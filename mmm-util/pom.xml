@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 198 2006-08-01 20:14:50Z hohwille $ -->
+<project>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <name>MMM::Util</name>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-util</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+  </dependencies>
+  <description>basic library used throughout the project</description>
+</project>

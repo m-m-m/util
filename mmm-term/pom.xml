@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 209 2006-08-28 17:16:43Z hohwille $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <name>MMM::Term</name>
+  <description>Component for parsing and dynamic evaluation of expression terms.</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-term</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+  </dependencies>
+  <modules>
+    <module>mmm-term-core</module>
+    <module>mmm-term-main</module>
+  </modules>
+</project>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <name>MMM::NLS</name>
+  <description>True native language support</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-nls</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+  </dependencies>
+  <modules>
+    <module>mmm-nls-core</module>
+  </modules>
+</project>

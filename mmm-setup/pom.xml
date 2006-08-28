@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<project>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <name>MMM::Setup</name>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-setup</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0</version>
+  <description>infrastructure for project setup</description>
+  <dependencies>
+  </dependencies>
+</project>

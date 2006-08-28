@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <name>MMM::Framework</name>
+  <description>Leightweight, flexible non-invasive IOC Framework.</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-framework</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+  </dependencies>
+  <modules>
+    <module>mmm-framework-core</module>
+    <module>mmm-framework-main</module>
+    <module>mmm-framework-annotation</module>
+    <!--
+    <module>mmm-framework-descriptor-avalon</module>
+    <module>mmm-framework-descriptor-pico</module>
+    -->
+  </modules>
+</project>

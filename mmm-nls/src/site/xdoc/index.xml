@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!-- $Id: index.xml 209 2006-08-28 17:16:43Z hohwille $ -->
+<document>
+  <properties>
+    <title>MMM::NLS - Native Language Support</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM::NLS">
+      <p>
+      Applications that should be used by people all over the world need 
+      <em>native language support</em> (NLS). The developers task is the
+      <em>internationalization</em> (i18n) where the application has to 
+      be written in a way that the code is (mostly) independent from 
+      locale-specific informations. This means that all messages that may 
+      be displayed to the end-user have to be accessed in a way that allows
+      <em>localization</em> (l10n) to the users locale.
+      </p>
+      <subsection name="The Problem">
+        <p>
+        <img src="images/no-msg-dialog.png"/>
+	</p>
+	<p>
+        Java already comes with great i18n support. But IMHO there are some
+	tiny peaces missing to complete the great puzzle of NLS:<br/>
+        There is almost no support if an application needs NLS support 
+	that is handling multiple users concurrently (e.g. a web-application).
+	And especially the <code>ResourceBundle</code> (bundle) implies 
+	that your messages are all stored as technical keys that are used
+	to lookup the message in the bundle. Following this principal
+        you have a problem when you want to have i18n support for your 
+	exceptions:
+        If you store the technical message key in the exception the receiver 
+	of the message needs the proper bundle to decode the message key
+	or he ends up with a cryptical message he can NOT understand. 
+	On the other hand you need to know the locale of the receiver to 
+	do the l10n when creating the exception with the proper message text.
+        This is impossible to solve in may situations.
+        </p>
+      </subsection>
+      <subsection name="The Solution">
+        <p>
+	The solution is quite simple because again Java brings parts of the
+	solution with <code>MessageFormat</code>:<br/>
+        We simply bundle the message in default language together with 
+	the separated locale independent arguments in one container object 
+	that is called <code>NlsMessage</code>. Here is an example to clarify
+	the idea: The i18n message is "Hi {0}! How are you?" and the language
+	independent argument is the users name "Lilli". Now if we store these
+	informations together we have all we need. To get the localized message
+	we simply translate the i18n message to the proper language
+	and then fill in the arguments. If we can NOT translate we always have
+	the message in default language which is "Hi Lilli! How are you?".<br/>
+	But how do we translate the i18n message without artificial intelligence?
+	The answer is very easy: We simply use the bundle in default language 
+	and do a reverse lookup to get the technical key. Then we can lookup 
+	the proper message in the according bundle to translate it to the 
+	according locale.<br/>
+	All you have to do is creating a subclass of 
+	<code>AbstractResourceBundle</code> that declares public string contants
+	<source>
+public class MyResourceBundle extends AbstractRespourceBundle {
+  public static final String MSG_SAY_HI = "Hi {0}! How are you?";
+  public static final String ERR_LOGIN_IN_USE = "Sorry. The login \"{0}\" is " +
+    "already in use. Please choose a different login.";
+}
+	</source>
+        From your code you need to create the <code>NlsMessage</code> using this
+	constants:
+	<source>
+String usersName = "Lilli";
+NlsMessageIF msg = new NlsMessage(MyResourceBundle.MSG_SAY_HI, usersName);
+	</source>
+	For exceptions there is additional support via 
+	<code>NlsException</code> and <code>NlsRuntimeException</code>.
+        Simply derive your declared exceptions from one of these classes:
+	<source>
+public class IllegalLoginException extends NlsException {
+  public IllegalLoginException(String usedLogin) {
+    super(MyResourceBundle.ERR_LOGIN_IN_USE, usedLogin);
+  }
+}
+	</source>
+        Now if you throw a <code>IllegalLoginException</code>, it will behave as a
+	"regular" exception with a english message. Additionally it has methods
+	<code>getLocalizedMessage</code> and <code>printStackTrace</code> that
+	take a <code>StringTranslatorIF</code> interface as argument.
+	</p>
+      </subsection>
+    </section>
+  </body>
+</document>

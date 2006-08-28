@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 208 2006-08-22 20:29:11Z hohwille $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <name>MMM::Value</name>
+  <description>The value management component.</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-value</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+  </dependencies>
+  <modules>
+    <module>mmm-value-core</module>
+    <module>mmm-value-main</module> 
+  </modules>
+</project>
