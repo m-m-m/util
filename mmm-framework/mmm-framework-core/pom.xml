@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-framework</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <name>MMM Framework::Core</name>
+  <description>Core of the MMM IOC Framework.</description>
+  <url>http://m-m-m.sourceforge.net/framework</url>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-framework-core</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-nls-core</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

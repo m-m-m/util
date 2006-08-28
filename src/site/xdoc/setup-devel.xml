@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!-- $Id: setup-devel.xml 202 2006-08-03 21:22:59Z hohwille $ -->
+<document>
+  <properties>
+    <title>MMM - Setup Development Environment</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Setup">
+      <p>
+      To setup your development environment follow these steps:
+      <ol>
+	<li>Install a <a href="http://java.sun.com">Java JDK</a> in version 1.5 or higher.
+	Open a shell and type the following command to verify your installation:
+	  <source>
+java -version
+	  </source>
+	</li>
+	<li>Install <a href="http://maven.apache.org">maven</a>.
+	Open a shell and type the following command to verify your installation:
+	  <source>
+mvn -version
+	  </source>
+	</li>
+        <li>Install <a href="http://subversion.tigris.org">subversion</a>. It is recommended
+	to install the native commandline client tool. If you are using Windows you might
+	want to use <a href="http://tortoisesvn.tigris.org">tortoiseSVN</a> instead or 
+	additionally.
+	If you installed the commandline client, open a shell and type the following command 
+	to verify your installation:
+	  <source>
+svn --version
+	  </source>
+        </li>
+	<li>Check out the <a href="source-repository.html">source-repository</a> 
+	with your subversion client. With tortoiseSVN go to the folder where you want 
+	to checkout in your Windows-Exporer, perform a right-click and choose 
+	"Tortoise SVN > checkout". With the commandline client go to the directory 
+	where you want to checkout and type:
+          <source>
+svn co https://svn.projxpert.com/mmm/trunk
+          </source>
+	</li>
+	<li>Open a shell, go to the directory where you checked out the repository and call
+	the following command:
+          <source>
+mvn install
+          </source>
+	  Be aware that on the first call maven will download half of the internet into your
+	  local repository. This will take quite a while. Further calls will be reasonable fast.
+	</li>
+	<li>Install <a href="http://www.eclipse.org">eclipse</a> on your system.
+	You can use an IDE of your choice instead but eclipse is the only IDE supported
+	in this manual. Start eclipse (it is suggested to use the default for your workspace, you can start eclipse with "-data some/other/workspace" if you need another eclipse setup).
+	Create a directory "eclipse-plugins" that is writeable for the account
+	you are using (e.g. somewhere in your home directory). In the eclipse workbench
+	select "Help > Software updates > Find and Install...". In the dialog click the button
+	"New Remote Site..." and enter "Subclipse" as Name and 
+	"http://subclipse.tigris.org/update_1.0.x" as URL. 
+	Now click on "Finish", then check the subclipse plugin and proceed the installation
+	BUT before pressing "Finish" in the last dialog (after license agreement) click on
+	"Change Location" and select your created "eclipse-plugins" directory. 
+	Then finish the installation.<br/>
+        You may also install the 
+	<a href="http://maven.apache.org/eclipse-plugin.html">m2eclipse plugin</a> if you 
+	like (current version 0.0.7 is NOT recommended).
+	</li>
+	<li>In your locally checked out repository invoke the <code>setup-all</code> script
+	in the folder <code>mmm-setup/scripts/&lt;my-os&gt;</code>.
+	</li>
+      </ol>
+      </p>
+    </section>
+  </body>
+</document>

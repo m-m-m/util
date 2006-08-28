@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- $Id: download.xml 202 2006-08-03 21:22:59Z hohwille $ -->
+<document>
+  <properties>
+    <title>MMM - Downloads</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Downloads">
+      <p>Sorry, but there is no release available yet. 
+      Please follow the <a href="setup-devel.html">setup-guide</a> to 
+      checkout and build the software.</p>
+      <p>Downloads will be available <a href="http://sourceforge.net/project/showfiles.php?group_id=40062">here</a>.</p>
+    </section>
+  </body>
+</document>

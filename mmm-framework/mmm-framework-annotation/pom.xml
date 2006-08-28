@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 203 2006-08-04 18:29:26Z hohwille $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-framework</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <name>MMM Framework::Annotation</name>
+  <description>Part of the MMM IOC Framework that depends on javax.annotation.</description>
+  <url>http://m-m-m.sourceforge.net/framework</url>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-framework-annotation</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-framework-main</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,38 @@
+/* $Id: UIMutableTableModelIF.java 191 2006-07-24 21:00:49Z hohwille $ */
+package net.sf.mmm.ui.toolkit.api.model;
+
+/**
+ * This is the interface of a
+ * {@link net.sf.mmm.ui.toolkit.api.model.UIListModelIF} that can be modified.
+ * 
+ * @param <E>
+ *        is the templated type of the objects in the table cells.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public interface UIMutableTableModelIF<E> extends UITableModelIF<E> {
+
+    /**
+     * This method sets the value of the specified cell.
+     * 
+     * @param rowIndex
+     *        is the row index of the cell to set.
+     * @param columnIndex
+     *        is the column index of the cell to set.
+     * @param value
+     *        is the new value to set.
+     */
+    void setCellValue(int rowIndex, int columnIndex, E value);
+
+    /**
+     * This method sets the {@link UITableModelIF#getColumnName(int) name} of
+     * the column at the given index.
+     * 
+     * @param columnIndex
+     *        is the index of the according column.
+     * @param name
+     *        is the new name of the specified column.
+     */
+    void setColumnName(int columnIndex, String name);
+
+}

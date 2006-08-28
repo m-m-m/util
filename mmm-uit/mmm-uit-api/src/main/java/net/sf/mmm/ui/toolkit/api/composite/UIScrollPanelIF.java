@@ -1,0 +1,29 @@
+/* $Id: UIScrollPanelIF.java 191 2006-07-24 21:00:49Z hohwille $ */
+package net.sf.mmm.ui.toolkit.api.composite;
+
+/**
+ * This is the interface for a
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UICompositeIF composite} that can
+ * hold one child
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UICompositeIF composite}. It has
+ * a horizontal and a vertical scrollbar. The scrollbars can be used to scroll
+ * the contained child if its width/height is greater than the width/height
+ * available for this panel.<br>
+ * The implementation should only show the scrollbars as needed.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public interface UIScrollPanelIF extends UICompositeIF {
+
+    /** the type of this object */
+    String TYPE = "ScrollPanel";
+
+    /**
+     * This method sets the child viewed inside this scroll-panel.
+     * 
+     * @param child
+     *        is the new contained child composite.
+     */
+    void setComponent(UICompositeIF child);
+
+}

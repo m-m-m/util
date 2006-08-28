@@ -1,0 +1,48 @@
+/* $Id: GenericFunctionTest.java 191 2006-07-24 21:00:49Z hohwille $ */
+package net.sf.mmm.term.impl;
+
+import net.sf.mmm.term.api.OperatorPriority;
+import net.sf.mmm.term.impl.function.FctAdd;
+import net.sf.mmm.term.impl.function.FctAddNumeric;
+import net.sf.mmm.term.impl.function.FctAddString;
+import net.sf.mmm.value.api.ValueException;
+
+import junit.framework.TestCase;
+
+/**
+ * This is the test case for {@link GenericFunction}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+@SuppressWarnings("all")
+public class GenericFunctionTest extends TestCase {
+
+    public GenericFunctionTest() {
+
+        super();
+    }
+
+    private void checkCalculation(GenericFunction f, Object arg1, Object arg2, Object result)
+            throws ValueException {
+
+        assertEquals(result, f.calculate(arg1, arg2));
+        // ATTENTION: for legal API usage no null arguments should be passed
+        // here - this is just a unit-test.
+        assertEquals(result, f.calculate(null, new Constant(arg1, null), new Constant(arg2, null)));
+    }
+
+    public void testAdd() throws Exception {
+
+        GenericFunction add = new GenericFunction("add", FctAdd.SYMBOL, OperatorPriority.MEDIUM);
+        add.addImplementation(FctAddNumeric.class);
+        add.addImplementation(FctAddString.class);
+        checkCalculation(add, 5, 3, 8);
+        checkCalculation(add, -1, 1, 0);
+        checkCalculation(add, -1, 1, 0);
+        checkCalculation(add, Integer.MAX_VALUE, 1, (Integer.MAX_VALUE + 1L));
+        checkCalculation(add, 1.0, -1.125, -0.125);
+        checkCalculation(add, "Hi", 42, "Hi42");
+        checkCalculation(add, new Short("5"), new Byte("42"), new Byte("47"));
+    }
+
+}

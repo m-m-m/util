@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- $Id: conventions.xml 203 2006-08-04 18:29:26Z hohwille $ -->
+<document>
+  <properties>
+    <title>MMM - Project Conventions</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="General">
+      <p>This project aims to produce high quality software. Therefore it is very
+      important that the code is well designed, documented and tested.
+      No sub-project should be released (as official version) if it has NOT
+      been tested intensively (though it can obviously still have bugs).</p>
+    </section>
+    <section name="Maven">
+      <p>The project is using <a href="http://maven.apache.org">maven</a>
+      as build- and management-tool. Therefore the maven conventions apply 
+      to this project. If you are NOT familiar with maven please read the 
+      following guides:
+      <ul>
+        <li><a href="http://maven.apache.org/guides/getting-started/index.html">getting started</a></li>
+        <li><a href="http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">project layout</a></li>
+	<li>TODO</li>
+      </ul>
+      </p>
+    </section>
+    <section name="Code-Style">
+      <p>TODO (chekcstyle, etc.)</p>
+    </section>
+    <section name="Tests">
+      <p>TODO (surefire, *Test, JUnit)</p>
+    </section>
+    <section name="Packages">
+      <p>TODO</p>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-ui-toolkit</artifactId>
+    <version>SNAPSHOT</version>
+  </parent>
+  <name>MMM UI-Toolkit - Demo</name>
+  <description>Demo application showing the same GUI with different implementations.</description>
+  <url>http://m-m-m.sourceforge.net/ui-toolkit/demo</url>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-ui-toolkit-demo</artifactId>
+  <packaging>jar</packaging>
+  <version>SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-ui-toolkit-api</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-ui-toolkit-swing</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-ui-toolkit-swt</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <defaultGoal>jar:jar</defaultGoal>
+  </build>
+</project>

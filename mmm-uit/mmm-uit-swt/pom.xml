@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-uit</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <name>MMM UIT::SWT</name>
+  <description>Implementation of the UI-Toolkit API using SWT as the native toolkit</description>
+  <url>http://m-m-m.sourceforge.net/ui-toolkit/swt</url>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-uit-swt</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-uit-api</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>swt</groupId>
+      <artifactId>swt-linux-gtk</artifactId>
+      <version>3.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

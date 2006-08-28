@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-value</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <name>MMM Value::Core</name>
+  <description>Core part of component for value management.</description>
+  <url>http://m-m-m.sourceforge.net/value/core</url>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-value-core</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-nls-core</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-xml</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

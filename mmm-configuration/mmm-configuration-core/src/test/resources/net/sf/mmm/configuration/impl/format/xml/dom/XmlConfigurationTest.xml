@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: XmlConfigurationTest.xml 205 2006-08-10 19:04:59Z hohwille $ -->
+<root xmlns:mmm="http://m-m-m.sf.net/namespaces/configuration">
+  <mmm:context>
+  <!-- 
+    <mmm:variable name="net.sf.mmm.configuration.factory.default">xml</mmm:variable>
+  -->
+    <mmm:variable name="server.port">8080</mmm:variable>
+    <mmm:variable name="server.host">localhost</mmm:variable>
+  </mmm:context>
+  <server port="${server.port}" host="${server.host}">
+    <description>This is a server at ${server.host} running on port ${server.port}...</description>
+    <service name="ServiceA" class="java.lang.String" policy="singleton"/>
+    <service name="ServiceB" class="java.lang.Integer" policy="per-request"/>
+    <service name="ServiceC" class="java.lang.Integer" policy="singleton"/>
+    <mmm:include type="xml" access="resource" href="include.xml" descendants="server/service"/>
+  </server>
+</root>

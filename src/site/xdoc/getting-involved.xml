@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- $Id: getting-involved.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<document>
+  <properties>
+    <title>MMM - Getting involved</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Getting involved">
+      <p>Great to see you here. The project needs your help. We need people for discussion,
+      bug-reports, active development, internationalization, etc.</p>
+      <p>
+      The first step you should do is subscribe to the
+      <a href="mail-lists.html">mailing list</a>.
+      </p>
+    </section>
+  </body>
+</document>

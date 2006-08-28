@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!-- $Id: history.xml 197 2006-07-31 21:00:03Z hohwille $ -->
+<document>
+  <properties>
+    <title>History</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Project History">
+      <subsection name="2000-??-??">
+        <p>
+        <a href="team-list.html#Contributors">Christoph Bauer</a> 
+        created a tcl/tk script called 
+        <a href="http://www.rhrk.uni-kl.de/~bauerc">mp3man</a>.
+        His idea was to create a program that organinzes mp3 files. 
+        It plays them using and external player program (mpg123).
+        MySQL is used by mp3man to store information about each song like
+        title, artist, genre, ranking, backup-media-id, etc.
+        Now during playing the user can influence the ranking with the buttons
+        "I like this song" or "I hate this song". The program also archieves
+        the mp3-files to a backup-media (CD), associates each backup-media
+        with a unique ID that the user should write on the media. Now the
+        program can delete songs with bad ranking if disk space is low. If
+        a deleted song is choosen by the user to be played (the entry is
+        still in the db), the program tells the ID of the backup-media to
+        insert and restores the song to the hard-disk. Finally the program
+        can import audio-CDs and automatically fill the database (using CDDB).
+        </p>
+      </subsection>
+      <subsection name="2001-01-30">
+        <p>
+        <a href="team-list.html#Contributors">Christoph Bauer</a> and
+        <a href="team-list.html#Developers">J&#246;rg Hohwiller</a> (me)
+        decided to start a project called pythonDJ, that was registered at
+        <a href="http://www.sourceforge.net">sourceforge</a>.
+        The name already tells that the implementation was done in python.
+        The project should be like mp3man, but more fexible and also os-independent 
+        using wxPython.<br/>
+        Actually this project died before any useful code was done:
+        We had different ideas of the project and especially I
+        decided not to write a big team project in a non typed script language.
+        </p>
+      </subsection>
+      <subsection name="2001-04-11">
+        <p>
+        I (<a href="team-list.html#Developers">J&#246;rg Hohwiller</a>) founded the 
+        project myDJ which was the replacement for pythonDJ, but written in Java.
+        <a href="team-list.html#Contributors">Christoph Bauer</a> did not like 
+        to join the project, because he did not like my decision to write the 
+        program in Java.<br/>
+        <a href="mailto:carlos_santos@users.sourceforge.net">Carlos Santos</a> 
+        joined the team as webmaster and created the www-sites. I wrote some 
+        code for this project that was only available in the CVS.
+        </p>
+      </subsection>
+      <subsection name="2001-10-01">
+        <p>
+        I (<a href="team-list.html#Developers">J&#246;rg Hohwiller</a>) founded this 
+        project (m-m-m) as a replacement for myDJ. The reason was that I thought
+        that all the concepts and ideas of myDJ were so generic that 
+        they can be used not only for music but for any kind of data.
+        </p>
+      </subsection>
+      <subsection name="2001-11-14">
+        <p>
+        The project m-m-m was registered at 
+        <a href="http://www.sourceforge.net">sourceforge</a>.
+        Some code was devloped and available via CVS (module core) but because 
+        spare time was rare the project was sleeping for a very long while.
+        </p>
+      </subsection>
+      <subsection name="2004-01-01">
+        <p>
+        After years I finally decided to work active on the project again. 
+        A lot of refactoring was done dividing the project into separate components (COP).
+	Avalon was choosen as framework for COP driven design. 
+        Maven was evaluated and finally chosen as project management tool.
+        </p>
+      </subsection>
+      <subsection name="2004-07-01">
+        <p>
+	 Because my plans for the project make it impossible to have a working release 
+	 before 2006, I decided to change the codebase to JDK 5.0 (named JDK 1.5 at this time).
+        </p>
+      </subsection>
+      <subsection name="2004-07-16">
+        <p>
+        Changed License from GPL to LGPL.
+	This step could be easily taken because no other author than me
+	had produced any file or line of code for the project.
+        </p>
+      </subsection>
+      <subsection name="2004-2005">
+        <p>
+	Since there is no community and might not be before a first useable release,
+	I decided to develop on my local subversion server until sourceforge will
+	offer subversion as alternative to cvs. Please send me an email if you
+	want to have the latest sources or would like to have the subversion repository
+	visible to the public.
+	</p>
+      </subsection>
+      <subsection name="2005-06-24">
+        <p>
+	Switched from maven to maven2.
+        </p>
+      </subsection>
+      <subsection name="2005-08-01">
+        <p>
+        Changed License from LGPL to Apache Software Licenes for final freedom.
+	This step could be easily taken because no other author than me
+	had produced any file or line of code for the project.
+        </p>
+      </subsection>
+      <subsection name="2005-10-25">
+        <p>
+        Registered and set up subversion repository at projxpert.com. The projxpert team
+	granted public read access for the subversion and gave a free upgrade because the
+	project is open-source. Big thanks to projxpert.com.
+	</p>
+      </subsection>
+      <subsection name="2006-07-23">
+        Deployed the maven2 site after the old site was not updated for over one year. From now on the site gets updated automatically by my server.
+      </subsection>
+    </section>
+  </body>
+</document>

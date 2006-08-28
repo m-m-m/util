@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id: faq.fml 205 2006-08-10 19:04:59Z hohwille $ -->
+<faqs title="Frequently Asked Questions">
+  <part id="general">
+    <title>General</title>
+    <faq id="submitQuestion">
+      <question>Where is the multi-media-manager?</question>
+      <answer>
+        <p>Currently the multi-media-manager is only a vision. There are only low-level
+	components available right now. Please <a href="getting-involved.html">help</a> to speed up the progress.</p>
+      </answer>
+    </faq>
+    <faq id="mmm">
+      <question>Is it mmm, m-m-m or what?</question>
+      <answer>
+        <p>The project name is Multi-Media-Manager. The shortcut is officially mmm.
+	However another project was already registered with that name at sourceforge
+	so the sourceforge project id is m-m-m. Since m-m-m can not be used in some
+	technical situations (e.g. Java package names), it is only used for
+	sourceforge related stuff.</p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

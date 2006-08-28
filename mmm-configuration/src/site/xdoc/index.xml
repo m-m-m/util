@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!-- $Id: index.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<document>
+  <properties>
+    <title>MMM:Configuration</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Configuration">
+      <p>MMM::Configuration is a flexible and easy to use configuration library for everybody.</p>
+      <p>Your configuration may start as a single system property, change to a simple property 
+      file and end as a complex XML document. When you make your application scaleable you
+      might move your configuration from the local disc to a shared database.</p>
+      <p>If you directly use protocol and format specific technologies to access your 
+      configuration, you have to rewrite your code multiple times. Further you need to 
+      fiddle with verbose APIs (such as XML DOM), check for "null", parse strings, handle 
+      various exceptions to track down errors, and write if statements for default 
+      fallbacks.</p>
+      <p>To make your life a lot easier you should use a configuration library. I have been
+      using the configuration of 
+      <a href="http://avalon.apache.org">avalon</a>/<a href="http://dna.codehause.org/dna">dna</a> 
+      as well as 
+      <a href="http://jakarta.apache.org/commons/configuration">commons-configuration</a>
+      but were not completely satisfied with these solutions.</p>
+      <subsection name="Features">
+        <p>
+        This configuration API has the following goals and features:
+        </p>
+        <ul>
+        <li>easy to use</li>
+        <li>abstract from underlying data access (filesystem, URL, etc.)</li>
+        <li>abstract from underlying format (properties, XML, etc.)</li>
+        <li>ability to represent the configuration from diffrent sources and formats as 
+          single homogen configuration tree</li>
+        <li>information hiding (no access to parent configurations)</li>
+        <li>namespace support</li>
+        <li>flexible and extendable</li>
+        <li>optional ability to modify and update configuration (without problems when 
+          including other configurations)</li>
+        <li>ability to autocomplete configuration from defaults in the accessing code</li>
+        <li>avoid redundancies by allowing variable expressions</li>
+        <li>event listener support for configuration changes</li>
+        <li>excellent exception handling (inclduing precise details and i18n support)</li>
+        </ul>
+      </subsection>
+      <subsection name="Getting Started">
+        <p>
+          To get started read the <a href="1min-tutorial.html">1 minute tutorial</a>.
+        </p>
+      </subsection>      
+    </section>
+  </body>
+</document>

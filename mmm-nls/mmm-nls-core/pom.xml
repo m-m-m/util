@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<project>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-nls</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <name>MMM NLS::Core</name>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-nls-core</artifactId>
+  <version>0.0.1</version>
+  <description>Core Native Language Support</description>
+  <dependencies>
+  </dependencies>
+</project>

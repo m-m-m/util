@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-uit</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  <name>MMM UIT::API</name>
+  <description>API and base implementation for the UI-Toolkit</description>
+  <url>http://m-m-m.sourceforge.net/ui-toolkit/api</url>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-uit-api</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <dependencies>
+  </dependencies>
+</project>

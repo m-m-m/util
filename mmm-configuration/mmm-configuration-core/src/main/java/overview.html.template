@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Overview documentation for the ${component.title} component of the ${project.title} project</title>
+  </head>
+  <body>
+  <p>The <em>${component.title}</em> component of the 
+     <a href="${project.url}">${project.title}</a> Project 
+     supports handling complex configurations. A simple API makes it easy for the
+     user of the configuration without knowing where the configuration data is stored
+     (e.g. filesystem, DB, etc.) and which syntax ist used for storing (e.g. XML).
+  </p>
+  <p>See the
+     <a href="net/sf/mmm/xml/package-summary.html#package_description">description</a>
+     of the <code>net.sf.mmm.xml</code> package for more information.
+  </p>
+</body>
+</html>
