@@ -1,4 +1,4 @@
-/* $Id: ServiceNlsResourceBundle.java 191 2006-07-24 21:00:49Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.term;
 
 import net.sf.mmm.nls.base.AbstractResourceBundle;

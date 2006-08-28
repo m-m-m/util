@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: pom.xml 198 2006-08-01 20:14:50Z hohwille $ -->
+<!-- $Id$ -->
 <project>
   <parent>
     <groupId>net.sf.mmm</groupId>

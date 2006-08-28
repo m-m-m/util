@@ -1,4 +1,4 @@
-/* $Id: QName.java 205 2006-08-10 19:04:59Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.configuration.base;
 
 import net.sf.mmm.configuration.api.ConfigurationIF;

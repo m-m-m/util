@@ -1,4 +1,4 @@
-/* $Id: StringValue.java 208 2006-08-22 20:29:11Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.value.impl;
 
 import net.sf.mmm.value.base.AbstractStringValue;

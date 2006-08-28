@@ -1,4 +1,4 @@
-/* $Id: StringValueTest.java 209 2006-08-28 17:16:43Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.value.impl;
 
 import org.junit.Test;

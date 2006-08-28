@@ -1,4 +1,4 @@
-/* $Id: AbstractDependency.java 196 2006-07-25 21:03:31Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.framework.base;
 
 import net.sf.mmm.framework.api.ComponentManagerIF;

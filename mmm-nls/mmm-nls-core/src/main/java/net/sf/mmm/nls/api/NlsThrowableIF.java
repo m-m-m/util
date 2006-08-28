@@ -1,4 +1,4 @@
-/* $Id: NlsThrowableIF.java 205 2006-08-10 19:04:59Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.nls.api;
 
 import java.io.PrintStream;

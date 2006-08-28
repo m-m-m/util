@@ -1,4 +1,4 @@
-/* $Id: UIProgressBar.java 191 2006-07-24 21:00:49Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.swing.widget;
 
 import javax.swing.JComponent;

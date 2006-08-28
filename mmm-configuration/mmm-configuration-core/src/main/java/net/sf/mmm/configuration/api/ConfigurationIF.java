@@ -1,4 +1,4 @@
-/* $Id: ConfigurationIF.java 208 2006-08-22 20:29:11Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.configuration.api;
 
 import java.util.Collection;

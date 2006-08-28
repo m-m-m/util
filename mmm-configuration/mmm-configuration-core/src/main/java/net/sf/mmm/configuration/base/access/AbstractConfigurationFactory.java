@@ -1,4 +1,4 @@
-/* $Id: AbstractConfigurationFactory.java 197 2006-07-31 21:00:03Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.configuration.base.access;
 
 import net.sf.mmm.configuration.api.ConfigurationException;

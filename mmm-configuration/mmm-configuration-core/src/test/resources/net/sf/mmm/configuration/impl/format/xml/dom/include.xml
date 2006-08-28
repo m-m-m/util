@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: include.xml 208 2006-08-22 20:29:11Z hohwille $ -->
+<!-- $Id$ -->
 <root xmlns:mmm="http://m-m-m.sf.net/namespaces/configuration">
   <server>
     <service name="ServiceD" class="java.lang.String" policy="singleton"/>

@@ -1,4 +1,4 @@
-/* $Id: UIDevice.java 191 2006-07-24 21:00:49Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.awt;
 
 import java.awt.GraphicsDevice;

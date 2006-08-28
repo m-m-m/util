@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- $Id: site.xml 209 2006-08-28 17:16:43Z hohwille $ -->
+<!-- $Id$ -->
 <project name="MMM UIT:SWT">
   <bannerLeft>
     <src>http://sourceforge.net/sflogo.php?group_id=40062&amp;type=6</src>

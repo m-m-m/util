@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: XmlConfigurationTest.xml 205 2006-08-10 19:04:59Z hohwille $ -->
+<!-- $Id$ -->
 <root xmlns:mmm="http://m-m-m.sf.net/namespaces/configuration">
   <mmm:context>
   <!-- 

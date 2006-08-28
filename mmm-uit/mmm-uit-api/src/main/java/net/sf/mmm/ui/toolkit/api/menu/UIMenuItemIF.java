@@ -1,4 +1,4 @@
-/* $Id: UIMenuItemIF.java 191 2006-07-24 21:00:49Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.ui.toolkit.api.menu;
 
 import net.sf.mmm.ui.toolkit.api.UINodeIF;

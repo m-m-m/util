@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: pom.xml 208 2006-08-22 20:29:11Z hohwille $ -->
+<!-- $Id$ -->
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>

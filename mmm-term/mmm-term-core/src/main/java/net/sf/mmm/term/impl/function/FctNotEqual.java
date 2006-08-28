@@ -1,4 +1,4 @@
-/* $Id: FctNotEqual.java 191 2006-07-24 21:00:49Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.term.impl.function;
 
 import net.sf.mmm.term.api.OperatorPriority;

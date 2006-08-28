@@ -1,4 +1,4 @@
-/* $Id: AbstractComponentDescriptor.java 196 2006-07-25 21:03:31Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.framework.base.descriptor;
 
 import net.sf.mmm.framework.api.ComponentDescriptorIF;

@@ -1,4 +1,4 @@
-/* $Id: DescriptorBuilder.java 209 2006-08-28 17:16:43Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.framework.impl;
 
 import java.lang.reflect.Constructor;

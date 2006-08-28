@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- $Id: project.xml 191 2006-07-24 21:00:49Z hohwille $ -->
+<!-- $Id$ -->
 <project>
   <extend>${basedir}/../../project.xml</extend>
   <id>mmm-xml</id>

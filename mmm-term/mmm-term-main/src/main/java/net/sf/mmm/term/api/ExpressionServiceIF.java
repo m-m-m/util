@@ -1,4 +1,4 @@
-/* $Id: ExpressionServiceIF.java 209 2006-08-28 17:16:43Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.term.api;
 
 import org.w3c.dom.Element;

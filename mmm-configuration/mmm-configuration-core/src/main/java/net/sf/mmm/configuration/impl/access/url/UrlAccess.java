@@ -1,4 +1,4 @@
-/* $Id: UrlAccess.java 205 2006-08-10 19:04:59Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.configuration.impl.access.url;
 
 import java.io.IOException;

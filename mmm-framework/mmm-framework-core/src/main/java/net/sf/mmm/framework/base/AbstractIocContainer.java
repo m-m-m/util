@@ -1,4 +1,4 @@
-/* $Id: AbstractIocContainer.java 197 2006-07-31 21:00:03Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.framework.base;
 
 import java.util.HashMap;

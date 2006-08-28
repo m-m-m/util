@@ -1,4 +1,4 @@
-/* $Id: PropertiesDocument.java 200 2006-08-01 21:30:00Z hohwille $ */
+/* $Id$ */
 package net.sf.mmm.configuration.impl.format.properties;
 
 import java.io.IOException;

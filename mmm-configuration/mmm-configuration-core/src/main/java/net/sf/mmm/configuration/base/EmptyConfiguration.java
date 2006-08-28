@@ -1,4 +1,4 @@
-/* $Id: $ */
+/* $Id$ */
 package net.sf.mmm.configuration.base;
 
 import java.util.Iterator;

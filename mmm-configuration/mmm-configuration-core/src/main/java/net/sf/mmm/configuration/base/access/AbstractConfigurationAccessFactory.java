@@ -1,4 +1,4 @@
-/* $Id: $ */
+/* $Id$ */
 package net.sf.mmm.configuration.base.access;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
