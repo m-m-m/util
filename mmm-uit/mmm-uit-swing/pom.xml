@@ -2,22 +2,22 @@
 <!-- $Id$ -->
 <project>
   <parent>
-    <artifactId>mmm-uit</artifactId>
     <groupId>net.sf.mmm</groupId>
-    <version>0.0.1</version>
+    <artifactId>mmm-uit</artifactId>
+    <version>0.9.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-uit-swing</artifactId>
   <name>MMM UIT::Swing</name>
-  <version>0.0.1</version>
+  <version>0.9.0-SNAPSHOT</version>
   <description>Implementation of the UI-Toolkit API using Swing as the native toolkit</description>
   <url>http://m-m-m.sourceforge.net/ui-toolkit/swing</url>
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-uit-api</artifactId>
-      <version>0.0.1</version>
+      <version>0.9.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

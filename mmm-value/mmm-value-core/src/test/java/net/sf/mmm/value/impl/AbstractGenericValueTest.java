@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.ValueNotEditableException;
+import net.sf.mmm.value.api.WrongValueTypeException;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
 import junit.framework.TestCase;
@@ -36,6 +39,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
      */
     protected abstract GenericValueIF convert(Object plainValue);
 
+    @Test
     public void testEmptyValue() {
         
         GenericValueIF valueEmpty = convert(null);
@@ -44,7 +48,46 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertNull(valueEmpty.getBoolean(null));
         assertNull(valueEmpty.getDate(null));
         assertNull(valueEmpty.getDouble(null));
-        assertNull(valueEmpty.getInteger(defaultValue));
+        assertNull(valueEmpty.getInteger(null));
+        assertNull(valueEmpty.getJavaClass(null));
+        assertNull(valueEmpty.getLong(null));
+        assertNull(valueEmpty.getNumber(null));
+        assertNull(valueEmpty.getString(null));
+        assertNull(valueEmpty.getValue(Object.class, null));
+
+        assertFalse(valueEmpty.hasValue());
+        if (valueEmpty.isAddDefaults()) {
+            String string = "value";            
+            assertEquals(string, valueEmpty.getString(string));
+            assertTrue(valueEmpty.hasValue());
+            assertEquals(string, valueEmpty.getString());
+            assertEquals(string, valueEmpty.getString(null));
+            assertEquals(string, valueEmpty.getString("foo"));
+        }
+        
+    }
+    
+    @Test
+    public void testMutableValue() {
+        
+        GenericValueIF value = convert(null);
+        if (value instanceof MutableGenericValueIF) {
+            MutableGenericValueIF mutableValue = (MutableGenericValueIF) value;
+            String string = "value";
+            if (mutableValue.isEditable()) {
+                assertFalse(mutableValue.hasValue());
+                mutableValue.setString(string);
+                assertEquals(string, value.getString());                
+            } else {
+                boolean error = false;
+                try {
+                    mutableValue.setString(string);
+                } catch (ValueNotEditableException e) {
+                    error = true;
+                }
+                assertTrue("Exception expected", error);
+            }
+        }
     }
     
     @Test

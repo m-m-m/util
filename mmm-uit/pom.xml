@@ -19,8 +19,6 @@
     <module>mmm-uit-api</module>
     <module>mmm-uit-swt</module>
     <module>mmm-uit-swing</module>
-  <!--
     <module>mmm-uit-demo</module>
-    -->
   </modules>
 </project>
