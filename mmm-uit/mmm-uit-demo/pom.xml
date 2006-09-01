@@ -25,13 +25,13 @@
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-uit-swing</artifactId>
       <version>0.9.0-SNAPSHOT</version>
-      <scope>runtime</scope>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-uit-swt</artifactId>
       <version>0.9.0-SNAPSHOT</version>
-      <scope>runtime</scope>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

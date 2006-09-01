@@ -5,8 +5,6 @@ import net.sf.mmm.value.api.MutableGenericValueIF;
 import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.WrongValueTypeException;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**
  * This is the abstract base implementation of the {@link MutableGenericValueIF}
@@ -31,8 +29,8 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
     /**
      * This method gets the plain object that holds the actual value.
      * 
-     * @return the value object or <code>null</code> if the value is NOT
-     *         {@link #hasValue() set}.
+     * @return the value object or <code>null</code> if the value
+     *         {@link #isEmpty() is empty}.
      */
     protected abstract V getPlainValue();
 
@@ -45,11 +43,11 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
     protected abstract void setPlainValue(V newValue);
 
     /**
-     * @see net.sf.mmm.value.api.GenericValueIF#hasValue() {@inheritDoc}
+     * @see net.sf.mmm.value.api.GenericValueIF#isEmpty() {@inheritDoc}
      */
-    public boolean hasValue() {
+    public boolean isEmpty() {
 
-        return (getPlainValue() != null);
+        return (getPlainValue() == null);
     }
 
     /**
@@ -85,10 +83,11 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
     }
 
     /**
-     * @see net.sf.mmm.value.api.MutableGenericValueIF#setValue(java.lang.Object)
+     * @see net.sf.mmm.value.api.MutableGenericValueIF#setObject(java.lang.Object)
      *      {@inheritDoc}
      */
-    public void setValue(Object newValue) throws ValueNotEditableException, WrongValueTypeException {
+    public void setObject(Object newValue) throws ValueNotEditableException,
+            WrongValueTypeException {
 
         if (isEditable()) {
             setPlainValue(convertValue(newValue));
@@ -130,24 +129,6 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
      *         given <code>type</code>.
      */
     protected abstract V convertValue(Object value) throws WrongValueTypeException;
-
-    /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(net.sf.mmm.xml.api.XmlWriterIF)
-     *      {@inheritDoc}
-     */
-    public void toXml(XmlWriterIF xmlWriter) throws XmlException {
-
-        xmlWriter.writeStartElement(XML_TAG_VALUE);
-        xmlWriter.writeAttribute(XML_ATR_VALUE_CLASS, String.class.getName());
-        String s = getString(null);
-        if (s == null) {
-            xmlWriter.writeStartElement(XML_TAG_NULL);
-            xmlWriter.writeEndElement(XML_TAG_NULL);
-        } else {
-            xmlWriter.writeCharacters(s);
-        }
-        xmlWriter.writeEndElement(XML_TAG_VALUE);
-    }
 
     /**
      * @see java.lang.Object#toString() {@inheritDoc}

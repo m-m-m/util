@@ -3,7 +3,6 @@ package net.sf.mmm.term.impl;
 
 import net.sf.mmm.context.api.ContextIF;
 import net.sf.mmm.term.base.AbstractTerm;
-import net.sf.mmm.value.api.GenericValueIF;
 import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.api.XmlSerializerIF;
 import net.sf.mmm.xml.api.XmlWriterIF;
@@ -11,8 +10,7 @@ import net.sf.mmm.xml.api.XmlWriterIF;
 /**
  * This is the implementation of a constant
  * {@link net.sf.mmm.term.api.TermIF term}. It simply holds a value as constant
- * that is always returned as {@link #evaluate(ContextIF) evaluation}
- * result.
+ * that is always returned as {@link #evaluate(ContextIF) evaluation} result.
  * 
  * @param <C>
  *        is the templated type of the constant.
@@ -21,6 +19,15 @@ import net.sf.mmm.xml.api.XmlWriterIF;
  */
 public class Constant<C> extends AbstractTerm {
 
+    /** @see XmlSerializer */
+    public static final String XML_TAG_VALUE = "value";
+
+    /** @see XmlSerializer */
+    public static final String XML_TAG_NULL = "null";
+    
+    /** @see XmlSerializer */
+    public static final String XML_ATR_VALUE_CLASS = "class";
+    
     /**
      * This inner class is the default seriailizer used if none is supplied.
      * 
@@ -30,23 +37,23 @@ public class Constant<C> extends AbstractTerm {
      *        is the templated type of the constant.
      */
     private static class XmlSerializer<C> implements XmlSerializerIF<C> {
-        
+
         /**
          * @see net.sf.mmm.xml.api.XmlSerializerIF#toXml(net.sf.mmm.xml.api.XmlWriterIF,
-         *      java.lang.Object)
-         * {@inheritDoc}
-     */
+         *      java.lang.Object) {@inheritDoc}
+         */
         public void toXml(XmlWriterIF xmlWriter, C object) throws XmlException {
 
-            xmlWriter.writeStartElement(GenericValueIF.XML_TAG_VALUE);
+            // TODO: check for XmlSerializable, use ValueManager, ...
+            xmlWriter.writeStartElement(XML_TAG_VALUE);
             if (object == null) {
-                xmlWriter.writeStartElement(GenericValueIF.XML_TAG_NULL);
-                xmlWriter.writeEndElement(GenericValueIF.XML_TAG_NULL);
+                xmlWriter.writeStartElement(XML_TAG_NULL);
+                xmlWriter.writeEndElement(XML_TAG_NULL);
             } else {
-                xmlWriter.writeAttribute(GenericValueIF.XML_ATR_VALUE_CLASS, object.getClass()
-                        .getName());
+                xmlWriter.writeAttribute(XML_ATR_VALUE_CLASS, object.getClass().getName());
+                xmlWriter.writeCharacters(object.toString());
             }
-            xmlWriter.writeEndElement(GenericValueIF.XML_TAG_VALUE);
+            xmlWriter.writeEndElement(XML_TAG_VALUE);
         }
 
     }
@@ -97,7 +104,7 @@ public class Constant<C> extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
     public C evaluate(ContextIF variableSet) {
 
@@ -106,7 +113,7 @@ public class Constant<C> extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {
 
@@ -116,8 +123,7 @@ public class Constant<C> extends AbstractTerm {
     }
 
     /**
-     * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * @see java.lang.Object#toString() {@inheritDoc}
      */
     @Override
     public String toString() {

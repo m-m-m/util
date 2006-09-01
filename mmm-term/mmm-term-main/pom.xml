@@ -6,7 +6,7 @@
     <artifactId>mmm-term</artifactId>
     <version>0.0.1</version>
   </parent>
-  <name>MMM Term (Main)</name>
+  <name>MMM Term::Main</name>
   <description>Main of component for parsing and dynamic evaluation of expression terms.</description>
   <url>http://m-m-m.sourceforge.net/term/core</url>
   <groupId>net.sf.mmm</groupId>

@@ -1,12 +1,15 @@
 /* $Id$ */
 package net.sf.mmm.value.impl;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.value.api.GenericValueIF;
 import net.sf.mmm.value.api.MutableGenericValueIF;
 import net.sf.mmm.value.api.ValueNotEditableException;
+import net.sf.mmm.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.WrongValueTypeException;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
@@ -42,27 +45,34 @@ public abstract class AbstractGenericValueTest extends TestCase {
     @Test
     public void testEmptyValue() {
         
-        GenericValueIF valueEmpty = convert(null);
-        assertFalse(valueEmpty.hasValue());
-        assertNull(valueEmpty.getObject(null));
-        assertNull(valueEmpty.getBoolean(null));
-        assertNull(valueEmpty.getDate(null));
-        assertNull(valueEmpty.getDouble(null));
-        assertNull(valueEmpty.getInteger(null));
-        assertNull(valueEmpty.getJavaClass(null));
-        assertNull(valueEmpty.getLong(null));
-        assertNull(valueEmpty.getNumber(null));
-        assertNull(valueEmpty.getString(null));
-        assertNull(valueEmpty.getValue(Object.class, null));
+        GenericValueIF value = convert(null);
+        assertTrue(value.isEmpty());
+        boolean error = false;
+        try {
+            value.getObject();
+        } catch (ValueNotSetException e) {
+            error = true;
+        }
+        assertTrue("Exception expected", error);
+        assertNull(value.getObject(null));
+        assertNull(value.getBoolean(null));
+        assertNull(value.getDate(null));
+        assertNull(value.getDouble(null));
+        assertNull(value.getInteger(null));
+        assertNull(value.getJavaClass(null));
+        assertNull(value.getLong(null));
+        assertNull(value.getNumber(null));
+        assertNull(value.getString(null));
+        assertNull(value.getValue(Object.class, null));
 
-        assertFalse(valueEmpty.hasValue());
-        if (valueEmpty.isAddDefaults()) {
+        assertTrue(value.isEmpty());
+        if (value.isAddDefaults()) {
             String string = "value";            
-            assertEquals(string, valueEmpty.getString(string));
-            assertTrue(valueEmpty.hasValue());
-            assertEquals(string, valueEmpty.getString());
-            assertEquals(string, valueEmpty.getString(null));
-            assertEquals(string, valueEmpty.getString("foo"));
+            assertEquals(string, value.getString(string));
+            assertFalse(value.isEmpty());
+            assertEquals(string, value.getString());
+            assertEquals(string, value.getString(null));
+            assertEquals(string, value.getString("foo"));
         }
         
     }
@@ -75,9 +85,25 @@ public abstract class AbstractGenericValueTest extends TestCase {
             MutableGenericValueIF mutableValue = (MutableGenericValueIF) value;
             String string = "value";
             if (mutableValue.isEditable()) {
-                assertFalse(mutableValue.hasValue());
+                assertTrue(mutableValue.isEmpty());
                 mutableValue.setString(string);
-                assertEquals(string, value.getString());                
+                assertEquals(string, value.getString());
+                mutableValue.setObject(string);
+                assertEquals(string, value.getString());
+                mutableValue.setBoolean(true);
+                assertTrue(value.getBoolean());
+                Date date = new Date(1157004890000L);
+                mutableValue.setDate(date);                
+                assertEquals(date, value.getDate());
+                double d = 42.42;
+                mutableValue.setDouble(d);
+                assertEquals(d, mutableValue.getDouble(), 0);
+                int i = 42;
+                mutableValue.setInteger(i);
+                assertEquals(i, value.getInteger());
+                Class type = String.class;
+                mutableValue.setJavaClass(type);
+                assertSame(type, value.getJavaClass());
             } else {
                 boolean error = false;
                 try {
@@ -106,6 +132,14 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertEquals(Boolean.FALSE.toString(), valueFalse.getString());
     }
 
+    public void testString() {
+        
+        String string = "value";            
+        GenericValueIF valueString = convert(string);
+        assertEquals(string, valueString.getString());
+        assertEquals(string, valueString.getObject());
+    }
+    
     @Test
     public void testJavaClass() {
 
@@ -126,7 +160,10 @@ public abstract class AbstractGenericValueTest extends TestCase {
         checkNumber(convert(new Integer(424242)));
         checkNumber(convert(new Long(4242424242424242L)));
         checkNumber(convert(new Float(42.25)));
-        checkNumber(convert(new Double(42.42)));
+        GenericValueIF doubleValue = convert(new Double(42.42));
+        checkNumber(doubleValue);
+        // TODO: validate range is stupid, add getNumber(min, max[. default])
+        //doubleValue.getNumber(<T extends Number>, minimum, maximum, boolean inclusive)
     }
 
     /**
@@ -136,7 +173,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
     public void checkNumber(GenericValueIF value) {
 
         // this will only work for Number of java.lang.*
-        assertTrue(value.hasValue());
+        assertFalse(value.isEmpty());
         Number number = value.getNumber();
         assertEquals(number.toString(), value.getString());
         assertEquals(number, value.getValue(Number.class));
@@ -146,6 +183,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertEquals(doubleValue, value.getDouble(null).doubleValue(), 0);
         assertEquals(doubleValue, value.getValue(Double.class).doubleValue(), 0);
         assertEquals(doubleValue, value.getValue(Double.class, null).doubleValue(), 0);
+        assertEquals(doubleValue, value.getValue(Number.class).doubleValue(), 0);
         Class type = number.getClass();
         if (type != Double.class) {
             float floatValue = number.floatValue();

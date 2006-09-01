@@ -39,4 +39,5 @@ public class StringValueTest extends AbstractGenericValueTest {
         }
         return new StringValue(s);
     }
+    
 }

@@ -8,9 +8,6 @@ import net.sf.mmm.util.DateUtil;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.WrongValueTypeException;
 import net.sf.mmm.value.api.MutableGenericValueIF;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlSerializableIF;
-import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**
  * This is the abstract base implementation of the {@link MutableGenericValueIF}
@@ -344,28 +341,6 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
             } catch (ClassNotFoundException e1) {
                 throw new WrongValueTypeException(this, Class.class, e1);
             }
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(net.sf.mmm.xml.api.XmlWriterIF)
-     *      {@inheritDoc}
-     */
-    public void toXml(XmlWriterIF xmlWriter) throws XmlException {
-
-        Object o = getPlainValue();
-        if ((o != null) && (o instanceof XmlSerializableIF)) {
-            ((XmlSerializableIF) o).toXml(xmlWriter);
-        } else {
-            xmlWriter.writeStartElement(XML_TAG_VALUE);
-            if (o == null) {
-                xmlWriter.writeStartElement(XML_TAG_NULL);
-                xmlWriter.writeEndElement(XML_TAG_NULL);
-            } else {
-                xmlWriter.writeAttribute(XML_ATR_VALUE_CLASS, o.getClass().getName());
-                xmlWriter.writeCharacters(o.toString());
-            }
-            xmlWriter.writeEndElement(XML_TAG_VALUE);
         }
     }
 

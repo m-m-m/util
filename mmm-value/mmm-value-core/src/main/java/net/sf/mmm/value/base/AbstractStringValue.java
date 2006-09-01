@@ -114,6 +114,8 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
         } else {
             if (value instanceof Date) {
                 result = DateUtil.format((Date) value);
+            } else if (value instanceof Class) {
+                result = ((Class) value).getName();
             } else {
                 result = value.toString();
             }

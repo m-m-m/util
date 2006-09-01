@@ -39,8 +39,7 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
     }
 
     /**
-     * @see net.sf.mmm.value.api.GenericValueIF#getObject()
-     * {@inheritDoc}
+     * @see net.sf.mmm.value.api.GenericValueIF#getObject() {@inheritDoc}
      */
     public Object getObject() throws ValueNotSetException {
 
@@ -49,7 +48,7 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
 
     /**
      * @see net.sf.mmm.value.api.GenericValueIF#getObject(java.lang.Object)
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
     public Object getObject(Object defaultValue) {
 
@@ -258,7 +257,7 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
             boolean setDefault) throws WrongValueTypeException, ValueInstanciationException {
 
         Class<?> javaClass;
-        if (setDefault || hasValue()) {
+        if (setDefault || !isEmpty()) {
             javaClass = getJavaClass(defaultValue);
         } else {
             javaClass = defaultValue;
@@ -273,16 +272,16 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
     public void setBoolean(boolean newValue) throws ValueNotEditableException,
             WrongValueTypeException {
 
-        setValue(Boolean.valueOf(newValue));
+        setObject(Boolean.valueOf(newValue));
     }
-    
+
     /**
      * @see net.sf.mmm.value.api.MutableGenericValueIF#setDate(java.util.Date)
      *      {@inheritDoc}
      */
     public void setDate(Date newValue) throws ValueNotEditableException, WrongValueTypeException {
 
-        setValue(newValue);
+        setObject(newValue);
     }
 
     /**
@@ -292,7 +291,7 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
     public void setDouble(double newValue) throws ValueNotEditableException,
             WrongValueTypeException {
 
-        setValue(Double.valueOf(newValue));
+        setObject(Double.valueOf(newValue));
     }
 
     /**
@@ -301,7 +300,7 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
      */
     public void setInteger(int newValue) throws ValueNotEditableException, WrongValueTypeException {
 
-        setValue(Integer.valueOf(newValue));
+        setObject(Integer.valueOf(newValue));
     }
 
     /**
@@ -311,7 +310,7 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
     public void setJavaClass(Class newValue) throws ValueNotEditableException,
             WrongValueTypeException {
 
-        setValue(newValue);
+        setObject(newValue);
     }
 
     /**
@@ -321,20 +320,41 @@ public abstract class AbstractGenericValue implements MutableGenericValueIF {
     public void setString(String newValue) throws ValueNotEditableException,
             WrongValueTypeException {
 
-        setValue(newValue);
+        setObject(newValue);
     }
 
     /**
-     * @see net.sf.mmm.value.api.GenericValueIF#validateRange(java.lang.Number,
-     *      java.lang.Number, java.lang.Number) {@inheritDoc}
+     * @see net.sf.mmm.value.api.GenericValueIF#getNumber(java.lang.Number,
+     *      java.lang.Number) {@inheritDoc}
      */
-    public void validateRange(Number value, Number minimum, Number maximum)
-            throws ValueOutOfRangeException {
+    public <T extends Number> T getNumber(T minimum, T maximum) throws ValueNotSetException,
+            WrongValueTypeException, ValueOutOfRangeException {
 
-        double v = value.doubleValue();
-        if ((v < minimum.doubleValue()) || (v > maximum.doubleValue())) {
+        T value = getValue(minimum.getClass());
+        if ((minimum.doubleValue() > value.doubleValue())
+                || (maximum.doubleValue() < value.doubleValue())) {
             throw new ValueOutOfRangeException(this, value, minimum, maximum);
         }
+        return value;
+    }
+
+    /**
+     * @see net.sf.mmm.value.api.GenericValueIF#getNumber(java.lang.Number,
+     *      java.lang.Number, java.lang.Number) {@inheritDoc}
+     */
+    public <T extends Number> T getNumber(T minimum, T maximum, T defaultValue)
+            throws WrongValueTypeException, ValueOutOfRangeException {
+
+        Class<T> type = (Class<T>) minimum.getClass();
+        T value = getValue(type, defaultValue);
+        if (value == null) {
+            return null;
+        }
+        if ((minimum.doubleValue() > value.doubleValue())
+                || (maximum.doubleValue() < value.doubleValue())) {
+            throw new ValueOutOfRangeException(this, value, minimum, maximum);
+        }
+        return value;
     }
 
     /**

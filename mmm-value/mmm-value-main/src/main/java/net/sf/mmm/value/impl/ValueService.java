@@ -38,7 +38,7 @@ public class ValueService extends AbstractValueService {
 
         for (ConfigurationIF typeNode : configuration.getDescendants("type")) {
             GenericValueIF managerValue = typeNode.getDescendant("@manager").getValue();
-            if (managerValue.hasValue()) {
+            if (!managerValue.isEmpty()) {
                 ValueManagerIF manager = managerValue.getJavaClassInstance(ValueManagerIF.class);
                 registerManager(manager);
             } else {

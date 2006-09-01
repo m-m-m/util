@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
 public interface ValueManagerIF<V> extends XmlSerializerIF<V> {
 
     /** the tag name used to represent a value as XML */
-    String XML_TAG_VALUE = GenericValueIF.XML_TAG_VALUE;
+    String XML_TAG_VALUE = "value";
 
     /**
      * the attribute name used to represent the {@link #getName() name} of the
@@ -45,7 +45,7 @@ public interface ValueManagerIF<V> extends XmlSerializerIF<V> {
      * implementation, while the {@link #getValueType() "value type"} of the
      * according value may be an interface or abstract-superclass of the value.
      */
-    String XML_ATR_VALUE_CLASS = GenericValueIF.XML_ATR_VALUE_CLASS;
+    String XML_ATR_VALUE_CLASS = "class";
 
     /**
      * This method gets the logical name of the managed value type.<br>

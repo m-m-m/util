@@ -97,7 +97,7 @@ public class Condition implements ConditionIF {
                 return false;
             }
             GenericValueIF value = child.getValue();
-            if (!value.hasValue()) {
+            if (value.isEmpty()) {
                 return false;
             }
             return this.comparator.accept(value, this.childValue, this.valuePattern);

@@ -6,7 +6,7 @@ import net.sf.mmm.value.api.MutableGenericValueIF;
 /**
  * This is a simple implementation of the
  * {@link net.sf.mmm.value.api.MutableGenericValueIF} interface that is always
- * {@link #hasValue() empty}.
+ * {@link #isEmpty() empty}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

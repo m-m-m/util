@@ -93,7 +93,7 @@ public interface MutableGenericValueIF extends GenericValueIF {
      *         if the type of the given object is NOT accepted by this
      *         implementation.
      */
-    void setValue(Object newValue) throws ValueNotEditableException, WrongValueTypeException;
+    void setObject(Object newValue) throws ValueNotEditableException, WrongValueTypeException;
 
     /**
      * This method determines if this value can be edited by the end-user.
@@ -104,7 +104,7 @@ public interface MutableGenericValueIF extends GenericValueIF {
      * @see #setInteger(int)
      * @see #setJavaClass(Class)
      * @see #setString(String)
-     * @see #setValue(Object)
+     * @see #setObject(Object)
      * 
      * @return <code>true</code> if this node is editable, <code>false</code>
      *         otherwise.
