@@ -7,11 +7,11 @@
     <version>0.9.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <name>MMM NLS::Service</name>
+  <name>MMM NLS::Main</name>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-nls-main</artifactId>
-  <version>0.0.1</version>
-  <description>Main Part of the Native Language Support</description>
+  <version>0.9.0</version>
+  <description>Main Component for Native Language Support</description>
   <dependencies>
   </dependencies>
 </project>
