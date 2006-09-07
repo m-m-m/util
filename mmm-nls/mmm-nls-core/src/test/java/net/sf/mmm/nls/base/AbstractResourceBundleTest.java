@@ -24,9 +24,9 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ResourceBundleTest extends TestCase {
+public class AbstractResourceBundleTest extends TestCase {
 
-    public ResourceBundleTest() {
+    public AbstractResourceBundleTest() {
         super();
     }
 
