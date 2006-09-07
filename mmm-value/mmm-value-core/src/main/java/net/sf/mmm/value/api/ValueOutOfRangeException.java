@@ -32,8 +32,7 @@ public class ValueOutOfRangeException extends ValueException {
             Number maximum) {
 
         super(CoreNlsResourceBundle.ERR_VALUE_OUT_OF_RANGE, genericValue, value, minimum, maximum);
-        // TODO:
-        assert (value.doubleValue() >= minimum.doubleValue());
+        assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
     }
 
     /**

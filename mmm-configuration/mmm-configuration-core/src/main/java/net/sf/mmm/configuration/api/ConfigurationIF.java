@@ -10,9 +10,9 @@ import net.sf.mmm.value.api.GenericValueIF;
 
 /**
  * This is the interface used to access configuration. It actually represents a
- * node of a configuration tree. If you are familiar with the XML, you can think
- * of this interface as a {@link org.w3c.dom.Node}.<br>
- * Here a little wired example:
+ * node of a configuration tree. If you are familiar with the XML DOM API, you
+ * can think of this interface as a {@link org.w3c.dom.Node}.<br>
+ * Here a little example:
  * 
  * <pre>
  * ConfigurationIF conf = getConfigurationFromSomewhere();
@@ -47,11 +47,11 @@ import net.sf.mmm.value.api.GenericValueIF;
  * easy approach of this configuration API. To keep it simple, there is just
  * this interface for the {@link #getType() types}
  * {@link Type#ATTRIBUTE element} and {@link Type#ATTRIBUTE attribute}. Else we
- * would have at least 3 interfaces for this one and you would need to do
- * casting. The trade-of is that you have the method to get a
+ * would have at least 3 interfaces instead and you would need to do casting.
+ * The trade-of is that you have the method to get a
  * {@link #getDescendant(String, String) descendant} that does NOT make sense on
  * {@link Type#ATTRIBUTE attributes}.<br>
- * You all may have expirienced an update of a software without an update of the
+ * You may have expirienced an update of a software without an update of the
  * documentation. The user may end up with incompatible configuration and does
  * not know how to fix. Or the configuration still works but the user does not
  * know how to configure and activate the cool new feauters. This configuration
@@ -94,9 +94,9 @@ import net.sf.mmm.value.api.GenericValueIF;
  * <code>{@link #getDescendant(String) getDescendant}("foo"+{@link ConfigurationIF}.{@link #PATH_SEPARATOR}+{@link ConfigurationIF}.{@link #NAME_PREFIX_ATTRIBUTE}+"bar")</code>.
  * 
  * ATTENTION: Operations on a {@link ConfigurationIF} are NOT thread-safe.
- * Anyways it does not make sense to share the same configuration. Different
- * {@link #getDescendant(String, String) sub-trees} of the configuration can be
- * accessed in a concurrent way.
+ * Anyways it does not make sense to share the same configuration over multiple
+ * threads. Different {@link #getDescendant(String, String) sub-trees} of the
+ * configuration can be accessed in a concurrent way.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -258,7 +258,7 @@ public interface ConfigurationIF extends
      * This method determines if this configuration is automatically adding
      * defaults. This means that if a {@link #getValue() value} is requested
      * with a {@link GenericValueIF#getString(String) default} supplied but the
-     * value is currently {@link GenericValueIF#hasValue() empty}, the default
+     * value is currently {@link GenericValueIF#isEmpty() empty}, the default
      * will automatically assigned as value. Additionally if a
      * {@link #getDescendant(String, String) descendant} is requested that does
      * not yet exist, the created {@link ConfigurationIF configuration}(s) will
@@ -288,7 +288,13 @@ public interface ConfigurationIF extends
 
     /**
      * This method gets the {@link #getDescendant(String, String) descendant}
-     * for the same {@link #getNamespaceUri() namespace} as this configuration.
+     * for the given <code>path</code> in the same
+     * {@link #getNamespaceUri() namespace} as this configuration. This is a
+     * shortcut for
+     * 
+     * <pre>
+     * {@link #getDescendant(String, String) getDescendant}(path, {@link #getNamespaceUri()})
+     * </pre>
      * 
      * @see #getDescendant(String, String)
      * 
@@ -300,7 +306,8 @@ public interface ConfigurationIF extends
     ConfigurationIF getDescendant(String path);
 
     /**
-     * This method gets a descendant of this configuration with the given path.<br>
+     * This method gets a descendant of this configuration with the given
+     * <code>path</code> and <code>namespaceUri</code>.<br>
      * A descendant of this configuration is a direct child ({@link Type#ATTRIBUTE attribute}
      * or {@link Type#ELEMENT element}) or a descendant of a child. Since an
      * {@link Type#ATTRIBUTE attribute} can NOT have children, this method only
@@ -314,20 +321,23 @@ public interface ConfigurationIF extends
      * The given <code>path</code> identifies the requested descendant
      * relative to this configuration in a way similar to XPath.
      * <ul>
-     * <li><code>element.{@link #getDescendant(String) getDescendant}(name+"{@link #PATH_THIS .}"</li>
-     * <li><code>element.{@link #getDescendant(String) getDescendant}(name+"{@link #PATH_SEPARATOR /}"+path)</code>
-     * is the same as
-     * <code>element.{@link #getDescendant(String) getDescendant}(name).{@link #getDescendant(String) getDescendant}(path)</code>.</li>
-     * 
-     * <li><code>element.{@link #getDescendant(String) getDescendant}("child")</code>
+     * <li><code>element.{@link #getDescendant(String) getDescendant}("{@link #PATH_THIS .}")
+     * is the same as <code>element</code>.</li>
+     * <li><code>element.{@link #getDescendant(String, String) getDescendant}("child", ns)</code>
      * gets the first child with the {@link #getType() type}
      * {@link Type#ELEMENT element} that has the {@link #getName() name}
-     * "child".</li>
-     * 
-     * <li><code>element.{@link #getDescendant(String) getDescendant}("@attribute")</code>
+     * "child" and {@link #getNamespaceUri() namespace} <code>ns</code>.</li>
+     * <li><code>element.{@link #getDescendant(String) getDescendant}("@attribute", ns)</code>
      * gets the child with the {@link #getType() type}
      * {@link Type#ATTRIBUTE attribute} that has the {@link #getName() name}
-     * "attribute".</li>
+     * "@attribute" and {@link #getNamespaceUri() namespace} <code>ns</code>.</li>
+     * <li><code>element.{@link #getDescendant(String, String) getDescendant}("child[@attribute='value']", ns)</code>
+     * gets the (first) child with the {@link #getType() type}
+     * {@link Type#ELEMENT element} that has the {@link #getName() name}
+     * "child", {@link #getNamespaceUri() namespace} <code>ns</code> and has an {@link Type#ATTRIBUTE attribute} named "@attribute" that has the value "value".</li>
+     * <li><code>element.{@link #getDescendant(String, String) getDescendant}(name+"{@link #PATH_SEPARATOR /}"+path, ns)</code>
+     * is the same as
+     * <code>element.{@link #getDescendant(String, String) getDescendant}(name, ns).{@link #getDescendant(String) getDescendant}(path)</code>.</li>
      * </ul>
      * 
      * @param path

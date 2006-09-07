@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.junit.Test;
+
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationIF;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF;
@@ -37,12 +39,7 @@ public class XmlConfigurationTest extends TestCase {
         super();
     }
 
-    private int countDescendants(ConfigurationIF config, String path) {
-
-        Collection<? extends ConfigurationIF> descendants = config.getDescendants(path);
-        return descendants.size();
-    }
-
+    @Test
     public void testConfiguration() {
 
         String href = XmlConfigurationTest.class.getName().replace('.', '/') + ".xml";

@@ -68,7 +68,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
         this.propertyKeySeparator = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_SEPARATOR)
                 .getString(DEFAULT_SEPARATOR);
         this.flat = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_FLAT)
-                .getBoolean(DEFAULT_FLAT);
+                .getBoolean(Boolean.valueOf(DEFAULT_FLAT)).booleanValue();
     }
 
     /**

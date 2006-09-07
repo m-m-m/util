@@ -156,7 +156,7 @@ public interface ConfigurationDocumentIF {
      * This is the {@link ConfigurationIF#getName() name} of an
      * {@link ConfigurationIF.Type#ATTRIBUTE attribute} that defines the
      * {@link ContextIF#getVariableNames() name} of the variable to
-     * {@link net.sf.mmm.context.api.MutableContextIF#setVariable(String, Object) set}.
+     * {@link net.sf.mmm.context.api.MutableContextIF#setObject(String, Object) set}.
      * It is used as child of {@link #NAME_CONTEXT_VARIABLE}.
      */
     String NAME_CONTEXT_VARIABLE_NAME = "@name";

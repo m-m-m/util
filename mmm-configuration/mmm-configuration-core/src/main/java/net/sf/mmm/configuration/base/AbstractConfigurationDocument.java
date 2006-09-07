@@ -116,7 +116,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
         if (accessPrefix != null) {
             String hrefKey = accessPrefix
                     + ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_SUFFIX_PARENT;
-            this.context.setVariable(hrefKey, this.access);
+            this.context.setObject(hrefKey, this.access);
         }
 
         detectInclusionCycle();

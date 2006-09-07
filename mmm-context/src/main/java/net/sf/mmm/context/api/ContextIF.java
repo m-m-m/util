@@ -14,18 +14,23 @@ import net.sf.mmm.value.api.ValueNotSetException;
 public interface ContextIF {
 
     /**
-     * This method gets the variable associated with the given variable-name as
-     * object.
+     * This method gets the variable associated with the given
+     * <code>variableName</code> as object. This method is similar to:
+     * 
+     * <pre>
+     * {@link #getValue(String) getValue}(variableName).{@link GenericValueIF#getObject() getObject()}
+     * </pre>
      * 
      * @param variableName
      *        is the name of the requested variable.
      * @return the value of the variable as
      *         {@link GenericValueIF#getObject() object} or <code>null</code>
      *         if the variable is defined but set to an
-     *         {@link GenericValueIF#hasValue() empty} value.
+     *         {@link GenericValueIF#isEmpty() empty} value.
      * @throws ValueNotSetException
      *         if the requested value is not {@link #hasValue(String) available}.
-     *         Use {@link #hasValue(String)} to prevent this.
+     *         Use {@link #hasValue(String)} or {@link #getValue(String)} to
+     *         prevent this.
      */
     Object getObject(String variableName) throws ValueNotSetException;
 
@@ -36,14 +41,14 @@ public interface ContextIF {
      * @param variableName
      *        is the name of the requested variable.
      * @return the value of the requested variable or an
-     *         {@link net.sf.mmm.value.base.EmptyValue} if the variable is
-     *         NOT defined.
+     *         {@link net.sf.mmm.value.base.EmptyValue} if the variable is NOT
+     *         defined.
      */
     GenericValueIF getValue(String variableName);
 
     /**
      * This method determines if the {@link #getValue(String) value} for the
-     * given key exists.
+     * given <code>variableName</code> exists.
      * 
      * @param variableName
      *        is the name of the value to check.

@@ -12,7 +12,7 @@
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-value</artifactId>
   <packaging>pom</packaging>
-  <version>0.0.1</version>
+  <version>0.9.0</version>
   <dependencies>
   </dependencies>
   <modules>

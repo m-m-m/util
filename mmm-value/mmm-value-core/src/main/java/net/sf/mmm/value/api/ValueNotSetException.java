@@ -19,8 +19,8 @@ public class ValueNotSetException extends ValueException {
      * The constructor.
      * 
      * @param genericValue
-     *        is the required value that is NOT
-     *        {@link GenericValueIF#hasValue() set}.
+     *        is the required value that is
+     *        {@link GenericValueIF#isEmpty() empty}.
      */
     public ValueNotSetException(GenericValueIF genericValue) {
 

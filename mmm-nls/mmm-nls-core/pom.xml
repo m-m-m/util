@@ -4,13 +4,13 @@
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-nls</artifactId>
-    <version>0.0.1</version>
+    <version>0.9.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <name>MMM NLS::Core</name>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-nls-core</artifactId>
-  <version>0.0.1</version>
+  <version>0.9.0</version>
   <description>Core Native Language Support</description>
   <dependencies>
   </dependencies>

@@ -85,6 +85,7 @@ enable-auto-props = yes
 *.jsp = svn:keywords=Id;svn:eol-style=native
 *.jinc = svn:keywords=Id;svn:eol-style=native
 *.xml = svn:keywords=Id;svn:eol-style=native
+*.html = svn:keywords=Id;svn:eol-style=native
 *.xsl = svn:keywords=Id;svn:eol-style=native
 *.dtd = svn:keywords=Id;svn:eol-style=native
 *.xsd = svn:keywords=Id;svn:eol-style=native

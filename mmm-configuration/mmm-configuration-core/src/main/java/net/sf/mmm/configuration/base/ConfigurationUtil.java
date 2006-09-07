@@ -59,7 +59,7 @@ public final class ConfigurationUtil {
 
         String key = ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_PREFIX + type
                 + ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_SUFFIX_FACTORY;
-        context.setVariable(key, factoryClass.getName());
+        context.setObject(key, factoryClass.getName());
     }
 
     /**
@@ -73,7 +73,7 @@ public final class ConfigurationUtil {
 
         String key = ConfigurationFactoryIF.CONTEXT_VARIABLE_PREFIX + type
                 + ConfigurationFactoryIF.CONTEXT_VARIABLE_SUFFIX_FACTORY;
-        context.setVariable(key, factoryClass.getName());
+        context.setObject(key, factoryClass.getName());
     }
 
     /**
@@ -87,7 +87,7 @@ public final class ConfigurationUtil {
 
         // ### access ###
         // default
-        context.setVariable(ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_DEFAULT,
+        context.setObject(ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_DEFAULT,
                 ResourceAccessFactory.CONTEXT_DEFAULT_NAME);
 
         // resource
@@ -100,7 +100,7 @@ public final class ConfigurationUtil {
 
         // ### formats ###
         // default
-        context.setVariable(ConfigurationFactoryIF.CONTEXT_VARIABLE_DEFAULT,
+        context.setObject(ConfigurationFactoryIF.CONTEXT_VARIABLE_DEFAULT,
                 XmlFactory.CONTEXT_DEFAULT_NAME);
         // xml
         setFormatFactory(context, XmlFactory.CONTEXT_DEFAULT_NAME, XmlFactory.class);
@@ -111,11 +111,11 @@ public final class ConfigurationUtil {
         setFormatFactory(context, type, PropertiesFactory.class);
         String key = ConfigurationFactoryIF.CONTEXT_VARIABLE_PREFIX + type
                 + PropertiesFactory.CONTEXT_VARIABLE_SUFFIX_FLAT;
-        context.setVariable(key, Boolean.TRUE.toString());
+        context.setObject(key, Boolean.TRUE.toString());
         key = ConfigurationFactoryIF.CONTEXT_VARIABLE_PREFIX
                 + PropertiesFactory.CONTEXT_DEFAULT_NAME
                 + PropertiesFactory.CONTEXT_VARIABLE_SUFFIX_FLAT;
-        context.setVariable(key, XmlFactory.class.getName());
+        context.setObject(key, XmlFactory.class.getName());
 
     }
 

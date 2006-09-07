@@ -17,7 +17,6 @@ public class ObjectValueTest extends AbstractGenericValueTest {
 
     /**
      * The constructor.
-     *
      */
     public ObjectValueTest() {
 
@@ -31,7 +30,7 @@ public class ObjectValueTest extends AbstractGenericValueTest {
     @Override
     protected GenericValueIF convert(Object plainValue) {
 
-        return new ObjectValue(plainValue);
+        return new ImmutableObjectValue(plainValue);
     }
     
 }

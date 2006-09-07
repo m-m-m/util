@@ -14,13 +14,17 @@ import net.sf.mmm.nls.api.StringTranslatorIF;
  */
 public class SimpleStringTranslator implements StringTranslatorIF {
 
+    /** the original bundle */
     private final AbstractResourceBundle nlsBundle;
     
+    /** the nationalized bundle */
     private final ResourceBundle localeBundle;
     
     /**
      * The constructor.
-     *
+     * 
+     * @param internationalBundle 
+     * @param locale 
      */
     public SimpleStringTranslator(AbstractResourceBundle internationalBundle, Locale locale) {
         super();

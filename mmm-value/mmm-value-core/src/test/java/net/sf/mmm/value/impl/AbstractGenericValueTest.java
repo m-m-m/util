@@ -8,8 +8,10 @@ import org.junit.Test;
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.value.api.GenericValueIF;
 import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.ValueInstanciationException;
 import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
+import net.sf.mmm.value.api.ValueOutOfRangeException;
 import net.sf.mmm.value.api.WrongValueTypeException;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
@@ -54,6 +56,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
             error = true;
         }
         assertTrue("Exception expected", error);
+        
         assertNull(value.getObject(null));
         assertNull(value.getBoolean(null));
         assertNull(value.getDate(null));
@@ -65,6 +68,12 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertNull(value.getString(null));
         assertNull(value.getValue(Object.class, null));
 
+        try {
+            CharSequence test = value.getJavaClassInstance(CharSequence.class, CharSequence.class, false);
+            fail("Exception expected");
+        } catch (ValueInstanciationException e) {            
+        }
+        
         assertTrue(value.isEmpty());
         if (value.isAddDefaults()) {
             String string = "value";            
@@ -132,6 +141,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertEquals(Boolean.FALSE.toString(), valueFalse.getString());
     }
 
+    @Test
     public void testString() {
         
         String string = "value";            
@@ -150,6 +160,36 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertEquals(new String(), s);
     }
 
+    private void checkWrongType(GenericValueIF value, Class wrongType) {
+        try {
+            value.getValue(wrongType);
+            fail("Exception expected");
+        } catch (WrongValueTypeException e) {
+            assertEquals(wrongType, e.getExpectedType());
+            assertSame(value, e.getGenericValue());
+        }        
+    }
+    
+    @Test
+    public void testWrongValueType() {
+        
+        double d = 42.42;
+        GenericValueIF value = convert(Double.valueOf(d));
+        assertEquals(d, value.getDouble());
+        assertEquals(Double.toString(d), value.getString());
+        checkWrongType(value, Boolean.class);
+        checkWrongType(value, Class.class);
+        checkWrongType(value, Date.class);
+        value = convert("foo");
+        checkWrongType(value, Byte.class);
+        checkWrongType(value, Short.class);
+        checkWrongType(value, Integer.class);
+        checkWrongType(value, Long.class);
+        checkWrongType(value, Float.class);
+        checkWrongType(value, Double.class);
+        checkWrongType(value, Number.class);
+    }
+    
     @Test
     public void testNumbers() {
 
@@ -183,7 +223,27 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertEquals(doubleValue, value.getDouble(null).doubleValue(), 0);
         assertEquals(doubleValue, value.getValue(Double.class).doubleValue(), 0);
         assertEquals(doubleValue, value.getValue(Double.class, null).doubleValue(), 0);
-        assertEquals(doubleValue, value.getValue(Number.class).doubleValue(), 0);
+        Double bounds = Double.valueOf(doubleValue);
+        assertEquals(doubleValue, value.getNumber(bounds, bounds).doubleValue(), 0);
+        assertEquals(doubleValue, value.getNumber(bounds, bounds, null).doubleValue(), 0);
+        Double greater = Double.valueOf(doubleValue + 1);
+        if (greater.doubleValue() > doubleValue) {
+            try {
+                value.getNumber(greater, greater);
+                fail("Exception expected");
+            } catch (ValueOutOfRangeException e) {
+                assertSame(value, e.getGenericValue());
+            }
+        }
+        Double smaller = Double.valueOf(doubleValue - 1);
+        if (smaller.doubleValue() < doubleValue) {
+            try {
+                value.getNumber(smaller, smaller);
+                fail("Exception expected");
+            } catch (ValueOutOfRangeException e) {
+                assertSame(value, e.getGenericValue());
+            }
+        }
         Class type = number.getClass();
         if (type != Double.class) {
             float floatValue = number.floatValue();

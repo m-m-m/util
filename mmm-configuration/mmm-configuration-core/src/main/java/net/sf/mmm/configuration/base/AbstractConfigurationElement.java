@@ -166,7 +166,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
                 String variableName = variable.getDescendant(
                         ConfigurationDocumentIF.NAME_CONTEXT_VARIABLE_NAME).getValue().getString();
                 String variableValue = variable.getValue().getString();
-                getOwnerDocument().getMutableContext().setVariable(variableName, variableValue);
+                getOwnerDocument().getMutableContext().setObject(variableName, variableValue);
             }
         } else if (ConfigurationDocumentIF.NAME_INCLUDE.equals(name)) {
             // getOwnerDocument().isIncludeEnabled();

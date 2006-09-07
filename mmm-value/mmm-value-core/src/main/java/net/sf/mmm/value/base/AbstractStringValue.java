@@ -39,7 +39,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
                 if (type.isAssignableFrom(String.class)) {
                     result = value;
                 } else if ((type == boolean.class) || (type == Boolean.class)) {
-                    result = Boolean.valueOf(value);
+                    result = parseBoolean(value);
                 } else if ((type == int.class) || (type == Integer.class)) {
                     result = Integer.valueOf(value);
                 } else if ((type == long.class) || (type == Long.class)) {
@@ -123,6 +123,25 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
         return result;
     }
 
+    /**
+     * This method parses a boolean value.
+     * 
+     * @param booleanValue
+     *        is the boolean value as string.
+     * @return the value as boolean.
+     * @throws WrongValueTypeException
+     *         if the given string is no boolean.
+     */
+    protected Boolean parseBoolean(String booleanValue) throws WrongValueTypeException {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(booleanValue)) {
+            return Boolean.TRUE;
+        } else if (Boolean.FALSE.toString().equalsIgnoreCase(booleanValue)) {
+            return Boolean.FALSE;
+        } else {
+            throw new WrongValueTypeException(this, Boolean.class);            
+        }
+    }
+    
     /**
      * This method parses a date value.
      * 

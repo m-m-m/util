@@ -60,10 +60,19 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
     }
 
     /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#configure(java.lang.String,
-     *      net.sf.mmm.context.api.ContextIF,
+     * @see #configure(java.lang.String, net.sf.mmm.context.api.ContextIF,
      *      net.sf.mmm.configuration.api.ConfigurationIF)
+     * @see #getAccessors()
      * 
+     * @param prefix
+     *        is the prefix for the
+     *        {@link ContextIF#getValue(String) "variables"}.
+     * @param context
+     *        is the context (potentially) containing the required configuration.
+     * @param include
+     *        is the
+     *        {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE include}
+     *        configuration.
      * @param parent
      *        is the paretn access the given <code>href</code> may be relative
      *        to. It should only be interpreted if the given <code>href</code>
@@ -73,6 +82,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
      *        is the value of the
      *        {@link ConfigurationDocumentIF#NAME_INCLUDE_HREF} attribute. It
      *        can be relative or absolute.
+     * @return the {@link #getAccessors() accessors}.
      * @throws ConfigurationException
      */
     public abstract AbstractConfigurationAccess[] configure(String prefix, ContextIF context,

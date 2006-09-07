@@ -76,6 +76,15 @@
         <artifactId>maven-javadoc-plugin</artifactId>
 	<reportSets>
           <reportSet>
+            <id>html</id>
+            <configuration>
+              <show>private</show>
+            </configuration>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+          <reportSet>
             <id>uml</id>
             <configuration>
               <doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet>
@@ -85,16 +94,8 @@
                 <version>4.4</version>
               </docletArtifact>
               <additionalparam>-views</additionalparam>
+	      <!-- TODO setup proper directory -->
               <destDir>target/uml</destDir>
-              <show>private</show>
-            </configuration>
-            <reports>
-              <report>javadoc</report>
-            </reports>
-          </reportSet>
-          <reportSet>
-            <id>html</id>
-            <configuration>
               <show>private</show>
             </configuration>
             <reports>

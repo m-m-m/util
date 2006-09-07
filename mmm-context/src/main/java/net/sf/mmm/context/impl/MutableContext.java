@@ -129,24 +129,24 @@ public class MutableContext implements MutableContextIF {
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContextIF#setVariable(java.lang.String,
+     * @see net.sf.mmm.context.api.MutableContextIF#setValue(java.lang.String,
      *      net.sf.mmm.value.api.GenericValueIF) {@inheritDoc}
      */
-    public void setVariable(String variableName, GenericValueIF value) {
+    public void setValue(String variableName, GenericValueIF value) {
 
         this.variableTable.put(variableName, value);
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContextIF#setVariable(java.lang.String,
+     * @see net.sf.mmm.context.api.MutableContextIF#setObject(java.lang.String,
      *      java.lang.Object) {@inheritDoc}
      */
-    public void setVariable(String variableName, Object value) {
+    public void setObject(String variableName, Object value) {
 
         if ((value != null) && (value instanceof String)) {
-            setVariable(variableName, new StringValue((String) value));
+            setValue(variableName, new StringValue((String) value));
         } else {
-            setVariable(variableName, new ObjectValue(value));
+            setValue(variableName, new ObjectValue(value));
         }
     }
 
@@ -159,10 +159,10 @@ public class MutableContext implements MutableContextIF {
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContextIF#unsetVariable(java.lang.String)
+     * @see net.sf.mmm.context.api.MutableContextIF#unsetValue(java.lang.String)
      *      {@inheritDoc}
      */
-    public void unsetVariable(String variableName) {
+    public void unsetValue(String variableName) {
 
         this.variableTable.remove(variableName);
     }
