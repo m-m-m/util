@@ -26,7 +26,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
 
     /**
      * @see AbstractComponentProvider#AbstractComponentProvider(Class)
-     *      {@inheritDoc}
+     *      
      */
     public AbstractStaticSingletonComponentProvider(Class<S> specification) {
 
@@ -35,7 +35,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
 
     /**
      * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptorIF)
-     *      {@inheritDoc}
+     *      
      */
     public AbstractStaticSingletonComponentProvider(ComponentDescriptorIF<S> componentDescriptor) {
 
@@ -68,7 +68,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
     /**
      * @see net.sf.mmm.framework.base.provider.AbstractDefaultInstanceComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptorIF,
      *      java.lang.String, net.sf.mmm.framework.api.ComponentManagerIF)
-     *      {@inheritDoc}
+     *      
      */
     @Override
     protected ComponentInstanceContainerIF<S> requestDefault(
@@ -104,7 +104,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#release(ComponentInstanceContainerIF,
-     *      net.sf.mmm.framework.api.ComponentManagerIF) {@inheritDoc}
+     *      net.sf.mmm.framework.api.ComponentManagerIF) 
      */
     public final boolean release(ComponentInstanceContainerIF<S> instanceContainer,
             ComponentManagerIF componentManager) {
@@ -119,7 +119,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
      * Please override if your component has to be shut-down.
      * 
      * @see net.sf.mmm.framework.api.ComponentProviderIF#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-     *      net.sf.mmm.framework.api.ComponentManagerIF) {@inheritDoc}
+     *      net.sf.mmm.framework.api.ComponentManagerIF) 
      */
     public void dispose(ComponentInstanceContainerIF<S> instanceContainer,
             ComponentManagerIF componentManager) {

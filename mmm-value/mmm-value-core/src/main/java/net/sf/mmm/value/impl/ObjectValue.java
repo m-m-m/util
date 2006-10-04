@@ -12,59 +12,58 @@ import net.sf.mmm.value.base.AbstractObjectValue;
  */
 public class ObjectValue extends AbstractObjectValue {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -8334640713105624373L;
+  /** UID for serialization */
+  private static final long serialVersionUID = -8334640713105624373L;
 
-    /** the actual value */
-    private Object value;
+  /** the actual value */
+  private Object value;
 
-    /**
-     * The constructor.
-     */
-    public ObjectValue() {
+  /**
+   * The constructor.
+   */
+  public ObjectValue() {
 
-        this(null);
-    }
+    this(null);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param internalValue
-     *        is the internal value object to represent.
-     */
-    public ObjectValue(Object internalValue) {
+  /**
+   * The constructor.
+   * 
+   * @param internalValue
+   *        is the internal value object to represent.
+   */
+  public ObjectValue(Object internalValue) {
 
-        super();
-        this.value = internalValue;
-    }
+    super();
+    this.value = internalValue;
+  }
 
-    /**
-     * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
-     * {@inheritDoc}
-     */
-    public boolean isEditable() {
+  /**
+   * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
+   */
+  public boolean isEditable() {
 
-        return true;
-    }
+    return true;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
-     * {@inheritDoc}
-     */
-    @Override
-    protected Object getPlainValue() {
+  /**
+   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
+   * 
+   */
+  @Override
+  protected Object getPlainValue() {
 
-        return this.value;
-    }
+    return this.value;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setPlainValue(Object newValue) {
+  /**
+   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
+   * 
+   */
+  @Override
+  protected void setPlainValue(Object newValue) {
 
-        this.value = newValue;
-    }
+    this.value = newValue;
+  }
 
 }

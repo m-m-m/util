@@ -31,7 +31,7 @@ public class FunctionSwitch extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 
@@ -40,7 +40,7 @@ public class FunctionSwitch extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorSymbol()
-     * {@inheritDoc}
+     * 
      */
     public String getOperatorSymbol() {
 
@@ -49,7 +49,7 @@ public class FunctionSwitch extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getMinimumArgumentCount() {
 
@@ -58,7 +58,7 @@ public class FunctionSwitch extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getMaximumArgumentCount() {
 
@@ -68,7 +68,7 @@ public class FunctionSwitch extends BasicFunction {
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValueIF,
      *      GenericValueIF)
-     * {@inheritDoc}
+     * 
      */
     public Object calculate(Object argument1, Object argument2)
             throws ValueException {

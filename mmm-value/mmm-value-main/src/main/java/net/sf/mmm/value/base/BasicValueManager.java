@@ -48,7 +48,7 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#getValueType()
-     * {@inheritDoc}
+     * 
      */
     public Class<V> getValueType() {
 
@@ -57,7 +57,7 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 

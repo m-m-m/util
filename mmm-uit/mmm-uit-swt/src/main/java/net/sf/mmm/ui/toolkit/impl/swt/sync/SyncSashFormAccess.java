@@ -66,7 +66,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess#getSwtObject()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public Composite getSwtObject() {
@@ -76,7 +76,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void performSynchron(String operation) {
@@ -98,7 +98,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void createSynchron() {

@@ -16,45 +16,45 @@ import javax.xml.stream.XMLStreamWriter;
  */
 public class StaxUtil {
 
-    /** the stax output factory */
-    private static final XMLOutputFactory OUTPUT_FACTORY = XMLOutputFactory.newInstance();
+  /** the stax output factory */
+  private static final XMLOutputFactory OUTPUT_FACTORY = XMLOutputFactory.newInstance();
 
-    /**
-     * Forbidden constructor.
-     */
-    private StaxUtil() {
+  /**
+   * Forbidden constructor.
+   */
+  private StaxUtil() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * This method creates a stream writer.
-     * 
-     * @param out
-     *        is the output stream where the XML will be written to.
-     * @return the XML stream writer.
-     * @throws XMLStreamException
-     *         if the creation of the stream writer failed (StAX not available
-     *         or misconfigured).
-     */
-    public static XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException {
+  /**
+   * This method creates a stream writer.
+   * 
+   * @param out
+   *        is the output stream where the XML will be written to.
+   * @return the XML stream writer.
+   * @throws XMLStreamException
+   *         if the creation of the stream writer failed (StAX not available or
+   *         misconfigured).
+   */
+  public static XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException {
 
-        return OUTPUT_FACTORY.createXMLStreamWriter(out);
-    }
+    return OUTPUT_FACTORY.createXMLStreamWriter(out);
+  }
 
-    /**
-     * This method creates a stream writer.
-     * 
-     * @param writer
-     *        is the writer where the XML will be written to.
-     * @return the XML stream writer.
-     * @throws XMLStreamException
-     *         if the creation of the stream writer failed (StAX not available
-     *         or misconfigured).
-     */
-    public static XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
+  /**
+   * This method creates a stream writer.
+   * 
+   * @param writer
+   *        is the writer where the XML will be written to.
+   * @return the XML stream writer.
+   * @throws XMLStreamException
+   *         if the creation of the stream writer failed (StAX not available or
+   *         misconfigured).
+   */
+  public static XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
 
-        return OUTPUT_FACTORY.createXMLStreamWriter(writer);
-    }
+    return OUTPUT_FACTORY.createXMLStreamWriter(writer);
+  }
 
 }

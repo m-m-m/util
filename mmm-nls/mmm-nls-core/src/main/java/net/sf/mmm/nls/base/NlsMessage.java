@@ -108,7 +108,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsObjectIF#toNlsMessage()
-     * {@inheritDoc}
+     * 
      */
     public NlsMessageIF toNlsMessage() {
 
@@ -117,7 +117,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getInternationalizedMessage()
-     * {@inheritDoc}
+     * 
      */
     public String getInternationalizedMessage() {
 
@@ -126,7 +126,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getArgumentCount() {
 
@@ -135,7 +135,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getArgument(int)
-     * {@inheritDoc}
+     * 
      */
     public Object getArgument(int index) {
 
@@ -144,7 +144,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getMessage()
-     * {@inheritDoc}
+     * 
      */
     public String getMessage() {
 
@@ -153,7 +153,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getLocalizedMessage()
-     * {@inheritDoc}
+     * 
      */
     public String getLocalizedMessage() {
 
@@ -162,7 +162,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getLocalizedMessage(net.sf.mmm.nls.api.StringTranslatorIF)
-     * {@inheritDoc}
+     * 
      */
     public String getLocalizedMessage(StringTranslatorIF nationalizer) {
 
@@ -174,7 +174,7 @@ public class NlsMessage implements NlsMessageIF {
     /**
      * @see net.sf.mmm.nls.api.NlsMessageIF#getLocalizedMessage(net.sf.mmm.nls.api.StringTranslatorIF,
      *      java.lang.StringBuffer)
-     * {@inheritDoc}
+     * 
      */
     public void getLocalizedMessage(StringTranslatorIF nationalizer, StringBuffer messageBuffer) {
 
@@ -218,7 +218,7 @@ public class NlsMessage implements NlsMessageIF {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public String toString() {

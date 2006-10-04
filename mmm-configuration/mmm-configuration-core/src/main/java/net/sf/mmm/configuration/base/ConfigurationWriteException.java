@@ -12,31 +12,31 @@ import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
  */
 public class ConfigurationWriteException extends ConfigurationException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 4441678946509285043L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 4441678946509285043L;
 
-    /**
-     * The constructor.
-     * 
-     * @param access
-     *        is the access where to read the configuration from.
-     */
-    public ConfigurationWriteException(ConfigurationAccessIF access) {
+  /**
+   * The constructor.
+   * 
+   * @param access
+   *        is the access where to read the configuration from.
+   */
+  public ConfigurationWriteException(ConfigurationAccessIF access) {
 
-        super(NlsResourceBundle.ERR_WRITE, access);
-    }
+    super(NlsResourceBundle.ERR_WRITE, access);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param access
-     *        is the access where to read the configuration from.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public ConfigurationWriteException(ConfigurationAccessIF access, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param access
+   *        is the access where to read the configuration from.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public ConfigurationWriteException(ConfigurationAccessIF access, Throwable nested) {
 
-        super(NlsResourceBundle.ERR_WRITE, access, nested);
-    }
+    super(NlsResourceBundle.ERR_WRITE, access, nested);
+  }
 
 }

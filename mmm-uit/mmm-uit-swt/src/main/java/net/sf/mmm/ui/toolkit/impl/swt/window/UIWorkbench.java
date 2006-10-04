@@ -28,7 +28,7 @@ public class UIWorkbench extends UIFrame implements UIWorkbenchIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -37,7 +37,7 @@ public class UIWorkbench extends UIFrame implements UIWorkbenchIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#createFrame(java.lang.String, boolean)
-     * {@inheritDoc}
+     * 
      */
     public UIFrame createFrame(String title, boolean resizeable) {
 

@@ -32,7 +32,7 @@ public class FunctionConcat extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 
@@ -41,7 +41,7 @@ public class FunctionConcat extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorSymbol()
-     * {@inheritDoc}
+     * 
      */
     public String getOperatorSymbol() {
 
@@ -50,7 +50,7 @@ public class FunctionConcat extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getMinimumArgumentCount() {
 
@@ -59,7 +59,7 @@ public class FunctionConcat extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getMaximumArgumentCount() {
 
@@ -68,7 +68,7 @@ public class FunctionConcat extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public Object calculate(Object argument) throws ValueException {
@@ -79,7 +79,7 @@ public class FunctionConcat extends BasicFunction {
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValueIF,
      *      GenericValueIF)
-     * {@inheritDoc}
+     * 
      */
     public String calculate(Object argument1, Object argument2) throws CalculationException {
 

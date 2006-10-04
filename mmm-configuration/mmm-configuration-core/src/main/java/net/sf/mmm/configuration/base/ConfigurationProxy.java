@@ -21,226 +21,219 @@ import net.sf.mmm.value.api.MutableGenericValueIF;
  */
 public abstract class ConfigurationProxy extends AbstractConfiguration {
 
-    /**
-     * The constructor.
-     */
-    public ConfigurationProxy() {
+  /**
+   * The constructor.
+   */
+  public ConfigurationProxy() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * This method gets the configuration this proxy delegates to. The delegate
-     * can be lazy loaded in the implementation of this method.
-     * 
-     * @return the configuration delegate.
-     */
-    protected abstract AbstractConfiguration getDelegate();
+  /**
+   * This method gets the configuration this proxy delegates to. The delegate
+   * can be lazy loaded in the implementation of this method.
+   * 
+   * @return the configuration delegate.
+   */
+  protected abstract AbstractConfiguration getDelegate();
 
-    /**
-     * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getValue()
-     * {@inheritDoc}
-     */
-    public MutableGenericValueIF getValue() {
+  /**
+   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getValue()
+   *      
+   */
+  public MutableGenericValueIF getValue() {
 
-        return getDelegate().getValue();
-    }
+    return getDelegate().getValue();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getName()
-     * {@inheritDoc}
-     */
-    public String getName() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   */
+  public String getName() {
 
-        return getDelegate().getName();
-    }
+    return getDelegate().getName();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
-     * {@inheritDoc}
-     */
-    public String getNamespaceUri() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   *      
+   */
+  public String getNamespaceUri() {
 
-        return getDelegate().getNamespaceUri();
-    }
+    return getDelegate().getNamespaceUri();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
-     * {@inheritDoc}
-     */
-    public boolean isEditable() {
+  /**
+   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
+   *      
+   */
+  public boolean isEditable() {
 
-        return getDelegate().isEditable();
-    }
+    return getDelegate().isEditable();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
-     * {@inheritDoc}
-     */
-    public boolean isAddDefaults() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
+   *      
+   */
+  public boolean isAddDefaults() {
 
-        return getDelegate().isAddDefaults();
-    }
+    return getDelegate().isAddDefaults();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getType()
-     * {@inheritDoc}
-     */
-    public Type getType() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getType() 
+   */
+  public Type getType() {
 
-        return getDelegate().getType();
-    }
+    return getDelegate().getType();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration getParent() {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
+   *      
+   */
+  @Override
+  protected AbstractConfiguration getParent() {
 
-        return getDelegate().getParent();
-    }
+    return getDelegate().getParent();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfigurationDocument getOwnerDocument() {
-    
-        return getDelegate().getOwnerDocument();
-    }
-    
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String,
-     *      java.lang.String)
-     * {@inheritDoc}
-     */
-    public AbstractConfiguration getDescendant(String path, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
+   *      
+   */
+  @Override
+  protected AbstractConfigurationDocument getOwnerDocument() {
 
-        return getDelegate().getDescendant(path, namespaceUri);
-    }
+    return getDelegate().getOwnerDocument();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(java.lang.String,
-     *      java.lang.String)
-     * {@inheritDoc}
-     */
-    public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String,
+   *      java.lang.String) 
+   */
+  public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
-        return getDelegate().getDescendants(path, namespaceUri);
-    }
+    return getDelegate().getDescendant(path, namespaceUri);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(String,
-     *      String)
-     * {@inheritDoc}
-     */
-    @Override
-    public AbstractConfiguration doCreateChild(String name, String namespace)
-            throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(java.lang.String,
+   *      java.lang.String) 
+   */
+  public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
-        return getDelegate().doCreateChild(name, namespace);
-    }
+    return getDelegate().getDescendants(path, namespaceUri);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-     *      java.lang.String)
-     * {@inheritDoc}
-     */
-    @Override
-    public AbstractConfiguration getChild(String name, String namespace)
-            throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(String,
+   *      String) 
+   */
+  @Override
+  public AbstractConfiguration doCreateChild(String name, String namespace)
+      throws ConfigurationException {
 
-        return getDelegate().getChild(name, namespace);
-    }
+    return getDelegate().doCreateChild(name, namespace);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-     *      java.lang.String)
-     * {@inheritDoc}
-     */
-    @Override
-    public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
+   *      java.lang.String) 
+   */
+  @Override
+  public AbstractConfiguration getChild(String name, String namespace)
+      throws ConfigurationException {
 
-        return getDelegate().getChildren(name, namespaceUri);
-    }
+    return getDelegate().getChild(name, namespace);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
-     * {@inheritDoc}
-     */
-    @Override
-    public Iterator<AbstractConfiguration> getChildren(Type childType) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
+   *      java.lang.String) 
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
 
-        return getDelegate().getChildren(childType);
-    }
+    return getDelegate().getChildren(name, namespaceUri);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-     * {@inheritDoc}
-     */
-    @Override
-    protected void addChild(AbstractConfiguration child) {
-    
-        getDelegate().addChild(child);
-    }
-    
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doRemove() throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
+   *      
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Type childType) {
 
-        getDelegate().doRemove();
-    }
-    
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-     * {@inheritDoc}
-     */
-    @Override
-    protected void removeChild(AbstractConfiguration child) {
+    return getDelegate().getChildren(childType);
+  }
 
-        getDelegate().removeChild(child);
-    }
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   *      
+   */
+  @Override
+  protected void addChild(AbstractConfiguration child) {
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration doDisable() throws ConfigurationException {
-    
-        return getDelegate().doDisable();
-    }
+    getDelegate().addChild(child);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
-     * {@inheritDoc}
-     */
-    public void disable() throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
+   *      
+   */
+  @Override
+  protected void doRemove() throws ConfigurationException {
 
-        getDelegate().disable();
-    }
+    getDelegate().doRemove();
+  }
 
-    /**
-     * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
-     * {@inheritDoc}
-     */
-    public void addListener(ConfigurationChangeListenerIF listener) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   *      
+   */
+  @Override
+  protected void removeChild(AbstractConfiguration child) {
 
-        getDelegate().addListener(listener);
-    }
+    getDelegate().removeChild(child);
+  }
 
-    /**
-     * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
-     * {@inheritDoc}
-     */
-    public void removeListener(ConfigurationChangeListenerIF listener) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
+   *      
+   */
+  @Override
+  protected AbstractConfiguration doDisable() throws ConfigurationException {
 
-        getDelegate().removeListener(listener);
-    }
+    return getDelegate().doDisable();
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
+   *      
+   */
+  public void disable() throws ConfigurationException {
+
+    getDelegate().disable();
+  }
+
+  /**
+   * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
+   *      
+   */
+  public void addListener(ConfigurationChangeListenerIF listener) {
+
+    getDelegate().addListener(listener);
+  }
+
+  /**
+   * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
+   *      
+   */
+  public void removeListener(ConfigurationChangeListenerIF listener) {
+
+    getDelegate().removeListener(listener);
+  }
 
 }

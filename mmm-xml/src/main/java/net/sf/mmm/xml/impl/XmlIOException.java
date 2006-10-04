@@ -12,18 +12,18 @@ import net.sf.mmm.xml.api.XmlException;
  */
 public class XmlIOException extends XmlException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -6092609800350198023L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -6092609800350198023L;
 
-    /**
-     * The constructor.
-     * 
-     * @param ioException
-     *        is the IO exception that caused this exception.
-     */
-    public XmlIOException(Throwable ioException) {
+  /**
+   * The constructor.
+   * 
+   * @param ioException
+   *        is the IO exception that caused this exception.
+   */
+  public XmlIOException(Throwable ioException) {
 
-        super(ioException, NlsResourceBundle.ERR_IO);
-    }
+    super(ioException, NlsResourceBundle.ERR_IO);
+  }
 
 }

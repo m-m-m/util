@@ -45,7 +45,7 @@ public class ListModelAdapter<E> implements UIListModelListenerIF, Runnable {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-     * {@inheritDoc}
+     * 
      */
     public synchronized void listModelChanged(UIListModelEvent changeEvent) {
 

@@ -15,7 +15,7 @@ public class ComponentException extends IocException {
 
     /**
      * @see IocException#IocException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ComponentException(String internaitionalizedMessage, Object... arguments) {
 
@@ -24,7 +24,7 @@ public class ComponentException extends IocException {
 
     /**
      * @see IocException#IocException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ComponentException(Throwable nested, String internaitionalizedMessage,
             Object... arguments) {

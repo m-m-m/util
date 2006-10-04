@@ -37,7 +37,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIComponentIF#setEnabled(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setEnabled(boolean enabled) {
 
@@ -49,7 +49,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitleIF#setBorderTitle(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setBorderTitle(String borderTitle) {
 
@@ -70,7 +70,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitleIF#getBorderTitle()
-     * {@inheritDoc}
+     * 
      */
     public String getBorderTitle() {
 
@@ -83,7 +83,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#refresh()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void refresh() {

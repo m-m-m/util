@@ -34,7 +34,7 @@ public class SimpleStringTranslator implements StringTranslatorIF {
 
     /**
      * @see net.sf.mmm.nls.api.StringTranslatorIF#translate(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public String translate(String message) {
 

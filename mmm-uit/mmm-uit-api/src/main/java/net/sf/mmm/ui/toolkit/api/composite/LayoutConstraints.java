@@ -19,7 +19,7 @@ public class LayoutConstraints {
 
         /**
          * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-         * {@inheritDoc}
+         * 
      */
         public int getHeight() {
 
@@ -28,7 +28,7 @@ public class LayoutConstraints {
 
         /**
          * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-         * {@inheritDoc}
+         * 
      */
         public int getWidth() {
 

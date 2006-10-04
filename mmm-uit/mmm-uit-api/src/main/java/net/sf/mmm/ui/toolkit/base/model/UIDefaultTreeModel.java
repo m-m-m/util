@@ -40,7 +40,7 @@ public class UIDefaultTreeModel<T> extends UIAbstractTreeModel<UITreeNodeIF<T>> 
     /**
      * @see net.sf.mmm.ui.toolkit.base.model.UIAbstractTreeModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITreeModelListenerIF,
      *      java.lang.Throwable)
-     * {@inheritDoc}
+     * 
      */
     protected void handleListenerException(UITreeModelListenerIF listener, Throwable t) {
 
@@ -62,7 +62,7 @@ public class UIDefaultTreeModel<T> extends UIAbstractTreeModel<UITreeNodeIF<T>> 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#getRootNode()
-     * {@inheritDoc}
+     * 
      */
     public UITreeNodeIF<T> getRootNode() {
 
@@ -71,7 +71,7 @@ public class UIDefaultTreeModel<T> extends UIAbstractTreeModel<UITreeNodeIF<T>> 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#getChildCount(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public int getChildCount(UITreeNodeIF<T> node) {
 
@@ -81,7 +81,7 @@ public class UIDefaultTreeModel<T> extends UIAbstractTreeModel<UITreeNodeIF<T>> 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#getChildNode(java.lang.Object,
      *      int)
-     * {@inheritDoc}
+     * 
      */
     public UITreeNodeIF<T> getChildNode(UITreeNodeIF<T> node, int index) {
 
@@ -90,7 +90,7 @@ public class UIDefaultTreeModel<T> extends UIAbstractTreeModel<UITreeNodeIF<T>> 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#getParent(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public UITreeNodeIF<T> getParent(UITreeNodeIF<T> node) {
 

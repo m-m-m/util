@@ -41,7 +41,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#getValueType()
-     * {@inheritDoc}
+     * 
      */
     public Class<Element> getValueType() {
 
@@ -50,7 +50,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#parse(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public Element parse(String valueAsString) throws ValueParseException {
 
@@ -65,7 +65,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#parse(org.w3c.dom.Element)
-     * {@inheritDoc}
+     * 
      */
     public Element parse(Element valueAsXml) throws ValueParseException {
 
@@ -78,7 +78,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#toString(Object)
-     * {@inheritDoc}
+     * 
      */
     public String toString(Element value) {
 
@@ -93,7 +93,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     /**
      * @see AbstractValueManager#toXmlValue(XmlWriterIF, Object)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void toXmlValue(XmlWriterIF xmlWriter, Element value) throws XmlException {
@@ -103,7 +103,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 

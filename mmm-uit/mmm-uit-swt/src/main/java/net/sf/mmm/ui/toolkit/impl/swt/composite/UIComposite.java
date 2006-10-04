@@ -47,7 +47,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitleIF#getBorderTitle()
-     * {@inheritDoc}
+     * 
      */
     public String getBorderTitle() {
 
@@ -60,7 +60,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public AbstractSyncCompositeAccess getSyncAccess() {
@@ -74,20 +74,20 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getActiveSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public abstract AbstractSyncCompositeAccess getActiveSyncAccess();
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public abstract UIComponent getComponent(int index);
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#create()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void create() {
@@ -115,7 +115,7 @@ public abstract class UIComposite extends UIComponent implements UICompositeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#dispose()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void dispose() {

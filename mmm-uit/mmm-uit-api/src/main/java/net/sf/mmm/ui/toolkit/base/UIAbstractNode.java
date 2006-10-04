@@ -48,7 +48,7 @@ public abstract class UIAbstractNode extends UIAbstractObject implements UINodeI
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#getParent()
-     * {@inheritDoc}
+     * 
      */
     public UINodeIF getParent() {
 
@@ -92,7 +92,7 @@ public abstract class UIAbstractNode extends UIAbstractObject implements UINodeI
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#getParentFrame()
-     * {@inheritDoc}
+     * 
      */
     public UIFrameIF getParentFrame() {
 
@@ -116,7 +116,7 @@ public abstract class UIAbstractNode extends UIAbstractObject implements UINodeI
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#getParentWindow()
-     * {@inheritDoc}
+     * 
      */
     public UIWindowIF getParentWindow() {
 
@@ -139,7 +139,7 @@ public abstract class UIAbstractNode extends UIAbstractObject implements UINodeI
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#addActionListener(net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void addActionListener(UIActionListenerIF listener) {
 
@@ -189,7 +189,7 @@ public abstract class UIAbstractNode extends UIAbstractObject implements UINodeI
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#removeActionListener(net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeActionListener(UIActionListenerIF listener) {
 
@@ -202,7 +202,7 @@ public abstract class UIAbstractNode extends UIAbstractObject implements UINodeI
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#refresh()
-     * {@inheritDoc}
+     * 
      */
     public void refresh() {
 

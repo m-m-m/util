@@ -54,7 +54,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#getValue(java.lang.String)
-     *      {@inheritDoc}
+     *      
      * 
      * @param variableName
      *        is the name of the requested context value.
@@ -72,7 +72,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#getValue(java.lang.String)
-     *      {@inheritDoc}
+     *      
      */
     public GenericValueIF getValue(String variableName) {
 
@@ -85,7 +85,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#getObject(java.lang.String)
-     *      {@inheritDoc}
+     *      
      */
     public Object getObject(String variableName) {
 
@@ -98,7 +98,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#hasValue(java.lang.String)
-     *      {@inheritDoc}
+     *      
      */
     public boolean hasValue(String variableName) {
 
@@ -114,7 +114,7 @@ public class MutableContext implements MutableContextIF {
     }
 
     /**
-     * @see net.sf.mmm.context.api.ContextIF#getVariableNames() {@inheritDoc}
+     * @see net.sf.mmm.context.api.ContextIF#getVariableNames() 
      */
     public Set<String> getVariableNames() {
 
@@ -130,7 +130,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.MutableContextIF#setValue(java.lang.String,
-     *      net.sf.mmm.value.api.GenericValueIF) {@inheritDoc}
+     *      net.sf.mmm.value.api.GenericValueIF) 
      */
     public void setValue(String variableName, GenericValueIF value) {
 
@@ -139,7 +139,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.MutableContextIF#setObject(java.lang.String,
-     *      java.lang.Object) {@inheritDoc}
+     *      java.lang.Object) 
      */
     public void setObject(String variableName, Object value) {
 
@@ -151,7 +151,7 @@ public class MutableContext implements MutableContextIF {
     }
 
     /**
-     * @see net.sf.mmm.context.api.ContextIF#createChildContext() {@inheritDoc}
+     * @see net.sf.mmm.context.api.ContextIF#createChildContext() 
      */
     public MutableContextIF createChildContext() {
 
@@ -160,7 +160,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.MutableContextIF#unsetValue(java.lang.String)
-     *      {@inheritDoc}
+     *      
      */
     public void unsetValue(String variableName) {
 
@@ -169,7 +169,7 @@ public class MutableContext implements MutableContextIF {
 
     /**
      * @see net.sf.mmm.context.api.MutableContextIF#getImmutableContext()
-     *      {@inheritDoc}
+     *      
      */
     public ContextIF getImmutableContext() {
 

@@ -63,7 +63,7 @@ public class LifecycleManager extends AbstractLifecycleManager {
 
     /**
      * @see net.sf.mmm.framework.api.LifecycleManagerIF#setupComponent(ExtendedComponentInstanceContainerIF)
-     * {@inheritDoc}
+     * 
      */
     public void setupComponent(ExtendedComponentInstanceContainerIF<?, ?> instanceContainer)
             throws LifecycleException {
@@ -105,7 +105,7 @@ public class LifecycleManager extends AbstractLifecycleManager {
 
     /**
      * @see net.sf.mmm.framework.api.LifecycleManagerIF#shutdownComponent(ExtendedComponentInstanceContainerIF)
-     * {@inheritDoc}
+     * 
      */
     public void shutdownComponent(ExtendedComponentInstanceContainerIF<?, ?> instanceContainer)
             throws LifecycleException {
@@ -159,7 +159,7 @@ public class LifecycleManager extends AbstractLifecycleManager {
 
         /**
          * @see java.lang.Runnable#run()
-         * {@inheritDoc}
+         * 
      */
         public void run() {
 

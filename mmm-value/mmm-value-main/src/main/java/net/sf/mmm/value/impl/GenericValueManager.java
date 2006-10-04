@@ -72,7 +72,7 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#parse(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public V parse(String valueAsString) throws ValueParseException {
 

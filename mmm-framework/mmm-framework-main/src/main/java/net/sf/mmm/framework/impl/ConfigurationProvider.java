@@ -52,7 +52,7 @@ public class ConfigurationProvider extends AbstractComponentProvider<Configurati
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#release(net.sf.mmm.framework.api.ComponentInstanceContainerIF, net.sf.mmm.framework.api.ComponentManagerIF)
-     * {@inheritDoc}
+     * 
      */
     public boolean release(ComponentInstanceContainerIF<ConfigurationIF> instanceContainer, ComponentManagerIF componentManager) {
 
@@ -62,7 +62,7 @@ public class ConfigurationProvider extends AbstractComponentProvider<Configurati
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#request(java.lang.String, net.sf.mmm.framework.api.ComponentDescriptorIF, java.lang.String, net.sf.mmm.framework.api.ComponentManagerIF)
-     * {@inheritDoc}
+     * 
      */
     public ComponentInstanceContainerIF<ConfigurationIF> request(String instanceId, ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId, ComponentManagerIF componentManager) throws ComponentException {
 
@@ -72,7 +72,7 @@ public class ConfigurationProvider extends AbstractComponentProvider<Configurati
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF, net.sf.mmm.framework.api.ComponentManagerIF)
-     * {@inheritDoc}
+     * 
      */
     public void dispose(ComponentInstanceContainerIF<ConfigurationIF> instanceContainer, ComponentManagerIF componentManager) {
         

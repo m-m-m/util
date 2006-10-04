@@ -256,7 +256,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getImplementation()
-     * {@inheritDoc}
+     * 
      */
     public Class<I> getImplementation() {
 
@@ -265,7 +265,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getConstructor()
-     * {@inheritDoc}
+     * 
      */
     public Constructor<I> getConstructor() {
 
@@ -274,7 +274,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getInstantiationPolicy()
-     * {@inheritDoc}
+     * 
      */
     public String getInstantiationPolicy() {
 
@@ -283,7 +283,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getDependencies()
-     * {@inheritDoc}
+     * 
      */
     public Iterator<DependencyIF> getDependencies() {
 
@@ -292,7 +292,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getDependencies(net.sf.mmm.framework.api.DependencyIF.Type)
-     * {@inheritDoc}
+     * 
      */
     public Iterator<DependencyIF> getDependencies(Type type) {
 
@@ -301,7 +301,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getLifecycleMethod(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public LifecycleMethod getLifecycleMethod(String phase) {
 
@@ -310,7 +310,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getLifecycleMethods()
-     * {@inheritDoc}
+     * 
      */
     public Iterator<LifecycleMethod> getLifecycleMethods() {
 
@@ -374,7 +374,7 @@ public class ExtendedComponentDescriptor<S, I extends S> extends SimpleComponent
 
         /**
          * @see net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator#findNext()
-         * {@inheritDoc}
+         * 
      */
         @Override
         protected DependencyIF<?> findNext() {

@@ -64,7 +64,7 @@ public abstract class AbstractAction implements ActionIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 
@@ -84,7 +84,7 @@ public abstract class AbstractAction implements ActionIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getId()
-     * {@inheritDoc}
+     * 
      */
     public String getId() {
 
@@ -104,7 +104,7 @@ public abstract class AbstractAction implements ActionIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getStyle()
-     * {@inheritDoc}
+     * 
      */
     public ButtonStyle getStyle() {
 
@@ -124,7 +124,7 @@ public abstract class AbstractAction implements ActionIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getIcon()
-     * {@inheritDoc}
+     * 
      */
     public UIPictureIF getIcon() {
 

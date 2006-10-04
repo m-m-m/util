@@ -11,26 +11,25 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ValueException extends NlsRuntimeException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -8445209659250789499L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -8445209659250789499L;
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * {@inheritDoc}
-     */
-    public ValueException(String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * 
+   */
+  public ValueException(String internaitionalizedMessage, Object... arguments) {
 
-        super(internaitionalizedMessage, arguments);
-    }
+    super(internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * {@inheritDoc}
-     */
-    public ValueException(Throwable nested, String internaitionalizedMessage,
-            Object... arguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
+   * 
+   */
+  public ValueException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 
-        super(nested, internaitionalizedMessage, arguments);
-    }
+    super(nested, internaitionalizedMessage, arguments);
+  }
 
 }

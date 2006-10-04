@@ -12,15 +12,15 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
  */
 public interface ConditionIF {
 
-    /**
-     * This method determines if the given <code>configuration</code> is
-     * accepted for this condition.
-     * 
-     * @param configuration
-     *        is the configuration to check.
-     * @return <code>true</code> if the given <code>configuration</code> is
-     *         acceptable, <code>false</code> otherwise.
-     */
-    boolean accept(AbstractConfiguration configuration);
+  /**
+   * This method determines if the given <code>configuration</code> is
+   * accepted for this condition.
+   * 
+   * @param configuration
+   *        is the configuration to check.
+   * @return <code>true</code> if the given <code>configuration</code> is
+   *         acceptable, <code>false</code> otherwise.
+   */
+  boolean accept(AbstractConfiguration configuration);
 
 }

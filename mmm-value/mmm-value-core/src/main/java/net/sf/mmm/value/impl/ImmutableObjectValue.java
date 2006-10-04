@@ -11,46 +11,45 @@ package net.sf.mmm.value.impl;
  */
 public class ImmutableObjectValue extends ObjectValue {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 5962310960812151729L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 5962310960812151729L;
 
-    /**
-     * The constructor.
-     * 
-     * @param internalValue
-     */
-    public ImmutableObjectValue(Object internalValue) {
+  /**
+   * The constructor.
+   * 
+   * @param internalValue
+   */
+  public ImmutableObjectValue(Object internalValue) {
 
-        super(internalValue);
-    }
+    super(internalValue);
+  }
 
-    /**
-     * @see net.sf.mmm.value.impl.ObjectValue#isEditable()
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isEditable() {
-        return false;
-    }
+  /**
+   * @see net.sf.mmm.value.impl.ObjectValue#isEditable()
+   */
+  @Override
+  public boolean isEditable() {
 
-    /**
-     * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults()
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isAddDefaults() {
+    return false;
+  }
 
-        return false;
-    }
+  /**
+   * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults()
+   */
+  @Override
+  public boolean isAddDefaults() {
 
-    /**
-     * @see net.sf.mmm.value.impl.ObjectValue#setPlainValue(java.lang.Object)
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setPlainValue(Object newValue) {
+    return false;
+  }
 
-        //just to get sure...
-    }
+  /**
+   * @see net.sf.mmm.value.impl.ObjectValue#setPlainValue(java.lang.Object)
+   * 
+   */
+  @Override
+  protected void setPlainValue(Object newValue) {
+
+  // just to get sure...
+  }
 
 }

@@ -55,7 +55,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -64,7 +64,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlagIF#isMultiSelection()
-     * {@inheritDoc}
+     * 
      */
     public boolean isMultiSelection() {
 
@@ -90,7 +90,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     public UIListModelIF<E> getModel() {
 
@@ -103,7 +103,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListIF#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public void setModel(UIListModelIF<E> newModel) {
 
@@ -116,7 +116,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndexIF#getSelectedIndex()
-     * {@inheritDoc}
+     * 
      */
     public int getSelectedIndex() {
 
@@ -125,7 +125,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF#setSelectedIndex(int)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedIndex(int newIndex) {
     
@@ -134,7 +134,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListIF#getSelectedIndices()
-     * {@inheritDoc}
+     * 
      */
     public int[] getSelectedIndices() {
 
@@ -143,7 +143,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public JComponent getSwingComponent() {
 
@@ -152,7 +152,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getActiveSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     protected JComponent getActiveSwingComponent() {
 
@@ -161,7 +161,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF#setSelectedValue(Object)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedValue(E newValue) {
 
@@ -173,7 +173,7 @@ public class UIList<E> extends UIWidget implements UIListIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValueIF#getSelectedValue()
-     * {@inheritDoc}
+     * 
      */
     public E getSelectedValue() {
         

@@ -43,7 +43,7 @@ public class UIScrollPanel extends UIComposite implements UIScrollPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public JComponent getSwingComponent() {
@@ -53,7 +53,7 @@ public class UIScrollPanel extends UIComposite implements UIScrollPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIScrollPanelIF#setComponent(net.sf.mmm.ui.toolkit.api.composite.UICompositeIF)
-     * {@inheritDoc}
+     * 
      */
     public void setComponent(UICompositeIF child) {
 
@@ -69,7 +69,7 @@ public class UIScrollPanel extends UIComposite implements UIScrollPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getComponentCount() {
 
@@ -78,7 +78,7 @@ public class UIScrollPanel extends UIComposite implements UIScrollPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public UIComponentIF getComponent(int index) {
 
@@ -90,7 +90,7 @@ public class UIScrollPanel extends UIComposite implements UIScrollPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -99,7 +99,7 @@ public class UIScrollPanel extends UIComposite implements UIScrollPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#refresh()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void refresh() {

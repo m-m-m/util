@@ -68,7 +68,7 @@ public class EscapeWriter extends Writer {
 
     /**
      * @see java.io.Writer#write(char[], int, int)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
@@ -107,7 +107,7 @@ public class EscapeWriter extends Writer {
 
     /**
      * @see java.io.Writer#flush()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void flush() throws IOException {
@@ -117,7 +117,7 @@ public class EscapeWriter extends Writer {
 
     /**
      * @see java.io.Writer#close()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void close() throws IOException {

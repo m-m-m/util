@@ -34,7 +34,7 @@ public abstract class UIAbstractTableModel<E> implements UITableModelIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#addListener(net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void addListener(UITableModelListenerIF listener) {
 
@@ -43,7 +43,7 @@ public abstract class UIAbstractTableModel<E> implements UITableModelIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#removeListener(net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeListener(UITableModelListenerIF listener) {
 
@@ -53,7 +53,7 @@ public abstract class UIAbstractTableModel<E> implements UITableModelIF<E> {
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getCellValueAsString(int,
      *      int)
-     * {@inheritDoc}
+     * 
      */
     public String getCellValueAsString(int rowIndex, int columnIndex) {
 

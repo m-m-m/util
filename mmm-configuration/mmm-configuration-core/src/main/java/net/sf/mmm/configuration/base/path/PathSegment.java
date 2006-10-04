@@ -14,86 +14,85 @@ package net.sf.mmm.configuration.base.path;
  */
 public class PathSegment {
 
-    /**
-     * the segment string ({@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name})
-     */
-    private String string;
+  /**
+   * the segment string ({@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name})
+   */
+  private String string;
 
-    /**
-     * if <code>true</code> the {@link #string} is a
-     * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-     * that will be checked by the {@link #condition}.
-     */
-    private boolean isPattern;
+  /**
+   * if <code>true</code> the {@link #string} is a
+   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
+   * that will be checked by the {@link #condition}.
+   */
+  private boolean isPattern;
 
-    /**
-     * the condition or <code>null</code> if any child is acceptable.
-     */
-    private ConditionIF condition;
+  /**
+   * the condition or <code>null</code> if any child is acceptable.
+   */
+  private ConditionIF condition;
 
-    /**
-     * The constructor.
-     * 
-     * @param name
-     * @param isGlobPattern
-     * @param filter
-     */
-    public PathSegment(String name, boolean isGlobPattern, ConditionIF filter) {
+  /**
+   * The constructor.
+   * 
+   * @param name
+   * @param isGlobPattern
+   * @param filter
+   */
+  public PathSegment(String name, boolean isGlobPattern, ConditionIF filter) {
 
-        super();
-        this.string = name;
-        this.isPattern = isGlobPattern;
-        this.condition = filter;
-    }
+    super();
+    this.string = name;
+    this.isPattern = isGlobPattern;
+    this.condition = filter;
+  }
 
-    /**
-     * This method gets the condition.
-     * 
-     * @return the condition.
-     */
-    public ConditionIF getCondition() {
+  /**
+   * This method gets the condition.
+   * 
+   * @return the condition.
+   */
+  public ConditionIF getCondition() {
 
-        return this.condition;
-    }
+    return this.condition;
+  }
 
-    /**
-     * This method determines if the {@link #getString() string} is a
-     * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-     * that will be checked by the {@link #getCondition() condition}.
-     * 
-     * @return <code>true</code> if the {@link #getString() string} is a
-     *         pattern and <code>false</code> if it is a regular
-     *         {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}.
-     */
-    public boolean isPattern() {
+  /**
+   * This method determines if the {@link #getString() string} is a
+   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
+   * that will be checked by the {@link #getCondition() condition}.
+   * 
+   * @return <code>true</code> if the {@link #getString() string} is a pattern
+   *         and <code>false</code> if it is a regular
+   *         {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}.
+   */
+  public boolean isPattern() {
 
-        return this.isPattern;
-    }
+    return this.isPattern;
+  }
 
-    /**
-     * This method gets the string. It is eigther a regular
-     * {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name} of
-     * the according
-     * {@link net.sf.mmm.configuration.api.ConfigurationIF configuration} or a
-     * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-     * the {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}
-     * must match.
-     * 
-     * @return the string.
-     */
-    public String getString() {
+  /**
+   * This method gets the string. It is eigther a regular
+   * {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name} of the
+   * according
+   * {@link net.sf.mmm.configuration.api.ConfigurationIF configuration} or a
+   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
+   * the {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}
+   * must match.
+   * 
+   * @return the string.
+   */
+  public String getString() {
 
-        return this.string;
-    }
+    return this.string;
+  }
 
-    /**
-     * @see java.lang.Object#toString()
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
+  /**
+   * @see java.lang.Object#toString() 
+   */
+  @Override
+  public String toString() {
 
-        return this.string;
-    }
+    return this.string;
+  }
 
 }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.term.ServiceNlsResourceBundle;
+import net.sf.mmm.term.MainNlsResourceBundle;
 import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.api.FunctionIF;
 import net.sf.mmm.term.api.FunctionServiceIF;
@@ -54,11 +54,11 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
     protected void registerFunction(FunctionIF function) throws FunctionException {
 
         if (this.functionsByName.containsKey(function.getName())) {
-            throw new FunctionException(ServiceNlsResourceBundle.ERR_FCT_NAME_USED, function);
+            throw new FunctionException(MainNlsResourceBundle.ERR_FCT_NAME_USED, function);
         }
         if (function.getOperatorSymbol() != null) {
             if (this.functionsBySymbol.containsKey(function.getOperatorSymbol())) {
-                throw new FunctionException(ServiceNlsResourceBundle.ERR_FCT_SYMBOL_USED, function);
+                throw new FunctionException(MainNlsResourceBundle.ERR_FCT_SYMBOL_USED, function);
             }
             this.functionsBySymbol.put(function.getOperatorSymbol(), function);
         }
@@ -67,7 +67,7 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionServiceIF#getFunctionBySymbol(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public FunctionIF getFunctionBySymbol(String symbol) throws NoSuchFunctionException {
 
@@ -80,7 +80,7 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionServiceIF#getFunctionByName(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public FunctionIF getFunctionByName(String name) throws NoSuchFunctionException {
 
@@ -93,7 +93,7 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionServiceIF#getFunctions()
-     * {@inheritDoc}
+     * 
      */
     public Iterator<FunctionIF> getFunctions() {
 

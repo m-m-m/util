@@ -22,51 +22,51 @@ import net.sf.mmm.value.api.ValueException;
  */
 public class ClasspathResourceAccessFactory implements ConfigurationAccessFactoryIF {
 
-    /** the file accessors */
-    private UrlAccess[] accessors;
+  /** the file accessors */
+  private UrlAccess[] accessors;
 
-    /**
-     * The constructor.
-     */
-    public ClasspathResourceAccessFactory() {
+  /**
+   * The constructor.
+   */
+  public ClasspathResourceAccessFactory() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#configure(java.lang.String,
+   *      net.sf.mmm.context.api.ContextIF,
+   *      net.sf.mmm.configuration.api.ConfigurationIF)
+   */
+  public void configure(String prefix, ContextIF environment, ConfigurationIF include)
+      throws ConfigurationException, ValueException {
+
+    String resourceName = include.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_HREF)
+        .getValue().getString();
+    URL url = Thread.currentThread().getContextClassLoader().getResource(resourceName);
+    if (url == null) {
+      throw new ConfigurationReadException(resourceName);
     }
+    UrlAccess access = new UrlAccess(url);
+    this.accessors = new UrlAccess[] {access};
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#configure(java.lang.String,
-     *      net.sf.mmm.context.api.ContextIF,
-     *      net.sf.mmm.configuration.api.ConfigurationIF)
-     */
-    public void configure(String prefix, ContextIF environment, ConfigurationIF include)
-            throws ConfigurationException, ValueException {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#getAccessors()
+   *      
+   */
+  public ConfigurationAccessIF[] getAccessors() {
 
-        String resourceName = include.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_HREF)
-                .getValue().getString();
-        URL url = Thread.currentThread().getContextClassLoader().getResource(resourceName);
-        if (url == null) {
-            throw new ConfigurationReadException(resourceName);
-        }
-        UrlAccess access = new UrlAccess(url);
-        this.accessors = new UrlAccess[] {access};
-    }
+    return this.accessors;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#getAccessors()
-     *      {@inheritDoc}
-     */
-    public ConfigurationAccessIF[] getAccessors() {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#isSingleAccess()
+   *      
+   */
+  public boolean isSingleAccess() {
 
-        return this.accessors;
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#isSingleAccess()
-     *      {@inheritDoc}
-     */
-    public boolean isSingleAccess() {
-
-        return true;
-    }
+    return true;
+  }
 
 }

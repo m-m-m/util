@@ -9,7 +9,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.api.FunctionIF;
@@ -154,7 +154,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 
@@ -163,7 +163,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorSymbol()
-     * {@inheritDoc}
+     * 
      */
     public String getOperatorSymbol() {
 
@@ -172,7 +172,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorPriority()
-     * {@inheritDoc}
+     * 
      */
     public OperatorPriority getOperatorPriority() {
 
@@ -181,7 +181,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getMinimumArgumentCount() {
 
@@ -190,7 +190,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getMaximumArgumentCount() {
 
@@ -274,7 +274,7 @@ public class GenericFunction extends BasicFunction {
                     if (!CalculationException.class.isAssignableFrom(excType)) {
                         if (!RuntimeException.class.isAssignableFrom(excType)) {
                             throw new FunctionException(
-                                    NlsResourceBundle.ERR_FCT_ILLEGAL_EXCEPTION_TYPE,
+                                    CoreNlsResourceBundle.ERR_FCT_ILLEGAL_EXCEPTION_TYPE,
                                     partialFunction, this, signature, excType);
                         }
                     }
@@ -282,7 +282,7 @@ public class GenericFunction extends BasicFunction {
                 return;
             }
         }
-        throw new FunctionException(NlsResourceBundle.ERR_FCT_ILLEGAL_METHOD, partialFunction,
+        throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_ILLEGAL_METHOD, partialFunction,
                 this, signature);
     }
 
@@ -310,7 +310,7 @@ public class GenericFunction extends BasicFunction {
         try {
             return ReflectionUtil.getStaticField(partialFunction, fieldName, fieldType, true);
         } catch (Throwable e) {
-            throw new FunctionException(e, NlsResourceBundle.ERR_FCT_FIELD, partialFunction, this,
+            throw new FunctionException(e, CoreNlsResourceBundle.ERR_FCT_FIELD, partialFunction, this,
                     fieldName, fieldType);
         }
     }
@@ -330,13 +330,13 @@ public class GenericFunction extends BasicFunction {
         int classModifiers = partialFunction.getModifiers();
         if (Modifier.isAbstract(classModifiers) || Modifier.isInterface(classModifiers)
                 || !Modifier.isPublic(classModifiers)) {
-            throw new FunctionException(NlsResourceBundle.ERR_FCT_ILLEGAL_CLASS, partialFunction,
+            throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_ILLEGAL_CLASS, partialFunction,
                     this);
         }
         // check if operator is valid...
         String operator = getStaticField(partialFunction, FIELD_NAME_SYMBOL, String.class);
         if (!BasicUtil.equals(this.symbol, operator)) {
-            throw new FunctionException(NlsResourceBundle.ERR_FCT_WRONG_SYMBOL, partialFunction,
+            throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_WRONG_SYMBOL, partialFunction,
                     this, operator);
         }
     }
@@ -369,7 +369,7 @@ public class GenericFunction extends BasicFunction {
                 validateMethod(method, partialFunction, signature);
                 // check for duplicate signature
                 if (this.signature2method.containsKey(signature)) {
-                    throw new FunctionException(NlsResourceBundle.ERR_FCT_DUPLICATE_SIGNATURE,
+                    throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_DUPLICATE_SIGNATURE,
                             partialFunction, this, signature);
                 }
                 this.signature2method.put(signature, method);
@@ -384,7 +384,7 @@ public class GenericFunction extends BasicFunction {
         }
         if (maxSignatureCount == -1) {
             // no method found!
-            throw new FunctionException(NlsResourceBundle.ERR_FCT_EMPTY, partialFunction, this);
+            throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_EMPTY, partialFunction, this);
         }
         if (maxSignatureCount > this.maxArgCount) {
             if (maxSignatureCount > 1) {
@@ -476,7 +476,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public Object calculate() throws ValueException {
@@ -487,7 +487,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(Object)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public Object calculate(Object argument) throws ValueException {
@@ -498,7 +498,7 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(Object, Object)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public Object calculate(Object argument1, Object argument2) throws ValueException {

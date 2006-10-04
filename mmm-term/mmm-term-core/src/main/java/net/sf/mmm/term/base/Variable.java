@@ -46,7 +46,7 @@ public class Variable extends AbstractVariable {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 
@@ -55,7 +55,7 @@ public class Variable extends AbstractVariable {
 
     /**
      * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
-     * {@inheritDoc}
+     * 
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {
 

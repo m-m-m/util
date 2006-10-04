@@ -28,7 +28,7 @@ public class LoggerProvider extends AbstractPerRequestComponentProvider<Log> {
 
     /**
      * @see net.sf.mmm.framework.base.provider.AbstractPerRequestComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptorIF, java.lang.String, net.sf.mmm.framework.api.ComponentManagerIF)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected Log requestDefault(ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId, ComponentManagerIF componentManager) throws ComponentException {

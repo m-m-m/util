@@ -56,7 +56,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -65,7 +65,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITreeIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     @SuppressWarnings("unchecked")
     public UITreeModelIF getModel() {
@@ -79,7 +79,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITreeIF#setModel(net.sf.mmm.ui.toolkit.api.model.UITreeModelIF)
-     * {@inheritDoc}
+     * 
      */
     @SuppressWarnings("unchecked")
     public void setModel(UITreeModelIF newModel) {
@@ -109,7 +109,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public JComponent getSwingComponent() {
 
@@ -118,7 +118,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getActiveSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     protected JComponent getActiveSwingComponent() {
 
@@ -127,7 +127,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlagIF#isMultiSelection()
-     * {@inheritDoc}
+     * 
      */
     public boolean isMultiSelection() {
 
@@ -137,7 +137,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITreeIF#getSelection()
-     * {@inheritDoc}
+     * 
      */
     public Object getSelection() {
 
@@ -150,7 +150,7 @@ public class UITree extends UIWidget implements UITreeIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITreeIF#getSelections()
-     * {@inheritDoc}
+     * 
      */
     public Object[] getSelections() {
 

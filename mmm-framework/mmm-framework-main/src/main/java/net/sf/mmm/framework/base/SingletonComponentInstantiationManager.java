@@ -57,7 +57,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
 
     /**
      * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#release(net.sf.mmm.framework.base.ExtendedComponentInstanceContainer)
-     * {@inheritDoc}
+     * 
      */
     public boolean release(ExtendedComponentInstanceContainer<S, I> instanceContainer) {
 
@@ -66,7 +66,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
 
     /**
      * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#request(String)
-     * {@inheritDoc}
+     * 
      */
     public ExtendedComponentInstanceContainer<S, I> request(String instanceId) {
 
@@ -80,7 +80,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
 
     /**
      * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#dispose()
-     * {@inheritDoc}
+     * 
      */
     public ExtendedComponentInstanceContainer[] dispose() {
     

@@ -27,7 +27,7 @@ public abstract class AbstractFunction implements FunctionIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#validateArgumentCount(int)
-     * {@inheritDoc}
+     * 
      */
     public final void validateArgumentCount(int count) throws CalculationException {
 
@@ -40,7 +40,7 @@ public abstract class AbstractFunction implements FunctionIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorPriority()
-     * {@inheritDoc}
+     * 
      */
     public OperatorPriority getOperatorPriority() {
 
@@ -95,7 +95,7 @@ public abstract class AbstractFunction implements FunctionIF {
 
     /**
      * @see FunctionIF#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 

@@ -15,22 +15,22 @@ import net.sf.mmm.configuration.base.ConfigurationUtil;
  */
 public abstract class AbstractConfigurationFactory implements ConfigurationFactoryIF {
 
-    /**
-     * The constructor.
-     */
-    public AbstractConfigurationFactory() {
+  /**
+   * The constructor.
+   */
+  public AbstractConfigurationFactory() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF)
-     * {@inheritDoc}
-     */
-    public AbstractConfigurationDocument create(ConfigurationAccessIF access)
-            throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF)
+   *      
+   */
+  public AbstractConfigurationDocument create(ConfigurationAccessIF access)
+      throws ConfigurationException {
 
-        return create(access, ConfigurationUtil.createDefaultContext());
-    }
+    return create(access, ConfigurationUtil.createDefaultContext());
+  }
 
 }

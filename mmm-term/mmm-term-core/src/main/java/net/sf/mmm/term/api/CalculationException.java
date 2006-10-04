@@ -19,7 +19,7 @@ public class CalculationException extends ValueException {
 
     /**
      * @see ValueException#ValueException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public CalculationException(String internaitionalizedMessage, Object... arguments) {
 
@@ -28,7 +28,7 @@ public class CalculationException extends ValueException {
 
     /**
      * @see ValueException#ValueException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public CalculationException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

@@ -29,7 +29,7 @@ public class IocContainerProxy implements IocContainerIF {
 
     /**
      * @see net.sf.mmm.framework.api.IocContainerIF#createChildContainer(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public MutableIocContainerIF createChildContainer(String name) {
 
@@ -38,7 +38,7 @@ public class IocContainerProxy implements IocContainerIF {
 
     /**
      * @see net.sf.mmm.framework.api.IocContainerIF#getName()
-     * {@inheritDoc}
+     * 
      */
     public String getName() {
 
@@ -47,7 +47,7 @@ public class IocContainerProxy implements IocContainerIF {
 
     /**
      * @see net.sf.mmm.framework.api.IocContainerIF#isRunning()
-     * {@inheritDoc}
+     * 
      */
     public boolean isRunning() {
 

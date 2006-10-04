@@ -33,7 +33,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getElementCount()
-     * {@inheritDoc}
+     * 
      */
     public int getElementCount() {
 
@@ -42,7 +42,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getElement(int)
-     * {@inheritDoc}
+     * 
      */
     public E getElement(int index) {
 
@@ -52,7 +52,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
     /**
      * @see net.sf.mmm.ui.toolkit.base.model.UIAbstractListModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF,
      *      java.lang.Throwable)
-     * {@inheritDoc}
+     * 
      */
     protected void handleListenerException(UIListModelListenerIF listener, Throwable t) {
 
@@ -61,7 +61,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModelIF#addElement(Object)
-     * {@inheritDoc}
+     * 
      */
     public void addElement(E element) {
 
@@ -72,7 +72,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModelIF#setElement(Object,
      *      int)
-     * {@inheritDoc}
+     * 
      */
     public void setElement(E newItem, int index) {
 
@@ -83,7 +83,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModelIF#addElement(Object,
      *      int)
-     * {@inheritDoc}
+     * 
      */
     public void addElement(E item, int index) {
 
@@ -93,7 +93,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModelIF#removeElement(int)
-     * {@inheritDoc}
+     * 
      */
     public void removeElement(int index) {
 
@@ -103,7 +103,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModelIF#removeElement(Object)
-     * {@inheritDoc}
+     * 
      */
     public boolean removeElement(E element) {
 
@@ -117,7 +117,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModelIF#removeAll()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void removeAll() {
@@ -131,7 +131,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getIndexOf(Object)
-     * {@inheritDoc}
+     * 
      */
     public int getIndexOf(E element) {
 
@@ -140,7 +140,7 @@ public class UIDefaultListModel<E> extends UIAbstractMutableListModel<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getIndexOfString(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public int getIndexOfString(String element) {
 

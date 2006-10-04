@@ -16,31 +16,31 @@ import net.sf.mmm.value.api.GenericValueIF;
  */
 public interface ComparatorIF {
 
-    /**
-     * This method gets the symbol of the comparator. This must be unique for
-     * each implementation.<br>
-     * Examples are "==", "!=", "<", "<=", etc.
-     * 
-     * @return the operation symbol.
-     */
-    String getSymbol();
+  /**
+   * This method gets the symbol of the comparator. This must be unique for each
+   * implementation.<br>
+   * Examples are "==", "!=", "<", "<=", etc.
+   * 
+   * @return the operation symbol.
+   */
+  String getSymbol();
 
-    /**
-     * This method determines if the given <code>value</code> is acceptable in
-     * comparison to the given <code>pattern</code> (if pattern is
-     * <code>null</code>) or <code>string</code>.
-     * 
-     * @param value
-     *        is the value to check.
-     * @param string
-     *        is the string the <code>value</code> will be compared to.
-     * @param pattern
-     *        is the pattern the <code>value</code> must match or
-     *        <code>null</code> if <code>string</code> should be preferred.
-     * 
-     * @return <code>true</code> if the given <code>value</code> is
-     *         acceptable, <code>false</code> otherwise.
-     */
-    boolean accept(GenericValueIF value, String string, Pattern pattern);
+  /**
+   * This method determines if the given <code>value</code> is acceptable in
+   * comparison to the given <code>pattern</code> (if pattern is
+   * <code>null</code>) or <code>string</code>.
+   * 
+   * @param value
+   *        is the value to check.
+   * @param string
+   *        is the string the <code>value</code> will be compared to.
+   * @param pattern
+   *        is the pattern the <code>value</code> must match or
+   *        <code>null</code> if <code>string</code> should be preferred.
+   * 
+   * @return <code>true</code> if the given <code>value</code> is
+   *         acceptable, <code>false</code> otherwise.
+   */
+  boolean accept(GenericValueIF value, String string, Pattern pattern);
 
 }

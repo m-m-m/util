@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 
 /**
  * This exception represents an error that occured during the cast (conversion
@@ -26,7 +26,7 @@ public class IllegalCastException extends CalculationException {
      */
     public IllegalCastException(Object argument, Class type) {
 
-        super(NlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
+        super(CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
     }
 
     /**
@@ -41,7 +41,7 @@ public class IllegalCastException extends CalculationException {
      */
     public IllegalCastException(Object argument, Class type, Throwable nested) {
 
-        super(nested, NlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
+        super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
     }
 
 }

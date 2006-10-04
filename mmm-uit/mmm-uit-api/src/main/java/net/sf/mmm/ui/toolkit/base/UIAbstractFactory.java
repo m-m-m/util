@@ -46,7 +46,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createFrame(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public UIFrameIF createFrame(String title) {
 
@@ -55,7 +55,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createLabel()
-     * {@inheritDoc}
+     * 
      */
     public UILabelIF createLabel() {
 
@@ -64,7 +64,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createButton(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public UIButtonIF createButton(String text) {
 
@@ -74,7 +74,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createButton(java.lang.String,
      *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-     * {@inheritDoc}
+     * 
      */
     public UIButtonIF createButton(String text, ButtonStyle style) {
 
@@ -84,7 +84,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createButton(net.sf.mmm.ui.toolkit.api.UIPictureIF,
      *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-     * {@inheritDoc}
+     * 
      */
     public UIButtonIF createButton(UIPictureIF icon, ButtonStyle style) {
 
@@ -93,7 +93,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createButton(net.sf.mmm.ui.toolkit.api.feature.ActionIF)
-     * {@inheritDoc}
+     * 
      */
     public UIButtonIF createButton(ActionIF action) {
 
@@ -112,7 +112,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPanel(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-     * {@inheritDoc}
+     * 
      */
     public UIPanelIF createPanel(Orientation orientation) {
 
@@ -121,7 +121,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPicture(java.io.File)
-     * {@inheritDoc}
+     * 
      */
     public UIPictureIF createPicture(File imageFile) throws IOException {
 
@@ -134,7 +134,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createSlideBar(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public <E> UISlideBarIF<E> createSlideBar(UIListModelIF<E> model) {
 
@@ -143,7 +143,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createList(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public <E> UIListIF<E> createList(UIListModelIF<E> model) {
 
@@ -152,7 +152,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createComboBox(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public <E> UIComboBoxIF<E> createComboBox(UIListModelIF<E> model) {
 
@@ -161,7 +161,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createProgressBar()
-     * {@inheritDoc}
+     * 
      */
     public UIProgressBarIF createProgressBar() {
 
@@ -170,7 +170,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createScrollPanel()
-     * {@inheritDoc}
+     * 
      */
     public UIScrollPanelIF createScrollPanel() {
 
@@ -179,7 +179,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTable()
-     * {@inheritDoc}
+     * 
      */
     public UITableIF createTable() {
 
@@ -188,7 +188,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTable(boolean)
-     * {@inheritDoc}
+     * 
      */
     public UITableIF createTable(boolean multiSelection) {
 
@@ -197,7 +197,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTree()
-     * {@inheritDoc}
+     * 
      */
     public UITreeIF createTree() {
 
@@ -206,7 +206,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTree(boolean)
-     * {@inheritDoc}
+     * 
      */
     public UITreeIF createTree(boolean multiSelection) {
 
@@ -215,7 +215,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPrintAction(net.sf.mmm.ui.toolkit.api.UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public ActionIF createPrintAction(UIComponentIF component) {
 
@@ -226,7 +226,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPrintAction(net.sf.mmm.ui.toolkit.api.UIComponentIF,
      *      java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public ActionIF createPrintAction(UIComponentIF component, String actionName) {
 
@@ -238,7 +238,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#dispose()
-     * {@inheritDoc}
+     * 
      */
     public void dispose() {
 
@@ -247,7 +247,7 @@ public abstract class UIAbstractFactory implements UIFactoryIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#isDisposed()
-     * {@inheritDoc}
+     * 
      */
     public boolean isDisposed() {
 

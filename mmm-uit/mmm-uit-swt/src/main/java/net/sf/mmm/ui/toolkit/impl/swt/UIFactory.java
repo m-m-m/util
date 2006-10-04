@@ -137,7 +137,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createFrame(java.lang.String,
      *      boolean)
-     * {@inheritDoc}
+     * 
      */
     public UIFrameIF createFrame(String title, boolean resizeable) {
 
@@ -149,7 +149,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createButton(java.lang.String,
      *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-     * {@inheritDoc}
+     * 
      */
     public UIButtonIF createButton(String text, UIPictureIF icon, ButtonStyle style) {
 
@@ -164,7 +164,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPanel(net.sf.mmm.ui.toolkit.api.composite.Orientation,
      *      java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public UIPanelIF createPanel(Orientation orientation, String borderTitle) {
 
@@ -174,7 +174,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createScrollPanel(net.sf.mmm.ui.toolkit.api.composite.UICompositeIF)
-     * {@inheritDoc}
+     * 
      */
     public UIScrollPanelIF createScrollPanel(UICompositeIF child) {
 
@@ -187,7 +187,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createSplitPanel(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-     * {@inheritDoc}
+     * 
      */
     public UISplitPanelIF createSplitPanel(Orientation orientation) {
 
@@ -198,7 +198,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createList(net.sf.mmm.ui.toolkit.api.model.UIListModelIF,
      *      boolean)
-     * {@inheritDoc}
+     * 
      */
     public <E> UIListIF<E> createList(UIListModelIF<E> model, boolean multiSelection) {
 
@@ -209,7 +209,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTree(boolean,
      *      net.sf.mmm.ui.toolkit.api.model.UITreeModelIF)
-     * {@inheritDoc}
+     * 
      */
     public UITreeIF createTree(boolean multiSelection, UITreeModelIF model) {
 
@@ -223,7 +223,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTable(boolean,
      *      net.sf.mmm.ui.toolkit.api.model.UITableModelIF)
-     * {@inheritDoc}
+     * 
      */
     public UITableIF createTable(boolean multiSelection, UITableModelIF model) {
 
@@ -236,7 +236,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#getDisplay()
-     * {@inheritDoc}
+     * 
      */
     public UIDisplay getDisplay() {
 
@@ -245,7 +245,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createLabel(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public UILabelIF createLabel(String text) {
 
@@ -256,7 +256,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTextField()
-     * {@inheritDoc}
+     * 
      */
     public UITextFieldIF createTextField() {
 
@@ -265,7 +265,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createSpinBox(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public <E> UISpinBoxIF<E> createSpinBox(UIListModelIF<E> model) {
 
@@ -274,7 +274,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createFileDownload(net.sf.mmm.ui.toolkit.api.feature.FileAccessIF)
-     * {@inheritDoc}
+     * 
      */
     public UIFileDownloadIF createFileDownload(FileAccessIF access) {
 
@@ -283,7 +283,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createFileUpload()
-     * {@inheritDoc}
+     * 
      */
     public UIFileUploadIF createFileUpload() {
 
@@ -292,7 +292,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPicture(java.net.URL)
-     * {@inheritDoc}
+     * 
      */
     public UIPictureIF createPicture(URL imageUrl) throws IOException {
 
@@ -302,7 +302,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createComboBox(net.sf.mmm.ui.toolkit.api.model.UIListModelIF,
      *      boolean)
-     * {@inheritDoc}
+     * 
      */
     public <E> UIComboBoxIF<E> createComboBox(UIListModelIF<E> model, boolean editableFlag) {
 
@@ -311,7 +311,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createTabbedPanel()
-     * {@inheritDoc}
+     * 
      */
     public UITabbedPanelIF createTabbedPanel() {
 
@@ -321,7 +321,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createSlideBar(net.sf.mmm.ui.toolkit.api.model.UIListModelIF,
      *      net.sf.mmm.ui.toolkit.api.composite.Orientation)
-     * {@inheritDoc}
+     * 
      */
     public <E> UISlideBarIF<E> createSlideBar(UIListModelIF<E> model, Orientation orientation) {
 
@@ -331,7 +331,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createProgressBar(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-     * {@inheritDoc}
+     * 
      */
     public UIProgressBarIF createProgressBar(Orientation orientation) {
 
@@ -340,7 +340,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createWorkbench(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public UIWorkbenchIF createWorkbench(String title) {
 
@@ -352,7 +352,7 @@ public class UIFactory extends UIAbstractFactory {
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPrintAction(net.sf.mmm.ui.toolkit.api.UIComponentIF,
      *      java.lang.String, java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public ActionIF createPrintAction(UIComponentIF component, String actionName, String jobName) {
 
@@ -361,7 +361,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIFactoryIF#createDateEditor()
-     * {@inheritDoc}
+     * 
      */
     public UIDateEditorIF createDateEditor() {
 
@@ -370,7 +370,7 @@ public class UIFactory extends UIAbstractFactory {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#dispose()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void dispose() {

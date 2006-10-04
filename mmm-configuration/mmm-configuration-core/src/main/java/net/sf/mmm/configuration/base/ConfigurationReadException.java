@@ -12,57 +12,57 @@ import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
  */
 public class ConfigurationReadException extends ConfigurationException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -3756630761535352289L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -3756630761535352289L;
 
-    /**
-     * The constructor.
-     * 
-     * @param access
-     *        is the access where to read the configuration from.
-     */
-    public ConfigurationReadException(ConfigurationAccessIF access) {
+  /**
+   * The constructor.
+   * 
+   * @param access
+   *        is the access where to read the configuration from.
+   */
+  public ConfigurationReadException(ConfigurationAccessIF access) {
 
-        super(NlsResourceBundle.ERR_READ, access);
-    }
+    super(NlsResourceBundle.ERR_READ, access);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param location
-     *        is the location (path, URL, etc.) where to read the configuration
-     *        from.
-     */
-    public ConfigurationReadException(String location) {
+  /**
+   * The constructor.
+   * 
+   * @param location
+   *        is the location (path, URL, etc.) where to read the configuration
+   *        from.
+   */
+  public ConfigurationReadException(String location) {
 
-        super(NlsResourceBundle.ERR_READ, location);
-    }
+    super(NlsResourceBundle.ERR_READ, location);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param access
-     *        is the access where to read the configuration from.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public ConfigurationReadException(ConfigurationAccessIF access, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param access
+   *        is the access where to read the configuration from.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public ConfigurationReadException(ConfigurationAccessIF access, Throwable nested) {
 
-        super(NlsResourceBundle.ERR_READ, access, nested);
-    }
+    super(NlsResourceBundle.ERR_READ, access, nested);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param location
-     *        is the location (path, URL, etc.) where to read the configuration
-     *        from.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public ConfigurationReadException(String location, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param location
+   *        is the location (path, URL, etc.) where to read the configuration
+   *        from.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public ConfigurationReadException(String location, Throwable nested) {
 
-        super(NlsResourceBundle.ERR_READ, location, nested);
-    }
+    super(NlsResourceBundle.ERR_READ, location, nested);
+  }
 
 }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id$ -->
 <project>
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>net.sf.mmm</groupId>
-		<artifactId>mmm</artifactId>
-		<version>1.0.0</version>
-	</parent>
-	<name>MMM::NLS</name>
-	<description>True native language support</description>
-	<groupId>net.sf.mmm</groupId>
-	<artifactId>mmm-nls</artifactId>
-	<packaging>pom</packaging>
-	<version>0.9.0</version>
-	<dependencies>
-	</dependencies>
-	<modules>
-		<module>mmm-nls-core</module>
-		<module>mmm-nls-main</module>
-	</modules>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <name>MMM::NLS</name>
+  <description>True native language support</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-nls</artifactId>
+  <packaging>pom</packaging>
+  <version>0.9.0</version>
+  <dependencies>
+  </dependencies>
+  <modules>
+    <module>mmm-nls-core</module>
+    <module>mmm-nls-main</module>
+  </modules>
 </project>

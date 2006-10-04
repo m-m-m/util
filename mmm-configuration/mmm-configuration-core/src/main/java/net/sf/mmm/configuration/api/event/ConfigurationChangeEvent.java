@@ -15,30 +15,30 @@ import net.sf.mmm.event.EventIF;
  */
 public class ConfigurationChangeEvent implements EventIF {
 
-    /** is the configuration that changed */
-    private final ConfigurationIF configuration;
+  /** is the configuration that changed */
+  private final ConfigurationIF configuration;
 
-    /**
-     * The constructor.
-     * 
-     * @param conf
-     *        is the configuration that has changed.
-     */
-    public ConfigurationChangeEvent(ConfigurationIF conf) {
+  /**
+   * The constructor.
+   * 
+   * @param conf
+   *        is the configuration that has changed.
+   */
+  public ConfigurationChangeEvent(ConfigurationIF conf) {
 
-        super();
-        this.configuration = conf;
-    }
+    super();
+    this.configuration = conf;
+  }
 
-    /**
-     * This method gets the configuration that has changed (e.g. child was added
-     * or removed).
-     * 
-     * @return the changed configuration.
-     */
-    public ConfigurationIF getConfiguration() {
+  /**
+   * This method gets the configuration that has changed (e.g. child was added
+   * or removed).
+   * 
+   * @return the changed configuration.
+   */
+  public ConfigurationIF getConfiguration() {
 
-        return this.configuration;
-    }
+    return this.configuration;
+  }
 
 }

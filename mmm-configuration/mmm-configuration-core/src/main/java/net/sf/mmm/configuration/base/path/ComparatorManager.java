@@ -15,70 +15,70 @@ import net.sf.mmm.configuration.api.ConfigurationException;
  */
 public class ComparatorManager {
 
-    /** the singleton instance */
-    private static ComparatorManager INSTANCE = null;
+  /** the singleton instance */
+  private static ComparatorManager INSTANCE = null;
 
-    /** the registered comparators */
-    private final Map<String, ComparatorIF> comparators;
+  /** the registered comparators */
+  private final Map<String, ComparatorIF> comparators;
 
-    /**
-     * The constructor.
-     */
-    public ComparatorManager() {
+  /**
+   * The constructor.
+   */
+  public ComparatorManager() {
 
-        super();
-        this.comparators = new HashMap<String, ComparatorIF>();
-        ComparatorIF eq = new EqualsComparator();
-        this.comparators.put("=", eq);
-        register(eq);
-        register(new NotEqualsComparator());
+    super();
+    this.comparators = new HashMap<String, ComparatorIF>();
+    ComparatorIF eq = new EqualsComparator();
+    this.comparators.put("=", eq);
+    register(eq);
+    register(new NotEqualsComparator());
+  }
+
+  /**
+   * This method gets the comparator for the given
+   * {@link ComparatorIF#getSymbol() symbol}.
+   * 
+   * @param symbol
+   *        is the {@link ComparatorIF#getSymbol() symbol} of the requested
+   *        comparator.
+   * @return the comparator for the given symbol.
+   */
+  public final ComparatorIF getComparator(String symbol) {
+
+    ComparatorIF result = this.comparators.get(symbol);
+    if (result == null) {
+      throw new ConfigurationException("Undefined comparator symbol " + symbol);
     }
+    return result;
+  }
 
-    /**
-     * This method gets the comparator for the given
-     * {@link ComparatorIF#getSymbol() symbol}.
-     * 
-     * @param symbol
-     *        is the {@link ComparatorIF#getSymbol() symbol} of the requested
-     *        comparator.
-     * @return the comparator for the given symbol.
-     */
-    public final ComparatorIF getComparator(String symbol) {
+  /**
+   * 
+   * @param comparator
+   */
+  protected final void register(ComparatorIF comparator) {
 
-        ComparatorIF result = this.comparators.get(symbol);
-        if (result == null) {
-            throw new ConfigurationException("Undefined comparator symbol " + symbol);
-        }
-        return result;
+    String symbol = comparator.getSymbol();
+    if (this.comparators.containsKey(symbol)) {
+      throw new ConfigurationException("Duplicate symbol!");
     }
+  }
 
-    /**
-     * 
-     * @param comparator
-     */
-    protected final void register(ComparatorIF comparator) {
+  /**
+   * This method gets the singleton instance of the comparator manager.
+   * 
+   * @return the singleton instance.
+   */
+  public static ComparatorManager getInstance() {
 
-        String symbol = comparator.getSymbol();
-        if (this.comparators.containsKey(symbol)) {
-            throw new ConfigurationException("Duplicate symbol!");
-        }
-    }
-
-    /**
-     * This method gets the singleton instance of the comparator manager.
-     * 
-     * @return the singleton instance.
-     */
-    public static ComparatorManager getInstance() {
-
+    if (INSTANCE == null) {
+      synchronized (ComparatorManager.class) {
         if (INSTANCE == null) {
-            synchronized (ComparatorManager.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new ComparatorManager();
-                }
-            }
+          INSTANCE = new ComparatorManager();
         }
-        return INSTANCE;
+      }
     }
+    return INSTANCE;
+  }
 
 }

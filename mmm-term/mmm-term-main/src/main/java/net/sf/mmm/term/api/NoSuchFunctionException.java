@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.ServiceNlsResourceBundle;
+import net.sf.mmm.term.MainNlsResourceBundle;
 
 /**
  * This is the exception thrown if a function was requested that ist NOT
@@ -22,6 +22,6 @@ public class NoSuchFunctionException extends FunctionException {
      */
     public NoSuchFunctionException(String nameOrSymbol) {
 
-        super(ServiceNlsResourceBundle.ERR_FCT_NO_SUCH_NAME_OR_SYMBOL, nameOrSymbol);
+        super(MainNlsResourceBundle.ERR_FCT_NO_SUCH_NAME_OR_SYMBOL, nameOrSymbol);
     }
 }

@@ -173,7 +173,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font)
-     * {@inheritDoc}
+     * 
      */
     public void setFont(Font font) {
 
@@ -209,7 +209,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see org.eclipse.swt.widgets.Control#computeSize(int, int, boolean)
-     * {@inheritDoc}
+     * 
      */
     public Point computeSize(int wHint, int hHint, boolean changed) {
 
@@ -230,7 +230,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndexIF#getSelectedIndex()
-     * {@inheritDoc}
+     * 
      */
     public int getSelectedIndex() {
 
@@ -239,7 +239,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF#setSelectedIndex(int)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedIndex(int newIndex) {
 
@@ -263,7 +263,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-     * {@inheritDoc}
+     * 
      */
     public void listModelChanged(UIListModelEvent event) {
 
@@ -277,7 +277,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditableIF#isEditable()
-     * {@inheritDoc}
+     * 
      */
     public boolean isEditable() {
 
@@ -286,7 +286,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndexIF,
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditableIF#setEditable(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setEditable(boolean editableFlag) {
 

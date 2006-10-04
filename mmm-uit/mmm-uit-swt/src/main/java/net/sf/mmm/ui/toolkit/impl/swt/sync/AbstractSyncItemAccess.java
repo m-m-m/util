@@ -51,7 +51,7 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#performSynchron(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void performSynchron(String operation) {
@@ -67,7 +67,7 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#createSynchron()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void createSynchron() {
@@ -83,7 +83,7 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public abstract Item getSwtObject();

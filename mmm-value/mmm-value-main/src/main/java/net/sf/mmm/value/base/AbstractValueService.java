@@ -93,7 +93,7 @@ public abstract class AbstractValueService implements ValueServiceIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueServiceIF#getManager(java.lang.Class)
-     * {@inheritDoc}
+     * 
      */
     @SuppressWarnings("unchecked")
     public ValueManagerIF getManager(Class valueClass) {
@@ -115,7 +115,7 @@ public abstract class AbstractValueService implements ValueServiceIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueServiceIF#getManager(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public ValueManagerIF<?> getManager(String name) {
 
@@ -124,7 +124,7 @@ public abstract class AbstractValueService implements ValueServiceIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueServiceIF#getManagers()
-     * {@inheritDoc}
+     * 
      */
     public Iterator<ValueManagerIF> getManagers() {
 
@@ -133,7 +133,7 @@ public abstract class AbstractValueService implements ValueServiceIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueServiceIF#xml2value(org.w3c.dom.Element)
-     * {@inheritDoc}
+     * 
      */
     public Object xml2value(Element xmlElement) throws ValueException {
 

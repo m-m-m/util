@@ -51,7 +51,7 @@ public class UITable extends UIWidget implements UITableIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public SyncTableAccess getSyncAccess() {
@@ -61,7 +61,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#create()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void create() {
@@ -72,7 +72,7 @@ public class UITable extends UIWidget implements UITableIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITableIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     public UITableModelIF getModel() {
 
@@ -81,7 +81,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITableIF#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModelIF)
-     * {@inheritDoc}
+     * 
      */
     public void setModel(UITableModelIF newModel) {
 
@@ -90,7 +90,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 

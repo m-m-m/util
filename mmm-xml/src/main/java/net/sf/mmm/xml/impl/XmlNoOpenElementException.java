@@ -17,15 +17,15 @@ import net.sf.mmm.xml.api.XmlException;
  */
 public class XmlNoOpenElementException extends XmlException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 4749788432393108108L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 4749788432393108108L;
 
-    /**
-     * The constructor.
-     */
-    public XmlNoOpenElementException() {
+  /**
+   * The constructor.
+   */
+  public XmlNoOpenElementException() {
 
-        super(NlsResourceBundle.ERR_NOT_OPEN);
-    }
+    super(NlsResourceBundle.ERR_NOT_OPEN);
+  }
 
 }

@@ -43,7 +43,7 @@ public class UIPicture extends UIAbstractPicture {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF#getPreferredHeight()
-     * {@inheritDoc}
+     * 
      */
     public int getPreferredHeight() {
 
@@ -52,7 +52,7 @@ public class UIPicture extends UIAbstractPicture {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF#getPreferredWidth()
-     * {@inheritDoc}
+     * 
      */
     public int getPreferredWidth() {
 

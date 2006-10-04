@@ -25,7 +25,7 @@ public abstract class AbstractVariable extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
-     * {@inheritDoc}
+     * 
      */
     public final Object evaluate(ContextIF environment) throws ValueException {
 

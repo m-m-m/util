@@ -73,7 +73,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
 
     /**
      * @see java.util.ResourceBundle#getKeys()
-     * {@inheritDoc}
+     * 
      */
     public Enumeration<String> getKeys() {
 
@@ -82,7 +82,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
 
     /**
      * @see java.util.ResourceBundle#handleGetObject(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     protected Object handleGetObject(String key) {
 

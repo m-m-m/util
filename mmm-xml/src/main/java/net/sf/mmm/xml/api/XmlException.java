@@ -11,25 +11,25 @@ import net.sf.mmm.nls.base.NlsException;
  */
 public class XmlException extends NlsException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 3257850978257613621L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 3257850978257613621L;
 
-    /**
-     * @see NlsException#NlsException(String, Object[])
-     * {@inheritDoc}
-     */
-    public XmlException(String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see NlsException#NlsException(String, Object[])
+   * 
+   */
+  public XmlException(String internaitionalizedMessage, Object... arguments) {
 
-        super(internaitionalizedMessage, arguments);
-    }
+    super(internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see NlsException#NlsException(Throwable, String, Object[])
-     * {@inheritDoc}
-     */
-    public XmlException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see NlsException#NlsException(Throwable, String, Object[])
+   * 
+   */
+  public XmlException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 
-        super(nested, internaitionalizedMessage, arguments);
-    }
+    super(nested, internaitionalizedMessage, arguments);
+  }
 
 }

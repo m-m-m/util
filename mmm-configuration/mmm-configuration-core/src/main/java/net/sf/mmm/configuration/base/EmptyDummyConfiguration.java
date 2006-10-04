@@ -20,242 +20,241 @@ import net.sf.mmm.value.base.EmptyValue;
  */
 public class EmptyDummyConfiguration extends AbstractConfiguration {
 
-    /** the empty configuration element */
-    private static final EmptyDummyConfiguration EMPTY_ELEMENT = new EmptyDummyConfiguration(
-            Type.ELEMENT);
+  /** the empty configuration element */
+  private static final EmptyDummyConfiguration EMPTY_ELEMENT = new EmptyDummyConfiguration(
+      Type.ELEMENT);
 
-    /** the empty configuration attribute */
-    private static final EmptyDummyConfiguration EMPTY_ATTRIBUTE = new EmptyDummyConfiguration(
-            Type.ATTRIBUTE);
+  /** the empty configuration attribute */
+  private static final EmptyDummyConfiguration EMPTY_ATTRIBUTE = new EmptyDummyConfiguration(
+      Type.ATTRIBUTE);
 
-    /** the type */
-    private final Type type;
+  /** the type */
+  private final Type type;
 
-    /**
-     * The constructor.
-     * 
-     * @param configurationType
-     *        is the type of the empty configuration.
-     */
-    private EmptyDummyConfiguration(Type configurationType) {
+  /**
+   * The constructor.
+   * 
+   * @param configurationType
+   *        is the type of the empty configuration.
+   */
+  private EmptyDummyConfiguration(Type configurationType) {
 
-        super();
-        this.type = configurationType;
+    super();
+    this.type = configurationType;
+  }
+
+  /**
+   * This method gets the singleton instance of the empty configuration for the
+   * given type.
+   * 
+   * @param configurationType
+   *        is the type of the requested empty configuration.
+   * @return the requested configuration.
+   */
+  public static final AbstractConfiguration getInstance(Type configurationType) {
+
+    switch (configurationType) {
+      case ELEMENT:
+        return EMPTY_ELEMENT;
+      case ATTRIBUTE:
+        return EMPTY_ATTRIBUTE;
+      default :
+        throw new IllegalArgumentException("" + configurationType);
     }
+  }
 
-    /**
-     * This method gets the singleton instance of the empty configuration for
-     * the given type.
-     * 
-     * @param configurationType
-     *        is the type of the requested empty configuration.
-     * @return the requested configuration.
-     */
-    public static final AbstractConfiguration getInstance(Type configurationType) {
+  /**
+   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getValue()
+   *      
+   */
+  public MutableGenericValueIF getValue() {
 
-        switch (configurationType) {
-            case ELEMENT:
-                return EMPTY_ELEMENT;
-            case ATTRIBUTE:
-                return EMPTY_ATTRIBUTE;
-            default :
-                throw new IllegalArgumentException("" + configurationType);
-        }
-    }
+    return EmptyValue.getInstance();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getValue()
-     *      {@inheritDoc}
-     */
-    public MutableGenericValueIF getValue() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   */
+  public String getName() {
 
-        return EmptyValue.getInstance();
-    }
+    return "";
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() {@inheritDoc}
-     */
-    public String getName() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   *      
+   */
+  public String getNamespaceUri() {
 
-        return "";
-    }
+    return null;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
-     *      {@inheritDoc}
-     */
-    public String getNamespaceUri() {
+  /**
+   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
+   *      
+   */
+  public boolean isEditable() {
 
-        return null;
-    }
+    return false;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
-     *      {@inheritDoc}
-     */
-    public boolean isEditable() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
+   *      
+   */
+  public boolean isAddDefaults() {
 
-        return false;
-    }
+    return false;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
-     *      {@inheritDoc}
-     */
-    public boolean isAddDefaults() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getType() 
+   */
+  public Type getType() {
 
-        return false;
-    }
+    return this.type;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getType() {@inheritDoc}
-     */
-    public Type getType() {
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String,
+   *      java.lang.String) 
+   */
+  public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
-        return this.type;
-    }
+    // TODO: check type (attributes can not have children).
+    // TODO: check if last segment starts with @
+    return this;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String,
-     *      java.lang.String) {@inheritDoc}
-     */
-    public AbstractConfiguration getDescendant(String path, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getDescendants(java.lang.String,
+   *      java.lang.String) 
+   */
+  public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
-        // TODO: check type (attributes can not have children).
-        // TODO: check if last segment starts with @
-        return this;
-    }
+    return Collections.emptyList();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getDescendants(java.lang.String,
-     *      java.lang.String) {@inheritDoc}
-     */
-    public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(java.lang.String,
+   *      java.lang.String) 
+   */
+  @Override
+  AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
 
-        return Collections.emptyList();
-    }
+    return null;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(java.lang.String,
-     *      java.lang.String) {@inheritDoc}
-     */
-    @Override
-    AbstractConfiguration doCreateChild(String name, String namespace)
-            throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
+   *      java.lang.String) 
+   */
+  @Override
+  public AbstractConfiguration getChild(String name, String namespace)
+      throws ConfigurationException {
 
-        return null;
-    }
+    return null;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-     *      java.lang.String) {@inheritDoc}
-     */
-    @Override
-    public AbstractConfiguration getChild(String name, String namespace)
-            throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
+   *      
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Type childType) {
 
-        return null;
-    }
+    return EmptyConfigurationIterator.getInstance();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
-     *      {@inheritDoc}
-     */
-    @Override
-    public Iterator<AbstractConfiguration> getChildren(Type childType) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
+   *      java.lang.String) 
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
 
-        return EmptyConfigurationIterator.getInstance();
-    }
+    return EmptyConfigurationIterator.getInstance();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-     *      java.lang.String) {@inheritDoc}
-     */
-    @Override
-    public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
+   *      
+   */
+  @Override
+  protected void doRemove() throws ConfigurationException {
 
-        return EmptyConfigurationIterator.getInstance();
-    }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
-     *      {@inheritDoc}
-     */
-    @Override
-    protected void doRemove() throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   *      
+   */
+  @Override
+  protected void removeChild(AbstractConfiguration child) {
 
-    }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-     *      {@inheritDoc}
-     */
-    @Override
-    protected void removeChild(AbstractConfiguration child) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   *      
+   */
+  @Override
+  protected void addChild(AbstractConfiguration child) {
 
-    }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-     *      {@inheritDoc}
-     */
-    @Override
-    protected void addChild(AbstractConfiguration child) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
+   *      
+   */
+  @Override
+  protected AbstractConfiguration doDisable() throws ConfigurationException {
 
-    }
+    return null;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
-     *      {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration doDisable() throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
+   *      
+   */
+  public void disable() throws ConfigurationException {
 
-        return null;
-    }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
-     *      {@inheritDoc}
-     */
-    public void disable() throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
+   *      
+   */
+  public void addListener(ConfigurationChangeListenerIF listener) {
 
-    }
+  }
 
-    /**
-     * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
-     *      {@inheritDoc}
-     */
-    public void addListener(ConfigurationChangeListenerIF listener) {
+  /**
+   * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
+   *      
+   */
+  public void removeListener(ConfigurationChangeListenerIF listener) {
 
-    }
+  }
 
-    /**
-     * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
-     *      {@inheritDoc}
-     */
-    public void removeListener(ConfigurationChangeListenerIF listener) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
+   *      
+   */
+  @Override
+  protected AbstractConfiguration getParent() {
 
-    }
+    return null;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
-     *      {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration getParent() {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
+   *      
+   */
+  @Override
+  protected AbstractConfigurationDocument getOwnerDocument() {
 
-        return null;
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
-     *      {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfigurationDocument getOwnerDocument() {
-
-        return null;
-    }
+    return null;
+  }
 
 }

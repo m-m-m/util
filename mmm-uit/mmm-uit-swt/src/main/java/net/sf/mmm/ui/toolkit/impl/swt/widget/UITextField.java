@@ -38,7 +38,7 @@ public class UITextField extends UIWidget implements UITextFieldIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public AbstractSyncControlAccess getSyncAccess() {
@@ -48,7 +48,7 @@ public class UITextField extends UIWidget implements UITextFieldIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -57,7 +57,7 @@ public class UITextField extends UIWidget implements UITextFieldIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTextIF#setText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setText(String text) {
 
@@ -66,7 +66,7 @@ public class UITextField extends UIWidget implements UITextFieldIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadTextIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 

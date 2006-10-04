@@ -66,7 +66,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public JComponent getSwingComponent() {
@@ -76,7 +76,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -85,7 +85,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#removeComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public void removeComponent(int index) {
 
@@ -105,7 +105,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#removeComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeComponent(UIComponentIF component) {
 
@@ -117,7 +117,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#addComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void addComponent(UIComponentIF component) {
 
@@ -127,7 +127,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#addComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF,
      *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints)
-     * {@inheritDoc}
+     * 
      */
     public void addComponent(UIComponentIF component, LayoutConstraints constraints) {
 
@@ -150,7 +150,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#addComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF,
      *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints, int)
-     * {@inheritDoc}
+     * 
      */
     public void addComponent(UIComponentIF component, LayoutConstraints constraints, int position) {
 
@@ -169,7 +169,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public UIComponentIF getComponent(int index) {
 
@@ -178,7 +178,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#setOrientation(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-     * {@inheritDoc}
+     * 
      */
     public void setOrientation(Orientation orientation) {
 
@@ -189,7 +189,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UIPanelIF#getOrientation()
-     * {@inheritDoc}
+     * 
      */
     public Orientation getOrientation() {
 
@@ -198,7 +198,7 @@ public class UIPanel extends UIMultiComposite implements UIPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#refresh()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void refresh() {

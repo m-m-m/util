@@ -45,7 +45,7 @@ public class UIWorkbench extends UIFrame implements UIWorkbenchIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -64,7 +64,7 @@ public class UIWorkbench extends UIFrame implements UIWorkbenchIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIWindowIF#setComposite(net.sf.mmm.ui.toolkit.api.composite.UICompositeIF)
-     * {@inheritDoc}
+     * 
      */
     public void setComposite(UICompositeIF newComposite) {
 
@@ -74,7 +74,7 @@ public class UIWorkbench extends UIFrame implements UIWorkbenchIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIWorkbenchIF#createFrame(java.lang.String, boolean)
-     * {@inheritDoc}
+     * 
      */
     public UIFrameIF createFrame(String title, boolean resizeable) {
 

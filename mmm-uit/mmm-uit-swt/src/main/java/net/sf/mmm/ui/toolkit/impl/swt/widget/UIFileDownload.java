@@ -33,7 +33,7 @@ public class UIFileDownload extends UIWidget implements UIFileDownloadIF {
 
         /**
          * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
-         * {@inheritDoc}
+         * 
      */
         public void handleEvent(Event event) {
 
@@ -81,7 +81,7 @@ public class UIFileDownload extends UIWidget implements UIFileDownloadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public AbstractSyncControlAccess getSyncAccess() {
@@ -91,7 +91,7 @@ public class UIFileDownload extends UIWidget implements UIFileDownloadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -100,7 +100,7 @@ public class UIFileDownload extends UIWidget implements UIFileDownloadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTextIF#setText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setText(String text) {
 
@@ -109,7 +109,7 @@ public class UIFileDownload extends UIWidget implements UIFileDownloadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadTextIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 

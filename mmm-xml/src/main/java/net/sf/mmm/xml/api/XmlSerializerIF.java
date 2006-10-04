@@ -14,18 +14,18 @@ package net.sf.mmm.xml.api;
  */
 public interface XmlSerializerIF<O> {
 
-    /**
-     * This method creates an XML representation of the given value. <br>
-     * 
-     * @see XmlSerializableIF#toXml(XmlWriterIF)
-     * 
-     * @param xmlWriter
-     *        is where the XML is written to.
-     * @param object
-     *        is the object to serialize. May be <code>null</code>.
-     * @throws XmlException
-     *         if the serialization fails (I/O error, invalid XML, etc.).
-     */
-    void toXml(XmlWriterIF xmlWriter, O object) throws XmlException;
+  /**
+   * This method creates an XML representation of the given value. <br>
+   * 
+   * @see XmlSerializableIF#toXml(XmlWriterIF)
+   * 
+   * @param xmlWriter
+   *        is where the XML is written to.
+   * @param object
+   *        is the object to serialize. May be <code>null</code>.
+   * @throws XmlException
+   *         if the serialization fails (I/O error, invalid XML, etc.).
+   */
+  void toXml(XmlWriterIF xmlWriter, O object) throws XmlException;
 
 }

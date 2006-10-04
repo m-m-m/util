@@ -13,53 +13,50 @@ import java.util.NoSuchElementException;
  */
 public class EmptyConfigurationIterator implements Iterator<AbstractConfiguration> {
 
-    /** the singleton instance */
-    private static final Iterator<AbstractConfiguration> INSTANCE = new EmptyConfigurationIterator();
+  /** the singleton instance */
+  private static final Iterator<AbstractConfiguration> INSTANCE = new EmptyConfigurationIterator();
 
-    /**
-     * The constructor.
-     * 
-     */
-    private EmptyConfigurationIterator() {
+  /**
+   * The constructor.
+   * 
+   */
+  private EmptyConfigurationIterator() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * @see java.util.Iterator#hasNext()
-     * {@inheritDoc}
-     */
-    public boolean hasNext() {
+  /**
+   * @see java.util.Iterator#hasNext() 
+   */
+  public boolean hasNext() {
 
-        return false;
-    }
+    return false;
+  }
 
-    /**
-     * @see java.util.Iterator#next()
-     * {@inheritDoc}
-     */
-    public AbstractConfiguration next() {
+  /**
+   * @see java.util.Iterator#next() 
+   */
+  public AbstractConfiguration next() {
 
-        throw new NoSuchElementException();
-    }
+    throw new NoSuchElementException();
+  }
 
-    /**
-     * @see java.util.Iterator#remove()
-     * {@inheritDoc}
-     */
-    public void remove() {
+  /**
+   * @see java.util.Iterator#remove() 
+   */
+  public void remove() {
 
-        throw new UnsupportedOperationException();
-    }
+    throw new UnsupportedOperationException();
+  }
 
-    /**
-     * This method gets the singleton instance of this class.
-     * 
-     * @return an empty iterator.
-     */
-    public static Iterator<AbstractConfiguration> getInstance() {
+  /**
+   * This method gets the singleton instance of this class.
+   * 
+   * @return an empty iterator.
+   */
+  public static Iterator<AbstractConfiguration> getInstance() {
 
-        return INSTANCE;
-    }
+    return INSTANCE;
+  }
 
 }

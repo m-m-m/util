@@ -12,74 +12,73 @@ import net.sf.mmm.value.base.AbstractStringValue;
  */
 public class StringValue extends AbstractStringValue {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 1838925287686720743L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 1838925287686720743L;
 
-    /** the actual native value */
-    private String value;
+  /** the actual native value */
+  private String value;
 
-    /** the editable flag */
-    private boolean editable;
+  /** the editable flag */
+  private boolean editable;
 
-    /**
-     * The constructor.
-     */
-    public StringValue() {
+  /**
+   * The constructor.
+   */
+  public StringValue() {
 
-        this(null);
-    }
+    this(null);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param initialValue
-     *        is the initial value.
-     */
-    public StringValue(String initialValue) {
+  /**
+   * The constructor.
+   * 
+   * @param initialValue
+   *        is the initial value.
+   */
+  public StringValue(String initialValue) {
 
-        super();
-        this.value = initialValue;
-        this.editable = true;
-    }
+    super();
+    this.value = initialValue;
+    this.editable = true;
+  }
 
-    /**
-     * This method sets the {@link #isEditable() "editable flag"}.
-     * 
-     * @param editableFlag
-     *        is the new status of the editable flag.
-     */
-    public void setEditable(boolean editableFlag) {
+  /**
+   * This method sets the {@link #isEditable() "editable flag"}.
+   * 
+   * @param editableFlag
+   *        is the new status of the editable flag.
+   */
+  public void setEditable(boolean editableFlag) {
 
-        this.editable = editableFlag;
-    }
+    this.editable = editableFlag;
+  }
 
-    /**
-     * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
-     * {@inheritDoc}
-     */
-    public boolean isEditable() {
+  /**
+   * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
+   */
+  public boolean isEditable() {
 
-        return this.editable;
-    }
+    return this.editable;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getPlainValue() {
+  /**
+   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
+   * 
+   */
+  @Override
+  protected String getPlainValue() {
 
-        return this.value;
-    }
+    return this.value;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setPlainValue(String newValue) {
+  /**
+   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
+   * 
+   */
+  @Override
+  protected void setPlainValue(String newValue) {
 
-        this.value = newValue;
-    }
+    this.value = newValue;
+  }
 
 }

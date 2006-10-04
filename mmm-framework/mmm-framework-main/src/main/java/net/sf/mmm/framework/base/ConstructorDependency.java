@@ -45,7 +45,7 @@ public final class ConstructorDependency<S> extends AbstractDependency<S> {
 
     /**
      * @see net.sf.mmm.framework.api.DependencyIF#getInjectionField()
-     * {@inheritDoc}
+     * 
      */
     public Field getInjectionField() {
 
@@ -54,7 +54,7 @@ public final class ConstructorDependency<S> extends AbstractDependency<S> {
 
     /**
      * @see net.sf.mmm.framework.api.DependencyIF#getInjectionMethod()
-     * {@inheritDoc}
+     * 
      */
     public Method getInjectionMethod() {
 
@@ -63,7 +63,7 @@ public final class ConstructorDependency<S> extends AbstractDependency<S> {
 
     /**
      * @see net.sf.mmm.framework.api.DependencyIF#getInjectionType()
-     * {@inheritDoc}
+     * 
      */
     public Type getInjectionType() {
 
@@ -72,7 +72,7 @@ public final class ConstructorDependency<S> extends AbstractDependency<S> {
 
     /**
      * @see net.sf.mmm.framework.base.AbstractDependency#getInjectionTargetDescription()
-     * {@inheritDoc}
+     * 
      */
     public String getInjectionTargetDescription() {
 

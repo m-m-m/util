@@ -33,7 +33,7 @@ public abstract class AbstractContextProxy implements ContextIF {
     
     /**
      * @see net.sf.mmm.context.api.ContextIF#getObject(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public Object getObject(String variableName) {
 
@@ -42,7 +42,7 @@ public abstract class AbstractContextProxy implements ContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#getValue(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public GenericValueIF getValue(String variableName) {
 
@@ -51,7 +51,7 @@ public abstract class AbstractContextProxy implements ContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#hasValue(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public boolean hasValue(String variableName) {
     
@@ -60,7 +60,7 @@ public abstract class AbstractContextProxy implements ContextIF {
     
     /**
      * @see net.sf.mmm.context.api.ContextIF#getVariableNames()
-     * {@inheritDoc}
+     * 
      */
     public Set<String> getVariableNames() {
 
@@ -69,7 +69,7 @@ public abstract class AbstractContextProxy implements ContextIF {
 
     /**
      * @see net.sf.mmm.context.api.ContextIF#createChildContext()
-     * {@inheritDoc}
+     * 
      */
     public MutableContextIF createChildContext() {
 

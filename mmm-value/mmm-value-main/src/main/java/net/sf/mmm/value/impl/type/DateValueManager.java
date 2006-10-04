@@ -65,7 +65,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManagerIF#getName() {@inheritDoc}
+     * @see net.sf.mmm.value.api.ValueManagerIF#getName() 
      */
     public String getName() {
 
@@ -73,7 +73,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManagerIF#getValueType() {@inheritDoc}
+     * @see net.sf.mmm.value.api.ValueManagerIF#getValueType() 
      */
     public Class<Date> getValueType() {
 
@@ -82,7 +82,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#parse(java.lang.String)
-     *      {@inheritDoc}
+     *      
      */
     public Date parse(String valueAsString) throws ValueParseException {
 
@@ -144,7 +144,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
     /**
      * @see net.sf.mmm.value.base.AbstractValueManager#parse(org.w3c.dom.Element)
-     *      {@inheritDoc}
+     *      
      */
     @Override
     public Date parse(Element valueAsXml) throws ValueParseException {
@@ -173,7 +173,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#toString(java.lang.Object)
-     *      {@inheritDoc}
+     *      
      */
     @Override
     public String toString(Date value) {
@@ -182,7 +182,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
     }
 
     /**
-     * @see AbstractValueManager#toXmlValue(XmlWriterIF, Object) {@inheritDoc}
+     * @see AbstractValueManager#toXmlValue(XmlWriterIF, Object) 
      */
     @Override
     protected void toXmlValue(XmlWriterIF xmlWriter, Date value) throws XmlException {

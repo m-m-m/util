@@ -14,40 +14,39 @@ import net.sf.mmm.value.api.GenericValueIF;
  */
 public class NotEqualsComparator implements ComparatorIF {
 
-    /** the comparator symbol */
-    public static final String SYMBOL = "!=";
+  /** the comparator symbol */
+  public static final String SYMBOL = "!=";
 
-    /**
-     * The constructor.
-     * 
-     */
-    public NotEqualsComparator() {
+  /**
+   * The constructor.
+   * 
+   */
+  public NotEqualsComparator() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.base.path.ComparatorIF#accept(net.sf.mmm.value.api.GenericValueIF,
+   *      java.lang.String, java.util.regex.Pattern) 
+   */
+  public boolean accept(GenericValueIF value, String string, Pattern pattern) {
+
+    String valueString = value.getString(null);
+    if (pattern == null) {
+      return !string.equals(valueString);
+    } else {
+      return !pattern.matcher(string).matches();
     }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.path.ComparatorIF#accept(net.sf.mmm.value.api.GenericValueIF,
-     *      java.lang.String, java.util.regex.Pattern)
-     * {@inheritDoc}
-     */
-    public boolean accept(GenericValueIF value, String string, Pattern pattern) {
+  /**
+   * @see net.sf.mmm.configuration.base.path.ComparatorIF#getSymbol()
+   *      
+   */
+  public String getSymbol() {
 
-        String valueString = value.getString(null);
-        if (pattern == null) {
-            return !string.equals(valueString);
-        } else {
-            return !pattern.matcher(string).matches();
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.base.path.ComparatorIF#getSymbol()
-     * {@inheritDoc}
-     */
-    public String getSymbol() {
-
-        return SYMBOL;
-    }
+    return SYMBOL;
+  }
 
 }

@@ -37,7 +37,7 @@ public class UIMenuBar extends UIAbstractMenuBar {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.menu.UIAbstractMenuBar#createMenu(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     protected UIMenuIF createMenu(String name) {
         JMenu menu = new JMenu(name);

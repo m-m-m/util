@@ -48,7 +48,7 @@ public abstract class AbstractLifecycleManager implements LifecycleManagerIF {
 
     /**
      * @see net.sf.mmm.framework.api.LifecycleManagerIF#getLifecyclePhases()
-     * {@inheritDoc}
+     * 
      */
     public final Set<String> getLifecyclePhases() {
 

@@ -46,7 +46,7 @@ public abstract class UIAwtNode extends UIAbstractNode {
 
             /**
              * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-             * {@inheritDoc}
+             * 
      */
             public void actionPerformed(ActionEvent e) {
 
@@ -69,7 +69,7 @@ public abstract class UIAwtNode extends UIAbstractNode {
 
             /**
              * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent)
-             * {@inheritDoc}
+             * 
      */
             public void stateChanged(ChangeEvent e) {
 

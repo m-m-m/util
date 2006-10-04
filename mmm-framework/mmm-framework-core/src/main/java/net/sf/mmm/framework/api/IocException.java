@@ -13,7 +13,7 @@ public abstract class IocException extends NlsRuntimeException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public IocException(String newInternaitionalizedMessage, Object... newArguments) {
 
@@ -22,7 +22,7 @@ public abstract class IocException extends NlsRuntimeException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public IocException(Throwable newNested, String newInternaitionalizedMessage,
             Object... newArguments) {

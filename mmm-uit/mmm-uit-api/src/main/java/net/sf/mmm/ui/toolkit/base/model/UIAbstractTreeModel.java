@@ -34,7 +34,7 @@ public abstract class UIAbstractTreeModel<N> implements UITreeModelIF<N> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#addListener(net.sf.mmm.ui.toolkit.api.event.UITreeModelListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void addListener(UITreeModelListenerIF<N> listener) {
 
@@ -43,7 +43,7 @@ public abstract class UIAbstractTreeModel<N> implements UITreeModelIF<N> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#removeListener(net.sf.mmm.ui.toolkit.api.event.UITreeModelListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeListener(UITreeModelListenerIF<N> listener) {
 
@@ -96,7 +96,7 @@ public abstract class UIAbstractTreeModel<N> implements UITreeModelIF<N> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITreeModelIF#toString(Object)
-     * {@inheritDoc}
+     * 
      */
     public String toString(N node) {
 

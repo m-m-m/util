@@ -107,7 +107,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
     // }
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltipIF#getTooltipText()
-     * {@inheritDoc}
+     * 
      */
     public String getTooltipText() {
 
@@ -116,7 +116,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltipIF#setTooltipText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setTooltipText(String tooltip) {
 
@@ -125,7 +125,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#setParent(net.sf.mmm.ui.toolkit.api.UINodeIF)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void setParent(UINodeIF newParent) {
@@ -183,7 +183,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEnabledIF#setEnabled(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setEnabled(boolean enabled) {
 
@@ -192,7 +192,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabledIF#isEnabled()
-     * {@inheritDoc}
+     * 
      */
     public boolean isEnabled() {
 
@@ -201,7 +201,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#isResizeable()
-     * {@inheritDoc}
+     * 
      */
     public boolean isResizeable() {
 
@@ -211,7 +211,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#setSize(int, int)
-     * {@inheritDoc}
+     * 
      */
     public void setSize(int width, int height) {
 
@@ -223,7 +223,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-     * {@inheritDoc}
+     * 
      */
     public int getHeight() {
 
@@ -232,7 +232,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-     * {@inheritDoc}
+     * 
      */
     public int getWidth() {
 
@@ -241,7 +241,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF#getPreferredHeight()
-     * {@inheritDoc}
+     * 
      */
     public int getPreferredHeight() {
 
@@ -250,7 +250,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF#getPreferredWidth()
-     * {@inheritDoc}
+     * 
      */
     public int getPreferredWidth() {
 
@@ -259,7 +259,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#dispose()
-     * {@inheritDoc}
+     * 
      */
     public void dispose() {
 
@@ -272,7 +272,7 @@ public abstract class UIComponent extends UISwtNode implements UIComponentIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#isDisposed()
-     * {@inheritDoc}
+     * 
      */
     public boolean isDisposed() {
 

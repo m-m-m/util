@@ -41,7 +41,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -50,7 +50,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#getItemCount()
-     * {@inheritDoc}
+     * 
      */
     public int getItemCount() {
 
@@ -59,7 +59,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#getItems()
-     * {@inheritDoc}
+     * 
      */
     public Iterator<UIMenuItemIF> getItems() {
 
@@ -69,7 +69,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#addItem(java.lang.String,
      *      net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public UIMenuItemIF addItem(String name, UIActionListenerIF action) {
 
@@ -79,7 +79,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#addItem(java.lang.String,
      *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-     * {@inheritDoc}
+     * 
      */
     public UIMenuItemIF addItem(String name, ButtonStyle style) {
 
@@ -88,7 +88,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#addItem(net.sf.mmm.ui.toolkit.api.feature.ActionIF)
-     * {@inheritDoc}
+     * 
      */
     public UIMenuItemIF addItem(ActionIF action) {
 
@@ -108,7 +108,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#addItem(java.lang.String,
      *      net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public UIMenuItemIF addItem(String name, UIActionListenerIF action, ButtonStyle style) {
 
@@ -136,7 +136,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuIF#addSubMenu(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public UIMenuIF addSubMenu(String name) {
 
@@ -158,7 +158,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItemIF#getStyle()
-     * {@inheritDoc}
+     * 
      */
     public ButtonStyle getStyle() {
 
@@ -167,7 +167,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlagIF#isSelected()
-     * {@inheritDoc}
+     * 
      */
     public boolean isSelected() {
 
@@ -176,7 +176,7 @@ public abstract class UIAbstractMenu extends UIAbstractNode implements UIMenuIF 
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlagIF#setSelected(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setSelected(boolean selected) {
 

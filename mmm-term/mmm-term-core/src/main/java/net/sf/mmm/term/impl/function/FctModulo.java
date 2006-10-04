@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.impl.function;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.OperatorPriority;
 
@@ -55,7 +55,7 @@ public class FctModulo {
     public static Integer mod(Integer argument1, Integer argument2) throws CalculationException {
 
         if (argument2.intValue() == 0) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_DIV_ZERO);            
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
         }
         return new Integer(argument1.intValue() % argument2.intValue());
     }
@@ -73,7 +73,7 @@ public class FctModulo {
     public static Long mod(Long argument1, Integer argument2) throws CalculationException {
 
         if (argument2.longValue() == 0) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_DIV_ZERO);            
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
         }
         return new Long(argument1.longValue() % argument2.longValue());
     }
@@ -91,7 +91,7 @@ public class FctModulo {
     public static Long mod(Integer argument1, Long argument2) throws CalculationException {
 
         if (argument2.longValue() == 0) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_DIV_ZERO);            
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
         }
         return new Long(argument1.longValue() % argument2.longValue());
     }
@@ -109,7 +109,7 @@ public class FctModulo {
     public static Long mod(Long argument1, Long argument2) throws CalculationException {
 
         if (argument2.longValue() == 0) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_DIV_ZERO);            
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
         }
         return new Long(argument1.longValue() % argument2.longValue());
     }

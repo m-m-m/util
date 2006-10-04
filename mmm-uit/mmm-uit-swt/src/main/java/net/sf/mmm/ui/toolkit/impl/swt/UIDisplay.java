@@ -38,7 +38,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
         /**
          * @see java.lang.Runnable#run()
-         * {@inheritDoc}
+         * 
      */
         public void run() {
 
@@ -76,7 +76,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getFactory()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public UIFactory getFactory() {
@@ -86,7 +86,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-     * {@inheritDoc}
+     * 
      */
     public int getWidth() {
 
@@ -96,7 +96,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-     * {@inheritDoc}
+     * 
      */
     public int getHeight() {
 
@@ -116,7 +116,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -125,7 +125,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIDisplayIF#dispatch()
-     * {@inheritDoc}
+     * 
      */
     public void dispatch() {
 
@@ -140,7 +140,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIDisplayIF#isDispatchThread()
-     * {@inheritDoc}
+     * 
      */
     public boolean isDispatchThread() {
     
@@ -149,7 +149,7 @@ public class UIDisplay extends UIAbstractDisplay {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIDisplayIF#invokeAsynchron(java.lang.Runnable)
-     * {@inheritDoc}
+     * 
      */
     public void invokeAsynchron(Runnable task) {
 
@@ -158,7 +158,7 @@ public class UIDisplay extends UIAbstractDisplay {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractDisplay#doInvokeSynchron(java.lang.Runnable)
-     * {@inheritDoc}
+     * 
      */
     public void doInvokeSynchron(Runnable task) {
 

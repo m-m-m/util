@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.impl.function;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.OperatorPriority;
 
@@ -216,7 +216,7 @@ public class FctMultiply {
 
         int count = argument2.intValue();
         if (count < 0) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_MUL_STR_NEG);
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_MUL_STR_NEG);
         }
         long length = argument1.length() * count;
         if (length == 0) {
@@ -224,7 +224,7 @@ public class FctMultiply {
         }
         // we need a limit here, howerver lets take 2^16=65536
         if (length > MAX_STRING_LENGTH) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_MUL_STR_MAX, Integer
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_MUL_STR_MAX, Integer
                     .valueOf(MAX_STRING_LENGTH));
         }
         StringBuffer result = new StringBuffer((int) length);

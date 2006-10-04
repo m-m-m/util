@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.util.reflect.Arguments;
 import net.sf.mmm.util.reflect.Signature;
 
@@ -27,7 +27,7 @@ public class IllegalArgumentTypeException extends CalculationException {
      */
     public IllegalArgumentTypeException(FunctionIF function, Signature signature) {
 
-        super(NlsResourceBundle.ERR_ILLEGAL_SIGNATURE, function, signature);
+        super(CoreNlsResourceBundle.ERR_ILLEGAL_SIGNATURE, function, signature);
     }
 
     /**
@@ -40,7 +40,7 @@ public class IllegalArgumentTypeException extends CalculationException {
      */
     public IllegalArgumentTypeException(FunctionIF function, Arguments arguments) {
 
-        super(NlsResourceBundle.ERR_ILLEGAL_ARGUMENTS, function, arguments);
+        super(CoreNlsResourceBundle.ERR_ILLEGAL_ARGUMENTS, function, arguments);
     }
 
     /**
@@ -56,7 +56,7 @@ public class IllegalArgumentTypeException extends CalculationException {
      */
     public IllegalArgumentTypeException(FunctionIF function, Arguments arguments, Throwable nested) {
 
-        super(nested, NlsResourceBundle.ERR_ILLEGAL_ARGUMENTS, function, arguments);
+        super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_ARGUMENTS, function, arguments);
     }
 
     /**

@@ -33,7 +33,7 @@ public abstract class UIAbstractListModel<E> implements UIListModelIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#addListener(net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void addListener(UIListModelListenerIF listener) {
 
@@ -42,7 +42,7 @@ public abstract class UIAbstractListModel<E> implements UIListModelIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#removeListener(net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeListener(UIListModelListenerIF listener) {
 
@@ -81,7 +81,7 @@ public abstract class UIAbstractListModel<E> implements UIListModelIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getElementAsString(int)
-     * {@inheritDoc}
+     * 
      */
     public String getElementAsString(int index) {
 
@@ -96,7 +96,7 @@ public abstract class UIAbstractListModel<E> implements UIListModelIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getIndexOf(Object)
-     * {@inheritDoc}
+     * 
      */
     public int getIndexOf(E element) {
 

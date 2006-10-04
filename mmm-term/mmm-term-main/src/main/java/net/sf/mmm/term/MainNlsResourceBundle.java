@@ -8,12 +8,12 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ServiceNlsResourceBundle extends AbstractResourceBundle {
+public class MainNlsResourceBundle extends AbstractResourceBundle {
 
     /**
      * The constructor.
      */
-    public ServiceNlsResourceBundle() {
+    public MainNlsResourceBundle() {
 
         super();
     }

@@ -59,7 +59,7 @@ public class SimpleAction extends AbstractAction {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getActionListener()
-     * {@inheritDoc}
+     * 
      */
     public UIActionListenerIF getActionListener() {
 

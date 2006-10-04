@@ -88,7 +88,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.composite.UIComposite#createChildren()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void createChildren() {
@@ -100,7 +100,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getActiveSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public SyncSashFormAccess getActiveSyncAccess() {
@@ -110,7 +110,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setOrientation(Orientation)
-     * {@inheritDoc}
+     * 
      */
     public void setOrientation(Orientation orientation) {
 
@@ -123,7 +123,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#getOrientation()
-     * {@inheritDoc}
+     * 
      */
     public Orientation getOrientation() {
 
@@ -136,7 +136,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setTopOrLeftComponent(UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void setTopOrLeftComponent(UIComponentIF component) {
 
@@ -151,7 +151,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setBottomOrRightComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void setBottomOrRightComponent(UIComponentIF component) {
 
@@ -165,7 +165,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setDividerPosition(double)
-     * {@inheritDoc}
+     * 
      */
     public void setDividerPosition(double proportion) {
 
@@ -185,7 +185,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -194,7 +194,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#getTopOrLeftComponent()
-     * {@inheritDoc}
+     * 
      */
     public UIComponent getTopOrLeftComponent() {
 
@@ -203,7 +203,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#getBottomOrRightComponent()
-     * {@inheritDoc}
+     * 
      */
     public UIComponent getBottomOrRightComponent() {
 
@@ -212,7 +212,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIComponentIF#setEnabled(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setEnabled(boolean enabled) {
 
@@ -221,7 +221,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabledIF#isEnabled()
-     * {@inheritDoc}
+     * 
      */
     public boolean isEnabled() {
 
@@ -230,7 +230,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public UIComponent getComponent(int index) {
 
@@ -245,7 +245,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getComponentCount() {
 
@@ -254,7 +254,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.composite.UIComposite#isAttachToActiveAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public boolean isAttachToActiveAccess() {

@@ -38,7 +38,7 @@ public abstract class UIAbstractObject implements UIObjectIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getFactory()
-     * {@inheritDoc}
+     * 
      */
     public UIFactoryIF getFactory() {
 
@@ -67,7 +67,7 @@ public abstract class UIAbstractObject implements UIObjectIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getId()
-     * {@inheritDoc}
+     * 
      */
     public String getId() {
 
@@ -76,7 +76,7 @@ public abstract class UIAbstractObject implements UIObjectIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#setId(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setId(String newId) {
 

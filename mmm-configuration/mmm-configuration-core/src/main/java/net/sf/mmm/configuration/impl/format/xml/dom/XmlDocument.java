@@ -25,101 +25,101 @@ import net.sf.mmm.xml.api.XmlException;
  */
 public class XmlDocument extends AbstractConfigurationDocument {
 
-    /** the XML document */
-    private Document xmlDocument;
+  /** the XML document */
+  private Document xmlDocument;
 
-    /**
-     * The constructor.
-     * 
-     * @param configurationAccess
-     * @param env
-     */
-    public XmlDocument(ConfigurationAccessIF configurationAccess, MutableContextIF env) {
+  /**
+   * The constructor.
+   * 
+   * @param configurationAccess
+   * @param env
+   */
+  public XmlDocument(ConfigurationAccessIF configurationAccess, MutableContextIF env) {
 
-        super(configurationAccess, env);
+    super(configurationAccess, env);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param configurationAccess
+   * @param parentConfiguration
+   */
+  public XmlDocument(ConfigurationAccessIF configurationAccess,
+      AbstractConfiguration parentConfiguration) {
+
+    super(configurationAccess, parentConfiguration);
+  }
+
+  /**
+   * 
+   * @param localname
+   * @param xmlNode
+   * @param namespaceUri
+   * @return the qualified name.
+   */
+  protected static String getQualifiedName(String localname, Node xmlNode, String namespaceUri) {
+
+    String prefix = xmlNode.lookupPrefix(namespaceUri);
+    if (prefix == null) {
+      // TODO: generate prefix from namespace ???
+      throw new IllegalArgumentException("namespace not defined: " + namespaceUri);
+    }
+    return createQualifiedName(localname, prefix);
+  }
+
+  /**
+   * This method creates a qualified name build of <code>localName</code> and
+   * <code>prefix</code>.
+   * 
+   * @param localName
+   *        is the local name.
+   * @param prefix
+   *        is the namespace prefix. It may be <code>null</code> for NO
+   *        namespace.
+   * @return the qualified name.
+   */
+  protected static String createQualifiedName(String localName, String prefix) {
+
+    if (prefix == null) {
+      return localName;
+    } else {
+      return prefix + ":" + localName;
     }
 
-    /**
-     * The constructor.
-     * 
-     * @param configurationAccess
-     * @param parentConfiguration
-     */
-    public XmlDocument(ConfigurationAccessIF configurationAccess,
-            AbstractConfiguration parentConfiguration) {
+  }
 
-        super(configurationAccess, parentConfiguration);
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationDocument#save(java.io.OutputStream)
+   *      
+   */
+  @Override
+  protected void save(OutputStream outputStream) throws ConfigurationException {
+
+    try {
+      DomUtil.writeXml(this.xmlDocument, outputStream, false);
+    } catch (XmlException e) {
+      // TODO:
+      throw new ConfigurationException(e.getMessage());
     }
+  }
 
-    /**
-     * 
-     * @param localname
-     * @param xmlNode
-     * @param namespaceUri
-     * @return the qualified name.
-     */
-    protected static String getQualifiedName(String localname, Node xmlNode, String namespaceUri) {
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationDocument#load(java.io.InputStream)
+   *      
+   */
+  @Override
+  protected AbstractConfiguration load(InputStream inputStream) throws ConfigurationException {
 
-        String prefix = xmlNode.lookupPrefix(namespaceUri);
-        if (prefix == null) {
-            // TODO: generate prefix from namespace ???
-            throw new IllegalArgumentException("namespace not defined: " + namespaceUri);
-        }
-        return createQualifiedName(localname, prefix);
+    try {
+      this.xmlDocument = DomUtil.parseDocument(inputStream);
+      Element rootElement = this.xmlDocument.getDocumentElement();
+      XmlElement rootNode = new XmlElement(this, getParentConfiguration(), rootElement);
+      return rootNode;
+    } catch (XmlException e) {
+      // TODO:
+      throw new ConfigurationException(e.getMessage(), e);
     }
-
-    /**
-     * This method creates a qualified name build of <code>localName</code>
-     * and <code>prefix</code>.
-     * 
-     * @param localName
-     *        is the local name.
-     * @param prefix
-     *        is the namespace prefix. It may be <code>null</code> for NO
-     *        namespace.
-     * @return the qualified name.
-     */
-    protected static String createQualifiedName(String localName, String prefix) {
-
-        if (prefix == null) {
-            return localName;
-        } else {
-            return prefix + ":" + localName;
-        }
-
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfigurationDocument#save(java.io.OutputStream)
-     *      {@inheritDoc}
-     */
-    @Override
-    protected void save(OutputStream outputStream) throws ConfigurationException {
-
-        try {
-            DomUtil.writeXml(this.xmlDocument, outputStream, false);
-        } catch (XmlException e) {
-            // TODO:
-            throw new ConfigurationException(e.getMessage());
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.base.AbstractConfigurationDocument#load(java.io.InputStream)
-     *      {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration load(InputStream inputStream) throws ConfigurationException {
-
-        try {
-            this.xmlDocument = DomUtil.parseDocument(inputStream);
-            Element rootElement = this.xmlDocument.getDocumentElement();
-            XmlElement rootNode = new XmlElement(this, getParentConfiguration(), rootElement);
-            return rootNode;
-        } catch (XmlException e) {
-            // TODO:
-            throw new ConfigurationException(e.getMessage(), e);
-        }
-    }
+  }
 
 }

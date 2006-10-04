@@ -11,44 +11,44 @@ import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
  */
 public abstract class AbstractConfigurationAccess implements ConfigurationAccessIF {
 
-    /** @see #getContextPrefix() */
-    private String prefix;
-    
-    /**
-     * The constructor.
-     */
-    public AbstractConfigurationAccess() {
+  /** @see #getContextPrefix() */
+  private String prefix;
 
-        super();
-        this.prefix = null;
-    }
+  /**
+   * The constructor.
+   */
+  public AbstractConfigurationAccess() {
 
-    /**
-     * @see #getContextPrefix()
-     * 
-     * @param contextPrefix
-     */
-    public void setContextPrefix(String contextPrefix) {
-        this.prefix = contextPrefix;
-    }
-    
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getContextPrefix()
-     * {@inheritDoc}
-     */
-    public String getContextPrefix() {
-    
-        return this.prefix;
-    }
-    
-    
-    /**
-     * @see java.lang.Object#toString() {@inheritDoc}
-     */
-    @Override
-    public String toString() {
+    super();
+    this.prefix = null;
+  }
 
-        return getUniqueUri();
-    }
+  /**
+   * @see #getContextPrefix()
+   * 
+   * @param contextPrefix
+   */
+  public void setContextPrefix(String contextPrefix) {
+
+    this.prefix = contextPrefix;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getContextPrefix()
+   *      
+   */
+  public String getContextPrefix() {
+
+    return this.prefix;
+  }
+
+  /**
+   * @see java.lang.Object#toString() 
+   */
+  @Override
+  public String toString() {
+
+    return getUniqueUri();
+  }
 
 }

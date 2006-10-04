@@ -30,7 +30,7 @@ public class UIDevice implements UIDeviceIF {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 

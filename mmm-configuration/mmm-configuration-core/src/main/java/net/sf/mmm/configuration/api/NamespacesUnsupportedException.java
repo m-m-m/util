@@ -19,47 +19,46 @@ import net.sf.mmm.configuration.NlsResourceBundle;
  */
 public class NamespacesUnsupportedException extends ConfigurationException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -6131430745876832213L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -6131430745876832213L;
 
-    /**
-     * The constructor.
-     * 
-     * @param node
-     *        is the node that does not support namespaces.
-     * @param implementation
-     *        is the specific implementation that does not support namespaces.
-     */
-    public NamespacesUnsupportedException(ConfigurationIF node, Class implementation) {
+  /**
+   * The constructor.
+   * 
+   * @param node
+   *        is the node that does not support namespaces.
+   * @param implementation
+   *        is the specific implementation that does not support namespaces.
+   */
+  public NamespacesUnsupportedException(ConfigurationIF node, Class implementation) {
 
-        super(NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
-    }
+    super(NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param node
-     *        is the node that does not support namespaces.
-     * @param implementation
-     *        is the specific implementation that does not support namespaces.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public NamespacesUnsupportedException(ConfigurationIF node, Class implementation,
-            Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param node
+   *        is the node that does not support namespaces.
+   * @param implementation
+   *        is the specific implementation that does not support namespaces.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public NamespacesUnsupportedException(ConfigurationIF node, Class implementation, Throwable nested) {
 
-        super(nested, NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
-    }
+    super(nested, NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
+  }
 
-    /**
-     * This method gets the configuration that does NOT support
-     * {@link ConfigurationIF#getNamespaceUri() namepsaces}.
-     * 
-     * @return the associated configuration node.
-     */
-    public ConfigurationIF getConfiguration() {
+  /**
+   * This method gets the configuration that does NOT support
+   * {@link ConfigurationIF#getNamespaceUri() namepsaces}.
+   * 
+   * @return the associated configuration node.
+   */
+  public ConfigurationIF getConfiguration() {
 
-        return (ConfigurationIF) getNlsMessage().getArgument(0);
-    }
+    return (ConfigurationIF) getNlsMessage().getArgument(0);
+  }
 
 }

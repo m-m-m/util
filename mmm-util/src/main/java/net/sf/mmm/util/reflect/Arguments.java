@@ -66,7 +66,7 @@ public class Arguments {
 
     /**
      * @see java.lang.Object#hashCode()
-     * {@inheritDoc}
+     * 
      */
     public int hashCode() {
 
@@ -75,7 +75,7 @@ public class Arguments {
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public boolean equals(Object other) {
 
@@ -95,7 +95,7 @@ public class Arguments {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 

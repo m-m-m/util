@@ -35,7 +35,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getColumnCount()
-     * {@inheritDoc}
+     * 
      */
     public int getColumnCount() {
 
@@ -44,7 +44,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getRowCount()
-     * {@inheritDoc}
+     * 
      */
     public int getRowCount() {
 
@@ -54,7 +54,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getCellValue(int,
      *      int)
-     * {@inheritDoc}
+     * 
      */
     public String getCellValue(int rowIndex, int columnIndex) {
 
@@ -63,7 +63,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getColumnName(int)
-     * {@inheritDoc}
+     * 
      */
     public String getColumnName(int columnIndex) {
 
@@ -101,7 +101,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModelIF#setCellValue(int,
      *      int, Object)
-     * {@inheritDoc}
+     * 
      */
     public void setCellValue(int rowIndex, int columnIndex, String value) {
 
@@ -111,7 +111,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModelIF#setColumnName(int, java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setColumnName(int columnIndex, String name) {
 
@@ -121,7 +121,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.model.UIAbstractTableModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF, java.lang.Throwable)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void handleListenerException(UITableModelListenerIF listener, Throwable t) {

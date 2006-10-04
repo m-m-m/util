@@ -89,7 +89,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
-     *      {@inheritDoc}
+     *      
      */
     @Override
     public void printStackTrace(PrintStream s) {
@@ -99,7 +99,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
-     *      {@inheritDoc}
+     *      
      */
     @Override
     public void printStackTrace(PrintWriter s) {
@@ -109,7 +109,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#printStackTrace(java.io.PrintStream,
-     *      StringTranslatorIF) {@inheritDoc}
+     *      StringTranslatorIF) 
      */
     public void printStackTrace(PrintStream stream, StringTranslatorIF nationalizer) {
 
@@ -134,7 +134,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#printStackTrace(java.io.PrintWriter,
-     *      net.sf.mmm.nls.api.StringTranslatorIF) {@inheritDoc}
+     *      net.sf.mmm.nls.api.StringTranslatorIF) 
      */
     public void printStackTrace(PrintWriter writer, StringTranslatorIF nationalizer) {
 
@@ -158,7 +158,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     }
 
     /**
-     * @see java.lang.Throwable#getMessage() {@inheritDoc}
+     * @see java.lang.Throwable#getMessage() 
      */
     public String getMessage() {
 
@@ -167,7 +167,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#getLocalizedMessage(StringTranslatorIF)
-     *      {@inheritDoc}
+     *      
      */
     public String getLocalizedMessage(StringTranslatorIF nationalizer) {
 
@@ -178,7 +178,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#getLocalizedMessage(StringTranslatorIF,
-     *      java.lang.StringBuffer) {@inheritDoc}
+     *      java.lang.StringBuffer) 
      */
     public void getLocalizedMessage(StringTranslatorIF nationalizer, StringBuffer message) {
 

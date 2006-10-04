@@ -23,95 +23,95 @@ import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
  */
 public class FileAccess extends AbstractConfigurationAccess {
 
-    /** the file to access */
-    private final File file;
+  /** the file to access */
+  private final File file;
 
-    /** the canonical path of the file */
-    private final String canonicalPath;
+  /** the canonical path of the file */
+  private final String canonicalPath;
 
-    /**
-     * The constructor.
-     * 
-     * @param configurationFile
-     *        is the file to access.
-     */
-    public FileAccess(File configurationFile) {
+  /**
+   * The constructor.
+   * 
+   * @param configurationFile
+   *        is the file to access.
+   */
+  public FileAccess(File configurationFile) {
 
-        super();
-        try {
-            this.file = configurationFile;
-            if (!this.file.isFile()) {
-                throw new ConfigurationException("The given path " + this.file.getAbsolutePath()
-                        + " is no file!");
-            }
-            this.canonicalPath = this.file.getCanonicalPath();
-        } catch (IOException e) {
-            throw new ConfigurationException("", e);
-        }
+    super();
+    try {
+      this.file = configurationFile;
+      if (!this.file.isFile()) {
+        throw new ConfigurationException("The given path " + this.file.getAbsolutePath()
+            + " is no file!");
+      }
+      this.canonicalPath = this.file.getCanonicalPath();
+    } catch (IOException e) {
+      throw new ConfigurationException("", e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getUniqueUri()
-     * {@inheritDoc}
-     */
-    public String getUniqueUri() {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getUniqueUri()
+   *      
+   */
+  public String getUniqueUri() {
 
-        return this.canonicalPath;
+    return this.canonicalPath;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getName()
+   *      
+   */
+  public String getName() {
+
+    return this.file.getName();
+  }
+
+  /**
+   * This method gets the file to access.
+   * 
+   * @return the access file.
+   */
+  public File getFile() {
+
+    return this.file;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getReadAccess()
+   *      
+   */
+  public InputStream getReadAccess() throws ConfigurationException {
+
+    try {
+      return new FileInputStream(this.file);
+    } catch (FileNotFoundException e) {
+      throw new ConfigurationReadException(this, e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getName()
-     * {@inheritDoc}
-     */
-    public String getName() {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getWriteAccess()
+   *      
+   */
+  public OutputStream getWriteAccess() throws ConfigurationException {
 
-        return this.file.getName();
+    try {
+      this.file.createNewFile();
+      return new FileOutputStream(this.file);
+    } catch (IOException e) {
+      throw new ConfigurationWriteException(this);
     }
+  }
 
-    /**
-     * This method gets the file to access.
-     * 
-     * @return the access file.
-     */
-    public File getFile() {
-        
-        return this.file;
-    }
-    
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getReadAccess()
-     * {@inheritDoc}
-     */
-    public InputStream getReadAccess() throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#isReadOnly()
+   *      
+   */
+  public boolean isReadOnly() {
 
-        try {
-            return new FileInputStream(this.file);
-        } catch (FileNotFoundException e) {
-            throw new ConfigurationReadException(this, e);
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getWriteAccess()
-     * {@inheritDoc}
-     */
-    public OutputStream getWriteAccess() throws ConfigurationException {
-
-        try {
-            this.file.createNewFile();
-            return new FileOutputStream(this.file);
-        } catch (IOException e) {
-            throw new ConfigurationWriteException(this);
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#isReadOnly()
-     * {@inheritDoc}
-     */
-    public boolean isReadOnly() {
-
-        return !(this.file.canWrite());
-    }
+    return !(this.file.canWrite());
+  }
 
 }

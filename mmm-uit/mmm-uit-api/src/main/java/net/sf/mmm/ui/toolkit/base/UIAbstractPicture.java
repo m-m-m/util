@@ -32,7 +32,7 @@ public abstract class UIAbstractPicture extends UIAbstractObject implements UIPi
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -41,7 +41,7 @@ public abstract class UIAbstractPicture extends UIAbstractObject implements UIPi
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#setSize(int, int)
-     * {@inheritDoc}
+     * 
      */
     public void setSize(int newWidth, int newHeight) {
 
@@ -51,7 +51,7 @@ public abstract class UIAbstractPicture extends UIAbstractObject implements UIPi
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#isResizeable()
-     * {@inheritDoc}
+     * 
      */
     public boolean isResizeable() {
 
@@ -60,7 +60,7 @@ public abstract class UIAbstractPicture extends UIAbstractObject implements UIPi
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-     * {@inheritDoc}
+     * 
      */
     public int getWidth() {
 
@@ -69,7 +69,7 @@ public abstract class UIAbstractPicture extends UIAbstractObject implements UIPi
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-     * {@inheritDoc}
+     * 
      */
     public int getHeight() {
 

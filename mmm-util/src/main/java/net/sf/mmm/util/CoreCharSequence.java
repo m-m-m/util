@@ -58,7 +58,7 @@ public abstract class CoreCharSequence implements CharSequence {
 
     /**
      * @see java.lang.Object#hashCode()
-     * {@inheritDoc}
+     * 
      */
     public int hashCode() {
 
@@ -76,7 +76,7 @@ public abstract class CoreCharSequence implements CharSequence {
 
     /**
      * @see CharSequence#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 

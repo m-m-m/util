@@ -16,147 +16,148 @@ import net.sf.mmm.xml.base.AbstractXmlWriter;
  */
 public class StaxXmlWriter extends AbstractXmlWriter {
 
-    /** the StAX writer */
-    private final XMLStreamWriter staxWriter;
+  /** the StAX writer */
+  private final XMLStreamWriter staxWriter;
 
-    /**
-     * The constructor.
-     * 
-     * @param streamWriter
-     *        is the writer to adapt.
-     */
-    public StaxXmlWriter(XMLStreamWriter streamWriter) {
+  /**
+   * The constructor.
+   * 
+   * @param streamWriter
+   *        is the writer to adapt.
+   */
+  public StaxXmlWriter(XMLStreamWriter streamWriter) {
 
-        super();
-        this.staxWriter = streamWriter;
-    }
+    super();
+    this.staxWriter = streamWriter;
+  }
 
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
-     *      java.lang.String, java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeStartElement(String localName, String namespacePrefix, String namespaceUri)
-            throws XmlException {
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
+   *      java.lang.String, java.lang.String)
+   * 
+   */
+  public void writeStartElement(String localName, String namespacePrefix, String namespaceUri)
+      throws XmlException {
 
-        try {
-            if ((namespacePrefix == null) && (namespaceUri == null)) {
-                this.staxWriter.writeStartElement(localName);
-            } else {
-                if (namespaceUri == null) {
-                    namespaceUri = this.staxWriter.getNamespaceContext().getNamespaceURI(namespacePrefix);                    
-                    if (namespaceUri == null) {
-                        throw new XmlNamespacePrefixUndefinedException(namespacePrefix);
-                    }
-                } else {
-                    if (namespacePrefix == null) {
-                        namespacePrefix = this.staxWriter.getPrefix(namespaceUri);                        
-                    }
-                    if (namespacePrefix == null) {
-                        // Exception or build own prefix?
-                        throw new XmlException("No such Uri" + namespaceUri);                        
-                    }
-                }
-                this.staxWriter.writeStartElement(namespacePrefix, localName, namespaceUri);                
-            }
-        } catch (XMLStreamException e) {
-            // TODO
-            throw new XmlException("", e);
-        }        
-    }
-
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
-     *      java.lang.String, java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeAttribute(String localName, String value, String namespacePrefix)
-            throws XmlException {
-
-        try {
-            if (namespacePrefix == null) {
-                this.staxWriter.writeAttribute(localName, value);
-            } else {
-                String namespaceUri = this.staxWriter.getNamespaceContext().getNamespaceURI(namespacePrefix);                    
-                if (namespaceUri == null) {
-                    throw new XmlNamespacePrefixUndefinedException(namespacePrefix);
-                }                
-                this.staxWriter.writeAttribute(namespaceUri, localName, value);            
-            }
-        } catch (XMLStreamException e) {
-            // TODO
-            throw new XmlException("", e);
+    try {
+      if ((namespacePrefix == null) && (namespaceUri == null)) {
+        this.staxWriter.writeStartElement(localName);
+      } else {
+        if (namespaceUri == null) {
+          namespaceUri = this.staxWriter.getNamespaceContext().getNamespaceURI(namespacePrefix);
+          if (namespaceUri == null) {
+            throw new XmlNamespacePrefixUndefinedException(namespacePrefix);
+          }
+        } else {
+          if (namespacePrefix == null) {
+            namespacePrefix = this.staxWriter.getPrefix(namespaceUri);
+          }
+          if (namespacePrefix == null) {
+            // Exception or build own prefix?
+            throw new XmlException("No such Uri" + namespaceUri);
+          }
         }
+        this.staxWriter.writeStartElement(namespacePrefix, localName, namespaceUri);
+      }
+    } catch (XMLStreamException e) {
+      // TODO
+      throw new XmlException("", e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
-     *      java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeNamespaceDeclaration(String namespacePrefix, String namespaceUri)
-            throws XmlException {
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
+   *      java.lang.String, java.lang.String)
+   * 
+   */
+  public void writeAttribute(String localName, String value, String namespacePrefix)
+      throws XmlException {
 
-        try {
-            this.staxWriter.writeNamespace(namespacePrefix, namespaceUri);
-        } catch (XMLStreamException e) {
-            // TODO
-            throw new XmlException("", e);
+    try {
+      if (namespacePrefix == null) {
+        this.staxWriter.writeAttribute(localName, value);
+      } else {
+        String namespaceUri = this.staxWriter.getNamespaceContext()
+            .getNamespaceURI(namespacePrefix);
+        if (namespaceUri == null) {
+          throw new XmlNamespacePrefixUndefinedException(namespacePrefix);
         }
+        this.staxWriter.writeAttribute(namespaceUri, localName, value);
+      }
+    } catch (XMLStreamException e) {
+      // TODO
+      throw new XmlException("", e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeCharacters(String text) throws XmlException {
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
+   *      java.lang.String)
+   * 
+   */
+  public void writeNamespaceDeclaration(String namespacePrefix, String namespaceUri)
+      throws XmlException {
 
-        try {
-            this.staxWriter.writeCharacters(text);
-        } catch (XMLStreamException e) {
-            throw new XmlIOException(e);
-        }
+    try {
+      this.staxWriter.writeNamespace(namespacePrefix, namespaceUri);
+    } catch (XMLStreamException e) {
+      // TODO
+      throw new XmlException("", e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeCData(java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeCData(String text) throws XmlException {
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
+   * 
+   */
+  public void writeCharacters(String text) throws XmlException {
 
-        try {
-            this.staxWriter.writeCData(text);
-        } catch (XMLStreamException e) {
-            throw new XmlIOException(e);
-        }
+    try {
+      this.staxWriter.writeCharacters(text);
+    } catch (XMLStreamException e) {
+      throw new XmlIOException(e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeComment(java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeComment(String comment) throws XmlException {
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCData(java.lang.String)
+   * 
+   */
+  public void writeCData(String text) throws XmlException {
 
-        try {
-            this.staxWriter.writeComment(comment);
-        } catch (XMLStreamException e) {
-            throw new XmlIOException(e);
-        }
+    try {
+      this.staxWriter.writeCData(text);
+    } catch (XMLStreamException e) {
+      throw new XmlIOException(e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
-     *      java.lang.String)
-     * {@inheritDoc}
-     */
-    public void writeEndElement(String localName, String namespacePrefix) throws XmlException {
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeComment(java.lang.String)
+   * 
+   */
+  public void writeComment(String comment) throws XmlException {
 
-        try {
-            this.staxWriter.writeEndElement();
-        } catch (XMLStreamException e) {
-            // TODO
-            throw new XmlException("", e);
-        }
+    try {
+      this.staxWriter.writeComment(comment);
+    } catch (XMLStreamException e) {
+      throw new XmlIOException(e);
     }
+  }
+
+  /**
+   * @see net.sf.mmm.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
+   *      java.lang.String)
+   * 
+   */
+  public void writeEndElement(String localName, String namespacePrefix) throws XmlException {
+
+    try {
+      this.staxWriter.writeEndElement();
+    } catch (XMLStreamException e) {
+      // TODO
+      throw new XmlException("", e);
+    }
+  }
 
 }

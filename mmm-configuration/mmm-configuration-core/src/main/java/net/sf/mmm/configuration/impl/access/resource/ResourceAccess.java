@@ -26,123 +26,123 @@ import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
  */
 public class ResourceAccess extends AbstractConfigurationAccess {
 
-    /** the file to access */
-    private final File file;
+  /** the file to access */
+  private final File file;
 
-    /** the file to access */
-    private final URL classpathResource;
+  /** the file to access */
+  private final URL classpathResource;
 
-    /** @see #getPath() */
-    private final String path;
+  /** @see #getPath() */
+  private final String path;
 
-    /**
-     * The constructor.
-     * 
-     * @param href
-     *        is the absolute href of the resource to access.
-     */
-    public ResourceAccess(String href) {
+  /**
+   * The constructor.
+   * 
+   * @param href
+   *        is the absolute href of the resource to access.
+   */
+  public ResourceAccess(String href) {
 
-        this(new File("").getAbsolutePath(), href);
+    this(new File("").getAbsolutePath(), href);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param fileRootPath
+   *        is the root path in the filesystem where the lookup for
+   *        file-resources.
+   * @param href
+   *        is the absolute href of the resource to access.
+   */
+  public ResourceAccess(String fileRootPath, String href) {
+
+    super();
+    this.path = href;
+    this.file = new File(fileRootPath, href);
+    String resourcePath = href;
+    if (resourcePath.charAt(0) == '/') {
+      resourcePath = resourcePath.substring(1);
     }
-
-    /**
-     * The constructor.
-     * 
-     * @param fileRootPath
-     *        is the root path in the filesystem where the lookup for
-     *        file-resources.
-     * @param href
-     *        is the absolute href of the resource to access.
-     */
-    public ResourceAccess(String fileRootPath, String href) {
-
-        super();
-        this.path = href;
-        this.file = new File(fileRootPath, href);
-        String resourcePath = href;
-        if (resourcePath.charAt(0) == '/') {
-            resourcePath = resourcePath.substring(1);
-        }
-        this.classpathResource = Thread.currentThread().getContextClassLoader().getResource(
-                resourcePath);
-        if ((this.classpathResource == null) && (!this.file.isFile())) {
-            throw new ConfigurationReadException(href);
-        }
-        setContextPrefix(ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_PREFIX
-                + ResourceAccessFactory.CONTEXT_DEFAULT_NAME);
+    this.classpathResource = Thread.currentThread().getContextClassLoader().getResource(
+        resourcePath);
+    if ((this.classpathResource == null) && (!this.file.isFile())) {
+      throw new ConfigurationReadException(href);
     }
+    setContextPrefix(ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_PREFIX
+        + ResourceAccessFactory.CONTEXT_DEFAULT_NAME);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getUniqueUri()
-     *      {@inheritDoc}
-     */
-    public String getUniqueUri() {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getUniqueUri()
+   *      
+   */
+  public String getUniqueUri() {
 
-        return this.file.getPath();
+    return this.file.getPath();
+  }
+
+  /**
+   * This method gets the current path where the resource is located.
+   * 
+   * @return the path of the resource.
+   */
+  public String getPath() {
+
+    return this.path;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getName()
+   *      
+   */
+  public String getName() {
+
+    return this.file.getPath();
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getReadAccess()
+   *      
+   */
+  public InputStream getReadAccess() throws ConfigurationException {
+
+    try {
+      if (this.file.isFile()) {
+        return new FileInputStream(this.file);
+      } else if (this.classpathResource != null) {
+        return this.classpathResource.openStream();
+      } else {
+        throw new FileNotFoundException(this.file.getPath());
+      }
+    } catch (IOException e) {
+      throw new ConfigurationReadException(this, e);
     }
+  }
 
-    /**
-     * This method gets the current path where the resource is located.
-     * 
-     * @return the path of the resource.
-     */
-    public String getPath() {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getWriteAccess()
+   *      
+   */
+  public OutputStream getWriteAccess() throws ConfigurationException {
 
-        return this.path;
+    try {
+      if (!this.file.isFile()) {
+        this.file.createNewFile();
+      }
+      return new FileOutputStream(this.file);
+    } catch (IOException e) {
+      throw new ConfigurationWriteException(this, e);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getName()
-     *      {@inheritDoc}
-     */
-    public String getName() {
+  /**
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#isReadOnly()
+   *      
+   */
+  public boolean isReadOnly() {
 
-        return this.file.getPath();
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getReadAccess()
-     *      {@inheritDoc}
-     */
-    public InputStream getReadAccess() throws ConfigurationException {
-
-        try {
-            if (this.file.isFile()) {
-                return new FileInputStream(this.file);
-            } else if (this.classpathResource != null) {
-                return this.classpathResource.openStream();
-            } else {
-                throw new FileNotFoundException(this.file.getPath());
-            }
-        } catch (IOException e) {
-            throw new ConfigurationReadException(this, e);
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getWriteAccess()
-     *      {@inheritDoc}
-     */
-    public OutputStream getWriteAccess() throws ConfigurationException {
-
-        try {
-            if (!this.file.isFile()) {
-                this.file.createNewFile();
-            }
-            return new FileOutputStream(this.file);
-        } catch (IOException e) {
-            throw new ConfigurationWriteException(this, e);
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#isReadOnly()
-     *      {@inheritDoc}
-     */
-    public boolean isReadOnly() {
-
-        return false;
-    }
+    return false;
+  }
 
 }

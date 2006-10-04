@@ -21,7 +21,7 @@ public class DateUtil {
     private static ThreadLocal<DateFormat> DATE_FORMAT = new ThreadLocal<DateFormat>() {
 
         /**
-         * @see java.lang.ThreadLocal#initialValue() {@inheritDoc}
+         * @see java.lang.ThreadLocal#initialValue() 
          */
         @Override
         protected DateFormat initialValue() {

@@ -13,40 +13,41 @@ import junit.framework.TestCase;
 /**
  * This is the {@link junit.framework.TestCase} for testing the class
  * {@link EmptyValue}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class EmptyValueTest extends TestCase {
 
-    /**
-     * The constructor.
-     */
-    public EmptyValueTest() {
+  /**
+   * The constructor.
+   */
+  public EmptyValueTest() {
 
-        super();
+    super();
+  }
+
+  @Test
+  public void testEmptyValue() {
+
+    MutableGenericValueIF value = EmptyValue.getInstance();
+    assertNotNull(value);
+    assertTrue(value.isEmpty());
+    try {
+      value.getObject();
+      fail("Exception expected");
+    } catch (ValueNotSetException e) {
     }
-    
-    @Test
-    public void testEmptyValue() {
-        MutableGenericValueIF value = EmptyValue.getInstance();
-        assertNotNull(value);
-        assertTrue(value.isEmpty());
-        try {
-            value.getObject();
-            fail("Exception expected");
-        } catch (ValueNotSetException e) {
-        }
-        try {
-            value.setObject(value);
-            fail("Exception expected");
-        } catch (ValueNotEditableException e) {
-        }
-        assertTrue(value.isEmpty());
-        String s = "yipiieh!";
-        assertEquals(s, value.getString(s));
-        assertTrue(value.isEmpty());
-        
+    try {
+      value.setObject(value);
+      fail("Exception expected");
+    } catch (ValueNotEditableException e) {
     }
-    
+    assertTrue(value.isEmpty());
+    String s = "yipiieh!";
+    assertEquals(s, value.getString(s));
+    assertTrue(value.isEmpty());
+
+  }
+
 }

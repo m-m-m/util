@@ -46,7 +46,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public JComponent getSwingComponent() {
@@ -56,7 +56,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidgetIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     public UIListModelIF<E> getModel() {
 
@@ -65,7 +65,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidgetIF#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public void setModel(UIListModelIF<E> newModel) {
 
@@ -78,7 +78,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndexIF#getSelectedIndex()
-     * {@inheritDoc}
+     * 
      */
     public int getSelectedIndex() {
 
@@ -87,7 +87,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF#setSelectedIndex(int)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedIndex(int newIndex) {
 
@@ -96,7 +96,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -105,7 +105,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditableIF#isEditable()
-     * {@inheritDoc}
+     * 
      */
     public boolean isEditable() {
 
@@ -114,7 +114,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditableIF#setEditable(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setEditable(boolean editableFlag) {
 
@@ -123,7 +123,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadTextIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 
@@ -132,7 +132,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTextIF#setText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setText(String text) {
 
@@ -141,7 +141,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF#setSelectedValue(Object)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedValue(E newValue) {
 
@@ -153,7 +153,7 @@ public class UIComboBox<E> extends UIWidget implements UIComboBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValueIF#getSelectedValue()
-     * {@inheritDoc}
+     * 
      */
     public E getSelectedValue() {
 

@@ -59,7 +59,7 @@ public class ComponentInstanceContainer<S> implements ComponentInstanceContainer
 
     /**
      * @see net.sf.mmm.framework.api.ComponentInstanceContainerIF#getInstance()
-     * {@inheritDoc}
+     * 
      */
     public S getInstance() {
 
@@ -83,7 +83,7 @@ public class ComponentInstanceContainer<S> implements ComponentInstanceContainer
 
     /**
      * @see net.sf.mmm.framework.api.ComponentInstanceContainerIF#getInstanceId()
-     * {@inheritDoc}
+     * 
      */
     public String getInstanceId() {
 
@@ -106,7 +106,7 @@ public class ComponentInstanceContainer<S> implements ComponentInstanceContainer
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public String toString() {

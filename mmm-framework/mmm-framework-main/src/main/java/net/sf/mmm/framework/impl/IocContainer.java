@@ -66,7 +66,7 @@ public class IocContainer extends AbstractIocContainer {
 
     /**
      * @see net.sf.mmm.framework.api.IocContainerIF#createChildContainer(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public MutableIocContainerIF createChildContainer(String name) {
 
@@ -75,7 +75,7 @@ public class IocContainer extends AbstractIocContainer {
 
     /**
      * @see net.sf.mmm.framework.base.AbstractIocContainer#debug(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void debug(String message) {
@@ -85,7 +85,7 @@ public class IocContainer extends AbstractIocContainer {
 
     /**
      * @see net.sf.mmm.framework.base.AbstractIocContainer#info(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void info(String message) {
@@ -95,7 +95,7 @@ public class IocContainer extends AbstractIocContainer {
 
     /**
      * @see net.sf.mmm.framework.base.AbstractIocContainer#warning(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void warning(String message) {

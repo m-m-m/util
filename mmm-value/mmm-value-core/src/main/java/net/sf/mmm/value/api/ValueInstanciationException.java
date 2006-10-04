@@ -11,20 +11,20 @@ import net.sf.mmm.value.CoreNlsResourceBundle;
  */
 public class ValueInstanciationException extends ValueException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -1522159316208300410L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -1522159316208300410L;
 
-    /**
-     * The constructor.
-     * 
-     * @param javaClass
-     *        is the class that could not be instantiated.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public ValueInstanciationException(Class javaClass, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param javaClass
+   *        is the class that could not be instantiated.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public ValueInstanciationException(Class javaClass, Throwable nested) {
 
-        super(nested, CoreNlsResourceBundle.ERR_INSTANTIATION_FAILED, javaClass);
-    }
+    super(nested, CoreNlsResourceBundle.ERR_INSTANTIATION_FAILED, javaClass);
+  }
 
 }

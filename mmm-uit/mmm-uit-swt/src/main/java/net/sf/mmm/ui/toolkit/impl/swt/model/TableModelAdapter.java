@@ -119,7 +119,7 @@ public class TableModelAdapter implements UITableModelListenerIF, Listener, Runn
 
     /**
      * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
-     * {@inheritDoc}
+     * 
      */
     public void handleEvent(Event swtEvent) {
 
@@ -144,7 +144,7 @@ public class TableModelAdapter implements UITableModelListenerIF, Listener, Runn
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF#tableModelChanged(net.sf.mmm.ui.toolkit.api.event.UITableModelEvent)
-     * {@inheritDoc}
+     * 
      */
     public synchronized void tableModelChanged(UITableModelEvent changeEvent) {
 

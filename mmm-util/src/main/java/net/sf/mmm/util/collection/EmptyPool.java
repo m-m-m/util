@@ -22,7 +22,7 @@ public class EmptyPool<E> extends AbstractPool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.PoolIF#add(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public void add(E element) {
 
@@ -31,7 +31,7 @@ public class EmptyPool<E> extends AbstractPool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.PoolIF#getMaximumSize()
-     * {@inheritDoc}
+     * 
      */
     public int getMaximumSize() {
 
@@ -40,7 +40,7 @@ public class EmptyPool<E> extends AbstractPool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.PoolIF#size()
-     * {@inheritDoc}
+     * 
      */
     public int size() {
 
@@ -49,7 +49,7 @@ public class EmptyPool<E> extends AbstractPool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.PoolIF#take()
-     * {@inheritDoc}
+     * 
      */
     public E take() {
 

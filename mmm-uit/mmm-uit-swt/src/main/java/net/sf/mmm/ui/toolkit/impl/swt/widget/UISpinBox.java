@@ -50,7 +50,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public AbstractSyncControlAccess getSyncAccess() {
@@ -60,7 +60,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -69,7 +69,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UISpinBoxIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     public UIListModelIF<E> getModel() {
 
@@ -78,7 +78,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF#setSelectedIndex(int)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedIndex(int newIndex) {
 
@@ -87,7 +87,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndexIF#getSelectedIndex()
-     * {@inheritDoc}
+     * 
      */
     public int getSelectedIndex() {
 
@@ -96,7 +96,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF#setSelectedValue(Object)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedValue(E newValue) {
 
@@ -108,7 +108,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValueIF#getSelectedValue()
-     * {@inheritDoc}
+     * 
      */
     public E getSelectedValue() {
 
@@ -121,7 +121,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidgetIF#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public void setModel(UIListModelIF<E> newModel) {
 
@@ -131,7 +131,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditableIF#isEditable()
-     * {@inheritDoc}
+     * 
      */
     public boolean isEditable() {
 
@@ -140,7 +140,7 @@ public class UISpinBox<E> extends UIWidget implements UISpinBoxIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditableIF#setEditable(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setEditable(boolean editableFlag) {
 

@@ -71,7 +71,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
 
     /**
      * @see java.lang.Runnable#run()
-     * {@inheritDoc}
+     * 
      */
     public final void run() {
 

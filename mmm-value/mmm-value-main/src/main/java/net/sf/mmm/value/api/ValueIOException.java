@@ -13,7 +13,7 @@ public class ValueIOException extends ValueException {
 
     /**
      * @see ValueException#ValueException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ValueIOException(String internaitionalizedMessage, Object... arguments) {
 
@@ -22,7 +22,7 @@ public class ValueIOException extends ValueException {
 
     /**
      * @see ValueException#ValueException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ValueIOException(Throwable nested, String internaitionalizedMessage,
             Object... arguments) {

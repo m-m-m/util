@@ -16,47 +16,45 @@ import net.sf.mmm.configuration.api.ConfigurationException;
  */
 public class CompositeConfigurationException extends ConfigurationException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -7509766690812596716L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -7509766690812596716L;
 
-    /** The agregated exceptions */
-    private final List<ConfigurationException> trouble;
+  /** The agregated exceptions */
+  private final List<ConfigurationException> trouble;
 
-    /**
-     * The constructor.
-     * 
-     * @param childExceptions
-     */
-    public CompositeConfigurationException(List<ConfigurationException> childExceptions) {
+  /**
+   * The constructor.
+   * 
+   * @param childExceptions
+   */
+  public CompositeConfigurationException(List<ConfigurationException> childExceptions) {
 
-        super("");
-        this.trouble = childExceptions;
+    super("");
+    this.trouble = childExceptions;
+  }
+
+  /**
+   * @see java.lang.Throwable#printStackTrace(java.io.PrintStream) 
+   */
+  public void printStackTrace(PrintStream s) {
+
+    super.printStackTrace(s);
+    for (int i = 0; i < this.trouble.size(); i++) {
+      s.println("" + i + ". child exception:");
+      this.trouble.get(i).printStackTrace(s);
     }
+  }
 
-    /**
-     * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
-     * {@inheritDoc}
-     */
-    public void printStackTrace(PrintStream s) {
+  /**
+   * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter) 
+   */
+  public void printStackTrace(PrintWriter s) {
 
-        super.printStackTrace(s);
-        for (int i = 0; i < this.trouble.size(); i++) {
-            s.println("" + i + ". child exception:");
-            this.trouble.get(i).printStackTrace(s);
-        }
+    super.printStackTrace(s);
+    for (int i = 0; i < this.trouble.size(); i++) {
+      s.println("" + i + ". child exception:");
+      this.trouble.get(i).printStackTrace(s);
     }
-
-    /**
-     * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
-     * {@inheritDoc}
-     */
-    public void printStackTrace(PrintWriter s) {
-
-        super.printStackTrace(s);
-        for (int i = 0; i < this.trouble.size(); i++) {
-            s.println("" + i + ". child exception:");
-            this.trouble.get(i).printStackTrace(s);
-        }
-    }
+  }
 
 }

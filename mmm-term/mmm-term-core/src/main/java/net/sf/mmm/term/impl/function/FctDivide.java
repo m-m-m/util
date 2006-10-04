@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.impl.function;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.OperatorPriority;
 
@@ -56,7 +56,7 @@ public class FctDivide {
 
         double quotient = argument2.doubleValue();
         if (quotient == 0) {
-            throw new CalculationException(NlsResourceBundle.ERR_FCT_DIV_ZERO);
+            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);
         }
         return Double.valueOf(argument1.doubleValue() / quotient);
     }

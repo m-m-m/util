@@ -11,47 +11,47 @@ package net.sf.mmm.configuration.base;
  */
 public class EntryPointConfiguration extends ConfigurationProxy {
 
-    /** the parent configuration */
-    private final AbstractConfiguration parent;
+  /** the parent configuration */
+  private final AbstractConfiguration parent;
 
-    /** the entry point */
-    private final AbstractConfiguration delegate;
+  /** the entry point */
+  private final AbstractConfiguration delegate;
 
-    /**
-     * The constructor.
-     * 
-     * @param parentConfiguration
-     *        is the parent of this configuration.
-     * @param entryPoint
-     *        is the configuration that should appear as child of the
-     *        <code>parentConfiguration</code>.
-     */
-    public EntryPointConfiguration(AbstractConfiguration parentConfiguration,
-            AbstractConfiguration entryPoint) {
+  /**
+   * The constructor.
+   * 
+   * @param parentConfiguration
+   *        is the parent of this configuration.
+   * @param entryPoint
+   *        is the configuration that should appear as child of the
+   *        <code>parentConfiguration</code>.
+   */
+  public EntryPointConfiguration(AbstractConfiguration parentConfiguration,
+      AbstractConfiguration entryPoint) {
 
-        super();
-        this.parent = parentConfiguration;
-        this.delegate = entryPoint;
-    }
+    super();
+    this.parent = parentConfiguration;
+    this.delegate = entryPoint;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.ConfigurationProxy#getDelegate()
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration getDelegate() {
+  /**
+   * @see net.sf.mmm.configuration.base.ConfigurationProxy#getDelegate()
+   *      
+   */
+  @Override
+  protected AbstractConfiguration getDelegate() {
 
-        return this.delegate;
-    }
+    return this.delegate;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.ConfigurationProxy#getParent()
-     * {@inheritDoc}
-     */
-    @Override
-    protected AbstractConfiguration getParent() {
+  /**
+   * @see net.sf.mmm.configuration.base.ConfigurationProxy#getParent()
+   *      
+   */
+  @Override
+  protected AbstractConfiguration getParent() {
 
-        return this.parent;
-    }
+    return this.parent;
+  }
 
 }

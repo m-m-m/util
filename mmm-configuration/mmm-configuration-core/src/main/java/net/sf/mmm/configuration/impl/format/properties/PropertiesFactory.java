@@ -21,75 +21,74 @@ import net.sf.mmm.value.api.ValueException;
  */
 public class PropertiesFactory extends AbstractConfigurationFactory {
 
-    /**
-     * this is the default
-     * {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT format} name for this
-     * implementation.
-     * 
-     * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#CONTEXT_VARIABLE_PREFIX
-     */
-    public static final String CONTEXT_DEFAULT_NAME = "properties";
+  /**
+   * this is the default
+   * {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT format} name for this
+   * implementation.
+   * 
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#CONTEXT_VARIABLE_PREFIX
+   */
+  public static final String CONTEXT_DEFAULT_NAME = "properties";
 
-    /** the suffix for the {@link PropertiesDocument#getSeparator() separator} */
-    public static final String CONTEXT_VARIABLE_SUFFIX_SEPARATOR = ".separator";
+  /** the suffix for the {@link PropertiesDocument#getSeparator() separator} */
+  public static final String CONTEXT_VARIABLE_SUFFIX_SEPARATOR = ".separator";
 
-    /** the suffix for the {@link PropertiesDocument#isFlat() flat} flag */
-    public static final String CONTEXT_VARIABLE_SUFFIX_FLAT = ".flat";
+  /** the suffix for the {@link PropertiesDocument#isFlat() flat} flag */
+  public static final String CONTEXT_VARIABLE_SUFFIX_FLAT = ".flat";
 
-    /** the default {@link PropertiesDocument#getSeparator() separator} */
-    public static final String DEFAULT_SEPARATOR = ".";
+  /** the default {@link PropertiesDocument#getSeparator() separator} */
+  public static final String DEFAULT_SEPARATOR = ".";
 
-    /** the default {@link PropertiesDocument#getSeparator() separator} */
-    public static final boolean DEFAULT_FLAT = false;
+  /** the default {@link PropertiesDocument#getSeparator() separator} */
+  public static final boolean DEFAULT_FLAT = false;
 
-    /** the {@link PropertiesDocument#isFlat() flat} flag */
-    private boolean flat;
+  /** the {@link PropertiesDocument#isFlat() flat} flag */
+  private boolean flat;
 
-    /** the {@link PropertiesDocument#getSeparator() separator} */
-    private String propertyKeySeparator;
+  /** the {@link PropertiesDocument#getSeparator() separator} */
+  private String propertyKeySeparator;
 
-    /**
-     * The constructor.
-     */
-    public PropertiesFactory() {
+  /**
+   * The constructor.
+   */
+  public PropertiesFactory() {
 
-        super();
-        this.propertyKeySeparator = DEFAULT_SEPARATOR;
-    }
+    super();
+    this.propertyKeySeparator = DEFAULT_SEPARATOR;
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#configure(java.lang.String,
-     *      net.sf.mmm.context.api.ContextIF,
-     *      net.sf.mmm.configuration.api.ConfigurationIF)
-     */
-    public void configure(String prefix, ContextIF context, ConfigurationIF include)
-            throws ConfigurationException, ValueException {
+  /**
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#configure(java.lang.String,
+   *      net.sf.mmm.context.api.ContextIF,
+   *      net.sf.mmm.configuration.api.ConfigurationIF)
+   */
+  public void configure(String prefix, ContextIF context, ConfigurationIF include)
+      throws ConfigurationException, ValueException {
 
-        this.propertyKeySeparator = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_SEPARATOR)
-                .getString(DEFAULT_SEPARATOR);
-        this.flat = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_FLAT)
-                .getBoolean(Boolean.valueOf(DEFAULT_FLAT)).booleanValue();
-    }
+    this.propertyKeySeparator = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_SEPARATOR)
+        .getString(DEFAULT_SEPARATOR);
+    this.flat = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_FLAT).getBoolean(
+        Boolean.valueOf(DEFAULT_FLAT)).booleanValue();
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
-     *      net.sf.mmm.context.api.MutableContextIF) {@inheritDoc}
-     */
-    public AbstractConfigurationDocument create(ConfigurationAccessIF access, MutableContextIF context)
-            throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
+   *      net.sf.mmm.context.api.MutableContextIF) 
+   */
+  public AbstractConfigurationDocument create(ConfigurationAccessIF access, MutableContextIF context)
+      throws ConfigurationException {
 
-        return new PropertiesDocument(access, context, this.propertyKeySeparator, this.flat);
-    }
+    return new PropertiesDocument(access, context, this.propertyKeySeparator, this.flat);
+  }
 
-    /**
-     * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
-     *      net.sf.mmm.configuration.base.AbstractConfiguration) {@inheritDoc}
-     */
-    public AbstractConfigurationDocument create(ConfigurationAccessIF access,
-            AbstractConfiguration parentConfiguration) throws ConfigurationException {
+  /**
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
+   *      net.sf.mmm.configuration.base.AbstractConfiguration) 
+   */
+  public AbstractConfigurationDocument create(ConfigurationAccessIF access,
+      AbstractConfiguration parentConfiguration) throws ConfigurationException {
 
-        return new PropertiesDocument(access, parentConfiguration, this.propertyKeySeparator,
-                this.flat);
-    }
+    return new PropertiesDocument(access, parentConfiguration, this.propertyKeySeparator, this.flat);
+  }
 
 }

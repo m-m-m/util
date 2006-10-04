@@ -50,7 +50,7 @@ public abstract class AbstractComponentProvider<S> implements ComponentProviderI
     
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#getDescriptor()
-     * {@inheritDoc}
+     * 
      */
     public final ComponentDescriptorIF<S> getDescriptor() {
 

@@ -47,7 +47,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#doInitializeListener()
-     * {@inheritDoc}
+     * 
      */
     protected boolean doInitializeListener() {
 
@@ -55,7 +55,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowActivated(WindowEvent e) {
 
@@ -64,7 +64,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowClosed(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowClosed(WindowEvent e) {
 
@@ -73,7 +73,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowClosing(WindowEvent e) {
 
@@ -82,7 +82,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowDeactivated(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowDeactivated(WindowEvent e) {
 
@@ -91,7 +91,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowDeiconified(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowDeiconified(WindowEvent e) {
 
@@ -100,7 +100,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowIconified(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowIconified(WindowEvent e) {
 
@@ -109,7 +109,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
             /**
              * @see java.awt.event.WindowListener#windowOpened(java.awt.event.WindowEvent)
-             * {@inheritDoc}
+             * 
      */
             public void windowOpened(WindowEvent e) {
 
@@ -123,7 +123,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisibleIF#isVisible()
-     * {@inheritDoc}
+     * 
      */
     public boolean isVisible() {
 
@@ -132,7 +132,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisibleIF#setVisible(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setVisible(boolean visible) {
 
@@ -141,7 +141,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIWindowIF#pack()
-     * {@inheritDoc}
+     * 
      */
     public void pack() {
 
@@ -151,7 +151,7 @@ public abstract class UIWindow extends UIAbstractWindow {
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWritePositionIF#setPosition(int,
      *      int)
-     * {@inheritDoc}
+     * 
      */
     public void setPosition(int x, int y) {
 
@@ -160,7 +160,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#setSize(int, int)
-     * {@inheritDoc}
+     * 
      */
     public void setSize(int width, int height) {
 
@@ -169,7 +169,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadPositionIF#getX()
-     * {@inheritDoc}
+     * 
      */
     public int getX() {
 
@@ -178,7 +178,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadPositionIF#getY()
-     * {@inheritDoc}
+     * 
      */
     public int getY() {
 
@@ -187,7 +187,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-     * {@inheritDoc}
+     * 
      */
     public int getWidth() {
 
@@ -196,7 +196,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-     * {@inheritDoc}
+     * 
      */
     public int getHeight() {
 
@@ -205,7 +205,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#dispose()
-     * {@inheritDoc}
+     * 
      */
     public void dispose() {
 
@@ -214,7 +214,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#isDisposed()
-     * {@inheritDoc}
+     * 
      */
     public boolean isDisposed() {
 
@@ -224,7 +224,7 @@ public abstract class UIWindow extends UIAbstractWindow {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#isResizeable()
-     * {@inheritDoc}
+     * 
      */
     public boolean isResizeable() {
 

@@ -40,7 +40,7 @@ public class UIProgressBar extends UIWidget implements UIProgressBarIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public @Override JComponent getSwingComponent() {
 
@@ -49,7 +49,7 @@ public class UIProgressBar extends UIWidget implements UIProgressBarIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBarIF#getProgress()
-     * {@inheritDoc}
+     * 
      */
     public int getProgress() {
 
@@ -58,7 +58,7 @@ public class UIProgressBar extends UIWidget implements UIProgressBarIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBarIF#setProgress(int)
-     * {@inheritDoc}
+     * 
      */
     public void setProgress(int newProgress) {
 
@@ -67,7 +67,7 @@ public class UIProgressBar extends UIWidget implements UIProgressBarIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -76,7 +76,7 @@ public class UIProgressBar extends UIWidget implements UIProgressBarIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBarIF#getOrientation()
-     * {@inheritDoc}
+     * 
      */
     public Orientation getOrientation() {
 
@@ -89,7 +89,7 @@ public class UIProgressBar extends UIWidget implements UIProgressBarIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBarIF#isIndeterminate()
-     * {@inheritDoc}
+     * 
      */
     public boolean isIndeterminate() {
 

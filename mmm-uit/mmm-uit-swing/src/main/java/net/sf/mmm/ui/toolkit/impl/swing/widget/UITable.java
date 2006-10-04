@@ -53,7 +53,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public JComponent getSwingComponent() {
@@ -63,7 +63,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -72,7 +72,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITableIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     public UITableModelIF getModel() {
 
@@ -85,7 +85,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UITableIF#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModelIF)
-     * {@inheritDoc}
+     * 
      */
     public void setModel(UITableModelIF newModel) {
 
@@ -99,7 +99,7 @@ public class UITable extends UIWidget implements UITableIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getActiveSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected JComponent getActiveSwingComponent() {

@@ -72,7 +72,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#createSynchron()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void createSynchron() {
@@ -84,7 +84,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#performSynchron(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void performSynchron(String operation) {
@@ -104,7 +104,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess#getSwtObject()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public MySpinner getSwtObject() {

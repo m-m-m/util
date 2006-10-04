@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 
 /**
  * This is the exception thrown if a
@@ -27,7 +27,7 @@ public class IllegalArgumentCountException extends CalculationException {
      */
     public IllegalArgumentCountException(FunctionIF function, int argumentCount) {
 
-        super(NlsResourceBundle.ERR_ILLEGAL_ARG_COUNT, function, Integer.valueOf(argumentCount),
+        super(CoreNlsResourceBundle.ERR_ILLEGAL_ARG_COUNT, function, Integer.valueOf(argumentCount),
                 Integer.valueOf(function.getMinimumArgumentCount()), Integer.valueOf(function
                         .getMaximumArgumentCount()));
     }

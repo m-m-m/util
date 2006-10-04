@@ -50,7 +50,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public JComponent getSwingComponent() {
 
@@ -59,7 +59,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setOrientation(Orientation)
-     * {@inheritDoc}
+     * 
      */
     public void setOrientation(Orientation orientation) {
 
@@ -72,7 +72,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#getOrientation()
-     * {@inheritDoc}
+     * 
      */
     public Orientation getOrientation() {
 
@@ -85,7 +85,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setTopOrLeftComponent(UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void setTopOrLeftComponent(UIComponentIF component) {
 
@@ -103,7 +103,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setBottomOrRightComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void setBottomOrRightComponent(UIComponentIF component) {
 
@@ -124,7 +124,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#setDividerPosition(double)
-     * {@inheritDoc}
+     * 
      */
     public void setDividerPosition(double proportion) {
 
@@ -133,7 +133,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -142,7 +142,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#getTopOrLeftComponent()
-     * {@inheritDoc}
+     * 
      */
     public UIComponentIF getTopOrLeftComponent() {
 
@@ -151,7 +151,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF#getBottomOrRightComponent()
-     * {@inheritDoc}
+     * 
      */
     public UIComponentIF getBottomOrRightComponent() {
 
@@ -160,7 +160,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public UIComponentIF getComponent(int index) {
 
@@ -175,7 +175,7 @@ public class UISplitPanel extends UIComposite implements UISplitPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UICompositeIF#getComponentCount()
-     * {@inheritDoc}
+     * 
      */
     public int getComponentCount() {
 

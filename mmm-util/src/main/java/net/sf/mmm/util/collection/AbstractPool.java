@@ -21,7 +21,7 @@ public abstract class AbstractPool<E> implements PoolIF<E> {
 
     /**
      * @see net.sf.mmm.util.collection.PoolIF#isEmpty()
-     * {@inheritDoc}
+     * 
      */
     public boolean isEmpty() {
 

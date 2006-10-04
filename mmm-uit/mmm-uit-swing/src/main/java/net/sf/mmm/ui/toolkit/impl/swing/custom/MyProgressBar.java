@@ -35,7 +35,7 @@ public class MyProgressBar extends JProgressBar {
 
     /**
      * @see java.awt.Component#paint(java.awt.Graphics)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void paint(Graphics g) {

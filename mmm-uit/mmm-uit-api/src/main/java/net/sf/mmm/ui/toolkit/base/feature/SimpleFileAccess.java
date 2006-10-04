@@ -34,7 +34,7 @@ public class SimpleFileAccess implements FileAccessIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.FileAccessIF#getFile()
-     * {@inheritDoc}
+     * 
      */
     public InputStream getFile() throws IOException {
 
@@ -43,7 +43,7 @@ public class SimpleFileAccess implements FileAccessIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.FileAccessIF#getFilename()
-     * {@inheritDoc}
+     * 
      */
     public String getFilename() {
 
@@ -52,7 +52,7 @@ public class SimpleFileAccess implements FileAccessIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.FileAccessIF#getSize()
-     * {@inheritDoc}
+     * 
      */
     public long getSize() {
 

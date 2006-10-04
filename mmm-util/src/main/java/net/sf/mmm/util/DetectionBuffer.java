@@ -81,7 +81,7 @@ public class DetectionBuffer extends AbstractCharSequence {
 
     /**
      * @see java.lang.CharSequence#length()
-     * {@inheritDoc}
+     * 
      */
     public int length() {
 
@@ -90,7 +90,7 @@ public class DetectionBuffer extends AbstractCharSequence {
 
     /**
      * @see java.lang.CharSequence#charAt(int)
-     * {@inheritDoc}
+     * 
      */
     public char charAt(int index) {
 

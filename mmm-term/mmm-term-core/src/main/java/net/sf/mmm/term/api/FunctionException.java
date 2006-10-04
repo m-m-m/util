@@ -16,7 +16,7 @@ public class FunctionException extends NlsException {
 
     /**
      * @see NlsException#NlsException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public FunctionException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +25,7 @@ public class FunctionException extends NlsException {
 
     /**
      * @see NlsException#NlsException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public FunctionException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

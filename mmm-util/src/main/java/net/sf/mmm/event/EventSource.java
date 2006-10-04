@@ -35,7 +35,7 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
 
     /**
      * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void addListener(L listener) {
 
@@ -44,7 +44,7 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
 
     /**
      * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeListener(L listener) {
 

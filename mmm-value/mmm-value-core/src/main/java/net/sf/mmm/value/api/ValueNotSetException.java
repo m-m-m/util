@@ -12,30 +12,29 @@ import net.sf.mmm.value.CoreNlsResourceBundle;
  */
 public class ValueNotSetException extends ValueException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -8722582228766326020L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -8722582228766326020L;
 
-    /**
-     * The constructor.
-     * 
-     * @param genericValue
-     *        is the required value that is
-     *        {@link GenericValueIF#isEmpty() empty}.
-     */
-    public ValueNotSetException(GenericValueIF genericValue) {
+  /**
+   * The constructor.
+   * 
+   * @param genericValue
+   *        is the required value that is {@link GenericValueIF#isEmpty() empty}.
+   */
+  public ValueNotSetException(GenericValueIF genericValue) {
 
-        super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, genericValue);
-    }
+    super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, genericValue);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param valueName
-     *        is the name of the required value that is not set.
-     */
-    public ValueNotSetException(String valueName) {
+  /**
+   * The constructor.
+   * 
+   * @param valueName
+   *        is the name of the required value that is not set.
+   */
+  public ValueNotSetException(String valueName) {
 
-        super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, valueName);
-    }
+    super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, valueName);
+  }
 
 }

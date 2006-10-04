@@ -15,7 +15,7 @@ public class ValueParseException extends ValueException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ValueParseException(String internaitionalizedMessage, Object... arguments) {
 
@@ -24,7 +24,7 @@ public class ValueParseException extends ValueException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ValueParseException(Throwable nested, String internaitionalizedMessage,
             Object... arguments) {

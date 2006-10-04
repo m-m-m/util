@@ -56,7 +56,7 @@ public class Expression extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
-     * {@inheritDoc}
+     * 
      */
     public Object evaluate(ContextIF environment) throws CalculationException,
             ValueException {
@@ -66,7 +66,7 @@ public class Expression extends AbstractTerm {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 
@@ -104,7 +104,7 @@ public class Expression extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
-     * {@inheritDoc}
+     * 
      */
     public void toXml(XmlWriterIF serializer) throws XmlException {
 

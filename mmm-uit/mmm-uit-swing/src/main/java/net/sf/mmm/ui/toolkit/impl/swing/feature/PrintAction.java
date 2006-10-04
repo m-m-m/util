@@ -52,7 +52,7 @@ public class PrintAction extends AbstractAction implements UIActionListenerIF, P
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getActionListener()
-     * {@inheritDoc}
+     * 
      */
     public UIActionListenerIF getActionListener() {
 
@@ -62,7 +62,7 @@ public class PrintAction extends AbstractAction implements UIActionListenerIF, P
     /**
      * @see net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF#invoke(net.sf.mmm.ui.toolkit.api.UINodeIF,
      *      net.sf.mmm.ui.toolkit.api.event.ActionType)
-     * {@inheritDoc}
+     * 
      */
     public void invoke(UINodeIF source, ActionType action) {
 
@@ -89,7 +89,7 @@ public class PrintAction extends AbstractAction implements UIActionListenerIF, P
 
     /**
      * @see java.awt.print.Printable#print(java.awt.Graphics, java.awt.print.PageFormat, int)
-     * {@inheritDoc}
+     * 
      */
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
 

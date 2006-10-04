@@ -12,83 +12,82 @@ import net.sf.mmm.value.api.MutableGenericValueIF;
  */
 public class EmptyValue extends AbstractObjectValue {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 4749888507801081650L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 4749888507801081650L;
 
-    /** the singleton instance */
-    private static final EmptyValue INSTANCE = new EmptyValue("empty");
+  /** the singleton instance */
+  private static final EmptyValue INSTANCE = new EmptyValue("empty");
 
-    /** @see #toString() */
-    private final String name;
+  /** @see #toString() */
+  private final String name;
 
-    /**
-     * The constructor.
-     * 
-     * @param valueName
-     *        is the name of the value returned by {@link #toString()}.
-     */
-    public EmptyValue(String valueName) {
+  /**
+   * The constructor.
+   * 
+   * @param valueName
+   *        is the name of the value returned by {@link #toString()}.
+   */
+  public EmptyValue(String valueName) {
 
-        super();
-        assert (valueName != null);
-        this.name = valueName;
-    }
+    super();
+    assert (valueName != null);
+    this.name = valueName;
+  }
 
-    /**
-     * This method gets the singleton instance of the empty, immutable value.
-     * 
-     * @return the instance.
-     */
-    public static MutableGenericValueIF getInstance() {
+  /**
+   * This method gets the singleton instance of the empty, immutable value.
+   * 
+   * @return the instance.
+   */
+  public static MutableGenericValueIF getInstance() {
 
-        return INSTANCE;
-    }
+    return INSTANCE;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
-     * {@inheritDoc}
-     */
-    @Override
-    protected Object getPlainValue() {
+  /**
+   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
+   * 
+   */
+  @Override
+  protected Object getPlainValue() {
 
-        return null;
-    }
+    return null;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setPlainValue(Object newValue) {
+  /**
+   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
+   * 
+   */
+  @Override
+  protected void setPlainValue(Object newValue) {
 
-        throw new IllegalStateException();
-    }
+    throw new IllegalStateException();
+  }
 
-    /**
-     * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
-     *      {@inheritDoc}
-     */
-    public boolean isEditable() {
+  /**
+   * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
+   */
+  public boolean isEditable() {
 
-        return false;
-    }
+    return false;
+  }
 
-    /**
-     * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults() {@inheritDoc}
-     */
-    @Override
-    public boolean isAddDefaults() {
+  /**
+   * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults()
+   */
+  @Override
+  public boolean isAddDefaults() {
 
-        return false;
-    }
+    return false;
+  }
 
-    /**
-     * @see net.sf.mmm.value.base.AbstractObjectValue#toString() {@inheritDoc}
-     */
-    @Override
-    public String toString() {
+  /**
+   * @see net.sf.mmm.value.base.AbstractObjectValue#toString()
+   */
+  @Override
+  public String toString() {
 
-        return this.name;
-    }
+    return this.name;
+  }
 
 }

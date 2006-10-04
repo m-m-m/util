@@ -64,7 +64,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public SyncSliderAccess getSyncAccess() {
@@ -74,7 +74,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#create()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void create() {
@@ -85,7 +85,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
     
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#doInitializeListener()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected boolean doInitializeListener() {
@@ -96,7 +96,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -105,7 +105,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadOrientationIF#getOrientation()
-     * {@inheritDoc}
+     * 
      */
     public Orientation getOrientation() {
 
@@ -114,7 +114,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndexIF#getSelectedIndex()
-     * {@inheritDoc}
+     * 
      */
     public int getSelectedIndex() {
 
@@ -123,7 +123,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF#setSelectedIndex(int)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedIndex(int newIndex) {
 
@@ -132,7 +132,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidgetIF#getModel()
-     * {@inheritDoc}
+     * 
      */
     public UIListModelIF<E> getModel() {
 
@@ -141,7 +141,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidgetIF#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModelIF)
-     * {@inheritDoc}
+     * 
      */
     public void setModel(UIListModelIF<E> newModel) {
 
@@ -151,7 +151,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValueIF#getSelectedValue()
-     * {@inheritDoc}
+     * 
      */
     public E getSelectedValue() {
 
@@ -164,7 +164,7 @@ public class UISlideBar<E> extends UIWidget implements UISlideBarIF<E> {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF#setSelectedValue(Object)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedValue(E newValue) {
 

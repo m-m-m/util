@@ -23,7 +23,7 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
 
     /**
      * @see AbstractComponentProvider#AbstractComponentProvider(Class)
-     *      {@inheritDoc}
+     *      
      */
     public AbstractPerRequestComponentProvider(Class<S> specification) {
 
@@ -32,7 +32,7 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
 
     /**
      * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptorIF)
-     *      {@inheritDoc}
+     *      
      */
     public AbstractPerRequestComponentProvider(ComponentDescriptorIF<S> componentDescriptor) {
 
@@ -42,7 +42,7 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#request(java.lang.String,
      *      net.sf.mmm.framework.api.ComponentDescriptorIF, java.lang.String,
-     *      net.sf.mmm.framework.api.ComponentManagerIF) {@inheritDoc}
+     *      net.sf.mmm.framework.api.ComponentManagerIF) 
      */
     public ComponentInstanceContainerIF<S> request(String instanceId,
             ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId,
@@ -91,7 +91,7 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProviderIF#release(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-     *      net.sf.mmm.framework.api.ComponentManagerIF) {@inheritDoc}
+     *      net.sf.mmm.framework.api.ComponentManagerIF) 
      */
     public boolean release(ComponentInstanceContainerIF<S> instanceContainer,
             ComponentManagerIF componentManager) {
@@ -105,7 +105,7 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
      * component has to be shut-down.
      * 
      * @see net.sf.mmm.framework.api.ComponentProviderIF#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-     *      net.sf.mmm.framework.api.ComponentManagerIF) {@inheritDoc}
+     *      net.sf.mmm.framework.api.ComponentManagerIF) 
      */
     public void dispose(ComponentInstanceContainerIF<S> instanceContainer,
             ComponentManagerIF componentManager) {

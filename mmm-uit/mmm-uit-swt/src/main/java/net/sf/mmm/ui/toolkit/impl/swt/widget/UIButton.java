@@ -50,7 +50,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadTextIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 
@@ -59,7 +59,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTextIF#setText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setText(String text) {
 
@@ -68,7 +68,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -77,7 +77,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#doInitializeListener()
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected boolean doInitializeListener() {
@@ -88,7 +88,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIButtonIF#getStyle()
-     * {@inheritDoc}
+     * 
      */
     public ButtonStyle getStyle() {
 
@@ -97,7 +97,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlagIF#isSelected()
-     * {@inheritDoc}
+     * 
      */
     public boolean isSelected() {
 
@@ -106,7 +106,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlagIF#setSelected(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setSelected(boolean selected) {
 
@@ -115,7 +115,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadIconIF#getIcon()
-     * {@inheritDoc}
+     * 
      */
     public UIPicture getIcon() {
 
@@ -124,7 +124,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIconIF#setIcon(net.sf.mmm.ui.toolkit.api.UIPictureIF)
-     * {@inheritDoc}
+     * 
      */
     public void setIcon(UIPictureIF newIcon) {
 
@@ -138,7 +138,7 @@ public class UIButton extends UIWidget implements UIButtonIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swt.UIComponent#getSyncAccess()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public SyncButtonAccess getSyncAccess() {

@@ -39,7 +39,7 @@ public class UITabbedPanel extends UIMultiComposite implements UITabbedPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public @Override JComponent getSwingComponent() {
 
@@ -49,7 +49,7 @@ public class UITabbedPanel extends UIMultiComposite implements UITabbedPanelIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanelIF#addComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF,
      *      java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void addComponent(UIComponentIF component, String title) {
 
@@ -61,7 +61,7 @@ public class UITabbedPanel extends UIMultiComposite implements UITabbedPanelIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanelIF#addComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF,
      *      java.lang.String, int)
-     * {@inheritDoc}
+     * 
      */
     public void addComponent(UIComponentIF component, String title, int position) {
 
@@ -72,7 +72,7 @@ public class UITabbedPanel extends UIMultiComposite implements UITabbedPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanelIF#removeComponent(net.sf.mmm.ui.toolkit.api.UIComponentIF)
-     * {@inheritDoc}
+     * 
      */
     public void removeComponent(UIComponentIF component) {
 
@@ -85,7 +85,7 @@ public class UITabbedPanel extends UIMultiComposite implements UITabbedPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanelIF#removeComponent(int)
-     * {@inheritDoc}
+     * 
      */
     public void removeComponent(int position) {
 
@@ -95,7 +95,7 @@ public class UITabbedPanel extends UIMultiComposite implements UITabbedPanelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 

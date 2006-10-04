@@ -23,7 +23,7 @@ public abstract class AbstractComponentManager implements ComponentManagerIF {
 
     /**
      * @see net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(java.lang.Class)
-     * {@inheritDoc}
+     * 
      */
     public final <S> S requestComponent(Class<S> specification) throws ComponentException,
             ContainerException {

@@ -34,7 +34,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
 
     /**
      * @see javax.swing.ComboBoxModel#setSelectedItem(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public void setSelectedItem(Object anItem) {
 
@@ -43,7 +43,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
 
     /**
      * @see javax.swing.ComboBoxModel#getSelectedItem()
-     * {@inheritDoc}
+     * 
      */
     public Object getSelectedItem() {
 
@@ -52,7 +52,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
 
     /**
      * @see javax.swing.MutableComboBoxModel#addElement(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public void addElement(Object obj) {
 
@@ -62,7 +62,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
 
     /**
      * @see javax.swing.MutableComboBoxModel#removeElement(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public void removeElement(Object obj) {
 
@@ -72,7 +72,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
 
     /**
      * @see javax.swing.MutableComboBoxModel#insertElementAt(java.lang.Object, int)
-     * {@inheritDoc}
+     * 
      */
     public void insertElementAt(Object obj, int index) {
 
@@ -82,7 +82,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
 
     /**
      * @see javax.swing.MutableComboBoxModel#removeElementAt(int)
-     * {@inheritDoc}
+     * 
      */
     public void removeElementAt(int index) {
 

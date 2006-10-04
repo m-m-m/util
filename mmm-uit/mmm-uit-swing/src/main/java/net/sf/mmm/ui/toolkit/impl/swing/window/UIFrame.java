@@ -55,7 +55,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindow#getAwtWindow()
-     * {@inheritDoc}
+     * 
      */
     protected Window getAwtWindow() {
 
@@ -64,7 +64,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitleIF#getTitle()
-     * {@inheritDoc}
+     * 
      */
     public String getTitle() {
 
@@ -73,7 +73,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitleIF#setTitle(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setTitle(String newTitle) {
 
@@ -82,7 +82,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -91,7 +91,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.window.UIAbstractWindow#createMenuBar()
-     * {@inheritDoc}
+     * 
      */
     protected UIMenuBarIF createMenuBar() {
 
@@ -105,7 +105,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximizedIF#isMaximized()
-     * {@inheritDoc}
+     * 
      */
     public boolean isMaximized() {
 
@@ -114,7 +114,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#setMaximized(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setMaximized(boolean maximize) {
 
@@ -129,7 +129,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#setMinimized(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setMinimized(boolean minimize) {
 
@@ -140,7 +140,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#createFrame(java.lang.String,
      *      boolean)
-     * {@inheritDoc}
+     * 
      */
     public UIFrameIF createFrame(String title, boolean resizeable) {
 
@@ -149,7 +149,7 @@ public class UIFrame extends UIWindow implements UIFrameIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.window.UIWindowIF#setComposite(net.sf.mmm.ui.toolkit.api.composite.UICompositeIF)
-     * {@inheritDoc}
+     * 
      */
     public void setComposite(UICompositeIF newComposite) {
 

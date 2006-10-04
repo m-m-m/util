@@ -12,66 +12,66 @@ import net.sf.mmm.value.api.GenericValueIF;
  */
 public class WrongValueTypeException extends ValueException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 3681394831124284211L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 3681394831124284211L;
 
-    /**
-     * The constructor.
-     * 
-     * @param genericValue
-     *        is the generic value that has the wrong type.
-     * @param expectedType
-     *        is the expected type of the value.
-     */
-    public WrongValueTypeException(GenericValueIF genericValue, Class expectedType) {
+  /**
+   * The constructor.
+   * 
+   * @param genericValue
+   *        is the generic value that has the wrong type.
+   * @param expectedType
+   *        is the expected type of the value.
+   */
+  public WrongValueTypeException(GenericValueIF genericValue, Class expectedType) {
 
-        this(genericValue, expectedType, null);
+    this(genericValue, expectedType, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param genericValue
+   *        is the generic value that has the wrong type.
+   * @param expectedType
+   *        is the expected type of the value.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public WrongValueTypeException(GenericValueIF genericValue, Class expectedType, Throwable nested) {
+
+    super(nested, CoreNlsResourceBundle.ERR_VALUE_WRONG_TYPE, genericValue, getType(genericValue),
+        expectedType);
+  }
+
+  private static Class getType(GenericValueIF genericValue) {
+
+    Object value = genericValue.getObject(null);
+    if (value == null) {
+      return null;
+    } else {
+      return value.getClass();
     }
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param genericValue
-     *        is the generic value that has the wrong type.
-     * @param expectedType
-     *        is the expected type of the value.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public WrongValueTypeException(GenericValueIF genericValue, Class expectedType, Throwable nested) {
+  /**
+   * This method gets the value that has the wrong type.
+   * 
+   * @return the wrong typed value.
+   */
+  public GenericValueIF getGenericValue() {
 
-        super(nested, CoreNlsResourceBundle.ERR_VALUE_WRONG_TYPE, genericValue,
-                getType(genericValue), expectedType);
-    }
+    return (GenericValueIF) getNlsMessage().getArgument(0);
+  }
 
-    private static Class getType(GenericValueIF genericValue) {
+  /**
+   * This method gets the expected value type.
+   * 
+   * @return the type that was expected.
+   */
+  public Class getExpectedType() {
 
-        Object value = genericValue.getObject(null);
-        if (value == null) {
-            return null;
-        } else {
-            return value.getClass();
-        }
-    }
-
-    /**
-     * This method gets the value that has the wrong type.
-     * 
-     * @return the wrong typed value.
-     */
-    public GenericValueIF getGenericValue() {
-
-        return (GenericValueIF) getNlsMessage().getArgument(0);
-    }
-
-    /**
-     * This method gets the expected value type.
-     * 
-     * @return the type that was expected.
-     */
-    public Class getExpectedType() {
-
-        return (Class) getNlsMessage().getArgument(2);
-    }
+    return (Class) getNlsMessage().getArgument(2);
+  }
 
 }

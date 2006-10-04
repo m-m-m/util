@@ -14,30 +14,30 @@ import net.sf.mmm.value.api.GenericValueIF;
 @SuppressWarnings("all")
 public class StringValueTest extends AbstractGenericValueTest {
 
-    /**
-     * The constructor.
-     */
-    public StringValueTest() {
+  /**
+   * The constructor.
+   */
+  public StringValueTest() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see net.sf.mmm.value.impl.AbstractGenericValueTest#convert(java.lang.Object)
+   * 
+   */
+  @Override
+  protected GenericValueIF convert(Object plainValue) {
+
+    String s;
+    if (plainValue == null) {
+      s = null;
+    } else if (plainValue instanceof Class) {
+      s = ((Class) plainValue).getName();
+    } else {
+      s = plainValue.toString();
     }
+    return new StringValue(s);
+  }
 
-    /**
-     * @see net.sf.mmm.value.impl.AbstractGenericValueTest#convert(java.lang.Object)
-     *      {@inheritDoc}
-     */
-    @Override
-    protected GenericValueIF convert(Object plainValue) {
-
-        String s;
-        if (plainValue == null) {
-            s = null;
-        } else if (plainValue instanceof Class) {
-            s = ((Class) plainValue).getName();
-        } else {
-            s = plainValue.toString();
-        }
-        return new StringValue(s);
-    }
-    
 }

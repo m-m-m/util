@@ -167,7 +167,7 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
 
     /**
      * @see net.sf.mmm.value.api.ValueManagerIF#toString(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     public String toString(V value) {
 
@@ -179,7 +179,7 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     public String toString() {
 

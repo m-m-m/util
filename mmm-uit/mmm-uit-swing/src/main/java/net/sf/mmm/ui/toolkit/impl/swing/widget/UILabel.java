@@ -41,7 +41,7 @@ public class UILabel extends UIWidget implements UILabelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public @Override JComponent getSwingComponent() {
 
@@ -50,7 +50,7 @@ public class UILabel extends UIWidget implements UILabelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -59,7 +59,7 @@ public class UILabel extends UIWidget implements UILabelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTextIF#setText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setText(String text) {
 
@@ -68,7 +68,7 @@ public class UILabel extends UIWidget implements UILabelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadTextIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 
@@ -77,7 +77,7 @@ public class UILabel extends UIWidget implements UILabelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIconIF#setIcon(net.sf.mmm.ui.toolkit.api.UIPictureIF)
-     * {@inheritDoc}
+     * 
      */
     public void setIcon(UIPictureIF newIcon) {
 
@@ -91,7 +91,7 @@ public class UILabel extends UIWidget implements UILabelIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadIconIF#getIcon()
-     * {@inheritDoc}
+     * 
      */
     public UIPictureIF getIcon() {
 

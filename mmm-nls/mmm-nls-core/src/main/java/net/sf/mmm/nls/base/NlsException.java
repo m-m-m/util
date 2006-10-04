@@ -93,7 +93,7 @@ public abstract class NlsException extends Exception implements NlsThrowableIF {
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#printStackTrace(java.io.PrintStream,
      *      StringTranslatorIF)
-     * {@inheritDoc}
+     * 
      */
     public void printStackTrace(PrintStream stream, StringTranslatorIF nationalizer) {
 
@@ -118,7 +118,7 @@ public abstract class NlsException extends Exception implements NlsThrowableIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#printStackTrace(java.io.PrintWriter, net.sf.mmm.nls.api.StringTranslatorIF)
-     * {@inheritDoc}
+     * 
      */
     public void printStackTrace(PrintWriter writer, StringTranslatorIF nationalizer) {
     
@@ -143,7 +143,7 @@ public abstract class NlsException extends Exception implements NlsThrowableIF {
     
     /**
      * @see java.lang.Throwable#getMessage()
-     * {@inheritDoc}
+     * 
      */
     public String getMessage() {
 
@@ -152,7 +152,7 @@ public abstract class NlsException extends Exception implements NlsThrowableIF {
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#getLocalizedMessage(StringTranslatorIF)
-     * {@inheritDoc}
+     * 
      */
     public String getLocalizedMessage(StringTranslatorIF nationalizer) {
 
@@ -164,7 +164,7 @@ public abstract class NlsException extends Exception implements NlsThrowableIF {
     /**
      * @see net.sf.mmm.nls.api.NlsThrowableIF#getLocalizedMessage(StringTranslatorIF,
      *      java.lang.StringBuffer)
-     * {@inheritDoc}
+     * 
      */
     public void getLocalizedMessage(StringTranslatorIF nationalizer, StringBuffer message) {
 

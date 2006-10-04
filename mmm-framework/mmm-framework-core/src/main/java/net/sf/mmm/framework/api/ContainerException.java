@@ -16,7 +16,7 @@ public class ContainerException extends IocException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ContainerException(String newInternaitionalizedMessage, Object... newArguments) {
 
@@ -25,7 +25,7 @@ public class ContainerException extends IocException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * {@inheritDoc}
+     * 
      */
     public ContainerException(Throwable newNested, String newInternaitionalizedMessage,
             Object... newArguments) {

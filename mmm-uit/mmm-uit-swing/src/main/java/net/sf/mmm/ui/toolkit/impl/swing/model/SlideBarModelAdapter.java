@@ -60,7 +60,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Enumeration#hasMoreElements()
-         * {@inheritDoc}
+         * 
      */
         public boolean hasMoreElements() {
 
@@ -79,7 +79,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Enumeration#nextElement()
-         * {@inheritDoc}
+         * 
      */
         public Integer nextElement() {
 
@@ -116,7 +116,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#elements()
-         * {@inheritDoc}
+         * 
      */
         @Override
         public Enumeration<JLabel> elements() {
@@ -126,7 +126,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#get(java.lang.Object)
-         * {@inheritDoc}
+         * 
      */
         @Override
         public JLabel get(Object key) {
@@ -143,7 +143,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#isEmpty()
-         * {@inheritDoc}
+         * 
      */
         @Override
         public boolean isEmpty() {
@@ -153,7 +153,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#keys()
-         * {@inheritDoc}
+         * 
      */
         @Override
         public Enumeration<Integer> keys() {
@@ -170,7 +170,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#put(Object, Object)
-         * {@inheritDoc}
+         * 
      */
         @Override
         public JLabel put(Integer key, JLabel value) {
@@ -180,7 +180,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#remove(java.lang.Object)
-         * {@inheritDoc}
+         * 
      */
         @Override
         public JLabel remove(Object key) {
@@ -190,7 +190,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
         /**
          * @see java.util.Dictionary#size()
-         * {@inheritDoc}
+         * 
      */
         @Override
         public int size() {
@@ -250,7 +250,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListenerIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-     * {@inheritDoc}
+     * 
      */
     public void listModelChanged(UIListModelEvent event) {
 

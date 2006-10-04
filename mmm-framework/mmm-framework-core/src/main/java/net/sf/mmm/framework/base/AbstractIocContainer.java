@@ -99,7 +99,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.IocContainerIF#getName() {@inheritDoc}
+     * @see net.sf.mmm.framework.api.IocContainerIF#getName() 
      */
     public final String getName() {
 
@@ -143,7 +143,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
 
     /**
      * @see net.sf.mmm.framework.api.MutableIocContainerIF#addComponentProvider(net.sf.mmm.framework.api.ComponentProviderIF)
-     *      {@inheritDoc}
+     *      
      */
     public void addComponentProvider(ComponentProviderIF<?> componentProvider)
             throws ContainerException {
@@ -158,7 +158,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.MutableIocContainerIF#start() {@inheritDoc}
+     * @see net.sf.mmm.framework.api.MutableIocContainerIF#start() 
      */
     public final synchronized void start() {
 
@@ -186,7 +186,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.MutableIocContainerIF#stop() {@inheritDoc}
+     * @see net.sf.mmm.framework.api.MutableIocContainerIF#stop() 
      */
     public final synchronized void stop() {
 
@@ -217,7 +217,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.IocContainerIF#isRunning() {@inheritDoc}
+     * @see net.sf.mmm.framework.api.IocContainerIF#isRunning() 
      */
     public boolean isRunning() {
 
@@ -601,7 +601,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     }
 
     /**
-     * @see java.lang.Object#toString() {@inheritDoc}
+     * @see java.lang.Object#toString() 
      */
     @Override
     public String toString() {
@@ -667,7 +667,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
 
         /**
          * @see net.sf.mmm.framework.base.provider.SimpleSingletonProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-         *      net.sf.mmm.framework.api.ComponentManagerIF) {@inheritDoc}
+         *      net.sf.mmm.framework.api.ComponentManagerIF) 
          */
         @Override
         public void dispose(ComponentInstanceContainerIF<IocContainerIF> singletonContainer,

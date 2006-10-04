@@ -34,7 +34,7 @@ public class UIFileUpload extends UIWidget implements UIFileUploadIF {
 
         /**
          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         * {@inheritDoc}
+         * 
      */
         public void actionPerformed(ActionEvent e) {
 
@@ -81,7 +81,7 @@ public class UIFileUpload extends UIWidget implements UIFileUploadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.impl.swing.UIComponent#getSwingComponent()
-     * {@inheritDoc}
+     * 
      */
     public @Override JComponent getSwingComponent() {
 
@@ -90,7 +90,7 @@ public class UIFileUpload extends UIWidget implements UIFileUploadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.widget.UIFileUploadIF#getSelection()
-     * {@inheritDoc}
+     * 
      */
     public FileAccessIF getSelection() {
 
@@ -99,7 +99,7 @@ public class UIFileUpload extends UIWidget implements UIFileUploadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -108,7 +108,7 @@ public class UIFileUpload extends UIWidget implements UIFileUploadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadTextIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 
@@ -117,7 +117,7 @@ public class UIFileUpload extends UIWidget implements UIFileUploadIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTextIF#setText(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public void setText(String text) {
 

@@ -34,37 +34,37 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class XmlConfigurationTest extends TestCase {
 
-    public XmlConfigurationTest() {
+  public XmlConfigurationTest() {
 
-        super();
+    super();
+  }
+
+  @Test
+  public void testConfiguration() {
+
+    String href = XmlConfigurationTest.class.getName().replace('.', '/') + ".xml";
+    ConfigurationAccessIF access = new ResourceAccess(href);
+    ConfigurationFactoryIF factory = new XmlFactory();
+    ConfigurationDocumentIF xmlDoc = factory.create(access);
+    assertNotNull(xmlDoc);
+    ContextIF context = xmlDoc.getContext();
+    assertNotNull(context);
+    int port = context.getValue("server.port").getInteger();
+    assertEquals(8080, port);
+    String host = context.getValue("server.host").getString();
+    assertEquals("localhost", host);
+    ConfigurationIF config = xmlDoc.getConfiguration();
+    assertNotNull(config);
+    assertEquals("root", config.getName());
+    ConfigurationIF portAttribute = config.getDescendant("server/@port");
+    assertNotNull(portAttribute);
+    assertEquals(port, portAttribute.getValue().getInteger());
+    assertEquals(host, config.getDescendant("server/@host").getValue().getString());
+    Collection<? extends ConfigurationIF> serviceColl = config.getDescendants("server/service");
+    assertEquals(5, serviceColl.size());
+    int index = 0;
+    for (ConfigurationIF serviceConf : serviceColl) {
+      System.out.println(serviceConf.getDescendant("@name").getValue().getString());
     }
-
-    @Test
-    public void testConfiguration() {
-
-        String href = XmlConfigurationTest.class.getName().replace('.', '/') + ".xml";
-        ConfigurationAccessIF access = new ResourceAccess(href);
-        ConfigurationFactoryIF factory = new XmlFactory();
-        ConfigurationDocumentIF xmlDoc = factory.create(access);
-        assertNotNull(xmlDoc);
-        ContextIF context = xmlDoc.getContext();
-        assertNotNull(context);
-        int port = context.getValue("server.port").getInteger();
-        assertEquals(8080, port);
-        String host = context.getValue("server.host").getString();
-        assertEquals("localhost", host);
-        ConfigurationIF config = xmlDoc.getConfiguration();
-        assertNotNull(config);
-        assertEquals("root", config.getName());
-        ConfigurationIF portAttribute = config.getDescendant("server/@port");
-        assertNotNull(portAttribute);
-        assertEquals(port, portAttribute.getValue().getInteger());
-        assertEquals(host, config.getDescendant("server/@host").getValue().getString());
-        Collection<? extends ConfigurationIF> serviceColl = config.getDescendants("server/service");
-        assertEquals(5, serviceColl.size());
-        int index = 0;
-        for (ConfigurationIF serviceConf : serviceColl) {
-            System.out.println(serviceConf.getDescendant("@name").getValue().getString());
-        }
-    }
+  }
 }

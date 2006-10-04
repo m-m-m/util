@@ -40,7 +40,7 @@ public class Constant<C> extends AbstractTerm {
 
         /**
          * @see net.sf.mmm.xml.api.XmlSerializerIF#toXml(net.sf.mmm.xml.api.XmlWriterIF,
-         *      java.lang.Object) {@inheritDoc}
+         *      java.lang.Object) 
          */
         public void toXml(XmlWriterIF xmlWriter, C object) throws XmlException {
 
@@ -104,7 +104,7 @@ public class Constant<C> extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
-     *      {@inheritDoc}
+     *      
      */
     public C evaluate(ContextIF variableSet) {
 
@@ -113,7 +113,7 @@ public class Constant<C> extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
-     *      {@inheritDoc}
+     *      
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {
 
@@ -123,7 +123,7 @@ public class Constant<C> extends AbstractTerm {
     }
 
     /**
-     * @see java.lang.Object#toString() {@inheritDoc}
+     * @see java.lang.Object#toString() 
      */
     @Override
     public String toString() {

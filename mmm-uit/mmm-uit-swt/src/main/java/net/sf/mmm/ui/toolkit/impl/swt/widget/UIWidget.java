@@ -31,7 +31,7 @@ public abstract class UIWidget extends UIComponent implements UIWidgetIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractObject#isWidget()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public boolean isWidget() {
@@ -41,7 +41,7 @@ public abstract class UIWidget extends UIComponent implements UIWidgetIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UINodeIF#getParent()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public UIComposite getParent() {

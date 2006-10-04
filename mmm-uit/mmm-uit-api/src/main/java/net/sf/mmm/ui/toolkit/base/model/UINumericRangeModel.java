@@ -47,7 +47,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
     /**
      * @see net.sf.mmm.ui.toolkit.base.model.UIAbstractListModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF,
      *      java.lang.Throwable)
-     * {@inheritDoc}
+     * 
      */
     @Override
     protected void handleListenerException(UIListModelListenerIF listener, Throwable t) {
@@ -57,7 +57,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getElementCount()
-     * {@inheritDoc}
+     * 
      */
     public int getElementCount() {
 
@@ -66,7 +66,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getElement(int)
-     * {@inheritDoc}
+     * 
      */
     public Integer getElement(int index) {
 
@@ -78,7 +78,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getElementAsString(int)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public String getElementAsString(int index) {
@@ -91,7 +91,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
     
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRangeIF#setMaximumValue(int)
-     * {@inheritDoc}
+     * 
      */
     public void setMaximumValue(int newMaximum) {
 
@@ -117,7 +117,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRangeIF#setMinimumValue(int)
-     * {@inheritDoc}
+     * 
      */
     public void setMinimumValue(int newMinimum) {
 
@@ -141,7 +141,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadIntegerRangeIF#getMaximumValue()
-     * {@inheritDoc}
+     * 
      */
     public int getMaximumValue() {
 
@@ -150,7 +150,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadIntegerRangeIF#getMinimumValue()
-     * {@inheritDoc}
+     * 
      */
     public int getMinimumValue() {
 
@@ -159,7 +159,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getIndexOf(Object)
-     * {@inheritDoc}
+     * 
      */
     public int getIndexOf(Integer element) {
         
@@ -172,7 +172,7 @@ public class UINumericRangeModel extends UIAbstractListModel<Integer> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIListModelIF#getIndexOfString(java.lang.String)
-     * {@inheritDoc}
+     * 
      */
     public int getIndexOfString(String element) {
 

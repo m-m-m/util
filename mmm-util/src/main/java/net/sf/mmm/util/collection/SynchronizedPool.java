@@ -16,7 +16,7 @@ public class SynchronizedPool<E> extends SimplePool<E> {
 
     /**
      * @see SimplePool#SimplePool(Class, int)
-     * {@inheritDoc}
+     * 
      */
     public SynchronizedPool(Class<E> type, int maximumSize) {
 
@@ -39,7 +39,7 @@ public class SynchronizedPool<E> extends SimplePool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.SimplePool#take()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public E take() {
@@ -51,7 +51,7 @@ public class SynchronizedPool<E> extends SimplePool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.SimplePool#add(java.lang.Object)
-     * {@inheritDoc}
+     * 
      */
     @Override
     public void add(E element) {

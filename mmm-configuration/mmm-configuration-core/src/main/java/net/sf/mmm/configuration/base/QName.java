@@ -11,76 +11,76 @@ import net.sf.mmm.configuration.api.ConfigurationIF;
  */
 public final class QName {
 
-    /** @see net.sf.mmm.configuration.api.ConfigurationIF#getName() */
-    public final String name;
+  /** @see net.sf.mmm.configuration.api.ConfigurationIF#getName() */
+  public final String name;
 
-    /**
-     * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri() May
-     *      be null to {@link #equals(Object) match} any namespace.
-     */
-    public final String namespaceUri;
+  /**
+   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri() May be
+   *      null to {@link #equals(Object) match} any namespace.
+   */
+  public final String namespaceUri;
 
-    /**
-     * The constructor.
-     * 
-     * @param localName
-     *        is the local {@link #name}.
-     * @param nsUri
-     *        is the {@link #namespaceUri}.
-     */
-    public QName(String localName, String nsUri) {
+  /**
+   * The constructor.
+   * 
+   * @param localName
+   *        is the local {@link #name}.
+   * @param nsUri
+   *        is the {@link #namespaceUri}.
+   */
+  public QName(String localName, String nsUri) {
 
-        super();
-        this.name = localName;
-        this.namespaceUri = nsUri;
+    super();
+    this.name = localName;
+    this.namespaceUri = nsUri;
+  }
+
+  /**
+   * @see java.lang.Object#equals(java.lang.Object) 
+   */
+  @Override
+  public boolean equals(Object obj) {
+
+    if ((obj == null) || (obj.getClass() != QName.class)) {
+      return false;
     }
-
-    /**
-     * @see java.lang.Object#equals(java.lang.Object) {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-
-        if ((obj == null) || (obj.getClass() != QName.class)) {
-            return false;
-        }
-        QName other = (QName) obj;
-        if (!this.name.equals(other.name)) {
-            return false;
-        }
-        if ((this.namespaceUri == null) || (other.namespaceUri == null)
-                || (this.namespaceUri.equals(other.namespaceUri))) {
-            return true;
-        }
-        return false;
+    QName other = (QName) obj;
+    if (!this.name.equals(other.name)) {
+      return false;
     }
-
-    /**
-     * @see java.lang.Object#hashCode() {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-
-        return this.name.hashCode();
+    if ((this.namespaceUri == null) || (other.namespaceUri == null)
+        || (this.namespaceUri.equals(other.namespaceUri))) {
+      return true;
     }
+    return false;
+  }
 
-    /**
-     * @see java.lang.Object#toString() {@inheritDoc}
-     */
-    @Override
-    public String toString() {
+  /**
+   * @see java.lang.Object#hashCode() 
+   */
+  @Override
+  public int hashCode() {
 
-        if ((this.namespaceUri == null)
-                || (ConfigurationIF.NAMESPACE_URI_NONE.equals(this.namespaceUri))) {
-            return this.name;
-        } else {
-            int len = 1 + this.name.length() + this.namespaceUri.length();
-            StringBuffer sb = new StringBuffer(len);
-            sb.append(this.namespaceUri);
-            sb.append(':');
-            sb.append(this.name);
-            return sb.toString();
-        }
+    return this.name.hashCode();
+  }
+
+  /**
+   * @see java.lang.Object#toString() 
+   */
+  @Override
+  public String toString() {
+
+    if ((this.namespaceUri == null)
+        || (ConfigurationIF.NAMESPACE_URI_NONE.equals(this.namespaceUri))) {
+      return this.name;
+    } else {
+      int len = 1 + this.name.length() + this.namespaceUri.length();
+      StringBuffer sb = new StringBuffer(len);
+      sb.append(this.namespaceUri);
+      sb.append(':');
+      sb.append(this.name);
+      return sb.toString();
     }
+  }
 
 }

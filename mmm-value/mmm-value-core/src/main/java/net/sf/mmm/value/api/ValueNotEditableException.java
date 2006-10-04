@@ -13,44 +13,44 @@ import net.sf.mmm.value.CoreNlsResourceBundle;
  */
 public class ValueNotEditableException extends ValueException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 8537295080260761963L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 8537295080260761963L;
 
-    /**
-     * The constructor.
-     * 
-     * @param genericValue
-     *        is the node that is NOT
-     *        {@link net.sf.mmm.value.api.MutableGenericValueIF#isEditable() editable} .
-     */
-    public ValueNotEditableException(MutableGenericValueIF genericValue) {
+  /**
+   * The constructor.
+   * 
+   * @param genericValue
+   *        is the node that is NOT
+   *        {@link net.sf.mmm.value.api.MutableGenericValueIF#isEditable() editable} .
+   */
+  public ValueNotEditableException(MutableGenericValueIF genericValue) {
 
-        super(CoreNlsResourceBundle.ERR_NODE_NOT_EDITABLE, genericValue);
-    }
+    super(CoreNlsResourceBundle.ERR_NODE_NOT_EDITABLE, genericValue);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param genericValue
-     *        is the node that is NOT
-     *        {@link net.sf.mmm.value.api.MutableGenericValueIF#isEditable() editable} .
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public ValueNotEditableException(MutableGenericValueIF genericValue, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param genericValue
+   *        is the node that is NOT
+   *        {@link net.sf.mmm.value.api.MutableGenericValueIF#isEditable() editable} .
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public ValueNotEditableException(MutableGenericValueIF genericValue, Throwable nested) {
 
-        super(nested, CoreNlsResourceBundle.ERR_NODE_NOT_EDITABLE, genericValue);
-    }
+    super(nested, CoreNlsResourceBundle.ERR_NODE_NOT_EDITABLE, genericValue);
+  }
 
-    /**
-     * This method gets the node that was edited without being
-     * {@link MutableGenericValueIF#isEditable() editable}.
-     * 
-     * @return the associated configuration node.
-     */
-    public MutableGenericValueIF getGenericValue() {
+  /**
+   * This method gets the node that was edited without being
+   * {@link MutableGenericValueIF#isEditable() editable}.
+   * 
+   * @return the associated configuration node.
+   */
+  public MutableGenericValueIF getGenericValue() {
 
-        return (MutableGenericValueIF) getNlsMessage().getArgument(0);
-    }
+    return (MutableGenericValueIF) getNlsMessage().getArgument(0);
+  }
 
 }

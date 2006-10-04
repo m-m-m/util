@@ -72,7 +72,7 @@ public class UIMenuItem extends UIAwtNode implements UIMenuItemIF {
     
     /**
      * @see net.sf.mmm.ui.toolkit.base.UIAbstractNode#doInitializeListener()
-     * {@inheritDoc}
+     * 
      */
     protected boolean doInitializeListener() {
 
@@ -82,7 +82,7 @@ public class UIMenuItem extends UIAwtNode implements UIMenuItemIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItemIF#getText()
-     * {@inheritDoc}
+     * 
      */
     public String getText() {
 
@@ -91,7 +91,7 @@ public class UIMenuItem extends UIAwtNode implements UIMenuItemIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * {@inheritDoc}
+     * 
      */
     public String getType() {
 
@@ -100,7 +100,7 @@ public class UIMenuItem extends UIAwtNode implements UIMenuItemIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItemIF#getStyle()
-     * {@inheritDoc}
+     * 
      */
     public ButtonStyle getStyle() {
 
@@ -109,7 +109,7 @@ public class UIMenuItem extends UIAwtNode implements UIMenuItemIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlagIF#isSelected()
-     * {@inheritDoc}
+     * 
      */
     public boolean isSelected() {
 
@@ -118,7 +118,7 @@ public class UIMenuItem extends UIAwtNode implements UIMenuItemIF {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlagIF#setSelected(boolean)
-     * {@inheritDoc}
+     * 
      */
     public void setSelected(boolean selected) {
 

@@ -2,7 +2,7 @@
 package net.sf.mmm.term.impl;
 
 import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.term.NlsResourceBundle;
+import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.TermIF;
 import net.sf.mmm.term.base.AbstractVariable;
@@ -46,20 +46,20 @@ public class ExpressionVariable extends AbstractVariable {
 
     /**
      * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(net.sf.mmm.context.api.ContextIF)
-     * {@inheritDoc}
+     * 
      */
     public String getVariableName(ContextIF environment) throws ValueException {
 
         Object expressionResult = this.term.evaluate(environment);
         if (expressionResult == null) {
-            throw new CalculationException(NlsResourceBundle.ERR_EXPR_VAR_NULL, this);
+            throw new CalculationException(CoreNlsResourceBundle.ERR_EXPR_VAR_NULL, this);
         }
         return expressionResult.toString();
     }
 
     /**
      * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
-     * {@inheritDoc}
+     * 
      */
     public void toXml(XmlWriterIF serializer) throws XmlException {
 
@@ -70,7 +70,7 @@ public class ExpressionVariable extends AbstractVariable {
 
     /**
      * @see java.lang.Object#toString()
-     * {@inheritDoc}
+     * 
      */
     @Override
     public String toString() {
