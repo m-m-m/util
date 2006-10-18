@@ -7,7 +7,7 @@ import java.util.List;
 
 import net.sf.mmm.content.validator.api.ValidationResultIF;
 import net.sf.mmm.content.validator.api.ValueValidatorIF;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**

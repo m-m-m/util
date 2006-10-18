@@ -4,7 +4,7 @@
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-value</artifactId>
-    <version>0.9.0</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <name>MMM Value::Main</name>
   <description>Main of component for value management.</description>
@@ -17,7 +17,7 @@
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-configuration-core</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -28,7 +28,7 @@
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-util</artifactId>
+      <artifactId>mmm-util-misc</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>

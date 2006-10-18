@@ -3,6 +3,8 @@ package net.sf.mmm.xml.api;
 
 import java.io.Serializable;
 
+import net.sf.mmm.xml.XmlException;
+
 /**
  * This is the interface for an object that can be serialized to XML.
  * 

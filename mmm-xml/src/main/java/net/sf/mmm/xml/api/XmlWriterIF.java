@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.xml.api;
 
+import net.sf.mmm.xml.XmlException;
+
 /**
  * This is the interface for a simple XML serializer. I do not like the SAX API
  * so I had to reinvent the wheel.

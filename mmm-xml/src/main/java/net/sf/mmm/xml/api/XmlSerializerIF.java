@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.xml.api;
 
+import net.sf.mmm.xml.XmlException;
+
 /**
  * This is the interface for an serializer that can convert objects of a
  * specific type to XML.

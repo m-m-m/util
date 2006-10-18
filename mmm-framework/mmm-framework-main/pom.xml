@@ -4,7 +4,7 @@
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-framework</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <name>MMM Framework::Main</name>
   <description>Main of the MMM IOC Framework.</description>
@@ -17,19 +17,19 @@
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-framework-core</artifactId>
-      <version>0.0.1</version>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-configuration-core</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-nls-core</artifactId>
-      <version>0.0.1</version>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

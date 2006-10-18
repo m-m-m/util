@@ -3,8 +3,8 @@ package net.sf.mmm.xml.test;
 
 import java.io.StringWriter;
 
-import net.sf.mmm.xml.DomUtil;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 import net.sf.mmm.xml.impl.DomXmlWriter;
 import net.sf.mmm.xml.impl.OutputXmlWriter;

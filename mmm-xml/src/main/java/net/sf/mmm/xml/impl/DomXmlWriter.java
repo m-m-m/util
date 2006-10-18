@@ -5,9 +5,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.xml.NlsResourceBundle;
-import net.sf.mmm.xml.XmlUtil;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.base.AbstractXmlWriter;
 
 /**

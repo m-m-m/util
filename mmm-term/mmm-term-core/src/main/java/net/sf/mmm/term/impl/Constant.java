@@ -3,7 +3,7 @@ package net.sf.mmm.term.impl;
 
 import net.sf.mmm.context.api.ContextIF;
 import net.sf.mmm.term.base.AbstractTerm;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.api.XmlSerializerIF;
 import net.sf.mmm.xml.api.XmlWriterIF;
 

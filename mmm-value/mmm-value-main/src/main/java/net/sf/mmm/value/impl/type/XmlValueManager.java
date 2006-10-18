@@ -9,12 +9,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
+import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.value.api.ValueManagerIF;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
-import net.sf.mmm.xml.DomUtil;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**

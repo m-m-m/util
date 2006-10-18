@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.api.XmlSerializerIF;
 import net.sf.mmm.xml.api.XmlWriterIF;
 

@@ -5,7 +5,7 @@ package net.sf.mmm.value.impl.type;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.type.DurationIF;
 import net.sf.mmm.value.api.type.TimeIF;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.xml.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import net.sf.mmm.xml.XmlUtil;
+import net.sf.mmm.util.xml.XmlUtil;
 
 /**
  * TODO This type ...
