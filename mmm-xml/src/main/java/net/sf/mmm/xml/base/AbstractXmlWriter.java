@@ -2,7 +2,7 @@
 package net.sf.mmm.xml.base;
 
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**

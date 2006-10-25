@@ -2,7 +2,7 @@
 package net.sf.mmm.xml.impl;
 
 import net.sf.mmm.xml.NlsResourceBundle;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 
 /**
  * This is the exception thrown if a namespace prefix is used for XML that has

@@ -2,7 +2,7 @@
 package net.sf.mmm.xml.impl;
 
 import net.sf.mmm.xml.NlsResourceBundle;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 
 /**
  * This is the exception thrown if an input or output error occured while

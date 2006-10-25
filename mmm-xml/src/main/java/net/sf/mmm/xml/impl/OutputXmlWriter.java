@@ -8,9 +8,9 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.xml.XmlUtil;
 import net.sf.mmm.xml.NlsResourceBundle;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.base.AbstractXmlWriter;
 
 /**

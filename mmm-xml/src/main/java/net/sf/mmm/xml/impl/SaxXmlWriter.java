@@ -10,8 +10,8 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import net.sf.mmm.util.xml.XmlUtil;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.XmlUtil;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.base.AbstractXmlWriter;
 
 /**

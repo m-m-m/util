@@ -4,7 +4,7 @@ package net.sf.mmm.xml.impl;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.base.AbstractXmlWriter;
 
 /**
