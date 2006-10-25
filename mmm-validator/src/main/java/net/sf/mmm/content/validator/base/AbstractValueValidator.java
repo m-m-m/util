@@ -1,11 +1,9 @@
 /* $Id$ */
 package net.sf.mmm.content.validator.base;
 
-
 import net.sf.mmm.content.validator.api.ValueValidatorIF;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
-
 
 /**
  * This is the abstract base implementation of the value validator interface.

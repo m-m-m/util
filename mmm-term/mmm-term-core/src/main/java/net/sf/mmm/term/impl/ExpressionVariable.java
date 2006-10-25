@@ -7,7 +7,7 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.TermIF;
 import net.sf.mmm.term.base.AbstractVariable;
 import net.sf.mmm.value.api.ValueException;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**

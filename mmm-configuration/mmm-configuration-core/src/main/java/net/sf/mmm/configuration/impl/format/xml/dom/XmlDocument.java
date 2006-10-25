@@ -13,8 +13,8 @@ import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 import net.sf.mmm.context.api.MutableContextIF;
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.DomUtil;
+import net.sf.mmm.xml.api.XmlException;
 
 /**
  * This is the implementation of the

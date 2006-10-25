@@ -14,7 +14,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationElement;
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.xml.DomUtil;
 
 /**
  * This is the implementation of the

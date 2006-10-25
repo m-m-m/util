@@ -49,7 +49,7 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <tagBase>https://svn.projxpert.com/mmm/tags</tagBase>
+          <tagBase>https://m-m-m.googlecode.com/svn/tags</tagBase>
         </configuration>
       </plugin>
       <plugin>
@@ -166,6 +166,7 @@
     <url>http://sourceforge.net/tracker/?group_id=40062&#038;atid=427657</url>
   </issueManagement>
   <scm>
+    <!-- https://m-m-m.googlecode.com/svn/trunk -->
     <connection>scm:svn:http://svn.projxpert.com/mmm/trunk</connection>
     <developerConnection>scm:svn:https://svn.projxpert.com/mmm/trunk</developerConnection>
     <tag/>
