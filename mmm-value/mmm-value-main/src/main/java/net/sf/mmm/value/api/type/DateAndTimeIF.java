@@ -8,26 +8,26 @@ package net.sf.mmm.value.api.type;
  */
 public interface DateAndTimeIF extends DateIF, TimeIF {
 
-    /**
-     * The {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} of this
-     * value type.
-     */
-    String VALUE_NAME = "DateTime";
+  /**
+   * The {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} of this
+   * value type.
+   */
+  String VALUE_NAME = "DateTime";
 
-    /**
-     * This method gets the timezone offset in minutes relative to UTC
-     * (Greenwich).
-     * 
-     * @return the timezone offset in minutes relative to UTC.
-     */
-    int getTimezoneOffset();
+  /**
+   * This method gets the timezone offset in minutes relative to UTC
+   * (Greenwich).
+   * 
+   * @return the timezone offset in minutes relative to UTC.
+   */
+  int getTimezoneOffset();
 
-    /**
-     * This method gets a string representation of this object in the format
-     * "yyyy.MM.dd'T'HH:mm:ss".
-     * 
-     * @see java.lang.Object#toString()
-     */
-    public String toString();
+  /**
+   * This method gets a string representation of this object in the format
+   * "yyyy.MM.dd'T'HH:mm:ss".
+   * 
+   * @see java.lang.Object#toString()
+   */
+  public String toString();
 
 }

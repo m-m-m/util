@@ -13,45 +13,45 @@ import net.sf.mmm.value.api.ValueException;
  */
 public class ValueNotRegisteredException extends ValueException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 1584341208707126020L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 1584341208707126020L;
 
-    /**
-     * The constructor.
-     * 
-     * @param valueName
-     *        is the {@link net.sf.mmm.value.api.ValueManagerIF#getName() name}
-     *        of the value that was requested but is NOT registered.
-     */
-    public ValueNotRegisteredException(String valueName) {
+  /**
+   * The constructor.
+   * 
+   * @param valueName
+   *        is the {@link net.sf.mmm.value.api.ValueManagerIF#getName() name}
+   *        of the value that was requested but is NOT registered.
+   */
+  public ValueNotRegisteredException(String valueName) {
 
-        super(NlsResourceBundle.ERR_NOT_REGISTERED, valueName);
-    }
+    super(NlsResourceBundle.ERR_NOT_REGISTERED, valueName);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param valueType
-     *        is the
-     *        {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of
-     *        the value that was requested but is NOT registered.
-     */
-    public ValueNotRegisteredException(Class valueType) {
+  /**
+   * The constructor.
+   * 
+   * @param valueType
+   *        is the
+   *        {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of
+   *        the value that was requested but is NOT registered.
+   */
+  public ValueNotRegisteredException(Class valueType) {
 
-        super(NlsResourceBundle.ERR_NOT_REGISTERED, valueType.getName());
-    }
+    super(NlsResourceBundle.ERR_NOT_REGISTERED, valueType.getName());
+  }
 
-    /**
-     * This method gets the
-     * {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} or
-     * {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of the
-     * value that was requested but NOT registered.
-     * 
-     * @return the value name or {@link Class#getName() type}.
-     */
-    public String getValueNameOrType() {
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} or
+   * {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of the
+   * value that was requested but NOT registered.
+   * 
+   * @return the value name or {@link Class#getName() type}.
+   */
+  public String getValueNameOrType() {
 
-        return (String) getNlsMessage().getArgument(0);
-    }
+    return (String) getNlsMessage().getArgument(0);
+  }
 
 }

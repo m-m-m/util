@@ -11,57 +11,57 @@ package net.sf.mmm.value.base;
  */
 public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
 
-    /** the name of the value manager */
-    protected final String name;
+  /** the name of the value manager */
+  protected final String name;
 
-    /** the class of the managed value */
-    protected final Class<V> valueType;
+  /** the class of the managed value */
+  protected final Class<V> valueType;
 
-    /**
-     * The constructor.
-     * 
-     * @param valueClass
-     *        is the {@link #getValueType() implementation} of the managed value
-     *        type.
-     */
-    public BasicValueManager(Class<V> valueClass) {
+  /**
+   * The constructor.
+   * 
+   * @param valueClass
+   *        is the {@link #getValueType() implementation} of the managed value
+   *        type.
+   */
+  public BasicValueManager(Class<V> valueClass) {
 
-        this(valueClass, valueClass.getSimpleName());
-    }
+    this(valueClass, valueClass.getSimpleName());
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param valueClass
-     *        is the {@link #getValueType() implementation} of the managed value
-     *        type.
-     * @param typeName
-     *        is the {@link #getName() "logical name"} of the managed value
-     *        type.
-     */
-    public BasicValueManager(Class<V> valueClass, String typeName) {
+  /**
+   * The constructor.
+   * 
+   * @param valueClass
+   *        is the {@link #getValueType() implementation} of the managed value
+   *        type.
+   * @param typeName
+   *        is the {@link #getName() "logical name"} of the managed value
+   *        type.
+   */
+  public BasicValueManager(Class<V> valueClass, String typeName) {
 
-        super();
-        this.valueType = valueClass;
-        this.name = typeName;
-    }
+    super();
+    this.valueType = valueClass;
+    this.name = typeName;
+  }
 
-    /**
-     * @see net.sf.mmm.value.api.ValueManagerIF#getValueType()
-     * 
-     */
-    public Class<V> getValueType() {
+  /**
+   * @see net.sf.mmm.value.api.ValueManagerIF#getValueType()
+   * 
+   */
+  public Class<V> getValueType() {
 
-        return this.valueType;
-    }
+    return this.valueType;
+  }
 
-    /**
-     * @see net.sf.mmm.value.api.ValueManagerIF#getName()
-     * 
-     */
-    public String getName() {
+  /**
+   * @see net.sf.mmm.value.api.ValueManagerIF#getName()
+   * 
+   */
+  public String getName() {
 
-        return this.name;
-    }
+    return this.name;
+  }
 
 }

@@ -8,10 +8,10 @@ import junit.framework.TestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.xml.DomUtil;
 import net.sf.mmm.value.api.ValueManagerIF;
 import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.xml.XmlException;
+import net.sf.mmm.xml.api.XmlException;
 import net.sf.mmm.xml.api.XmlWriterIF;
 import net.sf.mmm.xml.impl.DomXmlWriter;
 import net.sf.mmm.xml.impl.OutputXmlWriter;
@@ -25,80 +25,81 @@ import net.sf.mmm.xml.impl.OutputXmlWriter;
 @SuppressWarnings("unchecked")
 public class XmlValueManagerTest extends TestCase {
 
+  /**
+   * The constructor.
+   */
+  public XmlValueManagerTest() {
+
+    super();
+  }
+
+  /**
+   * This method produces some strange xml for testing.
+   * 
+   * @param xmlWriter
+   *        is the serializer where to create the xml.
+   * @throws XmlException
+   *         if the xml is illegal or general error.
+   */
+  public static void toXml(XmlWriterIF xmlWriter) throws XmlException {
+
+    String ns3 = "http://URI3";
+    // xmlWriter.writeStartElement(ValueManagerIF.XML_TAG_VALUE);
+    // xmlWriter.writeAttribute(ValueManagerIF.XML_ATR_VALUE_NAME,
+    // XmlValueManager.VALUE_NAME);
+    xmlWriter.writeStartElement("tag1");
+    xmlWriter.writeNamespaceDeclaration("ns3", ns3);
+    xmlWriter.writeAttribute("atr", "val");
+    xmlWriter.writeCharacters("Hello World!&<>äöüßÄÖÜ");
+    xmlWriter.writeStartElement("tag2", "ns2", "http://URI2");
+    xmlWriter.writeAttribute("atr", "val&<>\"");
+    xmlWriter.writeCharacters("Hello World!");
+    xmlWriter.writeEndElement("tag2", "ns2");
+    xmlWriter.writeStartElement("tag3", "ns3");
+    xmlWriter.writeAttribute("atr", "val");
+    xmlWriter.writeEndElement("tag3", "ns3");
+    xmlWriter.writeEndElement("tag1");
+    // xmlWriter.writeEndElement(ValueManagerIF.XML_TAG_VALUE);
+  }
+
+  /**
+   * This method does the test.
+   * 
+   * @throws XmlException
+   *         on xml problem.
+   * @throws ValueParseException
+   *         on parsing problem.
+   */
+  public void test() throws XmlException, ValueParseException {
+
     /**
-     * The constructor.
+     * XMLStreamWriter xmlSerializer =
+     * StaxUtil.createXmlStreamWriter(System.out);
+     * xmlSerializer.writeStartDocument(); toXml(xmlSerializer);
+     * xmlSerializer.writeEndDocument(); xmlSerializer.close();
      */
-    public XmlValueManagerTest() {
+    ValueManagerIF<Element> manager = new XmlValueManager();
+    Document doc = DomUtil.createDocument();
+    XmlWriterIF domWriter = new DomXmlWriter(doc);
+    toXml(domWriter);
+    System.out.println(manager.getValueType());
+    System.out.println(manager.getName());
+    System.out.println("--");
+    Element rootElement = doc.getDocumentElement();
+    String xmlString = manager.toString(rootElement);
+    System.out.println(xmlString);
+    System.out.println("--");
 
-        super();
-    }
-
-    /**
-     * This method produces some strange xml for testing.
-     * 
-     * @param xmlWriter
-     *        is the serializer where to create the xml.
-     * @throws XmlException
-     *         if the xml is illegal or general error.
-     */
-    public static void toXml(XmlWriterIF xmlWriter) throws XmlException {
-
-        String ns3 = "http://URI3";
-        //xmlWriter.writeStartElement(ValueManagerIF.XML_TAG_VALUE);
-        //xmlWriter.writeAttribute(ValueManagerIF.XML_ATR_VALUE_NAME, XmlValueManager.VALUE_NAME);
-        xmlWriter.writeStartElement("tag1");
-        xmlWriter.writeNamespaceDeclaration("ns3", ns3);
-        xmlWriter.writeAttribute("atr", "val");
-        xmlWriter.writeCharacters("Hello World!&<>äöüßÄÖÜ");
-        xmlWriter.writeStartElement("tag2", "ns2", "http://URI2");
-        xmlWriter.writeAttribute("atr", "val&<>\"");
-        xmlWriter.writeCharacters("Hello World!");
-        xmlWriter.writeEndElement("tag2", "ns2");
-        xmlWriter.writeStartElement("tag3", "ns3");
-        xmlWriter.writeAttribute("atr", "val");
-        xmlWriter.writeEndElement("tag3", "ns3");
-        xmlWriter.writeEndElement("tag1");
-        //xmlWriter.writeEndElement(ValueManagerIF.XML_TAG_VALUE);
-    }
-
-    /**
-     * This method does the test.
-     * 
-     * @throws XmlException
-     *         on xml problem.
-     * @throws ValueParseException
-     *         on parsing problem.
-     */
-    public void test() throws XmlException, ValueParseException {
-
-        /**
-         * XMLStreamWriter xmlSerializer =
-         * StaxUtil.createXmlStreamWriter(System.out);
-         * xmlSerializer.writeStartDocument(); toXml(xmlSerializer);
-         * xmlSerializer.writeEndDocument(); xmlSerializer.close();
-         */
-        ValueManagerIF<Element> manager = new XmlValueManager();
-        Document doc = DomUtil.createDocument();
-        XmlWriterIF domWriter = new DomXmlWriter(doc);
-        toXml(domWriter);
-        System.out.println(manager.getValueType());
-        System.out.println(manager.getName());
-        System.out.println("--");
-        Element rootElement = doc.getDocumentElement();
-        String xmlString = manager.toString(rootElement);
-        System.out.println(xmlString);
-        System.out.println("--");
-
-        Element root2Element = manager.parse(xmlString);
-        String xmlString2 = manager.toString(root2Element);
-        System.out.println(xmlString2);
-        System.out.println("--");
-        //assertEquals(xmlString, xmlString2);
-        StringWriter sw = new StringWriter();
-        XmlWriterIF outSerializer = new OutputXmlWriter(sw, null, "UTF-8");
-        toXml(outSerializer);
-        System.out.println(sw.toString());
-        System.out.println("--");
-    }
+    Element root2Element = manager.parse(xmlString);
+    String xmlString2 = manager.toString(root2Element);
+    System.out.println(xmlString2);
+    System.out.println("--");
+    // assertEquals(xmlString, xmlString2);
+    StringWriter sw = new StringWriter();
+    XmlWriterIF outSerializer = new OutputXmlWriter(sw, null, "UTF-8");
+    toXml(outSerializer);
+    System.out.println(sw.toString());
+    System.out.println("--");
+  }
 
 }
