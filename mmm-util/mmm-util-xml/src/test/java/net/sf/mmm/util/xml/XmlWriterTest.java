@@ -1,5 +1,5 @@
 /* $ Id: $ */
-package net.sf.mmm.xml.test;
+package net.sf.mmm.util.xml;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -12,9 +12,6 @@ import org.w3c.dom.Element;
 
 import junit.framework.TestCase;
 
-import net.sf.mmm.value.api.ValueManagerIF;
-import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.impl.type.XmlValueManager;
 import net.sf.mmm.xml.DomUtil;
 import net.sf.mmm.xml.XmlUtil;
 import net.sf.mmm.xml.api.XmlException;
@@ -77,7 +74,7 @@ public class XmlWriterTest extends TestCase {
    *         on parsing problem.
    */
   @Test
-  public void testXml() throws XmlException, ValueParseException {
+  public void testXml() throws XmlException {
 
     /**
      * XMLStreamWriter xmlSerializer =
@@ -85,25 +82,10 @@ public class XmlWriterTest extends TestCase {
      * xmlSerializer.writeStartDocument(); toXml(xmlSerializer);
      * xmlSerializer.writeEndDocument(); xmlSerializer.close();
      */
-    System.out.println(manager.toString());
     Document doc = DomUtil.createDocument();
     XmlWriterIF domWriter = new DomXmlWriter(doc);
     toXml(domWriter);
     Element rootElement = doc.getDocumentElement();
-    String xmlString = manager.toString(rootElement);
-    System.out.println(xmlString);
-    System.out.println("--");
-
-    Element root2Element = manager.parse(xmlString);
-    String xmlString2 = manager.toString(root2Element);
-    System.out.println(xmlString2);
-    System.out.println("--");
-    // assertEquals(xmlString, xmlString2);
-    StringWriter sw = new StringWriter();
-    XmlWriterIF outSerializer = new OutputXmlWriter(sw, null, "UTF-8");
-    toXml(outSerializer);
-    System.out.println(sw.toString());
-    System.out.println("--");
   }
 
   /**
