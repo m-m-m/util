@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<test xmlns:xi="http://www.w3.org/2001/XInclude">
-  <!-- start -->
-  <xi:include href="/home/joerg/projects/m-m-m/components/xml/src/test/resources/b.xml" xpointer="b" parse="xml"/>
-  <!-- end -->
-</test>

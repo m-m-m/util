@@ -25,7 +25,6 @@
     <module>mmm-setup</module>
     <module>mmm-util</module>
     <module>mmm-nls</module>
-    <module>mmm-xml</module>
     <module>mmm-uit</module>
     <module>mmm-value</module>
     <module>mmm-context</module>
@@ -166,11 +165,10 @@
     <url>http://sourceforge.net/tracker/?group_id=40062&#038;atid=427657</url>
   </issueManagement>
   <scm>
-    <!-- https://m-m-m.googlecode.com/svn/trunk -->
-    <connection>scm:svn:http://svn.projxpert.com/mmm/trunk</connection>
-    <developerConnection>scm:svn:https://svn.projxpert.com/mmm/trunk</developerConnection>
+    <connection>scm:svn:http://m-m-m.googlecode.com/svn/trunk</connection>
+    <developerConnection>scm:svn:https://m-m-m.googlecode.com/svn/trunk</developerConnection>
     <tag/>
-    <url>http://svn.projxpert.com/mmm/trunk</url>
+    <url>http://m-m-m.googlecode.com/svn/trunk</url>
   </scm>
   <distributionManagement>
     <site>
