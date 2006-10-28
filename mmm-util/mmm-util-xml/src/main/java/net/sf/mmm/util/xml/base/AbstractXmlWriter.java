@@ -1,13 +1,13 @@
 /* $ Id: $ */
-package net.sf.mmm.xml.base;
+package net.sf.mmm.util.xml.base;
 
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.xml.api.XmlWriterIF} interface.
+ * {@link net.sf.mmm.util.xml.api.XmlWriterIF} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -41,7 +41,7 @@ public abstract class AbstractXmlWriter implements XmlWriterIF {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(java.lang.String)
    * 
    */
   public void writeStartElement(String localName) throws XmlException {
@@ -50,7 +50,7 @@ public abstract class AbstractXmlWriter implements XmlWriterIF {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -60,7 +60,7 @@ public abstract class AbstractXmlWriter implements XmlWriterIF {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -70,7 +70,7 @@ public abstract class AbstractXmlWriter implements XmlWriterIF {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeEndElement(String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(String)
    * 
    */
   public void writeEndElement(String localName) throws XmlException {

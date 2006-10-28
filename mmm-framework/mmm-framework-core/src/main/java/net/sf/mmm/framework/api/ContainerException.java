@@ -11,26 +11,26 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ContainerException extends IocException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -596276084369784042L;
+  /** UID for serialization */
+  private static final long serialVersionUID = -596276084369784042L;
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * 
-     */
-    public ContainerException(String newInternaitionalizedMessage, Object... newArguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * 
+   */
+  public ContainerException(String newInternaitionalizedMessage, Object... newArguments) {
 
-        super(newInternaitionalizedMessage, newArguments);
-    }
+    super(newInternaitionalizedMessage, newArguments);
+  }
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * 
-     */
-    public ContainerException(Throwable newNested, String newInternaitionalizedMessage,
-            Object... newArguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
+   * 
+   */
+  public ContainerException(Throwable newNested, String newInternaitionalizedMessage,
+      Object... newArguments) {
 
-        super(newNested, newInternaitionalizedMessage, newArguments);
-    }
+    super(newNested, newInternaitionalizedMessage, newArguments);
+  }
 
 }

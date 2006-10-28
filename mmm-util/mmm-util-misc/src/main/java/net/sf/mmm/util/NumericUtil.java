@@ -2,8 +2,8 @@
 package net.sf.mmm.util;
 
 /**
- * This class is a collection of utility functions for {@link Number} handling
- * and manipulation.
+ * This class is a collection of utility functions for handling
+ * and manipulation of {@link Number numbers}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

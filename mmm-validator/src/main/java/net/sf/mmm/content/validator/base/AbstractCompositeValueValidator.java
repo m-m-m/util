@@ -6,8 +6,8 @@ import java.util.List;
 
 import net.sf.mmm.content.validator.api.ValidationResultIF;
 import net.sf.mmm.content.validator.api.ValueValidatorIF;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 /**
  * This is an abstract base implementation of a composite ValueValidatorIF.
@@ -136,7 +136,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
     }
 
     /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {
     

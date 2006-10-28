@@ -1,5 +1,5 @@
 /* $ Id: $ */
-package net.sf.mmm.xml.impl;
+package net.sf.mmm.util.xml.impl;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -10,9 +10,9 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import net.sf.mmm.xml.XmlUtil;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.base.AbstractXmlWriter;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
  * TODO This type ...
@@ -58,7 +58,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -82,7 +82,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -131,7 +131,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -150,7 +150,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -165,7 +165,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeComment(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeComment(java.lang.String)
    * 
    */
   public void writeComment(String comment) throws XmlException {
@@ -174,7 +174,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
    * 
    */
   public void writeCharacters(String text) throws XmlException {
@@ -197,7 +197,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCData(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCData(java.lang.String)
    * 
    */
   public void writeCData(String text) throws XmlException {

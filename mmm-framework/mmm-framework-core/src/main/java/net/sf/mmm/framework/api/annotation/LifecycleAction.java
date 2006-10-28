@@ -39,95 +39,95 @@ package net.sf.mmm.framework.api.annotation;
  */
 public enum LifecycleAction {
 
-    /**
-     * Action marker for initialization method. The recomendet signature of the
-     * associated method is:
-     * 
-     * <pre>
-     * public void initialize()
-     * </pre>
-     * 
-     * @see net.sf.mmm.framework.api.marker.InitializableIF
-     */
-    INITIALIZE,
+  /**
+   * Action marker for initialization method. The recomendet signature of the
+   * associated method is:
+   * 
+   * <pre>
+   * public void initialize()
+   * </pre>
+   * 
+   * @see net.sf.mmm.framework.api.marker.InitializableIF
+   */
+  INITIALIZE,
 
-    /**
-     * Action marker for start method. The framework will NOT call this method
-     * in a separate {@link Thread}. The recomendet signature of the associated
-     * method is:
-     * 
-     * <pre>
-     * public void start()
-     * </pre>
-     * 
-     * @see net.sf.mmm.framework.api.marker.StartableIF
-     */
-    START,
+  /**
+   * Action marker for start method. The framework will NOT call this method
+   * in a separate {@link Thread}. The recomendet signature of the associated
+   * method is:
+   * 
+   * <pre>
+   * public void start()
+   * </pre>
+   * 
+   * @see net.sf.mmm.framework.api.marker.StartableIF
+   */
+  START,
 
-    /**
-     * Action marker for the execute method. This method will be called in a
-     * seperate {@link Thread}. It may be done after some time and return or
-     * loop forever. The recomendet signature of the associated method is
-     * {@link Runnable#run()} or
-     * 
-     * <pre>
-     * public void execute()
-     * </pre>
-     */
-    EXECUTE,
+  /**
+   * Action marker for the execute method. This method will be called in a
+   * seperate {@link Thread}. It may be done after some time and return or
+   * loop forever. The recomendet signature of the associated method is
+   * {@link Runnable#run()} or
+   * 
+   * <pre>
+   * public void execute()
+   * </pre>
+   */
+  EXECUTE,
 
-    /**
-     * Action marker for pausing a component. The recomendet signature of the
-     * associated method is:
-     * 
-     * <pre>
-     * public void pause()
-     * </pre>
-     */
-    PAUSE,
+  /**
+   * Action marker for pausing a component. The recomendet signature of the
+   * associated method is:
+   * 
+   * <pre>
+   * public void pause()
+   * </pre>
+   */
+  PAUSE,
 
-    /**
-     * Action marker for reconfiguration. This method is called if configuration
-     * that was {@link Injection injected} has changed. The {@link #PAUSE}
-     * action will be performed on the component before this action is invoked.
-     * It is not specified if the configuration instance itself changes or
-     * another instance of the configuration is injected immediatly before this
-     * action is called. The recomendet signature of the associated method is:
-     * 
-     * <pre>
-     * public void reconfigure()
-     * </pre>
-     */
-    RECONFIGURE,
+  /**
+   * Action marker for reconfiguration. This method is called if configuration
+   * that was {@link Injection injected} has changed. The {@link #PAUSE}
+   * action will be performed on the component before this action is invoked.
+   * It is not specified if the configuration instance itself changes or
+   * another instance of the configuration is injected immediatly before this
+   * action is called. The recomendet signature of the associated method is:
+   * 
+   * <pre>
+   * public void reconfigure()
+   * </pre>
+   */
+  RECONFIGURE,
 
-    /**
-     * Action marker for resuming a component. This is the inverse action of
-     * {@link #PAUSE}. The recomendet signature of the associated method is:
-     * 
-     * <pre>
-     * public void resume()
-     * </pre>
-     */
-    RESUME,
+  /**
+   * Action marker for resuming a component. This is the inverse action of
+   * {@link #PAUSE}. The recomendet signature of the associated method is:
+   * 
+   * <pre>
+   * public void resume()
+   * </pre>
+   */
+  RESUME,
 
-    /**
-     * Action marker for stopping a component. This is the inverse action of
-     * {@link #START}. The recomendet signature of the associated method is:
-     * 
-     * <pre>
-     * public void stop()
-     * </pre>
-     */
-    STOP,
+  /**
+   * Action marker for stopping a component. This is the inverse action of
+   * {@link #START}. The recomendet signature of the associated method is:
+   * 
+   * <pre>
+   * public void stop()
+   * </pre>
+   */
+  STOP,
 
-    /**
-     * Action marker for dispsing a component. The recomendet signature of the
-     * associated method is:
-     * 
-     * <pre>
-     * public void dispose()
-     * </pre>
-     */
-    DISPOSE
+  /**
+   * Action marker for dispsing a component. The recomendet signature of the
+   * associated method is:
+   * 
+   * <pre>
+   * public void dispose()
+   * </pre>
+   */
+  DISPOSE
 
 }

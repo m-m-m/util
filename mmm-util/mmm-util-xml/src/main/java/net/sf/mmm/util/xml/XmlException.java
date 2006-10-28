@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.xml.api;
+package net.sf.mmm.util.xml;
 
 import net.sf.mmm.nls.base.NlsException;
 

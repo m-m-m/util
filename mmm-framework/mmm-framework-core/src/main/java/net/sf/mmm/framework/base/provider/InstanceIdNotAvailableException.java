@@ -16,24 +16,24 @@ import net.sf.mmm.framework.api.ComponentManagerIF;
  */
 public class InstanceIdNotAvailableException extends ComponentException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 5117938605875157668L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 5117938605875157668L;
 
-    /**
-     * The constructor.
-     * 
-     * @param instanceId
-     *        is the
-     *        {@link ComponentManagerIF#requestComponent(Class, String) requested}
-     *        instance-ID that is NOT available.
-     * @param descriptor
-     *        is the descriptor of the {@link ComponentDescriptorIF component}
-     *        that was requested.
-     */
-    public InstanceIdNotAvailableException(String instanceId, ComponentDescriptorIF<?> descriptor) {
+  /**
+   * The constructor.
+   * 
+   * @param instanceId
+   *        is the
+   *        {@link ComponentManagerIF#requestComponent(Class, String) requested}
+   *        instance-ID that is NOT available.
+   * @param descriptor
+   *        is the descriptor of the {@link ComponentDescriptorIF component}
+   *        that was requested.
+   */
+  public InstanceIdNotAvailableException(String instanceId, ComponentDescriptorIF<?> descriptor) {
 
-        super(NlsResourceBundle.ERR_COMPONENT_ID_NOT_AVAILABLE, descriptor.getSpecification(),
-                instanceId);
-    }
+    super(NlsResourceBundle.ERR_COMPONENT_ID_NOT_AVAILABLE, descriptor.getSpecification(),
+        instanceId);
+  }
 
 }

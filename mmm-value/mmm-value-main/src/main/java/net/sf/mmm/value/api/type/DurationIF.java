@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.value.api.type;
 
-import net.sf.mmm.xml.api.XmlSerializableIF;
+import net.sf.mmm.util.xml.api.XmlSerializableIF;
 
 /**
  * This is the interface for a duration value. A duration represents the

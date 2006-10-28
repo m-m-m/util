@@ -9,13 +9,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.util.DateUtil;
-import net.sf.mmm.xml.DomUtil;
+import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 import net.sf.mmm.value.api.ValueManagerIF;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**
  * This is the {@link ValueManagerIF manager} for {@link java.util.Date date}

@@ -10,8 +10,9 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation is used to associate a public non-arg method of a component
- * {@link net.sf.mmm.framework.api.annotation.Implementation} with one (or multiple)
- * lifecycle {@link net.sf.mmm.framework.api.annotation.LifecycleAction action}(s).
+ * {@link net.sf.mmm.framework.api.annotation.Implementation} with one (or
+ * multiple) lifecycle
+ * {@link net.sf.mmm.framework.api.annotation.LifecycleAction action}(s).
  * 
  * @see net.sf.mmm.framework.api.annotation.LifecycleAction
  * 
@@ -23,12 +24,12 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Lifecycle {
 
-    /**
-     * This method gets the lifecycle action(s) annotated in the according
-     * method.
-     * 
-     * @return the lifecycle action.
-     */
-    LifecycleAction[] value();
+  /**
+   * This method gets the lifecycle action(s) annotated in the according
+   * method.
+   * 
+   * @return the lifecycle action.
+   */
+  LifecycleAction[] value();
 
 }

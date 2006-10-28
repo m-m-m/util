@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import net.sf.mmm.configuration.api.event.ConfigurationChangeEvent;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF;
-import net.sf.mmm.event.EventSourceIF;
+import net.sf.mmm.util.event.EventSourceIF;
 import net.sf.mmm.value.api.GenericValueIF;
 
 /**

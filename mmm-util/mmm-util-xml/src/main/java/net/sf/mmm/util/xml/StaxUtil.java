@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.xml;
+package net.sf.mmm.util.xml;
 
 import java.io.OutputStream;
 import java.io.Writer;

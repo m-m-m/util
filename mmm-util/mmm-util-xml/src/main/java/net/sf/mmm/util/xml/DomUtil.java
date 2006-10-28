@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.xml;
+package net.sf.mmm.util.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,9 +32,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import net.sf.mmm.xml.XmlUtil;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 /**
  * This utility class contains methods that help to deal with the
@@ -378,7 +377,7 @@ public final class DomUtil {
    * This method adapts from DOM to {@link XmlWriterIF}. It serializes the
    * given DOM node to the given XML xmlWriter.
    * 
-   * @see net.sf.mmm.xml.api.XmlSerializerIF
+   * @see net.sf.mmm.util.xml.api.XmlSerializerIF
    * 
    * @param xmlWriter
    *        is the receiver of the serialized XML data.

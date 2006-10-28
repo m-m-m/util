@@ -13,22 +13,22 @@ import net.sf.mmm.framework.api.ContainerException;
  */
 public abstract class AbstractComponentManager implements ComponentManagerIF {
 
-    /**
-     * The constructor.
-     */
-    public AbstractComponentManager() {
+  /**
+   * The constructor.
+   */
+  public AbstractComponentManager() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * @see net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(java.lang.Class)
-     * 
-     */
-    public final <S> S requestComponent(Class<S> specification) throws ComponentException,
-            ContainerException {
+  /**
+   * @see net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(java.lang.Class)
+   * 
+   */
+  public final <S> S requestComponent(Class<S> specification) throws ComponentException,
+      ContainerException {
 
-        return requestComponent(specification, DEFAULT_INSTANCE_ID);
-    }
+    return requestComponent(specification, DEFAULT_INSTANCE_ID);
+  }
 
 }

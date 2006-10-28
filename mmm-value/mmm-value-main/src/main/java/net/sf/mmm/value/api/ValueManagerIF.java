@@ -1,9 +1,9 @@
 /* $Id$ */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlSerializerIF;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlSerializerIF;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 import org.w3c.dom.Element;
 

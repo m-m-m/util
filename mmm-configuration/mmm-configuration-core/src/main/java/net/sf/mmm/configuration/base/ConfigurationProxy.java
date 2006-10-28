@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF;
-import net.sf.mmm.event.EventListenerIF;
+import net.sf.mmm.util.event.EventListenerIF;
 import net.sf.mmm.value.api.MutableGenericValueIF;
 
 /**
@@ -219,7 +219,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListenerIF)
    *      
    */
   public void addListener(ConfigurationChangeListenerIF listener) {
@@ -228,7 +228,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListenerIF)
    *      
    */
   public void removeListener(ConfigurationChangeListenerIF listener) {

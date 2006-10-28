@@ -10,26 +10,25 @@ package net.sf.mmm.framework.api;
  */
 public class ComponentException extends IocException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -3274177722975395418L;
+  /** UID for serialization */
+  private static final long serialVersionUID = -3274177722975395418L;
 
-    /**
-     * @see IocException#IocException(String, Object[])
-     * 
-     */
-    public ComponentException(String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see IocException#IocException(String, Object[])
+   * 
+   */
+  public ComponentException(String internaitionalizedMessage, Object... arguments) {
 
-        super(internaitionalizedMessage, arguments);
-    }
+    super(internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see IocException#IocException(Throwable, String, Object[])
-     * 
-     */
-    public ComponentException(Throwable nested, String internaitionalizedMessage,
-            Object... arguments) {
+  /**
+   * @see IocException#IocException(Throwable, String, Object[])
+   * 
+   */
+  public ComponentException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 
-        super(nested, internaitionalizedMessage, arguments);
-    }
+    super(nested, internaitionalizedMessage, arguments);
+  }
 
 }

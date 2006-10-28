@@ -2,9 +2,9 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.util.xml.api.XmlSerializableIF;
 import net.sf.mmm.value.api.GenericValueIF;
 import net.sf.mmm.value.api.ValueException;
-import net.sf.mmm.xml.api.XmlSerializableIF;
 
 /**
  * This is the interface for a mathematical term. A term is an object that can

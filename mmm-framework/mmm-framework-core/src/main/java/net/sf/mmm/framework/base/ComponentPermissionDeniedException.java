@@ -19,22 +19,22 @@ import net.sf.mmm.framework.api.IocSecurityManagerIF;
  */
 public class ComponentPermissionDeniedException extends ComponentSecurityException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -328513333974531814L;
+  /** UID for serialization */
+  private static final long serialVersionUID = -328513333974531814L;
 
-    /**
-     * The constructor.
-     * 
-     * @param source
-     *        is the requestor specification.
-     * @param target
-     *        is the requested specifciation.
-     * @param instanceId
-     *        is the requested instance-ID.
-     */
-    public ComponentPermissionDeniedException(Class source, Class target, String instanceId) {
+  /**
+   * The constructor.
+   * 
+   * @param source
+   *        is the requestor specification.
+   * @param target
+   *        is the requested specifciation.
+   * @param instanceId
+   *        is the requested instance-ID.
+   */
+  public ComponentPermissionDeniedException(Class source, Class target, String instanceId) {
 
-        super(NlsResourceBundle.ERR_COMPONENT_PERMISSION_DENIED, source, target, instanceId);
-    }
+    super(NlsResourceBundle.ERR_COMPONENT_PERMISSION_DENIED, source, target, instanceId);
+  }
 
 }

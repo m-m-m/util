@@ -15,18 +15,18 @@ import net.sf.mmm.framework.api.IocContainerIF;
  */
 public class DependencyCycleException extends DependencyException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 2162762136391685441L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 2162762136391685441L;
 
-    /**
-     * The constructor.
-     * 
-     * @param cycle
-     *        is a textual representation of the cycle (e.g. "A->B->C->A").
-     */
-    public DependencyCycleException(String cycle) {
+  /**
+   * The constructor.
+   * 
+   * @param cycle
+   *        is a textual representation of the cycle (e.g. "A->B->C->A").
+   */
+  public DependencyCycleException(String cycle) {
 
-        super(NlsResourceBundle.ERR_DEPENDENCY_CYCLE, cycle);
-    }
+    super(NlsResourceBundle.ERR_DEPENDENCY_CYCLE, cycle);
+  }
 
 }

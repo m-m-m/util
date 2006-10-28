@@ -13,29 +13,29 @@ package net.sf.mmm.framework.base.descriptor;
  */
 public class SimpleComponentDescriptor<S> extends AbstractComponentDescriptor<S> {
 
-    /** @see #getSpecification() */
-    private final Class<S> specification;
+  /** @see #getSpecification() */
+  private final Class<S> specification;
 
-    /**
-     * The constructor.
-     * 
-     * @param componentSpecification
-     *        is the {@link #getSpecification() specification} of the component.
-     */
-    public SimpleComponentDescriptor(Class<S> componentSpecification) {
+  /**
+   * The constructor.
+   * 
+   * @param componentSpecification
+   *        is the {@link #getSpecification() specification} of the component.
+   */
+  public SimpleComponentDescriptor(Class<S> componentSpecification) {
 
-        super();
-        this.specification = componentSpecification;
-        initialize();
-    }
+    super();
+    this.specification = componentSpecification;
+    initialize();
+  }
 
-    /**
-     * @see net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification()
-     * 
-     */
-    public Class<S> getSpecification() {
+  /**
+   * @see net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification()
+   * 
+   */
+  public Class<S> getSpecification() {
 
-        return this.specification;
-    }
+    return this.specification;
+  }
 
 }

@@ -14,33 +14,33 @@ package net.sf.mmm.framework.api;
  */
 public interface ComponentInstanceContainerIF<S> {
 
-    /**
-     * This method gets the component instance.
-     * 
-     * @return the component instance.
-     */
-    S getInstance();
+  /**
+   * This method gets the component instance.
+   * 
+   * @return the component instance.
+   */
+  S getInstance();
 
-    /**
-     * This method gets the
-     * {@link ComponentManagerIF#requestComponent(Class, String) instance-ID} of
-     * this component {@link #getInstance() instance}. The default is
-     * <code>null</code>.
-     * 
-     * @return the instance-ID.
-     */
-    String getInstanceId();
+  /**
+   * This method gets the
+   * {@link ComponentManagerIF#requestComponent(Class, String) instance-ID} of
+   * this component {@link #getInstance() instance}. The default is
+   * <code>null</code>.
+   * 
+   * @return the instance-ID.
+   */
+  String getInstanceId();
 
-    /**
-     * This method gets the string representation of this object. It should
-     * contain the {@link Object#toString() string representations} of the
-     * {@link #getInstance() instance} itself, the
-     * {@link #getInstanceId() instance-ID} and the
-     * {@link ComponentDescriptorIF#getSpecification() specification} of the
-     * component.
-     * 
-     * @see java.lang.Object#toString()
-     */
-    String toString();
+  /**
+   * This method gets the string representation of this object. It should
+   * contain the {@link Object#toString() string representation} of the
+   * {@link #getInstance() instance} itself, the
+   * {@link #getInstanceId() instance-ID} and the
+   * {@link ComponentDescriptorIF#getSpecification() specification} of the
+   * component.
+   * 
+   * @see java.lang.Object#toString()
+   */
+  String toString();
 
 }

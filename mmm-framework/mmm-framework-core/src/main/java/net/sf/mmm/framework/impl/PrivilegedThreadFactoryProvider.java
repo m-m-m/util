@@ -14,12 +14,12 @@ import net.sf.mmm.framework.base.provider.SimpleSingletonProvider;
  */
 public class PrivilegedThreadFactoryProvider extends SimpleSingletonProvider<ThreadFactory> {
 
-    /**
-     * The constructor.
-     */
-    public PrivilegedThreadFactoryProvider() {
+  /**
+   * The constructor.
+   */
+  public PrivilegedThreadFactoryProvider() {
 
-        super(ThreadFactory.class, Executors.privilegedThreadFactory());
-    }
+    super(ThreadFactory.class, Executors.privilegedThreadFactory());
+  }
 
 }

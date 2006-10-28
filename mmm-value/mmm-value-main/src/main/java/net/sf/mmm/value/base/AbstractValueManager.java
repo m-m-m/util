@@ -5,13 +5,13 @@ import org.w3c.dom.Element;
 
 import net.sf.mmm.nls.api.NlsMessageIF;
 import net.sf.mmm.nls.base.NlsMessage;
-import net.sf.mmm.xml.DomUtil;
+import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 import net.sf.mmm.value.NlsResourceBundle;
 import net.sf.mmm.value.api.GenericValueIF;
 import net.sf.mmm.value.api.ValueManagerIF;
 import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**
  * This is the abstract base implementation of the

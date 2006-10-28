@@ -21,49 +21,49 @@ import net.sf.mmm.framework.base.ComponentInstanceContainer;
  */
 public class SimpleSingletonProvider<S> extends AbstractStaticSingletonComponentProvider<S> {
 
-    /**
-     * The constructor.
-     * 
-     * @param specification
-     *        is the
-     *        {@link ComponentDescriptorIF#getSpecification() specification}.
-     * @param instance
-     *        is the singleton instance.
-     */
-    public SimpleSingletonProvider(Class<S> specification, S instance) {
+  /**
+   * The constructor.
+   * 
+   * @param specification
+   *        is the
+   *        {@link ComponentDescriptorIF#getSpecification() specification}.
+   * @param instance
+   *        is the singleton instance.
+   */
+  public SimpleSingletonProvider(Class<S> specification, S instance) {
 
-        super(specification);
-        setInstanceContainer(new ComponentInstanceContainer<S>(instance));
-    }
+    super(specification);
+    setInstanceContainer(new ComponentInstanceContainer<S>(instance));
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param componentDescriptor
-     *        is the {@link ComponentDescriptorIF descriptor} of the provided
-     *        component.
-     * @param instance
-     *        is the singleton instance.
-     */
-    public SimpleSingletonProvider(ComponentDescriptorIF<S> componentDescriptor, S instance) {
+  /**
+   * The constructor.
+   * 
+   * @param componentDescriptor
+   *        is the {@link ComponentDescriptorIF descriptor} of the provided
+   *        component.
+   * @param instance
+   *        is the singleton instance.
+   */
+  public SimpleSingletonProvider(ComponentDescriptorIF<S> componentDescriptor, S instance) {
 
-        this(componentDescriptor, new ComponentInstanceContainer<S>(instance));
-    }
+    this(componentDescriptor, new ComponentInstanceContainer<S>(instance));
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param componentDescriptor
-     *        is the {@link ComponentDescriptorIF descriptor} of the provided
-     *        component.
-     * @param componentInstanceContainer
-     *        is the container with the singleton instance.
-     */
-    public SimpleSingletonProvider(ComponentDescriptorIF<S> componentDescriptor,
-            ComponentInstanceContainerIF<S> componentInstanceContainer) {
+  /**
+   * The constructor.
+   * 
+   * @param componentDescriptor
+   *        is the {@link ComponentDescriptorIF descriptor} of the provided
+   *        component.
+   * @param componentInstanceContainer
+   *        is the container with the singleton instance.
+   */
+  public SimpleSingletonProvider(ComponentDescriptorIF<S> componentDescriptor,
+      ComponentInstanceContainerIF<S> componentInstanceContainer) {
 
-        super(componentDescriptor);
-        setInstanceContainer(componentInstanceContainer);
-    }
+    super(componentDescriptor);
+    setInstanceContainer(componentInstanceContainer);
+  }
 
 }

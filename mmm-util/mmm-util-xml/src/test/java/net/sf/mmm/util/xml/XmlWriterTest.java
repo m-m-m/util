@@ -12,12 +12,11 @@ import org.w3c.dom.Element;
 
 import junit.framework.TestCase;
 
-import net.sf.mmm.xml.DomUtil;
-import net.sf.mmm.xml.XmlUtil;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
-import net.sf.mmm.xml.impl.DomXmlWriter;
-import net.sf.mmm.xml.impl.OutputXmlWriter;
+import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.impl.DomXmlWriter;
+import net.sf.mmm.util.xml.impl.OutputXmlWriter;
 
 /**
  * TODO This type ...

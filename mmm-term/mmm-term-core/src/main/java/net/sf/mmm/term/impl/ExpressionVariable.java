@@ -6,9 +6,9 @@ import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.TermIF;
 import net.sf.mmm.term.base.AbstractVariable;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 import net.sf.mmm.value.api.ValueException;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**
  * This class represents a variable as term. The name of the variable is given
@@ -58,7 +58,7 @@ public class ExpressionVariable extends AbstractVariable {
     }
 
     /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
      * 
      */
     public void toXml(XmlWriterIF serializer) throws XmlException {

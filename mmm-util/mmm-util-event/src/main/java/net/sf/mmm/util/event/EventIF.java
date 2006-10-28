@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.event;
+package net.sf.mmm.util.event;
 
 /**
  * This is the interface for a generic event.

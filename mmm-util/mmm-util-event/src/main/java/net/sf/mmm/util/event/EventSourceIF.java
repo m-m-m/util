@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.event;
+package net.sf.mmm.util.event;
 
 /**
  * This interface allows listeners to be registered and unregistered.
@@ -8,9 +8,9 @@ package net.sf.mmm.event;
  *        is the templated type of the {@link EventIF events} to send.
  * @param <L>
  *        is the templated type of the
- *        {@link net.sf.mmm.event.EventListenerIF listeners} that can be
+ *        {@link net.sf.mmm.util.event.EventListenerIF listeners} that can be
  *        {@link #addListener(EventListenerIF) registered} here and that will
- *        {@link net.sf.mmm.event.EventListenerIF#handleEvent(EventIF) receive}
+ *        {@link net.sf.mmm.util.event.EventListenerIF#handleEvent(EventIF) receive}
  *        the events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

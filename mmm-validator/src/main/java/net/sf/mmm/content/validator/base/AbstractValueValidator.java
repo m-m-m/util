@@ -2,8 +2,8 @@
 package net.sf.mmm.content.validator.base;
 
 import net.sf.mmm.content.validator.api.ValueValidatorIF;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 /**
  * This is the abstract base implementation of the value validator interface.
@@ -21,7 +21,7 @@ public abstract class AbstractValueValidator implements ValueValidatorIF {
     }
 
     /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {
         

@@ -1,8 +1,8 @@
 /* $Id$ */
-package net.sf.mmm.xml.impl;
+package net.sf.mmm.util.xml.impl;
 
-import net.sf.mmm.xml.NlsResourceBundle;
-import net.sf.mmm.xml.api.XmlException;
+import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.XmlException;
 
 /**
  * This is the exception thrown if a namespace prefix is used for XML that has

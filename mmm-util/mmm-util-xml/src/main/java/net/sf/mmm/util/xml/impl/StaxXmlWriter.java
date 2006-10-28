@@ -1,14 +1,14 @@
 /* $Id$ */
-package net.sf.mmm.xml.impl;
+package net.sf.mmm.util.xml.impl;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.base.AbstractXmlWriter;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.xml.api.XmlWriterIF}
+ * This is an implementation of the {@link net.sf.mmm.util.xml.api.XmlWriterIF}
  * interface that delegates the write events to an
  * {@link javax.xml.stream.XMLStreamWriter} of the StAX API (JSR 173).
  * 
@@ -32,7 +32,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -66,7 +66,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -91,7 +91,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -107,7 +107,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
    * 
    */
   public void writeCharacters(String text) throws XmlException {
@@ -120,7 +120,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCData(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCData(java.lang.String)
    * 
    */
   public void writeCData(String text) throws XmlException {
@@ -133,7 +133,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeComment(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeComment(java.lang.String)
    * 
    */
   public void writeComment(String comment) throws XmlException {
@@ -146,7 +146,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
    *      java.lang.String)
    * 
    */

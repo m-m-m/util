@@ -1,17 +1,17 @@
 /* $Id$ */
-package net.sf.mmm.xml.impl;
+package net.sf.mmm.util.xml.impl;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import net.sf.mmm.xml.XmlUtil;
-import net.sf.mmm.xml.NlsResourceBundle;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.base.AbstractXmlWriter;
+import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.xml.api.XmlSerializerIF}
+ * This is an implementation of the {@link net.sf.mmm.util.xml.api.XmlSerializerIF}
  * interface that generates the XML as {@link org.w3c.dom.Node DOM} tree. This
  * can be done from scratch or the XML can be appended to an element of an
  * existing DOM tree.
@@ -57,7 +57,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -101,7 +101,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -123,7 +123,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
    * 
    */
   public void writeCharacters(String text) throws XmlException {
@@ -135,7 +135,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeCData(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCData(java.lang.String)
    * 
    */
   public void writeCData(String text) throws XmlException {
@@ -147,7 +147,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -175,7 +175,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeComment(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeComment(java.lang.String)
    * 
    */
   public void writeComment(String text) throws XmlException {
@@ -187,7 +187,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
    *      java.lang.String)
    * 
    */

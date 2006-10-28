@@ -2,7 +2,6 @@
 package net.sf.mmm.framework.base.provider;
 
 import net.sf.mmm.framework.api.ComponentDescriptorIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
 import net.sf.mmm.framework.api.ComponentProviderIF;
 import net.sf.mmm.framework.base.descriptor.SimpleComponentDescriptor;
 
@@ -19,42 +18,42 @@ import net.sf.mmm.framework.base.descriptor.SimpleComponentDescriptor;
  */
 public abstract class AbstractComponentProvider<S> implements ComponentProviderIF<S> {
 
-    /** @see #getDescriptor() */
-    private final ComponentDescriptorIF<S> descriptor;
+  /** @see #getDescriptor() */
+  private final ComponentDescriptorIF<S> descriptor;
 
-    /**
-     * The constructor.
-     * 
-     * @param specification
-     *        is the
-     *        {@link ComponentDescriptorIF#getSpecification() specification} of
-     *        the component.
-     */
-    public AbstractComponentProvider(Class<S> specification) {
+  /**
+   * The constructor.
+   * 
+   * @param specification
+   *        is the
+   *        {@link ComponentDescriptorIF#getSpecification() specification} of
+   *        the component.
+   */
+  public AbstractComponentProvider(Class<S> specification) {
 
-        super();
-        this.descriptor = new SimpleComponentDescriptor<S>(specification);
-    }
+    super();
+    this.descriptor = new SimpleComponentDescriptor<S>(specification);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param componentDescriptor
-     *        is the {@link #getDescriptor() descriptor} of the component.
-     */
-    public AbstractComponentProvider(ComponentDescriptorIF<S> componentDescriptor) {
+  /**
+   * The constructor.
+   * 
+   * @param componentDescriptor
+   *        is the {@link #getDescriptor() descriptor} of the component.
+   */
+  public AbstractComponentProvider(ComponentDescriptorIF<S> componentDescriptor) {
 
-        super();
-        this.descriptor = componentDescriptor;
-    }
-    
-    /**
-     * @see net.sf.mmm.framework.api.ComponentProviderIF#getDescriptor()
-     * 
-     */
-    public final ComponentDescriptorIF<S> getDescriptor() {
+    super();
+    this.descriptor = componentDescriptor;
+  }
 
-        return this.descriptor;
-    }
-    
+  /**
+   * @see net.sf.mmm.framework.api.ComponentProviderIF#getDescriptor()
+   * 
+   */
+  public final ComponentDescriptorIF<S> getDescriptor() {
+
+    return this.descriptor;
+  }
+
 }

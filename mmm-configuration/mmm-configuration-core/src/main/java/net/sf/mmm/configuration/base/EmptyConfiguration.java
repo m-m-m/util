@@ -87,7 +87,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.event.EventSourceIF#addListener(net.sf.mmm.event.EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSourceIF#addListener(net.sf.mmm.util.event.EventListenerIF)
    *      
    */
   public void addListener(ConfigurationChangeListenerIF listener) {
@@ -95,7 +95,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.event.EventSourceIF#removeListener(net.sf.mmm.event.EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(net.sf.mmm.util.event.EventListenerIF)
    *      
    */
   public void removeListener(ConfigurationChangeListenerIF listener) {

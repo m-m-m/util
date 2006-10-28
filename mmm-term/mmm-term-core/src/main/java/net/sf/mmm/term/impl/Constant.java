@@ -3,9 +3,9 @@ package net.sf.mmm.term.impl;
 
 import net.sf.mmm.context.api.ContextIF;
 import net.sf.mmm.term.base.AbstractTerm;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlSerializerIF;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlSerializerIF;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 /**
  * This is the implementation of a constant
@@ -39,7 +39,7 @@ public class Constant<C> extends AbstractTerm {
     private static class XmlSerializer<C> implements XmlSerializerIF<C> {
 
         /**
-         * @see net.sf.mmm.xml.api.XmlSerializerIF#toXml(net.sf.mmm.xml.api.XmlWriterIF,
+         * @see net.sf.mmm.util.xml.api.XmlSerializerIF#toXml(net.sf.mmm.util.xml.api.XmlWriterIF,
          *      java.lang.Object) 
          */
         public void toXml(XmlWriterIF xmlWriter, C object) throws XmlException {
@@ -112,7 +112,7 @@ public class Constant<C> extends AbstractTerm {
     }
 
     /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
      *      
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {

@@ -2,10 +2,10 @@
 package net.sf.mmm.configuration.api.event;
 
 import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.event.EventIF;
+import net.sf.mmm.util.event.EventIF;
 
 /**
- * This class represents an {@link net.sf.mmm.event.EventIF event} that notifies
+ * This class represents an {@link net.sf.mmm.util.event.EventIF event} that notifies
  * a
  * {@link net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF listener}
  * about a {@link net.sf.mmm.configuration.api.ConfigurationIF configuration}

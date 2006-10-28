@@ -1,7 +1,9 @@
 /* $Id$ */
-package net.sf.mmm.xml.api;
+package net.sf.mmm.util.xml.api;
 
 import java.io.Serializable;
+
+import net.sf.mmm.util.xml.XmlException;
 
 /**
  * This is the interface for an object that can be serialized to XML.

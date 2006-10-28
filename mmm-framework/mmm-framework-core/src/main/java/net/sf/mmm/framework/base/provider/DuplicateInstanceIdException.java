@@ -16,21 +16,21 @@ import net.sf.mmm.framework.api.ComponentException;
  */
 public class DuplicateInstanceIdException extends ComponentException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 8793855410381174579L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 8793855410381174579L;
 
-    /**
-     * The constructor.
-     * 
-     * @param instanceId
-     *        is the instance-ID that is already in use.
-     * @param descriptor
-     *        is the descriptor of the component.
-     */
-    public DuplicateInstanceIdException(String instanceId, ComponentDescriptorIF descriptor) {
+  /**
+   * The constructor.
+   * 
+   * @param instanceId
+   *        is the instance-ID that is already in use.
+   * @param descriptor
+   *        is the descriptor of the component.
+   */
+  public DuplicateInstanceIdException(String instanceId, ComponentDescriptorIF descriptor) {
 
-        super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_INSTANCE_ID, instanceId, descriptor
-                .getSpecification());
-    }
+    super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_INSTANCE_ID, instanceId, descriptor
+        .getSpecification());
+  }
 
 }

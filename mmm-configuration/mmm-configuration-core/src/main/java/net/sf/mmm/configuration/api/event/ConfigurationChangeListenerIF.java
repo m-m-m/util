@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.configuration.api.event;
 
-import net.sf.mmm.event.EventListenerIF;
+import net.sf.mmm.util.event.EventListenerIF;
 
 /**
  * This is the interface a listener needs to implement in order to receive

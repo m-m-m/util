@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.xml;
+package net.sf.mmm.util.xml;
 
 import java.io.Writer;
 
@@ -8,7 +8,7 @@ import net.sf.mmm.util.io.EscapeWriter;
 /**
  * This utility class contains methods that held to deal with XML.
  * 
- * @see net.sf.mmm.xml.DomUtil
+ * @see net.sf.mmm.util.xml.DomUtil
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

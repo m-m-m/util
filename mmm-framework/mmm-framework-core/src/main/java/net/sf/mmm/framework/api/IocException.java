@@ -11,23 +11,23 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public abstract class IocException extends NlsRuntimeException {
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * 
-     */
-    public IocException(String newInternaitionalizedMessage, Object... newArguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * 
+   */
+  public IocException(String newInternaitionalizedMessage, Object... newArguments) {
 
-        super(newInternaitionalizedMessage, newArguments);
-    }
+    super(newInternaitionalizedMessage, newArguments);
+  }
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * 
-     */
-    public IocException(Throwable newNested, String newInternaitionalizedMessage,
-            Object... newArguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
+   * 
+   */
+  public IocException(Throwable newNested, String newInternaitionalizedMessage,
+      Object... newArguments) {
 
-        super(newNested, newInternaitionalizedMessage, newArguments);
-    }
+    super(newNested, newInternaitionalizedMessage, newArguments);
+  }
 
 }

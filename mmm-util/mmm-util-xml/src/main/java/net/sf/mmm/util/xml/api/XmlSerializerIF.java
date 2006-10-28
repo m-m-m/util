@@ -1,11 +1,13 @@
 /* $Id$ */
-package net.sf.mmm.xml.api;
+package net.sf.mmm.util.xml.api;
+
+import net.sf.mmm.util.xml.XmlException;
 
 /**
  * This is the interface for an serializer that can convert objects of a
  * specific type to XML.
  * 
- * @see net.sf.mmm.xml.api.XmlSerializableIF
+ * @see net.sf.mmm.util.xml.api.XmlSerializableIF
  * 
  * @param <O>
  *        is the templated type of the objects to serialize.

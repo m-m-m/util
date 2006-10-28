@@ -8,13 +8,13 @@ import junit.framework.TestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import net.sf.mmm.xml.DomUtil;
+import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.impl.DomXmlWriter;
+import net.sf.mmm.util.xml.impl.OutputXmlWriter;
 import net.sf.mmm.value.api.ValueManagerIF;
 import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
-import net.sf.mmm.xml.impl.DomXmlWriter;
-import net.sf.mmm.xml.impl.OutputXmlWriter;
 
 /**
  * 

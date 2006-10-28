@@ -11,23 +11,23 @@ import net.sf.mmm.framework.api.ComponentException;
  */
 public abstract class ComponentSecurityException extends ComponentException {
 
-    /**
-     * @see ComponentException#ComponentException(String, Object[])
-     * 
-     */
-    public ComponentSecurityException(String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see ComponentException#ComponentException(String, Object[])
+   * 
+   */
+  public ComponentSecurityException(String internaitionalizedMessage, Object... arguments) {
 
-        super(internaitionalizedMessage, arguments);
-    }
+    super(internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see ComponentException#ComponentException(Throwable, String, Object[])
-     * 
-     */
-    public ComponentSecurityException(Throwable nested, String internaitionalizedMessage,
-            Object... arguments) {
+  /**
+   * @see ComponentException#ComponentException(Throwable, String, Object[])
+   * 
+   */
+  public ComponentSecurityException(Throwable nested, String internaitionalizedMessage,
+      Object... arguments) {
 
-        super(nested, internaitionalizedMessage, arguments);
-    }
+    super(nested, internaitionalizedMessage, arguments);
+  }
 
 }

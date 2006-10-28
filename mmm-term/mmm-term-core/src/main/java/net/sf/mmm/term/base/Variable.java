@@ -2,8 +2,8 @@
 package net.sf.mmm.term.base;
 
 import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 
 /**
  * This class represents a variable {@link net.sf.mmm.term.api.TermIF term}.
@@ -54,7 +54,7 @@ public class Variable extends AbstractVariable {
     }
 
     /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
      * 
      */
     public void toXml(XmlWriterIF xmlWriter) throws XmlException {

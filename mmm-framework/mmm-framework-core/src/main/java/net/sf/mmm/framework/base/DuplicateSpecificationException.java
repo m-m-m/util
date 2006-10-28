@@ -16,18 +16,18 @@ import net.sf.mmm.framework.api.ContainerException;
  */
 public class DuplicateSpecificationException extends ContainerException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 536566649568067962L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 536566649568067962L;
 
-    /**
-     * The constructor.
-     * 
-     * @param specification
-     *        is the specification
-     */
-    public DuplicateSpecificationException(Class specification) {
+  /**
+   * The constructor.
+   * 
+   * @param specification
+   *        is the specification
+   */
+  public DuplicateSpecificationException(Class specification) {
 
-        super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_SPECIFICATION, specification);
-    }
+    super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_SPECIFICATION, specification);
+  }
 
 }

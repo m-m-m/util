@@ -6,9 +6,9 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.FunctionIF;
 import net.sf.mmm.term.api.TermIF;
 import net.sf.mmm.term.base.AbstractTerm;
+import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlWriterIF;
 import net.sf.mmm.value.api.ValueException;
-import net.sf.mmm.xml.api.XmlException;
-import net.sf.mmm.xml.api.XmlWriterIF;
 
 /**
  * This class represents an expression as a simple combination of a function and
@@ -103,7 +103,7 @@ public class Expression extends AbstractTerm {
     }
 
     /**
-     * @see net.sf.mmm.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
      * 
      */
     public void toXml(XmlWriterIF serializer) throws XmlException {

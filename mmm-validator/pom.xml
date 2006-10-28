@@ -22,7 +22,7 @@
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-xml</artifactId>
+      <artifactId>mmm-util-xml</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>

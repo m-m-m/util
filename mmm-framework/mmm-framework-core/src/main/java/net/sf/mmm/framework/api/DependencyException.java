@@ -15,31 +15,31 @@ package net.sf.mmm.framework.api;
  */
 public abstract class DependencyException extends IocException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = 592958136566865602L;
+  /** UID for serialization */
+  private static final long serialVersionUID = 592958136566865602L;
 
-    /**
-     * The constructor.
-     * 
-     * @param newInternaitionalizedMessage
-     * @param newArguments
-     */
-    public DependencyException(String newInternaitionalizedMessage, Object... newArguments) {
+  /**
+   * The constructor.
+   * 
+   * @param newInternaitionalizedMessage
+   * @param newArguments
+   */
+  public DependencyException(String newInternaitionalizedMessage, Object... newArguments) {
 
-        super(newInternaitionalizedMessage, newArguments);
-    }
+    super(newInternaitionalizedMessage, newArguments);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param newNested
-     * @param newInternaitionalizedMessage
-     * @param newArguments
-     */
-    public DependencyException(Throwable newNested, String newInternaitionalizedMessage,
-            Object... newArguments) {
+  /**
+   * The constructor.
+   * 
+   * @param newNested
+   * @param newInternaitionalizedMessage
+   * @param newArguments
+   */
+  public DependencyException(Throwable newNested, String newInternaitionalizedMessage,
+      Object... newArguments) {
 
-        super(newNested, newInternaitionalizedMessage, newArguments);
-    }
+    super(newNested, newInternaitionalizedMessage, newArguments);
+  }
 
 }

@@ -1,19 +1,19 @@
 /* $Id$ */
-package net.sf.mmm.event;
+package net.sf.mmm.util.event;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.event.EventListenerIF} interface.
+ * {@link net.sf.mmm.util.event.EventListenerIF} interface.
  * 
  * @param <E>
  *        is the templated type of the events to send.
  * @param <L>
  *        is the templated type of the listeners that can be
  *        {@link #addListener(EventListenerIF) registered} here and that will
- *        {@link net.sf.mmm.event.EventListenerIF#handleEvent(EventIF) receive}
+ *        {@link net.sf.mmm.util.event.EventListenerIF#handleEvent(EventIF) receive}
  *        the sent events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -34,7 +34,7 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
     }
 
     /**
-     * @see net.sf.mmm.event.EventSourceIF#addListener(EventListenerIF)
+     * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListenerIF)
      * 
      */
     public void addListener(L listener) {
@@ -43,7 +43,7 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
     }
 
     /**
-     * @see net.sf.mmm.event.EventSourceIF#removeListener(EventListenerIF)
+     * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListenerIF)
      * 
      */
     public void removeListener(L listener) {
