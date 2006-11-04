@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilderIF;
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorIF;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptorIF;
-import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorBuilderImpl;
 
 import junit.framework.TestCase;
 
@@ -31,14 +31,14 @@ public class PojoDescriptorTest extends TestCase {
     super();
   }
   
-  private void checkProperty(PojoDescriptorIF<MyPojo> pojoDescriptor, String propertyName,
+  private void checkProperty(PojoDescriptor<MyPojo> pojoDescriptor, String propertyName,
       Class readType, Class writeType) {
 
-    PojoPropertyDescriptorIF propertyDescriptor = pojoDescriptor
+    PojoPropertyDescriptor propertyDescriptor = pojoDescriptor
         .getPropertyDescriptor(propertyName);
     assertNotNull(propertyDescriptor);
     assertEquals(propertyName, propertyDescriptor.getName());
-    PojoPropertyAccessorIF accessor;
+    PojoPropertyAccessor accessor;
     // test read accessor
     accessor = propertyDescriptor.getReadAccess();
     if (readType == null) {
@@ -66,8 +66,8 @@ public class PojoDescriptorTest extends TestCase {
   @Test
   public void testPojoDescriptor() throws Exception {
 
-    PojoDescriptorBuilderIF factory = new PojoDescriptorBuilder();
-    PojoDescriptorIF<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
+    PojoDescriptorBuilder factory = new PojoDescriptorBuilderImpl();
+    PojoDescriptor<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
     MyPojo pojoInstance = new MyPojo();
     // test property "class"

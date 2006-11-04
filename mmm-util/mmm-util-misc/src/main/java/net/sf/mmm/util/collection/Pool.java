@@ -15,7 +15,7 @@ import java.util.Collection;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PoolIF<E> {
+public interface Pool<E> {
 
     /**
      * This method takes an element from the pool.

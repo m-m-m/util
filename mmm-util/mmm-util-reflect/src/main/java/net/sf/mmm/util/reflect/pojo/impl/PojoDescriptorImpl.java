@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.reflect.ReflectionUtil;
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorIF;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptorIF;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
 
 /**
@@ -24,11 +24,11 @@ import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
  * <P>
  * is the templated type of the {@link #getPojoType() POJO}.
  * 
- * @see PojoPropertyDescriptor
+ * @see PojoPropertyDescriptorImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
+public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
 
   /** method name prefix for classic getter */
   private static final String METHOD_PREFIX_GET = "get";
@@ -49,10 +49,10 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   private final Class<P> pojoType;
 
   /** @see #getPropertyDescriptor(String) */
-  private final Map<String, PojoPropertyDescriptor> propertyMap;
+  private final Map<String, PojoPropertyDescriptorImpl> propertyMap;
 
   /** @see #getPropertyDescriptor(String) */
-  private final Collection<PojoPropertyDescriptor> propertyList;
+  private final Collection<PojoPropertyDescriptorImpl> propertyList;
 
   /**
    * The constructor.
@@ -61,18 +61,18 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
    *        is the {@link #getPojoType() type} reflecting the POJO of this
    *        descriptor.
    */
-  public PojoDescriptor(Class<P> pojoClass) {
+  public PojoDescriptorImpl(Class<P> pojoClass) {
 
     super();
     this.pojoType = pojoClass;
-    this.propertyMap = new HashMap<String, PojoPropertyDescriptor>();
+    this.propertyMap = new HashMap<String, PojoPropertyDescriptorImpl>();
     this.propertyList = Collections.unmodifiableCollection(this.propertyMap.values());
     Method[] methods = this.pojoType.getMethods();
     for (Method method : methods) {
       String methodName = method.getName();
       Class<?>[] argumentTypes = method.getParameterTypes();
-      PojoPropertyDescriptor descriptor;
-      PojoPropertyAccessor accessor;
+      PojoPropertyDescriptorImpl descriptor;
+      PojoPropertyAccessorImpl accessor;
 
       if (argumentTypes.length == 1) {
         // is property write method (setter)?
@@ -81,7 +81,7 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
           // found compliant setter
           String propertyName = getPropertyName(methodName, METHOD_PREFIX_SET.length());
           if (propertyName != null) {
-            accessor = new PojoPropertyAccessor(propertyName, method, genericArgTypes[0],
+            accessor = new PojoPropertyAccessorImpl(propertyName, method, genericArgTypes[0],
                 argumentTypes[0]);
             descriptor = getOrCreateProperty(propertyName);
             descriptor.write = accessor;
@@ -90,7 +90,7 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
           // found compliant setter
           String propertyName = getPropertyName(methodName, METHOD_PREFIX_SET.length());
           if (propertyName != null) {
-            accessor = new PojoPropertyAccessor(propertyName, method, genericArgTypes[0],
+            accessor = new PojoPropertyAccessorImpl(propertyName, method, genericArgTypes[0],
                 argumentTypes[0]);
             descriptor = getOrCreateProperty(propertyName);
             descriptor.add = accessor;
@@ -112,7 +112,7 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
             }
           }
           if (propertyName != null) {
-            accessor = new PojoPropertyAccessor(propertyName, method,
+            accessor = new PojoPropertyAccessorImpl(propertyName, method,
                 method.getGenericReturnType(), propertyClass);
             descriptor = getOrCreateProperty(accessor.getName());
             descriptor.read = accessor;
@@ -131,11 +131,11 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
    * @return the requested property-descriptor or <code>null</code> if NO
    *         property exists with the given <code>propertyName</code>.
    */
-  private PojoPropertyDescriptor getOrCreateProperty(String propertyName) {
+  private PojoPropertyDescriptorImpl getOrCreateProperty(String propertyName) {
 
-    PojoPropertyDescriptor descriptor = this.propertyMap.get(propertyName);
+    PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(propertyName);
     if (descriptor == null) {
-      descriptor = new PojoPropertyDescriptor(propertyName);
+      descriptor = new PojoPropertyDescriptorImpl(propertyName);
       this.propertyMap.put(propertyName, descriptor);
     }
     return descriptor;
@@ -143,14 +143,14 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
 
   /**
    * This method gets the according
-   * {@link PojoPropertyDescriptorIF#getName() property-name} for the given
+   * {@link PojoPropertyDescriptor#getName() property-name} for the given
    * <code>methodName</code>.<br>
    * This is the un-capitalized substring of the <code>methodName</code> after
    * the prefix (given via <code>prefixLength</code>).
    * 
    * @param methodName
    *        is the {@link Method#getName() name} of the
-   *        {@link PojoPropertyAccessorIF#getMethod() accessor-method}.
+   *        {@link PojoPropertyAccessor#getMethod() accessor-method}.
    * @param prefixLength
    *        is the length of the method prefix (e.g. 3 for "get"/"set" or 2 for
    *        "is").
@@ -170,7 +170,7 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptorIF#getPojoType()
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptor#getPojoType()
    */
   public Class<P> getPojoType() {
 
@@ -178,20 +178,20 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   }
 
   /**
-   * This method gets the {@link PojoPropertyAccessor accessor} used to read the
+   * This method gets the {@link PojoPropertyAccessorImpl accessor} used to read the
    * property identified by the given <code>propertyName</code>.
    * 
    * @param propertyName
    *        is the name of the requested property.
    * @return the accessor used to read the property identified by the given
    *         <code>propertyName</code> or <code>null</code> if no public
-   *         read-{@link PojoPropertyAccessor#getMethod() method} exists for
+   *         read-{@link PojoPropertyAccessorImpl#getMethod() method} exists for
    *         the property in the according {@link #getPojoType() POJO}.
    */
-  public PojoPropertyAccessorIF getReadAccess(String propertyName) {
+  public PojoPropertyAccessor getReadAccess(String propertyName) {
 
-    PojoPropertyAccessorIF accessor = null;
-    PojoPropertyDescriptorIF descriptor = this.propertyMap.get(propertyName);
+    PojoPropertyAccessor accessor = null;
+    PojoPropertyDescriptor descriptor = this.propertyMap.get(propertyName);
     if (descriptor != null) {
       accessor = descriptor.getReadAccess();
     }
@@ -199,20 +199,20 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   }
 
   /**
-   * This method gets the {@link PojoPropertyAccessor accessor} used to write
+   * This method gets the {@link PojoPropertyAccessorImpl accessor} used to write
    * the property identified by the given <code>propertyName</code>.
    * 
    * @param propertyName
    *        is the name of the requested property.
    * @return the accessor used to write the property identified by the given
    *         <code>propertyName</code> or <code>null</code> if no public
-   *         write-{@link PojoPropertyAccessor#getMethod() method} exists for
+   *         write-{@link PojoPropertyAccessorImpl#getMethod() method} exists for
    *         the property in the according {@link #getPojoType() POJO}.
    */
-  public PojoPropertyAccessorIF getWriteAccess(String propertyName) {
+  public PojoPropertyAccessor getWriteAccess(String propertyName) {
 
-    PojoPropertyAccessorIF accessor = null;
-    PojoPropertyDescriptorIF descriptor = this.propertyMap.get(propertyName);
+    PojoPropertyAccessor accessor = null;
+    PojoPropertyDescriptor descriptor = this.propertyMap.get(propertyName);
     if (descriptor != null) {
       accessor = descriptor.getWriteAccess();
     }
@@ -220,21 +220,21 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptorIF#getPropertyDescriptor(java.lang.String)
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptor#getPropertyDescriptor(java.lang.String)
    */
-  public PojoPropertyDescriptorIF getPropertyDescriptor(String propertyName) {
+  public PojoPropertyDescriptor getPropertyDescriptor(String propertyName) {
 
     return this.propertyMap.get(propertyName);
   }
 
   /**
-   * This method gets the {@link PojoPropertyDescriptor descriptor}s of all
+   * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all
    * properties of the according {@link #getPojoType() pojo}.
    * 
    * @return a collection with all
-   *         {@link PojoPropertyDescriptor property descriptor}s
+   *         {@link PojoPropertyDescriptorImpl property descriptor}s
    */
-  public Collection<? extends PojoPropertyDescriptorIF> getPropertyDescriptors() {
+  public Collection<? extends PojoPropertyDescriptor> getPropertyDescriptors() {
 
     return this.propertyList;
   }
@@ -242,19 +242,19 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   /**
    * This inner class is a simple container for different property accessors.
    */
-  private static class PojoPropertyDescriptor implements PojoPropertyDescriptorIF {
+  private static class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
 
     /** @see #getName() */
     private final String name;
 
     /** @see #getReadAccess() */
-    private PojoPropertyAccessor read;
+    private PojoPropertyAccessorImpl read;
 
     /** @see #getWriteAccess() */
-    private PojoPropertyAccessor write;
+    private PojoPropertyAccessorImpl write;
 
     /** @see #getAddAccess() */
-    private PojoPropertyAccessor add;
+    private PojoPropertyAccessorImpl add;
 
     /**
      * The constructor.
@@ -262,7 +262,7 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
      * @param propertyName
      *        is the {@link #getName() name} of the property.
      */
-    public PojoPropertyDescriptor(String propertyName) {
+    public PojoPropertyDescriptorImpl(String propertyName) {
 
       super();
       this.name = propertyName;
@@ -284,25 +284,25 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
     }
 
     /**
-     * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptorIF#getAddAccess()
+     * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getAddAccess()
      */
-    public PojoPropertyAccessorIF getAddAccess() {
+    public PojoPropertyAccessor getAddAccess() {
 
       return this.add;
     }
 
     /**
-     * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptorIF#getReadAccess()
+     * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getReadAccess()
      */
-    public PojoPropertyAccessorIF getReadAccess() {
+    public PojoPropertyAccessor getReadAccess() {
 
       return this.read;
     }
 
     /**
-     * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptorIF#getWriteAccess()
+     * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getWriteAccess()
      */
-    public PojoPropertyAccessorIF getWriteAccess() {
+    public PojoPropertyAccessor getWriteAccess() {
 
       return this.write;
     }
@@ -310,13 +310,13 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptorIF#getProperty(java.lang.Object,
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptor#getProperty(java.lang.Object,
    *      java.lang.String)
    */
   public Object getProperty(P pojoInstance, String propertyName)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    PojoPropertyAccessorIF readAccess = getReadAccess(propertyName);
+    PojoPropertyAccessor readAccess = getReadAccess(propertyName);
     if (readAccess == null) {
       throw new PojoPropertyNotFoundException(getPojoType(), propertyName);
     }
@@ -324,13 +324,13 @@ public class PojoDescriptor<P> implements PojoDescriptorIF<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptorIF#setProperty(java.lang.Object,
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptor#setProperty(java.lang.Object,
    *      java.lang.String, java.lang.Object)
    */
   public void setProperty(P pojoInstance, String propertyName, Object value)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    PojoPropertyAccessorIF writeAccess = getWriteAccess(propertyName);
+    PojoPropertyAccessor writeAccess = getWriteAccess(propertyName);
     if (writeAccess == null) {
       throw new PojoPropertyNotFoundException(getPojoType(), propertyName);
     }

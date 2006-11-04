@@ -4,7 +4,7 @@ package net.sf.mmm.util.collection;
 import java.lang.reflect.Array;
 
 /**
- * This is the default implementation of the {@link PoolIF} interface.
+ * This is the default implementation of the {@link Pool} interface.
  * 
  * @param <E>
  *        is the templated type of the elements in the pool.
@@ -35,7 +35,7 @@ public class SimplePool<E> extends AbstractPool<E> {
     }
 
     /**
-     * @see net.sf.mmm.util.collection.PoolIF#add(java.lang.Object)
+     * @see net.sf.mmm.util.collection.Pool#add(java.lang.Object)
      * 
      */
     public void add(E element) {
@@ -46,7 +46,7 @@ public class SimplePool<E> extends AbstractPool<E> {
     }
 
     /**
-     * @see net.sf.mmm.util.collection.PoolIF#getMaximumSize()
+     * @see net.sf.mmm.util.collection.Pool#getMaximumSize()
      * 
      */
     public int getMaximumSize() {
@@ -55,7 +55,7 @@ public class SimplePool<E> extends AbstractPool<E> {
     }
 
     /**
-     * @see net.sf.mmm.util.collection.PoolIF#size()
+     * @see net.sf.mmm.util.collection.Pool#size()
      * 
      */
     public int size() {
@@ -64,7 +64,7 @@ public class SimplePool<E> extends AbstractPool<E> {
     }
 
     /**
-     * @see net.sf.mmm.util.collection.PoolIF#take()
+     * @see net.sf.mmm.util.collection.Pool#take()
      * 
      */
     public E take() {

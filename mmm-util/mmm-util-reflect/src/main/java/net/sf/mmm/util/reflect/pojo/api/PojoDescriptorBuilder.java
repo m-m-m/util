@@ -3,18 +3,18 @@ package net.sf.mmm.util.reflect.pojo.api;
 
 /**
  * This is the interface used to {@link #getDescriptor(Class) get} the
- * {@link PojoDescriptorIF descriptor} for a given POJO. A POJO (plain old java
+ * {@link PojoDescriptor descriptor} for a given POJO. A POJO (plain old java
  * object) in this manner is more or less any java object.<br>
  * This functionality is an alternative to {@link java.beans.Introspector}.
  * 
- * @see PojoPropertyDescriptorIF
+ * @see PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoDescriptorBuilderIF {
+public interface PojoDescriptorBuilder {
 
   /**
-   * This method gets the {@link PojoDescriptorIF descriptor} for the given
+   * This method gets the {@link PojoDescriptor descriptor} for the given
    * <code>pojoType</code>.
    * 
    * @param <P>
@@ -25,6 +25,6 @@ public interface PojoDescriptorBuilderIF {
    * @return the descriptor used to get information about the properties of the
    *         given <code>pojoType</code>.
    */
-  <P> PojoDescriptorIF<P> getDescriptor(Class<P> pojoType);
+  <P> PojoDescriptor<P> getDescriptor(Class<P> pojoType);
 
 }

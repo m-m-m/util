@@ -2,14 +2,14 @@
 package net.sf.mmm.util.collection;
 
 /**
- * This is the abstract base implementation of the {@link PoolIF} interface.
+ * This is the abstract base implementation of the {@link Pool} interface.
  * 
  * @param <E>
  *        is the templated type of the elements in the pool.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPool<E> implements PoolIF<E> {
+public abstract class AbstractPool<E> implements Pool<E> {
 
     /**
      * The constructor.
@@ -20,7 +20,7 @@ public abstract class AbstractPool<E> implements PoolIF<E> {
     }
 
     /**
-     * @see net.sf.mmm.util.collection.PoolIF#isEmpty()
+     * @see net.sf.mmm.util.collection.Pool#isEmpty()
      * 
      */
     public boolean isEmpty() {

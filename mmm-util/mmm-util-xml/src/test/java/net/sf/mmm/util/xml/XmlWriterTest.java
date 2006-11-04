@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlUtil;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.util.xml.impl.DomXmlWriter;
 import net.sf.mmm.util.xml.impl.OutputXmlWriter;
 
@@ -43,7 +43,7 @@ public class XmlWriterTest extends TestCase {
    * @throws XmlException
    *         if the xml is illegal or general error.
    */
-  public static void toXml(XmlWriterIF xmlWriter) throws XmlException {
+  public static void toXml(XmlWriter xmlWriter) throws XmlException {
 
     String ns3 = "http://URI3";
     // xmlWriter.writeStartElement(ValueManagerIF.XML_TAG_VALUE);
@@ -82,7 +82,7 @@ public class XmlWriterTest extends TestCase {
      * xmlSerializer.writeEndDocument(); xmlSerializer.close();
      */
     Document doc = DomUtil.createDocument();
-    XmlWriterIF domWriter = new DomXmlWriter(doc);
+    XmlWriter domWriter = new DomXmlWriter(doc);
     toXml(domWriter);
     Element rootElement = doc.getDocumentElement();
   }

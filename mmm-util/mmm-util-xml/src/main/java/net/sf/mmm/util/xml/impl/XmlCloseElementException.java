@@ -6,7 +6,7 @@ import net.sf.mmm.util.xml.XmlException;
 
 /**
  * This is the exception thrown if the
- * {@link net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(String, String) closing}
+ * {@link net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String, String) closing}
  * of an element failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -21,11 +21,11 @@ public class XmlCloseElementException extends XmlException {
    * 
    * @param openTagName
    *        is the (qualified) tagname used to
-   *        {@link net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(String, String, String) open}
+   *        {@link net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String, String) open}
    *        the element.
    * @param closeTagName
    *        is the (qualified) tagname used to
-   *        {@link net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(String, String) close}
+   *        {@link net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String, String) close}
    *        the element that differes.
    */
   public XmlCloseElementException(String openTagName, String closeTagName) {

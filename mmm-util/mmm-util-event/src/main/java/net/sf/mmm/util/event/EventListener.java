@@ -1,8 +1,6 @@
 /* $Id$ */
 package net.sf.mmm.util.event;
 
-import java.util.EventListener;
-
 /**
  * This is the interface for a generic event listener.
  * 
@@ -11,7 +9,7 @@ import java.util.EventListener;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface EventListenerIF<E extends EventIF> extends EventListener {
+public interface EventListener<E extends Event> extends java.util.EventListener {
 
     /**
      * This method is called if an event occured.

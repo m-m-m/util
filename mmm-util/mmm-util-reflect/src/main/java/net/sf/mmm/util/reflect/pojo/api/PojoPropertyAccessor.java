@@ -8,20 +8,20 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 
 /**
- * A {@link PojoPropertyAccessorIF} gives {@link #getMethod() access} to a
+ * A {@link PojoPropertyAccessor} gives {@link #getMethod() access} to a
  * specific {@link #getName() property} of a POJO.<br>
  * 
- * @see PojoPropertyDescriptorIF
+ * @see PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoPropertyAccessorIF {
+public interface PojoPropertyAccessor {
 
   /**
-   * This method gets {@link PojoPropertyDescriptorIF#getName() name} of the
+   * This method gets {@link PojoPropertyDescriptor#getName() name} of the
    * according property.
    * 
-   * @see PojoPropertyDescriptorIF#getName()
+   * @see PojoPropertyDescriptor#getName()
    * 
    * @return the property name.
    */

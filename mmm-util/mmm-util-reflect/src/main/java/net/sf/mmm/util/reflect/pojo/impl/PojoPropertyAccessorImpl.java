@@ -8,14 +8,14 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorIF} interface.
+ * This is the implementation of the {@link PojoPropertyAccessor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
+public class PojoPropertyAccessorImpl implements PojoPropertyAccessor {
 
   /** @see #getName() */
   private final String name;
@@ -44,7 +44,7 @@ public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
    * @param propertyClass
    */
   @ConstructorProperties( {"name", "method", "type", "rawType"})
-  public PojoPropertyAccessor(String propertyName, Method propertyMethod, Type propertyType,
+  public PojoPropertyAccessorImpl(String propertyName, Method propertyMethod, Type propertyType,
       Class<?> propertyClass) {
 
     super();
@@ -74,7 +74,7 @@ public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF#getName()
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor#getName()
    */
   public String getName() {
 
@@ -82,7 +82,7 @@ public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF#getMethod()
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor#getMethod()
    */
   public Method getMethod() {
 
@@ -90,7 +90,7 @@ public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF#getGenericType()
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor#getGenericType()
    */
   public Type getGenericType() {
 
@@ -98,7 +98,7 @@ public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF#getRawType()
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor#getRawType()
    */
   public Class<?> getRawType() {
 
@@ -106,7 +106,7 @@ public class PojoPropertyAccessor implements PojoPropertyAccessorIF {
   }
 
   /**
-   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessorIF#getComponentType()
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor#getComponentType()
    */
   public Type getComponentType() {
 

@@ -97,7 +97,7 @@ package net.sf.mmm.util.reflect.pojo.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoPropertyDescriptorIF {
+public interface PojoPropertyDescriptor {
 
   /**
    * This method gets the programmatic (technical) name of the according
@@ -113,30 +113,30 @@ public interface PojoPropertyDescriptorIF {
   String getName();
 
   /**
-   * This method gets the {@link PojoPropertyAccessorIF accessor} used to read
+   * This method gets the {@link PojoPropertyAccessor accessor} used to read
    * the property. It represents the getter method for the property.
    * 
    * @return the requested accessor or <code>null</code> if it is NOT
    *         available.
    */
-  PojoPropertyAccessorIF getReadAccess();
+  PojoPropertyAccessor getReadAccess();
 
   /**
-   * This method gets the {@link PojoPropertyAccessorIF accessor} used to write
+   * This method gets the {@link PojoPropertyAccessor accessor} used to write
    * the property. It represents the setter method for the property.
    * 
    * @return the requested accessor or <code>null</code> if it is NOT
    *         available.
    */
-  PojoPropertyAccessorIF getWriteAccess();
+  PojoPropertyAccessor getWriteAccess();
 
   /**
-   * This method gets the {@link PojoPropertyAccessorIF accessor} used to add an
+   * This method gets the {@link PojoPropertyAccessor accessor} used to add an
    * item to a list-type property.
    * 
    * @return the requested accessor or <code>null</code> if it is NOT
    *         available.
    */
-  PojoPropertyAccessorIF getAddAccess();
+  PojoPropertyAccessor getAddAccess();
 
 }

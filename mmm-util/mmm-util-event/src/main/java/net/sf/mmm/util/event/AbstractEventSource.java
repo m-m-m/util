@@ -6,19 +6,19 @@ import java.util.List;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.util.event.EventListenerIF} interface.
+ * {@link net.sf.mmm.util.event.EventListener} interface.
  * 
  * @param <E>
  *        is the templated type of the events to send.
  * @param <L>
  *        is the templated type of the listeners that can be
- *        {@link #addListener(EventListenerIF) registered} here and that will
- *        {@link net.sf.mmm.util.event.EventListenerIF#handleEvent(EventIF) receive}
+ *        {@link #addListener(EventListener) registered} here and that will
+ *        {@link net.sf.mmm.util.event.EventListener#handleEvent(Event) receive}
  *        the sent events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E>> implements
+public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> implements
         EventSourceIF<E, L> {
 
     /** the registered listeners */
@@ -27,14 +27,14 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
     /**
      * The constructor.
      */
-    public EventSource() {
+    public AbstractEventSource() {
 
         super();
         this.listeners = new ArrayList<L>();
     }
 
     /**
-     * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListenerIF)
+     * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
      * 
      */
     public void addListener(L listener) {
@@ -43,7 +43,7 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
     }
 
     /**
-     * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListenerIF)
+     * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
      * 
      */
     public void removeListener(L listener) {
@@ -53,7 +53,7 @@ public abstract class EventSource<E extends EventIF, L extends EventListenerIF<E
 
     /**
      * This method sends the given <code>event</code> to all
-     * {@link #addListener(EventListenerIF) registered} listeners.
+     * {@link #addListener(EventListener) registered} listeners.
      * 
      * @param event
      *        the event to set.

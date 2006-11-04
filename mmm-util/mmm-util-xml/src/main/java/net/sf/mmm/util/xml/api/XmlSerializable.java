@@ -10,7 +10,7 @@ import net.sf.mmm.util.xml.XmlException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface XmlSerializableIF extends Serializable {
+public interface XmlSerializable extends Serializable {
 
   /**
    * This method searializes this object to XML using the given searializer.<br>
@@ -22,6 +22,6 @@ public interface XmlSerializableIF extends Serializable {
    * @throws XmlException
    *         if the serialization fails (I/O error, invalid XML, etc.).
    */
-  void toXml(XmlWriterIF xmlWriter) throws XmlException;
+  void toXml(XmlWriter xmlWriter) throws XmlException;
 
 }

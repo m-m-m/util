@@ -12,12 +12,12 @@ import net.sf.mmm.util.xml.XmlException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface XmlWriterIF {
+public interface XmlWriter {
 
   /**
    * This method opens an XML {@link org.w3c.dom.Element element} in the default
    * namespace. The XML element must be closed using the
-   * {@link XmlWriterIF#writeEndElement(String)} method.<br>
+   * {@link XmlWriter#writeEndElement(String)} method.<br>
    * Will produce the XML <code>&lt;localName ...</code>
    * 
    * @param localName
@@ -31,7 +31,7 @@ public interface XmlWriterIF {
   /**
    * This method opens an XML {@link org.w3c.dom.Element element}. The XML
    * element must be closed using the
-   * {@link XmlWriterIF#writeEndElement(String, String)} method.<br>
+   * {@link XmlWriter#writeEndElement(String, String)} method.<br>
    * It will produce the XML code <code>&lt;namespacePrefix:localName ...</code>.
    * 
    * @param localName
@@ -51,7 +51,7 @@ public interface XmlWriterIF {
    * This method opens an XML {@link org.w3c.dom.Element element} in a new
    * namespace that has not been declared by a parent element before. The XML
    * element must be closed using the
-   * {@link XmlWriterIF#writeEndElement(String, String)} method.<br>
+   * {@link XmlWriter#writeEndElement(String, String)} method.<br>
    * Will produce the XML
    * <code>&lt;namespacePrefix:localName xmlns:namespacePrefix="namespaceUri" ...</code>
    * or <code>&lt;localName xmlns="namespaceUri" ...</code>
@@ -72,9 +72,9 @@ public interface XmlWriterIF {
   /**
    * This method sets an attribute in the default namespace in the previously
    * opened element. This method must be called after the
-   * {@link XmlWriterIF#writeStartElement(String)} method is called and before
-   * the {@link XmlWriterIF#writeCharacters(String)} or
-   * {@link XmlWriterIF#writeEndElement(String, String)} method is called.
+   * {@link XmlWriter#writeStartElement(String)} method is called and before
+   * the {@link XmlWriter#writeCharacters(String)} or
+   * {@link XmlWriter#writeEndElement(String, String)} method is called.
    * 
    * @see javax.xml.stream.XMLStreamWriter#writeAttribute(java.lang.String,
    *      java.lang.String)
@@ -91,9 +91,9 @@ public interface XmlWriterIF {
 
   /**
    * This method sets an attribute of the previously opened element. This method
-   * must be called after the {@link XmlWriterIF#writeStartElement(String)}
-   * method is called and before the {@link XmlWriterIF#writeCharacters(String)}
-   * or {@link XmlWriterIF#writeEndElement(String)} method is called.
+   * must be called after the {@link XmlWriter#writeStartElement(String)}
+   * method is called and before the {@link XmlWriter#writeCharacters(String)}
+   * or {@link XmlWriter#writeEndElement(String)} method is called.
    * 
    * @see javax.xml.stream.XMLStreamWriter#writeAttribute(java.lang.String,
    *      java.lang.String, java.lang.String, java.lang.String)
@@ -115,9 +115,9 @@ public interface XmlWriterIF {
   /**
    * This method declares a namespace in the previously
    * {@link #writeStartElement(String) opened} element.This method must be
-   * called after the {@link XmlWriterIF#writeStartElement(String)} method is
-   * called and before the {@link XmlWriterIF#writeCharacters(String)} or
-   * {@link XmlWriterIF#writeEndElement(String)} method is called.
+   * called after the {@link XmlWriter#writeStartElement(String)} method is
+   * called and before the {@link XmlWriter#writeCharacters(String)} or
+   * {@link XmlWriter#writeEndElement(String)} method is called.
    * 
    * @param namespacePrefix
    *        is the key used as shortcut for the namespace.

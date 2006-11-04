@@ -32,8 +32,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlUtil;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This utility class contains methods that help to deal with the
@@ -374,10 +375,228 @@ public final class DomUtil {
   }
 
   /**
-   * This method adapts from DOM to {@link XmlWriterIF}. It serializes the
-   * given DOM node to the given XML xmlWriter.
+   * TODO
    * 
-   * @see net.sf.mmm.util.xml.api.XmlSerializerIF
+   * @param node1
+   * @param node2
+   * @return <code>true</code> if the XML fragment represented by the given
+   *         nodes equals, <code>false</code> otherwise.
+   */
+  public static boolean isEqual(Node node1, Node node2) {
+
+    if (node1 == null) {
+      return (node2 == null);
+    } else {
+      if (node2 == null) {
+        return false;
+      }
+      short type = node1.getNodeType();
+      if (type != node2.getNodeType()) {
+        return false;
+      }
+      if (type == Node.ATTRIBUTE_NODE) {
+        if (!StringUtil.isEqual(node1.getLocalName(), node2.getLocalName())) {
+          return false;
+        }
+        if (!StringUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+          return false;
+        }
+        Attr attr1 = (Attr) node1;
+        Attr attr2 = (Attr) node2;
+        if (!StringUtil.isEqual(attr1.getValue(), attr2.getValue())) {
+          return false;
+        }
+        return true;
+      } else if (type == Node.COMMENT_NODE) {
+        // ignore comments
+        return true;
+      } else if (type == Node.DOCUMENT_NODE) {
+        Document doc1 = (Document) node1;
+        Document doc2 = (Document) node2;
+        return isEqual(doc1.getDocumentElement(), doc2.getDocumentElement());
+      } else if (type == Node.TEXT_NODE) {
+        return StringUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
+      } else if (type == Node.CDATA_SECTION_NODE) {
+        return StringUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
+      } else if (type == Node.ELEMENT_NODE) {
+        if (!StringUtil.isEqual(node1.getLocalName(), node2.getLocalName())) {
+          return false;
+        }
+        if (!StringUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+          return false;
+        }
+        // compare attributes
+        NamedNodeMap attributes1 = node1.getAttributes();
+        NamedNodeMap attributes2 = node2.getAttributes();
+        int length = attributes1.getLength();
+        if (attributes2.getLength() != length) {
+          return false;
+        }
+        for (int i = 0; i < length; i++) {
+          Attr attr1 = (Attr) attributes1.item(i);
+          Attr attr2 = (Attr) attributes2.getNamedItemNS(attr1.getNamespaceURI(), attr1
+              .getLocalName());
+          if (attr2 == null) {
+            attr2 = (Attr) attributes2.getNamedItem(attr1.getName());
+          }
+          if (attr2 == null) {
+            return false;
+          }
+          if (!attr1.getValue().equals(attr2.getValue())) {
+            return false;
+          }
+        }
+        // compare child nodes
+        NodeList children1 = node1.getChildNodes();
+        NodeList children2 = node2.getChildNodes();
+        return isEqual(children1, children2);
+      }
+      // TODO
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param nodeList1
+   * @param nodeList2
+   * @return <code>true</code> if the XML fragment represented by the given
+   *         node-lists equals, <code>false</code> otherwise.
+   */
+  private static boolean isEqual(NodeList nodeList1, NodeList nodeList2) {
+
+    int length1 = nodeList1.getLength();
+    int length2 = nodeList2.getLength();
+    int index1 = 0;
+    int index2 = 0;
+    StringBuffer text1 = new StringBuffer();
+    StringBuffer text2 = new StringBuffer();
+    while ((index1 < length1) || (index2 < length2)) {
+
+      Node node1 = null;
+      Node node2 = null;
+      if (index1 < length1) {
+        node1 = nodeList1.item(index1);
+        index1++;
+      }
+      if (index2 < length2) {
+        node2 = nodeList2.item(index2);
+        index2++;
+      }
+      if (node1 == null) {
+        if (!isEqualLast(node2, text2)) {
+          return false;
+        }
+      } else if (node2 == null) {
+        if (!isEqualLast(node1, text1)) {
+          return false;
+        }
+      } else {
+        if (isEqual(node1, node2)) {
+          if (!text1.toString().equals(text2.toString())) {
+            return false;
+          }
+          text1.setLength(0);
+          text2.setLength(0);
+        } else {
+          // mmhm, nodes may NOT be normalized...
+          if (node1.getNodeType() == Node.COMMENT_NODE) {
+            // skip node1
+            index2--;
+          } else if (node2.getNodeType() == Node.COMMENT_NODE) {
+            // skip node2
+            index1--;
+          } else if (isTextualNode(node1)) {
+            int code = equalsTextNode(node1, text1, node2, text2);
+            if (code == -1) {
+              // skip node1
+              index2--;
+            } else if (code == 0) {
+              return false;
+            }
+          } else if (isTextualNode(node2)) {
+            int code = equalsTextNode(node2, text2, node1, text1);
+            if (code == -1) {
+              // skip node2
+              index1--;
+            } else if (code == 0) {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        }
+      }
+    }
+    if (text1.toString().equals(text2.toString())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * @param textNode1
+   * @param sb1
+   * @param node2
+   * @param sb2
+   * @return -1 falls textNode1 ?bersprungen werden sollte, 0 falls keine
+   *         ?bereinstimmung festgestellt wurde, 1 normal weitermachen.
+   */
+  private static int equalsTextNode(Node textNode1, StringBuffer sb1, Node node2, StringBuffer sb2) {
+
+    sb1.append(textNode1.getNodeValue());
+    if (isTextualNode(node2)) {
+      sb2.append(node2.getNodeValue());
+      return 1;
+    } else {
+      if (sb1.toString().trim().length() == 0) {
+        // skip node1
+        return -1;
+      } else if (sb1.toString().equals(sb2.toString())) {
+        sb1.setLength(0);
+        sb2.setLength(0);
+        // skip node1
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  }
+
+  private static boolean isEqualLast(Node node, StringBuffer sb) {
+
+    if (node.getNodeType() == Node.ELEMENT_NODE) {
+      return false;
+    }
+    if (isTextualNode(node)) {
+      sb.append(node.getNodeValue());
+    } else {
+      // ignore comments, entities, etc.
+    }
+    return true;
+  }
+
+  /**
+   * This method determines if the given <code>node</code> represents regular
+   * text.
+   * 
+   * @param node
+   *        is the node to check.
+   * @return <code>true</code> if the given <code>node</code> is
+   *         {@link org.w3c.dom.Text text} or
+   *         {@link org.w3c.dom.CDATASection CDATA}.
+   */
+  public static boolean isTextualNode(Node node) {
+
+    return ((node.getNodeType() == Node.TEXT_NODE) || (node.getNodeType() == Node.CDATA_SECTION_NODE));
+  }
+
+  /**
+   * This method adapts from DOM to {@link XmlWriter}. It serializes the given
+   * DOM node to the given XML xmlWriter.
+   * 
+   * @see net.sf.mmm.util.xml.api.XmlSerializer
    * 
    * @param xmlWriter
    *        is the receiver of the serialized XML data.
@@ -386,7 +605,7 @@ public final class DomUtil {
    * @throws XmlException
    *         if the xml serilization failed.
    */
-  public static void toXml(XmlWriterIF xmlWriter, Node node) throws XmlException {
+  public static void toXml(XmlWriter xmlWriter, Node node) throws XmlException {
 
     if (node == null) {
       new InternalError().printStackTrace();

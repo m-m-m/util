@@ -14,7 +14,7 @@ import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.xml.api.XmlWriterIF}
+ * This is an implementation of the {@link net.sf.mmm.util.xml.api.XmlWriter}
  * interface that writes the produced XML directly to an output stream or a
  * writer.
  * 
@@ -226,7 +226,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeStartElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -260,7 +260,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeAttribute(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeAttribute(java.lang.String,
    *      java.lang.String, java.lang.String)
    * 
    */
@@ -286,7 +286,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeNamespaceDeclaration(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeNamespaceDeclaration(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -301,7 +301,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeEndElement(java.lang.String,
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(java.lang.String,
    *      java.lang.String)
    * 
    */
@@ -334,7 +334,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCharacters(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeCharacters(java.lang.String)
    * 
    */
   public void writeCharacters(String text) throws XmlException {
@@ -349,7 +349,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeCData(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeCData(java.lang.String)
    * 
    */
   public void writeCData(String text) throws XmlException {
@@ -364,7 +364,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriterIF#writeComment(java.lang.String)
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeComment(java.lang.String)
    * 
    */
   public void writeComment(String comment) throws XmlException {

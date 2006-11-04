@@ -6,6 +6,6 @@ package net.sf.mmm.util.event;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface EventIF {
+public interface Event {
 
 }
