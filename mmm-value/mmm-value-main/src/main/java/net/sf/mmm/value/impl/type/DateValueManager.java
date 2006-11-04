@@ -11,24 +11,24 @@ import org.w3c.dom.NodeList;
 import net.sf.mmm.util.DateUtil;
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
-import net.sf.mmm.value.api.ValueManagerIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
+import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the {@link ValueManagerIF manager} for {@link java.util.Date date}
+ * This is the {@link ValueManager manager} for {@link java.util.Date date}
  * values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DateValueManager extends AbstractValueManager<Date> {
 
-  /** the {@link ValueManagerIF#getName() "logical name"} of the managed value */
+  /** the {@link ValueManager#getName() "logical name"} of the managed value */
   public static final String VALUE_NAME = "Date";
 
-  /** the {@link ValueManagerIF#getValueType() type} of the managed value */
+  /** the {@link ValueManager#getValueType() type} of the managed value */
   private static final Class<Date> VALUE_TYPE = Date.class;
 
   /** the XML tagname for the date */
@@ -65,7 +65,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#getName()
+   * @see net.sf.mmm.value.api.ValueManager#getName()
    */
   public String getName() {
 
@@ -73,7 +73,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#getValueType()
+   * @see net.sf.mmm.value.api.ValueManager#getValueType()
    */
   public Class<Date> getValueType() {
 
@@ -81,7 +81,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#parse(java.lang.String)
+   * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
    * 
    */
   public Date parse(String valueAsString) throws ValueParseException {
@@ -172,7 +172,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#toString(java.lang.Object)
+   * @see net.sf.mmm.value.api.ValueManager#toString(java.lang.Object)
    * 
    */
   @Override
@@ -182,10 +182,10 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * @see AbstractValueManager#toXmlValue(XmlWriterIF, Object)
+   * @see AbstractValueManager#toXmlValue(XmlWriter, Object)
    */
   @Override
-  protected void toXmlValue(XmlWriterIF xmlWriter, Date value) throws XmlException {
+  protected void toXmlValue(XmlWriter xmlWriter, Date value) throws XmlException {
 
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(value);

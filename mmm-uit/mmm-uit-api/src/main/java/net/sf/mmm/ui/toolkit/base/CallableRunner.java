@@ -15,46 +15,46 @@ import java.util.concurrent.Callable;
  */
 public class CallableRunner<T> implements Runnable {
 
-    /** the callable task to execute */
-    private final Callable<T> task;
+  /** the callable task to execute */
+  private final Callable<T> task;
 
-    /** the result of the callable */
-    private T result;
+  /** the result of the callable */
+  private T result;
 
-    /**
-     * The constructor.
-     * 
-     * @param callable
-     *        is the callable to adapt.
-     */
-    public CallableRunner(Callable<T> callable) {
+  /**
+   * The constructor.
+   * 
+   * @param callable
+   *        is the callable to adapt.
+   */
+  public CallableRunner(Callable<T> callable) {
 
-        super();
-        this.task = callable;
-        this.result = null;
+    super();
+    this.task = callable;
+    this.result = null;
+  }
+
+  /**
+   * @see java.lang.Runnable#run()
+   * 
+   */
+  public void run() {
+
+    try {
+      this.result = this.task.call();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    /**
-     * @see java.lang.Runnable#run()
-     * 
-     */
-    public void run() {
+  /**
+   * This method gets the {@link Callable#call() result} of the callable.
+   * 
+   * @return the result.
+   */
+  public T getResult() {
 
-        try {
-            this.result = this.task.call();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * This method gets the {@link Callable#call() result} of the callable.
-     * 
-     * @return the result.
-     */
-    public T getResult() {
-
-        return this.result;
-    }
+    return this.result;
+  }
 
 }

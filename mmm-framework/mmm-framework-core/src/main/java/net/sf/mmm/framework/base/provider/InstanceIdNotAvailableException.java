@@ -2,14 +2,14 @@
 package net.sf.mmm.framework.base.provider;
 
 import net.sf.mmm.framework.NlsResourceBundle;
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.ComponentManagerIF;
+import net.sf.mmm.framework.api.ComponentManager;
 
 /**
- * This exception is thrown if a {@link ComponentDescriptorIF component} for a
+ * This exception is thrown if a {@link ComponentDescriptor component} for a
  * specific instance-ID was
- * {@link ComponentManagerIF#requestComponent(Class, String) requested} but is
+ * {@link ComponentManager#requestComponent(Class, String) requested} but is
  * NOT available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -24,13 +24,13 @@ public class InstanceIdNotAvailableException extends ComponentException {
    * 
    * @param instanceId
    *        is the
-   *        {@link ComponentManagerIF#requestComponent(Class, String) requested}
+   *        {@link ComponentManager#requestComponent(Class, String) requested}
    *        instance-ID that is NOT available.
    * @param descriptor
-   *        is the descriptor of the {@link ComponentDescriptorIF component}
+   *        is the descriptor of the {@link ComponentDescriptor component}
    *        that was requested.
    */
-  public InstanceIdNotAvailableException(String instanceId, ComponentDescriptorIF<?> descriptor) {
+  public InstanceIdNotAvailableException(String instanceId, ComponentDescriptor<?> descriptor) {
 
     super(NlsResourceBundle.ERR_COMPONENT_ID_NOT_AVAILABLE, descriptor.getSpecification(),
         instanceId);

@@ -1,20 +1,20 @@
 /* $Id$ */
 package net.sf.mmm.streamdetect.base;
 
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.context.api.MutableContextIF;
-import net.sf.mmm.context.impl.MutableContext;
-import net.sf.mmm.streamdetect.api.DetectorStreamIF;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.context.api.MutableContext;
+import net.sf.mmm.context.impl.MutableContextImpl;
+import net.sf.mmm.streamdetect.api.DetectorStream;
 
 /**
- * This is the abstract base implementation of a {@link DetectorStreamIF}.
+ * This is the abstract base implementation of a {@link DetectorStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractDetectorStream implements DetectorStreamIF {
+public abstract class AbstractDetectorStream implements DetectorStream {
 
     /** @see #getMetadata() */
-    private MutableContextIF context;
+    private MutableContext context;
 
     /** @see #isDone() */
     private boolean done;
@@ -24,7 +24,7 @@ public abstract class AbstractDetectorStream implements DetectorStreamIF {
      */
     public AbstractDetectorStream() {
 
-        this(new MutableContext());
+        this(new MutableContextImpl());
     }
 
     /**
@@ -33,7 +33,7 @@ public abstract class AbstractDetectorStream implements DetectorStreamIF {
      * @param metadata
      *        is the initial {@link #getMetadata() metadata}.
      */
-    public AbstractDetectorStream(MutableContextIF metadata) {
+    public AbstractDetectorStream(MutableContext metadata) {
 
         super();
         this.context = metadata;
@@ -41,10 +41,10 @@ public abstract class AbstractDetectorStream implements DetectorStreamIF {
     }
 
     /**
-     * @see net.sf.mmm.streamdetect.api.DetectorStreamIF#getMetadata()
+     * @see net.sf.mmm.streamdetect.api.DetectorStream#getMetadata()
      *      
      */
-    public ContextIF getMetadata() {
+    public Context getMetadata() {
 
         return this.context.getImmutableContext();
     }
@@ -58,7 +58,7 @@ public abstract class AbstractDetectorStream implements DetectorStreamIF {
     }
 
     /**
-     * @see net.sf.mmm.streamdetect.api.DetectorStreamIF#isDone() 
+     * @see net.sf.mmm.streamdetect.api.DetectorStream#isDone() 
      */
     public boolean isDone() {
 

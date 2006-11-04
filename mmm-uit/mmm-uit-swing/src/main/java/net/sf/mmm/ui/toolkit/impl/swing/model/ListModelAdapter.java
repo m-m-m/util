@@ -5,11 +5,11 @@ import javax.swing.AbstractListModel;
 
 import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF;
-import net.sf.mmm.ui.toolkit.api.model.UIListModelIF;
+import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
+import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModelIF} to
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
  * a swing {@link javax.swing.ListModel}.
  * 
  * @param <E>
@@ -17,81 +17,80 @@ import net.sf.mmm.ui.toolkit.api.model.UIListModelIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ListModelAdapter<E> extends AbstractListModel implements
-        UIListModelListenerIF {
+public class ListModelAdapter<E> extends AbstractListModel implements UIListModelListener {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -6062581165914420738L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -6062581165914420738L;
 
-    /** the original list model */
-    protected final UIListModelIF<E> model;
+  /** the original list model */
+  protected final UIListModel<E> model;
 
-    /**
-     * The constructor.
-     * 
-     * @param listModel
-     *        is the list model to adapt to swing.
-     */
-    public ListModelAdapter(UIListModelIF<E> listModel) {
+  /**
+   * The constructor.
+   * 
+   * @param listModel
+   *        is the list model to adapt to swing.
+   */
+  public ListModelAdapter(UIListModel<E> listModel) {
 
-        super();
-        this.model = listModel;
-        this.model.addListener(this);
+    super();
+    this.model = listModel;
+    this.model.addListener(this);
+  }
+
+  /**
+   * @see javax.swing.ListModel#getElementAt(int)
+   * 
+   */
+  public Object getElementAt(int index) {
+
+    return this.model.getElement(index);
+  }
+
+  /**
+   * @see javax.swing.ListModel#getSize()
+   * 
+   */
+  public int getSize() {
+
+    return this.model.getElementCount();
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
+   * 
+   */
+  public void listModelChanged(UIListModelEvent event) {
+
+    if (event.getType() == EventType.ADD) {
+      fireIntervalAdded(this, event.getStartIndex(), event.getEndIndex());
+    } else if (event.getType() == EventType.REMOVE) {
+      fireIntervalRemoved(this, event.getStartIndex(), event.getEndIndex());
+      System.out.println(event.getStartIndex() + "-" + event.getEndIndex());
+    } else if (event.getType() == EventType.UPDATE) {
+      fireContentsChanged(this, event.getStartIndex(), event.getEndIndex());
     }
+  }
 
-    /**
-     * @see javax.swing.ListModel#getElementAt(int)
-     * 
-     */
-    public Object getElementAt(int index) {
+  /**
+   * This method gets the list-model that is adapted.
+   * 
+   * @return the actual list-model.
+   */
+  public UIListModel<E> getModel() {
 
-        return this.model.getElement(index);
-    }
+    return this.model;
+  }
 
-    /**
-     * @see javax.swing.ListModel#getSize()
-     * 
-     */
-    public int getSize() {
+  /**
+   * This method disposes this model adapter. It is called when the adapter is
+   * NOT used anymore and can be eaten by the garbarge-collector. The
+   * implementation of this method can tidy-up (e.g. remove registered
+   * listeners).
+   */
+  public void dispose() {
 
-        return this.model.getElementCount();
-    }
+    this.model.removeListener(this);
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-     * 
-     */
-    public void listModelChanged(UIListModelEvent event) {
-
-        if (event.getType() == EventType.ADD) {
-            fireIntervalAdded(this, event.getStartIndex(), event.getEndIndex());
-        } else if (event.getType() == EventType.REMOVE) {
-            fireIntervalRemoved(this, event.getStartIndex(), event.getEndIndex());
-            System.out.println(event.getStartIndex() + "-" + event.getEndIndex());
-        } else if (event.getType() == EventType.UPDATE) {
-            fireContentsChanged(this, event.getStartIndex(), event.getEndIndex());
-        }
-    }
-
-    /**
-     * This method gets the list-model that is adapted.
-     * 
-     * @return the actual list-model.
-     */
-    public UIListModelIF<E> getModel() {
-        
-        return this.model;
-    }
-
-    /**
-     * This method disposes this model adapter. It is called when the adapter is
-     * NOT used anymore and can be eaten by the garbarge-collector. The
-     * implementation of this method can tidy-up (e.g. remove registered
-     * listeners).
-     */
-    public void dispose() {
-
-        this.model.removeListener(this);
-    }
-    
 }

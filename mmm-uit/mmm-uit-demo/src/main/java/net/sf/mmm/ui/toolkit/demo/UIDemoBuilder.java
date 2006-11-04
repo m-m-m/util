@@ -4,44 +4,44 @@ package net.sf.mmm.ui.toolkit.demo;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.mmm.ui.toolkit.api.UIComponentIF;
-import net.sf.mmm.ui.toolkit.api.UIFactoryIF;
-import net.sf.mmm.ui.toolkit.api.UINodeIF;
-import net.sf.mmm.ui.toolkit.api.UIPictureIF;
+import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.composite.Alignment;
 import net.sf.mmm.ui.toolkit.api.composite.Filling;
 import net.sf.mmm.ui.toolkit.api.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UICompositeIF;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanelIF;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanelIF;
+import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBarIF;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuIF;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItemIF;
+import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
+import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
+import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButtonIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBoxIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownloadIF;
-import net.sf.mmm.ui.toolkit.api.widget.UILabelIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIListIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIProgressBarIF;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBarIF;
-import net.sf.mmm.ui.toolkit.api.widget.UISpinBoxIF;
-import net.sf.mmm.ui.toolkit.api.widget.UITableIF;
-import net.sf.mmm.ui.toolkit.api.widget.UITreeIF;
-import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditorIF;
+import net.sf.mmm.ui.toolkit.api.widget.UIButton;
+import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
+import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
+import net.sf.mmm.ui.toolkit.api.widget.UILabel;
+import net.sf.mmm.ui.toolkit.api.widget.UIList;
+import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
+import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
+import net.sf.mmm.ui.toolkit.api.widget.UISpinBox;
+import net.sf.mmm.ui.toolkit.api.widget.UITable;
+import net.sf.mmm.ui.toolkit.api.widget.UITree;
+import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIWindowIF;
+import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 import net.sf.mmm.ui.toolkit.base.feature.MaximumSizer;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
-import net.sf.mmm.ui.toolkit.base.model.UIDefaultListModel;
-import net.sf.mmm.ui.toolkit.base.model.UIDefaultTreeModel;
-import net.sf.mmm.ui.toolkit.base.model.UINumericRangeModel;
-import net.sf.mmm.ui.toolkit.base.model.UITreeNode;
+import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
+import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel;
+import net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel;
+import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeNode;
 
 /**
  * TODO This type ...
@@ -59,9 +59,9 @@ public class UIDemoBuilder {
         super();
     }
 
-    public static UITabbedPanelIF createTabbedPanel(UIFactoryIF factory) {
+    public static UITabbedPanel createTabbedPanel(UIFactory factory) {
 
-        UITabbedPanelIF tabbedPanel = factory.createTabbedPanel();
+        UITabbedPanel tabbedPanel = factory.createTabbedPanel();
         tabbedPanel.addComponent(createLayoutPanel(factory), "layout");
         tabbedPanel.addComponent(createSplitPanel(factory), "split");
         tabbedPanel.addComponent(createEditorPanel(factory), "edior", 1);
@@ -70,12 +70,12 @@ public class UIDemoBuilder {
         return tabbedPanel;
     }
 
-    public static void addEditorProperty(UIPanelIF editorPanel, String labelText,
-            UIComponentIF component, MaximumSizer sizer) {
+    public static void addEditorProperty(UIPanel editorPanel, String labelText,
+            UIComponent component, MaximumSizer sizer) {
 
-        UIFactoryIF factory = editorPanel.getFactory();
-        UIPanelIF fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
-        UILabelIF label = factory.createLabel(labelText);
+        UIFactory factory = editorPanel.getFactory();
+        UIPanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
+        UILabel label = factory.createLabel(labelText);
         sizer.add(label);
         fieldEditorPanel.addComponent(label, new LayoutConstraints(Alignment.LEFT, Filling.NONE, 0,
                 Insets.SMALL_SPACE_HORIZONTAL, sizer));
@@ -86,29 +86,29 @@ public class UIDemoBuilder {
 
     }
 
-    public static UICompositeIF createEditorPanel(final UIFactoryIF factory) {
+    public static UIComposite createEditorPanel(final UIFactory factory) {
 
-        final UIPanelIF editorPanel = factory.createPanel(Orientation.VERTICAL);
+        final UIPanel editorPanel = factory.createPanel(Orientation.VERTICAL);
         final MaximumSizer sizer = new MaximumSizer(true, false);
         addEditorProperty(editorPanel, "Name:", factory.createTextField(), sizer);
         addEditorProperty(editorPanel, "Quality-Ranking:", factory.createTextField(), sizer);
-        UINumericRangeModel sbModel = new UINumericRangeModel();
+        NumericUIRangeModel sbModel = new NumericUIRangeModel();
         sbModel.setMaximumValue(50);
         sbModel.setMinimumValue(-10);
         addEditorProperty(editorPanel, "Port:", factory.createSpinBox(sbModel), sizer);
-        final UINumericRangeModel maxSlideModel = new UINumericRangeModel(2, 100);
-        final UISlideBarIF maxSlideBar = factory.createSlideBar(maxSlideModel);
-        final UINumericRangeModel slideModel = new UINumericRangeModel(0, 7);
-        final UISlideBarIF slideBar = factory.createSlideBar(slideModel);
-        final UIProgressBarIF progressBar = factory.createProgressBar();
-        maxSlideBar.addActionListener(new UIActionListenerIF() {
+        final NumericUIRangeModel maxSlideModel = new NumericUIRangeModel(2, 100);
+        final UISlideBar maxSlideBar = factory.createSlideBar(maxSlideModel);
+        final NumericUIRangeModel slideModel = new NumericUIRangeModel(0, 7);
+        final UISlideBar slideBar = factory.createSlideBar(slideModel);
+        final UIProgressBar progressBar = factory.createProgressBar();
+        maxSlideBar.addActionListener(new UIActionListener() {
 
             /**
-             * @see net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF#invoke(net.sf.mmm.ui.toolkit.api.UINodeIF,
+             * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
              *      net.sf.mmm.ui.toolkit.api.event.ActionType)
              * 
      */
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 int index = maxSlideBar.getSelectedIndex();
                 Integer maxSelection = maxSlideModel.getElement(index);
@@ -116,14 +116,14 @@ public class UIDemoBuilder {
             }
 
         });
-        slideBar.addActionListener(new UIActionListenerIF() {
+        slideBar.addActionListener(new UIActionListener() {
 
             /**
-             * @see net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF#invoke(net.sf.mmm.ui.toolkit.api.UINodeIF,
+             * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
              *      net.sf.mmm.ui.toolkit.api.event.ActionType)
              * 
      */
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 progressBar.setProgress(slideBar.getSelectedIndex());
             }
@@ -136,10 +136,10 @@ public class UIDemoBuilder {
 
         // TODO: this is a stupid and unix specific example!
         SimpleFileAccess access = new SimpleFileAccess(new File("/etc/mtab"));
-        UIFileDownloadIF download = factory.createFileDownload(access);
+        UIFileDownload download = factory.createFileDownload(access);
         addEditorProperty(editorPanel, "BLOB:", download, sizer);
 
-        UIPictureIF icon = null;
+        UIPicture icon = null;
         try {
             // TODO add icon as resource and load it this way!
             icon = factory.createPicture(new File(
@@ -148,21 +148,21 @@ public class UIDemoBuilder {
             e.printStackTrace();
         }
         
-        UIDateEditorIF dateEditor = factory.createDateEditor();
+        UIDateEditor dateEditor = factory.createDateEditor();
          addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
         
-        UIButtonIF imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
+        UIButton imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
         addEditorProperty(editorPanel, "IconButton:", imageButton, sizer);
-        imageButton.addActionListener(new UIActionListenerIF() {
+        imageButton.addActionListener(new UIActionListener() {
 
             /**
-             * @see net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF#invoke(net.sf.mmm.ui.toolkit.api.UINodeIF,
+             * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
              *      net.sf.mmm.ui.toolkit.api.event.ActionType)
              * 
      */
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
-                UIButtonIF testButton = factory.createButton("Test");
+                UIButton testButton = factory.createButton("Test");
                 addEditorProperty(editorPanel, "Extra long special greedy Label:", testButton,
                         sizer);
             }
@@ -172,24 +172,24 @@ public class UIDemoBuilder {
         return factory.createScrollPanel(editorPanel);
     }
 
-    public static UISplitPanelIF createSplitPanel(UIFactoryIF factory) {
+    public static UISplitPanel createSplitPanel(UIFactory factory) {
 
-        UISplitPanelIF splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
+        UISplitPanel splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
         splitPanel.setTopOrLeftComponent(createTreePanel(factory));
         splitPanel.setBottomOrRightComponent(createListPanel(factory, createDemoListModel()));
         return splitPanel;
     }
 
-    public static UIPanelIF createLayoutPanel(UIFactoryIF factory) {
+    public static UIPanel createLayoutPanel(UIFactory factory) {
 
-        final UIPanelIF panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
+        final UIPanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
         panel.addComponent(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
         panel.addComponent(UIDemoBuilder.createTreePanel(factory));
         panel.addComponent(UIDemoBuilder.createRadioPanel(factory));
-        UIButtonIF button = factory.createButton("Flip");
-        button.addActionListener(new UIActionListenerIF() {
+        UIButton button = factory.createButton("Flip");
+        button.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 panel.setOrientation(panel.getOrientation().getMirrored());
             }
@@ -198,11 +198,11 @@ public class UIDemoBuilder {
         return panel;
     }
 
-    public static UIPanelIF createTablePanel(UIFactoryIF factory) {
+    public static UIPanel createTablePanel(UIFactory factory) {
 
-        final UIPanelIF tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
+        final UIPanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
 
-        final UITableIF table = factory.createTable();
+        final UITable table = factory.createTable();
         UISimpleTableModel model = new UISimpleTableModel(10, 5);
         model.initColumnNames();
         model.initCells();
@@ -212,9 +212,9 @@ public class UIDemoBuilder {
         return tablePanel;
     }
 
-    public static UIDefaultListModel<String> createDemoListModel() {
+    public static DefaultUIListModel<String> createDemoListModel() {
 
-        UIDefaultListModel<String> listModel = new UIDefaultListModel<String>();
+        DefaultUIListModel<String> listModel = new DefaultUIListModel<String>();
         listModel.addElement("Hi");
         listModel.addElement("this");
         listModel.addElement("is");
@@ -223,25 +223,25 @@ public class UIDemoBuilder {
         return listModel;
     }
 
-    public static UIPanelIF createListPanel(UIFactoryIF factory,
-            final UIDefaultListModel<String> listModel) {
+    public static UIPanel createListPanel(UIFactory factory,
+            final DefaultUIListModel<String> listModel) {
 
-        final UIPanelIF listPanel = factory.createPanel(Orientation.VERTICAL, "List");
+        final UIPanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
 
-        final UIComboBoxIF<String> combo = factory.createComboBox(listModel);
+        final UIComboBox<String> combo = factory.createComboBox(listModel);
         listPanel.addComponent(combo, new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL,
                 0.0));
 
-        final UIListIF<String> list = factory.createList(listModel);
+        final UIList<String> list = factory.createList(listModel);
         listPanel.addComponent(list);
         listModel.addElement("!");
 
-        final UIPanelIF buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+        final UIPanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
-        final UIButtonIF addButton = factory.createButton("add");
-        addButton.addActionListener(new UIActionListenerIF() {
+        final UIButton addButton = factory.createButton("add");
+        addButton.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 String text = combo.getText();
                 int index = list.getSelectedIndex();
@@ -251,10 +251,10 @@ public class UIDemoBuilder {
                 listModel.addElement(text, index);
             }
         });
-        final UIButtonIF removeButton = factory.createButton("remove");
-        removeButton.addActionListener(new UIActionListenerIF() {
+        final UIButton removeButton = factory.createButton("remove");
+        removeButton.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 int index = list.getSelectedIndex();
                 if (index != -1) {
@@ -272,14 +272,14 @@ public class UIDemoBuilder {
 
     }
 
-    public static void createMenus(final UIWindowIF frame) {
+    public static void createMenus(final UIWindow frame) {
 
-        UIMenuBarIF menubar = frame.getMenuBar();
+        UIMenuBar menubar = frame.getMenuBar();
         // file menu
-        UIMenuIF fileMenu = menubar.addMenu("File");
-        UIActionListenerIF loadAction = new UIActionListenerIF() {
+        UIMenu fileMenu = menubar.addMenu("File");
+        UIActionListener loadAction = new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 frame.showMessage("You selected load", "Hi", MessageType.INFO);
             }
@@ -287,13 +287,13 @@ public class UIDemoBuilder {
         };
         fileMenu.addItem("Load", loadAction);
         fileMenu.addSeparator();
-        UIMenuIF subMenu = fileMenu.addSubMenu("Submenu");
-        UIActionListenerIF checkAction = new UIActionListenerIF() {
+        UIMenu subMenu = fileMenu.addSubMenu("Submenu");
+        UIActionListener checkAction = new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 if (action == ActionType.SELECT) {
-                    UIMenuItemIF item = (UIMenuItemIF) source;
+                    UIMenuItem item = (UIMenuItem) source;
                     boolean selection = item.isSelected();
                     String state = "uncheck";
                     if (selection) {
@@ -311,15 +311,15 @@ public class UIDemoBuilder {
         fileMenu.addItem(frame.getFactory().createPrintAction(frame.getComposite(), "Print map"));
 
         // radio menu
-        UIMenuIF radioMenu = menubar.addMenu("Radio");
-        final UIMenuItemIF[] colors = new UIMenuItemIF[] {
+        UIMenu radioMenu = menubar.addMenu("Radio");
+        final UIMenuItem[] colors = new UIMenuItem[] {
                 radioMenu.addItem("blue", ButtonStyle.RADIO),
                 radioMenu.addItem("green", ButtonStyle.RADIO),
                 radioMenu.addItem("red", ButtonStyle.RADIO)};
         radioMenu.addSeparator();
-        UIActionListenerIF colorAction = new UIActionListenerIF() {
+        UIActionListener colorAction = new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 String color = "none";
                 for (int i = 0; i < colors.length; i++) {
@@ -336,38 +336,38 @@ public class UIDemoBuilder {
 
     }
 
-    public static UIPanelIF createTreePanel(UIFactoryIF factory) {
+    public static UIPanel createTreePanel(UIFactory factory) {
 
-        final UIPanelIF treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
+        final UIPanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
 
-        final UITreeIF tree = factory.createTree(false);
-        final UIDefaultTreeModel<String> treeModel = new UIDefaultTreeModel<String>("root");
-        UITreeNode<String> child1 = treeModel.getRoot().createChildNode("child");
+        final UITree tree = factory.createTree(false);
+        final DefaultUITreeModel<String> treeModel = new DefaultUITreeModel<String>("root");
+        DefaultUITreeNode<String> child1 = treeModel.getRoot().createChildNode("child");
         child1.createChildNode("sub-child");
         treeModel.getRoot().createChildNode("child2");
         tree.setModel(treeModel);
         treePanel.addComponent(tree);
 
-        final UIPanelIF buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+        final UIPanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
-        final UIButtonIF addButton = factory.createButton("add");
-        addButton.addActionListener(new UIActionListenerIF() {
+        final UIButton addButton = factory.createButton("add");
+        addButton.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
-                UITreeNode<String> selection = (UITreeNode<String>) tree.getSelection();
+                DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
                 if (selection != null) {
                     selection.createChildNode(selection.toString() + ".child."
                             + selection.getChildNodeCount());
                 }
             }
         });
-        final UIButtonIF removeButton = factory.createButton("remove");
-        removeButton.addActionListener(new UIActionListenerIF() {
+        final UIButton removeButton = factory.createButton("remove");
+        removeButton.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
-                UITreeNode<String> selection = (UITreeNode<String>) tree.getSelection();
+                DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
                 if (selection != null) {
                     selection.removeFromParent();
                 }
@@ -384,37 +384,37 @@ public class UIDemoBuilder {
         return treePanel;
     }
 
-    public static UIPanelIF createModelPanel(UIFactoryIF factory) {
+    public static UIPanel createModelPanel(UIFactory factory) {
 
-        final UIPanelIF modelPanel = factory.createPanel(Orientation.VERTICAL,
+        final UIPanel modelPanel = factory.createPanel(Orientation.VERTICAL,
                 "Model-View-Controller");
-        final UIDefaultListModel<String> listModel = createDemoListModel();
+        final DefaultUIListModel<String> listModel = createDemoListModel();
 
         // add combo-box
-        final UIComboBoxIF<String> combo = factory.createComboBox(listModel, true);
-        final UIPanelIF buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
-        final UIButtonIF addButton = factory.createButton("add");
-        final UIButtonIF removeButton = factory.createButton("remove");
+        final UIComboBox<String> combo = factory.createComboBox(listModel, true);
+        final UIPanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+        final UIButton addButton = factory.createButton("add");
+        final UIButton removeButton = factory.createButton("remove");
         buttonPanel.addComponent(addButton, LayoutConstraints.FIXED_HORIZONTAL);
         buttonPanel.addComponent(removeButton, LayoutConstraints.FIXED_HORIZONTAL);
         buttonPanel.addComponent(combo);
         modelPanel.addComponent(buttonPanel, LayoutConstraints.FIXED_HORIZONTAL);
 
         // spin-box
-        UISpinBoxIF<String> spinBox = factory.createSpinBox(listModel);
+        UISpinBox<String> spinBox = factory.createSpinBox(listModel);
         modelPanel.addComponent(spinBox, LayoutConstraints.FIXED_HORIZONTAL);
 
         // slide-bar
-        UISlideBarIF slideBar = factory.createSlideBar(listModel);
+        UISlideBar slideBar = factory.createSlideBar(listModel);
         modelPanel.addComponent(slideBar, LayoutConstraints.FIXED_HORIZONTAL);
 
         // add list
-        final UIListIF<String> list = factory.createList(listModel);
+        final UIList<String> list = factory.createList(listModel);
         modelPanel.addComponent(list);
 
-        addButton.addActionListener(new UIActionListenerIF() {
+        addButton.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 String text = combo.getText();
                 int index = list.getSelectedIndex();
@@ -424,9 +424,9 @@ public class UIDemoBuilder {
                 listModel.addElement(text, index);
             }
         });
-        removeButton.addActionListener(new UIActionListenerIF() {
+        removeButton.addActionListener(new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 int index = list.getSelectedIndex();
                 if (index != -1) {
@@ -438,12 +438,12 @@ public class UIDemoBuilder {
         return modelPanel;
     }
 
-    public static UIPanelIF createRadioPanel(UIFactoryIF factory) {
+    public static UIPanel createRadioPanel(UIFactory factory) {
 
-        UIPanelIF radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
-        UIButtonIF rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
+        UIPanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
+        UIButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
         radioPanel.addComponent(rb1);
-        UIButtonIF rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);
+        UIButton rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);
         radioPanel.addComponent(rb2);
         return radioPanel;
     }

@@ -2,14 +2,14 @@
 package net.sf.mmm.framework.base.provider;
 
 import net.sf.mmm.framework.NlsResourceBundle;
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
 
 /**
  * A {@link DuplicateInstanceIdException} is thrown if the
- * {@link net.sf.mmm.framework.api.ComponentInstanceContainerIF#getInstanceId() instance-ID}
+ * {@link net.sf.mmm.framework.api.ComponentInstanceContainer#getInstanceId() instance-ID}
  * is NOT unique and a duplicate was about to be created. This indicates a bug
- * in the according {@link net.sf.mmm.framework.api.ComponentProviderIF}
+ * in the according {@link net.sf.mmm.framework.api.ComponentProvider}
  * implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -27,7 +27,7 @@ public class DuplicateInstanceIdException extends ComponentException {
    * @param descriptor
    *        is the descriptor of the component.
    */
-  public DuplicateInstanceIdException(String instanceId, ComponentDescriptorIF descriptor) {
+  public DuplicateInstanceIdException(String instanceId, ComponentDescriptor descriptor) {
 
     super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_INSTANCE_ID, instanceId, descriptor
         .getSpecification());

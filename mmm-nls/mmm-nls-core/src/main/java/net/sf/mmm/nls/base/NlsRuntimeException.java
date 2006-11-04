@@ -4,19 +4,19 @@ package net.sf.mmm.nls.base;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-import net.sf.mmm.nls.api.NlsMessageIF;
-import net.sf.mmm.nls.api.NlsThrowableIF;
-import net.sf.mmm.nls.api.StringTranslatorIF;
+import net.sf.mmm.nls.api.NlsMessage;
+import net.sf.mmm.nls.api.NlsThrowable;
+import net.sf.mmm.nls.api.StringTranslator;
 
 /**
  * This the base class for all runtime exceptions of the project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class NlsRuntimeException extends RuntimeException implements NlsThrowableIF {
+public abstract class NlsRuntimeException extends RuntimeException implements NlsThrowable {
 
     /** the internationalized message */
-    private NlsMessageIF nlsMessage;
+    private NlsMessage nlsMessage;
 
     /**
      * The default constructor.
@@ -30,7 +30,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
      */
     public NlsRuntimeException(String internaitionalizedMessage, Object... arguments) {
 
-        this(new NlsMessage(internaitionalizedMessage, arguments));
+        this(new NlsMessageImpl(internaitionalizedMessage, arguments));
     }
 
     /**
@@ -48,7 +48,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     public NlsRuntimeException(Throwable nested, String internaitionalizedMessage,
             Object... arguments) {
 
-        this(nested, new NlsMessage(internaitionalizedMessage, arguments));
+        this(nested, new NlsMessageImpl(internaitionalizedMessage, arguments));
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
      * @param internationalizedMessage
      *        the internationalized message describing the problem briefly.
      */
-    public NlsRuntimeException(NlsMessageIF internationalizedMessage) {
+    public NlsRuntimeException(NlsMessage internationalizedMessage) {
 
         super();
         this.nlsMessage = internationalizedMessage;
@@ -71,7 +71,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
      * @param internationalizedMessage
      *        the internationalized message describing the problem briefly.
      */
-    public NlsRuntimeException(Throwable nested, NlsMessageIF internationalizedMessage) {
+    public NlsRuntimeException(Throwable nested, NlsMessage internationalizedMessage) {
 
         super(nested);
         this.nlsMessage = internationalizedMessage;
@@ -82,7 +82,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
      * 
      * @return the internationalized message.
      */
-    public final NlsMessageIF getNlsMessage() {
+    public final NlsMessage getNlsMessage() {
 
         return this.nlsMessage;
     }
@@ -108,10 +108,10 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     }
 
     /**
-     * @see net.sf.mmm.nls.api.NlsThrowableIF#printStackTrace(java.io.PrintStream,
-     *      StringTranslatorIF) 
+     * @see net.sf.mmm.nls.api.NlsThrowable#printStackTrace(java.io.PrintStream,
+     *      StringTranslator) 
      */
-    public void printStackTrace(PrintStream stream, StringTranslatorIF nationalizer) {
+    public void printStackTrace(PrintStream stream, StringTranslator nationalizer) {
 
         synchronized (stream) {
             stream.println(getLocalizedMessage(nationalizer));
@@ -123,8 +123,8 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
             Throwable nested = getCause();
             if (nested != null) {
                 stream.println("Caused by: ");
-                if (nested instanceof NlsThrowableIF) {
-                    ((NlsThrowableIF) nested).printStackTrace(stream, nationalizer);
+                if (nested instanceof NlsThrowable) {
+                    ((NlsThrowable) nested).printStackTrace(stream, nationalizer);
                 } else {
                     nested.printStackTrace(stream);
                 }
@@ -133,10 +133,10 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     }
 
     /**
-     * @see net.sf.mmm.nls.api.NlsThrowableIF#printStackTrace(java.io.PrintWriter,
-     *      net.sf.mmm.nls.api.StringTranslatorIF) 
+     * @see net.sf.mmm.nls.api.NlsThrowable#printStackTrace(java.io.PrintWriter,
+     *      net.sf.mmm.nls.api.StringTranslator) 
      */
-    public void printStackTrace(PrintWriter writer, StringTranslatorIF nationalizer) {
+    public void printStackTrace(PrintWriter writer, StringTranslator nationalizer) {
 
         synchronized (writer) {
             writer.println(getLocalizedMessage(nationalizer));
@@ -148,8 +148,8 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
             Throwable nested = getCause();
             if (nested != null) {
                 writer.println("Caused by: ");
-                if (nested instanceof NlsThrowableIF) {
-                    ((NlsThrowableIF) nested).printStackTrace(writer, nationalizer);
+                if (nested instanceof NlsThrowable) {
+                    ((NlsThrowable) nested).printStackTrace(writer, nationalizer);
                 } else {
                     nested.printStackTrace(writer);
                 }
@@ -166,10 +166,10 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     }
 
     /**
-     * @see net.sf.mmm.nls.api.NlsThrowableIF#getLocalizedMessage(StringTranslatorIF)
+     * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator)
      *      
      */
-    public String getLocalizedMessage(StringTranslatorIF nationalizer) {
+    public String getLocalizedMessage(StringTranslator nationalizer) {
 
         StringBuffer message = new StringBuffer();
         getLocalizedMessage(nationalizer, message);
@@ -177,18 +177,18 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     }
 
     /**
-     * @see net.sf.mmm.nls.api.NlsThrowableIF#getLocalizedMessage(StringTranslatorIF,
+     * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator,
      *      java.lang.StringBuffer) 
      */
-    public void getLocalizedMessage(StringTranslatorIF nationalizer, StringBuffer message) {
+    public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message) {
 
         getNlsMessage().getLocalizedMessage(nationalizer, message);
         Throwable nested = getCause();
         if (nested != null) {
-            NlsThrowableIF mt = null;
+            NlsThrowable mt = null;
             String msg = null;
-            if (nested instanceof NlsThrowableIF) {
-                mt = (NlsThrowableIF) nested;
+            if (nested instanceof NlsThrowable) {
+                mt = (NlsThrowable) nested;
             } else {
                 msg = nested.getLocalizedMessage();
             }

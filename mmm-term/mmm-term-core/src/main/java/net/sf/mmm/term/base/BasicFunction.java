@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.term.base;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.api.TermIF;
@@ -34,11 +34,11 @@ public abstract class BasicFunction extends AbstractFunction {
     }
 
     /**
-     * @see net.sf.mmm.term.api.FunctionIF#calculate(net.sf.mmm.context.api.ContextIF,
+     * @see net.sf.mmm.term.api.FunctionIF#calculate(net.sf.mmm.context.api.Context,
      *      net.sf.mmm.term.api.TermIF[])
      * 
      */
-    public Object calculate(ContextIF environment, TermIF... arguments)
+    public Object calculate(Context environment, TermIF... arguments)
             throws ValueException {
 
         validateArgumentCount(arguments.length);
@@ -64,7 +64,7 @@ public abstract class BasicFunction extends AbstractFunction {
      * than two arguments by iteratively performing a binary calculation with a
      * left-associative logic as described in the type comment of this class.
      * 
-     * @see net.sf.mmm.term.api.FunctionIF#calculate(ContextIF, TermIF[])
+     * @see net.sf.mmm.term.api.FunctionIF#calculate(Context, TermIF[])
      * 
      * @param environment
      *        is a set of variables used to evaluate the (conditional) terms
@@ -79,7 +79,7 @@ public abstract class BasicFunction extends AbstractFunction {
      *         if an error occurs during calculation e.g. zero divide or
      *         incompatible types.
      */
-    public Object calculateBinary(ContextIF environment, TermIF... arguments)
+    public Object calculateBinary(Context environment, TermIF... arguments)
             throws ValueException {
 
         Object result = arguments[0].evaluate(environment);

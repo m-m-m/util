@@ -6,7 +6,7 @@ import net.sf.mmm.framework.api.ComponentException;
 
 /**
  * This is the exception thrown if a
- * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getImplementation() component implementation}
+ * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getImplementation() component implementation}
  * could NOT be instantiated.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -21,13 +21,13 @@ public class ComponentInstantiationException extends ComponentException {
      * 
      * @param specification
      *        is the component
-     *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}.
+     *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}.
      * @param implementation
      *        is the component
-     *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getImplementation() implementation}.
+     *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getImplementation() implementation}.
      * @param instanceId
      *        is the
-     *        {@link net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(Class, String) instance-ID}
+     *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class, String) instance-ID}
      *        of the component.
      * @param cause
      *        is the exception that caused this error.

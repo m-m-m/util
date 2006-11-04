@@ -4,20 +4,20 @@ package net.sf.mmm.content.validator.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.content.validator.api.ValidationResultIF;
-import net.sf.mmm.content.validator.api.ValueValidatorIF;
+import net.sf.mmm.content.validator.api.ValidationResult;
+import net.sf.mmm.content.validator.api.ValueValidator;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This is an abstract base implementation of a composite ValueValidatorIF.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractCompositeValueValidator implements ValueValidatorIF {
+public abstract class AbstractCompositeValueValidator implements ValueValidator {
 
     /** the list of child validators */
-    List<ValueValidatorIF> children;
+    List<ValueValidator> children;
 
     /**
      * The constructor.
@@ -25,7 +25,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
     public AbstractCompositeValueValidator() {
 
         super();
-        this.children = new ArrayList<ValueValidatorIF>();
+        this.children = new ArrayList<ValueValidator>();
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
      *        is the position of the requested child validator.
      * @return the child validator at the given index.
      */
-    public ValueValidatorIF getChild(int index) {
+    public ValueValidator getChild(int index) {
 
         return this.children.get(index);
     }
@@ -56,7 +56,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
      * @param child
      *        is the new child validator to add.
      */
-    public void add(ValueValidatorIF child) {
+    public void add(ValueValidator child) {
 
         this.children.add(child);
     }
@@ -67,9 +67,9 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
      * 
      * @return the result if empty.
      */
-    protected ValidationResultIF getResultIfEmpty() {
+    protected ValidationResult getResultIfEmpty() {
 
-        return ValidationResult.VALID_RESULT;
+        return ValidationResultImpl.VALID_RESULT;
     }
 
     /**
@@ -86,15 +86,15 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
      *        is the number of child validators that succeeded.
      * @return the final validation result.
      */
-    protected abstract ValidationResultIF getResult(
-            ValidationResultIF[] details, int detailCount, int succeedCount);
+    protected abstract ValidationResult getResult(
+            ValidationResult[] details, int detailCount, int succeedCount);
 
     /**
      * This method gets the maximum number of child validators that must succeed
      * until no further child validators are evaluated. <br>
      * E.g. if you want to create a composite validator with OR logic you can
      * override this method and return <code>1</code>. Then the
-     * {@link AbstractCompositeValueValidator#getResult(ValidationResultIF[], int, int)}
+     * {@link AbstractCompositeValueValidator#getResult(ValidationResult[], int, int)}
      * method will be called after the first validator suceeded. <br>
      * The default value is <code>Integer.MAX_VALUE</code> so all child
      * validators are always performed.
@@ -109,19 +109,19 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
     }
 
     /**
-     * @see net.sf.mmm.content.validator.api.ValueValidatorIF#validate(Object)
+     * @see net.sf.mmm.content.validator.api.ValueValidator#validate(Object)
      */
-    public ValidationResultIF validate(Object value) {
+    public ValidationResult validate(Object value) {
 
         int length = getChildCount();
         if (length == 0) {
             return getResultIfEmpty();
         }
-        ValidationResultIF[] details = new ValidationResultIF[length];
+        ValidationResult[] details = new ValidationResult[length];
         int invalidCount = 0;
         int succeedCount = 0;
         for (int i = 0; i < length; i++) {
-            ValidationResultIF result = getChild(i).validate(value);
+            ValidationResult result = getChild(i).validate(value);
             if (result.isValid()) {
                 succeedCount++;
             } else {
@@ -136,9 +136,9 @@ public abstract class AbstractCompositeValueValidator implements ValueValidatorI
     }
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
      */
-    public void toXml(XmlWriterIF xmlWriter) throws XmlException {
+    public void toXml(XmlWriter xmlWriter) throws XmlException {
     
         xmlWriter.writeStartElement(XML_TAG_VALIDATOR);
         xmlWriter.writeAttribute(XML_ATR_VALIDATOR_TYPE, getClass().toString());

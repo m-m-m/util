@@ -16,7 +16,7 @@ import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessIF} interface
+ * {@link net.sf.mmm.configuration.api.access.ConfigurationAccess} interface
  * using {@link java.io.File} to read and write data.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -51,7 +51,7 @@ public class FileAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getUniqueUri()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getUniqueUri()
    *      
    */
   public String getUniqueUri() {
@@ -60,7 +60,7 @@ public class FileAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getName()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getName()
    *      
    */
   public String getName() {
@@ -79,7 +79,7 @@ public class FileAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getReadAccess()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getReadAccess()
    *      
    */
   public InputStream getReadAccess() throws ConfigurationException {
@@ -92,7 +92,7 @@ public class FileAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getWriteAccess()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getWriteAccess()
    *      
    */
   public OutputStream getWriteAccess() throws ConfigurationException {
@@ -106,7 +106,7 @@ public class FileAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#isReadOnly()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#isReadOnly()
    *      
    */
   public boolean isReadOnly() {

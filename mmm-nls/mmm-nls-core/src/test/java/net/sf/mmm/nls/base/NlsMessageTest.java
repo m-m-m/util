@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
-import net.sf.mmm.nls.api.NlsMessageIF;
-import net.sf.mmm.nls.api.StringTranslatorIF;
-import net.sf.mmm.nls.base.NlsMessage;
+import net.sf.mmm.nls.api.NlsMessage;
+import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.base.NlsMessageImpl;
 
 /**
- * This is the {@link TestCase} for {@link net.sf.mmm.nls.base.NlsMessage}.
+ * This is the {@link TestCase} for {@link net.sf.mmm.nls.base.NlsMessageImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,8 +25,8 @@ public class NlsMessageTest extends TestCase {
     }
 
     /**
-     * This method tests the {@link net.sf.mmm.nls.api.NlsMessageIF}
-     * implementation ({@link net.sf.mmm.nls.base.NlsMessage}).
+     * This method tests the {@link net.sf.mmm.nls.api.NlsMessage}
+     * implementation ({@link net.sf.mmm.nls.base.NlsMessageImpl}).
      */
     @Test
     public void testMessage() {
@@ -37,12 +37,12 @@ public class NlsMessageTest extends TestCase {
         String suffix = "!";
         final String msg = hello + "{0}" + suffix;
         final String msgDe = helloDe + "{0}" + suffix;
-        NlsMessageIF testMessage = new NlsMessage(msg, arg);
+        NlsMessage testMessage = new NlsMessageImpl(msg, arg);
         assertEquals(testMessage.getInternationalizedMessage(), msg);
         assertEquals(testMessage.getArgumentCount(), 1);
         assertEquals(testMessage.getArgument(0), arg);
         assertEquals(testMessage.getMessage(), hello + arg + suffix);
-        StringTranslatorIF translatorDe = new StringTranslatorIF() {
+        StringTranslator translatorDe = new StringTranslator() {
 
             public String translate(String message) {
 

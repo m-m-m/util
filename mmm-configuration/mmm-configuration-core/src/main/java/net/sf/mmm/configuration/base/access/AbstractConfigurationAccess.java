@@ -1,15 +1,15 @@
 /* $Id$ */
 package net.sf.mmm.configuration.base.access;
 
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessIF} interface.
+ * {@link net.sf.mmm.configuration.api.access.ConfigurationAccess} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfigurationAccess implements ConfigurationAccessIF {
+public abstract class AbstractConfigurationAccess implements ConfigurationAccess {
 
   /** @see #getContextPrefix() */
   private String prefix;
@@ -34,7 +34,7 @@ public abstract class AbstractConfigurationAccess implements ConfigurationAccess
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getContextPrefix()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getContextPrefix()
    *      
    */
   public String getContextPrefix() {

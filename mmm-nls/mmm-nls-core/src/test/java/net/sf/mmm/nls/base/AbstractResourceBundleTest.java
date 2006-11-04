@@ -10,10 +10,10 @@ import java.util.Set;
 import org.junit.Test;
 
 import net.sf.mmm.nls.MyResourceBundle;
-import net.sf.mmm.nls.api.NlsMessageIF;
-import net.sf.mmm.nls.api.StringTranslatorIF;
+import net.sf.mmm.nls.api.NlsMessage;
+import net.sf.mmm.nls.api.StringTranslator;
 import net.sf.mmm.nls.base.AbstractResourceBundle;
-import net.sf.mmm.nls.base.NlsMessage;
+import net.sf.mmm.nls.base.NlsMessageImpl;
 import net.sf.mmm.nls.base.SimpleStringTranslator;
 
 import junit.framework.TestCase;
@@ -45,8 +45,8 @@ public class AbstractResourceBundleTest extends TestCase {
             count++;
         }
         assertEquals(count, expectedKeys.size());
-        StringTranslatorIF st = new SimpleStringTranslator(myRB, Locale.GERMAN);
-        NlsMessageIF msg = new NlsMessage(MyResourceBundle.MSG_WELCOME, "Paul");
+        StringTranslator st = new SimpleStringTranslator(myRB, Locale.GERMAN);
+        NlsMessage msg = new NlsMessageImpl(MyResourceBundle.MSG_WELCOME, "Paul");
         assertEquals("Welcome \"Paul\"!", msg.getMessage());
         assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(st));
     }

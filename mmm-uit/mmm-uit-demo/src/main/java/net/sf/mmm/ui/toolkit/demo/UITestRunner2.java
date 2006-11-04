@@ -1,12 +1,12 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.demo;
 
-import net.sf.mmm.ui.toolkit.api.UIFactoryIF;
-import net.sf.mmm.ui.toolkit.api.window.UIFrameIF;
-import net.sf.mmm.ui.toolkit.api.window.UIWorkbenchIF;
+import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 
 /**
- * This is a test runner that tests the various UIFactory implementations.
+ * This is a test runner that tests the various UIFactorySwing implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -18,14 +18,14 @@ public class UITestRunner2 {
      * @param factory
      *        is the actual factory implementation to use.
      */
-    private static void runTest(UIFactoryIF factory) {
+    private static void runTest(UIFactory factory) {
 
         System.out.println(factory);
         System.out.println(factory.getDisplay());
-        final UIWorkbenchIF workbench = factory.createWorkbench("Workbench");
+        final UIWorkbench workbench = factory.createWorkbench("Workbench");
         workbench.setSize(800, 1024);
         workbench.setVisible(true);
-        final UIFrameIF frame = workbench.createFrame("TestFrame", true);        
+        final UIFrame frame = workbench.createFrame("TestFrame", true);        
         frame.setComposite(UIDemoBuilder.createTabbedPanel(factory));
         UIDemoBuilder.createMenus(frame);        
         frame.setSize(500, 300);
@@ -47,8 +47,8 @@ public class UITestRunner2 {
      */
     public static void main(String[] args) {
 
-        runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactory());
-        runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactory());
+        runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
+        runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
     }
 
 }

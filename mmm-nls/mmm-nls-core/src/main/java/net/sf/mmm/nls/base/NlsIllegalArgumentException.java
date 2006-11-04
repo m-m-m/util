@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.nls.base;
 
-import net.sf.mmm.nls.api.NlsMessageIF;
+import net.sf.mmm.nls.api.NlsMessage;
 
 /**
  * A {@link NlsIllegalArgumentException} is analog to an
@@ -34,19 +34,19 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
     }
 
     /**
-     * @see NlsRuntimeException#NlsRuntimeException(NlsMessageIF)
+     * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
      * 
      */
-    public NlsIllegalArgumentException(NlsMessageIF internationalizedMessage) {
+    public NlsIllegalArgumentException(NlsMessage internationalizedMessage) {
 
         super(internationalizedMessage);
     }
 
     /**
-     * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessageIF)
+     * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
      * 
      */
-    public NlsIllegalArgumentException(Throwable nested, NlsMessageIF internationalizedMessage) {
+    public NlsIllegalArgumentException(Throwable nested, NlsMessage internationalizedMessage) {
 
         super(nested, internationalizedMessage);
     }

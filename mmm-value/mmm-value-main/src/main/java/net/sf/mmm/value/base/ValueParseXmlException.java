@@ -7,7 +7,7 @@ import net.sf.mmm.value.api.ValueParseException;
 /**
  * This exception is thrown if the parsing of a value as string fails.
  * 
- * @see net.sf.mmm.value.api.ValueManagerIF#parse(String)
+ * @see net.sf.mmm.value.api.ValueManager#parse(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

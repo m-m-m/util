@@ -5,7 +5,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
  * An {@link IocException} is thrown if anything goes wrong with
- * {@link ComponentProviderIF component} {@link IocContainerIF management}.
+ * {@link ComponentProvider component} {@link IocContainer management}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

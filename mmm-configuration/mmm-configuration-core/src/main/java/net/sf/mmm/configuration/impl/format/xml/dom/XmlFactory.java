@@ -3,17 +3,17 @@ package net.sf.mmm.configuration.impl.format.xml.dom;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationFactory;
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.context.api.MutableContextIF;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.context.api.MutableContext;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.base.access.ConfigurationFactoryIF} interface
+ * {@link net.sf.mmm.configuration.base.access.ConfigurationFactory} interface
  * using {@link org.w3c.dom XML DOM} as representation for the configuration.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -25,7 +25,7 @@ public class XmlFactory extends AbstractConfigurationFactory {
    * {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT format} name for this
    * implementation.
    * 
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#CONTEXT_VARIABLE_PREFIX
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#CONTEXT_VARIABLE_PREFIX
    */
   public static final String CONTEXT_DEFAULT_NAME = "file";
 
@@ -39,30 +39,30 @@ public class XmlFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#configure(String,
-   *      ContextIF, ConfigurationIF) 
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#configure(String,
+   *      Context, Configuration) 
    */
-  public void configure(String prefix, ContextIF environment, ConfigurationIF include)
+  public void configure(String prefix, Context environment, Configuration include)
       throws ConfigurationException {
 
   // TODO: parser factory configuration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
-   *      net.sf.mmm.context.api.MutableContextIF) 
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
+   *      net.sf.mmm.context.api.MutableContext) 
    */
-  public AbstractConfigurationDocument create(ConfigurationAccessIF access, MutableContextIF env)
+  public AbstractConfigurationDocument create(ConfigurationAccess access, MutableContext env)
       throws ConfigurationException {
 
     return new XmlDocument(access, env);
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
    *      net.sf.mmm.configuration.base.AbstractConfiguration) 
    */
-  public AbstractConfigurationDocument create(ConfigurationAccessIF access,
+  public AbstractConfigurationDocument create(ConfigurationAccess access,
       AbstractConfiguration parentConfiguration) throws ConfigurationException {
 
     return new XmlDocument(access, parentConfiguration);

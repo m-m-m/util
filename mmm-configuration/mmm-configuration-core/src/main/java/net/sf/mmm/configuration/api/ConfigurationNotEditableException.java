@@ -5,8 +5,8 @@ import net.sf.mmm.configuration.NlsResourceBundle;
 
 /**
  * This is the exception thrown if a
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF configuration-node}
- * was edited without being {@link MutableConfigurationIF#isEditable() editable}.
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration configuration-node}
+ * was edited without being {@link MutableConfiguration#isEditable() editable}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,9 +20,9 @@ public class ConfigurationNotEditableException extends ConfigurationException {
    * 
    * @param node
    *        is the node that is NOT
-   *        {@link MutableConfigurationIF#isEditable() editable} .
+   *        {@link MutableConfiguration#isEditable() editable} .
    */
-  public ConfigurationNotEditableException(MutableConfigurationIF node) {
+  public ConfigurationNotEditableException(MutableConfiguration node) {
 
     super(NlsResourceBundle.ERR_NODE_NOT_EDITABLE, node);
   }
@@ -32,24 +32,24 @@ public class ConfigurationNotEditableException extends ConfigurationException {
    * 
    * @param node
    *        is the node that is NOT
-   *        {@link MutableConfigurationIF#isEditable() editable} .
+   *        {@link MutableConfiguration#isEditable() editable} .
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public ConfigurationNotEditableException(MutableConfigurationIF node, Throwable nested) {
+  public ConfigurationNotEditableException(MutableConfiguration node, Throwable nested) {
 
     super(nested, NlsResourceBundle.ERR_NODE_NOT_EDITABLE, node);
   }
 
   /**
    * This method gets the node that was edited without being
-   * {@link MutableConfigurationIF#isEditable() editable}.
+   * {@link MutableConfiguration#isEditable() editable}.
    * 
    * @return the associated configuration node.
    */
-  public MutableConfigurationIF getConfiguration() {
+  public MutableConfiguration getConfiguration() {
 
-    return (MutableConfigurationIF) getNlsMessage().getArgument(0);
+    return (MutableConfiguration) getNlsMessage().getArgument(0);
   }
 
 }

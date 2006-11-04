@@ -3,7 +3,7 @@ package net.sf.mmm.framework.base.descriptor;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.framework.api.ComponentDescriptorIF} interface.
+ * {@link net.sf.mmm.framework.api.ComponentDescriptor} interface.
  * 
  * @param <S>
  *        is the {@link #getSpecification() specification} of the provided
@@ -30,7 +30,7 @@ public class SimpleComponentDescriptor<S> extends AbstractComponentDescriptor<S>
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification()
+   * @see net.sf.mmm.framework.api.ComponentDescriptor#getSpecification()
    * 
    */
   public Class<S> getSpecification() {

@@ -33,7 +33,7 @@ package net.sf.mmm.framework.api.annotation;
  * <li>{@link javax.annotation.PreDestroy dispose}</li>
  * </ol>
  * 
- * @see net.sf.mmm.framework.api.ComponentDescriptorIF
+ * @see net.sf.mmm.framework.api.ComponentDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

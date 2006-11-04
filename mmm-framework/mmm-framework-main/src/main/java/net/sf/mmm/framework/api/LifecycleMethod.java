@@ -5,11 +5,11 @@ import java.lang.reflect.Method;
 
 /**
  * This class represents a {@link #getLifecycleMethod() method} of a
- * {@link ExtendedComponentDescriptorIF#getImplementation() component}
+ * {@link ExtendedComponentDescriptor#getImplementation() component}
  * associated with a {@link #getLifecyclePhase() phase} of the
- * {@link LifecycleManagerIF#getLifecyclePhases() lifecycle}.
+ * {@link LifecycleManager#getLifecyclePhases() lifecycle}.
  * 
- * @see LifecycleManagerIF
+ * @see LifecycleManager
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -45,7 +45,7 @@ public final class LifecycleMethod {
 
     /**
      * This is the
-     * {@link ExtendedComponentInstanceContainerIF#getLifecycleState() lifecycle status}
+     * {@link ExtendedComponentInstanceContainer#getLifecycleState() lifecycle status}
      * if the {@link #getLifecyclePhase() lifecycle-phase}
      * {@link #LIFECYCLE_EXECUTE "execute"} has completed.
      * 
@@ -138,8 +138,8 @@ public final class LifecycleMethod {
 
     /**
      * This method gets the {@link Method method} of the
-     * {@link ExtendedComponentDescriptorIF#getLifecycleMethods() declaring}
-     * {@link ExtendedComponentDescriptorIF#getImplementation() component-implementation}
+     * {@link ExtendedComponentDescriptor#getLifecycleMethods() declaring}
+     * {@link ExtendedComponentDescriptor#getImplementation() component-implementation}
      * for the associated {@link #getLifecyclePhase() lifecycle-phase}. It must
      * be a public non-arg (no {@link Method#getParameterTypes() arguments})
      * method.<br>

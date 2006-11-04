@@ -5,21 +5,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.ExtendedComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
 
 /**
- * This is the implementation of the {@link ComponentInstantiationManagerIF}
+ * This is the implementation of the {@link ComponentInstantiationManager}
  * interface for multiple singletons with different
- * {@link net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(Class, String) instance-IDs}.
+ * {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class, String) instance-IDs}.
  * 
  * @param <S>
- *        is the {@link ComponentDescriptorIF#getSpecification() specification}
+ *        is the {@link ComponentDescriptor#getSpecification() specification}
  *        of the component.
  * @param <I>
  *        is the
- *        {@link ExtendedComponentDescriptorIF#getImplementation() implementation}
+ *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
  *        of the component.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -28,7 +28,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
         AbstractComponentInstantiationManager<S, I> {
 
     /** @see #getNewInstanceContainer(String) */
-    private final Map<String, ExtendedComponentInstanceContainer<S, I>> instanceContainers;
+    private final Map<String, ExtendedComponentInstanceContainerImpl<S, I>> instanceContainers;
 
     /**
      * The constructor.
@@ -36,7 +36,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
     public SingletonComponentInstantiationManager() {
 
         super();
-        this.instanceContainers = new HashMap<String, ExtendedComponentInstanceContainer<S, I>>();
+        this.instanceContainers = new HashMap<String, ExtendedComponentInstanceContainerImpl<S, I>>();
     }
 
     /**
@@ -44,33 +44,33 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
      * 
      * @param instanceId
      *        is the
-     *        {@link ComponentManagerIF#requestComponent(Class, String) instance-ID}
+     *        {@link ComponentManager#requestComponent(Class, String) instance-ID}
      *        of the requested component.
      * @return the new instance container for the requested component.
      */
-    protected ExtendedComponentInstanceContainer<S, I> getNewInstanceContainer(String instanceId) {
+    protected ExtendedComponentInstanceContainerImpl<S, I> getNewInstanceContainer(String instanceId) {
 
-        ExtendedComponentInstanceContainer<S, I> instanceContainer = createInstanceContainer(instanceId);
+        ExtendedComponentInstanceContainerImpl<S, I> instanceContainer = createInstanceContainer(instanceId);
         this.instanceContainers.put(instanceId, instanceContainer);
         return instanceContainer;
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#release(net.sf.mmm.framework.base.ExtendedComponentInstanceContainer)
+     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#release(net.sf.mmm.framework.base.ExtendedComponentInstanceContainerImpl)
      * 
      */
-    public boolean release(ExtendedComponentInstanceContainer<S, I> instanceContainer) {
+    public boolean release(ExtendedComponentInstanceContainerImpl<S, I> instanceContainer) {
 
         return false;
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#request(String)
+     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
      * 
      */
-    public ExtendedComponentInstanceContainer<S, I> request(String instanceId) {
+    public ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId) {
 
-        ExtendedComponentInstanceContainer<S, I> instanceContainer = this.instanceContainers
+        ExtendedComponentInstanceContainerImpl<S, I> instanceContainer = this.instanceContainers
                 .get(instanceId);
         if (instanceContainer == null) {
             instanceContainer = getNewInstanceContainer(instanceId);
@@ -79,13 +79,13 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#dispose()
+     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#dispose()
      * 
      */
-    public ExtendedComponentInstanceContainer[] dispose() {
+    public ExtendedComponentInstanceContainerImpl[] dispose() {
     
-        Collection<ExtendedComponentInstanceContainer<S, I>> values = this.instanceContainers.values();
-        ExtendedComponentInstanceContainer[] containers = new ExtendedComponentInstanceContainer[values.size()];
+        Collection<ExtendedComponentInstanceContainerImpl<S, I>> values = this.instanceContainers.values();
+        ExtendedComponentInstanceContainerImpl[] containers = new ExtendedComponentInstanceContainerImpl[values.size()];
         return this.instanceContainers.values().toArray(containers);
     }
 }

@@ -1,9 +1,9 @@
 /* $Id$ */
 package net.sf.mmm.content.validator.impl;
 
-import net.sf.mmm.content.validator.api.ValidationResultIF;
+import net.sf.mmm.content.validator.api.ValidationResult;
 import net.sf.mmm.content.validator.base.AbstractValueValidator;
-import net.sf.mmm.content.validator.base.ValidationResult;
+import net.sf.mmm.content.validator.base.ValidationResultImpl;
 
 /**
  * This is an implementation of the ValueValidatorIF interface that that the
@@ -25,17 +25,17 @@ public class ValueNotNullValidator extends AbstractValueValidator {
     }
 
     /**
-     * @see net.sf.mmm.content.validator.api.ValueValidatorIF#validate(Object)
+     * @see net.sf.mmm.content.validator.api.ValueValidator#validate(Object)
      */
-    public ValidationResultIF validate(Object value) {
+    public ValidationResult validate(Object value) {
 
         if (value == null) {
             //TODO: i18n
-            return new ValidationResult("The value is null!");
+            return new ValidationResultImpl("The value is null!");
             //"The value must have the type {0}!",
             //new Object[]{this.type});
         } else {
-            return ValidationResult.VALID_RESULT;            
+            return ValidationResultImpl.VALID_RESULT;            
         }
     }
 }

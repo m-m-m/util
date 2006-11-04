@@ -1,19 +1,19 @@
 /* $Id$ */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.api.IocContainerIF;
-import net.sf.mmm.framework.api.MutableIocContainerIF;
+import net.sf.mmm.framework.api.IocContainer;
+import net.sf.mmm.framework.api.MutableIocContainer;
 
 /**
- * This is an implementation of the {@link IocContainerIF} interface that acts
+ * This is an implementation of the {@link IocContainer} interface that acts
  * as proxy on another instance.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class IocContainerProxy implements IocContainerIF {
+public class IocContainerProxy implements IocContainer {
 
   /** the delegate instance */
-  private final IocContainerIF delegate;
+  private final IocContainer delegate;
 
   /**
    * The constructor.
@@ -21,23 +21,23 @@ public class IocContainerProxy implements IocContainerIF {
    * @param proxyDelegate
    *        is the instance this proxy delegates to.
    */
-  public IocContainerProxy(IocContainerIF proxyDelegate) {
+  public IocContainerProxy(IocContainer proxyDelegate) {
 
     super();
     this.delegate = proxyDelegate;
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainerIF#createChildContainer(java.lang.String)
+   * @see net.sf.mmm.framework.api.IocContainer#createChildContainer(java.lang.String)
    * 
    */
-  public MutableIocContainerIF createChildContainer(String name) {
+  public MutableIocContainer createChildContainer(String name) {
 
     return this.delegate.createChildContainer(name);
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainerIF#getName()
+   * @see net.sf.mmm.framework.api.IocContainer#getName()
    * 
    */
   public String getName() {
@@ -46,7 +46,7 @@ public class IocContainerProxy implements IocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainerIF#isRunning()
+   * @see net.sf.mmm.framework.api.IocContainer#isRunning()
    * 
    */
   public boolean isRunning() {

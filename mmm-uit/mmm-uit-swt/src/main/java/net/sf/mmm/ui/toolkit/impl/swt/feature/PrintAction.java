@@ -7,83 +7,83 @@ import org.eclipse.swt.printing.Printer;
 import org.eclipse.swt.printing.PrinterData;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.api.UIComponentIF;
-import net.sf.mmm.ui.toolkit.api.UINodeIF;
+import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF;
-import net.sf.mmm.ui.toolkit.api.feature.ActionIF;
+import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
-import net.sf.mmm.ui.toolkit.impl.swt.UIComponent;
-
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactoryIF#createPrintAction(UIComponentIF) print-action}
+ * {@link net.sf.mmm.ui.toolkit.api.UIFactory#createPrintAction(UIComponent) print-action}
  * for SWT.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PrintAction extends AbstractAction implements UIActionListenerIF {
+public class PrintAction extends AbstractAction implements UIActionListener {
 
-    /** the component to be printed */
-    private final UIComponent component;
+  /** the component to be printed */
+  private final AbstractUIComponent component;
 
-    /**
-     * The constructor.
-     * 
-     * @param printComponent
-     *        is the component to be printed by this action.
-     * @param actionName
-     *        is the {@link ActionIF#getName() name} of the print action.
-     * @param jobName
-     *        is the name of the print job.
-     */
-    public PrintAction(UIComponent printComponent, String actionName, String jobName) {
+  /**
+   * The constructor.
+   * 
+   * @param printComponent
+   *        is the component to be printed by this action.
+   * @param actionName
+   *        is the {@link Action#getName() name} of the print action.
+   * @param jobName
+   *        is the name of the print job.
+   */
+  public PrintAction(AbstractUIComponent printComponent, String actionName, String jobName) {
 
-        super(actionName);
-        setId(jobName);
-        this.component = printComponent;        
-    }
+    super(actionName);
+    setId(jobName);
+    this.component = printComponent;
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.feature.ActionIF#getActionListener()
-     * 
-     */
-    public UIActionListenerIF getActionListener() {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.feature.Action#getActionListener()
+   * 
+   */
+  public UIActionListener getActionListener() {
 
-        return this;
-    }
+    return this;
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF#invoke(net.sf.mmm.ui.toolkit.api.UINodeIF, net.sf.mmm.ui.toolkit.api.event.ActionType)
-     * 
-     */
-    public void invoke(UINodeIF source, ActionType action) {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
+   *      net.sf.mmm.ui.toolkit.api.event.ActionType)
+   * 
+   */
+  public void invoke(UINode source, ActionType action) {
 
-        if (action == ActionType.SELECT) {
-            Shell shell = this.component.getSyncAccess().getSwtObject().getShell();
-            PrintDialog printDialog = new PrintDialog(shell);
-            PrinterData printerData = printDialog.open();
-            if (printerData != null) {
-                //printerData.name = getId();
-                if (printerData.printToFile) {
-                    //TODO: open filechooser...
-                    printerData.fileName = "printing.out";
-                }
-                Printer printer = new Printer(printerData);
-                GC gc = new GC(printer);
-                if (printer.startJob(getId())) {
-                    printer.startPage();
-                    //this.component.getSwtControl().                    
-                    printer.endPage();
-                    printer.endJob();
-                } else {
-                    //TODO: problem starting print job...
-                }
-                gc.dispose();
-                printer.dispose();
-            }
+    if (action == ActionType.SELECT) {
+      Shell shell = this.component.getSyncAccess().getSwtObject().getShell();
+      PrintDialog printDialog = new PrintDialog(shell);
+      PrinterData printerData = printDialog.open();
+      if (printerData != null) {
+        // printerData.name = getId();
+        if (printerData.printToFile) {
+          // TODO: open filechooser...
+          printerData.fileName = "printing.out";
         }
+        Printer printer = new Printer(printerData);
+        GC gc = new GC(printer);
+        if (printer.startJob(getId())) {
+          printer.startPage();
+          // this.component.getSwtControl().
+          printer.endPage();
+          printer.endJob();
+        } else {
+          // TODO: problem starting print job...
+        }
+        gc.dispose();
+        printer.dispose();
+      }
     }
+  }
 
 }

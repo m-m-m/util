@@ -3,7 +3,7 @@ package net.sf.mmm.term.impl.function;
 
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.base.BasicFunction;
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This class represents the {@link net.sf.mmm.term.api.FunctionIF function}
@@ -65,8 +65,8 @@ public class FunctionElse extends BasicFunction {
     }
 
     /**
-     * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValueIF,
-     *      GenericValueIF)
+     * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
+     *      GenericValue)
      * 
      */
     public Object calculate(Object argument1, Object argument2)

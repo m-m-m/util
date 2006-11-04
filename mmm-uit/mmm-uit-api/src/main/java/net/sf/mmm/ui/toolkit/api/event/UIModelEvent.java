@@ -8,29 +8,29 @@ package net.sf.mmm.ui.toolkit.api.event;
  */
 public abstract class UIModelEvent {
 
-    /** the event type */
-    private EventType type;
+  /** the event type */
+  private EventType type;
 
-    /**
-     * The constructor.
-     * 
-     * @param eventType
-     *        is the type for the new event.
-     */
-    protected UIModelEvent(EventType eventType) {
+  /**
+   * The constructor.
+   * 
+   * @param eventType
+   *        is the type for the new event.
+   */
+  protected UIModelEvent(EventType eventType) {
 
-        super();
-        this.type = eventType;
-    }
+    super();
+    this.type = eventType;
+  }
 
-    /**
-     * This method gets the type of event.
-     * 
-     * @return the event type (must be one of the TYPE_* constants).
-     */
-    public EventType getType() {
+  /**
+   * This method gets the type of event.
+   * 
+   * @return the event type (must be one of the TYPE_* constants).
+   */
+  public EventType getType() {
 
-        return this.type;
-    }
+    return this.type;
+  }
 
 }

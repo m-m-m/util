@@ -7,13 +7,13 @@ import org.w3c.dom.Element;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationAttribute;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface to
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to
  * adapt an {@link org.w3c.dom.Attr xml-attribute}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -98,7 +98,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName() 
    */
   public String getName() {
 
@@ -106,11 +106,11 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
     if (name == null) {
       name = this.attribute.getName();
     }
-    return ConfigurationIF.NAME_PREFIX_ATTRIBUTE + name;
+    return Configuration.NAME_PREFIX_ATTRIBUTE + name;
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
    *      
    */
   public String getNamespaceUri() {

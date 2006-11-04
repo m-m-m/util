@@ -3,7 +3,7 @@ package net.sf.mmm.value.impl;
 
 import org.junit.Test;
 
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the {@link junit.framework.TestCase} for testing the class
@@ -28,7 +28,7 @@ public class ImmutableObjectValueTest extends AbstractGenericValueTest {
    * 
    */
   @Override
-  protected GenericValueIF convert(Object plainValue) {
+  protected GenericValue convert(Object plainValue) {
 
     return new ObjectValue(plainValue);
   }
@@ -38,7 +38,7 @@ public class ImmutableObjectValueTest extends AbstractGenericValueTest {
 
     int i = 42;
     String s = Integer.toString(i);
-    GenericValueIF value = convert(s);
+    GenericValue value = convert(s);
     assertEquals(s, value.getString());
     assertEquals(i, value.getInteger());
     assertEquals(i, value.getLong());

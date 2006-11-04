@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.base;
 
 import net.sf.mmm.configuration.NlsResourceBundle;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 
 /**
  * This is the exception thrown if a configuration file was not found.
@@ -21,7 +21,7 @@ public class ConfigurationReadException extends ConfigurationException {
    * @param access
    *        is the access where to read the configuration from.
    */
-  public ConfigurationReadException(ConfigurationAccessIF access) {
+  public ConfigurationReadException(ConfigurationAccess access) {
 
     super(NlsResourceBundle.ERR_READ, access);
   }
@@ -46,7 +46,7 @@ public class ConfigurationReadException extends ConfigurationException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public ConfigurationReadException(ConfigurationAccessIF access, Throwable nested) {
+  public ConfigurationReadException(ConfigurationAccess access, Throwable nested) {
 
     super(NlsResourceBundle.ERR_READ, access, nested);
   }

@@ -2,17 +2,17 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.event.EventType;
-import net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF;
-import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModelIF;
-import net.sf.mmm.ui.toolkit.base.model.UIAbstractTableModel;
+import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
+import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel;
+import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
 
 /**
  * TODO This type ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UISimpleTableModel extends UIAbstractTableModel<String> implements
-        UIMutableTableModelIF<String> {
+public class UISimpleTableModel extends AbstractUITableModel<String> implements
+        UIMutableTableModel<String> {
 
     /** */
     private final String[][] cells;
@@ -34,7 +34,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getColumnCount()
+     * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnCount()
      * 
      */
     public int getColumnCount() {
@@ -43,7 +43,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getRowCount()
+     * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount()
      * 
      */
     public int getRowCount() {
@@ -52,7 +52,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getCellValue(int,
+     * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getCellValue(int,
      *      int)
      * 
      */
@@ -62,7 +62,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getColumnName(int)
+     * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnName(int)
      * 
      */
     public String getColumnName(int columnIndex) {
@@ -99,7 +99,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
     
     /**
-     * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModelIF#setCellValue(int,
+     * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel#setCellValue(int,
      *      int, Object)
      * 
      */
@@ -110,7 +110,7 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModelIF#setColumnName(int, java.lang.String)
+     * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel#setColumnName(int, java.lang.String)
      * 
      */
     public void setColumnName(int columnIndex, String name) {
@@ -120,11 +120,11 @@ public class UISimpleTableModel extends UIAbstractTableModel<String> implements
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.base.model.UIAbstractTableModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF, java.lang.Throwable)
+     * @see net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITableModelListener, java.lang.Throwable)
      * 
      */
     @Override
-    protected void handleListenerException(UITableModelListenerIF listener, Throwable t) {
+    protected void handleListenerException(UITableModelListener listener, Throwable t) {
 
         t.printStackTrace();        
     }

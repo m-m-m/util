@@ -3,18 +3,18 @@ package net.sf.mmm.context.base;
 
 import java.util.Set;
 
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.context.api.MutableContextIF;
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.context.api.MutableContext;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.context.api.ContextIF} interface that delegates to
+ * {@link net.sf.mmm.context.api.Context} interface that delegates to
  * another instance.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContextProxy implements ContextIF {
+public abstract class AbstractContextProxy implements Context {
 
     /**
      * The constructor.
@@ -29,10 +29,10 @@ public abstract class AbstractContextProxy implements ContextIF {
      * 
      * @return the real environment behind this proxy.
      */
-    protected abstract ContextIF getContext();
+    protected abstract Context getContext();
     
     /**
-     * @see net.sf.mmm.context.api.ContextIF#getObject(java.lang.String)
+     * @see net.sf.mmm.context.api.Context#getObject(java.lang.String)
      * 
      */
     public Object getObject(String variableName) {
@@ -41,16 +41,16 @@ public abstract class AbstractContextProxy implements ContextIF {
     }
 
     /**
-     * @see net.sf.mmm.context.api.ContextIF#getValue(java.lang.String)
+     * @see net.sf.mmm.context.api.Context#getValue(java.lang.String)
      * 
      */
-    public GenericValueIF getValue(String variableName) {
+    public GenericValue getValue(String variableName) {
 
         return getContext().getValue(variableName);
     }
 
     /**
-     * @see net.sf.mmm.context.api.ContextIF#hasValue(java.lang.String)
+     * @see net.sf.mmm.context.api.Context#hasValue(java.lang.String)
      * 
      */
     public boolean hasValue(String variableName) {
@@ -59,7 +59,7 @@ public abstract class AbstractContextProxy implements ContextIF {
     }
     
     /**
-     * @see net.sf.mmm.context.api.ContextIF#getVariableNames()
+     * @see net.sf.mmm.context.api.Context#getVariableNames()
      * 
      */
     public Set<String> getVariableNames() {
@@ -68,10 +68,10 @@ public abstract class AbstractContextProxy implements ContextIF {
     }
 
     /**
-     * @see net.sf.mmm.context.api.ContextIF#createChildContext()
+     * @see net.sf.mmm.context.api.Context#createChildContext()
      * 
      */
-    public MutableContextIF createChildContext() {
+    public MutableContext createChildContext() {
 
         return getContext().createChildContext();
     }

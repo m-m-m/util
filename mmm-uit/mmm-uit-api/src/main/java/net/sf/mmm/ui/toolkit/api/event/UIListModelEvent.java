@@ -9,66 +9,66 @@ package net.sf.mmm.ui.toolkit.api.event;
  */
 public final class UIListModelEvent extends UIModelEvent {
 
-    /** the index of the first item that has changed */
-    private int startIndex;
+  /** the index of the first item that has changed */
+  private int startIndex;
 
-    /** the index of the last item that has changed */
-    private int endIndex;
+  /** the index of the last item that has changed */
+  private int endIndex;
 
-    /**
-     * The constructor.
-     * 
-     * @param eventType
-     *        is the type for the new event.
-     * @param startItemIndex
-     *        is the index of the first item that has changed.
-     * @param endItemIndex
-     *        is the index of the last item that has changed.
-     */
-    public UIListModelEvent(EventType eventType, int startItemIndex, int endItemIndex) {
+  /**
+   * The constructor.
+   * 
+   * @param eventType
+   *        is the type for the new event.
+   * @param startItemIndex
+   *        is the index of the first item that has changed.
+   * @param endItemIndex
+   *        is the index of the last item that has changed.
+   */
+  public UIListModelEvent(EventType eventType, int startItemIndex, int endItemIndex) {
 
-        super(eventType);
-        this.startIndex = startItemIndex;
-        this.endIndex = endItemIndex;
-    }
+    super(eventType);
+    this.startIndex = startItemIndex;
+    this.endIndex = endItemIndex;
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param eventType
-     *        is the type for the new event.
-     * @param itemIndex
-     *        is the index of the according item.
-     */
-    public UIListModelEvent(EventType eventType, int itemIndex) {
+  /**
+   * The constructor.
+   * 
+   * @param eventType
+   *        is the type for the new event.
+   * @param itemIndex
+   *        is the index of the according item.
+   */
+  public UIListModelEvent(EventType eventType, int itemIndex) {
 
-        super(eventType);
-        this.startIndex = itemIndex;
-        this.endIndex = itemIndex;
-    }
+    super(eventType);
+    this.startIndex = itemIndex;
+    this.endIndex = itemIndex;
+  }
 
-    /**
-     * This method gets the index of the first item that has changed (updated,
-     * removed or added/inserted). If only one item has changed, the value is
-     * equal to {@link #getEndIndex()}
-     * 
-     * @return the index of the first item that has changed.
-     */
-    public int getStartIndex() {
+  /**
+   * This method gets the index of the first item that has changed (updated,
+   * removed or added/inserted). If only one item has changed, the value is
+   * equal to {@link #getEndIndex()}
+   * 
+   * @return the index of the first item that has changed.
+   */
+  public int getStartIndex() {
 
-        return this.startIndex;
-    }
+    return this.startIndex;
+  }
 
-    /**
-     * This method gets the index of the last item that has changed (updated,
-     * removed or added/inserted). If only one item has changed, the value is
-     * equal to {@link #getStartIndex()}.
-     * 
-     * @return the index of the last item that has changed.
-     */
-    public int getEndIndex() {
+  /**
+   * This method gets the index of the last item that has changed (updated,
+   * removed or added/inserted). If only one item has changed, the value is
+   * equal to {@link #getStartIndex()}.
+   * 
+   * @return the index of the last item that has changed.
+   */
+  public int getEndIndex() {
 
-        return this.endIndex;
-    }
+    return this.endIndex;
+  }
 
 }

@@ -1,11 +1,11 @@
 /* $Id$ */
 package net.sf.mmm.value.base;
 
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.value.api.MutableGenericValueIF} interface that is always
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface that is always
  * {@link #isEmpty() empty}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -39,7 +39,7 @@ public class EmptyValue extends AbstractObjectValue {
    * 
    * @return the instance.
    */
-  public static MutableGenericValueIF getInstance() {
+  public static MutableGenericValue getInstance() {
 
     return INSTANCE;
   }
@@ -65,7 +65,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
+   * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
    */
   public boolean isEditable() {
 
@@ -73,7 +73,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults()
+   * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
    */
   @Override
   public boolean isAddDefaults() {

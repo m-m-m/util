@@ -1,15 +1,15 @@
 /* $Id$ */
 package net.sf.mmm.term.base;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the abstract base implementation of a the
  * {@link net.sf.mmm.term.api.TermIF} interface that represents a variable.<br>
  * A variable
- * {@link net.sf.mmm.term.api.TermIF#evaluate(ContextIF) evaluates} to an
- * {@link net.sf.mmm.context.api.ContextIF#getObject(String) "environment value"}.
+ * {@link net.sf.mmm.term.api.TermIF#evaluate(Context) evaluates} to an
+ * {@link net.sf.mmm.context.api.Context#getObject(String) "environment value"}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,10 +24,10 @@ public abstract class AbstractVariable extends AbstractTerm {
     }
 
     /**
-     * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
+     * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.Context)
      * 
      */
-    public final Object evaluate(ContextIF environment) throws ValueException {
+    public final Object evaluate(Context environment) throws ValueException {
 
         return environment.getObject(getVariableName(environment));
     }
@@ -42,6 +42,6 @@ public abstract class AbstractVariable extends AbstractTerm {
      *         if the variable name is determined dynamically via a calculation
      *         that failed.
      */
-    public abstract String getVariableName(ContextIF environment) throws ValueException;
+    public abstract String getVariableName(Context environment) throws ValueException;
 
 }

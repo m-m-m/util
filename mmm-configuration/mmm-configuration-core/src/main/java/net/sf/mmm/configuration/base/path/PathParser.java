@@ -4,7 +4,7 @@ package net.sf.mmm.configuration.base.path;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.configuration.api.ConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.IllegalPathException;
 import net.sf.mmm.util.StringUtil;
 
@@ -31,7 +31,7 @@ public class PathParser {
    * 
    * @param path
    *        is the
-   *        {@link ConfigurationIF#getDescendants(String, String) descendant path}
+   *        {@link Configuration#getDescendants(String, String) descendant path}
    *        to parse.
    */
   public PathParser(String path) {
@@ -83,7 +83,7 @@ public class PathParser {
           }
           comparatorLength++;
           break;
-        case ConfigurationIF.PATH_CONDITION_END:
+        case Configuration.PATH_CONDITION_END:
           if (comparatorLength == 0) {
             throw new IllegalPathException(this.string);
           } else {
@@ -108,10 +108,10 @@ public class PathParser {
         case '?':
           isPattern = true;
           break;
-        case ConfigurationIF.PATH_SEPARATOR:
-        case ConfigurationIF.PATH_UNION:
-        case ConfigurationIF.PATH_INTERSECTION:
-        case ConfigurationIF.PATH_CONDITION_START:
+        case Configuration.PATH_SEPARATOR:
+        case Configuration.PATH_UNION:
+        case Configuration.PATH_INTERSECTION:
+        case Configuration.PATH_CONDITION_START:
           throw new IllegalPathException(this.string);
       }
     }
@@ -137,14 +137,14 @@ public class PathParser {
       if (this.pos < this.chars.length) {
         c = this.chars[this.pos++];
       } else {
-        c = ConfigurationIF.PATH_SEPARATOR;
+        c = Configuration.PATH_SEPARATOR;
         this.pos++;
       }
       switch (c) {
-        case ConfigurationIF.PATH_UNION:
-        case ConfigurationIF.PATH_INTERSECTION:
-        case ConfigurationIF.PATH_CONDITION_START:
-        case ConfigurationIF.PATH_SEPARATOR:
+        case Configuration.PATH_UNION:
+        case Configuration.PATH_INTERSECTION:
+        case Configuration.PATH_CONDITION_START:
+        case Configuration.PATH_SEPARATOR:
           int len = this.pos - start - 1;
           if (len <= 0) {
             throw new IllegalPathException(this.string);
@@ -157,14 +157,14 @@ public class PathParser {
             namePattern = null;
           }
           ConditionIF condition = null;
-          if (c == ConfigurationIF.PATH_CONDITION_START) {
+          if (c == Configuration.PATH_CONDITION_START) {
             condition = parseCondition(namePattern);
             if (this.pos < this.chars.length) {
               c = this.chars[this.pos++];
               switch (c) {
-                case ConfigurationIF.PATH_UNION:
-                case ConfigurationIF.PATH_INTERSECTION:
-                case ConfigurationIF.PATH_SEPARATOR:
+                case Configuration.PATH_UNION:
+                case Configuration.PATH_INTERSECTION:
+                case Configuration.PATH_SEPARATOR:
                   break;
                 default :
                   throw new IllegalPathException(this.string);
@@ -185,7 +185,7 @@ public class PathParser {
         case '!':
         case '<':
         case '>':
-        case ConfigurationIF.PATH_CONDITION_END:
+        case Configuration.PATH_CONDITION_END:
           throw new IllegalPathException(this.string);
       }
     }
@@ -195,9 +195,9 @@ public class PathParser {
   /**
    * This method reads all segments of a simple path. A simple path is build by
    * one or multiple segments separated by
-   * {@link ConfigurationIF#PATH_SEPARATOR}. The descendant path may contain
-   * multiple simple paths separated by {@link ConfigurationIF#PATH_UNION} or
-   * {@link ConfigurationIF#PATH_INTERSECTION}.
+   * {@link Configuration#PATH_SEPARATOR}. The descendant path may contain
+   * multiple simple paths separated by {@link Configuration#PATH_UNION} or
+   * {@link Configuration#PATH_INTERSECTION}.
    * 
    * @param segments
    */
@@ -209,7 +209,7 @@ public class PathParser {
       int lastPos = this.pos - 1;
       if (lastPos < this.chars.length) {
         char c = this.chars[lastPos];
-        if (c != ConfigurationIF.PATH_SEPARATOR) {
+        if (c != Configuration.PATH_SEPARATOR) {
           todo = false;
         }
       } else {

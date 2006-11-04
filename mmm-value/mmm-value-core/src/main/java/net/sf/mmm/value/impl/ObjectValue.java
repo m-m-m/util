@@ -5,7 +5,7 @@ import net.sf.mmm.value.base.AbstractObjectValue;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.value.api.MutableGenericValueIF} interface that uses an
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface that uses an
  * object as internal value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -39,7 +39,7 @@ public class ObjectValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
+   * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
    */
   public boolean isEditable() {
 

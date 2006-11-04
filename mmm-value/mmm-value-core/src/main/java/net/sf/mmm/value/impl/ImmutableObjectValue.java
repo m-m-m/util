@@ -4,7 +4,7 @@ package net.sf.mmm.value.impl;
 /**
  * This is a simple,
  * {@link net.sf.mmm.value.base.AbstractGenericValue#isAddDefaults() immutable}
- * implementation of the {@link net.sf.mmm.value.api.GenericValueIF} interface
+ * implementation of the {@link net.sf.mmm.value.api.GenericValue} interface
  * that uses an object as internal value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -34,7 +34,7 @@ public class ImmutableObjectValue extends ObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults()
+   * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
    */
   @Override
   public boolean isAddDefaults() {

@@ -4,20 +4,20 @@ package net.sf.mmm.framework.base;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.mmm.framework.api.ExtendedComponentDescriptorIF;
-import net.sf.mmm.framework.api.ExtendedComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.LifecycleManagerIF;
+import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
+import net.sf.mmm.framework.api.ExtendedComponentInstanceContainer;
+import net.sf.mmm.framework.api.LifecycleManager;
 import net.sf.mmm.framework.api.LifecycleMethod;
 import net.sf.mmm.framework.impl.LifecycleException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
- * This is the abstract base implementation of the {@link LifecycleManagerIF}
+ * This is the abstract base implementation of the {@link LifecycleManager}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractLifecycleManager implements LifecycleManagerIF {
+public abstract class AbstractLifecycleManager implements LifecycleManager {
 
     /** @see #getLifecyclePhases() */
     private final Set<String> phases;
@@ -47,7 +47,7 @@ public abstract class AbstractLifecycleManager implements LifecycleManagerIF {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.LifecycleManagerIF#getLifecyclePhases()
+     * @see net.sf.mmm.framework.api.LifecycleManager#getLifecyclePhases()
      * 
      */
     public final Set<String> getLifecyclePhases() {
@@ -68,11 +68,11 @@ public abstract class AbstractLifecycleManager implements LifecycleManagerIF {
      *         if the phase failed.
      */
     protected void performLifecyclePhase(
-            ExtendedComponentInstanceContainerIF<?, ?> instanceContainer, String phase)
+            ExtendedComponentInstanceContainer<?, ?> instanceContainer, String phase)
             throws LifecycleException {
 
         try {
-            ExtendedComponentDescriptorIF<?, ?> descriptor = instanceContainer.getDescriptor();
+            ExtendedComponentDescriptor<?, ?> descriptor = instanceContainer.getDescriptor();
             LifecycleMethod method = descriptor.getLifecycleMethod(phase);
             if (method != null) {
                 method.getLifecycleMethod().invoke(instanceContainer.getPrivateInstance(),

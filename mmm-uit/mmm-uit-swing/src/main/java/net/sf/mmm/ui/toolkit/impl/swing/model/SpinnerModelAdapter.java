@@ -4,13 +4,13 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 import javax.swing.AbstractSpinnerModel;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF;
-import net.sf.mmm.ui.toolkit.api.model.UIListModelIF;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF;
+import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
+import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModelIF} to
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
  * a swing {@link javax.swing.SpinnerModel}.
  * 
  * @param <E>
@@ -19,157 +19,157 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
-        UIWriteSelectionIndexIF, UIWriteSelectionValueIF<E>, UIListModelListenerIF {
+    UIWriteSelectionIndex, UIWriteSelectionValue<E>, UIListModelListener {
 
-    /** the model to adapt */
-    private UIListModelIF<E> model;
+  /** the model to adapt */
+  private UIListModel<E> model;
 
-    /** the current selection index */
-    private int index;
+  /** the current selection index */
+  private int index;
 
-    /**
-     * The constructor.
-     * 
-     * @param listModel
-     *        is the model to adapt.
-     */
-    public SpinnerModelAdapter(UIListModelIF<E> listModel) {
+  /**
+   * The constructor.
+   * 
+   * @param listModel
+   *        is the model to adapt.
+   */
+  public SpinnerModelAdapter(UIListModel<E> listModel) {
 
-        super();
-        this.model = listModel;
-        this.model.addListener(this);
+    super();
+    this.model = listModel;
+    this.model.addListener(this);
+  }
+
+  /**
+   * This method gets the adapted model.
+   * 
+   * @return the model.
+   */
+  public UIListModel<E> getModel() {
+
+    return this.model;
+  }
+
+  /**
+   * This method sets a new model.
+   * 
+   * @param newModel
+   *        is the new model to set.
+   */
+  public void setModel(UIListModel<E> newModel) {
+
+    this.index = 0;
+    if (this.model != null) {
+      this.model.removeListener(this);
     }
+    this.model = newModel;
+    this.model.addListener(this);
+    fireStateChanged();
+  }
 
-    /**
-     * This method gets the adapted model.
-     * 
-     * @return the model.
-     */
-    public UIListModelIF<E> getModel() {
+  /**
+   * @see javax.swing.SpinnerModel#getValue()
+   * 
+   */
+  public Object getValue() {
 
-        return this.model;
+    return getSelectedValue();
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
+   * 
+   */
+  public int getSelectedIndex() {
+
+    return this.index;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
+   * 
+   */
+  public void setSelectedIndex(int newIndex) {
+
+    if (this.index != newIndex) {
+      // TODO: validate!
+      this.index = newIndex;
+      fireStateChanged();
     }
+  }
 
-    /**
-     * This method sets a new model.
-     * 
-     * @param newModel
-     *        is the new model to set.
-     */
-    public void setModel(UIListModelIF<E> newModel) {
+  /**
+   * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  public void setValue(Object value) {
 
-        this.index = 0;
-        if (this.model != null) {
-            this.model.removeListener(this);
-        }
-        this.model = newModel;
-        this.model.addListener(this);
-        fireStateChanged();
+    setSelectedValue((E) value);
+  }
+
+  /**
+   * @see javax.swing.SpinnerModel#getNextValue()
+   * 
+   */
+  public Object getNextValue() {
+
+    int max = this.model.getElementCount() - 1;
+    int nextIndex;
+    if (this.index >= max) {
+      nextIndex = max;
+    } else {
+      nextIndex = this.index + 1;
     }
+    return this.model.getElement(nextIndex);
+  }
 
-    /**
-     * @see javax.swing.SpinnerModel#getValue()
-     * 
-     */
-    public Object getValue() {
+  /**
+   * @see javax.swing.SpinnerModel#getPreviousValue()
+   * 
+   */
+  public Object getPreviousValue() {
 
-        return getSelectedValue();
+    int prevIndex = this.index;
+    if (this.index > 0) {
+      prevIndex--;
     }
+    return this.model.getElement(prevIndex);
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndexIF#getSelectedIndex()
-     * 
-     */
-    public int getSelectedIndex() {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
+   * 
+   */
+  public void listModelChanged(UIListModelEvent event) {
 
-        return this.index;
+    int count = this.model.getElementCount();
+    if (this.index >= count) {
+      this.index = count - 1;
     }
+    fireStateChanged();
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndexIF#setSelectedIndex(int)
-     * 
-     */
-    public void setSelectedIndex(int newIndex) {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
+   * 
+   */
+  public E getSelectedValue() {
 
-        if (this.index != newIndex) {
-            // TODO: validate!
-            this.index = newIndex;
-            fireStateChanged();
-        }
+    return this.model.getElement(this.index);
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
+   * 
+   */
+  public void setSelectedValue(E newValue) {
+
+    int i = this.model.getIndexOf(newValue);
+    if (i < 0) {
+      throw new IllegalArgumentException("Not in model: " + newValue);
     }
-
-    /**
-     * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public void setValue(Object value) {
-
-        setSelectedValue((E) value);
-    }
-
-    /**
-     * @see javax.swing.SpinnerModel#getNextValue()
-     * 
-     */
-    public Object getNextValue() {
-
-        int max = this.model.getElementCount() - 1;
-        int nextIndex;
-        if (this.index >= max) {
-            nextIndex = max;
-        } else {
-            nextIndex = this.index + 1;
-        }
-        return this.model.getElement(nextIndex);
-    }
-
-    /**
-     * @see javax.swing.SpinnerModel#getPreviousValue()
-     * 
-     */
-    public Object getPreviousValue() {
-
-        int prevIndex = this.index;
-        if (this.index > 0) {
-            prevIndex--;
-        }
-        return this.model.getElement(prevIndex);
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListenerIF#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-     * 
-     */
-    public void listModelChanged(UIListModelEvent event) {
-
-        int count = this.model.getElementCount();
-        if (this.index >= count) {
-            this.index = count - 1;
-        }
-        fireStateChanged();
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValueIF#getSelectedValue()
-     * 
-     */
-    public E getSelectedValue() {
-        
-        return this.model.getElement(this.index);
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValueIF#setSelectedValue(Object)
-     * 
-     */
-    public void setSelectedValue(E newValue) {
-
-        int i = this.model.getIndexOf(newValue);
-        if (i < 0) {
-            throw new IllegalArgumentException("Not in model: " + newValue);
-        }
-        setSelectedIndex(i);
-    }
+    setSelectedIndex(i);
+  }
 
 }

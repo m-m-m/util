@@ -6,26 +6,26 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.sf.mmm.framework.NlsResourceBundle;
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.ComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.ComponentProviderIF;
+import net.sf.mmm.framework.api.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.ComponentProvider;
 import net.sf.mmm.framework.api.ContainerException;
-import net.sf.mmm.framework.api.IocSecurityManagerIF;
-import net.sf.mmm.framework.api.MutableIocContainerIF;
-import net.sf.mmm.framework.api.IocContainerIF;
+import net.sf.mmm.framework.api.IocSecurityManager;
+import net.sf.mmm.framework.api.MutableIocContainer;
+import net.sf.mmm.framework.api.IocContainer;
 import net.sf.mmm.framework.base.provider.SimpleSingletonProvider;
 
 /**
- * This is the abstact base implementation of the {@link MutableIocContainerIF}
+ * This is the abstact base implementation of the {@link MutableIocContainer}
  * interface.
  * 
  * TODO: shared component management and shutdown?!?
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractIocContainer implements MutableIocContainerIF {
+public abstract class AbstractIocContainer implements MutableIocContainer {
 
   /** @see #getParentContainer() */
   private final AbstractIocContainer parent;
@@ -34,16 +34,16 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   private final String name;
 
   /** @see #getProvider(Class) */
-  private final Map<Class, ComponentProviderIF> providerMap;
+  private final Map<Class, ComponentProvider> providerMap;
 
   /** @see #requestComponent(Class, String, DependencyNode) */
-  private final Map<ComponentInstanceContainerIF, DependencyNode> instanceMap;
+  private final Map<ComponentInstanceContainer, DependencyNode> instanceMap;
 
   /** @see #getDependencyNode() */
-  private final DependencyNode<IocContainerIF> containerNode;
+  private final DependencyNode<IocContainer> containerNode;
 
   /** @see #getDependencyNode() */
-  private final ComponentManagerIF componentManager;
+  private final ComponentManager componentManager;
 
   /** the pool for dependency-nodes */
   // private final PoolIF<DependencyNode> nodePool;
@@ -54,7 +54,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   private volatile boolean stopped;
 
   /** @see #checkPermission(Class, Class, String) */
-  private IocSecurityManagerIF securityManager;
+  private IocSecurityManager securityManager;
 
   /**
    * The constructor for the root container.
@@ -76,18 +76,18 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     super();
     this.parent = parentContainer;
     this.name = containerName;
-    this.providerMap = new HashMap<Class, ComponentProviderIF>();
-    this.instanceMap = new HashMap<ComponentInstanceContainerIF, DependencyNode>();
+    this.providerMap = new HashMap<Class, ComponentProvider>();
+    this.instanceMap = new HashMap<ComponentInstanceContainer, DependencyNode>();
     ContainerProvider containerProvider = new ContainerProvider();
     this.providerMap.put(containerProvider.getDescriptor().getSpecification(), containerProvider);
-    this.containerNode = new DependencyNode<IocContainerIF>(this);
+    this.containerNode = new DependencyNode<IocContainer>(this);
     if (this.parent != null) {
       this.containerNode.setSource(getParentContainer().getDependencyNode());
     }
     this.containerNode.setInstanceContainer(containerProvider.getInstanceContainer());
-    this.containerNode.setInstanceId(ComponentManagerIF.DEFAULT_INSTANCE_ID);
+    this.containerNode.setInstanceId(ComponentManager.DEFAULT_INSTANCE_ID);
     this.containerNode.setProvider(containerProvider);
-    this.componentManager = new ComponentManager(this, this.containerNode);
+    this.componentManager = new ComponentManagerImpl(this, this.containerNode);
     this.started = false;
     this.stopped = false;
     this.securityManager = null;
@@ -96,7 +96,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainerIF#getName()
+   * @see net.sf.mmm.framework.api.IocContainer#getName()
    */
   public final String getName() {
 
@@ -123,7 +123,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
    * 
    * @return the own dependency-node.
    */
-  protected DependencyNode<IocContainerIF> getDependencyNode() {
+  protected DependencyNode<IocContainer> getDependencyNode() {
 
     return this.containerNode;
   }
@@ -133,16 +133,16 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
    * 
    * @return the component manager.
    */
-  public ComponentManagerIF getComponentManager() {
+  public ComponentManager getComponentManager() {
 
     return this.componentManager;
   }
 
   /**
-   * @see net.sf.mmm.framework.api.MutableIocContainerIF#addComponentProvider(net.sf.mmm.framework.api.ComponentProviderIF)
+   * @see net.sf.mmm.framework.api.MutableIocContainer#addComponentProvider(net.sf.mmm.framework.api.ComponentProvider)
    * 
    */
-  public void addComponentProvider(ComponentProviderIF<?> componentProvider)
+  public void addComponentProvider(ComponentProvider<?> componentProvider)
       throws ContainerException {
 
     ensureNotStarted();
@@ -155,7 +155,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.MutableIocContainerIF#start()
+   * @see net.sf.mmm.framework.api.MutableIocContainer#start()
    */
   public final synchronized void start() {
 
@@ -183,7 +183,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.MutableIocContainerIF#stop()
+   * @see net.sf.mmm.framework.api.MutableIocContainer#stop()
    */
   public final synchronized void stop() {
 
@@ -214,7 +214,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainerIF#isRunning()
+   * @see net.sf.mmm.framework.api.IocContainer#isRunning()
    */
   public boolean isRunning() {
 
@@ -260,16 +260,16 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
    * 
    * @param <S>
    *        is the
-   *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+   *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        of the requested component.
    * @param specification
-   *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+   *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        of the component.
    * @return the requested provider or <code>null</code> if NOT avaialable.
    */
-  protected <S> ComponentProviderIF<S> getProvider(Class<S> specification) {
+  protected <S> ComponentProvider<S> getProvider(Class<S> specification) {
 
-    ComponentProviderIF<S> provider = this.providerMap.get(specification);
+    ComponentProvider<S> provider = this.providerMap.get(specification);
     if (provider == null) {
       if (getParentContainer() != null) {
         provider = getParentContainer().getProvider(specification);
@@ -279,24 +279,24 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManagerIF#hasComponent(java.lang.Class)
+   * @see net.sf.mmm.framework.api.ComponentManager#hasComponent(java.lang.Class)
    * 
    * This method determines if the componenet for the given
-   * {@link ComponentDescriptorIF#getSpecification() specification} is
+   * {@link ComponentDescriptor#getSpecification() specification} is
    * available. In that case, it can be retrieved via the
-   * {@link ComponentManagerIF#requestComponent(Class)} method without causing
+   * {@link ComponentManager#requestComponent(Class)} method without causing
    * an "component not registered" exception.
    * 
    * @param <S>
    *        is the
-   *        {@link ComponentDescriptorIF#getSpecification() specification} of
+   *        {@link ComponentDescriptor#getSpecification() specification} of
    *        the requested component.
    * @param specification
    *        is the
-   *        {@link ComponentDescriptorIF#getSpecification() specification} of
+   *        {@link ComponentDescriptor#getSpecification() specification} of
    *        the component.
    * @return <code>true</code> if a component for the given
-   *         {@link ComponentDescriptorIF#getSpecification() specification} is
+   *         {@link ComponentDescriptor#getSpecification() specification} is
    *         registered, <code>false</code> otherwise.
    */
   public <S> boolean hasComponent(Class<S> specification) {
@@ -305,7 +305,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManagerIF#releaseComponent(Object)
+   * @see net.sf.mmm.framework.api.ComponentManager#releaseComponent(Object)
    * 
    * @param <S>
    * @param component
@@ -333,11 +333,11 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManagerIF#releaseComponent(java.lang.Object)
+   * @see net.sf.mmm.framework.api.ComponentManager#releaseComponent(java.lang.Object)
    * 
    * @param <S>
    *        is the templated type of the associated
-   *        {@link ComponentDescriptorIF#getSpecification() component specification}.
+   *        {@link ComponentDescriptor#getSpecification() component specification}.
    * @param node
    *        is the node with the component instance to release.
    */
@@ -345,7 +345,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
 
     // TODO: call on right container
     debug("releasing component " + node);
-    ComponentInstanceContainerIF<S> instanceContainer = node.getInstanceContainer();
+    ComponentInstanceContainer<S> instanceContainer = node.getInstanceContainer();
     boolean released = node.getProvider().release(instanceContainer, node.getComponentManager());
     // node.removeFromSiblingList();
     if (released) {
@@ -396,7 +396,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   protected <S> void disposeComponentByNode(DependencyNode<S> node) {
 
     debug("diposing component " + node);
-    ComponentInstanceContainerIF<S> instanceContainer = node.getInstanceContainer();
+    ComponentInstanceContainer<S> instanceContainer = node.getInstanceContainer();
     node.getProvider().dispose(instanceContainer, node.getComponentManager());
 
     // okay recursively release all dependencies of the released
@@ -418,11 +418,11 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
    * 
    * @param specification
    *        is the
-   *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+   *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        of the requested component.
    * @param instanceId
    *        is the
-   *        {@link ComponentManagerIF#requestComponent(Class, String) instance-ID}
+   *        {@link ComponentManager#requestComponent(Class, String) instance-ID}
    *        of the requested component.
    * @param sourceNode
    *        is the node for the source component performing the request.
@@ -434,7 +434,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
 
     DependencyNode<?> node = sourceNode;
     while (node != null) {
-      ComponentInstanceContainerIF<?> instanceContainer = node.getInstanceContainer();
+      ComponentInstanceContainer<?> instanceContainer = node.getInstanceContainer();
       if (node.getProvider().getDescriptor().getSpecification() == specification) {
         if (isStrictOnDependencyCycle() || instanceContainer.getInstanceId().equals(instanceId)) {
           StringBuffer sb = new StringBuffer();
@@ -467,15 +467,15 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
    * when
    * {@link #detectDependencyCycle(Class, String, DependencyNode) detecting cyclic dependencies}.
    * In this case a trace containing the same
-   * {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+   * {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    * twice is immediately treated as {@link DependencyCycleException error}.
    * This is the default behaviour.<br>
    * You may override this method and return <code>false</code> instead to
    * disable strict mode. Then a trace is treated as cycle only if two
    * {@link DependencyNode nodes} point to the same
-   * {@link ComponentDescriptorIF#getSpecification() specification} AND the
+   * {@link ComponentDescriptor#getSpecification() specification} AND the
    * {@link Object#equals(Object) same}
-   * {@link ComponentManagerIF#requestComponent(Class, String) instance-ID}.
+   * {@link ComponentManager#requestComponent(Class, String) instance-ID}.
    * 
    * @return <code>true</code> if strict, <code>false</code> otherwise.
    */
@@ -488,7 +488,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
    * This method checks if the component <code>source</code> is allowed to
    * request an instance of <code>target</code> and <code>instanceId</code>.
    * 
-   * @see IocSecurityManagerIF#checkPermission(Class, Class, String)
+   * @see IocSecurityManager#checkPermission(Class, Class, String)
    * 
    * @param source
    *        is the source
@@ -508,24 +508,24 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * @see ComponentManagerIF#requestComponent(Class, String)
+   * @see ComponentManager#requestComponent(Class, String)
    * 
    * @param <S>
    *        is the
-   *        {@link ComponentDescriptorIF#getSpecification() specification} of
+   *        {@link ComponentDescriptor#getSpecification() specification} of
    *        the requested component.
    * @param specification
    *        is the
-   *        {@link ComponentDescriptorIF#getSpecification() specification} of
+   *        {@link ComponentDescriptor#getSpecification() specification} of
    *        the requested component.
    * @param instanceId
    *        identifies a specific instance of the componnent for
    *        <code>specification</code> if there are multiple. The
-   *        {@link ComponentManagerIF#requestComponent(Class) default} is
-   *        {@link ComponentManagerIF#DEFAULT_INSTANCE_ID}.
+   *        {@link ComponentManager#requestComponent(Class) default} is
+   *        {@link ComponentManager#DEFAULT_INSTANCE_ID}.
    * @param sourceNode
    * @return an instance of the requested component. It must fulfill the given
-   *         {@link ComponentDescriptorIF#getSpecification() specification}.
+   *         {@link ComponentDescriptor#getSpecification() specification}.
    *         It is illegal (and typically NOT possible) to cast it to another
    *         type (that is no super-type).
    * @throws ComponentException
@@ -549,7 +549,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
 
     // actually the request should be handled by the container declaring the
     // according provider.
-    ComponentProviderIF<S> provider = this.providerMap.get(specification);
+    ComponentProvider<S> provider = this.providerMap.get(specification);
     if (provider == null) {
       if (getParentContainer() != null) {
         return getParentContainer().requestComponentOnDeclaringContainer(specification, instanceId,
@@ -565,7 +565,7 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
     node.setSource(sourceNode);
     node.setProvider(provider);
     node.setInstanceId(instanceId);
-    ComponentInstanceContainerIF<S> ic = provider.request(instanceId, sourceNode.getProvider()
+    ComponentInstanceContainer<S> ic = provider.request(instanceId, sourceNode.getProvider()
         .getDescriptor(), sourceNode.getInstanceId(), node.getComponentManager());
     DependencyNode<?> sharedNode = this.instanceMap.get(ic);
     node.setInstanceContainer(ic);
@@ -635,26 +635,26 @@ public abstract class AbstractIocContainer implements MutableIocContainerIF {
   }
 
   /**
-   * This is the {@link ComponentProviderIF provider} of the
-   * {@link IocContainerIF}.
+   * This is the {@link ComponentProvider provider} of the
+   * {@link IocContainer}.
    */
-  protected class ContainerProvider extends SimpleSingletonProvider<IocContainerIF> {
+  protected class ContainerProvider extends SimpleSingletonProvider<IocContainer> {
 
     /**
      * The constructor.
      */
     protected ContainerProvider() {
 
-      super(IocContainerIF.class, new IocContainerProxy(AbstractIocContainer.this));
+      super(IocContainer.class, new IocContainerProxy(AbstractIocContainer.this));
     }
 
     /**
-     * @see net.sf.mmm.framework.base.provider.SimpleSingletonProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-     *      net.sf.mmm.framework.api.ComponentManagerIF)
+     * @see net.sf.mmm.framework.base.provider.SimpleSingletonProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer,
+     *      net.sf.mmm.framework.api.ComponentManager)
      */
     @Override
-    public void dispose(ComponentInstanceContainerIF<IocContainerIF> singletonContainer,
-        ComponentManagerIF componentMgr) {
+    public void dispose(ComponentInstanceContainer<IocContainer> singletonContainer,
+        ComponentManager componentMgr) {
 
       stop();
     }

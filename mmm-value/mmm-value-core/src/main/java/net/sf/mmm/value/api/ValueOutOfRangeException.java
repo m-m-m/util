@@ -2,11 +2,11 @@
 package net.sf.mmm.value.api;
 
 import net.sf.mmm.value.CoreNlsResourceBundle;
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the exception thrown if a value (e.g.
- * {@link net.sf.mmm.value.api.GenericValueIF#getInteger() integer}) is not in
+ * {@link net.sf.mmm.value.api.GenericValue#getInteger() integer}) is not in
  * the expected range.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -28,7 +28,7 @@ public class ValueOutOfRangeException extends ValueException {
    * @param maximum
    *        is the maximum value allowed.
    */
-  public ValueOutOfRangeException(GenericValueIF genericValue, Number value, Number minimum,
+  public ValueOutOfRangeException(GenericValue genericValue, Number value, Number minimum,
       Number maximum) {
 
     super(CoreNlsResourceBundle.ERR_VALUE_OUT_OF_RANGE, genericValue, value, minimum, maximum);
@@ -41,9 +41,9 @@ public class ValueOutOfRangeException extends ValueException {
    * 
    * @return the value out of range.
    */
-  public GenericValueIF getGenericValue() {
+  public GenericValue getGenericValue() {
 
-    return (GenericValueIF) getNlsMessage().getArgument(0);
+    return (GenericValue) getNlsMessage().getArgument(0);
   }
 
 }

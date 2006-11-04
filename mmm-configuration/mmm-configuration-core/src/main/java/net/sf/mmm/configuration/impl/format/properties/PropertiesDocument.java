@@ -7,10 +7,10 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
-import net.sf.mmm.context.api.MutableContextIF;
+import net.sf.mmm.context.api.MutableContext;
 
 /**
  * This is the implementation of the
@@ -44,7 +44,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * @param isFlat
    *        is the {@link #isFlat() flat} flag.
    */
-  public PropertiesDocument(ConfigurationAccessIF configurationAccess, MutableContextIF context,
+  public PropertiesDocument(ConfigurationAccess configurationAccess, MutableContext context,
       String keySeparator, boolean isFlat) {
 
     super(configurationAccess, context);
@@ -65,7 +65,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * @param isFlat
    *        is the {@link #isFlat() flat} flag.
    */
-  public PropertiesDocument(ConfigurationAccessIF configurationAccess,
+  public PropertiesDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration, String keySeparator, boolean isFlat) {
 
     super(configurationAccess, parentConfiguration);
@@ -91,26 +91,26 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * {@link #getSeparator() sperator} splits a property key into according
    * configuration nodes. E.g. if the {@link #getSeparator() sperator} is '.'
    * and a property has the key 'foo.bar.key' then it represents a
-   * {@link net.sf.mmm.configuration.api.ConfigurationIF configuration-node}
+   * {@link net.sf.mmm.configuration.api.Configuration configuration-node}
    * with the
-   * {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name} 'key'
+   * {@link net.sf.mmm.configuration.api.Configuration#getName() name} 'key'
    * and can be retrieved via
    * 
    * <pre>
-   * propertiesRootNode.{@link net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(String) getDescendant}("foo/bar/key").
+   * propertiesRootNode.{@link net.sf.mmm.configuration.api.Configuration#getDescendant(String) getDescendant}("foo/bar/key").
    * </pre>
    * 
    * In a flat layout, the property would represent a direct child of the
    * <code>propertiesRootNode</code> accessable via
    * 
    * <pre>
-   * propertiesRootNode.{@link net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(String) getDescendant}("foo.bar.key").
+   * propertiesRootNode.{@link net.sf.mmm.configuration.api.Configuration#getDescendant(String) getDescendant}("foo.bar.key").
    * </pre>
    * 
    * Be aware that
    * 
    * <pre>
-   * propertiesRootNode.{@link net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(String) getDescendant}("foo").{@link net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(String) getDescendants}("*").
+   * propertiesRootNode.{@link net.sf.mmm.configuration.api.Configuration#getDescendant(String) getDescendant}("foo").{@link net.sf.mmm.configuration.api.Configuration#getDescendants(String) getDescendants}("*").
    * </pre>
    * 
    * would be empty in flat mode but in tree mode it has 'bar' as child.
@@ -125,7 +125,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   /**
    * This method gets the key separator (typically '.' or '/'). If the
    * properties are treated as tree (NOT {@link #isFlat() flat}) is used analog
-   * to {@link net.sf.mmm.configuration.api.ConfigurationIF#PATH_SEPARATOR} but
+   * to {@link net.sf.mmm.configuration.api.Configuration#PATH_SEPARATOR} but
    * to separate the internal keys of the properties.
    * 
    * 

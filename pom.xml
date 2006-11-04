@@ -33,6 +33,8 @@
     <module>mmm-streamdetect</module>
     <module>mmm-framework</module>
     <module>mmm-validator</module>
+    <module>mmm-gui</module>
+    <module>mmm-content</module>
   </modules>
   <inceptionYear>2001</inceptionYear>
   <build>

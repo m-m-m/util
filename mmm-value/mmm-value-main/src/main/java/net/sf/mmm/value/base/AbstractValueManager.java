@@ -3,19 +3,19 @@ package net.sf.mmm.value.base;
 
 import org.w3c.dom.Element;
 
-import net.sf.mmm.nls.api.NlsMessageIF;
-import net.sf.mmm.nls.base.NlsMessage;
+import net.sf.mmm.nls.api.NlsMessage;
+import net.sf.mmm.nls.base.NlsMessageImpl;
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.NlsResourceBundle;
-import net.sf.mmm.value.api.GenericValueIF;
-import net.sf.mmm.value.api.ValueManagerIF;
+import net.sf.mmm.value.api.GenericValue;
+import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.value.api.ValueManagerIF} interface. It is recommended to
+ * {@link net.sf.mmm.value.api.ValueManager} interface. It is recommended to
  * extend this class rather than implementing the interface from scratch.
  * 
  * @see net.sf.mmm.value.base.BasicValueManager
@@ -25,10 +25,10 @@ import net.sf.mmm.value.api.ValueParseException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
+public abstract class AbstractValueManager<V> implements ValueManager<V> {
 
   /** the to string message */
-  private NlsMessageIF toStringMessage;
+  private NlsMessage toStringMessage;
 
   /**
    * The constructor.
@@ -44,10 +44,10 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
    * 
    * @return the NLS message.
    */
-  public final synchronized NlsMessageIF getToStringMessage() {
+  public final synchronized NlsMessage getToStringMessage() {
 
     if (this.toStringMessage == null) {
-      this.toStringMessage = new NlsMessage(NlsResourceBundle.MSG_MANAGER_TO_STRING, getName(),
+      this.toStringMessage = new NlsMessageImpl(NlsResourceBundle.MSG_MANAGER_TO_STRING, getName(),
           getValueType());
     }
     return this.toStringMessage;
@@ -57,7 +57,7 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
    * The default implementation expects the {@link #toString(Object) string}
    * representation of the value encoded as text in the XML element.
    * 
-   * @see net.sf.mmm.value.api.ValueManagerIF#parse(org.w3c.dom.Element)
+   * @see net.sf.mmm.value.api.ValueManager#parse(org.w3c.dom.Element)
    */
   public V parse(Element valueAsXml) throws ValueParseException {
 
@@ -73,11 +73,11 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
    * This method creates the content of the XML representation for the given
    * value. This default implementation uses {@link #toString(Object)} to
    * convert the value to string and then writes it as
-   * {@link XmlWriterIF#writeCharacters(String) text} content.<br>
+   * {@link XmlWriter#writeCharacters(String) text} content.<br>
    * Override this method to implement specific custom XML. If you override
    * this method you should also override {@link #parse(Element)}.
    * 
-   * @see #toXml(XmlWriterIF, Object)
+   * @see #toXml(XmlWriter, Object)
    * 
    * @param xmlWriter
    *        is where the XML is written to.
@@ -86,7 +86,7 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
    * @throws XmlException
    *         if the XML serialization fails.
    */
-  protected void toXmlValue(XmlWriterIF xmlWriter, V value) throws XmlException {
+  protected void toXmlValue(XmlWriter xmlWriter, V value) throws XmlException {
 
     xmlWriter.writeCharacters(toString(value));
   }
@@ -96,14 +96,14 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
    * will have the following form:
    * 
    * <pre>
-   * &lt;value type=&quot;{@link ValueManagerIF#getName() manager.getName()}&quot;&gt;
-   * {@link #toXml(XmlWriterIF, Object) toXmlValue(value)}
+   * &lt;value type=&quot;{@link ValueManager#getName() manager.getName()}&quot;&gt;
+   * {@link #toXml(XmlWriter, Object) toXmlValue(value)}
    * &lt;/value&gt;
    * </pre>
    * 
-   * @see net.sf.mmm.value.api.ValueManagerIF#toXml(XmlWriterIF, Object)
+   * @see net.sf.mmm.value.api.ValueManager#toXml(XmlWriter, Object)
    */
-  public final void toXml(XmlWriterIF xmlWriter, V value) throws XmlException {
+  public final void toXml(XmlWriter xmlWriter, V value) throws XmlException {
 
     xmlWriter.writeStartElement(XML_TAG_VALUE);
     xmlWriter.writeAttribute(XML_ATR_VALUE_NAME, getName());
@@ -154,9 +154,9 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
   }
   
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#eqauls(java.lang.Object, java.lang.Object)
+   * @see net.sf.mmm.value.api.ValueManager#isEqual(java.lang.Object, java.lang.Object)
    */
-  public boolean eqauls(V value1, V value2) {
+  public boolean isEqual(V value1, V value2) {
   
     if (value1 == null) {
       return (value2 == null);
@@ -171,18 +171,18 @@ public abstract class AbstractValueManager<V> implements ValueManagerIF<V> {
 
   /**
    * This method gets the String that represents the <code>null</code>
-   * value. This method always returns the same (==) object ({@link GenericValueIF#NULL_STRING}).
+   * value. This method always returns the same (==) object ({@link GenericValue#NULL_STRING}).
    * It can be overriden to change the <code>null</code> string.
    * 
    * @return the string that represents the <code>null</code> value.
    */
   protected String getNullString() {
 
-    return GenericValueIF.NULL_STRING;
+    return GenericValue.NULL_STRING;
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#toString(java.lang.Object)
+   * @see net.sf.mmm.value.api.ValueManager#toString(java.lang.Object)
    * 
    */
   public String toString(V value) {

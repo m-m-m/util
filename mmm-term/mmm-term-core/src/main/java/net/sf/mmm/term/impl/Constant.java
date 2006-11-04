@@ -1,16 +1,16 @@
 /* $Id$ */
 package net.sf.mmm.term.impl;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.term.base.AbstractTerm;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlSerializerIF;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlSerializer;
+import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This is the implementation of a constant
  * {@link net.sf.mmm.term.api.TermIF term}. It simply holds a value as constant
- * that is always returned as {@link #evaluate(ContextIF) evaluation} result.
+ * that is always returned as {@link #evaluate(Context) evaluation} result.
  * 
  * @param <C>
  *        is the templated type of the constant.
@@ -19,13 +19,13 @@ import net.sf.mmm.util.xml.api.XmlWriterIF;
  */
 public class Constant<C> extends AbstractTerm {
 
-    /** @see XmlSerializer */
+    /** @see XmlSerializerImpl */
     public static final String XML_TAG_VALUE = "value";
 
-    /** @see XmlSerializer */
+    /** @see XmlSerializerImpl */
     public static final String XML_TAG_NULL = "null";
     
-    /** @see XmlSerializer */
+    /** @see XmlSerializerImpl */
     public static final String XML_ATR_VALUE_CLASS = "class";
     
     /**
@@ -36,13 +36,13 @@ public class Constant<C> extends AbstractTerm {
      * @param <C>
      *        is the templated type of the constant.
      */
-    private static class XmlSerializer<C> implements XmlSerializerIF<C> {
+    private static class XmlSerializerImpl<C> implements XmlSerializer<C> {
 
         /**
-         * @see net.sf.mmm.util.xml.api.XmlSerializerIF#toXml(net.sf.mmm.util.xml.api.XmlWriterIF,
+         * @see net.sf.mmm.util.xml.api.XmlSerializer#toXml(net.sf.mmm.util.xml.api.XmlWriter,
          *      java.lang.Object) 
          */
-        public void toXml(XmlWriterIF xmlWriter, C object) throws XmlException {
+        public void toXml(XmlWriter xmlWriter, C object) throws XmlException {
 
             // TODO: check for XmlSerializable, use ValueManager, ...
             xmlWriter.writeStartElement(XML_TAG_VALUE);
@@ -73,8 +73,8 @@ public class Constant<C> extends AbstractTerm {
     /** the constant value */
     private final C value;
 
-    /** the serializer used for {@link #toXml(XmlWriterIF)} */
-    private final XmlSerializerIF<C> serializer;
+    /** the serializer used for {@link #toXml(XmlWriter)} */
+    private final XmlSerializer<C> serializer;
 
     /**
      * The dummy constructor. Only use for testing or outside the project.
@@ -84,7 +84,7 @@ public class Constant<C> extends AbstractTerm {
      */
     public Constant(C constantValue) {
 
-        this(constantValue, new XmlSerializer<C>());
+        this(constantValue, new XmlSerializerImpl<C>());
     }
 
     /**
@@ -93,9 +93,9 @@ public class Constant<C> extends AbstractTerm {
      * @param constantValue
      *        is the value of this constant.
      * @param valueSerializer
-     *        is the serializer used for {@link #toXml(XmlWriterIF)}
+     *        is the serializer used for {@link #toXml(XmlWriter)}
      */
-    public Constant(C constantValue, XmlSerializerIF<C> valueSerializer) {
+    public Constant(C constantValue, XmlSerializer<C> valueSerializer) {
 
         super();
         this.value = constantValue;
@@ -103,19 +103,19 @@ public class Constant<C> extends AbstractTerm {
     }
 
     /**
-     * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
+     * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.Context)
      *      
      */
-    public C evaluate(ContextIF variableSet) {
+    public C evaluate(Context variableSet) {
 
         return this.value;
     }
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
      *      
      */
-    public void toXml(XmlWriterIF xmlWriter) throws XmlException {
+    public void toXml(XmlWriter xmlWriter) throws XmlException {
 
         xmlWriter.writeStartElement(XML_TAG_CONSTANT);
         this.serializer.toXml(xmlWriter, this.value);

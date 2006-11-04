@@ -3,15 +3,15 @@ package net.sf.mmm.framework.impl;
 
 import net.sf.mmm.framework.NlsResourceBundle;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.ComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.LifecycleManagerIF;
+import net.sf.mmm.framework.api.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.LifecycleManager;
 import net.sf.mmm.framework.api.LifecycleMethod;
 
 /**
  * This is the exception thrown if a {@link LifecycleMethod lifecycle phase}
  * failed.
  * 
- * @see LifecycleManagerIF
+ * @see LifecycleManager
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,7 +28,7 @@ public class LifecycleException extends ComponentException {
      * @param lifecyclePhase
      *        is the lifecycle phase that failed.
      */
-    public LifecycleException(ComponentInstanceContainerIF instanceContainer, String lifecyclePhase) {
+    public LifecycleException(ComponentInstanceContainer instanceContainer, String lifecyclePhase) {
 
         super(NlsResourceBundle.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
     }
@@ -43,7 +43,7 @@ public class LifecycleException extends ComponentException {
      * @param nested
      *        is the exception that caused this error.
      */
-    public LifecycleException(ComponentInstanceContainerIF instanceContainer,
+    public LifecycleException(ComponentInstanceContainer instanceContainer,
             String lifecyclePhase, Throwable nested) {
 
         super(nested, NlsResourceBundle.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);

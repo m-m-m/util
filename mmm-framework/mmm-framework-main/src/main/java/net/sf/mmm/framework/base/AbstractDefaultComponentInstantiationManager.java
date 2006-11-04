@@ -1,21 +1,21 @@
 /* $Id$ */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.ExtendedComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
 import net.sf.mmm.framework.base.provider.InstanceIdNotAvailableException;
 
 /**
  * This is the abstract base implementation of the
- * {@link ComponentInstantiationManagerIF} interface.
+ * {@link ComponentInstantiationManager} interface.
  * 
  * @param <S>
- *        is the {@link ComponentDescriptorIF#getSpecification() specification}
+ *        is the {@link ComponentDescriptor#getSpecification() specification}
  *        of the component.
  * @param <I>
  *        is the
- *        {@link ExtendedComponentDescriptorIF#getImplementation() implementation}
+ *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
  *        of the component.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -32,23 +32,23 @@ public abstract class AbstractDefaultComponentInstantiationManager<S, I extends 
     }
 
     /**
-     * @see AbstractComponentInstantiationManager#AbstractComponentInstantiationManager(ExtendedComponentDescriptorIF)
+     * @see AbstractComponentInstantiationManager#AbstractComponentInstantiationManager(ExtendedComponentDescriptor)
      * 
      */
     public AbstractDefaultComponentInstantiationManager(
-            ExtendedComponentDescriptorIF<S, I> componentDescriptor) {
+            ExtendedComponentDescriptor<S, I> componentDescriptor) {
 
         super(componentDescriptor);
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#request(String)
+     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
      * 
      */
-    public final ExtendedComponentInstanceContainer<S, I> request(String instanceId)
+    public final ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId)
             throws InstanceIdNotAvailableException {
 
-        if (ComponentManagerIF.DEFAULT_INSTANCE_ID.equals(instanceId)) {
+        if (ComponentManager.DEFAULT_INSTANCE_ID.equals(instanceId)) {
             return requestDefault();
         } else {
             return requestByInstanceId(instanceId);
@@ -56,15 +56,15 @@ public abstract class AbstractDefaultComponentInstantiationManager<S, I extends 
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#request(String)
+     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
      * 
      * @return the container for the
-     *         {@link ComponentManagerIF#DEFAULT_INSTANCE_ID default} instance.
+     *         {@link ComponentManager#DEFAULT_INSTANCE_ID default} instance.
      */
-    public abstract ExtendedComponentInstanceContainer<S, I> requestDefault();
+    public abstract ExtendedComponentInstanceContainerImpl<S, I> requestDefault();
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManagerIF#request(String)
+     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
      * 
      * @param instanceId
      * @return the requested instance-ID
@@ -72,7 +72,7 @@ public abstract class AbstractDefaultComponentInstantiationManager<S, I extends 
      *         if the component is NOT available for the requested
      *         <code>instanceId</code>.
      */
-    public ExtendedComponentInstanceContainer<S, I> requestByInstanceId(String instanceId)
+    public ExtendedComponentInstanceContainerImpl<S, I> requestByInstanceId(String instanceId)
             throws InstanceIdNotAvailableException {
 
         throw new InstanceIdNotAvailableException(instanceId, getDescriptor());

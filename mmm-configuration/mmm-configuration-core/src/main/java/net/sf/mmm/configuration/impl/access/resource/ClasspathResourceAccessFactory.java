@@ -5,22 +5,22 @@ import java.net.URL;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.ConfigurationReadException;
 import net.sf.mmm.configuration.impl.access.url.UrlAccess;
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF} for
+ * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessFactory} for
  * {@link ClassLoader#getResource(java.lang.String) classpath-resource} access.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ClasspathResourceAccessFactory implements ConfigurationAccessFactoryIF {
+public class ClasspathResourceAccessFactory implements ConfigurationAccessFactory {
 
   /** the file accessors */
   private UrlAccess[] accessors;
@@ -34,11 +34,11 @@ public class ClasspathResourceAccessFactory implements ConfigurationAccessFactor
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#configure(java.lang.String,
-   *      net.sf.mmm.context.api.ContextIF,
-   *      net.sf.mmm.configuration.api.ConfigurationIF)
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#configure(java.lang.String,
+   *      net.sf.mmm.context.api.Context,
+   *      net.sf.mmm.configuration.api.Configuration)
    */
-  public void configure(String prefix, ContextIF environment, ConfigurationIF include)
+  public void configure(String prefix, Context environment, Configuration include)
       throws ConfigurationException, ValueException {
 
     String resourceName = include.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_HREF)
@@ -52,16 +52,16 @@ public class ClasspathResourceAccessFactory implements ConfigurationAccessFactor
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#getAccessors()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#getAccessors()
    *      
    */
-  public ConfigurationAccessIF[] getAccessors() {
+  public ConfigurationAccess[] getAccessors() {
 
     return this.accessors;
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#isSingleAccess()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#isSingleAccess()
    *      
    */
   public boolean isSingleAccess() {

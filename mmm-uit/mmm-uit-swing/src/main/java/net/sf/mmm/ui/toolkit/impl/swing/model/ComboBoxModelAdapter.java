@@ -3,10 +3,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 
 import javax.swing.MutableComboBoxModel;
 
-import net.sf.mmm.ui.toolkit.api.model.UIListModelIF;
+import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModelIF} to
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
  * a swing {@link javax.swing.ComboBoxModel}.
  * 
  * @param <E>
@@ -16,78 +16,73 @@ import net.sf.mmm.ui.toolkit.api.model.UIListModelIF;
  */
 public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements MutableComboBoxModel {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 7187832628689261207L;
-    
-    /** the selected item */
-    private Object selectedItem;
-    
-    /**
-     * The constructor.
-     * 
-     * @param listModel
-     */
-    public ComboBoxModelAdapter(UIListModelIF<E> listModel) {
+  /** uid for serialization */
+  private static final long serialVersionUID = 7187832628689261207L;
 
-        super(listModel);
-    }
+  /** the selected item */
+  private Object selectedItem;
 
-    /**
-     * @see javax.swing.ComboBoxModel#setSelectedItem(java.lang.Object)
-     * 
-     */
-    public void setSelectedItem(Object anItem) {
+  /**
+   * The constructor.
+   * 
+   * @param listModel
+   */
+  public ComboBoxModelAdapter(UIListModel<E> listModel) {
 
-        this.selectedItem = anItem;
-    }
+    super(listModel);
+  }
 
-    /**
-     * @see javax.swing.ComboBoxModel#getSelectedItem()
-     * 
-     */
-    public Object getSelectedItem() {
+  /**
+   * @see javax.swing.ComboBoxModel#setSelectedItem(java.lang.Object)
+   */
+  public void setSelectedItem(Object anItem) {
 
-        return this.selectedItem;
-    }
+    this.selectedItem = anItem;
+  }
 
-    /**
-     * @see javax.swing.MutableComboBoxModel#addElement(java.lang.Object)
-     * 
-     */
-    public void addElement(Object obj) {
+  /**
+   * @see javax.swing.ComboBoxModel#getSelectedItem()
+   */
+  public Object getSelectedItem() {
 
-        // TODO Auto-generated method stub
+    return this.selectedItem;
+  }
 
-    }
+  /**
+   * @see javax.swing.MutableComboBoxModel#addElement(java.lang.Object)
+   */
+  public void addElement(Object obj) {
 
-    /**
-     * @see javax.swing.MutableComboBoxModel#removeElement(java.lang.Object)
-     * 
-     */
-    public void removeElement(Object obj) {
+  // TODO Auto-generated method stub
 
-        // TODO Auto-generated method stub
-        
-    }
+  }
 
-    /**
-     * @see javax.swing.MutableComboBoxModel#insertElementAt(java.lang.Object, int)
-     * 
-     */
-    public void insertElementAt(Object obj, int index) {
+  /**
+   * @see javax.swing.MutableComboBoxModel#removeElement(java.lang.Object)
+   */
+  public void removeElement(Object obj) {
 
-        // TODO Auto-generated method stub
-        
-    }
+  // TODO Auto-generated method stub
 
-    /**
-     * @see javax.swing.MutableComboBoxModel#removeElementAt(int)
-     * 
-     */
-    public void removeElementAt(int index) {
+  }
 
-        // TODO Auto-generated method stub
-        
-    }
+  /**
+   * @see javax.swing.MutableComboBoxModel#insertElementAt(java.lang.Object,
+   *      int)
+   */
+  public void insertElementAt(Object obj, int index) {
+
+  // TODO Auto-generated method stub
+
+  }
+
+  /**
+   * @see javax.swing.MutableComboBoxModel#removeElementAt(int)
+   */
+  public void removeElementAt(int index) {
+
+  // TODO Auto-generated method stub
+
+  }
 
 }

@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.base.path;
 
 import java.util.regex.Pattern;
 
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the implementation of the
@@ -27,10 +27,10 @@ public class EqualsComparator implements ComparatorIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.ComparatorIF#accept(net.sf.mmm.value.api.GenericValueIF,
+   * @see net.sf.mmm.configuration.base.path.ComparatorIF#accept(net.sf.mmm.value.api.GenericValue,
    *      java.lang.String, java.util.regex.Pattern) 
    */
-  public boolean accept(GenericValueIF value, String string, Pattern pattern) {
+  public boolean accept(GenericValue value, String string, Pattern pattern) {
 
     String valueString = value.getString(null);
     if (pattern == null) {

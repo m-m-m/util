@@ -2,15 +2,15 @@
 package net.sf.mmm.configuration.base;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF;
+import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.term.api.TermIF;
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueException;
 import net.sf.mmm.value.base.AbstractStringValue;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface.
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,7 +20,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   private AbstractConfiguration parent;
 
   /** @see #getValue() */
-  private MutableGenericValueIF value;
+  private MutableGenericValue value;
 
   /** @see #isEditable() */
   private Boolean editable;
@@ -79,7 +79,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
    * 
    */
   public final boolean isEditable() {
@@ -108,7 +108,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
+   * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
    * 
    */
   public boolean isAddDefaults() {
@@ -130,7 +130,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
    * 
    * @return the value.
    */
-  protected MutableGenericValueIF createValue() {
+  protected MutableGenericValue createValue() {
 
     return new Value();
   }
@@ -151,9 +151,9 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   protected abstract void setPlainString(String newValue);
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getValue()
+   * @see net.sf.mmm.configuration.api.Configuration#getValue()
    */
-  public MutableGenericValueIF getValue() {
+  public MutableGenericValue getValue() {
 
     if (this.value == null) {
       this.value = createValue();
@@ -166,7 +166,6 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
    * will set the "dirty" flag so
    * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#save() saving}
    * is only performed as needed.
-   * 
    */
   protected void setModified() {
 
@@ -176,19 +175,17 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#addListener(net.sf.mmm.util.event.EventListenerIF)
-   * 
+   * @see net.sf.mmm.util.event.EventSourceIF#addListener(net.sf.mmm.util.event.EventListener)
    */
-  public void addListener(ConfigurationChangeListenerIF listener) {
+  public void addListener(ConfigurationChangeListener listener) {
 
     getOwnerDocument().addListener(this, listener);
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(net.sf.mmm.util.event.EventListenerIF)
-   * 
+   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(net.sf.mmm.util.event.EventListener)
    */
-  public void removeListener(ConfigurationChangeListenerIF listener) {
+  public void removeListener(ConfigurationChangeListener listener) {
 
     getOwnerDocument().removeListener(this, listener);
   }
@@ -212,7 +209,6 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
 
     /**
      * The constructor.
-     * 
      */
     public Value() {
 
@@ -245,7 +241,6 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
 
     /**
      * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
-     * 
      */
     @Override
     protected String getPlainValue() {
@@ -272,7 +267,6 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
 
     /**
      * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
-     * 
      */
     @Override
     protected void setPlainValue(String newValue) {
@@ -282,7 +276,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.api.GenericValueIF#isAddDefaults()
+     * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
      */
     @Override
     public boolean isAddDefaults() {
@@ -291,8 +285,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
-     * 
+     * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
      */
     public boolean isEditable() {
 

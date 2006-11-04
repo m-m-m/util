@@ -6,14 +6,14 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF;
-import net.sf.mmm.util.event.EventListenerIF;
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
+import net.sf.mmm.util.event.EventListener;
+import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.base.EmptyValue;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface that is
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface that is
  * always empty.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -64,16 +64,16 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getValue()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#getValue()
    *      
    */
-  public MutableGenericValueIF getValue() {
+  public MutableGenericValue getValue() {
 
     return EmptyValue.getInstance();
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName() 
    */
   public String getName() {
 
@@ -81,7 +81,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
    *      
    */
   public String getNamespaceUri() {
@@ -90,7 +90,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
    *      
    */
   public boolean isEditable() {
@@ -99,7 +99,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
+   * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
    *      
    */
   public boolean isAddDefaults() {
@@ -108,7 +108,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getType() 
+   * @see net.sf.mmm.configuration.api.Configuration#getType() 
    */
   public Type getType() {
 
@@ -116,7 +116,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String,
+   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String,
    *      java.lang.String) 
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
@@ -157,7 +157,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
    *      
    */
   @Override
@@ -214,7 +214,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
    *      
    */
   public void disable() throws ConfigurationException {
@@ -222,18 +222,18 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
    *      
    */
-  public void addListener(ConfigurationChangeListenerIF listener) {
+  public void addListener(ConfigurationChangeListener listener) {
 
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
    *      
    */
-  public void removeListener(ConfigurationChangeListenerIF listener) {
+  public void removeListener(ConfigurationChangeListener listener) {
 
   }
 

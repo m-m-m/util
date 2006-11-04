@@ -1,31 +1,31 @@
 /* $Id$ */
 package net.sf.mmm.framework.impl;
 
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.ComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.ComponentProviderIF;
+import net.sf.mmm.framework.api.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.ComponentProvider;
 import net.sf.mmm.framework.base.provider.AbstractComponentProvider;
 
 /**
- * This is the implementation of the {@link ComponentProviderIF} interface
- * providing {@link ConfigurationIF configuration}.
+ * This is the implementation of the {@link ComponentProvider} interface
+ * providing {@link Configuration configuration}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ConfigurationProvider extends AbstractComponentProvider<ConfigurationIF> {
+public class ConfigurationProvider extends AbstractComponentProvider<Configuration> {
 
     /** the root configuration */
-    private ConfigurationIF rootConfiguration;
+    private Configuration rootConfiguration;
 
     /**
      * The constructor.
      */
     public ConfigurationProvider() {
 
-        super(ConfigurationIF.class);
+        super(Configuration.class);
         this.rootConfiguration = null;
     }
 
@@ -34,7 +34,7 @@ public class ConfigurationProvider extends AbstractComponentProvider<Configurati
      * 
      * @return the rootConfiguration.
      */
-    public ConfigurationIF getRootConfiguration() {
+    public Configuration getRootConfiguration() {
 
         return this.rootConfiguration;
     }
@@ -45,36 +45,36 @@ public class ConfigurationProvider extends AbstractComponentProvider<Configurati
      * @param rootConfig
      *        is the rootConfiguration to set.
      */
-    public void setRootConfiguration(ConfigurationIF rootConfig) {
+    public void setRootConfiguration(Configuration rootConfig) {
 
         this.rootConfiguration = rootConfig;
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ComponentProviderIF#release(net.sf.mmm.framework.api.ComponentInstanceContainerIF, net.sf.mmm.framework.api.ComponentManagerIF)
+     * @see net.sf.mmm.framework.api.ComponentProvider#release(net.sf.mmm.framework.api.ComponentInstanceContainer, net.sf.mmm.framework.api.ComponentManager)
      * 
      */
-    public boolean release(ComponentInstanceContainerIF<ConfigurationIF> instanceContainer, ComponentManagerIF componentManager) {
+    public boolean release(ComponentInstanceContainer<Configuration> instanceContainer, ComponentManager componentManager) {
 
         // TODO Auto-generated method stub
         return false;
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ComponentProviderIF#request(java.lang.String, net.sf.mmm.framework.api.ComponentDescriptorIF, java.lang.String, net.sf.mmm.framework.api.ComponentManagerIF)
+     * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String, net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String, net.sf.mmm.framework.api.ComponentManager)
      * 
      */
-    public ComponentInstanceContainerIF<ConfigurationIF> request(String instanceId, ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId, ComponentManagerIF componentManager) throws ComponentException {
+    public ComponentInstanceContainer<Configuration> request(String instanceId, ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId, ComponentManager componentManager) throws ComponentException {
 
         // TODO Auto-generated method stub
         return null;
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ComponentProviderIF#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF, net.sf.mmm.framework.api.ComponentManagerIF)
+     * @see net.sf.mmm.framework.api.ComponentProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer, net.sf.mmm.framework.api.ComponentManager)
      * 
      */
-    public void dispose(ComponentInstanceContainerIF<ConfigurationIF> instanceContainer, ComponentManagerIF componentManager) {
+    public void dispose(ComponentInstanceContainer<Configuration> instanceContainer, ComponentManager componentManager) {
         
     }
 

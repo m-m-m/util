@@ -5,7 +5,7 @@ import net.sf.mmm.value.base.AbstractStringValue;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.value.api.MutableGenericValueIF} interface that uses a
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface that uses a
  * string as internal value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -54,7 +54,7 @@ public class StringValue extends AbstractStringValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.MutableGenericValueIF#isEditable()
+   * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
    */
   public boolean isEditable() {
 

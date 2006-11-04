@@ -1,22 +1,22 @@
 /* $Id$ */
 package net.sf.mmm.configuration.api.event;
 
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.util.event.EventIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.util.event.Event;
 
 /**
- * This class represents an {@link net.sf.mmm.util.event.EventIF event} that notifies
+ * This class represents an {@link net.sf.mmm.util.event.Event event} that notifies
  * a
- * {@link net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF listener}
- * about a {@link net.sf.mmm.configuration.api.ConfigurationIF configuration}
+ * {@link net.sf.mmm.configuration.api.event.ConfigurationChangeListener listener}
+ * about a {@link net.sf.mmm.configuration.api.Configuration configuration}
  * that has changed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ConfigurationChangeEvent implements EventIF {
+public class ConfigurationChangeEvent implements Event {
 
   /** is the configuration that changed */
-  private final ConfigurationIF configuration;
+  private final Configuration configuration;
 
   /**
    * The constructor.
@@ -24,7 +24,7 @@ public class ConfigurationChangeEvent implements EventIF {
    * @param conf
    *        is the configuration that has changed.
    */
-  public ConfigurationChangeEvent(ConfigurationIF conf) {
+  public ConfigurationChangeEvent(Configuration conf) {
 
     super();
     this.configuration = conf;
@@ -36,7 +36,7 @@ public class ConfigurationChangeEvent implements EventIF {
    * 
    * @return the changed configuration.
    */
-  public ConfigurationIF getConfiguration() {
+  public Configuration getConfiguration() {
 
     return this.configuration;
   }

@@ -4,7 +4,7 @@ package net.sf.mmm.nls.base;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.nls.api.StringTranslatorIF;
+import net.sf.mmm.nls.api.StringTranslator;
 
 
 /**
@@ -12,7 +12,7 @@ import net.sf.mmm.nls.api.StringTranslatorIF;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SimpleStringTranslator implements StringTranslatorIF {
+public class SimpleStringTranslator implements StringTranslator {
 
     /** the original bundle */
     private final AbstractResourceBundle nlsBundle;
@@ -33,7 +33,7 @@ public class SimpleStringTranslator implements StringTranslatorIF {
     }
 
     /**
-     * @see net.sf.mmm.nls.api.StringTranslatorIF#translate(java.lang.String)
+     * @see net.sf.mmm.nls.api.StringTranslator#translate(java.lang.String)
      * 
      */
     public String translate(String message) {

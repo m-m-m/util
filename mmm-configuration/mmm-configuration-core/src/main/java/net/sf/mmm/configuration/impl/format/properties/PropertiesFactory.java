@@ -3,18 +3,18 @@ package net.sf.mmm.configuration.impl.format.properties;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationFactory;
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.context.api.MutableContextIF;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.context.api.MutableContext;
 import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.base.access.ConfigurationFactoryIF} interface
+ * {@link net.sf.mmm.configuration.base.access.ConfigurationFactory} interface
  * using {@link java.util.Properties} as representation for the configuration.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -26,7 +26,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
    * {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT format} name for this
    * implementation.
    * 
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#CONTEXT_VARIABLE_PREFIX
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#CONTEXT_VARIABLE_PREFIX
    */
   public static final String CONTEXT_DEFAULT_NAME = "properties";
 
@@ -58,11 +58,11 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#configure(java.lang.String,
-   *      net.sf.mmm.context.api.ContextIF,
-   *      net.sf.mmm.configuration.api.ConfigurationIF)
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#configure(java.lang.String,
+   *      net.sf.mmm.context.api.Context,
+   *      net.sf.mmm.configuration.api.Configuration)
    */
-  public void configure(String prefix, ContextIF context, ConfigurationIF include)
+  public void configure(String prefix, Context context, Configuration include)
       throws ConfigurationException, ValueException {
 
     this.propertyKeySeparator = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_SEPARATOR)
@@ -72,20 +72,20 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
-   *      net.sf.mmm.context.api.MutableContextIF) 
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
+   *      net.sf.mmm.context.api.MutableContext) 
    */
-  public AbstractConfigurationDocument create(ConfigurationAccessIF access, MutableContextIF context)
+  public AbstractConfigurationDocument create(ConfigurationAccess access, MutableContext context)
       throws ConfigurationException {
 
     return new PropertiesDocument(access, context, this.propertyKeySeparator, this.flat);
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactoryIF#create(net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
+   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
    *      net.sf.mmm.configuration.base.AbstractConfiguration) 
    */
-  public AbstractConfigurationDocument create(ConfigurationAccessIF access,
+  public AbstractConfigurationDocument create(ConfigurationAccess access,
       AbstractConfiguration parentConfiguration) throws ConfigurationException {
 
     return new PropertiesDocument(access, parentConfiguration, this.propertyKeySeparator, this.flat);

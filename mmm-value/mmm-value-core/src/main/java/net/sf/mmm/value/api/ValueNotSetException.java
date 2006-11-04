@@ -6,7 +6,7 @@ import net.sf.mmm.value.CoreNlsResourceBundle;
 /**
  * This is the exception thrown if a required value was not set.
  * 
- * @see net.sf.mmm.value.api.GenericValueIF#getString()
+ * @see net.sf.mmm.value.api.GenericValue#getString()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -19,9 +19,9 @@ public class ValueNotSetException extends ValueException {
    * The constructor.
    * 
    * @param genericValue
-   *        is the required value that is {@link GenericValueIF#isEmpty() empty}.
+   *        is the required value that is {@link GenericValue#isEmpty() empty}.
    */
-  public ValueNotSetException(GenericValueIF genericValue) {
+  public ValueNotSetException(GenericValue genericValue) {
 
     super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, genericValue);
   }

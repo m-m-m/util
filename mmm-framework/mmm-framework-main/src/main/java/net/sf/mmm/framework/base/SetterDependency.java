@@ -3,12 +3,12 @@ package net.sf.mmm.framework.base;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import net.sf.mmm.framework.api.ComponentManagerIF;
+import net.sf.mmm.framework.api.ComponentManager;
 
 /**
  * This inner class is the implementation of {@link AbstractDependency} for the
  * {@link #getInjectionType() type}
- * {@link net.sf.mmm.framework.api.DependencyIF.Type#SETTER}.
+ * {@link net.sf.mmm.framework.api.Dependency.Type#SETTER}.
  * 
  * @param <S>
  *        is the templated type of the {@link #getSpecification()}.
@@ -43,7 +43,7 @@ public final class SetterDependency<S> extends AbstractDependency<S> {
      */
     public SetterDependency(Method setter, Class<S> specification) {
 
-        this(setter, specification, ComponentManagerIF.DEFAULT_INSTANCE_ID);
+        this(setter, specification, ComponentManager.DEFAULT_INSTANCE_ID);
     }
 
     /**
@@ -57,7 +57,7 @@ public final class SetterDependency<S> extends AbstractDependency<S> {
      *        dependency.
      * @param instanceId
      *        is the
-     *        {@link ComponentInstanceContainer#getInstanceId() instance-ID} of
+     *        {@link SimpleComponentInstanceContainer#getInstanceId() instance-ID} of
      *        the dependency.
      */
     public SetterDependency(Method setter, Class<S> specification, String instanceId) {
@@ -90,7 +90,7 @@ public final class SetterDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.DependencyIF#getInjectionField()
+     * @see net.sf.mmm.framework.api.Dependency#getInjectionField()
      * 
      */
     public Field getInjectionField() {
@@ -99,7 +99,7 @@ public final class SetterDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.DependencyIF#getInjectionMethod()
+     * @see net.sf.mmm.framework.api.Dependency#getInjectionMethod()
      * 
      */
     public Method getInjectionMethod() {
@@ -108,7 +108,7 @@ public final class SetterDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.DependencyIF#getInjectionType()
+     * @see net.sf.mmm.framework.api.Dependency#getInjectionType()
      * 
      */
     public Type getInjectionType() {

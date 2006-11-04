@@ -4,14 +4,14 @@ package net.sf.mmm.ui.toolkit.base.feature;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF;
+import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize;
+import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF} interface that builds
+ * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize} interface that builds
  * the maximum width/height out of
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF preferred-size}
+ * {@link net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize preferred-size}
  * objects. This is supposted to be used as
  * {@link net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints#size size} in
  * {@linkplain net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints} to emulate
@@ -19,84 +19,84 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class MaximumSizer implements UIReadSizeIF {
+public class MaximumSizer implements UIReadSize {
 
-    /** the list of sizes to build maximum of */
-    private final List<UIReadPreferredSizeIF> sizeList;
+  /** the list of sizes to build maximum of */
+  private final List<UIReadPreferredSize> sizeList;
 
-    /** if <code>true</code> the width will be override */
-    private final boolean overrideWidth;
+  /** if <code>true</code> the width will be override */
+  private final boolean overrideWidth;
 
-    /** if <code>true</code> the height will be override */
-    private final boolean overrideHeight;
+  /** if <code>true</code> the height will be override */
+  private final boolean overrideHeight;
 
-    /**
-     * The constructor.
-     * 
-     * @param widthOverride
-     *        if <code>true</code> the {@link #getHeight() height} will be the
-     *        maximum height of all added sizes.
-     * @param heightOverride
-     */
-    public MaximumSizer(boolean widthOverride, boolean heightOverride) {
+  /**
+   * The constructor.
+   * 
+   * @param widthOverride
+   *        if <code>true</code> the {@link #getHeight() height} will be the
+   *        maximum height of all added sizes.
+   * @param heightOverride
+   */
+  public MaximumSizer(boolean widthOverride, boolean heightOverride) {
 
-        super();
-        this.sizeList = new ArrayList<UIReadPreferredSizeIF>();
-        this.overrideHeight = heightOverride;
-        this.overrideWidth = widthOverride;
-    }
+    super();
+    this.sizeList = new ArrayList<UIReadPreferredSize>();
+    this.overrideHeight = heightOverride;
+    this.overrideWidth = widthOverride;
+  }
 
-    /**
-     * This method adds the given {@link UIReadPreferredSizeIF size} to the
-     * size-list. The maximum width/height will be determined over all sized in
-     * the list.
-     * 
-     * @param size
-     *        is the size to add.
-     */
-    public void add(UIReadPreferredSizeIF size) {
+  /**
+   * This method adds the given {@link UIReadPreferredSize size} to the
+   * size-list. The maximum width/height will be determined over all sized in
+   * the list.
+   * 
+   * @param size
+   *        is the size to add.
+   */
+  public void add(UIReadPreferredSize size) {
 
-        this.sizeList.add(size);
-    }
+    this.sizeList.add(size);
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-     * 
-     */
-    public int getWidth() {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * 
+   */
+  public int getWidth() {
 
-        int width = 0;
-        if (this.overrideWidth) {
-            int count = this.sizeList.size();
-            for (int i = 0; i < count; i++) {
-                UIReadPreferredSizeIF size = this.sizeList.get(i);
-                int currentWidth = size.getPreferredWidth();
-                if (currentWidth > width) {
-                    width = currentWidth;
-                }
-            }
+    int width = 0;
+    if (this.overrideWidth) {
+      int count = this.sizeList.size();
+      for (int i = 0; i < count; i++) {
+        UIReadPreferredSize size = this.sizeList.get(i);
+        int currentWidth = size.getPreferredWidth();
+        if (currentWidth > width) {
+          width = currentWidth;
         }
-        return width;
+      }
     }
+    return width;
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-     * 
-     */
-    public int getHeight() {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * 
+   */
+  public int getHeight() {
 
-        int height = 0;
-        if (this.overrideHeight) {
-            int count = this.sizeList.size();
-            for (int i = 0; i < count; i++) {
-                UIReadPreferredSizeIF size = this.sizeList.get(i);
-                int currentHeight = size.getPreferredHeight();
-                if (currentHeight > height) {
-                    height = currentHeight;
-                }
-            }
+    int height = 0;
+    if (this.overrideHeight) {
+      int count = this.sizeList.size();
+      for (int i = 0; i < count; i++) {
+        UIReadPreferredSize size = this.sizeList.get(i);
+        int currentHeight = size.getPreferredHeight();
+        if (currentHeight > height) {
+          height = currentHeight;
         }
-        return height;
+      }
     }
+    return height;
+  }
 
 }

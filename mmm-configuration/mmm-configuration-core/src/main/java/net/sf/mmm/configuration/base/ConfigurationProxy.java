@@ -5,13 +5,13 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF;
-import net.sf.mmm.util.event.EventListenerIF;
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
+import net.sf.mmm.util.event.EventListener;
+import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.configuration.api.ConfigurationIF} interface that delegates
+ * {@link net.sf.mmm.configuration.api.Configuration} interface that delegates
  * to another {@link #getDelegate() instance}. You can use it to wrap a
  * configuration node and change its behaviour by overriding specific method(s).<br>
  * There are {@link java.lang.reflect.Proxy proxies} in JAVA that could be used
@@ -38,16 +38,16 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   protected abstract AbstractConfiguration getDelegate();
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getValue()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#getValue()
    *      
    */
-  public MutableGenericValueIF getValue() {
+  public MutableGenericValue getValue() {
 
     return getDelegate().getValue();
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName() 
    */
   public String getName() {
 
@@ -55,7 +55,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
    *      
    */
   public String getNamespaceUri() {
@@ -64,7 +64,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
    *      
    */
   public boolean isEditable() {
@@ -73,7 +73,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#isAddDefaults()
+   * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
    *      
    */
   public boolean isAddDefaults() {
@@ -82,7 +82,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getType() 
+   * @see net.sf.mmm.configuration.api.Configuration#getType() 
    */
   public Type getType() {
 
@@ -110,7 +110,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String,
+   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String,
    *      java.lang.String) 
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
@@ -119,7 +119,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(java.lang.String,
+   * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String,
    *      java.lang.String) 
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
@@ -160,7 +160,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
    *      
    */
   @Override
@@ -210,7 +210,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
    *      
    */
   public void disable() throws ConfigurationException {
@@ -219,19 +219,19 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListener)
    *      
    */
-  public void addListener(ConfigurationChangeListenerIF listener) {
+  public void addListener(ConfigurationChangeListener listener) {
 
     getDelegate().addListener(listener);
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListenerIF)
+   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListener)
    *      
    */
-  public void removeListener(ConfigurationChangeListenerIF listener) {
+  public void removeListener(ConfigurationChangeListener listener) {
 
     getDelegate().removeListener(listener);
   }

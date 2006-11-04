@@ -1,15 +1,15 @@
 /* $Id$ */
 package net.sf.mmm.term.base;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This class represents a variable {@link net.sf.mmm.term.api.TermIF term}.
  * The variable simply contains a variable-name and
- * {@link net.sf.mmm.term.api.TermIF#evaluate(ContextIF) evaluates} to the
- * {@link net.sf.mmm.context.api.ContextIF#getValue(String) "environment value"}
+ * {@link net.sf.mmm.term.api.TermIF#evaluate(Context) evaluates} to the
+ * {@link net.sf.mmm.context.api.Context#getValue(String) "environment value"}
  * with that name.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -37,9 +37,9 @@ public class Variable extends AbstractVariable {
     /**
      * This method gets the name of the variable. Parameters are ignored.
      * 
-     * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(ContextIF)
+     * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(Context)
      */
-    public String getVariableName(ContextIF environment) {
+    public String getVariableName(Context environment) {
 
         return this.variableName;
     }
@@ -54,10 +54,10 @@ public class Variable extends AbstractVariable {
     }
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
      * 
      */
-    public void toXml(XmlWriterIF xmlWriter) throws XmlException {
+    public void toXml(XmlWriter xmlWriter) throws XmlException {
 
         xmlWriter.writeStartElement(XML_TAG_VARIABLE);
         xmlWriter.writeAttribute(XML_ATR_VARIABLE_NAME, this.variableName);

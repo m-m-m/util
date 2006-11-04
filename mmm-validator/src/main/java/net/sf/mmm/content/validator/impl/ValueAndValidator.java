@@ -1,10 +1,10 @@
 /* $Id$ */
 package net.sf.mmm.content.validator.impl;
 
-import net.sf.mmm.content.validator.api.ValidationResultIF;
+import net.sf.mmm.content.validator.api.ValidationResult;
 import net.sf.mmm.content.validator.base.AbstractCompositeValueValidator;
-import net.sf.mmm.content.validator.base.ValidationResult;
-import net.sf.mmm.nls.base.NlsMessage;
+import net.sf.mmm.content.validator.base.ValidationResultImpl;
+import net.sf.mmm.nls.base.NlsMessageImpl;
 
 /**
  * This is the implementation of a composite validator that declares a value as
@@ -26,17 +26,17 @@ public class ValueAndValidator extends AbstractCompositeValueValidator {
     }
 
     /**
-     * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResultIF[],
+     * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
      *      int, int)
      */
-    protected ValidationResultIF getResult(ValidationResultIF[] details, int detailCount,
+    protected ValidationResult getResult(ValidationResult[] details, int detailCount,
             int succeedCount) {
 
         if (succeedCount == getChildCount()) {
-            return ValidationResult.VALID_RESULT;
+            return ValidationResultImpl.VALID_RESULT;
         } else {
             // TODO: i18n
-            return new ValidationResult(new NlsMessage("\"{0}\" error(s):", detailCount), details,
+            return new ValidationResultImpl(new NlsMessageImpl("\"{0}\" error(s):", detailCount), details,
                     detailCount);
         }
     }

@@ -5,16 +5,16 @@ import java.io.File;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccessFactory;
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF}
+ * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessFactory}
  * interface for {@link java.net.URL URL} access.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -26,7 +26,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
    * {@link ConfigurationDocumentIF#NAME_INCLUDE_ACCESS access} name for this
    * implementation.
    * 
-   * @see ConfigurationAccessFactoryIF#CONTEXT_VARIABLE_PREFIX
+   * @see ConfigurationAccessFactory#CONTEXT_VARIABLE_PREFIX
    */
   public static final String CONTEXT_DEFAULT_NAME = "resource";
 
@@ -46,14 +46,14 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
 
   /**
    * @see net.sf.mmm.configuration.base.access.AbstractConfigurationAccessFactory#configure(java.lang.String,
-   *      net.sf.mmm.context.api.ContextIF,
-   *      net.sf.mmm.configuration.api.ConfigurationIF,
-   *      net.sf.mmm.configuration.api.access.ConfigurationAccessIF,
+   *      net.sf.mmm.context.api.Context,
+   *      net.sf.mmm.configuration.api.Configuration,
+   *      net.sf.mmm.configuration.api.access.ConfigurationAccess,
    *      java.lang.String) 
    */
   @Override
-  public AbstractConfigurationAccess[] configure(String prefix, ContextIF context,
-      ConfigurationIF include, ConfigurationAccessIF parent, String href)
+  public AbstractConfigurationAccess[] configure(String prefix, Context context,
+      Configuration include, ConfigurationAccess parent, String href)
       throws ConfigurationException {
 
     String fileRootPath = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_ROOT_PATH).getString(
@@ -83,7 +83,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#isSingleAccess()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#isSingleAccess()
    *      
    */
   public boolean isSingleAccess() {

@@ -6,10 +6,10 @@ import net.sf.mmm.framework.api.ComponentException;
 
 /**
  * A {@link ComponentNotAvailableException} is thrown if a
- * {@link net.sf.mmm.framework.api.ComponentProviderIF component} was
- * {@link net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(Class) requested}
+ * {@link net.sf.mmm.framework.api.ComponentProvider component} was
+ * {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class) requested}
  * that is NOT
- * {@link net.sf.mmm.framework.api.ComponentManagerIF#hasComponent(Class) available}.
+ * {@link net.sf.mmm.framework.api.ComponentManager#hasComponent(Class) available}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,10 +23,10 @@ public class ComponentNotAvailableException extends ComponentException {
    * 
    * @param specification
    *        is the
-   *        {@link net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(Class) requested}
-   *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+   *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class) requested}
+   *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        that is NOT
-   *        {@link net.sf.mmm.framework.api.ComponentManagerIF#hasComponent(Class) available}.
+   *        {@link net.sf.mmm.framework.api.ComponentManager#hasComponent(Class) available}.
    */
   public ComponentNotAvailableException(Class specification) {
 

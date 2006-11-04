@@ -10,15 +10,15 @@ import java.util.Vector;
 
 import net.sf.mmm.configuration.NlsResourceBundle;
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
-import net.sf.mmm.configuration.api.ConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeEvent;
-import net.sf.mmm.configuration.api.event.ConfigurationChangeListenerIF;
-import net.sf.mmm.configuration.base.access.ConfigurationDocumentCollectorIF;
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.context.api.MutableContextIF;
+import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
+import net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.context.api.MutableContext;
 
 /**
  * This is the abstract base implementation of the
@@ -27,10 +27,10 @@ import net.sf.mmm.context.api.MutableContextIF;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractConfigurationDocument implements ConfigurationDocumentIF,
-    ConfigurationDocumentCollectorIF {
+    ConfigurationDocumentCollector {
 
   /** the {@link #getContext() context} */
-  private final MutableContextIF context;
+  private final MutableContext context;
 
   /** the list of child documents */
   private final List<ConfigurationDocumentIF> childDocuments;
@@ -48,7 +48,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   private final AbstractConfigurationDocument parentDoc;
 
   /** this object gives r/w access to the configuration data */
-  private final ConfigurationAccessIF access;
+  private final ConfigurationAccess access;
 
   /** the root node */
   private AbstractConfiguration root;
@@ -62,8 +62,8 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @param configurationAccess
    * @param docContext
    */
-  public AbstractConfigurationDocument(ConfigurationAccessIF configurationAccess,
-      MutableContextIF docContext) {
+  public AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
+      MutableContext docContext) {
 
     this(configurationAccess, null, docContext);
   }
@@ -74,7 +74,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @param configurationAccess
    * @param parentConfiguration
    */
-  public AbstractConfigurationDocument(ConfigurationAccessIF configurationAccess,
+  public AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration) {
 
     this(configurationAccess, parentConfiguration, null);
@@ -89,8 +89,8 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @param parentConfiguration
    * @param docContext
    */
-  private AbstractConfigurationDocument(ConfigurationAccessIF configurationAccess,
-      AbstractConfiguration parentConfiguration, MutableContextIF docContext) {
+  private AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
+      AbstractConfiguration parentConfiguration, MutableContext docContext) {
 
     super();
     this.access = configurationAccess;
@@ -114,7 +114,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
     String accessPrefix = this.access.getContextPrefix();
     if (accessPrefix != null) {
-      String hrefKey = accessPrefix + ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_SUFFIX_PARENT;
+      String hrefKey = accessPrefix + ConfigurationAccessFactory.CONTEXT_VARIABLE_SUFFIX_PARENT;
       this.context.setObject(hrefKey, this.access);
     }
 
@@ -167,7 +167,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#getContext()
    *      
    */
-  public ContextIF getContext() {
+  public Context getContext() {
 
     if (this.root == null) {
       getConfiguration();
@@ -181,7 +181,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * 
    * @return the mutable context.
    */
-  protected MutableContextIF getMutableContext() {
+  protected MutableContext getMutableContext() {
 
     return this.context;
   }
@@ -212,20 +212,20 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /**
    * This method sets the {@link #isModified() modified-flag} to
    * <code>true</code> and
-   * {@link #configurationChanged(ConfigurationIF) sends} a
+   * {@link #configurationChanged(Configuration) sends} a
    * {@link ConfigurationChangeEvent change-event}. This method must be called
-   * by the {@link ConfigurationIF configurations} of this document on any
+   * by the {@link Configuration configurations} of this document on any
    * change.
    * 
    * @see #save()
    * 
    * @param configuration
-   *        is the configuration that has been modified ({@link ConfigurationIF#getValue() value}
+   *        is the configuration that has been modified ({@link Configuration#getValue() value}
    *        changed or
    *        {@link AbstractConfiguration#getChild(String, String) child} has
    *        been added or removed).
    */
-  protected void setModified(ConfigurationIF configuration) {
+  protected void setModified(Configuration configuration) {
 
     this.modifiedFlag = true;
     configurationChanged(configuration);
@@ -253,7 +253,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * 
    * @return the configuration data access.
    */
-  protected ConfigurationAccessIF getConfigurationAccess() {
+  protected ConfigurationAccess getConfigurationAccess() {
 
     return this.access;
   }
@@ -355,7 +355,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
       throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationDocumentCollectorIF#addDocument(net.sf.mmm.configuration.api.ConfigurationDocumentIF)
+   * @see net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector#addDocument(net.sf.mmm.configuration.api.ConfigurationDocumentIF)
    *      
    */
   public void addDocument(ConfigurationDocumentIF document) {
@@ -368,7 +368,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @param configuration
    * @param listener
    */
-  protected void addListener(ConfigurationIF configuration, ConfigurationChangeListenerIF listener) {
+  protected void addListener(Configuration configuration, ConfigurationChangeListener listener) {
 
     if (this.parentDoc == null) {
       this.listeners.add(new FilteredListener(configuration, listener));
@@ -382,8 +382,8 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @param configuration
    * @param listener
    */
-  protected void removeListener(ConfigurationIF configuration,
-      ConfigurationChangeListenerIF listener) {
+  protected void removeListener(Configuration configuration,
+      ConfigurationChangeListener listener) {
 
     if (this.parentDoc == null) {
       this.listeners.remove(new FilteredListener(configuration, listener));
@@ -399,7 +399,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @param configuration
    *        is the configuration that has changed.
    */
-  protected void configurationChanged(ConfigurationIF configuration) {
+  protected void configurationChanged(Configuration configuration) {
 
     if (this.parentDoc == null) {
       int length = this.listeners.size();
@@ -433,19 +433,19 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /**
    * This inner class represents a container for a {@link #configuration} and a
    * {@link #listener}. Additionally it is a
-   * {@link ConfigurationChangeListenerIF listener} itself that delegates all
+   * {@link ConfigurationChangeListener listener} itself that delegates all
    * events about configurations in the
-   * {@link ConfigurationIF#isDescendantOf(ConfigurationIF) subtree} of the
+   * {@link Configuration#isDescendantOf(Configuration) subtree} of the
    * {@link #configuration} to the {@link #listener}. All other events are
    * filtered (ignored).
    */
-  private static class FilteredListener implements ConfigurationChangeListenerIF {
+  private static class FilteredListener implements ConfigurationChangeListener {
 
     /** the configuration from where to start listening */
-    private final ConfigurationIF configuration;
+    private final Configuration configuration;
 
     /** the listener delegate */
-    private final ConfigurationChangeListenerIF listener;
+    private final ConfigurationChangeListener listener;
 
     /**
      * The constructor.
@@ -455,7 +455,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
      * @param changeListener
      *        is the actual listener that handles the events.
      */
-    public FilteredListener(ConfigurationIF conf, ConfigurationChangeListenerIF changeListener) {
+    public FilteredListener(Configuration conf, ConfigurationChangeListener changeListener) {
 
       super();
       this.configuration = conf;
@@ -487,12 +487,11 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     }
 
     /**
-     * @see net.sf.mmm.util.event.EventListenerIF#handleEvent(net.sf.mmm.util.event.EventIF)
-     *      
+     * @see net.sf.mmm.util.event.EventListener#handleEvent(net.sf.mmm.util.event.Event)
      */
     public void handleEvent(ConfigurationChangeEvent event) {
 
-      ConfigurationIF changedConfiguration = event.getConfiguration();
+      Configuration changedConfiguration = event.getConfiguration();
       if ((changedConfiguration == this.configuration)
           || changedConfiguration.isDescendantOf(this.configuration)) {
         this.listener.handleEvent(event);

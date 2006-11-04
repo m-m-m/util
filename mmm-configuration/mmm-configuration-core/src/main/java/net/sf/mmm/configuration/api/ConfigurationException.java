@@ -5,7 +5,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a
- * {@link net.sf.mmm.configuration.api.ConfigurationIF configuration} error
+ * {@link net.sf.mmm.configuration.api.Configuration configuration} error
  * occurs.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.configuration.base;
 
-import net.sf.mmm.configuration.api.ConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
 
 /**
  * This class represents a qualified name. It is a container for a local
@@ -11,11 +11,11 @@ import net.sf.mmm.configuration.api.ConfigurationIF;
  */
 public final class QName {
 
-  /** @see net.sf.mmm.configuration.api.ConfigurationIF#getName() */
+  /** @see net.sf.mmm.configuration.api.Configuration#getName() */
   public final String name;
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri() May be
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri() May be
    *      null to {@link #equals(Object) match} any namespace.
    */
   public final String namespaceUri;
@@ -71,7 +71,7 @@ public final class QName {
   public String toString() {
 
     if ((this.namespaceUri == null)
-        || (ConfigurationIF.NAMESPACE_URI_NONE.equals(this.namespaceUri))) {
+        || (Configuration.NAMESPACE_URI_NONE.equals(this.namespaceUri))) {
       return this.name;
     } else {
       int len = 1 + this.name.length() + this.namespaceUri.length();

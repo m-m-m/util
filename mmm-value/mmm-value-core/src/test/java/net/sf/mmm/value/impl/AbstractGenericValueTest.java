@@ -6,8 +6,8 @@ import java.util.Date;
 import org.junit.Test;
 
 import net.sf.mmm.util.NumericUtil;
-import net.sf.mmm.value.api.GenericValueIF;
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
+import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueInstanciationException;
 import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
@@ -36,18 +36,18 @@ public abstract class AbstractGenericValueTest extends TestCase {
 
   /**
    * This method converts the given <code>plainValue</code> to a
-   * {@link GenericValueIF}.
+   * {@link GenericValue}.
    * 
    * @param plainValue
    *        is the object to convert.
    * @return is the object as generic value.
    */
-  protected abstract GenericValueIF convert(Object plainValue);
+  protected abstract GenericValue convert(Object plainValue);
 
   @Test
   public void testEmptyValue() {
 
-    GenericValueIF value = convert(null);
+    GenericValue value = convert(null);
     assertTrue(value.isEmpty());
     boolean error = false;
     try {
@@ -89,9 +89,9 @@ public abstract class AbstractGenericValueTest extends TestCase {
   @Test
   public void testMutableValue() {
 
-    GenericValueIF value = convert(null);
-    if (value instanceof MutableGenericValueIF) {
-      MutableGenericValueIF mutableValue = (MutableGenericValueIF) value;
+    GenericValue value = convert(null);
+    if (value instanceof MutableGenericValue) {
+      MutableGenericValue mutableValue = (MutableGenericValue) value;
       String string = "value";
       if (mutableValue.isEditable()) {
         assertTrue(mutableValue.isEmpty());
@@ -128,13 +128,13 @@ public abstract class AbstractGenericValueTest extends TestCase {
   @Test
   public void testBoolean() {
 
-    GenericValueIF valueTrue = convert(Boolean.TRUE);
+    GenericValue valueTrue = convert(Boolean.TRUE);
     assertTrue(valueTrue.getBoolean());
     assertTrue(valueTrue.getBoolean(null).booleanValue());
     assertTrue(valueTrue.getValue(Boolean.class).booleanValue());
     assertEquals(Boolean.TRUE.toString(), valueTrue.getString());
 
-    GenericValueIF valueFalse = convert(Boolean.FALSE);
+    GenericValue valueFalse = convert(Boolean.FALSE);
     assertFalse(valueFalse.getBoolean());
     assertFalse(valueFalse.getBoolean(null).booleanValue());
     assertFalse(valueFalse.getValue(Boolean.class).booleanValue());
@@ -145,7 +145,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
   public void testString() {
 
     String string = "value";
-    GenericValueIF valueString = convert(string);
+    GenericValue valueString = convert(string);
     assertEquals(string, valueString.getString());
     assertEquals(string, valueString.getObject());
   }
@@ -153,14 +153,14 @@ public abstract class AbstractGenericValueTest extends TestCase {
   @Test
   public void testJavaClass() {
 
-    GenericValueIF valueString = convert(String.class);
+    GenericValue valueString = convert(String.class);
     assertSame(String.class, valueString.getJavaClass());
     assertSame(String.class, valueString.getValue(Class.class));
     String s = valueString.getJavaClassInstance(String.class);
     assertEquals(new String(), s);
   }
 
-  private void checkWrongType(GenericValueIF value, Class wrongType) {
+  private void checkWrongType(GenericValue value, Class wrongType) {
 
     try {
       value.getValue(wrongType);
@@ -175,7 +175,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
   public void testWrongValueType() {
 
     double d = 42.42;
-    GenericValueIF value = convert(Double.valueOf(d));
+    GenericValue value = convert(Double.valueOf(d));
     assertEquals(d, value.getDouble());
     assertEquals(Double.toString(d), value.getString());
     checkWrongType(value, Boolean.class);
@@ -201,7 +201,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
     checkNumber(convert(new Integer(424242)));
     checkNumber(convert(new Long(4242424242424242L)));
     checkNumber(convert(new Float(42.25)));
-    GenericValueIF doubleValue = convert(new Double(42.42));
+    GenericValue doubleValue = convert(new Double(42.42));
     checkNumber(doubleValue);
     // TODO: validate range is stupid, add getNumber(min, max[. default])
     // doubleValue.getNumber(<T extends Number>, minimum, maximum, boolean
@@ -212,7 +212,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
    * @param value
    *        must be a generic value containing a number.
    */
-  public void checkNumber(GenericValueIF value) {
+  public void checkNumber(GenericValue value) {
 
     // this will only work for Number of java.lang.*
     assertFalse(value.isEmpty());

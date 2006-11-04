@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Widget;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactory;
+import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
  * This class is used for synchron access on a SWT
@@ -17,169 +17,169 @@ import net.sf.mmm.ui.toolkit.impl.swt.UIFactory;
  */
 public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
 
-    /**
-     * operation to set the {@link TabFolder#setSelection(int) selection-index}
-     * of the tab-folder.
-     */
-    private static final String OPERATION_SET_SELECTION = "setSelection";
+  /**
+   * operation to set the {@link TabFolder#setSelection(int) selection-index}
+   * of the tab-folder.
+   */
+  private static final String OPERATION_SET_SELECTION = "setSelection";
 
-    /**
-     * operation to get the
-     * {@link TabFolder#getSelectionIndex() selection-index} of the tab-folder.
-     */
-    private static final String OPERATION_GET_SELECTION = "getSelectionIndex";
+  /**
+   * operation to get the
+   * {@link TabFolder#getSelectionIndex() selection-index} of the tab-folder.
+   */
+  private static final String OPERATION_GET_SELECTION = "getSelectionIndex";
 
-    /**
-     * operation to create a
-     * {@link TabItem#TabItem(org.eclipse.swt.widgets.TabFolder, int, int) tab-item}
-     * in the tab-folder.
-     */
-    private static final String OPERATION_CREATE_TAB_ITEM = "createTabItem";
+  /**
+   * operation to create a
+   * {@link TabItem#TabItem(org.eclipse.swt.widgets.TabFolder, int, int) tab-item}
+   * in the tab-folder.
+   */
+  private static final String OPERATION_CREATE_TAB_ITEM = "createTabItem";
 
-    /** the tab-folder */
-    private TabFolder tabFolder;
+  /** the tab-folder */
+  private TabFolder tabFolder;
 
-    /** the weights to set */
-    private int selectionIndex;
+  /** the weights to set */
+  private int selectionIndex;
 
-    /** a tab-item */
-    private TabItem tabItem;
+  /** a tab-item */
+  private TabItem tabItem;
 
-    /** the title for the tab-item */
-    private String tabItemText;
+  /** the title for the tab-item */
+  private String tabItemText;
 
-    /** the index where to insert the new tab-item or <code>-1</code> for end */
-    private int tabItemIndex;
+  /** the index where to insert the new tab-item or <code>-1</code> for end */
+  private int tabItemIndex;
 
-    /** the control of the tab-item */
-    private Control tabItemControl;
+  /** the control of the tab-item */
+  private Control tabItemControl;
 
-    /**
-     * The constructor.
-     * 
-     * @param uiFactory
-     *        is used to do the synchonization.
-     * @param swtStyle
-     *        is the {@link Widget#getStyle() style} of the tab-folder.
-     */
-    public SyncTabFolderAccess(UIFactory uiFactory, int swtStyle) {
+  /**
+   * The constructor.
+   * 
+   * @param uiFactory
+   *        is used to do the synchonization.
+   * @param swtStyle
+   *        is the {@link Widget#getStyle() style} of the tab-folder.
+   */
+  public SyncTabFolderAccess(UIFactorySwt uiFactory, int swtStyle) {
 
-        this(uiFactory, swtStyle, null);
+    this(uiFactory, swtStyle, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param uiFactory
+   *        is used to do the synchonization.
+   * @param swtStyle
+   *        is the {@link Widget#getStyle() style} of the tab-folder.
+   * @param swtSashForm
+   *        is the widget to access.
+   */
+  public SyncTabFolderAccess(UIFactorySwt uiFactory, int swtStyle, TabFolder swtSashForm) {
+
+    super(uiFactory, swtStyle);
+    this.tabFolder = swtSashForm;
+    this.selectionIndex = 0;
+    this.tabItem = null;
+    this.tabItemControl = null;
+    this.tabItemText = null;
+    this.tabItemIndex = -1;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess#getSwtObject()
+   * 
+   */
+  @Override
+  public TabFolder getSwtObject() {
+
+    return this.tabFolder;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(java.lang.String)
+   * 
+   */
+  @Override
+  protected void performSynchron(String operation) {
+
+    if (operation == OPERATION_SET_SELECTION) {
+      this.tabFolder.setSelection(this.selectionIndex);
+    } else if (operation == OPERATION_GET_SELECTION) {
+      this.selectionIndex = this.tabFolder.getSelectionIndex();
+    } else if (operation == OPERATION_CREATE_TAB_ITEM) {
+      if (this.tabItemIndex == -1) {
+        this.tabItem = new TabItem(this.tabFolder, SWT.NONE);
+      } else {
+        this.tabItem = new TabItem(this.tabFolder, SWT.NONE, this.tabItemIndex);
+      }
+      this.tabItem.setText(this.tabItemText);
+      this.tabItem.setControl(this.tabItemControl);
+    } else {
+      super.performSynchron(operation);
     }
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param uiFactory
-     *        is used to do the synchonization.
-     * @param swtStyle
-     *        is the {@link Widget#getStyle() style} of the tab-folder.
-     * @param swtSashForm
-     *        is the widget to access.
-     */
-    public SyncTabFolderAccess(UIFactory uiFactory, int swtStyle, TabFolder swtSashForm) {
+  /**
+   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
+   * 
+   */
+  @Override
+  protected void createSynchron() {
 
-        super(uiFactory, swtStyle);
-        this.tabFolder = swtSashForm;
-        this.selectionIndex = 0;
-        this.tabItem = null;
-        this.tabItemControl = null;
-        this.tabItemText = null;
-        this.tabItemIndex = -1;
-    }
+    this.tabFolder = new TabFolder(getParent(), getStyle());
+    super.createSynchron();
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess#getSwtObject()
-     * 
-     */
-    @Override
-    public TabFolder getSwtObject() {
+  /**
+   * This method {@link TabFolder#setSelection(int) selects} the tab with the
+   * given <code>selectionIndex</code>.
+   * 
+   * @param selection
+   *        is the index of the tab to select.
+   */
+  public void setSelectionIndex(int selection) {
 
-        return this.tabFolder;
-    }
+    assert (checkReady());
+    this.selectionIndex = selection;
+    invoke(OPERATION_SET_SELECTION);
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(java.lang.String)
-     * 
-     */
-    @Override
-    protected void performSynchron(String operation) {
+  /**
+   * This method gets the {@link TabFolder#getSelectionIndex() index} of the
+   * selected tab.
+   * 
+   * @return the selection index.
+   */
+  public int getSelectionIndex() {
 
-        if (operation == OPERATION_SET_SELECTION) {
-            this.tabFolder.setSelection(this.selectionIndex);
-        } else if (operation == OPERATION_GET_SELECTION) {
-            this.selectionIndex = this.tabFolder.getSelectionIndex();
-        } else if (operation == OPERATION_CREATE_TAB_ITEM) {
-            if (this.tabItemIndex == -1) {
-                this.tabItem = new TabItem(this.tabFolder, SWT.NONE);
-            } else {
-                this.tabItem = new TabItem(this.tabFolder, SWT.NONE, this.tabItemIndex);
-            }
-            this.tabItem.setText(this.tabItemText);
-            this.tabItem.setControl(this.tabItemControl);
-        } else {
-            super.performSynchron(operation);
-        }
-    }
+    assert (checkReady());
+    invoke(OPERATION_GET_SELECTION);
+    return this.selectionIndex;
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
-     * 
-     */
-    @Override
-    protected void createSynchron() {
+  /**
+   * This method creates a new tab-item with the given <code>title</code>.
+   * 
+   * @param control
+   *        is the control to display in the new tab.
+   * @param title
+   *        is the title for the new tab-item.
+   * @param index
+   *        is the index where to insert the new tab-item or <code>-1</code>
+   *        to add the new item to the end.
+   * @return the created tab-item.
+   */
+  public TabItem createTabItem(Control control, String title, int index) {
 
-        this.tabFolder = new TabFolder(getParent(), getStyle());
-        super.createSynchron();
-    }
-
-    /**
-     * This method {@link TabFolder#setSelection(int) selects} the tab with the
-     * given <code>selectionIndex</code>.
-     * 
-     * @param selection
-     *        is the index of the tab to select.
-     */
-    public void setSelectionIndex(int selection) {
-
-        assert (checkReady());
-        this.selectionIndex = selection;
-        invoke(OPERATION_SET_SELECTION);
-    }
-
-    /**
-     * This method gets the {@link TabFolder#getSelectionIndex() index} of the
-     * selected tab.
-     * 
-     * @return the selection index.
-     */
-    public int getSelectionIndex() {
-
-        assert (checkReady());
-        invoke(OPERATION_GET_SELECTION);
-        return this.selectionIndex;
-    }
-
-    /**
-     * This method creates a new tab-item with the given <code>title</code>.
-     * 
-     * @param control
-     *        is the control to display in the new tab.
-     * @param title
-     *        is the title for the new tab-item.
-     * @param index
-     *        is the index where to insert the new tab-item or <code>-1</code>
-     *        to add the new item to the end.
-     * @return the created tab-item.
-     */
-    public TabItem createTabItem(Control control, String title, int index) {
-
-        assert (checkReady());
-        this.tabItemText = title;
-        this.tabItemIndex = index;
-        this.tabItemControl = control;
-        invoke(OPERATION_CREATE_TAB_ITEM);
-        return this.tabItem;
-    }
+    assert (checkReady());
+    this.tabItemText = title;
+    this.tabItemIndex = index;
+    this.tabItemControl = control;
+    invoke(OPERATION_CREATE_TAB_ITEM);
+    return this.tabItem;
+  }
 
 }

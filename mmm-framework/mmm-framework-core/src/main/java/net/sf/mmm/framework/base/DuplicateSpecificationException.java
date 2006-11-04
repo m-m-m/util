@@ -6,10 +6,10 @@ import net.sf.mmm.framework.api.ContainerException;
 
 /**
  * A {@link DuplicateSpecificationException} is thrown if a
- * {@link net.sf.mmm.framework.api.ComponentProviderIF component} was
- * {@link net.sf.mmm.framework.api.MutableIocContainerIF#addComponentProvider(net.sf.mmm.framework.api.ComponentProviderIF) added}
+ * {@link net.sf.mmm.framework.api.ComponentProvider component} was
+ * {@link net.sf.mmm.framework.api.MutableIocContainer#addComponentProvider(net.sf.mmm.framework.api.ComponentProvider) added}
  * but another component with the same
- * {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+ * {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  * is already registered.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

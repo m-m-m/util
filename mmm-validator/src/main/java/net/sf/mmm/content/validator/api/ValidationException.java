@@ -16,7 +16,7 @@ public class ValidationException extends NlsException {
     private static final long serialVersionUID = 6180310118551885467L;
 
     /** the result of the validation */
-    private final ValidationResultIF result;
+    private final ValidationResult result;
 
     /**
      * The construtor.
@@ -25,9 +25,9 @@ public class ValidationException extends NlsException {
      * 
      * @param validationResult
      *        is the result of the failed validation. The result must NOT be
-     *        {@link ValidationResultIF#isValid() valid}.
+     *        {@link ValidationResult#isValid() valid}.
      */
-    public ValidationException(ValidationResultIF validationResult) {
+    public ValidationException(ValidationResult validationResult) {
 
         super(validationResult.getMessage());
         this.result = validationResult;
@@ -41,11 +41,11 @@ public class ValidationException extends NlsException {
      * 
      * @param validationResult
      *        is the result of the failed validation. The result must NOT be
-     *        {@link ValidationResultIF#isValid() valid}.
+     *        {@link ValidationResult#isValid() valid}.
      * @param nested
      *        is the throwable that caused this error.
      */
-    public ValidationException(ValidationResultIF validationResult, Throwable nested) {
+    public ValidationException(ValidationResult validationResult, Throwable nested) {
 
         super(nested, validationResult.getMessage());
         this.result = validationResult;
@@ -56,7 +56,7 @@ public class ValidationException extends NlsException {
      * 
      * @return the result of the validation.
      */
-    public ValidationResultIF getResult() {
+    public ValidationResult getResult() {
 
         return this.result;
     }

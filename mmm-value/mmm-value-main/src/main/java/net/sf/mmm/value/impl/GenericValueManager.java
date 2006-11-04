@@ -13,7 +13,7 @@ import net.sf.mmm.value.base.BasicValueManager;
 
 /**
  * This is a generic implementation of the
- * {@link net.sf.mmm.value.api.ValueManagerIF}interface.
+ * {@link net.sf.mmm.value.api.ValueManager}interface.
  * 
  * @param <V>
  *        is the managed value type.
@@ -70,7 +70,7 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#parse(java.lang.String)
+   * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
    * 
    */
   public V parse(String valueAsString) throws ValueParseException {

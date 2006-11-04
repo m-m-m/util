@@ -3,7 +3,7 @@ package net.sf.mmm.value.impl;
 
 import org.junit.Test;
 
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the {@link junit.framework.TestCase} for testing the class
@@ -27,7 +27,7 @@ public class ObjectValueTest extends AbstractGenericValueTest {
    * 
    */
   @Override
-  protected GenericValueIF convert(Object plainValue) {
+  protected GenericValue convert(Object plainValue) {
 
     return new ImmutableObjectValue(plainValue);
   }

@@ -3,12 +3,12 @@ package net.sf.mmm.configuration.base.path;
 
 import java.util.regex.Pattern;
 
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the interface for a comparator that determines if a given
- * {@link GenericValueIF value} is
- * {@link #accept(GenericValueIF, String, Pattern) acceptable} in comparison to
+ * {@link GenericValue value} is
+ * {@link #accept(GenericValue, String, Pattern) acceptable} in comparison to
  * a given {@link java.util.regex.Pattern pattern} or (if pattern is
  * <code>null</code>) {@link java.lang.String string}.
  * 
@@ -41,6 +41,6 @@ public interface ComparatorIF {
    * @return <code>true</code> if the given <code>value</code> is
    *         acceptable, <code>false</code> otherwise.
    */
-  boolean accept(GenericValueIF value, String string, Pattern pattern);
+  boolean accept(GenericValue value, String string, Pattern pattern);
 
 }

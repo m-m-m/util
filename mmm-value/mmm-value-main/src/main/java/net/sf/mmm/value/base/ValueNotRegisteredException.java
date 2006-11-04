@@ -6,8 +6,8 @@ import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the exception thrown if a value is requested by its
- * {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} but is NOT
- * {@link net.sf.mmm.value.api.ValueServiceIF#getManager(String) registered}.
+ * {@link net.sf.mmm.value.api.ValueManager#getName() name} but is NOT
+ * {@link net.sf.mmm.value.api.ValueService#getManager(String) registered}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,7 +20,7 @@ public class ValueNotRegisteredException extends ValueException {
    * The constructor.
    * 
    * @param valueName
-   *        is the {@link net.sf.mmm.value.api.ValueManagerIF#getName() name}
+   *        is the {@link net.sf.mmm.value.api.ValueManager#getName() name}
    *        of the value that was requested but is NOT registered.
    */
   public ValueNotRegisteredException(String valueName) {
@@ -33,7 +33,7 @@ public class ValueNotRegisteredException extends ValueException {
    * 
    * @param valueType
    *        is the
-   *        {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of
+   *        {@link net.sf.mmm.value.api.ValueManager#getValueType() type} of
    *        the value that was requested but is NOT registered.
    */
   public ValueNotRegisteredException(Class valueType) {
@@ -43,8 +43,8 @@ public class ValueNotRegisteredException extends ValueException {
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} or
-   * {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of the
+   * {@link net.sf.mmm.value.api.ValueManager#getName() name} or
+   * {@link net.sf.mmm.value.api.ValueManager#getValueType() type} of the
    * value that was requested but NOT registered.
    * 
    * @return the value name or {@link Class#getName() type}.

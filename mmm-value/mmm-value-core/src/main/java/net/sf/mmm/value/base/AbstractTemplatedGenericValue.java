@@ -1,13 +1,13 @@
 /* $Id$ */
 package net.sf.mmm.value.base;
 
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.WrongValueTypeException;
 
 /**
- * This is the abstract base implementation of the {@link MutableGenericValueIF}
+ * This is the abstract base implementation of the {@link MutableGenericValue}
  * interrface using a templated {@link #getPlainValue() value}.
  * 
  * @param <V>
@@ -43,7 +43,7 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
   protected abstract void setPlainValue(V newValue);
 
   /**
-   * @see net.sf.mmm.value.api.GenericValueIF#isEmpty()
+   * @see net.sf.mmm.value.api.GenericValue#isEmpty()
    */
   public boolean isEmpty() {
 
@@ -51,7 +51,7 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
   }
 
   /**
-   * @see net.sf.mmm.value.api.GenericValueIF#getValue(java.lang.Class)
+   * @see net.sf.mmm.value.api.GenericValue#getValue(java.lang.Class)
    * 
    */
   public <T> T getValue(Class<T> type) {
@@ -64,7 +64,7 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
   }
 
   /**
-   * @see net.sf.mmm.value.api.GenericValueIF#getValue(java.lang.Class,
+   * @see net.sf.mmm.value.api.GenericValue#getValue(java.lang.Class,
    *      java.lang.Object)
    */
   public <T> T getValue(Class<T> type, T defaultValue) {
@@ -83,7 +83,7 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
   }
 
   /**
-   * @see net.sf.mmm.value.api.MutableGenericValueIF#setObject(java.lang.Object)
+   * @see net.sf.mmm.value.api.MutableGenericValue#setObject(java.lang.Object)
    * 
    */
   public void setObject(Object newValue) throws ValueNotEditableException, WrongValueTypeException {

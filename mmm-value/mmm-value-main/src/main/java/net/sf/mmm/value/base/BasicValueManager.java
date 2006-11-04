@@ -3,7 +3,7 @@ package net.sf.mmm.value.base;
 
 /**
  * This is the enhanced base implementation of the
- * {@link net.sf.mmm.value.api.ValueManagerIF} interface.
+ * {@link net.sf.mmm.value.api.ValueManager} interface.
  * 
  * @param <V>
  *        is the templated type of the managed value type.
@@ -47,7 +47,7 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#getValueType()
+   * @see net.sf.mmm.value.api.ValueManager#getValueType()
    * 
    */
   public Class<V> getValueType() {
@@ -56,7 +56,7 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManagerIF#getName()
+   * @see net.sf.mmm.value.api.ValueManager#getName()
    * 
    */
   public String getName() {

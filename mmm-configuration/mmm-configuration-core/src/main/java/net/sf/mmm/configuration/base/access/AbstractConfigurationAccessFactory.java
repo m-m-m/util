@@ -3,19 +3,19 @@ package net.sf.mmm.configuration.base.access;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the abstract base implementation of the
- * {@link ConfigurationAccessFactoryIF} interface.
+ * {@link ConfigurationAccessFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfigurationAccessFactory implements ConfigurationAccessFactoryIF {
+public abstract class AbstractConfigurationAccessFactory implements ConfigurationAccessFactory {
 
   /** the file accessors */
   private AbstractConfigurationAccess[] accessors;
@@ -30,17 +30,17 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#configure(java.lang.String,
-   *      net.sf.mmm.context.api.ContextIF,
-   *      net.sf.mmm.configuration.api.ConfigurationIF) 
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#configure(java.lang.String,
+   *      net.sf.mmm.context.api.Context,
+   *      net.sf.mmm.configuration.api.Configuration) 
    */
-  public final void configure(String prefix, ContextIF context, ConfigurationIF include)
+  public final void configure(String prefix, Context context, Configuration include)
       throws ConfigurationException, ValueException {
 
     String href = include.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_HREF).getValue()
         .getString();
     String parentKey = prefix + CONTEXT_VARIABLE_SUFFIX_PARENT;
-    ConfigurationAccessIF parentAccess = (ConfigurationAccessIF) context.getValue(parentKey)
+    ConfigurationAccess parentAccess = (ConfigurationAccess) context.getValue(parentKey)
         .getObject(null);
     // TODO: only store root url access specific and relative href
     // globally???
@@ -60,12 +60,12 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
   }
 
   /**
-   * @see #configure(java.lang.String, net.sf.mmm.context.api.ContextIF,
-   *      net.sf.mmm.configuration.api.ConfigurationIF)
+   * @see #configure(java.lang.String, net.sf.mmm.context.api.Context,
+   *      net.sf.mmm.configuration.api.Configuration)
    * @see #getAccessors()
    * 
    * @param prefix
-   *        is the prefix for the {@link ContextIF#getValue(String) "variables"}.
+   *        is the prefix for the {@link Context#getValue(String) "variables"}.
    * @param context
    *        is the context (potentially) containing the required configuration.
    * @param include
@@ -84,15 +84,15 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
    * @return the {@link #getAccessors() accessors}.
    * @throws ConfigurationException
    */
-  public abstract AbstractConfigurationAccess[] configure(String prefix, ContextIF context,
-      ConfigurationIF include, ConfigurationAccessIF parent, String href)
+  public abstract AbstractConfigurationAccess[] configure(String prefix, Context context,
+      Configuration include, ConfigurationAccess parent, String href)
       throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF#getAccessors()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#getAccessors()
    *      
    */
-  public final ConfigurationAccessIF[] getAccessors() {
+  public final ConfigurationAccess[] getAccessors() {
 
     return this.accessors;
   }

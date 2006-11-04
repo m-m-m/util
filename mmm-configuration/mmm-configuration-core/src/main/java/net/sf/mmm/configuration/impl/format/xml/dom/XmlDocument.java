@@ -9,10 +9,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessIF;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
-import net.sf.mmm.context.api.MutableContextIF;
+import net.sf.mmm.context.api.MutableContext;
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
 
@@ -34,7 +34,7 @@ public class XmlDocument extends AbstractConfigurationDocument {
    * @param configurationAccess
    * @param env
    */
-  public XmlDocument(ConfigurationAccessIF configurationAccess, MutableContextIF env) {
+  public XmlDocument(ConfigurationAccess configurationAccess, MutableContext env) {
 
     super(configurationAccess, env);
   }
@@ -45,7 +45,7 @@ public class XmlDocument extends AbstractConfigurationDocument {
    * @param configurationAccess
    * @param parentConfiguration
    */
-  public XmlDocument(ConfigurationAccessIF configurationAccess,
+  public XmlDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration) {
 
     super(configurationAccess, parentConfiguration);

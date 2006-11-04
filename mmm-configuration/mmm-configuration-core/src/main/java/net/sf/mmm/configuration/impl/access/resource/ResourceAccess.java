@@ -11,14 +11,14 @@ import java.io.OutputStream;
 import java.net.URL;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessFactoryIF;
+import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
 import net.sf.mmm.configuration.base.ConfigurationReadException;
 import net.sf.mmm.configuration.base.ConfigurationWriteException;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessIF} interface
+ * {@link net.sf.mmm.configuration.api.access.ConfigurationAccess} interface
  * using {@link java.io.File} or {@link ClassLoader#getResource(String)} to read
  * and write data.
  * 
@@ -69,12 +69,12 @@ public class ResourceAccess extends AbstractConfigurationAccess {
     if ((this.classpathResource == null) && (!this.file.isFile())) {
       throw new ConfigurationReadException(href);
     }
-    setContextPrefix(ConfigurationAccessFactoryIF.CONTEXT_VARIABLE_PREFIX
+    setContextPrefix(ConfigurationAccessFactory.CONTEXT_VARIABLE_PREFIX
         + ResourceAccessFactory.CONTEXT_DEFAULT_NAME);
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getUniqueUri()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getUniqueUri()
    *      
    */
   public String getUniqueUri() {
@@ -93,7 +93,7 @@ public class ResourceAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getName()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getName()
    *      
    */
   public String getName() {
@@ -102,7 +102,7 @@ public class ResourceAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getReadAccess()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getReadAccess()
    *      
    */
   public InputStream getReadAccess() throws ConfigurationException {
@@ -121,7 +121,7 @@ public class ResourceAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#getWriteAccess()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getWriteAccess()
    *      
    */
   public OutputStream getWriteAccess() throws ConfigurationException {
@@ -137,7 +137,7 @@ public class ResourceAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessIF#isReadOnly()
+   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#isReadOnly()
    *      
    */
   public boolean isReadOnly() {

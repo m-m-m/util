@@ -1,20 +1,20 @@
 /* $Id$ */
 package net.sf.mmm.framework.base.provider;
 
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.ComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.base.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.base.SimpleComponentInstanceContainer;
 
 /**
  * This is an abstract implementation of the
- * {@link net.sf.mmm.framework.api.ComponentProviderIF} interface for custom
+ * {@link net.sf.mmm.framework.api.ComponentProvider} interface for custom
  * providers.
  * 
  * @param <S>
  *        is the
- *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+ *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the provided component.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -31,35 +31,35 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
   }
 
   /**
-   * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptorIF)
+   * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptor)
    * 
    */
-  public AbstractPerRequestComponentProvider(ComponentDescriptorIF<S> componentDescriptor) {
+  public AbstractPerRequestComponentProvider(ComponentDescriptor<S> componentDescriptor) {
 
     super(componentDescriptor);
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProviderIF#request(java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentDescriptorIF, java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String,
+   *      net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String,
+   *      net.sf.mmm.framework.api.ComponentManager)
    */
-  public ComponentInstanceContainerIF<S> request(String instanceId,
-      ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId,
-      ComponentManagerIF componentManager) throws ComponentException {
+  public ComponentInstanceContainer<S> request(String instanceId,
+      ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
 
     S instance;
-    if (ComponentManagerIF.DEFAULT_INSTANCE_ID.equals(instanceId)) {
+    if (ComponentManager.DEFAULT_INSTANCE_ID.equals(instanceId)) {
       instance = requestDefault(sourceDescriptor, sourceInstanceId, componentManager);
     } else {
       instance = requestById(instanceId, sourceDescriptor, sourceInstanceId, componentManager);
     }
-    return new ComponentInstanceContainer<S>(instance);
+    return new SimpleComponentInstanceContainer<S>(instance);
   }
 
   /**
    * This method requests the
-   * {@link ComponentManagerIF#DEFAULT_INSTANCE_ID default} instance of the
+   * {@link ComponentManager#DEFAULT_INSTANCE_ID default} instance of the
    * component.
    * 
    * @param sourceDescriptor
@@ -68,13 +68,13 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
    * @return a new instance of the component.
    * @throws ComponentException
    */
-  protected abstract S requestDefault(ComponentDescriptorIF<?> sourceDescriptor,
-      String sourceInstanceId, ComponentManagerIF componentManager) throws ComponentException;
+  protected abstract S requestDefault(ComponentDescriptor<?> sourceDescriptor,
+      String sourceInstanceId, ComponentManager componentManager) throws ComponentException;
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProviderIF#request(java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentDescriptorIF, java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String,
+   *      net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String,
+   *      net.sf.mmm.framework.api.ComponentManager)
    * 
    * @param instanceId
    * @param sourceDescriptor
@@ -83,18 +83,18 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
    * @return the requested descriptor.
    * @throws ComponentException
    */
-  protected S requestById(String instanceId, ComponentDescriptorIF<?> sourceDescriptor,
-      String sourceInstanceId, ComponentManagerIF componentManager) throws ComponentException {
+  protected S requestById(String instanceId, ComponentDescriptor<?> sourceDescriptor,
+      String sourceInstanceId, ComponentManager componentManager) throws ComponentException {
 
     throw new InstanceIdNotAvailableException(instanceId, getDescriptor());
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProviderIF#release(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-   *      net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.api.ComponentProvider#release(net.sf.mmm.framework.api.ComponentInstanceContainer,
+   *      net.sf.mmm.framework.api.ComponentManager)
    */
-  public boolean release(ComponentInstanceContainerIF<S> instanceContainer,
-      ComponentManagerIF componentManager) {
+  public boolean release(ComponentInstanceContainer<S> instanceContainer,
+      ComponentManager componentManager) {
 
     dispose(instanceContainer, componentManager);
     return true;
@@ -104,11 +104,11 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
    * ATTENTION: this implementation does nothing. Please override if your
    * component has to be shut-down.
    * 
-   * @see net.sf.mmm.framework.api.ComponentProviderIF#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-   *      net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.api.ComponentProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer,
+   *      net.sf.mmm.framework.api.ComponentManager)
    */
-  public void dispose(ComponentInstanceContainerIF<S> instanceContainer,
-      ComponentManagerIF componentManager) {
+  public void dispose(ComponentInstanceContainer<S> instanceContainer,
+      ComponentManager componentManager) {
 
   }
 

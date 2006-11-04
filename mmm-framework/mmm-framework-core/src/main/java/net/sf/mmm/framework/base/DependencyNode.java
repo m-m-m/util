@@ -1,11 +1,11 @@
 /* $Id$ */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
-import net.sf.mmm.framework.api.ComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.ComponentProviderIF;
-import net.sf.mmm.framework.api.IocContainerIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
+import net.sf.mmm.framework.api.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.ComponentProvider;
+import net.sf.mmm.framework.api.IocContainer;
 
 /**
  * This class represents a node in the dependency tree of the
@@ -13,7 +13,7 @@ import net.sf.mmm.framework.api.IocContainerIF;
  * 
  * @param <S>
  *        is the
- *        {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() specification}
+ *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the {@link #getInstanceContainer() component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -24,16 +24,16 @@ public class DependencyNode<S> {
   private final AbstractIocContainer container;
 
   /** @see #getProvider() */
-  private ComponentProviderIF<S> provider;
+  private ComponentProvider<S> provider;
 
   /** @see #getInstanceId() */
   private String instanceId;
 
   /** @see #getComponentManager() */
-  private ComponentManager dependencyManager;
+  private ComponentManagerImpl dependencyManager;
 
   /** @see #getInstanceContainer() */
-  private ComponentInstanceContainerIF<S> instanceContainer;
+  private ComponentInstanceContainer<S> instanceContainer;
 
   /** @see #isDisposed() */
   private boolean disposed;
@@ -54,7 +54,7 @@ public class DependencyNode<S> {
    * The constructor.
    * 
    * @param iocContainer
-   *        is the {@link IocContainerIF IoC-container} owning this node.
+   *        is the {@link IocContainer IoC-container} owning this node.
    */
   public DependencyNode(AbstractIocContainer iocContainer) {
 
@@ -85,7 +85,7 @@ public class DependencyNode<S> {
    * 
    * @return the provider.
    */
-  public ComponentProviderIF<S> getProvider() {
+  public ComponentProvider<S> getProvider() {
 
     return this.provider;
   }
@@ -96,18 +96,18 @@ public class DependencyNode<S> {
    * @param newProvider
    *        is the provider to set.
    */
-  public void setProvider(ComponentProviderIF<S> newProvider) {
+  public void setProvider(ComponentProvider<S> newProvider) {
 
     this.provider = newProvider;
   }
 
   /**
    * This method gets the
-   * {@link ComponentDescriptorIF#getSpecification() specification} of the
+   * {@link ComponentDescriptor#getSpecification() specification} of the
    * component. This is a shortcut for
    * 
    * <pre>
-   * {@link #getProvider()}.{@link ComponentProviderIF#getDescriptor() getDescriptor()}.{@link ComponentDescriptorIF#getSpecification() getSpecification()}
+   * {@link #getProvider()}.{@link ComponentProvider#getDescriptor() getDescriptor()}.{@link ComponentDescriptor#getSpecification() getSpecification()}
    * </pre>
    * 
    * @return the specifciation of the component.
@@ -140,7 +140,7 @@ public class DependencyNode<S> {
 
   /**
    * This method gets the
-   * {@link ComponentInstanceContainerIF#getInstance() component instance}.
+   * {@link ComponentInstanceContainer#getInstance() component instance}.
    * 
    * @return the component instance.
    */
@@ -154,19 +154,19 @@ public class DependencyNode<S> {
    * 
    * @param componentInstanceContainer
    *        is the container with the component
-   *        {@link net.sf.mmm.framework.api.ComponentInstanceContainerIF#getInstance() instance}.
+   *        {@link net.sf.mmm.framework.api.ComponentInstanceContainer#getInstance() instance}.
    */
-  public void setInstanceContainer(ComponentInstanceContainerIF<S> componentInstanceContainer) {
+  public void setInstanceContainer(ComponentInstanceContainer<S> componentInstanceContainer) {
 
     this.instanceContainer = componentInstanceContainer;
   }
 
   /**
-   * This method gets the {@link ComponentManagerIF component-manager}.
+   * This method gets the {@link ComponentManager component-manager}.
    * 
    * @return the compoonent-manager.
    */
-  public ComponentManagerIF getComponentManager() {
+  public ComponentManager getComponentManager() {
 
     return this.dependencyManager;
   }
@@ -176,7 +176,7 @@ public class DependencyNode<S> {
    * for.<br>
    * 
    * @return the source or <code>null</code> if this is the dependency node
-   *         for the top-level {@link IocContainerIF IOC-container} itself.
+   *         for the top-level {@link IocContainer IOC-container} itself.
    */
   public DependencyNode<?> getSource() {
 
@@ -188,12 +188,12 @@ public class DependencyNode<S> {
    * 
    * @param sourceNode
    *        is the {@link #getSource() source} or <code>null</code> if this is
-   *        the top-level {@link IocContainerIF container}.
+   *        the top-level {@link IocContainer container}.
    */
   public void setSource(DependencyNode<?> sourceNode) {
 
     this.source = sourceNode;
-    this.dependencyManager = new ComponentManager(this.container, this);
+    this.dependencyManager = new ComponentManagerImpl(this.container, this);
   }
 
   /**
@@ -262,7 +262,7 @@ public class DependencyNode<S> {
   /**
    * This method finds the dependency-node in the sibling list where the
    * {@link #getInstanceContainer() instance-container} has the same
-   * {@link ComponentInstanceContainerIF#getInstance() instance} as the given
+   * {@link ComponentInstanceContainer#getInstance() instance} as the given
    * <code>componentInstance</code>.
    * 
    * @param componentInstance
@@ -316,7 +316,7 @@ public class DependencyNode<S> {
    * 
    * @return the instance-container.
    */
-  public ComponentInstanceContainerIF<S> getInstanceContainer() {
+  public ComponentInstanceContainer<S> getInstanceContainer() {
 
     return this.instanceContainer;
   }

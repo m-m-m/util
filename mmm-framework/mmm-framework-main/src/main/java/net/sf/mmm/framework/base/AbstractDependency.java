@@ -1,20 +1,20 @@
 /* $Id$ */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.DependencyIF;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.Dependency;
 
 /**
  * This is the interface for a
- * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getDependencies() dependency}
- * of a {@link net.sf.mmm.framework.api.ExtendedComponentDescriptorIF component}.<br>
+ * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getDependencies() dependency}
+ * of a {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor component}.<br>
  * An instance of the {@link #getSpecification() depdency-specification} is
  * injected automatically into to the
- * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getImplementation() component}
- * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getDependencies() declaring}
+ * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getImplementation() component}
+ * {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getDependencies() declaring}
  * this dependency. According to the {@link #getInjectionType() injection-type}
  * this happens via the
- * {@lnik net.sf.mmm.framework.api.ExtendedComponentDescriptorIF#getConstructor() constructor},
+ * {@lnik net.sf.mmm.framework.api.ExtendedComponentDescriptor#getConstructor() constructor},
  * a {@link #getInjectionMethod() setter} or a
  * {@link #getInjectionField() field}.<br>
  * 
@@ -23,7 +23,7 @@ import net.sf.mmm.framework.api.DependencyIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractDependency<S> implements DependencyIF<S> {
+public abstract class AbstractDependency<S> implements Dependency<S> {
 
     /** @see #getSpecification() */
     private final Class<S> spec;
@@ -39,7 +39,7 @@ public abstract class AbstractDependency<S> implements DependencyIF<S> {
      *        dependency.
      * @param instanceId
      *        is the
-     *        {@link ComponentInstanceContainer#getInstanceId() instance-ID} of
+     *        {@link SimpleComponentInstanceContainer#getInstanceId() instance-ID} of
      *        the dependency.
      */
     public AbstractDependency(Class<S> specification, String instanceId) {
@@ -47,7 +47,7 @@ public abstract class AbstractDependency<S> implements DependencyIF<S> {
         super();
         this.spec = specification;
         if ((instanceId == null) || (instanceId.length() == 0)) {
-            this.componentId = ComponentManagerIF.DEFAULT_INSTANCE_ID;
+            this.componentId = ComponentManager.DEFAULT_INSTANCE_ID;
         } else {
             this.componentId = instanceId;
         }
@@ -55,7 +55,7 @@ public abstract class AbstractDependency<S> implements DependencyIF<S> {
 
     /**
      * This method gets the
-     * {@link net.sf.mmm.framework.api.ComponentDescriptorIF#getSpecification() sepcification}
+     * {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() sepcification}
      * of the dependency to inject.
      * 
      * @return the specification.
@@ -67,10 +67,10 @@ public abstract class AbstractDependency<S> implements DependencyIF<S> {
 
     /**
      * This method gets the
-     * {@link ComponentInstanceContainer#getInstanceId() instance-ID} of the
+     * {@link SimpleComponentInstanceContainer#getInstanceId() instance-ID} of the
      * dependency.
      * 
-     * @see net.sf.mmm.framework.api.ComponentManagerIF#requestComponent(Class,
+     * @see net.sf.mmm.framework.api.ComponentManager#requestComponent(Class,
      *      String)
      * 
      * @return the instance-ID of the dependency.

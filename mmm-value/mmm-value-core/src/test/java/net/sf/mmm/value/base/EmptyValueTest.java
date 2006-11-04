@@ -3,8 +3,8 @@ package net.sf.mmm.value.base;
 
 import org.junit.Test;
 
-import net.sf.mmm.value.api.GenericValueIF;
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
+import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
 
@@ -30,7 +30,7 @@ public class EmptyValueTest extends TestCase {
   @Test
   public void testEmptyValue() {
 
-    MutableGenericValueIF value = EmptyValue.getInstance();
+    MutableGenericValue value = EmptyValue.getInstance();
     assertNotNull(value);
     assertTrue(value.isEmpty());
     try {

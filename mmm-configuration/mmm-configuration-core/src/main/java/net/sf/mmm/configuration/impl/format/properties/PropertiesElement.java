@@ -11,7 +11,7 @@ import net.sf.mmm.configuration.base.EmptyDummyConfiguration;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface to
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to
  * adapt an single
  * {@link java.util.Properties#getProperty(java.lang.String) property}.
  * 
@@ -122,7 +122,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName() 
    */
   public String getName() {
 
@@ -130,7 +130,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
    *      
    */
   public String getNamespaceUri() {

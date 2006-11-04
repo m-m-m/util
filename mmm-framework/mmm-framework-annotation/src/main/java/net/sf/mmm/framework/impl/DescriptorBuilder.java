@@ -13,19 +13,19 @@ import javax.annotation.Resource;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.framework.NlsResourceBundle;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.DependencyIF;
-import net.sf.mmm.framework.api.ExtendedComponentDescriptorIF;
+import net.sf.mmm.framework.api.Dependency;
+import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
 import net.sf.mmm.framework.api.LifecycleMethod;
 import net.sf.mmm.framework.base.ConstructorDependency;
 import net.sf.mmm.framework.base.AbstractDependency;
-import net.sf.mmm.framework.base.ExtendedComponentDescriptor;
+import net.sf.mmm.framework.base.ExtendedComponentDescriptorImpl;
 import net.sf.mmm.framework.base.SetterDependency;
 import net.sf.mmm.util.reflect.AnnotationUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This class is used to {@link #createDescriptor(String, String) create}
- * {@link ExtendedComponentDescriptorIF}s.
+ * {@link ExtendedComponentDescriptor}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -67,19 +67,19 @@ public class DescriptorBuilder {
 
     /**
      * This method finds the
-     * {@link ExtendedComponentDescriptorIF#getConstructor() constructor} used
+     * {@link ExtendedComponentDescriptor#getConstructor() constructor} used
      * to instantiate the
-     * {@link ExtendedComponentDescriptorIF#getImplementation() component implementation}.
+     * {@link ExtendedComponentDescriptor#getImplementation() component implementation}.
      * If there is more than one constructor, the one with the fewest number of
      * {@link Constructor#getParameterTypes() arguments} is choosen. If this is
      * NOT unique, the result is unspecified.
      * 
      * @param <I>
      *        is the templated type of the
-     *        {@link ExtendedComponentDescriptorIF#getImplementation() component implementation}.
+     *        {@link ExtendedComponentDescriptor#getImplementation() component implementation}.
      * @param implementation
      *        is the
-     *        {@link ExtendedComponentDescriptorIF#getImplementation() component implementation}.
+     *        {@link ExtendedComponentDescriptor#getImplementation() component implementation}.
      * @return the requested constructor.
      * @throws ComponentException
      *         if the given <code>implementation</code> is illegal (e.g. has
@@ -110,24 +110,24 @@ public class DescriptorBuilder {
 
     /**
      * This method determines the
-     * {@link ExtendedComponentDescriptorIF#getInstantiationPolicy() instantiation-policy}
+     * {@link ExtendedComponentDescriptor#getInstantiationPolicy() instantiation-policy}
      * of the component.
      * 
      * @param implementation
      *        is the
-     *        {@link ExtendedComponentDescriptorIF#getImplementation() component implementation}.
+     *        {@link ExtendedComponentDescriptor#getImplementation() component implementation}.
      * @return the
-     *         {@link ExtendedComponentDescriptorIF#getInstantiationPolicy() instantiation-policy}
+     *         {@link ExtendedComponentDescriptor#getInstantiationPolicy() instantiation-policy}
      *         to be used for the given <code>implementation</code>.
      */
     public String getInstantiationPolicy(Class<?> implementation) {
 
-        String policy = ExtendedComponentDescriptorIF.INSTANTIATION_POLICY_SINGLETON;
+        String policy = ExtendedComponentDescriptor.INSTANTIATION_POLICY_SINGLETON;
         Resource classAnnotation = AnnotationUtil
                 .getClassAnnotation(implementation, Resource.class);
         if (classAnnotation != null) {
             if (!classAnnotation.shareable()) {
-                policy = ExtendedComponentDescriptorIF.INSTANTIATION_POLICY_PER_REQUEST;
+                policy = ExtendedComponentDescriptor.INSTANTIATION_POLICY_PER_REQUEST;
             }
         }
         return policy;
@@ -144,7 +144,7 @@ public class DescriptorBuilder {
      *        is the list where to add the dependencies.
      */
     public void addConstructorDependencies(Constructor<?> constructor,
-            List<DependencyIF> dependencies) {
+            List<Dependency> dependencies) {
 
         Class<?>[] constructorArgs = constructor.getParameterTypes();
         if (constructorArgs.length > 0) {
@@ -171,30 +171,30 @@ public class DescriptorBuilder {
 
     /**
      * This method creates the descriptor for the given
-     * {@link ExtendedComponentDescriptorIF#getSpecification() specification}
+     * {@link ExtendedComponentDescriptor#getSpecification() specification}
      * and
-     * {@link ExtendedComponentDescriptorIF#getImplementation() implementation}.
+     * {@link ExtendedComponentDescriptor#getImplementation() implementation}.
      * 
      * @param <S>
      *        is the component
-     *        {@link ExtendedComponentDescriptorIF#getSpecification() specification}
+     *        {@link ExtendedComponentDescriptor#getSpecification() specification}
      * @param <I>
      *        is the component
-     *        {@link ExtendedComponentDescriptorIF#getImplementation() implementation}
+     *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
      * @param specification
      *        is the component
-     *        {@link ExtendedComponentDescriptorIF#getSpecification() specification}
+     *        {@link ExtendedComponentDescriptor#getSpecification() specification}
      * @param implementation
      *        is the component
-     *        {@link ExtendedComponentDescriptorIF#getImplementation() implementation}
+     *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
      * @return the according descriptor.
      */
-    public <S, I extends S> ExtendedComponentDescriptorIF<S, I> createDescriptor(
+    public <S, I extends S> ExtendedComponentDescriptor<S, I> createDescriptor(
             Class<S> specification, Class<I> implementation) {
 
         String policy = getInstantiationPolicy(implementation);
 
-        List<DependencyIF> dependencies = new ArrayList<DependencyIF>();
+        List<Dependency> dependencies = new ArrayList<Dependency>();
         Constructor<I> constructor = findConstructor(implementation);
         addConstructorDependencies(constructor, dependencies);
 
@@ -249,9 +249,9 @@ public class DescriptorBuilder {
         }
         LifecycleMethod[] lifecycleMethodsArray = new LifecycleMethod[lifecycleMethods.size()];
         lifecycleMethodsArray = lifecycleMethods.toArray(lifecycleMethodsArray);
-        DependencyIF[] dependenciesArray = new DependencyIF[dependencies.size()];
+        Dependency[] dependenciesArray = new Dependency[dependencies.size()];
         dependenciesArray = dependencies.toArray(dependenciesArray);
-        ExtendedComponentDescriptorIF<S, I> descriptor = new ExtendedComponentDescriptor<S, I>(
+        ExtendedComponentDescriptor<S, I> descriptor = new ExtendedComponentDescriptorImpl<S, I>(
                 specification, constructor, policy, dependenciesArray, lifecycleMethodsArray);
         return descriptor;
     }
@@ -260,13 +260,13 @@ public class DescriptorBuilder {
      * 
      * @param specificationName
      *        is the {@link Class#getName() name} of the component
-     *        {@link ExtendedComponentDescriptorIF#getSpecification() specification}
+     *        {@link ExtendedComponentDescriptor#getSpecification() specification}
      * @param implementationName
      *        is the {@link Class#getName() name} of the component
-     *        {@link ExtendedComponentDescriptorIF#getImplementation() implementation}
+     *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
      * @return the according descriptor.
      */
-    public ExtendedComponentDescriptorIF createDescriptor(String specificationName,
+    public ExtendedComponentDescriptor createDescriptor(String specificationName,
             String implementationName) {
 
         try {

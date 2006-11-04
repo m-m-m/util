@@ -11,11 +11,11 @@ import javax.swing.tree.TreePath;
 
 import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
-import net.sf.mmm.ui.toolkit.api.event.UITreeModelListenerIF;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModelIF;
+import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
+import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITreeModelIF} to
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to
  * a Swing {@link javax.swing.tree.TreeModel}.
  * 
  * @param <N>
@@ -23,237 +23,237 @@ import net.sf.mmm.ui.toolkit.api.model.UITreeModelIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class TreeModelAdapter<N> implements TreeModel, UITreeModelListenerIF<N> {
+public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
 
-    /** the original tree model */
-    private final UITreeModelIF model;
+  /** the original tree model */
+  private final UITreeModel model;
 
-    /**
-     * the list of all registered tree model listeners (
-     * {@link TreeModelListener TreeModelListener}objects)
-     */
-    private final List<TreeModelListener> listeners;
+  /**
+   * the list of all registered tree model listeners (
+   * {@link TreeModelListener TreeModelListener}objects)
+   */
+  private final List<TreeModelListener> listeners;
 
-    /**
-     * The constructor.
-     * 
-     * @param treeModel
-     *        is the tree model to adapt.
-     */
-    @SuppressWarnings("unchecked")
-    public TreeModelAdapter(UITreeModelIF<N> treeModel) {
+  /**
+   * The constructor.
+   * 
+   * @param treeModel
+   *        is the tree model to adapt.
+   */
+  @SuppressWarnings("unchecked")
+  public TreeModelAdapter(UITreeModel<N> treeModel) {
 
-        super();
-        this.model = treeModel;
-        this.listeners = new Vector<TreeModelListener>();
-        this.model.addListener(this);
+    super();
+    this.model = treeModel;
+    this.listeners = new Vector<TreeModelListener>();
+    this.model.addListener(this);
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#getRoot()
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  public Object getRoot() {
+
+    return this.model.getRootNode();
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  public Object getChild(Object parent, int index) {
+
+    return this.model.getChildNode(parent, index);
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  public int getChildCount(Object parent) {
+
+    return this.model.getChildCount(parent);
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  public boolean isLeaf(Object node) {
+
+    return (this.model.getChildCount(node) == 0);
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath,
+   *      java.lang.Object)
+   * 
+   */
+  public void valueForPathChanged(TreePath path, Object newValue) {
+
+  // we do not support editors, yet
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object,
+   *      java.lang.Object)
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  public int getIndexOfChild(Object parent, Object child) {
+
+    for (int i = 0; i < this.model.getChildCount(parent); i++) {
+      if (child == this.model.getChildNode(parent, i)) {
+        return i;
+      }
     }
+    return -1;
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#getRoot()
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public Object getRoot() {
+  /**
+   * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
+   * 
+   */
+  public void addTreeModelListener(TreeModelListener l) {
 
-        return this.model.getRootNode();
+    this.listeners.add(l);
+  }
+
+  /**
+   * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
+   * 
+   */
+  public void removeTreeModelListener(TreeModelListener l) {
+
+    this.listeners.remove(l);
+  }
+
+  /**
+   * This method fires an update event to all registered listeners.
+   * 
+   * @param event
+   *        is the event to fire.
+   */
+  private void fireUpdateEvent(UITreeModelEvent<N> event) {
+
+    TreePath treePath = getTreePath(event.getTreeNode());
+    TreeModelEvent swingEvent = new TreeModelEvent(this, treePath);
+    for (int i = 0; i < this.listeners.size(); i++) {
+      TreeModelListener listener = this.listeners.get(i);
+      // //treeNodesChanged is not handled by swing!
+      // listener.treeNodesChanged(swingEvent);
+      listener.treeStructureChanged(swingEvent);
     }
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public Object getChild(Object parent, int index) {
+  /**
+   * This method fires an add event to all registered listeners.
+   * 
+   * @param event
+   *        is the event to fire.
+   */
+  @SuppressWarnings("unchecked")
+  private void fireAddEvent(UITreeModelEvent<N> event) {
 
-        return this.model.getChildNode(parent, index);
+    Object parentNode = this.model.getParent(event.getTreeNode());
+    TreePath treePath = getTreePath(parentNode);
+    TreeModelEvent swingEvent = new TreeModelEvent(this, treePath);
+    for (int i = 0; i < this.listeners.size(); i++) {
+      TreeModelListener listener = this.listeners.get(i);
+      // //treeNodesInserted is not handled by swing!
+      // listener.treeNodesInserted(event);
+      listener.treeStructureChanged(swingEvent);
     }
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public int getChildCount(Object parent) {
+  /**
+   * This method fires a remove event to all registered listeners.
+   * 
+   * @param event
+   *        is the event to fire.
+   */
+  @SuppressWarnings("unchecked")
+  private void fireRemoveEvent(UITreeModelEvent<N> event) {
 
-        return this.model.getChildCount(parent);
+    Object parentNode = this.model.getParent(event.getTreeNode());
+    TreePath treePath = getTreePath(parentNode);
+    TreeModelEvent swingEvent = new TreeModelEvent(this, treePath);
+    for (int i = 0; i < this.listeners.size(); i++) {
+      TreeModelListener listener = this.listeners.get(i);
+      // //treeNodesRemoved does NOT help after the node is removed!
+      // listener.treeNodesRemoved(swingEvent);
+      listener.treeStructureChanged(swingEvent);
     }
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public boolean isLeaf(Object node) {
+  /**
+   * This method gets the tree-path of a given node.
+   * 
+   * @param node
+   *        is the tree-node.
+   * @return the tree-path from the root-node to the according node.
+   */
+  @SuppressWarnings("unchecked")
+  protected TreePath getTreePath(Object node) {
 
-        return (this.model.getChildCount(node) == 0);
+    final List path = new ArrayList();
+    // Object node = event.getTreeNode();
+    while (node != null) {
+      path.add(node);
+      node = this.model.getParent(node);
     }
-
-    /**
-     * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath,
-     *      java.lang.Object)
-     * 
-     */
-    public void valueForPathChanged(TreePath path, Object newValue) {
-
-    // we do not support editors, yet
+    int len = path.size();
+    int last = len - 1;
+    Object[] treePath = new Object[len];
+    for (int i = 0; i < len; i++) {
+      treePath[i] = path.get(last - i);
     }
+    return new TreePath(treePath);
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object,
-     *      java.lang.Object)
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public int getIndexOfChild(Object parent, Object child) {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.event.UITreeModelListener#treeModelChanged(net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent)
+   * 
+   */
+  public void treeModelChanged(UITreeModelEvent<N> event) {
 
-        for (int i = 0; i < this.model.getChildCount(parent); i++) {
-            if (child == this.model.getChildNode(parent, i)) {
-                return i;
-            }
-        }
-        return -1;
+    // TreePath treePath = getTreePath(event);
+    // only treeStructureChanged and treeNodeRemoved are handled by swing!
+    if (event.getType() == EventType.ADD) {
+      fireAddEvent(event);
+    } else if (event.getType() == EventType.REMOVE) {
+      fireRemoveEvent(event);
+    } else if (event.getType() == EventType.UPDATE) {
+      fireUpdateEvent(event);
     }
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
-     * 
-     */
-    public void addTreeModelListener(TreeModelListener l) {
+  /**
+   * This method gets the adapted tree model.
+   * 
+   * @return the model.
+   */
+  @SuppressWarnings("unchecked")
+  public UITreeModel<N> getModel() {
 
-        this.listeners.add(l);
-    }
+    return this.model;
+  }
 
-    /**
-     * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
-     * 
-     */
-    public void removeTreeModelListener(TreeModelListener l) {
+  /**
+   * This method disposes this model adapter. It is called when the adapter is
+   * NOT used anymore and can be eaten by the garbarge-collector. The
+   * implementation of this method can tidy-up (e.g. remove registered
+   * listeners).
+   */
+  @SuppressWarnings("unchecked")
+  public void dispose() {
 
-        this.listeners.remove(l);
-    }
-
-    /**
-     * This method fires an update event to all registered listeners.
-     * 
-     * @param event
-     *        is the event to fire.
-     */
-    private void fireUpdateEvent(UITreeModelEvent<N> event) {
-
-        TreePath treePath = getTreePath(event.getTreeNode());
-        TreeModelEvent swingEvent = new TreeModelEvent(this, treePath);
-        for (int i = 0; i < this.listeners.size(); i++) {
-            TreeModelListener listener = this.listeners.get(i);
-            // //treeNodesChanged is not handled by swing!
-            // listener.treeNodesChanged(swingEvent);
-            listener.treeStructureChanged(swingEvent);
-        }
-    }
-
-    /**
-     * This method fires an add event to all registered listeners.
-     * 
-     * @param event
-     *        is the event to fire.
-     */
-    @SuppressWarnings("unchecked")
-    private void fireAddEvent(UITreeModelEvent<N> event) {
-
-        Object parentNode = this.model.getParent(event.getTreeNode());
-        TreePath treePath = getTreePath(parentNode);
-        TreeModelEvent swingEvent = new TreeModelEvent(this, treePath);
-        for (int i = 0; i < this.listeners.size(); i++) {
-            TreeModelListener listener = this.listeners.get(i);
-            // //treeNodesInserted is not handled by swing!
-            // listener.treeNodesInserted(event);
-            listener.treeStructureChanged(swingEvent);
-        }
-    }
-
-    /**
-     * This method fires a remove event to all registered listeners.
-     * 
-     * @param event
-     *        is the event to fire.
-     */
-    @SuppressWarnings("unchecked")
-    private void fireRemoveEvent(UITreeModelEvent<N> event) {
-
-        Object parentNode = this.model.getParent(event.getTreeNode());
-        TreePath treePath = getTreePath(parentNode);
-        TreeModelEvent swingEvent = new TreeModelEvent(this, treePath);
-        for (int i = 0; i < this.listeners.size(); i++) {
-            TreeModelListener listener = this.listeners.get(i);
-            // //treeNodesRemoved does NOT help after the node is removed!
-            // listener.treeNodesRemoved(swingEvent);
-            listener.treeStructureChanged(swingEvent);
-        }
-    }
-
-    /**
-     * This method gets the tree-path of a given node.
-     * 
-     * @param node
-     *        is the tree-node.
-     * @return the tree-path from the root-node to the according node.
-     */
-    @SuppressWarnings("unchecked")
-    protected TreePath getTreePath(Object node) {
-
-        final List path = new ArrayList();
-        // Object node = event.getTreeNode();
-        while (node != null) {
-            path.add(node);
-            node = this.model.getParent(node);
-        }
-        int len = path.size();
-        int last = len - 1;
-        Object[] treePath = new Object[len];
-        for (int i = 0; i < len; i++) {
-            treePath[i] = path.get(last - i);
-        }
-        return new TreePath(treePath);
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.event.UITreeModelListenerIF#treeModelChanged(net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent)
-     * 
-     */
-    public void treeModelChanged(UITreeModelEvent<N> event) {
-
-        // TreePath treePath = getTreePath(event);
-        // only treeStructureChanged and treeNodeRemoved are handled by swing!
-        if (event.getType() == EventType.ADD) {
-            fireAddEvent(event);
-        } else if (event.getType() == EventType.REMOVE) {
-            fireRemoveEvent(event);
-        } else if (event.getType() == EventType.UPDATE) {
-            fireUpdateEvent(event);
-        }
-    }
-
-    /**
-     * This method gets the adapted tree model.
-     * 
-     * @return the model.
-     */
-    @SuppressWarnings("unchecked")
-    public UITreeModelIF<N> getModel() {
-
-        return this.model;
-    }
-
-    /**
-     * This method disposes this model adapter. It is called when the adapter is
-     * NOT used anymore and can be eaten by the garbarge-collector. The
-     * implementation of this method can tidy-up (e.g. remove registered
-     * listeners).
-     */
-    @SuppressWarnings("unchecked")
-    public void dispose() {
-
-        this.model.removeListener(this);
-    }
+    this.model.removeListener(this);
+  }
 
 }

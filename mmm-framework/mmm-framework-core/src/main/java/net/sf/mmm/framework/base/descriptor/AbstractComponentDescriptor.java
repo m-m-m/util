@@ -1,10 +1,10 @@
 /* $Id$ */
 package net.sf.mmm.framework.base.descriptor;
 
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 
 /**
- * This is the abstract baee implementation of the {@link ComponentDescriptorIF}
+ * This is the abstract baee implementation of the {@link ComponentDescriptor}
  * interface.
  * 
  * @param <S>
@@ -13,7 +13,7 @@ import net.sf.mmm.framework.api.ComponentDescriptorIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractComponentDescriptor<S> implements ComponentDescriptorIF<S> {
+public abstract class AbstractComponentDescriptor<S> implements ComponentDescriptor<S> {
 
   /** @see #getName() */
   private String name;
@@ -73,7 +73,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptorIF#getCategory()
+   * @see net.sf.mmm.framework.api.ComponentDescriptor#getCategory()
    * 
    */
   public String getCategory() {
@@ -82,7 +82,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptorIF#getDomain()
+   * @see net.sf.mmm.framework.api.ComponentDescriptor#getDomain()
    * 
    */
   public String getDomain() {
@@ -91,7 +91,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptorIF#getName()
+   * @see net.sf.mmm.framework.api.ComponentDescriptor#getName()
    * 
    */
   public String getName() {

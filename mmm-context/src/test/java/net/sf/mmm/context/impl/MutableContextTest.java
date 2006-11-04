@@ -1,14 +1,14 @@
 /* $Id$ */
 package net.sf.mmm.context.impl;
 
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.context.api.MutableContextIF;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.context.api.MutableContext;
 import net.sf.mmm.value.api.ValueNotSetException;
 
 import junit.framework.TestCase;
 
 /**
- * This is the test case for {@link MutableContext}
+ * This is the test case for {@link MutableContextImpl}
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -19,11 +19,11 @@ public class MutableContextTest extends TestCase {
     }
 
     public void testContext() {
-        MutableContextIF context = new MutableContext();
+        MutableContext context = new MutableContextImpl();
         assertEquals(context.getVariableNames().size(), 0);
-        ContextIF immutableContext = context.getImmutableContext();
-        assertTrue(ContextIF.class.isAssignableFrom(immutableContext.getClass()));
-        assertFalse(MutableContextIF.class.isAssignableFrom(immutableContext.getClass()));
+        Context immutableContext = context.getImmutableContext();
+        assertTrue(Context.class.isAssignableFrom(immutableContext.getClass()));
+        assertFalse(MutableContext.class.isAssignableFrom(immutableContext.getClass()));
         String key = "key";
         String value = "value";
         assertFalse(context.hasValue(key));
@@ -43,7 +43,7 @@ public class MutableContextTest extends TestCase {
         assertSame(value, context.getValue(key).getString());
         assertSame(value, immutableContext.getValue(key).getString());
         assertEquals(1, immutableContext.getVariableNames().size());
-        MutableContextIF childContext = immutableContext.createChildContext();
+        MutableContext childContext = immutableContext.createChildContext();
         assertTrue(childContext.hasValue(key));
         childContext.unsetValue(key);
         assertTrue(childContext.hasValue(key));

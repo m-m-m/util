@@ -1,16 +1,16 @@
 /* $Id$ */
 package net.sf.mmm.content.validator.base;
 
-import net.sf.mmm.content.validator.api.ValueValidatorIF;
+import net.sf.mmm.content.validator.api.ValueValidator;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This is the abstract base implementation of the value validator interface.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractValueValidator implements ValueValidatorIF {
+public abstract class AbstractValueValidator implements ValueValidator {
 
     /**
      * The constructor.
@@ -21,9 +21,9 @@ public abstract class AbstractValueValidator implements ValueValidatorIF {
     }
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
      */
-    public void toXml(XmlWriterIF xmlWriter) throws XmlException {
+    public void toXml(XmlWriter xmlWriter) throws XmlException {
         
         xmlWriter.writeStartElement(XML_TAG_VALIDATOR);
         xmlWriter.writeAttribute(XML_ATR_VALIDATOR_TYPE, getClass().toString());

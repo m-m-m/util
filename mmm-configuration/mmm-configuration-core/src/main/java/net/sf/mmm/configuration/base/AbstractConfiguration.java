@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.Set;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationNotEditableException;
 import net.sf.mmm.configuration.api.IllegalPathException;
-import net.sf.mmm.configuration.api.MutableConfigurationIF;
+import net.sf.mmm.configuration.api.MutableConfiguration;
 import net.sf.mmm.configuration.base.path.ConditionIF;
 import net.sf.mmm.configuration.base.path.PathParser;
 import net.sf.mmm.configuration.base.path.PathSegment;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface. It is
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface. It is
  * the "interal API" for a
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF configuration} and
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration configuration} and
  * even the complete {@link net.sf.mmm.configuration.base base-implementation}
  * relies on this abstract implementation. The interface is used to make life
  * easier for the end user and to be able to do internal refactorings without
@@ -29,7 +29,7 @@ import net.sf.mmm.configuration.base.path.PathSegment;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfiguration implements MutableConfigurationIF {
+public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * The constructor.
@@ -56,7 +56,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
    * 
    * @param name
    *        is the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}.
+   *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}.
    * @param namespace
    *        is the namespace (URI or prefix) and may be <code>null</code> for
    *        NO namespace.
@@ -83,22 +83,22 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   /**
    * This method gets the child with the given {@link #getName() name} in the
    * {@link #getNamespaceUri() namespace} of this configuration. If the
-   * requested child is to be an {@link Type#ATTRIBUTE attribute} and no
+   * requested child is to be an {@link Configuration.Type#ATTRIBUTE attribute} and no
    * attribute exists in the {@link #getNamespaceUri() namespace}, the request
    * defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
    * The method is ONLY applicable for configurations of the
-   * {@link #getType() type} {@link Type#ELEMENT element}.
+   * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
    * @param name
    *        is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Type#ATTRIBUTE attribute}, else {@link Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
    * @return the requested child or <code>null</code> if no such child exists.
    * @throws ConfigurationException
    *         if applied to a configuration of the {@link #getType() type}
-   *         {@link Type#ATTRIBUTE attribute} or the given <code>name</code>
+   *         {@link Configuration.Type#ATTRIBUTE attribute} or the given <code>name</code>
    *         or <code>namespace</code> has illegal syntax.
    */
   public AbstractConfiguration getChild(String name) {
@@ -117,27 +117,27 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
    * This method gets the child with the given {@link #getName() name} and
    * {@link #getNamespaceUri() namespace}. <br>
    * The method is ONLY applicable for configurations of the
-   * {@link #getType() type} {@link Type#ELEMENT element}.
+   * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
    * @param name
    *        is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Type#ATTRIBUTE attribute}, else {@link Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the requested child.
    * @return the requested child or <code>null</code> if no such child exists.
    * @throws ConfigurationException
    *         if applied to a configuration of the {@link #getType() type}
-   *         {@link Type#ATTRIBUTE attribute} or the given <code>name</code>
+   *         {@link Configuration.Type#ATTRIBUTE attribute} or the given <code>name</code>
    *         or <code>namespace</code> has illegal syntax.
    */
   public abstract AbstractConfiguration getChild(String name, String namespaceUri)
       throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#createChild(java.lang.String,
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#createChild(java.lang.String,
    *      java.lang.String) 
    */
   public AbstractConfiguration createChild(String name, String namespaceUri)
@@ -158,11 +158,11 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   /**
    * This method creates the child with the given {@link #getName() name} and
    * {@link #getNamespaceUri() namespace}.<br>
-   * If the child to create is an {@link Type#ATTRIBUTE attribute} that already
+   * If the child to create is an {@link Configuration.Type#ATTRIBUTE attribute} that already
    * exists, this method will NOT create a new attribute and return the existing
    * one instead.
    * 
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#createChild(java.lang.String,
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#createChild(java.lang.String,
    *      java.lang.String)
    * 
    * @param name
@@ -170,7 +170,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Type#ATTRIBUTE attribute}, else {@link Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the child to create
    *        or <code>null</code> for default namespace.
@@ -186,16 +186,16 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
    * {@link #getNamespaceUri() namespace}. If no such child exists, it will be
    * created.<br>
    * The method is ONLY applicable for configurations of the
-   * {@link #getType() type} {@link Type#ELEMENT element}.
+   * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
-   * @see ConfigurationIF#getDescendant(String, String)
+   * @see Configuration#getDescendant(String, String)
    * 
    * @param childName
    *        is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Type#ATTRIBUTE attribute}, else {@link Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the requested child.
    * @return the requested child.
@@ -217,7 +217,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
 
   /**
    * This method gets an iterator of the child
-   * {@link ConfigurationIF configurations} with the given
+   * {@link Configuration configurations} with the given
    * {@link #getType() type}.
    * 
    * @param childType
@@ -229,7 +229,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
 
   /**
    * This method gets an iterator of the child
-   * {@link ConfigurationIF configurations} with the given <code>name</code>
+   * {@link Configuration configurations} with the given <code>name</code>
    * and <code>namespaceUri</code>.
    * 
    * @param name
@@ -237,7 +237,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Type#ATTRIBUTE attribute}, else {@link Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the requested child.
    * @return an iterator containing the requested children.
@@ -246,9 +246,9 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
 
   /**
    * This method gets an iterator of the child
-   * {@link ConfigurationIF configurations} with the given
+   * {@link Configuration configurations} with the given
    * {@link #getName() name} in the {@link #getNamespaceUri() namespace} of this
-   * configuration. If an {@link Type#ATTRIBUTE attribute} is requested and no
+   * configuration. If an {@link Configuration.Type#ATTRIBUTE attribute} is requested and no
    * attribute exists in the {@link #getNamespaceUri() namespace}, the request
    * defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
    * 
@@ -257,7 +257,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Type#ATTRIBUTE attribute}, else {@link Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
    * @return an iterator containing the requested children.
    */
   public Iterator<AbstractConfiguration> getChildren(String name) {
@@ -276,7 +276,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(java.lang.String)
+   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
    *      
    */
   public AbstractConfiguration getDescendant(String path) {
@@ -285,7 +285,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getDescendant(java.lang.String,
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#getDescendant(java.lang.String,
    *      java.lang.String) 
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
@@ -388,7 +388,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(java.lang.String)
+   * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String)
    *      
    */
   public Collection<AbstractConfiguration> getDescendants(String path) {
@@ -397,7 +397,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#getDescendants(java.lang.String,
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#getDescendants(java.lang.String,
    *      java.lang.String) 
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
@@ -405,7 +405,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
     PathParser parser = new PathParser(path);
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
     Set<AbstractConfiguration> resultSet = new HashSet<AbstractConfiguration>();
-    char state = ConfigurationIF.PATH_UNION;
+    char state = Configuration.PATH_UNION;
     while (state != 0) {
       parser.parsePath(segmentList);
       addDescendants(segmentList, 0, resultSet);
@@ -467,7 +467,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getPath() 
+   * @see net.sf.mmm.configuration.api.Configuration#getPath() 
    */
   public final String getPath() {
 
@@ -489,7 +489,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
     if (parent != null) {
       parent.buildPath(buffer);
     }
-    buffer.append(ConfigurationIF.PATH_SEPARATOR);
+    buffer.append(Configuration.PATH_SEPARATOR);
     buffer.append(getName());
   }
 
@@ -502,10 +502,10 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   protected abstract AbstractConfiguration getParent();
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#isDescendantOf(net.sf.mmm.configuration.api.ConfigurationIF)
+   * @see net.sf.mmm.configuration.api.Configuration#isDescendantOf(net.sf.mmm.configuration.api.Configuration)
    *      
    */
-  public final boolean isDescendantOf(ConfigurationIF superNode) {
+  public final boolean isDescendantOf(Configuration superNode) {
 
     AbstractConfiguration parent = getParent();
     if (parent == null) {
@@ -518,10 +518,10 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getRelativePath(net.sf.mmm.configuration.api.ConfigurationIF)
+   * @see net.sf.mmm.configuration.api.Configuration#getRelativePath(net.sf.mmm.configuration.api.Configuration)
    *      
    */
-  public final String getRelativePath(ConfigurationIF ancestor) {
+  public final String getRelativePath(Configuration ancestor) {
 
     AbstractConfiguration parent = getParent();
     if (parent == null) {
@@ -530,7 +530,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
       if (parent == ancestor) {
         return getName();
       } else {
-        return parent.getRelativePath(ancestor) + ConfigurationIF.PATH_SEPARATOR + getName();
+        return parent.getRelativePath(ancestor) + Configuration.PATH_SEPARATOR + getName();
       }
     }
   }
@@ -567,7 +567,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   protected abstract void doRemove() throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#remove()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#remove()
    *      
    */
   public void remove() throws ConfigurationException {
@@ -600,7 +600,7 @@ public abstract class AbstractConfiguration implements MutableConfigurationIF {
   protected abstract AbstractConfiguration doDisable() throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfigurationIF#disable()
+   * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
    *      
    */
   public void disable() throws ConfigurationException {

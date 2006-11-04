@@ -6,7 +6,7 @@ import net.sf.mmm.value.NlsResourceBundle;
 /**
  * This exception is thrown if the parsing of a value as string fails.
  * 
- * @see net.sf.mmm.value.api.ValueManagerIF#parse(String)
+ * @see net.sf.mmm.value.api.ValueManager#parse(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,10 +21,10 @@ public class ValueParseStringException extends ValueParseException {
    * @param stringToParse
    *        is the string that could not be parsed
    * @param valueType
-   *        is the {@link ValueManagerIF#getValueType() type} of value the
+   *        is the {@link ValueManager#getValueType() type} of value the
    *        given string should be parsed as.
    * @param valueName
-   *        is the {@link ValueManagerIF#getName() name} of value the given
+   *        is the {@link ValueManager#getName() name} of value the given
    *        string should be parsed as.
    */
   public ValueParseStringException(String stringToParse, Class valueType, String valueName) {
@@ -38,10 +38,10 @@ public class ValueParseStringException extends ValueParseException {
    * @param stringToParse
    *        is the string that could not be parsed
    * @param valueType
-   *        is the {@link ValueManagerIF#getValueType() type} of value the
+   *        is the {@link ValueManager#getValueType() type} of value the
    *        given string should be parsed as.
    * @param valueName
-   *        is the {@link ValueManagerIF#getName() name} of value the given
+   *        is the {@link ValueManager#getName() name} of value the given
    *        string should be parsed as.
    * @param nested
    */
@@ -52,7 +52,7 @@ public class ValueParseStringException extends ValueParseException {
   }
 
   /**
-   * This method gets the expected {@link ValueManagerIF#getValueType() type}
+   * This method gets the expected {@link ValueManager#getValueType() type}
    * of the value that could not be parsed.
    * 
    * @return the value type.
@@ -63,7 +63,7 @@ public class ValueParseStringException extends ValueParseException {
   }
 
   /**
-   * This method gets the expected {@link ValueManagerIF#getName() name} of
+   * This method gets the expected {@link ValueManager#getName() name} of
    * the value that could not be parsed.
    * 
    * @return the value name.
@@ -75,7 +75,7 @@ public class ValueParseStringException extends ValueParseException {
 
   /**
    * This method gets the string that could not be
-   * {@link ValueManagerIF#parse(String) parsed} and is the reason of this
+   * {@link ValueManager#parse(String) parsed} and is the reason of this
    * exception.
    * 
    * @return the malformed value string.

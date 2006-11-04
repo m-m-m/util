@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.value.api.type;
 
-import net.sf.mmm.util.xml.api.XmlSerializableIF;
+import net.sf.mmm.util.xml.api.XmlSerializable;
 
 /**
  * This is the interface for a duration value. A duration represents the
@@ -9,10 +9,10 @@ import net.sf.mmm.util.xml.api.XmlSerializableIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DurationIF extends XmlSerializableIF {
+public interface DurationIF extends XmlSerializable {
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} of this
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
    * value type.
    */
   String VALUE_NAME = "Duration";

@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * This class implements an empty iterator of
- * {@link net.sf.mmm.configuration.api.ConfigurationIF configurations}. It is a
+ * {@link net.sf.mmm.configuration.api.Configuration configurations}. It is a
  * singleton that can be retrieved via {@link #getInstance()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -8,374 +8,373 @@ import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UIComponentIF;
-import net.sf.mmm.ui.toolkit.api.composite.UICompositeIF;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBarIF;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF;
-import net.sf.mmm.ui.toolkit.api.window.UIFrameIF;
-import net.sf.mmm.ui.toolkit.impl.swing.UIComponent;
-import net.sf.mmm.ui.toolkit.impl.swing.UIFactory;
-import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBar;
+import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
+import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of an internal
- * {@link net.sf.mmm.ui.toolkit.api.window.UIFrameIF frame} using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame frame} using Swing as the
  * UI toolkit.
  * 
- * @see net.sf.mmm.ui.toolkit.api.window.UIWorkbenchIF#createFrame(String,
+ * @see net.sf.mmm.ui.toolkit.api.window.UIWorkbench#createFrame(String,
  *      boolean)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIInternalFrame extends UIWindow implements UIFrameIF, UIComponentIF {
+public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
-    /** the frame */
-    private final JInternalFrame frame;
+  /** the frame */
+  private final JInternalFrame frame;
 
-    /** the workbench */
-    private final UIWorkbench workbench;
+  /** the workbench */
+  private final UIWorkbenchImpl workbench;
 
-    /**
-     * The constructor.
-     * 
-     * @param uiFactory
-     *        is the
-     *        {@link net.sf.mmm.ui.toolkit.api.UIObjectIF#getFactory() factory}
-     *        instance.
-     * @param parentObject
-     *        is the workbench that created this frame.
-     * @param title
-     *        is the {@link #getTitle() title} of the frame.
-     * @param resizeable -
-     *        if <code>true</code> the frame will be
-     *        {@link #isResizeable() resizeable}.
-     */
-    public UIInternalFrame(UIFactory uiFactory, UIWorkbench parentObject, String title,
-            boolean resizeable) {
+  /**
+   * The constructor.
+   * 
+   * @param uiFactory
+   *        is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
+   *        instance.
+   * @param parentObject
+   *        is the workbench that created this frame.
+   * @param title
+   *        is the {@link #getTitle() title} of the frame.
+   * @param resizeable -
+   *        if <code>true</code> the frame will be
+   *        {@link #isResizeable() resizeable}.
+   */
+  public UIInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
+      boolean resizeable) {
 
-        super(uiFactory, parentObject);
-        this.frame = new JInternalFrame(title, resizeable, true, resizeable, true);
-        this.workbench = parentObject;
+    super(uiFactory, parentObject);
+    this.frame = new JInternalFrame(title, resizeable, true, resizeable, true);
+    this.workbench = parentObject;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param uiFactory
+   *        is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
+   *        instance.
+   * @param parentObject
+   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
+   *        that created this frame.
+   * @param title
+   *        is the {@link #getTitle() title} of the frame.
+   * @param resizeable -
+   *        if <code>true</code> the frame will be
+   *        {@link #isResizeable() resizeable}.
+   */
+  public UIInternalFrame(UIFactorySwing uiFactory, UIInternalFrame parentObject, String title,
+      boolean resizeable) {
+
+    super(uiFactory, parentObject);
+    this.frame = new JInternalFrame();
+    this.workbench = parentObject.workbench;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#createMenuBar()
+   * 
+   */
+  @Override
+  protected UIMenuBar createMenuBar() {
+
+    JMenuBar menuBar = this.frame.getJMenuBar();
+    if (menuBar == null) {
+      menuBar = new JMenuBar();
+      this.frame.setJMenuBar(menuBar);
     }
+    return new UIMenuBarImpl((UIFactorySwing) getFactory(), this, menuBar);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param uiFactory
-     *        is the
-     *        {@link net.sf.mmm.ui.toolkit.api.UIObjectIF#getFactory() factory}
-     *        instance.
-     * @param parentObject
-     *        is the
-     *        {@link net.sf.mmm.ui.toolkit.api.UINodeIF#getParent() parent} that
-     *        created this frame.
-     * @param title
-     *        is the {@link #getTitle() title} of the frame.
-     * @param resizeable -
-     *        if <code>true</code> the frame will be
-     *        {@link #isResizeable() resizeable}.
-     */
-    public UIInternalFrame(UIFactory uiFactory, UIInternalFrame parentObject, String title,
-            boolean resizeable) {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
+   *      boolean)
+   * 
+   */
+  public UIFrame createFrame(String title, boolean resizeable) {
 
-        super(uiFactory, parentObject);
-        this.frame = new JInternalFrame();
-        this.workbench = parentObject.workbench;
+    UIInternalFrame internalFrame = new UIInternalFrame((UIFactorySwing) getFactory(), this, title,
+        resizeable);
+    return internalFrame;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximized#isMaximized()
+   * 
+   */
+  public boolean isMaximized() {
+
+    return this.frame.isMaximum();
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMaximized(boolean)
+   * 
+   */
+  public void setMaximized(boolean maximize) {
+
+    if (this.frame.isMaximizable()) {
+      try {
+        this.frame.setMaximum(maximize);
+      } catch (PropertyVetoException e) {
+        // ignore this...
+      }
     }
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.base.window.UIAbstractWindow#createMenuBar()
-     * 
-     */
-    @Override
-    protected UIMenuBarIF createMenuBar() {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMinimized(boolean)
+   * 
+   */
+  public void setMinimized(boolean minimize) {
 
-        JMenuBar menuBar = this.frame.getJMenuBar();
-        if (menuBar == null) {
-            menuBar = new JMenuBar();
-            this.frame.setJMenuBar(menuBar);
-        }
-        return new UIMenuBar((UIFactory) getFactory(), this, menuBar);
+    try {
+      this.frame.setIcon(minimize);
+    } catch (PropertyVetoException e) {
+      // ignore this...
     }
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#createFrame(java.lang.String,
-     *      boolean)
-     * 
-     */
-    public UIFrameIF createFrame(String title, boolean resizeable) {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * 
+   */
+  public String getType() {
 
-        UIInternalFrame internalFrame = new UIInternalFrame((UIFactory) getFactory(), this, title,
-                resizeable);
-        return internalFrame;
-    }
+    return TYPE;
+  }
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximizedIF#isMaximized()
-     * 
-     */
-    public boolean isMaximized() {
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
+   * 
+   */
+  public boolean isResizeable() {
 
-        return this.frame.isMaximum();
-    }
-    
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#setMaximized(boolean)
-     * 
-     */
-    public void setMaximized(boolean maximize) {
+    return this.frame.isResizable();
+  }
 
-        if (this.frame.isMaximizable()) {
-            try {
-                this.frame.setMaximum(maximize);
-            } catch (PropertyVetoException e) {
-                // ignore this...
-            }            
-        }
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
+   * 
+   */
+  public void setSize(int width, int height) {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.window.UIFrameIF#setMinimized(boolean)
-     * 
-     */
-    public void setMinimized(boolean minimize) {
+    this.frame.setSize(width, height);
+  }
 
-        try {
-            this.frame.setIcon(minimize);
-        } catch (PropertyVetoException e) {
-            // ignore this...
-        }
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWritePosition#setPosition(int,
+   *      int)
+   * 
+   */
+  public void setPosition(int x, int y) {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.UIObjectIF#getType()
-     * 
-     */
-    public String getType() {
+    this.frame.setLocation(x, y);
+  }
 
-        return TYPE;
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#getTitle()
+   * 
+   */
+  public String getTitle() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#isResizeable()
-     * 
-     */
-    public boolean isResizeable() {
+    return this.frame.getTitle();
+  }
 
-        return this.frame.isResizable();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#setTitle(java.lang.String)
+   * 
+   */
+  public void setTitle(String newTitle) {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSizeIF#setSize(int, int)
-     * 
-     */
-    public void setSize(int width, int height) {
+    this.frame.setTitle(newTitle);
+  }
 
-        this.frame.setSize(width, height);
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * 
+   */
+  public int getHeight() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWritePositionIF#setPosition(int,
-     *      int)
-     * 
-     */
-    public void setPosition(int x, int y) {
+    return this.frame.getHeight();
+  }
 
-        this.frame.setLocation(x, y);
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * 
+   */
+  public int getWidth() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitleIF#getTitle()
-     * 
-     */
-    public String getTitle() {
+    return this.frame.getWidth();
+  }
 
-        return this.frame.getTitle();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
+   * 
+   */
+  public void dispose() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitleIF#setTitle(java.lang.String)
-     * 
-     */
-    public void setTitle(String newTitle) {
+    this.frame.dispose();
+  }
 
-        this.frame.setTitle(newTitle);
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#isDisposed()
+   * 
+   */
+  public boolean isDisposed() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getHeight()
-     * 
-     */
-    public int getHeight() {
+    return this.frame.isDisplayable();
+  }
 
-        return this.frame.getHeight();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getX()
+   * 
+   */
+  public int getX() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSizeIF#getWidth()
-     * 
-     */
-    public int getWidth() {
+    return this.frame.getX();
+  }
 
-        return this.frame.getWidth();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getY()
+   * 
+   */
+  public int getY() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#dispose()
-     * 
-     */
-    public void dispose() {
+    return this.frame.getY();
+  }
 
-        this.frame.dispose();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#pack()
+   * 
+   */
+  public void pack() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposedIF#isDisposed()
-     * 
-     */
-    public boolean isDisposed() {
+    this.frame.pack();
+  }
 
-        return this.frame.isDisplayable();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
+   * 
+   */
+  public void setComposite(UIComposite newComposite) {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadPositionIF#getX()
-     * 
-     */
-    public int getX() {
+    JComponent jComponent = ((AbstractUIComponent) newComposite).getSwingComponent();
+    this.frame.setContentPane(jComponent);
+    registerComposite(newComposite);
+  }
 
-        return this.frame.getX();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisible#isVisible()
+   * 
+   */
+  public boolean isVisible() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadPositionIF#getY()
-     * 
-     */
-    public int getY() {
+    return this.frame.isVisible();
+  }
 
-        return this.frame.getY();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisible#setVisible(boolean)
+   * 
+   */
+  public void setVisible(boolean visible) {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.window.UIWindowIF#pack()
-     * 
-     */
-    public void pack() {
+    this.frame.setVisible(visible);
+  }
 
-        this.frame.pack();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl#getAwtWindow()
+   * 
+   */
+  @Override
+  protected Window getAwtWindow() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.window.UIWindowIF#setComposite(net.sf.mmm.ui.toolkit.api.composite.UICompositeIF)
-     * 
-     */
-    public void setComposite(UICompositeIF newComposite) {
+    return ((UIWorkbenchImpl) getParent()).getAwtWindow();
+  }
 
-        JComponent jComponent = ((UIComponent) newComposite).getSwingComponent();
-        this.frame.setContentPane(jComponent);
-        registerComposite(newComposite);
-    }
+  /**
+   * This method gets the native swing object.
+   * 
+   * @return the swing internal frame.
+   */
+  public JInternalFrame getSwingInternalFrame() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisibleIF#isVisible()
-     * 
-     */
-    public boolean isVisible() {
+    return this.frame;
+  }
 
-        return this.frame.isVisible();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#getDesktopSize()
+   * 
+   */
+  @Override
+  protected UIReadSize getDesktopSize() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisibleIF#setVisible(boolean)
-     * 
-     */
-    public void setVisible(boolean visible) {
+    return this.workbench.getDesktopPanel();
+  }
 
-        this.frame.setVisible(visible);
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabled#isEnabled()
+   * 
+   */
+  public boolean isEnabled() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindow#getAwtWindow()
-     * 
-     */
-    @Override
-    protected Window getAwtWindow() {
+    return this.frame.isEnabled();
+  }
 
-        return ((UIWorkbench) getParent()).getAwtWindow();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEnabled#setEnabled(boolean)
+   * 
+   */
+  public void setEnabled(boolean enabled) {
 
-    /**
-     * This method gets the native swing object.
-     * 
-     * @return the swing internal frame.
-     */
-    public JInternalFrame getSwingInternalFrame() {
+    this.frame.setEnabled(enabled);
+  }
 
-        return this.frame;
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#getTooltipText()
+   * 
+   */
+  public String getTooltipText() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.base.window.UIAbstractWindow#getDesktopSize()
-     * 
-     */
-    @Override
-    protected UIReadSizeIF getDesktopSize() {
+    return this.frame.getToolTipText();
+  }
 
-        return this.workbench.getDesktopPanel();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#setTooltipText(java.lang.String)
+   * 
+   */
+  public void setTooltipText(String tooltip) {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabledIF#isEnabled()
-     * 
-     */
-    public boolean isEnabled() {
+    this.frame.setToolTipText(tooltip);
+  }
 
-        return this.frame.isEnabled();
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredHeight()
+   * 
+   */
+  public int getPreferredHeight() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEnabledIF#setEnabled(boolean)
-     * 
-     */
-    public void setEnabled(boolean enabled) {
+    return (int) this.frame.getPreferredSize().getHeight();
+  }
 
-        this.frame.setEnabled(enabled);
-    }
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredWidth()
+   * 
+   */
+  public int getPreferredWidth() {
 
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltipIF#getTooltipText()
-     * 
-     */
-    public String getTooltipText() {
-
-        return this.frame.getToolTipText();
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltipIF#setTooltipText(java.lang.String)
-     * 
-     */
-    public void setTooltipText(String tooltip) {
-
-        this.frame.setToolTipText(tooltip);
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF#getPreferredHeight()
-     * 
-     */
-    public int getPreferredHeight() {
-
-        return (int) this.frame.getPreferredSize().getHeight();
-    }
-
-    /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSizeIF#getPreferredWidth()
-     * 
-     */
-    public int getPreferredWidth() {
-
-        return (int) this.frame.getPreferredSize().getWidth();
-    }
+    return (int) this.frame.getPreferredSize().getWidth();
+  }
 
 }

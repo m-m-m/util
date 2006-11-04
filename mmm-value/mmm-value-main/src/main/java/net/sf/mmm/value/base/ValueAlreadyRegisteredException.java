@@ -6,9 +6,9 @@ import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the exception thrown if a value should be
- * {@link net.sf.mmm.value.api.ValueServiceIF#getManager(String) registered}
- * with a {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} or
- * {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of that is
+ * {@link net.sf.mmm.value.api.ValueService#getManager(String) registered}
+ * with a {@link net.sf.mmm.value.api.ValueManager#getName() name} or
+ * {@link net.sf.mmm.value.api.ValueManager#getValueType() type} of that is
  * already in use.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -22,9 +22,9 @@ public class ValueAlreadyRegisteredException extends ValueException {
    * The constructor.
    * 
    * @param valueName
-   *        is the {@link net.sf.mmm.value.api.ValueManagerIF#getName() name}
+   *        is the {@link net.sf.mmm.value.api.ValueManager#getName() name}
    *        of the value that is already
-   *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManagerIF) registered}.
+   *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManager) registered}.
    */
   public ValueAlreadyRegisteredException(String valueName) {
 
@@ -36,9 +36,9 @@ public class ValueAlreadyRegisteredException extends ValueException {
    * 
    * @param valueType
    *        is the
-   *        {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of
+   *        {@link net.sf.mmm.value.api.ValueManager#getValueType() type} of
    *        the value that is already
-   *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManagerIF) registered}.
+   *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManager) registered}.
    */
   public ValueAlreadyRegisteredException(Class valueType) {
 
@@ -47,8 +47,8 @@ public class ValueAlreadyRegisteredException extends ValueException {
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} or
-   * {@link net.sf.mmm.value.api.ValueManagerIF#getValueType() type} of the
+   * {@link net.sf.mmm.value.api.ValueManager#getName() name} or
+   * {@link net.sf.mmm.value.api.ValueManager#getValueType() type} of the
    * value that was requested but NOT registered.
    * 
    * @return the value name or {@link Class#getName() type}.

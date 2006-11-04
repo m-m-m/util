@@ -1,13 +1,13 @@
 /* $Id$ */
 package net.sf.mmm.term.impl;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.term.CoreNlsResourceBundle;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.TermIF;
 import net.sf.mmm.term.base.AbstractVariable;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -45,10 +45,10 @@ public class ExpressionVariable extends AbstractVariable {
     }
 
     /**
-     * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(net.sf.mmm.context.api.ContextIF)
+     * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(net.sf.mmm.context.api.Context)
      * 
      */
-    public String getVariableName(ContextIF environment) throws ValueException {
+    public String getVariableName(Context environment) throws ValueException {
 
         Object expressionResult = this.term.evaluate(environment);
         if (expressionResult == null) {
@@ -58,10 +58,10 @@ public class ExpressionVariable extends AbstractVariable {
     }
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
      * 
      */
-    public void toXml(XmlWriterIF serializer) throws XmlException {
+    public void toXml(XmlWriter serializer) throws XmlException {
 
         serializer.writeStartElement(XML_TAG_VARIABLE);
         this.term.toXml(serializer);

@@ -7,10 +7,10 @@ import java.util.Date;
 import net.sf.mmm.util.DateUtil;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.WrongValueTypeException;
-import net.sf.mmm.value.api.MutableGenericValueIF;
+import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
- * This is the abstract base implementation of the {@link MutableGenericValueIF}
+ * This is the abstract base implementation of the {@link MutableGenericValue}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

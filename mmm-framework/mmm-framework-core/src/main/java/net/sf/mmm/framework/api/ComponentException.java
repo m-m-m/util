@@ -3,7 +3,7 @@ package net.sf.mmm.framework.api;
 
 /**
  * A {@link ComponentException} is thrown if a
- * {@link ComponentProviderIF component} itself or reflecting on a component
+ * {@link ComponentProvider component} itself or reflecting on a component
  * caused an error.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

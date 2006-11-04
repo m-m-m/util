@@ -1,9 +1,9 @@
 /* $Id$ */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.context.api.ContextIF;
-import net.sf.mmm.util.xml.api.XmlSerializableIF;
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.context.api.Context;
+import net.sf.mmm.util.xml.api.XmlSerializable;
+import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.value.api.ValueException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface TermIF extends XmlSerializableIF {
+public interface TermIF extends XmlSerializable {
 
     /**
      * This string indicates the start of an expression term as string. If
@@ -105,10 +105,10 @@ public interface TermIF extends XmlSerializableIF {
      *         if a calculation fails during evaluation.
      * @throws ValueException
      *         if an argument (e.g. an
-     *         {@link ContextIF#getValue(String) "environment value"}) is
-     *         {@link GenericValueIF#hasValue() undefined} or has the
+     *         {@link Context#getValue(String) "environment value"}) is
+     *         {@link GenericValue#hasValue() undefined} or has the
      *         {@link net.sf.mmm.value.api.WrongValueTypeException "wrong type"}.
      */
-    Object evaluate(ContextIF environment) throws CalculationException, ValueException;
+    Object evaluate(Context environment) throws CalculationException, ValueException;
 
 }

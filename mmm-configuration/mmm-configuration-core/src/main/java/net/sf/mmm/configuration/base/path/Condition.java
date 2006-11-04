@@ -4,11 +4,11 @@ package net.sf.mmm.configuration.base.path;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.base.AbstractConfiguration;
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.api.ConfigurationIF} interface.
+ * {@link net.sf.mmm.configuration.api.Configuration} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -45,7 +45,7 @@ public class Condition implements ConditionIF {
    *        is the
    *        {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
    *        the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}
+   *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}
    *        must match or <code>null</code> if any name is acceptable.
    */
   public Condition(Pattern nameGlobPattern) {
@@ -60,7 +60,7 @@ public class Condition implements ConditionIF {
    *        is the
    *        {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
    *        the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}
+   *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}
    *        must match or <code>null</code> if any name is acceptable.
    * @param childsName
    * @param childsValue
@@ -96,7 +96,7 @@ public class Condition implements ConditionIF {
       if (child == null) {
         return false;
       }
-      GenericValueIF value = child.getValue();
+      GenericValue value = child.getValue();
       if (value.isEmpty()) {
         return false;
       }
@@ -106,7 +106,7 @@ public class Condition implements ConditionIF {
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name} of the
+   * {@link net.sf.mmm.configuration.api.Configuration#getName() name} of the
    * {@link AbstractConfiguration#getChild(String) child} to check.
    * 
    * @return the child name.
@@ -119,7 +119,7 @@ public class Condition implements ConditionIF {
   /**
    * This method gets the value to compare with the the
    * {@link AbstractConfiguration#getChild(String) childs}
-   * {@link net.sf.mmm.configuration.api.ConfigurationIF#getValue() value}.
+   * {@link net.sf.mmm.configuration.api.Configuration#getValue() value}.
    * 
    * @return the childs value.
    */

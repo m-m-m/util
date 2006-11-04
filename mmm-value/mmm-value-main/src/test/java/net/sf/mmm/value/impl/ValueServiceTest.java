@@ -12,17 +12,19 @@ import org.w3c.dom.Element;
 
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.util.xml.impl.DomXmlWriter;
 import net.sf.mmm.util.xml.impl.OutputXmlWriter;
-import net.sf.mmm.value.api.ValueManagerIF;
+import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.api.ValueServiceIF;
-import net.sf.mmm.value.impl.ValueService;
+import net.sf.mmm.value.api.ValueService;
+import net.sf.mmm.value.impl.ValueServiceImpl;
+import net.sf.mmm.value.impl.type.DateValueManager;
 import net.sf.mmm.value.impl.type.XmlValueManager;
 
 /**
- * This is the test case for {@link net.sf.mmm.value.impl.ValueService}.
+ * This is the test case for {@link net.sf.mmm.value.impl.ValueServiceImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,7 +32,7 @@ import net.sf.mmm.value.impl.type.XmlValueManager;
 public class ValueServiceTest extends TestCase {
 
   /** the value service instance */
-  private ValueServiceIF service;
+  private ValueService service;
 
   /**
    * The constructor.
@@ -38,14 +40,12 @@ public class ValueServiceTest extends TestCase {
   public ValueServiceTest() {
 
     super();
-    ValueService serviceImpl = new ValueService();
-    serviceImpl.initialize();
-    this.service = serviceImpl;
+    this.service = new StaticValueServiceImpl();
   }
 
-  private ValueManagerIF getManager(Class type, String name) {
+  private ValueManager getManager(Class type, String name) {
 
-    ValueManagerIF manager = this.service.getManager(type);
+    ValueManager manager = this.service.getManager(type);
     assertNotNull(manager);
     assertSame(this.service.getManager(name), manager);
     assertSame(manager.getValueType(), type);
@@ -63,19 +63,21 @@ public class ValueServiceTest extends TestCase {
    * @param manager
    *        is the manager of the value type V.
    * @param valueAsString
-   *        is the {@link ValueManagerIF#toString(V) "string representation"} of
+   *        is the {@link ValueManager#toString(V) "string representation"} of
    *        an example value.
    * @throws Exception
    *         if the test fails.
    */
-  private <V> void checkManager(ValueManagerIF<V> manager, String valueAsString) throws Exception {
+  private <V> void checkManager(ValueManager<V> manager, String valueAsString) throws Exception {
 
     V value = manager.parse(valueAsString);
     assertEquals(manager.toString(value), valueAsString);
     Document doc = DomUtil.createDocument();
     manager.toXml(new DomXmlWriter(doc), value);
-    Element rootElement = doc.getDocumentElement();    
-    assertEquals(manager.parse(rootElement), value);
+    Element rootElement = doc.getDocumentElement();
+    V parsedValue = manager.parse(rootElement);
+    assertTrue("parsed " + manager.getName() + " value differes", manager.isEqual(value,
+        parsedValue));
   }
 
   /**
@@ -84,7 +86,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testString() throws Exception {
 
-    ValueManagerIF<String> manager = getManager(String.class, "String");
+    ValueManager<String> manager = getManager(String.class, "String");
     checkManager(manager, "Hello World!");
   }
 
@@ -94,7 +96,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testInteger() throws Exception {
 
-    ValueManagerIF<Integer> manager = getManager(Integer.class, "Integer");
+    ValueManager<Integer> manager = getManager(Integer.class, "Integer");
     checkManager(manager, "42");
   }
 
@@ -104,7 +106,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testBoolean() throws Exception {
 
-    ValueManagerIF<Boolean> manager = getManager(Boolean.class, "Boolean");
+    ValueManager<Boolean> manager = getManager(Boolean.class, "Boolean");
     checkManager(manager, "true");
     checkManager(manager, "false");
   }
@@ -115,7 +117,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testLong() throws Exception {
 
-    ValueManagerIF<Long> manager = getManager(Long.class, "Long");
+    ValueManager<Long> manager = getManager(Long.class, "Long");
     checkManager(manager, "123456789012345678");
   }
 
@@ -125,7 +127,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testDouble() throws Exception {
 
-    ValueManagerIF<Double> manager = getManager(Double.class, "Double");
+    ValueManager<Double> manager = getManager(Double.class, "Double");
     checkManager(manager, "42.4242424242");
   }
 
@@ -135,7 +137,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testDate() throws Exception {
 
-    ValueManagerIF<Date> manager = getManager(Date.class, "Date");
+    ValueManager<Date> manager = getManager(Date.class, "Date");
     checkManager(manager, "2005-01-01T23:59:00");
   }
 
@@ -145,7 +147,7 @@ public class ValueServiceTest extends TestCase {
   @Test
   public void testXml() throws Exception {
 
-    ValueManagerIF<Element> manager = getManager(Element.class, XmlValueManager.VALUE_NAME);
+    ValueManager<Element> manager = getManager(Element.class, XmlValueManager.VALUE_NAME);
     checkManager(manager,
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root><tag attribute=\"value\">text</tag></root>");
   }

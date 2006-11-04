@@ -1,12 +1,12 @@
 /* $Id$ */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the interface for a function. A function can perform a
- * {@link #calculate(ContextIF, TermIF[]) calculation} on a list of
+ * {@link #calculate(Context, TermIF[]) calculation} on a list of
  * {@link net.sf.mmm.term.api.TermIF terms} and returns the result value.<br>
  * A function can be used via its {@link #getName() name} in prefix notation
  * (e.g. "add(5,3)"). If the {@link #getOperatorSymbol() "operator symbol"} is
@@ -145,12 +145,12 @@ public interface FunctionIF {
      *         incompatible types.
      * @throws ValueException
      *         if an argument (e.g. an
-     *         {@link ContextIF#getValue(String) "environment value"}) is
-     *         {@link net.sf.mmm.value.api.GenericValueIF#hasValue() undefined}
+     *         {@link Context#getValue(String) "environment value"}) is
+     *         {@link net.sf.mmm.value.api.GenericValue#hasValue() undefined}
      *         or has the
      *         {@link net.sf.mmm.value.api.WrongValueTypeException "wrong type"}.
      */
-    Object calculate(ContextIF environment, TermIF... arguments) throws ValueException;
+    Object calculate(Context environment, TermIF... arguments) throws ValueException;
 
     /**
      * This method should return the result of {@link FunctionIF#getName()}. If

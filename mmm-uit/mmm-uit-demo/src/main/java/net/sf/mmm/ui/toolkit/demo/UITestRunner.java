@@ -3,36 +3,36 @@ package net.sf.mmm.ui.toolkit.demo;
 
 import java.io.File;
 
-import net.sf.mmm.ui.toolkit.api.UINodeIF;
-import net.sf.mmm.ui.toolkit.api.UIFactoryIF;
+import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanelIF;
-import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanelIF;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanelIF;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanelIF;
+import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListenerIF;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccessIF;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuIF;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItemIF;
+import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
+import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButtonIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBoxIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownloadIF;
-import net.sf.mmm.ui.toolkit.api.widget.UILabelIF;
-import net.sf.mmm.ui.toolkit.api.widget.UIListIF;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBarIF;
-import net.sf.mmm.ui.toolkit.api.widget.UITextFieldIF;
-import net.sf.mmm.ui.toolkit.api.widget.UITreeIF;
+import net.sf.mmm.ui.toolkit.api.widget.UIButton;
+import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
+import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
+import net.sf.mmm.ui.toolkit.api.widget.UILabel;
+import net.sf.mmm.ui.toolkit.api.widget.UIList;
+import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
+import net.sf.mmm.ui.toolkit.api.widget.UITextField;
+import net.sf.mmm.ui.toolkit.api.widget.UITree;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIFrameIF;
+import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
-import net.sf.mmm.ui.toolkit.base.model.UIDefaultListModel;
-import net.sf.mmm.ui.toolkit.base.model.UIDefaultTreeModel;
-import net.sf.mmm.ui.toolkit.base.model.UINumericRangeModel;
+import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
+import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel;
+import net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel;
 
 /**
- * This is a test runner that tests the various UIFactory implementations.
+ * This is a test runner that tests the various UIFactorySwing implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -45,42 +45,42 @@ public class UITestRunner {
      * @param factory
      *        is the actual factory implementation to use.
      */
-    private static void runTest(UIFactoryIF factory) {
+    private static void runTest(UIFactory factory) {
 
         System.out.println(factory);
         System.out.println(factory.getDisplay());
-        final UIFrameIF frame = factory.createFrame("TestFrame");
-        UIMenuIF fileMenu = frame.getMenuBar().addMenu("File");
-        fileMenu.addItem("Load", new UIActionListenerIF() {
+        final UIFrame frame = factory.createFrame("TestFrame");
+        UIMenu fileMenu = frame.getMenuBar().addMenu("File");
+        fileMenu.addItem("Load", new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 frame.showMessage("You selected load", "Hi", MessageType.INFO);
             }
 
         });
         fileMenu.addSeparator();
-        UIMenuIF subMenu = fileMenu.addSubMenu("Submenu");
-        subMenu.addItem("Test", new UIActionListenerIF() {
+        UIMenu subMenu = fileMenu.addSubMenu("Submenu");
+        subMenu.addItem("Test", new UIActionListener() {
 
-            public void invoke(UINodeIF source, ActionType action) {
+            public void invoke(UINode source, ActionType action) {
 
                 if (action == ActionType.SELECT) {
                     if (!frame.showQuestion("Did you mean to do that?", "Test")) {
-                        ((UIMenuItemIF) source).setSelected(false);
+                        ((UIMenuItem) source).setSelected(false);
                     }
                 }
             }
 
         }, ButtonStyle.CHECK);
         /*
-        final UISplitPanelIF splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
-        final UIDefaultListModel<String> listModel = new UIDefaultListModel<String>();
+        final UISplitPanel splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
+        final DefaultUIListModel<String> listModel = new DefaultUIListModel<String>();
         listModel.addElement("Hi");
         listModel.addElement("this");
         listModel.addElement("is");
-        UIComboBoxIF comboBox = factory.createComboBox(listModel);
-        UIListIF list = factory.createList(listModel);
+        UIComboBox comboBox = factory.createComboBox(listModel);
+        UIList list = factory.createList(listModel);
         listModel.addElement("a");
         listModel.addElement("test");
 
@@ -88,8 +88,8 @@ public class UITestRunner {
         splitPanel.setTopOrLeftComponent(comboBox);
         */
         /*
-        UITreeIF tree = factory.createTree(false);
-        UIDefaultTreeModel<String> treeModel = new UIDefaultTreeModel<String>("root");
+        UITree tree = factory.createTree(false);
+        DefaultUITreeModel<String> treeModel = new DefaultUITreeModel<String>("root");
         treeModel.getRoot().createChildNode("child1");
         tree.setModel(treeModel);
         // tree.setEnabled(false);
@@ -97,36 +97,36 @@ public class UITestRunner {
         // splitPanel.setEnabled(false);
         splitPanel.setDividerPosition(0.5);
          */
-        UIScrollPanelIF scroll = factory.createScrollPanel();
+        UIScrollPanel scroll = factory.createScrollPanel();
         
-        UIPanelIF panel = factory.createPanel(Orientation.VERTICAL);
+        UIPanel panel = factory.createPanel(Orientation.VERTICAL);
         
-        UIButtonIF button = factory.createButton("Test");
+        UIButton button = factory.createButton("Test");
         panel.addComponent(button);
         button = factory.createButton("Test2");
         panel.addComponent(button);
-        UITextFieldIF text = factory.createTextField();
+        UITextField text = factory.createTextField();
         panel.addComponent(text);
-        UILabelIF label = factory.createLabel("Label");
+        UILabel label = factory.createLabel("Label");
         panel.addComponent(label);
-        UISlideBarIF slider = factory.createSlideBar(new UINumericRangeModel(0, 100));
+        UISlideBar slider = factory.createSlideBar(new NumericUIRangeModel(0, 100));
         panel.addComponent(slider);
-        FileAccessIF access = new SimpleFileAccess(new File("/etc/fstab"));
-        UIFileDownloadIF download = factory.createFileDownload(access);
+        FileAccess access = new SimpleFileAccess(new File("/etc/fstab"));
+        UIFileDownload download = factory.createFileDownload(access);
         panel.addComponent(download);
         
         scroll.setComponent(panel);
         
-        UITabbedPanelIF tabPanel = factory.createTabbedPanel();
+        UITabbedPanel tabPanel = factory.createTabbedPanel();
         tabPanel.addComponent(scroll, "Scroll");
         frame.setComposite(tabPanel);
         
-        final UIDefaultListModel<String> listModel = new UIDefaultListModel<String>();
+        final DefaultUIListModel<String> listModel = new DefaultUIListModel<String>();
         listModel.addElement("Hi");
         listModel.addElement("this");
         listModel.addElement("is");
-        UIComboBoxIF comboBox = factory.createComboBox(listModel);
-        UIListIF list = factory.createList(listModel);
+        UIComboBox comboBox = factory.createComboBox(listModel);
+        UIList list = factory.createList(listModel);
         panel.addComponent(comboBox);
         panel.addComponent(list);
         listModel.addElement("a");
@@ -159,8 +159,8 @@ public class UITestRunner {
      */
     public static void main(String[] args) {
 
-        //runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactory());
-        runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactory());
+        //runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
+        runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
     }
 
 }

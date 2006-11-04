@@ -10,10 +10,10 @@ import org.w3c.dom.Element;
 
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.util.xml.impl.DomXmlWriter;
 import net.sf.mmm.util.xml.impl.OutputXmlWriter;
-import net.sf.mmm.value.api.ValueManagerIF;
+import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
 
 /**
@@ -41,7 +41,7 @@ public class XmlValueManagerTest extends TestCase {
    * @throws XmlException
    *         if the xml is illegal or general error.
    */
-  public static void toXml(XmlWriterIF xmlWriter) throws XmlException {
+  public static void toXml(XmlWriter xmlWriter) throws XmlException {
 
     String ns3 = "http://URI3";
     // xmlWriter.writeStartElement(ValueManagerIF.XML_TAG_VALUE);
@@ -78,9 +78,9 @@ public class XmlValueManagerTest extends TestCase {
      * xmlSerializer.writeStartDocument(); toXml(xmlSerializer);
      * xmlSerializer.writeEndDocument(); xmlSerializer.close();
      */
-    ValueManagerIF<Element> manager = new XmlValueManager();
+    ValueManager<Element> manager = new XmlValueManager();
     Document doc = DomUtil.createDocument();
-    XmlWriterIF domWriter = new DomXmlWriter(doc);
+    XmlWriter domWriter = new DomXmlWriter(doc);
     toXml(domWriter);
     System.out.println(manager.getValueType());
     System.out.println(manager.getName());
@@ -96,7 +96,7 @@ public class XmlValueManagerTest extends TestCase {
     System.out.println("--");
     // assertEquals(xmlString, xmlString2);
     StringWriter sw = new StringWriter();
-    XmlWriterIF outSerializer = new OutputXmlWriter(sw, null, "UTF-8");
+    XmlWriter outSerializer = new OutputXmlWriter(sw, null, "UTF-8");
     toXml(outSerializer);
     System.out.println(sw.toString());
     System.out.println("--");

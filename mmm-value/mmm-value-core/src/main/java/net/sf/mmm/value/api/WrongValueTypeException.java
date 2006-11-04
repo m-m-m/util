@@ -2,7 +2,7 @@
 package net.sf.mmm.value.api;
 
 import net.sf.mmm.value.CoreNlsResourceBundle;
-import net.sf.mmm.value.api.GenericValueIF;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This expeption is thrown if a value has the wrong type (a different value
@@ -23,7 +23,7 @@ public class WrongValueTypeException extends ValueException {
    * @param expectedType
    *        is the expected type of the value.
    */
-  public WrongValueTypeException(GenericValueIF genericValue, Class expectedType) {
+  public WrongValueTypeException(GenericValue genericValue, Class expectedType) {
 
     this(genericValue, expectedType, null);
   }
@@ -38,13 +38,21 @@ public class WrongValueTypeException extends ValueException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public WrongValueTypeException(GenericValueIF genericValue, Class expectedType, Throwable nested) {
+  public WrongValueTypeException(GenericValue genericValue, Class expectedType, Throwable nested) {
 
     super(nested, CoreNlsResourceBundle.ERR_VALUE_WRONG_TYPE, genericValue, getType(genericValue),
         expectedType);
   }
 
-  private static Class getType(GenericValueIF genericValue) {
+  /**
+   * This method gets the type reflecting the actual value contained in the
+   * <code>genericValue</code>.
+   * 
+   * @param genericValue
+   *        is the value for which the type is requested.
+   * @return the type of the given <code>genericValue</code>.
+   */
+  private static Class getType(GenericValue genericValue) {
 
     Object value = genericValue.getObject(null);
     if (value == null) {
@@ -59,9 +67,9 @@ public class WrongValueTypeException extends ValueException {
    * 
    * @return the wrong typed value.
    */
-  public GenericValueIF getGenericValue() {
+  public GenericValue getGenericValue() {
 
-    return (GenericValueIF) getNlsMessage().getArgument(0);
+    return (GenericValue) getNlsMessage().getArgument(0);
   }
 
   /**

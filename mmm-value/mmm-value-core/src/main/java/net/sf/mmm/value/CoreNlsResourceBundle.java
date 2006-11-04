@@ -42,7 +42,7 @@ public class CoreNlsResourceBundle extends AbstractResourceBundle {
 
   /**
    * exception message if a node was tried to be changed that is NOT
-   * {@link net.sf.mmm.value.api.MutableGenericValueIF#isEditable() editable}.
+   * {@link net.sf.mmm.value.api.MutableGenericValue#isEditable() editable}.
    * 
    * @see net.sf.mmm.value.api.ValueNotEditableException
    */
@@ -50,7 +50,7 @@ public class CoreNlsResourceBundle extends AbstractResourceBundle {
 
   /**
    * exception message if
-   * {@link net.sf.mmm.value.api.GenericValueIF#getJavaClassInstance(Class) instantiation}
+   * {@link net.sf.mmm.value.api.GenericValue#getJavaClassInstance(Class) instantiation}
    * failed.
    * 
    * @see net.sf.mmm.value.api.ValueInstanciationException

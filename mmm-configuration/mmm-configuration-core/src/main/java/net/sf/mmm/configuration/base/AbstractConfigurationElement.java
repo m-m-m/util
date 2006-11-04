@@ -10,13 +10,13 @@ import java.util.Map;
 
 import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.ConfigurationIF;
-import net.sf.mmm.configuration.api.MutableConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.MutableConfiguration;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface for the
- * {@link #getType() type} {@link Type#ELEMENT element}.
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface for the
+ * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -42,7 +42,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getType() 
+   * @see net.sf.mmm.configuration.api.Configuration#getType()
    */
   public Type getType() {
 
@@ -51,13 +51,13 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * This method creates a new empty and unattached
-   * {@link Type#ATTRIBUTE attribute} as {@link #getChildren(Type) child} of
-   * this configuration.
+   * {@link Configuration.Type#ATTRIBUTE attribute} as
+   * {@link #getChildren(Type) child} of this configuration.
    * 
    * @param name
    *        is the {@link #getName() name} of the
-   *        {@link Type#ATTRIBUTE attribute} to create (including the
-   *        {@link ConfigurationIF#NAME_PREFIX_ATTRIBUTE prefix}
+   *        {@link Configuration.Type#ATTRIBUTE attribute} to create (including
+   *        the {@link Configuration#NAME_PREFIX_ATTRIBUTE prefix}
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the attribute.
    * @return the new attribute.
@@ -65,12 +65,12 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   protected abstract AbstractConfiguration createChildAttribute(String name, String namespaceUri);
 
   /**
-   * This method creates a new empty {@link Type#ELEMENT element} as child of
-   * this configuration.
+   * This method creates a new empty {@link Configuration.Type#ELEMENT element}
+   * as child of this configuration.
    * 
    * @param name
    *        is the {@link #getName() name} of the
-   *        {@link Type#ATTRIBUTE attribute} to create.
+   *        {@link Configuration.Type#ATTRIBUTE attribute} to create.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the element.
    * @return the new element.
@@ -79,7 +79,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespace)
@@ -90,7 +90,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
     }
     AbstractConfiguration child = null;
     QName qName = new QName(name, namespace);
-    if (name.charAt(0) == ConfigurationIF.NAME_PREFIX_ATTRIBUTE) {
+    if (name.charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
       child = this.childAttributes.get(qName);
     } else {
       List<AbstractConfiguration> childList = getChildElementList(qName);
@@ -103,14 +103,14 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
 
     AbstractConfiguration child;
     QName qName = new QName(name, namespace);
-    if (name.charAt(0) == ConfigurationIF.NAME_PREFIX_ATTRIBUTE) {
+    if (name.charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
       child = this.childAttributes.get(qName);
       if (child == null) {
         child = createChildAttribute(name, namespace);
@@ -125,8 +125,8 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.ConfigurationIF.Type)
-   *      
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
+   * 
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
@@ -159,9 +159,9 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
     String name = child.getName();
     if (ConfigurationDocumentIF.NAME_CONTEXT.equals(name)) {
-      Collection<? extends MutableConfigurationIF> envChildIt = child
+      Collection<? extends MutableConfiguration> envChildIt = child
           .getDescendants(ConfigurationDocumentIF.NAME_CONTEXT_VARIABLE);
-      for (ConfigurationIF variable : envChildIt) {
+      for (Configuration variable : envChildIt) {
         String variableName = variable.getDescendant(
             ConfigurationDocumentIF.NAME_CONTEXT_VARIABLE_NAME).getValue().getString();
         String variableValue = variable.getValue().getString();
@@ -191,7 +191,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   *      
+   * 
    */
   @Override
   protected void addChild(AbstractConfiguration child) {
@@ -219,7 +219,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   *      
+   * 
    */
   @Override
   protected void removeChild(AbstractConfiguration child) {
@@ -242,8 +242,8 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   }
 
   /**
-   * This method gets the list of all child {@link Type#ELEMENT elements} with
-   * the given
+   * This method gets the list of all child
+   * {@link Configuration.Type#ELEMENT elements} with the given
    * {@link AbstractConfiguration#createQualifiedName(String, String) "qualified name"}.
    * 
    * @param qName
@@ -262,7 +262,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {

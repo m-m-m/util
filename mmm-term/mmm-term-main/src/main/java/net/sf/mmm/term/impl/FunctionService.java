@@ -3,7 +3,7 @@ package net.sf.mmm.term.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.configuration.api.ConfigurationIF;
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.term.base.AbstractFunctionService;
 
 /**
@@ -30,7 +30,7 @@ public class FunctionService extends AbstractFunctionService {
      *        is the configuration to inject.
      */
     @Resource
-    public void configure(ConfigurationIF configuration) {
+    public void configure(Configuration configuration) {
 
     }
 

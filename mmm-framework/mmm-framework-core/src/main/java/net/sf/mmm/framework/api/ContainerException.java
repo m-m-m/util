@@ -5,7 +5,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
  * A {@link ContainerException} is thrown the
- * {@link IocContainerIF IoC container} itself is in an exceptional state.
+ * {@link IocContainer IoC container} itself is in an exceptional state.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

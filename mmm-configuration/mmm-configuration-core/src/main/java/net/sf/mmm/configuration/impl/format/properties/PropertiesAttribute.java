@@ -80,7 +80,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName() 
    */
   public String getName() {
 
@@ -89,7 +89,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationIF#getNamespaceUri()
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
    *      
    */
   public String getNamespaceUri() {

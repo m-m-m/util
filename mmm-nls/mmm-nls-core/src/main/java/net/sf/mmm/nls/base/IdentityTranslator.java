@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.nls.base;
 
-import net.sf.mmm.nls.api.StringTranslatorIF;
+import net.sf.mmm.nls.api.StringTranslator;
 
 /**
  * This is an implementation of the StringTranslatorIF interface that simply
@@ -9,10 +9,10 @@ import net.sf.mmm.nls.api.StringTranslatorIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class IdentityTranslator implements StringTranslatorIF {
+public final class IdentityTranslator implements StringTranslator {
 
     /** the singleton instance */
-    public static final StringTranslatorIF INSTANCE = new IdentityTranslator();
+    public static final StringTranslator INSTANCE = new IdentityTranslator();
 
     /**
      * The constructor.
@@ -23,7 +23,7 @@ public final class IdentityTranslator implements StringTranslatorIF {
     }
 
     /**
-     * @see net.sf.mmm.nls.api.StringTranslatorIF#translate(java.lang.String)
+     * @see net.sf.mmm.nls.api.StringTranslator#translate(java.lang.String)
      * 
      */
     public String translate(String message) {

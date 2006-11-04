@@ -3,16 +3,16 @@ package net.sf.mmm.ui.toolkit.api.event;
 
 /**
  * This class represents the event sent by the
- * {@link net.sf.mmm.ui.toolkit.api.model.UITableModelIF table-model} to its
- * {@link net.sf.mmm.ui.toolkit.api.event.UITableModelListenerIF listeners} in
+ * {@link net.sf.mmm.ui.toolkit.api.model.UITableModel table-model} to its
+ * {@link net.sf.mmm.ui.toolkit.api.event.UITableModelListener listeners} in
  * order to notify about changes of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITableIF table}.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UITable table}.<br>
  * Be aware that only
  * {@link net.sf.mmm.ui.toolkit.api.event.EventType#UPDATE update} events may
  * apply to incomplete columns (single column but
  * {@link #getRowStartIndex() row-start} is not <code>0</code> or
  * {@link #getRowEndIndex() row-end} is not
- * <code>{@link net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getRowCount() rowCount} -
+ * <code>{@link net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount() rowCount} -
  * 1</code>).
  * Other events must apply to complete column(s) or row(s).
  * 
@@ -20,74 +20,73 @@ package net.sf.mmm.ui.toolkit.api.event;
  */
 public class UITableModelEvent extends UIModelEvent {
 
-    /** the start index of the changed rows */
-    private final int rowStart;
+  /** the start index of the changed rows */
+  private final int rowStart;
 
-    /** the end index of the changed rows */
-    private final int rowEnd;
+  /** the end index of the changed rows */
+  private final int rowEnd;
 
-    /** the index of the changed column */
-    private final int column;
+  /** the index of the changed column */
+  private final int column;
 
-    /**
-     * The constructor.
-     * 
-     * @param eventType
-     *        is the type for the new event.
-     * @param rowStartIndex
-     *        is the index of the first row that has changed.
-     * @param rowEndIndex
-     *        is the index of the last row that has changed.
-     * @param columnIndex
-     *        is the index of the column that has changed.
-     */
-    public UITableModelEvent(EventType eventType, int rowStartIndex, int rowEndIndex,
-            int columnIndex) {
+  /**
+   * The constructor.
+   * 
+   * @param eventType
+   *        is the type for the new event.
+   * @param rowStartIndex
+   *        is the index of the first row that has changed.
+   * @param rowEndIndex
+   *        is the index of the last row that has changed.
+   * @param columnIndex
+   *        is the index of the column that has changed.
+   */
+  public UITableModelEvent(EventType eventType, int rowStartIndex, int rowEndIndex, int columnIndex) {
 
-        super(eventType);
-        this.rowStart = rowStartIndex;
-        this.rowEnd = rowEndIndex;
-        this.column = columnIndex;
-    }
+    super(eventType);
+    this.rowStart = rowStartIndex;
+    this.rowEnd = rowEndIndex;
+    this.column = columnIndex;
+  }
 
-    /**
-     * This method gets the index of the first row that has changed.
-     * 
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getRowCount()
-     * 
-     * @return the start index of the rows that changed or <code>-1</code> if
-     *         one or multiple
-     *         {@link net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getColumnName(int) column-name}(s)
-     *         changed.
-     */
-    public int getRowStartIndex() {
+  /**
+   * This method gets the index of the first row that has changed.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount()
+   * 
+   * @return the start index of the rows that changed or <code>-1</code> if
+   *         one or multiple
+   *         {@link net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnName(int) column-name}(s)
+   *         changed.
+   */
+  public int getRowStartIndex() {
 
-        return this.rowStart;
-    }
+    return this.rowStart;
+  }
 
-    /**
-     * This method gets the index of the last row that has changed.
-     * 
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getRowCount()
-     * 
-     * @return the end index of the rows that changed.
-     */
-    public int getRowEndIndex() {
+  /**
+   * This method gets the index of the last row that has changed.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount()
+   * 
+   * @return the end index of the rows that changed.
+   */
+  public int getRowEndIndex() {
 
-        return this.rowEnd;
-    }
+    return this.rowEnd;
+  }
 
-    /**
-     * This method gets the index of the column that has changed.
-     * 
-     * @see net.sf.mmm.ui.toolkit.api.model.UITableModelIF#getColumnCount()
-     * 
-     * @return the index of the column that changed or <code>-1</code> if all
-     *         columns changed.
-     */
-    public int getColumnIndex() {
+  /**
+   * This method gets the index of the column that has changed.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnCount()
+   * 
+   * @return the index of the column that changed or <code>-1</code> if all
+   *         columns changed.
+   */
+  public int getColumnIndex() {
 
-        return this.column;
-    }
+    return this.column;
+  }
 
 }

@@ -7,11 +7,11 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import net.sf.mmm.framework.api.ComponentDescriptorIF;
+import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
-import net.sf.mmm.framework.api.ComponentInstanceContainerIF;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.base.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentInstanceContainer;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.base.SimpleComponentInstanceContainer;
 import net.sf.mmm.framework.base.provider.AbstractStaticSingletonComponentProvider;
 
 /**
@@ -128,42 +128,42 @@ public class ThreadPoolProvider extends AbstractStaticSingletonComponentProvider
   }
 
   /**
-   * @see net.sf.mmm.framework.base.provider.AbstractStaticSingletonComponentProvider#requestSingleton(net.sf.mmm.framework.api.ComponentDescriptorIF,
-   *      java.lang.String, net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.base.provider.AbstractStaticSingletonComponentProvider#requestSingleton(net.sf.mmm.framework.api.ComponentDescriptor,
+   *      java.lang.String, net.sf.mmm.framework.api.ComponentManager)
    * 
    */
   @Override
-  protected ComponentInstanceContainerIF<Executor> requestSingleton(
-      ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId,
-      ComponentManagerIF componentManager) {
+  protected ComponentInstanceContainer<Executor> requestSingleton(
+      ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) {
 
     // TODO Auto-generated method stub
     return super.requestSingleton(sourceDescriptor, sourceInstanceId, componentManager);
   }
 
   /**
-   * @see net.sf.mmm.framework.base.provider.AbstractDefaultInstanceComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptorIF,
-   *      java.lang.String, net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.base.provider.AbstractDefaultInstanceComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptor,
+   *      java.lang.String, net.sf.mmm.framework.api.ComponentManager)
    * 
    */
   @Override
-  protected ComponentInstanceContainerIF<Executor> requestDefault(
-      ComponentDescriptorIF<?> sourceDescriptor, String sourceInstanceId,
-      ComponentManagerIF componentManager) throws ComponentException {
+  protected ComponentInstanceContainer<Executor> requestDefault(
+      ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
 
     ThreadFactory threadFactory = componentManager.requestComponent(ThreadFactory.class);
     this.threadPool = new ThreadPoolExecutor(this.corePoolSize, this.maximumPoolSize, 60L,
         TimeUnit.SECONDS, new SynchronousQueue<Runnable>(), threadFactory);
-    return new ComponentInstanceContainer<Executor>(this.threadPool);
+    return new SimpleComponentInstanceContainer<Executor>(this.threadPool);
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProviderIF#dispose(net.sf.mmm.framework.api.ComponentInstanceContainerIF,
-   *      net.sf.mmm.framework.api.ComponentManagerIF)
+   * @see net.sf.mmm.framework.api.ComponentProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer,
+   *      net.sf.mmm.framework.api.ComponentManager)
    */
   @Override
-  public void dispose(ComponentInstanceContainerIF<Executor> instanceContainer,
-      ComponentManagerIF componentManager) {
+  public void dispose(ComponentInstanceContainer<Executor> instanceContainer,
+      ComponentManager componentManager) {
 
     this.threadPool.shutdown();
     super.dispose(instanceContainer, componentManager);

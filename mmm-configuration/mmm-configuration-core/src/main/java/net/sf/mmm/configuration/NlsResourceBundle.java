@@ -21,7 +21,7 @@ public class NlsResourceBundle extends AbstractResourceBundle {
 
   /**
    * exception message if a node was tried to be changed that is not
-   * {@link net.sf.mmm.configuration.api.MutableConfigurationIF#isEditable() editable}.
+   * {@link net.sf.mmm.configuration.api.MutableConfiguration#isEditable() editable}.
    * 
    * @see net.sf.mmm.configuration.api.ConfigurationNotEditableException
    */

@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.base.path;
 
 /**
  * This class represents a single segment of a
- * {@link net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(String, String) descendant-path}.
+ * {@link net.sf.mmm.configuration.api.Configuration#getDescendants(String, String) descendant-path}.
  * A segment is a substring of the descendant-path that represents a query for a
  * {@link net.sf.mmm.configuration.base.AbstractConfiguration#getChild(String) child}
  * configuration. It is build out of a name (-pattern) and an optional
@@ -15,7 +15,7 @@ package net.sf.mmm.configuration.base.path;
 public class PathSegment {
 
   /**
-   * the segment string ({@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name})
+   * the segment string ({@link net.sf.mmm.configuration.api.Configuration#getName() name})
    */
   private String string;
 
@@ -63,7 +63,7 @@ public class PathSegment {
    * 
    * @return <code>true</code> if the {@link #getString() string} is a pattern
    *         and <code>false</code> if it is a regular
-   *         {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}.
+   *         {@link net.sf.mmm.configuration.api.Configuration#getName() name}.
    */
   public boolean isPattern() {
 
@@ -72,11 +72,11 @@ public class PathSegment {
 
   /**
    * This method gets the string. It is eigther a regular
-   * {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name} of the
+   * {@link net.sf.mmm.configuration.api.Configuration#getName() name} of the
    * according
-   * {@link net.sf.mmm.configuration.api.ConfigurationIF configuration} or a
+   * {@link net.sf.mmm.configuration.api.Configuration configuration} or a
    * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-   * the {@link net.sf.mmm.configuration.api.ConfigurationIF#getName() name}
+   * the {@link net.sf.mmm.configuration.api.Configuration#getName() name}
    * must match.
    * 
    * @return the string.

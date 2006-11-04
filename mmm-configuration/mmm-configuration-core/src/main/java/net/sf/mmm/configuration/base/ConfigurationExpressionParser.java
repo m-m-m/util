@@ -14,8 +14,8 @@ import net.sf.mmm.term.impl.function.FunctionConcat;
 
 /**
  * This is a simple, hand-written parser for expressions allowed in
- * {@link net.sf.mmm.configuration.api.ConfigurationIF configuration}
- * {@link net.sf.mmm.configuration.api.ConfigurationIF#getValue() values}.
+ * {@link net.sf.mmm.configuration.api.Configuration configuration}
+ * {@link net.sf.mmm.configuration.api.Configuration#getValue() values}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -92,7 +92,8 @@ public class ConfigurationExpressionParser {
             // TODO i18n
             throw new ParseException(
                 "Could not parse \"{0}\": character \"{1}\" must be followed by \"{2}\"!",
-                expression, VARIABLE_START_CAR1, VARIABLE_START_CAR2);
+                expression, Character.valueOf(VARIABLE_START_CAR1), Character
+                    .valueOf(VARIABLE_START_CAR2));
           }
         } else {
           buffer.append(c);

@@ -4,9 +4,9 @@ package net.sf.mmm.configuration.api;
 /**
  * This is the exception thrown if a descendant path is illegal.
  * 
- * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendant(String,
+ * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String,
  *      String)
- * @see net.sf.mmm.configuration.api.ConfigurationIF#getDescendants(String,
+ * @see net.sf.mmm.configuration.api.Configuration#getDescendants(String,
  *      String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -2,14 +2,14 @@
 package net.sf.mmm.framework.base;
 
 import net.sf.mmm.framework.NlsResourceBundle;
-import net.sf.mmm.framework.api.ComponentProviderIF;
+import net.sf.mmm.framework.api.ComponentProvider;
 import net.sf.mmm.framework.api.DependencyException;
-import net.sf.mmm.framework.api.IocContainerIF;
+import net.sf.mmm.framework.api.IocContainer;
 
 /**
  * A {@link DependencyCycleException} is thrown by the
- * {@link IocContainerIF IoC container} if some
- * {@link ComponentProviderIF components} cause a cyclic dependency.
+ * {@link IocContainer IoC container} if some
+ * {@link ComponentProvider components} cause a cyclic dependency.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

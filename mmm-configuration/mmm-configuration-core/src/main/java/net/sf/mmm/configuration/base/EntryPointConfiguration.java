@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.base;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfigurationIF} interface that
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface that
  * allows to insert an existing {@link #delegate configuration} at another place
  * in the configuration tree.
  * 

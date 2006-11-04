@@ -3,7 +3,7 @@ package net.sf.mmm.value.impl.type;
 
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.type.DurationIF;
 import net.sf.mmm.value.api.type.TimeIF;
 
@@ -148,10 +148,10 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
    * 
    */
-  public void toXml(XmlWriterIF xmlWriter) throws XmlException {
+  public void toXml(XmlWriter xmlWriter) throws XmlException {
 
   // TODO
   }

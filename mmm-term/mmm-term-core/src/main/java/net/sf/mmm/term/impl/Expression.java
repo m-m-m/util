@@ -1,13 +1,13 @@
 /* $Id$ */
 package net.sf.mmm.term.impl;
 
-import net.sf.mmm.context.api.ContextIF;
+import net.sf.mmm.context.api.Context;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.FunctionIF;
 import net.sf.mmm.term.api.TermIF;
 import net.sf.mmm.term.base.AbstractTerm;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriterIF;
+import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -55,10 +55,10 @@ public class Expression extends AbstractTerm {
     }
 
     /**
-     * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.ContextIF)
+     * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.Context)
      * 
      */
-    public Object evaluate(ContextIF environment) throws CalculationException,
+    public Object evaluate(Context environment) throws CalculationException,
             ValueException {
 
         return this.function.calculate(environment, this.arguments);
@@ -103,10 +103,10 @@ public class Expression extends AbstractTerm {
     }
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializableIF#toXml(XmlWriterIF)
+     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
      * 
      */
-    public void toXml(XmlWriterIF serializer) throws XmlException {
+    public void toXml(XmlWriter serializer) throws XmlException {
 
         serializer.writeStartElement(XML_TAG_EXPRESSION);
         serializer.writeAttribute(XML_ATR_EXPRESSION_FKTNAME, getFunction().getName());

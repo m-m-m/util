@@ -2,18 +2,18 @@
 package net.sf.mmm.framework.base;
 
 import net.sf.mmm.framework.NlsResourceBundle;
-import net.sf.mmm.framework.api.ComponentManagerIF;
-import net.sf.mmm.framework.api.ComponentProviderIF;
-import net.sf.mmm.framework.api.IocSecurityManagerIF;
+import net.sf.mmm.framework.api.ComponentManager;
+import net.sf.mmm.framework.api.ComponentProvider;
+import net.sf.mmm.framework.api.IocSecurityManager;
 
 /**
  * A {@link ComponentPermissionDeniedException} is thrown if a
- * {@link ComponentProviderIF component} tries to
- * {@link ComponentManagerIF#requestComponent(Class, String) request} another
- * {@link ComponentProviderIF component} without having permission to do so by
+ * {@link ComponentProvider component} tries to
+ * {@link ComponentManager#requestComponent(Class, String) request} another
+ * {@link ComponentProvider component} without having permission to do so by
  * the security manager.
  * 
- * @see IocSecurityManagerIF
+ * @see IocSecurityManager
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

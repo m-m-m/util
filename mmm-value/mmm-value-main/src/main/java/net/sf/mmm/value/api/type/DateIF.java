@@ -1,14 +1,14 @@
 /* $Id$ */
 package net.sf.mmm.value.api.type;
 
-import net.sf.mmm.util.xml.api.XmlSerializableIF;
+import net.sf.mmm.util.xml.api.XmlSerializable;
 
 /**
  * This is the interface for a date value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DateIF extends XmlSerializableIF {
+public interface DateIF extends XmlSerializable {
 
   /** the month january as number */
   public static final int MONTH_JANUARY = 1;
@@ -47,7 +47,7 @@ public interface DateIF extends XmlSerializableIF {
   public static final int MONTH_DECEMBER = 12;
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManagerIF#getName() name} of this
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
    * value type.
    */
   String VALUE_NAME = "Date";
