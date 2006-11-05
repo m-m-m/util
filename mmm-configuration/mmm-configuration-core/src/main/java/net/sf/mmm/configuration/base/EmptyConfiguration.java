@@ -82,14 +82,14 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#addListener(net.sf.mmm.util.event.EventListener)
+   * @see net.sf.mmm.util.event.EventSource#addListener(net.sf.mmm.util.event.EventListener)
    */
   public void addListener(ConfigurationChangeListener listener) {
 
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(net.sf.mmm.util.event.EventListener)
+   * @see net.sf.mmm.util.event.EventSource#removeListener(net.sf.mmm.util.event.EventListener)
    */
   public void removeListener(ConfigurationChangeListener listener) {
 

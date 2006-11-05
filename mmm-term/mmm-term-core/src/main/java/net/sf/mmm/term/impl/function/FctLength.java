@@ -15,60 +15,59 @@ import net.sf.mmm.term.api.OperatorPriority;
  */
 public class FctLength {
 
-    /**
-     * the
-     * {@link net.sf.mmm.term.api.FunctionIF#getOperatorSymbol() "operator symbol"}
-     */
-    public static final String SYMBOL = "#";
+  /**
+   * the
+   * {@link net.sf.mmm.term.api.Function#getOperatorSymbol() "operator symbol"}
+   */
+  public static final String SYMBOL = "#";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getName() name} of this
-     * function
-     */
-    public static final String NAME = "length";
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getName() name} of this function
+   */
+  public static final String NAME = "length";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getOperatorPriority() priority}
-     * of this function
-     */
-    public static final OperatorPriority PRIORITY = OperatorPriority.MAXIMUM;
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getOperatorPriority() priority} of
+   * this function
+   */
+  public static final OperatorPriority PRIORITY = OperatorPriority.MAXIMUM;
 
-    /**
-     * The constructor.
-     */
-    private FctLength() {
+  /**
+   * The constructor.
+   */
+  private FctLength() {
 
-        super();
+    super();
+  }
+
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument
+   *        is the argument of the function.
+   * @return the length of the given string.
+   */
+  public static Integer length(String argument) {
+
+    if (argument == null) {
+      return Integer.valueOf(0);
     }
+    return Integer.valueOf(argument.length());
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument
-     *        is the argument of the function.
-     * @return the length of the given string.
-     */
-    public static Integer length(String argument) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument
+   *        is the argument of the function.
+   * @return the length of the given string.
+   */
+  public static Integer length(List argument) {
 
-        if (argument == null) {
-            return Integer.valueOf(0);
-        }
-        return Integer.valueOf(argument.length());
+    if (argument == null) {
+      return Integer.valueOf(0);
     }
-
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument
-     *        is the argument of the function.
-     * @return the length of the given string.
-     */
-    public static Integer length(List argument) {
-
-        if (argument == null) {
-            return Integer.valueOf(0);
-        }
-        return Integer.valueOf(argument.size());
-    }
+    return Integer.valueOf(argument.size());
+  }
 
 }

@@ -11,26 +11,26 @@ package net.sf.mmm.term.impl.function;
  */
 public class FctAddString extends FctAdd {
 
-    /**
-     * The constructor.
-     */
-    private FctAddString() {
+  /**
+   * The constructor.
+   */
+  private FctAddString() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the sum of both arguments.
-     */
-    public static String add(String argument1, Object argument2) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the sum of both arguments.
+   */
+  public static String add(String argument1, Object argument2) {
 
-        return argument1 + argument2;
-    }
+    return argument1 + argument2;
+  }
 
 }

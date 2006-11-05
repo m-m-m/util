@@ -3,8 +3,8 @@ package net.sf.mmm.content.value.api;
 
 import java.util.Date;
 
-import net.sf.mmm.content.api.security.ContentActionIF;
-import net.sf.mmm.content.api.security.ContentUserIF;
+//import net.sf.mmm.content.api.security.ContentActionIF;
+//import net.sf.mmm.content.api.security.ContentUserIF;
 
 /**
  * This is the interface for the history of a specific
@@ -39,7 +39,7 @@ public interface RevisionHistoryIF {
    *         <code>0</code> (latest revision), this method gets the creator
    *         of the resource.
    */
-  ContentUserIF getSubjectOfCreation();
+  //ContentUserIF getSubjectOfCreation();
 
   /**
    * This method gets the date when the given action was performed on the
@@ -51,7 +51,7 @@ public interface RevisionHistoryIF {
    *         <code>null</code> if the actions was not (yet) performed on
    *         this revision.
    */
-  Date getDateOfAction(ContentActionIF action);
+  //Date getDateOfAction(ContentActionIF action);
 
   /**
    * This method gets the user that performed the given action on the
@@ -63,6 +63,6 @@ public interface RevisionHistoryIF {
    *         <code>null</code> if the actions was not (yet) performed on
    *         this revision.
    */
-  ContentUserIF getSubjectOfAction(ContentActionIF action);
+  //ContentUserIF getSubjectOfAction(ContentActionIF action);
 
 }

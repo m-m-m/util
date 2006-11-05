@@ -17,32 +17,32 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class GenericFunctionTest extends TestCase {
 
-    public GenericFunctionTest() {
+  public GenericFunctionTest() {
 
-        super();
-    }
+    super();
+  }
 
-    private void checkCalculation(GenericFunction f, Object arg1, Object arg2, Object result)
-            throws ValueException {
+  private void checkCalculation(GenericFunction f, Object arg1, Object arg2, Object result)
+      throws ValueException {
 
-        assertEquals(result, f.calculate(arg1, arg2));
-        // ATTENTION: for legal API usage no null arguments should be passed
-        // here - this is just a unit-test.
-        assertEquals(result, f.calculate(null, new Constant(arg1, null), new Constant(arg2, null)));
-    }
+    assertEquals(result, f.calculate(arg1, arg2));
+    // ATTENTION: for legal API usage no null arguments should be passed
+    // here - this is just a unit-test.
+    assertEquals(result, f.calculate(null, new Constant(arg1, null), new Constant(arg2, null)));
+  }
 
-    public void testAdd() throws Exception {
+  public void testAdd() throws Exception {
 
-        GenericFunction add = new GenericFunction("add", FctAdd.SYMBOL, OperatorPriority.MEDIUM);
-        add.addImplementation(FctAddNumeric.class);
-        add.addImplementation(FctAddString.class);
-        checkCalculation(add, 5, 3, 8);
-        checkCalculation(add, -1, 1, 0);
-        checkCalculation(add, -1, 1, 0);
-        checkCalculation(add, Integer.MAX_VALUE, 1, (Integer.MAX_VALUE + 1L));
-        checkCalculation(add, 1.0, -1.125, -0.125);
-        checkCalculation(add, "Hi", 42, "Hi42");
-        checkCalculation(add, new Short("5"), new Byte("42"), new Byte("47"));
-    }
+    GenericFunction add = new GenericFunction("add", FctAdd.SYMBOL, OperatorPriority.MEDIUM);
+    add.addImplementation(FctAddNumeric.class);
+    add.addImplementation(FctAddString.class);
+    checkCalculation(add, 5, 3, 8);
+    checkCalculation(add, -1, 1, 0);
+    checkCalculation(add, -1, 1, 0);
+    checkCalculation(add, Integer.MAX_VALUE, 1, (Integer.MAX_VALUE + 1L));
+    checkCalculation(add, 1.0, -1.125, -0.125);
+    checkCalculation(add, "Hi", 42, "Hi42");
+    checkCalculation(add, new Short("5"), new Byte("42"), new Byte("47"));
+  }
 
 }

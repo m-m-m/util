@@ -50,7 +50,7 @@ public interface ContentModelWriteAccessIF {
    *        field to create. They must NOT be
    *        {@link FieldModifiersIF#isTransient() transient} (@see
    *        #createField(ContentClassIF, String, Class, FieldModifiersIF,
-   *        TermIF)).
+   *        Term)).
    * @return the created field.
    * @throws ContentModelException
    *         if the field could not be created. This can have one of the
@@ -98,7 +98,7 @@ public interface ContentModelWriteAccessIF {
    */
   // ContentFieldIF createField(ContentClassIF declaringClass, String name,
   // Class type,
-  // FieldModifiersIF modifiers, TermIF term) throws ContentModelException;
+  // FieldModifiersIF modifiers, Term term) throws ContentModelException;
   /**
    * This method sets the status of the deleted flag of the given class or
    * field.

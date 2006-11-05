@@ -1,7 +1,7 @@
 /* $ Id: $ */
 package net.sf.mmm.configuration.impl.format.xml.dom;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
@@ -22,7 +22,7 @@ public class XmlFactory extends AbstractConfigurationFactory {
 
   /**
    * this is the default
-   * {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT format} name for this
+   * {@link ConfigurationDocument#NAME_INCLUDE_FORMAT format} name for this
    * implementation.
    * 
    * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#CONTEXT_VARIABLE_PREFIX

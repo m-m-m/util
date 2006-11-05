@@ -15,7 +15,7 @@ package net.sf.mmm.util.event;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface EventSourceIF<E extends Event, L extends EventListener<E>> {
+public interface EventSource<E extends Event, L extends EventListener<E>> {
 
     /**
      * This method registers a listener that is interested in events about

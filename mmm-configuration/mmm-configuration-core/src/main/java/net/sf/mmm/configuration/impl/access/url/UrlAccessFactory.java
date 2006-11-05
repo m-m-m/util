@@ -23,7 +23,7 @@ public class UrlAccessFactory extends AbstractConfigurationAccessFactory {
 
   /**
    * this is the default
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE_ACCESS access}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE_ACCESS access}
    * name for this implementation.
    * 
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#CONTEXT_VARIABLE_PREFIX

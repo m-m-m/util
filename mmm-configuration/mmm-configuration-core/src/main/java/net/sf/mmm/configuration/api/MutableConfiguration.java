@@ -68,7 +68,7 @@ public interface MutableConfiguration extends Configuration {
    * This method removes the this configuration and all its
    * {@link #getDescendants(String, String) descendants} from the configuration
    * tree.<br>
-   * After the configuration is {@link ConfigurationDocumentIF#save() saved}
+   * After the configuration is {@link ConfigurationDocument#save() saved}
    * this information is lost.
    * 
    * @see #disable()
@@ -94,7 +94,7 @@ public interface MutableConfiguration extends Configuration {
    * This method determines if this configuration can be edited by the end-user.
    * By default a configuration is NOT editable. The status is inherited by the
    * {@link #getValue() value} and {@link #getDescendant(String) descendants}
-   * but can be {@link ConfigurationDocumentIF#NAME_EDITABLE overriden}. This
+   * but can be {@link ConfigurationDocument#NAME_EDITABLE overriden}. This
    * flag is independent of {@link #isAddDefaults()}. This especially means
    * that a configuration that is NOT {@link #isEditable() editable} is NOT
    * necessarily immutable. If {@link #isAddDefaults()} is set to

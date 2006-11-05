@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.base;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
-import net.sf.mmm.term.api.TermIF;
+import net.sf.mmm.term.api.Term;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueException;
 import net.sf.mmm.value.base.AbstractStringValue;
@@ -162,7 +162,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   /**
    * This method is to has to be called every time the configuration changes. It
    * will set the "dirty" flag so
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#save() saving}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#save() saving}
    * is only performed as needed.
    */
   protected void setModified() {
@@ -173,7 +173,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#addListener(net.sf.mmm.util.event.EventListener)
+   * @see net.sf.mmm.util.event.EventSource#addListener(net.sf.mmm.util.event.EventListener)
    */
   public void addListener(ConfigurationChangeListener listener) {
 
@@ -181,7 +181,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(net.sf.mmm.util.event.EventListener)
+   * @see net.sf.mmm.util.event.EventSource#removeListener(net.sf.mmm.util.event.EventListener)
    */
   public void removeListener(ConfigurationChangeListener listener) {
 
@@ -203,7 +203,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
      * the expression term used if value contains variable(s), else
      * <code>null</code>
      */
-    private TermIF expression;
+    private Term expression;
 
     /**
      * The constructor.

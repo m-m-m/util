@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
@@ -45,7 +45,7 @@ public class XmlConfigurationTest extends TestCase {
     String href = XmlConfigurationTest.class.getName().replace('.', '/') + ".xml";
     ConfigurationAccess access = new ResourceAccess(href);
     ConfigurationFactory factory = new XmlFactory();
-    ConfigurationDocumentIF xmlDoc = factory.create(access);
+    ConfigurationDocument xmlDoc = factory.create(access);
     assertNotNull(xmlDoc);
     Context context = xmlDoc.getContext();
     assertNotNull(context);

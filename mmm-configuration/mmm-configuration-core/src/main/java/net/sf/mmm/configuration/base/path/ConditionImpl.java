@@ -12,7 +12,7 @@ import net.sf.mmm.value.api.GenericValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class Condition implements ConditionIF {
+public class ConditionImpl implements ConditionIF {
 
   /**
    * the pattern the name must match or <code>null</code> if name does not
@@ -36,7 +36,7 @@ public class Condition implements ConditionIF {
    * the pattern the name must match or <code>null</code> if name does not
    * matter.
    */
-  private final ComparatorIF comparator;
+  private final Comparator comparator;
 
   /**
    * The constructor.
@@ -48,7 +48,7 @@ public class Condition implements ConditionIF {
    *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}
    *        must match or <code>null</code> if any name is acceptable.
    */
-  public Condition(Pattern nameGlobPattern) {
+  public ConditionImpl(Pattern nameGlobPattern) {
 
     this(nameGlobPattern, null, null, null, null);
   }
@@ -67,8 +67,8 @@ public class Condition implements ConditionIF {
    * @param childsValuePattern
    * @param cmp
    */
-  public Condition(Pattern nameGlobPattern, String childsName, String childsValue,
-      Pattern childsValuePattern, ComparatorIF cmp) {
+  public ConditionImpl(Pattern nameGlobPattern, String childsName, String childsValue,
+      Pattern childsValuePattern, Comparator cmp) {
 
     super();
     this.namePattern = nameGlobPattern;

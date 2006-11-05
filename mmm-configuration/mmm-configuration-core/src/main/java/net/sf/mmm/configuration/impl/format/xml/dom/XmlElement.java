@@ -9,7 +9,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationElement;
@@ -36,7 +36,7 @@ public class XmlElement extends AbstractConfigurationElement {
    * 
    * @param ownerDocument
    *        is the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF document}
+   *        {@link net.sf.mmm.configuration.api.ConfigurationDocument document}
    *        this configuration belongs to.
    * @param parentConfiguration
    *        is the parent configuration.
@@ -121,20 +121,20 @@ public class XmlElement extends AbstractConfigurationElement {
    */
   public void disable() {
 
-    String prefix = this.element.lookupPrefix(ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION);
+    String prefix = this.element.lookupPrefix(ConfigurationDocument.NAMESPACE_URI_CONFIGURATION);
     if (prefix == null) {
-      prefix = ConfigurationDocumentIF.NAMESPACE_PREFIX_CONFIGURATION;
+      prefix = ConfigurationDocument.NAMESPACE_PREFIX_CONFIGURATION;
       String uri = this.element.lookupNamespaceURI(prefix);
-      if (!ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION.equals(uri)) {
+      if (!ConfigurationDocument.NAMESPACE_URI_CONFIGURATION.equals(uri)) {
         // TODO
         throw new ConfigurationException("Namespace "
-            + ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION + " not defined but prefix "
-            + ConfigurationDocumentIF.NAMESPACE_PREFIX_CONFIGURATION + " already in use!");
+            + ConfigurationDocument.NAMESPACE_URI_CONFIGURATION + " not defined but prefix "
+            + ConfigurationDocument.NAMESPACE_PREFIX_CONFIGURATION + " already in use!");
       }
     }
-    String qName = XmlDocument.createQualifiedName(ConfigurationDocumentIF.NAME_EXCLUDE, prefix);
+    String qName = XmlDocument.createQualifiedName(ConfigurationDocument.NAME_EXCLUDE, prefix);
     Element disableElement = this.element.getOwnerDocument().createElementNS(
-        ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION, qName);
+        ConfigurationDocument.NAMESPACE_URI_CONFIGURATION, qName);
     Node parent = this.element.getParentNode();
     if ((parent.getNodeType() == Node.ELEMENT_NODE) || (parent.getNodeType() == Node.DOCUMENT_NODE)) {
       parent.replaceChild(disableElement, this.element);
@@ -213,10 +213,10 @@ public class XmlElement extends AbstractConfigurationElement {
 
     Node parentNode = this.element.getParentNode();
     if (parentNode.getNodeType() == Node.ELEMENT_NODE) {
-      String qName = XmlDocument.createQualifiedName(ConfigurationDocumentIF.NAME_EXCLUDE,
-          ConfigurationDocumentIF.NAMESPACE_PREFIX_CONFIGURATION);
+      String qName = XmlDocument.createQualifiedName(ConfigurationDocument.NAME_EXCLUDE,
+          ConfigurationDocument.NAMESPACE_PREFIX_CONFIGURATION);
       Element exclude = this.element.getOwnerDocument().createElementNS(
-          ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION, qName);
+          ConfigurationDocument.NAMESPACE_URI_CONFIGURATION, qName);
       parentNode.replaceChild(exclude, this.element);
       XmlElement newParent = new XmlElement(this.document, getParent(), exclude);
       setParent(newParent);

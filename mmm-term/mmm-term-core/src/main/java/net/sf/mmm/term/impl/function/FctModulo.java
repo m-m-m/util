@@ -16,102 +16,105 @@ import net.sf.mmm.term.api.OperatorPriority;
  */
 public class FctModulo {
 
-    /**
-     * the suggested
-     * {@link net.sf.mmm.term.api.FunctionIF#getOperatorSymbol() "operator symbol"}
-     */
-    public static final String SYMBOL = "%";
+  /**
+   * the suggested
+   * {@link net.sf.mmm.term.api.Function#getOperatorSymbol() "operator symbol"}
+   */
+  public static final String SYMBOL = "%";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getName() name} of this
-     * function
-     */
-    public static final String NAME = "mod";
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getName() name} of this function
+   */
+  public static final String NAME = "mod";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getOperatorPriority() priority}
-     * of this function
-     */
-    public static final OperatorPriority PRIORITY = OperatorPriority.HIGH;
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getOperatorPriority() priority} of
+   * this function
+   */
+  public static final OperatorPriority PRIORITY = OperatorPriority.HIGH;
 
-    /**
-     * The constructor.
-     */
-    private FctModulo() {
+  /**
+   * The constructor.
+   */
+  private FctModulo() {
 
-        super();
+    super();
+  }
+
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the modulo of both arguments.
+   * @throws CalculationException
+   *         if the second argument is zero.
+   */
+  public static Integer mod(Integer argument1, Integer argument2) throws CalculationException {
+
+    if (argument2.intValue() == 0) {
+      throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);
     }
+    return new Integer(argument1.intValue() % argument2.intValue());
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the modulo of both arguments.
-     * @throws CalculationException if the second argument is zero.
-     */
-    public static Integer mod(Integer argument1, Integer argument2) throws CalculationException {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the modulo of both arguments.
+   * @throws CalculationException
+   *         if the second argument is zero.
+   */
+  public static Long mod(Long argument1, Integer argument2) throws CalculationException {
 
-        if (argument2.intValue() == 0) {
-            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
-        }
-        return new Integer(argument1.intValue() % argument2.intValue());
+    if (argument2.longValue() == 0) {
+      throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);
     }
+    return new Long(argument1.longValue() % argument2.longValue());
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the modulo of both arguments.
-     * @throws CalculationException if the second argument is zero.
-     */
-    public static Long mod(Long argument1, Integer argument2) throws CalculationException {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the modulo of both arguments.
+   * @throws CalculationException
+   *         if the second argument is zero.
+   */
+  public static Long mod(Integer argument1, Long argument2) throws CalculationException {
 
-        if (argument2.longValue() == 0) {
-            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
-        }
-        return new Long(argument1.longValue() % argument2.longValue());
+    if (argument2.longValue() == 0) {
+      throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);
     }
+    return new Long(argument1.longValue() % argument2.longValue());
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the modulo of both arguments.
-     * @throws CalculationException if the second argument is zero.
-     */
-    public static Long mod(Integer argument1, Long argument2) throws CalculationException {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the modulo of both arguments.
+   * @throws CalculationException
+   *         if the second argument is zero.
+   */
+  public static Long mod(Long argument1, Long argument2) throws CalculationException {
 
-        if (argument2.longValue() == 0) {
-            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
-        }
-        return new Long(argument1.longValue() % argument2.longValue());
+    if (argument2.longValue() == 0) {
+      throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);
     }
-
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the modulo of both arguments.
-     * @throws CalculationException if the second argument is zero.
-     */
-    public static Long mod(Long argument1, Long argument2) throws CalculationException {
-
-        if (argument2.longValue() == 0) {
-            throw new CalculationException(CoreNlsResourceBundle.ERR_FCT_DIV_ZERO);            
-        }
-        return new Long(argument1.longValue() % argument2.longValue());
-    }
+    return new Long(argument1.longValue() % argument2.longValue());
+  }
 
 }

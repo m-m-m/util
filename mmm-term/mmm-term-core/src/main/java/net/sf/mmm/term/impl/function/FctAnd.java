@@ -13,59 +13,58 @@ import net.sf.mmm.term.api.OperatorPriority;
  */
 public class FctAnd {
 
-    /**
-     * the
-     * {@link net.sf.mmm.term.api.FunctionIF#getOperatorSymbol() "operator symbol"}
-     */
-    public static final String SYMBOL = "&";
+  /**
+   * the
+   * {@link net.sf.mmm.term.api.Function#getOperatorSymbol() "operator symbol"}
+   */
+  public static final String SYMBOL = "&";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getName() name} of this
-     * function
-     */
-    public static final String NAME = "and";
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getName() name} of this function
+   */
+  public static final String NAME = "and";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getOperatorPriority() priority}
-     * of this function
-     */
-    public static final OperatorPriority PRIORITY = OperatorPriority.HIGH;
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getOperatorPriority() priority} of
+   * this function
+   */
+  public static final OperatorPriority PRIORITY = OperatorPriority.HIGH;
 
-    /**
-     * The constructor.
-     */
-    private FctAnd() {
+  /**
+   * The constructor.
+   */
+  private FctAnd() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the binary AND of both arguments.
-     */
-    public static Integer and(Integer argument1, Integer argument2) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the binary AND of both arguments.
+   */
+  public static Integer and(Integer argument1, Integer argument2) {
 
-        return Integer.valueOf(argument1.intValue() & argument2.intValue());
-    }
+    return Integer.valueOf(argument1.intValue() & argument2.intValue());
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument1
-     *        is the first argument.
-     * @param argument2
-     *        is the second argument.
-     * @return the logical AND of both arguments (<code>true</code> if both
-     *         arguments are <code>true</code>).
-     */
-    public static Boolean and(Boolean argument1, Boolean argument2) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument1
+   *        is the first argument.
+   * @param argument2
+   *        is the second argument.
+   * @return the logical AND of both arguments (<code>true</code> if both
+   *         arguments are <code>true</code>).
+   */
+  public static Boolean and(Boolean argument1, Boolean argument2) {
 
-        return Boolean.valueOf(argument1.booleanValue() && argument2.booleanValue());
-    }
+    return Boolean.valueOf(argument1.booleanValue() && argument2.booleanValue());
+  }
 
 }

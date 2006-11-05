@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.term.api.TermIF;
+import net.sf.mmm.term.api.Term;
 
 /**
  * This interface extends the {@link ContentModelReadAccessIF}interface with
@@ -84,7 +84,7 @@ public interface MutableModelStoreIF extends ContentModelReadAccessIF {
    *         </ul>
    */
   ContentFieldIF createTransientField(ContentClassIF declaringClass, String name, Class type,
-      boolean isFinal, TermIF term) throws ContentModelException;
+      boolean isFinal, Term term) throws ContentModelException;
 
   /**
    * This method sets the status of the deleted flag of the given class or

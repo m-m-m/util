@@ -4,9 +4,9 @@ package net.sf.mmm.configuration.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.term.api.FunctionIF;
+import net.sf.mmm.term.api.Function;
 import net.sf.mmm.term.api.ParseException;
-import net.sf.mmm.term.api.TermIF;
+import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.base.Variable;
 import net.sf.mmm.term.impl.Constant;
 import net.sf.mmm.term.impl.Expression;
@@ -22,7 +22,7 @@ import net.sf.mmm.term.impl.function.FunctionConcat;
 public class ConfigurationExpressionParser {
 
   /** the string-concat function */
-  private static final FunctionIF FUNCTION_CONCAT = new FunctionConcat();
+  private static final Function FUNCTION_CONCAT = new FunctionConcat();
 
   /** the first start char of a variable */
   private static final char VARIABLE_START_CAR1 = '$';
@@ -57,12 +57,12 @@ public class ConfigurationExpressionParser {
    * @throws Exception
    *         if the parsing failed.
    */
-  public static TermIF parse(String expression) throws Exception {
+  public static Term parse(String expression) throws Exception {
 
     StringBuffer buffer = new StringBuffer();
     int pos = 0;
     int len = expression.length();
-    List<TermIF> arguments = new ArrayList<TermIF>();
+    List<Term> arguments = new ArrayList<Term>();
     boolean inVariable = false;
     while (pos < len) {
       char c = expression.charAt(pos++);
@@ -108,7 +108,7 @@ public class ConfigurationExpressionParser {
       String constantString = buffer.toString();
       arguments.add(new Constant<String>(constantString));
     }
-    return new Expression(FUNCTION_CONCAT, arguments.toArray(new TermIF[arguments.size()]));
+    return new Expression(FUNCTION_CONCAT, arguments.toArray(new Term[arguments.size()]));
   }
 
 }

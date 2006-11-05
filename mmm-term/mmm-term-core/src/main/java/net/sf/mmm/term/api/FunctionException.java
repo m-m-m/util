@@ -5,29 +5,29 @@ import net.sf.mmm.nls.base.NlsException;
 
 /**
  * This exception represents an error that occured because of an invalid
- * implementation or usage of a {@link net.sf.mmm.term.api.FunctionIF function}.
+ * implementation or usage of a {@link net.sf.mmm.term.api.Function function}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class FunctionException extends NlsException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -1874189448219258306L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -1874189448219258306L;
 
-    /**
-     * @see NlsException#NlsException(String, Object[])
-     */
-    public FunctionException(String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see NlsException#NlsException(String, Object[])
+   */
+  public FunctionException(String internaitionalizedMessage, Object... arguments) {
 
-        super(internaitionalizedMessage, arguments);
-    }
+    super(internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see NlsException#NlsException(Throwable, String, Object[])
-     */
-    public FunctionException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see NlsException#NlsException(Throwable, String, Object[])
+   */
+  public FunctionException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 
-        super(nested, internaitionalizedMessage, arguments);
-    }
+    super(nested, internaitionalizedMessage, arguments);
+  }
 
 }

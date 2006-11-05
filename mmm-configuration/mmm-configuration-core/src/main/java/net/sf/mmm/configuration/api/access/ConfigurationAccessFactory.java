@@ -10,8 +10,8 @@ import net.sf.mmm.value.api.ValueException;
  * This is the interface for a factory of
  * {@link net.sf.mmm.configuration.api.access.ConfigurationAccess accessors}
  * for
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE included}
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-documents}.
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE included}
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-documents}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,7 +37,7 @@ public interface ConfigurationAccessFactory {
   /**
    * This is the suffix for a context variable containg the parent access used
    * if the
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE_HREF}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE_HREF}
    * is a relative path.
    */
   String CONTEXT_VARIABLE_SUFFIX_PARENT = ".parent";
@@ -45,7 +45,7 @@ public interface ConfigurationAccessFactory {
   /**
    * This is the suffix for a context variable containg the current href used as
    * base if the
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE_HREF}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE_HREF}
    * is a relative path.
    */
   String CONTEXT_VARIABLE_SUFFIX_HREF = ".basehref";
@@ -78,7 +78,7 @@ public interface ConfigurationAccessFactory {
    *        for this factory. TODO: explain more
    * @param include
    *        is the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE include}
+   *        {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE include}
    *        configuration.
    * @throws ConfigurationException
    *         if the configuration is illegal for this implementation.
@@ -106,8 +106,8 @@ public interface ConfigurationAccessFactory {
 
   /**
    * This method gets the {@link ConfigurationAccess accessors} for the
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE included}
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-documents}.
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE included}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-documents}.
    * The method is called exactly once after this access-list is
    * {@link #configure(String, Context, Configuration) configured}.
    * 

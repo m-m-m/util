@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.impl.access.resource;
 
 import java.net.URL;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
@@ -41,7 +41,7 @@ public class ClasspathResourceAccessFactory implements ConfigurationAccessFactor
   public void configure(String prefix, Context environment, Configuration include)
       throws ConfigurationException, ValueException {
 
-    String resourceName = include.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_HREF)
+    String resourceName = include.getDescendant(ConfigurationDocument.NAME_INCLUDE_HREF)
         .getValue().getString();
     URL url = Thread.currentThread().getContextClassLoader().getResource(resourceName);
     if (url == null) {

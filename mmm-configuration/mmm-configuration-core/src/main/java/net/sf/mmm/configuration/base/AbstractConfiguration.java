@@ -73,7 +73,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF document} this
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument document} this
    * configuration belongs to.
    * 
    * @return the owner document.
@@ -552,7 +552,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * This method removes this node including all its
    * {@link #getDescendant(String, String) descendants} from the underlying
    * configuration representation (e.g. properties, DOM tree, etc.). After
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#save() saving}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#save() saving}
    * this information is lost.
    * 
    * @see #remove()
@@ -582,12 +582,12 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * {@link #getDescendant(String, String) descendants} from the underlying
    * configuration representation (e.g. properties, DOM tree, etc.). This will
    * be done by moving the configuration sub-tree to an
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_EXCLUDE exlcude configuration}.
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exlcude configuration}.
    * 
    * @see #disable()
    * 
    * @return the
-   *         {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_EXCLUDE exlcude configuration}
+   *         {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exlcude configuration}
    *         containing this node as child.
    * @throws ConfigurationException
    *         is something goes wrong.

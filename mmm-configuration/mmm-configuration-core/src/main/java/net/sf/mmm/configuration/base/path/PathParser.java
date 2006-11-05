@@ -88,7 +88,7 @@ public class PathParser {
             throw new IllegalPathException(this.string);
           } else {
             String cmp = new String(this.chars, start, comparatorLength);
-            ComparatorIF comparator = ComparatorManager.getInstance().getComparator(cmp);
+            Comparator comparator = ComparatorManager.getInstance().getComparator(cmp);
             start = start + comparatorLength;
             int len = this.pos - start - 1;
             if (len <= 0) {
@@ -101,7 +101,7 @@ public class PathParser {
             } else {
               valuePattern = null;
             }
-            condition = new Condition(namePattern, childName, value, valuePattern, comparator);
+            condition = new ConditionImpl(namePattern, childName, value, valuePattern, comparator);
           }
           break;
         case '*':
@@ -173,7 +173,7 @@ public class PathParser {
               this.pos++;
             }
           } else {
-            condition = new Condition(namePattern);
+            condition = new ConditionImpl(namePattern);
           }
           segment = new PathSegment(name, isPattern, condition);
           break;

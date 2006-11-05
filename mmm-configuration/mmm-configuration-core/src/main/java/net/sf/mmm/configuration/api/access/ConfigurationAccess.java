@@ -10,7 +10,7 @@ import net.sf.mmm.configuration.api.MutableConfiguration;
 
 /**
  * This is the interface for a class that gives access to a
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-document}.
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}.
  * The typical implementation accesses the configuration via the local
  * filesystem. Various other targets e.g. a database, etc. are possible.
  * 

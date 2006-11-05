@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.impl.access.resource;
 
 import java.io.File;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
@@ -23,7 +23,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
 
   /**
    * this is the default
-   * {@link ConfigurationDocumentIF#NAME_INCLUDE_ACCESS access} name for this
+   * {@link ConfigurationDocument#NAME_INCLUDE_ACCESS access} name for this
    * implementation.
    * 
    * @see ConfigurationAccessFactory#CONTEXT_VARIABLE_PREFIX

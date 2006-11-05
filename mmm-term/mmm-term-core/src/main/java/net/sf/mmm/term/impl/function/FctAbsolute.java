@@ -13,78 +13,77 @@ import net.sf.mmm.term.api.OperatorPriority;
  */
 public class FctAbsolute {
 
-    /**
-     * the suggested
-     * {@link net.sf.mmm.term.api.FunctionIF#getOperatorSymbol() "operator symbol"}
-     */
-    public static final String SYMBOL = null;
+  /**
+   * the suggested
+   * {@link net.sf.mmm.term.api.Function#getOperatorSymbol() "operator symbol"}
+   */
+  public static final String SYMBOL = null;
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getName() name} of this
-     * function
-     */
-    public static final String NAME = "abs";
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getName() name} of this function
+   */
+  public static final String NAME = "abs";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getOperatorPriority() priority}
-     * of this function
-     */
-    public static final OperatorPriority PRIORITY = OperatorPriority.MEDIUM;
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getOperatorPriority() priority} of
+   * this function
+   */
+  public static final OperatorPriority PRIORITY = OperatorPriority.MEDIUM;
 
-    /**
-     * The constructor.
-     */
-    private FctAbsolute() {
+  /**
+   * The constructor.
+   */
+  private FctAbsolute() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument
-     *        is the argument of the function.
-     * @return the mathematically absolute value.
-     */
-    public static Integer abs(Integer argument) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument
+   *        is the argument of the function.
+   * @return the mathematically absolute value.
+   */
+  public static Integer abs(Integer argument) {
 
-        return Integer.valueOf(Math.abs(argument.intValue()));
-    }
+    return Integer.valueOf(Math.abs(argument.intValue()));
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument
-     *        is the argument of the function.
-     * @return the mathematically absolute value.
-     */
-    public static Long abs(Long argument) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument
+   *        is the argument of the function.
+   * @return the mathematically absolute value.
+   */
+  public static Long abs(Long argument) {
 
-        return Long.valueOf(Math.abs(argument.longValue()));
-    }
+    return Long.valueOf(Math.abs(argument.longValue()));
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument
-     *        is the argument of the function.
-     * @return the mathematically absolute value.
-     */
-    public static Float abs(Float argument) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument
+   *        is the argument of the function.
+   * @return the mathematically absolute value.
+   */
+  public static Float abs(Float argument) {
 
-        return Float.valueOf(Math.abs(argument.floatValue()));
-    }
+    return Float.valueOf(Math.abs(argument.floatValue()));
+  }
 
-    /**
-     * The function implementation for the given signature.
-     * 
-     * @param argument
-     *        is the argument of the function.
-     * @return the mathematically absolute value.
-     */
-    public static Double abs(Double argument) {
+  /**
+   * The function implementation for the given signature.
+   * 
+   * @param argument
+   *        is the argument of the function.
+   * @return the mathematically absolute value.
+   */
+  public static Double abs(Double argument) {
 
-        return Double.valueOf(Math.abs(argument.doubleValue()));
-    }
+    return Double.valueOf(Math.abs(argument.doubleValue()));
+  }
 
 }

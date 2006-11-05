@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import net.sf.mmm.configuration.NlsResourceBundle;
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
@@ -22,18 +22,18 @@ import net.sf.mmm.context.api.MutableContext;
 
 /**
  * This is the abstract base implementation of the
- * {@link ConfigurationDocumentIF} interface.
+ * {@link ConfigurationDocument} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfigurationDocument implements ConfigurationDocumentIF,
+public abstract class AbstractConfigurationDocument implements ConfigurationDocument,
     ConfigurationDocumentCollector {
 
   /** the {@link #getContext() context} */
   private final MutableContext context;
 
   /** the list of child documents */
-  private final List<ConfigurationDocumentIF> childDocuments;
+  private final List<ConfigurationDocument> childDocuments;
 
   /** the list of all registered listeners */
   private final List<FilteredListener> listeners;
@@ -100,7 +100,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     } else {
       this.parentDoc = parentConfiguration.getOwnerDocument();
     }
-    this.childDocuments = new ArrayList<ConfigurationDocumentIF>();
+    this.childDocuments = new ArrayList<ConfigurationDocument>();
     this.modifiedFlag = false;
     this.immutableFlag = this.access.isReadOnly();
     this.root = null;
@@ -158,13 +158,13 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @return the parent document or <code>null</code> if this is the
    *         root-document.
    */
-  public ConfigurationDocumentIF getParentDocument() {
+  public ConfigurationDocument getParentDocument() {
 
     return this.parentDoc;
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#getContext()
+   * @see net.sf.mmm.configuration.api.ConfigurationDocument#getContext()
    */
   public Context getContext() {
 
@@ -186,7 +186,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#isImmutable()
+   * @see net.sf.mmm.configuration.api.ConfigurationDocument#isImmutable()
    */
   public boolean isImmutable() {
 
@@ -230,7 +230,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#getConfiguration()
+   * @see net.sf.mmm.configuration.api.ConfigurationDocument#getConfiguration()
    */
   public synchronized AbstractConfiguration getConfiguration() {
 
@@ -256,7 +256,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#save()
+   * @see net.sf.mmm.configuration.api.ConfigurationDocument#save()
    */
   public void save() throws ConfigurationException {
 
@@ -327,7 +327,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#reload()
+   * @see net.sf.mmm.configuration.api.ConfigurationDocument#reload()
    */
   public void reload() throws ConfigurationException {
 
@@ -350,9 +350,9 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
       throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector#addDocument(net.sf.mmm.configuration.api.ConfigurationDocumentIF)
+   * @see net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector#addDocument(net.sf.mmm.configuration.api.ConfigurationDocument)
    */
-  public void addDocument(ConfigurationDocumentIF document) {
+  public void addDocument(ConfigurationDocument document) {
 
     this.childDocuments.add(document);
   }

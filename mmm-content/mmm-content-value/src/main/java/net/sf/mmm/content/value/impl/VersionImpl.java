@@ -8,7 +8,7 @@ import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This class implements a unique id value.
+ * This is the implementation of the {@link VersionIF} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -278,7 +278,7 @@ public final class VersionImpl implements VersionIF {
             microVersion = Integer.parseInt(s);
           }
         } catch (NumberFormatException e) {
-          throw new ValueParseStringException(versionAsString, IdImpl.class, VALUE_NAME, e);
+          throw new ValueParseStringException(versionAsString, VersionImpl.class, VALUE_NAME, e);
         }
         pos++;
       } else {

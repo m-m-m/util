@@ -13,35 +13,35 @@ import net.sf.mmm.term.CoreNlsResourceBundle;
  */
 public class IllegalCastException extends CalculationException {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -8880790425494345197L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -8880790425494345197L;
 
-    /**
-     * The constructor.
-     * 
-     * @param argument
-     *        is the argument that could not be casted.
-     * @param type
-     *        is the type the argument could not be casted to.
-     */
-    public IllegalCastException(Object argument, Class type) {
+  /**
+   * The constructor.
+   * 
+   * @param argument
+   *        is the argument that could not be casted.
+   * @param type
+   *        is the type the argument could not be casted to.
+   */
+  public IllegalCastException(Object argument, Class type) {
 
-        super(CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
-    }
+    super(CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param argument
-     *        is the argument that could not be casted.
-     * @param type
-     *        is the type the argument could not be casted to.
-     * @param nested
-     *        is the throwable that caused this exception.
-     */
-    public IllegalCastException(Object argument, Class type, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param argument
+   *        is the argument that could not be casted.
+   * @param type
+   *        is the type the argument could not be casted to.
+   * @param nested
+   *        is the throwable that caused this exception.
+   */
+  public IllegalCastException(Object argument, Class type, Throwable nested) {
 
-        super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
-    }
+    super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
+  }
 
 }

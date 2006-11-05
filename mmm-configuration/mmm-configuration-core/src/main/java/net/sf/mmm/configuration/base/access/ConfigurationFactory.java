@@ -1,7 +1,7 @@
 /* $ Id: $ */
 package net.sf.mmm.configuration.base.access;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
@@ -13,7 +13,7 @@ import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the interface for factory that creates (loads) a
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-document}.<br>
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}.<br>
  * A legal implementation must have a public non-arg constructor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -59,7 +59,7 @@ public interface ConfigurationFactory {
    * The name of the the {@link Context#getValue(String) variable}
    * {@link net.sf.mmm.value.api.GenericValue#getString() containing} the
    * default format. This default is used if
-   * {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT} is not set.<br>
+   * {@link ConfigurationDocument#NAME_INCLUDE_FORMAT} is not set.<br>
    */
   String CONTEXT_VARIABLE_DEFAULT = CONTEXT_VARIABLE_PREFIX + "default";
 
@@ -70,7 +70,7 @@ public interface ConfigurationFactory {
    *        is the prefix for the {@link Context#getValue(String) variables}
    *        containing the factory configuration. It is build by the
    *        {@link #CONTEXT_VARIABLE_PREFIX} with
-   *        {@link ConfigurationDocumentIF#NAME_INCLUDE_FORMAT format} and "."
+   *        {@link ConfigurationDocument#NAME_INCLUDE_FORMAT format} and "."
    *        appended.
    * @param context
    *        is the context (potentially) containing the required configuration
@@ -78,7 +78,7 @@ public interface ConfigurationFactory {
    *        {@link Context#getValue(String) variables} that start with the
    *        given <code>prefix</code>.
    * @param include
-   *        is the {@link ConfigurationDocumentIF#NAME_INCLUDE include}
+   *        is the {@link ConfigurationDocument#NAME_INCLUDE include}
    *        configuration.
    * @throws ConfigurationException
    *         if the configuration is illegal for this implementation.
@@ -90,7 +90,7 @@ public interface ConfigurationFactory {
 
   /**
    * This method creates the root
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-document}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}
    * via the given {@link ConfigurationAccess access}.
    * 
    * @param access
@@ -103,7 +103,7 @@ public interface ConfigurationFactory {
 
   /**
    * This method creates the root
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-document}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}
    * via the given {@link ConfigurationAccess access}.
    * 
    * @see net.sf.mmm.configuration.base.ConfigurationUtil#initializeContext(MutableContext)
@@ -111,7 +111,7 @@ public interface ConfigurationFactory {
    * @param access
    *        gives read/write access to the configuration data.
    * @param context
-   *        is the {@link ConfigurationDocumentIF#getContext() context} for the
+   *        is the {@link ConfigurationDocument#getContext() context} for the
    *        document.
    * @return the loaded configuration.
    * @throws ConfigurationException
@@ -122,14 +122,14 @@ public interface ConfigurationFactory {
 
   /**
    * This method creates the
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF configuration-document}
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}
    * via the given {@link ConfigurationAccess access}.
    * 
    * @param access
    *        gives read/write access to the configuration data.
    * @param parentConfiguration
    *        is the parent-configuration for the
-   *        {@link ConfigurationDocumentIF#getConfiguration() "document configuration"}.
+   *        {@link ConfigurationDocument#getConfiguration() "document configuration"}.
    * @return the loaded configuration.
    * @throws ConfigurationException
    *         if the configuration data could not be read or is illegal.

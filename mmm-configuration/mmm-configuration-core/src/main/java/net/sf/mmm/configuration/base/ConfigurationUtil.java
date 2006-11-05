@@ -3,7 +3,7 @@ package net.sf.mmm.configuration.base;
 
 import java.util.List;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
@@ -19,7 +19,7 @@ import net.sf.mmm.context.impl.MutableContextImpl;
 
 /**
  * This class is a collection of utility methods to resolve
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE included}
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE included}
  * {@link net.sf.mmm.configuration.api.Configuration configurations}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -78,7 +78,7 @@ public final class ConfigurationUtil {
 
   /**
    * This method initializes the given {@link MutableContext environment} with
-   * the defaults for the root {@link ConfigurationDocumentIF document}.
+   * the defaults for the root {@link ConfigurationDocument document}.
    * 
    * @param context
    *        is the environment to modify.
@@ -129,7 +129,7 @@ public final class ConfigurationUtil {
   public static ConfigurationFactory getDocumentFactory(Configuration includeConfiguration,
       Context context) {
 
-    String format = includeConfiguration.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_FORMAT)
+    String format = includeConfiguration.getDescendant(ConfigurationDocument.NAME_INCLUDE_FORMAT)
         .getValue().getString(null);
     if (format == null) {
       format = context.getValue(ConfigurationFactory.CONTEXT_VARIABLE_DEFAULT).getString();
@@ -151,7 +151,7 @@ public final class ConfigurationUtil {
   public static ConfigurationAccessFactory getAccessFactory(Configuration includeConfiguration,
       Context env) {
 
-    String access = includeConfiguration.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_ACCESS)
+    String access = includeConfiguration.getDescendant(ConfigurationDocument.NAME_INCLUDE_ACCESS)
         .getValue().getString(null);
     if (access == null) {
       access = env.getValue(ConfigurationAccessFactory.CONTEXT_VARIABLE_DEFAULT).getString();
@@ -169,7 +169,7 @@ public final class ConfigurationUtil {
    * <code>includeElement</code>.
    * 
    * @param includeElement
-   *        is the {@link ConfigurationDocumentIF#NAME_INCLUDE include} element
+   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element
    *        to resolve.
    * @param targetList
    *        is the list where to add the included child nodes.
@@ -177,8 +177,8 @@ public final class ConfigurationUtil {
   public static void resolveInclude(AbstractConfiguration includeElement,
       List<AbstractConfiguration> targetList) {
 
-    assert ConfigurationDocumentIF.NAME_INCLUDE.equals(includeElement.getName());
-    assert ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION.equals(includeElement
+    assert ConfigurationDocument.NAME_INCLUDE.equals(includeElement.getName());
+    assert ConfigurationDocument.NAMESPACE_URI_CONFIGURATION.equals(includeElement
         .getNamespaceUri());
 
     Context context = includeElement.getOwnerDocument().getContext();
@@ -186,7 +186,7 @@ public final class ConfigurationUtil {
     ConfigurationAccessFactory accessFactory = getAccessFactory(includeElement, context);
     ConfigurationAccess[] accessors = accessFactory.getAccessors();
     String descendantPath = includeElement.getDescendant(
-        ConfigurationDocumentIF.NAME_INCLUDE_DESCENDANTS).getValue().getString(null);
+        ConfigurationDocument.NAME_INCLUDE_DESCENDANTS).getValue().getString(null);
     for (int i = 0; i < accessors.length; i++) {
       AbstractConfigurationDocument document = documentFactory.create(accessors[i], includeElement);
       AbstractConfiguration result = document.getConfiguration();

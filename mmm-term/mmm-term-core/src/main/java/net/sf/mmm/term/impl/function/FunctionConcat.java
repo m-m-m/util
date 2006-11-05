@@ -9,78 +9,79 @@ import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueException;
 
 /**
- * This class represents the {@link net.sf.mmm.term.api.FunctionIF function}
+ * This class represents the {@link net.sf.mmm.term.api.Function function}
  * <b>concat</b> that concats all given arguments.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class FunctionConcat extends BasicFunction {
 
-    /** the {@link #getName() name} of this function */
-    public static final String NAME = "concat";
+  /** the {@link #getName() name} of this function */
+  public static final String NAME = "concat";
 
-    /** the {@link #getOperatorSymbol() "operator symbol"} of this function */
-    public static final String SYMBOL = null;
+  /** the {@link #getOperatorSymbol() "operator symbol"} of this function */
+  public static final String SYMBOL = null;
 
-    /**
-     * The constructor.
-     */
-    public FunctionConcat() {
+  /**
+   * The constructor.
+   */
+  public FunctionConcat() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see net.sf.mmm.term.api.Function#getName()
+   */
+  public String getName() {
+
+    return NAME;
+  }
+
+  /**
+   * @see net.sf.mmm.term.api.Function#getOperatorSymbol()
+   */
+  public String getOperatorSymbol() {
+
+    return SYMBOL;
+  }
+
+  /**
+   * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
+   */
+  public int getMinimumArgumentCount() {
+
+    return 1;
+  }
+
+  /**
+   * @see net.sf.mmm.term.api.Function#getMaximumArgumentCount()
+   */
+  public int getMaximumArgumentCount() {
+
+    return Integer.MAX_VALUE;
+  }
+
+  /**
+   * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object)
+   */
+  @Override
+  public Object calculate(Object argument) throws ValueException {
+
+    return argument;
+  }
+
+  /**
+   * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
+   *      GenericValue)
+   */
+  @Override
+  public String calculate(Object argument1, Object argument2) throws CalculationException {
+
+    if ((argument1 != null) && (argument1.getClass() == String.class)) {
+      return ((String) argument1) + argument2;
     }
-
-    /**
-     * @see net.sf.mmm.term.api.FunctionIF#getName()
-     */
-    public String getName() {
-
-        return NAME;
-    }
-
-    /**
-     * @see net.sf.mmm.term.api.FunctionIF#getOperatorSymbol()
-     */
-    public String getOperatorSymbol() {
-
-        return SYMBOL;
-    }
-
-    /**
-     * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     */
-    public int getMinimumArgumentCount() {
-
-        return 1;
-    }
-
-    /**
-     * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     */
-    public int getMaximumArgumentCount() {
-
-        return Integer.MAX_VALUE;
-    }
-
-    /**
-     * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object)
-     */
-    @Override
-    public Object calculate(Object argument) throws ValueException {
-
-        return argument;
-    }
-
-    /**
-     * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
-     *      GenericValue)
-     */
-    public String calculate(Object argument1, Object argument2) throws CalculationException {
-
-        if ((argument1 != null) && (argument1.getClass() == String.class)) {
-            return ((String) argument1) + argument2;
-        }
-        throw new IllegalArgumentTypeException(this, new Arguments(argument1, argument2));
-    }
+    throw new IllegalArgumentTypeException(this, new Arguments(argument1, argument2));
+  }
 
 }

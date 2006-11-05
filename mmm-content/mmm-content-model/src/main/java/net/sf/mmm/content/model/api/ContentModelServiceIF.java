@@ -2,7 +2,7 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.util.event.EventListener;
-import net.sf.mmm.util.event.EventSourceIF;
+import net.sf.mmm.util.event.EventSource;
 
 /**
  * This is the interface for a service that provides access to the content
@@ -54,14 +54,14 @@ public interface ContentModelServiceIF extends ContentModelReadAccessIF {
    * 
    * @see ContentModelWriteAccessIF
    * 
-   * Instead of extending the {@link EventSourceIF} interface an instance of the
+   * Instead of extending the {@link EventSource} interface an instance of the
    * interface is returned by this method. This gives more flexibility e.g. to
    * avoid multi-inheritance problems. An implementation of this service can
-   * still directly implement the {@link EventSourceIF} interface and return
+   * still directly implement the {@link EventSource} interface and return
    * <code>this</code> by the current method.
    * 
    * @return the event registrar.
    */
-  EventSourceIF<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar();
+  EventSource<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar();
 
 }

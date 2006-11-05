@@ -11,30 +11,29 @@ import net.sf.mmm.term.api.OperatorPriority;
  */
 public abstract class FctAdd {
 
-    /**
-     * the
-     * {@link net.sf.mmm.term.api.FunctionIF#getOperatorSymbol() "operator symbol"}
-     */
-    public static final String SYMBOL = "+";
+  /**
+   * the
+   * {@link net.sf.mmm.term.api.Function#getOperatorSymbol() "operator symbol"}
+   */
+  public static final String SYMBOL = "+";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getName() name} of this
-     * function
-     */
-    public static final String NAME = "add";
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getName() name} of this function
+   */
+  public static final String NAME = "add";
 
-    /**
-     * the {@link net.sf.mmm.term.api.FunctionIF#getOperatorPriority() priority}
-     * of this function
-     */
-    public static final OperatorPriority PRIORITY = OperatorPriority.MEDIUM;
+  /**
+   * the {@link net.sf.mmm.term.api.Function#getOperatorPriority() priority} of
+   * this function
+   */
+  public static final OperatorPriority PRIORITY = OperatorPriority.MEDIUM;
 
-    /**
-     * The constructor.
-     */
-    protected FctAdd() {
+  /**
+   * The constructor.
+   */
+  protected FctAdd() {
 
-        super();
-    }
+    super();
+  }
 
 }

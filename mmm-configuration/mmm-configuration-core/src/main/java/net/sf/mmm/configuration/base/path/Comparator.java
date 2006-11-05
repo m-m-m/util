@@ -14,7 +14,7 @@ import net.sf.mmm.value.api.GenericValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ComparatorIF {
+public interface Comparator {
 
   /**
    * This method gets the symbol of the comparator. This must be unique for each

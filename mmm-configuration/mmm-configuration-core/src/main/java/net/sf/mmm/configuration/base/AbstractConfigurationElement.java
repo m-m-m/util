@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.MutableConfiguration;
@@ -149,7 +149,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
    * This method is called if a {@link #getChild(String, String) child} has been
    * {@link #addChild(AbstractConfiguration) added} that has the
    * {@link #getNamespaceUri() namespace}
-   * {@link ConfigurationDocumentIF#NAMESPACE_URI_CONFIGURATION}.
+   * {@link ConfigurationDocument#NAMESPACE_URI_CONFIGURATION}.
    * 
    * @param child
    *        is the child to handle.
@@ -157,16 +157,16 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   protected void handleInternalChild(AbstractConfiguration child) {
 
     String name = child.getName();
-    if (ConfigurationDocumentIF.NAME_CONTEXT.equals(name)) {
+    if (ConfigurationDocument.NAME_CONTEXT.equals(name)) {
       Collection<? extends MutableConfiguration> envChildIt = child
-          .getDescendants(ConfigurationDocumentIF.NAME_CONTEXT_VARIABLE);
+          .getDescendants(ConfigurationDocument.NAME_CONTEXT_VARIABLE);
       for (Configuration variable : envChildIt) {
         String variableName = variable.getDescendant(
-            ConfigurationDocumentIF.NAME_CONTEXT_VARIABLE_NAME).getValue().getString();
+            ConfigurationDocument.NAME_CONTEXT_VARIABLE_NAME).getValue().getString();
         String variableValue = variable.getValue().getString();
         getOwnerDocument().getMutableContext().setObject(variableName, variableValue);
       }
-    } else if (ConfigurationDocumentIF.NAME_INCLUDE.equals(name)) {
+    } else if (ConfigurationDocument.NAME_INCLUDE.equals(name)) {
       // getOwnerDocument().isIncludeEnabled();
       // TODO:
       // TODO: allow to disable includes per document for security reasons
@@ -179,7 +179,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
           throw new ConfigurationException("Including attributes is NOT allowed!");
         }
       }
-    } else if (ConfigurationDocumentIF.NAME_EXCLUDE.equals(name)) {
+    } else if (ConfigurationDocument.NAME_EXCLUDE.equals(name)) {
       // nothing to do...
     } else {
       // TODO
@@ -196,7 +196,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
     String namespace = child.getNamespaceUri();
     QName qName = new QName(child.getName(), namespace);
-    if (ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION.equals(namespace)) {
+    if (ConfigurationDocument.NAMESPACE_URI_CONFIGURATION.equals(namespace)) {
       handleInternalChild(child);
     }
     switch (child.getType()) {

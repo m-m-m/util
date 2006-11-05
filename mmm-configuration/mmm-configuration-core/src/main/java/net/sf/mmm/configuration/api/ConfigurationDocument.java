@@ -17,7 +17,7 @@ import net.sf.mmm.context.api.Context;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ConfigurationDocumentIF {
+public interface ConfigurationDocument {
 
   /**
    * This is the URI of the {@link Configuration#getNamespaceUri() namespace}

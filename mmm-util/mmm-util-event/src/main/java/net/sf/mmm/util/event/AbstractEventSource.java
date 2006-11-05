@@ -19,7 +19,7 @@ import java.util.List;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> implements
-        EventSourceIF<E, L> {
+        EventSource<E, L> {
 
     /** the registered listeners */
     private final List<L> listeners;

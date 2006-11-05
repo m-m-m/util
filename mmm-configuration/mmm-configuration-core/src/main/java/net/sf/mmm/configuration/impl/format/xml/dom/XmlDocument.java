@@ -18,7 +18,7 @@ import net.sf.mmm.util.xml.XmlException;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF} for an XML
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument} for an XML
  * {@link org.w3c.dom.Document document}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

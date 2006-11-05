@@ -14,7 +14,7 @@ import net.sf.mmm.context.api.MutableContext;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF} for
+ * {@link net.sf.mmm.configuration.api.ConfigurationDocument} for
  * {@link java.util.Properties}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import net.sf.mmm.configuration.api.event.ConfigurationChangeEvent;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
-import net.sf.mmm.util.event.EventSourceIF;
+import net.sf.mmm.util.event.EventSource;
 import net.sf.mmm.value.api.GenericValue;
 
 /**
@@ -101,7 +101,7 @@ import net.sf.mmm.value.api.GenericValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface Configuration extends
-    EventSourceIF<ConfigurationChangeEvent, ConfigurationChangeListener> {
+    EventSource<ConfigurationChangeEvent, ConfigurationChangeListener> {
 
   /**
    * This enum contains the {@link #getType() types} of configuration
@@ -263,7 +263,7 @@ public interface Configuration extends
    * automatically assigned as child.<br>
    * By default this flag is <code>true</code>. It is inherited by the
    * {@link #getValue() value} and {@link #getDescendant(String) descendants}
-   * but can be {@link ConfigurationDocumentIF#NAME_ADD_DEFAULTS overriden}.
+   * but can be {@link ConfigurationDocument#NAME_ADD_DEFAULTS overriden}.
    * 
    * @return <code>true</code> if this configuration is automatically adding
    *         defaults, <code>false</code> otherwise.

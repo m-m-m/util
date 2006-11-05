@@ -207,7 +207,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#addListener(EventListener)
+   * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
    */
   public void addListener(ConfigurationChangeListener listener) {
 
@@ -215,7 +215,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSourceIF#removeListener(EventListener)
+   * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
    */
   public void removeListener(ConfigurationChangeListener listener) {
 

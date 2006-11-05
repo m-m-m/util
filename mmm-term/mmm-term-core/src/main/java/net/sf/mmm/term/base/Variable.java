@@ -6,9 +6,9 @@ import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
- * This class represents a variable {@link net.sf.mmm.term.api.TermIF term}.
- * The variable simply contains a variable-name and
- * {@link net.sf.mmm.term.api.TermIF#evaluate(Context) evaluates} to the
+ * This class represents a variable {@link net.sf.mmm.term.api.Term term}. The
+ * variable simply contains a variable-name and
+ * {@link net.sf.mmm.term.api.Term#evaluate(Context) evaluates} to the
  * {@link net.sf.mmm.context.api.Context#getValue(String) "environment value"}
  * with that name.
  * 
@@ -16,50 +16,52 @@ import net.sf.mmm.util.xml.api.XmlWriter;
  */
 public class Variable extends AbstractVariable {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -8438644468276039165L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -8438644468276039165L;
 
-    /** the name of the variable */
-    private final String variableName;
+  /** the name of the variable */
+  private final String variableName;
 
-    /**
-     * The constructor.
-     * 
-     * @param name
-     *        is the name of the variable.
-     */
-    public Variable(String name) {
+  /**
+   * The constructor.
+   * 
+   * @param name
+   *        is the name of the variable.
+   */
+  public Variable(String name) {
 
-        super();
-        this.variableName = name;
-    }
+    super();
+    this.variableName = name;
+  }
 
-    /**
-     * This method gets the name of the variable. Parameters are ignored.
-     * 
-     * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(Context)
-     */
-    public String getVariableName(Context environment) {
+  /**
+   * This method gets the name of the variable. Parameters are ignored.
+   * 
+   * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(Context)
+   */
+  @Override
+  public String getVariableName(Context environment) {
 
-        return this.variableName;
-    }
+    return this.variableName;
+  }
 
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
+  /**
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
 
-        return VARIABLE_START + this.variableName + VARIABLE_END;
-    }
+    return VARIABLE_START + this.variableName + VARIABLE_END;
+  }
 
-    /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
-     */
-    public void toXml(XmlWriter xmlWriter) throws XmlException {
+  /**
+   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   */
+  public void toXml(XmlWriter xmlWriter) throws XmlException {
 
-        xmlWriter.writeStartElement(XML_TAG_VARIABLE);
-        xmlWriter.writeAttribute(XML_ATR_VARIABLE_NAME, this.variableName);
-        xmlWriter.writeEndElement(XML_TAG_VARIABLE);
-    }
+    xmlWriter.writeStartElement(XML_TAG_VARIABLE);
+    xmlWriter.writeAttribute(XML_ATR_VARIABLE_NAME, this.variableName);
+    xmlWriter.writeEndElement(XML_TAG_VARIABLE);
+  }
 
 }

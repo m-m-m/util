@@ -5,7 +5,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
@@ -37,7 +37,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
    * 
    * @param ownerDocument
    *        is the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF document}
+   *        {@link net.sf.mmm.configuration.api.ConfigurationDocument document}
    *        this configuration belongs to.
    * @param parentConfiguration
    *        is the parent configuration.
@@ -59,7 +59,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
    * 
    * @param ownerDocument
    *        is the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF document}
+   *        {@link net.sf.mmm.configuration.api.ConfigurationDocument document}
    *        this configuration belongs to.
    * @param parentConfiguration
    *        is the parent configuration.
@@ -164,9 +164,9 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
         name = this.attribute.getName();
       }
       String qName = XmlDocument.createQualifiedName(name,
-          ConfigurationDocumentIF.NAMESPACE_PREFIX_CONFIGURATION);
+          ConfigurationDocument.NAMESPACE_PREFIX_CONFIGURATION);
       Attr newAttribute = xmlDoc.createAttributeNS(
-          ConfigurationDocumentIF.NAMESPACE_URI_CONFIGURATION, qName);
+          ConfigurationDocument.NAMESPACE_URI_CONFIGURATION, qName);
       this.element.setAttributeNodeNS(newAttribute);
       return new XmlAttribute(this.document, getParent(), newAttribute);
     }

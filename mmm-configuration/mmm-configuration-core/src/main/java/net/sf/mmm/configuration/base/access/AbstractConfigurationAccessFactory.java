@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.configuration.base.access;
 
-import net.sf.mmm.configuration.api.ConfigurationDocumentIF;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
@@ -37,7 +37,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
   public final void configure(String prefix, Context context, Configuration include)
       throws ConfigurationException, ValueException {
 
-    String href = include.getDescendant(ConfigurationDocumentIF.NAME_INCLUDE_HREF).getValue()
+    String href = include.getDescendant(ConfigurationDocument.NAME_INCLUDE_HREF).getValue()
         .getString();
     String parentKey = prefix + CONTEXT_VARIABLE_SUFFIX_PARENT;
     ConfigurationAccess parentAccess = (ConfigurationAccess) context.getValue(parentKey)
@@ -70,7 +70,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
    *        is the context (potentially) containing the required configuration.
    * @param include
    *        is the
-   *        {@link net.sf.mmm.configuration.api.ConfigurationDocumentIF#NAME_INCLUDE include}
+   *        {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE include}
    *        configuration.
    * @param parent
    *        is the paretn access the given <code>href</code> may be relative
@@ -79,7 +79,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
    *        cases.
    * @param href
    *        is the value of the
-   *        {@link ConfigurationDocumentIF#NAME_INCLUDE_HREF} attribute. It can
+   *        {@link ConfigurationDocument#NAME_INCLUDE_HREF} attribute. It can
    *        be relative or absolute.
    * @return the {@link #getAccessors() accessors}.
    * @throws ConfigurationException

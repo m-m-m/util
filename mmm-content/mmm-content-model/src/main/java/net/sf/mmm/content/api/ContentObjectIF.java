@@ -23,11 +23,6 @@ public interface ContentObjectIF extends XmlSerializable {
   String ENV_VARIABLE_THIS = "this";
 
   /**
-   * the separator used for the {@link ContentObjectIF#getPath() path}
-   */
-  String PATH_SEPARATOR = "/";
-
-  /**
    * the attribute for the {@link #getName() name}.
    */
   String XML_ATR_ROOT_NAME = "name";
@@ -59,20 +54,7 @@ public interface ContentObjectIF extends XmlSerializable {
    * @return the name of the resource.
    */
   String getName();
-
-  /**
-   * This method gets the parent object of this content-object.
-   * 
-   * @return the parent or <code>null</code> if this is the root-folder.
-   */
-  // ContentObjectIF getParent();
-  /**
-   * This method gets the path to this content-object in the repository.<br>
-   * The path already contains the {@link #getName() name} of this resource.
-   * 
-   * @return the path of the resource.
-   */
-  // String getPath();
+  
   /**
    * This method gets the content-class used to reflect this content-object. The
    * content-class represents the exact type of this content-object.

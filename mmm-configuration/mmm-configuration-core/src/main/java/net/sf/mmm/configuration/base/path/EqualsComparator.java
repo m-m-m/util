@@ -7,12 +7,12 @@ import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.base.path.ComparatorIF} interface for the
+ * {@link net.sf.mmm.configuration.base.path.Comparator} interface for the
  * equals function.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class EqualsComparator implements ComparatorIF {
+public class EqualsComparator implements Comparator {
 
   /** the comparator symbol */
   public static final String SYMBOL = "==";
@@ -26,7 +26,7 @@ public class EqualsComparator implements ComparatorIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.ComparatorIF#accept(net.sf.mmm.value.api.GenericValue,
+   * @see net.sf.mmm.configuration.base.path.Comparator#accept(net.sf.mmm.value.api.GenericValue,
    *      java.lang.String, java.util.regex.Pattern) 
    */
   public boolean accept(GenericValue value, String string, Pattern pattern) {
@@ -40,7 +40,7 @@ public class EqualsComparator implements ComparatorIF {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.ComparatorIF#getSymbol()
+   * @see net.sf.mmm.configuration.base.path.Comparator#getSymbol()
    */
   public String getSymbol() {
 
