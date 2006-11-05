@@ -87,7 +87,6 @@ public class FileAccessFactory extends AbstractConfigurationAccessFactory {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#isSingleAccess()
-   *      
    */
   public boolean isSingleAccess() {
 

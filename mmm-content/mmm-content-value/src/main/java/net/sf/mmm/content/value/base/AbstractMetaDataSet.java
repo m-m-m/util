@@ -26,7 +26,6 @@ public abstract class AbstractMetaDataSet implements MutableMetaDataSetIF {
 
   /**
    * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
-   * 
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 

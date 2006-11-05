@@ -165,7 +165,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
   /**
    * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#getContext()
-   *      
    */
   public Context getContext() {
 
@@ -188,7 +187,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
   /**
    * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#isImmutable()
-   *      
    */
   public boolean isImmutable() {
 
@@ -233,7 +231,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
   /**
    * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#getConfiguration()
-   *      
    */
   public synchronized AbstractConfiguration getConfiguration() {
 
@@ -260,7 +257,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
   /**
    * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#save()
-   *      
    */
   public void save() throws ConfigurationException {
 
@@ -332,7 +328,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
   /**
    * @see net.sf.mmm.configuration.api.ConfigurationDocumentIF#reload()
-   *      
    */
   public void reload() throws ConfigurationException {
 
@@ -356,7 +351,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
 
   /**
    * @see net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector#addDocument(net.sf.mmm.configuration.api.ConfigurationDocumentIF)
-   *      
    */
   public void addDocument(ConfigurationDocumentIF document) {
 

@@ -183,7 +183,6 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
 
   /**
    * @see net.sf.mmm.value.api.ValueManager#toString(java.lang.Object)
-   * 
    */
   public String toString(V value) {
 
@@ -195,7 +194,6 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
 
   /**
    * @see java.lang.Object#toString()
-   * 
    */
   @Override
   public String toString() {

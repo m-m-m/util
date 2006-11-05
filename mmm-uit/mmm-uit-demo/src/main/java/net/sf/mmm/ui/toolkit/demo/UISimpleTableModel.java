@@ -35,7 +35,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnCount()
-     * 
      */
     public int getColumnCount() {
 
@@ -44,7 +43,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount()
-     * 
      */
     public int getRowCount() {
 
@@ -54,7 +52,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getCellValue(int,
      *      int)
-     * 
      */
     public String getCellValue(int rowIndex, int columnIndex) {
 
@@ -63,7 +60,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnName(int)
-     * 
      */
     public String getColumnName(int columnIndex) {
 
@@ -88,7 +84,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
 
     /**
      * 
-     *
      */
     public void initColumnNames() {
         
@@ -101,7 +96,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel#setCellValue(int,
      *      int, Object)
-     * 
      */
     public void setCellValue(int rowIndex, int columnIndex, String value) {
 
@@ -111,7 +105,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel#setColumnName(int, java.lang.String)
-     * 
      */
     public void setColumnName(int columnIndex, String name) {
 
@@ -121,7 +114,6 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
 
     /**
      * @see net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITableModelListener, java.lang.Throwable)
-     * 
      */
     @Override
     protected void handleListenerException(UITableModelListener listener, Throwable t) {

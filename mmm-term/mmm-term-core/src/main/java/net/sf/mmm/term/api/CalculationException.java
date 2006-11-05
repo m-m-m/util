@@ -19,7 +19,6 @@ public class CalculationException extends ValueException {
 
     /**
      * @see ValueException#ValueException(String, Object[])
-     * 
      */
     public CalculationException(String internaitionalizedMessage, Object... arguments) {
 
@@ -28,7 +27,6 @@ public class CalculationException extends ValueException {
 
     /**
      * @see ValueException#ValueException(Throwable, String, Object[])
-     * 
      */
     public CalculationException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

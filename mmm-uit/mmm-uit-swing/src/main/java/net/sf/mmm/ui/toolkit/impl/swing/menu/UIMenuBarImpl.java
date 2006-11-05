@@ -38,7 +38,6 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar#createMenu(java.lang.String)
-   * 
    */
   protected UIMenu createMenu(String name) {
 

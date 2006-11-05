@@ -217,7 +217,6 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
 
   /**
    * @see java.lang.Object#toString()
-   * 
    */
   @Override
   public String toString() {

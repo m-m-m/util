@@ -24,7 +24,6 @@ public final class IdentityTranslator implements StringTranslator {
 
     /**
      * @see net.sf.mmm.nls.api.StringTranslator#translate(java.lang.String)
-     * 
      */
     public String translate(String message) {
 

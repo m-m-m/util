@@ -34,7 +34,6 @@ public class SimpleFileAccess implements FileAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.FileAccess#getFile()
-   * 
    */
   public InputStream getFile() throws IOException {
 
@@ -43,7 +42,6 @@ public class SimpleFileAccess implements FileAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.FileAccess#getFilename()
-   * 
    */
   public String getFilename() {
 
@@ -52,7 +50,6 @@ public class SimpleFileAccess implements FileAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.FileAccess#getSize()
-   * 
    */
   public long getSize() {
 

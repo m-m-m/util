@@ -256,7 +256,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getImplementation()
-     * 
      */
     public Class<I> getImplementation() {
 
@@ -265,7 +264,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getConstructor()
-     * 
      */
     public Constructor<I> getConstructor() {
 
@@ -274,7 +272,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getInstantiationPolicy()
-     * 
      */
     public String getInstantiationPolicy() {
 
@@ -283,7 +280,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getDependencies()
-     * 
      */
     public Iterator<Dependency> getDependencies() {
 
@@ -292,7 +288,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getDependencies(net.sf.mmm.framework.api.Dependency.Type)
-     * 
      */
     public Iterator<Dependency> getDependencies(Type type) {
 
@@ -301,7 +296,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getLifecycleMethod(java.lang.String)
-     * 
      */
     public LifecycleMethod getLifecycleMethod(String phase) {
 
@@ -310,7 +304,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
     /**
      * @see net.sf.mmm.framework.api.ExtendedComponentDescriptor#getLifecycleMethods()
-     * 
      */
     public Iterator<LifecycleMethod> getLifecycleMethods() {
 
@@ -374,7 +367,6 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
 
         /**
          * @see net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator#findNext()
-         * 
      */
         @Override
         protected Dependency<?> findNext() {

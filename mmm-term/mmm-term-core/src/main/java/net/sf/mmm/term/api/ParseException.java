@@ -19,7 +19,6 @@ public class ParseException extends NlsException {
 
     /**
      * @see NlsException#NlsException(String, Object[])
-     * 
      */
     public ParseException(String internaitionalizedMessage, Object... arguments) {
 
@@ -28,7 +27,6 @@ public class ParseException extends NlsException {
 
     /**
      * @see NlsException#NlsException(Throwable, String, Object[])
-     * 
      */
     public ParseException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

@@ -51,7 +51,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
-   * 
    */
   public void addComponent(UIComponent component) {
 
@@ -61,7 +60,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints)
-   * 
    */
   public void addComponent(UIComponent component, LayoutConstraints constraints) {
 
@@ -75,7 +73,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints, int)
-   * 
    */
   public void addComponent(UIComponent component, LayoutConstraints constraints, int position) {
 
@@ -88,7 +85,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
-   * 
    */
   public void removeComponent(UIComponent component) {
 
@@ -100,7 +96,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(int)
-   * 
    */
   public void removeComponent(int index) {
 
@@ -110,7 +105,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -119,7 +113,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getActiveSyncAccess()
-   * 
    */
   @Override
   public SyncCompositeAccess getActiveSyncAccess() {
@@ -129,7 +122,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#setOrientation(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-   * 
    */
   public void setOrientation(Orientation orientation) {
 
@@ -139,7 +131,6 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#getOrientation()
-   * 
    */
   public Orientation getOrientation() {
 

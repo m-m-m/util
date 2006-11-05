@@ -61,7 +61,6 @@ public class GenericComponentProvider<S, I extends S> implements ComponentProvid
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProvider#getDescriptor()
-     *      
      */
     public ExtendedComponentDescriptor<S, I> getDescriptor() {
 
@@ -70,7 +69,6 @@ public class GenericComponentProvider<S, I extends S> implements ComponentProvid
 
     /**
      * @see net.sf.mmm.framework.api.ComponentProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer, net.sf.mmm.framework.api.ComponentManager)
-     * 
      */
     public void dispose(ComponentInstanceContainer<S> instanceContainer, ComponentManager componentManager) {
     

@@ -35,7 +35,6 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
 
     /**
      * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
-     * 
      */
     public void addListener(L listener) {
 
@@ -44,7 +43,6 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
 
     /**
      * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
-     * 
      */
     public void removeListener(L listener) {
 

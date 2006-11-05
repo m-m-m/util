@@ -19,7 +19,6 @@ public class AsciiTable {
 
     /**
      * The constructor.
-     *
      */
     public AsciiTable() {
 

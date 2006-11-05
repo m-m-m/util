@@ -48,7 +48,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getObject(java.lang.Object)
-   * 
    */
   public Object getObject(Object defaultValue) {
 
@@ -65,7 +64,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getString(java.lang.String)
-   * 
    */
   public String getString(String defaultValue) throws WrongValueTypeException {
 
@@ -82,7 +80,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getBoolean(java.lang.Boolean)
-   * 
    */
   public Boolean getBoolean(Boolean defaultValue) throws WrongValueTypeException {
 
@@ -99,7 +96,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getDate(java.util.Date)
-   * 
    */
   public Date getDate(Date defaultValue) throws WrongValueTypeException {
 
@@ -116,7 +112,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getDouble(java.lang.Double)
-   * 
    */
   public Double getDouble(Double defaultValue) throws WrongValueTypeException {
 
@@ -133,7 +128,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getInteger(java.lang.Integer)
-   * 
    */
   public Integer getInteger(Integer defaultValue) throws WrongValueTypeException {
 
@@ -150,7 +144,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getJavaClass(java.lang.Class)
-   * 
    */
   public Class<?> getJavaClass(Class<?> defaultValue) throws WrongValueTypeException {
 
@@ -167,7 +160,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getLong(java.lang.Long)
-   * 
    */
   public Long getLong(Long defaultValue) throws WrongValueTypeException {
 
@@ -228,7 +220,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getJavaClassInstance(java.lang.Class)
-   * 
    */
   public <T> T getJavaClassInstance(Class<T> superType) throws ValueNotSetException,
       WrongValueTypeException, ValueInstanciationException {
@@ -265,7 +256,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setBoolean(boolean)
-   * 
    */
   public void setBoolean(boolean newValue) throws ValueNotEditableException,
       WrongValueTypeException {
@@ -275,7 +265,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setDate(java.util.Date)
-   * 
    */
   public void setDate(Date newValue) throws ValueNotEditableException, WrongValueTypeException {
 
@@ -284,7 +273,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setDouble(double)
-   * 
    */
   public void setDouble(double newValue) throws ValueNotEditableException, WrongValueTypeException {
 
@@ -293,7 +281,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setInteger(int)
-   * 
    */
   public void setInteger(int newValue) throws ValueNotEditableException, WrongValueTypeException {
 
@@ -302,7 +289,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setJavaClass(java.lang.Class)
-   * 
    */
   public void setJavaClass(Class newValue) throws ValueNotEditableException,
       WrongValueTypeException {
@@ -312,7 +298,6 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setString(java.lang.String)
-   * 
    */
   public void setString(String newValue) throws ValueNotEditableException, WrongValueTypeException {
 

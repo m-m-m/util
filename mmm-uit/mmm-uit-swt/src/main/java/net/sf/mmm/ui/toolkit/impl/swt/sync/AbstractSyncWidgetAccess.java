@@ -51,7 +51,6 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#isDisposedSynchron()
-   * 
    */
   @Override
   protected boolean isDisposedSynchron() {
@@ -61,7 +60,6 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#disposeSynchron()
-   * 
    */
   @Override
   protected void disposeSynchron() {

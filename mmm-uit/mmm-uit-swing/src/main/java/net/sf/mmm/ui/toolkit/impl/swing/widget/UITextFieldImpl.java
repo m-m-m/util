@@ -36,7 +36,6 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   public @Override
   JComponent getSwingComponent() {
@@ -46,7 +45,6 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -55,7 +53,6 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
-   * 
    */
   public void setText(String text) {
 
@@ -64,7 +61,6 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
-   * 
    */
   public String getText() {
 

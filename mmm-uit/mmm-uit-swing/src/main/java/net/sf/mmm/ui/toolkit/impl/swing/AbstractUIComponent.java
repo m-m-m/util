@@ -65,7 +65,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#getTooltipText()
-   * 
    */
   public String getTooltipText() {
 
@@ -74,7 +73,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIComponent#setTooltipText(java.lang.String)
-   * 
    */
   public void setTooltipText(String tooltip) {
 
@@ -83,7 +81,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIComponent#setEnabled(boolean)
-   * 
    */
   public void setEnabled(boolean enabled) {
 
@@ -92,7 +89,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabled#isEnabled()
-   * 
    */
   public boolean isEnabled() {
 
@@ -101,7 +97,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#setId(java.lang.String)
-   * 
    */
   @Override
   public void setId(String newId) {
@@ -112,7 +107,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
-   * 
    */
   public int getHeight() {
 
@@ -121,7 +115,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
-   * 
    */
   public int getWidth() {
 
@@ -130,7 +123,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
-   * 
    */
   public boolean isResizeable() {
 
@@ -140,7 +132,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
-   * 
    */
   public void setSize(int width, int height) {
 
@@ -154,7 +145,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
-   * 
    */
   public void dispose() {
 
@@ -163,7 +153,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#isDisposed()
-   * 
    */
   public boolean isDisposed() {
 
@@ -172,7 +161,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredHeight()
-   * 
    */
   public int getPreferredHeight() {
 
@@ -181,7 +169,6 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredWidth()
-   * 
    */
   public int getPreferredWidth() {
 

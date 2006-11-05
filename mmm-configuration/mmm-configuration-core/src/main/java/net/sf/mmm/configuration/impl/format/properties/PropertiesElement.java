@@ -52,7 +52,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfigurationElement#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   *      
    */
   @Override
   protected void addChild(AbstractConfiguration child) {
@@ -93,7 +92,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.base.BasicConfiguration#getOwnerDocument()
-   *      
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -103,7 +101,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.base.BasicConfiguration#getPlainString()
-   *      
    */
   @Override
   protected String getPlainString() {
@@ -113,7 +110,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.base.BasicConfiguration#setPlainString(java.lang.String)
-   *      
    */
   @Override
   protected void setPlainString(String newValue) {
@@ -131,7 +127,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
-   *      
    */
   public String getNamespaceUri() {
 
@@ -140,7 +135,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
-   *      
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {
@@ -151,7 +145,6 @@ public class PropertiesElement extends AbstractConfigurationElement {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
-   *      
    */
   @Override
   protected void doRemove() throws ConfigurationException {

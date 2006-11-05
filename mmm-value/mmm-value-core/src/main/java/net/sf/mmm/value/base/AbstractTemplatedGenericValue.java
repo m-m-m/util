@@ -19,7 +19,6 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
 
   /**
    * The constructor.
-   * 
    */
   public AbstractTemplatedGenericValue() {
 
@@ -52,7 +51,6 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
 
   /**
    * @see net.sf.mmm.value.api.GenericValue#getValue(java.lang.Class)
-   * 
    */
   public <T> T getValue(Class<T> type) {
 
@@ -84,7 +82,6 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
 
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setObject(java.lang.Object)
-   * 
    */
   public void setObject(Object newValue) throws ValueNotEditableException, WrongValueTypeException {
 

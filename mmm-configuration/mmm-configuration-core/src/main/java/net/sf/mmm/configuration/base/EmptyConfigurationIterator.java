@@ -18,7 +18,6 @@ public class EmptyConfigurationIterator implements Iterator<AbstractConfiguratio
 
   /**
    * The constructor.
-   * 
    */
   private EmptyConfigurationIterator() {
 

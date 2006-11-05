@@ -33,7 +33,6 @@ public class FctOr {
 
     /**
      * The constructor.
-     *  
      */
     private FctOr() {
 

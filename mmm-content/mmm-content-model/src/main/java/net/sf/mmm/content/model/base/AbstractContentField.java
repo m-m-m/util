@@ -126,7 +126,6 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
 
   /**
    * @see java.lang.Object#toString()
-   * 
    */
   @Override
   public String toString() {

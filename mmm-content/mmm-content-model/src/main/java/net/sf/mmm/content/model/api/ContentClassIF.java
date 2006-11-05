@@ -174,7 +174,6 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
 
   /**
    * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#getModifiers()
-   * 
    */
   ClassModifiersIF getModifiers();
 

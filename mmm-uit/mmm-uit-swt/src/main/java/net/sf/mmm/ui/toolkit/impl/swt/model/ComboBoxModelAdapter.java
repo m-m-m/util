@@ -43,7 +43,6 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-   * 
    */
   public synchronized void listModelChanged(UIListModelEvent changeEvent) {
 

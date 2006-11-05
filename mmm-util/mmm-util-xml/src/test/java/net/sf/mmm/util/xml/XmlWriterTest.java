@@ -28,7 +28,6 @@ public class XmlWriterTest extends TestCase {
 
   /**
    * The constructor.
-   * 
    */
   public XmlWriterTest() {
 

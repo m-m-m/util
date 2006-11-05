@@ -32,7 +32,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
     /**
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     * 
      */
     public void actionPerformed(ActionEvent e) {
 
@@ -78,7 +77,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   public @Override
   JComponent getSwingComponent() {
@@ -88,7 +86,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIFileUpload#getSelection()
-   * 
    */
   public FileAccess getSelection() {
 
@@ -97,7 +94,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -106,7 +102,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
-   * 
    */
   public String getText() {
 
@@ -115,7 +110,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
-   * 
    */
   public void setText(String text) {
 

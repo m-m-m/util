@@ -45,7 +45,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel#setComponent(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
-   * 
    */
   public void setComponent(UIComposite child) {
 
@@ -66,7 +65,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
-   * 
    */
   @Override
   public void create() {
@@ -80,7 +78,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponentCount()
-   * 
    */
   public int getComponentCount() {
 
@@ -89,7 +86,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
-   * 
    */
   @Override
   public AbstractUIComponent getComponent(int index) {
@@ -102,7 +98,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -125,7 +120,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite#getActiveSyncAccess()
-   * 
    */
   @Override
   public SyncScrolledCompositeAccess getActiveSyncAccess() {

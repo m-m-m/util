@@ -74,7 +74,6 @@ public abstract class AbstractValueService implements ValueService {
 
   /**
    * @see net.sf.mmm.value.api.ValueService#getManager(java.lang.Class)
-   * 
    */
   @SuppressWarnings("unchecked")
   public <V> ValueManager<V> getManager(Class<V> valueType) {

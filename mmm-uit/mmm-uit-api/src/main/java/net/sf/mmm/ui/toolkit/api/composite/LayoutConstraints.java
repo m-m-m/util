@@ -19,7 +19,6 @@ public class LayoutConstraints {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
-     * 
      */
     public int getHeight() {
 
@@ -28,7 +27,6 @@ public class LayoutConstraints {
 
     /**
      * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
-     * 
      */
     public int getWidth() {
 

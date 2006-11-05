@@ -82,7 +82,6 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {
@@ -107,7 +106,6 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
-   * 
    */
   @Override
   public Menu getSwtObject() {

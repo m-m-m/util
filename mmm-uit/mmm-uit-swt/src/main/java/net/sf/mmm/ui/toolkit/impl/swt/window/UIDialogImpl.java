@@ -43,7 +43,6 @@ public class UIDialogImpl extends UIWindowImpl implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIDialog#isModal()
-   * 
    */
   public boolean isModal() {
 
@@ -52,7 +51,6 @@ public class UIDialogImpl extends UIWindowImpl implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 

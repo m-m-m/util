@@ -69,7 +69,6 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#performSynchron(java.lang.String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {
@@ -120,7 +119,6 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#createSynchron()
-   * 
    */
   @Override
   protected void createSynchron() {
@@ -138,7 +136,6 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#create()
-   * 
    */
   @Override
   public void create() {
@@ -164,7 +161,6 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncItemAccess#getSwtObject()
-   * 
    */
   @Override
   public TabItem getSwtObject() {

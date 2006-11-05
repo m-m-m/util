@@ -47,7 +47,6 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UINode#getParent()
-   * 
    */
   public UINode getParent() {
 
@@ -90,7 +89,6 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UINode#getParentFrame()
-   * 
    */
   public UIFrame getParentFrame() {
 
@@ -114,7 +112,6 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UINode#getParentWindow()
-   * 
    */
   public UIWindow getParentWindow() {
 
@@ -137,7 +134,6 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UINode#addActionListener(net.sf.mmm.ui.toolkit.api.event.UIActionListener)
-   * 
    */
   public void addActionListener(UIActionListener listener) {
 
@@ -187,7 +183,6 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UINode#removeActionListener(net.sf.mmm.ui.toolkit.api.event.UIActionListener)
-   * 
    */
   public void removeActionListener(UIActionListener listener) {
 
@@ -200,7 +195,6 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UINode#refresh()
-   * 
    */
   public void refresh() {
 

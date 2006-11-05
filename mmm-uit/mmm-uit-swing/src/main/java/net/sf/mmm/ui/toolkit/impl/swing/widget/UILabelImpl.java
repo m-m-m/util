@@ -40,7 +40,6 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   public @Override
   JComponent getSwingComponent() {
@@ -50,7 +49,6 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -59,7 +57,6 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
-   * 
    */
   public void setText(String text) {
 
@@ -68,7 +65,6 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
-   * 
    */
   public String getText() {
 
@@ -77,7 +73,6 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIcon#setIcon(net.sf.mmm.ui.toolkit.api.UIPicture)
-   * 
    */
   public void setIcon(UIPicture newIcon) {
 
@@ -91,7 +86,6 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadIcon#getIcon()
-   * 
    */
   public UIPicture getIcon() {
 

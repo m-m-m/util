@@ -49,7 +49,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
-   * 
    */
   @Override
   protected boolean doInitializeListener() {
@@ -60,7 +59,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   public @Override
   JComponent getSwingComponent() {
@@ -70,7 +68,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -79,7 +76,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UISpinBox#getModel()
-   * 
    */
   public UIListModel<E> getModel() {
 
@@ -88,7 +84,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
-   * 
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -97,7 +92,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
-   * 
    */
   public int getSelectedIndex() {
 
@@ -106,7 +100,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
-   * 
    */
   public void setSelectedValue(E newValue) {
 
@@ -115,7 +108,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
-   * 
    */
   public E getSelectedValue() {
 
@@ -124,7 +116,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable()
-   * 
    */
   public boolean isEditable() {
 
@@ -134,7 +125,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#setEditable(boolean)
-   * 
    */
   public void setEditable(boolean editableFlag) {
 
@@ -143,7 +133,6 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidget#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public void setModel(UIListModel<E> newModel) {
 

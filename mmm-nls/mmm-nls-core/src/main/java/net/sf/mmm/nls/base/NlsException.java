@@ -93,7 +93,6 @@ public abstract class NlsException extends Exception implements NlsThrowable {
     /**
      * @see net.sf.mmm.nls.api.NlsThrowable#printStackTrace(java.io.PrintStream,
      *      StringTranslator)
-     * 
      */
     public void printStackTrace(PrintStream stream, StringTranslator nationalizer) {
 
@@ -118,7 +117,6 @@ public abstract class NlsException extends Exception implements NlsThrowable {
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowable#printStackTrace(java.io.PrintWriter, net.sf.mmm.nls.api.StringTranslator)
-     * 
      */
     public void printStackTrace(PrintWriter writer, StringTranslator nationalizer) {
     
@@ -143,7 +141,6 @@ public abstract class NlsException extends Exception implements NlsThrowable {
     
     /**
      * @see java.lang.Throwable#getMessage()
-     * 
      */
     public String getMessage() {
 
@@ -152,7 +149,6 @@ public abstract class NlsException extends Exception implements NlsThrowable {
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator)
-     * 
      */
     public String getLocalizedMessage(StringTranslator nationalizer) {
 
@@ -164,7 +160,6 @@ public abstract class NlsException extends Exception implements NlsThrowable {
     /**
      * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator,
      *      java.lang.StringBuffer)
-     * 
      */
     public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message) {
 

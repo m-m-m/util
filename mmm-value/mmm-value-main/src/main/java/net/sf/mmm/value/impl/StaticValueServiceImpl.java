@@ -15,7 +15,6 @@ public class StaticValueServiceImpl extends ValueServiceImpl {
 
   /**
    * The constructor.
-   * 
    */
   public StaticValueServiceImpl() {
 

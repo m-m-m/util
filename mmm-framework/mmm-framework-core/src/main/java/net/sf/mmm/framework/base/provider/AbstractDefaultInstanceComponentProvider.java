@@ -29,7 +29,6 @@ public abstract class AbstractDefaultInstanceComponentProvider<S> extends
 
   /**
    * @see AbstractComponentProvider#AbstractComponentProvider(Class)
-   * 
    */
   public AbstractDefaultInstanceComponentProvider(Class<S> specification) {
 
@@ -38,7 +37,6 @@ public abstract class AbstractDefaultInstanceComponentProvider<S> extends
 
   /**
    * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptor)
-   * 
    */
   public AbstractDefaultInstanceComponentProvider(ComponentDescriptor<S> componentDescriptor) {
 

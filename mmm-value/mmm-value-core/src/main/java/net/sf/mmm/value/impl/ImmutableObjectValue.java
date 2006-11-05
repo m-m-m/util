@@ -44,7 +44,6 @@ public class ImmutableObjectValue extends ObjectValue {
 
   /**
    * @see net.sf.mmm.value.impl.ObjectValue#setPlainValue(java.lang.Object)
-   * 
    */
   @Override
   protected void setPlainValue(Object newValue) {

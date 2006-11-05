@@ -42,7 +42,6 @@ public abstract class AbstractDetectorStream implements DetectorStream {
 
     /**
      * @see net.sf.mmm.streamdetect.api.DetectorStream#getMetadata()
-     *      
      */
     public Context getMetadata() {
 

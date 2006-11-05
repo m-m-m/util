@@ -154,7 +154,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getName()
-     * 
      */
     public String getName() {
 
@@ -163,7 +162,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorSymbol()
-     * 
      */
     public String getOperatorSymbol() {
 
@@ -172,7 +170,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorPriority()
-     * 
      */
     public OperatorPriority getOperatorPriority() {
 
@@ -181,7 +178,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     * 
      */
     public int getMinimumArgumentCount() {
 
@@ -190,7 +186,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     * 
      */
     public int getMaximumArgumentCount() {
 
@@ -476,7 +471,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate()
-     * 
      */
     @Override
     public Object calculate() throws ValueException {
@@ -487,7 +481,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(Object)
-     * 
      */
     @Override
     public Object calculate(Object argument) throws ValueException {
@@ -498,7 +491,6 @@ public class GenericFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(Object, Object)
-     * 
      */
     @Override
     public Object calculate(Object argument1, Object argument2) throws ValueException {

@@ -18,7 +18,6 @@ public abstract class UnaryFunction extends BasicFunction {
 
     /**
      * The constructor.
-     * 
      */
     public UnaryFunction() {
 
@@ -27,7 +26,6 @@ public abstract class UnaryFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorPriority()
-     * 
      */
     @Override
     public OperatorPriority getOperatorPriority() {
@@ -37,7 +35,6 @@ public abstract class UnaryFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     * 
      */
     public int getMinimumArgumentCount() {
 
@@ -46,7 +43,6 @@ public abstract class UnaryFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     * 
      */
     public int getMaximumArgumentCount() {
 
@@ -55,7 +51,6 @@ public abstract class UnaryFunction extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(Object)
-     * 
      */
     @Override
     public abstract Object calculate(Object argument) throws ValueException;

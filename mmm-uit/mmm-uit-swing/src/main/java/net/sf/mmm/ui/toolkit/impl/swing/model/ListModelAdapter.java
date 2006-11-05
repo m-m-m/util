@@ -40,7 +40,6 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
 
   /**
    * @see javax.swing.ListModel#getElementAt(int)
-   * 
    */
   public Object getElementAt(int index) {
 
@@ -49,7 +48,6 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
 
   /**
    * @see javax.swing.ListModel#getSize()
-   * 
    */
   public int getSize() {
 
@@ -58,7 +56,6 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-   * 
    */
   public void listModelChanged(UIListModelEvent event) {
 

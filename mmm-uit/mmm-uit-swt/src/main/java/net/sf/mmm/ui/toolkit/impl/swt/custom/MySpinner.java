@@ -173,7 +173,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font)
-   * 
    */
   @Override
   public void setFont(Font font) {
@@ -210,7 +209,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see org.eclipse.swt.widgets.Control#computeSize(int, int, boolean)
-   * 
    */
   @Override
   public Point computeSize(int wHint, int hHint, boolean changed) {
@@ -232,7 +230,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
-   * 
    */
   public int getSelectedIndex() {
 
@@ -241,7 +238,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
-   * 
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -265,7 +261,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-   * 
    */
   public void listModelChanged(UIListModelEvent event) {
 
@@ -279,7 +274,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable()
-   * 
    */
   public boolean isEditable() {
 
@@ -288,7 +282,6 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#setEditable(boolean)
-   * 
    */
   public void setEditable(boolean editableFlag) {
 

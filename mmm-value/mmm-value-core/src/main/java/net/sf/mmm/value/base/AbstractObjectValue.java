@@ -27,7 +27,6 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
 
   /**
    * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#convertValue(java.lang.Object)
-   * 
    */
   @Override
   protected Object convertValue(Object value) throws WrongValueTypeException {

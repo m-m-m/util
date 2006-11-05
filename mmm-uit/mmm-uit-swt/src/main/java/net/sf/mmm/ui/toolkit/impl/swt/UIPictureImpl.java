@@ -42,7 +42,6 @@ public class UIPictureImpl extends AbstractUIPicture {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredHeight()
-   * 
    */
   public int getPreferredHeight() {
 
@@ -51,7 +50,6 @@ public class UIPictureImpl extends AbstractUIPicture {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredWidth()
-   * 
    */
   public int getPreferredWidth() {
 

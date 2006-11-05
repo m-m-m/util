@@ -16,7 +16,6 @@ public class XmlException extends NlsException {
 
   /**
    * @see NlsException#NlsException(String, Object[])
-   * 
    */
   public XmlException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +24,6 @@ public class XmlException extends NlsException {
 
   /**
    * @see NlsException#NlsException(Throwable, String, Object[])
-   * 
    */
   public XmlException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

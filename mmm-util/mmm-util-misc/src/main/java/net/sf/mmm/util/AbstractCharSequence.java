@@ -19,7 +19,6 @@ public abstract class AbstractCharSequence extends CoreCharSequence {
 
     /**
      * @see java.lang.CharSequence#subSequence(int, int)
-     * 
      */
     public CharSequence subSequence(int startPosition, int endPosition) {
 

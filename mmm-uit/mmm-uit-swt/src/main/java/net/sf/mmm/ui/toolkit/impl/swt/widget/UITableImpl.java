@@ -51,7 +51,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
-   * 
    */
   @Override
   public SyncTableAccess getSyncAccess() {
@@ -61,7 +60,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
-   * 
    */
   @Override
   public void create() {
@@ -72,7 +70,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#getModel()
-   * 
    */
   public UITableModel getModel() {
 
@@ -81,7 +78,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModel)
-   * 
    */
   public void setModel(UITableModel newModel) {
 
@@ -90,7 +86,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 

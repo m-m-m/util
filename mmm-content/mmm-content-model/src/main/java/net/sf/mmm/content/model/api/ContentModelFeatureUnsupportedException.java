@@ -16,7 +16,6 @@ public class ContentModelFeatureUnsupportedException extends ContentModelExcepti
 
   /**
    * @see NlsException#NlsException(String, Object[])
-   * 
    */
   public ContentModelFeatureUnsupportedException(String internaitionalizedMessage,
       Object... arguments) {
@@ -26,7 +25,6 @@ public class ContentModelFeatureUnsupportedException extends ContentModelExcepti
 
   /**
    * @see NlsException#NlsException(Throwable, String, Object[])
-   * 
    */
   public ContentModelFeatureUnsupportedException(Throwable nested,
       String internaitionalizedMessage, Object... arguments) {

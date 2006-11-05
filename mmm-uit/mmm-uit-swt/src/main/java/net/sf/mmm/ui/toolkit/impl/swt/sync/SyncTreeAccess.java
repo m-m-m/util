@@ -53,7 +53,6 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
-   * 
    */
   @Override
   public Tree getSwtObject() {
@@ -63,7 +62,6 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {
@@ -87,7 +85,6 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
-   * 
    */
   @Override
   protected void createSynchron() {

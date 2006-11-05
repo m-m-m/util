@@ -57,7 +57,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -66,7 +65,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag#isMultiSelection()
-   * 
    */
   public boolean isMultiSelection() {
 
@@ -92,7 +90,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIList#getModel()
-   * 
    */
   public UIListModel<E> getModel() {
 
@@ -105,7 +102,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIList#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public void setModel(UIListModel<E> newModel) {
 
@@ -119,7 +115,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
-   * 
    */
   public int getSelectedIndex() {
 
@@ -128,7 +123,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
-   * 
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -137,7 +131,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIList#getSelectedIndices()
-   * 
    */
   public int[] getSelectedIndices() {
 
@@ -146,7 +139,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   public JComponent getSwingComponent() {
 
@@ -155,7 +147,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getActiveSwingComponent()
-   * 
    */
   protected JComponent getActiveSwingComponent() {
 
@@ -164,7 +155,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
-   * 
    */
   public void setSelectedValue(E newValue) {
 
@@ -176,7 +166,6 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
-   * 
    */
   public E getSelectedValue() {
 

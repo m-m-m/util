@@ -11,7 +11,6 @@ public class CollecionUtil {
 
     /**
      * The constructor.
-     *
      */
     private CollecionUtil() {
 

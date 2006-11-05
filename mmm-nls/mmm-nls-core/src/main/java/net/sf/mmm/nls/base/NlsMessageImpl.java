@@ -108,7 +108,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsObject#toNlsMessage()
-     * 
      */
     public NlsMessage toNlsMessage() {
 
@@ -117,7 +116,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getInternationalizedMessage()
-     * 
      */
     public String getInternationalizedMessage() {
 
@@ -126,7 +124,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getArgumentCount()
-     * 
      */
     public int getArgumentCount() {
 
@@ -135,7 +132,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getArgument(int)
-     * 
      */
     public Object getArgument(int index) {
 
@@ -144,7 +140,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getMessage()
-     * 
      */
     public String getMessage() {
 
@@ -153,7 +148,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage()
-     * 
      */
     public String getLocalizedMessage() {
 
@@ -162,7 +156,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(net.sf.mmm.nls.api.StringTranslator)
-     * 
      */
     public String getLocalizedMessage(StringTranslator nationalizer) {
 
@@ -174,7 +167,6 @@ public class NlsMessageImpl implements NlsMessage {
     /**
      * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(net.sf.mmm.nls.api.StringTranslator,
      *      java.lang.StringBuffer)
-     * 
      */
     public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer messageBuffer) {
 
@@ -218,7 +210,6 @@ public class NlsMessageImpl implements NlsMessage {
 
     /**
      * @see java.lang.Object#toString()
-     * 
      */
     @Override
     public String toString() {

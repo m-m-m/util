@@ -69,7 +69,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see javax.swing.SpinnerModel#getValue()
-   * 
    */
   public Object getValue() {
 
@@ -78,7 +77,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
-   * 
    */
   public int getSelectedIndex() {
 
@@ -87,7 +85,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
-   * 
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -100,7 +97,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
-   * 
    */
   @SuppressWarnings("unchecked")
   public void setValue(Object value) {
@@ -110,7 +106,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see javax.swing.SpinnerModel#getNextValue()
-   * 
    */
   public Object getNextValue() {
 
@@ -126,7 +121,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see javax.swing.SpinnerModel#getPreviousValue()
-   * 
    */
   public Object getPreviousValue() {
 
@@ -139,7 +133,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-   * 
    */
   public void listModelChanged(UIListModelEvent event) {
 
@@ -152,7 +145,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
-   * 
    */
   public E getSelectedValue() {
 
@@ -161,7 +153,6 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
-   * 
    */
   public void setSelectedValue(E newValue) {
 

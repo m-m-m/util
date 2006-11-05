@@ -69,7 +69,6 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * @see net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu#createMenuItem(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-   * 
    */
   protected UIMenuItem createMenuItem(String name, ButtonStyle style) {
 
@@ -83,7 +82,6 @@ public class UIMenuImpl extends AbstractUIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu#createSubMenu(java.lang.String)
-   * 
    */
   protected UIMenu createSubMenu(String name) {
 
@@ -94,7 +92,6 @@ public class UIMenuImpl extends AbstractUIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItem#getText()
-   * 
    */
   public String getText() {
 
@@ -103,7 +100,6 @@ public class UIMenuImpl extends AbstractUIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addSeparator()
-   * 
    */
   public void addSeparator() {
 
@@ -112,7 +108,6 @@ public class UIMenuImpl extends AbstractUIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItem#getStyle()
-   * 
    */
   public ButtonStyle getStyle() {
 
@@ -121,7 +116,6 @@ public class UIMenuImpl extends AbstractUIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#isSelected()
-   * 
    */
   public boolean isSelected() {
 
@@ -130,7 +124,6 @@ public class UIMenuImpl extends AbstractUIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#setSelected(boolean)
-   * 
    */
   public void setSelected(boolean selected) {
 

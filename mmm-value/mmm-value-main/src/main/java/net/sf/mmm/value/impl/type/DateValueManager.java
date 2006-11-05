@@ -57,7 +57,6 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
   /**
    * The constructor.
-   * 
    */
   public DateValueManager() {
 
@@ -82,7 +81,6 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
   /**
    * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
-   * 
    */
   public Date parse(String valueAsString) throws ValueParseException {
 
@@ -144,7 +142,6 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
   /**
    * @see net.sf.mmm.value.base.AbstractValueManager#parse(org.w3c.dom.Element)
-   * 
    */
   @Override
   public Date parse(Element valueAsXml) throws ValueParseException {
@@ -173,7 +170,6 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
   /**
    * @see net.sf.mmm.value.api.ValueManager#toString(java.lang.Object)
-   * 
    */
   @Override
   public String toString(Date value) {

@@ -140,7 +140,6 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
 
   /**
    * @see net.sf.mmm.framework.api.MutableIocContainer#addComponentProvider(net.sf.mmm.framework.api.ComponentProvider)
-   * 
    */
   public void addComponentProvider(ComponentProvider<?> componentProvider)
       throws ContainerException {

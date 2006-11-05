@@ -64,7 +64,6 @@ public abstract class AbstractAction implements Action {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.Action#getName()
-   * 
    */
   public String getName() {
 
@@ -84,7 +83,6 @@ public abstract class AbstractAction implements Action {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.Action#getId()
-   * 
    */
   public String getId() {
 
@@ -104,7 +102,6 @@ public abstract class AbstractAction implements Action {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.Action#getStyle()
-   * 
    */
   public ButtonStyle getStyle() {
 
@@ -124,7 +121,6 @@ public abstract class AbstractAction implements Action {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.feature.Action#getIcon()
-   * 
    */
   public UIPicture getIcon() {
 

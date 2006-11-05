@@ -47,7 +47,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#getBorderTitle()
-   * 
    */
   public String getBorderTitle() {
 
@@ -60,7 +59,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
-   * 
    */
   @Override
   public AbstractSyncCompositeAccess getSyncAccess() {
@@ -74,20 +72,17 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getActiveSyncAccess()
-   * 
    */
   @Override
   public abstract AbstractSyncCompositeAccess getActiveSyncAccess();
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
-   * 
    */
   public abstract AbstractUIComponent getComponent(int index);
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
-   * 
    */
   @Override
   public void create() {
@@ -115,7 +110,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#dispose()
-   * 
    */
   @Override
   public void dispose() {

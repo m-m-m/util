@@ -15,7 +15,6 @@ public class ValueParseException extends ValueException {
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-   * 
    */
   public ValueParseException(String internaitionalizedMessage, Object... arguments) {
 
@@ -24,7 +23,6 @@ public class ValueParseException extends ValueException {
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-   * 
    */
   public ValueParseException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {

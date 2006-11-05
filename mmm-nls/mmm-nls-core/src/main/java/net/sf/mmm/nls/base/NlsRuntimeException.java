@@ -89,7 +89,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
-     *      
      */
     @Override
     public void printStackTrace(PrintStream s) {
@@ -99,7 +98,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
-     *      
      */
     @Override
     public void printStackTrace(PrintWriter s) {
@@ -167,7 +165,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
 
     /**
      * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator)
-     *      
      */
     public String getLocalizedMessage(StringTranslator nationalizer) {
 

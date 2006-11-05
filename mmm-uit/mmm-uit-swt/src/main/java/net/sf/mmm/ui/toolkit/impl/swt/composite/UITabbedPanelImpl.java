@@ -47,7 +47,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      java.lang.String)
-   * 
    */
   public void addComponent(UIComponent component, String title) {
 
@@ -67,7 +66,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      java.lang.String, int)
-   * 
    */
   public void addComponent(UIComponent component, String title, int position) {
 
@@ -86,7 +84,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel#removeComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
-   * 
    */
   public void removeComponent(UIComponent component) {
 
@@ -98,7 +95,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel#removeComponent(int)
-   * 
    */
   public void removeComponent(int position) {
 
@@ -110,7 +106,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -119,7 +114,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite#createChildren()
-   * 
    */
   @Override
   protected void createChildren() {
@@ -137,7 +131,6 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getActiveSyncAccess()
-   * 
    */
   @Override
   public SyncTabFolderAccess getActiveSyncAccess() {

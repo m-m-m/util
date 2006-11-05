@@ -65,7 +65,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
-   * 
    */
   @Override
   protected boolean doInitializeListener() {
@@ -76,7 +75,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   @Override
   public JComponent getSwingComponent() {
@@ -86,7 +84,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -95,7 +92,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation()
-   * 
    */
   public Orientation getOrientation() {
 
@@ -108,7 +104,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
-   * 
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -117,7 +112,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
-   * 
    */
   public int getSelectedIndex() {
 
@@ -126,7 +120,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidget#getModel()
-   * 
    */
   public UIListModel<E> getModel() {
 
@@ -135,7 +128,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidget#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public void setModel(UIListModel<E> newModel) {
 
@@ -144,7 +136,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
-   * 
    */
   public void setSelectedValue(E newValue) {
 
@@ -156,7 +147,6 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
-   * 
    */
   public E getSelectedValue() {
 

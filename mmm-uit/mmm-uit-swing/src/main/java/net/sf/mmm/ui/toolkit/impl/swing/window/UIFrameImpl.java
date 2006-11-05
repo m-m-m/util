@@ -55,7 +55,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl#getAwtWindow()
-   * 
    */
   protected Window getAwtWindow() {
 
@@ -64,7 +63,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#getTitle()
-   * 
    */
   public String getTitle() {
 
@@ -73,7 +71,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#setTitle(java.lang.String)
-   * 
    */
   public void setTitle(String newTitle) {
 
@@ -82,7 +79,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -91,7 +87,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#createMenuBar()
-   * 
    */
   protected UIMenuBar createMenuBar() {
 
@@ -105,7 +100,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximized#isMaximized()
-   * 
    */
   public boolean isMaximized() {
 
@@ -114,7 +108,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMaximized(boolean)
-   * 
    */
   public void setMaximized(boolean maximize) {
 
@@ -129,7 +122,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMinimized(boolean)
-   * 
    */
   public void setMinimized(boolean minimize) {
 
@@ -140,7 +132,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
    *      boolean)
-   * 
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
@@ -149,7 +140,6 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
-   * 
    */
   public void setComposite(UIComposite newComposite) {
 

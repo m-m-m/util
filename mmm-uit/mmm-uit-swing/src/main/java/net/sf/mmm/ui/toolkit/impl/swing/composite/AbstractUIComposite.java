@@ -37,7 +37,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIComponent#setEnabled(boolean)
-   * 
    */
   public void setEnabled(boolean enabled) {
 
@@ -49,7 +48,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#setBorderTitle(java.lang.String)
-   * 
    */
   public void setBorderTitle(String borderTitle) {
 
@@ -70,7 +68,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#getBorderTitle()
-   * 
    */
   public String getBorderTitle() {
 
@@ -83,7 +80,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#refresh()
-   * 
    */
   @Override
   public void refresh() {

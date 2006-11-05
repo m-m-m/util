@@ -18,7 +18,6 @@ public class NlsExceptionTest extends TestCase {
 
     /**
      * The constructor.
-     * 
      */
     public NlsExceptionTest() {
 

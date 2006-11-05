@@ -53,7 +53,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   @Override
   public JComponent getSwingComponent() {
@@ -63,7 +62,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -72,7 +70,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#getModel()
-   * 
    */
   public UITableModel getModel() {
 
@@ -85,7 +82,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModel)
-   * 
    */
   public void setModel(UITableModel newModel) {
 
@@ -99,7 +95,6 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getActiveSwingComponent()
-   * 
    */
   @Override
   protected JComponent getActiveSwingComponent() {

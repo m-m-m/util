@@ -16,7 +16,6 @@ public class ContentModelException extends ContentException {
 
   /**
    * @see NlsException#NlsException(String, Object[])
-   * 
    */
   public ContentModelException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +24,6 @@ public class ContentModelException extends ContentException {
 
   /**
    * @see NlsException#NlsException(Throwable, String, Object[])
-   * 
    */
   public ContentModelException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {

@@ -30,7 +30,6 @@ public class FunctionElse extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getName()
-     * 
      */
     public String getName() {
 
@@ -39,7 +38,6 @@ public class FunctionElse extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getOperatorSymbol()
-     * 
      */
     public String getOperatorSymbol() {
 
@@ -48,7 +46,6 @@ public class FunctionElse extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMinimumArgumentCount()
-     * 
      */
     public int getMinimumArgumentCount() {
 
@@ -57,7 +54,6 @@ public class FunctionElse extends BasicFunction {
 
     /**
      * @see net.sf.mmm.term.api.FunctionIF#getMaximumArgumentCount()
-     * 
      */
     public int getMaximumArgumentCount() {
 
@@ -67,7 +63,6 @@ public class FunctionElse extends BasicFunction {
     /**
      * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
      *      GenericValue)
-     * 
      */
     public Object calculate(Object argument1, Object argument2)
             throws CalculationException {

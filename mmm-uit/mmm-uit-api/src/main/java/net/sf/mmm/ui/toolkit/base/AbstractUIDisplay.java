@@ -33,7 +33,6 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -42,7 +41,6 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
 
   /**
    * @see java.lang.Object#toString()
-   * 
    */
   @Override
   public String toString() {
@@ -52,7 +50,6 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIDisplay#getDevice()
-   * 
    */
   public UIDevice getDevice() {
 
@@ -61,7 +58,6 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIDisplay#invokeSynchron(java.util.concurrent.Callable)
-   * 
    */
   public <T> T invokeSynchron(Callable<T> task) throws Exception {
 
@@ -76,7 +72,6 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIDisplay#invokeSynchron(java.lang.Runnable)
-   * 
    */
   public void invokeSynchron(Runnable task) {
 

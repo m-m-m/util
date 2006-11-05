@@ -533,7 +533,6 @@ public final class IdImpl implements IdIF {
 
   /**
    * @see Object#equals(java.lang.Object)
-   * 
    */
   @Override
   public boolean equals(Object other) {
@@ -546,7 +545,6 @@ public final class IdImpl implements IdIF {
 
   /**
    * @see java.lang.Object#hashCode()
-   * 
    */
   @Override
   public int hashCode() {
@@ -619,7 +617,6 @@ public final class IdImpl implements IdIF {
 
   /**
    * @see java.lang.Object#toString()
-   * 
    */
   @Override
   public String toString() {
@@ -662,7 +659,6 @@ public final class IdImpl implements IdIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
-     * 
      */
     public IdImpl parse(String valueAsString) throws ValueParseException {
 
@@ -671,7 +667,6 @@ public final class IdImpl implements IdIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueManager#getValueType()
-     * 
      */
     public Class<IdImpl> getValueType() {
 

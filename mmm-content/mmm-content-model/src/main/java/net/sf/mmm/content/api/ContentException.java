@@ -12,7 +12,6 @@ public abstract class ContentException extends NlsException {
 
   /**
    * @see NlsException#NlsException(String, Object[])
-   * 
    */
   public ContentException(String internaitionalizedMessage, Object... arguments) {
 
@@ -21,7 +20,6 @@ public abstract class ContentException extends NlsException {
 
   /**
    * @see NlsException#NlsException(Throwable, String, Object[])
-   * 
    */
   public ContentException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

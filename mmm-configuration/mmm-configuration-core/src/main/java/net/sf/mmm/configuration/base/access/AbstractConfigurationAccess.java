@@ -35,7 +35,6 @@ public abstract class AbstractConfigurationAccess implements ConfigurationAccess
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getContextPrefix()
-   *      
    */
   public String getContextPrefix() {
 

@@ -42,7 +42,6 @@ public abstract class AbstractXmlWriter implements XmlWriter {
 
   /**
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(java.lang.String)
-   * 
    */
   public void writeStartElement(String localName) throws XmlException {
 
@@ -52,7 +51,6 @@ public abstract class AbstractXmlWriter implements XmlWriter {
   /**
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(java.lang.String,
    *      java.lang.String)
-   * 
    */
   public void writeStartElement(String localName, String namespacePrefix) throws XmlException {
 
@@ -62,7 +60,6 @@ public abstract class AbstractXmlWriter implements XmlWriter {
   /**
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeAttribute(java.lang.String,
    *      java.lang.String)
-   * 
    */
   public void writeAttribute(String localName, String value) throws XmlException {
 
@@ -71,7 +68,6 @@ public abstract class AbstractXmlWriter implements XmlWriter {
 
   /**
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String)
-   * 
    */
   public void writeEndElement(String localName) throws XmlException {
 

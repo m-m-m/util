@@ -435,7 +435,6 @@ public final class VersionImpl implements VersionIF {
 
   /**
    * @see net.sf.mmm.content.api.value.VersionIF#isHigherThan(net.sf.mmm.content.api.value.VersionIF)
-   * 
    */
   public boolean isHigherThan(VersionIF other) {
 
@@ -460,7 +459,6 @@ public final class VersionImpl implements VersionIF {
 
   /**
    * @see VersionIF#toString()
-   * 
    */
   @Override
   public String toString() {
@@ -501,7 +499,6 @@ public final class VersionImpl implements VersionIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueManager#getName()
-     * 
      */
     public String getName() {
 
@@ -510,7 +507,6 @@ public final class VersionImpl implements VersionIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
-     * 
      */
     public VersionImpl parse(String valueAsString) throws ValueParseException {
 
@@ -519,7 +515,6 @@ public final class VersionImpl implements VersionIF {
 
     /**
      * @see net.sf.mmm.value.api.ValueManager#getValueType()
-     * 
      */
     public Class<VersionImpl> getValueType() {
 

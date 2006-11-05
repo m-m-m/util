@@ -19,7 +19,6 @@ public class EqualsComparator implements ComparatorIF {
 
   /**
    * The constructor.
-   * 
    */
   public EqualsComparator() {
 
@@ -42,7 +41,6 @@ public class EqualsComparator implements ComparatorIF {
 
   /**
    * @see net.sf.mmm.configuration.base.path.ComparatorIF#getSymbol()
-   *      
    */
   public String getSymbol() {
 

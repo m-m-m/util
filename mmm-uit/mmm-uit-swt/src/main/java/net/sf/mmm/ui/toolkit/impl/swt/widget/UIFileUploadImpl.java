@@ -33,7 +33,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
     /**
      * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
-     * 
      */
     public void handleEvent(Event event) {
 
@@ -79,7 +78,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
-   * 
    */
   @Override
   public AbstractSyncControlAccess getSyncAccess() {
@@ -89,7 +87,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIFileUpload#getSelection()
-   * 
    */
   public FileAccess getSelection() {
 
@@ -98,7 +95,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -107,7 +103,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
-   * 
    */
   public void setText(String text) {
 
@@ -116,7 +111,6 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
-   * 
    */
   public String getText() {
 

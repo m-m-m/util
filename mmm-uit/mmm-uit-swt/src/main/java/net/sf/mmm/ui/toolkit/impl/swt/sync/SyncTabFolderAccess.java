@@ -90,7 +90,6 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess#getSwtObject()
-   * 
    */
   @Override
   public TabFolder getSwtObject() {
@@ -100,7 +99,6 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(java.lang.String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {
@@ -124,7 +122,6 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
-   * 
    */
   @Override
   protected void createSynchron() {

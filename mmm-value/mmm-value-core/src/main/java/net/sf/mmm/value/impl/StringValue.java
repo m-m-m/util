@@ -63,7 +63,6 @@ public class StringValue extends AbstractStringValue {
 
   /**
    * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
-   * 
    */
   @Override
   protected String getPlainValue() {
@@ -73,7 +72,6 @@ public class StringValue extends AbstractStringValue {
 
   /**
    * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
-   * 
    */
   @Override
   protected void setPlainValue(String newValue) {

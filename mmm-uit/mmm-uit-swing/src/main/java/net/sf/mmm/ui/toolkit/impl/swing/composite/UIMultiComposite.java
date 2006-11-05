@@ -34,7 +34,6 @@ public abstract class UIMultiComposite extends AbstractUIComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponentCount()
-   * 
    */
   public int getComponentCount() {
 
@@ -43,7 +42,6 @@ public abstract class UIMultiComposite extends AbstractUIComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
-   * 
    */
   public UIComponent getComponent(int index) {
 

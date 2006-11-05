@@ -57,7 +57,6 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#createSynchron()
-   * 
    */
   @Override
   protected void createSynchron() {
@@ -68,7 +67,6 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#performSynchron(java.lang.String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {
@@ -86,7 +84,6 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncDialogAccess#getSwtObject()
-   * 
    */
   @Override
   public FileDialog getSwtObject() {

@@ -15,7 +15,6 @@ public class SecurityException extends NlsException {
 
   /**
    * @see NlsException#NlsException(String, Object[])
-   * 
    */
   public SecurityException(String internaitionalizedMessage, Object... arguments) {
 
@@ -24,7 +23,6 @@ public class SecurityException extends NlsException {
 
   /**
    * @see NlsException#NlsException(Throwable, String, Object[])
-   * 
    */
   public SecurityException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

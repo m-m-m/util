@@ -27,7 +27,6 @@ public abstract class AbstractUIMutableListModel<E> extends AbstractUIListModel<
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.model.UIMutableListModel#removeAll()
-   * 
    */
   public void removeAll() {
 

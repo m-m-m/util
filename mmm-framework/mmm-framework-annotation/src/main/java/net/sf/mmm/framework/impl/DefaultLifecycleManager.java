@@ -63,7 +63,6 @@ public class DefaultLifecycleManager extends AbstractLifecycleManager {
 
     /**
      * @see net.sf.mmm.framework.api.LifecycleManager#setupComponent(ExtendedComponentInstanceContainer)
-     * 
      */
     public void setupComponent(ExtendedComponentInstanceContainer<?, ?> instanceContainer)
             throws LifecycleException {
@@ -105,7 +104,6 @@ public class DefaultLifecycleManager extends AbstractLifecycleManager {
 
     /**
      * @see net.sf.mmm.framework.api.LifecycleManager#shutdownComponent(ExtendedComponentInstanceContainer)
-     * 
      */
     public void shutdownComponent(ExtendedComponentInstanceContainer<?, ?> instanceContainer)
             throws LifecycleException {
@@ -159,7 +157,6 @@ public class DefaultLifecycleManager extends AbstractLifecycleManager {
 
         /**
          * @see java.lang.Runnable#run()
-         * 
      */
         public void run() {
 

@@ -93,7 +93,6 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
-   * 
    */
   @Override
   public Shell getSwtObject() {
@@ -103,7 +102,6 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {

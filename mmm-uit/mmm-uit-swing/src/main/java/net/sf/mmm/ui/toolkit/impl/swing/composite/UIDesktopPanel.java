@@ -38,7 +38,6 @@ public class UIDesktopPanel extends UIMultiComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
-   * 
    */
   @Override
   public JComponent getSwingComponent() {
@@ -48,7 +47,6 @@ public class UIDesktopPanel extends UIMultiComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 

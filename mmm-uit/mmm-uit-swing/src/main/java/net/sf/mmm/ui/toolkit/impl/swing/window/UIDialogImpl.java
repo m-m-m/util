@@ -44,7 +44,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl#getAwtWindow()
-   * 
    */
   protected Window getAwtWindow() {
 
@@ -53,7 +52,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#getTitle()
-   * 
    */
   public String getTitle() {
 
@@ -62,7 +60,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#setTitle(java.lang.String)
-   * 
    */
   public void setTitle(String newTitle) {
 
@@ -71,7 +68,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -80,7 +76,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadModal#isModal()
-   * 
    */
   public boolean isModal() {
 
@@ -89,7 +84,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#createMenuBar()
-   * 
    */
   protected UIMenuBar createMenuBar() {
 
@@ -103,7 +97,6 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
-   * 
    */
   public void setComposite(UIComposite newComposite) {
 

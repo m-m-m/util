@@ -33,7 +33,6 @@ public class SwtListenerAdapter implements Listener {
 
   /**
    * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
-   * 
    */
   public void handleEvent(Event event) {
 

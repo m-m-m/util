@@ -46,7 +46,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createFrame(java.lang.String)
-   * 
    */
   public UIFrame createFrame(String title) {
 
@@ -55,7 +54,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createLabel()
-   * 
    */
   public UILabel createLabel() {
 
@@ -64,7 +62,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(java.lang.String)
-   * 
    */
   public UIButton createButton(String text) {
 
@@ -74,7 +71,6 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-   * 
    */
   public UIButton createButton(String text, ButtonStyle style) {
 
@@ -84,7 +80,6 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(net.sf.mmm.ui.toolkit.api.UIPicture,
    *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-   * 
    */
   public UIButton createButton(UIPicture icon, ButtonStyle style) {
 
@@ -93,7 +88,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(net.sf.mmm.ui.toolkit.api.feature.Action)
-   * 
    */
   public UIButton createButton(Action action) {
 
@@ -112,7 +106,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPanel(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-   * 
    */
   public UIPanel createPanel(Orientation orientation) {
 
@@ -121,7 +114,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPicture(java.io.File)
-   * 
    */
   public UIPicture createPicture(File imageFile) throws IOException {
 
@@ -134,7 +126,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createSlideBar(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public <E> UISlideBar<E> createSlideBar(UIListModel<E> model) {
 
@@ -143,7 +134,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createList(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public <E> UIList<E> createList(UIListModel<E> model) {
 
@@ -152,7 +142,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createComboBox(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public <E> UIComboBox<E> createComboBox(UIListModel<E> model) {
 
@@ -161,7 +150,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createProgressBar()
-   * 
    */
   public UIProgressBar createProgressBar() {
 
@@ -170,7 +158,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createScrollPanel()
-   * 
    */
   public UIScrollPanel createScrollPanel() {
 
@@ -179,7 +166,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable()
-   * 
    */
   public UITable createTable() {
 
@@ -188,7 +174,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable(boolean)
-   * 
    */
   public UITable createTable(boolean multiSelection) {
 
@@ -197,7 +182,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree()
-   * 
    */
   public UITree createTree() {
 
@@ -206,7 +190,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree(boolean)
-   * 
    */
   public UITree createTree(boolean multiSelection) {
 
@@ -215,7 +198,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPrintAction(net.sf.mmm.ui.toolkit.api.UIComponent)
-   * 
    */
   public Action createPrintAction(UIComponent component) {
 
@@ -226,7 +208,6 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPrintAction(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      java.lang.String)
-   * 
    */
   public Action createPrintAction(UIComponent component, String actionName) {
 
@@ -238,7 +219,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
-   * 
    */
   public void dispose() {
 
@@ -247,7 +227,6 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#isDisposed()
-   * 
    */
   public boolean isDisposed() {
 

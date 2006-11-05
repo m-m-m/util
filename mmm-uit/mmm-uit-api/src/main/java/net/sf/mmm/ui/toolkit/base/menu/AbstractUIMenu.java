@@ -41,7 +41,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -50,7 +49,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#getItemCount()
-   * 
    */
   public int getItemCount() {
 
@@ -59,7 +57,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#getItems()
-   * 
    */
   public Iterator<UIMenuItem> getItems() {
 
@@ -69,7 +66,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.event.UIActionListener)
-   * 
    */
   public UIMenuItem addItem(String name, UIActionListener action) {
 
@@ -79,7 +75,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
-   * 
    */
   public UIMenuItem addItem(String name, ButtonStyle style) {
 
@@ -88,7 +83,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(net.sf.mmm.ui.toolkit.api.feature.Action)
-   * 
    */
   public UIMenuItem addItem(Action action) {
 
@@ -108,7 +102,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.event.UIActionListener)
-   * 
    */
   public UIMenuItem addItem(String name, UIActionListener action, ButtonStyle style) {
 
@@ -136,7 +129,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addSubMenu(java.lang.String)
-   * 
    */
   public UIMenu addSubMenu(String name) {
 
@@ -158,7 +150,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItem#getStyle()
-   * 
    */
   public ButtonStyle getStyle() {
 
@@ -167,7 +158,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#isSelected()
-   * 
    */
   public boolean isSelected() {
 
@@ -176,7 +166,6 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#setSelected(boolean)
-   * 
    */
   public void setSelected(boolean selected) {
 

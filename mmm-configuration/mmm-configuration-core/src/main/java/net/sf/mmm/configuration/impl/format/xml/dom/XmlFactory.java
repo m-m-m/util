@@ -31,7 +31,6 @@ public class XmlFactory extends AbstractConfigurationFactory {
 
   /**
    * The constructor.
-   * 
    */
   public XmlFactory() {
 

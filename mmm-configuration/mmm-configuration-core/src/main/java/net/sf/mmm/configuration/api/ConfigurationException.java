@@ -17,7 +17,6 @@ public class ConfigurationException extends NlsRuntimeException {
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-   *      
    */
   public ConfigurationException(String internaitionalizedMessage, Object... arguments) {
 
@@ -26,7 +25,6 @@ public class ConfigurationException extends NlsRuntimeException {
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-   *      
    */
   public ConfigurationException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {

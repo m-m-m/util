@@ -67,7 +67,6 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionServiceIF#getFunctionBySymbol(java.lang.String)
-     * 
      */
     public FunctionIF getFunctionBySymbol(String symbol) throws NoSuchFunctionException {
 
@@ -80,7 +79,6 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionServiceIF#getFunctionByName(java.lang.String)
-     * 
      */
     public FunctionIF getFunctionByName(String name) throws NoSuchFunctionException {
 
@@ -93,7 +91,6 @@ public abstract class AbstractFunctionService implements FunctionServiceIF {
 
     /**
      * @see net.sf.mmm.term.api.FunctionServiceIF#getFunctions()
-     * 
      */
     public Iterator<FunctionIF> getFunctions() {
 

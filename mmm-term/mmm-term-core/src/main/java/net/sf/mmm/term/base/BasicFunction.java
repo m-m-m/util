@@ -36,7 +36,6 @@ public abstract class BasicFunction extends AbstractFunction {
     /**
      * @see net.sf.mmm.term.api.FunctionIF#calculate(net.sf.mmm.context.api.Context,
      *      net.sf.mmm.term.api.TermIF[])
-     * 
      */
     public Object calculate(Context environment, TermIF... arguments)
             throws ValueException {

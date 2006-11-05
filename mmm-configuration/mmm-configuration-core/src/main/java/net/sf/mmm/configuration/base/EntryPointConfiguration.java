@@ -36,7 +36,6 @@ public class EntryPointConfiguration extends ConfigurationProxy {
 
   /**
    * @see net.sf.mmm.configuration.base.ConfigurationProxy#getDelegate()
-   *      
    */
   @Override
   protected AbstractConfiguration getDelegate() {
@@ -46,7 +45,6 @@ public class EntryPointConfiguration extends ConfigurationProxy {
 
   /**
    * @see net.sf.mmm.configuration.base.ConfigurationProxy#getParent()
-   *      
    */
   @Override
   protected AbstractConfiguration getParent() {

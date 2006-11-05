@@ -32,7 +32,6 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
 
     /**
      * @see java.util.Iterator#hasNext()
-     * 
      */
     public boolean hasNext() {
 
@@ -41,7 +40,6 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
 
     /**
      * @see java.util.Iterator#next()
-     * 
      */
     public E next() {
 

@@ -89,7 +89,6 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
 
   /**
    * @see net.sf.mmm.configuration.base.BasicConfiguration#getOwnerDocument()
-   *      
    */
   @Override
   protected XmlDocument getOwnerDocument() {
@@ -111,7 +110,6 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
-   *      
    */
   public String getNamespaceUri() {
 
@@ -124,7 +122,6 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
 
   /**
    * @see net.sf.mmm.configuration.base.BasicConfiguration#getPlainString()
-   *      
    */
   @Override
   protected String getPlainString() {
@@ -138,7 +135,6 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
 
   /**
    * @see net.sf.mmm.configuration.base.BasicConfiguration#setPlainString(java.lang.String)
-   *      
    */
   @Override
   protected void setPlainString(String newValue) {
@@ -156,7 +152,6 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
-   *      
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {
@@ -180,7 +175,6 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
-   *      
    */
   @Override
   protected void doRemove() throws ConfigurationException {

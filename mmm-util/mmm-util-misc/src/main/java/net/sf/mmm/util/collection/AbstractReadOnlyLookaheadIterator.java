@@ -49,7 +49,6 @@ public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E
 
     /**
      * @see java.util.Iterator#hasNext()
-     * 
      */
     public final boolean hasNext() {
 
@@ -58,7 +57,6 @@ public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E
 
     /**
      * @see java.util.Iterator#next()
-     * 
      */
     public final E next() {
 

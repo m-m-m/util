@@ -277,7 +277,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
-   *      
    */
   public AbstractConfiguration getDescendant(String path) {
 
@@ -389,7 +388,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String)
-   *      
    */
   public Collection<AbstractConfiguration> getDescendants(String path) {
 
@@ -503,7 +501,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#isDescendantOf(net.sf.mmm.configuration.api.Configuration)
-   *      
    */
   public final boolean isDescendantOf(Configuration superNode) {
 
@@ -519,7 +516,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getRelativePath(net.sf.mmm.configuration.api.Configuration)
-   *      
    */
   public final String getRelativePath(Configuration ancestor) {
 
@@ -568,7 +564,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#remove()
-   *      
    */
   public void remove() throws ConfigurationException {
 
@@ -601,7 +596,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
-   *      
    */
   public void disable() throws ConfigurationException {
 

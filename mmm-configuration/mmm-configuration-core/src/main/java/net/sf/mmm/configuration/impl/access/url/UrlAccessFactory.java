@@ -67,7 +67,6 @@ public class UrlAccessFactory extends AbstractConfigurationAccessFactory {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#isSingleAccess()
-   *      
    */
   public boolean isSingleAccess() {
 

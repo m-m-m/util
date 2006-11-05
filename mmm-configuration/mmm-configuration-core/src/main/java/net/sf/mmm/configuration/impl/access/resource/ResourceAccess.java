@@ -75,7 +75,6 @@ public class ResourceAccess extends AbstractConfigurationAccess {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getUniqueUri()
-   *      
    */
   public String getUniqueUri() {
 
@@ -94,7 +93,6 @@ public class ResourceAccess extends AbstractConfigurationAccess {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getName()
-   *      
    */
   public String getName() {
 
@@ -103,7 +101,6 @@ public class ResourceAccess extends AbstractConfigurationAccess {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getReadAccess()
-   *      
    */
   public InputStream getReadAccess() throws ConfigurationException {
 
@@ -122,7 +119,6 @@ public class ResourceAccess extends AbstractConfigurationAccess {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getWriteAccess()
-   *      
    */
   public OutputStream getWriteAccess() throws ConfigurationException {
 
@@ -138,7 +134,6 @@ public class ResourceAccess extends AbstractConfigurationAccess {
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#isReadOnly()
-   *      
    */
   public boolean isReadOnly() {
 

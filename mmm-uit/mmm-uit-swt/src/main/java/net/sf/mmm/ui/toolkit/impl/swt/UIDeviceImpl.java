@@ -30,7 +30,6 @@ public class UIDeviceImpl implements UIDevice {
 
   /**
    * @see java.lang.Object#toString()
-   * 
    */
   @Override
   public String toString() {

@@ -28,7 +28,6 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   @Override
   public String getType() {
@@ -39,7 +38,6 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
    *      boolean)
-   * 
    */
   @Override
   public UIFrameImpl createFrame(String title, boolean resizeable) {

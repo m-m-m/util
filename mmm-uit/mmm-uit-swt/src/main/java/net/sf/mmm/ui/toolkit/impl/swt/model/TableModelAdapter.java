@@ -87,7 +87,6 @@ public class TableModelAdapter implements UITableModelListener, Listener, Runnab
 
   /**
    * 
-   * 
    */
   public void initialize() {
 
@@ -99,7 +98,6 @@ public class TableModelAdapter implements UITableModelListener, Listener, Runnab
 
   /**
    * 
-   * 
    */
   /*
    * public void updateColumnWiths() { Point size = this.table.getSize(); int
@@ -110,7 +108,6 @@ public class TableModelAdapter implements UITableModelListener, Listener, Runnab
 
   /**
    * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
-   * 
    */
   public void handleEvent(Event swtEvent) {
 
@@ -135,7 +132,6 @@ public class TableModelAdapter implements UITableModelListener, Listener, Runnab
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UITableModelListener#tableModelChanged(net.sf.mmm.ui.toolkit.api.event.UITableModelEvent)
-   * 
    */
   public synchronized void tableModelChanged(UITableModelEvent changeEvent) {
 

@@ -126,7 +126,6 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
-   * 
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
@@ -191,7 +190,6 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   * 
    */
   @Override
   protected void addChild(AbstractConfiguration child) {
@@ -219,7 +217,6 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   * 
    */
   @Override
   protected void removeChild(AbstractConfiguration child) {

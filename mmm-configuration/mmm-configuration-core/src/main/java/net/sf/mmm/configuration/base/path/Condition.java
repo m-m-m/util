@@ -80,7 +80,6 @@ public class Condition implements ConditionIF {
 
   /**
    * @see net.sf.mmm.configuration.base.path.ConditionIF#accept(net.sf.mmm.configuration.base.AbstractConfiguration)
-   *      
    */
   public boolean accept(AbstractConfiguration configuration) {
 

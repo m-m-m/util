@@ -18,7 +18,6 @@ public class PlainFileFilter implements FileFilter {
 
     /**
      * The constructor.
-     * 
      */
     private PlainFileFilter() {
 
@@ -27,7 +26,6 @@ public class PlainFileFilter implements FileFilter {
 
     /**
      * @see java.io.FileFilter#accept(java.io.File)
-     * 
      */
     public boolean accept(File file) {
 

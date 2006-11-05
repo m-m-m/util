@@ -40,7 +40,6 @@ public abstract class UIMultiComposite extends AbstractUIComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponentCount()
-   * 
    */
   public int getComponentCount() {
 
@@ -49,7 +48,6 @@ public abstract class UIMultiComposite extends AbstractUIComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
-   * 
    */
   @Override
   public AbstractUIComponent getComponent(int index) {
@@ -59,7 +57,6 @@ public abstract class UIMultiComposite extends AbstractUIComposite {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#setParent(net.sf.mmm.ui.toolkit.api.UINode)
-   * 
    */
   @Override
   public void setParent(UINode newParent) {

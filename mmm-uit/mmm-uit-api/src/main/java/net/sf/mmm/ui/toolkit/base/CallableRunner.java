@@ -36,7 +36,6 @@ public class CallableRunner<T> implements Runnable {
 
   /**
    * @see java.lang.Runnable#run()
-   * 
    */
   public void run() {
 

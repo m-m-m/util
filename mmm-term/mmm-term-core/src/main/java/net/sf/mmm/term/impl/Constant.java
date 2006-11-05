@@ -104,7 +104,6 @@ public class Constant<C> extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.term.api.TermIF#evaluate(net.sf.mmm.context.api.Context)
-     *      
      */
     public C evaluate(Context variableSet) {
 
@@ -113,7 +112,6 @@ public class Constant<C> extends AbstractTerm {
 
     /**
      * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
-     *      
      */
     public void toXml(XmlWriter xmlWriter) throws XmlException {
 

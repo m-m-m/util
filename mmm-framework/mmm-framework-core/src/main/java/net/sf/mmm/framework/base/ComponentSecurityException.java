@@ -13,7 +13,6 @@ public abstract class ComponentSecurityException extends ComponentException {
 
   /**
    * @see ComponentException#ComponentException(String, Object[])
-   * 
    */
   public ComponentSecurityException(String internaitionalizedMessage, Object... arguments) {
 
@@ -22,7 +21,6 @@ public abstract class ComponentSecurityException extends ComponentException {
 
   /**
    * @see ComponentException#ComponentException(Throwable, String, Object[])
-   * 
    */
   public ComponentSecurityException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {

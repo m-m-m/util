@@ -50,7 +50,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
-   * 
    */
   @Override
   public SyncTreeAccess getSyncAccess() {
@@ -60,7 +59,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
-   * 
    */
   @Override
   public void create() {
@@ -71,7 +69,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -80,7 +77,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getModel()
-   * 
    */
   @SuppressWarnings("unchecked")
   public UITreeModel getModel() {
@@ -90,7 +86,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#setModel(net.sf.mmm.ui.toolkit.api.model.UITreeModel)
-   * 
    */
   @SuppressWarnings("unchecked")
   public void setModel(UITreeModel newModel) {
@@ -100,7 +95,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag#isMultiSelection()
-   * 
    */
   public boolean isMultiSelection() {
 
@@ -109,7 +103,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelection()
-   * 
    */
   public Object getSelection() {
 
@@ -122,7 +115,6 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelections()
-   * 
    */
   public Object[] getSelections() {
 

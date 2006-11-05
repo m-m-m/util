@@ -21,7 +21,6 @@ public interface MutableConfiguration extends Configuration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
-   * 
    */
   MutableConfiguration getDescendant(String path);
 
@@ -33,7 +32,6 @@ public interface MutableConfiguration extends Configuration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String)
-   * 
    */
   Collection<? extends MutableConfiguration> getDescendants(String path);
 

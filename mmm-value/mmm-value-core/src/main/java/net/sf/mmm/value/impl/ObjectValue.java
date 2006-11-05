@@ -48,7 +48,6 @@ public class ObjectValue extends AbstractObjectValue {
 
   /**
    * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
-   * 
    */
   @Override
   protected Object getPlainValue() {
@@ -58,7 +57,6 @@ public class ObjectValue extends AbstractObjectValue {
 
   /**
    * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
-   * 
    */
   @Override
   protected void setPlainValue(Object newValue) {

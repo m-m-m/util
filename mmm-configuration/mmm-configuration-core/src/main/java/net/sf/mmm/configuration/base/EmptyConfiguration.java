@@ -31,7 +31,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#getValue()
-   *      
    */
   public MutableGenericValue getValue() {
 
@@ -40,7 +39,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   *      
    */
   @Override
   protected void addChild(AbstractConfiguration child) {
@@ -60,7 +58,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
-   *      
    */
   @Override
   protected AbstractConfiguration getParent() {
@@ -70,7 +67,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
-   *      
    */
   public boolean isEditable() {
 
@@ -79,7 +75,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
-   *      
    */
   public boolean isAddDefaults() {
 
@@ -88,7 +83,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.util.event.EventSourceIF#addListener(net.sf.mmm.util.event.EventListener)
-   *      
    */
   public void addListener(ConfigurationChangeListener listener) {
 
@@ -96,7 +90,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.util.event.EventSourceIF#removeListener(net.sf.mmm.util.event.EventListener)
-   *      
    */
   public void removeListener(ConfigurationChangeListener listener) {
 
@@ -104,7 +97,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
-   *      
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {
@@ -115,7 +107,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
-   *      
    */
   @Override
   protected void doRemove() throws ConfigurationException {
@@ -138,7 +129,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
-   *      
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
@@ -160,7 +150,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
-   *      
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -171,7 +160,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
-   *      
    */
   @Override
   protected void removeChild(AbstractConfiguration child) {
@@ -190,7 +178,6 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
-   *      
    */
   public String getNamespaceUri() {
 

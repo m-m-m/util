@@ -16,7 +16,6 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     * 
      */
     public NlsIllegalArgumentException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +24,6 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     * 
      */
     public NlsIllegalArgumentException(Throwable nested, String internaitionalizedMessage,
             Object... arguments) {
@@ -35,7 +33,6 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
-     * 
      */
     public NlsIllegalArgumentException(NlsMessage internationalizedMessage) {
 
@@ -44,7 +41,6 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
 
     /**
      * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
-     * 
      */
     public NlsIllegalArgumentException(Throwable nested, NlsMessage internationalizedMessage) {
 

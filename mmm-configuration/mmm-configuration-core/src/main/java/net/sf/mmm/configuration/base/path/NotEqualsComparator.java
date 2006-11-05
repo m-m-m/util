@@ -19,7 +19,6 @@ public class NotEqualsComparator implements ComparatorIF {
 
   /**
    * The constructor.
-   * 
    */
   public NotEqualsComparator() {
 
@@ -42,7 +41,6 @@ public class NotEqualsComparator implements ComparatorIF {
 
   /**
    * @see net.sf.mmm.configuration.base.path.ComparatorIF#getSymbol()
-   *      
    */
   public String getSymbol() {
 

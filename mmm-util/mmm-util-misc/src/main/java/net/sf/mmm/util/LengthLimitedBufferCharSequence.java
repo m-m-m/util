@@ -87,7 +87,6 @@ public class LengthLimitedBufferCharSequence extends AbstractCharSequence {
 
     /**
      * @see java.lang.CharSequence#length()
-     * 
      */
     public int length() {
 
@@ -96,7 +95,6 @@ public class LengthLimitedBufferCharSequence extends AbstractCharSequence {
 
     /**
      * @see java.lang.CharSequence#charAt(int)
-     * 
      */
     public char charAt(int index) {
 

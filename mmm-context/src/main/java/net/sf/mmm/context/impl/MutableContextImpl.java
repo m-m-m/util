@@ -72,7 +72,6 @@ public class MutableContextImpl implements MutableContext {
 
     /**
      * @see net.sf.mmm.context.api.Context#getValue(java.lang.String)
-     *      
      */
     public GenericValue getValue(String variableName) {
 
@@ -85,7 +84,6 @@ public class MutableContextImpl implements MutableContext {
 
     /**
      * @see net.sf.mmm.context.api.Context#getObject(java.lang.String)
-     *      
      */
     public Object getObject(String variableName) {
 
@@ -98,7 +96,6 @@ public class MutableContextImpl implements MutableContext {
 
     /**
      * @see net.sf.mmm.context.api.Context#hasValue(java.lang.String)
-     *      
      */
     public boolean hasValue(String variableName) {
 
@@ -160,7 +157,6 @@ public class MutableContextImpl implements MutableContext {
 
     /**
      * @see net.sf.mmm.context.api.MutableContext#unsetValue(java.lang.String)
-     *      
      */
     public void unsetValue(String variableName) {
 
@@ -169,7 +165,6 @@ public class MutableContextImpl implements MutableContext {
 
     /**
      * @see net.sf.mmm.context.api.MutableContext#getImmutableContext()
-     *      
      */
     public Context getImmutableContext() {
 

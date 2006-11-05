@@ -103,7 +103,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#getDisplay()
-   * 
    */
   public UIDisplay getDisplay() {
 
@@ -123,7 +122,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createFrame(java.lang.String,
    *      boolean)
-   * 
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
@@ -148,7 +146,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPanel(net.sf.mmm.ui.toolkit.api.composite.Orientation,
    *      java.lang.String)
-   * 
    */
   public UIPanel createPanel(Orientation orientation, String text) {
 
@@ -159,7 +156,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createScrollPanel(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
-   * 
    */
   public UIScrollPanel createScrollPanel(UIComposite child) {
 
@@ -171,7 +167,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createList(net.sf.mmm.ui.toolkit.api.model.UIListModel,
    *      boolean)
-   * 
    */
   public <E> UIList<E> createList(UIListModel<E> model, boolean multiSelection) {
 
@@ -186,7 +181,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createComboBox(net.sf.mmm.ui.toolkit.api.model.UIListModel,
    *      boolean)
-   * 
    */
   public <E> UIComboBox<E> createComboBox(UIListModel<E> model, boolean editableFlag) {
 
@@ -201,7 +195,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree(boolean,
    *      net.sf.mmm.ui.toolkit.api.model.UITreeModel)
-   * 
    */
   public UITree createTree(boolean multiSelection, UITreeModel model) {
 
@@ -216,7 +209,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable(boolean,
    *      net.sf.mmm.ui.toolkit.api.model.UITableModel)
-   * 
    */
   public UITable createTable(boolean multiSelection, UITableModel model) {
 
@@ -230,7 +222,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createLabel(java.lang.String)
-   * 
    */
   public UILabel createLabel(String text) {
 
@@ -241,7 +232,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTextField()
-   * 
    */
   public UITextField createTextField() {
 
@@ -250,7 +240,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createSpinBox(net.sf.mmm.ui.toolkit.api.model.UIListModel)
-   * 
    */
   public <E> UISpinBox<E> createSpinBox(UIListModel<E> model) {
 
@@ -259,7 +248,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createFileDownload(net.sf.mmm.ui.toolkit.api.feature.FileAccess)
-   * 
    */
   public UIFileDownload createFileDownload(FileAccess access) {
 
@@ -268,7 +256,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createFileUpload()
-   * 
    */
   public UIFileUpload createFileUpload() {
 
@@ -277,7 +264,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPicture(java.net.URL)
-   * 
    */
   public UIPicture createPicture(URL imageUrl) {
 
@@ -286,7 +272,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTabbedPanel()
-   * 
    */
   public UITabbedPanel createTabbedPanel() {
 
@@ -295,7 +280,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createSplitPanel(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-   * 
    */
   public UISplitPanel createSplitPanel(Orientation orientation) {
 
@@ -305,7 +289,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createSlideBar(net.sf.mmm.ui.toolkit.api.model.UIListModel,
    *      net.sf.mmm.ui.toolkit.api.composite.Orientation)
-   * 
    */
   public <E> UISlideBar<E> createSlideBar(UIListModel<E> model, Orientation orientation) {
 
@@ -314,7 +297,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createProgressBar(net.sf.mmm.ui.toolkit.api.composite.Orientation)
-   * 
    */
   public UIProgressBar createProgressBar(Orientation orientation) {
 
@@ -323,7 +305,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createWorkbench(java.lang.String)
-   * 
    */
   public UIWorkbench createWorkbench(String title) {
 
@@ -333,7 +314,6 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPrintAction(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      java.lang.String, java.lang.String)
-   * 
    */
   public Action createPrintAction(UIComponent component, String actionName, String jobName) {
 
@@ -342,7 +322,6 @@ public class UIFactorySwing extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createDateEditor()
-   * 
    */
   public UIDateEditor createDateEditor() {
 

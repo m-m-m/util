@@ -53,7 +53,6 @@ public class ClasspathResourceAccessFactory implements ConfigurationAccessFactor
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#getAccessors()
-   *      
    */
   public ConfigurationAccess[] getAccessors() {
 
@@ -62,7 +61,6 @@ public class ClasspathResourceAccessFactory implements ConfigurationAccessFactor
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#isSingleAccess()
-   *      
    */
   public boolean isSingleAccess() {
 

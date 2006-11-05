@@ -50,7 +50,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
-   * 
    */
   public String getText() {
 
@@ -59,7 +58,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
-   * 
    */
   public void setText(String text) {
 
@@ -68,7 +66,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -77,7 +74,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
-   * 
    */
   @Override
   protected boolean doInitializeListener() {
@@ -88,7 +84,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UIButton#getStyle()
-   * 
    */
   public ButtonStyle getStyle() {
 
@@ -97,7 +92,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#isSelected()
-   * 
    */
   public boolean isSelected() {
 
@@ -106,7 +100,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#setSelected(boolean)
-   * 
    */
   public void setSelected(boolean selected) {
 
@@ -115,7 +108,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadIcon#getIcon()
-   * 
    */
   public UIPictureImpl getIcon() {
 
@@ -124,7 +116,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIcon#setIcon(net.sf.mmm.ui.toolkit.api.UIPicture)
-   * 
    */
   public void setIcon(UIPicture newIcon) {
 
@@ -138,7 +129,6 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
-   * 
    */
   @Override
   public SyncButtonAccess getSyncAccess() {

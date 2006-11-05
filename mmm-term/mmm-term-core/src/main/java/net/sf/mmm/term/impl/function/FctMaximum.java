@@ -27,7 +27,6 @@ public class FctMaximum {
 
     /**
      * The constructor.
-     *  
      */
     private FctMaximum() {
 

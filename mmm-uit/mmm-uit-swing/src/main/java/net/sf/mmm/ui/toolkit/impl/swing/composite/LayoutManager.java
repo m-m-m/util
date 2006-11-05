@@ -45,7 +45,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
   /**
    * @see java.awt.LayoutManager2#addLayoutComponent(java.awt.Component,
    *      java.lang.Object)
-   * 
    */
   public void addLayoutComponent(Component component, Object layoutConstraints) {
 
@@ -59,7 +58,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager2#maximumLayoutSize(java.awt.Container)
-   * 
    */
   public Dimension maximumLayoutSize(Container target) {
 
@@ -68,7 +66,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager2#getLayoutAlignmentX(java.awt.Container)
-   * 
    */
   public float getLayoutAlignmentX(Container target) {
 
@@ -77,7 +74,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager2#getLayoutAlignmentY(java.awt.Container)
-   * 
    */
   public float getLayoutAlignmentY(Container target) {
 
@@ -86,7 +82,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager2#invalidateLayout(java.awt.Container)
-   * 
    */
   public void invalidateLayout(Container target) {
 
@@ -148,7 +143,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
   /**
    * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String,
    *      java.awt.Component)
-   * 
    */
   public void addLayoutComponent(String name, Component comp) {
 
@@ -159,7 +153,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
-   * 
    */
   public void removeLayoutComponent(Component component) {
 
@@ -168,7 +161,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
-   * 
    */
   public Dimension preferredLayoutSize(Container target) {
 
@@ -180,7 +172,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
-   * 
    */
   public Dimension minimumLayoutSize(Container target) {
 
@@ -189,7 +180,6 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
-   * 
    */
   public void layoutContainer(Container target) {
 

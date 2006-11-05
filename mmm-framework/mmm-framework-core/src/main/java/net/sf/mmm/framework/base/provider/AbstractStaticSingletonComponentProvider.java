@@ -26,7 +26,6 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
 
   /**
    * @see AbstractComponentProvider#AbstractComponentProvider(Class)
-   * 
    */
   public AbstractStaticSingletonComponentProvider(Class<S> specification) {
 
@@ -35,7 +34,6 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
 
   /**
    * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptor)
-   * 
    */
   public AbstractStaticSingletonComponentProvider(ComponentDescriptor<S> componentDescriptor) {
 
@@ -68,7 +66,6 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
   /**
    * @see net.sf.mmm.framework.base.provider.AbstractDefaultInstanceComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptor,
    *      java.lang.String, net.sf.mmm.framework.api.ComponentManager)
-   * 
    */
   @Override
   protected ComponentInstanceContainer<S> requestDefault(ComponentDescriptor<?> sourceDescriptor,

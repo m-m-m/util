@@ -28,7 +28,6 @@ public class NumericUtilTest extends TestCase {
     
     /**
      * 
-     *
      */
     public void testToSimplestNumber() {
         verifySimplestNumber(new Double(1.0), Byte.class);

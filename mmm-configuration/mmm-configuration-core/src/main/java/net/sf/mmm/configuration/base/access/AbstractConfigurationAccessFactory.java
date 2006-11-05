@@ -90,7 +90,6 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#getAccessors()
-   *      
    */
   public final ConfigurationAccess[] getAccessors() {
 

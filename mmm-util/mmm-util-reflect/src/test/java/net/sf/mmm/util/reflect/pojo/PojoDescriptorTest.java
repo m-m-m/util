@@ -24,7 +24,6 @@ public class PojoDescriptorTest extends TestCase {
 
   /**
    * The constructor.
-   * 
    */
   public PojoDescriptorTest() {
 

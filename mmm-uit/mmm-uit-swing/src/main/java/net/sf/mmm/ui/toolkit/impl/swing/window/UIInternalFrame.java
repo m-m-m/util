@@ -84,7 +84,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#createMenuBar()
-   * 
    */
   @Override
   protected UIMenuBar createMenuBar() {
@@ -100,7 +99,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
    *      boolean)
-   * 
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
@@ -111,7 +109,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximized#isMaximized()
-   * 
    */
   public boolean isMaximized() {
 
@@ -120,7 +117,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMaximized(boolean)
-   * 
    */
   public void setMaximized(boolean maximize) {
 
@@ -135,7 +131,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMinimized(boolean)
-   * 
    */
   public void setMinimized(boolean minimize) {
 
@@ -148,7 +143,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -157,7 +151,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
-   * 
    */
   public boolean isResizeable() {
 
@@ -166,7 +159,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
-   * 
    */
   public void setSize(int width, int height) {
 
@@ -176,7 +168,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWritePosition#setPosition(int,
    *      int)
-   * 
    */
   public void setPosition(int x, int y) {
 
@@ -185,7 +176,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#getTitle()
-   * 
    */
   public String getTitle() {
 
@@ -194,7 +184,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#setTitle(java.lang.String)
-   * 
    */
   public void setTitle(String newTitle) {
 
@@ -203,7 +192,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
-   * 
    */
   public int getHeight() {
 
@@ -212,7 +200,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
-   * 
    */
   public int getWidth() {
 
@@ -221,7 +208,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
-   * 
    */
   public void dispose() {
 
@@ -230,7 +216,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#isDisposed()
-   * 
    */
   public boolean isDisposed() {
 
@@ -239,7 +224,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getX()
-   * 
    */
   public int getX() {
 
@@ -248,7 +232,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getY()
-   * 
    */
   public int getY() {
 
@@ -257,7 +240,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#pack()
-   * 
    */
   public void pack() {
 
@@ -266,7 +248,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
-   * 
    */
   public void setComposite(UIComposite newComposite) {
 
@@ -277,7 +258,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisible#isVisible()
-   * 
    */
   public boolean isVisible() {
 
@@ -286,7 +266,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisible#setVisible(boolean)
-   * 
    */
   public void setVisible(boolean visible) {
 
@@ -295,7 +274,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl#getAwtWindow()
-   * 
    */
   @Override
   protected Window getAwtWindow() {
@@ -315,7 +293,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#getDesktopSize()
-   * 
    */
   @Override
   protected UIReadSize getDesktopSize() {
@@ -325,7 +302,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabled#isEnabled()
-   * 
    */
   public boolean isEnabled() {
 
@@ -334,7 +310,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEnabled#setEnabled(boolean)
-   * 
    */
   public void setEnabled(boolean enabled) {
 
@@ -343,7 +318,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#getTooltipText()
-   * 
    */
   public String getTooltipText() {
 
@@ -352,7 +326,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#setTooltipText(java.lang.String)
-   * 
    */
   public void setTooltipText(String tooltip) {
 
@@ -361,7 +334,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredHeight()
-   * 
    */
   public int getPreferredHeight() {
 
@@ -370,7 +342,6 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredWidth()
-   * 
    */
   public int getPreferredWidth() {
 

@@ -12,7 +12,6 @@ public class CoreNlsResourceBundle extends AbstractResourceBundle {
 
     /**
      * The constructor.
-     * 
      */
     public CoreNlsResourceBundle() {
 

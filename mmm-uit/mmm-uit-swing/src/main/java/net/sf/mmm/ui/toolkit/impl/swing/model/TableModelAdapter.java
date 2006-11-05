@@ -48,7 +48,6 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
 
   /**
    * @see javax.swing.table.TableModel#getRowCount()
-   * 
    */
   public int getRowCount() {
 
@@ -61,7 +60,6 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
 
   /**
    * @see javax.swing.table.TableModel#getColumnCount()
-   * 
    */
   public int getColumnCount() {
 
@@ -74,7 +72,6 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
 
   /**
    * @see javax.swing.table.TableModel#getValueAt(int, int)
-   * 
    */
   public Object getValueAt(int rowIndex, int columnIndex) {
 
@@ -87,7 +84,6 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
 
   /**
    * @see javax.swing.table.AbstractTableModel#getColumnName(int)
-   * 
    */
   @Override
   public String getColumnName(int columnIndex) {
@@ -108,7 +104,6 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UITableModelListener#tableModelChanged(net.sf.mmm.ui.toolkit.api.event.UITableModelEvent)
-   * 
    */
   public void tableModelChanged(UITableModelEvent event) {
 
@@ -138,7 +133,6 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
   /**
    * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int,
    *      int)
-   * 
    */
   @SuppressWarnings("unchecked")
   @Override

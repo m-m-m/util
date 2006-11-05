@@ -24,7 +24,6 @@ public class StringValueTest extends AbstractGenericValueTest {
 
   /**
    * @see net.sf.mmm.value.impl.AbstractGenericValueTest#convert(java.lang.Object)
-   * 
    */
   @Override
   protected GenericValue convert(Object plainValue) {

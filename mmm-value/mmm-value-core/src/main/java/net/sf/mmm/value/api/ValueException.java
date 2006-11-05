@@ -16,7 +16,6 @@ public class ValueException extends NlsRuntimeException {
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-   * 
    */
   public ValueException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +24,6 @@ public class ValueException extends NlsRuntimeException {
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-   * 
    */
   public ValueException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

@@ -45,7 +45,6 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -64,7 +63,6 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
-   * 
    */
   public void setComposite(UIComposite newComposite) {
 
@@ -75,7 +73,6 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIWorkbench#createFrame(java.lang.String,
    *      boolean)
-   * 
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 

@@ -31,7 +31,6 @@ public class ContextProxy extends AbstractContextProxy {
 
     /**
      * @see net.sf.mmm.context.base.AbstractContextProxy#getContext()
-     * 
      */
     @Override
     protected Context getContext() {

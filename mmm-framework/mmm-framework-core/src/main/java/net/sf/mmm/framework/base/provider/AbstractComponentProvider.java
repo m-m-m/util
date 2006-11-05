@@ -49,7 +49,6 @@ public abstract class AbstractComponentProvider<S> implements ComponentProvider<
 
   /**
    * @see net.sf.mmm.framework.api.ComponentProvider#getDescriptor()
-   * 
    */
   public final ComponentDescriptor<S> getDescriptor() {
 

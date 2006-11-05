@@ -23,7 +23,6 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
 
   /**
    * @see AbstractComponentProvider#AbstractComponentProvider(Class)
-   * 
    */
   public AbstractPerRequestComponentProvider(Class<S> specification) {
 
@@ -32,7 +31,6 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
 
   /**
    * @see AbstractComponentProvider#AbstractComponentProvider(ComponentDescriptor)
-   * 
    */
   public AbstractPerRequestComponentProvider(ComponentDescriptor<S> componentDescriptor) {
 

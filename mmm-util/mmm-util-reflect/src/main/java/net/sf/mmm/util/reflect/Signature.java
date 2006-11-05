@@ -126,7 +126,6 @@ public class Signature {
 
     /**
      * @see java.lang.Object#hashCode()
-     * 
      */
     public int hashCode() {
 
@@ -135,7 +134,6 @@ public class Signature {
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
-     * 
      */
     public boolean equals(Object other) {
 
@@ -155,7 +153,6 @@ public class Signature {
 
     /**
      * @see java.lang.Object#toString()
-     * 
      */
     public String toString() {
 

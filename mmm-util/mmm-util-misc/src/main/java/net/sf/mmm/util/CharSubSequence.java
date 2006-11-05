@@ -36,7 +36,6 @@ public class CharSubSequence extends CoreCharSequence {
 
     /**
      * @see java.lang.CharSequence#subSequence(int, int)
-     * 
      */
     public CharSequence subSequence(int startPosition, int endPosition) {
 
@@ -59,7 +58,6 @@ public class CharSubSequence extends CoreCharSequence {
 
     /**
      * @see java.lang.CharSequence#length()
-     * 
      */
     public int length() {
 
@@ -68,7 +66,6 @@ public class CharSubSequence extends CoreCharSequence {
 
     /**
      * @see java.lang.CharSequence#charAt(int)
-     * 
      */
     public char charAt(int index) {
 

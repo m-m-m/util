@@ -55,7 +55,6 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
-   * 
    */
   @Override
   public Label getSwtObject() {
@@ -65,7 +64,6 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(String)
-   * 
    */
   @Override
   protected void performSynchron(String operation) {
@@ -81,7 +79,6 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
 
   /**
    * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
-   * 
    */
   @Override
   protected void createSynchron() {

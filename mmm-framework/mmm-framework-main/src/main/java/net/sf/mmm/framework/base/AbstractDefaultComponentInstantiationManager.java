@@ -33,7 +33,6 @@ public abstract class AbstractDefaultComponentInstantiationManager<S, I extends 
 
     /**
      * @see AbstractComponentInstantiationManager#AbstractComponentInstantiationManager(ExtendedComponentDescriptor)
-     * 
      */
     public AbstractDefaultComponentInstantiationManager(
             ExtendedComponentDescriptor<S, I> componentDescriptor) {
@@ -43,7 +42,6 @@ public abstract class AbstractDefaultComponentInstantiationManager<S, I extends 
 
     /**
      * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
-     * 
      */
     public final ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId)
             throws InstanceIdNotAvailableException {

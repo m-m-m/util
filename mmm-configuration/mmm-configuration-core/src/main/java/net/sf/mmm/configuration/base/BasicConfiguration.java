@@ -80,7 +80,6 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
-   * 
    */
   public final boolean isEditable() {
 
@@ -109,7 +108,6 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
-   * 
    */
   public boolean isAddDefaults() {
 

@@ -48,7 +48,6 @@ public abstract class AbstractLifecycleManager implements LifecycleManager {
 
     /**
      * @see net.sf.mmm.framework.api.LifecycleManager#getLifecyclePhases()
-     * 
      */
     public final Set<String> getLifecyclePhases() {
 

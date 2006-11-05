@@ -22,7 +22,6 @@ public interface IdIF extends Serializable {
    * long ID_FOLDER_CONTENT = 1;
    * 
    * long ID_FOLDER_ACTIONS = 5;
-   * 
    */
 
   /** a reserved id that is always illegal */

@@ -64,7 +64,6 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
 
   /**
    * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
-   * 
    */
   @Override
   protected boolean doInitializeListener() {
@@ -75,7 +74,6 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItem#getText()
-   * 
    */
   public String getText() {
 
@@ -84,7 +82,6 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
-   * 
    */
   public String getType() {
 
@@ -93,7 +90,6 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItem#getStyle()
-   * 
    */
   public ButtonStyle getStyle() {
 
@@ -102,7 +98,6 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#isSelected()
-   * 
    */
   public boolean isSelected() {
 
@@ -111,7 +106,6 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#setSelected(boolean)
-   * 
    */
   public void setSelected(boolean selected) {
 

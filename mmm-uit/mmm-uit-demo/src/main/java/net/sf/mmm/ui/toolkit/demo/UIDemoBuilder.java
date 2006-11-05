@@ -106,7 +106,6 @@ public class UIDemoBuilder {
             /**
              * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
              *      net.sf.mmm.ui.toolkit.api.event.ActionType)
-             * 
      */
             public void invoke(UINode source, ActionType action) {
 
@@ -121,7 +120,6 @@ public class UIDemoBuilder {
             /**
              * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
              *      net.sf.mmm.ui.toolkit.api.event.ActionType)
-             * 
      */
             public void invoke(UINode source, ActionType action) {
 
@@ -158,7 +156,6 @@ public class UIDemoBuilder {
             /**
              * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
              *      net.sf.mmm.ui.toolkit.api.event.ActionType)
-             * 
      */
             public void invoke(UINode source, ActionType action) {
 

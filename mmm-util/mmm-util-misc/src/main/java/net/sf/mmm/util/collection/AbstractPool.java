@@ -21,7 +21,6 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
     /**
      * @see net.sf.mmm.util.collection.Pool#isEmpty()
-     * 
      */
     public boolean isEmpty() {
 

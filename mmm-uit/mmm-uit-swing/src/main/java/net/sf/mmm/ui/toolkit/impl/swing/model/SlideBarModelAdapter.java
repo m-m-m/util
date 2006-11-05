@@ -60,7 +60,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Enumeration#hasMoreElements()
-     * 
      */
     public boolean hasMoreElements() {
 
@@ -79,7 +78,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Enumeration#nextElement()
-     * 
      */
     public Integer nextElement() {
 
@@ -116,7 +114,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#elements()
-     * 
      */
     @Override
     public Enumeration<JLabel> elements() {
@@ -126,7 +123,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#get(java.lang.Object)
-     * 
      */
     @Override
     public JLabel get(Object key) {
@@ -142,7 +138,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#isEmpty()
-     * 
      */
     @Override
     public boolean isEmpty() {
@@ -152,7 +147,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#keys()
-     * 
      */
     @Override
     public Enumeration<Integer> keys() {
@@ -169,7 +163,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#put(Object, Object)
-     * 
      */
     @Override
     public JLabel put(Integer key, JLabel value) {
@@ -179,7 +172,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#remove(java.lang.Object)
-     * 
      */
     @Override
     public JLabel remove(Object key) {
@@ -189,7 +181,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
     /**
      * @see java.util.Dictionary#size()
-     * 
      */
     @Override
     public int size() {
@@ -228,7 +219,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
   /**
    * 
-   * 
    */
   private void update() {
 
@@ -249,7 +239,6 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-   * 
    */
   public void listModelChanged(UIListModelEvent event) {
 

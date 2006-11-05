@@ -11,7 +11,6 @@ public class NumericUtil {
 
     /**
      * The constructor.
-     * 
      */
     private NumericUtil() {
 

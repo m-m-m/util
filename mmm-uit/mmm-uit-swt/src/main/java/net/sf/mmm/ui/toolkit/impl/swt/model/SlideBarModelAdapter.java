@@ -67,7 +67,6 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
-   * 
    */
   public void listModelChanged(UIListModelEvent changeEvent) {
 

@@ -41,7 +41,6 @@ public class HashKey<T> {
 
     /**
      * @see java.lang.Object#hashCode()
-     * 
      */
     @Override
     public int hashCode() {
@@ -54,7 +53,6 @@ public class HashKey<T> {
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
-     * 
      */
     @Override
     public boolean equals(Object obj) {
