@@ -1,21 +1,21 @@
 /* $Id$ */
 package net.sf.mmm.content.value.impl;
 
-import net.sf.mmm.content.value.api.IdIF;
+import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the implementation of the {@link IdIF} interface.<br>
+ * This is the implementation of the {@link Id} interface.<br>
  * Since the revision and
- * {@link net.sf.mmm.content.api.ContentObjectIF#getContentClass() content-class}
- * of a {@link net.sf.mmm.content.api.ContentObjectIF content-object} does not
+ * {@link net.sf.mmm.content.api.ContentObject#getContentClass() content-class}
+ * of a {@link net.sf.mmm.content.api.ContentObject content-object} does not
  * change, their primary keys are stored in this ID implementation. This allows
  * to determine the content-class and revision of the resource without any cost
  * (e.g. DB lookup). Especially a content-object-instance can be created from
  * the ID using lazy loading.<br>
- * This {@link IdIF} implementation builds the ID out of four parts:
+ * This {@link Id} implementation builds the ID out of four parts:
  * <ul>
  * <li>{@link #getObjectId() object-id} - unique object/resource counter but
  * <code>0</code> for id of a content-class.</li>
@@ -25,100 +25,100 @@ import net.sf.mmm.value.base.AbstractValueManager;
  * in combination with this store-id.</li>
  * <li>{@link #getRevision() revision} - a resource can have multiple revisions
  * (in the version history). All revisions of a resource (in the same branch)
- * share the same {@link #getObjectId() object-id}. An {@link IdIF} uniquely
+ * share the same {@link #getObjectId() object-id}. An {@link Id} uniquely
  * identifies the specific resource-revision.</li>
  * <li>{@link #getClassId() class-id} - is the id of the content-class that
- * reflects the {@link net.sf.mmm.content.api.ContentObjectIF content-object}
- * identified by this {@link IdIF}. See also {@link #getContentClassId()}.</li>
+ * reflects the {@link net.sf.mmm.content.api.ContentObject content-object}
+ * identified by this {@link Id}. See also {@link #getContentClassId()}.</li>
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class IdImpl implements IdIF {
+public final class IdImpl implements Id {
 
   /** uid for serialization */
   private static final long serialVersionUID = 4050487802653521717L;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
-   * {@link net.sf.mmm.content.api.ContentObjectIF content-object}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
+   * {@link net.sf.mmm.content.api.ContentObject content-object}.
    */
   public static final int CLASS_ID_ROOT = 0;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
-   * {@link net.sf.mmm.content.model.api.ContentReflectionObjectIF content-relection-object}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentReflectionObject content-relection-object}.
    */
   public static final int CLASS_ID_RELECTION = 1;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
    */
   public static final int CLASS_ID_CLASS = 2;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
-   * {@link net.sf.mmm.content.api.model.ContentFieldIF content-field}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentField content-field}.
    */
   public static final int CLASS_ID_FIELD = 3;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}.
    */
   public static final int CLASS_ID_RESOURCE = 4;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}.
    */
   public static final int CLASS_ID_FOLDER = 5;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.resource.ContentFileIF content-file}.
    */
   public static final int CLASS_ID_FILE = 6;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.security.ContentPrincipalIF content-principal}.
    */
   public static final int CLASS_ID_PRINCIPAL = 7;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.security.ContentUserIF content-user}.
    */
   public static final int CLASS_ID_USER = 8;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group}.
    */
   public static final int CLASS_ID_GROUP = 9;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group}.
    */
   public static final int CLASS_ID_ACTION = 10;
 
   /**
    * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of a
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group}.
    */
   public static final int CLASS_ID_PERMISSION = 11;
@@ -126,7 +126,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_ROOT}.
    */
   public static final long FOLDER_ID_ROOT = 1;
@@ -134,7 +134,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_REFLECTION}.
    */
   public static final long FOLDER_ID_REFLECTION = 2;
@@ -142,7 +142,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_CLASSES}.
    */
   public static final long FOLDER_ID_CLASSES = 3;
@@ -150,7 +150,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_FIELDS}.
    */
   public static final long FOLDER_ID_FIELDS = 4;
@@ -158,7 +158,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_PRINCIPALS}.
    */
   public static final long FOLDER_ID_PRINCIPALS = 5;
@@ -166,7 +166,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_USERS}.
    */
   public static final long FOLDER_ID_USERS = 6;
@@ -174,7 +174,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_GROUPS}.
    */
   public static final long FOLDER_ID_GROUPS = 7;
@@ -182,7 +182,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_IDS}.
    */
   public static final long FOLDER_ID_IDS = 8;
@@ -190,7 +190,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObjectIF#getPath() path}
+   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_RESOURCES}.
    */
   public static final long FOLDER_ID_RESOURCES = 9;
@@ -209,36 +209,36 @@ public final class IdImpl implements IdIF {
 
   /**
    * the id of the root
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} (the
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} (the
    * class that all other classes are derived from).
    */
   public static final IdImpl ID_CLASS_ROOT = new IdImpl(0, CLASS_ID_ROOT);
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects
-   * {@link net.sf.mmm.content.model.api.ContentReflectionObjectIF content-reflection-object} .
+   * {@link net.sf.mmm.content.model.api.ContentReflectionObject content-reflection-object} .
    */
   public static final IdImpl ID_CLASS_REFELCTION = new IdImpl(0, CLASS_ID_RELECTION);
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects itself (Like {@link Class} in java).
    */
   public static final IdImpl ID_CLASS_CLASS = new IdImpl(0, CLASS_ID_CLASS);
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
-   * reflects {@link net.sf.mmm.content.api.model.ContentFieldIF content-field} .
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
+   * reflects {@link net.sf.mmm.content.api.model.ContentField content-field} .
    */
   public static final IdImpl ID_CLASS_FIELD = new IdImpl(0, CLASS_ID_FIELD);
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects
    * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource} .
    */
@@ -246,7 +246,7 @@ public final class IdImpl implements IdIF {
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} .
    */
@@ -254,14 +254,14 @@ public final class IdImpl implements IdIF {
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects {@link net.sf.mmm.content.api.resource.ContentFileIF content-file} .
    */
   public static final IdImpl ID_CLASS_FILE = new IdImpl(0, CLASS_ID_FILE);
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects
    * {@link net.sf.mmm.content.api.security.ContentPrincipalIF content-principal} .
    */
@@ -269,7 +269,7 @@ public final class IdImpl implements IdIF {
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects a
    * {@link net.sf.mmm.content.api.security.ContentUserIF content-user} .
    */
@@ -277,7 +277,7 @@ public final class IdImpl implements IdIF {
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects a
    * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group} .
    */
@@ -285,7 +285,7 @@ public final class IdImpl implements IdIF {
 
   /**
    * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects a
    * {@link net.sf.mmm.content.api.security.ContentActionIF content-action} .
    */
@@ -301,7 +301,7 @@ public final class IdImpl implements IdIF {
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
    * where
-   * {@link net.sf.mmm.content.model.api.ContentReflectionObjectIF content-reflection-objects}
+   * {@link net.sf.mmm.content.model.api.ContentReflectionObject content-reflection-objects}
    * are located.
    */
   public static final IdImpl ID_FOLDER_REFLECTION = new IdImpl(FOLDER_ID_REFLECTION,
@@ -311,7 +311,7 @@ public final class IdImpl implements IdIF {
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
    * where the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-classes} are
+   * {@link net.sf.mmm.content.model.api.ContentClass content-classes} are
    * located.
    */
   public static final IdImpl ID_FOLDER_CLASSES = new IdImpl(FOLDER_ID_CLASSES, CLASS_ID_FOLDER);
@@ -320,7 +320,7 @@ public final class IdImpl implements IdIF {
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
    * where the
-   * {@link net.sf.mmm.content.api.model.ContentFieldIF content-fields} are
+   * {@link net.sf.mmm.content.api.model.ContentField content-fields} are
    * located.
    */
   public static final IdImpl ID_FOLDER_FIELDS = new IdImpl(FOLDER_ID_FIELDS, CLASS_ID_FOLDER);
@@ -356,7 +356,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where all {@link net.sf.mmm.content.api.ContentObjectIF content-objects}
+   * where all {@link net.sf.mmm.content.api.ContentObject content-objects}
    * are mirrored by their id.
    * 
    * @see net.sf.mmm.content.api.resource.ContentFolderIF#PATH_RESOURCES
@@ -366,7 +366,7 @@ public final class IdImpl implements IdIF {
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where all {@link net.sf.mmm.content.api.ContentObjectIF content-objects}
+   * where all {@link net.sf.mmm.content.api.ContentObject content-objects}
    * are mirrored by their id.
    * 
    * @see net.sf.mmm.content.api.resource.ContentFolderIF#PATH_IDS
@@ -399,7 +399,7 @@ public final class IdImpl implements IdIF {
 
   /**
    * The constructor for the ID of a
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
    * 
    * @see IdImpl
    * 
@@ -413,7 +413,7 @@ public final class IdImpl implements IdIF {
 
   /**
    * The constructor for the ID of a
-   * {@link net.sf.mmm.content.api.ContentObjectIF content-object} or the latest
+   * {@link net.sf.mmm.content.api.ContentObject content-object} or the latest
    * revision of a
    * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}
    * in the default {@link net.sf.mmm.content.api.store.StoreIF store}.
@@ -537,7 +537,7 @@ public final class IdImpl implements IdIF {
   @Override
   public boolean equals(Object other) {
 
-    if ((other != null) && (other instanceof IdIF)) {
+    if ((other != null) && (other instanceof Id)) {
       return (toString().equals(other.toString()));
     }
     return false;
@@ -554,8 +554,8 @@ public final class IdImpl implements IdIF {
 
   /**
    * This method gets UID of the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} of the
-   * {@link net.sf.mmm.content.api.ContentObjectIF content-object} associated
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of the
+   * {@link net.sf.mmm.content.api.ContentObject content-object} associated
    * with this ID.
    * 
    * @return the classId.
@@ -598,8 +598,8 @@ public final class IdImpl implements IdIF {
   }
 
   /**
-   * This method gets the {@link IdIF ID} of the associated
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}
+   * This method gets the {@link Id ID} of the associated
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}
    * 
    * @return the ID of the associated content-class.
    */

@@ -3,8 +3,8 @@ package net.sf.mmm.content.model.base;
 
 import java.util.Iterator;
 
-import net.sf.mmm.content.model.api.ContentClassIF;
-import net.sf.mmm.content.model.api.ContentFieldIF;
+import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
 
 /**
@@ -13,22 +13,22 @@ import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<ContentFieldIF> {
+public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<ContentField> {
 
   /** the current class */
-  private ContentClassIF currentClass;
+  private ContentClass currentClass;
 
   /** the current own field enumeration */
-  private Iterator<ContentFieldIF> currentIt;
+  private Iterator<ContentField> currentIt;
 
   /**
    * The constructor.
    * 
    * @param contentClass
-   *        is the class of that all {@link ContentFieldIF fields} are to be
+   *        is the class of that all {@link ContentField fields} are to be
    *        iterated.
    */
-  public ContentFieldIterator(ContentClassIF contentClass) {
+  public ContentFieldIterator(ContentClass contentClass) {
 
     super();
     this.currentClass = contentClass;
@@ -40,10 +40,10 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
    * @see net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator#findNext()
    */
   @Override
-  protected ContentFieldIF findNext() {
+  protected ContentField findNext() {
 
     while (this.currentIt.hasNext()) {
-      ContentFieldIF field = this.currentIt.next();
+      ContentField field = this.currentIt.next();
       if (field.getSuperField() == null) {
         return field;
       }

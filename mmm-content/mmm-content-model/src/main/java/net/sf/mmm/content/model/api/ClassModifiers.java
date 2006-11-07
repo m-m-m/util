@@ -3,13 +3,13 @@ package net.sf.mmm.content.model.api;
 
 /**
  * This is the interface for the modifiers of a
- * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+ * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
  * 
- * @see net.sf.mmm.content.model.api.ContentClassIF#getModifiers()
+ * @see net.sf.mmm.content.model.api.ContentClass#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ClassModifiersIF extends ModifiersIF {
+public interface ClassModifiers extends Modifiers {
 
   /**
    * the name of the root tag.
@@ -28,7 +28,7 @@ public interface ClassModifiersIF extends ModifiersIF {
 
   /**
    * This method determines if the class is abstract and no
-   * {@link net.sf.mmm.content.api.ContentObjectIF instance} can be created
+   * {@link net.sf.mmm.content.api.ContentObject instance} can be created
    * directly from this class.
    * 
    * @return <code>true</code> if the class is abstract.
@@ -37,16 +37,16 @@ public interface ClassModifiersIF extends ModifiersIF {
 
   /**
    * This method determines if the class can be
-   * {@link ContentModelWriteAccessIF#createClass(ContentClassIF, String, ClassModifiersIF) extendet}
+   * {@link ContentModelWriteAccess#createClass(ContentClass, String, ClassModifiers) extendet}
    * by the user.<br>
-   * This is the same as {@link ModifiersIF#isFinal() final}. But additionally
-   * a {@link ModifiersIF#isSystem() system} class that is NOT
-   * {@link ModifiersIF#isFinal() final} can be unextendable (this method will
+   * This is the same as {@link Modifiers#isFinal() final}. But additionally a
+   * {@link Modifiers#isSystem() system} class that is NOT
+   * {@link Modifiers#isFinal() final} can be unextendable (this method will
    * return <code>false</code> then). Such class will usually have
-   * {@link ContentClassIF#getSubClasses() sub-classes} (that are all system
+   * {@link ContentClass#getSubClasses() sub-classes} (that are all system
    * classes) but may not allow the user to directly extend that class. In that
    * case this method returns <code>true</code> even though
-   * {@link ModifiersIF#isFinal()} will return <code>false</code>.
+   * {@link Modifiers#isFinal()} will return <code>false</code>.
    * 
    * @return <code>true</code> if the class can be extended by the user,
    *         <code>false</code> otherwise.

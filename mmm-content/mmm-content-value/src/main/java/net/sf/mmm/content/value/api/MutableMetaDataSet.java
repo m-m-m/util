@@ -9,7 +9,7 @@ package net.sf.mmm.content.value.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface MutableMetaDataSetIF extends MetaDataSet {
+public interface MutableMetaDataSet extends MetaDataSet {
 
   /**
    * This method (un)sets a meta-data entry.

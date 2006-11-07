@@ -3,15 +3,15 @@ package net.sf.mmm.content.model.api;
 
 import java.util.Collection;
 
-import net.sf.mmm.content.api.ContentObjectIF;
-import net.sf.mmm.content.value.api.IdIF;
+import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.value.api.Id;
 
 /**
  * This interface gives read access to the content model.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentModelReadAccessIF {
+public interface ContentModelReadAccess {
 
   /**
    * This method gets the content class for the given name.
@@ -22,7 +22,7 @@ public interface ContentModelReadAccessIF {
    * @throws ContentModelException
    *         if the requested class does not exist.
    */
-  ContentClassIF getClass(String name) throws ContentModelException;
+  ContentClass getClass(String name) throws ContentModelException;
 
   /**
    * This method gets the content class for the given ID.
@@ -33,21 +33,21 @@ public interface ContentModelReadAccessIF {
    * @throws ContentModelException
    *         if the requested class does not exist.
    */
-  ContentClassIF getClass(IdIF id) throws ContentModelException;
+  ContentClass getClass(Id id) throws ContentModelException;
 
   /**
    * This method gets the root content class that reflects the
-   * {@link ContentObjectIF content-object}.
+   * {@link ContentObject content-object}.
    * 
    * @return the root class.
    */
-  ContentClassIF getRootClass();
+  ContentClass getRootClass();
 
   /**
    * This method gets the list of all registered content classes.
    * 
    * @return an enumeration of all content classes.
    */
-  Collection<ContentClassIF> getClasses();
+  Collection<ContentClass> getClasses();
 
 }

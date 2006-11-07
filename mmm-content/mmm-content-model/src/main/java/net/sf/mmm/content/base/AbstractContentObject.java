@@ -2,21 +2,21 @@
 package net.sf.mmm.content.base;
 
 import net.sf.mmm.content.api.ContentException;
-import net.sf.mmm.content.api.ContentObjectIF;
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.security.PermissionDeniedException;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
- * This is the abstract base implementation of the {@link ContentObjectIF}
+ * This is the abstract base implementation of the {@link ContentObject}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentObject implements ContentObjectIF {
+public abstract class AbstractContentObject implements ContentObject {
 
   /** @see #getName() */
-  private final String name;
+  private String name;
 
   /** the deleted-flag */
   private boolean deletedFlag;
@@ -35,7 +35,7 @@ public abstract class AbstractContentObject implements ContentObjectIF {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#getName()
+   * @see net.sf.mmm.content.api.ContentObject#getName()
    */
   public String getName() {
 
@@ -43,27 +43,11 @@ public abstract class AbstractContentObject implements ContentObjectIF {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#getPath()
-   */
-  /*
-   * public String getPath() {
-   * 
-   * if (getParent() == null) { // root folder return
-   * ContentObjectIF.PATH_SEPARATOR; } else { String parentPath =
-   * getParent().getPath(); StringBuffer path = new
-   * StringBuffer(parentPath.length() + this.name.length() + 1);
-   * path.append(parentPath); // only add separator if parent is NOT the root
-   * folder if (parentPath.length() > 1) {
-   * path.append(ContentObjectIF.PATH_SEPARATOR); } path.append(this.name);
-   * return path.toString(); } }
-   */
-
-  /**
    * This method gets the deleted flag of this object. This method gives direct
    * access to the deleted flag and can be used if the method
    * {@link AbstractContentObject#isDeleted()}has been overriden.
    * 
-   * @see ContentObjectIF#isDeleted()
+   * @see ContentObject#isDeleted()
    * 
    * @return the deleted flag of this object.
    */
@@ -73,7 +57,7 @@ public abstract class AbstractContentObject implements ContentObjectIF {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#isDeleted()
+   * @see net.sf.mmm.content.api.ContentObject#isDeleted()
    */
   public boolean isDeleted() {
 
@@ -92,7 +76,7 @@ public abstract class AbstractContentObject implements ContentObjectIF {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#setFieldValue(java.lang.String,
+   * @see net.sf.mmm.content.api.ContentObject#setFieldValue(java.lang.String,
    *      java.lang.Object)
    */
   public void setFieldValue(String fieldName, Object value) throws NoSuchFieldException,
@@ -103,7 +87,7 @@ public abstract class AbstractContentObject implements ContentObjectIF {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#getFieldValue(java.lang.String)
+   * @see net.sf.mmm.content.api.ContentObject#getFieldValue(java.lang.String)
    */
   public Object getFieldValue(String fieldName) throws NoSuchFieldException,
       PermissionDeniedException, ContentException {
@@ -138,7 +122,7 @@ public abstract class AbstractContentObject implements ContentObjectIF {
   public final boolean equals(Object other) {
 
     if ((other != null) && (other instanceof AbstractContentObject)) {
-      return getId().equals(((ContentObjectIF) other).getId());
+      return getId().equals(((ContentObject) other).getId());
     }
     return false;
   }

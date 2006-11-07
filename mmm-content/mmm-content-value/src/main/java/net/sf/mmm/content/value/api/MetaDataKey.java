@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class represents a key used to uniquely identify a value in a
- * {@link net.sf.mmm.content.value.api.MutableMetaDataSetIF}.<br>
+ * {@link net.sf.mmm.content.value.api.MutableMetaDataSet}.<br>
  * An instance of this class is called qualified meta-data key and is a tuple of
  * a namespace and an unqualified key. <br>
  * Because a meta-data key is nothing but a tuple of two strings the API package

@@ -4,11 +4,11 @@ package net.sf.mmm.content.value.api;
 /**
  * This is the interface for a version-information of a resource.
  * 
- * @see net.sf.mmm.content.value.api.IdIF
+ * @see net.sf.mmm.content.value.api.Id
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface VersionIF {
+public interface Version {
 
   /**
    * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
@@ -78,7 +78,7 @@ public interface VersionIF {
    * This method gets the version suffix. E.g. for version "3.42.1.5-test" the
    * version suffix is "test".<br>
    * A suffix reduces the rank of a version: e.g. "1.0" is
-   * {@link #isHigherThan(VersionIF) higher-than} "1.0-stable".
+   * {@link #isHigherThan(Version) higher-than} "1.0-stable".
    * 
    * @return the version suffix.
    */
@@ -101,6 +101,6 @@ public interface VersionIF {
    * @return <code>true</code> if this version is higher than the given
    *         version and <code>false</code> otherwise.
    */
-  public boolean isHigherThan(VersionIF otherVersion);
+  public boolean isHigherThan(Version otherVersion);
 
 }

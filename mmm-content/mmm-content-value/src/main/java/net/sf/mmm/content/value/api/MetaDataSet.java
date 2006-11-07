@@ -25,14 +25,14 @@ public interface MetaDataSet extends XmlSerializable {
 
   /**
    * The top-level tag of the XML representation. The only children allowed are
-   * 0-N {@link MutableMetaDataSetIF#XML_TAG_VALUE}elements.
+   * 0-N {@link MutableMetaDataSet#XML_TAG_VALUE}elements.
    */
   String XML_TAG_META_DATA = "metaData";
 
   /**
    * The value tag of the XML representation. Must have exactly one occurance of
-   * the attributes {@link MutableMetaDataSetIF#XML_ATR_VALUE_NAMESPACE}and
-   * {@link MutableMetaDataSetIF#XML_ATR_VALUE_KEY}. The value of the meta-data
+   * the attributes {@link MutableMetaDataSet#XML_ATR_VALUE_NAMESPACE}and
+   * {@link MutableMetaDataSet#XML_ATR_VALUE_KEY}. The value of the meta-data
    * set specified by the namespace and the key attribute must be embeded as
    * text inside the value element.
    */

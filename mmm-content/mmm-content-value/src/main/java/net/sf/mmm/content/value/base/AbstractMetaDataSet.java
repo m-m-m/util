@@ -4,17 +4,17 @@ package net.sf.mmm.content.value.base;
 import java.util.Iterator;
 
 import net.sf.mmm.content.value.api.MetaDataKey;
-import net.sf.mmm.content.value.api.MutableMetaDataSetIF;
+import net.sf.mmm.content.value.api.MutableMetaDataSet;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
- * This is the abstract base implementation of the {@link MutableMetaDataSetIF}
+ * This is the abstract base implementation of the {@link MutableMetaDataSet}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractMetaDataSet implements MutableMetaDataSetIF {
+public abstract class AbstractMetaDataSet implements MutableMetaDataSet {
 
   /**
    * The constructor.

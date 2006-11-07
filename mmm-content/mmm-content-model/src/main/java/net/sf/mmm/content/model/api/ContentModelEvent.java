@@ -16,10 +16,10 @@ public final class ContentModelEvent implements ChangeEvent {
   private final Type type;
 
   /** the data class this event is about */
-  private final ContentClassIF contentClass;
+  private final ContentClass contentClass;
 
   /** the field that this event is about */
-  private final ContentFieldIF contentField;
+  private final ContentField contentField;
 
   /**
    * This is the constructor for a class event. The event will be about the
@@ -30,7 +30,7 @@ public final class ContentModelEvent implements ChangeEvent {
    * @param changeType
    *        is the type of event.
    */
-  public ContentModelEvent(ContentClassIF changedClass, Type changeType) {
+  public ContentModelEvent(ContentClass changedClass, Type changeType) {
 
     super();
     this.type = changeType;
@@ -48,7 +48,7 @@ public final class ContentModelEvent implements ChangeEvent {
    *        is the type of event (add/remove/update). Use only the static
    *        constant fields (TYPE_*)!
    */
-  public ContentModelEvent(ContentFieldIF changedField, Type changeType) {
+  public ContentModelEvent(ContentField changedField, Type changeType) {
 
     super();
     this.type = changeType;
@@ -61,7 +61,7 @@ public final class ContentModelEvent implements ChangeEvent {
    * 
    * @return the class the event is about.
    */
-  public ContentClassIF getContentClass() {
+  public ContentClass getContentClass() {
 
     return this.contentClass;
   }
@@ -72,7 +72,7 @@ public final class ContentModelEvent implements ChangeEvent {
    * @return the field the event is about or <code>null</code> if the event is
    *         about the class itself.
    */
-  public ContentFieldIF getContentField() {
+  public ContentField getContentField() {
 
     return this.contentField;
   }

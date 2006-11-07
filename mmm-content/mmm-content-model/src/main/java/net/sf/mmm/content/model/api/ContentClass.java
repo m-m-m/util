@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * This is the interface of a content-class. It reflects the structure of the
- * {@link net.sf.mmm.content.api.ContentObjectIF content-object} types in an
+ * {@link net.sf.mmm.content.api.ContentObject content-object} types in an
  * object-oriented way. <br>
  * A content-class is the analogy to a java {@link java.lang.Class} that
  * reflects a type. <br>
@@ -15,26 +15,26 @@ import java.util.List;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentClassIF extends ContentReflectionObjectIF {
+public interface ContentClass extends ContentReflectionObject {
 
   /**
    * the name of the root class reflecting
-   * {@link net.sf.mmm.content.api.ContentObjectIF}
+   * {@link net.sf.mmm.content.api.ContentObject}
    */
   String NAME_ROOT = "Object";
 
   /**
-   * the name of the class reflecting {@link ContentReflectionObjectIF}
+   * the name of the class reflecting {@link ContentReflectionObject}
    */
   String NAME_REFLECTION = "ReflectionObject";
 
   /**
-   * the name of the class reflecting {@link ContentClassIF} (itself).
+   * the name of the class reflecting {@link ContentClass} (itself).
    */
   String NAME_CLASS = "Class";
 
   /**
-   * the name of the class reflecting {@link ContentFieldIF}.
+   * the name of the class reflecting {@link ContentField}.
    */
   String NAME_FIELD = "Field";
 
@@ -75,18 +75,18 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
   String NAME_ACTION = "Action";
 
   /**
-   * the name of the class reflecting {@link ContentResourceIF}.
+   * the name of the class reflecting content-resource.
    */
   String NAME_RESOURCE = "Resource";
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.resource.ContentFileIF}.
+   * {@link net.sf.mmm.content.resource.api.ContentFile}.
    */
   String NAME_FILE = "File";
 
   /**
-   * the name of the class reflecting {@link ContentFolderIF}.
+   * the name of the class reflecting {@link ContentFolder}.
    */
   String NAME_FOLDER = "Folder";
 
@@ -104,31 +104,31 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
    * does NOT include fields inherited from the
    * {@link #getSuperClass() super-class} except they are overriden by this
    * class. An inherited field can be overridden (if supported by the
-   * {@link ContentModelServiceIF content-model}) in order to declare it more
+   * {@link ContentModelService content-model}) in order to declare it more
    * specific meaning. Then the type of the field is a subtype of the field that
    * is overriden or the validator is more restrictive.<br>
    * 
    * @return an (read-only) iterator of all declared fields.
    */
-  Iterator<ContentFieldIF> getDeclatedFields();
+  Iterator<ContentField> getDeclatedFields();
 
   /**
    * This method gets the declared field with the given name. The field must be
    * defined in this content-class (that do not exist in the
    * {@link #getSuperClass() super-class}) and inherited fields that are
    * overriden by this class. An inherited field can be overridden (if supported
-   * by the {@link ContentModelServiceIF content-model}) in order to declare it
+   * by the {@link ContentModelService content-model}) in order to declare it
    * more specific meaning that the type of the field is a subtype of the field
    * that is overriden or the validator is more restrictive.<br>
    * An inherited field can be identified via
-   * {@link ContentFieldIF#getDeclaringClass()}
+   * {@link ContentField#getDeclaringClass()}
    * 
    * @param name
    *        is the name of the requested field of this class.
    * @return the field with the given name or <code>null</code> if no such
    *         field is declared by this class.
    */
-  ContentFieldIF getDeclatedField(String name);
+  ContentField getDeclatedField(String name);
 
   /**
    * This method gets the field with the given name. The field must be defined
@@ -139,7 +139,7 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
    * @return the field with the given name or <code>null</code> if no such
    *         field exists for this class.
    */
-  ContentFieldIF getField(String name);
+  ContentField getField(String name);
 
   /**
    * This method gets the number of fields defined in this class or inherited by
@@ -152,30 +152,30 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
   /**
    * This method gets all fields defined in this class or inherited by the
    * super-classe(s). An inherited field can be identified via
-   * {@link ContentFieldIF#getDeclaringClass()}.
+   * {@link ContentField#getDeclaringClass()}.
    * 
    * @return an (read-only) iterator of fields of this class.
    */
-  Iterator<ContentFieldIF> getFields();
+  Iterator<ContentField> getFields();
 
   /**
    * This method gets the super-class of this class.
    * 
    * @return the super-class that is extended by this class.
    */
-  ContentClassIF getSuperClass();
+  ContentClass getSuperClass();
 
   /**
    * This method gets the list of all sub-classes.
    * 
    * @return an unmodifyable list of all sub-class.
    */
-  List<ContentClassIF> getSubClasses();
+  List<ContentClass> getSubClasses();
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#getModifiers()
+   * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()
    */
-  ClassModifiersIF getModifiers();
+  ClassModifiers getModifiers();
 
   /**
    * This method determines is this class is a super class of the given class.
@@ -186,11 +186,11 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
    * @return <code>true</code> if this class is a super-class of the given
    *         class.
    */
-  boolean isSuperClassOf(ContentClassIF contentClass);
+  boolean isSuperClassOf(ContentClass contentClass);
 
   /**
    * This is the opposite of the method
-   * {@link ContentClassIF#isSuperClassOf(ContentClassIF)}. This means that
+   * {@link ContentClass#isSuperClassOf(ContentClass)}. This means that
    * <code>class1.isSubClassOf(class2)</code> is equal to
    * <code>class2.isSuperClassOf(class1)</code>.
    * 
@@ -199,6 +199,6 @@ public interface ContentClassIF extends ContentReflectionObjectIF {
    * @return <code>true</code> if this class is a sub-class of the given
    *         class.
    */
-  boolean isSubClassOf(ContentClassIF contentClass);
+  boolean isSubClassOf(ContentClass contentClass);
 
 }

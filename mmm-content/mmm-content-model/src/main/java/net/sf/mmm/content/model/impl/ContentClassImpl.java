@@ -1,15 +1,15 @@
 /* $Id$ */
 package net.sf.mmm.content.model.impl;
 
-import net.sf.mmm.content.model.api.ClassModifiersIF;
-import net.sf.mmm.content.model.api.ContentClassIF;
+import net.sf.mmm.content.model.api.ClassModifiers;
+import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.base.AbstractContentClass;
-import net.sf.mmm.content.model.base.ClassModifiers;
-import net.sf.mmm.content.value.api.IdIF;
+import net.sf.mmm.content.model.base.ClassModifiersImpl;
+import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
 
 /**
- * This is the implementation of the {@link ContentClassIF} interface.
+ * This is the implementation of the {@link ContentClass} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,19 +20,19 @@ public class ContentClassImpl extends AbstractContentClass {
 
   /** @see #NAME_ROOT */
   public static final ContentClassImpl CLASS_ROOT = new ContentClassImpl(NAME_ROOT, null,
-      ClassModifiers.SYSTEM_ABSTRACT_UNEXTENDABLE, IdImpl.ID_CLASS_ROOT);
+      ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, IdImpl.ID_CLASS_ROOT);
 
   /** @see #NAME_REFLECTION */
   public static final ContentClassImpl CLASS_REFLECTION = new ContentClassImpl(NAME_REFLECTION,
-      CLASS_ROOT, ClassModifiers.SYSTEM_ABSTRACT_UNEXTENDABLE, IdImpl.ID_CLASS_REFELCTION);
+      CLASS_ROOT, ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, IdImpl.ID_CLASS_REFELCTION);
 
   /** @see #NAME_CLASS */
   public static final ContentClassImpl CLASS_CLASS = new ContentClassImpl(NAME_CLASS,
-      CLASS_REFLECTION, ClassModifiers.SYSTEM_FINAL, IdImpl.ID_CLASS_CLASS);
+      CLASS_REFLECTION, ClassModifiersImpl.SYSTEM_FINAL, IdImpl.ID_CLASS_CLASS);
 
   /** @see #NAME_FIELD */
   public static final ContentClassImpl CLASS_FIELD = new ContentClassImpl(NAME_FIELD,
-      CLASS_REFLECTION, ClassModifiers.SYSTEM_FINAL, IdImpl.ID_CLASS_FIELD);
+      CLASS_REFLECTION, ClassModifiersImpl.SYSTEM_FINAL, IdImpl.ID_CLASS_FIELD);
 
   /** @see #getId() */
   private final IdImpl id;
@@ -45,25 +45,25 @@ public class ContentClassImpl extends AbstractContentClass {
    * @param classModifiers
    * @param classId
    */
-  public ContentClassImpl(String className, ContentClassIF parentClass,
-      ClassModifiersIF classModifiers, IdImpl classId) {
+  public ContentClassImpl(String className, ContentClass parentClass,
+      ClassModifiers classModifiers, IdImpl classId) {
 
     super(className, parentClass, classModifiers);
     this.id = classId;
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#getContentClass()
+   * @see net.sf.mmm.content.api.ContentObject#getContentClass()
    */
-  public ContentClassIF getContentClass() {
+  public ContentClass getContentClass() {
 
     return CLASS_CLASS;
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#getId()
+   * @see net.sf.mmm.content.api.ContentObject#getId()
    */
-  public IdIF getId() {
+  public Id getId() {
 
     return this.id;
   }

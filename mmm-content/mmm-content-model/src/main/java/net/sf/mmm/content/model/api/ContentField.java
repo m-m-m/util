@@ -1,59 +1,57 @@
 /* $Id$ */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.content.api.ContentObjectIF;
+import net.sf.mmm.content.api.ContentObject;
 
 /**
  * This interface declares the api of a content field. Such object describes the
- * structure of a field of a {@link net.sf.mmm.content.model.api.ContentClassIF}.
+ * structure of a field of a {@link net.sf.mmm.content.model.api.ContentClass}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentFieldIF extends ContentReflectionObjectIF {
+public interface ContentField extends ContentReflectionObject {
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getId() ID} for generic access via {@link #getFieldValue(String)}.
    */
   String NAME_ID = "id";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getName() name} for generic access via
    * {@link #getFieldValue(String)}.
    */
   String NAME_NAME = "name";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
-   * {@link #getParentFolder() parentFolder} for generic access via
-   * {@link #getFieldValue(String)}.
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * parentFolder for generic access via {@link #getFieldValue(String)}.
    */
   String NAME_PARENT_FOLDER = "parentFolder";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
-   * {@link #getPath() path} for generic access via
-   * {@link #getFieldValue(String)}.
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * path for generic access via {@link #getFieldValue(String)}.
    */
   String NAME_PATH = "path";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getContentClass() class} for generic access via
    * {@link #getFieldValue(String)}.
    */
   String NAME_CLASS = "class";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getMetaData() metadata} for generic access via
    * {@link #getFieldValue(String)}.
    */
   String NAME_METADATA = "metadata";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentFieldIF field}
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getFieldType() type} for generic access via
    * {@link #getFieldValue(String)}.
    */
@@ -64,24 +62,24 @@ public interface ContentFieldIF extends ContentReflectionObjectIF {
    * mean that the field is
    * {@link #getInitiallyDefiningClass() initially defined} by that class. It
    * can also be that the declaring class inherits the field from a
-   * {@link ContentClassIF#getSuperClass() super-class} but overrides it (if
-   * supported by the {@link ContentModelServiceIF content-model}) in order to
+   * {@link ContentClass#getSuperClass() super-class} but overrides it (if
+   * supported by the {@link ContentModelService content-model}) in order to
    * declare it more specific meaning that the type of the field is a subtype of
    * the field that is overriden or the validator is more restrictive.<br>
    * 
    * @return the class that declares this field.
    */
-  ContentClassIF getDeclaringClass();
+  ContentClass getDeclaringClass();
 
   /**
    * This method gets the content-class that initially defined by this field.
    * This means that the returned content-class does not inherit this field and
    * its parent class (if not root) has no field with the same
-   * {@link ContentObjectIF#getName() name}.
+   * {@link ContentObject#getName() name}.
    * 
    * @return the class that initially defines this field.
    */
-  ContentClassIF getInitiallyDefiningClass();
+  ContentClass getInitiallyDefiningClass();
 
   /**
    * This method gets the super-field of this field if this field is extended. A
@@ -91,7 +89,7 @@ public interface ContentFieldIF extends ContentReflectionObjectIF {
    * @return the field extended by this field or <code>null</code> if the
    *         field is NOT inherited.
    */
-  ContentFieldIF getSuperField();
+  ContentField getSuperField();
 
   /**
    * This method gets the value type of the field. Only values of this type can
@@ -102,9 +100,9 @@ public interface ContentFieldIF extends ContentReflectionObjectIF {
   Class getFieldType();
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#getModifiers()
+   * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()
    */
-  FieldModifiersIF getModifiers();
+  FieldModifiers getModifiers();
 
   /**
    * This method validates if the given argument is an acceptable value for this
@@ -118,9 +116,10 @@ public interface ContentFieldIF extends ContentReflectionObjectIF {
    * @return the result of the validation.
    */
   // ValidationResultIF validate(Object value);
+  
   /**
    * This method dynamically determines the value of the field. It is only
-   * applicable for {@link FieldModifiersIF#isTransient() transient} fields.
+   * applicable for {@link FieldModifiersImpl#isTransient() transient} fields.
    * 
    * @param object
    *        is the content-object for that the value of the current transient
@@ -134,6 +133,6 @@ public interface ContentFieldIF extends ContentReflectionObjectIF {
    *         if the calculation performed an operation you (the current user) is
    *         not permitted.
    */
-  // Object calculate(ContentObjectIF object) throws CalculationException,
+  // Object calculate(ContentObject object) throws CalculationException,
   // PermissionDeniedException;
 }

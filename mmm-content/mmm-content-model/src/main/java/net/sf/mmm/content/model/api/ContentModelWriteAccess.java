@@ -6,19 +6,19 @@ package net.sf.mmm.content.model.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentModelWriteAccessIF {
+public interface ContentModelWriteAccess {
 
   /**
    * This method creates a sub-class of the given class.
    * 
    * @param superClass
-   *        is the {@link ContentClassIF#getSuperClass() super-class} of the
+   *        is the {@link ContentClass#getSuperClass() super-class} of the
    *        class to create.
    * @param name
-   *        is the {@link net.sf.mmm.content.api.ContentObjectIF#getName() name}
+   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
    *        of the class to create.
    * @param modifiers
-   *        are the {@link ContentClassIF#getModifiers() modifiers} for the
+   *        are the {@link ContentClass#getModifiers() modifiers} for the
    *        class to create.
    * @return the created class.
    * @throws ContentModelException
@@ -30,26 +30,26 @@ public interface ContentModelWriteAccessIF {
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
-  ContentClassIF createClass(ContentClassIF superClass, String name, ClassModifiersIF modifiers)
+  ContentClass createClass(ContentClass superClass, String name, ClassModifiers modifiers)
       throws ContentModelException;
 
   /**
    * This method creates a field in the given class with the specified name.
    * 
    * @param declaringClass
-   *        is the {@link ContentFieldIF#getDeclaringClass() class} where the
+   *        is the {@link ContentField#getDeclaringClass() class} where the
    *        new field will be added.
    * @param name
-   *        is the {@link net.sf.mmm.content.api.ContentObjectIF#getName() name}
+   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
    *        of the field to create.
    * @param type
-   *        is the {@link ContentFieldIF#getFieldType() type} of the values that
+   *        is the {@link ContentField#getFieldType() type} of the values that
    *        can be stored in the field to create.
    * @param modifiers
-   *        are the {@link ContentFieldIF#getModifiers() modifiers} for the
+   *        are the {@link ContentField#getModifiers() modifiers} for the
    *        field to create. They must NOT be
-   *        {@link FieldModifiersIF#isTransient() transient} (@see
-   *        #createField(ContentClassIF, String, Class, FieldModifiersIF,
+   *        {@link FieldModifiers#isTransient() transient} (@see
+   *        #createField(ContentClass, String, Class, FieldModifiersImpl,
    *        Term)).
    * @return the created field.
    * @throws ContentModelException
@@ -61,31 +61,31 @@ public interface ContentModelWriteAccessIF {
    *         </li>
    *         </ul>
    */
-  ContentFieldIF createField(ContentClassIF declaringClass, String name, Class type,
-      FieldModifiersIF modifiers) throws ContentModelException;
+  ContentField createField(ContentClass declaringClass, String name, Class type,
+      FieldModifiers modifiers) throws ContentModelException;
 
   /**
-   * This method creates a {@link FieldModifiersIF#isTransient() transient}
+   * This method creates a {@link FieldModifiersImpl#isTransient() transient}
    * field in the given class with the specified name.
    * 
    * @param declaringClass
-   *        is the {@link ContentFieldIF#getDeclaringClass() class} where the
+   *        is the {@link ContentField#getDeclaringClass() class} where the
    *        new field will be added.
    * @param name
    *        is the {@link net.sf.mmm.content.ContentObjectIF#getName() name} of
    *        the field to create.
    * @param type
-   *        is the {@link ContentFieldIF#getFieldType() type} of the values that
+   *        is the {@link ContentField#getFieldType() type} of the values that
    *        can be stored in the field to create.
    * @param modifiers
-   *        are the {@link ContentFieldIF#getModifiers() modifiers} for the
+   *        are the {@link ContentField#getModifiers() modifiers} for the
    *        field to create. They must be
-   *        {@link FieldModifiersIF#isTransient() transient} (@see
-   *        #createField(ContentClassIF, String, Class, FieldModifiersIF)).
+   *        {@link FieldModifiersImpl#isTransient() transient} (@see
+   *        #createField(ContentClass, String, Class, FieldModifiersImpl)).
    * @param term
    *        is the term used for dynamic
-   *        {@link ContentFieldIF#calculate(net.sf.mmm.content.ContentObjectIF) calculation}
-   *        of this {@link FieldModifiersIF#isTransient() transient} field.
+   *        {@link ContentField#calculate(net.sf.mmm.content.ContentObjectIF) calculation}
+   *        of this {@link FieldModifiersImpl#isTransient() transient} field.
    * @return the created field.
    * @throws ContentModelException
    *         if the field could not be created. This can have one of the
@@ -96,9 +96,9 @@ public interface ContentModelWriteAccessIF {
    *         </li>
    *         </ul>
    */
-  // ContentFieldIF createField(ContentClassIF declaringClass, String name,
+  // ContentField createField(ContentClass declaringClass, String name,
   // Class type,
-  // FieldModifiersIF modifiers, Term term) throws ContentModelException;
+  // FieldModifiersImpl modifiers, Term term) throws ContentModelException;
   /**
    * This method sets the status of the deleted flag of the given class or
    * field.
@@ -115,7 +115,7 @@ public interface ContentModelWriteAccessIF {
    *         <li>the given class or field has the system flag set</li>
    *         </ul>
    */
-  void setDeleted(ContentReflectionObjectIF classOrField, boolean newDeletedFlag)
+  void setDeleted(ContentReflectionObject classOrField, boolean newDeletedFlag)
       throws ContentModelException;
 
 }

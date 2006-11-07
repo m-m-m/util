@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.content.api.ContentObjectIF;
+import net.sf.mmm.content.api.ContentObject;
 
 /**
  * This is the interface for an object reflecting the content model. It can be
@@ -9,37 +9,37 @@ import net.sf.mmm.content.api.ContentObjectIF;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentReflectionObjectIF extends ContentObjectIF {
+public interface ContentReflectionObject extends ContentObject {
 
   /**
    * This method gets the modifiers of this object. The modifiers are a set of
    * flags.
    * 
-   * @see ContentClassIF#getModifiers()
-   * @see ContentFieldIF#getModifiers()
+   * @see ContentClass#getModifiers()
+   * @see ContentField#getModifiers()
    * 
    * @return the objects modifiers.
    */
-  ModifiersIF getModifiers();
+  Modifiers getModifiers();
 
   /**
-   * This method determines if this is a {@link ContentClassIF content-class} or
-   * a {@link ContentFieldIF content-field}. It is allowed to cast this object
+   * This method determines if this is a {@link ContentClass content-class} or
+   * a {@link ContentField content-field}. It is allowed to cast this object
    * according to the result of this method.
    * 
    * @return <code>true</code> if this is a
-   *         {@link ContentClassIF content-class}, <code>false</code> if this
-   *         is a {@link ContentFieldIF content-field}.
+   *         {@link ContentClass content-class}, <code>false</code> if this
+   *         is a {@link ContentField content-field}.
    */
   boolean isClass();
 
   /**
-   * The deleted-flag is inherited so {@link ContentObjectIF#isDeleted()} will
+   * The deleted-flag is inherited so {@link ContentObject#isDeleted()} will
    * return <code>true</code> if a super-classes is marked as deleted. <br>
    * This method gets the deleted flag of this class or field. The method does
    * not inherit the flag from super-classes or extended fields.
    * 
-   * @see ContentObjectIF#isDeleted()
+   * @see ContentObject#isDeleted()
    * 
    * @return the delted flag.
    */

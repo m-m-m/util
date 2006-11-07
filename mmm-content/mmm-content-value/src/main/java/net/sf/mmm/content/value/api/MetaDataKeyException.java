@@ -7,7 +7,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  * This is the runtime exception thrown if a meta-data namespace, unqualified or
  * qualified key was illegal.
  * 
- * @see MutableMetaDataSetIF
+ * @see MutableMetaDataSet
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -3,8 +3,8 @@ package net.sf.mmm.content.model.api;
 
 /**
  * This is the interface for the modifiers of a
- * {@link net.sf.mmm.content.model.api.ContentFieldIF content-field}.<br>
- * ATTENTION: Be aware that a {@link ContentFieldIF field} in this context is
+ * {@link net.sf.mmm.content.model.api.ContentField content-field}.<br>
+ * ATTENTION: Be aware that a {@link ContentField field} in this context is
  * different from a <code>field</code> in the JAVA language. Better think of
  * it as a bean property. If the field is {@link #isFinal() final}, the getter
  * (and setter) is final. A {@link #isImmutable() immutable} field has no setter
@@ -12,11 +12,11 @@ package net.sf.mmm.content.model.api;
  * {@link #isFinal() final} field is NOT a constant and can be modified if it is
  * NOT {@link #isImmutable() immutable}.
  * 
- * @see net.sf.mmm.content.model.api.ContentFieldIF#getModifiers()
+ * @see net.sf.mmm.content.model.api.ContentField#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface FieldModifiersIF extends ModifiersIF {
+public interface FieldModifiers extends Modifiers {
 
   /**
    * the name of the root tag.
@@ -57,17 +57,17 @@ public interface FieldModifiersIF extends ModifiersIF {
 
   /**
    * This method determines if the field is static. A static field is a field of
-   * the {@link ContentClassIF content-class} instead of the
-   * {@link net.sf.mmm.content.api.ContentObjectIF instance}.<br>
+   * the {@link ContentClass content-class} instead of the
+   * {@link net.sf.mmm.content.api.ContentObject instance}.<br>
    * Be aware that a {@link #isStatic() static} and {@link #isFinal() final}
    * field can be modified if it is NOT {@link #isImmutable() immutable} as
-   * described {@link FieldModifiersIF here}.<br>
-   * From all instances of the {@link ContentClassIF content-class} declaring
+   * described {@link FieldModifiers here}.<br>
+   * From all instances of the {@link ContentClass content-class} declaring
    * the field, the value of the field can be
-   * {@link net.sf.mmm.content.api.ContentObjectIF#getFieldValue(String) read}
+   * {@link net.sf.mmm.content.api.ContentObject#getFieldValue(String) read}
    * what will always result in the same value. Writing the value via the
    * instance is NOT allowed and must be done via the declaring
-   * {@link ContentClassIF content-class}.<br>
+   * {@link ContentClass content-class}.<br>
    * A {@link #isStatic() static} field can NOT be
    * {@link #isTransient() transient}. It can be persisted without additional
    * costs. If the according field should be {@link #isTransient() transient} it

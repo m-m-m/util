@@ -2,25 +2,25 @@
 package net.sf.mmm.content.model.base;
 
 import net.sf.mmm.content.base.AbstractContentObject;
-import net.sf.mmm.content.model.api.ContentClassIF;
-import net.sf.mmm.content.model.api.ContentFieldIF;
-import net.sf.mmm.content.model.api.FieldModifiersIF;
+import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.FieldModifiers;
 
 /**
- * This is the abstract base implementation of the ContentFieldIF interface.
+ * This is the abstract base implementation of the ContentField interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentField extends AbstractContentObject implements ContentFieldIF {
+public abstract class AbstractContentField extends AbstractContentObject implements ContentField {
 
   /** @see #getDeclaringClass() */
-  private final ContentClassIF declaringClass;
+  private final ContentClass declaringClass;
 
   /** @see #getFieldType() */
   private Class type;
 
   /** @see #getModifiers() */
-  private FieldModifiersIF modifiers;
+  private FieldModifiers modifiers;
 
   /**
    * The constructor.
@@ -31,8 +31,8 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
    *        is the content-class that {@link #getDeclaringClass() declares} (or
    *        overrides) this field.
    */
-  public AbstractContentField(String fieldName, ContentClassIF declaringContentClass,
-      Class fieldType, FieldModifiersIF fieldModifiers) {
+  public AbstractContentField(String fieldName, ContentClass declaringContentClass,
+      Class fieldType, FieldModifiers fieldModifiers) {
 
     super(fieldName);
     this.declaringClass = declaringContentClass;
@@ -41,7 +41,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#isClass()
+   * @see net.sf.mmm.content.model.api.ContentReflectionObject#isClass()
    */
   public boolean isClass() {
 
@@ -49,20 +49,20 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentFieldIF#getDeclaringClass()
+   * @see net.sf.mmm.content.model.api.ContentField#getDeclaringClass()
    */
-  public ContentClassIF getDeclaringClass() {
+  public ContentClass getDeclaringClass() {
 
     return this.declaringClass;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentFieldIF#getInitiallyDefiningClass()
+   * @see net.sf.mmm.content.model.api.ContentField#getInitiallyDefiningClass()
    */
-  public ContentClassIF getInitiallyDefiningClass() {
+  public ContentClass getInitiallyDefiningClass() {
 
-    ContentClassIF definingClass = this.declaringClass;
-    ContentClassIF superClass = definingClass.getSuperClass();
+    ContentClass definingClass = this.declaringClass;
+    ContentClass superClass = definingClass.getSuperClass();
     while (superClass != null) {
       if (superClass.getField(getName()) != null) {
         definingClass = superClass;
@@ -73,7 +73,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentFieldIF#getFieldType()
+   * @see net.sf.mmm.content.model.api.ContentField#getFieldType()
    */
   public Class getFieldType() {
 
@@ -81,20 +81,20 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentFieldIF#getModifiers()
+   * @see net.sf.mmm.content.model.api.ContentField#getModifiers()
    */
-  public FieldModifiersIF getModifiers() {
+  public FieldModifiers getModifiers() {
 
     return this.modifiers;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentFieldIF#getSuperField()
+   * @see net.sf.mmm.content.model.api.ContentField#getSuperField()
    */
-  public ContentFieldIF getSuperField() {
+  public ContentField getSuperField() {
 
-    ContentFieldIF superField = null;
-    ContentClassIF superClass = getContentClass().getSuperClass();
+    ContentField superField = null;
+    ContentClass superClass = getContentClass().getSuperClass();
     if (superClass != null) {
       superField = superClass.getField(getName());
     }
@@ -117,7 +117,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#isDeletedFlagSet()
+   * @see net.sf.mmm.content.model.api.ContentReflectionObject#isDeletedFlagSet()
    */
   public boolean isDeletedFlagSet() {
 

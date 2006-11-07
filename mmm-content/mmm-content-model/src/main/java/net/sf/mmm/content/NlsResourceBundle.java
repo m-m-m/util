@@ -21,7 +21,7 @@ public class NlsResourceBundle extends AbstractResourceBundle {
   /**
    * exception message if permission was denied.
    * 
-   * @see net.sf.mmm.content.api.security.PermissionDeniedException
+   * @see net.sf.mmm.content.security.PermissionDeniedException
    */
   public static final String ERR_PERMISSION_DENIED = "Permission denied for \"{0}\" performing \"{1}\" on \"{2}\"!";
 

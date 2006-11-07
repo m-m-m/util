@@ -1,24 +1,24 @@
 /* $Id$ */
 package net.sf.mmm.content.api;
 
-import net.sf.mmm.content.model.api.ContentClassIF;
+import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.security.PermissionDeniedException;
-import net.sf.mmm.content.value.api.IdIF;
+import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.util.xml.api.XmlSerializable;
 
 /**
  * This is the abstract interface for any content object. This can be a
- * {@link net.sf.mmm.content.model.api.ContentReflectionObjectIF reflection-object}
+ * {@link net.sf.mmm.content.model.api.ContentReflectionObject reflection-object}
  * (class or field), or a resource (file, folder, user, group, etc.).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentObjectIF extends XmlSerializable {
+public interface ContentObject extends XmlSerializable {
 
   /**
    * the variable-name of the current object in the
    * {@link net.sf.mmm.context.api.Context context} for
-   * {@link net.sf.mmm.content.model.api.ContentFieldIF#calculate(ContentObjectIF) calculation}.
+   * link net.sf.mmm.content.model.api.ContentField#calculate(ContentObject) calculation.
    */
   String ENV_VARIABLE_THIS = "this";
 
@@ -42,7 +42,7 @@ public interface ContentObjectIF extends XmlSerializable {
    * 
    * @return the unique ID.
    */
-  IdIF getId();
+  Id getId();
 
   /**
    * This method gets the name of this content-object. The name must be unique
@@ -54,14 +54,14 @@ public interface ContentObjectIF extends XmlSerializable {
    * @return the name of the resource.
    */
   String getName();
-  
+
   /**
    * This method gets the content-class used to reflect this content-object. The
    * content-class represents the exact type of this content-object.
    * 
    * @return the content-class of this resource.
    */
-  ContentClassIF getContentClass();
+  ContentClass getContentClass();
 
   /**
    * This method gets the meta-data of this object.
@@ -71,7 +71,7 @@ public interface ContentObjectIF extends XmlSerializable {
    *         if you (the current user) does not have permission to perform the
    *         operation.
    */
-  // MutableMetaDataSetIF getMetaData() throws PermissionDeniedException;
+  // MutableMetaDataSet getMetaData() throws PermissionDeniedException;
   /**
    * This method determines if this content-object is marked as deleted. <br>
    * A deleted class or field can NOT be modified. No instances or sub-classes
@@ -87,26 +87,26 @@ public interface ContentObjectIF extends XmlSerializable {
 
   /**
    * This method gets the value of the specified
-   * {@link net.sf.mmm.content.model.api.ContentFieldIF field}. It is the
+   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the
    * generic getter for all fields of this object. <br>
    * E.g. <code>getFieldValue("id")</code> will produce the same result as
-   * {@link ContentObjectIF#getId()}. Additionally all fields that are defined
+   * {@link ContentObject#getId()}. Additionally all fields that are defined
    * in sub-types are accessible.
    * 
    * @param fieldName
-   *        is the {@link ContentObjectIF#getName() name} of the
-   *        {@link net.sf.mmm.content.api.model.ContentFieldIF field} to get.
+   *        is the {@link ContentObject#getName() name} of the
+   *        {@link net.sf.mmm.content.model.api.ContentField field} to get.
    * @return the value of the specified field or <code>null</code> if not set.
    * @throws NoSuchFieldException
    *         if the objects {@link #getContentClass() content-class} does not
-   *         have a {@link net.sf.mmm.content.api.model.ContentFieldIF field}
-   *         with the given {@link ContentObjectIF#getName() name}.
+   *         have a {@link net.sf.mmm.content.model.api.ContentField field}
+   *         with the given {@link ContentObject#getName() name}.
    * @throws PermissionDeniedException
    *         if you (the current user) does not have permission to perform the
    *         operation.
    * @throws ContentException
    *         TODO: if the specified field is
-   *         {@link net.sf.mmm.content.model.api.FieldModifiersIF#isTransient() transient}
+   *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
    *         but an error occured calculating its value.
    */
   Object getFieldValue(String fieldName) throws NoSuchFieldException, PermissionDeniedException,
@@ -114,29 +114,29 @@ public interface ContentObjectIF extends XmlSerializable {
 
   /**
    * This method sets the value of the specified
-   * {@link net.sf.mmm.content.model.api.ContentFieldIF field}. It is the
+   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the
    * generic setter for all fields of this resource. The field must NOT be
-   * {@link net.sf.mmm.content.model.api.FieldModifiersIF#isImmutable() immutable}.
-   * A {@link net.sf.mmm.content.model.api.FieldModifiersIF#isStatic() static}
-   * field can only be set on a {@link ContentClassIF content-class}. Other
+   * {@link net.sf.mmm.content.model.api.FieldModifiers#isImmutable() immutable}.
+   * A {@link net.sf.mmm.content.model.api.FieldModifiers#isStatic() static}
+   * field can only be set on a {@link ContentClass content-class}. Other
    * fields only on a resource.
    * 
    * @see #getFieldValue(String)
    * 
    * @param fieldName
-   *        is the {@link ContentObjectIF#getName() name} of the
-   *        {@link net.sf.mmm.content.model.api.ContentFieldIF field} to set.
+   *        is the {@link ContentObject#getName() name} of the
+   *        {@link net.sf.mmm.content.model.api.ContentField field} to set.
    *        The field must be defined in the object's
    *        {@link #getContentClass() content-class}.
    * @param value
    *        is the new value for the field. It must be an instance of the
-   *        {@link net.sf.mmm.content.model.api.ContentFieldIF#getFieldType() type}
+   *        {@link net.sf.mmm.content.model.api.ContentField#getFieldType() type}
    *        declared by the
-   *        {@link net.sf.mmm.content.model.api.ContentFieldIF field}.
+   *        {@link net.sf.mmm.content.model.api.ContentField field}.
    * @throws NoSuchFieldException
    *         if the objects {@link #getContentClass() content-class} does not
-   *         have a {@link net.sf.mmm.content.model.api.ContentFieldIF field}
-   *         with the given {@link ContentObjectIF#getName() name}.
+   *         have a {@link net.sf.mmm.content.model.api.ContentField field}
+   *         with the given {@link ContentObject#getName() name}.
    * @throws PermissionDeniedException
    *         if you (the current user) does not have permission to perform the
    *         operation.

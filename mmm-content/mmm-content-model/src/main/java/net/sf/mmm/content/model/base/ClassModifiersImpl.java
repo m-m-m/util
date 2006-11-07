@@ -1,92 +1,92 @@
 /* $ Id: $ */
 package net.sf.mmm.content.model.base;
 
-import net.sf.mmm.content.model.api.ClassModifiersIF;
+import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
- * This is the base implementation of the {@link ClassModifiersIF} interface.
+ * This is the base implementation of the {@link ClassModifiersImpl} interface.
  * 
- * @see net.sf.mmm.content.model.api.ContentClassIF#getModifiers()
+ * @see net.sf.mmm.content.model.api.ContentClass#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ClassModifiers extends AbstractModifiers implements ClassModifiersIF {
+public class ClassModifiersImpl extends AbstractModifiers implements ClassModifiers {
 
   /** uid for serialization */
   private static final long serialVersionUID = 2603625618112910413L;
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
    * for a {@link #isSystem() system}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
    */
-  public static final ClassModifiersIF SYSTEM = new ClassModifiers(true, false, false, true);
+  public static final ClassModifiersImpl SYSTEM = new ClassModifiersImpl(true, false, false, true);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
    * for a {@link #isSystem() system}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that is
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * NOT {@link #isExtendable() extendable}.
    */
-  public static final ClassModifiersIF SYSTEM_UNEXTENDABLE = new ClassModifiers(true, false, false,
+  public static final ClassModifiersImpl SYSTEM_UNEXTENDABLE = new ClassModifiersImpl(true, false, false,
       false);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
-   * for a {@link net.sf.mmm.content.model.api.ModifiersIF#isSystem() system}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that is
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
+   * for a {@link net.sf.mmm.content.model.api.Modifiers#isSystem() system}
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * {@link #isFinal() final}.
    */
-  public static final ClassModifiersIF SYSTEM_FINAL = new ClassModifiers(true, true, false, false);
+  public static final ClassModifiersImpl SYSTEM_FINAL = new ClassModifiersImpl(true, true, false, false);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
-   * for a {@link net.sf.mmm.content.model.api.ModifiersIF#isSystem() system}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that is
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
+   * for a {@link net.sf.mmm.content.model.api.Modifiers#isSystem() system}
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * {@link #isAbstract() abstract}.
    */
-  public static final ClassModifiersIF SYSTEM_ABSTRACT = new ClassModifiers(true, false, true, true);
+  public static final ClassModifiersImpl SYSTEM_ABSTRACT = new ClassModifiersImpl(true, false, true, true);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
-   * for a {@link net.sf.mmm.content.model.api.ModifiersIF#isSystem() system}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class} that is
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
+   * for a {@link net.sf.mmm.content.model.api.Modifiers#isSystem() system}
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * {@link #isAbstract() abstract} and NOT {@link #isExtendable() extendable}.
    */
-  public static final ClassModifiersIF SYSTEM_ABSTRACT_UNEXTENDABLE = new ClassModifiers(true,
+  public static final ClassModifiersImpl SYSTEM_ABSTRACT_UNEXTENDABLE = new ClassModifiersImpl(true,
       false, true, false);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
    * for a {@link #isFinal() final}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
    */
-  public static final ClassModifiersIF FINAL = new ClassModifiers(false, true, false, false);
+  public static final ClassModifiersImpl FINAL = new ClassModifiersImpl(false, true, false, false);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
    * for a {@link #isAbstract() abstract}
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
    */
-  public static final ClassModifiersIF ABSTRACT = new ClassModifiers(false, false, true, true);
+  public static final ClassModifiersImpl ABSTRACT = new ClassModifiersImpl(false, false, true, true);
 
   /**
    * the
-   * {@link net.sf.mmm.content.model.api.ContentClassIF#getModifiers() modifiers}
+   * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
    * for a "normal"
-   * {@link net.sf.mmm.content.model.api.ContentClassIF content-class}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class}.
    */
-  public static final ClassModifiersIF NORMAL = new ClassModifiers(false, false, false, true);
+  public static final ClassModifiersImpl NORMAL = new ClassModifiersImpl(false, false, false, true);
 
   /** @see #isAbstract() */
   private final boolean abstractFlag;
@@ -104,7 +104,7 @@ public class ClassModifiers extends AbstractModifiers implements ClassModifiersI
    * @param isExtendable
    *        is the {@link #isExtendable() extendable-flag}.
    */
-  public ClassModifiers(boolean isSystem, boolean isFinal, boolean isAbstract, boolean isExtendable) {
+  public ClassModifiersImpl(boolean isSystem, boolean isFinal, boolean isAbstract, boolean isExtendable) {
 
     super(isSystem, isFinal);
     this.abstractFlag = isAbstract;
@@ -118,7 +118,7 @@ public class ClassModifiers extends AbstractModifiers implements ClassModifiersI
    * @param modifiers
    *        is the modifiers object to copy.
    */
-  public ClassModifiers(ClassModifiersIF modifiers) {
+  public ClassModifiersImpl(ClassModifiersImpl modifiers) {
 
     super(modifiers);
     this.abstractFlag = modifiers.isAbstract();
@@ -148,7 +148,7 @@ public class ClassModifiers extends AbstractModifiers implements ClassModifiersI
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ClassModifiersIF#isAbstract()
+   * @see net.sf.mmm.content.model.api.ClassModifiers#isAbstract()
    */
   public boolean isAbstract() {
 
@@ -156,7 +156,7 @@ public class ClassModifiers extends AbstractModifiers implements ClassModifiersI
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ClassModifiersIF#isExtendable()
+   * @see net.sf.mmm.content.model.api.ClassModifiers#isExtendable()
    */
   public boolean isExtendable() {
 

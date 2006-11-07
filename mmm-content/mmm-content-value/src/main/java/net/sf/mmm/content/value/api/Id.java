@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface IdIF extends Serializable {
+public interface Id extends Serializable {
 
   /**
    * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this

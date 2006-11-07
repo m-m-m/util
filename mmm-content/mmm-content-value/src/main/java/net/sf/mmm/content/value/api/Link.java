@@ -21,7 +21,7 @@ public interface Link {
    * 
    * @return the ID of the linked content-object.
    */
-  IdIF getTargetId();
+  Id getTargetId();
 
   /**
    * This method gets the classification of the link.

@@ -1,17 +1,17 @@
 /* $ Id: $ */
 package net.sf.mmm.content.model.base;
 
-import net.sf.mmm.content.model.api.ModifiersIF;
+import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
- * This is the base implementation of the {@link ModifiersIF} interface.
+ * This is the base implementation of the {@link Modifiers} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractModifiers implements ModifiersIF {
+public abstract class AbstractModifiers implements Modifiers {
 
   /** @see #isSystem() */
   private final boolean systemFlag;
@@ -40,13 +40,13 @@ public abstract class AbstractModifiers implements ModifiersIF {
    * @param modifiers
    *        is the modifiers object to copy.
    */
-  public AbstractModifiers(ModifiersIF modifiers) {
+  public AbstractModifiers(Modifiers modifiers) {
 
     this(modifiers.isSystem(), modifiers.isFinal());
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ModifiersIF#isSystem()
+   * @see net.sf.mmm.content.model.api.Modifiers#isSystem()
    */
   public boolean isSystem() {
 
@@ -54,7 +54,7 @@ public abstract class AbstractModifiers implements ModifiersIF {
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ModifiersIF#isFinal()
+   * @see net.sf.mmm.content.model.api.Modifiers#isFinal()
    */
   public boolean isFinal() {
 

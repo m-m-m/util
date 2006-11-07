@@ -11,36 +11,36 @@ import java.util.Map;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.base.AbstractContentObject;
-import net.sf.mmm.content.model.api.ClassModifiersIF;
-import net.sf.mmm.content.model.api.ContentClassIF;
-import net.sf.mmm.content.model.api.ContentFieldIF;
+import net.sf.mmm.content.model.api.ClassModifiers;
+import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.security.PermissionDeniedException;
 
 /**
- * This is the abstract base implementation of the {@link ContentClassIF}
+ * This is the abstract base implementation of the {@link ContentClass}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentClass extends AbstractContentObject implements ContentClassIF {
+public abstract class AbstractContentClass extends AbstractContentObject implements ContentClass {
 
   /** the super-class of this class */
-  private ContentClassIF superClass;
+  private ContentClass superClass;
 
   /** the list of direct sub-classes */
-  private final List<ContentClassIF> subClasses;
+  private final List<ContentClass> subClasses;
 
   /** @see #getSubClasses() */
-  private final List<ContentClassIF> subClassesView;
+  private final List<ContentClass> subClassesView;
 
   /** the map of content fields by name */
-  private final Map<String, ContentFieldIF> fields;
+  private final Map<String, ContentField> fields;
 
   /** @see #getDeclatedFields() */
-  private final Collection<ContentFieldIF> fieldCollection;
+  private final Collection<ContentField> fieldCollection;
 
   /** @see #getModifiers() */
-  private final ClassModifiersIF modifiers;
+  private final ClassModifiers modifiers;
 
   /**
    * The constructor.
@@ -49,20 +49,20 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * @param parentClass
    * @param classModifiers
    */
-  public AbstractContentClass(String className, ContentClassIF parentClass,
-      ClassModifiersIF classModifiers) {
+  public AbstractContentClass(String className, ContentClass parentClass,
+      ClassModifiers classModifiers) {
 
     super(className);
     this.superClass = parentClass;
     this.modifiers = classModifiers;
-    this.subClasses = new ArrayList<ContentClassIF>();
+    this.subClasses = new ArrayList<ContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
-    this.fields = new HashMap<String, ContentFieldIF>();
+    this.fields = new HashMap<String, ContentField>();
     this.fieldCollection = Collections.unmodifiableCollection(this.fields.values());
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getDeclaredFieldCount()
+   * @see net.sf.mmm.content.model.api.ContentClass#getDeclaredFieldCount()
    */
   public int getDeclaredFieldCount() {
 
@@ -70,39 +70,39 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getDeclatedField(java.lang.String)
+   * @see net.sf.mmm.content.model.api.ContentClass#getDeclatedField(java.lang.String)
    */
-  public ContentFieldIF getDeclatedField(String name) {
+  public ContentField getDeclatedField(String name) {
 
     return this.fields.get(name);
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getDeclatedFields()
+   * @see net.sf.mmm.content.model.api.ContentClass#getDeclatedFields()
    */
-  public Iterator<ContentFieldIF> getDeclatedFields() {
+  public Iterator<ContentField> getDeclatedFields() {
 
     return this.fieldCollection.iterator();
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getField(java.lang.String)
+   * @see net.sf.mmm.content.model.api.ContentClass#getField(java.lang.String)
    */
-  public ContentFieldIF getField(String name) {
+  public ContentField getField(String name) {
 
     // TODO Auto-generated method stub
     return null;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getFieldCount()
+   * @see net.sf.mmm.content.model.api.ContentClass#getFieldCount()
    */
   public int getFieldCount() {
 
     int result = 0;
-    Iterator<ContentFieldIF> declaredFields = this.fields.values().iterator();
+    Iterator<ContentField> declaredFields = this.fields.values().iterator();
     while (declaredFields.hasNext()) {
-      ContentFieldIF myField = declaredFields.next();
+      ContentField myField = declaredFields.next();
       if (myField.getSuperField() == null) {
         result++;
       }
@@ -117,41 +117,41 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getFields()
+   * @see net.sf.mmm.content.model.api.ContentClass#getFields()
    */
-  public Iterator<ContentFieldIF> getFields() {
+  public Iterator<ContentField> getFields() {
 
     return new ContentFieldIterator(this);
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getModifiers()
+   * @see net.sf.mmm.content.model.api.ContentClass#getModifiers()
    */
-  public ClassModifiersIF getModifiers() {
+  public ClassModifiers getModifiers() {
 
     return this.modifiers;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getSuperClass()
+   * @see net.sf.mmm.content.model.api.ContentClass#getSuperClass()
    */
-  public ContentClassIF getSuperClass() {
+  public ContentClass getSuperClass() {
 
     return this.superClass;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#getSubClasses()
+   * @see net.sf.mmm.content.model.api.ContentClass#getSubClasses()
    */
-  public List<ContentClassIF> getSubClasses() {
+  public List<ContentClass> getSubClasses() {
 
     return this.subClassesView;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#isSubClassOf(net.sf.mmm.content.model.api.ContentClassIF)
+   * @see net.sf.mmm.content.model.api.ContentClass#isSubClassOf(net.sf.mmm.content.model.api.ContentClass)
    */
-  public boolean isSubClassOf(ContentClassIF contentClass) {
+  public boolean isSubClassOf(ContentClass contentClass) {
 
     if (this.superClass == null) {
       // root-class can NOT be a sub-class
@@ -166,15 +166,15 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClassIF#isSuperClassOf(net.sf.mmm.content.model.api.ContentClassIF)
+   * @see net.sf.mmm.content.model.api.ContentClass#isSuperClassOf(net.sf.mmm.content.model.api.ContentClass)
    */
-  public boolean isSuperClassOf(ContentClassIF contentClass) {
+  public boolean isSuperClassOf(ContentClass contentClass) {
 
     return contentClass.isSubClassOf(this);
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#isClass()
+   * @see net.sf.mmm.content.model.api.ContentReflectionObject#isClass()
    */
   public boolean isClass() {
 
@@ -182,7 +182,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObjectIF#isDeletedFlagSet()
+   * @see net.sf.mmm.content.model.api.ContentReflectionObject#isDeletedFlagSet()
    */
   public boolean isDeletedFlagSet() {
 
@@ -205,7 +205,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObjectIF#getFieldValue(java.lang.String)
+   * @see net.sf.mmm.content.api.ContentObject#getFieldValue(java.lang.String)
    */
   @Override
   public Object getFieldValue(String fieldName) throws NoSuchFieldException,

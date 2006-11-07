@@ -8,10 +8,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.sf.mmm.content.value.api.MetaDataKey;
-import net.sf.mmm.content.value.api.MutableMetaDataSetIF;
+import net.sf.mmm.content.value.api.MutableMetaDataSet;
 
 /**
- * This is the default implementation of the {@link MutableMetaDataSetIF}
+ * This is the default implementation of the {@link MutableMetaDataSet}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -43,7 +43,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
    * @param metaDataToCopy
    *        is a map containing the meta-data.
    */
-  public MetaDataSetImpl(MutableMetaDataSetIF metaDataToCopy) {
+  public MetaDataSetImpl(MutableMetaDataSet metaDataToCopy) {
 
     this();
     Iterator<MetaDataKey> keyIterator = metaDataToCopy.getKeys().iterator();
@@ -70,7 +70,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableMetaDataSetIF#setMetaData(net.sf.mmm.content.value.api.MetaDataKey,
+   * @see net.sf.mmm.content.value.api.MutableMetaDataSet#setMetaData(net.sf.mmm.content.value.api.MetaDataKey,
    *      java.lang.String)
    */
   public String setMetaData(MetaDataKey key, String value) {
@@ -79,7 +79,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableMetaDataSetIF#unsetMetaData(net.sf.mmm.content.value.api.MetaDataKey)
+   * @see net.sf.mmm.content.value.api.MutableMetaDataSet#unsetMetaData(net.sf.mmm.content.value.api.MetaDataKey)
    */
   public String unsetMetaData(MetaDataKey key) {
 

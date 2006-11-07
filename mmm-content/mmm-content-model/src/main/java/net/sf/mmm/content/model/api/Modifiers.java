@@ -5,14 +5,14 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
 
 /**
  * This is the interface for the modifiers of a
- * {@link net.sf.mmm.content.model.api.ContentReflectionObjectIF}.
+ * {@link net.sf.mmm.content.model.api.ContentReflectionObject}.
  * 
- * @see net.sf.mmm.content.model.api.FieldModifiersIF
- * @see net.sf.mmm.content.model.api.ClassModifiersIF
+ * @see net.sf.mmm.content.model.api.FieldModifiers
+ * @see net.sf.mmm.content.model.api.ClassModifiers
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ModifiersIF extends XmlSerializable {
+public interface Modifiers extends XmlSerializable {
 
   /**
    * the attribute for the {@link #isSystem() system-flag}.

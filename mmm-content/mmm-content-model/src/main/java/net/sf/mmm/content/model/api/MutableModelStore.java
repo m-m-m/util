@@ -4,12 +4,12 @@ package net.sf.mmm.content.model.api;
 import net.sf.mmm.term.api.Term;
 
 /**
- * This interface extends the {@link ContentModelReadAccessIF}interface with
+ * This interface extends the {@link ContentModelReadAccess}interface with
  * methods to edit the content model.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface MutableModelStoreIF extends ContentModelReadAccessIF {
+public interface MutableModelStore extends ContentModelReadAccess {
 
   /**
    * This method creates a sub-class of the given class with the specified id.
@@ -32,7 +32,7 @@ public interface MutableModelStoreIF extends ContentModelReadAccessIF {
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
-  ContentClassIF createClass(ContentClassIF superClass, String name, boolean isAbstract,
+  ContentClass createClass(ContentClass superClass, String name, boolean isAbstract,
       boolean isFinal) throws ContentModelException;
 
   /**
@@ -55,7 +55,7 @@ public interface MutableModelStoreIF extends ContentModelReadAccessIF {
    *         <li>the given class already has a field with the given name</li>
    *         </ul>
    */
-  ContentFieldIF createField(ContentClassIF declaringClass, String name, Class type, boolean isFinal)
+  ContentField createField(ContentClass declaringClass, String name, Class type, boolean isFinal)
       throws ContentModelException;
 
   /**
@@ -83,7 +83,7 @@ public interface MutableModelStoreIF extends ContentModelReadAccessIF {
    *         </li>
    *         </ul>
    */
-  ContentFieldIF createTransientField(ContentClassIF declaringClass, String name, Class type,
+  ContentField createTransientField(ContentClass declaringClass, String name, Class type,
       boolean isFinal, Term term) throws ContentModelException;
 
   /**
@@ -102,7 +102,7 @@ public interface MutableModelStoreIF extends ContentModelReadAccessIF {
    *         <li>the given class or field has the system flag set</li>
    *         </ul>
    */
-  void setDeleted(ContentReflectionObjectIF classOrField, boolean deleteFlag)
+  void setDeleted(ContentReflectionObject classOrField, boolean deleteFlag)
       throws ContentModelException;
 
 }

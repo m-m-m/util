@@ -8,51 +8,51 @@ import net.sf.mmm.util.event.EventSource;
  * This is the interface for a service that provides access to the content
  * model. <br>
  * The content model is used to reflect the different types of
- * {@link net.sf.mmm.content.api.ContentObjectIF content-object}s. It is used
+ * {@link net.sf.mmm.content.api.ContentObject content-object}s. It is used
  * for generic access to the content (UI for rendering editors, persistence for
  * O/R mapping, etc.).
  * 
- * @see net.sf.mmm.content.model.api.ContentClassIF
+ * @see net.sf.mmm.content.model.api.ContentClass
  * 
  * An implementation of this service may make assumptions (about the
  * implementations of the
- * {@link net.sf.mmm.content.api.ContentObjectIF content-object}. This means
+ * {@link net.sf.mmm.content.api.ContentObject content-object}. This means
  * that it is allowed to cast the implementations and bypass the API if
  * neccessary.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentModelServiceIF extends ContentModelReadAccessIF {
+public interface ContentModelService extends ContentModelReadAccess {
 
   /** the unique identifier of this service */
-  String SERVICE_ID = ContentModelServiceIF.class.getName();
+  String SERVICE_ID = ContentModelService.class.getName();
 
   /** the root tag-name of the content-model XML representation */
   String XML_TAG_ROOT = "model";
 
   /**
-   * the tag-name of a {@link ContentClassIF content-class} in the content-model
+   * the tag-name of a {@link ContentClass content-class} in the content-model
    * XML representation
    */
-  String XML_TAG_CLASS = ContentClassIF.NAME_CLASS;
+  String XML_TAG_CLASS = ContentClass.NAME_CLASS;
 
   /**
-   * the tag-name of a {@link ContentClassIF content-class} in the content-model
+   * the tag-name of a {@link ContentClass content-class} in the content-model
    * XML representation
    */
-  String XML_ATR_CLASS_NAME = ContentFieldIF.NAME_NAME;
+  String XML_ATR_CLASS_NAME = ContentField.NAME_NAME;
 
   /**
-   * the tag-name of a {@link ContentFieldIF content-field} in the content-model
+   * the tag-name of a {@link ContentField content-field} in the content-model
    * XML representation
    */
-  String XML_TAG_FIELD = ContentClassIF.NAME_FIELD;
+  String XML_TAG_FIELD = ContentClass.NAME_FIELD;
 
   /**
    * This method gets the event registrar where listeners can be registered so
    * they receive events about changes of the content model. <br>
    * 
-   * @see ContentModelWriteAccessIF
+   * @see ContentModelWriteAccess
    * 
    * Instead of extending the {@link EventSource} interface an instance of the
    * interface is returned by this method. This gives more flexibility e.g. to

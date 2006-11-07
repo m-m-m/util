@@ -1,59 +1,59 @@
 /* $ Id: $ */
 package net.sf.mmm.content.model.base;
 
-import net.sf.mmm.content.model.api.FieldModifiersIF;
+import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
- * This is the base implementation of the {@link FieldModifiersIF} interface.
+ * This is the base implementation of the {@link FieldModifiersImpl} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class FieldModifiers extends AbstractModifiers implements FieldModifiersIF {
+public class FieldModifiersImpl extends AbstractModifiers implements FieldModifiers {
 
   /** uid for serialization */
   private static final long serialVersionUID = -7486568372216293843L;
 
   /** the modifier of a "normal" field */
-  public static final FieldModifiers NORMAL = new FieldModifiers(false, false, false, false, false);
+  public static final FieldModifiersImpl NORMAL = new FieldModifiersImpl(false, false, false, false, false);
 
   /** the modifier of a final field */
-  public static final FieldModifiers FINAL = new FieldModifiers(false, true, false, false, false);
+  public static final FieldModifiersImpl FINAL = new FieldModifiersImpl(false, true, false, false, false);
 
   /** the modifier of a final and immutable field */
-  public static final FieldModifiers FINAL_IMMUTABLE = new FieldModifiers(false, true, true, false,
+  public static final FieldModifiersImpl FINAL_IMMUTABLE = new FieldModifiersImpl(false, true, true, false,
       false);
 
   /** the modifier of a static field */
-  public static final FieldModifiers STATIC = new FieldModifiers(false, false, false, true, false);
+  public static final FieldModifiersImpl STATIC = new FieldModifiersImpl(false, false, false, true, false);
 
   /** the modifier of a static and final field */
-  public static final FieldModifiers STATIC_FINAL = new FieldModifiers(false, true, false, true,
+  public static final FieldModifiersImpl STATIC_FINAL = new FieldModifiersImpl(false, true, false, true,
       false);
 
   /** the modifier of a static and immutable field */
-  public static final FieldModifiers STATIC_IMMUTABLE = new FieldModifiers(false, false, true,
+  public static final FieldModifiersImpl STATIC_IMMUTABLE = new FieldModifiersImpl(false, false, true,
       true, false);
 
   /** the modifier of a static, final and immutable field */
-  public static final FieldModifiers STATIC_FINAL_IMMUTABLE = new FieldModifiers(false, true, true,
+  public static final FieldModifiersImpl STATIC_FINAL_IMMUTABLE = new FieldModifiersImpl(false, true, true,
       true, false);
 
   /** the modifier of a transient (and immutable) field */
-  public static final FieldModifiers TRANSIENT = new FieldModifiers(false, false, true, false, true);
+  public static final FieldModifiersImpl TRANSIENT = new FieldModifiersImpl(false, false, true, false, true);
 
   /** the modifier of a transient field */
-  public static final FieldModifiers FINAL_TRANSIENT = new FieldModifiers(false, true, true, false,
+  public static final FieldModifiersImpl FINAL_TRANSIENT = new FieldModifiersImpl(false, true, true, false,
       true);
 
   /** the modifier of a final system field */
-  public static final FieldModifiers SYSTEM_FINAL = new FieldModifiers(true, true, false, false,
+  public static final FieldModifiersImpl SYSTEM_FINAL = new FieldModifiersImpl(true, true, false, false,
       false);
 
   /** the modifier of a final and immutable system field */
-  public static final FieldModifiers SYSTEM_FINAL_IMMUTABLE = new FieldModifiers(true, true, true,
+  public static final FieldModifiersImpl SYSTEM_FINAL_IMMUTABLE = new FieldModifiersImpl(true, true, true,
       false, false);
 
   /** @see #isImmutable() */
@@ -77,7 +77,7 @@ public class FieldModifiers extends AbstractModifiers implements FieldModifiersI
    * @param isTransient
    *        is the value for the {@link #isTransient() transient-flag}.
    */
-  public FieldModifiers(boolean isSystem, boolean isFinal, boolean isImmutable, boolean isStatic,
+  public FieldModifiersImpl(boolean isSystem, boolean isFinal, boolean isImmutable, boolean isStatic,
       boolean isTransient) {
 
     super(isSystem, isFinal);
@@ -93,7 +93,7 @@ public class FieldModifiers extends AbstractModifiers implements FieldModifiersI
    * @param modifiers
    *        is the modifiers object to copy.
    */
-  public FieldModifiers(FieldModifiersIF modifiers) {
+  public FieldModifiersImpl(FieldModifiersImpl modifiers) {
 
     super(modifiers);
     this.immutableFlag = modifiers.isImmutable();
@@ -117,7 +117,7 @@ public class FieldModifiers extends AbstractModifiers implements FieldModifiersI
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.FieldModifiersIF#isImmutable()
+   * @see net.sf.mmm.content.model.api.FieldModifiers#isImmutable()
    */
   public boolean isImmutable() {
 
@@ -128,7 +128,7 @@ public class FieldModifiers extends AbstractModifiers implements FieldModifiersI
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.FieldModifiersIF#isTransient()
+   * @see net.sf.mmm.content.model.api.FieldModifiers#isTransient()
    */
   public boolean isTransient() {
 
@@ -136,7 +136,7 @@ public class FieldModifiers extends AbstractModifiers implements FieldModifiersI
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.FieldModifiersIF#isStatic()
+   * @see net.sf.mmm.content.model.api.FieldModifiers#isStatic()
    */
   public boolean isStatic() {
 

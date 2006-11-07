@@ -1,18 +1,18 @@
 /* $Id$ */
 package net.sf.mmm.content.value.impl;
 
-import net.sf.mmm.content.value.api.VersionIF;
+import net.sf.mmm.content.value.api.Version;
 import net.sf.mmm.util.BasicUtil;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the implementation of the {@link VersionIF} interface.
+ * This is the implementation of the {@link Version} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class VersionImpl implements VersionIF {
+public final class VersionImpl implements Version {
 
   /** the delimiter used in the string representation */
   private static final char SEPARATOR_CHAR = '.';
@@ -44,13 +44,13 @@ public final class VersionImpl implements VersionIF {
    * @param userComment
    *        is the comment of the user who created this version.
    * @param majorVersion
-   *        is the {@link VersionIF#getMajorVersion() major-version} number.
+   *        is the {@link Version#getMajorVersion() major-version} number.
    * @param minorVersion
-   *        is the {@link VersionIF#getMinorVersion() minor-version} number
+   *        is the {@link Version#getMinorVersion() minor-version} number
    * @param milliVersion
-   *        is the {@link VersionIF#getMilliVersion() milli-version} number.
+   *        is the {@link Version#getMilliVersion() milli-version} number.
    * @param microVersion
-   *        is the {@link VersionIF#getMicroVersion() micro-version} number.
+   *        is the {@link Version#getMicroVersion() micro-version} number.
    * @param versionSuffix
    *        is the suffix appended to the version.
    */
@@ -236,7 +236,7 @@ public final class VersionImpl implements VersionIF {
    * 
    * @param versionAsString
    *        is the version as String as retrieved by
-   *        {@link VersionIF#toString()}.
+   *        {@link Version#toString()}.
    * @throws ValueParseException
    *         if the given string is invalid and could not be parsed.
    */
@@ -300,8 +300,8 @@ public final class VersionImpl implements VersionIF {
   @Override
   public boolean equals(Object other) {
 
-    if ((other != null) && (other instanceof VersionIF)) {
-      VersionIF otherVersion = (VersionIF) other;
+    if ((other != null) && (other instanceof Version)) {
+      Version otherVersion = (Version) other;
       if (getMajorVersion() == otherVersion.getMajorVersion()
           && getMinorVersion() == otherVersion.getMinorVersion()
           && getMicroVersion() == otherVersion.getMicroVersion()) {
@@ -329,7 +329,7 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.VersionIF#getMajorVersion()
+   * @see net.sf.mmm.content.value.api.Version#getMajorVersion()
    */
   public int getMajorVersion() {
 
@@ -337,7 +337,7 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.VersionIF#getMinorVersion()
+   * @see net.sf.mmm.content.value.api.Version#getMinorVersion()
    */
   public int getMinorVersion() {
 
@@ -348,7 +348,7 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.VersionIF#getMilliVersion()
+   * @see net.sf.mmm.content.value.api.Version#getMilliVersion()
    */
   public int getMilliVersion() {
 
@@ -359,7 +359,7 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.VersionIF#getMicroVersion()
+   * @see net.sf.mmm.content.value.api.Version#getMicroVersion()
    */
   public int getMicroVersion() {
 
@@ -380,7 +380,7 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.VersionIF#getComment()
+   * @see net.sf.mmm.content.value.api.Version#getComment()
    */
   public String getComment() {
 
@@ -434,9 +434,9 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see net.sf.mmm.content.api.value.VersionIF#isHigherThan(net.sf.mmm.content.api.value.VersionIF)
+   * @see net.sf.mmm.content.api.value.Version#isHigherThan(net.sf.mmm.content.api.value.Version)
    */
-  public boolean isHigherThan(VersionIF other) {
+  public boolean isHigherThan(Version other) {
 
     if (getMajorVersion() == other.getMajorVersion()) {
       if (getMinorVersion() == other.getMinorVersion()) {
@@ -458,7 +458,7 @@ public final class VersionImpl implements VersionIF {
   }
 
   /**
-   * @see VersionIF#toString()
+   * @see Version#toString()
    */
   @Override
   public String toString() {
