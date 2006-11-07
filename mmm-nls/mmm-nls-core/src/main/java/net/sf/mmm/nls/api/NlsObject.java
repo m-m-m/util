@@ -4,7 +4,7 @@ package net.sf.mmm.nls.api;
 /**
  * This is the interface for an object with native language support. Such object
  * be can {@link #toNlsMessage() converted} to an
- * {@link NlsMessage i18n message} describing the object analog to its
+ * {@link NlsMessage i18n-message} describing the object analog to its
  * {@link Object#toString() string representation}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
