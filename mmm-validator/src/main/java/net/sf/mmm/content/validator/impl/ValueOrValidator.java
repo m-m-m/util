@@ -14,48 +14,50 @@ import net.sf.mmm.nls.base.NlsMessageImpl;
  */
 public class ValueOrValidator extends AbstractCompositeValueValidator {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = -9206244114248240571L;
+  /** uid for serialization */
+  private static final long serialVersionUID = -9206244114248240571L;
 
-    /**
-     * The constructor.
-     */
-    public ValueOrValidator() {
+  /**
+   * The constructor.
+   */
+  public ValueOrValidator() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
+   *      int, int)
+   */
+  @Override
+  protected ValidationResult getResult(ValidationResult[] details, int detailCount, int succeedCount) {
+
+    if (succeedCount >= 1) {
+      return ValidationResultImpl.VALID_RESULT;
+    } else {
+      // TODO: i18n
+      return new ValidationResultImpl(new NlsMessageImpl(
+          "At least one of the \"{0}\" error(s) must be fixed:", Integer.valueOf(detailCount)),
+          details, detailCount);
     }
+  }
 
-    /**
-     * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
-     *      int, int)
-     */
-    protected ValidationResult getResult(ValidationResult[] details, int detailCount,
-            int succeedCount) {
+  /**
+   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getMaximumRequiredValidChildren()
+   */
+  @Override
+  protected int getMaximumRequiredValidChildren() {
 
-        if (succeedCount >= 1) {
-            return ValidationResultImpl.VALID_RESULT;
-        } else {
-            // TODO: i18n
-            return new ValidationResultImpl(new NlsMessageImpl(
-                    "At least one of the \"{0}\" error(s) must be fixed:", detailCount), details,
-                    detailCount);
-        }
-    }
+    return 1;
+  }
 
-    /**
-     * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getMaximumRequiredValidChildren()
-     */
-    protected int getMaximumRequiredValidChildren() {
+  /**
+   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResultIfEmpty()
+   */
+  @Override
+  protected ValidationResult getResultIfEmpty() {
 
-        return 1;
-    }
-
-    /**
-     * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResultIfEmpty()
-     */
-    protected ValidationResult getResultIfEmpty() {
-
-        // TODO: i18n
-        return new ValidationResultImpl("OR-Validator needs at least one child validator to succeed!");
-    }
+    // TODO: i18n
+    return new ValidationResultImpl("OR-Validator needs at least one child validator to succeed!");
+  }
 }

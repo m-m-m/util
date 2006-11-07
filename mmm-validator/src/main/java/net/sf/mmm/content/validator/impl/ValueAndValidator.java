@@ -14,30 +14,30 @@ import net.sf.mmm.nls.base.NlsMessageImpl;
  */
 public class ValueAndValidator extends AbstractCompositeValueValidator {
 
-    /** uid for serialization */
-    private static final long serialVersionUID = 7866624963054137926L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 7866624963054137926L;
 
-    /**
-     * The constructor.
-     */
-    public ValueAndValidator() {
+  /**
+   * The constructor.
+   */
+  public ValueAndValidator() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
+   *      int, int)
+   */
+  @Override
+  protected ValidationResult getResult(ValidationResult[] details, int detailCount, int succeedCount) {
+
+    if (succeedCount == getChildCount()) {
+      return ValidationResultImpl.VALID_RESULT;
+    } else {
+      // TODO: i18n
+      return new ValidationResultImpl(new NlsMessageImpl("\"{0}\" error(s):", Integer
+          .valueOf(detailCount)), details, detailCount);
     }
-
-    /**
-     * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
-     *      int, int)
-     */
-    protected ValidationResult getResult(ValidationResult[] details, int detailCount,
-            int succeedCount) {
-
-        if (succeedCount == getChildCount()) {
-            return ValidationResultImpl.VALID_RESULT;
-        } else {
-            // TODO: i18n
-            return new ValidationResultImpl(new NlsMessageImpl("\"{0}\" error(s):", detailCount), details,
-                    detailCount);
-        }
-    }
+  }
 }
