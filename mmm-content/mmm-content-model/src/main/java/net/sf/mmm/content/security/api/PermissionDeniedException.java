@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.content.security;
+package net.sf.mmm.content.security.api;
 
 import net.sf.mmm.content.NlsResourceBundle;
 import net.sf.mmm.content.api.ContentObject;

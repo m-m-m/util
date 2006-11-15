@@ -40,37 +40,37 @@ public interface ContentClass extends ContentReflectionObject {
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentSecurityObjectIF}.
+   * {@link net.sf.mmm.content.api.security.ContentSecurityObject}.
    */
   String NAME_SECURITY = "SecurityObject";
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentPrincipalIF}.
+   * {@link net.sf.mmm.content.api.security.ContentPrincipal}.
    */
   String NAME_PRINCIPAL = "Principal";
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentUserIF}.
+   * {@link net.sf.mmm.content.api.security.ContentUser}.
    */
   String NAME_USER = "User";
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentGroupIF}.
+   * {@link net.sf.mmm.content.api.security.ContentGroup}.
    */
   String NAME_GROUP = "Group";
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentPermissionIF}.
+   * {@link net.sf.mmm.content.api.security.ContentPermission}.
    */
   String NAME_PERMISSION = "Permission";
 
   /**
    * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentActionIF}.
+   * {@link net.sf.mmm.content.api.security.ContentAction}.
    */
   String NAME_ACTION = "Action";
 
@@ -113,26 +113,30 @@ public interface ContentClass extends ContentReflectionObject {
   Iterator<ContentField> getDeclatedFields();
 
   /**
-   * This method gets the declared field with the given name. The field must be
-   * defined in this content-class (that do not exist in the
-   * {@link #getSuperClass() super-class}) and inherited fields that are
-   * overriden by this class. An inherited field can be overridden (if supported
-   * by the {@link ContentModelService content-model}) in order to declare it
-   * more specific meaning that the type of the field is a subtype of the field
-   * that is overriden or the validator is more restrictive.<br>
-   * An inherited field can be identified via
-   * {@link ContentField#getDeclaringClass()}
+   * This method gets the declared field with the given
+   * {@link ContentField#getName() name}. Declared means that the field is
+   * {@link ContentField#getInitiallyDefiningClass() initially defined} or
+   * overriden in this class.<br>
+   * An inherited field can be overridden (if supported by the
+   * {@link ContentModelService content-model}) in order to declare it more
+   * specific (typically the {@link ContentField#getFieldType() field-type} is
+   * specialized). Such field can be identified via
+   * {@link ContentField#getInitiallyDefiningClass()}.
+   * 
+   * @see #getField(String)
    * 
    * @param name
    *        is the name of the requested field of this class.
    * @return the field with the given name or <code>null</code> if no such
    *         field is declared by this class.
    */
-  ContentField getDeclatedField(String name);
+  ContentField getDeclaredField(String name);
 
   /**
-   * This method gets the field with the given name. The field must be defined
-   * in this class or be inherited (defined in one of the super-classes).
+   * This method gets the field with the given
+   * {@link ContentField#getName() name}. A field is eigther
+   * {@link #getDeclaredFieldCount() declared} in this class or inherited
+   * from a {@link #getSuperClass() super-class}.
    * 
    * @param name
    *        is the name of the requested field of this class.

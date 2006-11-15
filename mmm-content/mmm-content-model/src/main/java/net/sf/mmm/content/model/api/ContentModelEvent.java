@@ -53,7 +53,7 @@ public final class ContentModelEvent implements ChangeEvent {
     super();
     this.type = changeType;
     this.contentField = changedField;
-    this.contentClass = this.contentField.getContentClass();
+    this.contentClass = this.contentField.getDeclaringClass();
   }
 
   /**

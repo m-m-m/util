@@ -1,15 +1,17 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.api.event;
 
+import net.sf.mmm.util.event.ChangeEvent;
+
 /**
  * This is the abstract base class of all events sent from models of the UI.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class UIModelEvent {
+public abstract class UIModelEvent implements ChangeEvent {
 
   /** the event type */
-  private EventType type;
+  private Type type;
 
   /**
    * The constructor.
@@ -17,18 +19,16 @@ public abstract class UIModelEvent {
    * @param eventType
    *        is the type for the new event.
    */
-  protected UIModelEvent(EventType eventType) {
+  protected UIModelEvent(Type eventType) {
 
     super();
     this.type = eventType;
   }
 
   /**
-   * This method gets the type of event.
-   * 
-   * @return the event type (must be one of the TYPE_* constants).
+   * @see net.sf.mmm.util.event.ChangeEvent#getType()
    */
-  public EventType getType() {
+  public Type getType() {
 
     return this.type;
   }

@@ -26,7 +26,7 @@ public class UITreeModelEvent<N> extends UIModelEvent {
    * @param node
    *        is the node that changed.
    */
-  public UITreeModelEvent(EventType eventType, N node) {
+  public UITreeModelEvent(Type eventType, N node) {
 
     super(eventType);
     this.treeNode = node;

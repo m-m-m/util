@@ -10,9 +10,13 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
  * close the nodes of the tree that are no leaves. Further he can select one or
  * multiple nodes (depending on selection type).
  * 
+ * @param <N>
+ *        is the templated type of the tree-nodes that can be
+ *        {@link #getSelection() selected} with this widget.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITree extends UIWidget, UIReadMultiSelectionFlag {
+public interface UITree<N> extends UIWidget, UIReadMultiSelectionFlag {
 
   /** the type of this object */
   String TYPE = "Tree";
@@ -22,7 +26,7 @@ public interface UITree extends UIWidget, UIReadMultiSelectionFlag {
    * 
    * @return the tree model.
    */
-  UITreeModel getModel();
+  UITreeModel<N> getModel();
 
   /**
    * This method sets the model of this tree.
@@ -30,7 +34,7 @@ public interface UITree extends UIWidget, UIReadMultiSelectionFlag {
    * @param newModel
    *        is the new tree model to set.
    */
-  void setModel(UITreeModel newModel);
+  void setModel(UITreeModel<N> newModel);
 
   /**
    * This method gets the selected
@@ -38,7 +42,7 @@ public interface UITree extends UIWidget, UIReadMultiSelectionFlag {
    * 
    * @return the selected node or <code>null</code> if no node is selected.
    */
-  Object getSelection();
+  N getSelection();
 
   /**
    * This method gets all selected nodes.
@@ -48,6 +52,6 @@ public interface UITree extends UIWidget, UIReadMultiSelectionFlag {
    * @return an array containing all selected nodes. The array will have a
    *         <code>length</code> of zero if no node is selected.
    */
-  Object[] getSelections();
+  N[] getSelections();
 
 }

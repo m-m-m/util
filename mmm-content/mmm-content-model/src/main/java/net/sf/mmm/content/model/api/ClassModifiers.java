@@ -39,14 +39,14 @@ public interface ClassModifiers extends Modifiers {
    * This method determines if the class can be
    * {@link ContentModelWriteAccess#createClass(ContentClass, String, ClassModifiers) extendet}
    * by the user.<br>
-   * This is the same as {@link Modifiers#isFinal() final}. But additionally a
+   * A {@link Modifiers#isFinal() final} class is NOT extendable. In advance a
    * {@link Modifiers#isSystem() system} class that is NOT
-   * {@link Modifiers#isFinal() final} can be unextendable (this method will
-   * return <code>false</code> then). Such class will usually have
-   * {@link ContentClass#getSubClasses() sub-classes} (that are all system
-   * classes) but may not allow the user to directly extend that class. In that
-   * case this method returns <code>true</code> even though
-   * {@link Modifiers#isFinal()} will return <code>false</code>.
+   * {@link Modifiers#isFinal() final} can have
+   * {@link ContentClass#getSubClasses() sub-classes} but may NOT be extendable.
+   * These {@link ContentClass#getSubClasses() sub-classes} will also be
+   * {@link Modifiers#isSystem() system} classes. In that case this method
+   * returns <code>false</code> even though {@link #isFinal()} will return
+   * <code>false</code>.
    * 
    * @return <code>true</code> if the class can be extended by the user,
    *         <code>false</code> otherwise.

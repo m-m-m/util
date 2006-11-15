@@ -2,11 +2,11 @@ package net.sf.mmm.ui.toolkit.impl.swt.model;
 
 import org.eclipse.swt.widgets.List;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncListAccess;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel}
@@ -105,15 +105,15 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
     int start = this.event.getStartIndex();
     int end = this.event.getEndIndex();
     // TODO synchonization!!!
-    if (this.event.getType() == EventType.ADD) {
+    if (this.event.getType() == Type.ADD) {
       for (int i = start; i <= end; i++) {
         // TODO maybe define method that performs the string conversion
         list.add(this.model.getElementAsString(i), i);
       }
-    } else if (this.event.getType() == EventType.REMOVE) {
+    } else if (this.event.getType() == Type.REMOVE) {
       // for (int i = start; i <= end; i++) { list.remove(i); }
       list.remove(start, end);
-    } else if (this.event.getType() == EventType.UPDATE) {
+    } else if (this.event.getType() == Type.UPDATE) {
       for (int i = start; i <= end; i++) {
         // TODO maybe define method that performs the string conversion
         list.setItem(i, this.model.getElementAsString(i));

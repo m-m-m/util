@@ -160,10 +160,13 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    */
   public boolean isExtendable() {
 
-    if (isSystem() && !isFinal()) {
+    if (isFinal()) {
+      return false;
+    }
+    if (isSystem()) {
       return this.extendableFlag;
     }
-    return isFinal();
+    return true;
   }
 
   /**

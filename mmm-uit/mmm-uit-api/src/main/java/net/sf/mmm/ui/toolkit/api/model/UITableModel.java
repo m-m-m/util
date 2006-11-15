@@ -8,12 +8,12 @@ import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
  * 
  * @see net.sf.mmm.ui.toolkit.api.widget.UITable
  * 
- * @param <E>
+ * @param <C>
  *        is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITableModel<E> {
+public interface UITableModel<C> {
 
   /**
    * This method registers the given change listener to this model.
@@ -57,7 +57,7 @@ public interface UITableModel<E> {
    * @return the value at the specified cell. For an empty cell
    *         <code>null</code> can be returned.
    */
-  E getCellValue(int rowIndex, int columnIndex);
+  C getCellValue(int rowIndex, int columnIndex);
 
   /**
    * This method gets the value of the specified cell as string.

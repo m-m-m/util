@@ -3,10 +3,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 
 import javax.swing.AbstractListModel;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
@@ -59,12 +59,12 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
    */
   public void listModelChanged(UIListModelEvent event) {
 
-    if (event.getType() == EventType.ADD) {
+    if (event.getType() == Type.ADD) {
       fireIntervalAdded(this, event.getStartIndex(), event.getEndIndex());
-    } else if (event.getType() == EventType.REMOVE) {
+    } else if (event.getType() == Type.REMOVE) {
       fireIntervalRemoved(this, event.getStartIndex(), event.getEndIndex());
       System.out.println(event.getStartIndex() + "-" + event.getEndIndex());
-    } else if (event.getType() == EventType.UPDATE) {
+    } else if (event.getType() == Type.UPDATE) {
       fireContentsChanged(this, event.getStartIndex(), event.getEndIndex());
     }
   }

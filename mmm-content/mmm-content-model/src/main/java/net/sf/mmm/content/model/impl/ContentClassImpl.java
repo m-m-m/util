@@ -3,6 +3,7 @@ package net.sf.mmm.content.model.impl;
 
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.value.api.Id;
@@ -19,24 +20,33 @@ public class ContentClassImpl extends AbstractContentClass {
   private static final long serialVersionUID = -5047411761519800723L;
 
   /** @see #NAME_ROOT */
-  public static final ContentClassImpl CLASS_ROOT = new ContentClassImpl(NAME_ROOT, null,
-      ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, IdImpl.ID_CLASS_ROOT);
+  public static final ContentClassImpl CLASS_ROOT = new ContentClassImpl(IdImpl.ID_CLASS_ROOT,
+      NAME_ROOT, null, ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE);
 
   /** @see #NAME_REFLECTION */
-  public static final ContentClassImpl CLASS_REFLECTION = new ContentClassImpl(NAME_REFLECTION,
-      CLASS_ROOT, ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, IdImpl.ID_CLASS_REFELCTION);
+  public static final ContentClassImpl CLASS_REFLECTION = new ContentClassImpl(
+      IdImpl.ID_CLASS_REFELCTION, NAME_REFLECTION, CLASS_ROOT,
+      ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE);
 
   /** @see #NAME_CLASS */
-  public static final ContentClassImpl CLASS_CLASS = new ContentClassImpl(NAME_CLASS,
-      CLASS_REFLECTION, ClassModifiersImpl.SYSTEM_FINAL, IdImpl.ID_CLASS_CLASS);
+  public static final ContentClassImpl CLASS_CLASS = new ContentClassImpl(IdImpl.ID_CLASS_CLASS,
+      NAME_CLASS, CLASS_REFLECTION, ClassModifiersImpl.SYSTEM_FINAL);
 
   /** @see #NAME_FIELD */
-  public static final ContentClassImpl CLASS_FIELD = new ContentClassImpl(NAME_FIELD,
-      CLASS_REFLECTION, ClassModifiersImpl.SYSTEM_FINAL, IdImpl.ID_CLASS_FIELD);
+  public static final ContentClassImpl CLASS_FIELD = new ContentClassImpl(IdImpl.ID_CLASS_FIELD,
+      NAME_FIELD, CLASS_REFLECTION, ClassModifiersImpl.SYSTEM_FINAL);
 
-  /** @see #getId() */
-  private final IdImpl id;
-
+  static {
+    try {
+      CLASS_ROOT.addSubClass(CLASS_REFLECTION);
+      CLASS_REFLECTION.addSubClass(CLASS_CLASS);
+      CLASS_REFLECTION.addSubClass(CLASS_FIELD);
+    } catch (ContentModelException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+  
   /**
    * The constructor.
    * 
@@ -45,11 +55,10 @@ public class ContentClassImpl extends AbstractContentClass {
    * @param classModifiers
    * @param classId
    */
-  public ContentClassImpl(String className, ContentClass parentClass,
-      ClassModifiers classModifiers, IdImpl classId) {
+  public ContentClassImpl(Id classId, String className, ContentClass parentClass,
+      ClassModifiers classModifiers) {
 
-    super(className, parentClass, classModifiers);
-    this.id = classId;
+    super(classId, className, parentClass, classModifiers);
   }
 
   /**
@@ -58,14 +67,6 @@ public class ContentClassImpl extends AbstractContentClass {
   public ContentClass getContentClass() {
 
     return CLASS_CLASS;
-  }
-
-  /**
-   * @see net.sf.mmm.content.api.ContentObject#getId()
-   */
-  public Id getId() {
-
-    return this.id;
   }
 
 }

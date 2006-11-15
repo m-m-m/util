@@ -28,6 +28,9 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /** the component bottom or right */
   private AbstractUIComponent componentBottomOrRight;
 
+  /** @see #setDividerPosition(double) */
+  private double dividerLocation;
+  
   /**
    * The constructor.
    * 
@@ -45,6 +48,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
     this.componentTopOrLeft = null;
     this.componentBottomOrRight = null;
     setOrientation(orientation);
+    this.dividerLocation = 0.5;
   }
 
   /**
@@ -121,6 +125,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
    */
   public void setDividerPosition(double proportion) {
 
+    this.dividerLocation = proportion;
     this.splitPanel.setDividerLocation(proportion);
   }
 
@@ -169,5 +174,5 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
 
     return 2;
   }
-
+  
 }

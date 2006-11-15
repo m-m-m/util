@@ -7,10 +7,10 @@ package net.sf.mmm.content.model.api;
  * ATTENTION: Be aware that a {@link ContentField field} in this context is
  * different from a <code>field</code> in the JAVA language. Better think of
  * it as a bean property. If the field is {@link #isFinal() final}, the getter
- * (and setter) is final. A {@link #isImmutable() immutable} field has no setter
+ * (and setter) is final. A {@link #isReadOnly() read-only} field has no setter
  * (can NOT be modified). Therefore a {@link #isStatic() static} and
  * {@link #isFinal() final} field is NOT a constant and can be modified if it is
- * NOT {@link #isImmutable() immutable}.
+ * NOT {@link #isReadOnly() read-only}.
  * 
  * @see net.sf.mmm.content.model.api.ContentField#getModifiers()
  * 
@@ -29,9 +29,9 @@ public interface FieldModifiers extends Modifiers {
   String XML_ATR_ROOT_STATIC = "static";
 
   /**
-   * the attribute for the {@link #isImmutable() immutable-flag}.
+   * the attribute for the {@link #isReadOnly() read-only flag}.
    */
-  String XML_ATR_ROOT_IMMUTABLE = "immutable";
+  String XML_ATR_ROOT_READ_ONLY = "read-only";
 
   /**
    * the attribute for the {@link #isTransient() transient-flag}.
@@ -39,12 +39,13 @@ public interface FieldModifiers extends Modifiers {
   String XML_ATR_ROOT_TRANSIENT = "transient";
 
   /**
-   * This method determines if the field is immutable. If a field is immutable
-   * its value can not be modified by the user.
+   * This method determines if the field is read-only. A read-only field can NOT
+   * be written (at least NOT via
+   * {@link net.sf.mmm.content.api.ContentObject#setFieldValue(String, Object) setFieldValue}).
    * 
    * @return <code>true</code> if the field is immutable.
    */
-  boolean isImmutable();
+  boolean isReadOnly();
 
   /**
    * This method determines if the field is transient. A transient field is not
@@ -60,10 +61,10 @@ public interface FieldModifiers extends Modifiers {
    * the {@link ContentClass content-class} instead of the
    * {@link net.sf.mmm.content.api.ContentObject instance}.<br>
    * Be aware that a {@link #isStatic() static} and {@link #isFinal() final}
-   * field can be modified if it is NOT {@link #isImmutable() immutable} as
+   * field can be modified if it is NOT {@link #isReadOnly() read-only} as
    * described {@link FieldModifiers here}.<br>
-   * From all instances of the {@link ContentClass content-class} declaring
-   * the field, the value of the field can be
+   * From all instances of the {@link ContentClass content-class} declaring the
+   * field, the value of the field can be
    * {@link net.sf.mmm.content.api.ContentObject#getFieldValue(String) read}
    * what will always result in the same value. Writing the value via the
    * instance is NOT allowed and must be done via the declaring

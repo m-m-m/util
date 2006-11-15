@@ -5,6 +5,7 @@ import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
+import net.sf.mmm.content.value.api.Id;
 
 /**
  * This is the abstract base implementation of the ContentField interface.
@@ -25,16 +26,21 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   /**
    * The constructor.
    * 
-   * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(String)
+   * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(Id,
+   *      String)
    * 
    * @param declaringContentClass
    *        is the content-class that {@link #getDeclaringClass() declares} (or
    *        overrides) this field.
+   * @param fieldType
+   *        is the {@link #getFieldType() field-type}.
+   * @param fieldModifiers
+   *        are the {@link #getModifiers() modifiers}.
    */
-  public AbstractContentField(String fieldName, ContentClass declaringContentClass,
+  public AbstractContentField(Id fieldId, String fieldName, ContentClass declaringContentClass,
       Class fieldType, FieldModifiers fieldModifiers) {
 
-    super(fieldName);
+    super(fieldId, fieldName);
     this.declaringClass = declaringContentClass;
     this.type = fieldType;
     this.modifiers = fieldModifiers;
@@ -143,7 +149,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
     if (getModifiers().isStatic()) {
       result.append("s");
     }
-    if (getModifiers().isImmutable()) {
+    if (getModifiers().isReadOnly()) {
       result.append("I");
     }
     if (getModifiers().isTransient()) {

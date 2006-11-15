@@ -1,9 +1,9 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.base.model;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.model.UIMutableListModel;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This is the abstract base implementation of the
@@ -38,7 +38,7 @@ public abstract class AbstractUIMutableListModel<E> extends AbstractUIListModel<
           removeElement(i);
         }
       }
-      fireChangeEvent(new UIListModelEvent(EventType.REMOVE, 0, lastIndex));
+      fireChangeEvent(new UIListModelEvent(Type.REMOVE, 0, lastIndex));
     }
   }
 

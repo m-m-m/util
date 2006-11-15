@@ -2,14 +2,18 @@
 package net.sf.mmm.ui.toolkit.impl.swing.widget;
 
 import java.awt.Dimension;
+import java.lang.reflect.Array;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -19,12 +23,12 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
  * This class is the implementation of the UITree interface using Swing as the
  * UI toolkit.
  * 
+ * @param <N>
+ *        is the templated type of the tree-nodes.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITreeImpl extends AbstractUIWidget implements UITree {
-
-  /** the empty selection */
-  private static final Object[] EMPTY_SELECTION = new Object[0];
+public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
 
   /** the swing scroll pane */
   private final JScrollPane scrollPanel;
@@ -33,7 +37,7 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
   private final JTree tree;
 
   /** the tree model adapter */
-  private TreeModelAdapter modelAdapter;
+  private TreeModelAdapter<N> modelAdapter;
 
   /**
    * The constructor.
@@ -66,7 +70,7 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getModel()
    */
   @SuppressWarnings("unchecked")
-  public UITreeModel getModel() {
+  public UITreeModel<N> getModel() {
 
     if (this.modelAdapter == null) {
       return null;
@@ -79,7 +83,7 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#setModel(net.sf.mmm.ui.toolkit.api.model.UITreeModel)
    */
   @SuppressWarnings("unchecked")
-  public void setModel(UITreeModel newModel) {
+  public void setModel(UITreeModel<N> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();
@@ -132,11 +136,11 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelection()
    */
-  public Object getSelection() {
+  public N getSelection() {
 
     TreePath selection = this.tree.getSelectionPath();
     if (selection != null) {
-      return selection.getLastPathComponent();
+      return (N) selection.getLastPathComponent();
     }
     return null;
   }
@@ -144,18 +148,38 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelections()
    */
-  public Object[] getSelections() {
+  public N[] getSelections() {
 
     TreePath[] selections = this.tree.getSelectionPaths();
-    if ((selections != null) && (selections.length > 0)) {
-      Object[] result = new Object[selections.length];
-      for (int i = 0; i < selections.length; i++) {
-        result[i] = selections[i].getLastPathComponent();
-      }
-      return result;
-    } else {
-      return EMPTY_SELECTION;
+    int len = 0;
+    if (selections != null) {
+      len = selections.length;
     }
+    N[] result = (N[]) Array.newInstance(getModel().getNodeType(), len);
+    if (len > 0) {
+      for (int i = 0; i < len; i++) {
+        result[i] = (N) selections[i].getLastPathComponent();
+      }
+    }
+    return result;
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
+   */
+  @Override
+  protected boolean doInitializeListener() {
+
+    this.tree.addTreeSelectionListener(new TreeSelectionListener() {
+
+      /**
+       * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.TreeSelectionEvent)
+       */
+      public void valueChanged(TreeSelectionEvent e) {
+
+        invoke(ActionType.SELECT);
+      }
+    });
+    return true;
+  }
 }

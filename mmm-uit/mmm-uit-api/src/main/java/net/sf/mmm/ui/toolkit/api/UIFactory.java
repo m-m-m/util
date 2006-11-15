@@ -200,8 +200,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a list with single-selection.
    * 
    * @param <E>
-   *        is the templated type of the elements that can be selected with
-   *        the widget.
+   *        is the templated type of the elements that can be selected with the
+   *        widget.
    * @param model
    *        is the model defining the the selectable elements.
    * @return the created list.
@@ -212,8 +212,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a list.
    * 
    * @param <E>
-   *        is the templated type of the elements that can be selected with
-   *        the widget.
+   *        is the templated type of the elements that can be selected with the
+   *        widget.
    * @param model
    *        is the model defining the the selectable elements.
    * @param multiSelection
@@ -227,8 +227,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a combo-box that is NOT editable.
    * 
    * @param <E>
-   *        is the templated type of the elements that can be selected with
-   *        the widget.
+   *        is the templated type of the elements that can be selected with the
+   *        widget.
    * @param model
    *        is the model defining the the selectable elements.
    * @return the created combo-box.
@@ -239,8 +239,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a combo-box.
    * 
    * @param <E>
-   *        is the templated type of the elements that can be selected with
-   *        the widget.
+   *        is the templated type of the elements that can be selected with the
+   *        widget.
    * @param model
    *        is the model defining the the selectable elements.
    * @param editable
@@ -270,6 +270,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a tree.
    * 
+   * @param <N>
+   *        is the templated type of the tree-nodes.
    * @param multiSelection -
    *        if <code>true</code> the user can select multiple items of the
    *        tree, else ony one.
@@ -277,7 +279,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        is the model defining the content of the tree.
    * @return the created tree.
    */
-  UITree createTree(boolean multiSelection, UITreeModel model);
+  <N> UITree<N> createTree(boolean multiSelection, UITreeModel<N> model);
 
   /**
    * This method creates a table. It will have single-selection mode.
@@ -347,8 +349,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a new horizontal slide-bar.
    * 
    * @param <E>
-   *        is the templated type of the elements that can be selected with
-   *        the widget.
+   *        is the templated type of the elements that can be selected with the
+   *        widget.
    * @param model
    *        is the model for the slide bar. Use
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel} for a
@@ -361,8 +363,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a new slide-bar.
    * 
    * @param <E>
-   *        is the templated type of the elements that can be selected with
-   *        the widget.
+   *        is the templated type of the elements that can be selected with the
+   *        widget.
    * @param model
    *        is the model for the slide bar. Use
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel} for a

@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
+import java.lang.reflect.Array;
+
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -17,13 +19,13 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITreeImpl extends AbstractUIWidget implements UITree {
+public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
 
   /** the unwrapped swt tree */
   private final SyncTreeAccess syncAccess;
 
   /** the model adapter */
-  private final TreeModelAdapter modelAdapter;
+  private final TreeModelAdapter<N> modelAdapter;
 
   /**
    * The constructor.
@@ -45,7 +47,7 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
       style |= SWT.SINGLE;
     }
     this.syncAccess = new SyncTreeAccess(uiFactory, style);
-    this.modelAdapter = new TreeModelAdapter(this.syncAccess);
+    this.modelAdapter = new TreeModelAdapter<N>(this.syncAccess);
   }
 
   /**
@@ -79,7 +81,7 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getModel()
    */
   @SuppressWarnings("unchecked")
-  public UITreeModel getModel() {
+  public UITreeModel<N> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -88,7 +90,7 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#setModel(net.sf.mmm.ui.toolkit.api.model.UITreeModel)
    */
   @SuppressWarnings("unchecked")
-  public void setModel(UITreeModel newModel) {
+  public void setModel(UITreeModel<N> newModel) {
 
     this.modelAdapter.setModel(newModel);
   }
@@ -104,11 +106,11 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelection()
    */
-  public Object getSelection() {
+  public N getSelection() {
 
     Object[] selection = this.syncAccess.getSelection();
     if (selection.length > 0) {
-      return selection[0];
+      return (N) selection[0];
     }
     return null;
   }
@@ -116,9 +118,12 @@ public class UITreeImpl extends AbstractUIWidget implements UITree {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelections()
    */
-  public Object[] getSelections() {
+  public N[] getSelections() {
 
-    return this.syncAccess.getSelection();
+    Object[] selection = this.syncAccess.getSelection();
+    N[] result = (N[]) Array.newInstance(getModel().getNodeType(), selection.length);
+    System.arraycopy(selection, 0, result, 0, selection.length);
+    return result;
   }
 
 }

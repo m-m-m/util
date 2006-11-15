@@ -11,11 +11,11 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TreeItem;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTreeAccess;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel}
@@ -203,7 +203,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
       this.model.addListener(this);
     } else {
       N node = this.event.getTreeNode();
-      if (this.event.getType() == EventType.ADD) {
+      if (this.event.getType() == Type.ADD) {
         if (!this.node2itemMap.containsKey(node)) {
           N parentNode = this.model.getParent(node);
           TreeItem parentItem = this.node2itemMap.get(parentNode);
@@ -214,13 +214,13 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
             }
           }
         }
-      } else if (this.event.getType() == EventType.REMOVE) {
+      } else if (this.event.getType() == Type.REMOVE) {
         TreeItem item = this.node2itemMap.remove(node);
         if (item != null) {
           item.dispose();
           removeNodes(node);
         }
-      } else if (this.event.getType() == EventType.UPDATE) {
+      } else if (this.event.getType() == Type.UPDATE) {
         TreeItem item = this.node2itemMap.get(node);
         if (item != null) {
           item.setText(this.model.toString(node));

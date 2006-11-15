@@ -6,9 +6,12 @@ import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 /**
  * This is the interface for a table.
  * 
+ * @param <C>
+ *        is the templated type of the objects in the table cells.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITable extends UIWidget {
+public interface UITable<C> extends UIWidget {
 
   /** the type of this object */
   String TYPE = "Table";
@@ -18,7 +21,7 @@ public interface UITable extends UIWidget {
    * 
    * @return the table model.
    */
-  UITableModel getModel();
+  UITableModel<C> getModel();
 
   /**
    * This method sets the model of this table. If the table already has a model
@@ -27,6 +30,6 @@ public interface UITable extends UIWidget {
    * @param newModel
    *        is the new model to set.
    */
-  void setModel(UITableModel newModel);
+  void setModel(UITableModel<C> newModel);
 
 }

@@ -1,10 +1,10 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.base.model;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRange;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This is an implementation of the
@@ -89,9 +89,9 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
       int newSize = newMaximum - this.minimum;
       UIListModelEvent changeEvent;
       if (newMaximum > this.maximum) {
-        changeEvent = new UIListModelEvent(EventType.ADD, oldSize, newSize - 1);
+        changeEvent = new UIListModelEvent(Type.ADD, oldSize, newSize - 1);
       } else {
-        changeEvent = new UIListModelEvent(EventType.REMOVE, newSize, oldSize - 1);
+        changeEvent = new UIListModelEvent(Type.REMOVE, newSize, oldSize - 1);
       }
       this.maximum = newMaximum;
       fireChangeEvent(changeEvent);
@@ -112,9 +112,9 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
       }
       UIListModelEvent changeEvent;
       if (newMinimum > this.minimum) {
-        changeEvent = new UIListModelEvent(EventType.ADD, 0, (newMinimum - this.minimum) - 1);
+        changeEvent = new UIListModelEvent(Type.ADD, 0, (newMinimum - this.minimum) - 1);
       } else {
-        changeEvent = new UIListModelEvent(EventType.REMOVE, 0, (this.minimum - newMinimum) - 1);
+        changeEvent = new UIListModelEvent(Type.REMOVE, 0, (this.minimum - newMinimum) - 1);
       }
       this.minimum = newMinimum;
       fireChangeEvent(changeEvent);

@@ -3,11 +3,11 @@ package net.sf.mmm.ui.toolkit.impl.swt.model;
 
 import org.eclipse.swt.widgets.Slider;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel}
@@ -86,7 +86,7 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
       Slider slider = this.syncAccess.getSwtObject();
       slider.setMaximum(this.model.getElementCount());
     } else {
-      if (this.event.getType() != EventType.UPDATE) {
+      if (this.event.getType() != Type.UPDATE) {
         Slider slider = this.syncAccess.getSwtObject();
         slider.setMaximum(this.model.getElementCount());
       }

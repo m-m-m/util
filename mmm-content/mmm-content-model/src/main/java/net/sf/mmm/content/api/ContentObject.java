@@ -2,7 +2,7 @@
 package net.sf.mmm.content.api;
 
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.security.PermissionDeniedException;
+import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.util.xml.api.XmlSerializable;
 
@@ -10,6 +10,9 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  * This is the abstract interface for any content object. This can be a
  * {@link net.sf.mmm.content.model.api.ContentReflectionObject reflection-object}
  * (class or field), or a resource (file, folder, user, group, etc.).
+ * 
+ * TODO: add generic methods "ContentObject getParent()", "String getPath()" 
+ *       "Collection<ContentObject> getChildren()" instead of content-folder?
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -116,7 +119,7 @@ public interface ContentObject extends XmlSerializable {
    * This method sets the value of the specified
    * {@link net.sf.mmm.content.model.api.ContentField field}. It is the
    * generic setter for all fields of this resource. The field must NOT be
-   * {@link net.sf.mmm.content.model.api.FieldModifiers#isImmutable() immutable}.
+   * {@link net.sf.mmm.content.model.api.FieldModifiers#isReadOnly() read-only}.
    * A {@link net.sf.mmm.content.model.api.FieldModifiers#isStatic() static}
    * field can only be set on a {@link ContentClass content-class}. Other
    * fields only on a resource.
@@ -155,9 +158,8 @@ public interface ContentObject extends XmlSerializable {
    * @return <code>true</code> if the current user is allowed to perform the
    *         specified action of this object.
    */
-  /*
-   * boolean checkPermission(ContentActionIF action);
-   */
+  // boolean checkPermission(ContentActionIF action);
+   
 
   /**
    * This method validates the given object. This is done by

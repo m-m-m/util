@@ -42,6 +42,13 @@ public interface UITreeModel<N> {
   N getRootNode();
 
   /**
+   * This method gets the class reflecting the type of the generic node type.
+   * 
+   * @return the node-type.
+   */
+  Class<N> getNodeType();
+
+  /**
    * This method determines the number of children of the given node.
    * 
    * @param node

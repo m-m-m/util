@@ -91,35 +91,35 @@ public final class IdImpl implements Id {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentPrincipalIF content-principal}.
+   * {@link net.sf.mmm.content.api.security.ContentPrincipal content-principal}.
    */
   public static final int CLASS_ID_PRINCIPAL = 7;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentUserIF content-user}.
+   * {@link net.sf.mmm.content.api.security.ContentUser content-user}.
    */
   public static final int CLASS_ID_USER = 8;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group}.
+   * {@link net.sf.mmm.content.api.security.ContentGroup content-group}.
    */
   public static final int CLASS_ID_GROUP = 9;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group}.
+   * {@link net.sf.mmm.content.api.security.ContentGroup content-group}.
    */
   public static final int CLASS_ID_ACTION = 10;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group}.
+   * {@link net.sf.mmm.content.api.security.ContentGroup content-group}.
    */
   public static final int CLASS_ID_PERMISSION = 11;
 
@@ -263,7 +263,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects
-   * {@link net.sf.mmm.content.api.security.ContentPrincipalIF content-principal} .
+   * {@link net.sf.mmm.content.api.security.ContentPrincipal content-principal} .
    */
   public static final IdImpl ID_CLASS_PRINCIPAL = new IdImpl(0, CLASS_ID_PRINCIPAL);
 
@@ -271,7 +271,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects a
-   * {@link net.sf.mmm.content.api.security.ContentUserIF content-user} .
+   * {@link net.sf.mmm.content.api.security.ContentUser content-user} .
    */
   public static final IdImpl ID_CLASS_USER = new IdImpl(0, CLASS_ID_USER);
 
@@ -279,7 +279,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects a
-   * {@link net.sf.mmm.content.api.security.ContentGroupIF content-group} .
+   * {@link net.sf.mmm.content.api.security.ContentGroup content-group} .
    */
   public static final IdImpl ID_CLASS_GROUP = new IdImpl(0, CLASS_ID_GROUP);
 
@@ -287,7 +287,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects a
-   * {@link net.sf.mmm.content.api.security.ContentActionIF content-action} .
+   * {@link net.sf.mmm.content.api.security.ContentAction content-action} .
    */
   public static final IdImpl ID_CLASS_ACTION = new IdImpl(0, CLASS_ID_ACTION);
 
@@ -329,7 +329,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
    * where the
-   * {@link net.sf.mmm.content.api.security.ContentPrincipalIF content-principals}
+   * {@link net.sf.mmm.content.api.security.ContentPrincipal content-principals}
    * are located.
    */
   public static final IdImpl ID_FOLDER_PRINCIPALS = new IdImpl(FOLDER_ID_PRINCIPALS,
@@ -339,7 +339,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
    * where the
-   * {@link net.sf.mmm.content.api.security.ContentUserIF content-users} are
+   * {@link net.sf.mmm.content.api.security.ContentUser content-users} are
    * located.
    */
   public static final IdImpl ID_FOLDER_USERS = new IdImpl(FOLDER_ID_USERS, CLASS_ID_FOLDER);
@@ -348,7 +348,7 @@ public final class IdImpl implements Id {
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
    * where the
-   * {@link net.sf.mmm.content.api.security.ContentGroupIF content-groups} are
+   * {@link net.sf.mmm.content.api.security.ContentGroup content-groups} are
    * located.
    */
   public static final IdImpl ID_FOLDER_GROUPS = new IdImpl(FOLDER_ID_GROUPS, CLASS_ID_FOLDER);

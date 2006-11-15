@@ -5,7 +5,6 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.base.AbstractContentField;
 import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.content.value.impl.IdImpl;
 
 /**
  * This is the implementation of the
@@ -22,23 +21,20 @@ public class ContentFieldImpl extends AbstractContentField {
 
   /** TODO */
   private static final long serialVersionUID = -7652076416516015944L;
-  /** @see #getId() */
-  private final IdImpl id;
-
+  
   /**
    * The constructor.
    * 
+   * @param fieldId
    * @param fieldName
    * @param declaringClass
    * @param fieldType
    * @param fieldModifiers
-   * @param fieldId
    */
-  public ContentFieldImpl(String fieldName, ContentClass declaringClass, Class fieldType,
-      FieldModifiers fieldModifiers, IdImpl fieldId) {
+  public ContentFieldImpl(Id fieldId, String fieldName, ContentClass declaringClass, Class fieldType,
+      FieldModifiers fieldModifiers) {
 
-    super(fieldName, declaringClass, fieldType, fieldModifiers);
-    this.id = fieldId;
+    super(fieldId, fieldName, declaringClass, fieldType, fieldModifiers);
   }
 
   /**
@@ -47,14 +43,6 @@ public class ContentFieldImpl extends AbstractContentField {
   public ContentClass getContentClass() {
 
     return ContentClassImpl.CLASS_FIELD;
-  }
-
-  /**
-   * @see net.sf.mmm.content.api.ContentObject#getId()
-   */
-  public Id getId() {
-
-    return this.id;
   }
 
 }

@@ -14,7 +14,7 @@ public final class UIListModelEvent extends UIModelEvent {
 
   /** the index of the last item that has changed */
   private int endIndex;
-
+  
   /**
    * The constructor.
    * 
@@ -25,7 +25,7 @@ public final class UIListModelEvent extends UIModelEvent {
    * @param endItemIndex
    *        is the index of the last item that has changed.
    */
-  public UIListModelEvent(EventType eventType, int startItemIndex, int endItemIndex) {
+  public UIListModelEvent(Type eventType, int startItemIndex, int endItemIndex) {
 
     super(eventType);
     this.startIndex = startItemIndex;
@@ -40,7 +40,7 @@ public final class UIListModelEvent extends UIModelEvent {
    * @param itemIndex
    *        is the index of the according item.
    */
-  public UIListModelEvent(EventType eventType, int itemIndex) {
+  public UIListModelEvent(Type eventType, int itemIndex) {
 
     super(eventType);
     this.startIndex = itemIndex;

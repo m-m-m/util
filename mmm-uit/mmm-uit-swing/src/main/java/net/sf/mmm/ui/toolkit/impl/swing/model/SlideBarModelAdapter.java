@@ -10,10 +10,10 @@ import java.util.NoSuchElementException;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
@@ -242,12 +242,12 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
    */
   public void listModelChanged(UIListModelEvent event) {
 
-    EventType type = event.getType();
+    Type type = event.getType();
     int startIndex = event.getStartIndex();
     int endIndex;
-    if ((type == EventType.REMOVE) || (type == EventType.UPDATE)) {
+    if ((type == Type.REMOVE) || (type == Type.UPDATE)) {
       endIndex = event.getEndIndex();
-    } else if (type == EventType.ADD) {
+    } else if (type == Type.ADD) {
       endIndex = this.model.getElementCount() - 1;
     } else {
       // this is an error

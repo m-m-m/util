@@ -1,10 +1,12 @@
 /* $Id$ */
-package net.sf.mmm.content.security;
+package net.sf.mmm.content.security.api;
 
 import net.sf.mmm.nls.base.NlsException;
 
 /**
- * This exception is used if something went wrong with a content resource.
+ * This exception is used if a
+ * {@link net.sf.mmm.content.api.ContentObject content-object} was accessed
+ * violating a security constraint.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

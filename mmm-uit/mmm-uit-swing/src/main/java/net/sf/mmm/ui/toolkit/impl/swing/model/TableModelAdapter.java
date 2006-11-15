@@ -13,15 +13,18 @@ import net.sf.mmm.ui.toolkit.api.model.UITableModel;
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITableModel} to
  * a swing {@link javax.swing.table.TableModel}.
  * 
+ * @param <C>
+ *        is the templated type of the objects in the table cells.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class TableModelAdapter extends AbstractTableModel implements UITableModelListener {
+public class TableModelAdapter<C> extends AbstractTableModel implements UITableModelListener {
 
   /** UID for serialization */
   private static final long serialVersionUID = -7846849727632188732L;
 
   /** the model to adapt */
-  private final UITableModel<?> model;
+  private final UITableModel<C> model;
 
   /**
    * The constructor.
@@ -29,7 +32,7 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
    * @param tableModel
    *        is the model to adapt.
    */
-  public TableModelAdapter(UITableModel tableModel) {
+  public TableModelAdapter(UITableModel<C> tableModel) {
 
     super();
     this.model = tableModel;
@@ -41,7 +44,7 @@ public class TableModelAdapter extends AbstractTableModel implements UITableMode
    * 
    * @return the model.
    */
-  public UITableModel getModel() {
+  public UITableModel<C> getModel() {
 
     return this.model;
   }

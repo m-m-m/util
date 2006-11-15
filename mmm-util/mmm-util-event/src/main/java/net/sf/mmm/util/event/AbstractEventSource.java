@@ -56,7 +56,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
      * @param event
      *        the event to set.
      */
-    protected void setEvent(E event) {
+    protected void fireEvent(E event) {
 
         int length = this.listeners.size();
         for (int i = 0; i < length; i++) {

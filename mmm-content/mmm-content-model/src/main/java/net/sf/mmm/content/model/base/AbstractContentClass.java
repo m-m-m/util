@@ -14,7 +14,9 @@ import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
-import net.sf.mmm.content.security.PermissionDeniedException;
+import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.security.api.PermissionDeniedException;
+import net.sf.mmm.content.value.api.Id;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}
@@ -45,14 +47,15 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * The constructor.
    * 
+   * @param classId
    * @param className
    * @param parentClass
    * @param classModifiers
    */
-  public AbstractContentClass(String className, ContentClass parentClass,
+  public AbstractContentClass(Id classId, String className, ContentClass parentClass,
       ClassModifiers classModifiers) {
 
-    super(className);
+    super(classId, className);
     this.superClass = parentClass;
     this.modifiers = classModifiers;
     this.subClasses = new ArrayList<ContentClass>();
@@ -70,14 +73,6 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentClass#getDeclatedField(java.lang.String)
-   */
-  public ContentField getDeclatedField(String name) {
-
-    return this.fields.get(name);
-  }
-
-  /**
    * @see net.sf.mmm.content.model.api.ContentClass#getDeclatedFields()
    */
   public Iterator<ContentField> getDeclatedFields() {
@@ -86,12 +81,23 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
+   * @see net.sf.mmm.content.model.api.ContentClass#getDeclaredField(java.lang.String)
+   */
+  public ContentField getDeclaredField(String name) {
+
+    return this.fields.get(name);
+  }
+
+  /**
    * @see net.sf.mmm.content.model.api.ContentClass#getField(java.lang.String)
    */
   public ContentField getField(String name) {
 
-    // TODO Auto-generated method stub
-    return null;
+    ContentField field = this.fields.get(name);
+    if ((field == null) && (this.superClass != null)) {
+      field = this.superClass.getField(name);
+    }
+    return field;
   }
 
   /**
@@ -216,11 +222,52 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
+   * 
+   * @param subClass
+   * @throws ContentModelException
+   */
+  public void addSubClass(ContentClass subClass) throws ContentModelException {
+
+    if (subClass.getSuperClass() != this) {
+      throw new ContentModelException("Internal error!");
+    }
+    if (this.subClasses.contains(subClass)) {
+      // TODO: error or ignore?
+      return;
+    }
+    this.subClasses.add(subClass);
+  }
+
+  /**
+   * 
+   * @param field
+   * @throws ContentModelException
+   */
+  public void addField(ContentField field) throws ContentModelException {
+
+    if (field.getDeclaringClass() != this) {
+      throw new ContentModelException("Internal error!");
+    }
+    ContentField duplicate = this.fields.get(field.getName());
+    if (duplicate != null) {
+      if (duplicate == field) {
+        // ignore?
+        return;
+      } else {
+        throw new ContentModelException("Todo");
+      }
+    }
+    this.fields.put(field.getName(), field);
+  }
+
+  /**
    * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {
 
+    return getName();
+    /*
     StringBuffer result = new StringBuffer();
     result.append("Class:");
     result.append(getId());
@@ -239,6 +286,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     }
     result.append("]");
     return result.toString();
+    */
   }
 
 }

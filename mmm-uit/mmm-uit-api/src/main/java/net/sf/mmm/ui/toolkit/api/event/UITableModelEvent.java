@@ -41,7 +41,7 @@ public class UITableModelEvent extends UIModelEvent {
    * @param columnIndex
    *        is the index of the column that has changed.
    */
-  public UITableModelEvent(EventType eventType, int rowStartIndex, int rowEndIndex, int columnIndex) {
+  public UITableModelEvent(Type eventType, int rowStartIndex, int rowEndIndex, int columnIndex) {
 
     super(eventType);
     this.rowStart = rowStartIndex;

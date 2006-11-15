@@ -19,9 +19,12 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.TableModelAdapter;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable} interface using Swing as
  * the UI toolkit.
  * 
+ * @param <C>
+ *        is the templated type of the objects in the table cells.
+ *        
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITableImpl extends AbstractUIWidget implements UITable {
+public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
 
   /** the native Swing table */
   private final JTable table;
@@ -71,7 +74,7 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#getModel()
    */
-  public UITableModel getModel() {
+  public UITableModel<C> getModel() {
 
     if (this.modelAdapter == null) {
       return null;
@@ -83,7 +86,7 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModel)
    */
-  public void setModel(UITableModel newModel) {
+  public void setModel(UITableModel<C> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();

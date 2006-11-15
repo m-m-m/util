@@ -3,7 +3,8 @@ package net.sf.mmm.content.base;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.security.PermissionDeniedException;
+import net.sf.mmm.content.security.api.PermissionDeniedException;
+import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
@@ -15,6 +16,11 @@ import net.sf.mmm.util.xml.api.XmlWriter;
  */
 public abstract class AbstractContentObject implements ContentObject {
 
+  /** @see #getId() */
+  private final Id id;
+
+  // general info: name, parent, deleted-flag
+  
   /** @see #getName() */
   private String name;
 
@@ -24,14 +30,25 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * The constructor.
    * 
+   * @param objectId
+   *        is the {@link #getId() unique id} of the object.
    * @param objectName
    *        is the {@link #getName() name} of the object to create.
    */
-  public AbstractContentObject(String objectName) {
+  public AbstractContentObject(Id objectId, String objectName) {
 
     super();
     this.name = objectName;
     this.deletedFlag = false;
+    this.id = objectId;
+  }
+
+  /**
+   * @see net.sf.mmm.content.api.ContentObject#getId()
+   */
+  public Id getId() {
+
+    return this.id;
   }
 
   /**
@@ -70,9 +87,20 @@ public abstract class AbstractContentObject implements ContentObject {
    * @param deleted
    *        is the new value of the deleted flag.
    */
-  protected void setDeleted(boolean deleted) {
+  public void setDeleted(boolean deleted) {
 
     this.deletedFlag = deleted;
+  }
+
+  /**
+   * This method changes the {@link #getName() name} of this object.
+   * 
+   * @param newName
+   *        is the new name to set.
+   */
+  protected void setName(String newName) {
+
+    this.name = newName;
   }
 
   /**

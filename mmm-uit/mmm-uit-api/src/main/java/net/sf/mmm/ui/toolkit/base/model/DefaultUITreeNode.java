@@ -3,7 +3,7 @@ package net.sf.mmm.ui.toolkit.base.model;
 import java.util.List;
 import java.util.Vector;
 
-import net.sf.mmm.ui.toolkit.api.event.EventType;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This inner class is the implementation of the {@link UITreeNodeIF} interface.
@@ -110,7 +110,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
 
     DefaultUITreeNode<T> childNode = new DefaultUITreeNode<T>(this.model, this, childData);
     this.children.add(childNode);
-    this.model.fireChangeEvent(EventType.ADD, childNode);
+    this.model.fireChangeEvent(Type.ADD, childNode);
     return childNode;
   }
 
@@ -121,7 +121,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
 
     if (this.parent != null) {
       this.parent.children.remove(this);
-      this.model.fireChangeEvent(EventType.REMOVE, this);
+      this.model.fireChangeEvent(Type.REMOVE, this);
     }
   }
 
