@@ -102,7 +102,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
     ContentField superField = null;
     ContentClass superClass = getContentClass().getSuperClass();
     if (superClass != null) {
-      superField = superClass.getField(getName());
+      superField = superClass.getDeclaredField(getName());
     }
     return superField;
   }
