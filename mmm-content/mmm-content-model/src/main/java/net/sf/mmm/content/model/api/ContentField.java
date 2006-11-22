@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.validator.api.ValueValidator;
 
 /**
  * This interface declares the api of a content field. Such object describes the
@@ -11,51 +11,15 @@ import net.sf.mmm.content.api.ContentObject;
  */
 public interface ContentField extends ContentReflectionObject {
 
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getId() ID} for generic access via {@link #getFieldValue(String)}.
-   */
-  String NAME_ID = "id";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getName() name} for generic access via
-   * {@link #getFieldValue(String)}.
-   */
-  String NAME_NAME = "name";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * parentFolder for generic access via {@link #getFieldValue(String)}.
-   */
-  String NAME_PARENT_FOLDER = "parentFolder";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * path for generic access via {@link #getFieldValue(String)}.
-   */
-  String NAME_PATH = "path";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getContentClass() class} for generic access via
-   * {@link #getFieldValue(String)}.
-   */
-  String NAME_CLASS = "class";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getMetaData() metadata} for generic access via
-   * {@link #getFieldValue(String)}.
-   */
-  String NAME_METADATA = "metadata";
+  /** the name of the {@link #getContentClass() class} reflecting this type. */
+  String CLASS_NAME = "Field";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getFieldType() type} for generic access via
    * {@link #getFieldValue(String)}.
    */
-  String NAME_FIELD_TYPE = "type";
+  String FIELD_NAME_TYPE = "type";
 
   /**
    * This method gets the content-class that declares this field. This does NOT
@@ -75,7 +39,7 @@ public interface ContentField extends ContentReflectionObject {
    * This method gets the content-class that initially defined by this field.
    * This means that the returned content-class does not inherit this field and
    * its parent class (if not root) has no field with the same
-   * {@link ContentObject#getName() name}.
+   * {@link net.sf.mmm.content.api.ContentObject#getName() name}.
    * 
    * @return the class that initially defines this field.
    */
@@ -105,18 +69,25 @@ public interface ContentField extends ContentReflectionObject {
   FieldModifiers getModifiers();
 
   /**
-   * This method validates if the given argument is an acceptable value for this
-   * field.
+   * This method gets the constraint a value of this field must fulfill in order
+   * to be valid. <br>
+   * The constraint will validate that the value has the
+   * {@link #getFieldType() specified field-type}. A constraint may also verify
+   * additional things. E.g. that the value
+   * <ul>
+   * <li>is NOT <code>null</code>.</li>
+   * <li>does NOT exceed a specific length (e.g. for strings or lists).</li>
+   * <li>is a {@link net.sf.mmm.content.value.api.LinkList linklist} that only
+   * contains links of a specific
+   * {@link net.sf.mmm.content.api.ContentObject#getContentClass() type}.</li>
+   * </ul>
    * 
-   * @see net.sf.mmm.content.validator.api.ValueValidatorIF#validate(Object)
+   * @see net.sf.mmm.content.validator.api.ValueValidator
    * 
-   * @param value
-   *        is the value to check. It may be <code>null</code> but its not
-   *        allowed to throw a {@link NullPointerException} for this reason.
-   * @return the result of the validation.
+   * @return the constraint.
    */
-  // ValidationResultIF validate(Object value);
-  
+  ValueValidator getConstraint();
+
   /**
    * This method dynamically determines the value of the field. It is only
    * applicable for {@link FieldModifiersImpl#isTransient() transient} fields.

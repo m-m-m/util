@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.content.model.api;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
 
@@ -34,19 +35,19 @@ public interface ContentModelService extends ContentModelReadAccess {
    * the tag-name of a {@link ContentClass content-class} in the content-model
    * XML representation
    */
-  String XML_TAG_CLASS = ContentClass.NAME_CLASS;
+  String XML_TAG_CLASS = ContentClass.CLASS_NAME;
 
   /**
    * the tag-name of a {@link ContentClass content-class} in the content-model
    * XML representation
    */
-  String XML_ATR_CLASS_NAME = ContentField.NAME_NAME;
+  String XML_ATR_CLASS_NAME = ContentObject.FIELD_NAME_NAME;
 
   /**
    * the tag-name of a {@link ContentField content-field} in the content-model
    * XML representation
    */
-  String XML_TAG_FIELD = ContentClass.NAME_FIELD;
+  String XML_TAG_FIELD = ContentField.CLASS_NAME;
 
   /**
    * This method gets the event registrar where listeners can be registered so

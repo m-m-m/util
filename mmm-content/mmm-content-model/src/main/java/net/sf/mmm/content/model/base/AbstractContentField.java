@@ -5,6 +5,8 @@ import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
+import net.sf.mmm.content.validator.api.ValueValidator;
+import net.sf.mmm.content.validator.impl.ValueTypeValidator;
 import net.sf.mmm.content.value.api.Id;
 
 /**
@@ -23,6 +25,9 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   /** @see #getModifiers() */
   private FieldModifiers modifiers;
 
+  /** @see #getConstraint() */
+  private ValueValidator constraint;
+
   /**
    * The constructor.
    * 
@@ -40,10 +45,34 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   public AbstractContentField(Id fieldId, String fieldName, ContentClass declaringContentClass,
       Class fieldType, FieldModifiers fieldModifiers) {
 
+    this(fieldId, fieldName, declaringContentClass, fieldType, fieldModifiers,
+        new ValueTypeValidator(fieldType));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(Id,
+   *      String)
+   * 
+   * @param declaringContentClass
+   *        is the content-class that {@link #getDeclaringClass() declares} (or
+   *        overrides) this field.
+   * @param fieldType
+   *        is the {@link #getFieldType() field-type}.
+   * @param fieldModifiers
+   *        are the {@link #getModifiers() modifiers}.
+   * @param validator
+   *        is the {@link #getConstraint() constraint}.
+   */
+  public AbstractContentField(Id fieldId, String fieldName, ContentClass declaringContentClass,
+      Class fieldType, FieldModifiers fieldModifiers, ValueValidator validator) {
+
     super(fieldId, fieldName);
     this.declaringClass = declaringContentClass;
     this.type = fieldType;
     this.modifiers = fieldModifiers;
+    this.constraint = validator;
   }
 
   /**
@@ -87,6 +116,14 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
+   * @see net.sf.mmm.content.model.api.ContentField#getConstraint()
+   */
+  public ValueValidator getConstraint() {
+
+    return this.constraint;
+  }
+
+  /**
    * @see net.sf.mmm.content.model.api.ContentField#getModifiers()
    */
   public FieldModifiers getModifiers() {
@@ -102,7 +139,10 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
     ContentField superField = null;
     ContentClass superClass = getContentClass().getSuperClass();
     if (superClass != null) {
-      superField = superClass.getDeclaredField(getName());
+      superField = superClass.getField(getName());
+      if (superField == this) {
+        superField = null;
+      }
     }
     return superField;
   }

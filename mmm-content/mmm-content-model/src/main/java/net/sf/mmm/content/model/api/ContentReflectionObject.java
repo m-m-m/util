@@ -11,6 +11,16 @@ import net.sf.mmm.content.api.ContentObject;
  */
 public interface ContentReflectionObject extends ContentObject {
 
+  /** the name of the {@link #getContentClass() class} reflecting this type. */
+  String CLASS_NAME = "ReflectionObject";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getModifiers() modifiers} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_MODIFIERS = "modifiers";
+
   /**
    * This method gets the modifiers of this object. The modifiers are a set of
    * flags.
@@ -23,13 +33,13 @@ public interface ContentReflectionObject extends ContentObject {
   Modifiers getModifiers();
 
   /**
-   * This method determines if this is a {@link ContentClass content-class} or
-   * a {@link ContentField content-field}. It is allowed to cast this object
+   * This method determines if this is a {@link ContentClass content-class} or a
+   * {@link ContentField content-field}. It is allowed to cast this object
    * according to the result of this method.
    * 
-   * @return <code>true</code> if this is a
-   *         {@link ContentClass content-class}, <code>false</code> if this
-   *         is a {@link ContentField content-field}.
+   * @return <code>true</code> if this is a {@link ContentClass content-class},
+   *         <code>false</code> if this is a
+   *         {@link ContentField content-field}.
    */
   boolean isClass();
 

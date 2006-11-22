@@ -4,6 +4,7 @@ package net.sf.mmm.content.model.impl;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.base.AbstractContentField;
+import net.sf.mmm.content.validator.api.ValueValidator;
 import net.sf.mmm.content.value.api.Id;
 
 /**
@@ -14,27 +15,31 @@ import net.sf.mmm.content.value.api.Id;
  */
 public class ContentFieldImpl extends AbstractContentField {
 
-  // public static final ContentFieldImpl FIELD_ID = new
-  // ContentFieldImpl(NAME_ID,
-  // ContentClassImpl.CLASS_ROOT, Id.class,
-  // FieldModifiersImpl.SYSTEM_FINAL_IMMUTABLE, IdImpl.ID_FIELD_ID);
-
-  /** TODO */
+  /** UID for serialization */
   private static final long serialVersionUID = -7652076416516015944L;
-  
+
   /**
    * The constructor.
    * 
-   * @param fieldId
-   * @param fieldName
-   * @param declaringClass
-   * @param fieldType
-   * @param fieldModifiers
+   * @see AbstractContentField#AbstractContentField(Id, String, ContentClass,
+   *      Class, FieldModifiers)
    */
-  public ContentFieldImpl(Id fieldId, String fieldName, ContentClass declaringClass, Class fieldType,
-      FieldModifiers fieldModifiers) {
+  public ContentFieldImpl(Id fieldId, String fieldName, ContentClass declaringClass,
+      Class fieldType, FieldModifiers fieldModifiers) {
 
     super(fieldId, fieldName, declaringClass, fieldType, fieldModifiers);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @see AbstractContentField#AbstractContentField(Id, String, ContentClass,
+   *      Class, FieldModifiers, ValueValidator)
+   */
+  public ContentFieldImpl(Id fieldId, String fieldName, ContentClass declaringContentClass,
+      Class fieldType, FieldModifiers fieldModifiers, ValueValidator validator) {
+
+    super(fieldId, fieldName, declaringContentClass, fieldType, fieldModifiers, validator);
   }
 
   /**

@@ -17,78 +17,8 @@ import java.util.List;
  */
 public interface ContentClass extends ContentReflectionObject {
 
-  /**
-   * the name of the root class reflecting
-   * {@link net.sf.mmm.content.api.ContentObject}
-   */
-  String NAME_ROOT = "Object";
-
-  /**
-   * the name of the class reflecting {@link ContentReflectionObject}
-   */
-  String NAME_REFLECTION = "ReflectionObject";
-
-  /**
-   * the name of the class reflecting {@link ContentClass} (itself).
-   */
-  String NAME_CLASS = "Class";
-
-  /**
-   * the name of the class reflecting {@link ContentField}.
-   */
-  String NAME_FIELD = "Field";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentSecurityObject}.
-   */
-  String NAME_SECURITY = "SecurityObject";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentPrincipal}.
-   */
-  String NAME_PRINCIPAL = "Principal";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentUser}.
-   */
-  String NAME_USER = "User";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentGroup}.
-   */
-  String NAME_GROUP = "Group";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentPermission}.
-   */
-  String NAME_PERMISSION = "Permission";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.api.security.ContentAction}.
-   */
-  String NAME_ACTION = "Action";
-
-  /**
-   * the name of the class reflecting content-resource.
-   */
-  String NAME_RESOURCE = "Resource";
-
-  /**
-   * the name of the class reflecting
-   * {@link net.sf.mmm.content.resource.api.ContentFile}.
-   */
-  String NAME_FILE = "File";
-
-  /**
-   * the name of the class reflecting {@link ContentFolder}.
-   */
-  String NAME_FOLDER = "Folder";
+  /** the name of the {@link #getContentClass() class} reflecting this type. */
+  String CLASS_NAME = "Class";
 
   /**
    * This method gets the number of fields declared by this class.

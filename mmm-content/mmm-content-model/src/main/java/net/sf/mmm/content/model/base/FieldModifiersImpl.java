@@ -24,8 +24,8 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   public static final FieldModifiersImpl FINAL = new FieldModifiersImpl(false, true, false, false,
       false);
 
-  /** the modifier of a final and immutable field */
-  public static final FieldModifiersImpl FINAL_IMMUTABLE = new FieldModifiersImpl(false, true,
+  /** the modifier of a final and read-only field */
+  public static final FieldModifiersImpl FINAL_READONLY = new FieldModifiersImpl(false, true,
       true, false, false);
 
   /** the modifier of a static field */
@@ -37,14 +37,14 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
       true, false);
 
   /** the modifier of a static and immutable field */
-  public static final FieldModifiersImpl STATIC_IMMUTABLE = new FieldModifiersImpl(false, false,
+  public static final FieldModifiersImpl STATIC_READONLY = new FieldModifiersImpl(false, false,
       true, true, false);
 
-  /** the modifier of a static, final and immutable field */
-  public static final FieldModifiersImpl STATIC_FINAL_IMMUTABLE = new FieldModifiersImpl(false,
+  /** the modifier of a static, final and read-only field */
+  public static final FieldModifiersImpl STATIC_FINAL_READONLY = new FieldModifiersImpl(false,
       true, true, true, false);
 
-  /** the modifier of a transient (and immutable) field */
+  /** the modifier of a transient (and read-only) field */
   public static final FieldModifiersImpl TRANSIENT = new FieldModifiersImpl(false, false, true,
       false, true);
 
@@ -56,8 +56,8 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   public static final FieldModifiersImpl SYSTEM_FINAL = new FieldModifiersImpl(true, true, false,
       false, false);
 
-  /** the modifier of a final and immutable system field */
-  public static final FieldModifiersImpl SYSTEM_FINAL_IMMUTABLE = new FieldModifiersImpl(true,
+  /** the modifier of a final and read-only system field */
+  public static final FieldModifiersImpl SYSTEM_FINAL_READONLY = new FieldModifiersImpl(true,
       true, true, false, false);
 
   /** @see #isReadOnly() */

@@ -5,6 +5,7 @@ import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.MutableMetaDataSet;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
@@ -103,6 +104,14 @@ public abstract class AbstractContentObject implements ContentObject {
     this.name = newName;
   }
 
+  /**
+   * @see net.sf.mmm.content.api.ContentObject#getMetaData()
+   */
+  public MutableMetaDataSet getMetaData() throws PermissionDeniedException {
+  
+    return null;
+  }
+  
   /**
    * @see net.sf.mmm.content.api.ContentObject#setFieldValue(java.lang.String,
    *      java.lang.Object)

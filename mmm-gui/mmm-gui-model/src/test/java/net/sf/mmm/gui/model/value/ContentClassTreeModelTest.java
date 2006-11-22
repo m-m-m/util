@@ -2,14 +2,9 @@
 package net.sf.mmm.gui.model.value;
 
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.MutableContentModelService;
-import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.model.impl.BasicMutableContentModelServiceImpl;
-import net.sf.mmm.content.model.impl.ContentClassImpl;
-import net.sf.mmm.content.model.impl.ContentFieldImpl;
-import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.content.model.impl.ContentModelInitializer;
 import net.sf.mmm.gui.model.content.ContentClassTableManager;
 import net.sf.mmm.gui.model.content.ContentClassTreeModel;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
@@ -54,15 +49,7 @@ public class ContentClassTreeModelTest {
     classModel.setModelService(modelService);
     classModel.initialize();
 
-    // dummy model
-
-    ContentField idField = new ContentFieldImpl(new IdImpl(0, IdImpl.CLASS_ID_FIELD), "id",
-        ContentClassImpl.CLASS_ROOT, Id.class, FieldModifiersImpl.SYSTEM_FINAL_IMMUTABLE);
-    ContentClassImpl.CLASS_ROOT.addField(idField);
-    ContentField nameField = new ContentFieldImpl(new IdImpl(1, IdImpl.CLASS_ID_FIELD), "name",
-        ContentClassImpl.CLASS_ROOT, String.class, FieldModifiersImpl.SYSTEM_FINAL);
-
-    // end dummy model
+    ContentModelInitializer.initializeModel();
 
     /*
      * ValueService valueService = new StaticValueServiceImpl(); ValueTypeModel
@@ -99,8 +86,6 @@ public class ContentClassTreeModelTest {
     frame.centerWindow();
     frame.setVisible(true);
     splitPanel.setDividerPosition(0.5);
-    modelService.createField(ContentClassImpl.CLASS_ROOT, "name", String.class,
-        FieldModifiersImpl.SYSTEM_FINAL);
   }
 
 }

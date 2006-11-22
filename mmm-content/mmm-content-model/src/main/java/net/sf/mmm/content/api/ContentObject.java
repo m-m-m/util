@@ -4,6 +4,7 @@ package net.sf.mmm.content.api;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.MutableMetaDataSet;
 import net.sf.mmm.util.xml.api.XmlSerializable;
 
 /**
@@ -17,6 +18,9 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface ContentObject extends XmlSerializable {
+
+  /** the name of the {@link #getContentClass() class} reflecting this type. */
+  String CLASS_NAME = "Object";
 
   /**
    * the variable-name of the current object in the
@@ -39,6 +43,33 @@ public interface ContentObject extends XmlSerializable {
    * the attribute for the {@link #isDeleted() deleted-flag}.
    */
   String XML_ATR_ROOT_DELETED = "deleted";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getId() ID} for generic access via {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_ID = "id";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getName() name} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_NAME = "name";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getContentClass() class} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_CLASS = "contentClass";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getMetaData() metadata} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_METADATA = "metadata";
 
   /**
    * This method gets the unique identifier of this content-object.
@@ -74,7 +105,8 @@ public interface ContentObject extends XmlSerializable {
    *         if you (the current user) does not have permission to perform the
    *         operation.
    */
-  // MutableMetaDataSet getMetaData() throws PermissionDeniedException;
+  MutableMetaDataSet getMetaData() throws PermissionDeniedException;
+  
   /**
    * This method determines if this content-object is marked as deleted. <br>
    * A deleted class or field can NOT be modified. No instances or sub-classes
