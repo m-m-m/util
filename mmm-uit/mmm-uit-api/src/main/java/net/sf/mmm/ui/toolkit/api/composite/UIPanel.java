@@ -38,9 +38,9 @@ public interface UIPanel extends UIComposite, UIWriteOrientation {
 
   /**
    * This method adds the given component to the end of the panels component
-   * list. If the panel has horizontal layout, the component will appear on
-   * the right. If the panel has vertical layout, the component will appear at
-   * the bottom. It will use {@link LayoutConstraints#DEFAULT} as constraints.
+   * list. If the panel has horizontal layout, the component will appear on the
+   * right. If the panel has vertical layout, the component will appear at the
+   * bottom. It will use {@link LayoutConstraints#DEFAULT} as constraints.
    * 
    * @param component
    *        is the component to add. The given component instance must be
@@ -50,16 +50,36 @@ public interface UIPanel extends UIComposite, UIWriteOrientation {
 
   /**
    * This method adds the given component to the end of the panels component
-   * list. If the panel has horizontal layout, the component will appear on
-   * the right. If the panel has vertical layout, the component will appear at
-   * the bottom.
+   * list. If the panel has horizontal layout, the component will appear on the
+   * right. If the panel has vertical layout, the component will appear at the
+   * bottom. Additionally a
+   * {@link net.sf.mmm.ui.toolkit.api.widget.UILabel label} is created and
+   * placed on the left (vertical layout) or top (horizontal layout) of the
+   * <code>component</code>. The constraints for the <code>component</code>
+   * will be {@link LayoutConstraints#DEFAULT}.
+   * 
+   * @param label
+   *        is the text of the
+   *        {@link net.sf.mmm.ui.toolkit.api.widget.UILabel label} for the
+   *        <code>component</code>.
+   * @param component
+   *        is the component to add. The given component instance must be
+   *        created by the same factory.
+   */
+  void addComponent(String label, UIComponent component);
+
+  /**
+   * This method adds the given component to the end of the panels component
+   * list. If the panel has horizontal layout, the component will appear on the
+   * right. If the panel has vertical layout, the component will appear at the
+   * bottom.
    * 
    * @param component
    *        is the component to add. The given component instance must be
    *        created by the same factory.
    * @param constraints
-   *        are the constraints that define the layout of the component in
-   *        this panel.
+   *        are the constraints that define the layout of the component in this
+   *        panel.
    */
   void addComponent(UIComponent component, LayoutConstraints constraints);
 
@@ -70,8 +90,8 @@ public interface UIPanel extends UIComposite, UIWriteOrientation {
    *        is the component to add. The given component instance must be
    *        created by the same factory.
    * @param constraints
-   *        are the constraints that define the layout of the component in
-   *        this panel.
+   *        are the constraints that define the layout of the component in this
+   *        panel.
    * @param position
    *        is the index position where the given component will be inserted.
    */

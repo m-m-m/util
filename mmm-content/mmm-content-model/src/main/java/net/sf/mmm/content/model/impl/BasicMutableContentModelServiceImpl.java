@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.content.model.impl;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
@@ -11,6 +13,8 @@ import net.sf.mmm.content.model.api.ContentReflectionObject;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.model.base.AbstractContentModelService;
+import net.sf.mmm.content.persistence.api.IdService;
+import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.event.ChangeEvent;
 
@@ -22,6 +26,9 @@ import net.sf.mmm.util.event.ChangeEvent;
  */
 public class BasicMutableContentModelServiceImpl extends AbstractContentModelService implements
     MutableContentModelService {
+
+  /** @see #setIdService(IdService) */
+  private IdService idService;
 
   /**
    * The constructor.
@@ -35,6 +42,18 @@ public class BasicMutableContentModelServiceImpl extends AbstractContentModelSer
   }
 
   /**
+   * This method sets the idService.
+   * 
+   * @param idService
+   *        is the idService to set.
+   */
+  @Resource
+  public void setIdService(IdService idService) {
+
+    this.idService = idService;
+  }
+
+  /**
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createClass(net.sf.mmm.content.model.api.ContentClass,
    *      java.lang.String, net.sf.mmm.content.model.api.ClassModifiers)
    */
@@ -45,7 +64,7 @@ public class BasicMutableContentModelServiceImpl extends AbstractContentModelSer
       throw new ContentModelException("Can not extend " + superClass + "!");
     }
 
-    IdImpl id = null;
+    Id id = this.idService.createId(ContentClassImpl.CLASS_CLASS);
     ContentClass newClass = new ContentClassImpl(id, name, superClass, modifiers);
     // persist here
     ((ContentClassImpl) superClass).addSubClass(newClass);
@@ -63,7 +82,22 @@ public class BasicMutableContentModelServiceImpl extends AbstractContentModelSer
   public ContentField createField(ContentClass declaringClass, String name, Class type,
       FieldModifiers modifiers) throws ContentModelException {
 
-    IdImpl id = null;
+    // validation
+    ContentField field = declaringClass.getField(name);
+    if (field != null) {
+      if (field.getModifiers().isFinal()) {
+        throw new ContentModelException("Can not extend final field: " + field + "!");
+      }
+      if (!field.getFieldType().isAssignableFrom(type)) {
+        throw new ContentModelException("Can not extend " + field + " with incompatible type "
+            + type.getName() + "!");
+      }
+    }
+    if (modifiers.isSystem()) {
+      throw new ContentModelException("User can not create system field: " + name + "!");      
+    }
+    // creation
+    Id id = this.idService.createId(ContentClassImpl.CLASS_FIELD);
     ContentField newField = new ContentFieldImpl(id, name, declaringClass, type, modifiers);
     // persist here
     ((ContentClassImpl) declaringClass).addField(newField);
@@ -80,7 +114,7 @@ public class BasicMutableContentModelServiceImpl extends AbstractContentModelSer
 
     ((AbstractContentObject) classOrField).setDeleted(newDeletedFlag);
     // persist here...
-    
+
     // Update or Delete?
     if (classOrField.isClass()) {
       fireEvent(new ContentModelEvent((ContentClass) classOrField, ChangeEvent.Type.UPDATE));

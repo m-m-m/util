@@ -3,6 +3,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -141,6 +142,31 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
     }
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(java.lang.String, net.sf.mmm.ui.toolkit.api.UIComponent)
+   */
+  public void addComponent(String label, UIComponent component) {
+  
+    JLabel swingLabel = new JLabel(label);
+    AbstractUIComponent c = (AbstractUIComponent) component;
+    // synchronized (this) {
+    JComponent swingComponent = c.getSwingComponent();
+    JPanel swingPanel = new JPanel();
+    swingPanel.add(swingLabel);
+    swingPanel.add(swingComponent);
+    this.panel.add(swingPanel, LayoutConstraints.DEFAULT);
+    if (swingComponent instanceof JRadioButton) {
+      getButtonGroup().add((JRadioButton) swingComponent);
+    }
+    this.components.add(c);
+    setParent(c, this);
+    // }
+    // this.panel.updateUI();
+    if (this.panel.isVisible()) {
+      refresh();
+    }    
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
    *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints, int)

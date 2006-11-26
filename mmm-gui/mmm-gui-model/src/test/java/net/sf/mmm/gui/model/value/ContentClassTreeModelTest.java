@@ -28,7 +28,6 @@ public class ContentClassTreeModelTest {
 
   /**
    * The constructor.
-   * 
    */
   public ContentClassTreeModelTest() {
 
@@ -65,7 +64,6 @@ public class ContentClassTreeModelTest {
     UISplitPanel splitPanel = uiFactory.createSplitPanel(Orientation.HORIZONTAL);
     splitPanel.setTopOrLeftComponent(tree);
     UIFrame frame = uiFactory.createFrame("test");
-    UIPanel panel = uiFactory.createPanel(Orientation.HORIZONTAL);
     final ContentClassTableManager tableFactory = new ContentClassTableManager();
     tableFactory.setContentModelService(modelService);
     final UITable table = uiFactory.createTable(false, tableFactory.getTableModel(modelService
@@ -80,12 +78,17 @@ public class ContentClassTreeModelTest {
         }
       }
     });
-    splitPanel.setBottomOrRightComponent(table);
+    UISplitPanel splitPanelRight = uiFactory.createSplitPanel(Orientation.VERTICAL);
+    UIPanel panel = uiFactory.createPanel(Orientation.VERTICAL);
+    splitPanelRight.setTopOrLeftComponent(panel);
+    splitPanelRight.setBottomOrRightComponent(table);
+    splitPanel.setBottomOrRightComponent(splitPanelRight);
     frame.setComposite(splitPanel);
     frame.setSize(600, 400);
     frame.centerWindow();
     frame.setVisible(true);
     splitPanel.setDividerPosition(0.5);
+    splitPanelRight.setDividerPosition(0.5);
   }
 
 }
