@@ -132,6 +132,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#getOrientation()
    */
+  @Override
   public Orientation getOrientation() {
 
     return this.layoutManager.getOrientation();

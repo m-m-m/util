@@ -9,8 +9,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize} interface that builds
- * the maximum width/height out of
+ * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize} interface that builds the
+ * maximum width/height out of
  * {@link net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize preferred-size}
  * objects. This is supposted to be used as
  * {@link net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints#size size} in
@@ -57,6 +57,18 @@ public class MaximumSizer implements UIReadSize {
   public void add(UIReadPreferredSize size) {
 
     this.sizeList.add(size);
+  }
+
+  /**
+   * This method removes the given {@link UIReadPreferredSize size} from the
+   * size-list.
+   * 
+   * @param size
+   *        is the size to remove.
+   */
+  public void remove(UIReadPreferredSize size) {
+
+    this.sizeList.remove(size);
   }
 
   /**

@@ -40,8 +40,12 @@ public class LayoutConstraints {
 
   /**
    * The default layout constraints:<br>
-   * Default alignment is {@link Alignment#CENTER}, default {@link #weight} is
-   * <code>1.0</code> and default insets are {@link Insets#NO_SPACE}.
+   * <ul>
+   * <li>{@link #alignment} = {@link Alignment#CENTER}</li>
+   * <li>{@link #filling} = {@link Filling#BOTH}</li>
+   * <li>{@link #weight} = <code>1.0</code></li>
+   * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
    */
   public static final LayoutConstraints DEFAULT = new LayoutConstraints(Alignment.CENTER,
       Filling.BOTH, 1.0, Insets.NO_SPACE);
@@ -53,6 +57,7 @@ public class LayoutConstraints {
    * <li>{@link #filling} = {@link Filling#HORIZONTAL}</li>
    * <li>{@link #weight} = <code>0.0</code></li>
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
    */
   public static final LayoutConstraints FIXED_HORIZONTAL = new LayoutConstraints(Alignment.CENTER,
       Filling.HORIZONTAL, 0.0, Insets.NO_SPACE);
@@ -61,9 +66,22 @@ public class LayoutConstraints {
    * Layout constraints with:
    * <ul>
    * <li>{@link #alignment} = {@link Alignment#CENTER}</li>
+   * <li>{@link #filling} = {@link Filling#HORIZONTAL}</li>
+   * <li>{@link #weight} = <code>0.0</code></li>
+   * <li>{@link #insets} = {@link Insets#SMALL_SPACE}</li>
+   * </ul>
+   */
+  public static final LayoutConstraints FIXED_HORIZONTAL_INSETS = new LayoutConstraints(Alignment.CENTER,
+      Filling.HORIZONTAL, 0.0, Insets.SMALL_SPACE);
+
+  /**
+   * Layout constraints with:
+   * <ul>
+   * <li>{@link #alignment} = {@link Alignment#CENTER}</li>
    * <li>{@link #filling} = {@link Filling#VERTICAL}</li>
    * <li>{@link #weight} = <code>0.0</code></li>
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
    */
   public static final LayoutConstraints FIXED_VERTICAL = new LayoutConstraints(Alignment.CENTER,
       Filling.VERTICAL, 0.0, Insets.NO_SPACE);
@@ -75,6 +93,7 @@ public class LayoutConstraints {
    * <li>{@link #filling} = {@link Filling#VERTICAL}</li>
    * <li>{@link #weight} = <code>0.0</code></li>
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
    */
   public static final LayoutConstraints FIXED_NONE = new LayoutConstraints(Alignment.CENTER,
       Filling.NONE, 0.0, Insets.NO_SPACE);

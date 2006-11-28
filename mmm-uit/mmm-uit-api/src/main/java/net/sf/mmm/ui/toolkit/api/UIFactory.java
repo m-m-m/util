@@ -7,6 +7,7 @@ import java.net.URL;
 
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
@@ -153,7 +154,7 @@ public interface UIFactory extends UIWriteDisposed {
   UIPanel createPanel(Orientation orientation);
 
   /**
-   * This method creates a new panel with a border.
+   * This method creates a new {@link UIPanel panel} with a border.
    * 
    * @param orientation
    *        is the orientation of the child-components in the panel.
@@ -162,6 +163,44 @@ public interface UIFactory extends UIWriteDisposed {
    * @return the created panel.
    */
   UIPanel createPanel(Orientation orientation, String borderTitle);
+
+  /**
+   * This method creates a {@link UIDecoratedComponent decorated component} that
+   * bundles the given <code>component</code> together with a
+   * <code>decorator</code>. The result can be easily
+   * {@link UIPanel#addComponent(UIComponent) added} to a {@link UIPanel panel}.
+   * 
+   * @param <D>
+   *        is the templated type of the <code>decorator</code>.
+   * @param <C>
+   *        is the templated type of the <code>component</code>.
+   * 
+   * @param decorator
+   *        is the decorating component.
+   * @param component
+   *        is the main component.
+   * @return the decorated component.
+   */
+  <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
+      D decorator, C component);
+
+  /**
+   * This method creates a {@link UIDecoratedComponent decorated component} that
+   * bundles the given <code>component</code> together with a
+   * {@link UILabel label}. The result can be easily
+   * {@link UIPanel#addComponent(UIComponent) added} to a {@link UIPanel panel}.
+   * 
+   * @param <C>
+   *        is the templated type of the <code>component</code>.
+   * 
+   * @param label
+   *        is the label text.
+   * @param component
+   *        is the component.
+   * @return the labeled component.
+   */
+  <C extends UIComponent> UIDecoratedComponent<UILabel, C> createLabeledComponent(String label,
+      C component);
 
   /**
    * This method creates a new scroll-panel.
@@ -255,7 +294,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @return the created tree.
    */
-  UITree createTree();
+  UITree<?> createTree();
 
   /**
    * This method creates a tree.
@@ -265,7 +304,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        tree, else ony one.
    * @return the created tree.
    */
-  UITree createTree(boolean multiSelection);
+  UITree<?> createTree(boolean multiSelection);
 
   /**
    * This method creates a tree.
@@ -286,7 +325,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @return the created table.
    */
-  UITable createTable();
+  UITable<?> createTable();
 
   /**
    * This method creates a table.
@@ -296,10 +335,13 @@ public interface UIFactory extends UIWriteDisposed {
    *        the table, else ony one.
    * @return the created table.
    */
-  UITable createTable(boolean multiSelection);
+  UITable<?> createTable(boolean multiSelection);
 
   /**
    * This method creates a table.
+   * 
+   * @param <C>
+   *        is the templated type of the objects in the table cells.
    * 
    * @param multiSelection -
    *        if <code>true</code> the user can select multiple items/cells of
@@ -308,7 +350,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        is the model defining the content of the table.
    * @return the created table.
    */
-  UITable createTable(boolean multiSelection, UITableModel model);
+  <C> UITable<C> createTable(boolean multiSelection, UITableModel<C> model);
 
   /**
    * This method creates a new label. The label is initially empty (has no

@@ -9,6 +9,7 @@ import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
@@ -113,6 +114,15 @@ public abstract class AbstractUIFactory implements UIFactory {
   }
 
   /**
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createLabeledComponent(java.lang.String, net.sf.mmm.ui.toolkit.api.UIComponent)
+   */
+  public <C extends UIComponent> UIDecoratedComponent<UILabel, C> createLabeledComponent(
+      String label, C component) {
+  
+    return createDecoratedComponent(createLabel(label), component);
+  }
+  
+  /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPicture(java.io.File)
    */
   public UIPicture createPicture(File imageFile) throws IOException {
@@ -167,7 +177,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable()
    */
-  public UITable createTable() {
+  public UITable<?> createTable() {
 
     return createTable(false);
   }
@@ -175,7 +185,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable(boolean)
    */
-  public UITable createTable(boolean multiSelection) {
+  public UITable<?> createTable(boolean multiSelection) {
 
     return createTable(multiSelection, null);
   }
@@ -183,7 +193,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree()
    */
-  public UITree createTree() {
+  public UITree<?> createTree() {
 
     return createTree(false);
   }
@@ -191,7 +201,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree(boolean)
    */
-  public UITree createTree(boolean multiSelection) {
+  public UITree<?> createTree(boolean multiSelection) {
 
     return createTree(multiSelection, null);
   }

@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
+import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -45,6 +46,14 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
     }
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation()
+   */
+  public Orientation getOrientation() {
+  
+    return Orientation.HORIZONTAL;
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#getBorderTitle()
    */

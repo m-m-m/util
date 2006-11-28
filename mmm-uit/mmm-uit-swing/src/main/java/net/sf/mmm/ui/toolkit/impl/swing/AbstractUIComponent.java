@@ -64,6 +64,17 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   }
 
   /**
+   * This method removes this component from its {@link #getParent() parent}.
+   */
+  public void removeFromParent() {
+    UINode parent = getParent();
+    if (parent != null) {
+      setParent(null);    
+      throw new IllegalArgumentException("Currently unsupported!");      
+    }
+  }
+  
+  /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#getTooltipText()
    */
   public String getTooltipText() {

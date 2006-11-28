@@ -124,7 +124,7 @@ public abstract class AbstractLayoutManager {
     double axisDynamic = 0;
     // pass 1
     for (int i = 0; i < this.childCount; i++) {
-      // if with is 0, the component is NOT visible
+      // if width is 0, the component is NOT visible
       if (this.childSizes[i].width != 0) {
         // add insets as fixed space
         if (this.layoutOrientation == Orientation.HORIZONTAL) {

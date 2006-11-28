@@ -121,6 +121,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#getOrientation()
    */
+  @Override
   public Orientation getOrientation() {
 
     if (this.syncAccess.hasStyle(SWT.HORIZONTAL)) {

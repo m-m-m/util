@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.api.UIDisplay;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
@@ -39,6 +40,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDeviceImpl;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDisplayImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.composite.UIDecoratedComponentImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UIPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UIScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UISplitPanelImpl;
@@ -154,6 +156,18 @@ public class UIFactorySwing extends AbstractUIFactory {
     return panel;
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createDecoratedComponent(net.sf.mmm.ui.toolkit.api.UIComponent, net.sf.mmm.ui.toolkit.api.UIComponent)
+   */
+  public <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
+      D decorator, C component) {
+  
+    UIDecoratedComponent<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this, null);
+    decoratedComponent.setDecorator(decorator);
+    decoratedComponent.setComponent(component);
+    return decoratedComponent;
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createScrollPanel(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
    */

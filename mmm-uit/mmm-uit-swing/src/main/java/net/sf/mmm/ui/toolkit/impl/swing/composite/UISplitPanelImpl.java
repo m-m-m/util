@@ -74,6 +74,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#getOrientation()
    */
+  @Override
   public Orientation getOrientation() {
 
     if (this.splitPanel.getOrientation() == JSplitPane.HORIZONTAL_SPLIT) {
@@ -88,13 +89,14 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
    */
   public void setTopOrLeftComponent(UIComponent component) {
 
-    if (component.getParent() != null) {
-      throw new IllegalArgumentException("Currently unsupported!");
+    AbstractUIComponent newComponent = (AbstractUIComponent) component;
+    if (newComponent.getParent() != null) {
+      newComponent.removeFromParent();
     }
     if (this.componentTopOrLeft != null) {
       setParent(this.componentTopOrLeft, null);
     }
-    this.componentTopOrLeft = (AbstractUIComponent) component;
+    this.componentTopOrLeft = newComponent;
     JComponent jComponent = this.componentTopOrLeft.getSwingComponent();
     this.splitPanel.setTopComponent(jComponent);
     setParent(this.componentTopOrLeft, this);
@@ -105,16 +107,14 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
    */
   public void setBottomOrRightComponent(UIComponent component) {
 
-    if (component.getParent() != null) {
-      // TODO: add AbstractUIComponent.removeFromParent()
-      // AbstractUIComponent c = (AbstractUIComponent) component;
-      // c.removeFromParent;
-      throw new IllegalArgumentException("Currently unsupported!");
+    AbstractUIComponent newComponent = (AbstractUIComponent) component;
+    if (newComponent.getParent() != null) {
+      newComponent.removeFromParent();
     }
     if (this.componentBottomOrRight != null) {
       setParent(this.componentBottomOrRight, null);
     }
-    this.componentBottomOrRight = (AbstractUIComponent) component;
+    this.componentBottomOrRight = newComponent;
     JComponent jComponent = this.componentBottomOrRight.getSwingComponent();
     this.splitPanel.setBottomComponent(jComponent);
     setParent(this.componentBottomOrRight, this);

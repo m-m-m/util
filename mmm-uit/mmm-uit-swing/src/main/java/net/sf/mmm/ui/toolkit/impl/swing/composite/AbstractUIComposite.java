@@ -5,18 +5,21 @@ import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIComponent} interface using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.UIComponent} interface using Swing as the UI
+ * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIComposite extends AbstractUIComponent implements UIComposite {
+public abstract class AbstractUIComposite extends AbstractUIComponent implements UIComposite,
+    UIWriteBorderTitle {
 
   /** the titled border of this composite */
   private TitledBorder border;
@@ -35,6 +38,14 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
     this.border = null;
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation()
+   */
+  public Orientation getOrientation() {
+  
+    return Orientation.HORIZONTAL;
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIComponent#setEnabled(boolean)
    */
@@ -67,7 +78,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#getBorderTitle()
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadBorderTitle#getBorderTitle()
    */
   public String getBorderTitle() {
 
