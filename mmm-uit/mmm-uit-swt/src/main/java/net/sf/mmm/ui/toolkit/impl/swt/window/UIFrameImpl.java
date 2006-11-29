@@ -41,8 +41,9 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximized#isMaximized()
    */
   public boolean isMaximized() {
-
-    return getSwtWindow().getMaximized();
+    
+    //return getSwtWindow().getMaximized();
+    return getSyncAccess().getMaximized();
   }
 
   /**
@@ -50,7 +51,8 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    */
   public void setMaximized(boolean maximize) {
 
-    getSwtWindow().setMaximized(maximize);
+    //getSwtWindow().setMaximized(maximize);
+    getSyncAccess().setMaximized(maximize);
   }
 
   /**
@@ -66,9 +68,18 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    */
   public void setMinimized(boolean minimize) {
 
-    getSwtWindow().setMinimized(minimize);
+    //getSwtWindow().setMinimized(minimize);
+    getSyncAccess().setMinimized(minimize);
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMinimized#isMinimized()
+   */
+  public boolean isMinimized() {
+  
+    return getSyncAccess().getMinimized();
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
    *      boolean)

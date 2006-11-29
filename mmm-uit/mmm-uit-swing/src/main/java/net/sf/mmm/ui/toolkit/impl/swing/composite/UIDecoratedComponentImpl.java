@@ -1,10 +1,6 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.LayoutManager2;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -37,14 +33,14 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   /** @see #getSwingComponent() */
   private final JPanel panel;
 
+  /** the layout-manager */
+  private final DecoratingLayoutManager layoutManager;
+  
   /** @see #getComponent() */
   private C component;
 
   /** @see #getDecorator() */
   private D decorator;
-
-  /** @see #setDecoratorSizer(UIReadSize) */
-  private UIReadSize decoratorSizer;
 
   /**
    * @param uiFactory
@@ -53,7 +49,8 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
-    this.panel = new JPanel(new DecoratingLayoutManager());
+    this.layoutManager = new DecoratingLayoutManager(this);
+    this.panel = new JPanel(this.layoutManager);
   }
 
   /**
@@ -137,7 +134,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
    */
   public void setDecoratorSizer(UIReadSize sizer) {
 
-    this.decoratorSizer = sizer;
+    this.layoutManager.setSizer(sizer);
   }
 
   /**
@@ -174,193 +171,6 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   public String getType() {
 
     return TYPE;
-  }
-
-  /**
-   * This inner class is the layout-manager that organizes the layout for this
-   * {@link UIDecoratedComponent} implementation.
-   */
-  private class DecoratingLayoutManager implements LayoutManager2 {
-
-    /** the indent for the decorator */
-    private static final int INDENT = 2;
-
-    /** 2 * INDENT */
-    private static final int DOUBLE_INDENT = 2 * INDENT;
-
-    /**
-     * The constructor.
-     */
-    public DecoratingLayoutManager() {
-
-      super();
-    }
-
-    /**
-     * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
-     */
-    public void layoutContainer(Container parent) {
-
-      Dimension parentSize = parent.getSize();
-
-      Dimension decoratorSize = null;
-      if (UIDecoratedComponentImpl.this.decorator != null) {
-        AbstractUIComponent abstractComponent = (AbstractUIComponent) UIDecoratedComponentImpl.this.decorator;
-        JComponent swingComponent = abstractComponent.getSwingComponent();
-        decoratorSize = swingComponent.getMinimumSize();
-        UIReadSize sizer = UIDecoratedComponentImpl.this.decoratorSizer;
-        if (sizer != null) {
-          if (getOrientation() == Orientation.HORIZONTAL) {
-            decoratorSize.width = sizer.getWidth();
-          } else {
-            decoratorSize.height = sizer.getHeight();
-          }
-        }
-        if (getOrientation() == Orientation.HORIZONTAL) {
-          swingComponent.setBounds(INDENT, 0, decoratorSize.width, decoratorSize.height);
-        } else {
-          swingComponent.setBounds(0, INDENT, decoratorSize.width, decoratorSize.height);
-        }
-      }
-
-      if (UIDecoratedComponentImpl.this.component != null) {
-        AbstractUIComponent abstractComponent = (AbstractUIComponent) UIDecoratedComponentImpl.this.component;
-        JComponent swingComponent = abstractComponent.getSwingComponent();
-        if (decoratorSize == null) {
-          swingComponent.setBounds(0, 0, parentSize.width, parentSize.height);
-        } else {
-          if (getOrientation() == Orientation.HORIZONTAL) {
-            swingComponent.setBounds(decoratorSize.width + DOUBLE_INDENT, 0, parentSize.width
-                - decoratorSize.width - DOUBLE_INDENT, parentSize.height);
-          } else {
-            swingComponent.setBounds(0, decoratorSize.height + DOUBLE_INDENT, parentSize.width,
-                parentSize.height - decoratorSize.height - DOUBLE_INDENT);
-          }
-        }
-      }
-    }
-
-    /**
-     * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
-     */
-    public Dimension preferredLayoutSize(Container parent) {
-
-      Dimension preferredSize = null;
-      if (UIDecoratedComponentImpl.this.decorator != null) {
-        AbstractUIComponent abstractComponent = (AbstractUIComponent) UIDecoratedComponentImpl.this.decorator;
-        JComponent swingComponent = abstractComponent.getSwingComponent();
-        preferredSize = swingComponent.getMinimumSize();
-        if (getOrientation() == Orientation.HORIZONTAL) {
-          preferredSize.width += DOUBLE_INDENT;
-        } else {
-          preferredSize.height += DOUBLE_INDENT;
-        }
-      }
-      UIReadSize sizer = UIDecoratedComponentImpl.this.decoratorSizer;
-      if (sizer != null) {
-        if (preferredSize == null) {
-          preferredSize = new Dimension(sizer.getWidth(), sizer.getHeight());
-        } else {
-          if (getOrientation() == Orientation.HORIZONTAL) {
-            preferredSize.width = sizer.getWidth() + DOUBLE_INDENT;
-          } else {
-            preferredSize.height = sizer.getHeight() + DOUBLE_INDENT;
-          }
-        }
-      }
-      if (UIDecoratedComponentImpl.this.component != null) {
-        AbstractUIComponent abstractComponent = (AbstractUIComponent) UIDecoratedComponentImpl.this.component;
-        JComponent swingComponent = abstractComponent.getSwingComponent();
-        Dimension size = swingComponent.getPreferredSize();
-        if (preferredSize == null) {
-          preferredSize = size;
-        } else {
-          if (getOrientation() == Orientation.HORIZONTAL) {
-            preferredSize.width += size.width;
-            if (preferredSize.height < size.height) {
-              preferredSize.height = size.height;
-            }
-          } else {
-            preferredSize.height += size.height;
-            if (preferredSize.width < size.width) {
-              preferredSize.width = size.width;
-            }
-          }
-        }
-      }
-      if (preferredSize == null) {
-        return new Dimension();
-      } else {
-        return preferredSize;
-      }
-    }
-
-    /**
-     * @see java.awt.LayoutManager2#addLayoutComponent(java.awt.Component,
-     *      java.lang.Object)
-     */
-    public void addLayoutComponent(Component comp, Object constraints) {
-
-    // nothing to do...
-    }
-
-    /**
-     * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String,
-     *      java.awt.Component)
-     */
-    public void addLayoutComponent(String name, Component comp) {
-
-    // nothing to do...
-    }
-
-    /**
-     * @see java.awt.LayoutManager2#invalidateLayout(java.awt.Container)
-     */
-    public void invalidateLayout(Container target) {
-
-    // nothing to do...
-    }
-
-    /**
-     * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
-     */
-    public void removeLayoutComponent(Component comp) {
-
-    // nothing to do...
-    }
-
-    /**
-     * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
-     */
-    public Dimension minimumLayoutSize(Container parent) {
-
-      return preferredLayoutSize(parent);
-    }
-
-    /**
-     * @see java.awt.LayoutManager2#maximumLayoutSize(java.awt.Container)
-     */
-    public Dimension maximumLayoutSize(Container target) {
-
-      return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
-    }
-
-    /**
-     * @see java.awt.LayoutManager2#getLayoutAlignmentX(java.awt.Container)
-     */
-    public float getLayoutAlignmentX(Container target) {
-
-      return 0.5F;
-    }
-
-    /**
-     * @see java.awt.LayoutManager2#getLayoutAlignmentY(java.awt.Container)
-     */
-    public float getLayoutAlignmentY(Container target) {
-
-      return 0.5F;
-    }
-
   }
 
 }

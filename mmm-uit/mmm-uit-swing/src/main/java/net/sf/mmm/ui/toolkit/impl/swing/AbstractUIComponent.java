@@ -22,7 +22,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   private boolean disposed;
 
   /** the (mimimum) size */
-  private final Dimension size;
+  //private final Dimension size;
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
     super(uiFactory, parentObject);
     this.disposed = false;
-    this.size = new Dimension();
+    //this.size = new Dimension();
   }
 
   /**
@@ -117,6 +117,22 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   }
 
   /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getX()
+   */
+  public int getX() {
+  
+    return getSwingComponent().getX();
+  }
+  
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getY()
+   */
+  public int getY() {
+  
+    return getSwingComponent().getY();
+  }
+  
+  /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
    */
   public int getHeight() {
@@ -147,13 +163,21 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   public void setSize(int width, int height) {
 
     if (isResizeable()) {
-      // getSwingComponent().setSize(width, height);
-      this.size.height = height;
-      this.size.width = width;
-      getSwingComponent().setMinimumSize(this.size);
+      getSwingComponent().setSize(width, height);
+      //this.size.height = height;
+      //this.size.width = width;
+      //getSwingComponent().setMinimumSize(this.size);
     }
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWritePosition#setPosition(int, int)
+   */
+  public void setPosition(int x, int y) {
+  
+    getSwingComponent().setLocation(x, y);
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
    */

@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.state;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIWriteMinimized {
+public interface UIWriteMinimized extends UIReadMinimized {
 
   /**
    * This method (un)minimizes the object (window). If it is minimized it will

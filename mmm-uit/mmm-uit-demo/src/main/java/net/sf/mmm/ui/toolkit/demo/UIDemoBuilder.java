@@ -3,6 +3,7 @@ package net.sf.mmm.ui.toolkit.demo;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
@@ -140,8 +141,9 @@ public class UIDemoBuilder {
         UIPicture icon = null;
         try {
             // TODO add icon as resource and load it this way!
-            icon = factory.createPicture(new File(
-                    "/usr/share/icons/crystalsvg/22x22/mimetypes/spreadsheet.png"));
+          String iconPath = UIDemoBuilder.class.getPackage().getName().replace('.', '/') + "/icon.png";
+          URL iconUrl = Thread.currentThread().getContextClassLoader().getResource(iconPath);
+            icon = factory.createPicture(iconUrl);
         } catch (IOException e) {
             e.printStackTrace();
         }

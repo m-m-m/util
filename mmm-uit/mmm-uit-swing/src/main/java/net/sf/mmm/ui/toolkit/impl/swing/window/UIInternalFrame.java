@@ -134,11 +134,21 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    */
   public void setMinimized(boolean minimize) {
 
-    try {
-      this.frame.setIcon(minimize);
-    } catch (PropertyVetoException e) {
-      // ignore this...
+    if(this.frame.isIconifiable()) {
+      try {
+        this.frame.setIcon(minimize);
+      } catch (PropertyVetoException e) {
+        // ignore this...
+      }      
     }
+  }
+  
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMinimized#isMinimized()
+   */
+  public boolean isMinimized() {
+  
+    return this.frame.isIcon();
   }
 
   /**

@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.swing.window;
 
+import java.awt.Frame;
 import java.awt.Window;
 
 import javax.swing.JComponent;
@@ -103,7 +104,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    */
   public boolean isMaximized() {
 
-    return (this.frame.getExtendedState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH;
+    return (this.frame.getExtendedState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
   }
 
   /**
@@ -113,9 +114,9 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
 
     int state = this.frame.getExtendedState();
     if (maximize) {
-      state |= JFrame.MAXIMIZED_BOTH;
+      state |= Frame.MAXIMIZED_BOTH;
     } else {
-      state &= ~JFrame.MAXIMIZED_BOTH;
+      state &= ~Frame.MAXIMIZED_BOTH;
     }
     this.frame.setExtendedState(state);
   }
@@ -124,11 +125,23 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMinimized(boolean)
    */
   public void setMinimized(boolean minimize) {
-
-  // TODO Auto-generated method stub
-
+    int state = this.frame.getExtendedState();
+    if (minimize) {
+      state |= Frame.ICONIFIED;
+    } else {
+      state &= ~Frame.ICONIFIED;
+    }
+    this.frame.setExtendedState(state);
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMinimized#isMinimized()
+   */
+  public boolean isMinimized() {
+  
+    return (this.frame.getExtendedState() & Frame.ICONIFIED) == Frame.ICONIFIED;
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
    *      boolean)

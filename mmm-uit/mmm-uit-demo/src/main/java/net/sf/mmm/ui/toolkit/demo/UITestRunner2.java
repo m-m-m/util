@@ -23,12 +23,12 @@ public class UITestRunner2 {
         System.out.println(factory);
         System.out.println(factory.getDisplay());
         final UIWorkbench workbench = factory.createWorkbench("Workbench");
-        workbench.setSize(800, 1024);
+        workbench.setMaximized(true);
         workbench.setVisible(true);
         final UIFrame frame = workbench.createFrame("TestFrame", true);        
         frame.setComposite(UIDemoBuilder.createTabbedPanel(factory));
         UIDemoBuilder.createMenus(frame);        
-        frame.setSize(500, 300);
+        frame.setSize(600, 500);
         frame.centerWindow();
         frame.setVisible(true);
         while (workbench.isVisible()) {

@@ -189,26 +189,6 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
-   */
-  public boolean isResizeable() {
-
-    // TODO
-    return false;
-  }
-
-  /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
-   */
-  public void setSize(int width, int height) {
-
-    if (isResizeable()) {
-
-      getSyncAccess().setSize(width, height);
-    }
-  }
-
-  /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
    */
   public int getHeight() {
@@ -224,6 +204,50 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
     return getSyncAccess().getBounds().width;
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getX()
+   */
+  public int getX() {
+  
+    return getSyncAccess().getBounds().x;
+  }
+  
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getY()
+   */
+  public int getY() {
+  
+    return getSyncAccess().getBounds().y;
+  }
+  
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
+   */
+  public boolean isResizeable() {
+
+    // TODO
+    return true;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
+   */
+  public void setSize(int width, int height) {
+
+    if (isResizeable()) {
+
+      getSyncAccess().setSize(width, height);
+    }
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWritePosition#setPosition(int, int)
+   */
+  public void setPosition(int x, int y) {
+  
+    getSyncAccess().setLocation(x, y);
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredHeight()
    */
