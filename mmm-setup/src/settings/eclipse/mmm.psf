@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-util/mmm-util-xml,mmm-util-xml"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-uit/mmm-uit-api,mmm-uit-api"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-term/mmm-term-core,mmm-term-core"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-gui/mmm-gui-model,mmm-gui-model"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-configuration/mmm-configuration-binding,mmm-configuration-binding"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-context,mmm-context"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-value/mmm-value-main,mmm-value-main"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-util/mmm-util-reflect,mmm-util-reflect"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-content/mmm-content-value,mmm-content-value"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-content/mmm-content-model,mmm-content-model"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-content/mmm-content-resource,mmm-content-resource"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-uit/mmm-uit-swt,mmm-uit-swt"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-value/mmm-value-core,mmm-value-core"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-util/mmm-util-misc,mmm-util-misc"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-nls/mmm-nls-core,mmm-nls-core"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-uit/mmm-uit-swing,mmm-uit-swing"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-configuration/mmm-configuration-core,mmm-configuration-core"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-uit/mmm-uit-demo,mmm-uit-demo"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-util/mmm-util-event,mmm-util-event"/>
+<project reference="0.9.3,https://m-m-m.googlecode.com/svn/trunk/mmm-validator,mmm-validator"/>
+</provider>
+</psf>

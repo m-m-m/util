@@ -156,10 +156,8 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
       len = selections.length;
     }
     N[] result = (N[]) Array.newInstance(getModel().getNodeType(), len);
-    if (len > 0) {
-      for (int i = 0; i < len; i++) {
-        result[i] = (N) selections[i].getLastPathComponent();
-      }
+    for (int i = 0; i < len; i++) {
+      result[i] = (N) selections[i].getLastPathComponent();
     }
     return result;
   }

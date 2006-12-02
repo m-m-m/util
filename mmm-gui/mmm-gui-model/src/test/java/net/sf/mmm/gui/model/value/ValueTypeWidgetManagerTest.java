@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.gui.model.content;
+package net.sf.mmm.gui.model.value;
 
 import net.sf.mmm.gui.model.value.ValueTypeListModel;
 import net.sf.mmm.gui.model.value.ValueTypeWidgetManager;

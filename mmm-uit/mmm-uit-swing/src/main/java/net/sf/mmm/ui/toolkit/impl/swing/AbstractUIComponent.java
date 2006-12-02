@@ -1,8 +1,6 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.impl.swing;
 
-import java.awt.Dimension;
-
 import javax.swing.JComponent;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;

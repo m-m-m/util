@@ -41,6 +41,7 @@ import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.impl.swt.composite.UIDecoratedComponentImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.UIPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.UIScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.UISplitPanelImpl;
@@ -83,8 +84,8 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * The dummy constructor.
    * 
-   * This constructor may be used for testing if an instance is required for
-   * the default display without using the
+   * This constructor may be used for testing if an instance is required for the
+   * default display without using the
    * {@link net.sf.mmm.ui.toolkit.api.UIService UIService}.
    */
   public UIFactorySwt() {
@@ -149,6 +150,7 @@ public class UIFactorySwt extends AbstractUIFactory {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(java.lang.String,
+   *      net.sf.mmm.ui.toolkit.api.UIPicture,
    *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
    */
   public UIButton createButton(String text, UIPicture icon, ButtonStyle style) {
@@ -172,14 +174,19 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createDecoratedComponent(net.sf.mmm.ui.toolkit.api.UIComponent, net.sf.mmm.ui.toolkit.api.UIComponent)
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createDecoratedComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
+   *      net.sf.mmm.ui.toolkit.api.UIComponent)
    */
   public <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component) {
-  
-    return null;
+
+    UIDecoratedComponentImpl<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this,
+        null, null);
+    decoratedComponent.setDecorator(decorator);
+    decoratedComponent.setComponent(component);
+    return decoratedComponent;
   }
-  
+
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createScrollPanel(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
    */
@@ -215,9 +222,9 @@ public class UIFactorySwt extends AbstractUIFactory {
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree(boolean,
    *      net.sf.mmm.ui.toolkit.api.model.UITreeModel)
    */
-  public UITree createTree(boolean multiSelection, UITreeModel model) {
+  public <N> UITree<N> createTree(boolean multiSelection, UITreeModel<N> model) {
 
-    UITreeImpl tree = new UITreeImpl(this, null, multiSelection);
+    UITreeImpl<N> tree = new UITreeImpl<N>(this, null, multiSelection);
     if (model != null) {
       tree.setModel(model);
     }
@@ -228,9 +235,9 @@ public class UIFactorySwt extends AbstractUIFactory {
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable(boolean,
    *      net.sf.mmm.ui.toolkit.api.model.UITableModel)
    */
-  public UITable createTable(boolean multiSelection, UITableModel model) {
+  public <C> UITable<C> createTable(boolean multiSelection, UITableModel<C> model) {
 
-    UITableImpl table = new UITableImpl(this, null, multiSelection);
+    UITableImpl<C> table = new UITableImpl<C>(this, null, multiSelection);
     if (model != null) {
       table.setModel(model);
     }
@@ -256,11 +263,13 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTextField()
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTextField(boolean)
    */
-  public UITextField createTextField() {
+  public UITextField createTextField(boolean editable) {
 
-    return new UITextFieldImpl(this, null);
+    UITextFieldImpl textField = new UITextFieldImpl(this, null);
+    textField.setEditable(editable);
+    return textField;
   }
 
   /**
@@ -368,8 +377,8 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * This method converts the given <code>buttonStyle</code> to the
-   * according {@link org.eclipse.swt.SWT} constant for a {@link MenuItem}.
+   * This method converts the given <code>buttonStyle</code> to the according
+   * {@link org.eclipse.swt.SWT} constant for a {@link MenuItem}.
    * 
    * @param buttonStyle
    *        is the button-style to convert.
@@ -386,8 +395,8 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * This method converts the given <code>buttonStyle</code> to the
-   * according {@link org.eclipse.swt.SWT} constant for a
+   * This method converts the given <code>buttonStyle</code> to the according
+   * {@link org.eclipse.swt.SWT} constant for a
    * {@link org.eclipse.swt.widgets.Button}.
    * 
    * @param buttonStyle
@@ -411,8 +420,8 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * This method converts the given <code>orientation</code> to the
-   * according {@link org.eclipse.swt.SWT} constant.
+   * This method converts the given <code>orientation</code> to the according
+   * {@link org.eclipse.swt.SWT} constant.
    * 
    * @param orientation
    *        is the orientation to convert.

@@ -67,4 +67,20 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
     return this.textField.getText();
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable()
+   */
+  public boolean isEditable() {
+  
+    return this.textField.isEditable();
+  }
+  
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#setEditable(boolean)
+   */
+  public void setEditable(boolean editableFlag) {
+  
+    this.textField.setEditable(editableFlag);
+  }
+  
 }

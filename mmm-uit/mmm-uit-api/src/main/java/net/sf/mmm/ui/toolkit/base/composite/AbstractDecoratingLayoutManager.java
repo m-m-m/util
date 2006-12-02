@@ -81,7 +81,6 @@ public abstract class AbstractDecoratingLayoutManager {
         decorator.setPosition(0, INDENT);
       }
       decorator.setSize(width, height);
-      System.out.println(width + "*" + height);
     }
 
     UIComponent component = this.decoratedComponent.getComponent();
@@ -93,7 +92,6 @@ public abstract class AbstractDecoratingLayoutManager {
         if (this.decoratedComponent.getOrientation() == Orientation.HORIZONTAL) {
           component.setPosition(width + DOUBLE_INDENT, 0);
           component.setSize(parentSize.width - width - DOUBLE_INDENT, parentSize.height);
-          System.out.println(parentSize.width - width - DOUBLE_INDENT + "*" + parentSize.height);
         } else {
           component.setPosition(0, height + DOUBLE_INDENT);
           component.setSize(parentSize.width, parentSize.height - height - DOUBLE_INDENT);

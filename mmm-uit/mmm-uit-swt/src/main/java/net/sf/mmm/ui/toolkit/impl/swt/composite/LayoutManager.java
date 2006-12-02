@@ -21,6 +21,61 @@ import net.sf.mmm.ui.toolkit.base.composite.Size;
 public class LayoutManager extends Layout {
 
   /**
+   * The actual layout-manager where all work is delegated to.
+   */
+  private final Manager delegate;
+
+  /**
+   * The constructor.
+   */
+  public LayoutManager() {
+
+    super();
+    this.delegate = new Manager();
+  }
+
+  /**
+   * @see org.eclipse.swt.widgets.Layout#computeSize(org.eclipse.swt.widgets.Composite,
+   *      int, int, boolean)
+   */
+  @Override
+  protected Point computeSize(Composite composite, int wHint, int hHint, boolean flushCache) {
+
+    return this.delegate.computeSize(composite, flushCache);
+  }
+
+  /**
+   * @see org.eclipse.swt.widgets.Layout#layout(org.eclipse.swt.widgets.Composite,
+   *      boolean)
+   */
+  @Override
+  protected void layout(Composite composite, boolean flushCache) {
+
+    this.delegate.layout(composite, flushCache);
+  }
+
+  /**
+   * This method gets the layout orientation.
+   * 
+   * @return the layout orientation.
+   */
+  public Orientation getOrientation() {
+
+    return this.delegate.getOrientation();
+  }
+
+  /**
+   * This method sets the layout orientation.
+   * 
+   * @param orientation
+   *        is the layout orientation to set.
+   */
+  public void setOrientation(Orientation orientation) {
+
+    this.delegate.setOrientation(orientation);
+  }
+
+  /**
    * This inner class is the actual layout-manager.
    */
   private static class Manager extends AbstractLayoutManager {
@@ -142,61 +197,6 @@ public class LayoutManager extends Layout {
       }
     }
 
-  }
-
-  /**
-   * The actual layout-manager where all work is delegated to.
-   */
-  private final Manager delegate;
-
-  /**
-   * The constructor.
-   */
-  public LayoutManager() {
-
-    super();
-    this.delegate = new Manager();
-  }
-
-  /**
-   * @see org.eclipse.swt.widgets.Layout#computeSize(org.eclipse.swt.widgets.Composite,
-   *      int, int, boolean)
-   */
-  @Override
-  protected Point computeSize(Composite composite, int wHint, int hHint, boolean flushCache) {
-
-    return this.delegate.computeSize(composite, flushCache);
-  }
-
-  /**
-   * @see org.eclipse.swt.widgets.Layout#layout(org.eclipse.swt.widgets.Composite,
-   *      boolean)
-   */
-  @Override
-  protected void layout(Composite composite, boolean flushCache) {
-
-    this.delegate.layout(composite, flushCache);
-  }
-
-  /**
-   * This method gets the layout orientation.
-   * 
-   * @return the layout orientation.
-   */
-  public Orientation getOrientation() {
-
-    return this.delegate.getOrientation();
-  }
-
-  /**
-   * This method sets the layout orientation.
-   * 
-   * @param orientation
-   *        is the layout orientation to set.
-   */
-  public void setOrientation(Orientation orientation) {
-
-    this.delegate.setOrientation(orientation);
   }
 
 }

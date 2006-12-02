@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.ui.toolkit.api.widget;
 
+import net.sf.mmm.ui.toolkit.api.state.UIWriteEditable;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
 
 /**
@@ -8,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITextField extends UIWidget, UIWriteText {
+public interface UITextField extends UIWidget, UIWriteText, UIWriteEditable {
 
   /** the type of this object */
   String TYPE = "Textfield";

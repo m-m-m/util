@@ -15,9 +15,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable} interface using SWT as the
  * UI toolkit.
  * 
+ * @param <C> 
+ *        is the templated type of the objects in the table cells.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITableImpl extends AbstractUIWidget implements UITable {
+public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
 
   /** the sync access to the native SWT table */
   private final SyncTableAccess syncAccess;
@@ -71,7 +74,7 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#getModel()
    */
-  public UITableModel getModel() {
+  public UITableModel<C> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -79,7 +82,7 @@ public class UITableImpl extends AbstractUIWidget implements UITable {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UITable#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModel)
    */
-  public void setModel(UITableModel newModel) {
+  public void setModel(UITableModel<C> newModel) {
 
     this.modelAdapter.setModel(newModel);
   }

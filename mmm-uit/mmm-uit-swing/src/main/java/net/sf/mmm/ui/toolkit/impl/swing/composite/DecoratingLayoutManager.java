@@ -10,8 +10,10 @@ import net.sf.mmm.ui.toolkit.base.composite.AbstractDecoratingLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Size;
 
 /**
- * This inner class is the layout-manager that organizes the layout for this
- * {@link UIDecoratedComponent} implementation.
+ * This is the layout-manager that organizes the layout for
+ * {@link UIDecoratedComponent decorated components}.
+ *
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements LayoutManager2 {
 
@@ -40,7 +42,6 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
   public Dimension preferredLayoutSize(Container parent) {
 
     Size preferredSize = calculateSize();
-    System.out.println(preferredSize.width + "*" + preferredSize.height);
     return new Dimension(preferredSize.width, preferredSize.height);
   }
 

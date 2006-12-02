@@ -22,6 +22,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UIList;
 import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
 import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
 import net.sf.mmm.ui.toolkit.api.widget.UITable;
+import net.sf.mmm.ui.toolkit.api.widget.UITextField;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 
@@ -61,6 +62,14 @@ public abstract class AbstractUIFactory implements UIFactory {
     return createLabel("");
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTextField()
+   */
+  public UITextField createTextField() {
+  
+    return createTextField(true);
+  }
+  
   /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(java.lang.String)
    */

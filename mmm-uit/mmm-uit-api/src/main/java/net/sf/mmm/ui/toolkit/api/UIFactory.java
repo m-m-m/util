@@ -377,6 +377,16 @@ public interface UIFactory extends UIWriteDisposed {
   UITextField createTextField();
 
   /**
+   * This method creates a new text-field.
+   * 
+   * @param editable
+   *        is the {@link UITextField#isEditable() editable flag} of the text
+   *        field.
+   * @return the created text-field.
+   */
+  UITextField createTextField(boolean editable);
+
+  /**
    * This method creates a new spin-box.
    * 
    * @param <E>

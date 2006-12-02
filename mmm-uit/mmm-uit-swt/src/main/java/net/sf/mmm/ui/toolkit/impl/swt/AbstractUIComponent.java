@@ -148,6 +148,17 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
+   * This method removes this component from its {@link #getParent() parent}.
+   */
+  public void removeFromParent() {
+    UINode parent = getParent();
+    if (parent != null) {
+      setParent(null);    
+      throw new IllegalArgumentException("Currently unsupported!");      
+    }
+  }
+
+  /**
    * This method creates the SWT control of this component.
    */
   public void create() {

@@ -210,9 +210,9 @@ public class UIFactorySwing extends AbstractUIFactory {
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTree(boolean,
    *      net.sf.mmm.ui.toolkit.api.model.UITreeModel)
    */
-  public UITree createTree(boolean multiSelection, UITreeModel model) {
+  public <N> UITree<N> createTree(boolean multiSelection, UITreeModel<N> model) {
 
-    UITreeImpl tree = new UITreeImpl(this, null);
+    UITreeImpl<N> tree = new UITreeImpl<N>(this, null);
     tree.setMultiSelection(multiSelection);
     if (model != null) {
       tree.setModel(model);
@@ -224,9 +224,9 @@ public class UIFactorySwing extends AbstractUIFactory {
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTable(boolean,
    *      net.sf.mmm.ui.toolkit.api.model.UITableModel)
    */
-  public UITable createTable(boolean multiSelection, UITableModel model) {
+  public <C> UITable<C> createTable(boolean multiSelection, UITableModel<C> model) {
 
-    UITableImpl table = new UITableImpl(this, null);
+    UITableImpl<C> table = new UITableImpl<C>(this, null);
     // table.setMultiSelection(multiSelection);
     if (model != null) {
       table.setModel(model);
@@ -245,11 +245,13 @@ public class UIFactorySwing extends AbstractUIFactory {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTextField()
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createTextField(boolean)
    */
-  public UITextField createTextField() {
+  public UITextField createTextField(boolean editable) {
 
-    return new UITextFieldImpl(this, null);
+    UITextFieldImpl textField = new UITextFieldImpl(this, null);
+    textField.setEditable(editable);
+    return textField;
   }
 
   /**

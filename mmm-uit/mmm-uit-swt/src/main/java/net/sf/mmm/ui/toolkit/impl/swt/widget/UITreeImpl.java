@@ -17,6 +17,10 @@ import org.eclipse.swt.SWT;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITree} interface using SWT as the
  * UI toolkit.
  * 
+ * @param <N>
+ *        is the templated type of the tree-nodes that can be
+ *        {@link #getSelection() selected} with this widget.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {

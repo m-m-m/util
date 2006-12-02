@@ -1,18 +1,18 @@
 /* $Id$ */
-package net.sf.mmm.ui.toolkit.impl.swing.composite;
+package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
-import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 
 /**
  * This class is the implementation of the
@@ -30,8 +30,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 public class UIDecoratedComponentImpl<D extends UIComponent, C extends UIComponent> extends
     AbstractUIComposite implements UIDecoratedComponent<D, C> {
 
-  /** @see #getSwingComponent() */
-  private final JPanel panel;
+  /** the synchron access to the {@link org.eclipse.swt.widgets.Composite} */
+  private final SyncCompositeAccess syncAccess;
 
   /** the layout-manager */
   private final DecoratingLayoutManager layoutManager;
@@ -45,27 +45,29 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   /**
    * @param uiFactory
    * @param parentObject
+   * @param borderTitle
    */
-  public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UIDecoratedComponentImpl(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory, parentObject, borderTitle);
     this.layoutManager = new DecoratingLayoutManager(this);
-    this.panel = new JPanel(this.layoutManager);
+    this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.NORMAL);
+    this.syncAccess.setLayout(this.layoutManager);
     this.component = null;
     this.decorator = null;
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * @see net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite#getActiveSyncAccess()
    */
   @Override
-  public JComponent getSwingComponent() {
+  public AbstractSyncCompositeAccess getActiveSyncAccess() {
 
-    return this.panel;
+    return this.syncAccess;
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.composite.AbstractUIComposite#getOrientation()
+   * @see net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite#getOrientation()
    */
   @Override
   public Orientation getOrientation() {
@@ -76,6 +78,21 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
       orientation = ((UIComposite) parent).getOrientation().getMirrored();
     }
     return orientation;
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite#getComponent(int)
+   */
+  @Override
+  public AbstractUIComponent getComponent(int index) {
+
+    if (index == 0) {
+      return (AbstractUIComponent) getDecorator();
+    } else if (index == 1) {
+      return (AbstractUIComponent) getComponent();
+    } else {
+      throw new IndexOutOfBoundsException("Illegal index (" + index + ") must be 0 or 1!");
+    }
   }
 
   /**
@@ -95,17 +112,20 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
+   * @see net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent#setComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
    */
-  public UIComponent getComponent(int index) {
+  public void setComponent(C newComponent) {
 
-    if (index == 0) {
-      return getDecorator();
-    } else if (index == 1) {
-      return getComponent();
-    } else {
-      throw new IndexOutOfBoundsException("Illegal index (" + index + ") must be 0 or 1!");
+    AbstractUIComponent abstractComponent = (AbstractUIComponent) newComponent;
+    if (this.component != null) {
+      AbstractUIComponent oldComponent = (AbstractUIComponent) this.component;
+      oldComponent.removeFromParent();
     }
+    if (abstractComponent.getParent() != null) {
+      abstractComponent.removeFromParent();
+    }
+    this.component = newComponent;
+    abstractComponent.getSyncAccess().setParentAccess(this.syncAccess);
   }
 
   /**
@@ -116,48 +136,13 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
     AbstractUIComponent abstractComponent = (AbstractUIComponent) newDecorator;
     if (this.decorator != null) {
       AbstractUIComponent oldComponent = (AbstractUIComponent) this.decorator;
-      //setParent(oldComponent, null);
-      //this.panel.remove(oldComponent.getSwingComponent());
       oldComponent.removeFromParent();
     }
     if (abstractComponent.getParent() != null) {
       abstractComponent.removeFromParent();
     }
     this.decorator = newDecorator;
-    JComponent swingComponent = abstractComponent.getSwingComponent();
-    this.panel.add(swingComponent);
-  }
-
-  /**
-   * This method sets the sizer used to override the size of the
-   * {@link #getDecorator() decorator}.
-   * 
-   * @param sizer
-   *        is the sizer to use or <code>null</code> to disable.
-   */
-  public void setDecoratorSizer(UIReadSize sizer) {
-
-    this.layoutManager.setSizer(sizer);
-  }
-
-  /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent#setComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
-   */
-  public void setComponent(C newComponent) {
-
-    AbstractUIComponent abstractComponent = (AbstractUIComponent) newComponent;
-    if (this.component != null) {
-      AbstractUIComponent oldComponent = (AbstractUIComponent) this.component;
-      setParent(oldComponent, null);
-      this.panel.remove(oldComponent.getSwingComponent());
-    }
-    this.component = newComponent;
-    if (abstractComponent.getParent() != null) {
-      abstractComponent.removeFromParent();
-    }
-    this.component = newComponent;
-    JComponent swingComponent = abstractComponent.getSwingComponent();
-    this.panel.add(swingComponent);
+    abstractComponent.getSyncAccess().setParentAccess(this.syncAccess);
   }
 
   /**
