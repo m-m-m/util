@@ -8,8 +8,8 @@ import java.util.List;
  * This is the interface of a content-class. It reflects the structure of the
  * {@link net.sf.mmm.content.api.ContentObject content-object} types in an
  * object-oriented way. <br>
- * A content-class is the analogy to a java {@link java.lang.Class} that
- * reflects a type. <br>
+ * A content-class is the analogy to a {@link java.lang.Class} that
+ * reflects a {@link java.lang.Object}. <br>
  * A content-class may be used to render a genric UI editor, synchronize the
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 

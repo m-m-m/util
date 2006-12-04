@@ -61,7 +61,7 @@ public interface ContentField extends ContentReflectionObject {
    * 
    * @return the type of this field.
    */
-  Class getFieldType();
+  Class<?> getFieldType();
 
   /**
    * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()

@@ -26,7 +26,9 @@ public interface Modifiers extends XmlSerializable {
 
   /**
    * This method determines if the class or field is required by the system in
-   * order to work. Then it can NOT be modified or deleted by the user.
+   * order to work. Then it can NOT be modified or deleted by the user.<br>
+   * For fields this flag is <code>true</code> if the declaring class is a
+   * system class.
    * 
    * @return <code>true</code> if the class or field is required by the
    *         system.
