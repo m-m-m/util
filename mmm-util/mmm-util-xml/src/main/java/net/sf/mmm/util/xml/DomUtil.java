@@ -374,6 +374,15 @@ public final class DomUtil {
     }
   }
 
+  public static String getLocalNodeName(Node element) {
+    
+    String localName = element.getLocalName();
+    if (localName == null) {
+      localName = element.getNodeName();
+    }
+    return localName;
+  }
+  
   /**
    * TODO
    * 
@@ -419,7 +428,7 @@ public final class DomUtil {
       } else if (type == Node.CDATA_SECTION_NODE) {
         return StringUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
       } else if (type == Node.ELEMENT_NODE) {
-        if (!StringUtil.isEqual(node1.getLocalName(), node2.getLocalName())) {
+        if (!StringUtil.isEqual(getLocalNodeName(node1), getLocalNodeName(node2))) {
           return false;
         }
         if (!StringUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
