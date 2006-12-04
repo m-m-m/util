@@ -18,9 +18,9 @@ public abstract class AbstractDecoratingLayoutManager {
   private static final int DOUBLE_INDENT = 2 * INDENT;
 
   /**
-   * @see AbstractDecoratingLayoutManager#DecoratingLayoutManager(UIDecoratedComponent)
+   * @see AbstractDecoratingLayoutManager#AbstractDecoratingLayoutManager(UIDecoratedComponent)
    */
-  private final UIDecoratedComponent decoratedComponent;
+  private final UIDecoratedComponent<?,?> decoratedComponent;
 
   /** the sizer for the decorators */
   private UIReadSize sizer;
@@ -31,7 +31,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * @param decoratedComp
    *        TODO
    */
-  public AbstractDecoratingLayoutManager(UIDecoratedComponent decoratedComp) {
+  public AbstractDecoratingLayoutManager(UIDecoratedComponent<?,?> decoratedComp) {
 
     super();
     this.decoratedComponent = decoratedComp;
@@ -63,6 +63,7 @@ public abstract class AbstractDecoratingLayoutManager {
       return;
     }
     UIComponent decorator = this.decoratedComponent.getDecorator();
+    UIComponent component = this.decoratedComponent.getComponent();
     int width = 0;
     int height = 0;
     if (decorator != null) {
@@ -76,14 +77,27 @@ public abstract class AbstractDecoratingLayoutManager {
         }
       }
       if (this.decoratedComponent.getOrientation() == Orientation.HORIZONTAL) {
-        decorator.setPosition(INDENT, 0);
+        int y = 0;
+        if (component != null) {
+          int componentHeigth = component.getPreferredHeight();
+          if (componentHeigth > height) {
+            y = (componentHeigth - height) >> 1;
+          }
+        }
+        decorator.setPosition(INDENT, y);
       } else {
-        decorator.setPosition(0, INDENT);
+        int x = 0;
+        if (component != null) {
+          int componentWidth = component.getPreferredWidth();
+          if (componentWidth > width) {
+            x = (componentWidth - width) >> 1;
+          }
+        }        
+        decorator.setPosition(x, INDENT);
       }
       decorator.setSize(width, height);
     }
 
-    UIComponent component = this.decoratedComponent.getComponent();
     if (component != null) {
       if (decorator == null) {
         component.setPosition(0, 0);
@@ -100,6 +114,11 @@ public abstract class AbstractDecoratingLayoutManager {
     }
   }
 
+  /**
+   * This method calculates the preferred size for the layout.
+   * 
+   * @return the preferred size.
+   */
   protected Size calculateSize() {
 
     Size size = null;

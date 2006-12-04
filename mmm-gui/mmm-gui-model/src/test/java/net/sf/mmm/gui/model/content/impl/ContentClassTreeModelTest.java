@@ -1,12 +1,12 @@
 /* $Id$ */
-package net.sf.mmm.gui.model.content;
+package net.sf.mmm.gui.model.content.impl;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.model.impl.BasicMutableContentModelServiceImpl;
 import net.sf.mmm.content.model.impl.ContentModelInitializer;
-import net.sf.mmm.gui.model.content.ContentClassTableManager;
-import net.sf.mmm.gui.model.content.ContentClassTreeModel;
+import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
+import net.sf.mmm.gui.model.content.impl.ContentClassTreeModel;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
@@ -43,6 +43,7 @@ public class ContentClassTreeModelTest {
    * 
    * @param args
    *        are the command-line arguments.
+   * @throws Exception
    */
   public static void main(String[] args) throws Exception {
 
@@ -74,27 +75,34 @@ public class ContentClassTreeModelTest {
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     final UIButton checkSystem = uiFactory.createButton("system", ButtonStyle.CHECK);
     checkSystem.setEnabled(false);
-    panel.addComponent(uiFactory.createLabeledComponent("System:", checkSystem),
+    final UIButton checkExtendable = uiFactory.createButton("extendable", ButtonStyle.CHECK);
+    checkExtendable.setEnabled(false);
+    panel.addComponent(uiFactory.createLabeledComponents("Flags:", checkSystem, checkExtendable),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    
+    UIButton radioNormal = uiFactory.createButton("normal", ButtonStyle.RADIO);
+    UIButton radioFinal = uiFactory.createButton("final", ButtonStyle.RADIO);
+    UIButton radioAbstract = uiFactory.createButton("abstract", ButtonStyle.RADIO);
+    panel.addComponent(uiFactory.createLabeledComponents("Flags2:", radioNormal, radioAbstract,
+        radioFinal), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     final UITree<ContentClass> tree = uiFactory.createTree(false, classModel);
     UISplitPanel splitPanel = uiFactory.createSplitPanel(Orientation.HORIZONTAL);
     splitPanel.setTopOrLeftComponent(tree);
     UIFrame frame = uiFactory.createFrame("test");
-    final ContentClassTableManager tableFactory = new ContentClassTableManager();
+    final ContentClassFieldTableManagerImpl tableFactory = new ContentClassFieldTableManagerImpl();
     tableFactory.setContentModelService(modelService);
-    final UITable table = uiFactory.createTable(false, tableFactory.getTableModel(modelService
-        .getRootClass()));
+    final UITable<Object> table = uiFactory.createTable(false, tableFactory
+        .getFieldTableModel(modelService.getRootClass()));
     tree.addActionListener(new UIActionListener() {
 
       public void invoke(UINode source, ActionType action) {
 
         if (action == ActionType.SELECT) {
           ContentClass contentClass = tree.getSelection();
-          table.setModel(tableFactory.getTableModel(contentClass));
+          table.setModel(tableFactory.getFieldTableModel(contentClass));
           textId.setText(contentClass.getId().toString());
           textName.setText(contentClass.getName());
           checkSystem.setSelected(contentClass.getModifiers().isSystem());
+          checkExtendable.setSelected(contentClass.getModifiers().isExtendable());
         }
       }
     });

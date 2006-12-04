@@ -132,6 +132,19 @@ public abstract class AbstractUIFactory implements UIFactory {
   }
   
   /**
+   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createLabeledComponents(java.lang.String, net.sf.mmm.ui.toolkit.api.UIComponent[])
+   */
+  public UIDecoratedComponent<UILabel, UIPanel> createLabeledComponents(String label,
+      UIComponent... components) {
+
+    UIPanel panel = createPanel(Orientation.HORIZONTAL);
+    for (UIComponent component : components) {
+      panel.addComponent(component);      
+    }
+    return createLabeledComponent(label, panel);
+  }
+  
+  /**
    * @see net.sf.mmm.ui.toolkit.api.UIFactory#createPicture(java.io.File)
    */
   public UIPicture createPicture(File imageFile) throws IOException {

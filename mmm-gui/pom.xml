@@ -17,5 +17,6 @@
   </dependencies>
   <modules>
     <module>mmm-gui-model</module>
+    <module>mmm-gui-view</module>
   </modules>
 </project>

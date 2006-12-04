@@ -23,7 +23,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    * @param decoratedComponent
    *        is the decorated component to layout.
    */
-  public DecoratingLayoutManager(UIDecoratedComponent decoratedComponent) {
+  public DecoratingLayoutManager(UIDecoratedComponent<?, ?> decoratedComponent) {
 
     super(decoratedComponent);
   }

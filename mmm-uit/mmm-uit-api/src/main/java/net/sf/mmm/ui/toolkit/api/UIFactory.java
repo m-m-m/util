@@ -203,6 +203,22 @@ public interface UIFactory extends UIWriteDisposed {
       C component);
 
   /**
+   * This method creates a {@link UIDecoratedComponent decorated component} that
+   * puts the given <code>components</code> into a
+   * {@link Orientation#HORIZONTAL horizontal} {@link UIPanel panel} and bundles
+   * it together with a {@link UILabel label}. The result can be easily
+   * {@link UIPanel#addComponent(UIComponent) added} to a {@link UIPanel panel}.
+   * 
+   * @param label
+   *        is the label text.
+   * @param components
+   *        are the components (should be at least two to make sense).
+   * @return the labeled component.
+   */
+  UIDecoratedComponent<UILabel, UIPanel> createLabeledComponents(String label,
+      UIComponent... components);
+
+  /**
    * This method creates a new scroll-panel.
    * 
    * @return the created scroll-panel.

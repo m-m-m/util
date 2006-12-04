@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.gui.model.content;
+package net.sf.mmm.gui.model.content.impl;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.gui.model.value;
+package net.sf.mmm.gui.model.value.impl;
 
 import javax.annotation.Resource;
 

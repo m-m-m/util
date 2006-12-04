@@ -1,8 +1,8 @@
 /* $Id$ */
-package net.sf.mmm.gui.model.value;
+package net.sf.mmm.gui.model.value.impl;
 
-import net.sf.mmm.gui.model.value.ValueTypeListModel;
-import net.sf.mmm.gui.model.value.ValueTypeWidgetManager;
+import net.sf.mmm.gui.model.value.impl.ValueTypeListModel;
+import net.sf.mmm.gui.model.value.impl.ValueTypeWidgetManager;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIPanel;

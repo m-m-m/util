@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.gui.model.content;
+package net.sf.mmm.gui.model.content.impl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +21,7 @@ import net.sf.mmm.util.event.EventListener;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentClassTableModel extends AbstractUITableModel implements
+public class ContentClassTableModel extends AbstractUITableModel<Object> implements
     EventListener<ContentModelEvent> {
 
   /** index of the "name" column */
@@ -35,9 +35,6 @@ public class ContentClassTableModel extends AbstractUITableModel implements
 
   /** index of the "deleted" column */
   private static final int COLUMN_DELETED = 3;
-
-  /** index of the "modifiers" column */
-  private static final int COLUMN_MODIFIERS = 4;
 
   /** index of the "system" column */
   private static final int COLUMN_SYSTEM = 4;

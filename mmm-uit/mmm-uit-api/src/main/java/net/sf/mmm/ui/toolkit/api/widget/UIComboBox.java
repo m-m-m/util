@@ -25,7 +25,6 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  *        widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @deprecated will be kicked out: only use UIList and a style (combo, multicolumn) attribute.
  */
 public interface UIComboBox<E> extends UIListWidget<E>, UIWriteEditable, UIWriteText {
 
