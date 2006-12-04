@@ -51,11 +51,14 @@
       <version>1.2.13</version>
       <scope>compile</scope>
     </dependency>
+    <!-- required for jdk less than 6.0 -->
+    <!--
     <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>jsr250-api</artifactId>
-      <version>1.0-20050927.133100</version>
-      <scope>compile</scope>
+    <groupId>javax.annotation</groupId>
+    <artifactId>jsr250-api</artifactId>
+    <version>1.0-20050927.133100</version>
+    <scope>compile</scope>
     </dependency>
+    -->
   </dependencies>
 </project>
