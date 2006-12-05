@@ -8,6 +8,7 @@ import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentReflectionObject;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.Modifiers;
+import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
@@ -71,6 +72,7 @@ public class ContentModelInitializer {
     addField(ContentClassImpl.CLASS_FIELD, 5, ContentReflectionObject.FIELD_NAME_MODIFIERS,
         FieldModifiers.class, FieldModifiersImpl.SYSTEM_FINAL_READONLY);
 
+    ContentClass testClass = new ContentClassImpl(new IdImpl(0, 5), "Test", ContentClassImpl.CLASS_ROOT, ClassModifiersImpl.SYSTEM);
+    ContentClassImpl.CLASS_ROOT.addSubClass(testClass);
   }
-
 }

@@ -9,6 +9,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelService;
+import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
@@ -22,7 +23,7 @@ import net.sf.mmm.util.event.EventListener;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ContentClassTableModel extends AbstractUITableModel<Object> implements
-    EventListener<ContentModelEvent> {
+    EventListener<ContentModelEvent>, FieldTableModel {
 
   /** index of the "name" column */
   private static final int COLUMN_NAME = 0;
@@ -192,4 +193,12 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
     return this.fields.size();
   }
 
+  /**
+   * @see net.sf.mmm.gui.model.content.api.FieldTableModel#getField(int)
+   */
+  public ContentField getField(int rowIndex) {
+  
+    return this.fields.get(rowIndex);
+  }
+  
 }

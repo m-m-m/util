@@ -26,7 +26,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   private final SyncTableAccess syncAccess;
 
   /** the model adapter */
-  private final TableModelAdapter modelAdapter;
+  private final TableModelAdapter<C> modelAdapter;
 
   /**
    * The constructor.
@@ -49,7 +49,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
     }
     style |= SWT.VIRTUAL;
     this.syncAccess = new SyncTableAccess(uiFactory, style);
-    this.modelAdapter = new TableModelAdapter(this.syncAccess);
+    this.modelAdapter = new TableModelAdapter<C>(this.syncAccess);
   }
 
   /**
@@ -95,4 +95,20 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
     return TYPE;
   }
 
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
+   */
+  public int getSelectedIndex() {
+  
+    return this.syncAccess.getSelection();
+  }
+  
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
+   */
+  public void setSelectedIndex(int newIndex) {
+  
+    this.syncAccess.setSelection(newIndex);
+  }
+  
 }

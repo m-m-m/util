@@ -22,6 +22,13 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
   private static final String OPERATION_GET_SELECTION = "getSelection";
 
   /**
+   * operation to set the
+   * {@link org.eclipse.swt.widgets.Table#setSelection(int) selection} of the
+   * table.
+   */
+  private static final String OPERATION_SET_SELECTION = "getSelection";
+
+  /**
    * operation to
    * {@link org.eclipse.swt.widgets.Table#removeAll() "remove all"} items of
    * the table.
@@ -66,6 +73,8 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
 
     if (operation == OPERATION_GET_SELECTION) {
       this.selection = this.table.getSelectionIndex();
+    } else if (operation == OPERATION_SET_SELECTION) {
+      this.table.setSelection(this.selection);
     } else if (operation == OPERATION_REMOVE_ALL) {
       this.table.removeAll();
     } else {
@@ -99,6 +108,17 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
     return this.selection;
   }
 
+  /**
+   * 
+   * @param newSelection
+   */
+  public void setSelection(int newSelection) {
+    
+    assert (checkReady());
+    this.selection = newSelection;
+    invoke(OPERATION_SET_SELECTION);
+  }
+  
   /**
    * This method
    * {@link org.eclipse.swt.widgets.Table#removeAll() "removes all"} items

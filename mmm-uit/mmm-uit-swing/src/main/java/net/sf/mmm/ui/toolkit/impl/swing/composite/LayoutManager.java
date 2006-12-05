@@ -167,7 +167,8 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
     this.panel = target;
     refreshCachedData();
     Size result = calculateSize();
-    return new Dimension(result.width, result.height);
+    Insets insets = this.panel.getInsets();
+    return new Dimension(result.width + insets.left, result.height + insets.top);
   }
 
   /**

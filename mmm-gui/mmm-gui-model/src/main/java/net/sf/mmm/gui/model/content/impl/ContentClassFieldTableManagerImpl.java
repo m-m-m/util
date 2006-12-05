@@ -10,10 +10,11 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.gui.model.content.api.FieldTableModel;
 
 /**
- * TODO This type ...
+ * This is the implementation of the {@link ContentClassFieldTableManager}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -49,7 +50,7 @@ public class ContentClassFieldTableManagerImpl implements ContentClassFieldTable
   /**
    * @see net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager#getFieldTableModel(net.sf.mmm.content.model.api.ContentClass)
    */
-  public UITableModel<Object> getFieldTableModel(ContentClass contentClass) {
+  public FieldTableModel getFieldTableModel(ContentClass contentClass) {
 
     synchronized (this.model) {
       ContentClassTableModel tableModel = this.id2modelMap.get(contentClass.getId());

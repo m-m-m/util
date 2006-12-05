@@ -21,15 +21,18 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
  * to an {@link org.eclipse.swt.widgets.Table}. It is the controler of the MVC
  * pattern.
  * 
+ * @param <C>
+ *        is the templated type of the objects in the table cells.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class TableModelAdapter implements UITableModelListener, Listener, Runnable {
+public class TableModelAdapter<C> implements UITableModelListener, Listener, Runnable {
 
   /** the sync access to the table */
   private final SyncTableAccess syncAccess;
 
   /** the current table model */
-  private UITableModel<?> model;
+  private UITableModel<C> model;
 
   /** the table columns */
   private final List<TableColumn> columns;
@@ -62,7 +65,7 @@ public class TableModelAdapter implements UITableModelListener, Listener, Runnab
    * 
    * @return the model or <code>null</code> if not set.
    */
-  public UITableModel getModel() {
+  public UITableModel<C> getModel() {
 
     return this.model;
   }
@@ -73,7 +76,7 @@ public class TableModelAdapter implements UITableModelListener, Listener, Runnab
    * @param newModel
    *        is the model to set.
    */
-  public void setModel(UITableModel newModel) {
+  public void setModel(UITableModel<C> newModel) {
 
     if (this.model != null) {
       this.model.removeListener(this);

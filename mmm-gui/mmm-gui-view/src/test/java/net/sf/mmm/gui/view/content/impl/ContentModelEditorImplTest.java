@@ -48,7 +48,7 @@ public class ContentModelEditorImplTest extends TestCase {
     UIComposite modelEditorView = modelEditor.create(uiFactory);
     UIFrame frame = uiFactory.createFrame("Model Editor");
     frame.setComposite(modelEditorView);
-    frame.setSize(600, 800);
+    frame.setSize(800, 600);
     frame.centerWindow();
     frame.setVisible(true);
     while (frame.isVisible()) {

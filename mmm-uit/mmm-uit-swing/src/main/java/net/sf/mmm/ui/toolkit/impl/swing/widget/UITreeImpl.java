@@ -170,9 +170,6 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
 
     this.tree.addTreeSelectionListener(new TreeSelectionListener() {
 
-      /**
-       * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.TreeSelectionEvent)
-       */
       public void valueChanged(TreeSelectionEvent e) {
 
         invoke(ActionType.SELECT);

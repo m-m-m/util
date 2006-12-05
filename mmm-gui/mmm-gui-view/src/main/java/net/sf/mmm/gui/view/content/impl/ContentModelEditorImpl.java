@@ -5,8 +5,10 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager;
+import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.gui.view.content.api.ContentModelEditorView;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
@@ -39,6 +41,9 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
 
   /** @see #setFieldTableManager(ContentClassFieldTableManager) */
   private ContentClassFieldTableManager fieldTableManager;
+
+  /** the current field table model */
+  private FieldTableModel fieldTableModel;
 
   /**
    * The constructor.
@@ -100,20 +105,57 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
 
     // ########### content-field stuff ################
 
+    UIPanel fieldEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Field");
+    final UITextField textFieldId = uiFactory.createTextField(false);
+    fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", textFieldId),
+        LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    final UITextField textFieldName = uiFactory.createTextField(true);
+    fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", textFieldName),
+        LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    final UIButton checkFieldSystem = uiFactory.createButton("system", ButtonStyle.CHECK);
+    checkFieldSystem.setEnabled(false);
+    final UIButton checkFieldExtendable = uiFactory.createButton("extendable", ButtonStyle.CHECK);
+    checkFieldExtendable.setEnabled(false);
+    fieldEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags:", checkFieldSystem,
+        checkFieldExtendable), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+
     // field table
-    final UITable<Object> table = uiFactory.createTable(false, this.fieldTableManager
-        .getFieldTableModel(this.modelService.getRootClass()));
+    this.fieldTableModel = this.fieldTableManager.getFieldTableModel(this.modelService
+        .getRootClass());
+    final UITable<Object> table = uiFactory.createTable(false, this.fieldTableModel);
+    table.addActionListener(new UIActionListener() {
+
+      public void invoke(UINode source, ActionType action) {
+
+        int rowIndex = table.getSelectedIndex();
+        if (rowIndex >= 0) {
+          ContentField contentField = ContentModelEditorImpl.this.fieldTableModel
+              .getField(rowIndex);
+          textFieldId.setText(contentField.getId().toString());
+          textFieldName.setText(contentField.getName());
+        } else {
+          textFieldId.setText("");
+          textFieldName.setText("");          
+        }
+      }
+
+    });
+
+    // field panel
+    UIPanel fieldPanel = uiFactory.createPanel(Orientation.VERTICAL);
+    fieldPanel.addComponent(fieldEditorPanel, LayoutConstraints.FIXED_HORIZONTAL);
+    fieldPanel.addComponent(table);
 
     // ########### content-class stuff ################
-    
+
     // class editor panel
     UIPanel classEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Class");
 
-    final UITextField textId = uiFactory.createTextField(false);
-    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", textId),
+    final UITextField textClassId = uiFactory.createTextField(false);
+    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", textClassId),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    final UITextField textName = uiFactory.createTextField(true);
-    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", textName),
+    final UITextField textClassName = uiFactory.createTextField(true);
+    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", textClassName),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     final UIButton checkSystem = uiFactory.createButton("system", ButtonStyle.CHECK);
     checkSystem.setEnabled(false);
@@ -135,11 +177,18 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
 
         if (action == ActionType.SELECT) {
           ContentClass contentClass = classTree.getSelection();
-          table.setModel(ContentModelEditorImpl.this.fieldTableManager.getFieldTableModel(contentClass));
-          textId.setText(contentClass.getId().toString());
-          textName.setText(contentClass.getName());
+          ContentModelEditorImpl.this.fieldTableModel = ContentModelEditorImpl.this.fieldTableManager
+              .getFieldTableModel(contentClass);
+          table.setModel(ContentModelEditorImpl.this.fieldTableModel);
+          textClassId.setText(contentClass.getId().toString());
+          textClassName.setText(contentClass.getName());
           checkSystem.setSelected(contentClass.getModifiers().isSystem());
           checkExtendable.setSelected(contentClass.getModifiers().isExtendable());
+          if (ContentModelEditorImpl.this.fieldTableModel.getRowCount() > 0) {
+            table.setSelectedIndex(0);
+          } else {
+            table.setSelectedIndex(-1);            
+          }
         }
       }
     });
@@ -148,13 +197,13 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     UIPanel classPanel = uiFactory.createPanel(Orientation.VERTICAL);
     classPanel.addComponent(classEditorPanel, LayoutConstraints.FIXED_HORIZONTAL);
     classPanel.addComponent(classTree);
-    
+
     // main panel
     UISplitPanel splitPanel = uiFactory.createSplitPanel(Orientation.HORIZONTAL);
     splitPanel.setTopOrLeftComponent(classPanel);
     splitPanel.setDividerPosition(0.5);
-    splitPanel.setBottomOrRightComponent(table);
-    
+    splitPanel.setBottomOrRightComponent(fieldPanel);
+
     return splitPanel;
   }
 
