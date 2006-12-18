@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-search-parser</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <name>MMM Search Parser::XLS</name>
+  <description>This is the search parser for files of the mimetype " 	application/vnd.ms-excel".</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-search-parser-xls</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-poi</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

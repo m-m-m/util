@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-search-parser</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <name>MMM Search Parser::POI</name>
+  <description>This module provides an abstract base parser for MS office documents using apache POI.</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-search-parser-poi</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>2.5.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

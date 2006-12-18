@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-search-parser</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <name>MMM Search Parser::PPT</name>
+  <description>This is the search parser for files of the mimetype "application/vnd.ms-powerpoint".</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-search-parser-ppt</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-poi</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <!--
+    <dependency>
+      <groupId>poi</groupId>
+      <artifactId>poi-contrib</artifactId>
+      <version>2.5.1-final-20040804</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>poi</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>2.5.1-final-20040804</version>
+      <scope>compile</scope>
+    </dependency>
+    -->
+  </dependencies>
+</project>

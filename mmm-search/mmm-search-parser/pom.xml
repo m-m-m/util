@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-search</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <name>MMM Search::Parser</name>
+  <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-search-parser</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <modules>
+    <module>mmm-search-parser-api</module>
+    <module>mmm-search-parser-xml</module>
+    <module>mmm-search-parser-html</module>
+    <module>mmm-search-parser-pdf</module>
+    <module>mmm-search-parser-poi</module>
+    <module>mmm-search-parser-doc</module>
+    <module>mmm-search-parser-xls</module>
+    <module>mmm-search-parser-ppt</module>
+    <module>mmm-search-parser-opendoc</module>
+    <module>mmm-search-parser-generic</module>
+    <module>mmm-search-parser-service</module>
+  </modules>  
+</project>

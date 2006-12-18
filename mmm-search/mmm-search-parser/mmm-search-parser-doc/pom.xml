@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-search-parser</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <name>MMM Search Parser::DOC</name>
+  <description>This is the search parser for files of the mimetype "application/msword".</description>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-search-parser-doc</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-poi</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.textmining</groupId>
+      <artifactId>tm-extractors</artifactId>
+      <version>0.4-patched</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
