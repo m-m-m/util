@@ -111,7 +111,11 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
 
         // has the mouse button already been released?
         if (!e.getValueIsAdjusting()) {
-          invoke(ActionType.SELECT);
+          if (getSelectedIndex() >= 0) {
+            invoke(ActionType.SELECT);            
+          } else {
+            invoke(ActionType.DESELECT);
+          }
         }
       }
     });

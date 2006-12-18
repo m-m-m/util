@@ -132,8 +132,9 @@ public abstract class AbstractLayoutManager {
         } else {
           axisFixed += this.constraints[i].insets.getVerticalSpace();
         }
-        Filling axisFilling = this.constraints[i].filling.getPart(this.layoutOrientation);
-        if ((this.constraints[i].weight == 0) || (Filling.NONE == axisFilling)) {
+        //Filling axisFilling = this.constraints[i].filling.getPart(this.layoutOrientation);
+        //if ((this.constraints[i].weight == 0) || (Filling.NONE == axisFilling)) {
+        if (this.constraints[i].weight == 0) {
           axisFixed += this.childSizes[i].width;
         } else {
           axisDynamic += this.childSizes[i].width * this.constraints[i].weight;
@@ -182,7 +183,8 @@ public abstract class AbstractLayoutManager {
         }
         boolean axisFill = (this.constraints[i].weight != 0);
         double w;
-        if (axisFill && (filling == Filling.HORIZONTAL) || (filling == Filling.BOTH)) {
+        //if (axisFill && ((filling == Filling.HORIZONTAL) || (filling == Filling.BOTH))) {
+        if (axisFill) {
           w = this.constraints[i].weight * scale;
         } else {
           w = fixscale;

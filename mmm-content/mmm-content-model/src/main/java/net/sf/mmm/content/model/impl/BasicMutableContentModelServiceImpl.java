@@ -15,7 +15,6 @@ import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.model.base.AbstractContentModelService;
 import net.sf.mmm.content.persistence.api.IdService;
 import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.event.ChangeEvent;
 
 /**

@@ -51,6 +51,42 @@ public class LayoutConstraints {
       Filling.BOTH, 1.0, Insets.NO_SPACE);
 
   /**
+   * The default layout constraints:<br>
+   * <ul>
+   * <li>{@link #alignment} = {@link Alignment#CENTER}</li>
+   * <li>{@link #filling} = {@link Filling#BOTH}</li>
+   * <li>{@link #weight} = <code>1.0</code></li>
+   * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
+   */
+  public static final LayoutConstraints SCALED = new LayoutConstraints(Alignment.CENTER,
+      Filling.BOTH, 1.0, Insets.NO_SPACE);
+
+  /**
+   * The default layout constraints:<br>
+   * <ul>
+   * <li>{@link #alignment} = {@link Alignment#CENTER}</li>
+   * <li>{@link #filling} = {@link Filling#HORIZONTAL}</li>
+   * <li>{@link #weight} = <code>1.0</code></li>
+   * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
+   */
+  public static final LayoutConstraints SCALED_HORIZONTAL = new LayoutConstraints(Alignment.CENTER,
+      Filling.HORIZONTAL, 1.0, Insets.NO_SPACE);
+
+  /**
+   * The default layout constraints:<br>
+   * <ul>
+   * <li>{@link #alignment} = {@link Alignment#CENTER}</li>
+   * <li>{@link #filling} = {@link Filling#NONE}</li>
+   * <li>{@link #weight} = <code>1.0</code></li>
+   * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
+   * </ul>
+   */
+  public static final LayoutConstraints SCALED_NO_FILL = new LayoutConstraints(Alignment.CENTER,
+      Filling.NONE, 1.0, Insets.NO_SPACE);
+
+  /**
    * Layout constraints with:
    * <ul>
    * <li>{@link #alignment} = {@link Alignment#CENTER}</li>

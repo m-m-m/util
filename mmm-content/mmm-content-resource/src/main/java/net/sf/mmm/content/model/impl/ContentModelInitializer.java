@@ -72,7 +72,8 @@ public class ContentModelInitializer {
     addField(ContentClassImpl.CLASS_FIELD, 5, ContentReflectionObject.FIELD_NAME_MODIFIERS,
         FieldModifiers.class, FieldModifiersImpl.SYSTEM_FINAL_READONLY);
 
-    ContentClass testClass = new ContentClassImpl(new IdImpl(0, 5), "Test", ContentClassImpl.CLASS_ROOT, ClassModifiersImpl.SYSTEM);
+    ContentClass testClass = new ContentClassImpl(new IdImpl(0, 5), "Test",
+        ContentClassImpl.CLASS_ROOT, ClassModifiersImpl.NORMAL);
     ContentClassImpl.CLASS_ROOT.addSubClass(testClass);
   }
 }

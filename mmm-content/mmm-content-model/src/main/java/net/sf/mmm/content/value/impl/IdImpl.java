@@ -124,6 +124,18 @@ public final class IdImpl implements Id {
   public static final int CLASS_ID_PERMISSION = 11;
 
   /**
+   * the first {@link #getClassId() class-id} that can be used for custom
+   * classes. All class-ids lower than this are reserved for system classes.
+   */
+  public static final int MINIMUM_CUSTOM_CLASS_ID = 4096;
+
+  /**
+   * the first {@link #getObjectId() object-id} that can be used for custom
+   * fields. All field-ids lower than this are reserved for system fields.
+   */
+  public static final int MINIMUM_CUSTOM_FIELD_ID = 4096;
+
+  /**
    * the id number of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
    * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
@@ -197,9 +209,10 @@ public final class IdImpl implements Id {
 
   /**
    * the first {@link #getObjectId() object-id} that can be used for custom
-   * objects. All object-ids lower than this are reserved for system objects.
+   * resources. All object-ids lower than this are reserved for system
+   * resources (e.g. root-folder, etc.).
    */
-  public static final long MINIMUM_CUSTOM_OBJECT_ID = 4096;
+  public static final long MINIMUM_CUSTOM_RESOURCE_ID = 4096;
 
   /** the delimiter used in the string representations of an id */
   private static final char SEPARATOR_CHAR = '.';
@@ -209,8 +222,8 @@ public final class IdImpl implements Id {
 
   /**
    * the id of the root
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} (the
-   * class that all other classes are derived from).
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} (the class
+   * that all other classes are derived from).
    */
   public static final IdImpl ID_CLASS_ROOT = new IdImpl(0, CLASS_ID_ROOT);
 
@@ -270,8 +283,7 @@ public final class IdImpl implements Id {
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a
-   * {@link net.sf.mmm.content.api.security.ContentUser content-user} .
+   * reflects a {@link net.sf.mmm.content.api.security.ContentUser content-user} .
    */
   public static final IdImpl ID_CLASS_USER = new IdImpl(0, CLASS_ID_USER);
 
@@ -310,18 +322,16 @@ public final class IdImpl implements Id {
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-classes} are
-   * located.
+   * where the {@link net.sf.mmm.content.model.api.ContentClass content-classes}
+   * are located.
    */
   public static final IdImpl ID_FOLDER_CLASSES = new IdImpl(FOLDER_ID_CLASSES, CLASS_ID_FOLDER);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the
-   * {@link net.sf.mmm.content.api.model.ContentField content-fields} are
-   * located.
+   * where the {@link net.sf.mmm.content.api.model.ContentField content-fields}
+   * are located.
    */
   public static final IdImpl ID_FOLDER_FIELDS = new IdImpl(FOLDER_ID_FIELDS, CLASS_ID_FOLDER);
 
@@ -338,9 +348,8 @@ public final class IdImpl implements Id {
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the
-   * {@link net.sf.mmm.content.api.security.ContentUser content-users} are
-   * located.
+   * where the {@link net.sf.mmm.content.api.security.ContentUser content-users}
+   * are located.
    */
   public static final IdImpl ID_FOLDER_USERS = new IdImpl(FOLDER_ID_USERS, CLASS_ID_FOLDER);
 
@@ -356,8 +365,8 @@ public final class IdImpl implements Id {
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where all {@link net.sf.mmm.content.api.ContentObject content-objects}
-   * are mirrored by their id.
+   * where all {@link net.sf.mmm.content.api.ContentObject content-objects} are
+   * mirrored by their id.
    * 
    * @see net.sf.mmm.content.api.resource.ContentFolderIF#PATH_RESOURCES
    */
@@ -366,8 +375,8 @@ public final class IdImpl implements Id {
   /**
    * the id of the
    * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where all {@link net.sf.mmm.content.api.ContentObject content-objects}
-   * are mirrored by their id.
+   * where all {@link net.sf.mmm.content.api.ContentObject content-objects} are
+   * mirrored by their id.
    * 
    * @see net.sf.mmm.content.api.resource.ContentFolderIF#PATH_IDS
    */
@@ -555,8 +564,8 @@ public final class IdImpl implements Id {
   /**
    * This method gets UID of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of the
-   * {@link net.sf.mmm.content.api.ContentObject content-object} associated
-   * with this ID.
+   * {@link net.sf.mmm.content.api.ContentObject content-object} associated with
+   * this ID.
    * 
    * @return the classId.
    */

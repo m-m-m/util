@@ -1,9 +1,10 @@
 /* $Id$ */
 package net.sf.mmm.gui.view.content.impl;
 
-import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.model.impl.BasicMutableContentModelServiceImpl;
 import net.sf.mmm.content.model.impl.ContentModelInitializer;
+import net.sf.mmm.content.persistence.api.IdService;
+import net.sf.mmm.content.persistence.base.DummyIdService;
 import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
 import net.sf.mmm.gui.model.content.impl.ContentClassTreeModel;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
@@ -33,7 +34,9 @@ public class ContentModelEditorImplTest extends TestCase {
 
     // static initilization
     UIFactory uiFactory = new UIFactorySwing();
-    MutableContentModelService modelService = new BasicMutableContentModelServiceImpl();
+    BasicMutableContentModelServiceImpl modelService = new BasicMutableContentModelServiceImpl();
+    IdService idService = new DummyIdService();
+    modelService.setIdService(idService);
     ContentClassTreeModel classModel = new ContentClassTreeModel();
     classModel.setModelService(modelService);
     classModel.initialize();

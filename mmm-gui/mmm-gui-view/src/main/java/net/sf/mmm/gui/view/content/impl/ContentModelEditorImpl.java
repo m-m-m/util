@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
-import net.sf.mmm.content.model.api.ContentModelService;
+import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.model.api.MutableContentModelService;
+import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.gui.view.content.api.ContentModelEditorView;
@@ -25,6 +27,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UIButton;
 import net.sf.mmm.ui.toolkit.api.widget.UITable;
 import net.sf.mmm.ui.toolkit.api.widget.UITextField;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
+import net.sf.mmm.ui.toolkit.api.window.MessageType;
 
 /**
  * This is the implementation of the {@link ContentModelEditorView}.
@@ -34,7 +37,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UITree;
 public class ContentModelEditorImpl implements ContentModelEditorView {
 
   /** @see #setContentModelService(ContentModelService) */
-  private ContentModelService modelService;
+  private MutableContentModelService modelService;
 
   /** @see #setContentClassTreeModel(UITreeModel) */
   private UITreeModel<ContentClass> classTreeModel;
@@ -69,7 +72,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
    * @param contentModelService
    */
   @Resource
-  public void setContentModelService(ContentModelService contentModelService) {
+  public void setContentModelService(MutableContentModelService contentModelService) {
 
     this.modelService = contentModelService;
   }
@@ -106,18 +109,29 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     // ########### content-field stuff ################
 
     UIPanel fieldEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Field");
-    final UITextField textFieldId = uiFactory.createTextField(false);
-    fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", textFieldId),
+    final UITextField fieldIdText = uiFactory.createTextField(false);
+    fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", fieldIdText),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    final UITextField textFieldName = uiFactory.createTextField(true);
-    fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", textFieldName),
+    final UITextField fieldNameText = uiFactory.createTextField(true);
+    fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", fieldNameText),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    final UIButton checkFieldSystem = uiFactory.createButton("system", ButtonStyle.CHECK);
-    checkFieldSystem.setEnabled(false);
-    final UIButton checkFieldExtendable = uiFactory.createButton("extendable", ButtonStyle.CHECK);
-    checkFieldExtendable.setEnabled(false);
-    fieldEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags:", checkFieldSystem,
-        checkFieldExtendable), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    final UIButton fieldSystemCheckbox = uiFactory.createButton("system", ButtonStyle.CHECK);
+    fieldSystemCheckbox.setEnabled(false);
+    final UIButton fieldExtendableCheckbox = uiFactory
+        .createButton("extendable", ButtonStyle.CHECK);
+    fieldExtendableCheckbox.setEnabled(false);
+    fieldEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags:", fieldSystemCheckbox,
+        fieldExtendableCheckbox), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    final UIButton fieldAddButton = uiFactory.createButton("add", ButtonStyle.DEFAULT);
+    final UIButton fieldUpdateButton = uiFactory.createButton("update", ButtonStyle.DEFAULT);
+    final UIButton fieldRemoveButton = uiFactory.createButton("remove", ButtonStyle.DEFAULT);
+    fieldUpdateButton.setEnabled(false);
+    fieldRemoveButton.setEnabled(false);
+    UIPanel fieldButtonPanel = uiFactory.createPanel(Orientation.HORIZONTAL);
+    fieldButtonPanel.addComponent(fieldAddButton, LayoutConstraints.SCALED_NO_FILL);
+    fieldButtonPanel.addComponent(fieldUpdateButton, LayoutConstraints.SCALED_NO_FILL);
+    fieldButtonPanel.addComponent(fieldRemoveButton, LayoutConstraints.SCALED_NO_FILL);
+    fieldEditorPanel.addComponent(fieldButtonPanel, LayoutConstraints.SCALED_HORIZONTAL);
 
     // field table
     this.fieldTableModel = this.fieldTableManager.getFieldTableModel(this.modelService
@@ -127,15 +141,21 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
 
       public void invoke(UINode source, ActionType action) {
 
-        int rowIndex = table.getSelectedIndex();
-        if (rowIndex >= 0) {
-          ContentField contentField = ContentModelEditorImpl.this.fieldTableModel
-              .getField(rowIndex);
-          textFieldId.setText(contentField.getId().toString());
-          textFieldName.setText(contentField.getName());
-        } else {
-          textFieldId.setText("");
-          textFieldName.setText("");          
+        if ((action == ActionType.SELECT) || (action == ActionType.DESELECT)) {
+          boolean enabled = false;
+          int rowIndex = table.getSelectedIndex();
+          if (rowIndex >= 0) {
+            ContentField contentField = ContentModelEditorImpl.this.fieldTableModel
+                .getField(rowIndex);
+            fieldIdText.setText(contentField.getId().toString());
+            fieldNameText.setText(contentField.getName());
+            enabled = !contentField.getModifiers().isSystem();
+          } else {
+            fieldIdText.setText("");
+            fieldNameText.setText("");
+          }
+          fieldUpdateButton.setEnabled(enabled);
+          fieldRemoveButton.setEnabled(enabled);
         }
       }
 
@@ -151,43 +171,77 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     // class editor panel
     UIPanel classEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Class");
 
-    final UITextField textClassId = uiFactory.createTextField(false);
-    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", textClassId),
+    final UITextField classIdText = uiFactory.createTextField(false);
+    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", classIdText),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    final UITextField textClassName = uiFactory.createTextField(true);
-    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", textClassName),
+    final UITextField classNameText = uiFactory.createTextField(true);
+    classEditorPanel.addComponent(uiFactory.createLabeledComponent("Name:", classNameText),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     final UIButton checkSystem = uiFactory.createButton("system", ButtonStyle.CHECK);
     checkSystem.setEnabled(false);
-    final UIButton checkExtendable = uiFactory.createButton("extendable", ButtonStyle.CHECK);
-    checkExtendable.setEnabled(false);
+    final UIButton classExtendableCheckbox = uiFactory.createButton("extendable", ButtonStyle.CHECK);
+    classExtendableCheckbox.setEnabled(false);
     classEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags:", checkSystem,
-        checkExtendable), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    UIButton radioNormal = uiFactory.createButton("normal", ButtonStyle.RADIO);
-    UIButton radioFinal = uiFactory.createButton("final", ButtonStyle.RADIO);
-    UIButton radioAbstract = uiFactory.createButton("abstract", ButtonStyle.RADIO);
-    classEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags2:", radioNormal,
-        radioAbstract, radioFinal), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-
+        classExtendableCheckbox), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    UIButton classNormalRadio = uiFactory.createButton("normal", ButtonStyle.RADIO);
+    UIButton classFinalRadio = uiFactory.createButton("final", ButtonStyle.RADIO);
+    UIButton classAbstractRadio = uiFactory.createButton("abstract", ButtonStyle.RADIO);
+    classEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags2:", classNormalRadio,
+        classAbstractRadio, classFinalRadio), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    final UIButton classAddButton = uiFactory.createButton("add", ButtonStyle.DEFAULT);
+    final UIButton classUpdateButton = uiFactory.createButton("update", ButtonStyle.DEFAULT);
+    final UIButton classRemoveButton = uiFactory.createButton("remove", ButtonStyle.DEFAULT);
+    classAddButton.setEnabled(false);
+    classUpdateButton.setEnabled(false);
+    classRemoveButton.setEnabled(false);
+    UIPanel classButtonPanel = uiFactory.createPanel(Orientation.HORIZONTAL);
+    classButtonPanel.addComponent(classAddButton, LayoutConstraints.SCALED_NO_FILL);
+    classButtonPanel.addComponent(classUpdateButton, LayoutConstraints.SCALED_NO_FILL);
+    classButtonPanel.addComponent(classRemoveButton, LayoutConstraints.SCALED_NO_FILL);
+    classEditorPanel.addComponent(classButtonPanel, LayoutConstraints.SCALED_HORIZONTAL);
     // class tree
     final UITree<ContentClass> classTree = uiFactory.createTree(false, this.classTreeModel);
     classTree.addActionListener(new UIActionListener() {
 
       public void invoke(UINode source, ActionType action) {
 
+        if ((action == ActionType.SELECT) || (action == ActionType.DESELECT)) {
+
+          ContentClass contentClass = classTree.getSelection();
+          if (contentClass != null) {
+            ContentModelEditorImpl.this.fieldTableModel = ContentModelEditorImpl.this.fieldTableManager
+                .getFieldTableModel(contentClass);
+            table.setModel(ContentModelEditorImpl.this.fieldTableModel);
+            classIdText.setText(contentClass.getId().toString());
+            classNameText.setText(contentClass.getName());
+            checkSystem.setSelected(contentClass.getModifiers().isSystem());
+            classExtendableCheckbox.setSelected(contentClass.getModifiers().isExtendable());
+            if (ContentModelEditorImpl.this.fieldTableModel.getRowCount() > 0) {
+              table.setSelectedIndex(0);
+            } else {
+              table.setSelectedIndex(-1);
+            }
+            boolean enabled = !contentClass.getModifiers().isSystem();
+            classUpdateButton.setEnabled(enabled);
+            classRemoveButton.setEnabled(enabled);
+            fieldAddButton.setEnabled(enabled);
+            classAddButton.setEnabled(contentClass.getModifiers().isExtendable());
+          }
+        }
+      }
+    });
+    classAddButton.addActionListener(new UIActionListener() {
+
+      public void invoke(UINode source, ActionType action) {
         if (action == ActionType.SELECT) {
           ContentClass contentClass = classTree.getSelection();
-          ContentModelEditorImpl.this.fieldTableModel = ContentModelEditorImpl.this.fieldTableManager
-              .getFieldTableModel(contentClass);
-          table.setModel(ContentModelEditorImpl.this.fieldTableModel);
-          textClassId.setText(contentClass.getId().toString());
-          textClassName.setText(contentClass.getName());
-          checkSystem.setSelected(contentClass.getModifiers().isSystem());
-          checkExtendable.setSelected(contentClass.getModifiers().isExtendable());
-          if (ContentModelEditorImpl.this.fieldTableModel.getRowCount() > 0) {
-            table.setSelectedIndex(0);
-          } else {
-            table.setSelectedIndex(-1);            
+          if (contentClass != null) {
+            String name = classNameText.getText();
+            try {
+              ContentModelEditorImpl.this.modelService.createClass(contentClass, name, ClassModifiersImpl.NORMAL);              
+            } catch (ContentModelException e) {
+              classTree.getParentWindow().showMessage(e.getMessage(), "Error", MessageType.ERROR);
+            }
           }
         }
       }

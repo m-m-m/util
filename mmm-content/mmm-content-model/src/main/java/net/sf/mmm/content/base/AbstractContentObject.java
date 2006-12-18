@@ -170,7 +170,12 @@ public abstract class AbstractContentObject implements ContentObject {
   @Override
   public final int hashCode() {
 
-    return ~getId().hashCode();
+    if (this.id == null) {
+      // this is actually a bug
+      return super.hashCode();
+    } else {
+      return ~this.id.hashCode();      
+    }
   }
 
 }
