@@ -20,7 +20,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserOo implements ContentParser {
+public class ContentParserOpenDoc implements ContentParser {
 
   /** the content.xml entry of the document */
   private static final String ENTRY_CONTENT_XML = "content.xml";
@@ -31,7 +31,7 @@ public class ContentParserOo implements ContentParser {
   /**
    * The constructor
    */
-  public ContentParserOo() {
+  public ContentParserOpenDoc() {
 
     super();
   }
