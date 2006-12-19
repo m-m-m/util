@@ -35,18 +35,32 @@ public class ContentParserPdf implements ContentParser {
 
     Properties properties = new Properties();
     PDFParser parser = new PDFParser(inputStream);
+    parser.parse();
     PDDocument pdfDoc = parser.getPDDocument();
-    if (pdfDoc.isEncrypted()) {
-      // pdfDoc.decrypt("password");
-      return properties;
-    }
-    PDDocumentInformation info = pdfDoc.getDocumentInformation();
-    properties.setProperty(PROPERTY_KEY_TITLE, info.getTitle());
-    properties.setProperty(PROPERTY_KEY_KEYWORDS, info.getKeywords());
-    properties.setProperty(PROPERTY_KEY_AUTHOR, info.getAuthor());
+    try {
+      if (pdfDoc.isEncrypted()) {
+        // pdfDoc.decrypt("password");
+        return properties;
+      }
+      PDDocumentInformation info = pdfDoc.getDocumentInformation();
+      String title = info.getTitle();
+      if (title != null) {
+        properties.setProperty(PROPERTY_KEY_TITLE, title);        
+      }
+      String keywords = info.getKeywords();
+      if (keywords != null) {
+        properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);        
+      }
+      String author = info.getAuthor();
+      if (author != null) {
+        properties.setProperty(PROPERTY_KEY_AUTHOR, author);        
+      }
 
-    PDFTextStripper stripper = new PDFTextStripper();
-    properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));
+      PDFTextStripper stripper = new PDFTextStripper();
+      properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));
+    } finally {
+      pdfDoc.close();
+    }
     return properties;
   }
 
