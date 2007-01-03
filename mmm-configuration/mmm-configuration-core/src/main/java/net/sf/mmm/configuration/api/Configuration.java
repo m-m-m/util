@@ -17,7 +17,7 @@ import net.sf.mmm.value.api.GenericValue;
  * <pre>
  * Configuration conf = getConfigurationFromSomewhere();
  * Configuration srvConf = conf.{@link #getDescendant(String) getDescendant}("server");
- * int port = srvConf.{@link #getDescendant(String) getDescendant}("@port").{@link #getValue() getValue}().{@link GenericValue#getInteger(int) getInteger}(80);
+ * int port = srvConf.{@link #getDescendant(String) getDescendant}("@port").{@link #getValue() getValue}().{@link GenericValue#getInteger(Integer) getInteger}(80);
  * String host = srvConf.{@link #getDescendant(String) getDescendant}("@host").{@link #getValue() getValue}().{@link GenericValue#getString(String) getString}("localhost");
  * Runnable initializer = conf.{@link #getDescendant(String) getDescendant}("client/component[@name='initializer']/implementation").{@link #getValue() getValue}().{@link GenericValue#getJavaClassInstance(Class, Class) getJavaClassInstance}(Runnable.class, MyDefaultInitializer.class);
  * Iterator&lt;Configuration&gt; srvCompIt = srvConf.{@link #getDescendants(String) getDescendants}("components");
@@ -66,7 +66,7 @@ import net.sf.mmm.value.api.GenericValue;
  * {@link Configuration} conf2 = conf1.{@link #getDescendant(String) getDescendant}("foo");
  * {@link Configuration} conf3 = conf2.{@link #getDescendant(String) getDescendant}("@bar");
  * {@link GenericValue} value1 = conf3.{@link #getValue()};
- * int intValue = value1.{@link GenericValue#getInteger(int) getInteger}(42);
+ * int intValue = value1.{@link GenericValue#getInteger(Integer) getInteger}(42);
  * {@link GenericValue} value2 = node2.getValue();
  * String stringValue = value2.{@link GenericValue#getString(String) getString}("hiho");
  * </pre>
@@ -86,16 +86,16 @@ import net.sf.mmm.value.api.GenericValue;
  * {@link java.lang.NullPointerException NullPointerException}s using:
  * 
  * <pre>
- * conf1.{@link #getDescendant(String) getDescendant}("foo/@bar").{@link #getValue()}.{@link GenericValue#getInteger(int) getInteger}(42)
+ * conf1.{@link #getDescendant(String) getDescendant}("foo/@bar").{@link #getValue()}.{@link GenericValue#getInteger(Integer) getInteger}(42)
  * </pre>
  * 
  * Please note that the char constants defined in this interface will never
  * change. Therefore it does NOT make sense to write something like
  * <code>{@link #getDescendant(String) getDescendant}("foo"+{@link Configuration}.{@link #PATH_SEPARATOR}+{@link Configuration}.{@link #NAME_PREFIX_ATTRIBUTE}+"bar")</code>.
  * 
- * ATTENTION: Operations on a {@link Configuration} are NOT thread-safe.
- * Anyways it does not make sense to share the same configuration over multiple
- * threads. Different {@link #getDescendant(String, String) sub-trees} of the
+ * ATTENTION: Operations on a {@link Configuration} are NOT thread-safe. Anyways
+ * it does not make sense to share the same configuration over multiple threads.
+ * Different {@link #getDescendant(String, String) sub-trees} of the
  * configuration can be accessed in a concurrent way.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -120,8 +120,8 @@ public interface Configuration extends
     ELEMENT,
 
     /**
-     * This type represents a {@link Configuration configuration} that only
-     * has a {@link #getValue() value} but can never have
+     * This type represents a {@link Configuration configuration} that only has
+     * a {@link #getValue() value} but can never have
      * {@link #getDescendants(String) descendants}. The {@link #getName() name}
      * of an attribute starts with {@link #NAME_PREFIX_ATTRIBUTE}.<br>
      * It corresponds to a {@link org.w3c.dom.Attr}.

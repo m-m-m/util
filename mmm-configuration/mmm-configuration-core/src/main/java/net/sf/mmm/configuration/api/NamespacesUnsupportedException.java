@@ -30,7 +30,7 @@ public class NamespacesUnsupportedException extends ConfigurationException {
    * @param implementation
    *        is the specific implementation that does not support namespaces.
    */
-  public NamespacesUnsupportedException(Configuration node, Class implementation) {
+  public NamespacesUnsupportedException(Configuration node, Class<?> implementation) {
 
     super(NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
   }
@@ -45,7 +45,7 @@ public class NamespacesUnsupportedException extends ConfigurationException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public NamespacesUnsupportedException(Configuration node, Class implementation, Throwable nested) {
+  public NamespacesUnsupportedException(Configuration node, Class<?> implementation, Throwable nested) {
 
     super(nested, NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
   }

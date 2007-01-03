@@ -52,7 +52,7 @@ public interface ConfigurationAccessFactory {
 
   /**
    * TODO This is the name of an optional
-   * {@link net.sf.mmm.value.api.GenericValue#getBoolean(boolean) boolean}
+   * {@link net.sf.mmm.value.api.GenericValue#getBoolean(Boolean) boolean}
    * {@link Context#getValue(String) value} of that determines if the
    * {@link #getAccessors() accessors} are statically set to
    * {@link ConfigurationAccess#isReadOnly() read-only}. The default value is
