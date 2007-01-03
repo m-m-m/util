@@ -2,7 +2,7 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>MMM::NLS - Native Language Support</title>
+    <title>Native Language Support</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
@@ -70,7 +70,7 @@ public class MyResourceBundle extends AbstractRespourceBundle {
 	constants:
 	<source>
 String usersName = "Lilli";
-NlsMessageIF msg = new NlsMessage(MyResourceBundle.MSG_SAY_HI, usersName);
+NlsMessage msg = new NlsMessageImpl(MyResourceBundle.MSG_SAY_HI, usersName);
 	</source>
 	For exceptions there is additional support via 
 	<code>NlsException</code> and <code>NlsRuntimeException</code>.
@@ -85,7 +85,7 @@ public class IllegalLoginException extends NlsException {
         Now if you throw a <code>IllegalLoginException</code>, it will behave as a
 	"regular" exception with a english message. Additionally it has methods
 	<code>getLocalizedMessage</code> and <code>printStackTrace</code> that
-	take a <code>StringTranslatorIF</code> interface as argument.
+	take a <code>StringTranslator</code> interface as argument.
 	</p>
       </subsection>
     </section>
