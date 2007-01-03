@@ -15,7 +15,7 @@
       <item name="Configuration" href="../../../mmm-configuration/src/site/index.html"/>
     </links>
 
-    <menu name="General Information">
+    <menu name="General Information" inherit="none">
       <item name="Introduction" href="index.html"/>
       <item name="Getting Involved" href="getting-involved.html"/>
       <item name="Road Map" href="roadmap.html"/>
@@ -27,18 +27,19 @@
       -->
     </menu>
 
-    <menu name="Documentation">
+    <menu name="Documentation" inherit="none">
       <item name="FAQ" href="faq.html"/>
       <item name="Users Guide" href="users-guide.html"/>
     </menu>
 
-    <menu name="Developer Guides">
+    <menu name="Developer Guides" inherit="none">
       <item name="Setup" href="setup-devel.html"/>
       <item name="Conventions" href="conventions.html"/>
     </menu>
 
-    <menu ref="modules"/>
-    <menu ref="reports"/>
+    <menu ref="parent" inherit="bottom"/>
+    <menu ref="modules" inherit="bottom"/>
+    <menu ref="reports" inherit="bottom"/>
 
   </body>
   <skin>

@@ -74,53 +74,56 @@
         <p>
         After years I finally decided to work active on the project again. 
         A lot of refactoring was done dividing the project into separate components (COP).
-	Avalon was choosen as framework for COP driven design. 
+        Avalon was choosen as framework for COP driven design. 
         Maven was evaluated and finally chosen as project management tool.
         </p>
       </subsection>
       <subsection name="2004-07-01">
         <p>
-	 Because my plans for the project make it impossible to have a working release 
-	 before 2006, I decided to change the codebase to JDK 5.0 (named JDK 1.5 at this time).
+         Because my plans for the project make it impossible to have a working release 
+         before 2006, I decided to change the codebase to JDK 5.0 (named JDK 1.5 at this time).
         </p>
       </subsection>
       <subsection name="2004-07-16">
         <p>
         Changed License from GPL to LGPL.
-	This step could be easily taken because no other author than me
-	had produced any file or line of code for the project.
+        This step could be easily taken because no other author than me
+        had produced any file or line of code for the project.
         </p>
       </subsection>
       <subsection name="2004-2005">
         <p>
-	Since there is no community and might not be before a first useable release,
-	I decided to develop on my local subversion server until sourceforge will
-	offer subversion as alternative to cvs. Please send me an email if you
-	want to have the latest sources or would like to have the subversion repository
-	visible to the public.
-	</p>
+        Since there is no community and might not be before a first useable release,
+        I decided to develop on my local subversion server until sourceforge will
+        offer subversion as alternative to cvs. Please send me an email if you
+        want to have the latest sources or would like to have the subversion repository
+        visible to the public.
+        </p>
       </subsection>
       <subsection name="2005-06-24">
         <p>
-	Switched from maven to maven2.
+        Switched from maven to maven2.
         </p>
       </subsection>
       <subsection name="2005-08-01">
         <p>
         Changed License from LGPL to Apache Software Licenes for final freedom.
-	This step could be easily taken because no other author than me
-	had produced any file or line of code for the project.
+        This step could be easily taken because no other author than me
+        had produced any file or line of code for the project.
         </p>
       </subsection>
       <subsection name="2005-10-25">
         <p>
         Registered and set up subversion repository at projxpert.com. The projxpert team
-	granted public read access for the subversion and gave a free upgrade because the
-	project is open-source. Big thanks to projxpert.com.
-	</p>
+        granted public read access for the subversion and gave a free upgrade because the
+        project is open-source. Big thanks to projxpert.com.
+        </p>
       </subsection>
       <subsection name="2006-07-23">
         Deployed the maven2 site after the old site was not updated for over one year. From now on the site gets updated automatically by my server.
+      </subsection>
+      <subsection name="TODO">
+        TODO: switched subversion to googlecode.
       </subsection>
     </section>
   </body>
