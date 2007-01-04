@@ -22,20 +22,21 @@
     </dependency>
   </dependencies>
   <modules>
-    <module>mmm-setup</module>
-    <module>mmm-util</module>
-    <module>mmm-nls</module>
-    <module>mmm-uit</module>
-    <module>mmm-value</module>
-    <module>mmm-context</module>
-    <module>mmm-term</module>
     <module>mmm-configuration</module>
-    <module>mmm-streamdetect</module>
-    <module>mmm-framework</module>
-    <module>mmm-validator</module>
     <module>mmm-content</module>
+    <module>mmm-context</module>
+    <module>mmm-framework</module>
     <module>mmm-gui</module>
+    <module>mmm-nls</module>
     <module>mmm-search</module>
+    <module>mmm-setup</module>
+    <module>mmm-streamdetect</module>
+    <module>mmm-term</module>
+    <module>mmm-upnp</module>
+    <module>mmm-util</module>
+    <module>mmm-uit</module>
+    <module>mmm-validator</module>
+    <module>mmm-value</module>
   </modules>
   <inceptionYear>2001</inceptionYear>
   <build>
@@ -63,14 +64,28 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-checkstyle-plugin</artifactId>
-	<dependencies>
-	  <dependency>
-	    <groupId>net.sf.mmm</groupId>
-	    <artifactId>mmm-setup</artifactId>
-	    <version>1.0.0</version>
-	  </dependency>
-	</dependencies>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>net.sf.mmm</groupId>
+            <artifactId>mmm-setup</artifactId>
+            <version>1.0.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <!-- workaround to clear the cobertura.ser files that currently do not go to target directory -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>        
       </plugin>
     </plugins>
   </build>
@@ -169,10 +184,12 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
       </plugin>
+      <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
       </plugin>
+      -->
     </plugins>
   </reporting>
   <issueManagement>
