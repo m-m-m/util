@@ -28,7 +28,7 @@ public class Signature {
      * @param theSignature
      *        is the signature to wrap.
      */
-    public Signature(Class... theSignature) {
+    public Signature(Class<?>... theSignature) {
 
         super();
         this.signature = theSignature;
@@ -119,7 +119,7 @@ public class Signature {
      *        <code>{@link #getTypeCount()} - 1</code>.
      * @return the {@link Class type} at the given index.
      */
-    public Class getType(int position) {
+    public Class<?> getType(int position) {
 
         return this.signature[position];
     }

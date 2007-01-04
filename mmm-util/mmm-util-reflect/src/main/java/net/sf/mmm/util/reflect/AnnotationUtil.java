@@ -258,8 +258,8 @@ public class AnnotationUtil {
         A result = annotatedMethod.getAnnotation(annotation);
         if (result == null) {
             String methodName = annotatedMethod.getName();
-            Class[] parameterTypes = annotatedMethod.getParameterTypes();
-            Class inheritingClass = annotatedMethod.getDeclaringClass();
+            Class<?>[] parameterTypes = annotatedMethod.getParameterTypes();
+            Class<?> inheritingClass = annotatedMethod.getDeclaringClass();
             while (result == null) {
                 annotatedMethod = ReflectionUtil.getParentMethod(inheritingClass, methodName,
                         parameterTypes);
