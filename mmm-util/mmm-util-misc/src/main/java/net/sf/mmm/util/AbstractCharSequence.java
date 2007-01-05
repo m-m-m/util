@@ -9,32 +9,31 @@ package net.sf.mmm.util;
  */
 public abstract class AbstractCharSequence extends CoreCharSequence {
 
-    /**
-     * The constructor.
-     */
-    public AbstractCharSequence() {
+  /**
+   * The constructor.
+   */
+  public AbstractCharSequence() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see java.lang.CharSequence#subSequence(int, int)
+   */
+  public CharSequence subSequence(int startPosition, int endPosition) {
+
+    if (startPosition < 0) {
+      throw new IndexOutOfBoundsException("Start (" + startPosition + ") must not be negative!");
     }
-
-    /**
-     * @see java.lang.CharSequence#subSequence(int, int)
-     */
-    public CharSequence subSequence(int startPosition, int endPosition) {
-
-        if (startPosition < 0) {
-            throw new IndexOutOfBoundsException("Start (" + startPosition
-                    + ") must not be negative!");
-        }
-        if (endPosition < startPosition) {
-            throw new IndexOutOfBoundsException("End (" + endPosition
-                    + ") must be greater or equal to start (" + startPosition + ")!");
-        }
-        if (endPosition > length()) {
-            throw new IndexOutOfBoundsException("End (" + endPosition
-                    + ") greater than length of sequence (" + length() + ")");
-        }
-        return new CharSubSequence(this, startPosition, endPosition);
+    if (endPosition < startPosition) {
+      throw new IndexOutOfBoundsException("End (" + endPosition
+          + ") must be greater or equal to start (" + startPosition + ")!");
     }
-    
+    if (endPosition > length()) {
+      throw new IndexOutOfBoundsException("End (" + endPosition
+          + ") greater than length of sequence (" + length() + ")");
+    }
+    return new CharSubSequence(this, startPosition, endPosition);
+  }
+
 }

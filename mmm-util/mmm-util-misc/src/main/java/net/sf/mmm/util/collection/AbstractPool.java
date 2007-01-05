@@ -11,20 +11,20 @@ package net.sf.mmm.util.collection;
  */
 public abstract class AbstractPool<E> implements Pool<E> {
 
-    /**
-     * The constructor.
-     */
-    public AbstractPool() {
+  /**
+   * The constructor.
+   */
+  public AbstractPool() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * @see net.sf.mmm.util.collection.Pool#isEmpty()
-     */
-    public boolean isEmpty() {
+  /**
+   * @see net.sf.mmm.util.collection.Pool#isEmpty()
+   */
+  public boolean isEmpty() {
 
-        return (size() == 0);
-    }
+    return (size() == 0);
+  }
 
 }

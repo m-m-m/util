@@ -16,47 +16,47 @@ import java.util.Iterator;
  */
 public class ReadOnlyIterator<E> implements Iterator<E> {
 
-    /** the actual iterator instance */
-    private Iterator<E> delegate;
+  /** the actual iterator instance */
+  private Iterator<E> delegate;
 
-    /**
-     * The constructor.
-     * 
-     * @param iterator
-     */
-    public ReadOnlyIterator(Iterator<E> iterator) {
+  /**
+   * The constructor.
+   * 
+   * @param iterator
+   */
+  public ReadOnlyIterator(Iterator<E> iterator) {
 
-        super();
-        this.delegate = iterator;
-    }
+    super();
+    this.delegate = iterator;
+  }
 
-    /**
-     * @see java.util.Iterator#hasNext()
-     */
-    public boolean hasNext() {
+  /**
+   * @see java.util.Iterator#hasNext()
+   */
+  public boolean hasNext() {
 
-        return this.delegate.hasNext();
-    }
+    return this.delegate.hasNext();
+  }
 
-    /**
-     * @see java.util.Iterator#next()
-     */
-    public E next() {
+  /**
+   * @see java.util.Iterator#next()
+   */
+  public E next() {
 
-        return this.delegate.next();
-    }
+    return this.delegate.next();
+  }
 
-    /**
-     * This method will always throw an exception.
-     * 
-     * @see java.util.Iterator#remove()
-     * 
-     * @throws UnsupportedOperationException
-     *         whenever this method is called.
-     */
-    public void remove() {
+  /**
+   * This method will always throw an exception.
+   * 
+   * @see java.util.Iterator#remove()
+   * 
+   * @throws UnsupportedOperationException
+   *         whenever this method is called.
+   */
+  public void remove() {
 
-        throw new UnsupportedOperationException();
-    }
+    throw new UnsupportedOperationException();
+  }
 
 }

@@ -13,33 +13,33 @@ import java.io.FileFilter;
  */
 public class DirectoryFilter implements FileFilter {
 
-    /** the singleton instance */
-    private static final FileFilter INSTANCE = new DirectoryFilter();
+  /** the singleton instance */
+  private static final FileFilter INSTANCE = new DirectoryFilter();
 
-    /**
-     * The constructor.
-     */
-    private DirectoryFilter() {
+  /**
+   * The constructor.
+   */
+  private DirectoryFilter() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * @see java.io.FileFilter#accept(java.io.File)
-     */
-    public boolean accept(File file) {
+  /**
+   * @see java.io.FileFilter#accept(java.io.File)
+   */
+  public boolean accept(File file) {
 
-        return file.isDirectory();
-    }
+    return file.isDirectory();
+  }
 
-    /**
-     * This method gets the signleton instance of this file-filter.
-     * 
-     * @return the filter.
-     */
-    public static FileFilter getInstance() {
+  /**
+   * This method gets the signleton instance of this file-filter.
+   * 
+   * @return the filter.
+   */
+  public static FileFilter getInstance() {
 
-        return INSTANCE;
-    }
+    return INSTANCE;
+  }
 
 }

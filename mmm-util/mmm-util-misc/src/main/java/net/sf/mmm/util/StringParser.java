@@ -213,12 +213,12 @@ public class StringParser implements CharSequence {
     if (acceptEof) {
       int len = this.pos - startIndex;
       if (len > 0) {
-        return new String(this.chars, startIndex, len);              
+        return new String(this.chars, startIndex, len);
       } else {
         return "";
       }
     } else {
-      return null;      
+      return null;
     }
   }
 
@@ -256,8 +256,8 @@ public class StringParser implements CharSequence {
   /**
    * This method reads all {@link #next() next characters} until the given
    * <code>stop</code> character or the end of the string to parse is reached.
-   * In advance to {@link #readUntil(char, boolean)}, this method will read over the
-   * <code>stop</code> character if it is properly escaped. <br>
+   * In advance to {@link #readUntil(char, boolean)}, this method will read
+   * over the <code>stop</code> character if it is properly escaped. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index}
    * will point to the next character after the (first) <code>stop</code>
    * character or to the end of the string if NO such character exists.

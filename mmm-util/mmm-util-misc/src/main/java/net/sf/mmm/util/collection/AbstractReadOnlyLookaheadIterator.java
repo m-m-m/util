@@ -17,69 +17,69 @@ import java.util.NoSuchElementException;
  */
 public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E> {
 
-    /** the next item or <code>null</code> if done */
-    private E next;
+  /** the next item or <code>null</code> if done */
+  private E next;
 
-    /**
-     * The constructor.
-     * 
-     * @see #findFirst()
-     */
-    public AbstractReadOnlyLookaheadIterator() {
+  /**
+   * The constructor.
+   * 
+   * @see #findFirst()
+   */
+  public AbstractReadOnlyLookaheadIterator() {
 
-        super();
+    super();
+  }
+
+  /**
+   * This method has to be called from the constructor of the implementing
+   * class.
+   */
+  protected final void findFirst() {
+
+    this.next = findNext();
+  }
+
+  /**
+   * This method tries to find the {@link #next() next} element.
+   * 
+   * @return the next element or <code>null</code> if
+   *         {@link #hasNext() done}.
+   */
+  protected abstract E findNext();
+
+  /**
+   * @see java.util.Iterator#hasNext()
+   */
+  public final boolean hasNext() {
+
+    return (this.next != null);
+  }
+
+  /**
+   * @see java.util.Iterator#next()
+   */
+  public final E next() {
+
+    if (this.next == null) {
+      throw new NoSuchElementException();
+    } else {
+      E result = this.next;
+      this.next = findNext();
+      return result;
     }
+  }
 
-    /**
-     * This method has to be called from the constructor of the implementing
-     * class.
-     */
-    protected final void findFirst() {
+  /**
+   * This method will always throw an exception.
+   * 
+   * @see java.util.Iterator#remove()
+   * 
+   * @throws UnsupportedOperationException
+   *         whenever this method is called.
+   */
+  public final void remove() {
 
-        this.next = findNext();
-    }
-
-    /**
-     * This method tries to find the {@link #next() next} element.
-     * 
-     * @return the next element or <code>null</code> if
-     *         {@link #hasNext() done}.
-     */
-    protected abstract E findNext();
-
-    /**
-     * @see java.util.Iterator#hasNext()
-     */
-    public final boolean hasNext() {
-
-        return (this.next != null);
-    }
-
-    /**
-     * @see java.util.Iterator#next()
-     */
-    public final E next() {
-
-        if (this.next == null) {
-            throw new NoSuchElementException();
-        } else {
-            E result = this.next;
-            this.next = findNext();
-            return result;
-        }
-    }
-
-    /**
-     * This method will always throw an exception.
-     * 
-     * @see java.util.Iterator#remove()
-     * 
-     * @throws UnsupportedOperationException
-     *         whenever this method is called.
-     */
-    public final void remove() {
-
-        throw new UnsupportedOperationException();
-    }
+    throw new UnsupportedOperationException();
+  }
 
 }

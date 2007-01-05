@@ -17,46 +17,46 @@ import java.util.Collection;
  */
 public interface Pool<E> {
 
-    /**
-     * This method takes an element from the pool.
-     * 
-     * @return an element from the pool or <code>null</code> if the pool is
-     *         empty.
-     */
-    E take();
+  /**
+   * This method takes an element from the pool.
+   * 
+   * @return an element from the pool or <code>null</code> if the pool is
+   *         empty.
+   */
+  E take();
 
-    /**
-     * This method puts the given <code>element</code> into the pool.
-     * 
-     * @see Collection#add(Object)
-     * 
-     * @param element
-     *        is the element to add to the pool.
-     */
-    void add(E element);
+  /**
+   * This method puts the given <code>element</code> into the pool.
+   * 
+   * @see Collection#add(Object)
+   * 
+   * @param element
+   *        is the element to add to the pool.
+   */
+  void add(E element);
 
-    /**
-     * This method determines if the pool is empty (has a {@link #size() size}
-     * of <code>0</code>).
-     * 
-     * @see Collection#isEmpty()
-     * 
-     * @return <code>true</code> if the pool is emtpy.
-     */
-    boolean isEmpty();
+  /**
+   * This method determines if the pool is empty (has a {@link #size() size}
+   * of <code>0</code>).
+   * 
+   * @see Collection#isEmpty()
+   * 
+   * @return <code>true</code> if the pool is emtpy.
+   */
+  boolean isEmpty();
 
-    /**
-     * @see Collection#size()
-     * 
-     * @return the current size of this pool.
-     */
-    int size();
+  /**
+   * @see Collection#size()
+   * 
+   * @return the current size of this pool.
+   */
+  int size();
 
-    /**
-     * This method gets the maximum size of the pool.
-     * 
-     * @return the maximum pool size.
-     */
-    int getMaximumSize();
+  /**
+   * This method gets the maximum size of the pool.
+   * 
+   * @return the maximum pool size.
+   */
+  int getMaximumSize();
 
 }

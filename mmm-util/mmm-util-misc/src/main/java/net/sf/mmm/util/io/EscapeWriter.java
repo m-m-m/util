@@ -15,111 +15,111 @@ import java.io.Writer;
  */
 public class EscapeWriter extends Writer {
 
-    /** 
-     * A table that mapps chars (as index) to escape sequences.   
-     */
-    private final String[] characterEscapingTable;
+  /**
+   * A table that mapps chars (as index) to escape sequences.
+   */
+  private final String[] characterEscapingTable;
 
-    /** the actual writer */
-    private final Writer writer;
+  /** the actual writer */
+  private final Writer writer;
 
-    /**
-     * The constructor.
-     * 
-     * @see EscapeWriter#EscapeWriter(Object, String[], Writer)
-     * 
-     * @param charEscapeTable
-     *        is a String array that mapps characters by to escape sequences. If
-     *        the numeric representation of a character is a legal index for the
-     *        given array and the String at that index is <code>null</code>
-     *        that string is written instead of the character. In all other
-     *        cases, the character is written without change.
-     * @param plainWriter
-     *        is the writer that is wrapped.
-     */
-    public EscapeWriter(String[] charEscapeTable, Writer plainWriter) {
+  /**
+   * The constructor.
+   * 
+   * @see EscapeWriter#EscapeWriter(Object, String[], Writer)
+   * 
+   * @param charEscapeTable
+   *        is a String array that mapps characters by to escape sequences. If
+   *        the numeric representation of a character is a legal index for the
+   *        given array and the String at that index is <code>null</code> that
+   *        string is written instead of the character. In all other cases, the
+   *        character is written without change.
+   * @param plainWriter
+   *        is the writer that is wrapped.
+   */
+  public EscapeWriter(String[] charEscapeTable, Writer plainWriter) {
 
-        super();
-        this.writer = plainWriter;
-        this.characterEscapingTable = charEscapeTable;
-    }
+    super();
+    this.writer = plainWriter;
+    this.characterEscapingTable = charEscapeTable;
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param syncLock
-     *        is an explicit lock object used for synchronization (see
-     *        {@link Writer#Writer(java.lang.Object)}).
-     * @param charEscapeTable
-     *        is a String array that mapps characters by to escape sequences. If
-     *        the numeric representation of a character is a legal index for the
-     *        given array and the String at that index is <code>null</code>
-     *        that string is written instead of the character. In all other
-     *        cases, the character is written without change.
-     * @param plainWriter
-     *        is the writer that is wrapped.
-     */
-    public EscapeWriter(Object syncLock, String[] charEscapeTable, Writer plainWriter) {
+  /**
+   * The constructor.
+   * 
+   * @param syncLock
+   *        is an explicit lock object used for synchronization (see
+   *        {@link Writer#Writer(java.lang.Object)}).
+   * @param charEscapeTable
+   *        is a String array that mapps characters by to escape sequences. If
+   *        the numeric representation of a character is a legal index for the
+   *        given array and the String at that index is <code>null</code> that
+   *        string is written instead of the character. In all other cases, the
+   *        character is written without change.
+   * @param plainWriter
+   *        is the writer that is wrapped.
+   */
+  public EscapeWriter(Object syncLock, String[] charEscapeTable, Writer plainWriter) {
 
-        super(syncLock);
-        this.writer = plainWriter;
-        this.characterEscapingTable = charEscapeTable;
-    }
+    super(syncLock);
+    this.writer = plainWriter;
+    this.characterEscapingTable = charEscapeTable;
+  }
 
-    /**
-     * @see java.io.Writer#write(char[], int, int)
-     */
-    @Override
-    public void write(char[] cbuf, int off, int len) throws IOException {
+  /**
+   * @see java.io.Writer#write(char[], int, int)
+   */
+  @Override
+  public void write(char[] cbuf, int off, int len) throws IOException {
 
-        int start = off;
-        int end = off + len;
-        int index = start;
-        int count = 0;
-        while (index < end) {
-            char c = cbuf[index++];
-            // escaped representation of character c or null if no escaping
-            // needed.
-            if (c < this.characterEscapingTable.length) {
-                String escapeSequence = this.characterEscapingTable[c];
-                if (escapeSequence != null) {
-                    // some characters left that where not escaped?
-                    if (count > 0) {
-                        // flush them
-                        this.writer.write(cbuf, start, count);
-                        count = 0;
-                    }
-                    start = index;
-                    this.writer.write(escapeSequence);
-                } else {
-                    count++;
-                }
-            } else {
-                count++;
-            }
-        }
-        // flush rest of the buffer
-        if (count > 0) {
+    int start = off;
+    int end = off + len;
+    int index = start;
+    int count = 0;
+    while (index < end) {
+      char c = cbuf[index++];
+      // escaped representation of character c or null if no escaping
+      // needed.
+      if (c < this.characterEscapingTable.length) {
+        String escapeSequence = this.characterEscapingTable[c];
+        if (escapeSequence != null) {
+          // some characters left that where not escaped?
+          if (count > 0) {
+            // flush them
             this.writer.write(cbuf, start, count);
+            count = 0;
+          }
+          start = index;
+          this.writer.write(escapeSequence);
+        } else {
+          count++;
         }
+      } else {
+        count++;
+      }
     }
-
-    /**
-     * @see java.io.Writer#flush()
-     */
-    @Override
-    public void flush() throws IOException {
-
-        this.writer.flush();
+    // flush rest of the buffer
+    if (count > 0) {
+      this.writer.write(cbuf, start, count);
     }
+  }
 
-    /**
-     * @see java.io.Writer#close()
-     */
-    @Override
-    public void close() throws IOException {
+  /**
+   * @see java.io.Writer#flush()
+   */
+  @Override
+  public void flush() throws IOException {
 
-        this.writer.close();
-    }
+    this.writer.flush();
+  }
+
+  /**
+   * @see java.io.Writer#close()
+   */
+  @Override
+  public void close() throws IOException {
+
+    this.writer.close();
+  }
 
 }

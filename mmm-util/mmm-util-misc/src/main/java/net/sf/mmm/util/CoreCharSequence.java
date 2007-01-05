@@ -27,6 +27,7 @@ public abstract class CoreCharSequence implements CharSequence {
    * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
+  @Override
   public boolean equals(Object other) {
 
     if (this == other) {
@@ -60,6 +61,7 @@ public abstract class CoreCharSequence implements CharSequence {
   /**
    * @see java.lang.Object#hashCode()
    */
+  @Override
   public int hashCode() {
 
     // behave like java.lang.String
@@ -77,6 +79,7 @@ public abstract class CoreCharSequence implements CharSequence {
   /**
    * @see CharSequence#toString()
    */
+  @Override
   public String toString() {
 
     return new StringBuffer(this).toString();
