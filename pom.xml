@@ -260,4 +260,24 @@
       <comments/>
     </license>
   </licenses>
+  <repositories>
+    <repository>
+      <!--
+      <releases>
+        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+      -->
+      <id>mmm</id>
+      <name>MMM Repository</name>
+      <url>http://m-m-m.googlecode.com/svn/trunk/repository/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>  
 </project>
