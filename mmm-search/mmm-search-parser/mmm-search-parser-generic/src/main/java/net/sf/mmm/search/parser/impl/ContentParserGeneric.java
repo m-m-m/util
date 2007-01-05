@@ -25,9 +25,9 @@ public class ContentParserGeneric implements ContentParser {
 
   /**
    * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
-   *      java.lang.String)
+   *      long)
    */
-  public Properties parse(InputStream inputStream, String filename) throws Exception {
+  public Properties parse(InputStream inputStream, long filesize) throws Exception {
 
     Properties properties = new Properties();
     properties.setProperty(PROPERTY_KEY_TEXT, "test");

@@ -1,0 +1,156 @@
+/* $Id$ */
+package net.sf.mmm.search.parser.impl;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.Reader;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.glaforge.i18n.io.SmartEncodingInputStream;
+
+import net.sf.mmm.search.parser.base.AbstractContentParser;
+
+/**
+ * This is the implementation of the
+ * {@link net.sf.mmm.search.parser.api.ContentParser} interface for text
+ * (content with the mimetype "text/plain").
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public class ContentParserText extends AbstractContentParser {
+
+  /** @see #getDefaultCapacity() */
+  private int defaultCapacity;
+
+  /**
+   * The constructor
+   */
+  public ContentParserText() {
+
+    super();
+    this.defaultCapacity = 1024;
+  }
+
+  /**
+   * @see #setDefaultCapacity(int)
+   * 
+   * @return the defaultBufferSize.
+   */
+  public int getDefaultCapacity() {
+
+    return this.defaultCapacity;
+  }
+
+  /**
+   * If content is {@link #parse(InputStream, long) parsed} the capacity of the
+   * used {@link StringBuffer} is set to
+   * <code>{@link #getMaximumBufferSize() maximumBufferSize}/2</code> limited
+   * to the <code>filesize</code>. If the <code>filesize</code> is
+   * undefined, this value is used as limit.<br>
+   * Since Java sources are typically quite small, you should NOT use a too
+   * large value here. The default is <code>1024</code>.
+   * 
+   * @param newBufferSize
+   *        the defaultBufferSize to set.
+   */
+  public void setDefaultCapacity(int newBufferSize) {
+
+    this.defaultCapacity = newBufferSize;
+  }
+
+  /**
+   * This method may be overriden to parse addinional information from the
+   * content.
+   * 
+   * @param properties
+   *        are the properties with the collected metadata.
+   * @param line
+   *        is a single line read from the text.
+   * @return the part of the given <code>line</code> that should be added to
+   *         the text or <code>null</code> if the line should be ignored.
+   */
+  protected String parseLine(Properties properties, String line) {
+
+    return line;
+  }
+
+  /**
+   * This method checks if the property identified by <code>propertyName</code>
+   * already exists. If NOT, it tries to extract it using the given
+   * <code>pattern</code> that has to produce it in
+   * {@link Matcher#group(int) group} <code>1</code>.
+   * 
+   * @param properties
+   *        are the properties with the collected metadata.
+   * @param line
+   *        is a single line read from the text.
+   * @param pattern
+   *        is the regular expression pattern.
+   * @param propertyName
+   *        is the name of the property to extract.
+   */
+  protected void parseProperty(Properties properties, String line, Pattern pattern,
+      String propertyName) {
+
+    String value = properties.getProperty(propertyName);
+    if (value == null) {
+      Matcher m = pattern.matcher(line);
+      if (m.matches()) {
+        value = m.group(1);
+        properties.setProperty(propertyName, value);
+      }
+    }
+  }
+
+  /**
+   * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
+   *      long)
+   */
+  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+
+    Properties properties = new Properties();
+    int maxBufferSize = getMaximumBufferSize();
+    int maxChars = maxBufferSize / 2;
+    int capacity = maxChars;
+    if (filesize > 0) {
+      if (filesize < capacity) {
+        capacity = (int) filesize;
+      }
+    } else {
+      if (capacity > this.defaultCapacity) {
+        capacity = this.defaultCapacity;
+      }
+    }
+    StringBuffer textBuffer = new StringBuffer(capacity);
+    int bufferLength = 4096;
+    if (bufferLength > maxBufferSize) {
+      bufferLength = maxBufferSize;
+    }
+    SmartEncodingInputStream smartIS = new SmartEncodingInputStream(inputStream, bufferLength);
+    Reader reader = smartIS.getReader();
+    BufferedReader bufferedReader = new BufferedReader(reader);
+    String line = bufferedReader.readLine();
+    int charCount = 0;
+    while (line != null) {
+      line = parseLine(properties, line);
+      if (line != null) {
+        int len = line.length();
+        charCount += len;
+        if (charCount > maxChars) {
+          break;
+        }
+        // omitt empty lines...
+        if ((len > 8) || (line.trim().length() > 0)) {
+          textBuffer.append(line);
+          textBuffer.append('\n');
+        }
+      }
+      line = bufferedReader.readLine();
+    }
+    properties.setProperty(PROPERTY_KEY_TEXT, textBuffer.toString());
+    return properties;
+  }
+
+}

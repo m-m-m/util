@@ -25,10 +25,10 @@ public class ContentParserXls extends AbstractPoiContentParser {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem)
+   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem, long)
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs) throws Exception {
+  protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
 
     StringBuffer textBuffer = new StringBuffer(1024);
     HSSFWorkbook parser = new HSSFWorkbook(poiFs);

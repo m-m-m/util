@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.search.engine.api;
 
+import net.sf.mmm.search.api.SearchException;
+
 /**
  * This is the interface used to build {@link SearchQuery search-queries}.<br>
  * You can eigther specify the query as string and

@@ -5,7 +5,6 @@ import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
-import net.sf.mmm.search.engine.api.SearchException;
 import net.sf.mmm.search.engine.api.SearchQuery;
 
 /**
@@ -55,13 +54,9 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   private void addQuery(BooleanClause.Occur occur, SearchQuery subQuery) {
 
     if (subQuery != LuceneSearchQueryBuilder.NULL_QUERY) {
-      try {
-        AbstractLuceneSearchQuery luceneQuery = (AbstractLuceneSearchQuery) subQuery;
-        this.query.add(luceneQuery.getLuceneQuery(), occur);
-        this.size++;
-      } catch (ClassCastException e) {
-        throw new SearchException(e, "Illegal query: must be created via query builder!");
-      }
+      AbstractLuceneSearchQuery luceneQuery = (AbstractLuceneSearchQuery) subQuery;
+      this.query.add(luceneQuery.getLuceneQuery(), occur);
+      this.size++;
     }
   }
 

@@ -2,6 +2,7 @@
 package net.sf.mmm.search.engine.api;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.SearchException;
 
 /**
  * This is the interface of a search-engine used to perform full-text search. An

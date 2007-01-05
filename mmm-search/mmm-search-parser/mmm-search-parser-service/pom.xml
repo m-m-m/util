@@ -52,6 +52,12 @@
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-java</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-search-parser-opendoc</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>

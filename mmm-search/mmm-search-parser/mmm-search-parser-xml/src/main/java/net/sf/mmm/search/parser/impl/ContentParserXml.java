@@ -26,9 +26,9 @@ public class ContentParserXml implements ContentParser {
 
   /**
    * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
-   *      java.lang.String)
+   *      long)
    */
-  public Properties parse(InputStream inputStream, String filename) throws Exception {
+  public Properties parse(InputStream inputStream, long filesize) throws Exception {
 
     Properties properties = new Properties();
     StringBuffer text = new StringBuffer();

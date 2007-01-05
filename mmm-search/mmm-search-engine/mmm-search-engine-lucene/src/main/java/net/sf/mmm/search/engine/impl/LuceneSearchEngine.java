@@ -15,7 +15,10 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 
 import net.sf.mmm.search.api.SearchEntry;
-import net.sf.mmm.search.engine.api.SearchException;
+import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.base.SearchIdInvalidException;
+import net.sf.mmm.search.base.SearchEntryIdMissingException;
+import net.sf.mmm.search.base.SearchIoException;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResult;
@@ -157,7 +160,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       }
       return new LuceneSearchResult(query.toString(), hits, highlighter);
     } catch (IOException e) {
-      throw new SearchException(e, "Search failed for technical reasons!");
+      throw new SearchIoException(e);
     }
   }
 
@@ -170,13 +173,13 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       int docId = Integer.valueOf(id).intValue();
       Document doc = this.searcher.doc(docId);
       if (doc == null) {
-        throw new SearchException("Search entry \"{0}\" does NOT exist!", id);
+        throw new SearchEntryIdMissingException(id);
       }
       return new LuceneSearchEntry(doc);
     } catch (NumberFormatException e) {
-      throw new SearchException(e, "Illegal search entry id \"{0}\"!", id);
+      throw new SearchIdInvalidException(e, id);
     } catch (IOException e) {
-      throw new SearchException(e, "Search failed for technical reasons!");
+      throw new SearchIoException(e);
     }
   }
 

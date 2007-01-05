@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.apache.lucene.search.Hits;
 
-import net.sf.mmm.search.engine.api.SearchException;
+import net.sf.mmm.search.base.SearchIoException;
 import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.base.AbstractSearchResult;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
@@ -51,7 +51,7 @@ public class LuceneSearchResult extends AbstractSearchResult {
       return new SearchHitImpl(new LuceneSearchEntry(this.hits.doc(index)), entryId, this.hits
           .score(index), this.highlighter);
     } catch (IOException e) {
-      throw new SearchException(e, "Failed to get hit!");
+      throw new SearchIoException(e);
     }
   }
 

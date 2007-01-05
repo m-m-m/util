@@ -2,8 +2,8 @@
 package net.sf.mmm.search.engine.base;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
-import net.sf.mmm.search.engine.api.SearchException;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.util.CharFilter;

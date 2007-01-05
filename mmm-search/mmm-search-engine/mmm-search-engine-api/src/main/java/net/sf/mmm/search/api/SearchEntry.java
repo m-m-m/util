@@ -4,7 +4,12 @@ package net.sf.mmm.search.api;
 import java.util.Iterator;
 
 /**
- * This interface represents an entry of the search-index.
+ * This interface represents an entry of the search-index. It is eigther used
+ * for {@link net.sf.mmm.search.indexer.api.SearchIndexer indexing} or
+ * {@link net.sf.mmm.search.engine.api.SearchEngine retrieval}.
+ * 
+ * @see net.sf.mmm.search.engine.api.SearchHit
+ * @see net.sf.mmm.search.indexer.api.MutableSearchEntry
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -97,37 +102,46 @@ public interface SearchEntry {
    * 
    * @see SearchEntry#PROPERTY_URI
    * 
-   * @return the URI of this hit.
+   * @return the URI of this entry.
    */
   String getUri();
 
   /**
    * This method gets the UID that identifies the original content. While the
    * {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() entry ID} is the
-   * technical ID of the hit assigned by the underlying search-engine this is an
-   * optional custom ID given by the user.
+   * technical ID of the entry assigned by the underlying search-engine this is
+   * an optional custom ID given by the user.
    * 
    * @see SearchEntry#PROPERTY_UID
    * 
-   * @return the UID of this hit or <code>null</code> if NOT available.
+   * @return the UID of this entry or <code>null</code> if NOT available.
    */
   String getUid();
 
   /**
-   * This method gets the title used to display this hit.
+   * This method gets the title used to display this entry.
    * 
    * @see SearchEntry#PROPERTY_TITLE
    * 
-   * @return the title of this hit.
+   * @return the title of this entry.
    */
   String getTitle();
+
+  /**
+   * This method gets the author of this entry.
+   * 
+   * @see SearchEntry#PROPERTY_AUTHOR
+   * 
+   * @return the author of this entry or <code>null</code> if NOT available.
+   */
+  String getAuthor();
 
   /**
    * This method gets the plain text of the content.
    * 
    * @see SearchEntry#PROPERTY_TEXT
    * 
-   * @return the text of this hit.
+   * @return the text of this entry.
    */
   String getText();
 
@@ -136,7 +150,7 @@ public interface SearchEntry {
    * 
    * @see SearchEntry#PROPERTY_TYPE
    * 
-   * @return the type of this hit or <code>null</code> if NOT available.
+   * @return the type of this entry or <code>null</code> if NOT available.
    */
   String getType();
 
@@ -145,8 +159,8 @@ public interface SearchEntry {
    * 
    * @see SearchEntry#PROPERTY_SIZE
    * 
-   * @return the size of this hit or <code>null</code> if NOT available.
+   * @return the size of this entry or <code>null</code> if NOT available.
    */
-  String getSize();
+  Long getSize();
 
 }

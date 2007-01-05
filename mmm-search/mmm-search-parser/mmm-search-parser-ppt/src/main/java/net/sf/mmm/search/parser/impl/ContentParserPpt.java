@@ -146,8 +146,10 @@ public class ContentParserPpt extends AbstractPoiContentParser {
 
     int offsetLength = offset + length - 8;
     if (offsetLength > buffer.length - 8) {
+      /*
       System.out.println("Illegal array index: offset=" + offset + ", length=" + length
           + ", bufferSize=" + buffer.length);
+      */
       offsetLength = buffer.length - 8;
     }
     int index = offset;
@@ -232,18 +234,22 @@ public class ContentParserPpt extends AbstractPoiContentParser {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem)
+   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem, long)
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs) throws Exception {
+  protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
 
     // PowerPointExtractor pptExtractor = new PowerPointExtractor(poiFs);
     // return pptExtractor.getText();
     
-    StringBuffer textBuffer = new StringBuffer(1024);
     DocumentInputStream docStream = poiFs.createDocumentInputStream(POIFS_POWERPOINT_DOC);
 
     int length = docStream.available();
+    if (getMaximumBufferSize() < length) {
+      length = getMaximumBufferSize();
+    }
+    int capacity = length / 10;
+    StringBuffer textBuffer = new StringBuffer(capacity);
     byte[] buffer = new byte[length];
     docStream.read(buffer);
     docStream.close();

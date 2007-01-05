@@ -9,9 +9,8 @@ package net.sf.mmm.search.parser.api;
 public interface ContentParserService {
 
   /**
-   * This method gets a generic {@link ContentParser parser} that is used if no
-   * parser is available for a specific
-   * {@link #getParser(String) file-extension}.
+   * This method gets a generic {@link ContentParser parser} that can be used as
+   * fallback if no {@link #getParser(String) specific parser} is available.
    * 
    * @return the generic parser.
    */
@@ -19,16 +18,17 @@ public interface ContentParserService {
 
   /**
    * This method gets the {@link ContentParser parser} for the given
-   * <code>fileExtension</code>.
+   * <code>key</code>.
    * 
-   * @param fileExtension
-   *        is the extension of the filename excluding the dot (e.g. "xml",
-   *        "html", "htm", etc.).
-   * @return the {@link ContentParser parser} for the given
-   *         <code>fileExtension</code> or <code>null</code> if no specific
-   *         parser is available for the given <code>fileExtension</code> (see
+   * @param key
+   *        is the key identifying the requested parser. It is recommendet to
+   *        use the extension of the filename excluding the dot (e.g. "xml",
+   *        "html", "htm", etc.) as key. Other things like the mimetype are
+   *        possible. Please see the javadoc of the implementation to get sure.
+   * @return the {@link ContentParser parser} for the given <code>key</code>
+   *         or <code>null</code> if no such parser is available (see
    *         {@link #getGenericParser()}).
    */
-  ContentParser getParser(String fileExtension);
+  ContentParser getParser(String key);
 
 }

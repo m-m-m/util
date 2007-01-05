@@ -13,13 +13,16 @@ import net.sf.mmm.search.parser.api.ContentParserService;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentParserService implements ContentParserService {
+public abstract class AbstractContentParserService implements ContentParserService, LimitBufferSize {
 
   /** @see #getGenericParser() */
   private ContentParser genericParser;
 
   /** @see #getParser(String) */
   private final Map<String, ContentParser> ext2parserMap;
+
+  /** @see #getMaximumBufferSize() */
+  private int maximumBufferSize;
 
   /**
    * The constructor.
@@ -28,6 +31,37 @@ public abstract class AbstractContentParserService implements ContentParserServi
 
     super();
     this.ext2parserMap = new HashMap<String, ContentParser>();
+    this.maximumBufferSize = DEFAULT_MAX_BUFFER_SIZE;
+  }
+
+  /**
+   * @see net.sf.mmm.search.parser.base.LimitBufferSize#getMaximumBufferSize()
+   */
+  public int getMaximumBufferSize() {
+
+    return this.maximumBufferSize;
+  }
+
+  /**
+   * @see net.sf.mmm.search.parser.base.LimitBufferSize#setMaximumBufferSize(int)
+   */
+  public void setMaximumBufferSize(int maxBytes) {
+
+    this.maximumBufferSize = maxBytes;
+    updateBufferSize();
+  }
+
+  /**
+   * This method updates the {@link #setMaximumBufferSize(int) buffer size}.
+   */
+  private void updateBufferSize() {
+
+    int bufferSize = this.maximumBufferSize;
+    for (ContentParser parser : this.ext2parserMap.values()) {
+      if (parser instanceof LimitBufferSize) {
+        ((LimitBufferSize) parser).setMaximumBufferSize(bufferSize);
+      }
+    }
   }
 
   /**
@@ -66,7 +100,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
    * @param extensions
    *        are the extensions the parser will be associated with.
    */
-  public void addParser(ContentParser parser, String ... extensions) {
+  public void addParser(ContentParser parser, String... extensions) {
 
     if (extensions.length == 0) {
       throw new IllegalArgumentException("At least one extension is required!");
@@ -75,6 +109,9 @@ public abstract class AbstractContentParserService implements ContentParserServi
       if (this.ext2parserMap.containsKey(extensions[i])) {
         throw new IllegalArgumentException("Parser for extension '" + extensions[i]
             + "'already registered!");
+      }
+      if (parser instanceof LimitBufferSize) {
+        ((LimitBufferSize) parser).setMaximumBufferSize(this.maximumBufferSize);
       }
       this.ext2parserMap.put(extensions[i], parser);
     }

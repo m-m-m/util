@@ -25,10 +25,10 @@ public class ContentParserDoc extends AbstractPoiContentParser {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem)
+   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem, long)
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs) throws Exception {
+  protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
 
     // DocumentEntry documentEntry = (DocumentEntry)
     // poiFs.getRoot().getEntry(POIFS_WORD_DOC);
@@ -41,7 +41,7 @@ public class ContentParserDoc extends AbstractPoiContentParser {
   public static void main(String[] args) throws Exception {
 
     System.out.println(new ContentParserDoc().parse(
-        new FileInputStream("C:\\tmp\\Sicherheitskonzept.doc"), "Sicherheitskonzept.doc")
+        new FileInputStream("C:\\tmp\\Sicherheitskonzept.doc"), -1)
         .getProperty(PROPERTY_KEY_TEXT));
   }
 

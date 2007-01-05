@@ -9,15 +9,16 @@ import org.pdfbox.pdmodel.PDDocument;
 import org.pdfbox.pdmodel.PDDocumentInformation;
 import org.pdfbox.util.PDFTextStripper;
 
-import net.sf.mmm.search.parser.api.ContentParser;
+import net.sf.mmm.search.parser.base.AbstractContentParser;
 
 /**
- * This is the implementation of the {@link ContentParser} interface for PDF
+ * This is the implementation of the
+ * {@link net.sf.mmm.search.parser.api.ContentParser} interface for PDF
  * documents (content with the mimetype "application/pdf").
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserPdf implements ContentParser {
+public class ContentParserPdf extends AbstractContentParser {
 
   /**
    * The constructor
@@ -29,9 +30,9 @@ public class ContentParserPdf implements ContentParser {
 
   /**
    * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
-   *      java.lang.String)
+   *      long)
    */
-  public Properties parse(InputStream inputStream, String filename) throws Exception {
+  public Properties parse(InputStream inputStream, long filesize) throws Exception {
 
     Properties properties = new Properties();
     PDFParser parser = new PDFParser(inputStream);
@@ -45,15 +46,15 @@ public class ContentParserPdf implements ContentParser {
       PDDocumentInformation info = pdfDoc.getDocumentInformation();
       String title = info.getTitle();
       if (title != null) {
-        properties.setProperty(PROPERTY_KEY_TITLE, title);        
+        properties.setProperty(PROPERTY_KEY_TITLE, title);
       }
       String keywords = info.getKeywords();
       if (keywords != null) {
-        properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);        
+        properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);
       }
       String author = info.getAuthor();
       if (author != null) {
-        properties.setProperty(PROPERTY_KEY_AUTHOR, author);        
+        properties.setProperty(PROPERTY_KEY_AUTHOR, author);
       }
 
       PDFTextStripper stripper = new PDFTextStripper();

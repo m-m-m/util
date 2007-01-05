@@ -20,6 +20,12 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-reflect</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
     <!--
     <dependency>
       <groupId>poi</groupId>

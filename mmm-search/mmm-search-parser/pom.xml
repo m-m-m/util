@@ -25,6 +25,8 @@
     <module>mmm-search-parser-ppt</module>
     <module>mmm-search-parser-opendoc</module>
     <module>mmm-search-parser-generic</module>
+    <module>mmm-search-parser-text</module>
+    <module>mmm-search-parser-java</module>
     <module>mmm-search-parser-service</module>
   </modules>  
 </project>

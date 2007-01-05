@@ -7,7 +7,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -19,8 +18,9 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.base.SearchParseException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
-import net.sf.mmm.search.engine.api.SearchException;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder;
@@ -64,10 +64,10 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
    * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#createComplexQuery()
    */
   public ComplexSearchQuery createComplexQuery() {
-  
+
     return new LuceneComplexSearchQuery();
   }
-  
+
   /**
    * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#createPhraseQuery(java.lang.String,
    *      java.lang.String)
@@ -160,18 +160,8 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
       Query luceneQuery = parser.parse(query);
       return new LuceneSearchQuery(luceneQuery);
     } catch (ParseException e) {
-      throw new SearchException(e, "Failed to parse query \"{0}\"", query);
+      throw new SearchParseException(e, query);
     }
-  }
-
-  public static void main(String[] args) throws Exception {
-
-    Analyzer analyzer = new StandardAnalyzer();
-    QueryParser qp = new QueryParser("text", analyzer);
-    String query = "+(text:(Hallo Welt) title:Foo)";
-    SearchQuery q = new LuceneSearchQueryBuilder(analyzer).parseStandardQuery(query, false);
-    System.out.println(q);
-    System.out.println(qp.parse(query));
   }
 
 }

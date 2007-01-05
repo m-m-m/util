@@ -8,15 +8,16 @@ import org.apache.poi.hpsf.PropertySetFactory;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
-import net.sf.mmm.search.parser.api.ContentParser;
+import net.sf.mmm.search.parser.base.AbstractContentParser;
 
 /**
- * This is the implementation of the {@link ContentParser} interface for PDF
- * documents (content with the mimetype "application/pdf").
+ * This is the abstract base implementation of the
+ * {@link net.sf.mmm.search.parser.api.ContentParser} interface for parsing
+ * binary microsoft office documents using apache POI.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPoiContentParser implements ContentParser {
+public abstract class AbstractPoiContentParser extends AbstractContentParser {
 
   /** name of the entry for a word document in the POI filesystem */
   public static final String POIFS_WORD_DOC = "WordDocument";
@@ -34,25 +35,15 @@ public abstract class AbstractPoiContentParser implements ContentParser {
 
   /**
    * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
-   *      java.lang.String)
+   *      long)
    */
-  public Properties parse(InputStream inputStream, String filename) throws Exception {
+  public Properties parse(InputStream inputStream, long filesize) throws Exception {
 
     Properties properties = new Properties();
     POIFSFileSystem poiFs = new POIFSFileSystem(inputStream);
     SummaryInformation summaryInfo = (SummaryInformation) PropertySetFactory.create(poiFs
         .createDocumentInputStream(SummaryInformation.DEFAULT_STREAM_NAME));
     String title = summaryInfo.getTitle();
-    if (title == null) {
-      if (filename != null) {
-        int lastDot = filename.lastIndexOf('.');
-        if (lastDot > 0) {
-          title = filename.substring(0, lastDot);
-        } else {
-          title = filename;
-        }
-      }
-    }
     if (title != null) {
       properties.setProperty(PROPERTY_KEY_TITLE, title);
     }
@@ -64,7 +55,7 @@ public abstract class AbstractPoiContentParser implements ContentParser {
     if (keywords != null) {
       properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);
     }
-    properties.setProperty(PROPERTY_KEY_TEXT, extractText(poiFs));
+    properties.setProperty(PROPERTY_KEY_TEXT, extractText(poiFs, filesize));
     return properties;
   }
 
@@ -72,10 +63,13 @@ public abstract class AbstractPoiContentParser implements ContentParser {
    * This method extracts the text from the office document given by
    * <code>poiFs</code>.
    * 
-   * @param poiFs is the POI filesystem of the office document.
+   * @param poiFs
+   *        is the POI filesystem of the office document.
+   * @param filesize TODO
    * @return the plain text extracted from the content.
-   * @throws Exception if something goes wrong.
+   * @throws Exception
+   *         if something goes wrong.
    */
-  protected abstract String extractText(POIFSFileSystem poiFs) throws Exception;
+  protected abstract String extractText(POIFSFileSystem poiFs, long filesize) throws Exception;
 
 }

@@ -60,11 +60,47 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
+   * @see net.sf.mmm.search.api.SearchEntry#getAuthor()
+   */
+  public String getAuthor() {
+  
+    return getProperty(PROPERTY_AUTHOR);
+  }
+  
+  /**
    * @see net.sf.mmm.search.api.SearchEntry#getSize()
    */
-  public String getSize() {
+  public Long getSize() {
 
-    return getProperty(PROPERTY_SIZE);
+    Long size = null;
+    String sizeString = getProperty(PROPERTY_SIZE);
+    if (sizeString != null) {
+      try {
+        size = Long.valueOf(sizeString);
+      } catch (NumberFormatException e) {
+        // ignore...
+      }
+    }
+    return size;
   }
+  
+  /**
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
 
+    String id = getUid();
+    if (id == null) {
+      id = getUri();
+      if (id == null) {
+        id = getTitle();
+        if (id == null) {
+          id = "undefined";
+        }
+      }
+    }
+    return id;
+  }
+  
 }

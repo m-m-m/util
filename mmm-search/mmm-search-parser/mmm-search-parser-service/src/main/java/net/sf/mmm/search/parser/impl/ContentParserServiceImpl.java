@@ -23,6 +23,7 @@ public class ContentParserServiceImpl extends AbstractContentParserService {
     addParser(new ContentParserDoc(), "doc", "dot");
     addParser(new ContentParserXls(), "xls");
     addParser(new ContentParserPpt(), "ppt");
+    addParser(new ContentParserJava(), "java");
   }
 
 }
