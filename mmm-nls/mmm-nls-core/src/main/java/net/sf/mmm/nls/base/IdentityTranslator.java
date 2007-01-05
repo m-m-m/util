@@ -11,23 +11,23 @@ import net.sf.mmm.nls.api.StringTranslator;
  */
 public final class IdentityTranslator implements StringTranslator {
 
-    /** the singleton instance */
-    public static final StringTranslator INSTANCE = new IdentityTranslator();
+  /** the singleton instance */
+  public static final StringTranslator INSTANCE = new IdentityTranslator();
 
-    /**
-     * The constructor.
-     */
-    private IdentityTranslator() {
+  /**
+   * The constructor.
+   */
+  private IdentityTranslator() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * @see net.sf.mmm.nls.api.StringTranslator#translate(java.lang.String)
-     */
-    public String translate(String message) {
+  /**
+   * @see net.sf.mmm.nls.api.StringTranslator#translate(java.lang.String)
+   */
+  public String translate(String message) {
 
-        return message;
-    }
+    return message;
+  }
 
 }

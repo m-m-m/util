@@ -16,19 +16,19 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class NlsExceptionTest extends TestCase {
 
-    /**
-     * The constructor.
-     */
-    public NlsExceptionTest() {
+  /**
+   * The constructor.
+   */
+  public NlsExceptionTest() {
 
-        super();
-    }
+    super();
+  }
 
-    public void testNlsException() {
-        
-        String source = "bad boy";
-        NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
-        assertEquals("NullPointerException caused by \""+ source+"\"!", e.getMessage());
-        StringTranslator st = new SimpleStringTranslator(new MyResourceBundle(), Locale.GERMAN);
-    }
+  public void testNlsException() {
+
+    String source = "bad boy";
+    NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
+    assertEquals("NullPointerException caused by \"" + source + "\"!", e.getMessage());
+    StringTranslator st = new SimpleStringTranslator(new MyResourceBundle(), Locale.GERMAN);
+  }
 }

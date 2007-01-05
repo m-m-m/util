@@ -26,28 +26,30 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class AbstractResourceBundleTest extends TestCase {
 
-    public AbstractResourceBundleTest() {
-        super();
-    }
+  public AbstractResourceBundleTest() {
 
-    @Test
-    public void testKeys() {
-        final MyResourceBundle myRB = new MyResourceBundle();
-        Set<String> expectedKeys = new HashSet<String>();
-        expectedKeys.add("ERR_NULL");
-        expectedKeys.add("MSG_WELCOME");
-        expectedKeys.add("MSG_BYE");
-        Enumeration<String> keys = myRB.getKeys();
-        int count = 0;
-        while (keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            assertTrue(expectedKeys.contains(key));
-            count++;
-        }
-        assertEquals(count, expectedKeys.size());
-        StringTranslator st = new SimpleStringTranslator(myRB, Locale.GERMAN);
-        NlsMessage msg = new NlsMessageImpl(MyResourceBundle.MSG_WELCOME, "Paul");
-        assertEquals("Welcome \"Paul\"!", msg.getMessage());
-        assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(st));
+    super();
+  }
+
+  @Test
+  public void testKeys() {
+
+    final MyResourceBundle myRB = new MyResourceBundle();
+    Set<String> expectedKeys = new HashSet<String>();
+    expectedKeys.add("ERR_NULL");
+    expectedKeys.add("MSG_WELCOME");
+    expectedKeys.add("MSG_BYE");
+    Enumeration<String> keys = myRB.getKeys();
+    int count = 0;
+    while (keys.hasMoreElements()) {
+      String key = keys.nextElement();
+      assertTrue(expectedKeys.contains(key));
+      count++;
     }
+    assertEquals(count, expectedKeys.size());
+    StringTranslator st = new SimpleStringTranslator(myRB, Locale.GERMAN);
+    NlsMessage msg = new NlsMessageImpl(MyResourceBundle.MSG_WELCOME, "Paul");
+    assertEquals("Welcome \"Paul\"!", msg.getMessage());
+    assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(st));
+  }
 }

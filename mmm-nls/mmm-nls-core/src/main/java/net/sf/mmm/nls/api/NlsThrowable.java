@@ -28,66 +28,65 @@ import java.io.PrintWriter;
  */
 public interface NlsThrowable {
 
-    /**
-     * @return the {@link Throwable#getCause() cause}.
-     */
-    Throwable getCause();
+  /**
+   * @return the {@link Throwable#getCause() cause}.
+   */
+  Throwable getCause();
 
-    /**
-     * @return the {@link Throwable#getMessage() message}.
-     */
-    String getMessage();
+  /**
+   * @return the {@link Throwable#getMessage() message}.
+   */
+  String getMessage();
 
-    /**
-     * This method gets the localized message as string.
-     * 
-     * @see NlsThrowable#getLocalizedMessage(StringTranslator, StringBuffer)
-     * 
-     * @param nationalizer
-     *        is used to translate the original i18n message.
-     * @return the localized message.
-     */
-    String getLocalizedMessage(StringTranslator nationalizer);
+  /**
+   * This method gets the localized message as string.
+   * 
+   * @see NlsThrowable#getLocalizedMessage(StringTranslator, StringBuffer)
+   * 
+   * @param nationalizer
+   *        is used to translate the original i18n message.
+   * @return the localized message.
+   */
+  String getLocalizedMessage(StringTranslator nationalizer);
 
-    /**
-     * This method writes the nationalized (or localized) message to the given
-     * string buffer. <br>
-     * The actual nationalization is done by the given translator who will get
-     * the value of the contained internationalized message without arguments
-     * {@link net.sf.mmm.nls.api.NlsMessage#getInternationalizedMessage()}.
-     * If this translator fails (returns <code>null</code>), the original
-     * message (in english language) will be used. After translation is done,
-     * the language independed arguments will be filled in the translated
-     * message string.
-     * 
-     * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(StringTranslator,
-     *      StringBuffer)
-     * 
-     * @param nationalizer
-     *        is used to translate the original i18n message.
-     * @param message
-     *        is the buffer where to write the message to.
-     */
-    void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message);
+  /**
+   * This method writes the nationalized (or localized) message to the given
+   * string buffer. <br>
+   * The actual nationalization is done by the given translator who will get the
+   * value of the contained internationalized message without arguments
+   * {@link net.sf.mmm.nls.api.NlsMessage#getInternationalizedMessage()}. If
+   * this translator fails (returns <code>null</code>), the original message
+   * (in english language) will be used. After translation is done, the language
+   * independed arguments will be filled in the translated message string.
+   * 
+   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(StringTranslator,
+   *      StringBuffer)
+   * 
+   * @param nationalizer
+   *        is used to translate the original i18n message.
+   * @param message
+   *        is the buffer where to write the message to.
+   */
+  void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message);
 
-    /**
-     * This method prints the strack trace with localized exception message(s).
-     * 
-     * @param stream
-     *        is where to write the strack trace.
-     * @param nationalizer
-     *        translates the original message. May be <code>null</code>.
-     */
-    void printStackTrace(PrintStream stream, StringTranslator nationalizer);
+  /**
+   * This method prints the strack trace with localized exception message(s).
+   * 
+   * @param stream
+   *        is where to write the strack trace.
+   * @param nationalizer
+   *        translates the original message. May be <code>null</code>.
+   */
+  void printStackTrace(PrintStream stream, StringTranslator nationalizer);
 
-    /**
-     * This method prints the strack trace with localized exception message(s).
-     * 
-     * @param writer
-     *        is where to write the strack trace.
-     * @param nationalizer
-     *        translates the original message. Mey be <code>null</code>.
-     */
-    void printStackTrace(PrintWriter writer, StringTranslator nationalizer);
+  /**
+   * This method prints the strack trace with localized exception message(s).
+   * 
+   * @param writer
+   *        is where to write the strack trace.
+   * @param nationalizer
+   *        translates the original message. Mey be <code>null</code>.
+   */
+  void printStackTrace(PrintWriter writer, StringTranslator nationalizer);
 
 }

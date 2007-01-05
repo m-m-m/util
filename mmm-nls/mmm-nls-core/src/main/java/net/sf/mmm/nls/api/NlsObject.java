@@ -11,12 +11,12 @@ package net.sf.mmm.nls.api;
  */
 public interface NlsObject {
 
-    /**
-     * This method is the equivalent to {@link Object#toString()} with native
-     * language support.
-     * 
-     * @return an nls message representing this object.
-     */
-    NlsMessage toNlsMessage();
+  /**
+   * This method is the equivalent to {@link Object#toString()} with native
+   * language support.
+   * 
+   * @return an nls message representing this object.
+   */
+  NlsMessage toNlsMessage();
 
 }

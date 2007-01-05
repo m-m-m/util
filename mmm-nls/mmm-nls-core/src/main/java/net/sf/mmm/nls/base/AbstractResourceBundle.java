@@ -21,70 +21,73 @@ import java.util.ResourceBundle;
  */
 public abstract class AbstractResourceBundle extends ResourceBundle {
 
-    /**
-     * The key value pairs; mapps keys (String) to values (Object). No Map
-     * because Enumeration is required...
-     */
-    private Hashtable<String, Object> bundle;
+  /**
+   * The key value pairs; mapps keys (String) to values (Object). No Map
+   * because Enumeration is required...
+   */
+  private Hashtable<String, Object> bundle;
 
-    /** the inverse map of {@link #bundle} */
-    private Map<Object, String> reverse;
+  /** the inverse map of {@link #bundle} */
+  private Map<Object, String> reverse;
 
-    /**
-     * The constructor.
-     */
-    public AbstractResourceBundle() {
+  /**
+   * The constructor.
+   */
+  public AbstractResourceBundle() {
 
-        super();
-        try {
-            Field[] fields = getClass().getFields();
-            this.bundle = new Hashtable<String, Object>(fields.length);
-            this.reverse = new HashMap<Object, String>(fields.length);
-            for (int i = 0; i < fields.length; i++) {
-                int modifiers = fields[i].getModifiers();
-                if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)
-                        && !Modifier.isPrivate(modifiers)) {
-                    if (fields[i].getType() == String.class) {
-                        String key = fields[i].getName();
-                        Object value = fields[i].get(null);
-                        this.bundle.put(key, value);
-                        this.reverse.put(value, key);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException("Failed to initialize " + getClass().getName(), e);
+    super();
+    try {
+      Field[] fields = getClass().getFields();
+      this.bundle = new Hashtable<String, Object>(fields.length);
+      this.reverse = new HashMap<Object, String>(fields.length);
+      for (int i = 0; i < fields.length; i++) {
+        int modifiers = fields[i].getModifiers();
+        if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)
+            && !Modifier.isPrivate(modifiers)) {
+          if (fields[i].getType() == String.class) {
+            String key = fields[i].getName();
+            Object value = fields[i].get(null);
+            this.bundle.put(key, value);
+            this.reverse.put(value, key);
+          }
         }
+      }
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to initialize " + getClass().getName(), e);
     }
+  }
 
-    /**
-     * This method is the inverse of {@link #getObject(String)}.
-     * 
-     * @param object
-     *        is the object (potentially) retrieved via
-     *        {@link #getObject(String)}.
-     * @return the key for the given <code>object</code> or <code>null</code>
-     *         if it was NOT retrieved via {@link #getObject(String)} from this instance.
-     */
-    public String getKey(Object object) {
+  /**
+   * This method is the inverse of {@link #getObject(String)}.
+   * 
+   * @param object
+   *        is the object (potentially) retrieved via
+   *        {@link #getObject(String)}.
+   * @return the key for the given <code>object</code> or <code>null</code>
+   *         if it was NOT retrieved via {@link #getObject(String)} from this
+   *         instance.
+   */
+  public String getKey(Object object) {
 
-        return this.reverse.get(object);
-    }
+    return this.reverse.get(object);
+  }
 
-    /**
-     * @see java.util.ResourceBundle#getKeys()
-     */
-    public Enumeration<String> getKeys() {
+  /**
+   * @see java.util.ResourceBundle#getKeys()
+   */
+  @Override
+  public Enumeration<String> getKeys() {
 
-        return this.bundle.keys();
-    }
+    return this.bundle.keys();
+  }
 
-    /**
-     * @see java.util.ResourceBundle#handleGetObject(java.lang.String)
-     */
-    protected Object handleGetObject(String key) {
+  /**
+   * @see java.util.ResourceBundle#handleGetObject(java.lang.String)
+   */
+  @Override
+  protected Object handleGetObject(String key) {
 
-        return this.bundle.get(key);
-    }
+    return this.bundle.get(key);
+  }
 
 }

@@ -11,40 +11,40 @@ import net.sf.mmm.nls.api.NlsMessage;
  */
 public class NlsIllegalArgumentException extends NlsRuntimeException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -1537683835966488723L;
+  /** UID for serialization */
+  private static final long serialVersionUID = -1537683835966488723L;
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-     */
-    public NlsIllegalArgumentException(String internaitionalizedMessage, Object... arguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   */
+  public NlsIllegalArgumentException(String internaitionalizedMessage, Object... arguments) {
 
-        super(internaitionalizedMessage, arguments);
-    }
+    super(internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
-     */
-    public NlsIllegalArgumentException(Throwable nested, String internaitionalizedMessage,
-            Object... arguments) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
+   */
+  public NlsIllegalArgumentException(Throwable nested, String internaitionalizedMessage,
+      Object... arguments) {
 
-        super(nested, internaitionalizedMessage, arguments);
-    }
+    super(nested, internaitionalizedMessage, arguments);
+  }
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
-     */
-    public NlsIllegalArgumentException(NlsMessage internationalizedMessage) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
+   */
+  public NlsIllegalArgumentException(NlsMessage internationalizedMessage) {
 
-        super(internationalizedMessage);
-    }
+    super(internationalizedMessage);
+  }
 
-    /**
-     * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
-     */
-    public NlsIllegalArgumentException(Throwable nested, NlsMessage internationalizedMessage) {
+  /**
+   * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
+   */
+  public NlsIllegalArgumentException(Throwable nested, NlsMessage internationalizedMessage) {
 
-        super(nested, internationalizedMessage);
-    }
+    super(nested, internationalizedMessage);
+  }
 
 }
