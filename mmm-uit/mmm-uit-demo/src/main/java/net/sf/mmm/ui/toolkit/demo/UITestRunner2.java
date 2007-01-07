@@ -48,7 +48,7 @@ public class UITestRunner2 {
     public static void main(String[] args) {
 
         runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
-        runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
+        //runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
     }
 
 }
