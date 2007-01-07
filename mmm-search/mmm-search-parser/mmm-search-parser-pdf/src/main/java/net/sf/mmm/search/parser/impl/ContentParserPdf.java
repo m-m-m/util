@@ -57,8 +57,10 @@ public class ContentParserPdf extends AbstractContentParser {
         properties.setProperty(PROPERTY_KEY_AUTHOR, author);
       }
 
-      PDFTextStripper stripper = new PDFTextStripper();
-      properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));
+      if (filesize < getMaximumBufferSize()) {
+        PDFTextStripper stripper = new PDFTextStripper();
+        properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));        
+      }
     } finally {
       pdfDoc.close();
     }
