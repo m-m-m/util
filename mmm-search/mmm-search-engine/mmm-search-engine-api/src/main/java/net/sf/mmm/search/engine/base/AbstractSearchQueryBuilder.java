@@ -64,11 +64,12 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
     while (todo) {
       // determine conjunction...
       parser.skipWhile(CharFilter.WHITESPACE_FILTER);
-      char conjunction = 0;
+      char conjunction = 0;      
       while (parser.hasNext()) {
-        conjunction = parser.peek();
-        if ((conjunction == '+') || (conjunction == '-')) {
+        char c = parser.peek();
+        if ((c == '+') || (c == '-')) {
           parser.next();
+          conjunction = c;
         } else {
           break;
         }
