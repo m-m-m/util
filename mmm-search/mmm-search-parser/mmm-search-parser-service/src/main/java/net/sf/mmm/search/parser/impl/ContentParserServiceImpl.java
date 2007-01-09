@@ -25,7 +25,7 @@ public class ContentParserServiceImpl extends AbstractContentParserService {
     addParser(new ContentParserPpt(), "ppt");
     //elm?
     addParser(new ContentParserText(), "txt", "asc", "apt", "csv", "sql", "php", "vbs", "bat",
-        "sh", "jsp", "jinc", "php", "c", "h", "cpp", "c++", "cs", "net", "asp", "pl", "py", "js");
+        "sh", "jsp", "jinc", "c", "h", "cpp", "c++", "cs", "net", "asp", "pl", "py", "js");
     addParser(new ContentParserJava(), "java");
   }
 
