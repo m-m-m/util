@@ -97,4 +97,56 @@ public interface SearchResultPage {
    */
   SearchHit getPageHit(int index);
 
+  /**
+   * This method gets the {@link #getPageIndex() page-index} of the start
+   * {@link SearchResultPage page} when a number <code>(pagingRange*2)+1</code>
+   * links should be rendered for paging. The <code>pagingRange</code> actualy
+   * specifies the number of links forward and backwards.<br>
+   * The number of {@link SearchResultPage result-pages} is potentially NOT
+   * limited. To avoid that your GUI layout gets broken by too many paging
+   * links, you can use this method to render a fixed number of paging links.<br>
+   * E.g. assume <code>pagingCount</code> is 2 and you would have a
+   * {@link #getPageCount() page-count} of e.g. <code>10</code>. Then you
+   * would render links for visiting the pages from <code>0</code> to
+   * <code>4</code> if your {@link #getPageIndex() page-index} is
+   * <code>0</code>,<code>1</code>, or <code>2</code>. For a
+   * {@link #getPageIndex() page-index} of <code>3</code>, you would render
+   * the links from <code>1</code> to <code>5</code> and so on.<br>
+   * The calculation is performed per call so avoid multiple calls of this
+   * method if possible.
+   * 
+   * @see #getPagingEndIndex(int)
+   * 
+   * @param pagingRange
+   *        the number of paging links forward and backwards.
+   * @return the {@link #getPageIndex() page-index} to start paging with.
+   */
+  int getPagingStartIndex(int pagingRange);
+
+  /**
+   * This method gets the {@link #getPageIndex() page-index} of the end
+   * {@link SearchResultPage page} when a number <code>(pagingRange*2)+1</code>
+   * links should be rendered for paging. The <code>pagingRange</code> actualy
+   * specifies the number of links forward and backwards.<br>
+   * The number of {@link SearchResultPage result-pages} is potentially NOT
+   * limited. To avoid that your GUI layout gets broken by too many paging
+   * links, you can use this method to render a fixed number of paging links.<br>
+   * E.g. assume <code>pagingCount</code> is 2 and you would have a
+   * {@link #getPageCount() page-count} of e.g. <code>10</code>. Then you
+   * would render links for visiting the pages from <code>5</code> to
+   * <code>9</code> if your {@link #getPageIndex() page-index} is
+   * <code>7</code>,<code>8</code>, or <code>9</code>. For a
+   * {@link #getPageIndex() page-index} of <code>6</code>, you would render
+   * the links from <code>4</code> to <code>8</code> and so on.<br>
+   * The calculation is performed per call so avoid multiple calls of this
+   * method if possible.
+   * 
+   * @see #getPagingStartIndex(int)
+   * 
+   * @param pagingRange
+   *        the number of paging links forward and backwards.
+   * @return the {@link #getPageIndex() page-index} to end paging with.
+   */
+  int getPagingEndIndex(int pagingRange);
+
 }

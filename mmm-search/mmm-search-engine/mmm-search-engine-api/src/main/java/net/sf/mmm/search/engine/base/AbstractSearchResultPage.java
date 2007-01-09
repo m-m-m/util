@@ -88,4 +88,39 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
     return this.totalHitCount;
   }
 
+  /**
+   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPagingStartIndex(int)
+   */
+  public int getPagingStartIndex(int pagingRange) {
+
+    int diff = pagingRange;
+    int end = this.pageIndex + pagingRange;
+    if (end >= this.pageCount) {
+      int delta = (end + 1) - this.pageCount;
+      diff = diff + delta;
+    }
+    int result = this.pageIndex - diff;
+    if (result < 0) {
+      result = 0;
+    }
+    return result;
+  }
+
+  /**
+   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPagingEndIndex(int)
+   */
+  public int getPagingEndIndex(int pagingRange) {
+
+    int diff = pagingRange;
+    int start = this.pageIndex - pagingRange;
+    if (start < 0) {
+      diff = diff - start;
+    }
+    int result = this.pageIndex + diff;
+    if (result >= this.pageCount) {
+      result = this.pageCount - 1;
+    }
+    return result;
+  }
+
 }

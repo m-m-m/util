@@ -49,5 +49,5 @@ public class SearchResultPageImpl extends AbstractSearchResultPage {
 
     return this.hits.length;
   }
-
+  
 }
