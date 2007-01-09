@@ -22,9 +22,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>commons-beanutils</groupId>
-      <artifactId>commons-beanutils</artifactId>
-      <version>1.7.0</version>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-reflect</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
