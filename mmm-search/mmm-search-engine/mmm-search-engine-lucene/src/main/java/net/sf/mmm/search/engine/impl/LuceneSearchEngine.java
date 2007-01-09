@@ -50,6 +50,9 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /** @see #setIndexPath(String) */
   private String indexPath;
 
+  /** @see #setIgnoreLeadingWildcards(boolean) */
+  private boolean ignoreLeadingWildcards;
+
   /**
    * The constructor
    */
@@ -61,6 +64,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     this.searcher = null;
     this.indexPath = null;
     this.queryBuilder = null;
+    this.ignoreLeadingWildcards = true;
   }
 
   /**
@@ -117,6 +121,36 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
+   * @see #setIgnoreLeadingWildcards(boolean)
+   * 
+   * @return <code>true</code> if leading wildcards ('*' or '?') are ignored,
+   *         <code>false</code> otherwise.
+   */
+  public boolean isIgnoreLeadingWildcards() {
+
+    return this.ignoreLeadingWildcards;
+  }
+
+  /**
+   * This method sets the flag to ignore leading wildcards ('*' or '?') in
+   * search terms.<br>
+   * <b>ATTENTION:</b><br>
+   * Leading wildcards can potentially cause very expensive search queries that
+   * may kill your performance. Do NOT use this for a public search site because
+   * it allows simplistic DOS-Attacks.
+   * 
+   * @see SearchQueryBuilder#parseStandardQuery(String)
+   * 
+   * @param ignore -
+   *        if <code>true</code>, leading wildcards ('*' or '?') are ignored,
+   *        <code>false</code> otherwise.
+   */
+  public void setIgnoreLeadingWildcards(boolean ignore) {
+
+    this.ignoreLeadingWildcards = ignore;
+  }
+
+  /**
    * This method has to be called before the search-engine can be used. You have
    * to inject the {@link #setIndexPath(String) index-path} or the
    * {@link #setSearcher(Searcher) searcher} before you can call this method.
@@ -140,7 +174,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       this.searcher = new IndexSearcher(this.indexPath);
     }
     if (this.queryBuilder == null) {
-      this.queryBuilder = new LuceneSearchQueryBuilder(this.analyzier);
+      this.queryBuilder = new LuceneSearchQueryBuilder(this.analyzier, this.ignoreLeadingWildcards);
     }
   }
 

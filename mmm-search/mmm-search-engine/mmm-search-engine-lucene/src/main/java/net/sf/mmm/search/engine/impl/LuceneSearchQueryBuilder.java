@@ -37,18 +37,37 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   public static final LuceneSearchQuery NULL_QUERY = new LuceneSearchQuery(new MatchAllDocsQuery());
 
   /** the analyzer to use */
-  private Analyzer analyzer;
+  private final Analyzer analyzer;
+
+  /**
+   * <code>true</code> if leading wildcards ('*' or '?') are ignored,
+   * <code>false</code> otherwise.
+   */
+  private final boolean ignoreLeadingWildcard;
 
   /**
    * The constructor
    * 
    * @param luceneAnalyzer
    *        is the analyzer to use.
+   * @param ignoreLeadingWildcards -
+   *        if <code>true</code>, leading wildcards ('*' or '?') are ignored,
+   *        <code>false</code> otherwise.
    */
-  public LuceneSearchQueryBuilder(Analyzer luceneAnalyzer) {
+  public LuceneSearchQueryBuilder(Analyzer luceneAnalyzer, boolean ignoreLeadingWildcards) {
 
     super();
     this.analyzer = luceneAnalyzer;
+    this.ignoreLeadingWildcard = false;
+  }
+
+  /**
+   * @return <code>true</code> if leading wildcards ('*' or '?') are ignored,
+   *         <code>false</code> otherwise.
+   */
+  public boolean isIgnoreLeadingWildcards() {
+
+    return this.ignoreLeadingWildcard;
   }
 
   /**
@@ -109,8 +128,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
         index++;
       }
       if ((c == '*') || (c == '?')) {
-        // ignore trailing wildcards
-        if (buffer.length() > 0) {
+        if ((!this.ignoreLeadingWildcard) || (buffer.length() > 0)) {
           hasPattern = true;
           if (index < chars.length) {
             isPrefixQuery = false;
