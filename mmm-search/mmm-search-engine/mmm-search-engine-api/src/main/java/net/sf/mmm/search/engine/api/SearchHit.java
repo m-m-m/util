@@ -14,6 +14,15 @@ import net.sf.mmm.search.api.SearchEntry;
  */
 public interface SearchHit extends SearchEntry {
 
+  /** @see #getHighlightedText() */
+  String HIGHLIGHT_START_TAG = "<span class=\"highlight\">";
+
+  /** @see #getHighlightedText() */
+  String HIGHLIGHT_END_TAG = "</span>";
+
+  /** @see #getHighlightedText() */
+  String HIGHLIGHT_CUT_TEXT = "<span class=\"cut\">...</span>";
+
   /**
    * This method gets the ID of the entry in the search index represented by
    * this hit.
@@ -51,7 +60,12 @@ public interface SearchHit extends SearchEntry {
 
   /**
    * This method gets an excerpt of the plain text of the content that contains
-   * terms of the search query as a highlighted html fragment.
+   * terms of the search query as a highlighted html fragment.<br>
+   * The highlighted terms should be sourreded by {@link #HIGHLIGHT_START_TAG}
+   * and {@link #HIGHLIGHT_END_TAG} and parts of the text that have been cut out
+   * should be replaced with {@link #HIGHLIGHT_CUT_TEXT}. An implementing
+   * search-engine component may allow to override these defaults for custom
+   * needs.
    * 
    * @see #getText()
    * 

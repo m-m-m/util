@@ -7,10 +7,12 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.highlight.Formatter;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.QueryScorer;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
 
 /**
@@ -31,12 +33,14 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
    * The constructor
    * 
    * @param searchAnalyzer
+   * @param formatter
+   *        is the formatter used to highlight terms.
    * @param searchQuery
    */
-  public LuceneSearchHighlighter(Analyzer searchAnalyzer, Query searchQuery) {
+  public LuceneSearchHighlighter(Analyzer searchAnalyzer, Formatter formatter, Query searchQuery) {
 
     super();
-    this.highlighter = new Highlighter(new QueryScorer(searchQuery));
+    this.highlighter = new Highlighter(formatter, new QueryScorer(searchQuery));
     this.analyzer = searchAnalyzer;
   }
 
@@ -53,7 +57,8 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
 
         TokenStream tokenStream = this.analyzer.tokenStream(SearchEntry.PROPERTY_TEXT,
             new StringReader(text));
-        result = this.highlighter.getBestFragments(tokenStream, text, 3, " <B>...</B>");
+        result = this.highlighter.getBestFragments(tokenStream, text, 3,
+            SearchHit.HIGHLIGHT_CUT_TEXT);
       } catch (IOException e) {
         result = text;
       }

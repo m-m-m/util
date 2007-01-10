@@ -13,12 +13,15 @@ import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.highlight.Formatter;
+import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchIdInvalidException;
 import net.sf.mmm.search.base.SearchEntryIdMissingException;
 import net.sf.mmm.search.base.SearchIoException;
+import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResult;
@@ -53,6 +56,9 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /** @see #setIgnoreLeadingWildcards(boolean) */
   private boolean ignoreLeadingWildcards;
 
+  /** @see #getHighlightFormatter() */
+  private Formatter highlightFormatter;
+
   /**
    * The constructor
    */
@@ -65,6 +71,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     this.indexPath = null;
     this.queryBuilder = null;
     this.ignoreLeadingWildcards = true;
+    this.highlightFormatter = null;
   }
 
   /**
@@ -118,6 +125,23 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   public void setQueryBuilder(SearchQueryBuilder searchQueryBuilder) {
 
     this.queryBuilder = searchQueryBuilder;
+  }
+
+  /**
+   * @return the formatter
+   */
+  public Formatter getHighlightFormatter() {
+
+    return this.highlightFormatter;
+  }
+
+  /**
+   * @param formatter
+   *        the formatter to set
+   */
+  public void setHighlightFormatter(Formatter formatter) {
+
+    this.highlightFormatter = formatter;
   }
 
   /**
@@ -176,6 +200,10 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     if (this.queryBuilder == null) {
       this.queryBuilder = new LuceneSearchQueryBuilder(this.analyzier, this.ignoreLeadingWildcards);
     }
+    if (this.highlightFormatter == null) {
+      this.highlightFormatter = new SimpleHTMLFormatter(SearchHit.HIGHLIGHT_START_TAG,
+          SearchHit.HIGHLIGHT_END_TAG);
+    }
   }
 
   /**
@@ -185,10 +213,12 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
     try {
       Query luceneQuery = ((AbstractLuceneSearchQuery) query).getLuceneQuery();
+      luceneQuery = this.searcher.rewrite(luceneQuery);
       Hits hits = this.searcher.search(luceneQuery);
       SearchHighlighter highlighter;
       if (hits.length() > 0) {
-        highlighter = new LuceneSearchHighlighter(this.analyzier, luceneQuery);
+        highlighter = new LuceneSearchHighlighter(this.analyzier, this.highlightFormatter,
+            luceneQuery);
       } else {
         highlighter = null;
       }
