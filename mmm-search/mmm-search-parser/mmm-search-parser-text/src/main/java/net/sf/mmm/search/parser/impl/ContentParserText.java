@@ -128,6 +128,9 @@ public class ContentParserText extends AbstractContentParser {
     if (bufferLength > maxBufferSize) {
       bufferLength = maxBufferSize;
     }
+    if ((bufferLength > filesize) && (filesize > 0)) {
+      bufferLength = (int) filesize;
+    }
     SmartEncodingInputStream smartIS = new SmartEncodingInputStream(inputStream, bufferLength);
     Reader reader = smartIS.getReader();
     BufferedReader bufferedReader = new BufferedReader(reader);
