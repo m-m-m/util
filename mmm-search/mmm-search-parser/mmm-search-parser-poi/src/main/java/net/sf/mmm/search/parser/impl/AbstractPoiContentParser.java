@@ -25,6 +25,9 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
   /** name of the entry for a powerpoint document in the POI filesystem */
   public static final String POIFS_POWERPOINT_DOC = "PowerPoint Document";
 
+  /** name of the entry for a excel document in the POI filesystem */
+  public static final String POIFS_EXCEL_DOC = "Workbook";
+  
   /**
    * The constructor
    */
