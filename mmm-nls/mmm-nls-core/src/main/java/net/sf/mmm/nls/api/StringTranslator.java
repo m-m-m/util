@@ -17,7 +17,7 @@ public interface StringTranslator {
    * to a message-key and then perform a translation by forward mapping that key
    * to the nationalized message. This only works if the original english
    * message was supplied from the constant defined by the message key.<br>
-   * A legal implementation does NOT throw {@link java.lang.Throwable anything}.
+   * A legal implementation does NOT throw {@link java.lang.Exception anything}.
    * On multiple calls it should always return the
    * {@link String#equals(java.lang.Object) same} result for the same argument.
    * 
@@ -30,6 +30,5 @@ public interface StringTranslator {
    *         translation is available.
    */
   String translate(String message);
-  // MessageFormat translate(String message);
 
 }

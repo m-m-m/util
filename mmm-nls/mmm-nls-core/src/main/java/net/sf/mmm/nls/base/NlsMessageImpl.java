@@ -9,7 +9,7 @@ import net.sf.mmm.nls.api.NlsObject;
 import net.sf.mmm.nls.api.StringTranslator;
 
 /**
- * This is the implementation of the NlsMessageIF interface. It is NOT
+ * This is the implementation of the {@link NlsMessage} interface. It is NOT
  * thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -191,17 +191,17 @@ public class NlsMessageImpl implements NlsMessage {
         msg = this.messageFormat;
       } else {
         // TODO: this causes parsing every time this is invoked.
-        // Should this be cached? Should the StringTranslatorAPI be
-        // changed
-        // to MessageFormat?
+        // Should this be cached? But MessageFormat is NOT thread-safe!
         msg = new MessageFormat(localizedMessage);
       }
       if (this.nlsArguments == null) {
         msg.format(this.arguments, messageBuffer, null);
       } else {
+        // given arguments may also be NLS objects
         for (int i = 0; i < this.arguments.length; i++) {
           if (this.nlsArguments[i] != null) {
-            this.copyArguments[i] = this.nlsArguments[i].toNlsMessage();
+            NlsMessage subMessage = this.nlsArguments[i].toNlsMessage();
+            this.copyArguments[i] = subMessage.getLocalizedMessage(nationalizer);
           }
         }
         msg.format(this.copyArguments, messageBuffer, null);
