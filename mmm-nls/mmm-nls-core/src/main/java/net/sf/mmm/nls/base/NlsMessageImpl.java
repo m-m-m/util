@@ -83,8 +83,9 @@ public class NlsMessageImpl implements NlsMessage {
   /**
    * This method sets a universal {@link StringTranslator translator} this is
    * used by {@link #getLocalizedMessage(StringTranslator, StringBuffer)}, if
-   * <code>null</code> is given as translator. After the universal translator
-   * is set, further calls of this method will have NO effect.<br>
+   * <code>null</code> is given as translator (e.g. via
+   * {@link net.sf.mmm.nls.api.NlsThrowable#getMessage()}). After the universal
+   * translator is set, further calls of this method will have NO effect.<br>
    * The desired behaviour of a universal translator can depend from the
    * situation where it is used. E.g. a client application could use the
    * {@link Locale#getDefault() "default locale"} to choose the destination
@@ -92,10 +93,15 @@ public class NlsMessageImpl implements NlsMessage {
    * used to retrieve the appropriate {@link Locale locale}. After the callers
    * locale is determined, the universal translator should delegate to the
    * locale-specific translator.<br>
-   * ATTENTION: No synchronization is performed setting the universal
-   * translator. This assumes that an assignment is an atomic operation in the
-   * JVM you are using. Additionally this method should be invoked in the
-   * initialization phase of your application.
+   * <b>WARNING:</b><br>
+   * This is only a backdoor for simple applications or test situations. Please
+   * try to avoid using this feature and solve this issue with IoC strategies
+   * (using non-final static fields like here is evil).<br>
+   * <b>ATTENTION:</b><br>
+   * No synchronization is performed setting the universal translator. This
+   * assumes that an assignment is an atomic operation in the JVM you are using.
+   * Additionally this method should be invoked in the initialization phase of
+   * your application.
    * 
    * @param universalTranslator
    *        is the universal translator.
