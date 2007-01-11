@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.util.reflect;
+package net.sf.mmm.util.resource;
 
 import net.sf.mmm.nls.base.NlsRuntimeException;
 
@@ -22,6 +22,19 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
   public ResourceNotAvailableException(String absolutePath) {
 
     super(NlsResourceBundle.ERR_RESOURCE_NOT_AVAILABLE, absolutePath);
+  }
+
+  /**
+   * The constructor
+   * 
+   * @param nested
+   *        is the {@link #getCause() cause} of this exception.
+   * @param absolutePath
+   *        is the absolute path of the resource that could NOT be found.
+   */
+  public ResourceNotAvailableException(Throwable nested, String absolutePath) {
+
+    super(nested, NlsResourceBundle.ERR_RESOURCE_NOT_AVAILABLE, absolutePath);
   }
 
 }

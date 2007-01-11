@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.util.reflect;
+package net.sf.mmm.util.resource;
 
 import net.sf.mmm.nls.base.AbstractResourceBundle;
 
