@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 
 /**
  * This is the test case for the class {@link ClasspathUtil}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -26,8 +26,9 @@ public class ClasspathResourceTest extends TestCase {
 
     super();
   }
-  
-  public void verifyResource(Resource resource) throws Exception {
+
+  public void verifyResource(DataResource resource) throws Exception {
+
     assertTrue(resource.isAvailable());
     assertEquals(41, resource.getSize());
     InputStream in = in = resource.openStream();
@@ -41,11 +42,15 @@ public class ClasspathResourceTest extends TestCase {
       in.close();
     }
   }
-  
+
   @Test
   public void testClasspathResource() throws Exception {
-    verifyResource(new ClasspathResource(ClasspathResource.class, ".txt"));
-    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(), "ClasspathResource.txt"));
+
+    verifyResource(new ClasspathResource(ClasspathResource.class, ".txt", true));
+    verifyResource(new ClasspathResource(ClasspathResource.class, "ClasspathResource.txt", false));
+    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(),
+        "ClasspathResource.txt"));
+    verifyResource(new ClasspathResource(ClasspathResource.class.getName().replace('.', '/')
+        + ".txt"));
   }
-  
 }

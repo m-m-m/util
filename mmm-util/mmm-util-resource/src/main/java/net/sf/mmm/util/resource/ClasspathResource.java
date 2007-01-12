@@ -4,7 +4,7 @@ package net.sf.mmm.util.resource;
 import java.net.URL;
 
 /**
- * This is the implementation of the {@link Resource} interface for a resource
+ * This is the implementation of the {@link DataResource} interface for a resource
  * that comes from the {@link ClassLoader#getResource(String) classpath}. <br>
  * A very nice feature of Java is to load resources from the classpath. This
  * allows that these resource are deployed within a jar-file. Adding a directory
@@ -54,18 +54,24 @@ public class ClasspathResource extends AbstractResource {
 
   /**
    * The constructor for a classpath-resource identified by
-   * <code>somePackage</code> and the given <code>filename</code>.<br>
+   * <code>someClass</code> and the given <code>nameOrSuffix</code>.<br>
    * E.g. the following code would get a resource named "{@linkplain ClasspathResource}.xml"
    * from the same package where this class is located:
    * 
    * <pre>
-   * getClasspathResource({@link net.sf.mmm.util.resource.ClasspathResource}.class, ".xml")
+   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.ClasspathResource}.class, ".xml", true)
    * </pre>
    * 
    * This is the same as:
    * 
    * <pre>
-   * getClasspathResource("net/sf/mmm/util/resource/{@linkplain ClasspathResource}.xml")
+   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.ClasspathResource}.class, "{@linkplain ClasspathResource}.xml", false)
+   * </pre>
+   * 
+   * This is the same as:
+   * 
+   * <pre>
+   * new {@link ClasspathResource}("net/sf/mmm/util/resource/{@linkplain ClasspathResource}.xml")
    * </pre>
    * 
    * @see #ClasspathResource(Package, String)
@@ -73,13 +79,15 @@ public class ClasspathResource extends AbstractResource {
    * @param someClass
    *        is the class identifying the path where the resource is located and
    *        the prefix of its filename.
-   * @param suffix
-   *        is the suffix for the filename of the resource (e.g. ".properties"
-   *        or "-test.xml").
+   * @param nameOrSuffix
+   *        is the filename of the resource or a suffix (e.g. ".properties" or
+   *        "-test.xml") for it depending on <code>append</code>.
+   * @param append -
+   *        if <code>true</code> the <code>nameOrSuffix</code>
    */
-  public ClasspathResource(Class<?> someClass, String suffix) {
+  public ClasspathResource(Class<?> someClass, String nameOrSuffix, boolean append) {
 
-    this(someClass.getName().replace('.', '/') + suffix);
+    this(getAbsolutePath(someClass, nameOrSuffix, append));
   }
 
   /**
@@ -92,6 +100,14 @@ public class ClasspathResource extends AbstractResource {
    * new {@link ClasspathResource}({@link ClasspathResource}.class.{@link Class#getPackage() getPackage}(), "relection.properties")
    * </pre>
    * 
+   * This is the same as:
+   * 
+   * <pre>
+   * new {@link ClasspathResource}({@link ClasspathResource}.class, "relection.properties", false)
+   * </pre>
+   * 
+   * @see #ClasspathResource(Class, String, boolean)
+   * 
    * @param somePackage
    *        is the package identifying the path where the resource is located.
    * @param filename
@@ -103,7 +119,29 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.Resource#isAvailable()
+   * @see #ClasspathResource(Class, String, boolean)
+   * 
+   * @param someClass
+   *        is the class identifying the path where the resource is located and
+   *        the prefix of its filename.
+   * @param nameOrSuffix
+   *        is the filename of the resource or a suffix (e.g. ".properties" or
+   *        "-test.xml") for it depending on <code>append</code>.
+   * @param append -
+   *        if <code>true</code> the <code>nameOrSuffix</code>
+   * @return the absolute path.
+   */
+  private static String getAbsolutePath(Class<?> someClass, String nameOrSuffix, boolean append) {
+
+    if (append) {
+      return someClass.getName().replace('.', '/') + nameOrSuffix;
+    } else {
+      return someClass.getPackage().getName().replace('.', '/') + '/' + nameOrSuffix;
+    }
+  }
+
+  /**
+   * @see net.sf.mmm.util.resource.DataResource#isAvailable()
    */
   public boolean isAvailable() {
 
@@ -111,7 +149,7 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.Resource#getPath()
+   * @see net.sf.mmm.util.resource.DataResource#getPath()
    */
   public String getPath() {
 
@@ -119,7 +157,7 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.Resource#getUrl()
+   * @see net.sf.mmm.util.resource.DataResource#getUrl()
    */
   public URL getUrl() throws ResourceNotAvailableException {
 

@@ -6,12 +6,16 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * This is the interface for a resource. You can think of a resource as a
- * {@link java.io.File} but it may come from other sources than the filesystem.
+ * This is the interface for a resource. You can think of a {@link DataResource}
+ * as a {@link java.io.File file} but it may come from other sources than the
+ * filesystem.<br>
+ * The major reason for naming it {@link DataResource} is that
+ * <code>Resource</code> is a very general name already occupied by
+ * {@link javax.annotation.Resource}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface Resource {
+public interface DataResource {
 
   /**
    * This method determines if this resource is available. Available simply

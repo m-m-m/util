@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is the abstract base implementation of the {@link Resource} interface.
+ * This is the abstract base implementation of the {@link DataResource} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractResource implements Resource {
+public abstract class AbstractResource implements DataResource {
 
   /**
    * The constructor
@@ -23,7 +23,7 @@ public abstract class AbstractResource implements Resource {
    * This is a default implementation. Override if there is a more performant
    * way to implement this.
    * 
-   * @see net.sf.mmm.util.resource.Resource#getSize()
+   * @see net.sf.mmm.util.resource.DataResource#getSize()
    */
   public long getSize() throws ResourceNotAvailableException {
 
@@ -38,7 +38,7 @@ public abstract class AbstractResource implements Resource {
    * This is a default implementation. Override if there is a more performant
    * way to implement this.
    * 
-   * @see net.sf.mmm.util.resource.Resource#openStream()
+   * @see net.sf.mmm.util.resource.DataResource#openStream()
    */
   public InputStream openStream() throws ResourceNotAvailableException, IOException {
 

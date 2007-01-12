@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * This is the implementation of the {@link Resource} interface for a resource
+ * This is the implementation of the {@link DataResource} interface for a resource
  * that is a {@link File#isFile() regular} {@link File}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -33,7 +33,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.Resource#getPath()
+   * @see net.sf.mmm.util.resource.DataResource#getPath()
    */
   public String getPath() {
 
@@ -66,7 +66,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.Resource#getUrl()
+   * @see net.sf.mmm.util.resource.DataResource#getUrl()
    */
   public URL getUrl() throws ResourceNotAvailableException {
 
@@ -78,7 +78,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.Resource#isAvailable()
+   * @see net.sf.mmm.util.resource.DataResource#isAvailable()
    */
   public boolean isAvailable() {
 
