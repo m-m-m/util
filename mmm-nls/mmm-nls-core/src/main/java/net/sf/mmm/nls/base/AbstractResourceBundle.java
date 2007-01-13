@@ -10,20 +10,21 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * This is the abstract base class for resource bundle implementations in the
- * project. It allows to create a resource bundle by subclassing this class and
- * simply define some public static final fields that will be automatically
- * added to the bundle using reflection. Please note that your sub-class must
- * also be public or you need to set privileges in the security manager to allow
- * this class reading the fields via reflection.
+ * This is the abstract base class for {@link ResourceBundle} implementations
+ * using this NLS support. Create your {@link ResourceBundle}s by subclassing
+ * this class and simply define some public static final fields that will be
+ * automatically added to the bundle using reflection (only from constructor).
+ * Please note that your sub-class must also be public or you need to set
+ * privileges in the security manager to allow this class reading the fields via
+ * reflection.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractResourceBundle extends ResourceBundle {
 
   /**
-   * The key value pairs; mapps keys (String) to values (Object). No Map
-   * because Enumeration is required...
+   * The key value pairs; mapps keys (String) to values (Object). No Map because
+   * Enumeration is required...
    */
   private Hashtable<String, Object> bundle;
 
@@ -56,13 +57,12 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
       throw new IllegalStateException("Failed to initialize " + getClass().getName(), e);
     }
   }
-
+  
   /**
    * This method is the inverse of {@link #getObject(String)}.
    * 
    * @param object
-   *        is the object (potentially) retrieved via
-   *        {@link #getObject(String)}.
+   *        is the object (potentially) retrieved via {@link #getObject(String)}.
    * @return the key for the given <code>object</code> or <code>null</code>
    *         if it was NOT retrieved via {@link #getObject(String)} from this
    *         instance.

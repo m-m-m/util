@@ -14,6 +14,7 @@ import net.sf.mmm.nls.base.NlsMessageImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("all")
 public class NlsMessageTest extends TestCase {
 
   /**
@@ -25,8 +26,7 @@ public class NlsMessageTest extends TestCase {
   }
 
   /**
-   * This method tests the {@link net.sf.mmm.nls.api.NlsMessage}
-   * implementation ({@link net.sf.mmm.nls.base.NlsMessageImpl}).
+   * This method tests the {@link net.sf.mmm.nls.api.NlsMessage} implementation ({@link net.sf.mmm.nls.base.NlsMessageImpl}).
    */
   @Test
   public void testMessage() {
@@ -52,7 +52,38 @@ public class NlsMessageTest extends TestCase {
         return null;
       }
     };
-    assertEquals(testMessage.getLocalizedMessage(translatorDe), helloDe + arg + suffix);
+    assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(translatorDe));
   }
 
+  @Test
+  public void testCascadedMessage() {
+
+    final String integer = "integer";
+    final String integerDe = "Ganze Zahl";
+    final String real = "real[{0},{1}]";
+    final String realDe = "relle Zahl[{0},{1}]";
+    NlsMessage simpleMessageInteger = new NlsMessageImpl(integer);
+    NlsMessage simpleMessageReal = new NlsMessageImpl(real, Double.valueOf(-5), Double.valueOf(5));
+    final String err = "The given value must be of the type \"{0}\" but has the type \"{1}\"!";
+    final String errDe = "Der angegebene Wert muss vom Typ \"{0}\" sein hat aber den Typ \"{1}\"!";
+    NlsMessage cascadedMessage = new NlsMessageImpl(err, simpleMessageInteger, simpleMessageReal);
+    StringTranslator translatorDe = new StringTranslator() {
+
+      public String translate(String message) {
+
+        if (message.equals(integer)) {
+          return integerDe;
+        } else if (message.equals(real)) {
+          return realDe;
+        } else if (message.equals(err)) {
+          return errDe;
+        }
+        return null;
+      }
+    };
+    String msgDe = cascadedMessage.getLocalizedMessage(translatorDe);
+    assertEquals(
+        "Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein hat aber den Typ \"relle Zahl[-5,5]\"!",
+        msgDe);
+  }
 }

@@ -7,7 +7,14 @@ import java.util.ResourceBundle;
 import net.sf.mmm.nls.api.StringTranslator;
 
 /**
- * TODO This type ...
+ * This is a simple implementation of the {@link StringTranslator} interface. It
+ * {@link ResourceBundle#getBundle(String, Locale) looks} for a regular
+ * {@link ResourceBundle bundle} with the same {@link Class#getName() name} as
+ * the given {@link AbstractResourceBundle nls-bundle} using the given
+ * {@link Locale}.
+ * 
+ * @see net.sf.mmm.nls.api.NlsMessage
+ * @see ResourceBundle
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,7 +30,11 @@ public class SimpleStringTranslator implements StringTranslator {
    * The constructor.
    * 
    * @param internationalBundle
+   *        is the NLS bundle.
    * @param locale
+   *        is the locale used to
+   *        {@link ResourceBundle#getBundle(String, Locale) lookup} the
+   *        nationalized bundle.
    */
   public SimpleStringTranslator(AbstractResourceBundle internationalBundle, Locale locale) {
 
