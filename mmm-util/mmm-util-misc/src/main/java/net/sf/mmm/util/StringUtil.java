@@ -48,57 +48,8 @@ public final class StringUtil {
   }
 
   /**
-   * For each argument with the index <code><b>i</b></code> this method
-   * will replace all occurences of the string <code>${<b>i</b>}</code> in
-   * the given string with that argument. <br>
-   * E.g.
-   * <code>fillArguments("${0} ${1}!", new String[] {"Hello", "world"})</code>
-   * will return the String <code>"Hello World!"</code>.
-   * 
-   * @param string
-   *        is the string where to fill in the arguments.
-   * @param arguments
-   *        are the arguments to fill.
-   * @return the string will the arguments filled in.
-   */
-  public static String fillInArguments(String string, Object[] arguments) {
-
-    if (arguments.length == 0) {
-      return string;
-    }
-    String result = string;
-    for (int i = 0; i < arguments.length; i++) {
-      result = replace(result, "${" + i + "}", arguments[i].toString());
-    }
-    return result;
-  }
-
-  /**
-   * This method compares two given string for equality. In addition to
-   * calling the <code>equals</code> on one of the strings this method also
-   * handles the case that this string may be <code>null</code>. If both
-   * strings are <code>null</code> the result will also be <code>true</code>.
-   * 
-   * @param string1
-   *        the first string
-   * @param string2
-   *        the second string
-   * @return <code>true</code> if both strings are <code>null</code> or if
-   *         both strings are not <code>null</code> and fulfill the
-   *         <code>equals</code> method, <code>false</code> otherwise.
-   */
-  public static boolean isEqual(String string1, String string2) {
-
-    if (string1 == null) {
-      return (string2 == null);
-    } else {
-      return string1.equals(string2);
-    }
-  }
-
-  /**
-   * This method replaces all occurences of the string <code>match</code>
-   * with the string <code>replace</code> in the given string.
+   * This method replaces all occurences of the string <code>match</code> with
+   * the string <code>replace</code> in the given string.
    * 
    * @param string
    *        is the string where to replace.
@@ -130,93 +81,6 @@ public final class StringUtil {
   }
 
   /**
-   * This method does a glob pattern match.
-   * 
-   * @param pattern
-   *        is the glob pattern (a string that may contain the special
-   *        matching characters * and ?. The character * represents a
-   *        sub-string of any lenght (including 0) and ? represents the
-   *        occurence of any character.
-   * @param patternIndex
-   *        is the index in the pattern where to start the process.
-   * @param string
-   *        is the string to be matched against the pattern.
-   * @param stringIndex
-   *        is the index in the string where to start the process.
-   * @return true if the string matches the pattern.
-   */
-  public static boolean matchGlobPattern(String pattern, int patternIndex, String string,
-      int stringIndex) {
-
-    while (patternIndex < pattern.length()) {
-      char patternChar = pattern.charAt(patternIndex++);
-      if (patternChar == '*') {
-        if (patternIndex == pattern.length()) {
-          return true;
-        }
-        while (stringIndex < string.length()) {
-          if (matchGlobPattern(pattern, patternIndex, string, stringIndex++)) {
-            return true;
-          }
-        }
-        return false;
-      } else {
-        if (stringIndex >= string.length()) {
-          return false;
-        }
-        char stringChar = string.charAt(stringIndex++);
-        if ((patternChar != stringChar) && (patternChar != '?')) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  /**
-   * This method does a glob pattern match.
-   * 
-   * @param pattern
-   *        is the glob pattern (a string that may contain the special
-   *        matching characters * and ?. The character * represents a
-   *        sub-string of any lenght (including 0) and ? represents the
-   *        occurence of any character (string of length 1).
-   * @param string
-   *        is the string to be matched against the pattern.
-   * @return true if the string matches the pattern.
-   */
-  public static boolean matchGlobPattern(String pattern, String string) {
-
-    if (pattern.length() == 0) {
-      return (string.length() == 0);
-    }
-    return matchGlobPattern(pattern, 0, string, 0);
-  }
-
-  /**
-   * This method formats a positive number to a string with at least the given
-   * number of digits by filling up with leading zeros.
-   * 
-   * @param number
-   *        is the positive number to format.
-   * @param digits
-   *        is the (minimum) number of digits required.
-   * @return the number as string with the length of (at least)
-   *         <code>digits</code>. If the number is less, leading zeros are
-   *         appended.
-   */
-  public static String format(long number, int digits) {
-
-    String result = Long.toString(number);
-    int leadingZeros = digits - result.length();
-    while (leadingZeros > 0) {
-      result = "0" + result;
-      leadingZeros--;
-    }
-    return result;
-  }
-
-  /**
    * IsEmpty with trim set to <code>true</code>.
    * 
    * @see #isEmpty(String, boolean)
@@ -237,8 +101,8 @@ public final class StringUtil {
    * @param string
    *        is the string to check.
    * @param trim
-   *        if whitespaces should be ignored and a string with a trimmed
-   *        length of zero is considered as emtpy.
+   *        if whitespaces should be ignored and a string with a trimmed length
+   *        of zero is considered as emtpy.
    * @return <code>true</code> if the given string is <code>null</code> or
    *         has a (trimmed) length of zero, <code>false</code> otherwise.
    */
@@ -256,9 +120,9 @@ public final class StringUtil {
   /**
    * This method compiles the given <code>pattern</code> to a
    * {@link java.util.regex.Pattern} interpreting it as glob-pattern. In a
-   * glob-pattern only the characters "*" and "?" are treated special. The
-   * wildcard ("*") can match any string including the empty string and the
-   * XXX ("?") can match any single character.
+   * glob-pattern only the wildcard characters "*" and "?" are treated special.
+   * The asterisk ("*") can match any string including the empty string and the
+   * questionmark ("?") can match any single character.
    * 
    * @param pattern
    *        is the glob pattern to compile.
@@ -277,7 +141,7 @@ public final class StringUtil {
       } else if (c == '.') {
         buffer.append("\\.");
       } else if (c == '\\') {
-        buffer.append("\\\\.");
+        buffer.append("\\\\");
       } else {
         buffer.append(c);
       }
