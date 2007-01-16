@@ -113,7 +113,6 @@ public class CoreNlsResourceBundle extends AbstractResourceBundle {
   /**
    * exception message for illegal cast (conversion of a value to another type).
    * 
-   * @see net.sf.mmm.term.impl.function.FctCast
    * @see net.sf.mmm.term.api.IllegalCastException
    */
   public static final String ERR_ILLEGAL_CAST = "Can not cast value \"{0}\" to \"{1}\"!";

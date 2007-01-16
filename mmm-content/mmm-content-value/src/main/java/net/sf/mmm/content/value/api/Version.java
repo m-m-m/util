@@ -44,7 +44,7 @@ public interface Version {
   // String getBranchName();
   /**
    * This method gets the major version number. <br>
-   * E.g. for version "3.42.1-test" the major version is "3".
+   * E.g. for version "3.42.1.5-test" the major version is "3".
    * 
    * @return the major version
    */

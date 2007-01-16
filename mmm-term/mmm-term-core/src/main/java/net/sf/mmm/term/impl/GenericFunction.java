@@ -194,12 +194,11 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * This method sets the minimum argument count of this function. It is
-   * usally not neccessary to set the argument count range because this is
-   * done automatically by the
-   * {@link GenericFunction#addImplementation(Class)} method. Anyways after
-   * you have added all function implementations you can override the minimum
-   * argument count using this method.
+   * This method sets the minimum argument count of this function. It is usally
+   * not neccessary to set the argument count range because this is done
+   * automatically by the {@link GenericFunction#addImplementation(Class)}
+   * method. Anyways after you have added all function implementations you can
+   * override the minimum argument count using this method.
    * 
    * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
    * 
@@ -212,12 +211,11 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * This method sets the maximum argument count of this function. It is
-   * usally not neccessary to set the argument count range because this is
-   * done automatically by the
-   * {@link GenericFunction#addImplementation(Class)} method. Anyways after
-   * you have added all function implementations you can override the maximum
-   * argument count using this method.
+   * This method sets the maximum argument count of this function. It is usally
+   * not neccessary to set the argument count range because this is done
+   * automatically by the {@link GenericFunction#addImplementation(Class)}
+   * method. Anyways after you have added all function implementations you can
+   * override the maximum argument count using this method.
    * 
    * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
    * 
@@ -256,7 +254,7 @@ public class GenericFunction extends BasicFunction {
    *         if the given method applies to the points above except the last
    *         one.
    */
-  protected void validateMethod(Method method, Class partialFunction, Signature signature)
+  protected void validateMethod(Method method, Class<?> partialFunction, Signature signature)
       throws FunctionException {
 
     // check if the method is public and static...
@@ -264,9 +262,9 @@ public class GenericFunction extends BasicFunction {
       // check if the method returns something...
       if (method.getReturnType() != Void.class) {
         // verify exception types...
-        Class[] exceptionTypes = method.getExceptionTypes();
+        Class<?>[] exceptionTypes = method.getExceptionTypes();
         for (int j = 0; j < exceptionTypes.length; j++) {
-          Class excType = exceptionTypes[j];
+          Class<?> excType = exceptionTypes[j];
           if (!CalculationException.class.isAssignableFrom(excType)) {
             if (!RuntimeException.class.isAssignableFrom(excType)) {
               throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_ILLEGAL_EXCEPTION_TYPE,
@@ -292,12 +290,12 @@ public class GenericFunction extends BasicFunction {
    * @param fieldName
    *        is the {@link Field#getName() name} of the requested field.
    * @param fieldType
-   *        is the type the requested field is assigned to. Therefore the
-   *        field declaration (!) must be assignable to this type.
+   *        is the type the requested field is assigned to. Therefore the field
+   *        declaration (!) must be assignable to this type.
    * @return the value of the field with the given type.
    * @throws FunctionException
-   *         if the requested field does NOT exist, is NOT accessable or has
-   *         the wrong type.
+   *         if the requested field does NOT exist, is NOT accessable or has the
+   *         wrong type.
    */
   protected <T> T getStaticField(Class<?> partialFunction, String fieldName, Class<T> fieldType)
       throws FunctionException {
@@ -330,7 +328,7 @@ public class GenericFunction extends BasicFunction {
     }
     // check if operator is valid...
     String operator = getStaticField(partialFunction, FIELD_NAME_SYMBOL, String.class);
-    if (!BasicUtil.equals(this.symbol, operator)) {
+    if (!BasicUtil.isEqual(this.symbol, operator)) {
       throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_WRONG_SYMBOL, partialFunction,
           this, operator);
     }
@@ -346,12 +344,12 @@ public class GenericFunction extends BasicFunction {
    *        is a partial implemenetation of this function. It is a class that
    *        has one or more static methods with the name of this function.
    *        Please follow the naming convention and use the "Fct" followed by
-   *        the capitalized name of this function as prefix for the classname
-   *        of your partial implementation.
+   *        the capitalized name of this function as prefix for the classname of
+   *        your partial implementation.
    * @throws FunctionException
    *         if the implementation is illegal.
    */
-  public void addImplementation(Class partialFunction) throws FunctionException {
+  public void addImplementation(Class<?> partialFunction) throws FunctionException {
 
     validateClass(partialFunction);
     int maxSignatureCount = -1;
@@ -438,8 +436,8 @@ public class GenericFunction extends BasicFunction {
    * This method performs the actual calculation by calling the given method
    * with the given arguments.
    * 
-   * @see Function#calculate(net.sf.mmm.environment.api.EnvironmentIF,
-   *      net.sf.mmm.term.api.Term[])
+   * @see Function#calculate(net.sf.mmm.context.api.Context,
+   *      net.sf.mmm.term.api.Term...)
    * 
    * @param method
    *        is the method implementing the function call for the given

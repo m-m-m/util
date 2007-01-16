@@ -62,7 +62,7 @@ public class FctLength {
    *        is the argument of the function.
    * @return the length of the given string.
    */
-  public static Integer length(List argument) {
+  public static Integer length(List<?> argument) {
 
     if (argument == null) {
       return Integer.valueOf(0);

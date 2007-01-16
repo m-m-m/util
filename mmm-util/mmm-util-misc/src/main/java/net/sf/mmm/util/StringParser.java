@@ -388,6 +388,8 @@ public class StringParser implements CharSequence {
   }
 
   /**
+   * This method gets the original string to parse.
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

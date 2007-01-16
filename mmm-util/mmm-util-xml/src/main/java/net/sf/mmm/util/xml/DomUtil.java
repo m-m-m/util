@@ -32,7 +32,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.BasicUtil;
 import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
@@ -374,15 +374,23 @@ public final class DomUtil {
     }
   }
 
+  /**
+   * This method gets the local name of a given <code>element</code>. This is
+   * the name of the element without any namespace prefix.
+   * 
+   * @param element
+   *        the element to get the local name from.
+   * @return the local name of the given element.
+   */
   public static String getLocalNodeName(Node element) {
-    
+
     String localName = element.getLocalName();
     if (localName == null) {
       localName = element.getNodeName();
     }
     return localName;
   }
-  
+
   /**
    * TODO
    * 
@@ -404,15 +412,15 @@ public final class DomUtil {
         return false;
       }
       if (type == Node.ATTRIBUTE_NODE) {
-        if (!StringUtil.isEqual(node1.getLocalName(), node2.getLocalName())) {
+        if (!BasicUtil.isEqual(node1.getLocalName(), node2.getLocalName())) {
           return false;
         }
-        if (!StringUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+        if (!BasicUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
           return false;
         }
         Attr attr1 = (Attr) node1;
         Attr attr2 = (Attr) node2;
-        if (!StringUtil.isEqual(attr1.getValue(), attr2.getValue())) {
+        if (!BasicUtil.isEqual(attr1.getValue(), attr2.getValue())) {
           return false;
         }
         return true;
@@ -424,14 +432,14 @@ public final class DomUtil {
         Document doc2 = (Document) node2;
         return isEqual(doc1.getDocumentElement(), doc2.getDocumentElement());
       } else if (type == Node.TEXT_NODE) {
-        return StringUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
+        return BasicUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
       } else if (type == Node.CDATA_SECTION_NODE) {
-        return StringUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
+        return BasicUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
       } else if (type == Node.ELEMENT_NODE) {
-        if (!StringUtil.isEqual(getLocalNodeName(node1), getLocalNodeName(node2))) {
+        if (!BasicUtil.isEqual(getLocalNodeName(node1), getLocalNodeName(node2))) {
           return false;
         }
-        if (!StringUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+        if (!BasicUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
           return false;
         }
         // compare attributes
@@ -573,6 +581,12 @@ public final class DomUtil {
     }
   }
 
+  /**
+   * 
+   * @param node
+   * @param sb
+   * @return
+   */
   private static boolean isEqualLast(Node node, StringBuffer sb) {
 
     if (node.getNodeType() == Node.ELEMENT_NODE) {

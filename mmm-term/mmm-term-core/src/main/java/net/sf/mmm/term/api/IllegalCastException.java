@@ -24,7 +24,7 @@ public class IllegalCastException extends CalculationException {
    * @param type
    *        is the type the argument could not be casted to.
    */
-  public IllegalCastException(Object argument, Class type) {
+  public IllegalCastException(Object argument, Class<?> type) {
 
     super(CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
   }
@@ -39,7 +39,7 @@ public class IllegalCastException extends CalculationException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public IllegalCastException(Object argument, Class type, Throwable nested) {
+  public IllegalCastException(Object argument, Class<?> type, Throwable nested) {
 
     super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
   }

@@ -1,14 +1,13 @@
 /* $Id$ */
 package net.sf.mmm.value.impl.type;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import net.sf.mmm.util.DateUtil;
+import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
@@ -85,8 +84,8 @@ public class DateValueManager extends AbstractValueManager<Date> {
   public Date parse(String valueAsString) throws ValueParseException {
 
     try {
-      return DateUtil.parse(valueAsString);
-    } catch (ParseException e) {
+      return Iso8601Util.parseDate(valueAsString);
+    } catch (Exception e) {
       throw new ValueParseStringException(valueAsString, VALUE_TYPE, VALUE_NAME, e);
     }
   }
@@ -174,7 +173,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   @Override
   public String toString(Date value) {
 
-    return DateUtil.format(value);
+    return Iso8601Util.formatDateAndTime(value);
   }
 
   /**

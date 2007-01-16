@@ -85,7 +85,7 @@ public class FctAddNumeric extends FctAdd {
    */
   public static Number add(Integer argument1, Integer argument2) {
 
-    long sum = Long.valueOf(argument1.longValue() + argument2.longValue());
+    long sum = argument1.longValue() + argument2.longValue();
     int i = (int) sum;
     if (sum == i) {
       return Integer.valueOf(i);
@@ -217,7 +217,7 @@ public class FctAddNumeric extends FctAdd {
    */
   public static Number add(Number argument1, Number argument2) {
 
-    Double sum = argument1.doubleValue() + argument2.doubleValue();
+    Double sum = Double.valueOf(argument1.doubleValue() + argument2.doubleValue());
     return NumericUtil.toSimplestNumber(sum);
   }
 

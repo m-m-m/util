@@ -3,7 +3,10 @@ package net.sf.mmm.util.io;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -27,25 +30,163 @@ public final class FileUtil {
   }
 
   /**
+   * This method copies the file given by <code>source</code> to the file
+   * given by <code>destination</code>.
    * 
    * @param source
+   *        is the existing file to copy from.
    * @param destination
+   *        is the file to copy to. It will be created if it does NOT exist and
+   *        overriden otherwise.
    * @throws IOException
+   *         if the operation fails.
    */
   public void copyFile(File source, File destination) throws IOException {
 
-    throw new UnsupportedOperationException("TODO: Not yet implemented!");
+    FileInputStream sourceStream = new FileInputStream(source);
+    try {
+      FileOutputStream destinationStream = new FileOutputStream(destination);
+      try {
+        FileChannel sourceChannel = sourceStream.getChannel();
+        sourceChannel.transferTo(0, sourceChannel.size(), destinationStream.getChannel());
+      } finally {
+        destinationStream.close();
+      }
+    } finally {
+      sourceStream.close();
+    }
+  }
+  
+  /**
+   * This method copies the file or directory given by <code>source</code>
+   * into the given <code>destination</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * In order to allow giving the copy of <code>source</code> a new
+   * {@link File#getName() name}, the <code>destination</code> has to point
+   * to the final place where the copy should appear rather than the directory
+   * where the copy will be located in.<br>
+   * <br>
+   * E.g. the following code copies the folder "foo" located in "/usr/local"
+   * recursively to the directory "/tmp". The copy will have the same name
+   * "foo".
+   * 
+   * <pre>
+   * {@link File} source = new {@link File}("/usr/local/foo");
+   * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
+   * {@link FileUtil}.copyRecursive(source, destination, true);
+   * </pre>
+   * 
+   * @param source
+   *        is the file or directory to copy.
+   * @param destination
+   *        is the final place where the copy should appear.
+   * @param allowOverwrite -
+   *        if <code>false</code> and the <code>destination</code> already
+   *        exists, an {@link IOException} is thrown, else if <code>true</code>
+   *        the <code>destination</code> will be overwritten.
+   * @throws IOException
+   *         if the operation fails.
+   */
+  public void copyRecursive(File source, File destination, boolean allowOverwrite)
+      throws IOException {
+
+    copyRecursive(source, destination, allowOverwrite, null);
   }
 
   /**
+   * This method copies the file or directory given by <code>source</code>
+   * into the given <code>destination</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * In order to allow giving the copy of <code>source</code> a new
+   * {@link File#getName() name}, the <code>destination</code> has to point
+   * to the final place where the copy should appear rather than the directory
+   * where the copy will be located in.<br>
+   * <br>
+   * E.g. the following code copies the folder "foo" located in "/usr/local"
+   * recursively to the directory "/tmp". The copy will have the same name
+   * "foo".
+   * 
+   * <pre>
+   * {@link File} source = new {@link File}("/usr/local/foo");
+   * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
+   * {@link FileUtil}.copyRecursive(source, destination, true);
+   * </pre>
    * 
    * @param source
+   *        is the file or directory to copy.
    * @param destination
+   *        is the final place where the copy should appear.
+   * @param allowOverwrite -
+   *        if <code>false</code> and the <code>destination</code> already
+   *        exists, an {@link IOException} is thrown, else if <code>true</code>
+   *        the <code>destination</code> will be overwritten.
+   * @param filter
+   *        is a {@link FileFilter} that {@link FileFilter#accept(File) decides}
+   *        which files should be copied. Only
+   *        {@link FileFilter#accept(File) accepted} files and directories are
+   *        copied, othes will be ignored.
    * @throws IOException
+   *         if the operation fails.
    */
-  public void copyDir(File source, File destination) throws IOException {
+  public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter)
+      throws IOException {
 
-    throw new UnsupportedOperationException("TODO: Not yet implemented!");
+    if (!allowOverwrite && (destination.exists())) {
+      throw new IOException("Destination path \"" + destination.getAbsolutePath() + "\" already exists!");      
+    }
+    copyRecursive(source, destination, filter);
+  }
+
+  /**
+   * This method copies the file or directory given by <code>source</code>
+   * into the given <code>destination</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * In order to allow giving the copy of <code>source</code> a new
+   * {@link File#getName() name}, the <code>destination</code> has to point
+   * to the final place where the copy should appear rather than the directory
+   * where the copy will be located in.<br>
+   * <br>
+   * E.g. the following code copies the folder "foo" located in "/usr/local"
+   * recursively to the directory "/tmp". The copy will have the same name
+   * "foo".
+   * 
+   * <pre>
+   * {@link File} source = new {@link File}("/usr/local/foo");
+   * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
+   * {@link FileUtil}.copyRecursive(source, destination, true);
+   * </pre>
+   * 
+   * @param source
+   *        is the file or directory to copy.
+   * @param destination
+   *        is the final place where the copy should appear.
+   * @param filter
+   *        is a {@link FileFilter} that {@link FileFilter#accept(File) decides}
+   *        which files should be copied. Only
+   *        {@link FileFilter#accept(File) accepted} files and directories are
+   *        copied, othes will be ignored.
+   * @throws IOException
+   *         if the operation fails.
+   */
+  private void copyRecursive(File source, File destination, FileFilter filter) throws IOException {
+
+    if (source.isDirectory()) {
+      boolean okay = destination.mkdir();
+      if (!okay) {
+        throw new IOException("Failed to create path \"" + destination.getAbsolutePath() + "\"!");
+      }
+      File[] children;
+      if (filter == null) {
+        children = source.listFiles();
+      } else {
+        children = source.listFiles(filter);
+      }
+      for (File file : children) {
+        copyRecursive(file, new File(destination, file.getName()), filter);
+      }
+    } else {
+      copyFile(source, destination);
+    }
   }
 
   /**
@@ -156,7 +297,7 @@ public final class FileUtil {
   /**
    * This method adds all files matching to the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may be a {@link StringUtil#compileGlobPattern(String) glob-pattern}
+   * may be contain {@link StringUtil#compileGlobPattern(String) wildcards}.
    * 
    * @param cwd
    *        is the current working directory and should therefore point to an

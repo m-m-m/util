@@ -149,4 +149,39 @@ public final class StringUtil {
     return Pattern.compile(buffer.toString());
   }
 
+  /**
+   * This method formats a positive number to a string with at least the given
+   * number of digits padding it with leading zeros.<br>
+   * Examples:
+   * <ul>
+   *   <li><code>padNumber(5, 3)</code> will return <code>"005"</code></li>
+   *   <li><code>padNumber(25, 3)</code> will return <code>"025"</code></li>
+   *   <li><code>padNumber(100, 3)</code> will return <code>"100"</code></li>
+   * </ul>
+   * 
+   * @param number
+   *        is the positive number to format.
+   * @param digits
+   *        is the (minimum) number of digits required.
+   * @return the number as string with the length of (at least)
+   *         <code>digits</code>. If the number is less, leading zeros are
+   *         appended.
+   */
+  public static String padNumber(long number, int digits) {
+
+    String result = Long.toString(number);    
+    int leadingZeros = digits - result.length();
+    if (leadingZeros > 0) {
+      int capacity = result.length() + leadingZeros;
+      StringBuffer buffer = new StringBuffer(capacity);
+      buffer.append(result);
+      while (leadingZeros > 0) {
+        buffer.append('0');
+        leadingZeros--;
+      }
+      result = buffer.toString();
+    }
+    return result;
+  }
+
 }

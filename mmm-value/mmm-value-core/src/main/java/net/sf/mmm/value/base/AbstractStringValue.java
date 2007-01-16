@@ -1,11 +1,10 @@
 /* $ Id: $ */
 package net.sf.mmm.value.base;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import net.sf.mmm.value.api.WrongValueTypeException;
-import net.sf.mmm.util.DateUtil;
+import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
@@ -112,9 +111,9 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
       result = null;
     } else {
       if (value instanceof Date) {
-        result = DateUtil.format((Date) value);
+        result = Iso8601Util.formatDateAndTime((Date) value);
       } else if (value instanceof Class) {
-        result = ((Class) value).getName();
+        result = ((Class<?>) value).getName();
       } else {
         result = value.toString();
       }
@@ -154,8 +153,8 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   protected Date parseDate(String dateValue) throws WrongValueTypeException {
 
     try {
-      return DateUtil.parse(dateValue);
-    } catch (ParseException e) {
+      return Iso8601Util.parseDate(dateValue);
+    } catch (Exception e) {
       throw new WrongValueTypeException(this, Date.class, e);
     }
   }

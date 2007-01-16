@@ -3,7 +3,6 @@ package net.sf.mmm.term.impl.function;
 
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.base.BasicFunction;
-import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This class represents the {@link net.sf.mmm.term.api.Function function}
@@ -61,8 +60,8 @@ public class FunctionElse extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
-   *      GenericValue)
+   * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object,
+   *      java.lang.Object)
    */
   @Override
   public Object calculate(Object argument1, Object argument2) throws CalculationException {

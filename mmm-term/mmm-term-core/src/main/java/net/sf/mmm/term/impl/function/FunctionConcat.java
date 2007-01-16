@@ -5,7 +5,6 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.base.BasicFunction;
 import net.sf.mmm.util.reflect.Arguments;
-import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -72,8 +71,8 @@ public class FunctionConcat extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
-   *      GenericValue)
+   * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object,
+   *      java.lang.Object)
    */
   @Override
   public String calculate(Object argument1, Object argument2) throws CalculationException {

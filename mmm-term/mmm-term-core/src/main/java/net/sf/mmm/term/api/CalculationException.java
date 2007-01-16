@@ -5,7 +5,7 @@ import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the exception thrown if the
- * {@link net.sf.mmm.term.api.Term#evaluate(net.sf.mmm.environment.api.EnvironmentIF) evaluation}
+ * {@link net.sf.mmm.term.api.Term#evaluate(net.sf.mmm.context.api.Context) evaluation}
  * of a {@link net.sf.mmm.term.api.Term term} failes because of an invalid
  * calculation. This can have various reasons such as zero divide or
  * incompatible types.

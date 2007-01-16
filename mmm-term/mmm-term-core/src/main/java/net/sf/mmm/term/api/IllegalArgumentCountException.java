@@ -6,7 +6,7 @@ import net.sf.mmm.term.CoreNlsResourceBundle;
 /**
  * This is the exception thrown if a
  * {@link net.sf.mmm.term.api.Function function} was
- * {@link net.sf.mmm.term.api.Function#calculate(net.sf.mmm.environment.api.EnvironmentIF, net.sf.mmm.term.api.Term[]) calculated}
+ * {@link net.sf.mmm.term.api.Function#calculate(net.sf.mmm.context.api.Context, Term...) calculated}
  * with an {@link Function#validateArgumentCount(int) illegal} number of
  * arguments.
  * 
@@ -33,10 +33,10 @@ public class IllegalArgumentCountException extends CalculationException {
   }
 
   /**
-   * This method gets the illegal argument count. This exception was thrown by
-   * a function that did not accept the list of arguments because the length
-   * was not in the range specified by the functions minimum and maximum
-   * argument count.
+   * This method gets the illegal argument count. This exception was thrown by a
+   * function that did not accept the list of arguments because the length was
+   * not in the range specified by the functions minimum and maximum argument
+   * count.
    * 
    * @return the argument count the function declared as illegal.
    */
@@ -46,8 +46,8 @@ public class IllegalArgumentCountException extends CalculationException {
   }
 
   /**
-   * This method gets the function that threw this error and declared the
-   * number of arguments it was given as calculation input as illegal.
+   * This method gets the function that threw this error and declared the number
+   * of arguments it was given as calculation input as illegal.
    * 
    * @return the function.
    */

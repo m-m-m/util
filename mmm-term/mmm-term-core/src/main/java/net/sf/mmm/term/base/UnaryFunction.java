@@ -9,8 +9,8 @@ import net.sf.mmm.value.api.ValueException;
  * {@link net.sf.mmm.term.api.Function function}. This means that the function
  * takes exactly <code>1</code> argument.
  * 
- * @see net.sf.mmm.term.api.Function#calculate(net.sf.mmm.environment.api.EnvironmentIF,
- *      net.sf.mmm.term.api.Term[])
+ * @see net.sf.mmm.term.api.Function#calculate(net.sf.mmm.context.api.Context,
+ *      net.sf.mmm.term.api.Term...)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

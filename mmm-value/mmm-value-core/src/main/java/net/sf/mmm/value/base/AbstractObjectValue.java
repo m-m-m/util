@@ -1,10 +1,9 @@
 /* $ Id: $ */
 package net.sf.mmm.value.base;
 
-import java.text.ParseException;
 import java.util.Date;
 
-import net.sf.mmm.util.DateUtil;
+import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.WrongValueTypeException;
 import net.sf.mmm.value.api.MutableGenericValue;
@@ -164,8 +163,8 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
       return (Date) value;
     } catch (ClassCastException e) {
       try {
-        return DateUtil.parse(value.toString());
-      } catch (ParseException e1) {
+        return Iso8601Util.parseDate(value.toString());
+      } catch (Exception e1) {
         throw new WrongValueTypeException(this, Date.class);
       }
     }
@@ -330,10 +329,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
    * @throws WrongValueTypeException
    *         if the given object can NOT be converted to a class.
    */
-  protected Class toClass(Object value) throws WrongValueTypeException {
+  protected Class<?> toClass(Object value) throws WrongValueTypeException {
 
     try {
-      return (Class) value;
+      return (Class<?>) value;
     } catch (ClassCastException e) {
       try {
         return Class.forName(value.toString());

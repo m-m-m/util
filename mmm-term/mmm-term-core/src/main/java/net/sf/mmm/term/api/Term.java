@@ -106,7 +106,7 @@ public interface Term extends XmlSerializable {
    * @throws ValueException
    *         if an argument (e.g. an
    *         {@link Context#getValue(String) "environment value"}) is
-   *         {@link GenericValue#hasValue() undefined} or has the
+   *         {@link GenericValue#isEmpty() empty} or has the
    *         {@link net.sf.mmm.value.api.WrongValueTypeException "wrong type"}.
    */
   Object evaluate(Context environment) throws CalculationException, ValueException;

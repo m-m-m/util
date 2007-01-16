@@ -145,8 +145,8 @@ public interface Function {
    * @throws ValueException
    *         if an argument (e.g. an
    *         {@link Context#getValue(String) "environment value"}) is
-   *         {@link net.sf.mmm.value.api.GenericValue#hasValue() undefined} or
-   *         has the
+   *         {@link net.sf.mmm.value.api.GenericValue#isEmpty() empty} or has
+   *         the
    *         {@link net.sf.mmm.value.api.WrongValueTypeException "wrong type"}.
    */
   Object calculate(Context environment, Term... arguments) throws ValueException;

@@ -4,7 +4,6 @@ package net.sf.mmm.term.impl.function;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.base.BasicFunction;
 import net.sf.mmm.util.reflect.Arguments;
-import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -62,15 +61,15 @@ public class FunctionSwitch extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(GenericValue,
-   *      GenericValue)
+   * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object,
+   *      java.lang.Object)
    */
   @Override
   public Object calculate(Object argument1, Object argument2) throws ValueException {
 
     try {
       Boolean test = (Boolean) argument1;
-      if (test) {
+      if (test.booleanValue()) {
         return argument2;
       } else {
         // TODO: create fake NULL value in order to work with else!
