@@ -8,18 +8,65 @@ import java.util.TimeZone;
 import sun.util.calendar.ZoneInfo;
 
 /**
- * This class is a collection of utility functions for {@link Date} handling and
- * manipulation.
+ * This class is a collection of utility functions for formatting and parsing
+ * dates according to ISO 8601 formats.<br>
+ * This implementation does NOT use {@link java.text.SimpleDateFormat}. All
+ * methods of this class are fast and thread-safe.<br>
+ * The ISO 8601 defines multiple formats for date and times. The following forms
+ * are handled by this implementation:<br>
+ * <table border="1">
+ * <tr bgcolor="#ccccff">
+ * <th>Type</th>
+ * <th>Basic</th>
+ * <th>Extended</th>
+ * <th>Special</th>
+ * </tr>
+ * <tr>
+ * <td>Date</td>
+ * <td>yyyyMMdd</td>
+ * <td>yyyy-MM-dd</td>
+ * <td>&#160;</td>
+ * </tr>
+ * <tr>
+ * <td>Time</td>
+ * <td>HHmmss</td>
+ * <td>HH:mm:ss</td>
+ * <td>&#160;</td>
+ * </tr>
+ * <tr>
+ * <td>Timezone</td>
+ * <td>&#177;HH[mm[ss]]</td>
+ * <td>&#177;HH[:mm[:ss]]</td>
+ * <td>'Z'</td>
+ * </tr>
+ * </table><br>
+ * Please note that the special timezone character <code>Z</code> means UTC.<br>
+ * Out of these forms the following combinations are supported:
+ * <ul>
+ * <li>&lt;Date&gt;</li>
+ * <li>&lt;Date&gt;T&lt;Time&gt;</li>
+ * <li>&lt;Date&gt;T&lt;Time&gt;&lt;Timezone&gt;</li>
+ * </ul>
+ * Examples:<br>
+ * <ul>
+ * <li>1999-12-31</li>
+ * <li>1999-12-31T23:59:59</li>
+ * <li>1999-12-31T23:59:59+01:00</li>
+ * <li>2000-01-01T00:00:00Z</li>
+ * <li>20000101T000000Z</li>
+ * </ul>
+ * As you can see by the example the basic format is harder to read (for
+ * humans). Therefore you should use the extended format if possible.<br>
+ * The {@link #parseCalendar(String) parse} methods support all formats
+ * described above. For {@link #formatDateTime(Calendar) formatting} various
+ * methods exist for different format combinations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class Iso8601Util {
 
-  /** the default zimezone is GMT */
-  private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
-
-  /** the default zimezone is GMT */
-  private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
+  /** the ID for Coordinated Universal Time */
+  private static final String UTC_ID = "UTC";
 
   /**
    * The forbidden constructor
@@ -30,9 +77,7 @@ public class Iso8601Util {
 
   /**
    * This method fromats the given <code>date</code> in the format
-   * "yyyy-MM-dd" in GMT according to ISO 8601. This implementation is
-   * thread-safe. It does NOT use {@link java.text.SimpleDateFormat} and
-   * neigther requires nor performs any synchronization.
+   * "yyyy-MM-dd" in GMT according to {@link Iso8601Util ISO 8601}.
    * 
    * @param date
    *        is the date to format.
@@ -40,16 +85,14 @@ public class Iso8601Util {
    */
   public static String formatDate(Date date) {
 
-    Calendar calendar = Calendar.getInstance(GMT);
+    Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
-    return formatDate(calendar);
+    return formatDate(calendar, true);
   }
 
   /**
    * This method fromats the given <code>calendar</code> as a date in the
-   * format "yyyy-MM-dd" according to ISO 8601. This implementation is
-   * thread-safe. It does NOT use {@link java.text.SimpleDateFormat} and
-   * neigther requires nor performs any synchronization.
+   * format "yyyy-MM-dd" according to {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar
    *        is the date to format.
@@ -57,36 +100,59 @@ public class Iso8601Util {
    */
   public static String formatDate(Calendar calendar) {
 
-    // "yyyy-MM-dd".length() == 10
-    StringBuffer buffer = new StringBuffer(10);
-    formatDate(calendar, buffer);
-    return buffer.toString();
+    return formatDate(calendar, true);
   }
 
   /**
    * This method fromats the given <code>calendar</code> as a date in the
-   * format "yyyy-MM-dd" according to ISO 8601. This implementation is
-   * thread-safe. It does NOT use {@link java.text.SimpleDateFormat} and
-   * neigther requires nor performs any synchronization.
+   * format "yyyy-MM-dd" according to {@link Iso8601Util ISO 8601}.
+   * 
+   * @param calendar
+   *        is the date to format.
+   * @return the given <code>calendar</code> as date string.
+   * @param extended
+   *        if <code>false</code> the basic format ("yyyyMMdd") is used, if
+   *        <code>true</code> the extended format ("yyyy-MM-dd") is used.
+   */
+  public static String formatDate(Calendar calendar, boolean extended) {
+
+    // we could save 2*2 bytes here according to extended flag ;)
+    // "yyyy-MM-dd".length() == 10
+    StringBuffer buffer = new StringBuffer(10);
+    formatDate(calendar, buffer, extended);
+    return buffer.toString();
+  }
+
+  /**
+   * This method fromats the given <code>calendar</code> as a date according
+   * to {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar
    *        is the date to format.
    * @param buffer
    *        is where to append the formatted date.
+   * @param extended
+   *        if <code>false</code> the basic date format ("yyyyMMdd") is used,
+   *        if <code>true</code> the extended date format ("yyyy-MM-dd") is
+   *        used.
    */
-  private static void formatDate(Calendar calendar, StringBuffer buffer) {
+  private static void formatDate(Calendar calendar, StringBuffer buffer, boolean extended) {
 
     // year
     String year = String.valueOf(calendar.get(Calendar.YEAR));
     buffer.append(year);
-    buffer.append('-');
+    if (extended) {
+      buffer.append('-');
+    }
     // month
     String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
     if (month.length() < 2) {
       buffer.append('0');
     }
     buffer.append(month);
-    buffer.append('-');
+    if (extended) {
+      buffer.append('-');
+    }
     // day
     String day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
     if (day.length() < 2) {
@@ -96,65 +162,86 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>date</code> as a GMT date and time in
-   * the format "yyyy-MM-dd'T'HH:mm:ss" according to ISO 8601. This
-   * implementation is thread-safe. It does NOT use
-   * {@link java.text.SimpleDateFormat} and neigther requires nor performs any
-   * synchronization.
+   * This method fromats the given <code>date</code> as a date and time in the
+   * format "yyyy-MM-ddTHH:mm:ssZ" (UTC) according to
+   * {@link Iso8601Util ISO 8601}.
    * 
    * @param date
    *        is the date to format.
    * @return the given <code>calendar</code> as date string.
    */
-  public static String formatDateAndTime(Date date) {
+  public static String formatDateTime(Date date) {
 
-    Calendar calendar = Calendar.getInstance(GMT);
+    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(UTC_ID));
     calendar.setTime(date);
-    // "yyyy-MM-ddTHH:mm:ss".length() == 19
-    StringBuffer buffer = new StringBuffer(19);
-    formatDate(calendar, buffer);
+    // "yyyy-MM-ddTHH:mm:ssZ".length() == 20
+    StringBuffer buffer = new StringBuffer(20);
+    formatDate(calendar, buffer, true);
     buffer.append('T');
-    formatTime(calendar, buffer);
+    formatTime(calendar, buffer, true);
+    buffer.append('Z');
     return buffer.toString();
   }
 
   /**
    * This method fromats the given <code>calendar</code> as a date and time in
-   * the format "yyyy-MM-dd'T'HH:mm:ssZ" but with timezone (Z) in the format
-   * "[+|-]hh:mm" according to ISO 8601. This implementation is thread-safe. It
-   * does NOT use {@link java.text.SimpleDateFormat} and neigther requires nor
-   * performs any synchronization.
+   * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
+   * {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar
    *        is the date to format.
    * @return the given <code>calendar</code> as date string.
    */
-  public static String formatDateAndTime(Calendar calendar) {
+  public static String formatDateTime(Calendar calendar) {
 
-    // TODO: this is nuts!!!
-    // !!!The date and time has to be converted to GMT!!!
+    return formatDateTime(calendar, true, true, true);
+  }
+
+  /**
+   * This method fromats the given <code>calendar</code> as a date and time in
+   * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
+   * {@link Iso8601Util ISO 8601}.
+   * 
+   * @param calendar
+   *        is the date to format.
+   * @return the given <code>calendar</code> as date string.
+   * @param extendedDate
+   *        if <code>false</code> the basic date format ("yyyyMMdd") is used,
+   *        if <code>true</code> the extended date format ("yyyy-MM-dd") is
+   *        used.
+   * @param extendedTime
+   *        if <code>false</code> the basic time format ("HHmmss") is used, if
+   *        <code>true</code> the extended time format ("HH:mm:ss") is used.
+   * @param extendedTimezone
+   *        if <code>false</code> the basic timzone format ("&#177;HHmm[ss]")
+   *        is used, if <code>true</code> the extended timezone format
+   *        ("&#177;HH:mm[:ss]") is used.
+   */
+  public static String formatDateTime(Calendar calendar, boolean extendedDate,
+      boolean extendedTime, boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
     StringBuffer buffer = new StringBuffer(25);
-    formatDate(calendar, buffer);
+    formatDate(calendar, buffer, extendedDate);
     buffer.append('T');
-    formatTime(calendar, buffer);
-    formatTimeZone(calendar.getTimeZone(), buffer, true);
+    formatTime(calendar, buffer, extendedTime);
+    formatTimeZone(calendar.getTimeZone(), buffer, extendedTimezone);
     return buffer.toString();
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as time in the format
-   * "HH:mm:ss" according to ISO 8601. This implementation is thread-safe. It
-   * does NOT use {@link java.text.SimpleDateFormat} and neigther requires nor
-   * performs any synchronization.
+   * This method fromats the given <code>calendar</code> as time according to
+   * {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar
    *        is the date to format.
    * @param buffer
    *        is where to append the formatted date.
+   * @param extended
+   *        if <code>false</code> the basic time format ("HHmmss") is used, if
+   *        <code>true</code> the extended time format ("HH:mm:ss") is used.
    */
-  public static void formatTime(Calendar calendar, StringBuffer buffer) {
+  public static void formatTime(Calendar calendar, StringBuffer buffer, boolean extended) {
 
     // append hours
     String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
@@ -162,14 +249,18 @@ public class Iso8601Util {
       buffer.append('0');
     }
     buffer.append(hour);
-    buffer.append(':');
+    if (extended) {
+      buffer.append(':');
+    }
     String minute = String.valueOf(calendar.get(Calendar.MINUTE));
     // append minutes
     if (minute.length() < 2) {
       buffer.append('0');
     }
     buffer.append(minute);
-    buffer.append(':');
+    if (extended) {
+      buffer.append(':');
+    }
     // append seconds
     String second = String.valueOf(calendar.get(Calendar.SECOND));
     if (second.length() < 2) {
@@ -179,21 +270,17 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>timezone</code> in the format
-   * "[+|-]HHmm[ss]" (basic) or "[+|-]HH:mm[:ss]" (extended) according to ISO
-   * 8601.<br>
-   * This implementation is thread-safe. It does NOT use
-   * {@link java.text.SimpleDateFormat} and neigther requires nor performs any
-   * synchronization.
+   * This method fromats the given <code>timezone</code> according to
+   * {@link Iso8601Util ISO 8601}.<br>
    * 
    * @param timezone
    *        is the date to format.
    * @param buffer
    *        is where to append the formatted timezone.
    * @param extended -
-   *        if <code>false</code> the basic format ("[+|-]HHmm[ss]") is used,
-   *        if <code>true</code> the extended format ("[+|-]HH:mm[:ss]") is
-   *        used.
+   *        if <code>false</code> the basic timzone format ("&#177;HHmm[ss]")
+   *        is used, if <code>true</code> the extended timezone format
+   *        ("&#177;HH:mm[:ss]") is used.
    */
   public static void formatTimeZone(TimeZone timezone, StringBuffer buffer, boolean extended) {
 
@@ -211,7 +298,7 @@ public class Iso8601Util {
     }
     buffer.append(hours);
     if (extended) {
-      buffer.append(':');      
+      buffer.append(':');
     }
     String minutes = String.valueOf(offsetMinutes % 60);
     if (minutes.length() < 2) {
@@ -227,14 +314,17 @@ public class Iso8601Util {
           buffer.append('0');
         }
         buffer.append(secs);
-      }      
+      }
     }
   }
 
   /**
+   * This method parses the given string <code>date</code> according to
+   * {@link Iso8601Util ISO 8601}.
    * 
    * @param date
-   * @return
+   *        is the date to parse.
+   * @return the parsed date.
    */
   public static Date parseDate(String date) {
 
@@ -242,13 +332,16 @@ public class Iso8601Util {
   }
 
   /**
+   * This method parses the given string <code>date</code> according to
+   * {@link Iso8601Util ISO 8601}.
    * 
    * @param date
-   * @return
+   *        is the date to parse.
+   * @return the parsed date.
    */
   public static Calendar parseCalendar(String date) {
 
-    Calendar calendar = Calendar.getInstance(GMT);
+    Calendar calendar = Calendar.getInstance();
     parseCalendar(date, calendar);
     return calendar;
   }
@@ -307,13 +400,8 @@ public class Iso8601Util {
         minute = 0;
         second = 0;
       }
-      if ((hour < 0) || (hour > 23)) {
-        throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
-      }
-      if ((minute < 0) || (minute > 59)) {
-        throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
-      }
-      if ((second < 0) || (second > 59)) {
+      if (((hour < 0) || (hour > 23)) || ((minute < 0) || (minute > 59))
+          || ((second < 0) || (second > 59))) {
         throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
       }
       int timezoneOffset = ((((hour * 60) + minute) * 60) + second) * 1000;
@@ -325,31 +413,102 @@ public class Iso8601Util {
       return null;
     } else if (c == 'Z') {
       // UTC
-      return UTC;
+      return new ZoneInfo(UTC_ID, 0);
     }
     throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
   }
 
   /**
+   * This method parses the time (and timezone) from the given
+   * <code>parser</code> and sets it to the given <code>calendar</code>
+   * including <code>year</code>, <code>month</code> and <code>date</code>.
+   * 
+   * @param parser
+   *        is the parser pointing to the time or at the end of the string
+   * @param calendar
+   *        is the calendar where the parsed date and time will be set.
+   * @param year
+   *        is the year to set that has already been parsed.
+   * @param month
+   *        is the month to set that has already been parsed (in the range of
+   *        1-12).
+   * @param day
+   *        is the day to set that has already been parsed.
+   */
+  private static void parseTime(StringParser parser, Calendar calendar, int year, int month, int day) {
+
+    char c = parser.forceNext();
+    if (c == 'T') {
+      int hour = 0;
+      int minute = 0;
+      int second = -1;
+      String hourString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+      if (hourString.length() == 2) {
+        hour = Integer.parseInt(hourString);
+        c = parser.forceNext();
+        if (c == ':') {
+          String minuteString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+          if (minuteString.length() == 2) {
+            minute = Integer.parseInt(minuteString);
+            c = parser.forceNext();
+            if (c == ':') {
+              String secondString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+              if (secondString.length() == 2) {
+                second = Integer.parseInt(secondString);
+                TimeZone timeZone = parseTimezone(parser);
+                if (timeZone != null) {
+                  calendar.setTimeZone(timeZone);
+                }
+              }
+            } else if (c == 0) {
+              second = 0;
+            }
+          }
+        } else if (c == 0) {
+          minute = 0;
+          second = 0;
+        }
+      } else if (hourString.length() == 4) {
+        hour = Integer.parseInt(hourString.substring(0, 2));
+        minute = Integer.parseInt(hourString.substring(2, 4));
+        second = 0;
+      } else if (hourString.length() == 6) {
+        hour = Integer.parseInt(hourString.substring(0, 2));
+        minute = Integer.parseInt(hourString.substring(2, 4));
+        second = Integer.parseInt(hourString.substring(4, 6));
+      }
+      if (((hour < 0) || (hour > 23)) || ((minute < 0) || (minute > 59))
+          || ((second < 0) || (second > 59))) {
+        throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
+      }
+      calendar.set(year, month - 1, day, hour, minute, second);
+    } else if (c == 0) {
+      calendar.set(year, month - 1, day);
+    } else {
+      throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
+    }
+  }
+
+  /**
+   * This method parses the given <code>date</code> according to
+   * {@link Iso8601Util ISO 8601} using the given <code>calendar</code>. If
+   * the given <code>date</code> does NOT specify the time or timezone, the
+   * values from the given <code>calendar</code> will be kept.
    * 
    * @param date
-   * @return
+   *        is the date to parse.
+   * @param calendar
+   *        is the calendar where the parsed date will be set.
    */
   public static void parseCalendar(String date, Calendar calendar) {
 
-    // "yyyy-MM-dd[THH:mm:ss[+hh:ss]]"
-    // year: in format "yyyy-MM-dd" or "yyyyMMdd"
-    // time: followed after year and separated by 'T' in format "HH:mm:ss"
-    // if omitted, assumed as "00:00:00"
-    // timzone: followed after time, "[+|-]HH:mm"
-    // if omitted, assumed as "+00:00"
     StringParser parser = new StringParser(date);
     int year = 0;
     int month = -1;
     int day = -1;
     // proceed date
-    // TODO: peek for +/-
     try {
+      // TODO: peek for +/-
       String yearString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
       char c = parser.forceNext();
       if (c == '-') {
@@ -362,7 +521,6 @@ public class Iso8601Util {
             String dayString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
             if (dayString.length() == 2) {
               day = Integer.parseInt(dayString);
-              c = parser.forceNext();
             }
           }
         }
@@ -371,60 +529,15 @@ public class Iso8601Util {
         year = Integer.parseInt(yearString.substring(0, 4));
         month = Integer.parseInt(yearString.substring(4, 6));
         day = Integer.parseInt(yearString.substring(6, 8));
-      } else {
+      }
+      if (((month < 1) || (month > 12)) || ((day < 1) || (day > 31))) {
         throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!");
       }
-      if ((month < 1) || (month > 12)) {
-        throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!");
-      }
-      if ((day < 1) || (day > 31)) {
-        throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!");
-      }
-      // proceed time
-      boolean okay = false;
-      int hour = 0;
-      int minute = 0;
-      int second = 0;
-      TimeZone timeZone = null;
-      if (c == 'T') {
-        String hourString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-        if (hourString.length() == 2) {
-          hour = Integer.parseInt(hourString);
-          c = parser.forceNext();
-          if (c == ':') {
-            String minuteString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-            if (minuteString.length() == 2) {
-              minute = Integer.parseInt(minuteString);
-              c = parser.forceNext();
-              if (c == ':') {
-                String secondString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-                if (secondString.length() == 2) {
-                  second = Integer.parseInt(secondString);
-                  timeZone = parseTimezone(parser);
-                  okay = true;
-                }
-              }
-            }
-          }
-        }
-      } else if (c == 0) {
-        okay = true;
-      }
-      if (!okay) {
-        throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!");
-      }
-      calendar.set(year, month - 1, day, hour, minute, second);
-      if (timeZone != null) {
-        calendar.setTimeZone(timeZone);
-      }
+      // proceed time (and timezone)
+      parseTime(parser, calendar, year, month, day);
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!", e);
     }
-  }
-
-  public static void main(String[] args) {
-
-    System.out.println(formatDateAndTime(Calendar.getInstance()));
   }
 
 }
