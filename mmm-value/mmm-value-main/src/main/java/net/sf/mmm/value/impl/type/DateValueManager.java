@@ -173,7 +173,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   @Override
   public String toString(Date value) {
 
-    return Iso8601Util.formatDateAndTime(value);
+    return Iso8601Util.formatDateTime(value);
   }
 
   /**

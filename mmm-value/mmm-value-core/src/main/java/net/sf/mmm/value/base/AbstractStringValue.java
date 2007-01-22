@@ -111,7 +111,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
       result = null;
     } else {
       if (value instanceof Date) {
-        result = Iso8601Util.formatDateAndTime((Date) value);
+        result = Iso8601Util.formatDateTime((Date) value);
       } else if (value instanceof Class) {
         result = ((Class<?>) value).getName();
       } else {
