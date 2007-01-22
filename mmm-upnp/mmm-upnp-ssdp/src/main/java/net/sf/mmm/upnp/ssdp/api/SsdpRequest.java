@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.upnp.ssdp;
+package net.sf.mmm.upnp.ssdp.api;
 
 import net.sf.mmm.util.http.HttpRequest;
 
@@ -7,12 +7,21 @@ import net.sf.mmm.util.http.HttpRequest;
  * This class represents an SSDP request. It is a specific HTTP-Request that is
  * transmitted via an multicast over UDP.
  * 
+ * @see HttpRequest#METHOD_NOTIFY
+ * @see HttpRequest#METHOD_M_SEARCH
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class SsdpRequest extends HttpRequest {
 
+  /** the URI to use for SSDP */
+  private static final String SSDP_URI = "*";
+
   /** the SSDP multicast address */
   public static final String MULTICAST_ADDRESS = "239.255.255.250";
+
+  /** the SSDP multicast port */
+  public static final int MULTICAST_PORT = 1900;
 
   /**
    * The {@link #getHeaderProperty(String) header-property} <code>NT</code>.
@@ -35,6 +44,11 @@ public class SsdpRequest extends HttpRequest {
   public static final String HEADER_PROPERTY_MAN = "MAN";
 
   /**
+   * The {@link #getHeaderProperty(String) header-property} <code>EXT</code>.
+   */
+  public static final String HEADER_PROPERTY_EXT = "EXT";
+
+  /**
    * The {@link #getHeaderProperty(String) header-property} <code>MAN</code>.
    */
   public static final String HEADER_PROPERTY_MAXIMUM_WAIT = "MX";
@@ -44,17 +58,38 @@ public class SsdpRequest extends HttpRequest {
    */
   public static final String HEADER_PROPERTY_SEARCH_TARGET = "ST";
 
-  /** the SSDP multicast port */
-  public static final int MULTICAST_PORT = 1900;
-
   /** device available (register advertisment) */
   public static final String NTS_SSDP_ALIVE = "ssdp:alive";
 
   /** device unavailable (de-register advertisment) */
   public static final String NTS_SSDP_BYEBYE = "ssdp:byebye";
 
-  /** the URI to use for SSDP */
-  private static final String SSDP_URI = "*";
+  /** proper man header */
+  public static final String MAN_SSDP_DISCOVER = "\"ssdp:discover\"";
+
+  /** st header */
+  public static final String ST_SSDP_ALL = "ssdp:all";
+
+  /**
+   * This method sets the {@link #HEADER_PROPERTY_SEARCH_TARGET search-target}.
+   * 
+   * @param st
+   *        is the search-target to set.
+   */
+  public void setSearchTarget(String st) {
+
+    setHeaderProperty(HEADER_PROPERTY_SEARCH_TARGET, st);
+  }
+
+  /**
+   * This method gets the {@link #HEADER_PROPERTY_SEARCH_TARGET search-target}.
+   * 
+   * @return the search-target or <code>null</code> if NOT set.
+   */
+  public String getSearchTarget() {
+
+    return getHeaderProperty(HEADER_PROPERTY_SEARCH_TARGET);
+  }
 
   /**
    * The constructor
@@ -62,21 +97,19 @@ public class SsdpRequest extends HttpRequest {
   public SsdpRequest() {
 
     super();
+    setMethod(METHOD_NOTIFY);
     setUri(SSDP_URI);
     setHeaderProperty(HEADER_PROPERTY_HOST, MULTICAST_ADDRESS + ":" + MULTICAST_PORT);
     setNotificationSubType(NTS_SSDP_ALIVE);
   }
 
   /**
-   * Override to ensure that property names are in upper case.
-   * 
-   * @see net.sf.mmm.util.http.HttpMessage#setHeaderProperty(java.lang.String,
-   *      java.lang.String)
+   * @see net.sf.mmm.util.http.HttpMessage#createHeaderNameHash(java.lang.String)
    */
   @Override
-  public void setHeaderProperty(String name, String value) {
-
-    super.setHeaderProperty(name.toUpperCase(), value);
+  protected Object createHeaderNameHash(String name) {
+  
+    return name.toUpperCase();
   }
 
   /**

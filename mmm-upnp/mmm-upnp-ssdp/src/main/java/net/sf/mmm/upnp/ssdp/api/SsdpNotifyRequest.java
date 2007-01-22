@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.upnp.ssdp;
+package net.sf.mmm.upnp.ssdp.api;
 
 /**
  * This is class represents an SSDP notification request that advertises an UPnP
@@ -16,7 +16,7 @@ public class SsdpNotifyRequest extends SsdpRequest {
   public SsdpNotifyRequest() {
 
     super();
-    setMethod(HTTP_METHOD_NOTIFY);
+    setMethod(METHOD_NOTIFY);
   }
 
 }

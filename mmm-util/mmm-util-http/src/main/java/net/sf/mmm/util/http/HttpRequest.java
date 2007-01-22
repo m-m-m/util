@@ -9,34 +9,34 @@ package net.sf.mmm.util.http;
 public class HttpRequest extends HttpMessage {
 
   /** the GET method */
-  public static final String HTTP_METHOD_GET = "GET";
+  public static final String METHOD_GET = "GET";
 
   /** the POST method */
-  public static final String HTTP_METHOD_HEAD = "HEAD";
+  public static final String METHOD_HEAD = "HEAD";
 
   /** the POST method */
-  public static final String HTTP_METHOD_POST = "POST";
+  public static final String METHOD_POST = "POST";
 
   /** the PUT method */
-  public static final String HTTP_METHOD_PUT = "PUT";
+  public static final String METHOD_PUT = "PUT";
 
   /** the DELETE method */
-  public static final String HTTP_METHOD_DELETE = "DELETE";
+  public static final String METHOD_DELETE = "DELETE";
 
   /** the OPTIONS method */
-  public static final String HTTP_METHOD_OPTIONS = "OPTIONS";
+  public static final String METHOD_OPTIONS = "OPTIONS";
 
   /** the TRACE method */
-  public static final String HTTP_METHOD_TRACE = "TRACE";
+  public static final String METHOD_TRACE = "TRACE";
 
   /** the CONNECT method */
-  public static final String HTTP_METHOD_CONNECT = "CONNECT";
+  public static final String METHOD_CONNECT = "CONNECT";
 
   /** the NOTIFY method */
-  public static final String HTTP_METHOD_NOTIFY = "NOTIFY";
+  public static final String METHOD_NOTIFY = "NOTIFY";
 
   /** the M-SEARCH method */
-  public static final String HTTP_METHOD_M_SEARCH = "M-SEARCH";
+  public static final String METHOD_M_SEARCH = "M-SEARCH";
   
   /** @see #getMethod() */
   private String method;
@@ -50,13 +50,13 @@ public class HttpRequest extends HttpMessage {
   public HttpRequest() {
 
     super();
-    this.method = HTTP_METHOD_GET;
+    this.method = METHOD_GET;
   }
 
   /**
    * This method gets the HTTP method to use.<br>
-   * The typical methods are {@link #HTTP_METHOD_GET GET},
-   * {@link #HTTP_METHOD_HEAD HEAD}, {@link #HTTP_METHOD_POST POST}.
+   * The typical methods are {@link #METHOD_GET GET},
+   * {@link #METHOD_HEAD HEAD}, {@link #METHOD_POST POST}.
    * 
    * @return the HTTP method.
    */

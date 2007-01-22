@@ -21,6 +21,13 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-http</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- to be removed -->
+    <dependency>
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
       <version>3.0</version>
