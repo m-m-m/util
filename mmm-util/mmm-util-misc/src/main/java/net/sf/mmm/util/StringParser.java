@@ -223,6 +223,68 @@ public class StringParser implements CharSequence {
   }
 
   /**
+   * This method reads the number of {@link #next() next characters} given by
+   * <code>count</code> and returns them as string. If there are less
+   * characters {@link #hasNext() available} the returned string will be shorter
+   * than <code>count</code> and only contain the available characters.
+   * 
+   * @param count
+   *        is the number of characters to read. Use {@link Integer#MAX_VALUE}
+   *        to read until the end of of the parsers data.
+   * @return a string with the given number of characters or all available
+   *         characters if less than <code>count</code>. Will be the empty
+   *         string if no character is {@link #hasNext() available} at all.
+   */
+  public String read(int count) {
+
+    int length = this.chars.length - this.pos;
+    if (length > count) {
+      length = count;
+    }
+    String result = new String(this.chars, this.pos, length);
+    this.pos += length;
+    return result;
+  }
+
+  /**
+   * This method reads all {@link #next() next characters} as long as they equal
+   * the <code>expected</code> string.<br>
+   * This method is very similar to the following code snipplet except that it
+   * stops {@link #next() reading} when a character differs:
+   * 
+   * <pre>
+   * {@link #read(int) read}(expected.length).equals[IgnoreCase](expected)
+   * </pre>
+   * 
+   * @param exprected
+   *        is the expected string.
+   * @param ignoreCase -
+   *        if <code>true</code> the case of the characters is ignored when
+   *        compared.
+   * @return <code>true</code> if the
+   */
+  public boolean expect(String exprected, boolean ignoreCase) {
+
+    int len = exprected.length();
+    for (int i = 0; i < len; i++) {
+      if (this.pos >= this.chars.length) {
+        return false;
+      }
+      char c = this.chars[this.pos++];
+      char exp = exprected.charAt(i);
+      if (c != exp) {
+        if (!ignoreCase) {
+          return false;
+        }
+        if (Character.toUpperCase(c) != Character.toUpperCase(exp)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  /**
    * This method reads all {@link #next() next characters} until the given
    * <code>stop</code> character or the end of the string to parse is reached.
    * In advance to {@link #skipUntil(char)}, this method will read over the
