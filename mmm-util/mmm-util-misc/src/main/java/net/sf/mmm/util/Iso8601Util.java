@@ -487,6 +487,7 @@ public class Iso8601Util {
     } else {
       throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
     }
+    calendar.set(Calendar.MILLISECOND, 0);
   }
 
   /**
