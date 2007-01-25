@@ -4,6 +4,10 @@ package net.sf.mmm.util.http;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.CharFilter;
+import net.sf.mmm.util.ListCharFilter;
+import net.sf.mmm.util.StringParser;
+
 /**
  * This class represents an HTTP message.
  * 
@@ -114,8 +118,24 @@ public abstract class HttpMessage {
    */
   public static final String HEADER_PROPERTY_HOST = "Host";
 
+  /**
+   * The {@link #getHeaderPropertyAttribute(String, String) header-property}
+   * <code>max-age</code>.
+   * 
+   * @see #HEADER_PROPERTY_CACHE_CONTROL
+   */
+  public static final String HEADER_ATTRIBUTE_MAX_AGE = "max-age";
+
   /** the line termination sequence used by HTTP */
   protected static final String CRLF = "\r\n";
+
+  /** char-filter accepting only ',' and ';' */
+  protected static final CharFilter CHAR_FILTER_WHITELIST_COMMA_OR_SEMICOLON = new ListCharFilter(
+      true, ',', ';');
+
+  /** char-filter accepting everything except ',' and ';' */
+  protected static final CharFilter CHAR_FILTER_BLACKLIST_COMMA_OR_SEMICOLON = new ListCharFilter(
+      false, ',', ';');
 
   /** @see #getHeaderProperty(String) */
   private final Map<Object, String> header;
@@ -147,7 +167,9 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method sets the HTTP version to use.
+   * This method sets the HTTP version to use.<br>
+   * By {@link HttpMessage#HttpMessage() default} the version is
+   * {@link #VERSION_1_1}.
    * 
    * @param httpVersion
    *        the HTTP version to set.
@@ -189,7 +211,134 @@ public abstract class HttpMessage {
    */
   public String getHeaderProperty(String name) {
 
-    return this.header.get(name);
+    return this.header.get(createHeaderNameHash(name));
+  }
+
+  /**
+   * This method sets a single attribute of the property with the given
+   * <code>name</code> in the header of this HTTP message.<br>
+   * 
+   * @param name
+   *        is the name of the property to manipulate.
+   * @param attributeName
+   *        is the name of the attribute to set.
+   * @param attributeValue
+   *        is the value of the attribute or the empty string ("") if the
+   *        attribute is just a flag.
+   */
+  public void setHeaderPropertyAttribute(String name, String attributeName, String attributeValue) {
+
+    if (attributeName.length() == 0) {
+      throw new IllegalArgumentException("Attribute name must NOT be empty!");
+    }
+    String value = getHeaderProperty(name);
+    if (value == null) {
+      value = attributeName;
+      if (attributeValue.length() > 0) {
+        value = value + "=" + attributeValue;
+      }
+    } else {
+      StringParser parser = new StringParser(value);
+      boolean found = false;
+      while (parser.hasNext()) {
+        boolean startsWith = parser.expect(attributeName, true);
+        if (startsWith) {
+          int startIndex = parser.getCurrentIndex();
+          // be tolerant and ommit spaces
+          parser.skipWhile(' ');
+          if (parser.hasNext()) {
+            char c = parser.next();
+            if ((c == '=') || (c == ';') || (c == ',')) {
+              found = true;
+              if (c == '=') {
+                parser.skipWhile(CHAR_FILTER_BLACKLIST_COMMA_OR_SEMICOLON);
+              }
+              String substring = "";
+              if (attributeValue.length() > 0) {
+                substring = "=" + attributeValue;
+              }
+              value = parser.getReplaced(substring, startIndex, parser.getCurrentIndex());
+            }
+          } else {
+            // string end...
+            found = true;
+            if (attributeValue.length() > 0) {
+              value = value + "=" + attributeValue;
+            }
+          }
+        }
+        if (found) {
+          break;
+        } else {
+          parser.skipWhile(CHAR_FILTER_BLACKLIST_COMMA_OR_SEMICOLON);
+          // ensure to read over ',' / ';'
+          parser.forceNext();
+        }
+      }
+      if (!found) {
+        StringBuffer buffer = new StringBuffer(value.length() + attributeName.length()
+            + attributeValue.length() + 2);
+        buffer.append(value);
+        buffer.append(',');
+        buffer.append(attributeName);
+        if (attributeValue.length() > 0) {
+          buffer.append('=');
+          buffer.append(attributeValue);
+        }
+        value = buffer.toString();
+      }
+    }
+    setHeaderProperty(name, value);
+  }
+
+  /**
+   * This method gets a single attribute of the property with the given
+   * <code>name</code> from the header of this HTTP message.<br>
+   * E.g. the property {@link #HEADER_PROPERTY_CACHE_CONTROL Cache-Control} may
+   * have the value <code>no-cache,no-store,max-age=0</code>. Then the
+   * following code snipplet would return "0":
+   * 
+   * <pre>
+   * {@link #getHeaderPropertyAttribute(String, String) getHeaderPropertyAttribute}({@link #HEADER_PROPERTY_CACHE_CONTROL "Cache-Control"}, {@link #HEADER_ATTRIBUTE_MAX_AGE "max-age"})
+   * </pre>
+   * 
+   * @param name
+   *        is the name of the requested property.
+   * @param attributeName
+   *        the name of the requested attribute.
+   * @return the value of the requested attribute or <code>null</code> if the
+   *         property is NOT set or does NOT contain the attribute. If the
+   *         property is set but has no value, the empty string ("") is
+   *         returned.
+   */
+  public String getHeaderPropertyAttribute(String name, String attributeName) {
+
+    if (attributeName.length() == 0) {
+      // avoid infinity loop
+      return null;
+    }
+    String value = getHeaderProperty(name);
+    if (value != null) {
+      StringParser parser = new StringParser(value);
+      while (parser.hasNext()) {
+        if (parser.expect(attributeName, true)) {
+          // be tolerant and ommit spaces
+          parser.skipWhile(' ');
+          char c = parser.forceNext();
+          if (c == '=') {
+            String attributeValue = parser.readWhile(CHAR_FILTER_BLACKLIST_COMMA_OR_SEMICOLON);
+            if (attributeValue != null) {
+              return attributeValue.trim();
+            }
+          } else if ((c == ';') || (c == ',')) {
+            return "";
+          }
+        }
+        parser.skipWhile(CHAR_FILTER_BLACKLIST_COMMA_OR_SEMICOLON);
+        parser.forceNext();
+      }
+    }
+    return null;
   }
 
   /**
@@ -212,18 +361,52 @@ public abstract class HttpMessage {
    * This method appends the given <code>value</code> to the HTTP
    * header-property with the given <code>name</code>.
    * 
+   * @see #appendHeaderProperty(String, String, String)
+   * 
    * @param name
-   * @param value
+   *        is the name of the property to append to.
+   * @param appendValue
+   *        is the value to append to the header-property.
    */
-  public void appendHeaderProperty(String name, String value) {
+  public void appendHeaderProperty(String name, String appendValue) {
 
-    String concated = this.header.get(name);
-    if (concated == null) {
-      concated = value;
+    appendHeaderProperty(name, appendValue, null);
+  }
+
+  /**
+   * This method appends the given <code>value</code> to the HTTP
+   * header-property with the given <code>name</code>. If the header-property
+   * is NOT yet set, this method behaves like
+   * {@link #setHeaderProperty(String, String) setHeaderProperty}(name,
+   * appendValue).
+   * 
+   * @param name
+   *        is the name of the property to append to.
+   * @param appendValue
+   *        is the value to append to the header-property.
+   * @param separator
+   *        if NOT <code>null</code> and the header property is already set,
+   *        this string will be appended after the current value and before the
+   *        given <code>appendValue</code>.
+   */
+  public void appendHeaderProperty(String name, String appendValue, String separator) {
+
+    String value = getHeaderProperty(name);
+    if (value == null) {
+      value = appendValue;
     } else {
-      concated = concated + value;
+      if (separator == null) {
+        value = value + appendValue;
+      } else {
+        StringBuffer buffer = new StringBuffer(value.length() + separator.length()
+            + appendValue.length());
+        buffer.append(value);
+        buffer.append(separator);
+        buffer.append(appendValue);
+        value = buffer.toString();
+      }
     }
-    this.header.put(name, concated);
+    setHeaderProperty(name, value);
   }
 
   /**
@@ -296,9 +479,45 @@ public abstract class HttpMessage {
   }
 
   /**
+   * This method sets the {@link #HEADER_ATTRIBUTE_MAX_AGE maximum age} (lease
+   * time) in seconds.<br>
+   * 
+   * @param seconds
+   *        is the max-age in seconds.
+   */
+  public void setCacheControlMaxAge(int seconds) {
+
+    setHeaderPropertyAttribute(HEADER_PROPERTY_CACHE_CONTROL, HEADER_ATTRIBUTE_MAX_AGE, Integer
+        .toString(seconds));
+  }
+
+  /**
+   * This method gets the {@link #HEADER_ATTRIBUTE_MAX_AGE maximum age} (lease
+   * time) in seconds.
+   * 
+   * @return the maximum age in seconds or <code>-1</code> if the max-age is
+   *         NOT set (properly).
+   */
+  public int getCacheControlMaxAge() {
+
+    String age = getHeaderPropertyAttribute(HEADER_PROPERTY_CACHE_CONTROL, HEADER_ATTRIBUTE_MAX_AGE);
+    int result = -1;
+    if (age != null) {
+      try {
+        result = Integer.parseInt(age.trim());
+      } catch (NumberFormatException e) {
+        // ignore
+      }
+    }
+    return result;
+  }
+
+  /**
    * This method gets the {@link #HEADER_PROPERTY_DATE date}.
    * 
-   * @return
+   * TODO: implement HTTP date parser
+   * 
+   * @return the date or <code>null</code> if NOT set.
    */
   public String getDate() {
 
@@ -306,8 +525,12 @@ public abstract class HttpMessage {
   }
 
   /**
+   * This method sets the {@link #HEADER_PROPERTY_DATE date}.
+   * 
+   * TODO: implement HTTP date formatter
    * 
    * @param date
+   *        is the date to set.
    */
   public void setDate(String date) {
 

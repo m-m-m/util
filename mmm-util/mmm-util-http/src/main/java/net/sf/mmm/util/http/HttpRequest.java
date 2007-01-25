@@ -50,7 +50,8 @@ public class HttpRequest extends HttpMessage {
   public HttpRequest() {
 
     super();
-    this.method = METHOD_GET;
+    this.method = null;
+    this.uri = null;
   }
 
   /**

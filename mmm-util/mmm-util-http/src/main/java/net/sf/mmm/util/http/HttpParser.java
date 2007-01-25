@@ -15,6 +15,9 @@ import net.sf.mmm.util.StringParser;
  */
 public class HttpParser {
 
+  /** the default encoding */
+  private static final Charset CHARSET_US_ASCII = Charset.forName("US-ASCII");
+  
   /**
    * The constructor
    */
@@ -122,6 +125,27 @@ public class HttpParser {
     }
   }
 
+  /**
+   * This method parses the HTTP-header from the given <code>stream</code> and
+   * applies all information to the given <code>request</code>. After this
+   * method has been called, the given <code>stream</code> is pointing to the
+   * beginning of the HTTP-body (or EOF if empty).<br>
+   * 
+   * @param stream
+   *        is the input-stream to read the header from. Only the header is read
+   *        so the stream is NOT closed by this method.
+   * @param request
+   *        is where to apply the parsed information to. Simply supply a new
+   *        instance.
+   * @throws IOException
+   *         if the operation failes with an I/O problem.
+   */
+  public static void parseRequest(InputStream stream, HttpRequest request)
+      throws IOException {
+    
+    parseRequest(stream, request, CHARSET_US_ASCII);
+  }
+  
   /**
    * This method parses the HTTP-header from the given <code>stream</code> and
    * applies all information to the given <code>request</code>. After this
