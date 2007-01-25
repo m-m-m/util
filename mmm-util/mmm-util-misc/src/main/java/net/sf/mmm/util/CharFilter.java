@@ -10,6 +10,17 @@ package net.sf.mmm.util;
 public interface CharFilter {
 
   /**
+   * This method determines if the given character <code>c</code> should be
+   * accepted.
+   * 
+   * @param c
+   *        is the character to check.
+   * @return <code>true</code> if the given character <code>c</code> is
+   *         acceptable, <code>false</code> if it should be filtered.
+   */
+  boolean accept(char c);
+
+  /**
    * A filter that {@link #accept(char) accepts} only the latin digits '0'-'9'.
    */
   CharFilter LATIN_DIGIT_FILTER = new CharFilter() {
@@ -43,16 +54,5 @@ public interface CharFilter {
       return Character.isWhitespace(c);
     }
   };
-
-  /**
-   * This method determines if the given character <code>c</code> should be
-   * accepted.
-   * 
-   * @param c
-   *        is the character to check.
-   * @return <code>true</code> if the given character <code>c</code> is
-   *         acceptable, <code>false</code> if it should be filtered.
-   */
-  boolean accept(char c);
 
 }

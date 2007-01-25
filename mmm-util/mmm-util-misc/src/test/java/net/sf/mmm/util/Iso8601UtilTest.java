@@ -12,7 +12,7 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 /**
- * This is the test-case for {@link DateUtil}.
+ * This is the {@link TestCase test-case} for {@link DateUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,8 +26,9 @@ public class Iso8601UtilTest extends TestCase {
 
     super();
   }
-  
+
   private void dump(Date date) {
+
     System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(date));
   }
 

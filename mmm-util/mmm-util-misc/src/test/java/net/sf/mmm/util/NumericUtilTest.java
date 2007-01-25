@@ -4,7 +4,8 @@ package net.sf.mmm.util;
 import junit.framework.TestCase;
 
 /**
- * This is the test-case for {@link net.sf.mmm.util.NumericUtil}.
+ * This is the {@link TestCase test-case} for
+ * {@link net.sf.mmm.util.NumericUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

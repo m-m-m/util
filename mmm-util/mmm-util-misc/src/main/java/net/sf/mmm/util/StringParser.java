@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.util;
 
+import java.util.Locale;
+
 /**
  * This class represents a string together with a
  * {@link #getCurrentIndex() index position} in that string.<br>
@@ -8,13 +10,16 @@ package net.sf.mmm.util;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class StringParser implements CharSequence {
+public class StringParser {
 
-  /** the original string */
+  /** @see #getOriginalString() */
   private String str;
 
   /** the string to parse as char array */
   private char[] chars;
+
+  /** the string to parse in upper case as char array */
+  private char[] upperChars;
 
   /** @see #getCurrentIndex() */
   private int pos;
@@ -23,18 +28,37 @@ public class StringParser implements CharSequence {
    * The constructor
    * 
    * @param string
-   *        is the string to parse.
+   *        is the {@link #getOriginalString() string} to parse.
    */
   public StringParser(String string) {
 
     super();
     this.str = string;
     this.chars = string.toCharArray();
+    this.upperChars = null;
     this.pos = 0;
   }
 
   /**
+   * This method gets the {@link #upperChars}. On the first call they are
+   * created.
+   * 
+   * @return the chars in upper case.
+   */
+  private char[] getUpperChars() {
+
+    if (this.upperChars == null) {
+      this.upperChars = this.str.toUpperCase(Locale.ENGLISH).toCharArray();
+    }
+    return this.upperChars;
+  }
+
+  /**
    * @see java.lang.CharSequence#charAt(int)
+   * 
+   * @param index
+   *        is the index of the requested character.
+   * @return the character at the given <code>index</code>.
    */
   public char charAt(int index) {
 
@@ -43,6 +67,8 @@ public class StringParser implements CharSequence {
 
   /**
    * @see java.lang.CharSequence#length()
+   * 
+   * @return the total length of the string to parse.
    */
   public int length() {
 
@@ -50,15 +76,8 @@ public class StringParser implements CharSequence {
   }
 
   /**
-   * @see java.lang.CharSequence#subSequence(int, int)
-   */
-  public CharSequence subSequence(int start, int end) {
-
-    return new CharSubSequence(this, start, end);
-  }
-
-  /**
    * @see String#substring(int, int)
+   * @see #appendSubstring(StringBuffer, int, int)
    * 
    * @param start
    *        the start index, inclusive.
@@ -69,6 +88,49 @@ public class StringParser implements CharSequence {
   public String substring(int start, int end) {
 
     return new String(this.chars, start, end - start);
+  }
+
+  /**
+   * This method gets the {@link #getOriginalString() original string} where the
+   * {@link #substring(int, int) substring} specified by <code>start</code>
+   * and <code>end</code> is replaced by <code>substitute</code>.
+   * 
+   * @param substitute
+   *        is the string used as replacement.
+   * @param start
+   *        is the inclusive start index of the substring to replace.
+   * @param end
+   *        is the exclusive end index of the substring to replace.
+   * @return the {@link #getOriginalString() original string} with the specified
+   *         substring replaced by <code>substitute</code>.
+   */
+  public String getReplaced(String substitute, int start, int end) {
+
+    int restLength = this.chars.length - end;
+    StringBuffer buffer = new StringBuffer(start + restLength + substitute.length());
+    buffer.append(this.chars, 0, start);
+    buffer.append(substitute);
+    buffer.append(this.chars, end, restLength);
+    return buffer.toString();
+  }
+
+  /**
+   * This method appends the {@link #substring(int, int) substring} specified by
+   * <code>start</code> and <code>end</code> to the given
+   * <code>buffer</code>.<br>
+   * This avoids the overhead of creating a new string and copying the char
+   * array.
+   * 
+   * @param buffer
+   *        is the buffer where to append the substring to.
+   * @param start
+   *        the start index, inclusive.
+   * @param end
+   *        the end index, exclusive.
+   */
+  public void appendSubstring(StringBuffer buffer, int start, int end) {
+
+    buffer.append(this.chars, start, end - start);
   }
 
   /**
@@ -247,14 +309,128 @@ public class StringParser implements CharSequence {
   }
 
   /**
-   * This method reads all {@link #next() next characters} as long as they equal
-   * the <code>expected</code> string.<br>
-   * This method is very similar to the following code snipplet except that it
-   * stops {@link #next() reading} when a character differs:
+   * This method reads all {@link #next() next characters} until the given
+   * <code>substring</code> has been detected.<br>
+   * After the call of this method, the {@link #getCurrentIndex() current index}
+   * will point to the next character after the first occurence of
+   * <code>substring</code> after the {@link #getCurrentIndex() index} before
+   * this method has been called or to the end of the string if the given
+   * <code>substring</code> was NOT found.<br>
+   * <b>ATTENTION:</b><br>
+   * If <code>ignoreCase</code> is <code>true</code> the complete
+   * {@link #getOriginalString() parse string} is duplicated into
+   * {@link String#toUpperCase(java.util.Locale) upper-case} and stored in this
+   * parser instance. This may be expensive when the
+   * {@link #getOriginalString() parse string} is extremly large.
+   * 
+   * @param substring
+   * @param ignoreCase -
+   *        if <code>true</code> the case of the characters is ignored when
+   *        compared with characters from <code>substring</code>.
+   * @return <code>true</code> if the given <code>substring</code> occured
+   *         and has been passed and <code>false</code> if the end of the
+   *         string has been reached without any occurence of the given
+   *         <code>substring</code>.
+   */
+  public boolean skipOver(String substring, boolean ignoreCase) {
+
+    return skipOver(substring, ignoreCase, null);
+  }
+
+  /**
+   * This method reads all {@link #next() next characters} until the given
+   * <code>substring</code> has been detected.<br>
+   * After the call of this method, the {@link #getCurrentIndex() current index}
+   * will point to the next character after the first occurence of
+   * <code>substring</code> after the {@link #getCurrentIndex() index} before
+   * this method has been called or to the end of the string if the given
+   * <code>substring</code> was NOT found.<br>
+   * <b>ATTENTION:</b><br>
+   * If <code>ignoreCase</code> is <code>true</code> the complete
+   * {@link #getOriginalString() parse string} is duplicated into
+   * {@link String#toUpperCase(java.util.Locale) upper-case} and stored in this
+   * parser instance. This may be expensive when the
+   * {@link #getOriginalString() parse string} is extremly large.
+   * 
+   * @param substring
+   *        is the substring to search and skip over starting at the
+   *        {@link #getCurrentIndex() current index}.
+   * @param ignoreCase -
+   *        if <code>true</code> the case of the characters is ignored when
+   *        compared with characters from <code>substring</code>.
+   * @param stopFilter
+   *        is the filter used to {@link CharFilter#accept(char) detect} stop
+   *        characters. If such character was detected, the skip is stopped and
+   *        the parser points to the character after the stop character. The
+   *        <code>substring</code> should NOT contain a
+   *        {@link CharFilter#accept(char) stop character}.
+   * @return <code>true</code> if the given <code>substring</code> occured
+   *         and has been passed and <code>false</code> if a stop character
+   *         has been detected or the end of the string has been reached without
+   *         any occurence of the given <code>substring</code>.
+   */
+  public boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter) {
+
+    int subLength = substring.length();
+    if (subLength == 0) {
+      return true;
+    }
+    char[] myChars;
+    char[] subChars;
+    if (ignoreCase) {
+      myChars = getUpperChars();
+      subChars = substring.toUpperCase(Locale.ENGLISH).toCharArray();
+    } else {
+      myChars = this.chars;
+      subChars = substring.toCharArray();
+    }
+    // we can only find the substring at a position
+    // until where enough chars are left to go...
+    int max = myChars.length - subLength;
+    char first = subChars[0];
+    while (this.pos <= max) {
+      if (stopFilter != null) {
+        if (stopFilter.accept(this.chars[this.pos])) {
+          this.pos++;
+          return false;
+        }
+      }
+      if (myChars[this.pos++] == first) {
+        // found first character
+        int myCharsIndex = this.pos;
+        int subCharsIndex = 1;
+        boolean found = true;
+        while (subCharsIndex < subLength) {
+          if (myChars[myCharsIndex++] != subChars[subCharsIndex++]) {
+            found = false;
+            break;
+          }
+        }
+        if (found) {
+          this.pos = myCharsIndex;
+          return true;
+        }
+      }
+    }
+    // substring not found (EOF)
+    this.pos = this.chars.length;
+    return false;
+  }
+
+  /**
+   * This method skips all {@link #next() next characters} as long as they equal
+   * to the according character of the <code>expected</code> string.<br>
+   * If a character differs this method stops and the parser points to the first
+   * character that differes from <code>expected</code>. Except for this
+   * circumstance, this method behaves like the following code snipplet:
    * 
    * <pre>
    * {@link #read(int) read}(expected.length).equals[IgnoreCase](expected)
    * </pre>
+   * 
+   * <b>ATTENTION:</b><br>
+   * Be aware that if already the first character differs, this method will NOT
+   * change the parsers state. So take care NOT to produce infinity loops.
    * 
    * @param exprected
    *        is the expected string.
@@ -270,7 +446,7 @@ public class StringParser implements CharSequence {
       if (this.pos >= this.chars.length) {
         return false;
       }
-      char c = this.chars[this.pos++];
+      char c = this.chars[this.pos];
       char exp = exprected.charAt(i);
       if (c != exp) {
         if (!ignoreCase) {
@@ -280,6 +456,7 @@ public class StringParser implements CharSequence {
           return false;
         }
       }
+      this.pos++;
     }
     return true;
   }
@@ -452,12 +629,26 @@ public class StringParser implements CharSequence {
   /**
    * This method gets the original string to parse.
    * 
+   * @see StringParser#StringParser(String)
+   * 
+   * @return the original string.
+   */
+  public String getOriginalString() {
+
+    return this.str;
+  }
+
+  /**
    * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {
 
-    return this.str;
+    if (this.pos < this.chars.length) {
+      return new String(this.chars, this.pos, this.chars.length - this.pos);
+    } else {
+      return "";
+    }
   }
 
 }
