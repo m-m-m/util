@@ -103,7 +103,8 @@ public abstract class AbstractGenericValueTest extends TestCase {
         assertTrue(value.getBoolean());
         Date date = new Date(1157004890000L);
         mutableValue.setDate(date);
-        assertEquals(date, value.getDate());
+        Date otherDate = value.getDate();
+        assertEquals(date.getTime(), otherDate.getTime());
         double d = 42.42;
         mutableValue.setDouble(d);
         assertEquals(d, mutableValue.getDouble(), 0);

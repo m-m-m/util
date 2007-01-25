@@ -23,7 +23,7 @@ public class WrongValueTypeException extends ValueException {
    * @param expectedType
    *        is the expected type of the value.
    */
-  public WrongValueTypeException(GenericValue genericValue, Class expectedType) {
+  public WrongValueTypeException(GenericValue genericValue, Class<?> expectedType) {
 
     this(genericValue, expectedType, null);
   }
@@ -38,7 +38,7 @@ public class WrongValueTypeException extends ValueException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public WrongValueTypeException(GenericValue genericValue, Class expectedType, Throwable nested) {
+  public WrongValueTypeException(GenericValue genericValue, Class<?> expectedType, Throwable nested) {
 
     super(nested, CoreNlsResourceBundle.ERR_VALUE_WRONG_TYPE, genericValue, getType(genericValue),
         expectedType);
@@ -52,7 +52,7 @@ public class WrongValueTypeException extends ValueException {
    *        is the value for which the type is requested.
    * @return the type of the given <code>genericValue</code>.
    */
-  private static Class getType(GenericValue genericValue) {
+  private static Class<?> getType(GenericValue genericValue) {
 
     Object value = genericValue.getObject(null);
     if (value == null) {
@@ -77,9 +77,9 @@ public class WrongValueTypeException extends ValueException {
    * 
    * @return the type that was expected.
    */
-  public Class getExpectedType() {
+  public Class<?> getExpectedType() {
 
-    return (Class) getNlsMessage().getArgument(2);
+    return (Class<?>) getNlsMessage().getArgument(2);
   }
 
 }

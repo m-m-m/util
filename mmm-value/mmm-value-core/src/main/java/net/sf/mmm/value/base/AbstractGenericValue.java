@@ -224,7 +224,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   public <T> T getJavaClassInstance(Class<T> superType) throws ValueNotSetException,
       WrongValueTypeException, ValueInstanciationException {
 
-    Class javaClass = getJavaClass();
+    Class<?> javaClass = getJavaClass();
     return createJavaClassInstance(javaClass, superType);
   }
 
@@ -290,7 +290,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   /**
    * @see net.sf.mmm.value.api.MutableGenericValue#setJavaClass(java.lang.Class)
    */
-  public void setJavaClass(Class newValue) throws ValueNotEditableException,
+  public void setJavaClass(Class<?> newValue) throws ValueNotEditableException,
       WrongValueTypeException {
 
     setObject(newValue);
@@ -308,6 +308,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    * @see net.sf.mmm.value.api.GenericValue#getNumber(java.lang.Number,
    *      java.lang.Number)
    */
+  @SuppressWarnings("unchecked")
   public <T extends Number> T getNumber(T minimum, T maximum) throws ValueNotSetException,
       WrongValueTypeException, ValueOutOfRangeException {
 
@@ -324,6 +325,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    * @see net.sf.mmm.value.api.GenericValue#getNumber(java.lang.Number,
    *      java.lang.Number, java.lang.Number)
    */
+  @SuppressWarnings("unchecked")
   public <T extends Number> T getNumber(T minimum, T maximum, T defaultValue)
       throws WrongValueTypeException, ValueOutOfRangeException {
 

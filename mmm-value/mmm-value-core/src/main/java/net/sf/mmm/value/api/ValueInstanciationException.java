@@ -22,7 +22,7 @@ public class ValueInstanciationException extends ValueException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public ValueInstanciationException(Class javaClass, Throwable nested) {
+  public ValueInstanciationException(Class<?> javaClass, Throwable nested) {
 
     super(nested, CoreNlsResourceBundle.ERR_INSTANTIATION_FAILED, javaClass);
   }

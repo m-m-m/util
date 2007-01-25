@@ -27,6 +27,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
    * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#convertValue(java.lang.Class,
    *      java.lang.Object)
    */
+  @SuppressWarnings("unchecked")
   @Override
   protected <T> T convertValue(Class<T> type, String value) throws WrongValueTypeException {
 

@@ -316,9 +316,9 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * @see #getNumber(Number, Number, Number)
-   * @see #getInteger(int)
-   * @see #getLong(long)
-   * @see #getDouble(double)
+   * @see #getInteger(Integer)
+   * @see #getLong(Long)
+   * @see #getDouble(Double)
    * 
    * @param defaultValue
    *        is the default returned if this value {@link #isEmpty() is empty}.

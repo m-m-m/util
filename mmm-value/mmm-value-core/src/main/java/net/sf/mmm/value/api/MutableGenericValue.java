@@ -56,7 +56,7 @@ public interface MutableGenericValue extends GenericValue {
    * @throws WrongValueTypeException
    *         if the value is NO java-class.
    */
-  void setJavaClass(Class newValue) throws ValueNotEditableException, WrongValueTypeException;
+  void setJavaClass(Class<?> newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the value.
