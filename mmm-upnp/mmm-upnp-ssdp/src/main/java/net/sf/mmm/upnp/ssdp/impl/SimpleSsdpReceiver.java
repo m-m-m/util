@@ -6,6 +6,9 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import net.sf.mmm.upnp.ssdp.api.SsdpListener;
+import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
+
 /**
  * This is a simple implemetation of the
  * {@link net.sf.mmm.upnp.ssdp.api.SsdpReceiver} interface. It opens the
@@ -20,6 +23,9 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
 
   /**
    * The constructor
+   * 
+   * @see #initialize()
+   * @see #dispose()
    */
   public SimpleSsdpReceiver() {
 
@@ -27,9 +33,11 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
   }
 
   /**
+   * This method initializes this object. It needs to be called after
+   * construction and before the object can be used.
    * 
    * @throws IOException
-   *         if the operation failed I/O problem occured.
+   *         if the operation failed with an I/O problem.
    */
   @PostConstruct
   public void initialize() throws IOException {
@@ -38,13 +46,43 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
   }
 
   /**
+   * This method disposes this object. It should be called when this object is
+   * NOT used anymore. It will free allocated resources.
    * 
    * @throws IOException
+   *         if the operation failed with an I/O problem.
    */
   @PreDestroy
   public void dispose() throws IOException {
 
     disconnect();
+  }
+
+  /**
+   * @see net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver#addListener(net.sf.mmm.upnp.ssdp.api.SsdpListener)
+   */
+  @Override
+  public synchronized void addListener(SsdpListener listener) {
+
+    super.addListener(listener);
+  }
+
+  /**
+   * @see net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver#notifyListeners(net.sf.mmm.upnp.ssdp.api.SsdpRequest)
+   */
+  @Override
+  protected synchronized void notifyListeners(SsdpRequest request) {
+
+    super.notifyListeners(request);
+  }
+
+  /**
+   * @see net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver#removeListener(net.sf.mmm.upnp.ssdp.api.SsdpListener)
+   */
+  @Override
+  public synchronized void removeListener(SsdpListener listener) {
+
+    super.removeListener(listener);
   }
 
 }

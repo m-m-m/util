@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.upnp.ssdp.api;
 
+import net.sf.mmm.util.StringParser;
 import net.sf.mmm.util.http.HttpRequest;
 
 /**
@@ -15,13 +16,68 @@ import net.sf.mmm.util.http.HttpRequest;
 public class SsdpRequest extends HttpRequest {
 
   /** the URI to use for SSDP */
-  private static final String SSDP_URI = "*";
+  public static final String SSDP_URI = "*";
 
   /** the SSDP multicast address */
   public static final String MULTICAST_ADDRESS = "239.255.255.250";
 
   /** the SSDP multicast port */
   public static final int MULTICAST_PORT = 1900;
+
+  /** device available (register advertisment) */
+  public static final String NTS_SSDP_ALIVE = "ssdp:alive";
+
+  /** device unavailable (de-register advertisment) */
+  public static final String NTS_SSDP_BYEBYE = "ssdp:byebye";
+
+  /** proper man header */
+  public static final String MAN_SSDP_DISCOVER = "\"ssdp:discover\"";
+
+  /** st header */
+  public static final String ST_SSDP_ALL = "ssdp:all";
+
+  /**
+   * the default value for {@link #setCacheControlMaxAge(int) max-age}: 1800
+   * seconds (30 minutes).
+   */
+  public static final int MAX_AGE_DEFAULT = 30 * 60;
+
+  /**
+   * The identifier for the root-device.
+   * 
+   * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
+   * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
+   */
+  public static final String UPNP_ROOT_DEVICE = "upnp:rootdevice";
+
+  /**
+   * The prefix for the UUID.
+   * 
+   * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
+   * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
+   */
+  public static final String PREFIX_UUID = "uuid:";
+
+  /**
+   * The prefix for the device followed by <code>deviceType</code>:<code>version</code>.
+   * 
+   * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
+   * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
+   */
+  public static final String PREFIX_DEVICE = "urn:schemas-upnp-org:device:";
+
+  /**
+   * The prefix for the service followed by <code>serviceType</code>:<code>version</code>.
+   * 
+   * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
+   * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
+   */
+  public static final String PREFIX_SERVICE = "urn:schemas-upnp-org:service:";
+
+  /**
+   * The separator for the {@link #HEADER_PROPERTY_UNIQUE_SERVICE_NAME USN}.
+   */
+  public static final String USN_SEPARATOR = "::";
 
   /**
    * The {@link #getHeaderProperty(String) header-property} <code>NT</code>.
@@ -30,11 +86,22 @@ public class SsdpRequest extends HttpRequest {
 
   /**
    * The {@link #getHeaderProperty(String) header-property} <code>NTS</code>.
+   * Jep, it is NOT <code>NST</code> - this is correct.
    */
   public static final String HEADER_PROPERTY_NOTIFICATION_SUB_TYPE = "NTS";
 
   /**
    * The {@link #getHeaderProperty(String) header-property} <code>USN</code>.
+   * The value must be in the following form:<br>
+   * 
+   * <pre>
+   * {@link #PREFIX_UUID uuid:}<i>UUID</i>[{@link #USN_SEPARATOR ::}<i>suffix</i>]
+   * </pre>
+   * 
+   * where <code>UUID</code> is {@link java.util.UUID UUID} of the offered
+   * device or service and the <code>suffix</code> is one of
+   * {@link #UPNP_ROOT_DEVICE}, {@link #PREFIX_DEVICE}, or
+   * {@link #PREFIX_SERVICE}.
    */
   public static final String HEADER_PROPERTY_UNIQUE_SERVICE_NAME = "USN";
 
@@ -57,18 +124,6 @@ public class SsdpRequest extends HttpRequest {
    * The {@link #getHeaderProperty(String) header-property} <code>ST</code>.
    */
   public static final String HEADER_PROPERTY_SEARCH_TARGET = "ST";
-
-  /** device available (register advertisment) */
-  public static final String NTS_SSDP_ALIVE = "ssdp:alive";
-
-  /** device unavailable (de-register advertisment) */
-  public static final String NTS_SSDP_BYEBYE = "ssdp:byebye";
-
-  /** proper man header */
-  public static final String MAN_SSDP_DISCOVER = "\"ssdp:discover\"";
-
-  /** st header */
-  public static final String ST_SSDP_ALL = "ssdp:all";
 
   /**
    * This method sets the {@link #HEADER_PROPERTY_SEARCH_TARGET search-target}.
@@ -93,14 +148,24 @@ public class SsdpRequest extends HttpRequest {
 
   /**
    * The constructor
+   * 
+   * @see #initializeDefaults()
    */
   public SsdpRequest() {
 
     super();
+  }
+
+  /**
+   * This methods initializes the default settings for a typical SSDP request.
+   */
+  public void initializeDefaults() {
+
     setMethod(METHOD_NOTIFY);
     setUri(SSDP_URI);
     setHeaderProperty(HEADER_PROPERTY_HOST, MULTICAST_ADDRESS + ":" + MULTICAST_PORT);
     setNotificationSubType(NTS_SSDP_ALIVE);
+    setCacheControlMaxAge(1800);
   }
 
   /**
@@ -108,7 +173,7 @@ public class SsdpRequest extends HttpRequest {
    */
   @Override
   protected Object createHeaderNameHash(String name) {
-  
+
     return name.toUpperCase();
   }
 
@@ -201,6 +266,58 @@ public class SsdpRequest extends HttpRequest {
     buffer.append('/');
     buffer.append(productVersion);
     setHeaderProperty(HEADER_PROPERTY_SERVER, buffer.toString());
+  }
+
+  /**
+   * This method gets the product-name from the {@link #HEADER_PROPERTY_SERVER}.
+   * 
+   * @return the product-name or <code>null</code> if NOT set/available.
+   */
+  public String getServerProductName() {
+
+    // the SSDP specification is very unprecise here:
+    // we assume that names do NOT contain the character '/'
+    // and versions do NOT contain the whitespace character ' '.
+    String serverText = getHeaderProperty(HEADER_PROPERTY_SERVER);
+    if (serverText != null) {
+      StringParser parser = new StringParser(serverText);
+      boolean okay = parser.skipOver(" UPnP/", true);
+      if (okay) {
+        okay = parser.skipUntil(' ');
+        if (okay) {
+          return parser.readUntil('/', false);
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * This method gets the product-version from the
+   * {@link #HEADER_PROPERTY_SERVER}.
+   * 
+   * @return the product-version or <code>null</code> if NOT set/available.
+   */
+  public String getServerProductVersion() {
+
+    // the SSDP specification is very unprecise here:
+    // we assume that names do NOT contain the character '/'
+    // and versions do NOT contain the whitespace character ' '.
+    String serverText = getHeaderProperty(HEADER_PROPERTY_SERVER);
+    if (serverText != null) {
+      StringParser parser = new StringParser(serverText);
+      boolean okay = parser.skipOver(" UPnP/", true);
+      if (okay) {
+        okay = parser.skipUntil(' ');
+        if (okay) {
+          okay = parser.skipUntil('/');
+          if (okay) {
+            return parser.read(Integer.MAX_VALUE).trim();
+          }
+        }
+      }
+    }
+    return null;
   }
 
 }

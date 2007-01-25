@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.upnp.ssdp.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver;
+import net.sf.mmm.util.http.HttpParser;
 
 /**
  * This is the basic implemetation of the
@@ -49,6 +51,17 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     }
     this.listener = new MulticastListener();
     this.threadPool.execute(this.listener);
+  }
+
+  /**
+   * This method determines if this receiver is currently
+   * {@link #connect() connected}.
+   * 
+   * @return <code>true</code> if connected, <code>false</code> otherwise.
+   */
+  protected boolean isConnected() {
+
+    return (this.listener != null);
   }
 
   /**
@@ -147,8 +160,10 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
         try {
           this.socket.receive(packet);
           byte[] data = packet.getData();
-          //SsdpRequest request;
-          //notifyListeners(request);
+          ByteArrayInputStream stream = new ByteArrayInputStream(data);
+          SsdpRequest request = new SsdpRequest();
+          HttpParser.parseRequest(stream, request);
+          notifyListeners(request);
         } catch (IOException e) {
           // TODO: error handling!!!
           e.printStackTrace();

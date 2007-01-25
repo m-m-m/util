@@ -45,6 +45,17 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
   }
 
   /**
+   * This method gets the number of listeners currently
+   * {@link #addListener(SsdpListener) registered}.
+   * 
+   * @return the listener count.
+   */
+  public int getListenerCount() {
+
+    return this.listeners.size();
+  }
+
+  /**
    * This method {@link SsdpListener#receive(SsdpRequest) sends} the given
    * <code>request</code> to all {@link #addListener(SsdpListener) registered}
    * {@link SsdpListener listeners}.
