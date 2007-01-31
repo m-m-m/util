@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executor;
 
 import javax.annotation.Resource;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver;
+import net.sf.mmm.util.SimpleExecutor;
 import net.sf.mmm.util.http.HttpParser;
 
 /**
@@ -22,8 +23,8 @@ import net.sf.mmm.util.http.HttpParser;
  */
 public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
 
-  /** @see #setThreadPool(ExecutorService) */
-  private ExecutorService threadPool;
+  /** @see #setThreadPool(Executor) */
+  private Executor threadPool;
 
   /** @see #connect() */
   private MulticastListener listener;
@@ -48,6 +49,9 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
 
     if (this.listener != null) {
       throw new IllegalStateException("Connect called twice without disconnect!");
+    }
+    if (this.threadPool == null) {
+      this.threadPool = new SimpleExecutor();
     }
     this.listener = new MulticastListener();
     this.threadPool.execute(this.listener);
@@ -85,7 +89,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
    *        the threadPool to set.
    */
   @Resource
-  public void setThreadPool(ExecutorService executor) {
+  public void setThreadPool(Executor executor) {
 
     this.threadPool = executor;
   }
@@ -99,7 +103,10 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     private MulticastSocket socket;
 
     /** @see #run() */
-    private boolean listening;
+    private transient boolean listening;
+
+    /** @see #run() */
+    private transient boolean stopped;
 
     /** the internet address to listen to */
     private InetAddress address;
@@ -127,6 +134,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
 
       super();
       this.listening = true;
+      this.stopped = false;
       this.address = mutlicastAddress;
       this.socket = new MulticastSocket(SsdpRequest.MULTICAST_PORT);
       this.socket.joinGroup(this.address);
@@ -143,6 +151,20 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
       try {
         this.listening = false;
         this.socket.leaveGroup(this.address);
+        // receive blocks with synchronization lock so disconnect stalls for
+        // ever if nothing is received...
+        // this.socket.disconnect();
+        for (int retry = 0; retry < 3; retry++) {
+          if (this.stopped) {
+            System.out.println("stopped");
+            break;
+          } else {
+            try {
+              Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+          }
+        }
       } finally {
         this.socket.close();
         this.socket = null;
@@ -169,6 +191,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
           e.printStackTrace();
         }
       }
+      this.stopped = true;
     }
   }
 

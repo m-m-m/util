@@ -21,18 +21,68 @@
       <ul>
         <li><a href="http://maven.apache.org/guides/getting-started/index.html">getting started</a></li>
         <li><a href="http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">project layout</a></li>
-	<li>TODO</li>
       </ul>
       </p>
     </section>
     <section name="Code-Style">
-      <p>TODO (chekcstyle, etc.)</p>
-    </section>
-    <section name="Tests">
-      <p>TODO (surefire, *Test, JUnit)</p>
+      <p>The code produced by this project follows a common code-style.
+      To enforce the rules configurations for checkstyle and eclipse are 
+      provided (see <a href="setup-devel.html">Setup</a>). Further
+      there are additional rules to follow:
+      <ul>
+        <li>Names for classes and interfaces are english words that describe the type briefly.
+        They are in the typical caml case (e.g. AbstractWidget). Shortcuts and acronyms are
+        NOT capitalized as part of names (e.g. XmlUtil and NOT XMLUtil).</li>
+        <li>There are no artificial conventions for interfaces (like <code>I</code> as prefix 
+        or <code>IF</code> as suffix).</li>
+        <li>The code should be very well documented using javadoc. It does NOT help
+        just to satisfy checkstyle with some generated javadoc nonsense. Please help
+        to maintain the javadoc of the code and make it precise. Make intensive use
+        of the {@link FooClass} constructs to specify what you are talking about.
+        </li>
+      </ul>
+      </p>
     </section>
     <section name="Packages">
-      <p>TODO</p>
+      <p>The projects package namespace is <code>net.sf.mmm</code>.
+      All packages should be sub-packages of these namespace.
+      Each component declares a specific package (say <code>net.sf.mmm.foo</code>) 
+      and is devided into the following subpackages:
+      <ul>
+        <li><code>api</code><br/>
+        Contains the API of the component that should consist only of 
+        interfaces and exception classes. It may also contain classes 
+        like simple container objects (e.g. event-classes) or utilities.
+        </li>
+        <li><code>base</code><br/>
+        Contains the basic implementation of the API that is NOT intended to
+        be implemented in another way. It typically contains abstract classes.
+        Vendors that want to write a custom implementation of a component
+        are supposed to extend these classes rather than directly implementing 
+        the API interfaces. If in some specific circumstance the API hat to 
+        be changed (extended) compatibility can be gained by covering this in 
+        the base implementation.
+        </li>
+        <li><code>impl</code><br/>
+        Contains the implementation(s) of the component.
+        </li>
+      </ul>
+      Each of these sub-packages may be devided into further sub-sub-packages
+      (say <code>net.sf.mmm.foo.api.bar</code>) if desireable according to 
+      size and complexity. Users of a component should only use the API what 
+      can easily be checked via the import statements. This NOT only applies
+      to external users but also other components of this project, though
+      NOT always possible. A container framework is (to be) used for creating
+      the components from their implementation.
+      </p>
+    </section>
+    <section name="Tests">
+      <p>For each sub-project module tests should verify the integrity of the code.
+      Therefore JUnit and its extensions (e.g. XmlUnit) are used. Maven (surefire) 
+      is used to verify the unit-tests during the build process. The test-results
+      and test-coverage are generated as report per sub-project on the web-site.
+      It is hard to reach a high coverage but it should be a goal of the project
+      to increase the coverage continously.</p>
     </section>
   </body>
 </document>

@@ -39,16 +39,8 @@ svn --version
   "Tortoise SVN > checkout". With the commandline client go to the directory 
 	where you want to checkout and type:
           <source>
-svn co https://m-m-m.googlecode.com/svn/trunk
+svn co https://m-m-m.googlecode.com/svn/trunk mmm
           </source>
-  </li>
-  <li>Open a shell, go to the directory where you checked out the repository and call
-	the following command:
-          <source>
-mvn install
-          </source>
-    Be aware that on the first call maven will download "half of the internet" into your
-    local repository. This will take quite a while. Further calls will be reasonable fast.
   </li>
   <li>Install <a href="http://www.eclipse.org">eclipse</a> on your system.
 	You can use an IDE of your choice instead but eclipse is the only IDE supported
@@ -66,6 +58,20 @@ mvn install
   You may also install the 
   <a href="http://maven.apache.org/eclipse-plugin.html">m2eclipse plugin</a> if you 
 	like (current version 0.0.9 is NOT recommended).
+  </li>
+  <li>Open a shell and go to the directory where you checked out the repository and call
+  the following command:
+  <source>
+    setup
+  </source>
+  </li>
+  <li>Open a shell, go to the directory where you checked out the repository and call
+	the following command:
+          <source>
+mvn install
+          </source>
+    Be aware that on the first call maven will download "half of the internet" into your
+    local repository. This will take quite a while. Further calls will be reasonable fast.
   </li>
   <li>In your locally checked out repository invoke the <code>setup-all</code> script
 	in the folder <code>mmm-setup/scripts/&lt;my-os&gt;</code>.

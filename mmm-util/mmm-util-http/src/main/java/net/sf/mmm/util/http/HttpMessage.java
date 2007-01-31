@@ -547,12 +547,13 @@ public abstract class HttpMessage {
   protected abstract void writeFirstLine(StringBuffer buffer);
 
   /**
-   * @see java.lang.Object#toString()
+   * This method serializes this HTTP-message to the given string buffer.
+   * 
+   * @param buffer
+   *        is the string buffer where to append this HTTP-message to.
    */
-  @Override
-  public String toString() {
+  public void serialize(StringBuffer buffer) {
 
-    StringBuffer buffer = new StringBuffer();
     writeFirstLine(buffer);
     for (Object key : this.header.keySet()) {
       String value = this.header.get(key);
@@ -561,6 +562,16 @@ public abstract class HttpMessage {
       buffer.append(value);
       buffer.append(CRLF);
     }
+  }
+
+  /**
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+
+    StringBuffer buffer = new StringBuffer();
+    serialize(buffer);
     return buffer.toString();
   }
 

@@ -94,4 +94,4 @@ enable-auto-props = yes
 *.txt = svn:keywords=Id
 *.conf = svn:keywords=Id
 *.sh = svn:keywords=Id;svn:eol-style=LF;svn:executable
-
+*.bat = svn:keywords=Id;svn:eol-style=CRLF

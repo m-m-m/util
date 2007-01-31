@@ -1,6 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.upnp.ssdp.api;
 
+import java.io.IOException;
 
 /**
  * This is the interface for a sender of {@link SsdpRequest}s.
@@ -13,7 +14,10 @@ public interface SsdpSender {
    * This method sents the given <code>request</code> as multicast via UDP.
    * 
    * @param request
+   *        is the request to send.
+   * @throws IOException
+   *         if the operation failed with an I/O problem.
    */
-  void send(SsdpRequest request);
+  void send(SsdpRequest request) throws IOException;
 
 }

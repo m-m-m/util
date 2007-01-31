@@ -60,7 +60,7 @@ public class HttpParser {
         buffer[bufferIndex++] = (byte) c;
         if (bufferIndex == buffer.length) {
           String part = new String(buffer, 0, bufferIndex, charset);
-          if (stringBuffer != null) {
+          if (stringBuffer == null) {
             stringBuffer = new StringBuffer(part);
           } else {
             stringBuffer.append(part);
@@ -115,7 +115,7 @@ public class HttpParser {
         c = parser.forceNext();
         if (c == ':') {
           c = parser.forceNext();
-          parser.readWhile(CharFilter.WHITESPACE_FILTER);
+          parser.skipWhile(CharFilter.WHITESPACE_FILTER);
           currentProperty = property;
           String value = parser.read(Integer.MAX_VALUE);
           message.appendHeaderProperty(property, value);
@@ -159,8 +159,7 @@ public class HttpParser {
    *        is where to apply the parsed information to. Simply supply a new
    *        instance.
    * @param charset
-   *        is the charset used to convert the read bytes to strings. (TODO:
-   *        default to ASCII?)
+   *        is the charset used to convert the read bytes to strings.
    * @throws IOException
    *         if the operation failes with an I/O problem.
    */

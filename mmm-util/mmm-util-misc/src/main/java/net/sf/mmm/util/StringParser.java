@@ -6,6 +6,11 @@ import java.util.Locale;
 /**
  * This class represents a string together with a
  * {@link #getCurrentIndex() index position} in that string.<br>
+ * It has various useful methods for parsing strings. This parser is designed to
+ * be fast on long strings and therefore internally
+ * {@link String#toCharArray() converts} the given string to a char array
+ * instead of calling {@link String#charAt(int)}.<br>
+ * <b>ATTENTION:</b><br>
  * This implementation is NOT thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -68,9 +73,10 @@ public class StringParser {
   /**
    * @see java.lang.CharSequence#length()
    * 
-   * @return the total length of the string to parse.
+   * @return the total length of the
+   *         {@link #getOriginalString() string to parse}.
    */
-  public int length() {
+  public int getLength() {
 
     return this.chars.length;
   }
@@ -149,7 +155,7 @@ public class StringParser {
    * 
    * @param index
    *        is the next index position to set. The value has to be greater or
-   *        equal to <code>0</code> and less or equal to {@link #length()}.
+   *        equal to <code>0</code> and less or equal to {@link #getLength()}.
    */
   public void setCurrentIndex(int index) {
 
@@ -503,16 +509,16 @@ public class StringParser {
    * 
    * @param stop
    *        is the character to read until.
-   * @param escape
-   *        is the character used to escape the stop character (e.g. '\').
    * @param acceptEof
    *        if <code>true</code> EOF will be treated as <code>stop</code>,
    *        too.
+   * @param escape
+   *        is the character used to escape the stop character (e.g. '\').
    * @return the string with all read characters excluding the <code>stop</code>
    *         character or <code>null</code> if there was no <code>stop</code>
    *         character.
    */
-  public String readUntil(char stop, char escape, boolean acceptEof) {
+  public String readUntil(char stop, boolean acceptEof, char escape) {
 
     StringBuffer result = new StringBuffer();
     boolean escapeActive = false;
