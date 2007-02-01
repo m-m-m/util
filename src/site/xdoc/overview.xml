@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Overview</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Project overview">
+      <p>This project is seperated into many sub-projects. This page should help
+      you NOT to get lost.<br/>
+      <img src="images/components.png" alt="components" title="components"/></p>
+    </section>
+  </body>
+</document>

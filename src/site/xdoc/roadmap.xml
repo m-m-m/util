@@ -2,25 +2,22 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>MMM - Roadmap</title>
+    <title>Roadmap</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
   <body>
     <section name="Roadmap">
-      <p>This vision of mmm is to build an ECMS on top of the 
+      <p>This vision of mmm is to build an ECMS with 
+      <a href="mmm-content/index.html">mmm-content</a> on top of the 
       <a href="mmm-framework/index.html">mmm-framework</a> using the 
       <a href="mmm-uit/index.html">mmm-uit</a> and all the other useful modules.</p>
-      <p>I am currently active on the mmm-configuration and mmm-framework.
-      Therefore I am working on a first release of these modules.</p>
+      <p>There is still a long way to go. Anyhow the first sub-projects are about
+      to be released soon. This will include <a href="mmm-search/index.html">mmm-search</a>
+      and according parts of <a href="mmm-util/index.html">mmm-util</a>.</p>
       <p>The mmm-uit needs intensive improvements and web-support, etc.</p>
       <p>The ECMS content module (OO-database layer) is NOT yet available.
       It is still unclear if JCR (JSR 170) will be used as generic API, because it sucks.
-      I already designed an own API that is not yet checked into subversion.
-      Besides the generic API there will be an implementation that allows to have
-      JavaBeans as content objects that can be accessed directly in your custom code 
-      instead of using the generic API that is only an adaptor on the beans. This is the
-      oposite approach about what current (E)CMS systems offer.
       </p>
     </section>
   </body>

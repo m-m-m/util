@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Setup Eclipse</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Setup Eclipse">
+      The recommended IDE is <a href="http://www.eclipse.org">eclipse</a> 
+      because it is free and very popular. You can use an IDE of your 
+      choice instead but eclipse is the only IDE supported in this manual.
+      <subsection name="Installation">
+        Simply download and extract the latest release of eclipse and you
+        are ready to go. If you already use eclipse and want to use
+        a separate workspace for this project you can start eclipse
+        as following:
+        <source>
+          eclipse -data /some/other/workspace
+        </source>
+      </subsection>
+      <subsection name="Code Templates">
+        Go to <code>Window > Preferences > Java > Code Style > Code Templates</code>
+        and click the button <code>Import...</code>. Then choose the file
+        <code>mmm-setup/src/settings/eclipse/codetemplates.xml</code> and proceed.
+      </subsection>
+      <subsection name="Formatter">
+        Go to <code>Window > Preferences > Java > Code Style > Formatter</code>
+        and click the button <code>Import...</code>. Then choose the file
+        <code>mmm-setup/src/settings/eclipse/formatter.xml</code> and proceed.
+      </subsection>
+      <subsection name="Clean Up">
+        Go to <code>Window > Preferences > Java > Code Style > Clean Up</code>
+        and click the button <code>Import...</code>. Then choose the file
+        <code>mmm-setup/src/settings/eclipse/cleanup.xml</code> and proceed.
+      </subsection>
+    </section>
+  </body>
+</document>

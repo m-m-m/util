@@ -2,7 +2,7 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>MMM - Setup Development Environment</title>
+    <title>Setup Development Environment</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
@@ -11,8 +11,9 @@
       <p>
       To setup your development environment follow these steps:
       <ol>
-  <li>Install a <a href="http://java.sun.com">Java JDK</a> in version 1.5 or higher.
-	Open a shell and type the following command to verify your installation:
+  <li>Install a <a href="http://java.sun.com">Java JDK</a> in version 5 (1.5) or 
+  higher (6 is recommended). Open a shell and type the following command to 
+  verify your installation:
     <source>
 java -version
     </source>
@@ -64,17 +65,12 @@ svn co https://m-m-m.googlecode.com/svn/trunk mmm
   <source>
     setup
   </source>
-  </li>
-  <li>Open a shell, go to the directory where you checked out the repository and call
-	the following command:
-          <source>
-mvn install
-          </source>
-    Be aware that on the first call maven will download "half of the internet" into your
-    local repository. This will take quite a while. Further calls will be reasonable fast.
-  </li>
-  <li>In your locally checked out repository invoke the <code>setup-all</code> script
-	in the folder <code>mmm-setup/scripts/&lt;my-os&gt;</code>.
+  Follow the instructions of the script. It will call 
+  <code>mvn eclipse:eclipse -DdownloadSources=true</code> to generate the eclipse project 
+  configuration. When you import these projects into your eclipse workbench via 
+  "Import... > Existing Projects into Workspace" then select the toplevel directory of your
+  checked out repository. This will allow to import all sub-projects (there are many) in one 
+  step.
   </li>
       </ol>
       </p>

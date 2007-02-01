@@ -18,13 +18,15 @@
 	    <li>Never cast an object of the mmm API to a more specific type
 	    execpt you are permitted to do so by the API documentation.</li>
 	    <li>Never supply <code>null</code> as parameter to a method or 
-	    constructor exception you are permitted to do so by the API 
+	    constructor except if you are permitted to do so by the API 
 	    documentation. On the other hand you should never get <code>null</code>
 	    as result of a method except this is documented in the API.</li>
 	  </ul>
 	</p>
       </subsection>
       <subsection name="Tips">
+        For all <a href="overview.html">modules</a> of this project
+        you are intereseted in follow these hits:
         <ul>
           <li>Read the introductions.</li>
           <li>Read the tutorials.</li>

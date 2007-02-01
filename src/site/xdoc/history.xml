@@ -125,8 +125,8 @@
       <subsection name="2006-08-28">
         Moved the subversion repository from projxpert.com to googlecode.com. The service at projxpert was good
         and the hosting maby even a little faster. Anyways for an open-source project it is easier for others
-        to contribute since a google account is more common than a projxpert and the googlecode hosting service
-        is intended for open-source projects.
+        to contribute since a google account is more common than one for projxpert. 
+        Additionally the googlecode hosting service is intended for open-source projects.
       </subsection>
     </section>
   </body>

@@ -17,6 +17,7 @@
 
     <menu name="General Information" inherit="none">
       <item name="Introduction" href="index.html"/>
+      <item name="Overview" href="overview.html"/>
       <item name="Getting Involved" href="getting-involved.html"/>
       <item name="Road Map" href="roadmap.html"/>
       <item name="Release Notes" href="changes-report.html"/>

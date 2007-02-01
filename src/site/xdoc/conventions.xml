@@ -2,7 +2,7 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>MMM - Project Conventions</title>
+    <title>Project Conventions</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
@@ -35,7 +35,7 @@
         NOT capitalized as part of names (e.g. XmlUtil and NOT XMLUtil).</li>
         <li>There are no artificial conventions for interfaces (like <code>I</code> as prefix 
         or <code>IF</code> as suffix).</li>
-        <li>The code should be very well documented using javadoc. It does NOT help
+        <li>The code should be well documented using javadoc. It does NOT help
         just to satisfy checkstyle with some generated javadoc nonsense. Please help
         to maintain the javadoc of the code and make it precise. Make intensive use
         of the {@link FooClass} constructs to specify what you are talking about.
@@ -59,7 +59,7 @@
         be implemented in another way. It typically contains abstract classes.
         Vendors that want to write a custom implementation of a component
         are supposed to extend these classes rather than directly implementing 
-        the API interfaces. If in some specific circumstance the API hat to 
+        the API interfaces. If in some specific circumstance the API has to 
         be changed (extended) compatibility can be gained by covering this in 
         the base implementation.
         </li>
@@ -71,17 +71,18 @@
       (say <code>net.sf.mmm.foo.api.bar</code>) if desireable according to 
       size and complexity. Users of a component should only use the API what 
       can easily be checked via the import statements. This NOT only applies
-      to external users but also other components of this project, though
+      to external users but also to other components of this project, though
       NOT always possible. A container framework is (to be) used for creating
-      the components from their implementation.
+      the components from their implementation. Testcases or very simple applications
+      may directly create and setup a component from its implementation.
       </p>
     </section>
     <section name="Tests">
-      <p>For each sub-project module tests should verify the integrity of the code.
+      <p>For each sub-project module-tests should verify the integrity of the code.
       Therefore JUnit and its extensions (e.g. XmlUnit) are used. Maven (surefire) 
       is used to verify the unit-tests during the build process. The test-results
       and test-coverage are generated as report per sub-project on the web-site.
-      It is hard to reach a high coverage but it should be a goal of the project
+      It is hard to reach a high coverage but this is a goal of the project
       to increase the coverage continously.</p>
     </section>
   </body>
