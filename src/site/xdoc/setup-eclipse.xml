@@ -35,6 +35,9 @@
         and click the button <code>Import...</code>. Then choose the file
         <code>mmm-setup/src/settings/eclipse/cleanup.xml</code> and proceed.
       </subsection>
+      <subsection name="Compiler">
+        TODO
+      </subsection>
     </section>
   </body>
 </document>
