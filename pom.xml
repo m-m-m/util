@@ -59,7 +59,7 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <tagBase>https://m-m-m.googlecode.com/svn/tags</tagBase>
+          <tagBase>https://m-m-m.svn.sourceforge.net/svnroot/m-m-m/tags/</tagBase>
         </configuration>
       </plugin>
       <plugin>
@@ -197,10 +197,10 @@
     <url>http://sourceforge.net/tracker/?group_id=40062&#038;atid=427657</url>
   </issueManagement>
   <scm>
-    <connection>scm:svn:http://m-m-m.googlecode.com/svn/trunk</connection>
-    <developerConnection>scm:svn:https://m-m-m.googlecode.com/svn/trunk</developerConnection>
+    <connection>scm:svn:http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</connection>
+    <developerConnection>scm:svn:https://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</developerConnection>
     <tag/>
-    <url>http://m-m-m.googlecode.com/svn/trunk</url>
+    <url>http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</url>
   </scm>
   <distributionManagement>
     <site>
