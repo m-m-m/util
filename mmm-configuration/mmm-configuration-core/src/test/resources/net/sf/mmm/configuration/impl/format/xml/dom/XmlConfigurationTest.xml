@@ -2,9 +2,6 @@
 <!-- $Id$ -->
 <root xmlns:mmm="http://m-m-m.sf.net/namespaces/configuration">
   <mmm:context>
-  <!-- 
-    <mmm:variable name="net.sf.mmm.configuration.factory.default">xml</mmm:variable>
-  -->
     <mmm:variable name="server.port">8080</mmm:variable>
     <mmm:variable name="server.host">localhost</mmm:variable>
   </mmm:context>

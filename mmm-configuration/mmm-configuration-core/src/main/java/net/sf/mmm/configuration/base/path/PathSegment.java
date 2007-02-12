@@ -12,37 +12,25 @@ package net.sf.mmm.configuration.base.path;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PathSegment {
-
-  /**
-   * the segment string ({@link net.sf.mmm.configuration.api.Configuration#getName() name})
-   */
-  private String string;
-
-  /**
-   * if <code>true</code> the {@link #string} is a
-   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-   * that will be checked by the {@link #condition}.
-   */
-  private boolean isPattern;
+public class PathSegment extends SimplePathSegment {
 
   /**
    * the condition or <code>null</code> if any child is acceptable.
    */
-  private ConditionIF condition;
+  private Condition condition;
 
   /**
    * The constructor.
    * 
    * @param name
-   * @param isGlobPattern
+   *        is the {@link #getString() string} to match.
    * @param filter
+   *        is the additional {@link #getCondition() condition} or
+   *        <code>null</code>.
    */
-  public PathSegment(String name, boolean isGlobPattern, ConditionIF filter) {
+  public PathSegment(String name, Condition filter) {
 
-    super();
-    this.string = name;
-    this.isPattern = isGlobPattern;
+    super(name);
     this.condition = filter;
   }
 
@@ -51,48 +39,9 @@ public class PathSegment {
    * 
    * @return the condition.
    */
-  public ConditionIF getCondition() {
+  public Condition getCondition() {
 
     return this.condition;
-  }
-
-  /**
-   * This method determines if the {@link #getString() string} is a
-   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-   * that will be checked by the {@link #getCondition() condition}.
-   * 
-   * @return <code>true</code> if the {@link #getString() string} is a pattern
-   *         and <code>false</code> if it is a regular
-   *         {@link net.sf.mmm.configuration.api.Configuration#getName() name}.
-   */
-  public boolean isPattern() {
-
-    return this.isPattern;
-  }
-
-  /**
-   * This method gets the string. It is eigther a regular
-   * {@link net.sf.mmm.configuration.api.Configuration#getName() name} of the
-   * according
-   * {@link net.sf.mmm.configuration.api.Configuration configuration} or a
-   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-   * the {@link net.sf.mmm.configuration.api.Configuration#getName() name}
-   * must match.
-   * 
-   * @return the string.
-   */
-  public String getString() {
-
-    return this.string;
-  }
-
-  /**
-   * @see java.lang.Object#toString() 
-   */
-  @Override
-  public String toString() {
-
-    return this.string;
   }
 
 }

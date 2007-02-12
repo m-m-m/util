@@ -4,9 +4,11 @@ package net.sf.mmm.configuration.base;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
+import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.base.EmptyValue;
@@ -172,6 +174,15 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern, java.lang.String)
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespace) {
+  
+    return EmptyConfigurationIterator.getInstance();
+  }
+  
+  /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
    */
   @Override
@@ -195,6 +206,23 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
 
   }
 
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected void addSibling(AbstractConfiguration element) {
+  
+  }
+  
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected boolean removeSibling(AbstractConfiguration element) {
+  
+    return false;
+  }
+  
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
    */

@@ -7,11 +7,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.MutableConfiguration;
+import net.sf.mmm.configuration.base.iterator.ChildPatternIterator;
+import net.sf.mmm.configuration.base.iterator.ChildTypeIterator;
+import net.sf.mmm.configuration.base.iterator.SiblingIterator;
 
 /**
  * This is the abstract base implementation of the
@@ -22,11 +26,8 @@ import net.sf.mmm.configuration.api.MutableConfiguration;
  */
 public abstract class AbstractConfigurationElement extends BasicConfiguration {
 
-  /** the child elements */
-  private final Map<QName, List<AbstractConfiguration>> childElements;
-
   /** the child attributes */
-  private final Map<QName, AbstractConfiguration> childAttributes;
+  private final Map<QName, AbstractConfiguration> children;
 
   /**
    * The constructor.
@@ -37,8 +38,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   public AbstractConfigurationElement(AbstractConfiguration parentConfiguration) {
 
     super(parentConfiguration);
-    this.childElements = new HashMap<QName, List<AbstractConfiguration>>();
-    this.childAttributes = new HashMap<QName, AbstractConfiguration>();
+    this.children = new HashMap<QName, AbstractConfiguration>();
   }
 
   /**
@@ -90,14 +90,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
     }
     AbstractConfiguration child = null;
     QName qName = new QName(name, namespace);
-    if (name.charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
-      child = this.childAttributes.get(qName);
-    } else {
-      List<AbstractConfiguration> childList = getChildElementList(qName);
-      if (!childList.isEmpty()) {
-        child = childList.get(0);
-      }
-    }
+    child = this.children.get(qName);
     return child;
   }
 
@@ -108,20 +101,23 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   @Override
   AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
 
-    AbstractConfiguration child;
     QName qName = new QName(name, namespace);
+    AbstractConfiguration child = this.children.get(qName);
     if (name.charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
-      child = this.childAttributes.get(qName);
+      // does attribute already exist?
       if (child == null) {
         child = createChildAttribute(name, namespace);
-        this.childAttributes.put(qName, child);
       }
+      return child;
     } else {
-      List<AbstractConfiguration> childList = getChildElementList(qName);
-      child = createChildElement(name, namespace);
-      childList.add(child);
+      AbstractConfiguration newChild = createChildElement(name, namespace);
+      if (child == null) {
+        this.children.put(qName, newChild);
+      } else {
+        child.addSibling(newChild);
+      }
+      return newChild;
     }
-    return child;
   }
 
   /**
@@ -130,19 +126,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
 
-    switch (childType) {
-      case ELEMENT:
-        return new ChildIterator(null, this.childElements.values().iterator());
-      case ATTRIBUTE:
-        return new ChildIterator(this.childAttributes.values().iterator(), null);
-      default :
-        if (childType == null) {
-          return new ChildIterator(this.childAttributes.values().iterator(), this.childElements
-              .values().iterator());
-        } else {
-          throw new IllegalArgumentException();
-        }
-    }
+    return new ChildTypeIterator(this.children.values().iterator(), childType);
   }
 
   /**
@@ -199,19 +183,19 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
     if (ConfigurationDocument.NAMESPACE_URI_CONFIGURATION.equals(namespace)) {
       handleInternalChild(child);
     }
-    switch (child.getType()) {
-      case ATTRIBUTE:
-        if (this.childAttributes.containsKey(qName)) {
+    AbstractConfiguration existingChild = this.children.get(qName);
+    if (existingChild == null) {
+      this.children.put(qName, child);
+    } else {
+      switch (child.getType()) {
+        case ATTRIBUTE:
           throw new IllegalArgumentException("Duplicate Attribute: " + qName + " in " + this);
-        }
-        this.childAttributes.put(qName, child);
-        break;
-      case ELEMENT:
-        List<AbstractConfiguration> childList = getChildElementList(qName);
-        childList.add(child);
-        break;
-      default :
-        throw new IllegalArgumentException("unknown type for " + child);
+        case ELEMENT:
+          existingChild.addSibling(child);
+          break;
+        default :
+          throw new IllegalArgumentException("unknown type for " + child);
+      }
     }
   }
 
@@ -227,34 +211,25 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
     QName qName = new QName(child.getName(), child.getNamespaceUri());
     switch (child.getType()) {
       case ATTRIBUTE:
-        this.childAttributes.remove(qName);
+        this.children.remove(qName);
         break;
       case ELEMENT:
-        List<AbstractConfiguration> childList = getChildElementList(qName);
-        childList.remove(child);
+        AbstractConfiguration head = this.children.get(qName);
+        AbstractConfiguration following = head.getNextSibling();
+        head.removeSibling(child);
+        if (child == head) {
+          // remove first
+          // if there is only one element in the sibling list, remove it
+          if (following == child) {
+            this.children.remove(qName);
+          } else {
+            this.children.put(qName, following);
+          }
+        }
         break;
       default :
         throw new IllegalArgumentException("unknown type for " + child);
     }
-  }
-
-  /**
-   * This method gets the list of all child
-   * {@link Configuration.Type#ELEMENT elements} with the given
-   * {@link AbstractConfiguration#createQualifiedName(String, String) "qualified name"}.
-   * 
-   * @param qName
-   *        is the qualified name of the requested child list.
-   * @return the requested child list.
-   */
-  protected List<AbstractConfiguration> getChildElementList(QName qName) {
-
-    List<AbstractConfiguration> childList = this.childElements.get(qName);
-    if (childList == null) {
-      childList = new ArrayList<AbstractConfiguration>();
-      this.childElements.put(qName, childList);
-    }
-    return childList;
   }
 
   /**
@@ -265,25 +240,18 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
 
     QName qName = new QName(name, namespaceUri);
-    if (name.charAt(0) == NAME_PREFIX_ATTRIBUTE) {
-      AbstractConfiguration result = this.childAttributes.get(qName);
-      if (result == null) {
-        if ((namespaceUri != null) && (namespaceUri.equals(getNamespaceUri()))) {
-          result = this.childAttributes.get(new QName(name, NAMESPACE_URI_NONE));
-        }
-      }
-      if (result == null) {
-        return EmptyConfigurationIterator.getInstance();
-      } else {
-        return new SingleConfigurationIterator(result);
-      }
-    } else {
-      List<AbstractConfiguration> childList = this.childElements.get(qName);
-      if (childList == null) {
-        return EmptyConfigurationIterator.getInstance();
-      }
-      return childList.iterator();
-    }
+    AbstractConfiguration child = this.children.get(qName);
+    return new SiblingIterator(child);
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern,
+   *      java.lang.String)
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {
+
+    return new ChildPatternIterator(this.children.values().iterator(), namePattern, namespaceUri);
   }
 
 }

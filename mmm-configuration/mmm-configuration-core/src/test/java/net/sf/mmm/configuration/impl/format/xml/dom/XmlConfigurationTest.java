@@ -18,6 +18,7 @@ import net.sf.mmm.configuration.impl.access.file.FileAccess;
 import net.sf.mmm.configuration.impl.access.resource.ResourceAccess;
 import net.sf.mmm.configuration.impl.access.resource.ResourceAccessFactory;
 import net.sf.mmm.configuration.impl.access.url.UrlAccess;
+import net.sf.mmm.configuration.impl.format.AbstractConfigurationFormatTest;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.value.api.GenericValue;
@@ -25,7 +26,7 @@ import net.sf.mmm.value.api.GenericValue;
 import junit.framework.TestCase;
 
 /**
- * This is the test case for the
+ * This is the {@link TestCase test-case} for the
  * {@link net.sf.mmm.configuration.api.Configuration configuration}
  * implementation {@link net.sf.mmm.configuration.impl.format.xml.dom}.
  * 
@@ -45,22 +46,25 @@ public class XmlConfigurationTest extends TestCase {
     String href = XmlConfigurationTest.class.getName().replace('.', '/') + ".xml";
     ConfigurationAccess access = new ResourceAccess(href);
     ConfigurationFactory factory = new XmlFactory();
-    ConfigurationDocument xmlDoc = factory.create(access);
-    assertNotNull(xmlDoc);
-    Context context = xmlDoc.getContext();
+    ConfigurationDocument doc = factory.create(access);
+    assertNotNull(doc);
+    Context context = doc.getContext();
     assertNotNull(context);
     int port = context.getValue("server.port").getInteger();
     assertEquals(8080, port);
     String host = context.getValue("server.host").getString();
     assertEquals("localhost", host);
-    Configuration config = xmlDoc.getConfiguration();
+    Configuration config = doc.getConfiguration();
     assertNotNull(config);
     assertEquals("root", config.getName());
     Configuration portAttribute = config.getDescendant("server/@port");
     assertNotNull(portAttribute);
     assertEquals(port, portAttribute.getValue().getInteger());
     assertEquals(host, config.getDescendant("server/@host").getValue().getString());
-    Collection<? extends Configuration> serviceColl = config.getDescendants("server/service");
+    Configuration serviceAConf = config.getDescendant("server/service[@name=ServiceA]");
+    Configuration serviceAClassConf = serviceAConf.getDescendant("@class");
+    assertEquals(String.class, serviceAClassConf.getValue().getJavaClass());
+    Collection<? extends Configuration> serviceColl = config.getDescendants("server/service[@name=Service*]");
     assertEquals(5, serviceColl.size());
     int index = 0;
     for (Configuration serviceConf : serviceColl) {

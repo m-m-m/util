@@ -7,15 +7,20 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationNotEditableException;
-import net.sf.mmm.configuration.api.IllegalPathException;
+import net.sf.mmm.configuration.api.IllegalDescendantPathException;
 import net.sf.mmm.configuration.api.MutableConfiguration;
-import net.sf.mmm.configuration.base.path.ConditionIF;
-import net.sf.mmm.configuration.base.path.PathParser;
+import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
+import net.sf.mmm.configuration.base.path.Condition;
+import net.sf.mmm.configuration.base.path.DescendantPathParser;
 import net.sf.mmm.configuration.base.path.PathSegment;
+import net.sf.mmm.configuration.base.path.SimplePathSegment;
+import net.sf.mmm.util.ListCharFilter;
+import net.sf.mmm.util.StringParser;
 
 /**
  * This is the abstract base implementation of the
@@ -31,12 +36,28 @@ import net.sf.mmm.configuration.base.path.PathSegment;
  */
 public abstract class AbstractConfiguration implements MutableConfiguration {
 
+  /** filter that excepts all chars except those reserved for descendent path */
+  private static final ListCharFilter SEGMENT_FILTER = new ListCharFilter(false, PATH_SEPARATOR,
+      PATH_CONDITION_START, PATH_UNION, PATH_INTERSECTION);
+
+  /** filter that excepts all chars except those reserved for conditions */
+  private static final ListCharFilter CONDITION_FILTER = new ListCharFilter(false,
+      PATH_CONDITION_START, PATH_CONDITION_END, '=', '<', '>');
+
+  /** @see #getNextSibling() */
+  private AbstractConfiguration next;
+
+  /** @see #getPreviousSibling() */
+  private AbstractConfiguration previous;
+
   /**
    * The constructor.
    */
   public AbstractConfiguration() {
 
     super();
+    this.next = this;
+    this.previous = this;
   }
 
   /**
@@ -65,10 +86,75 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   public static QName createQualifiedName(String name, String namespace) {
 
     return new QName(name, namespace);
-    /*
-     * if ((namespace == null) || (NAMESPACE_URI_NONE.equals(namespace))) {
-     * return name; } else { return namespace + ":" + name; }
-     */
+  }
+
+  /**
+   * This method gets the next configuration sibling with the same
+   * {@link #getName() name} and {@link #getNamespaceUri() namespace}.<br>
+   * ATTENTION: the siblings are connected cyclically. Be careful to avoid
+   * infinity loops.
+   * 
+   * @return the next sibling or the <code>head</code> if this configuration
+   *         is the tail.
+   */
+  public final AbstractConfiguration getNextSibling() {
+
+    return this.next;
+  }
+
+  /**
+   * This method gets the previous configuration sibling with the same
+   * {@link #getName() name} and {@link #getNamespaceUri() namespace}.<br>
+   * ATTENTION: the siblings are connected cyclically. Be careful to avoid
+   * infinity loops.
+   * 
+   * @return the previous sibling or the <code>tail</code> if this
+   *         configuration is the head.
+   */
+  protected final AbstractConfiguration getPreviousSibling() {
+
+    return this.previous;
+  }
+
+  /**
+   * This method adds the given <code>element</code> as sibling to the tail.
+   * 
+   * @param element
+   *        is the element to add.
+   */
+  protected void addSibling(AbstractConfiguration element) {
+
+    element.previous = this.previous;
+    element.next = this;
+    this.previous.next = element;
+    this.previous = element;
+  }
+
+  /**
+   * This method removes the given <code>element</code> from the sibling list.
+   * 
+   * @param element
+   *        is the element to remove.
+   * @return <code>true</code> if the element was successfully removed from
+   *         the list.
+   */
+  protected boolean removeSibling(AbstractConfiguration element) {
+
+    AbstractConfiguration pointer = this;
+    while (pointer != element) {
+      pointer = pointer.next;
+      // did we reach the end of the sibling list?
+      if (pointer == this) {
+        break;
+      }
+    }
+    if (pointer == element) {
+      pointer.previous.next = pointer.next;
+      pointer.next.previous = pointer.previous;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -83,9 +169,9 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method gets the child with the given {@link #getName() name} in the
    * {@link #getNamespaceUri() namespace} of this configuration. If the
-   * requested child is to be an {@link Configuration.Type#ATTRIBUTE attribute} and no
-   * attribute exists in the {@link #getNamespaceUri() namespace}, the request
-   * defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
+   * requested child is to be an {@link Configuration.Type#ATTRIBUTE attribute}
+   * and no attribute exists in the {@link #getNamespaceUri() namespace}, the
+   * request defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
    * The method is ONLY applicable for configurations of the
    * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
@@ -94,12 +180,13 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else
+   *        {@link Configuration.Type#ELEMENT element}.
    * @return the requested child or <code>null</code> if no such child exists.
    * @throws ConfigurationException
    *         if applied to a configuration of the {@link #getType() type}
-   *         {@link Configuration.Type#ATTRIBUTE attribute} or the given <code>name</code>
-   *         or <code>namespace</code> has illegal syntax.
+   *         {@link Configuration.Type#ATTRIBUTE attribute} or the given
+   *         <code>name</code> or <code>namespace</code> has illegal syntax.
    */
   public AbstractConfiguration getChild(String name) {
 
@@ -124,21 +211,22 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else
+   *        {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the requested child.
    * @return the requested child or <code>null</code> if no such child exists.
    * @throws ConfigurationException
    *         if applied to a configuration of the {@link #getType() type}
-   *         {@link Configuration.Type#ATTRIBUTE attribute} or the given <code>name</code>
-   *         or <code>namespace</code> has illegal syntax.
+   *         {@link Configuration.Type#ATTRIBUTE attribute} or the given
+   *         <code>name</code> or <code>namespace</code> has illegal syntax.
    */
   public abstract AbstractConfiguration getChild(String name, String namespaceUri)
       throws ConfigurationException;
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#createChild(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   public AbstractConfiguration createChild(String name, String namespaceUri)
       throws ConfigurationException {
@@ -158,9 +246,9 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method creates the child with the given {@link #getName() name} and
    * {@link #getNamespaceUri() namespace}.<br>
-   * If the child to create is an {@link Configuration.Type#ATTRIBUTE attribute} that already
-   * exists, this method will NOT create a new attribute and return the existing
-   * one instead.
+   * If the child to create is an {@link Configuration.Type#ATTRIBUTE attribute}
+   * that already exists, this method will NOT create a new attribute and return
+   * the existing one instead.
    * 
    * @see net.sf.mmm.configuration.api.MutableConfiguration#createChild(java.lang.String,
    *      java.lang.String)
@@ -170,7 +258,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else
+   *        {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the child to create
    *        or <code>null</code> for default namespace.
@@ -195,7 +284,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else
+   *        {@link Configuration.Type#ELEMENT element}.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} of the requested child.
    * @return the requested child.
@@ -217,8 +307,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * This method gets an iterator of the child
-   * {@link Configuration configurations} with the given
-   * {@link #getType() type}.
+   * {@link Configuration configurations} with the given {@link #getType() type}.
    * 
    * @param childType
    *        is the {@link #getType() type} of the requested children or
@@ -229,26 +318,43 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * This method gets an iterator of the child
-   * {@link Configuration configurations} with the given <code>name</code>
-   * and <code>namespaceUri</code>.
+   * {@link Configuration configurations} whos {@link #getName() name} matches
+   * the given <code>namePattern</code> in the
+   * {@link #getNamespaceUri() namespace} of this configuration..
    * 
-   * @param name
-   *        is the {@link #getName() name} of the requested child. If the
-   *        <code>name</code> starts with the
-   *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
-   *        child has the {@link #getType() type}
-   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the requested child.
+   * @param namePattern
+   *        is a pattern that needs to be matched by the {@link #getName() name}
+   *        of the requested children.
    * @return an iterator containing the requested children.
    */
-  public abstract Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri);
+  public Iterator<AbstractConfiguration> getChildren(Pattern namePattern) {
+
+    return getChildren(namePattern, getNamespaceUri());
+  }
 
   /**
    * This method gets an iterator of the child
-   * {@link Configuration configurations} with the given
-   * {@link #getName() name} in the {@link #getNamespaceUri() namespace} of this
-   * configuration. If an {@link Configuration.Type#ATTRIBUTE attribute} is requested and no
+   * {@link Configuration configurations} whos {@link #getName() name} matches
+   * the given <code>namePattern</code> and whos
+   * {@link #getNamespaceUri() namespace-URI}
+   * {@link String#equals(Object) equals} the given <code>namespaceUri</code>.
+   * 
+   * @param namePattern
+   *        is a pattern that needs to be matched by the {@link #getName() name}
+   *        of the requested children.
+   * @param namespaceUri
+   *        is the {@link #getNamespaceUri() namespace} of the requested
+   *        children or <code>null</code> if the namespace should be ignored.
+   * @return an iterator containing the requested children.
+   */
+  public abstract Iterator<AbstractConfiguration> getChildren(Pattern namePattern,
+      String namespaceUri);
+
+  /**
+   * This method gets an iterator of the child
+   * {@link Configuration configurations} with the given {@link #getName() name}
+   * in the {@link #getNamespaceUri() namespace} of this configuration. If an
+   * {@link Configuration.Type#ATTRIBUTE attribute} is requested and no
    * attribute exists in the {@link #getNamespaceUri() namespace}, the request
    * defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
    * 
@@ -257,11 +363,14 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
-   *        {@link Configuration.Type#ATTRIBUTE attribute}, else {@link Configuration.Type#ELEMENT element}.
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else
+   *        {@link Configuration.Type#ELEMENT element}.
    * @return an iterator containing the requested children.
    */
   public Iterator<AbstractConfiguration> getChildren(String name) {
 
+    // TODO
+    // return getChildren(name, getNamespaceUri());
     String namespace = getNamespaceUri();
     if (name.charAt(0) == NAME_PREFIX_ATTRIBUTE) {
       AbstractConfiguration child = getChild(name);
@@ -276,6 +385,24 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
+   * This method gets an iterator of the child
+   * {@link Configuration configurations} with the given <code>name</code> and
+   * <code>namespaceUri</code>.
+   * 
+   * @param name
+   *        is the {@link #getName() name} of the requested child. If the
+   *        <code>name</code> starts with the
+   *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
+   *        child has the {@link #getType() type}
+   *        {@link Configuration.Type#ATTRIBUTE attribute}, else
+   *        {@link Configuration.Type#ELEMENT element}.
+   * @param namespaceUri
+   *        is the {@link #getNamespaceUri() namespace} of the requested child.
+   * @return an iterator containing the requested children.
+   */
+  public abstract Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri);
+
+  /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
    */
   public AbstractConfiguration getDescendant(String path) {
@@ -285,105 +412,57 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#getDescendant(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
-    char[] chars = path.toCharArray();
-    if (chars.length == 0) {
+    if (path.length() == 0) {
       throw new ConfigurationException("Illegal path!" + path);
     }
+    StringParser parser = new StringParser(path);
     AbstractConfiguration node = this;
-    int pos = 0;
-    int nameStart = 0;
-    char c = 0;
-    boolean todo = true;
-    while (todo) {
-      if (pos < chars.length) {
-        c = chars[pos++];
-      } else {
-        if (c == PATH_CONDITION_END) {
-
-        } else {
-          c = PATH_SEPARATOR;
-        }
-        pos++;
-        todo = false;
-      }
-      switch (c) {
-        case PATH_CONDITION_START:
-        case PATH_SEPARATOR:
-          int len = pos - nameStart - 1;
-          String childName = new String(chars, nameStart, len);
-          node = node.requireChild(childName, namespaceUri);
-          if (c == PATH_CONDITION_START) {
-            String conditionName = null;
-            String conditionValue = null;
-            int conditionStart = pos;
-            int eqCount = 0;
-            int valueStart = 0;
-            while (conditionValue == null) {
-              if (pos < chars.length) {
-                c = chars[pos++];
-              } else {
-                throw new ConfigurationException("Illegal path!" + path);
+    while (true) {
+      String childName = parser.readWhile(SEGMENT_FILTER);
+      char special = parser.forceNext();
+      if ((special == PATH_SEPARATOR) || (special == PATH_CONDITION_START) || (special == 0)) {
+        AbstractConfiguration descendant = node.requireChild(childName, namespaceUri);
+        if (special == PATH_CONDITION_START) {
+          // TODO: condition parser...
+          String conditionName = parser.readWhile(CONDITION_FILTER);
+          char c = parser.forceNext();
+          // only [@name=value] supported
+          if (c == '=') {
+            String conditionValue = parser.readUntil(PATH_CONDITION_END, false);
+            // TODO: parser does NOT need to be done here!!!
+            if ((!parser.hasNext()) && (conditionValue != null)) {
+              // condition syntax okay
+              AbstractConfiguration child;
+              Iterator<? extends AbstractConfiguration> it = descendant.getChildren(conditionName,
+                  namespaceUri);
+              while (it.hasNext()) {
+                child = it.next();
+                String value = child.getValue().getString(conditionValue);
+                if (conditionValue.equals(value)) {
+                  return descendant;
+                }
               }
-              switch (c) {
-                case '=':
-                  if (eqCount == 0) {
-                    len = pos - conditionStart - 1;
-                    conditionName = new String(chars, conditionStart, len);
-                  } else if (eqCount > 1) {
-                    throw new ConfigurationException("Illegal path!" + path);
-                  }
-                  eqCount++;
-                  valueStart = pos;
-                  break;
-                case PATH_CONDITION_END:
-                  if (conditionName == null) {
-                    throw new ConfigurationException("Illegal path!" + path);
-                  }
-                  len = pos - valueStart - 1;
-                  conditionValue = new String(chars, valueStart, len);
-                  // TODO:
-                  Iterator<? extends AbstractConfiguration> it = node.getChildren(childName,
-                      namespaceUri);
-                  while (it.hasNext()) {
-                    AbstractConfiguration child = it.next();
-                    String value = child.requireChild(childName, namespaceUri).getValue()
-                        .getString(conditionValue);
-                    if (conditionValue.equals(value)) {
-                      node = child;
-                      break;
-                    }
-                  }
-                  break;
-                case PATH_UNION:
-                case PATH_INTERSECTION:
-                case '*':
-                case '?':
-                case '<':
-                case '>':
-                case '!':
-                  throw new ConfigurationException("Illegal path!" + path);
-              }
+              descendant = node.createChild(childName, namespaceUri);
+              child = descendant.createChild(conditionName, namespaceUri);
+              child.getValue().getString(conditionValue);
+              return descendant;
             }
           }
-          nameStart = pos;
-          break;
-        case PATH_CONDITION_END:
-        case PATH_UNION:
-        case PATH_INTERSECTION:
-        case '*':
-        case '?':
-        case '=':
-        case '<':
-        case '>':
-        case '!':
+          // condition syntax was NOT correct...
           throw new ConfigurationException("Illegal path!" + path);
+        } else if (special == 0) {
+          return descendant;
+        }
+        node = descendant;
+      } else {
+        // special was illegal...
+        throw new ConfigurationException("Illegal path!" + path);
       }
     }
-    return node;
   }
 
   /**
@@ -396,21 +475,32 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.MutableConfiguration#getDescendants(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
-    PathParser parser = new PathParser(path);
+    StringParser parser = new StringParser(path);
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
+    List<SimplePathSegment> conditionSegments = new ArrayList<SimplePathSegment>();
+    // TODO: use collection that keeps the ordering of insertion!!!
     Set<AbstractConfiguration> resultSet = new HashSet<AbstractConfiguration>();
     char state = Configuration.PATH_UNION;
+    // TODO: also support intersections!
     while (state != 0) {
-      parser.parsePath(segmentList);
+      DescendantPathParser.parsePath(parser, segmentList, conditionSegments);
       addDescendants(segmentList, 0, resultSet);
       segmentList.clear();
-      state = parser.getState();
-      if ((state != PATH_UNION) && (state != 0)) {
-        throw new IllegalPathException(path);
+      if (parser.hasNext()) {
+        char c = parser.next();
+        if (c == PATH_UNION) {
+          state = c;
+        } else if (c == PATH_INTERSECTION) {
+          state = c;
+        } else {
+          throw new IllegalDescendantPathException(path);
+        }
+      } else {
+        state = 0;
       }
     }
     return resultSet;
@@ -432,17 +522,10 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
     Iterator<AbstractConfiguration> childIt;
     PathSegment segment = path.get(segmentIndex);
-    String name = segment.getString();
     if (segment.isPattern()) {
-      Type type;
-      if (name.charAt(0) == NAME_PREFIX_ATTRIBUTE) {
-        type = Type.ATTRIBUTE;
-      } else {
-        type = Type.ELEMENT;
-      }
-      childIt = getChildren(type);
+      childIt = getChildren(segment.getPattern());
     } else {
-      childIt = getChildren(name);
+      childIt = getChildren(segment.getString());
     }
     int nextIndex = segmentIndex + 1;
     boolean lastSegment;
@@ -451,10 +534,14 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     } else {
       lastSegment = false;
     }
-    ConditionIF condition = segment.getCondition();
+    Condition condition = segment.getCondition();
     while (childIt.hasNext()) {
       AbstractConfiguration child = childIt.next();
-      if ((condition == null) || (condition.accept(child))) {
+      boolean accept = true;
+      if (condition != null) {
+        accept = condition.accept(child);
+      }
+      if (accept) {
         if (lastSegment) {
           set.add(child);
         } else {
@@ -465,7 +552,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getPath() 
+   * @see net.sf.mmm.configuration.api.Configuration#getPath()
    */
   public final String getPath() {
 
@@ -610,7 +697,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see java.lang.Object#toString() 
+   * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {

@@ -3,6 +3,7 @@ package net.sf.mmm.configuration.base;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
@@ -46,7 +47,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName()
    */
   public String getName() {
 
@@ -78,7 +79,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getType() 
+   * @see net.sf.mmm.configuration.api.Configuration#getType()
    */
   public Type getType() {
 
@@ -105,7 +106,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
@@ -114,7 +115,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
@@ -123,7 +124,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(String,
-   *      String) 
+   *      String)
    */
   @Override
   public AbstractConfiguration doCreateChild(String name, String namespace)
@@ -134,7 +135,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespace)
@@ -145,12 +146,22 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
 
     return getDelegate().getChildren(name, namespaceUri);
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern,
+   *      java.lang.String)
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {
+
+    return getDelegate().getChildren(namePattern, namespaceUri);
   }
 
   /**

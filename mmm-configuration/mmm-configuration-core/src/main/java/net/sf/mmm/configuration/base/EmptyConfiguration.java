@@ -2,9 +2,11 @@
 package net.sf.mmm.configuration.base;
 
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
+import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.base.EmptyValue;
 
@@ -46,8 +48,25 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected void addSibling(AbstractConfiguration element) {
+
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected boolean removeSibling(AbstractConfiguration element) {
+
+    return false;
+  }
+
+  /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   AbstractConfiguration doCreateChild(String name, String namespaceUri)
@@ -117,13 +136,12 @@ public class EmptyConfiguration extends AbstractConfiguration {
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespaceUri)
       throws ConfigurationException {
 
-    // TODO Auto-generated method stub
     return null;
   }
 
@@ -133,21 +151,28 @@ public class EmptyConfiguration extends AbstractConfiguration {
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
 
-    // TODO Auto-generated method stub
-    return null;
+    return EmptyConfigurationIterator.getInstance();
   }
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
 
-    // TODO Auto-generated method stub
-    return null;
+    return EmptyConfigurationIterator.getInstance();
   }
 
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern, java.lang.String)
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespace) {
+  
+    return EmptyConfigurationIterator.getInstance();
+  }
+  
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
    */
@@ -169,7 +194,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName() 
+   * @see net.sf.mmm.configuration.api.Configuration#getName()
    */
   public String getName() {
 
@@ -186,7 +211,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getType() 
+   * @see net.sf.mmm.configuration.api.Configuration#getType()
    */
   public Type getType() {
 

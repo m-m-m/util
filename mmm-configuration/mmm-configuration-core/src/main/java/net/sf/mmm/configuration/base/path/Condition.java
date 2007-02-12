@@ -10,7 +10,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ConditionIF {
+public interface Condition {
 
   /**
    * This method determines if the given <code>configuration</code> is

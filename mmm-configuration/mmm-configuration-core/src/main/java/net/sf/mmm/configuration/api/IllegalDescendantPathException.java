@@ -11,7 +11,7 @@ package net.sf.mmm.configuration.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class IllegalPathException extends ConfigurationException {
+public class IllegalDescendantPathException extends ConfigurationException {
 
   /** uid for serialization */
   private static final long serialVersionUID = -4616110040377899931L;
@@ -22,7 +22,7 @@ public class IllegalPathException extends ConfigurationException {
    * @param path
    *        is the descendant path that is illegal.
    */
-  public IllegalPathException(String path) {
+  public IllegalDescendantPathException(String path) {
 
     this(path, null);
   }
@@ -35,7 +35,7 @@ public class IllegalPathException extends ConfigurationException {
    * @param nested
    *        is the throwable that caused this exception.
    */
-  public IllegalPathException(String path, Throwable nested) {
+  public IllegalDescendantPathException(String path, Throwable nested) {
 
     super(nested, "Illegal descendant path \"{0}\"!", path);
   }

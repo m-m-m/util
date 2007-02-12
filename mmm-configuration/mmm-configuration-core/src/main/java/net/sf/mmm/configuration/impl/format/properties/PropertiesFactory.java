@@ -39,7 +39,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   /** the default {@link PropertiesDocument#getSeparator() separator} */
   public static final String DEFAULT_SEPARATOR = ".";
 
-  /** the default {@link PropertiesDocument#getSeparator() separator} */
+  /** the default {@link PropertiesDocument#isFlat() flat-flag} */
   public static final boolean DEFAULT_FLAT = false;
 
   /** the {@link PropertiesDocument#isFlat() flat} flag */

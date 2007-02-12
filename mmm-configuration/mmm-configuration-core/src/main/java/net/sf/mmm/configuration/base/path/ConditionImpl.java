@@ -1,35 +1,28 @@
 /* $Id$ */
 package net.sf.mmm.configuration.base.path;
 
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.base.AbstractConfiguration;
+import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.GenericValue;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.api.Configuration} interface.
+ * This is the implementation of the {@link Condition} interface.<br>
+ * An example for a condition is <code>[foo/bar/@attr=value]</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ConditionImpl implements ConditionIF {
+public class ConditionImpl implements Condition {
 
-  /**
-   * the pattern the name must match or <code>null</code> if name does not
-   * matter.
-   */
-  private final Pattern namePattern;
+  /** the segments */
+  private final SimplePathSegment[] segments;
 
-  /** the name of the child to check or <code>null</code> no child to check */
-  private final String childName;
+  /** @see #getValue() */
+  private final String value;
 
-  /** the value of the child */
-  private final String childValue;
-
-  /**
-   * the pattern the name must match or <code>null</code> if name does not
-   * matter.
-   */
+  /** the value as pattern or <code>null</code> if name does not matter. */
   private final Pattern valuePattern;
 
   /**
@@ -41,90 +34,111 @@ public class ConditionImpl implements ConditionIF {
   /**
    * The constructor.
    * 
-   * @param nameGlobPattern
-   *        is the
-   *        {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-   *        the
-   *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}
-   *        must match or <code>null</code> if any name is acceptable.
+   * @param pathSegments
+   *        are the segments specifying the path to the descendant matched by
+   *        this condition.
    */
-  public ConditionImpl(Pattern nameGlobPattern) {
+  public ConditionImpl(SimplePathSegment[] pathSegments) {
 
-    this(nameGlobPattern, null, null, null, null);
+    super();
+    this.segments = pathSegments;
+    this.value = null;
+    this.comparator = null;
+    this.valuePattern = null;
   }
 
   /**
    * The constructor.
    * 
-   * @param nameGlobPattern
-   *        is the
-   *        {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}
-   *        the
-   *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}
-   *        must match or <code>null</code> if any name is acceptable.
-   * @param childsName
-   * @param childsValue
-   * @param childsValuePattern
+   * @param pathSegments
+   *        are the segments specifying the path to the descendant matched by
+   *        this condition.
+   * @param descendantValue
+   *        is the {@link #getValue() value} to compare the descendant with.
    * @param cmp
+   *        is the comparator defining how to compare the descendant with the
+   *        value.
    */
-  public ConditionImpl(Pattern nameGlobPattern, String childsName, String childsValue,
-      Pattern childsValuePattern, Comparator cmp) {
+  public ConditionImpl(SimplePathSegment[] pathSegments, String descendantValue, Comparator cmp) {
 
     super();
-    this.namePattern = nameGlobPattern;
-    this.childName = childsName;
-    this.childValue = childsValue;
+    this.segments = pathSegments;
+    this.value = descendantValue;
     this.comparator = cmp;
-    this.valuePattern = childsValuePattern;
+    this.valuePattern = StringUtil.compileGlobPattern(descendantValue, true);
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.ConditionIF#accept(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * This method recursively implements the accept method.
+   * 
+   * @param configuration
+   *        is the current configuration node.
+   * @param segmentIndex
+   *        is the current index in the segment-list.
+   * @return <code>true</code> if there is at least one path that matches.
+   */
+  private boolean accept(AbstractConfiguration configuration, int segmentIndex) {
+
+    SimplePathSegment segment = this.segments[segmentIndex];
+    Iterator<AbstractConfiguration> childIterator;
+    if (segment.isPattern()) {
+      childIterator = configuration.getChildren(segment.getPattern());
+    } else {
+      childIterator = configuration.getChildren(segment.getString());
+    }
+    int nextIndex = segmentIndex + 1;
+    while (childIterator.hasNext()) {
+      AbstractConfiguration child = childIterator.next();
+      if (nextIndex < this.segments.length) {
+        boolean acceptChild = accept(child, nextIndex);
+        if (acceptChild) {
+          return true;
+        }
+      } else {
+        GenericValue childValue = child.getValue();
+        if (childValue.isEmpty()) {
+          return false;
+        }
+        if (this.comparator == null) {
+          return true;
+        } else {
+          return this.comparator.accept(child.getValue(), this.value, this.valuePattern);
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.base.path.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   public boolean accept(AbstractConfiguration configuration) {
 
-    if (this.namePattern != null) {
-      if (!this.namePattern.matcher(configuration.getName()).matches()) {
-        return false;
-      }
-    }
-    if (this.childName == null) {
-      return true;
-    } else {
-      AbstractConfiguration child = configuration.getChild(this.childName);
-      if (child == null) {
-        return false;
-      }
-      GenericValue value = child.getValue();
-      if (value.isEmpty()) {
-        return false;
-      }
-      return this.comparator.accept(value, this.childValue, this.valuePattern);
-    }
-  }
-
-  /**
-   * This method gets the
-   * {@link net.sf.mmm.configuration.api.Configuration#getName() name} of the
-   * {@link AbstractConfiguration#getChild(String) child} to check.
-   * 
-   * @return the child name.
-   */
-  public String getChildName() {
-
-    return this.childName;
+    return accept(configuration, 0);
   }
 
   /**
    * This method gets the value to compare with the the
-   * {@link AbstractConfiguration#getChild(String) childs}
+   * {@link AbstractConfiguration#getChild(String) childrens}
    * {@link net.sf.mmm.configuration.api.Configuration#getValue() value}.
    * 
-   * @return the childs value.
+   * @return the childs value or <code>null</code> if only the existence of a
+   *         specific child is checked.
    */
-  public String getChildValue() {
+  public String getValue() {
 
-    return this.childValue;
+    return this.value;
+  }
+
+  /**
+   * The comparator used to compare the matching children in relation to
+   * {@link #getValue() child-value}.
+   * 
+   * @return the comparator.
+   */
+  public Comparator getComparator() {
+
+    return this.comparator;
   }
 
 }

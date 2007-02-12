@@ -2,8 +2,10 @@
 package net.sf.mmm.configuration.base;
 
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
+import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
 
 /**
  * This is the abstract base implementation of the
@@ -63,6 +65,15 @@ public abstract class AbstractConfigurationAttribute extends BasicConfiguration 
   }
 
   /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern, java.lang.String)
+   */
+  @Override
+  public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {
+  
+    return EmptyConfigurationIterator.getInstance();
+  }
+  
+  /**
    * @see AbstractConfiguration#doCreateChild(String, String)
    */
   @Override
@@ -88,5 +99,23 @@ public abstract class AbstractConfigurationAttribute extends BasicConfiguration 
 
     throw new ConfigurationException("Attribute cannot have children!");
   }
-
+ 
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected void addSibling(AbstractConfiguration element) {
+  
+    throw new ConfigurationException("Attribute cannot have siblings!");
+  }
+  
+  /**
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected boolean removeSibling(AbstractConfiguration element) {
+  
+    throw new ConfigurationException("Attribute cannot have siblings!");
+  }
+  
 }
