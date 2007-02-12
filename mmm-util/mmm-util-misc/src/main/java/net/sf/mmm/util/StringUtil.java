@@ -130,13 +130,38 @@ public final class StringUtil {
    */
   public static Pattern compileGlobPattern(String pattern) {
 
+    return compileGlobPattern(pattern, false);
+  }
+
+  /**
+   * This method compiles the given <code>pattern</code> to a
+   * {@link java.util.regex.Pattern} interpreting it as glob-pattern. In a
+   * glob-pattern only the wildcard characters "*" and "?" are treated special.
+   * The asterisk ("*") can match any string including the empty string and the
+   * questionmark ("?") can match any single character.
+   * 
+   * @param pattern
+   *        is the glob pattern to compile.
+   * @param requireWildcard -
+   *        if <code>true</code> the given <code>pattern</code> needs to
+   *        have a wildcard character in order to be compiled,
+   *        <code>false</code> otherwise.
+   * @return the compiled pattern or <code>null</code> if
+   *         <code>requireWildcard</code> is <code>true</code> but the given
+   *         <code>pattern</code> does NOT contain any wildcard.
+   */
+  public static Pattern compileGlobPattern(String pattern, boolean requireWildcard) {
+
     char[] chars = pattern.toCharArray();
-    StringBuffer buffer = new StringBuffer();
+    StringBuffer buffer = new StringBuffer(pattern.length() + 8);
+    boolean hasWildcard = false;
     for (int i = 0; i < chars.length; i++) {
       char c = chars[i];
       if (c == '*') {
+        hasWildcard = true;
         buffer.append(".*");
       } else if (c == '?') {
+        hasWildcard = true;
         buffer.append('.');
       } else if (c == '.') {
         buffer.append("\\.");
@@ -146,7 +171,11 @@ public final class StringUtil {
         buffer.append(c);
       }
     }
-    return Pattern.compile(buffer.toString());
+    if (requireWildcard && !hasWildcard) {
+      return null;
+    } else {
+      return Pattern.compile(buffer.toString());      
+    }
   }
 
   /**
@@ -154,9 +183,9 @@ public final class StringUtil {
    * number of digits padding it with leading zeros.<br>
    * Examples:
    * <ul>
-   *   <li><code>padNumber(5, 3)</code> will return <code>"005"</code></li>
-   *   <li><code>padNumber(25, 3)</code> will return <code>"025"</code></li>
-   *   <li><code>padNumber(100, 3)</code> will return <code>"100"</code></li>
+   * <li><code>padNumber(5, 3)</code> will return <code>"005"</code></li>
+   * <li><code>padNumber(25, 3)</code> will return <code>"025"</code></li>
+   * <li><code>padNumber(100, 3)</code> will return <code>"100"</code></li>
    * </ul>
    * 
    * @param number
@@ -169,7 +198,7 @@ public final class StringUtil {
    */
   public static String padNumber(long number, int digits) {
 
-    String result = Long.toString(number);    
+    String result = Long.toString(number);
     int leadingZeros = digits - result.length();
     if (leadingZeros > 0) {
       int capacity = result.length() + leadingZeros;

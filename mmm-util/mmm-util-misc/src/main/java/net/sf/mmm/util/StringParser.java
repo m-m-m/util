@@ -191,6 +191,25 @@ public class StringParser {
 
   /**
    * This method reads the {@link #getCurrentIndex() current}
+   * {@link #charAt(int) character} without incementing the
+   * {@link #getCurrentIndex() index}. If there is no character
+   * {@link #hasNext() available} this method will return <code>0</code> (the
+   * NULL character and NOT <code>'0'</code>).
+   * 
+   * @return the current character or <code>0</code> if none is
+   *         {@link #hasNext() available}.
+   */
+  public char forcePeek() {
+
+    if (this.pos < this.chars.length) {
+      return this.chars[this.pos];
+    } else {
+      return 0;
+    }
+  }
+
+  /**
+   * This method reads the {@link #getCurrentIndex() current}
    * {@link #charAt(int) character} and increments the
    * {@link #getCurrentIndex() index}. You need to {@link #hasNext() check} if
    * a character is available before calling this method.

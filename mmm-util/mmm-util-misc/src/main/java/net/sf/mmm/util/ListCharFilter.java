@@ -47,6 +47,8 @@ public class ListCharFilter implements CharFilter {
         if (this.blacklist) {
           // we found a blacklisted char
           return false;
+        } else {
+          return true;
         }
       }
     }
