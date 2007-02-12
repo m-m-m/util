@@ -26,7 +26,7 @@
     </section>
     <section name="Code-Style">
       <p>The code produced by this project follows a common code-style.
-      To enforce the rules configurations for checkstyle and eclipse are 
+      To check these rules, configurations for checkstyle and eclipse are 
       provided (see <a href="setup-devel.html">Setup</a>). Further
       there are additional rules to follow:
       <ul>
@@ -50,12 +50,12 @@
       and is devided into the following subpackages:
       <ul>
         <li><code>api</code><br/>
-        Contains the API of the component that should consist only of 
+        contains the API of the component that should consist only of 
         interfaces and exception classes. It may also contain classes 
         like simple container objects (e.g. event-classes) or utilities.
         </li>
         <li><code>base</code><br/>
-        Contains the basic implementation of the API that is NOT intended to
+        contains the basic implementation of the API that is NOT intended to
         be implemented in another way. It typically contains abstract classes.
         Vendors that want to write a custom implementation of a component
         are supposed to extend these classes rather than directly implementing 
@@ -64,7 +64,7 @@
         the base implementation.
         </li>
         <li><code>impl</code><br/>
-        Contains the implementation(s) of the component.
+        contains the implementation(s) of the component.
         </li>
       </ul>
       Each of these sub-packages may be devided into further sub-sub-packages
@@ -76,6 +76,76 @@
       the components from their implementation. Testcases or very simple applications
       may directly create and setup a component from its implementation.
       </p>
+    </section>    
+    <section name="Resources">
+      Java makes resource handling very easy. The tradeoff is that there are many 
+      common mistakes developers do because they stop thinking about resource 
+      management.
+      <subsection name="Streams">
+        If you deal with streams (InputStream, OutputStream, or related stuff) 
+        please be very careful to ensure they are closed properly.
+        Whenever an API method takes a stream as parameter, the javadoc must 
+        specifiy wheter the stream is closed or not. If you want to close
+        a stream make proper use of finally statements.
+        The following example does NOT always close streams properly:
+        <source>
+FileInputStream sourceStream = new FileInputStream(source);
+FileOutputStream destinationStream = new FileOutputStream(destination);
+FileChannel sourceChannel = sourceStream.getChannel();
+try {
+  sourceChannel.transferTo(0, sourceChannel.size(), destinationStream.getChannel());
+} finally {
+  destinationStream.close();
+  sourceStream.close();
+}
+        </source>
+        A correct version looks as following:
+        <source>
+FileInputStream sourceStream = new FileInputStream(source);
+try {
+  FileOutputStream destinationStream = new FileOutputStream(destination);
+  try {
+    FileChannel sourceChannel = sourceStream.getChannel();
+    sourceChannel.transferTo(0, sourceChannel.size(), destinationStream.getChannel());
+  } finally {
+    destinationStream.close();
+  }
+} finally {
+  sourceStream.close();
+}
+        </source>        
+      </subsection>      
+      <subsection name="Dereference">
+        The garbarge-collector is a fine thing, but anyways it does NOT prevent
+        you from creating memory-holes in your software. Therefore you should
+        carefully derefence objects that are no longer needed. This especially
+        applies to objects stored in collections. If you use a map to cache
+        objects you need to ensure that the cache size can only grow to a 
+        defined maximum and objects can still be dereferenced using weak- or
+        soft-references.
+      </subsection>  
+      <subsection name="Classpath-Resources">
+        If you want to load a resource from the classpath do NOT use
+        the following code-style:
+        <source>
+InputStream resourceStream = MyClass.class.getResourceAsStream("my-resource.xml");
+        </source>
+        This will NOT work properly in every environment such as
+        some application-servers or frameworks that deal with special 
+        class-loaders. Instead use <code>net.sf.mmm.util.resource.ClasspathResource</code>
+        as following:
+        <source>
+DataResource resource = new ClasspathResource(MyClass.class, "my-resource.xml", false);
+InputStream resourceStream = resource.openStream();
+        </source>
+      </subsection>
+    </section>    
+    <section name="Concurrency">
+      In non-functional programming languages it is NOT always easy to deal with 
+      cuncurrent access to shared objects. Please avoid static access to
+      non-final objects. If you design a class always consider if it is possible
+      to do something in a thread-safe way. On the other hand never assume that 
+      some implementation is thread-safe if NOT explicitly specified in the javadoc.
     </section>
     <section name="Tests">
       <p>For each sub-project module-tests should verify the integrity of the code.
