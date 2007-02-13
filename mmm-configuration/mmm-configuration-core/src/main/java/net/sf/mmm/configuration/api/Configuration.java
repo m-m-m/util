@@ -146,6 +146,9 @@ public interface Configuration extends
    */
   char PATH_THIS = '.';
 
+  /** @see #PATH_THIS */
+  String PATH_THIS_STRING = String.valueOf(PATH_THIS);
+
   /**
    * The character used in as wildcard for
    * {@link #getDescendants(String, String) descendants}.
@@ -311,50 +314,61 @@ public interface Configuration extends
    * {@link Type#ATTRIBUTE attribute} can NOT have children, this method only
    * makes sense for configurations of the {@link #getType() type}
    * {@link Type#ELEMENT element}.<br>
-   * This method will always return a configuration. If this method is applied
-   * to an {@link Type#ELEMENT element} where the given <code>path</code> does
-   * NOT point to an existing configuration, the according configurations will
-   * be created similar to an {@link java.io.File#mkdirs() mkdirs} operation.<br>
    * The given <code>path</code> identifies the requested descendant relative
    * to this configuration in a way similar to XPath.
    * <ul>
-   * <li><code>element.{@link #getDescendant(String) getDescendant}("{@link #PATH_THIS .}")
+   * <li><code>element.{@link #getDescendant(String) getDescendant}({@link #PATH_THIS "."})</code>
    * is the same as <code>element</code>.</li>
    * <li><code>element.{@link #getDescendant(String, String) getDescendant}("child", ns)</code>
    * gets the first child with the {@link #getType() type}
    * {@link Type#ELEMENT element} that has the {@link #getName() name}
-   * "child" and {@link #getNamespaceUri() namespace} <code>ns</code>.</li>
+   * <code>child</code> and {@link #getNamespaceUri() namespace}
+   * <code>ns</code>.</li>
    * <li><code>element.{@link #getDescendant(String) getDescendant}("@attribute", ns)</code>
    * gets the child with the {@link #getType() type}
    * {@link Type#ATTRIBUTE attribute} that has the {@link #getName() name}
-   * "@attribute" and {@link #getNamespaceUri() namespace} <code>ns</code>.</li>
+   * <code>&#64;attribute</code> and {@link #getNamespaceUri() namespace}
+   * <code>ns</code>.</li>
    * <li><code>element.{@link #getDescendant(String, String) getDescendant}("child[@attribute='value']", ns)</code>
    * gets the (first) child with the {@link #getType() type}
    * {@link Type#ELEMENT element} that has the {@link #getName() name}
-   * "child", {@link #getNamespaceUri() namespace} <code>ns</code> and has an {@link Type#ATTRIBUTE attribute} named "@attribute" that has the value "value".</li>
+   * <code>child</code>, {@link #getNamespaceUri() namespace} <code>ns</code>
+   * and has an {@link Type#ATTRIBUTE attribute} named
+   * <code>&#64;attribute</code> that has the value <code>value</code>. The
+   * expression in brackets (here <code>&#64;attribute='value'</code>) is
+   * called condition.</li>
    * <li><code>element.{@link #getDescendant(String, String) getDescendant}(name+"{@link #PATH_SEPARATOR /}"+path, ns)</code>
    * is the same as
    * <code>element.{@link #getDescendant(String, String) getDescendant}(name, ns).{@link #getDescendant(String) getDescendant}(path)</code>.</li>
    * </ul>
+   * <b>ATTENTION:</b><br>
+   * This method will always return a configuration. If this method is applied
+   * to an {@link Type#ELEMENT element} where the given <code>path</code> does
+   * NOT point to an existing configuration, the according configurations will
+   * be created similar to an {@link java.io.File#mkdirs() mkdirs} operation.<br>
+   * <b>ATTENTION:</b><br>
+   * The <code>path</code> must follow the specification above. It can NOT be
+   * any XPath expression.
+   * 
+   * @see #getDescendants(String, String)
    * 
    * @param path
    *        is the relative {@link Configuration#getPath() path} from this
    *        configuration to the requested descendant.
    * @param namespaceUri
    *        is the {@link #getNamespaceUri() namespace} used to resolve the
-   *        descendant. May be <code>null</code> to match any namespace. Then, if the 
-   *        requested descendant does NOT exists anyways, the created descendant(s) will
-   *        inherit the {@link #getNamespaceUri() namespace} from the existing parent.
-   *        To resolve a descendant with multiple
-   *        {@link #getNamespaceUri() namespaces} on its <code>path</code> explicitly 
-   *        you have to use multiple calls of this method. 
-   *        If the requested
-   *        descendant is an {@link Type#ATTRIBUTE attribute} and the given
-   *        <code>namespaceUri</code> equals to the
+   *        descendant. May be <code>null</code> to match any namespace. Then,
+   *        if the requested descendant does NOT exists anyways, the created
+   *        descendant(s) will inherit the {@link #getNamespaceUri() namespace}
+   *        from the existing parent. To resolve a descendant with multiple
+   *        {@link #getNamespaceUri() namespaces} on its <code>path</code>
+   *        explicitly you have to use multiple calls of this method. If the
+   *        requested descendant is an {@link Type#ATTRIBUTE attribute} and the
+   *        given <code>namespaceUri</code> equals to the
    *        {@link #getNamespaceUri() namespace} of <code>this</code>
-   *        configuration, but no {@link Type#ATTRIBUTE attribute} as
-   *        requested exists, the {@link #getNamespaceUri() namespace}
-   *        defaults to {@link #NAMESPACE_URI_NONE NO namespace}. If no such attribute 
+   *        configuration, but no {@link Type#ATTRIBUTE attribute} as requested
+   *        exists, the {@link #getNamespaceUri() namespace} defaults to
+   *        {@link #NAMESPACE_URI_NONE NO namespace}. If no such attribute
    *        exists eigther, it will be created with
    *        {@link #NAMESPACE_URI_NONE NO namespace}.
    * @return the descendant for the given path.
@@ -379,20 +393,34 @@ public interface Configuration extends
    * that exist for the given path. While {@link #getDescendant(String, String)}
    * will create missing configurations, this method will NOT modify
    * configurations in any way. It only returns what is already there.<br>
-   * In addition to {@link #getDescendant(String, String)} you can combine
-   * multiple paths with '|' and '&' in the <code>path</code> argument of this
-   * method with the following meaning:
+   * In addition to {@link #getDescendant(String, String)} you can use
+   * glob-patterns in segments/condition-values and use other conditions
+   * operators ('<', '>', '<=', '>=', '!='). Examples:<br>
    * <ul>
-   * <li>"path1|path2" returns the union set that contains all matches of
-   * "path1" and "path2"</li>
-   * <li>"path1&path2" returns the intersection set that contains only the
-   * matches found by "path1" and "path2"</li>
+   * <li><code>*[@*='foo*']</code> leads to all elements that have an
+   * attribute whos value starts with <code>foo</code>.</li>
+   * <li><code>foo[@bar>5]</code> leads to all elements named
+   * <code>foo</code> that have an attribute <code>bar</code> whos value is
+   * a number greater than <code>5</code>.</li>
+   * </ul>
+   * 
+   * Further you combine multiple paths with '|' and '&' in the
+   * <code>path</code> argument of this method with the following meaning:
+   * <ul>
+   * <li><code>path1|path2</code> returns the union set that contains all
+   * matches of <code>path1</code> and <code>path2</code>.</li>
+   * <li><code>path1&path2</code> returns the intersection set that contains
+   * only the matches found by <code>path1</code> and <code>path2</code>.</li>
    * </ul>
    * The ordering of the returned configurations in general is unspecified. Only
    * {@link Type#ELEMENT elements} with the same {@link #getName() name} should
    * be iterated in the order of their occurence in the underlying configuration
    * format (e.g. XML-document) and according to the order of the matching
-   * expression in the given <code>path</code>.
+   * expression in the given <code>path</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * The <code>path</code> must follow the specification above. It can NOT be
+   * any XPath expression. Especially there is no support for <code>//</code>
+   * or functions (such as <code>count()</code>).
    * 
    * @param path
    *        is the relative {@link Configuration#getPath() path} from this

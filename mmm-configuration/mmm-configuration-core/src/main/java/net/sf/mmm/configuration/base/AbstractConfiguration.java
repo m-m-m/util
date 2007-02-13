@@ -15,8 +15,11 @@ import net.sf.mmm.configuration.api.ConfigurationNotEditableException;
 import net.sf.mmm.configuration.api.IllegalDescendantPathException;
 import net.sf.mmm.configuration.api.MutableConfiguration;
 import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
+import net.sf.mmm.configuration.base.iterator.SiblingIterator;
 import net.sf.mmm.configuration.base.path.Condition;
+import net.sf.mmm.configuration.base.path.ConditionImpl;
 import net.sf.mmm.configuration.base.path.DescendantPathParser;
+import net.sf.mmm.configuration.base.path.DescendantPathWalker;
 import net.sf.mmm.configuration.base.path.PathSegment;
 import net.sf.mmm.configuration.base.path.SimplePathSegment;
 import net.sf.mmm.util.ListCharFilter;
@@ -171,7 +174,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * {@link #getNamespaceUri() namespace} of this configuration. If the
    * requested child is to be an {@link Configuration.Type#ATTRIBUTE attribute}
    * and no attribute exists in the {@link #getNamespaceUri() namespace}, the
-   * request defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
+   * request defaults to {@link #NAMESPACE_URI_NONE NO}
+   * {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
    * The method is ONLY applicable for configurations of the
    * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
@@ -194,7 +198,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     AbstractConfiguration result = getChild(name, namespace);
     if (result == null) {
       if ((name.charAt(0) == NAME_PREFIX_ATTRIBUTE) && !NAMESPACE_URI_NONE.equals(namespace)) {
-        result = getChild(name, null);
+        result = getChild(name, NAMESPACE_URI_NONE);
       }
     }
     return result;
@@ -371,6 +375,9 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
     // TODO
     // return getChildren(name, getNamespaceUri());
+    if (name.length() == 0) {
+      throw new IllegalArgumentException("Child name empty!");
+    }
     String namespace = getNamespaceUri();
     if (name.charAt(0) == NAME_PREFIX_ATTRIBUTE) {
       AbstractConfiguration child = getChild(name);
@@ -400,7 +407,10 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *        is the {@link #getNamespaceUri() namespace} of the requested child.
    * @return an iterator containing the requested children.
    */
-  public abstract Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri);
+  public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
+
+    return new SiblingIterator(getChild(name, namespaceUri));
+  }
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
@@ -415,6 +425,49 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    *      java.lang.String)
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
+
+    if (path.equals(PATH_THIS_STRING)) {
+      return this;
+    }
+    // This one is a little tricky:
+    // if the given path does NOT already exist we need to find the
+    // deepest part of the path that does exist...
+
+    // path: /foo/bar[x='5']/child
+    // example config:
+    // <foo id="1"/>
+    // <foo id="2">
+    // <bar id="3" x="4"/>
+    // </foo>
+    // <foo id="4">
+    // <bar id="5" x="5"/>
+    // <bar id="6" x="5"/>
+    // </foo>
+
+    // parse the given descendant path
+    StringParser parser = new StringParser(path);
+    PathSegment[] pathSegments = DescendantPathParser.parsePath(parser, true);
+    if (parser.hasNext() || pathSegments.length == 0) {
+      throw new IllegalDescendantPathException(path);
+    }
+    return DescendantPathWalker.getDescendant(this, namespaceUri, pathSegments);
+    /*
+     * AbstractConfiguration descendant = this; for (int segmentIndex = 0;
+     * segmentIndex < pathSegments.length; segmentIndex++) { PathSegment segment =
+     * pathSegments[segmentIndex]; Iterator<AbstractConfiguration>
+     * childIterator = descendant.getChildren(segment.getString(),
+     * namespaceUri); int bestIndex = -1; AbstractConfiguration bestChild =
+     * null; while (childIterator.hasNext()) { AbstractConfiguration child =
+     * childIterator.next(); if (segment.getCondition().accept(child)) { //
+     * forecast for (int i = segmentIndex + 1; i < pathSegments.length; i++) {
+     * PathSegment forecastSegment = pathSegments[i];
+     * 
+     * AbstractConfiguration lookahead = childIterator.next(); } } } } return
+     * descendant;
+     */
+  }
+
+  public AbstractConfiguration getDescendantOld(String path, String namespaceUri) {
 
     if (path.length() == 0) {
       throw new ConfigurationException("Illegal path!" + path);
@@ -487,7 +540,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     char state = Configuration.PATH_UNION;
     // TODO: also support intersections!
     while (state != 0) {
-      DescendantPathParser.parsePath(parser, segmentList, conditionSegments);
+      DescendantPathParser.parsePath(parser, segmentList, false, conditionSegments);
       addDescendants(segmentList, 0, resultSet);
       segmentList.clear();
       if (parser.hasNext()) {
@@ -534,14 +587,9 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     } else {
       lastSegment = false;
     }
-    Condition condition = segment.getCondition();
     while (childIt.hasNext()) {
       AbstractConfiguration child = childIt.next();
-      boolean accept = true;
-      if (condition != null) {
-        accept = condition.accept(child);
-      }
-      if (accept) {
+      if (segment.getCondition().accept(child)) {
         if (lastSegment) {
           set.add(child);
         } else {

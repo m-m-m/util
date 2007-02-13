@@ -12,6 +12,15 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
  */
 public interface Condition {
 
+  /** a condition that always accepts */
+  Condition EMPTY_CONDITION = new Condition() {
+
+    public boolean accept(AbstractConfiguration configuration) {
+
+      return true;
+    }
+  };
+
   /**
    * This method determines if the given <code>configuration</code> is
    * accepted for this condition.

@@ -47,6 +47,7 @@ public class ComparatorManager {
 
     Comparator result = this.comparators.get(symbol);
     if (result == null) {
+      // TODO: i18n
       throw new ConfigurationException("Undefined comparator symbol " + symbol);
     }
     return result;

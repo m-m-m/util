@@ -15,7 +15,6 @@ import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.MutableConfiguration;
 import net.sf.mmm.configuration.base.iterator.ChildPatternIterator;
 import net.sf.mmm.configuration.base.iterator.ChildTypeIterator;
-import net.sf.mmm.configuration.base.iterator.SiblingIterator;
 
 /**
  * This is the abstract base implementation of the
@@ -82,15 +81,19 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
    *      java.lang.String)
    */
   @Override
-  public AbstractConfiguration getChild(String name, String namespace)
+  public AbstractConfiguration getChild(String name, String namespaceUri)
       throws ConfigurationException {
 
     if (name.length() == 0) {
       throw new ConfigurationException("Child name must not be empty!");
     }
-    AbstractConfiguration child = null;
-    QName qName = new QName(name, namespace);
-    child = this.children.get(qName);
+    QName qName = new QName(name, namespaceUri);
+    AbstractConfiguration child = this.children.get(qName);
+    if ((child == null) && (namespaceUri != null) && (namespaceUri.equals(getNamespaceUri()))
+        && name.charAt(0) == NAME_PREFIX_ATTRIBUTE) {
+      qName = new QName(name, NAMESPACE_URI_NONE);
+      child = this.children.get(qName);
+    }
     return child;
   }
 
@@ -107,6 +110,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
       // does attribute already exist?
       if (child == null) {
         child = createChildAttribute(name, namespace);
+        this.children.put(qName, child);
       }
       return child;
     } else {
@@ -230,18 +234,6 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
       default :
         throw new IllegalArgumentException("unknown type for " + child);
     }
-  }
-
-  /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String)
-   */
-  @Override
-  public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
-
-    QName qName = new QName(name, namespaceUri);
-    AbstractConfiguration child = this.children.get(qName);
-    return new SiblingIterator(child);
   }
 
   /**

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base.path;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.configuration.api.Configuration;
@@ -11,8 +12,10 @@ import net.sf.mmm.util.ListCharFilter;
 import net.sf.mmm.util.StringParser;
 
 /**
- * This is a parser for
- * {@link Configuration#getDescendants(String, String) descendant-paths}.
+ * This is a parser for descendant-paths.
+ * 
+ * @see Configuration#getDescendant(String, String)
+ * @see Configuration#getDescendants(String, String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,9 +31,8 @@ public class DescendantPathParser {
 
   /**
    * The constructor
-   * 
    */
-  public DescendantPathParser() {
+  private DescendantPathParser() {
 
     super();
   }
@@ -46,9 +48,15 @@ public class DescendantPathParser {
    *        character after {@link Configuration#PATH_CONDITION_START}.
    * @param segmentList
    *        is a list used to collect path segments.
+   * @param strict -
+   *        if <code>true</code> the path is parsed
+   *        {@link Configuration#getDescendant(String, String) strict}, if
+   *        <code>false</code> wildcards and advanced conditions are
+   *        permitted.
    * @return the parsed condition.
    */
-  public static Condition parseCondition(StringParser parser, List<SimplePathSegment> segmentList) {
+  public static Condition parseCondition(StringParser parser, List<SimplePathSegment> segmentList,
+      boolean strict) {
 
     segmentList.clear();
     char c = Configuration.PATH_SEPARATOR;
@@ -67,7 +75,15 @@ public class DescendantPathParser {
         throw new IllegalDescendantPathException(parser.getOriginalString());
       }
       Comparator comparator = ComparatorManager.getInstance().getComparator(operator);
-      condition = new ConditionImpl(segments, value, comparator);
+      if (strict && !EqualsComparator.SYMBOL.equals(comparator.getSymbol())) {
+        throw new IllegalDescendantPathException(parser.getOriginalString());
+      }
+      ConditionImpl cond = new ConditionImpl(segments, value, comparator);
+      if (strict && cond.isValuePattern()) {
+        throw new IllegalDescendantPathException(parser.getOriginalString());
+      }
+      condition = cond;
+
     } else {
       condition = new ConditionImpl(segments);
       c = parser.forceNext();
@@ -89,41 +105,86 @@ public class DescendantPathParser {
    *        is the string to parse at the current state.
    * @param segmentList
    *        is a list used to collect path segments.
+   * @param strict -
+   *        if <code>true</code> the path is parsed
+   *        {@link Configuration#getDescendant(String, String) strict}, if
+   *        <code>false</code> wildcards and advanced conditions are
+   *        permitted.
    * @return the parsed segment.
    */
-  public static PathSegment parseSegment(StringParser parser, List<SimplePathSegment> segmentList) {
+  public static PathSegment parseSegment(StringParser parser, List<SimplePathSegment> segmentList,
+      boolean strict) {
 
     String segment = parser.readWhile(SEGMENT_FILTER);
-    Condition condition = null;
+    Condition condition = Condition.EMPTY_CONDITION;
     if (parser.hasNext()) {
       char c = parser.peek();
       if (c == Configuration.PATH_CONDITION_START) {
         parser.next();
-        condition = parseCondition(parser, segmentList);
+        condition = parseCondition(parser, segmentList, strict);
       }
     }
-    return new PathSegment(segment, condition);
+    PathSegment result = new PathSegment(segment, condition);
+    if (result.isPattern()) {
+      throw new IllegalDescendantPathException(parser.getOriginalString());
+    }
+    return result;
   }
 
   /**
-   * This method parses all segments of a simple path. A simple path is build by
-   * one or multiple segments separated by {@link Configuration#PATH_SEPARATOR}.
-   * The descendant path may contain multiple simple paths separated by
-   * {@link Configuration#PATH_UNION} or {@link Configuration#PATH_INTERSECTION}.
+   * This method parses all segments of a simple descendant path. Such path is
+   * build by one or multiple segments separated by
+   * {@link Configuration#PATH_SEPARATOR}. A full descendant path may contain
+   * multiple simple paths separated by {@link Configuration#PATH_UNION} or
+   * {@link Configuration#PATH_INTERSECTION}.
+   * 
+   * @see Configuration#getDescendant(String, String)
+   * @see Configuration#getDescendants(String, String)
+   * 
+   * @param parser
+   *        is the string-parser pointing to the start of the path to parse.
+   * @param strict -
+   *        if <code>true</code> the path is parsed
+   *        {@link Configuration#getDescendant(String, String) strict}, if
+   *        <code>false</code> wildcards and advanced conditions are
+   *        permitted.
+   * @return the parsed segments of the given <code>path</code>.
+   */
+  public static PathSegment[] parsePath(StringParser parser, boolean strict) {
+
+    List<PathSegment> segments = new ArrayList<PathSegment>();
+    parsePath(parser, segments, strict, new ArrayList<SimplePathSegment>());
+    return segments.toArray(new PathSegment[segments.size()]);
+  }
+
+  /**
+   * This method parses all segments of a simple descendant path. Such path is
+   * build by one or multiple segments separated by
+   * {@link Configuration#PATH_SEPARATOR}. A full descendant path may contain
+   * multiple simple paths separated by {@link Configuration#PATH_UNION} or
+   * {@link Configuration#PATH_INTERSECTION}.
+   * 
+   * @see Configuration#getDescendant(String, String)
+   * @see Configuration#getDescendants(String, String)
    * 
    * @param parser
    *        is the string-parser pointing to the start of the path to parse.
    * @param segments
    *        is the list where to add the parsed segments.
+   * @param strict -
+   *        if <code>true</code> the path is parsed
+   *        {@link Configuration#getDescendant(String, String) strict}, if
+   *        <code>false</code> wildcards and advanced conditions are
+   *        permitted.
    * @param conditionSegments
    *        is a list used to collect path segments.
    */
-  public static void parsePath(StringParser parser, List<PathSegment> segments,
+  public static void parsePath(StringParser parser, List<PathSegment> segments, boolean strict,
       List<SimplePathSegment> conditionSegments) {
 
     boolean todo = true;
     while (todo) {
-      segments.add(parseSegment(parser, conditionSegments));
+      segments.add(parseSegment(parser, conditionSegments, strict));
       todo = false;
       if (parser.hasNext()) {
         char c = parser.peek();

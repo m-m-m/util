@@ -63,6 +63,8 @@ public class XmlConfigurationTest extends TestCase {
     assertEquals(host, config.getDescendant("server/@host").getValue().getString());
     Configuration serviceAConf = config.getDescendant("server/service[@name=ServiceA]");
     Configuration serviceAClassConf = serviceAConf.getDescendant("@class");
+    Configuration serviceAChild = config.getDescendant("server/service[@name=ServiceA]/foo[@bar=42]");
+    assertEquals(42, serviceAConf.getDescendant("foo/@bar").getValue().getInteger());
     assertEquals(String.class, serviceAClassConf.getValue().getJavaClass());
     Collection<? extends Configuration> serviceColl = config.getDescendants("server/service[@name=Service*]");
     assertEquals(5, serviceColl.size());

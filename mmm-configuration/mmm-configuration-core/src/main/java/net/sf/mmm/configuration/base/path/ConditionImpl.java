@@ -131,6 +131,28 @@ public class ConditionImpl implements Condition {
   }
 
   /**
+   * This method gets the simple path segments.
+   * 
+   * @return the segments.
+   */
+  public SimplePathSegment[] getSegments() {
+
+    return this.segments;
+  }
+
+  /**
+   * This method determines if the {@link #getValue() value} is a
+   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}.
+   * 
+   * @return <code>true</code> if the {@link #getValue() value} is a pattern
+   *         and <code>false</code> if it is a regular value.
+   */
+  public boolean isValuePattern() {
+
+    return (this.valuePattern != null);
+  }
+
+  /**
    * The comparator used to compare the matching children in relation to
    * {@link #getValue() child-value}.
    * 
