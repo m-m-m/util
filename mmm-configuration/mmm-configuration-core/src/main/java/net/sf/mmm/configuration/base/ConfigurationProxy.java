@@ -90,7 +90,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
    */
   @Override
-  protected AbstractConfiguration getParent() {
+  public AbstractConfiguration getParent() {
 
     return getDelegate().getParent();
   }

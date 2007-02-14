@@ -104,7 +104,7 @@ public abstract class AbstractConfigurationAttribute extends BasicConfiguration 
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void addSibling(AbstractConfiguration element) {
+  public void addSibling(AbstractConfiguration element) {
   
     throw new ConfigurationException("Attribute cannot have siblings!");
   }
@@ -113,7 +113,7 @@ public abstract class AbstractConfigurationAttribute extends BasicConfiguration 
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected boolean removeSibling(AbstractConfiguration element) {
+  public boolean removeSibling(AbstractConfiguration element) {
   
     throw new ConfigurationException("Attribute cannot have siblings!");
   }

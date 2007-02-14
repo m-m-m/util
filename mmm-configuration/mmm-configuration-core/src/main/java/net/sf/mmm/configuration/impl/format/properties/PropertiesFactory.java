@@ -37,7 +37,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   public static final String CONTEXT_VARIABLE_SUFFIX_FLAT = ".flat";
 
   /** the default {@link PropertiesDocument#getSeparator() separator} */
-  public static final String DEFAULT_SEPARATOR = ".";
+  public static final char DEFAULT_SEPARATOR = '.';
 
   /** the default {@link PropertiesDocument#isFlat() flat-flag} */
   public static final boolean DEFAULT_FLAT = false;
@@ -46,7 +46,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   private boolean flat;
 
   /** the {@link PropertiesDocument#getSeparator() separator} */
-  private String propertyKeySeparator;
+  private char propertyKeySeparator;
 
   /**
    * The constructor.
@@ -66,14 +66,14 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
       throws ConfigurationException, ValueException {
 
     this.propertyKeySeparator = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_SEPARATOR)
-        .getString(DEFAULT_SEPARATOR);
+        .getCharacter(Character.valueOf(DEFAULT_SEPARATOR)).charValue();
     this.flat = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_FLAT).getBoolean(
         Boolean.valueOf(DEFAULT_FLAT)).booleanValue();
   }
 
   /**
    * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      net.sf.mmm.context.api.MutableContext) 
+   *      net.sf.mmm.context.api.MutableContext)
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access, MutableContext context)
       throws ConfigurationException {
@@ -83,7 +83,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
 
   /**
    * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      net.sf.mmm.configuration.base.AbstractConfiguration) 
+   *      net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access,
       AbstractConfiguration parentConfiguration) throws ConfigurationException {

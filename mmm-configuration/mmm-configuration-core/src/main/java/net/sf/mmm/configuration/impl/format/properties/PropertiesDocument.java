@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
@@ -27,7 +28,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   /**
    * @see #getSeparator()
    */
-  private final String separator;
+  private final char separator;
 
   /** @see #isFlat() */
   private final boolean flat;
@@ -45,7 +46,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    *        is the {@link #isFlat() flat} flag.
    */
   public PropertiesDocument(ConfigurationAccess configurationAccess, MutableContext context,
-      String keySeparator, boolean isFlat) {
+      char keySeparator, boolean isFlat) {
 
     super(configurationAccess, context);
     this.properties = null;
@@ -66,7 +67,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    *        is the {@link #isFlat() flat} flag.
    */
   public PropertiesDocument(ConfigurationAccess configurationAccess,
-      AbstractConfiguration parentConfiguration, String keySeparator, boolean isFlat) {
+      AbstractConfiguration parentConfiguration, char keySeparator, boolean isFlat) {
 
     super(configurationAccess, parentConfiguration);
     this.properties = null;
@@ -131,7 +132,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * 
    * @return the properties key separator.
    */
-  String getSeparator() {
+  char getSeparator() {
 
     return this.separator;
   }
@@ -146,22 +147,28 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
       this.properties = new Properties();
       this.properties.load(inputStream);
 
-      String name = this.properties.getProperty("cfg:name");
+      String name = this.properties.getProperty(".name");
       if (name == null) {
         name = "properties";
       }
-      String namespace = this.properties.getProperty("cfg:namespace");
+      String namespace = this.properties.getProperty(".xmlns");
+      if (namespace == null) {
+        namespace = Configuration.NAMESPACE_URI_NONE;
+      }
       PropertiesElement root = new PropertiesElement(getParentConfiguration(), this, "", name,
           namespace);
       // TODO: namespace support...
       for (Object key : this.properties.keySet()) {
         String keyString = key.toString();
-        if (this.flat) {
-          PropertiesElement child = new PropertiesElement(root, this, keyString, keyString,
-              namespace);
-          root.addChild(child);
-        } else {
-          root.getDescendant(keyString);
+        if ((keyString.length() > 0) && (keyString.charAt(0) != '.')) {
+          if (this.flat) {
+            PropertiesElement child = new PropertiesElement(root, this, keyString, keyString,
+                namespace);
+            root.addChild(child);
+          } else {
+            String path = keyString.replace(this.separator, Configuration.PATH_SEPARATOR);
+            root.getDescendant(path);
+          }          
         }
       }
       return root;

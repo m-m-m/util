@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: EmptyDummyConfiguration.java 38 2006-11-05 09:04:58Z joerg.hohwiller $ */
 package net.sf.mmm.configuration.base;
 
 import java.util.Collection;
@@ -138,7 +138,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    *      java.lang.String) 
    */
   @Override
-  AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
+  public AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
 
     return null;
   }
@@ -186,7 +186,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
    */
   @Override
-  protected void doRemove() throws ConfigurationException {
+  public void doRemove() throws ConfigurationException {
 
   }
 
@@ -194,7 +194,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void removeChild(AbstractConfiguration child) {
+  public void removeChild(AbstractConfiguration child) {
 
   }
 
@@ -202,7 +202,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void addChild(AbstractConfiguration child) {
+  public void addChild(AbstractConfiguration child) {
 
   }
 
@@ -210,7 +210,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void addSibling(AbstractConfiguration element) {
+  public void addSibling(AbstractConfiguration element) {
   
   }
   
@@ -218,7 +218,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected boolean removeSibling(AbstractConfiguration element) {
+  public boolean removeSibling(AbstractConfiguration element) {
   
     return false;
   }
@@ -227,7 +227,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
    */
   @Override
-  protected AbstractConfiguration doDisable() throws ConfigurationException {
+  public AbstractConfiguration doDisable() throws ConfigurationException {
 
     return null;
   }
@@ -257,7 +257,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
    */
   @Override
-  protected AbstractConfiguration getParent() {
+  public AbstractConfiguration getParent() {
 
     return null;
   }
@@ -266,7 +266,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
    */
   @Override
-  protected AbstractConfigurationDocument getOwnerDocument() {
+  public AbstractConfigurationDocument getOwnerDocument() {
 
     return null;
   }

@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.configuration.base.path;
 
+import net.sf.mmm.configuration.base.path.condition.Condition;
+
 /**
  * This class represents a single segment of a
  * {@link net.sf.mmm.configuration.api.Configuration#getDescendants(String, String) descendant-path}.
@@ -42,6 +44,15 @@ public class PathSegment extends SimplePathSegment {
   public Condition getCondition() {
 
     return this.condition;
+  }
+  
+  /**
+   * @see net.sf.mmm.configuration.base.path.SimplePathSegment#toString()
+   */
+  @Override
+  public String toString() {
+  
+    return super.toString() + this.condition.toString();
   }
 
 }

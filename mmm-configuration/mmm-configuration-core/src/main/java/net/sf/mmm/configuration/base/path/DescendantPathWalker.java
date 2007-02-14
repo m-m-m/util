@@ -6,6 +6,7 @@ package net.sf.mmm.configuration.base.path;
 import java.util.Iterator;
 
 import net.sf.mmm.configuration.base.AbstractConfiguration;
+import net.sf.mmm.configuration.base.path.condition.Condition;
 
 /**
  * This is a utility class that provides functionality to evaluate descendant
@@ -54,17 +55,8 @@ public class DescendantPathWalker {
         // TODO: what if best match is element and segment is attribute
         descendant = descendant.createChild(segment.getString(), namespaceUri);
         Condition condition = segment.getCondition();
-        if (condition != Condition.EMPTY_CONDITION) {
-          ConditionImpl cimpl = (ConditionImpl) condition;
-          SimplePathSegment[] conditionSegments = cimpl.getSegments();
-          AbstractConfiguration child = descendant;
-          for (int j = 0; j < conditionSegments.length; j++) {
-            SimplePathSegment conditionSegment = conditionSegments[j];
-            child = child.createChild(conditionSegment.getString(), namespaceUri);            
-          }
-          child.getValue().setString(cimpl.getValue());
-          assert (condition.accept(descendant));
-        }
+        descendant = condition.establish(descendant);
+        assert (condition.accept(descendant));
       }
     }
     return descendant;
@@ -94,9 +86,12 @@ public class DescendantPathWalker {
     int nextIndex = segmentIndex + 1;
     Iterator<AbstractConfiguration> childIterator = node.getChildren(segment.getString(),
         namespaceUri);
+    Condition condition = segment.getCondition();
     while (childIterator.hasNext()) {
       AbstractConfiguration child = childIterator.next();
-      if (segment.getCondition().accept(child)) {
+      // if we would know that our condition is an index-condition this could be
+      // solved a lot faster...
+      if (condition.accept(child)) {
         match.checkMatch(child, nextIndex);
         if (nextIndex < pathSegments.length) {
           AbstractConfiguration descendant = getDescendant(child, namespaceUri, pathSegments,

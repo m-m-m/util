@@ -16,8 +16,6 @@ import net.sf.mmm.configuration.api.IllegalDescendantPathException;
 import net.sf.mmm.configuration.api.MutableConfiguration;
 import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
 import net.sf.mmm.configuration.base.iterator.SiblingIterator;
-import net.sf.mmm.configuration.base.path.Condition;
-import net.sf.mmm.configuration.base.path.ConditionImpl;
 import net.sf.mmm.configuration.base.path.DescendantPathParser;
 import net.sf.mmm.configuration.base.path.DescendantPathWalker;
 import net.sf.mmm.configuration.base.path.PathSegment;
@@ -114,9 +112,87 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @return the previous sibling or the <code>tail</code> if this
    *         configuration is the head.
    */
-  protected final AbstractConfiguration getPreviousSibling() {
+  public final AbstractConfiguration getPreviousSibling() {
 
     return this.previous;
+  }
+
+  /**
+   * This method gets the index of this node in its sibling list.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relatively expensive operation because it needs to find the head
+   * of the list and step through the linked list until it hits the head.
+   * 
+   * @return the sibling index.
+   */
+  public int getSiblingIndex() {
+
+    AbstractConfiguration parent = getParent();
+    int index = 0;
+    if (parent != null) {
+      AbstractConfiguration headSibling = parent.getChild(getName(), getNamespaceUri());
+      AbstractConfiguration pointer = this;
+      while (pointer != headSibling) {
+        index++;
+        pointer = pointer.previous;
+        if (pointer == this) {
+          throw new ConfigurationException("Internal error: sibling-structure broken!");
+        }
+      }
+    }
+    return index;
+  }
+
+  /**
+   * This method gets the number of siblings of this node (including the node
+   * itself).<br>
+   * <b>ATTENTION:</b><br>
+   * This operation is a little expensive because it needs to walk through the
+   * complete linked-list of siblings.
+   * 
+   * @return the sibling index.
+   */
+  public int getSiblingCount() {
+
+    int count = 1;
+    AbstractConfiguration pointer = this;
+    while (pointer != this) {
+      count++;
+      pointer = pointer.previous;
+    }
+    return count;
+  }
+
+  /**
+   * This method gets the sibling at the given <code>index</code>.
+   * 
+   * @param index
+   *        is the index of the requested sibling.
+   * @return the requested sibling.
+   */
+  public AbstractConfiguration getSibling(int index) {
+
+    AbstractConfiguration parent = getParent();
+    if (parent == null) {
+      if (index == 0) {
+        return this;
+      } else {
+        throw new IndexOutOfBoundsException(String.valueOf(index));
+      }
+    } else {
+      AbstractConfiguration headSibling = parent.getChild(getName(), getNamespaceUri());
+      AbstractConfiguration pointer = headSibling;
+      int position = 0;
+      while (position != index) {
+        position++;
+        pointer = pointer.next;
+        if (pointer == headSibling) {
+          throw new IndexOutOfBoundsException(String.valueOf(index));
+        }
+      }
+      return pointer;
+
+    }
   }
 
   /**
@@ -125,7 +201,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @param element
    *        is the element to add.
    */
-  protected void addSibling(AbstractConfiguration element) {
+  public void addSibling(AbstractConfiguration element) {
 
     element.previous = this.previous;
     element.next = this;
@@ -141,7 +217,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @return <code>true</code> if the element was successfully removed from
    *         the list.
    */
-  protected boolean removeSibling(AbstractConfiguration element) {
+  public boolean removeSibling(AbstractConfiguration element) {
 
     AbstractConfiguration pointer = this;
     while (pointer != element) {
@@ -297,12 +373,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   public AbstractConfiguration requireChild(String childName, String namespaceUri) {
 
     AbstractConfiguration child = getChild(childName, namespaceUri);
-    if (child == null) {
-      if ((namespaceUri != null)
-          && (namespaceUri.equals(getNamespaceUri()) && (childName.charAt(0) == NAME_PREFIX_ATTRIBUTE))) {
-        child = getChild(childName, NAMESPACE_URI_NONE);
-      }
-    }
     if (child == null) {
       child = doCreateChild(childName, namespaceUri);
     }
@@ -632,7 +702,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @return the parent configuration or <code>null</code> if this
    *         configuration is the root-node.
    */
-  protected abstract AbstractConfiguration getParent();
+  public abstract AbstractConfiguration getParent();
 
   /**
    * @see net.sf.mmm.configuration.api.Configuration#isDescendantOf(net.sf.mmm.configuration.api.Configuration)

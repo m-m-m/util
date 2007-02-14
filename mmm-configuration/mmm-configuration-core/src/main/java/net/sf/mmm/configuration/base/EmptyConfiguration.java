@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: EmptyConfiguration.java 40 2006-11-05 22:51:46Z joerg.hohwiller $ */
 package net.sf.mmm.configuration.base;
 
 import java.util.Iterator;
@@ -51,7 +51,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void addSibling(AbstractConfiguration element) {
+  public void addSibling(AbstractConfiguration element) {
 
   }
 
@@ -59,7 +59,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected boolean removeSibling(AbstractConfiguration element) {
+  public boolean removeSibling(AbstractConfiguration element) {
 
     return false;
   }
@@ -79,7 +79,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
    */
   @Override
-  protected AbstractConfiguration getParent() {
+  public AbstractConfiguration getParent() {
 
     return this.parent;
   }

@@ -47,7 +47,7 @@ public class EntryPointConfiguration extends ConfigurationProxy {
    * @see net.sf.mmm.configuration.base.ConfigurationProxy#getParent()
    */
   @Override
-  protected AbstractConfiguration getParent() {
+  public AbstractConfiguration getParent() {
 
     return this.parent;
   }

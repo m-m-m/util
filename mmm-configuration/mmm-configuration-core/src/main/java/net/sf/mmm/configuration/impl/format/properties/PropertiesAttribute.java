@@ -7,21 +7,57 @@ import net.sf.mmm.configuration.base.AbstractConfigurationAttribute;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 
 /**
- * TODO This type ...
+ * This is the implementation of the
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to
+ * adapt an single
+ * {@link java.util.Properties#getProperty(java.lang.String) property}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class PropertiesAttribute extends AbstractConfigurationAttribute {
 
+  /** the document */
+  private final PropertiesDocument doc;
+
+  /** the properties key */
+  private final String key;
+
+  /** the {@link #getName() name} */
+  private final String name;
+
+  /** the {@link #getNamespaceUri() namespace} */
+  private final String namespace;
+
   /**
    * The constructor.
    * 
    * @param parentConfiguration
+   *        is the {@link #getParent() parent} configuration.
+   * @param document
+   *        is the {@link #getOwnerDocument() owner-document}.
+   * @param propertyKey
+   *        is the {@link java.util.Properties#getProperty(String) property-key}.
+   * @param propertyName
+   *        is the {@link #getName() name}.
+   * @param propertyNamespace
+   *        is the {@link #getNamespaceUri() NameSpace-URI}.
    */
-  public PropertiesAttribute(AbstractConfiguration parentConfiguration) {
+  public PropertiesAttribute(AbstractConfiguration parentConfiguration, PropertiesDocument document,
+      String propertyKey, String propertyName, String propertyNamespace) {
 
     super(parentConfiguration);
-    // TODO Auto-generated constructor stub
+    this.doc = document;
+    this.key = propertyKey;
+    this.name = propertyName;
+    this.namespace = propertyNamespace;
+  }
+  /**
+   * @see net.sf.mmm.configuration.base.BasicConfiguration#getOwnerDocument()
+   */
+  @Override
+  protected AbstractConfigurationDocument getOwnerDocument() {
+
+    return this.doc;
   }
 
   /**
@@ -30,8 +66,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   @Override
   protected String getPlainString() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return this.doc.getProperties().getProperty(this.key);
   }
 
   /**
@@ -40,18 +75,23 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   @Override
   protected void setPlainString(String newValue) {
 
-  // TODO Auto-generated method stub
-
+    this.doc.getProperties().setProperty(this.key, newValue);
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
+   * @see net.sf.mmm.configuration.api.Configuration#getName()
    */
-  @Override
-  protected AbstractConfigurationDocument getOwnerDocument() {
+  public String getName() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return this.name;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
+   */
+  public String getNamespaceUri() {
+
+    return this.namespace;
   }
 
   /**
@@ -69,24 +109,6 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName() 
-   */
-  public String getName() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
-   */
-  public String getNamespaceUri() {
 
     // TODO Auto-generated method stub
     return null;

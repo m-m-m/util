@@ -32,7 +32,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
    * The constructor.
    * 
    * @param parentConfiguration
-   *        is the parent configuration.
+   *        is the {@link #getParent() parent} configuration.
    */
   public BasicConfiguration(AbstractConfiguration parentConfiguration) {
 
@@ -49,7 +49,7 @@ public abstract class BasicConfiguration extends AbstractConfiguration {
    * @return the parent configuration or <code>null</code> if this is the root
    *         configuration.
    */
-  protected AbstractConfiguration getParent() {
+  public AbstractConfiguration getParent() {
 
     return this.parent;
   }

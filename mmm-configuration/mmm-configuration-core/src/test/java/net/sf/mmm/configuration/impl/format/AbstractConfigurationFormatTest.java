@@ -43,7 +43,7 @@ public abstract class AbstractConfigurationFormatTest extends TestCase {
     //assertEquals(port, portAttribute.getValue().getInteger());
     //assertEquals(host, config.getDescendant("server/@host").getValue().getString());
     Collection<? extends Configuration> serviceColl = config.getDescendants("server/service");
-    assertEquals(5, serviceColl.size());
+    assertEquals(2, serviceColl.size());
     int index = 0;
     for (Configuration serviceConf : serviceColl) {
       System.out.println(serviceConf.getDescendant("@name").getValue().getString());

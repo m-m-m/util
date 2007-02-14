@@ -43,7 +43,7 @@ public class XmlConfigurationFormatTest extends AbstractConfigurationFormatTest 
   @Test
   public void testConfiguration() {
 
-    String href = AbstractConfigurationFormatTest.class.getName().replace('.', '/') + ".xml";
+    String href = XmlConfigurationFormatTest.class.getName().replace('.', '/') + ".xml";
     ConfigurationAccess access = new ResourceAccess(href);
     ConfigurationFactory factory = new XmlFactory();
     ConfigurationDocument doc = factory.create(access);

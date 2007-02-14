@@ -8,6 +8,13 @@ import java.util.List;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.IllegalDescendantPathException;
+import net.sf.mmm.configuration.base.path.comparator.Comparator;
+import net.sf.mmm.configuration.base.path.comparator.ComparatorManager;
+import net.sf.mmm.configuration.base.path.comparator.EqualsComparator;
+import net.sf.mmm.configuration.base.path.condition.CompareCondition;
+import net.sf.mmm.configuration.base.path.condition.Condition;
+import net.sf.mmm.configuration.base.path.condition.IndexCondition;
+import net.sf.mmm.configuration.base.path.condition.PathCondition;
 import net.sf.mmm.util.ListCharFilter;
 import net.sf.mmm.util.StringParser;
 
@@ -23,8 +30,9 @@ public class DescendantPathParser {
 
   /** filter that excepts all chars except those reserved for descendent path */
   private static final ListCharFilter SEGMENT_FILTER = new ListCharFilter(false,
-      Configuration.PATH_SEPARATOR, Configuration.PATH_CONDITION_START, Configuration.PATH_UNION,
-      Configuration.PATH_INTERSECTION, '=', '<', '>', '!');
+      Configuration.PATH_SEPARATOR, Configuration.PATH_CONDITION_START,
+      Configuration.PATH_CONDITION_END, Configuration.PATH_UNION, Configuration.PATH_INTERSECTION,
+      '=', '<', '>', '!');
 
   /** filter that accepts only chars allowed for condition comparators */
   private static final ListCharFilter OPERATION_FILTER = new ListCharFilter(true, '=', '<', '>');
@@ -59,12 +67,36 @@ public class DescendantPathParser {
       boolean strict) {
 
     segmentList.clear();
+    // parse all segments...
     char c = Configuration.PATH_SEPARATOR;
     while (c == Configuration.PATH_SEPARATOR) {
       String name = parser.readWhile(SEGMENT_FILTER);
+      if (name.length() == 0) {
+        throw new IllegalDescendantPathException(parser.getOriginalString());
+      }
       SimplePathSegment segment = new SimplePathSegment(name);
       segmentList.add(segment);
       c = parser.forcePeek();
+    }
+    // check for index condition...
+    if (segmentList.size() == 1) {
+      SimplePathSegment segment = segmentList.get(0);
+      if (!segment.isPattern()) {
+        String indexString = segment.getString();
+        try {
+          int index = Integer.parseInt(indexString);
+          if (index < 1) {
+            throw new IllegalDescendantPathException(parser.getOriginalString());
+          }
+          c = parser.forceNext();
+          if (c != Configuration.PATH_CONDITION_END) {
+            throw new IllegalDescendantPathException(parser.getOriginalString());            
+          }
+          return new IndexCondition(index - 1);
+        } catch (NumberFormatException e) {
+          // ignore...
+        }
+      }
     }
     SimplePathSegment[] segments = segmentList.toArray(new SimplePathSegment[segmentList.size()]);
     String operator = parser.readWhile(OPERATION_FILTER);
@@ -78,14 +110,14 @@ public class DescendantPathParser {
       if (strict && !EqualsComparator.SYMBOL.equals(comparator.getSymbol())) {
         throw new IllegalDescendantPathException(parser.getOriginalString());
       }
-      ConditionImpl cond = new ConditionImpl(segments, value, comparator);
+      CompareCondition cond = new CompareCondition(segments, value, comparator);
       if (strict && cond.isValuePattern()) {
         throw new IllegalDescendantPathException(parser.getOriginalString());
       }
       condition = cond;
 
     } else {
-      condition = new ConditionImpl(segments);
+      condition = new PathCondition(segments);
       c = parser.forceNext();
       if (c != Configuration.PATH_CONDITION_END) {
         throw new IllegalDescendantPathException(parser.getOriginalString());

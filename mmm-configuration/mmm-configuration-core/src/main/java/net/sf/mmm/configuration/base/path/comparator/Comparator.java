@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.configuration.base.path;
+package net.sf.mmm.configuration.base.path.comparator;
 
 import java.util.regex.Pattern;
 

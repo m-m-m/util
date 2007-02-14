@@ -1,5 +1,5 @@
 /* $Id$ */
-package net.sf.mmm.configuration.base.path;
+package net.sf.mmm.configuration.base.path.comparator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 
 /**
  * This is the manager where all available
- * {@link net.sf.mmm.configuration.base.path.Comparator comparators} are
+ * {@link net.sf.mmm.configuration.base.path.comparator.Comparator comparators} are
  * registered.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -32,7 +32,7 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
    * The constructor.
    * 
    * @param parentConfiguration
-   *        is the parent configuration.
+   *        is the {@link #getParent() parent} configuration.
    */
   public AbstractConfigurationElement(AbstractConfiguration parentConfiguration) {
 
