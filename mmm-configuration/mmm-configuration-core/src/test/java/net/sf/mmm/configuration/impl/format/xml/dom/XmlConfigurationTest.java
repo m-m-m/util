@@ -32,7 +32,7 @@ import junit.framework.TestCase;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@SuppressWarnings("all")
+//@SuppressWarnings("all")
 public class XmlConfigurationTest extends TestCase {
 
   public XmlConfigurationTest() {
@@ -61,16 +61,20 @@ public class XmlConfigurationTest extends TestCase {
     assertNotNull(portAttribute);
     assertEquals(port, portAttribute.getValue().getInteger());
     assertEquals(host, config.getDescendant("server/@host").getValue().getString());
-    Configuration serviceAConf = config.getDescendant("server/service[@name=ServiceA]");
+    Configuration serviceAConf = config.getDescendant("server/service[@name='ServiceA']");
     Configuration serviceAClassConf = serviceAConf.getDescendant("@class");
-    Configuration serviceAChild = config.getDescendant("server/service[@name=ServiceA]/foo[@bar=42]");
+    Configuration serviceAChild = config
+        .getDescendant("server/service[@name='ServiceA']/foo[@bar='42']");
     assertEquals(42, serviceAConf.getDescendant("foo/@bar").getValue().getInteger());
     assertEquals(String.class, serviceAClassConf.getValue().getJavaClass());
-    Collection<? extends Configuration> serviceColl = config.getDescendants("server/service[@name=Service*]");
+    Collection<? extends Configuration> serviceColl = config
+        .getDescendants("server/service[@name='Service*']");
     assertEquals(5, serviceColl.size());
-    int index = 0;
+    char serviceLetter = 'A';
     for (Configuration serviceConf : serviceColl) {
-      System.out.println(serviceConf.getDescendant("@name").getValue().getString());
+      assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue().getString());
+      serviceLetter++;
     }
+    assertEquals(5, serviceLetter - 'A');
   }
 }

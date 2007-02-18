@@ -446,7 +446,7 @@ public class StringParser {
    * This method skips all {@link #next() next characters} as long as they equal
    * to the according character of the <code>expected</code> string.<br>
    * If a character differs this method stops and the parser points to the first
-   * character that differes from <code>expected</code>. Except for this
+   * character that differs from <code>expected</code>. Except for this
    * circumstance, this method behaves like the following code snipplet:
    * 
    * <pre>
@@ -484,6 +484,28 @@ public class StringParser {
       this.pos++;
     }
     return true;
+  }
+
+  /**
+   * This method checks that the {@link #next() current character} is equal to
+   * the given character <code>c</code>.<br>
+   * If the current character was as expected, the parser points to the next
+   * character. Otherwise its position will remain unchanged.
+   * 
+   * @param expected
+   *        is the expected character.
+   * @return <code>true</code> if the current character is the same as
+   *         <code>expected</code>, <code>false</code> otherwise.
+   */
+  public boolean expect(char expected) {
+
+    if (this.pos < this.chars.length) {
+      if (this.chars[this.pos] == expected) {
+        this.pos++;
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

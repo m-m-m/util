@@ -47,7 +47,7 @@ public class DescendantPathParser {
 
   /**
    * This method parses a single condition from the descendant path.<br>
-   * After the successfuly call of this method the given <code>parser</code>
+   * After the successfully call of this method the given <code>parser</code>
    * will point to the next character after
    * {@link Configuration#PATH_CONDITION_START}.
    * 
@@ -102,20 +102,26 @@ public class DescendantPathParser {
     String operator = parser.readWhile(OPERATION_FILTER);
     Condition condition;
     if (operator.length() > 0) {
-      String value = parser.readUntil(Configuration.PATH_CONDITION_END, false);
-      if (value == null) {
-        throw new IllegalDescendantPathException(parser.getOriginalString());
-      }
       Comparator comparator = ComparatorManager.getInstance().getComparator(operator);
       if (strict && !EqualsComparator.SYMBOL.equals(comparator.getSymbol())) {
         throw new IllegalDescendantPathException(parser.getOriginalString());
       }
-      CompareCondition cond = new CompareCondition(segments, value, comparator);
-      if (strict && cond.isValuePattern()) {
-        throw new IllegalDescendantPathException(parser.getOriginalString());
+      if (parser.expect(Configuration.PATH_VALUE_START)) {
+        String value = parser.readUntil(Configuration.PATH_VALUE_END, false);
+        if (value == null) {
+          throw new IllegalDescendantPathException(parser.getOriginalString());
+        }
+        if (!parser.expect(Configuration.PATH_CONDITION_END)) {
+          throw new IllegalDescendantPathException(parser.getOriginalString());          
+        }
+        CompareCondition cond = new CompareCondition(segments, value, comparator);
+        if (strict && cond.isValuePattern()) {
+          throw new IllegalDescendantPathException(parser.getOriginalString());
+        }
+        condition = cond;        
+      } else {
+        throw new IllegalDescendantPathException(parser.getOriginalString());        
       }
-      condition = cond;
-
     } else {
       condition = new PathCondition(segments);
       c = parser.forceNext();

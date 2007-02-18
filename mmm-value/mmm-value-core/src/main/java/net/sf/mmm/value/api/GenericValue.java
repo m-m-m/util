@@ -175,6 +175,36 @@ public interface GenericValue {
   String getString(String defaultValue) throws WrongValueTypeException;
 
   /**
+   * This method gets the value as char.
+   * 
+   * @see #getValue(Class)
+   * 
+   * @return the requested value.
+   * @throws ValueNotSetException
+   *         if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException
+   *         if the value is NO char.
+   */
+  char getCharacter() throws ValueNotSetException, WrongValueTypeException;
+
+  /**
+   * This method gets the value as character.
+   * 
+   * @see #getValue(Class, Object)
+   * 
+   * @param defaultValue
+   *        is the default returned if this value {@link #isEmpty() is empty}.
+   *        It may be <code>null</code>.
+   * @return the requested value or the <code>defaultValue</code> if this
+   *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
+   *         if this value {@link #isEmpty() is empty} and the
+   *         <code>defaultValue</code> is <code>null</code>.
+   * @throws WrongValueTypeException
+   *         if the value is NO character.
+   */
+  Character getCharacter(Character defaultValue) throws WrongValueTypeException;
+  
+  /**
    * This method gets the value as boolean.
    * 
    * @see #getValue(Class)

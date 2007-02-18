@@ -138,7 +138,7 @@ public class ValueServiceTest extends TestCase {
   public void testDate() throws Exception {
 
     ValueManager<Date> manager = getManager(Date.class, "Date");
-    checkManager(manager, "2005-01-01T23:59:00");
+    checkManager(manager, "2005-01-01T23:59:00Z");
   }
 
   /**

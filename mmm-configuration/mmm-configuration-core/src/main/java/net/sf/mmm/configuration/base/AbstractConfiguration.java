@@ -3,8 +3,8 @@ package net.sf.mmm.configuration.base;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -606,12 +606,12 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
     List<SimplePathSegment> conditionSegments = new ArrayList<SimplePathSegment>();
     // TODO: use collection that keeps the ordering of insertion!!!
-    Set<AbstractConfiguration> resultSet = new HashSet<AbstractConfiguration>();
+    Set<AbstractConfiguration> resultSet = new LinkedHashSet<AbstractConfiguration>();
     char state = Configuration.PATH_UNION;
     // TODO: also support intersections!
     while (state != 0) {
       DescendantPathParser.parsePath(parser, segmentList, false, conditionSegments);
-      addDescendants(segmentList, 0, resultSet);
+      DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, resultSet);
       segmentList.clear();
       if (parser.hasNext()) {
         char c = parser.next();
@@ -627,46 +627,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       }
     }
     return resultSet;
-  }
-
-  /**
-   * This method adds all descendants that match the given <code>path</code>
-   * to the given <code>set</code>.
-   * 
-   * @param path
-   *        is the parsed descendant path (simple path part).
-   * @param segmentIndex
-   *        is the current index in the path.
-   * @param set
-   *        is the set where to add the matching descendants.
-   */
-  protected void addDescendants(List<PathSegment> path, int segmentIndex,
-      Set<AbstractConfiguration> set) {
-
-    Iterator<AbstractConfiguration> childIt;
-    PathSegment segment = path.get(segmentIndex);
-    if (segment.isPattern()) {
-      childIt = getChildren(segment.getPattern());
-    } else {
-      childIt = getChildren(segment.getString());
-    }
-    int nextIndex = segmentIndex + 1;
-    boolean lastSegment;
-    if (nextIndex == path.size()) {
-      lastSegment = true;
-    } else {
-      lastSegment = false;
-    }
-    while (childIt.hasNext()) {
-      AbstractConfiguration child = childIt.next();
-      if (segment.getCondition().accept(child)) {
-        if (lastSegment) {
-          set.add(child);
-        } else {
-          child.addDescendants(path, nextIndex, set);
-        }
-      }
-    }
   }
 
   /**

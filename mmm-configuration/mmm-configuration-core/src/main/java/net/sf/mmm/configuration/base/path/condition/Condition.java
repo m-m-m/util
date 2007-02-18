@@ -6,7 +6,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
 
 /**
  * This is the interface for a condition that
- * {@link #accept(AbstractConfiguration) filters}
+ * {@link #accept(AbstractConfiguration, String) filters}
  * {@link net.sf.mmm.configuration.api.Configuration configurations}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -22,30 +22,36 @@ public interface Condition {
    * 
    * @param configuration
    *        is the configuration to check.
+   * @param namespaceUri
+   *        is the namespace-URI to use or <code>null</code> if namespaces
+   *        should be ignored.
    * @return <code>true</code> if the given <code>configuration</code> is
    *         acceptable, <code>false</code> otherwise.
    */
-  boolean accept(AbstractConfiguration configuration);
+  boolean accept(AbstractConfiguration configuration, String namespaceUri);
 
   /**
    * This method ensures that this condition is
-   * {@link #accept(AbstractConfiguration) fulfilled} for the given
+   * {@link #accept(AbstractConfiguration, String) fulfilled} for the given
    * <code>configuration</code>. To do so, the given
    * <code>configuration</code> is modified accordingly. Please note, that
    * this is NOT always possible.
    * 
    * @param configuration
    *        is the configuration that should
-   *        {@link #accept(AbstractConfiguration) fulfill} this condition.
+   *        {@link #accept(AbstractConfiguration, String) fulfill} this condition.
+   * @param namespaceUri
+   *        is the namespace-URI to use or <code>null</code> if namespaces
+   *        should be ignored.
    * @return the configuration that
-   *         {@link #accept(AbstractConfiguration) fulfill} this condition. This
+   *         {@link #accept(AbstractConfiguration, String) fulfill} this condition. This
    *         will typically be the given <code>configuration</code> but also
    *         may be a created sibling.
    * @throws ConfigurationException
    *         if this conditions can NOT be established in general or specificly
    *         for the given <code>configuration</code>.
    */
-  AbstractConfiguration establish(AbstractConfiguration configuration)
+  AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri)
       throws ConfigurationException;
 
 }

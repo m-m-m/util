@@ -41,7 +41,7 @@
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-context</artifactId>
+      <artifactId>mmm-value-context</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

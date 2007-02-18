@@ -86,6 +86,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   }
 
   /**
+   * TODO: flat mode is nuts and should be kicked out!
    * This method determines if the properties are treated flat. In this case all
    * properties are direct children of the root-node.<br>
    * Else the properties are treated as a tree. Then the
@@ -160,7 +161,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
       // TODO: namespace support...
       for (Object key : this.properties.keySet()) {
         String keyString = key.toString();
-        if ((keyString.length() > 0) && (keyString.charAt(0) != '.')) {
+        if ((keyString.length() > 0) && (keyString.charAt(0) != this.separator)) {
           if (this.flat) {
             PropertiesElement child = new PropertiesElement(root, this, keyString, keyString,
                 namespace);

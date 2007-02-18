@@ -29,10 +29,11 @@ public class ContentParserPptTest extends TestCase {
     super();
   }
 
-  protected Properties parse(ContentParser parser, String resourceName, long filesize) throws Exception {
+  protected Properties parse(ContentParser parser, String resourceName, long filesize)
+      throws Exception {
 
-    DataResource testResource = new ClasspathResource(AbstractPoiContentParserTest.class.getPackage(),
-        resourceName);
+    DataResource testResource = new ClasspathResource(ContentParserPptTest.class, resourceName,
+        false);
     InputStream inputStream = testResource.openStream();
     try {
       return parser.parse(inputStream, filesize);
@@ -42,6 +43,7 @@ public class ContentParserPptTest extends TestCase {
   }
 
   public void checkParser(ContentParser parser, long filesize) throws Exception {
+
     Properties properties = parse(parser, "test.ppt", filesize);
     String title = properties.getProperty(ContentParser.PROPERTY_KEY_TITLE);
     assertEquals("Title of Testslide", title);
@@ -50,7 +52,7 @@ public class ContentParserPptTest extends TestCase {
     String keywords = properties.getProperty(ContentParser.PROPERTY_KEY_KEYWORDS);
     assertEquals("some keywords", keywords);
     String text = properties.getProperty(ContentParser.PROPERTY_KEY_TEXT);
-    //System.out.println(text);
+    // System.out.println(text);
     assertTrue(text.contains("Titlecaption"));
     assertTrue(text.contains("Subscription"));
     assertTrue(text.contains("Slidetitle"));
@@ -58,13 +60,13 @@ public class ContentParserPptTest extends TestCase {
     assertTrue(text.contains("Hello world, this is a test."));
     assertTrue(text.contains("This is a note."));
   }
-  
+
   @Test
   public void testParser() throws Exception {
 
-    ContentParserPpt parser = new ContentParserPpt();    
+    ContentParserPpt parser = new ContentParserPpt();
     checkParser(parser, 0);
-    //parser.setMaximumBufferSize(4096);
+    // parser.setMaximumBufferSize(4096);
     checkParser(parser, 9728);
   }
 

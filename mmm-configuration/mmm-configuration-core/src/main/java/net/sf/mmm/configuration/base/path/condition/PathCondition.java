@@ -74,7 +74,7 @@ public class PathCondition implements Condition {
    * @param descendant
    *        is a descendant that matches the condition-path.
    * @return <code>true</code> if the give <code>descendant</code> is
-   *         acceptable for this condtion.
+   *         acceptable for this condition.
    */
   protected boolean acceptDescendant(AbstractConfiguration descendant) {
 
@@ -82,25 +82,39 @@ public class PathCondition implements Condition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
-  public boolean accept(AbstractConfiguration configuration) {
+  public boolean accept(AbstractConfiguration configuration, String namespaceUri) {
 
     return accept(configuration, 0);
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
-  public AbstractConfiguration establish(AbstractConfiguration configuration) {
+  public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
 
+    AbstractConfiguration node = configuration;
     for (SimplePathSegment segment : this.segments) {
-      // TODO
       if (segment.isPattern()) {
         throw new ConfigurationException("Cannot establish condition with wildcards!");
       }
+      node = node.requireChild(segment.getString(), namespaceUri);
     }
+    doEstablish(node);
     return configuration;
+  }
+
+  /**
+   * This method establishes this condition on the configuration at the path of
+   * this condition which is given by <code>node</code>.
+   * 
+   * @param node
+   *        is the configuration this {@link #getSegments() path} points to.
+   */
+  protected void doEstablish(AbstractConfiguration node) {
+
+  // nothing to do...
   }
 
   /**
@@ -112,23 +126,34 @@ public class PathCondition implements Condition {
 
     return this.segments;
   }
-  
+
+  /**
+   * Override to append chars before condition-end char of {@link #toString()}.
+   * 
+   * @param buffer
+   *        is the buffer to use.
+   */
+  protected void appendCondition(StringBuffer buffer) {
+
+  }
+
   /**
    * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {
-  
+
     StringBuffer buffer = new StringBuffer();
     buffer.append(Configuration.PATH_CONDITION_START);
     boolean separator = false;
     for (SimplePathSegment segment : this.segments) {
       if (separator) {
-        buffer.append(Configuration.PATH_SEPARATOR);        
+        buffer.append(Configuration.PATH_SEPARATOR);
       }
       buffer.append(segment);
       separator = true;
     }
+    appendCondition(buffer);
     buffer.append(Configuration.PATH_CONDITION_END);
     return buffer.toString();
   }

@@ -11,7 +11,8 @@ import net.sf.mmm.value.api.GenericValue;
 /**
  * This is the interface used to access configuration. It actually represents a
  * node of a configuration tree. If you are familiar with the XML DOM API, you
- * can think of this interface as a {@link org.w3c.dom.Node}.<br>
+ * can think of this interface as a {@link org.w3c.dom.Node} - only that it is a
+ * lot easier to deal with.<br>
  * Here a little example:
  * 
  * <pre>
@@ -32,11 +33,11 @@ import net.sf.mmm.value.api.GenericValue;
  * This configuration API has the following goals:
  * <ul>
  * <li>easy to use</li>
+ * <li>support for type conversions</li>
  * <li>read and write access</li>
  * <li>no access to parent configurations</li>
- * <li>access data from XML or properties</li>
  * <li>access complex configurations</li>
- * <li>access configurations in different formats</li>
+ * <li>access configurations in different formats (XML, properties)</li>
  * <li>access configurations from different data sources</li>
  * <li>including other configurations without problems when saving</li>
  * <li>support for namespaces</li>
@@ -86,7 +87,7 @@ import net.sf.mmm.value.api.GenericValue;
  * {@link java.lang.NullPointerException NullPointerException}s using:
  * 
  * <pre>
- * conf1.{@link #getDescendant(String) getDescendant}("foo/@bar").{@link #getValue()}.{@link GenericValue#getInteger(Integer) getInteger}(42)
+ * int intValue = conf1.{@link #getDescendant(String) getDescendant}("foo/@bar").{@link #getValue()}.{@link GenericValue#getInteger(Integer) getInteger}(42)
  * </pre>
  * 
  * Please note that the char constants defined in this interface will never
@@ -195,6 +196,16 @@ public interface Configuration extends
    * {@link #getDescendant(String, String) descendant}.
    */
   char PATH_CONDITION_END = ']';
+
+  /**
+   * The character used for the start of a value in a compare condition.
+   */
+  char PATH_VALUE_START = '\'';
+
+  /**
+   * The character used for the end of a value in a compare condition.
+   */
+  char PATH_VALUE_END = '\'';
 
   /**
    * This method gets the name of this configuration. If this configuration has
@@ -329,26 +340,49 @@ public interface Configuration extends
    * {@link Type#ATTRIBUTE attribute} that has the {@link #getName() name}
    * <code>&#64;attribute</code> and {@link #getNamespaceUri() namespace}
    * <code>ns</code>.</li>
-   * <li><code>element.{@link #getDescendant(String, String) getDescendant}("child[@attribute='value']", ns)</code>
-   * gets the (first) child with the {@link #getType() type}
-   * {@link Type#ELEMENT element} that has the {@link #getName() name}
-   * <code>child</code>, {@link #getNamespaceUri() namespace} <code>ns</code>
-   * and has an {@link Type#ATTRIBUTE attribute} named
-   * <code>&#64;attribute</code> that has the value <code>value</code>. The
-   * expression in brackets (here <code>&#64;attribute='value'</code>) is
-   * called condition.</li>
+   * <li><code>element.{@link #getDescendant(String, String) getDescendant}("child[&lt;condition&gt;]", ns)</code>
+   * gets the (first) child that matches <code>&lt;condition&gt;</code> that
+   * has the {@link #getName() name} <code>child</code>,
+   * {@link #getNamespaceUri() namespace} <code>ns</code> and has an
+   * {@link Type#ATTRIBUTE attribute} named <code>&#64;attribute</code> that
+   * has the value <code>value</code>. The <code>&lt;condition&gt;</code>
+   * is eigther a positive integer identifying the number of the child if there
+   * are multiple (only makes sense for {@link Type#ELEMENT elements}) or again
+   * a <code>path</code> (without conditions) that may be followed by
+   * <code>='&lt;value&gt;'</code>. In the latter case, the <code>path</code>
+   * needs to exist and its {@link #getValue() value} has to be equal to the
+   * <code>&lt;value&gt;</code> if present.</li>
    * <li><code>element.{@link #getDescendant(String, String) getDescendant}(name+"{@link #PATH_SEPARATOR /}"+path, ns)</code>
    * is the same as
    * <code>element.{@link #getDescendant(String, String) getDescendant}(name, ns).{@link #getDescendant(String) getDescendant}(path)</code>.</li>
    * </ul>
+   * Examples for <code>path</code> expressions:
+   * <ul>
+   * <li><code>foo/bar[2]</code></li>
+   * <li><code>foo[bar/@attribute='value']</code></li>
+   * </ul>
+   * Examples for expressions that are NOT accepted by this method:
+   * <ul>
+   * <li><code>foo/bar[count()=2]</code></li>
+   * <li><code>foo[bar/@attribute!='value']</code></li>
+   * <li><code>fo?</code></li>
+   * <li><code>*</code></li>
+   * <li><code>./.</code></li>
+   * <li><code>foo/</code></li>
+   * <li><code>foo//bar</code></li>
+   * </ul>
+   * 
+   * <br>
    * <b>ATTENTION:</b><br>
+   * The <code>path</code> must follow the specification above. It can NOT be
+   * any XPath expression.<br>
+   * <b>WARNING:</b><br>
    * This method will always return a configuration. If this method is applied
    * to an {@link Type#ELEMENT element} where the given <code>path</code> does
    * NOT point to an existing configuration, the according configurations will
-   * be created similar to an {@link java.io.File#mkdirs() mkdirs} operation.<br>
-   * <b>ATTENTION:</b><br>
-   * The <code>path</code> must follow the specification above. It can NOT be
-   * any XPath expression.
+   * be created similar to an {@link java.io.File#mkdirs() mkdirs} operation. Be
+   * careful when using index-condtions (e.g. <code>foo[10]</code>) because
+   * they can create many nodes.<br>
    * 
    * @see #getDescendants(String, String)
    * 

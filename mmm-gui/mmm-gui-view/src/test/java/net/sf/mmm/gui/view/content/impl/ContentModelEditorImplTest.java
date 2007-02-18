@@ -1,6 +1,8 @@
 /* $Id$ */
 package net.sf.mmm.gui.view.content.impl;
 
+import org.junit.Test;
+
 import net.sf.mmm.content.model.impl.BasicMutableContentModelServiceImpl;
 import net.sf.mmm.content.model.impl.ContentModelInitializer;
 import net.sf.mmm.content.persistence.api.IdService;
@@ -28,6 +30,11 @@ public class ContentModelEditorImplTest extends TestCase {
   public ContentModelEditorImplTest() {
 
     super();
+  }
+  
+  @Test
+  public void testFoo() {
+    // nothing so far...
   }
 
   public static void main(String[] args) throws Exception {

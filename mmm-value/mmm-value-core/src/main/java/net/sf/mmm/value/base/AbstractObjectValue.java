@@ -70,6 +70,8 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
         result = parseNumber(value.toString());
       } else if (type == Date.class) {
         result = toDate(value);
+      } else if (type == Character.class) {
+        result = toCharacter(value);
       } else {
         result = toValue(type, value);
       }
@@ -123,6 +125,28 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
       return null;
     } else {
       return value.toString();
+    }
+  }
+
+  /**
+   * This method gets the given value object as character.
+   * 
+   * @param value
+   *        is the value to get as character.
+   * @return the value to convert.
+   * @throws WrongValueTypeException
+   *         if the given object can NOT be converted to a character.
+   */
+  protected Character toCharacter(Object value) throws WrongValueTypeException {
+
+    if (value == null) {
+      return null;
+    } else {
+      String string = value.toString();
+      if ((string != null) && (string.length() == 1)) {
+        return Character.valueOf(string.charAt(0));
+      }
+      throw new WrongValueTypeException(this, Character.class);
     }
   }
 

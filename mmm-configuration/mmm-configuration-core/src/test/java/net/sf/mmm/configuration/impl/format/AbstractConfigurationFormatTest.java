@@ -4,6 +4,7 @@
 package net.sf.mmm.configuration.impl.format;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationDocument;
@@ -44,10 +45,13 @@ public abstract class AbstractConfigurationFormatTest extends TestCase {
     //assertEquals(host, config.getDescendant("server/@host").getValue().getString());
     Collection<? extends Configuration> serviceColl = config.getDescendants("server/service");
     assertEquals(2, serviceColl.size());
-    int index = 0;
+    Iterator<? extends Configuration> serviceIterator = serviceColl.iterator();
+    char serviceLetter = 'A';
     for (Configuration serviceConf : serviceColl) {
-      System.out.println(serviceConf.getDescendant("@name").getValue().getString());
+      assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue().getString());
+      serviceLetter++;
     }
+    assertEquals(2, serviceLetter - 'A');
   }
-
+  
 }

@@ -71,6 +71,22 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   }
 
   /**
+   * @see net.sf.mmm.value.api.GenericValue#getCharacter()
+   */
+  public char getCharacter() throws ValueNotSetException, WrongValueTypeException {
+  
+    return getValue(Character.class).charValue();
+  }
+  
+  /**
+   * @see net.sf.mmm.value.api.GenericValue#getCharacter(java.lang.Character)
+   */
+  public Character getCharacter(Character defaultValue) throws WrongValueTypeException {
+  
+    return getValue(Character.class, defaultValue);
+  }
+  
+  /**
    * @see net.sf.mmm.value.api.GenericValue#getBoolean()
    */
   public boolean getBoolean() throws ValueNotSetException, WrongValueTypeException {

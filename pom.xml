@@ -24,7 +24,6 @@
   <modules>
     <module>mmm-configuration</module>
     <module>mmm-content</module>
-    <module>mmm-context</module>
     <module>mmm-framework</module>
     <module>mmm-gui</module>
     <module>mmm-nls</module>
@@ -132,6 +131,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
+        <!--
+        <configuration>
+          <outputDirectory>${project.reporting.outputDirectory}/xref</outputDirectory>
+        </configuration>
+        -->
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -175,6 +179,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.2-SNAPSHOT</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

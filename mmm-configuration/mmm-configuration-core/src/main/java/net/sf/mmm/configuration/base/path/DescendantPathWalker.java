@@ -4,6 +4,8 @@
 package net.sf.mmm.configuration.base.path;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.path.condition.Condition;
@@ -29,6 +31,51 @@ public class DescendantPathWalker {
   }
 
   /**
+   * This method adds all descendants that match the given <code>path</code>
+   * to the given <code>set</code>.
+   * 
+   * @param node
+   *        is the current node to work one.
+   * @param namespaceUri
+   *        is the namespace-URI to use or <code>null</code> if namespaces
+   *        should be ignored.
+   * @param path
+   *        is the parsed descendant path (simple path part).
+   * @param segmentIndex
+   *        is the current index in the path.
+   * @param set
+   *        is the set where to add the matching descendants.
+   */
+  public static void addDescendants(AbstractConfiguration node, String namespaceUri,
+      List<PathSegment> path, int segmentIndex, Set<AbstractConfiguration> set) {
+
+    Iterator<AbstractConfiguration> childIt;
+    PathSegment segment = path.get(segmentIndex);
+    if (segment.isPattern()) {
+      childIt = node.getChildren(segment.getPattern(), namespaceUri);
+    } else {
+      childIt = node.getChildren(segment.getString(), namespaceUri);
+    }
+    int nextIndex = segmentIndex + 1;
+    boolean lastSegment;
+    if (nextIndex == path.size()) {
+      lastSegment = true;
+    } else {
+      lastSegment = false;
+    }
+    while (childIt.hasNext()) {
+      AbstractConfiguration child = childIt.next();
+      if (segment.getCondition().accept(child, namespaceUri)) {
+        if (lastSegment) {
+          set.add(child);
+        } else {
+          addDescendants(child, namespaceUri, path, nextIndex, set);
+        }
+      }
+    }
+  }
+
+  /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String,
    *      String)
    * 
@@ -37,7 +84,7 @@ public class DescendantPathWalker {
    * @param namespaceUri
    *        is the namespace URI to use.
    * @param pathSegments
-   *        are the segemnts of the descendant path.
+   *        are the segments of the descendant path.
    * @return the requested descendant or <code>null</code> if it does NOT
    *         exist and needs to be created.
    */
@@ -55,8 +102,8 @@ public class DescendantPathWalker {
         // TODO: what if best match is element and segment is attribute
         descendant = descendant.createChild(segment.getString(), namespaceUri);
         Condition condition = segment.getCondition();
-        descendant = condition.establish(descendant);
-        assert (condition.accept(descendant));
+        descendant = condition.establish(descendant, namespaceUri);
+        assert (condition.accept(descendant, namespaceUri));
       }
     }
     return descendant;
@@ -71,7 +118,7 @@ public class DescendantPathWalker {
    * @param namespaceUri
    *        is the namespace URI to use.
    * @param pathSegments
-   *        are the segemnts of the descendant path.
+   *        are the segments of the descendant path.
    * @param segmentIndex
    *        is the current index in the segment path.
    * @param match
@@ -91,7 +138,7 @@ public class DescendantPathWalker {
       AbstractConfiguration child = childIterator.next();
       // if we would know that our condition is an index-condition this could be
       // solved a lot faster...
-      if (condition.accept(child)) {
+      if (condition.accept(child, namespaceUri)) {
         match.checkMatch(child, nextIndex);
         if (nextIndex < pathSegments.length) {
           AbstractConfiguration descendant = getDescendant(child, namespaceUri, pathSegments,

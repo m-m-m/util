@@ -9,6 +9,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.path.SimplePathSegment;
 import net.sf.mmm.configuration.base.path.comparator.Comparator;
+import net.sf.mmm.configuration.base.path.comparator.EqualsComparator;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.GenericValue;
 
@@ -71,17 +72,31 @@ public class CompareCondition extends PathCondition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#establish(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
   @Override
-  public AbstractConfiguration establish(AbstractConfiguration configuration) {
+  public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
 
     if (isValuePattern()) {
       throw new ConfigurationException("Cannot establish condition with wildcards!");
     }
-    return super.establish(configuration);
+    if (this.comparator.getSymbol() != EqualsComparator.SYMBOL) {
+      throw new ConfigurationException(
+          "Can only establish condition for condition comparator equals (=)!");
+    }
+    return super.establish(configuration, namespaceUri);
   }
 
+  /**
+   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#doEstablish(net.sf.mmm.configuration.base.AbstractConfiguration)
+   */
+  @Override
+  protected void doEstablish(AbstractConfiguration node) {
+  
+    super.doEstablish(node);
+    node.getValue().setString(this.value);    
+  }
+  
   /**
    * This method gets the value to compare with the the
    * {@link AbstractConfiguration#getChild(String) childrens}
@@ -116,6 +131,17 @@ public class CompareCondition extends PathCondition {
   public Comparator getComparator() {
 
     return this.comparator;
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#appendCondition(java.lang.StringBuffer)
+   */
+  @Override
+  protected void appendCondition(StringBuffer buffer) {
+
+    super.appendCondition(buffer);
+    buffer.append(this.comparator.getSymbol());
+    buffer.append(this.value.toString());
   }
 
 }

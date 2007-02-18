@@ -58,6 +58,12 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
           result = parseNumber(value);
         } else if (type == Date.class) {
           result = parseDate(value);
+        } else if (type == Character.class) {
+          if (value.length() == 1) {
+            result = Character.valueOf(value.charAt(0));
+          } else {
+            throw new WrongValueTypeException(this, type);            
+          }
         } else {
           result = toValue(type, value);
         }

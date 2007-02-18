@@ -38,17 +38,17 @@ public class IndexCondition implements Condition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
-  public boolean accept(AbstractConfiguration configuration) {
+  public boolean accept(AbstractConfiguration configuration, String namespaceUri) {
 
     return (this.index == configuration.getSiblingIndex());
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
-  public AbstractConfiguration establish(AbstractConfiguration configuration) {
+  public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
 
     int count = configuration.getSiblingCount();
     if (this.index < count) {
@@ -63,14 +63,17 @@ public class IndexCondition implements Condition {
         }
       } else {
         String name = configuration.getName();
-        String namespaceUri = configuration.getNamespaceUri();
+        String nsUri = namespaceUri;
+        if (nsUri == null) {
+          nsUri = configuration.getNamespaceUri();          
+        }
         int diff = count - this.index;
         if (diff > 20) {
           throw new ConfigurationException("Too many siblings to create for index condition!");
         }
         AbstractConfiguration sibling = configuration;
         while (diff > 0) {
-          sibling = parent.createChild(name, namespaceUri);
+          sibling = parent.createChild(name, nsUri);
           diff--;
         }
         return sibling;

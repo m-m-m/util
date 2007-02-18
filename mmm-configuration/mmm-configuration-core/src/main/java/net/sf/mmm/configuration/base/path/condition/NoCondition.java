@@ -7,7 +7,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
 
 /**
  * This is the implementation of the {@link Condition} interface that always
- * {@link #accept(AbstractConfiguration) matches}.<br>
+ * {@link #accept(AbstractConfiguration, String) matches}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -22,17 +22,17 @@ public class NoCondition implements Condition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
-  public boolean accept(AbstractConfiguration configuration) {
+  public boolean accept(AbstractConfiguration configuration, String namespaceUri) {
 
     return true;
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
-  public AbstractConfiguration establish(AbstractConfiguration configuration) {
+  public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
 
     return configuration;
   }
