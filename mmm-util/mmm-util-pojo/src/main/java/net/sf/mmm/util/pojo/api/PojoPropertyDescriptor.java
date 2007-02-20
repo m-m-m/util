@@ -39,8 +39,8 @@ package net.sf.mmm.util.pojo.api;
  * <table>
  * <tr>
  * <th>Name</th>
- * <th>Access</th>
- * <th>Raw-Type</th>
+ * <th>Access-Type</th>
+ * <th>Property-Class</th>
  * <th>Method</th>
  * <th>Component-Type</th>
  * </tr>
@@ -113,8 +113,19 @@ public interface PojoPropertyDescriptor {
   String getName();
 
   /**
-   * This method gets the {@link PojoPropertyAccessor accessor} used to read
-   * the property. It represents the getter method for the property.
+   * This method gets the {@link PojoPropertyAccessor accessor} to access the
+   * property in the way given by <code>mode</code>.
+   * 
+   * @param mode
+   *        is the mode of the requested accessor.
+   * @return the accessor for the given <code>mode</code> or <code>null</code>
+   *         if no such accessor exists.
+   */
+  PojoPropertyAccessor getAccessor(PojoPropertyAccessMode mode);
+
+  /**
+   * This method gets the {@link PojoPropertyAccessor accessor} used to read the
+   * property. It represents the getter method for the property.
    * 
    * @return the requested accessor or <code>null</code> if it is NOT
    *         available.

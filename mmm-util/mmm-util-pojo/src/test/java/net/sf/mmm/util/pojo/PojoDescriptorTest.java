@@ -10,7 +10,8 @@ import net.sf.mmm.util.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
-import net.sf.mmm.util.pojo.impl.PojoDescriptorBuilderImpl;
+import net.sf.mmm.util.pojo.base.PojoDescriptorBuilderImpl;
+import net.sf.mmm.util.pojo.impl.MethodPropertyIntrospector;
 
 import junit.framework.TestCase;
 
@@ -44,10 +45,10 @@ public class PojoDescriptorTest extends TestCase {
       assertNull(accessor);
     } else {
       assertEquals(propertyName, accessor.getName());
-      assertEquals(readType, accessor.getRawType());
-      assertEquals(readType, accessor.getMethod().getReturnType());
+      assertEquals(readType, accessor.getPropertyClass());
+      //assertEquals(readType, accessor.getAccessibleObject().getReturnType());
       // getter must be non-arg method
-      assertEquals(0, accessor.getMethod().getParameterTypes().length);
+      //assertEquals(0, accessor.getAccessibleObject().getParameterTypes().length);
     }
     // test write accessor
     accessor = propertyDescriptor.getWriteAccess();
@@ -55,17 +56,17 @@ public class PojoDescriptorTest extends TestCase {
       assertNull(accessor);
     } else {
       assertEquals(propertyName, accessor.getName());
-      assertEquals(writeType, accessor.getRawType());
+      assertEquals(writeType, accessor.getPropertyClass());
       // setter method must take one argument
-      assertEquals(1, accessor.getMethod().getParameterTypes().length);      
-      assertEquals(writeType, accessor.getMethod().getParameterTypes()[0]);
+      //assertEquals(1, accessor.getAccessibleObject().getParameterTypes().length);      
+      //assertEquals(writeType, accessor.getAccessibleObject().getParameterTypes()[0]);
     }
   }
 
   @Test
   public void testPojoDescriptor() throws Exception {
 
-    PojoDescriptorBuilder factory = new PojoDescriptorBuilderImpl();
+    PojoDescriptorBuilder factory = new PojoDescriptorBuilderImpl(new MethodPropertyIntrospector());
     PojoDescriptor<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
     MyPojo pojoInstance = new MyPojo();

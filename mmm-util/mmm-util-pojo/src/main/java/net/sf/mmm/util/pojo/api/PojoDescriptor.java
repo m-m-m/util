@@ -54,7 +54,7 @@ public interface PojoDescriptor<P> {
    * the given <code>propertyName</code> from the given
    * <code>pojoInstance</code> using the
    * {@link PojoPropertyDescriptor#getReadAccess() getter}
-   * {@link PojoPropertyAccessor#getMethod()}.
+   * {@link PojoPropertyAccessor#getAccessibleObject()}.
    * 
    * @param pojoInstance
    *        is the {@link #getPojoType() POJO} instance where to get the
@@ -63,7 +63,7 @@ public interface PojoDescriptor<P> {
    *        is the {@link PojoPropertyDescriptor#getName() name} of the
    *        requested property.
    * @return the value of the requested property. It will be an instance of the
-   *         {@link PojoPropertyAccessor#getRawType() type} of the according
+   *         {@link PojoPropertyAccessor#getPropertyClass() type} of the according
    *         {@link PojoPropertyDescriptor#getReadAccess() getter}. Depending
    *         on the POJO, the value may be <code>null</code>.
    * @throws PojoPropertyNotFoundException
@@ -84,7 +84,7 @@ public interface PojoDescriptor<P> {
    * {@link #getPropertyDescriptor(String) property} with the given
    * <code>propertyName</code> from the given <code>pojoInstance</code>
    * using the {@link PojoPropertyDescriptor#getWriteAccess() setter}
-   * {@link PojoPropertyAccessor#getMethod()}.
+   * {@link PojoPropertyAccessor#getAccessibleObject()}.
    * 
    * @param pojoInstance
    *        is the {@link #getPojoType() POJO} instance where to set the given
@@ -97,7 +97,7 @@ public interface PojoDescriptor<P> {
    * @throws PojoPropertyNotFoundException
    *         if the property with the given <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link PojoPropertyDescriptor#getWriteAccess() writeable}.
+   *         {@link PojoPropertyDescriptor#getWriteAccess() writable}.
    * @throws IllegalAccessException
    *         if you do NOT have permissions the access the underlying setter
    *         method.
