@@ -1,4 +1,6 @@
-/* $Id: EmptyConfiguration.java 40 2006-11-05 22:51:46Z joerg.hohwiller $ */
+/* $Id: $
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base;
 
 import java.util.Iterator;

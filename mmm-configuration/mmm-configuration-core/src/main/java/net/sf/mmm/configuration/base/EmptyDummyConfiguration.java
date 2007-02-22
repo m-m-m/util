@@ -1,4 +1,6 @@
-/* $Id: EmptyDummyConfiguration.java 38 2006-11-05 09:04:58Z joerg.hohwiller $ */
+/* $Id: $
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base;
 
 import java.util.Collection;
