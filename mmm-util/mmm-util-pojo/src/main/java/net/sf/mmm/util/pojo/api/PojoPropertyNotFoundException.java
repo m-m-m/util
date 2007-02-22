@@ -1,16 +1,20 @@
 /* $Id$ */
 package net.sf.mmm.util.pojo.api;
 
+import net.sf.mmm.nls.base.NlsRuntimeException;
+import net.sf.mmm.util.pojo.NlsResourceBundlePojo;
+
 /**
- * A {@link PojoPropertyNotFoundException} is thrown if a property shoud be
- * accessed that does NOT exist (was NOT found).
+ * A {@link PojoPropertyNotFoundException} is thrown if a property should be
+ * accessed that does NOT exist (was NOT found) or can NOT be accessed in the
+ * intended way.
  * 
  * @see PojoDescriptor#getProperty(Object, String)
  * @see PojoDescriptor#setProperty(Object, String, Object)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyNotFoundException extends RuntimeException {
+public class PojoPropertyNotFoundException extends NlsRuntimeException {
 
   /** UID for serialization */
   private static final long serialVersionUID = -7713121978429674081L;
@@ -18,12 +22,32 @@ public class PojoPropertyNotFoundException extends RuntimeException {
   /**
    * The constructor.
    * 
-   * @param pojoType 
-   * @param propertyName 
+   * @param pojoType
+   *        is the class reflecting the POJO.
+   * @param propertyName
+   *        is the name of the missing property.
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName) {
 
-    super("Property " + propertyName + " not found in " + pojoType);
+    super(NlsResourceBundlePojo.ERR_PROPERTY_NOT_FOUND, propertyName, pojoType);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * TODO: own exception?
+   * 
+   * @param pojoType
+   *        is the class reflecting the POJO.
+   * @param propertyName
+   *        is the name of the missing property.
+   * @param mode
+   *        is the access-mode for which the property is NOT available.
+   */
+  public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName,
+      PojoPropertyAccessMode mode) {
+
+    super(NlsResourceBundlePojo.ERR_PROPERTY_NOT_ACCESSABLE, propertyName, pojoType, mode);
   }
 
 }

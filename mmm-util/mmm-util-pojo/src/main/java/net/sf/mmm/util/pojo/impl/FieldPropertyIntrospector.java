@@ -9,7 +9,8 @@ import net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor;
 import net.sf.mmm.util.pojo.base.PojoPropertyIntrospector;
 
 /**
- * This is an implementation of the {@link PojoPropertyIntrospector} that 
+ * This is an implementation of the {@link PojoPropertyIntrospector} that
+ * introspects the fields to find property-accessors.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -27,8 +28,8 @@ public class FieldPropertyIntrospector implements PojoPropertyIntrospector {
    * @see net.sf.mmm.util.pojo.base.PojoPropertyIntrospector#findAccessors(java.lang.Class)
    */
   public Iterator<AbstractPojoPropertyAccessor> findAccessors(Class<?> pojoType) {
-  
+
     return new FieldAccessorIterator(pojoType);
   }
-  
+
 }

@@ -4,13 +4,11 @@
 package net.sf.mmm.util.pojo.impl;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor;
 
 /**
@@ -22,8 +20,11 @@ import net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor;
  */
 public class FieldAccessorIterator implements Iterator<AbstractPojoPropertyAccessor> {
 
+  /** the current class */
+  private Class<?> currentClass;
+  
   /** the fields */
-  private final Field[] fields;
+  private Field[] fields;
 
   /** the current index of {@link #fields} */
   private int index;
@@ -43,6 +44,7 @@ public class FieldAccessorIterator implements Iterator<AbstractPojoPropertyAcces
   public FieldAccessorIterator(Class<?> pojoClass) {
 
     super();
+    this.currentClass = pojoClass;
     this.fields = pojoClass.getDeclaredFields();
     this.index = 0;
     this.field = null;
@@ -63,7 +65,15 @@ public class FieldAccessorIterator implements Iterator<AbstractPojoPropertyAcces
           this.field = currentField;
           this.field.setAccessible(true);
           this.next = new FieldPojoPropertyAccessor(this.field, PojoPropertyAccessMode.READ);
-          break;
+          return;
+        }
+      }
+      if (this.currentClass != null) {
+        this.currentClass = this.currentClass.getSuperclass();
+        if (this.currentClass != null) {
+          this.fields = this.currentClass.getDeclaredFields();
+          this.index = 0;
+          stepNext();
         }
       }
     } else {
@@ -99,34 +109,6 @@ public class FieldAccessorIterator implements Iterator<AbstractPojoPropertyAcces
   public void remove() {
 
     throw new UnsupportedOperationException();
-  }
-
-  /**
-   * This method gets the according
-   * {@link PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>.<br>
-   * This is the un-capitalized substring of the <code>methodName</code> after
-   * the prefix (given via <code>prefixLength</code>).
-   * 
-   * @param methodName
-   *        is the {@link Method#getName() name} of the
-   *        {@link net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getAccessibleObject() accessor-method}.
-   * @param prefixLength
-   *        is the length of the method prefix (e.g. 3 for "get"/"set" or 2 for
-   *        "is").
-   * @return the requested property-name or <code>null</code> if NOT available
-   *         <br> (<code>methodName</code>.{@link String#length() length()}
-   *         &lt;= <code>prefixLength</code>).
-   */
-  private static String getPropertyName(String methodName, int prefixLength) {
-
-    String methodSuffix = methodName.substring(prefixLength);
-    if (methodSuffix.length() > 0) {
-      StringBuffer sb = new StringBuffer(methodSuffix);
-      sb.setCharAt(0, Character.toLowerCase(methodSuffix.charAt(0)));
-      return sb.toString();
-    }
-    return null;
   }
 
 }

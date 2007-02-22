@@ -9,26 +9,36 @@ import net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor;
 import net.sf.mmm.util.pojo.base.PojoPropertyIntrospector;
 
 /**
- * This is an implementation of the {@link PojoPropertyIntrospector} that 
+ * This is an implementation of the {@link PojoPropertyIntrospector} that
+ * introspects the methods to find property-accessors (getters, setters, etc.).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class MethodPropertyIntrospector implements PojoPropertyIntrospector {
 
+  /** @see MethodAccessorIterator#MethodAccessorIterator(Class, boolean) */
+  private final boolean publicOnly;
+
   /**
    * The constructor
+   * 
+   * @param onlyPublic
+   *        if <code>true</code> only public methods will be considered for
+   *        when searching for property-accessors, else if <code>false</code>
+   *        all implemented methods are introspected.
    */
-  public MethodPropertyIntrospector() {
+  public MethodPropertyIntrospector(boolean onlyPublic) {
 
     super();
+    this.publicOnly = onlyPublic;
   }
 
   /**
    * @see net.sf.mmm.util.pojo.base.PojoPropertyIntrospector#findAccessors(java.lang.Class)
    */
   public Iterator<AbstractPojoPropertyAccessor> findAccessors(Class<?> pojoType) {
-  
-    return new MethodAccessorIterator(pojoType, false);
+
+    return new MethodAccessorIterator(pojoType, this.publicOnly);
   }
-  
+
 }

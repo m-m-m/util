@@ -13,14 +13,17 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
   /** @see #getName() */
   private final String name;
 
-  /** @see #getReadAccess() */
+  /** @see PojoPropertyAccessMode#READ */
   private AbstractPojoPropertyAccessor read;
 
-  /** @see #getWriteAccess() */
+  /** @see PojoPropertyAccessMode#WRITE */
   private AbstractPojoPropertyAccessor write;
 
-  /** @see #getAddAccess() */
+  /** @see PojoPropertyAccessMode#ADD */
   private AbstractPojoPropertyAccessor add;
+
+  /** @see PojoPropertyAccessMode#REMOVE */
+  private AbstractPojoPropertyAccessor remove;
 
   /**
    * The constructor.
@@ -35,6 +38,7 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
     this.read = null;
     this.write = null;
     this.add = null;
+    this.remove = null;
   }
 
   /**
@@ -61,6 +65,8 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
         return this.write;
       case ADD:
         return this.add;
+      case REMOVE:
+        return this.remove;
       default :
         // actually an illegal argument...
         return null;
@@ -87,33 +93,12 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
       case ADD:
         this.add = accessor;
         break;
+      case REMOVE:
+        this.remove = accessor;
+        break;
       default :
         // actually an illegal argument...
     }
-  }
-
-  /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyDescriptor#getAddAccess()
-   */
-  public AbstractPojoPropertyAccessor getAddAccess() {
-
-    return this.add;
-  }
-
-  /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyDescriptor#getReadAccess()
-   */
-  public AbstractPojoPropertyAccessor getReadAccess() {
-
-    return this.read;
-  }
-
-  /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyDescriptor#getWriteAccess()
-   */
-  public AbstractPojoPropertyAccessor getWriteAccess() {
-
-    return this.write;
   }
 
 }

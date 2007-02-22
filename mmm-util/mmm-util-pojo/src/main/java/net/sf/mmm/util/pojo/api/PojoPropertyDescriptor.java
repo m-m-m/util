@@ -9,7 +9,8 @@ package net.sf.mmm.util.pojo.api;
  * specification such as a Java Bean where the getter and setter of a property
  * needs to have the exact same type. In advance boolean getters can also use
  * the prefix <code>has</code>. Further a list-type property can also define
- * an {@link #getAddAccess() add-method} allowing to add items to the list.<br>
+ * an {@link PojoPropertyAccessMode#ADD add-method} allowing to add items to the
+ * list.<br>
  * <br>
  * Look at the following example:
  * 
@@ -102,7 +103,8 @@ public interface PojoPropertyDescriptor {
   /**
    * This method gets the programmatic (technical) name of the according
    * property.<br>
-   * E.g. for the accessor {@link #getReadAccess() read-accessor}
+   * E.g. for the {@link PojoPropertyAccessMode#READ read}
+   * {@link #getAccessor(PojoPropertyAccessMode) accessor}
    * <code>public String getFooBar()</code> the property name would be
    * <code>fooBar</code>.
    * 
@@ -122,32 +124,5 @@ public interface PojoPropertyDescriptor {
    *         if no such accessor exists.
    */
   PojoPropertyAccessor getAccessor(PojoPropertyAccessMode mode);
-
-  /**
-   * This method gets the {@link PojoPropertyAccessor accessor} used to read the
-   * property. It represents the getter method for the property.
-   * 
-   * @return the requested accessor or <code>null</code> if it is NOT
-   *         available.
-   */
-  PojoPropertyAccessor getReadAccess();
-
-  /**
-   * This method gets the {@link PojoPropertyAccessor accessor} used to write
-   * the property. It represents the setter method for the property.
-   * 
-   * @return the requested accessor or <code>null</code> if it is NOT
-   *         available.
-   */
-  PojoPropertyAccessor getWriteAccess();
-
-  /**
-   * This method gets the {@link PojoPropertyAccessor accessor} used to add an
-   * item to a list-type property.
-   * 
-   * @return the requested accessor or <code>null</code> if it is NOT
-   *         available.
-   */
-  PojoPropertyAccessor getAddAccess();
 
 }

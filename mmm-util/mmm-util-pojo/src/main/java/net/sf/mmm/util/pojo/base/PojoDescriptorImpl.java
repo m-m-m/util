@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.sf.mmm.util.pojo.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.api.PojoPropertyNotFoundException;
 
@@ -91,45 +92,29 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
-   * This method gets the {@link AbstractPojoPropertyAccessor accessor} used to
-   * read the property identified by the given <code>propertyName</code>.
+   * This method gets the {@link AbstractPojoPropertyAccessor accessor} for the
+   * property identified by the given <code>propertyName</code> and the given
+   * access <code>mode</code>.
    * 
    * @param propertyName
-   *        is the name of the requested property.
-   * @return the accessor used to read the property identified by the given
-   *         <code>propertyName</code> or <code>null</code> if no public
-   *         read-{@link AbstractPojoPropertyAccessor#getAccessibleObject() method}
-   *         exists for the property in the according
-   *         {@link #getPojoType() POJO}.
+   *        is the name of the property.
+   * @param mode
+   *        identifies the way how to access the specified property.
+   * @return the accessor for the property identified by the given
+   *         <code>propertyName</code> using the given <code>mode</code>.
+   * @throws PojoPropertyNotFoundException
+   *         if the requested property-accessor does NOT exist.
    */
-  public AbstractPojoPropertyAccessor getReadAccess(String propertyName) {
+  public AbstractPojoPropertyAccessor getAccessor(String propertyName, PojoPropertyAccessMode mode)
+      throws PojoPropertyNotFoundException {
 
-    AbstractPojoPropertyAccessor accessor = null;
     PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(propertyName);
-    if (descriptor != null) {
-      accessor = descriptor.getReadAccess();
+    if (descriptor == null) {
+      throw new PojoPropertyNotFoundException(this.pojoType, propertyName);
     }
-    return accessor;
-  }
-
-  /**
-   * This method gets the {@link AbstractPojoPropertyAccessor accessor} used to
-   * write the property identified by the given <code>propertyName</code>.
-   * 
-   * @param propertyName
-   *        is the name of the requested property.
-   * @return the accessor used to write the property identified by the given
-   *         <code>propertyName</code> or <code>null</code> if no public
-   *         write-{@link AbstractPojoPropertyAccessor#getAccessibleObject() method}
-   *         exists for the property in the according
-   *         {@link #getPojoType() POJO}.
-   */
-  public AbstractPojoPropertyAccessor getWriteAccess(String propertyName) {
-
-    AbstractPojoPropertyAccessor accessor = null;
-    PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(propertyName);
-    if (descriptor != null) {
-      accessor = descriptor.getWriteAccess();
+    AbstractPojoPropertyAccessor accessor = descriptor.getAccessor(mode);
+    if (accessor == null) {
+      throw new PojoPropertyNotFoundException(this.pojoType, propertyName, mode);
     }
     return accessor;
   }
@@ -141,11 +126,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   public Object getProperty(P pojoInstance, String propertyName)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    AbstractPojoPropertyAccessor readAccess = getReadAccess(propertyName);
-    if (readAccess == null) {
-      throw new PojoPropertyNotFoundException(getPojoType(), propertyName);
-    }
-    return readAccess.get(pojoInstance);
+    return getAccessor(propertyName, PojoPropertyAccessMode.READ).get(pojoInstance);
   }
 
   /**
@@ -155,12 +136,18 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   public void setProperty(P pojoInstance, String propertyName, Object value)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    AbstractPojoPropertyAccessor writeAccess = getWriteAccess(propertyName);
-    if (writeAccess == null) {
-      throw new PojoPropertyNotFoundException(getPojoType(), propertyName);
-    }
     // TODO: maybe convert the type
-    writeAccess.set(pojoInstance, value);
+    getAccessor(propertyName, PojoPropertyAccessMode.WRITE).set(pojoInstance, value);
+  }
+
+  /**
+   * @see net.sf.mmm.util.pojo.api.PojoDescriptor#addPropertyItem(java.lang.Object,
+   *      java.lang.String, java.lang.Object)
+   */
+  public void addPropertyItem(P pojoInstance, String propertyName, Object item)
+      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+
+    getAccessor(propertyName, PojoPropertyAccessMode.ADD).set(pojoInstance, item);
   }
 
   /**

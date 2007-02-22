@@ -4,7 +4,8 @@ package net.sf.mmm.util.pojo.base;
 import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
 
 /**
- * This is the implementation of the {@link PojoDescriptorBuilder} interface.
+ * This is the generic implementation of the {@link PojoDescriptorBuilder}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

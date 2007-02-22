@@ -60,6 +60,11 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
    * 
    * @param pojoClass
    *        is the class for which the property-accessors should be iterated.
+   * @param onlyPublic
+   *        if <code>true</code> only {@link Modifier#isPublic(int) public}
+   *        methods will be considered for when searching for
+   *        property-accessors, else if <code>false</code> all implemented
+   *        methods are introspected.
    */
   public MethodAccessorIterator(Class<?> pojoClass, boolean onlyPublic) {
 
@@ -96,7 +101,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
       if (this.currentClass != null) {
         this.methods = this.currentClass.getDeclaredMethods();
         this.index = 0;
-        stepNext();        
+        stepNext();
       }
     }
   }
