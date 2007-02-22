@@ -19,74 +19,100 @@ import java.util.List;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> implements
-        EventSource<E, L> {
+    EventSource<E, L> {
 
-    /** the registered listeners */
-    private final List<L> listeners;
+  /** the registered listeners */
+  private final List<L> listeners;
 
-    /**
-     * The constructor.
-     */
-    public AbstractEventSource() {
+  /**
+   * The constructor.
+   */
+  public AbstractEventSource() {
 
-        super();
-        this.listeners = new ArrayList<L>();
+    super();
+    this.listeners = new ArrayList<L>();
+  }
+
+  /**
+   * The constructor
+   * 
+   * @param listenerList
+   *        is the list used to store the listeners.
+   */
+  protected AbstractEventSource(List<L> listenerList) {
+
+    super();
+    this.listeners = listenerList;
+  }
+
+  /**
+   * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
+   */
+  public void addListener(L listener) {
+
+    this.listeners.add(listener);
+  }
+
+  /**
+   * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
+   */
+  public void removeListener(L listener) {
+
+    this.listeners.remove(listener);
+  }
+
+  /**
+   * This method sends the given <code>event</code> to all
+   * {@link #addListener(EventListener) registered} listeners.
+   * 
+   * @param event
+   *        the event to set.
+   */
+  protected void fireEvent(E event) {
+
+    int length = this.listeners.size();
+    for (int i = 0; i < length; i++) {
+      L listener = this.listeners.get(i);
+      try {
+        fireEvent(event, listener);
+      } catch (RuntimeException e) {
+        handleListenerError(listener, event, e);
+      }
     }
+  }
 
-    /**
-     * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
-     */
-    public void addListener(L listener) {
+  /**
+   * This method sends the given <code>event</code> to the given
+   * <code>listener</code>.
+   * 
+   * @param event
+   *        the event to set.
+   * @param listener
+   *        the listener that should receive the <code>event</code>.
+   */
+  protected void fireEvent(E event, L listener) {
 
-        this.listeners.add(listener);
-    }
+    listener.handleEvent(event);
+  }
 
-    /**
-     * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
-     */
-    public void removeListener(L listener) {
+  /**
+   * This method is called if a listener throws something while handling an
+   * event.<br>
+   * The default implementation is to do nothing. Override this method to change
+   * the behaviour (e.g. log the problem, remove the "evil" listener, throw the
+   * error anyways).
+   * 
+   * @param listener
+   *        is the listener that caused the error.
+   * @param event
+   *        is the event that could not be handled.
+   * @param error
+   *        is the throwable caused by the <code>listener</code> while
+   *        handling the <code>event</code>.
+   */
+  protected void handleListenerError(L listener, E event, Throwable error) {
 
-        this.listeners.remove(listener);
-    }
-
-    /**
-     * This method sends the given <code>event</code> to all
-     * {@link #addListener(EventListener) registered} listeners.
-     * 
-     * @param event
-     *        the event to set.
-     */
-    protected void fireEvent(E event) {
-
-        int length = this.listeners.size();
-        for (int i = 0; i < length; i++) {
-            L listener = this.listeners.get(i);
-            try {
-                listener.handleEvent(event);
-            } catch (RuntimeException e) {
-                handleListenerError(listener, event, e);
-            }
-        }
-    }
-
-    /**
-     * This method is called if a listener throws something while handling an
-     * event.<br>
-     * The default implementation is to do nothing. Override this method to
-     * change the behaviour (e.g. log the problem, remove the "evil" listener,
-     * throw the error anyways).
-     * 
-     * @param listener
-     *        is the listener that caused the error.
-     * @param event
-     *        is the event that could not be handled.
-     * @param error
-     *        is the throwable caused by the <code>listener</code> while
-     *        handling the <code>event</code>.
-     */
-    protected void handleListenerError(L listener, E event, Throwable error) {
-
-    // by default do nothing
-    }
+  // by default do nothing
+  }
 
 }
