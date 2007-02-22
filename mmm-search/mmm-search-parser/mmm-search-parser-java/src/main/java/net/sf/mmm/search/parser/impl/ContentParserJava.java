@@ -24,8 +24,8 @@ public class ContentParserJava extends ContentParserText {
   private static final Pattern CLASS_PATTERN = Pattern.compile("[\\sa-z]*(class|interface)\\s+(\\w*).*");
 
   /** pattern to extract the author */
-  private static final Pattern AUTHOR_PATTERN = Pattern.compile("[\\s/*]*@author\\s+([^(</]*)");
-
+  private static final Pattern AUTHOR_PATTERN = Pattern.compile("[\\s/*]*@author\\s+\"?([^(</\"]*)");
+  
   /**
    * The constructor
    */
