@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsSearchEngineApiBundle;
+import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -26,7 +26,7 @@ public class SearchParseException extends SearchException {
    */
   public SearchParseException(String query) {
 
-    super(NlsSearchEngineApiBundle.ERR_PARSE, query);
+    super(NlsResourceBundleSearchEngineApi.ERR_PARSE, query);
   }
 
   /**
@@ -39,7 +39,7 @@ public class SearchParseException extends SearchException {
    */
   public SearchParseException(Throwable nested, String query) {
 
-    super(nested, NlsSearchEngineApiBundle.ERR_PARSE, query);
+    super(nested, NlsResourceBundleSearchEngineApi.ERR_PARSE, query);
   }
 
 }

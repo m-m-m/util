@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsSearchEngineApiBundle;
+import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
 
@@ -25,7 +25,7 @@ public class SearchAddFailedException extends SearchException {
    */
   public SearchAddFailedException(SearchEntry entry) {
 
-    super(NlsSearchEngineApiBundle.ERR_ADD_FAILED, "" + entry);
+    super(NlsResourceBundleSearchEngineApi.ERR_ADD_FAILED, "" + entry);
   }
 
   /**
@@ -38,7 +38,7 @@ public class SearchAddFailedException extends SearchException {
    */
   public SearchAddFailedException(Throwable nested, SearchEntry entry) {
 
-    super(nested, NlsSearchEngineApiBundle.ERR_ADD_FAILED, "" + entry);
+    super(nested, NlsResourceBundleSearchEngineApi.ERR_ADD_FAILED, "" + entry);
   }
 
 }

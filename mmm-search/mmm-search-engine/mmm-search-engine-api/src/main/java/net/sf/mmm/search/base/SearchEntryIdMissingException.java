@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsSearchEngineApiBundle;
+import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -25,7 +25,7 @@ public class SearchEntryIdMissingException extends SearchException {
    */
   public SearchEntryIdMissingException(String entryId) {
 
-    super(NlsSearchEngineApiBundle.ERR_ENTRY_ID_MISSING, entryId);
+    super(NlsResourceBundleSearchEngineApi.ERR_ENTRY_ID_MISSING, entryId);
   }
 
   /**
@@ -38,7 +38,7 @@ public class SearchEntryIdMissingException extends SearchException {
    */
   public SearchEntryIdMissingException(Throwable nested, String entryId) {
 
-    super(nested, NlsSearchEngineApiBundle.ERR_ENTRY_ID_MISSING, entryId);
+    super(nested, NlsResourceBundleSearchEngineApi.ERR_ENTRY_ID_MISSING, entryId);
   }
 
 }

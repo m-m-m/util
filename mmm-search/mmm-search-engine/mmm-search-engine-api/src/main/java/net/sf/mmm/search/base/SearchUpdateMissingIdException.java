@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsSearchEngineApiBundle;
+import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -21,7 +21,7 @@ public class SearchUpdateMissingIdException extends SearchException {
    */
   public SearchUpdateMissingIdException() {
 
-    super(NlsSearchEngineApiBundle.ERR_UPDATE_MISSING_ID);
+    super(NlsResourceBundleSearchEngineApi.ERR_UPDATE_MISSING_ID);
   }
 
 }

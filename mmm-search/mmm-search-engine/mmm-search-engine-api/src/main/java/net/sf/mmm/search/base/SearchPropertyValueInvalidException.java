@@ -1,7 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsSearchEngineApiBundle;
+import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -26,7 +26,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(String propertyName, String value) {
 
-    super(NlsSearchEngineApiBundle.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
+    super(NlsResourceBundleSearchEngineApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
   }
 
   /**
@@ -41,7 +41,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(Throwable nested, String propertyName, String value) {
 
-    super(nested, NlsSearchEngineApiBundle.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
+    super(nested, NlsResourceBundleSearchEngineApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
   }
 
 }

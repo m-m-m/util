@@ -8,12 +8,12 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NlsSearchEngineApiBundle extends AbstractResourceBundle {
+public class NlsResourceBundleSearchEngineApi extends AbstractResourceBundle {
 
   /**
    * The constructor
    */
-  public NlsSearchEngineApiBundle() {
+  public NlsResourceBundleSearchEngineApi() {
 
     super();
   }
@@ -21,7 +21,7 @@ public class NlsSearchEngineApiBundle extends AbstractResourceBundle {
   /**
    * @see net.sf.mmm.search.base.SearchUpdateMissingIdException
    */
-  public static final String ERR_UPDATE_MISSING_ID = "Can not update entry: neigther UID nor URI is set!";
+  public static final String ERR_UPDATE_MISSING_ID = "Can not update entry: neither UID nor URI is set!";
 
   /**
    * @see net.sf.mmm.search.base.SearchIdInvalidException
