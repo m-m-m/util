@@ -56,7 +56,7 @@ public interface ComponentProvider<S> {
   /**
    * This method is called if a
    * {@link ComponentInstanceContainer#getInstance() component instance} is
-   * NOT needed anymore by the requestor. This method eithter
+   * NOT needed anymore by the requestor. This method either
    * {@link #dispose(ComponentInstanceContainer, ComponentManager) disposes}
    * the given
    * {@link ComponentInstanceContainer#getInstance() component instance} and
@@ -95,8 +95,8 @@ public interface ComponentProvider<S> {
    * If a component is disposed (shut-down), all resources (e.g.
    * {@link Thread threads}, {@link Process processes},
    * {@link InputStream streams}, memory, etc.) allocated for the
-   * {@link ComponentInstanceContainer#getInstance() componant instance}
-   * should be released. All dependend components should NOT be touched by
+   * {@link ComponentInstanceContainer#getInstance() component instance}
+   * should be released. All dependent components should NOT be touched by
    * this method. They will be released automatically be the container.<br>
    * 
    * @param instanceContainer

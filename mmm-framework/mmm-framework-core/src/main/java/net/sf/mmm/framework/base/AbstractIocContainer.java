@@ -18,7 +18,7 @@ import net.sf.mmm.framework.api.IocContainer;
 import net.sf.mmm.framework.base.provider.SimpleSingletonProvider;
 
 /**
- * This is the abstact base implementation of the {@link MutableIocContainer}
+ * This is the abstract base implementation of the {@link MutableIocContainer}
  * interface.
  * 
  * TODO: shared component management and shutdown?!?
@@ -108,7 +108,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    * 
    * @see #createChildContainer(String)
    * 
-   * @return the parent-container or <code>null</code> if this is a toplevel
+   * @return the parent-container or <code>null</code> if this is a top-level
    *         container.
    */
   protected AbstractIocContainer getParentContainer() {
@@ -264,7 +264,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    * @param specification
    *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        of the component.
-   * @return the requested provider or <code>null</code> if NOT avaialable.
+   * @return the requested provider or <code>null</code> if NOT available.
    */
   protected <S> ComponentProvider<S> getProvider(Class<S> specification) {
 
@@ -280,7 +280,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   /**
    * @see net.sf.mmm.framework.api.ComponentManager#hasComponent(java.lang.Class)
    * 
-   * This method determines if the componenet for the given
+   * This method determines if the component for the given
    * {@link ComponentDescriptor#getSpecification() specification} is
    * available. In that case, it can be retrieved via the
    * {@link ComponentManager#requestComponent(Class)} method without causing
@@ -328,7 +328,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
      * (target.getInstanceContainer().getInstance() == component) {
      * releaseComponentByNode(target); // targetIterator.remove(); return; } }
      */
-    warning("Could not relase unknown component instance '" + component + "'!");
+    warning("Could not release unknown component instance '" + component + "'!");
   }
 
   /**
@@ -518,7 +518,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    *        {@link ComponentDescriptor#getSpecification() specification} of
    *        the requested component.
    * @param instanceId
-   *        identifies a specific instance of the componnent for
+   *        identifies a specific instance of the component for
    *        <code>specification</code> if there are multiple. The
    *        {@link ComponentManager#requestComponent(Class) default} is
    *        {@link ComponentManager#DEFAULT_INSTANCE_ID}.
@@ -531,7 +531,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    *         if the requested component is NOT
    *         {@link #hasComponent(Class) available} or could not be provided.
    * @throws ContainerException
-   *         if a fundamental problem occured (e.g. the container has NOT been
+   *         if a fundamental problem occurred (e.g. the container has NOT been
    *         started).
    */
   protected <S> S requestComponent(Class<S> specification, String instanceId,

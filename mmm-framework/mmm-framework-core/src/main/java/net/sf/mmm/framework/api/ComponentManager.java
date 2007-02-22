@@ -19,7 +19,7 @@ public interface ComponentManager {
   String DEFAULT_INSTANCE_ID = "default";
 
   /**
-   * This method determines if the componenet for the given
+   * This method determines if the component for the given
    * {@link ComponentDescriptor#getSpecification() specification} is
    * available. In that case, it can be retrieved via the
    * {@link #requestComponent(Class)} method without causing an "component not
@@ -64,7 +64,7 @@ public interface ComponentManager {
    *         if the requested component is NOT
    *         {@link #hasComponent(Class) available} or could not be provided.
    * @throws ContainerException
-   *         if a fundamental problem occured (e.g. the container has NOT been
+   *         if a fundamental problem occurred (e.g. the container has NOT been
    *         started).
    */
   <S> S requestComponent(Class<S> specification) throws ComponentException, ContainerException;
@@ -84,7 +84,7 @@ public interface ComponentManager {
    *        {@link ComponentDescriptor#getSpecification() specification} of
    *        the requested component.
    * @param instanceId
-   *        identifies a specific instance of the componnent for
+   *        identifies a specific instance of the component for
    *        <code>specification</code> if there are multiple. The
    *        {@link #requestComponent(Class) default} is
    *        {@link #DEFAULT_INSTANCE_ID}.
@@ -98,7 +98,7 @@ public interface ComponentManager {
    *         if the requested component is NOT
    *         {@link #hasComponent(Class) available} or could not be provided.
    * @throws ContainerException
-   *         if a fundamental problem occured (e.g. the container has NOT been
+   *         if a fundamental problem occurred (e.g. the container has NOT been
    *         started).
    */
   <S> S requestComponent(Class<S> specification, String instanceId) throws ComponentException,
