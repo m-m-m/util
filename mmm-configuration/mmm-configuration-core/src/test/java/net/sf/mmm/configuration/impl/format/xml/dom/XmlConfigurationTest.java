@@ -1,9 +1,7 @@
 /* $Id$ */
 package net.sf.mmm.configuration.impl.format.xml.dom;
 
-import java.net.URL;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.Test;
 
