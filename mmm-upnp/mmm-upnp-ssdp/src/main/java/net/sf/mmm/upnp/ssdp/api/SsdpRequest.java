@@ -24,10 +24,10 @@ public class SsdpRequest extends HttpRequest {
   /** the SSDP multicast port */
   public static final int MULTICAST_PORT = 1900;
 
-  /** device available (register advertisment) */
+  /** device available (register advertisement) */
   public static final String NTS_SSDP_ALIVE = "ssdp:alive";
 
-  /** device unavailable (de-register advertisment) */
+  /** device unavailable (de-register advertisement) */
   public static final String NTS_SSDP_BYEBYE = "ssdp:byebye";
 
   /** proper man header */
@@ -86,7 +86,7 @@ public class SsdpRequest extends HttpRequest {
 
   /**
    * The {@link #getHeaderProperty(String) header-property} <code>NTS</code>.
-   * Jep, it is NOT <code>NST</code> - this is correct.
+   * Yes, it is NOT <code>NST</code> - this is correct.
    */
   public static final String HEADER_PROPERTY_NOTIFICATION_SUB_TYPE = "NTS";
 
@@ -275,7 +275,7 @@ public class SsdpRequest extends HttpRequest {
    */
   public String getServerProductName() {
 
-    // the SSDP specification is very unprecise here:
+    // the SSDP specification is very un precise here:
     // we assume that names do NOT contain the character '/'
     // and versions do NOT contain the whitespace character ' '.
     String serverText = getHeaderProperty(HEADER_PROPERTY_SERVER);
@@ -300,7 +300,7 @@ public class SsdpRequest extends HttpRequest {
    */
   public String getServerProductVersion() {
 
-    // the SSDP specification is very unprecise here:
+    // the SSDP specification is very un precise here:
     // we assume that names do NOT contain the character '/'
     // and versions do NOT contain the whitespace character ' '.
     String serverText = getHeaderProperty(HEADER_PROPERTY_SERVER);

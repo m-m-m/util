@@ -11,7 +11,7 @@ import java.io.IOException;
 public interface SsdpSender {
 
   /**
-   * This method sents the given <code>request</code> as multicast via UDP.
+   * This method sends the given <code>request</code> as multicast via UDP.
    * 
    * @param request
    *        is the request to send.
