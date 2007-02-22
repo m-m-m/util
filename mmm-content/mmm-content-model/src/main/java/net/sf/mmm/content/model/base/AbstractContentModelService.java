@@ -10,7 +10,7 @@ import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.util.event.AbstractEventSource;
+import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
 
@@ -21,7 +21,7 @@ import net.sf.mmm.util.event.EventSource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractContentModelService extends
-    AbstractEventSource<ContentModelEvent, EventListener<ContentModelEvent>> implements
+    AbstractSynchronizedEventSource<ContentModelEvent, EventListener<ContentModelEvent>> implements
     ContentModelService {
 
   /** @see #getClass(String) */
@@ -91,7 +91,7 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * This method registeres the given <code>contentClass</code> to this
+   * This method registers the given <code>contentClass</code> to this
    * service.<br>
    * It does NOT {@link #fireEvent(ContentModelEvent) fire} the according event.
    * 
@@ -120,7 +120,7 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * This method {@link #addClass(ContentClass) registeres} the given
+   * This method {@link #addClass(ContentClass) registers} the given
    * <code>contentClass</code> recursive. Here recursive means that all
    * {@link ContentClass#getSubClasses() sub-classes} are
    * {@link #addClassRecursive(ContentClass) registered} recursively.
