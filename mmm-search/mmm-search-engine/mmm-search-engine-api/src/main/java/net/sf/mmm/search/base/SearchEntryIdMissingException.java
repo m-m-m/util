@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
+import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -27,7 +27,7 @@ public class SearchEntryIdMissingException extends SearchException {
    */
   public SearchEntryIdMissingException(String entryId) {
 
-    super(NlsResourceBundleSearchEngineApi.ERR_ENTRY_ID_MISSING, entryId);
+    super(NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, entryId);
   }
 
   /**
@@ -40,7 +40,7 @@ public class SearchEntryIdMissingException extends SearchException {
    */
   public SearchEntryIdMissingException(Throwable nested, String entryId) {
 
-    super(nested, NlsResourceBundleSearchEngineApi.ERR_ENTRY_ID_MISSING, entryId);
+    super(nested, NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, entryId);
   }
 
 }

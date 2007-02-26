@@ -11,7 +11,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.term.CoreNlsResourceBundle;
+import net.sf.mmm.term.NlsBundleTermCore;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.api.Function;
@@ -269,7 +269,7 @@ public class GenericFunction extends BasicFunction {
           Class<?> excType = exceptionTypes[j];
           if (!CalculationException.class.isAssignableFrom(excType)) {
             if (!RuntimeException.class.isAssignableFrom(excType)) {
-              throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_ILLEGAL_EXCEPTION_TYPE,
+              throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_EXCEPTION_TYPE,
                   partialFunction, this, signature, excType);
             }
           }
@@ -277,7 +277,7 @@ public class GenericFunction extends BasicFunction {
         return;
       }
     }
-    throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_ILLEGAL_METHOD, partialFunction,
+    throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_METHOD, partialFunction,
         this, signature);
   }
 
@@ -305,7 +305,7 @@ public class GenericFunction extends BasicFunction {
     try {
       return ReflectionUtil.getStaticField(partialFunction, fieldName, fieldType, true);
     } catch (Throwable e) {
-      throw new FunctionException(e, CoreNlsResourceBundle.ERR_FCT_FIELD, partialFunction, this,
+      throw new FunctionException(e, NlsBundleTermCore.ERR_FCT_FIELD, partialFunction, this,
           fieldName, fieldType);
     }
   }
@@ -325,13 +325,13 @@ public class GenericFunction extends BasicFunction {
     int classModifiers = partialFunction.getModifiers();
     if (Modifier.isAbstract(classModifiers) || Modifier.isInterface(classModifiers)
         || !Modifier.isPublic(classModifiers)) {
-      throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_ILLEGAL_CLASS, partialFunction,
+      throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_CLASS, partialFunction,
           this);
     }
     // check if operator is valid...
     String operator = getStaticField(partialFunction, FIELD_NAME_SYMBOL, String.class);
     if (!BasicUtil.isEqual(this.symbol, operator)) {
-      throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_WRONG_SYMBOL, partialFunction,
+      throw new FunctionException(NlsBundleTermCore.ERR_FCT_WRONG_SYMBOL, partialFunction,
           this, operator);
     }
   }
@@ -364,7 +364,7 @@ public class GenericFunction extends BasicFunction {
         validateMethod(method, partialFunction, signature);
         // check for duplicate signature
         if (this.signature2method.containsKey(signature)) {
-          throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_DUPLICATE_SIGNATURE,
+          throw new FunctionException(NlsBundleTermCore.ERR_FCT_DUPLICATE_SIGNATURE,
               partialFunction, this, signature);
         }
         this.signature2method.put(signature, method);
@@ -379,7 +379,7 @@ public class GenericFunction extends BasicFunction {
     }
     if (maxSignatureCount == -1) {
       // no method found!
-      throw new FunctionException(CoreNlsResourceBundle.ERR_FCT_EMPTY, partialFunction, this);
+      throw new FunctionException(NlsBundleTermCore.ERR_FCT_EMPTY, partialFunction, this);
     }
     if (maxSignatureCount > this.maxArgCount) {
       if (maxSignatureCount > 1) {

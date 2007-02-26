@@ -1,4 +1,6 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.api;
 
 import java.util.Date;
@@ -8,7 +10,7 @@ import java.util.Date;
 
 /**
  * This is the interface for the history of a specific
- * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}
+ * {@link net.sf.mmm.content.api.resource.ContentResource content-resource}
  * revision.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

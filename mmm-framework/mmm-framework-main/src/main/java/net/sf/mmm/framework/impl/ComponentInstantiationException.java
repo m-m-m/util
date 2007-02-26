@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.impl;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentException;
 
 /**
@@ -37,7 +37,7 @@ public class ComponentInstantiationException extends ComponentException {
     public ComponentInstantiationException(Class specification, Class implementation,
             String instanceId, Exception cause) {
 
-        super(cause, NlsResourceBundle.ERR_INSTANTIATION, specification, implementation, instanceId);
+        super(cause, NlsBundleFrameworkCore.ERR_INSTANTIATION, specification, implementation, instanceId);
     }
 
 }

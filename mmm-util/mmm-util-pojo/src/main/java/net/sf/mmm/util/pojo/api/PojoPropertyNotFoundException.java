@@ -4,7 +4,7 @@
 package net.sf.mmm.util.pojo.api;
 
 import net.sf.mmm.nls.base.NlsRuntimeException;
-import net.sf.mmm.util.pojo.NlsResourceBundlePojo;
+import net.sf.mmm.util.pojo.NlsBundlePojo;
 
 /**
  * A {@link PojoPropertyNotFoundException} is thrown if a property should be
@@ -31,7 +31,7 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName) {
 
-    super(NlsResourceBundlePojo.ERR_PROPERTY_NOT_FOUND, propertyName, pojoType);
+    super(NlsBundlePojo.ERR_PROPERTY_NOT_FOUND, propertyName, pojoType);
   }
 
   /**
@@ -49,7 +49,7 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName,
       PojoPropertyAccessMode mode) {
 
-    super(NlsResourceBundlePojo.ERR_PROPERTY_NOT_ACCESSABLE, propertyName, pojoType, mode);
+    super(NlsBundlePojo.ERR_PROPERTY_NOT_ACCESSABLE, propertyName, pojoType, mode);
   }
 
 }

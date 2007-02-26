@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.value.CoreNlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueCore;
 
 /**
  * This is the exception thrown if a required value was not set.
@@ -23,7 +25,7 @@ public class ValueNotSetException extends ValueException {
    */
   public ValueNotSetException(GenericValue genericValue) {
 
-    super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, genericValue);
+    super(NlsBundleValueCore.ERR_VALUE_NOT_SET, genericValue);
   }
 
   /**
@@ -34,7 +36,7 @@ public class ValueNotSetException extends ValueException {
    */
   public ValueNotSetException(String valueName) {
 
-    super(CoreNlsResourceBundle.ERR_VALUE_NOT_SET, valueName);
+    super(NlsBundleValueCore.ERR_VALUE_NOT_SET, valueName);
   }
 
 }

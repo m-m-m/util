@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.security.api;
 
-import net.sf.mmm.content.NlsResourceBundle;
+import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.api.ContentObject;
 
 /**
@@ -30,7 +30,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(String subject, String action, String object) {
 
-    super(NlsResourceBundle.ERR_PERMISSION_DENIED, subject, action, object);
+    super(NlsBundleContentModel.ERR_PERMISSION_DENIED, subject, action, object);
   }
 
   /**

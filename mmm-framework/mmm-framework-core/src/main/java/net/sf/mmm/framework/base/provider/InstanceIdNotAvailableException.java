@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base.provider;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
 import net.sf.mmm.framework.api.ComponentManager;
@@ -34,7 +34,7 @@ public class InstanceIdNotAvailableException extends ComponentException {
    */
   public InstanceIdNotAvailableException(String instanceId, ComponentDescriptor<?> descriptor) {
 
-    super(NlsResourceBundle.ERR_COMPONENT_ID_NOT_AVAILABLE, descriptor.getSpecification(),
+    super(NlsBundleFrameworkCore.ERR_COMPONENT_ID_NOT_AVAILABLE, descriptor.getSpecification(),
         instanceId);
   }
 

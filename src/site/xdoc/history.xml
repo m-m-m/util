@@ -108,7 +108,7 @@
       </subsection>
       <subsection name="2007-02-02">
         Moved the subversion repository from googlecode.com to sourceforge.net. With <code>svnsync</code> and 
-        <code>svnadmin</code> this migration was possible without loosing the versioning history.
+        <code>svnadmin</code> this migration was possible without losing the versioning history.
         So now we are back in homeland and can use additional features (commit-hooks) offered by sf.net.
         I am quite sure that this is the final destination for the version control management.
       </subsection>

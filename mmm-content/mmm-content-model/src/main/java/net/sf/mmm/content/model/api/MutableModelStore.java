@@ -95,7 +95,7 @@ public interface MutableModelStore extends ContentModelReadAccess {
    * @param classOrField
    *        is the class or field to mark as deleted.
    * @param deleteFlag -
-   *        if <code>true</code> the class will be marked as delted, else it
+   *        if <code>true</code> the class will be marked as deleted, else it
    *        will be undeleted.
    * @throws ContentModelException
    *         if the deleted flag could not be modified. This can have one of the

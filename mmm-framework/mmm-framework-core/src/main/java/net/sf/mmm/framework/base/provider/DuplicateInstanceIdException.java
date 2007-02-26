@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base.provider;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
 
@@ -31,7 +31,7 @@ public class DuplicateInstanceIdException extends ComponentException {
    */
   public DuplicateInstanceIdException(String instanceId, ComponentDescriptor descriptor) {
 
-    super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_INSTANCE_ID, instanceId, descriptor
+    super(NlsBundleFrameworkCore.ERR_COMPONENT_DUPLICATE_INSTANCE_ID, instanceId, descriptor
         .getSpecification());
   }
 

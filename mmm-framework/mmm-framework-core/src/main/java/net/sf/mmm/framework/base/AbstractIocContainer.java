@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentException;
 import net.sf.mmm.framework.api.ComponentInstanceContainer;
@@ -190,7 +190,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
 
     if (!this.stopped) {
       if (!this.started) {
-        throw new ContainerException(NlsResourceBundle.ERR_CONTAINER_NOT_STARTED);
+        throw new ContainerException(NlsBundleFrameworkCore.ERR_CONTAINER_NOT_STARTED);
       }
       info("stopping IoC-Container [" + getName() + "]");
       this.stopped = true;
@@ -234,10 +234,10 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   protected final void ensureRunning() throws ContainerException {
 
     if (!this.started) {
-      throw new ContainerException(NlsResourceBundle.ERR_CONTAINER_NOT_STARTED);
+      throw new ContainerException(NlsBundleFrameworkCore.ERR_CONTAINER_NOT_STARTED);
     }
     if (this.stopped) {
-      throw new ContainerException(NlsResourceBundle.ERR_CONTAINER_STOPPED);
+      throw new ContainerException(NlsBundleFrameworkCore.ERR_CONTAINER_STOPPED);
     }
   }
 
@@ -252,7 +252,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   protected final void ensureNotStarted() throws ContainerException {
 
     if (this.started) {
-      throw new ContainerException(NlsResourceBundle.ERR_CONTAINER_STARTED);
+      throw new ContainerException(NlsBundleFrameworkCore.ERR_CONTAINER_STARTED);
     }
   }
 

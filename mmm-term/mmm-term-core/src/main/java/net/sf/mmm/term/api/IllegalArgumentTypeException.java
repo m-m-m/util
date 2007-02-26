@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.CoreNlsResourceBundle;
+import net.sf.mmm.term.NlsBundleTermCore;
 import net.sf.mmm.util.reflect.Arguments;
 import net.sf.mmm.util.reflect.Signature;
 
@@ -29,7 +29,7 @@ public class IllegalArgumentTypeException extends CalculationException {
    */
   public IllegalArgumentTypeException(Function function, Signature signature) {
 
-    super(CoreNlsResourceBundle.ERR_ILLEGAL_SIGNATURE, function, signature);
+    super(NlsBundleTermCore.ERR_ILLEGAL_SIGNATURE, function, signature);
   }
 
   /**
@@ -42,7 +42,7 @@ public class IllegalArgumentTypeException extends CalculationException {
    */
   public IllegalArgumentTypeException(Function function, Arguments arguments) {
 
-    super(CoreNlsResourceBundle.ERR_ILLEGAL_ARGUMENTS, function, arguments);
+    super(NlsBundleTermCore.ERR_ILLEGAL_ARGUMENTS, function, arguments);
   }
 
   /**
@@ -58,7 +58,7 @@ public class IllegalArgumentTypeException extends CalculationException {
    */
   public IllegalArgumentTypeException(Function function, Arguments arguments, Throwable nested) {
 
-    super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_ARGUMENTS, function, arguments);
+    super(nested, NlsBundleTermCore.ERR_ILLEGAL_ARGUMENTS, function, arguments);
   }
 
   /**

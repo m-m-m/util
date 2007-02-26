@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentProvider;
 import net.sf.mmm.framework.api.DependencyException;
 import net.sf.mmm.framework.api.IocContainer;
@@ -28,7 +28,7 @@ public class DependencyCycleException extends DependencyException {
    */
   public DependencyCycleException(String cycle) {
 
-    super(NlsResourceBundle.ERR_DEPENDENCY_CYCLE, cycle);
+    super(NlsBundleFrameworkCore.ERR_DEPENDENCY_CYCLE, cycle);
   }
 
 }

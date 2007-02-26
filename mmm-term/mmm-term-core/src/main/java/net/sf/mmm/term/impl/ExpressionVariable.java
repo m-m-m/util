@@ -4,7 +4,7 @@
 package net.sf.mmm.term.impl;
 
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.term.CoreNlsResourceBundle;
+import net.sf.mmm.term.NlsBundleTermCore;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.base.AbstractVariable;
@@ -54,7 +54,7 @@ public class ExpressionVariable extends AbstractVariable {
 
     Object expressionResult = this.term.evaluate(environment);
     if (expressionResult == null) {
-      throw new CalculationException(CoreNlsResourceBundle.ERR_EXPR_VAR_NULL, this);
+      throw new CalculationException(NlsBundleTermCore.ERR_EXPR_VAR_NULL, this);
     }
     return expressionResult.toString();
   }

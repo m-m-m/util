@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.content.NlsResourceBundle;
+import net.sf.mmm.content.NlsBundleContentModel;
 
 /**
  * This exception is thrown if a
@@ -13,7 +15,7 @@ import net.sf.mmm.content.NlsResourceBundle;
  */
 public class NoSuchFieldException extends ContentModelException {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = 8593724225377132253L;
 
   /**
@@ -28,7 +30,7 @@ public class NoSuchFieldException extends ContentModelException {
    */
   public NoSuchFieldException(String fieldName, ContentClass declaringClass) {
 
-    super(NlsResourceBundle.ERR_NO_SUCH_FIELD, fieldName, declaringClass);
+    super(NlsBundleContentModel.ERR_NO_SUCH_FIELD, fieldName, declaringClass);
   }
 
   /**

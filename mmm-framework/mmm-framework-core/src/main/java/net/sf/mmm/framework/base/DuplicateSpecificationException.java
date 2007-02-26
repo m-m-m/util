@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ContainerException;
 
 /**
@@ -29,7 +29,7 @@ public class DuplicateSpecificationException extends ContainerException {
    */
   public DuplicateSpecificationException(Class specification) {
 
-    super(NlsResourceBundle.ERR_COMPONENT_DUPLICATE_SPECIFICATION, specification);
+    super(NlsBundleFrameworkCore.ERR_COMPONENT_DUPLICATE_SPECIFICATION, specification);
   }
 
 }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
 import net.sf.mmm.framework.api.IocException;
 
@@ -30,7 +30,7 @@ public class InstantiationPolicyNotAvailableException extends IocException {
      */
     public InstantiationPolicyNotAvailableException(ExtendedComponentDescriptor<?, ?> descriptor) {
 
-        super(NlsResourceBundle.ERR_INSTANTIATION_POLICY_NOT_AVAILABLE, descriptor
+        super(NlsBundleFrameworkCore.ERR_INSTANTIATION_POLICY_NOT_AVAILABLE, descriptor
                 .getInstantiationPolicy(), descriptor.getSpecification());
     }
 

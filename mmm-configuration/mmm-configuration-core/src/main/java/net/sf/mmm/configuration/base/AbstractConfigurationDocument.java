@@ -1,4 +1,6 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base;
 
 import java.io.IOException;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import net.sf.mmm.configuration.NlsResourceBundle;
+import net.sf.mmm.configuration.NlsBundleConfigCore;
 import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
@@ -134,7 +136,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     String accessId = this.access.getUniqueUri();
     while (doc != null) {
       if (accessId.equals(doc.access.getUniqueUri())) {
-        throw new ConfigurationException(NlsResourceBundle.ERR_INCLUDE_CYCLE, accessId, this);
+        throw new ConfigurationException(NlsBundleConfigCore.ERR_INCLUDE_CYCLE, accessId, this);
       }
       doc = doc.parentDoc;
     }

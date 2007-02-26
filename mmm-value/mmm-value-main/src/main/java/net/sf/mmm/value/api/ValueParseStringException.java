@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.value.NlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueMain;
 
 /**
  * This exception is thrown if the parsing of a value as string fails.
@@ -50,7 +50,7 @@ public class ValueParseStringException extends ValueParseException {
   public ValueParseStringException(String stringToParse, Class valueType, String valueName,
       Throwable nested) {
 
-    super(nested, NlsResourceBundle.ERR_PARSE_STRING, stringToParse, valueType, valueName);
+    super(nested, NlsBundleValueMain.ERR_PARSE_STRING, stringToParse, valueType, valueName);
   }
 
   /**

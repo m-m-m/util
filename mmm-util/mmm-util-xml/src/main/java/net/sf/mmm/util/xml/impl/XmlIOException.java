@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.impl;
 
-import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 
 /**
@@ -25,7 +25,7 @@ public class XmlIOException extends XmlException {
    */
   public XmlIOException(Throwable ioException) {
 
-    super(ioException, NlsResourceBundle.ERR_IO);
+    super(ioException, NlsBundleXml.ERR_IO);
   }
 
 }

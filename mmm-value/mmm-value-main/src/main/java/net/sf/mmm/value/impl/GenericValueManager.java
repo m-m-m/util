@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-import net.sf.mmm.value.NlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.ValueException;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
@@ -56,18 +56,18 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
     super(valueClass, typeName);
     if (Modifier.isAbstract(this.valueType.getModifiers())
         || Modifier.isInterface(this.valueType.getModifiers())) {
-      throw new ValueException(NlsResourceBundle.ERR_GENERIC_CLASS_ABSTRACT, valueClass);
+      throw new ValueException(NlsBundleValueMain.ERR_GENERIC_CLASS_ABSTRACT, valueClass);
     }
     try {
       this.stringConstructor = valueClass.getConstructor(new Class[] {String.class});
       if (!Modifier.isPublic(this.stringConstructor.getModifiers())) {
-        throw new ValueException(NlsResourceBundle.ERR_GENERIC_CLASS_NOT_ACCESSIBLE, valueClass);
+        throw new ValueException(NlsBundleValueMain.ERR_GENERIC_CLASS_NOT_ACCESSIBLE, valueClass);
       }
     } catch (SecurityException e) {
-      throw new ValueException(e, NlsResourceBundle.ERR_GENERIC_CLASS_SECURITY, valueClass);
+      throw new ValueException(e, NlsBundleValueMain.ERR_GENERIC_CLASS_SECURITY, valueClass);
     } catch (NoSuchMethodException e) {
       // TODO: maybe search for static parse(String) method...
-      throw new ValueException(e, NlsResourceBundle.ERR_GENERIC_CLASS_STRING, valueClass);
+      throw new ValueException(e, NlsBundleValueMain.ERR_GENERIC_CLASS_STRING, valueClass);
     }
   }
 

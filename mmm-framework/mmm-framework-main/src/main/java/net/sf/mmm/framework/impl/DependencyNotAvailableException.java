@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.impl;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.DependencyException;
 import net.sf.mmm.framework.base.AbstractDependency;
@@ -41,7 +41,7 @@ public class DependencyNotAvailableException extends DependencyException {
     public DependencyNotAvailableException(ComponentDescriptor<?> sourceDescriptor,
             String sourceInstanceId, Class dependencySpecification) {
 
-        super(NlsResourceBundle.ERR_DEPENDENCY_NOT_AVAILABLE, sourceDescriptor, sourceInstanceId,
+        super(NlsBundleFrameworkCore.ERR_DEPENDENCY_NOT_AVAILABLE, sourceDescriptor, sourceInstanceId,
                 dependencySpecification);
     }
 

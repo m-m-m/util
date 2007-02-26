@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base;
 
-import net.sf.mmm.configuration.NlsResourceBundle;
+import net.sf.mmm.configuration.NlsBundleConfigCore;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 
@@ -23,7 +25,7 @@ public class ConfigurationWriteException extends ConfigurationException {
    */
   public ConfigurationWriteException(ConfigurationAccess access) {
 
-    super(NlsResourceBundle.ERR_WRITE, access);
+    super(NlsBundleConfigCore.ERR_WRITE, access);
   }
 
   /**
@@ -36,7 +38,7 @@ public class ConfigurationWriteException extends ConfigurationException {
    */
   public ConfigurationWriteException(ConfigurationAccess access, Throwable nested) {
 
-    super(NlsResourceBundle.ERR_WRITE, access, nested);
+    super(NlsBundleConfigCore.ERR_WRITE, access, nested);
   }
 
 }

@@ -1,11 +1,13 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.value.CoreNlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueCore;
 import net.sf.mmm.value.api.GenericValue;
 
 /**
- * This expeption is thrown if a value has the wrong type (a different value
+ * This exception is thrown if a value has the wrong type (a different value
  * type was expected).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -40,7 +42,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(GenericValue genericValue, Class<?> expectedType, Throwable nested) {
 
-    super(nested, CoreNlsResourceBundle.ERR_VALUE_WRONG_TYPE, genericValue, getType(genericValue),
+    super(nested, NlsBundleValueCore.ERR_VALUE_WRONG_TYPE, genericValue, getType(genericValue),
         expectedType);
   }
 

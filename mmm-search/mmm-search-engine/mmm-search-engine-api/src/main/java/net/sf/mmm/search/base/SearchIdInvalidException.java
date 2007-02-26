@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
+import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -26,7 +26,7 @@ public class SearchIdInvalidException extends SearchException {
    */
   public SearchIdInvalidException(String entryId) {
 
-    super(NlsResourceBundleSearchEngineApi.ERR_ID_INVALID, entryId);
+    super(NlsBundleSearchApi.ERR_ID_INVALID, entryId);
   }
 
   /**
@@ -39,7 +39,7 @@ public class SearchIdInvalidException extends SearchException {
    */
   public SearchIdInvalidException(Throwable nested, String entryId) {
 
-    super(nested, NlsResourceBundleSearchEngineApi.ERR_ID_INVALID, entryId);
+    super(nested, NlsBundleSearchApi.ERR_ID_INVALID, entryId);
   }
 
 }

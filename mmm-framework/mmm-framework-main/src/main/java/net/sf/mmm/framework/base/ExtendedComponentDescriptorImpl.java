@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ContainerException;
 import net.sf.mmm.framework.api.Dependency;
 import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
@@ -179,7 +179,7 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
                             if (!constructorArgTypes[constructorDepCount]
                                     .isAssignableFrom(dependencies[i].getSpecification())) {
                                 throw new NlsIllegalArgumentException(
-                                        NlsResourceBundle.ERR_DESCRIPTOR_CONSTRUCTOR_DEPENDENCY_TYPE,
+                                        NlsBundleFrameworkCore.ERR_DESCRIPTOR_CONSTRUCTOR_DEPENDENCY_TYPE,
                                         getSpecification(), Integer
                                                 .valueOf(constructorDepCount + 1),
                                         constructorArgTypes[constructorDepCount], dependencies[i]
@@ -188,7 +188,7 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
                             constructorDepCount++;
                         } else {
                             throw new NlsIllegalArgumentException(
-                                    NlsResourceBundle.ERR_DESCRIPTOR_CONSTRUCTOR_DEPENDENCY_COUNT,
+                                    NlsBundleFrameworkCore.ERR_DESCRIPTOR_CONSTRUCTOR_DEPENDENCY_COUNT,
                                     getSpecification(), Integer
                                             .valueOf(this.constructorDependencies.length), Integer
                                             .valueOf(constructorDepCount + 1));
@@ -222,13 +222,13 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
                         assert (dependencies[i].getInjectionField() == null);
                         break;
                     default :
-                        throw new ContainerException(NlsResourceBundle.ERR_INJECTION_TYPE_ILLEGAL,
+                        throw new ContainerException(NlsBundleFrameworkCore.ERR_INJECTION_TYPE_ILLEGAL,
                                 dependencies[i].getInjectionType(), getSpecification());
                 }
             }
             if (constructorDepCount != this.constructorDependencies.length) {
                 throw new NlsIllegalArgumentException(
-                        NlsResourceBundle.ERR_DESCRIPTOR_CONSTRUCTOR_DEPENDENCY_COUNT,
+                        NlsBundleFrameworkCore.ERR_DESCRIPTOR_CONSTRUCTOR_DEPENDENCY_COUNT,
                         getSpecification(), Integer.valueOf(this.constructorDependencies.length),
                         Integer.valueOf(constructorDepCount));
             }

@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.api;
 
-import net.sf.mmm.configuration.NlsResourceBundle;
+import net.sf.mmm.configuration.NlsBundleConfigCore;
 
 /**
  * This is the exception thrown if a
@@ -24,7 +26,7 @@ public class ConfigurationNotEditableException extends ConfigurationException {
    */
   public ConfigurationNotEditableException(MutableConfiguration node) {
 
-    super(NlsResourceBundle.ERR_NODE_NOT_EDITABLE, node);
+    super(NlsBundleConfigCore.ERR_NODE_NOT_EDITABLE, node);
   }
 
   /**
@@ -38,7 +40,7 @@ public class ConfigurationNotEditableException extends ConfigurationException {
    */
   public ConfigurationNotEditableException(MutableConfiguration node, Throwable nested) {
 
-    super(nested, NlsResourceBundle.ERR_NODE_NOT_EDITABLE, node);
+    super(nested, NlsBundleConfigCore.ERR_NODE_NOT_EDITABLE, node);
   }
 
   /**

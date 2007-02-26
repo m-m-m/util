@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 /**
  * This is the abstract base class for {@link ResourceBundle} implementations
- * using this NLS support. Create your {@link ResourceBundle}s by subclassing
+ * using this NLS support. Create your {@link ResourceBundle}s by sub-classing
  * this class and simply define some public static final fields that will be
  * automatically added to the bundle using reflection (only from constructor).
  * Please note that your sub-class must also be public or you need to set
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 public abstract class AbstractResourceBundle extends ResourceBundle {
 
   /**
-   * The key value pairs; mapps keys (String) to values (Object). No Map because
+   * The key value pairs; maps keys (String) to values (Object). No Map because
    * Enumeration is required...
    */
   private Hashtable<String, Object> bundle;

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.CoreNlsResourceBundle;
+import net.sf.mmm.term.NlsBundleTermCore;
 
 /**
  * This is the exception thrown if a
@@ -29,7 +29,7 @@ public class IllegalArgumentCountException extends CalculationException {
    */
   public IllegalArgumentCountException(Function function, int argumentCount) {
 
-    super(CoreNlsResourceBundle.ERR_ILLEGAL_ARG_COUNT, function, Integer.valueOf(argumentCount),
+    super(NlsBundleTermCore.ERR_ILLEGAL_ARG_COUNT, function, Integer.valueOf(argumentCount),
         Integer.valueOf(function.getMinimumArgumentCount()), Integer.valueOf(function
             .getMaximumArgumentCount()));
   }

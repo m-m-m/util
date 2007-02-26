@@ -1,12 +1,11 @@
 /* $Id$
- * Copyright The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.upnp.ssdp.impl;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 
 import javax.annotation.PostConstruct;

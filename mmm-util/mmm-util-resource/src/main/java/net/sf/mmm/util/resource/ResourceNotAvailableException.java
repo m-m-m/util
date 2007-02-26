@@ -23,7 +23,7 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
    */
   public ResourceNotAvailableException(String absolutePath) {
 
-    super(NlsResourceBundle.ERR_RESOURCE_NOT_AVAILABLE, absolutePath);
+    super(NlsBundleResource.ERR_RESOURCE_NOT_AVAILABLE, absolutePath);
   }
 
   /**
@@ -36,7 +36,7 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
    */
   public ResourceNotAvailableException(Throwable nested, String absolutePath) {
 
-    super(nested, NlsResourceBundle.ERR_RESOURCE_NOT_AVAILABLE, absolutePath);
+    super(nested, NlsBundleResource.ERR_RESOURCE_NOT_AVAILABLE, absolutePath);
   }
 
 }

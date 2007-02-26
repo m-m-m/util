@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.impl;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentException;
 import net.sf.mmm.framework.api.Dependency;
 
@@ -35,7 +35,7 @@ public class ComponentInjectionException extends ComponentException {
     public ComponentInjectionException(Exception cause, Object dependecyInstance,
             Dependency<?> dependency, Object targetComponent) {
 
-        super(cause, NlsResourceBundle.ERR_INJECTION, "" + dependecyInstance + "["
+        super(cause, NlsBundleFrameworkCore.ERR_INJECTION, "" + dependecyInstance + "["
                 + dependency.getSpecification() + "]", dependency, targetComponent);
     }
 }

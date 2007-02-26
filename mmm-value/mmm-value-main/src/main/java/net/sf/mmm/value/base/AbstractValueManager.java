@@ -10,7 +10,7 @@ import net.sf.mmm.nls.base.NlsMessageImpl;
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
-import net.sf.mmm.value.NlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
@@ -49,7 +49,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   public final synchronized NlsMessage getToStringMessage() {
 
     if (this.toStringMessage == null) {
-      this.toStringMessage = new NlsMessageImpl(NlsResourceBundle.MSG_MANAGER_TO_STRING, getName(),
+      this.toStringMessage = new NlsMessageImpl(NlsBundleValueMain.MSG_MANAGER_TO_STRING, getName(),
           getValueType());
     }
     return this.toStringMessage;

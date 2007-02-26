@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.impl;
 
-import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 
 /**
@@ -27,7 +27,7 @@ public class XmlNoOpenElementException extends XmlException {
    */
   public XmlNoOpenElementException() {
 
-    super(NlsResourceBundle.ERR_NOT_OPEN);
+    super(NlsBundleXml.ERR_NOT_OPEN);
   }
 
 }

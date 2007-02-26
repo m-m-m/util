@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.api;
 
-import net.sf.mmm.configuration.NlsResourceBundle;
+import net.sf.mmm.configuration.NlsBundleConfigCore;
 
 /**
  * This is the exception thrown if a
@@ -32,7 +34,7 @@ public class NamespacesUnsupportedException extends ConfigurationException {
    */
   public NamespacesUnsupportedException(Configuration node, Class<?> implementation) {
 
-    super(NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
+    super(NlsBundleConfigCore.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
   }
 
   /**
@@ -47,7 +49,7 @@ public class NamespacesUnsupportedException extends ConfigurationException {
    */
   public NamespacesUnsupportedException(Configuration node, Class<?> implementation, Throwable nested) {
 
-    super(nested, NlsResourceBundle.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
+    super(nested, NlsBundleConfigCore.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
   }
 
   /**

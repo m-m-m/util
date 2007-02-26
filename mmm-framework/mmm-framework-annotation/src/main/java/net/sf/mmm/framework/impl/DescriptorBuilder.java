@@ -13,7 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentException;
 import net.sf.mmm.framework.api.Dependency;
 import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
@@ -91,7 +91,7 @@ public class DescriptorBuilder {
 
         Constructor<?>[] constructors = implementation.getConstructors();
         if (constructors.length == 0) {
-            throw new ComponentException(NlsResourceBundle.ERR_NO_CONSTRUCTOR, implementation);
+            throw new ComponentException(NlsBundleFrameworkCore.ERR_NO_CONSTRUCTOR, implementation);
         }
         Constructor<I> result = null;
         if (constructors.length == 1) {

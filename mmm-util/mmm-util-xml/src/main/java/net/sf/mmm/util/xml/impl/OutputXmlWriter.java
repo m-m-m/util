@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.base.AbstractXmlWriter;
@@ -269,7 +269,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
 
     try {
       if (this.openElementCompleted) {
-        throw new XmlException(NlsResourceBundle.ERR_INVALID_XML);
+        throw new XmlException(NlsBundleXml.ERR_INVALID_XML);
       }
       this.printWriter.write(' ');
       if (namespacePrefix != null) {

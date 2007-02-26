@@ -7,7 +7,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.base.AbstractXmlWriter;
@@ -92,7 +92,7 @@ public class DomXmlWriter extends AbstractXmlWriter {
     }
     if (this.currentElement == null) {
       if (this.document.getDocumentElement() != null) {
-        throw new XmlException(NlsResourceBundle.ERR_SECOND_ROOT);
+        throw new XmlException(NlsBundleXml.ERR_SECOND_ROOT);
       }
       this.document.appendChild(newElement);
     } else {
@@ -160,14 +160,14 @@ public class DomXmlWriter extends AbstractXmlWriter {
     }
     Node parentNode = this.currentElement.getParentNode();
     if (parentNode == this.element) {
-      throw new XmlException(NlsResourceBundle.ERR_CLOSE_TOPLEVEL);
+      throw new XmlException(NlsBundleXml.ERR_CLOSE_TOPLEVEL);
     }
     if (parentNode.getNodeType() == Node.ELEMENT_NODE) {
       this.currentElement = (Element) parentNode;
     } else if (parentNode.getNodeType() == Node.DOCUMENT_NODE) {
       this.currentElement = null;
     } else {
-      throw new XmlException(NlsResourceBundle.ERR_INVALID_XML);
+      throw new XmlException(NlsBundleXml.ERR_INVALID_XML);
     }
   }
 

@@ -1,5 +1,5 @@
 /* $Id$
- * Copyright The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base.path.condition;
 
@@ -99,7 +99,7 @@ public class CompareCondition extends PathCondition {
   
   /**
    * This method gets the value to compare with the the
-   * {@link AbstractConfiguration#getChild(String) childrens}
+   * {@link AbstractConfiguration#getChild(String) children}
    * {@link net.sf.mmm.configuration.api.Configuration#getValue() value}.
    * 
    * @return the childs value or <code>null</code> if only the existence of a

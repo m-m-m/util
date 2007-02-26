@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.term.CoreNlsResourceBundle;
+import net.sf.mmm.term.NlsBundleTermCore;
 
 /**
  * This exception represents an error that occured during the cast (conversion
@@ -28,7 +28,7 @@ public class IllegalCastException extends CalculationException {
    */
   public IllegalCastException(Object argument, Class<?> type) {
 
-    super(CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
+    super(NlsBundleTermCore.ERR_ILLEGAL_CAST, argument, type);
   }
 
   /**
@@ -43,7 +43,7 @@ public class IllegalCastException extends CalculationException {
    */
   public IllegalCastException(Object argument, Class<?> type, Throwable nested) {
 
-    super(nested, CoreNlsResourceBundle.ERR_ILLEGAL_CAST, argument, type);
+    super(nested, NlsBundleTermCore.ERR_ILLEGAL_CAST, argument, type);
   }
 
 }

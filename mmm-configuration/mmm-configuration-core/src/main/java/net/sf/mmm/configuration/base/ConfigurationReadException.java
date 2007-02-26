@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base;
 
-import net.sf.mmm.configuration.NlsResourceBundle;
+import net.sf.mmm.configuration.NlsBundleConfigCore;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 
@@ -23,7 +25,7 @@ public class ConfigurationReadException extends ConfigurationException {
    */
   public ConfigurationReadException(ConfigurationAccess access) {
 
-    super(NlsResourceBundle.ERR_READ, access);
+    super(NlsBundleConfigCore.ERR_READ, access);
   }
 
   /**
@@ -35,7 +37,7 @@ public class ConfigurationReadException extends ConfigurationException {
    */
   public ConfigurationReadException(String location) {
 
-    super(NlsResourceBundle.ERR_READ, location);
+    super(NlsBundleConfigCore.ERR_READ, location);
   }
 
   /**
@@ -48,7 +50,7 @@ public class ConfigurationReadException extends ConfigurationException {
    */
   public ConfigurationReadException(ConfigurationAccess access, Throwable nested) {
 
-    super(NlsResourceBundle.ERR_READ, access, nested);
+    super(NlsBundleConfigCore.ERR_READ, access, nested);
   }
 
   /**
@@ -62,7 +64,7 @@ public class ConfigurationReadException extends ConfigurationException {
    */
   public ConfigurationReadException(String location, Throwable nested) {
 
-    super(NlsResourceBundle.ERR_READ, location, nested);
+    super(NlsBundleConfigCore.ERR_READ, location, nested);
   }
 
 }

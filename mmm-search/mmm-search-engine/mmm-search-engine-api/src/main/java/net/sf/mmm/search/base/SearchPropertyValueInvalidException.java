@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
+import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -28,7 +28,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(String propertyName, String value) {
 
-    super(NlsResourceBundleSearchEngineApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
+    super(NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
   }
 
   /**
@@ -43,7 +43,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(Throwable nested, String propertyName, String value) {
 
-    super(nested, NlsResourceBundleSearchEngineApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
+    super(nested, NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
   }
 
 }

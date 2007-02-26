@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.impl;
 
-import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 
 /**
@@ -25,7 +25,7 @@ public class XmlNamespacePrefixUndefinedException extends XmlException {
    */
   public XmlNamespacePrefixUndefinedException(String prefix) {
 
-    super(NlsResourceBundle.ERR_NAMESPACE_NOT_DECLARED, prefix);
+    super(NlsBundleXml.ERR_NAMESPACE_NOT_DECLARED, prefix);
   }
 
   /**

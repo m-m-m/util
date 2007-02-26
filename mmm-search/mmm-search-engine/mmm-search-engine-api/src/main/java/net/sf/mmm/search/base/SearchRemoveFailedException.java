@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base;
 
-import net.sf.mmm.search.NlsResourceBundleSearchEngineApi;
+import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -28,7 +28,7 @@ public class SearchRemoveFailedException extends SearchException {
    */
   public SearchRemoveFailedException(String property, String value) {
 
-    super(NlsResourceBundleSearchEngineApi.ERR_REMOVE_FAILED, property, value);
+    super(NlsBundleSearchApi.ERR_REMOVE_FAILED, property, value);
   }
 
   /**
@@ -43,7 +43,7 @@ public class SearchRemoveFailedException extends SearchException {
    */
   public SearchRemoveFailedException(Throwable nested, String property, String value) {
 
-    super(nested, NlsResourceBundleSearchEngineApi.ERR_REMOVE_FAILED, property, value);
+    super(nested, NlsBundleSearchApi.ERR_REMOVE_FAILED, property, value);
   }
 
 }

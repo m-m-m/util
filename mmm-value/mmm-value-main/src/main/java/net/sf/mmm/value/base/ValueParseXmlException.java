@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.base;
 
-import net.sf.mmm.value.NlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.ValueParseException;
 
 /**
@@ -40,7 +40,7 @@ public class ValueParseXmlException extends ValueParseException {
    */
   public ValueParseXmlException(Class valueType, String stringToParse, Throwable nested) {
 
-    super(nested, NlsResourceBundle.ERR_PARSE_STRING, valueType, stringToParse);
+    super(nested, NlsBundleValueMain.ERR_PARSE_STRING, valueType, stringToParse);
   }
 
   /**

@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.value.CoreNlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueCore;
 
 /**
  * This is the exception thrown if a
@@ -25,7 +27,7 @@ public class ValueNotEditableException extends ValueException {
    */
   public ValueNotEditableException(MutableGenericValue genericValue) {
 
-    super(CoreNlsResourceBundle.ERR_NODE_NOT_EDITABLE, genericValue);
+    super(NlsBundleValueCore.ERR_NODE_NOT_EDITABLE, genericValue);
   }
 
   /**
@@ -39,7 +41,7 @@ public class ValueNotEditableException extends ValueException {
    */
   public ValueNotEditableException(MutableGenericValue genericValue, Throwable nested) {
 
-    super(nested, CoreNlsResourceBundle.ERR_NODE_NOT_EDITABLE, genericValue);
+    super(nested, NlsBundleValueCore.ERR_NODE_NOT_EDITABLE, genericValue);
   }
 
   /**

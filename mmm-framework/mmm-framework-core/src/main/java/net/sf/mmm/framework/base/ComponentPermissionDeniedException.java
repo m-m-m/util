@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentManager;
 import net.sf.mmm.framework.api.ComponentProvider;
 import net.sf.mmm.framework.api.IocSecurityManager;
@@ -36,7 +36,7 @@ public class ComponentPermissionDeniedException extends ComponentSecurityExcepti
    */
   public ComponentPermissionDeniedException(Class source, Class target, String instanceId) {
 
-    super(NlsResourceBundle.ERR_COMPONENT_PERMISSION_DENIED, source, target, instanceId);
+    super(NlsBundleFrameworkCore.ERR_COMPONENT_PERMISSION_DENIED, source, target, instanceId);
   }
 
 }

@@ -1,4 +1,6 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value;
 
 import net.sf.mmm.nls.base.AbstractResourceBundle;
@@ -9,12 +11,12 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class CoreNlsResourceBundle extends AbstractResourceBundle {
+public class NlsBundleValueCore extends AbstractResourceBundle {
 
   /**
    * The constructor.
    */
-  public CoreNlsResourceBundle() {
+  public NlsBundleValueCore() {
 
     super();
   }

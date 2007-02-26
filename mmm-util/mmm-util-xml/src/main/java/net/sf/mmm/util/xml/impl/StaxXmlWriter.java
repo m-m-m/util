@@ -61,8 +61,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
         this.staxWriter.writeStartElement(namespacePrefix, localName, namespaceUri);
       }
     } catch (XMLStreamException e) {
-      // TODO
-      throw new XmlException("", e);
+      throw new XmlIOException(e);
     }
   }
 
@@ -85,8 +84,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
         this.staxWriter.writeAttribute(namespaceUri, localName, value);
       }
     } catch (XMLStreamException e) {
-      // TODO
-      throw new XmlException("", e);
+      throw new XmlIOException(e);
     }
   }
 
@@ -100,8 +98,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
     try {
       this.staxWriter.writeNamespace(namespacePrefix, namespaceUri);
     } catch (XMLStreamException e) {
-      // TODO
-      throw new XmlException("", e);
+      throw new XmlIOException(e);
     }
   }
 
@@ -150,8 +147,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
     try {
       this.staxWriter.writeEndElement();
     } catch (XMLStreamException e) {
-      // TODO
-      throw new XmlException("", e);
+      throw new XmlIOException(e);
     }
   }
 

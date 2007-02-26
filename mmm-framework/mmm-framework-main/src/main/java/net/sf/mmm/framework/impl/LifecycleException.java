@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.impl;
 
-import net.sf.mmm.framework.NlsResourceBundle;
+import net.sf.mmm.framework.NlsBundleFrameworkCore;
 import net.sf.mmm.framework.api.ComponentException;
 import net.sf.mmm.framework.api.ComponentInstanceContainer;
 import net.sf.mmm.framework.api.LifecycleManager;
@@ -32,7 +32,7 @@ public class LifecycleException extends ComponentException {
      */
     public LifecycleException(ComponentInstanceContainer instanceContainer, String lifecyclePhase) {
 
-        super(NlsResourceBundle.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
+        super(NlsBundleFrameworkCore.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
     }
 
     /**
@@ -48,7 +48,7 @@ public class LifecycleException extends ComponentException {
     public LifecycleException(ComponentInstanceContainer instanceContainer,
             String lifecyclePhase, Throwable nested) {
 
-        super(nested, NlsResourceBundle.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
+        super(nested, NlsBundleFrameworkCore.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
     }
 
 }

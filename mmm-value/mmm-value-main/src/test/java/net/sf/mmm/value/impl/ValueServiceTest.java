@@ -1,4 +1,6 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.impl;
 
 import java.io.StringWriter;
@@ -76,7 +78,7 @@ public class ValueServiceTest extends TestCase {
     manager.toXml(new DomXmlWriter(doc), value);
     Element rootElement = doc.getDocumentElement();
     V parsedValue = manager.parse(rootElement);
-    assertTrue("parsed " + manager.getName() + " value differes", manager.isEqual(value,
+    assertTrue("parsed " + manager.getName() + " value differs", manager.isEqual(value,
         parsedValue));
   }
 

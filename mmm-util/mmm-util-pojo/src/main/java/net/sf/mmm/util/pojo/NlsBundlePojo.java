@@ -1,5 +1,5 @@
 /* $Id$
- * Copyright The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo;
 
@@ -11,12 +11,12 @@ import net.sf.mmm.util.pojo.api.PojoPropertyNotFoundException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NlsResourceBundlePojo extends AbstractResourceBundle {
+public class NlsBundlePojo extends AbstractResourceBundle {
 
   /**
    * The constructor
    */
-  public NlsResourceBundlePojo() {
+  public NlsBundlePojo() {
 
     super();
   }

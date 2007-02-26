@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.base;
 
-import net.sf.mmm.value.NlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -27,7 +27,7 @@ public class ValueNotRegisteredException extends ValueException {
    */
   public ValueNotRegisteredException(String valueName) {
 
-    super(NlsResourceBundle.ERR_NOT_REGISTERED, valueName);
+    super(NlsBundleValueMain.ERR_NOT_REGISTERED, valueName);
   }
 
   /**
@@ -40,7 +40,7 @@ public class ValueNotRegisteredException extends ValueException {
    */
   public ValueNotRegisteredException(Class valueType) {
 
-    super(NlsResourceBundle.ERR_NOT_REGISTERED, valueType.getName());
+    super(NlsBundleValueMain.ERR_NOT_REGISTERED, valueType.getName());
   }
 
   /**

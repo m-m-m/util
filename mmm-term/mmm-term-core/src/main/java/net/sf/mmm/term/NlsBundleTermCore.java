@@ -10,12 +10,12 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class CoreNlsResourceBundle extends AbstractResourceBundle {
+public class NlsBundleTermCore extends AbstractResourceBundle {
 
   /**
    * The constructor.
    */
-  public CoreNlsResourceBundle() {
+  public NlsBundleTermCore() {
 
     super();
   }

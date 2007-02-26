@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.value.CoreNlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueCore;
 import net.sf.mmm.value.api.GenericValue;
 
 /**
@@ -31,7 +33,7 @@ public class ValueOutOfRangeException extends ValueException {
   public ValueOutOfRangeException(GenericValue genericValue, Number value, Number minimum,
       Number maximum) {
 
-    super(CoreNlsResourceBundle.ERR_VALUE_OUT_OF_RANGE, genericValue, value, minimum, maximum);
+    super(NlsBundleValueCore.ERR_VALUE_OUT_OF_RANGE, genericValue, value, minimum, maximum);
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum
         .doubleValue()));
   }

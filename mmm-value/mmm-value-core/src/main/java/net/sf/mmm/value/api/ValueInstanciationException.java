@@ -1,7 +1,9 @@
-/* $ Id: $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.value.CoreNlsResourceBundle;
+import net.sf.mmm.value.NlsBundleValueCore;
 
 /**
  * This is the exception thrown if an reflective
@@ -24,7 +26,7 @@ public class ValueInstanciationException extends ValueException {
    */
   public ValueInstanciationException(Class<?> javaClass, Throwable nested) {
 
-    super(nested, CoreNlsResourceBundle.ERR_INSTANTIATION_FAILED, javaClass);
+    super(nested, NlsBundleValueCore.ERR_INSTANTIATION_FAILED, javaClass);
   }
 
 }

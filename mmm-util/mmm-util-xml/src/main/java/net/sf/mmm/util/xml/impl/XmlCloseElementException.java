@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.impl;
 
-import net.sf.mmm.util.xml.NlsResourceBundle;
+import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 
 /**
@@ -32,7 +32,7 @@ public class XmlCloseElementException extends XmlException {
    */
   public XmlCloseElementException(String openTagName, String closeTagName) {
 
-    super(NlsResourceBundle.ERR_CLOSE_TAGNAME, openTagName, closeTagName);
+    super(NlsBundleXml.ERR_CLOSE_TAGNAME, openTagName, closeTagName);
   }
 
 }
