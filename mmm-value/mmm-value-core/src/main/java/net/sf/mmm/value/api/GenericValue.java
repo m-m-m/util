@@ -20,7 +20,7 @@ import net.sf.mmm.value.api.WrongValueTypeException;
  * {@link #getObject(Object)}) should be used instead. Depending on
  * {@link #isAddDefaults()}, the supplied value is automatically assigned if
  * not <code>null</code> and the generic-value was {@link #isEmpty() empty}.<br>
- * For numeric access there is the generíc {@link #getNumber()} method and
+ * For numeric access there is the generic {@link #getNumber()} method and
  * methods for specific numeric types (e.g. {@link #getInteger()}). If you want
  * to get a numeric value allowing conversion use the {@link #getNumber()}
  * method. E.g. if you want to get a value as {@link Integer} even though it may
@@ -69,7 +69,7 @@ public interface GenericValue {
    * @param <T>
    *        is the templated type of the requested value type.
    * @param type
-   *        is the class refelecting the requested value type.
+   *        is the class reflecting the requested value type.
    * @return the requested value.
    * @throws ValueNotSetException
    *         if this object {@link #isEmpty() is empty}.
@@ -95,7 +95,7 @@ public interface GenericValue {
    * <li>{@link Float}</li>
    * <li>{@link Short}</li>
    * <li>{@link Byte}</li>
-   * <li>{@link java.util.Date}</li>
+   * <li>{@link Date}</li>
    * </ul>
    * 
    * @see #isEmpty()
@@ -104,7 +104,7 @@ public interface GenericValue {
    * @param <T>
    *        is the templated type of the requested value type.
    * @param type
-   *        is the class refelecting the requested value type.
+   *        is the class reflecting the requested value type.
    * @param defaultValue
    *        is the default returned if this value {@link #isEmpty() is empty}.
    *        It may be <code>null</code>.
@@ -120,7 +120,7 @@ public interface GenericValue {
 
   /**
    * This method gets the value as object. The typed methods such as
-   * {@link #getString()} should be prefered to this method if possible.
+   * {@link #getString()} should be preferred to this method if possible.
    * 
    * @see #getValue(Class)
    * 
@@ -132,7 +132,7 @@ public interface GenericValue {
 
   /**
    * This method gets the value as object. The typed methods such as
-   * {@link #getString(String)} should be prefered to this method if possible.
+   * {@link #getString(String)} should be preferred to this method if possible.
    * 
    * @see #getValue(Class, Object)
    * 

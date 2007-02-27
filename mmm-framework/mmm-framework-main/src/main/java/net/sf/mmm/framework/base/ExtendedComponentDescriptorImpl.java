@@ -19,7 +19,7 @@ import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
 import net.sf.mmm.framework.api.LifecycleMethod;
 import net.sf.mmm.framework.api.Dependency.Type;
 import net.sf.mmm.framework.base.descriptor.SimpleComponentDescriptor;
-import net.sf.mmm.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.nls.impl.NlsIllegalArgumentException;
 import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 

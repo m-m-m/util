@@ -23,7 +23,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FieldPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
+public class FieldPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
   /**
    * The constructor.
@@ -40,27 +40,14 @@ public class FieldPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilde
     PojoDescriptor<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
     MyPojo pojoInstance = new MyPojo();
-    // test property "name"
-    checkProperty(pojoDescriptor, "name", String.class, String.class);
-    String name = "Emma";
-    pojoDescriptor.setProperty(pojoInstance, "name", name);
-    String retrievedName = (String) pojoDescriptor.getProperty(pojoInstance, "name");
-    assertEquals(name, retrievedName);
+    checkPojo(pojoDescriptor, pojoInstance);
     // test property "port"
     checkProperty(pojoDescriptor, "port", Integer.class, Integer.class);
-    Integer port = new Integer(4242);
-    assertNull(pojoDescriptor.getProperty(pojoInstance, "port"));
-    pojoDescriptor.setProperty(pojoInstance, "port", port);
-    Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, "port");
-    assertEquals(port, retrievedPort);
     // test property "flag"
     checkProperty(pojoDescriptor, "flag", Boolean.class, Boolean.class);
-    Boolean flag = Boolean.TRUE;
-    assertNull(pojoDescriptor.getProperty(pojoInstance, "flag"));
-    pojoDescriptor.setProperty(pojoInstance, "flag", Boolean.valueOf(flag));
-    assertEquals(flag, pojoDescriptor.getProperty(pojoInstance, "flag"));
     // test property "items"/"item"
     checkProperty(pojoDescriptor, "items", List.class, List.class);
+
     List<String> myList = new ArrayList<String>();
     pojoDescriptor.setProperty(pojoInstance, "items", myList);
     assertSame(myList, pojoDescriptor.getProperty(pojoInstance, "items"));

@@ -23,12 +23,12 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
+public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
   /**
    * The constructor.
    */
-  public PublicMethodPojoDescriptorBuilderTest() {
+  public FieldAndPublicMethodPojoDescriptorBuilderTest() {
 
     super();
   }
@@ -36,7 +36,7 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
   @Test
   public void testPojoDescriptor() throws Exception {
 
-    PojoDescriptorBuilder factory = new PublicMethodPojoDescriptorBuilder();
+    PojoDescriptorBuilder factory = new FieldAndPublicMethodPojoDescriptorBuilder();
     PojoDescriptor<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
     MyPojo pojoInstance = new MyPojo();
@@ -47,8 +47,9 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
     checkProperty(pojoDescriptor, "port", Integer.class, int.class);
     // test property "flag"
     checkProperty(pojoDescriptor, "flag", Boolean.class, boolean.class);
+    // test property "items"/"item"
     
-    
+    // TODO: create add helper and move to abstract parent
     List<String> myList = new ArrayList<String>();
     pojoDescriptor.setProperty(pojoInstance, "items", myList);
     assertSame(myList, pojoDescriptor.getProperty(pojoInstance, "items"));
@@ -60,6 +61,23 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
     pojoDescriptor.addPropertyItem(pojoInstance, "item", item2);
     assertEquals(2, myList.size());
     assertEquals(item2, myList.get(1));
+    
+    // test property "privateString"
+    String secret = "secret";
+    checkProperty(pojoDescriptor, "privateString", String.class, String.class);
+    pojoDescriptor.setProperty(pojoInstance, "privateString", secret);
+    String result = (String) pojoDescriptor.getProperty(pojoInstance, "privateString");
+    assertEquals(secret, result);
+    // property is retrieved via getter...
+    assertNotSame(secret, result);
+    // test property "renamedProperty"
+    checkProperty(pojoDescriptor, "renamedProperty", String.class, String.class);
+    // test property "string"
+    checkProperty(pojoDescriptor, "string", String.class, String.class);
+    secret = "h5g/{h%k$z";
+    pojoDescriptor.setProperty(pojoInstance, "string", secret);
+    assertSame(secret, pojoDescriptor.getProperty(pojoInstance, "renamedProperty"));
+    
   }
 
 }

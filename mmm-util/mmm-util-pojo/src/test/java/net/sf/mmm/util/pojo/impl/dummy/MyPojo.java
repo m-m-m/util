@@ -20,6 +20,10 @@ public class MyPojo extends AbstractPojo {
 
   private List<String> items;
 
+  private String string;
+
+  private String privateString;
+  
   public MyPojo() {
 
     super();
@@ -63,4 +67,17 @@ public class MyPojo extends AbstractPojo {
     this.items = items;
   }
 
+  public void setRenamedProperty(String value) {
+    this.string = value;
+  }
+  
+  public String getRenamedProperty() {
+    return this.string;
+  }
+  
+  public String getPrivateString() {
+
+    return new String(this.privateString);
+  }
+  
 }

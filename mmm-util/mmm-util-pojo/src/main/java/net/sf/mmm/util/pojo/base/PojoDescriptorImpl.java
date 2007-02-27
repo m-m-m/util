@@ -52,7 +52,10 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
     Iterator<AbstractPojoPropertyAccessor> accessorIterator = introspector.findAccessors(pojoClass);
     while (accessorIterator.hasNext()) {
       AbstractPojoPropertyAccessor accessor = accessorIterator.next();
-      getOrCreateProperty(accessor.getName()).setAccessor(accessor);
+      PojoPropertyDescriptorImpl descriptor = getOrCreateProperty(accessor.getName());
+      if (descriptor.getAccessor(accessor.getAccessMode()) == null) {
+        descriptor.setAccessor(accessor);        
+      }
     }
   }
 

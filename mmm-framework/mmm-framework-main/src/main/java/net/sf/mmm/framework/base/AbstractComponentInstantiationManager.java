@@ -6,7 +6,7 @@ package net.sf.mmm.framework.base;
 import net.sf.mmm.framework.api.ComponentDescriptor;
 import net.sf.mmm.framework.api.ComponentManager;
 import net.sf.mmm.framework.api.ExtendedComponentDescriptor;
-import net.sf.mmm.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.nls.impl.NlsIllegalArgumentException;
 
 /**
  * This is the abstract base implementation of the
