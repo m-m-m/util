@@ -3,9 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.binding.api;
 
-import javax.naming.ConfigurationException;
-
 import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.ConfigurationException;
 
 /**
  * This is the interface for a service that allows to

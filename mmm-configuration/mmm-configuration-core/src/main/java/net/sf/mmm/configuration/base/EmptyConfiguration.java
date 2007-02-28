@@ -189,10 +189,9 @@ public class EmptyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void removeChild(AbstractConfiguration child) {
+  protected boolean removeChild(AbstractConfiguration child) {
 
-  // TODO Auto-generated method stub
-
+    return false;
   }
 
   /**

@@ -25,7 +25,7 @@ import net.sf.mmm.configuration.base.iterator.ChildTypeIterator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfigurationElement extends BasicConfiguration {
+public abstract class AbstractConfigurationElement extends AbstractConfigurationNode {
 
   /** the child attributes */
   private final Map<QName, AbstractConfiguration> children;
@@ -203,26 +203,29 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
           throw new IllegalArgumentException("unknown type for " + child);
       }
     }
+    setModified();
   }
 
   /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void removeChild(AbstractConfiguration child) {
+  protected boolean removeChild(AbstractConfiguration child) {
 
     if (!isEditable()) {
       throw new ConfigurationException("not editable");
     }
+    boolean modified;
     QName qName = new QName(child.getName(), child.getNamespaceUri());
     switch (child.getType()) {
       case ATTRIBUTE:
-        this.children.remove(qName);
+        AbstractConfiguration old = this.children.remove(qName);
+        modified = (old != null);
         break;
       case ELEMENT:
         AbstractConfiguration head = this.children.get(qName);
         AbstractConfiguration following = head.getNextSibling();
-        head.removeSibling(child);
+        modified = head.removeSibling(child);
         if (child == head) {
           // remove first
           // if there is only one element in the sibling list, remove it
@@ -231,11 +234,16 @@ public abstract class AbstractConfigurationElement extends BasicConfiguration {
           } else {
             this.children.put(qName, following);
           }
+          modified = true;
         }
         break;
       default :
         throw new IllegalArgumentException("unknown type for " + child);
     }
+    if (modified) {      
+      setModified();
+    }
+    return modified;
   }
 
   /**

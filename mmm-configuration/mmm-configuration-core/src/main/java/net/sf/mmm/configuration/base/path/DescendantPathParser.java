@@ -163,7 +163,7 @@ public class DescendantPathParser {
       }
     }
     PathSegment result = new PathSegment(segment, condition);
-    if (result.isPattern()) {
+    if (strict && result.isPattern()) {
       throw new IllegalDescendantPathException(parser.getOriginalString());
     }
     return result;

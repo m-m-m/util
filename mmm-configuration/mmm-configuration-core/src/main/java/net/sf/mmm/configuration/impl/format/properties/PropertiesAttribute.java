@@ -54,7 +54,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
     this.namespace = propertyNamespace;
   }
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#getOwnerDocument()
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getOwnerDocument()
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -63,7 +63,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#getPlainString()
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getPlainString()
    */
   @Override
   protected String getPlainString() {
@@ -72,7 +72,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#setPlainString(java.lang.String)
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#setPlainString(java.lang.String)
    */
   @Override
   protected void setPlainString(String newValue) {

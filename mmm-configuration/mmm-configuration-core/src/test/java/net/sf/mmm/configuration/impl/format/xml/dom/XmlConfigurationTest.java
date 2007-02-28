@@ -59,14 +59,23 @@ public class XmlConfigurationTest extends TestCase {
         .getDescendant("server/service[@name='ServiceA']/foo[@bar='42']");
     assertEquals(42, serviceAConf.getDescendant("foo/@bar").getValue().getInteger());
     assertEquals(String.class, serviceAClassConf.getValue().getJavaClass());
-    Collection<? extends Configuration> serviceColl = config
+    Collection<? extends Configuration> descendants = config
         .getDescendants("server/service[@name='Service*']");
-    assertEquals(5, serviceColl.size());
+    assertEquals(5, descendants.size());
     char serviceLetter = 'A';
-    for (Configuration serviceConf : serviceColl) {
+    for (Configuration serviceConf : descendants) {
       assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue().getString());
       serviceLetter++;
     }
     assertEquals(5, serviceLetter - 'A');
+    Configuration serverConfig = config.getDescendant("server");
+    int elementCount = 6;
+    int attributeCount = 2;
+    descendants = serverConfig.getDescendants("*");
+    assertEquals(elementCount, descendants.size());
+    descendants = serverConfig.getDescendants("@*");
+    assertEquals(attributeCount, descendants.size());
+    descendants = serverConfig.getDescendants("*|@*");
+    assertEquals(attributeCount + elementCount, descendants.size());
   }
 }

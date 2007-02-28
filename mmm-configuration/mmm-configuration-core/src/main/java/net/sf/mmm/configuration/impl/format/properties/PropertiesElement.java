@@ -128,7 +128,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#getOwnerDocument()
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getOwnerDocument()
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -137,7 +137,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#getPlainString()
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getPlainString()
    */
   @Override
   protected String getPlainString() {
@@ -146,7 +146,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#setPlainString(java.lang.String)
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#setPlainString(java.lang.String)
    */
   @Override
   protected void setPlainString(String newValue) {

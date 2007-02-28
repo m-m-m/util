@@ -90,7 +90,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#getOwnerDocument()
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getOwnerDocument()
    */
   @Override
   protected XmlDocument getOwnerDocument() {
@@ -123,7 +123,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#getPlainString()
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getPlainString()
    */
   @Override
   protected String getPlainString() {
@@ -136,7 +136,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.BasicConfiguration#setPlainString(java.lang.String)
+   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#setPlainString(java.lang.String)
    */
   @Override
   protected void setPlainString(String newValue) {

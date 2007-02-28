@@ -43,7 +43,7 @@ import net.sf.mmm.value.api.GenericValue;
  * <li>access configurations from different data sources</li>
  * <li>including other configurations without problems when saving</li>
  * <li>support for namespaces</li>
- * <li>autocomplete configuration from defaults in the accessing code</li>
+ * <li>auto-complete configuration from defaults in the accessing code</li>
  * </ul>
  * <br>
  * If you have struggled with the {@link org.w3c.dom DOM} API you will love the
@@ -54,10 +54,10 @@ import net.sf.mmm.value.api.GenericValue;
  * The trade-of is that you have the method to get a
  * {@link #getDescendant(String, String) descendant} that does NOT make sense on
  * {@link Type#ATTRIBUTE attributes}.<br>
- * You may have expirienced an update of a software without an update of the
+ * You may have experienced an update of a software without an update of the
  * documentation. The user may end up with incompatible configuration and does
  * not know how to fix. Or the configuration still works but the user does not
- * know how to configure and activate the cool new feauters. This configuration
+ * know how to configure and activate the cool new features. This configuration
  * does NOT help you to write your documentation. But if you read your
  * configuration as suggested by this API, you will help the user to find new
  * options in the configuration.
@@ -133,7 +133,7 @@ public interface Configuration extends
   }
 
   /**
-   * The {@link #getNamespaceUri() namepsace URI} for no namespace.
+   * The {@link #getNamespaceUri() namespace URI} for no namespace.
    */
   String NAMESPACE_URI_NONE = "";
 
@@ -159,7 +159,7 @@ public interface Configuration extends
   char PATH_WILDCARD = '*';
 
   /**
-   * The character used in as anychar for
+   * The character used in as any-char for
    * {@link #getDescendants(String, String) descendants}.
    */
   char PATH_ANYCHAR = '?';
@@ -234,7 +234,7 @@ public interface Configuration extends
    * {@link #PATH_SEPARATOR} and the {@link #getName() name} of this
    * configuration to the {@link #getPath() path} of the parent configuration or
    * the empty string if this is the root of the configuration. This method is
-   * intendet to be used for debugging.
+   * intended to be used for debugging.
    * 
    * @return the path of this node in the configuration tree.
    */
@@ -279,7 +279,7 @@ public interface Configuration extends
    * automatically assigned as child.<br>
    * By default this flag is <code>true</code>. It is inherited by the
    * {@link #getValue() value} and {@link #getDescendant(String) descendants}
-   * but can be {@link ConfigurationDocument#NAME_ADD_DEFAULTS overriden}.
+   * but can be {@link ConfigurationDocument#NAME_ADD_DEFAULTS overridden}.
    * 
    * @return <code>true</code> if this configuration is automatically adding
    *         defaults, <code>false</code> otherwise.
@@ -383,7 +383,7 @@ public interface Configuration extends
    * to an {@link Type#ELEMENT element} where the given <code>path</code> does
    * NOT point to an existing configuration, the according configurations will
    * be created similar to an {@link java.io.File#mkdirs() mkdirs} operation. Be
-   * careful when using index-condtions (e.g. <code>foo[10]</code>) because
+   * careful when using index-conditions (e.g. <code>foo[10]</code>) because
    * they can create many nodes.<br>
    * 
    * @see #getDescendants(String, String)
@@ -405,7 +405,7 @@ public interface Configuration extends
    *        configuration, but no {@link Type#ATTRIBUTE attribute} as requested
    *        exists, the {@link #getNamespaceUri() namespace} defaults to
    *        {@link #NAMESPACE_URI_NONE NO namespace}. If no such attribute
-   *        exists eigther, it will be created with
+   *        exists either, it will be created with
    *        {@link #NAMESPACE_URI_NONE NO namespace}.
    * @return the descendant for the given path.
    */
@@ -413,9 +413,8 @@ public interface Configuration extends
 
   /**
    * This method gets the {@link #getDescendants(String, String) descendants}
-   * for the same {@link #getNamespaceUri() namespace} as this configuration.
-   * 
-   * @see #getDescendants(String, String)
+   * for the same {@link #getNamespaceUri() namespace} as this configuration.<br>
+   * See {@link #getDescendants(String, String)} for more details.
    * 
    * @param path
    *        is the relative {@link Configuration#getPath() path} from this
@@ -431,15 +430,7 @@ public interface Configuration extends
    * configurations in any way. It only returns what is already there.<br>
    * In addition to {@link #getDescendant(String, String)} you can use
    * glob-patterns in segments/condition-values and use other conditions
-   * operators ('<', '>', '<=', '>=', '!='). Examples:<br>
-   * <ul>
-   * <li><code>*[@*='foo*']</code> leads to all elements that have an
-   * attribute whos value starts with <code>foo</code>.</li>
-   * <li><code>foo[@bar>5]</code> leads to all elements named
-   * <code>foo</code> that have an attribute <code>bar</code> whos value is
-   * a number greater than <code>5</code>.</li>
-   * </ul>
-   * 
+   * operators ('<', '>', '<=', '>=', '!=').<br>
    * Further you combine multiple paths with '|' and '&' in the
    * <code>path</code> argument of this method with the following meaning:
    * <ul>
@@ -448,11 +439,25 @@ public interface Configuration extends
    * <li><code>path1&path2</code> returns the intersection set that contains
    * only the matches found by <code>path1</code> and <code>path2</code>.</li>
    * </ul>
+   * Examples:<br>
+   * <ul>
+   * <li><code>*[@*='foo*']</code> leads to all elements that have an
+   * attribute whose value starts with <code>foo</code>.</li>
+   * <li><code>foo[@bar>5]</code> leads to all elements named
+   * <code>foo</code> that have an attribute <code>bar</code> whos value is
+   * a number greater than <code>5</code>.</li>
+   * </ul>
+   * <b>IMPORTANT:</b><br>
+   * When using glob-patterns the first character has to be
+   * <code>{@link #NAME_PREFIX_ATTRIBUTE '@'}</code> to match
+   * {@link Type#ATTRIBUTE attributes}. To match all direct children you need
+   * to use the path <code>"*|@*"</code>.<br>
+   * 
    * The ordering of the returned configurations in general is unspecified. Only
    * {@link Type#ELEMENT elements} with the same {@link #getName() name} should
-   * be iterated in the order of their occurence in the underlying configuration
-   * format (e.g. XML-document) and according to the order of the matching
-   * expression in the given <code>path</code>.<br>
+   * be iterated in the order of their occurrence in the underlying
+   * configuration format (e.g. XML-document) and according to the order of the
+   * matching expression in the given <code>path</code>.<br>
    * <b>ATTENTION:</b><br>
    * The <code>path</code> must follow the specification above. It can NOT be
    * any XPath expression. Especially there is no support for <code>//</code>

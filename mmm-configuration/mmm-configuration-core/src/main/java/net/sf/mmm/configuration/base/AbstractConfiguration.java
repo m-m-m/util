@@ -28,12 +28,12 @@ import net.sf.mmm.util.StringParser;
 /**
  * This is the abstract base implementation of the
  * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface. It is
- * the "interal API" for a
+ * the "internal API" for a
  * {@link net.sf.mmm.configuration.api.MutableConfiguration configuration} and
  * even the complete {@link net.sf.mmm.configuration.base base-implementation}
  * relies on this abstract implementation. The interface is used to make life
- * easier for the end user and to be able to do internal refactorings without
- * affecting the API user.
+ * easier for the end user and to be able to do internal refactoring without
+ * affecting the API.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -64,8 +64,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * This method is called to recursively initilialize the configuration tree.
-   * It creates the child configurations of this configuration and
+   * This method is called to recursively initialize the configuration tree. It
+   * creates the child configurations of this configuration and
    * {@link #initialize() initializes} them. This is NOT done at construction to
    * prevent problems (e.g .infinity loops).<br>
    * Override this method in your custom implementation to perform
@@ -394,7 +394,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * This method gets an iterator of the child
-   * {@link Configuration configurations} whos {@link #getName() name} matches
+   * {@link Configuration configurations} whose {@link #getName() name} matches
    * the given <code>namePattern</code> in the
    * {@link #getNamespaceUri() namespace} of this configuration..
    * 
@@ -410,8 +410,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
   /**
    * This method gets an iterator of the child
-   * {@link Configuration configurations} whos {@link #getName() name} matches
-   * the given <code>namePattern</code> and whos
+   * {@link Configuration configurations} whose {@link #getName() name} matches
+   * the given <code>namePattern</code> and whose
    * {@link #getNamespaceUri() namespace-URI}
    * {@link String#equals(Object) equals} the given <code>namespaceUri</code>.
    * 
@@ -712,8 +712,11 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @param child
    *        is the {@link #getChildren(Type) child} configuration of this
    *        configuration that should be removed.
+   * @return <code>true</code> if the <code>child</code> has been
+   *         successfully removed, <code>false</code> if the
+   *         <code>child</code> is no child of this configuration.
    */
-  protected abstract void removeChild(AbstractConfiguration child);
+  protected abstract boolean removeChild(AbstractConfiguration child);
 
   /**
    * This method removes this node including all its
@@ -749,12 +752,12 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * {@link #getDescendant(String, String) descendants} from the underlying
    * configuration representation (e.g. properties, DOM tree, etc.). This will
    * be done by moving the configuration sub-tree to an
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exlcude configuration}.
+   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exclude configuration}.
    * 
    * @see #disable()
    * 
    * @return the
-   *         {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exlcude configuration}
+   *         {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exclude configuration}
    *         containing this node as child.
    * @throws ConfigurationException
    *         is something goes wrong.

@@ -17,7 +17,7 @@ import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfigurationAttribute extends BasicConfiguration {
+public abstract class AbstractConfigurationAttribute extends AbstractConfigurationNode {
 
   /**
    * The constructor.
@@ -97,7 +97,7 @@ public abstract class AbstractConfigurationAttribute extends BasicConfiguration 
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  protected void removeChild(AbstractConfiguration child) {
+  protected boolean removeChild(AbstractConfiguration child) {
 
     throw new ConfigurationException("Attribute cannot have children!");
   }

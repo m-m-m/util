@@ -196,8 +196,9 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
-  public void removeChild(AbstractConfiguration child) {
+  public boolean removeChild(AbstractConfiguration child) {
 
+    return false;
   }
 
   /**
