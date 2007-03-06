@@ -99,6 +99,7 @@ public class PathCondition implements Condition {
     AbstractConfiguration node = configuration;
     for (SimplePathSegment segment : this.segments) {
       if (segment.isPattern()) {
+        // TODO: NLS
         throw new ConfigurationException("Cannot establish condition with wildcards!");
       }
       node = node.requireChild(segment.getString(), namespaceUri);

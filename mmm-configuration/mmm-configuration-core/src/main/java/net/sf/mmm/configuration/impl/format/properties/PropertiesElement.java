@@ -56,11 +56,12 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationElement#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
    */
   @Override
   protected void addChild(AbstractConfiguration child) {
 
+    // just to make visible...
     super.addChild(child);
   }
 
@@ -80,6 +81,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
       if (this.key.length() == 0) {
         subName = childName;
       } else {
+        // TODO: NLS
         throw new ConfigurationException("Cannot have children in flat-mode!");
       }
     } else {

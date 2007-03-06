@@ -36,7 +36,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   private final boolean flat;
 
   /**
-   * The constructor for a toplevel document.
+   * The constructor for a top-level document.
    * 
    * @param configurationAccess
    *        is the access to the raw configuration data.
@@ -92,8 +92,8 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * This method determines if the properties are treated flat. In this case all
    * properties are direct children of the root-node.<br>
    * Else the properties are treated as a tree. Then the
-   * {@link #getSeparator() sperator} splits a property key into according
-   * configuration nodes. E.g. if the {@link #getSeparator() sperator} is '.'
+   * {@link #getSeparator() separator} splits a property key into according
+   * configuration nodes. E.g. if the {@link #getSeparator() separator} is '.'
    * and a property has the key 'foo.bar.key' then it represents a
    * {@link net.sf.mmm.configuration.api.Configuration configuration-node}
    * with the
@@ -176,6 +176,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
       }
       return root;
     } catch (IOException e) {
+      // TODO: NLS
       throw new ConfigurationException("I/O Error reading properties for " + this, e);
     }
   }
@@ -190,6 +191,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
       // TODO
       this.properties.store(outputStream, "");
     } catch (IOException e) {
+      // TODO: NLS
       throw new ConfigurationException("I/O Error writing properties for " + this, e);
     }
 

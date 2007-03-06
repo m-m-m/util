@@ -13,6 +13,15 @@ import java.util.regex.Pattern;
  */
 public final class StringUtil {
 
+  /** a string representing the boolean value <code>true</code> */
+  public static final String TRUE = String.valueOf(true);
+
+  /** a string representing the boolean value <code>false</code> */
+  public static final String FALSE = String.valueOf(false);
+
+  /** @see #toCamlCase(String) */
+  private static final char[] SEPARATORS = new char[] {' ', '-', '_', '.'};
+
   /**
    * Forbidden constructor.
    */
@@ -21,14 +30,10 @@ public final class StringUtil {
     super();
   }
 
-  /** a string representing the boolean value <code>true</code> */
-  public static final String TRUE = String.valueOf(true);
-
-  /** a string representing the boolean value <code>false</code> */
-  public static final String FALSE = String.valueOf(false);
-
   /**
    * This method parses a boolean value given as string.
+   * 
+   * @see Boolean#valueOf(String)
    * 
    * @param booleanValue
    *        is the boolean value as string.
@@ -50,8 +55,8 @@ public final class StringUtil {
   }
 
   /**
-   * This method replaces all occurences of the string <code>match</code> with
-   * the string <code>replace</code> in the given string.
+   * This method replaces all occurrences of the string <code>match</code>
+   * with the string <code>replace</code> in the given string.
    * 
    * @param string
    *        is the string where to replace.
@@ -59,7 +64,7 @@ public final class StringUtil {
    *        is the string that is searched and replaced.
    * @param replace
    *        is the string <code>match</code> is substituted with.
-   * @return the given string whith all occurences of <code>match</code>
+   * @return the given string with all occurrences of <code>match</code>
    *         replaced by <code>replace</code>.
    */
   public static String replace(String string, String match, String replace) {
@@ -77,7 +82,7 @@ public final class StringUtil {
       pos = string.indexOf(match, oldPos);
     }
     if (oldPos < string.length()) {
-      result.append(string.substring(oldPos, string.length()));
+      result.append(string.substring(oldPos));
     }
     return result.toString();
   }
@@ -104,7 +109,7 @@ public final class StringUtil {
    *        is the string to check.
    * @param trim
    *        if whitespaces should be ignored and a string with a trimmed length
-   *        of zero is considered as emtpy.
+   *        of zero is considered as empty.
    * @return <code>true</code> if the given string is <code>null</code> or
    *         has a (trimmed) length of zero, <code>false</code> otherwise.
    */
@@ -176,7 +181,7 @@ public final class StringUtil {
     if (requireWildcard && !hasWildcard) {
       return null;
     } else {
-      return Pattern.compile(buffer.toString());      
+      return Pattern.compile(buffer.toString());
     }
   }
 
@@ -213,6 +218,88 @@ public final class StringUtil {
       result = buffer.toString();
     }
     return result;
+  }
+
+  /**
+   * This method converts the given <code>string</code> to caml-case syntax
+   * using the default separators <code>' '</code>, <code>'-'</code>,
+   * <code>'_'</code> and <code>'.'</code>.
+   * 
+   * @see #toCamlCase(String, char[])
+   * 
+   * @param string
+   *        is the string to convert.
+   * @return the given <code>string</code> in caml-case syntax.
+   */
+  public static String toCamlCase(String string) {
+
+    return toCamlCase(string, SEPARATORS);
+  }
+
+  /**
+   * This method converts the given <code>string</code> to caml-case syntax.<br>
+   * In caml-case syntax words are written without a separator but each new word
+   * starts with a capitalized letter. This method removes all characters from
+   * the given <code>string</code> that are in the list given by
+   * <code>separators</code> and capitalizes the first character of the
+   * following word.<br>
+   * Examples for separators ' ', '-', '_', '.': <br>
+   * <table border="1">
+   * <tr>
+   * <th>string</th>
+   * <th>toCamlCase(string)</th>
+   * </tr>
+   * <tr>
+   * <td><code>foo bar</code></td>
+   * <td><code>fooBar</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>aAa-bBB-CcC</code></td>
+   * <td><code>aAaBBBCcC</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>X--m_._l..</code></td>
+   * <td><code>XML</code></td>
+   * </tr>
+   * </table>
+   * 
+   * @param string
+   *        is the string to convert.
+   * @param separators
+   *        is the list of characters that are treated as word-separators.
+   * @return the given <code>string</code> in caml-case syntax.
+   */
+  public static String toCamlCase(String string, char... separators) {
+
+    char[] chars = string.toCharArray();
+    StringBuffer buffer = new StringBuffer(chars.length);
+    int pos = 0;
+    boolean lastSeparator = false;
+    for (int i = 0; i < chars.length; i++) {
+      char c = chars[i];
+      boolean isSeparator = false;
+      for (char s : separators) {
+        if (c == s) {
+          isSeparator = true;
+          break;
+        }
+      }
+      if (isSeparator) {
+        lastSeparator = true;
+        if (pos < i) {
+          buffer.append(chars, pos, i - pos);
+        }
+        pos = i + 1;
+      } else if (lastSeparator) {
+        buffer.append(Character.toUpperCase(c));
+        pos++;
+        lastSeparator = false;
+      }
+    }
+    if (!lastSeparator) {
+      buffer.append(chars, pos, chars.length - pos);
+    }
+    return buffer.toString();
   }
 
 }

@@ -71,7 +71,7 @@ import net.sf.mmm.value.api.GenericValue;
  * {@link GenericValue} value1 = conf3.{@link #getValue()};
  * int intValue = value1.{@link GenericValue#getInteger(Integer) getInteger}(42);
  * {@link GenericValue} value2 = node2.getValue();
- * String stringValue = value2.{@link GenericValue#getString(String) getString}("hiho");
+ * String stringValue = value2.{@link GenericValue#getString(String) getString}("hello");
  * </pre>
  * 
  * If this code is run first time while <code>conf1</code> is empty, the
@@ -79,10 +79,10 @@ import net.sf.mmm.value.api.GenericValue;
  * syntax):
  * 
  * <pre>
- * &lt;foo bar="42"&gt;hiho&lt;/foo&gt;
+ * &lt;foo bar="42"&gt;hello&lt;/foo&gt;
  * </pre>
  * 
- * If you modify the XML and change the values ("42" and "hiho") then
+ * If you modify the XML and change the values ("42" and "hello") then
  * <code>intValue</code> and <code>stringValue</code> will change
  * accordingly. Additionally the value of the attribute can be accessed faster
  * but still safe from
@@ -310,7 +310,7 @@ public interface Configuration extends
    * {@link #getDescendant(String, String) getDescendant}(path, {@link #getNamespaceUri()})
    * </pre>
    * 
-   * @see #getDescendant(String, String)
+   * See {@link #getDescendant(String, String)} for more details.
    * 
    * @param path
    *        is the relative {@link Configuration#getPath() path} from this
@@ -444,7 +444,7 @@ public interface Configuration extends
    * <li><code>*[@*='foo*']</code> leads to all elements that have an
    * attribute whose value starts with <code>foo</code>.</li>
    * <li><code>foo[@bar>5]</code> leads to all elements named
-   * <code>foo</code> that have an attribute <code>bar</code> whos value is
+   * <code>foo</code> that have an attribute <code>bar</code> whose value is
    * a number greater than <code>5</code>.</li>
    * </ul>
    * <b>IMPORTANT:</b><br>
@@ -480,14 +480,47 @@ public interface Configuration extends
    * This method determines if this configuration is a
    * {@link #getDescendant(String, String) descendant} of the given
    * {@link Configuration configuration}. In other words it is checked if the
-   * given {@link Configuration configuration} is a super-node of this node,
-   * meaning that it is in the list of parent-nodes up to the root-node.
+   * given <code>ancestor</code> is a super-node of this node, meaning that it
+   * is in the list of parent-nodes up to the root-node.<br>
+   * This is the same as:
    * 
-   * @param superNode
+   * <pre>
+   * {@link #getAncestorDistance(Configuration) getDescendantDistance}(ancestor) > 0
+   * </pre>
+   * 
+   * @see #getAncestorDistance(Configuration)
+   * 
+   * @param ancestor
    *        is the potential super-node of this node.
-   * @return <code>true</code> if the given node is a super-node of this node,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if the given <code>ancestor</code> is a
+   *         super-node of this node, <code>false</code> otherwise.
    */
-  boolean isDescendantOf(Configuration superNode);
+  boolean isDescendantOf(Configuration ancestor);
+
+  /**
+   * This method determines the distance of this node to the given
+   * <code>ancestor</code>.<br>
+   * Examples:
+   * <ul>
+   * <li><code>config.{@link #getAncestorDistance(Configuration) getAncestorDistance}(config)</code>
+   * is <code>0</code>.</li>
+   * <li><code>config.{@link #getDescendant(String) getDescendant}("foo/bar").{@link #getAncestorDistance(Configuration) getAncestorDistance}(config)</code>
+   * is <code>2</code>.</li>
+   * </ul>
+   * 
+   * @param ancestor
+   *        is the node potential super-node of this node.
+   * @return
+   *        <ul>
+   *        <li><code>0</code> if the node given by <code>ancestor</code>
+   *        is the same as this node.</li>
+   *        <li>a positive integer <code>N</code> if this node is the
+   *        <code>N</code>.th child of the given <code>ancestor</code>.</li>
+   *        <li><code>-1</code> if this node is no
+   *        {@link #getDescendant(String, String) descendant} of the node given
+   *        by <code>ancestor</code>.</li>
+   *        </ul>
+   */
+  int getAncestorDistance(Configuration ancestor);
 
 }

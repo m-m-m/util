@@ -128,7 +128,7 @@ public class XmlElement extends AbstractConfigurationElement {
       prefix = ConfigurationDocument.NAMESPACE_PREFIX_CONFIGURATION;
       String uri = this.element.lookupNamespaceURI(prefix);
       if (!ConfigurationDocument.NAMESPACE_URI_CONFIGURATION.equals(uri)) {
-        // TODO
+        // TODO: NLS
         throw new ConfigurationException("Namespace "
             + ConfigurationDocument.NAMESPACE_URI_CONFIGURATION + " not defined but prefix "
             + ConfigurationDocument.NAMESPACE_PREFIX_CONFIGURATION + " already in use!");
@@ -225,6 +225,7 @@ public class XmlElement extends AbstractConfigurationElement {
       return newParent;
     } else {
       // can not remove root node!
+      // TODO: NLS
       throw new ConfigurationException("Can not remove document root node!");
     }
   }

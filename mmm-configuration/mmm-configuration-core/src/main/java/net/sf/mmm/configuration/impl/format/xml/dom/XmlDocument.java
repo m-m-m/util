@@ -100,7 +100,7 @@ public class XmlDocument extends AbstractConfigurationDocument {
     try {
       DomUtil.writeXml(this.xmlDocument, outputStream, false);
     } catch (XmlException e) {
-      // TODO:
+      // TODO: NLS
       throw new ConfigurationException(e.getMessage());
     }
   }
@@ -117,7 +117,7 @@ public class XmlDocument extends AbstractConfigurationDocument {
       XmlElement rootNode = new XmlElement(this, getParentConfiguration(), rootElement);
       return rootNode;
     } catch (XmlException e) {
-      // TODO:
+      // TODO: NLS
       throw new ConfigurationException(e.getMessage(), e);
     }
   }

@@ -43,11 +43,13 @@ public class FileAccess extends AbstractConfigurationAccess {
     try {
       this.file = configurationFile;
       if (!this.file.isFile()) {
+        // TODO: NLS
         throw new ConfigurationException("The given path " + this.file.getAbsolutePath()
             + " is no file!");
       }
       this.canonicalPath = this.file.getCanonicalPath();
     } catch (IOException e) {
+      // TODO: NLS
       throw new ConfigurationException("", e);
     }
   }

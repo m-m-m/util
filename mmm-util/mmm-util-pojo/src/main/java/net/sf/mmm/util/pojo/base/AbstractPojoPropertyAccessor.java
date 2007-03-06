@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.base;
 
 import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -115,33 +114,5 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
 
     return this.componentType;
   }
-
-  /**
-   * This method invokes this accessor as getter.
-   * 
-   * @param pojoInstance
-   *        the instance of the pojo where to get the property value from.
-   * @return the value of the property.
-   * @throws IllegalAccessException
-   *         if you do NOT have permissions the access the underlying getter
-   *         method.
-   * @throws InvocationTargetException
-   *         if the POJO itself (the getter) throws an exception.
-   */
-  public abstract Object get(Object pojoInstance) throws IllegalAccessException,
-      InvocationTargetException;
-
-  /**
-   * 
-   * @param pojoInstance
-   * @param value
-   * @throws IllegalAccessException
-   *         if you do NOT have permissions the access the underlying getter
-   *         method.
-   * @throws InvocationTargetException
-   *         if the POJO itself (the getter) throws an exception.
-   */
-  public abstract void set(Object pojoInstance, Object value) throws IllegalAccessException,
-      InvocationTargetException;
 
 }

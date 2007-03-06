@@ -14,9 +14,11 @@ import java.util.regex.Pattern;
 import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.ConfigurationNotEditableException;
 import net.sf.mmm.configuration.api.MutableConfiguration;
 import net.sf.mmm.configuration.base.iterator.ChildPatternIterator;
 import net.sf.mmm.configuration.base.iterator.ChildTypeIterator;
+import net.sf.mmm.util.event.ChangeEvent;
 
 /**
  * This is the abstract base implementation of the
@@ -87,6 +89,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       throws ConfigurationException {
 
     if (name.length() == 0) {
+      // TODO: NLS
       throw new ConfigurationException("Child name must not be empty!");
     }
     QName qName = new QName(name, namespaceUri);
@@ -112,16 +115,18 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       // does attribute already exist?
       if (child == null) {
         child = createChildAttribute(name, namespace);
-        this.children.put(qName, child);
+        addChild(child, qName);
+        //this.children.put(qName, child);
       }
       return child;
     } else {
       AbstractConfiguration newChild = createChildElement(name, namespace);
-      if (child == null) {
-        this.children.put(qName, newChild);
-      } else {
-        child.addSibling(newChild);
-      }
+      addChild(newChild, qName);
+      //if (child == null) {
+      //  this.children.put(qName, newChild);
+      //} else {
+      //  child.addSibling(newChild);
+      //}
       return newChild;
     }
   }
@@ -137,7 +142,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
 
   /**
    * This method is called if a {@link #getChild(String, String) child} has been
-   * {@link #addChild(AbstractConfiguration) added} that has the
+   * {@link #addChild(AbstractConfiguration, QName) added} that has the
    * {@link #getNamespaceUri() namespace}
    * {@link ConfigurationDocument#NAMESPACE_URI_CONFIGURATION}.
    * 
@@ -166,6 +171,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
         if (includeChild.getType() == Type.ELEMENT) {
           addChild(includeChild);
         } else {
+          // TODO: NLS
           throw new ConfigurationException("Including attributes is NOT allowed!");
         }
       }
@@ -179,13 +185,12 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
    */
   @Override
-  protected void addChild(AbstractConfiguration child) {
+  protected void addChild(AbstractConfiguration child, QName qName) {
 
     String namespace = child.getNamespaceUri();
-    QName qName = new QName(child.getName(), namespace);
     if (ConfigurationDocument.NAMESPACE_URI_CONFIGURATION.equals(namespace)) {
       handleInternalChild(child);
     }
@@ -195,15 +200,20 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
     } else {
       switch (child.getType()) {
         case ATTRIBUTE:
+          // TODO: NLS
           throw new IllegalArgumentException("Duplicate Attribute: " + qName + " in " + this);
         case ELEMENT:
           existingChild.addSibling(child);
           break;
         default :
+          // TODO: NLS
           throw new IllegalArgumentException("unknown type for " + child);
       }
     }
-    setModified();
+    AbstractConfigurationDocument ownerDoc = getOwnerDocument();
+    if (ownerDoc != null) {
+      ownerDoc.configurationChanged(child, ChangeEvent.Type.ADD);
+    }
   }
 
   /**
@@ -213,7 +223,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   protected boolean removeChild(AbstractConfiguration child) {
 
     if (!isEditable()) {
-      throw new ConfigurationException("not editable");
+      throw new ConfigurationNotEditableException(this);
     }
     boolean modified;
     QName qName = new QName(child.getName(), child.getNamespaceUri());
@@ -240,8 +250,11 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       default :
         throw new IllegalArgumentException("unknown type for " + child);
     }
-    if (modified) {      
-      setModified();
+    if (modified) { 
+      AbstractConfigurationDocument ownerDoc = getOwnerDocument();
+      if (ownerDoc != null) {
+        ownerDoc.configurationChanged(child, ChangeEvent.Type.REMOVE);
+      }      
     }
     return modified;
   }

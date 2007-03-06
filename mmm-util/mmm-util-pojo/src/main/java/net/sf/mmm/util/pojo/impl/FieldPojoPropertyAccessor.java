@@ -60,7 +60,6 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   /**
    * @see net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor#get(java.lang.Object)
    */
-  @Override
   public Object get(Object pojoInstance) throws IllegalAccessException, InvocationTargetException {
 
     return this.field.get(pojoInstance);
@@ -70,7 +69,6 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
    * @see net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor#set(java.lang.Object,
    *      java.lang.Object)
    */
-  @Override
   public void set(Object pojoInstance, Object value) throws IllegalAccessException,
       InvocationTargetException {
 

@@ -38,7 +38,18 @@ public final class QName {
   }
 
   /**
-   * @see java.lang.Object#equals(java.lang.Object) 
+   * The constructor.
+   * 
+   * @param config
+   *        is the configuration where to take qualified name from.
+   */
+  public QName(Configuration config) {
+
+    this(config.getName(), config.getNamespaceUri());
+  }
+
+  /**
+   * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
   public boolean equals(Object obj) {
@@ -58,7 +69,7 @@ public final class QName {
   }
 
   /**
-   * @see java.lang.Object#hashCode() 
+   * @see java.lang.Object#hashCode()
    */
   @Override
   public int hashCode() {
@@ -67,13 +78,12 @@ public final class QName {
   }
 
   /**
-   * @see java.lang.Object#toString() 
+   * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {
 
-    if ((this.namespaceUri == null)
-        || (Configuration.NAMESPACE_URI_NONE.equals(this.namespaceUri))) {
+    if ((this.namespaceUri == null) || (Configuration.NAMESPACE_URI_NONE.equals(this.namespaceUri))) {
       return this.name;
     } else {
       int len = 1 + this.name.length() + this.namespaceUri.length();

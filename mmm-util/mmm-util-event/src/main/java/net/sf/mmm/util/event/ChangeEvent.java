@@ -32,7 +32,7 @@ public interface ChangeEvent extends Event {
 
     /**
      * A {@link ChangeEvent change-event} of this type indicates, that something
-     * that has been removed. E.g. one or mutliple existing item(s) have been
+     * that has been removed. E.g. one or multiple existing item(s) have been
      * removed from a list.
      */
     REMOVE

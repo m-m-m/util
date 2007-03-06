@@ -15,7 +15,7 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 /**
- * This is the test case for the class {@link AnnotationUtil}.
+ * This is the {@link TestCase} for the class {@link AnnotationUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -27,14 +27,6 @@ public class AnnotationUtilTest extends TestCase {
     private static final String FOO_CLASS = "Foo-class";
 
     private static final String BAR_CLASS = "Foo-class";
-
-    /**
-     * The constructor.
-     */
-    public AnnotationUtilTest() {
-
-        super();
-    }
 
     @Test
     public static void testMethodAnnotation() throws Exception {
@@ -49,7 +41,7 @@ public class AnnotationUtilTest extends TestCase {
         assertTrue(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.ANNOTATION_TYPE));
         assertFalse(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.TYPE));
 
-        // annotation inheritence
+        // annotation inheritance
         MyAnnotation classAnnotation = AnnotationUtil.getClassAnnotation(Bar.class,
                 MyAnnotation.class);
         assertNotNull(classAnnotation);
@@ -63,7 +55,6 @@ public class AnnotationUtilTest extends TestCase {
         
         assertNotNull(FooIF.class.getAnnotation(SomeAnnotation.class));
         
-        // this should work... bug in eclipse, jdk 5.0, ...???
         SomeAnnotation typeAnnotation = AnnotationUtil.getTypeAnnotation(Bar.class,
                 SomeAnnotation.class);
         assertNotNull(typeAnnotation);

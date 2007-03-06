@@ -11,17 +11,17 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 
 /**
  * This is a configuration exception that contains multiple nested configuration
- * exceptions. It is a summary of multiple errors that occured during a chain of
+ * exceptions. It is a summary of multiple errors that occurred during a chain of
  * operations that should be processed to the end.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class CompositeConfigurationException extends ConfigurationException {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = -7509766690812596716L;
 
-  /** The agregated exceptions */
+  /** The aggregated exceptions */
   private final List<ConfigurationException> trouble;
 
   /**
@@ -31,6 +31,7 @@ public class CompositeConfigurationException extends ConfigurationException {
    */
   public CompositeConfigurationException(List<ConfigurationException> childExceptions) {
 
+    // TODO
     super("");
     this.trouble = childExceptions;
   }

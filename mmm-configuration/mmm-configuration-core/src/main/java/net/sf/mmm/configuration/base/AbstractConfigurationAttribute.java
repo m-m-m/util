@@ -81,15 +81,17 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   @Override
   AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
 
+    // TODO: NLS
     throw new ConfigurationException("Attribute cannot have children!");
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
    */
   @Override
-  protected void addChild(AbstractConfiguration child) {
+  protected void addChild(AbstractConfiguration child, QName qname) {
 
+    // TODO: NLS
     throw new ConfigurationException("Attribute cannot have children!");
   }
 
@@ -99,6 +101,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   @Override
   protected boolean removeChild(AbstractConfiguration child) {
 
+    // TODO: NLS
     throw new ConfigurationException("Attribute cannot have children!");
   }
  
@@ -108,6 +111,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   @Override
   public void addSibling(AbstractConfiguration element) {
   
+    // TODO: NLS
     throw new ConfigurationException("Attribute cannot have siblings!");
   }
   
@@ -117,6 +121,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   @Override
   public boolean removeSibling(AbstractConfiguration element) {
   
+    // TODO: NLS
     throw new ConfigurationException("Attribute cannot have siblings!");
   }
   

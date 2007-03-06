@@ -14,7 +14,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ConfigurationException extends NlsRuntimeException {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = -7724733961978667640L;
 
   /**

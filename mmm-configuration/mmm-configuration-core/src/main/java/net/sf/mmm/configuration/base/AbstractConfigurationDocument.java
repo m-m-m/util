@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import net.sf.mmm.configuration.NlsBundleConfigCore;
 import net.sf.mmm.configuration.api.ConfigurationDocument;
@@ -21,10 +20,11 @@ import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector;
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
+import net.sf.mmm.util.event.ChangeEvent;
 
 /**
- * This is the abstract base implementation of the
- * {@link ConfigurationDocument} interface.
+ * This is the abstract base implementation of the {@link ConfigurationDocument}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -108,7 +108,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     this.root = null;
     if (this.parentDoc == null) {
       this.context = docContext;
-      this.listeners = new Vector<FilteredListener>();
+      this.listeners = new ArrayList<FilteredListener>();
     } else {
       this.context = this.parentDoc.getContext().createChildContext();
       this.listeners = null;
@@ -210,28 +210,6 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * This method sets the {@link #isModified() modified-flag} to
-   * <code>true</code> and
-   * {@link #configurationChanged(Configuration) sends} a
-   * {@link ConfigurationChangeEvent change-event}. This method must be called
-   * by the {@link Configuration configurations} of this document on any
-   * change.
-   * 
-   * @see #save()
-   * 
-   * @param configuration
-   *        is the configuration that has been modified ({@link Configuration#getValue() value}
-   *        changed or
-   *        {@link AbstractConfiguration#getChild(String, String) child} has
-   *        been added or removed).
-   */
-  protected void setModified(Configuration configuration) {
-
-    this.modifiedFlag = true;
-    configurationChanged(configuration);
-  }
-
-  /**
    * @see net.sf.mmm.configuration.api.ConfigurationDocument#getConfiguration()
    */
   public synchronized AbstractConfiguration getConfiguration() {
@@ -272,7 +250,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
         try {
           outputStream.close();
         } catch (IOException e) {
-          // TODO
+          // TODO: NLS
           exceptions.add(new ConfigurationException(e.getMessage()));
         }
       }
@@ -323,6 +301,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
       try {
         inputStream.close();
       } catch (IOException e) {
+        // TODO: NLS
         throw new ConfigurationException(e.getMessage());
       }
     }
@@ -360,62 +339,96 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
+   * This method registers the given <code>listener</code> for events in the
+   * sub-tree of the given <code>configuration</code>.
    * 
    * @param configuration
+   *        is the configuration where the listener was registered.
    * @param listener
+   *        is the listener to add.
    */
   protected void addListener(Configuration configuration, ConfigurationChangeListener listener) {
 
     if (this.parentDoc == null) {
-      this.listeners.add(new FilteredListener(configuration, listener));
+      synchronized (this.listeners) {
+        this.listeners.add(new FilteredListener(configuration, listener));
+      }
     } else {
       this.parentDoc.addListener(configuration, listener);
     }
   }
 
   /**
+   * This method removes the given <code>listener</code>.
    * 
    * @param configuration
+   *        is the configuration where the listener de-registered.
    * @param listener
+   *        is the listener to remove.
+   * @return <code>true</code> if the listener has successfully be removed,
+   *         <code>false</code> otherwise (the listener has NOT been
+   *         registered).
    */
-  protected void removeListener(Configuration configuration,
-      ConfigurationChangeListener listener) {
+  protected boolean removeListener(Configuration configuration, ConfigurationChangeListener listener) {
 
     if (this.parentDoc == null) {
-      this.listeners.remove(new FilteredListener(configuration, listener));
+      synchronized (this.listeners) {
+        int len = this.listeners.size();
+        for (int i = 0; i < len; i++) {
+          FilteredListener filteredListener = this.listeners.get(i);
+          if (filteredListener.listener == listener) {
+            this.listeners.remove(i);
+            return true;
+          }
+        }
+        return false;
+      }
     } else {
-      this.parentDoc.removeListener(configuration, listener);
+      return this.parentDoc.removeListener(configuration, listener);
     }
   }
 
   /**
-   * This method notifies all listeners about the change of the given
-   * configuration.
+   * This method sets the {@link #isModified() modified-flag} to
+   * <code>true</code> and notifies all listeners about the change of the
+   * given configuration.
+   * 
+   * @see #save()
+   * @see #addListener(Configuration, ConfigurationChangeListener)
    * 
    * @param configuration
-   *        is the configuration that has changed.
+   *        is the configuration that has changed (been added/removed/updated).
+   * @param type
+   *        is the type of the change.
    */
-  protected void configurationChanged(Configuration configuration) {
+  protected void configurationChanged(AbstractConfiguration configuration, ChangeEvent.Type type) {
 
+    this.modifiedFlag = true;
     if (this.parentDoc == null) {
-      int length = this.listeners.size();
-      if (length > 0) {
-        ConfigurationChangeEvent event = new ConfigurationChangeEvent(configuration);
-        for (int i = 0; i < length; i++) {
-          try {
-            this.listeners.get(i).handleEvent(event);
-          } catch (RuntimeException e) {
-
+      if (this.listeners.size() > 0) {
+        synchronized (this.listeners) {
+          AbstractConfiguration topCause = configuration;
+          if (type != ChangeEvent.Type.UPDATE) {
+            topCause = configuration.getParent();
+          }
+          ConfigurationChangeEvent event = new ConfigurationChangeEvent(configuration, type,
+              topCause);
+          for (FilteredListener listener : this.listeners) {
+            try {
+              listener.handleEvent(event);
+            } catch (RuntimeException e) {
+              // TODO: do something here???
+            }
           }
         }
       }
     } else {
-      this.parentDoc.configurationChanged(configuration);
+      this.parentDoc.configurationChanged(configuration, type);
     }
   }
 
   /**
-   * @see java.lang.Object#toString() 
+   * @see java.lang.Object#toString()
    */
   @Override
   public String toString() {
@@ -459,7 +472,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     }
 
     /**
-     * @see java.lang.Object#equals(java.lang.Object) 
+     * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
@@ -474,7 +487,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     }
 
     /**
-     * @see java.lang.Object#hashCode() 
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
@@ -487,9 +500,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
      */
     public void handleEvent(ConfigurationChangeEvent event) {
 
-      Configuration changedConfiguration = event.getConfiguration();
-      if ((changedConfiguration == this.configuration)
-          || changedConfiguration.isDescendantOf(this.configuration)) {
+      if (event.getTopCause().getAncestorDistance(this.configuration) >= 0) {
         this.listener.handleEvent(event);
       }
     }

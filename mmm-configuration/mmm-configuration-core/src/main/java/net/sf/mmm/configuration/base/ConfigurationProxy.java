@@ -176,12 +176,12 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
    */
   @Override
-  protected void addChild(AbstractConfiguration child) {
+  protected void addChild(AbstractConfiguration child, QName qName) {
 
-    getDelegate().addChild(child);
+    getDelegate().addChild(child, qName);
   }
 
   /**

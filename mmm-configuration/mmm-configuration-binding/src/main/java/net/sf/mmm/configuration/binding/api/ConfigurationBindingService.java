@@ -42,7 +42,7 @@ public interface ConfigurationBindingService {
    * @throws ConfigurationException
    *         if a required property is missing.
    */
-  void configure(Configuration configuration, Object pojo, PojoBuilder builder)
+  void configure(Configuration configuration, Object pojo, ConfigurationBindingInjector builder)
       throws ConfigurationException;
 
 }

@@ -6,6 +6,7 @@ package net.sf.mmm.configuration.base;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.term.api.Term;
+import net.sf.mmm.util.event.ChangeEvent;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueException;
 import net.sf.mmm.value.base.AbstractStringValue;
@@ -163,24 +164,14 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   }
 
   /**
-   * This method is to has to be called every time the configuration changes. It
-   * will set the "dirty" flag so
-   * {@link net.sf.mmm.configuration.api.ConfigurationDocument#save() saving} is
-   * only performed as needed.
-   */
-  protected void setModified() {
-
-    if (getOwnerDocument() != null) {
-      getOwnerDocument().setModified(this);
-    }
-  }
-
-  /**
    * @see net.sf.mmm.util.event.EventSource#addListener(net.sf.mmm.util.event.EventListener)
    */
   public void addListener(ConfigurationChangeListener listener) {
 
-    getOwnerDocument().addListener(this, listener);
+    AbstractConfigurationDocument ownerDoc = getOwnerDocument();
+    if (ownerDoc != null) {
+      ownerDoc.addListener(this, listener);
+    }
   }
 
   /**
@@ -188,7 +179,21 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
    */
   public void removeListener(ConfigurationChangeListener listener) {
 
-    getOwnerDocument().removeListener(this, listener);
+    AbstractConfigurationDocument ownerDoc = getOwnerDocument();
+    if (ownerDoc != null) {
+      ownerDoc.removeListener(this, listener);
+    }
+  }
+
+  /**
+   * This method has to be called every time the configuration (value) is
+   * updated.
+   */
+  protected void fireUpdate() {
+
+    if (getOwnerDocument() != null) {
+      getOwnerDocument().configurationChanged(this, ChangeEvent.Type.UPDATE);
+    }
   }
 
   /**
@@ -274,6 +279,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
 
       AbstractConfigurationNode.this.setPlainString(newValue);
       initExpression(newValue);
+      fireUpdate();
     }
 
     /**

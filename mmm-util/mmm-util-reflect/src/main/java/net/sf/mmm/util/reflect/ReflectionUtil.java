@@ -3,9 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 
 /**
  * This class is a collection of utility functions for dealing with
@@ -53,6 +59,101 @@ public class ReflectionUtil {
     }
     return result;
 
+  }
+  
+  /**
+   * This method gets the component type of the given <code>type</code>.<br>
+   * For example the following types all have the component-type MyClass:
+   * <ul>
+   * <li>MyClass[]</li>
+   * <li>List&lt;MyClass&gt;</li>
+   * <li>Foo&lt;? extends MyClass&gt;</li>
+   * <li>Bar&lt;? super MyClass&gt;</li>
+   * <li>&lt;T extends MyClass&gt; T[]</li>
+   * </ul>
+   * 
+   * @param type
+   *        is the type where to get the component type from.
+   * @return the component type of the given <code>type</code> or
+   *         <code>null</code> if the given <code>type</code> does NOT have
+   *         a single (component) type.
+   */
+  public static Class<?> getComponentType(Type type) {
+
+    if (type instanceof Class) {
+      Class clazz = (Class) type;
+      if (clazz.isArray()) {
+        return clazz.getComponentType();
+      }
+    } else if (type instanceof ParameterizedType) {
+      ParameterizedType pt = (ParameterizedType) type;
+      Type[] generics = pt.getActualTypeArguments();
+      if (generics.length == 1) {
+        return getSimpleType(generics[0]);
+      }
+    } else if (type instanceof GenericArrayType) {
+      GenericArrayType gat = (GenericArrayType) type;
+      return getSimpleType(gat.getGenericComponentType());
+    }
+    return null;
+  }
+
+  /**
+   * This method gets the simple type class for the given <code>type</code>.<br>
+   * Examples:
+   * <table>
+   * <tr border="1">
+   * <th><code>type</code></th>
+   * <th><code>{@link #getSimpleType(Type) getSimpleType}(type)</code></th>
+   * </tr>
+   * <tr>
+   * <td><code>String</code></td>
+   * <td><code>String</code></td>
+   * </td>
+   * <tr>
+   * <td><code>List&lt;String&gt;</code></td>
+   * <td><code>List</code></td>
+   * </td>
+   * <tr>
+   * <td><code>&lt;T extends MyClass&gt; T[]</code></td>
+   * <td><code>MyClass[]</code></td>
+   * </td>
+   * </table>
+   * 
+   * @param type
+   *        is the type to convert.
+   * @return the closest class representing the given <code>type</code>.
+   */
+  public static Class<?> getSimpleType(Type type) {
+
+    if (type instanceof Class) {
+      return (Class) type;
+    } else if (type instanceof ParameterizedType) {
+      ParameterizedType pt = (ParameterizedType) type;
+      return getSimpleType(pt.getRawType());
+    } else if (type instanceof WildcardType) {
+      WildcardType wt = (WildcardType) type;
+      Type[] lower = wt.getLowerBounds();
+      if (lower.length == 1) {
+        return getSimpleType(lower[0]);
+      }
+      Type[] upper = wt.getUpperBounds();
+      if (upper.length == 1) {
+        return getSimpleType(upper[0]);
+      }
+    } else if (type instanceof GenericArrayType) {
+      GenericArrayType gat = (GenericArrayType) type;
+      Class componentType = getSimpleType(gat.getGenericComponentType());
+      // this is sort of stupid but there seems no other way...
+      return Array.newInstance(componentType, 0).getClass();
+    } else if (type instanceof TypeVariable) {
+      TypeVariable tv = (TypeVariable) type;
+      Type[] bounds = tv.getBounds();
+      if (bounds.length == 1) {
+        return getSimpleType(bounds[0]);
+      }
+    }
+    return null;
   }
 
   /**
@@ -104,7 +205,7 @@ public class ReflectionUtil {
 
   /**
    * This method gets the parent method of the given <code>method</code>. The
-   * parent method is the method overriden (is the sense of {@link Override})
+   * parent method is the method overridden (is the sense of {@link Override})
    * by the given <code>method</code> or directly inherited from an
    * {@link Class#getInterfaces() interface}.
    * 
@@ -129,7 +230,7 @@ public class ReflectionUtil {
    * @see #getParentMethod(Class, String, Class[])
    * 
    * @param inheritingClass
-   *        is the class inherting the requested method.
+   *        is the class inheriting the requested method.
    * @param methodName
    *        is the {@link Method#getName() name} of the requested method.
    * @param parameterTypes

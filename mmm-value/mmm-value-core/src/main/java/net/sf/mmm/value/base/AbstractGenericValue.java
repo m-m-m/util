@@ -21,12 +21,42 @@ import net.sf.mmm.value.api.MutableGenericValue;
  */
 public abstract class AbstractGenericValue implements MutableGenericValue {
 
+  /** @see #isSupported(Class) */
+  private static final Class[] SUPPORTED_CLASSES = new Class[] {Object.class, String.class,
+      Boolean.class, boolean.class, Class.class, Number.class, Integer.class, int.class,
+      Long.class, long.class, Double.class, double.class, Float.class, float.class, Short.class,
+      short.class, Byte.class, byte.class, Date.class};
+
   /**
    * The constructor.
    */
   public AbstractGenericValue() {
 
     super();
+  }
+
+  /**
+   * This method determines if the given <code>valueType</code> is supported
+   * by {@link #getValue(Class)}. The term supported here means that
+   * {@link #getValue(Class)} will potentially be able to convert the actual
+   * value to <code>valueType</code>. You can use this method to avoid (reduce)
+   * {@link WrongValueTypeException}s.
+   * 
+   * @see #getValue(Class, Object)
+   * 
+   * @param valueType
+   *        is the type to check.
+   * @return <code>true</code> if the given <code>type</code> is supported,
+   *         <code>false</code> otherwise.
+   */
+  public static boolean isSupported(Class<?> valueType) {
+
+    for (Class supportedType : SUPPORTED_CLASSES) {
+      if (supportedType.equals(valueType)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -76,18 +106,18 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    * @see net.sf.mmm.value.api.GenericValue#getCharacter()
    */
   public char getCharacter() throws ValueNotSetException, WrongValueTypeException {
-  
+
     return getValue(Character.class).charValue();
   }
-  
+
   /**
    * @see net.sf.mmm.value.api.GenericValue#getCharacter(java.lang.Character)
    */
   public Character getCharacter(Character defaultValue) throws WrongValueTypeException {
-  
+
     return getValue(Character.class, defaultValue);
   }
-  
+
   /**
    * @see net.sf.mmm.value.api.GenericValue#getBoolean()
    */
@@ -360,7 +390,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   }
 
   /**
-   * This method parses an numberic value.
+   * This method parses a numeric value.
    * 
    * @param numberValue
    *        is the number value as string.

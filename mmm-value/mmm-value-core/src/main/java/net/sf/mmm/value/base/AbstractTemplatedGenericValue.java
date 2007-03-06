@@ -10,7 +10,7 @@ import net.sf.mmm.value.api.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the {@link MutableGenericValue}
- * interrface using a templated {@link #getPlainValue() value}.
+ * interface using a templated {@link #getPlainValue() value}.
  * 
  * @param <V>
  *        is the templated type of the actual {@link #getPlainValue() value}.

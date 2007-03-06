@@ -66,6 +66,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
     String absoluteHref = href;
     if (!href.startsWith("/")) {
       if (parent == null) {
+        // TODO: NLS
         throw new ConfigurationException(
             "The parent access is required but NOT available - please set the contextPrefix properly!");
       } else {

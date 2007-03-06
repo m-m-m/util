@@ -78,9 +78,11 @@ public class CompareCondition extends PathCondition {
   public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
 
     if (isValuePattern()) {
+      // TODO: NLS
       throw new ConfigurationException("Cannot establish condition with wildcards!");
     }
     if (this.comparator.getSymbol() != EqualsComparator.SYMBOL) {
+      // TODO: NLS
       throw new ConfigurationException(
           "Can only establish condition for condition comparator equals (=)!");
     }

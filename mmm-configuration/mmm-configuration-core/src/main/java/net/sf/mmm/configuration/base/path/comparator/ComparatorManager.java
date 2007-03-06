@@ -63,6 +63,7 @@ public class ComparatorManager {
 
     String symbol = comparator.getSymbol();
     if (this.comparators.containsKey(symbol)) {
+      // TODO: NLS
       throw new ConfigurationException("Duplicate symbol!");
     }
   }

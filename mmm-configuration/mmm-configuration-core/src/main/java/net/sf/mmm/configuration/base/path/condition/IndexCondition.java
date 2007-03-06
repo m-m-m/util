@@ -59,6 +59,7 @@ public class IndexCondition implements Condition {
         if (this.index == 0) {
           return configuration;
         } else {
+          // TODO: NLS
           throw new ConfigurationException("Cannot establish index condition on root node!");
         }
       } else {
@@ -69,6 +70,7 @@ public class IndexCondition implements Condition {
         }
         int diff = count - this.index;
         if (diff > 20) {
+          // TODO: NLS
           throw new ConfigurationException("Too many siblings to create for index condition!");
         }
         AbstractConfiguration sibling = configuration;

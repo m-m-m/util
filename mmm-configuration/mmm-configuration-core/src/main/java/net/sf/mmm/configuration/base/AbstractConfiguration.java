@@ -138,6 +138,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
         index++;
         pointer = pointer.previous;
         if (pointer == this) {
+          // TODO: NLS
           throw new ConfigurationException("Internal error: sibling-structure broken!");
         }
       }
@@ -317,9 +318,11 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       throw new ConfigurationNotEditableException(this);
     }
     if (name.length() == 0) {
+      // TODO: NLS
       throw new ConfigurationException("Child name must not be empty!");
     }
     if ((name.length() == 1) && (name.charAt(0) == NAME_PREFIX_ATTRIBUTE)) {
+      // TODO: NLS
       throw new ConfigurationException("Child name must not be empty!");
     }
     return doCreateChild(name, namespaceUri);
@@ -539,57 +542,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
      */
   }
 
-  public AbstractConfiguration getDescendantOld(String path, String namespaceUri) {
-
-    if (path.length() == 0) {
-      throw new ConfigurationException("Illegal path!" + path);
-    }
-    StringParser parser = new StringParser(path);
-    AbstractConfiguration node = this;
-    while (true) {
-      String childName = parser.readWhile(SEGMENT_FILTER);
-      char special = parser.forceNext();
-      if ((special == PATH_SEPARATOR) || (special == PATH_CONDITION_START) || (special == 0)) {
-        AbstractConfiguration descendant = node.requireChild(childName, namespaceUri);
-        if (special == PATH_CONDITION_START) {
-          // TODO: condition parser...
-          String conditionName = parser.readWhile(CONDITION_FILTER);
-          char c = parser.forceNext();
-          // only [@name=value] supported
-          if (c == '=') {
-            String conditionValue = parser.readUntil(PATH_CONDITION_END, false);
-            // TODO: parser does NOT need to be done here!!!
-            if ((!parser.hasNext()) && (conditionValue != null)) {
-              // condition syntax okay
-              AbstractConfiguration child;
-              Iterator<? extends AbstractConfiguration> it = descendant.getChildren(conditionName,
-                  namespaceUri);
-              while (it.hasNext()) {
-                child = it.next();
-                String value = child.getValue().getString(conditionValue);
-                if (conditionValue.equals(value)) {
-                  return descendant;
-                }
-              }
-              descendant = node.createChild(childName, namespaceUri);
-              child = descendant.createChild(conditionName, namespaceUri);
-              child.getValue().getString(conditionValue);
-              return descendant;
-            }
-          }
-          // condition syntax was NOT correct...
-          throw new ConfigurationException("Illegal path!" + path);
-        } else if (special == 0) {
-          return descendant;
-        }
-        node = descendant;
-      } else {
-        // special was illegal...
-        throw new ConfigurationException("Illegal path!" + path);
-      }
-    }
-  }
-
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String)
    */
@@ -669,18 +621,34 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * @see net.sf.mmm.configuration.api.Configuration#isDescendantOf(net.sf.mmm.configuration.api.Configuration)
    */
-  public final boolean isDescendantOf(Configuration superNode) {
+  public final boolean isDescendantOf(Configuration ancestor) {
 
-    AbstractConfiguration parent = getParent();
-    if (parent == null) {
-      return false;
-    } else if (parent == superNode) {
-      return true;
-    } else {
-      return parent.isDescendantOf(superNode);
-    }
+    return (getAncestorDistance(ancestor) > 0);
   }
 
+  /**
+   * @see net.sf.mmm.configuration.api.Configuration#getAncestorDistance(net.sf.mmm.configuration.api.Configuration)
+   */
+  public final int getAncestorDistance(Configuration ancestor) {
+  
+    if (ancestor == this) {
+      return 0;      
+    }
+    AbstractConfiguration parent = getParent();
+    if (parent == null) {
+      return -1;
+    } else if (parent == ancestor) {
+      return 1;
+    } else {
+      int distance = parent.getAncestorDistance(ancestor);
+      if (distance < 0) {
+        return distance;
+      } else {
+        return distance + 1;
+      }
+    }
+  }
+  
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getRelativePath(net.sf.mmm.configuration.api.Configuration)
    */
@@ -688,6 +656,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
     AbstractConfiguration parent = getParent();
     if (parent == null) {
+      // TODO: NLS
       throw new ConfigurationException("Given configuration \"{0}\" is no ancestor!");
     } else {
       if (parent == ancestor) {
@@ -704,7 +673,20 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @param child
    *        is the child to add.
    */
-  protected abstract void addChild(AbstractConfiguration child);
+  protected void addChild(AbstractConfiguration child) {
+
+    addChild(child, new QName(child));
+  }
+
+  /**
+   * This method adds the given child to this configuration.
+   * 
+   * @param child
+   *        is the child to add.
+   * @param qName
+   *        is the qualified-name of the given <code>child</code>.
+   */
+  protected abstract void addChild(AbstractConfiguration child, QName qName);
 
   /**
    * This method removes the given child from this configuration.

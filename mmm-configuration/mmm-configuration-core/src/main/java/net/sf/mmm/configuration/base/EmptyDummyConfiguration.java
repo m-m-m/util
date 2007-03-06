@@ -202,10 +202,10 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
    */
   @Override
-  public void addChild(AbstractConfiguration child) {
+  public void addChild(AbstractConfiguration child, QName qName) {
 
   }
 
