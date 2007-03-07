@@ -32,6 +32,12 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   private static final EmptyDummyConfiguration EMPTY_ATTRIBUTE = new EmptyDummyConfiguration(
       Type.ATTRIBUTE);
 
+  /** @see #getName() */
+  private static final String EMPTY_ELEMENT_NAME = "EMPTY";
+
+  /** @see #getName() */
+  private static final String EMPTY_ATTRIBUTE_NAME = "@EMPTY";
+
   /** the type */
   private final Type type;
 
@@ -80,7 +86,11 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    */
   public String getName() {
 
-    return "";
+    if (this.type == Type.ATTRIBUTE) {
+      return EMPTY_ATTRIBUTE_NAME;      
+    } else {
+      return EMPTY_ELEMENT_NAME;
+    }
   }
 
   /**
@@ -88,7 +98,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    */
   public String getNamespaceUri() {
 
-    return null;
+    return NAMESPACE_URI_NONE;
   }
 
   /**
@@ -116,17 +126,6 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String,
-   *      java.lang.String) 
-   */
-  public AbstractConfiguration getDescendant(String path, String namespaceUri) {
-
-    // TODO: check type (attributes can not have children).
-    // TODO: check if last segment starts with @
-    return this;
-  }
-
-  /**
    * @see net.sf.mmm.configuration.base.AbstractConfiguration#getDescendants(java.lang.String,
    *      java.lang.String) 
    */
@@ -142,7 +141,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   @Override
   public AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
 
-    return null;
+    throw new IllegalStateException();
   }
 
   /**
@@ -190,6 +189,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   @Override
   public void doRemove() throws ConfigurationException {
 
+    throw new IllegalStateException();
   }
 
   /**
@@ -207,6 +207,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   @Override
   public void addChild(AbstractConfiguration child, QName qName) {
 
+    throw new IllegalStateException();
   }
 
   /**
@@ -215,6 +216,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   @Override
   public void addSibling(AbstractConfiguration element) {
   
+    throw new IllegalStateException();
   }
   
   /**
@@ -223,7 +225,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   @Override
   public boolean removeSibling(AbstractConfiguration element) {
   
-    return false;
+    throw new IllegalStateException();
   }
   
   /**
@@ -232,7 +234,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
   @Override
   public AbstractConfiguration doDisable() throws ConfigurationException {
 
-    return null;
+    throw new IllegalStateException();
   }
 
   /**

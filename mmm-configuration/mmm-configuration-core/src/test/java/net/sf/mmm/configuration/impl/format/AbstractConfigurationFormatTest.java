@@ -39,19 +39,26 @@ public abstract class AbstractConfigurationFormatTest extends TestCase {
     Configuration config = doc.getConfiguration();
     assertNotNull(config);
     assertEquals("root", config.getName());
+
+    String mmmHost = "m-m-m.sf.net";
+    Configuration server2Config = config.getDescendant("server[@host='" + mmmHost + "']");
+    assertEquals(mmmHost, server2Config.getDescendant("@host").getValue().getString());
+    
     Configuration portAttribute = config.getDescendant("server/@port");
     assertNotNull(portAttribute);
-    //assertEquals(port, portAttribute.getValue().getInteger());
-    //assertEquals(host, config.getDescendant("server/@host").getValue().getString());
+    assertEquals(8080, portAttribute.getValue().getInteger());
+    Configuration hostAttribute = config.getDescendant("server/@host");
+    assertNotNull(hostAttribute);
+    assertEquals("localhost", hostAttribute.getValue().getString());
     Collection<? extends Configuration> serviceColl = config.getDescendants("server/service");
     assertEquals(2, serviceColl.size());
     Iterator<? extends Configuration> serviceIterator = serviceColl.iterator();
     char serviceLetter = 'A';
     for (Configuration serviceConf : serviceColl) {
-      assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue().getString());
+      assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue()
+          .getString());
       serviceLetter++;
     }
     assertEquals(2, serviceLetter - 'A');
   }
-  
 }

@@ -6,7 +6,10 @@ package net.sf.mmm.configuration.binding.impl;
 import java.lang.reflect.Modifier;
 
 import net.sf.mmm.configuration.api.Configuration;
+import net.sf.mmm.configuration.api.ConfigurationDocument;
+import net.sf.mmm.configuration.binding.api.ConfigurationBindingException;
 import net.sf.mmm.configuration.binding.base.AbstractConfigurationBindingInjector;
+import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the default implementation of the
@@ -21,9 +24,10 @@ public class DefaultConfigurationBindingInjector extends AbstractConfigurationBi
    * 
    * @return the classloader to use.
    */
-  protected ClassLoader getClassLoader() {
+  protected ClassLoader getClassLoader(Class<?> type) {
 
-    return Thread.currentThread().getContextClassLoader();
+    //return Thread.currentThread().getContextClassLoader();
+    return type.getClassLoader();
   }
 
   /**
@@ -34,7 +38,14 @@ public class DefaultConfigurationBindingInjector extends AbstractConfigurationBi
    */
   protected <O> Class<? extends O> findImplementation(Class<O> type) {
 
-    // TODO:
+    ClassLoader loader = getClassLoader(type);
+    String packageName = type.getPackage().getName();
+    String className = type.getCanonicalName();
+    if (packageName.contains(".api.") || packageName.endsWith(".api")) {
+      packageName = packageName.replace(".api", ".impl");
+    }
+    if (type.isInterface()) {
+    }
     return type;
   }
 
@@ -48,13 +59,23 @@ public class DefaultConfigurationBindingInjector extends AbstractConfigurationBi
   protected <O> O create(Configuration configuration, Class<O> type) throws InstantiationException,
       IllegalAccessException {
 
-    Class<? extends O> implementation;
+    Class<?> implementation;
     if (type.isInterface() || Modifier.isAbstract(type.getModifiers())) {
-      implementation = findImplementation(type);
+      GenericValue implValue = configuration.getDescendant("@implementation", ConfigurationDocument.NAMESPACE_URI_CONFIGURATION).getValue();
+      if (implValue.isEmpty()) {
+        implementation = implValue.getJavaClass();
+      } else {
+        implementation = findImplementation(type);        
+      }
+      if (!type.isAssignableFrom(implementation)) {
+        // TODO
+        throw new ConfigurationBindingException("ERROR");
+      }
     } else {
       implementation = type;
     }
-    return implementation.newInstance();
+    // TODO: find constructor, etc.
+    return (O) implementation.newInstance();
   }
 
 }

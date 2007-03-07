@@ -90,7 +90,12 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     if (this.editable == null) {
       // inherit the flag if not explicitly set.
       if (this.parent == null) {
-        return true;
+        AbstractConfigurationDocument ownerDoc = getOwnerDocument();
+        if (ownerDoc == null) {
+          return true;          
+        } else {
+          return !ownerDoc.isImmutable();
+        }
       } else {
         return this.parent.isEditable();
       }

@@ -177,6 +177,10 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       }
     } else if (ConfigurationDocument.NAME_EXCLUDE.equals(name)) {
       // nothing to do...
+    } else if (ConfigurationDocument.NAME_EDITABLE.equals(name)) {
+      setEditable(child.getValue().getBoolean());
+    } else if (ConfigurationDocument.NAME_ADD_DEFAULTS.equals(name)) {
+      setAddDefaults(child.getValue().getBoolean());
     } else {
       // TODO
       // throw new ConfigurationException("Illegal child '" + name +

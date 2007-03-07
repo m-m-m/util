@@ -77,6 +77,9 @@ public class DescendantPathParser {
       SimplePathSegment segment = new SimplePathSegment(name);
       segmentList.add(segment);
       c = parser.forcePeek();
+      if (c == Configuration.PATH_SEPARATOR) {
+        parser.next();
+      }
     }
     // check for index condition...
     if (segmentList.size() == 1) {

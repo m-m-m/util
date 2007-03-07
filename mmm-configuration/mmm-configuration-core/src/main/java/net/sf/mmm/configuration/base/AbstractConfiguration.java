@@ -22,7 +22,6 @@ import net.sf.mmm.configuration.base.path.DescendantPathParser;
 import net.sf.mmm.configuration.base.path.DescendantPathWalker;
 import net.sf.mmm.configuration.base.path.PathSegment;
 import net.sf.mmm.configuration.base.path.SimplePathSegment;
-import net.sf.mmm.util.ListCharFilter;
 import net.sf.mmm.util.StringParser;
 
 /**
@@ -38,14 +37,6 @@ import net.sf.mmm.util.StringParser;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractConfiguration implements MutableConfiguration {
-
-  /** filter that excepts all chars except those reserved for descendent path */
-  private static final ListCharFilter SEGMENT_FILTER = new ListCharFilter(false, PATH_SEPARATOR,
-      PATH_CONDITION_START, PATH_UNION, PATH_INTERSECTION);
-
-  /** filter that excepts all chars except those reserved for conditions */
-  private static final ListCharFilter CONDITION_FILTER = new ListCharFilter(false,
-      PATH_CONDITION_START, PATH_CONDITION_END, '=', '<', '>');
 
   /** @see #getNextSibling() */
   private AbstractConfiguration next;
@@ -379,7 +370,17 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
 
     AbstractConfiguration child = getChild(childName, namespaceUri);
     if (child == null) {
-      child = doCreateChild(childName, namespaceUri);
+      if (isAddDefaults()) {
+        child = doCreateChild(childName, namespaceUri);        
+      } else {
+        Configuration.Type type;
+        if (childName.charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
+          type = Configuration.Type.ATTRIBUTE;
+        } else {
+          type = Configuration.Type.ELEMENT;          
+        }
+        child = EmptyDummyConfiguration.getInstance(type);
+      }
     }
     return child;
   }
@@ -526,20 +527,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       throw new IllegalDescendantPathException(path);
     }
     return DescendantPathWalker.getDescendant(this, namespaceUri, pathSegments);
-    /*
-     * AbstractConfiguration descendant = this; for (int segmentIndex = 0;
-     * segmentIndex < pathSegments.length; segmentIndex++) { PathSegment segment =
-     * pathSegments[segmentIndex]; Iterator<AbstractConfiguration>
-     * childIterator = descendant.getChildren(segment.getString(),
-     * namespaceUri); int bestIndex = -1; AbstractConfiguration bestChild =
-     * null; while (childIterator.hasNext()) { AbstractConfiguration child =
-     * childIterator.next(); if (segment.getCondition().accept(child)) { //
-     * forecast for (int i = segmentIndex + 1; i < pathSegments.length; i++) {
-     * PathSegment forecastSegment = pathSegments[i];
-     * 
-     * AbstractConfiguration lookahead = childIterator.next(); } } } } return
-     * descendant;
-     */
   }
 
   /**

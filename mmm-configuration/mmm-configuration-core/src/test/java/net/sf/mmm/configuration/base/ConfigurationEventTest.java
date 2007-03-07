@@ -23,7 +23,7 @@ import net.sf.mmm.util.event.ChangeEvent;
 import junit.framework.TestCase;
 
 /**
- * This is the {@link TestCase test-case} for the
+ * This is the {@link TestCase} for the
  * {@link ConfigurationChangeEvent event} support of the
  * {@link net.sf.mmm.configuration.api.Configuration configuration}.
  * 
@@ -31,14 +31,6 @@ import junit.framework.TestCase;
  */
 @SuppressWarnings("all")
 public class ConfigurationEventTest extends TestCase {
-
-  /**
-   * The constructor
-   */
-  public ConfigurationEventTest() {
-
-    super();
-  }
 
   @Test
   public void testEvents() {

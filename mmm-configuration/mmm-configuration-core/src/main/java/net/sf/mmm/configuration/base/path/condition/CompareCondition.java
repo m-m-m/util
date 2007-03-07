@@ -96,6 +96,8 @@ public class CompareCondition extends PathCondition {
   protected void doEstablish(AbstractConfiguration node) {
   
     super.doEstablish(node);
+    // TODO: if node is attribute that already has a value
+    // TODO: if node is NOT editable
     node.getValue().setString(this.value);    
   }
   

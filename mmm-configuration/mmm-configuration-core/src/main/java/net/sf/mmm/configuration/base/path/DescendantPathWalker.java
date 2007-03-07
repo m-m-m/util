@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
+import net.sf.mmm.configuration.base.EmptyDummyConfiguration;
 import net.sf.mmm.configuration.base.path.condition.Condition;
 
 /**
@@ -99,11 +101,31 @@ public class DescendantPathWalker {
       int segmentIndex = match.index;
       for (int i = segmentIndex; i < pathSegments.length; i++) {
         PathSegment segment = pathSegments[i];
-        // TODO: what if best match is element and segment is attribute
-        descendant = descendant.createChild(segment.getString(), namespaceUri);
-        Condition condition = segment.getCondition();
-        descendant = condition.establish(descendant, namespaceUri);
-        assert (condition.accept(descendant, namespaceUri));
+        String name = segment.getString();
+        // TODO: what is the proper strategy here?
+        // if the descendant is NOT editable and we do "createChild" then
+        // addChild is accessible via
+        // getDescendant("child["+getDescendants("child").size()+"]")
+        if (descendant.isEditable()) {
+          descendant = descendant.createChild(name, namespaceUri);
+          Condition condition = segment.getCondition();
+          descendant = condition.establish(descendant, namespaceUri);
+          assert (condition.accept(descendant, namespaceUri));
+        } else if (descendant.isAddDefaults() && (descendant.getChild(name, namespaceUri) == null)) {
+          descendant = descendant.createChild(name, namespaceUri);
+          Condition condition = segment.getCondition();
+          descendant = condition.establish(descendant, namespaceUri);
+          assert (condition.accept(descendant, namespaceUri));
+        } else {
+          PathSegment lastSegment = pathSegments[pathSegments.length - 1];
+          Configuration.Type type;
+          if (lastSegment.getString().charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
+            type = Configuration.Type.ATTRIBUTE;
+          } else {
+            type = Configuration.Type.ELEMENT;
+          }
+          return EmptyDummyConfiguration.getInstance(type);
+        }
       }
     }
     return descendant;
