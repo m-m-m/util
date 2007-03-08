@@ -22,14 +22,14 @@ import net.sf.mmm.value.base.EmptyValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class EmptyDummyConfiguration extends AbstractConfiguration {
+public class EmptyConfiguration extends AbstractConfiguration {
 
   /** the empty configuration element */
-  private static final EmptyDummyConfiguration EMPTY_ELEMENT = new EmptyDummyConfiguration(
+  private static final EmptyConfiguration EMPTY_ELEMENT = new EmptyConfiguration(
       Type.ELEMENT);
 
   /** the empty configuration attribute */
-  private static final EmptyDummyConfiguration EMPTY_ATTRIBUTE = new EmptyDummyConfiguration(
+  private static final EmptyConfiguration EMPTY_ATTRIBUTE = new EmptyConfiguration(
       Type.ATTRIBUTE);
 
   /** @see #getName() */
@@ -47,7 +47,7 @@ public class EmptyDummyConfiguration extends AbstractConfiguration {
    * @param configurationType
    *        is the type of the empty configuration.
    */
-  private EmptyDummyConfiguration(Type configurationType) {
+  private EmptyConfiguration(Type configurationType) {
 
     super();
     this.type = configurationType;

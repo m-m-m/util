@@ -30,6 +30,14 @@ public class NoCondition implements Condition {
   }
 
   /**
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#canBeEstablished(net.sf.mmm.configuration.base.AbstractConfiguration, java.lang.String)
+   */
+  public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
+  
+    return true;
+  }
+  
+  /**
    * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
   public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {

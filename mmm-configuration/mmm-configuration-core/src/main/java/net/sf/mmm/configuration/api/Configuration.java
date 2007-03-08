@@ -348,7 +348,7 @@ public interface Configuration extends
    * {@link #getNamespaceUri() namespace} <code>ns</code> and has an
    * {@link Type#ATTRIBUTE attribute} named <code>&#64;attribute</code> that
    * has the value <code>value</code>. The <code>&lt;condition&gt;</code>
-   * is eigther a positive integer identifying the number of the child if there
+   * is either a positive integer identifying the number of the child if there
    * are multiple (only makes sense for {@link Type#ELEMENT elements}) or again
    * a <code>path</code> (without conditions) that may be followed by
    * <code>='&lt;value&gt;'</code>. In the latter case, the <code>path</code>
@@ -426,13 +426,13 @@ public interface Configuration extends
   /**
    * This method gets all {@link #getDescendant(String, String) descendants}
    * that exist for the given path. While {@link #getDescendant(String, String)}
-   * will create missing configurations, this method will NOT modify
+   * may create missing configurations, this method will NOT modify
    * configurations in any way. It only returns what is already there.<br>
-   * In addition to {@link #getDescendant(String, String)} you can use
-   * glob-patterns in segments/condition-values and use other conditions
-   * operators ('<', '>', '<=', '>=', '!=').<br>
-   * Further you combine multiple paths with '|' and '&' in the
-   * <code>path</code> argument of this method with the following meaning:
+   * In addition to {@link #getDescendant(String, String)} this method accepts
+   * <code>path</code> with glob-patterns in segments/condition-values and
+   * other conditions operators (<code>'<', '>', '<=', '>=', '!='</code>).<br>
+   * Further you can combine multiple paths with <code>'|'</code> and
+   * <code>'&'</code> with the following meaning:
    * <ul>
    * <li><code>path1|path2</code> returns the union set that contains all
    * matches of <code>path1</code> and <code>path2</code>.</li>
@@ -441,8 +441,8 @@ public interface Configuration extends
    * </ul>
    * Examples:<br>
    * <ul>
-   * <li><code>*[@*='foo*']</code> leads to all elements that have an
-   * attribute whose value starts with <code>foo</code>.</li>
+   * <li><code>*[@*='foo*']|*[@*='*foo']</code> leads to all elements that
+   * have an attribute whose value starts or ends with <code>foo</code>.</li>
    * <li><code>foo[@bar>5]</code> leads to all elements named
    * <code>foo</code> that have an attribute <code>bar</code> whose value is
    * a number greater than <code>5</code>.</li>

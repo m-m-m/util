@@ -30,16 +30,16 @@ public interface ConfigurationFactory {
    * "xml"):
    * 
    * <pre>
-   * &lt;myRoot xmlns:mmm="http://m-m-m.sf.net/namespaces/configuration"&gt;
-   *   &lt;mmm:context&gt;
-   *     &lt;mmm:variable name="net.sf.mmm.configuration.format.default"&gt;foo&lt;/mmm:variable&gt;
-   *     &lt;mmm:variable name="net.sf.mmm.configuration.format.foo.factory"&gt;net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory&lt;/mmm:variable&gt;
-   *     &lt;mmm:variable name="net.sf.mmm.configuration.format.foo.encoding"&gt;UTF-8&lt;/mmm:variable&gt;
-   *   &lt;/mmm:context&gt;
+   * &lt;myRoot xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration"&gt;
+   *   &lt;cfg:context&gt;
+   *     &lt;cfg:variable name="net.sf.mmm.configuration.format.default"&gt;foo&lt;/cfg:variable&gt;
+   *     &lt;cfg:variable name="net.sf.mmm.configuration.format.foo.factory"&gt;net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory&lt;/cfg:variable&gt;
+   *     &lt;cfg:variable name="net.sf.mmm.configuration.format.foo.encoding"&gt;UTF-8&lt;/cfg:variable&gt;
+   *   &lt;/cfg:context&gt;
    *   &lt;myContent&gt;
    *     ...
    *     &lt;!-- the type attribute could also be omitted in this case --&gt;
-   *     &lt;mmm:include type="foo" href="inlcude.xml"&gt;
+   *     &lt;cfg:include type="foo" href="inlcude.xml"&gt;
    *     ...
    *   &lt;/myContent&gt;
    * &lt;/myRoot&gt;

@@ -9,7 +9,7 @@ import java.util.Set;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.base.AbstractConfiguration;
-import net.sf.mmm.configuration.base.EmptyDummyConfiguration;
+import net.sf.mmm.configuration.base.EmptyConfiguration;
 import net.sf.mmm.configuration.base.path.condition.Condition;
 
 /**
@@ -102,21 +102,27 @@ public class DescendantPathWalker {
       for (int i = segmentIndex; i < pathSegments.length; i++) {
         PathSegment segment = pathSegments[i];
         String name = segment.getString();
-        // TODO: what is the proper strategy here?
-        // if the descendant is NOT editable and we do "createChild" then
-        // addChild is accessible via
-        // getDescendant("child["+getDescendants("child").size()+"]")
-        if (descendant.isEditable()) {
-          descendant = descendant.createChild(name, namespaceUri);
+        boolean returnEmptyConfig = true;
+        if (descendant.isAddDefaults()) {
           Condition condition = segment.getCondition();
-          descendant = condition.establish(descendant, namespaceUri);
-          assert (condition.accept(descendant, namespaceUri));
-        } else if (descendant.isAddDefaults() && (descendant.getChild(name, namespaceUri) == null)) {
-          descendant = descendant.createChild(name, namespaceUri);
-          Condition condition = segment.getCondition();
-          descendant = condition.establish(descendant, namespaceUri);
-          assert (condition.accept(descendant, namespaceUri));
-        } else {
+          AbstractConfiguration child = descendant.requireChild(name, namespaceUri);
+          if (condition.canBeEstablished(child, namespaceUri)) {
+            condition.establish(child, namespaceUri);
+            assert (condition.accept(descendant, namespaceUri));
+            returnEmptyConfig = false;
+          } else if (child.isEditable()) {
+            // TODO: what is the proper strategy here?
+            // if the descendant is NOT editable and we do "doCreateChild" then
+            // createChild is accessible via
+            // getDescendant("child["+getDescendants("child").size()+"]")
+            child = descendant.createChild(name, namespaceUri);
+            condition.establish(child, namespaceUri);
+            assert (condition.accept(descendant, namespaceUri));
+            returnEmptyConfig = false;
+          }
+          descendant = child;
+        }
+        if (returnEmptyConfig) {
           PathSegment lastSegment = pathSegments[pathSegments.length - 1];
           Configuration.Type type;
           if (lastSegment.getString().charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
@@ -124,7 +130,7 @@ public class DescendantPathWalker {
           } else {
             type = Configuration.Type.ELEMENT;
           }
-          return EmptyDummyConfiguration.getInstance(type);
+          return EmptyConfiguration.getInstance(type);
         }
       }
     }
@@ -202,7 +208,7 @@ public class DescendantPathWalker {
     }
 
     /**
-     * This method checks if the given <code>match</code> is bettern than the
+     * This method checks if the given <code>match</code> is better than the
      * {@link #node current} according to the given <code>segmentIndex</code>.
      * If it is better, the <code>match</code> is stored as best match.
      * 

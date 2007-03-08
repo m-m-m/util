@@ -46,6 +46,14 @@ public class IndexCondition implements Condition {
   }
 
   /**
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#canBeEstablished(net.sf.mmm.configuration.base.AbstractConfiguration, java.lang.String)
+   */
+  public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
+  
+    return true;
+  }
+  
+  /**
    * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */
   public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
@@ -68,8 +76,9 @@ public class IndexCondition implements Condition {
         if (nsUri == null) {
           nsUri = configuration.getNamespaceUri();          
         }
-        int diff = count - this.index;
+        int diff = count - this.index + 1;
         if (diff > 20) {
+          // TODO: should we return empty configuration instead???
           // TODO: NLS
           throw new ConfigurationException("Too many siblings to create for index condition!");
         }

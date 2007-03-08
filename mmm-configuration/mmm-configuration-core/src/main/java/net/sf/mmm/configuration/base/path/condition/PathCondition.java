@@ -36,6 +36,14 @@ public class PathCondition implements Condition {
   }
 
   /**
+   * @see net.sf.mmm.configuration.base.path.condition.Condition#canBeEstablished(net.sf.mmm.configuration.base.AbstractConfiguration, java.lang.String)
+   */
+  public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
+  
+    return true;
+  }
+  
+  /**
    * This method recursively implements the accept method.
    * 
    * @param configuration
@@ -90,7 +98,7 @@ public class PathCondition implements Condition {
 
     return accept(configuration, 0);
   }
-
+  
   /**
    * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
    */

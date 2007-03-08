@@ -39,9 +39,10 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * The constructor for a top-level document.
    * 
    * @param configurationAccess
-   *        is the access to the raw configuration data.
+   *        is the {@link #getConfigurationAccess() access} to the raw
+   *        configuration.
    * @param context
-   *        is the context.
+   *        is the initial {@link #getContext() context} to use.
    * @param keySeparator
    *        is the {@link #getSeparator() separator}.
    * @param isFlat
@@ -60,9 +61,10 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
    * The constructor for a child document.
    * 
    * @param configurationAccess
-   *        is the access to the raw configuration data.
+   *        is the {@link #getConfigurationAccess() access} to the raw
+   *        configuration.
    * @param parentConfiguration
-   *        is the parent configuration.
+   *        is the {@link #getParentConfiguration() parent-configuration}.
    * @param keySeparator
    *        is the {@link #getSeparator() separator}.
    * @param isFlat

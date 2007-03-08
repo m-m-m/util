@@ -37,7 +37,7 @@ public interface ConfigurationAccessFactory {
   String CONTEXT_VARIABLE_SUFFIX_FACTORY = ".factory";
 
   /**
-   * This is the suffix for a context variable containg the parent access used
+   * This is the suffix for a context variable containing the parent access used
    * if the
    * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE_HREF}
    * is a relative path.
@@ -45,7 +45,7 @@ public interface ConfigurationAccessFactory {
   String CONTEXT_VARIABLE_SUFFIX_PARENT = ".parent";
 
   /**
-   * This is the suffix for a context variable containg the current href used as
+   * This is the suffix for a context variable containing the current href used as
    * base if the
    * {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE_HREF}
    * is a relative path.

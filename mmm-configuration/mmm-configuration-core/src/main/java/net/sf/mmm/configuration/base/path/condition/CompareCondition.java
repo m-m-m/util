@@ -72,7 +72,28 @@ public class CompareCondition extends PathCondition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
+   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#canBeEstablished(net.sf.mmm.configuration.base.AbstractConfiguration, java.lang.String)
+   */
+  @Override
+  public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
+  
+    AbstractConfiguration node = configuration;
+    for (SimplePathSegment segment : getSegments()) {
+      node = node.getChild(segment.getString(), namespaceUri);
+      if (node == null) {
+        return true;
+      }
+    }
+    GenericValue genericValue = node.getValue();
+    if (genericValue.isEmpty()) {
+      return true;
+    }
+    return this.comparator.accept(genericValue, this.value, this.valuePattern);
+  }
+  
+  /**
+   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#establish(net.sf.mmm.configuration.base.AbstractConfiguration,
+   *      String)
    */
   @Override
   public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
@@ -94,20 +115,21 @@ public class CompareCondition extends PathCondition {
    */
   @Override
   protected void doEstablish(AbstractConfiguration node) {
-  
+
     super.doEstablish(node);
-    // TODO: if node is attribute that already has a value
-    // TODO: if node is NOT editable
-    node.getValue().setString(this.value);    
+    assert node.isAddDefaults();
+    GenericValue genericValue = node.getValue();
+    assert genericValue.isEmpty();
+    node.getValue().setString(this.value);
   }
-  
+
   /**
    * This method gets the value to compare with the the
    * {@link AbstractConfiguration#getChild(String) children}
    * {@link net.sf.mmm.configuration.api.Configuration#getValue() value}.
    * 
-   * @return the childs value or <code>null</code> if only the existence of a
-   *         specific child is checked.
+   * @return the value of the child or <code>null</code> if only the existence
+   *         of a specific child is checked.
    */
   public String getValue() {
 

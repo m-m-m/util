@@ -6,6 +6,8 @@ package net.sf.mmm.configuration.base;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.term.api.Term;
+import net.sf.mmm.term.api.TermParser;
+import net.sf.mmm.term.impl.SimpleTermParser;
 import net.sf.mmm.util.event.ChangeEvent;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueException;
@@ -19,7 +21,7 @@ import net.sf.mmm.value.base.AbstractStringValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractConfigurationNode extends AbstractConfiguration {
-
+  
   /** the parent configuration */
   private AbstractConfiguration parent;
 
@@ -87,12 +89,13 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
    */
   public final boolean isEditable() {
 
+    // TODO: this is called quite often, this recursion stuff may be a big waste
     if (this.editable == null) {
       // inherit the flag if not explicitly set.
       if (this.parent == null) {
         AbstractConfigurationDocument ownerDoc = getOwnerDocument();
         if (ownerDoc == null) {
-          return true;          
+          return true;
         } else {
           return !ownerDoc.isImmutable();
         }
@@ -120,6 +123,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
    */
   public boolean isAddDefaults() {
 
+    // TODO: this is called quite often, this recursion stuff may be a big waste
     if (this.addDefaults == null) {
       // inherit the flag if not explicitly set.
       if (this.parent == null) {
@@ -235,15 +239,13 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
      */
     protected void initExpression(String plainValue) {
 
-      if ((plainValue != null)
-          && (plainValue.contains(ConfigurationExpressionParser.VARIABLE_START))) {
+      if ((plainValue != null) && (plainValue.contains(Term.VARIABLE_START))) {
         try {
-          this.expression = ConfigurationExpressionParser.parse(plainValue);
+          // TODO
+          this.expression = getTermParser().parse(plainValue);
         } catch (Exception e) {
           // TODO: i18n
-          throw new ConfigurationException(e,
-              "Error in configuration value node \"{0}\": expression \"{0}\" could not be parsed!",
-              this, plainValue);
+          throw new ConfigurationException(e, "Error in configuration value node \"{0}\"!", this);
         }
       } else {
         this.expression = null;

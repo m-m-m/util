@@ -20,6 +20,7 @@ import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector;
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
+import net.sf.mmm.term.api.TermParser;
 import net.sf.mmm.util.event.ChangeEvent;
 
 /**
@@ -52,7 +53,10 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /** this object gives r/w access to the configuration data */
   private final ConfigurationAccess access;
 
-  /** the root node */
+  /** @see #getTermParser() */
+  private TermParser termParser;
+
+  /** the {@link #getConfiguration() root node} */
   private AbstractConfiguration root;
 
   /** the status of the {@link #isModified() modified-flag} */
@@ -62,7 +66,10 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * The constructor.
    * 
    * @param configurationAccess
+   *        is the {@link #getConfigurationAccess() access} to the raw
+   *        configuration.
    * @param docContext
+   *        is the initial {@link #getContext() context} to use.
    */
   public AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       MutableContext docContext) {
@@ -74,7 +81,10 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * The constructor.
    * 
    * @param configurationAccess
+   *        is the {@link #getConfigurationAccess() access} to the raw
+   *        configuration.
    * @param parentConfiguration
+   *        is the {@link #getParentConfiguration() parent-configuration}.
    */
   public AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration) {
@@ -88,8 +98,14 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @see ConfigurationUtil#createDefaultContext()
    * 
    * @param configurationAccess
+   *        is the {@link #getConfigurationAccess() access} to the raw
+   *        configuration.
    * @param parentConfiguration
+   *        is the {@link #getParentConfiguration() parent-configuration} or
+   *        <code>null</code> if root-document.
    * @param docContext
+   *        is the {@link #getContext() context} to use if root-document or
+   *        <code>null</code> otherwise.
    */
   private AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration, MutableContext docContext) {
@@ -113,7 +129,11 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
       this.context = this.parentDoc.getContext().createChildContext();
       this.listeners = null;
     }
-
+    if (this.parentDoc != null) {
+      this.termParser = this.parentDoc.getTermParser();
+    } else {
+      this.termParser = null;
+    }
     String accessPrefix = this.access.getContextPrefix();
     if (accessPrefix != null) {
       String hrefKey = accessPrefix + ConfigurationAccessFactory.CONTEXT_VARIABLE_SUFFIX_PARENT;
@@ -425,6 +445,30 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     } else {
       this.parentDoc.configurationChanged(configuration, type);
     }
+  }
+
+  /**
+   * This method gets the parser used for expression terms in
+   * {@link Configuration#getValue() values}.
+   * 
+   * @see AbstractConfiguration#getTermParser()
+   * 
+   * @return the term parser to use or <code>null</code>.
+   */
+  public TermParser getTermParser() {
+
+    return this.termParser;
+  }
+
+  /**
+   * This method sets the {@link #getTermParser() term parser}.
+   * 
+   * @param parser
+   *        the term parser to use.
+   */
+  public void setTermParser(TermParser parser) {
+
+    this.termParser = parser;
   }
 
   /**

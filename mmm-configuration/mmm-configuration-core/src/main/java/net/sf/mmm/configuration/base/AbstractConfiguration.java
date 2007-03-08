@@ -22,6 +22,8 @@ import net.sf.mmm.configuration.base.path.DescendantPathParser;
 import net.sf.mmm.configuration.base.path.DescendantPathWalker;
 import net.sf.mmm.configuration.base.path.PathSegment;
 import net.sf.mmm.configuration.base.path.SimplePathSegment;
+import net.sf.mmm.term.api.TermParser;
+import net.sf.mmm.term.impl.SimpleTermParser;
 import net.sf.mmm.util.StringParser;
 
 /**
@@ -37,6 +39,9 @@ import net.sf.mmm.util.StringParser;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractConfiguration implements MutableConfiguration {
+
+  /** the default parser to use */
+  private static final TermParser BOOTSTRAP_PARSER = new SimpleTermParser();
 
   /** @see #getNextSibling() */
   private AbstractConfiguration next;
@@ -80,6 +85,33 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   public static QName createQualifiedName(String name, String namespace) {
 
     return new QName(name, namespace);
+  }
+
+  /**
+   * @see net.sf.mmm.configuration.api.Configuration#getPath()
+   */
+  public final String getPath() {
+
+    StringBuffer result = new StringBuffer();
+    buildPath(result);
+    return result.toString();
+  }
+
+  /**
+   * This method builds the {@link #getPath() path} to the given
+   * <code>buffer</code>.
+   * 
+   * @param buffer
+   *        is the string buffer where the path will be appended to.
+   */
+  private void buildPath(StringBuffer buffer) {
+
+    AbstractConfiguration parent = getParent();
+    if (parent != null) {
+      parent.buildPath(buffer);
+    }
+    buffer.append(Configuration.PATH_SEPARATOR);
+    buffer.append(getName());
   }
 
   /**
@@ -371,15 +403,15 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     AbstractConfiguration child = getChild(childName, namespaceUri);
     if (child == null) {
       if (isAddDefaults()) {
-        child = doCreateChild(childName, namespaceUri);        
+        child = doCreateChild(childName, namespaceUri);
       } else {
         Configuration.Type type;
         if (childName.charAt(0) == Configuration.NAME_PREFIX_ATTRIBUTE) {
           type = Configuration.Type.ATTRIBUTE;
         } else {
-          type = Configuration.Type.ELEMENT;          
+          type = Configuration.Type.ELEMENT;
         }
-        child = EmptyDummyConfiguration.getInstance(type);
+        child = EmptyConfiguration.getInstance(type);
       }
     }
     return child;
@@ -546,13 +578,22 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     StringParser parser = new StringParser(path);
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
     List<SimplePathSegment> conditionSegments = new ArrayList<SimplePathSegment>();
-    // TODO: use collection that keeps the ordering of insertion!!!
     Set<AbstractConfiguration> resultSet = new LinkedHashSet<AbstractConfiguration>();
+    Set<AbstractConfiguration> intersectionSet = null;
     char state = Configuration.PATH_UNION;
-    // TODO: also support intersections!
     while (state != 0) {
       DescendantPathParser.parsePath(parser, segmentList, false, conditionSegments);
-      DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, resultSet);
+      if (state == PATH_INTERSECTION) {
+        if (intersectionSet == null) {
+          intersectionSet = new LinkedHashSet<AbstractConfiguration>();
+        } else {
+          intersectionSet.clear();
+        }
+        DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, intersectionSet);
+        resultSet.retainAll(intersectionSet);
+      } else {
+        DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, resultSet);        
+      }
       segmentList.clear();
       if (parser.hasNext()) {
         char c = parser.next();
@@ -568,33 +609,6 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       }
     }
     return resultSet;
-  }
-
-  /**
-   * @see net.sf.mmm.configuration.api.Configuration#getPath()
-   */
-  public final String getPath() {
-
-    StringBuffer result = new StringBuffer();
-    buildPath(result);
-    return result.toString();
-  }
-
-  /**
-   * This method builds the {@link #getPath() path} to the given
-   * <code>buffer</code>.
-   * 
-   * @param buffer
-   *        is the string buffer where the path will be appended to.
-   */
-  private void buildPath(StringBuffer buffer) {
-
-    AbstractConfiguration parent = getParent();
-    if (parent != null) {
-      parent.buildPath(buffer);
-    }
-    buffer.append(Configuration.PATH_SEPARATOR);
-    buffer.append(getName());
   }
 
   /**
@@ -617,9 +631,9 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @see net.sf.mmm.configuration.api.Configuration#getAncestorDistance(net.sf.mmm.configuration.api.Configuration)
    */
   public final int getAncestorDistance(Configuration ancestor) {
-  
+
     if (ancestor == this) {
-      return 0;      
+      return 0;
     }
     AbstractConfiguration parent = getParent();
     if (parent == null) {
@@ -635,7 +649,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       }
     }
   }
-  
+
   /**
    * @see net.sf.mmm.configuration.api.Configuration#getRelativePath(net.sf.mmm.configuration.api.Configuration)
    */
@@ -746,6 +760,25 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       parent.removeChild(this);
       parent.addChild(doDisable());
     }
+  }
+
+  /**
+   * This method gets the parser used for expression terms in
+   * {@link #getValue() values}.
+   * 
+   * @return the term parser to use.
+   */
+  public TermParser getTermParser() {
+
+    AbstractConfigurationDocument ownerDoc = getOwnerDocument();
+    TermParser parser = null;
+    if (ownerDoc != null) {
+      parser = ownerDoc.getTermParser();
+    }
+    if (parser == null) {
+      parser = BOOTSTRAP_PARSER;
+    }
+    return parser;
   }
 
   /**
