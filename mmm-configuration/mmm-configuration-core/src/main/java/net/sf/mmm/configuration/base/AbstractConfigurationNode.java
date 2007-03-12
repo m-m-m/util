@@ -3,11 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.base;
 
-import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.term.api.Term;
-import net.sf.mmm.term.api.TermParser;
-import net.sf.mmm.term.impl.SimpleTermParser;
 import net.sf.mmm.util.event.ChangeEvent;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueException;
@@ -21,7 +18,7 @@ import net.sf.mmm.value.base.AbstractStringValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractConfigurationNode extends AbstractConfiguration {
-  
+
   /** the parent configuration */
   private AbstractConfiguration parent;
 
@@ -239,13 +236,12 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
      */
     protected void initExpression(String plainValue) {
 
+      // TODO: detection for expression only works for bootstrap term parser
       if ((plainValue != null) && (plainValue.contains(Term.VARIABLE_START))) {
         try {
-          // TODO
           this.expression = getTermParser().parse(plainValue);
         } catch (Exception e) {
-          // TODO: i18n
-          throw new ConfigurationException(e, "Error in configuration value node \"{0}\"!", this);
+          throw new GeneralConfigurationException(e, AbstractConfigurationNode.this);
         }
       } else {
         this.expression = null;
@@ -261,20 +257,16 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
       if (this.expression == null) {
         return AbstractConfigurationNode.this.getPlainString();
       } else {
-        Throwable nested = null;
         try {
           Object result = this.expression.evaluate(getOwnerDocument().getContext());
-          if (result != null) {
-            return (String) result;
+          if (result == null) {
+            return null;
+          } else {
+            return result.toString();            
           }
         } catch (ValueException e) {
-          nested = e;
+          throw new GeneralConfigurationException(e, AbstractConfigurationNode.this);
         }
-        // TODO i18n
-        throw new ConfigurationException(
-            nested,
-            "Error in configuration value node \"{0}\": expression \"{1}\" could not be evaluated!",
-            this, this.expression);
       }
     }
 

@@ -58,4 +58,18 @@ public class NlsBundleConfigCore extends AbstractResourceBundle {
    */
   public static final String ERR_INCLUDE_CYCLE = "Cyclic inclusion: can not include \"{0}\" from \"{1}\"!";
 
+  /**
+   * general exception message for exception cascade.
+   * 
+   * @see net.sf.mmm.configuration.api.NamespacesUnsupportedException
+   */
+  public static final String ERR_ILLEGAL_NAME = "Illegal child name \"{0}\" in configuration \"{1}\"!";
+
+  /**
+   * general exception message for exception cascade.
+   * 
+   * @see net.sf.mmm.configuration.api.NamespacesUnsupportedException
+   */
+  public static final String ERR_GENERAL = "Error in configuration \"{0}\"!";
+
 }

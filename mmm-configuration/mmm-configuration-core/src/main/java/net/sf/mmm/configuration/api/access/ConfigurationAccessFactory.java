@@ -95,12 +95,12 @@ public interface ConfigurationAccessFactory {
    * {@link #getAccessors() contain} a single
    * {@link ConfigurationAccess access}. If this access-list can contain
    * potentially none or more than one {@link ConfigurationAccess accessors},
-   * according to its configuration (even if it currently has exaclty one single
+   * according to its configuration (even if it currently has exactly one single
    * access) it should return <code>false</code>.<br>
    * For example an include of the file "configuration/include.xml" will
    * represent an access-list that will return <code>true</code> here while
    * "configuration/*.xml" will return <code>false</code> even if there is
-   * exaclty one matching file.
+   * exactly one matching file.
    * 
    * @return <code>true</code> if this access-list always contains
    */

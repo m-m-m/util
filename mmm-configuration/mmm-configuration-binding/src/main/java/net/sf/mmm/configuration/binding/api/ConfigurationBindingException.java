@@ -5,13 +5,17 @@ package net.sf.mmm.configuration.binding.api;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 
-
 /**
- * TODO: this class ...
+ * This is the exception thrown if the configuration-binding failed.
+ * 
+ * @see ConfigurationBindingService
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ConfigurationBindingException extends ConfigurationException {
+
+  /** UID for serialization */
+  private static final long serialVersionUID = 5267673193101239594L;
 
   /**
    * The constructor

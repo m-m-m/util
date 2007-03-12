@@ -239,7 +239,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
         this.root = load();
         this.root.initialize();
       } catch (Exception e) {
-        throw new ConfigurationException(e, "Failed to initialize " + toString());
+        throw new GeneralConfigurationException(e, toString());
       }
     }
     return this.root;
@@ -321,8 +321,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
       try {
         inputStream.close();
       } catch (IOException e) {
-        // TODO: NLS
-        throw new ConfigurationException(e.getMessage());
+        throw new GeneralConfigurationException(e, toString());
       }
     }
   }

@@ -163,7 +163,6 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       }
     } else if (ConfigurationDocument.NAME_INCLUDE.equals(name)) {
       // getOwnerDocument().isIncludeEnabled();
-      // TODO:
       // TODO: allow to disable includes per document for security reasons
       List<AbstractConfiguration> includeList = new ArrayList<AbstractConfiguration>();
       ConfigurationUtil.resolveInclude(child, includeList);

@@ -40,8 +40,8 @@ public interface ConfigurationDocument {
   /**
    * This is the {@link Configuration#getName() name} of an
    * {@link Configuration.Type#ELEMENT element} that is omitted with all its
-   * {@link Configuration#getDescendants(String, String) descendants}. It
-   * must have the {@link Configuration#getNamespaceUri() namespace}
+   * {@link Configuration#getDescendants(String, String) descendants}. It must
+   * have the {@link Configuration#getNamespaceUri() namespace}
    * {@link #NAMESPACE_URI_CONFIGURATION}.<br>
    * Did you ever worry that you can NOT out-comment parts of XML that contain
    * comments? Ever thought why comments could not be special elements? A node
@@ -85,9 +85,8 @@ public interface ConfigurationDocument {
   /**
    * This is the {@link Configuration#getName() name} of a required
    * {@link Configuration.Type#ATTRIBUTE attribute} that defines where to
-   * {@link #NAME_INCLUDE_ACCESS access} the
-   * {@link Configuration configuration} to {@link #NAME_INCLUDE include}.
-   * This corresponds to the
+   * {@link #NAME_INCLUDE_ACCESS access} the {@link Configuration configuration}
+   * to {@link #NAME_INCLUDE include}. This corresponds to the
    * {@link net.sf.mmm.configuration.api.access.ConfigurationAccessFactory access-list}
    * used to read and write the raw configuration data.
    */
@@ -101,6 +100,15 @@ public interface ConfigurationDocument {
    * {@link #NAME_INCLUDE include}.
    */
   String NAME_INCLUDE_DESCENDANTS = "@descendants";
+
+  /**
+   * This is the {@link Configuration#getName() name} of an optional
+   * {@link Configuration.Type#ATTRIBUTE attribute} that determines if the
+   * configuration to {@link #NAME_INCLUDE include} should be lazy-loaded. If
+   * this attribute is set to <code>true</code>, the included
+   * configuration(s) will only be 
+   */
+  String NAME_INCLUDE_LAZY = "@lazy";
 
   /**
    * This is the {@link Configuration#getName() name} of an
@@ -224,8 +232,8 @@ public interface ConfigurationDocument {
    * This method gets the context of with this document. This is a set of
    * variables that can be defined within the configuration. The plain
    * {@link Configuration#getValue() value} of a
-   * {@link Configuration configuration} may contain a variable expression
-   * (e.g. "http://localhost:${com.foo.server.port}") that will be resolved when
+   * {@link Configuration configuration} may contain a variable expression (e.g.
+   * "http://localhost:${com.foo.server.port}") that will be resolved when
    * {@link net.sf.mmm.value.api.GenericValue#getObject() read} (e.g.
    * "http://localhost:8080").
    * 

@@ -13,9 +13,9 @@
           Please note that it is NOT an example of how to design your configuration.</p>
         <source><![CDATA[
 <config>
-  <server @port="8080" @host="localhost">
-    <service @impl="net.foo.MyForum"/>
-    <service @impl="com.bar.PowerShop" @singleton="false"/>
+  <server port="8080" host="localhost">
+    <service impl="net.foo.MyForum"/>
+    <service impl="com.bar.PowerShop" singleton="false"/>
   </server>
 </config>
 ]]></source>
@@ -51,7 +51,7 @@ int portNumber = portConf.getValue().getInteger(80);
         </p>
         <source><![CDATA[
 <config>
-  <server @port="80"/>
+  <server port="80"/>
 </server>
 ]]></source>
         <p>

@@ -341,12 +341,10 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       throw new ConfigurationNotEditableException(this);
     }
     if (name.length() == 0) {
-      // TODO: NLS
-      throw new ConfigurationException("Child name must not be empty!");
+      throw new IllegalNameException(name, this);
     }
     if ((name.length() == 1) && (name.charAt(0) == NAME_PREFIX_ATTRIBUTE)) {
-      // TODO: NLS
-      throw new ConfigurationException("Child name must not be empty!");
+      throw new IllegalNameException(name, this);
     }
     return doCreateChild(name, namespaceUri);
   }
@@ -481,10 +479,9 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    */
   public Iterator<AbstractConfiguration> getChildren(String name) {
 
-    // TODO
-    // return getChildren(name, getNamespaceUri());
+    // we do a special treatment here for attributes that have no namespace...
     if (name.length() == 0) {
-      throw new IllegalArgumentException("Child name empty!");
+      throw new IllegalNameException(name, this);
     }
     String namespace = getNamespaceUri();
     if (name.charAt(0) == NAME_PREFIX_ATTRIBUTE) {

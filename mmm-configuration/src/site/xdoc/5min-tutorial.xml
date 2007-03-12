@@ -34,7 +34,7 @@ ConfigurationDocumentIF document = factory.create(accessor);
 ConfigurationIF configuration = document.getConfiguration();
         </source>
         <p>
-          Puh! That was the heavy part. Anyways this allows you to access you configuration 
+          Puh! That was the heavy part. Anyways this allows you to access your configuration 
           from anywhere (file, URL, database, etc.) and in any format (XML, properties, etc.).
           Next we will see why we only need to create the initial configuration once.
         </p>
@@ -42,15 +42,15 @@ ConfigurationIF configuration = document.getConfiguration();
       <subsection name="Include configurations">
         <p>
           The idea of this configuration library is that you can have a single configuration
-          tree for all your configuration data. This does NOT mean that you should dump 
-          everything in one big file or all of your configuration is read into memory.
+          tree for complex and heterogenous configuration data. This does NOT mean that you 
+          should dump everything in one big file or all of your configuration is read into memory.
         </p>
         <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <myRoot xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
   ...
   <myChild>
-    <cfg:include access="file" type="xml" href="mySubConfiguration.xml" lazy="false" descendants="."/>
+    <cfg:include access="file" type="xml" href="mySubConfiguration.xml" descendants="."/>
   </myChild>
   ...
 </myRoot>        
@@ -58,9 +58,11 @@ ConfigurationIF configuration = document.getConfiguration();
         <p>
           The &lt;cfg:include&gt; element in the XML above will automatically be replaced
           with the configuration from the XML file <em>mySubConfiguration.xml</em>.
+          <!--
           If the optional attribute <em>lazy</em> is set to <em>true</em>, the included
           configuration will be loaded when the parent configuration element 
           (&lt;myChild&gt;) is accessed (via the configuration API) for the first time.
+          -->
           The optional attributes <em>access</em> and <em>type</em> indicate the 
           accessor(-factory) and the format. The required attribute <em>href</em> defines 
           the location of the configuration and is interpreted by the accessor(-factory).

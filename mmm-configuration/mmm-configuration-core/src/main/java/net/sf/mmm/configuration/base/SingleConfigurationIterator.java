@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * TODO This type ...
+ * This class iterates a single configuration.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

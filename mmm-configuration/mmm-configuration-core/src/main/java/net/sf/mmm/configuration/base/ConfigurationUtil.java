@@ -125,7 +125,9 @@ public final class ConfigurationUtil {
    * configuration to include.
    * 
    * @param includeConfiguration
+   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element.
    * @param context
+   *        is the {@link ConfigurationDocument#getContext() document-context}.
    * @return the configuration factory.
    */
   public static ConfigurationFactory getDocumentFactory(Configuration includeConfiguration,
@@ -145,24 +147,27 @@ public final class ConfigurationUtil {
   }
 
   /**
+   * This method gets the factory used to access the configuration to include.
    * 
    * @param includeConfiguration
-   * @param env
+   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element.
+   * @param context
+   *        is the {@link ConfigurationDocument#getContext() document-context}.
    * @return the access factory.
    */
   public static ConfigurationAccessFactory getAccessFactory(Configuration includeConfiguration,
-      Context env) {
+      Context context) {
 
     String access = includeConfiguration.getDescendant(ConfigurationDocument.NAME_INCLUDE_ACCESS)
         .getValue().getString(null);
     if (access == null) {
-      access = env.getValue(ConfigurationAccessFactory.CONTEXT_VARIABLE_DEFAULT).getString();
+      access = context.getValue(ConfigurationAccessFactory.CONTEXT_VARIABLE_DEFAULT).getString();
     }
     String varPrefix = ConfigurationAccessFactory.CONTEXT_VARIABLE_PREFIX + access;
     String varFactory = varPrefix + ConfigurationAccessFactory.CONTEXT_VARIABLE_SUFFIX_FACTORY;
-    ConfigurationAccessFactory factory = env.getValue(varFactory).getJavaClassInstance(
+    ConfigurationAccessFactory factory = context.getValue(varFactory).getJavaClassInstance(
         ConfigurationAccessFactory.class);
-    factory.configure(varPrefix, env, includeConfiguration);
+    factory.configure(varPrefix, context, includeConfiguration);
     return factory;
   }
 
@@ -171,8 +176,8 @@ public final class ConfigurationUtil {
    * <code>includeElement</code>.
    * 
    * @param includeElement
-   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element
-   *        to resolve.
+   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element to
+   *        resolve.
    * @param targetList
    *        is the list where to add the included child nodes.
    */
@@ -191,6 +196,7 @@ public final class ConfigurationUtil {
         ConfigurationDocument.NAME_INCLUDE_DESCENDANTS).getValue().getString(null);
     for (int i = 0; i < accessors.length; i++) {
       AbstractConfigurationDocument document = documentFactory.create(accessors[i], includeElement);
+      // TODO: lazy loading!
       AbstractConfiguration result = document.getConfiguration();
       if (descendantPath == null) {
         targetList.add(result);
