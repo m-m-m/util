@@ -108,7 +108,7 @@ public class DescendantPathWalker {
           AbstractConfiguration child = descendant.requireChild(name, namespaceUri);
           if (condition.canBeEstablished(child, namespaceUri)) {
             condition.establish(child, namespaceUri);
-            assert (condition.accept(descendant, namespaceUri));
+            assert (condition.accept(child, namespaceUri));
             returnEmptyConfig = false;
           } else if (child.isEditable()) {
             // TODO: what is the proper strategy here?
