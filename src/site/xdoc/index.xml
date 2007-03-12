@@ -7,12 +7,25 @@
   </properties>
 
   <body>
+    <section name="Introduction">
+      Welcome to the Project Multi-Media-Manager (MMM). The project is still under development.
+      Before you get lost, first some words of what you can already find here before we 
+      talk about the TODOs.
+      <subsection name="Ready to use">
+        This project provides the following generic components that can already be used now:
+        <ul>
+          <li><a href="mmm-configuration/index.html">mmm-configuration</a> gives easy access to read and write configurations.</li>
+          <li><a href="mmm-search/index.html">mmm-search</a> gives easy access to read and write configurations.</li>
+          <li><a href="mmm-nls/index.html">mmm-nls</a> provides techniques for native language support beyond the capatibilities build into java.</li>
+          <li><a href="mmm-util/index.html">mmm-util</a> contains serveral useful utilities.</li>
+        </ul>
+      </subsection>
+    </section>
     <section name="About MMM">
-      <p>The Multi-Media-Manager (MMM) is a generic application plattform and 
+      The Multi-Media-Manager (MMM) is a generic application plattform and 
       a enterprise content management system (ECMS) with custom modules for 
-      multi-media management build on top.</p>
+      multi-media management build on top.
       <subsection name="Codex">
-        <p>
         MMM is entirely written in JAVA. It makes extensive use of the JAVA 5 language.
         All code is written with focus on design &amp; quality and comes with detailed API
         documentation.<br/>
@@ -20,16 +33,12 @@
         inversion of control (IoC) and therefore split into tiny components 
         (see <a href="overview.html">overview</a>). This open architecture allows any 
         component implementation to be reused (by other projects) or be replaced.
-        </p>
       </subsection>
       <subsection name="Project State">
-        <p>
-        Even though the project exists for 5 years now, there is no CMS and no multi-media
+        Even though the project exists for 6 years now, there is no CMS and no multi-media
         management available. If you are looking for open, flexible and well-designed software
-        components (fulltext-search-solution, configuration, user-interface, 
-        container-framework, etc.) or you want to get involved and let the vision of 
+        components (see "Ready to use") or you want to get involved and let the vision of 
         MMM become reality then you are at the right place.
-        </p>
       </subsection>
     </section>
   </body>
