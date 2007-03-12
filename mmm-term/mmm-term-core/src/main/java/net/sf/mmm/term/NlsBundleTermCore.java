@@ -50,6 +50,13 @@ public class NlsBundleTermCore extends AbstractResourceBundle {
   public static final String ERR_EXPR_VAR_NULL = "The expression variable \"{0}\" can not be resolved, internal expression was null.";
 
   /**
+   * exception message if term expression could NOT be parsed.
+   * 
+   * @see net.sf.mmm.term.api.TermParseException
+   */
+  public static final String ERR_TERM_PARSE = "The expression variable \"{0}\" can not be resolved, internal expression was null.";
+
+  /**
    * exception message if partial function implementation has method signature
    * that is already registered.
    * 

@@ -4,6 +4,7 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.nls.base.NlsException;
+import net.sf.mmm.term.NlsBundleTermCore;
 
 /**
  * This exception is thrown if an error occurred while parsing a
@@ -20,19 +21,27 @@ public class TermParseException extends NlsException {
   private static final long serialVersionUID = 8299920898179225587L;
 
   /**
-   * @see NlsException#NlsException(String, Object[])
+   * The constructor.
+   * 
+   * @param expression
+   *        is the expression that could NOT be parsed.
    */
-  public TermParseException(String internaitionalizedMessage, Object... arguments) {
+  public TermParseException(String expression) {
 
-    super(internaitionalizedMessage, arguments);
+    super(NlsBundleTermCore.ERR_TERM_PARSE, expression);
   }
 
   /**
-   * @see NlsException#NlsException(Throwable, String, Object[])
+   * The constructor.
+   * 
+   * @param expression
+   *        is the expression that could NOT be parsed.
+   * @param nested
+   *        is the {@link #getCause() cause} of this exception.
    */
-  public TermParseException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  public TermParseException(String expression, Throwable nested) {
 
-    super(nested, internaitionalizedMessage, arguments);
+    super(nested, NlsBundleTermCore.ERR_TERM_PARSE, expression);
   }
 
 }

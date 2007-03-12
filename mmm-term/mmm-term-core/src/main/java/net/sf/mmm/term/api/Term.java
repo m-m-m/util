@@ -9,10 +9,13 @@ import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueException;
 
 /**
- * This is the interface for a mathematical term. A term is an object that can
- * be evaluated to a concrete value. It is either a constant, a variable or an
- * expression. An expression is a function in combination with a number of terms
- * treated as arguments to the function.
+ * This is the interface for a calculation term. A term is an object that can be
+ * {@link #evaluate(Context) evaluated} to a concrete value. It is either a
+ * constant, a variable or an expression. An expression is a function in
+ * combination with a number of terms treated as arguments to the function.<br>
+ * A term is typically parsed from a textual representation.
+ * 
+ * @see TermParser
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -91,26 +94,26 @@ public interface Term extends XmlSerializable {
   String XML_TAG_EXPRESSION = "expression";
 
   /**
-   * the attribute name used to represent the name of an expression function
-   * in XML
+   * the attribute name used to represent the name of an expression function in
+   * XML
    */
   String XML_ATR_EXPRESSION_FKTNAME = "function";
 
   /**
    * This method evaluates the current term to a value. The term might contain
-   * variables that are resolved through the given <code>environment</code>.
+   * variables that are resolved through the given <code>context</code>.
    * 
-   * @param environment
+   * @param context
    *        is the environment holding the variables used for evaluation.
-   * @return the result value.
+   * @return the result value. May be <code>null</code>.
    * @throws CalculationException
    *         if a calculation fails during evaluation.
    * @throws ValueException
-   *         if an argument (e.g. an
-   *         {@link Context#getValue(String) "environment value"}) is
+   *         if an argument (e.g. a
+   *         {@link Context#getValue(String) context value}) is
    *         {@link GenericValue#isEmpty() empty} or has the
-   *         {@link net.sf.mmm.value.api.WrongValueTypeException "wrong type"}.
+   *         {@link net.sf.mmm.value.api.WrongValueTypeException wrong type}.
    */
-  Object evaluate(Context environment) throws CalculationException, ValueException;
+  Object evaluate(Context context) throws CalculationException, ValueException;
 
 }
