@@ -107,7 +107,7 @@ public class DescendantPathWalker {
           Condition condition = segment.getCondition();
           AbstractConfiguration child = descendant.requireChild(name, namespaceUri);
           if (condition.canBeEstablished(child, namespaceUri)) {
-            condition.establish(child, namespaceUri);
+            child = condition.establish(child, namespaceUri);
             assert (condition.accept(child, namespaceUri));
             returnEmptyConfig = false;
           } else if (child.isEditable()) {
@@ -116,8 +116,8 @@ public class DescendantPathWalker {
             // createChild is accessible via
             // getDescendant("child["+getDescendants("child").size()+"]")
             child = descendant.createChild(name, namespaceUri);
-            condition.establish(child, namespaceUri);
-            assert (condition.accept(descendant, namespaceUri));
+            child = condition.establish(child, namespaceUri);
+            assert (condition.accept(child, namespaceUri));
             returnEmptyConfig = false;
           }
           descendant = child;
