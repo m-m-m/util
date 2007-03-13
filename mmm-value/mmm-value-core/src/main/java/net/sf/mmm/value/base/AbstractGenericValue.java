@@ -135,6 +135,14 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   }
 
   /**
+   * @see net.sf.mmm.value.api.GenericValue#getBoolean(boolean)
+   */
+  public boolean getBoolean(boolean defaultValue) throws WrongValueTypeException {
+
+    return getValue(Boolean.class, Boolean.valueOf(defaultValue)).booleanValue();
+  }
+
+  /**
    * @see net.sf.mmm.value.api.GenericValue#getDate()
    */
   public Date getDate() throws ValueNotSetException, WrongValueTypeException {

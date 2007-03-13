@@ -6,7 +6,7 @@ package net.sf.mmm.search.api;
 import java.util.Iterator;
 
 /**
- * This interface represents an entry of the search-index. It is eigther used
+ * This interface represents an entry of the search-index. It is either used
  * for {@link net.sf.mmm.search.indexer.api.SearchIndexer indexing} or
  * {@link net.sf.mmm.search.engine.api.SearchEngine retrieval}.
  * 
@@ -33,7 +33,7 @@ public interface SearchEntry {
   String PROPERTY_URI = "uri";
 
   /**
-   * The name of the "uid" property. The UID (Unique Idenitifier) is an optional
+   * The name of the "uid" property. The UID (Unique Identifier) is an optional
    * property that identifies the content technically unique. While the URI of a
    * content may change (e.g. if the content is renamed or moved) the UID stays
    * untouched and identifies the content for its complete lifetime.
@@ -61,20 +61,20 @@ public interface SearchEntry {
   String PROPERTY_SIZE = "size";
 
   /**
-   * The name of the "author" property. This is an optinal property that may
+   * The name of the "author" property. This is an optional property that may
    * hold the author (aka artist) of the content.
    */
   String PROPERTY_AUTHOR = "author";
 
   /**
-   * The name of the "type" property. This is an optinal property that
+   * The name of the "type" property. This is an optional property that
    * classifies the type (aka format or content-type) of the content. As values
-   * typically eigther mime-types or file-extensions are used (but NOT mixed).
+   * typically either mime-types or file-extensions are used (but NOT mixed).
    */
   String PROPERTY_TYPE = "type";
 
   /**
-   * The name of the "lang" property. This is an optinal property that specifies
+   * The name of the "lang" property. This is an optional property that specifies
    * the language of the content.
    */
   String PROPERTY_LANGUAGE = "lang";

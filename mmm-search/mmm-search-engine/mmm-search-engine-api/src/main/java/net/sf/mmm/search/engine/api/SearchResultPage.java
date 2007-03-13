@@ -71,6 +71,30 @@ public interface SearchResultPage {
   int getPageIndex();
 
   /**
+   * This method gets the absolute number of the first hit of this page. This is
+   * the same as:
+   * 
+   * <pre>
+   * {@link #getPageIndex()} * {@link #getHitsPerPage()} + 1
+   * </pre>
+   * 
+   * @return the number of the first {@link #getPageHit(int) hit} of this page.
+   */
+  int getHitStartNumber();
+
+  /**
+   * This method gets the absolute number of the last hit of this page. This is
+   * the same as:
+   * 
+   * <pre>
+   * {@link #getHitStartNumber()} + {@link #getPageHitCount()}
+   * </pre>
+   * 
+   * @return the number of the last {@link #getPageHit(int) hit} of this page.
+   */
+  int getHitEndNumber();
+
+  /**
    * This method get the number of {@link #getPageHit(int) hits} in the page
    * represented by this {@link SearchResultPage search result}. The value may
    * be less than the number of {@link #getHitsPerPage() hits per page} if this
@@ -102,8 +126,8 @@ public interface SearchResultPage {
   /**
    * This method gets the {@link #getPageIndex() page-index} of the start
    * {@link SearchResultPage page} when a number <code>(pagingRange*2)+1</code>
-   * links should be rendered for paging. The <code>pagingRange</code> actualy
-   * specifies the number of links forward and backwards.<br>
+   * links should be rendered for paging. The <code>pagingRange</code>
+   * actually specifies the number of links forward and backwards.<br>
    * The number of {@link SearchResultPage result-pages} is potentially NOT
    * limited. To avoid that your GUI layout gets broken by too many paging
    * links, you can use this method to render a fixed number of paging links.<br>
@@ -128,8 +152,8 @@ public interface SearchResultPage {
   /**
    * This method gets the {@link #getPageIndex() page-index} of the end
    * {@link SearchResultPage page} when a number <code>(pagingRange*2)+1</code>
-   * links should be rendered for paging. The <code>pagingRange</code> actualy
-   * specifies the number of links forward and backwards.<br>
+   * links should be rendered for paging. The <code>pagingRange</code>
+   * actually specifies the number of links forward and backwards.<br>
    * The number of {@link SearchResultPage result-pages} is potentially NOT
    * limited. To avoid that your GUI layout gets broken by too many paging
    * links, you can use this method to render a fixed number of paging links.<br>

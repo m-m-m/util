@@ -112,7 +112,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   /**
    * @see net.sf.mmm.content.model.api.ContentField#getFieldType()
    */
-  public Class getFieldType() {
+  public Class<?> getFieldType() {
 
     return this.type;
   }

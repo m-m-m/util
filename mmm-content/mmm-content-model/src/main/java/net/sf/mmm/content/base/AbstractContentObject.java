@@ -21,8 +21,6 @@ public abstract class AbstractContentObject implements ContentObject {
 
   /** @see #getId() */
   private final Id id;
-
-  // general info: name, parent, deleted-flag
   
   /** @see #getName() */
   private String name;
@@ -65,7 +63,7 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * This method gets the deleted flag of this object. This method gives direct
    * access to the deleted flag and can be used if the method
-   * {@link AbstractContentObject#isDeleted()}has been overriden.
+   * {@link AbstractContentObject#isDeleted()}has been overridden.
    * 
    * @see ContentObject#isDeleted()
    * 

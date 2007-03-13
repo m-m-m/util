@@ -2,12 +2,12 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>1 Minute Tutorial</title>
+    <title>Tutorial</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
   <body>
-    <section name="1 Minute Tutorial">
+    <section name="Tutorial">
       <subsection name="Example XML">
         <p>The following example is used to illustrate the use of the configuration API.
           Please note that it is NOT an example of how to design your configuration.</p>

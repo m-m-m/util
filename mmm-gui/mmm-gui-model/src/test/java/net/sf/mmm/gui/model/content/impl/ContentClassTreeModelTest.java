@@ -5,8 +5,8 @@ package net.sf.mmm.gui.model.content.impl;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.MutableContentModelService;
-import net.sf.mmm.content.model.impl.BasicMutableContentModelServiceImpl;
-import net.sf.mmm.content.model.impl.ContentModelInitializer;
+import net.sf.mmm.content.model.impl.AbstractMutableContentModelService;
+import net.sf.mmm.content.model.impl.MemoryContentModelService;
 import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
 import net.sf.mmm.gui.model.content.impl.ContentClassTreeModel;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
@@ -50,12 +50,10 @@ public class ContentClassTreeModelTest {
   public static void main(String[] args) throws Exception {
 
     UIFactory uiFactory = new UIFactorySwing();
-    MutableContentModelService modelService = new BasicMutableContentModelServiceImpl();
+    MutableContentModelService modelService = new MemoryContentModelService();
     ContentClassTreeModel classModel = new ContentClassTreeModel();
     classModel.setModelService(modelService);
     classModel.initialize();
-
-    ContentModelInitializer.initializeModel();
 
     /*
      * ValueService valueService = new StaticValueServiceImpl(); ValueTypeModel

@@ -4,7 +4,6 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.content.api.ContentException;
-import net.sf.mmm.nls.base.NlsException;
 
 /**
  * This exception is used if something went wrong with the content model.
@@ -13,11 +12,11 @@ import net.sf.mmm.nls.base.NlsException;
  */
 public class ContentModelException extends ContentException {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = 3544669568611071536L;
 
   /**
-   * @see NlsException#NlsException(String, Object[])
+   * @see ContentException#ContentException(String, Object[])
    */
   public ContentModelException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +24,7 @@ public class ContentModelException extends ContentException {
   }
 
   /**
-   * @see NlsException#NlsException(Throwable, String, Object[])
+   * @see ContentException#ContentException(Throwable, String, Object[])
    */
   public ContentModelException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {

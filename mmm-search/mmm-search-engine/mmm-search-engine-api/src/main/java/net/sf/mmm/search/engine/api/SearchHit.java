@@ -34,7 +34,7 @@ public interface SearchHit extends SearchEntry {
   String getEntryId();
 
   /**
-   * This method gets the score of this hit. It is a positiv value in the range
+   * This method gets the score of this hit. It is a positive value in the range
    * from <code>0</code> to <code>1</code>, where <code>1</code>
    * represents a perfect hit and <code>0</code> represents a hit that has
    * nothing in common with the search query. A hit will typically NOT have a
@@ -63,7 +63,7 @@ public interface SearchHit extends SearchEntry {
   /**
    * This method gets an excerpt of the plain text of the content that contains
    * terms of the search query as a highlighted html fragment.<br>
-   * The highlighted terms should be sourreded by {@link #HIGHLIGHT_START_TAG}
+   * The highlighted terms should be surrounded by {@link #HIGHLIGHT_START_TAG}
    * and {@link #HIGHLIGHT_END_TAG} and parts of the text that have been cut out
    * should be replaced with {@link #HIGHLIGHT_CUT_TEXT}. An implementing
    * search-engine component may allow to override these defaults for custom

@@ -5,8 +5,8 @@ package net.sf.mmm.gui.view.content.impl;
 
 import org.junit.Test;
 
-import net.sf.mmm.content.model.impl.BasicMutableContentModelServiceImpl;
-import net.sf.mmm.content.model.impl.ContentModelInitializer;
+import net.sf.mmm.content.model.impl.AbstractMutableContentModelService;
+import net.sf.mmm.content.model.impl.MemoryContentModelService;
 import net.sf.mmm.content.persistence.api.IdService;
 import net.sf.mmm.content.persistence.base.DummyIdService;
 import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
@@ -41,15 +41,14 @@ public class ContentModelEditorImplTest extends TestCase {
 
   public static void main(String[] args) throws Exception {
 
-    // static initilization
+    // static initialization
     UIFactory uiFactory = new UIFactorySwing();
-    BasicMutableContentModelServiceImpl modelService = new BasicMutableContentModelServiceImpl();
-    IdService idService = new DummyIdService();
-    modelService.setIdService(idService);
+    AbstractMutableContentModelService modelService = new MemoryContentModelService();
+    //IdService idService = new DummyIdService();
+    //modelService.setIdService(idService);
     ContentClassTreeModel classModel = new ContentClassTreeModel();
     classModel.setModelService(modelService);
     classModel.initialize();
-    ContentModelInitializer.initializeModel();
     ContentClassFieldTableManagerImpl tableManager = new ContentClassFieldTableManagerImpl();
     tableManager.setContentModelService(modelService);
     ContentModelEditorImpl modelEditor = new ContentModelEditorImpl();

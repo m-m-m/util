@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>1 Minute Tutorial</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="1 Minute Tutorial">
+      This tutorial is showing the plain way to setup the search components.
+      Typically you will use a sophisticated IoC framework that injects all this
+      stuff from a configuration file. Therefore all components are properly annotated.
+      <subsection name="Indexing">
+        First of all you need to create a <code>SearchIndexer</code>:
+        <source>
+String indexDirectory = "/tmp/index";        
+Analyzer analyzer = new StandardAnalyzer();
+IndexModifier indexModifier = new IndexModifier(indexDirectory, analyzer, true);
+SearchIndexer indexer = new LuceneSearchIndexer(indexModifier);
+        </source>
+        Additionally you can use the <a href="../mmm-search-parser/index.html"><code>ContentParserService</code></a> to index
+        various content types:
+        <source>
+ContentParserServiceImpl parserServiceImpl = new ContentParserServiceImpl();
+// allow 0.5GB buffer size
+parserServiceImpl.setMaximumBufferSize(500 * 1024);
+ContentParserService parserService = parserServiceImpl;
+        </source>
+        Now you are ready to index files:
+        <source>
+File file = ...;
+MutableSearchEntry entry = indexer.createEntry();
+entry.setUri(file.getPath());
+entry.setSize(file.length());
+addMetadata(file, entry);
+indexer.add(entry);
+        </source>
+        To make it complete here is what <code>addMetadata</code> would typically do:
+        <!-- TODO: FileUtil.getExtension -->
+        <source>
+String extension = getExtension(file);
+if (extension != null) {
+  entry.setType(extension);
+  ContentParser parser = parserService.getParser(extension);
+  if (parser != null) {
+    InputStream inputStream = new FileInputStream(file);
+    try {
+      Properties properties = parser.parse(inputStream, fileSize);
+      String title = getProperty(properties, ContentParser.PROPERTY_KEY_TITLE);
+      if (title != null) {
+        entry.setTitle(title);
+      }
+      String author = getProperty(properties, ContentParser.PROPERTY_KEY_AUTHOR);
+      if (author != null) {
+        entry.setAuthor(author);
+      }
+      String text = getProperty(properties, ContentParser.PROPERTY_KEY_TEXT);
+      if (text != null) {
+        entry.setText(text);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      inputStream.close();
+    }
+  }
+}
+        </source>        
+      </subsection>
+      <subsection name="Searching">
+        In order to search, you need an instance of <code>SearchEngine</code>:
+        <source>
+String indexDirectory = "/tmp/index";
+LuceneSearchEngine luceneEngine = new LuceneSearchEngine();
+luceneEngine.setIndexPath(indexDirectory);
+luceneEngine.setIgnoreLeadingWildcards(false);
+luceneEngine.initialize();
+SearchEngine searchEngine = luceneEngine;
+        </source>
+        Now we can perform a search and show some results:
+        <source><![CDATA[
+String queryString = ...;
+SearchQueryBuilder queryBuilder = searchEngine.getQueryBuilder();
+SearchQuery query = queryBuilder.parseStandardQuery(queryString);
+int pageNumber = 0;
+int hitsPerPage = 10;
+SearchResultPage resultPage = this.searchEngine.search(query, pageNumber, hitsPerPage);
+System.out.println("Hits " + resultPage.getHitStartNumber() + " to " + resultPage.getHitEndNumber()
+                           + " of total " + resultPage.getTotalHitCount() + "...");
+int hitCount = resultPage.getPageHitCount();
+for (int i = 0; i < hitCount; i++) {
+  SearchHit hit = resultPage.getPageHit(i);
+  System.out.println(hit.getScore(100) + "% <a href='http://mydomain.com/files/" + hit.getUri() + "'>" + hit.getTitle + "</a>");
+  System.out.println(hit.getHighlightedText());
+}]]></source>
+      </subsection>
+    </section>
+  </body>
+</document>

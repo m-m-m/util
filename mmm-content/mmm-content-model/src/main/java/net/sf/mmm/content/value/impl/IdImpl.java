@@ -22,7 +22,7 @@ import net.sf.mmm.value.base.AbstractValueManager;
  * <li>{@link #getObjectId() object-id} - unique object/resource counter but
  * <code>0</code> for id of a content-class.</li>
  * <li>{@link #getStoreId() store-id} - if multiple backends are used to store
- * objects this identifies the actual store. In that case two totaly different
+ * objects this identifies the actual store. In that case two totally different
  * objects may share the same object-id. Unique identification is only possible
  * in combination with this store-id.</li>
  * <li>{@link #getRevision() revision} - a resource can have multiple revisions
@@ -38,7 +38,7 @@ import net.sf.mmm.value.base.AbstractValueManager;
  */
 public final class IdImpl implements Id {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = 4050487802653521717L;
 
   /**
@@ -72,147 +72,108 @@ public final class IdImpl implements Id {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}.
+   * content-resource.
    */
   public static final int CLASS_ID_RESOURCE = 4;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}.
+   * content-folder.
    */
   public static final int CLASS_ID_FOLDER = 5;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.resource.ContentFileIF content-file}.
+   * content-file.
    */
   public static final int CLASS_ID_FILE = 6;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentPrincipal content-principal}.
+   * content-principal.
    */
   public static final int CLASS_ID_PRINCIPAL = 7;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentUser content-user}.
+   * content-user.
    */
   public static final int CLASS_ID_USER = 8;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentGroup content-group}.
+   * content-group.
    */
   public static final int CLASS_ID_GROUP = 9;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentGroup content-group}.
+   * content-group.
    */
   public static final int CLASS_ID_ACTION = 10;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * {@link net.sf.mmm.content.api.security.ContentGroup content-group}.
+   * content-group.
    */
   public static final int CLASS_ID_PERMISSION = 11;
 
   /**
    * the first {@link #getClassId() class-id} that can be used for custom
-   * classes. All class-ids lower than this are reserved for system classes.
+   * classes. All class-IDs lower than this are reserved for system classes.
    */
   public static final int MINIMUM_CUSTOM_CLASS_ID = 4096;
 
   /**
    * the first {@link #getObjectId() object-id} that can be used for custom
-   * fields. All field-ids lower than this are reserved for system fields.
+   * fields. All field-IDs lower than this are reserved for system fields.
    */
   public static final int MINIMUM_CUSTOM_FIELD_ID = 4096;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_ROOT}.
-   */
-  public static final long FOLDER_ID_ROOT = 1;
+  /** the {@link #getObjectId() object-ID} of a class. */
+  public static final long OID_CLASS = 0;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_REFLECTION}.
-   */
-  public static final long FOLDER_ID_REFLECTION = 2;
+  /** the {@link #getObjectId() object-ID} of a field. */
+  public static final long OID_FIELD = 1;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_CLASSES}.
-   */
-  public static final long FOLDER_ID_CLASSES = 3;
+  /** the id of the root-folder. */
+  public static final long FOLDER_ID_ROOT = 2;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_FIELDS}.
-   */
-  public static final long FOLDER_ID_FIELDS = 4;
+  /** the id of the reflection-folder. */
+  public static final long FOLDER_ID_REFLECTION = 3;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_PRINCIPALS}.
-   */
-  public static final long FOLDER_ID_PRINCIPALS = 5;
+  /** the id of the classes-folder. */
+  public static final long FOLDER_ID_CLASSES = 4;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_USERS}.
-   */
-  public static final long FOLDER_ID_USERS = 6;
+  /** the id of the fields-folder. */
+  public static final long FOLDER_ID_FIELDS = 5;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_GROUPS}.
-   */
-  public static final long FOLDER_ID_GROUPS = 7;
+  /** the id of the principals-folder. */
+  public static final long FOLDER_ID_PRINCIPALS = 6;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_IDS}.
-   */
-  public static final long FOLDER_ID_IDS = 8;
+  /** the id of the users-folder. */
+  public static final long FOLDER_ID_USERS = 7;
 
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} with
-   * the {@link net.sf.mmm.content.api.ContentObject#getPath() path}
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF#PATH_RESOURCES}.
-   */
-  public static final long FOLDER_ID_RESOURCES = 9;
+  /** the id of the groups-folder. */
+  public static final long FOLDER_ID_GROUPS = 8;
+
+  /** the id of the IDs-folder. */
+  public static final long FOLDER_ID_IDS = 9;
+
+  /** the id of the resources-folder. */
+  public static final long FOLDER_ID_RESOURCES = 10;
 
   /**
    * the first {@link #getObjectId() object-id} that can be used for custom
-   * resources. All object-ids lower than this are reserved for system
-   * resources (e.g. root-folder, etc.).
+   * resources. All object-IDs lower than this are reserved for system resources
+   * (e.g. root-folder, etc.).
    */
   public static final long MINIMUM_CUSTOM_RESOURCE_ID = 4096;
 
@@ -227,160 +188,91 @@ public final class IdImpl implements Id {
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} (the class
    * that all other classes are derived from).
    */
-  public static final IdImpl ID_CLASS_ROOT = new IdImpl(0, CLASS_ID_ROOT);
+  public static final IdImpl ID_CLASS_ROOT = new IdImpl(CLASS_ID_ROOT);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects
-   * {@link net.sf.mmm.content.model.api.ContentReflectionObject content-reflection-object} .
+   * {@link net.sf.mmm.content.model.api.ContentReflectionObject content-reflection-object}.
    */
-  public static final IdImpl ID_CLASS_REFELCTION = new IdImpl(0, CLASS_ID_RELECTION);
+  public static final IdImpl ID_CLASS_REFELCTION = new IdImpl(CLASS_ID_RELECTION);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
    * reflects itself (Like {@link Class} in java).
    */
-  public static final IdImpl ID_CLASS_CLASS = new IdImpl(0, CLASS_ID_CLASS);
+  public static final IdImpl ID_CLASS_CLASS = new IdImpl(CLASS_ID_CLASS);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects {@link net.sf.mmm.content.api.model.ContentField content-field} .
+   * reflects {@link net.sf.mmm.content.model.api.ContentField content-field}.
    */
-  public static final IdImpl ID_CLASS_FIELD = new IdImpl(0, CLASS_ID_FIELD);
+  public static final IdImpl ID_CLASS_FIELD = new IdImpl(CLASS_ID_FIELD);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects
-   * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource} .
+   * reflects content-resource.
    */
-  public static final IdImpl ID_CLASS_RESOURCE = new IdImpl(0, CLASS_ID_RESOURCE);
+  public static final IdImpl ID_CLASS_RESOURCE = new IdImpl(CLASS_ID_RESOURCE);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder} .
+   * reflects content-folder.
    */
-  public static final IdImpl ID_CLASS_FOLDER = new IdImpl(0, CLASS_ID_FOLDER);
+  public static final IdImpl ID_CLASS_FOLDER = new IdImpl(CLASS_ID_FOLDER);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects {@link net.sf.mmm.content.api.resource.ContentFileIF content-file} .
+   * reflects content-file.
    */
-  public static final IdImpl ID_CLASS_FILE = new IdImpl(0, CLASS_ID_FILE);
+  public static final IdImpl ID_CLASS_FILE = new IdImpl(CLASS_ID_FILE);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects
-   * {@link net.sf.mmm.content.api.security.ContentPrincipal content-principal} .
+   * reflects content-principal.
    */
-  public static final IdImpl ID_CLASS_PRINCIPAL = new IdImpl(0, CLASS_ID_PRINCIPAL);
+  public static final IdImpl ID_CLASS_PRINCIPAL = new IdImpl(CLASS_ID_PRINCIPAL);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a {@link net.sf.mmm.content.api.security.ContentUser content-user} .
+   * reflects a content-user.
    */
-  public static final IdImpl ID_CLASS_USER = new IdImpl(0, CLASS_ID_USER);
+  public static final IdImpl ID_CLASS_USER = new IdImpl(CLASS_ID_USER);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a
-   * {@link net.sf.mmm.content.api.security.ContentGroup content-group} .
+   * reflects a content-group.
    */
-  public static final IdImpl ID_CLASS_GROUP = new IdImpl(0, CLASS_ID_GROUP);
+  public static final IdImpl ID_CLASS_GROUP = new IdImpl(CLASS_ID_GROUP);
 
   /**
    * the id of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a
-   * {@link net.sf.mmm.content.api.security.ContentAction content-action} .
+   * reflects a content-action.
    */
-  public static final IdImpl ID_CLASS_ACTION = new IdImpl(0, CLASS_ID_ACTION);
+  public static final IdImpl ID_CLASS_ACTION = new IdImpl(CLASS_ID_ACTION);
 
   /**
-   * the id of the root
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}.
+   * the id of the root-folder.
    */
   public static final IdImpl ID_FOLDER_ROOT = new IdImpl(FOLDER_ID_ROOT, CLASS_ID_FOLDER);
 
   /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where
-   * {@link net.sf.mmm.content.model.api.ContentReflectionObject content-reflection-objects}
-   * are located.
-   */
-  public static final IdImpl ID_FOLDER_REFLECTION = new IdImpl(FOLDER_ID_REFLECTION,
-      CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the {@link net.sf.mmm.content.model.api.ContentClass content-classes}
-   * are located.
-   */
-  public static final IdImpl ID_FOLDER_CLASSES = new IdImpl(FOLDER_ID_CLASSES, CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the {@link net.sf.mmm.content.api.model.ContentField content-fields}
-   * are located.
-   */
-  public static final IdImpl ID_FOLDER_FIELDS = new IdImpl(FOLDER_ID_FIELDS, CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the
-   * {@link net.sf.mmm.content.api.security.ContentPrincipal content-principals}
-   * are located.
-   */
-  public static final IdImpl ID_FOLDER_PRINCIPALS = new IdImpl(FOLDER_ID_PRINCIPALS,
-      CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the {@link net.sf.mmm.content.api.security.ContentUser content-users}
-   * are located.
-   */
-  public static final IdImpl ID_FOLDER_USERS = new IdImpl(FOLDER_ID_USERS, CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where the
-   * {@link net.sf.mmm.content.api.security.ContentGroup content-groups} are
-   * located.
-   */
-  public static final IdImpl ID_FOLDER_GROUPS = new IdImpl(FOLDER_ID_GROUPS, CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where all {@link net.sf.mmm.content.api.ContentObject content-objects} are
-   * mirrored by their id.
-   * 
-   * @see net.sf.mmm.content.api.resource.ContentFolderIF#PATH_RESOURCES
+   * the id of the resources-folder.
    */
   public static final IdImpl ID_FOLDER_RESOURCES = new IdImpl(FOLDER_ID_RESOURCES, CLASS_ID_FOLDER);
 
   /**
-   * the id of the
-   * {@link net.sf.mmm.content.api.resource.ContentFolderIF content-folder}
-   * where all {@link net.sf.mmm.content.api.ContentObject content-objects} are
-   * mirrored by their id.
-   * 
-   * @see net.sf.mmm.content.api.resource.ContentFolderIF#PATH_IDS
+   * the id of the IDs-folder
    */
   public static final IdImpl ID_FOLDER_IDS = new IdImpl(FOLDER_ID_IDS, CLASS_ID_FOLDER);
 
@@ -397,7 +289,7 @@ public final class IdImpl implements Id {
   private final int classId;
 
   /**
-   * the revision counter of the ideentified resource version, <code>0</code>
+   * the revision counter of the identified resource version, <code>0</code>
    * for latest version.
    */
   private final int revision;
@@ -419,15 +311,13 @@ public final class IdImpl implements Id {
    */
   public IdImpl(int classUid) {
 
-    this(0, classUid);
+    this(OID_CLASS, classUid);
   }
 
   /**
    * The constructor for the ID of a
    * {@link net.sf.mmm.content.api.ContentObject content-object} or the latest
-   * revision of a
-   * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}
-   * in the default {@link net.sf.mmm.content.api.store.StoreIF store}.
+   * revision of a content-resource in the default store.
    * 
    * @see IdImpl
    * 
@@ -442,9 +332,7 @@ public final class IdImpl implements Id {
   }
 
   /**
-   * The constructor for the ID of a
-   * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}
-   * in the default {@link net.sf.mmm.content.api.store.StoreIF store}.
+   * The constructor for the ID of a content-resource in the default store.
    * 
    * @see IdImpl
    * 
@@ -461,9 +349,7 @@ public final class IdImpl implements Id {
   }
 
   /**
-   * The constructor for the ID of a
-   * {@link net.sf.mmm.content.api.resource.ContentResourceIF content-resource}
-   * in the specified {@link net.sf.mmm.content.api.store.StoreIF store}.
+   * The constructor for the ID of a content-resource in the specified store.
    * 
    * @see IdImpl
    * 
@@ -619,6 +505,9 @@ public final class IdImpl implements Id {
     if (this.objectId == 0) {
       // identified object is a class
       return ID_CLASS_CLASS;
+    } else if (this.objectId == 1) {
+      // identified object is a class
+      return ID_CLASS_FIELD;
     } else {
       // identified object is no class, get the class id
       // TOOD: use pool!?

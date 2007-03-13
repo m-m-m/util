@@ -220,7 +220,7 @@ public interface GenericValue {
   boolean getBoolean() throws ValueNotSetException, WrongValueTypeException;
 
   /**
-   * This method gets the value as boolean.
+   * This method gets the value as Boolean.
    * 
    * @see #getValue(Class, Object)
    * 
@@ -235,6 +235,20 @@ public interface GenericValue {
    *         if the value is NO boolean.
    */
   Boolean getBoolean(Boolean defaultValue) throws WrongValueTypeException;
+
+  /**
+   * This method gets the value as boolean.
+   * 
+   * @see #getValue(Class, Object)
+   * 
+   * @param defaultValue
+   *        is the default returned if this value {@link #isEmpty() is empty}.
+   * @return the requested value or the <code>defaultValue</code> if this
+   *         value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException
+   *         if the value is NO boolean.
+   */
+  boolean getBoolean(boolean defaultValue) throws WrongValueTypeException;
 
   /**
    * This method gets the value if it is a defined date value.

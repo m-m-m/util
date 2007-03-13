@@ -4,6 +4,7 @@
 package net.sf.mmm.content.model.base;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelService;
+import net.sf.mmm.content.model.api.NoSuchClassException;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.event.EventListener;
@@ -27,28 +29,23 @@ public abstract class AbstractContentModelService extends
     ContentModelService {
 
   /** @see #getClass(String) */
-  private final Map<String, ContentClass> name2class;
+  private final Map<String, AbstractContentClass> name2class;
 
   /** @see #getClass(Id) */
-  private final Map<Id, ContentClass> id2class;
+  private final Map<Id, AbstractContentClass> id2class;
 
-  /** @see #getRootClass() */
-  private final ContentClass root;
+  /** @see #getClasses() */
+  private final Collection<AbstractContentClass> classesView;
 
   /**
    * The constructor.
-   * 
-   * @param rootClass
-   * @throws ContentModelException
-   *         if the <code>rootClass</code> or its sub-classes are inconsistent.
    */
-  public AbstractContentModelService(ContentClass rootClass) throws ContentModelException {
+  public AbstractContentModelService() {
 
     super();
-    this.name2class = new HashMap<String, ContentClass>();
-    this.id2class = new HashMap<Id, ContentClass>();
-    this.root = rootClass;
-    addClassRecursive(this.root);
+    this.name2class = new HashMap<String, AbstractContentClass>();
+    this.id2class = new HashMap<Id, AbstractContentClass>();
+    this.classesView = Collections.unmodifiableCollection(this.id2class.values());
   }
 
   /**
@@ -62,15 +59,47 @@ public abstract class AbstractContentModelService extends
   /**
    * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(java.lang.String)
    */
-  public ContentClass getClass(String name) throws ContentModelException {
+  public AbstractContentClass getClass(String name) throws ContentModelException {
+
+    AbstractContentClass contentClass = this.name2class.get(name);
+    if (contentClass == null) {
+      throw new NoSuchClassException(name);
+    }
+    return contentClass;
+  }
+
+  /**
+   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(net.sf.mmm.content.value.api.Id)
+   */
+  public AbstractContentClass getClass(Id id) throws ContentModelException {
+
+    AbstractContentClass contentClass = this.id2class.get(id);
+    if (contentClass == null) {
+      throw new NoSuchClassException(id);
+    }
+    return contentClass;
+  }
+
+  /**
+   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(java.lang.String)
+   * 
+   * @param name
+   *        the name of the requested class.
+   * @return the requested class or <code>null</code> if NOT found.
+   */
+  protected AbstractContentClass getClassOrNull(String name) {
 
     return this.name2class.get(name);
   }
 
   /**
    * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(net.sf.mmm.content.value.api.Id)
+   * 
+   * @param id
+   *        the ID of the requested class.
+   * @return the requested class or <code>null</code> if NOT found.
    */
-  public ContentClass getClass(Id id) throws ContentModelException {
+  protected AbstractContentClass getClassOrNull(Id id) {
 
     return this.id2class.get(id);
   }
@@ -78,18 +107,9 @@ public abstract class AbstractContentModelService extends
   /**
    * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClasses()
    */
-  public Collection<ContentClass> getClasses() {
+  public Collection<AbstractContentClass> getClasses() {
 
-    // TODO
-    return this.id2class.values();
-  }
-
-  /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getRootClass()
-   */
-  public ContentClass getRootClass() {
-
-    return this.root;
+    return this.classesView;
   }
 
   /**
@@ -99,23 +119,19 @@ public abstract class AbstractContentModelService extends
    * 
    * @param contentClass
    *        is the class to add.
-   * @throws ContentModelException
+   * @throws ContentModelRuntimeException
+   *         if the class is already registered.
    */
-  protected void addClass(ContentClass contentClass) throws ContentModelException {
+  protected void addClass(AbstractContentClass contentClass) throws ContentModelRuntimeException {
 
     ContentClass duplicate;
     duplicate = this.id2class.get(contentClass.getId());
     if (duplicate != null) {
-      if (duplicate == contentClass) {
-        // already registered...
-        return;
-      } else {
-        throw new ContentModelException("");
-      }
+      throw new DuplicateClassException(contentClass.getId());
     }
     duplicate = this.name2class.get(contentClass.getName());
     if (duplicate != null) {
-      // TODO
+      throw new DuplicateClassException(contentClass.getName());
     }
     this.name2class.put(contentClass.getName(), contentClass);
     this.id2class.put(contentClass.getId(), contentClass);
@@ -131,10 +147,10 @@ public abstract class AbstractContentModelService extends
    *        is the class to add.
    * @throws ContentModelException
    */
-  protected void addClassRecursive(ContentClass contentClass) throws ContentModelException {
+  protected void addClassRecursive(AbstractContentClass contentClass) throws ContentModelException {
 
     addClass(contentClass);
-    for (ContentClass subClass : contentClass.getSubClasses()) {
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
       addClassRecursive(subClass);
     }
   }

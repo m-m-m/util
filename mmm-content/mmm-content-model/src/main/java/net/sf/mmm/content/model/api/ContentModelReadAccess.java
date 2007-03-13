@@ -50,6 +50,6 @@ public interface ContentModelReadAccess {
    * 
    * @return an enumeration of all content classes.
    */
-  Collection<ContentClass> getClasses();
+  Collection<? extends ContentClass> getClasses();
 
 }

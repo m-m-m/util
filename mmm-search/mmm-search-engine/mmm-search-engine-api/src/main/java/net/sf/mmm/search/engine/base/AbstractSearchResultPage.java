@@ -91,6 +91,22 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
+   * @see net.sf.mmm.search.engine.api.SearchResultPage#getHitStartNumber()
+   */
+  public int getHitStartNumber() {
+  
+    return this.pageIndex * this.hitsPerPage + 1;
+  }
+  
+  /**
+   * @see net.sf.mmm.search.engine.api.SearchResultPage#getHitEndNumber()
+   */
+  public int getHitEndNumber() {
+  
+    return getHitStartNumber() + getPageHitCount();
+  }
+  
+  /**
    * @see net.sf.mmm.search.engine.api.SearchResultPage#getPagingStartIndex(int)
    */
   public int getPagingStartIndex(int pagingRange) {

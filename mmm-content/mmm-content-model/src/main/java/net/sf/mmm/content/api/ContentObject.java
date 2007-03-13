@@ -16,6 +16,7 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  * 
  * TODO: add generic methods "ContentObject getParent()", "String getPath()" 
  *       "Collection<ContentObject> getChildren()" instead of content-folder?
+ * TODO: create external XmlSerializer instead of extend XmlSerializable here?
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -113,10 +114,10 @@ public interface ContentObject extends XmlSerializable {
    * This method determines if this content-object is marked as deleted. <br>
    * A deleted class or field can NOT be modified. No instances or sub-classes
    * can be created of a deleted class. Deleted fields are NOT visible in the
-   * editor. If a class or field is deleted it can eighter be undeleted or
+   * editor. If a class or field is deleted it can either be undeleted or
    * destroyed (then all instances will be removed from the persistence store).
    * <br>
-   * If the delted flag is set, the class or field can be seen as deprecated.
+   * If the deleted flag is set, the class or field can be seen as deprecated.
    * 
    * @return <code>true</code> if this object is marked as deleted.
    */
@@ -144,7 +145,7 @@ public interface ContentObject extends XmlSerializable {
    * @throws ContentException
    *         TODO: if the specified field is
    *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
-   *         but an error occured calculating its value.
+   *         but an error occurred calculating its value.
    */
   Object getFieldValue(String fieldName) throws NoSuchFieldException, PermissionDeniedException,
       ContentException;

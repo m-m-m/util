@@ -4,7 +4,6 @@
 package net.sf.mmm.content.model.base;
 
 import net.sf.mmm.content.model.api.ClassModifiers;
-import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
@@ -17,7 +16,7 @@ import net.sf.mmm.util.xml.api.XmlWriter;
  */
 public class ClassModifiersImpl extends AbstractModifiers implements ClassModifiers {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = 2603625618112910413L;
 
   /**
@@ -179,7 +178,8 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
 
     super.setXmlAttributes(xmlWriter);
     if (isAbstract()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_ABSTRACT, StringUtil.TRUE);
+      xmlWriter.writeAttribute(XML_ATR_ROOT_ABSTRACT, Boolean.toString(this.abstractFlag));
+      xmlWriter.writeAttribute(XML_ATR_ROOT_EXTENDABLE, Boolean.toString(this.extendableFlag));
     }
   }
 
@@ -193,4 +193,45 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     xmlWriter.writeEndElement(XML_TAG_ROOT);
   }
 
+  /**
+   * This method gets the modifiers.
+   * 
+   * @param isSystem
+   *        is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal
+   *        is the value for the {@link #isFinal() final-flag}.
+   * @param isAbstract
+   *        is the {@link #isAbstract() abstract-flag}.
+   * @param isExtendable
+   *        is the {@link #isExtendable() extendable-flag}.
+   * @return the requested modifiers.
+   */
+  public static ClassModifiers getInstance(boolean isSystem, boolean isFinal, boolean isAbstract, boolean isExtendable) {
+    if (isSystem) {
+      if (isAbstract) {
+        if (isExtendable) {
+          return SYSTEM_ABSTRACT;          
+        } else {
+          return SYSTEM_ABSTRACT_UNEXTENDABLE;                    
+        }
+      } else {
+        if (isFinal) {
+          return SYSTEM_FINAL;
+        } else if (isExtendable) {
+          return SYSTEM;
+        } else {
+          return SYSTEM_UNEXTENDABLE;
+        }
+      }
+    } else {
+      if (isAbstract) {
+        return ABSTRACT;
+      } else if (isFinal) {
+        return FINAL;
+      } else {
+        return NORMAL;
+      }
+    } 
+  }
+  
 }

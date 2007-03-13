@@ -39,7 +39,7 @@ public final class FileUtil {
    *        is the existing file to copy from.
    * @param destination
    *        is the file to copy to. It will be created if it does NOT exist and
-   *        overriden otherwise.
+   *        overridden otherwise.
    * @throws IOException
    *         if the operation fails.
    */

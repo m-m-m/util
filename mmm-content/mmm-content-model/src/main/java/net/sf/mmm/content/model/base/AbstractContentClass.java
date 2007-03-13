@@ -16,7 +16,6 @@ import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
-import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Id;
 
@@ -32,10 +31,10 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   private ContentClass superClass;
 
   /** the list of direct sub-classes */
-  private final List<ContentClass> subClasses;
+  private final List<AbstractContentClass> subClasses;
 
   /** @see #getSubClasses() */
-  private final List<ContentClass> subClassesView;
+  private final List<AbstractContentClass> subClassesView;
 
   /** the map of content fields by name */
   private final Map<String, ContentField> fields;
@@ -50,9 +49,14 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * The constructor.
    * 
    * @param classId
+   *        is the {@link #getId() ID} of the class.
    * @param className
+   *        is the {@link #getName() name} of the class.
    * @param parentClass
+   *        is the {@link #getSuperClass() super-class} of the class or
+   *        <code>null</code> for creating the root-class.
    * @param classModifiers
+   *        are the {@link #getModifiers() modifiers}.
    */
   public AbstractContentClass(Id classId, String className, ContentClass parentClass,
       ClassModifiers classModifiers) {
@@ -60,7 +64,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     super(classId, className);
     this.superClass = parentClass;
     this.modifiers = classModifiers;
-    this.subClasses = new ArrayList<ContentClass>();
+    this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
     this.fields = new HashMap<String, ContentField>();
     this.fieldCollection = Collections.unmodifiableCollection(this.fields.values());
@@ -115,7 +119,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
         result++;
       }
     }
-    // the calcuation until here should be stored as member.
+    // the calculation until here should be stored as member.
     // the only problem is that the value may change if a super-class
     // changes.
     if (this.superClass != null) {
@@ -151,7 +155,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * @see net.sf.mmm.content.model.api.ContentClass#getSubClasses()
    */
-  public List<ContentClass> getSubClasses() {
+  public List<AbstractContentClass> getSubClasses() {
 
     return this.subClassesView;
   }
@@ -224,40 +228,38 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
+   * This method adds a {@link #getSubClasses() sub-class} to this class.
    * 
    * @param subClass
-   * @throws ContentModelException
+   *        is the sub-class to add.
+   * @throws ContentModelRuntimeException
+   *         if the operation fails.
    */
-  public void addSubClass(ContentClass subClass) throws ContentModelException {
+  public void addSubClass(AbstractContentClass subClass) throws ContentModelRuntimeException {
 
     if (subClass.getSuperClass() != this) {
-      throw new ContentModelException("Internal error!");
+      throw new ContentModelRuntimeException("Internal error!");
     }
-    if (this.subClasses.contains(subClass)) {
-      // TODO: error or ignore?
-      return;
-    }
+    assert (!this.subClasses.contains(subClass));
     this.subClasses.add(subClass);
   }
 
   /**
+   * This method adds the given <code>field</code> to this class.
    * 
    * @param field
-   * @throws ContentModelException
+   *        is the field to add.
+   * @throws ContentModelRuntimeException
+   *         if the field could NOT be added.
    */
-  public void addField(ContentField field) throws ContentModelException {
+  public void addField(ContentField field) throws ContentModelRuntimeException {
 
     if (field.getDeclaringClass() != this) {
-      throw new ContentModelException("Internal error!");
+      throw new ContentModelRuntimeException("Internal error!");
     }
     ContentField duplicate = this.fields.get(field.getName());
     if (duplicate != null) {
-      if (duplicate == field) {
-        // ignore?
-        return;
-      } else {
-        throw new ContentModelException("Todo");
-      }
+      throw new DuplicateFieldException(field.getName());
     }
     this.fields.put(field.getName(), field);
   }
@@ -270,25 +272,13 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
 
     return getName();
     /*
-    StringBuffer result = new StringBuffer();
-    result.append("Class:");
-    result.append(getId());
-    result.append("[");
-    if (getModifiers().isAbstract()) {
-      result.append("A");
-    }
-    if (getModifiers().isFinal()) {
-      result.append("F");
-    }
-    if (getModifiers().isSystem()) {
-      result.append("S");
-    }
-    if (isDeleted()) {
-      result.append("D");
-    }
-    result.append("]");
-    return result.toString();
-    */
+     * StringBuffer result = new StringBuffer(); result.append("Class:");
+     * result.append(getId()); result.append("["); if
+     * (getModifiers().isAbstract()) { result.append("A"); } if
+     * (getModifiers().isFinal()) { result.append("F"); } if
+     * (getModifiers().isSystem()) { result.append("S"); } if (isDeleted()) {
+     * result.append("D"); } result.append("]"); return result.toString();
+     */
   }
 
 }

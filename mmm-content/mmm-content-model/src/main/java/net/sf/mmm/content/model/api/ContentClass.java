@@ -12,7 +12,7 @@ import java.util.List;
  * object-oriented way. <br>
  * A content-class is the analogy to a {@link java.lang.Class} that
  * reflects a {@link java.lang.Object}. <br>
- * A content-class may be used to render a genric UI editor, synchronize the
+ * A content-class may be used to render a generic UI editor, synchronize the
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -34,11 +34,11 @@ public interface ContentClass extends ContentReflectionObject {
   /**
    * This method gets an iterator of all fields declared by this class. This
    * does NOT include fields inherited from the
-   * {@link #getSuperClass() super-class} except they are overriden by this
+   * {@link #getSuperClass() super-class} except they are overridden by this
    * class. An inherited field can be overridden (if supported by the
    * {@link ContentModelService content-model}) in order to declare it more
    * specific meaning. Then the type of the field is a subtype of the field that
-   * is overriden or the validator is more restrictive.<br>
+   * is overridden or the validator is more restrictive.<br>
    * 
    * @return an (read-only) iterator of all declared fields.
    */
@@ -48,7 +48,7 @@ public interface ContentClass extends ContentReflectionObject {
    * This method gets the declared field with the given
    * {@link ContentField#getName() name}. Declared means that the field is
    * {@link ContentField#getInitiallyDefiningClass() initially defined} or
-   * overriden in this class.<br>
+   * overridden in this class.<br>
    * An inherited field can be overridden (if supported by the
    * {@link ContentModelService content-model}) in order to declare it more
    * specific (typically the {@link ContentField#getFieldType() field-type} is
@@ -66,7 +66,7 @@ public interface ContentClass extends ContentReflectionObject {
 
   /**
    * This method gets the field with the given
-   * {@link ContentField#getName() name}. A field is eigther
+   * {@link ContentField#getName() name}. A field is either
    * {@link #getDeclaredFieldCount() declared} in this class or inherited
    * from a {@link #getSuperClass() super-class}.
    * 
@@ -79,7 +79,7 @@ public interface ContentClass extends ContentReflectionObject {
 
   /**
    * This method gets the number of fields defined in this class or inherited by
-   * the super-classe(s).
+   * the super-class(es).
    * 
    * @return the number of fields.
    */
@@ -87,7 +87,7 @@ public interface ContentClass extends ContentReflectionObject {
 
   /**
    * This method gets all fields defined in this class or inherited by the
-   * super-classe(s). An inherited field can be identified via
+   * super-class(es). An inherited field can be identified via
    * {@link ContentField#getDeclaringClass()}.
    * 
    * @return an (read-only) iterator of fields of this class.
@@ -104,9 +104,9 @@ public interface ContentClass extends ContentReflectionObject {
   /**
    * This method gets the list of all sub-classes.
    * 
-   * @return an unmodifyable list of all sub-class.
+   * @return an un-modifiable list of all sub-class.
    */
-  List<ContentClass> getSubClasses();
+  List<? extends ContentClass> getSubClasses();
 
   /**
    * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()
