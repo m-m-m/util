@@ -20,12 +20,12 @@ import net.sf.mmm.value.impl.StaticValueServiceImpl;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueTypeWidgetManagerTest {
+public class ValueTypeWidgetManagerDemo {
 
   /**
    * The constructor.
    */
-  public ValueTypeWidgetManagerTest() {
+  public ValueTypeWidgetManagerDemo() {
 
     super();
   }

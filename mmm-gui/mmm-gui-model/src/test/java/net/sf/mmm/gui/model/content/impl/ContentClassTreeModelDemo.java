@@ -30,12 +30,12 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentClassTreeModelTest {
+public class ContentClassTreeModelDemo {
 
   /**
    * The constructor.
    */
-  public ContentClassTreeModelTest() {
+  public ContentClassTreeModelDemo() {
 
     super();
   }

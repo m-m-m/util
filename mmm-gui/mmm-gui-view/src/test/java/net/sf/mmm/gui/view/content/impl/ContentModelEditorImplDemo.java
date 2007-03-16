@@ -3,12 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.gui.view.content.impl;
 
-import org.junit.Test;
-
 import net.sf.mmm.content.model.impl.AbstractMutableContentModelService;
 import net.sf.mmm.content.model.impl.ConfiguredModelService;
-import net.sf.mmm.content.persistence.api.IdService;
-import net.sf.mmm.content.persistence.base.DummyIdService;
 import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
 import net.sf.mmm.gui.model.content.impl.ContentClassTreeModel;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
@@ -16,27 +12,20 @@ import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
-import junit.framework.TestCase;
-
 
 /**
  * TODO: this class ...
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentModelEditorImplTest extends TestCase {
+public class ContentModelEditorImplDemo {
 
   /**
    * The constructor.
    */
-  public ContentModelEditorImplTest() {
+  public ContentModelEditorImplDemo() {
 
     super();
-  }
-  
-  @Test
-  public void testFoo() {
-    // nothing so far...
   }
 
   public static void main(String[] args) throws Exception {
