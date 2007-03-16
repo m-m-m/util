@@ -6,13 +6,12 @@
     <href>http://sourceforge.net/projects/m-m-m</href>
   </bannerLeft>
   <bannerRight>
-    <src>images/logo.png</src>
+    <src>http://m-m-m.sourceforge.net/images/logo.png</src>
     <href>http://m-m-m.sourceforge.net</href>
   </bannerRight>
   <body>
     <links>
       <item name="Home" href="http://m-m-m.sourceforge.net/" />
-      <item name="Configuration" href="../../../mmm-configuration/src/site/index.html"/>
     </links>
 
     <menu name="General Information" inherit="none">
