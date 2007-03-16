@@ -56,7 +56,7 @@
             <property name="tokens" value="CLASS_DEF"/>
         </module>
         <module name="TypeName">
-            <property name="format" value="^[A-Z][a-zA-Z0-9]*IF$"/>
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
             <property name="tokens" value="INTERFACE_DEF"/>
         </module>
 
