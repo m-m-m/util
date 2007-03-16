@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
@@ -22,13 +23,17 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   public static final FieldModifiersImpl NORMAL = new FieldModifiersImpl(false, false, false,
       false, false);
 
+  /** the modifier of a read-only field */
+  public static final FieldModifiersImpl READ_ONLY = new FieldModifiersImpl(false, false, true,
+      false, false);
+
   /** the modifier of a final field */
   public static final FieldModifiersImpl FINAL = new FieldModifiersImpl(false, true, false, false,
       false);
 
   /** the modifier of a final and read-only field */
-  public static final FieldModifiersImpl FINAL_READONLY = new FieldModifiersImpl(false, true,
-      true, false, false);
+  public static final FieldModifiersImpl FINAL_READONLY = new FieldModifiersImpl(false, true, true,
+      false, false);
 
   /** the modifier of a static field */
   public static final FieldModifiersImpl STATIC = new FieldModifiersImpl(false, false, false, true,
@@ -54,13 +59,45 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   public static final FieldModifiersImpl FINAL_TRANSIENT = new FieldModifiersImpl(false, true,
       true, false, true);
 
-  /** the modifier of a final system field */
+  /** the modifier of a system-field */
+  public static final FieldModifiersImpl SYSTEM = new FieldModifiersImpl(true, false, false, false,
+      false);
+
+  /** the modifier of a final system-field */
   public static final FieldModifiersImpl SYSTEM_FINAL = new FieldModifiersImpl(true, true, false,
       false, false);
 
-  /** the modifier of a final and read-only system field */
-  public static final FieldModifiersImpl SYSTEM_FINAL_READONLY = new FieldModifiersImpl(true,
-      true, true, false, false);
+  /** the modifier of a final and read-only system-field */
+  public static final FieldModifiersImpl SYSTEM_FINAL_READONLY = new FieldModifiersImpl(true, true,
+      true, false, false);
+
+  /** the modifier of a static system-field */
+  public static final FieldModifiersImpl SYSTEM_STATIC = new FieldModifiersImpl(true, false, false,
+      true, false);
+
+  /** the modifier of a static and final system-field */
+  public static final FieldModifiersImpl SYSTEM_STATIC_FINAL = new FieldModifiersImpl(true, true,
+      false, true, false);
+
+  /** the modifier of a static, final and read-only system-field */
+  public static final FieldModifiersImpl SYSTEM_STATIC_FINAL_READONLY = new FieldModifiersImpl(
+      true, true, true, true, false);
+
+  /** the modifier of a transient system-field */
+  public static final FieldModifiersImpl SYSTEM_TRANSIENT = new FieldModifiersImpl(true, false,
+      true, false, true);
+
+  /** the modifier of a final, transient system-field */
+  public static final FieldModifiersImpl SYSTEM_FINAL_TRANSIENT = new FieldModifiersImpl(true,
+      true, true, false, true);
+
+  /** the modifier of a static and read-only system-field */
+  public static final FieldModifiersImpl SYSTEM_STATIC_READONLY = new FieldModifiersImpl(true, false, true,
+      true, false);
+
+  /** the modifier of a read-only system-field */
+  public static final FieldModifiersImpl SYSTEM_READONLY = new FieldModifiersImpl(true, false,
+      true, false, false);
 
   /** @see #isReadOnly() */
   private final boolean readOnlyFlag;
@@ -70,7 +107,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
 
   /** @see #isTransient() */
   private final boolean transientFlag;
-  
+
   /**
    * The constructor.
    * 
@@ -87,10 +124,10 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
       boolean isStatic, boolean isTransient) {
 
     super(isSystem, isFinal);
+    validate(isSystem, isFinal, isReadOnly, isStatic, isTransient);
     this.readOnlyFlag = isReadOnly;
     this.staticFlag = isStatic;
     this.transientFlag = isTransient;
-    validate();
   }
 
   /**
@@ -99,26 +136,141 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
    * @param modifiers
    *        is the modifiers object to copy.
    */
-  public FieldModifiersImpl(FieldModifiersImpl modifiers) {
+  public FieldModifiersImpl(FieldModifiers modifiers) {
 
     super(modifiers);
+    // if this really fails we have an evil attack here...
+    validate(modifiers.isSystem(), modifiers.isFinal(), modifiers.isReadOnly(), modifiers
+        .isStatic(), modifiers.isTransient());
     this.readOnlyFlag = modifiers.isReadOnly();
     this.staticFlag = modifiers.isStatic();
     this.transientFlag = modifiers.isTransient();
-    validate();
   }
 
   /**
-   * This method is called from the constructor and validates the consistence of
-   * the modifier flags.
+   * This method gets the modifiers.
    * 
-   * @throws IllegalArgumentException
+   * @param isSystem
+   *        is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal
+   *        is the value for the {@link #isFinal() final-flag}.
+   * @param isReadOnly
+   *        is the value for the {@link #isReadOnly() read-only flag}.
+   * @param isStatic
+   *        is the value for the {@link #isStatic() static-flag}.
+   * @param isTransient
+   *        is the value for the {@link #isTransient() transient-flag}.
+   * @return the requested modifiers.
+   */
+  public static FieldModifiers getInstance(boolean isSystem, boolean isFinal,
+      boolean isReadOnly, boolean isStatic, boolean isTransient) {
+
+    validate(isSystem, isFinal, isReadOnly, isStatic, isTransient);
+    if (isSystem) {
+      if (isTransient) {
+        if (isFinal) {
+          return SYSTEM_FINAL_TRANSIENT;
+        } else {
+          return SYSTEM_TRANSIENT;
+        }
+      } else {
+        if (isFinal) {
+          if (isReadOnly) {
+            if (isStatic) {
+              return SYSTEM_STATIC_FINAL_READONLY;
+            } else {
+              return SYSTEM_FINAL_READONLY;
+            }
+          } else {
+            if (isStatic) {
+              return SYSTEM_STATIC_FINAL;
+            } else {
+              return SYSTEM_FINAL;
+            }
+          }
+        } else {
+          if (isReadOnly) {
+            if (isStatic) {
+              return SYSTEM_STATIC_READONLY;
+            } else {
+              return SYSTEM_READONLY;
+            }
+          } else {
+            if (isStatic) {
+              return SYSTEM_STATIC;
+            } else {
+              return SYSTEM;
+            }
+          }
+        }
+      }
+    } else {
+      if (isTransient) {
+        if (isFinal) {
+          return FINAL_TRANSIENT;
+        } else {
+          return TRANSIENT;
+        }
+      } else {
+        if (isFinal) {
+          if (isReadOnly) {
+            if (isStatic) {
+              return STATIC_FINAL_READONLY;
+            } else {
+              return FINAL_READONLY;
+            }
+          } else {
+            if (isStatic) {
+              return STATIC_FINAL;
+            } else {
+              return FINAL;
+            }
+          }
+        } else {
+          if (isReadOnly) {
+            if (isStatic) {
+              return STATIC_READONLY;
+            } else {
+              return READ_ONLY;
+            }
+          } else {
+            if (isStatic) {
+              return STATIC;
+            } else {
+              return NORMAL;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * This method validates the consistence of the modifier flags.
+   * 
+   * @param isSystem
+   *        is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal
+   *        is the value for the {@link #isFinal() final-flag}.
+   * @param isReadOnly
+   *        is the value for the {@link #isReadOnly() read-only flag}.
+   * @param isStatic
+   *        is the value for the {@link #isStatic() static-flag}.
+   * @param isTransient
+   *        is the value for the {@link #isTransient() transient-flag}.
+   * @throws IllegalModifiersException
    *         if the flags are inconsistent.
    */
-  protected void validate() throws IllegalArgumentException {
+  protected static void validate(boolean isSystem, boolean isFinal, boolean isReadOnly,
+      boolean isStatic, boolean isTransient) throws IllegalModifiersException {
 
-    if (this.transientFlag && !this.readOnlyFlag) {
-      throw new IllegalArgumentException("Transient field must be immutable!");
+    if (isTransient) {
+      if (!isReadOnly) {
+        throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_TRANSIENT_MUTABLE);
+      }
+      if (isStatic) {
+        throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_TRANSIENT_STATIC);
+      }
     }
   }
 

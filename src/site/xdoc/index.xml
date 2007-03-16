@@ -15,7 +15,7 @@
         This project provides the following generic components that can already be used now:
         <ul>
           <li><a href="mmm-configuration/index.html">mmm-configuration</a> gives easy access to read and write configurations.</li>
-          <li><a href="mmm-search/index.html">mmm-search</a> gives easy access to read and write configurations.</li>
+          <li><a href="mmm-search/index.html">mmm-search</a> provides a full-text solution base on lucene.</li>
           <li><a href="mmm-nls/index.html">mmm-nls</a> provides techniques for native language support beyond the capatibilities build into java.</li>
           <li><a href="mmm-util/index.html">mmm-util</a> contains serveral useful utilities.</li>
         </ul>

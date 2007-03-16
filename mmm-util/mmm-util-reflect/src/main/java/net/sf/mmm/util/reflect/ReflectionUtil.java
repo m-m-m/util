@@ -27,6 +27,9 @@ public class ReflectionUtil {
   /** an empty object array */
   public static final Object[] NO_ARGUMENTS = new Object[0];
 
+  /** an empty object array */
+  public static final Type[] NO_TYPES = new Type[0];
+
   /**
    * Forbidden constructor.
    */
@@ -60,7 +63,7 @@ public class ReflectionUtil {
     return result;
 
   }
-  
+
   /**
    * This method gets the component type of the given <code>type</code>.<br>
    * For example the following types all have the component-type MyClass:
@@ -89,22 +92,22 @@ public class ReflectionUtil {
       ParameterizedType pt = (ParameterizedType) type;
       Type[] generics = pt.getActualTypeArguments();
       if (generics.length == 1) {
-        return getSimpleType(generics[0]);
+        return toClass(generics[0]);
       }
     } else if (type instanceof GenericArrayType) {
       GenericArrayType gat = (GenericArrayType) type;
-      return getSimpleType(gat.getGenericComponentType());
+      return toClass(gat.getGenericComponentType());
     }
     return null;
   }
 
   /**
-   * This method gets the simple type class for the given <code>type</code>.<br>
-   * Examples:
-   * <table>
-   * <tr border="1">
+   * This method gets the {@link Class} for the given <code>type</code>.<br>
+   * Examples: <br>
+   * <table border="1">
+   * <tr>
    * <th><code>type</code></th>
-   * <th><code>{@link #getSimpleType(Type) getSimpleType}(type)</code></th>
+   * <th><code>{@link #toClass(Type) getSimpleType}(type)</code></th>
    * </tr>
    * <tr>
    * <td><code>String</code></td>
@@ -124,37 +127,41 @@ public class ReflectionUtil {
    *        is the type to convert.
    * @return the closest class representing the given <code>type</code>.
    */
-  public static Class<?> getSimpleType(Type type) {
+  public static Class<?> toClass(Type type) {
 
     if (type instanceof Class) {
       return (Class) type;
     } else if (type instanceof ParameterizedType) {
       ParameterizedType pt = (ParameterizedType) type;
-      return getSimpleType(pt.getRawType());
+      return toClass(pt.getRawType());
     } else if (type instanceof WildcardType) {
       WildcardType wt = (WildcardType) type;
       Type[] lower = wt.getLowerBounds();
       if (lower.length == 1) {
-        return getSimpleType(lower[0]);
+        return toClass(lower[0]);
       }
       Type[] upper = wt.getUpperBounds();
       if (upper.length == 1) {
-        return getSimpleType(upper[0]);
+        return toClass(upper[0]);
       }
     } else if (type instanceof GenericArrayType) {
       GenericArrayType gat = (GenericArrayType) type;
-      Class componentType = getSimpleType(gat.getGenericComponentType());
+      Class componentType = toClass(gat.getGenericComponentType());
       // this is sort of stupid but there seems no other way...
       return Array.newInstance(componentType, 0).getClass();
     } else if (type instanceof TypeVariable) {
       TypeVariable tv = (TypeVariable) type;
       Type[] bounds = tv.getBounds();
       if (bounds.length == 1) {
-        return getSimpleType(bounds[0]);
+        return toClass(bounds[0]);
       }
     }
     return null;
   }
+
+  // public static Type toType(String type) {
+  // return Class.forName(type);
+  // }
 
   /**
    * This method gets the {@link Field#get(java.lang.Object) value} of a

@@ -25,7 +25,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
    * 
    * @param internaitionalizedMessage
    *        is a short description of the problem. It is used for
-   *        internationalization and should be in english language.
+   *        internationalization and should be in English language.
    * @param arguments
    *        are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
@@ -42,7 +42,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
    *        is the {@link #getCause() cause} of this exception.
    * @param internaitionalizedMessage
    *        is a short description of the problem. It is used for
-   *        internationalization and should be in english language.
+   *        internationalization and should be in English language.
    * @param arguments
    *        are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.

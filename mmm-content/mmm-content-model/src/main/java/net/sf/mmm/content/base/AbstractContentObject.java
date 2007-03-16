@@ -5,9 +5,10 @@ package net.sf.mmm.content.base;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.content.value.api.MutableMetaDataSet;
+import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
@@ -20,8 +21,8 @@ import net.sf.mmm.util.xml.api.XmlWriter;
 public abstract class AbstractContentObject implements ContentObject {
 
   /** @see #getId() */
-  private final Id id;
-  
+  private final IdImpl id;
+
   /** @see #getName() */
   private String name;
 
@@ -36,9 +37,10 @@ public abstract class AbstractContentObject implements ContentObject {
    * @param objectName
    *        is the {@link #getName() name} of the object to create.
    */
-  public AbstractContentObject(Id objectId, String objectName) {
+  public AbstractContentObject(IdImpl objectId, String objectName) {
 
     super();
+    assert (objectId != null);
     this.name = objectName;
     this.deletedFlag = false;
     this.id = objectId;
@@ -47,7 +49,7 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * @see net.sf.mmm.content.api.ContentObject#getId()
    */
-  public Id getId() {
+  public IdImpl getId() {
 
     return this.id;
   }
@@ -105,33 +107,80 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getMetaData()
+   * @see net.sf.mmm.content.api.ContentObject#getFieldValue(java.lang.String)
    */
-  public MutableMetaDataSet getMetaData() throws PermissionDeniedException {
-  
+  public final Object getFieldValue(String fieldName) throws FieldNotExistsException,
+      PermissionDeniedException, ContentException {
+
+    ContentField field = getContentClass().getField(fieldName);
+    if (field == null) {
+      throw new FieldNotExistsException(fieldName, getContentClass());
+    }
+    return getFieldValue(field, fieldName);
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @param field
+   * @param fieldName
+   *        TODO
+   * @return
+   * @throws PermissionDeniedException
+   * @throws ContentException
+   */
+  protected Object getFieldValue(ContentField field, String fieldName)
+      throws PermissionDeniedException, ContentException {
+
+    if (fieldName.equals(FIELD_NAME_ID)) {
+      return getId();
+    } else if (fieldName.equals(FIELD_NAME_CONTENT_CLASS)) {
+      return getContentClass();
+    } else if (fieldName.equals(FIELD_NAME_NAME)) {
+      return getName();
+    }
     return null;
   }
-  
+
   /**
    * @see net.sf.mmm.content.api.ContentObject#setFieldValue(java.lang.String,
    *      java.lang.Object)
    */
-  public void setFieldValue(String fieldName, Object value) throws NoSuchFieldException,
+  public final void setFieldValue(String fieldName, Object value) throws FieldNotExistsException,
       PermissionDeniedException, ContentException {
 
-  // TODO Auto-generated method stub
-
+    ContentField field = getContentClass().getField(fieldName);
+    if (field == null) {
+      throw new FieldNotExistsException(fieldName, getContentClass());
+    }
+    if (field.getModifiers().isReadOnly()) {
+      // TODO: create exception type
+      // throw new FieldNotEditableException(fieldName, getContentClass());
+      throw new PermissionDeniedException("", "write " + field, "");
+    }
+    try {
+      setFieldValue(field, fieldName, value);
+    } catch (ClassCastException e) {
+      if ((value != null) && field.getFieldClass().isAssignableFrom(value.getClass())) {
+        // TODO: create exception type
+        //throw new FieldTypeNotCompatibleException(e, field, value.getClass(), field.getFieldType());
+        throw new IllegalStateException("Field type NOT compatible!");
+      }
+      throw new IllegalStateException("Internal Error");
+    }
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getFieldValue(java.lang.String)
+   * TODO: javadoc
+   * 
+   * @param field
+   * @param fieldName
+   * @param value
+   * @throws PermissionDeniedException
+   * @throws ContentException
    */
-  public Object getFieldValue(String fieldName) throws NoSuchFieldException,
-      PermissionDeniedException, ContentException {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
+  protected abstract void setFieldValue(ContentField field, String fieldName, Object value)
+      throws PermissionDeniedException, ContentException;
 
   /**
    * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(net.sf.mmm.util.xml.api.XmlWriter)
@@ -148,8 +197,12 @@ public abstract class AbstractContentObject implements ContentObject {
   @Override
   public String toString() {
 
-    // TODO Auto-generated method stub
-    return super.toString();
+    StringBuffer buffer = new StringBuffer();
+    buffer.append(getContentClass().getName());
+    buffer.append(" [");
+    buffer.append(this.id);
+    buffer.append(']');
+    return buffer.toString();
   }
 
   /**
@@ -174,7 +227,7 @@ public abstract class AbstractContentObject implements ContentObject {
       // this is actually a bug
       return super.hashCode();
     } else {
-      return ~this.id.hashCode();      
+      return ~this.id.hashCode();
     }
   }
 

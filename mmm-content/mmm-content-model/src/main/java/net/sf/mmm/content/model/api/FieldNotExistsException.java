@@ -13,7 +13,7 @@ import net.sf.mmm.content.NlsBundleContentModel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NoSuchFieldException extends ContentModelException {
+public class FieldNotExistsException extends ContentModelException {
 
   /** UID for serialization */
   private static final long serialVersionUID = 8593724225377132253L;
@@ -28,7 +28,7 @@ public class NoSuchFieldException extends ContentModelException {
    *        is the {@link ContentClass content-class} where the missing field
    *        was expected.
    */
-  public NoSuchFieldException(String fieldName, ContentClass declaringClass) {
+  public FieldNotExistsException(String fieldName, ContentClass declaringClass) {
 
     super(NlsBundleContentModel.ERR_NO_SUCH_FIELD, fieldName, declaringClass);
   }

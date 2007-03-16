@@ -12,7 +12,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelService;
-import net.sf.mmm.content.model.api.NoSuchClassException;
+import net.sf.mmm.content.model.api.ClassNotExistsException;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.event.EventListener;
@@ -63,7 +63,7 @@ public abstract class AbstractContentModelService extends
 
     AbstractContentClass contentClass = this.name2class.get(name);
     if (contentClass == null) {
-      throw new NoSuchClassException(name);
+      throw new ClassNotExistsException(name);
     }
     return contentClass;
   }
@@ -75,7 +75,7 @@ public abstract class AbstractContentModelService extends
 
     AbstractContentClass contentClass = this.id2class.get(id);
     if (contentClass == null) {
-      throw new NoSuchClassException(id);
+      throw new ClassNotExistsException(id);
     }
     return contentClass;
   }

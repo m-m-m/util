@@ -89,7 +89,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
    */
   public void initialize() {
 
-    Iterator<ContentField> fieldIterator = this.cClass.getDeclatedFields();
+    Iterator<? extends ContentField> fieldIterator = this.cClass.getDeclatedFields();
     while (fieldIterator.hasNext()) {
       this.fields.add(fieldIterator.next());
     }
@@ -151,7 +151,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
       case COLUMN_CLASS:
         return field.getInitiallyDefiningClass();
       case COLUMN_TYPE:
-        return field.getFieldType().getSimpleName();
+        return field.getFieldClass().getSimpleName();
       case COLUMN_DELETED:
         return Boolean.valueOf(field.isDeleted());
         // return Boolean.valueOf(field.isDeletedFlagSet());

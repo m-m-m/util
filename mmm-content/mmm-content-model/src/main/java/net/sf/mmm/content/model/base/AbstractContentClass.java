@@ -17,7 +17,7 @@ import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.impl.IdImpl;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}
@@ -37,10 +37,10 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   private final List<AbstractContentClass> subClassesView;
 
   /** the map of content fields by name */
-  private final Map<String, ContentField> fields;
+  private final Map<String, AbstractContentField> fields;
 
   /** @see #getDeclatedFields() */
-  private final Collection<ContentField> fieldCollection;
+  private final Collection<AbstractContentField> fieldCollection;
 
   /** @see #getModifiers() */
   private final ClassModifiers modifiers;
@@ -58,16 +58,23 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * @param classModifiers
    *        are the {@link #getModifiers() modifiers}.
    */
-  public AbstractContentClass(Id classId, String className, ContentClass parentClass,
+  public AbstractContentClass(IdImpl classId, String className, ContentClass parentClass,
       ClassModifiers classModifiers) {
 
     super(classId, className);
+    assert (classId.getObjectId() == IdImpl.OID_CLASS);
     this.superClass = parentClass;
     this.modifiers = classModifiers;
     this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
-    this.fields = new HashMap<String, ContentField>();
+    this.fields = new HashMap<String, AbstractContentField>();
     this.fieldCollection = Collections.unmodifiableCollection(this.fields.values());
+    if (this.superClass != null) {
+      if (!this.superClass.getModifiers().isExtendable() && !classModifiers.isSystem()) {
+        // TODO: NLS
+        throw new ContentModelRuntimeException("Can NOT extend un-extendable class!");
+      }
+    }
   }
 
   /**
@@ -81,7 +88,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * @see net.sf.mmm.content.model.api.ContentClass#getDeclatedFields()
    */
-  public Iterator<ContentField> getDeclatedFields() {
+  public Iterator<AbstractContentField> getDeclatedFields() {
 
     return this.fieldCollection.iterator();
   }
@@ -89,7 +96,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * @see net.sf.mmm.content.model.api.ContentClass#getDeclaredField(java.lang.String)
    */
-  public ContentField getDeclaredField(String name) {
+  public AbstractContentField getDeclaredField(String name) {
 
     return this.fields.get(name);
   }
@@ -112,7 +119,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   public int getFieldCount() {
 
     int result = 0;
-    Iterator<ContentField> declaredFields = this.fields.values().iterator();
+    Iterator<AbstractContentField> declaredFields = this.fields.values().iterator();
     while (declaredFields.hasNext()) {
       ContentField myField = declaredFields.next();
       if (myField.getSuperField() == null) {
@@ -217,14 +224,43 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getFieldValue(java.lang.String)
+   * @see net.sf.mmm.content.base.AbstractContentObject#getFieldValue(net.sf.mmm.content.model.api.ContentField,
+   *      java.lang.String)
    */
   @Override
-  public Object getFieldValue(String fieldName) throws NoSuchFieldException,
-      PermissionDeniedException, ContentException {
+  protected Object getFieldValue(ContentField field, String fieldName)
+      throws PermissionDeniedException, ContentException {
 
-    // TODO Auto-generated method stub
-    return null;
+    if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
+      return getModifiers();
+    } else if (fieldName.equals(FIELD_NAME_SUPER_CLASS)) {
+      return getSuperClass();
+    } else if (fieldName.equals(FIELD_NAME_SUB_CLASSES)) {
+      return getSubClasses();
+    } else if (fieldName.equals(FIELD_NAME_FIELDS)) {
+      return getFields();
+    } else if (fieldName.equals(FIELD_NAME_FIELD_COUNT)) {
+      return Integer.valueOf(getFieldCount());
+    } else if (fieldName.equals(FIELD_NAME_DECLARED_FIELDS)) {
+      return getDeclatedFields();
+    } else if (fieldName.equals(FIELD_NAME_DECLARED_FIELD_COUNT)) {
+      return Integer.valueOf(getDeclaredFieldCount());
+    } else {
+      return super.getFieldValue(field, fieldName);
+    }
+  }
+
+  /**
+   * @see net.sf.mmm.content.base.AbstractContentObject#setFieldValue(net.sf.mmm.content.model.api.ContentField,
+   *      String, java.lang.Object)
+   */
+  @Override
+  protected void setFieldValue(ContentField field, String fieldName, Object value)
+      throws PermissionDeniedException, ContentException {
+
+    if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
+      // this.modifiers = (ClassModifiers) value;
+    }
   }
 
   /**
@@ -238,7 +274,16 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   public void addSubClass(AbstractContentClass subClass) throws ContentModelRuntimeException {
 
     if (subClass.getSuperClass() != this) {
+      // TODO: NLS
       throw new ContentModelRuntimeException("Internal error!");
+    }
+    if (subClass.getModifiers().isSystem() && !getModifiers().isSystem()) {
+      // TODO: NLS
+      throw new ContentModelRuntimeException("System-class can NOT extend user-class!");
+    }
+    if (!getModifiers().isExtendable() && !subClass.getModifiers().isSystem()) {
+      // TODO: NLS
+      throw new ContentModelRuntimeException("Can NOT extend un-extendable class!");
     }
     assert (!this.subClasses.contains(subClass));
     this.subClasses.add(subClass);
@@ -252,7 +297,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * @throws ContentModelRuntimeException
    *         if the field could NOT be added.
    */
-  public void addField(ContentField field) throws ContentModelRuntimeException {
+  public void addField(AbstractContentField field) throws ContentModelRuntimeException {
 
     if (field.getDeclaringClass() != this) {
       throw new ContentModelRuntimeException("Internal error!");

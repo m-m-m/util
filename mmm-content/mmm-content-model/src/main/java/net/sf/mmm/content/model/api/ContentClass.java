@@ -10,8 +10,8 @@ import java.util.List;
  * This is the interface of a content-class. It reflects the structure of the
  * {@link net.sf.mmm.content.api.ContentObject content-object} types in an
  * object-oriented way. <br>
- * A content-class is the analogy to a {@link java.lang.Class} that
- * reflects a {@link java.lang.Object}. <br>
+ * A content-class is the analogy to a {@link java.lang.Class} that reflects a
+ * {@link java.lang.Object}. <br>
  * A content-class may be used to render a generic UI editor, synchronize the
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 
@@ -21,6 +21,48 @@ public interface ContentClass extends ContentReflectionObject {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "Class";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getSuperClass() superClass} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_SUPER_CLASS = "superClass";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getSubClasses() subClasses} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_SUB_CLASSES = "subClasses";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getFields() fields} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_FIELDS = "fields";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getFieldCount() fieldCount} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_FIELD_COUNT = "fieldCount";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getDeclatedFields() declaredFields} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_DECLARED_FIELDS = "declaredFields";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getDeclatedFields() declaredFieldCount} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_DECLARED_FIELD_COUNT = "declaredFieldCount";
 
   /**
    * This method gets the number of fields declared by this class.
@@ -42,7 +84,7 @@ public interface ContentClass extends ContentReflectionObject {
    * 
    * @return an (read-only) iterator of all declared fields.
    */
-  Iterator<ContentField> getDeclatedFields();
+  Iterator<? extends ContentField> getDeclatedFields();
 
   /**
    * This method gets the declared field with the given
@@ -67,8 +109,8 @@ public interface ContentClass extends ContentReflectionObject {
   /**
    * This method gets the field with the given
    * {@link ContentField#getName() name}. A field is either
-   * {@link #getDeclaredFieldCount() declared} in this class or inherited
-   * from a {@link #getSuperClass() super-class}.
+   * {@link #getDeclaredFieldCount() declared} in this class or inherited from a
+   * {@link #getSuperClass() super-class}.
    * 
    * @param name
    *        is the name of the requested field of this class.
@@ -92,7 +134,7 @@ public interface ContentClass extends ContentReflectionObject {
    * 
    * @return an (read-only) iterator of fields of this class.
    */
-  Iterator<ContentField> getFields();
+  Iterator<? extends ContentField> getFields();
 
   /**
    * This method gets the super-class of this class.

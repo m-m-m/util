@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
@@ -31,11 +32,11 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * the
    * {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
    * for a {@link #isSystem() system}
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
-   * NOT {@link #isExtendable() extendable}.
+   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is NOT
+   * {@link #isExtendable() extendable}.
    */
-  public static final ClassModifiersImpl SYSTEM_UNEXTENDABLE = new ClassModifiersImpl(true, false, false,
-      false);
+  public static final ClassModifiersImpl SYSTEM_UNEXTENDABLE = new ClassModifiersImpl(true, false,
+      false, false);
 
   /**
    * the
@@ -44,7 +45,8 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * {@link #isFinal() final}.
    */
-  public static final ClassModifiersImpl SYSTEM_FINAL = new ClassModifiersImpl(true, true, false, false);
+  public static final ClassModifiersImpl SYSTEM_FINAL = new ClassModifiersImpl(true, true, false,
+      false);
 
   /**
    * the
@@ -53,7 +55,8 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * {@link #isAbstract() abstract}.
    */
-  public static final ClassModifiersImpl SYSTEM_ABSTRACT = new ClassModifiersImpl(true, false, true, true);
+  public static final ClassModifiersImpl SYSTEM_ABSTRACT = new ClassModifiersImpl(true, false,
+      true, true);
 
   /**
    * the
@@ -62,8 +65,8 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} that is
    * {@link #isAbstract() abstract} and NOT {@link #isExtendable() extendable}.
    */
-  public static final ClassModifiersImpl SYSTEM_ABSTRACT_UNEXTENDABLE = new ClassModifiersImpl(true,
-      false, true, false);
+  public static final ClassModifiersImpl SYSTEM_ABSTRACT_UNEXTENDABLE = new ClassModifiersImpl(
+      true, false, true, false);
 
   /**
    * the
@@ -105,12 +108,13 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * @param isExtendable
    *        is the {@link #isExtendable() extendable-flag}.
    */
-  public ClassModifiersImpl(boolean isSystem, boolean isFinal, boolean isAbstract, boolean isExtendable) {
+  public ClassModifiersImpl(boolean isSystem, boolean isFinal, boolean isAbstract,
+      boolean isExtendable) {
 
     super(isSystem, isFinal);
+    validate(isSystem, isFinal, isAbstract, isExtendable);
     this.abstractFlag = isAbstract;
     this.extendableFlag = isExtendable;
-    validate();
   }
 
   /**
@@ -122,29 +126,82 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   public ClassModifiersImpl(ClassModifiersImpl modifiers) {
 
     super(modifiers);
+    // if this really fails we have an evil attack here...
+    validate(modifiers.isSystem(), modifiers.isFinal(), modifiers.isAbstract(), modifiers
+        .isExtendable());
     this.abstractFlag = modifiers.isAbstract();
     this.extendableFlag = modifiers.isExtendable();
-    validate();
   }
 
   /**
-   * This method is called from the constructor and validates the consistence of
-   * the modifier flags.
+   * This method gets the modifiers.
    * 
-   * @throws IllegalArgumentException
-   *         if the flags are inconsistent.
+   * @param isSystem
+   *        is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal
+   *        is the value for the {@link #isFinal() final-flag}.
+   * @param isAbstract
+   *        is the {@link #isAbstract() abstract-flag}.
+   * @param isExtendable
+   *        is the {@link #isExtendable() extendable-flag}.
+   * @return the requested modifiers.
    */
-  protected void validate() throws IllegalArgumentException {
+  public static ClassModifiers getInstance(boolean isSystem, boolean isFinal, boolean isAbstract,
+      boolean isExtendable) {
 
-    if (isFinal() == this.extendableFlag) {
-      if (!isSystem() || isFinal()) {
-        // TODO:
-        throw new IllegalArgumentException("extendable flag illegal!");
+    validate(isSystem, isFinal, isAbstract, isExtendable);
+    if (isSystem) {
+      if (isAbstract) {
+        if (isExtendable) {
+          return SYSTEM_ABSTRACT;
+        } else {
+          return SYSTEM_ABSTRACT_UNEXTENDABLE;
+        }
+      } else {
+        if (isFinal) {
+          return SYSTEM_FINAL;
+        } else if (isExtendable) {
+          return SYSTEM;
+        } else {
+          return SYSTEM_UNEXTENDABLE;
+        }
+      }
+    } else {
+      if (isAbstract) {
+        return ABSTRACT;
+      } else if (isFinal) {
+        return FINAL;
+      } else {
+        return NORMAL;
       }
     }
-    if (isAbstract() && isFinal()) {
-      // TODO:
-      throw new IllegalArgumentException("abstract + final = illegal!");
+  }
+
+  /**
+   * This method validates the consistence of the modifier flags.
+   * 
+   * @param isSystem
+   *        is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal
+   *        is the value for the {@link #isFinal() final-flag}.
+   * @param isAbstract
+   *        is the {@link #isAbstract() abstract-flag}.
+   * @param isExtendable
+   *        is the {@link #isExtendable() extendable-flag}.
+   * @throws IllegalModifiersException
+   *         if the flags are inconsistent.
+   */
+  protected static void validate(boolean isSystem, boolean isFinal, boolean isAbstract,
+      boolean isExtendable) throws IllegalModifiersException {
+
+    if (isFinal && isExtendable) {
+      throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_FINAL_EXTENDABLE);      
+    }
+    if (!isExtendable && !isFinal && !isSystem) {
+      throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_USER_UNEXTENDABLE);            
+    }
+    if (isAbstract && isFinal) {
+      throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_ABSTRACT_FINAL);
     }
   }
 
@@ -193,45 +250,4 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     xmlWriter.writeEndElement(XML_TAG_ROOT);
   }
 
-  /**
-   * This method gets the modifiers.
-   * 
-   * @param isSystem
-   *        is the value for the {@link #isSystem() system-flag}.
-   * @param isFinal
-   *        is the value for the {@link #isFinal() final-flag}.
-   * @param isAbstract
-   *        is the {@link #isAbstract() abstract-flag}.
-   * @param isExtendable
-   *        is the {@link #isExtendable() extendable-flag}.
-   * @return the requested modifiers.
-   */
-  public static ClassModifiers getInstance(boolean isSystem, boolean isFinal, boolean isAbstract, boolean isExtendable) {
-    if (isSystem) {
-      if (isAbstract) {
-        if (isExtendable) {
-          return SYSTEM_ABSTRACT;          
-        } else {
-          return SYSTEM_ABSTRACT_UNEXTENDABLE;                    
-        }
-      } else {
-        if (isFinal) {
-          return SYSTEM_FINAL;
-        } else if (isExtendable) {
-          return SYSTEM;
-        } else {
-          return SYSTEM_UNEXTENDABLE;
-        }
-      }
-    } else {
-      if (isAbstract) {
-        return ABSTRACT;
-      } else if (isFinal) {
-        return FINAL;
-      } else {
-        return NORMAL;
-      }
-    } 
-  }
-  
 }

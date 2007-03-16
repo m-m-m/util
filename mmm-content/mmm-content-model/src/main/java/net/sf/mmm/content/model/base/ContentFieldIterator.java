@@ -19,7 +19,7 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
   private ContentClass currentClass;
 
   /** the current own field enumeration */
-  private Iterator<ContentField> currentIt;
+  private Iterator<? extends ContentField> currentIt;
 
   /**
    * The constructor.

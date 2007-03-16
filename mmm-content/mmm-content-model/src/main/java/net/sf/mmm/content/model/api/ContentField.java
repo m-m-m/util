@@ -3,11 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
+import java.lang.reflect.Type;
+
 import net.sf.mmm.content.validator.api.ValueValidator;
 
 /**
- * This interface declares the api of a content field. Such object describes the
- * structure of a field of a {@link net.sf.mmm.content.model.api.ContentClass}.
+ * This interface declares the api of a field in the content-model. Such object
+ * describes the structure of a field of a
+ * {@link net.sf.mmm.content.model.api.ContentClass}.<br>
+ * <b>ATTENTION:</b><br>
+ * Do NOT get confused in comparison with {@link java.lang.reflect.Field fields}
+ * in the java language specification. Better think of a {@link ContentField}
+ * as something like a java {@link java.lang.reflect.Method method}.
+ * 
+ * @see FieldModifiers
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -18,11 +27,37 @@ public interface ContentField extends ContentReflectionObject {
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getFieldType() type} for generic access via
+   * {@link #getFieldType() fieldType} for generic access via
    * {@link #getFieldValue(String)}.
    */
-  String FIELD_NAME_TYPE = "type";
+  String FIELD_NAME_FIELD_TYPE = "fieldType";
 
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getFieldClass() fieldClass} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_FIELD_CLASS = "fieldClass";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getDeclaringClass() declaringClass} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_DECLARING_CLASS = "declaringClass";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getInitiallyDefiningClass() initiallyDefiningClass} for generic
+   * access via {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
+
+  /**
+   * the attribute for the {@link #getFieldType() type}.
+   */
+  String XML_ATR_ROOT_TYPE = "type";
+  
   /**
    * This method gets the content-class that declares this field. This does NOT
    * mean that the field is
@@ -31,7 +66,7 @@ public interface ContentField extends ContentReflectionObject {
    * {@link ContentClass#getSuperClass() super-class} but overrides it (if
    * supported by the {@link ContentModelService content-model}) in order to
    * declare it more specific meaning that the type of the field is a subtype of
-   * the field that is overriden or the validator is more restrictive.<br>
+   * the field that is overridden or the validator is more restrictive.<br>
    * 
    * @return the class that declares this field.
    */
@@ -63,7 +98,14 @@ public interface ContentField extends ContentReflectionObject {
    * 
    * @return the type of this field.
    */
-  Class<?> getFieldType();
+  Type getFieldType();
+
+  /**
+   * This method gets the {@link #getFieldType() field-type} as {@link Class}.
+   * 
+   * @return the type of this field.
+   */
+  Class<?> getFieldClass();
 
   /**
    * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()

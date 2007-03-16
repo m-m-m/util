@@ -4,9 +4,9 @@
 package net.sf.mmm.content.api;
 
 import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.content.value.api.MutableMetaDataSet;
 import net.sf.mmm.util.xml.api.XmlSerializable;
 
 /**
@@ -14,8 +14,8 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  * {@link net.sf.mmm.content.model.api.ContentReflectionObject reflection-object}
  * (class or field), or a resource (file, folder, user, group, etc.).
  * 
- * TODO: add generic methods "ContentObject getParent()", "String getPath()" 
- *       "Collection<ContentObject> getChildren()" instead of content-folder?
+ * TODO: add generic methods "ContentObject getParent()", "String getPath()"
+ * "Collection<ContentObject> getChildren()" instead of content-folder?<br>
  * TODO: create external XmlSerializer instead of extend XmlSerializable here?
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -27,8 +27,9 @@ public interface ContentObject extends XmlSerializable {
 
   /**
    * the variable-name of the current object in the
-   * {@link net.sf.mmm.context.api.Context context} for
-   * link net.sf.mmm.content.model.api.ContentField#calculate(ContentObject) calculation.
+   * {@link net.sf.mmm.context.api.Context context} for link
+   * net.sf.mmm.content.model.api.ContentField#calculate(ContentObject)
+   * calculation.
    */
   String ENV_VARIABLE_THIS = "this";
 
@@ -62,17 +63,10 @@ public interface ContentObject extends XmlSerializable {
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getContentClass() class} for generic access via
+   * {@link #getContentClass() contentClass} for generic access via
    * {@link #getFieldValue(String)}.
    */
-  String FIELD_NAME_CLASS = "contentClass";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getMetaData() metadata} for generic access via
-   * {@link #getFieldValue(String)}.
-   */
-  String FIELD_NAME_METADATA = "metadata";
+  String FIELD_NAME_CONTENT_CLASS = "contentClass";
 
   /**
    * This method gets the unique identifier of this content-object.
@@ -101,16 +95,6 @@ public interface ContentObject extends XmlSerializable {
   ContentClass getContentClass();
 
   /**
-   * This method gets the meta-data of this object.
-   * 
-   * @return the meta-data.
-   * @throws PermissionDeniedException
-   *         if you (the current user) does not have permission to perform the
-   *         operation.
-   */
-  MutableMetaDataSet getMetaData() throws PermissionDeniedException;
-  
-  /**
    * This method determines if this content-object is marked as deleted. <br>
    * A deleted class or field can NOT be modified. No instances or sub-classes
    * can be created of a deleted class. Deleted fields are NOT visible in the
@@ -125,20 +109,20 @@ public interface ContentObject extends XmlSerializable {
 
   /**
    * This method gets the value of the specified
-   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the
-   * generic getter for all fields of this object. <br>
+   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic
+   * getter for all fields of this object. <br>
    * E.g. <code>getFieldValue("id")</code> will produce the same result as
-   * {@link ContentObject#getId()}. Additionally all fields that are defined
-   * in sub-types are accessible.
+   * {@link ContentObject#getId()}. Additionally all fields that are defined in
+   * sub-types are accessible.
    * 
    * @param fieldName
    *        is the {@link ContentObject#getName() name} of the
    *        {@link net.sf.mmm.content.model.api.ContentField field} to get.
    * @return the value of the specified field or <code>null</code> if not set.
-   * @throws NoSuchFieldException
+   * @throws FieldNotExistsException
    *         if the objects {@link #getContentClass() content-class} does not
-   *         have a {@link net.sf.mmm.content.model.api.ContentField field}
-   *         with the given {@link ContentObject#getName() name}.
+   *         have a {@link net.sf.mmm.content.model.api.ContentField field} with
+   *         the given {@link ContentObject#getName() name}.
    * @throws PermissionDeniedException
    *         if you (the current user) does not have permission to perform the
    *         operation.
@@ -147,13 +131,13 @@ public interface ContentObject extends XmlSerializable {
    *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
    *         but an error occurred calculating its value.
    */
-  Object getFieldValue(String fieldName) throws NoSuchFieldException, PermissionDeniedException,
+  Object getFieldValue(String fieldName) throws FieldNotExistsException, PermissionDeniedException,
       ContentException;
 
   /**
    * This method sets the value of the specified
-   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the
-   * generic setter for all fields of this resource. The field must NOT be
+   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic
+   * setter for all fields of this resource. The field must NOT be
    * {@link net.sf.mmm.content.model.api.FieldModifiers#isReadOnly() read-only}.
    * A {@link net.sf.mmm.content.model.api.FieldModifiers#isStatic() static}
    * field can only be set on a {@link ContentClass content-class}. Other
@@ -163,26 +147,25 @@ public interface ContentObject extends XmlSerializable {
    * 
    * @param fieldName
    *        is the {@link ContentObject#getName() name} of the
-   *        {@link net.sf.mmm.content.model.api.ContentField field} to set.
-   *        The field must be defined in the object's
+   *        {@link net.sf.mmm.content.model.api.ContentField field} to set. The
+   *        field must be defined in the object's
    *        {@link #getContentClass() content-class}.
    * @param value
    *        is the new value for the field. It must be an instance of the
    *        {@link net.sf.mmm.content.model.api.ContentField#getFieldType() type}
    *        declared by the
    *        {@link net.sf.mmm.content.model.api.ContentField field}.
-   * @throws NoSuchFieldException
+   * @throws FieldNotExistsException
    *         if the objects {@link #getContentClass() content-class} does not
-   *         have a {@link net.sf.mmm.content.model.api.ContentField field}
-   *         with the given {@link ContentObject#getName() name}.
+   *         have a {@link net.sf.mmm.content.model.api.ContentField field} with
+   *         the given {@link ContentObject#getName() name}.
    * @throws PermissionDeniedException
    *         if you (the current user) does not have permission to perform the
    *         operation.
    * @throws ContentException
-   *         TODO: if the field does not exist for this resource or has an
-   *         incompatible type for the given value.
+   *         TODO: if the field has an incompatible type for the given value.
    */
-  void setFieldValue(String fieldName, Object value) throws NoSuchFieldException,
+  void setFieldValue(String fieldName, Object value) throws FieldNotExistsException,
       PermissionDeniedException, ContentException;
 
   /**
@@ -194,8 +177,6 @@ public interface ContentObject extends XmlSerializable {
    *         specified action of this object.
    */
   // boolean checkPermission(ContentActionIF action);
-   
-
   /**
    * This method validates the given object. This is done by
    * {@link net.sf.mmm.content.api.model.ContentFieldIF#validate(Object) validating}

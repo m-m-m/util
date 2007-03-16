@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
+import java.lang.reflect.Type;
+
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.base.AbstractContentObject;
@@ -17,11 +20,8 @@ import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.AbstractContentField;
-import net.sf.mmm.content.model.base.AbstractContentModelService;
 import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
-import net.sf.mmm.content.validator.api.ValueValidator;
-import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.event.ChangeEvent;
 
@@ -31,82 +31,92 @@ import net.sf.mmm.util.event.ChangeEvent;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractMutableContentModelService extends AbstractContentModelService implements
-    MutableContentModelService {
+public abstract class AbstractMutableContentModelService extends AbstractBaseContentModelService
+    implements MutableContentModelService {
 
-  /** @see #getRootClass() */
-  private final ContentClassImpl rootClass;
+  /** descendant name of attribute <code>id</code> */
+  private static final String CFG_ATR_ID = Configuration.NAME_PREFIX_ATTRIBUTE
+      + ContentObject.XML_ATR_ROOT_ID;
 
-  /** @see ContentClass#getClass() */
-  private final ContentClassImpl classClass;
+  /** descendant name of attribute <code>name</code> */
+  private static final String CFG_ATR_NAME = Configuration.NAME_PREFIX_ATTRIBUTE
+      + ContentObject.XML_ATR_ROOT_NAME;
 
-  /** @see ContentField#getClass() */
-  private final ContentClassImpl fieldClass;
+  /** descendant name of attribute <code>system</code> */
+  private static final String CFG_ATR_SYSTEM = Configuration.NAME_PREFIX_ATTRIBUTE
+      + Modifiers.XML_ATR_ROOT_SYSTEM;
 
+  /** descendant name of attribute <code>final</code> */
+  private static final String CFG_ATR_FINAL = Configuration.NAME_PREFIX_ATTRIBUTE
+      + Modifiers.XML_ATR_ROOT_FINAL;
+
+  /** descendant name of attribute <code>abstract</code> */
+  private static final String CFG_ATR_ABSTRACT = Configuration.NAME_PREFIX_ATTRIBUTE
+      + ClassModifiers.XML_ATR_ROOT_ABSTRACT;
+
+  /** descendant name of attribute <code>extendable</code> */
+  private static final String CFG_ATR_EXTENDABLE = Configuration.NAME_PREFIX_ATTRIBUTE
+      + ClassModifiers.XML_ATR_ROOT_EXTENDABLE;
+
+  /** descendant name of attribute <code>read-only</code> */
+  private static final String CFG_ATR_READ_ONLY = Configuration.NAME_PREFIX_ATTRIBUTE
+      + FieldModifiers.XML_ATR_ROOT_READ_ONLY;
+
+  /** descendant name of attribute <code>static</code> */
+  private static final String CFG_ATR_STATIC = Configuration.NAME_PREFIX_ATTRIBUTE
+      + FieldModifiers.XML_ATR_ROOT_STATIC;
+
+  /** descendant name of attribute <code>transient</code> */
+  private static final String CFG_ATR_TRANSIENT = Configuration.NAME_PREFIX_ATTRIBUTE
+      + FieldModifiers.XML_ATR_ROOT_TRANSIENT;
+
+  /** descendant name of attribute <code>transient</code> */
+  private static final String CFG_ATR_TYPE = Configuration.NAME_PREFIX_ATTRIBUTE
+      + ContentField.XML_ATR_ROOT_TYPE;
+
+  /** @see #isEditable() */
+  private boolean editable;
+  
   /**
    * The constructor.
    */
   public AbstractMutableContentModelService() {
 
     super();
-    // create root class
-    this.rootClass = new ContentClassImpl(IdImpl.ID_CLASS_ROOT, ContentObject.CLASS_NAME, null,
-        ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE);
-    addClass(this.rootClass);
-    // add fields
-    this.rootClass.addField(0, ContentObject.FIELD_NAME_ID, Id.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
-    // name can only be modified via repository.rename
-    this.rootClass.addField(1, ContentObject.FIELD_NAME_NAME, String.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
-    this.rootClass.addField(2, ContentObject.FIELD_NAME_CLASS, ContentClass.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
-
-    // create reflection-object class
-    ContentClassImpl classReflection = new ContentClassImpl(IdImpl.ID_CLASS_REFELCTION,
-        ContentReflectionObject.CLASS_NAME, this.rootClass,
-        ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE);
-    // add fields
-    classReflection.addField(3, ContentReflectionObject.FIELD_NAME_MODIFIERS, Modifiers.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
-    this.rootClass.addSubClass(classReflection);
-
-    // create class class
-    this.classClass = new ContentClassImpl(IdImpl.ID_CLASS_CLASS, ContentClass.CLASS_NAME,
-        classReflection, ClassModifiersImpl.SYSTEM_FINAL);
-    // add fields
-    this.classClass.addField(4, ContentReflectionObject.FIELD_NAME_MODIFIERS, ClassModifiers.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
-    classReflection.addSubClass(this.classClass);
-
-    // create field class
-    this.fieldClass = new ContentClassImpl(IdImpl.ID_CLASS_FIELD, ContentField.CLASS_NAME,
-        classReflection, ClassModifiersImpl.SYSTEM_FINAL);
-    // add fields
-    this.fieldClass.addField(5, ContentReflectionObject.FIELD_NAME_MODIFIERS, FieldModifiers.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
-    classReflection.addSubClass(this.fieldClass);
-
+    this.editable = true;
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getRootClass()
+   * @see net.sf.mmm.content.model.api.MutableContentModelService#isEditable()
    */
-  public ContentClass getRootClass() {
-
-    return this.rootClass;
+  public boolean isEditable() {
+  
+    return this.editable;
   }
+  
+  /**
+   * This method sets the {@link #isEditable() editable-flag} of this service.
+   * 
+   * @param isEditable the editable to set
+   */
+  public void setEditable(boolean isEditable) {
 
+    this.editable = isEditable;
+  }
+  
   /**
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createClass(net.sf.mmm.content.model.api.ContentClass,
    *      java.lang.String, net.sf.mmm.content.model.api.ClassModifiers)
    */
-  public AbstractContentClass createClass(ContentClass superClass, String name, ClassModifiers modifiers)
-      throws ContentModelException {
+  public AbstractContentClass createClass(ContentClass superClass, String name,
+      ClassModifiers modifiers) throws ContentModelException {
 
-    if ((!superClass.getModifiers().isExtendable()) && (!modifiers.isSystem())) {
-      throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_NOT_EXTENDABLE, superClass);
+    if (modifiers.isSystem()) {
+      throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_SYSTEM, superClass);      
     }
+    if (!superClass.getModifiers().isExtendable()) {
+      throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_NOT_EXTENDABLE, superClass);
+    }    
     AbstractContentClass newClass = doCreateClass(superClass, name, modifiers);
     ((AbstractContentClass) superClass).addSubClass(newClass);
     addClass(newClass);
@@ -115,10 +125,24 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     return newClass;
   }
 
-  protected abstract Id createClassId();
-  
-  protected abstract Id createFieldId();
-  
+  /**
+   * This method creates a new ID for a custom {@link ContentClass}.
+   * 
+   * @see IdImpl#MINIMUM_CUSTOM_CLASS_ID
+   * 
+   * @return the created ID.
+   */
+  protected abstract IdImpl createClassId();
+
+  /**
+   * This method creates a new ID for a custom {@link ContentField}.
+   * 
+   * @see IdImpl#MINIMUM_CUSTOM_FIELD_ID
+   * 
+   * @return the created ID.
+   */
+  protected abstract IdImpl createFieldId();
+
   /**
    * Creates and persists the class.
    * 
@@ -128,7 +152,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
   protected AbstractContentClass doCreateClass(ContentClass superClass, String name,
       ClassModifiers modifiers) throws ContentModelException {
 
-    Id id = createClassId();
+    IdImpl id = createClassId();
     ContentClassImpl newClass = new ContentClassImpl(id, name, superClass, modifiers);
     // persist here
     return newClass;
@@ -148,7 +172,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
       if (field.getModifiers().isFinal()) {
         throw new ContentModelException("Can not extend final field: " + field + "!");
       }
-      if (!field.getFieldType().isAssignableFrom(type)) {
+      if (!field.getFieldClass().isAssignableFrom(type)) {
         throw new ContentModelException("Can not extend " + field + " with incompatible type "
             + type.getName() + "!");
       }
@@ -156,7 +180,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     if (modifiers.isSystem()) {
       throw new ContentModelException("User can not create system field: " + name + "!");
     }
-    ContentField newField = doCreateField(declaringClass, name, type, modifiers);
+    AbstractContentField newField = doCreateField(declaringClass, name, type, modifiers);
     ((ContentClassImpl) declaringClass).addField(newField);
     fireEvent(new ContentModelEvent(newField, ChangeEvent.Type.ADD));
     return newField;
@@ -167,16 +191,16 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
    *      java.lang.String, java.lang.Class,
    *      net.sf.mmm.content.model.api.FieldModifiers)
    */
-  protected ContentField doCreateField(ContentClass declaringClass, String name, Class type,
-      FieldModifiers modifiers) throws ContentModelException {
+  protected AbstractContentField doCreateField(ContentClass declaringClass, String name,
+      Class type, FieldModifiers modifiers) throws ContentModelException {
 
     // creation
-    Id id = createFieldId();
-    ContentField newField = new ContentFieldImpl(id, name, declaringClass, type, modifiers);
+    IdImpl id = createFieldId();
+    AbstractContentField newField = new ContentFieldImpl(id, name, declaringClass, type, modifiers);
     // persist here
     return newField;
   }
-  
+
   /**
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#setDeleted(net.sf.mmm.content.model.api.ContentReflectionObject,
    *      boolean)
@@ -184,6 +208,9 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
   public void setDeleted(ContentReflectionObject classOrField, boolean newDeletedFlag)
       throws ContentModelException {
 
+    if (classOrField.getModifiers().isSystem()) {
+      throw new ContentModelException(NlsBundleContentModel.ERR_DELETE_SYSTEM, classOrField);
+    }
     ((AbstractContentObject) classOrField).setDeleted(newDeletedFlag);
     // persist here...
 
@@ -196,98 +223,131 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
   }
 
   /**
-   * This is the implementation of the {@link ContentClass} interface.
+   * 
+   * @param config
+   * @return
    */
-  public class ContentClassImpl extends AbstractContentClass {
+  protected AbstractContentClass importClass(Configuration config, AbstractContentClass superClass)
+      throws ContentModelException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -1985821250541285370L;
+    // what is our strategy: import as much as possible and log errors or
+    // verify as much as possible and only import on successful verification?
+    String name = config.getDescendant(CFG_ATR_NAME).getValue().getString();
 
-    /**
-     * The constructor
-     * 
-     * @param classId
-     *        is the {@link #getId() ID} of the class.
-     * @param className
-     *        is the {@link #getName() name} of the class.
-     * @param parentClass
-     *        is the {@link #getSuperClass() super-class} of the class or
-     *        <code>null</code> for creating the root-class.
-     * @param classModifiers
-     *        are the {@link #getModifiers() modifiers}.
-     */
-    public ContentClassImpl(Id classId, String className, ContentClass parentClass,
-        ClassModifiers classModifiers) {
+    Integer classId = config.getDescendant(CFG_ATR_ID).getValue().getInteger(null);
 
-      super(classId, className, parentClass, classModifiers);
+    boolean isSystem = config.getDescendant(CFG_ATR_SYSTEM).getValue().getBoolean(false);
+    boolean isFinal = config.getDescendant(CFG_ATR_FINAL).getValue().getBoolean(false);
+    boolean isAbstract = config.getDescendant(CFG_ATR_ABSTRACT).getValue().getBoolean(false);
+    boolean isExtendable = config.getDescendant(CFG_ATR_EXTENDABLE).getValue().getBoolean(!isFinal);
+    ClassModifiers modifiers = ClassModifiersImpl.getInstance(isSystem, isFinal, isAbstract,
+        isExtendable);
+
+    if ((classId == null) || (classId.intValue() >= IdImpl.MINIMUM_CUSTOM_CLASS_ID)) {
+      // do NOT allow to create system classes in user-space
+      if (isSystem) {
+        // TODO: NLS
+        throw new ContentModelException("System-Class \"{0}\" can NOT be created in user-space!",
+            name);
+      }
     }
 
-    /**
-     * @see net.sf.mmm.content.api.ContentObject#getContentClass()
-     */
-    public ContentClass getContentClass() {
+    AbstractContentClass existingClass = getClassOrNull(name);
+    AbstractContentClass newClass;
+    if (existingClass != null) {
+      if (classId != null) {
+        if (classId.intValue() != existingClass.getId().getClassId()) {
+          throw new ContentModelException("ID can NOT be changed!");
+        }
+      }
+      if (!modifiers.equals(existingClass.getModifiers())) {
+        throw new ContentModelException("TODO: changing modifiers NOT implemented!");
+      }
+      if ((superClass != null) && (!superClass.equals(existingClass))) {
+        throw new ContentModelException("TODO: changing class hierarchy NOT implemented!");
+      }
+      newClass = existingClass;
+    } else {
+      IdImpl id;
+      if (classId == null) {
+        id = createClassId();
+      } else {
+        id = new IdImpl(classId.intValue());
+      }
 
-      return AbstractMutableContentModelService.this.classClass;
+      newClass = new ContentClassImpl(id, name, superClass, modifiers);
     }
 
-    /**
-     * This method is internally used to create initial fields.
-     * 
-     * @param id
-     * @param name
-     * @param type
-     * @param modifiers
-     * @return the created field.
-     */
-    protected ContentField addField(int id, String name, Class type, FieldModifiers modifiers) {
-
-      ContentField field = new ContentFieldImpl(new IdImpl(IdImpl.OID_FIELD, id), name, this, type,
-          modifiers);
-      addField(field);
-      return field;
+    // recurse on sub-classes
+    for (Configuration subClassConfig : config.getDescendants(ContentClass.CLASS_NAME)) {
+      // TODO
+      AbstractContentClass subClass = importClass(subClassConfig, newClass);
+      if (!newClass.getSubClasses().contains(subClass)) {
+        newClass.addSubClass(subClass);
+      }
     }
 
+    for (Configuration subClassConfig : config.getDescendants(ContentField.CLASS_NAME)) {
+      AbstractContentField field = importField(subClassConfig, newClass);
+      // TODO
+      newClass.addField(field);
+    }
+
+    return newClass;
   }
 
-  /**
-   * This is the implementation of the {@link ContentField} interface.
-   */
-  public class ContentFieldImpl extends AbstractContentField {
+  protected AbstractContentField importField(Configuration config,
+      AbstractContentClass declaringClass) throws ContentModelException {
 
-    /** UID for serialization */
-    private static final long serialVersionUID = -6504064074715878761L;
+    String name = config.getDescendant(CFG_ATR_NAME).getValue().getString();
 
-    /**
-     * The constructor
-     * 
-     * @see AbstractContentField#AbstractContentField(Id, String, ContentClass,
-     *      Class, FieldModifiers, ValueValidator)
-     */
-    public ContentFieldImpl(Id fieldId, String fieldName, ContentClass declaringContentClass,
-        Class fieldType, FieldModifiers fieldModifiers, ValueValidator validator) {
+    Integer fieldId = config.getDescendant(CFG_ATR_ID).getValue().getInteger(null);
 
-      super(fieldId, fieldName, declaringContentClass, fieldType, fieldModifiers, validator);
+    boolean isSystem = config.getDescendant(CFG_ATR_SYSTEM).getValue().getBoolean(false);
+    boolean isFinal = config.getDescendant(CFG_ATR_FINAL).getValue().getBoolean(false);
+    boolean isReadOnly = config.getDescendant(CFG_ATR_READ_ONLY).getValue().getBoolean(false);
+    boolean isStatic = config.getDescendant(CFG_ATR_STATIC).getValue().getBoolean(false);
+    boolean isTransient = config.getDescendant(CFG_ATR_TRANSIENT).getValue().getBoolean(false);
+    FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal, isReadOnly,
+        isStatic, isTransient);
+
+    // TODO: use ValueService
+    Type fieldType = config.getDescendant(CFG_ATR_TYPE).getValue().getJavaClass();
+
+    if ((fieldId == null) || (fieldId.intValue() >= IdImpl.MINIMUM_CUSTOM_FIELD_ID)) {
+      // do NOT allow to create system classes in user-space
+      if (isSystem) {
+        // TODO: NLS
+        throw new ContentModelException("System-Field \"{0}\" can NOT be created in user-space!",
+            name);
+      }
     }
 
-    /**
-     * The constructor
-     * 
-     * @see AbstractContentField#AbstractContentField(Id, String, ContentClass,
-     *      Class, FieldModifiers)
-     */
-    public ContentFieldImpl(Id fieldId, String fieldName, ContentClass declaringContentClass,
-        Class fieldType, FieldModifiers fieldModifiers) {
+    AbstractContentField existingField = declaringClass.getDeclaredField(name);
+    AbstractContentField newField;
+    if (existingField != null) {
+      if (fieldId != null) {
+        if (fieldId.intValue() != existingField.getId().getClassId()) {
+          // TODO: NLS
+          throw new IllegalStateException("ID can NOT be changed!");
+        }
+      }
+      if (!modifiers.equals(existingField.getModifiers())) {
+        throw new IllegalStateException("TODO: changing modifiers NOT implemented!");
+      }
+      newField = existingField;
+    } else {
+      IdImpl id;
+      if (fieldId == null) {
+        id = createClassId();
+      } else {
+        id = new IdImpl(fieldId.intValue());
+      }
 
-      super(fieldId, fieldName, declaringContentClass, fieldType, fieldModifiers);
+      newField = new ContentFieldImpl(id, name, declaringClass, fieldType, modifiers);
     }
 
-    /**
-     * @see net.sf.mmm.content.api.ContentObject#getContentClass()
-     */
-    public ContentClass getContentClass() {
-
-      return AbstractMutableContentModelService.this.fieldClass;
-    }
-
+    return newField;
   }
+  
 }

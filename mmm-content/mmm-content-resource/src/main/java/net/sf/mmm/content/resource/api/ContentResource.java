@@ -4,6 +4,8 @@
 package net.sf.mmm.content.resource.api;
 
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.security.api.PermissionDeniedException;
+import net.sf.mmm.content.value.api.MutableMetaDataSet;
 import net.sf.mmm.content.value.api.RevisionHistory;
 import net.sf.mmm.content.value.api.Version;
 
@@ -21,13 +23,13 @@ import net.sf.mmm.content.value.api.Version;
  * {@link ContentResource#setFieldValue(String, Object)}). Generic components
  * of the project (including plugins) need to use this official API to access
  * resources. Like java objects a resource can be reflected via
- * {@link net.sf.mmm.content.api.ContentObject#getContentClass()}. Custum
+ * {@link net.sf.mmm.content.api.ContentObject#getContentClass()}. Custom
  * implementations are free to bypass this API and directly work on the
- * implementation if allowed by thier policy (see javadoc, etc.). <br>
+ * implementation if allowed by their policy (see javadoc, etc.). <br>
  * One implementation may wrap java bean-like classes as ContentClass and direct
  * object instances of those classes as {@link ContentResource} objects. On the
  * other hand another implementation may use dynamic containers (a la
- * {@link java.util.Map}) as {@link ContentResource}and reimplement the OO
+ * {@link java.util.Map}) as {@link ContentResource}and re-implement the OO
  * world.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -53,6 +55,13 @@ public interface ContentResource extends ContentObject {
    * path for generic access via {@link #getFieldValue(String)}.
    */
   String FIELD_NAME_PATH = "path";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getMetaData() metadata} for generic access via
+   * {@link #getFieldValue(String)}.
+   */
+  String FIELD_NAME_METADATA = "metadata";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
@@ -89,6 +98,16 @@ public interface ContentResource extends ContentObject {
    * @return the path of the resource.
    */
   String getPath();
+
+  /**
+   * This method gets the meta-data of this object.
+   * 
+   * @return the meta-data.
+   * @throws PermissionDeniedException
+   *         if you (the current user) does not have permission to perform the
+   *         operation.
+   */
+  MutableMetaDataSet getMetaData() throws PermissionDeniedException;
 
   /**
    * This method gets the version-information of this resource.

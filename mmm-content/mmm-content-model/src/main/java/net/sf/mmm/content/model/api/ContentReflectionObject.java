@@ -7,7 +7,7 @@ import net.sf.mmm.content.api.ContentObject;
 
 /**
  * This is the interface for an object reflecting the content model. It can be
- * eighter a class or a field.
+ * either a {@link ContentClass} or a {@link ContentField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -53,7 +53,7 @@ public interface ContentReflectionObject extends ContentObject {
    * 
    * @see ContentObject#isDeleted()
    * 
-   * @return the delted flag.
+   * @return the deleted flag.
    */
   boolean isDeletedFlagSet();
 

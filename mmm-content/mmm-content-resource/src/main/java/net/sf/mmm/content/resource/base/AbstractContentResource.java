@@ -7,9 +7,9 @@ import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.resource.api.ContentFolder;
 import net.sf.mmm.content.resource.api.ContentResource;
-import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.api.RevisionHistory;
 import net.sf.mmm.content.value.api.Version;
+import net.sf.mmm.content.value.impl.IdImpl;
 
 /**
  * This is the abstract base implementation of the {@link ContentResource}
@@ -34,7 +34,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
    * @param parentFolder
    * @param contentClass 
    */
-  public AbstractContentResource(Id objectId, String objectName, ContentFolder parentFolder,
+  public AbstractContentResource(IdImpl objectId, String objectName, ContentFolder parentFolder,
       ContentClass contentClass) {
 
     super(objectId, objectName);

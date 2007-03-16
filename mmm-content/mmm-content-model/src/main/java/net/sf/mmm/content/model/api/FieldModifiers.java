@@ -52,7 +52,9 @@ public interface FieldModifiers extends Modifiers {
   /**
    * This method determines if the field is transient. A transient field is not
    * stored by the persistence but its value is dynamically calculated by a
-   * given expression term.
+   * given expression term.<br>
+   * A transient field is always {@link #isReadOnly() read-only} and never
+   * {@link #isStatic() static}.
    * 
    * @return <code>true</code> if this field is transient.
    */

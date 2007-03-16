@@ -40,7 +40,15 @@ public interface Modifiers extends XmlSerializable {
   /**
    * This method determines if the class or field is final. A final class can
    * NOT be extended (can NOT have sub-classes). A final field can NOT be
-   * overriden in a sub-class.
+   * overridden in a sub-class.<br>
+   * <b>ATTENTION:</b><br>
+   * Do NOT get confused with
+   * {@link java.lang.reflect.Modifier#isFinal(int) final}
+   * {@link java.lang.reflect.Field fields} in the java language specification.
+   * In this world, a {@link #isFinal() final} {@link ContentField field} can be
+   * {@link net.sf.mmm.content.api.ContentObject#setFieldValue(String, Object) modified}
+   * any number of times as long as it is NOT
+   * {@link FieldModifiers#isReadOnly() read-only}.
    * 
    * @return <code>true</code> if the class or field is final.
    */
