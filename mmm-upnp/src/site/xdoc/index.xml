@@ -13,11 +13,11 @@
       This project focuses on an open implementation of the neccessary parts to build an UPnP-AV media server. 
       This consists of the following modules:
       <ul>
-        <li><a href="mmm-upnp-ssdp">Discovery</a></li>
-        <li><a href="mmm-upnp-description">Description</a></li>
-        <li><a href="mmm-upnp-control">Control</a></li>
-        <li><a href="mmm-upnp-notification">Notification</a></li>
-        <li><a href="mmm-upnp-presentation">Presentation</a></li>
+        <li><a href="mmm-upnp-ssdp/index.html">Discovery</a></li>
+        <li><a href="mmm-upnp-description/index.html">Description</a></li>
+        <li><a href="mmm-upnp-control/index.html">Control</a></li>
+        <li><a href="mmm-upnp-notification/index.html">Notification</a></li>
+        <li><a href="mmm-upnp-presentation/index.html">Presentation</a></li>
       </ul>
       </p>
     </section>
