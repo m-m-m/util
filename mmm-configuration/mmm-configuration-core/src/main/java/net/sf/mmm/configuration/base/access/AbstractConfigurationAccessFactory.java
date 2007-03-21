@@ -34,7 +34,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#configure(java.lang.String,
    *      net.sf.mmm.context.api.Context,
-   *      net.sf.mmm.configuration.api.Configuration) 
+   *      net.sf.mmm.configuration.api.Configuration)
    */
   public final void configure(String prefix, Context context, Configuration include)
       throws ConfigurationException, ValueException {
@@ -42,9 +42,9 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
     String href = include.getDescendant(ConfigurationDocument.NAME_INCLUDE_HREF).getValue()
         .getString();
     String parentKey = prefix + CONTEXT_VARIABLE_SUFFIX_PARENT;
-    ConfigurationAccess parentAccess = (ConfigurationAccess) context.getValue(parentKey)
-        .getObject(null);
-    // TODO: only store root url access specific and relative href
+    ConfigurationAccess parentAccess = context.getValue(parentKey).getValue(
+        ConfigurationAccess.class, null);
+    // TODO: only store root URL access specific and relative href
     // globally???
 
     // TODO: base is 'http://foo.com/bar/test.xml'
@@ -54,7 +54,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
     // same for 'C:\bar\text.xml' and '\foo\test.xml' -> 'C:\foo\test.xml'
 
     // This means there is a top-root 'http://foo.com' or 'C:\'
-    // and additionally a pwd 'http://foo.com/bar' or 'C:\bar'
+    // and additionally a PWD 'http://foo.com/bar' or 'C:\bar'
     this.accessors = configure(prefix, context, include, parentAccess, href);
     for (int i = 0; i < this.accessors.length; i++) {
       this.accessors[i].setContextPrefix(prefix);
@@ -75,20 +75,18 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
    *        {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE include}
    *        configuration.
    * @param parent
-   *        is the paretn access the given <code>href</code> may be relative
+   *        is the parent access the given <code>href</code> may be relative
    *        to. It should only be interpreted if the given <code>href</code>
    *        is relative and may potentially be <code>null</code> in other
    *        cases.
    * @param href
-   *        is the value of the
-   *        {@link ConfigurationDocument#NAME_INCLUDE_HREF} attribute. It can
-   *        be relative or absolute.
+   *        is the value of the {@link ConfigurationDocument#NAME_INCLUDE_HREF}
+   *        attribute. It can be relative or absolute.
    * @return the {@link #getAccessors() accessors}.
    * @throws ConfigurationException
    */
   public abstract AbstractConfigurationAccess[] configure(String prefix, Context context,
-      Configuration include, ConfigurationAccess parent, String href)
-      throws ConfigurationException;
+      Configuration include, ConfigurationAccess parent, String href) throws ConfigurationException;
 
   /**
    * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#getAccessors()

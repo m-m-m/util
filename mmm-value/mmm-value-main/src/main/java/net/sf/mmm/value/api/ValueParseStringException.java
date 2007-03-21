@@ -23,7 +23,7 @@ public class ValueParseStringException extends ValueParseException {
    * @param stringToParse
    *        is the string that could not be parsed
    * @param valueType
-   *        is the {@link ValueManager#getValueType() type} of value the
+   *        is the {@link ValueManager#getValueClass() type} of value the
    *        given string should be parsed as.
    * @param valueName
    *        is the {@link ValueManager#getName() name} of value the given
@@ -31,7 +31,7 @@ public class ValueParseStringException extends ValueParseException {
    */
   public ValueParseStringException(String stringToParse, Class valueType, String valueName) {
 
-    this(stringToParse, valueType, valueName, null);
+    super(NlsBundleValueMain.ERR_PARSE_STRING, stringToParse, valueType, valueName);
   }
 
   /**
@@ -40,7 +40,7 @@ public class ValueParseStringException extends ValueParseException {
    * @param stringToParse
    *        is the string that could not be parsed
    * @param valueType
-   *        is the {@link ValueManager#getValueType() type} of value the
+   *        is the {@link ValueManager#getValueClass() type} of value the
    *        given string should be parsed as.
    * @param valueName
    *        is the {@link ValueManager#getName() name} of value the given
@@ -54,7 +54,7 @@ public class ValueParseStringException extends ValueParseException {
   }
 
   /**
-   * This method gets the expected {@link ValueManager#getValueType() type}
+   * This method gets the expected {@link ValueManager#getValueClass() type}
    * of the value that could not be parsed.
    * 
    * @return the value type.

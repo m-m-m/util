@@ -61,6 +61,7 @@ public class UrlAccessFactory extends AbstractConfigurationAccessFactory {
         url = new URL(href);
       }
       UrlAccess access = new UrlAccess(url);
+      access.setContextPrefix(prefix);
       return new UrlAccess[] {access};
     } catch (MalformedURLException e) {
       throw new ConfigurationReadException(href, e);

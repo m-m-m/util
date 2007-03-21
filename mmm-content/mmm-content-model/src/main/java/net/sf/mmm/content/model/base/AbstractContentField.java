@@ -237,24 +237,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
     result.append("Field:");
     result.append(getName());
     result.append("[");
-    if (getModifiers().isFinal()) {
-      result.append("F");
-    }
-    if (getModifiers().isSystem()) {
-      result.append("S");
-    }
-    if (getModifiers().isStatic()) {
-      result.append("s");
-    }
-    if (getModifiers().isReadOnly()) {
-      result.append("I");
-    }
-    if (getModifiers().isTransient()) {
-      result.append("T");
-    }
-    if (isDeleted()) {
-      result.append("D");
-    }
+    result.append(getModifiers());
     result.append("]");
     return result.toString();
   }

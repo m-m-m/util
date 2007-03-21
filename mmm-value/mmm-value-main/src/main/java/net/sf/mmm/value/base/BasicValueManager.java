@@ -23,7 +23,7 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
    * The constructor.
    * 
    * @param valueClass
-   *        is the {@link #getValueType() implementation} of the managed value
+   *        is the {@link #getValueClass() implementation} of the managed value
    *        type.
    */
   public BasicValueManager(Class<V> valueClass) {
@@ -35,7 +35,7 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
    * The constructor.
    * 
    * @param valueClass
-   *        is the {@link #getValueType() implementation} of the managed value
+   *        is the {@link #getValueClass() implementation} of the managed value
    *        type.
    * @param typeName
    *        is the {@link #getName() "logical name"} of the managed value
@@ -49,9 +49,9 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#getValueType()
+   * @see net.sf.mmm.value.api.ValueManager#getValueClass()
    */
-  public Class<V> getValueType() {
+  public Class<V> getValueClass() {
 
     return this.valueType;
   }

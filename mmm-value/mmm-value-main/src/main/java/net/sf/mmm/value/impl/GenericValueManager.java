@@ -45,7 +45,7 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
    * The constructor.
    * 
    * @param valueClass
-   *        is the {@link #getValueType() implementation} of the managed value
+   *        is the {@link #getValueClass() implementation} of the managed value
    *        type.
    * @param typeName
    *        is the {@link #getName() "logical name"} of the managed value

@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
-<ContentModel>
+<!-- $Id$ -->
+<ContentModel xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
   <Class id="0" name="Object" system="true" abstract="true" extendable="false">
-    <Field id="0" name="id" type="Id" final="true" reado-only="true"/>
-    <Field id="1" name="name" type="String" final="true" reado-only="true"/>
-    <Field id="2" name="contentClass" type="ContentClass" final="true" reado-only="true"/>
+    <Field id="0" name="id" type="Id" final="true" read-only="true"/>
+    <Field id="1" name="name" type="String" final="true" read-only="true"/>
+    <Field id="2" name="contentClass" type="net.sf.mmm.content.model.api.ContentClass" final="true" read-only="true"/>
     <Class id="1" name="ReflectionObject" system="true" abstract="true" extendable="false">
-      <Field id="3" name="modifiers" type="Modifiers" final="true" reado-only="true"/>
+      <Field id="3" name="modifiers" type="net.sf.mmm.content.model.api.FieldModifiers" final="true" read-only="true"/>
       <Class id="2" name="Class" system="true" final="true">
-        <Field id="3" name="modifiers" type="ClassModifiers" final="true" reado-only="true"/>
+        <Field id="3" name="modifiers" type="ClassModifiers" final="true" read-only="true"/>
       </Class>
       <Class id="3" name="Field">
         
       </Class>
     </Class>
+    <cfg:include type="xml" href="ContentModel-Main.xml" descendants="Class"/>
   </Class>
 </ContentModel>

@@ -66,10 +66,11 @@ public class ResourceAccess extends AbstractConfigurationAccess {
     if (resourcePath.charAt(0) == '/') {
       resourcePath = resourcePath.substring(1);
     }
+    resourcePath = resourcePath.replace('\\', '/');
     this.classpathResource = Thread.currentThread().getContextClassLoader().getResource(
         resourcePath);
     if ((this.classpathResource == null) && (!this.file.isFile())) {
-      throw new ConfigurationReadException(href);
+      throw new ConfigurationReadException(resourcePath);
     }
     setContextPrefix(ConfigurationAccessFactory.CONTEXT_VARIABLE_PREFIX
         + ResourceAccessFactory.CONTEXT_DEFAULT_NAME);

@@ -5,6 +5,9 @@ package net.sf.mmm.content.model.impl;
 
 import java.lang.reflect.Type;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.api.ContentObject;
@@ -23,7 +26,10 @@ import net.sf.mmm.content.model.base.AbstractContentField;
 import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.value.api.ValueManager;
+import net.sf.mmm.value.api.ValueService;
 
 /**
  * This is the basic implementation of the {@link MutableContentModelService}
@@ -74,9 +80,12 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   private static final String CFG_ATR_TYPE = Configuration.NAME_PREFIX_ATTRIBUTE
       + ContentField.XML_ATR_ROOT_TYPE;
 
+  /** @see #setDeleted(ContentReflectionObject, boolean) */
+  private ValueService valueService;
+
   /** @see #isEditable() */
   private boolean editable;
-  
+
   /**
    * The constructor.
    */
@@ -84,26 +93,55 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
 
     super();
     this.editable = true;
+    this.valueService = null;
   }
 
   /**
    * @see net.sf.mmm.content.model.api.MutableContentModelService#isEditable()
    */
   public boolean isEditable() {
-  
+
     return this.editable;
   }
-  
+
   /**
    * This method sets the {@link #isEditable() editable-flag} of this service.
    * 
-   * @param isEditable the editable to set
+   * @param isEditable
+   *        the editable to set
    */
   public void setEditable(boolean isEditable) {
 
     this.editable = isEditable;
   }
-  
+
+  /**
+   * This method injects the value-service required by this implementation.
+   * 
+   * @param service
+   *        the value-service to set
+   */
+  @Resource
+  public void setValueService(ValueService service) {
+
+    this.valueService = service;
+  }
+
+  /**
+   * This method initializes this class. It has to be called after construction
+   * and injection is completed.
+   * 
+   * @throws Exception
+   *         if initialization failed.
+   */
+  @PostConstruct
+  public void initialize() throws Exception {
+
+    if (this.valueService == null) {
+      throw new ResourceMissingException("value-service");
+    }
+  }
+
   /**
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createClass(net.sf.mmm.content.model.api.ContentClass,
    *      java.lang.String, net.sf.mmm.content.model.api.ClassModifiers)
@@ -112,11 +150,11 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
       ClassModifiers modifiers) throws ContentModelException {
 
     if (modifiers.isSystem()) {
-      throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_SYSTEM, superClass);      
+      throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_SYSTEM, superClass);
     }
     if (!superClass.getModifiers().isExtendable()) {
       throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_NOT_EXTENDABLE, superClass);
-    }    
+    }
     AbstractContentClass newClass = doCreateClass(superClass, name, modifiers);
     ((AbstractContentClass) superClass).addSubClass(newClass);
     addClass(newClass);
@@ -246,9 +284,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
     if ((classId == null) || (classId.intValue() >= IdImpl.MINIMUM_CUSTOM_CLASS_ID)) {
       // do NOT allow to create system classes in user-space
       if (isSystem) {
-        // TODO: NLS
-        throw new ContentModelException("System-Class \"{0}\" can NOT be created in user-space!",
-            name);
+        throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_SYSTEM, name);
       }
     }
 
@@ -289,8 +325,10 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
 
     for (Configuration subClassConfig : config.getDescendants(ContentField.CLASS_NAME)) {
       AbstractContentField field = importField(subClassConfig, newClass);
-      // TODO
-      newClass.addField(field);
+      if (newClass.getField(field.getName()) != field) {
+        // TODO
+        newClass.addField(field);        
+      }
     }
 
     return newClass;
@@ -303,7 +341,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
 
     Integer fieldId = config.getDescendant(CFG_ATR_ID).getValue().getInteger(null);
 
-    boolean isSystem = config.getDescendant(CFG_ATR_SYSTEM).getValue().getBoolean(false);
+    boolean isSystem = declaringClass.getModifiers().isSystem();
     boolean isFinal = config.getDescendant(CFG_ATR_FINAL).getValue().getBoolean(false);
     boolean isReadOnly = config.getDescendant(CFG_ATR_READ_ONLY).getValue().getBoolean(false);
     boolean isStatic = config.getDescendant(CFG_ATR_STATIC).getValue().getBoolean(false);
@@ -311,8 +349,19 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
     FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal, isReadOnly,
         isStatic, isTransient);
 
-    // TODO: use ValueService
-    Type fieldType = config.getDescendant(CFG_ATR_TYPE).getValue().getJavaClass();
+    String typeName = config.getDescendant(CFG_ATR_TYPE).getValue().getString();
+    ValueManager<?> valueManager = this.valueService.getManager(typeName);
+    Type fieldType;
+    if (valueManager == null) {
+      try {
+        fieldType = Class.forName(typeName);
+      } catch (ClassNotFoundException e) {
+        // TODO: NLS
+        throw new ContentModelException(e, "Value-type \"{0}\" can NOT be resolved!", typeName);
+      }
+    } else {
+      fieldType = valueManager.getValueType();
+    }
 
     if ((fieldId == null) || (fieldId.intValue() >= IdImpl.MINIMUM_CUSTOM_FIELD_ID)) {
       // do NOT allow to create system classes in user-space
@@ -341,7 +390,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
       if (fieldId == null) {
         id = createClassId();
       } else {
-        id = new IdImpl(fieldId.intValue());
+        id = new IdImpl(IdImpl.OID_FIELD, fieldId.intValue());
       }
 
       newField = new ContentFieldImpl(id, name, declaringClass, fieldType, modifiers);
@@ -349,5 +398,5 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
 
     return newField;
   }
-  
+
 }

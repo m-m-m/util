@@ -15,9 +15,9 @@ import net.sf.mmm.util.xml.XmlException;
 public interface XmlSerializable extends Serializable {
 
   /**
-   * This method searializes this object to XML using the given searializer.<br>
+   * This method serializes this object to XML using the given serializer.<br>
    * The class implementing this method is responsible to produce well-formed
-   * XML. The given serializer may NOT neccessarily validate the produced XML.
+   * XML. The given serializer may NOT necessarily validate the produced XML.
    * 
    * @param xmlWriter
    *        is the receiver of the serialized XML data.

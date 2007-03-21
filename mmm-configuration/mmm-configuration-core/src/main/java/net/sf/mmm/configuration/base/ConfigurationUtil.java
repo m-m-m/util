@@ -97,7 +97,7 @@ public final class ConfigurationUtil {
         ResourceAccessFactory.class);
     // file
     setAccessFactory(context, FileAccessFactory.CONTEXT_DEFAULT_NAME, FileAccessFactory.class);
-    // url
+    // URL
     setAccessFactory(context, UrlAccessFactory.CONTEXT_DEFAULT_NAME, UrlAccessFactory.class);
 
     // ### formats ###

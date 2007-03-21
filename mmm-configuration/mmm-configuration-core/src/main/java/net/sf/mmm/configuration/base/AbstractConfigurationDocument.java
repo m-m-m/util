@@ -539,7 +539,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     }
 
     /**
-     * @see net.sf.mmm.util.event.EventListener#handleEvent(net.sf.mmm.util.event.Event)
+     * {@inheritDoc}
      */
     public void handleEvent(ConfigurationChangeEvent event) {
 

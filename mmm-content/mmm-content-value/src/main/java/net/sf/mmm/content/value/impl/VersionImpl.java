@@ -630,9 +630,9 @@ public final class VersionImpl implements Version {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getValueType()
+     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
      */
-    public Class<VersionImpl> getValueType() {
+    public Class<VersionImpl> getValueClass() {
 
       return VersionImpl.class;
     }

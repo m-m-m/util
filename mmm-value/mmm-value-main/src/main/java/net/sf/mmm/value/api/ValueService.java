@@ -30,12 +30,12 @@ public interface ValueService {
 
   /**
    * This method gets the {@link ValueManager value manager} for the given
-   * {@link ValueManager#getValueType() valueType}.
+   * {@link ValueManager#getValueClass() valueType}.
    * 
    * @param <V>
    *        is the templated type of the value.
    * @param valueType
-   *        is the {@link ValueManager#getValueType() value type} of the
+   *        is the {@link ValueManager#getValueClass() value type} of the
    *        requested manager.
    * @return the manager for the given <code>valueClass</code> or
    *         <code>null</code> if NO such manager is registered.
@@ -47,7 +47,7 @@ public interface ValueService {
    * <code>valueSubType</code>. Use this method instead of
    * {@link #getManager(Class)} if you do NOT know the precise value type.<br>
    * E.g. if you have {@link ValueManager value-managers} with an abstract
-   * {@link ValueManager#getValueType() value-type} (such as
+   * {@link ValueManager#getValueClass() value-type} (such as
    * {@link org.w3c.dom.Document}) and you have an instance of a value you can
    * use this method to find the manager for the {@link Object#getClass() class}
    * of the value.
@@ -56,10 +56,10 @@ public interface ValueService {
    *        is the templated type of the value.
    * @param valueSubType
    *        is a sup-type of the requested manager's
-   *        {@link ValueManager#getValueType() value type}.
+   *        {@link ValueManager#getValueClass() value type}.
    * @return the manager for the given <code>valueClass</code> or
    *         <code>null</code> if NO such manager could be found. Be aware
-   *         that the {@link ValueManager#getValueType() value-type} of the
+   *         that the {@link ValueManager#getValueClass() value-type} of the
    *         result may return a super-type of the given
    *         <code>valueSubType</code>.
    */

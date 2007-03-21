@@ -21,14 +21,11 @@ import net.sf.mmm.util.event.EventSource;
  * implementations of the
  * {@link net.sf.mmm.content.api.ContentObject content-object}. This means
  * that it is allowed to cast the implementations and bypass the API if
- * neccessary.
+ * necessary.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface ContentModelService extends ContentModelReadAccess {
-
-  /** the unique identifier of this service */
-  String SERVICE_ID = ContentModelService.class.getName();
 
   /** the root tag-name of the content-model XML representation */
   String XML_TAG_ROOT = "model";
@@ -66,5 +63,5 @@ public interface ContentModelService extends ContentModelReadAccess {
    * @return the event registrar.
    */
   EventSource<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar();
-
+  
 }

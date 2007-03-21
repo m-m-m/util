@@ -74,21 +74,21 @@ public final class IdImpl implements Id {
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * content-resource.
    */
-  public static final int CLASS_ID_RESOURCE = 4;
+  public static final int CLASS_ID_RESOURCE = 10;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * content-folder.
    */
-  public static final int CLASS_ID_FOLDER = 5;
+  public static final int CLASS_ID_FOLDER = 11;
 
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * content-file.
    */
-  public static final int CLASS_ID_FILE = 6;
+  public static final int CLASS_ID_FILE = 12;
 
   /**
    * the id number of the
@@ -566,9 +566,9 @@ public final class IdImpl implements Id {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getValueType()
+     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
      */
-    public Class<IdImpl> getValueType() {
+    public Class<IdImpl> getValueClass() {
 
       return IdImpl.class;
     }

@@ -29,7 +29,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   /** the {@link ValueManager#getName() "logical name"} of the managed value */
   public static final String VALUE_NAME = "Date";
 
-  /** the {@link ValueManager#getValueType() type} of the managed value */
+  /** the {@link ValueManager#getValueClass() type} of the managed value */
   private static final Class<Date> VALUE_TYPE = Date.class;
 
   /** the XML tagname for the date */
@@ -73,9 +73,9 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#getValueType()
+   * @see net.sf.mmm.value.api.ValueManager#getValueClass()
    */
-  public Class<Date> getValueType() {
+  public Class<Date> getValueClass() {
 
     return VALUE_TYPE;
   }

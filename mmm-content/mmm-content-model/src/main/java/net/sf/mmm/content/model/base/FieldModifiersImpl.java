@@ -3,11 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import org.w3c.dom.Element;
+
 import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
+import net.sf.mmm.value.api.ValueParseException;
+import net.sf.mmm.value.api.ValueParseStringException;
+import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
  * This is the base implementation of the {@link FieldModifiersImpl} interface.
@@ -365,6 +370,135 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     return result.toString();
+  }
+
+  /**
+   * This inner class is the manager for the value.
+   */
+  public static class Manager extends AbstractValueManager<FieldModifiers> {
+
+    /** @see #getName() */
+    public static final String VALUE_NAME = "FieldModifiers";
+
+    /**
+     * @see net.sf.mmm.value.api.ValueManager#getName()
+     */
+    public String getName() {
+
+      return VALUE_NAME;
+    }
+
+    /**
+     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
+     */
+    public Class<FieldModifiers> getValueClass() {
+
+      return FieldModifiers.class;
+    }
+
+    /**
+     * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
+     */
+    public FieldModifiers parse(String valueAsString) throws ValueParseException {
+
+      if ("N".equals(valueAsString)) {
+        return NORMAL;
+      }
+      boolean isSystem = (valueAsString.indexOf('X') >= 0);
+      boolean isStatic = (valueAsString.indexOf('S') >= 0);
+      boolean isFinal = (valueAsString.indexOf('F') >= 0);
+      boolean isReadOnly = (valueAsString.indexOf('R') >= 0);
+      boolean isTransient = (valueAsString.indexOf('T') >= 0);
+      return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient);
+    }
+
+    /**
+     * @see net.sf.mmm.value.base.AbstractValueManager#toString(java.lang.Object)
+     */
+    @Override
+    public String toString(FieldModifiers value) {
+
+      StringBuffer buffer = new StringBuffer(4);
+      if (value.isSystem()) {
+        buffer.append('X');
+      } else if (value.isStatic()) {
+        buffer.append('S');
+      } else if (value.isFinal()) {
+        buffer.append('F');
+      } else if (value.isReadOnly()) {
+        buffer.append('R');
+      } else if (value.isTransient()) {
+        buffer.append('T');
+      } 
+      if (buffer.length() == 0) {
+        buffer.append('N');
+      }
+      return buffer.toString();
+    }
+
+    /**
+     * TODO: javadoc
+     * @param element
+     * @param attributeName
+     * @param defaultValue
+     * @return
+     * @throws ValueParseException
+     */
+    private boolean getAttributeAsBoolean(Element element, String attributeName,
+        boolean defaultValue) throws ValueParseException {
+
+      if (element.hasAttribute(attributeName)) {
+        String value = element.getAttribute(attributeName);
+        Boolean result = StringUtil.parseBoolean(value);
+        if (result == null) {
+          throw new ValueParseStringException(value, boolean.class, VALUE_NAME);
+        }
+        return result.booleanValue();
+      } else {
+        return defaultValue;
+      }
+    }
+
+    /**
+     * @see net.sf.mmm.value.base.AbstractValueManager#parse(org.w3c.dom.Element)
+     */
+    @Override
+    public FieldModifiers parse(Element valueAsXml) throws ValueParseException {
+
+      checkXml(valueAsXml);
+
+      boolean isSystem = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
+      boolean isStatic = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_STATIC, false);
+      boolean isFinal = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
+      boolean isReadOnly = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_READ_ONLY, false);
+      boolean isTransient = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_TRANSIENT, false);
+      return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient);
+    }
+
+    /**
+     * @see net.sf.mmm.value.base.AbstractValueManager#toXmlValue(net.sf.mmm.util.xml.api.XmlWriter,
+     *      java.lang.Object)
+     */
+    @Override
+    protected void toXmlValue(XmlWriter xmlWriter, FieldModifiers value) throws XmlException {
+
+      if (value.isSystem()) {
+        xmlWriter.writeAttribute(XML_ATR_ROOT_SYSTEM, StringUtil.TRUE);
+      }
+      if (value.isStatic()) {
+        xmlWriter.writeAttribute(XML_ATR_ROOT_STATIC, StringUtil.TRUE);
+      }
+      if (value.isFinal()) {
+        xmlWriter.writeAttribute(XML_ATR_ROOT_FINAL, StringUtil.TRUE);
+      }
+      if (value.isReadOnly()) {
+        xmlWriter.writeAttribute(XML_ATR_ROOT_READ_ONLY, StringUtil.TRUE);
+      }
+      if (value.isTransient()) {
+        xmlWriter.writeAttribute(XML_ATR_ROOT_TRANSIENT, StringUtil.TRUE);
+      }
+    }
+
   }
 
 }

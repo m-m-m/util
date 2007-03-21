@@ -83,6 +83,7 @@ public class FileAccessFactory extends AbstractConfigurationAccessFactory {
     FileAccess[] accessors = new FileAccess[count];
     for (int i = 0; i < count; i++) {
       accessors[i] = new FileAccess(fileList.get(i));
+      accessors[i].setContextPrefix(prefix);
     }
     return accessors;
   }

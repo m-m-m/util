@@ -84,7 +84,7 @@ public class XmlValueManagerTest extends TestCase {
     Document doc = DomUtil.createDocument();
     XmlWriter domWriter = new DomXmlWriter(doc);
     toXml(domWriter);
-    System.out.println(manager.getValueType());
+    System.out.println(manager.getValueClass());
     System.out.println(manager.getName());
     System.out.println("--");
     Element rootElement = doc.getDocumentElement();

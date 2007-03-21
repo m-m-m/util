@@ -16,14 +16,15 @@ import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueService;
 
 /**
- * This is the abstract base implemenation of the ValueServiceIF interface.
+ * This is the abstract base implementation of the {@link ValueService}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractValueService implements ValueService {
 
   /**
-   * maps a {@link ValueManager#getValueType() value type} to the according
+   * maps a {@link ValueManager#getValueClass() value type} to the according
    * manager.
    * 
    * @see #getManager(Class)
@@ -66,7 +67,7 @@ public abstract class AbstractValueService implements ValueService {
     if (this.name2manager.containsKey(name)) {
       throw new ValueAlreadyRegisteredException(name);
     }
-    Class<?> valueClass = manager.getValueType();
+    Class<?> valueClass = manager.getValueClass();
     if (this.class2manager.containsKey(valueClass)) {
       throw new ValueAlreadyRegisteredException(valueClass);
     }
@@ -92,7 +93,7 @@ public abstract class AbstractValueService implements ValueService {
     ValueManager<? super V> manager = getManager(valueSubType);
     if (manager == null) {
       for (ValueManager<?> currentManager : this.class2manager.values()) {
-        if (currentManager.getValueType().isAssignableFrom(valueSubType)) {
+        if (currentManager.getValueClass().isAssignableFrom(valueSubType)) {
           manager = (ValueManager<? super V>) currentManager;
           // TODO: should we cache this mapping to speed up lookups?
           break;

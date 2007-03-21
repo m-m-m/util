@@ -30,7 +30,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   /** the {@link ValueManager#getName() "logical name"} of the managed value */
   public static final String VALUE_NAME = "Xml";
 
-  /** the {@link ValueManager#getValueType() type} of the managed value */
+  /** the {@link ValueManager#getValueClass() type} of the managed value */
   private static final Class<Element> VALUE_TYPE = Element.class;
 
   /**
@@ -42,9 +42,9 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#getValueType()
+   * @see net.sf.mmm.value.api.ValueManager#getValueClass()
    */
-  public Class<Element> getValueType() {
+  public Class<Element> getValueClass() {
 
     return VALUE_TYPE;
   }

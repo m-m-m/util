@@ -33,7 +33,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
   public static final String CONTEXT_DEFAULT_NAME = "resource";
 
   /**
-   * This is the suffix for a context variable containg the root path where
+   * This is the suffix for a context variable containing the root path where
    * resources are looked up in the filesystem.
    */
   public static final String CONTEXT_VARIABLE_SUFFIX_ROOT_PATH = ".root";
@@ -51,12 +51,11 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
    *      net.sf.mmm.context.api.Context,
    *      net.sf.mmm.configuration.api.Configuration,
    *      net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public AbstractConfigurationAccess[] configure(String prefix, Context context,
-      Configuration include, ConfigurationAccess parent, String href)
-      throws ConfigurationException {
+      Configuration include, ConfigurationAccess parent, String href) throws ConfigurationException {
 
     String fileRootPath = context.getValue(prefix + CONTEXT_VARIABLE_SUFFIX_ROOT_PATH).getString(
         null);
@@ -65,24 +64,23 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
     }
     String absoluteHref = href;
     if (!href.startsWith("/")) {
-      if (parent == null) {
-        // TODO: NLS
-        throw new ConfigurationException(
-            "The parent access is required but NOT available - please set the contextPrefix properly!");
-      } else {
+      String path = null;
+      if (parent != null) {
         ResourceAccess parentAccess = (ResourceAccess) parent;
-        String path = new File(parentAccess.getPath()).getParent();
-        if (path == null) {
-          path = "/";
-        }
-        if (!path.endsWith("/")) {
-          absoluteHref = path + "/" + href;
-        } else {
-          absoluteHref = path + href;
-        }
+        path = new File(parentAccess.getPath()).getParent();
+      }
+      if (path == null) {
+        path = "/";
+      }
+      if (!path.endsWith("/")) {
+        absoluteHref = path + "/" + href;
+      } else {
+        absoluteHref = path + href;
       }
     }
-    return new ResourceAccess[] {new ResourceAccess(fileRootPath, absoluteHref)};
+    ResourceAccess accessor = new ResourceAccess(fileRootPath, absoluteHref);
+    accessor.setContextPrefix(prefix);
+    return new ResourceAccess[] {accessor};
   }
 
   /**

@@ -23,9 +23,9 @@
       <subsection name="Reading configuration">
         <p>Now look at the following code:</p>
         <source>
-ConfigurationIF conf = getConfigFromSomewhere(); //represents &lt;config&gt;
-ConfigurationIF serverConf = conf.getDescendant("server");
-ConfigurationIF portConf = serverConf.getDescendant("@port");
+Configuration conf = getConfigFromSomewhere(); //represents &lt;config&gt;
+Configuration serverConf = conf.getDescendant("server");
+Configuration portConf = serverConf.getDescendant("@port");
 int portNumber = portConf.getValue().getInteger(80);
         </source>
         <p>
@@ -33,8 +33,8 @@ int portNumber = portConf.getValue().getInteger(80);
           As you can guess by the name of the method, you could also write:
         </p>
         <source>
-ConfigurationIF conf = getConfigFromSomewhere(); //represents &lt;config&gt;
-ConfigurationIF portConf = conf.getDescendant("server/@port");
+Configuration conf = getConfigFromSomewhere(); //represents &lt;config&gt;
+Configuration portConf = conf.getDescendant("server/@port");
 int portNumber = portConf.getValue().getInteger(80);
         </source>
         <p>
@@ -59,7 +59,7 @@ int portNumber = portConf.getValue().getInteger(80);
           exceptions (e.g. via getInteger()), you can write:
         </p>
         <source>
-GenericValueIF portValue = portConf.getValue();
+GenericValue portValue = portConf.getValue();
 if (portValue.hasValue()) {          
   int portNumber = portValue.getInteger();
   ...
@@ -83,13 +83,13 @@ if (portValue.hasValue()) {
           descendants matching the given path. Here is an example:
         </p>
         <source><![CDATA[
-Iterator<? extends ConfigurationIF> attributeIt = serverConf.getDescendants("@port|@host");
+Iterator<? extends Configuration> attributeIt = serverConf.getDescendants("@port|@host");
 while (attributeIt.hasNext()) {
-  ConfigurationIF attr = attributeIt.next();
+  Configuration attr = attributeIt.next();
   ...
 }
-Collection<? extends ConfigurationIF> serviceCollection = serverConf.getDescendants("service");
-for (ConfigurationIF serviceConf: serviceCollection) {
+Collection<? extends Configuration> serviceCollection = serverConf.getDescendants("service");
+for (Configuration serviceConf: serviceCollection) {
   MyServiceApi serviceInstance = serviceConf.getValue().getJavaClassInstance(MyServiceApi.class);
   if (serviceConf.getDescendant("@singleton").getValue().getBoolean()) {
     ...
@@ -106,8 +106,8 @@ for (ConfigurationIF serviceConf: serviceCollection) {
       </subsection>
       <subsection name="Learn more...">
         <p>
-          Congratulations, you have completed the 1 minute tutorial. Please continue with 
-          the <a href="5min-tutorial.html">5 minute tutorial</a>.
+          Congratulations, you have completed the tutorial.
+          Please continue with the documentation how to <a href="create-config.html">create initial configuration</a>.
         </p>
       </subsection>
     </section>

@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
+import java.lang.reflect.Type;
+
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlSerializer;
 import net.sf.mmm.util.xml.api.XmlWriter;
@@ -24,7 +26,7 @@ import org.w3c.dom.Element;
  * 
  * @param <V>
  *        is the templated type of the managed value type. See also
- *        {@link #getValueType()}.
+ *        {@link #getValueClass()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -44,15 +46,15 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * the value. ATTENTION: please prefer to use the {@link #XML_ATR_VALUE_NAME}
    * attribute prior to this attribute. Be also aware, that this attribute
    * contains may contain the class of a value implementation, while the
-   * {@link #getValueType() "value type"} of the according value may be an
+   * {@link #getValueClass() "value type"} of the according value may be an
    * interface or abstract-superclass of the value.
    */
   String XML_ATR_VALUE_CLASS = "class";
 
   /**
    * This method gets the logical name of the managed value type.<br>
-   * To avoid using implementation class-pathes as reference for a logical value
-   * type (e.g. in the content-modell) the value type can be represented and
+   * To avoid using implementation class-paths as reference for a logical value
+   * type (e.g. in the content-model) the value type can be represented and
    * identified by this name.
    * 
    * @see ValueService#getManager(String)
@@ -60,6 +62,15 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * @return the name.
    */
   String getName();
+
+  /**
+   * This method gets the type of the managed value as class.
+   * 
+   * @see #getValueType()
+   * 
+   * @return the value class.
+   */
+  Class<V> getValueClass();
 
   /**
    * This method gets the type of the managed value. Typically this should be
@@ -70,11 +81,11 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * 
    * @return the value type.
    */
-  Class<V> getValueType();
+  Type getValueType();
 
   /**
    * This method creates an instance of the managed value encoded as string. It
-   * is the inverse operation of the values {@link Object#toString()} method.
+   * is the inverse operation of the {@link #toString(Object)} method.
    * 
    * @param valueAsString
    *        is the string representation of the value in the format as produced
@@ -83,7 +94,7 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    *        value manager.
    * @return the created value.
    * @throws ValueParseException
-   *         if the string representation is invalid for this value (e.g. "abc"
+   *         if the string representation is invalid for this value (e.g. "foo"
    *         is invalid for an integer value while a string value will accept
    *         any string and never throw this exception).
    */
@@ -108,8 +119,8 @@ public interface ValueManager<V> extends XmlSerializer<V> {
 
   /**
    * This method creates an XML representation of the given value. <br>
-   * E.g. the string "abc" may be represented as
-   * <code>&lt;value type="String"&gt;abc&lt;/value&gt;</code>
+   * E.g. the string "foo" may be represented as
+   * <code>&lt;value type="String"&gt;foo&lt;/value&gt;</code>
    * 
    * @see XmlSerializer#toXml(XmlWriter, Object)
    * 
@@ -123,7 +134,8 @@ public interface ValueManager<V> extends XmlSerializer<V> {
   void toXml(XmlWriter xmlWriter, V value) throws XmlException;
 
   /**
-   * This method creates a String representation of the given value.
+   * This method creates a string representation of the given value. The result
+   * has to be understood by the {@link #parse(String)} method.
    * 
    * @param value
    *        is the value to get a string. It may be <code>null</code>.
@@ -134,11 +146,11 @@ public interface ValueManager<V> extends XmlSerializer<V> {
   /**
    * This method checks if the given values <code>value1</code> and
    * <code>value2</code> or {@link Object#equals(Object) equal} to each other.
-   * This method accepts <code>null</code> values. If both vaues are NOT
+   * This method accepts <code>null</code> values. If both values are NOT
    * <code>null</code>, it returns
    * <code>value1.{@link Object#equals(Object) equals}(value2)</code> by
-   * default. In specific situations the semantic of equals can be chaned by the
-   * implementation of this method.
+   * default. In specific situations the semantic of equals can be changed by
+   * the implementation of this method.
    * 
    * @param value1
    *        is the first value to compare. May be <code>null</code>.

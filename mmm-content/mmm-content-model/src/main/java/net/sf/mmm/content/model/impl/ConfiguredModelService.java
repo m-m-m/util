@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
-import java.util.Collection;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
@@ -16,8 +14,7 @@ import net.sf.mmm.content.value.impl.IdImpl;
 /**
  * This is an implementation of the {@link MutableContentModelService} that
  * persists the content-model in an XML file.<br>
- * <b>ATTENTION:</b><br/>
- * This implementation is only 
+ * <b>ATTENTION:</b><br/> This implementation is only
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -58,15 +55,18 @@ public class ConfiguredModelService extends AbstractMutableContentModelService {
   /**
    * This method initializes this class. It has to be called after construction
    * and injection is completed.
+   * 
+   * @see net.sf.mmm.content.model.impl.AbstractMutableContentModelService#initialize()
    */
   @PostConstruct
-  public void initialize() {
+  public void initialize() throws Exception {
 
+    super.initialize();
     if (this.config == null) {
-      // throw new Injection
+      // throw new MissingParameterException
+      throw new IllegalStateException();
     }
-    Collection<? extends Configuration> classConfigs = this.config
-        .getDescendants(ContentClass.CLASS_NAME + "/" + ContentClass.CLASS_NAME);
+    importClass(this.config.getDescendant(ContentClass.CLASS_NAME), null);
   }
 
   /**

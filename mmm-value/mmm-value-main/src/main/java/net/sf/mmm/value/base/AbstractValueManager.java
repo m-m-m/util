@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.base;
 
+import java.lang.reflect.Type;
+
 import org.w3c.dom.Element;
 
 import net.sf.mmm.nls.api.NlsMessage;
@@ -50,7 +52,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
 
     if (this.toStringMessage == null) {
       this.toStringMessage = new NlsMessageImpl(NlsBundleValueMain.MSG_MANAGER_TO_STRING, getName(),
-          getValueType());
+          getValueClass());
     }
     return this.toStringMessage;
   }
@@ -114,7 +116,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
 
   /**
-   * This method validates the toplevel element of the given XML encoded
+   * This method validates the top-level element of the given XML encoded
    * value.
    * 
    * @param valueAsXml
@@ -135,10 +137,10 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
       }
     } else if (valueAsXml.hasAttribute(XML_ATR_VALUE_CLASS)) {
       String className = valueAsXml.getAttribute(XML_ATR_VALUE_CLASS);
-      if (!getValueType().getName().equals(className)) {
+      if (!getValueClass().getName().equals(className)) {
         try {
           Class clazz = Class.forName(className);
-          if (!getValueType().isAssignableFrom(clazz)) {
+          if (!getValueClass().isAssignableFrom(clazz)) {
             // TODO
             throw new ValueParseException(null);
           }
@@ -153,6 +155,14 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
       // TODO
       throw new ValueParseException(null);
     }
+  }
+  
+  /**
+   * @see net.sf.mmm.value.api.ValueManager#getValueType()
+   */
+  public Type getValueType() {
+  
+    return getValueClass();
   }
   
   /**
@@ -174,7 +184,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   /**
    * This method gets the String that represents the <code>null</code>
    * value. This method always returns the same (==) object ({@link GenericValue#NULL_STRING}).
-   * It can be overriden to change the <code>null</code> string.
+   * It can be overridden to change the <code>null</code> string.
    * 
    * @return the string that represents the <code>null</code> value.
    */

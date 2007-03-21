@@ -50,7 +50,7 @@ public class ValueServiceTest extends TestCase {
     ValueManager manager = this.service.getManager(type);
     assertNotNull(manager);
     assertSame(this.service.getManager(name), manager);
-    assertSame(manager.getValueType(), type);
+    assertSame(manager.getValueClass(), type);
     assertEquals(manager.getName(), name);
     return manager;
   }

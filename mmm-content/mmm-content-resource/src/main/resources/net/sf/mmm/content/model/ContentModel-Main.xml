@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<ContentModel xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
+  <Class id="10" name="Resource" system="true" abstract="true" extendable="false">
+    <Field id="32" name="modifiers" type="ClassModifiers" final="true"
+      read-only="true"/>
+    <Class id="11" name="Folder" system="true" final="true">
+    </Class>
+    <Class id="12" name="File" system="true" final="true">
+      
+    </Class>
+    <Class id="13" name="Document" system="true" abstract="true">
+      
+    </Class>
+    
+  </Class>
+</ContentModel>

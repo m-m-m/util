@@ -70,9 +70,9 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     this.fields = new HashMap<String, AbstractContentField>();
     this.fieldCollection = Collections.unmodifiableCollection(this.fields.values());
     if (this.superClass != null) {
-      if (!this.superClass.getModifiers().isExtendable() && !classModifiers.isSystem()) {
+      if (this.superClass.getModifiers().isFinal()) {
         // TODO: NLS
-        throw new ContentModelRuntimeException("Can NOT extend un-extendable class!");
+        throw new ContentModelRuntimeException("Can NOT extend final class!");
       }
     }
   }
@@ -281,9 +281,9 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
       // TODO: NLS
       throw new ContentModelRuntimeException("System-class can NOT extend user-class!");
     }
-    if (!getModifiers().isExtendable() && !subClass.getModifiers().isSystem()) {
+    if (getModifiers().isFinal()) {
       // TODO: NLS
-      throw new ContentModelRuntimeException("Can NOT extend un-extendable class!");
+      throw new ContentModelRuntimeException("Can NOT extend final class!");
     }
     assert (!this.subClasses.contains(subClass));
     this.subClasses.add(subClass);
