@@ -47,7 +47,7 @@ public class ExpressionVariable extends AbstractVariable {
   }
 
   /**
-   * @see net.sf.mmm.term.base.AbstractVariable#getVariableName(net.sf.mmm.context.api.Context)
+   * {@inheritDoc}
    */
   @Override
   public String getVariableName(Context environment) throws ValueException {
@@ -60,7 +60,7 @@ public class ExpressionVariable extends AbstractVariable {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter serializer) throws XmlException {
 
@@ -70,7 +70,7 @@ public class ExpressionVariable extends AbstractVariable {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

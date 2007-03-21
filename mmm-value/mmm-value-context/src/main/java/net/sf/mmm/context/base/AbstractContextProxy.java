@@ -34,7 +34,7 @@ public abstract class AbstractContextProxy implements Context {
     protected abstract Context getContext();
     
     /**
-     * @see net.sf.mmm.context.api.Context#getObject(java.lang.String)
+     * {@inheritDoc}
      */
     public Object getObject(String variableName) {
 
@@ -42,7 +42,7 @@ public abstract class AbstractContextProxy implements Context {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#getValue(java.lang.String)
+     * {@inheritDoc}
      */
     public GenericValue getValue(String variableName) {
 
@@ -50,7 +50,7 @@ public abstract class AbstractContextProxy implements Context {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#hasValue(java.lang.String)
+     * {@inheritDoc}
      */
     public boolean hasValue(String variableName) {
     
@@ -58,7 +58,7 @@ public abstract class AbstractContextProxy implements Context {
     }
     
     /**
-     * @see net.sf.mmm.context.api.Context#getVariableNames()
+     * {@inheritDoc}
      */
     public Set<String> getVariableNames() {
 
@@ -66,7 +66,7 @@ public abstract class AbstractContextProxy implements Context {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#createChildContext()
+     * {@inheritDoc}
      */
     public MutableContext createChildContext() {
 

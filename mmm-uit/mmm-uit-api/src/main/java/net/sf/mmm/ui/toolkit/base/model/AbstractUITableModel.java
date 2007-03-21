@@ -35,7 +35,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#addListener(net.sf.mmm.ui.toolkit.api.event.UITableModelListener)
+   * {@inheritDoc}
    */
   public void addListener(UITableModelListener listener) {
 
@@ -43,7 +43,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#removeListener(net.sf.mmm.ui.toolkit.api.event.UITableModelListener)
+   * {@inheritDoc}
    */
   public void removeListener(UITableModelListener listener) {
 
@@ -51,8 +51,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getCellValueAsString(int,
-   *      int)
+   * {@inheritDoc}
    */
   public String getCellValueAsString(int rowIndex, int columnIndex) {
 

@@ -47,8 +47,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.AbstractUIListModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UIListModelListener,
-   *      java.lang.Throwable)
+   * {@inheritDoc}
    */
   @Override
   protected void handleListenerException(UIListModelListener listener, Throwable t) {
@@ -57,7 +56,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElementCount()
+   * {@inheritDoc}
    */
   public int getElementCount() {
 
@@ -65,7 +64,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElement(int)
+   * {@inheritDoc}
    */
   public Integer getElement(int index) {
 
@@ -76,7 +75,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRange#setMaximumValue(int)
+   * {@inheritDoc}
    */
   public void setMaximumValue(int newMaximum) {
 
@@ -101,7 +100,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRange#setMinimumValue(int)
+   * {@inheritDoc}
    */
   public void setMinimumValue(int newMinimum) {
 
@@ -124,7 +123,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadIntegerRange#getMaximumValue()
+   * {@inheritDoc}
    */
   public int getMaximumValue() {
 
@@ -132,7 +131,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadIntegerRange#getMinimumValue()
+   * {@inheritDoc}
    */
   public int getMinimumValue() {
 
@@ -140,7 +139,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getIndexOf(Object)
+   * {@inheritDoc}
    */
   @Override
   public int getIndexOf(Integer element) {
@@ -153,7 +152,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getIndexOfString(java.lang.String)
+   * {@inheritDoc}
    */
   public int getIndexOfString(String element) {
 

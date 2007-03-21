@@ -26,8 +26,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#convertValue(java.lang.Class,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   @Override
@@ -110,7 +109,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#convertValue(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   protected String convertValue(Object value) throws WrongValueTypeException {

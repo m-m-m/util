@@ -88,7 +88,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getPath()
+   * {@inheritDoc}
    */
   public final String getPath() {
 
@@ -331,8 +331,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
       throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#createChild(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public AbstractConfiguration createChild(String name, String namespaceUri)
       throws ConfigurationException {
@@ -518,7 +517,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
+   * {@inheritDoc}
    */
   public AbstractConfiguration getDescendant(String path) {
 
@@ -526,8 +525,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#getDescendant(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
@@ -559,7 +557,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String)
+   * {@inheritDoc}
    */
   public Collection<AbstractConfiguration> getDescendants(String path) {
 
@@ -567,8 +565,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#getDescendants(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
@@ -617,7 +614,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   public abstract AbstractConfiguration getParent();
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#isDescendantOf(net.sf.mmm.configuration.api.Configuration)
+   * {@inheritDoc}
    */
   public final boolean isDescendantOf(Configuration ancestor) {
 
@@ -625,7 +622,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getAncestorDistance(net.sf.mmm.configuration.api.Configuration)
+   * {@inheritDoc}
    */
   public final int getAncestorDistance(Configuration ancestor) {
 
@@ -648,7 +645,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getRelativePath(net.sf.mmm.configuration.api.Configuration)
+   * {@inheritDoc}
    */
   public final String getRelativePath(Configuration ancestor) {
 
@@ -713,7 +710,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   protected abstract void doRemove() throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#remove()
+   * {@inheritDoc}
    */
   public void remove() throws ConfigurationException {
 
@@ -745,7 +742,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   protected abstract AbstractConfiguration doDisable() throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
+   * {@inheritDoc}
    */
   public void disable() throws ConfigurationException {
 
@@ -779,7 +776,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

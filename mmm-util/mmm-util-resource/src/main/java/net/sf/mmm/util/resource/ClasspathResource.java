@@ -143,7 +143,7 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.DataResource#isAvailable()
+   * {@inheritDoc}
    */
   public boolean isAvailable() {
 
@@ -151,7 +151,7 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.DataResource#getPath()
+   * {@inheritDoc}
    */
   public String getPath() {
 
@@ -159,7 +159,7 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.DataResource#getUrl()
+   * {@inheritDoc}
    */
   public URL getUrl() throws ResourceNotAvailableException {
 

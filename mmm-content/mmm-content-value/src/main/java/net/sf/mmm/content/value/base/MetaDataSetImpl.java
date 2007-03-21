@@ -56,7 +56,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MetaDataSet#getKeys()
+   * {@inheritDoc}
    */
   public Collection<MetaDataKey> getKeys() {
 
@@ -64,7 +64,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MetaDataSet#getMetaData(net.sf.mmm.content.value.api.MetaDataKey)
+   * {@inheritDoc}
    */
   public String getMetaData(MetaDataKey key) {
 
@@ -72,8 +72,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableMetaDataSet#setMetaData(net.sf.mmm.content.value.api.MetaDataKey,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public String setMetaData(MetaDataKey key, String value) {
 
@@ -81,7 +80,7 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableMetaDataSet#unsetMetaData(net.sf.mmm.content.value.api.MetaDataKey)
+   * {@inheritDoc}
    */
   public String unsetMetaData(MetaDataKey key) {
 

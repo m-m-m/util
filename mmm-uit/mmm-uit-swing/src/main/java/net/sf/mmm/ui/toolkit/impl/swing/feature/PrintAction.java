@@ -53,7 +53,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.feature.Action#getActionListener()
+   * {@inheritDoc}
    */
   public UIActionListener getActionListener() {
 
@@ -61,8 +61,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
-   *      net.sf.mmm.ui.toolkit.api.event.ActionType)
+   * {@inheritDoc}
    */
   public void invoke(UINode source, ActionType action) {
 
@@ -88,8 +87,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   }
 
   /**
-   * @see java.awt.print.Printable#print(java.awt.Graphics,
-   *      java.awt.print.PageFormat, int)
+   * {@inheritDoc}
    */
   public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
 

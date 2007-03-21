@@ -212,7 +212,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ClassModifiers#isAbstract()
+   * {@inheritDoc}
    */
   public boolean isAbstract() {
 
@@ -220,7 +220,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ClassModifiers#isExtendable()
+   * {@inheritDoc}
    */
   public boolean isExtendable() {
 
@@ -234,7 +234,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.base.AbstractModifiers#setXmlAttributes(net.sf.mmm.util.xml.api.XmlWriter)
+   * {@inheritDoc}
    */
   @Override
   protected void setXmlAttributes(XmlWriter xmlWriter) throws XmlException {
@@ -247,7 +247,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 
@@ -273,7 +273,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
+     * {@inheritDoc}
      */
     public Class<ClassModifiers> getValueClass() {
 
@@ -281,7 +281,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
+     * {@inheritDoc}
      */
     public ClassModifiers parse(String valueAsString) throws ValueParseException {
 
@@ -307,7 +307,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractValueManager#toString(java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
     public String toString(ClassModifiers value) {
@@ -351,7 +351,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractValueManager#parse(org.w3c.dom.Element)
+     * {@inheritDoc}
      */
     @Override
     public ClassModifiers parse(Element valueAsXml) throws ValueParseException {
@@ -366,8 +366,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractValueManager#toXmlValue(net.sf.mmm.util.xml.api.XmlWriter,
-     *      java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
     protected void toXmlValue(XmlWriter xmlWriter, ClassModifiers value) throws XmlException {

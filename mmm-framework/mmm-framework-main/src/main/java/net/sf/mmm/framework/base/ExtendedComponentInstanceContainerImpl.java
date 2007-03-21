@@ -50,7 +50,7 @@ public class ExtendedComponentInstanceContainerImpl<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ExtendedComponentInstanceContainer#getDescriptor()
+     * {@inheritDoc}
      */
     public ExtendedComponentDescriptor<S, I> getDescriptor() {
 
@@ -58,7 +58,7 @@ public class ExtendedComponentInstanceContainerImpl<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ExtendedComponentInstanceContainer#getLifecycleState()
+     * {@inheritDoc}
      */
     public String getLifecycleState() {
 
@@ -66,7 +66,7 @@ public class ExtendedComponentInstanceContainerImpl<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ExtendedComponentInstanceContainer#getPrivateInstance()
+     * {@inheritDoc}
      */
     public I getPrivateInstance() {
 
@@ -85,7 +85,7 @@ public class ExtendedComponentInstanceContainerImpl<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.api.ExtendedComponentInstanceContainer#setLifecycleState(java.lang.String)
+     * {@inheritDoc}
      */
     public void setLifecycleState(String state) {
 

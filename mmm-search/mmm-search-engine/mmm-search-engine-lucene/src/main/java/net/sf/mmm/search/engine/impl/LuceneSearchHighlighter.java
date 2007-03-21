@@ -47,7 +47,7 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.base.SearchHighlighter#getHighlightedText(java.lang.String)
+   * {@inheritDoc}
    */
   public String getHighlightedText(String text) {
 

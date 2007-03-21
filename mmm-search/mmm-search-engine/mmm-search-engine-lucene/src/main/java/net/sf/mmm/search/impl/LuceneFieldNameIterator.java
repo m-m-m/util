@@ -45,7 +45,7 @@ public final class LuceneFieldNameIterator implements Iterator<String> {
   }
 
   /**
-   * @see java.util.Iterator#hasNext()
+   * {@inheritDoc}
    */
   public boolean hasNext() {
 
@@ -53,7 +53,7 @@ public final class LuceneFieldNameIterator implements Iterator<String> {
   }
 
   /**
-   * @see java.util.Iterator#next()
+   * {@inheritDoc}
    */
   public String next() {
 
@@ -67,7 +67,7 @@ public final class LuceneFieldNameIterator implements Iterator<String> {
   }
 
   /**
-   * @see java.util.Iterator#remove()
+   * {@inheritDoc}
    */
   public void remove() {
 

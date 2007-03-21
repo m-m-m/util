@@ -72,7 +72,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.value.api.type.DurationIF#getDays()
+   * {@inheritDoc}
    */
   public long getDays() {
 
@@ -80,7 +80,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.value.api.type.DurationIF#getHours()
+   * {@inheritDoc}
    */
   public int getHours() {
 
@@ -88,7 +88,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.value.api.type.DurationIF#getMinutes()
+   * {@inheritDoc}
    */
   public int getMinutes() {
 
@@ -96,7 +96,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.value.api.type.DurationIF#getSeconds()
+   * {@inheritDoc}
    */
   public int getSeconds() {
 
@@ -104,7 +104,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.value.api.type.DurationIF#getMilliseconds()
+   * {@inheritDoc}
    */
   public int getMilliseconds() {
 
@@ -112,7 +112,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.value.api.type.DurationIF#asMilliseconds()
+   * {@inheritDoc}
    */
   public long asMilliseconds() {
 
@@ -120,7 +120,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -143,7 +143,7 @@ public class Duration implements DurationIF {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 

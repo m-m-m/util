@@ -66,7 +66,7 @@ public class UrlAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getUniqueUri()
+   * {@inheritDoc}
    */
   public String getUniqueUri() {
 
@@ -84,7 +84,7 @@ public class UrlAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -92,7 +92,7 @@ public class UrlAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getReadAccess()
+   * {@inheritDoc}
    */
   public InputStream getReadAccess() throws ConfigurationException {
 
@@ -104,7 +104,7 @@ public class UrlAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getWriteAccess()
+   * {@inheritDoc}
    */
   public OutputStream getWriteAccess() throws ConfigurationException {
 
@@ -113,7 +113,7 @@ public class UrlAccess extends AbstractConfigurationAccess {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#isReadOnly()
+   * {@inheritDoc}
    */
   public boolean isReadOnly() {
 

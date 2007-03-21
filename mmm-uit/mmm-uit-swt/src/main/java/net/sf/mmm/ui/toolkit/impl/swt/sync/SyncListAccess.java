@@ -79,7 +79,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#createSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void createSynchron() {
@@ -89,7 +89,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#performSynchron(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected void performSynchron(String operation) {
@@ -110,7 +110,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess#getSwtObject()
+   * {@inheritDoc}
    */
   @Override
   public List getSwtObject() {

@@ -26,7 +26,7 @@ public abstract class AbstractConfigurationFactory implements ConfigurationFacto
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess)
+   * {@inheritDoc}
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access)
       throws ConfigurationException {

@@ -33,7 +33,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UIPi
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -41,7 +41,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UIPi
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
+   * {@inheritDoc}
    */
   public void setSize(int newWidth, int newHeight) {
 
@@ -50,7 +50,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UIPi
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
+   * {@inheritDoc}
    */
   public boolean isResizeable() {
 
@@ -58,7 +58,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UIPi
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * {@inheritDoc}
    */
   public int getWidth() {
 
@@ -66,7 +66,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UIPi
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * {@inheritDoc}
    */
   public int getHeight() {
 

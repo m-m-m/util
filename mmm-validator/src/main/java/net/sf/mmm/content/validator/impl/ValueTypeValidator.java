@@ -36,7 +36,7 @@ public class ValueTypeValidator extends AbstractValueValidator {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.api.ValueValidator#validate(Object)
+   * {@inheritDoc}
    */
   public ValidationResult validate(Object value) {
 

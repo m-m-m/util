@@ -27,8 +27,7 @@ public class ContentParserXml implements ContentParser {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
-   *      long)
+   * {@inheritDoc}
    */
   public Properties parse(InputStream inputStream, long filesize) throws Exception {
 

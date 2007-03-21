@@ -54,7 +54,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
     this.namespace = propertyNamespace;
   }
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getOwnerDocument()
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -63,7 +63,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getPlainString()
+   * {@inheritDoc}
    */
   @Override
   protected String getPlainString() {
@@ -72,7 +72,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#setPlainString(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected void setPlainString(String newValue) {
@@ -81,7 +81,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -89,7 +89,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
+   * {@inheritDoc}
    */
   public String getNamespaceUri() {
 
@@ -97,7 +97,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
+   * {@inheritDoc}
    */
   @Override
   protected void doRemove() throws ConfigurationException {
@@ -107,7 +107,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {

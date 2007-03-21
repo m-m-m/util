@@ -40,8 +40,7 @@ public class XmlFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#configure(String,
-   *      Context, Configuration) 
+   * {@inheritDoc} 
    */
   public void configure(String prefix, Context environment, Configuration include)
       throws ConfigurationException {
@@ -50,8 +49,7 @@ public class XmlFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      net.sf.mmm.context.api.MutableContext) 
+   * {@inheritDoc} 
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access, MutableContext env)
       throws ConfigurationException {
@@ -60,8 +58,7 @@ public class XmlFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      net.sf.mmm.configuration.base.AbstractConfiguration) 
+   * {@inheritDoc} 
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access,
       AbstractConfiguration parentConfiguration) throws ConfigurationException {

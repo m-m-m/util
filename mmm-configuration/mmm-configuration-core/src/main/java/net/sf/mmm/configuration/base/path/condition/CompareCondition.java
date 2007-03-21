@@ -56,7 +56,7 @@ public class CompareCondition extends PathCondition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#acceptDescendant(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   protected boolean acceptDescendant(AbstractConfiguration descendant) {
@@ -72,7 +72,7 @@ public class CompareCondition extends PathCondition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#canBeEstablished(net.sf.mmm.configuration.base.AbstractConfiguration, java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
@@ -92,8 +92,7 @@ public class CompareCondition extends PathCondition {
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#establish(net.sf.mmm.configuration.base.AbstractConfiguration,
-   *      String)
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
@@ -111,7 +110,7 @@ public class CompareCondition extends PathCondition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#doEstablish(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   protected void doEstablish(AbstractConfiguration node) {
@@ -160,7 +159,7 @@ public class CompareCondition extends PathCondition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.PathCondition#appendCondition(java.lang.StringBuffer)
+   * {@inheritDoc}
    */
   @Override
   protected void appendCondition(StringBuffer buffer) {

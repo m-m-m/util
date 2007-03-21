@@ -36,7 +36,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   }
 
   /**
-   * @see net.sf.mmm.search.engine.impl.AbstractLuceneSearchQuery#getLuceneQuery()
+   * {@inheritDoc}
    */
   @Override
   public BooleanQuery getLuceneQuery() {
@@ -63,7 +63,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.ComplexSearchQuery#addExcludingQuery(net.sf.mmm.search.engine.api.SearchQuery)
+   * {@inheritDoc}
    */
   public void addExcludingQuery(SearchQuery subQuery) {
 
@@ -71,7 +71,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.ComplexSearchQuery#addOptionalQuery(net.sf.mmm.search.engine.api.SearchQuery)
+   * {@inheritDoc}
    */
   public void addOptionalQuery(SearchQuery subQuery) {
 
@@ -79,7 +79,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.ComplexSearchQuery#addRequiredQuery(net.sf.mmm.search.engine.api.SearchQuery)
+   * {@inheritDoc}
    */
   public void addRequiredQuery(SearchQuery subQuery) {
 
@@ -87,7 +87,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.ComplexSearchQuery#getSubQueryCount()
+   * {@inheritDoc}
    */
   public int getSubQueryCount() {
 

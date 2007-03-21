@@ -46,7 +46,7 @@ public abstract class UIAwtNode extends AbstractUINode {
     ActionListener listener = new ActionListener() {
 
       /**
-       * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+       * {@inheritDoc}
        */
       public void actionPerformed(ActionEvent e) {
 
@@ -67,7 +67,7 @@ public abstract class UIAwtNode extends AbstractUINode {
     ChangeListener listener = new ChangeListener() {
 
       /**
-       * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent)
+       * {@inheritDoc}
        */
       public void stateChanged(ChangeEvent e) {
 

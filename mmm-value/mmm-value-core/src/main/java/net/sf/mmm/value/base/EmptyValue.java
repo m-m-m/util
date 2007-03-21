@@ -47,7 +47,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
+   * {@inheritDoc}
    */
   @Override
   protected Object getPlainValue() {
@@ -56,7 +56,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   protected void setPlainValue(Object newValue) {
@@ -65,7 +65,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
 
@@ -73,7 +73,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
+   * {@inheritDoc}
    */
   @Override
   public boolean isAddDefaults() {
@@ -82,7 +82,7 @@ public class EmptyValue extends AbstractObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractObjectValue#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

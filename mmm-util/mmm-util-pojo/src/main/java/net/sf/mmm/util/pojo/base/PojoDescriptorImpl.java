@@ -60,7 +60,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoDescriptor#getPojoType()
+   * {@inheritDoc}
    */
   public Class<P> getPojoType() {
 
@@ -68,7 +68,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoDescriptor#getPropertyDescriptor(java.lang.String)
+   * {@inheritDoc}
    */
   public PojoPropertyDescriptorImpl getPropertyDescriptor(String propertyName) {
 
@@ -123,8 +123,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoDescriptor#getProperty(java.lang.Object,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public Object getProperty(P pojoInstance, String propertyName)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
@@ -133,8 +132,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoDescriptor#setProperty(java.lang.Object,
-   *      java.lang.String, java.lang.Object)
+   * {@inheritDoc}
    */
   public void setProperty(P pojoInstance, String propertyName, Object value)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
@@ -144,8 +142,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoDescriptor#addPropertyItem(java.lang.Object,
-   *      java.lang.String, java.lang.Object)
+   * {@inheritDoc}
    */
   public void addPropertyItem(P pojoInstance, String propertyName, Object item)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {

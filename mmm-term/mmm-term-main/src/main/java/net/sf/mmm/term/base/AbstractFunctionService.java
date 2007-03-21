@@ -67,7 +67,7 @@ public abstract class AbstractFunctionService implements FunctionService {
   }
 
   /**
-   * @see net.sf.mmm.term.api.FunctionService#getFunctionBySymbol(java.lang.String)
+   * {@inheritDoc}
    */
   public Function getFunctionBySymbol(String symbol) throws NoSuchFunctionException {
 
@@ -79,7 +79,7 @@ public abstract class AbstractFunctionService implements FunctionService {
   }
 
   /**
-   * @see net.sf.mmm.term.api.FunctionService#getFunctionByName(java.lang.String)
+   * {@inheritDoc}
    */
   public Function getFunctionByName(String name) throws NoSuchFunctionException {
 
@@ -91,7 +91,7 @@ public abstract class AbstractFunctionService implements FunctionService {
   }
 
   /**
-   * @see net.sf.mmm.term.api.FunctionService#getFunctions()
+   * {@inheritDoc}
    */
   public Iterator<Function> getFunctions() {
 

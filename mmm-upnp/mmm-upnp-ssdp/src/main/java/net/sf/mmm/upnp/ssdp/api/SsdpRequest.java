@@ -171,7 +171,7 @@ public class SsdpRequest extends HttpRequest {
   }
 
   /**
-   * @see net.sf.mmm.util.http.HttpMessage#createHeaderNameHash(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected Object createHeaderNameHash(String name) {

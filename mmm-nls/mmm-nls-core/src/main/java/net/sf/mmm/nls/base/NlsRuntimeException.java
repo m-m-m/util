@@ -90,7 +90,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
+   * {@inheritDoc}
    */
   @Override
   public void printStackTrace(PrintStream s) {
@@ -99,7 +99,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
+   * {@inheritDoc}
    */
   @Override
   public void printStackTrace(PrintWriter s) {
@@ -108,8 +108,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsThrowable#printStackTrace(java.io.PrintStream,
-   *      StringTranslator)
+   * {@inheritDoc}
    */
   public void printStackTrace(PrintStream stream, StringTranslator nationalizer) {
 
@@ -133,8 +132,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsThrowable#printStackTrace(java.io.PrintWriter,
-   *      net.sf.mmm.nls.api.StringTranslator)
+   * {@inheritDoc}
    */
   public void printStackTrace(PrintWriter writer, StringTranslator nationalizer) {
 
@@ -158,7 +156,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see java.lang.Throwable#getMessage()
+   * {@inheritDoc}
    */
   @Override
   public String getMessage() {
@@ -167,7 +165,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator)
+   * {@inheritDoc}
    */
   public String getLocalizedMessage(StringTranslator nationalizer) {
 
@@ -177,8 +175,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsThrowable#getLocalizedMessage(StringTranslator,
-   *      java.lang.StringBuffer)
+   * {@inheritDoc}
    */
   public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message) {
 

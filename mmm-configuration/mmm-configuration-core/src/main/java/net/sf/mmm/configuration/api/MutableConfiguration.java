@@ -17,29 +17,27 @@ import net.sf.mmm.value.api.MutableGenericValue;
 public interface MutableConfiguration extends Configuration {
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getValue()
+   * {@inheritDoc}
    */
   MutableGenericValue getValue();
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String)
+   * {@inheritDoc}
    */
   MutableConfiguration getDescendant(String path);
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   MutableConfiguration getDescendant(String path, String namespaceUri);
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String)
+   * {@inheritDoc}
    */
   Collection<? extends MutableConfiguration> getDescendants(String path);
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   Collection<? extends MutableConfiguration> getDescendants(String path, String namespaceUri);
 

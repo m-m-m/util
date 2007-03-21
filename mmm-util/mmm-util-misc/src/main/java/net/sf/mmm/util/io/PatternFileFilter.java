@@ -78,7 +78,7 @@ public class PatternFileFilter implements FileFilter {
   }
 
   /**
-   * @see java.io.FileFilter#accept(java.io.File)
+   * {@inheritDoc}
    */
   public boolean accept(File file) {
 

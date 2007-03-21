@@ -45,7 +45,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -53,7 +53,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public AbstractSyncControlAccess getSyncAccess() {
@@ -62,7 +62,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -70,7 +70,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -78,7 +78,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadIcon#getIcon()
+   * {@inheritDoc}
    */
   public UIPictureImpl getIcon() {
 
@@ -86,7 +86,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIcon#setIcon(net.sf.mmm.ui.toolkit.api.UIPicture)
+   * {@inheritDoc}
    */
   public void setIcon(UIPicture newIcon) {
 

@@ -37,8 +37,7 @@ public abstract class AbstractBlob implements MutableBlob {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableBlob#writeData(java.io.InputStream,
-   *      boolean)
+   * {@inheritDoc}
    */
   public void writeData(InputStream inputStream, boolean append) throws ValueIOException {
 
@@ -68,7 +67,7 @@ public abstract class AbstractBlob implements MutableBlob {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Blob#streamData(java.io.OutputStream)
+   * {@inheritDoc}
    */
   public void streamData(OutputStream outStream) throws ValueIOException {
 
@@ -84,7 +83,7 @@ public abstract class AbstractBlob implements MutableBlob {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Blob#getSize()
+   * {@inheritDoc}
    */
   public long getSize() {
 
@@ -92,7 +91,7 @@ public abstract class AbstractBlob implements MutableBlob {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Blob#getMimeType()
+   * {@inheritDoc}
    */
   public String getMimeType() {
 

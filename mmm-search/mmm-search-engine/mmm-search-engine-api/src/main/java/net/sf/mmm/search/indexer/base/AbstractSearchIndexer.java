@@ -25,7 +25,7 @@ public abstract class AbstractSearchIndexer implements SearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#update(net.sf.mmm.search.indexer.api.MutableSearchEntry)
+   * {@inheritDoc}
    */
   public int update(MutableSearchEntry entry) throws SearchException {
 

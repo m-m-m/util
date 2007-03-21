@@ -73,7 +73,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder#createNullQuery()
+   * {@inheritDoc}
    */
   @Override
   protected SearchQuery createNullQuery() {
@@ -82,7 +82,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#createComplexQuery()
+   * {@inheritDoc}
    */
   public ComplexSearchQuery createComplexQuery() {
 
@@ -90,8 +90,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#createPhraseQuery(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public SearchQuery createPhraseQuery(String property, String phrase) {
 
@@ -113,8 +112,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#createTermQuery(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public SearchQuery createTermQuery(String property, String term) {
 
@@ -169,7 +167,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#parseNativeQuery(java.lang.String)
+   * {@inheritDoc}
    */
   public SearchQuery parseNativeQuery(String query) throws SearchException {
 

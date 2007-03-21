@@ -75,7 +75,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptor#getCategory()
+   * {@inheritDoc}
    */
   public String getCategory() {
 
@@ -83,7 +83,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptor#getDomain()
+   * {@inheritDoc}
    */
   public String getDomain() {
 
@@ -91,7 +91,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptor#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -132,7 +132,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

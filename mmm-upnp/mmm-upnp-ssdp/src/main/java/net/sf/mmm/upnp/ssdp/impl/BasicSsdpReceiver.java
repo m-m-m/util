@@ -174,7 +174,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     }
 
     /**
-     * @see java.lang.Runnable#run()
+     * {@inheritDoc}
      */
     public void run() {
 

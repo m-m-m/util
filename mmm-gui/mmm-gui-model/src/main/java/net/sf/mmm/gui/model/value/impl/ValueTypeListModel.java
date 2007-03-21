@@ -62,8 +62,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.AbstractUIListModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UIListModelListener,
-   *      java.lang.Throwable)
+   * {@inheritDoc}
    */
   @Override
   protected void handleListenerException(UIListModelListener listener, Throwable t) {
@@ -71,7 +70,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElement(int)
+   * {@inheritDoc}
    */
   public ValueManager getElement(int index) {
 
@@ -79,7 +78,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElementCount()
+   * {@inheritDoc}
    */
   public int getElementCount() {
 
@@ -87,7 +86,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getIndexOfString(java.lang.String)
+   * {@inheritDoc}
    */
   public int getIndexOfString(String element) {
 
@@ -100,7 +99,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.AbstractUIListModel#toString(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   public String toString(ValueManager element) {

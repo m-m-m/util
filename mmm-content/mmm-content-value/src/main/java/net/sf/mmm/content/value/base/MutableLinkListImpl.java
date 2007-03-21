@@ -32,7 +32,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableLinkList#addLink(net.sf.mmm.content.value.api.Link)
+   * {@inheritDoc}
    */
   public void addLink(Link link) {
 
@@ -40,7 +40,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableLinkList#removeLink(int)
+   * {@inheritDoc}
    */
   public Link removeLink(int index) {
 
@@ -48,7 +48,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableLinkList#setLink(int, net.sf.mmm.content.value.api.Link)
+   * {@inheritDoc}
    */
   public Link setLink(int index, Link link) {
 
@@ -56,7 +56,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.MutableLinkList#insertLink(int, net.sf.mmm.content.value.api.Link)
+   * {@inheritDoc}
    */
   public void insertLink(int index, Link link) {
 
@@ -65,7 +65,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.LinkList#getLinkCount()
+   * {@inheritDoc}
    */
   public int getLinkCount() {
 
@@ -73,7 +73,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.LinkList#getLink(int)
+   * {@inheritDoc}
    */
   public Link getLink(int index) {
 
@@ -81,7 +81,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.LinkList#getLinks()
+   * {@inheritDoc}
    */
   public Iterator<Link> getLinks() {
 
@@ -89,7 +89,7 @@ public class MutableLinkListImpl implements MutableLinkList {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.LinkList#getLinks(net.sf.mmm.content.value.api.LinkFilter)
+   * {@inheritDoc}
    */
   public Iterator<Link> getLinks(LinkFilter filter) {
 
@@ -125,7 +125,7 @@ public class MutableLinkListImpl implements MutableLinkList {
     }
 
     /**
-     * @see java.util.Iterator#hasNext()
+     * {@inheritDoc}
      */
     public boolean hasNext() {
 
@@ -142,7 +142,7 @@ public class MutableLinkListImpl implements MutableLinkList {
     }
 
     /**
-     * @see java.util.Iterator#next()
+     * {@inheritDoc}
      */
     public Link next() {
 
@@ -155,7 +155,7 @@ public class MutableLinkListImpl implements MutableLinkList {
     }
 
     /**
-     * @see java.util.Iterator#remove()
+     * {@inheritDoc}
      */
     public void remove() {
 

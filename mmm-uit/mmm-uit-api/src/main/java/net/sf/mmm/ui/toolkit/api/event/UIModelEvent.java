@@ -28,7 +28,7 @@ public abstract class UIModelEvent implements ChangeEvent {
   }
 
   /**
-   * @see net.sf.mmm.util.event.ChangeEvent#getType()
+   * {@inheritDoc}
    */
   public Type getType() {
 

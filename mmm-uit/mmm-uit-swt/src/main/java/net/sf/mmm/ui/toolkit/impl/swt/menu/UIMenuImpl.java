@@ -57,8 +57,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu#createMenuItem(java.lang.String,
-   *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
+   * {@inheritDoc}
    */
   @Override
   protected UIMenuItem createMenuItem(String name, ButtonStyle style) {
@@ -68,7 +67,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu#createSubMenu(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected UIMenu createSubMenu(String name) {
@@ -78,7 +77,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuItem#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -86,7 +85,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addSeparator()
+   * {@inheritDoc}
    */
   public void addSeparator() {
 

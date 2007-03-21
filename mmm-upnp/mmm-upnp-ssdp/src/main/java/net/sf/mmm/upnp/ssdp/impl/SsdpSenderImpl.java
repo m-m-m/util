@@ -105,7 +105,7 @@ public class SsdpSenderImpl implements SsdpSender {
   }
 
   /**
-   * @see net.sf.mmm.upnp.ssdp.api.SsdpSender#send(net.sf.mmm.upnp.ssdp.api.SsdpRequest)
+   * {@inheritDoc}
    */
   public void send(SsdpRequest request) throws IOException {
 

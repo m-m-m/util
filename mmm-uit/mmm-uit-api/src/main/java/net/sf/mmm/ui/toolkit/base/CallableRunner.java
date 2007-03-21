@@ -37,7 +37,7 @@ public class CallableRunner<T> implements Runnable {
   }
 
   /**
-   * @see java.lang.Runnable#run()
+   * {@inheritDoc}
    */
   public void run() {
 

@@ -30,7 +30,7 @@ public class LuceneSearchQuery extends AbstractLuceneSearchQuery {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.impl.AbstractLuceneSearchQuery#getLuceneQuery()
+   * {@inheritDoc}
    */
   @Override
   public Query getLuceneQuery() {

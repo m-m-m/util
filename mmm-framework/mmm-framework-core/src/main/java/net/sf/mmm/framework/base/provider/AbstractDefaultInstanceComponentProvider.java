@@ -15,8 +15,8 @@ import net.sf.mmm.framework.api.ComponentManager;
  * for the {@link ComponentManager#DEFAULT_INSTANCE_ID default instance-id}
  * than the
  * {@link #requestById(String, ComponentDescriptor, String, ComponentManager) handling}
- * for other instance-ids.<br>
- * By default other instance-ids are NOT accepted and cause an
+ * for other instance-IDs.<br>
+ * By default other instance-IDs are NOT accepted and cause an
  * {@link InstanceIdNotAvailableException}.
  * 
  * @param <S>
@@ -46,9 +46,7 @@ public abstract class AbstractDefaultInstanceComponentProvider<S> extends
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   public ComponentInstanceContainer<S> request(String instanceId,
       ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,

@@ -28,7 +28,7 @@ public abstract class AbstractFunction implements Function {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#validateArgumentCount(int)
+   * {@inheritDoc}
    */
   public final void validateArgumentCount(int count) throws CalculationException {
 
@@ -40,7 +40,7 @@ public abstract class AbstractFunction implements Function {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getOperatorPriority()
+   * {@inheritDoc}
    */
   public OperatorPriority getOperatorPriority() {
 
@@ -94,7 +94,7 @@ public abstract class AbstractFunction implements Function {
   }
 
   /**
-   * @see Function#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

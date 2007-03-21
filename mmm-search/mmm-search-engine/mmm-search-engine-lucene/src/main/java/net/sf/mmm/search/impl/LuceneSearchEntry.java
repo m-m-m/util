@@ -33,7 +33,7 @@ public class LuceneSearchEntry extends AbstractSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getProperty(java.lang.String)
+   * {@inheritDoc}
    */
   public String getProperty(String name) {
 
@@ -41,7 +41,7 @@ public class LuceneSearchEntry extends AbstractSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getPropertyNames()
+   * {@inheritDoc}
    */
   public Iterator<String> getPropertyNames() {
 

@@ -115,8 +115,7 @@ public class ContentParserHtml extends ContentParserText {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.api.ContentParser#parse(java.io.InputStream,
-   *      long)
+   * {@inheritDoc}
    */
   public Properties parse(InputStream inputStream, long filesize) throws Exception {
 
@@ -128,8 +127,7 @@ public class ContentParserHtml extends ContentParserText {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.ContentParserText#parseLine(java.util.Properties,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected String parseLine(Properties properties, String line) {

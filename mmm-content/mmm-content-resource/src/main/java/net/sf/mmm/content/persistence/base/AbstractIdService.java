@@ -17,7 +17,7 @@ import net.sf.mmm.value.api.ValueParseException;
 public abstract class AbstractIdService implements IdService {
 
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#createId(net.sf.mmm.content.model.api.ContentClass)
+   * {@inheritDoc}
    */
   public Id createId(ContentClass type) {
 
@@ -50,7 +50,7 @@ public abstract class AbstractIdService implements IdService {
   protected abstract Id createResourceId(ContentClass type);
   
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#getContentClassId(net.sf.mmm.content.value.api.Id)
+   * {@inheritDoc}
    */
   public Id getContentClassId(Id id) {
 
@@ -59,7 +59,7 @@ public abstract class AbstractIdService implements IdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#getContentFolderId()
+   * {@inheritDoc}
    */
   public Id getContentFolderId() {
 
@@ -67,7 +67,7 @@ public abstract class AbstractIdService implements IdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#getRootClassId()
+   * {@inheritDoc}
    */
   public Id getRootClassId() {
 
@@ -75,7 +75,7 @@ public abstract class AbstractIdService implements IdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#getRootFolderId()
+   * {@inheritDoc}
    */
   public Id getRootFolderId() {
 
@@ -83,7 +83,7 @@ public abstract class AbstractIdService implements IdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#releaseId(net.sf.mmm.content.value.api.Id)
+   * {@inheritDoc}
    */
   public void releaseId(Id unusedId) {
 
@@ -92,7 +92,7 @@ public abstract class AbstractIdService implements IdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.api.IdService#toId(java.lang.String)
+   * {@inheritDoc}
    */
   public Id toId(String id) throws ValueParseException {
 

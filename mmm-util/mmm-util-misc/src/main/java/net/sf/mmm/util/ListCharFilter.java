@@ -38,7 +38,7 @@ public class ListCharFilter implements CharFilter {
   }
 
   /**
-   * @see net.sf.mmm.util.CharFilter#accept(char)
+   * {@inheritDoc}
    */
   public boolean accept(char c) {
 

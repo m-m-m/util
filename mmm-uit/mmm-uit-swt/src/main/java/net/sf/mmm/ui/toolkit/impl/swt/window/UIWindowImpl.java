@@ -90,7 +90,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getFactory()
+   * {@inheritDoc}
    */
   @Override
   public UIFactorySwt getFactory() {
@@ -109,7 +109,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
+   * {@inheritDoc}
    */
   @Override
   protected boolean doInitializeListener() {
@@ -132,7 +132,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisible#isVisible()
+   * {@inheritDoc}
    */
   public boolean isVisible() {
 
@@ -140,7 +140,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteVisible#setVisible(boolean)
+   * {@inheritDoc}
    */
   public void setVisible(boolean visibleFlag) {
 
@@ -148,7 +148,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#pack()
+   * {@inheritDoc}
    */
   public void pack() {
 
@@ -156,7 +156,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#getTitle()
+   * {@inheritDoc}
    */
   public String getTitle() {
 
@@ -164,7 +164,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#setTitle(java.lang.String)
+   * {@inheritDoc}
    */
   public void setTitle(String newTitle) {
 
@@ -172,8 +172,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWritePosition#setPosition(int,
-   *      int)
+   * {@inheritDoc}
    */
   public void setPosition(int x, int y) {
 
@@ -181,7 +180,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
+   * {@inheritDoc}
    */
   public void setSize(final int width, final int height) {
 
@@ -189,7 +188,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getX()
+   * {@inheritDoc}
    */
   public int getX() {
 
@@ -197,7 +196,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getY()
+   * {@inheritDoc}
    */
   public int getY() {
 
@@ -205,7 +204,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * {@inheritDoc}
    */
   public int getWidth() {
 
@@ -213,7 +212,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * {@inheritDoc}
    */
   public int getHeight() {
 
@@ -221,7 +220,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
+   * {@inheritDoc}
    */
   public void dispose() {
 
@@ -229,7 +228,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#isDisposed()
+   * {@inheritDoc}
    */
   public boolean isDisposed() {
 
@@ -237,8 +236,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#showMessage(java.lang.String,
-   *      java.lang.String, net.sf.mmm.ui.toolkit.api.window.MessageType)
+   * {@inheritDoc}
    */
   public void showMessage(final String message, final String title, MessageType messageType) {
 
@@ -265,8 +263,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#showQuestion(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public boolean showQuestion(String question, String title) {
 
@@ -278,7 +275,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#createMenuBar()
+   * {@inheritDoc}
    */
   @Override
   protected UIMenuBar createMenuBar() {
@@ -288,8 +285,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#createDialog(java.lang.String,
-   *      boolean, boolean)
+   * {@inheritDoc}
    */
   public UIDialogImpl createDialog(String title, boolean modal, boolean resizeable) {
 
@@ -299,7 +295,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
+   * {@inheritDoc}
    */
   public boolean isResizeable() {
 
@@ -307,7 +303,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
+   * {@inheritDoc}
    */
   public void setComposite(final UIComposite newComposite) {
 

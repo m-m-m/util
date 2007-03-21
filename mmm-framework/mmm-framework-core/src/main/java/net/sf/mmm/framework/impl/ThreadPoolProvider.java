@@ -130,8 +130,7 @@ public class ThreadPoolProvider extends AbstractStaticSingletonComponentProvider
   }
 
   /**
-   * @see net.sf.mmm.framework.base.provider.AbstractStaticSingletonComponentProvider#requestSingleton(net.sf.mmm.framework.api.ComponentDescriptor,
-   *      java.lang.String, net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   @Override
   protected ComponentInstanceContainer<Executor> requestSingleton(
@@ -143,8 +142,7 @@ public class ThreadPoolProvider extends AbstractStaticSingletonComponentProvider
   }
 
   /**
-   * @see net.sf.mmm.framework.base.provider.AbstractDefaultInstanceComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptor,
-   *      java.lang.String, net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   @Override
   protected ComponentInstanceContainer<Executor> requestDefault(
@@ -158,8 +156,7 @@ public class ThreadPoolProvider extends AbstractStaticSingletonComponentProvider
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer,
-   *      net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   @Override
   public void dispose(ComponentInstanceContainer<Executor> instanceContainer,

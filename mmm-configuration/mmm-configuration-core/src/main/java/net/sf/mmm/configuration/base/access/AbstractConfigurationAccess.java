@@ -36,7 +36,7 @@ public abstract class AbstractConfigurationAccess implements ConfigurationAccess
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccess#getContextPrefix()
+   * {@inheritDoc}
    */
   public String getContextPrefix() {
 
@@ -44,7 +44,7 @@ public abstract class AbstractConfigurationAccess implements ConfigurationAccess
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

@@ -58,7 +58,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -66,7 +66,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public SyncListAccess getSyncAccess() {
@@ -75,7 +75,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
+   * {@inheritDoc}
    */
   @Override
   public void create() {
@@ -85,7 +85,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag#isMultiSelection()
+   * {@inheritDoc}
    */
   public boolean isMultiSelection() {
 
@@ -93,7 +93,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIList#getModel()
+   * {@inheritDoc}
    */
   public UIListModel<E> getModel() {
 
@@ -101,7 +101,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIList#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModel)
+   * {@inheritDoc}
    */
   public void setModel(UIListModel<E> newModel) {
 
@@ -109,7 +109,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
+   * {@inheritDoc}
    */
   public int getSelectedIndex() {
 
@@ -117,7 +117,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
+   * {@inheritDoc}
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -125,7 +125,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIList#getSelectedIndices()
+   * {@inheritDoc}
    */
   public int[] getSelectedIndices() {
 
@@ -133,7 +133,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
+   * {@inheritDoc}
    */
   public void setSelectedValue(E newValue) {
 
@@ -144,7 +144,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
+   * {@inheritDoc}
    */
   public E getSelectedValue() {
 

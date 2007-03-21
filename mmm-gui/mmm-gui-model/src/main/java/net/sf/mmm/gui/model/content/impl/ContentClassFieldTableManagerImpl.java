@@ -50,7 +50,7 @@ public class ContentClassFieldTableManagerImpl implements ContentClassFieldTable
   }
 
   /**
-   * @see net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager#getFieldTableModel(net.sf.mmm.content.model.api.ContentClass)
+   * {@inheritDoc}
    */
   public FieldTableModel getFieldTableModel(ContentClass contentClass) {
 

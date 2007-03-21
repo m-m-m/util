@@ -163,7 +163,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.event.UITreeModelListener#treeModelChanged(net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent)
+   * {@inheritDoc}
    */
   public synchronized void treeModelChanged(UITreeModelEvent<N> changeEvent) {
 
@@ -173,7 +173,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
   }
 
   /**
-   * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public void handleEvent(Event swtEvent) {

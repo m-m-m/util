@@ -24,8 +24,7 @@ public abstract class AbstractSearchEngine implements SearchEngine {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchEngine#search(net.sf.mmm.search.engine.api.SearchQuery,
-   *      int)
+   * {@inheritDoc}
    */
   public SearchResultPage search(SearchQuery query, int pageIndex) {
 

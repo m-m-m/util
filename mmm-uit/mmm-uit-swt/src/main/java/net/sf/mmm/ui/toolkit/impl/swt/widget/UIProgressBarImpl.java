@@ -53,7 +53,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public SyncProgressBarAccess getSyncAccess() {
@@ -62,7 +62,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBar#getProgress()
+   * {@inheritDoc}
    */
   public int getProgress() {
 
@@ -70,7 +70,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBar#setProgress(int)
+   * {@inheritDoc}
    */
   public void setProgress(int newProgress) {
 
@@ -78,7 +78,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -86,7 +86,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBar#isIndeterminate()
+   * {@inheritDoc}
    */
   public boolean isIndeterminate() {
 
@@ -94,7 +94,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIProgressBar#getOrientation()
+   * {@inheritDoc}
    */
   public Orientation getOrientation() {
 

@@ -37,7 +37,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setAuthor(java.lang.String)
+   * {@inheritDoc}
    */
   public void setAuthor(String author) {
 
@@ -45,7 +45,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setKeywords(java.lang.String)
+   * {@inheritDoc}
    */
   public void setKeywords(String keywords) {
 
@@ -53,7 +53,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -61,7 +61,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setTitle(java.lang.String)
+   * {@inheritDoc}
    */
   public void setTitle(String title) {
 
@@ -69,7 +69,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setType(java.lang.String)
+   * {@inheritDoc}
    */
   public void setType(String type) {
 
@@ -77,7 +77,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setUid(java.lang.String)
+   * {@inheritDoc}
    */
   public void setUid(String uid) {
 
@@ -85,7 +85,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setUri(java.lang.String)
+   * {@inheritDoc}
    */
   public void setUri(String uri) {
 
@@ -93,7 +93,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setSize(long)
+   * {@inheritDoc}
    */
   public void setSize(long size) {
 

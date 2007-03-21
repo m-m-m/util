@@ -33,7 +33,7 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
   }
 
   /**
-   * @see java.util.Iterator#hasNext()
+   * {@inheritDoc}
    */
   public boolean hasNext() {
 
@@ -41,7 +41,7 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
   }
 
   /**
-   * @see java.util.Iterator#next()
+   * {@inheritDoc}
    */
   public E next() {
 

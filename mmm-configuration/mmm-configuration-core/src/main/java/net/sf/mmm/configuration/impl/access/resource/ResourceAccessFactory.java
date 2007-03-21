@@ -84,7 +84,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#isSingleAccess()
+   * {@inheritDoc}
    */
   public boolean isSingleAccess() {
 

@@ -35,7 +35,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.DataResource#getPath()
+   * {@inheritDoc}
    */
   public String getPath() {
 
@@ -43,7 +43,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.AbstractResource#getSize()
+   * {@inheritDoc}
    */
   @Override
   public long getSize() throws ResourceNotAvailableException {
@@ -55,7 +55,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.AbstractResource#openStream()
+   * {@inheritDoc}
    */
   @Override
   public InputStream openStream() throws ResourceNotAvailableException, IOException {
@@ -68,7 +68,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.DataResource#getUrl()
+   * {@inheritDoc}
    */
   public URL getUrl() throws ResourceNotAvailableException {
 
@@ -80,7 +80,7 @@ public class FileResource extends AbstractResource {
   }
 
   /**
-   * @see net.sf.mmm.util.resource.DataResource#isAvailable()
+   * {@inheritDoc}
    */
   public boolean isAvailable() {
 

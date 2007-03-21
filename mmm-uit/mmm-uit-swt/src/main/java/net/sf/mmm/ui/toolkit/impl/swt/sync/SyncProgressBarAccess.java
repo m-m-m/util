@@ -67,7 +67,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
+   * {@inheritDoc}
    */
   @Override
   public ProgressBar getSwtObject() {
@@ -76,7 +76,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(String)
+   * {@inheritDoc}
    */
   @Override
   protected void performSynchron(String operation) {
@@ -93,7 +93,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void createSynchron() {

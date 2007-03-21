@@ -40,7 +40,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * {@inheritDoc}
    */
   public int getWidth() {
 
@@ -48,7 +48,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * {@inheritDoc}
    */
   public int getHeight() {
 
@@ -67,7 +67,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIDisplay#dispatch()
+   * {@inheritDoc}
    */
   public void dispatch() {
 
@@ -75,7 +75,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIDisplay#isDispatchThread()
+   * {@inheritDoc}
    */
   public boolean isDispatchThread() {
 
@@ -83,7 +83,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIDisplay#invokeAsynchron(java.lang.Runnable)
+   * {@inheritDoc}
    */
   public void invokeAsynchron(Runnable task) {
 
@@ -91,7 +91,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUIDisplay#doInvokeSynchron(java.lang.Runnable)
+   * {@inheritDoc}
    */
   @Override
   protected void doInvokeSynchron(Runnable task) {

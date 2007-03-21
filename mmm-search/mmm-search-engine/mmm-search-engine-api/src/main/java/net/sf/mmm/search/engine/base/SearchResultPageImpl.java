@@ -37,7 +37,7 @@ public class SearchResultPageImpl extends AbstractSearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPageHit(int)
+   * {@inheritDoc}
    */
   public SearchHit getPageHit(int index) {
 
@@ -45,7 +45,7 @@ public class SearchResultPageImpl extends AbstractSearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPageHitCount()
+   * {@inheritDoc}
    */
   public int getPageHitCount() {
 

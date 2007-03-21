@@ -51,7 +51,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getHitsPerPage()
+   * {@inheritDoc}
    */
   public int getHitsPerPage() {
 
@@ -59,7 +59,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPageCount()
+   * {@inheritDoc}
    */
   public int getPageCount() {
 
@@ -67,7 +67,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPageIndex()
+   * {@inheritDoc}
    */
   public int getPageIndex() {
 
@@ -75,7 +75,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getQuery()
+   * {@inheritDoc}
    */
   public String getQuery() {
 
@@ -83,7 +83,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getTotalHitCount()
+   * {@inheritDoc}
    */
   public int getTotalHitCount() {
 
@@ -91,7 +91,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getHitStartNumber()
+   * {@inheritDoc}
    */
   public int getHitStartNumber() {
   
@@ -99,7 +99,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
   
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getHitEndNumber()
+   * {@inheritDoc}
    */
   public int getHitEndNumber() {
   
@@ -107,7 +107,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
   
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPagingStartIndex(int)
+   * {@inheritDoc}
    */
   public int getPagingStartIndex(int pagingRange) {
 
@@ -125,7 +125,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResultPage#getPagingEndIndex(int)
+   * {@inheritDoc}
    */
   public int getPagingEndIndex(int pagingRange) {
 

@@ -48,7 +48,7 @@ public abstract class AbstractResource implements DataResource {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

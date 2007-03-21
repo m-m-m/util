@@ -70,7 +70,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see javax.swing.SpinnerModel#getValue()
+   * {@inheritDoc}
    */
   public Object getValue() {
 
@@ -78,7 +78,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
+   * {@inheritDoc}
    */
   public int getSelectedIndex() {
 
@@ -86,7 +86,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
+   * {@inheritDoc}
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -98,7 +98,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see javax.swing.SpinnerModel#setValue(java.lang.Object)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public void setValue(Object value) {
@@ -107,7 +107,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see javax.swing.SpinnerModel#getNextValue()
+   * {@inheritDoc}
    */
   public Object getNextValue() {
 
@@ -122,7 +122,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see javax.swing.SpinnerModel#getPreviousValue()
+   * {@inheritDoc}
    */
   public Object getPreviousValue() {
 
@@ -134,7 +134,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.event.UIListModelListener#listModelChanged(net.sf.mmm.ui.toolkit.api.event.UIListModelEvent)
+   * {@inheritDoc}
    */
   public void listModelChanged(UIListModelEvent event) {
 
@@ -146,7 +146,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
+   * {@inheritDoc}
    */
   public E getSelectedValue() {
 
@@ -154,7 +154,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
+   * {@inheritDoc}
    */
   public void setSelectedValue(E newValue) {
 

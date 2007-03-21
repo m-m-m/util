@@ -52,7 +52,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   }
 
   /**
-   * @see javax.swing.table.TableModel#getRowCount()
+   * {@inheritDoc}
    */
   public int getRowCount() {
 
@@ -64,7 +64,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   }
 
   /**
-   * @see javax.swing.table.TableModel#getColumnCount()
+   * {@inheritDoc}
    */
   public int getColumnCount() {
 
@@ -76,7 +76,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   }
 
   /**
-   * @see javax.swing.table.TableModel#getValueAt(int, int)
+   * {@inheritDoc}
    */
   public Object getValueAt(int rowIndex, int columnIndex) {
 
@@ -88,7 +88,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   }
 
   /**
-   * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+   * {@inheritDoc}
    */
   @Override
   public String getColumnName(int columnIndex) {
@@ -108,7 +108,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.event.UITableModelListener#tableModelChanged(net.sf.mmm.ui.toolkit.api.event.UITableModelEvent)
+   * {@inheritDoc}
    */
   public void tableModelChanged(UITableModelEvent event) {
 
@@ -136,8 +136,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   }
 
   /**
-   * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int,
-   *      int)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   @Override

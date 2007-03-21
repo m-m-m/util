@@ -31,7 +31,7 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
   }
 
   /**
-   * @see net.sf.mmm.upnp.ssdp.api.SsdpReceiver#addListener(net.sf.mmm.upnp.ssdp.api.SsdpListener)
+   * {@inheritDoc}
    */
   public void addListener(SsdpListener listener) {
 
@@ -39,7 +39,7 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
   }
 
   /**
-   * @see net.sf.mmm.upnp.ssdp.api.SsdpReceiver#removeListener(net.sf.mmm.upnp.ssdp.api.SsdpListener)
+   * {@inheritDoc}
    */
   public void removeListener(SsdpListener listener) {
 

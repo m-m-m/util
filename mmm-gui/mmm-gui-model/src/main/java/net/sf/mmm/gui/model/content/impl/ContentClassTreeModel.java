@@ -38,7 +38,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.AbstractUITreeModel#getNodeType()
+   * {@inheritDoc}
    */
   @Override
   public Class<ContentClass> getNodeType() {
@@ -78,8 +78,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.AbstractUITreeModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITreeModelListener,
-   *      java.lang.Throwable)
+   * {@inheritDoc}
    */
   @Override
   protected void handleListenerException(UITreeModelListener listener, Throwable t) {
@@ -87,7 +86,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventListener#handleEvent(net.sf.mmm.util.event.Event)
+   * {@inheritDoc}
    */
   public void handleEvent(ContentModelEvent event) {
 
@@ -95,7 +94,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#getChildCount(java.lang.Object)
+   * {@inheritDoc}
    */
   public int getChildCount(ContentClass node) {
 
@@ -103,8 +102,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#getChildNode(java.lang.Object,
-   *      int)
+   * {@inheritDoc}
    */
   public ContentClass getChildNode(ContentClass node, int index) {
 
@@ -112,7 +110,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#getParent(java.lang.Object)
+   * {@inheritDoc}
    */
   public ContentClass getParent(ContentClass node) {
 
@@ -120,7 +118,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#getRootNode()
+   * {@inheritDoc}
    */
   public ContentClass getRootNode() {
 

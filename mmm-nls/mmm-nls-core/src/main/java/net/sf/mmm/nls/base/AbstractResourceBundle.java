@@ -75,7 +75,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
   }
 
   /**
-   * @see java.util.ResourceBundle#getKeys()
+   * {@inheritDoc}
    */
   @Override
   public Enumeration<String> getKeys() {
@@ -84,7 +84,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
   }
 
   /**
-   * @see java.util.ResourceBundle#handleGetObject(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected Object handleGetObject(String key) {

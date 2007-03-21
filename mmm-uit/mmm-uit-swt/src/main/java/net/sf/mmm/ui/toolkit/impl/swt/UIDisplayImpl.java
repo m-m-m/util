@@ -39,7 +39,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
     }
 
     /**
-     * @see java.lang.Runnable#run()
+     * {@inheritDoc}
      */
     public void run() {
 
@@ -76,7 +76,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getFactory()
+   * {@inheritDoc}
    */
   @Override
   public UIFactorySwt getFactory() {
@@ -85,7 +85,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * {@inheritDoc}
    */
   public int getWidth() {
 
@@ -94,7 +94,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * {@inheritDoc}
    */
   public int getHeight() {
 
@@ -113,7 +113,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   @Override
   public String getType() {
@@ -122,7 +122,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIDisplay#dispatch()
+   * {@inheritDoc}
    */
   public void dispatch() {
 
@@ -136,7 +136,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIDisplay#isDispatchThread()
+   * {@inheritDoc}
    */
   public boolean isDispatchThread() {
 
@@ -144,7 +144,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIDisplay#invokeAsynchron(java.lang.Runnable)
+   * {@inheritDoc}
    */
   public void invokeAsynchron(Runnable task) {
 
@@ -152,7 +152,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUIDisplay#doInvokeSynchron(java.lang.Runnable)
+   * {@inheritDoc}
    */
   @Override
   public void doInvokeSynchron(Runnable task) {

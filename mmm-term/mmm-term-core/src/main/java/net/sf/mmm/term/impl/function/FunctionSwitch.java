@@ -31,7 +31,7 @@ public class FunctionSwitch extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -39,7 +39,7 @@ public class FunctionSwitch extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getOperatorSymbol()
+   * {@inheritDoc}
    */
   public String getOperatorSymbol() {
 
@@ -47,7 +47,7 @@ public class FunctionSwitch extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
+   * {@inheritDoc}
    */
   public int getMinimumArgumentCount() {
 
@@ -55,7 +55,7 @@ public class FunctionSwitch extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getMaximumArgumentCount()
+   * {@inheritDoc}
    */
   public int getMaximumArgumentCount() {
 
@@ -63,8 +63,7 @@ public class FunctionSwitch extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(java.lang.Object,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   public Object calculate(Object argument1, Object argument2) throws ValueException {

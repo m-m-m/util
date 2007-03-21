@@ -25,7 +25,7 @@ public class FieldPropertyIntrospector implements PojoPropertyIntrospector {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.base.PojoPropertyIntrospector#findAccessors(java.lang.Class)
+   * {@inheritDoc}
    */
   public Iterator<AbstractPojoPropertyAccessor> findAccessors(Class<?> pojoType) {
 

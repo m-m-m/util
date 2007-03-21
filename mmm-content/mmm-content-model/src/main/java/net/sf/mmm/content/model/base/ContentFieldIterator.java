@@ -37,7 +37,7 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
   }
 
   /**
-   * @see net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator#findNext()
+   * {@inheritDoc}
    */
   @Override
   protected ContentField findNext() {

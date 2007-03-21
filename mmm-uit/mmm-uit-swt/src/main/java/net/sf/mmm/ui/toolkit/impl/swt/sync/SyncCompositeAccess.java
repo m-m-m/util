@@ -49,7 +49,7 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void createSynchron() {
@@ -59,7 +59,7 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
+   * {@inheritDoc}
    */
   @Override
   public Composite getSwtObject() {

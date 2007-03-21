@@ -567,7 +567,7 @@ public abstract class HttpMessage {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -618,7 +618,7 @@ public abstract class HttpMessage {
     }
 
     /**
-     * @see java.lang.Object#hashCode()
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -627,7 +627,7 @@ public abstract class HttpMessage {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

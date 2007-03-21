@@ -30,7 +30,7 @@ public class IocContainerProxy implements IocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainer#createChildContainer(java.lang.String)
+   * {@inheritDoc}
    */
   public MutableIocContainer createChildContainer(String name) {
 
@@ -38,7 +38,7 @@ public class IocContainerProxy implements IocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainer#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -46,7 +46,7 @@ public class IocContainerProxy implements IocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainer#isRunning()
+   * {@inheritDoc}
    */
   public boolean isRunning() {
 

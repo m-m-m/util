@@ -70,7 +70,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   public abstract Object getSwtObject();
 
   /**
-   * @see java.lang.Runnable#run()
+   * {@inheritDoc}
    */
   public final void run() {
 

@@ -56,7 +56,7 @@ public class StringValue extends AbstractStringValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
 
@@ -64,7 +64,7 @@ public class StringValue extends AbstractStringValue {
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
+   * {@inheritDoc}
    */
   @Override
   protected String getPlainValue() {
@@ -73,7 +73,7 @@ public class StringValue extends AbstractStringValue {
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   protected void setPlainValue(String newValue) {

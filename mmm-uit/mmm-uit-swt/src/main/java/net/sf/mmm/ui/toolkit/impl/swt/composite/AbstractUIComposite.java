@@ -49,7 +49,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation()
+   * {@inheritDoc}
    */
   public Orientation getOrientation() {
   
@@ -57,7 +57,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#getBorderTitle()
+   * {@inheritDoc}
    */
   public String getBorderTitle() {
 
@@ -69,7 +69,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public AbstractSyncCompositeAccess getSyncAccess() {
@@ -82,18 +82,18 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getActiveSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public abstract AbstractSyncCompositeAccess getActiveSyncAccess();
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
+   * {@inheritDoc}
    */
   public abstract AbstractUIComponent getComponent(int index);
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
+   * {@inheritDoc}
    */
   @Override
   public void create() {
@@ -120,7 +120,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#dispose()
+   * {@inheritDoc}
    */
   @Override
   public void dispose() {

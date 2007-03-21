@@ -89,7 +89,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObject#isClass()
+   * {@inheritDoc}
    */
   public boolean isClass() {
 
@@ -97,7 +97,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getDeclaringClass()
+   * {@inheritDoc}
    */
   public ContentClass getDeclaringClass() {
 
@@ -105,7 +105,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getInitiallyDefiningClass()
+   * {@inheritDoc}
    */
   public ContentClass getInitiallyDefiningClass() {
 
@@ -121,7 +121,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getFieldType()
+   * {@inheritDoc}
    */
   public Type getFieldType() {
 
@@ -129,7 +129,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getFieldClass()
+   * {@inheritDoc}
    */
   public Class<?> getFieldClass() {
   
@@ -137,7 +137,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
   
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getConstraint()
+   * {@inheritDoc}
    */
   public ValueValidator getConstraint() {
 
@@ -145,7 +145,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getModifiers()
+   * {@inheritDoc}
    */
   public FieldModifiers getModifiers() {
 
@@ -153,7 +153,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentField#getSuperField()
+   * {@inheritDoc}
    */
   public ContentField getSuperField() {
 
@@ -169,7 +169,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.base.AbstractContentObject#isDeleted()
+   * {@inheritDoc}
    */
   @Override
   public boolean isDeleted() {
@@ -184,7 +184,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObject#isDeletedFlagSet()
+   * {@inheritDoc}
    */
   public boolean isDeletedFlagSet() {
 
@@ -192,8 +192,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.base.AbstractContentObject#getFieldValue(net.sf.mmm.content.model.api.ContentField,
-   *      String)
+   * {@inheritDoc}
    */
   @Override
   protected Object getFieldValue(ContentField field, String fieldName)
@@ -215,8 +214,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see net.sf.mmm.content.base.AbstractContentObject#setFieldValue(net.sf.mmm.content.model.api.ContentField,
-   *      String, java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   protected void setFieldValue(ContentField field, String fieldName, Object value)
@@ -228,7 +226,7 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

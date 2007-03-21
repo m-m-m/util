@@ -29,7 +29,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.base.AbstractPojoDescriptorBuilder#createDescriptor(java.lang.Class)
+   * {@inheritDoc}
    */
   @Override
   protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoType) {

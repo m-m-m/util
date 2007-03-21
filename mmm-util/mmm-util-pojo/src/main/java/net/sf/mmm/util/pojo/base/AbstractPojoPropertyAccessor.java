@@ -76,7 +76,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -84,7 +84,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getAccessMode()
+   * {@inheritDoc}
    */
   public PojoPropertyAccessMode getAccessMode() {
 
@@ -92,7 +92,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getPropertyType()
+   * {@inheritDoc}
    */
   public Type getPropertyType() {
 
@@ -100,7 +100,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getPropertyClass()
+   * {@inheritDoc}
    */
   public Class<?> getPropertyClass() {
 
@@ -108,7 +108,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getPropertyComponentType()
+   * {@inheritDoc}
    */
   public Type getPropertyComponentType() {
 

@@ -36,8 +36,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem,
-   *      long)
+   * {@inheritDoc}
    */
   @Override
   protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
@@ -118,7 +117,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
     }
 
     /**
-     * @see org.apache.poi.hssf.eventusermodel.HSSFListener#processRecord(org.apache.poi.hssf.record.Record)
+     * {@inheritDoc}
      */
     public void processRecord(Record record) {
 

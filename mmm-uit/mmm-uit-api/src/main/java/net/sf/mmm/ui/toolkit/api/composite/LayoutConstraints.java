@@ -20,7 +20,7 @@ public class LayoutConstraints {
   private static class DummySize implements UIReadSize {
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+     * {@inheritDoc}
      */
     public int getHeight() {
 
@@ -28,7 +28,7 @@ public class LayoutConstraints {
     }
 
     /**
-     * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+     * {@inheritDoc}
      */
     public int getWidth() {
 

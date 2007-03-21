@@ -74,8 +74,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      net.sf.mmm.context.api.MutableContext)
+   * {@inheritDoc}
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access, MutableContext context)
       throws ConfigurationException {
@@ -84,8 +83,7 @@ public class PropertiesFactory extends AbstractConfigurationFactory {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationFactory#create(net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   public AbstractConfigurationDocument create(ConfigurationAccess access,
       AbstractConfiguration parentConfiguration) throws ConfigurationException {

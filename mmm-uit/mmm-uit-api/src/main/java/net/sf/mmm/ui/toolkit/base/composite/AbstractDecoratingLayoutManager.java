@@ -17,9 +17,7 @@ public abstract class AbstractDecoratingLayoutManager {
   /** 2 * INDENT */
   private static final int DOUBLE_INDENT = 2 * INDENT;
 
-  /**
-   * @see AbstractDecoratingLayoutManager#AbstractDecoratingLayoutManager(UIDecoratedComponent)
-   */
+  /** the decorated-component to layout */
   private final UIDecoratedComponent<?,?> decoratedComponent;
 
   /** the sizer for the decorators */

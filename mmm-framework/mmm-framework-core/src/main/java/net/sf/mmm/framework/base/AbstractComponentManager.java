@@ -24,7 +24,7 @@ public abstract class AbstractComponentManager implements ComponentManager {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManager#requestComponent(java.lang.Class)
+   * {@inheritDoc}
    */
   public final <S> S requestComponent(Class<S> specification) throws ComponentException,
       ContainerException {

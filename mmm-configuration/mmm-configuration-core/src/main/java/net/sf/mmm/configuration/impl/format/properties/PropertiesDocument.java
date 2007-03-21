@@ -143,7 +143,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationDocument#load(java.io.InputStream)
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration load(InputStream inputStream) throws ConfigurationException {
@@ -184,7 +184,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationDocument#save(java.io.OutputStream)
+   * {@inheritDoc}
    */
   @Override
   protected void save(OutputStream outputStream) throws ConfigurationException {

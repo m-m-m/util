@@ -61,7 +61,7 @@ public class SimpleSsdpReceiverTest extends TestCase {
     }
 
     /**
-     * @see net.sf.mmm.upnp.ssdp.api.SsdpListener#receive(net.sf.mmm.upnp.ssdp.api.SsdpRequest)
+     * {@inheritDoc}
      */
     public void receive(SsdpRequest request) {
 

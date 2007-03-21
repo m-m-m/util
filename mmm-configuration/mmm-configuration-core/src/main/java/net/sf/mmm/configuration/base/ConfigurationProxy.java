@@ -41,7 +41,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   protected abstract AbstractConfiguration getDelegate();
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#getValue()
+   * {@inheritDoc}
    */
   public MutableGenericValue getValue() {
 
@@ -49,7 +49,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -57,7 +57,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
+   * {@inheritDoc}
    */
   public String getNamespaceUri() {
 
@@ -65,7 +65,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
 
@@ -73,7 +73,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
+   * {@inheritDoc}
    */
   public boolean isAddDefaults() {
 
@@ -81,7 +81,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getType()
+   * {@inheritDoc}
    */
   public Type getType() {
 
@@ -89,7 +89,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration getParent() {
@@ -98,7 +98,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -107,8 +107,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendant(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
@@ -116,8 +115,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getDescendants(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
@@ -125,8 +123,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(String,
-   *      String)
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration doCreateChild(String name, String namespace)
@@ -136,8 +133,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespace)
@@ -147,8 +143,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
@@ -157,8 +152,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {
@@ -167,7 +161,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
@@ -176,7 +170,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
+   * {@inheritDoc}
    */
   @Override
   protected void addChild(AbstractConfiguration child, QName qName) {
@@ -185,7 +179,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
+   * {@inheritDoc}
    */
   @Override
   protected void doRemove() throws ConfigurationException {
@@ -194,7 +188,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   protected boolean removeChild(AbstractConfiguration child) {
@@ -203,7 +197,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {
@@ -212,7 +206,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
+   * {@inheritDoc}
    */
   public void disable() throws ConfigurationException {
 
@@ -220,7 +214,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
+   * {@inheritDoc}
    */
   public void addListener(ConfigurationChangeListener listener) {
 
@@ -228,7 +222,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
+   * {@inheritDoc}
    */
   public void removeListener(ConfigurationChangeListener listener) {
 

@@ -151,7 +151,7 @@ public interface ContentClass extends ContentReflectionObject {
   List<? extends ContentClass> getSubClasses();
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()
+   * {@inheritDoc}
    */
   ClassModifiers getModifiers();
 

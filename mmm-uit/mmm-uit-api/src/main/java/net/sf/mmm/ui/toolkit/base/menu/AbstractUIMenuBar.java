@@ -38,7 +38,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuBar#addMenu(java.lang.String)
+   * {@inheritDoc}
    */
   public UIMenu addMenu(String name) {
 
@@ -65,7 +65,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   protected abstract UIMenu createMenu(String name);
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuBar#getMenu(java.lang.String)
+   * {@inheritDoc}
    */
   public UIMenu getMenu(String name) {
 
@@ -73,7 +73,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuBar#getMenuCount()
+   * {@inheritDoc}
    */
   public int getMenuCount() {
 
@@ -81,7 +81,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -89,7 +89,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuBar#getMenus()
+   * {@inheritDoc}
    */
   public Iterator<UIMenu> getMenus() {
 

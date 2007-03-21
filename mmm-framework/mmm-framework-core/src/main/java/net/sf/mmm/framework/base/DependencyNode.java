@@ -345,7 +345,7 @@ public class DependencyNode<S> {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

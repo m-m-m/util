@@ -72,7 +72,7 @@ public final class FieldDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.Dependency#getInjectionField()
+     * {@inheritDoc}
      */
     public Field getInjectionField() {
 
@@ -80,7 +80,7 @@ public final class FieldDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.Dependency#getInjectionMethod()
+     * {@inheritDoc}
      */
     public Method getInjectionMethod() {
 
@@ -88,7 +88,7 @@ public final class FieldDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.api.Dependency#getInjectionType()
+     * {@inheritDoc}
      */
     public Type getInjectionType() {
 
@@ -96,7 +96,7 @@ public final class FieldDependency<S> extends AbstractDependency<S> {
     }
 
     /**
-     * @see net.sf.mmm.framework.base.AbstractDependency#getInjectionTargetDescription()
+     * {@inheritDoc}
      */
     @Override
     public String getInjectionTargetDescription() {

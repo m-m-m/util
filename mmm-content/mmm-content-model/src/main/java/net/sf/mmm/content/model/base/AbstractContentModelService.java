@@ -49,7 +49,7 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelService#getEventRegistrar()
+   * {@inheritDoc}
    */
   public EventSource<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar() {
 
@@ -57,7 +57,7 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(java.lang.String)
+   * {@inheritDoc}
    */
   public AbstractContentClass getClass(String name) throws ContentModelException {
 
@@ -69,7 +69,7 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(net.sf.mmm.content.value.api.Id)
+   * {@inheritDoc}
    */
   public AbstractContentClass getClass(Id id) throws ContentModelException {
 
@@ -105,7 +105,7 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClasses()
+   * {@inheritDoc}
    */
   public Collection<AbstractContentClass> getClasses() {
 

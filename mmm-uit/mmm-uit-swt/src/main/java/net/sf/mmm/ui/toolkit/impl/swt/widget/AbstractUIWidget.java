@@ -32,7 +32,7 @@ public abstract class AbstractUIWidget extends AbstractUIComponent implements UI
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUIObject#isWidget()
+   * {@inheritDoc}
    */
   @Override
   public boolean isWidget() {
@@ -41,7 +41,7 @@ public abstract class AbstractUIWidget extends AbstractUIComponent implements UI
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UINode#getParent()
+   * {@inheritDoc}
    */
   @Override
   public AbstractUIComposite getParent() {

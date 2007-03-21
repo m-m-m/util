@@ -97,7 +97,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.MutableContentModelService#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
 
@@ -143,8 +143,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createClass(net.sf.mmm.content.model.api.ContentClass,
-   *      java.lang.String, net.sf.mmm.content.model.api.ClassModifiers)
+   * {@inheritDoc}
    */
   public AbstractContentClass createClass(ContentClass superClass, String name,
       ClassModifiers modifiers) throws ContentModelException {
@@ -240,8 +239,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#setDeleted(net.sf.mmm.content.model.api.ContentReflectionObject,
-   *      boolean)
+   * {@inheritDoc}
    */
   public void setDeleted(ContentReflectionObject classOrField, boolean newDeletedFlag)
       throws ContentModelException {

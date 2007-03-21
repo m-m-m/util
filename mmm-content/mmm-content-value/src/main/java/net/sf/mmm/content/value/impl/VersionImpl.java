@@ -411,7 +411,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see java.lang.Object#equals(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   public boolean equals(Object other) {
@@ -428,7 +428,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see java.lang.Object#hashCode()
+   * {@inheritDoc}
    */
   @Override
   public int hashCode() {
@@ -445,7 +445,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Version#getMajorVersion()
+   * {@inheritDoc}
    */
   public int getMajorVersion() {
 
@@ -453,7 +453,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Version#getMinorVersion()
+   * {@inheritDoc}
    */
   public int getMinorVersion() {
 
@@ -464,7 +464,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Version#getMilliVersion()
+   * {@inheritDoc}
    */
   public int getMilliVersion() {
 
@@ -475,7 +475,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Version#getMicroVersion()
+   * {@inheritDoc}
    */
   public int getMicroVersion() {
 
@@ -496,7 +496,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Version#getComment()
+   * {@inheritDoc}
    */
   public String getComment() {
 
@@ -550,7 +550,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see net.sf.mmm.content.value.api.Version#isHigherThan(net.sf.mmm.content.value.api.Version)
+   * {@inheritDoc}
    */
   public boolean isHigherThan(Version other) {
 
@@ -574,7 +574,7 @@ public final class VersionImpl implements Version {
   }
 
   /**
-   * @see Version#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -614,7 +614,7 @@ public final class VersionImpl implements Version {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getName()
+     * {@inheritDoc}
      */
     public String getName() {
 
@@ -622,7 +622,7 @@ public final class VersionImpl implements Version {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
+     * {@inheritDoc}
      */
     public VersionImpl parse(String valueAsString) throws ValueParseException {
 
@@ -630,7 +630,7 @@ public final class VersionImpl implements Version {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
+     * {@inheritDoc}
      */
     public Class<VersionImpl> getValueClass() {
 

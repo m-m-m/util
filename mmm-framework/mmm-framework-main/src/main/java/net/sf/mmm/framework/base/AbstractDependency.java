@@ -91,7 +91,7 @@ public abstract class AbstractDependency<S> implements Dependency<S> {
     public abstract String getInjectionTargetDescription();
 
     /**
-     * @see java.lang.Object#toString() 
+     * {@inheritDoc} 
      */
     @Override
     public String toString() {

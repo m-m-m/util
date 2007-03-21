@@ -52,7 +52,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchHit#getScore()
+   * {@inheritDoc}
    */
   public double getScore() {
 
@@ -60,7 +60,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchHit#getScore(int)
+   * {@inheritDoc}
    */
   public int getScore(int maximum) {
 
@@ -68,7 +68,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()
+   * {@inheritDoc}
    */
   public String getHighlightedText() {
 
@@ -76,7 +76,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchHit#getEntryId()
+   * {@inheritDoc}
    */
   public String getEntryId() {
 
@@ -84,7 +84,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getProperty(java.lang.String)
+   * {@inheritDoc}
    */
   public String getProperty(String name) {
 
@@ -92,7 +92,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getPropertyNames()
+   * {@inheritDoc}
    */
   public Iterator<String> getPropertyNames() {
 

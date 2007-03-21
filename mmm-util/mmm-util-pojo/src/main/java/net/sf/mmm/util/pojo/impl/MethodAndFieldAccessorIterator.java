@@ -42,7 +42,7 @@ public class MethodAndFieldAccessorIterator implements Iterator<AbstractPojoProp
   }
 
   /**
-   * @see java.util.Iterator#hasNext()
+   * {@inheritDoc}
    */
   public boolean hasNext() {
 
@@ -50,7 +50,7 @@ public class MethodAndFieldAccessorIterator implements Iterator<AbstractPojoProp
   }
 
   /**
-   * @see java.util.Iterator#next()
+   * {@inheritDoc}
    */
   public AbstractPojoPropertyAccessor next() {
 
@@ -61,7 +61,7 @@ public class MethodAndFieldAccessorIterator implements Iterator<AbstractPojoProp
   }
 
   /**
-   * @see java.util.Iterator#remove()
+   * {@inheritDoc}
    */
   public void remove() {
 

@@ -35,7 +35,7 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#addListener(net.sf.mmm.ui.toolkit.api.event.UITreeModelListener)
+   * {@inheritDoc}
    */
   public void addListener(UITreeModelListener<N> listener) {
 
@@ -43,7 +43,7 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#removeListener(net.sf.mmm.ui.toolkit.api.event.UITreeModelListener)
+   * {@inheritDoc}
    */
   public void removeListener(UITreeModelListener<N> listener) {
 
@@ -107,7 +107,7 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
   protected abstract void handleListenerException(UITreeModelListener listener, Throwable t);
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#toString(Object)
+   * {@inheritDoc}
    */
   public String toString(N node) {
 

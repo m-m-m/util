@@ -58,7 +58,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * {@inheritDoc}
    */
   @Override
   public JComponent getSwingComponent() {
@@ -67,7 +67,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.composite.AbstractUIComposite#getOrientation()
+   * {@inheritDoc}
    */
   @Override
   public Orientation getOrientation() {
@@ -81,7 +81,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent#getComponent()
+   * {@inheritDoc}
    */
   public C getComponent() {
 
@@ -89,7 +89,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent#getDecorator()
+   * {@inheritDoc}
    */
   public D getDecorator() {
 
@@ -97,7 +97,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
+   * {@inheritDoc}
    */
   public UIComponent getComponent(int index) {
 
@@ -111,7 +111,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent#setDecorator(net.sf.mmm.ui.toolkit.api.UIComponent)
+   * {@inheritDoc}
    */
   public void setDecorator(D newDecorator) {
 
@@ -143,7 +143,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent#setComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
+   * {@inheritDoc}
    */
   public void setComponent(C newComponent) {
 
@@ -163,7 +163,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponentCount()
+   * {@inheritDoc}
    */
   public int getComponentCount() {
 
@@ -171,7 +171,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 

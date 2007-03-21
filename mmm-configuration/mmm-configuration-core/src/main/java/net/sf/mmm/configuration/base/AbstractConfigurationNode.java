@@ -82,7 +82,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
+   * {@inheritDoc}
    */
   public final boolean isEditable() {
 
@@ -116,7 +116,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
+   * {@inheritDoc}
    */
   public boolean isAddDefaults() {
 
@@ -159,7 +159,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   protected abstract void setPlainString(String newValue);
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getValue()
+   * {@inheritDoc}
    */
   public MutableGenericValue getValue() {
 
@@ -170,7 +170,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSource#addListener(net.sf.mmm.util.event.EventListener)
+   * {@inheritDoc}
    */
   public void addListener(ConfigurationChangeListener listener) {
 
@@ -181,7 +181,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSource#removeListener(net.sf.mmm.util.event.EventListener)
+   * {@inheritDoc}
    */
   public void removeListener(ConfigurationChangeListener listener) {
 
@@ -249,7 +249,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#getPlainValue()
+     * {@inheritDoc}
      */
     @Override
     protected String getPlainValue() {
@@ -271,7 +271,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractTemplatedGenericValue#setPlainValue(java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
     protected void setPlainValue(String newValue) {
@@ -282,7 +282,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
+     * {@inheritDoc}
      */
     @Override
     public boolean isAddDefaults() {
@@ -291,7 +291,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.api.MutableGenericValue#isEditable()
+     * {@inheritDoc}
      */
     public boolean isEditable() {
 
@@ -299,7 +299,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractStringValue#toString()
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

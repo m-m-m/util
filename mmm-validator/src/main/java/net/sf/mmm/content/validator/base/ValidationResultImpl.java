@@ -104,7 +104,7 @@ public class ValidationResultImpl implements ValidationResult {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.api.ValidationResult#isValid()
+   * {@inheritDoc}
    */
   public boolean isValid() {
 
@@ -112,7 +112,7 @@ public class ValidationResultImpl implements ValidationResult {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.api.ValidationResult#getMessage()
+   * {@inheritDoc}
    */
   public NlsMessage getMessage() {
 
@@ -120,7 +120,7 @@ public class ValidationResultImpl implements ValidationResult {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.api.ValidationResult#getDetailCount()
+   * {@inheritDoc}
    */
   public int getDetailCount() {
 
@@ -128,7 +128,7 @@ public class ValidationResultImpl implements ValidationResult {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.api.ValidationResult#getDetail(int)
+   * {@inheritDoc}
    */
   public ValidationResult getDetail(int index) {
 

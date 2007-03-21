@@ -32,7 +32,7 @@ public class SimpleComponentDescriptor<S> extends AbstractComponentDescriptor<S>
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentDescriptor#getSpecification()
+   * {@inheritDoc}
    */
   public Class<S> getSpecification() {
 

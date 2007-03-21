@@ -57,7 +57,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl#getAwtWindow()
+   * {@inheritDoc}
    */
   protected Window getAwtWindow() {
 
@@ -65,7 +65,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#getTitle()
+   * {@inheritDoc}
    */
   public String getTitle() {
 
@@ -73,7 +73,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTitle#setTitle(java.lang.String)
+   * {@inheritDoc}
    */
   public void setTitle(String newTitle) {
 
@@ -81,7 +81,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -89,7 +89,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow#createMenuBar()
+   * {@inheritDoc}
    */
   protected UIMenuBar createMenuBar() {
 
@@ -102,7 +102,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMaximized#isMaximized()
+   * {@inheritDoc}
    */
   public boolean isMaximized() {
 
@@ -110,7 +110,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMaximized(boolean)
+   * {@inheritDoc}
    */
   public void setMaximized(boolean maximize) {
 
@@ -124,7 +124,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#setMinimized(boolean)
+   * {@inheritDoc}
    */
   public void setMinimized(boolean minimize) {
     int state = this.frame.getExtendedState();
@@ -137,7 +137,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMinimized#isMinimized()
+   * {@inheritDoc}
    */
   public boolean isMinimized() {
   
@@ -145,8 +145,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIFrame#createFrame(java.lang.String,
-   *      boolean)
+   * {@inheritDoc}
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
@@ -154,7 +153,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#setComposite(net.sf.mmm.ui.toolkit.api.composite.UIComposite)
+   * {@inheritDoc}
    */
   public void setComposite(UIComposite newComposite) {
 

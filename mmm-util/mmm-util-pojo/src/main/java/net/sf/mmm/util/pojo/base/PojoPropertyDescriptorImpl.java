@@ -54,7 +54,7 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyDescriptor#getAccessor(net.sf.mmm.util.pojo.api.PojoPropertyAccessMode)
+   * {@inheritDoc}
    */
   public AbstractPojoPropertyAccessor getAccessor(PojoPropertyAccessMode mode) {
 

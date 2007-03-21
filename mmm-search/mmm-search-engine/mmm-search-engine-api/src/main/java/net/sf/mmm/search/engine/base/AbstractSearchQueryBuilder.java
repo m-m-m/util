@@ -38,7 +38,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#parseStandardQuery(java.lang.String)
+   * {@inheritDoc}
    */
   public SearchQuery parseStandardQuery(String query) throws SearchException {
   
@@ -166,8 +166,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchQueryBuilder#parseStandardQuery(java.lang.String,
-   *      boolean)
+   * {@inheritDoc}
    */
   public SearchQuery parseStandardQuery(String query, boolean requireTerms) {
 

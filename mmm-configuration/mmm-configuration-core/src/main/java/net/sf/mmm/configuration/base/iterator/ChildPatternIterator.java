@@ -97,7 +97,7 @@ public class ChildPatternIterator extends SiblingIterator {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.iterator.SiblingIterator#stepNext()
+   * {@inheritDoc}
    */
   protected boolean stepNext() {
 

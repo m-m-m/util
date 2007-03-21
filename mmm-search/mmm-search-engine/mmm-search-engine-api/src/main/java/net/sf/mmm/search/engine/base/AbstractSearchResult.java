@@ -31,7 +31,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResult#getQuery()
+   * {@inheritDoc}
    */
   public String getQuery() {
 
@@ -39,7 +39,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResult#getPageCount()
+   * {@inheritDoc}
    */
   public int getPageCount() {
 
@@ -47,7 +47,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResult#getPageCount(int)
+   * {@inheritDoc}
    */
   public int getPageCount(int hitsPerPage) {
 
@@ -60,7 +60,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResult#getPage(int)
+   * {@inheritDoc}
    */
   public SearchResultPage getPage(int pageIndex) {
 

@@ -158,7 +158,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
   
   /**
-   * @see net.sf.mmm.value.api.ValueManager#getValueType()
+   * {@inheritDoc}
    */
   public Type getValueType() {
   
@@ -166,7 +166,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
   
   /**
-   * @see net.sf.mmm.value.api.ValueManager#isEqual(java.lang.Object, java.lang.Object)
+   * {@inheritDoc}
    */
   public boolean isEqual(V value1, V value2) {
   
@@ -194,7 +194,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#toString(java.lang.Object)
+   * {@inheritDoc}
    */
   public String toString(V value) {
 
@@ -205,7 +205,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

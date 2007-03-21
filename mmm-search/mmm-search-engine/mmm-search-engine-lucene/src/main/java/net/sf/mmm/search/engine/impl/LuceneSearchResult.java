@@ -44,7 +44,7 @@ public class LuceneSearchResult extends AbstractSearchResult {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResult#getHit(int)
+   * {@inheritDoc}
    */
   public SearchHit getHit(int index) {
 
@@ -58,7 +58,7 @@ public class LuceneSearchResult extends AbstractSearchResult {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchResult#getHitCount()
+   * {@inheritDoc}
    */
   public int getHitCount() {
 

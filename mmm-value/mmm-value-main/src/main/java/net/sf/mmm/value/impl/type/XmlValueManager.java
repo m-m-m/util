@@ -42,7 +42,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#getValueClass()
+   * {@inheritDoc}
    */
   public Class<Element> getValueClass() {
 
@@ -50,7 +50,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
+   * {@inheritDoc}
    */
   public Element parse(String valueAsString) throws ValueParseException {
 
@@ -64,7 +64,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#parse(org.w3c.dom.Element)
+   * {@inheritDoc}
    */
   @Override
   public Element parse(Element valueAsXml) throws ValueParseException {
@@ -77,7 +77,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#toString(Object)
+   * {@inheritDoc}
    */
   @Override
   public String toString(Element value) {
@@ -92,7 +92,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.base.AbstractValueManager#isEqual(java.lang.Object, java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   public boolean isEqual(Element value1, Element value2) {
@@ -101,7 +101,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
   
   /**
-   * @see AbstractValueManager#toXmlValue(XmlWriter, Object)
+   * {@inheritDoc}
    */
   @Override
   protected void toXmlValue(XmlWriter xmlWriter, Element value) throws XmlException {
@@ -110,7 +110,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueManager#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 

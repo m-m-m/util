@@ -76,7 +76,7 @@ public class TestComponentA implements ComponentA {
     }
 
     /**
-     * @see net.sf.mmm.framework.demo.api.ComponentA#sayAhh()
+     * {@inheritDoc}
      */
     public String sayAhh() {
     

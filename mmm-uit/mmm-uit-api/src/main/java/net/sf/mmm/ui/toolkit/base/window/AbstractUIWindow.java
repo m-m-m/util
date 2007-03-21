@@ -55,7 +55,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#centerWindow()
+   * {@inheritDoc}
    */
   public void centerWindow() {
 
@@ -72,7 +72,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#isWindow()
+   * {@inheritDoc}
    */
   @Override
   public boolean isWindow() {
@@ -81,7 +81,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#getComposite()
+   * {@inheritDoc}
    */
   public UIComposite getComposite() {
 
@@ -111,7 +111,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#getMenuBar()
+   * {@inheritDoc}
    */
   public synchronized UIMenuBar getMenuBar() {
 

@@ -37,8 +37,7 @@ public class ContentParserJava extends ContentParserText {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.ContentParserText#parseLine(java.util.Properties,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected String parseLine(Properties properties, String line) {

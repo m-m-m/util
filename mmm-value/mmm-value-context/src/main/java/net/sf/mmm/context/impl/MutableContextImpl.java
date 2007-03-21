@@ -73,7 +73,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#getValue(java.lang.String)
+     * {@inheritDoc}
      */
     public GenericValue getValue(String variableName) {
 
@@ -85,7 +85,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#getObject(java.lang.String)
+     * {@inheritDoc}
      */
     public Object getObject(String variableName) {
 
@@ -97,7 +97,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#hasValue(java.lang.String)
+     * {@inheritDoc}
      */
     public boolean hasValue(String variableName) {
 
@@ -113,7 +113,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#getVariableNames() 
+     * {@inheritDoc} 
      */
     public Set<String> getVariableNames() {
 
@@ -128,8 +128,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContext#setValue(java.lang.String,
-     *      net.sf.mmm.value.api.GenericValue) 
+     * {@inheritDoc} 
      */
     public void setValue(String variableName, GenericValue value) {
 
@@ -137,8 +136,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContext#setObject(java.lang.String,
-     *      java.lang.Object) 
+     * {@inheritDoc} 
      */
     public void setObject(String variableName, Object value) {
 
@@ -150,7 +148,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.Context#createChildContext() 
+     * {@inheritDoc} 
      */
     public MutableContext createChildContext() {
 
@@ -158,7 +156,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContext#unsetValue(java.lang.String)
+     * {@inheritDoc}
      */
     public void unsetValue(String variableName) {
 
@@ -166,7 +164,7 @@ public class MutableContextImpl implements MutableContext {
     }
 
     /**
-     * @see net.sf.mmm.context.api.MutableContext#getImmutableContext()
+     * {@inheritDoc}
      */
     public Context getImmutableContext() {
 

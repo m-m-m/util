@@ -69,8 +69,7 @@ public class LuceneSearchIndexManager implements SearchIndexManager {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexManager#createIndexer(java.lang.String,
-   *      boolean)
+   * {@inheritDoc}
    */
   public SearchIndexer createIndexer(String dataSource, boolean update) throws SearchException {
 

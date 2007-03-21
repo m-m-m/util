@@ -429,7 +429,7 @@ public final class IdImpl implements Id {
   }
 
   /**
-   * @see Object#equals(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   public boolean equals(Object other) {
@@ -441,7 +441,7 @@ public final class IdImpl implements Id {
   }
 
   /**
-   * @see java.lang.Object#hashCode()
+   * {@inheritDoc}
    */
   @Override
   public int hashCode() {
@@ -516,7 +516,7 @@ public final class IdImpl implements Id {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -550,7 +550,7 @@ public final class IdImpl implements Id {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getName()
+     * {@inheritDoc}
      */
     public String getName() {
 
@@ -558,7 +558,7 @@ public final class IdImpl implements Id {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
+     * {@inheritDoc}
      */
     public IdImpl parse(String valueAsString) throws ValueParseException {
 
@@ -566,7 +566,7 @@ public final class IdImpl implements Id {
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
+     * {@inheritDoc}
      */
     public Class<IdImpl> getValueClass() {
 

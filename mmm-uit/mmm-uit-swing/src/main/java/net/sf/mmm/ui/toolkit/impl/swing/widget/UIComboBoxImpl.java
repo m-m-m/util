@@ -51,7 +51,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * {@inheritDoc}
    */
   @Override
   public JComponent getSwingComponent() {
@@ -60,7 +60,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidget#getModel()
+   * {@inheritDoc}
    */
   public UIListModel<E> getModel() {
 
@@ -68,7 +68,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIListWidget#setModel(net.sf.mmm.ui.toolkit.api.model.UIListModel)
+   * {@inheritDoc}
    */
   public void setModel(UIListModel<E> newModel) {
 
@@ -81,7 +81,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
+   * {@inheritDoc}
    */
   public int getSelectedIndex() {
 
@@ -89,7 +89,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
+   * {@inheritDoc}
    */
   public void setSelectedIndex(int newIndex) {
 
@@ -97,7 +97,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -105,7 +105,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
 
@@ -113,7 +113,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#setEditable(boolean)
+   * {@inheritDoc}
    */
   public void setEditable(boolean editableFlag) {
 
@@ -121,7 +121,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -129,7 +129,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -137,7 +137,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue#setSelectedValue(Object)
+   * {@inheritDoc}
    */
   public void setSelectedValue(E newValue) {
 
@@ -148,7 +148,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionValue#getSelectedValue()
+   * {@inheritDoc}
    */
   public E getSelectedValue() {
 
@@ -176,8 +176,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
     }
 
     /**
-     * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList,
-     *      java.lang.Object, int, boolean, boolean)
+     * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
     @Override

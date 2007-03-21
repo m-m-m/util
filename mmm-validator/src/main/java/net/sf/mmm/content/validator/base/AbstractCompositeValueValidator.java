@@ -110,7 +110,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidator 
   }
 
   /**
-   * @see net.sf.mmm.content.validator.api.ValueValidator#validate(Object)
+   * {@inheritDoc}
    */
   public ValidationResult validate(Object value) {
 
@@ -137,7 +137,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidator 
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 

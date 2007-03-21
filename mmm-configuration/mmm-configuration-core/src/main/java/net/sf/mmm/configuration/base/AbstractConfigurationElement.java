@@ -45,7 +45,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getType()
+   * {@inheritDoc}
    */
   public Type getType() {
 
@@ -81,8 +81,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   protected abstract AbstractConfiguration createChildElement(String name, String namespaceUri);
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespaceUri)
@@ -103,8 +102,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
@@ -132,7 +130,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
@@ -188,7 +186,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
+   * {@inheritDoc}
    */
   @Override
   protected void addChild(AbstractConfiguration child, QName qName) {
@@ -220,7 +218,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   protected boolean removeChild(AbstractConfiguration child) {
@@ -263,8 +261,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {

@@ -49,7 +49,7 @@ public class PathSegment extends SimplePathSegment {
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.path.SimplePathSegment#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

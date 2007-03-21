@@ -22,7 +22,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getTitle()
+   * {@inheritDoc}
    */
   public String getTitle() {
 
@@ -30,7 +30,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getUri()
+   * {@inheritDoc}
    */
   public String getUri() {
 
@@ -38,7 +38,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getUid()
+   * {@inheritDoc}
    */
   public String getUid() {
 
@@ -46,7 +46,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -54,7 +54,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -62,7 +62,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getAuthor()
+   * {@inheritDoc}
    */
   public String getAuthor() {
   
@@ -70,7 +70,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
   
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getSize()
+   * {@inheritDoc}
    */
   public Long getSize() {
 
@@ -87,7 +87,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   }
   
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

@@ -116,7 +116,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsObject#toNlsMessage()
+   * {@inheritDoc}
    */
   public NlsMessage toNlsMessage() {
 
@@ -124,7 +124,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getInternationalizedMessage()
+   * {@inheritDoc}
    */
   public String getInternationalizedMessage() {
 
@@ -132,7 +132,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getArgumentCount()
+   * {@inheritDoc}
    */
   public int getArgumentCount() {
 
@@ -140,7 +140,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getArgument(int)
+   * {@inheritDoc}
    */
   public Object getArgument(int index) {
 
@@ -148,7 +148,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getMessage()
+   * {@inheritDoc}
    */
   public String getMessage() {
 
@@ -156,7 +156,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage()
+   * {@inheritDoc}
    */
   public String getLocalizedMessage() {
 
@@ -164,7 +164,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(net.sf.mmm.nls.api.StringTranslator)
+   * {@inheritDoc}
    */
   public String getLocalizedMessage(StringTranslator nationalizer) {
 
@@ -174,8 +174,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(net.sf.mmm.nls.api.StringTranslator,
-   *      java.lang.StringBuffer)
+   * {@inheritDoc}
    */
   public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer messageBuffer) {
 
@@ -218,7 +217,7 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

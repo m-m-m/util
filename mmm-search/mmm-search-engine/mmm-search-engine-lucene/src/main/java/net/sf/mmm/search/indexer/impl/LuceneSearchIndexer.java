@@ -44,7 +44,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#add(net.sf.mmm.search.indexer.api.MutableSearchEntry)
+   * {@inheritDoc}
    */
   public void add(MutableSearchEntry entry) throws SearchException {
 
@@ -58,7 +58,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#close()
+   * {@inheritDoc}
    */
   public void close() {
 
@@ -70,7 +70,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#flush()
+   * {@inheritDoc}
    */
   public void flush() throws SearchException {
 
@@ -82,7 +82,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#createEntry()
+   * {@inheritDoc}
    */
   public MutableSearchEntry createEntry() {
 
@@ -90,7 +90,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#optimize()
+   * {@inheritDoc}
    */
   public void optimize() throws SearchException {
 
@@ -102,7 +102,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#removeById(java.lang.String)
+   * {@inheritDoc}
    */
   public boolean removeById(String entryId) throws SearchException {
 
@@ -119,7 +119,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#removeByUid(java.lang.String)
+   * {@inheritDoc}
    */
   public int removeByUid(String uid) throws SearchException {
 
@@ -127,7 +127,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#removeByUri(java.lang.String)
+   * {@inheritDoc}
    */
   public int removeByUri(String uri) throws SearchException {
 
@@ -135,8 +135,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.SearchIndexer#remove(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public int remove(String property, String value) throws SearchException {
 

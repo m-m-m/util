@@ -155,7 +155,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -163,7 +163,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getOperatorSymbol()
+   * {@inheritDoc}
    */
   public String getOperatorSymbol() {
 
@@ -171,7 +171,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getOperatorPriority()
+   * {@inheritDoc}
    */
   @Override
   public OperatorPriority getOperatorPriority() {
@@ -180,7 +180,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
+   * {@inheritDoc}
    */
   public int getMinimumArgumentCount() {
 
@@ -188,7 +188,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getMaximumArgumentCount()
+   * {@inheritDoc}
    */
   public int getMaximumArgumentCount() {
 
@@ -469,7 +469,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate()
+   * {@inheritDoc}
    */
   @Override
   public Object calculate() throws ValueException {
@@ -479,7 +479,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(Object)
+   * {@inheritDoc}
    */
   @Override
   public Object calculate(Object argument) throws ValueException {
@@ -489,7 +489,7 @@ public class GenericFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(Object, Object)
+   * {@inheritDoc}
    */
   @Override
   public Object calculate(Object argument1, Object argument2) throws ValueException {

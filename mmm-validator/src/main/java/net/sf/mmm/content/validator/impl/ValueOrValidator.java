@@ -28,8 +28,7 @@ public class ValueOrValidator extends AbstractCompositeValueValidator {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
-   *      int, int)
+   * {@inheritDoc}
    */
   @Override
   protected ValidationResult getResult(ValidationResult[] details, int detailCount, int succeedCount) {
@@ -45,7 +44,7 @@ public class ValueOrValidator extends AbstractCompositeValueValidator {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getMaximumRequiredValidChildren()
+   * {@inheritDoc}
    */
   @Override
   protected int getMaximumRequiredValidChildren() {
@@ -54,7 +53,7 @@ public class ValueOrValidator extends AbstractCompositeValueValidator {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResultIfEmpty()
+   * {@inheritDoc}
    */
   @Override
   protected ValidationResult getResultIfEmpty() {

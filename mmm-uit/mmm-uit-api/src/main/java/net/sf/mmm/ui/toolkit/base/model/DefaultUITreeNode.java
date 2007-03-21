@@ -45,7 +45,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getParentNode()
+   * {@inheritDoc}
    */
   public UITreeNodeIF<T> getParentNode() {
 
@@ -53,7 +53,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getChildNode(int)
+   * {@inheritDoc}
    */
   public UITreeNodeIF<T> getChildNode(int index) {
 
@@ -61,7 +61,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getChildNodeCount()
+   * {@inheritDoc}
    */
   public int getChildNodeCount() {
 
@@ -69,7 +69,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getIndexOfChildNode(net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF)
+   * {@inheritDoc}
    */
   public int getIndexOfChildNode(UITreeNodeIF childNode) {
 
@@ -77,7 +77,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getData()
+   * {@inheritDoc}
    */
   public T getData() {
 
@@ -126,7 +126,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

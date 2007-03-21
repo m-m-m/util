@@ -72,8 +72,7 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   }
 
   /**
-   * @see net.sf.mmm.util.event.AbstractEventSource#fireEvent(net.sf.mmm.util.event.Event,
-   *      net.sf.mmm.util.event.EventListener)
+   * {@inheritDoc}
    */
   @Override
   protected void fireEvent(final E event, final L listener) {

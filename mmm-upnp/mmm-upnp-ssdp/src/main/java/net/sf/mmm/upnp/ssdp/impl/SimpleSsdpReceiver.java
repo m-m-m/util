@@ -61,7 +61,7 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
   }
 
   /**
-   * @see net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver#addListener(net.sf.mmm.upnp.ssdp.api.SsdpListener)
+   * {@inheritDoc}
    */
   @Override
   public synchronized void addListener(SsdpListener listener) {
@@ -70,7 +70,7 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
   }
 
   /**
-   * @see net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver#notifyListeners(net.sf.mmm.upnp.ssdp.api.SsdpRequest)
+   * {@inheritDoc}
    */
   @Override
   protected synchronized void notifyListeners(SsdpRequest request) {
@@ -79,7 +79,7 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
   }
 
   /**
-   * @see net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver#removeListener(net.sf.mmm.upnp.ssdp.api.SsdpListener)
+   * {@inheritDoc}
    */
   @Override
   public synchronized void removeListener(SsdpListener listener) {

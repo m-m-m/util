@@ -52,7 +52,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
+   * {@inheritDoc}
    */
   public void addComponent(UIComponent component) {
 
@@ -60,8 +60,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
-   *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints)
+   * {@inheritDoc}
    */
   public void addComponent(UIComponent component, LayoutConstraints constraints) {
 
@@ -73,8 +72,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
-   *      net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints, int)
+   * {@inheritDoc}
    */
   public void addComponent(UIComponent component, LayoutConstraints constraints, int position) {
 
@@ -86,7 +84,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
+   * {@inheritDoc}
    */
   public void removeComponent(UIComponent component) {
 
@@ -97,7 +95,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(int)
+   * {@inheritDoc}
    */
   public void removeComponent(int index) {
 
@@ -106,7 +104,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -114,7 +112,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getActiveSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public SyncCompositeAccess getActiveSyncAccess() {
@@ -123,7 +121,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#setOrientation(net.sf.mmm.ui.toolkit.api.composite.Orientation)
+   * {@inheritDoc}
    */
   public void setOrientation(Orientation orientation) {
 
@@ -132,7 +130,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#getOrientation()
+   * {@inheritDoc}
    */
   @Override
   public Orientation getOrientation() {

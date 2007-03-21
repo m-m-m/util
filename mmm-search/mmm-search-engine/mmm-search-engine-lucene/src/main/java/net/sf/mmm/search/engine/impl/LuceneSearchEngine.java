@@ -111,7 +111,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchEngine#getQueryBuilder()
+   * {@inheritDoc}
    */
   public SearchQueryBuilder getQueryBuilder() {
 
@@ -209,7 +209,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchEngine#search(net.sf.mmm.search.engine.api.SearchQuery)
+   * {@inheritDoc}
    */
   public SearchResult search(SearchQuery query) {
 
@@ -231,7 +231,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
-   * @see net.sf.mmm.search.engine.api.SearchEngine#getEntry(java.lang.String)
+   * {@inheritDoc}
    */
   public SearchEntry getEntry(String id) throws SearchException {
 

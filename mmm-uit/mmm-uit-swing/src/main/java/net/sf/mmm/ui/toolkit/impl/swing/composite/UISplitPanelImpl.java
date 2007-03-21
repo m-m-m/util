@@ -54,7 +54,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * {@inheritDoc}
    */
   public JComponent getSwingComponent() {
 
@@ -62,7 +62,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#setOrientation(Orientation)
+   * {@inheritDoc}
    */
   public void setOrientation(Orientation orientation) {
 
@@ -74,7 +74,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#getOrientation()
+   * {@inheritDoc}
    */
   @Override
   public Orientation getOrientation() {
@@ -87,7 +87,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#setTopOrLeftComponent(UIComponent)
+   * {@inheritDoc}
    */
   public void setTopOrLeftComponent(UIComponent component) {
 
@@ -105,7 +105,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#setBottomOrRightComponent(net.sf.mmm.ui.toolkit.api.UIComponent)
+   * {@inheritDoc}
    */
   public void setBottomOrRightComponent(UIComponent component) {
 
@@ -123,7 +123,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#setDividerPosition(double)
+   * {@inheritDoc}
    */
   public void setDividerPosition(double proportion) {
 
@@ -132,7 +132,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -140,7 +140,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#getTopOrLeftComponent()
+   * {@inheritDoc}
    */
   public UIComponent getTopOrLeftComponent() {
 
@@ -148,7 +148,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UISplitPanel#getBottomOrRightComponent()
+   * {@inheritDoc}
    */
   public UIComponent getBottomOrRightComponent() {
 
@@ -156,7 +156,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponent(int)
+   * {@inheritDoc}
    */
   public UIComponent getComponent(int index) {
 
@@ -170,7 +170,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIComposite#getComponentCount()
+   * {@inheritDoc}
    */
   public int getComponentCount() {
 

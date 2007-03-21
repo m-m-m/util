@@ -98,7 +98,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainer#getName()
+   * {@inheritDoc}
    */
   public final String getName() {
 
@@ -141,7 +141,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.MutableIocContainer#addComponentProvider(net.sf.mmm.framework.api.ComponentProvider)
+   * {@inheritDoc}
    */
   public void addComponentProvider(ComponentProvider<?> componentProvider)
       throws ContainerException {
@@ -156,7 +156,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.MutableIocContainer#start()
+   * {@inheritDoc}
    */
   public final synchronized void start() {
 
@@ -184,7 +184,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.MutableIocContainer#stop()
+   * {@inheritDoc}
    */
   public final synchronized void stop() {
 
@@ -215,7 +215,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.IocContainer#isRunning()
+   * {@inheritDoc}
    */
   public boolean isRunning() {
 
@@ -585,7 +585,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -650,8 +650,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
     }
 
     /**
-     * @see net.sf.mmm.framework.base.provider.SimpleSingletonProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer,
-     *      net.sf.mmm.framework.api.ComponentManager)
+     * {@inheritDoc}
      */
     @Override
     public void dispose(ComponentInstanceContainer<IocContainer> singletonContainer,

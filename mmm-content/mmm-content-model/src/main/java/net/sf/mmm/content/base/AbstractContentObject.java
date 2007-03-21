@@ -47,7 +47,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getId()
+   * {@inheritDoc}
    */
   public IdImpl getId() {
 
@@ -55,7 +55,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -77,7 +77,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#isDeleted()
+   * {@inheritDoc}
    */
   public boolean isDeleted() {
 
@@ -107,7 +107,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getFieldValue(java.lang.String)
+   * {@inheritDoc}
    */
   public final Object getFieldValue(String fieldName) throws FieldNotExistsException,
       PermissionDeniedException, ContentException {
@@ -143,8 +143,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#setFieldValue(java.lang.String,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   public final void setFieldValue(String fieldName, Object value) throws FieldNotExistsException,
       PermissionDeniedException, ContentException {
@@ -183,7 +182,7 @@ public abstract class AbstractContentObject implements ContentObject {
       throws PermissionDeniedException, ContentException;
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(net.sf.mmm.util.xml.api.XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 
@@ -192,7 +191,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -206,7 +205,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see java.lang.Object#equals(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   public final boolean equals(Object other) {
@@ -218,7 +217,7 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * @see java.lang.Object#hashCode()
+   * {@inheritDoc}
    */
   @Override
   public final int hashCode() {

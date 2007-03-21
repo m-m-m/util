@@ -27,7 +27,7 @@ public class ImmutableObjectValue extends ObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.impl.ObjectValue#isEditable()
+   * {@inheritDoc}
    */
   @Override
   public boolean isEditable() {
@@ -36,7 +36,7 @@ public class ImmutableObjectValue extends ObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
+   * {@inheritDoc}
    */
   @Override
   public boolean isAddDefaults() {
@@ -45,7 +45,7 @@ public class ImmutableObjectValue extends ObjectValue {
   }
 
   /**
-   * @see net.sf.mmm.value.impl.ObjectValue#setPlainValue(java.lang.Object)
+   * {@inheritDoc}
    */
   @Override
   protected void setPlainValue(Object newValue) {

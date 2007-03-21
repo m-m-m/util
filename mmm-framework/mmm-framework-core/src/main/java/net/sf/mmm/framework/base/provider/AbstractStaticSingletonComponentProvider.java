@@ -66,8 +66,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
   }
 
   /**
-   * @see net.sf.mmm.framework.base.provider.AbstractDefaultInstanceComponentProvider#requestDefault(net.sf.mmm.framework.api.ComponentDescriptor,
-   *      java.lang.String, net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   @Override
   protected ComponentInstanceContainer<S> requestDefault(ComponentDescriptor<?> sourceDescriptor,
@@ -99,8 +98,7 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProvider#release(ComponentInstanceContainer,
-   *      net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   public final boolean release(ComponentInstanceContainer<S> instanceContainer,
       ComponentManager componentManager) {
@@ -110,12 +108,10 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
   }
 
   /**
+   * {@inheritDoc}
    * ATTENTION: this implementation does nothing but setting the singleton
    * {@link #getInstanceContainer() instance-container} to <code>null</code>.
    * Please override if your component has to be shut-down.
-   * 
-   * @see net.sf.mmm.framework.api.ComponentProvider#dispose(net.sf.mmm.framework.api.ComponentInstanceContainer,
-   *      net.sf.mmm.framework.api.ComponentManager)
    */
   public void dispose(ComponentInstanceContainer<S> instanceContainer,
       ComponentManager componentManager) {

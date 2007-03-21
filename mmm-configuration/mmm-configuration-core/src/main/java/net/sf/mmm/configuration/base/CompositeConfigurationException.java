@@ -37,7 +37,7 @@ public class CompositeConfigurationException extends ConfigurationException {
   }
 
   /**
-   * @see java.lang.Throwable#printStackTrace(java.io.PrintStream) 
+   * {@inheritDoc} 
    */
   public void printStackTrace(PrintStream s) {
 
@@ -49,7 +49,7 @@ public class CompositeConfigurationException extends ConfigurationException {
   }
 
   /**
-   * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter) 
+   * {@inheritDoc} 
    */
   public void printStackTrace(PrintWriter s) {
 

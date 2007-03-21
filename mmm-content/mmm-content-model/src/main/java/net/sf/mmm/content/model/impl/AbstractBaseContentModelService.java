@@ -102,7 +102,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getRootClass()
+   * {@inheritDoc}
    */
   public ContentClass getRootClass() {
 
@@ -137,7 +137,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     }
 
     /**
-     * @see net.sf.mmm.content.api.ContentObject#getContentClass()
+     * {@inheritDoc}
      */
     public ContentClass getContentClass() {
 
@@ -196,7 +196,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     }
 
     /**
-     * @see net.sf.mmm.content.api.ContentObject#getContentClass()
+     * {@inheritDoc}
      */
     public ContentClass getContentClass() {
 

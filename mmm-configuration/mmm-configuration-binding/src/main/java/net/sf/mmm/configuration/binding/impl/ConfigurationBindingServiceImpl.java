@@ -44,7 +44,7 @@ public class ConfigurationBindingServiceImpl extends AbstractConfigurationBindin
   }
 
   /**
-   * @see net.sf.mmm.configuration.binding.base.AbstractConfigurationBindingService#initialize()
+   * {@inheritDoc}
    */
   @Override
   public void initialize() throws ResourceMissingException {
@@ -56,8 +56,7 @@ public class ConfigurationBindingServiceImpl extends AbstractConfigurationBindin
   }
 
   /**
-   * @see net.sf.mmm.configuration.binding.api.ConfigurationBindingService#configure(net.sf.mmm.configuration.api.Configuration,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   public void configure(Configuration configuration, Object pojo) throws ConfigurationException {
 

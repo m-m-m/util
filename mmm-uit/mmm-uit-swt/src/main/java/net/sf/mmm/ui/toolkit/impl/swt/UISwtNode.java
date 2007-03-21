@@ -33,7 +33,7 @@ public abstract class UISwtNode extends AbstractUINode {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getFactory()
+   * {@inheritDoc}
    */
   @Override
   public UIFactorySwt getFactory() {

@@ -40,7 +40,7 @@ public class CharSubSequence extends CoreCharSequence {
   }
 
   /**
-   * @see java.lang.CharSequence#subSequence(int, int)
+   * {@inheritDoc}
    */
   public CharSequence subSequence(int startPosition, int endPosition) {
 
@@ -61,7 +61,7 @@ public class CharSubSequence extends CoreCharSequence {
   }
 
   /**
-   * @see java.lang.CharSequence#length()
+   * {@inheritDoc}
    */
   public int length() {
 
@@ -69,7 +69,7 @@ public class CharSubSequence extends CoreCharSequence {
   }
 
   /**
-   * @see java.lang.CharSequence#charAt(int)
+   * {@inheritDoc}
    */
   public char charAt(int index) {
 

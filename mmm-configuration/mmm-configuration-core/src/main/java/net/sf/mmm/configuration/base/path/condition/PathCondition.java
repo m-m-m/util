@@ -36,7 +36,7 @@ public class PathCondition implements Condition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#canBeEstablished(net.sf.mmm.configuration.base.AbstractConfiguration, java.lang.String)
+   * {@inheritDoc}
    */
   public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
   
@@ -92,7 +92,7 @@ public class PathCondition implements Condition {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#accept(net.sf.mmm.configuration.base.AbstractConfiguration, String)
+   * {@inheritDoc}
    */
   public boolean accept(AbstractConfiguration configuration, String namespaceUri) {
 
@@ -100,7 +100,7 @@ public class PathCondition implements Condition {
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.path.condition.Condition#establish(net.sf.mmm.configuration.base.AbstractConfiguration, String)
+   * {@inheritDoc}
    */
   public AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri) {
 
@@ -149,7 +149,7 @@ public class PathCondition implements Condition {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

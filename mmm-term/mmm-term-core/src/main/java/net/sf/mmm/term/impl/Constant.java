@@ -41,8 +41,7 @@ public class Constant<C> extends AbstractTerm {
   private static class XmlSerializerImpl<C> implements XmlSerializer<C> {
 
     /**
-     * @see net.sf.mmm.util.xml.api.XmlSerializer#toXml(net.sf.mmm.util.xml.api.XmlWriter,
-     *      java.lang.Object)
+     * {@inheritDoc}
      */
     public void toXml(XmlWriter xmlWriter, C object) throws XmlException {
 
@@ -105,7 +104,7 @@ public class Constant<C> extends AbstractTerm {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Term#evaluate(net.sf.mmm.context.api.Context)
+   * {@inheritDoc}
    */
   public C evaluate(Context variableSet) {
 
@@ -113,7 +112,7 @@ public class Constant<C> extends AbstractTerm {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 
@@ -123,7 +122,7 @@ public class Constant<C> extends AbstractTerm {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {

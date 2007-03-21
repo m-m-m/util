@@ -43,7 +43,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   }
 
   /**
-   * @see net.sf.mmm.content.resource.api.ContentResource#getParent()
+   * {@inheritDoc}
    */
   public ContentFolder getParent() {
 
@@ -51,7 +51,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   }
 
   /**
-   * @see net.sf.mmm.content.resource.api.ContentResource#getPath()
+   * {@inheritDoc}
    */
   public String getPath() {
 
@@ -73,7 +73,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   }
 
   /**
-   * @see net.sf.mmm.content.resource.api.ContentResource#getRevisionHistory()
+   * {@inheritDoc}
    */
   public RevisionHistory getRevisionHistory() {
 
@@ -82,7 +82,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   }
 
   /**
-   * @see net.sf.mmm.content.resource.api.ContentResource#getVersion()
+   * {@inheritDoc}
    */
   public Version getVersion() {
 
@@ -91,7 +91,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   }
 
   /**
-   * @see net.sf.mmm.content.api.ContentObject#getContentClass()
+   * {@inheritDoc}
    */
   public ContentClass getContentClass() {
 

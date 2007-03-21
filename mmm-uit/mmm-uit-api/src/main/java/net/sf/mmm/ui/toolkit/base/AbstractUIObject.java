@@ -39,7 +39,7 @@ public abstract class AbstractUIObject implements UIObject {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getFactory()
+   * {@inheritDoc}
    */
   public UIFactory getFactory() {
 
@@ -67,7 +67,7 @@ public abstract class AbstractUIObject implements UIObject {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getId()
+   * {@inheritDoc}
    */
   public String getId() {
 
@@ -75,7 +75,7 @@ public abstract class AbstractUIObject implements UIObject {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#setId(java.lang.String)
+   * {@inheritDoc}
    */
   public void setId(String newId) {
 

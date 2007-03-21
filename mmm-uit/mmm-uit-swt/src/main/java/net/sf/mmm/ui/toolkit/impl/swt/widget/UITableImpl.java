@@ -55,7 +55,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public SyncTableAccess getSyncAccess() {
@@ -64,7 +64,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
+   * {@inheritDoc}
    */
   @Override
   public void create() {
@@ -74,7 +74,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UITable#getModel()
+   * {@inheritDoc}
    */
   public UITableModel<C> getModel() {
 
@@ -82,7 +82,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UITable#setModel(net.sf.mmm.ui.toolkit.api.model.UITableModel)
+   * {@inheritDoc}
    */
   public void setModel(UITableModel<C> newModel) {
 
@@ -90,7 +90,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -98,7 +98,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSelectionIndex#getSelectedIndex()
+   * {@inheritDoc}
    */
   public int getSelectedIndex() {
   
@@ -106,7 +106,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex#setSelectedIndex(int)
+   * {@inheritDoc}
    */
   public void setSelectedIndex(int newIndex) {
   

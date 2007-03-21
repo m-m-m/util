@@ -76,7 +76,7 @@ public abstract class AbstractValueService implements ValueService {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueService#getManager(java.lang.Class)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public <V> ValueManager<V> getManager(Class<V> valueType) {
@@ -85,7 +85,7 @@ public abstract class AbstractValueService implements ValueService {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueService#findManager(java.lang.Class)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public <V> ValueManager<? super V> findManager(Class<V> valueSubType) {
@@ -104,7 +104,7 @@ public abstract class AbstractValueService implements ValueService {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueService#getManager(java.lang.String)
+   * {@inheritDoc}
    */
   public ValueManager<?> getManager(String name) {
 
@@ -112,7 +112,7 @@ public abstract class AbstractValueService implements ValueService {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueService#getManagers()
+   * {@inheritDoc}
    */
   public Collection<ValueManager> getManagers() {
 
@@ -120,7 +120,7 @@ public abstract class AbstractValueService implements ValueService {
   }
 
   /**
-   * @see net.sf.mmm.value.api.ValueService#xml2value(org.w3c.dom.Element)
+   * {@inheritDoc}
    */
   public Object xml2value(Element xmlElement) throws ValueException {
 

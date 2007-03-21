@@ -32,7 +32,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   private class Listener implements ActionListener {
 
     /**
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
 
@@ -80,7 +80,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * {@inheritDoc}
    */
   public @Override
   JComponent getSwingComponent() {
@@ -89,7 +89,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -97,7 +97,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -105,7 +105,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 

@@ -41,7 +41,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation()
+   * {@inheritDoc}
    */
   public Orientation getOrientation() {
   
@@ -49,7 +49,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIComponent#setEnabled(boolean)
+   * {@inheritDoc}
    */
   public void setEnabled(boolean enabled) {
 
@@ -60,7 +60,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle#setBorderTitle(java.lang.String)
+   * {@inheritDoc}
    */
   public void setBorderTitle(String borderTitle) {
 
@@ -80,7 +80,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadBorderTitle#getBorderTitle()
+   * {@inheritDoc}
    */
   public String getBorderTitle() {
 
@@ -92,7 +92,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#refresh()
+   * {@inheritDoc}
    */
   @Override
   public void refresh() {

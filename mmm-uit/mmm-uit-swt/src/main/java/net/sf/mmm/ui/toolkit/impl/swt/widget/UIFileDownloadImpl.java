@@ -33,7 +33,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   private class SelectionListener implements Listener {
 
     /**
-     * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
+     * {@inheritDoc}
      */
     public void handleEvent(Event event) {
 
@@ -80,7 +80,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public AbstractSyncControlAccess getSyncAccess() {
@@ -89,7 +89,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -97,7 +97,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -105,7 +105,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 

@@ -65,7 +65,7 @@ public class TestComponentB implements ComponentB {
     }
     
     /**
-     * @see net.sf.mmm.framework.demo.api.ComponentB#sayBe()
+     * {@inheritDoc}
      */
     public String sayBe() {
     

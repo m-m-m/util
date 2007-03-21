@@ -28,8 +28,7 @@ public class NotEqualsComparator implements Comparator {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.comparator.Comparator#accept(net.sf.mmm.value.api.GenericValue,
-   *      java.lang.String, java.util.regex.Pattern) 
+   * {@inheritDoc} 
    */
   public boolean accept(GenericValue value, String string, Pattern pattern) {
 
@@ -42,7 +41,7 @@ public class NotEqualsComparator implements Comparator {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.path.comparator.Comparator#getSymbol()
+   * {@inheritDoc}
    */
   public String getSymbol() {
 

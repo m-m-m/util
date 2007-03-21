@@ -35,8 +35,7 @@ public abstract class BasicFunction extends AbstractFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#calculate(net.sf.mmm.context.api.Context,
-   *      net.sf.mmm.term.api.Term[])
+   * {@inheritDoc}
    */
   public Object calculate(Context environment, Term... arguments) throws ValueException {
 

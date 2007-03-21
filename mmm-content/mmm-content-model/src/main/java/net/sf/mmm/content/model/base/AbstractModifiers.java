@@ -48,7 +48,7 @@ public abstract class AbstractModifiers implements Modifiers {
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.Modifiers#isSystem()
+   * {@inheritDoc}
    */
   public boolean isSystem() {
 
@@ -56,7 +56,7 @@ public abstract class AbstractModifiers implements Modifiers {
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.Modifiers#isFinal()
+   * {@inheritDoc}
    */
   public boolean isFinal() {
 

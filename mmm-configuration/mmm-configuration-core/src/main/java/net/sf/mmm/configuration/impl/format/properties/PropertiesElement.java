@@ -56,7 +56,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   protected void addChild(AbstractConfiguration child) {
@@ -108,8 +108,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationElement#createChildAttribute(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration createChildAttribute(String childName, String namespaceUri) {
@@ -119,8 +118,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationElement#createChildElement(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration createChildElement(String childName, String namespaceUri) {
@@ -130,7 +128,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getOwnerDocument()
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfigurationDocument getOwnerDocument() {
@@ -139,7 +137,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#getPlainString()
+   * {@inheritDoc}
    */
   @Override
   protected String getPlainString() {
@@ -148,7 +146,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfigurationNode#setPlainString(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected void setPlainString(String newValue) {
@@ -157,7 +155,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName()
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -165,7 +163,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
+   * {@inheritDoc}
    */
   public String getNamespaceUri() {
 
@@ -173,7 +171,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration doDisable() throws ConfigurationException {
@@ -183,7 +181,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
+   * {@inheritDoc}
    */
   @Override
   protected void doRemove() throws ConfigurationException {

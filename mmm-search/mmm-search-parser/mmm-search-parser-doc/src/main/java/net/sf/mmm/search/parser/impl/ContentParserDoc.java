@@ -27,7 +27,7 @@ public class ContentParserDoc extends AbstractPoiContentParser {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.AbstractPoiContentParser#extractText(org.apache.poi.poifs.filesystem.POIFSFileSystem, long)
+   * {@inheritDoc}
    */
   @Override
   protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {

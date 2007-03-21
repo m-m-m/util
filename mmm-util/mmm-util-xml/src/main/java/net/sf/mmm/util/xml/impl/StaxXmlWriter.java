@@ -34,8 +34,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(java.lang.String,
-   *      java.lang.String, java.lang.String)
+   * {@inheritDoc}
    */
   public void writeStartElement(String localName, String namespacePrefix, String namespaceUri)
       throws XmlException {
@@ -66,8 +65,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeAttribute(java.lang.String,
-   *      java.lang.String, java.lang.String)
+   * {@inheritDoc}
    */
   public void writeAttribute(String localName, String value, String namespacePrefix)
       throws XmlException {
@@ -89,8 +87,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeNamespaceDeclaration(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public void writeNamespaceDeclaration(String namespacePrefix, String namespaceUri)
       throws XmlException {
@@ -103,7 +100,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeCharacters(java.lang.String)
+   * {@inheritDoc}
    */
   public void writeCharacters(String text) throws XmlException {
 
@@ -115,7 +112,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeCData(java.lang.String)
+   * {@inheritDoc}
    */
   public void writeCData(String text) throws XmlException {
 
@@ -127,7 +124,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeComment(java.lang.String)
+   * {@inheritDoc}
    */
   public void writeComment(String comment) throws XmlException {
 
@@ -139,8 +136,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public void writeEndElement(String localName, String namespacePrefix) throws XmlException {
 

@@ -198,7 +198,7 @@ public class HttpParser {
   private static final CharFilter TOKEN_FILTER = new CharFilter() {
 
     /**
-     * @see net.sf.mmm.util.CharFilter#accept(char)
+     * {@inheritDoc}
      */
     public boolean accept(char c) {
 

@@ -47,7 +47,7 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setBoost(double)
+   * {@inheritDoc}
    */
   public void setBoost(double boost) {
 
@@ -55,8 +55,7 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setProperty(java.lang.String,
-   *      java.lang.String, Mode)
+   * {@inheritDoc}
    */
   public void setProperty(String name, String value, Mode mode) {
 
@@ -81,8 +80,7 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setProperty(java.lang.String,
-   *      java.io.Reader)
+   * {@inheritDoc}
    */
   @Override
   public void setProperty(String name, Reader valueReader) {
@@ -92,7 +90,7 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getProperty(java.lang.String)
+   * {@inheritDoc}
    */
   public String getProperty(String name) {
 
@@ -100,7 +98,7 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   }
 
   /**
-   * @see net.sf.mmm.search.api.SearchEntry#getPropertyNames()
+   * {@inheritDoc}
    */
   public Iterator<String> getPropertyNames() {
 

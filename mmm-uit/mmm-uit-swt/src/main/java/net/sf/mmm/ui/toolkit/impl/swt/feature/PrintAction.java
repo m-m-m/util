@@ -47,7 +47,7 @@ public class PrintAction extends AbstractAction implements UIActionListener {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.feature.Action#getActionListener()
+   * {@inheritDoc}
    */
   public UIActionListener getActionListener() {
 
@@ -55,8 +55,7 @@ public class PrintAction extends AbstractAction implements UIActionListener {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode,
-   *      net.sf.mmm.ui.toolkit.api.event.ActionType)
+   * {@inheritDoc}
    */
   public void invoke(UINode source, ActionType action) {
 

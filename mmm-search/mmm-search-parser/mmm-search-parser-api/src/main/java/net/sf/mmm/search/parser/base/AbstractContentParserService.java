@@ -37,7 +37,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   }
 
   /**
-   * @see net.sf.mmm.search.parser.base.LimitBufferSize#getMaximumBufferSize()
+   * {@inheritDoc}
    */
   public int getMaximumBufferSize() {
 
@@ -45,7 +45,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   }
 
   /**
-   * @see net.sf.mmm.search.parser.base.LimitBufferSize#setMaximumBufferSize(int)
+   * {@inheritDoc}
    */
   public void setMaximumBufferSize(int maxBytes) {
 
@@ -67,7 +67,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   }
 
   /**
-   * @see net.sf.mmm.search.parser.api.ContentParserService#getGenericParser()
+   * {@inheritDoc}
    */
   public ContentParser getGenericParser() {
 
@@ -84,7 +84,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   }
 
   /**
-   * @see net.sf.mmm.search.parser.api.ContentParserService#getParser(java.lang.String)
+   * {@inheritDoc}
    */
   public ContentParser getParser(String fileExtension) {
 

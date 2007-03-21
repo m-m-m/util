@@ -46,7 +46,7 @@ public class SimpleStringTranslator implements StringTranslator {
   }
 
   /**
-   * @see net.sf.mmm.nls.api.StringTranslator#translate(java.lang.String)
+   * {@inheritDoc}
    */
   public String translate(String message) {
 

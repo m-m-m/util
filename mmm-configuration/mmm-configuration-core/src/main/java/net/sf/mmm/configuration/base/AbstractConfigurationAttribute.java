@@ -31,7 +31,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getType()
+   * {@inheritDoc}
    */
   public Type getType() {
 
@@ -39,8 +39,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public AbstractConfiguration getChild(String name, String namespace)
       throws IllegalArgumentException {
@@ -49,7 +48,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
+   * {@inheritDoc}
    */
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
 
@@ -57,8 +56,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
@@ -67,7 +65,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern, java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {
@@ -76,7 +74,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
   
   /**
-   * @see AbstractConfiguration#doCreateChild(String, String)
+   * {@inheritDoc}
    */
   @Override
   AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
@@ -86,7 +84,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
+   * {@inheritDoc}
    */
   @Override
   protected void addChild(AbstractConfiguration child, QName qname) {
@@ -96,7 +94,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   protected boolean removeChild(AbstractConfiguration child) {
@@ -106,7 +104,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
  
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   public void addSibling(AbstractConfiguration element) {
@@ -116,7 +114,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   public boolean removeSibling(AbstractConfiguration element) {

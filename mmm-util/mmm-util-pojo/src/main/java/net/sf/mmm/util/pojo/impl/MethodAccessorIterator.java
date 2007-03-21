@@ -107,7 +107,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   }
 
   /**
-   * @see java.util.Iterator#hasNext()
+   * {@inheritDoc}
    */
   public boolean hasNext() {
 
@@ -115,7 +115,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   }
 
   /**
-   * @see java.util.Iterator#next()
+   * {@inheritDoc}
    */
   public AbstractPojoPropertyAccessor next() {
 
@@ -128,7 +128,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   }
 
   /**
-   * @see java.util.Iterator#remove()
+   * {@inheritDoc}
    */
   public void remove() {
 

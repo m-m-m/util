@@ -57,7 +57,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public SyncTreeAccess getSyncAccess() {
@@ -66,7 +66,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#create()
+   * {@inheritDoc}
    */
   @Override
   public void create() {
@@ -76,7 +76,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -84,7 +84,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getModel()
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public UITreeModel<N> getModel() {
@@ -93,7 +93,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UITree#setModel(net.sf.mmm.ui.toolkit.api.model.UITreeModel)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public void setModel(UITreeModel<N> newModel) {
@@ -102,7 +102,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag#isMultiSelection()
+   * {@inheritDoc}
    */
   public boolean isMultiSelection() {
 
@@ -110,7 +110,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelection()
+   * {@inheritDoc}
    */
   public N getSelection() {
 
@@ -122,7 +122,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UITree#getSelections()
+   * {@inheritDoc}
    */
   public N[] getSelections() {
 

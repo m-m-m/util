@@ -186,7 +186,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocument#getContext()
+   * {@inheritDoc}
    */
   public Context getContext() {
 
@@ -208,7 +208,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocument#isImmutable()
+   * {@inheritDoc}
    */
   public boolean isImmutable() {
 
@@ -230,7 +230,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocument#getConfiguration()
+   * {@inheritDoc}
    */
   public synchronized AbstractConfiguration getConfiguration() {
 
@@ -256,7 +256,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocument#save()
+   * {@inheritDoc}
    */
   public void save() throws ConfigurationException {
 
@@ -327,7 +327,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.ConfigurationDocument#reload()
+   * {@inheritDoc}
    */
   public void reload() throws ConfigurationException {
 
@@ -350,7 +350,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
       throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector#addDocument(net.sf.mmm.configuration.api.ConfigurationDocument)
+   * {@inheritDoc}
    */
   public void addDocument(ConfigurationDocument document) {
 
@@ -471,7 +471,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -515,7 +515,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     }
 
     /**
-     * @see java.lang.Object#equals(java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -530,7 +530,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     }
 
     /**
-     * @see java.lang.Object#hashCode()
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {

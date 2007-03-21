@@ -32,7 +32,7 @@ public class SwtWorkerThread extends Thread {
   }
 
   /**
-   * @see java.lang.Runnable#run()
+   * {@inheritDoc}
    */
   @Override
   public void run() {

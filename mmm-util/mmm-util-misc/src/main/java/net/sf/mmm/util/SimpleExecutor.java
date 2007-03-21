@@ -56,7 +56,7 @@ public class SimpleExecutor implements Executor {
   }
 
   /**
-   * @see java.util.concurrent.Executor#execute(java.lang.Runnable)
+   * {@inheritDoc}
    */
   public void execute(Runnable command) {
 

@@ -36,7 +36,7 @@ public class ComponentManagerImpl extends AbstractComponentManager {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManager#hasComponent(java.lang.Class)
+   * {@inheritDoc}
    */
   public <S> boolean hasComponent(Class<S> specification) {
 
@@ -44,7 +44,7 @@ public class ComponentManagerImpl extends AbstractComponentManager {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManager#releaseComponent(java.lang.Object)
+   * {@inheritDoc}
    */
   public synchronized <S> void releaseComponent(S component) {
 
@@ -52,8 +52,7 @@ public class ComponentManagerImpl extends AbstractComponentManager {
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentManager#requestComponent(java.lang.Class,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public synchronized <S> S requestComponent(Class<S> specification, String instanceId)
       throws ComponentException, ContainerException {

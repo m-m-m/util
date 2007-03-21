@@ -58,7 +58,7 @@ public class SimpleAction extends AbstractAction {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.feature.Action#getActionListener()
+   * {@inheritDoc}
    */
   public UIActionListener getActionListener() {
 

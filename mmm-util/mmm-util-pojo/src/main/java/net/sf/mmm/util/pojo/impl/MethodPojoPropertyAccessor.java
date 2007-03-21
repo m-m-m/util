@@ -45,7 +45,7 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getAccessibleObject()
+   * {@inheritDoc}
    */
   public Method getAccessibleObject() {
 
@@ -53,7 +53,7 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor#get(java.lang.Object)
+   * {@inheritDoc}
    */
   public Object get(Object pojoInstance) throws IllegalAccessException, InvocationTargetException {
 
@@ -61,8 +61,7 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor#set(java.lang.Object,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   public void set(Object pojoInstance, Object value) throws IllegalAccessException,
       InvocationTargetException {

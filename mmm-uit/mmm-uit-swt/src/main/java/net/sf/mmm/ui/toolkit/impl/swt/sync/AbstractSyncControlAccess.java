@@ -179,13 +179,13 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
+   * {@inheritDoc}
    */
   @Override
   public abstract Control getSwtObject();
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(String)
+   * {@inheritDoc}
    */
   @Override
   protected void performSynchron(String operation) {
@@ -227,7 +227,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#doCreateSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void doCreateSynchron() {
@@ -248,7 +248,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void createSynchron() {
@@ -289,7 +289,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#handleDisposed()
+   * {@inheritDoc}
    */
   @Override
   protected void handleDisposed() {

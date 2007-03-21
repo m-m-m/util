@@ -85,7 +85,7 @@ public class ConfigurationEventTest extends TestCase {
     }
     
     /**
-     * @see net.sf.mmm.util.event.EventListener#handleEvent(net.sf.mmm.util.event.Event)
+     * {@inheritDoc}
      */
     public void handleEvent(ConfigurationChangeEvent event) {
 

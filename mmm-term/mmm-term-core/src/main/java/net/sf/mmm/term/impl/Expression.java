@@ -57,7 +57,7 @@ public class Expression extends AbstractTerm {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Term#evaluate(net.sf.mmm.context.api.Context)
+   * {@inheritDoc}
    */
   public Object evaluate(Context environment) throws CalculationException, ValueException {
 
@@ -65,7 +65,7 @@ public class Expression extends AbstractTerm {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -103,7 +103,7 @@ public class Expression extends AbstractTerm {
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter serializer) throws XmlException {
 

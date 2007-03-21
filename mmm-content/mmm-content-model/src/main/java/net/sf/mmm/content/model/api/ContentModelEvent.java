@@ -80,7 +80,7 @@ public final class ContentModelEvent implements ChangeEvent {
   }
 
   /**
-   * @see net.sf.mmm.util.event.ChangeEvent#getType()
+   * {@inheritDoc}
    */
   public Type getType() {
 

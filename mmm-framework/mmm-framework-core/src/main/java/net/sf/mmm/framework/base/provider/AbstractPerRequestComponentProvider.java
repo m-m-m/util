@@ -40,9 +40,7 @@ public abstract class AbstractPerRequestComponentProvider<S> extends AbstractCom
   }
 
   /**
-   * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String,
-   *      net.sf.mmm.framework.api.ComponentManager)
+   * {@inheritDoc}
    */
   public ComponentInstanceContainer<S> request(String instanceId,
       ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,

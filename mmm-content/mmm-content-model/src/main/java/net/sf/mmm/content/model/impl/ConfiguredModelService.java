@@ -70,7 +70,7 @@ public class ConfiguredModelService extends AbstractMutableContentModelService {
   }
 
   /**
-   * @see net.sf.mmm.content.model.impl.AbstractMutableContentModelService#createClassId()
+   * {@inheritDoc}
    */
   @Override
   protected IdImpl createClassId() {
@@ -79,7 +79,7 @@ public class ConfiguredModelService extends AbstractMutableContentModelService {
   }
 
   /**
-   * @see net.sf.mmm.content.model.impl.AbstractMutableContentModelService#createFieldId()
+   * {@inheritDoc}
    */
   @Override
   protected IdImpl createFieldId() {

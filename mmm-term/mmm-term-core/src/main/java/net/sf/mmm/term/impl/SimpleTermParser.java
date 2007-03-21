@@ -61,7 +61,7 @@ public class SimpleTermParser implements TermParser {
   }
 
   /**
-   * @see net.sf.mmm.term.api.TermParser#parse(java.lang.String)
+   * {@inheritDoc}
    */
   public Term parse(String expression) throws TermParseException {
 

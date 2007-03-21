@@ -280,7 +280,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.FieldModifiers#isReadOnly()
+   * {@inheritDoc}
    */
   public boolean isReadOnly() {
 
@@ -291,7 +291,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.FieldModifiers#isTransient()
+   * {@inheritDoc}
    */
   public boolean isTransient() {
 
@@ -299,7 +299,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.FieldModifiers#isStatic()
+   * {@inheritDoc}
    */
   public boolean isStatic() {
 
@@ -307,7 +307,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   }
 
   /**
-   * @see net.sf.mmm.content.model.base.AbstractModifiers#setXmlAttributes(net.sf.mmm.util.xml.api.XmlWriter)
+   * {@inheritDoc}
    */
   @Override
   protected void setXmlAttributes(XmlWriter xmlWriter) throws XmlException {
@@ -325,7 +325,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   }
 
   /**
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
+   * {@inheritDoc}
    */
   public void toXml(XmlWriter xmlWriter) throws XmlException {
 
@@ -335,7 +335,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * {@inheritDoc}
    */
   @Override
   public String toString() {
@@ -389,7 +389,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getValueClass()
+     * {@inheritDoc}
      */
     public Class<FieldModifiers> getValueClass() {
 
@@ -397,7 +397,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#parse(java.lang.String)
+     * {@inheritDoc}
      */
     public FieldModifiers parse(String valueAsString) throws ValueParseException {
 
@@ -413,7 +413,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractValueManager#toString(java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
     public String toString(FieldModifiers value) {
@@ -460,7 +460,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractValueManager#parse(org.w3c.dom.Element)
+     * {@inheritDoc}
      */
     @Override
     public FieldModifiers parse(Element valueAsXml) throws ValueParseException {
@@ -476,8 +476,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     /**
-     * @see net.sf.mmm.value.base.AbstractValueManager#toXmlValue(net.sf.mmm.util.xml.api.XmlWriter,
-     *      java.lang.Object)
+     * {@inheritDoc}
      */
     @Override
     protected void toXmlValue(XmlWriter xmlWriter, FieldModifiers value) throws XmlException {

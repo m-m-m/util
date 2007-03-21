@@ -50,7 +50,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#getRoot()
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public Object getRoot() {
@@ -59,7 +59,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public Object getChild(Object parent, int index) {
@@ -68,7 +68,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public int getChildCount(Object parent) {
@@ -77,7 +77,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public boolean isLeaf(Object node) {
@@ -86,8 +86,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   public void valueForPathChanged(TreePath path, Object newValue) {
 
@@ -95,8 +94,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object,
-   *      java.lang.Object)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public int getIndexOfChild(Object parent, Object child) {
@@ -110,7 +108,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
+   * {@inheritDoc}
    */
   public void addTreeModelListener(TreeModelListener l) {
 
@@ -118,7 +116,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
+   * {@inheritDoc}
    */
   public void removeTreeModelListener(TreeModelListener l) {
 
@@ -209,7 +207,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.event.UITreeModelListener#treeModelChanged(net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent)
+   * {@inheritDoc}
    */
   public void treeModelChanged(UITreeModelEvent<N> event) {
 

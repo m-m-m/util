@@ -34,7 +34,7 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#addListener(net.sf.mmm.ui.toolkit.api.event.UIListModelListener)
+   * {@inheritDoc}
    */
   public void addListener(UIListModelListener listener) {
 
@@ -42,7 +42,7 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#removeListener(net.sf.mmm.ui.toolkit.api.event.UIListModelListener)
+   * {@inheritDoc}
    */
   public void removeListener(UIListModelListener listener) {
 
@@ -80,7 +80,7 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   protected abstract void handleListenerException(UIListModelListener listener, Throwable t);
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#toString(java.lang.Object)
+   * {@inheritDoc}
    */
   public String toString(E element) {
 
@@ -92,7 +92,7 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElementAsString(int)
+   * {@inheritDoc}
    */
   public String getElementAsString(int index) {
 
@@ -100,7 +100,7 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getIndexOf(Object)
+   * {@inheritDoc}
    */
   public int getIndexOf(E element) {
 

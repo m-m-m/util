@@ -47,7 +47,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   }  
   
   /**
-   * @see net.sf.mmm.util.event.AbstractEventSource#addListener(net.sf.mmm.util.event.EventListener)
+   * {@inheritDoc}
    */
   @Override
   public void addListener(L listener) {
@@ -58,7 +58,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   }
 
   /**
-   * @see net.sf.mmm.util.event.AbstractEventSource#removeListener(net.sf.mmm.util.event.EventListener)
+   * {@inheritDoc}
    */
   @Override
   public void removeListener(L listener) {
@@ -69,7 +69,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   }
 
   /**
-   * @see net.sf.mmm.util.event.AbstractEventSource#fireEvent(net.sf.mmm.util.event.Event)
+   * {@inheritDoc}
    */
   @Override
   protected void fireEvent(E event) {

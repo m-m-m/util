@@ -287,7 +287,7 @@ public class HttpResponse extends HttpMessage {
   }
 
   /**
-   * @see net.sf.mmm.util.http.HttpMessage#writeFirstLine(java.lang.StringBuffer)
+   * {@inheritDoc}
    */
   @Override
   protected void writeFirstLine(StringBuffer buffer) {

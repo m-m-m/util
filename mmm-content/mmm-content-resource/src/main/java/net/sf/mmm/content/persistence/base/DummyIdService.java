@@ -36,7 +36,7 @@ public class DummyIdService extends AbstractIdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.base.AbstractIdService#createClassId()
+   * {@inheritDoc}
    */
   @Override
   protected Id createClassId() {
@@ -45,7 +45,7 @@ public class DummyIdService extends AbstractIdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.base.AbstractIdService#createFieldId()
+   * {@inheritDoc}
    */
   @Override
   protected Id createFieldId() {
@@ -54,7 +54,7 @@ public class DummyIdService extends AbstractIdService {
   }
 
   /**
-   * @see net.sf.mmm.content.persistence.base.AbstractIdService#createResourceId(net.sf.mmm.content.model.api.ContentClass)
+   * {@inheritDoc}
    */
   @Override
   protected Id createResourceId(ContentClass type) {

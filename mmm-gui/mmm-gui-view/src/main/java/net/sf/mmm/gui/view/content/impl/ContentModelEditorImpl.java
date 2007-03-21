@@ -104,7 +104,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
   }
 
   /**
-   * @see net.sf.mmm.gui.view.content.api.ContentModelEditorView#create(UIFactory)
+   * {@inheritDoc}
    */
   public UIComposite create(UIFactory uiFactory) {
 

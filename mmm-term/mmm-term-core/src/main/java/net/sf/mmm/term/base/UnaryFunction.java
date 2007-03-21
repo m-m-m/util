@@ -27,7 +27,7 @@ public abstract class UnaryFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getOperatorPriority()
+   * {@inheritDoc}
    */
   @Override
   public OperatorPriority getOperatorPriority() {
@@ -36,7 +36,7 @@ public abstract class UnaryFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
+   * {@inheritDoc}
    */
   public int getMinimumArgumentCount() {
 
@@ -44,7 +44,7 @@ public abstract class UnaryFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.api.Function#getMaximumArgumentCount()
+   * {@inheritDoc}
    */
   public int getMaximumArgumentCount() {
 
@@ -52,7 +52,7 @@ public abstract class UnaryFunction extends BasicFunction {
   }
 
   /**
-   * @see net.sf.mmm.term.base.BasicFunction#calculate(Object)
+   * {@inheritDoc}
    */
   @Override
   public abstract Object calculate(Object argument) throws ValueException;

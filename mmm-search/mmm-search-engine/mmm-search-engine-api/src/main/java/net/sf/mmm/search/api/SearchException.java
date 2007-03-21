@@ -11,7 +11,7 @@ import net.sf.mmm.search.engine.api.SearchEngine;
  * This is a technical exception that can be thrown by the {@link SearchEngine}
  * and related objects. The {@link SearchEngine} implementation is suggested to
  * be tolerant (e.g. accept malformed queries). Anyways in some situations (e.g.
- * {@link java.io.IOException}) it can be neccessary to throw an exception.
+ * {@link java.io.IOException}) it can be necessary to throw an exception.
  * Therefore this is the suggested exception type to be used.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

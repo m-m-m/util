@@ -97,8 +97,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel#handleListenerException(net.sf.mmm.ui.toolkit.api.event.UITableModelListener,
-   *      java.lang.Throwable)
+   * {@inheritDoc}
    */
   @Override
   protected void handleListenerException(UITableModelListener listener, Throwable t) {
@@ -108,7 +107,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventListener#handleEvent(net.sf.mmm.util.event.Event)
+   * {@inheritDoc}
    */
   public void handleEvent(ContentModelEvent event) {
 
@@ -140,7 +139,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getCellValue(int, int)
+   * {@inheritDoc}
    */
   public Object getCellValue(int rowIndex, int columnIndex) {
 
@@ -172,7 +171,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnCount()
+   * {@inheritDoc}
    */
   public int getColumnCount() {
 
@@ -180,7 +179,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getColumnName(int)
+   * {@inheritDoc}
    */
   public String getColumnName(int columnIndex) {
 
@@ -188,7 +187,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount()
+   * {@inheritDoc}
    */
   public int getRowCount() {
 
@@ -196,7 +195,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   }
 
   /**
-   * @see net.sf.mmm.gui.model.content.api.FieldTableModel#getField(int)
+   * {@inheritDoc}
    */
   public ContentField getField(int rowIndex) {
   

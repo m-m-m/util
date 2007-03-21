@@ -40,7 +40,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * {@inheritDoc}
    */
   @Override
   public JComponent getSwingComponent() {
@@ -49,7 +49,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor#setDate(java.util.Date)
+   * {@inheritDoc}
    */
   public void setDate(Date newDate) {
 
@@ -57,7 +57,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor#getDate()
+   * {@inheritDoc}
    */
   public Date getDate() {
 
@@ -65,7 +65,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -73,7 +73,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteLocale#setLocale(java.util.Locale)
+   * {@inheritDoc}
    */
   public void setLocale(Locale newLocale) {
 
@@ -81,7 +81,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadLocale#getLocale()
+   * {@inheritDoc}
    */
   public Locale getLocale() {
 

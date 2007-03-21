@@ -42,8 +42,7 @@ public abstract class UIWindow extends UIWindowImpl {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#showMessage(java.lang.String,
-   *      java.lang.String, net.sf.mmm.ui.toolkit.api.window.MessageType)
+   * {@inheritDoc}
    */
   public void showMessage(String message, String title, MessageType messageType) {
 
@@ -59,8 +58,7 @@ public abstract class UIWindow extends UIWindowImpl {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#showQuestion(java.lang.String,
-   *      java.lang.String)
+   * {@inheritDoc}
    */
   public boolean showQuestion(String question, String title) {
 
@@ -70,8 +68,7 @@ public abstract class UIWindow extends UIWindowImpl {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#createDialog(java.lang.String,
-   *      boolean, boolean)
+   * {@inheritDoc}
    */
   public UIDialog createDialog(String title, boolean modal, boolean resizeable) {
 

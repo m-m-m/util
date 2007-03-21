@@ -81,13 +81,13 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#getSwtObject()
+   * {@inheritDoc}
    */
   @Override
   public abstract Dialog getSwtObject();
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#performSynchron(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected void performSynchron(String operation) {
@@ -100,7 +100,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncObjectAccess#createSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void createSynchron() {

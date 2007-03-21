@@ -43,7 +43,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
     }
 
     /**
-     * @see net.sf.mmm.streamdetect.api.DetectorStream#getMetadata()
+     * {@inheritDoc}
      */
     public Context getMetadata() {
 
@@ -59,7 +59,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
     }
 
     /**
-     * @see net.sf.mmm.streamdetect.api.DetectorStream#isDone() 
+     * {@inheritDoc} 
      */
     public boolean isDone() {
 

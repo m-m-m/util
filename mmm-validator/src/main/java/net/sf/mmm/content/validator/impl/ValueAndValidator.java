@@ -28,8 +28,7 @@ public class ValueAndValidator extends AbstractCompositeValueValidator {
   }
 
   /**
-   * @see net.sf.mmm.content.validator.base.AbstractCompositeValueValidator#getResult(net.sf.mmm.content.validator.api.ValidationResult[],
-   *      int, int)
+   * {@inheritDoc}
    */
   @Override
   protected ValidationResult getResult(ValidationResult[] details, int detailCount, int succeedCount) {

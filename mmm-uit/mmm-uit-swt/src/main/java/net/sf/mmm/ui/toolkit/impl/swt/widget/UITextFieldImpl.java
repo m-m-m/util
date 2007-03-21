@@ -39,7 +39,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent#getSyncAccess()
+   * {@inheritDoc}
    */
   @Override
   public AbstractSyncControlAccess getSyncAccess() {
@@ -48,7 +48,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -56,7 +56,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -64,7 +64,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -72,7 +72,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
   
@@ -80,7 +80,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#setEditable(boolean)
+   * {@inheritDoc}
    */
   public void setEditable(boolean editableFlag) {
   

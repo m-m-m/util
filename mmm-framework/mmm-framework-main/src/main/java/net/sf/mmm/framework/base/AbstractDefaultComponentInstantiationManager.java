@@ -13,8 +13,8 @@ import net.sf.mmm.framework.base.provider.InstanceIdNotAvailableException;
  * {@link ComponentInstantiationManager} interface.
  * 
  * @param <S>
- *        is the {@link ComponentDescriptor#getSpecification() specification}
- *        of the component.
+ *        is the {@link ComponentDescriptor#getSpecification() specification} of
+ *        the component.
  * @param <I>
  *        is the
  *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
@@ -23,59 +23,59 @@ import net.sf.mmm.framework.base.provider.InstanceIdNotAvailableException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractDefaultComponentInstantiationManager<S, I extends S> extends
-        AbstractComponentInstantiationManager<S, I> {
+    AbstractComponentInstantiationManager<S, I> {
 
-    /**
-     * The constructor.
-     */
-    public AbstractDefaultComponentInstantiationManager() {
+  /**
+   * The constructor.
+   */
+  public AbstractDefaultComponentInstantiationManager() {
 
-        super();
+    super();
+  }
+
+  /**
+   * @see AbstractComponentInstantiationManager#AbstractComponentInstantiationManager(ExtendedComponentDescriptor)
+   */
+  public AbstractDefaultComponentInstantiationManager(
+      ExtendedComponentDescriptor<S, I> componentDescriptor) {
+
+    super(componentDescriptor);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId)
+      throws InstanceIdNotAvailableException {
+
+    if (ComponentManager.DEFAULT_INSTANCE_ID.equals(instanceId)) {
+      return requestDefault();
+    } else {
+      return requestByInstanceId(instanceId);
     }
+  }
 
-    /**
-     * @see AbstractComponentInstantiationManager#AbstractComponentInstantiationManager(ExtendedComponentDescriptor)
-     */
-    public AbstractDefaultComponentInstantiationManager(
-            ExtendedComponentDescriptor<S, I> componentDescriptor) {
+  /**
+   * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
+   * 
+   * @return the container for the
+   *         {@link ComponentManager#DEFAULT_INSTANCE_ID default} instance.
+   */
+  public abstract ExtendedComponentInstanceContainerImpl<S, I> requestDefault();
 
-        super(componentDescriptor);
-    }
+  /**
+   * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
+   * 
+   * @param instanceId
+   * @return the requested instance-ID
+   * @throws InstanceIdNotAvailableException
+   *         if the component is NOT available for the requested
+   *         <code>instanceId</code>.
+   */
+  public ExtendedComponentInstanceContainerImpl<S, I> requestByInstanceId(String instanceId)
+      throws InstanceIdNotAvailableException {
 
-    /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
-     */
-    public final ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId)
-            throws InstanceIdNotAvailableException {
-
-        if (ComponentManager.DEFAULT_INSTANCE_ID.equals(instanceId)) {
-            return requestDefault();
-        } else {
-            return requestByInstanceId(instanceId);
-        }
-    }
-
-    /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
-     * 
-     * @return the container for the
-     *         {@link ComponentManager#DEFAULT_INSTANCE_ID default} instance.
-     */
-    public abstract ExtendedComponentInstanceContainerImpl<S, I> requestDefault();
-
-    /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
-     * 
-     * @param instanceId
-     * @return the requested instance-ID
-     * @throws InstanceIdNotAvailableException
-     *         if the component is NOT available for the requested
-     *         <code>instanceId</code>.
-     */
-    public ExtendedComponentInstanceContainerImpl<S, I> requestByInstanceId(String instanceId)
-            throws InstanceIdNotAvailableException {
-
-        throw new InstanceIdNotAvailableException(instanceId, getDescriptor());
-    }
+    throw new InstanceIdNotAvailableException(instanceId, getDescriptor());
+  }
 
 }

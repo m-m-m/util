@@ -58,7 +58,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#release(net.sf.mmm.framework.base.ExtendedComponentInstanceContainerImpl)
+     * {@inheritDoc}
      */
     public boolean release(ExtendedComponentInstanceContainerImpl<S, I> instanceContainer) {
 
@@ -66,7 +66,7 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#request(String)
+     * {@inheritDoc}
      */
     public ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId) {
 
@@ -79,9 +79,9 @@ public class SingletonComponentInstantiationManager<S, I extends S> extends
     }
 
     /**
-     * @see net.sf.mmm.framework.base.ComponentInstantiationManager#dispose()
+     * {@inheritDoc}
      */
-    public ExtendedComponentInstanceContainerImpl[] dispose() {
+    public ExtendedComponentInstanceContainerImpl<S, I>[] dispose() {
     
         Collection<ExtendedComponentInstanceContainerImpl<S, I>> values = this.instanceContainers.values();
         ExtendedComponentInstanceContainerImpl[] containers = new ExtendedComponentInstanceContainerImpl[values.size()];

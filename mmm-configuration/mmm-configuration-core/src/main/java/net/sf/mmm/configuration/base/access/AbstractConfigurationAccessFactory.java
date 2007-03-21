@@ -89,7 +89,7 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
       Configuration include, ConfigurationAccess parent, String href) throws ConfigurationException;
 
   /**
-   * @see net.sf.mmm.configuration.api.access.ConfigurationAccessFactory#getAccessors()
+   * {@inheritDoc}
    */
   public final ConfigurationAccess[] getAccessors() {
 

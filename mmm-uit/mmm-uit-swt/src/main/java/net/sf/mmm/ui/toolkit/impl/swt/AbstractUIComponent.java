@@ -104,7 +104,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   // return getSwtControl();
   // }
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#getTooltipText()
+   * {@inheritDoc}
    */
   public String getTooltipText() {
 
@@ -112,7 +112,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip#setTooltipText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setTooltipText(String tooltip) {
 
@@ -120,7 +120,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#setParent(net.sf.mmm.ui.toolkit.api.UINode)
+   * {@inheritDoc}
    */
   @Override
   public void setParent(UINode newParent) {
@@ -186,7 +186,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteEnabled#setEnabled(boolean)
+   * {@inheritDoc}
    */
   public void setEnabled(boolean enabled) {
 
@@ -194,7 +194,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadEnabled#isEnabled()
+   * {@inheritDoc}
    */
   public boolean isEnabled() {
 
@@ -202,7 +202,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getHeight()
+   * {@inheritDoc}
    */
   public int getHeight() {
 
@@ -210,7 +210,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadSize#getWidth()
+   * {@inheritDoc}
    */
   public int getWidth() {
 
@@ -218,7 +218,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getX()
+   * {@inheritDoc}
    */
   public int getX() {
   
@@ -226,7 +226,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPosition#getY()
+   * {@inheritDoc}
    */
   public int getY() {
   
@@ -234,7 +234,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable()
+   * {@inheritDoc}
    */
   public boolean isResizeable() {
 
@@ -243,7 +243,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSize#setSize(int, int)
+   * {@inheritDoc}
    */
   public void setSize(int width, int height) {
 
@@ -254,7 +254,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWritePosition#setPosition(int, int)
+   * {@inheritDoc}
    */
   public void setPosition(int x, int y) {
   
@@ -262,7 +262,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
   
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredHeight()
+   * {@inheritDoc}
    */
   public int getPreferredHeight() {
 
@@ -270,7 +270,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize#getPreferredWidth()
+   * {@inheritDoc}
    */
   public int getPreferredWidth() {
 
@@ -278,7 +278,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#dispose()
+   * {@inheritDoc}
    */
   public void dispose() {
 
@@ -290,7 +290,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed#isDisposed()
+   * {@inheritDoc}
    */
   public boolean isDisposed() {
 

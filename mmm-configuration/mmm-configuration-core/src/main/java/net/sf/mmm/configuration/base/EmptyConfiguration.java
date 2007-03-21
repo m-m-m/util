@@ -74,7 +74,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#getValue()
+   * {@inheritDoc}
    */
   public MutableGenericValue getValue() {
 
@@ -82,7 +82,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getName() 
+   * {@inheritDoc} 
    */
   public String getName() {
 
@@ -94,7 +94,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getNamespaceUri()
+   * {@inheritDoc}
    */
   public String getNamespaceUri() {
 
@@ -102,7 +102,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#isEditable()
+   * {@inheritDoc}
    */
   public boolean isEditable() {
 
@@ -110,7 +110,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#isAddDefaults()
+   * {@inheritDoc}
    */
   public boolean isAddDefaults() {
 
@@ -118,7 +118,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.Configuration#getType() 
+   * {@inheritDoc} 
    */
   public Type getType() {
 
@@ -126,8 +126,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getDescendants(java.lang.String,
-   *      java.lang.String) 
+   * {@inheritDoc} 
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
@@ -135,8 +134,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doCreateChild(java.lang.String,
-   *      java.lang.String) 
+   * {@inheritDoc} 
    */
   @Override
   public AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
@@ -145,8 +143,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChild(java.lang.String,
-   *      java.lang.String) 
+   * {@inheritDoc} 
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespace)
@@ -156,7 +153,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(net.sf.mmm.configuration.api.Configuration.Type)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Type childType) {
@@ -165,8 +162,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.lang.String,
-   *      java.lang.String) 
+   * {@inheritDoc} 
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
@@ -175,7 +171,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getChildren(java.util.regex.Pattern, java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespace) {
@@ -184,7 +180,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doRemove()
+   * {@inheritDoc}
    */
   @Override
   public void doRemove() throws ConfigurationException {
@@ -193,7 +189,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeChild(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   public boolean removeChild(AbstractConfiguration child) {
@@ -202,7 +198,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addChild(net.sf.mmm.configuration.base.AbstractConfiguration, QName)
+   * {@inheritDoc}
    */
   @Override
   public void addChild(AbstractConfiguration child, QName qName) {
@@ -211,7 +207,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#addSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   public void addSibling(AbstractConfiguration element) {
@@ -220,7 +216,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#removeSibling(net.sf.mmm.configuration.base.AbstractConfiguration)
+   * {@inheritDoc}
    */
   @Override
   public boolean removeSibling(AbstractConfiguration element) {
@@ -229,7 +225,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
   
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#doDisable()
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration doDisable() throws ConfigurationException {
@@ -238,28 +234,28 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.api.MutableConfiguration#disable()
+   * {@inheritDoc}
    */
   public void disable() throws ConfigurationException {
 
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSource#addListener(EventListener)
+   * {@inheritDoc}
    */
   public void addListener(ConfigurationChangeListener listener) {
 
   }
 
   /**
-   * @see net.sf.mmm.util.event.EventSource#removeListener(EventListener)
+   * {@inheritDoc}
    */
   public void removeListener(ConfigurationChangeListener listener) {
 
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getParent()
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration getParent() {
@@ -268,7 +264,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * @see net.sf.mmm.configuration.base.AbstractConfiguration#getOwnerDocument()
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfigurationDocument getOwnerDocument() {

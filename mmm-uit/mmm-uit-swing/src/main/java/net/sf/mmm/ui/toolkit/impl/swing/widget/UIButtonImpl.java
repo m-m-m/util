@@ -74,7 +74,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent#getSwingComponent()
+   * {@inheritDoc}
    */
   public JComponent getSwingComponent() {
 
@@ -82,7 +82,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(java.lang.String)
+   * {@inheritDoc}
    */
   public void setText(String text) {
 
@@ -90,7 +90,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadText#getText()
+   * {@inheritDoc}
    */
   public String getText() {
 
@@ -98,7 +98,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#doInitializeListener()
+   * {@inheritDoc}
    */
   @Override
   protected boolean doInitializeListener() {
@@ -108,7 +108,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#getType()
+   * {@inheritDoc}
    */
   public String getType() {
 
@@ -116,7 +116,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#isSelected()
+   * {@inheritDoc}
    */
   public boolean isSelected() {
 
@@ -124,7 +124,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag#setSelected(boolean)
+   * {@inheritDoc}
    */
   public void setSelected(boolean selected) {
 
@@ -132,7 +132,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UIButton#getStyle()
+   * {@inheritDoc}
    */
   public ButtonStyle getStyle() {
 
@@ -140,7 +140,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIWriteIcon#setIcon(net.sf.mmm.ui.toolkit.api.UIPicture)
+   * {@inheritDoc}
    */
   public void setIcon(UIPicture newIcon) {
 
@@ -153,7 +153,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.state.UIReadIcon#getIcon()
+   * {@inheritDoc}
    */
   public UIPicture getIcon() {
 

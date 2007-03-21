@@ -108,7 +108,7 @@ public interface ContentField extends ContentReflectionObject {
   Class<?> getFieldClass();
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentReflectionObject#getModifiers()
+   * {@inheritDoc}
    */
   FieldModifiers getModifiers();
 

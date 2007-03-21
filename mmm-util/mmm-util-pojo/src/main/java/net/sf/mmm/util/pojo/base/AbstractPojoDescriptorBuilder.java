@@ -30,7 +30,7 @@ public abstract class AbstractPojoDescriptorBuilder implements PojoDescriptorBui
   }
 
   /**
-   * @see net.sf.mmm.util.pojo.api.PojoDescriptorBuilder#getDescriptor(java.lang.Class)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
   public <P> PojoDescriptorImpl<P> getDescriptor(Class<P> pojoType) {

@@ -82,7 +82,7 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#performSynchron(java.lang.String)
+   * {@inheritDoc}
    */
   @Override
   protected void performSynchron(String operation) {
@@ -97,7 +97,7 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#createSynchron()
+   * {@inheritDoc}
    */
   @Override
   protected void createSynchron() {
@@ -115,7 +115,7 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncWidgetAccess#getSwtObject()
+   * {@inheritDoc}
    */
   @Override
   public ScrolledComposite getSwtObject() {

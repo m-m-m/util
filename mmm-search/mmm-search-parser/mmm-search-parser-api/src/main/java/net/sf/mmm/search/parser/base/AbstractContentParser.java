@@ -26,7 +26,7 @@ public abstract class AbstractContentParser implements ContentParser, LimitBuffe
   }
 
   /**
-   * @see net.sf.mmm.search.parser.base.LimitBufferSize#getMaximumBufferSize()
+   * {@inheritDoc}
    */
   public int getMaximumBufferSize() {
 
@@ -34,7 +34,7 @@ public abstract class AbstractContentParser implements ContentParser, LimitBuffe
   }
 
   /**
-   * @see net.sf.mmm.search.parser.base.LimitBufferSize#setMaximumBufferSize(int)
+   * {@inheritDoc}
    */
   public void setMaximumBufferSize(int maxBytes) {
 
