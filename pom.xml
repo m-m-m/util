@@ -130,7 +130,6 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
           <configLocation>net/sf/mmm/checkstyle.xml</configLocation>
-          <headerLocation>net/sf/mmm/checkstyle.header.txt</headerLocation>
         </configuration>
       </plugin>
       <plugin>
