@@ -365,8 +365,8 @@ public final class VersionImpl implements Version {
     int microVersion = -1;
     String versionSuffix = null;
 
-    // StringTokenizer is inacceptable, because it hides multiple
-    // occurences of the delimiter if return token is set to false.
+    // StringTokenizer is in-acceptable, because it hides multiple
+    // occurrences of the delimiter if return token is set to false.
     StringBuffer token = new StringBuffer();
     int end = versionAsString.length() - 1;
     int pos = 0;

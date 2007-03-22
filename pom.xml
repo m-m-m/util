@@ -29,12 +29,10 @@
     <module>mmm-nls</module>
     <module>mmm-search</module>
     <module>mmm-setup</module>
-    <module>mmm-streamdetect</module>
     <module>mmm-term</module>
     <module>mmm-upnp</module>
     <module>mmm-util</module>
     <module>mmm-uit</module>
-    <module>mmm-validator</module>
     <module>mmm-value</module>
   </modules>
   <inceptionYear>2001</inceptionYear>

@@ -10,7 +10,7 @@
   <name>MMM::Streamdetect</name>
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-streamdetect</artifactId>
+  <artifactId>mmm-util-streamdetect</artifactId>
   <packaging>jar</packaging>
   <version>0.0.1</version>
   <description>library to detect metadata while streaming</description>

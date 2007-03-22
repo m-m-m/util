@@ -28,7 +28,7 @@
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-validator</artifactId>
+      <artifactId>mmm-value-validator</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>

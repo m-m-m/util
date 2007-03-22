@@ -22,5 +22,6 @@
     <module>mmm-util-reflect</module>
     <module>mmm-util-resource</module>
     <module>mmm-util-xml</module>
+    <module>mmm-util-streamdetect</module>
   </modules>
 </project>

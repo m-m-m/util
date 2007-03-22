@@ -19,5 +19,6 @@
     <module>mmm-value-core</module>
     <module>mmm-value-context</module> 
     <module>mmm-value-main</module> 
+    <module>mmm-value-validator</module>
   </modules>
 </project>

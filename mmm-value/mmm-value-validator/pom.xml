@@ -10,7 +10,7 @@
   <name>MMM::Validator</name>
   <description>Component for validation of content.</description>
   <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-validator</artifactId>
+  <artifactId>mmm-value-validator</artifactId>
   <packaging>jar</packaging>
   <version>0.0.1</version>
   <dependencies>
