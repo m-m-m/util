@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
-    <artifactId>mmm</artifactId>
-    <version>1.0.0</version>
+    <artifactId>mmm-value</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <name>MMM Value::Validator</name>
   <description>Component for validation.</description>
