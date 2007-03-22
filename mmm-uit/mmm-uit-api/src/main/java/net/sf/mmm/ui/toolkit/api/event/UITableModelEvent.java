@@ -10,7 +10,7 @@ package net.sf.mmm.ui.toolkit.api.event;
  * order to notify about changes of the
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable table}.<br>
  * Be aware that only
- * {@link net.sf.mmm.ui.toolkit.api.event.EventType#UPDATE update} events may
+ * {@link net.sf.mmm.util.event.ChangeEvent.Type#UPDATE update} events may
  * apply to incomplete columns (single column but
  * {@link #getRowStartIndex() row-start} is not <code>0</code> or
  * {@link #getRowEndIndex() row-end} is not

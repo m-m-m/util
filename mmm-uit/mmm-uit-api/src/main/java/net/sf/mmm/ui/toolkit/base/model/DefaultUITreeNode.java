@@ -20,7 +20,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   private DefaultUITreeNode<T> parent;
 
   /** the node data */
-  T data;
+  private T data;
 
   /** the children of this node */
   private List<UITreeNodeIF<T>> children;
@@ -35,7 +35,8 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
    * @param nodeData
    *        is the data of the node to create.
    */
-  protected DefaultUITreeNode(DefaultUITreeModel<T> treeModel, DefaultUITreeNode<T> parentNode, T nodeData) {
+  protected DefaultUITreeNode(DefaultUITreeModel<T> treeModel, DefaultUITreeNode<T> parentNode,
+      T nodeData) {
 
     super();
     this.model = treeModel;
@@ -102,8 +103,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
    * This method creates a child node of this node.
    * 
    * @param childData
-   *        is the data object of this node. See
-   *        {@link UITreeNodeIF#getData()}.
+   *        is the data object of this node. See {@link UITreeNodeIF#getData()}.
    * @return the created node.
    */
   public DefaultUITreeNode<T> createChildNode(T childData) {

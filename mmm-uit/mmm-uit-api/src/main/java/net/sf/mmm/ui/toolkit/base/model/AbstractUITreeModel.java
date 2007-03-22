@@ -84,11 +84,11 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
   }
 
   /**
+   * {@inheritDoc}
+   * 
    * ATTENTION: This method assumes the {@link Object#getClass() class} of the
    * {@link #getRootNode() root-node} as node-type. Please override this method
    * if this is NOT applicable.
-   * 
-   * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel#getNodeType()
    */
   public Class<N> getNodeType() {
 

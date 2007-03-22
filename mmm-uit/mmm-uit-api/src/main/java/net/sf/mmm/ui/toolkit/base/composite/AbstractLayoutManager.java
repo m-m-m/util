@@ -27,13 +27,13 @@ public abstract class AbstractLayoutManager {
   private static final int CACHE_SPARE_SIZE = 3;
 
   /**
-   * If <code>true</code> the layout is vertical, if <code>false</code>
-   * the layout is horizontal.
+   * If <code>true</code> the layout is vertical, if <code>false</code> the
+   * layout is horizontal.
    */
   protected Orientation layoutOrientation;
 
   /**
-   * The layout constraints of the componets. For a given array position the
+   * The layout constraints of the components. For a given array position the
    * constraint, childSize and childArea must belong to the same component.
    */
   protected LayoutConstraints[] constraints;
@@ -134,8 +134,10 @@ public abstract class AbstractLayoutManager {
         } else {
           axisFixed += this.constraints[i].insets.getVerticalSpace();
         }
-        //Filling axisFilling = this.constraints[i].filling.getPart(this.layoutOrientation);
-        //if ((this.constraints[i].weight == 0) || (Filling.NONE == axisFilling)) {
+        // Filling axisFilling =
+        // this.constraints[i].filling.getPart(this.layoutOrientation);
+        // if ((this.constraints[i].weight == 0) || (Filling.NONE ==
+        // axisFilling)) {
         if (this.constraints[i].weight == 0) {
           axisFixed += this.childSizes[i].width;
         } else {
@@ -154,9 +156,9 @@ public abstract class AbstractLayoutManager {
     }
     /*
      * if (axisPrefered > axisAvailable) { fixscale = axisAvailable /
-     * axisPrefered; scale = fixscale; } else { if (axisDynamic == 0) {
-     * fixscale = axisAvailable / axisFixed; } else { scale = (axisAvailable -
-     * axisFixed) / axisDynamic; } }
+     * axisPrefered; scale = fixscale; } else { if (axisDynamic == 0) { fixscale =
+     * axisAvailable / axisFixed; } else { scale = (axisAvailable - axisFixed) /
+     * axisDynamic; } }
      */
     if (axisDynamic == 0) {
       if (axisAvailable < axisFixed) {
@@ -185,7 +187,8 @@ public abstract class AbstractLayoutManager {
         }
         boolean axisFill = (this.constraints[i].weight != 0);
         double w;
-        //if (axisFill && ((filling == Filling.HORIZONTAL) || (filling == Filling.BOTH))) {
+        // if (axisFill && ((filling == Filling.HORIZONTAL) || (filling ==
+        // Filling.BOTH))) {
         if (axisFill) {
           w = this.constraints[i].weight * scale;
         } else {
@@ -297,8 +300,7 @@ public abstract class AbstractLayoutManager {
    *        is the {@link LayoutConstraints#size} that may override
    *        width/height.
    * @param componentSize
-   *        is the size of the component. It will be manipulated as
-   *        neccessary.
+   *        is the size of the component. It will be manipulated as neccessary.
    */
   public static void overrideSize(UIReadSize constraintsSize, Size componentSize) {
 

@@ -33,7 +33,7 @@ public final class FileAccessUtil {
   /**
    * This method saves the data given as {@link FileAccess access} to the
    * specified file. It will perform question dialogs before overwriting
-   * exsiting files or creating additional folders. If will show info dialogs
+   * existing files or creating additional folders. If will show info dialogs
    * if a problem arises.
    * 
    * @param access
@@ -47,7 +47,7 @@ public final class FileAccessUtil {
     if (target.exists()) {
       if (target.isFile()) {
         boolean okay = parentWindow.showQuestion("The file " + target.getAbsolutePath()
-            + " already exsits. Do you want to overwrite it?", "Overwrite");
+            + " already exists. Do you want to overwrite it?", "Overwrite");
         if (!okay) {
           return false;
         }
@@ -67,7 +67,7 @@ public final class FileAccessUtil {
         return false;
       } else {
         boolean okay = parentWindow.showQuestion("The folder " + folder.getAbsolutePath()
-            + " does not exsit. Do you want to create it?", "Create Folder");
+            + " does not exist. Do you want to create it?", "Create Folder");
         if (okay) {
           boolean result = folder.mkdirs();
           if (!result) {

@@ -1,3 +1,6 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.composite;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
@@ -18,7 +21,7 @@ public abstract class AbstractDecoratingLayoutManager {
   private static final int DOUBLE_INDENT = 2 * INDENT;
 
   /** the decorated-component to layout */
-  private final UIDecoratedComponent<?,?> decoratedComponent;
+  private final UIDecoratedComponent<?, ?> decoratedComponent;
 
   /** the sizer for the decorators */
   private UIReadSize sizer;
@@ -29,7 +32,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * @param decoratedComp
    *        TODO
    */
-  public AbstractDecoratingLayoutManager(UIDecoratedComponent<?,?> decoratedComp) {
+  public AbstractDecoratingLayoutManager(UIDecoratedComponent<?, ?> decoratedComp) {
 
     super();
     this.decoratedComponent = decoratedComp;
@@ -90,7 +93,7 @@ public abstract class AbstractDecoratingLayoutManager {
           if (componentWidth > width) {
             x = (componentWidth - width) >> 1;
           }
-        }        
+        }
         decorator.setPosition(x, INDENT);
       }
       decorator.setSize(width, height);

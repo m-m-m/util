@@ -14,10 +14,11 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
  * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize} interface that builds the
  * maximum width/height out of
  * {@link net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize preferred-size}
- * objects. This is supposted to be used as
+ * objects. This is supposed to be used as
  * {@link net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints#size size} in
  * {@linkplain net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints} to emulate
- * a grid layout. TODO: nobody can understand this crappy explanation
+ * a grid layout.<br>
+ * TODO: nobody can understand this crappy explanation
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

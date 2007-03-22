@@ -10,8 +10,8 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface that contains
- * a range of numeric (integer) values.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface that contains a
+ * range of numeric (integer) values.<br>
  * This model should NOT be used for a regular list or combo-box widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -37,7 +37,9 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
    * The constructor.
    * 
    * @param min
+   *        is the {@link #getMinimumValue() minimum value}.
    * @param max
+   *        is the {@link #getMaximumValue() maximum value}.
    */
   public NumericUIRangeModel(int min, int max) {
 
@@ -80,21 +82,22 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   public void setMaximumValue(int newMaximum) {
 
     if (this.maximum != newMaximum) {
-      if (newMaximum > HIGHEST_MAXIMUM) {
-        newMaximum = HIGHEST_MAXIMUM;
-      }
       if (newMaximum < this.minimum) {
         throw new IllegalArgumentException("TODO");
       }
+      int max = newMaximum;
+      if (max > HIGHEST_MAXIMUM) {
+        max = HIGHEST_MAXIMUM;
+      }
       int oldSize = this.maximum - this.minimum;
-      int newSize = newMaximum - this.minimum;
+      int newSize = max - this.minimum;
       UIListModelEvent changeEvent;
-      if (newMaximum > this.maximum) {
+      if (max > this.maximum) {
         changeEvent = new UIListModelEvent(Type.ADD, oldSize, newSize - 1);
       } else {
         changeEvent = new UIListModelEvent(Type.REMOVE, newSize, oldSize - 1);
       }
-      this.maximum = newMaximum;
+      this.maximum = max;
       fireChangeEvent(changeEvent);
     }
   }
@@ -105,19 +108,20 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   public void setMinimumValue(int newMinimum) {
 
     if (this.minimum != newMinimum) {
-      if (newMinimum < LOWEST_MINIMUM) {
-        newMinimum = LOWEST_MINIMUM;
-      }
       if (newMinimum > this.maximum) {
         throw new IllegalArgumentException("TODO");
       }
-      UIListModelEvent changeEvent;
-      if (newMinimum > this.minimum) {
-        changeEvent = new UIListModelEvent(Type.ADD, 0, (newMinimum - this.minimum) - 1);
-      } else {
-        changeEvent = new UIListModelEvent(Type.REMOVE, 0, (this.minimum - newMinimum) - 1);
+      int min = newMinimum;
+      if (min < LOWEST_MINIMUM) {
+        min = LOWEST_MINIMUM;
       }
-      this.minimum = newMinimum;
+      UIListModelEvent changeEvent;
+      if (min > this.minimum) {
+        changeEvent = new UIListModelEvent(Type.ADD, 0, (min - this.minimum) - 1);
+      } else {
+        changeEvent = new UIListModelEvent(Type.REMOVE, 0, (this.minimum - min) - 1);
+      }
+      this.minimum = min;
       fireChangeEvent(changeEvent);
     }
   }
@@ -157,8 +161,8 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   public int getIndexOfString(String element) {
 
     try {
-      Integer i = Integer.parseInt(element);
-      return getIndexOf(i);
+      int i = Integer.parseInt(element);
+      return getIndexOf(Integer.valueOf(i));
     } catch (NumberFormatException e) {
       return -1;
     }
