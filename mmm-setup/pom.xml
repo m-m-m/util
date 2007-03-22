@@ -12,7 +12,7 @@
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-setup</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>SNAPSHOT</version>
   <description>infrastructure for project setup</description>
   <dependencies>
   </dependencies>

@@ -38,6 +38,7 @@
   <inceptionYear>2001</inceptionYear>
   <build>
     <plugins>
+      <!-- activate java 5 language -->
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-compiler-plugin</artifactId>
@@ -46,12 +47,27 @@
            <target>1.5</target>
          </configuration>
       </plugin>
+      <!-- also generate source JARs -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>source-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>        
+      </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <tagBase>https://m-m-m.svn.sourceforge.net/svnroot/m-m-m/tags/</tagBase>
         </configuration>
       </plugin>
+      <!-- make checkstyle settings available -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -59,23 +75,9 @@
           <dependency>
             <groupId>net.sf.mmm</groupId>
             <artifactId>mmm-setup</artifactId>
-            <version>1.0.0</version>
+            <version>SNAPSHOT</version>
           </dependency>
         </dependencies>
-      </plugin>
-      <!-- workaround to clear the cobertura.ser files that currently do not go to target directory -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>clean</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-          </execution>
-        </executions>        
       </plugin>
     </plugins>
   </build>
