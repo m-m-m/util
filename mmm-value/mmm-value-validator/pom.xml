@@ -7,8 +7,8 @@
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
   </parent>
-  <name>MMM::Validator</name>
-  <description>Component for validation of content.</description>
+  <name>MMM Value::Validator</name>
+  <description>Component for validation.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-value-validator</artifactId>
   <packaging>jar</packaging>
