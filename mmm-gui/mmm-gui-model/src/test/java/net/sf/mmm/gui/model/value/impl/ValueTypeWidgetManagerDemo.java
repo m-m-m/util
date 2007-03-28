@@ -7,7 +7,7 @@ import net.sf.mmm.gui.model.value.impl.ValueTypeListModel;
 import net.sf.mmm.gui.model.value.impl.ValueTypeWidgetManager;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -46,7 +46,7 @@ public class ValueTypeWidgetManagerDemo {
     widgetFactory.setModel(valueTypeModel);
     UIComboBox<ValueManager> combo = widgetFactory.createValueTypeCombo(uiFactory);
     UIFrame frame = uiFactory.createFrame("test");
-    UIPanel panel = uiFactory.createPanel(Orientation.HORIZONTAL);
+    UISlicePanel panel = uiFactory.createPanel(Orientation.HORIZONTAL);
     panel.addComponent(combo);
     frame.setComposite(panel);
     frame.setVisible(true);

@@ -13,10 +13,10 @@ package net.sf.mmm.content.value.api;
 public interface Version {
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
-   * value type.
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
+   * type.
    */
-  String VALUE_NAME = "VersionImpl";
+  String VALUE_NAME = "Version";
 
   String SUFFIX_ALPHA = "alpha";
 
@@ -35,7 +35,7 @@ public interface Version {
    */
   String getComment();
 
-  // Branches are realized as new resource with an own revisioning but
+  // Branches are realized as new resource with an own version-history but
   // linked with the HEAD (or source branch).
   /**
    * This method gets the name of the branch this version belongs to or

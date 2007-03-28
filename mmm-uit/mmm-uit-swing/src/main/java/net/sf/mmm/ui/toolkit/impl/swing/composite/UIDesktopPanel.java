@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDesktopPanel extends UIMultiComposite {
+public class UIDesktopPanel extends AbstractUIMultiComposite {
 
   /** the workbench pane */
   private final JDesktopPane workbench;

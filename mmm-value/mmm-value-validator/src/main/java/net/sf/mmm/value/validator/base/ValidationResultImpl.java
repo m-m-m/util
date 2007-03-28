@@ -1,11 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.validator.base;
+package net.sf.mmm.value.validator.base;
 
-import net.sf.mmm.content.validator.api.ValidationResult;
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.base.NlsMessageImpl;
+import net.sf.mmm.value.validator.api.ValidationResult;
 
 /**
  * This is the default implementation of the ValidationResultIF interface.

@@ -10,7 +10,7 @@ import java.net.URL;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
@@ -153,10 +153,10 @@ public interface UIFactory extends UIWriteDisposed {
    *        is the orientation of the child-components in the panel.
    * @return the created panel.
    */
-  UIPanel createPanel(Orientation orientation);
+  UISlicePanel createPanel(Orientation orientation);
 
   /**
-   * This method creates a new {@link UIPanel panel} with a border.
+   * This method creates a new {@link UISlicePanel panel} with a border.
    * 
    * @param orientation
    *        is the orientation of the child-components in the panel.
@@ -164,13 +164,14 @@ public interface UIFactory extends UIWriteDisposed {
    *        is the label of the panels border.
    * @return the created panel.
    */
-  UIPanel createPanel(Orientation orientation, String borderTitle);
+  UISlicePanel createPanel(Orientation orientation, String borderTitle);
 
   /**
    * This method creates a {@link UIDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * <code>decorator</code>. The result can be easily
-   * {@link UIPanel#addComponent(UIComponent) added} to a {@link UIPanel panel}.
+   * {@link UISlicePanel#addComponent(UIComponent) added} to a
+   * {@link UISlicePanel panel}.
    * 
    * @param <D>
    *        is the templated type of the <code>decorator</code>.
@@ -190,7 +191,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a {@link UIDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * {@link UILabel label}. The result can be easily
-   * {@link UIPanel#addComponent(UIComponent) added} to a {@link UIPanel panel}.
+   * {@link UISlicePanel#addComponent(UIComponent) added} to a
+   * {@link UISlicePanel panel}.
    * 
    * @param <C>
    *        is the templated type of the <code>component</code>.
@@ -207,9 +209,10 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a {@link UIDecoratedComponent decorated component} that
    * puts the given <code>components</code> into a
-   * {@link Orientation#HORIZONTAL horizontal} {@link UIPanel panel} and bundles
-   * it together with a {@link UILabel label}. The result can be easily
-   * {@link UIPanel#addComponent(UIComponent) added} to a {@link UIPanel panel}.
+   * {@link Orientation#HORIZONTAL horizontal} {@link UISlicePanel panel} and
+   * bundles it together with a {@link UILabel label}. The result can be easily
+   * {@link UISlicePanel#addComponent(UIComponent) added} to a
+   * {@link UISlicePanel panel}.
    * 
    * @param label
    *        is the label text.
@@ -217,7 +220,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        are the components (should be at least two to make sense).
    * @return the labeled component.
    */
-  UIDecoratedComponent<UILabel, UIPanel> createLabeledComponents(String label,
+  UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
       UIComponent... components);
 
   /**
@@ -319,7 +322,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @param multiSelection -
    *        if <code>true</code> the user can select multiple items of the
-   *        tree, else ony one.
+   *        tree, else only one.
    * @return the created tree.
    */
   UITree<?> createTree(boolean multiSelection);
@@ -331,7 +334,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        is the templated type of the tree-nodes.
    * @param multiSelection -
    *        if <code>true</code> the user can select multiple items of the
-   *        tree, else ony one.
+   *        tree, else only one.
    * @param model
    *        is the model defining the content of the tree.
    * @return the created tree.
@@ -350,7 +353,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @param multiSelection -
    *        if <code>true</code> the user can select multiple items/cells of
-   *        the table, else ony one.
+   *        the table, else only one.
    * @return the created table.
    */
   UITable<?> createTable(boolean multiSelection);
@@ -363,7 +366,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @param multiSelection -
    *        if <code>true</code> the user can select multiple items/cells of
-   *        the table, else ony one.
+   *        the table, else only one.
    * @param model
    *        is the model defining the content of the table.
    * @return the created table.

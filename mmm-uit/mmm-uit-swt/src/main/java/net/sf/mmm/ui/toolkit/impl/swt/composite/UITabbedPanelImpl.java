@@ -23,9 +23,9 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTabItemAccess;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel {
+public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel {
 
-  /** the synchron access to the {@link org.eclipse.swt.widgets.TabFolder} */
+  /** the synchronous access to the {@link org.eclipse.swt.widgets.TabFolder} */
   private final SyncTabFolderAccess syncAccess;
 
   /** the list of the tab-items */
@@ -49,6 +49,14 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
   /**
    * {@inheritDoc}
    */
+  public void addComponent(UIComponent component) {
+  
+    addComponent(component, "Tab " + (getComponentCount() + 1));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void addComponent(UIComponent component, String title) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
@@ -63,7 +71,7 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
     this.tabItems.add(itemAccess);
     this.components.add(c);
   }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -85,23 +93,12 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
   /**
    * {@inheritDoc}
    */
-  public void removeComponent(UIComponent component) {
+  public AbstractUIComponent removeComponent(int position) {
 
-    int index = this.components.indexOf(component);
-    if (index >= 0) {
-      removeComponent(index);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void removeComponent(int position) {
-
-    AbstractUIComponent component = this.components.remove(position);
+    AbstractUIComponent component = super.removeComponent(position);
     SyncTabItemAccess itemAccess = this.tabItems.remove(position);
-    component.setParent(null);
     itemAccess.dispose();
+    return component;
   }
 
   /**

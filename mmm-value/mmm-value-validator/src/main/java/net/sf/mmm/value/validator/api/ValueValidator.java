@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.validator.api;
+package net.sf.mmm.value.validator.api;
 
 import net.sf.mmm.util.xml.api.XmlSerializable;
 
@@ -12,10 +12,10 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  */
 public interface ValueValidator extends XmlSerializable {
 
-  /** the XML tag for a avalidator */
+  /** the XML tag for a validator */
   String XML_TAG_VALIDATOR = "validator";
 
-  /** the XML tag for a avalidator */
+  /** the XML tag for a validator */
   String XML_ATR_VALIDATOR_TYPE = "name";
 
   /**

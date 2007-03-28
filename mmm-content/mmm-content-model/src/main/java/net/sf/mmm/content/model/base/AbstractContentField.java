@@ -11,10 +11,10 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.validator.api.ValueValidator;
-import net.sf.mmm.content.validator.impl.ValueTypeValidator;
 import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.value.validator.api.ValueValidator;
+import net.sf.mmm.value.validator.impl.ValueTypeValidator;
 
 /**
  * This is the abstract base implementation of the ContentField interface.

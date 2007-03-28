@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
@@ -24,12 +24,12 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIPanel} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel} interface using
+ * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIPanelImpl extends UIMultiComposite implements UIPanel {
+public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
 
   /** the swing panel */
   private final JPanel panel;
@@ -53,7 +53,7 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
    * @param orientation
    *        is the orientation for the layout of the panel.
    */
-  public UIPanelImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {
+  public UISlicePanelImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {
 
     super(uiFactory, parentObject);
     this.layout = new LayoutManager();
@@ -110,31 +110,17 @@ public class UIPanelImpl extends UIMultiComposite implements UIPanel {
   /**
    * {@inheritDoc}
    */
-  public void removeComponent(int index) {
+  public AbstractUIComponent removeComponent(int index) {
 
     // synchronized (this) {
     this.panel.remove(index);
-    UIComponent c = this.components.remove(index);
-    if ((c != null) && (c instanceof AbstractUIComponent)) {
-      AbstractUIComponent component = (AbstractUIComponent) c;
-      setParent(component, null);
-      JComponent swingComponent = component.getSwingComponent();
-      if (swingComponent instanceof JRadioButton) {
-        getButtonGroup().remove((JRadioButton) swingComponent);
-      }
+    AbstractUIComponent component = super.removeComponent(index);
+    JComponent swingComponent = component.getSwingComponent();
+    if (swingComponent instanceof JRadioButton) {
+      getButtonGroup().remove((JRadioButton) swingComponent);
     }
+    return component;
     // }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void removeComponent(UIComponent component) {
-
-    int index = this.components.indexOf(component);
-    if (index >= 0) {
-      removeComponent(index);
-    }
   }
 
   /**

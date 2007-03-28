@@ -93,7 +93,7 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
   /**
    * {@inheritDoc}
    */
-  public ButtonStyle getStyle() {
+  public ButtonStyle getButtonStyle() {
 
     return this.style;
   }

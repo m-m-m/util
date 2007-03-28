@@ -20,9 +20,9 @@ import net.sf.mmm.content.model.base.AbstractContentField;
 import net.sf.mmm.content.model.base.AbstractContentModelService;
 import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
-import net.sf.mmm.content.validator.api.ValueValidator;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
  * This is the basic implementation of the {@link MutableContentModelService}

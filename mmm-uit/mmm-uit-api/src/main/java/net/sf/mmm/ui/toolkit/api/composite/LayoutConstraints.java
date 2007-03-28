@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 /**
  * This class is a container for the layout constraints of a
  * {@link net.sf.mmm.ui.toolkit.api.UIComponent} inside a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIPanel}.
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

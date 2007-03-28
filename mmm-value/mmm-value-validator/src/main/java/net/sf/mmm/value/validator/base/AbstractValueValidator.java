@@ -1,11 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.validator.base;
+package net.sf.mmm.value.validator.base;
 
-import net.sf.mmm.content.validator.api.ValueValidator;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
+import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
  * This is the abstract base implementation of the value validator interface.

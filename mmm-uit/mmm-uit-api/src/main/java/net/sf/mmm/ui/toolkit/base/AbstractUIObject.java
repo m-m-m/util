@@ -14,15 +14,15 @@ import net.sf.mmm.ui.toolkit.api.UIObject;
  */
 public abstract class AbstractUIObject implements UIObject {
 
-  /** the factory instance */
+  /** @see #getFactory() */
   private UIFactory factory;
 
-  /** the {@link #getId() id} of the object */
+  /** @see #getId() */
   private String id;
 
-  /** the static counter */
-  private static int staticCounter = 0;
-
+  /** @see #getStyle() */
+  private String style;
+  
   /**
    * The constructor.
    * 
@@ -35,7 +35,6 @@ public abstract class AbstractUIObject implements UIObject {
 
     super();
     this.factory = uiFactory;
-    this.id = "obj" + staticCounter++;
   }
 
   /**
@@ -47,9 +46,9 @@ public abstract class AbstractUIObject implements UIObject {
   }
 
   /**
-   * Override this method if you implement a window object.
+   * {@inheritDoc}
    * 
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#isWindow()
+   * Override this method if you implement a window object.
    */
   public boolean isWindow() {
 
@@ -57,9 +56,9 @@ public abstract class AbstractUIObject implements UIObject {
   }
 
   /**
-   * Override this method if you implement a widget object.
+   * {@inheritDoc}
    * 
-   * @see net.sf.mmm.ui.toolkit.api.UIObject#isWidget()
+   * Override this method if you implement a widget object.
    */
   public boolean isWidget() {
 
@@ -82,4 +81,20 @@ public abstract class AbstractUIObject implements UIObject {
     this.id = newId;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public String getStyle() {
+  
+    return this.style;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void setStyle(String style) {
+  
+    this.style = style;
+  }
+  
 }

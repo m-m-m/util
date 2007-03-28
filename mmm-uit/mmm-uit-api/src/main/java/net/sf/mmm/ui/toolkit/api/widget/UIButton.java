@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag;
 
 /**
  * This is the interface for a button.<br>
- * According to its {@link #getStyle() style} this can be a
+ * According to its {@link #getButtonStyle() style} this can be a
  * {@link net.sf.mmm.ui.toolkit.api.widget.ButtonStyle#RADIO radio-},
  * {@link net.sf.mmm.ui.toolkit.api.widget.ButtonStyle#CHECK checkbox-},
  * {@link net.sf.mmm.ui.toolkit.api.widget.ButtonStyle#TOGGLE toggle-}, or
@@ -27,6 +27,6 @@ public interface UIButton extends UIWidget, UILabel, UIWriteSelectionFlag, UIWri
    * 
    * @return the button style.
    */
-  ButtonStyle getStyle();
+  ButtonStyle getButtonStyle();
 
 }

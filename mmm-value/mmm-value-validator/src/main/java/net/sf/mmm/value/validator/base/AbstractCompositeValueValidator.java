@@ -1,15 +1,15 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.validator.base;
+package net.sf.mmm.value.validator.base;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.content.validator.api.ValidationResult;
-import net.sf.mmm.content.validator.api.ValueValidator;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
+import net.sf.mmm.value.validator.api.ValidationResult;
+import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
  * This is an abstract base implementation of a composite ValueValidatorIF.

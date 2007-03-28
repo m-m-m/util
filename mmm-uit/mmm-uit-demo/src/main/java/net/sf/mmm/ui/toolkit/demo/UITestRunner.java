@@ -8,7 +8,7 @@ import java.io.File;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
@@ -101,7 +101,7 @@ public class UITestRunner {
          */
         UIScrollPanel scroll = factory.createScrollPanel();
         
-        UIPanel panel = factory.createPanel(Orientation.VERTICAL);
+        UISlicePanel panel = factory.createPanel(Orientation.VERTICAL);
         
         UIButton button = factory.createButton("Test");
         panel.addComponent(button);

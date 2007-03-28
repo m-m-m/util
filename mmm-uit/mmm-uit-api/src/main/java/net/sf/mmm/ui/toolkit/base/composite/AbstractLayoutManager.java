@@ -12,11 +12,11 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 
 /**
  * This is the abstract base implementation of a manager for the layout of a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIPanel panel}.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel panel}.<br>
  * The implementation assumes that for each panel an own layout-manager is
  * created and is therefore not thread-safe.
  * 
- * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
+ * @see net.sf.mmm.ui.toolkit.api.composite.UISlicePanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
  *      LayoutConstraints)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -85,7 +85,7 @@ public abstract class AbstractLayoutManager {
 
   /**
    * This method calculates the size of a
-   * {@link net.sf.mmm.ui.toolkit.api.composite.UIPanel panel}.
+   * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel panel}.
    * 
    * @return the calculated size for the panel.
    */

@@ -15,7 +15,7 @@ import net.sf.mmm.value.api.ValueIOException;
  * 
  * @todo Transaction support
  * @todo mimetype detection (wrapper stream)
- * @todo checksum support (md5 + filelength, wrapper stream)
+ * @todo checksum support (sha-2 + filelength, wrapper stream)
  * @todo locking support
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -41,27 +41,35 @@ public abstract class AbstractBlob implements MutableBlob {
    */
   public void writeData(InputStream inputStream, boolean append) throws ValueIOException {
 
-    OutputStream outputStream = getWriteAccess(append);
-
     try {
-      // wrap input stream with mimetype detecting and size counting
-      // stream implementation
+      OutputStream outputStream = null;
+      try {
+        outputStream = getWriteAccess(append);
+        // wrap input stream with mimetype detecting and size counting
+        // stream implementation
 
-      // copy data from input stream to output stream using utility class
-      // that returns the number of bytes copied
-      int bytesWritten = 0; // get from wrapper stream...
-
-      inputStream.close();
-      outputStream.close();
-
-      if (append) {
-        this.size += bytesWritten;
-      } else {
-        this.size = bytesWritten;
-        this.mimetype = ""; // get from wrapper stream...
+        // copy data from input stream to output stream using utility class
+        // that returns the number of bytes copied
+        int bytesWritten = 0; // get from wrapper stream...
+        // TODO:
+        
+        if (append) {
+          this.size += bytesWritten;
+        } else {
+          this.size = bytesWritten;
+          this.mimetype = ""; // get from wrapper stream...
+        }
+      } finally {
+        try {
+          inputStream.close();
+        } finally {
+          if (outputStream != null) {
+            outputStream.close();            
+          }
+        }
       }
     } catch (IOException e) {
-      // TODO Tx ?
+      // TODO Tx ? - better use Aspect
       throw new ValueIOException(e.getMessage(), e);
     }
   }

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.widget;
 
 /**
  * This enum contains the available values for the style of a
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIButton button}. Everyting said
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIButton button}. Everything said
  * about "buttons" also applies about
  * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenuItem items}.
  * 

@@ -70,7 +70,7 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * 
    * @return the value class.
    */
-  Class<V> getValueClass();
+  Class<? extends V> getValueClass();
 
   /**
    * This method gets the type of the managed value. Typically this should be

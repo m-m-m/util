@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
@@ -43,7 +43,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDeviceImpl;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDisplayImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UIDecoratedComponentImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UIPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.composite.UISlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UIScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UISplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UITabbedPanelImpl;
@@ -149,9 +149,9 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIPanel createPanel(Orientation orientation, String text) {
+  public UISlicePanel createPanel(Orientation orientation, String text) {
 
-    UIPanelImpl panel = new UIPanelImpl(this, null, orientation);
+    UISlicePanelImpl panel = new UISlicePanelImpl(this, null, orientation);
     panel.setBorderTitle(text);
     return panel;
   }

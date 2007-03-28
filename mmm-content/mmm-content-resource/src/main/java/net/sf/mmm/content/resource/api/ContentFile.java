@@ -19,7 +19,7 @@ public interface ContentFile extends ContentResource {
   String CLASS_NAME = "File";
 
   /**
-   * This method gets the BLOB (Binary Larget OBject) representing the data of
+   * This method gets the BLOB (Binary Large OBject) representing the data of
    * this file.
    * 
    * @return the BLOB.

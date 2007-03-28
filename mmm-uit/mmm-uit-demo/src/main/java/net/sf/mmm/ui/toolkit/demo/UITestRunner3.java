@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.widget.UIButton;
 import net.sf.mmm.ui.toolkit.api.widget.UILabel;
 import net.sf.mmm.ui.toolkit.api.widget.UITextField;
@@ -35,7 +35,7 @@ public class UITestRunner3 {
         workbench.setSize(800, 1024);
         workbench.setVisible(true);
         final UIFrame frame = workbench.createFrame("TestFrame", true);
-        UIPanel panel = factory.createPanel(Orientation.VERTICAL);
+        UISlicePanel panel = factory.createPanel(Orientation.VERTICAL);
         UIButton button = factory.createButton("Button");
         UIDecoratedComponent<UILabel, UIButton> labeledButton = factory.createLabeledComponent("Label:", button);
         panel.addComponent(labeledButton, LayoutConstraints.FIXED_HORIZONTAL_INSETS);

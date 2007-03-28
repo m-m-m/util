@@ -1,11 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.validator.impl;
+package net.sf.mmm.value.validator.impl;
 
-import net.sf.mmm.content.validator.api.ValidationResult;
-import net.sf.mmm.content.validator.base.AbstractValueValidator;
-import net.sf.mmm.content.validator.base.ValidationResultImpl;
+import net.sf.mmm.value.validator.api.ValidationResult;
+import net.sf.mmm.value.validator.base.AbstractValueValidator;
+import net.sf.mmm.value.validator.base.ValidationResultImpl;
 
 /**
  * This is an implementation of the ValueValidatorIF interface that checks if a

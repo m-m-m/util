@@ -5,7 +5,7 @@ package net.sf.mmm.content.model.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.content.validator.api.ValueValidator;
+import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
  * This interface declares the api of a field in the content-model. Such object
@@ -126,7 +126,7 @@ public interface ContentField extends ContentReflectionObject {
    * {@link net.sf.mmm.content.api.ContentObject#getContentClass() type}.</li>
    * </ul>
    * 
-   * @see net.sf.mmm.content.validator.api.ValueValidator
+   * @see net.sf.mmm.value.validator.api.ValueValidator
    * 
    * @return the constraint.
    */

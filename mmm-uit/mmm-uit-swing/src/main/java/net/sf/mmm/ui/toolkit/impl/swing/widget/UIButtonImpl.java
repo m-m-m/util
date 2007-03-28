@@ -134,7 +134,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /**
    * {@inheritDoc}
    */
-  public ButtonStyle getStyle() {
+  public ButtonStyle getButtonStyle() {
 
     return this.style;
   }

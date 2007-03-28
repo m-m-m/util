@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class UIMultiComposite extends AbstractUIComposite {
+public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
 
   /** the component list */
   protected final List<UIComponent> components;
@@ -28,7 +28,7 @@ public abstract class UIMultiComposite extends AbstractUIComposite {
    * @param uiFactory
    * @param parentObject
    */
-  public UIMultiComposite(UIFactorySwing uiFactory, UINode parentObject) {
+  public AbstractUIMultiComposite(UIFactorySwing uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
     this.components = new ArrayList<UIComponent>();

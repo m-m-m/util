@@ -11,6 +11,8 @@ import java.util.Map;
 
 import net.sf.mmm.content.value.api.MetaDataKey;
 import net.sf.mmm.content.value.api.MutableMetaDataSet;
+import net.sf.mmm.value.api.ValueParseException;
+import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
  * This is the default implementation of the {@link MutableMetaDataSet}
@@ -87,4 +89,43 @@ public class MetaDataSetImpl extends AbstractMetaDataSet {
     return this.metaData.remove(key);
   }
 
+  /**
+   * This inner class is the manager for the value.
+   */
+  public static class Manager extends AbstractValueManager<MutableMetaDataSet> {
+    
+    /**
+     * The constructor
+     */
+    public Manager() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getName() {
+
+      return VALUE_NAME;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Class<? extends MutableMetaDataSet> getValueClass() {
+
+      return MetaDataSetImpl.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public MutableMetaDataSet parse(String valueAsString) throws ValueParseException {
+
+      return null;
+    }
+    
+  }
+  
 }

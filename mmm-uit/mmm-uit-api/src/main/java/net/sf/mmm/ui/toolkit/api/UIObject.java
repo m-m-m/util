@@ -22,11 +22,11 @@ public interface UIObject {
   UIFactory getFactory();
 
   /**
-   * This method returns the type of the component. This must be a TYPE
-   * constant defined in a sub-interface. It is legal to use the == operator
-   * to compare the result with the TYPE constant of a sub-interface. Further
-   * it is legal to cast this instance to a sub-interface if the result of
-   * this method is the same as the TYPE constant of that sub-interface. <br>
+   * This method returns the type of the component. This must be a TYPE constant
+   * defined in a sub-interface. It is legal to use the == operator to compare
+   * the result with the TYPE constant of a sub-interface. Further it is legal
+   * to cast this instance to a sub-interface if the result of this method is
+   * the same as the TYPE constant of that sub-interface. <br>
    * An example usage of this method may be:
    * 
    * <pre>
@@ -60,17 +60,17 @@ public interface UIObject {
   boolean isWidget();
 
   /**
-   * This method gets the identifier of this object. It is used to associate
-   * additional information (e.g. CSS styles) with the object. The identifier
-   * should therefore be unique.
+   * This method gets the optional identifier of this object. It is used to
+   * identify the object and should therefore be unique.
    * 
-   * @return the name of this object.
+   * @return the ID of this object or <code>null</code> if NOT
+   *         {@link #setId(String) set}.
    */
   String getId();
 
   /**
-   * This method set the identifier of this object. Use this method to give
-   * the object a meanfull identifier after creation.
+   * This method set the identifier of this object. Use this method to give the
+   * object a meaningful identifier after creation.
    * 
    * @see #getId()
    * 
@@ -78,5 +78,23 @@ public interface UIObject {
    *        is the new identifier for the object.
    */
   void setId(String newId);
+
+  /**
+   * This method gets the optional style of this object. It is used to associate
+   * additional information (e.g. CSS styles) with the object. Multiple objects
+   * may have the same style and therefore .
+   * 
+   * @return the style of this object.
+   */
+  String getStyle();
+
+  /**
+   * This method sets the style of this object. The style is a custom string
+   * defined by the end-user that can be associated with a specific appearance
+   * settings (colors, borders, fonts, etc.).
+   * 
+   * @param style is the style to set.
+   */
+  void setStyle(String style);
 
 }

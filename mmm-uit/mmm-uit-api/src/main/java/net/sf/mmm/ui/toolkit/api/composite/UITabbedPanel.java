@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.UIComponent;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITabbedPanel extends UIComposite {
+public interface UITabbedPanel extends UIPanel {
 
   /** the type of this object */
   String TYPE = "TabbedPanel";
@@ -41,24 +41,5 @@ public interface UITabbedPanel extends UIComposite {
    *        is the index position where the given component will be inserted.
    */
   void addComponent(UIComponent component, String title, int position);
-
-  /**
-   * This method removes the given component. It will have no effect, if the
-   * component has not been added to this panel.
-   * 
-   * @param component
-   *        is the component to remove.
-   */
-  void removeComponent(UIComponent component);
-
-  /**
-   * This method removes the component at the given position.
-   * 
-   * @see UIComposite#getComponent(int)
-   * 
-   * @param position
-   *        is the index position of the component to remove.
-   */
-  void removeComponent(int position);
 
 }

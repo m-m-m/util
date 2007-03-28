@@ -150,7 +150,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * {@inheritDoc}
    */
-  public ButtonStyle getStyle() {
+  public ButtonStyle getButtonStyle() {
 
     return ButtonStyle.DEFAULT;
   }

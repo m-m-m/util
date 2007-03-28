@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
@@ -65,7 +65,7 @@ public class ContentClassTreeModelDemo {
      * widgetFactory.createValueTypeCombo(uiFactory);
      */
 
-    UIPanel panel = uiFactory.createPanel(Orientation.VERTICAL);
+    UISlicePanel panel = uiFactory.createPanel(Orientation.VERTICAL);
 
     final UITextField textId = uiFactory.createTextField(false);
     panel.addComponent(uiFactory.createLabeledComponent("Id:", textId),

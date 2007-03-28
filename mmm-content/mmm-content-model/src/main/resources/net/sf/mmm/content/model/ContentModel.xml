@@ -11,7 +11,7 @@
         <Field id="3" name="modifiers" type="ClassModifiers" final="true" read-only="true"/>
       </Class>
       <Class id="3" name="Field">
-        
+        <Field id="4" name="modifiers" type="FieldModifiers" final="true" read-only="true"/>        
       </Class>
     </Class>
     <cfg:include type="xml" href="ContentModel-Main.xml" descendants="Class"/>

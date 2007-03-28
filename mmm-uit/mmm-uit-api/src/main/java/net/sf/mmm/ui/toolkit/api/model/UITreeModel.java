@@ -48,7 +48,7 @@ public interface UITreeModel<N> {
    * 
    * @return the node-type.
    */
-  Class<N> getNodeType();
+  Class<? extends N> getNodeType();
 
   /**
    * This method determines the number of children of the given node.
@@ -78,7 +78,7 @@ public interface UITreeModel<N> {
    * This method gets the parent node of the given node.
    * 
    * @param node
-   *        is node whos parent is requested.
+   *        is node whose parent is requested.
    * @return the parent node of the given node or <code>null</code> if the
    *         given node is the root node.
    */

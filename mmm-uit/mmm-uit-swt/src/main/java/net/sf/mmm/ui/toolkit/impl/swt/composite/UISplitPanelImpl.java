@@ -23,19 +23,19 @@ import org.eclipse.swt.layout.FillLayout;
  */
 public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPanel {
 
-  /** the synchron access to the sash-form */
+  /** the synchronous access to the sash-form */
   private final SyncSashFormAccess syncAccess;
 
-  /** the synchron access to the top or left composite */
+  /** the synchronous access to the top or left composite */
   private final SyncGroupAccess syncTopLeft;
 
-  /** the synchron access to the bottom or right composite */
+  /** the synchronous access to the bottom or right composite */
   private final SyncGroupAccess syncBottomRight;
 
-  /** the componenet top or left */
+  /** the component top or left */
   private AbstractUIComponent componentTopOrLeft;
 
-  /** the componenet bottom or right */
+  /** the component bottom or right */
   private AbstractUIComponent componentBottomOrRight;
 
   /**

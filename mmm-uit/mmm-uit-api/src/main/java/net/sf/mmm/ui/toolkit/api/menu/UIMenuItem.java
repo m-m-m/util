@@ -10,9 +10,9 @@ import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 
 /**
  * This is the interface for a menu-item.<br>
- * Use
- * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(String, net.sf.mmm.ui.toolkit.api.event.UIActionListener, ButtonStyle)}
- * to create a menu-item.
+ * Use {@link net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(String, 
+ * net.sf.mmm.ui.toolkit.api.event.UIActionListener, ButtonStyle)} to create a
+ * menu-item.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,6 +26,6 @@ public interface UIMenuItem extends UINode, UIWriteSelectionFlag, UIReadText {
    * 
    * @return the items style.
    */
-  ButtonStyle getStyle();
+  ButtonStyle getButtonStyle();
 
 }

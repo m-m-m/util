@@ -90,9 +90,9 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * {@link #getRootNode() root-node} as node-type. Please override this method
    * if this is NOT applicable.
    */
-  public Class<N> getNodeType() {
+  public Class<? extends N> getNodeType() {
 
-    return (Class<N>) getRootNode().getClass();
+    return (Class<? extends N>) getRootNode().getClass();
   }
 
   /**

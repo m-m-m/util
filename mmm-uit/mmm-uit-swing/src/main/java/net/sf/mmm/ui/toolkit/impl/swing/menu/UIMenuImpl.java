@@ -110,7 +110,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * {@inheritDoc}
    */
-  public ButtonStyle getStyle() {
+  public ButtonStyle getButtonStyle() {
 
     return ButtonStyle.DEFAULT;
   }

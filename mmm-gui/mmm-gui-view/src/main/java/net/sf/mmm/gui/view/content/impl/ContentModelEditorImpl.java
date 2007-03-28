@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
@@ -38,7 +38,7 @@ import net.sf.mmm.ui.toolkit.api.window.MessageType;
  */
 public class ContentModelEditorImpl implements ContentModelEditorView {
 
-  /** @see #setContentModelService(ContentModelService) */
+  /** @see #setContentModelService(MutableContentModelService) */
   private MutableContentModelService modelService;
 
   /** @see #setContentClassTreeModel(UITreeModel) */
@@ -110,7 +110,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
 
     // ########### content-field stuff ################
 
-    UIPanel fieldEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Field");
+    UISlicePanel fieldEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Field");
     final UITextField fieldIdText = uiFactory.createTextField(false);
     fieldEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", fieldIdText),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
@@ -129,7 +129,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     final UIButton fieldRemoveButton = uiFactory.createButton("remove", ButtonStyle.DEFAULT);
     fieldUpdateButton.setEnabled(false);
     fieldRemoveButton.setEnabled(false);
-    UIPanel fieldButtonPanel = uiFactory.createPanel(Orientation.HORIZONTAL);
+    UISlicePanel fieldButtonPanel = uiFactory.createPanel(Orientation.HORIZONTAL);
     fieldButtonPanel.addComponent(fieldAddButton, LayoutConstraints.SCALED_NO_FILL);
     fieldButtonPanel.addComponent(fieldUpdateButton, LayoutConstraints.SCALED_NO_FILL);
     fieldButtonPanel.addComponent(fieldRemoveButton, LayoutConstraints.SCALED_NO_FILL);
@@ -164,14 +164,14 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     });
 
     // field panel
-    UIPanel fieldPanel = uiFactory.createPanel(Orientation.VERTICAL);
+    UISlicePanel fieldPanel = uiFactory.createPanel(Orientation.VERTICAL);
     fieldPanel.addComponent(fieldEditorPanel, LayoutConstraints.FIXED_HORIZONTAL);
     fieldPanel.addComponent(table);
 
     // ########### content-class stuff ################
 
     // class editor panel
-    UIPanel classEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Class");
+    UISlicePanel classEditorPanel = uiFactory.createPanel(Orientation.VERTICAL, "Class");
 
     final UITextField classIdText = uiFactory.createTextField(false);
     classEditorPanel.addComponent(uiFactory.createLabeledComponent("Id:", classIdText),
@@ -196,7 +196,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     classAddButton.setEnabled(false);
     classUpdateButton.setEnabled(false);
     classRemoveButton.setEnabled(false);
-    UIPanel classButtonPanel = uiFactory.createPanel(Orientation.HORIZONTAL);
+    UISlicePanel classButtonPanel = uiFactory.createPanel(Orientation.HORIZONTAL);
     classButtonPanel.addComponent(classAddButton, LayoutConstraints.SCALED_NO_FILL);
     classButtonPanel.addComponent(classUpdateButton, LayoutConstraints.SCALED_NO_FILL);
     classButtonPanel.addComponent(classRemoveButton, LayoutConstraints.SCALED_NO_FILL);
@@ -250,7 +250,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     });
 
     // class panel
-    UIPanel classPanel = uiFactory.createPanel(Orientation.VERTICAL);
+    UISlicePanel classPanel = uiFactory.createPanel(Orientation.VERTICAL);
     classPanel.addComponent(classEditorPanel, LayoutConstraints.FIXED_HORIZONTAL);
     classPanel.addComponent(classTree);
 

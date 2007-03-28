@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
-import java.awt.Component;
-
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
@@ -20,7 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel {
+public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel {
 
   /** the native swing component */
   private final JTabbedPane panel;
@@ -51,11 +49,20 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
   /**
    * {@inheritDoc}
    */
+  public void addComponent(UIComponent component) {
+  
+    addComponent(component, "Tab " + (getComponentCount() + 1));
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   public void addComponent(UIComponent component, String title) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.add(title, c.getSwingComponent());
     setParent(c, this);
+    this.components.add(component);
   }
 
   /**
@@ -66,27 +73,17 @@ public class UITabbedPanelImpl extends UIMultiComposite implements UITabbedPanel
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.insertTab(title, null, c.getSwingComponent(), null, position);
     setParent(c, this);
+    this.components.add(position, component);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void removeComponent(UIComponent component) {
+  public AbstractUIComponent removeComponent(int position) {
 
-    Component c = ((AbstractUIComponent) component).getSwingComponent();
-    int position = this.panel.indexOfComponent(c);
-    if (position >= 0) {
-      removeComponent(position);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void removeComponent(int position) {
-
+    AbstractUIComponent c = super.removeComponent(position);
     this.panel.remove(position);
-    this.components.remove(position);
+    return c;
   }
 
   /**

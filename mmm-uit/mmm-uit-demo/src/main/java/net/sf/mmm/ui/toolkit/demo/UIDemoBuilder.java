@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
@@ -73,11 +73,11 @@ public class UIDemoBuilder {
     return tabbedPanel;
   }
 
-  public static void addEditorProperty(UIPanel editorPanel, String labelText,
+  public static void addEditorProperty(UISlicePanel editorPanel, String labelText,
       UIComponent component, MaximumSizer sizer) {
 
     UIFactory factory = editorPanel.getFactory();
-    UIPanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
+    UISlicePanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
     UILabel label = factory.createLabel(labelText);
     sizer.add(label);
     fieldEditorPanel.addComponent(label, new LayoutConstraints(Alignment.LEFT, Filling.NONE, 0,
@@ -91,7 +91,7 @@ public class UIDemoBuilder {
 
   public static UIComposite createEditorPanel(final UIFactory factory) {
 
-    final UIPanel editorPanel = factory.createPanel(Orientation.VERTICAL);
+    final UISlicePanel editorPanel = factory.createPanel(Orientation.VERTICAL);
     final MaximumSizer sizer = new MaximumSizer(true, false);
     addEditorProperty(editorPanel, "Name:", factory.createTextField(), sizer);
     addEditorProperty(editorPanel, "Quality-Ranking:", factory.createTextField(), sizer);
@@ -177,9 +177,9 @@ public class UIDemoBuilder {
     return splitPanel;
   }
 
-  public static UIPanel createLayoutPanel(UIFactory factory) {
+  public static UISlicePanel createLayoutPanel(UIFactory factory) {
 
-    final UIPanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
+    final UISlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
     panel.addComponent(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
     panel.addComponent(UIDemoBuilder.createTreePanel(factory));
     panel.addComponent(UIDemoBuilder.createRadioPanel(factory));
@@ -195,9 +195,9 @@ public class UIDemoBuilder {
     return panel;
   }
 
-  public static UIPanel createTablePanel(UIFactory factory) {
+  public static UISlicePanel createTablePanel(UIFactory factory) {
 
-    final UIPanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
+    final UISlicePanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
 
     final UITable table = factory.createTable();
     UISimpleTableModel model = new UISimpleTableModel(10, 5);
@@ -220,10 +220,10 @@ public class UIDemoBuilder {
     return listModel;
   }
 
-  public static UIPanel createListPanel(UIFactory factory,
+  public static UISlicePanel createListPanel(UIFactory factory,
       final DefaultUIListModel<String> listModel) {
 
-    final UIPanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
+    final UISlicePanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
 
     final UIComboBox<String> combo = factory.createComboBox(listModel);
     listPanel.addComponent(combo, new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL, 0.0));
@@ -232,7 +232,7 @@ public class UIDemoBuilder {
     listPanel.addComponent(list);
     listModel.addElement("!");
 
-    final UIPanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UISlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
     final UIButton addButton = factory.createButton("add");
     addButton.addActionListener(new UIActionListener() {
@@ -328,9 +328,9 @@ public class UIDemoBuilder {
 
   }
 
-  public static UIPanel createTreePanel(UIFactory factory) {
+  public static UISlicePanel createTreePanel(UIFactory factory) {
 
-    final UIPanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
+    final UISlicePanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
 
     final UITree tree = factory.createTree(false);
     final DefaultUITreeModel<String> treeModel = new DefaultUITreeModel<String>("root");
@@ -340,7 +340,7 @@ public class UIDemoBuilder {
     tree.setModel(treeModel);
     treePanel.addComponent(tree);
 
-    final UIPanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UISlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
     final UIButton addButton = factory.createButton("add");
     addButton.addActionListener(new UIActionListener() {
@@ -376,14 +376,14 @@ public class UIDemoBuilder {
     return treePanel;
   }
 
-  public static UIPanel createModelPanel(UIFactory factory) {
+  public static UISlicePanel createModelPanel(UIFactory factory) {
 
-    final UIPanel modelPanel = factory.createPanel(Orientation.VERTICAL, "Model-View-Controller");
+    final UISlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL, "Model-View-Controller");
     final DefaultUIListModel<String> listModel = createDemoListModel();
 
     // add combo-box
     final UIComboBox<String> combo = factory.createComboBox(listModel, true);
-    final UIPanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UISlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
     final UIButton addButton = factory.createButton("add");
     final UIButton removeButton = factory.createButton("remove");
     buttonPanel.addComponent(addButton, LayoutConstraints.FIXED_HORIZONTAL);
@@ -429,9 +429,9 @@ public class UIDemoBuilder {
     return modelPanel;
   }
 
-  public static UIPanel createRadioPanel(UIFactory factory) {
+  public static UISlicePanel createRadioPanel(UIFactory factory) {
 
-    UIPanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
+    UISlicePanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
     UIButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
     radioPanel.addComponent(rb1);
     UIButton rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);

@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
@@ -117,7 +117,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIPanel createPanel(Orientation orientation) {
+  public UISlicePanel createPanel(Orientation orientation) {
 
     return createPanel(orientation, null);
   }
@@ -134,10 +134,10 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIDecoratedComponent<UILabel, UIPanel> createLabeledComponents(String label,
+  public UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
       UIComponent... components) {
 
-    UIPanel panel = createPanel(Orientation.HORIZONTAL);
+    UISlicePanel panel = createPanel(Orientation.HORIZONTAL);
     for (UIComponent component : components) {
       panel.addComponent(component);      
     }
