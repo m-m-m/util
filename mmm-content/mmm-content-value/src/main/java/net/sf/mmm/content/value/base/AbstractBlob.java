@@ -15,7 +15,7 @@ import net.sf.mmm.value.api.ValueIOException;
  * 
  * @todo Transaction support
  * @todo mimetype detection (wrapper stream)
- * @todo checksum support (sha-2 + filelength, wrapper stream)
+ * @todo checksum support (SHA-2 + file-length, wrapper stream)
  * @todo locking support
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -85,8 +85,6 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     this.classClass.addField(fid++, ContentClass.FIELD_NAME_FIELDS, Iterator.class,
         FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     // TODO: ...
-    this.classClass.addField(fid++, ContentClass.FIELD_NAME_FIELD_COUNT, int.class,
-        FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     this.classClass.addField(fid++, ContentClass.FIELD_NAME_DECLARED_FIELDS, Integer.class,
         FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     classReflection.addSubClass(this.classClass);

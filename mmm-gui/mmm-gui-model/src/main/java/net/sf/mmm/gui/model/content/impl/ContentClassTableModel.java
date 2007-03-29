@@ -4,7 +4,6 @@
 package net.sf.mmm.gui.model.content.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import net.sf.mmm.content.model.api.ContentClass;
@@ -81,17 +80,8 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
     this.cClass = contentClass;
     this.fields = new ArrayList<ContentField>();
     this.model = modelService;
-    initialize();
-  }
-
-  /**
-   * This method initializes the model.
-   */
-  public void initialize() {
-
-    Iterator<? extends ContentField> fieldIterator = this.cClass.getDeclatedFields();
-    while (fieldIterator.hasNext()) {
-      this.fields.add(fieldIterator.next());
+    for (ContentField field : this.cClass.getDeclaredFields()) {
+      this.fields.add(field);      
     }
     this.model.getEventRegistrar().addListener(this);
   }

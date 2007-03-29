@@ -10,7 +10,7 @@ import net.sf.mmm.content.model.api.ContentClass;
  * {@link #getFieldTableModel(ContentClass) provides} a
  * {@link FieldTableModel table-model} used to view the
  * {@link net.sf.mmm.content.model.api.ContentField fields}
- * {@link ContentClass#getDeclatedFields() declared} by a given
+ * {@link ContentClass#getDeclaredFields() declared} by a given
  * {@link ContentClass content-class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -20,7 +20,7 @@ public interface ContentClassFieldTableManager {
   /**
    * This method gets the {@link FieldTableModel table-model} used to
    * view the {@link net.sf.mmm.content.model.api.ContentField fields}
-   * {@link ContentClass#getDeclatedFields() declared} by the given
+   * {@link ContentClass#getDeclaredFields() declared} by the given
    * {@link ContentClass content-class}.
    * 
    * @param contentClass

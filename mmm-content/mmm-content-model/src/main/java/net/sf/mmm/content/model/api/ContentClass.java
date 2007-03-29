@@ -3,8 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import java.util.Iterator;
 import java.util.List;
+
+import net.sf.mmm.util.io.SizedIterable;
 
 /**
  * This is the interface of a content-class. It reflects the structure of the
@@ -45,33 +46,10 @@ public interface ContentClass extends ContentReflectionObject {
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getFieldCount() fieldCount} for generic access via
-   * {@link #getFieldValue(String)}.
-   */
-  String FIELD_NAME_FIELD_COUNT = "fieldCount";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getDeclatedFields() declaredFields} for generic access via
+   * {@link #getDeclaredFields() declaredFields} for generic access via
    * {@link #getFieldValue(String)}.
    */
   String FIELD_NAME_DECLARED_FIELDS = "declaredFields";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getDeclatedFields() declaredFieldCount} for generic access via
-   * {@link #getFieldValue(String)}.
-   */
-  String FIELD_NAME_DECLARED_FIELD_COUNT = "declaredFieldCount";
-
-  /**
-   * This method gets the number of fields declared by this class.
-   * 
-   * @see #getDeclatedFields()
-   * 
-   * @return the number of fields declared by this class.
-   */
-  int getDeclaredFieldCount();
 
   /**
    * This method gets an iterator of all fields declared by this class. This
@@ -82,9 +60,9 @@ public interface ContentClass extends ContentReflectionObject {
    * specific meaning. Then the type of the field is a subtype of the field that
    * is overridden or the validator is more restrictive.<br>
    * 
-   * @return an (read-only) iterator of all declared fields.
+   * @return a (read-only) iterable of all declared fields.
    */
-  Iterator<? extends ContentField> getDeclatedFields();
+  SizedIterable<? extends ContentField> getDeclaredFields();
 
   /**
    * This method gets the declared field with the given
@@ -109,7 +87,7 @@ public interface ContentClass extends ContentReflectionObject {
   /**
    * This method gets the field with the given
    * {@link ContentField#getName() name}. A field is either
-   * {@link #getDeclaredFieldCount() declared} in this class or inherited from a
+   * {@link #getDeclaredFields() declared} in this class or inherited from a
    * {@link #getSuperClass() super-class}.
    * 
    * @param name
@@ -120,21 +98,13 @@ public interface ContentClass extends ContentReflectionObject {
   ContentField getField(String name);
 
   /**
-   * This method gets the number of fields defined in this class or inherited by
-   * the super-class(es).
-   * 
-   * @return the number of fields.
-   */
-  int getFieldCount();
-
-  /**
    * This method gets all fields defined in this class or inherited by the
    * super-class(es). An inherited field can be identified via
    * {@link ContentField#getDeclaringClass()}.
    * 
-   * @return an (read-only) iterator of fields of this class.
+   * @return a (read-only) iterable of fields of this class.
    */
-  Iterator<? extends ContentField> getFields();
+  SizedIterable<? extends ContentField> getFields();
 
   /**
    * This method gets the super-class of this class.

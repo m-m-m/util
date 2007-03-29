@@ -10,7 +10,7 @@
     <Class id="11" name="Folder" system="true" final="true">
     </Class>
     <Class id="12" name="File" system="true" final="true">
-      <!-- <Field id="40" name="blob" type="Blob" final="true" read-only="true"/> -->
+      <Field id="40" name="blob" type="net.sf.mmm.content.value.api.MutableBlob" final="true" read-only="true"/>
     </Class>
     <Class id="13" name="Document" system="true" abstract="true">
       <cfg:include type="xml" href="ContentModel-User.xml" descendants="Class"/>

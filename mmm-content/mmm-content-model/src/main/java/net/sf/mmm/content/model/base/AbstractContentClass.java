@@ -18,6 +18,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.util.io.SizedIterable;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}
@@ -36,11 +37,14 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /** @see #getSubClasses() */
   private final List<AbstractContentClass> subClassesView;
 
-  /** the map of content fields by name */
-  private final Map<String, AbstractContentField> fields;
+  /** @see #getDeclaredFields() (map of content-fields by name) */
+  private final Map<String, AbstractContentField> declaredFields;
 
-  /** @see #getDeclatedFields() */
-  private final Collection<AbstractContentField> fieldCollection;
+  /** @see #getDeclaredFields() */
+  private final SizedIterable<AbstractContentField> declaredFieldsIterable;
+
+  /** @see #getDeclaredFields() */
+  private final SizedIterable<AbstractContentField> fieldsIterable;
 
   /** @see #getModifiers() */
   private final ClassModifiers modifiers;
@@ -67,8 +71,10 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     this.modifiers = classModifiers;
     this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
-    this.fields = new HashMap<String, AbstractContentField>();
-    this.fieldCollection = Collections.unmodifiableCollection(this.fields.values());
+    this.declaredFields = new HashMap<String, AbstractContentField>();
+    this.declaredFieldsIterable = new DeclaredFieldsIterable(Collections
+        .unmodifiableCollection(this.declaredFields.values()));
+    this.fieldsIterable = new FieldsIterable();
     if (this.superClass != null) {
       if (this.superClass.getModifiers().isFinal()) {
         // TODO: NLS
@@ -80,17 +86,9 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * {@inheritDoc}
    */
-  public int getDeclaredFieldCount() {
+  public SizedIterable<AbstractContentField> getDeclaredFields() {
 
-    return this.fields.size();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Iterator<AbstractContentField> getDeclatedFields() {
-
-    return this.fieldCollection.iterator();
+    return this.declaredFieldsIterable;
   }
 
   /**
@@ -98,7 +96,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    */
   public AbstractContentField getDeclaredField(String name) {
 
-    return this.fields.get(name);
+    return this.declaredFields.get(name);
   }
 
   /**
@@ -106,7 +104,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    */
   public ContentField getField(String name) {
 
-    ContentField field = this.fields.get(name);
+    ContentField field = this.declaredFields.get(name);
     if ((field == null) && (this.superClass != null)) {
       field = this.superClass.getField(name);
     }
@@ -116,31 +114,9 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * {@inheritDoc}
    */
-  public int getFieldCount() {
+  public SizedIterable<AbstractContentField> getFields() {
 
-    int result = 0;
-    Iterator<AbstractContentField> declaredFields = this.fields.values().iterator();
-    while (declaredFields.hasNext()) {
-      ContentField myField = declaredFields.next();
-      if (myField.getSuperField() == null) {
-        result++;
-      }
-    }
-    // the calculation until here should be stored as member.
-    // the only problem is that the value may change if a super-class
-    // changes.
-    if (this.superClass != null) {
-      result += this.superClass.getFieldCount();
-    }
-    return result;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Iterator<ContentField> getFields() {
-
-    return new ContentFieldIterator(this);
+    return this.fieldsIterable;
   }
 
   /**
@@ -238,12 +214,8 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
       return getSubClasses();
     } else if (fieldName.equals(FIELD_NAME_FIELDS)) {
       return getFields();
-    } else if (fieldName.equals(FIELD_NAME_FIELD_COUNT)) {
-      return Integer.valueOf(getFieldCount());
     } else if (fieldName.equals(FIELD_NAME_DECLARED_FIELDS)) {
-      return getDeclatedFields();
-    } else if (fieldName.equals(FIELD_NAME_DECLARED_FIELD_COUNT)) {
-      return Integer.valueOf(getDeclaredFieldCount());
+      return getDeclaredFields();
     } else {
       return super.getFieldValue(field, fieldName);
     }
@@ -300,11 +272,11 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     if (field.getDeclaringClass() != this) {
       throw new ContentModelRuntimeException("Internal error!");
     }
-    ContentField duplicate = this.fields.get(field.getName());
+    ContentField duplicate = this.declaredFields.get(field.getName());
     if (duplicate != null) {
       throw new DuplicateFieldException(field.getName());
     }
-    this.fields.put(field.getName(), field);
+    this.declaredFields.put(field.getName(), field);
   }
 
   /**
@@ -322,6 +294,83 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
      * (getModifiers().isSystem()) { result.append("S"); } if (isDeleted()) {
      * result.append("D"); } result.append("]"); return result.toString();
      */
+  }
+
+  /**
+   * @see ContentClass#getDeclaredFields()
+   */
+  private static class DeclaredFieldsIterable implements SizedIterable<AbstractContentField> {
+
+    /** @see #getDeclaredFields() */
+    private final Collection<AbstractContentField> fieldCollection;
+
+    /**
+     * The constructor
+     * 
+     * @param fields
+     *        is the unmodifiable collection of the declared fields.
+     */
+    public DeclaredFieldsIterable(Collection<AbstractContentField> fields) {
+
+      super();
+      this.fieldCollection = fields;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getSize() {
+
+      return this.fieldCollection.size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Iterator<AbstractContentField> iterator() {
+
+      return this.fieldCollection.iterator();
+    }
+
+  }
+
+  /**
+   * @see ContentClass#getFields()
+   */
+  private class FieldsIterable implements SizedIterable<AbstractContentField> {
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getSize() {
+
+      int result = 0;
+      Iterator<AbstractContentField> fieldsIterator = AbstractContentClass.this.declaredFields
+          .values().iterator();
+      while (fieldsIterator.hasNext()) {
+        ContentField myField = fieldsIterator.next();
+        if (myField.getSuperField() == null) {
+          result++;
+        }
+      }
+      // the calculation until here should be stored as member.
+      // the only problem is that the value may change if a super-class
+      // changes.
+      if (AbstractContentClass.this.superClass != null) {
+        result += AbstractContentClass.this.superClass.getFields().getSize();
+      }
+      return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Iterator<AbstractContentField> iterator() {
+
+      // TODO Auto-generated method stub
+      return null;
+    }
+
   }
 
 }

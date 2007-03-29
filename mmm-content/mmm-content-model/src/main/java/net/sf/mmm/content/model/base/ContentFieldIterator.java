@@ -32,7 +32,7 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
 
     super();
     this.currentClass = contentClass;
-    this.currentIt = contentClass.getDeclatedFields();
+    this.currentIt = contentClass.getDeclaredFields().iterator();
     findFirst();
   }
 
@@ -50,7 +50,7 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
     }
     if (this.currentClass != null) {
       this.currentClass = this.currentClass.getSuperClass();
-      this.currentIt = this.currentClass.getDeclatedFields();
+      this.currentIt = this.currentClass.getDeclaredFields().iterator();
       return findNext();
     }
     return null;
