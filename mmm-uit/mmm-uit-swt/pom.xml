@@ -8,13 +8,48 @@
     <version>0.9.0</version>
   </parent>
   <name>MMM UIT::SWT</name>
-  <description>Implementation of the UI-Toolkit API using SWT as the native
-  	toolkit</description>
+  <description>Implementation of the UI-Toolkit API using SWT as the native toolkit</description>
   <url>http://m-m-m.sourceforge.net/ui-toolkit/swt</url>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-uit-swt</artifactId>
   <packaging>jar</packaging>
   <version>0.9.0-SNAPSHOT</version>
+  <profiles>
+    <profile>
+      <id>linux</id>
+      <activation>
+        <os>
+          <name>linux</name>
+        </os>
+      </activation>
+      <properties>
+        <swt.variant>linux-gtk</swt.variant>
+      </properties>
+    </profile>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <swt.variant>win32</swt.variant>
+      </properties>
+    </profile>
+    <profile>
+      <!-- TODO -->
+      <id>mac</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <swt.variant>mac</swt.variant>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
@@ -22,41 +57,15 @@
       <version>0.9.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>swt</groupId>
+      <artifactId>swt-${swt.variant}</artifactId>
+      <version>${swt.version}</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
-  <profiles>
-    <!--
-    <profile>
-      <id>linux</id>
-      <activation>
-        <os>
-          <family>Linux</family>
-        </os>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>swt</groupId>
-          <artifactId>swt-linux-gtk</artifactId>
-          <version>3.2.1</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    -->
-    <profile>
-      <id>windows</id>
-      <activation>
-        <os>
-          <family>Windows</family>
-        </os>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>swt</groupId>
-          <artifactId>swt-win32</artifactId>
-          <version>3.2.1</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
+  <properties>
+    <swt.version>3.2.1</swt.version>
+    <swt.variant>_swt.variant_undefined</swt.variant>
+  </properties>
 </project>
