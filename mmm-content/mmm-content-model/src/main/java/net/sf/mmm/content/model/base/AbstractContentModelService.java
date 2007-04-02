@@ -138,16 +138,17 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * This method {@link #addClass(ContentClass) registers} the given
+   * This method {@link #addClass(AbstractContentClass) registers} the given
    * <code>contentClass</code> recursive. Here recursive means that all
-   * {@link ContentClass#getSubClasses() sub-classes} are
-   * {@link #addClassRecursive(ContentClass) registered} recursively.
+   * {@link ContentClass#getSubClasses() sub-classes} are also
+   * {@link #addClassRecursive(AbstractContentClass) registered} recursively.
    * 
    * @param contentClass
    *        is the class to add.
-   * @throws ContentModelException
+   * @throws ContentModelRuntimeException
    */
-  protected void addClassRecursive(AbstractContentClass contentClass) throws ContentModelException {
+  protected void addClassRecursive(AbstractContentClass contentClass)
+      throws ContentModelRuntimeException {
 
     addClass(contentClass);
     for (AbstractContentClass subClass : contentClass.getSubClasses()) {

@@ -4,10 +4,12 @@
 package net.sf.mmm.util.io;
 
 /**
- * This is the interface of a "lightweight" and unmodifiable
- * {@link java.util.Collection}.
+ * This is the interface of a "lightweight" and
+ * {@link java.util.Collections#unmodifiableCollection(java.util.Collection) unmodifiable}
+ * {@link java.util.Collection Collection}.
  * 
- * @param <E> is the
+ * @param <E>
+ *        is the templated element type that can be {@link #iterator() iterated}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

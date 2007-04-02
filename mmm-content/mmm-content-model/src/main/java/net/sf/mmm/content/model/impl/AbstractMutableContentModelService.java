@@ -155,8 +155,8 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
       throw new ContentModelException(NlsBundleContentModel.ERR_CLASS_NOT_EXTENDABLE, superClass);
     }
     AbstractContentClass newClass = doCreateClass(superClass, name, modifiers);
-    ((AbstractContentClass) superClass).addSubClass(newClass);
     addClass(newClass);
+    ((AbstractContentClass) superClass).addSubClass(newClass);
     ContentModelEvent event = new ContentModelEvent(newClass, ChangeEvent.Type.ADD);
     fireEvent(event);
     return newClass;
@@ -181,10 +181,23 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   protected abstract IdImpl createFieldId();
 
   /**
-   * Creates and persists the class.
+   * Creates and new class and persists it.
    * 
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createClass(net.sf.mmm.content.model.api.ContentClass,
    *      java.lang.String, net.sf.mmm.content.model.api.ClassModifiers)
+   * 
+   * @param superClass
+   *        is the {@link ContentClass#getSuperClass() super-class} of the class
+   *        to create.
+   * @param name
+   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
+   *        of the class to create.
+   * @param modifiers
+   *        are the {@link ContentClass#getModifiers() modifiers} for the class
+   *        to create.
+   * @return the created class.
+   * @throws ContentModelException
+   *         if the class could not be created.
    */
   protected AbstractContentClass doCreateClass(ContentClass superClass, String name,
       ClassModifiers modifiers) throws ContentModelException {
@@ -224,9 +237,30 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   }
 
   /**
+   * Creates and new class and persists it.
+   * 
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createField(net.sf.mmm.content.model.api.ContentClass,
    *      java.lang.String, java.lang.Class,
    *      net.sf.mmm.content.model.api.FieldModifiers)
+   * 
+   * @param declaringClass
+   *        is the {@link ContentField#getDeclaringClass() class} where the new
+   *        field will be added.
+   * @param name
+   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
+   *        of the field to create.
+   * @param type
+   *        is the {@link ContentField#getFieldType() type} of the values that
+   *        can be stored in the field to create.
+   * @param modifiers
+   *        are the {@link ContentField#getModifiers() modifiers} for the field
+   *        to create. They must NOT be
+   *        {@link FieldModifiers#isTransient() transient} (@see
+   *        #createField(ContentClass, String, Class, FieldModifiersImpl,
+   *        Term)).
+   * @return the created field.
+   * @throws ContentModelException
+   *         if the field could not be created.
    */
   protected AbstractContentField doCreateField(ContentClass declaringClass, String name,
       Class type, FieldModifiers modifiers) throws ContentModelException {
@@ -259,23 +293,37 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   }
 
   /**
+   * This method imports a class (recursively including its fields and
+   * sub-classes) from the given <code>configuration</code>.<br>
+   * If the class(es) to import already exist, they are updated accordingly.
+   * Please note that changing IDs, names or modifiers of existing classes is
+   * NOT supported.
    * 
-   * @param config
-   * @return
+   * @param configuration
+   *        is the configuration of the class to import.
+   * @param superClass
+   *        is the {@link ContentClass#getSuperClass() super-class} of the class
+   *        to import or <code>null</code> for ROOT-class.
+   * @return the imported class.
+   * @throws ContentModelException
+   *         if the import failed. This will stop the import at the point where
+   *         the error occurred. This may result in partial completion of the
+   *         import.
    */
-  protected AbstractContentClass importClass(Configuration config, AbstractContentClass superClass)
-      throws ContentModelException {
+  protected AbstractContentClass importClass(Configuration configuration,
+      AbstractContentClass superClass) throws ContentModelException {
 
     // what is our strategy: import as much as possible and log errors or
     // verify as much as possible and only import on successful verification?
-    String name = config.getDescendant(CFG_ATR_NAME).getValue().getString();
+    String name = configuration.getDescendant(CFG_ATR_NAME).getValue().getString();
 
-    Integer classId = config.getDescendant(CFG_ATR_ID).getValue().getInteger(null);
+    Integer classId = configuration.getDescendant(CFG_ATR_ID).getValue().getInteger(null);
 
-    boolean isSystem = config.getDescendant(CFG_ATR_SYSTEM).getValue().getBoolean(false);
-    boolean isFinal = config.getDescendant(CFG_ATR_FINAL).getValue().getBoolean(false);
-    boolean isAbstract = config.getDescendant(CFG_ATR_ABSTRACT).getValue().getBoolean(false);
-    boolean isExtendable = config.getDescendant(CFG_ATR_EXTENDABLE).getValue().getBoolean(!isFinal);
+    boolean isSystem = configuration.getDescendant(CFG_ATR_SYSTEM).getValue().getBoolean(false);
+    boolean isFinal = configuration.getDescendant(CFG_ATR_FINAL).getValue().getBoolean(false);
+    boolean isAbstract = configuration.getDescendant(CFG_ATR_ABSTRACT).getValue().getBoolean(false);
+    boolean isExtendable = configuration.getDescendant(CFG_ATR_EXTENDABLE).getValue().getBoolean(
+        !isFinal);
     ClassModifiers modifiers = ClassModifiersImpl.getInstance(isSystem, isFinal, isAbstract,
         isExtendable);
 
@@ -297,7 +345,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
       if (!modifiers.equals(existingClass.getModifiers())) {
         throw new ContentModelException("TODO: changing modifiers NOT implemented!");
       }
-      if ((superClass != null) && (!superClass.equals(existingClass))) {
+      if ((superClass != null) && (!superClass.equals(existingClass.getSuperClass()))) {
         throw new ContentModelException("TODO: changing class hierarchy NOT implemented!");
       }
       newClass = existingClass;
@@ -310,10 +358,11 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
       }
 
       newClass = new ContentClassImpl(id, name, superClass, modifiers);
+      addClass(newClass);
     }
 
     // recurse on sub-classes
-    for (Configuration subClassConfig : config.getDescendants(ContentClass.CLASS_NAME)) {
+    for (Configuration subClassConfig : configuration.getDescendants(ContentClass.CLASS_NAME)) {
       // TODO
       AbstractContentClass subClass = importClass(subClassConfig, newClass);
       if (!newClass.getSubClasses().contains(subClass)) {
@@ -321,17 +370,25 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
       }
     }
 
-    for (Configuration subClassConfig : config.getDescendants(ContentField.CLASS_NAME)) {
+    for (Configuration subClassConfig : configuration.getDescendants(ContentField.CLASS_NAME)) {
       AbstractContentField field = importField(subClassConfig, newClass);
       if (newClass.getField(field.getName()) != field) {
         // TODO
-        newClass.addField(field);        
+        newClass.addField(field);
       }
     }
 
     return newClass;
   }
 
+  /**
+   * This method imports a field from the given <code>configuration</code>.<br>
+   * 
+   * @param config
+   * @param declaringClass
+   * @return
+   * @throws ContentModelException
+   */
   protected AbstractContentField importField(Configuration config,
       AbstractContentClass declaringClass) throws ContentModelException {
 

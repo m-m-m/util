@@ -4,7 +4,6 @@
 package net.sf.mmm.content.model.impl;
 
 import java.lang.reflect.Type;
-import java.util.Iterator;
 import java.util.List;
 
 import net.sf.mmm.content.api.ContentObject;
@@ -22,6 +21,7 @@ import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.util.io.SizedIterable;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
@@ -50,7 +50,6 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     // create root class
     this.rootClass = new ContentClassImpl(IdImpl.ID_CLASS_ROOT, ContentObject.CLASS_NAME, null,
         ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE);
-    addClass(this.rootClass);
     int fid = 0;
     // add fields
     this.rootClass.addField(fid++, ContentObject.FIELD_NAME_ID, Id.class,
@@ -82,10 +81,10 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     this.classClass.addField(fid++, ContentClass.FIELD_NAME_SUB_CLASSES, List.class,
         FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     // TODO: ...
-    this.classClass.addField(fid++, ContentClass.FIELD_NAME_FIELDS, Iterator.class,
+    this.classClass.addField(fid++, ContentClass.FIELD_NAME_FIELDS, SizedIterable.class,
         FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     // TODO: ...
-    this.classClass.addField(fid++, ContentClass.FIELD_NAME_DECLARED_FIELDS, Integer.class,
+    this.classClass.addField(fid++, ContentClass.FIELD_NAME_DECLARED_FIELDS, SizedIterable.class,
         FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     classReflection.addSubClass(this.classClass);
 
@@ -97,6 +96,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
         FieldModifiers.class, FieldModifiersImpl.SYSTEM_FINAL_READONLY);
     classReflection.addSubClass(this.fieldClass);
 
+    addClassRecursive(this.rootClass);
   }
 
   /**

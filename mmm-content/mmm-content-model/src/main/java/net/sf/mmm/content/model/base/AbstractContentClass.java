@@ -4,7 +4,6 @@
 package net.sf.mmm.content.model.base;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +17,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.util.io.CollectionIterable;
 import net.sf.mmm.util.io.SizedIterable;
 
 /**
@@ -72,8 +72,8 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
     this.declaredFields = new HashMap<String, AbstractContentField>();
-    this.declaredFieldsIterable = new DeclaredFieldsIterable(Collections
-        .unmodifiableCollection(this.declaredFields.values()));
+    this.declaredFieldsIterable = new CollectionIterable<AbstractContentField>(this.declaredFields
+        .values());
     this.fieldsIterable = new FieldsIterable();
     if (this.superClass != null) {
       if (this.superClass.getModifiers().isFinal()) {
@@ -294,44 +294,6 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
      * (getModifiers().isSystem()) { result.append("S"); } if (isDeleted()) {
      * result.append("D"); } result.append("]"); return result.toString();
      */
-  }
-
-  /**
-   * @see ContentClass#getDeclaredFields()
-   */
-  private static class DeclaredFieldsIterable implements SizedIterable<AbstractContentField> {
-
-    /** @see #getDeclaredFields() */
-    private final Collection<AbstractContentField> fieldCollection;
-
-    /**
-     * The constructor
-     * 
-     * @param fields
-     *        is the unmodifiable collection of the declared fields.
-     */
-    public DeclaredFieldsIterable(Collection<AbstractContentField> fields) {
-
-      super();
-      this.fieldCollection = fields;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getSize() {
-
-      return this.fieldCollection.size();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Iterator<AbstractContentField> iterator() {
-
-      return this.fieldCollection.iterator();
-    }
-
   }
 
   /**

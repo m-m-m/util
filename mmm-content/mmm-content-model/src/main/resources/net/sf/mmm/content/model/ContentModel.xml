@@ -4,14 +4,21 @@
   <Class id="0" name="Object" system="true" abstract="true" extendable="false">
     <Field id="0" name="id" type="Id" final="true" read-only="true"/>
     <Field id="1" name="name" type="String" final="true" read-only="true"/>
+    <!-- TODO: avoid absolute class-names -->
     <Field id="2" name="contentClass" type="net.sf.mmm.content.model.api.ContentClass" final="true" read-only="true"/>
     <Class id="1" name="ReflectionObject" system="true" abstract="true" extendable="false">
       <Field id="3" name="modifiers" type="net.sf.mmm.content.model.api.FieldModifiers" final="true" read-only="true"/>
       <Class id="2" name="Class" system="true" final="true">
-        <Field id="3" name="modifiers" type="ClassModifiers" final="true" read-only="true"/>
+        <Field id="4" name="modifiers" type="ClassModifiers" final="true" read-only="true"/>
+        <Field id="5" name="superClass" type="net.sf.mmm.content.model.api.ContentClass" final="true" read-only="true"/>
+        <!-- TODO: allow generic construct: List<ContentClass> -->
+        <Field id="6" name="subClasses" type="java.util.List" final="true" read-only="true"/>
+        <!-- TODO: Linklist[Field] -->
+        <Field id="7" name="fields" type="net.sf.mmm.util.io.SizedIterable" final="true" read-only="true"/>
+        <Field id="8" name="declaredFields" type="net.sf.mmm.util.io.SizedIterable" final="true" read-only="true"/>
       </Class>
-      <Class id="3" name="Field">
-        <Field id="4" name="modifiers" type="FieldModifiers" final="true" read-only="true"/>        
+      <Class id="3" name="Field" system="true" final="true">
+        <Field id="9" name="modifiers" type="FieldModifiers" final="true" read-only="true"/>        
       </Class>
     </Class>
     <cfg:include type="xml" href="ContentModel-Main.xml" descendants="Class"/>
