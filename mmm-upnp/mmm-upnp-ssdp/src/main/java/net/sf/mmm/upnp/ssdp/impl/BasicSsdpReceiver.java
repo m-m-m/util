@@ -18,7 +18,7 @@ import net.sf.mmm.util.SimpleExecutor;
 import net.sf.mmm.util.http.HttpParser;
 
 /**
- * This is the basic implemetation of the
+ * This is the basic implementation of the
  * {@link net.sf.mmm.upnp.ssdp.api.SsdpReceiver} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -148,7 +148,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
      * @throws IOException
      *         if the operation failed.
      */
-    protected void disconnect() throws IOException {
+    protected synchronized void disconnect() throws IOException {
 
       try {
         this.listening = false;
@@ -182,6 +182,9 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
       DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
       while (this.listening) {
         try {
+          // TODO: this API sucks! The method blocks until datagram us received,
+          // if nothing is received and the socket is closed, an IO-Exception is
+          // thrown.
           this.socket.receive(packet);
           byte[] data = packet.getData();
           ByteArrayInputStream stream = new ByteArrayInputStream(data);
