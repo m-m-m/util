@@ -2,12 +2,12 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>1 Minute Tutorial</title>
+    <title>Tutorial</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
   <body>
-    <section name="1 Minute Tutorial">
+    <section name="Tutorial">
       This tutorial is showing the plain way to setup the search components.
       Typically you will use a sophisticated IoC framework that injects all this
       stuff from a configuration file. Therefore all components are properly annotated.
@@ -34,6 +34,7 @@ MutableSearchEntry entry = indexer.createEntry();
 entry.setUri(file.getPath());
 entry.setSize(file.length());
 addMetadata(file, entry);
+entry.setProperty("myProperty", "my value", MutableSearchEntry.Mode.TEXT);
 indexer.add(entry);
         </source>
         To make it complete here is what <code>addMetadata</code> would typically do:
