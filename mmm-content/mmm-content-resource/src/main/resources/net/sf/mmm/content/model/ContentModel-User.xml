@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <ContentModel xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
-  <Class name="Configuration" abstract="true">
-  </Class>
   <Class name="Content" abstract="true">
+  </Class>
+  <Class name="Configuration" abstract="true">
   </Class>
 </ContentModel>

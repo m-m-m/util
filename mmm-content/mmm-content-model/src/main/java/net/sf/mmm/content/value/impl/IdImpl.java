@@ -522,9 +522,9 @@ public final class IdImpl implements Id {
   public String toString() {
 
     StringBuffer result = new StringBuffer();
-    result.append(Long.toString(this.objectId));
+    result.append(Long.toString(this.objectId, 16).toUpperCase());
     result.append(SEPARATOR);
-    result.append(Long.toString(this.classId));
+    result.append(Long.toString(this.classId, 16).toUpperCase());
     if ((this.revision != 0) && (this.storeId != 0)) {
       result.append(SEPARATOR);
       result.append(Long.toString(this.revision));

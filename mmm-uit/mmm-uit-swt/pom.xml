@@ -65,7 +65,7 @@
     </dependency>
   </dependencies>
   <properties>
-    <swt.version>3.2.1</swt.version>
+    <swt.version>3.2.2</swt.version>
     <swt.variant>_swt.variant_undefined</swt.variant>
   </properties>
 </project>

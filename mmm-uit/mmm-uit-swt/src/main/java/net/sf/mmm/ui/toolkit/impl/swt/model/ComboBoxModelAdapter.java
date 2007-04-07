@@ -10,7 +10,7 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel}
- * to a {@link org.eclipse.swt.widgets.Combo}. It is the controler of the MVC
+ * to a {@link org.eclipse.swt.widgets.Combo}. It is the controller of the MVC
  * pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -90,7 +90,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
   }
 
   /**
-   * This method is called synchron to handle an model update event.
+   * This method is called synchronous to handle an model update event.
    * 
    * @see java.lang.Runnable#run()
    */
@@ -111,7 +111,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
       Combo combo = this.syncAccess.getSwtObject();
       if (this.event.getType() == Type.ADD) {
         for (int i = start; i <= end; i++) {
-          combo.add(this.model.getElementAsString(i), i);
+          //combo.add(this.model.getElementAsString(i), i);
         }
       } else if (this.event.getType() == Type.REMOVE) {
         // for (int i = start; i <= end; i++) { combo.remove(i); }
