@@ -58,7 +58,7 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>swt</groupId>
+      <groupId>org.eclipse.swt</groupId>
       <artifactId>swt-${swt.variant}</artifactId>
       <version>${swt.version}</version>
       <scope>compile</scope>
