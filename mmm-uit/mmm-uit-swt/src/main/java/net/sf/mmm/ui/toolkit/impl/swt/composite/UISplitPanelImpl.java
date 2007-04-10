@@ -8,6 +8,7 @@ import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncGroupAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSashFormAccess;
 
@@ -27,10 +28,10 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   private final SyncSashFormAccess syncAccess;
 
   /** the synchronous access to the top or left composite */
-  private final SyncGroupAccess syncTopLeft;
+  private final SyncCompositeAccess syncTopLeft;
 
   /** the synchronous access to the bottom or right composite */
-  private final SyncGroupAccess syncBottomRight;
+  private final SyncCompositeAccess syncBottomRight;
 
   /** the component top or left */
   private AbstractUIComponent componentTopOrLeft;
@@ -63,10 +64,10 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
     style |= SWT.BORDER;
     // style |= SWT.LEFT_TO_RIGHT;
     this.syncAccess = new SyncSashFormAccess(uiFactory, style);
-    this.syncTopLeft = new SyncGroupAccess(uiFactory, SWT.NONE);
+    this.syncTopLeft = new SyncCompositeAccess(uiFactory, SWT.NONE);
     this.syncTopLeft.setLayout(new FillLayout());
     this.syncTopLeft.setParentAccess(this.syncAccess);
-    this.syncBottomRight = new SyncGroupAccess(uiFactory, SWT.NONE);
+    this.syncBottomRight = new SyncCompositeAccess(uiFactory, SWT.NONE);
     this.syncBottomRight.setLayout(new FillLayout());
     this.syncBottomRight.setParentAccess(this.syncAccess);
     /*
