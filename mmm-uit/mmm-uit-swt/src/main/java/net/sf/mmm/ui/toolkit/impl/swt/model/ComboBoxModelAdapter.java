@@ -111,7 +111,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
       Combo combo = this.syncAccess.getSwtObject();
       if (this.event.getType() == Type.ADD) {
         for (int i = start; i <= end; i++) {
-          //combo.add(this.model.getElementAsString(i), i);
+          combo.add(this.model.getElementAsString(i), i);
         }
       } else if (this.event.getType() == Type.REMOVE) {
         // for (int i = start; i <= end; i++) { combo.remove(i); }
