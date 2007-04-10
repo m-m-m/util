@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Widget;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This class is used for synchron access on a SWT
+ * This class is used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Dialog}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -27,14 +27,14 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   /** the text of this dialog */
   private String text;
 
-  /** the synchron access to the parent */
+  /** the synchronous access to the parent */
   private AbstractSyncControlAccess parentAccess;
 
   /**
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the widget.
    */
@@ -65,7 +65,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
    * parent will be set on {@link #create() creation}.
    * 
    * @param newParentAccess
-   *        is the synchron access to the new parent
+   *        is the synchronous access to the new parent
    */
   public void setParentAccess(AbstractSyncControlAccess newParentAccess) {
 

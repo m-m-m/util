@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Widget;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This is the abstract base class used for synchron access on a SWT
+ * This is the abstract base class used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Control}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -118,13 +118,13 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   /** the location to set */
   private Point location;
 
-  /** the enabled-flag */
+  /** @see #isEnabled() */
   private boolean enabled;
 
-  /** the visible-flag */
+  /** @see #isVisible() */
   private boolean visible;
 
-  /** the tooltip text */
+  /** @see #getTooltip() */
   private String tooltip;
 
   /** the width hint for compute-size */
@@ -139,7 +139,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   /** the layout data */
   private Object layoutData;
 
-  /** the synchron access to the parent */
+  /** @see #getParentAccess() */
   private AbstractSyncCompositeAccess parentAccess;
 
   /** the font of this control */
@@ -155,7 +155,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the control.
    */
@@ -315,10 +315,10 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method gets the synchron access to the
+   * This method gets the synchronous access to the
    * {@link Control#getParent() parent} of this control.
    * 
-   * @return the synchron access to the parent.
+   * @return the synchronous access to the parent.
    */
   public AbstractSyncCompositeAccess getParentAccess() {
 

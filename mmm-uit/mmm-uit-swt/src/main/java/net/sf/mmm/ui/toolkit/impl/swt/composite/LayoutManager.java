@@ -93,7 +93,7 @@ public class LayoutManager extends Layout {
     }
 
     /**
-     * This method refreshes the cached data as neccessary.
+     * This method refreshes the cached data as necessary.
      * 
      * @param flushCache -
      *        <code>true</code> if all cached data must be refreshed,
@@ -183,7 +183,7 @@ public class LayoutManager extends Layout {
      * @param flushCache -
      *        <code>true</code> if all cached data must be refreshed,
      *        <code>false</code> otherwise.
-     * @return the compited size.
+     * @return the computed size.
      */
     protected Point computeSize(Composite composite, boolean flushCache) {
 

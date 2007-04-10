@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Widget;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This class is used for synchron access on a SWT
+ * This class is used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Slider}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -56,7 +56,7 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the slider.
    */
@@ -106,7 +106,6 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
     this.slider = new Slider(getParent(), getStyle());
     this.slider.setMinimum(this.minimum);
     this.slider.setMaximum(this.maximum);
-    System.out.println("Max:" + this.maximum);
     this.slider.setSelection(this.selection);
     this.slider.setIncrement(this.increment);
     this.slider.setThumb(1);

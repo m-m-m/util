@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Widget;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This class is used for synchron access on SWT
+ * This class is used for synchronous access on SWT
  * {@link org.eclipse.swt.widgets.Shell}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -75,11 +75,11 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the sash-form.
    * @param swtShell
-   *        is the {@link Shell} to access syncron.
+   *        is the {@link Shell} to access synchronous.
    */
   public SyncShellAccess(UIFactorySwt uiFactory, int swtStyle, Shell swtShell) {
 

@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.UIDisplay;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This is the abstract base class used for synchron access on a SWT
+ * This is the abstract base class used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Widget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -49,7 +49,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the widget.
    */
@@ -63,7 +63,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method gets the widget to access synchron.
+   * This method gets the widget to access synchronous.
    * 
    * @return the widget.
    */
@@ -114,7 +114,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
     } else if (operation == OPERATION_CREATE) {
       throw new UnsupportedOperationException("Duplicate operation: " + operation);
     } else {
-      throw new UnsupportedOperationException("Unkown operation: " + operation);
+      throw new UnsupportedOperationException("Unknown operation: " + operation);
     }
   }
 
@@ -200,7 +200,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
       return true;
     } else {
       System.out
-          .println("Synchonization bug: the operation '" + operation + "' was NOT completed!");
+          .println("Synchronization bug: the operation '" + operation + "' was NOT completed!");
       return false;
     }
   }
@@ -271,7 +271,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method invokes the given operation synchron.
+   * This method invokes the given operation synchronous.
    * 
    * @param operation
    *        is the operation to perform.

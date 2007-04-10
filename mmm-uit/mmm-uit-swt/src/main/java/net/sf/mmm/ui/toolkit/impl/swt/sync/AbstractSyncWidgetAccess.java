@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Widget;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This is the abstract base class used for synchron access on a SWT
+ * This is the abstract base class used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Widget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -30,7 +30,7 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the widget.
    */
@@ -42,7 +42,7 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
   }
 
   /**
-   * This method gets the widget to access synchron.
+   * This method gets the widget to access synchronous.
    * 
    * @return the widget.
    */

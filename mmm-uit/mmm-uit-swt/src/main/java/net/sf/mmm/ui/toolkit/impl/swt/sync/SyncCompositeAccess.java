@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Widget;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 /**
- * This class is used for synchron access on a SWT
+ * This class is used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Composite}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -23,7 +23,7 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the menu.
    */
@@ -36,7 +36,7 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
    *        is the {@link Widget#getStyle() style} of the composite.
    * @param swtComposite
