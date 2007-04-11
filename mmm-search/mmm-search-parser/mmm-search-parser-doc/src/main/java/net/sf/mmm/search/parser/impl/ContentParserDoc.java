@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.parser.impl;
 
-import java.io.FileInputStream;
-
-import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.textmining.text.extraction.WordExtractor;
 
@@ -38,13 +35,6 @@ public class ContentParserDoc extends AbstractPoiContentParser {
     // poiFs.createDocumentInputStream(POIFS_ENTRY);
     WordExtractor extractor = new WordExtractor();
     return extractor.extractText(poiFs);
-  }
-
-  public static void main(String[] args) throws Exception {
-
-    System.out.println(new ContentParserDoc().parse(
-        new FileInputStream("C:\\tmp\\Sicherheitskonzept.doc"), -1)
-        .getProperty(PROPERTY_KEY_TEXT));
   }
 
 }

@@ -132,9 +132,9 @@ public class ContentParserHtml extends ContentParserText {
   @Override
   protected String parseLine(Properties properties, String line) {
 
-    parseProperty(properties, line, TITLE_PATTERN, PROPERTY_KEY_TITLE);
-    parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR);
-    parseProperty(properties, line, KEYWORDS_PATTERN, PROPERTY_KEY_KEYWORDS);
+    parseProperty(properties, line, TITLE_PATTERN, PROPERTY_KEY_TITLE, 1);
+    parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR, 1);
+    parseProperty(properties, line, KEYWORDS_PATTERN, PROPERTY_KEY_KEYWORDS, 1);
     int capacity = line.length() / 2;
     StringBuffer buffer = new StringBuffer(capacity);
     char[] chars = line.toCharArray();

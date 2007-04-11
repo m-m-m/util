@@ -92,15 +92,18 @@ public class ContentParserText extends AbstractContentParser {
    *        is the regular expression pattern.
    * @param propertyName
    *        is the name of the property to extract.
+   * @param group
+   *        is the {@link Matcher#group(int) group} number of the property in
+   *        the <code>pattern</code>.
    */
   protected void parseProperty(Properties properties, String line, Pattern pattern,
-      String propertyName) {
+      String propertyName, int group) {
 
     String value = properties.getProperty(propertyName);
     if (value == null) {
       Matcher m = pattern.matcher(line);
       if (m.matches()) {
-        value = m.group(1);
+        value = m.group(group);
         properties.setProperty(propertyName, value);
       }
     }

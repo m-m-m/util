@@ -26,7 +26,7 @@ public class ContentParserJava extends ContentParserText {
   private static final Pattern CLASS_PATTERN = Pattern.compile("[\\sa-z]*(class|interface)\\s+(\\w*).*");
 
   /** pattern to extract the author */
-  private static final Pattern AUTHOR_PATTERN = Pattern.compile("[\\s/*]*@author\\s+\"?([^(</\"]*)");
+  private static final Pattern AUTHOR_PATTERN = Pattern.compile("[\\s/*]*@author\\s+(<[^>]*>)?\"?([^(</\"]*).*");
   
   /**
    * The constructor
@@ -57,7 +57,7 @@ public class ContentParserJava extends ContentParserText {
         properties.setProperty(PROPERTY_KEY_TITLE, title);
       }
       // author tag can only appear before class name was detected...
-      parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR);
+      parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR, 2);
     }
     return line;
   }
