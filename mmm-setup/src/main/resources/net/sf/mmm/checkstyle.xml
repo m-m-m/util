@@ -11,12 +11,11 @@ Description:
 <module name="Checker">
     <property name="severity" value="warning"/>
     <module name="TreeWalker">
+        <property name="charset" value="UTF-8"/>
         <module name="JavadocMethod"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
-        <module name="JavadocStyle">
-            <property name="checkFirstSentence" value="false"/>
-        </module>
+        <module name="JavadocStyle"/>
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
@@ -25,12 +24,7 @@ Description:
         <module name="PackageName"/>
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>
-        <module name="TypeName">
-            <property name="tokens" value="CLASS_DEF"/>
-        </module>
-        <module name="TypeName">
-            <property name="tokens" value="INTERFACE_DEF"/>
-        </module>
+        <module name="TypeName"/>
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"/>
         <module name="RedundantImport"/>
@@ -62,11 +56,15 @@ Description:
         <module name="EqualsHashCode">
             <property name="severity" value="info"/>
         </module>
-        <module name="HiddenField"/>
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreSetter" value="true"/>
+        </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MagicNumber">
             <property name="severity" value="info"/>
+            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 8, 10, 16, 100, 256, 1000"/>
         </module>
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
@@ -74,7 +72,8 @@ Description:
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType">
-            <property name="severity" value="info"/>
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info"/>
+            <property name="severity" value="ignore"/>
         </module>
         <module name="VisibilityModifier"/>
         <module name="ArrayTypeStyle"/>
@@ -84,20 +83,12 @@ Description:
         <module name="RegexpHeader">
             <property name="header" value="/\*[ ]\$[I]d:[ ]..*\$\n \* Copyright \(c\) The m-m-m Team, Licensed under the Apache License, Version 2\.0\n \* http://www\.apache\.org/licenses/LICENSE-2\.0 \*/"/>
         </module>
-        <module name="FileLength"/>
-        <module name="MethodLength"/>
-        <module name="ParameterNumber"/>
         <module name="WhitespaceAround">
             <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND"/>
         </module>
-        <module name="LeftCurly"/>
-        <module name="NeedBraces"/>
-        <module name="RightCurly"/>
         <module name="ExplicitInitialization"/>
         <module name="PackageDeclaration"/>
-        <module name="ParameterAssignment">
-            <property name="severity" value="error"/>
-        </module>
+        <module name="ParameterAssignment"/>
         <module name="RequireThis">
             <property name="severity" value="info"/>
             <property name="checkMethods" value="false"/>
@@ -112,6 +103,10 @@ Description:
         </module>
         <module name="EmptyBlock">
             <property name="option" value="text"/>
+        </module>
+        <module name="GenericIllegalRegexp">
+            <property name="format" value="System\.(out|err)"/>
+            <property name="message" value="Use logger"/>
         </module>
     </module>
     <module name="PackageHtml"/>
