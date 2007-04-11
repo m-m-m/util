@@ -63,7 +63,7 @@ public class ContentParserText extends AbstractContentParser {
   }
 
   /**
-   * This method may be overriden to parse addinional information from the
+   * This method may be overridden to parse additional information from the
    * content.
    * 
    * @param properties
@@ -79,10 +79,35 @@ public class ContentParserText extends AbstractContentParser {
   }
 
   /**
+   * This method tries to extract a property value using the given
+   * <code>pattern</code> that has to produce it in the given
+   * <code>{@link Matcher#group(int) group}</code>.
+   * 
+   * @param line
+   *        is a single line read from the text.
+   * @param pattern
+   *        is the regular expression pattern.
+   * @param group
+   *        is the {@link Matcher#group(int) group} number of the property in
+   *        the <code>pattern</code>.
+   * @return the property or <code>null</code> if the <code>pattern</code>
+   *         did NOT match.
+   */
+  protected String parseProperty(String line, Pattern pattern, int group) {
+
+    Matcher m = pattern.matcher(line);
+    if (m.matches()) {
+      return m.group(group).trim();
+    } else {
+      return null;
+    }
+  }
+
+  /**
    * This method checks if the property identified by <code>propertyName</code>
    * already exists. If NOT, it tries to extract it using the given
-   * <code>pattern</code> that has to produce it in
-   * {@link Matcher#group(int) group} <code>1</code>.
+   * <code>pattern</code> that has to produce it in the given
+   * <code>{@link Matcher#group(int) group}</code>.
    * 
    * @param properties
    *        are the properties with the collected metadata.
@@ -101,9 +126,8 @@ public class ContentParserText extends AbstractContentParser {
 
     String value = properties.getProperty(propertyName);
     if (value == null) {
-      Matcher m = pattern.matcher(line);
-      if (m.matches()) {
-        value = m.group(group);
+      value = parseProperty(line, pattern, group);
+      if (value != null) {
         properties.setProperty(propertyName, value);
       }
     }
@@ -148,7 +172,7 @@ public class ContentParserText extends AbstractContentParser {
         if (charCount > maxChars) {
           break;
         }
-        // omitt empty lines...
+        // omit empty lines...
         if ((len > 8) || (line.trim().length() > 0)) {
           textBuffer.append(line);
           textBuffer.append('\n');

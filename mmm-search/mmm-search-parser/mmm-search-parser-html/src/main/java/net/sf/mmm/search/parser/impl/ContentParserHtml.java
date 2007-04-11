@@ -157,7 +157,7 @@ public class ContentParserHtml extends ContentParserText {
         }
       } else if (!inTag) {
         if (c == '&') {
-          // TODO: unescaping of enities...
+          // TODO: unescaping of entities...
           buffer.append(c);
         } else {
           buffer.append(c);

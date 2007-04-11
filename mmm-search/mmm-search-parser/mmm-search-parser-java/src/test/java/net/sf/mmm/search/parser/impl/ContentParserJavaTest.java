@@ -15,9 +15,10 @@ import net.sf.mmm.search.parser.api.ContentParser;
 import junit.framework.TestCase;
 
 /**
- * This is the
+ * This is the {@link TestCase} for {@link ContentParserJava}.
  * 
  * @author <a href="mailto:hohwille@users.sourceforge.net">Jörg Hohwiller</a>
+ * @author Nobody Else
  */
 @SuppressWarnings("all")
 public class ContentParserJavaTest extends TestCase {
@@ -28,7 +29,9 @@ public class ContentParserJavaTest extends TestCase {
     File sourceFile = new File(basePath + "/" + classPath + ".java");
     InputStream inputStream = new FileInputStream(sourceFile);
     try {
-      return parser.parse(inputStream, sourceFile.length());
+      Properties metadata = parser.parse(inputStream, sourceFile.length());
+      assertEquals(clazz.getName(), metadata.getProperty(ContentParser.PROPERTY_KEY_TITLE));
+      return metadata;
     } finally {
       inputStream.close();
     }
@@ -39,7 +42,9 @@ public class ContentParserJavaTest extends TestCase {
 
     ContentParserJava parser = new ContentParserJava();
     Properties metadata = parse(parser, "src/test/java/", ContentParserJavaTest.class);
-    assertEquals("Jörg Hohwiller", metadata.getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
+    assertEquals("Jörg Hohwiller, Nobody Else", metadata.getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
+    metadata = parse(parser, "src/main/java/", ContentParserJava.class);
+    assertEquals("Joerg Hohwiller", metadata.getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
   }
-  
+
 }

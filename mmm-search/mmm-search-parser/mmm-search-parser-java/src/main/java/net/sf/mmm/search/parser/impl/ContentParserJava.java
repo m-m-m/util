@@ -57,7 +57,17 @@ public class ContentParserJava extends ContentParserText {
         properties.setProperty(PROPERTY_KEY_TITLE, title);
       }
       // author tag can only appear before class name was detected...
-      parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR, 2);
+      
+      String author = parseProperty(line, AUTHOR_PATTERN, 2);
+      if (author != null) {
+        String authorProperty = properties.getProperty(PROPERTY_KEY_AUTHOR);
+        if (authorProperty == null) {
+          authorProperty = author;
+        } else {
+          authorProperty = authorProperty + ", " + author;
+        }
+        properties.setProperty(PROPERTY_KEY_AUTHOR, authorProperty);
+      }      
     }
     return line;
   }
