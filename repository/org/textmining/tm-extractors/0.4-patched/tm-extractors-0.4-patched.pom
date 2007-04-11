@@ -1,0 +1,16 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.textmining</groupId>
+  <artifactId>tm-extractors</artifactId>
+  <name>TextMining extractors</name>
+  <version>0.4-patched</version>
+  <description>Java API to extract Microsoft Word documents</description>
+  <url>http://www.textmining.org/</url>
+  <dependencies>
+    <dependency>
+      <groupId>poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+  </dependencies>
+</project>
