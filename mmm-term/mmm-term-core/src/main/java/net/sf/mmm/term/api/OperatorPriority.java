@@ -26,7 +26,7 @@ public enum OperatorPriority {
   /** the highest available priority */
   MAXIMUM(8);
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -5989649807734768L;
 
   /** The actual priority value. It can be used to compare priorities */

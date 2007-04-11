@@ -12,7 +12,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ContentModelRuntimeException extends NlsRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 4743655362572569172L;
 
   /**

@@ -18,7 +18,7 @@ import net.sf.mmm.framework.api.ComponentManager;
  */
 public class InstanceIdNotAvailableException extends ComponentException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 5117938605875157668L;
 
   /**

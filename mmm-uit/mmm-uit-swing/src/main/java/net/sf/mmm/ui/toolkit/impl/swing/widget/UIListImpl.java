@@ -183,7 +183,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
    */
   private class Renderer extends DefaultListCellRenderer {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = 7629826608171331045L;
 
     /**

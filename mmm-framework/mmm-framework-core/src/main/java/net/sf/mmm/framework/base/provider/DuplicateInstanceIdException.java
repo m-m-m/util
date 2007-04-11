@@ -18,7 +18,7 @@ import net.sf.mmm.framework.api.ComponentException;
  */
 public class DuplicateInstanceIdException extends ComponentException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 8793855410381174579L;
 
   /**

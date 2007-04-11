@@ -15,7 +15,7 @@ import net.sf.mmm.content.NlsBundleContentModel;
  */
 public class FieldNotExistsException extends ContentModelException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 8593724225377132253L;
 
   /**

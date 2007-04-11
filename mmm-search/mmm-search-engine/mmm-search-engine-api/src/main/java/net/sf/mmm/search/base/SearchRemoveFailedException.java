@@ -15,7 +15,7 @@ import net.sf.mmm.search.api.SearchException;
  */
 public class SearchRemoveFailedException extends SearchException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -7746309827926123365L;
 
   /**

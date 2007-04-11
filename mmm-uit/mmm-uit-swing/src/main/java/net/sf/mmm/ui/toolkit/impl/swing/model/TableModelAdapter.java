@@ -22,7 +22,7 @@ import net.sf.mmm.ui.toolkit.api.model.UITableModel;
  */
 public class TableModelAdapter<C> extends AbstractTableModel implements UITableModelListener {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -7846849727632188732L;
 
   /** the model to adapt */

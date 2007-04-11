@@ -14,7 +14,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
  */
 public class ConfigurationBindingException extends ConfigurationException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 5267673193101239594L;
 
   /**

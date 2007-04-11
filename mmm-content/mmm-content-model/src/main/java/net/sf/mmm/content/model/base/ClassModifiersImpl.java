@@ -23,7 +23,7 @@ import net.sf.mmm.value.base.AbstractValueManager;
  */
 public class ClassModifiersImpl extends AbstractModifiers implements ClassModifiers {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 2603625618112910413L;
 
   /**

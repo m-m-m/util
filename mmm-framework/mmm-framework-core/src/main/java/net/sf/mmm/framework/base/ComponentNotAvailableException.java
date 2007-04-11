@@ -17,7 +17,7 @@ import net.sf.mmm.framework.api.ComponentException;
  */
 public class ComponentNotAvailableException extends ComponentException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -4615431837761683276L;
 
   /**

@@ -12,7 +12,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ResourceNotAvailableException extends NlsRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -356811274649703298L;
 
   /**

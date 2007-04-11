@@ -16,7 +16,7 @@ public class ResourceMissingException extends NlsRuntimeException {
   /** to be used with resource bundle */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -3065138916833672449L;
   
   /**

@@ -112,7 +112,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
    */
   public class ContentClassImpl extends AbstractContentClass {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = -1985821250541285370L;
 
     /**
@@ -166,7 +166,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
    */
   public class ContentFieldImpl extends AbstractContentField {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = -6504064074715878761L;
 
     /**

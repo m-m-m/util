@@ -16,7 +16,7 @@ import net.sf.mmm.search.api.SearchException;
  */
 public class SearchEntryIdMissingException extends SearchException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 301902932006670136L;
 
   /**

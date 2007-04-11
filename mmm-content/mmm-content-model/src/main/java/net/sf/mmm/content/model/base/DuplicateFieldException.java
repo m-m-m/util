@@ -17,7 +17,7 @@ import net.sf.mmm.content.value.api.Id;
  */
 public class DuplicateFieldException extends ContentModelRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -6393217248604007769L;
 
   /**

@@ -15,7 +15,7 @@ import net.sf.mmm.framework.api.ComponentException;
  */
 public class ComponentInstantiationException extends ComponentException {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = 8168893735381325200L;
 
     /**

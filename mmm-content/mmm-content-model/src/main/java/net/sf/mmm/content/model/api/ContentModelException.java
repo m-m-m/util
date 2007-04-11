@@ -12,7 +12,7 @@ import net.sf.mmm.content.api.ContentException;
  */
 public class ContentModelException extends ContentException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 3544669568611071536L;
 
   /**

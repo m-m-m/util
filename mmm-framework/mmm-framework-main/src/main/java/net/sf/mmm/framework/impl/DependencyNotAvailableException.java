@@ -20,7 +20,7 @@ import net.sf.mmm.framework.base.ComponentNotAvailableException;
  */
 public class DependencyNotAvailableException extends DependencyException {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = -177207919686785274L;
 
     /**

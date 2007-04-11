@@ -16,7 +16,7 @@ import net.sf.mmm.framework.api.Dependency;
  */
 public class ComponentInjectionException extends ComponentException {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = 4474708630553870559L;
 
     /**

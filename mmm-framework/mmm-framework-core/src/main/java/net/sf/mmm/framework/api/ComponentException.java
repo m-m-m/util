@@ -12,7 +12,7 @@ package net.sf.mmm.framework.api;
  */
 public class ComponentException extends IocException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -3274177722975395418L;
 
   /**

@@ -14,7 +14,7 @@ import net.sf.mmm.value.base.AbstractStringValue;
  */
 public class StringValue extends AbstractStringValue {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 1838925287686720743L;
 
   /** the actual native value */

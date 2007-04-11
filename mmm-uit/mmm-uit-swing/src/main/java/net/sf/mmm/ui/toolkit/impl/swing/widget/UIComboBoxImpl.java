@@ -164,7 +164,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
    */
   private class Renderer extends BasicComboBoxRenderer {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = 511949987370124270L;
 
     /**

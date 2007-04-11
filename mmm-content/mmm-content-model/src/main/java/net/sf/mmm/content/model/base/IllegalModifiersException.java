@@ -13,7 +13,7 @@ import net.sf.mmm.content.model.api.Modifiers;
  */
 public class IllegalModifiersException extends ContentModelRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -9096716721784689821L;
 
   /**

@@ -17,7 +17,7 @@ import net.sf.mmm.content.value.api.Id;
  */
 public class DuplicateClassException extends ContentModelRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -5254496867101413693L;
 
   /**

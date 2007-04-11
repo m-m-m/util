@@ -207,7 +207,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
    */
   private class Value extends AbstractStringValue {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = 6303301763148895128L;
 
     /** the path suffix */

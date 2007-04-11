@@ -13,7 +13,7 @@ import net.sf.mmm.term.MainNlsResourceBundle;
  */
 public class NoSuchFunctionException extends FunctionException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -1205400349394700623L;
 
   /**

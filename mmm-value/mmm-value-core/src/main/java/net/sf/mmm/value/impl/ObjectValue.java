@@ -14,7 +14,7 @@ import net.sf.mmm.value.base.AbstractObjectValue;
  */
 public class ObjectValue extends AbstractObjectValue {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -8334640713105624373L;
 
   /** the actual value */

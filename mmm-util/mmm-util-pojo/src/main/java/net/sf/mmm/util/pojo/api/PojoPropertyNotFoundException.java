@@ -18,7 +18,7 @@ import net.sf.mmm.util.pojo.NlsBundlePojo;
  */
 public class PojoPropertyNotFoundException extends NlsRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -7713121978429674081L;
 
   /**

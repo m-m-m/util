@@ -17,7 +17,7 @@ package net.sf.mmm.framework.api;
  */
 public abstract class DependencyException extends IocException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 592958136566865602L;
 
   /**

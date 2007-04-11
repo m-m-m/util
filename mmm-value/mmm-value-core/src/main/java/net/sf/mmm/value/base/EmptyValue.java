@@ -14,7 +14,7 @@ import net.sf.mmm.value.api.MutableGenericValue;
  */
 public class EmptyValue extends AbstractObjectValue {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 4749888507801081650L;
 
   /** the singleton instance */

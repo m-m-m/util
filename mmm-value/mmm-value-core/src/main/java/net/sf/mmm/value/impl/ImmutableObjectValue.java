@@ -13,7 +13,7 @@ package net.sf.mmm.value.impl;
  */
 public class ImmutableObjectValue extends ObjectValue {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 5962310960812151729L;
 
   /**

@@ -19,7 +19,7 @@ import net.sf.mmm.framework.api.LifecycleMethod;
  */
 public class LifecycleException extends ComponentException {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = -6987247060118666045L;
 
     /**

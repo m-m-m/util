@@ -18,7 +18,7 @@ import net.sf.mmm.framework.api.IocException;
  */
 public class InstantiationPolicyNotAvailableException extends IocException {
 
-    /** UID for serialization */
+    /** UID for serialization. */
     private static final long serialVersionUID = 3922899083538442911L;
 
     /**

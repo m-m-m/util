@@ -18,7 +18,7 @@ import net.sf.mmm.framework.api.ContainerException;
  */
 public class DuplicateSpecificationException extends ContainerException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 536566649568067962L;
 
   /**

@@ -38,7 +38,7 @@ import net.sf.mmm.value.base.AbstractValueManager;
  */
 public final class IdImpl implements Id {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 4050487802653521717L;
 
   /**

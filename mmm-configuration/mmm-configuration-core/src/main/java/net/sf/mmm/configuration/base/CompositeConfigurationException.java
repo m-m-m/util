@@ -18,7 +18,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
  */
 public class CompositeConfigurationException extends ConfigurationException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -7509766690812596716L;
 
   /** The aggregated exceptions */

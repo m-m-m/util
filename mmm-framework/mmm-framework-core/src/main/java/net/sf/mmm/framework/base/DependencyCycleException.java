@@ -17,7 +17,7 @@ import net.sf.mmm.framework.api.IocContainer;
  */
 public class DependencyCycleException extends DependencyException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 2162762136391685441L;
 
   /**

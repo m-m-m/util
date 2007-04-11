@@ -13,7 +13,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ContainerException extends IocException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -596276084369784042L;
 
   /**

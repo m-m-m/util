@@ -18,7 +18,7 @@ import net.sf.mmm.search.engine.api.SearchEngine;
  */
 public class SearchException extends NlsRuntimeException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -2903854338698104923L;
 
   /**

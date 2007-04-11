@@ -21,7 +21,7 @@ import net.sf.mmm.framework.api.IocSecurityManager;
  */
 public class ComponentPermissionDeniedException extends ComponentSecurityException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -328513333974531814L;
 
   /**

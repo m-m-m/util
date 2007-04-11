@@ -17,7 +17,7 @@ import net.sf.mmm.term.NlsBundleTermCore;
  */
 public class TermParseException extends NlsException {
 
-  /** UID for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 8299920898179225587L;
 
   /**
