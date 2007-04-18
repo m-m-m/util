@@ -31,7 +31,7 @@ public class ContentParserOpenDoc implements ContentParser {
   private static final String ENTRY_META_XML = "meta.xml";
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserOpenDoc() {
 
