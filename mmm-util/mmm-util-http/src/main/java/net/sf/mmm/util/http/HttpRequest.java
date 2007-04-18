@@ -47,7 +47,7 @@ public class HttpRequest extends HttpMessage {
   private String uri;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public HttpRequest() {
 

@@ -21,7 +21,7 @@ public class HttpParser {
   private static final Charset CHARSET_US_ASCII = Charset.forName("US-ASCII");
   
   /**
-   * The constructor
+   * The constructor. 
    */
   private HttpParser() {
 

@@ -230,7 +230,7 @@ public class HttpResponse extends HttpMessage {
   private String reasonPhrase;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public HttpResponse() {
 

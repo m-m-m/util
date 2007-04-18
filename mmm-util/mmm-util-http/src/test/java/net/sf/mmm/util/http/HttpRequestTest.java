@@ -16,7 +16,7 @@ import junit.framework.TestCase;
 public class HttpRequestTest extends AbstractHttpMessageTest {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public HttpRequestTest() {
 

@@ -146,7 +146,7 @@ public abstract class HttpMessage {
   private String version;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public HttpMessage() {
 
@@ -590,7 +590,7 @@ public abstract class HttpMessage {
     private int hash;
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @param key
      *        is the name of the property.
