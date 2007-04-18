@@ -20,7 +20,7 @@ public class ListCharFilter implements CharFilter {
   private final char[] chars;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param accept -
    *        if <code>true</code> exactly the chars given by

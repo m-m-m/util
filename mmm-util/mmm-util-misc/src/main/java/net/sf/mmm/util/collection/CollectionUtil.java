@@ -40,7 +40,7 @@ public class CollectionUtil {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    */
   private CollectionUtil() {
 

@@ -22,7 +22,7 @@ public class CollectionIterable<E> implements SizedIterable<E> {
   private final Collection<E> collection;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param collection
    *        the collection to encapsulate. An
@@ -36,7 +36,7 @@ public class CollectionIterable<E> implements SizedIterable<E> {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param collection
    *        the collection to encapsulate.

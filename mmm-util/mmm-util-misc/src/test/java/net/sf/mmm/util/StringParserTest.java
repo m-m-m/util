@@ -18,14 +18,6 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class StringParserTest extends TestCase {
 
-  /**
-   * The constructor
-   */
-  public StringParserTest() {
-
-    super();
-  }
-
   private void checkSkipOver(StringParser parser, String substring, boolean ignoreCase) {
 
     boolean found = parser.skipOver(substring, ignoreCase);

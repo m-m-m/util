@@ -32,7 +32,7 @@ public class StringParser {
   private int pos;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param string
    *        is the {@link #getOriginalString() string} to parse.

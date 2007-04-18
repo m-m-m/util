@@ -14,14 +14,6 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class NumericUtilTest extends TestCase {
 
-  /**
-   * The constructor.
-   */
-  public NumericUtilTest() {
-
-    super();
-  }
-
   private void verifySimplestNumber(Number value, Class simplestType) {
 
     Number simpleValue = NumericUtil.toSimplestNumber(value);

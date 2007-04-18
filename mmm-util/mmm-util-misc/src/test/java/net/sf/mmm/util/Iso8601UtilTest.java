@@ -21,14 +21,6 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class Iso8601UtilTest extends TestCase {
 
-  /**
-   * The constructor
-   */
-  public Iso8601UtilTest() {
-
-    super();
-  }
-
   private void dump(Date date) {
 
     System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(date));
