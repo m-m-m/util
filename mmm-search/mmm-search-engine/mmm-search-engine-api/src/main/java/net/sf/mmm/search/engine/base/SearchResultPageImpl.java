@@ -18,7 +18,7 @@ public class SearchResultPageImpl extends AbstractSearchResultPage {
   private final SearchHit[] hits;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param searchQuery
    *        is the {@link #getQuery() query} that caused this page.

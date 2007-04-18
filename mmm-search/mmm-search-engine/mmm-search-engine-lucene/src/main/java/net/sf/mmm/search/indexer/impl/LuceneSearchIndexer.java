@@ -32,7 +32,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   private final IndexModifier modifier;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param indexModifier
    *        is the index modifier to use.

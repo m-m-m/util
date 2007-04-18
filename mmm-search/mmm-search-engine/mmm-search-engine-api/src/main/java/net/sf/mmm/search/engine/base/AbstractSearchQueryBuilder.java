@@ -20,7 +20,7 @@ import net.sf.mmm.util.StringParser;
 public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractSearchQueryBuilder() {
 

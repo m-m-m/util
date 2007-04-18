@@ -31,7 +31,7 @@ public class LuceneSearchIndexManager implements SearchIndexManager {
   private Analyzer analyzer;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public LuceneSearchIndexManager() {
 

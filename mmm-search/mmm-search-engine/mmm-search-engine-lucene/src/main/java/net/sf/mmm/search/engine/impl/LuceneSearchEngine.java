@@ -62,7 +62,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   private Formatter highlightFormatter;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public LuceneSearchEngine() {
 

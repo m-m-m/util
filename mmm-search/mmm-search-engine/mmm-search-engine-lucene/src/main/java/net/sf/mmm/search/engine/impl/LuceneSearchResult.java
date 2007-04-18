@@ -30,7 +30,7 @@ public class LuceneSearchResult extends AbstractSearchResult {
   private final SearchHighlighter highlighter;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param searchQuery
    * @param searchHits

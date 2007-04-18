@@ -32,7 +32,7 @@ public class SearchParseException extends SearchException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param nested
    *        is the {@link #getCause() cause} of this exception.

@@ -48,7 +48,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   private final boolean ignoreLeadingWildcard;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param luceneAnalyzer
    *        is the analyzer to use.

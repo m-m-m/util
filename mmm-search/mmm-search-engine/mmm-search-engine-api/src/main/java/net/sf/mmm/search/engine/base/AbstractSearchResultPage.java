@@ -29,7 +29,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   private final int pageIndex;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param searchQuery
    *        is the {@link #getQuery() query} that caused this page.

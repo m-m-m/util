@@ -26,7 +26,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   private int size;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public LuceneComplexSearchQuery() {
 

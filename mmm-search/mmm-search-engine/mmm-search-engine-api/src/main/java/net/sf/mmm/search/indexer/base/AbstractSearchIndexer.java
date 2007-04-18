@@ -17,7 +17,7 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 public abstract class AbstractSearchIndexer implements SearchIndexer {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractSearchIndexer() {
 

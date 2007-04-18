@@ -25,7 +25,7 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   private final Document document;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param entry
    *        is the lucene document that represents the actual entry.

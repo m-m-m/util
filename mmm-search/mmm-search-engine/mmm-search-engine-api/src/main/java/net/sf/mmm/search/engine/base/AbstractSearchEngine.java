@@ -16,7 +16,7 @@ import net.sf.mmm.search.engine.api.SearchResultPage;
 public abstract class AbstractSearchEngine implements SearchEngine {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractSearchEngine() {
 

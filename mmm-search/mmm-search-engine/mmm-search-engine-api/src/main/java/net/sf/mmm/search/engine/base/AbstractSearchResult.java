@@ -19,7 +19,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   private final String query;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param searchQuery
    *        is the {@link #getQuery() query} that caused this result.

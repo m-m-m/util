@@ -32,7 +32,7 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
   private final Analyzer analyzer;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param searchAnalyzer
    * @param formatter

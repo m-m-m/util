@@ -21,7 +21,7 @@ public final class LuceneFieldNameIterator implements Iterator<String> {
   private String next;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param luceneDocument
    *        is the lucene document whos field names should be iterated.

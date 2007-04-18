@@ -29,7 +29,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   private final SearchHighlighter highlighter;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param searchEntry
    *        is the actual entry this hit delegates to.

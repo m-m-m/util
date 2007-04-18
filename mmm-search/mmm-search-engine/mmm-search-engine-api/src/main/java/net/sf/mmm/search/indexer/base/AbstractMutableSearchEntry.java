@@ -18,7 +18,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
     MutableSearchEntry {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractMutableSearchEntry() {
 

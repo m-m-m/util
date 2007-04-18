@@ -20,7 +20,7 @@ public class SearchEntryIdMissingException extends SearchException {
   private static final long serialVersionUID = 301902932006670136L;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param entryId
    *        is the invalid entry ID.
@@ -31,7 +31,7 @@ public class SearchEntryIdMissingException extends SearchException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param nested
    *        is the {@link #getCause() cause} of this exception.

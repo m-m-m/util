@@ -13,7 +13,7 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
 public class NlsBundleSearchApi extends AbstractResourceBundle {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public NlsBundleSearchApi() {
 

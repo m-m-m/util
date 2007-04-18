@@ -17,7 +17,7 @@ import net.sf.mmm.search.engine.api.SearchQuery;
 public abstract class AbstractLuceneSearchQuery implements SearchQuery {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractLuceneSearchQuery() {
 

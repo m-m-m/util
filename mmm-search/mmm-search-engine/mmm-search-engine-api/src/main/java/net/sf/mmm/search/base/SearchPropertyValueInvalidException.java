@@ -19,7 +19,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
   private static final long serialVersionUID = -8530282554868568736L;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param propertyName
    *        is the name of the related property.
@@ -32,7 +32,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param nested
    *        is the {@link #getCause() cause} of this exception.

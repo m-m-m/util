@@ -19,7 +19,7 @@ public class SearchIoException extends SearchException {
   private static final long serialVersionUID = -8896253123083824658L;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param ioException
    *        is the {@link java.io.IOException} that caused this error.

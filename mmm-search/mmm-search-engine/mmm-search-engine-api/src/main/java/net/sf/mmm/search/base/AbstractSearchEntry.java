@@ -14,7 +14,7 @@ import net.sf.mmm.search.api.SearchEntry;
 public abstract class AbstractSearchEntry implements SearchEntry {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractSearchEntry() {
 

@@ -19,7 +19,7 @@ public class SearchUpdateMissingIdException extends SearchException {
   private static final long serialVersionUID = 1458156115842499131L;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public SearchUpdateMissingIdException() {
 
