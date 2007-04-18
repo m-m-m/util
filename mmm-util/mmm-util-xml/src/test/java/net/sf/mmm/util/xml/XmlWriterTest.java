@@ -21,20 +21,12 @@ import net.sf.mmm.util.xml.impl.DomXmlWriter;
 import net.sf.mmm.util.xml.impl.OutputXmlWriter;
 
 /**
- * TODO This type ...
+ * This is the {@link TestCase} for {@link XmlWriter}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class XmlWriterTest extends TestCase {
-
-  /**
-   * The constructor.
-   */
-  public XmlWriterTest() {
-
-    super();
-  }
 
   /**
    * This method produces some strange xml for testing.
@@ -53,7 +45,7 @@ public class XmlWriterTest extends TestCase {
     xmlWriter.writeStartElement("tag1");
     xmlWriter.writeNamespaceDeclaration("ns3", ns3);
     xmlWriter.writeAttribute("atr", "val");
-    xmlWriter.writeCharacters("Hello World!&<>äöüßÄÖÜ");
+    xmlWriter.writeCharacters("Hello World!&<>Ã¤Ã¶Ã¼ÃŸÃ„Ã–Ãœ");
     xmlWriter.writeStartElement("tag2", "ns2", "http://URI2");
     xmlWriter.writeAttribute("atr", "val&<>\"");
     xmlWriter.writeCharacters("Hello World!");
@@ -70,7 +62,7 @@ public class XmlWriterTest extends TestCase {
    * 
    * @throws XmlException
    *         on xml problem.
-   * @throws ValueParseException
+   * @throws XmlException
    *         on parsing problem.
    */
   @Test
