@@ -14,7 +14,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
 public class NoCondition implements Condition {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public NoCondition() {
 

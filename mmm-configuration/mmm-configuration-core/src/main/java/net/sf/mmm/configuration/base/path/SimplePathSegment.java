@@ -28,7 +28,7 @@ public class SimplePathSegment {
   private Pattern pattern;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param name
    */

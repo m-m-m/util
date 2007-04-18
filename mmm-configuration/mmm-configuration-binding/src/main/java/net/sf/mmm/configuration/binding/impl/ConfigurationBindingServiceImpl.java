@@ -24,7 +24,7 @@ public class ConfigurationBindingServiceImpl extends AbstractConfigurationBindin
   private ConfigurationBindingInjector injector;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ConfigurationBindingServiceImpl() {
 

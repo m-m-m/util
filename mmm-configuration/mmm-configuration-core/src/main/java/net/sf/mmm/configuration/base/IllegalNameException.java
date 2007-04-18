@@ -19,7 +19,7 @@ public class IllegalNameException extends ConfigurationException {
   private static final long serialVersionUID = -6453342129988661990L;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param name
    *        is the configuration {@link Configuration#getName() name} that is
@@ -33,7 +33,7 @@ public class IllegalNameException extends ConfigurationException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param name
    *        is the configuration {@link Configuration#getName() name} that is

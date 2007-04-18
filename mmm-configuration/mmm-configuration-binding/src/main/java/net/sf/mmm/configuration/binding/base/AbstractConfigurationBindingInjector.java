@@ -29,7 +29,7 @@ import net.sf.mmm.value.base.AbstractGenericValue;
 public abstract class AbstractConfigurationBindingInjector implements ConfigurationBindingInjector {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractConfigurationBindingInjector() {
 

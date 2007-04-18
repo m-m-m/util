@@ -38,7 +38,7 @@ public class DescendantPathParser {
   private static final ListCharFilter OPERATION_FILTER = new ListCharFilter(true, '=', '<', '>');
 
   /**
-   * The constructor
+   * The constructor. 
    */
   private DescendantPathParser() {
 

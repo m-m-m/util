@@ -18,7 +18,7 @@ public class ConfigurationBindingException extends ConfigurationException {
   private static final long serialVersionUID = 5267673193101239594L;
 
   /**
-   * The constructor
+   * The constructor. 
    *
    * @param internaitionalizedMessage
    * @param arguments
@@ -29,7 +29,7 @@ public class ConfigurationBindingException extends ConfigurationException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    *
    * @param nested
    * @param internaitionalizedMessage

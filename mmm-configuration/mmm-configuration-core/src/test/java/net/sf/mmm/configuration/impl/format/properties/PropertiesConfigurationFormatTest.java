@@ -26,7 +26,7 @@ import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
 public class PropertiesConfigurationFormatTest extends AbstractConfigurationFormatTest {
 
   /**
-   * The constructor
+   * The constructor. 
    *
    */
   public PropertiesConfigurationFormatTest() {

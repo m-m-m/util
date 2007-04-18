@@ -33,7 +33,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
   private PojoDescriptorBuilder descriptorBuilder;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractConfigurationBindingService() {
 

@@ -25,7 +25,7 @@ import net.sf.mmm.configuration.base.path.condition.Condition;
 public class DescendantPathWalker {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   private DescendantPathWalker() {
 

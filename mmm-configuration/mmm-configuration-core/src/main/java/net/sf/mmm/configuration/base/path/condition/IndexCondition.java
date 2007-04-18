@@ -25,7 +25,7 @@ public class IndexCondition implements Condition {
   private final int index;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param siblingIndex
    *        is the {@link #getIndex() index} to check for. ATTENTION:

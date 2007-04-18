@@ -36,7 +36,7 @@ public class CompareCondition extends PathCondition {
   private final Comparator comparator;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param pathSegments
    *        are the segments specifying the path to the descendant matched by

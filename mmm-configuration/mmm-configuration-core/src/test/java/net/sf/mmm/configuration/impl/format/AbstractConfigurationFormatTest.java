@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 public abstract class AbstractConfigurationFormatTest extends TestCase {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractConfigurationFormatTest() {
 
