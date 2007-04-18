@@ -19,14 +19,6 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class SimpleSsdpReceiverTest extends TestCase {
 
-  /**
-   * The constructor
-   */
-  public SimpleSsdpReceiverTest() {
-
-    super();
-  }
-
   public void testDummy() {
     // this test-case is currently disabled...
   }
@@ -54,15 +46,6 @@ public class SimpleSsdpReceiverTest extends TestCase {
   private static class Listener implements SsdpListener {
 
     private SsdpRequest message;
-
-    /**
-     * The constructor
-     */
-    public Listener() {
-
-      super();
-      this.message = null;
-    }
 
     /**
      * {@inheritDoc}

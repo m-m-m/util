@@ -22,14 +22,6 @@ public class SsdpSenderImplTest extends TestCase {
   private static final String USN = SsdpRequest.PREFIX_UUID + "device-UUID::"
       + SsdpRequest.UPNP_ROOT_DEVICE;
 
-  /**
-   * The constructor
-   */
-  public SsdpSenderImplTest() {
-
-    super();
-  }
-
   public static SsdpRequest createRequest() {
 
     SsdpRequest request = new SsdpRequest();
