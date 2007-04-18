@@ -30,7 +30,7 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   private Executor executor;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractMultiThreadedEventSource() {
 

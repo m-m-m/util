@@ -27,7 +27,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   private final Object lock;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractSynchronizedEventSource() {
 
@@ -35,7 +35,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param listeners 
    *        is the list used to store the listeners.
