@@ -6,8 +6,9 @@ package net.sf.mmm.util.resource;
 import java.net.URL;
 
 /**
- * This is the implementation of the {@link DataResource} interface for a resource
- * that comes from the {@link ClassLoader#getResource(String) classpath}. <br>
+ * This is the implementation of the {@link DataResource} interface for a
+ * resource that comes from the
+ * {@link ClassLoader#getResource(String) classpath}. <br>
  * A very nice feature of Java is to load resources from the classpath. This
  * allows that these resource are deployed within a jar-file. Adding a directory
  * to the beginning of the classpath still allows to override such a resource.<br>
@@ -18,7 +19,7 @@ import java.net.URL;
  * </pre>
  * 
  * This will NOT allow to override resources in other classpath entries and
- * especially NOT work in situaitons where there are specific classloaders, what
+ * especially NOT work in situations where there are specific classloaders, what
  * is a typical situation in environments of applications servers or IoC
  * frameworks.<br>
  * The solution is to use the
@@ -41,7 +42,7 @@ public class ClasspathResource extends AbstractResource {
   private final URL url;
 
   /**
-   * The constructor
+   * The constructor.
    * 
    * @param absolutePath
    *        is the absolute path to the resource. E.g.
@@ -61,13 +62,15 @@ public class ClasspathResource extends AbstractResource {
    * from the same package where this class is located:
    * 
    * <pre>
-   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.ClasspathResource}.class, ".xml", true)
+   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.ClasspathResource}.class, 
+   * ".xml", true)
    * </pre>
    * 
    * This is the same as:
    * 
    * <pre>
-   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.ClasspathResource}.class, "{@linkplain ClasspathResource}.xml", false)
+   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.ClasspathResource}.class, 
+   * "{@linkplain ClasspathResource}.xml", false)
    * </pre>
    * 
    * This is the same as:
@@ -93,13 +96,14 @@ public class ClasspathResource extends AbstractResource {
   }
 
   /**
-   * The constructor for a classpath-resource identified by
+   * The constructor. for a classpath-resource identified by
    * <code>somePackage</code> and the given <code>filename</code>.<br>
    * E.g. the following code would create a resource named
    * "relection.properties" from the same package where this class is located:
    * 
    * <pre>
-   * new {@link ClasspathResource}({@link ClasspathResource}.class.{@link Class#getPackage() getPackage}(), "relection.properties")
+   * new {@link ClasspathResource}({@link ClasspathResource}.class.{@link Class#getPackage() getPackage}(), 
+   * "relection.properties")
    * </pre>
    * 
    * This is the same as:

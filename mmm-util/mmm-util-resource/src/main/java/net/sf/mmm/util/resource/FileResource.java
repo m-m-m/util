@@ -23,7 +23,7 @@ public class FileResource extends AbstractResource {
   private File file;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param someFile
    *        is the file.

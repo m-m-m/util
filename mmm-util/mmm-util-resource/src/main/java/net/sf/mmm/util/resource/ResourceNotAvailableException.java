@@ -16,7 +16,7 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
   private static final long serialVersionUID = -356811274649703298L;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param absolutePath
    *        is the absolute path of the resource that could NOT be found.
@@ -27,7 +27,7 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param nested
    *        is the {@link #getCause() cause} of this exception.

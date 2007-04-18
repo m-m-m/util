@@ -7,14 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is the abstract base implementation of the {@link DataResource} interface.
+ * This is the abstract base implementation of the {@link DataResource}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractResource implements DataResource {
 
   /**
-   * The constructor
+   * The constructor.
    */
   public AbstractResource() {
 
@@ -22,10 +23,10 @@ public abstract class AbstractResource implements DataResource {
   }
 
   /**
-   * This is a default implementation. Override if there is a more performant
-   * way to implement this.
+   * {@inheritDoc}
    * 
-   * @see net.sf.mmm.util.resource.DataResource#getSize()
+   * This is a default implementation. Override if there is a more performing
+   * way to implement this.
    */
   public long getSize() throws ResourceNotAvailableException {
 
@@ -37,10 +38,10 @@ public abstract class AbstractResource implements DataResource {
   }
 
   /**
-   * This is a default implementation. Override if there is a more performant
-   * way to implement this.
+   * {@inheritDoc}
    * 
-   * @see net.sf.mmm.util.resource.DataResource#openStream()
+   * This is a default implementation. Override if there is a more performing
+   * way to implement this.
    */
   public InputStream openStream() throws ResourceNotAvailableException, IOException {
 

@@ -14,20 +14,12 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 /**
- * This is the test case for the class {@link ClasspathUtil}.
+ * This is the {@link TestCase} for the class {@link ClasspathUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class ClasspathResourceTest extends TestCase {
-
-  /**
-   * The constructor
-   */
-  public ClasspathResourceTest() {
-
-    super();
-  }
 
   public void verifyResource(DataResource resource) throws Exception {
 

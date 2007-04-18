@@ -61,7 +61,7 @@ public interface DataResource {
    * @return the input stream where to read from.
    * @throws ResourceNotAvailableException
    *         if this resource is NOT {@link #isAvailable() available}.
-   * @throws IOException
+   * @throws IOException if an input/output error occurred.
    */
   InputStream openStream() throws ResourceNotAvailableException, IOException;
 
