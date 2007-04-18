@@ -116,7 +116,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     private static final long serialVersionUID = -1985821250541285370L;
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @param classId
      *        is the {@link #getId() ID} of the class.
@@ -170,7 +170,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     private static final long serialVersionUID = -6504064074715878761L;
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @see AbstractContentField#AbstractContentField(IdImpl, String,
      *      ContentClass, Type, FieldModifiers, ValueValidator)
@@ -182,7 +182,7 @@ public abstract class AbstractBaseContentModelService extends AbstractContentMod
     }
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @see AbstractContentField#AbstractContentField(IdImpl, String,
      *      ContentClass, Type, FieldModifiers)

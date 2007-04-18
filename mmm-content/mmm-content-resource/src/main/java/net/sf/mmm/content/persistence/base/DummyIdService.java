@@ -25,7 +25,7 @@ public class DummyIdService extends AbstractIdService {
   private long resourceIdCounter;
   
    /**
-    * The constructor
+    * The constructor. 
     */
   public DummyIdService() {
 

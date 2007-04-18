@@ -30,7 +30,7 @@ public class ConfiguredModelService extends AbstractMutableContentModelService {
   private Configuration config;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ConfiguredModelService() {
 

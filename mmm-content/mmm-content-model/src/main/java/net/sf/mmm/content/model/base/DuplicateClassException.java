@@ -21,7 +21,7 @@ public class DuplicateClassException extends ContentModelRuntimeException {
   private static final long serialVersionUID = -5254496867101413693L;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param name
    *        is the name already in use.
@@ -32,7 +32,7 @@ public class DuplicateClassException extends ContentModelRuntimeException {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param id
    *        is the ID already in use.
