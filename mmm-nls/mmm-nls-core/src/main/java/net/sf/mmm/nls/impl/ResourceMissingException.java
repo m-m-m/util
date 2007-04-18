@@ -20,7 +20,7 @@ public class ResourceMissingException extends NlsRuntimeException {
   private static final long serialVersionUID = -3065138916833672449L;
   
   /**
-   * The constructor
+   * The constructor. 
    *
    * @param resourceName
    */
