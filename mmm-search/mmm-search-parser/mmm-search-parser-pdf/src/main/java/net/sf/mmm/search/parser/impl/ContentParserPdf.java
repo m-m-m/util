@@ -23,7 +23,7 @@ import net.sf.mmm.search.parser.base.AbstractContentParser;
 public class ContentParserPdf extends AbstractContentParser {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserPdf() {
 
