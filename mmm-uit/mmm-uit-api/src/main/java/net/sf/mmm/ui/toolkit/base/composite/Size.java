@@ -59,7 +59,7 @@ public class Size {
   }
 
   /**
-   * This method swapps {@link #width}/{@link #height}.
+   * This method swaps {@link #width}/{@link #height}.
    */
   public void swap() {
 

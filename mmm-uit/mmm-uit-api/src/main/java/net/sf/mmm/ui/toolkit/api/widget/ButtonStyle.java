@@ -46,7 +46,7 @@ public enum ButtonStyle {
    * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenu menu}. Like for
    * {@link #CHECK} and {@link #TOGGLE} buttons of this style have a
    * selection-status. This is typically visualized by a circle or square that
-   * is eigther filled or not. The difference in behaviour is that the button
+   * is either filled or not. The difference in behaviour is that the button
    * gets not deselected if it is selected again but if another button of the
    * same group is selected.
    */

@@ -12,7 +12,7 @@ package net.sf.mmm.ui.toolkit.api.composite;
 public enum Alignment {
 
   /**
-   * the componenet will be horizontally and vertically centered.<br>
+   * the component will be horizontally and vertically centered.<br>
    * 000<br>
    * 0x0<br>
    * 000<br>
@@ -20,7 +20,7 @@ public enum Alignment {
   CENTER,
 
   /**
-   * the componenet will be located at the top and horizontally centered.<br>
+   * the component will be located at the top and horizontally centered.<br>
    * 0x0<br>
    * 000<br>
    * 000<br>
@@ -28,7 +28,7 @@ public enum Alignment {
   TOP,
 
   /**
-   * the componenet will be located at the bottom and horizontally centered.<br>
+   * the component will be located at the bottom and horizontally centered.<br>
    * 000<br>
    * 000<br>
    * 0x0<br>
@@ -36,7 +36,7 @@ public enum Alignment {
   BOTTOM,
 
   /**
-   * the componenet will be located at the left and vertically centered.<br>
+   * the component will be located at the left and vertically centered.<br>
    * 000<br>
    * x00<br>
    * 000<br>
@@ -44,7 +44,7 @@ public enum Alignment {
   LEFT,
 
   /**
-   * the componenet will be located at the right and vertically centered.<br>
+   * the component will be located at the right and vertically centered.<br>
    * 000<br>
    * 00x<br>
    * 000<br>
@@ -52,7 +52,7 @@ public enum Alignment {
   RIGHT,
 
   /**
-   * the componenet will be located at the right and vertically centered.<br>
+   * the component will be located at the right and vertically centered.<br>
    * x00<br>
    * 000<br>
    * 000<br>
@@ -60,7 +60,7 @@ public enum Alignment {
   TOP_LEFT,
 
   /**
-   * the componenet will be located at the right and vertically centered.<br>
+   * the component will be located at the right and vertically centered.<br>
    * 00x<br>
    * 000<br>
    * 000<br>
@@ -68,7 +68,7 @@ public enum Alignment {
   TOP_RIGHT,
 
   /**
-   * the componenet will be located at the right and vertically centered.<br>
+   * the component will be located at the right and vertically centered.<br>
    * 000<br>
    * 000<br>
    * x00<br>
@@ -76,7 +76,7 @@ public enum Alignment {
   BOTTOM_LEFT,
 
   /**
-   * the componenet will be located at the right and vertically centered.<br>
+   * the component will be located at the right and vertically centered.<br>
    * 000<br>
    * 000<br>
    * 00x<br>

@@ -23,14 +23,14 @@ public enum Filling {
   /**
    * The width of the
    * {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be
-   * expanded while the height is keept.
+   * expanded while the height is kept.
    */
   HORIZONTAL,
 
   /**
    * The height of the
    * {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be
-   * expanded while the width is keept.
+   * expanded while the width is kept.
    */
   VERTICAL,
 
