@@ -14,7 +14,7 @@ public abstract class AbstractPojo {
   private String name;
   
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractPojo() {
 

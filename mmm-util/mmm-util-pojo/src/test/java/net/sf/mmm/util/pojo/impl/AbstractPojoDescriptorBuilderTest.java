@@ -19,14 +19,6 @@ import junit.framework.TestCase;
 public abstract class AbstractPojoDescriptorBuilderTest extends TestCase {
 
   /**
-   * The constructor
-   */
-  public AbstractPojoDescriptorBuilderTest() {
-
-    super();
-  }
-
-  /**
    * This method checks read/write accessors to the property
    * <code>propertyName</code> of the <code>pojoDescriptor</code> according
    * to the given <code>readType</code> and <code>writeType</code>.

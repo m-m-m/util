@@ -16,7 +16,7 @@ import net.sf.mmm.util.pojo.base.PojoDescriptorBuilderImpl;
 public class FieldPojoDescriptorBuilder extends PojoDescriptorBuilderImpl {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public FieldPojoDescriptorBuilder() {
 

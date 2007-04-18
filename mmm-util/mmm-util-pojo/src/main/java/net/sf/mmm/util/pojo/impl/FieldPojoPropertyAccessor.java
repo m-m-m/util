@@ -23,7 +23,7 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   private final Field field;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param propertyField
    *        is the {@link #getAccessibleObject() method} to access the property.
@@ -37,7 +37,7 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param propertyName
    *        is the {@link #getName() name} of the property.

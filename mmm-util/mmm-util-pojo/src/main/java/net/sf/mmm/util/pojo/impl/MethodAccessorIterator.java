@@ -56,7 +56,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   private final boolean publicOnly;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param pojoClass
    *        is the class for which the property-accessors should be iterated.

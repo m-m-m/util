@@ -25,14 +25,6 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
-  /**
-   * The constructor.
-   */
-  public PublicMethodPojoDescriptorBuilderTest() {
-
-    super();
-  }
-
   @Test
   public void testPojoDescriptor() throws Exception {
 

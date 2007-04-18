@@ -37,7 +37,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   private final Collection<PojoPropertyDescriptorImpl> propertyList;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param pojoClass
    *        is the {@link #getPojoType() pojo-class}.

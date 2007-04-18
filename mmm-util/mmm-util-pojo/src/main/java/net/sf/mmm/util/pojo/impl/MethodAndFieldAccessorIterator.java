@@ -24,7 +24,7 @@ public class MethodAndFieldAccessorIterator implements Iterator<AbstractPojoProp
   private final Iterator<AbstractPojoPropertyAccessor> fieldIterator;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param pojoClass
    *        is the class for which the property-accessors should be iterated.

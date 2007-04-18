@@ -14,7 +14,7 @@ import net.sf.mmm.util.pojo.api.PojoPropertyNotFoundException;
 public class NlsBundlePojo extends AbstractResourceBundle {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public NlsBundlePojo() {
 

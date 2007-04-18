@@ -16,7 +16,7 @@ import net.sf.mmm.util.pojo.base.PojoDescriptorBuilderImpl;
 public class PublicMethodPojoDescriptorBuilder extends PojoDescriptorBuilderImpl {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public PublicMethodPojoDescriptorBuilder() {
 

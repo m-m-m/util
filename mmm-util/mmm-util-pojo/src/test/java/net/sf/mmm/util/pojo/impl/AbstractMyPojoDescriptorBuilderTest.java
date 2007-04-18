@@ -18,15 +18,6 @@ import net.sf.mmm.util.pojo.impl.dummy.MyPojo;
 @SuppressWarnings("all")
 public class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
 
-  /**
-   * The constructor
-   * 
-   */
-  public AbstractMyPojoDescriptorBuilderTest() {
-
-    super();
-  }
-
   protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance) throws Exception {
 
     // test property "name"

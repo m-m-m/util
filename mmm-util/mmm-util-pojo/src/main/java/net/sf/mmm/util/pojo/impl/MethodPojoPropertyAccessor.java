@@ -24,7 +24,7 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   private final Method method;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @param propertyName
    *        is the {@link #getName() name} of the property.
