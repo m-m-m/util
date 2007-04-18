@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 public abstract class AbstractUIPanel extends AbstractUIMultiComposite implements UIPanel {
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @see AbstractUIMultiComposite#AbstractUIMultiComposite(UIFactorySwing,
    *      UINode)
