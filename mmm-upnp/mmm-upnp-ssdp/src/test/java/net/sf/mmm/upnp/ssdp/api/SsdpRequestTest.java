@@ -22,14 +22,6 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class SsdpRequestTest extends TestCase {
 
-  /**
-   * The constructor
-   */
-  public SsdpRequestTest() {
-
-    super();
-  }
-
   @Test
   public void testPingPong() throws Exception {
 

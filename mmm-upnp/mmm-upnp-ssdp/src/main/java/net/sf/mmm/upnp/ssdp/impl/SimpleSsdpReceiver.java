@@ -24,7 +24,7 @@ import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 public class SimpleSsdpReceiver extends BasicSsdpReceiver {
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @see #initialize()
    * @see #dispose()

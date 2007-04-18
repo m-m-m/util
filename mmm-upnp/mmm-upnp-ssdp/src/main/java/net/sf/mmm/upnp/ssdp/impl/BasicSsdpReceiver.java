@@ -32,7 +32,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   private MulticastListener listener;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public BasicSsdpReceiver() {
 
@@ -114,7 +114,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     private InetAddress address;
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @throws IOException
      *         if the operation failed with an I/O problem.
@@ -125,7 +125,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     }
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @param mutlicastAddress
      *        the multicast address to listen to.

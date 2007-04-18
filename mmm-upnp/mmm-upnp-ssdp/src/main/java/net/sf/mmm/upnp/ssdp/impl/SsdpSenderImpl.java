@@ -31,7 +31,7 @@ public class SsdpSenderImpl implements SsdpSender {
   private int port;
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @see #initialize()
    * @see #dispose()

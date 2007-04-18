@@ -22,7 +22,7 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
   private final List<SsdpListener> listeners;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractSsdpReceiver() {
 

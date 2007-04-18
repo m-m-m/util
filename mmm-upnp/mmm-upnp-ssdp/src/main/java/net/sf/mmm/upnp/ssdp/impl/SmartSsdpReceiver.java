@@ -19,7 +19,7 @@ import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 public class SmartSsdpReceiver extends BasicSsdpReceiver {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public SmartSsdpReceiver() {
 

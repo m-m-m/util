@@ -149,7 +149,7 @@ public class SsdpRequest extends HttpRequest {
   }
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    * @see #initializeDefaults()
    */
