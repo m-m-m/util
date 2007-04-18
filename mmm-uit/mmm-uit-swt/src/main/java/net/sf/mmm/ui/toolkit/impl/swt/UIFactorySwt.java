@@ -379,12 +379,11 @@ public class UIFactorySwt extends AbstractUIFactory {
    */
   public static int convertButtonStyleForMenuItem(ButtonStyle buttonStyle) {
 
-    int result = convertButtonStyle(buttonStyle);
-    if (result == SWT.NORMAL) {
-      return SWT.CASCADE;
-    } else {
-      return result;
-    }
+    return convertButtonStyle(buttonStyle);
+    /*
+     * if (buttonStyle == ButtonStyle.DEFAULT) { return SWT.CASCADE; } else {
+     * return convertButtonStyle(buttonStyle); }
+     */
   }
 
   /**
@@ -400,7 +399,7 @@ public class UIFactorySwt extends AbstractUIFactory {
 
     switch (buttonStyle) {
       case DEFAULT:
-        return SWT.DEFAULT;
+        return SWT.PUSH;
       case CHECK:
         return SWT.CHECK;
       case RADIO:
