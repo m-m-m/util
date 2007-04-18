@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -43,7 +42,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the item.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    */
   public SyncTabItemAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -54,9 +53,9 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    * The constructor.
    * 
    * @param uiFactory
-   *        is used to do the synchonization.
+   *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the item.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    * @param index
    *        is the index position of the item to add.
    */
@@ -85,7 +84,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
   /**
    * This method gets the parent tab-folder of this tab-item.
    * 
-   * @return the parnet.
+   * @return the parent.
    */
   public TabFolder getParent() {
 
@@ -102,7 +101,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    * will be set on {@link #create() creation}.
    * 
    * @param newParentAccess
-   *        is the synchron access to the new parent
+   *        is the synchronous access to the new parent
    */
   public void setParentAccess(SyncTabFolderAccess newParentAccess) {
 
@@ -142,7 +141,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
   @Override
   public void create() {
 
-    // change visiblilty
+    // change visibility
     super.create();
   }
 

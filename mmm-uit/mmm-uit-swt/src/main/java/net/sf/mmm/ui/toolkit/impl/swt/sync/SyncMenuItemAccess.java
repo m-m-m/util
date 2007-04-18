@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -32,8 +31,8 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
 
   /**
    * operation to get the
-   * {@link org.eclipse.swt.widgets.MenuItem#getSelection() selection-status}
-   * of the menu-item.
+   * {@link org.eclipse.swt.widgets.MenuItem#getSelection() selection-status} of
+   * the menu-item.
    */
   protected static final String OPERATION_IS_SELECTED = "getSelected";
 
@@ -52,7 +51,8 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the menu.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the menu.
    * @param swtMenuItem
    *        is the menu-item to access.
    * @param itemText
@@ -119,8 +119,8 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
 
   /**
    * This method gets the
-   * {@link org.eclipse.swt.widgets.MenuItem#getSelection() selection-status}
-   * of the menu-item.
+   * {@link org.eclipse.swt.widgets.MenuItem#getSelection() selection-status} of
+   * the menu-item.
    * 
    * @return the selection-status.
    */

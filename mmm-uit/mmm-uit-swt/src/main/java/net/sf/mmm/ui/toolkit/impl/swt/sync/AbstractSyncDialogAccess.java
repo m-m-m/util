@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -19,8 +18,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the
-   * dialog.
+   * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the dialog.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
@@ -36,7 +34,8 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the widget.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the widget.
    */
   public AbstractSyncDialogAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -60,9 +59,9 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
 
   /**
    * This method sets the parent sync-access of the dialog. If the parent
-   * {@link AbstractSyncControlAccess#getSwtObject() exists}, it will be set
-   * as parent of the dialog. Else if the control does NOT yet exist, the
-   * parent will be set on {@link #create() creation}.
+   * {@link AbstractSyncControlAccess#getSwtObject() exists}, it will be set as
+   * parent of the dialog. Else if the control does NOT yet exist, the parent
+   * will be set on {@link #create() creation}.
    * 
    * @param newParentAccess
    *        is the synchronous access to the new parent
@@ -111,8 +110,8 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Dialog#getText() text} of the dialog.
+   * This method gets the {@link org.eclipse.swt.widgets.Dialog#getText() text}
+   * of the dialog.
    * 
    * @return the text of this dialog or <code>null</code> if no text is set.
    */
@@ -123,8 +122,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the
-   * dialog.
+   * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the dialog.
    * 
    * @param dialogText
    *        is the text to set.

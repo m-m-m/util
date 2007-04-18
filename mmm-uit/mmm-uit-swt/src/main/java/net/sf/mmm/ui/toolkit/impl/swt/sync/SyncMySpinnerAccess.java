@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
-import org.eclipse.swt.widgets.Widget;
-
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.custom.MySpinner;
@@ -30,14 +28,14 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   private static final String OPERATION_SET_SELECTED_INDEX = "setSelectedIndex";
 
   /**
-   * operation to set the
-   * {@link MySpinner#setEditable(boolean) "editable flag"} of the spinner.
+   * operation to set the {@link MySpinner#setEditable(boolean) "editable flag"}
+   * of the spinner.
    */
   private static final String OPERATION_SET_EDITABLE = "setEditable";
 
   /**
-   * operation to set the {@link MySpinner#setModel(UIListModel) model} of
-   * the spinner.
+   * operation to set the {@link MySpinner#setModel(UIListModel) model} of the
+   * spinner.
    */
   private static final String OPERATION_SET_MODEL = "setModel";
 
@@ -59,7 +57,8 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the composite.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the composite.
    * @param listModel
    *        is the list model containing the elements of the spinner.
    */
@@ -125,8 +124,8 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method sets the
-   * {@link MySpinner#setEditable(boolean) "editable flag"} of the spinner.
+   * This method sets the {@link MySpinner#setEditable(boolean) "editable flag"}
+   * of the spinner.
    * 
    * @param editableFlag
    *        is the new status of the editable-flag.
@@ -139,8 +138,8 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method gets the {@link MySpinner#isEditable() "editable flag"} of
-   * the spinner.
+   * This method gets the {@link MySpinner#isEditable() "editable flag"} of the
+   * spinner.
    * 
    * @return <code>true</code> if the spinner is editable.
    */

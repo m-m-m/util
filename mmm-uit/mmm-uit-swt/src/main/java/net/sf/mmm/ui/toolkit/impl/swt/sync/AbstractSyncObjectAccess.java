@@ -1,6 +1,7 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
-
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -16,8 +17,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   /**
    * operation to
    * {@link org.eclipse.swt.widgets.Widget#Widget(org.eclipse.swt.widgets.Widget, int) create}
-   * the object. This operation will be implemented in the according
-   * sub-class.
+   * the object. This operation will be implemented in the according sub-class.
    */
   private static final String OPERATION_CREATE = "create";
 
@@ -51,7 +51,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the widget.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the widget.
    */
   public AbstractSyncObjectAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -90,8 +91,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method is called from {@link #run()} if the widget has been
-   * disposed.
+   * This method is called from {@link #run()} if the widget has been disposed.
    */
   protected void handleDisposed() {
 
@@ -99,8 +99,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method is called from {@link #run()}. It does the actual job for
-   * the given operation.
+   * This method is called from {@link #run()}. It does the actual job for the
+   * given operation.
    * 
    * @param operation
    *        is the actual operation to perform.
@@ -199,8 +199,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
     if (operation == null) {
       return true;
     } else {
-      System.out
-          .println("Synchronization bug: the operation '" + operation + "' was NOT completed!");
+      System.out.println("Synchronization bug: the operation '" + operation
+          + "' was NOT completed!");
       return false;
     }
   }
@@ -259,8 +259,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method inverts (XORs) the flag(s) given by <code>styleMask</code>
-   * in the {@link #getStyle() style} of the widget.
+   * This method inverts (XORs) the flag(s) given by <code>styleMask</code> in
+   * the {@link #getStyle() style} of the widget.
    * 
    * @param styleMask
    *        is the style mask to invert.

@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -43,16 +42,15 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   private static final String OPERATION_GET_SELECTION = "getSelection";
 
   /**
-   * operation to
-   * {@link org.eclipse.swt.widgets.Combo#removeAll() "remove all"} items of
-   * the combo.
+   * operation to {@link org.eclipse.swt.widgets.Combo#removeAll() "remove all"}
+   * items of the combo.
    */
   private static final String OPERATION_REMOVE_ALL = "removeAll";
 
   /**
    * operation to
-   * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) add} an item
-   * to the combo.
+   * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) add} an item to
+   * the combo.
    */
   private static final String OPERATION_ADD = "add";
 
@@ -100,7 +98,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the combo.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the combo.
    */
   public SyncComboAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -208,8 +207,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
 
   /**
    * This method
-   * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) adds} an item
-   * to the combo at the end of the item-list.
+   * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) adds} an item to
+   * the combo at the end of the item-list.
    * 
    * @param itemText
    *        is the display text of the item.
@@ -272,9 +271,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method
-   * {@link org.eclipse.swt.widgets.Combo#removeAll() "removes all"} items
-   * from the combo.
+   * This method {@link org.eclipse.swt.widgets.Combo#removeAll() "removes all"}
+   * items from the combo.
    */
   public void removeAll() {
 

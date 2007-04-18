@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -65,7 +64,7 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the menu.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
    * @param swtMenu
    *        is the menu to access.
    * @param menuText

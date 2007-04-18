@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -48,7 +47,8 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the widget.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the widget.
    */
   public SyncFileDialogAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -96,8 +96,8 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
   /**
    * This method opens the dialog.
    * 
-   * @return the name of the selected file or <code>null</code> if no file
-   *         was chosen (e.g. dialog was canceled).
+   * @return the name of the selected file or <code>null</code> if no file was
+   *         chosen (e.g. dialog was canceled).
    */
   public String open() {
 

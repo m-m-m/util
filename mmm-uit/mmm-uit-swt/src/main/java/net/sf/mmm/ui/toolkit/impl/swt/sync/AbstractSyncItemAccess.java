@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Item;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -42,7 +41,8 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the item.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the item.
    */
   public AbstractSyncItemAccess(UIFactorySwt uiFactory, int swtStyle) {
 

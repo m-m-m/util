@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -25,7 +24,8 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the menu.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the menu.
    */
   public SyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -38,7 +38,8 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the composite.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the composite.
    * @param swtComposite
    *        is the composite to access.
    */

@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Slider;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -58,7 +57,8 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the slider.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the slider.
    */
   public SyncSliderAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -159,8 +159,7 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
 
   /**
    * This method gets the
-   * {@link org.eclipse.swt.widgets.Slider#getMaximum() maximum} of the
-   * slider.
+   * {@link org.eclipse.swt.widgets.Slider#getMaximum() maximum} of the slider.
    * 
    * @return the maximum.
    */

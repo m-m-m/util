@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -45,7 +44,8 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the label.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the label.
    */
   public SyncLabelAccess(UIFactorySwt uiFactory, int swtStyle) {
 

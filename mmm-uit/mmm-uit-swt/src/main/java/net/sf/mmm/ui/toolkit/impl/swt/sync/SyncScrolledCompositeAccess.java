@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -53,7 +52,8 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the menu.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the menu.
    */
   public SyncScrolledCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -66,7 +66,8 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the composite.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the composite.
    * @param swtScrolledComposite
    *        is the scrolled composite to access.
    */
@@ -139,8 +140,8 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method gets the {@link ScrolledComposite#getContent() content} of
-   * the scrolled composite.
+   * This method gets the {@link ScrolledComposite#getContent() content} of the
+   * scrolled composite.
    * 
    * @return the content.
    */

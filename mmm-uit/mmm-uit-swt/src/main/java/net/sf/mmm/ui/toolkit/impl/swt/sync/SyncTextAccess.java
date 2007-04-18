@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -23,15 +22,15 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   private static final String OPERATION_SET_TEXT = "setText";
 
   /**
-   * operation to get the {@link org.eclipse.swt.widgets.Text#getText() text}
-   * of the text.
+   * operation to get the {@link org.eclipse.swt.widgets.Text#getText() text} of
+   * the text.
    */
   private static final String OPERATION_GET_TEXT = "getText";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Text#setEditable(boolean) editable-flag}
-   * of the text.
+   * {@link org.eclipse.swt.widgets.Text#setEditable(boolean) editable-flag} of
+   * the text.
    */
   private static final String OPERATION_SET_EDITABLE = "setEditable";
 
@@ -70,7 +69,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the text.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the text.
    */
   public SyncTextAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -129,8 +129,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the {@link org.eclipse.swt.widgets.Text#getText() text}
-   * of the text.
+   * This method gets the {@link org.eclipse.swt.widgets.Text#getText() text} of
+   * the text.
    * 
    * @return the text of this text or <code>null</code> if no text is set.
    */
@@ -184,8 +184,7 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
 
   /**
    * This method gets the
-   * {@link org.eclipse.swt.widgets.Text#getTextLimit() text-limit} of the
-   * text.
+   * {@link org.eclipse.swt.widgets.Text#getTextLimit() text-limit} of the text.
    * 
    * @return the maximum character count for the text.
    */

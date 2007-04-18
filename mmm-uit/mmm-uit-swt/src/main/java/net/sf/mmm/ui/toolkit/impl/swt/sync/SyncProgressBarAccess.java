@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.ProgressBar;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -55,7 +54,8 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the progress-bar.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the progress-bar.
    */
   public SyncProgressBarAccess(UIFactorySwt uiFactory, int swtStyle) {
 

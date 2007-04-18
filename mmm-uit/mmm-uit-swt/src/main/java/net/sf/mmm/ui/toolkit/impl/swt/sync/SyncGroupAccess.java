@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -34,7 +33,8 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the group.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the group.
    */
   public SyncGroupAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -47,7 +47,8 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the group.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the group.
    * @param swtGroup
    *        is the group to access.
    */

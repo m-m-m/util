@@ -1,10 +1,11 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -77,7 +78,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the sash-form.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the sash-form.
    * @param swtShell
    *        is the {@link Shell} to access synchronous.
    */
@@ -128,7 +130,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method creates the {@link Decorations#getMenuBar() menu-bar} of the
+   * This method creates the
+   * {@link org.eclipse.swt.widgets.Decorations#getMenuBar() menu-bar} of the
    * decorations.
    * 
    * @return the menu-bar.
@@ -141,7 +144,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method set the {@link Decorations#setText(String) title} of the
+   * This method set the
+   * {@link org.eclipse.swt.widgets.Decorations#setText(String) title} of the
    * decorations.
    * 
    * @param newTitel
@@ -155,7 +159,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method get the {@link Decorations#getText() title} of the
+   * This method get the
+   * {@link org.eclipse.swt.widgets.Decorations#getText() title} of the
    * decorations.
    * 
    * @return the title.
@@ -168,8 +173,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
 
   /**
    * This method sets the
-   * {@link Decorations#setMaximized(boolean) maximized-state} of the
-   * decorations.
+   * {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean) maximized-state}
+   * of the decorations.
    * 
    * @param doMaximize
    *        is the new maximized-state to set.
@@ -182,7 +187,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method gets the {@link Decorations#getMaximized() maximized-state}
+   * This method gets the
+   * {@link org.eclipse.swt.widgets.Decorations#getMaximized() maximized-state}
    * of the decorations.
    * 
    * @return the maximized-state.
@@ -196,8 +202,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
 
   /**
    * This method sets the
-   * {@link Decorations#setMinimized(boolean) minimized-state} of the
-   * decorations.
+   * {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean) minimized-state}
+   * of the decorations.
    * 
    * @param doMinimize
    *        is the new minimized-state to set.
@@ -210,7 +216,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method gets the {@link Decorations#getMinimized() minimized-state}
+   * This method gets the
+   * {@link org.eclipse.swt.widgets.Decorations#getMinimized() minimized-state}
    * of the decorations.
    * 
    * @return the minimized-state.

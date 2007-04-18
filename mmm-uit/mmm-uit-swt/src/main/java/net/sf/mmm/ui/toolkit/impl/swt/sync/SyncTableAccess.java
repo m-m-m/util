@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -31,9 +30,8 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
   private static final String OPERATION_SET_SELECTION = "getSelection";
 
   /**
-   * operation to
-   * {@link org.eclipse.swt.widgets.Table#removeAll() "remove all"} items of
-   * the table.
+   * operation to {@link org.eclipse.swt.widgets.Table#removeAll() "remove all"}
+   * items of the table.
    */
   private static final String OPERATION_REMOVE_ALL = "removeAll";
 
@@ -49,7 +47,8 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the table.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the table.
    */
   public SyncTableAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -111,20 +110,20 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
   }
 
   /**
+   * This method sets the selection of the table.
    * 
-   * @param newSelection
+   * @param newSelection is the new selection to set.
    */
   public void setSelection(int newSelection) {
-    
+
     assert (checkReady());
     this.selection = newSelection;
     invoke(OPERATION_SET_SELECTION);
   }
-  
+
   /**
-   * This method
-   * {@link org.eclipse.swt.widgets.Table#removeAll() "removes all"} items
-   * from the table.
+   * This method {@link org.eclipse.swt.widgets.Table#removeAll() "removes all"}
+   * items from the table.
    */
   public void removeAll() {
 

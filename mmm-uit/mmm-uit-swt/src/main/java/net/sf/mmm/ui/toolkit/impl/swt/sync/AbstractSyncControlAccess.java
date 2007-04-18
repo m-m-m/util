@@ -1,3 +1,6 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.SWT;
@@ -8,7 +11,6 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -157,7 +159,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the control.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the control.
    */
   public AbstractSyncControlAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -327,12 +330,12 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method sets the parent sync-access of this control. If the parent
-   * {@link AbstractSyncCompositeAccess#getSwtObject() exists}, it will be
-   * set as parent of this control. Else if the control does NOT yet exist,
-   * the parent will be set on {@link #create() creation}.
+   * {@link AbstractSyncCompositeAccess#getSwtObject() exists}, it will be set
+   * as parent of this control. Else if the control does NOT yet exist, the
+   * parent will be set on {@link #create() creation}.
    * 
    * @param newParentAccess
-   *        is the synchron access to the new parent
+   *        is the synchronous access to the new parent
    */
   public void setParentAccess(AbstractSyncCompositeAccess newParentAccess) {
 
@@ -389,8 +392,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method sets the {@link Control#setSize(int, int) size} of the
-   * control.
+   * This method sets the {@link Control#setSize(int, int) size} of the control.
    * 
    * @param width
    *        is the width to set.
@@ -410,8 +412,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method sets the {@link Control#setSize(int, int) size} of the
-   * control.
+   * This method sets the {@link Control#setSize(int, int) size} of the control.
    * 
    * @param newSize
    *        is the new size.
@@ -424,8 +425,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method sets the {@link Control#setLocation(int, int) location} of
-   * the control.
+   * This method sets the {@link Control#setLocation(int, int) location} of the
+   * control.
    * 
    * @param x
    *        is the x-coordinate to set.
@@ -474,8 +475,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method sets the {@link Control#setToolTipText(String) tooltip-text}
-   * of the control.
+   * This method sets the {@link Control#setToolTipText(String) tooltip-text} of
+   * the control.
    * 
    * @param tooltipText
    *        is the new tooltip text to set.
@@ -515,8 +516,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method gets the visible flag as set by {@link #setVisible(boolean)}.
-   * This is NOT the same as the {@link Control#isVisible() visible-flag} of
-   * the control.
+   * This is NOT the same as the {@link Control#isVisible() visible-flag} of the
+   * control.
    * 
    * @return the visible-flag.
    */
@@ -538,8 +539,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method {@link Control#computeSize(int, int) computes} the size of
-   * the control.
+   * This method {@link Control#computeSize(int, int) computes} the size of the
+   * control.
    * 
    * @return the computed size.
    */
@@ -549,8 +550,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method {@link Control#computeSize(int, int) computes} the size of
-   * the control.
+   * This method {@link Control#computeSize(int, int) computes} the size of the
+   * control.
    * 
    * @param widthHint
    *        the suggested width or {@link org.eclipse.swt.SWT#DEFAULT}.
@@ -583,11 +584,11 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Control#getFont() font} of the control.
+   * This method gets the {@link org.eclipse.swt.widgets.Control#getFont() font}
+   * of the control.
    * 
-   * @return the font of the control. May be <code>null</code> if the
-   *         control has NOT been created.
+   * @return the font of the control. May be <code>null</code> if the control
+   *         has NOT been created.
    */
   public Font getFont() {
 
@@ -611,8 +612,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method gets the
-   * {@link org.eclipse.swt.widgets.Control#getForeground() foreground-color}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#getForeground() foreground-color} of
+   * the control.
    * 
    * @return the foreground of the control. May be <code>null</code> if the
    *         control has NOT been created.
@@ -639,8 +640,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method gets the
-   * {@link org.eclipse.swt.widgets.Control#getBackground() background-color}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#getBackground() background-color} of
+   * the control.
    * 
    * @return the background of the control. May be <code>null</code> if the
    *         control has NOT been created.

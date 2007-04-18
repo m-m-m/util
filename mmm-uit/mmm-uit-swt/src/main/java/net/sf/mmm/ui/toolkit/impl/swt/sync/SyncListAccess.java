@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -67,7 +66,8 @@ public class SyncListAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the control.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the control.
    */
   public SyncListAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -145,7 +145,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method selectes the item with the given index.
+   * This method selects the item with the given index.
    * 
    * @param selectionIndex
    *        is the index of the item to select.

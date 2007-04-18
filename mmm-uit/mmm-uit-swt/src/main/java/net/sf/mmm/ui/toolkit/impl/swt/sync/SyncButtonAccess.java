@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Widget;
 
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
@@ -19,8 +18,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the
-   * button.
+   * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the button.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
@@ -63,7 +61,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    * @param uiFactory
    *        is used to do the synchronization.
    * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the button.
+   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
+   *        the button.
    */
   public SyncButtonAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -122,8 +121,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Button#getText() text} of the button.
+   * This method gets the {@link org.eclipse.swt.widgets.Button#getText() text}
+   * of the button.
    * 
    * @return the text of this button or <code>null</code> if no text is set.
    */
@@ -134,8 +133,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the
-   * button.
+   * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the button.
    * 
    * @param buttonText
    *        is the text to set.
@@ -195,8 +193,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    * This method gets the
    * {@link org.eclipse.swt.widgets.Button#getImage() image} of the button.
    * 
-   * @return the image of the button or <code>null</code> if no image is
-   *         set.
+   * @return the image of the button or <code>null</code> if no image is set.
    */
   public Image getImage() {
 
