@@ -15,7 +15,9 @@ Description:
         <module name="JavadocMethod"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
-        <module name="JavadocStyle"/>
+        <module name="JavadocStyle">
+            <property name="tokens" value="INTERFACE_DEF,CLASS_DEF,METHOD_DEF,CTOR_DEF"/>
+        </module>
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
@@ -64,17 +66,13 @@ Description:
         <module name="InnerAssignment"/>
         <module name="MagicNumber">
             <property name="severity" value="info"/>
-            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 8, 10, 16, 100, 256, 1000"/>
+            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 8, 10, 16, 100, 256, 512, 1000, 1024"/>
         </module>
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
-        <module name="InterfaceIsType">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info"/>
-            <property name="severity" value="ignore"/>
-        </module>
         <module name="VisibilityModifier"/>
         <module name="ArrayTypeStyle"/>
         <module name="UpperEll"/>
@@ -95,9 +93,6 @@ Description:
         </module>
         <module name="SuperClone"/>
         <module name="SuperFinalize"/>
-        <module name="InterfaceIsType">
-            <property name="severity" value="ignore"/>
-        </module>
         <module name="TodoComment">
             <property name="severity" value="ignore"/>
         </module>
