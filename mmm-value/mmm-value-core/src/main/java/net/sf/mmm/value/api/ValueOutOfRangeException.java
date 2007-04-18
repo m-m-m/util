@@ -15,7 +15,7 @@ import net.sf.mmm.value.api.GenericValue;
  */
 public class ValueOutOfRangeException extends ValueException {
 
-  /** uid for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 3363522277063736719L;
 
   /**

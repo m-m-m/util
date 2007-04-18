@@ -5,11 +5,6 @@ package net.sf.mmm.value.api;
 
 import java.util.Date;
 
-import net.sf.mmm.value.api.ValueInstanciationException;
-import net.sf.mmm.value.api.ValueNotSetException;
-import net.sf.mmm.value.api.ValueOutOfRangeException;
-import net.sf.mmm.value.api.WrongValueTypeException;
-
 /**
  * This is the interface for a generic value.<br>
  * The actual value can be {@link #isEmpty() empty}. In that case the non-arg

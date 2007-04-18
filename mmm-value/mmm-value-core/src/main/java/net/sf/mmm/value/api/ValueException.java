@@ -13,7 +13,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  */
 public class ValueException extends NlsRuntimeException {
 
-  /** uid for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = -8445209659250789499L;
 
   /**

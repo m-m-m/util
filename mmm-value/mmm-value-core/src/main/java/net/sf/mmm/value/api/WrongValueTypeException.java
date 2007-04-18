@@ -14,7 +14,7 @@ import net.sf.mmm.value.api.GenericValue;
  */
 public class WrongValueTypeException extends ValueException {
 
-  /** uid for serialization */
+  /** UID for serialization. */
   private static final long serialVersionUID = 3681394831124284211L;
 
   /**
