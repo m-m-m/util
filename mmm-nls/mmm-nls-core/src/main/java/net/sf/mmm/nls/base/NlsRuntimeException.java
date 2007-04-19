@@ -21,7 +21,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   private NlsMessage nlsMessage;
 
   /**
-   * The default constructor.
+   * The constructor.
    * 
    * @param internaitionalizedMessage
    *        is a short description of the problem. It is used for
@@ -36,7 +36,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * The default constructor.
+   * The constructor.
    * 
    * @param nested
    *        is the {@link #getCause() cause} of this exception.
@@ -54,7 +54,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * The default constructor.
+   * The constructor.
    * 
    * @param internationalizedMessage
    *        the internationalized message describing the problem briefly.
@@ -66,7 +66,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * The default constructor.
+   * The constructor.
    * 
    * @param nested
    *        is the throwable that caused this exception.

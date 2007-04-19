@@ -11,9 +11,8 @@ import net.sf.mmm.nls.api.NlsThrowable;
 import net.sf.mmm.nls.api.StringTranslator;
 
 /**
- * This is an abstract base implementation of an exception with real <em>native
- * language support</em>
- * (NLS).
+ * This is an abstract base implementation of an exception with real
+ * <em>native language support</em> (NLS).
  * 
  * @see NlsThrowable
  * 
@@ -29,7 +28,7 @@ public abstract class NlsException extends Exception implements NlsThrowable {
    * 
    * @param internaitionalizedMessage
    *        is a short description of the problem. It is used for
-   *        internationalization and should be in english language.
+   *        internationalization and should be in English language.
    * @param arguments
    *        are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
@@ -46,7 +45,7 @@ public abstract class NlsException extends Exception implements NlsThrowable {
    *        is the {@link #getCause() cause} of this exception.
    * @param internaitionalizedMessage
    *        is a short description of the problem. It is used for
-   *        internationalization and should be in english language.
+   *        internationalization and should be in English language.
    * @param arguments
    *        are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
@@ -166,12 +165,11 @@ public abstract class NlsException extends Exception implements NlsThrowable {
 
     getNlsMessage().getLocalizedMessage(nationalizer, message);
     /*
-     * Throwable nested = getCause(); if (nested != null) { MmmThrowableIF
-     * mt = null; String msg = null; if (nested instanceof MmmThrowableIF) {
-     * mt = (MmmThrowableIF) nested; } else { msg =
-     * nested.getLocalizedMessage(); } if ((mt != null) || (msg != null)) {
-     * message.append(" ["); if (mt != null) {
-     * mt.getLocalizedMessage(nationalizer, message); } else {
+     * Throwable nested = getCause(); if (nested != null) { MmmThrowableIF mt =
+     * null; String msg = null; if (nested instanceof MmmThrowableIF) { mt =
+     * (MmmThrowableIF) nested; } else { msg = nested.getLocalizedMessage(); }
+     * if ((mt != null) || (msg != null)) { message.append(" ["); if (mt !=
+     * null) { mt.getLocalizedMessage(nationalizer, message); } else {
      * message.append(msg); } message.append("]"); } }
      */
   }

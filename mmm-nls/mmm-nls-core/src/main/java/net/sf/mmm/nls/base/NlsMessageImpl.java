@@ -19,15 +19,15 @@ import net.sf.mmm.nls.api.StringTranslator;
 public class NlsMessageImpl implements NlsMessage {
 
   /** the universal translator for {@link #getLocalizedMessage()} */
-  private static StringTranslator UNIVERSAL_TRANSLATOR = null;
+  private static StringTranslator staticTranslator;
 
-  /** the internationlized message */
+  /** the internationalized message */
   private final String message;
 
   /** the parsed i18n message format */
   private final MessageFormat messageFormat;
 
-  /** the dynamic (language independed) arguments */
+  /** the dynamic (language independent) arguments */
   private final Object[] arguments;
 
   /**
@@ -36,7 +36,7 @@ public class NlsMessageImpl implements NlsMessage {
    */
   private final NlsObject[] nlsArguments;
 
-  /** the dynamic (language independed) arguments */
+  /** the dynamic (language independent) arguments */
   private final Object[] copyArguments;
 
   /**
@@ -96,7 +96,7 @@ public class NlsMessageImpl implements NlsMessage {
    * locale is determined, the universal translator should delegate to the
    * locale-specific translator.<br>
    * <b>WARNING:</b><br>
-   * This is only a backdoor for simple applications or test situations. Please
+   * This is only a back-door for simple applications or test situations. Please
    * try to avoid using this feature and solve this issue with IoC strategies
    * (using non-final static fields like here is evil).<br>
    * <b>ATTENTION:</b><br>
@@ -110,8 +110,8 @@ public class NlsMessageImpl implements NlsMessage {
    */
   public static void setUniversalTranslator(StringTranslator universalTranslator) {
 
-    if (UNIVERSAL_TRANSLATOR == null) {
-      UNIVERSAL_TRANSLATOR = universalTranslator;
+    if (universalTranslator == null) {
+      NlsMessageImpl.staticTranslator = universalTranslator;
     }
   }
 
@@ -178,14 +178,15 @@ public class NlsMessageImpl implements NlsMessage {
    */
   public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer messageBuffer) {
 
-    if (nationalizer == null) {
-      nationalizer = UNIVERSAL_TRANSLATOR;
-      if (nationalizer == null) {
-        nationalizer = IdentityTranslator.INSTANCE;
+    StringTranslator translator = nationalizer;
+    if (translator == null) {
+      translator = NlsMessageImpl.staticTranslator;
+      if (translator == null) {
+        translator = IdentityTranslator.INSTANCE;
       }
     }
     String i18nMsg = getInternationalizedMessage();
-    String localizedMessage = nationalizer.translate(i18nMsg);
+    String localizedMessage = translator.translate(i18nMsg);
     if (localizedMessage == null) {
       messageBuffer.append('#');
       localizedMessage = i18nMsg;
@@ -208,7 +209,7 @@ public class NlsMessageImpl implements NlsMessage {
         for (int i = 0; i < this.arguments.length; i++) {
           if (this.nlsArguments[i] != null) {
             NlsMessage subMessage = this.nlsArguments[i].toNlsMessage();
-            this.copyArguments[i] = subMessage.getLocalizedMessage(nationalizer);
+            this.copyArguments[i] = subMessage.getLocalizedMessage(translator);
           }
         }
         msg.format(this.copyArguments, messageBuffer, null);

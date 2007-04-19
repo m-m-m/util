@@ -18,7 +18,16 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   private static final long serialVersionUID = -1537683835966488723L;
 
   /**
+   * The constructor.
+   * 
    * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * 
+   * @param internaitionalizedMessage
+   *        is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments
+   *        are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public NlsIllegalArgumentException(String internaitionalizedMessage, Object... arguments) {
 
@@ -26,7 +35,18 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   }
 
   /**
+   * The constructor.
+   * 
    * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
+   * 
+   * @param nested
+   *        is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage
+   *        is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments
+   *        are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public NlsIllegalArgumentException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {
@@ -35,7 +55,12 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   }
 
   /**
+   * The constructor.
+   * 
    * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
+   * 
+   * @param internationalizedMessage
+   *        the internationalized message describing the problem briefly.
    */
   public NlsIllegalArgumentException(NlsMessage internationalizedMessage) {
 
@@ -43,11 +68,18 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   }
 
   /**
+   * The constructor.
+   * 
    * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
+   * 
+   * @param nested
+   *        is the throwable that caused this exception.
+   * @param internationalizedMessage
+   *        the internationalized message describing the problem briefly.
    */
   public NlsIllegalArgumentException(Throwable nested, NlsMessage internationalizedMessage) {
 
     super(nested, internationalizedMessage);
   }
-
+  
 }
