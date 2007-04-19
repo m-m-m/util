@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.api;
 
+import java.util.Map;
+
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
@@ -12,10 +14,10 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
 /**
  * This is the abstract interface for any content object. This can be a
  * {@link net.sf.mmm.content.model.api.ContentReflectionObject reflection-object}
- * (class or field), or a resource (file, folder, user, group, etc.).
+ * (class or field), or a resource (file, folder, user, group, etc.).<br>
  * 
  * TODO: add generic methods "ContentObject getParent()", "String getPath()"
- * "Collection<ContentObject> getChildren()" instead of content-folder?<br>
+ * "Collection&lt;ContentObject&gt; getChildren()" instead of content-folder?<br>
  * TODO: create external XmlSerializer instead of extend XmlSerializable here?
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -107,6 +109,17 @@ public interface ContentObject extends XmlSerializable {
    */
   boolean isDeleted();
 
+  /**
+   * This method gets the meta-data of this object.
+   * 
+   * @return the meta-data.
+   * @throws PermissionDeniedException
+   *         if you (the current user) does not have permission to perform the
+   *         operation.
+   */
+  Map<String, String> getMetaData();
+  
+  
   /**
    * This method gets the value of the specified
    * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic

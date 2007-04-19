@@ -13,7 +13,16 @@ import net.sf.mmm.nls.base.NlsException;
 public abstract class ContentException extends NlsException {
 
   /**
+   * The constructor.<br>
+   * 
    * @see NlsException#NlsException(String, Object[])
+   * 
+   * @param internaitionalizedMessage
+   *        is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments
+   *        are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public ContentException(String internaitionalizedMessage, Object... arguments) {
 
@@ -21,7 +30,18 @@ public abstract class ContentException extends NlsException {
   }
 
   /**
+   * The constructor.<br>
+   * 
    * @see NlsException#NlsException(Throwable, String, Object[])
+   * 
+   * @param nested
+   *        is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage
+   *        is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments
+   *        are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public ContentException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

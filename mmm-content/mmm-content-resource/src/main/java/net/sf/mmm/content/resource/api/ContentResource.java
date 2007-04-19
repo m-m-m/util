@@ -4,8 +4,6 @@
 package net.sf.mmm.content.resource.api;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.api.MutableMetaDataSet;
 import net.sf.mmm.content.value.api.RevisionHistory;
 import net.sf.mmm.content.value.api.Version;
 
@@ -98,16 +96,6 @@ public interface ContentResource extends ContentObject {
    * @return the path of the resource.
    */
   String getPath();
-
-  /**
-   * This method gets the meta-data of this object.
-   * 
-   * @return the meta-data.
-   * @throws PermissionDeniedException
-   *         if you (the current user) does not have permission to perform the
-   *         operation.
-   */
-  MutableMetaDataSet getMetaData() throws PermissionDeniedException;
 
   /**
    * This method gets the version-information of this resource.

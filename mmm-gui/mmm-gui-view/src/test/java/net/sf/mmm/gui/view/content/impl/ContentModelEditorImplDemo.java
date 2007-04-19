@@ -13,7 +13,6 @@ import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.model.impl.AbstractMutableContentModelService;
 import net.sf.mmm.content.model.impl.ConfiguredModelService;
-import net.sf.mmm.content.value.base.MetaDataSetImpl;
 import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.content.value.impl.VersionImpl;
 import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
@@ -54,7 +53,6 @@ public class ContentModelEditorImplDemo {
     valueServiceImpl.addManager(new IdImpl.Manager());
     valueServiceImpl.addManager(new ClassModifiersImpl.Manager());
     valueServiceImpl.addManager(new FieldModifiersImpl.Manager());
-    valueServiceImpl.addManager(new MetaDataSetImpl.Manager());
     valueServiceImpl.addManager(new VersionImpl.Manager());
     ValueService valueService = valueServiceImpl;
     modelServiceImpl.setValueService(valueService);
