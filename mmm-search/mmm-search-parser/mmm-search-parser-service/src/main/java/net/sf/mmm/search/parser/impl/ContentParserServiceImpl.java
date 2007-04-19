@@ -14,7 +14,7 @@ import net.sf.mmm.search.parser.base.AbstractContentParserService;
 public class ContentParserServiceImpl extends AbstractContentParserService {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserServiceImpl() {
 

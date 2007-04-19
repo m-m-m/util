@@ -18,7 +18,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
 public class ContentParserXml implements ContentParser {
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    */
   public ContentParserXml() {

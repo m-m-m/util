@@ -18,7 +18,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
 public class ContentParserGeneric implements ContentParser {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserGeneric() {
 

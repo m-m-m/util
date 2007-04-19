@@ -29,7 +29,7 @@ public class ContentParserJava extends ContentParserText {
   private static final Pattern AUTHOR_PATTERN = Pattern.compile("[\\s/*]*@author\\s+(<[^>]*>)?\"?([^(</\"]*).*");
   
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserJava() {
 

@@ -17,7 +17,7 @@ public abstract class AbstractContentParser implements ContentParser, LimitBuffe
   private int maximumBufferSize;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractContentParser() {
 

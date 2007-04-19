@@ -27,7 +27,7 @@ public class ContentParserText extends AbstractContentParser {
   private int defaultCapacity;
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserText() {
 

@@ -55,7 +55,7 @@ public class ContentParserHtml extends ContentParserText {
       .compile(".*<meta name=[\"']keywords[\"'] content=[\"']([^\"']*)[\"']");
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserHtml() {
 
