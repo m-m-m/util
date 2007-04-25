@@ -6,7 +6,7 @@ package net.sf.mmm.nls.base;
 import java.util.Locale;
 
 import net.sf.mmm.nls.MyResourceBundle;
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslator;
 
 import junit.framework.TestCase;
 
@@ -31,6 +31,6 @@ public class NlsExceptionTest extends TestCase {
     String source = "bad boy";
     NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
     assertEquals("NullPointerException caused by \"" + source + "\"!", e.getMessage());
-    StringTranslator st = new SimpleStringTranslator(new MyResourceBundle(), Locale.GERMAN);
+    NlsTranslator st = new SimpleStringTranslator(new MyResourceBundle(), Locale.GERMAN);
   }
 }

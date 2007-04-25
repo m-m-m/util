@@ -8,11 +8,14 @@ import java.io.PrintWriter;
 
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.api.NlsThrowable;
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslator;
 
 /**
- * This is an abstract base implementation of an exception with real
- * <em>native language support</em> (NLS).
+ * This is an abstract base implementation of a checked exception with real
+ * <em>native language support</em> (NLS). <br>
+ * <b>ATTENTION:</b><br>
+ * Checked exceptions should be used for business errors and should only occur
+ * in unexpected situations.
  * 
  * @see NlsThrowable
  * 
@@ -94,7 +97,7 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * {@inheritDoc}
    */
-  public void printStackTrace(PrintStream stream, StringTranslator nationalizer) {
+  public void printStackTrace(PrintStream stream, NlsTranslator nationalizer) {
 
     synchronized (stream) {
       stream.println(getLocalizedMessage(nationalizer));
@@ -118,7 +121,7 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * {@inheritDoc}
    */
-  public void printStackTrace(PrintWriter writer, StringTranslator nationalizer) {
+  public void printStackTrace(PrintWriter writer, NlsTranslator nationalizer) {
 
     synchronized (writer) {
       writer.println(getLocalizedMessage(nationalizer));
@@ -151,7 +154,7 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * {@inheritDoc}
    */
-  public String getLocalizedMessage(StringTranslator nationalizer) {
+  public String getLocalizedMessage(NlsTranslator nationalizer) {
 
     StringBuffer message = new StringBuffer();
     getLocalizedMessage(nationalizer, message);
@@ -161,17 +164,9 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * {@inheritDoc}
    */
-  public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message) {
+  public void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message) {
 
     getNlsMessage().getLocalizedMessage(nationalizer, message);
-    /*
-     * Throwable nested = getCause(); if (nested != null) { MmmThrowableIF mt =
-     * null; String msg = null; if (nested instanceof MmmThrowableIF) { mt =
-     * (MmmThrowableIF) nested; } else { msg = nested.getLocalizedMessage(); }
-     * if ((mt != null) || (msg != null)) { message.append(" ["); if (mt !=
-     * null) { mt.getLocalizedMessage(nationalizer, message); } else {
-     * message.append(msg); } message.append("]"); } }
-     */
   }
 
 }

@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import net.sf.mmm.nls.MyResourceBundle;
 import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslator;
 import net.sf.mmm.nls.base.AbstractResourceBundle;
 import net.sf.mmm.nls.base.NlsMessageImpl;
 import net.sf.mmm.nls.base.SimpleStringTranslator;
@@ -49,7 +49,7 @@ public class AbstractResourceBundleTest extends TestCase {
       count++;
     }
     assertEquals(count, expectedKeys.size());
-    StringTranslator st = new SimpleStringTranslator(myRB, Locale.GERMAN);
+    NlsTranslator st = new SimpleStringTranslator(myRB, Locale.GERMAN);
     NlsMessage msg = new NlsMessageImpl(MyResourceBundle.MSG_WELCOME, "Paul");
     assertEquals("Welcome \"Paul\"!", msg.getMessage());
     assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(st));

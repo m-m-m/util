@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.api.NlsThrowable;
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslator;
 
 /**
  * This the base class for all runtime exceptions of the project.
@@ -110,7 +110,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * {@inheritDoc}
    */
-  public void printStackTrace(PrintStream stream, StringTranslator nationalizer) {
+  public void printStackTrace(PrintStream stream, NlsTranslator nationalizer) {
 
     synchronized (stream) {
       stream.println(getLocalizedMessage(nationalizer));
@@ -134,7 +134,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * {@inheritDoc}
    */
-  public void printStackTrace(PrintWriter writer, StringTranslator nationalizer) {
+  public void printStackTrace(PrintWriter writer, NlsTranslator nationalizer) {
 
     synchronized (writer) {
       writer.println(getLocalizedMessage(nationalizer));
@@ -167,7 +167,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * {@inheritDoc}
    */
-  public String getLocalizedMessage(StringTranslator nationalizer) {
+  public String getLocalizedMessage(NlsTranslator nationalizer) {
 
     StringBuffer message = new StringBuffer();
     getLocalizedMessage(nationalizer, message);
@@ -177,7 +177,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * {@inheritDoc}
    */
-  public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message) {
+  public void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message) {
 
     getNlsMessage().getLocalizedMessage(nationalizer, message);
     Throwable nested = getCause();

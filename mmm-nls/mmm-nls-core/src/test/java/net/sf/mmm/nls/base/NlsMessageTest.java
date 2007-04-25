@@ -8,7 +8,8 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslationSource;
+import net.sf.mmm.nls.api.NlsTranslator;
 import net.sf.mmm.nls.base.NlsMessageImpl;
 
 /**
@@ -39,15 +40,16 @@ public class NlsMessageTest extends TestCase {
     String suffix = "!";
     final String msg = hello + "{0}" + suffix;
     final String msgDe = helloDe + "{0}" + suffix;
-    NlsMessage testMessage = new NlsMessageImpl(msg, arg);
+    NlsMessageImpl testMessage = new NlsMessageImpl(msg, arg);
     assertEquals(testMessage.getInternationalizedMessage(), msg);
     assertEquals(testMessage.getArgumentCount(), 1);
     assertEquals(testMessage.getArgument(0), arg);
     assertEquals(testMessage.getMessage(), hello + arg + suffix);
-    StringTranslator translatorDe = new StringTranslator() {
+    NlsTranslator translatorDe = new AbstractNlsTranslator() {
 
-      public String translate(String message) {
+      public String translate(NlsTranslationSource source) {
 
+        String message = source.getInternationalizedMessage();
         if (message.equals(msg)) {
           return msgDe;
         }
@@ -69,10 +71,11 @@ public class NlsMessageTest extends TestCase {
     final String err = "The given value must be of the type \"{0}\" but has the type \"{1}\"!";
     final String errDe = "Der angegebene Wert muss vom Typ \"{0}\" sein hat aber den Typ \"{1}\"!";
     NlsMessage cascadedMessage = new NlsMessageImpl(err, simpleMessageInteger, simpleMessageReal);
-    StringTranslator translatorDe = new StringTranslator() {
+    NlsTranslator translatorDe = new AbstractNlsTranslator() {
 
-      public String translate(String message) {
+      public String translate(NlsTranslationSource source) {
 
+        String message = source.getInternationalizedMessage();
         if (message.equals(integer)) {
           return integerDe;
         } else if (message.equals(real)) {

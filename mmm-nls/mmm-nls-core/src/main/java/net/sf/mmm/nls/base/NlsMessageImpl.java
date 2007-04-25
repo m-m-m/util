@@ -8,7 +8,8 @@ import java.util.Locale;
 
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.api.NlsObject;
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslationSource;
+import net.sf.mmm.nls.api.NlsTranslator;
 
 /**
  * This is the implementation of the {@link NlsMessage} interface. It is NOT
@@ -16,18 +17,15 @@ import net.sf.mmm.nls.api.StringTranslator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NlsMessageImpl implements NlsMessage {
+public class NlsMessageImpl implements NlsMessage, NlsTranslationSource {
 
-  /** the universal translator for {@link #getLocalizedMessage()} */
-  private static StringTranslator staticTranslator;
+  /** @see #setUniversalTranslator(NlsTranslator) */
+  private static NlsTranslator staticTranslator;
 
-  /** the internationalized message */
+  /** @see #getInternationalizedMessage() */
   private final String message;
 
-  /** the parsed i18n message format */
-  private final MessageFormat messageFormat;
-
-  /** the dynamic (language independent) arguments */
+  /** @see #getArgument(int) */
   private final Object[] arguments;
 
   /**
@@ -36,8 +34,11 @@ public class NlsMessageImpl implements NlsMessage {
    */
   private final NlsObject[] nlsArguments;
 
-  /** the dynamic (language independent) arguments */
-  private final Object[] copyArguments;
+  /** @see #getBundleKey() */
+  private String bundleKey;
+
+  /** @see #getBundleName() */
+  private String bundleName;
 
   /**
    * The constructor.
@@ -52,11 +53,6 @@ public class NlsMessageImpl implements NlsMessage {
     super();
     this.message = internationalizedMessage;
     this.arguments = messageArguments;
-    if (this.arguments.length == 0) {
-      this.messageFormat = null;
-    } else {
-      this.messageFormat = new MessageFormat(internationalizedMessage, Locale.ENGLISH);
-    }
     boolean recursive = false;
     for (int i = 0; i < this.arguments.length; i++) {
       if (this.arguments[i] instanceof NlsObject) {
@@ -65,26 +61,22 @@ public class NlsMessageImpl implements NlsMessage {
       }
     }
     if (recursive) {
-      this.copyArguments = new Object[this.arguments.length];
       this.nlsArguments = new NlsObject[this.arguments.length];
       for (int i = 0; i < this.arguments.length; i++) {
         if (this.arguments[i] instanceof NlsObject) {
           this.nlsArguments[i] = (NlsObject) this.arguments[i];
-          this.copyArguments[i] = null;
         } else {
           this.nlsArguments[i] = null;
-          this.copyArguments[i] = this.arguments[i];
         }
       }
     } else {
       this.nlsArguments = null;
-      this.copyArguments = null;
     }
   }
 
   /**
-   * This method sets a universal {@link StringTranslator translator} this is
-   * used by {@link #getLocalizedMessage(StringTranslator, StringBuffer)}, if
+   * This method sets a universal {@link NlsTranslator translator} this is used
+   * by {@link #getLocalizedMessage(NlsTranslator, StringBuffer)}, if
    * <code>null</code> is given as translator (e.g. via
    * {@link net.sf.mmm.nls.api.NlsThrowable#getMessage()}). After the universal
    * translator is set, further calls of this method will have NO effect.<br>
@@ -108,7 +100,7 @@ public class NlsMessageImpl implements NlsMessage {
    * @param universalTranslator
    *        is the universal translator.
    */
-  public static void setUniversalTranslator(StringTranslator universalTranslator) {
+  public static void setUniversalTranslator(NlsTranslator universalTranslator) {
 
     if (universalTranslator == null) {
       NlsMessageImpl.staticTranslator = universalTranslator;
@@ -148,6 +140,49 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
+   * This method gets the key (technical UID) of the
+   * {@link #getInternationalizedMessage() internationalized message}.
+   * 
+   * @return the message key or <code>null</code> if NOT available.
+   */
+  public String getBundleKey() {
+
+    return this.bundleKey;
+  }
+
+  /**
+   * This method gets the
+   * {@link java.util.ResourceBundle#getBundle(String) base name} of the bundle
+   * containing the message.
+   * 
+   * @return the bundle name or <code>null</code> if NOT available.
+   */
+  public String getBundleName() {
+
+    return this.bundleName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setBundleName(String bundleName) {
+
+    if (this.bundleName == null) {
+      this.bundleName = bundleName;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setBundleKey(String bundleKey) {
+
+    if (this.bundleKey == null) {
+      this.bundleKey = bundleKey;
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   public String getMessage() {
@@ -166,7 +201,7 @@ public class NlsMessageImpl implements NlsMessage {
   /**
    * {@inheritDoc}
    */
-  public String getLocalizedMessage(StringTranslator nationalizer) {
+  public String getLocalizedMessage(NlsTranslator nationalizer) {
 
     StringBuffer result = new StringBuffer();
     getLocalizedMessage(nationalizer, result);
@@ -176,43 +211,41 @@ public class NlsMessageImpl implements NlsMessage {
   /**
    * {@inheritDoc}
    */
-  public void getLocalizedMessage(StringTranslator nationalizer, StringBuffer messageBuffer) {
+  public void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer messageBuffer) {
 
-    StringTranslator translator = nationalizer;
+    NlsTranslator translator = nationalizer;
     if (translator == null) {
       translator = NlsMessageImpl.staticTranslator;
       if (translator == null) {
         translator = IdentityTranslator.INSTANCE;
       }
     }
-    String i18nMsg = getInternationalizedMessage();
-    String localizedMessage = translator.translate(i18nMsg);
-    if (localizedMessage == null) {
-      messageBuffer.append('#');
-      localizedMessage = i18nMsg;
-    }
     if (getArgumentCount() == 0) {
+      String localizedMessage = translator.translate(this);
+      if (localizedMessage == null) {
+        messageBuffer.append('#');
+        localizedMessage = getInternationalizedMessage();
+      }
       messageBuffer.append(localizedMessage);
     } else {
-      MessageFormat msg;
-      if (localizedMessage == i18nMsg) {
-        msg = this.messageFormat;
-      } else {
-        // TODO: this causes parsing every time this is invoked.
-        // Should this be cached? But MessageFormat is NOT thread-safe!
-        msg = new MessageFormat(localizedMessage);
+      MessageFormat format = translator.translateFormat(this);
+      if (format == null) {
+        format = new MessageFormat(getInternationalizedMessage(), Locale.ENGLISH);
       }
       if (this.nlsArguments == null) {
-        msg.format(this.arguments, messageBuffer, null);
+        format.format(this.arguments, messageBuffer, null);
       } else {
         // given arguments may also be NLS objects
-        for (int i = 0; i < this.arguments.length; i++) {
-          if (this.nlsArguments[i] != null) {
-            NlsMessage subMessage = this.nlsArguments[i].toNlsMessage();
-            this.copyArguments[i] = subMessage.getLocalizedMessage(translator);
+        Object[] formattedArguments = new Object[this.arguments.length];
+        for (int argIndex = 0; argIndex < this.arguments.length; argIndex++) {
+          if (this.nlsArguments[argIndex] == null) {
+            formattedArguments[argIndex] = this.arguments[argIndex];
+          } else {
+            NlsMessage subMessage = this.nlsArguments[argIndex].toNlsMessage();
+            formattedArguments[argIndex] = subMessage.getLocalizedMessage(translator);
           }
         }
-        msg.format(this.copyArguments, messageBuffer, null);
+        format.format(formattedArguments, messageBuffer, null);
       }
     }
   }

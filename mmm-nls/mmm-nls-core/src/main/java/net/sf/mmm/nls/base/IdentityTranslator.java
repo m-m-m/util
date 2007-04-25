@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.base;
 
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslationSource;
+import net.sf.mmm.nls.api.NlsTranslator;
 
 /**
  * This is an implementation of the StringTranslatorIF interface that simply
@@ -11,10 +12,10 @@ import net.sf.mmm.nls.api.StringTranslator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class IdentityTranslator implements StringTranslator {
+public final class IdentityTranslator extends AbstractNlsTranslator {
 
   /** the singleton instance */
-  public static final StringTranslator INSTANCE = new IdentityTranslator();
+  public static final NlsTranslator INSTANCE = new IdentityTranslator();
 
   /**
    * The constructor.
@@ -27,9 +28,9 @@ public final class IdentityTranslator implements StringTranslator {
   /**
    * {@inheritDoc}
    */
-  public String translate(String message) {
+  public String translate(NlsTranslationSource source) {
 
-    return message;
+    return source.getInternationalizedMessage();
   }
 
 }

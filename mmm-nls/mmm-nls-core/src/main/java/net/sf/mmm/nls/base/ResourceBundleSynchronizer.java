@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Properties;
 
 import net.sf.mmm.nls.NlsBundleNlsCore;
+import net.sf.mmm.nls.api.NlsTranslator;
 
 /**
  * This class can be used to create and update the localized bundles
@@ -285,24 +286,12 @@ public class ResourceBundleSynchronizer {
    */
   public static void usage(int code) {
 
-    System.out.println("Usage: " + ResourceBundleSynchronizer.class.getName()
-        + " [<option>*] <bundle-class> [<locale>*]");
-    System.out.println();
-    System.out.println("Create and/or update resource bundle properties from <bundle-class>");
-    System.out.println("for the given locales (including the root locale).");
-    System.out.println();
-    System.out.println("Options:");
-    System.out.println("\t--help             print this help.");
-    System.out.println("\t--encoding <enc>   use the specified encoding (Default is "
-        + DEFAULT_ENCODING + ").");
-    System.out.println("\t--path <path>      use the specified base path (Default is "
-        + DEFAULT_BASE_PATH + ").");
-    System.out.println("\t--date-pattern <p> use the specified date pattern (Default is "
-        + DEFAULT_DATE_PATTERN + ").");
-    System.out.println();
-    System.out.println("Example:");
-    System.out.println(ResourceBundleSynchronizer.class.getName() + " "
-        + NlsBundleNlsCore.class.getName() + " de de_DE en en_US en_GB fr zh ja_JP zh_TW");
+    NlsMessageImpl message = new NlsMessageImpl(NlsBundleNlsCore.MSG_SYNCHRONIZER_USAGE,
+        ResourceBundleSynchronizer.class.getName(), DEFAULT_ENCODING, DEFAULT_BASE_PATH,
+        DEFAULT_DATE_PATTERN, NlsBundleNlsCore.class.getName());
+    NlsTranslator nationalizer = new SimpleStringTranslator(new NlsBundleNlsCore(), Locale
+        .getDefault());
+    System.out.println(message.getLocalizedMessage(nationalizer));
     System.exit(code);
   }
 

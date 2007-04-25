@@ -6,25 +6,30 @@ package net.sf.mmm.nls.api;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
+import net.sf.mmm.nls.base.NlsException;
+import net.sf.mmm.nls.base.NlsRuntimeException;
+
 /**
  * This is the interface that all exceptions and runtime exceptions of this
  * project should implement. <br>
- * In extension to usual throwables it brings enhanced native language support
- * (NLS). In a server environment there can be multiple users active at a time
- * with different locales. <br>
+ * In extension to a regular {@link Throwable throwable} it brings enhanced
+ * native language support (NLS). In a server environment there can be multiple
+ * users active at a time with different locales. <br>
  * This approach aims to simplify the NLS when creating throwables with error
  * messages. It has the following principles:
  * <ul>
- * <li>The throwable itself contains the message in english language so this is
+ * <li>The throwable itself contains the message in English language so this is
  * always available even if nationalization fails.</li>
- * <li>The language independed parts of the message are separated in an
+ * <li>The language independent parts of the message are separated in an
  * argument list that is inserted into the message after nationalization.</li>
- * <li>The trowable itself does not know the component that does the actual
- * nationalization and uses a simplest callback interface possible (
- * {@link net.sf.mmm.nls.api.StringTranslator})</li>
+ * <li>The throwable itself does not know the component that does the actual
+ * localization which is done by the callback interface
+ * {@link net.sf.mmm.nls.api.NlsTranslator}.</li>
  * </ul>
  * 
  * @see NlsMessage
+ * @see NlsException
+ * @see NlsRuntimeException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -43,25 +48,22 @@ public interface NlsThrowable {
   /**
    * This method gets the localized message as string.
    * 
-   * @see NlsThrowable#getLocalizedMessage(StringTranslator, StringBuffer)
+   * @see NlsThrowable#getLocalizedMessage(NlsTranslator, StringBuffer)
    * 
    * @param nationalizer
    *        is used to translate the original i18n message.
    * @return the localized message.
    */
-  String getLocalizedMessage(StringTranslator nationalizer);
+  String getLocalizedMessage(NlsTranslator nationalizer);
 
   /**
-   * This method writes the nationalized (or localized) message to the given
-   * string buffer. <br>
-   * The actual nationalization is done by the given translator who will get the
-   * value of the contained internationalized message without arguments
-   * {@link net.sf.mmm.nls.api.NlsMessage#getInternationalizedMessage()}. If
-   * this translator fails (returns <code>null</code>), the original message
-   * (in english language) will be used. After translation is done, the language
-   * independed arguments will be filled in the translated message string.
+   * This method writes the localized message to the given string buffer. <br>
+   * The actual localization is done by the given translator. If this translator
+   * fails (returns <code>null</code>), the original message (in English
+   * language) will be used. After translation is done, the language independent
+   * arguments will be filled in the translated message string.
    * 
-   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(StringTranslator,
+   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(NlsTranslator,
    *      StringBuffer)
    * 
    * @param nationalizer
@@ -69,17 +71,17 @@ public interface NlsThrowable {
    * @param message
    *        is the buffer where to write the message to.
    */
-  void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message);
+  void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message);
 
   /**
-   * This method prints the strack trace with localized exception message(s).
+   * This method prints the stack trace with localized exception message(s).
    * 
    * @param stream
-   *        is where to write the strack trace.
+   *        is where to write the stack trace.
    * @param nationalizer
    *        translates the original message. May be <code>null</code>.
    */
-  void printStackTrace(PrintStream stream, StringTranslator nationalizer);
+  void printStackTrace(PrintStream stream, NlsTranslator nationalizer);
 
   /**
    * This method prints the strack trace with localized exception message(s).
@@ -89,6 +91,6 @@ public interface NlsThrowable {
    * @param nationalizer
    *        translates the original message. Mey be <code>null</code>.
    */
-  void printStackTrace(PrintWriter writer, StringTranslator nationalizer);
+  void printStackTrace(PrintWriter writer, NlsTranslator nationalizer);
 
 }

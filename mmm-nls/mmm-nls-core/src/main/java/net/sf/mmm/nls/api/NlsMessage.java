@@ -4,7 +4,12 @@
 package net.sf.mmm.nls.api;
 
 /**
- * This is the interface for an internationalized message. <br>
+ * This is the interface for an internationalized message. It stores a message
+ * separated from language independent {@link #getArgument(int) arguments}.
+ * This approach ensures that the message is always available in the
+ * internationalized language (should be English) while it still allows to
+ * {@link #getLocalizedMessage(NlsTranslator) translate} the message to a native
+ * language.<br>
  * For the term <em>internationalization</em> usually the shortcut
  * <em>i18n</em> is used.
  * 
@@ -13,25 +18,7 @@ package net.sf.mmm.nls.api;
 public interface NlsMessage extends NlsObject {
 
   /**
-   * This method gets the internationalized message that can be nationalized (
-   * {@link StringTranslator#translate(String) translated} to the locales
-   * language). The language independent arguments are filled into the message
-   * after that nationalization process. <br>
-   * E.g. the i18n message may be <code>"Welcome {0}!"</code> and there is
-   * one argument that is the string <code>"Joelle"</code>. The final
-   * result will then be <code>"Welcome Joelle!"</code>. But the message
-   * can also be translated to german as <code>"Willkommen {0}!"</code> and
-   * finally result in <code>"Willkommen Joelle!"</code>.
-   * 
-   * @see NlsMessage#getArgument(int)
-   * @see java.text.MessageFormat
-   * 
-   * @return the message for internationalization.
-   */
-  String getInternationalizedMessage();
-
-  /**
-   * This method gets the number of language independed arguments of this
+   * This method gets the number of language independent arguments of this
    * exception.
    * 
    * @return the argument count.
@@ -39,7 +26,8 @@ public interface NlsMessage extends NlsObject {
   int getArgumentCount();
 
   /**
-   * This method gets the language independed argument at the given index.
+   * This method gets the language independent argument at the given
+   * <code>index</code>.
    * 
    * @param index
    *        is the position of the requested argument.
@@ -49,18 +37,24 @@ public interface NlsMessage extends NlsObject {
 
   /**
    * This method gets the untranslated message (default language should be
-   * english) with arguments filled in.
+   * English) with arguments filled in.
    * 
-   * @see NlsMessage#getLocalizedMessage(StringTranslator)
+   * @see NlsMessage#getLocalizedMessage(NlsTranslator)
    * 
    * @return the i18n message with arguments filled in.
    */
   String getMessage();
 
   /**
-   * This method tries to get the localized message as string. It simply calls
-   * {@link NlsMessage#getLocalizedMessage(StringTranslator)} will
-   * <code>null</code> as argument.
+   * This method tries to get the localized message as string. Since no
+   * translator is specified, the implementation should try its best to do the
+   * translation on its own according to the callers
+   * {@link java.util.Locale locale}. Therefore this method has to do some
+   * magic behind the scenes. This may only work if you follow specific rules of
+   * the implementation of this interface. If this fails or is NOT supported,
+   * the {@link #getMessage() untranslated} message should be used.<br>
+   * <b>ATTENTION:</b> If possible try to avoid using this method and use
+   * {@link #getLocalizedMessage(NlsTranslator)} instead.
    * 
    * @return the localized message.
    */
@@ -69,46 +63,28 @@ public interface NlsMessage extends NlsObject {
   /**
    * This method gets the localized message as string.
    * 
-   * @see NlsMessage#getLocalizedMessage(StringTranslator, StringBuffer)
+   * @see NlsMessage#getLocalizedMessage(NlsTranslator, StringBuffer)
    * 
    * @param nationalizer
-   *        is used to translates the original
-   *        {@link NlsMessage#getInternationalizedMessage() "internationalized message"}.
-   *        If <code>null</code> is given, the implementation should try its
-   *        best to do the translation on its own according to the callers
-   *        {@link java.util.Locale locale}. Therefore this method has to do
-   *        some magic behind the scenes. This may only work if you follow
-   *        specific rules of the implementation of this interface. If this
-   *        fails or is NOT supported, the {@link #getMessage() untranslated}
-   *        message should be used.
+   *        is used to translate the message.
    * @return the localized message.
    */
-  String getLocalizedMessage(StringTranslator nationalizer);
+  String getLocalizedMessage(NlsTranslator nationalizer);
 
   /**
-   * This method writes the nationalized (or localized) message to the given
-   * string buffer. <br>
-   * The actual nationalization is done by the given translator who will get
-   * the
-   * {@link NlsMessage#getInternationalizedMessage() internationalized-message}.
-   * If this translator fails (returns <code>null</code>), the original
-   * message (in english language) will be used. After translation is done,
-   * the language independed arguments will be filled in the translated
-   * message string.
+   * This method writes the localized message to the given <code>buffer</code>.
+   * <br>
+   * The actual localization is done by the given <code>translator</code>. If
+   * this translator fails (returns <code>null</code>), the original message
+   * (in English language) will be used. After translation is done, the language
+   * independent arguments will be filled in the translated message string
+   * according to the locale of the translated message.
    * 
    * @param nationalizer
-   *        is used to translates the original
-   *        {@link NlsMessage#getInternationalizedMessage() "internationalized message"}.
-   *        If <code>null</code> is given, the implementation should try its
-   *        best to do the translation on its own according to the callers
-   *        {@link java.util.Locale locale}. Therefore this method has to do
-   *        some magic behind the scenes. This may only work if you follow
-   *        specific rules of the implementation of this interface. If this
-   *        fails or is NOT supported, the {@link #getMessage() untranslated}
-   *        message should be used.
-   * @param message
+   *        is used to translates the original message.
+   * @param buffer
    *        is the buffer where to write the message to.
    */
-  void getLocalizedMessage(StringTranslator nationalizer, StringBuffer message);
+  void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer buffer);
 
 }

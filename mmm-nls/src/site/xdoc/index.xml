@@ -83,9 +83,9 @@ public class IllegalLoginException extends NlsException {
 }
 	</source>
         Now if you throw a <code>IllegalLoginException</code>, it will behave as a
-	"regular" exception with a english message. Additionally it has methods
+	"regular" exception with an English message. Additionally it has methods
 	<code>getLocalizedMessage</code> and <code>printStackTrace</code> that
-	take a <code>StringTranslator</code> interface as argument.
+	take a <code>NlsTranslator</code> interface as argument.
 	</p>
       </subsection>
     </section>

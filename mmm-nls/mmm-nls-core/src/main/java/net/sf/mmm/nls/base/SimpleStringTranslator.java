@@ -6,10 +6,11 @@ package net.sf.mmm.nls.base;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.nls.api.StringTranslator;
+import net.sf.mmm.nls.api.NlsTranslationSource;
 
 /**
- * This is a simple implementation of the {@link StringTranslator} interface. It
+ * This is a simple implementation of the
+ * {@link net.sf.mmm.nls.api.NlsTranslator} interface. It
  * {@link ResourceBundle#getBundle(String, Locale) looks} for a regular
  * {@link ResourceBundle bundle} with the same {@link Class#getName() name} as
  * the given {@link AbstractResourceBundle nls-bundle} using the given
@@ -20,7 +21,7 @@ import net.sf.mmm.nls.api.StringTranslator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SimpleStringTranslator implements StringTranslator {
+public class SimpleStringTranslator extends AbstractNlsTranslator {
 
   /** the original bundle */
   private final AbstractResourceBundle nlsBundle;
@@ -48,15 +49,20 @@ public class SimpleStringTranslator implements StringTranslator {
   /**
    * {@inheritDoc}
    */
-  public String translate(String message) {
+  public String translate(NlsTranslationSource source) {
 
-    String result = message;
-    String key = this.nlsBundle.getKey(message);
-    if (key != null) {
-      Object localMessage = this.localeBundle.getObject(key);
-      if (localMessage != null) {
-        result = localMessage.toString();
+    String result = null;
+    String key = source.getBundleKey();
+    if (key == null) {
+      String msg = source.getInternationalizedMessage();
+      key = this.nlsBundle.getKey(msg);
+      if (key != null) {
+        source.setBundleKey(key);
+        source.setBundleName(this.nlsBundle.getClass().getName());
       }
+    }
+    if (key != null) {
+      result = this.localeBundle.getString(key);
     }
     return result;
   }
