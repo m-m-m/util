@@ -48,7 +48,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
 
   /** @see #getModifiers() */
   private final ClassModifiers modifiers;
-
+  
   /**
    * The constructor.
    * 
@@ -82,7 +82,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
       }
     }
   }
-
+  
   /**
    * {@inheritDoc}
    */

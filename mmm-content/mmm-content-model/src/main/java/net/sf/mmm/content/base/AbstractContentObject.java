@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentField;
@@ -29,6 +32,9 @@ public abstract class AbstractContentObject implements ContentObject {
   /** the deleted-flag */
   private boolean deletedFlag;
 
+  /** @see #getMetaData() */
+  private final Map<String, String> metaData;
+
   /**
    * The constructor.
    * 
@@ -44,6 +50,7 @@ public abstract class AbstractContentObject implements ContentObject {
     this.name = objectName;
     this.deletedFlag = false;
     this.id = objectId;
+    this.metaData = new HashMap<String, String>();
   }
 
   /**
@@ -120,7 +127,17 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * TODO: javadoc
+   * {@inheritDoc}
+   */
+  public Map<String, String> getMetaData() {
+
+    return this.metaData;
+  }
+
+  /**
+   * This method gets the value of the given <code>field</code>.
+   * 
+   * @see #getFieldValue(String)
    * 
    * @param field
    * @param fieldName
