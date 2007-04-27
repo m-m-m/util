@@ -11,9 +11,8 @@
       <p>
       To setup your development environment follow these steps:
       <ol>
-  <li>Install a <a href="http://java.sun.com">Java JDK</a> in version 5 (1.5) or 
-  higher (6 is recommended). Open a shell and type the following command to 
-  verify your installation:
+  <li>Install the <a href="http://java.sun.com">Java JDK</a> version 6 (1.6). 
+  Open a shell and type the following command to verify your installation:
     <source>
 java -version
     </source>
