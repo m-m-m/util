@@ -31,14 +31,18 @@ public abstract class AbstractNlsTranslator implements NlsTranslator {
   /**
    * {@inheritDoc}
    */
-  public MessageFormat translateFormat(NlsTranslationSource source) {
+  public boolean translate(NlsTranslationSource source, Object[] arguments,
+      StringBuffer messageBuffer) {
 
     String message = translate(source);
     if (message == null) {
-      return null;
+      return false;
     } else {
-      return new MessageFormat(message, getLocale());
+      MessageFormat format = new MessageFormat(message);
+      format.format(arguments, messageBuffer, null);
+      return true;
     }
+
   }
 
 }

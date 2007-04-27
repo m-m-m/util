@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.api;
 
-import java.text.MessageFormat;
-
 /**
  * This is the callback interface for translating a text-message to a
  * {@link java.util.Locale locale}-specific language.<br>
@@ -14,7 +12,7 @@ import java.text.MessageFormat;
 public interface NlsTranslator {
 
   /**
-   * This method translates a given message string.<br>
+   * This method translates a given <code>source</code>.<br>
    * Instead of using keys for direct lookup of the message from a
    * {@link java.util.ResourceBundle} this method also works with the
    * {@link NlsTranslationSource#getInternationalizedMessage() internationalized message}.
@@ -35,7 +33,7 @@ public interface NlsTranslator {
    * @see NlsTranslationSource#getInternationalizedMessage()
    * 
    * @param source
-   *        is the source-data to translate.
+   *        contains the source-data to translate.
    * @return the translation of the given message or <code>null</code> if no
    *         translation is available.
    */
@@ -43,15 +41,19 @@ public interface NlsTranslator {
 
   /**
    * This method behaves like {@link #translate(NlsTranslationSource)} but
-   * returns the translated message as {@link MessageFormat}. This allows to
-   * construct the {@link MessageFormat} with the appropriate
-   * {@link java.util.Locale} and gives ability for advanced caching strategies.
+   * additionally fills the given <code>arguments</code> into the translated
+   * message using {@link java.text.MessageFormat}.
    * 
    * @param source
-   *        is the source-data to translate.
-   * @return the translation of the given message or <code>null</code> if no
-   *         translation is available.
+   *        contains the source-data to translate.
+   * @param arguments
+   *        are the variable arguments to fill in the message.
+   * @param messageBuffer
+   *        is the buffer where the translation will be appended to.
+   * @return <code>true</code> if the (translated) message has been appended
+   *         to the given <code>messageBuffer</code> or <code>false</code>
+   *         if the translation failed.
    */
-  MessageFormat translateFormat(NlsTranslationSource source);
+  boolean translate(NlsTranslationSource source, Object[] arguments, StringBuffer messageBuffer);
 
 }

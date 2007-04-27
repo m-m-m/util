@@ -203,7 +203,7 @@ public class NlsMessageImpl implements NlsMessage, NlsTranslationSource {
    */
   public String getLocalizedMessage(NlsTranslator nationalizer) {
 
-    StringBuffer result = new StringBuffer();
+    StringBuffer result = new StringBuffer(this.message.length() + 16);
     getLocalizedMessage(nationalizer, result);
     return result.toString();
   }
@@ -228,23 +228,25 @@ public class NlsMessageImpl implements NlsMessage, NlsTranslationSource {
       }
       messageBuffer.append(localizedMessage);
     } else {
-      MessageFormat format = translator.translateFormat(this);
-      if (format == null) {
-        format = new MessageFormat(getInternationalizedMessage(), Locale.ENGLISH);
-      }
+      Object[] formattedArguments;
       if (this.nlsArguments == null) {
-        format.format(this.arguments, messageBuffer, null);
+        formattedArguments = this.arguments;
       } else {
-        // given arguments may also be NLS objects
-        Object[] formattedArguments = new Object[this.arguments.length];
+        // given arguments contain NLS objects
+        formattedArguments = new Object[this.arguments.length];
         for (int argIndex = 0; argIndex < this.arguments.length; argIndex++) {
           if (this.nlsArguments[argIndex] == null) {
             formattedArguments[argIndex] = this.arguments[argIndex];
           } else {
             NlsMessage subMessage = this.nlsArguments[argIndex].toNlsMessage();
+            // we can not work with out string buffer here...
             formattedArguments[argIndex] = subMessage.getLocalizedMessage(translator);
           }
         }
+      }
+      boolean success = translator.translate(this, formattedArguments, messageBuffer);
+      if (!success) {
+        MessageFormat format = new MessageFormat(getInternationalizedMessage(), Locale.ENGLISH);
         format.format(formattedArguments, messageBuffer, null);
       }
     }

@@ -6,9 +6,6 @@ package net.sf.mmm.nls.api;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-import net.sf.mmm.nls.base.NlsException;
-import net.sf.mmm.nls.base.NlsRuntimeException;
-
 /**
  * This is the interface that all exceptions and runtime exceptions of this
  * project should implement. <br>
@@ -28,8 +25,8 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  * </ul>
  * 
  * @see NlsMessage
- * @see NlsException
- * @see NlsRuntimeException
+ * @see net.sf.mmm.nls.base.NlsException
+ * @see net.sf.mmm.nls.base.NlsRuntimeException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
