@@ -55,7 +55,7 @@ public class ContentParserHtml extends ContentParserText {
       .compile(".*<meta name=[\"']keywords[\"'] content=[\"']([^\"']*)[\"']");
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserHtml() {
 
@@ -71,9 +71,9 @@ public class ContentParserHtml extends ContentParserText {
    * @return the parsed properties.
    * @throws Exception
    */
-  protected Properties parseJtidy(InputStream inputStream, long filesize) throws Exception {
+  protected void parseJtidy(InputStream inputStream, long filesize, Properties properties)
+      throws Exception {
 
-    Properties properties = new Properties();
     Tidy tidy = new Tidy();
     tidy.setErrout(new PrintWriter(new NullWriter()));
     Document xmlDoc = tidy.parseDOM(inputStream, null);
@@ -111,18 +111,17 @@ public class ContentParserHtml extends ContentParserText {
     if (bodyElement != null) {
       properties.setProperty(PROPERTY_KEY_TEXT, getTextContent(bodyElement));
     }
-    return properties;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  public void parse(InputStream inputStream, long filesize, Properties properties) throws Exception {
 
     if ((filesize > 0) && (filesize < getMaximumBufferSize())) {
-      return parseJtidy(inputStream, filesize);
+      parseJtidy(inputStream, filesize, properties);
     } else {
-      return super.parse(inputStream, filesize);
+      super.parse(inputStream, filesize, properties);
     }
   }
 
@@ -157,7 +156,7 @@ public class ContentParserHtml extends ContentParserText {
         }
       } else if (!inTag) {
         if (c == '&') {
-          // TODO: unescaping of entities...
+          // TODO: un-escaping of entities...
           buffer.append(c);
         } else {
           buffer.append(c);

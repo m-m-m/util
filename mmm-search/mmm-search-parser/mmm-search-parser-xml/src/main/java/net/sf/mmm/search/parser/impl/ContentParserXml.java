@@ -19,7 +19,6 @@ public class ContentParserXml implements ContentParser {
 
   /**
    * The constructor. 
-   * 
    */
   public ContentParserXml() {
 
@@ -57,7 +56,7 @@ public class ContentParserXml implements ContentParser {
               // maybe standalone or version attribute...
               // read to next space
               while (dataByte != ' ') {
-                // this may potentially throw an IOException if eof is reached
+                // this may potentially throw an IOException if EOF is reached
                 // but in this case we cannot extract useful data anyways...
                 dataByte = inputStream.read();
               }

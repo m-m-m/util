@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.filter;
 
 /**
  * This is the interface for a filter that {@link #accept(char) decides} if a
@@ -23,7 +23,7 @@ public interface CharFilter {
   boolean accept(char c);
 
   /**
-   * A filter that {@link #accept(char) accepts} only the latin digits '0'-'9'.
+   * A filter that {@link #accept(char) accepts} only the Latin digits '0'-'9'.
    */
   CharFilter LATIN_DIGIT_FILTER = new CharFilter() {
 
@@ -34,7 +34,7 @@ public interface CharFilter {
   };
 
   /**
-   * A filter that {@link #accept(char) accepts} only the latin ASCII letters
+   * A filter that {@link #accept(char) accepts} only the Latin ASCII letters
    * 'a'-'z' and 'A'-'Z'.
    */
   CharFilter ASCII_LETTER_FILTER = new CharFilter() {

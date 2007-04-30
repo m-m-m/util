@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.filter.PatternFileFilter;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and
@@ -43,7 +44,7 @@ public final class FileUtil {
    * @throws IOException
    *         if the operation fails.
    */
-  public void copyFile(File source, File destination) throws IOException {
+  public static void copyFile(File source, File destination) throws IOException {
 
     FileInputStream sourceStream = new FileInputStream(source);
     try {
@@ -58,7 +59,7 @@ public final class FileUtil {
       sourceStream.close();
     }
   }
-  
+
   /**
    * This method copies the file or directory given by <code>source</code>
    * into the given <code>destination</code>.<br>
@@ -89,7 +90,7 @@ public final class FileUtil {
    * @throws IOException
    *         if the operation fails.
    */
-  public void copyRecursive(File source, File destination, boolean allowOverwrite)
+  public static void copyRecursive(File source, File destination, boolean allowOverwrite)
       throws IOException {
 
     copyRecursive(source, destination, allowOverwrite, null);
@@ -126,15 +127,16 @@ public final class FileUtil {
    *        is a {@link FileFilter} that {@link FileFilter#accept(File) decides}
    *        which files should be copied. Only
    *        {@link FileFilter#accept(File) accepted} files and directories are
-   *        copied, othes will be ignored.
+   *        copied, others will be ignored.
    * @throws IOException
    *         if the operation fails.
    */
-  public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter)
-      throws IOException {
+  public static void copyRecursive(File source, File destination, boolean allowOverwrite,
+      FileFilter filter) throws IOException {
 
     if (!allowOverwrite && (destination.exists())) {
-      throw new IOException("Destination path \"" + destination.getAbsolutePath() + "\" already exists!");      
+      throw new IOException("Destination path \"" + destination.getAbsolutePath()
+          + "\" already exists!");
     }
     copyRecursive(source, destination, filter);
   }
@@ -166,11 +168,12 @@ public final class FileUtil {
    *        is a {@link FileFilter} that {@link FileFilter#accept(File) decides}
    *        which files should be copied. Only
    *        {@link FileFilter#accept(File) accepted} files and directories are
-   *        copied, othes will be ignored.
+   *        copied, others will be ignored.
    * @throws IOException
    *         if the operation fails.
    */
-  private void copyRecursive(File source, File destination, FileFilter filter) throws IOException {
+  private static void copyRecursive(File source, File destination, FileFilter filter)
+      throws IOException {
 
     if (source.isDirectory()) {
       boolean okay = destination.mkdir();
@@ -205,7 +208,7 @@ public final class FileUtil {
    * @throws IOException
    *         if a file or directory could NOT be {@link File#delete() deleted}.
    */
-  public int deleteRecursive(File path) throws IOException {
+  public static int deleteRecursive(File path) throws IOException {
 
     int deleteCount = 0;
     if (path.exists()) {
@@ -237,7 +240,7 @@ public final class FileUtil {
    * @throws IOException
    *         if a file or directory could NOT be {@link File#delete() deleted}.
    */
-  public int deleteChildren(File directory) throws IOException {
+  public static int deleteChildren(File directory) throws IOException {
 
     int deleteCount = 0;
     File[] children = directory.listFiles();
@@ -264,11 +267,13 @@ public final class FileUtil {
    * Examples:
    * <ul>
    * <li>
-   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, "*", {@link FileType#DIRECTORY})</code>
+   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
+   * "*", {@link FileType#DIRECTORY})</code>
    * will return all {@link File#isDirectory() directories} in <code>cwd</code>
    * </li>
    * <li>
-   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, "*&#47;*.xml", {@link FileType#FILE})</code>
+   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
+   * "*&#47;*.xml", {@link FileType#FILE})</code>
    * will return all {@link File#isFile() files} from all
    * {@link File#list() subdirectories} of <code>cwd</code> that end with
    * ".xml" </li>

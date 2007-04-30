@@ -5,7 +5,7 @@ package net.sf.mmm.content.model.api;
 
 import java.util.List;
 
-import net.sf.mmm.util.io.SizedIterable;
+import net.sf.mmm.util.collection.SizedIterable;
 
 /**
  * This is the interface of a content-class. It reflects the structure of the

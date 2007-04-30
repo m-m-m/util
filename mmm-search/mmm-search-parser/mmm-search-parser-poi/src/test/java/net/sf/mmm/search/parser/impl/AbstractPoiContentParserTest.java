@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 public class AbstractPoiContentParserTest extends TestCase {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public AbstractPoiContentParserTest() {
 

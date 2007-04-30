@@ -17,8 +17,8 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.impl.IdImpl;
-import net.sf.mmm.util.io.CollectionIterable;
-import net.sf.mmm.util.io.SizedIterable;
+import net.sf.mmm.util.collection.CollectionIterable;
+import net.sf.mmm.util.collection.SizedIterable;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}

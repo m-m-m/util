@@ -15,8 +15,8 @@ import net.sf.mmm.configuration.base.path.condition.CompareCondition;
 import net.sf.mmm.configuration.base.path.condition.Condition;
 import net.sf.mmm.configuration.base.path.condition.IndexCondition;
 import net.sf.mmm.configuration.base.path.condition.PathCondition;
-import net.sf.mmm.util.ListCharFilter;
 import net.sf.mmm.util.StringParser;
+import net.sf.mmm.util.filter.ListCharFilter;
 
 /**
  * This is a parser for descendant-paths.

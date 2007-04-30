@@ -21,7 +21,7 @@ import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
-import net.sf.mmm.util.io.SizedIterable;
+import net.sf.mmm.util.collection.SizedIterable;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**

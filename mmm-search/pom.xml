@@ -19,5 +19,6 @@
   <modules>
     <module>mmm-search-parser</module>
     <module>mmm-search-engine</module>
+    <module>mmm-search-indexer</module>
   </modules>
 </project>

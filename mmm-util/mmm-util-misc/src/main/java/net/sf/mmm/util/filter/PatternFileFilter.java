@@ -1,17 +1,17 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.io;
+package net.sf.mmm.util.filter;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FilenameFilter;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.io.FileType;
 
 /**
- * This is the implementation of a {@link FilenameFilter} that filters using a
+ * This is the implementation of a {@link FileFilter} that filters using a
  * {@link java.util.regex.Pattern pattern}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -19,14 +19,14 @@ import net.sf.mmm.util.StringUtil;
 public class PatternFileFilter implements FileFilter {
 
   /**
-   * the pattern that must match in order to {@link #accept(File) accept} a
-   * file by its {@link File#getName() name}.
+   * the pattern that must match in order to {@link #accept(File) accept} a file
+   * by its {@link File#getName() name}.
    */
   private final Pattern pattern;
 
   /**
-   * The type of the {@link #accept(File) acceptable} files or
-   * <code>null</code> if any type is acceptable.
+   * The type of the {@link #accept(File) acceptable} files or <code>null</code>
+   * if any type is acceptable.
    */
   private final FileType fileType;
 

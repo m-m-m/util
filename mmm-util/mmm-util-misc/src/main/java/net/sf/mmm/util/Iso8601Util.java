@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import net.sf.mmm.util.filter.CharFilter;
+
 import sun.util.calendar.ZoneInfo;
 
 /**

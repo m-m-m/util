@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.filter;
 
 /**
  * This is an implementation of the {@link CharFilter} interface that
@@ -54,7 +54,7 @@ public class ListCharFilter implements CharFilter {
     }
     // the char was NOT found!
     // if blacklist -> return true because c is NOT blacklisted
-    // if whitelist -> return false because c is NOT in the whiltelist
+    // if whitelist -> return false because c is NOT in the whitelist
     return this.blacklist;
   }
 

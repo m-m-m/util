@@ -8,7 +8,6 @@ import java.net.URL;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
@@ -103,26 +102,26 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * The constructor.
    * 
-   * @param SWTDisplay
+   * @param swtDisplay
    *        is the display to use.
    */
-  public UIFactorySwt(Display SWTDisplay) {
+  public UIFactorySwt(Display swtDisplay) {
 
-    this(SWTDisplay, new UIDeviceImpl(SWTDisplay.getPrimaryMonitor()));
+    this(swtDisplay, new UIDeviceImpl(swtDisplay.getPrimaryMonitor()));
   }
 
   /**
    * The constructor.
    * 
-   * @param SWTDisplay
+   * @param swtDisplay
    *        is the display to use.
    * @param uiDevice
    *        is the graphics device the display of this factory belongs to.
    */
-  public UIFactorySwt(Display SWTDisplay, UIDeviceImpl uiDevice) {
+  public UIFactorySwt(Display swtDisplay, UIDeviceImpl uiDevice) {
 
     super();
-    this.swtDisplay = SWTDisplay;
+    this.swtDisplay = swtDisplay;
     this.display = new UIDisplayImpl(this, uiDevice, this.swtDisplay);
   }
 
@@ -150,9 +149,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(java.lang.String,
-   *      net.sf.mmm.ui.toolkit.api.UIPicture,
-   *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
+   * {@inheritDoc}
    */
   public UIButton createButton(String text, UIPicture icon, ButtonStyle style) {
 
@@ -371,7 +368,8 @@ public class UIFactorySwt extends AbstractUIFactory {
 
   /**
    * This method converts the given <code>buttonStyle</code> to the according
-   * {@link org.eclipse.swt.SWT} constant for a {@link MenuItem}.
+   * {@link org.eclipse.swt.SWT} constant for a
+   * {@link org.eclipse.swt.widgets.MenuItem}.
    * 
    * @param buttonStyle
    *        is the button-style to convert.

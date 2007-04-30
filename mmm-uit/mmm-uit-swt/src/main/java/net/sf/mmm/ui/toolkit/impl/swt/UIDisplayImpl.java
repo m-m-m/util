@@ -19,13 +19,13 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   /**
    * This inner class is used to get the display size.
    */
-  private static class SizeGetter implements Runnable {
+  private static final class SizeGetter implements Runnable {
 
     /** the size */
-    Rectangle size;
+    private Rectangle size;
 
     /** the display */
-    Display display;
+    private Display display;
 
     /**
      * The constructor.
@@ -131,7 +131,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
         this.display.sleep();
       }
     } else {
-      // sleep some secs...
+      // sleep some seconds...
     }
   }
 

@@ -18,7 +18,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
     MutableSearchEntry {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractMutableSearchEntry() {
 
@@ -26,14 +26,13 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   }
 
   /**
+   * {@inheritDoc}
+   * 
    * This is a default implementation of this feature used as fallback. Please
    * override this method if the underlying search-engine supports it.
-   * 
-   * @see net.sf.mmm.search.indexer.api.MutableSearchEntry#setProperty(java.lang.String,
-   *      java.io.Reader)
    */
   public void setProperty(String name, Reader valueReader) {
-    
+
   }
 
   /**
@@ -74,6 +73,14 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
   public void setType(String type) {
 
     setProperty(PROPERTY_TYPE, type, Mode.NOT_TOKENIZED);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setSource(String source) {
+
+    setProperty(PROPERTY_SOURCE, source, Mode.NOT_TOKENIZED);
   }
 
   /**

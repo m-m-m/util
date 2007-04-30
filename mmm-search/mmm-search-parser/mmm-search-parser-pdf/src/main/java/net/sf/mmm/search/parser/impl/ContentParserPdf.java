@@ -23,7 +23,7 @@ import net.sf.mmm.search.parser.base.AbstractContentParser;
 public class ContentParserPdf extends AbstractContentParser {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserPdf() {
 
@@ -33,16 +33,15 @@ public class ContentParserPdf extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  public void parse(InputStream inputStream, long filesize, Properties properties) throws Exception {
 
-    Properties properties = new Properties();
     PDFParser parser = new PDFParser(inputStream);
     parser.parse();
     PDDocument pdfDoc = parser.getPDDocument();
     try {
       if (pdfDoc.isEncrypted()) {
         // pdfDoc.decrypt("password");
-        return properties;
+        return;
       }
       PDDocumentInformation info = pdfDoc.getDocumentInformation();
       String title = info.getTitle();
@@ -60,12 +59,11 @@ public class ContentParserPdf extends AbstractContentParser {
 
       if (filesize < getMaximumBufferSize()) {
         PDFTextStripper stripper = new PDFTextStripper();
-        properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));        
+        properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));
       }
     } finally {
       pdfDoc.close();
     }
-    return properties;
   }
 
 }

@@ -72,6 +72,14 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   /**
    * {@inheritDoc}
    */
+  public String getSource() {
+  
+    return getProperty(PROPERTY_SOURCE);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   public Long getSize() {
 
     Long size = null;

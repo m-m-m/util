@@ -6,8 +6,8 @@ package net.sf.mmm.search.api;
 import java.util.Iterator;
 
 /**
- * This interface represents an entry of the search-index. It is either used
- * for {@link net.sf.mmm.search.indexer.api.SearchIndexer indexing} or
+ * This interface represents an entry of the search-index. It is either used for
+ * {@link net.sf.mmm.search.indexer.api.SearchIndexer indexing} or
  * {@link net.sf.mmm.search.engine.api.SearchEngine retrieval}.
  * 
  * @see net.sf.mmm.search.engine.api.SearchHit
@@ -74,10 +74,16 @@ public interface SearchEntry {
   String PROPERTY_TYPE = "type";
 
   /**
-   * The name of the "lang" property. This is an optional property that specifies
-   * the language of the content.
+   * The name of the "lang" property. This is an optional property that
+   * specifies the language of the content.
    */
   String PROPERTY_LANGUAGE = "lang";
+
+  /**
+   * The name of the "source" property. This is an optional property that
+   * specifies the source of the content.
+   */
+  String PROPERTY_SOURCE = "source";
 
   /**
    * This method is a generic accessor for additional properties of this
@@ -155,6 +161,15 @@ public interface SearchEntry {
    * @return the type of this entry or <code>null</code> if NOT available.
    */
   String getType();
+
+  /**
+   * This method gets the source of the content.
+   * 
+   * @see SearchEntry#PROPERTY_SOURCE
+   * 
+   * @return the source of this entry or <code>null</code> if NOT available.
+   */
+  String getSource();
 
   /**
    * This method gets the size of the content.

@@ -6,9 +6,9 @@ package net.sf.mmm.util.http;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.CharFilter;
-import net.sf.mmm.util.ListCharFilter;
 import net.sf.mmm.util.StringParser;
+import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.ListCharFilter;
 
 /**
  * This class represents an HTTP message.

@@ -27,7 +27,7 @@ public class ContentParserText extends AbstractContentParser {
   private int defaultCapacity;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserText() {
 
@@ -136,9 +136,8 @@ public class ContentParserText extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  public void parse(InputStream inputStream, long filesize, Properties properties) throws Exception {
 
-    Properties properties = new Properties();
     int maxBufferSize = getMaximumBufferSize();
     int maxChars = maxBufferSize / 2;
     int capacity = maxChars;
@@ -181,7 +180,6 @@ public class ContentParserText extends AbstractContentParser {
       line = bufferedReader.readLine();
     }
     properties.setProperty(PROPERTY_KEY_TEXT, textBuffer.toString());
-    return properties;
   }
 
 }

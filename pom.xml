@@ -134,37 +134,10 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <encoding>UTF-8</encoding>
+          <!--
+          <overview>${basedir}/src/main/java/overview.html</overview>          
+          -->
         </configuration>
-        <!--
-        <reportSets>
-          <reportSet>
-            <id>html</id>
-            <configuration>
-              <show>private</show>
-            </configuration>
-            <reports>
-              <report>javadoc</report>
-            </reports>
-          </reportSet>
-          <reportSet>
-            <id>uml</id>
-            <configuration>
-              <doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet>
-              <docletArtifact>
-                <groupId>gr.spinellis</groupId>
-                <artifactId>UmlGraph</artifactId>
-                <version>4.4</version>
-              </docletArtifact>
-              <additionalparam>-views</additionalparam>
-              <destDir>target/uml</destDir>
-              <show>private</show>
-            </configuration>
-            <reports>
-              <report>javadoc</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        -->
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

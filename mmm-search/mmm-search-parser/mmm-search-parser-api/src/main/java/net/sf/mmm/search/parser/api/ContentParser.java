@@ -8,12 +8,12 @@ import java.util.Properties;
 
 /**
  * This is the interface for a parser that
- * {@link #parse(InputStream, long) extracts} (meta-)data from the
- * content of an as {@link InputStream}.<br>
+ * {@link #parse(InputStream, long) extracts} (meta-)data from the content of an
+ * as {@link InputStream}.<br>
  * <b>ATTENTION:</b><br>
  * The implementation should allocate expensive resources (e.g. byte-arrays)
- * only temporary while {@link #parse(InputStream, long) parsing}. See
- * also {@link net.sf.mmm.search.parser.base.LimitBufferSize}.
+ * only temporary while {@link #parse(InputStream, long) parsing}. See also
+ * {@link net.sf.mmm.search.parser.base.LimitBufferSize}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -49,8 +49,8 @@ public interface ContentParser {
   /**
    * this is the {@link Properties#keys() property-key} used to
    * {@link Properties#getProperty(String) get} the <code>author</code> (aka
-   * artist) of the content from the
-   * {@link #parse(InputStream, long) parsed} {@link Properties}.<br>
+   * artist) of the content from the {@link #parse(InputStream, long) parsed}
+   * {@link Properties}.<br>
    * If the title could NOT be determined, this property is NOT set.
    */
   String PROPERTY_KEY_AUTHOR = "author";
@@ -60,10 +60,9 @@ public interface ContentParser {
    * extracts (meta-)data returned as {@link Properties}.
    * 
    * @param inputStream
-   *        is the fresh input stream of the content to parse. It will NOT be
-   *        {@link InputStream#close() closed} by this method because there can
-   *        be arbitrary implementations for this interface that would all need
-   *        to handle the closing for success and exceptional states.
+   *        is the fresh input stream of the content to parse. It will be
+   *        {@link InputStream#close() closed} by this method (on success and in
+   *        exceptional state).
    * @param filesize
    *        is the size (content-length) of the content to parse in bytes or
    *        <code>0</code> if NOT available (unknown). If available, the

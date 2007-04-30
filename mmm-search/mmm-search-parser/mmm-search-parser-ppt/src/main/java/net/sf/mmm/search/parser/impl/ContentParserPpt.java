@@ -127,7 +127,7 @@ public class ContentParserPpt extends AbstractPoiContentParser {
   protected static final String ENCODING_UTF16LE = "UTF-16LE";
 
   /**
-   * The constructor
+   * The constructor. 
    * 
    */
   public ContentParserPpt() {

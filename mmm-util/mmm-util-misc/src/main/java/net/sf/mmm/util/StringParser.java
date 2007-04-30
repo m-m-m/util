@@ -5,6 +5,8 @@ package net.sf.mmm.util;
 
 import java.util.Locale;
 
+import net.sf.mmm.util.filter.CharFilter;
+
 /**
  * This class represents a string together with a
  * {@link #getCurrentIndex() index position} in that string.<br>

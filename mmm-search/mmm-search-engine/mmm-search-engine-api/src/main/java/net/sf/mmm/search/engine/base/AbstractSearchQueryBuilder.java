@@ -8,8 +8,8 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
-import net.sf.mmm.util.CharFilter;
 import net.sf.mmm.util.StringParser;
+import net.sf.mmm.util.filter.CharFilter;
 
 /**
  * This is the abstract base implementation of the {@link SearchQueryBuilder}

@@ -71,7 +71,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * Use this method if you want to set a property to a very long text with a
    * low memory consumption. The property mode will be {@link Mode#NOT_STORED}.
    * If this feature is NOT supported by the implementation, the content of the
-   * reader is read as String into memory until a configureable maximum is
+   * reader is read as String into memory until a configurable maximum is
    * reached.<br>
    * <b>ATTENTION:</b><br>
    * The <code>valueReader</code> may be read only when the entry is
@@ -159,6 +159,16 @@ public interface MutableSearchEntry extends SearchEntry {
    */
   void setType(String type);
 
+  /**
+   * This method sets the {@link #PROPERTY_SOURCE source}.
+   * 
+   * @see #setProperty(String, String, Mode)
+   * 
+   * @param source
+   *        is the source to set.
+   */
+  void setSource(String source);
+  
   /**
    * This method sets the {@link #PROPERTY_SIZE size}.
    * 

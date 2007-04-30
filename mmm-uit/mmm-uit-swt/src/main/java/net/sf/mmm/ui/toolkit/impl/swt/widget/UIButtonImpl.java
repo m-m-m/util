@@ -25,7 +25,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /** the style of the button */
   private final ButtonStyle style;
 
-  /** the synchron access to the button */
+  /** the synchronous access to the button */
   private final SyncButtonAccess syncAccess;
 
   /** the icon */

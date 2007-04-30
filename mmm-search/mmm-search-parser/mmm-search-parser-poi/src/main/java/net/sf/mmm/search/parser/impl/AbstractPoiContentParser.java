@@ -15,7 +15,7 @@ import net.sf.mmm.search.parser.base.AbstractContentParser;
 /**
  * This is the abstract base implementation of the
  * {@link net.sf.mmm.search.parser.api.ContentParser} interface for parsing
- * binary microsoft office documents using apache POI.
+ * binary Microsoft office documents using apache POI.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -29,9 +29,9 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
 
   /** name of the entry for a excel document in the POI filesystem */
   public static final String POIFS_EXCEL_DOC = "Workbook";
-  
+
   /**
-   * The constructor
+   * The constructor.
    */
   public AbstractPoiContentParser() {
 
@@ -41,9 +41,8 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  public void parse(InputStream inputStream, long filesize, Properties properties) throws Exception {
 
-    Properties properties = new Properties();
     POIFSFileSystem poiFs = new POIFSFileSystem(inputStream);
     SummaryInformation summaryInfo = (SummaryInformation) PropertySetFactory.create(poiFs
         .createDocumentInputStream(SummaryInformation.DEFAULT_STREAM_NAME));
@@ -60,7 +59,6 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
       properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);
     }
     properties.setProperty(PROPERTY_KEY_TEXT, extractText(poiFs, filesize));
-    return properties;
   }
 
   /**
@@ -69,7 +67,10 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
    * 
    * @param poiFs
    *        is the POI filesystem of the office document.
-   * @param filesize TODO
+   * @param filesize
+   *        is the size (content-length) of the content to parse in bytes or
+   *        <code>0</code> if NOT available (unknown). If available, the
+   *        parser may use this value for optimized allocations.
    * @return the plain text extracted from the content.
    * @throws Exception
    *         if something goes wrong.
