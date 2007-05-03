@@ -8,22 +8,49 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * This class allows to parse a list of including and excluding regex
- * {@link Pattern}s and build an according {@link FilterRuleChain}. The rules
- * (include/exclude patterns) are proceeded in the order of their appearance in
- * the list.<br>
+ * {@link PatternFilterRule}s and build an according {@link FilterRuleChain}.
+ * The rules (include/exclude patterns) are proceeded in the order of their
+ * appearance in the list.<br>
  * Here is an example of a configuration (rule list) parsed by this class:
  * 
  * <pre>
- * # skip files and directories with extensions '.bak' or '.sav'
- * -\.(bak|sav)$
- * # skip files and directories if filename starts with '.' or '~'
- * -.&#42;/[.~].*$
- * # accept all others
- * +.
+ * # This file contains a filter-chain. Such chain is build of a list of 
+ * # filter-rules. Each rule starts with a character that determines if an 
+ * # inclusion (+) or an exclusion (-) is defined. This character must be followed
+ * # by a regex pattern. To make it easier for you a simple pre-processing is 
+ * # performed on the pattern string before it is compiled as 
+ * # java.util.regex.Pattern:
+ * # If the pattern does NOT start with "^" or ".*" the prefix ".*" is 
+ * # automatically added. If the pattern does NOT end with "$" or ".*" the suffix
+ * # ".*" is automatically appended.
+ * # The pre-processing should safe you some typing and make it a little easier for
+ * # users of the GNU command "grep".
+ * #
+ * # The filter-rules in the chain are processed in the order of their occurrence.
+ * # The first rule that matches makes the decision according to the first 
+ * # character (+/-).
+ * # A list starting with the '#' character indicates a comment and is therefore 
+ * # ignored. The same applies for empty lines.
+ *  
+ * # 1. rule says that all strings that start with "/doc/" will be accepted:
+ * +^/doc/
+ *  
+ * # 2. rule says that all strings that end ($) with ".pdf" ignoring the case (?i)  
+ * # of the characters will be rejected:
+ * -(?i)\.pdf$
+ * 
+ * # 3. rule says that all string that start with "/data/" will be accepted:
+ * +^/data/
+ * 
+ * # 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring the 
+ * # case (?i) of the characters will be rejected:
+ * -(?i)\.(xml|xsl)$
+ * 
+ * # 5. rule says that everything else is accepted
+ * +.*
  * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -144,14 +171,14 @@ public class FilterRuleChainParser {
       List<FilterRule> rules = new ArrayList<FilterRule>();
       String line = reader.readLine();
       while (line != null) {
+        line = line.trim();
         if (line.length() > 0) {
           lineCount++;
           char first = line.charAt(0);
           if ((first == this.acceptChar) || (first == this.denyChar)) {
             String regex = line.substring(1);
-            Pattern pattern = Pattern.compile(regex);
             boolean accept = (first == this.acceptChar);
-            FilterRule rule = new PatternFilterRule(pattern, accept);
+            FilterRule rule = new PatternFilterRule(regex, accept);
             rules.add(rule);
           } else if (first == this.commentChar) {
             // ignore line

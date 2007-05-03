@@ -182,7 +182,7 @@ public class StringParser {
 
   /**
    * This method reads the {@link #getCurrentIndex() current}
-   * {@link #charAt(int) character} without incementing the
+   * {@link #charAt(int) character} without incrementing the
    * {@link #getCurrentIndex() index}. You need to {@link #hasNext() check} if
    * a character is available before calling this method.
    * 
@@ -195,7 +195,7 @@ public class StringParser {
 
   /**
    * This method reads the {@link #getCurrentIndex() current}
-   * {@link #charAt(int) character} without incementing the
+   * {@link #charAt(int) character} without incrementing the
    * {@link #getCurrentIndex() index}. If there is no character
    * {@link #hasNext() available} this method will return <code>0</code> (the
    * NULL character and NOT <code>'0'</code>).
@@ -263,7 +263,7 @@ public class StringParser {
    * 
    * @param stop
    *        is the character to read until.
-   * @return <code>true</code> if the first occurence of the given
+   * @return <code>true</code> if the first occurrence of the given
    *         <code>stop</code> character has been passed, <code>false</code>
    *         if there is no such character.
    */
@@ -341,7 +341,7 @@ public class StringParser {
    * This method reads all {@link #next() next characters} until the given
    * <code>substring</code> has been detected.<br>
    * After the call of this method, the {@link #getCurrentIndex() current index}
-   * will point to the next character after the first occurence of
+   * will point to the next character after the first occurrence of
    * <code>substring</code> after the {@link #getCurrentIndex() index} before
    * this method has been called or to the end of the string if the given
    * <code>substring</code> was NOT found.<br>
@@ -350,15 +350,15 @@ public class StringParser {
    * {@link #getOriginalString() parse string} is duplicated into
    * {@link String#toUpperCase(java.util.Locale) upper-case} and stored in this
    * parser instance. This may be expensive when the
-   * {@link #getOriginalString() parse string} is extremly large.
+   * {@link #getOriginalString() parse string} is extremely large.
    * 
    * @param substring
    * @param ignoreCase -
    *        if <code>true</code> the case of the characters is ignored when
    *        compared with characters from <code>substring</code>.
-   * @return <code>true</code> if the given <code>substring</code> occured
+   * @return <code>true</code> if the given <code>substring</code> occurred
    *         and has been passed and <code>false</code> if the end of the
-   *         string has been reached without any occurence of the given
+   *         string has been reached without any occurrence of the given
    *         <code>substring</code>.
    */
   public boolean skipOver(String substring, boolean ignoreCase) {
@@ -370,7 +370,7 @@ public class StringParser {
    * This method reads all {@link #next() next characters} until the given
    * <code>substring</code> has been detected.<br>
    * After the call of this method, the {@link #getCurrentIndex() current index}
-   * will point to the next character after the first occurence of
+   * will point to the next character after the first occurrence of
    * <code>substring</code> after the {@link #getCurrentIndex() index} before
    * this method has been called or to the end of the string if the given
    * <code>substring</code> was NOT found.<br>
@@ -379,7 +379,7 @@ public class StringParser {
    * {@link #getOriginalString() parse string} is duplicated into
    * {@link String#toUpperCase(java.util.Locale) upper-case} and stored in this
    * parser instance. This may be expensive when the
-   * {@link #getOriginalString() parse string} is extremly large.
+   * {@link #getOriginalString() parse string} is extremely large.
    * 
    * @param substring
    *        is the substring to search and skip over starting at the
@@ -393,10 +393,10 @@ public class StringParser {
    *        the parser points to the character after the stop character. The
    *        <code>substring</code> should NOT contain a
    *        {@link CharFilter#accept(char) stop character}.
-   * @return <code>true</code> if the given <code>substring</code> occured
+   * @return <code>true</code> if the given <code>substring</code> occurred
    *         and has been passed and <code>false</code> if a stop character
    *         has been detected or the end of the string has been reached without
-   *         any occurence of the given <code>substring</code>.
+   *         any occurrence of the given <code>substring</code>.
    */
   public boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter) {
 
@@ -451,7 +451,7 @@ public class StringParser {
    * to the according character of the <code>expected</code> string.<br>
    * If a character differs this method stops and the parser points to the first
    * character that differs from <code>expected</code>. Except for this
-   * circumstance, this method behaves like the following code snipplet:
+   * circumstance, this method behaves like the following code:
    * 
    * <pre>
    * {@link #read(int) read}(expected.length).equals[IgnoreCase](expected)
@@ -522,7 +522,7 @@ public class StringParser {
    *        is the character to read until.
    * @param escape
    *        is the character used to escape the stop character (e.g. '\').
-   * @return <code>true</code> if the first occurence of the given
+   * @return <code>true</code> if the first occurrence of the given
    *         <code>stop</code> character has been passed, <code>false</code>
    *         if there is no such character.
    */

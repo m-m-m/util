@@ -33,6 +33,27 @@ public final class FileUtil {
   }
 
   /**
+   * This method extracts the extension from the given <code>filename</code>.
+   * 
+   * @param filename
+   *        is the filename and may include an absolute or relative path.
+   * @return the extension of the given <code>filename</code> in
+   *         {@link String#toLowerCase() lowercase} or <code>null</code> if
+   *         NOT present.
+   */
+  public static String getExtension(String filename) {
+
+    int lastDot = filename.lastIndexOf('.');
+    String extension = "";
+    if (lastDot > 0) {
+      if ((filename.lastIndexOf('/', lastDot) == -1) && (filename.lastIndexOf('\\', lastDot) == -1)) {
+        extension = filename.substring(lastDot + 1).toLowerCase();
+      }
+    }
+    return extension;
+  }
+
+  /**
    * This method copies the file given by <code>source</code> to the file
    * given by <code>destination</code>.
    * 
@@ -331,10 +352,10 @@ public final class FileUtil {
       List<File> list) {
 
     if ((path == null) || (path.length() == 0)) {
-      throw new IllegalArgumentException("Path must not be emtpy");
+      throw new IllegalArgumentException("Path must not be empty");
     }
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
-    // TODO init cwd according to absolute or relative path
+    // TODO initialize cwd according to absolute or relative path
     boolean pathIsPattern = tokenizePath(path, segmentList);
     PathSegment[] segments = segmentList.toArray(new PathSegment[segmentList.size()]);
     collectMatchingFiles(cwd, segments, 0, fileType, list);
@@ -412,7 +433,7 @@ public final class FileUtil {
    * @param path
    *        is the path to tokenized
    * @param list
-   *        is the list where to add the segement tokens.
+   *        is the list where to add the segment tokens.
    * @return <code>true</code> if the path is a glob-pattern (contains '*' or
    *         '?'), <code>false</code> otherwise.
    */
