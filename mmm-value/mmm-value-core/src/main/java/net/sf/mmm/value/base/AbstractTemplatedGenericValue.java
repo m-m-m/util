@@ -3,14 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.base;
 
-import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.WrongValueTypeException;
 
 /**
- * This is the abstract base implementation of the {@link MutableGenericValue}
- * interface using a templated {@link #getPlainValue() value}.
+ * This is the abstract base implementation of the
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface using a templated
+ * {@link #getPlainValue() value}.
  * 
  * @param <V>
  *        is the templated type of the actual {@link #getPlainValue() value}.

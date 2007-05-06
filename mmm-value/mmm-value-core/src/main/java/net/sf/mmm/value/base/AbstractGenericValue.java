@@ -22,10 +22,10 @@ import net.sf.mmm.value.api.MutableGenericValue;
 public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /** @see #isSupported(Class) */
-  private static final Class[] SUPPORTED_CLASSES = new Class[] {Object.class, String.class,
+  private static final Class[] SUPPORTED_CLASSES = new Class[] { Object.class, String.class,
       Boolean.class, boolean.class, Class.class, Number.class, Integer.class, int.class,
       Long.class, long.class, Double.class, double.class, Float.class, float.class, Short.class,
-      short.class, Byte.class, byte.class, Date.class};
+      short.class, Byte.class, byte.class, Date.class };
 
   /**
    * The constructor.
@@ -39,8 +39,8 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    * This method determines if the given <code>valueType</code> is supported
    * by {@link #getValue(Class)}. The term supported here means that
    * {@link #getValue(Class)} will potentially be able to convert the actual
-   * value to <code>valueType</code>. You can use this method to avoid (reduce)
-   * {@link WrongValueTypeException}s.
+   * value to <code>valueType</code>. You can use this method to avoid
+   * (reduce) {@link WrongValueTypeException}s.
    * 
    * @see #getValue(Class, Object)
    * 
@@ -60,10 +60,10 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   }
 
   /**
+   * {@inheritDoc}
+   * 
    * This implementation returns <code>true</code> as default. Override to
    * change.
-   * 
-   * @see net.sf.mmm.value.api.GenericValue#isAddDefaults()
    */
   public boolean isAddDefaults() {
 

@@ -7,11 +7,11 @@ import java.util.Date;
 
 import net.sf.mmm.value.api.WrongValueTypeException;
 import net.sf.mmm.util.Iso8601Util;
-import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
- * This is the abstract base implementation of the {@link MutableGenericValue}
- * interface. It is based on a {@link #getPlainValue() "string value"}.
+ * This is the abstract base implementation of the
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface. It is based on a
+ * {@link #getPlainValue() "string value"}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,7 +28,6 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   protected <T> T convertValue(Class<T> type, String value) throws WrongValueTypeException {
 
@@ -63,7 +62,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
           if (value.length() == 1) {
             result = Character.valueOf(value.charAt(0));
           } else {
-            throw new WrongValueTypeException(this, type);            
+            throw new WrongValueTypeException(this, type);
           }
         } else {
           result = toValue(type, value);
@@ -74,7 +73,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
         throw new WrongValueTypeException(this, type, e);
       }
     }
-    return (T) result;
+    return type.cast(result);
   }
 
   /**
@@ -97,11 +96,15 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
    * Override to add support for further types.
    * 
    * @param <T>
+   *        is the templated type of the value.
    * @param type
+   *        is the class reflecting the value.
    * @param value
-   *        is the value to convert.
+   *        is the value to convert to the given <code>type</code>.
    * @return the converted value.
    * @throws WrongValueTypeException
+   *         if the given <code>value</code> can NOT be converted to
+   *         <code>type</code>.
    */
   protected <T> T toValue(Class<T> type, Object value) throws WrongValueTypeException {
 

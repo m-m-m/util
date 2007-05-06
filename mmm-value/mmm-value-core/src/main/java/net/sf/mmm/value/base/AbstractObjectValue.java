@@ -8,11 +8,10 @@ import java.util.Date;
 import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.value.api.WrongValueTypeException;
-import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
- * This is the abstract base implementation of the {@link MutableGenericValue}
- * interface.
+ * This is the abstract base implementation of the
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -38,7 +37,6 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   protected <T> T convertValue(Class<T> type, Object value) throws WrongValueTypeException {
 
@@ -77,7 +75,7 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
         result = toValue(type, value);
       }
     }
-    return (T) result;
+    return type.cast(result);
   }
 
   /**
@@ -100,11 +98,15 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
    * Override to add support for further types.
    * 
    * @param <T>
+   *        is the templated type of the value.
    * @param type
+   *        is the class reflecting the value.
    * @param value
-   *        is the value to convert.
+   *        is the value to convert to the given <code>type</code>.
    * @return the converted value.
    * @throws WrongValueTypeException
+   *         if the given <code>value</code> can NOT be converted to
+   *         <code>type</code>.
    */
   protected <T> T toValue(Class<T> type, Object value) throws WrongValueTypeException {
 
