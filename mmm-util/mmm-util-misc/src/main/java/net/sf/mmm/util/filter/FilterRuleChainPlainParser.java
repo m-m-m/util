@@ -52,10 +52,12 @@ import java.util.List;
  * # 5. rule says that everything else is accepted
  * +.*
  * </pre>
+ *
+ * @see FilterRuleChainXmlParser
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class FilterRuleChainParser {
+public class FilterRuleChainPlainParser {
 
   /** @see #getAcceptChar() */
   private char acceptChar;
@@ -69,7 +71,7 @@ public class FilterRuleChainParser {
   /**
    * The constructor.
    */
-  public FilterRuleChainParser() {
+  public FilterRuleChainPlainParser() {
 
     super();
     this.acceptChar = '+';
@@ -139,7 +141,7 @@ public class FilterRuleChainParser {
 
   /**
    * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described {@link FilterRuleChainParser above}.
+   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser above}.
    * 
    * @param reader
    *        is where to read from. It will be closed at the end of this method
@@ -155,7 +157,7 @@ public class FilterRuleChainParser {
 
   /**
    * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described {@link FilterRuleChainParser above}.
+   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser above}.
    * 
    * @param reader
    *        is where to read from. It will be closed at the end of this method

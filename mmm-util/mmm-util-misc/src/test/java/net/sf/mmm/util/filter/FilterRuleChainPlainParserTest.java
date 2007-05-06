@@ -11,18 +11,18 @@ import org.junit.Test;
 import junit.framework.TestCase;
 
 /**
- * This is the {@link TestCase} for {@link FilterRuleChainParser}.
+ * This is the {@link TestCase} for {@link FilterRuleChainPlainParser}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FilterRuleChainParserTest extends TestCase {
+public class FilterRuleChainPlainParserTest extends TestCase {
 
   @Test
   public void test() throws Exception {
 
-    FilterRuleChainParser parser = new FilterRuleChainParser();
-    String resourceName = FilterRuleChainParserTest.class.getName().replace('.', '/') + ".txt";
+    FilterRuleChainPlainParser parser = new FilterRuleChainPlainParser();
+    String resourceName = FilterRuleChainPlainParserTest.class.getName().replace('.', '/') + ".txt";
     InputStream inSream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
         resourceName);
     FilterRuleChain chain = parser.parse(new InputStreamReader(inSream, "UTF-8"));
