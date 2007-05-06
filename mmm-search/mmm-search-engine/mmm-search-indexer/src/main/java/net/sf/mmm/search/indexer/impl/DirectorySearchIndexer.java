@@ -28,11 +28,12 @@ import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.util.filter.FileFilterAdapter;
 import net.sf.mmm.util.filter.Filter;
-import net.sf.mmm.util.filter.FilterRuleChainParser;
+import net.sf.mmm.util.filter.FilterRuleChainPlainParser;
 import net.sf.mmm.util.io.FileUtil;
 
 /**
- * TODO: this class ...
+ * This class contains functionality to recursively walk through directories and
+ * add contained files to a search index.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -109,7 +110,7 @@ public class DirectorySearchIndexer {
 
   /**
    * This method sets the filter by a reader pointing to a configuration file.
-   * For the format of the configuration see {@link FilterRuleChainParser}.
+   * For the format of the configuration see {@link FilterRuleChainPlainParser}.
    * 
    * @param reader
    *        is a fresh reader to the configuration.It will be closed at the end
@@ -119,7 +120,7 @@ public class DirectorySearchIndexer {
    */
   public void setFilterByConfiguration(Reader reader) throws IOException {
 
-    FilterRuleChainParser parser = new FilterRuleChainParser();
+    FilterRuleChainPlainParser parser = new FilterRuleChainPlainParser();
     Filter<String> stringFilter = parser.parse(reader);
     this.filter = FileFilterAdapter.convertStringFilter(stringFilter);
   }
