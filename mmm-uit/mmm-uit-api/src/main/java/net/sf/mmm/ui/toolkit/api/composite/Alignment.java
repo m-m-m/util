@@ -17,7 +17,16 @@ public enum Alignment {
    * 0x0<br>
    * 000<br>
    */
-  CENTER,
+  CENTER {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return CENTER;
+    }
+  },
 
   /**
    * the component will be located at the top and horizontally centered.<br>
@@ -25,7 +34,16 @@ public enum Alignment {
    * 000<br>
    * 000<br>
    */
-  TOP,
+  TOP {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return BOTTOM;
+    }
+  },
 
   /**
    * the component will be located at the bottom and horizontally centered.<br>
@@ -33,7 +51,17 @@ public enum Alignment {
    * 000<br>
    * 0x0<br>
    */
-  BOTTOM,
+  BOTTOM {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return TOP;
+    }
+
+  },
 
   /**
    * the component will be located at the left and vertically centered.<br>
@@ -41,7 +69,17 @@ public enum Alignment {
    * x00<br>
    * 000<br>
    */
-  LEFT,
+  LEFT {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return RIGHT;
+    }
+
+  },
 
   /**
    * the component will be located at the right and vertically centered.<br>
@@ -49,7 +87,17 @@ public enum Alignment {
    * 00x<br>
    * 000<br>
    */
-  RIGHT,
+  RIGHT {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return LEFT;
+    }
+
+  },
 
   /**
    * the component will be located at the right and vertically centered.<br>
@@ -57,7 +105,17 @@ public enum Alignment {
    * 000<br>
    * 000<br>
    */
-  TOP_LEFT,
+  TOP_LEFT {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return BOTTOM_RIGHT;
+    }
+
+  },
 
   /**
    * the component will be located at the right and vertically centered.<br>
@@ -65,7 +123,17 @@ public enum Alignment {
    * 000<br>
    * 000<br>
    */
-  TOP_RIGHT,
+  TOP_RIGHT {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return BOTTOM_LEFT;
+    }
+
+  },
 
   /**
    * the component will be located at the right and vertically centered.<br>
@@ -73,7 +141,17 @@ public enum Alignment {
    * 000<br>
    * x00<br>
    */
-  BOTTOM_LEFT,
+  BOTTOM_LEFT {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return TOP_RIGHT;
+    }
+
+  },
 
   /**
    * the component will be located at the right and vertically centered.<br>
@@ -81,13 +159,23 @@ public enum Alignment {
    * 000<br>
    * 00x<br>
    */
-  BOTTOM_RIGHT;
+  BOTTOM_RIGHT {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Alignment getMirrored() {
+
+      return TOP_LEFT;
+    }
+
+  };
 
   /**
    * This method extracts the vertical part of the alignment.
    * 
-   * @return the vertical alignment as one of {@link #TOP}, {@link #CENTER}
-   *         or {@link #BOTTOM}.
+   * @return the vertical alignment as one of {@link #TOP}, {@link #CENTER} or
+   *         {@link #BOTTOM}.
    */
   public Alignment getVerticalPart() {
 
@@ -103,8 +191,8 @@ public enum Alignment {
   /**
    * This method extracts the horizontal part of the alignment.
    * 
-   * @return the vertical alignment as one of {@link #LEFT}, {@link #CENTER}
-   *         or {@link #RIGHT}.
+   * @return the vertical alignment as one of {@link #LEFT}, {@link #CENTER} or
+   *         {@link #RIGHT}.
    */
   public Alignment getHorizontalPart() {
 
@@ -141,30 +229,6 @@ public enum Alignment {
    * @return the inverse alignment. E.g. {@link #BOTTOM_RIGHT} for
    *         {@link #TOP_LEFT}. Returns itself if {@link #CENTER}.
    */
-  public Alignment getMirrored() {
-
-    switch (this) {
-      case TOP_LEFT:
-        return BOTTOM_RIGHT;
-      case TOP:
-        return BOTTOM;
-      case TOP_RIGHT:
-        return BOTTOM_LEFT;
-      case LEFT:
-        return RIGHT;
-      case CENTER:
-        return CENTER;
-      case RIGHT:
-        return LEFT;
-      case BOTTOM_LEFT:
-        return TOP_RIGHT;
-      case BOTTOM:
-        return TOP;
-      case BOTTOM_RIGHT:
-        return TOP_LEFT;
-      default :
-        throw new IllegalStateException();
-    }
-  }
+  public abstract Alignment getMirrored();
 
 }
