@@ -7,10 +7,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.StringWriter;
 import java.util.Properties;
 
@@ -20,15 +18,11 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
 
-import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
-import net.sf.mmm.util.filter.FileFilterAdapter;
-import net.sf.mmm.util.filter.Filter;
-import net.sf.mmm.util.filter.FilterRuleChainPlainParser;
 import net.sf.mmm.util.io.FileUtil;
 
 /**
@@ -63,6 +57,7 @@ public class DirectorySearchIndexer {
    * The constructor.
    * 
    * @param indexer
+   *        is the indexer to use.
    */
   public DirectorySearchIndexer(SearchIndexer indexer) {
 
@@ -97,7 +92,12 @@ public class DirectorySearchIndexer {
   }
 
   /**
-   * @see #setFilterByConfiguration(Reader)
+   * This method sets the filter that decides which directories to scan and
+   * which files to index.<br>
+   * 
+   * @see net.sf.mmm.util.filter.FilterRuleChainXmlParser
+   * @see net.sf.mmm.util.filter.FilterRuleChainPlainParser
+   * @see net.sf.mmm.util.filter.FileFilterAdapter
    * 
    * @param filter
    *        the filter to set
@@ -106,23 +106,6 @@ public class DirectorySearchIndexer {
   public void setFilter(FileFilter filter) {
 
     this.filter = filter;
-  }
-
-  /**
-   * This method sets the filter by a reader pointing to a configuration file.
-   * For the format of the configuration see {@link FilterRuleChainPlainParser}.
-   * 
-   * @param reader
-   *        is a fresh reader to the configuration.It will be closed at the end
-   *        of this method (on success and in an exceptional state).
-   * @throws IOException
-   *         if the operation failed with an I/O error.
-   */
-  public void setFilterByConfiguration(Reader reader) throws IOException {
-
-    FilterRuleChainPlainParser parser = new FilterRuleChainPlainParser();
-    Filter<String> stringFilter = parser.parse(reader);
-    this.filter = FileFilterAdapter.convertStringFilter(stringFilter);
   }
 
   /**
@@ -193,8 +176,8 @@ public class DirectorySearchIndexer {
    * adding the given <code>source</code> as metadata.
    * 
    * @param source
-   *        is the {@link SearchEntry#getSource() source} attribute of the
-   *        indexed entries.
+   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
+   *        attribute of the indexed entries.
    * @param directory
    *        is the directory to index recursively.
    */
@@ -207,22 +190,23 @@ public class DirectorySearchIndexer {
    * This method starts the indexing from the given <code>directory</code>
    * adding the given <code>source</code> as metadata.
    * 
-   * @see SearchEntry#getSource()
+   * @see net.sf.mmm.search.api.SearchEntry#getSource()
    * 
    * @param source
-   *        is the {@link SearchEntry#getSource() source} attribute of the
-   *        indexed entries.
+   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
+   *        attribute of the indexed entries.
    * @param directory
    *        is the directory to index recursively.
    * @param relativePath
    *        is the base path where used to build the
-   *        {@link SearchEntry#getUri() URI} of the indexed entries. E.g. when
-   *        <code>source</code> is <code>"svn"</code> and
-   *        <code>directory</code> points to where you checked out a
-   *        subversion repository then <code>relativePath</code> may be
-   *        <code>"trunk"</code>. This is especially useful, when you index
-   *        multiple sub-directories from the same <code>source</code>. You
-   *        could also use <code>"http://svn.foo.bar/trunk"</code> as
+   *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the
+   *        indexed entries. E.g. when <code>source</code> is
+   *        <code>"svn"</code> and <code>directory</code> points to where
+   *        you checked out a subversion repository then
+   *        <code>relativePath</code> may be <code>"trunk"</code>. This is
+   *        especially useful, when you index multiple sub-directories from the
+   *        same <code>source</code>. You could also use
+   *        <code>"http://svn.foo.bar/trunk"</code> as
    *        <code>relativePath</code> but this would cause a lot of
    *        unnecessary redundancies in your index. Besides you would rather
    *        search for <code>source:svn</code> than
@@ -242,7 +226,7 @@ public class DirectorySearchIndexer {
       }
     }
   }
-
+  
   /**
    * This method gets the property <code>key</code> from the given
    * <code>properties</code>. It will also {@link String#trim() trim} the
@@ -271,14 +255,15 @@ public class DirectorySearchIndexer {
    * This method indexes a single file.
    * 
    * @param source
-   *        is the {@link SearchEntry#getSource() source} attribute of the
-   *        indexed entry.
+   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
+   *        attribute of the indexed entry.
    * @param file
    *        is the file to index.
    * @param relativePath
    *        is the path of the folder where the file is located relative to the
    *        path given when the indexing was started. This is used to build the
-   *        {@link SearchEntry#getUri() URI} of the file in the search index.
+   *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the file
+   *        in the search index.
    */
   public void indexFile(String source, File file, String relativePath) {
 
