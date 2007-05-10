@@ -173,4 +173,19 @@ public class ClasspathResource extends AbstractResource {
     return this.url;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public DataResource navigate(String relativePath) {
+
+    int lastSlash = this.path.lastIndexOf('/');
+    String newPath = "";
+    if (lastSlash > 0) {
+      newPath = this.path.substring(lastSlash);
+    }
+    newPath = newPath + relativePath;
+    // TODO: normalize path (remove . and ..)
+    return new ClasspathResource(newPath);
+  }
+
 }

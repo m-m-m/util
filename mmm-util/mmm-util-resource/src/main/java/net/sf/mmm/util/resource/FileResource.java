@@ -12,8 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * This is the implementation of the {@link DataResource} interface for a resource
- * that is a {@link File#isFile() regular} {@link File}. <br>
+ * This is the implementation of the {@link DataResource} interface for a
+ * resource that is a {@link File#isFile() regular} {@link File}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,7 +23,7 @@ public class FileResource extends AbstractResource {
   private File file;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    * @param someFile
    *        is the file.
@@ -86,6 +86,14 @@ public class FileResource extends AbstractResource {
 
     // todo works for symlinks to files???
     return this.file.isFile();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public DataResource navigate(String relativePath) {
+
+    return new FileResource(new File(this.file.getParentFile(), relativePath));
   }
 
 }

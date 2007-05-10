@@ -61,8 +61,24 @@ public interface DataResource {
    * @return the input stream where to read from.
    * @throws ResourceNotAvailableException
    *         if this resource is NOT {@link #isAvailable() available}.
-   * @throws IOException if an input/output error occurred.
+   * @throws IOException
+   *         if an input/output error occurred.
    */
   InputStream openStream() throws ResourceNotAvailableException, IOException;
+
+  /**
+   * This method creates a new {@link DataResource} pointing to the given
+   * <code>relativePath</code> based on this resource.<br>
+   * E.g. if this resource points to the file "/etc/init.d/rc" and
+   * <code>relativePath</code> would be "../apt/sources.list" the resulting
+   * resource would point to "/etc/apt/sources.list".
+   * 
+   * @param relativePath
+   *        is the relative path pointing from the parent URI (directory) of
+   *        this resource to the required resource that will be returned.
+   * @return is the resource pointing to the given path relative to this
+   *         resource.
+   */
+  DataResource navigate(String relativePath);
 
 }
