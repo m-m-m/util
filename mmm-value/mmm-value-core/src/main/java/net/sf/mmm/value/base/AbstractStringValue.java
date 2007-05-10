@@ -73,6 +73,9 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
         throw new WrongValueTypeException(this, type, e);
       }
     }
+    if (type.isPrimitive()) {
+      return (T) result;
+    }
     return type.cast(result);
   }
 

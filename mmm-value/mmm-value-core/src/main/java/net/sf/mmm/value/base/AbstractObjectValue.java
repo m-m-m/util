@@ -40,40 +40,42 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   @Override
   protected <T> T convertValue(Class<T> type, Object value) throws WrongValueTypeException {
 
-    Object result;
     if (value == null) {
-      result = null;
+      return null;
+    }
+    Object result;
+    Class<?> valueType = value.getClass();
+    if (type.isAssignableFrom(valueType)) {
+      result = value;
+    } else if (type == String.class) {
+      result = toString(value);
+    } else if ((type == boolean.class) || (type == Boolean.class)) {
+      result = toBoolean(value);
+    } else if ((type == int.class) || (type == Integer.class)) {
+      result = Integer.valueOf(toInteger(value));
+    } else if ((type == long.class) || (type == Long.class)) {
+      result = Long.valueOf(toLong(value));
+    } else if ((type == double.class) || (type == Double.class)) {
+      result = Double.valueOf(toDouble(value));
+    } else if (type == Class.class) {
+      result = toClass(value);
+    } else if ((type == float.class) || (type == Float.class)) {
+      result = Float.valueOf(toFloat(value));
+    } else if ((type == short.class) || (type == Short.class)) {
+      result = Short.valueOf(toShort(value));
+    } else if ((type == byte.class) || (type == Byte.class)) {
+      result = Byte.valueOf(toByte(value));
+    } else if (type == Number.class) {
+      result = parseNumber(value.toString());
+    } else if (type == Date.class) {
+      result = toDate(value);
+    } else if (type == Character.class) {
+      result = toCharacter(value);
     } else {
-      Class<?> valueType = value.getClass();
-      if (type.isAssignableFrom(valueType)) {
-        result = value;
-      } else if (type == String.class) {
-        result = toString(value);
-      } else if ((type == boolean.class) || (type == Boolean.class)) {
-        result = toBoolean(value);
-      } else if ((type == int.class) || (type == Integer.class)) {
-        result = Integer.valueOf(toInteger(value));
-      } else if ((type == long.class) || (type == Long.class)) {
-        result = Long.valueOf(toLong(value));
-      } else if ((type == double.class) || (type == Double.class)) {
-        result = Double.valueOf(toDouble(value));
-      } else if (type == Class.class) {
-        result = toClass(value);
-      } else if ((type == float.class) || (type == Float.class)) {
-        result = Float.valueOf(toFloat(value));
-      } else if ((type == short.class) || (type == Short.class)) {
-        result = Short.valueOf(toShort(value));
-      } else if ((type == byte.class) || (type == Byte.class)) {
-        result = Byte.valueOf(toByte(value));
-      } else if (type == Number.class) {
-        result = parseNumber(value.toString());
-      } else if (type == Date.class) {
-        result = toDate(value);
-      } else if (type == Character.class) {
-        result = toCharacter(value);
-      } else {
-        result = toValue(type, value);
-      }
+      result = toValue(type, value);
+    }
+    if (type.isPrimitive()) {
+      return (T) result;
     }
     return type.cast(result);
   }
