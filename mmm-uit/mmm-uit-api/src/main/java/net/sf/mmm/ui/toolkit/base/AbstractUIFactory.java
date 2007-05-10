@@ -6,7 +6,9 @@ package net.sf.mmm.ui.toolkit.base;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Locale;
 
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
@@ -39,6 +41,12 @@ public abstract class AbstractUIFactory implements UIFactory {
   /** the disposed flag */
   private boolean disposed;
 
+  /** @see #getLocale() */
+  private Locale locale;
+  
+  /** @see #getScriptOrientation() */
+  private ScriptOrientation scriptOrientation;
+  
   /**
    * The constructor.
    */
@@ -46,6 +54,40 @@ public abstract class AbstractUIFactory implements UIFactory {
 
     super();
     this.disposed = false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Locale getLocale() {
+
+    return this.locale;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setLocale(Locale locale) {
+
+    this.locale = locale;
+    // TODO: update script-orientation from resource-bundle
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ScriptOrientation getScriptOrientation() {
+
+    return this.scriptOrientation;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setScriptOrientation(ScriptOrientation scriptOrientation) {
+
+    this.scriptOrientation = scriptOrientation;
+    // TODO cause refresh of all windows...
   }
 
   /**
@@ -101,7 +143,7 @@ public abstract class AbstractUIFactory implements UIFactory {
    */
   public UIButton createButton(Action action) {
 
-    UIButton button = createButton(action.getName(), action.getStyle());
+    UIButton button = createButton(action.getName(), action.getButtonStyle());
     button.addActionListener(action.getActionListener());
     UIPicture icon = action.getIcon();
     if (icon != null) {

@@ -21,8 +21,8 @@ public abstract class AbstractAction implements Action {
   /** the {@link #getId() id} */
   private String id;
 
-  /** the {@link #getStyle() style} */
-  private ButtonStyle style;
+  /** the {@link #getButtonStyle() style} */
+  private ButtonStyle buttonStyle;
 
   /** the {@link #getIcon() icon} */
   private UIPicture icon;
@@ -44,7 +44,7 @@ public abstract class AbstractAction implements Action {
   public AbstractAction(String displayName) {
 
     super();
-    this.style = ButtonStyle.DEFAULT;
+    this.buttonStyle = ButtonStyle.DEFAULT;
     this.icon = null;
     this.name = displayName;
     this.id = displayName;
@@ -92,22 +92,22 @@ public abstract class AbstractAction implements Action {
   }
 
   /**
-   * This method sets the {@link #getStyle() style}.
+   * This method sets the {@link #getButtonStyle() style}.
    * 
    * @param newStyle
    *        is the style to set.
    */
-  public void setStyle(ButtonStyle newStyle) {
+  public void setButtonStyle(ButtonStyle newStyle) {
 
-    this.style = newStyle;
+    this.buttonStyle = newStyle;
   }
 
   /**
    * {@inheritDoc}
    */
-  public ButtonStyle getStyle() {
+  public ButtonStyle getButtonStyle() {
 
-    return this.style;
+    return this.buttonStyle;
   }
 
   /**

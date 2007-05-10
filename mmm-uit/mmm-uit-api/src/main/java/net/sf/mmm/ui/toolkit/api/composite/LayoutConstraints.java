@@ -137,7 +137,7 @@ public class LayoutConstraints {
       Filling.NONE, 0.0, Insets.NO_SPACE);
 
   /**
-   * The alignment specifies the placement of the componet inside its space.
+   * The alignment specifies the placement of the component inside its space.
    * This value is ignored if the weight is greater than zero (>0).
    */
   public final Alignment alignment;
@@ -149,9 +149,9 @@ public class LayoutConstraints {
   public final Filling filling;
 
   /**
-   * The weigth is a value in the range of [0,1] (0<=weight<=1). Typical
+   * The weight is a value in the range of [0,1] (0<=weight<=1). Typical
    * values are -1, 0 and 1.<br>
-   * If 0, the component will be sized as prefered by the component's
+   * If 0, the component will be sized as preferred by the component's
    * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}.<br>
    * If the weight is positive, the component will be scaled according to the
    * avaliable size and in proportion to the weight. The width (if

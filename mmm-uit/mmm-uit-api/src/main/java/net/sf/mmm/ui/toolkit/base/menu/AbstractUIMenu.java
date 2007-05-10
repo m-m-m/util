@@ -86,7 +86,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    */
   public UIMenuItem addItem(Action action) {
 
-    UIMenuItem item = addItem(action.getName(), action.getActionListener(), action.getStyle());
+    UIMenuItem item = addItem(action.getName(), action.getActionListener(), action.getButtonStyle());
     UIPicture icon = action.getIcon();
     if (icon != null) {
       // item.setIcon(icon);

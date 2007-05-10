@@ -16,7 +16,9 @@ import java.util.Collection;
 public interface UIService {
 
   /**
-   * This method gets the UI factory for the default display.
+   * This method gets the UI factory for the default display. Depending on the
+   * implementation this may always return the same instance (native client) or
+   * an individual instance per request (web client).
    * 
    * @return the default factory.
    */

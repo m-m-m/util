@@ -6,6 +6,7 @@ package net.sf.mmm.ui.toolkit.api;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
@@ -44,6 +45,50 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface UIFactory extends UIWriteDisposed {
+
+  /**
+   * This method gets the locale currently applied to this factory. The locale
+   * contains the language and country settings and is used for nationalization
+   * of the GUI elements.
+   * 
+   * @return the locale of this factory.
+   */
+  Locale getLocale();
+
+  /**
+   * This method sets the locale of this factory. This will cause a
+   * nationalization of all existing GUI elements created by this factory, that
+   * are currently attached to a window. The nationalization will cause
+   * translation of the texts (as long as you provide them as
+   * {@link net.sf.mmm.nls.api.NlsMessage}) as well as the
+   * {@link #getScriptOrientation() script-orientation}.
+   * 
+   * @param locale
+   *        is the locale to set.
+   */
+  void setLocale(Locale locale);
+
+  /**
+   * This method gets the orientation of the users script. This is taken into
+   * account when rendering texts as well as when calculating the layout.
+   * Therefore menu-items or widgets located inside a panel may appear
+   * left-to-right or vice versa according to the current script-orientation.
+   * 
+   * @return the script-orientation of this factory.
+   */
+  ScriptOrientation getScriptOrientation();
+
+  /**
+   * This method sets the script-orientation of this factory. This will have
+   * effect on all existing GUI elements created by this factory, that are
+   * currently attached to a window.
+   * 
+   * @see #setLocale(Locale)
+   * 
+   * @param scriptOrientation
+   *        is the orientation to set.
+   */
+  void setScriptOrientation(ScriptOrientation scriptOrientation);
 
   /**
    * This method gets the default display object.

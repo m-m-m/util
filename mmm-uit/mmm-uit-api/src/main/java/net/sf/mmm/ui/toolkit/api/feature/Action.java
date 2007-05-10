@@ -8,7 +8,12 @@ import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 
 /**
- * This is the interface for an action that
+ * This is the callback interface for an action that can be invoked by a widget
+ * or menu-item. It aims to abstract from the GUI element and groups your local
+ * code with the functionality you want to make available in the GUI. This
+ * allows to change the appearance of the according GUI element (e.g. change
+ * from button to menu-item) or reuse the functionality for other parts of the
+ * GUI.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,8 +30,8 @@ public interface Action {
 
   /**
    * This method gets the id of this action. It is used as
-   * {@link net.sf.mmm.ui.toolkit.api.UIObject#getId() object-id} for the
-   * widget that visualizes this action.
+   * {@link net.sf.mmm.ui.toolkit.api.UIObject#getId() object-id} for the widget
+   * that visualizes this action.
    * 
    * @return the id of this action or <code>null</code> if the default id of
    *         the widget should NOT be changed.
@@ -38,7 +43,7 @@ public interface Action {
    * 
    * @return the action style.
    */
-  ButtonStyle getStyle();
+  ButtonStyle getButtonStyle();
 
   /**
    * This method gets the icon used to visualize this action.

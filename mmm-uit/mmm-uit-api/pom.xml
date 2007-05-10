@@ -17,6 +17,12 @@
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-nls-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-util-event</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>

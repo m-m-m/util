@@ -36,7 +36,7 @@ public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize, UIWriteT
 
   /**
    * This method shows a message to the user. This is done by opening a dialog
-   * containing the message with an "ok" button.
+   * containing the message with an "OK" button.
    * 
    * @param message
    *        is the complete and detailed message to show.
@@ -50,7 +50,7 @@ public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize, UIWriteT
   /**
    * This method shows a message to the user. This is done by opening a dialog
    * containing the message and information about the given throwable with an
-   * "ok" button.
+   * "OK" button.
    * 
    * @param message
    *        is the complete and detailed message to show.
@@ -68,7 +68,7 @@ public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize, UIWriteT
    * dialog with the question with "yes" and "no" buttons.
    * 
    * @param question
-   *        is the complete question to aks including all details the user
+   *        is the complete question to ask including all details the user
    *        should know to be able to answer the question easily.
    * @param title
    *        is a short title.
@@ -84,7 +84,7 @@ public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize, UIWriteT
 
   /**
    * This method sets the position of the window, so that it is in the center
-   * of the screen
+   * of the screen.
    */
   void centerWindow();
 
@@ -92,13 +92,13 @@ public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize, UIWriteT
    * This method gets the menu bar of this window.
    * 
    * @return the menu bar. This method will never return <code>null</code>
-   *         but create an empty menubar on the first call.
+   *         but create an empty menu-bar on the first call.
    */
   UIMenuBar getMenuBar();
 
   /**
    * This method gets the composite that is used to display the content of
-   * this winodw.
+   * this window.
    * 
    * @return the composite content of this window or <code>null</code> if
    *         the composite has not been set.
