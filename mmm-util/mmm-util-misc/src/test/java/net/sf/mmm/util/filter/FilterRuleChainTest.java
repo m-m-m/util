@@ -15,17 +15,8 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class FilterRuleChainTest extends TestCase {
 
-  @Test
-  public void test() {
+  private void check(FilterRuleChain chain) {
 
-    FilterRule[] rules = new FilterRule[] {
-        new PatternFilterRule("^/doc/", true),
-        new PatternFilterRule("(?i)\\.pdf$", false),
-        new PatternFilterRule("^/data/", true),
-        new PatternFilterRule("(?i)\\.(xml|xsl)$", false),
-        new PatternFilterRule(".*", true),
-    };
-    FilterRuleChain chain = new FilterRuleChain(rules);
     assertTrue(chain.accept("/doc/manual.pdf"));
     assertFalse(chain.accept("/data/manual.pdf"));
     assertTrue(chain.accept("/data/config.xml"));
@@ -35,7 +26,21 @@ public class FilterRuleChainTest extends TestCase {
     assertFalse(chain.accept("/foo/bar/file.pdf"));
     assertFalse(chain.accept("/foo/bar/file.xml"));
     assertFalse(chain.accept("/foo/bar/file.XsL"));
-    assertTrue(chain.accept("/foo/bar/file.bar"));    
+  }
+
+  @Test
+  public void test() {
+
+    FilterRule[] rules = new FilterRule[] { new PatternFilterRule("^/doc/", true),
+        new PatternFilterRule("(?i)\\.pdf$", false), new PatternFilterRule("^/data/", true),
+        new PatternFilterRule("(?i)\\.(xml|xsl)$", false), };
+    FilterRuleChain chain = new FilterRuleChain(true, rules);
+    check(chain);
+    assertTrue(chain.accept("/foo/bar/file.bar"));
+    FilterRuleChain extendedChain = chain
+        .extend(true, new PatternFilterRule("(?i)\\.bar$", false));
+    check(extendedChain);
+    assertFalse(extendedChain.accept("/foo/bar/file.bar"));
   }
 
 }

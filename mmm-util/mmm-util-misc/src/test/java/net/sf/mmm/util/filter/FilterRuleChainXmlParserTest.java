@@ -4,28 +4,27 @@
 package net.sf.mmm.util.filter;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import org.junit.Test;
 
 import junit.framework.TestCase;
 
+
 /**
  * This is the {@link TestCase} for {@link FilterRuleChainPlainParser}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@SuppressWarnings("all")
-public class FilterRuleChainPlainParserTest extends TestCase {
+public class FilterRuleChainXmlParserTest extends TestCase {
 
   @Test
   public void test() throws Exception {
 
-    FilterRuleChainPlainParser parser = new FilterRuleChainPlainParser();
-    String resourceName = FilterRuleChainPlainParserTest.class.getName().replace('.', '/') + ".txt";
+    FilterRuleChainXmlParser parser = new FilterRuleChainXmlParser();
+    String resourceName = FilterRuleChainXmlParserTest.class.getName().replace('.', '/') + ".xml";
     InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
         resourceName);
-    FilterRuleChain chain = parser.parse(new InputStreamReader(inStream, "UTF-8"), true);
+    FilterRuleChain chain = parser.parse(inStream);
     assertTrue(chain.accept("/doc/manual.pdf"));
     assertFalse(chain.accept("/data/manual.pdf"));
     assertTrue(chain.accept("/data/config.xml"));
@@ -37,4 +36,5 @@ public class FilterRuleChainPlainParserTest extends TestCase {
     assertFalse(chain.accept("/foo/bar/file.XsL"));
     assertTrue(chain.accept("/foo/bar/file.bar"));    
   }
+
 }

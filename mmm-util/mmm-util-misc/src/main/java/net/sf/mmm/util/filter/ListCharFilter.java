@@ -44,12 +44,9 @@ public class ListCharFilter implements CharFilter {
 
     for (char currentChar : this.chars) {
       if (c == currentChar) {
-        if (this.blacklist) {
-          // we found a blacklisted char
-          return false;
-        } else {
-          return true;
-        }
+        // if blacklist we return false because we found a disallowed char,
+        // else we found an accepted char from the whitelist...
+        return !this.blacklist;
       }
     }
     // the char was NOT found!

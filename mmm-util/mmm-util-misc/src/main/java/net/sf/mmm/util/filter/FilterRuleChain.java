@@ -14,25 +14,42 @@ public class FilterRuleChain implements Filter<String> {
   /** the rules */
   private final FilterRule[] rules;
 
+  /** @see #getDefaultResult() */
+  private final boolean defaultResult;
+
   /**
    * The constructor.
    * 
    * @param rules
    *        is the chain of rules.
+   * @param defaultResult
+   *        is the {@link #accept(String) result} if none of the
+   *        <code>rules</code> match.
    */
-  public FilterRuleChain(FilterRule[] rules) {
+  public FilterRuleChain(boolean defaultResult, FilterRule... rules) {
 
     super();
     this.rules = rules;
+    this.defaultResult = defaultResult;
+  }
+
+  /**
+   * This method gets the default {@link #accept(String) result} used if none of
+   * the rules matched.
+   * 
+   * @return the default result.
+   */
+  public boolean getDefaultResult() {
+
+    return this.defaultResult;
   }
 
   /**
    * {@inheritDoc}
    * 
    * This method checks all rules in the chain and returns the result of the
-   * first matching rule. If no rule matches, <code>false</code> is returned.
-   * To prevent this, add a rule that always returns <code>true</code> to the
-   * end of the chain.
+   * first matching rule. If no rule matches,
+   * <code>{@link #getDefaultResult()}</code> is returned.
    */
   public boolean accept(String string) {
 
@@ -42,7 +59,24 @@ public class FilterRuleChain implements Filter<String> {
         return result.booleanValue();
       }
     }
-    return false;
+    return this.defaultResult;
   }
 
+  /**
+   * This method extends this chain with <code>additionalRules</code>.
+   * 
+   * @param newDefaultResult
+   *        is the result of the new extended chain if none of the rules match.
+   * @param additionalRules
+   *        are the rules to add.
+   * @return the chain that also checks the <code>additionalRules</code> if
+   *         none of this rules match.
+   */
+  public FilterRuleChain extend(boolean newDefaultResult, FilterRule... additionalRules) {
+
+    FilterRule[] newRules = new FilterRule[this.rules.length + additionalRules.length];
+    System.arraycopy(this.rules, 0, newRules, 0, this.rules.length);
+    System.arraycopy(additionalRules, 0, newRules, this.rules.length, additionalRules.length);
+    return new FilterRuleChain(newDefaultResult, newRules);
+  }
 }

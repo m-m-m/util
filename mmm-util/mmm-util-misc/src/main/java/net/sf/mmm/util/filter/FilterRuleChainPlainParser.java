@@ -52,7 +52,7 @@ import java.util.List;
  * # 5. rule says that everything else is accepted
  * +.*
  * </pre>
- *
+ * 
  * @see FilterRuleChainXmlParser
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -141,32 +141,40 @@ public class FilterRuleChainPlainParser {
 
   /**
    * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser above}.
+   * {@link FilterRuleChain} as described
+   * {@link FilterRuleChainPlainParser above}.
    * 
    * @param reader
    *        is where to read from. It will be closed at the end of this method
    *        (on success and in an exceptional state).
+   * @param defaultResult
+   *        is the {@link FilterRuleChain#getDefaultResult() default-result} of
+   *        the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException
    *         if an I/O error occurred while parsing.
    */
-  public FilterRuleChain parse(Reader reader) throws IOException {
+  public FilterRuleChain parse(Reader reader, boolean defaultResult) throws IOException {
 
-    return parse(new BufferedReader(reader));
+    return parse(new BufferedReader(reader), defaultResult);
   }
 
   /**
    * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser above}.
+   * {@link FilterRuleChain} as described
+   * {@link FilterRuleChainPlainParser above}.
    * 
    * @param reader
    *        is where to read from. It will be closed at the end of this method
    *        (on success and in an exceptional state).
+   * @param defaultResult
+   *        is the {@link FilterRuleChain#getDefaultResult() default-result} of
+   *        the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException
    *         if an I/O error occurred while parsing.
    */
-  public FilterRuleChain parse(BufferedReader reader) throws IOException {
+  public FilterRuleChain parse(BufferedReader reader, boolean defaultResult) throws IOException {
 
     try {
       int lineCount = 0;
@@ -192,7 +200,7 @@ public class FilterRuleChainPlainParser {
         line = reader.readLine();
       }
       FilterRule[] ruleArray = rules.toArray(new FilterRule[rules.size()]);
-      return new FilterRuleChain(ruleArray);
+      return new FilterRuleChain(defaultResult, ruleArray);
     } finally {
       reader.close();
     }
