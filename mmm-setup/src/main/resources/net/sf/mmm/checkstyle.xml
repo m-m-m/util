@@ -42,9 +42,7 @@ Description:
         <module name="NoWhitespaceAfter">
             <property name="tokens" value="BNOT,DEC,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
         </module>
-        <module name="NoWhitespaceBefore">
-            <property name="tokens" value="SEMI,DOT,POST_DEC,POST_INC"/>
-        </module>
+        <module name="NoWhitespaceBefore"/>
         <module name="OperatorWrap"/>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
