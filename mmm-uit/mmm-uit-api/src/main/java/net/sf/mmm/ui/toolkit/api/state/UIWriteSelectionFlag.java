@@ -18,8 +18,8 @@ public interface UIWriteSelectionFlag extends UIReadSelectionFlag {
    * an action event.
    * 
    * @param selected -
-   *        if <code>true</code> the object will be selected, else it will
-   *        be deselected.
+   *        if <code>true</code> the object will be selected, else it will be
+   *        deselected.
    */
   void setSelected(boolean selected);
 

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.composite;
 
+import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.Alignment;
 import net.sf.mmm.ui.toolkit.api.composite.Filling;
 import net.sf.mmm.ui.toolkit.api.composite.Insets;
@@ -26,11 +27,11 @@ public abstract class AbstractLayoutManager {
   /** The number of spare entries added if the cache size is increased. */
   private static final int CACHE_SPARE_SIZE = 3;
 
-  /**
-   * If <code>true</code> the layout is vertical, if <code>false</code> the
-   * layout is horizontal.
-   */
+  /** @see #getOrientation() */
   protected Orientation layoutOrientation;
+
+  /** @see #getFactory() */
+  private UIFactory factory;
 
   /**
    * The layout constraints of the components. For a given array position the
@@ -70,10 +71,14 @@ public abstract class AbstractLayoutManager {
 
   /**
    * The constructor.
+   * 
+   * @param factory
+   *        is the owning UI-factory.
    */
-  public AbstractLayoutManager() {
+  public AbstractLayoutManager(UIFactory factory) {
 
     super();
+    this.factory = factory;
     this.layoutOrientation = Orientation.HORIZONTAL;
     this.parentArea = new Rectangle();
     this.size = new Size();
@@ -84,6 +89,16 @@ public abstract class AbstractLayoutManager {
   }
 
   /**
+   * This method gets the UI-factory that created this manager.
+   * 
+   * @return the factory
+   */
+  public UIFactory getFactory() {
+
+    return this.factory;
+  }
+
+  /**
    * This method calculates the size of a
    * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel panel}.
    * 
@@ -91,26 +106,65 @@ public abstract class AbstractLayoutManager {
    */
   public Size calculateSize() {
 
+    boolean horizontal = isHorizontal();
+    boolean ltr = isLeftToRight();
     this.size.width = 0;
     this.size.height = 0;
     for (int i = 0; i < this.childCount; i++) {
+      int childIndex;
+      if (ltr) {
+        childIndex = i;
+      } else {
+        childIndex = this.childCount - i - 1;
+      }
       // if with is 0, the component is NOT visible
-      if (this.childSizes[i].width != 0) {
-        if (this.childSizes[i].height > this.size.height) {
-          this.size.height = this.childSizes[i].height;
+      if (this.childSizes[childIndex].width != 0) {
+        if (this.childSizes[childIndex].height > this.size.height) {
+          this.size.height = this.childSizes[childIndex].height;
         }
-        this.size.width += this.childSizes[i].width;
-        if (this.layoutOrientation == Orientation.HORIZONTAL) {
-          this.size.width += this.constraints[i].insets.getHorizontalSpace();
+        this.size.width += this.childSizes[childIndex].width;
+        if (horizontal) {
+          this.size.width += this.constraints[childIndex].insets.getHorizontalSpace();
         } else {
-          this.size.width += this.constraints[i].insets.getVerticalSpace();
+          this.size.width += this.constraints[childIndex].insets.getVerticalSpace();
         }
       }
     }
-    if (this.layoutOrientation == Orientation.VERTICAL) {
+    if (!horizontal) {
       this.size.swap();
     }
     return this.size;
+  }
+
+  /**
+   * This method determines if the layout orientation is horizontal or vertical.
+   * 
+   * @see #getOrientation()
+   * @see UIFactory#getScriptOrientation()
+   * @see net.sf.mmm.ui.toolkit.api.ScriptOrientation#isHorizontal()
+   * 
+   * @return <code>true</code> if the layout is horizontal, <code>false</code>
+   *         if vertical.
+   */
+  protected boolean isHorizontal() {
+
+    boolean horizontal = (this.layoutOrientation == Orientation.HORIZONTAL);
+    if (!this.factory.getScriptOrientation().isHorizontal()) {
+      horizontal = !horizontal;
+    }
+    return horizontal;
+  }
+
+  /**
+   * This method determines if the components should be ordered from left to
+   * right.
+   * 
+   * @return <code>true</code> for left-to-rigth, <code>false</code> for
+   *         right-to-left.
+   */
+  protected boolean isLeftToRight() {
+
+    return this.factory.getScriptOrientation().isLeftToRight();
   }
 
   /**
@@ -122,26 +176,34 @@ public abstract class AbstractLayoutManager {
       // nothing to do...
       return;
     }
+    boolean horizontal = isHorizontal();
+    boolean ltr = isLeftToRight();
     int axisFixed = 0;
     double axisDynamic = 0;
     // pass 1
     for (int i = 0; i < this.childCount; i++) {
+      int childIndex;
+      if (ltr) {
+        childIndex = i;
+      } else {
+        childIndex = this.childCount - i - 1;
+      }
       // if width is 0, the component is NOT visible
-      if (this.childSizes[i].width != 0) {
+      if (this.childSizes[childIndex].width != 0) {
         // add insets as fixed space
-        if (this.layoutOrientation == Orientation.HORIZONTAL) {
-          axisFixed += this.constraints[i].insets.getHorizontalSpace();
+        if (horizontal) {
+          axisFixed += this.constraints[childIndex].insets.getHorizontalSpace();
         } else {
-          axisFixed += this.constraints[i].insets.getVerticalSpace();
+          axisFixed += this.constraints[childIndex].insets.getVerticalSpace();
         }
         // Filling axisFilling =
         // this.constraints[i].filling.getPart(this.layoutOrientation);
         // if ((this.constraints[i].weight == 0) || (Filling.NONE ==
         // axisFilling)) {
-        if (this.constraints[i].weight == 0) {
-          axisFixed += this.childSizes[i].width;
+        if (this.constraints[childIndex].weight == 0) {
+          axisFixed += this.childSizes[childIndex].width;
         } else {
-          axisDynamic += this.childSizes[i].width * this.constraints[i].weight;
+          axisDynamic += this.childSizes[childIndex].width * this.constraints[childIndex].weight;
         }
       }
     }
@@ -175,67 +237,79 @@ public abstract class AbstractLayoutManager {
     int width; // = parentArea.width;
     int height = this.parentArea.height;
     for (int i = 0; i < this.childCount; i++) {
+      int childIndex;
+      if (ltr) {
+        childIndex = i;
+      } else {
+        childIndex = this.childCount - i - 1;
+      }
       // if with is 0, the component is NOT visible
-      if (this.childSizes[i].width != 0) {
-        Filling filling = this.constraints[i].filling;
-        Insets insets = this.constraints[i].insets;
-        Alignment alignment = this.constraints[i].alignment;
-        if (this.layoutOrientation == Orientation.VERTICAL) {
+      if (this.childSizes[childIndex].width != 0) {
+        Filling filling = this.constraints[childIndex].filling;
+        Insets insets = this.constraints[childIndex].insets;
+        Alignment alignment = this.constraints[childIndex].alignment;
+        if (!horizontal) {
           filling = filling.getMirrored();
           insets = insets.getSwapped();
           alignment = alignment.getMirrored();
         }
-        boolean axisFill = (this.constraints[i].weight != 0);
+        boolean axisFill = (this.constraints[childIndex].weight != 0);
         double w;
         // if (axisFill && ((filling == Filling.HORIZONTAL) || (filling ==
         // Filling.BOTH))) {
         if (axisFill) {
-          w = this.constraints[i].weight * scale;
+          w = this.constraints[childIndex].weight * scale;
         } else {
           w = fixscale;
         }
-        childWidth = this.childSizes[i].width + insets.getHorizontalSpace();
+        childWidth = this.childSizes[childIndex].width + insets.getHorizontalSpace();
         width = (int) (childWidth * w);
-        this.childAreas[i].x = x;
-        this.childAreas[i].y = y + insets.top;
+        this.childAreas[childIndex].x = x;
+        this.childAreas[childIndex].y = y + insets.top;
 
         // TODO: reduce insets if (width < clientAreas[i].width) ||
         // (height < clientAreas[i].height) ???
 
+        int insetsLeft;
+        if (ltr) {
+          insetsLeft = insets.left;
+        } else {
+          insetsLeft = insets.right;              
+        }
         // horizontal filling?
         if (width < childWidth) {
-          if (width > this.childAreas[i].width) {
-            int space = width - this.childSizes[i].width;
-            this.childAreas[i].x += (int) (insets.left * ((double) space / insets
+          if (width > this.childAreas[childIndex].width) {
+            int space = width - this.childSizes[childIndex].width;
+            this.childAreas[childIndex].x += (int) (insetsLeft * ((double) space / insets
                 .getHorizontalSpace()));
           }
-          this.childAreas[i].width = width;
+          this.childAreas[childIndex].width = width;
         } else if ((filling == Filling.HORIZONTAL) || (filling == Filling.BOTH)) {
-          this.childAreas[i].x += insets.left;
-          this.childAreas[i].width = width - insets.getHorizontalSpace();
+          this.childAreas[childIndex].x += insetsLeft;
+          this.childAreas[childIndex].width = width - insets.getHorizontalSpace();
         } else {
-          this.childAreas[i].width = this.childSizes[i].width;
+          this.childAreas[childIndex].width = this.childSizes[childIndex].width;
           Alignment hAlignment = alignment.getHorizontalPart();
-          int xSpace = width - this.childSizes[i].width;
+          int xSpace = width - this.childSizes[childIndex].width;
           if (hAlignment == Alignment.CENTER) {
-            this.childAreas[i].x += xSpace / 2;
+            this.childAreas[childIndex].x += xSpace / 2;
           } else if (hAlignment == Alignment.RIGHT) {
-            this.childAreas[i].x += xSpace;
+            this.childAreas[childIndex].x += xSpace;
           }
         }
 
         // vertical filling?
-        if ((height < this.childAreas[i].height) || (filling == Filling.VERTICAL)
+        if ((height < this.childAreas[childIndex].height) || (filling == Filling.VERTICAL)
             || (filling == Filling.BOTH)) {
-          this.childAreas[i].height = height - insets.getVerticalSpace();
+          this.childAreas[childIndex].height = height - insets.getVerticalSpace();
         } else {
-          this.childAreas[i].height = this.childSizes[i].height;
+          this.childAreas[childIndex].height = this.childSizes[childIndex].height;
           Alignment vAlignment = alignment.getVerticalPart();
-          int ySpace = height - this.childSizes[i].height;
+          int ySpace = height - this.childSizes[childIndex].height;
           if (vAlignment == Alignment.CENTER) {
-            this.childAreas[i].y += ySpace / 2;
+            this.childAreas[childIndex].y += ySpace / 2;
           } else if (vAlignment == Alignment.BOTTOM) {
-            this.childAreas[i].y += ySpace;
+            this.childAreas[childIndex].y += ySpace;
           }
         }
         x += width;

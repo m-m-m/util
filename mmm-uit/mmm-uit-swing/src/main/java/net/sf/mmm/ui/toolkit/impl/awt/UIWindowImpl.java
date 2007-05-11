@@ -3,16 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.awt;
 
+import java.awt.ComponentOrientation;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Window;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
 /**
@@ -34,7 +36,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
    *        that created this object. It may be <code>null</code>.
    */
-  public UIWindowImpl(UIFactory uiFactory, UINode parentObject) {
+  public UIWindowImpl(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
   }
@@ -200,7 +202,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    */
   public boolean isDisposed() {
 
-    // TODO this is not corret in all situations, is it?
+    // TODO this is not correct in all situations, is it?
     return getAwtWindow().isDisplayable();
   }
 
@@ -216,4 +218,19 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+  
+    super.refresh();
+    ScriptOrientation orientation = getFactory().getScriptOrientation();
+    if (orientation.isLeftToRight()) {
+      getAwtWindow().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    } else {
+      getAwtWindow().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    }
+  }
+  
 }

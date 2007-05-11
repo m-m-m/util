@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
@@ -31,7 +31,7 @@ public abstract class UIAwtNode extends AbstractUINode {
    * @param parentObject
    *        is the parent of this object (may be <code>null</code>).
    */
-  public UIAwtNode(UIFactory uiFactory, UINode parentObject) {
+  public UIAwtNode(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
   }

@@ -11,6 +11,7 @@ import java.awt.LayoutManager2;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
@@ -37,9 +38,9 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
   /**
    * The constructor.
    */
-  public LayoutManager() {
+  public LayoutManager(UIFactory factory) {
 
-    super();
+    super(factory);
     this.component2constraintMap = new HashMap<Component, LayoutConstraints>();
     this.panel = null;
   }
@@ -187,9 +188,10 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
     this.panel = target;
     refreshCachedData();
     calculateLayout();
+    boolean horizontal = isHorizontal();
     for (int i = 0; i < this.childAreas.length; i++) {
       if (this.childSizes[i].width != 0) {
-        if (this.layoutOrientation == Orientation.HORIZONTAL) {
+        if (horizontal) {
           this.panel.getComponent(i).setBounds(this.childAreas[i].x, this.childAreas[i].y,
               this.childAreas[i].width, this.childAreas[i].height);
         } else {

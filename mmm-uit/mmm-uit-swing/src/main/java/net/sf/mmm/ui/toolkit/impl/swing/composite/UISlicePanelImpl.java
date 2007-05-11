@@ -56,7 +56,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   public UISlicePanelImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {
 
     super(uiFactory, parentObject);
-    this.layout = new LayoutManager();
+    this.layout = new LayoutManager(uiFactory);
     this.layout.setOrientation(orientation);
     this.panel = new JPanel(this.layout);
     this.buttonGroup = null;

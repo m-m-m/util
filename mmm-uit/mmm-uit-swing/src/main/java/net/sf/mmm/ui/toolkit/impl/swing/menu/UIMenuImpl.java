@@ -3,10 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.menu;
 
+import java.awt.ComponentOrientation;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
@@ -131,4 +134,19 @@ public class UIMenuImpl extends AbstractUIMenu {
   // nothing to do!
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+  
+    super.refresh();
+    ScriptOrientation orientation = getFactory().getScriptOrientation();
+    if (orientation.isLeftToRight()) {
+      this.menu.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    } else {
+      this.menu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    }
+  }
+  
 }

@@ -6,6 +6,8 @@ package net.sf.mmm.ui.toolkit.base;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
@@ -29,6 +31,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UITable;
 import net.sf.mmm.ui.toolkit.api.widget.UITextField;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
 /**
  * This is the abstract base implementation of the
@@ -43,17 +46,25 @@ public abstract class AbstractUIFactory implements UIFactory {
 
   /** @see #getLocale() */
   private Locale locale;
-  
+
   /** @see #getScriptOrientation() */
   private ScriptOrientation scriptOrientation;
-  
+
+  /** The list of all windows that have been created by this factory */
+  private List<AbstractUIWindow> windows;
+
   /**
    * The constructor.
    */
   public AbstractUIFactory() {
 
     super();
+    // TODO: do we need a thread-safe implementation here?
+    this.windows = new ArrayList<AbstractUIWindow>();
     this.disposed = false;
+    this.locale = Locale.getDefault();
+    // TODO: set from default locale!
+    this.scriptOrientation = ScriptOrientation.LEFT_TO_RIGHT;
   }
 
   /**
@@ -88,6 +99,32 @@ public abstract class AbstractUIFactory implements UIFactory {
 
     this.scriptOrientation = scriptOrientation;
     // TODO cause refresh of all windows...
+    refresh();
+  }
+
+  /**
+   * This method refreshes all
+   * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow windows} created by this
+   * factory. The refresh of a window recursively refreshes all
+   * {@link net.sf.mmm.ui.toolkit.api.UINode nodes} contained in the window.
+   * This way all visible GUI elements are refreshed.
+   */
+  public void refresh() {
+
+    for (AbstractUIWindow window : this.windows) {
+      window.refresh();
+    }
+  }
+
+  /**
+   * This method registers the given <code>window</code> to this factory.
+   * 
+   * @param window
+   *        is the window to add.
+   */
+  public void addWindow(AbstractUIWindow window) {
+
+    this.windows.add(window);
   }
 
   /**
@@ -110,10 +147,10 @@ public abstract class AbstractUIFactory implements UIFactory {
    * {@inheritDoc}
    */
   public UITextField createTextField() {
-  
+
     return createTextField(true);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -169,10 +206,10 @@ public abstract class AbstractUIFactory implements UIFactory {
    */
   public <C extends UIComponent> UIDecoratedComponent<UILabel, C> createLabeledComponent(
       String label, C component) {
-  
+
     return createDecoratedComponent(createLabel(label), component);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -181,11 +218,11 @@ public abstract class AbstractUIFactory implements UIFactory {
 
     UISlicePanel panel = createPanel(Orientation.HORIZONTAL);
     for (UIComponent component : components) {
-      panel.addComponent(component);      
+      panel.addComponent(component);
     }
     return createLabeledComponent(label, panel);
   }
-  
+
   /**
    * {@inheritDoc}
    */

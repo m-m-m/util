@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
 
 /**
@@ -27,7 +26,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UIPi
    * 
    * @param uiFactory
    */
-  public AbstractUIPicture(UIFactory uiFactory) {
+  public AbstractUIPicture(AbstractUIFactory uiFactory) {
 
     super(uiFactory);
   }

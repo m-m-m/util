@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
@@ -177,7 +178,7 @@ public class UIDemoBuilder {
     return splitPanel;
   }
 
-  public static UISlicePanel createLayoutPanel(UIFactory factory) {
+  public static UISlicePanel createLayoutPanel(final UIFactory factory) {
 
     final UISlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
     panel.addComponent(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
@@ -188,7 +189,14 @@ public class UIDemoBuilder {
 
       public void invoke(UINode source, ActionType action) {
 
-        panel.setOrientation(panel.getOrientation().getMirrored());
+        //panel.setOrientation(panel.getOrientation().getMirrored());
+        ScriptOrientation so;
+        if (factory.getScriptOrientation() == ScriptOrientation.LEFT_TO_RIGHT) {
+          so = ScriptOrientation.RIGHT_TO_LEFT;
+        } else {
+          so = ScriptOrientation.LEFT_TO_RIGHT;          
+        }
+        factory.setScriptOrientation(so);
       }
     });
     panel.addComponent(button, new LayoutConstraints(Alignment.TOP_RIGHT, Filling.NONE, 1));

@@ -45,7 +45,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
       Orientation orientation) {
 
     super(uiFactory, parentObject, borderTitle);
-    this.layoutManager = new LayoutManager();
+    this.layoutManager = new LayoutManager(uiFactory);
     this.layoutManager.setOrientation(orientation);
     this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.NORMAL);
     this.syncAccess.setLayout(this.layoutManager);

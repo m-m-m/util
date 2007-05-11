@@ -144,4 +144,18 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
     return true;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+
+    super.refresh();
+    int componentCount = getComponentCount();
+    for (int i = 0; i < componentCount; i++) {
+      AbstractUIComponent component = getComponent(i);
+      component.refresh();
+    }
+  }
+  
 }

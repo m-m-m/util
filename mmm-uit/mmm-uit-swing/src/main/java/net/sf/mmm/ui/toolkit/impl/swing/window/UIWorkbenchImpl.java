@@ -80,6 +80,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
     UIInternalFrame internalFrame = new UIInternalFrame((UIFactorySwing) getFactory(), this, title,
         resizeable);
     this.workbench.add(internalFrame);
+    getFactory().addWindow(internalFrame);
     return internalFrame;
   }
 

@@ -3,16 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing;
 
+import java.awt.ComponentOrientation;
+
 import javax.swing.JComponent;
 
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIComponent} interface using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.UIComponent} interface using Swing as the UI
+ * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,9 +24,8 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   /** the disposed flag */
   private boolean disposed;
 
-  /** the (mimimum) size */
-  //private final Dimension size;
-
+  /** the (minimum) size */
+  // private final Dimension size;
   /**
    * The constructor.
    * 
@@ -36,7 +38,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
     super(uiFactory, parentObject);
     this.disposed = false;
-    //this.size = new Dimension();
+    // this.size = new Dimension();
   }
 
   /**
@@ -67,13 +69,14 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
    * This method removes this component from its {@link #getParent() parent}.
    */
   public void removeFromParent() {
+
     UINode parent = getParent();
     if (parent != null) {
-      setParent(null);    
-      throw new IllegalArgumentException("Currently unsupported!");      
+      setParent(null);
+      throw new IllegalArgumentException("Currently unsupported!");
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -120,18 +123,18 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
    * {@inheritDoc}
    */
   public int getX() {
-  
+
     return getSwingComponent().getX();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public int getY() {
-  
+
     return getSwingComponent().getY();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -164,9 +167,9 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
     if (isResizeable()) {
       getSwingComponent().setSize(width, height);
-      //this.size.height = height;
-      //this.size.width = width;
-      //getSwingComponent().setMinimumSize(this.size);
+      // this.size.height = height;
+      // this.size.width = width;
+      // getSwingComponent().setMinimumSize(this.size);
     }
   }
 
@@ -174,10 +177,10 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
    * {@inheritDoc}
    */
   public void setPosition(int x, int y) {
-  
+
     getSwingComponent().setLocation(x, y);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -208,6 +211,22 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   public int getPreferredWidth() {
 
     return (int) getActiveSwingComponent().getPreferredSize().getWidth();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+
+    super.refresh();
+    ScriptOrientation orientation = getFactory().getScriptOrientation();
+    if (orientation.isLeftToRight()) {
+      getSwingComponent().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    } else {
+      getSwingComponent().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    }
+    getSwingComponent().repaint();
   }
 
 }

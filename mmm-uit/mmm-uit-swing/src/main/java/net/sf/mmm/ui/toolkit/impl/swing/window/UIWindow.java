@@ -9,17 +9,17 @@ import java.awt.Frame;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
- * This class is the implementation of the UIWindow interface using Swing as
- * the UI toolkit.
+ * This class is the implementation of the UIWindow interface using Swing as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -36,7 +36,7 @@ public abstract class UIWindow extends UIWindowImpl {
    *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
    *        that created this object. It may be <code>null</code>.
    */
-  public UIWindow(UIFactory uiFactory, UINode parentObject) {
+  public UIWindow(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
   }

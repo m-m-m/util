@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
@@ -31,7 +31,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
    * @param parentObject
    *        is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMenuBar(UIFactory uiFactory, UINode parentObject) {
+  public AbstractUIMenuBar(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
     this.menuTable = new HashMap<String, UIMenu>();

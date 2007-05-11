@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
@@ -15,6 +14,7 @@ import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
@@ -35,7 +35,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    * @param parentObject
    *        is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMenu(UIFactory uiFactory, UINode parentObject) {
+  public AbstractUIMenu(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
     this.items = new ArrayList<UIMenuItem>();
@@ -171,4 +171,16 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   // nothing to do here
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+  
+    super.refresh();
+    for (UIMenuItem menuItem : this.items) {
+      menuItem.refresh();
+    }
+  }
+  
 }

@@ -97,7 +97,7 @@ public class UIFactorySwing extends AbstractUIFactory {
    * @param uiDevice
    *        is the device the display of this factory belongs to.
    * @param graphicConfiguration
-   *        is the graphics configuration for the diplay to represent.
+   *        is the graphics configuration for the display to represent.
    */
   public UIFactorySwing(UIDeviceImpl uiDevice, GraphicsConfiguration graphicConfiguration) {
 
@@ -128,13 +128,13 @@ public class UIFactorySwing extends AbstractUIFactory {
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
-    return new UIFrameImpl(this, null, title, resizeable);
+    UIFrameImpl frame = new UIFrameImpl(this, null, title, resizeable);
+    addWindow(frame);
+    return frame;
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactory#createButton(java.lang.String,
-   *      net.sf.mmm.ui.toolkit.api.UIPicture,
-   *      net.sf.mmm.ui.toolkit.api.widget.ButtonStyle)
+   * {@inheritDoc}
    */
   public UIButton createButton(String text, UIPicture icon, ButtonStyle style) {
 
@@ -319,7 +319,9 @@ public class UIFactorySwing extends AbstractUIFactory {
    */
   public UIWorkbench createWorkbench(String title) {
 
-    return new UIWorkbenchImpl(this, title, true);
+    UIWorkbenchImpl workbench = new UIWorkbenchImpl(this, title, true);
+    addWindow(workbench);
+    return workbench;
   }
 
   /**

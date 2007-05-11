@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 
+import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
@@ -29,11 +30,14 @@ public class LayoutManager extends Layout {
 
   /**
    * The constructor.
+   * 
+   * @param factory
+   *        is the owning factory.
    */
-  public LayoutManager() {
+  public LayoutManager(UIFactory factory) {
 
     super();
-    this.delegate = new Manager();
+    this.delegate = new Manager(factory);
   }
 
   /**
@@ -85,10 +89,13 @@ public class LayoutManager extends Layout {
 
     /**
      * The constructor.
+     * 
+     * @param factory
+     *        is the owning factory.
      */
-    public Manager() {
+    public Manager(UIFactory factory) {
 
-      super();
+      super(factory);
       this.panel = null;
     }
 
@@ -161,10 +168,11 @@ public class LayoutManager extends Layout {
       this.panel = composite;
       refreshCachedData(flushCache);
       calculateLayout();
+      boolean horizontal = isHorizontal();
       Control[] children = this.panel.getChildren();
       for (int i = 0; i < children.length; i++) {
         if (this.childSizes[i].width != 0) {
-          if (this.layoutOrientation == Orientation.HORIZONTAL) {
+          if (horizontal) {
             children[i].setBounds(this.childAreas[i].x, this.childAreas[i].y,
                 this.childAreas[i].width, this.childAreas[i].height);
           } else {

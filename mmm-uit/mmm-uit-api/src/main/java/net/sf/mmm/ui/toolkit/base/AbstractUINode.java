@@ -41,7 +41,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
    *        that created this object. It may be <code>null</code>.
    */
-  public AbstractUINode(UIFactory uiFactory, UINode parentObject) {
+  public AbstractUINode(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory);
     this.parent = parentObject;

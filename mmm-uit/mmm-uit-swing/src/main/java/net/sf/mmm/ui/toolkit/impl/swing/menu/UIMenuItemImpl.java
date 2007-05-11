@@ -3,10 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.menu;
 
+import java.awt.ComponentOrientation;
+
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
@@ -121,4 +124,19 @@ public class UIMenuItemImpl extends UIAwtNode implements UIMenuItem {
     this.item.setSelected(selected);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+  
+    super.refresh();
+    ScriptOrientation orientation = getFactory().getScriptOrientation();
+    if (orientation.isLeftToRight()) {
+      this.item.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    } else {
+      this.item.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    }
+  }
+  
 }

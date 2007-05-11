@@ -27,7 +27,7 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
    * @param uiDevice
    *        is the device the display belongs to.
    */
-  public AbstractUIDisplay(UIFactory uiFactory, UIDevice uiDevice) {
+  public AbstractUIDisplay(AbstractUIFactory uiFactory, UIDevice uiDevice) {
 
     super(uiFactory);
     this.device = uiDevice;

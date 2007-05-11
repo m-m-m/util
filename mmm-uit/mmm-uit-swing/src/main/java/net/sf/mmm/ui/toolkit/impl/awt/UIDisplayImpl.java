@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.awt;
 import java.awt.EventQueue;
 import java.awt.GraphicsConfiguration;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUIDisplay;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 
 /**
  * This class is the implementation of the UIDisplay interface using AWT as
@@ -28,9 +28,9 @@ public class UIDisplayImpl extends AbstractUIDisplay {
    * @param uiDevice
    *        is the device the display belongs to.
    * @param graphicConfiguration
-   *        is the graphics configuration for the diplay to represent.
+   *        is the graphics configuration for the display to represent.
    */
-  public UIDisplayImpl(UIFactory uiFactory, UIDeviceImpl uiDevice,
+  public UIDisplayImpl(AbstractUIFactory uiFactory, UIDeviceImpl uiDevice,
       GraphicsConfiguration graphicConfiguration) {
 
     super(uiFactory, uiDevice);

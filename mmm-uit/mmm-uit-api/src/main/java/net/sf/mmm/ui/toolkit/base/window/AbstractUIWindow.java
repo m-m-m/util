@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.window;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
@@ -36,15 +36,14 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
    *        that created this object. It may be <code>null</code>.
    */
-  public AbstractUIWindow(UIFactory uiFactory, UINode parentObject) {
+  public AbstractUIWindow(AbstractUIFactory uiFactory, UINode parentObject) {
 
     super(uiFactory, parentObject);
-    this.menuBar = null;
   }
 
   /**
    * This method gets access to read the size of the desktop.<br>
-   * It is used by {@link #centerWindow()} and may be overriden in specific
+   * It is used by {@link #centerWindow()} and may be overridden in specific
    * scenarios.
    * 
    * @return read-access to the size of the desktop.
@@ -89,9 +88,9 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   }
 
   /**
-   * This method registeres the new composite and changes the parent of the
-   * old and the new composite. The method should be called from the
-   * setComposite method implementation.
+   * This method registers the new composite and changes the parent of the old
+   * and the new composite. The method should be called from the setComposite
+   * method implementation.
    * 
    * @see UIWindow#setComposite(UIComposite)
    * 
@@ -145,6 +144,21 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
     // TODO Hack for the moment...
     throwable.printStackTrace();
     showMessage(message + "\n" + throwable.getMessage(), title, messageType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+
+    super.refresh();
+    if (this.menuBar != null) {
+      this.menuBar.refresh();
+    }
+    if (this.composite != null) {
+      this.composite.refresh();
+    }
   }
 
 }

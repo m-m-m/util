@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.UIObject;
 public abstract class AbstractUIObject implements UIObject {
 
   /** @see #getFactory() */
-  private UIFactory factory;
+  private AbstractUIFactory factory;
 
   /** @see #getId() */
   private String id;
@@ -31,7 +31,7 @@ public abstract class AbstractUIObject implements UIObject {
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
    */
-  public AbstractUIObject(UIFactory uiFactory) {
+  public AbstractUIObject(AbstractUIFactory uiFactory) {
 
     super();
     this.factory = uiFactory;
@@ -40,7 +40,7 @@ public abstract class AbstractUIObject implements UIObject {
   /**
    * {@inheritDoc}
    */
-  public UIFactory getFactory() {
+  public AbstractUIFactory getFactory() {
 
     return this.factory;
   }

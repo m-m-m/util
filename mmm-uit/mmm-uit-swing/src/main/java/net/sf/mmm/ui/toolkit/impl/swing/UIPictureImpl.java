@@ -7,7 +7,6 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
 
 /**
@@ -30,7 +29,7 @@ public class UIPictureImpl extends AbstractUIPicture {
    * @param imageUrl
    *        is the URL to the image data.
    */
-  public UIPictureImpl(UIFactory uiFactory, URL imageUrl) {
+  public UIPictureImpl(UIFactorySwing uiFactory, URL imageUrl) {
 
     super(uiFactory);
     this.picture = new ImageIcon(imageUrl);
