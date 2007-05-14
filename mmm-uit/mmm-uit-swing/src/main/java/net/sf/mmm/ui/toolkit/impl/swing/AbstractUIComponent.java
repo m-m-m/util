@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
 
 /**
@@ -217,14 +218,16 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
-    super.refresh();
-    ScriptOrientation orientation = getFactory().getScriptOrientation();
-    if (orientation.isLeftToRight()) {
-      getSwingComponent().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-    } else {
-      getSwingComponent().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    super.refresh(event);
+    if (event.isOrientationModified()) {
+      ScriptOrientation orientation = getFactory().getScriptOrientation();
+      if (orientation.isLeftToRight()) {
+        getSwingComponent().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+      } else {
+        getSwingComponent().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+      }      
     }
     getSwingComponent().repaint();
   }

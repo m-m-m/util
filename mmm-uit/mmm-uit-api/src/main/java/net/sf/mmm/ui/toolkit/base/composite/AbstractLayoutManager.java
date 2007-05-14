@@ -49,7 +49,7 @@ public abstract class AbstractLayoutManager {
   protected Size[] childSizes;
 
   /**
-   * The calculated (layouted) child areas. If the
+   * The child areas calculated for layout. If the
    * {@link #layoutOrientation layout} is {@link Orientation#VERTICAL},
    * {@link Rectangle#x} and {@link Rectangle#y} as well as
    * {@link Rectangle#width} and {@link Rectangle#height} must be swapped.
@@ -107,7 +107,7 @@ public abstract class AbstractLayoutManager {
   public Size calculateSize() {
 
     boolean horizontal = isHorizontal();
-    boolean ltr = isLeftToRight();
+    boolean ltr = isFlipHorizontal();
     this.size.width = 0;
     this.size.height = 0;
     for (int i = 0; i < this.childCount; i++) {
@@ -149,7 +149,9 @@ public abstract class AbstractLayoutManager {
   protected boolean isHorizontal() {
 
     boolean horizontal = (this.layoutOrientation == Orientation.HORIZONTAL);
-    if (!this.factory.getScriptOrientation().isHorizontal()) {
+    // was the GUI designed with an horizontally inverted orientation?
+    if (this.factory.getScriptOrientation().isHorizontal() != this.factory.getDesignOrientation()
+        .isHorizontal()) {
       horizontal = !horizontal;
     }
     return horizontal;
@@ -159,12 +161,13 @@ public abstract class AbstractLayoutManager {
    * This method determines if the components should be ordered from left to
    * right.
    * 
-   * @return <code>true</code> for left-to-rigth, <code>false</code> for
+   * @return <code>true</code> for left-to-right, <code>false</code> for
    *         right-to-left.
    */
-  protected boolean isLeftToRight() {
+  protected boolean isFlipHorizontal() {
 
-    return this.factory.getScriptOrientation().isLeftToRight();
+    return (this.factory.getScriptOrientation().isLeftToRight() != this.factory
+        .getDesignOrientation().isLeftToRight());
   }
 
   /**
@@ -177,16 +180,16 @@ public abstract class AbstractLayoutManager {
       return;
     }
     boolean horizontal = isHorizontal();
-    boolean ltr = isLeftToRight();
+    boolean flipHorizontal = isFlipHorizontal();
     int axisFixed = 0;
     double axisDynamic = 0;
     // pass 1
     for (int i = 0; i < this.childCount; i++) {
       int childIndex;
-      if (ltr) {
-        childIndex = i;
-      } else {
+      if (flipHorizontal) {
         childIndex = this.childCount - i - 1;
+      } else {
+        childIndex = i;
       }
       // if width is 0, the component is NOT visible
       if (this.childSizes[childIndex].width != 0) {
@@ -216,12 +219,6 @@ public abstract class AbstractLayoutManager {
     if (axisPrefered == 0) {
       return;
     }
-    /*
-     * if (axisPrefered > axisAvailable) { fixscale = axisAvailable /
-     * axisPrefered; scale = fixscale; } else { if (axisDynamic == 0) { fixscale =
-     * axisAvailable / axisFixed; } else { scale = (axisAvailable - axisFixed) /
-     * axisDynamic; } }
-     */
     if (axisDynamic == 0) {
       if (axisAvailable < axisFixed) {
         // fixscale = axisAvailable / (double) axisFixed;
@@ -238,10 +235,10 @@ public abstract class AbstractLayoutManager {
     int height = this.parentArea.height;
     for (int i = 0; i < this.childCount; i++) {
       int childIndex;
-      if (ltr) {
-        childIndex = i;
-      } else {
+      if (flipHorizontal) {
         childIndex = this.childCount - i - 1;
+      } else {
+        childIndex = i;
       }
       // if with is 0, the component is NOT visible
       if (this.childSizes[childIndex].width != 0) {
@@ -271,10 +268,10 @@ public abstract class AbstractLayoutManager {
         // (height < clientAreas[i].height) ???
 
         int insetsLeft;
-        if (ltr) {
-          insetsLeft = insets.left;
+        if (flipHorizontal) {
+          insetsLeft = insets.right;
         } else {
-          insetsLeft = insets.right;              
+          insetsLeft = insets.left;
         }
         // horizontal filling?
         if (width < childWidth) {
@@ -374,7 +371,7 @@ public abstract class AbstractLayoutManager {
    *        is the {@link LayoutConstraints#size} that may override
    *        width/height.
    * @param componentSize
-   *        is the size of the component. It will be manipulated as neccessary.
+   *        is the size of the component. It will be manipulated as necessary.
    */
   public static void overrideSize(UIReadSize constraintsSize, Size componentSize) {
 

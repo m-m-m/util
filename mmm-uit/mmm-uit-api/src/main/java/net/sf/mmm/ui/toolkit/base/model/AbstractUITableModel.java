@@ -6,9 +6,9 @@ package net.sf.mmm.ui.toolkit.base.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.event.UITableModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**

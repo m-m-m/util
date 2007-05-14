@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUINode;
  */
 public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenuBar {
 
-  /** mapps the name of a menu (String) to a menu (UIMenu) */
+  /** maps the name of a menu (String) to a menu (UIMenu) */
   private Map<String, UIMenu> menuTable;
 
   /**

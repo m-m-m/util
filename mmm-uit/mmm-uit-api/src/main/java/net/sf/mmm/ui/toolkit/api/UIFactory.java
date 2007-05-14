@@ -74,14 +74,14 @@ public interface UIFactory extends UIWriteDisposed {
    * Therefore menu-items or widgets located inside a panel may appear
    * left-to-right or vice versa according to the current script-orientation.
    * 
-   * @return the script-orientation of this factory.
+   * @return the script-orientation of the user.
    */
   ScriptOrientation getScriptOrientation();
 
   /**
-   * This method sets the script-orientation of this factory. This will have
-   * effect on all existing GUI elements created by this factory, that are
-   * currently attached to a window.
+   * This method sets the users script-orientation. This will have effect on all
+   * existing GUI elements created by this factory, that are currently attached
+   * to a window.
    * 
    * @see #setLocale(Locale)
    * 
@@ -89,6 +89,31 @@ public interface UIFactory extends UIWriteDisposed {
    *        is the orientation to set.
    */
   void setScriptOrientation(ScriptOrientation scriptOrientation);
+
+  /**
+   * This method gets the script-orientation of the design of the GUI. This
+   * property allows the creator of the GUI to design in the orientation
+   * according to his script so it feels native.<br>
+   * If the {@link #getScriptOrientation() script-orientation} of the user is
+   * different to the designed orientation the layout is automatically mirrored
+   * accordingly.
+   * 
+   * @see #getScriptOrientation()
+   * 
+   * @return the script-orientation of the designer.
+   */
+  ScriptOrientation getDesignOrientation();
+
+  /**
+   * This method sets the
+   * {@link #getDesignOrientation() designed script-orientation}. You should
+   * set this value at the beginning before creating {@link UINode UI nodes}
+   * with this factory.
+   * 
+   * @param orientation
+   *        is the script-orientation of the designer.
+   */
+  void setDesignOrientation(ScriptOrientation orientation);
 
   /**
    * This method gets the default display object.

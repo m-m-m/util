@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -98,7 +99,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
     this.scrollPanel.invalidate();
     this.scrollPanel.updateUI();

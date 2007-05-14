@@ -11,7 +11,6 @@ import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -87,7 +86,7 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
   /**
    * {@inheritDoc}
    */
-  protected UIMenuBar createMenuBar() {
+  protected UIMenuBarImpl createMenuBar() {
 
     JMenuBar menuBar = this.dialog.getJMenuBar();
     if (menuBar == null) {
@@ -106,5 +105,5 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
     this.dialog.setContentPane(jComponent);
     registerComposite(newComposite);
   }
-
+  
 }

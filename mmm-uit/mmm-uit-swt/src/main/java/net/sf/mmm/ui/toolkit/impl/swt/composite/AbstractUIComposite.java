@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -148,13 +149,13 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
-    super.refresh();
+    super.refresh(event);
     int componentCount = getComponentCount();
     for (int i = 0; i < componentCount; i++) {
       AbstractUIComponent component = getComponent(i);
-      component.refresh();
+      component.refresh(event);
     }
   }
   

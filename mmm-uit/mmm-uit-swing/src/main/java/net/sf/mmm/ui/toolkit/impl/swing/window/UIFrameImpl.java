@@ -10,9 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -20,8 +18,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame} interface using Swing as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -38,8 +36,8 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
    * @param parent
-   *        is the {@link UINode#getParent() parent} of this object (may be
-   *        <code>null</code>).
+   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
+   *        of this object (may be <code>null</code>).
    * @param title
    *        is the {@link #getTitle() title} of the frame.
    * @param resizeable -
@@ -91,7 +89,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   /**
    * {@inheritDoc}
    */
-  protected UIMenuBar createMenuBar() {
+  protected UIMenuBarImpl createMenuBar() {
 
     JMenuBar menuBar = this.frame.getJMenuBar();
     if (menuBar == null) {
@@ -127,6 +125,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    * {@inheritDoc}
    */
   public void setMinimized(boolean minimize) {
+
     int state = this.frame.getExtendedState();
     if (minimize) {
       state |= Frame.ICONIFIED;
@@ -140,16 +139,18 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    * {@inheritDoc}
    */
   public boolean isMinimized() {
-  
+
     return (this.frame.getExtendedState() & Frame.ICONIFIED) == Frame.ICONIFIED;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
-    return new UIFrameImpl((UIFactorySwing) getFactory(), this, title, resizeable);
+    UIFrameImpl newFrame = new UIFrameImpl((UIFactorySwing) getFactory(), this, title, resizeable);
+    getFactory().addWindow(newFrame);
+    return newFrame;
   }
 
   /**

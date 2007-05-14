@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
  */
 public class UIMenuBarImpl extends AbstractUIMenuBar {
 
-  /** the synchron access */
+  /** the synchronous access */
   private final SyncMenuAccess syncAccess;
 
   /**

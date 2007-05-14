@@ -13,6 +13,7 @@ import java.awt.event.WindowListener;
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
@@ -194,6 +195,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    */
   public void dispose() {
 
+    super.dispose();
     getAwtWindow().dispose();
   }
 
@@ -222,9 +224,9 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
   
-    super.refresh();
+    super.refresh(event);
     ScriptOrientation orientation = getFactory().getScriptOrientation();
     if (orientation.isLeftToRight()) {
       getAwtWindow().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);

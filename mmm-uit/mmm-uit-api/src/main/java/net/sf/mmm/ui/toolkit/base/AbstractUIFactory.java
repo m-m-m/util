@@ -18,6 +18,7 @@ import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
@@ -50,6 +51,9 @@ public abstract class AbstractUIFactory implements UIFactory {
   /** @see #getScriptOrientation() */
   private ScriptOrientation scriptOrientation;
 
+  /** @see #getScriptOrientation() */
+  private ScriptOrientation designOrientation;
+
   /** The list of all windows that have been created by this factory */
   private List<AbstractUIWindow> windows;
 
@@ -65,6 +69,7 @@ public abstract class AbstractUIFactory implements UIFactory {
     this.locale = Locale.getDefault();
     // TODO: set from default locale!
     this.scriptOrientation = ScriptOrientation.LEFT_TO_RIGHT;
+    this.designOrientation = ScriptOrientation.LEFT_TO_RIGHT;
   }
 
   /**
@@ -97,9 +102,26 @@ public abstract class AbstractUIFactory implements UIFactory {
    */
   public void setScriptOrientation(ScriptOrientation scriptOrientation) {
 
-    this.scriptOrientation = scriptOrientation;
-    // TODO cause refresh of all windows...
-    refresh();
+    if (this.scriptOrientation != scriptOrientation) {
+      this.scriptOrientation = scriptOrientation;
+      refresh(UIRefreshEvent.ORIENTATION_MODIFIED);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ScriptOrientation getDesignOrientation() {
+
+    return this.designOrientation;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setDesignOrientation(ScriptOrientation orientation) {
+
+    this.designOrientation = orientation;
   }
 
   /**
@@ -108,23 +130,47 @@ public abstract class AbstractUIFactory implements UIFactory {
    * factory. The refresh of a window recursively refreshes all
    * {@link net.sf.mmm.ui.toolkit.api.UINode nodes} contained in the window.
    * This way all visible GUI elements are refreshed.
+   * 
+   * @param event
+   *        is the event with details about the refresh.
    */
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
-    for (AbstractUIWindow window : this.windows) {
-      window.refresh();
+    AbstractUIWindow[] currentWindows;
+    synchronized (this.windows) {
+      currentWindows = this.windows.toArray(new AbstractUIWindow[this.windows.size()]);
+    }
+    for (AbstractUIWindow window : currentWindows) {
+      window.refresh(event);
     }
   }
 
   /**
-   * This method registers the given <code>window</code> to this factory.
+   * This method adds (registers) the given <code>window</code> to this
+   * factory.
    * 
    * @param window
    *        is the window to add.
    */
   public void addWindow(AbstractUIWindow window) {
 
-    this.windows.add(window);
+    synchronized (this.windows) {
+      this.windows.add(window);
+    }
+  }
+
+  /**
+   * This method removes (de-registers) the given <code>window</code> from
+   * this factory.
+   * 
+   * @param window
+   *        is the window to remove.
+   */
+  public void removeWindow(AbstractUIWindow window) {
+
+    synchronized (this.windows) {
+      this.windows.remove(window);
+    }
   }
 
   /**
@@ -229,7 +275,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   public UIPicture createPicture(File imageFile) throws IOException {
 
     try {
-      return createPicture(imageFile.toURL());
+      return createPicture(imageFile.toURI().toURL());
     } catch (MalformedURLException e) {
       throw new IllegalArgumentException(e);
     }

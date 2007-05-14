@@ -5,6 +5,8 @@ package net.sf.mmm.ui.toolkit.api.event;
 
 import java.util.EventListener;
 
+import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
+
 /**
  * This is the interface of a table model listener. Such a listener gets
  * notified about any change of table cells from the table model.

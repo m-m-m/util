@@ -58,5 +58,5 @@ public class UIDialogImpl extends UIWindowImpl implements UIDialog {
 
     return TYPE;
   }
-
+  
 }

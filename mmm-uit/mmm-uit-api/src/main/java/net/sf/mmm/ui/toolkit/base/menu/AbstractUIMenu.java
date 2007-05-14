@@ -10,6 +10,7 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.UIPicture;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
@@ -175,11 +176,11 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
   
-    super.refresh();
+    super.refresh(event);
     for (UIMenuItem menuItem : this.items) {
-      menuItem.refresh();
+      ((AbstractUINode) menuItem).refresh(event);
     }
   }
   

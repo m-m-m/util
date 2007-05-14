@@ -145,6 +145,7 @@ public class UIFactorySwt extends AbstractUIFactory {
 
     UIFrameImpl frame = new UIFrameImpl(UIFactorySwt.this, null, resizeable);
     frame.setTitle(title);
+    addWindow(frame);
     return frame;
   }
 

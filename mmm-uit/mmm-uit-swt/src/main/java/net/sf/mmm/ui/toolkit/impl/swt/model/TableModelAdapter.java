@@ -13,9 +13,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import net.sf.mmm.ui.toolkit.api.event.UITableModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
 
 /**

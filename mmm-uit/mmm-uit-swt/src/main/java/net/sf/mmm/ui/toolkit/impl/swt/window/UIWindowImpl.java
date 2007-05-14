@@ -10,9 +10,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
@@ -48,8 +46,8 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
    * @param parent
-   *        is the {@link UINode#getParent() parent} of this object (may be
-   *        <code>null</code>).
+   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
+   *        of this object (may be <code>null</code>).
    * @param defaultStyle
    *        is the default style used for the SWT shell.
    * @param modal -
@@ -224,6 +222,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    */
   public void dispose() {
 
+    super.dispose();
     this.syncAccess.dispose();
   }
 
@@ -278,7 +277,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    * {@inheritDoc}
    */
   @Override
-  protected UIMenuBar createMenuBar() {
+  protected UIMenuBarImpl createMenuBar() {
 
     Menu menuBar = this.syncAccess.createMenuBar();
     return new UIMenuBarImpl(getFactory(), this, menuBar);
@@ -291,6 +290,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
 
     UIDialogImpl dialog = new UIDialogImpl(getFactory(), this, modal, resizeable);
     dialog.setTitle(title);
+    getFactory().addWindow(dialog);
     return dialog;
   }
 

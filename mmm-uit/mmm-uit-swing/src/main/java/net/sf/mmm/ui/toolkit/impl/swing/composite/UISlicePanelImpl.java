@@ -17,6 +17,7 @@ import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
@@ -153,7 +154,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
     // }
     // this.panel.updateUI();
     if (this.panel.isVisible()) {
-      refresh();
+      refresh(UIRefreshEvent.DEFAULT);
     }
   }
 
@@ -206,9 +207,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
-    super.refresh();
+    super.refresh(event);
     this.layout.refreshCachedData();
     this.panel.updateUI();
   }

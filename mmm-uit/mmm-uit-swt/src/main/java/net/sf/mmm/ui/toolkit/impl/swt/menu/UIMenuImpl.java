@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
  */
 public class UIMenuImpl extends AbstractUIMenu {
 
-  /** the synchron access to the menu */
+  /** the synchronous access to the menu */
   private final SyncMenuAccess syncAccess;
 
   /**

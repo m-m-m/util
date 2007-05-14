@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 
@@ -199,6 +200,16 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * {@inheritDoc}
    */
   public void refresh() {
+    refresh(UIRefreshEvent.DEFAULT);
+  }
+  
+  /**
+   * This method refreshes this node.
+   * 
+   * @param event
+   *        is the event with details about the refresh.
+   */
+  public void refresh(UIRefreshEvent event) {
 
   // do nothing by default...
   }

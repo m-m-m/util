@@ -82,6 +82,7 @@ public abstract class UIWindow extends UIWindowImpl {
     jDialog.setResizable(resizeable);
     UIDialogImpl dialog = new UIDialogImpl((UIFactorySwing) getFactory(), this, jDialog);
     dialog.setTitle(title);
+    getFactory().addWindow(dialog);
     return dialog;
   }
 

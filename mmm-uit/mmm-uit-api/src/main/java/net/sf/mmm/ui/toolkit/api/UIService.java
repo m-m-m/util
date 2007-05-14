@@ -27,8 +27,7 @@ public interface UIService {
   /**
    * This method gets all available display objects.
    * 
-   * @return the list of all available display objects (
-   *         {@link UIDisplay UIDisplay}objects).
+   * @return the list of all available display objects.
    */
   Collection<UIDisplay> getDisplays();
 

@@ -9,7 +9,9 @@ import javax.swing.border.TitledBorder;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle;
+import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -95,12 +97,12 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
-    super.refresh();
+    super.refresh(event);
     int count = getComponentCount();
     for (int componentIndex = 0; componentIndex < count; componentIndex++) {
-      getComponent(componentIndex).refresh();
+      ((AbstractUINode) getComponent(componentIndex)).refresh(event);
     }
   }
 }

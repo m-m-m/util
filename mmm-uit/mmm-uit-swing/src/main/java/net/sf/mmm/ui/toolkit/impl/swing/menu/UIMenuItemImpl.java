@@ -11,6 +11,7 @@ import javax.swing.JRadioButtonMenuItem;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
@@ -128,9 +129,9 @@ public class UIMenuItemImpl extends UIAwtNode implements UIMenuItem {
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
   
-    super.refresh();
+    super.refresh(event);
     ScriptOrientation orientation = getFactory().getScriptOrientation();
     if (orientation.isLeftToRight()) {
       this.item.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);

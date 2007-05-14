@@ -99,7 +99,9 @@ public class UIDemoBuilder {
     NumericUIRangeModel sbModel = new NumericUIRangeModel();
     sbModel.setMaximumValue(50);
     sbModel.setMinimumValue(-10);
-    addEditorProperty(editorPanel, "Port:", factory.createSpinBox(sbModel), sizer);
+    UISpinBox<Integer> spinBox = factory.createSpinBox(sbModel);
+    spinBox.setEditable(true);
+    addEditorProperty(editorPanel, "Port:", spinBox, sizer);
     final NumericUIRangeModel maxSlideModel = new NumericUIRangeModel(2, 100);
     final UISlideBar maxSlideBar = factory.createSlideBar(maxSlideModel);
     final NumericUIRangeModel slideModel = new NumericUIRangeModel(0, 7);

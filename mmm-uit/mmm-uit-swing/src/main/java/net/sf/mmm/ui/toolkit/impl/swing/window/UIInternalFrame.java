@@ -12,7 +12,6 @@ import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
@@ -88,7 +87,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    * {@inheritDoc}
    */
   @Override
-  protected UIMenuBar createMenuBar() {
+  protected UIMenuBarImpl createMenuBar() {
 
     JMenuBar menuBar = this.frame.getJMenuBar();
     if (menuBar == null) {
@@ -135,7 +134,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    */
   public void setMinimized(boolean minimize) {
 
-    if(this.frame.isIconifiable()) {
+    if (this.frame.isIconifiable()) {
       try {
         this.frame.setIcon(minimize);
       } catch (PropertyVetoException e) {
@@ -221,6 +220,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    */
   public void dispose() {
 
+    getFactory().removeWindow(this);
     this.frame.dispose();
   }
 

@@ -27,11 +27,11 @@ public interface UIDisplay extends UIObject, UIReadSize {
   /**
    * Call this method frequently in your main loop if you want to use the UI
    * toolkit in a single-threaded style. This allows using the SWT port
-   * implementation in a way intendet by SWT. It does no harm with other
-   * implementations but be aware that you do NOT work synchron in this case.<br>
-   * If you have a main loop in your foreground thread waiting until the GUI
-   * is closed, it is recommendet to call this method from your main loop
-   * instead of {@link Thread#sleep(long) sleeping}.<br>
+   * implementation in a way intended by SWT. It does no harm with other
+   * implementations but be aware that you do NOT work synchronous in this case.<br>
+   * If you have a main loop in your foreground thread waiting until the GUI is
+   * closed, it is recommended to call this method from your main loop instead
+   * of {@link Thread#sleep(long) sleeping}.<br>
    */
   void dispatch();
 
@@ -46,8 +46,8 @@ public interface UIDisplay extends UIObject, UIReadSize {
 
   /**
    * This method {@link Runnable#run() invokes} the given <code>task</code>
-   * synchron in the dispatcher thread of the UI. The term "synchron" means
-   * that the current thread is suspended and this method will NOT return
+   * synchronous in the dispatcher thread of the UI. The term "synchronous"
+   * means that the current thread is suspended and this method will NOT return
    * before the task is completed. If this method is called in the dispatcher
    * thread or there is NO dispatcher thread in the underlying UI
    * implementation, the <code>task</code> may simply be invoked directly in
@@ -60,11 +60,11 @@ public interface UIDisplay extends UIObject, UIReadSize {
 
   /**
    * This method {@link Runnable#run() invokes} the given <code>task</code>
-   * asynchron in the dispatcher thread of the UI. The term "asynchron" means
-   * that this method may return before the <code>task</code> is invoked. If
-   * there is NO dispatcher thread in the underlying UI implementation, the
-   * <code>task</code> may simply be invoked directly in the implementation
-   * of this method.
+   * asynchronous in the dispatcher thread of the UI. The term "asynchronous"
+   * means that this method may return before the <code>task</code> is
+   * invoked. If there is NO dispatcher thread in the underlying UI
+   * implementation, the <code>task</code> may simply be invoked directly in
+   * the implementation of this method.
    * 
    * @param task
    *        is the job to {@link Runnable#run() invoke}.
@@ -73,8 +73,8 @@ public interface UIDisplay extends UIObject, UIReadSize {
 
   /**
    * This method {@link Callable#call() invokes} the given <code>task</code>
-   * synchron in the dispatcher thread of the UI. The term "synchron" means
-   * that the current thread is suspended and this method will NOT return
+   * synchronous in the dispatcher thread of the UI. The term "synchronous"
+   * means that the current thread is suspended and this method will NOT return
    * before the task is completed. If this method is called in the dispatcher
    * thread or there is NO dispatcher thread in the underlying UI
    * implementation, the <code>task</code> may simply be invoked directly in
@@ -83,7 +83,7 @@ public interface UIDisplay extends UIObject, UIReadSize {
    * @param <T>
    *        is the templated type of the task result.
    * @param task
-   *        is the piece of code to be executed synchron.
+   *        is the piece of code to be executed synchronous.
    * @return is the {@link Callable#call() result} of the task.
    * @throws Exception
    *         if {@link Callable#call()} throws an exception.

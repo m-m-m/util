@@ -24,7 +24,7 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
   /** the SWT menu item */
   private final MenuItem menuItem;
 
-  /** the synchron access to the menu-item */
+  /** the synchronous access to the menu-item */
   private final SyncMenuItemAccess syncAccess;
 
   /** the style */

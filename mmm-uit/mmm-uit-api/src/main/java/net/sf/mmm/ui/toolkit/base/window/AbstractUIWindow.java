@@ -5,12 +5,14 @@ package net.sf.mmm.ui.toolkit.base.window;
 
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
+import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
 
 /**
  * This is the base implementation of the UIWindow interface.
@@ -23,7 +25,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   private UIComposite composite;
 
   /** the menu bar of this window */
-  private UIMenuBar menuBar;
+  private AbstractUIMenuBar menuBar;
 
   /**
    * The constructor.
@@ -132,12 +134,10 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * 
    * @return the created menu bar.
    */
-  protected abstract UIMenuBar createMenuBar();
+  protected abstract AbstractUIMenuBar createMenuBar();
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.window.UIWindow#showMessage(java.lang.String,
-   *      java.lang.String, net.sf.mmm.ui.toolkit.api.window.MessageType,
-   *      java.lang.Throwable)
+   * {@inheritDoc}
    */
   public void showMessage(String message, String title, MessageType messageType, Throwable throwable) {
 
@@ -150,15 +150,23 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * {@inheritDoc}
    */
   @Override
-  public void refresh() {
+  public void refresh(UIRefreshEvent event) {
 
-    super.refresh();
+    super.refresh(event);
     if (this.menuBar != null) {
-      this.menuBar.refresh();
+      this.menuBar.refresh(event);
     }
     if (this.composite != null) {
-      this.composite.refresh();
+      ((AbstractUINode) this.composite).refresh(event);
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void dispose() {
+  
+    getFactory().removeWindow(this);
+  }
+  
 }

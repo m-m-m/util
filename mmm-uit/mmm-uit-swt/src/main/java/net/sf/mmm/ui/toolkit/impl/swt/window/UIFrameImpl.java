@@ -3,15 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.window;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 import org.eclipse.swt.SWT;
 
 /**
- * This class is the implementation of the UIFrame interface using SWT as the
- * UI toolkit.
+ * This class is the implementation of the UIFrame interface using SWT as the UI
+ * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,8 +27,8 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
    * @param parent
-   *        is the {@link UINode#getParent() parent} of this object (may be
-   *        <code>null</code>).
+   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
+   *        of this object (may be <code>null</code>).
    * @param resizeable -
    *        if <code>true</code> the frame will be
    *        {@link #isResizeable() resizeable}.
@@ -43,8 +42,8 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    * {@inheritDoc}
    */
   public boolean isMaximized() {
-    
-    //return getSwtWindow().getMaximized();
+
+    // return getSwtWindow().getMaximized();
     return getSyncAccess().getMaximized();
   }
 
@@ -53,7 +52,7 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    */
   public void setMaximized(boolean maximize) {
 
-    //getSwtWindow().setMaximized(maximize);
+    // getSwtWindow().setMaximized(maximize);
     getSyncAccess().setMaximized(maximize);
   }
 
@@ -70,7 +69,7 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    */
   public void setMinimized(boolean minimize) {
 
-    //getSwtWindow().setMinimized(minimize);
+    // getSwtWindow().setMinimized(minimize);
     getSyncAccess().setMinimized(minimize);
   }
 
@@ -78,10 +77,10 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    * {@inheritDoc}
    */
   public boolean isMinimized() {
-  
+
     return getSyncAccess().getMinimized();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -89,6 +88,7 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
 
     UIFrameImpl frame = new UIFrameImpl(getFactory(), this, resizeable);
     frame.setTitle(title);
+    getFactory().addWindow(frame);
     return frame;
   }
 

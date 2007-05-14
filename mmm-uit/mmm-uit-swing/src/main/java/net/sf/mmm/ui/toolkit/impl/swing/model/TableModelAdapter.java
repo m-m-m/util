@@ -6,10 +6,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
-import net.sf.mmm.ui.toolkit.api.event.UITableModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITableModel} to

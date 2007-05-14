@@ -62,8 +62,8 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.spinBox;
   }
@@ -121,8 +121,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
    */
   public boolean isEditable() {
 
-    // TODO Auto-generated method stub
-    return false;
+    return this.spinBox.getEditor().isEnabled();
   }
 
   /**
@@ -130,7 +129,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
    */
   public void setEditable(boolean editableFlag) {
 
-  // this.spinBox.getEditor().set
+    this.spinBox.getEditor().setEnabled(editableFlag);
   }
 
   /**
