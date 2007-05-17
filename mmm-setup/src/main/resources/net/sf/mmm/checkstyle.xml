@@ -55,7 +55,9 @@ Description:
         <module name="NeedBraces"/>
         <module name="RightCurly"/>
         <module name="AvoidInlineConditionals"/>
-        <module name="DoubleCheckedLocking"/>
+        <module name="DoubleCheckedLocking">
+            <property name="severity" value="info"/>
+        </module>
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode">
             <property name="severity" value="info"/>
