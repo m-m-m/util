@@ -18,10 +18,12 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 public abstract class AbstractUIPanel extends AbstractUIMultiComposite implements UIPanel {
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @see AbstractUIMultiComposite#AbstractUIMultiComposite(UIFactorySwing,
-   *      UINode)
+   * @param uiFactory
+   *        is the UIFactorySwing instance.
+   * @param parentObject
+   *        is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIPanel(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -33,8 +35,8 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
    */
   public AbstractUIComponent removeComponent(int index) {
 
-    AbstractUIComponent component = (AbstractUIComponent) this.components.remove(index);
-    component.setParent(null);
+    AbstractUIComponent component = (AbstractUIComponent) doRemoveComponent(index);
+    component.removeFromParent();
     return component;
   }
 
@@ -44,7 +46,7 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
   public boolean removeComponent(UIComponent component) {
 
     // return this.components.remove(component);
-    int index = this.components.indexOf(component);
+    int index = indexOfComponent(component);
     if (index >= 0) {
       removeComponent(index);
       return true;

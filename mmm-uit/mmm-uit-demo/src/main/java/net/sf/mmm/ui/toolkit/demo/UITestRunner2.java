@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
+import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
@@ -24,6 +25,7 @@ public class UITestRunner2 {
 
         System.out.println(factory);
         System.out.println(factory.getDisplay());
+        factory.setScriptOrientation(ScriptOrientation.RIGHT_TO_LEFT);
         /*
         final UIWorkbench workbench = factory.createWorkbench("Workbench");
         workbench.setMaximized(true);

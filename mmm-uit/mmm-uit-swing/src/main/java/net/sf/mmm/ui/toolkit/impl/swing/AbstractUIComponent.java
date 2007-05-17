@@ -53,10 +53,10 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   /**
    * This method gets the unwrapped component that represents the active part of
    * this component. This method is used by methods such as setEnabled() and
-   * setTooltipText(). It can be overriden if the implemented component is build
-   * out of multiple swing components and the top ancestor is not the active
-   * component (e.g. a {@link javax.swing.JTree} is the active component and a
-   * {@link javax.swing.JScrollPane} is the
+   * setTooltipText(). It can be overridden if the implemented component is
+   * build out of multiple swing components and the top ancestor is not the
+   * active component (e.g. a {@link javax.swing.JTree} is the active component
+   * and a {@link javax.swing.JScrollPane} is the
    * {@link #getSwingComponent() top-ancestor}).
    * 
    * @return the active unwrapped swing component.
@@ -74,7 +74,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
     UINode parent = getParent();
     if (parent != null) {
       setParent(null);
-      throw new IllegalArgumentException("Currently unsupported!");
+      // throw new IllegalArgumentException("Currently unsupported!");
     }
   }
 
@@ -215,6 +215,35 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
   }
 
   /**
+   * This method should be called at the end of the constructor to initialize
+   * general settings.
+   */
+  protected void initialize() {
+
+    updateOrientation();
+  }
+
+  /**
+   * This method updates the orientation of the GUI elements.
+   */
+  protected void updateOrientation() {
+
+    ScriptOrientation orientation = getFactory().getScriptOrientation();
+    ComponentOrientation componentOrientation;
+    if (orientation.isLeftToRight()) {
+      componentOrientation = ComponentOrientation.LEFT_TO_RIGHT;
+    } else {
+      componentOrientation = ComponentOrientation.RIGHT_TO_LEFT;
+    }
+    JComponent component = getSwingComponent();
+    component.setComponentOrientation(componentOrientation);
+    JComponent activeComponent = getActiveSwingComponent();
+    if (activeComponent != component) {
+      activeComponent.setComponentOrientation(componentOrientation);
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -222,12 +251,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
 
     super.refresh(event);
     if (event.isOrientationModified()) {
-      ScriptOrientation orientation = getFactory().getScriptOrientation();
-      if (orientation.isLeftToRight()) {
-        getSwingComponent().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-      } else {
-        getSwingComponent().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-      }      
+      updateOrientation();
     }
     getSwingComponent().repaint();
   }

@@ -9,6 +9,7 @@ import javax.swing.JSplitPane;
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
+import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -30,6 +31,9 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /** the component bottom or right */
   private AbstractUIComponent componentBottomOrRight;
 
+  /** @see #getOrientation() */
+  private Orientation orientation;
+  
   /** @see #setDividerPosition(double) */
   private double dividerLocation;
   
@@ -51,6 +55,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
     this.componentBottomOrRight = null;
     setOrientation(orientation);
     this.dividerLocation = 0.5;
+    initialize();
   }
 
   /**
@@ -66,11 +71,16 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
    */
   public void setOrientation(Orientation orientation) {
 
-    if (orientation == Orientation.HORIZONTAL) {
+    boolean horizontal = (orientation == Orientation.HORIZONTAL);
+    if (getFactory().isFlipHorizontal()) {
+      horizontal = !horizontal;
+    }
+    if (horizontal) {
       this.splitPanel.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
     } else {
       this.splitPanel.setOrientation(JSplitPane.VERTICAL_SPLIT);
     }
+    this.orientation = orientation;
   }
 
   /**
@@ -79,11 +89,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   @Override
   public Orientation getOrientation() {
 
-    if (this.splitPanel.getOrientation() == JSplitPane.HORIZONTAL_SPLIT) {
-      return Orientation.HORIZONTAL;
-    } else {
-      return Orientation.VERTICAL;
-    }
+    return this.orientation;
   }
 
   /**
@@ -175,6 +181,18 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   public int getComponentCount() {
 
     return 2;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh(UIRefreshEvent event) {
+  
+    super.refresh(event);
+    if (event.isOrientationModified()) {
+      setOrientation(this.orientation);
+    }
   }
   
 }

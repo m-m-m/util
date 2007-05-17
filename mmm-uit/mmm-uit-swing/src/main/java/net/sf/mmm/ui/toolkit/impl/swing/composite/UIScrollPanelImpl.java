@@ -42,6 +42,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
     super(uiFactory, parentObject);
     this.scrollPanel = new JScrollPane();
     this.childComponent = null;
+    initialize();
   }
 
   /**
@@ -64,7 +65,6 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
     this.childComponent = (AbstractUIComponent) child;
     if (this.childComponent != null) {
       this.scrollPanel.setViewportView(this.childComponent.getSwingComponent());
-      System.out.println(this.childComponent.getSwingComponent().getPreferredSize());
     }
   }
 
@@ -101,6 +101,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
   @Override
   public void refresh(UIRefreshEvent event) {
 
+    super.refresh(event);
     this.scrollPanel.invalidate();
     this.scrollPanel.updateUI();
     this.scrollPanel.repaint();

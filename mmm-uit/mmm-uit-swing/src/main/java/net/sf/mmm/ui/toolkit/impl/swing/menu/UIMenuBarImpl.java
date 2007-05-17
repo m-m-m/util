@@ -8,7 +8,6 @@ import java.awt.ComponentOrientation;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
@@ -40,6 +39,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
 
     super(uiFactory, parentObject);
     this.menuBar = jMenuBar;
+    updateOrientation();
   }
 
   /**
@@ -52,6 +52,21 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
     return new UIMenuImpl((UIFactorySwing) getFactory(), this, menu);
   }
 
+
+  /**
+   * This method updates the orientation of the GUI elements.
+   */
+  protected void updateOrientation() {
+
+    ComponentOrientation componentOrientation;
+    if (getFactory().getScriptOrientation().isLeftToRight()) {
+      componentOrientation = ComponentOrientation.LEFT_TO_RIGHT;
+    } else {
+      componentOrientation = ComponentOrientation.RIGHT_TO_LEFT;
+    }
+    this.menuBar.setComponentOrientation(componentOrientation);
+  } 
+  
   /**
    * {@inheritDoc}
    */
@@ -60,12 +75,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
   
     super.refresh(event);
     if (event.isOrientationModified()) {
-      ScriptOrientation orientation = getFactory().getScriptOrientation();
-      if (orientation.isLeftToRight()) {
-        this.menuBar.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-      } else {
-        this.menuBar.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-      }      
+      updateOrientation();
     }
   }
   

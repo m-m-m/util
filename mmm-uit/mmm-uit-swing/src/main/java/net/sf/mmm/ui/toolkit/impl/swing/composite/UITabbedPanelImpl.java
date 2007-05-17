@@ -35,13 +35,14 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
 
     super(uiFactory, parentObject);
     this.panel = new JTabbedPane();
+    initialize();
   }
 
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.panel;
   }
@@ -50,10 +51,10 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
    * {@inheritDoc}
    */
   public void addComponent(UIComponent component) {
-  
+
     addComponent(component, "Tab " + (getComponentCount() + 1));
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -62,7 +63,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.add(title, c.getSwingComponent());
     setParent(c, this);
-    this.components.add(component);
+    doAddComponent(component);
   }
 
   /**
@@ -73,7 +74,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.insertTab(title, null, c.getSwingComponent(), null, position);
     setParent(c, this);
-    this.components.add(position, component);
+    doAddComponent(position, component);
   }
 
   /**

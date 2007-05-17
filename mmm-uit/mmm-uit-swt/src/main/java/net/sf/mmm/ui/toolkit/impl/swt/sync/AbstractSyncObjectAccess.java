@@ -206,7 +206,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method gets the {@link Widget#getButtonStyle() style} of this widget.
+   * This method gets the
+   * {@link org.eclipse.swt.widgets.Widget#getStyle() style} of this widget.
    * 
    * @return the style of the widget.
    */

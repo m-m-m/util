@@ -45,8 +45,12 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   private D decorator;
 
   /**
+   * The constructor.
+   * 
    * @param uiFactory
+   *        is the UIFactorySwing instance.
    * @param parentObject
+   *        is the parent of this object (may be <code>null</code>).
    */
   public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UINode parentObject) {
 

@@ -9,7 +9,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 
-import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
@@ -47,6 +46,7 @@ public class UIMenuImpl extends AbstractUIMenu {
     super(uiFactory, parentObject);
     this.menu = jMenu;
     this.buttonGroup = null;
+    updateOrientation();
   }
 
   /**
@@ -136,17 +136,27 @@ public class UIMenuImpl extends AbstractUIMenu {
   }
 
   /**
+   * This method updates the orientation of the GUI elements.
+   */
+  protected void updateOrientation() {
+    ComponentOrientation componentOrientation;
+    if (getFactory().getScriptOrientation().isLeftToRight()) {
+      componentOrientation = ComponentOrientation.LEFT_TO_RIGHT;
+    } else {
+      componentOrientation = ComponentOrientation.RIGHT_TO_LEFT;
+    }
+    this.menu.setComponentOrientation(componentOrientation);
+  }
+  
+  /**
    * {@inheritDoc}
    */
   @Override
   public void refresh(UIRefreshEvent event) {
   
     super.refresh(event);
-    ScriptOrientation orientation = getFactory().getScriptOrientation();
-    if (orientation.isLeftToRight()) {
-      this.menu.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-    } else {
-      this.menu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    if (event.isOrientationModified()) {
+      updateOrientation();
     }
   }
   

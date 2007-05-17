@@ -35,17 +35,17 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   }
 
   /**
-   * This method gets synchron access on the SWT control.
+   * This method gets synchronous access on the SWT control.
    * 
-   * @return the synchron access.
+   * @return the synchronous access.
    */
   public abstract AbstractSyncControlAccess getSyncAccess();
 
   /**
-   * This method gets synchron access on the control that represents the active
-   * part of this component. This method is used by methods such as
+   * This method gets synchronous access on the control that represents the
+   * active part of this component. This method is used by methods such as
    * {@link #setEnabled(boolean)} and {@link #setTooltipText(String)}. It can
-   * be overriden if the implemented component is build out of multiple SWT
+   * be overridden if the implemented component is build out of multiple SWT
    * controls and the top ancestor is not the active control (e.g. composite may
    * have an SWT group as top ancestor that represents a titled border).
    * 
@@ -56,53 +56,6 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
     return getSyncAccess();
   }
 
-  /**
-   * This method gets the parent SWT composite of the components parent node.
-   * This method can be called from the constructor of a subclass to determine
-   * the SWT parent of the widget to create.
-   * 
-   * @return the SWT composite of the parent node or the dummy parent of the
-   *         factory if the parent is <code>null</code>.
-   */
-  /*
-   * protected Composite getSwtParent() {
-   * 
-   * if (getParent() == null) { return getFactory().getDummyParent(); } else if
-   * (getParent().isWindow()) { return ((UIWindowImpl)
-   * getParent()).getSwtWindow(); } else { return (Composite) ((AbstractUIComposite)
-   * getParent()).getSwtControl(); } }
-   */
-
-  /**
-   * This method gets the parent SWT shell of this component.
-   * 
-   * @return the parent shell this component is hooked to or the
-   *         {@link UIFactorySwt#getDummyParent() dummy-shell} if this component
-   *         is not yet attached to a shell.
-   */
-  /*
-   * protected Shell getSwtParentShell() {
-   * 
-   * if (getParent() == null) { return getFactory().getDummyParent(); } else if
-   * (getParent().isWindow()) { return ((UIWindowImpl)
-   * getParent()).getSwtWindow(); } else { return ((AbstractUIComposite)
-   * getParent()).getSwtParentShell(); } }
-   */
-
-  /**
-   * This method gets the unwrapped control that represents the active part of
-   * this component. This method is used by methods such as
-   * {@link #setEnabled(boolean)} and {@link #setTooltipText(String)}. It can
-   * be overriden if the implemented component is build out of multiple SWT
-   * controls and the top ancestor is not the active control (e.g. composite may
-   * have an SWT group as top ancestor that represents a titled border).
-   * 
-   * @return the active unwrapped SWT control.
-   */
-  // protected Control getActiveSwtControl() {
-  //
-  // return getSwtControl();
-  // }
   /**
    * {@inheritDoc}
    */
@@ -153,10 +106,11 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
    * This method removes this component from its {@link #getParent() parent}.
    */
   public void removeFromParent() {
+
     UINode parent = getParent();
     if (parent != null) {
-      setParent(null);    
-      throw new IllegalArgumentException("Currently unsupported!");      
+      setParent(null);
+      throw new IllegalArgumentException("Currently unsupported!");
     }
   }
 
@@ -221,18 +175,18 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
    * {@inheritDoc}
    */
   public int getX() {
-  
+
     return getSyncAccess().getBounds().x;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public int getY() {
-  
+
     return getSyncAccess().getBounds().y;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -257,10 +211,10 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
    * {@inheritDoc}
    */
   public void setPosition(int x, int y) {
-  
+
     getSyncAccess().setLocation(x, y);
   }
-  
+
   /**
    * {@inheritDoc}
    */

@@ -62,6 +62,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
     this.panel = new JPanel(this.layout);
     this.buttonGroup = null;
     this.sizer = null;
+    initialize();
   }
 
   /**
@@ -115,7 +116,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
 
     // synchronized (this) {
     this.panel.remove(index);
-    AbstractUIComponent component = super.removeComponent(index);
+    AbstractUIComponent component = (AbstractUIComponent) super.removeComponent(index);
     JComponent swingComponent = component.getSwingComponent();
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().remove((JRadioButton) swingComponent);
@@ -149,7 +150,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
       getSizer().add(decoratedComponent);
       decoratedComponent.setDecoratorSizer(getSizer());
     }
-    this.components.add(c);
+    doAddComponent(c);
     setParent(c, this);
     // }
     // this.panel.updateUI();
@@ -170,18 +171,10 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().add((JRadioButton) swingComponent);
     }
-    this.components.add(position, c);
+    doAddComponent(position, c);
     setParent(c, this);
     // }
     this.panel.updateUI();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UIComponent getComponent(int index) {
-
-    return this.components.get(index);
   }
 
   /**

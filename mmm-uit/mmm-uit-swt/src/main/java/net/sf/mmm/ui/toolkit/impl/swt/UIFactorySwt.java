@@ -143,7 +143,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    */
   public UIFrame createFrame(String title, boolean resizeable) {
 
-    UIFrameImpl frame = new UIFrameImpl(UIFactorySwt.this, null, resizeable);
+    UIFrameImpl frame = new UIFrameImpl(this, null, resizeable);
     frame.setTitle(title);
     addWindow(frame);
     return frame;
@@ -427,6 +427,26 @@ public class UIFactorySwt extends AbstractUIFactory {
         return SWT.VERTICAL;
       default :
         throw new IllegalArgumentException("Unknown orientation " + orientation);
+    }
+  }
+
+  /**
+   * This method gets the given <code>baseStyle</code> adjusted with the
+   * global settings of the factory.
+   * 
+   * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.ScriptOrientation)
+   * 
+   * @param baseStyle
+   *        is the basic style.
+   * @return the given <code>baseStyle</code> with additional options from
+   *         this factory.
+   */
+  public int adjustStyle(int baseStyle) {
+
+    if (getScriptOrientation().isLeftToRight()) {
+      return baseStyle | SWT.LEFT_TO_RIGHT;
+    } else {
+      return baseStyle | SWT.RIGHT_TO_LEFT;
     }
   }
 

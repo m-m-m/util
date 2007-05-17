@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.api.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 
 /**
  * This is the abstract base implementation of a manager for the layout of a
@@ -31,7 +32,7 @@ public abstract class AbstractLayoutManager {
   protected Orientation layoutOrientation;
 
   /** @see #getFactory() */
-  private UIFactory factory;
+  private AbstractUIFactory factory;
 
   /**
    * The layout constraints of the components. For a given array position the
@@ -75,7 +76,7 @@ public abstract class AbstractLayoutManager {
    * @param factory
    *        is the owning UI-factory.
    */
-  public AbstractLayoutManager(UIFactory factory) {
+  public AbstractLayoutManager(AbstractUIFactory factory) {
 
     super();
     this.factory = factory;
@@ -107,15 +108,15 @@ public abstract class AbstractLayoutManager {
   public Size calculateSize() {
 
     boolean horizontal = isHorizontal();
-    boolean ltr = isFlipHorizontal();
+    boolean flipHorizontal = this.factory.isFlipHorizontal();
     this.size.width = 0;
     this.size.height = 0;
     for (int i = 0; i < this.childCount; i++) {
       int childIndex;
-      if (ltr) {
-        childIndex = i;
-      } else {
+      if (flipHorizontal) {
         childIndex = this.childCount - i - 1;
+      } else {
+        childIndex = i;
       }
       // if with is 0, the component is NOT visible
       if (this.childSizes[childIndex].width != 0) {
@@ -150,24 +151,10 @@ public abstract class AbstractLayoutManager {
 
     boolean horizontal = (this.layoutOrientation == Orientation.HORIZONTAL);
     // was the GUI designed with an horizontally inverted orientation?
-    if (this.factory.getScriptOrientation().isHorizontal() != this.factory.getDesignOrientation()
-        .isHorizontal()) {
+    if (this.factory.isFlipVertical()) {
       horizontal = !horizontal;
     }
     return horizontal;
-  }
-
-  /**
-   * This method determines if the components should be ordered from left to
-   * right.
-   * 
-   * @return <code>true</code> for left-to-right, <code>false</code> for
-   *         right-to-left.
-   */
-  protected boolean isFlipHorizontal() {
-
-    return (this.factory.getScriptOrientation().isLeftToRight() != this.factory
-        .getDesignOrientation().isLeftToRight());
   }
 
   /**
@@ -180,7 +167,7 @@ public abstract class AbstractLayoutManager {
       return;
     }
     boolean horizontal = isHorizontal();
-    boolean flipHorizontal = isFlipHorizontal();
+    boolean flipHorizontal = this.factory.isFlipHorizontal();
     int axisFixed = 0;
     double axisDynamic = 0;
     // pass 1

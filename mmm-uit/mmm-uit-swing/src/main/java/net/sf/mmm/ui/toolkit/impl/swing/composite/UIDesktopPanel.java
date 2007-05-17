@@ -13,8 +13,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
 /**
  * This is the implementation of a
  * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite} interface for the
- * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow#getComposite() content} of
- * a {@link net.sf.mmm.ui.toolkit.api.window.UIWorkbench}.
+ * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow#getComposite() content} of a
+ * {@link net.sf.mmm.ui.toolkit.api.window.UIWorkbench}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,12 +30,15 @@ public class UIDesktopPanel extends AbstractUIMultiComposite {
    * The constructor.
    * 
    * @param uiFactory
+   *        is the UIFactorySwing instance.
    * @param parentObject
+   *        is the parent of this object (may be <code>null</code>).
    */
   public UIDesktopPanel(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject) {
 
     super(uiFactory, parentObject);
     this.workbench = new JDesktopPane();
+    initialize();
   }
 
   /**
@@ -63,7 +66,7 @@ public class UIDesktopPanel extends AbstractUIMultiComposite {
    */
   public void add(UIInternalFrame internalFrame) {
 
-    this.components.add(internalFrame);
+    doAddComponent(internalFrame);
     this.workbench.add(internalFrame.getSwingInternalFrame(), DEFAULT_LAYER);
   }
 

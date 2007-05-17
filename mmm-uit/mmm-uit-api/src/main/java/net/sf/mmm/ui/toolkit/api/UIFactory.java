@@ -79,9 +79,12 @@ public interface UIFactory extends UIWriteDisposed {
   ScriptOrientation getScriptOrientation();
 
   /**
-   * This method sets the users script-orientation. This will have effect on all
-   * existing GUI elements created by this factory, that are currently attached
-   * to a window.
+   * This method sets the users script-orientation. You should set this value at
+   * the beginning before creating your GUI with this factory. If you set this
+   * option at a later time, all existing {@link UIObject GUI-Objects} created
+   * by this factory will be refreshed. Depending on the implementation of this
+   * toolkit this may be an expensive operation, needs to dispose and rebuild
+   * all GUI elements and can cause the loss of data entered by the user.
    * 
    * @see #setLocale(Locale)
    * 

@@ -125,6 +125,36 @@ public abstract class AbstractUIFactory implements UIFactory {
   }
 
   /**
+   * This method determines if the vertical orientation of the GUI should be
+   * inverted (mirrored).
+   * 
+   * @see #getScriptOrientation()
+   * @see #getDesignOrientation()
+   * 
+   * @return <code>true</code> for inverse orientation, <code>false</code>
+   *         for designed orientation.
+   */
+  public boolean isFlipVertical() {
+
+    return (getScriptOrientation().isHorizontal() != getDesignOrientation().isHorizontal());
+  }
+
+  /**
+   * This method determines if the horizontal orientation of the GUI should be
+   * inverted (mirrored).
+   * 
+   * @see #getScriptOrientation()
+   * @see #getDesignOrientation()
+   * 
+   * @return <code>true</code> for inverse orientation, <code>false</code>
+   *         for designed orientation.
+   */
+  public boolean isFlipHorizontal() {
+
+    return (getScriptOrientation().isLeftToRight() != getDesignOrientation().isLeftToRight());
+  }
+
+  /**
    * This method refreshes all
    * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow windows} created by this
    * factory. The refresh of a window recursively refreshes all

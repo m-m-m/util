@@ -46,10 +46,10 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    * {@inheritDoc}
    */
   public Orientation getOrientation() {
-  
+
     return Orientation.HORIZONTAL;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -74,6 +74,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
     } else {
       if (this.border == null) {
         this.border = BorderFactory.createTitledBorder(borderTitle);
+        setBorderJustification();
         getSwingComponent().setBorder(this.border);
       } else {
         this.border.setTitle(borderTitle);
@@ -94,12 +95,30 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   }
 
   /**
+   * This method sets the justification of the border according to the
+   * script-orientation.
+   */
+  public void setBorderJustification() {
+
+    if (this.border != null) {
+      if (getFactory().getScriptOrientation().isLeftToRight()) {
+        this.border.setTitleJustification(TitledBorder.LEFT);
+      } else {
+        this.border.setTitleJustification(TitledBorder.RIGHT);
+      }
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
   public void refresh(UIRefreshEvent event) {
 
     super.refresh(event);
+    if (event.isOrientationModified()) {
+      setBorderJustification();
+    }
     int count = getComponentCount();
     for (int componentIndex = 0; componentIndex < count; componentIndex++) {
       ((AbstractUINode) getComponent(componentIndex)).refresh(event);

@@ -12,21 +12,23 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This is the abstract base implementation of a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite} that can contain
- * any number of components.
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite} that can contain any
+ * number of components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
 
-  /** the component list */
-  protected final List<UIComponent> components;
+  /** the component list. */
+  private final List<UIComponent> components;
 
   /**
    * The constructor.
    * 
    * @param uiFactory
+   *        is the UIFactorySwing instance.
    * @param parentObject
+   *        is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIMultiComposite(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -48,6 +50,56 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   public UIComponent getComponent(int index) {
 
     return this.components.get(index);
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(UIComponent)
+   * 
+   * @param component
+   *        is the component to add.
+   */
+  public void doAddComponent(UIComponent component) {
+
+    this.components.add(component);
+  }
+
+  /**
+   * This method adds (inserts) the <code>component</code> at the given
+   * <code>index</code>.
+   * 
+   * @param index
+   *        is the position where to add the component.
+   * @param component
+   *        is the component to add.
+   */
+  public void doAddComponent(int index, UIComponent component) {
+
+    this.components.add(index, component);
+  }
+
+  /**
+   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(int)
+   * 
+   * @param index
+   *        is the position of the component to remove.
+   * @return the removed component.
+   */
+  protected UIComponent doRemoveComponent(int index) {
+
+    return this.components.remove(index);
+  }
+
+  /**
+   * @see List#indexOf(Object)
+   * 
+   * @param component
+   *        is the component to lookup.
+   * @return the index of the given <code>component</code> or <code>-1</code>
+   *         if NOT found.
+   */
+  protected int indexOfComponent(UIComponent component) {
+
+    return this.components.indexOf(component);
   }
 
 }

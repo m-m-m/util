@@ -11,9 +11,9 @@ import java.awt.LayoutManager2;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
+import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Rectangle;
 import net.sf.mmm.ui.toolkit.base.composite.Size;
@@ -26,7 +26,7 @@ import net.sf.mmm.ui.toolkit.base.composite.Size;
 public class LayoutManager extends AbstractLayoutManager implements LayoutManager2 {
 
   /**
-   * mapps the component to its according layout constraints.
+   * maps the component to its according layout constraints.
    */
   private final Map<Component, LayoutConstraints> component2constraintMap;
 
@@ -37,8 +37,10 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
 
   /**
    * The constructor.
+   * 
+   * @param factory is the owning factory.
    */
-  public LayoutManager(UIFactory factory) {
+  public LayoutManager(AbstractUIFactory factory) {
 
     super(factory);
     this.component2constraintMap = new HashMap<Component, LayoutConstraints>();
@@ -91,7 +93,7 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
   }
 
   /**
-   * This method refreshes the cached data as neccessary.
+   * This method refreshes the cached data as necessary.
    */
   protected void refreshCachedData() {
 

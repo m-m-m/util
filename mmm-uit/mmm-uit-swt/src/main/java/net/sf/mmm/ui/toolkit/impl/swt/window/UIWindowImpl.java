@@ -70,7 +70,8 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
     if (modal) {
       styleModifiers |= SWT.APPLICATION_MODAL;
     }
-    final int style = defaultStyle | styleModifiers;
+    
+    final int style = uiFactory.adjustStyle(defaultStyle | styleModifiers);
     uiFactory.getDisplay().invokeSynchron(new Runnable() {
 
       public void run() {
