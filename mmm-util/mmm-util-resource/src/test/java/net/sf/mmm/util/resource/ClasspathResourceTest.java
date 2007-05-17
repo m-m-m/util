@@ -6,8 +6,6 @@ package net.sf.mmm.util.resource;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 
 import org.junit.Test;
 
@@ -41,9 +39,10 @@ public class ClasspathResourceTest extends TestCase {
   public void testClasspathResource() throws Exception {
 
     verifyResource(new ClasspathResource(ClasspathResource.class, ".txt", true));
-    verifyResource(new ClasspathResource(ClasspathResource.class, "ClasspathResource.txt", false));
+    verifyResource(new ClasspathResource(ClasspathResource.class, //
+        ClasspathResource.class.getSimpleName() + ".txt", false));
     verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(),
-        "ClasspathResource.txt"));
+        ClasspathResource.class.getSimpleName() + ".txt"));
     verifyResource(new ClasspathResource(ClasspathResource.class.getName().replace('.', '/')
         + ".txt"));
   }
