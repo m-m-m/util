@@ -137,6 +137,9 @@
           <!--
           <overview>${basedir}/src/main/java/overview.html</overview>          
           -->
+          <links>
+            <link>http://java.sun.com/javase/6/docs/api/</link>
+          </links>
         </configuration>
       </plugin>
       <plugin>
