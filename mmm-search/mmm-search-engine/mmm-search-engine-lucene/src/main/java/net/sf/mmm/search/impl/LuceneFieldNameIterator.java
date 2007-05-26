@@ -1,3 +1,6 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.impl;
 
 import java.util.Enumeration;
@@ -16,15 +19,17 @@ import org.apache.lucene.document.Field;
 @SuppressWarnings("all")
 public final class LuceneFieldNameIterator implements Iterator<String> {
 
+  /** The enumeration to adapt. */
   private Enumeration/* <Field> */enumeration;
 
+  /** @see #stepNext() */
   private String next;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    * @param luceneDocument
-   *        is the lucene document whos field names should be iterated.
+   *        is the lucene document whose field names should be iterated.
    */
   public LuceneFieldNameIterator(Document luceneDocument) {
 
@@ -34,6 +39,9 @@ public final class LuceneFieldNameIterator implements Iterator<String> {
     stepNext();
   }
 
+  /**
+   * This method steps to the next element (lookahead).
+   */
   private void stepNext() {
 
     if (this.enumeration.hasMoreElements()) {
