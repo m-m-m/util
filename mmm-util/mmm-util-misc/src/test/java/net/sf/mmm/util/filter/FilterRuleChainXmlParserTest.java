@@ -24,7 +24,7 @@ public class FilterRuleChainXmlParserTest extends TestCase {
     String resourceName = FilterRuleChainXmlParserTest.class.getName().replace('.', '/') + ".xml";
     InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
         resourceName);
-    FilterRuleChain chain = parser.parse(inStream);
+    FilterRuleChain chain = parser.parseChain(inStream);
     assertTrue(chain.accept("/doc/manual.pdf"));
     assertFalse(chain.accept("/data/manual.pdf"));
     assertTrue(chain.accept("/data/config.xml"));
