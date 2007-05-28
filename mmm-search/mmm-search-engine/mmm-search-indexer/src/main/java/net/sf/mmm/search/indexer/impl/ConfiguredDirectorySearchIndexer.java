@@ -145,14 +145,14 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
           setFilter(FileFilterAdapter.convertStringFilter(chain));
           File directory = new File(path);
           if (directory.isDirectory()) {
-            throw new IllegalArgumentException();
+            String relativePath = element.getAttribute(XML_ATR_DIRECTORY_INDEXBASEPATH);
+            indexDirectory(source, directory, relativePath);
           } else {
             getLogger().warn("Omitting non-existent directory (" + path + ")!");
           }
-          String relativePath = element.getAttribute(XML_ATR_DIRECTORY_INDEXBASEPATH);
-          indexDirectory(source, directory, relativePath);
         }
       }
     }
+    getIndexer().close();
   }
 }

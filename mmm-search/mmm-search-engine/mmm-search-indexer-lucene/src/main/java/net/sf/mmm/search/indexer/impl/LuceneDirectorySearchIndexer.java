@@ -17,20 +17,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.search.impl.LuceneConstants;
-import net.sf.mmm.search.indexer.api.SearchIndexer;
 
 /**
- * TODO: this class ...
+ * This class represents a search-indexer using lucene as underlying
+ * search-engine that can recursively scans a set of directories and adds
+ * contained files to a search index.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndexer {
-
-  /**
-   * The name of the XML element for a the underlying
-   * {@link SearchIndexer search-indexer}.
-   */
-  public static final String XML_TAG_INDEXER = "indexer";
 
   /**
    * The name of the XML attribute for the <code>create</code> flag. It
@@ -100,12 +95,12 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
       Node child = childNodes.item(i);
       if (child.getNodeType() == Node.ELEMENT_NODE) {
         Element element = (Element) child;
-        if (XML_TAG_INDEXER.equals(element.getTagName())) {
+        if (LuceneConstants.XML_TAG_INDEX.equals(element.getTagName())) {
           String indexPath = element.getAttribute(LuceneConstants.XML_ATR_INDEX_PATH);
           File indexDirectory = new File(indexPath);
           Analyzer analyzer;
-          if (element.hasAttribute(LuceneConstants.XML_ATR_ANALYZER)) {
-            String analyzerClass = element.getAttribute(LuceneConstants.XML_ATR_ANALYZER);
+          if (element.hasAttribute(LuceneConstants.XML_ATR_INDEX_ANALYZER)) {
+            String analyzerClass = element.getAttribute(LuceneConstants.XML_ATR_INDEX_ANALYZER);
             try {
               analyzer = (Analyzer) Class.forName(analyzerClass).newInstance();
             } catch (Exception e) {
@@ -144,7 +139,7 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
       }
     }
     if (luceneIndexer == null) {
-      throw new IllegalArgumentException("Missing XML-element: " + XML_TAG_INDEXER);
+      throw new IllegalArgumentException("Missing XML-element: " + LuceneConstants.XML_TAG_INDEX);
     }
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);
     indexer.setLogger(LogFactory.getLog(LuceneDirectorySearchIndexer.class));

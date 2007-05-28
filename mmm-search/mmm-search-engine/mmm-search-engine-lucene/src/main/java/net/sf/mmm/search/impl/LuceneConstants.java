@@ -11,15 +11,20 @@ package net.sf.mmm.search.impl;
 public interface LuceneConstants {
 
   /**
+   * The name of the XML element for a the configuration of the search-index.
+   */
+  String XML_TAG_INDEX = "index";
+
+  /**
    * The name of the XML attribute that contains the full-qualified class-name
    * of the {@link org.apache.lucene.analysis.Analyzer analyzer} to use.
    */
-  String XML_ATR_ANALYZER = "analyzer";
+  String XML_ATR_INDEX_ANALYZER = "analyzer";
 
   /**
    * The name of the XML attribute that contains the <code>path</code> to the
-   * directory with the search-index.
+   * directory with the {@link #XML_TAG_INDEX search-index}.
    */
-  String XML_ATR_INDEX_PATH = "index-path";
+  String XML_ATR_INDEX_PATH = "path";
 
 }
