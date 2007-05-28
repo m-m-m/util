@@ -38,7 +38,7 @@ public final class FileFilterAdapter {
 
       public boolean accept(File file) {
 
-        return filter.accept(file.getPath());
+        return filter.accept(file.getPath().replace('\\', '/'));
       }
     };
   }
