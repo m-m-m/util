@@ -23,7 +23,8 @@ import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 
 /**
- * This is the controller {@link javax.servlet.Servlet servlet} of the search.
+ * This is the abstract base implementation of the controller
+ * {@link javax.servlet.Servlet servlet} of the search.
  * 
  * @author Joerg Hohwiller
  */
@@ -92,9 +93,9 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       if (this.detailsPath == null) {
         this.detailsPath = "/details";
       }
-      String configPath = config.getInitParameter("configFile");
+      String configPath = config.getInitParameter("config-file");
       if (configPath == null) {
-        throw new ResourceMissingException("configFile");
+        throw new ResourceMissingException("config-file");
       }
       if (configPath.startsWith("~/")) {
         String home = System.getProperty("user.home");

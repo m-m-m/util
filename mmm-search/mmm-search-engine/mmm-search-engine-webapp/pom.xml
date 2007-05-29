@@ -8,26 +8,18 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <name>MMM Search Engine::Webapp</name>
-  <description>This project provides useful stuff to build a webapplication using the provided search-engine.</description>
+  <description>This project a demo webapplication using lucene as search-engine.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-engine-webapp</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <dependencies>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-search-engine-api</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <!--
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-search-engine-lucene</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
