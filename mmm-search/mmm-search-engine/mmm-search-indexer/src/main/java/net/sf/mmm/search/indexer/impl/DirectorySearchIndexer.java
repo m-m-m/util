@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
 
+import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.parser.api.ContentParser;
@@ -155,6 +156,9 @@ public class DirectorySearchIndexer {
     }
     if (this.logger == null) {
       this.logger = new NoOpLog();
+    }
+    if (this.indexer == null) {
+      throw new ResourceMissingException("indexer");
     }
   }
 

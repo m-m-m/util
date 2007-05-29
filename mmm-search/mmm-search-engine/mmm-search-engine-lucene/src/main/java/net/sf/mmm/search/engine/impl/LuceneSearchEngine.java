@@ -43,8 +43,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /** @see #getQueryBuilder() */
   private SearchQueryBuilder queryBuilder;
 
-  /** @see #setAnalyzier(Analyzer) */
-  private Analyzer analyzier;
+  /** @see #setAnalyzer(Analyzer) */
+  private Analyzer analyzer;
 
   /** the lucene query parser */
   private QueryParser queryParser;
@@ -62,29 +62,23 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   private Formatter highlightFormatter;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public LuceneSearchEngine() {
 
     super();
-    this.analyzier = null;
-    this.queryParser = null;
-    this.searcher = null;
-    this.indexPath = null;
-    this.queryBuilder = null;
     this.ignoreLeadingWildcards = true;
-    this.highlightFormatter = null;
   }
 
   /**
-   * This method sets the lucene analyser used by this search engine.
+   * This method sets the lucene analyzer used by this search engine.
    * 
-   * @param luceneAnalyzier
-   *        the analyzier to set
+   * @param luceneAnalyzer
+   *        the analyzer to set
    */
-  public void setAnalyzier(Analyzer luceneAnalyzier) {
+  public void setAnalyzer(Analyzer luceneAnalyzer) {
 
-    this.analyzier = luceneAnalyzier;
+    this.analyzer = luceneAnalyzer;
   }
 
   /**
@@ -181,17 +175,17 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * to inject the {@link #setIndexPath(String) index-path} or the
    * {@link #setSearcher(Searcher) searcher} before you can call this method.
    * 
-   * @throws Exception
-   *         if the initialization fails for arbitrary reasons.
+   * @throws IOException
+   *         if the initialization fails with an I/O error.
    */
   @PostConstruct
-  public void initialize() throws Exception {
+  public void initialize() throws IOException {
 
-    if (this.analyzier == null) {
-      this.analyzier = new StandardAnalyzer();
+    if (this.analyzer == null) {
+      this.analyzer = new StandardAnalyzer();
     }
     if (this.queryParser == null) {
-      this.queryParser = new QueryParser(SearchEntry.PROPERTY_TEXT, this.analyzier);
+      this.queryParser = new QueryParser(SearchEntry.PROPERTY_TEXT, this.analyzer);
     }
     if (this.searcher == null) {
       if (this.indexPath == null) {
@@ -200,7 +194,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       this.searcher = new IndexSearcher(this.indexPath);
     }
     if (this.queryBuilder == null) {
-      this.queryBuilder = new LuceneSearchQueryBuilder(this.analyzier, this.ignoreLeadingWildcards);
+      this.queryBuilder = new LuceneSearchQueryBuilder(this.analyzer, this.ignoreLeadingWildcards);
     }
     if (this.highlightFormatter == null) {
       this.highlightFormatter = new SimpleHTMLFormatter(SearchHit.HIGHLIGHT_START_TAG,
@@ -219,7 +213,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       Hits hits = this.searcher.search(luceneQuery);
       SearchHighlighter highlighter;
       if (hits.length() > 0) {
-        highlighter = new LuceneSearchHighlighter(this.analyzier, this.highlightFormatter,
+        highlighter = new LuceneSearchHighlighter(this.analyzer, this.highlightFormatter,
             luceneQuery);
       } else {
         highlighter = null;

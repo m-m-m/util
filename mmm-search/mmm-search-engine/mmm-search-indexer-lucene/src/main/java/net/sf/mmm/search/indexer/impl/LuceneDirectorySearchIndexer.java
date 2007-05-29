@@ -8,15 +8,12 @@ import java.io.File;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.index.IndexModifier;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import net.sf.mmm.search.impl.LuceneConstants;
+import net.sf.mmm.search.base.SearchConfigurator;
+import net.sf.mmm.search.impl.LuceneSearchConfigurator;
+import net.sf.mmm.util.xml.DomUtil;
 
 /**
  * This class represents a search-indexer using lucene as underlying
@@ -77,74 +74,25 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
       System.exit(-1);
     }
     // parse xml from file...
-    Element xmlConfigElement;
+    Element element;
     try {
       File xmlConfigFile = new File(args[0]);
       Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
           xmlConfigFile);
-      xmlConfigElement = xmlConfigDoc.getDocumentElement();
+      element = xmlConfigDoc.getDocumentElement();
     } catch (Exception e) {
       usage();
       System.out.println("Error: Failed to load configuration from file: " + args[0]);
       throw e;
     }
-    // parse xml content and create lucene-indexer
-    LuceneSearchIndexer luceneIndexer = null;
-    NodeList childNodes = xmlConfigElement.getChildNodes();
-    for (int i = 0; i < childNodes.getLength(); i++) {
-      Node child = childNodes.item(i);
-      if (child.getNodeType() == Node.ELEMENT_NODE) {
-        Element element = (Element) child;
-        if (LuceneConstants.XML_TAG_INDEX.equals(element.getTagName())) {
-          String indexPath = element.getAttribute(LuceneConstants.XML_ATR_INDEX_PATH);
-          File indexDirectory = new File(indexPath);
-          Analyzer analyzer;
-          if (element.hasAttribute(LuceneConstants.XML_ATR_INDEX_ANALYZER)) {
-            String analyzerClass = element.getAttribute(LuceneConstants.XML_ATR_INDEX_ANALYZER);
-            try {
-              analyzer = (Analyzer) Class.forName(analyzerClass).newInstance();
-            } catch (Exception e) {
-              throw new IllegalArgumentException("Illegal analyzer: " + analyzerClass, e);
-            }
-          } else {
-            analyzer = new StandardAnalyzer();
-          }
-          boolean update = false;
-          if (element.hasAttribute(XML_ATR_INDEXER_UPDATE)) {
-            String updateFlag = element.getAttribute(XML_ATR_INDEXER_UPDATE);
-            if (Boolean.TRUE.toString().equalsIgnoreCase(updateFlag)) {
-              update = true;
-            } else if (Boolean.FALSE.toString().equalsIgnoreCase(updateFlag)) {
-              update = false;
-            } else {
-              throw new IllegalArgumentException("XML-Attribute " + XML_ATR_INDEXER_UPDATE
-                  + " must be either 'true' or 'false'!");
-            }
-          }
-          boolean create;
-          if (update) {
-            if (indexDirectory.isDirectory()) {
-              create = false;
-            } else {
-              indexDirectory.mkdirs();
-              create = true;
-            }
-          } else {
-            indexDirectory.mkdirs();
-            create = true;
-          }
-          IndexModifier indexModifier = new IndexModifier(indexDirectory, analyzer, create);
-          luceneIndexer = new LuceneSearchIndexer(indexModifier);
-        }
-      }
-    }
-    if (luceneIndexer == null) {
-      throw new IllegalArgumentException("Missing XML-element: " + LuceneConstants.XML_TAG_INDEX);
-    }
+    LuceneSearchConfigurator configurator = new LuceneSearchConfigurator();
+    Element searchEngineElement = DomUtil.requireFirstChildElement(element,
+        SearchConfigurator.XML_TAG_SEARCH_ENGINE);
+    LuceneSearchIndexer luceneIndexer = configurator.createSearchIndexer(searchEngineElement);
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);
     indexer.setLogger(LogFactory.getLog(LuceneDirectorySearchIndexer.class));
     indexer.initialize();
-    indexer.index(xmlConfigElement);
+    indexer.index(element);
   }
 
 }
