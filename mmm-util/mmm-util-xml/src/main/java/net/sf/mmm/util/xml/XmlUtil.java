@@ -14,7 +14,7 @@ import net.sf.mmm.util.io.EscapeWriter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class XmlUtil {
+public final class XmlUtil {
 
   /** the xml entity for an ampersand sign (&) */
   public static final String ENTITY_AMPERSAND = "&amp;";
@@ -38,7 +38,7 @@ public class XmlUtil {
     int arraySize = StrictMath.max(StrictMath.max(StrictMath.max('<', '>'), '&'), '"') + 1;
     CHAR_ESCAPE_TABLE_TEXT = new String[arraySize];
     CHAR_ESCAPE_TABLE_ATTRIBUTE = new String[arraySize];
-    // would not be neccessary for sun jvm, but you never know...
+    // would not be necessary for sun JVM, but you never know...
     for (int i = 0; i < arraySize; i++) {
       CHAR_ESCAPE_TABLE_TEXT[i] = null;
       CHAR_ESCAPE_TABLE_ATTRIBUTE[i] = null;
@@ -67,7 +67,7 @@ public class XmlUtil {
   }
 
   /**
-   * This method creates a wrapper (fasade) on the given writer that escapes the
+   * This method creates a wrapper (facade) on the given writer that escapes the
    * characters reserved in XML attributes (CDATA).<br>
    * E.g. the character '"' will automatically written as {@link #ENTITY_QUOTE}
    * by the returned writer.
@@ -83,7 +83,7 @@ public class XmlUtil {
   }
 
   /**
-   * This method creates a wrapper (fasade) on the given writer that escapes the
+   * This method creates a wrapper (facade) on the given writer that escapes the
    * characters reserved in XML text (PCDATA).<br>
    * E.g. the character '&' will automatically written as
    * {@link #ENTITY_AMPERSAND} by the returned writer.

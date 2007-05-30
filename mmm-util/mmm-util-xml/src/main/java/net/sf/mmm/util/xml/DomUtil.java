@@ -35,7 +35,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import net.sf.mmm.util.BasicUtil;
-import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
@@ -87,7 +86,7 @@ public final class DomUtil {
       return BUILDER_FACTORY.newDocumentBuilder();
     } catch (ParserConfigurationException e) {
       throw new IllegalStateException("XML Parser misconfigured!"
-          + " Propably your JVM does not support the required JAXP version!", e);
+          + " Probably your JVM does not support the required JAXP version!", e);
     }
   }
 
@@ -157,6 +156,84 @@ public final class DomUtil {
   }
 
   /**
+   * This method gets the first child-element of the given <code>element</code>
+   * with the specified <code>tagName</code>.
+   * 
+   * @param element
+   *        is the element (potentially) containing the requested child-element.
+   * @param tagName
+   *        is the {@link Element#getTagName() tag-name} of the requested
+   *        element or <code>null</code> if any element is acceptable.
+   * @return the first element in the node-list with the given tag-name (or at
+   *         all if tag-name is <code>null</code>). If no such element exists
+   *         in the node-list, <code>null</code> is returned.
+   */
+  public static Element getFirstChildElement(Element element, String tagName) {
+
+    return getFirstElement(element.getChildNodes(), tagName);
+  }
+
+  /**
+   * This method requires the first child-element of the given
+   * <code>element</code> with the specified <code>tagName</code>.
+   * 
+   * @param element
+   *        is the element (potentially) containing the requested child-element.
+   * @param tagName
+   *        is the {@link Element#getTagName() tag-name} of the requested
+   *        element or <code>null</code> if any element is acceptable.
+   * @return the first element in the node-list with the given tag-name (or at
+   *         all if tag-name is <code>null</code>).
+   * @throws IllegalArgumentException
+   *         if the requested child element does NOT exist.
+   */
+  public static Element requireFirstChildElement(Element element, String tagName)
+      throws IllegalArgumentException {
+
+    Element result = getFirstChildElement(element, tagName);
+    if (result == null) {
+      throw new IllegalArgumentException("Missing element '" + tagName + "' in element '"
+          + element.getTagName() + "'!");
+    }
+    return result;
+  }
+
+  /**
+   * This method gets the value of the <code>attribute</code> from the given
+   * <code>element</code> as a boolean value.
+   * 
+   * @param element
+   *        is the element potentially containing the requested boolean
+   *        attribute.
+   * @param attribute
+   *        is the name of the requested attribute.
+   * @param defaultValue
+   *        is the default returned if the attribute is NOT present.
+   * @return the value of the specified <code>attribute</code> or the
+   *         <code>defaultValue</code> if the attribute is NOT present.
+   * @throws IllegalArgumentException
+   *         if the value of the specified attribute does NOT represent a
+   *         boolean value.
+   */
+  public static boolean getAttributeAsBoolean(Element element, String attribute,
+      boolean defaultValue) throws IllegalArgumentException {
+
+    boolean result = defaultValue;
+    if (element.hasAttribute(attribute)) {
+      String flag = element.getAttribute(attribute);
+      if (Boolean.TRUE.toString().equalsIgnoreCase(flag)) {
+        result = true;
+      } else if (Boolean.FALSE.toString().equalsIgnoreCase(flag)) {
+        result = false;
+      } else {
+        throw new IllegalArgumentException("XML-Attribute " + attribute
+            + " must be either 'true' or 'false'!");
+      }
+    }
+    return result;
+  }
+
+  /**
    * This method gets the text of the given node excluding the text of child
    * elements (depth=0).
    * 
@@ -197,7 +274,7 @@ public final class DomUtil {
    * element including the text of CDATA sections. The text of child elements is
    * only appended according to the given depth. If the depth is less than 1,
    * child elements are ignored, if equal to 1, the text of child elements is
-   * included without their child elements. For an infinte depth use
+   * included without their child elements. For an infinite depth use
    * <code>Integer.MAX_VALUE</code>. E.g. for the a element <code>a</code>
    * in <br>
    * <code>&lt;a&gt;123&lt;b/&gt;4&lt;c&gt;5&lt;d&gt;6&lt;/d&gt;&lt;/c&gt;
@@ -265,16 +342,18 @@ public final class DomUtil {
    *        is the input stream to the XML data.
    * @return the parsed XML DOM document.
    * @throws XmlException
-   *         if the input stream produced an IOException or the XML is invalid.
+   *         if the XML is invalid.
+   * @throws IOException
+   *         if the input stream produced an error while reading.
    */
-  public static Document parseDocument(InputStream inputStream) throws XmlException {
+  public static Document parseDocument(InputStream inputStream) throws XmlException, IOException {
 
     try {
       return createDocumentBuilder().parse(inputStream);
     } catch (SAXException e) {
       throw new XmlException(e.getMessage(), e);
-    } catch (IOException e) {
-      throw new XmlException(e.getMessage(), e);
+    } finally {
+      inputStream.close();
     }
   }
 
@@ -364,7 +443,7 @@ public final class DomUtil {
    *        <code>true</code> if the XML should be indented (automatically add
    *        linebreaks before opening tags), <code>false</code> otherwise.
    * @throws XmlException
-   *         if the tranformation failed (e.g. I/O error, invalid XML, or
+   *         if the transformation failed (e.g. I/O error, invalid XML, or
    *         whatever).
    */
   public static void transformXml(Source source, Result result, boolean indent) throws XmlException {
@@ -518,7 +597,7 @@ public final class DomUtil {
           text1.setLength(0);
           text2.setLength(0);
         } else {
-          // mmhm, nodes may NOT be normalized...
+          // nodes may NOT be normalized...
           if (node1.getNodeType() == Node.COMMENT_NODE) {
             // skip node1
             index2--;
@@ -559,8 +638,6 @@ public final class DomUtil {
    * @param sb1
    * @param node2
    * @param sb2
-   * @return -1 falls textNode1 ?bersprungen werden sollte, 0 falls keine
-   *         ?bereinstimmung festgestellt wurde, 1 normal weitermachen.
    */
   private static int equalsTextNode(Node textNode1, StringBuffer sb1, Node node2, StringBuffer sb2) {
 
@@ -628,7 +705,7 @@ public final class DomUtil {
    * @param node
    *        is the XML node to serialize.
    * @throws XmlException
-   *         if the xml serilization failed.
+   *         if the xml serialization failed.
    */
   public static void toXml(XmlWriter xmlWriter, Node node) throws XmlException {
 
@@ -647,13 +724,11 @@ public final class DomUtil {
       NamedNodeMap attributeList = element.getAttributes();
       int length = attributeList.getLength();
       for (int i = 0; i < length; i++) {
-        // who ever out of this w3c guyz named it Attr...
         toXml(xmlWriter, attributeList.item(i));
       }
       NodeList childList = element.getChildNodes();
       length = childList.getLength();
       for (int i = 0; i < length; i++) {
-        // who ever out of this w3c guyz named it Attr...
         toXml(xmlWriter, childList.item(i));
       }
       if (prefix == null) {

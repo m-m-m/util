@@ -11,14 +11,14 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 /**
- * This utitlity class contains methods that help to work with the StAX API (JSR
+ * This utility class contains methods that help to work with the StAX API (JSR
  * 173).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class StaxUtil {
+public final class StaxUtil {
 
-  /** the stax output factory */
+  /** the StAX output factory */
   private static final XMLOutputFactory OUTPUT_FACTORY = XMLOutputFactory.newInstance();
 
   /**
