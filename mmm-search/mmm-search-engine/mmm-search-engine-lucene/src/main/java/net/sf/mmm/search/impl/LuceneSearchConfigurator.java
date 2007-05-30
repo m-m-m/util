@@ -171,6 +171,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
     indexer.setAnalyzer(createAnalyzer(element));
     indexer.setIndexPath(getIndexPath(element));
     indexer.setUpdate(isUpdate(element));
+    indexer.initialize();
     return indexer;
   }
 

@@ -3,7 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view;
 
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Element;
@@ -15,7 +19,7 @@ import org.w3c.dom.NodeList;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SearchViewConfiguration {
+public final class SearchViewConfiguration {
 
   /** The name of the XML element for a list of {@link #XML_TAG_SOURCE sources}. */
   public static final String XML_TAG_SOURCES = "sources";
@@ -82,6 +86,12 @@ public class SearchViewConfiguration {
   /** @see #getUrlPrefixBySource(String) */
   private Map<String, String> source2urlMap;
 
+  /** @see #getTypeNames() */
+  private List<String> typeNames;
+
+  /** @see #getSourceNames() */
+  private List<String> sourceNames;
+
   /** @see #getIconName(String) */
   private String defaultIcon;
 
@@ -89,6 +99,7 @@ public class SearchViewConfiguration {
    * The constructor.
    * 
    * @param xmlConfiguration
+   *        is the XML-element containing the configuration.
    */
   public SearchViewConfiguration(Element xmlConfiguration) {
 
@@ -96,6 +107,9 @@ public class SearchViewConfiguration {
     this.type2iconMap = new HashMap<String, String>();
     this.typeName2typeMap = new HashMap<String, String>();
     this.sourceName2sourceMap = new HashMap<String, String>();
+    this.source2urlMap = new HashMap<String, String>();
+    this.sourceNames = new ArrayList<String>();
+    this.typeNames = new ArrayList<String>();
     NodeList childNodes = xmlConfiguration.getChildNodes();
     for (int i = 0; i < childNodes.getLength(); i++) {
       Node child = childNodes.item(i);
@@ -124,7 +138,7 @@ public class SearchViewConfiguration {
       Node child = childNodes.item(i);
       if (child.getNodeType() == Node.ELEMENT_NODE) {
         Element element = (Element) child;
-        if (XML_TAG_SOURCES.equals(element.getTagName())) {
+        if (XML_TAG_SOURCE.equals(element.getTagName())) {
           String id = element.getAttribute(XML_ATR_SOURCE_ID);
           if (element.hasAttribute(XML_ATR_SOURCE_NAME)) {
             String name = element.getAttribute(XML_ATR_SOURCE_NAME);
@@ -137,10 +151,12 @@ public class SearchViewConfiguration {
         }
       }
     }
+    this.sourceNames.addAll(this.sourceName2sourceMap.keySet());
+    Collections.sort(this.sourceNames, Collator.getInstance());
   }
 
   /**
-   * This method parses the {@link #XML_TAG_FILETYPES filetypes}
+   * This method parses the {@link #XML_TAG_FILETYPES filetypes}.
    * 
    * @param filetypesElement
    *        is the {@link #XML_TAG_FILETYPES filetypes-element}.
@@ -165,6 +181,8 @@ public class SearchViewConfiguration {
         }
       }
     }
+    this.typeNames.addAll(this.typeName2typeMap.keySet());
+    Collections.sort(this.typeNames, Collator.getInstance());
   }
 
   /**
@@ -185,7 +203,7 @@ public class SearchViewConfiguration {
 
   /**
    * This method gets the URL-prefix for the given
-   * <code>{@link net.sf.mmm.search.api.SearchEntry#getSource() source}</code>
+   * <code>{@link net.sf.mmm.search.api.SearchEntry#getSource() source}</code>.
    * 
    * @param source
    *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
@@ -231,6 +249,22 @@ public class SearchViewConfiguration {
       iconName = this.defaultIcon;
     }
     return iconName;
+  }
+
+  /**
+   * @return the sourceNames
+   */
+  public List<String> getSourceNames() {
+
+    return this.sourceNames;
+  }
+
+  /**
+   * @return the typeNames
+   */
+  public List<String> getTypeNames() {
+
+    return this.typeNames;
   }
 
 }

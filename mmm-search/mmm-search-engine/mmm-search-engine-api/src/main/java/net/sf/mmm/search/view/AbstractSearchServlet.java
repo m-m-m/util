@@ -186,12 +186,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
         appendFieldQuery(mainQuery, SearchEntry.PROPERTY_AUTHOR, searchContext.getAuthor());
         appendFieldQuery(mainQuery, SearchEntry.PROPERTY_TITLE, searchContext.getTitle());
         appendFieldQuery(mainQuery, SearchEntry.PROPERTY_TYPE, searchContext.getType());
-        String source = searchContext.getSource();
-        if (source.length() > 0) {
-          SearchQuery sourceQuery = queryBuilder.createTermQuery(SearchEntry.PROPERTY_URI, source
-              + "*");
-          mainQuery.addRequiredQuery(sourceQuery);
-        }
+        appendFieldQuery(mainQuery, SearchEntry.PROPERTY_SOURCE, searchContext.getSource());
         int querySize = mainQuery.getSubQueryCount();
         if (querySize > 0) {
           if ((query == null) || (querySize > 1)) {
