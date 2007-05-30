@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.impl.format.xml.dom;
 
-import com.sun.org.apache.xerces.internal.xni.NamespaceContext;
-
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -20,12 +18,19 @@ import net.sf.mmm.util.xml.DomUtil;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to
- * adapt an {@link org.w3c.dom.Element xml-element}.
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to adapt
+ * an {@link org.w3c.dom.Element xml-element}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XmlElement extends AbstractConfigurationElement {
+
+  /**
+   * XML Information Set REC all namespace attributes (including those named
+   * xmlns, whose [prefix] property has no value) have a namespace URI of
+   * http://www.w3.org/2000/xmlns/
+   */
+  public static final String XMLNS_URI = "http://www.w3.org/2000/xmlns/".intern();
 
   /** the owner document */
   private final XmlDocument document;
@@ -66,7 +71,7 @@ public class XmlElement extends AbstractConfigurationElement {
     NamedNodeMap attributeList = this.element.getAttributes();
     for (int i = 0; i < attributeList.getLength(); i++) {
       Attr xmlAttribute = (Attr) attributeList.item(i);
-      if (!NamespaceContext.XMLNS_URI.equals(xmlAttribute.getNamespaceURI())) {
+      if (!XMLNS_URI.equals(xmlAttribute.getNamespaceURI())) {
         child = new XmlAttribute(this.document, this, xmlAttribute);
         child.initialize();
         addChild(child);
@@ -95,7 +100,7 @@ public class XmlElement extends AbstractConfigurationElement {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public String getName() {
 
@@ -156,7 +161,7 @@ public class XmlElement extends AbstractConfigurationElement {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration createChildAttribute(String name, String namespaceUri) {
@@ -165,7 +170,7 @@ public class XmlElement extends AbstractConfigurationElement {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   @Override
   protected AbstractConfiguration createChildElement(String name, String namespaceUri) {

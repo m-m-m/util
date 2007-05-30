@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.configuration.impl.format.xml.dom;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -122,6 +123,9 @@ public class XmlDocument extends AbstractConfigurationDocument {
       Element rootElement = this.xmlDocument.getDocumentElement();
       XmlElement rootNode = new XmlElement(this, getParentConfiguration(), rootElement);
       return rootNode;
+    } catch (IOException e) {
+      // TODO: NLS
+      throw new ConfigurationException(e.getMessage(), e);
     } catch (XmlException e) {
       // TODO: NLS
       throw new ConfigurationException(e.getMessage(), e);
