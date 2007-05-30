@@ -143,6 +143,9 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
                 + filterId + ") that does NOT exist!");
           }
           setFilter(FileFilterAdapter.convertStringFilter(chain));
+          if (path.startsWith("~/")) {
+            path = System.getProperty("user.home") + path.substring(1);
+          }
           File directory = new File(path);
           if (directory.isDirectory()) {
             String relativePath = element.getAttribute(XML_ATR_DIRECTORY_INDEXBASEPATH);
