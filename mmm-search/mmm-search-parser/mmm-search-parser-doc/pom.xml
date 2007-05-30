@@ -20,11 +20,5 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    <dependency>
-      <groupId>org.textmining</groupId>
-      <artifactId>tm-extractors</artifactId>
-      <version>0.4-patched</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 </project>

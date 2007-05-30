@@ -28,7 +28,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 public class ContentParserXls extends AbstractPoiContentParser {
 
   /**
-   * The constructor
+   * The constructor. 
    */
   public ContentParserXls() {
 
@@ -44,7 +44,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
     int maxBufferSize = getMaximumBufferSize();
     int maxCharSize = maxBufferSize / 2;
     InputStream documentInputStream = poiFs.createDocumentInputStream(POIFS_EXCEL_DOC);
-    // actually there seems no smat guess for the initial capacity of textBuffer
+    // actually there seems no smart guess for the initial capacity of textBuffer
     // the text length can have any ration to documentInputStream.available()
     // the only possibility would be to create the string buffer in the listener
     // from the size of the SSTRecord. In this case stable code is better than
@@ -60,7 +60,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
     }
     return textBuffer.toString();
   }
-
+  
   /**
    * This inner class acts as listener for HSSF events and appends the received
    * text to a string-buffer.
@@ -76,7 +76,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
     /** list with the sheet names */
     private final List<String> sheetNames;
 
-    /** curretn SST record (table with unique strings) */
+    /** current SST record (table with unique strings) */
     private SSTRecord sstrec;
 
     /** current row */
@@ -86,7 +86,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
     private int sheet;
 
     /**
-     * The constructor
+     * The constructor. 
      * 
      * @param textBuffer
      *        is the buffer where to append the text to.
@@ -157,7 +157,7 @@ public class ContentParserXls extends AbstractPoiContentParser {
                 this.buffer.append('\n');
                 this.row = newRow;
               }
-              append(this.sstrec.getString(lrec.getSSTIndex()));
+              append(this.sstrec.getString(lrec.getSSTIndex()).getString());
             }
             break;
         }
