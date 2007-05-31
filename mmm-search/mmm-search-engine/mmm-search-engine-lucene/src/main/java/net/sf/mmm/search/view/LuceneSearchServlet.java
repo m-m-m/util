@@ -45,7 +45,9 @@ public class LuceneSearchServlet extends AbstractSearchServlet {
       setSearchEngine(searchEngine);
       super.configure(xmlConfiguration);
     } catch (IOException e) {
-      throw new IllegalStateException("Failed to configure search engine!", e);
+      // tomcat is too stupid to print out the right root cause so we include
+      // the message of "e"
+      throw new IllegalStateException("Failed to configure search engine: " + e.getMessage(), e);
     }
   }
 }
