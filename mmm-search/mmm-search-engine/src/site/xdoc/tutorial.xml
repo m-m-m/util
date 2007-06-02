@@ -96,6 +96,80 @@ for (int i = 0; i < hitCount; i++) {
   System.out.println(hit.getHighlightedText());
 }]]></source>
       </subsection>
+      <subsection name="Index and Search files from disc">
+        You think the stuff above is somewhat overcomplicated?
+        Well, if you want to index directories from your local disc 
+        you can have it even a lot easier using 
+        <a href="mmm-search-indexer-lucene/index.html">Search Indexer::Lucene</a> for 
+        indexing. For searching there is also a solution provided by
+        <a href="mmm-search-engine-webapp/index.html">Search Engine::Webapp</a>.
+        Simply create your configuration as XML file like this:
+        <source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<search>
+  <!-- core configuration of the search-engine -->
+  <search-engine>
+    <analyzer class="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
+    <index path="~/search/index/" update="false"/>
+    <!-- Enable wildcard queries for lucene (WARNING: this is a performance
+    risk. Never use this for public internet searches!) -->
+    <query leading-wildcards="true"/>
+  </search-engine>
+  <!-- configuration of filters used when indexing directories -->
+  <filters>
+    <filter-chain id="default-filter" default-result="true">
+      <!-- ignore folders and files that start with '.' (e.g. ".svn", ".eclipse") -->
+      <exclude pattern="/\.[^/]*$"/>
+      <!-- ignore folders (and files) with the name "CVS" -->
+      <exclude pattern="/CVS$"/>
+    </filter-chain>
+    <filter-chain id="maven-filter" default-result="true" parent="default-filter">
+      <!-- ignore folders (and files) with the name "target" -->
+      <exclude pattern="/target$"/>
+    </filter-chain>
+  </filters>
+  <!-- configuration of directories to index -->
+  <directories>
+    <directory path="~/projects/foo/trunk" source="svn" filter="maven-filter" index-base-path=""/>
+    <directory path="~/projects/foo/wiki/data" source="wiki" filter="default-filter" index-base-path=""/>
+  </directories>
+  <!-- configuration of sources for view (webapp) -->
+  <sources>
+    <source id="" name="Any"/>
+    <source id="svn" name="Subversion" url-prefix="http://foo.org/svn/trunk"/>
+    <source id="wiki" name="Wiki" url-prefix="http://foo.org/wiki/"/>
+  </sources>
+  <!-- configuration of file-types for view (webapp) -->
+  <filetypes default-icon="file.gif">
+    <type id="" name="Any"/>
+    <!-- office formats -->
+    <type id="pdf" name="PDF" icon="pdf.gif"/>
+    <type id="dot" icon="word.gif"/>
+    <type id="doc" name="Word" icon="word.gif"/>
+    <type id="rtf" name="RTF" icon="rtf.gif"/>
+    <type id="xls" name="Excel" icon="excel.gif"/>
+    <type id="ppt" name="Powerpoint" icon="powerpoint.gif"/>
+    <type id="ps" name="Postscript" icon="postscript.gif"/>
+
+    <!-- plain formats -->
+    <type id="txt" icon="text.gif"/>
+    <type id="xml" icon="text.gif"/>
+
+    <!-- web formats -->
+    <type id="html" name="HTML" icon="firefox.gif"/>
+    <type id="htm" icon="ie.gif"/>
+    <type id="css" icon="css.gif"/>
+
+    <!-- etc. etc. etc. -->
+
+  </filetypes>
+</search>
+]]></source>
+        Now for indexing all you have to do is start the indexer with this XML.
+        <source><![CDATA[
+java net.sf.mmm.search.indexer.impl.LuceneDirectorySearchIndexer <path-to-xml-config>
+]]></source>
+      </subsection>
     </section>
   </body>
 </document>
