@@ -56,6 +56,8 @@ public final class DomUtil {
 
       BUILDER_FACTORY = DocumentBuilderFactory.newInstance();
       BUILDER_FACTORY.setNamespaceAware(true);
+      // TODO: XInclude can be a security risk and should NOT be enabled in any
+      // case! Why using a singleton at all?
       BUILDER_FACTORY.setXIncludeAware(true);
       TRANSFORMER_FACTORY = TransformerFactory.newInstance();
 
@@ -108,7 +110,7 @@ public final class DomUtil {
       return result;
     } catch (TransformerConfigurationException e) {
       throw new IllegalStateException("XML Transformer misconfigured!"
-          + " Propably your JVM does not support the required JAXP version!", e);
+          + " Probably your JVM does not support the required JAXP version!", e);
     }
   }
 

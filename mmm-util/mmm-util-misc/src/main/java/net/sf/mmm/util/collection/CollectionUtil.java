@@ -24,7 +24,7 @@ import java.util.TreeSet;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class CollectionUtil {
+public final class CollectionUtil {
 
   /** @see #create(Class) */
   private static final Map<Class<? extends Collection>, Class<? extends Collection>> COLLECTION_IMPLEMENTATIONS;

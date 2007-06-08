@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.regex.Pattern;
 
 /**
@@ -20,7 +23,7 @@ public final class StringUtil {
   public static final String FALSE = String.valueOf(false);
 
   /** @see #toCamlCase(String) */
-  private static final char[] SEPARATORS = new char[] {' ', '-', '_', '.'};
+  private static final char[] SEPARATORS = new char[] { ' ', '-', '_', '.' };
 
   /**
    * Forbidden constructor.
@@ -88,7 +91,7 @@ public final class StringUtil {
   }
 
   /**
-   * IsEmpty with trim set to <code>true</code>.
+   * This method determines if the given string contains no information.
    * 
    * @see #isEmpty(String, boolean)
    * 
@@ -103,7 +106,7 @@ public final class StringUtil {
   }
 
   /**
-   * This method determines if the given string contains no information.
+   * This method determines if the given string is empty.
    * 
    * @param string
    *        is the string to check.
@@ -118,10 +121,13 @@ public final class StringUtil {
     if (string == null) {
       return true;
     }
+    String s;
     if (trim) {
-      string = string.trim();
+      s = string.trim();
+    } else {
+      s = string;
     }
-    return (string.length() == 0);
+    return (s.length() == 0);
   }
 
   /**
@@ -182,6 +188,73 @@ public final class StringUtil {
       return null;
     } else {
       return Pattern.compile(buffer.toString());
+    }
+  }
+
+  /**
+   * This method escapes the given <code>string</code> for usage in XML (or
+   * HTML, etc.).
+   * 
+   * @param string
+   *        is the string to escape.
+   * @param escapeQuotations
+   *        if <code>true</code> also the ASCII quotation characters (apos
+   *        <code>'\''</code> and quot <code>'"'</code>) will be escaped,
+   *        else if <code>false</code> quotations are untouched. Set this to
+   *        <code>true</code> if you are writing the value of an attribute.
+   * @return the escaped string.
+   */
+  public static String escapeXml(String string, boolean escapeQuotations) {
+
+    try {
+      StringWriter writer = new StringWriter(string.length() + 8);
+      escapeXml(string, writer, escapeQuotations);
+      return writer.toString();
+    } catch (IOException e) {
+      throw new IllegalStateException("Internal error!", e);
+    }
+  }
+
+  /**
+   * This method writes the given <code>string</code> to the
+   * <code>writer</code> while escaping special characters for XML (or HTML,
+   * etc.).
+   * 
+   * @param string
+   *        is the string to escape.
+   * @param writer
+   *        is where to write the string to.
+   * @param escapeQuotations
+   *        if <code>true</code> also the ASCII quotation characters (apos
+   *        <code>'\''</code> and quot <code>'"'</code>) will be escaped,
+   *        else if <code>false</code> quotations are untouched. Set this to
+   *        <code>true</code> if you are writing the value of an attribute.
+   * @throws IOException
+   *         if the <code>writer</code> produced an I/O error.
+   */
+  public static void escapeXml(String string, Writer writer, boolean escapeQuotations)
+      throws IOException {
+
+    char[] chars = string.toCharArray();
+    for (char c : chars) {
+      if (c >= 127) {
+        writer.append("&#");
+        writer.append(Integer.toString(c));
+        writer.append(";");
+      } else if (c == '&') {
+        writer.append("&amp;");
+      } else if (c == '<') {
+        writer.append("&lt;");
+      } else if (c == '>') {
+        writer.append("&gt;");
+      } else if (escapeQuotations && (c == '\'')) {
+        // writer.append("&apos;");
+        writer.append("&#39;");
+      } else if (escapeQuotations && (c == '"')) {
+        writer.append("&quot;");
+      } else {
+        writer.append(c);
+      }
     }
   }
 
@@ -300,6 +373,35 @@ public final class StringUtil {
       buffer.append(chars, pos, chars.length - pos);
     }
     return buffer.toString();
+  }
+
+  /**
+   * This method compiles the <code>pattern</code> given as string in a way
+   * similar to GNU-utilities like <code>sed</code> or <code>grep</code>.
+   * This means that if no leading "^" (or ".*") or no trailing "$" (or ".*") is
+   * present, an according ".*" prefix and/or suffix is added implicit. This
+   * causes that "\.xml$" matches "config.xml" and "^/etc/" matches
+   * "/etc/passwd".<br>
+   * <b>ATTENTION:</b><br>
+   * In many cases you may want to use {@link Pattern#compile(String)} with
+   * {@link java.util.regex.Matcher#find()} instead of
+   * {@link java.util.regex.Matcher#matches()}.
+   * 
+   * @param pattern
+   *        is the pattern as string.
+   * @return the compiled pattern.
+   */
+  public static Pattern compileInfixPattern(String pattern) {
+
+    StringBuffer buffer = new StringBuffer(pattern.length());
+    if (!pattern.startsWith("^") && !pattern.startsWith(".*")) {
+      buffer.append(".*");
+    }
+    buffer.append(pattern);
+    if (!pattern.endsWith("$") && !pattern.endsWith(".*")) {
+      buffer.append(".*");
+    }
+    return Pattern.compile(buffer.toString());
   }
 
 }

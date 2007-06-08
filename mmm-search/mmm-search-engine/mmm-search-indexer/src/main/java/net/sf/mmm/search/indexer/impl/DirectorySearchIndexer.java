@@ -25,10 +25,23 @@ import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.util.io.FileUtil;
+import net.sf.mmm.util.transformer.Transformer;
 
 /**
  * This class contains functionality to recursively walk through directories and
- * add contained files to a search index.
+ * add contained files to a search index.<br>
+ * Only directories that are {@link FileFilter#accept(File) accepted} by the
+ * {@link #setFilter(FileFilter) file-filter} are proceeded by this indexer and
+ * all containing files and folders will be processed recursively. If a file is
+ * hit and {@link FileFilter#accept(File) accepted} by the
+ * {@link #setFilter(FileFilter) file-filter} it will be added to the index.<br>
+ * The relative path to the file is used as the
+ * {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the according
+ * {@link net.sf.mmm.search.api.SearchEntry entry} in the search-index. An
+ * {@link #getUriRewriter() URI-rewriter} can be set to rewrite the URI if it
+ * differs from the path to access the file online. E.g. the relevant files in
+ * the <code>data</code> directory of a twiki installation have the extension
+ * <code>.txt</code> while their URLs do NOT contain this extension.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -39,6 +52,9 @@ public class DirectorySearchIndexer {
 
   /** @see #getFilter() */
   private FileFilter filter;
+
+  /** @see #getUriRewriter() */
+  private Transformer<String> uriRewriter;
 
   /** @see #getLogger() */
   private Log logger;
@@ -85,6 +101,9 @@ public class DirectorySearchIndexer {
   }
 
   /**
+   * This method gets the filter that decides which directories to scan and
+   * which files to index.<br>
+   * 
    * @return the filter
    */
   public FileFilter getFilter() {
@@ -93,8 +112,7 @@ public class DirectorySearchIndexer {
   }
 
   /**
-   * This method sets the filter that decides which directories to scan and
-   * which files to index.<br>
+   * This method sets the {@link #getFilter() file-filter}.<br>
    * 
    * @see net.sf.mmm.util.filter.FilterRuleChainXmlParser
    * @see net.sf.mmm.util.filter.FilterRuleChainPlainParser
@@ -107,6 +125,31 @@ public class DirectorySearchIndexer {
   public void setFilter(FileFilter filter) {
 
     this.filter = filter;
+  }
+
+  /**
+   * This method gets the optional rewriter for the
+   * {@link net.sf.mmm.search.api.SearchEntry#getUri() URI}s. This allows to
+   * rewrite the path of files indexed from the local filesystem if it differs
+   * from the path to access the file online.
+   * 
+   * @return the URI-rewriter or <code>null</code> if URIs should NOT be
+   *         rewritten.
+   */
+  public Transformer<String> getUriRewriter() {
+
+    return this.uriRewriter;
+  }
+
+  /**
+   * This method sets the {@link #getUriRewriter() URI-rewriter}.
+   * 
+   * @param urlRewriter
+   *        the URI-rewriter to set.
+   */
+  public void setUriRewriter(Transformer<String> urlRewriter) {
+
+    this.uriRewriter = urlRewriter;
   }
 
   /**
@@ -230,7 +273,7 @@ public class DirectorySearchIndexer {
       }
     }
   }
-  
+
   /**
    * This method gets the property <code>key</code> from the given
    * <code>properties</code>. It will also {@link String#trim() trim} the
@@ -277,7 +320,11 @@ public class DirectorySearchIndexer {
     long fileSize = file.length();
     String extension = FileUtil.getExtension(filename);
     MutableSearchEntry entry = this.indexer.createEntry();
-    entry.setUri(fullPath);
+    String uri = fullPath;
+    if (this.uriRewriter != null) {
+      uri = this.uriRewriter.transform(uri);
+    }
+    entry.setUri(uri);
     entry.setSize(fileSize);
     ContentParser parser = null;
     if (extension != null) {

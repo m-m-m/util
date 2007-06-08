@@ -6,6 +6,8 @@ package net.sf.mmm.util.filter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.StringUtil;
+
 /**
  * This is an implementation of the {@link FilterRule} interface that matches
  * using a regex {@link Pattern}.
@@ -37,29 +39,7 @@ public class PatternFilterRule implements FilterRule {
    */
   public PatternFilterRule(String pattern, boolean resultOnMatch) {
 
-    this(compile(pattern), resultOnMatch);
-  }
-
-  /**
-   * This method compiles the <code>pattern</code> given as string.
-   * 
-   * @see PatternFilterRule#PatternFilterRule(String, boolean)
-   * 
-   * @param pattern
-   *        is the pattern as string.
-   * @return the compiled pattern.
-   */
-  protected static Pattern compile(String pattern) {
-
-    StringBuffer buffer = new StringBuffer(pattern.length());
-    if (!pattern.startsWith("^") && !pattern.startsWith(".*")) {
-      buffer.append(".*");
-    }
-    buffer.append(pattern);
-    if (!pattern.endsWith("$") && !pattern.endsWith(".*")) {
-      buffer.append(".*");
-    }
-    return Pattern.compile(buffer.toString());
+    this(StringUtil.compileInfixPattern(pattern), resultOnMatch);
   }
 
   /**

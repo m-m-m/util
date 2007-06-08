@@ -11,10 +11,11 @@ import junit.framework.TestCase;
 
 
 /**
- * This is the {@link TestCase} for {@link FilterRuleChainPlainParser}.
+ * This is the {@link TestCase} for {@link FilterRuleChainXmlParser}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("all")
 public class FilterRuleChainXmlParserTest extends TestCase {
 
   @Test

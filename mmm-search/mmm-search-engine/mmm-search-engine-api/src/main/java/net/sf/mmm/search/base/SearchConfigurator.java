@@ -5,7 +5,7 @@ package net.sf.mmm.search.base;
 
 import org.w3c.dom.Element;
 
-import net.sf.mmm.search.engine.api.SearchEngine;
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 
 /**
@@ -41,18 +41,20 @@ public interface SearchConfigurator {
 
   /**
    * This method parses the XML-configuration given by <code>element</code>
-   * and creates an according {@link SearchEngine}.
+   * and creates an according {@link ManagedSearchEngine search-engine}.
    * 
    * @param element
    *        is the XML-element containing the configuration for the requested
-   *        {@link SearchEngine}. See {@link #XML_TAG_SEARCH_ENGINE}.
-   * @return a new {@link SearchEngine} for the configuration given by
+   *        {@link ManagedSearchEngine search-engine}. See
+   *        {@link #XML_TAG_SEARCH_ENGINE}.
+   * @return a new {@link ManagedSearchEngine} for the configuration given by
    *         <code>element</code>.
    * @throws IllegalArgumentException
    *         if the configuration is invalid.
    * @throws Exception
-   *         if the {@link SearchEngine} could NOT be created.
+   *         if the {@link ManagedSearchEngine} could NOT be created.
    */
-  SearchEngine createSearchEngine(Element element) throws IllegalArgumentException, Exception;
+  ManagedSearchEngine createSearchEngine(Element element) throws IllegalArgumentException,
+      Exception;
 
 }

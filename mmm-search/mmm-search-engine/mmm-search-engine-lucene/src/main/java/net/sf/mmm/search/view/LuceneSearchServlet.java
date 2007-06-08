@@ -16,6 +16,8 @@ import net.sf.mmm.util.xml.DomUtil;
  * This is the controller {@link javax.servlet.Servlet servlet} for the search
  * using lucene as underlying search-engine.
  * 
+ * @see GenericSearchServlet
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LuceneSearchServlet extends AbstractSearchServlet {

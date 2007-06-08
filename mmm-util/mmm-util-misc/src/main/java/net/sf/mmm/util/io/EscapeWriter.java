@@ -18,7 +18,7 @@ import java.io.Writer;
 public class EscapeWriter extends Writer {
 
   /**
-   * A table that mapps chars (as index) to escape sequences.
+   * A table that maps chars (as index) to escape sequences.
    */
   private final String[] characterEscapingTable;
 
@@ -31,7 +31,7 @@ public class EscapeWriter extends Writer {
    * @see EscapeWriter#EscapeWriter(Object, String[], Writer)
    * 
    * @param charEscapeTable
-   *        is a String array that mapps characters by to escape sequences. If
+   *        is a String array that maps characters by to escape sequences. If
    *        the numeric representation of a character is a legal index for the
    *        given array and the String at that index is <code>null</code> that
    *        string is written instead of the character. In all other cases, the
@@ -53,7 +53,7 @@ public class EscapeWriter extends Writer {
    *        is an explicit lock object used for synchronization (see
    *        {@link Writer#Writer(java.lang.Object)}).
    * @param charEscapeTable
-   *        is a String array that mapps characters by to escape sequences. If
+   *        is a String array that maps characters by to escape sequences. If
    *        the numeric representation of a character is a legal index for the
    *        given array and the String at that index is <code>null</code> that
    *        string is written instead of the character. In all other cases, the

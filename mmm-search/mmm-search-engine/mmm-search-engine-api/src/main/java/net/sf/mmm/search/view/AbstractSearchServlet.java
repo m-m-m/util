@@ -1,4 +1,6 @@
-/* $Id$ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view;
 
 import java.io.File;
@@ -17,6 +19,7 @@ import org.w3c.dom.Element;
 import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
@@ -33,11 +36,14 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** The UID for serialization. */
   private static final long serialVersionUID = -2197345445602977147L;
 
+  /** @see #init(ServletConfig) */
+  private static final String PARAM_CONFIG_FILE = "config-file";
+
   /** @see #configure(Element) */
   private SearchViewConfiguration configuration;
 
   /** The search engine. */
-  private SearchEngine searchEngine;
+  private ManagedSearchEngine searchEngine;
 
   /** The name of the JSP to dispatch for regular search. */
   private String searchJsp;
@@ -59,7 +65,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /**
    * @return the searchEngine
    */
-  public SearchEngine getSearchEngine() {
+  public ManagedSearchEngine getSearchEngine() {
 
     return this.searchEngine;
   }
@@ -68,7 +74,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
    * @param searchEngine
    *        the searchEngine to set
    */
-  public void setSearchEngine(SearchEngine searchEngine) {
+  public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngine = searchEngine;
   }
@@ -95,7 +101,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       }
       String configPath = config.getInitParameter("config-file");
       if (configPath == null) {
-        throw new ResourceMissingException("config-file");
+        throw new ResourceMissingException(PARAM_CONFIG_FILE);
       }
       if (configPath.startsWith("~/")) {
         String home = System.getProperty("user.home");
@@ -142,8 +148,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   }
 
   /**
-   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
-   *      javax.servlet.http.HttpServletResponse)
+   * {@inheritDoc}
    */
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -196,6 +201,9 @@ public abstract class AbstractSearchServlet extends HttpServlet {
           SearchResultPage result = this.searchEngine.search(query, searchContext.getPageNumber(),
               searchContext.getHitsPerPage());
           searchContext.setResultPage(result);
+          // TODO: remove this hack - only for testing!!!
+          this.searchEngine.refresh();
+          System.out.println("refreshing search...");
         }
       } catch (Exception e) {
         searchContext.setException(e);

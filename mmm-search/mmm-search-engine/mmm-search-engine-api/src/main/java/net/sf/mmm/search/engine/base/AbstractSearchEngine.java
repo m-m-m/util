@@ -3,20 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.base;
 
-import net.sf.mmm.search.engine.api.SearchEngine;
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 
 /**
- * This is the abstract base implementation of the {@link SearchEngine}
+ * This is the abstract base implementation of the {@link ManagedSearchEngine}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchEngine implements SearchEngine {
+public abstract class AbstractSearchEngine implements ManagedSearchEngine {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractSearchEngine() {
 
@@ -32,11 +32,10 @@ public abstract class AbstractSearchEngine implements SearchEngine {
   }
 
   /**
+   * {@inheritDoc}
+   * 
    * This method is a simple implementation of this method. Please override if
    * there is a more efficient way to do this.
-   * 
-   * @see net.sf.mmm.search.engine.api.SearchEngine#search(net.sf.mmm.search.engine.api.SearchQuery,
-   *      int, int)
    */
   public SearchResultPage search(SearchQuery query, int pageIndex, int hitsPerPage) {
 

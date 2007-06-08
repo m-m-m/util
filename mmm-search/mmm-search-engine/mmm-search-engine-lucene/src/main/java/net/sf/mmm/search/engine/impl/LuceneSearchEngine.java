@@ -243,4 +243,31 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void refresh() {
+
+    try {
+      this.searcher.close();
+      // TODO: do we need to do this in finally? What happened to the searcher
+      // if close caused an I/O error?
+      this.searcher = new IndexSearcher(this.indexPath);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void dispose() {
+
+    try {
+      this.searcher.close();
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
 }

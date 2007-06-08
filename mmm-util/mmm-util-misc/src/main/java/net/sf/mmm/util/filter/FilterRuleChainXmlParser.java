@@ -29,7 +29,7 @@ import net.sf.mmm.util.StringUtil;
  * Here is an example of a configuration (rule list) parsed by this class:
  * 
  * <pre>
- * &lt;chain default"true"&gt;
+ * &lt;filter-chain id="default-filter" default-result="true"&gt;
  * &lt;!-- 1. rule says that all strings that start (^) with "/doc/" will be accepted --&gt;
  * &lt;include pattern="^/doc/"/&gt;
  * &lt;!-- 2. rule says that all strings that end ($) with ".pdf" ignoring the case  
@@ -40,7 +40,7 @@ import net.sf.mmm.util.StringUtil;
  * &lt;!-- 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring 
  * the case (?i) of the characters will be rejected: --&gt;
  * &lt;exclude pattern="(?i)\.(xml|xsl)$"/&gt;
- * &lt;/chain&gt;
+ * &lt;/filter-chain&gt;
  * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -111,8 +111,8 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a map of {@link FilterRuleChain chain}s given as XML
-   * via <code>xmlElement</code>.
+   * This method parses a map of {@link FilterRuleChain chain}s given by
+   * <code>xmlElement</code>.
    * 
    * @param xmlElement
    *        is the XML element containing the filter-chains (see
@@ -152,7 +152,7 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a {@link FilterRuleChain chain} given as XML via
+   * This method parses a {@link FilterRuleChain chain} given by
    * <code>xmlElement</code>.
    * 
    * @see #XML_TAG_CHAIN
@@ -160,7 +160,7 @@ public class FilterRuleChainXmlParser {
    * @param xmlElement
    *        is the XML element containing the filter-rules (see
    *        {@link #XML_TAG_RULE_INCLUDE} and {@link #XML_TAG_RULE_EXCLUDE}) as
-   *        children. Unknown child elements or attributes are simply ignored.
+   *        children.
    * @return the parsed filter-chain.
    */
   public FilterRuleChain parseChain(Element xmlElement) {

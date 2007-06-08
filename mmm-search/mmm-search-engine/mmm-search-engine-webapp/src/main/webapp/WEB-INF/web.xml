@@ -8,12 +8,20 @@
 
   <servlet>
     <servlet-name>Search</servlet-name>
+    <!-- <servlet-class>net.sf.mmm.search.view.GenericSearchServlet</servlet-class> -->
     <servlet-class>net.sf.mmm.search.view.LuceneSearchServlet</servlet-class>
     <init-param>
       <!-- the path to the configuration file -->
       <param-name>config-file</param-name>
-      <param-value>search.xml</param-value>
+      <param-value>~/search.xml</param-value>
     </init-param>
+    <!-- search-configurator for GenericSearchServlet -->
+    <!--
+    <init-param>
+      <param-name>search-configurator</param-name>
+      <param-value>net.sf.mmm.search.impl.LuceneSearchConfigurator</param-value>
+    </init-param>
+    -->
     <!--
     <init-param>
       <param-name>search-jsp</param-name>

@@ -4,6 +4,7 @@
 package net.sf.mmm.search.indexer.impl;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.w3c.dom.Element;
@@ -14,6 +15,8 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.util.filter.FileFilterAdapter;
 import net.sf.mmm.util.filter.FilterRuleChain;
 import net.sf.mmm.util.filter.FilterRuleChainXmlParser;
+import net.sf.mmm.util.transformer.StringTransformerChainXmlParser;
+import net.sf.mmm.util.transformer.Transformer;
 
 /**
  * This class contains functionality to recursively walk through directories and
@@ -27,6 +30,9 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
 
   /** The name of the XML element for a list of filters. */
   public static final String XML_TAG_FILTERS = "filters";
+
+  /** The name of the XML element for a list of transformers (URI-rewriters). */
+  public static final String XML_TAG_URITRANSFORMERS = "uri-transformers";
 
   /**
    * The name of the XML element for a list of
@@ -55,6 +61,13 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
    * {@link #XML_TAG_DIRECTORY directory}.
    */
   public static final String XML_ATR_DIRECTORY_FILTER = "filter";
+
+  /**
+   * The name of the XML attribute pointing to the ID of the
+   * <code>transformer-chain</code> to use for rewriting the URIs when
+   * indexing a {@link #XML_TAG_DIRECTORY directory}.
+   */
+  public static final String XML_ATR_DIRECTORY_URITRANSFORMER = "uri-transformer";
 
   /**
    * The name of the XML attribute with the <code>base-path</code> used for
@@ -94,6 +107,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
 
     getLogger().debug("parsing configuration...");
     // find child-elements "filters" and "directories"...
+    Element transformersElement = null;
     Element filtersElement = null;
     Element directoriesElement = null;
     NodeList childNodes = configurationElement.getChildNodes();
@@ -111,6 +125,11 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
             throw new IllegalArgumentException("Duplicate tag: " + XML_TAG_DIRECTORIES);
           }
           directoriesElement = element;
+        } else if (XML_TAG_URITRANSFORMERS.equals(element.getTagName())) {
+          if (transformersElement != null) {
+            throw new IllegalArgumentException("Duplicate tag: " + XML_TAG_URITRANSFORMERS);
+          }
+          transformersElement = element;
         }
       }
     }
@@ -121,8 +140,16 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
       throw new IllegalArgumentException("Missing tag: " + XML_TAG_DIRECTORIES);
     }
     // parse filters...
-    FilterRuleChainXmlParser parser = new FilterRuleChainXmlParser();
-    Map<String, FilterRuleChain> chainMap = parser.parseChains(filtersElement);
+    FilterRuleChainXmlParser filterParser = new FilterRuleChainXmlParser();
+    Map<String, FilterRuleChain> chainMap = filterParser.parseChains(filtersElement);
+
+    Map<String, ? extends Transformer<String>> transformerMap;
+    if (transformersElement == null) {
+      transformerMap = new HashMap<String, Transformer<String>>();
+    } else {
+      StringTransformerChainXmlParser transformerParser = new StringTransformerChainXmlParser();
+      transformerMap = transformerParser.parseChains(transformersElement);
+    }
     // parse directories and do indexing...
     getLogger().debug("Filters parsed - parsing directories and start indexing...");
     childNodes = directoriesElement.getChildNodes();
@@ -136,6 +163,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
           if (element.hasAttribute(XML_ATR_DIRECTORY_SOURCE)) {
             source = element.getAttribute(XML_ATR_DIRECTORY_SOURCE);
           }
+          // set filter...
           String filterId = element.getAttribute(XML_ATR_DIRECTORY_FILTER);
           FilterRuleChain chain = chainMap.get(filterId);
           if (chain == null) {
@@ -143,6 +171,17 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
                 + filterId + ") that does NOT exist!");
           }
           setFilter(FileFilterAdapter.convertStringFilter(chain));
+          // set transformer/rewriter
+          Transformer<String> urlRewriter = null;
+          if (element.hasAttribute(XML_ATR_DIRECTORY_URITRANSFORMER)) {
+            String transformerId = element.getAttribute(XML_ATR_DIRECTORY_URITRANSFORMER);
+            urlRewriter = transformerMap.get(transformerId);
+            if (urlRewriter == null) {
+              throw new IllegalArgumentException("Directory (" + path + ") points to transformer ("
+                  + transformerId + ") that does NOT exist!");
+            }
+          }
+          setUriRewriter(urlRewriter);
           if (path.startsWith("~/")) {
             path = System.getProperty("user.home") + path.substring(1);
           }

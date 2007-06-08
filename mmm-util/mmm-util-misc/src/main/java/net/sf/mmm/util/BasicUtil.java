@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
+
+
 /**
  * This class is a collection of useful helper macros (static methods) for
  * little general purpose operations.
