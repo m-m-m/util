@@ -20,7 +20,6 @@ import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.search.engine.api.SearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
@@ -80,7 +79,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   }
 
   /**
-   * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
+   * {@inheritDoc}
    */
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -201,9 +200,6 @@ public abstract class AbstractSearchServlet extends HttpServlet {
           SearchResultPage result = this.searchEngine.search(query, searchContext.getPageNumber(),
               searchContext.getHitsPerPage());
           searchContext.setResultPage(result);
-          // TODO: remove this hack - only for testing!!!
-          this.searchEngine.refresh();
-          System.out.println("refreshing search...");
         }
       } catch (Exception e) {
         searchContext.setException(e);
