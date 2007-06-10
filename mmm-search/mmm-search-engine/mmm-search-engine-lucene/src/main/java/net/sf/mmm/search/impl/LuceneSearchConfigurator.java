@@ -36,11 +36,6 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
   public static final String XML_ATR_ANALYZER_CLASS = "class";
 
   /**
-   * The name of the XML element for a the configuration of the search-index.
-   */
-  public static final String XML_TAG_INDEX = "index";
-
-  /**
    * The name of the XML attribute that contains the <code>path</code> to the
    * directory with the {@link #XML_TAG_INDEX search-index}.
    */
@@ -54,18 +49,12 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
   public static final String XML_ATR_INDEX_UPDATE = "update";
 
   /**
-   * The name of the XML element for a the configuration of the
-   * {@link net.sf.mmm.search.engine.api.SearchQueryBuilder query-builder}.
-   */
-  public static final String XML_TAG_QUERY = "query";
-
-  /**
    * The name of the XML attribute for the <code>leading-wildcard</code> flag.
    * It contains a boolean value, that determines if leading wildcards are
    * supported in queries (true) or will be ignored (false). The default is
    * <code>false</code>.
    */
-  public static final String XML_ATR_QUERY_LEADINGWILDCARD = "leading-wildcard";
+  public static final String XML_ATR_SEARCH_LEADINGWILDCARD = "leading-wildcard";
 
   /**
    * The constructor.
@@ -136,17 +125,17 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private boolean isIgnoreLeadingWildcards(Element element) {
 
-    Element queryElement = DomUtil.getFirstChildElement(element, XML_TAG_QUERY);
+    Element queryElement = DomUtil.getFirstChildElement(element, XML_TAG_SEARCH);
     if (queryElement == null) {
       return true;
     } else {
-      return !DomUtil.getAttributeAsBoolean(queryElement, XML_ATR_QUERY_LEADINGWILDCARD, false);
+      return !DomUtil.getAttributeAsBoolean(queryElement, XML_ATR_SEARCH_LEADINGWILDCARD, false);
     }
   }
 
   /**
-   * This method gets the flag <code>update</code> from the
-   * configuration given by <code>element</code>.
+   * This method gets the flag <code>update</code> from the configuration
+   * given by <code>element</code>.
    * 
    * @param element
    *        is the element containing the flag.
@@ -185,6 +174,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
     searchEngine.setIndexPath(getIndexPath(element));
     searchEngine.setIgnoreLeadingWildcards(isIgnoreLeadingWildcards(element));
     searchEngine.initialize();
+    setupRefreshThread(element, searchEngine);
     return searchEngine;
   }
 
