@@ -106,7 +106,7 @@ for (int i = 0; i < hitCount; i++) {
         Simply create your configuration as XML file like this:
         <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
-<search>
+<search-config>
   <!-- core configuration of the search-engine -->
   <search-engine>
     <analyzer class="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
@@ -163,7 +163,7 @@ for (int i = 0; i < hitCount; i++) {
     <!-- etc. etc. etc. -->
 
   </filetypes>
-</search>
+</search-config>
 ]]></source>
         Now for indexing all you have to do is start the indexer with this XML.
         <source><![CDATA[
