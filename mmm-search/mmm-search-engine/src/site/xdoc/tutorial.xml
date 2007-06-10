@@ -113,7 +113,7 @@ for (int i = 0; i < hitCount; i++) {
     <index path="~/search/index/" update="false"/>
     <!-- Enable wildcard queries for lucene (WARNING: this is a performance
     risk. Never use this for public internet searches!) -->
-    <query leading-wildcards="true"/>
+    <search leading-wildcard="true" refresh-delay="3600"/>
   </search-engine>
   <!-- configuration of filters used when indexing directories -->
   <filters>
@@ -169,6 +169,12 @@ for (int i = 0; i < hitCount; i++) {
         <source><![CDATA[
 java net.sf.mmm.search.indexer.impl.LuceneDirectorySearchIndexer <path-to-xml-config>
 ]]></source>
+        For searching all you need to do is to throw the WAR file of
+        <a href="mmm-search-engine-webapp/index.html">mmm-search-engine-webapp</a>
+        into your tomcat 5.5+. If you have the XML config described above located 
+        at <code>~/search.xml</code> you do NOT even have to modify the web.xml.
+        If you update your search-index by re-running the indexer you need to wait
+        at most the configured <code>refresh-delay</code> until the change takes effect.
       </subsection>
     </section>
   </body>
