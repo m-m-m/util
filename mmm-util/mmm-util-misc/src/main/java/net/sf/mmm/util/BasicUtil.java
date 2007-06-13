@@ -11,7 +11,7 @@ package net.sf.mmm.util;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class BasicUtil {
+public final class BasicUtil {
 
   /**
    * Forbidden constructor.
@@ -27,9 +27,9 @@ public class BasicUtil {
    * objects may be <code>null</code>.
    * 
    * @param o1
-   *        the first object to comapre.
+   *        the first object to compare.
    * @param o2
-   *        the second object to comapre.
+   *        the second object to compare.
    * @return <code>true</code> if both objects are <code>null</code> or
    *         the first is not <code>null</code> and
    *         <code>o1.equals(o2)</code> returns <code>true</code>;
