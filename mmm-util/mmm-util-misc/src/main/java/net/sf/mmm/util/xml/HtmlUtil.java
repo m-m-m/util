@@ -1,13 +1,14 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.xml;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO: this class ...
+ * This utility class contains methods that help to deal with markup such as
+ * XML, SGML, HTML, etc.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -286,9 +287,8 @@ public final class HtmlUtil {
   /**
    * This method resolves an HTML entity given by <code>entityName</code>.
    * 
-   * @param entityName
-   *        is the bare name of the entity (e.g. "amp" or "uuml"). Please note
-   *        that entity-names are case-sensitive.
+   * @param entityName is the bare name of the entity (e.g. "amp" or "uuml").
+   *        Please note that entity-names are case-sensitive.
    * @return the value of the entity or <code>null</code> if no entity exists
    *         for the given <code>entityName</code>.
    */
@@ -308,13 +308,10 @@ public final class HtmlUtil {
    * proper encoding (according to Content-Type from HTTP header and/or META
    * tag).
    * 
-   * @param htmlFragment
-   *        is the HTML fragment to parse.
-   * @param buffer
-   *        is the buffer where the plain text will be appended to.
-   * @param parserState
-   *        is the state to continue on a subsequent call for multiple
-   *        <code>htmlFragment</code>s of the same HTML-document or
+   * @param htmlFragment is the HTML fragment to parse.
+   * @param buffer is the buffer where the plain text will be appended to.
+   * @param parserState is the state to continue on a subsequent call for
+   *        multiple <code>htmlFragment</code>s of the same HTML-document or
    *        <code>null</code> for a fresh start.
    * @return the state at the end of <code>htmlFragment</code>. You can pass
    *         this as <code>parserState</code> argument on subsequent call to
@@ -433,7 +430,7 @@ public final class HtmlUtil {
 
   /**
    * This inner class contains the state of an HTML
-   * {@link HtmlUtil#extractPlainText(String, StringBuffer, net.sf.mmm.util.HtmlUtil.ParserState) parsing}
+   * {@link HtmlUtil#extractPlainText(String, StringBuffer, net.sf.mmm.util.xml.HtmlUtil.ParserState) parsing}
    * process.
    */
   public static class ParserState {
@@ -464,8 +461,7 @@ public final class HtmlUtil {
     /**
      * The constructor.
      * 
-     * @param other
-     *        is the state to continue with.
+     * @param other is the state to continue with.
      */
     public ParserState(ParserState other) {
 

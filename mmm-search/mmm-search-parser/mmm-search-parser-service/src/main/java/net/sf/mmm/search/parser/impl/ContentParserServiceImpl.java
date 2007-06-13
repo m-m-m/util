@@ -6,7 +6,7 @@ package net.sf.mmm.search.parser.impl;
 import net.sf.mmm.search.parser.base.AbstractContentParserService;
 
 /**
- * This is the abstract base implemenation of the
+ * This is the abstract base implementation of the
  * {@link net.sf.mmm.search.parser.api.ContentParserService} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -14,7 +14,7 @@ import net.sf.mmm.search.parser.base.AbstractContentParserService;
 public class ContentParserServiceImpl extends AbstractContentParserService {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserServiceImpl() {
 
@@ -25,9 +25,10 @@ public class ContentParserServiceImpl extends AbstractContentParserService {
     addParser(new ContentParserDoc(), "doc", "dot");
     addParser(new ContentParserXls(), "xls");
     addParser(new ContentParserPpt(), "ppt");
-    //elm?
-    addParser(new ContentParserText(), "txt", "asc", "apt", "csv", "sql", "php", "vbs", "bat",
-        "sh", "jsp", "jinc", "c", "h", "cpp", "c++", "cs", "net", "asp", "pl", "py", "js");
+    // even *.txt files may contain markup (e.g. twiki data files).
+    addParser(new ContentParserTextMarkupAware(), "txt", "php", "jsp", "jinc", "asp");
+    addParser(new ContentParserText(), "asc", "apt", "csv", "sql", "vbs", "bat", "sh", "c", "h",
+        "cpp", "c++", "cs", "net", "pl", "py", "js");
     addParser(new ContentParserJava(), "java");
   }
 

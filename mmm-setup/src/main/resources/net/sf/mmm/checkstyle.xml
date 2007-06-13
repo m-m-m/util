@@ -70,7 +70,7 @@ Description:
         <module name="InnerAssignment"/>
         <module name="MagicNumber">
             <property name="severity" value="info"/>
-            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 8, 10, 16, 100, 256, 512, 1000, 1024"/>
+            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 8, 10, 16, 100, 128, 256, 512, 1000, 1024"/>
         </module>
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>

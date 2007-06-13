@@ -13,6 +13,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.sf.mmm.util.xml.DomUtil;
+
 /**
  * This class allows to parse a list of {@link StringTransformerRule}s from XML
  * and build an according {@link StringTransformerChain}. The rules are
@@ -80,44 +82,6 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * TODO: This method is copied from net.sf.mmm.util.xml.DomUtil because a
-   * dependency on util-xml would be odd. This has to be resolved somehow!
-   * 
-   * This method gets the value of the <code>attribute</code> from the given
-   * <code>element</code> as a boolean value.
-   * 
-   * @param element
-   *        is the element potentially containing the requested boolean
-   *        attribute.
-   * @param attribute
-   *        is the name of the requested attribute.
-   * @param defaultValue
-   *        is the default returned if the attribute is NOT present.
-   * @return the value of the specified <code>attribute</code> or the
-   *         <code>defaultValue</code> if the attribute is NOT present.
-   * @throws IllegalArgumentException
-   *         if the value of the specified attribute does NOT represent a
-   *         boolean value.
-   */
-  private static boolean getAttributeAsBoolean(Element element, String attribute,
-      boolean defaultValue) throws IllegalArgumentException {
-
-    boolean result = defaultValue;
-    if (element.hasAttribute(attribute)) {
-      String flag = element.getAttribute(attribute);
-      if (Boolean.TRUE.toString().equalsIgnoreCase(flag)) {
-        result = true;
-      } else if (Boolean.FALSE.toString().equalsIgnoreCase(flag)) {
-        result = false;
-      } else {
-        throw new IllegalArgumentException("XML-Attribute " + attribute
-            + " must be either 'true' or 'false'!");
-      }
-    }
-    return result;
-  }
-
-  /**
    * This method parses a {@link StringTransformerRule rule} given by
    * <code>xmlElement</code>.
    * 
@@ -130,8 +94,8 @@ public class StringTransformerChainXmlParser {
   public StringTransformerRule parseRule(Element xmlElement) {
 
     if (XML_TAG_RULE.equals(xmlElement.getTagName())) {
-      boolean replaceAll = getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL, false);
-      boolean stopOnMatch = getAttributeAsBoolean(xmlElement, XML_ATR_RULE_STOPONMATCH, false);
+      boolean replaceAll = DomUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL, false);
+      boolean stopOnMatch = DomUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_STOPONMATCH, false);
       String patternString = xmlElement.getAttribute(XML_ATR_RULE_PATTERN);
       Pattern pattern = Pattern.compile(patternString);
       String replacement = xmlElement.getAttribute(XML_ATR_RULE_REPLACEMENT);

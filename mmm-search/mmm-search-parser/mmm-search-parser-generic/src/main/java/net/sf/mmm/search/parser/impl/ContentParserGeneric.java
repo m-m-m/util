@@ -6,7 +6,7 @@ package net.sf.mmm.search.parser.impl;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.sf.mmm.search.parser.api.ContentParser;
+import net.sf.mmm.search.parser.base.AbstractContentParser;
 
 /**
  * This is the implementation of the
@@ -15,10 +15,10 @@ import net.sf.mmm.search.parser.api.ContentParser;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserGeneric implements ContentParser {
+public class ContentParserGeneric extends AbstractContentParser {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserGeneric() {
 
@@ -28,11 +28,12 @@ public class ContentParserGeneric implements ContentParser {
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  @Override
+  public void parse(InputStream inputStream, long filesize, String encoding,
+      Properties properties) throws Exception {
 
-    Properties properties = new Properties();
-    properties.setProperty(PROPERTY_KEY_TEXT, "test");
-    return properties;
+    // TODO: re-implement GNU command "strings"...
+    properties.setProperty(PROPERTY_KEY_TEXT, "");
   }
 
 }

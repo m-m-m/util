@@ -13,24 +13,30 @@ import org.xml.sax.InputSource;
 
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.XmlWriterUtil;
 import net.sf.mmm.util.xml.api.XmlWriter;
-import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the {@link ValueManager manager} for
+ * This is the {@link net.sf.mmm.value.api.ValueManager manager} for
  * {@link org.w3c.dom.Document xml} values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XmlValueManager extends AbstractValueManager<Element> {
 
-  /** the {@link ValueManager#getName() "logical name"} of the managed value */
+  /**
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() "logical name"} of
+   * the managed value.
+   */
   public static final String VALUE_NAME = "Xml";
 
-  /** the {@link ValueManager#getValueClass() type} of the managed value */
+  /**
+   * The {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of the
+   * managed value.
+   */
   private static final Class<Element> VALUE_TYPE = Element.class;
 
   /**
@@ -99,14 +105,14 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     return DomUtil.isEqual(value1, value2);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   protected void toXmlValue(XmlWriter xmlWriter, Element value) throws XmlException {
 
-    DomUtil.toXml(xmlWriter, value);
+    XmlWriterUtil.toXml(xmlWriter, value);
   }
 
   /**

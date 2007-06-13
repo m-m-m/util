@@ -14,6 +14,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.XmlWriterUtil;
 import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
@@ -29,7 +30,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
   /** the SAX handler */
   private final ContentHandler handler;
 
-  /** a table that mapps a namespacePrefix to an namespaceUri */
+  /** a table that maps a namespacePrefix to an namespaceUri */
   private final Map<String, String> prefix2namespaceUriMap;
 
   /** container for the current attributes */
@@ -173,7 +174,7 @@ public class SaxXmlWriter extends AbstractXmlWriter {
 
     try {
       StringWriter sw = new StringWriter(text.length() + 10);
-      XmlUtil.createXmlTextWriter(sw).write(text);
+      XmlWriterUtil.createXmlTextWriter(sw).write(text);
       StringBuffer sb = sw.getBuffer();
       int length = sb.length();
       char[] data = new char[length];

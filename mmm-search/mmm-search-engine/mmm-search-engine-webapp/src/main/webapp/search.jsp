@@ -81,7 +81,7 @@ function showPage(pageNum) {
     <input type="text" size="60" maxlength="2048" name="<%= SearchViewContext.PARAM_QUERY %>" value="<%= htmlQuery %>"/>
     <input type="hidden" name="<%= SearchViewContext.PARAM_PAGE %>" value="<%= searchContext.getPageNumber() %>"/>  
     <input type="submit" value="Search" onclick="showPage(0)">
-    <input type="checkbox" name="expert" <%= expertSelected %> onclick="updateExpert()">Advanced</Input>
+    <input type="checkbox" name="expert" <%= expertSelected %> onclick="updateExpert()">Advanced</input>
     <div id="searchadvanced">
       Source: 
       <select name="<%= SearchViewContext.PARAM_SOURCE %>" size="1">

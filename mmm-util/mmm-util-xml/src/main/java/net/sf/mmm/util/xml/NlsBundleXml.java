@@ -25,7 +25,7 @@ public class NlsBundleXml extends AbstractResourceBundle {
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String)
    */
-  public static final String ERR_CLOSE_TAGNAME = "Current element was openend with \"{0}\" but closed with \"{1}\"!";
+  public static final String ERR_CLOSE_TAGNAME = "Current element was opened with \"{0}\" but closed with \"{1}\"!";
 
   /**
    * exception message if element was closed with wrong namespace prefix.
@@ -44,7 +44,7 @@ public class NlsBundleXml extends AbstractResourceBundle {
   public static final String ERR_NAMESPACE_NOT_DECLARED = "Namespace prefix \"{0}\" has not been declared yet!";
 
   /**
-   * exception message if closeElement was called after toplevel element is
+   * exception message if closeElement was called after top-level element is
    * already closed.
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String, String)
@@ -73,10 +73,10 @@ public class NlsBundleXml extends AbstractResourceBundle {
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String, String)
    */
-  public static final String ERR_INVALID_XML = "Inalid XML!";
+  public static final String ERR_INVALID_XML = "Invalid XML!";
 
   /**
-   * exception message if an IO error occured while streaming XML.
+   * exception message if an IO error occurred while streaming XML.
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter
    */

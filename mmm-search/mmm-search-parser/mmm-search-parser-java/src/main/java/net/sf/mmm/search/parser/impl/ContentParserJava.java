@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserJava extends ContentParserText {
+public class ContentParserJava extends ContentParserTextMarkupAware {
 
   /** the string used to separate package names */
   private static final String PACKAGE_SEPARATOR = ".";
@@ -40,7 +40,7 @@ public class ContentParserJava extends ContentParserText {
    * {@inheritDoc}
    */
   @Override
-  protected String parseLine(Properties properties, String line) {
+  protected void parseLine(Properties properties, String line) {
 
     String title = properties.getProperty(PROPERTY_KEY_TITLE);
     if (title == null) {
@@ -69,7 +69,6 @@ public class ContentParserJava extends ContentParserText {
         properties.setProperty(PROPERTY_KEY_AUTHOR, authorProperty);
       }      
     }
-    return line;
   }
 
 }

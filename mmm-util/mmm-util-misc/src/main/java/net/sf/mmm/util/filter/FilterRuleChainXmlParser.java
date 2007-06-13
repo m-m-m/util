@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.xml.DomUtil;
 
 /**
  * This class allows to parse a list of including and excluding regex
@@ -182,15 +182,7 @@ public class FilterRuleChainXmlParser {
    */
   public FilterRuleChain parseChain(Element xmlElement, FilterRuleChain parent) {
 
-    boolean defaultResult = true;
-    if (xmlElement.hasAttribute(XML_ATR_CHAIN_DEFAULT)) {
-      String defaultAttribute = xmlElement.getAttribute(XML_ATR_CHAIN_DEFAULT);
-      Boolean def = StringUtil.parseBoolean(defaultAttribute);
-      if (def == null) {
-        throw new IllegalArgumentException("No boolean value: " + defaultAttribute);
-      }
-      defaultResult = def.booleanValue();
-    }
+    boolean defaultResult = DomUtil.getAttributeAsBoolean(xmlElement, XML_ATR_CHAIN_DEFAULT, true);
     List<FilterRule> rules = new ArrayList<FilterRule>();
     NodeList childList = xmlElement.getChildNodes();
     for (int childIndex = 0; childIndex < childList.getLength(); childIndex++) {

@@ -3,22 +3,30 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.parser.impl;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
-import net.sf.mmm.search.parser.api.ContentParser;
+import net.sf.mmm.search.parser.base.AbstractContentParser;
+import net.sf.mmm.util.xml.HtmlUtil;
+import net.sf.mmm.util.xml.XmlUtil;
 
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.search.parser.api.ContentParser} interface for XML
- * documents (content with the mimetype "text/xml").
+ * documents (content with the mimetype "text/xml").<br>
+ * It does NOT use a standard XML parser such as SAX or StAX to be fault
+ * tolerant. Still it supports XML encoding declarations, entities, CDATA
+ * sections, etc. Features like XInclude are (intentionally) NOT supported.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserXml implements ContentParser {
+public class ContentParserXml extends AbstractContentParser {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserXml() {
 
@@ -28,58 +36,49 @@ public class ContentParserXml implements ContentParser {
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  @Override
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+      throws Exception {
 
-    Properties properties = new Properties();
-    StringBuffer text = new StringBuffer();
-    int dataByte = inputStream.read();
-    while (dataByte == ' ') {
-      dataByte = inputStream.read();
+    int maxChars = getMaximumBufferSize() / 2;
+    StringBuffer textBuffer = new StringBuffer(maxChars);
+    Charset defaultCharset;
+    if (encoding == null) {
+      defaultCharset = Charset.defaultCharset();
+    } else {
+      defaultCharset = Charset.forName(encoding);
     }
-    boolean inTag = false;
-    if (dataByte == '<') {
-      inTag = true;
-      // check if xml header
-      dataByte = inputStream.read();
-      if (dataByte == '?') {
-        byte[] miniBuffer = new byte[4];
-        int byteCount = inputStream.read(miniBuffer);
-        if (byteCount == 4) {
-          String miniString = new String(miniBuffer);
-          if (miniString.equals("xml ")) {
-            dataByte = inputStream.read();
-            while (dataByte == ' ') {
-              dataByte = inputStream.read();
-            }
-            // search for encoding
-            while (dataByte != 'e') {
-              // maybe standalone or version attribute...
-              // read to next space
-              while (dataByte != ' ') {
-                // this may potentially throw an IOException if EOF is reached
-                // but in this case we cannot extract useful data anyways...
-                dataByte = inputStream.read();
-              }
-              while (dataByte == ' ') {
-                dataByte = inputStream.read();
-              }
-              dataByte = inputStream.read();
-            }
-            // so we found the xml-header attribute starting with 'e'
-            miniBuffer = new byte[8];
-            byteCount = inputStream.read(miniBuffer);
-            if (byteCount == 8) {
-              miniString = new String(miniBuffer);
-              if (miniString.equals("ncoding=")) {
-                
-              }
-            }            
-          }
-        }
+    Reader reader = XmlUtil.createXmlReader(inputStream, defaultCharset);
+    BufferedReader bufferedReader = new BufferedReader(reader);
+    parse(bufferedReader, properties, textBuffer);
+    properties.setProperty(PROPERTY_KEY_TEXT, textBuffer.toString());
+  }
+
+  /**
+   * This method parses the content of the given <code>bufferedReader</code>
+   * and appends the textual content to the <code>textBuffer</code>.
+   * Additional metadata can directly be set in the given
+   * <code>properties</code>.
+   * 
+   * @param bufferedReader is where to read the content from.
+   * @param properties is where the metadata is collected.
+   * @param textBuffer is the buffer where the textual content should be
+   *        appended to.
+   * @throws Exception if something goes wrong.
+   */
+  public void parse(BufferedReader bufferedReader, Properties properties, StringBuffer textBuffer)
+      throws Exception {
+
+    long maxChars = getMaximumBufferSize() / 2;
+    HtmlUtil.ParserState parserState = null;
+    String line = bufferedReader.readLine();
+    while (line != null) {
+      parserState = HtmlUtil.extractPlainText(line, textBuffer, parserState);
+      if (textBuffer.length() > maxChars) {
+        break;
       }
+      line = bufferedReader.readLine();
     }
-    properties.setProperty(PROPERTY_KEY_TEXT, text.toString());
-    return properties;
   }
 
 }

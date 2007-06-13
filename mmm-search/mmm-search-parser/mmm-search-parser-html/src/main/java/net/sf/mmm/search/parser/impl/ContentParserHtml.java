@@ -23,7 +23,7 @@ import org.w3c.tidy.Tidy;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserHtml extends ContentParserText {
+public class ContentParserHtml extends ContentParserTextMarkupAware {
 
   /** the head tag */
   private static final String TAG_HEAD = "head";
@@ -116,12 +116,12 @@ public class ContentParserHtml extends ContentParserText {
   /**
    * {@inheritDoc}
    */
-  public void parse(InputStream inputStream, long filesize, Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties) throws Exception {
 
     if ((filesize > 0) && (filesize < getMaximumBufferSize())) {
       parseJtidy(inputStream, filesize, properties);
     } else {
-      super.parse(inputStream, filesize, properties);
+      super.parse(inputStream, filesize, encoding, properties);
     }
   }
 
@@ -129,42 +129,11 @@ public class ContentParserHtml extends ContentParserText {
    * {@inheritDoc}
    */
   @Override
-  protected String parseLine(Properties properties, String line) {
+  protected void parseLine(Properties properties, String line) {
 
     parseProperty(properties, line, TITLE_PATTERN, PROPERTY_KEY_TITLE, 1);
     parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR, 1);
     parseProperty(properties, line, KEYWORDS_PATTERN, PROPERTY_KEY_KEYWORDS, 1);
-    int capacity = line.length() / 2;
-    StringBuffer buffer = new StringBuffer(capacity);
-    char[] chars = line.toCharArray();
-    boolean inTag = false;
-    char inAttribute = 0;
-    for (int i = 0; i < chars.length; i++) {
-      char c = chars[i];
-      if (c == '<') {
-        inTag = true;
-      } else if (c == '>') {
-        if (inAttribute == 0) {
-          inTag = false;
-          inAttribute = 0;
-        }
-      } else if (inTag && ((c == '"') || (c == '\''))) {
-        if (inAttribute == 0) {
-          inAttribute = c;
-        } else {
-          inAttribute = 0;
-        }
-      } else if (!inTag) {
-        if (c == '&') {
-          // TODO: un-escaping of entities...
-          buffer.append(c);
-        } else {
-          buffer.append(c);
-        }
-      }
-
-    }
-    return buffer.toString();
   }
 
   /**

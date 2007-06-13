@@ -12,6 +12,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexModifier;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
 import net.sf.mmm.nls.impl.ResourceMissingException;

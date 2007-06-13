@@ -13,6 +13,7 @@ import java.io.Writer;
 import net.sf.mmm.util.xml.NlsBundleXml;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.XmlWriterUtil;
 import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
@@ -63,7 +64,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
     this.openElementCompleted = true;
     this.indent = indentation;
     this.currentIndent = null;
-    this.escapingWriter = XmlUtil.createXmlAttributeWriter(writer);
+    this.escapingWriter = XmlWriterUtil.createXmlAttributeWriter(writer);
   }
 
   /**
@@ -137,7 +138,7 @@ public class OutputXmlWriter extends AbstractXmlWriter {
    *        <code>null</code> for no indentation (unformatted single line
    *        output). Typical indentations are " ", " ", " ", or "\t".
    * @param encoding
-   *        is the eoncoding used for writing and is also set as encoding in the
+   *        is the encoding used for writing and is also set as encoding in the
    *        xml header.
    * @throws UnsupportedEncodingException
    *         if the given encoding is not supported.

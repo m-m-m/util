@@ -41,18 +41,15 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** @see #configure(Element) */
   private SearchViewConfiguration configuration;
 
+  /** The name of the view for the actual search. */
+  private String searchView;
+
+  /** The name of the view for the details. */
+  private String detailsView;
+
   /** The search engine. */
-  private ManagedSearchEngine searchEngine;
-
-  /** The name of the JSP to dispatch for regular search. */
-  private String searchJsp;
-
-  /** The name of the JSP to dispatch for details of an entry. */
-  private String detailsJsp;
-
-  /** The URL-pattern of the servlet-mapping for the details view. */
-  private String detailsPath;
-
+  private ManagedSearchEngine searchEngine; 
+  
   /**
    * The constructor.
    */
@@ -76,6 +73,9 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngine = searchEngine;
+    if (this.configuration != null) {
+      this.configuration.setSearchEngine(searchEngine);      
+    }
   }
 
   /**
@@ -86,17 +86,13 @@ public abstract class AbstractSearchServlet extends HttpServlet {
 
     super.init(config);
     try {
-      this.searchJsp = config.getInitParameter("search-jsp");
-      if (this.searchJsp == null) {
-        this.searchJsp = "search.jsp";
+      this.detailsView = config.getInitParameter("details-view");
+      if (this.detailsView == null) {
+        this.detailsView = "details";
       }
-      this.detailsJsp = config.getInitParameter("details-jsp");
-      if (this.detailsJsp == null) {
-        this.detailsJsp = "details.jsp";
-      }
-      this.detailsPath = config.getInitParameter("details-path");
-      if (this.detailsPath == null) {
-        this.detailsPath = "/details";
+      this.searchView = config.getInitParameter("search-view");
+      if (this.searchView == null) {
+        this.searchView = "search";
       }
       String configPath = config.getInitParameter("config-file");
       if (configPath == null) {
@@ -125,6 +121,9 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   protected void configure(Element xmlConfiguration) {
 
     this.configuration = new SearchViewConfiguration(xmlConfiguration);
+    if (this.searchEngine != null) {
+      this.configuration.setSearchEngine(this.searchEngine);
+    }
   }
 
   /**
@@ -141,7 +140,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   private void appendFieldQuery(ComplexSearchQuery complexQuery, String property, String value) {
 
     if (value.length() > 0) {
-      SearchQuery query = this.searchEngine.getQueryBuilder().createPhraseQuery(property, value);
+      SearchQuery query = getSearchEngine().getQueryBuilder().createPhraseQuery(property, value);
       complexQuery.addRequiredQuery(query);
     }
   }
@@ -164,22 +163,20 @@ public abstract class AbstractSearchServlet extends HttpServlet {
     searchContext.setConfiguration(this.configuration);
     // request.setAttribute(SearchContext.ATTRIBUTE_NAME, searchContext);
 
-    String jspName;
-    if (request.getServletPath().equals(this.detailsPath)) {
-      jspName = this.detailsJsp;
+    String viewName = request.getServletPath().substring(1);
+    if (viewName.equals(this.detailsView)) {
       String idString = searchContext.getId();
       if (idString.length() > 0) {
         try {
-          SearchEntry entry = this.searchEngine.getEntry(idString);
+          SearchEntry entry = getSearchEngine().getEntry(idString);
           searchContext.setEntry(entry);
         } catch (Exception e) {
           searchContext.setException(e);
         }
       }
-    } else {
-      jspName = this.searchJsp;
+    } else if (viewName.equals(this.searchView)) {
       try {
-        SearchQueryBuilder queryBuilder = this.searchEngine.getQueryBuilder();
+        SearchQueryBuilder queryBuilder = getSearchEngine().getQueryBuilder();
         ComplexSearchQuery mainQuery = queryBuilder.createComplexQuery();
         SearchQuery query = null;
         String textQuery = searchContext.getQuery();
@@ -197,7 +194,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
             query = mainQuery;
           }
           // perform search...
-          SearchResultPage result = this.searchEngine.search(query, searchContext.getPageNumber(),
+          SearchResultPage result = getSearchEngine().search(query, searchContext.getPageNumber(),
               searchContext.getHitsPerPage());
           searchContext.setResultPage(result);
         }
@@ -207,6 +204,13 @@ public abstract class AbstractSearchServlet extends HttpServlet {
         // response);
         // return;
       }
+    }
+    String jspName;
+    int lastSlash = viewName.lastIndexOf('/');
+    if (lastSlash >= 0) {
+      jspName = viewName.substring(lastSlash) + ".jsp";
+    } else {
+      jspName = viewName + ".jsp";
     }
     request.getRequestDispatcher(jspName).include(request, response);
   }

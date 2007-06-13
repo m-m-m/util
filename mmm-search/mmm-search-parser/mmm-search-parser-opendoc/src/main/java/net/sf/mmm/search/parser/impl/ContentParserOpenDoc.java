@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.parser.impl;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
@@ -12,7 +11,7 @@ import java.util.zip.ZipInputStream;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.search.parser.api.ContentParser;
+import net.sf.mmm.search.parser.base.AbstractContentParser;
 
 /**
  * This is the implementation of the
@@ -22,7 +21,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserOpenDoc implements ContentParser {
+public class ContentParserOpenDoc extends AbstractContentParser {
 
   /** the content.xml entry of the document */
   private static final String ENTRY_CONTENT_XML = "content.xml";
@@ -31,7 +30,7 @@ public class ContentParserOpenDoc implements ContentParser {
   private static final String ENTRY_META_XML = "meta.xml";
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserOpenDoc() {
 
@@ -41,25 +40,27 @@ public class ContentParserOpenDoc implements ContentParser {
   /**
    * {@inheritDoc}
    */
-  public Properties parse(InputStream inputStream, long filesize) throws Exception {
+  @Override
+  public void parse(InputStream inputStream, long filesize, String encoding,
+      Properties properties) throws Exception {
 
-    Properties properties = new Properties();
     ZipInputStream zipInputStream = new ZipInputStream(inputStream);
     // new BufferedInputStream(zipInputStream);
     ZipEntry zipEntry = zipInputStream.getNextEntry();
     while (zipEntry != null) {
       if (zipEntry.getName().equals(ENTRY_CONTENT_XML)) {
-        XMLStreamReader streamReader = XMLInputFactory.newInstance().createXMLStreamReader(zipInputStream);
+        XMLStreamReader streamReader = XMLInputFactory.newInstance().createXMLStreamReader(
+            zipInputStream);
         streamReader.getLocalName();
       } else if (zipEntry.getName().equals(ENTRY_META_XML)) {
-        XMLStreamReader streamReader = XMLInputFactory.newInstance().createXMLStreamReader(zipInputStream);
+        XMLStreamReader streamReader = XMLInputFactory.newInstance().createXMLStreamReader(
+            zipInputStream);
+        // TODO: ...
       }
       zipInputStream.closeEntry();
       zipEntry = zipInputStream.getNextEntry();
     }
     zipInputStream.close();
-
-    return properties;
   }
 
 }

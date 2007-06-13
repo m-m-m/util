@@ -49,9 +49,18 @@ public abstract class AbstractContentParser implements ContentParser, LimitBuffe
    */
   public final Properties parse(InputStream inputStream, long filesize) throws Exception {
 
+    return parse(inputStream, filesize, null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final Properties parse(InputStream inputStream, long filesize, String encoding)
+      throws Exception {
+
     Properties properties = new Properties();
     try {
-      parse(inputStream, filesize, properties);
+      parse(inputStream, filesize, encoding, properties);
     } finally {
       inputStream.close();
     }
@@ -67,13 +76,16 @@ public abstract class AbstractContentParser implements ContentParser, LimitBuffe
    *        is the size (content-length) of the content to parse in bytes or
    *        <code>0</code> if NOT available (unknown). If available, the
    *        parser may use this value for optimized allocations.
+   * @param encoding
+   *        is the explicit encoding to use for text files or <code>null</code>
+   *        to use smart guess.
    * @param properties
    *        are the properties where the extracted (meta-)data from the parsed
    *        <code>inputStream</code> will be added to.
    * @throws Exception
    *         if the operation fails for arbitrary reasons.
    */
-  protected abstract void parse(InputStream inputStream, long filesize, Properties properties)
-      throws Exception;
+  protected abstract void parse(InputStream inputStream, long filesize, String encoding,
+      Properties properties) throws Exception;
 
 }

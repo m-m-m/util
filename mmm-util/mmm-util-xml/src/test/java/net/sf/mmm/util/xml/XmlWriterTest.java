@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 import junit.framework.TestCase;
 
 import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.XmlWriterUtil;
 import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.util.xml.impl.DomXmlWriter;
 import net.sf.mmm.util.xml.impl.OutputXmlWriter;
@@ -85,7 +85,7 @@ public class XmlWriterTest extends TestCase {
    */
   public static void main(String[] args) throws IOException {
 
-    Writer w = XmlUtil.createXmlAttributeWriter(new OutputStreamWriter(System.out));
+    Writer w = XmlWriterUtil.createXmlAttributeWriter(new OutputStreamWriter(System.out));
     w.write("<&>abc\"def<ghi>");
     w.flush();
   }

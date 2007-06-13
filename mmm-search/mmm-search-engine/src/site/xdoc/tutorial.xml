@@ -167,11 +167,17 @@ for (int i = 0; i < hitCount; i++) {
 ]]></source>
         Now for indexing all you have to do is start the indexer with this XML.
         <source><![CDATA[
-java net.sf.mmm.search.indexer.impl.LuceneDirectorySearchIndexer <path-to-xml-config>
+java -Dfile.encoding=ISO-8859-1 net.sf.mmm.search.indexer.impl.LuceneDirectorySearchIndexer <path-to-xml-config>
 ]]></source>
+        Please note that files encoded in UTF-8, UTF-16LE and UTF-16BE are detected automatically.
+        Anyways there is no way to detect non-unicode encodings. Therefore the system-encoding
+        is used as fallback for non-unicode text files.
         For searching all you need to do is to throw the WAR file of
         <a href="mmm-search-engine-webapp/index.html">mmm-search-engine-webapp</a>
-        into your tomcat 5.5+. If you have the XML config described above located 
+        into your tomcat 5.5+. To support special charaters in search requests, you need to 
+        set <code>useBodyEncodingForURI="true"</code> in the <code>Connector</code> of your 
+        tomcat (in <code>server.xml</code>).
+        If you have the XML config described above located 
         at <code>~/search.xml</code> you do NOT even have to modify the web.xml.
         If you update your search-index by re-running the indexer you need to wait
         at most the configured <code>refresh-delay</code> until the change takes effect.

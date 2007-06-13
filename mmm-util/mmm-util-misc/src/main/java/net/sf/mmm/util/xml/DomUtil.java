@@ -25,7 +25,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Attr;
-import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -35,7 +34,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import net.sf.mmm.util.BasicUtil;
-import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This utility class contains methods that help to deal with the
@@ -95,9 +93,9 @@ public final class DomUtil {
   /**
    * This method creates a new transformer.
    * 
-   * @param indent -
-   *        <code>true</code> if the XML should be indented (automatically add
-   *        linebreaks before opening tags), <code>false</code> otherwise.
+   * @param indent - <code>true</code> if the XML should be indented
+   *        (automatically add linebreaks before opening tags),
+   *        <code>false</code> otherwise.
    * @return the new transformer.
    */
   private static Transformer createTransformer(boolean indent) {
@@ -119,8 +117,8 @@ public final class DomUtil {
    * 
    * @see #getFirstElement(NodeList, String)
    * 
-   * @param nodeList
-   *        is the node-list (potentially) containing the requested element.
+   * @param nodeList is the node-list (potentially) containing the requested
+   *        element.
    * @return the first element in the node-list or <code>null</code>, if the
    *         node-list contains NO element.
    */
@@ -133,11 +131,11 @@ public final class DomUtil {
    * This method gets the first element of the given node-list with the
    * specified tag-name.
    * 
-   * @param nodeList
-   *        is the node-list (potentially) containing the requested element.
-   * @param tagName
-   *        is the {@link Element#getTagName() tag-name} of the requested
-   *        element or <code>null</code> if any element is acceptable.
+   * @param nodeList is the node-list (potentially) containing the requested
+   *        element.
+   * @param tagName is the {@link Element#getTagName() tag-name} of the
+   *        requested element or <code>null</code> if any element is
+   *        acceptable.
    * @return the first element in the node-list with the given tag-name (or at
    *         all if tag-name is <code>null</code>). If no such element exists
    *         in the node-list, <code>null</code> is returned.
@@ -161,11 +159,11 @@ public final class DomUtil {
    * This method gets the first child-element of the given <code>element</code>
    * with the specified <code>tagName</code>.
    * 
-   * @param element
-   *        is the element (potentially) containing the requested child-element.
-   * @param tagName
-   *        is the {@link Element#getTagName() tag-name} of the requested
-   *        element or <code>null</code> if any element is acceptable.
+   * @param element is the element (potentially) containing the requested
+   *        child-element.
+   * @param tagName is the {@link Element#getTagName() tag-name} of the
+   *        requested element or <code>null</code> if any element is
+   *        acceptable.
    * @return the first element in the node-list with the given tag-name (or at
    *         all if tag-name is <code>null</code>). If no such element exists
    *         in the node-list, <code>null</code> is returned.
@@ -179,15 +177,15 @@ public final class DomUtil {
    * This method requires the first child-element of the given
    * <code>element</code> with the specified <code>tagName</code>.
    * 
-   * @param element
-   *        is the element (potentially) containing the requested child-element.
-   * @param tagName
-   *        is the {@link Element#getTagName() tag-name} of the requested
-   *        element or <code>null</code> if any element is acceptable.
+   * @param element is the element (potentially) containing the requested
+   *        child-element.
+   * @param tagName is the {@link Element#getTagName() tag-name} of the
+   *        requested element or <code>null</code> if any element is
+   *        acceptable.
    * @return the first element in the node-list with the given tag-name (or at
    *         all if tag-name is <code>null</code>).
-   * @throws IllegalArgumentException
-   *         if the requested child element does NOT exist.
+   * @throws IllegalArgumentException if the requested child element does NOT
+   *         exist.
    */
   public static Element requireFirstChildElement(Element element, String tagName)
       throws IllegalArgumentException {
@@ -204,18 +202,15 @@ public final class DomUtil {
    * This method gets the value of the <code>attribute</code> from the given
    * <code>element</code> as a boolean value.
    * 
-   * @param element
-   *        is the element potentially containing the requested boolean
+   * @param element is the element potentially containing the requested boolean
    *        attribute.
-   * @param attribute
-   *        is the name of the requested attribute.
-   * @param defaultValue
-   *        is the default returned if the attribute is NOT present.
+   * @param attribute is the name of the requested attribute.
+   * @param defaultValue is the default returned if the attribute is NOT
+   *        present.
    * @return the value of the specified <code>attribute</code> or the
    *         <code>defaultValue</code> if the attribute is NOT present.
-   * @throws IllegalArgumentException
-   *         if the value of the specified attribute does NOT represent a
-   *         boolean value.
+   * @throws IllegalArgumentException if the value of the specified attribute
+   *         does NOT represent a boolean value.
    */
   public static boolean getAttributeAsBoolean(Element element, String attribute,
       boolean defaultValue) throws IllegalArgumentException {
@@ -241,8 +236,7 @@ public final class DomUtil {
    * 
    * @see DomUtil#getNodeText(Node, StringBuffer, int)
    * 
-   * @param node
-   *        is the xml node containing the text.
+   * @param node is the xml node containing the text.
    * @return the text of the node.
    */
   public static String getNodeText(Node node) {
@@ -255,11 +249,9 @@ public final class DomUtil {
    * 
    * @see DomUtil#getNodeText(Node, StringBuffer, int)
    * 
-   * @param node
-   *        is the xml node containing the text.
-   * @param depth
-   *        specifies how deep to step into child elements. If less than 1, the
-   *        text of child elements is ignored.
+   * @param node is the xml node containing the text.
+   * @param depth specifies how deep to step into child elements. If less than
+   *        1, the text of child elements is ignored.
    * @return the text of the node including child nodes down to the specified
    *         depth.
    */
@@ -290,13 +282,10 @@ public final class DomUtil {
    * <li>"12345678"</li>
    * </ol>
    * 
-   * @param node
-   *        is the xml node containing the text.
-   * @param buffer
-   *        is the string buffer where to append the text.
-   * @param depth
-   *        specifies how deep to step into child elements. If less than 1, the
-   *        text of child elements is ignored.
+   * @param node is the xml node containing the text.
+   * @param buffer is the string buffer where to append the text.
+   * @param depth specifies how deep to step into child elements. If less than
+   *        1, the text of child elements is ignored.
    */
   public static void getNodeText(Node node, StringBuffer buffer, int depth) {
 
@@ -316,8 +305,7 @@ public final class DomUtil {
   /**
    * This method removes all child nodes of the given node.
    * 
-   * @param node
-   *        is the node to clean of children.
+   * @param node is the node to clean of children.
    */
   public static void removeAllChildren(Element node) {
 
@@ -340,19 +328,18 @@ public final class DomUtil {
   /**
    * This method parses an XML document from a given input stream.
    * 
-   * @param inputStream
-   *        is the input stream to the XML data.
+   * @param inputStream is the input stream to the XML data. If will be closed
+   *        at the end of this method (on success as well as in an exceptional
+   *        state).
    * @return the parsed XML DOM document.
-   * @throws XmlException
-   *         if the XML is invalid.
-   * @throws IOException
-   *         if the input stream produced an error while reading.
+   * @throws IOException if the input stream produced an error while reading.
    */
   public static Document parseDocument(InputStream inputStream) throws XmlException, IOException {
 
     try {
       return createDocumentBuilder().parse(inputStream);
     } catch (SAXException e) {
+      // TODO: NLS, etc.
       throw new XmlException(e.getMessage(), e);
     } finally {
       inputStream.close();
@@ -362,11 +349,10 @@ public final class DomUtil {
   /**
    * This method parses an XML document from a given reader.
    * 
-   * @param reader
-   *        is the reader to the XML data.
+   * @param reader is the reader to the XML data.
    * @return the parsed XML DOM document.
-   * @throws XmlException
-   *         if the input stream produced an IOException or the XML is invalid.
+   * @throws XmlException if the input stream produced an IOException or the XML
+   *         is invalid.
    */
   public static Document parseDocument(Reader reader) throws XmlException {
 
@@ -376,11 +362,10 @@ public final class DomUtil {
   /**
    * This method parses an XML document into an DOM document.
    * 
-   * @param inputSource
-   *        is the input source to the XML data.
+   * @param inputSource is the input source to the XML data.
    * @return the parsed XML DOM document.
-   * @throws XmlException
-   *         if the input stream produced an IOException or the XML is invalid.
+   * @throws XmlException if the input stream produced an IOException or the XML
+   *         is invalid.
    */
   public static Document parseDocument(InputSource inputSource) throws XmlException {
 
@@ -397,16 +382,14 @@ public final class DomUtil {
    * This method writes the XML DOM tree given as node to the given output
    * stream.
    * 
-   * @param xmlNode
-   *        is the "root" node of the XML tree to write (e.g. the Document or
-   *        just a single Element).
-   * @param outputStream
-   *        is where the serialized XML is written to.
-   * @param indent -
-   *        <code>true</code> if the XML should be indented (automatically add
-   *        linebreaks before opening tags), <code>false</code> otherwise.
-   * @throws XmlException
-   *         if the output stream produced an IOException or whatever.
+   * @param xmlNode is the "root" node of the XML tree to write (e.g. the
+   *        Document or just a single Element).
+   * @param outputStream is where the serialized XML is written to.
+   * @param indent - <code>true</code> if the XML should be indented
+   *        (automatically add linebreaks before opening tags),
+   *        <code>false</code> otherwise.
+   * @throws XmlException if the output stream produced an IOException or
+   *         whatever.
    */
   public static void writeXml(Node xmlNode, OutputStream outputStream, boolean indent)
       throws XmlException {
@@ -417,16 +400,14 @@ public final class DomUtil {
   /**
    * This method writes the XML DOM tree given as node to the given writer.
    * 
-   * @param xmlNode
-   *        is the "root" node of the XML tree to write (e.g. the Document or
-   *        just a single Element).
-   * @param writer
-   *        is where the serialized XML is written to.
-   * @param indent -
-   *        <code>true</code> if the XML should be indented (automatically add
-   *        linebreaks before opening tags), <code>false</code> otherwise.
-   * @throws XmlException
-   *         if the output stream produced an IOException or whatever.
+   * @param xmlNode is the "root" node of the XML tree to write (e.g. the
+   *        Document or just a single Element).
+   * @param writer is where the serialized XML is written to.
+   * @param indent - <code>true</code> if the XML should be indented
+   *        (automatically add linebreaks before opening tags),
+   *        <code>false</code> otherwise.
+   * @throws XmlException if the output stream produced an IOException or
+   *         whatever.
    */
   public static void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException {
 
@@ -437,16 +418,13 @@ public final class DomUtil {
    * This method transforms the given XML source to the given result without
    * structural modifications.
    * 
-   * @param source
-   *        is a source (e.g. DomSource, etc.)
-   * @param result
-   *        is a result (e.g. DomResult, StreamResult, etc.)
-   * @param indent -
-   *        <code>true</code> if the XML should be indented (automatically add
-   *        linebreaks before opening tags), <code>false</code> otherwise.
-   * @throws XmlException
-   *         if the transformation failed (e.g. I/O error, invalid XML, or
-   *         whatever).
+   * @param source is a source (e.g. DomSource, etc.)
+   * @param result is a result (e.g. DomResult, StreamResult, etc.)
+   * @param indent - <code>true</code> if the XML should be indented
+   *        (automatically add linebreaks before opening tags),
+   *        <code>false</code> otherwise.
+   * @throws XmlException if the transformation failed (e.g. I/O error, invalid
+   *         XML, or whatever).
    */
   public static void transformXml(Source source, Result result, boolean indent) throws XmlException {
 
@@ -461,8 +439,7 @@ public final class DomUtil {
    * This method gets the local name of a given <code>element</code>. This is
    * the name of the element without any namespace prefix.
    * 
-   * @param element
-   *        the element to get the local name from.
+   * @param element the element to get the local name from.
    * @return the local name of the given element.
    */
   public static String getLocalNodeName(Node element) {
@@ -685,8 +662,7 @@ public final class DomUtil {
    * This method determines if the given <code>node</code> represents regular
    * text.
    * 
-   * @param node
-   *        is the node to check.
+   * @param node is the node to check.
    * @return <code>true</code> if the given <code>node</code> is
    *         {@link org.w3c.dom.Text text} or
    *         {@link org.w3c.dom.CDATASection CDATA}.
@@ -694,73 +670,6 @@ public final class DomUtil {
   public static boolean isTextualNode(Node node) {
 
     return ((node.getNodeType() == Node.TEXT_NODE) || (node.getNodeType() == Node.CDATA_SECTION_NODE));
-  }
-
-  /**
-   * This method adapts from DOM to {@link XmlWriter}. It serializes the given
-   * DOM node to the given XML xmlWriter.
-   * 
-   * @see net.sf.mmm.util.xml.api.XmlSerializer
-   * 
-   * @param xmlWriter
-   *        is the receiver of the serialized XML data.
-   * @param node
-   *        is the XML node to serialize.
-   * @throws XmlException
-   *         if the xml serialization failed.
-   */
-  public static void toXml(XmlWriter xmlWriter, Node node) throws XmlException {
-
-    if (node == null) {
-      new InternalError().printStackTrace();
-      return;
-    }
-    if (node.getNodeType() == Node.ELEMENT_NODE) {
-      Element element = (Element) node;
-      String prefix = element.getPrefix();
-      if (prefix == null) {
-        xmlWriter.writeStartElement(element.getTagName());
-      } else {
-        xmlWriter.writeStartElement(prefix, element.getLocalName(), element.getNamespaceURI());
-      }
-      NamedNodeMap attributeList = element.getAttributes();
-      int length = attributeList.getLength();
-      for (int i = 0; i < length; i++) {
-        toXml(xmlWriter, attributeList.item(i));
-      }
-      NodeList childList = element.getChildNodes();
-      length = childList.getLength();
-      for (int i = 0; i < length; i++) {
-        toXml(xmlWriter, childList.item(i));
-      }
-      if (prefix == null) {
-        xmlWriter.writeEndElement(element.getTagName());
-      } else {
-        xmlWriter.writeEndElement(prefix, element.getLocalName());
-      }
-    } else if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
-      Attr attribute = (Attr) node;
-      String prefix = attribute.getPrefix();
-      if (prefix == null) {
-        xmlWriter.writeAttribute(attribute.getName(), attribute.getValue());
-      } else {
-        if (prefix.equals(XmlUtil.NAMESPACE_PREFIX_XMLNS)) {
-          xmlWriter.writeNamespaceDeclaration(attribute.getLocalName(), attribute.getValue());
-        } else {
-          xmlWriter.writeAttribute(attribute.getLocalName(), attribute.getValue(), prefix);
-        }
-      }
-    } else if (node.getNodeType() == Node.TEXT_NODE) {
-      xmlWriter.writeCharacters(node.getTextContent());
-    } else if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
-      xmlWriter.writeCData(node.getTextContent());
-    } else if (node.getNodeType() == Node.COMMENT_NODE) {
-      Comment comment = (Comment) node;
-      xmlWriter.writeComment(comment.getData());
-    } else if (node.getNodeType() == Node.DOCUMENT_NODE) {
-      Document document = (Document) node;
-      toXml(xmlWriter, document.getDocumentElement());
-    }
   }
 
 }

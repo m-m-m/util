@@ -14,6 +14,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+
 /**
  * This class contains the configuration for the search-engine webapplication.
  * 
@@ -94,6 +96,9 @@ public final class SearchViewConfiguration {
 
   /** @see #getIconName(String) */
   private String defaultIcon;
+
+  /** The search engine. */
+  private ManagedSearchEngine searchEngine;
 
   /**
    * The constructor.
@@ -265,6 +270,22 @@ public final class SearchViewConfiguration {
   public List<String> getTypeNames() {
 
     return this.typeNames;
+  }
+  
+  /**
+   * @return the searchEngine
+   */
+  public ManagedSearchEngine getSearchEngine() {
+  
+    return this.searchEngine;
+  }
+  
+  /**
+   * @param searchEngine the searchEngine to set
+   */
+  public void setSearchEngine(ManagedSearchEngine searchEngine) {
+  
+    this.searchEngine = searchEngine;
   }
 
 }

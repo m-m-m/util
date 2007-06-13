@@ -41,7 +41,7 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  public void parse(InputStream inputStream, long filesize, Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties) throws Exception {
 
     POIFSFileSystem poiFs = new POIFSFileSystem(inputStream);
     SummaryInformation summaryInfo = (SummaryInformation) PropertySetFactory.create(poiFs
