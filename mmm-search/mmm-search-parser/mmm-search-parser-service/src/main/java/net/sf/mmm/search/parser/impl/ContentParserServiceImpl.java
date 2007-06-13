@@ -25,6 +25,7 @@ public class ContentParserServiceImpl extends AbstractContentParserService {
     addParser(new ContentParserDoc(), "doc", "dot");
     addParser(new ContentParserXls(), "xls");
     addParser(new ContentParserPpt(), "ppt");
+    addParser(new ContentParserXml(), "xml");
     // even *.txt files may contain markup (e.g. twiki data files).
     addParser(new ContentParserTextMarkupAware(), "txt", "php", "jsp", "jinc", "asp");
     addParser(new ContentParserText(), "asc", "apt", "csv", "sql", "vbs", "bat", "sh", "c", "h",
