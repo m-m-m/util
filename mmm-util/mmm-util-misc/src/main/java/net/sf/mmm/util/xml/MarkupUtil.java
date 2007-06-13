@@ -12,7 +12,7 @@ import java.util.Map;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class HtmlUtil {
+public final class MarkupUtil {
 
   /** @see #resolveEntity(String) */
   private static final Map<String, Character> ENTITY_MAP;
@@ -280,7 +280,7 @@ public final class HtmlUtil {
   /**
    * The constructor.
    */
-  private HtmlUtil() {
+  private MarkupUtil() {
 
   }
 
@@ -399,7 +399,7 @@ public final class HtmlUtil {
               buffer.append(c);
             } else {
               String entityName = htmlFragment.substring(i + 1, lookaheadIndex);
-              Character value = HtmlUtil.resolveEntity(entityName);
+              Character value = MarkupUtil.resolveEntity(entityName);
               if (value != null) {
                 c = value.charValue();
               } else {
@@ -430,7 +430,7 @@ public final class HtmlUtil {
 
   /**
    * This inner class contains the state of an HTML
-   * {@link HtmlUtil#extractPlainText(String, StringBuffer, net.sf.mmm.util.xml.HtmlUtil.ParserState) parsing}
+   * {@link MarkupUtil#extractPlainText(String, StringBuffer, net.sf.mmm.util.xml.MarkupUtil.ParserState) parsing}
    * process.
    */
   public static class ParserState {

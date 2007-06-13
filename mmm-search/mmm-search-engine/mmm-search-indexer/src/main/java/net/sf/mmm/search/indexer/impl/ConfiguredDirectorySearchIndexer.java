@@ -15,6 +15,7 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.util.filter.FileFilterAdapter;
 import net.sf.mmm.util.filter.FilterRuleChain;
 import net.sf.mmm.util.filter.FilterRuleChainXmlParser;
+import net.sf.mmm.util.io.FileUtil;
 import net.sf.mmm.util.transformer.StringTransformerChainXmlParser;
 import net.sf.mmm.util.transformer.Transformer;
 
@@ -56,6 +57,12 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
   public static final String XML_ATR_DIRECTORY_SOURCE = "source";
 
   /**
+   * The name of the XML attribute for the <code>encoding</code> used to read
+   * textual files in a {@link #XML_TAG_DIRECTORY directory}.
+   */
+  public static final String XML_ATR_DIRECTORY_ENCODING = "encoding";
+
+  /**
    * The name of the XML attribute pointing to the ID of the
    * <code>filter-chain</code> to use for indexing a
    * {@link #XML_TAG_DIRECTORY directory}.
@@ -87,8 +94,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
   /**
    * The constructor.
    * 
-   * @param indexer
-   *        is the indexer to use.
+   * @param indexer is the indexer to use.
    */
   public ConfiguredDirectorySearchIndexer(SearchIndexer indexer) {
 
@@ -99,9 +105,8 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
    * This method builds the search-index from the given
    * <code>configurationElement</code>.
    * 
-   * @param configurationElement
-   *        is the XML-element containing the configuration which directories to
-   *        index and which files to exclude.
+   * @param configurationElement is the XML-element containing the configuration
+   *        which directories to index and which files to exclude.
    */
   public void index(Element configurationElement) {
 
@@ -163,6 +168,11 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
           if (element.hasAttribute(XML_ATR_DIRECTORY_SOURCE)) {
             source = element.getAttribute(XML_ATR_DIRECTORY_SOURCE);
           }
+          String encoding = null;
+          if (element.hasAttribute(XML_ATR_DIRECTORY_ENCODING)) {
+            encoding = element.getAttribute(XML_ATR_DIRECTORY_ENCODING);
+          }
+          setEncoding(encoding);
           // set filter...
           String filterId = element.getAttribute(XML_ATR_DIRECTORY_FILTER);
           FilterRuleChain chain = chainMap.get(filterId);
@@ -182,9 +192,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
             }
           }
           setUriRewriter(urlRewriter);
-          if (path.startsWith("~/")) {
-            path = System.getProperty("user.home") + path.substring(1);
-          }
+          path = FileUtil.resolvePath(path);
           File directory = new File(path);
           if (directory.isDirectory()) {
             String relativePath = element.getAttribute(XML_ATR_DIRECTORY_INDEXBASEPATH);

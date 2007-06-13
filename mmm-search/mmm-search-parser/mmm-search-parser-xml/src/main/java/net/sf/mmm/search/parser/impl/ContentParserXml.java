@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 import java.util.Properties;
 
 import net.sf.mmm.search.parser.base.AbstractContentParser;
-import net.sf.mmm.util.xml.HtmlUtil;
+import net.sf.mmm.util.xml.MarkupUtil;
 import net.sf.mmm.util.xml.XmlUtil;
 
 /**
@@ -70,10 +70,10 @@ public class ContentParserXml extends AbstractContentParser {
       throws Exception {
 
     long maxChars = getMaximumBufferSize() / 2;
-    HtmlUtil.ParserState parserState = null;
+    MarkupUtil.ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
-      parserState = HtmlUtil.extractPlainText(line, textBuffer, parserState);
+      parserState = MarkupUtil.extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

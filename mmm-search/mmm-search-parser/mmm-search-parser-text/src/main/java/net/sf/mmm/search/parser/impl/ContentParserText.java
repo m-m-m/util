@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import com.glaforge.i18n.io.SmartEncodingInputStream;
 
 import net.sf.mmm.search.parser.base.AbstractContentParser;
-import net.sf.mmm.util.xml.HtmlUtil;
+import net.sf.mmm.util.xml.MarkupUtil;
 
 /**
  * This is the implementation of the
@@ -106,7 +106,7 @@ public class ContentParserText extends AbstractContentParser {
       value = parseProperty(line, pattern, group);
       if (value != null) {
         StringBuffer buffer = new StringBuffer(value.length());
-        HtmlUtil.extractPlainText(value, buffer, null);
+        MarkupUtil.extractPlainText(value, buffer, null);
         properties.setProperty(propertyName, buffer.toString());
       }
     }

@@ -33,10 +33,29 @@ public final class FileUtil {
   }
 
   /**
+   * This method resolves a given path. In most cases the given
+   * <code>path</code> will simply be returned. Anyhow Java is NOT able to
+   * resolve paths like "~/foo" that work properly in bash-scripts. Therefore
+   * this method resolves the path in such situations (e.g. to
+   * "/home/login/foo") and returns a physical path.
+   * 
+   * @param path is the path to resolve.
+   * @return the resolved path.
+   */
+  public static String resolvePath(String path) {
+
+    if (path.startsWith("~/")) {
+      return System.getProperty("user.home") + path.substring(1);
+    }
+    // TODO: also support "~user/"...
+    return path;
+  }
+
+  /**
    * This method extracts the extension from the given <code>filename</code>.
    * 
-   * @param filename
-   *        is the filename and may include an absolute or relative path.
+   * @param filename is the filename and may include an absolute or relative
+   *        path.
    * @return the extension of the given <code>filename</code> in
    *         {@link String#toLowerCase() lowercase} or <code>null</code> if
    *         NOT present.
@@ -57,13 +76,10 @@ public final class FileUtil {
    * This method copies the file given by <code>source</code> to the file
    * given by <code>destination</code>.
    * 
-   * @param source
-   *        is the existing file to copy from.
-   * @param destination
-   *        is the file to copy to. It will be created if it does NOT exist and
-   *        overridden otherwise.
-   * @throws IOException
-   *         if the operation fails.
+   * @param source is the existing file to copy from.
+   * @param destination is the file to copy to. It will be created if it does
+   *        NOT exist and overridden otherwise.
+   * @throws IOException if the operation fails.
    */
   public static void copyFile(File source, File destination) throws IOException {
 
@@ -100,16 +116,13 @@ public final class FileUtil {
    * {@link FileUtil}.copyRecursive(source, destination, true);
    * </pre>
    * 
-   * @param source
-   *        is the file or directory to copy.
-   * @param destination
-   *        is the final place where the copy should appear.
-   * @param allowOverwrite -
-   *        if <code>false</code> and the <code>destination</code> already
-   *        exists, an {@link IOException} is thrown, else if <code>true</code>
-   *        the <code>destination</code> will be overwritten.
-   * @throws IOException
-   *         if the operation fails.
+   * @param source is the file or directory to copy.
+   * @param destination is the final place where the copy should appear.
+   * @param allowOverwrite - if <code>false</code> and the
+   *        <code>destination</code> already exists, an {@link IOException} is
+   *        thrown, else if <code>true</code> the <code>destination</code>
+   *        will be overwritten.
+   * @throws IOException if the operation fails.
    */
   public static void copyRecursive(File source, File destination, boolean allowOverwrite)
       throws IOException {
@@ -136,21 +149,17 @@ public final class FileUtil {
    * {@link FileUtil}.copyRecursive(source, destination, true);
    * </pre>
    * 
-   * @param source
-   *        is the file or directory to copy.
-   * @param destination
-   *        is the final place where the copy should appear.
-   * @param allowOverwrite -
-   *        if <code>false</code> and the <code>destination</code> already
-   *        exists, an {@link IOException} is thrown, else if <code>true</code>
-   *        the <code>destination</code> will be overwritten.
-   * @param filter
-   *        is a {@link FileFilter} that {@link FileFilter#accept(File) decides}
-   *        which files should be copied. Only
-   *        {@link FileFilter#accept(File) accepted} files and directories are
-   *        copied, others will be ignored.
-   * @throws IOException
-   *         if the operation fails.
+   * @param source is the file or directory to copy.
+   * @param destination is the final place where the copy should appear.
+   * @param allowOverwrite - if <code>false</code> and the
+   *        <code>destination</code> already exists, an {@link IOException} is
+   *        thrown, else if <code>true</code> the <code>destination</code>
+   *        will be overwritten.
+   * @param filter is a {@link FileFilter} that
+   *        {@link FileFilter#accept(File) decides} which files should be
+   *        copied. Only {@link FileFilter#accept(File) accepted} files and
+   *        directories are copied, others will be ignored.
+   * @throws IOException if the operation fails.
    */
   public static void copyRecursive(File source, File destination, boolean allowOverwrite,
       FileFilter filter) throws IOException {
@@ -181,17 +190,13 @@ public final class FileUtil {
    * {@link FileUtil}.copyRecursive(source, destination, true);
    * </pre>
    * 
-   * @param source
-   *        is the file or directory to copy.
-   * @param destination
-   *        is the final place where the copy should appear.
-   * @param filter
-   *        is a {@link FileFilter} that {@link FileFilter#accept(File) decides}
-   *        which files should be copied. Only
-   *        {@link FileFilter#accept(File) accepted} files and directories are
-   *        copied, others will be ignored.
-   * @throws IOException
-   *         if the operation fails.
+   * @param source is the file or directory to copy.
+   * @param destination is the final place where the copy should appear.
+   * @param filter is a {@link FileFilter} that
+   *        {@link FileFilter#accept(File) decides} which files should be
+   *        copied. Only {@link FileFilter#accept(File) accepted} files and
+   *        directories are copied, others will be ignored.
+   * @throws IOException if the operation fails.
    */
   private static void copyRecursive(File source, File destination, FileFilter filter)
       throws IOException {
@@ -222,12 +227,11 @@ public final class FileUtil {
    * 
    * @see #deleteChildren(File)
    * 
-   * @param path
-   *        is the path to delete.
+   * @param path is the path to delete.
    * @return the number of files that have been deleted (excluding the
    *         directories).
-   * @throws IOException
-   *         if a file or directory could NOT be {@link File#delete() deleted}.
+   * @throws IOException if a file or directory could NOT be
+   *         {@link File#delete() deleted}.
    */
   public static int deleteRecursive(File path) throws IOException {
 
@@ -254,12 +258,11 @@ public final class FileUtil {
    * will be empty after the call of this method, else this method will have no
    * effect.
    * 
-   * @param directory
-   *        is the directory to delete.
+   * @param directory is the directory to delete.
    * @return the number of files that have been deleted (excluding the
    *         directories).
-   * @throws IOException
-   *         if a file or directory could NOT be {@link File#delete() deleted}.
+   * @throws IOException if a file or directory could NOT be
+   *         {@link File#delete() deleted}.
    */
   public static int deleteChildren(File directory) throws IOException {
 
@@ -300,18 +303,15 @@ public final class FileUtil {
    * ".xml" </li>
    * </ul>
    * 
-   * @param cwd
-   *        is the current working directory and should therefore point to an
-   *        existing {@link File#isDirectory() directory}. If the given
+   * @param cwd is the current working directory and should therefore point to
+   *        an existing {@link File#isDirectory() directory}. If the given
    *        <code>path</code> is NOT {@link File#isAbsolute() absolute} it is
    *        interpreted relative to this directory.
-   * @param path
-   *        is the path the requested files must match. If this path is NOT
+   * @param path is the path the requested files must match. If this path is NOT
    *        {@link File#isAbsolute() absolute} it is interpreted relative to the
    *        {@link File#isDirectory() directory} given by <code>cwd</code>.
-   * @param fileType
-   *        is the type of the requested files or <code>null</code> if files
-   *        of any type are acceptable.
+   * @param fileType is the type of the requested files or <code>null</code>
+   *        if files of any type are acceptable.
    * @return an array containing all the {@link File files} that match the given
    *         <code>path</code> and apply to <code>ignore</code>
    */
@@ -327,20 +327,16 @@ public final class FileUtil {
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
    * may be contain {@link StringUtil#compileGlobPattern(String) wildcards}.
    * 
-   * @param cwd
-   *        is the current working directory and should therefore point to an
-   *        existing {@link File#isDirectory() directory}. If the given
+   * @param cwd is the current working directory and should therefore point to
+   *        an existing {@link File#isDirectory() directory}. If the given
    *        <code>path</code> is NOT {@link File#isAbsolute() absolute} it is
    *        interpreted relative to this directory.
-   * @param path
-   *        is the path the files to collect must match. If this path is NOT
-   *        {@link File#isAbsolute() absolute} it is interpreted relative to the
-   *        {@link File#isDirectory() directory} given by <code>cwd</code>.
-   * @param fileType
-   *        is the type of the files to collect or <code>null</code> if files
-   *        of any type are acceptable.
-   * @param list
-   *        is the list where to {@link List#add(Object) add} the collected
+   * @param path is the path the files to collect must match. If this path is
+   *        NOT {@link File#isAbsolute() absolute} it is interpreted relative to
+   *        the {@link File#isDirectory() directory} given by <code>cwd</code>.
+   * @param fileType is the type of the files to collect or <code>null</code>
+   *        if files of any type are acceptable.
+   * @param list is the list where to {@link List#add(Object) add} the collected
    *        files.
    * @return <code>false</code> if the path is a regular string and
    *         <code>true</code> if the given path is a
@@ -367,23 +363,19 @@ public final class FileUtil {
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
    * may be a {@link StringUtil#compileGlobPattern(String) glob-pattern}
    * 
-   * @param cwd
-   *        is the current working directory and should therefore point to an
-   *        existing {@link File#isDirectory() directory}. If the given
+   * @param cwd is the current working directory and should therefore point to
+   *        an existing {@link File#isDirectory() directory}. If the given
    *        <code>path</code> is NOT {@link File#isAbsolute() absolute} it is
    *        interpreted relative to this directory.
-   * @param segments
-   *        is the path the files to collect must match. If this path is NOT
-   *        {@link File#isAbsolute() absolute} it is interpreted relative to the
-   *        {@link File#isDirectory() directory} given by <code>cwd</code>.
-   * @param segmentIndex
-   *        is the current index in <code>pathChars</code> for the collection
-   *        process.
-   * @param fileType
-   *        is the type of the files to collect or <code>null</code> if files
-   *        of any type are acceptable.
-   * @param list
-   *        is the list where to {@link List#add(Object) add} the collected
+   * @param segments is the path the files to collect must match. If this path
+   *        is NOT {@link File#isAbsolute() absolute} it is interpreted relative
+   *        to the {@link File#isDirectory() directory} given by
+   *        <code>cwd</code>.
+   * @param segmentIndex is the current index in <code>pathChars</code> for
+   *        the collection process.
+   * @param fileType is the type of the files to collect or <code>null</code>
+   *        if files of any type are acceptable.
+   * @param list is the list where to {@link List#add(Object) add} the collected
    *        files.
    */
   private static void collectMatchingFiles(File cwd, PathSegment[] segments, int segmentIndex,
@@ -430,10 +422,8 @@ public final class FileUtil {
    * This method tokenized the given <code>path</code> by adding
    * {@link PathSegment}s to the given <code>list</code>.
    * 
-   * @param path
-   *        is the path to tokenized
-   * @param list
-   *        is the list where to add the segment tokens.
+   * @param path is the path to tokenized
+   * @param list is the list where to add the segment tokens.
    * @return <code>true</code> if the path is a glob-pattern (contains '*' or
    *         '?'), <code>false</code> otherwise.
    */

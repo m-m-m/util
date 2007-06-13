@@ -23,6 +23,7 @@ import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
+import net.sf.mmm.util.io.FileUtil;
 
 /**
  * This is the abstract base implementation of the controller
@@ -98,10 +99,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       if (configPath == null) {
         throw new ResourceMissingException(PARAM_CONFIG_FILE);
       }
-      if (configPath.startsWith("~/")) {
-        String home = System.getProperty("user.home");
-        configPath = home + configPath.substring(1);
-      }
+      configPath = FileUtil.resolvePath(configPath);
       File configFile = new File(configPath);
       Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
           configFile);

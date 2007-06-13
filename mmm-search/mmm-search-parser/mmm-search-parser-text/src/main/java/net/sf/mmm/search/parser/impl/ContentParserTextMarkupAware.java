@@ -6,7 +6,7 @@ package net.sf.mmm.search.parser.impl;
 import java.io.BufferedReader;
 import java.util.Properties;
 
-import net.sf.mmm.util.xml.HtmlUtil;
+import net.sf.mmm.util.xml.MarkupUtil;
 
 /**
  * This is the implementation of the
@@ -33,11 +33,11 @@ public class ContentParserTextMarkupAware extends ContentParserText {
       throws Exception {
 
     long maxChars = getMaximumBufferSize() / 2;
-    HtmlUtil.ParserState parserState = null;
+    MarkupUtil.ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
       parseLine(properties, line);
-      parserState = HtmlUtil.extractPlainText(line, textBuffer, parserState);
+      parserState = MarkupUtil.extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

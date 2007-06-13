@@ -62,6 +62,9 @@ public class DirectorySearchIndexer {
   /** the parser service */
   private ContentParserService parserService;
 
+  /** @see #getEncoding() */
+  private String encoding;
+
   /**
    * The constructor.
    */
@@ -73,8 +76,7 @@ public class DirectorySearchIndexer {
   /**
    * The constructor.
    * 
-   * @param indexer
-   *        is the indexer to use.
+   * @param indexer is the indexer to use.
    */
   public DirectorySearchIndexer(SearchIndexer indexer) {
 
@@ -91,8 +93,7 @@ public class DirectorySearchIndexer {
   }
 
   /**
-   * @param indexer
-   *        the indexer to set
+   * @param indexer the indexer to set
    */
   @Resource
   public void setIndexer(SearchIndexer indexer) {
@@ -118,8 +119,7 @@ public class DirectorySearchIndexer {
    * @see net.sf.mmm.util.filter.FilterRuleChainPlainParser
    * @see net.sf.mmm.util.filter.FileFilterAdapter
    * 
-   * @param filter
-   *        the filter to set
+   * @param filter the filter to set
    */
   @Resource
   public void setFilter(FileFilter filter) {
@@ -144,8 +144,7 @@ public class DirectorySearchIndexer {
   /**
    * This method sets the {@link #getUriRewriter() URI-rewriter}.
    * 
-   * @param urlRewriter
-   *        the URI-rewriter to set.
+   * @param urlRewriter the URI-rewriter to set.
    */
   public void setUriRewriter(Transformer<String> urlRewriter) {
 
@@ -161,8 +160,7 @@ public class DirectorySearchIndexer {
   }
 
   /**
-   * @param logger
-   *        the logger to set
+   * @param logger the logger to set
    */
   @Resource
   public void setLogger(Log logger) {
@@ -179,13 +177,33 @@ public class DirectorySearchIndexer {
   }
 
   /**
-   * @param parserService
-   *        the parserService to set
+   * @param parserService the parserService to set
    */
   @Resource
   public void setParserService(ContentParserService parserService) {
 
     this.parserService = parserService;
+  }
+
+  /**
+   * This method gets the encoding.
+   * 
+   * @return the explicit encoding to use for textual files or <code>null</code>
+   *         for smart unicode detection.
+   */
+  public String getEncoding() {
+
+    return this.encoding;
+  }
+
+  /**
+   * This method sets the {@link #getEncoding() encoding}.
+   * 
+   * @param encoding the encoding to set.
+   */
+  public void setEncoding(String encoding) {
+
+    this.encoding = encoding;
   }
 
   /**
@@ -210,8 +228,7 @@ public class DirectorySearchIndexer {
    * 
    * @see #indexDirectory(String, File)
    * 
-   * @param directory
-   *        is the directory to index recursively.
+   * @param directory is the directory to index recursively.
    */
   public void indexDirectory(File directory) {
 
@@ -222,11 +239,10 @@ public class DirectorySearchIndexer {
    * This method starts the indexing from the given <code>directory</code>
    * adding the given <code>source</code> as metadata.
    * 
-   * @param source
-   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
+   * @param source is the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
    *        attribute of the indexed entries.
-   * @param directory
-   *        is the directory to index recursively.
+   * @param directory is the directory to index recursively.
    */
   public void indexDirectory(String source, File directory) {
 
@@ -239,13 +255,11 @@ public class DirectorySearchIndexer {
    * 
    * @see net.sf.mmm.search.api.SearchEntry#getSource()
    * 
-   * @param source
-   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
+   * @param source is the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
    *        attribute of the indexed entries.
-   * @param directory
-   *        is the directory to index recursively.
-   * @param relativePath
-   *        is the base path where used to build the
+   * @param directory is the directory to index recursively.
+   * @param relativePath is the base path where used to build the
    *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the
    *        indexed entries. E.g. when <code>source</code> is
    *        <code>"svn"</code> and <code>directory</code> points to where
@@ -279,10 +293,8 @@ public class DirectorySearchIndexer {
    * <code>properties</code>. It will also {@link String#trim() trim} the
    * properties value.
    * 
-   * @param properties
-   *        is where to get the property from.
-   * @param key
-   *        is the name of the requested property.
+   * @param properties is where to get the property from.
+   * @param key is the name of the requested property.
    * @return the trimmed property or <code>null</code> if the property is NOT
    *         set or its trimmed value is the empty string.
    */
@@ -301,14 +313,13 @@ public class DirectorySearchIndexer {
   /**
    * This method indexes a single file.
    * 
-   * @param source
-   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
+   * @param source is the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
    *        attribute of the indexed entry.
-   * @param file
-   *        is the file to index.
-   * @param relativePath
-   *        is the path of the folder where the file is located relative to the
-   *        path given when the indexing was started. This is used to build the
+   * @param file is the file to index.
+   * @param relativePath is the path of the folder where the file is located
+   *        relative to the path given when the indexing was started. This is
+   *        used to build the
    *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the file
    *        in the search index.
    */
@@ -335,7 +346,7 @@ public class DirectorySearchIndexer {
       try {
         InputStream inputStream = new FileInputStream(file);
         try {
-          Properties properties = parser.parse(inputStream, fileSize);
+          Properties properties = parser.parse(inputStream, fileSize, this.encoding);
           String title = getProperty(properties, ContentParser.PROPERTY_KEY_TITLE);
           if (title != null) {
             entry.setTitle(title);
