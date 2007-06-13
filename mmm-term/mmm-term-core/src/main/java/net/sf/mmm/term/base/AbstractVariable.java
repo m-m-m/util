@@ -36,11 +36,9 @@ public abstract class AbstractVariable extends AbstractTerm {
    * This method gets the name of the variable.
    * 
    * @return the name of the variable.
-   * @param environment
-   *        is the environment given to evaluate this variable.
-   * @throws ValueException
-   *         if the variable name is determined dynamically via a calculation
-   *         that failed.
+   * @param environment is the environment given to evaluate this variable.
+   * @throws ValueException if the variable name is determined dynamically via a
+   *         calculation that failed.
    */
   public abstract String getVariableName(Context environment) throws ValueException;
 

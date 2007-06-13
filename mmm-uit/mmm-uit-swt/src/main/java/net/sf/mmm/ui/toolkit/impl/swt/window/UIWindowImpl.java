@@ -41,20 +41,16 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parent
-   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
-   *        of this object (may be <code>null</code>).
-   * @param defaultStyle
-   *        is the default style used for the SWT shell.
-   * @param modal -
-   *        if <code>true</code> all windows of the application are blocked
-   *        until this window is closed.
-   * @param resizeable -
-   *        if <code>true</code> the window will be
+   * @param parent is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} of this
+   *        object (may be <code>null</code>).
+   * @param defaultStyle is the default style used for the SWT shell.
+   * @param modal - if <code>true</code> all windows of the application are
+   *        blocked until this window is closed.
+   * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizeable() resizeable}.
    */
   public UIWindowImpl(final UIFactorySwt uiFactory, final UIWindowImpl parent, int defaultStyle,
@@ -70,7 +66,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
     if (modal) {
       styleModifiers |= SWT.APPLICATION_MODAL;
     }
-    
+
     final int style = uiFactory.adjustStyle(defaultStyle | styleModifiers);
     uiFactory.getDisplay().invokeSynchron(new Runnable() {
 

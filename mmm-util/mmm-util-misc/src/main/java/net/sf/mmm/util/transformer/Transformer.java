@@ -7,8 +7,7 @@ package net.sf.mmm.util.transformer;
  * This is the interface for a transformer that
  * {@link #transform(Object) transforms} a given value.
  * 
- * @param <V>
- *        is the templated type of the value.
+ * @param <V> is the templated type of the value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,8 +20,7 @@ public interface Transformer<V> {
    * should NOT be changed, the <code>original</code> value (the exact same
    * instance) should be returned.
    * 
-   * @param original
-   *        is the original value.
+   * @param original is the original value.
    * @return the transformed value. May only be <code>null</code> if
    *         explicitly documented by the implementation. The receiver of a
    *         {@link Transformer} should also document if <code>null</code> is

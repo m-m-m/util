@@ -9,10 +9,9 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
-
 /**
  * This is the {@link TestCase} for {@link FilterRuleChainXmlParser}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -35,7 +34,7 @@ public class FilterRuleChainXmlParserTest extends TestCase {
     assertFalse(chain.accept("/foo/bar/file.pdf"));
     assertFalse(chain.accept("/foo/bar/file.xml"));
     assertFalse(chain.accept("/foo/bar/file.XsL"));
-    assertTrue(chain.accept("/foo/bar/file.bar"));    
+    assertTrue(chain.accept("/foo/bar/file.bar"));
   }
 
 }

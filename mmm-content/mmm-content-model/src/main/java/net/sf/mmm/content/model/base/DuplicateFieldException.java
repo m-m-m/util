@@ -21,10 +21,9 @@ public class DuplicateFieldException extends ContentModelRuntimeException {
   private static final long serialVersionUID = -6393217248604007769L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param name
-   *        is the name already in use.
+   * @param name is the name already in use.
    */
   public DuplicateFieldException(String name) {
 
@@ -32,10 +31,9 @@ public class DuplicateFieldException extends ContentModelRuntimeException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param id
-   *        is the ID already in use.
+   * @param id is the ID already in use.
    */
   public DuplicateFieldException(Id id) {
 

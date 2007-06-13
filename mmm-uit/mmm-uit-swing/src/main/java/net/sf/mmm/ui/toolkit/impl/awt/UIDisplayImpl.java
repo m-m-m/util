@@ -10,8 +10,8 @@ import net.sf.mmm.ui.toolkit.base.AbstractUIDisplay;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 
 /**
- * This class is the implementation of the UIDisplay interface using AWT as
- * the UI toolkit.
+ * This class is the implementation of the UIDisplay interface using AWT as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,12 +23,10 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param uiDevice
-   *        is the device the display belongs to.
-   * @param graphicConfiguration
-   *        is the graphics configuration for the display to represent.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param uiDevice is the device the display belongs to.
+   * @param graphicConfiguration is the graphics configuration for the display
+   *        to represent.
    */
   public UIDisplayImpl(AbstractUIFactory uiFactory, UIDeviceImpl uiDevice,
       GraphicsConfiguration graphicConfiguration) {

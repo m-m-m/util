@@ -22,7 +22,7 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
   private final List<SsdpListener> listeners;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractSsdpReceiver() {
 
@@ -62,8 +62,7 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
    * <code>request</code> to all {@link #addListener(SsdpListener) registered}
    * {@link SsdpListener listeners}.
    * 
-   * @param request
-   *        is the request to be sent to the listeners.
+   * @param request is the request to be sent to the listeners.
    */
   protected void notifyListeners(SsdpRequest request) {
 
@@ -83,8 +82,7 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
    * This implementation ignores the given <code>exception</code>. Override
    * to change this behaviour.
    * 
-   * @param exception
-   *        is the catched exception.
+   * @param exception is the catched exception.
    */
   protected void handleListenerException(Exception exception) {
 

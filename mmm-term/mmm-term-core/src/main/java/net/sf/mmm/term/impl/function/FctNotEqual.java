@@ -44,10 +44,8 @@ public class FctNotEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if both arguments do NOT equal,
    *         <code>false</code> otherwise.
    */
@@ -65,10 +63,8 @@ public class FctNotEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if both arguments do NOT equal,
    *         <code>false</code> otherwise.
    */

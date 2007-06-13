@@ -43,12 +43,10 @@ public class UIRefreshEvent implements Event {
   /**
    * The constructor.
    * 
-   * @param orientationModified
-   *        if <code>true</code> the
+   * @param orientationModified if <code>true</code> the
    *        {@link net.sf.mmm.ui.toolkit.api.UIFactory#getScriptOrientation() orientation}
    *        has been modified.
-   * @param localeModified
-   *        if <code>true</code> the
+   * @param localeModified if <code>true</code> the
    *        {@link net.sf.mmm.ui.toolkit.api.UIFactory#getLocale() locale} has
    *        been modified.
    */

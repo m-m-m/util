@@ -19,9 +19,9 @@ package net.sf.mmm.framework.api;
  * <br>
  * In the context of this framework a component is defined by a
  * {@link ComponentProvider provider} in combination with a
- * {@link ComponentDescriptor descriptor}. There are no technical
- * restrictions so anything can be a component. It is a matter of your
- * architectural design what is a component.<br>
+ * {@link ComponentDescriptor descriptor}. There are no technical restrictions
+ * so anything can be a component. It is a matter of your architectural design
+ * what is a component.<br>
  * A component has a {@link #getSpecification() specification}. This is all the
  * user of the component knows. He does NOT need to care how and when the
  * component is created, how it is configured and set-up, and when it is
@@ -29,8 +29,8 @@ package net.sf.mmm.framework.api;
  * {@link IocContainer IoC-Container} and the implementation the
  * {@link ComponentProvider provider}.<br>
  * Typically you do NOT implement {@link ComponentDescriptor descriptors} and
- * {@link ComponentProvider providers} (or deal at all with the framework
- * API). There are generic implementations of this interface that allow you to
+ * {@link ComponentProvider providers} (or deal at all with the framework API).
+ * There are generic implementations of this interface that allow you to
  * configure your component using
  * {@link java.lang.annotation.Annotation annotations} or XML descriptors.<br>
  * The implementation of this interface must guarantee that all attributes ({@link #getSpecification() specification},
@@ -39,8 +39,7 @@ package net.sf.mmm.framework.api;
  * 
  * @see ComponentProvider
  * 
- * @param <S>
- *        is the {@link #getSpecification() specification} of the provided
+ * @param <S> is the {@link #getSpecification() specification} of the provided
  *        component. The generic type in this interface is mainly used to make
  *        the specification more clear.
  * 
@@ -59,16 +58,15 @@ public interface ComponentDescriptor<S> {
 
   /**
    * This method gets the name of the component. This can be any string
-   * following the conventions for
-   * {@link Class#getCanonicalName() class-names}. It may be the
-   * {@link Class#getCanonicalName() canonical name} of the
+   * following the conventions for {@link Class#getCanonicalName() class-names}.
+   * It may be the {@link Class#getCanonicalName() canonical name} of the
    * {@link #getSpecification() specification} or the implementation. The name
    * should be quite short but also identify the component and give an idea of
    * its meaning. The combination of {@link #getDomain() domain} and
    * {@link #getName() name} should be technically unique.<br>
-   * The {@link IocContainer IoC-container} will only display the name but
-   * it might be interpreted by a {@link ComponentProvider provider} for one
-   * of your dependencies.
+   * The {@link IocContainer IoC-container} will only display the name but it
+   * might be interpreted by a {@link ComponentProvider provider} for one of
+   * your dependencies.
    * 
    * @return the name of the component.
    */
@@ -76,12 +74,11 @@ public interface ComponentDescriptor<S> {
 
   /**
    * This method gets the category of the component. This can be any string
-   * following the conventions for
-   * {@link Class#getName() qualified class-names}. The category may be used
-   * to create the components logger.<br>
-   * The category is NOT evaluated by the {@link IocContainer IoC-container}
-   * but might be used by a {@link ComponentProvider provider} for one of
-   * your dependencies.
+   * following the conventions for {@link Class#getName() qualified class-names}.
+   * The category may be used to create the components logger.<br>
+   * The category is NOT evaluated by the {@link IocContainer IoC-container} but
+   * might be used by a {@link ComponentProvider provider} for one of your
+   * dependencies.
    * 
    * @return the category of the component.
    */
@@ -95,9 +92,9 @@ public interface ComponentDescriptor<S> {
    * <code>org.apache.maven</code>. Instead of using technical domains you
    * can also use logical domains such as <code>Billing</code>, </code>Accounting</code>,
    * <code>Delivery</code>, etc.<br>
-   * The domain is NOT evaluated by the {@link IocContainer IoC-container}
-   * but might be used by a {@link ComponentProvider provider} for one of
-   * your dependencies.
+   * The domain is NOT evaluated by the {@link IocContainer IoC-container} but
+   * might be used by a {@link ComponentProvider provider} for one of your
+   * dependencies.
    * 
    * @return the domain of the component.
    */

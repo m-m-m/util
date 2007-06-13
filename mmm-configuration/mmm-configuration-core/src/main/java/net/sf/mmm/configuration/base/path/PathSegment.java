@@ -26,10 +26,8 @@ public class PathSegment extends SimplePathSegment {
   /**
    * The constructor.
    * 
-   * @param name
-   *        is the {@link #getString() string} to match.
-   * @param filter
-   *        is the {@link #getCondition() condition}. Use
+   * @param name is the {@link #getString() string} to match.
+   * @param filter is the {@link #getCondition() condition}. Use
    *        {@link Condition#EMPTY_CONDITION} for no condition.
    */
   public PathSegment(String name, Condition filter) {
@@ -47,13 +45,13 @@ public class PathSegment extends SimplePathSegment {
 
     return this.condition;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public String toString() {
-  
+
     return super.toString() + this.condition.toString();
   }
 

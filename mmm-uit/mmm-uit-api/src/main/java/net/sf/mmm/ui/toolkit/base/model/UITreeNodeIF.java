@@ -8,8 +8,7 @@ package net.sf.mmm.ui.toolkit.base.model;
  * 
  * @see net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel
  * 
- * @param <T>
- *        is the templated type of the user data in the tree nodes.
+ * @param <T> is the templated type of the user data in the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,8 +25,7 @@ public interface UITreeNodeIF<T> {
   /**
    * This method gets the child node of this node at the given position.
    * 
-   * @param index
-   *        is the position of the requested child node.
+   * @param index is the position of the requested child node.
    * @return the child node at the given index.
    */
   UITreeNodeIF<T> getChildNode(int index);
@@ -42,8 +40,7 @@ public interface UITreeNodeIF<T> {
   /**
    * This method gets the index of the given child node.
    * 
-   * @param childNode
-   *        is the child node whos index is requested.
+   * @param childNode is the child node whos index is requested.
    * @return the index position of the requested child node or -1 if the given
    *         node is no child node of this node.
    */

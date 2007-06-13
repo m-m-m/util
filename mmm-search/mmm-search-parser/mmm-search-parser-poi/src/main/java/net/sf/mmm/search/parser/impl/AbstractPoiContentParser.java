@@ -41,7 +41,8 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+      throws Exception {
 
     POIFSFileSystem poiFs = new POIFSFileSystem(inputStream);
     SummaryInformation summaryInfo = (SummaryInformation) PropertySetFactory.create(poiFs
@@ -65,15 +66,12 @@ public abstract class AbstractPoiContentParser extends AbstractContentParser {
    * This method extracts the text from the office document given by
    * <code>poiFs</code>.
    * 
-   * @param poiFs
-   *        is the POI filesystem of the office document.
-   * @param filesize
-   *        is the size (content-length) of the content to parse in bytes or
-   *        <code>0</code> if NOT available (unknown). If available, the
-   *        parser may use this value for optimized allocations.
+   * @param poiFs is the POI filesystem of the office document.
+   * @param filesize is the size (content-length) of the content to parse in
+   *        bytes or <code>0</code> if NOT available (unknown). If available,
+   *        the parser may use this value for optimized allocations.
    * @return the plain text extracted from the content.
-   * @throws Exception
-   *         if something goes wrong.
+   * @throws Exception if something goes wrong.
    */
   protected abstract String extractText(POIFSFileSystem poiFs, long filesize) throws Exception;
 

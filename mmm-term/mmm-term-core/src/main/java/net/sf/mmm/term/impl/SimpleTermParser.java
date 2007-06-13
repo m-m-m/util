@@ -91,11 +91,11 @@ public class SimpleTermParser implements TermParser {
     }
     if (arguments.size() == 0) {
       // TODO
-      throw new TermParseException(expression);      
+      throw new TermParseException(expression);
     } else if (arguments.size() == 1) {
       return arguments.get(0);
     } else {
-      return new Expression(FUNCTION_CONCAT, arguments.toArray(new Term[arguments.size()]));      
+      return new Expression(FUNCTION_CONCAT, arguments.toArray(new Term[arguments.size()]));
     }
   }
 

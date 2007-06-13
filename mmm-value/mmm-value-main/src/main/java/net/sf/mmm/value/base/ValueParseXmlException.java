@@ -21,10 +21,8 @@ public class ValueParseXmlException extends ValueParseException {
   /**
    * The constructor.
    * 
-   * @param valueType
-   *        is the type of value the given string should be parsed as.
-   * @param stringToParse
-   *        is the string that could not be parsed
+   * @param valueType is the type of value the given string should be parsed as.
+   * @param stringToParse is the string that could not be parsed
    */
   public ValueParseXmlException(Class valueType, String stringToParse) {
 

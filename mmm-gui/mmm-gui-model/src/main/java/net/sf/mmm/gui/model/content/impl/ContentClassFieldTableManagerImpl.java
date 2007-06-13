@@ -40,8 +40,7 @@ public class ContentClassFieldTableManagerImpl implements ContentClassFieldTable
   /**
    * This method injects the content-model-service required by this component.
    * 
-   * @param modelService
-   *        is the content-model-service.
+   * @param modelService is the content-model-service.
    */
   @Resource
   public void setContentModelService(ContentModelService modelService) {

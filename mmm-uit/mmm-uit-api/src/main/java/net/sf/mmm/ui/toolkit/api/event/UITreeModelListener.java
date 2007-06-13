@@ -13,8 +13,7 @@ import java.util.EventListener;
  * 
  * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel
  * 
- * @param <N>
- *        is the templated type of the tree nodes.
+ * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,8 +24,7 @@ public interface UITreeModelListener<N> extends EventListener {
    * {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel tree-model} if it
    * changed (nodes have been updated, inserted or removed).
    * 
-   * @param event
-   *        notifies about the change.
+   * @param event notifies about the change.
    */
   void treeModelChanged(UITreeModelEvent<N> event);
 

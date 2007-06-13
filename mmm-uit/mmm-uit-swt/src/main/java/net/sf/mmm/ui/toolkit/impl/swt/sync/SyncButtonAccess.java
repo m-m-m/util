@@ -58,11 +58,10 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the button.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        button.
    */
   public SyncButtonAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -135,8 +134,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    * This method sets the
    * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the button.
    * 
-   * @param buttonText
-   *        is the text to set.
+   * @param buttonText is the text to set.
    */
   public void setText(String buttonText) {
 
@@ -164,8 +162,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Button#setSelection(boolean) selection-status}
    * of the button.
    * 
-   * @param selection
-   *        is the selection-status to set.
+   * @param selection is the selection-status to set.
    */
   public void setSelected(boolean selection) {
 
@@ -179,8 +176,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Button#setImage(org.eclipse.swt.graphics.Image) image}
    * of the button.
    * 
-   * @param icon
-   *        is the image to set.
+   * @param icon is the image to set.
    */
   public void setImage(Image icon) {
 

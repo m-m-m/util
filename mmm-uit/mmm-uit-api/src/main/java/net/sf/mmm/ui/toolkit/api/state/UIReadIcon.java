@@ -17,8 +17,7 @@ public interface UIReadIcon {
   /**
    * This method gets the icon of this object.
    * 
-   * @return the icon of this object or <code>null</code>, if no icon is
-   *         set.
+   * @return the icon of this object or <code>null</code>, if no icon is set.
    */
   UIPicture getIcon();
 

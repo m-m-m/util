@@ -24,7 +24,8 @@ import net.sf.mmm.search.api.SearchException;
  * </pre>
  * 
  * The resulting <code>query</code> will be the same as if
- * {@link #parseStandardQuery(String)} was called with "+text:Multimedia* -text:PHP title:\"Enterprise Content Management\"".
+ * {@link #parseStandardQuery(String)} was called with "+text:Multimedia*
+ * -text:PHP title:\"Enterprise Content Management\"".
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,13 +38,11 @@ public interface SearchQueryBuilder {
    * implementation independend query language use
    * {@link #parseStandardQuery(String, boolean)} instead.
    * 
-   * @param query
-   *        is the query to parse as string.
+   * @param query is the query to parse as string.
    * @return the parsed query.
-   * @throws SearchException
-   *         if the given <code>query</code> string is illegal and can NOT be
-   *         parsed. Implementations should be tolerant and try to avoid this
-   *         situation.
+   * @throws SearchException if the given <code>query</code> string is illegal
+   *         and can NOT be parsed. Implementations should be tolerant and try
+   *         to avoid this situation.
    */
   SearchQuery parseNativeQuery(String query) throws SearchException;
 
@@ -67,13 +66,11 @@ public interface SearchQueryBuilder {
    * 
    * @see #parseNativeQuery(String)
    * 
-   * @param query
-   *        is the query to parse as string.
+   * @param query is the query to parse as string.
    * @return the parsed query.
-   * @throws SearchException
-   *         if the given <code>query</code> string is illegal and can NOT be
-   *         parsed. Implementations should be tolerant and try to avoid this
-   *         situation.
+   * @throws SearchException if the given <code>query</code> string is illegal
+   *         and can NOT be parsed. Implementations should be tolerant and try
+   *         to avoid this situation.
    */
   SearchQuery parseStandardQuery(String query) throws SearchException;
 
@@ -97,19 +94,16 @@ public interface SearchQueryBuilder {
    * 
    * @see #parseNativeQuery(String)
    * 
-   * @param query
-   *        is the query to parse as string.
-   * @param requireTerms -
-   *        if <code>true</code> regular terms of the query are required ("foo
-   *        bar" -> "+foo +bar"), <code>false</code> otherwise ("foo bar" ->
-   *        "foo OR bar"). In other words the call with <code>query</code> and
-   *        <code>true</code> is the same as the call with
-   *        <code>"+(" + query + ")"</code> and <code>false</code>.
+   * @param query is the query to parse as string.
+   * @param requireTerms - if <code>true</code> regular terms of the query are
+   *        required ("foo bar" -> "+foo +bar"), <code>false</code> otherwise
+   *        ("foo bar" -> "foo OR bar"). In other words the call with
+   *        <code>query</code> and <code>true</code> is the same as the call
+   *        with <code>"+(" + query + ")"</code> and <code>false</code>.
    * @return the parsed query.
-   * @throws SearchException
-   *         if the given <code>query</code> string is illegal and can NOT be
-   *         parsed. Implementations should be tolerant and try to avoid this
-   *         situation.
+   * @throws SearchException if the given <code>query</code> string is illegal
+   *         and can NOT be parsed. Implementations should be tolerant and try
+   *         to avoid this situation.
    */
   SearchQuery parseStandardQuery(String query, boolean requireTerms) throws SearchException;
 
@@ -117,12 +111,10 @@ public interface SearchQueryBuilder {
    * This method creates a new {@link SearchQuery query} for the given
    * <code>phrase</code> and <code>property</code>.
    * 
-   * @param property
-   *        is the name of the
+   * @param property is the name of the
    *        {@link net.sf.mmm.search.api.SearchEntry#getProperty(String) property}
    *        where to search.
-   * @param phrase
-   *        is the exact phrase to search for.
+   * @param phrase is the exact phrase to search for.
    * @return the created query.
    */
   SearchQuery createPhraseQuery(String property, String phrase);
@@ -131,13 +123,11 @@ public interface SearchQueryBuilder {
    * This method creates a new {@link SearchQuery query} for the given
    * <code>term</code> and <code>property</code>.
    * 
-   * @param property
-   *        is the name of the
+   * @param property is the name of the
    *        {@link net.sf.mmm.search.api.SearchEntry#getProperty(String) property}
    *        where to search.
-   * @param term
-   *        is the single term to search for. This is eigther a single word or
-   *        or a glob pattern (e.g. "moon?i*" to match "moonlight" or
+   * @param term is the single term to search for. This is eigther a single word
+   *        or or a glob pattern (e.g. "moon?i*" to match "moonlight" or
    *        "moonride") to match.
    * 
    * @return the created query.

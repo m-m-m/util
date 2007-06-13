@@ -14,110 +14,110 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class UISimpleTableModel extends AbstractUITableModel<String> implements
-        UIMutableTableModel<String> {
+    UIMutableTableModel<String> {
 
-    /** */
-    private final String[][] cells;
+  /** */
+  private final String[][] cells;
 
-    /** */
-    private final String[] columnNames;
+  /** */
+  private final String[] columnNames;
 
-    /**
-     * The constructor.
-     * 
-     * @param rowCount
-     * @param columnCount
-     */
-    public UISimpleTableModel(int rowCount, int columnCount) {
+  /**
+   * The constructor.
+   * 
+   * @param rowCount
+   * @param columnCount
+   */
+  public UISimpleTableModel(int rowCount, int columnCount) {
 
-        super();
-        this.cells = new String[rowCount][columnCount];
-        this.columnNames = new String[columnCount];
+    super();
+    this.cells = new String[rowCount][columnCount];
+    this.columnNames = new String[columnCount];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getColumnCount() {
+
+    return this.columnNames.length;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getRowCount() {
+
+    return this.cells.length;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getCellValue(int rowIndex, int columnIndex) {
+
+    return this.cells[rowIndex][columnIndex];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getColumnName(int columnIndex) {
+
+    return this.columnNames[columnIndex];
+  }
+
+  /**
+   * 
+   */
+  public void initCells() {
+
+    for (int col = 0; col < this.columnNames.length; col++) {
+      String s = getColumnName(col);
+      if (s == null) {
+        s = "" + (char) ('A' + col);
+      }
+      for (int row = 0; row < this.cells.length; row++) {
+        this.cells[row][col] = s + row;
+      }
     }
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getColumnCount() {
+  /**
+   * 
+   */
+  public void initColumnNames() {
 
-        return this.columnNames.length;
+    for (int col = 0; col < this.columnNames.length; col++) {
+      String letter = "" + (char) ('A' + col);
+      setColumnName(col, letter);
     }
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getRowCount() {
+  /**
+   * {@inheritDoc}
+   */
+  public void setCellValue(int rowIndex, int columnIndex, String value) {
 
-        return this.cells.length;
-    }
+    this.cells[rowIndex][columnIndex] = value;
+    fireChangeEvent(Type.UPDATE, rowIndex, rowIndex, columnIndex);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCellValue(int rowIndex, int columnIndex) {
+  /**
+   * {@inheritDoc}
+   */
+  public void setColumnName(int columnIndex, String name) {
 
-        return this.cells[rowIndex][columnIndex];
-    }
+    this.columnNames[columnIndex] = name;
+    fireChangeEvent(Type.UPDATE, -1, 0, columnIndex);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getColumnName(int columnIndex) {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void handleListenerException(UITableModelListener listener, Throwable t) {
 
-        return this.columnNames[columnIndex];
-    }
-
-    /**
-     * 
-     */
-    public void initCells() {
-
-        for (int col = 0; col < this.columnNames.length; col++) {
-            String s = getColumnName(col);
-            if (s == null) {
-                s = "" + (char)('A' + col);
-            }
-            for (int row = 0; row < this.cells.length; row++) {
-                this.cells[row][col] = s + row;
-            }
-        }
-    }
-
-    /**
-     * 
-     */
-    public void initColumnNames() {
-        
-        for (int col = 0; col < this.columnNames.length; col++) {
-            String letter = "" + (char)('A' + col); 
-            setColumnName(col, letter);
-        }
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public void setCellValue(int rowIndex, int columnIndex, String value) {
-
-        this.cells[rowIndex][columnIndex] = value;
-        fireChangeEvent(Type.UPDATE, rowIndex, rowIndex, columnIndex);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setColumnName(int columnIndex, String name) {
-
-        this.columnNames[columnIndex] = name;
-        fireChangeEvent(Type.UPDATE, -1, 0, columnIndex);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void handleListenerException(UITableModelListener listener, Throwable t) {
-
-        t.printStackTrace();        
-    }
+    t.printStackTrace();
+  }
 }

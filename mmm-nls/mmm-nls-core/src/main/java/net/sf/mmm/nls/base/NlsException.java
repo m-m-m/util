@@ -29,11 +29,9 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * The constructor.<br>
    * 
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
-   * @param arguments
-   *        are the arguments filled into the
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public NlsException(String internaitionalizedMessage, Object... arguments) {
@@ -44,13 +42,10 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * The constructor.<br>
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
-   * @param arguments
-   *        are the arguments filled into the
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public NlsException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
@@ -61,8 +56,8 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage
-   *        is the internationalized message describing the problem briefly.
+   * @param internationalizedMessage is the internationalized message describing
+   *        the problem briefly.
    */
   public NlsException(NlsMessage internationalizedMessage) {
 
@@ -73,10 +68,9 @@ public abstract class NlsException extends Exception implements NlsThrowable {
   /**
    * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage
-   *        is the internationalized message describing the problem briefly.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internationalizedMessage is the internationalized message describing
+   *        the problem briefly.
    */
   public NlsException(Throwable nested, NlsMessage internationalizedMessage) {
 

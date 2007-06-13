@@ -20,8 +20,7 @@ public interface UIWriteOrientation extends UIReadOrientation {
    * 
    * @see UIReadOrientation#getOrientation()
    * 
-   * @param orientation
-   *        is the new orientation.
+   * @param orientation is the new orientation.
    */
   void setOrientation(Orientation orientation);
 

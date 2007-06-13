@@ -37,25 +37,25 @@ import net.sf.mmm.context.api.Context;
  */
 public interface DetectorStream {
 
-    /**
-     * This method gets the context with the detected metadata. It should NOT be
-     * called, before this detector stream is {@link #isDone() done}.
-     * 
-     * @return the metadata.
-     */
-    Context getMetadata();
+  /**
+   * This method gets the context with the detected metadata. It should NOT be
+   * called, before this detector stream is {@link #isDone() done}.
+   * 
+   * @return the metadata.
+   */
+  Context getMetadata();
 
-    /**
-     * This method determines if the detection is done. This should be the case
-     * at least if the stream has completely been read (in case of
-     * {@link java.io.InputStream}) or written (in case of
-     * {@link java.io.OutputStream}). Depending on the type of the data and
-     * this implementation all metadata might be collected before (e.g. because
-     * all metadata comes from the header of the file).
-     * 
-     * @return <code>true</code> if the metadata has been completely been
-     *         collected, <code>false</code> otherwise.
-     */
-    boolean isDone();
+  /**
+   * This method determines if the detection is done. This should be the case at
+   * least if the stream has completely been read (in case of
+   * {@link java.io.InputStream}) or written (in case of
+   * {@link java.io.OutputStream}). Depending on the type of the data and this
+   * implementation all metadata might be collected before (e.g. because all
+   * metadata comes from the header of the file).
+   * 
+   * @return <code>true</code> if the metadata has been completely been
+   *         collected, <code>false</code> otherwise.
+   */
+  boolean isDone();
 
 }

@@ -29,10 +29,10 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   /**
    * The constructor.
    * 
-   * @param objectId 
+   * @param objectId
    * @param objectName
    * @param parentFolder
-   * @param contentClass 
+   * @param contentClass
    */
   public AbstractContentResource(IdImpl objectId, String objectName, ContentFolder parentFolder,
       ContentClass contentClass) {

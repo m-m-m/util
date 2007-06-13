@@ -15,8 +15,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIButton} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIButton} interface using SWT as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -34,12 +34,9 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param buttonStyle
-   *        determines the style of the button.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param buttonStyle determines the style of the button.
    */
   public UIButtonImpl(UIFactorySwt uiFactory, UISwtNode parentObject, ButtonStyle buttonStyle) {
 

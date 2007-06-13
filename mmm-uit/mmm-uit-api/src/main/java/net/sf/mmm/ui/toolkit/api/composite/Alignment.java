@@ -208,8 +208,7 @@ public enum Alignment {
   /**
    * This method extracts the horizontal or vertical part of this alignment.
    * 
-   * @param orientation
-   *        is the orientation of the requested part.
+   * @param orientation is the orientation of the requested part.
    * @return {@link #getHorizontalPart()} if orientation is
    *         {@link Orientation#HORIZONTAL}, {@link #getVerticalPart()}
    *         otherwise.

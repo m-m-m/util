@@ -21,14 +21,10 @@ public class ValueOutOfRangeException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param genericValue
-   *        is the generic value that is out of range.
-   * @param value
-   *        is the number that is out of range.
-   * @param minimum
-   *        is the minimum value allowed
-   * @param maximum
-   *        is the maximum value allowed.
+   * @param genericValue is the generic value that is out of range.
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
    */
   public ValueOutOfRangeException(GenericValue genericValue, Number value, Number minimum,
       Number maximum) {

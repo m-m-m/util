@@ -29,8 +29,7 @@ public class NumericUtil {
    * <code>0.2F - 0.2</code> is NOT <code>0.0</code> (but
    * <code>2.980232227667301E-9</code>).
    * 
-   * @param value
-   *        is the value to convert.
+   * @param value is the value to convert.
    * @return a number with the same {@link Number#doubleValue()} as the given
    *         value and the simplest possible type.
    */

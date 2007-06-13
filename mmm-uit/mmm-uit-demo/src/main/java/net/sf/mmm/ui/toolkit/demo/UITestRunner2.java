@@ -15,48 +15,45 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  */
 public class UITestRunner2 {
 
-    /**
-     * This method runs the demo test.
-     * 
-     * @param factory
-     *        is the actual factory implementation to use.
+  /**
+   * This method runs the demo test.
+   * 
+   * @param factory is the actual factory implementation to use.
+   */
+  private static void runTest(UIFactory factory) {
+
+    System.out.println(factory);
+    System.out.println(factory.getDisplay());
+    factory.setScriptOrientation(ScriptOrientation.RIGHT_TO_LEFT);
+    /*
+     * final UIWorkbench workbench = factory.createWorkbench("Workbench");
+     * workbench.setMaximized(true); workbench.setVisible(true); final UIFrame
+     * frame = workbench.createFrame("TestFrame", true);
      */
-    private static void runTest(UIFactory factory) {
-
-        System.out.println(factory);
-        System.out.println(factory.getDisplay());
-        factory.setScriptOrientation(ScriptOrientation.RIGHT_TO_LEFT);
-        /*
-        final UIWorkbench workbench = factory.createWorkbench("Workbench");
-        workbench.setMaximized(true);
-        workbench.setVisible(true);
-        final UIFrame frame = workbench.createFrame("TestFrame", true);
-        */
-        final UIFrame frame = factory.createFrame("TestFrame", true);
-        frame.setComposite(UIDemoBuilder.createTabbedPanel(factory));
-        UIDemoBuilder.createMenus(frame);        
-        frame.setSize(600, 500);
-        frame.centerWindow();
-        frame.setVisible(true);
-        //while (workbench.isVisible()) {
-        while (frame.isVisible()) {
-            factory.getDisplay().dispatch();
-        }
-        frame.dispose();
-        factory.dispose();
+    final UIFrame frame = factory.createFrame("TestFrame", true);
+    frame.setComposite(UIDemoBuilder.createTabbedPanel(factory));
+    UIDemoBuilder.createMenus(frame);
+    frame.setSize(600, 500);
+    frame.centerWindow();
+    frame.setVisible(true);
+    // while (workbench.isVisible()) {
+    while (frame.isVisible()) {
+      factory.getDisplay().dispatch();
     }
+    frame.dispose();
+    factory.dispose();
+  }
 
-    /**
-     * This method holds the main code to run this class. It will be called when
-     * the class is started as java application.
-     * 
-     * @param args
-     *        are the commandline arguments.
-     */
-    public static void main(String[] args) {
+  /**
+   * This method holds the main code to run this class. It will be called when
+   * the class is started as java application.
+   * 
+   * @param args are the commandline arguments.
+   */
+  public static void main(String[] args) {
 
-        runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
-        runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
-    }
+    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
+    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
+  }
 
 }

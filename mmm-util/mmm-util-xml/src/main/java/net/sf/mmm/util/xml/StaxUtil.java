@@ -32,12 +32,10 @@ public final class StaxUtil {
   /**
    * This method creates a stream writer.
    * 
-   * @param out
-   *        is the output stream where the XML will be written to.
+   * @param out is the output stream where the XML will be written to.
    * @return the XML stream writer.
-   * @throws XMLStreamException
-   *         if the creation of the stream writer failed (StAX not available or
-   *         misconfigured).
+   * @throws XMLStreamException if the creation of the stream writer failed
+   *         (StAX not available or misconfigured).
    */
   public static XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException {
 
@@ -47,12 +45,10 @@ public final class StaxUtil {
   /**
    * This method creates a stream writer.
    * 
-   * @param writer
-   *        is the writer where the XML will be written to.
+   * @param writer is the writer where the XML will be written to.
    * @return the XML stream writer.
-   * @throws XMLStreamException
-   *         if the creation of the stream writer failed (StAX not available or
-   *         misconfigured).
+   * @throws XMLStreamException if the creation of the stream writer failed
+   *         (StAX not available or misconfigured).
    */
   public static XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
 

@@ -12,8 +12,7 @@ import net.sf.mmm.content.value.api.Link;
 import net.sf.mmm.content.value.api.MutableLinkList;
 
 /**
- * This is the default implementation of the {@link MutableLinkList}
- * interface.
+ * This is the default implementation of the {@link MutableLinkList} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -112,7 +111,7 @@ public class MutableLinkListImpl implements MutableLinkList {
 
     /**
      * The constructor.
-     *
+     * 
      * @param linkIterator
      * @param linkFilter
      */

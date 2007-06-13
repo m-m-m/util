@@ -24,19 +24,16 @@ public interface SearchIndexManager {
    * Be very careful when setting <code>update</code> to <code>false</code>
    * to avoid loosing valuable data.
    * 
-   * @param dataSource
-   *        is a string identifying the data source where the index is
-   *        persisted. This is typically the absolute path to the index in the
-   *        local filesystem.
+   * @param dataSource is a string identifying the data source where the index
+   *        is persisted. This is typically the absolute path to the index in
+   *        the local filesystem.
    * @return the create indexer.
-   * @param update
-   *        if <code>true</code> the indexer will update the index at
+   * @param update if <code>true</code> the indexer will update the index at
    *        <code>dataSource</code> if it already exists, else if
    *        <code>false</code> the index will be overwritten if it already
    *        exists. If the index does NOT yet exist, it will be created in any
    *        case.
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   SearchIndexer createIndexer(String dataSource, boolean update) throws SearchException;
 

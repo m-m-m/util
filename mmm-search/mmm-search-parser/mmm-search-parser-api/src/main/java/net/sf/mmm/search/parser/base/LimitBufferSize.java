@@ -38,8 +38,7 @@ public interface LimitBufferSize {
    * 
    * @see #DEFAULT_MAX_BUFFER_SIZE
    * 
-   * @param maxBytes
-   *        is the maximum number of bytes to allocate.
+   * @param maxBytes is the maximum number of bytes to allocate.
    */
   void setMaximumBufferSize(int maxBytes);
 

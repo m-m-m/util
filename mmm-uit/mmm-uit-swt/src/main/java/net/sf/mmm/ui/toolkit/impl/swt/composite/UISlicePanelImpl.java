@@ -16,8 +16,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel} interface using SWT
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -32,14 +32,11 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param borderTitle
-   *        is the title of the border or <code>null</code> for NO border.
-   * @param orientation
-   *        is the orientation for the layout of the panel.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param borderTitle is the title of the border or <code>null</code> for NO
+   *        border.
+   * @param orientation is the orientation for the layout of the panel.
    */
   public UISlicePanelImpl(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle,
       Orientation orientation) {

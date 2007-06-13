@@ -25,10 +25,8 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIMultiComposite(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -55,8 +53,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(UIComponent)
    * 
-   * @param component
-   *        is the component to add.
+   * @param component is the component to add.
    */
   public void doAddComponent(UIComponent component) {
 
@@ -67,10 +64,8 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
    * This method adds (inserts) the <code>component</code> at the given
    * <code>index</code>.
    * 
-   * @param index
-   *        is the position where to add the component.
-   * @param component
-   *        is the component to add.
+   * @param index is the position where to add the component.
+   * @param component is the component to add.
    */
   public void doAddComponent(int index, UIComponent component) {
 
@@ -80,8 +75,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(int)
    * 
-   * @param index
-   *        is the position of the component to remove.
+   * @param index is the position of the component to remove.
    * @return the removed component.
    */
   protected UIComponent doRemoveComponent(int index) {
@@ -92,8 +86,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * @see List#indexOf(Object)
    * 
-   * @param component
-   *        is the component to lookup.
+   * @param component is the component to lookup.
    * @return the index of the given <code>component</code> or <code>-1</code>
    *         if NOT found.
    */

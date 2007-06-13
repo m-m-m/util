@@ -40,8 +40,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
    * This method converts the given <code>plainValue</code> to a
    * {@link GenericValue}.
    * 
-   * @param plainValue
-   *        is the object to convert.
+   * @param plainValue is the object to convert.
    * @return is the object as generic value.
    */
   protected abstract GenericValue convert(Object plainValue);
@@ -212,8 +211,7 @@ public abstract class AbstractGenericValueTest extends TestCase {
   }
 
   /**
-   * @param value
-   *        must be a generic value containing a number.
+   * @param value must be a generic value containing a number.
    */
   public void checkNumber(GenericValue value) {
 

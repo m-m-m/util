@@ -21,12 +21,11 @@ public class FieldNotExistsException extends ContentModelException {
   /**
    * The constructor.
    * 
-   * @param fieldName
-   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
-   *        of the missing {@link ContentField field}.
-   * @param declaringClass
-   *        is the {@link ContentClass content-class} where the missing field
-   *        was expected.
+   * @param fieldName is the
+   *        {@link net.sf.mmm.content.api.ContentObject#getName() name} of the
+   *        missing {@link ContentField field}.
+   * @param declaringClass is the {@link ContentClass content-class} where the
+   *        missing field was expected.
    */
   public FieldNotExistsException(String fieldName, ContentClass declaringClass) {
 

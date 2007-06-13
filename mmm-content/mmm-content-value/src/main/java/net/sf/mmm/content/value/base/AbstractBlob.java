@@ -52,7 +52,7 @@ public abstract class AbstractBlob implements MutableBlob {
         // that returns the number of bytes copied
         int bytesWritten = 0; // get from wrapper stream...
         // TODO:
-        
+
         if (append) {
           this.size += bytesWritten;
         } else {
@@ -64,7 +64,7 @@ public abstract class AbstractBlob implements MutableBlob {
           inputStream.close();
         } finally {
           if (outputStream != null) {
-            outputStream.close();            
+            outputStream.close();
           }
         }
       }

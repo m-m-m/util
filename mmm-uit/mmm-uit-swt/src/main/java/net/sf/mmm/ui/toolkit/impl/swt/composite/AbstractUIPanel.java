@@ -28,12 +28,10 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UIP
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param borderTitle
-   *        is the title of the border or <code>null</code> for NO border.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param borderTitle is the title of the border or <code>null</code> for NO
+   *        border.
    */
   public AbstractUIPanel(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle) {
 

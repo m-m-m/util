@@ -73,13 +73,13 @@ public class FieldModifiersImplTest extends TestCase {
             for (int trans = 0; trans < 2; trans++) {
               boolean isTransient = toBoolean(trans);
               try {
-              FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal,
-                  isReadOnly, isStatic, isTransient);
-              assertEquals(isSystem, modifiers.isSystem());
-              assertEquals(isFinal, modifiers.isFinal());
-              assertEquals(isReadOnly, modifiers.isReadOnly());
-              assertEquals(isStatic, modifiers.isStatic());
-              assertEquals(isTransient, modifiers.isTransient());
+                FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal,
+                    isReadOnly, isStatic, isTransient);
+                assertEquals(isSystem, modifiers.isSystem());
+                assertEquals(isFinal, modifiers.isFinal());
+                assertEquals(isReadOnly, modifiers.isReadOnly());
+                assertEquals(isStatic, modifiers.isStatic());
+                assertEquals(isTransient, modifiers.isTransient());
               } catch (IllegalModifiersException e) {
                 // ignore
               }

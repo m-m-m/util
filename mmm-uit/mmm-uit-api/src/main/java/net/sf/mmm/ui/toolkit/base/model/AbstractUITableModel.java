@@ -15,8 +15,7 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
  * This is the abstract base implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface.
  * 
- * @param <E>
- *        is the templated type of the objects in the table cells.
+ * @param <E> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -67,10 +66,8 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
    * an event that informs of the change of a single row.
    * 
-   * @param type
-   *        is the type change.
-   * @param rowIndex
-   *        is the index of the row that has changed.
+   * @param type is the type change.
+   * @param rowIndex is the index of the row that has changed.
    */
   protected void fireRowChangeEvent(Type type, int rowIndex) {
 
@@ -81,12 +78,9 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
    * an event that informs of the change of a range of rows.
    * 
-   * @param type
-   *        is the type change.
-   * @param rowStartIndex
-   *        is the index of the first row that has changed.
-   * @param rowEndIndex
-   *        is the index of the last row that has changed.
+   * @param type is the type change.
+   * @param rowStartIndex is the index of the first row that has changed.
+   * @param rowEndIndex is the index of the last row that has changed.
    */
   protected void fireRowChangeEvent(Type type, int rowStartIndex, int rowEndIndex) {
 
@@ -97,10 +91,8 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
    * an event that informs of the change of a single column.
    * 
-   * @param type
-   *        is the type change.
-   * @param columnIndex
-   *        is the index of the column that has changed.
+   * @param type is the type change.
+   * @param columnIndex is the index of the column that has changed.
    */
   protected void fireColumnChangeEvent(Type type, int columnIndex) {
 
@@ -111,14 +103,10 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
    * an event that informs of the change of a range of rows.
    * 
-   * @param type
-   *        is the type change.
-   * @param rowStartIndex
-   *        is the index of the first row that has changed.
-   * @param rowEndIndex
-   *        is the index of the last row that has changed.
-   * @param columnIndex
-   *        is the index of the column that has changed.
+   * @param type is the type change.
+   * @param rowStartIndex is the index of the first row that has changed.
+   * @param rowEndIndex is the index of the last row that has changed.
+   * @param columnIndex is the index of the column that has changed.
    */
   protected void fireChangeEvent(Type type, int rowStartIndex, int rowEndIndex, int columnIndex) {
 
@@ -130,8 +118,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * {@link UITableModel#addListener(UITableModelListener) registered}
    * {@link UITableModelListener listeners} of this model.
    * 
-   * @param event
-   *        is the event to send.
+   * @param event is the event to send.
    */
   protected void fireChangeEvent(UITableModelEvent event) {
 
@@ -149,10 +136,8 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * This method is called by the {@link #fireChangeEvent(UITableModelEvent)}
    * method if a listener caused an exception or error.
    * 
-   * @param listener
-   *        is the listener that threw the exception or error.
-   * @param t
-   *        is the exception or error.
+   * @param listener is the listener that threw the exception or error.
+   * @param t is the exception or error.
    */
   protected abstract void handleListenerException(UITableModelListener listener, Throwable t);
 

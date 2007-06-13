@@ -99,16 +99,12 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
    * This implementation simply throws an {@link WrongValueTypeException}.
    * Override to add support for further types.
    * 
-   * @param <T>
-   *        is the templated type of the value.
-   * @param type
-   *        is the class reflecting the value.
-   * @param value
-   *        is the value to convert to the given <code>type</code>.
+   * @param <T> is the templated type of the value.
+   * @param type is the class reflecting the value.
+   * @param value is the value to convert to the given <code>type</code>.
    * @return the converted value.
-   * @throws WrongValueTypeException
-   *         if the given <code>value</code> can NOT be converted to
-   *         <code>type</code>.
+   * @throws WrongValueTypeException if the given <code>value</code> can NOT
+   *         be converted to <code>type</code>.
    */
   protected <T> T toValue(Class<T> type, Object value) throws WrongValueTypeException {
 
@@ -118,11 +114,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as string.
    * 
-   * @param value
-   *        is the value to get as string.
+   * @param value is the value to get as string.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a string.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a string.
    */
   protected String toString(Object value) throws WrongValueTypeException {
 
@@ -136,11 +131,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as character.
    * 
-   * @param value
-   *        is the value to get as character.
+   * @param value is the value to get as character.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a character.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a character.
    */
   protected Character toCharacter(Object value) throws WrongValueTypeException {
 
@@ -158,11 +152,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as boolean.
    * 
-   * @param value
-   *        is the value to get as boolean.
+   * @param value is the value to get as boolean.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a boolean.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a boolean.
    */
   protected Boolean toBoolean(Object value) throws WrongValueTypeException {
 
@@ -181,11 +174,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as date.
    * 
-   * @param value
-   *        is the value to get as date.
+   * @param value is the value to get as date.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a date.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a date.
    */
   protected Date toDate(Object value) throws WrongValueTypeException {
 
@@ -203,11 +195,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as double.
    * 
-   * @param value
-   *        is the value to get as double.
+   * @param value is the value to get as double.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a double.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a double.
    */
   protected double toDouble(Object value) throws WrongValueTypeException {
 
@@ -225,11 +216,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as float.
    * 
-   * @param value
-   *        is the value to get as float.
+   * @param value is the value to get as float.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a float.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a float.
    */
   protected float toFloat(Object value) throws WrongValueTypeException {
 
@@ -247,11 +237,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as short.
    * 
-   * @param value
-   *        is the value to get as short.
+   * @param value is the value to get as short.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a short.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a short.
    */
   protected short toShort(Object value) throws WrongValueTypeException {
 
@@ -269,11 +258,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as byte.
    * 
-   * @param value
-   *        is the value to get as byte.
+   * @param value is the value to get as byte.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a byte.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a byte.
    */
   protected byte toByte(Object value) throws WrongValueTypeException {
 
@@ -291,11 +279,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as integer.
    * 
-   * @param value
-   *        is the value to get as integer.
+   * @param value is the value to get as integer.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to an integer.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         an integer.
    */
   protected int toInteger(Object value) throws WrongValueTypeException {
 
@@ -313,11 +300,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as number.
    * 
-   * @param value
-   *        is the value to get as integer.
+   * @param value is the value to get as integer.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to an integer.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         an integer.
    */
   protected Number toNumber(Object value) throws WrongValueTypeException {
 
@@ -331,11 +317,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as long.
    * 
-   * @param value
-   *        is the value to get as long.
+   * @param value is the value to get as long.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a long.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a long.
    */
   protected long toLong(Object value) throws WrongValueTypeException {
 
@@ -353,11 +338,10 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
   /**
    * This method gets the given value object as class.
    * 
-   * @param value
-   *        is the value to get as class.
+   * @param value is the value to get as class.
    * @return the value to convert.
-   * @throws WrongValueTypeException
-   *         if the given object can NOT be converted to a class.
+   * @throws WrongValueTypeException if the given object can NOT be converted to
+   *         a class.
    */
   protected Class<?> toClass(Object value) throws WrongValueTypeException {
 

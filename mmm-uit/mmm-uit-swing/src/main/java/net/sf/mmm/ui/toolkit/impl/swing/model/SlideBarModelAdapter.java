@@ -18,11 +18,10 @@ import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
- * a swing {@link javax.swing.JSlider}. It is the controller of the MVC.
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * swing {@link javax.swing.JSlider}. It is the controller of the MVC.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected.
+ * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -275,8 +274,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
   /**
    * This method set the model to the given value.
    * 
-   * @param newModel
-   *        is the new model to set.
+   * @param newModel is the new model to set.
    */
   public void setModel(UIListModel<E> newModel) {
 

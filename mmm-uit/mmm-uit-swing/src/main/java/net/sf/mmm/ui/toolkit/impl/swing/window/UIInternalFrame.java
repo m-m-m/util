@@ -20,8 +20,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of an internal
- * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame frame} using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame frame} using Swing as the UI
+ * toolkit.
  * 
  * @see net.sf.mmm.ui.toolkit.api.window.UIWorkbench#createFrame(String,
  *      boolean)
@@ -39,16 +39,12 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parentObject
-   *        is the workbench that created this frame.
-   * @param title
-   *        is the {@link #getTitle() title} of the frame.
-   * @param resizeable -
-   *        if <code>true</code> the frame will be
+   * @param parentObject is the workbench that created this frame.
+   * @param title is the {@link #getTitle() title} of the frame.
+   * @param resizeable - if <code>true</code> the frame will be
    *        {@link #isResizeable() resizeable}.
    */
   public UIInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
@@ -62,17 +58,14 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parentObject
-   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
-   *        that created this frame.
-   * @param title
-   *        is the {@link #getTitle() title} of the frame.
-   * @param resizeable -
-   *        if <code>true</code> the frame will be
+   * @param parentObject is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        created this frame.
+   * @param title is the {@link #getTitle() title} of the frame.
+   * @param resizeable - if <code>true</code> the frame will be
    *        {@link #isResizeable() resizeable}.
    */
   public UIInternalFrame(UIFactorySwing uiFactory, UIInternalFrame parentObject, String title,
@@ -139,15 +132,15 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
         this.frame.setIcon(minimize);
       } catch (PropertyVetoException e) {
         // ignore this...
-      }      
+      }
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public boolean isMinimized() {
-  
+
     return this.frame.isIcon();
   }
 

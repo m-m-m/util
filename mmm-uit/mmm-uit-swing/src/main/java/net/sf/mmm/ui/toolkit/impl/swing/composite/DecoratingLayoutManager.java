@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.base.composite.Size;
 /**
  * This is the layout-manager that organizes the layout for
  * {@link UIDecoratedComponent decorated components}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements LayoutManager2 {
@@ -23,8 +23,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
   /**
    * The constructor.
    * 
-   * @param decoratedComponent
-   *        is the decorated component to layout.
+   * @param decoratedComponent is the decorated component to layout.
    */
   public DecoratingLayoutManager(UIDecoratedComponent<?, ?> decoratedComponent) {
 

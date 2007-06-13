@@ -6,8 +6,8 @@ package net.sf.mmm.framework.api;
 /**
  * This is the interface of a manager that
  * {@link #checkPermission(Class, Class, String) checks} if a
- * {@link ComponentDescriptor#getSpecification() source component} is allowed
- * to access a {@link ComponentDescriptor#getSpecification() target component}.
+ * {@link ComponentDescriptor#getSpecification() source component} is allowed to
+ * access a {@link ComponentDescriptor#getSpecification() target component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,20 +20,15 @@ public interface IocSecurityManager {
    * {@link ComponentManager#requestComponent(Class) access} a component
    * identified by <code>target</code>.
    * 
-   * @param source
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the
+   * @param source is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
    *        {@link ComponentManager#requestComponent(Class, String) requesting}
    *        component.
-   * @param target
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the
+   * @param target is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
    *        {@link ComponentManager#requestComponent(Class, String) requested}
    *        component.
-   * @param instanceId
-   *        is the
+   * @param instanceId is the
    *        {@link ComponentManager#requestComponent(Class, String) requested instance-ID}.
    * @return <code>true</code> if <code>source</code> is allowed to access
    *         <code>target</code> with the given <code>instanceId</code>.

@@ -16,8 +16,7 @@ public interface UIWriteSelectionIndex extends UIReadSelectionIndex {
    * 
    * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElement(int)
    * 
-   * @param newIndex
-   *        is the index of the item to select.
+   * @param newIndex is the index of the item to select.
    */
   void setSelectedIndex(int newIndex);
 

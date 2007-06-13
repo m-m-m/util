@@ -130,8 +130,7 @@ public class SsdpRequest extends HttpRequest {
   /**
    * This method sets the {@link #HEADER_PROPERTY_SEARCH_TARGET search-target}.
    * 
-   * @param st
-   *        is the search-target to set.
+   * @param st is the search-target to set.
    */
   public void setSearchTarget(String st) {
 
@@ -149,7 +148,7 @@ public class SsdpRequest extends HttpRequest {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    * @see #initializeDefaults()
    */
@@ -198,8 +197,7 @@ public class SsdpRequest extends HttpRequest {
    * @see #NTS_SSDP_ALIVE
    * @see #NTS_SSDP_BYEBYE
    * 
-   * @param nts
-   *        the notification sub type to set.
+   * @param nts the notification sub type to set.
    */
   public void setNotificationSubType(String nts) {
 
@@ -219,8 +217,7 @@ public class SsdpRequest extends HttpRequest {
   /**
    * This method sets the {@link #HEADER_PROPERTY_NOTIFICATION_TYPE NT}.
    * 
-   * @param notificationType
-   *        the notification-type to set.
+   * @param notificationType the notification-type to set.
    */
   public void setNotificationType(String notificationType) {
 
@@ -240,8 +237,7 @@ public class SsdpRequest extends HttpRequest {
   /**
    * This method sets the {@link #HEADER_PROPERTY_UNIQUE_SERVICE_NAME USN}.
    * 
-   * @param usn
-   *        is the unique-service-name to set.
+   * @param usn is the unique-service-name to set.
    */
   public void setUniqueServiceName(String usn) {
 
@@ -252,10 +248,9 @@ public class SsdpRequest extends HttpRequest {
    * This method sets the product for the {@link #HEADER_PROPERTY_SERVER SERVER}
    * property.
    * 
-   * @param productName
-   *        is the name of the product specified by the vendor.
-   * @param productVersion
-   *        is the version of the product specified by the vendor.
+   * @param productName is the name of the product specified by the vendor.
+   * @param productVersion is the version of the product specified by the
+   *        vendor.
    */
   public void setServerProduct(String productName, String productVersion) {
 

@@ -102,8 +102,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * The constructor.
    * 
-   * @param swtDisplay
-   *        is the display to use.
+   * @param swtDisplay is the display to use.
    */
   public UIFactorySwt(Display swtDisplay) {
 
@@ -113,10 +112,9 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * The constructor.
    * 
-   * @param swtDisplay
-   *        is the display to use.
-   * @param uiDevice
-   *        is the graphics device the display of this factory belongs to.
+   * @param swtDisplay is the display to use.
+   * @param uiDevice is the graphics device the display of this factory belongs
+   *        to.
    */
   public UIFactorySwt(Display swtDisplay, UIDeviceImpl uiDevice) {
 
@@ -372,8 +370,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    * {@link org.eclipse.swt.SWT} constant for a
    * {@link org.eclipse.swt.widgets.MenuItem}.
    * 
-   * @param buttonStyle
-   *        is the button-style to convert.
+   * @param buttonStyle is the button-style to convert.
    * @return the according SWT button style.
    */
   public static int convertButtonStyleForMenuItem(ButtonStyle buttonStyle) {
@@ -390,8 +387,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    * {@link org.eclipse.swt.SWT} constant for a
    * {@link org.eclipse.swt.widgets.Button}.
    * 
-   * @param buttonStyle
-   *        is the button-style to convert.
+   * @param buttonStyle is the button-style to convert.
    * @return the according SWT button style.
    */
   public static int convertButtonStyle(ButtonStyle buttonStyle) {
@@ -414,8 +410,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    * This method converts the given <code>orientation</code> to the according
    * {@link org.eclipse.swt.SWT} constant.
    * 
-   * @param orientation
-   *        is the orientation to convert.
+   * @param orientation is the orientation to convert.
    * @return the according SWT style.
    */
   public static int convertOrientation(Orientation orientation) {
@@ -436,8 +431,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    * 
    * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.ScriptOrientation)
    * 
-   * @param baseStyle
-   *        is the basic style.
+   * @param baseStyle is the basic style.
    * @return the given <code>baseStyle</code> with additional options from
    *         this factory.
    */

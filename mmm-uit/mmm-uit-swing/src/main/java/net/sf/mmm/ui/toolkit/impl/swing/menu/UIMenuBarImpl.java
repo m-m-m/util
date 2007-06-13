@@ -28,12 +28,9 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param jMenuBar
-   *        is the swing menu bar to wrap.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param jMenuBar is the swing menu bar to wrap.
    */
   public UIMenuBarImpl(UIFactorySwing uiFactory, AbstractUIWindow parentObject, JMenuBar jMenuBar) {
 
@@ -52,7 +49,6 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
     return new UIMenuImpl((UIFactorySwing) getFactory(), this, menu);
   }
 
-
   /**
    * This method updates the orientation of the GUI elements.
    */
@@ -65,18 +61,18 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
       componentOrientation = ComponentOrientation.RIGHT_TO_LEFT;
     }
     this.menuBar.setComponentOrientation(componentOrientation);
-  } 
-  
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void refresh(UIRefreshEvent event) {
-  
+
     super.refresh(event);
     if (event.isOrientationModified()) {
       updateOrientation();
     }
   }
-  
+
 }

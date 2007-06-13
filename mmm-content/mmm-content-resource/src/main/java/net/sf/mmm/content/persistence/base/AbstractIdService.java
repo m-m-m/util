@@ -31,10 +31,10 @@ public abstract class AbstractIdService implements IdService {
     } else if (classId == IdImpl.ID_CLASS_FIELD) {
       // create field ID
       return createFieldId();
-    //} else if (classId == IdImpl.ID_CLASS_USER) {
+      // } else if (classId == IdImpl.ID_CLASS_USER) {
       // create user ID
-      //return createUserId();
-    //} else if (classId == ...) {
+      // return createUserId();
+      // } else if (classId == ...) {
     } else {
       // create resource ID
     }
@@ -42,13 +42,13 @@ public abstract class AbstractIdService implements IdService {
   }
 
   protected abstract Id createClassId();
-  
+
   protected abstract Id createFieldId();
-  
-  //protected abstract Id createUserId();
+
+  // protected abstract Id createUserId();
 
   protected abstract Id createResourceId(ContentClass type);
-  
+
   /**
    * {@inheritDoc}
    */
@@ -88,7 +88,7 @@ public abstract class AbstractIdService implements IdService {
   public void releaseId(Id unusedId) {
 
     IdImpl idImpl = (IdImpl) unusedId;
-    
+
   }
 
   /**

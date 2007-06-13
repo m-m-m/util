@@ -16,11 +16,9 @@ public interface TermParser {
    * This method parses the given <code>expression</code> that represents a
    * {@link Term} as string.
    * 
-   * @param expression
-   *        the expression to parse.
+   * @param expression the expression to parse.
    * @return the parsed expression
-   * @throws TermParseException
-   *         if expression is invalid.
+   * @throws TermParseException if expression is invalid.
    */
   Term parse(String expression) throws TermParseException;
 

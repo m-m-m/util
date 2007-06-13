@@ -27,7 +27,7 @@ import net.sf.mmm.value.impl.ValueServiceImpl;
 
 /**
  * TODO: this class ...
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ContentModelEditorImplDemo {
@@ -59,8 +59,8 @@ public class ContentModelEditorImplDemo {
     modelServiceImpl.setConfiguration(configuration);
     modelServiceImpl.initialize();
     AbstractMutableContentModelService modelService = modelServiceImpl;
-    //IdService idService = new DummyIdService();
-    //modelService.setIdService(idService);
+    // IdService idService = new DummyIdService();
+    // modelService.setIdService(idService);
     ContentClassTreeModel classModel = new ContentClassTreeModel();
     classModel.setModelService(modelService);
     classModel.initialize();
@@ -70,7 +70,7 @@ public class ContentModelEditorImplDemo {
     modelEditor.setContentClassTreeModel(classModel);
     modelEditor.setContentModelService(modelService);
     modelEditor.setFieldTableManager(tableManager);
-    
+
     UIComposite modelEditorView = modelEditor.create(uiFactory);
     UIFrame frame = uiFactory.createFrame("Model Editor");
     frame.setComposite(modelEditorView);
@@ -82,5 +82,5 @@ public class ContentModelEditorImplDemo {
     }
     System.exit(0);
   }
-  
+
 }

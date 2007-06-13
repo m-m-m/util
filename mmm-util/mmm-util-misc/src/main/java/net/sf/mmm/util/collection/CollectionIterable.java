@@ -11,8 +11,8 @@ import java.util.Iterator;
  * This is an implementation of the {@link SizedIterable} interface that adapts
  * a {@link Collection}. The {@link #iterator() iterator} will be read-only.
  * 
- * @param <E>
- *        is the templated element type that can be {@link #iterator() iterated}.
+ * @param <E> is the templated element type that can be
+ *        {@link #iterator() iterated}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -22,10 +22,9 @@ public class CollectionIterable<E> implements SizedIterable<E> {
   private final Collection<E> collection;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param collection
-   *        the collection to encapsulate. An
+   * @param collection the collection to encapsulate. An
    *        {@link Collections#unmodifiableCollection(Collection) unmodifiable}
    *        view on this collection is created to prevent modifications via
    *        {@link #iterator()}.
@@ -36,12 +35,10 @@ public class CollectionIterable<E> implements SizedIterable<E> {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param collection
-   *        the collection to encapsulate.
-   * @param makeUnmodifiable
-   *        if <code>true</code> an
+   * @param collection the collection to encapsulate.
+   * @param makeUnmodifiable if <code>true</code> an
    *        {@link Collections#unmodifiableCollection(Collection) unmodifiable}
    *        view on this collection is created to prevent modifications via
    *        {@link #iterator()}, else if <code>false</code> the collection is

@@ -20,8 +20,7 @@ public class XmlIOException extends XmlException {
   /**
    * The constructor.
    * 
-   * @param ioException
-   *        is the IO exception that caused this exception.
+   * @param ioException is the IO exception that caused this exception.
    */
   public XmlIOException(Throwable ioException) {
 

@@ -20,9 +20,10 @@ import junit.framework.TestCase;
 public class SimpleSsdpReceiverTest extends TestCase {
 
   public void testDummy() {
-    // this test-case is currently disabled...
+
+  // this test-case is currently disabled...
   }
-  
+
   @Test
   public void disableTestReceive() throws Exception {
 

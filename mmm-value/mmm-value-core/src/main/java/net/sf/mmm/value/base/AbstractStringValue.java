@@ -98,16 +98,12 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
    * This implementation simply throws an {@link WrongValueTypeException}.
    * Override to add support for further types.
    * 
-   * @param <T>
-   *        is the templated type of the value.
-   * @param type
-   *        is the class reflecting the value.
-   * @param value
-   *        is the value to convert to the given <code>type</code>.
+   * @param <T> is the templated type of the value.
+   * @param type is the class reflecting the value.
+   * @param value is the value to convert to the given <code>type</code>.
    * @return the converted value.
-   * @throws WrongValueTypeException
-   *         if the given <code>value</code> can NOT be converted to
-   *         <code>type</code>.
+   * @throws WrongValueTypeException if the given <code>value</code> can NOT
+   *         be converted to <code>type</code>.
    */
   protected <T> T toValue(Class<T> type, Object value) throws WrongValueTypeException {
 
@@ -138,11 +134,9 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   /**
    * This method parses a boolean value.
    * 
-   * @param booleanValue
-   *        is the boolean value as string.
+   * @param booleanValue is the boolean value as string.
    * @return the value as boolean.
-   * @throws WrongValueTypeException
-   *         if the given string is no boolean.
+   * @throws WrongValueTypeException if the given string is no boolean.
    */
   protected Boolean parseBoolean(String booleanValue) throws WrongValueTypeException {
 
@@ -158,11 +152,9 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   /**
    * This method parses a date value.
    * 
-   * @param dateValue
-   *        is the date value as string.
+   * @param dateValue is the date value as string.
    * @return the value as date.
-   * @throws WrongValueTypeException
-   *         if the given string is no date.
+   * @throws WrongValueTypeException if the given string is no date.
    */
   protected Date parseDate(String dateValue) throws WrongValueTypeException {
 

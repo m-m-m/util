@@ -14,11 +14,10 @@ import net.sf.mmm.ui.toolkit.api.UIComponent;
  * and located at the bottom/right.<br>
  * The intention of this composite is to simplify the layout management.
  * 
- * @param <D>
- *        is the templated type of the
+ * @param <D> is the templated type of the
  *        {@link #getDecorator() decorating component}.
- * @param <C>
- *        is the templated type of the {@link #getComponent() main component}.
+ * @param <C> is the templated type of the
+ *        {@link #getComponent() main component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -59,5 +58,5 @@ public interface UIDecoratedComponent<D extends UIComponent, C extends UICompone
    * @param newComponent is the new component to set.
    */
   void setComponent(C newComponent);
-  
+
 }

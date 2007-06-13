@@ -23,9 +23,8 @@ public class SwtListenerAdapter implements Listener {
   /**
    * The constructor.
    * 
-   * @param uiObject
-   *        is the UI object that registers this listener and will send the
-   *        events to registered listeners.
+   * @param uiObject is the UI object that registers this listener and will send
+   *        the events to registered listeners.
    */
   public SwtListenerAdapter(AbstractUINode uiObject) {
 

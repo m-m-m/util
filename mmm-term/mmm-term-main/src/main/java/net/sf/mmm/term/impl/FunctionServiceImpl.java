@@ -28,8 +28,7 @@ public class FunctionServiceImpl extends AbstractFunctionService {
   /**
    * This method configures this service.
    * 
-   * @param configuration
-   *        is the configuration to inject.
+   * @param configuration is the configuration to inject.
    */
   @Resource
   public void configure(Configuration configuration) {

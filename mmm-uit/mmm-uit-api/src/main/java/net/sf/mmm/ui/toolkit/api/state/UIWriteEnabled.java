@@ -12,12 +12,11 @@ package net.sf.mmm.ui.toolkit.api.state;
 public interface UIWriteEnabled extends UIReadEnabled {
 
   /**
-   * This method sets the enabled status of this object. If it is disabled,
-   * the user can not interact with the object.
+   * This method sets the enabled status of this object. If it is disabled, the
+   * user can not interact with the object.
    * 
-   * @param enabled -
-   *        if <code>true</code> the object will be enabled, else the object
-   *        will be disabled.
+   * @param enabled - if <code>true</code> the object will be enabled, else
+   *        the object will be disabled.
    */
   void setEnabled(boolean enabled);
 

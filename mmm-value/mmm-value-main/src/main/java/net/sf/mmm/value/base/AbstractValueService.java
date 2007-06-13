@@ -55,11 +55,9 @@ public abstract class AbstractValueService implements ValueService {
   /**
    * This method registers a value manager to this service.
    * 
-   * @param manager
-   *        is the value manager to register.
-   * @throws ValueException
-   *         if the a manager is already registered for the same (case
-   *         INtensitive) value type.
+   * @param manager is the value manager to register.
+   * @throws ValueException if the a manager is already registered for the same
+   *         (case INtensitive) value type.
    */
   public void addManager(ValueManager<?> manager) throws ValueException {
 

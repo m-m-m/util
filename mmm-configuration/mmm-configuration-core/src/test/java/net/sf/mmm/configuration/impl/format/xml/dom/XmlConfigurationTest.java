@@ -64,7 +64,8 @@ public class XmlConfigurationTest extends TestCase {
     assertEquals(5, descendants.size());
     char serviceLetter = 'A';
     for (Configuration serviceConf : descendants) {
-      assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue().getString());
+      assertEquals("Service" + serviceLetter, serviceConf.getDescendant("@name").getValue()
+          .getString());
       serviceLetter++;
     }
     assertEquals(5, serviceLetter - 'A');

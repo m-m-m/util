@@ -26,8 +26,7 @@ public abstract class AbstractSyncCompositeAccess extends AbstractSyncControlAcc
 
   /**
    * operation to perform a
-   * {@link org.eclipse.swt.widgets.Composite#layout() layout} of the
-   * composite.
+   * {@link org.eclipse.swt.widgets.Composite#layout() layout} of the composite.
    */
   private static final String OPERATION_LAYOUT = "layout";
 
@@ -37,10 +36,8 @@ public abstract class AbstractSyncCompositeAccess extends AbstractSyncControlAcc
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the composite.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the {@link Widget#getStyle() style} of the composite.
    */
   public AbstractSyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -85,8 +82,7 @@ public abstract class AbstractSyncCompositeAccess extends AbstractSyncControlAcc
    * {@link org.eclipse.swt.widgets.Composite#setLayout(org.eclipse.swt.widgets.Layout) layout}
    * of the composite.
    * 
-   * @param layoutManager
-   *        is the layout to set.
+   * @param layoutManager is the layout to set.
    */
   public void setLayout(Layout layoutManager) {
 
@@ -97,8 +93,7 @@ public abstract class AbstractSyncCompositeAccess extends AbstractSyncControlAcc
 
   /**
    * This method performs a
-   * {@link org.eclipse.swt.widgets.Composite#layout() layout} of the
-   * composite.
+   * {@link org.eclipse.swt.widgets.Composite#layout() layout} of the composite.
    */
   public void layout() {
 

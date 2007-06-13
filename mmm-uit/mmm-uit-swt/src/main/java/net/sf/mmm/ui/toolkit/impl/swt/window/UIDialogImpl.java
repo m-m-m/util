@@ -25,15 +25,11 @@ public class UIDialogImpl extends UIWindowImpl implements UIDialog {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param modal -
-   *        if <code>true</code> all windows of the application are blocked
-   *        until the dialog is closed.
-   * @param resizeable -
-   *        if <code>true</code> the window will be
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param modal - if <code>true</code> all windows of the application are
+   *        blocked until the dialog is closed.
+   * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizeable() resizeable}.
    */
   public UIDialogImpl(UIFactorySwt uiFactory, UIWindowImpl parentObject, boolean modal,
@@ -58,5 +54,5 @@ public class UIDialogImpl extends UIWindowImpl implements UIDialog {
 
     return TYPE;
   }
-  
+
 }

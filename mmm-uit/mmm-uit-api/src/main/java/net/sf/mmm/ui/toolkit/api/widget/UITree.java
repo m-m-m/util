@@ -12,8 +12,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
  * close the nodes of the tree that are no leaves. Further he can select one or
  * multiple nodes (depending on selection type).
  * 
- * @param <N>
- *        is the templated type of the tree-nodes that can be
+ * @param <N> is the templated type of the tree-nodes that can be
  *        {@link #getSelection() selected} with this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -33,8 +32,7 @@ public interface UITree<N> extends UIWidget, UIReadMultiSelectionFlag {
   /**
    * This method sets the model of this tree.
    * 
-   * @param newModel
-   *        is the new tree model to set.
+   * @param newModel is the new tree model to set.
    */
   void setModel(UITreeModel<N> newModel);
 

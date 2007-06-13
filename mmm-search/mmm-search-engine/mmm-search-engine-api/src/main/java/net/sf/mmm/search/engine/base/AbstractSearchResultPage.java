@@ -29,16 +29,12 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   private final int pageIndex;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param searchQuery
-   *        is the {@link #getQuery() query} that caused this page.
-   * @param totalHits
-   *        is the {@link #getTotalHitCount() total number of hits}.
-   * @param hitPerPage
-   *        is the {@link #getHitsPerPage() number of hits per page}.
-   * @param pageNumber
-   *        is the {@link #getPageIndex() index} of this page.
+   * @param searchQuery is the {@link #getQuery() query} that caused this page.
+   * @param totalHits is the {@link #getTotalHitCount() total number of hits}.
+   * @param hitPerPage is the {@link #getHitsPerPage() number of hits per page}.
+   * @param pageNumber is the {@link #getPageIndex() index} of this page.
    */
   public AbstractSearchResultPage(String searchQuery, int totalHits, int hitPerPage, int pageNumber) {
 
@@ -94,18 +90,18 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
    * {@inheritDoc}
    */
   public int getHitStartNumber() {
-  
+
     return this.pageIndex * this.hitsPerPage + 1;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public int getHitEndNumber() {
-  
+
     return getHitStartNumber() + getPageHitCount();
   }
-  
+
   /**
    * {@inheritDoc}
    */

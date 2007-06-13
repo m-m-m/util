@@ -66,11 +66,9 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the text.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the text.
    */
   public SyncTextAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -145,8 +143,7 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
    * This method sets the
    * {@link org.eclipse.swt.widgets.Text#setText(String) text} of the text.
    * 
-   * @param buttonText
-   *        is the text to set.
+   * @param buttonText is the text to set.
    */
   public void setText(String buttonText) {
 
@@ -172,8 +169,7 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Text#setEditable(boolean) editable-status}
    * of the text.
    * 
-   * @param selection
-   *        is the selection-status to set.
+   * @param selection is the selection-status to set.
    */
   public void setEditable(boolean selection) {
 
@@ -198,8 +194,7 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Text#setTextLimit(int) text-limit} of the
    * text.
    * 
-   * @param limit
-   *        is the maximum character count for the text.
+   * @param limit is the maximum character count for the text.
    */
   public void setTextLimit(int limit) {
 
@@ -225,8 +220,7 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Text#setEchoChar(char) echo-character} of
    * the text.
    * 
-   * @param echoCharacter
-   *        is the echo character or '\0' for normal echoing.
+   * @param echoCharacter is the echo character or '\0' for normal echoing.
    */
   public void setEchoChar(char echoCharacter) {
 

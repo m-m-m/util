@@ -26,8 +26,7 @@ public class EmptyValue extends AbstractObjectValue {
   /**
    * The constructor.
    * 
-   * @param valueName
-   *        is the name of the value returned by {@link #toString()}.
+   * @param valueName is the name of the value returned by {@link #toString()}.
    */
   public EmptyValue(String valueName) {
 

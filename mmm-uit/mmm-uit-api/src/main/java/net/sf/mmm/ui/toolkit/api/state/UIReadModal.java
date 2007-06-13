@@ -14,9 +14,9 @@ package net.sf.mmm.ui.toolkit.api.state;
 public interface UIReadModal {
 
   /**
-   * This method determines if this object (dialog) is modal. If a modal
-   * dialog is opened all previous windows of the application are blocked
-   * until the window is closed.
+   * This method determines if this object (dialog) is modal. If a modal dialog
+   * is opened all previous windows of the application are blocked until the
+   * window is closed.
    * 
    * @return <code>true</code> if modal, <code>false</code> otherwise.
    */

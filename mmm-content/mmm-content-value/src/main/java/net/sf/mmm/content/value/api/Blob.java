@@ -17,8 +17,8 @@ import net.sf.mmm.value.api.ValueIOException;
 public interface Blob {
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
-   * value type.
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
+   * type.
    */
   String VALUE_NAME = "Blob";
 
@@ -51,8 +51,7 @@ public interface Blob {
    * @see MutableBlob#streamData(OutputStream)
    * 
    * @return the BLOB data as input stream.
-   * @throws ValueIOException
-   *         if the BLOB could not be opened for reading.
+   * @throws ValueIOException if the BLOB could not be opened for reading.
    */
   InputStream getReadAccess() throws ValueIOException;
 
@@ -60,10 +59,8 @@ public interface Blob {
    * This method writes the data of this BLOB to the given output stream. The
    * given output stream will NOT be closed.
    * 
-   * @param outStream
-   *        is the stream where to write the data to.
-   * @throws ValueIOException
-   *         if the streaming fails.
+   * @param outStream is the stream where to write the data to.
+   * @throws ValueIOException if the streaming fails.
    */
   void streamData(OutputStream outStream) throws ValueIOException;
 

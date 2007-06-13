@@ -14,8 +14,7 @@ public interface UIWriteBorderTitle extends UIReadBorderTitle {
   /**
    * This method set the border-title of this object.
    * 
-   * @param borderTitle -
-   *        the title of this object's border.
+   * @param borderTitle - the title of this object's border.
    */
   void setBorderTitle(String borderTitle);
 

@@ -25,17 +25,15 @@ public class PatternFilterRule implements FilterRule {
   /**
    * The constructor.
    * 
-   * @param pattern
-   *        is the pattern a file has to match in order to activate this rule.
-   *        Before this given string is compiled via
+   * @param pattern is the pattern a file has to match in order to activate this
+   *        rule. Before this given string is compiled via
    *        {@link Pattern#compile(String)} the following manipulation is
    *        performed: If the pattern string does NOT start with the character
    *        <code>^</code> the implicit prefix <code>.*</code> is added. If
    *        the pattern does NOT end with the character <code>$</code> the
    *        implicit suffix <code>.*</code> is appended.
-   * @param resultOnMatch
-   *        is the result {@link #accept(String) returned} if the pattern
-   *        matches.
+   * @param resultOnMatch is the result {@link #accept(String) returned} if the
+   *        pattern matches.
    */
   public PatternFilterRule(String pattern, boolean resultOnMatch) {
 
@@ -45,11 +43,10 @@ public class PatternFilterRule implements FilterRule {
   /**
    * The constructor.
    * 
-   * @param pattern
-   *        is the pattern a file has to match in order to activate this rule.
-   * @param resultOnMatch
-   *        is the result {@link #accept(String) returned} if the pattern
-   *        matches.
+   * @param pattern is the pattern a file has to match in order to activate this
+   *        rule.
+   * @param resultOnMatch is the result {@link #accept(String) returned} if the
+   *        pattern matches.
    */
   public PatternFilterRule(Pattern pattern, boolean resultOnMatch) {
 

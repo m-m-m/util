@@ -63,8 +63,7 @@ public interface ContentFolder extends ContentResource {
   /**
    * This method gets the link-list containing all direct chilren of this
    * folder. The direct children are the content-objects that have this folder
-   * as
-   * {@link ContentResource#getParent() parent-folder}.
+   * as {@link ContentResource#getParent() parent-folder}.
    * 
    * @return the child resources.
    */

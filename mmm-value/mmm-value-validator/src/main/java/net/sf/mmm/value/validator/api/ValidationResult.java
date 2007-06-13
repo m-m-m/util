@@ -52,8 +52,7 @@ public interface ValidationResult {
    * 
    * @see ValidationResult#getDetailCount()
    * 
-   * @param index
-   *        is the position of the requested detail.
+   * @param index is the position of the requested detail.
    * @return the detailed child result at the given index.
    */
   ValidationResult getDetail(int index);

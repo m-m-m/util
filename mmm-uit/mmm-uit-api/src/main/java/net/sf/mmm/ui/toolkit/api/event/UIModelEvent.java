@@ -18,8 +18,7 @@ public abstract class UIModelEvent implements ChangeEvent {
   /**
    * The constructor.
    * 
-   * @param eventType
-   *        is the type for the new event.
+   * @param eventType is the type for the new event.
    */
   protected UIModelEvent(Type eventType) {
 

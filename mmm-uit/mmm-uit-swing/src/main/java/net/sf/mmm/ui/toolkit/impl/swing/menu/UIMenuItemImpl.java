@@ -33,16 +33,14 @@ public class UIMenuItemImpl extends UIAwtNode implements UIMenuItem {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param name
-   *        is the {@link #getText() name} of the menu item.
-   * @param itemStyle
-   *        is the style defining how the item is visualized and behaves.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param name is the {@link #getText() name} of the menu item.
+   * @param itemStyle is the style defining how the item is visualized and
+   *        behaves.
    */
-  public UIMenuItemImpl(UIFactorySwing uiFactory, UINode parentObject, String name, ButtonStyle itemStyle) {
+  public UIMenuItemImpl(UIFactorySwing uiFactory, UINode parentObject, String name,
+      ButtonStyle itemStyle) {
 
     super(uiFactory, parentObject);
     this.style = itemStyle;
@@ -137,18 +135,18 @@ public class UIMenuItemImpl extends UIAwtNode implements UIMenuItem {
       componentOrientation = ComponentOrientation.RIGHT_TO_LEFT;
     }
     this.item.setComponentOrientation(componentOrientation);
-  } 
-  
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void refresh(UIRefreshEvent event) {
-  
+
     super.refresh(event);
     if (event.isOrientationModified()) {
       updateOrientation();
     }
   }
-  
+
 }

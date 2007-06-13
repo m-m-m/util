@@ -9,8 +9,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
 /**
  * This is the interface for a table.
  * 
- * @param <C>
- *        is the templated type of the objects in the table cells.
+ * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,9 +29,8 @@ public interface UITable<C> extends UIWidget, UIWriteSelectionIndex {
    * This method sets the model of this table. If the table already has a model
    * assigned, it will be replaced.
    * 
-   * @param newModel
-   *        is the new model to set.
+   * @param newModel is the new model to set.
    */
   void setModel(UITableModel<C> newModel);
-  
+
 }

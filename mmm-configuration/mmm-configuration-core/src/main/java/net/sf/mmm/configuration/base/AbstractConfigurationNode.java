@@ -34,8 +34,8 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   /**
    * The constructor.
    * 
-   * @param parentConfiguration
-   *        is the {@link #getParent() parent} configuration.
+   * @param parentConfiguration is the {@link #getParent() parent}
+   *        configuration.
    */
   public AbstractConfigurationNode(AbstractConfiguration parentConfiguration) {
 
@@ -62,8 +62,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
    * configuration.<br>
    * ATTENTION: Use this method only if you exactly know what you are doing.
    * 
-   * @param newParent
-   *        is the new parent for this configuration.
+   * @param newParent is the new parent for this configuration.
    */
   protected void setParent(AbstractConfiguration newParent) {
 
@@ -73,8 +72,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   /**
    * This method sets (overrides) the {@link #isAddDefaults()} flag.
    * 
-   * @param isEditable
-   *        is the value to set.
+   * @param isEditable is the value to set.
    */
   public void setEditable(boolean isEditable) {
 
@@ -107,8 +105,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   /**
    * This method sets (overrides) the {@link #isAddDefaults()} flag.
    * 
-   * @param doAddDefaults
-   *        is the value to set.
+   * @param doAddDefaults is the value to set.
    */
   public void setAddDefaults(boolean doAddDefaults) {
 
@@ -153,8 +150,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   /**
    * This method sets the plain string {@link #getValue() value}.
    * 
-   * @param newValue
-   *        is the new value to set.
+   * @param newValue is the new value to set.
    */
   protected abstract void setPlainString(String newValue);
 
@@ -231,8 +227,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
     /**
      * This method initializes the expression according to the given value.
      * 
-     * @param plainValue
-     *        is the plain value.
+     * @param plainValue is the plain value.
      */
     protected void initExpression(String plainValue) {
 
@@ -262,7 +257,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
           if (result == null) {
             return null;
           } else {
-            return result.toString();            
+            return result.toString();
           }
         } catch (ValueException e) {
           throw new GeneralConfigurationException(e, AbstractConfigurationNode.this);

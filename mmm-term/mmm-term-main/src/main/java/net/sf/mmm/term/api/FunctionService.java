@@ -19,11 +19,9 @@ public interface FunctionService {
    * E.g. <code>getFunctionBySymbol("+")</code> should return the add
    * function.
    * 
-   * @param symbol
-   *        is the operator symbol of the requested function.
+   * @param symbol is the operator symbol of the requested function.
    * @return the function for the given symbol.
-   * @throws NoSuchFunctionException
-   *         if NO such function exists.
+   * @throws NoSuchFunctionException if NO such function exists.
    */
   Function getFunctionBySymbol(String symbol) throws NoSuchFunctionException;
 
@@ -33,12 +31,10 @@ public interface FunctionService {
    * E.g. <code>getFunctionByName("add")</code> should return the add
    * function.
    * 
-   * @param name
-   *        is the name of the requested function.
+   * @param name is the name of the requested function.
    * @return the function for the given name or <code>null</code> if no such
    *         function exists.
-   * @throws NoSuchFunctionException
-   *         if NO such function exists.
+   * @throws NoSuchFunctionException if NO such function exists.
    */
   Function getFunctionByName(String name) throws NoSuchFunctionException;
 

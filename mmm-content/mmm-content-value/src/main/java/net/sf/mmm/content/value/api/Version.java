@@ -98,8 +98,7 @@ public interface Version {
    * This method determines if this version is higher than the given one.<br>
    * E.g. "1.0">"1.0-rc1">"1.0-beta">"1.0-alpha">"0.9.237">"0.9">"0.1">"0"
    * 
-   * @param otherVersion
-   *        is the version to compare with.
+   * @param otherVersion is the version to compare with.
    * @return <code>true</code> if this version is higher than the given
    *         version and <code>false</code> otherwise.
    */

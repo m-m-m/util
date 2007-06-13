@@ -77,8 +77,7 @@ public interface ContentClass extends ContentReflectionObject {
    * 
    * @see #getField(String)
    * 
-   * @param name
-   *        is the name of the requested field of this class.
+   * @param name is the name of the requested field of this class.
    * @return the field with the given name or <code>null</code> if no such
    *         field is declared by this class.
    */
@@ -90,8 +89,7 @@ public interface ContentClass extends ContentReflectionObject {
    * {@link #getDeclaredFields() declared} in this class or inherited from a
    * {@link #getSuperClass() super-class}.
    * 
-   * @param name
-   *        is the name of the requested field of this class.
+   * @param name is the name of the requested field of this class.
    * @return the field with the given name or <code>null</code> if no such
    *         field exists for this class.
    */
@@ -129,8 +127,7 @@ public interface ContentClass extends ContentReflectionObject {
    * This method determines is this class is a super class of the given class.
    * <br>
    * 
-   * @param contentClass
-   *        is the class to compare with.
+   * @param contentClass is the class to compare with.
    * @return <code>true</code> if this class is a super-class of the given
    *         class.
    */
@@ -142,8 +139,7 @@ public interface ContentClass extends ContentReflectionObject {
    * <code>class1.isSubClassOf(class2)</code> is equal to
    * <code>class2.isSuperClassOf(class1)</code>.
    * 
-   * @param contentClass
-   *        is the class to compare with.
+   * @param contentClass is the class to compare with.
    * @return <code>true</code> if this class is a sub-class of the given
    *         class.
    */

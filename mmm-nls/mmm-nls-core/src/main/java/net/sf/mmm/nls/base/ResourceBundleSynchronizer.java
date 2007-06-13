@@ -80,8 +80,7 @@ public class ResourceBundleSynchronizer {
   }
 
   /**
-   * @param datePattern
-   *        the datePattern to set
+   * @param datePattern the datePattern to set
    */
   public void setDatePattern(String datePattern) {
 
@@ -104,8 +103,7 @@ public class ResourceBundleSynchronizer {
   /**
    * This method sets the {@link #getLocales() locales}.
    * 
-   * @param locales
-   *        are the locales to set
+   * @param locales are the locales to set
    */
   public void setLocales(String[] locales) {
 
@@ -115,8 +113,7 @@ public class ResourceBundleSynchronizer {
   /**
    * This method sets the {@link #getLocales() locales}.
    * 
-   * @param locales
-   *        are the locales to set
+   * @param locales are the locales to set
    */
   public void setLocales(Locale[] locales) {
 
@@ -142,8 +139,7 @@ public class ResourceBundleSynchronizer {
   /**
    * This method sets the {@link #getBasePath() base-path}.
    * 
-   * @param basePath
-   *        the basePath to set
+   * @param basePath the basePath to set
    */
   public void setBasePath(String basePath) {
 
@@ -164,8 +160,7 @@ public class ResourceBundleSynchronizer {
   /**
    * This method sets the {@link #getEncoding() encoding}.
    * 
-   * @param encoding
-   *        the encoding to set
+   * @param encoding the encoding to set
    */
   public void setEncoding(String encoding) {
 
@@ -184,8 +179,7 @@ public class ResourceBundleSynchronizer {
   }
 
   /**
-   * @param newline
-   *        the newline to set
+   * @param newline the newline to set
    */
   public void setNewline(String newline) {
 
@@ -198,10 +192,8 @@ public class ResourceBundleSynchronizer {
    * but the missing keys are appended to the end of the file. If no keys are
    * missing, the existing file remains untouched.
    * 
-   * @param bundle
-   *        is the bundle instance as java object.
-   * @throws IOException
-   *         if the operation failed with an input/output error.
+   * @param bundle is the bundle instance as java object.
+   * @throws IOException if the operation failed with an input/output error.
    */
   public void synchronize(AbstractResourceBundle bundle) throws IOException {
 
@@ -281,8 +273,7 @@ public class ResourceBundleSynchronizer {
   /**
    * This method prints the usage of this class.
    * 
-   * @param code
-   *        is the exit-code.
+   * @param code is the exit-code.
    */
   public static void usage(int code) {
 
@@ -298,10 +289,8 @@ public class ResourceBundleSynchronizer {
   /**
    * This is the main method used to run this class as application.
    * 
-   * @param arguments
-   *        are the commandline arguments.
-   * @throws Exception
-   *         if the operation fails for arbitrary reasons.
+   * @param arguments are the commandline arguments.
+   * @throws Exception if the operation fails for arbitrary reasons.
    */
   public static void main(String[] arguments) throws Exception {
 

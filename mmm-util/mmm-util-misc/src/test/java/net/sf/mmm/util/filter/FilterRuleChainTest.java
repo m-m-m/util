@@ -37,8 +37,7 @@ public class FilterRuleChainTest extends TestCase {
     FilterRuleChain chain = new FilterRuleChain(true, rules);
     check(chain);
     assertTrue(chain.accept("/foo/bar/file.bar"));
-    FilterRuleChain extendedChain = chain
-        .extend(true, new PatternFilterRule("(?i)\\.bar$", false));
+    FilterRuleChain extendedChain = chain.extend(true, new PatternFilterRule("(?i)\\.bar$", false));
     check(extendedChain);
     assertFalse(extendedChain.accept("/foo/bar/file.bar"));
   }

@@ -11,17 +11,16 @@ import net.sf.mmm.util.event.EventSource;
  * This is the interface for a service that provides access to the content
  * model. <br>
  * The content model is used to reflect the different types of
- * {@link net.sf.mmm.content.api.ContentObject content-object}s. It is used
- * for generic access to the content (UI for rendering editors, persistence for
- * O/R mapping, etc.).
+ * {@link net.sf.mmm.content.api.ContentObject content-object}s. It is used for
+ * generic access to the content (UI for rendering editors, persistence for O/R
+ * mapping, etc.).
  * 
  * @see net.sf.mmm.content.model.api.ContentClass
  * 
  * An implementation of this service may make assumptions (about the
  * implementations of the
- * {@link net.sf.mmm.content.api.ContentObject content-object}. This means
- * that it is allowed to cast the implementations and bypass the API if
- * necessary.
+ * {@link net.sf.mmm.content.api.ContentObject content-object}. This means that
+ * it is allowed to cast the implementations and bypass the API if necessary.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -63,5 +62,5 @@ public interface ContentModelService extends ContentModelReadAccess {
    * @return the event registrar.
    */
   EventSource<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar();
-  
+
 }

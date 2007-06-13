@@ -26,7 +26,7 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
   private int size;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public LuceneComplexSearchQuery() {
 
@@ -48,10 +48,8 @@ public class LuceneComplexSearchQuery extends AbstractLuceneSearchQuery implemen
    * This method adds the given <code>subQuery</code> using the given
    * <code>occur</code>.
    * 
-   * @param occur
-   *        is the occur to use.
-   * @param subQuery
-   *        is the sub-query to add.
+   * @param occur is the occur to use.
+   * @param subQuery is the sub-query to add.
    */
   private void addQuery(BooleanClause.Occur occur, SearchQuery subQuery) {
 

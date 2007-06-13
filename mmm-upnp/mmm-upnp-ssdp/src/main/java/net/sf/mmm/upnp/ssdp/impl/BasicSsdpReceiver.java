@@ -32,7 +32,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   private MulticastListener listener;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public BasicSsdpReceiver() {
 
@@ -44,8 +44,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   /**
    * This method connects the multicast-socket.
    * 
-   * @throws IOException
-   *         if the operation failed.
+   * @throws IOException if the operation failed.
    */
   protected void connect() throws IOException {
 
@@ -73,8 +72,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   /**
    * This method disconnects the multicast-socket.
    * 
-   * @throws IOException
-   *         if the operation failed.
+   * @throws IOException if the operation failed.
    */
   protected void disconnect() throws IOException {
 
@@ -87,8 +85,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   /**
    * This method sets the thread-pool used to create the listener thread.
    * 
-   * @param executor
-   *        the threadPool to set.
+   * @param executor the threadPool to set.
    */
   @Resource
   public void setThreadPool(Executor executor) {
@@ -114,10 +111,9 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     private InetAddress address;
 
     /**
-     * The constructor. 
+     * The constructor.
      * 
-     * @throws IOException
-     *         if the operation failed with an I/O problem.
+     * @throws IOException if the operation failed with an I/O problem.
      */
     public MulticastListener() throws IOException {
 
@@ -125,12 +121,10 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     }
 
     /**
-     * The constructor. 
+     * The constructor.
      * 
-     * @param mutlicastAddress
-     *        the multicast address to listen to.
-     * @throws IOException
-     *         if the operation failed with an I/O problem.
+     * @param mutlicastAddress the multicast address to listen to.
+     * @throws IOException if the operation failed with an I/O problem.
      */
     public MulticastListener(InetAddress mutlicastAddress) throws IOException {
 
@@ -145,8 +139,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     /**
      * This method disconnects the multicast-socket.
      * 
-     * @throws IOException
-     *         if the operation failed.
+     * @throws IOException if the operation failed.
      */
     protected synchronized void disconnect() throws IOException {
 

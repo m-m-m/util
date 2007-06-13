@@ -31,10 +31,8 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UILabelImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
 

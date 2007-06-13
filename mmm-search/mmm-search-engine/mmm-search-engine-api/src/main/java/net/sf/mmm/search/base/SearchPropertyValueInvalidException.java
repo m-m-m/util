@@ -19,12 +19,10 @@ public class SearchPropertyValueInvalidException extends SearchException {
   private static final long serialVersionUID = -8530282554868568736L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param propertyName
-   *        is the name of the related property.
-   * @param value
-   *        is the invalid value.
+   * @param propertyName is the name of the related property.
+   * @param value is the invalid value.
    */
   public SearchPropertyValueInvalidException(String propertyName, String value) {
 
@@ -32,14 +30,11 @@ public class SearchPropertyValueInvalidException extends SearchException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param propertyName
-   *        is the name of the related property.
-   * @param value
-   *        is the invalid value.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param propertyName is the name of the related property.
+   * @param value is the invalid value.
    */
   public SearchPropertyValueInvalidException(Throwable nested, String propertyName, String value) {
 

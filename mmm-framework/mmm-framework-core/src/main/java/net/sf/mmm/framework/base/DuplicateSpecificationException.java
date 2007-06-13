@@ -24,8 +24,7 @@ public class DuplicateSpecificationException extends ContainerException {
   /**
    * The constructor.
    * 
-   * @param specification
-   *        is the specification
+   * @param specification is the specification
    */
   public DuplicateSpecificationException(Class specification) {
 

@@ -91,8 +91,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * @param acceptChar
-   *        the acceptChar to set
+   * @param acceptChar the acceptChar to set
    */
   public void setAcceptChar(char acceptChar) {
 
@@ -111,8 +110,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * @param denyChar
-   *        the denyChar to set
+   * @param denyChar the denyChar to set
    */
   public void setDenyChar(char denyChar) {
 
@@ -131,8 +129,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * @param commentChar
-   *        the commentChar to set
+   * @param commentChar the commentChar to set
    */
   public void setCommentChar(char commentChar) {
 
@@ -144,15 +141,13 @@ public class FilterRuleChainPlainParser {
    * {@link FilterRuleChain} as described
    * {@link FilterRuleChainPlainParser above}.
    * 
-   * @param reader
-   *        is where to read from. It will be closed at the end of this method
-   *        (on success and in an exceptional state).
-   * @param defaultResult
-   *        is the {@link FilterRuleChain#getDefaultResult() default-result} of
-   *        the chain.
+   * @param reader is where to read from. It will be closed at the end of this
+   *        method (on success and in an exceptional state).
+   * @param defaultResult is the
+   *        {@link FilterRuleChain#getDefaultResult() default-result} of the
+   *        chain.
    * @return the parsed configuration as filter-chain.
-   * @throws IOException
-   *         if an I/O error occurred while parsing.
+   * @throws IOException if an I/O error occurred while parsing.
    */
   public FilterRuleChain parse(Reader reader, boolean defaultResult) throws IOException {
 
@@ -164,15 +159,13 @@ public class FilterRuleChainPlainParser {
    * {@link FilterRuleChain} as described
    * {@link FilterRuleChainPlainParser above}.
    * 
-   * @param reader
-   *        is where to read from. It will be closed at the end of this method
-   *        (on success and in an exceptional state).
-   * @param defaultResult
-   *        is the {@link FilterRuleChain#getDefaultResult() default-result} of
-   *        the chain.
+   * @param reader is where to read from. It will be closed at the end of this
+   *        method (on success and in an exceptional state).
+   * @param defaultResult is the
+   *        {@link FilterRuleChain#getDefaultResult() default-result} of the
+   *        chain.
    * @return the parsed configuration as filter-chain.
-   * @throws IOException
-   *         if an I/O error occurred while parsing.
+   * @throws IOException if an I/O error occurred while parsing.
    */
   public FilterRuleChain parse(BufferedReader reader, boolean defaultResult) throws IOException {
 

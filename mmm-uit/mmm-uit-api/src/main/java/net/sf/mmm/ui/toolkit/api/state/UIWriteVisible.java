@@ -14,10 +14,9 @@ public interface UIWriteVisible {
   /**
    * This method shows or hides this object.
    * 
-   * @param visible
-   *        is the new visiblilty status of this object. If <code>true</code>,
-   *        the object will be shown (and raised), if false the object will be
-   *        hidden (iconified).
+   * @param visible is the new visiblilty status of this object. If
+   *        <code>true</code>, the object will be shown (and raised), if
+   *        false the object will be hidden (iconified).
    */
   void setVisible(boolean visible);
 

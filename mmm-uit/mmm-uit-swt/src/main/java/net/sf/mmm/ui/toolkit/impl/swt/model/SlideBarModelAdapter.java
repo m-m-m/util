@@ -12,8 +12,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel}
- * to a {@link org.eclipse.swt.widgets.Slider}. It is the controler of the MVC
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
+ * a {@link org.eclipse.swt.widgets.Slider}. It is the controler of the MVC
  * pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -32,8 +32,7 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
   /**
    * The constructor.
    * 
-   * @param sliderAccess
-   *        gives synchron access on the slider.
+   * @param sliderAccess gives synchron access on the slider.
    */
   public SlideBarModelAdapter(SyncSliderAccess sliderAccess) {
 
@@ -55,8 +54,8 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
   }
 
   /**
-   * This method initializes the slider after it has been creation or the
-   * model changed.
+   * This method initializes the slider after it has been creation or the model
+   * changed.
    */
   public void initialize() {
 

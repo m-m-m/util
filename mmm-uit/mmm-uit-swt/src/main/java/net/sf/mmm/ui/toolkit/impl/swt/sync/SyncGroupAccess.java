@@ -30,11 +30,10 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the group.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        group.
    */
   public SyncGroupAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -44,13 +43,11 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the group.
-   * @param swtGroup
-   *        is the group to access.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        group.
+   * @param swtGroup is the group to access.
    */
   public SyncGroupAccess(UIFactorySwt uiFactory, int swtStyle, Group swtGroup) {
 
@@ -97,8 +94,7 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
   /**
    * This method sets the {@link Group#setText(String) text} of the group.
    * 
-   * @param newText
-   *        is the text to set.
+   * @param newText is the text to set.
    */
   public void setText(String newText) {
 

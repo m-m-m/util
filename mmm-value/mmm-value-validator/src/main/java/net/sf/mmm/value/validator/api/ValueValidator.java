@@ -22,9 +22,8 @@ public interface ValueValidator extends XmlSerializable {
    * This method validates the given value. The implementation decides what is
    * valid and invalid.
    * 
-   * @param value
-   *        the value to validate. It may be <code>null</code> but its not
-   *        allowed to throw a {@link NullPointerException} for this reason.
+   * @param value the value to validate. It may be <code>null</code> but its
+   *        not allowed to throw a {@link NullPointerException} for this reason.
    * @return the result of the validation.
    */
   ValidationResult validate(Object value);

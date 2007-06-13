@@ -57,12 +57,11 @@ public class FileAccessFactory extends AbstractConfigurationAccessFactory {
    *      net.sf.mmm.context.api.Context,
    *      net.sf.mmm.configuration.api.Configuration,
    *      net.sf.mmm.configuration.api.access.ConfigurationAccess,
-   *      java.lang.String) 
+   *      java.lang.String)
    */
   @Override
   public AbstractConfigurationAccess[] configure(String prefix, Context context,
-      Configuration include, ConfigurationAccess parent, String href)
-      throws ConfigurationException {
+      Configuration include, ConfigurationAccess parent, String href) throws ConfigurationException {
 
     // determine current working directory
     File cwd = null;

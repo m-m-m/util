@@ -34,12 +34,9 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param jMenu
-   *        is the swing menu to wrap.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param jMenu is the swing menu to wrap.
    */
   public UIMenuImpl(UIFactorySwing uiFactory, UINode parentObject, JMenu jMenu) {
 
@@ -139,6 +136,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * This method updates the orientation of the GUI elements.
    */
   protected void updateOrientation() {
+
     ComponentOrientation componentOrientation;
     if (getFactory().getScriptOrientation().isLeftToRight()) {
       componentOrientation = ComponentOrientation.LEFT_TO_RIGHT;
@@ -147,17 +145,17 @@ public class UIMenuImpl extends AbstractUIMenu {
     }
     this.menu.setComponentOrientation(componentOrientation);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void refresh(UIRefreshEvent event) {
-  
+
     super.refresh(event);
     if (event.isOrientationModified()) {
       updateOrientation();
     }
   }
-  
+
 }

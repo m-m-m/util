@@ -20,12 +20,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTreeAccess;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel}
- * to an {@link org.eclipse.swt.widgets.Tree swt-tree}. It is the controler of
- * the MVC pattern.
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to
+ * an {@link org.eclipse.swt.widgets.Tree swt-tree}. It is the controler of the
+ * MVC pattern.
  * 
- * @param <N>
- *        is the templated type of the tree nodes.
+ * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -49,8 +48,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
   /**
    * The constructor.
    * 
-   * @param treeAccess
-   *        is the sync access to the SWT tree.
+   * @param treeAccess is the sync access to the SWT tree.
    */
   public TreeModelAdapter(SyncTreeAccess treeAccess) {
 
@@ -77,8 +75,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
    * model will be removed. The items of the new model will be added to the
    * widget.
    * 
-   * @param newModel
-   *        is the new model.
+   * @param newModel is the new model.
    */
   public void setModel(UITreeModel<N> newModel) {
 
@@ -106,10 +103,8 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
   /**
    * This method creates an SWT tree item for the given node.
    * 
-   * @param userNode
-   *        is the node of the users tree model.
-   * @param parentItem
-   *        is the parent-item of the item to create.
+   * @param userNode is the node of the users tree model.
+   * @param parentItem is the parent-item of the item to create.
    * @return the according tree item.
    */
   private TreeItem createNode(N userNode, TreeItem parentItem) {
@@ -147,8 +142,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
   /**
    * This method removes a node recursive from the node2itemMap.
    * 
-   * @param node
-   *        is the node to remove with all its children.
+   * @param node is the node to remove with all its children.
    */
   private void removeNodes(N node) {
 

@@ -27,10 +27,8 @@ public final class ContentModelEvent implements ChangeEvent {
    * This is the constructor for a class event. The event will be about the
    * complete class and not about a specific field in the class.
    * 
-   * @param changedClass
-   *        is the class that has been added, removed, or updated.
-   * @param changeType
-   *        is the type of event.
+   * @param changedClass is the class that has been added, removed, or updated.
+   * @param changeType is the type of event.
    */
   public ContentModelEvent(ContentClass changedClass, Type changeType) {
 
@@ -44,11 +42,9 @@ public final class ContentModelEvent implements ChangeEvent {
    * This is the constructor for a field event. The event will only be about the
    * indexed field of the given class.
    * 
-   * @param changedField
-   *        is the field that has been added, removed, or updated.
-   * @param changeType
-   *        is the type of event (add/remove/update). Use only the static
-   *        constant fields (TYPE_*)!
+   * @param changedField is the field that has been added, removed, or updated.
+   * @param changeType is the type of event (add/remove/update). Use only the
+   *        static constant fields (TYPE_*)!
    */
   public ContentModelEvent(ContentField changedField, Type changeType) {
 

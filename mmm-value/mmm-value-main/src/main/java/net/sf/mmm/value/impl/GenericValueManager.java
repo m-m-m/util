@@ -17,8 +17,7 @@ import net.sf.mmm.value.base.BasicValueManager;
  * This is a generic implementation of the
  * {@link net.sf.mmm.value.api.ValueManager}interface.
  * 
- * @param <V>
- *        is the managed value type.
+ * @param <V> is the managed value type.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,8 +32,7 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
   /**
    * The constructor.
    * 
-   * @param valueClass
-   *        is the class implementing the managed value type.
+   * @param valueClass is the class implementing the managed value type.
    */
   public GenericValueManager(Class<V> valueClass) {
 
@@ -44,12 +42,10 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
   /**
    * The constructor.
    * 
-   * @param valueClass
-   *        is the {@link #getValueClass() implementation} of the managed value
-   *        type.
-   * @param typeName
-   *        is the {@link #getName() "logical name"} of the managed value
-   *        type.
+   * @param valueClass is the {@link #getValueClass() implementation} of the
+   *        managed value type.
+   * @param typeName is the {@link #getName() "logical name"} of the managed
+   *        value type.
    */
   public GenericValueManager(Class<V> valueClass, String typeName) {
 
@@ -59,7 +55,7 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
       throw new ValueException(NlsBundleValueMain.ERR_GENERIC_CLASS_ABSTRACT, valueClass);
     }
     try {
-      this.stringConstructor = valueClass.getConstructor(new Class[] {String.class});
+      this.stringConstructor = valueClass.getConstructor(new Class[] { String.class });
       if (!Modifier.isPublic(this.stringConstructor.getModifiers())) {
         throw new ValueException(NlsBundleValueMain.ERR_GENERIC_CLASS_NOT_ACCESSIBLE, valueClass);
       }
@@ -77,7 +73,7 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
   public V parse(String valueAsString) throws ValueParseException {
 
     try {
-      return this.stringConstructor.newInstance(new Object[] {valueAsString});
+      return this.stringConstructor.newInstance(new Object[] { valueAsString });
     } catch (IllegalArgumentException e) {
       throw new ValueParseStringException(valueAsString, this.valueType, this.name, e);
     } catch (InstantiationException e) {

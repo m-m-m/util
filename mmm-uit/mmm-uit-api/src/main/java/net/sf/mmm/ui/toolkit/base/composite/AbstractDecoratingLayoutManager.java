@@ -29,8 +29,7 @@ public abstract class AbstractDecoratingLayoutManager {
   /**
    * The constructor.
    * 
-   * @param decoratedComp
-   *        TODO
+   * @param decoratedComp TODO
    */
   public AbstractDecoratingLayoutManager(UIDecoratedComponent<?, ?> decoratedComp) {
 
@@ -42,8 +41,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * This method sets the sizer used to override the size of the
    * {@link UIDecoratedComponent#getDecorator() decorator}.
    * 
-   * @param sizer
-   *        is the sizer to use or <code>null</code> to disable.
+   * @param sizer is the sizer to use or <code>null</code> to disable.
    */
   public void setSizer(UIReadSize sizer) {
 
@@ -53,8 +51,7 @@ public abstract class AbstractDecoratingLayoutManager {
   /**
    * This method does the actual layout.
    * 
-   * @param parentSize
-   *        is the size of the
+   * @param parentSize is the size of the
    *        {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite composite} to
    *        layout.
    */

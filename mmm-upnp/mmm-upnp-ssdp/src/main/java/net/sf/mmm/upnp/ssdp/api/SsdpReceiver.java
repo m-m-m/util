@@ -16,8 +16,7 @@ public interface SsdpReceiver {
    * the registration all received requests will be sent to the
    * <code>listener</code>.
    * 
-   * @param listener
-   *        is the listener to add.
+   * @param listener is the listener to add.
    */
   void addListener(SsdpListener listener);
 

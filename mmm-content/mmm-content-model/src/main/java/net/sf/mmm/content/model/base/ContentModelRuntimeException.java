@@ -7,7 +7,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
  * This exception thrown if an internal error occurred in the content model.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ContentModelRuntimeException extends NlsRuntimeException {

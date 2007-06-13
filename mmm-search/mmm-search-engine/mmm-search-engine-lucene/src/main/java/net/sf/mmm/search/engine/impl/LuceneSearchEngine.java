@@ -73,8 +73,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * This method sets the lucene analyzer used by this search engine.
    * 
-   * @param luceneAnalyzer
-   *        the analyzer to set
+   * @param luceneAnalyzer the analyzer to set
    */
   public void setAnalyzer(Analyzer luceneAnalyzer) {
 
@@ -84,8 +83,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * This method sets the lucene searcher used by this search engine.
    * 
-   * @param luceneSearcher
-   *        the searcher to set
+   * @param luceneSearcher the searcher to set
    */
   public void setSearcher(Searcher luceneSearcher) {
 
@@ -96,8 +94,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * This method sets the path in the local filesystem where the search-index is
    * located. You can also use {@link #setSearcher(Searcher)} instead.
    * 
-   * @param searchIndexPath
-   *        the indexPath to set
+   * @param searchIndexPath the indexPath to set
    */
   public void setIndexPath(String searchIndexPath) {
 
@@ -115,8 +112,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * This method sets the {@link #getQueryBuilder() query-builder}.
    * 
-   * @param searchQueryBuilder
-   *        the queryBuilder to set
+   * @param searchQueryBuilder the queryBuilder to set
    */
   public void setQueryBuilder(SearchQueryBuilder searchQueryBuilder) {
 
@@ -132,8 +128,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
-   * @param formatter
-   *        the formatter to set
+   * @param formatter the formatter to set
    */
   public void setHighlightFormatter(Formatter formatter) {
 
@@ -161,9 +156,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * 
    * @see SearchQueryBuilder#parseStandardQuery(String)
    * 
-   * @param ignore -
-   *        if <code>true</code>, leading wildcards ('*' or '?') are ignored,
-   *        <code>false</code> otherwise.
+   * @param ignore - if <code>true</code>, leading wildcards ('*' or '?') are
+   *        ignored, <code>false</code> otherwise.
    */
   public void setIgnoreLeadingWildcards(boolean ignore) {
 
@@ -175,8 +169,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * to inject the {@link #setIndexPath(String) index-path} or the
    * {@link #setSearcher(Searcher) searcher} before you can call this method.
    * 
-   * @throws IOException
-   *         if the initialization fails with an I/O error.
+   * @throws IOException if the initialization fails with an I/O error.
    */
   @PostConstruct
   public void initialize() throws IOException {

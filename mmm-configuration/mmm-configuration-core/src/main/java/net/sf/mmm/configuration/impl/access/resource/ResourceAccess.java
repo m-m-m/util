@@ -40,8 +40,7 @@ public class ResourceAccess extends AbstractConfigurationAccess {
   /**
    * The constructor.
    * 
-   * @param href
-   *        is the absolute href of the resource to access.
+   * @param href is the absolute href of the resource to access.
    */
   public ResourceAccess(String href) {
 
@@ -51,11 +50,9 @@ public class ResourceAccess extends AbstractConfigurationAccess {
   /**
    * The constructor.
    * 
-   * @param fileRootPath
-   *        is the root path in the filesystem where the lookup for
+   * @param fileRootPath is the root path in the filesystem where the lookup for
    *        file-resources.
-   * @param href
-   *        is the absolute href of the resource to access.
+   * @param href is the absolute href of the resource to access.
    */
   public ResourceAccess(String fileRootPath, String href) {
 

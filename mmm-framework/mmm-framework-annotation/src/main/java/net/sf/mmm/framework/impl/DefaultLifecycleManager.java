@@ -53,8 +53,7 @@ public class DefaultLifecycleManager extends AbstractLifecycleManager {
   /**
    * This method sets the {@link #getThreadPool() thread-pool}.
    * 
-   * @param myThreadPool
-   *        is the thread-pool to set.
+   * @param myThreadPool is the thread-pool to set.
    */
   @Resource
   public void setThreadPool(Executor myThreadPool) {
@@ -81,14 +80,11 @@ public class DefaultLifecycleManager extends AbstractLifecycleManager {
    * 
    * @see #performLifecyclePhase(ExtendedComponentInstanceContainer, String)
    * 
-   * @param instanceContainer
-   *        is the container with the component instance.
-   * @param phase
-   *        is the
+   * @param instanceContainer is the container with the component instance.
+   * @param phase is the
    *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getLifecycleMethod(String) phase}
    *        to perform.
-   * @param endState
-   *        is the
+   * @param endState is the
    *        {@link ExtendedComponentInstanceContainer#getLifecycleState() lifecycle-state}
    *        reached if the phase has completed.
    */

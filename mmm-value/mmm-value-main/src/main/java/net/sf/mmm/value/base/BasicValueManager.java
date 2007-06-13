@@ -7,8 +7,7 @@ package net.sf.mmm.value.base;
  * This is the enhanced base implementation of the
  * {@link net.sf.mmm.value.api.ValueManager} interface.
  * 
- * @param <V>
- *        is the templated type of the managed value type.
+ * @param <V> is the templated type of the managed value type.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
@@ -22,9 +21,8 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
   /**
    * The constructor.
    * 
-   * @param valueClass
-   *        is the {@link #getValueClass() implementation} of the managed value
-   *        type.
+   * @param valueClass is the {@link #getValueClass() implementation} of the
+   *        managed value type.
    */
   public BasicValueManager(Class<V> valueClass) {
 
@@ -34,12 +32,10 @@ public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
   /**
    * The constructor.
    * 
-   * @param valueClass
-   *        is the {@link #getValueClass() implementation} of the managed value
-   *        type.
-   * @param typeName
-   *        is the {@link #getName() "logical name"} of the managed value
-   *        type.
+   * @param valueClass is the {@link #getValueClass() implementation} of the
+   *        managed value type.
+   * @param typeName is the {@link #getName() "logical name"} of the managed
+   *        value type.
    */
   public BasicValueManager(Class<V> valueClass, String typeName) {
 

@@ -20,7 +20,7 @@ import net.sf.mmm.util.filter.CharFilter;
 public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractSearchQueryBuilder() {
 
@@ -41,18 +41,18 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    * {@inheritDoc}
    */
   public SearchQuery parseStandardQuery(String query) throws SearchException {
-  
+
     return parseStandardQuery(query, false);
   }
-  
+
   /**
    * @see #parseStandardQuery(String, boolean)
    * 
    * @param parser
    * @param requireTerms
    * @param defaultProperty
-   * @param depth
-   *        is the deepth of the query expression (number of open parenthesis).
+   * @param depth is the deepth of the query expression (number of open
+   *        parenthesis).
    * @return the parsed query or <code>null</code> if this a call with a depth
    *         greater than <code>0</code> and the parsed query segment was
    *         void.
@@ -66,7 +66,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
     while (todo) {
       // determine conjunction...
       parser.skipWhile(CharFilter.WHITESPACE_FILTER);
-      char conjunction = 0;      
+      char conjunction = 0;
       while (parser.hasNext()) {
         char c = parser.peek();
         if ((c == '+') || (c == '-')) {
@@ -117,8 +117,8 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    * 
    * @param parser
    * @param defaultProperty
-   * @param depth
-   *        is the deepth of the query expression (number of open parenthesis).
+   * @param depth is the deepth of the query expression (number of open
+   *        parenthesis).
    * @return the parsed query or <code>null</code> if the parsed query segment
    *         was void.
    */
@@ -161,7 +161,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
       String term = parser.substring(start, end);
       return createTermQuery(property, term);
     } else {
-      return null;      
+      return null;
     }
   }
 

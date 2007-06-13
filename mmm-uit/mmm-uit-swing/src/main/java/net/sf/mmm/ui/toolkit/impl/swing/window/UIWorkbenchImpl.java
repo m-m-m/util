@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.composite.UIDesktopPanel;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.window.UIWorkbench} interface using Swing
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.window.UIWorkbench} interface using Swing as
+ * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,14 +24,11 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param title
-   *        is the {@link #getTitle() title} of the frame.
-   * @param resizeable -
-   *        if <code>true</code> the frame will be
+   * @param title is the {@link #getTitle() title} of the frame.
+   * @param resizeable - if <code>true</code> the frame will be
    *        {@link #isResizeable() resizeable}.
    */
   public UIWorkbenchImpl(UIFactorySwing uiFactory, String title, boolean resizeable) {

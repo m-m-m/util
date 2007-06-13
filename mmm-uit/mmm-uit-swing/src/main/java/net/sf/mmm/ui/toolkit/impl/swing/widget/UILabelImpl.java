@@ -14,8 +14,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UILabel} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UILabel} interface using Swing as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

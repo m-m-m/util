@@ -52,8 +52,7 @@ public interface NlsTranslationSource {
    * This method sets the {@link #getBundleName() bundle name}. If it is
    * already set, this method will have no effect.
    * 
-   * @param bundleName
-   *        is the bundle name to set.
+   * @param bundleName is the bundle name to set.
    */
   void setBundleName(String bundleName);
 
@@ -61,8 +60,7 @@ public interface NlsTranslationSource {
    * This method sets the {@link #getBundleKey() bundle key}. If it is already
    * set, this method will have no effect.
    * 
-   * @param bundleKey
-   *        is the key to set.
+   * @param bundleKey is the key to set.
    */
   void setBundleKey(String bundleKey);
 

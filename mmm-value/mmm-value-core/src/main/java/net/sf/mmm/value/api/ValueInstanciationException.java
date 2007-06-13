@@ -19,10 +19,8 @@ public class ValueInstanciationException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param javaClass
-   *        is the class that could not be instantiated.
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param javaClass is the class that could not be instantiated.
+   * @param nested is the throwable that caused this exception.
    */
   public ValueInstanciationException(Class<?> javaClass, Throwable nested) {
 

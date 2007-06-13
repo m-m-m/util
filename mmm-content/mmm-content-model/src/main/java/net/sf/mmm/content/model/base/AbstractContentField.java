@@ -44,13 +44,10 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
    * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(IdImpl,
    *      String)
    * 
-   * @param declaringContentClass
-   *        is the content-class that {@link #getDeclaringClass() declares} (or
-   *        overrides) this field.
-   * @param type
-   *        is the {@link #getFieldType() field-type}.
-   * @param fieldModifiers
-   *        are the {@link #getModifiers() modifiers}.
+   * @param declaringContentClass is the content-class that
+   *        {@link #getDeclaringClass() declares} (or overrides) this field.
+   * @param type is the {@link #getFieldType() field-type}.
+   * @param fieldModifiers are the {@link #getModifiers() modifiers}.
    */
   public AbstractContentField(IdImpl fieldId, String fieldName, ContentClass declaringContentClass,
       Type type, FieldModifiers fieldModifiers) {
@@ -66,15 +63,11 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
    * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(IdImpl,
    *      String)
    * 
-   * @param declaringContentClass
-   *        is the content-class that {@link #getDeclaringClass() declares} (or
-   *        overrides) this field.
-   * @param type
-   *        is the {@link #getFieldType() field-type}.
-   * @param fieldModifiers
-   *        are the {@link #getModifiers() modifiers}.
-   * @param validator
-   *        is the {@link #getConstraint() constraint}.
+   * @param declaringContentClass is the content-class that
+   *        {@link #getDeclaringClass() declares} (or overrides) this field.
+   * @param type is the {@link #getFieldType() field-type}.
+   * @param fieldModifiers are the {@link #getModifiers() modifiers}.
+   * @param validator is the {@link #getConstraint() constraint}.
    */
   public AbstractContentField(IdImpl fieldId, String fieldName, ContentClass declaringContentClass,
       Type type, FieldModifiers fieldModifiers, ValueValidator validator) {
@@ -132,10 +125,10 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
    * {@inheritDoc}
    */
   public Class<?> getFieldClass() {
-  
+
     return this.fieldClass;
   }
-  
+
   /**
    * {@inheritDoc}
    */

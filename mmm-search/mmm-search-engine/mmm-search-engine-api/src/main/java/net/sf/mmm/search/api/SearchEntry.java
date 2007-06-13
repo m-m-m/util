@@ -89,8 +89,7 @@ public interface SearchEntry {
    * This method is a generic accessor for additional properties of this
    * {@link SearchEntry entry}.
    * 
-   * @param name
-   *        is the name of the requested property.
+   * @param name is the name of the requested property.
    * @return the value of the requested property or <code>null</code> if no
    *         property exists for the given <code>name</code>.
    */

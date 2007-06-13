@@ -31,8 +31,7 @@ public class ObjectValue extends AbstractObjectValue {
   /**
    * The constructor.
    * 
-   * @param internalValue
-   *        is the internal value object to represent.
+   * @param internalValue is the internal value object to represent.
    */
   public ObjectValue(Object internalValue) {
 

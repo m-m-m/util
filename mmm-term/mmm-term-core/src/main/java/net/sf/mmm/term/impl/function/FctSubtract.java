@@ -43,10 +43,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Double sub(Double argument1, Number argument2) {
@@ -57,10 +55,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Double sub(Number argument1, Double argument2) {
@@ -71,10 +67,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Integer sub(Integer argument1, Integer argument2) {
@@ -85,10 +79,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Long sub(Long argument1, Integer argument2) {
@@ -99,10 +91,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Long sub(Integer argument1, Long argument2) {
@@ -113,10 +103,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Long sub(Long argument1, Long argument2) {
@@ -127,10 +115,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Float sub(Float argument1, Float argument2) {
@@ -141,10 +127,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Float sub(Float argument1, Integer argument2) {
@@ -155,10 +139,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Float sub(Integer argument1, Float argument2) {
@@ -169,10 +151,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Float sub(Float argument1, Long argument2) {
@@ -183,10 +163,8 @@ public class FctSubtract {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the difference of both arguments.
    */
   public static Float sub(Long argument1, Float argument2) {

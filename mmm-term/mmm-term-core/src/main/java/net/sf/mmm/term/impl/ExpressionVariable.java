@@ -24,21 +24,19 @@ public class ExpressionVariable extends AbstractVariable {
   private static final long serialVersionUID = -6989674048385225206L;
 
   /**
-   * the term that must resolve to a string that will be interpreted as name
-   * of the variable.
+   * the term that must resolve to a string that will be interpreted as name of
+   * the variable.
    */
   private Term term;
 
   /**
    * The constructor.
    * 
-   * @param variableNameTerm
-   *        is an expression that must resolve to the name of the variable (as
-   *        string value).
-   * @throws CalculationException
-   *         if the given term has a return type can not match {@link String}.
-   *         It might be confusing that the caused exception is called this
-   *         way but however.
+   * @param variableNameTerm is an expression that must resolve to the name of
+   *        the variable (as string value).
+   * @throws CalculationException if the given term has a return type can not
+   *         match {@link String}. It might be confusing that the caused
+   *         exception is called this way but however.
    */
   public ExpressionVariable(Term variableNameTerm) throws CalculationException {
 

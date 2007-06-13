@@ -20,8 +20,7 @@ public interface NlsService {
    * This method gets the {@link NlsTranslator} for the given
    * <code>locale</code>.
    * 
-   * @param locale
-   *        is the locale that should be translated to.
+   * @param locale is the locale that should be translated to.
    * @return the according translator.s
    */
   NlsTranslator getTranslator(Locale locale);

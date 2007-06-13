@@ -92,17 +92,15 @@ public interface PojoPropertyAccessor {
    * possible use {@link PojoDescriptor#setProperty(Object, String, Object)} or
    * {@link PojoDescriptor#addPropertyItem(Object, String, Object)}.
    * 
-   * @param pojoInstance
-   *        is the instance of the POJO where to set the property. Has to be an
-   *        instance of the {@link PojoDescriptor#getPojoType() type} from where
-   *        this accessor was created for.
-   * @param value
-   *        is the value of the property to set.
-   * @throws IllegalAccessException
-   *         if you do NOT have permissions the access the underlying getter
-   *         method.
-   * @throws InvocationTargetException
-   *         if the POJO itself (the getter) throws an exception.
+   * @param pojoInstance is the instance of the POJO where to set the property.
+   *        Has to be an instance of the
+   *        {@link PojoDescriptor#getPojoType() type} from where this accessor
+   *        was created for.
+   * @param value is the value of the property to set.
+   * @throws IllegalAccessException if you do NOT have permissions the access
+   *         the underlying getter method.
+   * @throws InvocationTargetException if the POJO itself (the getter) throws an
+   *         exception.
    */
   void set(Object pojoInstance, Object value) throws IllegalAccessException,
       InvocationTargetException;
@@ -112,19 +110,18 @@ public interface PojoPropertyAccessor {
    * this accessor.<br>
    * <b>ATTENTION:</b><br>
    * This method only makes sense if the {@link #getAccessMode() mode} of this
-   * accessor is readable ({@link PojoPropertyAccessMode#READ}). If
-   * possible use {@link PojoDescriptor#getProperty(Object, String)}.
+   * accessor is readable ({@link PojoPropertyAccessMode#READ}). If possible
+   * use {@link PojoDescriptor#getProperty(Object, String)}.
    * 
-   * @param pojoInstance
-   *        is the instance of the POJO where to get the property from. Has to
-   *        be an instance of the {@link PojoDescriptor#getPojoType() type} from
-   *        where this accessor was created for.
+   * @param pojoInstance is the instance of the POJO where to get the property
+   *        from. Has to be an instance of the
+   *        {@link PojoDescriptor#getPojoType() type} from where this accessor
+   *        was created for.
    * @return the value of the property.
-   * @throws IllegalAccessException
-   *         if you do NOT have permissions the access the underlying getter
-   *         method.
-   * @throws InvocationTargetException
-   *         if the POJO itself (the getter) throws an exception.
+   * @throws IllegalAccessException if you do NOT have permissions the access
+   *         the underlying getter method.
+   * @throws InvocationTargetException if the POJO itself (the getter) throws an
+   *         exception.
    */
   public abstract Object get(Object pojoInstance) throws IllegalAccessException,
       InvocationTargetException;

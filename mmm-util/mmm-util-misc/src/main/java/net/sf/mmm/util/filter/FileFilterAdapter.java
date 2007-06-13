@@ -25,8 +25,7 @@ public final class FileFilterAdapter {
    * This method converts the given <code>filter</code> to a
    * {@link FileFilter}.
    * 
-   * @param filter
-   *        is a string-filter.
+   * @param filter is a string-filter.
    * @return a {@link FileFilter} that {@link FileFilter#accept(File) accepts}
    *         if the given <code>filter</code>
    *         {@link Filter#accept(Object) accepts} the
@@ -47,8 +46,7 @@ public final class FileFilterAdapter {
    * This method converts the given <code>filter</code> to a
    * {@link FileFilter}.
    * 
-   * @param filter
-   *        is a file-filter.
+   * @param filter is a file-filter.
    * @return a {@link FileFilter} that {@link FileFilter#accept(File) accepts}
    *         if the given <code>filter</code>
    *         {@link Filter#accept(Object) accepts}.

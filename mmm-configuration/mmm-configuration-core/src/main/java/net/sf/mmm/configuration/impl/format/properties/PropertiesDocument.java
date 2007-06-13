@@ -38,15 +38,11 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   /**
    * The constructor for a top-level document.
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param context
-   *        is the initial {@link #getContext() context} to use.
-   * @param keySeparator
-   *        is the {@link #getSeparator() separator}.
-   * @param isFlat
-   *        is the {@link #isFlat() flat} flag.
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param context is the initial {@link #getContext() context} to use.
+   * @param keySeparator is the {@link #getSeparator() separator}.
+   * @param isFlat is the {@link #isFlat() flat} flag.
    */
   public PropertiesDocument(ConfigurationAccess configurationAccess, MutableContext context,
       char keySeparator, boolean isFlat) {
@@ -60,15 +56,12 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   /**
    * The constructor for a child document.
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param parentConfiguration
-   *        is the {@link #getParentConfiguration() parent-configuration}.
-   * @param keySeparator
-   *        is the {@link #getSeparator() separator}.
-   * @param isFlat
-   *        is the {@link #isFlat() flat} flag.
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param parentConfiguration is the
+   *        {@link #getParentConfiguration() parent-configuration}.
+   * @param keySeparator is the {@link #getSeparator() separator}.
+   * @param isFlat is the {@link #isFlat() flat} flag.
    */
   public PropertiesDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration, char keySeparator, boolean isFlat) {
@@ -90,16 +83,15 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   }
 
   /**
-   * TODO: flat mode is nuts and should be kicked out!
-   * This method determines if the properties are treated flat. In this case all
-   * properties are direct children of the root-node.<br>
+   * TODO: flat mode is nuts and should be kicked out! This method determines if
+   * the properties are treated flat. In this case all properties are direct
+   * children of the root-node.<br>
    * Else the properties are treated as a tree. Then the
    * {@link #getSeparator() separator} splits a property key into according
    * configuration nodes. E.g. if the {@link #getSeparator() separator} is '.'
    * and a property has the key 'foo.bar.key' then it represents a
-   * {@link net.sf.mmm.configuration.api.Configuration configuration-node}
-   * with the
-   * {@link net.sf.mmm.configuration.api.Configuration#getName() name} 'key'
+   * {@link net.sf.mmm.configuration.api.Configuration configuration-node} with
+   * the {@link net.sf.mmm.configuration.api.Configuration#getName() name} 'key'
    * and can be retrieved via
    * 
    * <pre>
@@ -131,8 +123,8 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
   /**
    * This method gets the key separator (typically '.' or '/'). If the
    * properties are treated as tree (NOT {@link #isFlat() flat}) is used analog
-   * to {@link net.sf.mmm.configuration.api.Configuration#PATH_SEPARATOR} but
-   * to separate the internal keys of the properties.
+   * to {@link net.sf.mmm.configuration.api.Configuration#PATH_SEPARATOR} but to
+   * separate the internal keys of the properties.
    * 
    * 
    * @return the properties key separator.
@@ -173,7 +165,7 @@ public class PropertiesDocument extends AbstractConfigurationDocument {
           } else {
             String path = keyString.replace(this.separator, Configuration.PATH_SEPARATOR);
             root.getDescendant(path);
-          }          
+          }
         }
       }
       return root;

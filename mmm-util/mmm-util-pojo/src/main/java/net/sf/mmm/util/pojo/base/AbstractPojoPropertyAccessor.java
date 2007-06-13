@@ -36,14 +36,12 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /**
    * The constructor.
    * 
-   * @param propertyName
-   *        is the {@link #getName() name} of the property.
-   * @param accessMode
-   *        is the {@link #getAccessMode() mode} of this accessor.
-   * @param propertyType
-   *        is the {@link #getPropertyType() generic type} of the property.
-   * @param propertyClass
-   *        is the {@link #getPropertyClass() raw type} of the property.
+   * @param propertyName is the {@link #getName() name} of the property.
+   * @param accessMode is the {@link #getAccessMode() mode} of this accessor.
+   * @param propertyType is the {@link #getPropertyType() generic type} of the
+   *        property.
+   * @param propertyClass is the {@link #getPropertyClass() raw type} of the
+   *        property.
    */
   public AbstractPojoPropertyAccessor(String propertyName, PojoPropertyAccessMode accessMode,
       Type propertyType, Class<?> propertyClass) {

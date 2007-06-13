@@ -22,10 +22,8 @@ public class IllegalArgumentTypeException extends CalculationException {
   /**
    * The constructor.
    * 
-   * @param function
-   *        the function that declared the signature as illegal.
-   * @param signature
-   *        is the signature that was illegal.
+   * @param function the function that declared the signature as illegal.
+   * @param signature is the signature that was illegal.
    */
   public IllegalArgumentTypeException(Function function, Signature signature) {
 
@@ -35,10 +33,8 @@ public class IllegalArgumentTypeException extends CalculationException {
   /**
    * The constructor.
    * 
-   * @param function
-   *        the function that declared the argument as illegal.
-   * @param arguments
-   *        are the arguments that were illegal.
+   * @param function the function that declared the argument as illegal.
+   * @param arguments are the arguments that were illegal.
    */
   public IllegalArgumentTypeException(Function function, Arguments arguments) {
 
@@ -48,13 +44,10 @@ public class IllegalArgumentTypeException extends CalculationException {
   /**
    * The constructor.
    * 
-   * @param function
-   *        the function that declared the argument as illegal.
-   * @param arguments
-   *        are the arguments that were illegal.
-   * @param nested
-   *        is the throwable that {@link Throwable#getCause() caused} this
-   *        exception.
+   * @param function the function that declared the argument as illegal.
+   * @param arguments are the arguments that were illegal.
+   * @param nested is the throwable that {@link Throwable#getCause() caused}
+   *        this exception.
    */
   public IllegalArgumentTypeException(Function function, Arguments arguments, Throwable nested) {
 

@@ -24,8 +24,7 @@ public class StaxXmlWriter extends AbstractXmlWriter {
   /**
    * The constructor.
    * 
-   * @param streamWriter
-   *        is the writer to adapt.
+   * @param streamWriter is the writer to adapt.
    */
   public StaxXmlWriter(XMLStreamWriter streamWriter) {
 

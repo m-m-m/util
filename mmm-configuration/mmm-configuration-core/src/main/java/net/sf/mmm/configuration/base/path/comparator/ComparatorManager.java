@@ -10,8 +10,8 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 
 /**
  * This is the manager where all available
- * {@link net.sf.mmm.configuration.base.path.comparator.Comparator comparators} are
- * registered.
+ * {@link net.sf.mmm.configuration.base.path.comparator.Comparator comparators}
+ * are registered.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -40,8 +40,7 @@ public class ComparatorManager {
    * This method gets the comparator for the given
    * {@link Comparator#getSymbol() symbol}.
    * 
-   * @param symbol
-   *        is the {@link Comparator#getSymbol() symbol} of the requested
+   * @param symbol is the {@link Comparator#getSymbol() symbol} of the requested
    *        comparator.
    * @return the comparator for the given symbol.
    */

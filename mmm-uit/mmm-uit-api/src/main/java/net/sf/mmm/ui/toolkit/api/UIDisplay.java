@@ -53,8 +53,7 @@ public interface UIDisplay extends UIObject, UIReadSize {
    * implementation, the <code>task</code> may simply be invoked directly in
    * the implementation of this method.
    * 
-   * @param task
-   *        is the job to {@link Runnable#run() invoke}.
+   * @param task is the job to {@link Runnable#run() invoke}.
    */
   void invokeSynchron(Runnable task);
 
@@ -66,8 +65,7 @@ public interface UIDisplay extends UIObject, UIReadSize {
    * implementation, the <code>task</code> may simply be invoked directly in
    * the implementation of this method.
    * 
-   * @param task
-   *        is the job to {@link Runnable#run() invoke}.
+   * @param task is the job to {@link Runnable#run() invoke}.
    */
   void invokeAsynchron(Runnable task);
 
@@ -80,13 +78,10 @@ public interface UIDisplay extends UIObject, UIReadSize {
    * implementation, the <code>task</code> may simply be invoked directly in
    * the implementation of this method.
    * 
-   * @param <T>
-   *        is the templated type of the task result.
-   * @param task
-   *        is the piece of code to be executed synchronous.
+   * @param <T> is the templated type of the task result.
+   * @param task is the piece of code to be executed synchronous.
    * @return is the {@link Callable#call() result} of the task.
-   * @throws Exception
-   *         if {@link Callable#call()} throws an exception.
+   * @throws Exception if {@link Callable#call()} throws an exception.
    */
   <T> T invokeSynchron(Callable<T> task) throws Exception;
 

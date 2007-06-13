@@ -18,9 +18,8 @@ public interface PojoPropertyIntrospector {
    * This method finds all accessors for properties of the given
    * <code>pojoType</code>.
    * 
-   * @param pojoType
-   *        is the type reflecting the POJO for which the property-accessors are
-   *        requested.
+   * @param pojoType is the type reflecting the POJO for which the
+   *        property-accessors are requested.
    * @return a read-only iterator of all the property-accessors.
    */
   Iterator<AbstractPojoPropertyAccessor> findAccessors(Class<?> pojoType);

@@ -20,8 +20,7 @@ public class XmlNamespacePrefixUndefinedException extends XmlException {
   /**
    * The constructor.
    * 
-   * @param prefix
-   *        is the namespace prefix that is undefined.
+   * @param prefix is the namespace prefix that is undefined.
    */
   public XmlNamespacePrefixUndefinedException(String prefix) {
 

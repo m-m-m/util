@@ -14,8 +14,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.custom.MyProgressBar;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIProgressBar} interface using
- * Swing as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIProgressBar} interface using Swing
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -27,10 +27,8 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param orientation
    */
   public UIProgressBarImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {

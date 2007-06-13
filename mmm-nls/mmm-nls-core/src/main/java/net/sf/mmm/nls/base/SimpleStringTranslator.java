@@ -32,10 +32,8 @@ public class SimpleStringTranslator extends AbstractNlsTranslator {
   /**
    * The constructor.
    * 
-   * @param internationalBundle
-   *        is the NLS bundle.
-   * @param locale
-   *        is the locale used to
+   * @param internationalBundle is the NLS bundle.
+   * @param locale is the locale used to
    *        {@link ResourceBundle#getBundle(String, Locale) lookup} the
    *        nationalized bundle.
    */

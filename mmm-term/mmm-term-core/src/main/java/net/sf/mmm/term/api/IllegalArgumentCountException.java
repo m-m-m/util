@@ -22,10 +22,8 @@ public class IllegalArgumentCountException extends CalculationException {
   /**
    * The constructor.
    * 
-   * @param argumentCount
-   *        the argument count that was illegal.
-   * @param function
-   *        the function that declared the argument count as illegal.
+   * @param argumentCount the argument count that was illegal.
+   * @param function the function that declared the argument count as illegal.
    */
   public IllegalArgumentCountException(Function function, int argumentCount) {
 

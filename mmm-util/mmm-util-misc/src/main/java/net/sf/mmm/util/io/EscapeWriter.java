@@ -30,14 +30,12 @@ public class EscapeWriter extends Writer {
    * 
    * @see EscapeWriter#EscapeWriter(Object, String[], Writer)
    * 
-   * @param charEscapeTable
-   *        is a String array that maps characters by to escape sequences. If
-   *        the numeric representation of a character is a legal index for the
-   *        given array and the String at that index is <code>null</code> that
-   *        string is written instead of the character. In all other cases, the
-   *        character is written without change.
-   * @param plainWriter
-   *        is the writer that is wrapped.
+   * @param charEscapeTable is a String array that maps characters by to escape
+   *        sequences. If the numeric representation of a character is a legal
+   *        index for the given array and the String at that index is
+   *        <code>null</code> that string is written instead of the character.
+   *        In all other cases, the character is written without change.
+   * @param plainWriter is the writer that is wrapped.
    */
   public EscapeWriter(String[] charEscapeTable, Writer plainWriter) {
 
@@ -49,17 +47,14 @@ public class EscapeWriter extends Writer {
   /**
    * The constructor.
    * 
-   * @param syncLock
-   *        is an explicit lock object used for synchronization (see
+   * @param syncLock is an explicit lock object used for synchronization (see
    *        {@link Writer#Writer(java.lang.Object)}).
-   * @param charEscapeTable
-   *        is a String array that maps characters by to escape sequences. If
-   *        the numeric representation of a character is a legal index for the
-   *        given array and the String at that index is <code>null</code> that
-   *        string is written instead of the character. In all other cases, the
-   *        character is written without change.
-   * @param plainWriter
-   *        is the writer that is wrapped.
+   * @param charEscapeTable is a String array that maps characters by to escape
+   *        sequences. If the numeric representation of a character is a legal
+   *        index for the given array and the String at that index is
+   *        <code>null</code> that string is written instead of the character.
+   *        In all other cases, the character is written without change.
+   * @param plainWriter is the writer that is wrapped.
    */
   public EscapeWriter(Object syncLock, String[] charEscapeTable, Writer plainWriter) {
 

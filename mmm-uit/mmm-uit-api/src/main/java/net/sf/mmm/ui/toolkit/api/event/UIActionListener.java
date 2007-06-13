@@ -16,13 +16,10 @@ import net.sf.mmm.ui.toolkit.api.UINode;
 public interface UIActionListener extends EventListener {
 
   /**
-   * This method is called if the user invoked an interaction in a
-   * UIComponent.
+   * This method is called if the user invoked an interaction in a UIComponent.
    * 
-   * @param source
-   *        is the component that invoked the action.
-   * @param action
-   *        is the action that has been invoked.
+   * @param source is the component that invoked the action.
+   * @param action is the action that has been invoked.
    */
   void invoke(UINode source, ActionType action);
 

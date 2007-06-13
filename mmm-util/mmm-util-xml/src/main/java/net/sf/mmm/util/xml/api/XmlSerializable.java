@@ -19,10 +19,9 @@ public interface XmlSerializable extends Serializable {
    * The class implementing this method is responsible to produce well-formed
    * XML. The given serializer may NOT necessarily validate the produced XML.
    * 
-   * @param xmlWriter
-   *        is the receiver of the serialized XML data.
-   * @throws XmlException
-   *         if the serialization fails (I/O error, invalid XML, etc.).
+   * @param xmlWriter is the receiver of the serialized XML data.
+   * @throws XmlException if the serialization fails (I/O error, invalid XML,
+   *         etc.).
    */
   void toXml(XmlWriter xmlWriter) throws XmlException;
 

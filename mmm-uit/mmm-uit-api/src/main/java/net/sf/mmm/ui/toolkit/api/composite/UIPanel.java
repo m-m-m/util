@@ -17,9 +17,8 @@ public interface UIPanel extends UIComposite {
    * This method adds the given <code>component</code> to the end of the
    * panels component list.
    * 
-   * @param component
-   *        is the component to add. The given component instance must be
-   *        created by the same factory.
+   * @param component is the component to add. The given component instance must
+   *        be created by the same factory.
    */
   void addComponent(UIComponent component);
 
@@ -28,8 +27,7 @@ public interface UIPanel extends UIComposite {
    * <br>
    * It will have no effect, if the component has not been added to this panel.
    * 
-   * @param component
-   *        is the component to remove.
+   * @param component is the component to remove.
    * @return <code>true</code> if the <code>component</code> has been
    *         remove, <code>false</code> otherwise (it was NOT in the panels
    *         component list).
@@ -41,8 +39,7 @@ public interface UIPanel extends UIComposite {
    * 
    * @see UIComposite#getComponent(int)
    * 
-   * @param index
-   *        is the position of the component to remove.
+   * @param index is the position of the component to remove.
    * @return the component that has been removed.
    */
   UIComponent removeComponent(int index);

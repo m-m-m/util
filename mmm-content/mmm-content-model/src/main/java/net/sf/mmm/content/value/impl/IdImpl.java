@@ -306,8 +306,7 @@ public final class IdImpl implements Id {
    * 
    * @see IdImpl
    * 
-   * @param classUid
-   *        is the class id.
+   * @param classUid is the class id.
    */
   public IdImpl(int classUid) {
 
@@ -321,10 +320,8 @@ public final class IdImpl implements Id {
    * 
    * @see IdImpl
    * 
-   * @param objectUid
-   *        is the object id.
-   * @param classUid
-   *        is the class id.
+   * @param objectUid is the object id.
+   * @param classUid is the class id.
    */
   public IdImpl(long objectUid, int classUid) {
 
@@ -336,12 +333,9 @@ public final class IdImpl implements Id {
    * 
    * @see IdImpl
    * 
-   * @param objectUid
-   *        is the object id.
-   * @param classUid
-   *        is the class id.
-   * @param revisionNumber
-   *        is the revision number
+   * @param objectUid is the object id.
+   * @param classUid is the class id.
+   * @param revisionNumber is the revision number
    */
   public IdImpl(long objectUid, int classUid, int revisionNumber) {
 
@@ -353,14 +347,10 @@ public final class IdImpl implements Id {
    * 
    * @see IdImpl
    * 
-   * @param objectUid
-   *        is the object id.
-   * @param classUid
-   *        is the class id.
-   * @param revisionNumber
-   *        is the revision number
-   * @param storeUid
-   *        is the id of the store.
+   * @param objectUid is the object id.
+   * @param classUid is the class id.
+   * @param revisionNumber is the revision number
+   * @param storeUid is the id of the store.
    */
   public IdImpl(long objectUid, int classUid, int revisionNumber, int storeUid) {
 
@@ -374,12 +364,10 @@ public final class IdImpl implements Id {
   /**
    * The constructor.
    * 
-   * @param uid
-   *        is the ID to create in the format produced by the
+   * @param uid is the ID to create in the format produced by the
    *        {@link #toString()} method.
-   * @throws ValueParseException
-   *         if the given string representation is invalid and can not be
-   *         parsed.
+   * @throws ValueParseException if the given string representation is invalid
+   *         and can not be parsed.
    */
   public IdImpl(String uid) throws ValueParseException {
 

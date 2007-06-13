@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
-
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -21,11 +20,10 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * {@link net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent} interface
  * using Swing as the UI toolkit.
  * 
- * @param <D>
- *        is the templated type of the
+ * @param <D> is the templated type of the
  *        {@link #getDecorator() decorating component}.
- * @param <C>
- *        is the templated type of the {@link #getComponent() main component}.
+ * @param <C> is the templated type of the
+ *        {@link #getComponent() main component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,7 +35,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
 
   /** the layout-manager */
   private final DecoratingLayoutManager layoutManager;
-  
+
   /** @see #getComponent() */
   private C component;
 
@@ -47,10 +45,8 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -122,8 +118,8 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
     AbstractUIComponent abstractComponent = (AbstractUIComponent) newDecorator;
     if (this.decorator != null) {
       AbstractUIComponent oldComponent = (AbstractUIComponent) this.decorator;
-      //setParent(oldComponent, null);
-      //this.panel.remove(oldComponent.getSwingComponent());
+      // setParent(oldComponent, null);
+      // this.panel.remove(oldComponent.getSwingComponent());
       oldComponent.removeFromParent();
     }
     if (abstractComponent.getParent() != null) {
@@ -138,8 +134,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
    * This method sets the sizer used to override the size of the
    * {@link #getDecorator() decorator}.
    * 
-   * @param sizer
-   *        is the sizer to use or <code>null</code> to disable.
+   * @param sizer is the sizer to use or <code>null</code> to disable.
    */
   public void setDecoratorSizer(UIReadSize sizer) {
 

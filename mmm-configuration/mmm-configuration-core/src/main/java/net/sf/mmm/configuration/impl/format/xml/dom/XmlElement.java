@@ -41,14 +41,11 @@ public class XmlElement extends AbstractConfigurationElement {
   /**
    * The constructor.
    * 
-   * @param ownerDocument
-   *        is the
+   * @param ownerDocument is the
    *        {@link net.sf.mmm.configuration.api.ConfigurationDocument document}
    *        this configuration belongs to.
-   * @param parentConfiguration
-   *        is the parent configuration.
-   * @param xmlElement
-   *        is the native XML element to adapt.
+   * @param parentConfiguration is the parent configuration.
+   * @param xmlElement is the native XML element to adapt.
    */
   public XmlElement(XmlDocument ownerDocument, AbstractConfiguration parentConfiguration,
       Element xmlElement) {

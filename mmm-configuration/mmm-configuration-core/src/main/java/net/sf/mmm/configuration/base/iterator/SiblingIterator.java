@@ -32,8 +32,7 @@ public class SiblingIterator implements Iterator<AbstractConfiguration> {
   /**
    * The constructor.
    * 
-   * @param head
-   *        is the head configuration of the sibling-list.
+   * @param head is the head configuration of the sibling-list.
    */
   public SiblingIterator(AbstractConfiguration head) {
 
@@ -43,8 +42,7 @@ public class SiblingIterator implements Iterator<AbstractConfiguration> {
   }
 
   /**
-   * @param nextSibling
-   *        the next to set
+   * @param nextSibling the next to set
    */
   public void setNext(AbstractConfiguration nextSibling) {
 

@@ -40,8 +40,7 @@ public class Duration implements DurationIF {
   /**
    * The constructor.
    * 
-   * @param durationInMillis
-   *        is the time difference in milliseconds.
+   * @param durationInMillis is the time difference in milliseconds.
    */
   public Duration(long durationInMillis) {
 
@@ -61,9 +60,8 @@ public class Duration implements DurationIF {
   /**
    * The constructor.
    * 
-   * @param durationAsString
-   *        is the duration given as String in the format as produced by
-   *        {@link Duration#toString()}.
+   * @param durationAsString is the duration given as String in the format as
+   *        produced by {@link Duration#toString()}.
    */
   public Duration(String durationAsString) {
 

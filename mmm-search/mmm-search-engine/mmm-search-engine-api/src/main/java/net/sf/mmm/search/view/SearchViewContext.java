@@ -76,8 +76,7 @@ public class SearchViewContext {
    * {@link SearchViewContext itself} (this) as attribute of the given
    * <code>request</code>.
    * 
-   * @param request
-   *        is the servlet request.
+   * @param request is the servlet request.
    */
   public SearchViewContext(ServletRequest request) {
 
@@ -93,8 +92,7 @@ public class SearchViewContext {
    * with the given <code>name</code> from the
    * {@link #getServletRequest() request}.
    * 
-   * @param name
-   *        is the name of the requested parameter.
+   * @param name is the name of the requested parameter.
    * @return the parameter as {@link String#trim() trimmed} string. If the
    *         parameter is NOT set, the empty string is returned.
    */
@@ -114,14 +112,10 @@ public class SearchViewContext {
    * with the given <code>name</code> from the
    * {@link #getServletRequest() request}.
    * 
-   * @param name
-   *        is the name of the requested parameter.
-   * @param defaultValue
-   *        is returned if the parameter is NOT set or invalid.
-   * @param minimum
-   *        is the minimum allowed value.
-   * @param maximum
-   *        is the maximum allowed value.
+   * @param name is the name of the requested parameter.
+   * @param defaultValue is returned if the parameter is NOT set or invalid.
+   * @param minimum is the minimum allowed value.
+   * @param maximum is the maximum allowed value.
    * @return the parameter as integer. If the parameter is NOT set, the
    *         <code>defaultValue</code> is returned.
    */
@@ -150,8 +144,7 @@ public class SearchViewContext {
    * This method gets the {@link SearchViewContext} from the given
    * <code>request</code>.
    * 
-   * @param request
-   *        is the request where to get the parameters from.
+   * @param request is the request where to get the parameters from.
    * @return the parameters instance.
    */
   public static SearchViewContext get(ServletRequest request) {
@@ -180,8 +173,7 @@ public class SearchViewContext {
   }
 
   /**
-   * @param configuration
-   *        the configuration to set
+   * @param configuration the configuration to set
    */
   public void setConfiguration(SearchViewConfiguration configuration) {
 
@@ -205,8 +197,7 @@ public class SearchViewContext {
   }
 
   /**
-   * @param newServletRequest
-   *        the servletRequest to set
+   * @param newServletRequest the servletRequest to set
    */
   public void setServletRequest(ServletRequest newServletRequest) {
 
@@ -270,8 +261,7 @@ public class SearchViewContext {
   }
 
   /**
-   * @param newResultPage
-   *        the resultPage to set
+   * @param newResultPage the resultPage to set
    */
   public void setResultPage(SearchResultPage newResultPage) {
 
@@ -289,8 +279,7 @@ public class SearchViewContext {
   /**
    * This method get the display title from the given <code>searchEntry</code>.
    * 
-   * @param searchEntry
-   *        is the entry where to get the title from.
+   * @param searchEntry is the entry where to get the title from.
    * 
    * @return the display title of the {@link #getEntry() entry}.
    */
@@ -317,8 +306,7 @@ public class SearchViewContext {
   }
 
   /**
-   * @param newEntry
-   *        the entry to set
+   * @param newEntry the entry to set
    */
   public void setEntry(SearchEntry newEntry) {
 
@@ -334,8 +322,7 @@ public class SearchViewContext {
   }
 
   /**
-   * @param newException
-   *        the exception to set
+   * @param newException the exception to set
    */
   public void setException(Exception newException) {
 

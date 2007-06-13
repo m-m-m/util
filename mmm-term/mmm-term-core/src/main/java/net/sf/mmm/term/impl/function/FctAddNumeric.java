@@ -39,8 +39,7 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument.
+   * @param argument is the argument.
    * @return the sum of the arguments.
    */
   public static Object add(Object argument) {
@@ -51,10 +50,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Double add(Double argument1, Number argument2) {
@@ -65,10 +62,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Double add(Number argument1, Double argument2) {
@@ -79,10 +74,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Number add(Integer argument1, Integer argument2) {
@@ -99,10 +92,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Long add(Long argument1, Integer argument2) {
@@ -113,10 +104,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Long add(Integer argument1, Long argument2) {
@@ -127,10 +116,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Long add(Long argument1, Long argument2) {
@@ -141,10 +128,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float add(Float argument1, Float argument2) {
@@ -155,10 +140,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float add(Float argument1, Integer argument2) {
@@ -169,10 +152,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float add(Integer argument1, Float argument2) {
@@ -183,10 +164,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float add(Float argument1, Long argument2) {
@@ -197,10 +176,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float add(Long argument1, Float argument2) {
@@ -211,10 +188,8 @@ public class FctAddNumeric extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Number add(Number argument1, Number argument2) {

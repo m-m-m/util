@@ -34,10 +34,9 @@ public class StringParser {
   private int pos;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param string
-   *        is the {@link #getOriginalString() string} to parse.
+   * @param string is the {@link #getOriginalString() string} to parse.
    */
   public StringParser(String string) {
 
@@ -65,8 +64,7 @@ public class StringParser {
   /**
    * @see java.lang.CharSequence#charAt(int)
    * 
-   * @param index
-   *        is the index of the requested character.
+   * @param index is the index of the requested character.
    * @return the character at the given <code>index</code>.
    */
   public char charAt(int index) {
@@ -89,10 +87,8 @@ public class StringParser {
    * @see String#substring(int, int)
    * @see #appendSubstring(StringBuffer, int, int)
    * 
-   * @param start
-   *        the start index, inclusive.
-   * @param end
-   *        the end index, exclusive.
+   * @param start the start index, inclusive.
+   * @param end the end index, exclusive.
    * @return the specified substring.
    */
   public String substring(int start, int end) {
@@ -105,12 +101,9 @@ public class StringParser {
    * {@link #substring(int, int) substring} specified by <code>start</code>
    * and <code>end</code> is replaced by <code>substitute</code>.
    * 
-   * @param substitute
-   *        is the string used as replacement.
-   * @param start
-   *        is the inclusive start index of the substring to replace.
-   * @param end
-   *        is the exclusive end index of the substring to replace.
+   * @param substitute is the string used as replacement.
+   * @param start is the inclusive start index of the substring to replace.
+   * @param end is the exclusive end index of the substring to replace.
    * @return the {@link #getOriginalString() original string} with the specified
    *         substring replaced by <code>substitute</code>.
    */
@@ -131,12 +124,9 @@ public class StringParser {
    * This avoids the overhead of creating a new string and copying the char
    * array.
    * 
-   * @param buffer
-   *        is the buffer where to append the substring to.
-   * @param start
-   *        the start index, inclusive.
-   * @param end
-   *        the end index, exclusive.
+   * @param buffer is the buffer where to append the substring to.
+   * @param start the start index, inclusive.
+   * @param end the end index, exclusive.
    */
   public void appendSubstring(StringBuffer buffer, int start, int end) {
 
@@ -157,9 +147,9 @@ public class StringParser {
   /**
    * This method sets the {@link #getCurrentIndex() current index}.
    * 
-   * @param index
-   *        is the next index position to set. The value has to be greater or
-   *        equal to <code>0</code> and less or equal to {@link #getLength()}.
+   * @param index is the next index position to set. The value has to be greater
+   *        or equal to <code>0</code> and less or equal to
+   *        {@link #getLength()}.
    */
   public void setCurrentIndex(int index) {
 
@@ -261,8 +251,7 @@ public class StringParser {
    * This method skips all {@link #next() next characters} until the given
    * <code>stop</code> character or the end of the string to parse is reached.
    * 
-   * @param stop
-   *        is the character to read until.
+   * @param stop is the character to read until.
    * @return <code>true</code> if the first occurrence of the given
    *         <code>stop</code> character has been passed, <code>false</code>
    *         if there is no such character.
@@ -284,11 +273,9 @@ public class StringParser {
    * will point to the next character after the (first) <code>stop</code>
    * character or to the end of the string if NO such character exists.
    * 
-   * @param stop
-   *        is the character to read until.
-   * @param acceptEof
-   *        if <code>true</code> EOF will be treated as <code>stop</code>,
-   *        too.
+   * @param stop is the character to read until.
+   * @param acceptEof if <code>true</code> EOF will be treated as
+   *        <code>stop</code>, too.
    * @return the string with all read characters excluding the <code>stop</code>
    *         character or <code>null</code> if there was no <code>stop</code>
    *         character and <code>acceptEof</code> is <code>false</code>.
@@ -319,9 +306,9 @@ public class StringParser {
    * characters {@link #hasNext() available} the returned string will be shorter
    * than <code>count</code> and only contain the available characters.
    * 
-   * @param count
-   *        is the number of characters to read. Use {@link Integer#MAX_VALUE}
-   *        to read until the end of of the parsers data.
+   * @param count is the number of characters to read. Use
+   *        {@link Integer#MAX_VALUE} to read until the end of of the parsers
+   *        data.
    * @return a string with the given number of characters or all available
    *         characters if less than <code>count</code>. Will be the empty
    *         string if no character is {@link #hasNext() available} at all.
@@ -353,9 +340,8 @@ public class StringParser {
    * {@link #getOriginalString() parse string} is extremely large.
    * 
    * @param substring
-   * @param ignoreCase -
-   *        if <code>true</code> the case of the characters is ignored when
-   *        compared with characters from <code>substring</code>.
+   * @param ignoreCase - if <code>true</code> the case of the characters is
+   *        ignored when compared with characters from <code>substring</code>.
    * @return <code>true</code> if the given <code>substring</code> occurred
    *         and has been passed and <code>false</code> if the end of the
    *         string has been reached without any occurrence of the given
@@ -381,18 +367,15 @@ public class StringParser {
    * parser instance. This may be expensive when the
    * {@link #getOriginalString() parse string} is extremely large.
    * 
-   * @param substring
-   *        is the substring to search and skip over starting at the
+   * @param substring is the substring to search and skip over starting at the
    *        {@link #getCurrentIndex() current index}.
-   * @param ignoreCase -
-   *        if <code>true</code> the case of the characters is ignored when
-   *        compared with characters from <code>substring</code>.
-   * @param stopFilter
-   *        is the filter used to {@link CharFilter#accept(char) detect} stop
-   *        characters. If such character was detected, the skip is stopped and
-   *        the parser points to the character after the stop character. The
-   *        <code>substring</code> should NOT contain a
-   *        {@link CharFilter#accept(char) stop character}.
+   * @param ignoreCase - if <code>true</code> the case of the characters is
+   *        ignored when compared with characters from <code>substring</code>.
+   * @param stopFilter is the filter used to
+   *        {@link CharFilter#accept(char) detect} stop characters. If such
+   *        character was detected, the skip is stopped and the parser points to
+   *        the character after the stop character. The <code>substring</code>
+   *        should NOT contain a {@link CharFilter#accept(char) stop character}.
    * @return <code>true</code> if the given <code>substring</code> occurred
    *         and has been passed and <code>false</code> if a stop character
    *         has been detected or the end of the string has been reached without
@@ -461,11 +444,9 @@ public class StringParser {
    * Be aware that if already the first character differs, this method will NOT
    * change the parsers state. So take care NOT to produce infinity loops.
    * 
-   * @param exprected
-   *        is the expected string.
-   * @param ignoreCase -
-   *        if <code>true</code> the case of the characters is ignored when
-   *        compared.
+   * @param exprected is the expected string.
+   * @param ignoreCase - if <code>true</code> the case of the characters is
+   *        ignored when compared.
    * @return <code>true</code> if the
    */
   public boolean expect(String exprected, boolean ignoreCase) {
@@ -496,8 +477,7 @@ public class StringParser {
    * If the current character was as expected, the parser points to the next
    * character. Otherwise its position will remain unchanged.
    * 
-   * @param expected
-   *        is the expected character.
+   * @param expected is the expected character.
    * @return <code>true</code> if the current character is the same as
    *         <code>expected</code>, <code>false</code> otherwise.
    */
@@ -518,10 +498,9 @@ public class StringParser {
    * In advance to {@link #skipUntil(char)}, this method will read over the
    * <code>stop</code> character if it is properly escaped.
    * 
-   * @param stop
-   *        is the character to read until.
-   * @param escape
-   *        is the character used to escape the stop character (e.g. '\').
+   * @param stop is the character to read until.
+   * @param escape is the character used to escape the stop character (e.g.
+   *        '\').
    * @return <code>true</code> if the first occurrence of the given
    *         <code>stop</code> character has been passed, <code>false</code>
    *         if there is no such character.
@@ -552,13 +531,11 @@ public class StringParser {
    * will point to the next character after the (first) <code>stop</code>
    * character or to the end of the string if NO such character exists.
    * 
-   * @param stop
-   *        is the character to read until.
-   * @param acceptEof
-   *        if <code>true</code> EOF will be treated as <code>stop</code>,
-   *        too.
-   * @param escape
-   *        is the character used to escape the stop character (e.g. '\').
+   * @param stop is the character to read until.
+   * @param acceptEof if <code>true</code> EOF will be treated as
+   *        <code>stop</code>, too.
+   * @param escape is the character used to escape the stop character (e.g.
+   *        '\').
    * @return the string with all read characters excluding the <code>stop</code>
    *         character or <code>null</code> if there was no <code>stop</code>
    *         character.
@@ -604,8 +581,7 @@ public class StringParser {
    * point to the next character that is different to <code>c</code> or to the
    * end of the string if NO such character exists.
    * 
-   * @param c
-   *        is the character to read over.
+   * @param c is the character to read over.
    * @return the number of characters that have been skipped.
    */
   public int skipWhile(char c) {
@@ -630,9 +606,8 @@ public class StringParser {
    * 
    * @see #skipWhile(char)
    * 
-   * @param filter
-   *        is used to {@link CharFilter#accept(char) decide} which characters
-   *        should be accepted.
+   * @param filter is used to {@link CharFilter#accept(char) decide} which
+   *        characters should be accepted.
    * @return the number of characters {@link CharFilter#accept(char) accepted}
    *         by the given <code>filter</code> that have been skipped.
    */
@@ -659,9 +634,8 @@ public class StringParser {
    * 
    * @see #skipWhile(CharFilter)
    * 
-   * @param filter
-   *        is used to {@link CharFilter#accept(char) decide} which characters
-   *        should be accepted.
+   * @param filter is used to {@link CharFilter#accept(char) decide} which
+   *        characters should be accepted.
    * @return a string with all characters
    *         {@link CharFilter#accept(char) accepted} by the given
    *         <code>filter</code>.

@@ -26,7 +26,7 @@ public class DefaultConfigurationBindingInjector extends AbstractConfigurationBi
    */
   protected ClassLoader getClassLoader(Class<?> type) {
 
-    //return Thread.currentThread().getContextClassLoader();
+    // return Thread.currentThread().getContextClassLoader();
     return type.getClassLoader();
   }
 
@@ -61,11 +61,12 @@ public class DefaultConfigurationBindingInjector extends AbstractConfigurationBi
 
     Class<?> implementation;
     if (type.isInterface() || Modifier.isAbstract(type.getModifiers())) {
-      GenericValue implValue = configuration.getDescendant("@implementation", ConfigurationDocument.NAMESPACE_URI_CONFIGURATION).getValue();
+      GenericValue implValue = configuration.getDescendant("@implementation",
+          ConfigurationDocument.NAMESPACE_URI_CONFIGURATION).getValue();
       if (implValue.isEmpty()) {
         implementation = implValue.getJavaClass();
       } else {
-        implementation = findImplementation(type);        
+        implementation = findImplementation(type);
       }
       if (!type.isAssignableFrom(implementation)) {
         // TODO

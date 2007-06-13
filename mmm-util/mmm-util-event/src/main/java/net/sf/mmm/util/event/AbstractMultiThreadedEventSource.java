@@ -13,10 +13,8 @@ import javax.annotation.Resource;
  * This class extends {@link AbstractSynchronizedEventSource} with the ability
  * to send events asynchronous in separate threads.
  * 
- * @param <E>
- *        is the templated type of the events to send.
- * @param <L>
- *        is the templated type of the listeners that can be
+ * @param <E> is the templated type of the events to send.
+ * @param <L> is the templated type of the listeners that can be
  *        {@link #addListener(EventListener) registered} here and that will
  *        {@link net.sf.mmm.util.event.EventListener#handleEvent(Event) receive}
  *        the sent events.
@@ -30,7 +28,7 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   private Executor executor;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractMultiThreadedEventSource() {
 
@@ -40,8 +38,7 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   /**
    * This method sets the thread-pool to use.
    * 
-   * @param threadPool
-   *        is used to dispatch events in separate threads.
+   * @param threadPool is used to dispatch events in separate threads.
    */
   @Resource
   public void setThreadPool(Executor threadPool) {
@@ -78,10 +75,12 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   protected void fireEvent(final E event, final L listener) {
 
     this.executor.execute(new Runnable() {
+
       public void run() {
+
         listener.handleEvent(event);
       }
     });
   }
-  
+
 }

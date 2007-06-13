@@ -36,14 +36,10 @@ public class Insets {
   /**
    * The constructor.
    * 
-   * @param spaceLeft
-   *        is the spacing on the left in pixels
-   * @param spaceTop
-   *        is the spacing at the top in pixels
-   * @param spaceRight
-   *        is the spacing on the right in pixels
-   * @param spaceBottom
-   *        is the spacing at the bottom in pixels
+   * @param spaceLeft is the spacing on the left in pixels
+   * @param spaceTop is the spacing at the top in pixels
+   * @param spaceRight is the spacing on the right in pixels
+   * @param spaceBottom is the spacing at the bottom in pixels
    */
   public Insets(int spaceLeft, int spaceTop, int spaceRight, int spaceBottom) {
 

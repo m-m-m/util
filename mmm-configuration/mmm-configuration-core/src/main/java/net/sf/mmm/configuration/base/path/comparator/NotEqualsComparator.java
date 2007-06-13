@@ -9,8 +9,8 @@ import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.base.path.comparator.Comparator} interface for the
- * equals function.
+ * {@link net.sf.mmm.configuration.base.path.comparator.Comparator} interface
+ * for the equals function.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,7 +28,7 @@ public class NotEqualsComparator implements Comparator {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public boolean accept(GenericValue value, String string, Pattern pattern) {
 

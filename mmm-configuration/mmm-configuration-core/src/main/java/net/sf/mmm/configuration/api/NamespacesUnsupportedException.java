@@ -12,8 +12,7 @@ import net.sf.mmm.configuration.NlsBundleConfigCore;
  * {@link net.sf.mmm.configuration.api.Configuration#getNamespaceUri() namespaces}
  * and a namespace-aware method was called.
  * 
- * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String,
- *      String)
+ * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String, String)
  * @see net.sf.mmm.configuration.api.Configuration#getDescendants(String,
  *      String)
  * 
@@ -27,10 +26,9 @@ public class NamespacesUnsupportedException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param node
-   *        is the node that does not support namespaces.
-   * @param implementation
-   *        is the specific implementation that does not support namespaces.
+   * @param node is the node that does not support namespaces.
+   * @param implementation is the specific implementation that does not support
+   *        namespaces.
    */
   public NamespacesUnsupportedException(Configuration node, Class<?> implementation) {
 
@@ -40,14 +38,13 @@ public class NamespacesUnsupportedException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param node
-   *        is the node that does not support namespaces.
-   * @param implementation
-   *        is the specific implementation that does not support namespaces.
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param node is the node that does not support namespaces.
+   * @param implementation is the specific implementation that does not support
+   *        namespaces.
+   * @param nested is the throwable that caused this exception.
    */
-  public NamespacesUnsupportedException(Configuration node, Class<?> implementation, Throwable nested) {
+  public NamespacesUnsupportedException(Configuration node, Class<?> implementation,
+      Throwable nested) {
 
     super(nested, NlsBundleConfigCore.ERR_NAMESPACES_UNSUPPORTED, node, implementation);
   }

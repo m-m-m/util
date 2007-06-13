@@ -14,8 +14,7 @@ public interface UIWriteText extends UIReadText {
   /**
    * This method sets the text of this object.
    * 
-   * @param text
-   *        is the new text for this object.
+   * @param text is the new text for this object.
    */
   void setText(String text);
 

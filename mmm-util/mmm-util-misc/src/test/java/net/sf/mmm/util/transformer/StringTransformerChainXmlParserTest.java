@@ -13,10 +13,9 @@ import org.w3c.dom.Element;
 
 import junit.framework.TestCase;
 
-
 /**
  * This is the {@link TestCase} for {@link StringTransformerChainXmlParser}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -26,10 +25,12 @@ public class StringTransformerChainXmlParserTest extends TestCase {
   public void test() throws Exception {
 
     StringTransformerChainXmlParser parser = new StringTransformerChainXmlParser();
-    String resourceName = StringTransformerChainXmlParserTest.class.getName().replace('.', '/') + ".xml";
+    String resourceName = StringTransformerChainXmlParserTest.class.getName().replace('.', '/')
+        + ".xml";
     InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
         resourceName);
-    Element xmlElement = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inStream).getDocumentElement();
+    Element xmlElement = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inStream)
+        .getDocumentElement();
     Map<String, StringTransformerChain> chainMap = parser.parseChains(xmlElement);
     StringTransformerChain defaultChain = chainMap.get("default-transformer");
     assertNotNull(defaultChain);

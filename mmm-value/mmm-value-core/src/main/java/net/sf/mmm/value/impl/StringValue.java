@@ -7,8 +7,8 @@ import net.sf.mmm.value.base.AbstractStringValue;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.value.api.MutableGenericValue} interface that uses a
- * string as internal value.
+ * {@link net.sf.mmm.value.api.MutableGenericValue} interface that uses a string
+ * as internal value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -34,8 +34,7 @@ public class StringValue extends AbstractStringValue {
   /**
    * The constructor.
    * 
-   * @param initialValue
-   *        is the initial value.
+   * @param initialValue is the initial value.
    */
   public StringValue(String initialValue) {
 
@@ -47,8 +46,7 @@ public class StringValue extends AbstractStringValue {
   /**
    * This method sets the {@link #isEditable() "editable flag"}.
    * 
-   * @param editableFlag
-   *        is the new status of the editable flag.
+   * @param editableFlag is the new status of the editable flag.
    */
   public void setEditable(boolean editableFlag) {
 

@@ -16,11 +16,10 @@ import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITree} interface using SWT as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UITree} interface using SWT as the UI
+ * toolkit.
  * 
- * @param <N>
- *        is the templated type of the tree-nodes that can be
+ * @param <N> is the templated type of the tree-nodes that can be
  *        {@link #getSelection() selected} with this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -36,12 +35,10 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple, else ony one.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param multiSelection - if <code>true</code> the user can select
+   *        multiple, else ony one.
    */
   public UITreeImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean multiSelection) {
 

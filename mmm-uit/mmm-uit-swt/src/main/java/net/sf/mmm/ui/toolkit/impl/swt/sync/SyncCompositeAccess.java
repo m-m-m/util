@@ -21,11 +21,9 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the menu.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
    */
   public SyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -35,13 +33,11 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the composite.
-   * @param swtComposite
-   *        is the composite to access.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        composite.
+   * @param swtComposite is the composite to access.
    */
   public SyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle, Composite swtComposite) {
 

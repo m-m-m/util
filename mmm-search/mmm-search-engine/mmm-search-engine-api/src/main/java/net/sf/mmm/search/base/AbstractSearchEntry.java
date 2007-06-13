@@ -14,7 +14,7 @@ import net.sf.mmm.search.api.SearchEntry;
 public abstract class AbstractSearchEntry implements SearchEntry {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractSearchEntry() {
 
@@ -65,18 +65,18 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    * {@inheritDoc}
    */
   public String getAuthor() {
-  
+
     return getProperty(PROPERTY_AUTHOR);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public String getSource() {
-  
+
     return getProperty(PROPERTY_SOURCE);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -93,7 +93,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
     }
     return size;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -112,5 +112,5 @@ public abstract class AbstractSearchEntry implements SearchEntry {
     }
     return id;
   }
-  
+
 }

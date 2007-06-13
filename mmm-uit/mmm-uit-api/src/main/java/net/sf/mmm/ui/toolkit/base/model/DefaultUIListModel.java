@@ -14,8 +14,7 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
  * This is the default implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.model.UIMutableListModel} interface.
  * 
- * @param <E>
- *        is the templated type of the elements in the list.
+ * @param <E> is the templated type of the elements in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

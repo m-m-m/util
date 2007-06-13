@@ -13,8 +13,7 @@ import net.sf.mmm.framework.api.IocContainer;
  * This class represents a node in the dependency tree of the
  * {@link #getInstanceContainer() component instances}.
  * 
- * @param <S>
- *        is the
+ * @param <S> is the
  *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the {@link #getInstanceContainer() component}.
  * 
@@ -55,8 +54,8 @@ public class DependencyNode<S> {
   /**
    * The constructor.
    * 
-   * @param iocContainer
-   *        is the {@link IocContainer IoC-container} owning this node.
+   * @param iocContainer is the {@link IocContainer IoC-container} owning this
+   *        node.
    */
   public DependencyNode(AbstractIocContainer iocContainer) {
 
@@ -95,8 +94,7 @@ public class DependencyNode<S> {
   /**
    * This method sets the {@link #getProvider() provider}.
    * 
-   * @param newProvider
-   *        is the provider to set.
+   * @param newProvider is the provider to set.
    */
   public void setProvider(ComponentProvider<S> newProvider) {
 
@@ -132,8 +130,7 @@ public class DependencyNode<S> {
   /**
    * This method sets the {@link #getInstanceId() instance-Id}.
    * 
-   * @param newInstanceId
-   *        is the instanceId to set.
+   * @param newInstanceId is the instanceId to set.
    */
   public void setInstanceId(String newInstanceId) {
 
@@ -154,8 +151,7 @@ public class DependencyNode<S> {
   /**
    * This method sets the {@link #getInstanceContainer() instanceContainer}.
    * 
-   * @param componentInstanceContainer
-   *        is the container with the component
+   * @param componentInstanceContainer is the container with the component
    *        {@link net.sf.mmm.framework.api.ComponentInstanceContainer#getInstance() instance}.
    */
   public void setInstanceContainer(ComponentInstanceContainer<S> componentInstanceContainer) {
@@ -188,9 +184,8 @@ public class DependencyNode<S> {
   /**
    * This method sets the {@link #getSource() source}.
    * 
-   * @param sourceNode
-   *        is the {@link #getSource() source} or <code>null</code> if this is
-   *        the top-level {@link IocContainer container}.
+   * @param sourceNode is the {@link #getSource() source} or <code>null</code>
+   *        if this is the top-level {@link IocContainer container}.
    */
   public void setSource(DependencyNode<?> sourceNode) {
 
@@ -217,8 +212,7 @@ public class DependencyNode<S> {
   /**
    * This method sets the target.
    * 
-   * @param targetNode
-   *        is the target to set.
+   * @param targetNode is the target to set.
    */
   public void setTarget(DependencyNode<?> targetNode) {
 
@@ -267,8 +261,8 @@ public class DependencyNode<S> {
    * {@link ComponentInstanceContainer#getInstance() instance} as the given
    * <code>componentInstance</code>.
    * 
-   * @param componentInstance
-   *        is the component instance of the requested dependency-node.
+   * @param componentInstance is the component instance of the requested
+   *        dependency-node.
    * @return the dependency-node in the sibling list containing the
    *         <code>componentInstance</code> or <code>null</code> if no such
    *         node could be found.
@@ -292,8 +286,7 @@ public class DependencyNode<S> {
    * This method inserts the give <code>sibling</code> to the end of the
    * sibling list.
    * 
-   * @param sibling
-   *        is the sibling to add.
+   * @param sibling is the sibling to add.
    */
   public void insertSibling(DependencyNode<?> sibling) {
 

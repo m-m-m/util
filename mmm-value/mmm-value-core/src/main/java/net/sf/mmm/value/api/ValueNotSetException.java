@@ -20,8 +20,8 @@ public class ValueNotSetException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param genericValue
-   *        is the required value that is {@link GenericValue#isEmpty() empty}.
+   * @param genericValue is the required value that is
+   *        {@link GenericValue#isEmpty() empty}.
    */
   public ValueNotSetException(GenericValue genericValue) {
 
@@ -31,8 +31,7 @@ public class ValueNotSetException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueName
-   *        is the name of the required value that is not set.
+   * @param valueName is the name of the required value that is not set.
    */
   public ValueNotSetException(String valueName) {
 

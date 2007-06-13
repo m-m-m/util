@@ -30,14 +30,10 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param swtMenu
-   *        is the SWT menu to wrap.
-   * @param text
-   *        is the {@link MenuItem#setText(java.lang.String) text} of the
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param swtMenu is the SWT menu to wrap.
+   * @param text is the {@link MenuItem#setText(java.lang.String) text} of the
    *        menu.
    */
   public UIMenuImpl(UIFactorySwt uiFactory, UINode parentObject, Menu swtMenu, String text) {

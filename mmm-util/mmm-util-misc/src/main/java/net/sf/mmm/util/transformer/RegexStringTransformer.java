@@ -28,14 +28,11 @@ public class RegexStringTransformer implements Transformer<String> {
   /**
    * The constructor.
    * 
-   * @param pattern
-   *        is the pattern used for conversion.
-   * @param replacement
-   *        is the replacement to fill in the string to convert.
-   * @param replaceAll -
-   *        if <code>true</code> {@link Matcher#replaceAll(String)} will be
-   *        used, else if <code>false</code>
-   *        {@link Matcher#replaceFirst(String)}.
+   * @param pattern is the pattern used for conversion.
+   * @param replacement is the replacement to fill in the string to convert.
+   * @param replaceAll - if <code>true</code>
+   *        {@link Matcher#replaceAll(String)} will be used, else if
+   *        <code>false</code> {@link Matcher#replaceFirst(String)}.
    */
   public RegexStringTransformer(Pattern pattern, String replacement, boolean replaceAll) {
 

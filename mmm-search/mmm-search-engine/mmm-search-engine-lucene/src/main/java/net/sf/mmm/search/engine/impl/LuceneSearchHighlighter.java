@@ -32,11 +32,10 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
   private final Analyzer analyzer;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    * @param searchAnalyzer
-   * @param formatter
-   *        is the formatter used to highlight terms.
+   * @param formatter is the formatter used to highlight terms.
    * @param searchQuery
    */
   public LuceneSearchHighlighter(Analyzer searchAnalyzer, Formatter formatter, Query searchQuery) {

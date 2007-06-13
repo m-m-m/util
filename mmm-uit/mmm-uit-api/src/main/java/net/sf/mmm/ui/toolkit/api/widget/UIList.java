@@ -11,9 +11,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
  * The list shows several items in rows. If the number of items is too large to
  * fit, a scrollbar is displayed.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

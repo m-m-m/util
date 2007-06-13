@@ -31,7 +31,7 @@ public class SsdpSenderImpl implements SsdpSender {
   private int port;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    * @see #initialize()
    * @see #dispose()
@@ -51,8 +51,7 @@ public class SsdpSenderImpl implements SsdpSender {
    * 
    * @see SsdpRequest#MULTICAST_ADDRESS
    * 
-   * @param multicastAddress
-   *        the address to set.
+   * @param multicastAddress the address to set.
    */
   public void setAddress(InetAddress multicastAddress) {
 
@@ -66,8 +65,7 @@ public class SsdpSenderImpl implements SsdpSender {
    * 
    * @see SsdpRequest#MULTICAST_PORT
    * 
-   * @param multicastPort
-   *        the port to set.
+   * @param multicastPort the port to set.
    */
   public void setPort(int multicastPort) {
 
@@ -77,8 +75,7 @@ public class SsdpSenderImpl implements SsdpSender {
   /**
    * This method initializes this object.
    * 
-   * @throws IOException
-   *         if the operation failed with an I/O problem.
+   * @throws IOException if the operation failed with an I/O problem.
    */
   @PostConstruct
   public void initialize() throws IOException {
@@ -87,7 +84,8 @@ public class SsdpSenderImpl implements SsdpSender {
       this.address = InetAddress.getByName(SsdpRequest.MULTICAST_ADDRESS);
     }
     if (this.socket == null) {
-      //this.socket = new MulticastSocket(new InetSocketAddress(this.address, this.port));
+      // this.socket = new MulticastSocket(new InetSocketAddress(this.address,
+      // this.port));
       this.socket = new MulticastSocket();
       // default TTL
       this.socket.setTimeToLive(4);

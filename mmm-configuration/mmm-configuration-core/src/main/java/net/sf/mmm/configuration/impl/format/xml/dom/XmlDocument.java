@@ -34,11 +34,9 @@ public class XmlDocument extends AbstractConfigurationDocument {
   /**
    * The constructor.
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param context
-   *        is the initial {@link #getContext() context} to use.
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param context is the initial {@link #getContext() context} to use.
    */
   public XmlDocument(ConfigurationAccess configurationAccess, MutableContext context) {
 
@@ -48,11 +46,10 @@ public class XmlDocument extends AbstractConfigurationDocument {
   /**
    * The constructor.
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param parentConfiguration
-   *        is the {@link #getParentConfiguration() parent-configuration}.
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param parentConfiguration is the
+   *        {@link #getParentConfiguration() parent-configuration}.
    */
   public XmlDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration) {
@@ -81,10 +78,8 @@ public class XmlDocument extends AbstractConfigurationDocument {
    * This method creates a qualified name build of <code>localName</code> and
    * <code>prefix</code>.
    * 
-   * @param localName
-   *        is the local name.
-   * @param prefix
-   *        is the namespace prefix. It may be <code>null</code> for NO
+   * @param localName is the local name.
+   * @param prefix is the namespace prefix. It may be <code>null</code> for NO
    *        namespace.
    * @return the qualified name.
    */

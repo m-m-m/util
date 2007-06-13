@@ -8,8 +8,8 @@ import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the exception thrown if a value should be
- * {@link net.sf.mmm.value.api.ValueService#getManager(String) registered}
- * with a {@link net.sf.mmm.value.api.ValueManager#getName() name} or
+ * {@link net.sf.mmm.value.api.ValueService#getManager(String) registered} with
+ * a {@link net.sf.mmm.value.api.ValueManager#getName() name} or
  * {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of that is
  * already in use.
  * 
@@ -23,9 +23,9 @@ public class ValueAlreadyRegisteredException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueName
-   *        is the {@link net.sf.mmm.value.api.ValueManager#getName() name}
-   *        of the value that is already
+   * @param valueName is the
+   *        {@link net.sf.mmm.value.api.ValueManager#getName() name} of the
+   *        value that is already
    *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManager) registered}.
    */
   public ValueAlreadyRegisteredException(String valueName) {
@@ -36,8 +36,7 @@ public class ValueAlreadyRegisteredException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueType
-   *        is the
+   * @param valueType is the
    *        {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of
    *        the value that is already
    *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManager) registered}.
@@ -50,8 +49,8 @@ public class ValueAlreadyRegisteredException extends ValueException {
   /**
    * This method gets the
    * {@link net.sf.mmm.value.api.ValueManager#getName() name} or
-   * {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of the
-   * value that was requested but NOT registered.
+   * {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of the value
+   * that was requested but NOT registered.
    * 
    * @return the value name or {@link Class#getName() type}.
    */

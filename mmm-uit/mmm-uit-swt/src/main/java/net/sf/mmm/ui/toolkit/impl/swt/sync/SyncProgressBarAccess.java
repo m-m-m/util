@@ -51,11 +51,10 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the progress-bar.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        progress-bar.
    */
   public SyncProgressBarAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -122,8 +121,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.ProgressBar#setSelection(int) selection} of
    * the progress-bar.
    * 
-   * @param selectionValue
-   *        is the selection to set.
+   * @param selectionValue is the selection to set.
    */
   public void setSelection(int selectionValue) {
 
@@ -137,8 +135,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.ProgressBar#setMaximum(int) maximum} of the
    * progress-bar.
    * 
-   * @param newMaximum
-   *        is the maximum to set.
+   * @param newMaximum is the maximum to set.
    */
   public void setMaximum(int newMaximum) {
 

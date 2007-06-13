@@ -230,7 +230,7 @@ public class HttpResponse extends HttpMessage {
   private String reasonPhrase;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public HttpResponse() {
 
@@ -254,8 +254,7 @@ public class HttpResponse extends HttpMessage {
    * 
    * @see #getStatusCode()
    * 
-   * @param httpStatusCode
-   *        the HTTP statusCode to set.
+   * @param httpStatusCode the HTTP statusCode to set.
    */
   public void setStatusCode(int httpStatusCode) {
 
@@ -278,8 +277,7 @@ public class HttpResponse extends HttpMessage {
    * 
    * @see #getReasonPhrase()
    * 
-   * @param reason
-   *        the reason-phrase to set.
+   * @param reason the reason-phrase to set.
    */
   public void setReasonPhrase(String reason) {
 

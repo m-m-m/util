@@ -17,8 +17,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
- * This class is the implementation of the UIDialog interface using Swing as
- * the UI toolkit.
+ * This class is the implementation of the UIDialog interface using Swing as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,12 +30,9 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param jDialog
-   *        is the swing dialog to wrap.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param jDialog is the swing dialog to wrap.
    */
   public UIDialogImpl(UIFactorySwing uiFactory, UINode parentObject, JDialog jDialog) {
 
@@ -105,5 +102,5 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
     this.dialog.setContentPane(jComponent);
     registerComposite(newComposite);
   }
-  
+
 }

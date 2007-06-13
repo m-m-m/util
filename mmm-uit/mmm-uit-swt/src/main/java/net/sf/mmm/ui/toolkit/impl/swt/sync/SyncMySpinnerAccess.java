@@ -54,13 +54,11 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the composite.
-   * @param listModel
-   *        is the list model containing the elements of the spinner.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        composite.
+   * @param listModel is the list model containing the elements of the spinner.
    */
   public SyncMySpinnerAccess(UIFactorySwt uiFactory, int swtStyle, UIListModel listModel) {
 
@@ -113,8 +111,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   /**
    * This method sets the model of the spinner.
    * 
-   * @param listModel
-   *        is the model to set.
+   * @param listModel is the model to set.
    */
   public void setModel(UIListModel listModel) {
 
@@ -127,8 +124,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    * This method sets the {@link MySpinner#setEditable(boolean) "editable flag"}
    * of the spinner.
    * 
-   * @param editableFlag
-   *        is the new status of the editable-flag.
+   * @param editableFlag is the new status of the editable-flag.
    */
   public void setEditable(boolean editableFlag) {
 
@@ -165,8 +161,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    * This method sets the
    * {@link MySpinner#setSelectedIndex(int) selection-index} of the spinner.
    * 
-   * @param selectedIndex
-   *        is the index of the item to select.
+   * @param selectedIndex is the index of the item to select.
    */
   public void setSelectedIndex(int selectedIndex) {
 

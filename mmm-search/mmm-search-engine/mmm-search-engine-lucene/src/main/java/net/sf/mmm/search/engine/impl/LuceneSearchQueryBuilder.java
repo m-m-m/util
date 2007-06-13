@@ -48,13 +48,11 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   private final boolean ignoreLeadingWildcard;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param luceneAnalyzer
-   *        is the analyzer to use.
-   * @param ignoreLeadingWildcards -
-   *        if <code>true</code>, leading wildcards ('*' or '?') are ignored,
-   *        <code>false</code> otherwise.
+   * @param luceneAnalyzer is the analyzer to use.
+   * @param ignoreLeadingWildcards - if <code>true</code>, leading wildcards
+   *        ('*' or '?') are ignored, <code>false</code> otherwise.
    */
   public LuceneSearchQueryBuilder(Analyzer luceneAnalyzer, boolean ignoreLeadingWildcards) {
 

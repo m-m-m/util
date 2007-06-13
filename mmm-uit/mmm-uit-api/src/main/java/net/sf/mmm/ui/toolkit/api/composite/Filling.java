@@ -6,38 +6,35 @@ package net.sf.mmm.ui.toolkit.api.composite;
 /**
  * This enum contains the available values for the filling of a
  * {@link net.sf.mmm.ui.toolkit.api.UIComponent component}. The filling
- * determines if the {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}
- * of the {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be
- * expanded horizontally and/or vertically if there is more space available.
+ * determines if the {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size} of
+ * the {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be expanded
+ * horizontally and/or vertically if there is more space available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public enum Filling {
 
   /**
-   * The {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will keep
-   * its {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}.
+   * The {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will keep its
+   * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}.
    */
   NONE,
 
   /**
-   * The width of the
-   * {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be
-   * expanded while the height is kept.
+   * The width of the {@link net.sf.mmm.ui.toolkit.api.UIComponent component}
+   * will be expanded while the height is kept.
    */
   HORIZONTAL,
 
   /**
-   * The height of the
-   * {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be
-   * expanded while the width is kept.
+   * The height of the {@link net.sf.mmm.ui.toolkit.api.UIComponent component}
+   * will be expanded while the width is kept.
    */
   VERTICAL,
 
   /**
    * Both width and height of the
-   * {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be
-   * expanded.
+   * {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be expanded.
    */
   BOTH;
 
@@ -64,10 +61,9 @@ public enum Filling {
   /**
    * This method extracts the horizontal or vertical part of this filling.
    * 
-   * @param orientation
-   *        is the orientation of the requested part.
-   * @return {@link #NONE} if this filling is {@link #NONE} or orthogonal to
-   *         the given orientation. The filling parallel to the orientation,
+   * @param orientation is the orientation of the requested part.
+   * @return {@link #NONE} if this filling is {@link #NONE} or orthogonal to the
+   *         given orientation. The filling parallel to the orientation,
    *         otherwise.
    */
   public Filling getPart(Orientation orientation) {

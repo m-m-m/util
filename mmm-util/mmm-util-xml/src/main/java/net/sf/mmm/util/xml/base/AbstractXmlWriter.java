@@ -26,11 +26,9 @@ public abstract class AbstractXmlWriter implements XmlWriter {
   /**
    * This method creates a qualified name for XML tags or attributes.
    * 
-   * @param namespacePrefix
-   *        is the prefix used to reference a namespace or <code>null</code>
-   *        if the default namespace is used.
-   * @param localName
-   *        is the local part of the qualified name.
+   * @param namespacePrefix is the prefix used to reference a namespace or
+   *        <code>null</code> if the default namespace is used.
+   * @param localName is the local part of the qualified name.
    * @return the qualified name based on the given prefix and local name.
    */
   protected String createQualifiedName(String namespacePrefix, String localName) {

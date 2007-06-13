@@ -20,8 +20,7 @@ public class ConfigurationNotEditableException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param node
-   *        is the node that is NOT
+   * @param node is the node that is NOT
    *        {@link MutableConfiguration#isEditable() editable} .
    */
   public ConfigurationNotEditableException(MutableConfiguration node) {
@@ -32,11 +31,9 @@ public class ConfigurationNotEditableException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param node
-   *        is the node that is NOT
+   * @param node is the node that is NOT
    *        {@link MutableConfiguration#isEditable() editable} .
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param nested is the throwable that caused this exception.
    */
   public ConfigurationNotEditableException(MutableConfiguration node, Throwable nested) {
 

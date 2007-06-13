@@ -43,8 +43,7 @@ public class FctAbsolute {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the mathematically absolute value.
    */
   public static Integer abs(Integer argument) {
@@ -55,8 +54,7 @@ public class FctAbsolute {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the mathematically absolute value.
    */
   public static Long abs(Long argument) {
@@ -67,8 +65,7 @@ public class FctAbsolute {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the mathematically absolute value.
    */
   public static Float abs(Float argument) {
@@ -79,8 +76,7 @@ public class FctAbsolute {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the mathematically absolute value.
    */
   public static Double abs(Double argument) {

@@ -13,8 +13,7 @@ import net.sf.mmm.framework.api.ComponentProvider;
  * This is the abstract implementation of a {@link ComponentProvider} for
  * singleton components.
  * 
- * @param <S>
- *        is the
+ * @param <S> is the
  *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the provided component.
  * 
@@ -108,10 +107,10 @@ public abstract class AbstractStaticSingletonComponentProvider<S> extends
   }
 
   /**
-   * {@inheritDoc}
-   * ATTENTION: this implementation does nothing but setting the singleton
-   * {@link #getInstanceContainer() instance-container} to <code>null</code>.
-   * Please override if your component has to be shut-down.
+   * {@inheritDoc} ATTENTION: this implementation does nothing but setting the
+   * singleton {@link #getInstanceContainer() instance-container} to
+   * <code>null</code>. Please override if your component has to be
+   * shut-down.
    */
   public void dispose(ComponentInstanceContainer<S> instanceContainer,
       ComponentManager componentManager) {

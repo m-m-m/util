@@ -113,13 +113,11 @@ public interface ContentObject extends XmlSerializable {
    * This method gets the meta-data of this object.
    * 
    * @return the meta-data.
-   * @throws PermissionDeniedException
-   *         if you (the current user) does not have permission to perform the
-   *         operation.
+   * @throws PermissionDeniedException if you (the current user) does not have
+   *         permission to perform the operation.
    */
   Map<String, String> getMetaData();
-  
-  
+
   /**
    * This method gets the value of the specified
    * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic
@@ -128,19 +126,16 @@ public interface ContentObject extends XmlSerializable {
    * {@link ContentObject#getId()}. Additionally all fields that are defined in
    * sub-types are accessible.
    * 
-   * @param fieldName
-   *        is the {@link ContentObject#getName() name} of the
+   * @param fieldName is the {@link ContentObject#getName() name} of the
    *        {@link net.sf.mmm.content.model.api.ContentField field} to get.
    * @return the value of the specified field or <code>null</code> if not set.
-   * @throws FieldNotExistsException
-   *         if the objects {@link #getContentClass() content-class} does not
-   *         have a {@link net.sf.mmm.content.model.api.ContentField field} with
-   *         the given {@link ContentObject#getName() name}.
-   * @throws PermissionDeniedException
-   *         if you (the current user) does not have permission to perform the
-   *         operation.
-   * @throws ContentException
-   *         TODO: if the specified field is
+   * @throws FieldNotExistsException if the objects
+   *         {@link #getContentClass() content-class} does not have a
+   *         {@link net.sf.mmm.content.model.api.ContentField field} with the
+   *         given {@link ContentObject#getName() name}.
+   * @throws PermissionDeniedException if you (the current user) does not have
+   *         permission to perform the operation.
+   * @throws ContentException TODO: if the specified field is
    *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
    *         but an error occurred calculating its value.
    */
@@ -158,25 +153,22 @@ public interface ContentObject extends XmlSerializable {
    * 
    * @see #getFieldValue(String)
    * 
-   * @param fieldName
-   *        is the {@link ContentObject#getName() name} of the
+   * @param fieldName is the {@link ContentObject#getName() name} of the
    *        {@link net.sf.mmm.content.model.api.ContentField field} to set. The
    *        field must be defined in the object's
    *        {@link #getContentClass() content-class}.
-   * @param value
-   *        is the new value for the field. It must be an instance of the
+   * @param value is the new value for the field. It must be an instance of the
    *        {@link net.sf.mmm.content.model.api.ContentField#getFieldType() type}
    *        declared by the
    *        {@link net.sf.mmm.content.model.api.ContentField field}.
-   * @throws FieldNotExistsException
-   *         if the objects {@link #getContentClass() content-class} does not
-   *         have a {@link net.sf.mmm.content.model.api.ContentField field} with
-   *         the given {@link ContentObject#getName() name}.
-   * @throws PermissionDeniedException
-   *         if you (the current user) does not have permission to perform the
-   *         operation.
-   * @throws ContentException
-   *         TODO: if the field has an incompatible type for the given value.
+   * @throws FieldNotExistsException if the objects
+   *         {@link #getContentClass() content-class} does not have a
+   *         {@link net.sf.mmm.content.model.api.ContentField field} with the
+   *         given {@link ContentObject#getName() name}.
+   * @throws PermissionDeniedException if you (the current user) does not have
+   *         permission to perform the operation.
+   * @throws ContentException TODO: if the field has an incompatible type for
+   *         the given value.
    */
   void setFieldValue(String fieldName, Object value) throws FieldNotExistsException,
       PermissionDeniedException, ContentException;
@@ -184,8 +176,7 @@ public interface ContentObject extends XmlSerializable {
   /**
    * This method test if the given action is allowed for the current user.
    * 
-   * @param action
-   *        is the action to be checked.
+   * @param action is the action to be checked.
    * @return <code>true</code> if the current user is allowed to perform the
    *         specified action of this object.
    */
@@ -198,9 +189,8 @@ public interface ContentObject extends XmlSerializable {
    * the objects {@link #getContentClass() content-class}.
    * 
    * @return the result of the validation.
-   * @throws PermissionDeniedException
-   *         if you (the current user) does not have permission to perform the
-   *         operation.
+   * @throws PermissionDeniedException if you (the current user) does not have
+   *         permission to perform the operation.
    */
   // ValidationResultIF validate() throws PermissionDeniedException;
 }

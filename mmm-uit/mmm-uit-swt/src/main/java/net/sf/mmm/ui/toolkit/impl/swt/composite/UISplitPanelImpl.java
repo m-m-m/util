@@ -17,8 +17,8 @@ import org.eclipse.swt.layout.FillLayout;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISplitPanel} interface using
- * SWT as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UISplitPanel} interface using SWT
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -42,17 +42,15 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param borderTitle
-   *        is the title of the border or <code>null</code> for NO border.
-   * @param orientation
-   *        is the orientation of the two child-components in this split-pane.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param borderTitle is the title of the border or <code>null</code> for NO
+   *        border.
+   * @param orientation is the orientation of the two child-components in this
+   *        split-pane.
    */
-  public UISplitPanelImpl(UIFactorySwt uiFactory, AbstractUIComponent parentObject, String borderTitle,
-      Orientation orientation) {
+  public UISplitPanelImpl(UIFactorySwt uiFactory, AbstractUIComponent parentObject,
+      String borderTitle, Orientation orientation) {
 
     super(uiFactory, parentObject, borderTitle);
     int style;
@@ -71,8 +69,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
     this.syncBottomRight.setLayout(new FillLayout());
     this.syncBottomRight.setParentAccess(this.syncAccess);
     /*
-     * final int sashStyle = style; getFactory().invokeSynchron(new
-     * Runnable() {
+     * final int sashStyle = style; getFactory().invokeSynchron(new Runnable() {
      * 
      * public void run() {
      * 

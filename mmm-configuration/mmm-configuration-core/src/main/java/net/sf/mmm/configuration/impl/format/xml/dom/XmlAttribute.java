@@ -15,8 +15,8 @@ import net.sf.mmm.configuration.base.AbstractConfigurationAttribute;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to
- * adapt an {@link org.w3c.dom.Attr xml-attribute}.
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to adapt
+ * an {@link org.w3c.dom.Attr xml-attribute}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,14 +37,11 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   /**
    * The constructor for an existing DOM attribute.
    * 
-   * @param ownerDocument
-   *        is the
+   * @param ownerDocument is the
    *        {@link net.sf.mmm.configuration.api.ConfigurationDocument document}
    *        this configuration belongs to.
-   * @param parentConfiguration
-   *        is the parent configuration.
-   * @param xmlAttribute
-   *        is the native XML attribute to adapt.
+   * @param parentConfiguration is the parent configuration.
+   * @param xmlAttribute is the native XML attribute to adapt.
    */
   public XmlAttribute(XmlDocument ownerDocument, AbstractConfiguration parentConfiguration,
       Attr xmlAttribute) {
@@ -59,18 +56,13 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   /**
    * The constructor for an attribute currently NOT existing in DOM.
    * 
-   * @param ownerDocument
-   *        is the
+   * @param ownerDocument is the
    *        {@link net.sf.mmm.configuration.api.ConfigurationDocument document}
    *        this configuration belongs to.
-   * @param parentConfiguration
-   *        is the parent configuration.
-   * @param parentElement
-   *        is the XML owner-element of the attribute to create.
-   * @param name
-   *        is the name of the attribute.
-   * @param namespaceUri
-   *        is the namespaceUri.
+   * @param parentConfiguration is the parent configuration.
+   * @param parentElement is the XML owner-element of the attribute to create.
+   * @param name is the name of the attribute.
+   * @param namespaceUri is the namespaceUri.
    */
   public XmlAttribute(XmlDocument ownerDocument, AbstractConfiguration parentConfiguration,
       Element parentElement, String name, String namespaceUri) {
@@ -99,7 +91,7 @@ public class XmlAttribute extends AbstractConfigurationAttribute {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public String getName() {
 

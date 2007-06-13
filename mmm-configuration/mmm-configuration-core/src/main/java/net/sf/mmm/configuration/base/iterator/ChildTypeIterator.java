@@ -24,11 +24,9 @@ public class ChildTypeIterator extends SiblingIterator {
   /**
    * The constructor.
    * 
-   * @param childIterator
-   *        is the iterator of all children to iterate.
-   * @param childType
-   *        is the type of the children to iterate or <code>null</code> to
-   *        iterate all children.
+   * @param childIterator is the iterator of all children to iterate.
+   * @param childType is the type of the children to iterate or
+   *        <code>null</code> to iterate all children.
    */
   public ChildTypeIterator(Iterator<AbstractConfiguration> childIterator, Type childType) {
 
@@ -52,7 +50,7 @@ public class ChildTypeIterator extends SiblingIterator {
           setNext(configuration);
           return true;
         }
-      }      
+      }
     }
     return hasNext;
   }

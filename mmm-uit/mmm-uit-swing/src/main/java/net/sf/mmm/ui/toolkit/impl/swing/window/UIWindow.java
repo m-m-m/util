@@ -28,13 +28,12 @@ public abstract class UIWindow extends UIWindowImpl {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parentObject
-   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
-   *        that created this object. It may be <code>null</code>.
+   * @param parentObject is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        created this object. It may be <code>null</code>.
    */
   public UIWindow(AbstractUIFactory uiFactory, UINode parentObject) {
 

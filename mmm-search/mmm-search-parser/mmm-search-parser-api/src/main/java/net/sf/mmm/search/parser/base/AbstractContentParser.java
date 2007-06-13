@@ -70,20 +70,15 @@ public abstract class AbstractContentParser implements ContentParser, LimitBuffe
   /**
    * @see ContentParser#parse(InputStream, long)
    * 
-   * @param inputStream
-   *        is the fresh input stream of the content to parse.
-   * @param filesize
-   *        is the size (content-length) of the content to parse in bytes or
-   *        <code>0</code> if NOT available (unknown). If available, the
-   *        parser may use this value for optimized allocations.
-   * @param encoding
-   *        is the explicit encoding to use for text files or <code>null</code>
-   *        to use smart guess.
-   * @param properties
-   *        are the properties where the extracted (meta-)data from the parsed
-   *        <code>inputStream</code> will be added to.
-   * @throws Exception
-   *         if the operation fails for arbitrary reasons.
+   * @param inputStream is the fresh input stream of the content to parse.
+   * @param filesize is the size (content-length) of the content to parse in
+   *        bytes or <code>0</code> if NOT available (unknown). If available,
+   *        the parser may use this value for optimized allocations.
+   * @param encoding is the explicit encoding to use for text files or
+   *        <code>null</code> to use smart guess.
+   * @param properties are the properties where the extracted (meta-)data from
+   *        the parsed <code>inputStream</code> will be added to.
+   * @throws Exception if the operation fails for arbitrary reasons.
    */
   protected abstract void parse(InputStream inputStream, long filesize, String encoding,
       Properties properties) throws Exception;

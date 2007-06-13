@@ -103,8 +103,7 @@ public final class SearchViewConfiguration {
   /**
    * The constructor.
    * 
-   * @param xmlConfiguration
-   *        is the XML-element containing the configuration.
+   * @param xmlConfiguration is the XML-element containing the configuration.
    */
   public SearchViewConfiguration(Element xmlConfiguration) {
 
@@ -133,8 +132,7 @@ public final class SearchViewConfiguration {
   /**
    * This method parses the {@link #XML_TAG_SOURCES sources}.
    * 
-   * @param sourcesElement
-   *        is the {@link #XML_TAG_SOURCES sources-element}.
+   * @param sourcesElement is the {@link #XML_TAG_SOURCES sources-element}.
    */
   protected void parseSources(Element sourcesElement) {
 
@@ -163,8 +161,7 @@ public final class SearchViewConfiguration {
   /**
    * This method parses the {@link #XML_TAG_FILETYPES filetypes}.
    * 
-   * @param filetypesElement
-   *        is the {@link #XML_TAG_FILETYPES filetypes-element}.
+   * @param filetypesElement is the {@link #XML_TAG_FILETYPES filetypes-element}.
    */
   protected void parseFiletypes(Element filetypesElement) {
 
@@ -195,8 +192,7 @@ public final class SearchViewConfiguration {
    * {@link net.sf.mmm.search.api.SearchEntry#getSource() source} for the given
    * <code>sourceName</code>.
    * 
-   * @param sourceName
-   *        is the display-name of the requested source.
+   * @param sourceName is the display-name of the requested source.
    * @return the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
    *         for the given <code>sourceName</code> or <code>null</code> if
    *         undefined.
@@ -210,9 +206,9 @@ public final class SearchViewConfiguration {
    * This method gets the URL-prefix for the given
    * <code>{@link net.sf.mmm.search.api.SearchEntry#getSource() source}</code>.
    * 
-   * @param source
-   *        is the {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
-   *        for which the requested URL-prefix is requested.
+   * @param source is the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source} for
+   *        which the requested URL-prefix is requested.
    * @return the requested URL-prefix or <code>null</code> if undefined.
    */
   public String getUrlPrefixBySource(String source) {
@@ -225,8 +221,7 @@ public final class SearchViewConfiguration {
    * {@link net.sf.mmm.search.api.SearchEntry#getType() type} for the given
    * <code>filetypeName</code>.
    * 
-   * @param filetypeName
-   *        is the display-name of a filetype.
+   * @param filetypeName is the display-name of a filetype.
    * @return the type (typically extension without dot) for the given
    *         <code>filetypeName</code> or <code>null</code> if undefined.
    */
@@ -239,10 +234,10 @@ public final class SearchViewConfiguration {
    * This method gets the name of the icon representing the filetype associated
    * with the given {@link net.sf.mmm.search.api.SearchEntry#getType() type}.
    * 
-   * @param type
-   *        is the filetype for which the icon name is requested (e.g. "doc",
-   *        "htm", "html", etc.). The type is typically the file extension (in
-   *        {@link String#toLowerCase() lower-case} excluding the dot)
+   * @param type is the filetype for which the icon name is requested (e.g.
+   *        "doc", "htm", "html", etc.). The type is typically the file
+   *        extension (in {@link String#toLowerCase() lower-case} excluding the
+   *        dot)
    * @return the name of the icon representing the filetype with the given
    *         <code>extension</code> or a default icon if no according icon
    *         could be found.
@@ -271,20 +266,20 @@ public final class SearchViewConfiguration {
 
     return this.typeNames;
   }
-  
+
   /**
    * @return the searchEngine
    */
   public ManagedSearchEngine getSearchEngine() {
-  
+
     return this.searchEngine;
   }
-  
+
   /**
    * @param searchEngine the searchEngine to set
    */
   public void setSearchEngine(ManagedSearchEngine searchEngine) {
-  
+
     this.searchEngine = searchEngine;
   }
 

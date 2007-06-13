@@ -18,9 +18,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UISlideBar} interface using SWT as
  * the UI toolkit.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -41,18 +40,14 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param sliderOrientation
-   *        is the orientation of the slide-bar.
-   * @param sliderModel
-   *        is the list model containing the data. See
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param sliderOrientation is the orientation of the slide-bar.
+   * @param sliderModel is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UIFactorySwt uiFactory, UISwtNode parentObject, Orientation sliderOrientation,
-      UIListModel<E> sliderModel) {
+  public UISlideBarImpl(UIFactorySwt uiFactory, UISwtNode parentObject,
+      Orientation sliderOrientation, UIListModel<E> sliderModel) {
 
     super(uiFactory, parentObject);
     this.orientation = sliderOrientation;

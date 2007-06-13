@@ -18,8 +18,8 @@ public interface UIProgressBar extends UIWidget, UIReadOrientation {
 
   /**
    * This method gets the current progress. It is a value in the range of
-   * <code>[0, 100]</code> and represents the completeness of the progress
-   * in percent.
+   * <code>[0, 100]</code> and represents the completeness of the progress in
+   * percent.
    * 
    * @return the progress.
    */
@@ -28,8 +28,7 @@ public interface UIProgressBar extends UIWidget, UIReadOrientation {
   /**
    * This method sets the progress to the given value.
    * 
-   * @param newProgress
-   *        is the new progress. It must be in the range of
+   * @param newProgress is the new progress. It must be in the range of
    *        <code>[0, 100]</code>.
    */
   void setProgress(int newProgress);

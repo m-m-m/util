@@ -23,8 +23,7 @@ public class SearchParseException extends SearchException {
    * Please use {@link #SearchParseException(Throwable, String)} to supply the
    * cause of the error.
    * 
-   * @param query
-   *        is the query that could NOT be parsed.
+   * @param query is the query that could NOT be parsed.
    */
   public SearchParseException(String query) {
 
@@ -32,12 +31,10 @@ public class SearchParseException extends SearchException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param query
-   *        is the query that could NOT be parsed.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param query is the query that could NOT be parsed.
    */
   public SearchParseException(Throwable nested, String query) {
 

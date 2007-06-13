@@ -14,8 +14,7 @@ import net.sf.mmm.framework.base.SimpleComponentInstanceContainer;
  * {@link net.sf.mmm.framework.api.ComponentProvider} interface for custom
  * providers.
  * 
- * @param <S>
- *        is the
+ * @param <S> is the
  *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the provided component.
  * 

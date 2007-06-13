@@ -14,7 +14,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
 public class NoCondition implements Condition {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public NoCondition() {
 
@@ -33,10 +33,10 @@ public class NoCondition implements Condition {
    * {@inheritDoc}
    */
   public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
-  
+
     return true;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -44,13 +44,13 @@ public class NoCondition implements Condition {
 
     return configuration;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public String toString() {
-  
+
     return "";
   }
 

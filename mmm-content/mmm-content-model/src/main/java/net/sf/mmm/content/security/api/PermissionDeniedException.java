@@ -21,12 +21,9 @@ public class PermissionDeniedException extends SecurityException {
   /**
    * The constructor.
    * 
-   * @param subject
-   *        is the user that wanted to perform the permitted operation.
-   * @param action
-   *        is the action that was permitted.
-   * @param object
-   *        is the content-object on which the action was permitted.
+   * @param subject is the user that wanted to perform the permitted operation.
+   * @param action is the action that was permitted.
+   * @param object is the content-object on which the action was permitted.
    */
   public PermissionDeniedException(String subject, String action, String object) {
 

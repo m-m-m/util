@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 public class AbstractPoiContentParserTest extends TestCase {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractPoiContentParserTest() {
 
@@ -34,8 +34,8 @@ public class AbstractPoiContentParserTest extends TestCase {
 
   protected Properties parse(ContentParser parser, String resourceName) throws Exception {
 
-    DataResource testResource = new ClasspathResource(AbstractPoiContentParserTest.class.getPackage(),
-        resourceName);
+    DataResource testResource = new ClasspathResource(AbstractPoiContentParserTest.class
+        .getPackage(), resourceName);
     InputStream inputStream = testResource.openStream();
     try {
       return parser.parse(inputStream, testResource.getSize());
@@ -45,6 +45,7 @@ public class AbstractPoiContentParserTest extends TestCase {
   }
 
   public void checkPpt(ContentParser parser) throws Exception {
+
     Properties properties = parse(parser, "test.ppt");
     String title = properties.getProperty(ContentParser.PROPERTY_KEY_TITLE);
     assertEquals("Title of Testslide", title);
@@ -53,7 +54,7 @@ public class AbstractPoiContentParserTest extends TestCase {
     String keywords = properties.getProperty(ContentParser.PROPERTY_KEY_KEYWORDS);
     assertEquals("some keywords", keywords);
   }
-  
+
   @Test
   public void testParser() throws Exception {
 
@@ -63,8 +64,8 @@ public class AbstractPoiContentParserTest extends TestCase {
 
         return "";
       }
-      
-    };    
+
+    };
     checkPpt(parser);
     // TODO: word and excel...
   }

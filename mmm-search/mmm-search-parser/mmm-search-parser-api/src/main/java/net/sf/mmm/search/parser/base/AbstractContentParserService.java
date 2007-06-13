@@ -75,8 +75,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   }
 
   /**
-   * @param defaultParser
-   *        is the generic Parser to set.
+   * @param defaultParser is the generic Parser to set.
    */
   public void setGenericParser(ContentParser defaultParser) {
 
@@ -97,10 +96,8 @@ public abstract class AbstractContentParserService implements ContentParserServi
    * 
    * @see #getParser(String)
    * 
-   * @param parser
-   *        is the parser to register.
-   * @param extensions
-   *        are the extensions the parser will be associated with.
+   * @param parser is the parser to register.
+   * @param extensions are the extensions the parser will be associated with.
    */
   public void addParser(ContentParser parser, String... extensions) {
 

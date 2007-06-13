@@ -46,11 +46,9 @@ public abstract class AbstractFunctionService implements FunctionService {
   /**
    * This method registers a function in this service.
    * 
-   * @param function
-   *        is the function to register.
-   * @throws FunctionException
-   *         if the name or operator symbol (as defined) is already in use by a
-   *         registered function.
+   * @param function is the function to register.
+   * @throws FunctionException if the name or operator symbol (as defined) is
+   *         already in use by a registered function.
    */
   protected void registerFunction(Function function) throws FunctionException {
 

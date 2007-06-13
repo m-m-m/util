@@ -17,8 +17,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable} interface using SWT as the
  * UI toolkit.
  * 
- * @param <C> 
- *        is the templated type of the objects in the table cells.
+ * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,12 +32,10 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple, else ony one.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param multiSelection - if <code>true</code> the user can select
+   *        multiple, else ony one.
    */
   public UITableImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean multiSelection) {
 
@@ -101,16 +98,16 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
    * {@inheritDoc}
    */
   public int getSelectedIndex() {
-  
+
     return this.syncAccess.getSelection();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void setSelectedIndex(int newIndex) {
-  
+
     this.syncAccess.setSelection(newIndex);
   }
-  
+
 }

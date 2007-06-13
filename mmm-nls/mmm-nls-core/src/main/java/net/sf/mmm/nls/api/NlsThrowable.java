@@ -47,8 +47,7 @@ public interface NlsThrowable {
    * 
    * @see NlsThrowable#getLocalizedMessage(NlsTranslator, StringBuffer)
    * 
-   * @param nationalizer
-   *        is used to translate the original i18n message.
+   * @param nationalizer is used to translate the original i18n message.
    * @return the localized message.
    */
   String getLocalizedMessage(NlsTranslator nationalizer);
@@ -63,30 +62,26 @@ public interface NlsThrowable {
    * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(NlsTranslator,
    *      StringBuffer)
    * 
-   * @param nationalizer
-   *        is used to translate the original i18n message.
-   * @param message
-   *        is the buffer where to write the message to.
+   * @param nationalizer is used to translate the original i18n message.
+   * @param message is the buffer where to write the message to.
    */
   void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message);
 
   /**
    * This method prints the stack trace with localized exception message(s).
    * 
-   * @param stream
-   *        is where to write the stack trace.
-   * @param nationalizer
-   *        translates the original message. May be <code>null</code>.
+   * @param stream is where to write the stack trace.
+   * @param nationalizer translates the original message. May be
+   *        <code>null</code>.
    */
   void printStackTrace(PrintStream stream, NlsTranslator nationalizer);
 
   /**
    * This method prints the strack trace with localized exception message(s).
    * 
-   * @param writer
-   *        is where to write the strack trace.
-   * @param nationalizer
-   *        translates the original message. Mey be <code>null</code>.
+   * @param writer is where to write the strack trace.
+   * @param nationalizer translates the original message. Mey be
+   *        <code>null</code>.
    */
   void printStackTrace(PrintWriter writer, NlsTranslator nationalizer);
 

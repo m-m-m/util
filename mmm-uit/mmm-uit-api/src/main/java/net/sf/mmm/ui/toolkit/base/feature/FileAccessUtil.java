@@ -33,8 +33,8 @@ public final class FileAccessUtil {
   /**
    * This method saves the data given as {@link FileAccess access} to the
    * specified file. It will perform question dialogs before overwriting
-   * existing files or creating additional folders. If will show info dialogs
-   * if a problem arises.
+   * existing files or creating additional folders. If will show info dialogs if
+   * a problem arises.
    * 
    * @param access
    * @param target

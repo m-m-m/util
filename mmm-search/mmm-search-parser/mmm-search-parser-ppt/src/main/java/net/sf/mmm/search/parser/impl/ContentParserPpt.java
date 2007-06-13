@@ -127,7 +127,7 @@ public class ContentParserPpt extends AbstractPoiContentParser {
   protected static final String ENCODING_UTF16LE = "UTF-16LE";
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    */
   public ContentParserPpt() {
@@ -149,9 +149,9 @@ public class ContentParserPpt extends AbstractPoiContentParser {
     int offsetLength = offset + length - 8;
     if (offsetLength > buffer.length - 8) {
       /*
-      System.out.println("Illegal array index: offset=" + offset + ", length=" + length
-          + ", bufferSize=" + buffer.length);
-      */
+       * System.out.println("Illegal array index: offset=" + offset + ",
+       * length=" + length + ", bufferSize=" + buffer.length);
+       */
       offsetLength = buffer.length - 8;
     }
     int index = offset;
@@ -243,7 +243,7 @@ public class ContentParserPpt extends AbstractPoiContentParser {
 
     // PowerPointExtractor pptExtractor = new PowerPointExtractor(poiFs);
     // return pptExtractor.getText();
-    
+
     DocumentInputStream docStream = poiFs.createDocumentInputStream(POIFS_POWERPOINT_DOC);
 
     int length = docStream.available();

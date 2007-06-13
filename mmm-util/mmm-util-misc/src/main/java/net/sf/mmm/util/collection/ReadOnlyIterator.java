@@ -11,8 +11,7 @@ import java.util.Iterator;
  * The design of the JDK sucks: if only {@link java.util.Iterator} would extend
  * {@link java.util.Enumeration} the world could be so simple.
  * 
- * @param <E>
- *        is the templated type of the elements to iterate.
+ * @param <E> is the templated type of the elements to iterate.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -53,8 +52,7 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
    * 
    * @see java.util.Iterator#remove()
    * 
-   * @throws UnsupportedOperationException
-   *         whenever this method is called.
+   * @throws UnsupportedOperationException whenever this method is called.
    */
   public void remove() {
 

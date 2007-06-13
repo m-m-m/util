@@ -4,8 +4,7 @@
 package net.sf.mmm.content.value.api;
 
 /**
- * This is the interface for a {@link LinkList link-list}that can be
- * modified.
+ * This is the interface for a {@link LinkList link-list}that can be modified.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -14,16 +13,14 @@ public interface MutableLinkList extends LinkList {
   /**
    * This method adds a link to this linklist.
    * 
-   * @param link
-   *        is the link to add.
+   * @param link is the link to add.
    */
   void addLink(Link link);
 
   /**
    * This method removes the link at the given index.
    * 
-   * @param index
-   *        is the position of the link to remove.
+   * @param index is the position of the link to remove.
    * @return the link that has been removed.
    */
   Link removeLink(int index);
@@ -31,10 +28,8 @@ public interface MutableLinkList extends LinkList {
   /**
    * This method sets the link at the given index.
    * 
-   * @param index
-   *        is the position of the link to set.
-   * @param link
-   *        is the link to set.
+   * @param index is the position of the link to set.
+   * @param link is the link to set.
    * @return the link that has been overridden and was located at the given
    *         index before this operation.
    */
@@ -43,10 +38,8 @@ public interface MutableLinkList extends LinkList {
   /**
    * This method inserts the given link at the given index.
    * 
-   * @param index
-   *        is the position where to insert the link.
-   * @param link
-   *        is the link to insert.
+   * @param index is the position where to insert the link.
+   * @param link is the link to insert.
    */
   void insertLink(int index, Link link);
 

@@ -46,8 +46,8 @@ public class ValidationResultImpl implements ValidationResult {
   /**
    * The constructor for an atomic invalid result.
    * 
-   * @param invalidationMessage
-   *        is the message describing why the object is invalid.
+   * @param invalidationMessage is the message describing why the object is
+   *        invalid.
    */
   public ValidationResultImpl(String invalidationMessage) {
 
@@ -57,8 +57,8 @@ public class ValidationResultImpl implements ValidationResult {
   /**
    * The constructor for an atomic invalid result.
    * 
-   * @param invalidationMessage
-   *        is the message describing why the object is invalid.
+   * @param invalidationMessage is the message describing why the object is
+   *        invalid.
    */
   public ValidationResultImpl(NlsMessage invalidationMessage) {
 
@@ -68,11 +68,10 @@ public class ValidationResultImpl implements ValidationResult {
   /**
    * The constructor for a composite invalid result.
    * 
-   * @param invalidationMessage
-   *        is the message describing why the object is invalid.
-   * @param detailedChildResults
-   *        is the array containing the results of all child validations that
-   *        failed.
+   * @param invalidationMessage is the message describing why the object is
+   *        invalid.
+   * @param detailedChildResults is the array containing the results of all
+   *        child validations that failed.
    */
   public ValidationResultImpl(NlsMessage invalidationMessage,
       ValidationResult... detailedChildResults) {
@@ -83,13 +82,11 @@ public class ValidationResultImpl implements ValidationResult {
   /**
    * The constructor for a composite invalid result.
    * 
-   * @param invalidationMessage
-   *        is the message describing why the object is invalid.
-   * @param detailedChildResults
-   *        is the array containing the results of all child validations that
-   *        failed.
-   * @param detailedChildCount
-   *        is the number of child results in the
+   * @param invalidationMessage is the message describing why the object is
+   *        invalid.
+   * @param detailedChildResults is the array containing the results of all
+   *        child validations that failed.
+   * @param detailedChildCount is the number of child results in the
    *        <code>detailedChildResults</code> array. The value must NOT be
    *        greater than the length of the array.
    */

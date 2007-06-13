@@ -31,10 +31,8 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIComposite(UIFactorySwing uiFactory, UINode parentObject) {
 

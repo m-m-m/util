@@ -61,10 +61,8 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
   /**
    * The main method used to execute this class as program.
    * 
-   * @param args
-   *        are the command-line arguments.
-   * @throws Exception
-   *         if something goes wrong.
+   * @param args are the command-line arguments.
+   * @throws Exception if something goes wrong.
    */
   public static void main(String[] args) throws Exception {
 

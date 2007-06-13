@@ -44,11 +44,10 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the widget.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        widget.
    */
   public SyncFileDialogAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -111,8 +110,7 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
    * {@link org.eclipse.swt.widgets.FileDialog#setFileName(java.lang.String) filename}
    * of the dialog.
    * 
-   * @param name
-   *        is the name of the selected file.
+   * @param name is the name of the selected file.
    */
   public void setFilename(String name) {
 

@@ -18,7 +18,8 @@ import net.sf.mmm.util.pojo.impl.dummy.MyPojo;
 @SuppressWarnings("all")
 public class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
 
-  protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance) throws Exception {
+  protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance)
+      throws Exception {
 
     // test property "name"
     checkProperty(pojoDescriptor, "name", String.class, String.class);
@@ -27,7 +28,7 @@ public class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorB
     String retrievedName = (String) pojoDescriptor.getProperty(pojoInstance, "name");
     assertEquals(name, retrievedName);
     // test property "port"
-    //checkProperty(pojoDescriptor, "port", Integer.class, int.class);
+    // checkProperty(pojoDescriptor, "port", Integer.class, int.class);
     Integer port = Integer.valueOf(4242);
     assertNull(pojoDescriptor.getProperty(pojoInstance, "port"));
     pojoDescriptor.setProperty(pojoInstance, "port", port);

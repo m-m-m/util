@@ -19,62 +19,65 @@ import net.sf.mmm.framework.base.provider.AbstractComponentProvider;
  */
 public class ConfigurationProvider extends AbstractComponentProvider<Configuration> {
 
-    /** the root configuration */
-    private Configuration rootConfiguration;
+  /** the root configuration */
+  private Configuration rootConfiguration;
 
-    /**
-     * The constructor.
-     */
-    public ConfigurationProvider() {
+  /**
+   * The constructor.
+   */
+  public ConfigurationProvider() {
 
-        super(Configuration.class);
-        this.rootConfiguration = null;
-    }
+    super(Configuration.class);
+    this.rootConfiguration = null;
+  }
 
-    /**
-     * This method gets the rootConfiguration.
-     * 
-     * @return the rootConfiguration.
-     */
-    public Configuration getRootConfiguration() {
+  /**
+   * This method gets the rootConfiguration.
+   * 
+   * @return the rootConfiguration.
+   */
+  public Configuration getRootConfiguration() {
 
-        return this.rootConfiguration;
-    }
+    return this.rootConfiguration;
+  }
 
-    /**
-     * This method sets the rootConfiguration.
-     * 
-     * @param rootConfig
-     *        is the rootConfiguration to set.
-     */
-    public void setRootConfiguration(Configuration rootConfig) {
+  /**
+   * This method sets the rootConfiguration.
+   * 
+   * @param rootConfig is the rootConfiguration to set.
+   */
+  public void setRootConfiguration(Configuration rootConfig) {
 
-        this.rootConfiguration = rootConfig;
-    }
+    this.rootConfiguration = rootConfig;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean release(ComponentInstanceContainer<Configuration> instanceContainer, ComponentManager componentManager) {
+  /**
+   * {@inheritDoc}
+   */
+  public boolean release(ComponentInstanceContainer<Configuration> instanceContainer,
+      ComponentManager componentManager) {
 
-        // TODO Auto-generated method stub
-        return false;
-    }
+    // TODO Auto-generated method stub
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public ComponentInstanceContainer<Configuration> request(String instanceId, ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId, ComponentManager componentManager) throws ComponentException {
+  /**
+   * {@inheritDoc}
+   */
+  public ComponentInstanceContainer<Configuration> request(String instanceId,
+      ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
 
-        // TODO Auto-generated method stub
-        return null;
-    }
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void dispose(ComponentInstanceContainer<Configuration> instanceContainer, ComponentManager componentManager) {
-        
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public void dispose(ComponentInstanceContainer<Configuration> instanceContainer,
+      ComponentManager componentManager) {
+
+  }
 
 }

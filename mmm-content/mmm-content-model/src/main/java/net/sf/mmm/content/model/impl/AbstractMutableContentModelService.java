@@ -107,8 +107,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   /**
    * This method sets the {@link #isEditable() editable-flag} of this service.
    * 
-   * @param isEditable
-   *        the editable to set
+   * @param isEditable the editable to set
    */
   public void setEditable(boolean isEditable) {
 
@@ -118,8 +117,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
   /**
    * This method injects the value-service required by this implementation.
    * 
-   * @param service
-   *        the value-service to set
+   * @param service the value-service to set
    */
   @Resource
   public void setValueService(ValueService service) {
@@ -131,8 +129,7 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
    * This method initializes this class. It has to be called after construction
    * and injection is completed.
    * 
-   * @throws Exception
-   *         if initialization failed.
+   * @throws Exception if initialization failed.
    */
   @PostConstruct
   public void initialize() throws Exception {
@@ -186,18 +183,15 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
    * @see net.sf.mmm.content.model.api.ContentModelWriteAccess#createClass(net.sf.mmm.content.model.api.ContentClass,
    *      java.lang.String, net.sf.mmm.content.model.api.ClassModifiers)
    * 
-   * @param superClass
-   *        is the {@link ContentClass#getSuperClass() super-class} of the class
-   *        to create.
-   * @param name
-   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
+   * @param superClass is the {@link ContentClass#getSuperClass() super-class}
    *        of the class to create.
-   * @param modifiers
-   *        are the {@link ContentClass#getModifiers() modifiers} for the class
-   *        to create.
+   * @param name is the
+   *        {@link net.sf.mmm.content.api.ContentObject#getName() name} of the
+   *        class to create.
+   * @param modifiers are the {@link ContentClass#getModifiers() modifiers} for
+   *        the class to create.
    * @return the created class.
-   * @throws ContentModelException
-   *         if the class could not be created.
+   * @throws ContentModelException if the class could not be created.
    */
   protected AbstractContentClass doCreateClass(ContentClass superClass, String name,
       ClassModifiers modifiers) throws ContentModelException {
@@ -243,24 +237,20 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
    *      java.lang.String, java.lang.Class,
    *      net.sf.mmm.content.model.api.FieldModifiers)
    * 
-   * @param declaringClass
-   *        is the {@link ContentField#getDeclaringClass() class} where the new
-   *        field will be added.
-   * @param name
-   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
-   *        of the field to create.
-   * @param type
-   *        is the {@link ContentField#getFieldType() type} of the values that
-   *        can be stored in the field to create.
-   * @param modifiers
-   *        are the {@link ContentField#getModifiers() modifiers} for the field
-   *        to create. They must NOT be
+   * @param declaringClass is the {@link ContentField#getDeclaringClass() class}
+   *        where the new field will be added.
+   * @param name is the
+   *        {@link net.sf.mmm.content.api.ContentObject#getName() name} of the
+   *        field to create.
+   * @param type is the {@link ContentField#getFieldType() type} of the values
+   *        that can be stored in the field to create.
+   * @param modifiers are the {@link ContentField#getModifiers() modifiers} for
+   *        the field to create. They must NOT be
    *        {@link FieldModifiers#isTransient() transient} (@see
    *        #createField(ContentClass, String, Class, FieldModifiersImpl,
    *        Term)).
    * @return the created field.
-   * @throws ContentModelException
-   *         if the field could not be created.
+   * @throws ContentModelException if the field could not be created.
    */
   protected AbstractContentField doCreateField(ContentClass declaringClass, String name,
       Class type, FieldModifiers modifiers) throws ContentModelException {
@@ -299,16 +289,13 @@ public abstract class AbstractMutableContentModelService extends AbstractBaseCon
    * Please note that changing IDs, names or modifiers of existing classes is
    * NOT supported.
    * 
-   * @param configuration
-   *        is the configuration of the class to import.
-   * @param superClass
-   *        is the {@link ContentClass#getSuperClass() super-class} of the class
-   *        to import or <code>null</code> for ROOT-class.
+   * @param configuration is the configuration of the class to import.
+   * @param superClass is the {@link ContentClass#getSuperClass() super-class}
+   *        of the class to import or <code>null</code> for ROOT-class.
    * @return the imported class.
-   * @throws ContentModelException
-   *         if the import failed. This will stop the import at the point where
-   *         the error occurred. This may result in partial completion of the
-   *         import.
+   * @throws ContentModelException if the import failed. This will stop the
+   *         import at the point where the error occurred. This may result in
+   *         partial completion of the import.
    */
   protected AbstractContentClass importClass(Configuration configuration,
       AbstractContentClass superClass) throws ContentModelException {

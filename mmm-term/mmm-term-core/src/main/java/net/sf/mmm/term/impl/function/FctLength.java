@@ -45,8 +45,7 @@ public class FctLength {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the length of the given string.
    */
   public static Integer length(String argument) {
@@ -60,8 +59,7 @@ public class FctLength {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the length of the given string.
    */
   public static Integer length(List<?> argument) {

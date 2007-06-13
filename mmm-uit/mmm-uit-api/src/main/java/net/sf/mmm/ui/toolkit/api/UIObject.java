@@ -74,8 +74,7 @@ public interface UIObject {
    * 
    * @see #getId()
    * 
-   * @param newId
-   *        is the new identifier for the object.
+   * @param newId is the new identifier for the object.
    */
   void setId(String newId);
 

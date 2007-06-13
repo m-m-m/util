@@ -27,8 +27,7 @@ public class Variable extends AbstractVariable {
   /**
    * The constructor.
    * 
-   * @param name
-   *        is the name of the variable.
+   * @param name is the name of the variable.
    */
   public Variable(String name) {
 

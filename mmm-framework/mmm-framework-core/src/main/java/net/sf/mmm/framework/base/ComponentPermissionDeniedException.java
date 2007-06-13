@@ -12,8 +12,8 @@ import net.sf.mmm.framework.api.IocSecurityManager;
  * A {@link ComponentPermissionDeniedException} is thrown if a
  * {@link ComponentProvider component} tries to
  * {@link ComponentManager#requestComponent(Class, String) request} another
- * {@link ComponentProvider component} without having permission to do so by
- * the security manager.
+ * {@link ComponentProvider component} without having permission to do so by the
+ * security manager.
  * 
  * @see IocSecurityManager
  * 
@@ -27,12 +27,9 @@ public class ComponentPermissionDeniedException extends ComponentSecurityExcepti
   /**
    * The constructor.
    * 
-   * @param source
-   *        is the requestor specification.
-   * @param target
-   *        is the requested specifciation.
-   * @param instanceId
-   *        is the requested instance-ID.
+   * @param source is the requestor specification.
+   * @param target is the requested specifciation.
+   * @param instanceId is the requested instance-ID.
    */
   public ComponentPermissionDeniedException(Class source, Class target, String instanceId) {
 

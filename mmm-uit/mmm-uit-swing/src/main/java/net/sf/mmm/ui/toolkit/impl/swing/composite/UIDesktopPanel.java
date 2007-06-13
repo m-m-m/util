@@ -29,10 +29,8 @@ public class UIDesktopPanel extends AbstractUIMultiComposite {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UIDesktopPanel(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject) {
 
@@ -61,8 +59,7 @@ public class UIDesktopPanel extends AbstractUIMultiComposite {
   /**
    * This method adds the given internal frame to this composite.
    * 
-   * @param internalFrame
-   *        is the frame to add.
+   * @param internalFrame is the frame to add.
    */
   public void add(UIInternalFrame internalFrame) {
 

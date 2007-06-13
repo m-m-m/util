@@ -48,19 +48,16 @@ public interface MutableConfiguration extends Configuration {
    * that already exists, this method will NOT create a new attribute and return
    * the existing one instead.
    * 
-   * @param name
-   *        is the {@link #getName() name} of the child to create. If the
+   * @param name is the {@link #getName() name} of the child to create. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
    *        {@link Configuration.Type#ATTRIBUTE attribute}, else
    *        {@link Configuration.Type#ELEMENT element}.
-   * @param namespace
-   *        is the {@link #getNamespaceUri() namespace} of the child to create
-   *        or <code>null</code> for default namespace.
+   * @param namespace is the {@link #getNamespaceUri() namespace} of the child
+   *        to create or <code>null</code> for default namespace.
    * @return the created child.
-   * @throws ConfigurationException
-   *         if the operation failed (e.g. NOT editable).
+   * @throws ConfigurationException if the operation failed (e.g. NOT editable).
    */
   MutableConfiguration createChild(String name, String namespace) throws ConfigurationException;
 
@@ -68,13 +65,12 @@ public interface MutableConfiguration extends Configuration {
    * This method removes the this configuration and all its
    * {@link #getDescendants(String, String) descendants} from the configuration
    * tree.<br>
-   * After the configuration is {@link ConfigurationDocument#save() saved}
-   * this information is lost.
+   * After the configuration is {@link ConfigurationDocument#save() saved} this
+   * information is lost.
    * 
    * @see #disable()
    * 
-   * @throws ConfigurationException
-   *         if the operation failed (e.g. NOT editable).
+   * @throws ConfigurationException if the operation failed (e.g. NOT editable).
    */
   void remove() throws ConfigurationException;
 
@@ -85,8 +81,7 @@ public interface MutableConfiguration extends Configuration {
    * Instead of {@link #remove()} this method will only out-comment the
    * according configuration but no information is lost.
    * 
-   * @throws ConfigurationException
-   *         if the operation failed (e.g. NOT editable).
+   * @throws ConfigurationException if the operation failed (e.g. NOT editable).
    */
   void disable() throws ConfigurationException;
 

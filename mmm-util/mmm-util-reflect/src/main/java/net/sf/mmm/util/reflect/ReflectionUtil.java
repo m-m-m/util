@@ -42,8 +42,7 @@ public class ReflectionUtil {
    * This method gets the {@link Object#getClass() classes} of the given
    * objects.
    * 
-   * @param objects
-   *        is an array containing the objects for that the classes are
+   * @param objects is an array containing the objects for that the classes are
    *        requested.
    * @return an array of the same length as the given array. At each position
    *         the returned array contains the {@link Object#getClass() class} of
@@ -75,8 +74,7 @@ public class ReflectionUtil {
    * <li>&lt;T extends MyClass&gt; T[]</li>
    * </ul>
    * 
-   * @param type
-   *        is the type where to get the component type from.
+   * @param type is the type where to get the component type from.
    * @return the component type of the given <code>type</code> or
    *         <code>null</code> if the given <code>type</code> does NOT have
    *         a single (component) type.
@@ -123,8 +121,7 @@ public class ReflectionUtil {
    * </td>
    * </table>
    * 
-   * @param type
-   *        is the type to convert.
+   * @param type is the type to convert.
    * @return the closest class representing the given <code>type</code>.
    */
   public static Class<?> toClass(Type type) {
@@ -167,27 +164,21 @@ public class ReflectionUtil {
    * This method gets the {@link Field#get(java.lang.Object) value} of a
    * {@link Modifier#isStatic(int) static} {@link Field field}.
    * 
-   * @param <T>
-   *        the templated type the requested field is assigned to.
-   * @param type
-   *        is the class or interface containing the requested field.
-   * @param fieldName
-   *        is the {@link Field#getName() name} of the requested field.
-   * @param fieldType
-   *        is the type the requested field is assigned to. Therefore the field
-   *        declaration (!) must be assignable to this type.
-   * @param mustBeFinal -
-   *        if <code>true</code>, an {@link IllegalArgumentException} is
-   *        thrown if the specified static field exists but is NOT
-   *        {@link Modifier#isFinal(int) final}, <code>false</code>
-   *        otherwise.
+   * @param <T> the templated type the requested field is assigned to.
+   * @param type is the class or interface containing the requested field.
+   * @param fieldName is the {@link Field#getName() name} of the requested
+   *        field.
+   * @param fieldType is the type the requested field is assigned to. Therefore
+   *        the field declaration (!) must be assignable to this type.
+   * @param mustBeFinal - if <code>true</code>, an
+   *        {@link IllegalArgumentException} is thrown if the specified static
+   *        field exists but is NOT {@link Modifier#isFinal(int) final},
+   *        <code>false</code> otherwise.
    * @return the value of the field with the given type.
-   * @throws NoSuchFieldException
-   *         if the given <code>type</code> has no field with the given
-   *         <code>fieldName</code>.
-   * @throws IllegalAccessException
-   *         if you do not have permission to read the field (e.g. field is
-   *         private).
+   * @throws NoSuchFieldException if the given <code>type</code> has no field
+   *         with the given <code>fieldName</code>.
+   * @throws IllegalAccessException if you do not have permission to read the
+   *         field (e.g. field is private).
    */
   @SuppressWarnings("unchecked")
   public static <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
@@ -216,11 +207,10 @@ public class ReflectionUtil {
    * by the given <code>method</code> or directly inherited from an
    * {@link Class#getInterfaces() interface}.
    * 
-   * @param method
-   *        is the method.
+   * @param method is the method.
    * @return the parent method or <code>null</code> if no such method exists.
-   * @throws SecurityException
-   *         if access has been denied by the {@link SecurityManager}.
+   * @throws SecurityException if access has been denied by the
+   *         {@link SecurityManager}.
    */
   public static Method getParentMethod(Method method) throws SecurityException {
 
@@ -236,17 +226,15 @@ public class ReflectionUtil {
    * 
    * @see #getParentMethod(Class, String, Class[])
    * 
-   * @param inheritingClass
-   *        is the class inheriting the requested method.
-   * @param methodName
-   *        is the {@link Method#getName() name} of the requested method.
-   * @param parameterTypes
-   *        is the {@link Method#getParameterTypes() signature} of the requested
+   * @param inheritingClass is the class inheriting the requested method.
+   * @param methodName is the {@link Method#getName() name} of the requested
    *        method.
+   * @param parameterTypes is the {@link Method#getParameterTypes() signature}
+   *        of the requested method.
    * @return the inherited method or <code>null</code> if no such method
    *         exists.
-   * @throws SecurityException
-   *         if access has been denied by the {@link SecurityManager}.
+   * @throws SecurityException if access has been denied by the
+   *         {@link SecurityManager}.
    */
   public static Method getParentMethod(Class<?> inheritingClass, String methodName,
       Class<?>[] parameterTypes) throws SecurityException {

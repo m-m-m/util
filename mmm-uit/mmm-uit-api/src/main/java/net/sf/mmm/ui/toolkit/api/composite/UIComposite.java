@@ -24,8 +24,7 @@ public interface UIComposite extends UIComponent, UIReadBorderTitle, UIReadOrien
   /**
    * This method gets the sub-component at the given index.
    * 
-   * @param index
-   *        is the position of the requested sub-component.
+   * @param index is the position of the requested sub-component.
    * @return the component at the given index.
    */
   UIComponent getComponent(int index);

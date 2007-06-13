@@ -80,7 +80,7 @@ public class ResourceAccessFactory extends AbstractConfigurationAccessFactory {
     }
     ResourceAccess accessor = new ResourceAccess(fileRootPath, absoluteHref);
     accessor.setContextPrefix(prefix);
-    return new ResourceAccess[] {accessor};
+    return new ResourceAccess[] { accessor };
   }
 
   /**

@@ -39,8 +39,7 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
     checkProperty(pojoDescriptor, "port", Integer.class, int.class);
     // test property "flag"
     checkProperty(pojoDescriptor, "flag", Boolean.class, boolean.class);
-    
-    
+
     List<String> myList = new ArrayList<String>();
     pojoDescriptor.setProperty(pojoInstance, "items", myList);
     assertSame(myList, pojoDescriptor.getProperty(pojoInstance, "items"));

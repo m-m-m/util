@@ -10,8 +10,7 @@ package net.sf.mmm.ui.toolkit.api.event;
  * order to notify about changes of the
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITree tree}.
  * 
- * @param <N>
- *        is the type of the node that changed.
+ * @param <N> is the type of the node that changed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,10 +22,8 @@ public class UITreeModelEvent<N> extends UIModelEvent {
   /**
    * The constructor.
    * 
-   * @param eventType
-   *        is the type for the new event.
-   * @param node
-   *        is the node that changed.
+   * @param eventType is the type for the new event.
+   * @param node is the node that changed.
    */
   public UITreeModelEvent(Type eventType, N node) {
 

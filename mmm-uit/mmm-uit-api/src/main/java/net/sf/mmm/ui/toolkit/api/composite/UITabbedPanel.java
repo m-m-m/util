@@ -20,11 +20,9 @@ public interface UITabbedPanel extends UIPanel {
    * This method adds the given component as new tab on the ride of all existing
    * tabs.
    * 
-   * @param component
-   *        is the component to add. The given component instance must be
-   *        created by the same factory.
-   * @param title
-   *        is the title that will be displayed in the tab.
+   * @param component is the component to add. The given component instance must
+   *        be created by the same factory.
+   * @param title is the title that will be displayed in the tab.
    */
   void addComponent(UIComponent component, String title);
 
@@ -32,13 +30,11 @@ public interface UITabbedPanel extends UIPanel {
    * This method adds the given component as new tab on the ride of all existing
    * tabs.
    * 
-   * @param component
-   *        is the component to add. The given component instance must be
-   *        created by the same factory.
-   * @param title
-   *        is the title that will be displayed in the tab.
-   * @param position
-   *        is the index position where the given component will be inserted.
+   * @param component is the component to add. The given component instance must
+   *        be created by the same factory.
+   * @param title is the title that will be displayed in the tab.
+   * @param position is the index position where the given component will be
+   *        inserted.
    */
   void addComponent(UIComponent component, String title, int position);
 

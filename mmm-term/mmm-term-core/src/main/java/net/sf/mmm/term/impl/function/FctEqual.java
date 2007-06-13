@@ -44,10 +44,8 @@ public class FctEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> iff both arguments are equal.
    */
   public static Boolean equal(Number argument1, Number argument2) {
@@ -64,10 +62,8 @@ public class FctEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if both arguments are equal, <code>false</code> .
    */
   public static Boolean equal(Object argument1, Object argument2) {

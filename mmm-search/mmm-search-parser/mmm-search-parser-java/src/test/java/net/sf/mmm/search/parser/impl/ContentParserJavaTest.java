@@ -42,7 +42,8 @@ public class ContentParserJavaTest extends TestCase {
 
     ContentParserJava parser = new ContentParserJava();
     Properties metadata = parse(parser, "src/test/java/", ContentParserJavaTest.class);
-    assertEquals("Jörg Hohwiller, Nobody Else", metadata.getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
+    assertEquals("Jörg Hohwiller, Nobody Else", metadata
+        .getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
     metadata = parse(parser, "src/main/java/", ContentParserJava.class);
     assertEquals("Joerg Hohwiller", metadata.getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
   }

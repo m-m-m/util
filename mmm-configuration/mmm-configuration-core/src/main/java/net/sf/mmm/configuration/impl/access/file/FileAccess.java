@@ -34,8 +34,7 @@ public class FileAccess extends AbstractConfigurationAccess {
   /**
    * The constructor.
    * 
-   * @param configurationFile
-   *        is the file to access.
+   * @param configurationFile is the file to access.
    */
   public FileAccess(File configurationFile) {
 

@@ -22,11 +22,9 @@ public interface Condition {
    * This method determines if the given <code>configuration</code> is
    * accepted for this condition.
    * 
-   * @param configuration
-   *        is the configuration to check.
-   * @param namespaceUri
-   *        is the namespace-URI to use or <code>null</code> if namespaces
-   *        should be ignored.
+   * @param configuration is the configuration to check.
+   * @param namespaceUri is the namespace-URI to use or <code>null</code> if
+   *        namespaces should be ignored.
    * @return <code>true</code> if the given <code>configuration</code> is
    *         acceptable, <code>false</code> otherwise.
    */
@@ -37,11 +35,9 @@ public interface Condition {
    * made {@link #accept(AbstractConfiguration, String) acceptable} via
    * {@link #establish(AbstractConfiguration, String)}.
    * 
-   * @param configuration
-   *        is the configuration to check.
-   * @param namespaceUri
-   *        is the namespace-URI to use or <code>null</code> if namespaces
-   *        should be ignored.
+   * @param configuration is the configuration to check.
+   * @param namespaceUri is the namespace-URI to use or <code>null</code> if
+   *        namespaces should be ignored.
    * @return <code>true</code> if the given <code>configuration</code> can
    *         be completed via establish, <code>false</code> otherwise.
    */
@@ -54,20 +50,17 @@ public interface Condition {
    * <code>configuration</code> is modified accordingly without changing
    * existing values. Please note, that this is NOT always possible.
    * 
-   * @param configuration
-   *        is the configuration that should
+   * @param configuration is the configuration that should
    *        {@link #accept(AbstractConfiguration, String) fulfill} this
    *        condition.
-   * @param namespaceUri
-   *        is the namespace-URI to use or <code>null</code> if namespaces
-   *        should be ignored.
+   * @param namespaceUri is the namespace-URI to use or <code>null</code> if
+   *        namespaces should be ignored.
    * @return the configuration that
    *         {@link #accept(AbstractConfiguration, String) fulfill} this
    *         condition. This will typically be the given
    *         <code>configuration</code> but also may be a created sibling.
-   * @throws ConfigurationException
-   *         if this conditions can NOT be established in general or specific
-   *         for the given <code>configuration</code>.
+   * @throws ConfigurationException if this conditions can NOT be established in
+   *         general or specific for the given <code>configuration</code>.
    */
   AbstractConfiguration establish(AbstractConfiguration configuration, String namespaceUri)
       throws ConfigurationException;

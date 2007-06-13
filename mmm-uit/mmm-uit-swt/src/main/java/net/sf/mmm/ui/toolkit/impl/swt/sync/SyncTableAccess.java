@@ -44,11 +44,10 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the table.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        table.
    */
   public SyncTableAccess(UIFactorySwt uiFactory, int swtStyle) {
 

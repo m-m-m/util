@@ -18,8 +18,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
    */

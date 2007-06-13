@@ -6,8 +6,7 @@ package net.sf.mmm.configuration.api;
 /**
  * This is the exception thrown if a descendant path is illegal.
  * 
- * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String,
- *      String)
+ * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String, String)
  * @see net.sf.mmm.configuration.api.Configuration#getDescendants(String,
  *      String)
  * 
@@ -21,8 +20,7 @@ public class IllegalDescendantPathException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param path
-   *        is the descendant path that is illegal.
+   * @param path is the descendant path that is illegal.
    */
   public IllegalDescendantPathException(String path) {
 
@@ -32,10 +30,8 @@ public class IllegalDescendantPathException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param path
-   *        is the descendant path that is illegal.
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param path is the descendant path that is illegal.
+   * @param nested is the throwable that caused this exception.
    */
   public IllegalDescendantPathException(String path, Throwable nested) {
 

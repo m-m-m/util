@@ -17,7 +17,7 @@ import net.sf.mmm.util.pojo.base.PojoPropertyIntrospector;
 public class FieldPropertyIntrospector implements PojoPropertyIntrospector {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public FieldPropertyIntrospector() {
 

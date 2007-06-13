@@ -37,10 +37,8 @@ public class FctMaximum {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the maximum of both arguments.
    */
   public static Number max(Number argument1, Number argument2) {
@@ -55,10 +53,8 @@ public class FctMaximum {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the maximum of both arguments.
    */
   public static Date max(Date argument1, Date argument2) {

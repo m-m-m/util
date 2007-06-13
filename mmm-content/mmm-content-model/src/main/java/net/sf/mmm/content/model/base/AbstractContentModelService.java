@@ -83,8 +83,7 @@ public abstract class AbstractContentModelService extends
   /**
    * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(java.lang.String)
    * 
-   * @param name
-   *        the name of the requested class.
+   * @param name the name of the requested class.
    * @return the requested class or <code>null</code> if NOT found.
    */
   protected AbstractContentClass getClassOrNull(String name) {
@@ -95,8 +94,7 @@ public abstract class AbstractContentModelService extends
   /**
    * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(net.sf.mmm.content.value.api.Id)
    * 
-   * @param id
-   *        the ID of the requested class.
+   * @param id the ID of the requested class.
    * @return the requested class or <code>null</code> if NOT found.
    */
   protected AbstractContentClass getClassOrNull(Id id) {
@@ -117,10 +115,8 @@ public abstract class AbstractContentModelService extends
    * service.<br>
    * It does NOT {@link #fireEvent(ContentModelEvent) fire} the according event.
    * 
-   * @param contentClass
-   *        is the class to add.
-   * @throws ContentModelRuntimeException
-   *         if the class is already registered.
+   * @param contentClass is the class to add.
+   * @throws ContentModelRuntimeException if the class is already registered.
    */
   protected void addClass(AbstractContentClass contentClass) throws ContentModelRuntimeException {
 
@@ -143,8 +139,7 @@ public abstract class AbstractContentModelService extends
    * {@link ContentClass#getSubClasses() sub-classes} are also
    * {@link #addClassRecursive(AbstractContentClass) registered} recursively.
    * 
-   * @param contentClass
-   *        is the class to add.
+   * @param contentClass is the class to add.
    * @throws ContentModelRuntimeException
    */
   protected void addClassRecursive(AbstractContentClass contentClass)

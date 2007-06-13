@@ -120,8 +120,7 @@ public interface PojoPropertyDescriptor {
    * This method gets the {@link PojoPropertyAccessor accessor} to access the
    * property in the way given by <code>mode</code>.
    * 
-   * @param mode
-   *        is the mode of the requested accessor.
+   * @param mode is the mode of the requested accessor.
    * @return the accessor for the given <code>mode</code> or <code>null</code>
    *         if no such accessor exists.
    */

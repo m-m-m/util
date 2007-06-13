@@ -8,11 +8,10 @@ import javax.swing.MutableComboBoxModel;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
- * a swing {@link javax.swing.ComboBoxModel}.
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * swing {@link javax.swing.ComboBoxModel}.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected.
+ * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

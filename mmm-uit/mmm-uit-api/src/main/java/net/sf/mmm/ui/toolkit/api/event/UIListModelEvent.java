@@ -16,16 +16,13 @@ public final class UIListModelEvent extends UIModelEvent {
 
   /** the index of the last item that has changed */
   private int endIndex;
-  
+
   /**
    * The constructor.
    * 
-   * @param eventType
-   *        is the type for the new event.
-   * @param startItemIndex
-   *        is the index of the first item that has changed.
-   * @param endItemIndex
-   *        is the index of the last item that has changed.
+   * @param eventType is the type for the new event.
+   * @param startItemIndex is the index of the first item that has changed.
+   * @param endItemIndex is the index of the last item that has changed.
    */
   public UIListModelEvent(Type eventType, int startItemIndex, int endItemIndex) {
 
@@ -37,10 +34,8 @@ public final class UIListModelEvent extends UIModelEvent {
   /**
    * The constructor.
    * 
-   * @param eventType
-   *        is the type for the new event.
-   * @param itemIndex
-   *        is the index of the according item.
+   * @param eventType is the type for the new event.
+   * @param itemIndex is the index of the according item.
    */
   public UIListModelEvent(Type eventType, int itemIndex) {
 

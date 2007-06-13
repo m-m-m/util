@@ -29,8 +29,8 @@ public class ContentParserGeneric extends AbstractContentParser {
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding,
-      Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+      throws Exception {
 
     // TODO: re-implement GNU command "strings"...
     properties.setProperty(PROPERTY_KEY_TEXT, "");

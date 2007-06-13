@@ -56,15 +56,14 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   private final boolean publicOnly;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param pojoClass
-   *        is the class for which the property-accessors should be iterated.
-   * @param onlyPublic
-   *        if <code>true</code> only {@link Modifier#isPublic(int) public}
-   *        methods will be considered for when searching for
-   *        property-accessors, else if <code>false</code> all implemented
-   *        methods are introspected.
+   * @param pojoClass is the class for which the property-accessors should be
+   *        iterated.
+   * @param onlyPublic if <code>true</code> only
+   *        {@link Modifier#isPublic(int) public} methods will be considered for
+   *        when searching for property-accessors, else if <code>false</code>
+   *        all implemented methods are introspected.
    */
   public MethodAccessorIterator(Class<?> pojoClass, boolean onlyPublic) {
 
@@ -138,8 +137,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   /**
    * This method creates an accessor for the given method.
    * 
-   * @param method
-   *        is the method that potentially gives access to a property.
+   * @param method is the method that potentially gives access to a property.
    * @return the accessor or <code>null</code> if the method is no accessor
    *         method.
    */
@@ -162,8 +160,7 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
   /**
    * This method creates an accessor for the given method.
    * 
-   * @param method
-   *        is the method that potentially gives access to a property.
+   * @param method is the method that potentially gives access to a property.
    * @return the accessor or <code>null</code> if the method is no accessor
    *         method.
    */
@@ -220,12 +217,10 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
    * This is the un-capitalized substring of the <code>methodName</code> after
    * the prefix (given via <code>prefixLength</code>).
    * 
-   * @param methodName
-   *        is the {@link Method#getName() name} of the
+   * @param methodName is the {@link Method#getName() name} of the
    *        {@link net.sf.mmm.util.pojo.api.PojoPropertyAccessor#getAccessibleObject() accessor-method}.
-   * @param prefixLength
-   *        is the length of the method prefix (e.g. 3 for "get"/"set" or 2 for
-   *        "is").
+   * @param prefixLength is the length of the method prefix (e.g. 3 for
+   *        "get"/"set" or 2 for "is").
    * @return the requested property-name or <code>null</code> if NOT available
    *         <br> (<code>methodName</code>.{@link String#length() length()}
    *         &lt;= <code>prefixLength</code>).

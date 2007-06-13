@@ -23,7 +23,8 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
+public class FieldAndPublicMethodPojoDescriptorBuilderTest extends
+    AbstractMyPojoDescriptorBuilderTest {
 
   @Test
   public void testPojoDescriptor() throws Exception {
@@ -40,7 +41,7 @@ public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPoj
     // test property "flag"
     checkProperty(pojoDescriptor, "flag", Boolean.class, boolean.class);
     // test property "items"/"item"
-    
+
     // TODO: create add helper and move to abstract parent
     List<String> myList = new ArrayList<String>();
     pojoDescriptor.setProperty(pojoInstance, "items", myList);
@@ -53,7 +54,7 @@ public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPoj
     pojoDescriptor.addPropertyItem(pojoInstance, "item", item2);
     assertEquals(2, myList.size());
     assertEquals(item2, myList.get(1));
-    
+
     // test property "privateString"
     String secret = "secret";
     checkProperty(pojoDescriptor, "privateString", String.class, String.class);
@@ -69,7 +70,7 @@ public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPoj
     secret = "h5g/{h%k$z";
     pojoDescriptor.setProperty(pojoInstance, "string", secret);
     assertSame(secret, pojoDescriptor.getProperty(pojoInstance, "renamedProperty"));
-    
+
   }
 
 }

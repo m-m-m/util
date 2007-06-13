@@ -12,11 +12,10 @@ import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITableModel} to
- * a swing {@link javax.swing.table.TableModel}.
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITableModel} to a
+ * swing {@link javax.swing.table.TableModel}.
  * 
- * @param <C>
- *        is the templated type of the objects in the table cells.
+ * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -31,8 +30,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   /**
    * The constructor.
    * 
-   * @param tableModel
-   *        is the model to adapt.
+   * @param tableModel is the model to adapt.
    */
   public TableModelAdapter(UITableModel<C> tableModel) {
 

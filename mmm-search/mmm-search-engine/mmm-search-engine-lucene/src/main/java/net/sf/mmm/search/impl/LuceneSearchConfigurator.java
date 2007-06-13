@@ -69,8 +69,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    * This method gets the index-path from the configuration given by
    * <code>element</code>.
    * 
-   * @param element
-   *        is the element containing the index-path.
+   * @param element is the element containing the index-path.
    * @return the index-path.
    */
   private String getIndexPath(Element element) {
@@ -91,8 +90,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    * This method creates an analyzer from the configuration given by
    * <code>element</code>.
    * 
-   * @param element
-   *        is the element containing the configuration of the analyzer.
+   * @param element is the element containing the configuration of the analyzer.
    * @return a new analyzer according to the given configuration.
    */
   private Analyzer createAnalyzer(Element element) {
@@ -119,8 +117,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    * This method gets the flag <code>ignore-leading-wildcards</code> from the
    * configuration given by <code>element</code>.
    * 
-   * @param element
-   *        is the element containing the flag.
+   * @param element is the element containing the flag.
    * @return the flag.
    */
   private boolean isIgnoreLeadingWildcards(Element element) {
@@ -137,8 +134,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    * This method gets the flag <code>update</code> from the configuration
    * given by <code>element</code>.
    * 
-   * @param element
-   *        is the element containing the flag.
+   * @param element is the element containing the flag.
    * @return the flag.
    */
   private boolean isUpdate(Element element) {

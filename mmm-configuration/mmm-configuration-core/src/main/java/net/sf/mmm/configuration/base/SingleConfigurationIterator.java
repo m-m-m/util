@@ -28,7 +28,7 @@ public class SingleConfigurationIterator implements Iterator<AbstractConfigurati
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public boolean hasNext() {
 
@@ -36,7 +36,7 @@ public class SingleConfigurationIterator implements Iterator<AbstractConfigurati
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public AbstractConfiguration next() {
 
@@ -49,7 +49,7 @@ public class SingleConfigurationIterator implements Iterator<AbstractConfigurati
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public void remove() {
 

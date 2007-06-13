@@ -13,19 +13,16 @@ public interface ContentModelWriteAccess {
   /**
    * This method creates a sub-class of the given class.
    * 
-   * @param superClass
-   *        is the {@link ContentClass#getSuperClass() super-class} of the
-   *        class to create.
-   * @param name
-   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
+   * @param superClass is the {@link ContentClass#getSuperClass() super-class}
    *        of the class to create.
-   * @param modifiers
-   *        are the {@link ContentClass#getModifiers() modifiers} for the
+   * @param name is the
+   *        {@link net.sf.mmm.content.api.ContentObject#getName() name} of the
    *        class to create.
+   * @param modifiers are the {@link ContentClass#getModifiers() modifiers} for
+   *        the class to create.
    * @return the created class.
-   * @throws ContentModelException
-   *         if the class could not be created. This can have one of the
-   *         following reasons:
+   * @throws ContentModelException if the class could not be created. This can
+   *         have one of the following reasons:
    *         <ul>
    *         <li>the given class is final</li>
    *         <li>the given id already identifies another class</li>
@@ -38,25 +35,21 @@ public interface ContentModelWriteAccess {
   /**
    * This method creates a field in the given class with the specified name.
    * 
-   * @param declaringClass
-   *        is the {@link ContentField#getDeclaringClass() class} where the
-   *        new field will be added.
-   * @param name
-   *        is the {@link net.sf.mmm.content.api.ContentObject#getName() name}
-   *        of the field to create.
-   * @param type
-   *        is the {@link ContentField#getFieldType() type} of the values that
-   *        can be stored in the field to create.
-   * @param modifiers
-   *        are the {@link ContentField#getModifiers() modifiers} for the
-   *        field to create. They must NOT be
+   * @param declaringClass is the {@link ContentField#getDeclaringClass() class}
+   *        where the new field will be added.
+   * @param name is the
+   *        {@link net.sf.mmm.content.api.ContentObject#getName() name} of the
+   *        field to create.
+   * @param type is the {@link ContentField#getFieldType() type} of the values
+   *        that can be stored in the field to create.
+   * @param modifiers are the {@link ContentField#getModifiers() modifiers} for
+   *        the field to create. They must NOT be
    *        {@link FieldModifiers#isTransient() transient} (@see
    *        #createField(ContentClass, String, Class, FieldModifiersImpl,
    *        Term)).
    * @return the created field.
-   * @throws ContentModelException
-   *         if the field could not be created. This can have one of the
-   *         following reasons:
+   * @throws ContentModelException if the field could not be created. This can
+   *         have one of the following reasons:
    *         <ul>
    *         <li>the given class is a system class</li>
    *         <li>the given class already declares a field with the given name
@@ -70,28 +63,23 @@ public interface ContentModelWriteAccess {
    * This method creates a {@link FieldModifiersImpl#isTransient() transient}
    * field in the given class with the specified name.
    * 
-   * @param declaringClass
-   *        is the {@link ContentField#getDeclaringClass() class} where the
-   *        new field will be added.
-   * @param name
-   *        is the {@link net.sf.mmm.content.ContentObjectIF#getName() name} of
-   *        the field to create.
-   * @param type
-   *        is the {@link ContentField#getFieldType() type} of the values that
-   *        can be stored in the field to create.
-   * @param modifiers
-   *        are the {@link ContentField#getModifiers() modifiers} for the
-   *        field to create. They must be
+   * @param declaringClass is the {@link ContentField#getDeclaringClass() class}
+   *        where the new field will be added.
+   * @param name is the
+   *        {@link net.sf.mmm.content.ContentObjectIF#getName() name} of the
+   *        field to create.
+   * @param type is the {@link ContentField#getFieldType() type} of the values
+   *        that can be stored in the field to create.
+   * @param modifiers are the {@link ContentField#getModifiers() modifiers} for
+   *        the field to create. They must be
    *        {@link FieldModifiersImpl#isTransient() transient} (@see
    *        #createField(ContentClass, String, Class, FieldModifiersImpl)).
-   * @param term
-   *        is the term used for dynamic
+   * @param term is the term used for dynamic
    *        {@link ContentField#calculate(net.sf.mmm.content.ContentObjectIF) calculation}
    *        of this {@link FieldModifiersImpl#isTransient() transient} field.
    * @return the created field.
-   * @throws ContentModelException
-   *         if the field could not be created. This can have one of the
-   *         following reasons:
+   * @throws ContentModelException if the field could not be created. This can
+   *         have one of the following reasons:
    *         <ul>
    *         <li>the given class is a system class</li>
    *         <li>the given class already declares a field with the given name
@@ -105,14 +93,11 @@ public interface ContentModelWriteAccess {
    * This method sets the status of the deleted flag of the given class or
    * field.
    * 
-   * @param classOrField
-   *        is the class or field to mark as deleted.
-   * @param newDeletedFlag -
-   *        if <code>true</code> the class will be marked as delted, else it
-   *        will be undeleted.
-   * @throws ContentModelException
-   *         if the deleted flag could not be modified. This can have one of the
-   *         following reasons:
+   * @param classOrField is the class or field to mark as deleted.
+   * @param newDeletedFlag - if <code>true</code> the class will be marked as
+   *        delted, else it will be undeleted.
+   * @throws ContentModelException if the deleted flag could not be modified.
+   *         This can have one of the following reasons:
    *         <ul>
    *         <li>the given class or field has the system flag set</li>
    *         </ul>

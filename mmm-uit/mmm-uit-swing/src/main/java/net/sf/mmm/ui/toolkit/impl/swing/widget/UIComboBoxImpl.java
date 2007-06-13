@@ -18,12 +18,11 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.ComboBoxModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using Swing as the
+ * UI toolkit.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -38,10 +37,8 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UIComboBoxImpl(UIFactorySwing uiFactory, UINode parentObject) {
 

@@ -6,8 +6,8 @@ package net.sf.mmm.framework.api;
 import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
- * A {@link ContainerException} is thrown the
- * {@link IocContainer IoC container} itself is in an exceptional state.
+ * A {@link ContainerException} is thrown the {@link IocContainer IoC container}
+ * itself is in an exceptional state.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -25,9 +25,8 @@ public class PathCondition implements Condition {
   /**
    * The constructor.
    * 
-   * @param pathSegments
-   *        are the segments specifying the path to the descendant matched by
-   *        this condition.
+   * @param pathSegments are the segments specifying the path to the descendant
+   *        matched by this condition.
    */
   public PathCondition(SimplePathSegment[] pathSegments) {
 
@@ -39,17 +38,15 @@ public class PathCondition implements Condition {
    * {@inheritDoc}
    */
   public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
-  
+
     return true;
   }
-  
+
   /**
    * This method recursively implements the accept method.
    * 
-   * @param configuration
-   *        is the current configuration node.
-   * @param segmentIndex
-   *        is the current index in the segment-list.
+   * @param configuration is the current configuration node.
+   * @param segmentIndex is the current index in the segment-list.
    * @return <code>true</code> if there is at least one path that matches.
    */
   private boolean accept(AbstractConfiguration configuration, int segmentIndex) {
@@ -81,8 +78,7 @@ public class PathCondition implements Condition {
    * This method checks if the given <code>descendant</code> is accepted by
    * this condition. Override this method to create a more specific condition.
    * 
-   * @param descendant
-   *        is a descendant that matches the condition-path.
+   * @param descendant is a descendant that matches the condition-path.
    * @return <code>true</code> if the give <code>descendant</code> is
    *         acceptable for this condition.
    */
@@ -98,7 +94,7 @@ public class PathCondition implements Condition {
 
     return accept(configuration, 0);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -120,8 +116,8 @@ public class PathCondition implements Condition {
    * This method establishes this condition on the configuration at the path of
    * this condition which is given by <code>node</code>.
    * 
-   * @param node
-   *        is the configuration this {@link #getSegments() path} points to.
+   * @param node is the configuration this {@link #getSegments() path} points
+   *        to.
    */
   protected void doEstablish(AbstractConfiguration node) {
 
@@ -141,8 +137,7 @@ public class PathCondition implements Condition {
   /**
    * Override to append chars before condition-end char of {@link #toString()}.
    * 
-   * @param buffer
-   *        is the buffer to use.
+   * @param buffer is the buffer to use.
    */
   protected void appendCondition(StringBuffer buffer) {
 

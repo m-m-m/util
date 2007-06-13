@@ -14,9 +14,10 @@ import junit.framework.TestCase;
  */
 @SuppressWarnings("all")
 public class StringUtilTest extends TestCase {
-  
+
   @Test
   public void testEmpty() {
+
     assertTrue(StringUtil.isEmpty(null));
     assertTrue(StringUtil.isEmpty(""));
     assertTrue(StringUtil.isEmpty("\t"));
@@ -28,13 +29,14 @@ public class StringUtilTest extends TestCase {
     assertFalse(StringUtil.isEmpty(" a "));
     assertFalse(StringUtil.isEmpty(" ", false));
   }
- 
+
   @Test
   public void testCamlCase() {
+
     assertEquals("abc", StringUtil.toCamlCase("abc"));
     assertEquals("aaBbCc", StringUtil.toCamlCase("aa-bb-cc"));
     assertEquals("aaBbCc", StringUtil.toCamlCase("aa bb_cc"));
     assertEquals("aaBb", StringUtil.toCamlCase("aa -_bb_ "));
   }
-  
+
 }

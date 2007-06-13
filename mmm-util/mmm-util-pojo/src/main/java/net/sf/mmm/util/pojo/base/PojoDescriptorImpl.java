@@ -37,12 +37,11 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   private final Collection<PojoPropertyDescriptorImpl> propertyList;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param pojoClass
-   *        is the {@link #getPojoType() pojo-class}.
-   * @param introspector
-   *        is used to find the accessors for the given <code>pojoClass</code>.
+   * @param pojoClass is the {@link #getPojoType() pojo-class}.
+   * @param introspector is used to find the accessors for the given
+   *        <code>pojoClass</code>.
    */
   public PojoDescriptorImpl(Class<P> pojoClass, PojoPropertyIntrospector introspector) {
 
@@ -54,7 +53,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
       AbstractPojoPropertyAccessor accessor = accessorIterator.next();
       PojoPropertyDescriptorImpl descriptor = getOrCreateProperty(accessor.getName());
       if (descriptor.getAccessor(accessor.getAccessMode()) == null) {
-        descriptor.setAccessor(accessor);        
+        descriptor.setAccessor(accessor);
       }
     }
   }
@@ -79,8 +78,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
    * This method gets the property-descriptor for the given
    * <code>propertyName</code>.
    * 
-   * @param propertyName
-   *        is the name of the requested property-descriptor.
+   * @param propertyName is the name of the requested property-descriptor.
    * @return the requested property-descriptor or <code>null</code> if NO
    *         property exists with the given <code>propertyName</code>.
    */
@@ -99,14 +97,12 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
    * property identified by the given <code>propertyName</code> and the given
    * access <code>mode</code>.
    * 
-   * @param propertyName
-   *        is the name of the property.
-   * @param mode
-   *        identifies the way how to access the specified property.
+   * @param propertyName is the name of the property.
+   * @param mode identifies the way how to access the specified property.
    * @return the accessor for the property identified by the given
    *         <code>propertyName</code> using the given <code>mode</code>.
-   * @throws PojoPropertyNotFoundException
-   *         if the requested property-accessor does NOT exist.
+   * @throws PojoPropertyNotFoundException if the requested property-accessor
+   *         does NOT exist.
    */
   public AbstractPojoPropertyAccessor getAccessor(String propertyName, PojoPropertyAccessMode mode)
       throws PojoPropertyNotFoundException {

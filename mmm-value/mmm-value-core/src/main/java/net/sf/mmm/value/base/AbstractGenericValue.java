@@ -44,8 +44,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param valueType
-   *        is the type to check.
+   * @param valueType is the type to check.
    * @return <code>true</code> if the given <code>type</code> is supported,
    *         <code>false</code> otherwise.
    */
@@ -243,19 +242,16 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    * java-class using the non-arg constructor. The resulting object must be an
    * instance of the given super-type.
    * 
-   * @param <T>
-   *        is the templated type of the requested instance.
-   * @param javaClass
-   *        is the java-class to instantiate.
-   * @param superType
-   *        is the expected (super-)interface or -class of the instance. Use
-   *        <code>Object.class</code> if any type is acceptable. It is ensured
-   *        that the resulting instance object can be casted to this type.
+   * @param <T> is the templated type of the requested instance.
+   * @param javaClass is the java-class to instantiate.
+   * @param superType is the expected (super-)interface or -class of the
+   *        instance. Use <code>Object.class</code> if any type is acceptable.
+   *        It is ensured that the resulting instance object can be casted to
+   *        this type.
    * @return an instance of the given java-class.
-   * @throws WrongValueTypeException
-   *         if the java-class value does not implement the given super-type.
-   * @throws ValueInstanciationException
-   *         if the instantiation failed.
+   * @throws WrongValueTypeException if the java-class value does not implement
+   *         the given super-type.
+   * @throws ValueInstanciationException if the instantiation failed.
    */
   @SuppressWarnings("unchecked")
   protected <T> T createJavaClassInstance(Class<?> javaClass, Class<T> superType)
@@ -396,11 +392,9 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
   /**
    * This method parses a numeric value.
    * 
-   * @param numberValue
-   *        is the number value as string.
+   * @param numberValue is the number value as string.
    * @return the value as number.
-   * @throws WrongValueTypeException
-   *         if the given string is no number.
+   * @throws WrongValueTypeException if the given string is no number.
    */
   protected Number parseNumber(String numberValue) throws WrongValueTypeException {
 

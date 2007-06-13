@@ -30,13 +30,12 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parentObject
-   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
-   *        that created this object. It may be <code>null</code>.
+   * @param parentObject is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        created this object. It may be <code>null</code>.
    */
   public AbstractUIWindow(AbstractUIFactory uiFactory, UINode parentObject) {
 
@@ -96,8 +95,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * 
    * @see UIWindow#setComposite(UIComposite)
    * 
-   * @param newComposite
-   *        is the composite to register.
+   * @param newComposite is the composite to register.
    */
   public void registerComposite(UIComposite newComposite) {
 
@@ -165,8 +163,8 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * {@inheritDoc}
    */
   public void dispose() {
-  
+
     getFactory().removeWindow(this);
   }
-  
+
 }

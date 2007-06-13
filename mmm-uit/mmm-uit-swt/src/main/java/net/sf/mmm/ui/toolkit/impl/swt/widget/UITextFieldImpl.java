@@ -26,10 +26,8 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UITextFieldImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
 
@@ -75,16 +73,16 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
    * {@inheritDoc}
    */
   public boolean isEditable() {
-  
+
     return this.syncAccess.isEditable();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void setEditable(boolean editableFlag) {
-  
+
     this.syncAccess.setEditable(editableFlag);
   }
-  
+
 }

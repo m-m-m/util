@@ -14,7 +14,7 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
 public class NlsBundleResource extends AbstractResourceBundle {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public NlsBundleResource() {
 

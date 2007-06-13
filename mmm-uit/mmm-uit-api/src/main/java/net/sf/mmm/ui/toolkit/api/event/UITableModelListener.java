@@ -22,8 +22,7 @@ public interface UITableModelListener extends EventListener {
    * {@link net.sf.mmm.ui.toolkit.api.model.UITableModel table-model} if it
    * changed (cells have been updated, inserted or removed).
    * 
-   * @param event
-   *        notifies about the change.
+   * @param event notifies about the change.
    */
   void tableModelChanged(UITableModelEvent event);
 

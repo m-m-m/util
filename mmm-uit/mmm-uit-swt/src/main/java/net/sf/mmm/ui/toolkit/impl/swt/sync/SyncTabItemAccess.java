@@ -39,10 +39,9 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    */
   public SyncTabItemAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -52,12 +51,10 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
-   * @param index
-   *        is the index position of the item to add.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
+   * @param index is the index position of the item to add.
    */
   public SyncTabItemAccess(UIFactorySwt uiFactory, int swtStyle, int index) {
 
@@ -100,8 +97,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    * parent of this control. Else if the control does NOT yet exist, the parent
    * will be set on {@link #create() creation}.
    * 
-   * @param newParentAccess
-   *        is the synchronous access to the new parent
+   * @param newParentAccess is the synchronous access to the new parent
    */
   public void setParentAccess(SyncTabFolderAccess newParentAccess) {
 
@@ -150,8 +146,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    * {@link org.eclipse.swt.widgets.TabItem#setControl(org.eclipse.swt.widgets.Control) control}
    * of the tab-item.
    * 
-   * @param swtControl
-   *        is the tabs control.
+   * @param swtControl is the tabs control.
    */
   public void setControl(Control swtControl) {
 

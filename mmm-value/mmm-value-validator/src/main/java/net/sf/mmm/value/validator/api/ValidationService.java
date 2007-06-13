@@ -15,10 +15,8 @@ public interface ValidationService {
    * {@link ValidationResult#getDetail(int) contains} the given
    * validation-results.
    * 
-   * @param message
-   *        is the message for the composed validation-result.
-   * @param validationResults
-   *        are the results to compose.
+   * @param message is the message for the composed validation-result.
+   * @param validationResults are the results to compose.
    * @return a new validation-result object containing the given
    *         validation-results.
    */

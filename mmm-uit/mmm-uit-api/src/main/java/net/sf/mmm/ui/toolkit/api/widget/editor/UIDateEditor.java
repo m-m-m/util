@@ -25,8 +25,7 @@ public interface UIDateEditor extends UIWidget, UIWriteLocale {
   /**
    * This method sets the date value of this editor.
    * 
-   * @param newDate
-   *        is the new date value.
+   * @param newDate is the new date value.
    */
   void setDate(Date newDate);
 

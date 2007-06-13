@@ -100,10 +100,8 @@ public interface Function {
    * This method validates that the given number of arguments is legal for this
    * function.
    * 
-   * @param count
-   *        is the number of arguments to validate.
-   * @throws CalculationException
-   *         if <code>count</code> is less than
+   * @param count is the number of arguments to validate.
+   * @throws CalculationException if <code>count</code> is less than
    *         {@link Function#getMinimumArgumentCount()} or greater than
    *         {@link Function#getMaximumArgumentCount()} or any number within
    *         this range is illegal for this function.
@@ -131,21 +129,17 @@ public interface Function {
    * This method performs a calculation of the function with the given
    * arguments.
    * 
-   * @param environment
-   *        is a set of variables used to evaluate the (conditional) terms given
-   *        as arguments.
-   * @param arguments
-   *        is an array containing all arguments for the function as terms. The
-   *        terms may be lazy evaluated meaning that they only need to be
-   *        evaluated as needed - e.g. <code>0*(...)</code> will be always
-   *        <code>0</code>. The given varargs array MUST NOT be modified by
-   *        the implementation of this method!
+   * @param environment is a set of variables used to evaluate the (conditional)
+   *        terms given as arguments.
+   * @param arguments is an array containing all arguments for the function as
+   *        terms. The terms may be lazy evaluated meaning that they only need
+   *        to be evaluated as needed - e.g. <code>0*(...)</code> will be
+   *        always <code>0</code>. The given varargs array MUST NOT be
+   *        modified by the implementation of this method!
    * @return the result the calculation.
-   * @throws CalculationException
-   *         if an error occurs during calculation e.g. zero divide or
-   *         incompatible types.
-   * @throws ValueException
-   *         if an argument (e.g. an
+   * @throws CalculationException if an error occurs during calculation e.g.
+   *         zero divide or incompatible types.
+   * @throws ValueException if an argument (e.g. an
    *         {@link Context#getValue(String) "environment value"}) is
    *         {@link net.sf.mmm.value.api.GenericValue#isEmpty() empty} or has
    *         the

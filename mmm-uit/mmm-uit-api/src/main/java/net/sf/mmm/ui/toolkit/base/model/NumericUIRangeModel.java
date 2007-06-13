@@ -36,10 +36,8 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * The constructor.
    * 
-   * @param min
-   *        is the {@link #getMinimumValue() minimum value}.
-   * @param max
-   *        is the {@link #getMaximumValue() maximum value}.
+   * @param min is the {@link #getMinimumValue() minimum value}.
+   * @param max is the {@link #getMaximumValue() maximum value}.
    */
   public NumericUIRangeModel(int min, int max) {
 

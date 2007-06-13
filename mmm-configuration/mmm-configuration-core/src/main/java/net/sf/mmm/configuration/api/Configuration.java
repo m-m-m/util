@@ -256,14 +256,12 @@ public interface Configuration extends
    * the {@link #getPath() "absolute path"} without the leading
    * {@link #PATH_SEPARATOR "/"}.
    * 
-   * @param ancestor
-   *        is the {@link Configuration configuration} where the relative path
-   *        should start.
+   * @param ancestor is the {@link Configuration configuration} where the
+   *        relative path should start.
    * @return the path relative from <code>ancestor</code> to <code>this</code>
    *         configuration.
-   * @throws ConfigurationException
-   *         if <code>this</code> configuration is NOT a
-   *         {@link #isDescendantOf(Configuration) descendant} of the given
+   * @throws ConfigurationException if <code>this</code> configuration is NOT
+   *         a {@link #isDescendantOf(Configuration) descendant} of the given
    *         <code>ancestor</code>.
    */
   String getRelativePath(Configuration ancestor) throws ConfigurationException;
@@ -312,8 +310,7 @@ public interface Configuration extends
    * 
    * See {@link #getDescendant(String, String)} for more details.
    * 
-   * @param path
-   *        is the relative {@link Configuration#getPath() path} from this
+   * @param path is the relative {@link Configuration#getPath() path} from this
    *        configuration to the requested descendant.
    * @return the descendant for the given path.
    */
@@ -388,15 +385,14 @@ public interface Configuration extends
    * 
    * @see #getDescendants(String, String)
    * 
-   * @param path
-   *        is the relative {@link Configuration#getPath() path} from this
+   * @param path is the relative {@link Configuration#getPath() path} from this
    *        configuration to the requested descendant.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} used to resolve the
-   *        descendant. May be <code>null</code> to match any namespace. Then,
-   *        if the requested descendant does NOT exists anyways, the created
-   *        descendant(s) will inherit the {@link #getNamespaceUri() namespace}
-   *        from the existing parent. To resolve a descendant with multiple
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} used to
+   *        resolve the descendant. May be <code>null</code> to match any
+   *        namespace. Then, if the requested descendant does NOT exists
+   *        anyways, the created descendant(s) will inherit the
+   *        {@link #getNamespaceUri() namespace} from the existing parent. To
+   *        resolve a descendant with multiple
    *        {@link #getNamespaceUri() namespaces} on its <code>path</code>
    *        explicitly you have to use multiple calls of this method. If the
    *        requested descendant is an {@link Type#ATTRIBUTE attribute} and the
@@ -416,8 +412,7 @@ public interface Configuration extends
    * for the same {@link #getNamespaceUri() namespace} as this configuration.<br>
    * See {@link #getDescendants(String, String)} for more details.
    * 
-   * @param path
-   *        is the relative {@link Configuration#getPath() path} from this
+   * @param path is the relative {@link Configuration#getPath() path} from this
    *        configuration to the requested descendants.
    * @return all descendants for the given path.
    */
@@ -463,13 +458,11 @@ public interface Configuration extends
    * any XPath expression. Especially there is no support for <code>//</code>
    * or functions (such as <code>count()</code>).
    * 
-   * @param path
-   *        is the relative {@link Configuration#getPath() path} from this
+   * @param path is the relative {@link Configuration#getPath() path} from this
    *        configuration to the requested descendants.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} used to resolve the
-   *        descendants. May be <code>null</code> to match any namespace. To
-   *        resolve descendants explicitly with multiple
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} used to
+   *        resolve the descendants. May be <code>null</code> to match any
+   *        namespace. To resolve descendants explicitly with multiple
    *        {@link #getNamespaceUri() namespaces} on their <code>path</code>
    *        you have to use multiple calls of this method.
    * @return all descendants for the given path.
@@ -490,8 +483,7 @@ public interface Configuration extends
    * 
    * @see #getAncestorDistance(Configuration)
    * 
-   * @param ancestor
-   *        is the potential super-node of this node.
+   * @param ancestor is the potential super-node of this node.
    * @return <code>true</code> if the given <code>ancestor</code> is a
    *         super-node of this node, <code>false</code> otherwise.
    */
@@ -508,8 +500,7 @@ public interface Configuration extends
    * is <code>2</code>.</li>
    * </ul>
    * 
-   * @param ancestor
-   *        is the node potential super-node of this node.
+   * @param ancestor is the node potential super-node of this node.
    * @return
    *        <ul>
    *        <li><code>0</code> if the node given by <code>ancestor</code>

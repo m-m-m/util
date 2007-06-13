@@ -27,10 +27,8 @@ public interface SearchIndexer {
   /**
    * This method adds the given <code>entry</code> to the search-index.
    * 
-   * @param entry
-   *        is the entry to add.
-   * @throws SearchException
-   *         if the operation failed.
+   * @param entry is the entry to add.
+   * @throws SearchException if the operation failed.
    */
   void add(MutableSearchEntry entry) throws SearchException;
 
@@ -41,8 +39,7 @@ public interface SearchIndexer {
    * {@link net.sf.mmm.search.api.SearchEntry#PROPERTY_URI} (fallback) is used
    * as unique identifier for entries.
    * 
-   * @param entry
-   *        is the entry to update.
+   * @param entry is the entry to update.
    * @return the number of entries that have been replaced. This should
    *         typically be <code>1</code> if one entry was replaced or
    *         <code>0</code> none was replaced and the given <code>entry</code>
@@ -50,8 +47,7 @@ public interface SearchIndexer {
    *         greater than <code>1</code> indicates that multiple entries have
    *         been replaced that all have the same <code>uri</code> or
    *         <code>id</code> what indicates a mistake of your index(er).
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   int update(MutableSearchEntry entry) throws SearchException;
 
@@ -61,15 +57,13 @@ public interface SearchIndexer {
    * <code>{@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() id}</code>
    * from the search-index.
    * 
-   * @param entryId
-   *        is the
-   *        {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() ID}
-   *        of the entry to remove.
+   * @param entryId is the
+   *        {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() ID} of
+   *        the entry to remove.
    * @return <code>true</code> if the entry existed and has been removed from
    *         the index, <code>false</code> if NO entry exists for the given
    *         <code>id</code>.
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   boolean removeById(String entryId) throws SearchException;
 
@@ -79,8 +73,7 @@ public interface SearchIndexer {
    * 
    * @see #update(MutableSearchEntry)
    * 
-   * @param uid
-   *        is the {@link MutableSearchEntry#setUid(String) UID} of an entry
+   * @param uid is the {@link MutableSearchEntry#setUid(String) UID} of an entry
    *        previously {@link #add(MutableSearchEntry) added} to the index.
    * @return the number of entries that have been removed. This should typically
    *         be <code>1</code> if one entry exists with the given
@@ -88,8 +81,7 @@ public interface SearchIndexer {
    *         value greater than <code>1</code> indicates that multiple entries
    *         have been removed that all have the given <code>uri</code> what
    *         indicates a mistake of your index(er).
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   int removeByUid(String uid) throws SearchException;
 
@@ -99,8 +91,7 @@ public interface SearchIndexer {
    * 
    * @see #update(MutableSearchEntry)
    * 
-   * @param uri
-   *        is the {@link MutableSearchEntry#setUri(String) URI} of an entry
+   * @param uri is the {@link MutableSearchEntry#setUri(String) URI} of an entry
    *        previously {@link #add(MutableSearchEntry) added} to the index.
    * @return the number of entries that have been removed. This should typically
    *         be <code>1</code> if one entry exists with the given
@@ -108,8 +99,7 @@ public interface SearchIndexer {
    *         value greater than <code>1</code> indicates that multiple entries
    *         have been removed that all have the given <code>uri</code> what
    *         indicates a mistake of your index(er).
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   int removeByUri(String uri) throws SearchException;
 
@@ -120,18 +110,15 @@ public interface SearchIndexer {
    * <b>ATTENTION:</b><br>
    * Please use this method with care.
    * 
-   * @param property
-   *        is the property where the <code>value</code> is expected to occur.
-   *        Therefore the property has to be
+   * @param property is the property where the <code>value</code> is expected
+   *        to occur. Therefore the property has to be
    *        {@link MutableSearchEntry.Mode#NOT_TOKENIZED}.
-   * @param value
-   *        is the
+   * @param value is the
    *        {@link MutableSearchEntry#setProperty(String, String, Mode) value}
    *        of an entry previously {@link #add(MutableSearchEntry) added} to the
    *        index.
    * @return the number of entries that have been removed.
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   int remove(String property, String value) throws SearchException;
 
@@ -140,8 +127,7 @@ public interface SearchIndexer {
    * written to the index. If NOT supported by the implementation, this method
    * will have no effect.
    * 
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   void flush() throws SearchException;
 
@@ -149,8 +135,7 @@ public interface SearchIndexer {
    * This method optimizes the search index. If NOT supported by the
    * implementation, this method will have no effect.
    * 
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   void optimize() throws SearchException;
 
@@ -158,8 +143,7 @@ public interface SearchIndexer {
    * This method closes the search index. After the call of this method no other
    * method of this object shall be invoked.
    * 
-   * @throws SearchException
-   *         if the operation failed.
+   * @throws SearchException if the operation failed.
    */
   void close() throws SearchException;
 

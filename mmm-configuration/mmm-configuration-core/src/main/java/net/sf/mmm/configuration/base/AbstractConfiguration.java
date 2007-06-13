@@ -74,12 +74,10 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method creates a qualified name build of name and namespaceUri.
    * 
-   * @param name
-   *        is the
+   * @param name is the
    *        {@link net.sf.mmm.configuration.api.Configuration#getName() name}.
-   * @param namespace
-   *        is the namespace (URI or prefix) and may be <code>null</code> for
-   *        NO namespace.
+   * @param namespace is the namespace (URI or prefix) and may be
+   *        <code>null</code> for NO namespace.
    * @return the qualified name.
    */
   public static QName createQualifiedName(String name, String namespace) {
@@ -101,8 +99,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * This method builds the {@link #getPath() path} to the given
    * <code>buffer</code>.
    * 
-   * @param buffer
-   *        is the string buffer where the path will be appended to.
+   * @param buffer is the string buffer where the path will be appended to.
    */
   private void buildPath(StringBuffer buffer) {
 
@@ -192,8 +189,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method gets the sibling at the given <code>index</code>.
    * 
-   * @param index
-   *        is the index of the requested sibling.
+   * @param index is the index of the requested sibling.
    * @return the requested sibling.
    */
   public AbstractConfiguration getSibling(int index) {
@@ -224,8 +220,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method adds the given <code>element</code> as sibling to the tail.
    * 
-   * @param element
-   *        is the element to add.
+   * @param element is the element to add.
    */
   public void addSibling(AbstractConfiguration element) {
 
@@ -238,8 +233,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method removes the given <code>element</code> from the sibling list.
    * 
-   * @param element
-   *        is the element to remove.
+   * @param element is the element to remove.
    * @return <code>true</code> if the element was successfully removed from
    *         the list.
    */
@@ -281,16 +275,15 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * The method is ONLY applicable for configurations of the
    * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
-   * @param name
-   *        is the {@link #getName() name} of the requested child. If the
+   * @param name is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
    *        {@link Configuration.Type#ATTRIBUTE attribute}, else
    *        {@link Configuration.Type#ELEMENT element}.
    * @return the requested child or <code>null</code> if no such child exists.
-   * @throws ConfigurationException
-   *         if applied to a configuration of the {@link #getType() type}
+   * @throws ConfigurationException if applied to a configuration of the
+   *         {@link #getType() type}
    *         {@link Configuration.Type#ATTRIBUTE attribute} or the given
    *         <code>name</code> or <code>namespace</code> has illegal syntax.
    */
@@ -312,18 +305,17 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * The method is ONLY applicable for configurations of the
    * {@link #getType() type} {@link Configuration.Type#ELEMENT element}.
    * 
-   * @param name
-   *        is the {@link #getName() name} of the requested child. If the
+   * @param name is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
    *        {@link Configuration.Type#ATTRIBUTE attribute}, else
    *        {@link Configuration.Type#ELEMENT element}.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the requested child.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        requested child.
    * @return the requested child or <code>null</code> if no such child exists.
-   * @throws ConfigurationException
-   *         if applied to a configuration of the {@link #getType() type}
+   * @throws ConfigurationException if applied to a configuration of the
+   *         {@link #getType() type}
    *         {@link Configuration.Type#ATTRIBUTE attribute} or the given
    *         <code>name</code> or <code>namespace</code> has illegal syntax.
    */
@@ -358,19 +350,17 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @see net.sf.mmm.configuration.api.MutableConfiguration#createChild(java.lang.String,
    *      java.lang.String)
    * 
-   * @param name
-   *        is the {@link #getName() name} of the child to create. If the
+   * @param name is the {@link #getName() name} of the child to create. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
    *        {@link Configuration.Type#ATTRIBUTE attribute}, else
    *        {@link Configuration.Type#ELEMENT element}.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the child to create
-   *        or <code>null</code> for default namespace.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        child to create or <code>null</code> for default namespace.
    * @return the created child.
-   * @throws ConfigurationException
-   *         if the operation failed (e.g. called on attribute).
+   * @throws ConfigurationException if the operation failed (e.g. called on
+   *         attribute).
    */
   abstract AbstractConfiguration doCreateChild(String name, String namespaceUri)
       throws ConfigurationException;
@@ -384,15 +374,14 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * 
    * @see Configuration#getDescendant(String, String)
    * 
-   * @param childName
-   *        is the {@link #getName() name} of the requested child. If the
-   *        <code>name</code> starts with the
+   * @param childName is the {@link #getName() name} of the requested child. If
+   *        the <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
    *        {@link Configuration.Type#ATTRIBUTE attribute}, else
    *        {@link Configuration.Type#ELEMENT element}.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the requested child.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        requested child.
    * @return the requested child.
    */
   public AbstractConfiguration requireChild(String childName, String namespaceUri) {
@@ -418,9 +407,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * This method gets an iterator of the child
    * {@link Configuration configurations} with the given {@link #getType() type}.
    * 
-   * @param childType
-   *        is the {@link #getType() type} of the requested children or
-   *        <code>null</code> if the children of any type are requested.
+   * @param childType is the {@link #getType() type} of the requested children
+   *        or <code>null</code> if the children of any type are requested.
    * @return an iterator containing the requested children.
    */
   public abstract Iterator<AbstractConfiguration> getChildren(Type childType);
@@ -431,9 +419,8 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * the given <code>namePattern</code> in the
    * {@link #getNamespaceUri() namespace} of this configuration..
    * 
-   * @param namePattern
-   *        is a pattern that needs to be matched by the {@link #getName() name}
-   *        of the requested children.
+   * @param namePattern is a pattern that needs to be matched by the
+   *        {@link #getName() name} of the requested children.
    * @return an iterator containing the requested children.
    */
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern) {
@@ -448,12 +435,11 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * {@link #getNamespaceUri() namespace-URI}
    * {@link String#equals(Object) equals} the given <code>namespaceUri</code>.
    * 
-   * @param namePattern
-   *        is a pattern that needs to be matched by the {@link #getName() name}
-   *        of the requested children.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the requested
-   *        children or <code>null</code> if the namespace should be ignored.
+   * @param namePattern is a pattern that needs to be matched by the
+   *        {@link #getName() name} of the requested children.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        requested children or <code>null</code> if the namespace should be
+   *        ignored.
    * @return an iterator containing the requested children.
    */
   public abstract Iterator<AbstractConfiguration> getChildren(Pattern namePattern,
@@ -467,8 +453,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * attribute exists in the {@link #getNamespaceUri() namespace}, the request
    * defaults to NO {@link #getNamespaceUri() namespace} (<code>null</code>).<br>
    * 
-   * @param name
-   *        is the {@link #getName() name} of the requested child. If the
+   * @param name is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
@@ -500,15 +485,14 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * {@link Configuration configurations} with the given <code>name</code> and
    * <code>namespaceUri</code>.
    * 
-   * @param name
-   *        is the {@link #getName() name} of the requested child. If the
+   * @param name is the {@link #getName() name} of the requested child. If the
    *        <code>name</code> starts with the
    *        {@link #NAME_PREFIX_ATTRIBUTE "attribute prefix"}, the requested
    *        child has the {@link #getType() type}
    *        {@link Configuration.Type#ATTRIBUTE attribute}, else
    *        {@link Configuration.Type#ELEMENT element}.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the requested child.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        requested child.
    * @return an iterator containing the requested children.
    */
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
@@ -586,7 +570,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
         DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, intersectionSet);
         resultSet.retainAll(intersectionSet);
       } else {
-        DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, resultSet);        
+        DescendantPathWalker.addDescendants(this, namespaceUri, segmentList, 0, resultSet);
       }
       segmentList.clear();
       if (parser.hasNext()) {
@@ -665,8 +649,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method adds the given child to this configuration.
    * 
-   * @param child
-   *        is the child to add.
+   * @param child is the child to add.
    */
   protected void addChild(AbstractConfiguration child) {
 
@@ -676,18 +659,15 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
   /**
    * This method adds the given child to this configuration.
    * 
-   * @param child
-   *        is the child to add.
-   * @param qName
-   *        is the qualified-name of the given <code>child</code>.
+   * @param child is the child to add.
+   * @param qName is the qualified-name of the given <code>child</code>.
    */
   protected abstract void addChild(AbstractConfiguration child, QName qName);
 
   /**
    * This method removes the given child from this configuration.
    * 
-   * @param child
-   *        is the {@link #getChildren(Type) child} configuration of this
+   * @param child is the {@link #getChildren(Type) child} configuration of this
    *        configuration that should be removed.
    * @return <code>true</code> if the <code>child</code> has been
    *         successfully removed, <code>false</code> if the
@@ -704,8 +684,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * 
    * @see #remove()
    * 
-   * @throws ConfigurationException
-   *         is something goes wrong.
+   * @throws ConfigurationException is something goes wrong.
    */
   protected abstract void doRemove() throws ConfigurationException;
 
@@ -736,8 +715,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    * @return the
    *         {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_EXCLUDE exclude configuration}
    *         containing this node as child.
-   * @throws ConfigurationException
-   *         is something goes wrong.
+   * @throws ConfigurationException is something goes wrong.
    */
   protected abstract AbstractConfiguration doDisable() throws ConfigurationException;
 

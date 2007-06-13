@@ -11,66 +11,66 @@ import net.sf.mmm.value.api.GenericValue;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.context.api.Context} interface that delegates to
- * another instance.
+ * {@link net.sf.mmm.context.api.Context} interface that delegates to another
+ * instance.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractContextProxy implements Context {
 
-    /**
-     * The constructor.
-     */
-    public AbstractContextProxy() {
+  /**
+   * The constructor.
+   */
+  public AbstractContextProxy() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * This method gets the delegate instance this proxy points to.
-     * 
-     * @return the real environment behind this proxy.
-     */
-    protected abstract Context getContext();
-    
-    /**
-     * {@inheritDoc}
-     */
-    public Object getObject(String variableName) {
+  /**
+   * This method gets the delegate instance this proxy points to.
+   * 
+   * @return the real environment behind this proxy.
+   */
+  protected abstract Context getContext();
 
-        return getContext().getObject(variableName);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public Object getObject(String variableName) {
 
-    /**
-     * {@inheritDoc}
-     */
-    public GenericValue getValue(String variableName) {
+    return getContext().getObject(variableName);
+  }
 
-        return getContext().getValue(variableName);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public GenericValue getValue(String variableName) {
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean hasValue(String variableName) {
-    
-        return getContext().hasValue(variableName);
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public Set<String> getVariableNames() {
+    return getContext().getValue(variableName);
+  }
 
-        return getContext().getVariableNames();
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public boolean hasValue(String variableName) {
 
-    /**
-     * {@inheritDoc}
-     */
-    public MutableContext createChildContext() {
+    return getContext().hasValue(variableName);
+  }
 
-        return getContext().createChildContext();
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public Set<String> getVariableNames() {
+
+    return getContext().getVariableNames();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public MutableContext createChildContext() {
+
+    return getContext().createChildContext();
+  }
 
 }

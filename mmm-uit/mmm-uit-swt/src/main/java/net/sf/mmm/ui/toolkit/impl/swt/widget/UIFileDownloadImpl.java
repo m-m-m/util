@@ -59,12 +59,9 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param access
-   *        gives access to the data that is offered for download.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param access gives access to the data that is offered for download.
    */
   public UIFileDownloadImpl(UIFactorySwt uiFactory, UISwtNode parentObject, FileAccess access) {
 

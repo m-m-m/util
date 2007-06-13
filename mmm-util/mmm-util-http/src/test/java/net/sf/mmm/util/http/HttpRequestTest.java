@@ -9,14 +9,14 @@ import junit.framework.TestCase;
 
 /**
  * This is a {@link TestCase test-case} for {@link HttpRequest}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class HttpRequestTest extends AbstractHttpMessageTest {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public HttpRequestTest() {
 
@@ -25,7 +25,8 @@ public class HttpRequestTest extends AbstractHttpMessageTest {
 
   @Test
   public void testRequest() {
+
     checkMessage(new HttpRequest());
   }
-  
+
 }

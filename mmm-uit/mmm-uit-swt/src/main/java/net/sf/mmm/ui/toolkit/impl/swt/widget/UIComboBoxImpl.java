@@ -17,9 +17,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UIComboBox} interface using SWT as
  * the UI toolkit.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,15 +36,11 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param editableFlag
-   *        is the (initial) value of the
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param editableFlag is the (initial) value of the
    *        {@link net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable() editable-flag}.
-   * @param listModel
-   *        is the model defining the the selectable elements.
+   * @param listModel is the model defining the the selectable elements.
    */
   public UIComboBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean editableFlag,
       UIListModel<E> listModel) {

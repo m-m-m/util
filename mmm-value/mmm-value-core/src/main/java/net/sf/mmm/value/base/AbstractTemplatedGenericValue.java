@@ -12,8 +12,7 @@ import net.sf.mmm.value.api.WrongValueTypeException;
  * {@link net.sf.mmm.value.api.MutableGenericValue} interface using a templated
  * {@link #getPlainValue() value}.
  * 
- * @param <V>
- *        is the templated type of the actual {@link #getPlainValue() value}.
+ * @param <V> is the templated type of the actual {@link #getPlainValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -38,8 +37,7 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
   /**
    * This method sets the plain value object.
    * 
-   * @param newValue
-   *        is the new value to set.
+   * @param newValue is the new value to set.
    */
   protected abstract void setPlainValue(V newValue);
 
@@ -97,18 +95,14 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
    * This method converts the given <code>value</code> to the requested
    * <code>type</code>.
    * 
-   * @param <T>
-   *        is the templated type that is requested.
-   * @param type
-   *        is the requested type.
-   * @param value
-   *        is the value to convert. May be <code>null</code>.
+   * @param <T> is the templated type that is requested.
+   * @param type is the requested type.
+   * @param value is the value to convert. May be <code>null</code>.
    * @return the <code>value</code> converted to the given <code>type</code>.
    *         Will be <code>null</code> if and only if the given
    *         <code>value</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the given <code>value</code> can NOT be converted to the given
-   *         <code>type</code>.
+   * @throws WrongValueTypeException if the given <code>value</code> can NOT
+   *         be converted to the given <code>type</code>.
    */
   protected abstract <T> T convertValue(Class<T> type, V value) throws WrongValueTypeException;
 
@@ -116,13 +110,11 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
    * This method converts a given <code>value</code> to the templated type of
    * this implementation.
    * 
-   * @param value
-   *        is the value to convert. May be <code>null</code>.
+   * @param value is the value to convert. May be <code>null</code>.
    * @return the converted <code>value</code>. Will be <code>null</code> if
    *         and only if the given <code>value</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the given <code>value</code> can NOT be converted to the given
-   *         <code>type</code>.
+   * @throws WrongValueTypeException if the given <code>value</code> can NOT
+   *         be converted to the given <code>type</code>.
    */
   protected abstract V convertValue(Object value) throws WrongValueTypeException;
 

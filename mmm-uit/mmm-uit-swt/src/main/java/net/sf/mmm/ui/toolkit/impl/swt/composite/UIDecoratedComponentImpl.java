@@ -21,11 +21,10 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
  * {@link net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent} interface
  * using Swing as the UI toolkit.
  * 
- * @param <D>
- *        is the templated type of the
+ * @param <D> is the templated type of the
  *        {@link #getDecorator() decorating component}.
- * @param <C>
- *        is the templated type of the {@link #getComponent() main component}.
+ * @param <C> is the templated type of the
+ *        {@link #getComponent() main component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,7 +36,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
 
   /** the layout-manager */
   private final DecoratingLayoutManager layoutManager;
-  
+
   /** @see #getComponent() */
   private C component;
 

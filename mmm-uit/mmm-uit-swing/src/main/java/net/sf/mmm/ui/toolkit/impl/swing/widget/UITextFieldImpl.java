@@ -12,8 +12,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITextField} interface using Swing
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UITextField} interface using Swing as
+ * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,10 +25,8 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UITextFieldImpl(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -73,16 +71,16 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
    * {@inheritDoc}
    */
   public boolean isEditable() {
-  
+
     return this.textField.isEditable();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void setEditable(boolean editableFlag) {
-  
+
     this.textField.setEditable(editableFlag);
   }
-  
+
 }

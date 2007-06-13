@@ -43,14 +43,14 @@ public class ClasspathResourceAccessFactory implements ConfigurationAccessFactor
   public void configure(String prefix, Context environment, Configuration include)
       throws ConfigurationException, ValueException {
 
-    String resourceName = include.getDescendant(ConfigurationDocument.NAME_INCLUDE_HREF)
-        .getValue().getString();
+    String resourceName = include.getDescendant(ConfigurationDocument.NAME_INCLUDE_HREF).getValue()
+        .getString();
     URL url = Thread.currentThread().getContextClassLoader().getResource(resourceName);
     if (url == null) {
       throw new ConfigurationReadException(resourceName);
     }
     UrlAccess access = new UrlAccess(url);
-    this.accessors = new UrlAccess[] {access};
+    this.accessors = new UrlAccess[] { access };
   }
 
   /**

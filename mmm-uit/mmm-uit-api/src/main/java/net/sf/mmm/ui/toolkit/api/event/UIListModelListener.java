@@ -19,8 +19,7 @@ public interface UIListModelListener extends EventListener {
    * This method is called by the list model if the list has changed (items have
    * been updated, inserted or removed).
    * 
-   * @param event
-   *        notifies about the change of the list.
+   * @param event notifies about the change of the list.
    */
   void listModelChanged(UIListModelEvent event);
 

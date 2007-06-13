@@ -11,8 +11,8 @@ package net.sf.mmm.value.api.type;
 public interface DateAndTimeIF extends DateIF, TimeIF {
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
-   * value type.
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
+   * type.
    */
   String VALUE_NAME = "DateTime";
 

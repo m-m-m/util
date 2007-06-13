@@ -13,10 +13,10 @@ import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.base.AbstractXmlWriter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.xml.api.XmlSerializer}
- * interface that generates the XML as {@link org.w3c.dom.Node DOM} tree. This
- * can be done from scratch or the XML can be appended to an element of an
- * existing DOM tree.
+ * This is an implementation of the
+ * {@link net.sf.mmm.util.xml.api.XmlSerializer} interface that generates the
+ * XML as {@link org.w3c.dom.Node DOM} tree. This can be done from scratch or
+ * the XML can be appended to an element of an existing DOM tree.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -34,8 +34,8 @@ public class DomXmlWriter extends AbstractXmlWriter {
   /**
    * The constructor.
    * 
-   * @param xmlDocument
-   *        is the XML DOM document where to append the XML to serialize.
+   * @param xmlDocument is the XML DOM document where to append the XML to
+   *        serialize.
    */
   public DomXmlWriter(Document xmlDocument) {
 
@@ -47,8 +47,8 @@ public class DomXmlWriter extends AbstractXmlWriter {
   /**
    * The constructor.
    * 
-   * @param xmlElement
-   *        is the XML DOM element where to append the XML to serialize.
+   * @param xmlElement is the XML DOM element where to append the XML to
+   *        serialize.
    */
   public DomXmlWriter(Element xmlElement) {
 

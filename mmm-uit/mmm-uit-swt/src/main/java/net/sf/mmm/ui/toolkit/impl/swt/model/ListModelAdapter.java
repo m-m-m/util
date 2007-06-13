@@ -9,12 +9,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncListAccess;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel}
- * to a {@link org.eclipse.swt.widgets.List}. It is the controler of the MVC
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
+ * a {@link org.eclipse.swt.widgets.List}. It is the controler of the MVC
  * pattern.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected.
+ * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -32,10 +31,8 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
   /**
    * The constructor.
    * 
-   * @param listAccess
-   *        is the synchron access to the SWT list.
-   * @param listModel
-   *        is the model to adapt.
+   * @param listAccess is the synchron access to the SWT list.
+   * @param listModel is the model to adapt.
    */
   public ListModelAdapter(SyncListAccess listAccess, UIListModel<E> listModel) {
 
@@ -64,11 +61,10 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
 
   /**
    * This method sets the list-model. If a model was already set, all items of
-   * that model will be removed. The items of the new model will be added to
-   * the widget.
+   * that model will be removed. The items of the new model will be added to the
+   * widget.
    * 
-   * @param newModel
-   *        is the new list-model.
+   * @param newModel is the new list-model.
    */
   public void setModel(UIListModel<E> newModel) {
 

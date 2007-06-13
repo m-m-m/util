@@ -64,22 +64,19 @@ public interface ContentParser {
    * system-property <code>file.encoding</code> (e.g.
    * <code>java -Dfile.encoding=ISO-8859-1 ...</code>).
    * 
-   * @param inputStream
-   *        is the fresh input stream of the content to parse. It will be
-   *        {@link InputStream#close() closed} by this method (on success and in
-   *        exceptional state).
-   * @param filesize
-   *        is the size (content-length) of the content to parse in bytes or
-   *        <code>0</code> if NOT available (unknown). If available, the
-   *        parser may use this value for optimized allocations.
+   * @param inputStream is the fresh input stream of the content to parse. It
+   *        will be {@link InputStream#close() closed} by this method (on
+   *        success and in exceptional state).
+   * @param filesize is the size (content-length) of the content to parse in
+   *        bytes or <code>0</code> if NOT available (unknown). If available,
+   *        the parser may use this value for optimized allocations.
    * @return the properties containing the extracted (meta-)data from the parsed
    *         <code>inputStream</code>. See the <code>PROPERTY_KEY_*</code>
    *         constants (e.g. {@link #PROPERTY_KEY_TEXT}) for the default keys.
    *         Please note that an implementation may use individual keys for
    *         additional properties.
-   * @throws Exception
-   *         if the parsing failed for a technical reason. There can be
-   *         arbitrary implementations for this interface that can throw any
+   * @throws Exception if the parsing failed for a technical reason. There can
+   *         be arbitrary implementations for this interface that can throw any
    *         {@link Exception} from this method. Declaring a specific
    *         <code>ParseException</code> here would cause the overhead of
    *         additional encapsulation of exceptions without any advantage. The
@@ -97,26 +94,22 @@ public interface ContentParser {
    * This method parses the document given as <code>inputStream</code> and
    * extracts (meta-)data returned as {@link Properties}.
    * 
-   * @param inputStream
-   *        is the fresh input stream of the content to parse. It will be
-   *        {@link InputStream#close() closed} by this method (on success and in
-   *        exceptional state).
-   * @param filesize
-   *        is the size (content-length) of the content to parse in bytes or
-   *        <code>0</code> if NOT available (unknown). If available, the
-   *        parser may use this value for optimized allocations.
-   * @param encoding
-   *        is the explicit encoding to use for textual files. Parsers for
-   *        formats that make encoding explicit (e.g. XML) will completely
+   * @param inputStream is the fresh input stream of the content to parse. It
+   *        will be {@link InputStream#close() closed} by this method (on
+   *        success and in exceptional state).
+   * @param filesize is the size (content-length) of the content to parse in
+   *        bytes or <code>0</code> if NOT available (unknown). If available,
+   *        the parser may use this value for optimized allocations.
+   * @param encoding is the explicit encoding to use for textual files. Parsers
+   *        for formats that make encoding explicit (e.g. XML) will completely
    *        ignore this parameter.
    * @return the properties containing the extracted (meta-)data from the parsed
    *         <code>inputStream</code>. See the <code>PROPERTY_KEY_*</code>
    *         constants (e.g. {@link #PROPERTY_KEY_TEXT}) for the default keys.
    *         Please note that an implementation may use individual keys for
    *         additional properties.
-   * @throws Exception
-   *         if the parsing failed for a technical reason. There can be
-   *         arbitrary implementations for this interface that can throw any
+   * @throws Exception if the parsing failed for a technical reason. There can
+   *         be arbitrary implementations for this interface that can throw any
    *         {@link Exception} from this method. Declaring a specific
    *         <code>ParseException</code> here would cause the overhead of
    *         additional encapsulation of exceptions without any advantage. The

@@ -38,7 +38,7 @@ public class DescendantPathParser {
   private static final ListCharFilter OPERATION_FILTER = new ListCharFilter(true, '=', '<', '>');
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   private DescendantPathParser() {
 
@@ -51,13 +51,10 @@ public class DescendantPathParser {
    * will point to the next character after
    * {@link Configuration#PATH_CONDITION_START}.
    * 
-   * @param parser
-   *        is the string to parse at the current state. It points to the next
-   *        character after {@link Configuration#PATH_CONDITION_START}.
-   * @param segmentList
-   *        is a list used to collect path segments.
-   * @param strict -
-   *        if <code>true</code> the path is parsed
+   * @param parser is the string to parse at the current state. It points to the
+   *        next character after {@link Configuration#PATH_CONDITION_START}.
+   * @param segmentList is a list used to collect path segments.
+   * @param strict - if <code>true</code> the path is parsed
    *        {@link Configuration#getDescendant(String, String) strict}, if
    *        <code>false</code> wildcards and advanced conditions are
    *        permitted.
@@ -93,7 +90,7 @@ public class DescendantPathParser {
           }
           c = parser.forceNext();
           if (c != Configuration.PATH_CONDITION_END) {
-            throw new IllegalDescendantPathException(parser.getOriginalString());            
+            throw new IllegalDescendantPathException(parser.getOriginalString());
           }
           return new IndexCondition(index - 1);
         } catch (NumberFormatException e) {
@@ -115,15 +112,15 @@ public class DescendantPathParser {
           throw new IllegalDescendantPathException(parser.getOriginalString());
         }
         if (!parser.expect(Configuration.PATH_CONDITION_END)) {
-          throw new IllegalDescendantPathException(parser.getOriginalString());          
+          throw new IllegalDescendantPathException(parser.getOriginalString());
         }
         CompareCondition cond = new CompareCondition(segments, value, comparator);
         if (strict && cond.isValuePattern()) {
           throw new IllegalDescendantPathException(parser.getOriginalString());
         }
-        condition = cond;        
+        condition = cond;
       } else {
-        throw new IllegalDescendantPathException(parser.getOriginalString());        
+        throw new IllegalDescendantPathException(parser.getOriginalString());
       }
     } else {
       condition = new PathCondition(segments);
@@ -142,12 +139,9 @@ public class DescendantPathParser {
    * condition.<br>
    * Examples are "childName", "*", "@attr*", "item[@name=='foo']"
    * 
-   * @param parser
-   *        is the string to parse at the current state.
-   * @param segmentList
-   *        is a list used to collect path segments.
-   * @param strict -
-   *        if <code>true</code> the path is parsed
+   * @param parser is the string to parse at the current state.
+   * @param segmentList is a list used to collect path segments.
+   * @param strict - if <code>true</code> the path is parsed
    *        {@link Configuration#getDescendant(String, String) strict}, if
    *        <code>false</code> wildcards and advanced conditions are
    *        permitted.
@@ -182,10 +176,9 @@ public class DescendantPathParser {
    * @see Configuration#getDescendant(String, String)
    * @see Configuration#getDescendants(String, String)
    * 
-   * @param parser
-   *        is the string-parser pointing to the start of the path to parse.
-   * @param strict -
-   *        if <code>true</code> the path is parsed
+   * @param parser is the string-parser pointing to the start of the path to
+   *        parse.
+   * @param strict - if <code>true</code> the path is parsed
    *        {@link Configuration#getDescendant(String, String) strict}, if
    *        <code>false</code> wildcards and advanced conditions are
    *        permitted.
@@ -208,17 +201,14 @@ public class DescendantPathParser {
    * @see Configuration#getDescendant(String, String)
    * @see Configuration#getDescendants(String, String)
    * 
-   * @param parser
-   *        is the string-parser pointing to the start of the path to parse.
-   * @param segments
-   *        is the list where to add the parsed segments.
-   * @param strict -
-   *        if <code>true</code> the path is parsed
+   * @param parser is the string-parser pointing to the start of the path to
+   *        parse.
+   * @param segments is the list where to add the parsed segments.
+   * @param strict - if <code>true</code> the path is parsed
    *        {@link Configuration#getDescendant(String, String) strict}, if
    *        <code>false</code> wildcards and advanced conditions are
    *        permitted.
-   * @param conditionSegments
-   *        is a list used to collect path segments.
+   * @param conditionSegments is a list used to collect path segments.
    */
   public static void parsePath(StringParser parser, List<PathSegment> segments, boolean strict,
       List<SimplePathSegment> conditionSegments) {

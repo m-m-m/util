@@ -19,10 +19,9 @@ public interface UIFrame extends UIWindow, UIWriteMaximized, UIWriteMinimized {
   /**
    * This method creates a new frame as child of this frame.
    * 
-   * @param title
-   *        is the title the new frame will have.
-   * @param resizeable -
-   *        if <code>true</code> the frame can be resized by the user.
+   * @param title is the title the new frame will have.
+   * @param resizeable - if <code>true</code> the frame can be resized by the
+   *        user.
    * @return the created frame.
    */
   UIFrame createFrame(String title, boolean resizeable);

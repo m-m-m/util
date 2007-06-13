@@ -32,8 +32,7 @@ public interface LinkList {
    * 
    * @see LinkList#getLinkCount()
    * 
-   * @param index
-   *        is the position of the requested link.
+   * @param index is the position of the requested link.
    * @return the link at the given index.
    */
   Link getLink(int index);
@@ -48,9 +47,9 @@ public interface LinkList {
   /**
    * This method gets an iterator over all links in the list.
    * 
-   * @param filter
-   *        is the filter that determines the {@link #getLinks() links} that are
-   *        {@link LinkFilter#acceptLink(Link) accepted} and will be returned.
+   * @param filter is the filter that determines the {@link #getLinks() links}
+   *        that are {@link LinkFilter#acceptLink(Link) accepted} and will be
+   *        returned.
    * @return an iterator of all links.
    */
   Iterator<Link> getLinks(LinkFilter filter);

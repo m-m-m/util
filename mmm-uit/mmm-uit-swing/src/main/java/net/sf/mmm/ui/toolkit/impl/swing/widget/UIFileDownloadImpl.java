@@ -19,8 +19,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIFileDownload} interface using
- * Swing as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIFileDownload} interface using Swing
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,7 +37,8 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
     public void actionPerformed(ActionEvent e) {
 
       UIFileDownloadImpl.this.fileChooser.setDialogTitle(getText());
-      int selection = UIFileDownloadImpl.this.fileChooser.showSaveDialog(UIFileDownloadImpl.this.button);
+      int selection = UIFileDownloadImpl.this.fileChooser
+          .showSaveDialog(UIFileDownloadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
         FileAccessUtil.save(UIFileDownloadImpl.this.access, UIFileDownloadImpl.this.fileChooser
             .getSelectedFile(), getParentWindow());
@@ -58,12 +59,9 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param fileAccess
-   *        gives access to the data that is offered for download.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param fileAccess gives access to the data that is offered for download.
    */
   public UIFileDownloadImpl(UIFactorySwing uiFactory, UINode parentObject, FileAccess fileAccess) {
 

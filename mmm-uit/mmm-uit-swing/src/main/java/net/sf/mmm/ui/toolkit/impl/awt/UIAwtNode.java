@@ -26,10 +26,8 @@ public abstract class UIAwtNode extends AbstractUINode {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UIAwtNode(AbstractUIFactory uiFactory, UINode parentObject) {
 

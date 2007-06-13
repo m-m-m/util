@@ -40,8 +40,7 @@ public abstract class AbstractLifecycleManager implements LifecycleManager {
    * 
    * @see #getLifecyclePhases()
    * 
-   * @param lifecyclePhase
-   *        is the lifecycle phase to register.
+   * @param lifecyclePhase is the lifecycle phase to register.
    */
   public final void registerLifecyclePhase(String lifecyclePhase) {
 
@@ -59,14 +58,11 @@ public abstract class AbstractLifecycleManager implements LifecycleManager {
   /**
    * This method performs a regular lifecycle method.
    * 
-   * @param instanceContainer
-   *        is the container with the component instance.
-   * @param phase
-   *        is the
-   *        {@link ExtendedComponentDescriptor#getLifecycleMethod(String)}
-   *        to perform.
-   * @throws LifecycleException
-   *         if the phase failed.
+   * @param instanceContainer is the container with the component instance.
+   * @param phase is the
+   *        {@link ExtendedComponentDescriptor#getLifecycleMethod(String)} to
+   *        perform.
+   * @throws LifecycleException if the phase failed.
    */
   protected void performLifecyclePhase(ExtendedComponentInstanceContainer<?, ?> instanceContainer,
       String phase) throws LifecycleException {

@@ -14,86 +14,87 @@ import net.sf.mmm.framework.demo.api.ComponentB;
 
 /**
  * TODO This type ...
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@Resource(shareable=false)
+@Resource(shareable = false)
 public class TestComponentA implements ComponentA {
 
-    private Log logger;
+  private Log logger;
 
-    private ComponentB be;
-    
-    /**
-     * The constructor.
-     */
-    public TestComponentA() {
+  private ComponentB be;
 
-        super();
-    }
-    
-    /**
-     * This method gets the be.
-     *
-     * @return the be.
-     */
-    public ComponentB getBe() {
-    
-        return this.be;
-    }
+  /**
+   * The constructor.
+   */
+  public TestComponentA() {
 
-    
-    /**
-     * This method sets the be.
-     *
-     * @param be is the be to set.
-     */
-    @Resource
-    public void setBe(ComponentB be) {
-    
-        this.be = be;
-    }
+    super();
+  }
 
-    /**
-     * This method gets the logger.
-     *
-     * @return the logger.
-     */
-    public Log getLogger() {
-    
-        return this.logger;
-    }
-    
-    /**
-     * This method sets the logger.
-     *
-     * @param logger is the logger to set.
-     */
-    @Resource
-    public void setLogger(Log logger) {
-    
-        this.logger = logger;
-    }
+  /**
+   * This method gets the be.
+   * 
+   * @return the be.
+   */
+  public ComponentB getBe() {
 
-    /**
-     * {@inheritDoc}
-     */
-    public String sayAhh() {
-    
-        return "Ahhhh ("+getBe().sayBe()+")!";
-    }
-    
-    /**
-     * 
-     */
-    @PostConstruct
-    public void init() {
-        getLogger().info("A initialized");
-    }
-    
-    @PreDestroy
-    public void dispose() {
-        getLogger().info("A disposed");
-    }
-    
+    return this.be;
+  }
+
+  /**
+   * This method sets the be.
+   * 
+   * @param be is the be to set.
+   */
+  @Resource
+  public void setBe(ComponentB be) {
+
+    this.be = be;
+  }
+
+  /**
+   * This method gets the logger.
+   * 
+   * @return the logger.
+   */
+  public Log getLogger() {
+
+    return this.logger;
+  }
+
+  /**
+   * This method sets the logger.
+   * 
+   * @param logger is the logger to set.
+   */
+  @Resource
+  public void setLogger(Log logger) {
+
+    this.logger = logger;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String sayAhh() {
+
+    return "Ahhhh (" + getBe().sayBe() + ")!";
+  }
+
+  /**
+   * 
+   */
+  @PostConstruct
+  public void init() {
+
+    getLogger().info("A initialized");
+  }
+
+  @PreDestroy
+  public void dispose() {
+
+    getLogger().info("A disposed");
+  }
+
 }

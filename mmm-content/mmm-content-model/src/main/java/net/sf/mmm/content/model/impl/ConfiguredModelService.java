@@ -30,7 +30,7 @@ public class ConfiguredModelService extends AbstractMutableContentModelService {
   private Configuration config;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ConfiguredModelService() {
 
@@ -43,8 +43,7 @@ public class ConfiguredModelService extends AbstractMutableContentModelService {
   /**
    * This method injects the configuration.
    * 
-   * @param configuration
-   *        is the configuration to set.
+   * @param configuration is the configuration to set.
    */
   @Resource
   public void setConfiguration(Configuration configuration) {

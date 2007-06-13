@@ -10,8 +10,7 @@ import net.sf.mmm.configuration.base.ConfigurationUtil;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.configuration.base.access.ConfigurationFactory}
- * interface.
+ * {@link net.sf.mmm.configuration.base.access.ConfigurationFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

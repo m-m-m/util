@@ -26,14 +26,12 @@ import net.sf.mmm.framework.base.ExtendedComponentInstanceContainerImpl;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
- * This is a generic implementation of the {@link ComponentProvider}
- * interface.
+ * This is a generic implementation of the {@link ComponentProvider} interface.
  * 
- * @param <S>
- *        is the {@link ComponentDescriptor#getSpecification() specification}
- *        of the component.
- * @param <I>
- *        is the
+ * @param <S> is the
+ *        {@link ComponentDescriptor#getSpecification() specification} of the
+ *        component.
+ * @param <I> is the
  *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
  *        of the component.
  * 
@@ -41,245 +39,244 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
  */
 public class GenericComponentProvider<S, I extends S> implements ComponentProvider<S> {
 
-    /** @see #getDescriptor() */
-    private final ExtendedComponentDescriptor<S, I> descriptor;
+  /** @see #getDescriptor() */
+  private final ExtendedComponentDescriptor<S, I> descriptor;
 
-    /** @see #request(String, ComponentDescriptor, String, ComponentManager) */
-    private final ComponentInstantiationManager<S, I> instantiationManager;
+  /** @see #request(String, ComponentDescriptor, String, ComponentManager) */
+  private final ComponentInstantiationManager<S, I> instantiationManager;
 
-    /**
-     * The constructor.
-     * 
-     * @param componentDescriptor
-     * @param instantiationPolicyManager
-     */
-    public GenericComponentProvider(ExtendedComponentDescriptor<S, I> componentDescriptor,
-            ComponentInstantiationManager<S, I> instantiationPolicyManager) {
+  /**
+   * The constructor.
+   * 
+   * @param componentDescriptor
+   * @param instantiationPolicyManager
+   */
+  public GenericComponentProvider(ExtendedComponentDescriptor<S, I> componentDescriptor,
+      ComponentInstantiationManager<S, I> instantiationPolicyManager) {
 
-        super();
-        this.descriptor = componentDescriptor;
-        this.instantiationManager = instantiationPolicyManager;
+    super();
+    this.descriptor = componentDescriptor;
+    this.instantiationManager = instantiationPolicyManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ExtendedComponentDescriptor<S, I> getDescriptor() {
+
+    return this.descriptor;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void dispose(ComponentInstanceContainer<S> instanceContainer,
+      ComponentManager componentManager) {
+
+    // TODO !!!
+    System.out.println("shutdown " + instanceContainer);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean release(ComponentInstanceContainer<S> instanceContainer,
+      ComponentManager componentManager) {
+
+    ExtendedComponentInstanceContainerImpl<S, I> extendedInstanceContainer = (ExtendedComponentInstanceContainerImpl<S, I>) instanceContainer;
+    boolean release = this.instantiationManager.release(extendedInstanceContainer);
+    if (release) {
+      dispose(extendedInstanceContainer, componentManager);
     }
+    return release;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public ExtendedComponentDescriptor<S, I> getDescriptor() {
+  /**
+   * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String,
+   *      net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String,
+   *      net.sf.mmm.framework.api.ComponentManager)
+   */
+  public ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId,
+      ComponentDescriptor sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
 
-        return this.descriptor;
-    }
+    ExtendedComponentInstanceContainerImpl<S, I> instanceContainer = this.instantiationManager
+        .request(instanceId);
+    if (instanceContainer.getInstance() == null) {
+      I privateInstance = instanceContainer.getPrivateInstance();
+      // instantiation
+      if (privateInstance == null) {
+        privateInstance = instantiateComponent(instanceId, sourceDescriptor, sourceInstanceId,
+            componentManager);
+        instanceContainer.setPrivateInstance(privateInstance);
+      }
+      // field injection
+      if (instanceContainer.getLifecycleState() == null) {
+        performFieldInjection(privateInstance, instanceId, sourceDescriptor, sourceInstanceId,
+            componentManager);
+        instanceContainer
+            .setLifecycleState(ExtendedComponentInstanceContainer.LIFECYCLE_STATE_FIELD_INJECTION_COMPLETE);
+      }
+      // setter injection
+      if (ExtendedComponentInstanceContainer.LIFECYCLE_STATE_FIELD_INJECTION_COMPLETE
+          .equals(instanceContainer.getLifecycleState())) {
 
-    /**
-     * {@inheritDoc}
-     */
-    public void dispose(ComponentInstanceContainer<S> instanceContainer, ComponentManager componentManager) {
-    
-        // TODO !!!
-        System.out.println("shutdown " + instanceContainer);
-    }
+        performSetterInjection(privateInstance, instanceId, sourceDescriptor, sourceInstanceId,
+            componentManager);
+        instanceContainer
+            .setLifecycleState(ExtendedComponentInstanceContainer.LIFECYCLE_STATE_SETTER_INJECTION_COMPLETE);
+      }
+      // real lifecycle
+      if (ExtendedComponentInstanceContainer.LIFECYCLE_STATE_SETTER_INJECTION_COMPLETE
+          .equals(instanceContainer.getLifecycleState())) {
 
-    /**
-     * {@inheritDoc} 
-     */
-    public boolean release(ComponentInstanceContainer<S> instanceContainer,
-            ComponentManager componentManager) {
-
-        ExtendedComponentInstanceContainerImpl<S, I> extendedInstanceContainer = (ExtendedComponentInstanceContainerImpl<S, I>) instanceContainer;
-        boolean release = this.instantiationManager.release(extendedInstanceContainer);
-        if (release) {
-            dispose(extendedInstanceContainer, componentManager);
+        Iterator<LifecycleMethod> lifecycleIterator = this.descriptor.getLifecycleMethods();
+        if (lifecycleIterator.hasNext()) {
+          LifecycleManager lifecycleManager = componentManager
+              .requestComponent(LifecycleManager.class);
+          Set<String> phases = lifecycleManager.getLifecyclePhases();
+          while (lifecycleIterator.hasNext()) {
+            LifecycleMethod lifecycleMethod = lifecycleIterator.next();
+            if (!phases.contains(lifecycleMethod.getLifecyclePhase())) {
+              throw new ContainerException("Lifecycle phase '"
+                  + lifecycleMethod.getLifecyclePhase() + "' not supported by lifecycle manager '"
+                  + lifecycleManager + "'");
+            }
+          }
+          lifecycleManager.setupComponent(instanceContainer);
+          componentManager.releaseComponent(lifecycleManager);
         }
-        return release;
+      }
+      // proxy
+      S publicInstance;
+      if (componentManager.hasComponent(ComponentProvider.class)) {
+        ComponentProxyBuilder proxyBuilder = componentManager
+            .requestComponent(ComponentProxyBuilder.class);
+        publicInstance = proxyBuilder.createProxy(this.descriptor, privateInstance);
+      } else {
+        publicInstance = privateInstance;
+      }
+      instanceContainer.setInstance(publicInstance);
     }
+    return instanceContainer;
+  }
 
-    /**
-     * @see net.sf.mmm.framework.api.ComponentProvider#request(java.lang.String,
-     *      net.sf.mmm.framework.api.ComponentDescriptor, java.lang.String,
-     *      net.sf.mmm.framework.api.ComponentManager)
-     */
-    public ExtendedComponentInstanceContainerImpl<S, I> request(String instanceId,
-            ComponentDescriptor sourceDescriptor, String sourceInstanceId,
-            ComponentManager componentManager) throws ComponentException {
+  /**
+   * 
+   * @param instanceId
+   * @param sourceDescriptor
+   * @param sourceInstanceId
+   * @param componentManager
+   * @return
+   * @throws ComponentInstantiationException
+   */
+  protected I instantiateComponent(String instanceId, ComponentDescriptor sourceDescriptor,
+      String sourceInstanceId, ComponentManager componentManager)
+      throws ComponentInstantiationException {
 
-        ExtendedComponentInstanceContainerImpl<S, I> instanceContainer = this.instantiationManager
-                .request(instanceId);
-        if (instanceContainer.getInstance() == null) {
-            I privateInstance = instanceContainer.getPrivateInstance();
-            // instantiation
-            if (privateInstance == null) {
-                privateInstance = instantiateComponent(instanceId, sourceDescriptor,
-                        sourceInstanceId, componentManager);
-                instanceContainer.setPrivateInstance(privateInstance);
-            }
-            // field injection
-            if (instanceContainer.getLifecycleState() == null) {
-                performFieldInjection(privateInstance, instanceId, sourceDescriptor,
-                        sourceInstanceId, componentManager);
-                instanceContainer
-                        .setLifecycleState(ExtendedComponentInstanceContainer.LIFECYCLE_STATE_FIELD_INJECTION_COMPLETE);
-            }
-            // setter injection
-            if (ExtendedComponentInstanceContainer.LIFECYCLE_STATE_FIELD_INJECTION_COMPLETE
-                    .equals(instanceContainer.getLifecycleState())) {
+    try {
+      Constructor<I> constructor = getDescriptor().getConstructor();
+      if (constructor == null) {
+        throw new NullPointerException("no constructor!");
+      }
+      Class<?>[] argTypes = constructor.getParameterTypes();
+      if (argTypes.length == 0) {
+        return constructor.newInstance(ReflectionUtil.NO_ARGUMENTS);
+      }
+      Object[] args = new Object[argTypes.length];
+      int argIndex = 0;
+      Iterator<Dependency> dependencyIterator = this.descriptor.getDependencies(Type.CONSTRUCTOR);
+      while (dependencyIterator.hasNext()) {
+        Dependency dependency = dependencyIterator.next();
+        Class<?> depSpec = dependency.getSpecification();
+        // TODO: how to handle configuration dependencies???
 
-                performSetterInjection(privateInstance, instanceId, sourceDescriptor,
-                        sourceInstanceId, componentManager);
-                instanceContainer
-                        .setLifecycleState(ExtendedComponentInstanceContainer.LIFECYCLE_STATE_SETTER_INJECTION_COMPLETE);
-            }
-            // real lifecycle
-            if (ExtendedComponentInstanceContainer.LIFECYCLE_STATE_SETTER_INJECTION_COMPLETE
-                    .equals(instanceContainer.getLifecycleState())) {
+        // This check is actually too late here...
+        if (!argTypes[argIndex].isAssignableFrom(depSpec)) {
 
-                Iterator<LifecycleMethod> lifecycleIterator = this.descriptor.getLifecycleMethods();
-                if (lifecycleIterator.hasNext()) {
-                    LifecycleManager lifecycleManager = componentManager
-                            .requestComponent(LifecycleManager.class);
-                    Set<String> phases = lifecycleManager.getLifecyclePhases();
-                    while (lifecycleIterator.hasNext()) {
-                        LifecycleMethod lifecycleMethod = lifecycleIterator.next();
-                        if (!phases.contains(lifecycleMethod.getLifecyclePhase())) {
-                            throw new ContainerException("Lifecycle phase '"
-                                    + lifecycleMethod.getLifecyclePhase()
-                                    + "' not supported by lifecycle manager '" + lifecycleManager
-                                    + "'");
-                        }
-                    }
-                    lifecycleManager.setupComponent(instanceContainer);
-                    componentManager.releaseComponent(lifecycleManager);
-                }
-            }
-            // proxy
-            S publicInstance;
-            if (componentManager.hasComponent(ComponentProvider.class)) {
-                ComponentProxyBuilder proxyBuilder = componentManager
-                        .requestComponent(ComponentProxyBuilder.class);
-                publicInstance = proxyBuilder.createProxy(this.descriptor, privateInstance);
-            } else {
-                publicInstance = privateInstance;
-            }
-            instanceContainer.setInstance(publicInstance);
         }
-        return instanceContainer;
+        args[argIndex] = requestDependency(componentManager, instanceId, dependency);
+        argIndex++;
+      }
+      return constructor.newInstance(args);
+    } catch (IocException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new ComponentInstantiationException(this.descriptor.getSpecification(), this.descriptor
+          .getImplementation(), ComponentManager.DEFAULT_INSTANCE_ID, e);
     }
+  }
 
-    /**
-     * 
-     * @param instanceId
-     * @param sourceDescriptor
-     * @param sourceInstanceId
-     * @param componentManager
-     * @return
-     * @throws ComponentInstantiationException
-     */
-    protected I instantiateComponent(String instanceId, ComponentDescriptor sourceDescriptor,
-            String sourceInstanceId, ComponentManager componentManager)
-            throws ComponentInstantiationException {
+  /**
+   * 
+   * @param instance
+   * @param instanceId
+   * @param sourceDescriptor
+   * @param sourceInstanceId
+   * @param componentManager
+   * @throws ComponentException
+   */
+  protected void performFieldInjection(I instance, String instanceId,
+      ComponentDescriptor sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
 
-        try {
-            Constructor<I> constructor = getDescriptor().getConstructor();
-            if (constructor == null) {
-                throw new NullPointerException("no constructor!");
-            }
-            Class<?>[] argTypes = constructor.getParameterTypes();
-            if (argTypes.length == 0) {
-                return constructor.newInstance(ReflectionUtil.NO_ARGUMENTS);
-            }
-            Object[] args = new Object[argTypes.length];
-            int argIndex = 0;
-            Iterator<Dependency> dependencyIterator = this.descriptor
-                    .getDependencies(Type.CONSTRUCTOR);
-            while (dependencyIterator.hasNext()) {
-                Dependency dependency = dependencyIterator.next();
-                Class<?> depSpec = dependency.getSpecification();
-                // TODO: how to handle configuration dependencies???
-
-                // This check is actually too late here...
-                if (!argTypes[argIndex].isAssignableFrom(depSpec)) {
-
-                }
-                args[argIndex] = requestDependency(componentManager, instanceId, dependency);
-                argIndex++;
-            }
-            return constructor.newInstance(args);
-        } catch (IocException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ComponentInstantiationException(this.descriptor.getSpecification(),
-                    this.descriptor.getImplementation(), ComponentManager.DEFAULT_INSTANCE_ID, e);
-        }
+    try {
+      Iterator<Dependency> dependencyIterator = this.descriptor.getDependencies(Type.FIELD);
+      while (dependencyIterator.hasNext()) {
+        Dependency<?> dependency = dependencyIterator.next();
+        Object component = requestDependency(componentManager, instanceId, dependency);
+        dependency.getInjectionField().set(instance, component);
+      }
+    } catch (IocException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new ComponentInstantiationException(this.descriptor.getSpecification(), this.descriptor
+          .getImplementation(), ComponentManager.DEFAULT_INSTANCE_ID, e);
     }
+  }
 
-    /**
-     * 
-     * @param instance
-     * @param instanceId
-     * @param sourceDescriptor
-     * @param sourceInstanceId
-     * @param componentManager
-     * @throws ComponentException
-     */
-    protected void performFieldInjection(I instance, String instanceId,
-            ComponentDescriptor sourceDescriptor, String sourceInstanceId,
-            ComponentManager componentManager) throws ComponentException {
+  /**
+   * 
+   * @param instance
+   * @param instanceId
+   * @param sourceDescriptor
+   * @param sourceInstanceId
+   * @param componentManager
+   * @throws ComponentException
+   */
+  protected void performSetterInjection(I instance, String instanceId,
+      ComponentDescriptor sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
 
-        try {
-            Iterator<Dependency> dependencyIterator = this.descriptor.getDependencies(Type.FIELD);
-            while (dependencyIterator.hasNext()) {
-                Dependency<?> dependency = dependencyIterator.next();
-                Object component = requestDependency(componentManager, instanceId, dependency);
-                dependency.getInjectionField().set(instance, component);
-            }
-        } catch (IocException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ComponentInstantiationException(this.descriptor.getSpecification(),
-                    this.descriptor.getImplementation(), ComponentManager.DEFAULT_INSTANCE_ID, e);
-        }
+    Iterator<Dependency> dependencyIterator = this.descriptor.getDependencies(Type.SETTER);
+    while (dependencyIterator.hasNext()) {
+      Dependency<?> dependency = dependencyIterator.next();
+      Object component = requestDependency(componentManager, instanceId, dependency);
+      try {
+        dependency.getInjectionMethod().invoke(instance, component);
+      } catch (Exception e) {
+        throw new ComponentInjectionException(e, component, dependency, instance);
+      }
     }
+  }
 
-    /**
-     * 
-     * @param instance
-     * @param instanceId
-     * @param sourceDescriptor
-     * @param sourceInstanceId
-     * @param componentManager
-     * @throws ComponentException
-     */
-    protected void performSetterInjection(I instance, String instanceId,
-            ComponentDescriptor sourceDescriptor, String sourceInstanceId,
-            ComponentManager componentManager) throws ComponentException {
+  /**
+   * 
+   * @param componentManager
+   * @param instanceId
+   * @param dependency
+   * @return the requested dependency.
+   * @throws DependencyCreationException
+   */
+  protected Object requestDependency(ComponentManager componentManager, String instanceId,
+      Dependency<?> dependency) throws DependencyCreationException {
 
-        Iterator<Dependency> dependencyIterator = this.descriptor.getDependencies(Type.SETTER);
-        while (dependencyIterator.hasNext()) {
-            Dependency<?> dependency = dependencyIterator.next();
-            Object component = requestDependency(componentManager, instanceId, dependency);
-            try {
-                dependency.getInjectionMethod().invoke(instance, component);
-            } catch (Exception e) {
-                throw new ComponentInjectionException(e, component, dependency, instance);
-            }
-        }
+    try {
+      return componentManager.requestComponent(dependency.getSpecification(), dependency
+          .getInstanceId());
+    } catch (ComponentException e) {
+      throw new DependencyCreationException(this.descriptor, instanceId, dependency, e);
     }
-
-    /**
-     * 
-     * @param componentManager
-     * @param instanceId
-     * @param dependency
-     * @return the requested dependency.
-     * @throws DependencyCreationException
-     */
-    protected Object requestDependency(ComponentManager componentManager, String instanceId,
-            Dependency<?> dependency) throws DependencyCreationException {
-
-        try {
-            return componentManager.requestComponent(dependency.getSpecification(), dependency
-                    .getInstanceId());
-        } catch (ComponentException e) {
-            throw new DependencyCreationException(this.descriptor, instanceId, dependency, e);
-        }
-    }
+  }
 
 }

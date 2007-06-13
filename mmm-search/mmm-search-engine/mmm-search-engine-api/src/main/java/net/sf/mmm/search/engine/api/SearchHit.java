@@ -54,8 +54,7 @@ public interface SearchHit extends SearchEntry {
    * 
    * @see #getScore()
    * 
-   * @param maximum
-   *        is the maximum score
+   * @param maximum is the maximum score
    * @return the score of this hit.
    */
   int getScore(int maximum);

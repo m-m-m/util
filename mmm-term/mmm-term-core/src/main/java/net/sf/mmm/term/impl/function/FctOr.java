@@ -43,10 +43,8 @@ public class FctOr {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the bitwise OR of both arguments.
    */
   public static Integer or(Integer argument1, Integer argument2) {
@@ -57,10 +55,8 @@ public class FctOr {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the logical OR of both arguments (<code>true</code> if one of
    *         the arguments is <code>true</code>).
    */

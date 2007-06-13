@@ -30,8 +30,7 @@ public class UIDisplayImpl extends AbstractUIDisplay {
     /**
      * The constructor.
      * 
-     * @param d
-     *        is the display
+     * @param d is the display
      */
     private SizeGetter(Display d) {
 
@@ -60,12 +59,9 @@ public class UIDisplayImpl extends AbstractUIDisplay {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param uiDevice
-   *        is the device the display belongs to.
-   * @param swtDisplay
-   *        is the SWT display to wrap.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param uiDevice is the device the display belongs to.
+   * @param swtDisplay is the SWT display to wrap.
    */
   public UIDisplayImpl(UIFactorySwt uiFactory, UIDeviceImpl uiDevice, Display swtDisplay) {
 

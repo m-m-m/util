@@ -25,8 +25,7 @@ public class MyProgressBar extends JProgressBar {
   /**
    * The constructor.
    * 
-   * @param o
-   *        is the orientation of the progress-bar.
+   * @param o is the orientation of the progress-bar.
    */
   public MyProgressBar(Orientation o) {
 

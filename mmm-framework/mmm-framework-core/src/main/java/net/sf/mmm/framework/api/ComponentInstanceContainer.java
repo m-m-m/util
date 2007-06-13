@@ -8,9 +8,9 @@ package net.sf.mmm.framework.api;
  * {@link #getInstance() instance} of the component for a specific
  * {@link ComponentProvider provider}.
  * 
- * @param <S>
- *        is the {@link ComponentDescriptor#getSpecification() specification}
- *        of the component.
+ * @param <S> is the
+ *        {@link ComponentDescriptor#getSpecification() specification} of the
+ *        component.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -25,8 +25,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
  * This class is the implementation of the UITree interface using Swing as the
  * UI toolkit.
  * 
- * @param <N>
- *        is the templated type of the tree-nodes.
+ * @param <N> is the templated type of the tree-nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -44,10 +43,8 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UITreeImpl(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -97,9 +94,8 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
   /**
    * This method sets the selection mode of this tree.
    * 
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple items, else ony
-   *        one.
+   * @param multiSelection - if <code>true</code> the user can select multiple
+   *        items, else ony one.
    */
   public void setMultiSelection(boolean multiSelection) {
 

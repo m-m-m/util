@@ -37,10 +37,8 @@ public class FctMinimum {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the minimum of both arguments.
    */
   public static Number min(Number argument1, Number argument2) {
@@ -55,10 +53,8 @@ public class FctMinimum {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the minimum of both arguments.
    */
   public static Date min(Date argument1, Date argument2) {

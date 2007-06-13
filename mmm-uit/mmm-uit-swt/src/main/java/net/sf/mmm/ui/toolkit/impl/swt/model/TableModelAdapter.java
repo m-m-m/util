@@ -23,8 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
  * to an {@link org.eclipse.swt.widgets.Table}. It is the controler of the MVC
  * pattern.
  * 
- * @param <C>
- *        is the templated type of the objects in the table cells.
+ * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -48,8 +47,8 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
   /**
    * The constructor.
    * 
-   * @param tableAccess
-   *        is the sync access to the native SWT table widget for this adapter.
+   * @param tableAccess is the sync access to the native SWT table widget for
+   *        this adapter.
    */
   public TableModelAdapter(SyncTableAccess tableAccess) {
 
@@ -75,8 +74,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
   /**
    * This method sets the model to adapt.
    * 
-   * @param newModel
-   *        is the model to set.
+   * @param newModel is the model to set.
    */
   public void setModel(UITableModel<C> newModel) {
 

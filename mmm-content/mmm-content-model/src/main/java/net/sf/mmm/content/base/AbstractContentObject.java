@@ -38,10 +38,8 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * The constructor.
    * 
-   * @param objectId
-   *        is the {@link #getId() unique id} of the object.
-   * @param objectName
-   *        is the {@link #getName() name} of the object to create.
+   * @param objectId is the {@link #getId() unique id} of the object.
+   * @param objectName is the {@link #getName() name} of the object to create.
    */
   public AbstractContentObject(IdImpl objectId, String objectName) {
 
@@ -94,8 +92,7 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * This method sets the deleted flag to the given value.
    * 
-   * @param deleted
-   *        is the new value of the deleted flag.
+   * @param deleted is the new value of the deleted flag.
    */
   public void setDeleted(boolean deleted) {
 
@@ -105,8 +102,7 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * This method changes the {@link #getName() name} of this object.
    * 
-   * @param newName
-   *        is the new name to set.
+   * @param newName is the new name to set.
    */
   protected void setName(String newName) {
 
@@ -140,8 +136,7 @@ public abstract class AbstractContentObject implements ContentObject {
    * @see #getFieldValue(String)
    * 
    * @param field
-   * @param fieldName
-   *        TODO
+   * @param fieldName TODO
    * @return
    * @throws PermissionDeniedException
    * @throws ContentException
@@ -179,7 +174,8 @@ public abstract class AbstractContentObject implements ContentObject {
     } catch (ClassCastException e) {
       if ((value != null) && field.getFieldClass().isAssignableFrom(value.getClass())) {
         // TODO: create exception type
-        //throw new FieldTypeNotCompatibleException(e, field, value.getClass(), field.getFieldType());
+        // throw new FieldTypeNotCompatibleException(e, field, value.getClass(),
+        // field.getFieldType());
         throw new IllegalStateException("Field type NOT compatible!");
       }
       throw new IllegalStateException("Internal Error");

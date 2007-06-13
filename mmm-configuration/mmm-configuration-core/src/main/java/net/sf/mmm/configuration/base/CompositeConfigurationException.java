@@ -11,8 +11,8 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 
 /**
  * This is a configuration exception that contains multiple nested configuration
- * exceptions. It is a summary of multiple errors that occurred during a chain of
- * operations that should be processed to the end.
+ * exceptions. It is a summary of multiple errors that occurred during a chain
+ * of operations that should be processed to the end.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,7 +37,7 @@ public class CompositeConfigurationException extends ConfigurationException {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public void printStackTrace(PrintStream s) {
 
@@ -49,7 +49,7 @@ public class CompositeConfigurationException extends ConfigurationException {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public void printStackTrace(PrintWriter s) {
 

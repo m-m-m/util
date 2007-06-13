@@ -10,8 +10,8 @@ package net.sf.mmm.util.collection;
  * {@link Object#equals(Object)} method of the
  * {@link #getDelegate() delegate object}.
  * 
- * @param <T>
- *        is the templated type of the {@link #getDelegate() delegate-object}.
+ * @param <T> is the templated type of the
+ *        {@link #getDelegate() delegate-object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,8 +23,7 @@ public class HashKey<T> {
   /**
    * The constructor.
    * 
-   * @param object
-   *        is the {@link #getDelegate() delegate object}.
+   * @param object is the {@link #getDelegate() delegate object}.
    */
   public HashKey(T object) {
 

@@ -70,8 +70,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    * The constructor.
    * 
    * @param parentContainer
-   * @param containerName
-   *        is the {@link #getName() name}.
+   * @param containerName is the {@link #getName() name}.
    */
   public AbstractIocContainer(AbstractIocContainer parentContainer, String containerName) {
 
@@ -223,13 +222,12 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * This method throws an exception if the container has already been
-   * started. Call this method from all methods that perform modifications of
-   * the container.
+   * This method throws an exception if the container has already been started.
+   * Call this method from all methods that perform modifications of the
+   * container.
    * 
-   * @throws ContainerException
-   *         if the container has NOT been {@link #start() started} or already
-   *         been {@link #stop() stopped}.
+   * @throws ContainerException if the container has NOT been
+   *         {@link #start() started} or already been {@link #stop() stopped}.
    */
   protected final void ensureRunning() throws ContainerException {
 
@@ -242,12 +240,11 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * This method throws an exception if the container has already been
-   * started. Call this method from all methods that perform modifications of
-   * the container.
+   * This method throws an exception if the container has already been started.
+   * Call this method from all methods that perform modifications of the
+   * container.
    * 
-   * @throws ContainerException
-   *         if the container has already been started.
+   * @throws ContainerException if the container has already been started.
    */
   protected final void ensureNotStarted() throws ContainerException {
 
@@ -259,8 +256,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   /**
    * This method gets the provider for the given <code>specification</code>.
    * 
-   * @param <S>
-   *        is the
+   * @param <S> is the
    *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        of the requested component.
    * @param specification
@@ -283,19 +279,17 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    * @see net.sf.mmm.framework.api.ComponentManager#hasComponent(java.lang.Class)
    * 
    * This method determines if the component for the given
-   * {@link ComponentDescriptor#getSpecification() specification} is
-   * available. In that case, it can be retrieved via the
-   * {@link ComponentManager#requestComponent(Class)} method without causing
-   * an "component not registered" exception.
+   * {@link ComponentDescriptor#getSpecification() specification} is available.
+   * In that case, it can be retrieved via the
+   * {@link ComponentManager#requestComponent(Class)} method without causing an
+   * "component not registered" exception.
    * 
-   * @param <S>
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the requested component.
-   * @param specification
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the component.
+   * @param <S> is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
+   *        requested component.
+   * @param specification is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
+   *        component.
    * @return <code>true</code> if a component for the given
    *         {@link ComponentDescriptor#getSpecification() specification} is
    *         registered, <code>false</code> otherwise.
@@ -336,11 +330,9 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   /**
    * @see net.sf.mmm.framework.api.ComponentManager#releaseComponent(java.lang.Object)
    * 
-   * @param <S>
-   *        is the templated type of the associated
+   * @param <S> is the templated type of the associated
    *        {@link ComponentDescriptor#getSpecification() component specification}.
-   * @param node
-   *        is the node with the component instance to release.
+   * @param node is the node with the component instance to release.
    */
   protected <S> void releaseComponentByNode(DependencyNode<S> node) {
 
@@ -367,8 +359,8 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
        * sharedNode = this.instanceMap.get(instanceContainer); if (sharedNode ==
        * null) { // we do not yet have it in the shared component map so lets
        * add // it. debug("tracking shared component " + node);
-       * this.instanceMap.put(instanceContainer, node); // then we move the
-       * node to the container's node node.removeFromSiblingList();
+       * this.instanceMap.put(instanceContainer, node); // then we move the node
+       * to the container's node node.removeFromSiblingList();
        * node.setSource(this.sharedDependencyNode);
        * this.sharedDependencyNode.addTarget(node); } else { // do we have
        * dependencies (or can we just drop the duplicate // node? if
@@ -417,18 +409,15 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   /**
    * This method detects cyclic dependencies.
    * 
-   * @param specification
-   *        is the
+   * @param specification is the
    *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        of the requested component.
-   * @param instanceId
-   *        is the
+   * @param instanceId is the
    *        {@link ComponentManager#requestComponent(Class, String) instance-ID}
    *        of the requested component.
-   * @param sourceNode
-   *        is the node for the source component performing the request.
-   * @throws DependencyCycleException
-   *         if a cycle was detected.
+   * @param sourceNode is the node for the source component performing the
+   *        request.
+   * @throws DependencyCycleException if a cycle was detected.
    */
   protected void detectDependencyCycle(Class<?> specification, String instanceId,
       DependencyNode<?> sourceNode) throws DependencyCycleException {
@@ -491,8 +480,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
    * 
    * @see IocSecurityManager#checkPermission(Class, Class, String)
    * 
-   * @param source
-   *        is the source
+   * @param source is the source
    * @param target
    * @param instanceId
    * @throws SecurityException
@@ -511,30 +499,25 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   /**
    * @see ComponentManager#requestComponent(Class, String)
    * 
-   * @param <S>
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the requested component.
-   * @param specification
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the requested component.
-   * @param instanceId
-   *        identifies a specific instance of the component for
+   * @param <S> is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
+   *        requested component.
+   * @param specification is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
+   *        requested component.
+   * @param instanceId identifies a specific instance of the component for
    *        <code>specification</code> if there are multiple. The
    *        {@link ComponentManager#requestComponent(Class) default} is
    *        {@link ComponentManager#DEFAULT_INSTANCE_ID}.
    * @param sourceNode
    * @return an instance of the requested component. It must fulfill the given
-   *         {@link ComponentDescriptor#getSpecification() specification}.
-   *         It is illegal (and typically NOT possible) to cast it to another
-   *         type (that is no super-type).
-   * @throws ComponentException
-   *         if the requested component is NOT
+   *         {@link ComponentDescriptor#getSpecification() specification}. It
+   *         is illegal (and typically NOT possible) to cast it to another type
+   *         (that is no super-type).
+   * @throws ComponentException if the requested component is NOT
    *         {@link #hasComponent(Class) available} or could not be provided.
-   * @throws ContainerException
-   *         if a fundamental problem occurred (e.g. the container has NOT been
-   *         started).
+   * @throws ContainerException if a fundamental problem occurred (e.g. the
+   *         container has NOT been started).
    */
   protected <S> S requestComponent(Class<S> specification, String instanceId,
       DependencyNode<?> sourceNode) throws ComponentException, ContainerException {
@@ -595,12 +578,11 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
 
   /**
    * This method prints out a warning message.<br>
-   * This implementation simply delegates to {@link System#err} for NOT adding
-   * a dependency to a specific logger API. Please override this method and
-   * use an appropriate logger.
+   * This implementation simply delegates to {@link System#err} for NOT adding a
+   * dependency to a specific logger API. Please override this method and use an
+   * appropriate logger.
    * 
-   * @param message
-   *        is the warning message.
+   * @param message is the warning message.
    */
   protected void warning(String message) {
 
@@ -609,12 +591,11 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
 
   /**
    * This method prints out an informational message.<br>
-   * This implementation simply delegates to {@link System#out} for NOT adding
-   * a dependency to a specific logger API. Please override this method and
-   * use an appropriate logger.
+   * This implementation simply delegates to {@link System#out} for NOT adding a
+   * dependency to a specific logger API. Please override this method and use an
+   * appropriate logger.
    * 
-   * @param message
-   *        is the informational message.
+   * @param message is the informational message.
    */
   protected void info(String message) {
 
@@ -623,12 +604,11 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
 
   /**
    * This method prints out an debugging message.<br>
-   * This implementation simply delegates to {@link System#out} for NOT adding
-   * a dependency to a specific logger API. Please override this method and
-   * use an appropriate logger.
+   * This implementation simply delegates to {@link System#out} for NOT adding a
+   * dependency to a specific logger API. Please override this method and use an
+   * appropriate logger.
    * 
-   * @param message
-   *        is the debugging message.
+   * @param message is the debugging message.
    */
   protected void debug(String message) {
 
@@ -636,8 +616,7 @@ public abstract class AbstractIocContainer implements MutableIocContainer {
   }
 
   /**
-   * This is the {@link ComponentProvider provider} of the
-   * {@link IocContainer}.
+   * This is the {@link ComponentProvider provider} of the {@link IocContainer}.
    */
   protected class ContainerProvider extends SimpleSingletonProvider<IocContainer> {
 

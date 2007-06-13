@@ -10,10 +10,8 @@ import java.util.List;
  * This class extends {@link AbstractEventSource} with the ability of
  * synchronization and therefore is thread-safe.
  * 
- * @param <E>
- *        is the templated type of the events to send.
- * @param <L>
- *        is the templated type of the listeners that can be
+ * @param <E> is the templated type of the events to send.
+ * @param <L> is the templated type of the listeners that can be
  *        {@link #addListener(EventListener) registered} here and that will
  *        {@link net.sf.mmm.util.event.EventListener#handleEvent(Event) receive}
  *        the sent events.
@@ -27,7 +25,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   private final Object lock;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractSynchronizedEventSource() {
 
@@ -35,17 +33,16 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param listeners 
-   *        is the list used to store the listeners.
+   * @param listeners is the list used to store the listeners.
    */
   protected AbstractSynchronizedEventSource(List<L> listeners) {
 
     super(listeners);
     this.lock = listeners;
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */

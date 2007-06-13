@@ -42,16 +42,15 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
    */
   @Override
   public Class<ContentClass> getNodeType() {
-  
+
     return ContentClass.class;
   }
-  
+
   /**
    * This method sets the {@link ContentModelService modelService} adapted by
    * this tree-model.
    * 
-   * @param modelService
-   *        is the modelService to set.
+   * @param modelService is the modelService to set.
    */
   @Resource
   public void setModelService(ContentModelService modelService) {

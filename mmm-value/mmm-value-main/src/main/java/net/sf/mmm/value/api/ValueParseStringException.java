@@ -20,14 +20,11 @@ public class ValueParseStringException extends ValueParseException {
   /**
    * The constructor.
    * 
-   * @param stringToParse
-   *        is the string that could not be parsed
-   * @param valueType
-   *        is the {@link ValueManager#getValueClass() type} of value the
+   * @param stringToParse is the string that could not be parsed
+   * @param valueType is the {@link ValueManager#getValueClass() type} of value
+   *        the given string should be parsed as.
+   * @param valueName is the {@link ValueManager#getName() name} of value the
    *        given string should be parsed as.
-   * @param valueName
-   *        is the {@link ValueManager#getName() name} of value the given
-   *        string should be parsed as.
    */
   public ValueParseStringException(String stringToParse, Class valueType, String valueName) {
 
@@ -37,14 +34,11 @@ public class ValueParseStringException extends ValueParseException {
   /**
    * The constructor.
    * 
-   * @param stringToParse
-   *        is the string that could not be parsed
-   * @param valueType
-   *        is the {@link ValueManager#getValueClass() type} of value the
+   * @param stringToParse is the string that could not be parsed
+   * @param valueType is the {@link ValueManager#getValueClass() type} of value
+   *        the given string should be parsed as.
+   * @param valueName is the {@link ValueManager#getName() name} of value the
    *        given string should be parsed as.
-   * @param valueName
-   *        is the {@link ValueManager#getName() name} of value the given
-   *        string should be parsed as.
    * @param nested
    */
   public ValueParseStringException(String stringToParse, Class valueType, String valueName,
@@ -54,8 +48,8 @@ public class ValueParseStringException extends ValueParseException {
   }
 
   /**
-   * This method gets the expected {@link ValueManager#getValueClass() type}
-   * of the value that could not be parsed.
+   * This method gets the expected {@link ValueManager#getValueClass() type} of
+   * the value that could not be parsed.
    * 
    * @return the value type.
    */
@@ -65,8 +59,8 @@ public class ValueParseStringException extends ValueParseException {
   }
 
   /**
-   * This method gets the expected {@link ValueManager#getName() name} of
-   * the value that could not be parsed.
+   * This method gets the expected {@link ValueManager#getName() name} of the
+   * value that could not be parsed.
    * 
    * @return the value name.
    */

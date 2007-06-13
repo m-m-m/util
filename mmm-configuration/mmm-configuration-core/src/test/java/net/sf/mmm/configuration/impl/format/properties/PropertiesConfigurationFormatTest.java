@@ -14,20 +14,19 @@ import net.sf.mmm.configuration.impl.format.AbstractConfigurationFormatTest;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlConfigurationTest;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
 
-
 /**
  * This is the {@link TestCase test-case} for the
  * {@link net.sf.mmm.configuration.api.Configuration configuration}
  * implementation {@link net.sf.mmm.configuration.impl.format.properties}.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class PropertiesConfigurationFormatTest extends AbstractConfigurationFormatTest {
 
   /**
-   * The constructor. 
-   *
+   * The constructor.
+   * 
    */
   public PropertiesConfigurationFormatTest() {
 
@@ -37,7 +36,8 @@ public class PropertiesConfigurationFormatTest extends AbstractConfigurationForm
   @Test
   public void testConfiguration() {
 
-    String href = PropertiesConfigurationFormatTest.class.getName().replace('.', '/') + ".properties";
+    String href = PropertiesConfigurationFormatTest.class.getName().replace('.', '/')
+        + ".properties";
     ConfigurationAccess access = new ResourceAccess(href);
     ConfigurationFactory factory = new PropertiesFactory();
     checkConfiguration(factory, access);

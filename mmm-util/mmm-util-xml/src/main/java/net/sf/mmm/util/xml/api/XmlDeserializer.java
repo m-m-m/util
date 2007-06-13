@@ -21,11 +21,9 @@ public interface XmlDeserializer<O> {
    * This method de-serializes the templated object from the given
    * <code>xmlReader</code>.
    * 
-   * @param xmlReader
-   *        is where to read from.
+   * @param xmlReader is where to read from.
    * @return the de-serialized object.
-   * @throws XmlException
-   *         if the serialization fails (e.g. caused by
+   * @throws XmlException if the serialization fails (e.g. caused by
    *         {@link XMLStreamException}).
    */
   O fromXml(XMLStreamReader xmlReader) throws XMLStreamException;

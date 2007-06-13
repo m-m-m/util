@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 
 import net.sf.mmm.configuration.base.AbstractConfiguration;
 
-
 /**
  * This class implements an empty iterator of
  * {@link net.sf.mmm.configuration.api.Configuration configurations}. It is a
@@ -30,7 +29,7 @@ public class EmptyConfigurationIterator implements Iterator<AbstractConfiguratio
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public boolean hasNext() {
 
@@ -38,7 +37,7 @@ public class EmptyConfigurationIterator implements Iterator<AbstractConfiguratio
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public AbstractConfiguration next() {
 
@@ -46,7 +45,7 @@ public class EmptyConfigurationIterator implements Iterator<AbstractConfiguratio
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public void remove() {
 

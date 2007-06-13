@@ -73,8 +73,7 @@ public abstract class AbstractLayoutManager {
   /**
    * The constructor.
    * 
-   * @param factory
-   *        is the owning UI-factory.
+   * @param factory is the owning UI-factory.
    */
   public AbstractLayoutManager(AbstractUIFactory factory) {
 
@@ -314,8 +313,7 @@ public abstract class AbstractLayoutManager {
   /**
    * This method sets the orientation for this layout.
    * 
-   * @param orientation
-   *        is the layoutOrientation to set.
+   * @param orientation is the layoutOrientation to set.
    */
   public void setOrientation(Orientation orientation) {
 
@@ -325,8 +323,7 @@ public abstract class AbstractLayoutManager {
   /**
    * This method ensures that the cache has at least the given size.
    * 
-   * @param componentCount
-   *        is the required cache size.
+   * @param componentCount is the required cache size.
    */
   protected void ensureCacheSize(int componentCount) {
 
@@ -354,11 +351,10 @@ public abstract class AbstractLayoutManager {
    * given component size is overridden according to the given
    * {@link LayoutConstraints#size}.
    * 
-   * @param constraintsSize
-   *        is the {@link LayoutConstraints#size} that may override
-   *        width/height.
-   * @param componentSize
-   *        is the size of the component. It will be manipulated as necessary.
+   * @param constraintsSize is the {@link LayoutConstraints#size} that may
+   *        override width/height.
+   * @param componentSize is the size of the component. It will be manipulated
+   *        as necessary.
    */
   public static void overrideSize(UIReadSize constraintsSize, Size componentSize) {
 

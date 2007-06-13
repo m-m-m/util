@@ -22,12 +22,11 @@ public abstract class AbstractUIObject implements UIObject {
 
   /** @see #getStyle() */
   private String style;
-  
+
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
    */
@@ -85,16 +84,16 @@ public abstract class AbstractUIObject implements UIObject {
    * {@inheritDoc}
    */
   public String getStyle() {
-  
+
     return this.style;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void setStyle(String style) {
-  
+
     this.style = style;
   }
-  
+
 }

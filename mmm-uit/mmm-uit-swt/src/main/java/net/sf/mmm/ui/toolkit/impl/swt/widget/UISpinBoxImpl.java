@@ -14,11 +14,10 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMySpinnerAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UISpinBox} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UISpinBox} interface using SWT as the
+ * UI toolkit.
  * 
- * @param <E>
- *        is the templated type of the list-elements.
+ * @param <E> is the templated type of the list-elements.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,12 +32,9 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param listModel
-   *        is the model for the elements to select.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param listModel is the model for the elements to select.
    */
   public UISpinBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UIListModel<E> listModel) {
 

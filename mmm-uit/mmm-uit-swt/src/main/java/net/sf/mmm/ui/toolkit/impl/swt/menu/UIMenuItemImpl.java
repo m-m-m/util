@@ -14,8 +14,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuItemAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenuItem} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenuItem} interface using SWT as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,16 +33,12 @@ public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param text
-   *        is the {@link #getText() text} of the menu item.
-   * @param itemStyle
-   *        is the style defining how the item is visualized and behaves.
-   * @param item
-   *        is the actual SWT menu-item.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param text is the {@link #getText() text} of the menu item.
+   * @param itemStyle is the style defining how the item is visualized and
+   *        behaves.
+   * @param item is the actual SWT menu-item.
    */
   public UIMenuItemImpl(UIFactorySwt uiFactory, UIMenuImpl parentObject, String text,
       ButtonStyle itemStyle, MenuItem item) {

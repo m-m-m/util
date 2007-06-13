@@ -46,13 +46,10 @@ public class FctModulo {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the modulo of both arguments.
-   * @throws CalculationException
-   *         if the second argument is zero.
+   * @throws CalculationException if the second argument is zero.
    */
   public static Integer mod(Integer argument1, Integer argument2) throws CalculationException {
 
@@ -65,13 +62,10 @@ public class FctModulo {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the modulo of both arguments.
-   * @throws CalculationException
-   *         if the second argument is zero.
+   * @throws CalculationException if the second argument is zero.
    */
   public static Long mod(Long argument1, Integer argument2) throws CalculationException {
 
@@ -84,13 +78,10 @@ public class FctModulo {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the modulo of both arguments.
-   * @throws CalculationException
-   *         if the second argument is zero.
+   * @throws CalculationException if the second argument is zero.
    */
   public static Long mod(Integer argument1, Long argument2) throws CalculationException {
 
@@ -103,13 +94,10 @@ public class FctModulo {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the modulo of both arguments.
-   * @throws CalculationException
-   *         if the second argument is zero.
+   * @throws CalculationException if the second argument is zero.
    */
   public static Long mod(Long argument1, Long argument2) throws CalculationException {
 

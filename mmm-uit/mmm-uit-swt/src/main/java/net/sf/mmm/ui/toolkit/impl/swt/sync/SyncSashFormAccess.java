@@ -38,11 +38,10 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the sash-form.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        sash-form.
    */
   public SyncSashFormAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -52,13 +51,11 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the sash-form.
-   * @param swtSashForm
-   *        is the widget to access.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        sash-form.
+   * @param swtSashForm is the widget to access.
    */
   public SyncSashFormAccess(UIFactorySwt uiFactory, int swtStyle, SashForm swtSashForm) {
 
@@ -113,8 +110,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
   /**
    * This method sets the weight for the divider-location.
    * 
-   * @param weight
-   *        is the new weight to set. The value has to be in the range of
+   * @param weight is the new weight to set. The value has to be in the range of
    *        <code>0</code> to <code>100</code>.
    */
   public void setWeights(int weight) {
@@ -129,9 +125,9 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
    * This method sets the {@link SashForm#setOrientation(int) orientation} of
    * the sash-form.
    * 
-   * @param sashOrientation -
-   *        {@link org.eclipse.swt.SWT#HORIZONTAL} for horizontal or
-   *        {@link org.eclipse.swt.SWT#VERTICAL} for vertical orientation.
+   * @param sashOrientation - {@link org.eclipse.swt.SWT#HORIZONTAL} for
+   *        horizontal or {@link org.eclipse.swt.SWT#VERTICAL} for vertical
+   *        orientation.
    */
   public void setOrientation(int sashOrientation) {
 

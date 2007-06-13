@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 
 /**
  * This is the {@link TestCase} for immutable configurations.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -27,7 +27,9 @@ public class ImmutableConfigurationTest extends TestCase {
 
   @Test
   public void testImmutableConfiguration() {
-    ClasspathResource resource = new ClasspathResource(ImmutableConfigurationTest.class, ".xml", true);
+
+    ClasspathResource resource = new ClasspathResource(ImmutableConfigurationTest.class, ".xml",
+        true);
     ConfigurationAccess access = new UrlAccess(resource.getUrl());
     ConfigurationFactory factory = new XmlFactory();
     ConfigurationDocument doc = factory.create(access);
@@ -40,5 +42,5 @@ public class ImmutableConfigurationTest extends TestCase {
     assertEquals("EMPTY", config.getDescendant("foo/bar[ding/@dong]").getName());
     assertEquals("@EMPTY", config.getDescendant("foo/@bar").getName());
   }
-  
+
 }

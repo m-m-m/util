@@ -9,7 +9,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
  * This is the exception thrown if the configuration-binding failed.
  * 
  * @see ConfigurationBindingService
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ConfigurationBindingException extends ConfigurationException {
@@ -18,8 +18,8 @@ public class ConfigurationBindingException extends ConfigurationException {
   private static final long serialVersionUID = 5267673193101239594L;
 
   /**
-   * The constructor. 
-   *
+   * The constructor.
+   * 
    * @param internaitionalizedMessage
    * @param arguments
    */
@@ -29,8 +29,8 @@ public class ConfigurationBindingException extends ConfigurationException {
   }
 
   /**
-   * The constructor. 
-   *
+   * The constructor.
+   * 
    * @param nested
    * @param internaitionalizedMessage
    * @param arguments

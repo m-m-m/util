@@ -29,7 +29,7 @@ import net.sf.mmm.value.base.AbstractGenericValue;
 public abstract class AbstractConfigurationBindingInjector implements ConfigurationBindingInjector {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractConfigurationBindingInjector() {
 
@@ -117,8 +117,7 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
    * This means that it is directly supported by
    * {@link GenericValue#getValue(Class)}.
    * 
-   * @param type
-   *        is the type to check.
+   * @param type is the type to check.
    * @return <code>true</code> if the given type is simple, <code>false</code>
    *         otherwise.
    */
@@ -130,19 +129,14 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
   /**
    * This method creates an instance of the given <code>type</code>.
    * 
-   * @param <O>
-   *        is the templated type of the object to create.
-   * @param configuration
-   *        is the configuration that may help to find the appropriate
-   *        implementation or to get constructor arguments from.
-   * @param type
-   *        is the class reflecting the type of the requested object.
+   * @param <O> is the templated type of the object to create.
+   * @param configuration is the configuration that may help to find the
+   *        appropriate implementation or to get constructor arguments from.
+   * @param type is the class reflecting the type of the requested object.
    * @return a new instance of the requested object.
-   * @throws IllegalAccessException
-   *         if you do NOT have permissions the access the underlying getter
-   *         method.
-   * @throws InstantiationException
-   *         if the instantiation failed.
+   * @throws IllegalAccessException if you do NOT have permissions the access
+   *         the underlying getter method.
+   * @throws InstantiationException if the instantiation failed.
    */
   protected abstract <O> O create(Configuration configuration, Class<O> type)
       throws InstantiationException, IllegalAccessException;

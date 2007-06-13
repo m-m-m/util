@@ -9,8 +9,7 @@ import java.util.concurrent.Callable;
  * This class allows executing a {@link java.util.concurrent.Callable} as
  * {@link java.lang.Runnable}.
  * 
- * @param <T>
- *        is the templated type of the callable
+ * @param <T> is the templated type of the callable
  *        {@link java.util.concurrent.Callable#call() result}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -26,8 +25,7 @@ public class CallableRunner<T> implements Runnable {
   /**
    * The constructor.
    * 
-   * @param callable
-   *        is the callable to adapt.
+   * @param callable is the callable to adapt.
    */
   public CallableRunner(Callable<T> callable) {
 

@@ -12,11 +12,10 @@ import net.sf.mmm.framework.base.provider.InstanceIdNotAvailableException;
  * This is the abstract base implementation of the
  * {@link ComponentInstantiationManager} interface.
  * 
- * @param <S>
- *        is the {@link ComponentDescriptor#getSpecification() specification} of
- *        the component.
- * @param <I>
- *        is the
+ * @param <S> is the
+ *        {@link ComponentDescriptor#getSpecification() specification} of the
+ *        component.
+ * @param <I> is the
  *        {@link ExtendedComponentDescriptor#getImplementation() implementation}
  *        of the component.
  * 
@@ -68,9 +67,8 @@ public abstract class AbstractDefaultComponentInstantiationManager<S, I extends 
    * 
    * @param instanceId
    * @return the requested instance-ID
-   * @throws InstanceIdNotAvailableException
-   *         if the component is NOT available for the requested
-   *         <code>instanceId</code>.
+   * @throws InstanceIdNotAvailableException if the component is NOT available
+   *         for the requested <code>instanceId</code>.
    */
   public ExtendedComponentInstanceContainerImpl<S, I> requestByInstanceId(String instanceId)
       throws InstanceIdNotAvailableException {

@@ -41,16 +41,14 @@ public interface UINode extends UIObject {
    * This method adds an action listener to this component. The listener will be
    * notified of changes of this component.
    * 
-   * @param listener
-   *        is the listener to add.
+   * @param listener is the listener to add.
    */
   void addActionListener(UIActionListener listener);
 
   /**
    * This method removes an action listener from this component.
    * 
-   * @param listener
-   *        is the listener to remove.
+   * @param listener is the listener to remove.
    */
   void removeActionListener(UIActionListener listener);
 

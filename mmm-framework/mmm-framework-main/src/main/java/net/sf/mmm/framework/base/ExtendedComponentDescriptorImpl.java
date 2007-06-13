@@ -27,10 +27,8 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
  * This is the implementation of the {@link ExtendedComponentDescriptor}
  * interface.
  * 
- * @param <S>
- *        is the component {@link #getSpecification() specification}
- * @param <I>
- *        is the component {@link #getImplementation() implementation}
+ * @param <S> is the component {@link #getSpecification() specification}
+ * @param <I> is the component {@link #getImplementation() implementation}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -64,16 +62,14 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
   /**
    * The constructor.
    * 
-   * @param componentSpecification
-   *        is the {@link #getSpecification() specification} of the component.
-   * @param componentConstructor
-   *        is the {@link #getConstructor() constructor} of the component.
-   * @param instantiationPolicy
-   *        is the {@link #getInstantiationPolicy() policy} for the
-   *        instantiation of the component.
-   * @param dependencies
-   *        are the {@link #getDependencies() dependencies} of the component. is
-   *        the {@link #getConstructor() constructor}
+   * @param componentSpecification is the
+   *        {@link #getSpecification() specification} of the component.
+   * @param componentConstructor is the {@link #getConstructor() constructor} of
+   *        the component.
+   * @param instantiationPolicy is the {@link #getInstantiationPolicy() policy}
+   *        for the instantiation of the component.
+   * @param dependencies are the {@link #getDependencies() dependencies} of the
+   *        component. is the {@link #getConstructor() constructor}
    */
   public ExtendedComponentDescriptorImpl(Class<S> componentSpecification,
       Constructor<I> componentConstructor, String instantiationPolicy, Dependency<?>[] dependencies) {
@@ -85,18 +81,16 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
   /**
    * The constructor.
    * 
-   * @param componentSpecification
-   *        is the {@link #getSpecification() specification} of the component.
-   * @param componentConstructor
-   *        is the {@link #getConstructor() constructor} of the component.
-   * @param instantiationPolicy
-   *        is the {@link #getInstantiationPolicy() policy} for the
-   *        instantiation of the component.
-   * @param dependencies
-   *        are the {@link #getDependencies() dependencies} of the component. is
-   *        the {@link #getConstructor() constructor}
-   * @param lifecycleMethods
-   *        are the {@link #getLifecycleMethods() lifecycle-methods}.
+   * @param componentSpecification is the
+   *        {@link #getSpecification() specification} of the component.
+   * @param componentConstructor is the {@link #getConstructor() constructor} of
+   *        the component.
+   * @param instantiationPolicy is the {@link #getInstantiationPolicy() policy}
+   *        for the instantiation of the component.
+   * @param dependencies are the {@link #getDependencies() dependencies} of the
+   *        component. is the {@link #getConstructor() constructor}
+   * @param lifecycleMethods are the
+   *        {@link #getLifecycleMethods() lifecycle-methods}.
    */
   public ExtendedComponentDescriptorImpl(Class<S> componentSpecification,
       Constructor<I> componentConstructor, String instantiationPolicy, Dependency[] dependencies,
@@ -109,20 +103,18 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
   /**
    * The constructor.
    * 
-   * @param componentSpecification
-   *        is the {@link #getSpecification() specification} of the component.
-   * @param componentImplementation
-   *        is the {@link #getImplementation() implementation} of the component.
-   * @param componentConstructor
-   *        is the {@link #getConstructor() constructor} of the component.
-   * @param instantiationPolicy
-   *        is the {@link #getInstantiationPolicy() policy} for the
-   *        instantiation of the component.
-   * @param dependencies
-   *        are the {@link #getDependencies() dependencies} of the component. is
-   *        the {@link #getConstructor() constructor}
-   * @param lifecycleMethods
-   *        are the {@link #getLifecycleMethods() lifecycle-methods}.
+   * @param componentSpecification is the
+   *        {@link #getSpecification() specification} of the component.
+   * @param componentImplementation is the
+   *        {@link #getImplementation() implementation} of the component.
+   * @param componentConstructor is the {@link #getConstructor() constructor} of
+   *        the component.
+   * @param instantiationPolicy is the {@link #getInstantiationPolicy() policy}
+   *        for the instantiation of the component.
+   * @param dependencies are the {@link #getDependencies() dependencies} of the
+   *        component. is the {@link #getConstructor() constructor}
+   * @param lifecycleMethods are the
+   *        {@link #getLifecycleMethods() lifecycle-methods}.
    */
   private ExtendedComponentDescriptorImpl(Class<S> componentSpecification,
       Class<I> componentImplementation, Constructor<I> componentConstructor,
@@ -307,10 +299,8 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
    * This method validates that the given <code>method</code> belongs to the
    * given <code>implementation</code>.
    * 
-   * @param method
-   *        is the method to validate.
-   * @param implementation
-   *        is the class that should own the method.
+   * @param method is the method to validate.
+   * @param implementation is the class that should own the method.
    */
   private static void validateOwnership(Method method, Class<?> implementation) {
 
@@ -339,9 +329,8 @@ public class ExtendedComponentDescriptorImpl<S, I extends S> extends SimpleCompo
     /**
      * The constructor.
      * 
-     * @param dependencyType
-     *        is the type of the dependecies to iterate or <code>null</code>
-     *        to iterate all dependencies.
+     * @param dependencyType is the type of the dependecies to iterate or
+     *        <code>null</code> to iterate all dependencies.
      */
     public DependencyIterator(Type dependencyType) {
 

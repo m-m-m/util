@@ -20,11 +20,9 @@ public interface ValueService {
   /**
    * This method parses an xml element that represents a value.
    * 
-   * @param xmlElement
-   *        is the value encoded as XML element.
+   * @param xmlElement is the value encoded as XML element.
    * @return the value represented by the xml element.
-   * @throws ValueException
-   *         if the given xml element is no legal value.
+   * @throws ValueException if the given xml element is no legal value.
    */
   Object xml2value(Element xmlElement) throws ValueException;
 
@@ -32,11 +30,9 @@ public interface ValueService {
    * This method gets the {@link ValueManager value manager} for the given
    * {@link ValueManager#getValueClass() valueType}.
    * 
-   * @param <V>
-   *        is the templated type of the value.
-   * @param valueType
-   *        is the {@link ValueManager#getValueClass() value type} of the
-   *        requested manager.
+   * @param <V> is the templated type of the value.
+   * @param valueType is the {@link ValueManager#getValueClass() value type} of
+   *        the requested manager.
    * @return the manager for the given <code>valueClass</code> or
    *         <code>null</code> if NO such manager is registered.
    */
@@ -52,10 +48,8 @@ public interface ValueService {
    * use this method to find the manager for the {@link Object#getClass() class}
    * of the value.
    * 
-   * @param <V>
-   *        is the templated type of the value.
-   * @param valueSubType
-   *        is a sup-type of the requested manager's
+   * @param <V> is the templated type of the value.
+   * @param valueSubType is a sup-type of the requested manager's
    *        {@link ValueManager#getValueClass() value type}.
    * @return the manager for the given <code>valueClass</code> or
    *         <code>null</code> if NO such manager could be found. Be aware
@@ -70,9 +64,8 @@ public interface ValueService {
    * 
    * @see ValueManager#getName()
    * 
-   * @param name
-   *        is the {@link ValueManager#getName() name} of the value for which
-   *        the manager is requested.
+   * @param name is the {@link ValueManager#getName() name} of the value for
+   *        which the manager is requested.
    * @return the manager for the given name or <code>null</code> if no such
    *         manager is registered.
    */

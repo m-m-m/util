@@ -95,11 +95,10 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the combo.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        combo.
    */
   public SyncComboAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -195,8 +194,7 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Combo#setTextLimit(int) text-limit} of the
    * combo.
    * 
-   * @param limit
-   *        is the maximum character count for the combo.
+   * @param limit is the maximum character count for the combo.
    */
   public void setTextLimit(int limit) {
 
@@ -210,8 +208,7 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) adds} an item to
    * the combo at the end of the item-list.
    * 
-   * @param itemText
-   *        is the display text of the item.
+   * @param itemText is the display text of the item.
    */
   public void addItem(String itemText) {
 
@@ -225,10 +222,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String, int) adds} an
    * item to the combo at the given <code>itemIndex</code>.
    * 
-   * @param itemText
-   *        is the display text of the item.
-   * @param itemIndex
-   *        is the position where to add the new item.
+   * @param itemText is the display text of the item.
+   * @param itemIndex is the position where to add the new item.
    */
   public void addItem(String itemText, int itemIndex) {
 
@@ -243,10 +238,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Combo#setItem(int, java.lang.String) sets}
    * the item of the combo at the given <code>itemIndex</code>.
    * 
-   * @param itemText
-   *        is the display text of the item.
-   * @param itemIndex
-   *        is the position of the item to set (update).
+   * @param itemText is the display text of the item.
+   * @param itemIndex is the position of the item to set (update).
    */
   public void setItem(String itemText, int itemIndex) {
 
@@ -260,8 +253,7 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * This method {@link org.eclipse.swt.widgets.Combo#remove(int) removes} the
    * item of the combo at the given <code>itemIndex</code>.
    * 
-   * @param itemIndex
-   *        is the position of the item to remove.
+   * @param itemIndex is the position of the item to remove.
    */
   public void removeItem(int itemIndex) {
 
@@ -297,8 +289,7 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * This method sets the
    * {@link org.eclipse.swt.widgets.Combo#setText(String) text} of the combo.
    * 
-   * @param newText
-   *        is the new text to set.
+   * @param newText is the new text to set.
    */
   public void setText(String newText) {
 

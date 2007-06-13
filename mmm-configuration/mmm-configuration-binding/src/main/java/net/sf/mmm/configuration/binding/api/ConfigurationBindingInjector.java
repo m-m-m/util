@@ -23,18 +23,14 @@ public interface ConfigurationBindingInjector {
    * {@link ConfigurationBindingService binding-service} recursively to
    * configure complex values.
    * 
-   * @param configuration
-   *        is the configuration to create.
-   * @param accessor
-   *        is the property-accessor of the value to create.
+   * @param configuration is the configuration to create.
+   * @param accessor is the property-accessor of the value to create.
    * @param pojo TODO
-   * @param bindingService
-   *        is the binding service.
-   * @throws ConfigurationException
-   *         if a problem occurred when reading from the given
-   *         <code>configuration</code>.
+   * @param bindingService is the binding service.
+   * @throws ConfigurationException if a problem occurred when reading from the
+   *         given <code>configuration</code>.
    */
-  void inject(Configuration configuration, PojoPropertyAccessor accessor,
-      Object pojo, ConfigurationBindingService bindingService) throws ConfigurationException;
+  void inject(Configuration configuration, PojoPropertyAccessor accessor, Object pojo,
+      ConfigurationBindingService bindingService) throws ConfigurationException;
 
 }

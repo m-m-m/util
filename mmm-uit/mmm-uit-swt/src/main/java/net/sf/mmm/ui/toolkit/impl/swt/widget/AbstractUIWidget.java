@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIWidget} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIWidget} interface using SWT as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,10 +21,8 @@ public abstract class AbstractUIWidget extends AbstractUIComponent implements UI
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIWidget(UIFactorySwt uiFactory, UISwtNode parentObject) {
 

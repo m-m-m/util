@@ -41,10 +41,8 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the tree.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the {@link Widget#getStyle() style} of the tree.
    */
   public SyncTreeAccess(UIFactorySwt uiFactory, int swtStyle) {
 

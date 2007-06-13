@@ -32,10 +32,8 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link Widget#getStyle() style} of the widget.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the {@link Widget#getStyle() style} of the widget.
    */
   public AbstractSyncWidgetAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -72,11 +70,10 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
   }
 
   /**
-   * This method is called from {@link #run()}. It does the actual job for
-   * the given operation.
+   * This method is called from {@link #run()}. It does the actual job for the
+   * given operation.
    * 
-   * @param operation
-   *        is the actual operation to perform.
+   * @param operation is the actual operation to perform.
    */
   @Override
   protected void performSynchron(String operation) {
@@ -103,13 +100,11 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
    * This method
    * {@link org.eclipse.swt.widgets.Widget#addListener(int, org.eclipse.swt.widgets.Listener) adds}
    * a listener to the widget.<br>
-   * ATTENTION: This implementation expects that this method is NOT called
-   * more than once before {@link #create() creation} is performed.
+   * ATTENTION: This implementation expects that this method is NOT called more
+   * than once before {@link #create() creation} is performed.
    * 
-   * @param type
-   *        is the event type to listen to.
-   * @param handler
-   *        is the handler that will receive the events.
+   * @param type is the event type to listen to.
+   * @param handler is the handler that will receive the events.
    */
   public void addListener(int type, Listener handler) {
 

@@ -43,10 +43,9 @@ public class NlsMessageImpl implements NlsMessage, NlsTranslationSource {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage
-   *        is the internationalized message.
-   * @param messageArguments
-   *        are the arguments filled into the message after nationalization.
+   * @param internationalizedMessage is the internationalized message.
+   * @param messageArguments are the arguments filled into the message after
+   *        nationalization.
    */
   public NlsMessageImpl(String internationalizedMessage, Object... messageArguments) {
 
@@ -97,8 +96,7 @@ public class NlsMessageImpl implements NlsMessage, NlsTranslationSource {
    * Additionally this method should be invoked in the initialization phase of
    * your application.
    * 
-   * @param universalTranslator
-   *        is the universal translator.
+   * @param universalTranslator is the universal translator.
    */
   public static void setUniversalTranslator(NlsTranslator universalTranslator) {
 

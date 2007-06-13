@@ -24,7 +24,7 @@ import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 public class SimpleSsdpReceiver extends BasicSsdpReceiver {
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
    * @see #initialize()
    * @see #dispose()
@@ -38,8 +38,7 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
    * This method initializes this object. It needs to be called after
    * construction and before the object can be used.
    * 
-   * @throws IOException
-   *         if the operation failed with an I/O problem.
+   * @throws IOException if the operation failed with an I/O problem.
    */
   @PostConstruct
   public void initialize() throws IOException {
@@ -51,8 +50,7 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
    * This method disposes this object. It should be called when this object is
    * NOT used anymore. It will free allocated resources.
    * 
-   * @throws IOException
-   *         if the operation failed with an I/O problem.
+   * @throws IOException if the operation failed with an I/O problem.
    */
   @PreDestroy
   public void dispose() throws IOException {

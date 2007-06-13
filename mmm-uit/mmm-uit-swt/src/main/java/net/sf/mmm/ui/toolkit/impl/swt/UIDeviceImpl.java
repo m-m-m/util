@@ -21,8 +21,7 @@ public class UIDeviceImpl implements UIDevice {
   /**
    * The constructor.
    * 
-   * @param monitor
-   *        is the SWT graphics device to represent.
+   * @param monitor is the SWT graphics device to represent.
    */
   public UIDeviceImpl(Monitor monitor) {
 

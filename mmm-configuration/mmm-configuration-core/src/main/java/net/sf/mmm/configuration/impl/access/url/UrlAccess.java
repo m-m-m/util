@@ -35,8 +35,7 @@ public class UrlAccess extends AbstractConfigurationAccess {
    * The constructor.
    * 
    * 
-   * @param unifiedResourceLocator
-   *        is the URL to access.
+   * @param unifiedResourceLocator is the URL to access.
    */
   public UrlAccess(URL unifiedResourceLocator) {
 

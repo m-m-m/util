@@ -31,8 +31,7 @@ public class LayoutManager extends Layout {
   /**
    * The constructor.
    * 
-   * @param factory
-   *        is the owning factory.
+   * @param factory is the owning factory.
    */
   public LayoutManager(AbstractUIFactory factory) {
 
@@ -71,8 +70,7 @@ public class LayoutManager extends Layout {
   /**
    * This method sets the layout orientation.
    * 
-   * @param orientation
-   *        is the layout orientation to set.
+   * @param orientation is the layout orientation to set.
    */
   public void setOrientation(Orientation orientation) {
 
@@ -90,8 +88,7 @@ public class LayoutManager extends Layout {
     /**
      * The constructor.
      * 
-     * @param factory
-     *        is the owning factory.
+     * @param factory is the owning factory.
      */
     public Manager(AbstractUIFactory factory) {
 
@@ -102,9 +99,8 @@ public class LayoutManager extends Layout {
     /**
      * This method refreshes the cached data as necessary.
      * 
-     * @param flushCache -
-     *        <code>true</code> if all cached data must be refreshed,
-     *        <code>false</code> otherwise.
+     * @param flushCache - <code>true</code> if all cached data must be
+     *        refreshed, <code>false</code> otherwise.
      */
     protected void refreshCachedData(boolean flushCache) {
 
@@ -157,11 +153,9 @@ public class LayoutManager extends Layout {
     /**
      * @see LayoutManager#layout(org.eclipse.swt.widgets.Composite, boolean)
      * 
-     * @param composite
-     *        is the panel.
-     * @param flushCache -
-     *        <code>true</code> if all cached data must be refreshed,
-     *        <code>false</code> otherwise.
+     * @param composite is the panel.
+     * @param flushCache - <code>true</code> if all cached data must be
+     *        refreshed, <code>false</code> otherwise.
      */
     protected void layout(Composite composite, boolean flushCache) {
 
@@ -186,11 +180,9 @@ public class LayoutManager extends Layout {
     /**
      * @see LayoutManager#computeSize(Composite, int, int, boolean)
      * 
-     * @param composite
-     *        is the panel.
-     * @param flushCache -
-     *        <code>true</code> if all cached data must be refreshed,
-     *        <code>false</code> otherwise.
+     * @param composite is the panel.
+     * @param flushCache - <code>true</code> if all cached data must be
+     *        refreshed, <code>false</code> otherwise.
      * @return the computed size.
      */
     protected Point computeSize(Composite composite, boolean flushCache) {

@@ -11,8 +11,7 @@ import net.sf.mmm.framework.base.descriptor.SimpleComponentDescriptor;
  * This is the abstract base implementation of the {@link ComponentProvider}
  * interface.
  * 
- * @param <S>
- *        is the
+ * @param <S> is the
  *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the provided component.
  * 
@@ -26,10 +25,9 @@ public abstract class AbstractComponentProvider<S> implements ComponentProvider<
   /**
    * The constructor.
    * 
-   * @param specification
-   *        is the
-   *        {@link ComponentDescriptor#getSpecification() specification} of
-   *        the component.
+   * @param specification is the
+   *        {@link ComponentDescriptor#getSpecification() specification} of the
+   *        component.
    */
   public AbstractComponentProvider(Class<S> specification) {
 
@@ -40,8 +38,8 @@ public abstract class AbstractComponentProvider<S> implements ComponentProvider<
   /**
    * The constructor.
    * 
-   * @param componentDescriptor
-   *        is the {@link #getDescriptor() descriptor} of the component.
+   * @param componentDescriptor is the {@link #getDescriptor() descriptor} of
+   *        the component.
    */
   public AbstractComponentProvider(ComponentDescriptor<S> componentDescriptor) {
 

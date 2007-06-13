@@ -19,8 +19,7 @@ public class NoSuchFunctionException extends FunctionException {
   /**
    * The constructor.
    * 
-   * @param nameOrSymbol
-   *        is the name or symbol of the requested function.
+   * @param nameOrSymbol is the name or symbol of the requested function.
    */
   public NoSuchFunctionException(String nameOrSymbol) {
 

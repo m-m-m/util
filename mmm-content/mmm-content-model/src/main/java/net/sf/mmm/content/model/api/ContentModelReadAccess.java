@@ -18,22 +18,18 @@ public interface ContentModelReadAccess {
   /**
    * This method gets the content class for the given name.
    * 
-   * @param name
-   *        is the name of the requested class.
+   * @param name is the name of the requested class.
    * @return the content class for the given name.
-   * @throws ContentModelException
-   *         if the requested class does not exist.
+   * @throws ContentModelException if the requested class does not exist.
    */
   ContentClass getClass(String name) throws ContentModelException;
 
   /**
    * This method gets the content class for the given ID.
    * 
-   * @param id
-   *        is the ID of the requested class.
+   * @param id is the ID of the requested class.
    * @return the content class for the given ID.
-   * @throws ContentModelException
-   *         if the requested class does not exist.
+   * @throws ContentModelException if the requested class does not exist.
    */
   ContentClass getClass(Id id) throws ContentModelException;
 

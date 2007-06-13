@@ -24,9 +24,8 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
   /**
    * The constructor.
    * 
-   * @param contentClass
-   *        is the class of that all {@link ContentField fields} are to be
-   *        iterated.
+   * @param contentClass is the class of that all {@link ContentField fields}
+   *        are to be iterated.
    */
   public ContentFieldIterator(ContentClass contentClass) {
 

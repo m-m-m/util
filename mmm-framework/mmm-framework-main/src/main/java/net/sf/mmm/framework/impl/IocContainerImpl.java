@@ -18,87 +18,84 @@ import net.sf.mmm.framework.base.AbstractIocContainer;
  */
 public class IocContainerImpl extends AbstractIocContainer {
 
-    /** the logger instance */
-    private Log logger;
+  /** the logger instance */
+  private Log logger;
 
-    /**
-     * The constructor for a toplevel container.
-     */
-    public IocContainerImpl() {
+  /**
+   * The constructor for a toplevel container.
+   */
+  public IocContainerImpl() {
 
-        super();
-    }
+    super();
+  }
 
-    /**
-     * The constructor for a
-     * {@link #createChildContainer(String) child-container}.
-     * 
-     * @param parentContainer
-     *        is the {@link #getParentContainer() parent-container} that created
-     *        this one.
-     * @param name
-     *        is the {@link #getName() name} of this container.
-     */
-    public IocContainerImpl(IocContainerImpl parentContainer, String name) {
+  /**
+   * The constructor for a {@link #createChildContainer(String) child-container}.
+   * 
+   * @param parentContainer is the
+   *        {@link #getParentContainer() parent-container} that created this
+   *        one.
+   * @param name is the {@link #getName() name} of this container.
+   */
+  public IocContainerImpl(IocContainerImpl parentContainer, String name) {
 
-        super(parentContainer, name);
-    }
+    super(parentContainer, name);
+  }
 
-    /**
-     * This method gets the logger instance.
-     * 
-     * @return the logger.
-     */
-    public Log getLogger() {
+  /**
+   * This method gets the logger instance.
+   * 
+   * @return the logger.
+   */
+  public Log getLogger() {
 
-        return this.logger;
-    }
+    return this.logger;
+  }
 
-    /**
-     * This method sets the logger.
-     * 
-     * @param myLogger
-     *        is the logger instance.
-     */
-    @Resource
-    public void setLogger(Log myLogger) {
+  /**
+   * This method sets the logger.
+   * 
+   * @param myLogger is the logger instance.
+   */
+  @Resource
+  public void setLogger(Log myLogger) {
 
-        this.logger = myLogger;
-    }
+    this.logger = myLogger;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public MutableIocContainer createChildContainer(String name) {
+  /**
+   * {@inheritDoc}
+   */
+  public MutableIocContainer createChildContainer(String name) {
 
-        return new IocContainerImpl(this, name);
-    }
+    return new IocContainerImpl(this, name);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void debug(String message) {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void debug(String message) {
 
-        this.logger.debug(message);
-    }
+    this.logger.debug(message);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void info(String message) {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void info(String message) {
 
-        this.logger.info(message);
-    }
+    this.logger.info(message);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void warning(String message) {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void warning(String message) {
 
-        this.logger.warn(message);
-    }
+    this.logger.warn(message);
+  }
 
 }

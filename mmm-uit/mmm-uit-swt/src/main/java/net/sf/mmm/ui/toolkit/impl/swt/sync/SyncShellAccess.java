@@ -75,13 +75,11 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the sash-form.
-   * @param swtShell
-   *        is the {@link Shell} to access synchronous.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        sash-form.
+   * @param swtShell is the {@link Shell} to access synchronous.
    */
   public SyncShellAccess(UIFactorySwt uiFactory, int swtStyle, Shell swtShell) {
 
@@ -148,8 +146,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    * {@link org.eclipse.swt.widgets.Decorations#setText(String) title} of the
    * decorations.
    * 
-   * @param newTitel
-   *        is the new title to set.
+   * @param newTitel is the new title to set.
    */
   public void setTitel(String newTitel) {
 
@@ -176,8 +173,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    * {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean) maximized-state}
    * of the decorations.
    * 
-   * @param doMaximize
-   *        is the new maximized-state to set.
+   * @param doMaximize is the new maximized-state to set.
    */
   public void setMaximized(boolean doMaximize) {
 
@@ -205,8 +201,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    * {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean) minimized-state}
    * of the decorations.
    * 
-   * @param doMinimize
-   *        is the new minimized-state to set.
+   * @param doMinimize is the new minimized-state to set.
    */
   public void setMinimized(boolean doMinimize) {
 

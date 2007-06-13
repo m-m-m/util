@@ -18,11 +18,10 @@ public class ClassNotExistsException extends ContentModelException {
   private static final long serialVersionUID = -8750295439186981933L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param name
-   *        is the {@link ContentClass#getName() name} of the class that does
-   *        NOT exist.
+   * @param name is the {@link ContentClass#getName() name} of the class that
+   *        does NOT exist.
    */
   public ClassNotExistsException(String name) {
 
@@ -30,10 +29,9 @@ public class ClassNotExistsException extends ContentModelException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param id
-   *        is the {@link ContentClass#getId() ID} of the class that does NOT
+   * @param id is the {@link ContentClass#getId() ID} of the class that does NOT
    *        exist.
    */
   public ClassNotExistsException(Id id) {

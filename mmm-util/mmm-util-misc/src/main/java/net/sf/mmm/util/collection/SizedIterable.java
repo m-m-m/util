@@ -8,8 +8,8 @@ package net.sf.mmm.util.collection;
  * {@link java.util.Collections#unmodifiableCollection(java.util.Collection) unmodifiable}
  * {@link java.util.Collection Collection}.
  * 
- * @param <E>
- *        is the templated element type that can be {@link #iterator() iterated}.
+ * @param <E> is the templated element type that can be
+ *        {@link #iterator() iterated}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

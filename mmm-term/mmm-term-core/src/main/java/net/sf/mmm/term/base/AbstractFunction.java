@@ -55,8 +55,7 @@ public abstract class AbstractFunction implements Function {
    * 
    * @see AbstractFunction#checkSymbolChar(char)
    * 
-   * @param symbol
-   *        is the operator symbol to check.
+   * @param symbol is the operator symbol to check.
    * @return <code>true</code> iff the operator symbol is legal.
    */
   public static boolean checkSymbol(String symbol) {
@@ -73,15 +72,14 @@ public abstract class AbstractFunction implements Function {
   }
 
   /**
-   * This method checks if a given character can be legally used in an
-   * operator symbol string.
+   * This method checks if a given character can be legally used in an operator
+   * symbol string.
    * 
    * @see Function#LEGAL_OPERATOR_CHARS
    * 
-   * @param c
-   *        is the character of an operator symbol.
-   * @return <code>true</code> if the given character is a legal character
-   *         for an operator symbol string, <code>false</code> otherwise.
+   * @param c is the character of an operator symbol.
+   * @return <code>true</code> if the given character is a legal character for
+   *         an operator symbol string, <code>false</code> otherwise.
    */
   public static boolean checkSymbolChar(char c) {
 

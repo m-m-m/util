@@ -11,8 +11,8 @@ import net.sf.mmm.framework.api.ComponentManager;
 /**
  * This exception is thrown if a {@link ComponentDescriptor component} for a
  * specific instance-ID was
- * {@link ComponentManager#requestComponent(Class, String) requested} but is
- * NOT available.
+ * {@link ComponentManager#requestComponent(Class, String) requested} but is NOT
+ * available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,13 +24,11 @@ public class InstanceIdNotAvailableException extends ComponentException {
   /**
    * The constructor.
    * 
-   * @param instanceId
-   *        is the
+   * @param instanceId is the
    *        {@link ComponentManager#requestComponent(Class, String) requested}
    *        instance-ID that is NOT available.
-   * @param descriptor
-   *        is the descriptor of the {@link ComponentDescriptor component}
-   *        that was requested.
+   * @param descriptor is the descriptor of the
+   *        {@link ComponentDescriptor component} that was requested.
    */
   public InstanceIdNotAvailableException(String instanceId, ComponentDescriptor<?> descriptor) {
 

@@ -71,5 +71,5 @@ public class NlsBundleContentModel extends AbstractResourceBundle {
 
   /** exception message if user tried to delete a class or field that is system. */
   public static final String ERR_DELETE_SYSTEM = "Can NOT delete \"{0}\" because it is required by the system!";
-  
+
 }

@@ -24,8 +24,7 @@ import org.w3c.dom.Element;
  * 
  * @see net.sf.mmm.value.api.ValueService
  * 
- * @param <V>
- *        is the templated type of the managed value type. See also
+ * @param <V> is the templated type of the managed value type. See also
  *        {@link #getValueClass()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -87,16 +86,15 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * This method creates an instance of the managed value encoded as string. It
    * is the inverse operation of the {@link #toString(Object)} method.
    * 
-   * @param valueAsString
-   *        is the string representation of the value in the format as produced
-   *        by the <code>toString()</code> method. The given string
-   *        representation must represent a value of the type managed by this
-   *        value manager.
+   * @param valueAsString is the string representation of the value in the
+   *        format as produced by the <code>toString()</code> method. The
+   *        given string representation must represent a value of the type
+   *        managed by this value manager.
    * @return the created value.
-   * @throws ValueParseException
-   *         if the string representation is invalid for this value (e.g. "foo"
-   *         is invalid for an integer value while a string value will accept
-   *         any string and never throw this exception).
+   * @throws ValueParseException if the string representation is invalid for
+   *         this value (e.g. "foo" is invalid for an integer value while a
+   *         string value will accept any string and never throw this
+   *         exception).
    */
   V parse(String valueAsString) throws ValueParseException;
 
@@ -106,14 +104,13 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * A more high-level version of this method is
    * {@link ValueService#xml2value(Element)}.
    * 
-   * @param valueAsXml
-   *        is the value in its XML representation. This method should only be
-   *        called if the XML representation belongs to the value managed by
-   *        this implementation. The implementation should only parse the child
-   *        nodes of the given element.
+   * @param valueAsXml is the value in its XML representation. This method
+   *        should only be called if the XML representation belongs to the value
+   *        managed by this implementation. The implementation should only parse
+   *        the child nodes of the given element.
    * @return the parsed value.
-   * @throws ValueParseException
-   *         if the XML representation is illegal for the managed value.
+   * @throws ValueParseException if the XML representation is illegal for the
+   *         managed value.
    */
   V parse(Element valueAsXml) throws ValueParseException;
 
@@ -124,12 +121,10 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * 
    * @see XmlSerializer#toXml(XmlWriter, Object)
    * 
-   * @param xmlWriter
-   *        is the writer where to write the XML to.
-   * @param value
-   *        is the value to serialize. It may be <code>null</code>.
-   * @throws XmlException
-   *         if the serialization fails (I/O error, invalid XML, etc.).
+   * @param xmlWriter is the writer where to write the XML to.
+   * @param value is the value to serialize. It may be <code>null</code>.
+   * @throws XmlException if the serialization fails (I/O error, invalid XML,
+   *         etc.).
    */
   void toXml(XmlWriter xmlWriter, V value) throws XmlException;
 
@@ -137,8 +132,7 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * This method creates a string representation of the given value. The result
    * has to be understood by the {@link #parse(String)} method.
    * 
-   * @param value
-   *        is the value to get a string. It may be <code>null</code>.
+   * @param value is the value to get a string. It may be <code>null</code>.
    * @return the string representation of the given value.
    */
   String toString(V value);
@@ -152,10 +146,8 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    * default. In specific situations the semantic of equals can be changed by
    * the implementation of this method.
    * 
-   * @param value1
-   *        is the first value to compare. May be <code>null</code>.
-   * @param value2
-   *        is the second value to compare. May be <code>null</code>.
+   * @param value1 is the first value to compare. May be <code>null</code>.
+   * @param value2 is the second value to compare. May be <code>null</code>.
    * @return <code>true</code> if both values are <code>null</code>, or
    *         both are NOT <code>null</code> and are equal to each other.
    */

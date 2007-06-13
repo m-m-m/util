@@ -15,8 +15,7 @@ public interface FilterRule {
    * This method checks if the given <code>string</code> is accepted, denied
    * or ignored by this rule.
    * 
-   * @param string
-   *        is the string to check.
+   * @param string is the string to check.
    * @return <code>true</code> if the file should be accepted,
    *         <code>false</code> if the file should NOT be accepted or
    *         <code>null</code> if this rule does NOT make a decision about the

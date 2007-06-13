@@ -12,15 +12,14 @@ import net.sf.mmm.framework.api.ComponentManager;
  * This is an abstract implementation of the
  * {@link net.sf.mmm.framework.api.ComponentProvider} interface that has a
  * {@link #requestDefault(ComponentDescriptor, String, ComponentManager) different treatment}
- * for the {@link ComponentManager#DEFAULT_INSTANCE_ID default instance-id}
- * than the
+ * for the {@link ComponentManager#DEFAULT_INSTANCE_ID default instance-id} than
+ * the
  * {@link #requestById(String, ComponentDescriptor, String, ComponentManager) handling}
  * for other instance-IDs.<br>
  * By default other instance-IDs are NOT accepted and cause an
  * {@link InstanceIdNotAvailableException}.
  * 
- * @param <S>
- *        is the
+ * @param <S> is the
  *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the provided component.
  * 

@@ -12,8 +12,7 @@ import java.util.NoSuchElementException;
  * The design of the JDK sucks: if only {@link java.util.Iterator} would extend
  * {@link java.util.Enumeration} the world could be so simple.
  * 
- * @param <E>
- *        is the templated type of the elements to iterate.
+ * @param <E> is the templated type of the elements to iterate.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -44,8 +43,7 @@ public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E
   /**
    * This method tries to find the {@link #next() next} element.
    * 
-   * @return the next element or <code>null</code> if
-   *         {@link #hasNext() done}.
+   * @return the next element or <code>null</code> if {@link #hasNext() done}.
    */
   protected abstract E findNext();
 
@@ -76,8 +74,7 @@ public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E
    * 
    * @see java.util.Iterator#remove()
    * 
-   * @throws UnsupportedOperationException
-   *         whenever this method is called.
+   * @throws UnsupportedOperationException whenever this method is called.
    */
   public final void remove() {
 

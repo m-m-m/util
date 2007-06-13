@@ -19,11 +19,9 @@ public class XmlException extends NlsException {
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
-   * @param arguments
-   *        are the arguments filled into the
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public XmlException(String internaitionalizedMessage, Object... arguments) {
@@ -34,13 +32,10 @@ public class XmlException extends NlsException {
   /**
    * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
-   * @param arguments
-   *        are the arguments filled into the
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public XmlException(Throwable nested, String internaitionalizedMessage, Object... arguments) {

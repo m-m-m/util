@@ -22,90 +22,88 @@ import junit.framework.TestCase;
 @SuppressWarnings("all")
 public class AnnotationUtilTest extends TestCase {
 
-    private static final String FOO_IF = "interface";
+  private static final String FOO_IF = "interface";
 
-    private static final String FOO_CLASS = "Foo-class";
+  private static final String FOO_CLASS = "Foo-class";
 
-    private static final String BAR_CLASS = "Foo-class";
+  private static final String BAR_CLASS = "Foo-class";
 
-    @Test
-    public static void testMethodAnnotation() throws Exception {
+  @Test
+  public static void testMethodAnnotation() throws Exception {
 
-        // annotation with retention "runtime" ?
-        assertTrue(AnnotationUtil.isRuntimeAnnotation(MyAnnotation.class));
-        assertFalse(AnnotationUtil.isRuntimeAnnotation(SuppressWarnings.class));
-        assertTrue(AnnotationUtil.isRuntimeAnnotation(Inherited.class));
+    // annotation with retention "runtime" ?
+    assertTrue(AnnotationUtil.isRuntimeAnnotation(MyAnnotation.class));
+    assertFalse(AnnotationUtil.isRuntimeAnnotation(SuppressWarnings.class));
+    assertTrue(AnnotationUtil.isRuntimeAnnotation(Inherited.class));
 
-        // annotation target type
-        assertTrue(AnnotationUtil.isAnnotationForType(MyAnnotation.class, ElementType.TYPE));
-        assertTrue(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.ANNOTATION_TYPE));
-        assertFalse(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.TYPE));
+    // annotation target type
+    assertTrue(AnnotationUtil.isAnnotationForType(MyAnnotation.class, ElementType.TYPE));
+    assertTrue(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.ANNOTATION_TYPE));
+    assertFalse(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.TYPE));
 
-        // annotation inheritance
-        MyAnnotation classAnnotation = AnnotationUtil.getClassAnnotation(Bar.class,
-                MyAnnotation.class);
-        assertNotNull(classAnnotation);
-        assertEquals(FOO_CLASS, classAnnotation.value());
-        Method barMethod = Bar.class.getMethod("foo", ReflectionUtil.NO_PARAMETERS);
-        MyAnnotation methodAnnotation = AnnotationUtil.getMethodAnnotation(barMethod,
-                MyAnnotation.class);
-        assertNotNull(methodAnnotation);
-        assertEquals(FOO_IF, methodAnnotation.value());
-        
-        
-        assertNotNull(FooIF.class.getAnnotation(SomeAnnotation.class));
-        
-        SomeAnnotation typeAnnotation = AnnotationUtil.getTypeAnnotation(Bar.class,
-                SomeAnnotation.class);
-        assertNotNull(typeAnnotation);
-        assertEquals(FOO_IF, typeAnnotation.value());
+    // annotation inheritance
+    MyAnnotation classAnnotation = AnnotationUtil.getClassAnnotation(Bar.class, MyAnnotation.class);
+    assertNotNull(classAnnotation);
+    assertEquals(FOO_CLASS, classAnnotation.value());
+    Method barMethod = Bar.class.getMethod("foo", ReflectionUtil.NO_PARAMETERS);
+    MyAnnotation methodAnnotation = AnnotationUtil.getMethodAnnotation(barMethod,
+        MyAnnotation.class);
+    assertNotNull(methodAnnotation);
+    assertEquals(FOO_IF, methodAnnotation.value());
 
-    }
+    assertNotNull(FooIF.class.getAnnotation(SomeAnnotation.class));
 
-    @Retention(RetentionPolicy.RUNTIME)
-    private @interface MyAnnotation {
+    SomeAnnotation typeAnnotation = AnnotationUtil.getTypeAnnotation(Bar.class,
+        SomeAnnotation.class);
+    assertNotNull(typeAnnotation);
+    assertEquals(FOO_IF, typeAnnotation.value());
 
-        String value();
-    }
+  }
 
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.TYPE)
-    private @interface SomeAnnotation {
+  @Retention(RetentionPolicy.RUNTIME)
+  private @interface MyAnnotation {
 
-        String value();
-    }
+    String value();
+  }
 
-    @SomeAnnotation(FOO_IF)
-    private static interface FooIF {
+  @Retention(RetentionPolicy.RUNTIME)
+  @Target(ElementType.TYPE)
+  private @interface SomeAnnotation {
 
-        @MyAnnotation(FOO_IF)
-        void foo();
+    String value();
+  }
 
-    }
+  @SomeAnnotation(FOO_IF)
+  private static interface FooIF {
 
-    private static interface BarIF extends FooIF {
+    @MyAnnotation(FOO_IF)
+    void foo();
 
-    }
+  }
 
-    @MyAnnotation(FOO_CLASS)
-    private static class Foo implements BarIF, Comparable<Foo> {
+  private static interface BarIF extends FooIF {
 
-        public void foo() {
+  }
 
-        }
+  @MyAnnotation(FOO_CLASS)
+  private static class Foo implements BarIF, Comparable<Foo> {
 
-        public int compareTo(Foo o) {
-
-            return 0;
-        }
+    public void foo() {
 
     }
 
-    private static class Bar extends Foo {
+    public int compareTo(Foo o) {
 
-        public void foo() {
-
-        }
+      return 0;
     }
+
+  }
+
+  private static class Bar extends Foo {
+
+    public void foo() {
+
+    }
+  }
 
 }

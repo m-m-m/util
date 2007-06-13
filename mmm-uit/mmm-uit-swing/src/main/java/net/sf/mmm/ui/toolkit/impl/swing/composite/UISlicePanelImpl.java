@@ -47,12 +47,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param orientation
-   *        is the orientation for the layout of the panel.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param orientation is the orientation for the layout of the panel.
    */
   public UISlicePanelImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {
 
@@ -229,8 +226,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
      * {@link UIDecoratedComponent decorated component} to the size-list. The
      * maximum width/height will be determined over all sized in the list.
      * 
-     * @param size
-     *        is the size to add.
+     * @param size is the size to add.
      */
     public void add(UIDecoratedComponent size) {
 
@@ -241,8 +237,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
      * This method removes the given
      * {@link UIDecoratedComponent decorated component} from the size-list.
      * 
-     * @param size
-     *        is the size to remove.
+     * @param size is the size to remove.
      */
     public void remove(UIDecoratedComponent size) {
 

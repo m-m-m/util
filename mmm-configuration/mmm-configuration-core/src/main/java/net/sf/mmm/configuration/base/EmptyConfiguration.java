@@ -25,12 +25,10 @@ import net.sf.mmm.value.base.EmptyValue;
 public class EmptyConfiguration extends AbstractConfiguration {
 
   /** the empty configuration element */
-  private static final EmptyConfiguration EMPTY_ELEMENT = new EmptyConfiguration(
-      Type.ELEMENT);
+  private static final EmptyConfiguration EMPTY_ELEMENT = new EmptyConfiguration(Type.ELEMENT);
 
   /** the empty configuration attribute */
-  private static final EmptyConfiguration EMPTY_ATTRIBUTE = new EmptyConfiguration(
-      Type.ATTRIBUTE);
+  private static final EmptyConfiguration EMPTY_ATTRIBUTE = new EmptyConfiguration(Type.ATTRIBUTE);
 
   /** @see #getName() */
   private static final String EMPTY_ELEMENT_NAME = "EMPTY";
@@ -44,8 +42,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   /**
    * The constructor.
    * 
-   * @param configurationType
-   *        is the type of the empty configuration.
+   * @param configurationType is the type of the empty configuration.
    */
   private EmptyConfiguration(Type configurationType) {
 
@@ -57,8 +54,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
    * This method gets the singleton instance of the empty configuration for the
    * given type.
    * 
-   * @param configurationType
-   *        is the type of the requested empty configuration.
+   * @param configurationType is the type of the requested empty configuration.
    * @return the requested configuration.
    */
   public static final AbstractConfiguration getInstance(Type configurationType) {
@@ -82,12 +78,12 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public String getName() {
 
     if (this.type == Type.ATTRIBUTE) {
-      return EMPTY_ATTRIBUTE_NAME;      
+      return EMPTY_ATTRIBUTE_NAME;
     } else {
       return EMPTY_ELEMENT_NAME;
     }
@@ -118,7 +114,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public Type getType() {
 
@@ -126,7 +122,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
@@ -134,16 +130,17 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   @Override
-  public AbstractConfiguration doCreateChild(String name, String namespace) throws ConfigurationException {
+  public AbstractConfiguration doCreateChild(String name, String namespace)
+      throws ConfigurationException {
 
     throw new IllegalStateException();
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   @Override
   public AbstractConfiguration getChild(String name, String namespace)
@@ -162,7 +159,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   }
 
   /**
-   * {@inheritDoc} 
+   * {@inheritDoc}
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(String name, String namespaceUri) {
@@ -175,10 +172,10 @@ public class EmptyConfiguration extends AbstractConfiguration {
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespace) {
-  
+
     return EmptyConfigurationIterator.getInstance();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -211,19 +208,19 @@ public class EmptyConfiguration extends AbstractConfiguration {
    */
   @Override
   public void addSibling(AbstractConfiguration element) {
-  
+
     throw new IllegalStateException();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public boolean removeSibling(AbstractConfiguration element) {
-  
+
     throw new IllegalStateException();
   }
-  
+
   /**
    * {@inheritDoc}
    */

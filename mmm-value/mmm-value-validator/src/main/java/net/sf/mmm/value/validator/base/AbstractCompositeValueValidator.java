@@ -43,8 +43,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidator 
   /**
    * This method gets the child validator at the given position.
    * 
-   * @param index
-   *        is the position of the requested child validator.
+   * @param index is the position of the requested child validator.
    * @return the child validator at the given index.
    */
   public ValueValidator getChild(int index) {
@@ -55,8 +54,7 @@ public abstract class AbstractCompositeValueValidator implements ValueValidator 
   /**
    * This method adds a child validator to this composite validator.
    * 
-   * @param child
-   *        is the new child validator to add.
+   * @param child is the new child validator to add.
    */
   public void add(ValueValidator child) {
 
@@ -78,13 +76,11 @@ public abstract class AbstractCompositeValueValidator implements ValueValidator 
    * This method is called after the child validators are evaluated and creates
    * the validation result of the collected information.
    * 
-   * @param details
-   *        is the array containing the invalid results of the child validtors.
-   * @param detailCount
-   *        is the number of invalid results in the array (may be less than the
-   *        array length).
-   * @param succeedCount
-   *        is the number of child validators that succeeded.
+   * @param details is the array containing the invalid results of the child
+   *        validtors.
+   * @param detailCount is the number of invalid results in the array (may be
+   *        less than the array length).
+   * @param succeedCount is the number of child validators that succeeded.
    * @return the final validation result.
    */
   protected abstract ValidationResult getResult(ValidationResult[] details, int detailCount,

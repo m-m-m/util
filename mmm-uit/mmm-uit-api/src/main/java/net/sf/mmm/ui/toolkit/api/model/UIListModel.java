@@ -10,8 +10,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
  * 
  * @see net.sf.mmm.ui.toolkit.api.widget.UIList
  * 
- * @param <E>
- *        is the templated type of the objects in the list.
+ * @param <E> is the templated type of the objects in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,8 +19,7 @@ public interface UIListModel<E> {
   /**
    * This method registers the given change listener to this model.
    * 
-   * @param listener
-   *        is the change listener to add.
+   * @param listener is the change listener to add.
    */
   void addListener(UIListModelListener listener);
 
@@ -30,8 +28,7 @@ public interface UIListModel<E> {
    * listener should have been registered via the addChangeListener method
    * before.
    * 
-   * @param listener
-   *        is the change listener to remove.
+   * @param listener is the change listener to remove.
    */
   void removeListener(UIListModelListener listener);
 
@@ -49,9 +46,9 @@ public interface UIListModel<E> {
    * 
    * @see java.util.List#get(int)
    * 
-   * @param index
-   *        is the position of the requested item in the list. The index must be
-   *        greater or equal to zero and less than {@link #getElementCount()}.
+   * @param index is the position of the requested item in the list. The index
+   *        must be greater or equal to zero and less than
+   *        {@link #getElementCount()}.
    * @return the element at the given index.
    */
   E getElement(int index);
@@ -61,9 +58,9 @@ public interface UIListModel<E> {
    * 
    * @see #getElement(int)
    * 
-   * @param index
-   *        is the position of the requested item in the list. The index must be
-   *        greater or equal to zero and less than {@link #getElementCount()}.
+   * @param index is the position of the requested item in the list. The index
+   *        must be greater or equal to zero and less than
+   *        {@link #getElementCount()}.
    * @return the element at the given index as string.
    */
   String getElementAsString(int index);
@@ -76,8 +73,7 @@ public interface UIListModel<E> {
    * return {@link Object#toString()} by default. In specific situations an
    * individual string representation can be implemented here.
    * 
-   * @param element
-   *        is the element to convert. May be <code>null</code>.
+   * @param element is the element to convert. May be <code>null</code>.
    * @return the string representation of the given <code>element</code>.
    */
   String toString(E element);
@@ -97,8 +93,7 @@ public interface UIListModel<E> {
    * 
    * @see java.util.List#indexOf(java.lang.Object)
    * 
-   * @param element
-   *        is the (potential) element of this list (as received by
+   * @param element is the (potential) element of this list (as received by
    *        {@link #getElement(int)}).
    * @return the index of the first occurrence of the given element or
    *         <code>-1</code> if the given element is NOT contained in this
@@ -122,9 +117,8 @@ public interface UIListModel<E> {
    * widgets, it is acceptable if this method will always return <code>-1</code>
    * if no acceptable or tivial implementation for this method is possible.<br>
    * 
-   * @param element
-   *        is the {@link #toString(Object) string representation} of the
-   *        (potential) {@link #getElement(int) element} of this list.
+   * @param element is the {@link #toString(Object) string representation} of
+   *        the (potential) {@link #getElement(int) element} of this list.
    * @return the (first) index of an {@link #getElement(int) element} with the
    *         {@link String#equals(java.lang.Object) same}
    *         {@link #toString(Object) string representation} as the given

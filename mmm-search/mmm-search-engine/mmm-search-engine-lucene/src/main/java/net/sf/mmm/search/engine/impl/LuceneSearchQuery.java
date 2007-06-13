@@ -18,10 +18,9 @@ public class LuceneSearchQuery extends AbstractLuceneSearchQuery {
   private Query query;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param luceneQuery
-   *        is the actual lucene query to wrap.
+   * @param luceneQuery is the actual lucene query to wrap.
    */
   public LuceneSearchQuery(Query luceneQuery) {
 

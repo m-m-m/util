@@ -27,15 +27,12 @@ public interface SearchConfigurator {
    * This method parses the XML-configuration given by <code>element</code>
    * and creates an according {@link SearchIndexer}.
    * 
-   * @param element
-   *        is the XML-element containing the configuration for the requested
-   *        {@link SearchIndexer}. See {@link #XML_TAG_SEARCH_ENGINE}.
+   * @param element is the XML-element containing the configuration for the
+   *        requested {@link SearchIndexer}. See {@link #XML_TAG_SEARCH_ENGINE}.
    * @return a new {@link SearchIndexer} for the configuration given by
    *         <code>element</code>.
-   * @throws IllegalArgumentException
-   *         if the configuration is invalid.
-   * @throws Exception
-   *         if the {@link SearchIndexer} could NOT be created.
+   * @throws IllegalArgumentException if the configuration is invalid.
+   * @throws Exception if the {@link SearchIndexer} could NOT be created.
    */
   SearchIndexer createSearchIndexer(Element element) throws IllegalArgumentException, Exception;
 
@@ -43,16 +40,13 @@ public interface SearchConfigurator {
    * This method parses the XML-configuration given by <code>element</code>
    * and creates an according {@link ManagedSearchEngine search-engine}.
    * 
-   * @param element
-   *        is the XML-element containing the configuration for the requested
-   *        {@link ManagedSearchEngine search-engine}. See
+   * @param element is the XML-element containing the configuration for the
+   *        requested {@link ManagedSearchEngine search-engine}. See
    *        {@link #XML_TAG_SEARCH_ENGINE}.
    * @return a new {@link ManagedSearchEngine} for the configuration given by
    *         <code>element</code>.
-   * @throws IllegalArgumentException
-   *         if the configuration is invalid.
-   * @throws Exception
-   *         if the {@link ManagedSearchEngine} could NOT be created.
+   * @throws IllegalArgumentException if the configuration is invalid.
+   * @throws Exception if the {@link ManagedSearchEngine} could NOT be created.
    */
   ManagedSearchEngine createSearchEngine(Element element) throws IllegalArgumentException,
       Exception;

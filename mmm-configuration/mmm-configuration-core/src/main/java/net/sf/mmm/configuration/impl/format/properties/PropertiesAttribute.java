@@ -10,9 +10,8 @@ import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to
- * adapt an single
- * {@link java.util.Properties#getProperty(java.lang.String) property}.
+ * {@link net.sf.mmm.configuration.api.MutableConfiguration} interface to adapt
+ * an single {@link java.util.Properties#getProperty(java.lang.String) property}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,19 +32,16 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
   /**
    * The constructor.
    * 
-   * @param parentConfiguration
-   *        is the {@link #getParent() parent} configuration.
-   * @param document
-   *        is the {@link #getOwnerDocument() owner-document}.
-   * @param propertyKey
-   *        is the {@link java.util.Properties#getProperty(String) property-key}.
-   * @param propertyName
-   *        is the {@link #getName() name}.
-   * @param propertyNamespace
-   *        is the {@link #getNamespaceUri() NameSpace-URI}.
+   * @param parentConfiguration is the {@link #getParent() parent}
+   *        configuration.
+   * @param document is the {@link #getOwnerDocument() owner-document}.
+   * @param propertyKey is the
+   *        {@link java.util.Properties#getProperty(String) property-key}.
+   * @param propertyName is the {@link #getName() name}.
+   * @param propertyNamespace is the {@link #getNamespaceUri() NameSpace-URI}.
    */
-  public PropertiesAttribute(AbstractConfiguration parentConfiguration, PropertiesDocument document,
-      String propertyKey, String propertyName, String propertyNamespace) {
+  public PropertiesAttribute(AbstractConfiguration parentConfiguration,
+      PropertiesDocument document, String propertyKey, String propertyName, String propertyNamespace) {
 
     super(parentConfiguration);
     this.doc = document;
@@ -53,6 +49,7 @@ public class PropertiesAttribute extends AbstractConfigurationAttribute {
     this.name = propertyName;
     this.namespace = propertyNamespace;
   }
+
   /**
    * {@inheritDoc}
    */

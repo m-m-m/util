@@ -33,7 +33,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
   private PojoDescriptorBuilder descriptorBuilder;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractConfigurationBindingService() {
 
@@ -45,8 +45,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
    * This method sets the descriptor-builder used to find reflective properties
    * of POJOs.
    * 
-   * @param pojoDescriptorBuilder
-   *        the descriptorBuilder to set.
+   * @param pojoDescriptorBuilder the descriptorBuilder to set.
    */
   @Resource
   public void setDescriptorBuilder(PojoDescriptorBuilder pojoDescriptorBuilder) {
@@ -70,8 +69,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
   /**
    * This method finds an according accessor for injection.
    * 
-   * @param propertyDescriptor
-   *        is the property-descriptor or <code>null</code>.
+   * @param propertyDescriptor is the property-descriptor or <code>null</code>.
    * @return <code>null</code> if the property-descriptor is <code>null</code>
    *         or it does NOT have an injectable accessor.
    */
@@ -93,10 +91,8 @@ public abstract class AbstractConfigurationBindingService implements Configurati
    * 
    * TODO extract this stuff to utility class in configuration-core...
    * 
-   * @param descriptor
-   *        is the POJO descriptor.
-   * @param propertyName
-   *        is the name of the property.
+   * @param descriptor is the POJO descriptor.
+   * @param propertyName is the name of the property.
    * @return the accessor or <code>null</code> if none could be found.
    */
   protected PojoPropertyAccessor findAccessor(PojoDescriptor<?> descriptor, String propertyName) {
@@ -152,8 +148,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
    * This means that it is directly supported by
    * {@link GenericValue#getValue(Class)}.
    * 
-   * @param type
-   *        is the type to check.
+   * @param type is the type to check.
    * @return <code>true</code> if the given type is simple, <code>false</code>
    *         otherwise.
    */

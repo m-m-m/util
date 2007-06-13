@@ -16,7 +16,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 public class ContentParserDoc extends AbstractPoiContentParser {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserDoc() {
 
@@ -33,10 +33,9 @@ public class ContentParserDoc extends AbstractPoiContentParser {
     // poiFs.getRoot().getEntry(POIFS_WORD_DOC);
     // DocumentInputStream documentInputStream =
     // poiFs.createDocumentInputStream(POIFS_ENTRY);
-    
+
     WordExtractor extractor = new WordExtractor(poiFs);
     return extractor.getText();
   }
 
-  
 }

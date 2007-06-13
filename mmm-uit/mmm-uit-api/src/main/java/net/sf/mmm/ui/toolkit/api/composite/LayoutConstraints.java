@@ -109,8 +109,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#SMALL_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints FIXED_HORIZONTAL_INSETS = new LayoutConstraints(Alignment.CENTER,
-      Filling.HORIZONTAL, 0.0, Insets.SMALL_SPACE);
+  public static final LayoutConstraints FIXED_HORIZONTAL_INSETS = new LayoutConstraints(
+      Alignment.CENTER, Filling.HORIZONTAL, 0.0, Insets.SMALL_SPACE);
 
   /**
    * Layout constraints with:
@@ -160,8 +160,8 @@ public class LayoutConstraints {
    * weight (absolute) and the size available for this panel. <br>
    * If the weight is negative, the behaviour is like <code>-weight</code>,
    * but only the space for the component is sized and the component itself is
-   * sized as its {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}.
-   * The alignment is used to place the component inside the sized space.
+   * sized as its {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}. The
+   * alignment is used to place the component inside the sized space.
    */
   public final double weight;
 
@@ -173,8 +173,8 @@ public class LayoutConstraints {
   /**
    * The size used to override default size. If
    * {@link UIReadSize#getWidth() width} or
-   * {@link UIReadSize#getHeight() height} is greater than <code>0</code>,
-   * it overrides the size-value of the associated
+   * {@link UIReadSize#getHeight() height} is greater than <code>0</code>, it
+   * overrides the size-value of the associated
    * {@link net.sf.mmm.ui.toolkit.api.UIComponent component}.
    */
   public final UIReadSize size;
@@ -184,8 +184,7 @@ public class LayoutConstraints {
    * Using {@link Alignment#CENTER}, {@link Filling#BOTH} and
    * {@link Insets#NO_SPACE}.
    * 
-   * @param w
-   *        is the {@link #weight}
+   * @param w is the {@link #weight}
    */
   public LayoutConstraints(double w) {
 
@@ -197,8 +196,7 @@ public class LayoutConstraints {
    * Using {@link Insets#NO_SPACE}, {@link Filling#NONE} and a weight of
    * <code>0</code>.
    * 
-   * @param align
-   *        is the {@link #alignment}
+   * @param align is the {@link #alignment}
    */
   public LayoutConstraints(Alignment align) {
 
@@ -208,10 +206,8 @@ public class LayoutConstraints {
   /**
    * The constructor. Using {@link Insets#NO_SPACE} and {@link Filling#BOTH}.
    * 
-   * @param align
-   *        is the {@link #alignment}
-   * @param w
-   *        is the {@link #weight}
+   * @param align is the {@link #alignment}
+   * @param w is the {@link #weight}
    */
   public LayoutConstraints(Alignment align, double w) {
 
@@ -221,10 +217,8 @@ public class LayoutConstraints {
   /**
    * The constructor. Using {@link Insets#NO_SPACE}.
    * 
-   * @param align
-   *        is the {@link #alignment}
-   * @param fill
-   *        is the {@link #filling}
+   * @param align is the {@link #alignment}
+   * @param fill is the {@link #filling}
    */
   public LayoutConstraints(Alignment align, Filling fill) {
 
@@ -234,12 +228,9 @@ public class LayoutConstraints {
   /**
    * The constructor. Using {@link Insets#NO_SPACE}.
    * 
-   * @param align
-   *        is the {@link #alignment}
-   * @param fill
-   *        is the {@link #filling}
-   * @param w
-   *        is the {@link #weight}
+   * @param align is the {@link #alignment}
+   * @param fill is the {@link #filling}
+   * @param w is the {@link #weight}
    */
   public LayoutConstraints(Alignment align, Filling fill, double w) {
 
@@ -249,14 +240,10 @@ public class LayoutConstraints {
   /**
    * The constructor.
    * 
-   * @param align
-   *        is the {@link #alignment}
-   * @param fill
-   *        is the {@link #filling}
-   * @param w
-   *        is the {@link #weight}
-   * @param border
-   *        are the {@link #insets}
+   * @param align is the {@link #alignment}
+   * @param fill is the {@link #filling}
+   * @param w is the {@link #weight}
+   * @param border are the {@link #insets}
    */
   public LayoutConstraints(Alignment align, Filling fill, double w, Insets border) {
 
@@ -266,16 +253,11 @@ public class LayoutConstraints {
   /**
    * The constructor.
    * 
-   * @param align
-   *        is the {@link #alignment}
-   * @param fill
-   *        is the {@link #filling}
-   * @param w
-   *        is the {@link #weight}
-   * @param border
-   *        are the {@link #insets}
-   * @param overrideSize
-   *        is the {@link #size}.
+   * @param align is the {@link #alignment}
+   * @param fill is the {@link #filling}
+   * @param w is the {@link #weight}
+   * @param border are the {@link #insets}
+   * @param overrideSize is the {@link #size}.
    */
   public LayoutConstraints(Alignment align, Filling fill, double w, Insets border,
       UIReadSize overrideSize) {

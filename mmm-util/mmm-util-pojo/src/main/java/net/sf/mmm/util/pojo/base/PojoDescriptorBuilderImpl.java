@@ -19,8 +19,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * The constructor.
    * 
-   * @param propertyIntrospector
-   *        is the introspector used to find the property-accessors of a POJO.
+   * @param propertyIntrospector is the introspector used to find the
+   *        property-accessors of a POJO.
    */
   public PojoDescriptorBuilderImpl(PojoPropertyIntrospector propertyIntrospector) {
 

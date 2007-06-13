@@ -17,9 +17,8 @@ public interface UIWriteSelectionFlag extends UIReadSelectionFlag {
    * {@link net.sf.mmm.ui.toolkit.api.event.UIActionListener#invoke(net.sf.mmm.ui.toolkit.api.UINode, net.sf.mmm.ui.toolkit.api.event.ActionType) invoke}
    * an action event.
    * 
-   * @param selected -
-   *        if <code>true</code> the object will be selected, else it will be
-   *        deselected.
+   * @param selected - if <code>true</code> the object will be selected, else
+   *        it will be deselected.
    */
   void setSelected(boolean selected);
 

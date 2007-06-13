@@ -48,11 +48,10 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the widget.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        widget.
    */
   public AbstractSyncObjectAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -102,8 +101,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * This method is called from {@link #run()}. It does the actual job for the
    * given operation.
    * 
-   * @param operation
-   *        is the actual operation to perform.
+   * @param operation is the actual operation to perform.
    */
   protected void performSynchron(String operation) {
 
@@ -225,8 +223,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * {@link #hasStyle(int) hasStyle}({@link org.eclipse.swt.SWT#HORIZONTAL})
    * </pre>
    * 
-   * @param styleMask
-   *        is the style mask to check.
+   * @param styleMask is the style mask to check.
    * @return <code>true</code> if all bits in the given styleMask are set in
    *         the {@link #getStyle() style}, <code>false</code> otherwise.
    */
@@ -239,8 +236,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * This method sets the flag(s) given in <code>styleMask</code> in the
    * {@link #getStyle() style} of the widget.
    * 
-   * @param styleMask
-   *        is the style mask to set.
+   * @param styleMask is the style mask to set.
    */
   protected void setFlag(int styleMask) {
 
@@ -251,8 +247,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * This method clears the flag(s) given by <code>styleMask</code> in the
    * {@link #getStyle() style} of the widget.
    * 
-   * @param styleMask
-   *        is the style mask to unset.
+   * @param styleMask is the style mask to unset.
    */
   protected void unsetFlag(int styleMask) {
 
@@ -263,8 +258,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * This method inverts (XORs) the flag(s) given by <code>styleMask</code> in
    * the {@link #getStyle() style} of the widget.
    * 
-   * @param styleMask
-   *        is the style mask to invert.
+   * @param styleMask is the style mask to invert.
    */
   protected void invertFlag(int styleMask) {
 
@@ -274,8 +268,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   /**
    * This method invokes the given operation synchronous.
    * 
-   * @param operation
-   *        is the operation to perform.
+   * @param operation is the operation to perform.
    */
   protected void invoke(String operation) {
 

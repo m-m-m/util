@@ -44,12 +44,9 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
   /**
    * The constructor.
    * 
-   * @param parent
-   *        is the parent composite.
-   * @param style
-   *        is the style of this widget.
-   * @param listModel
-   *        is the model for the elements of this spinner.
+   * @param parent is the parent composite.
+   * @param style is the style of this widget.
+   * @param listModel is the model for the elements of this spinner.
    */
   public MySpinner(Composite parent, int style, UIListModel<?> listModel) {
 
@@ -115,8 +112,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
   /**
    * This method is invoked if a key is pressed in the text-field.
    * 
-   * @param event
-   *        is the key-press event.
+   * @param event is the key-press event.
    */
   private void traverse(Event event) {
 
@@ -250,8 +246,7 @@ public class MySpinner extends Composite implements UIWriteSelectionIndex, UILis
   /**
    * This method sets the selection index without updating the spinner.
    * 
-   * @param newIndex
-   *        is the new index to set.
+   * @param newIndex is the new index to set.
    */
   private void setSelection(int newIndex) {
 

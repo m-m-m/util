@@ -48,19 +48,15 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
 
   /** @see #getModifiers() */
   private final ClassModifiers modifiers;
-  
+
   /**
    * The constructor.
    * 
-   * @param classId
-   *        is the {@link #getId() ID} of the class.
-   * @param className
-   *        is the {@link #getName() name} of the class.
-   * @param parentClass
-   *        is the {@link #getSuperClass() super-class} of the class or
-   *        <code>null</code> for creating the root-class.
-   * @param classModifiers
-   *        are the {@link #getModifiers() modifiers}.
+   * @param classId is the {@link #getId() ID} of the class.
+   * @param className is the {@link #getName() name} of the class.
+   * @param parentClass is the {@link #getSuperClass() super-class} of the class
+   *        or <code>null</code> for creating the root-class.
+   * @param classModifiers are the {@link #getModifiers() modifiers}.
    */
   public AbstractContentClass(IdImpl classId, String className, ContentClass parentClass,
       ClassModifiers classModifiers) {
@@ -82,7 +78,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
       }
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -236,10 +232,8 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * This method adds a {@link #getSubClasses() sub-class} to this class.
    * 
-   * @param subClass
-   *        is the sub-class to add.
-   * @throws ContentModelRuntimeException
-   *         if the operation fails.
+   * @param subClass is the sub-class to add.
+   * @throws ContentModelRuntimeException if the operation fails.
    */
   public void addSubClass(AbstractContentClass subClass) throws ContentModelRuntimeException {
 
@@ -262,10 +256,8 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * This method adds the given <code>field</code> to this class.
    * 
-   * @param field
-   *        is the field to add.
-   * @throws ContentModelRuntimeException
-   *         if the field could NOT be added.
+   * @param field is the field to add.
+   * @throws ContentModelRuntimeException if the field could NOT be added.
    */
   public void addField(AbstractContentField field) throws ContentModelRuntimeException {
 

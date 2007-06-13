@@ -33,8 +33,7 @@ public class PatternFileFilter implements FileFilter {
   /**
    * The constructor.
    * 
-   * @param filenamePattern
-   *        is the pattern that must match in order to
+   * @param filenamePattern is the pattern that must match in order to
    *        {@link #accept(File) accept} a file by its
    *        {@link File#getName() name}.
    */
@@ -46,12 +45,10 @@ public class PatternFileFilter implements FileFilter {
   /**
    * The constructor.
    * 
-   * @param filenamePattern
-   *        is the pattern that must match in order to
+   * @param filenamePattern is the pattern that must match in order to
    *        {@link #accept(File) accept} a file by its
    *        {@link File#getName() name}.
-   * @param type
-   *        the type of the {@link #accept(File) acceptable} files or
+   * @param type the type of the {@link #accept(File) acceptable} files or
    *        <code>null</code> if any type is acceptable.
    */
   public PatternFileFilter(Pattern filenamePattern, FileType type) {
@@ -64,12 +61,11 @@ public class PatternFileFilter implements FileFilter {
   /**
    * The constructor.
    * 
-   * @param filenamePattern
-   *        is the {@link StringUtil#compileGlobPattern(String) glob-pattern}
-   *        that must match in order to {@link #accept(File) accept} a file by
-   *        its {@link File#getName() name}.
-   * @param type
-   *        the type of the {@link #accept(File) acceptable} files or
+   * @param filenamePattern is the
+   *        {@link StringUtil#compileGlobPattern(String) glob-pattern} that must
+   *        match in order to {@link #accept(File) accept} a file by its
+   *        {@link File#getName() name}.
+   * @param type the type of the {@link #accept(File) acceptable} files or
    *        <code>null</code> if any type is acceptable.
    */
   public PatternFileFilter(String filenamePattern, FileType type) {

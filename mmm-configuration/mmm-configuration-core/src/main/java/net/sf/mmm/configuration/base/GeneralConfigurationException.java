@@ -19,12 +19,10 @@ public class GeneralConfigurationException extends ConfigurationException {
   private static final long serialVersionUID = -6453342129988661990L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param location
-   *        is the configuration where the error occurred.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param location is the configuration where the error occurred.
    */
   public GeneralConfigurationException(Throwable nested, Configuration location) {
 
@@ -32,12 +30,10 @@ public class GeneralConfigurationException extends ConfigurationException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param location
-   *        is the configuration where the error occurred.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param location is the configuration where the error occurred.
    */
   public GeneralConfigurationException(Throwable nested, String location) {
 

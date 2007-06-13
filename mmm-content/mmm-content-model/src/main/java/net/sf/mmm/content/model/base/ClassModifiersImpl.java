@@ -109,10 +109,8 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * 
    * @see AbstractModifiers#AbstractModifiers(boolean, boolean)
    * 
-   * @param isAbstract
-   *        is the {@link #isAbstract() abstract-flag}.
-   * @param isExtendable
-   *        is the {@link #isExtendable() extendable-flag}.
+   * @param isAbstract is the {@link #isAbstract() abstract-flag}.
+   * @param isExtendable is the {@link #isExtendable() extendable-flag}.
    */
   public ClassModifiersImpl(boolean isSystem, boolean isFinal, boolean isAbstract,
       boolean isExtendable) {
@@ -126,8 +124,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   /**
    * The constructor.
    * 
-   * @param modifiers
-   *        is the modifiers object to copy.
+   * @param modifiers is the modifiers object to copy.
    */
   public ClassModifiersImpl(ClassModifiersImpl modifiers) {
 
@@ -142,14 +139,10 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   /**
    * This method gets the modifiers.
    * 
-   * @param isSystem
-   *        is the value for the {@link #isSystem() system-flag}.
-   * @param isFinal
-   *        is the value for the {@link #isFinal() final-flag}.
-   * @param isAbstract
-   *        is the {@link #isAbstract() abstract-flag}.
-   * @param isExtendable
-   *        is the {@link #isExtendable() extendable-flag}.
+   * @param isSystem is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal is the value for the {@link #isFinal() final-flag}.
+   * @param isAbstract is the {@link #isAbstract() abstract-flag}.
+   * @param isExtendable is the {@link #isExtendable() extendable-flag}.
    * @return the requested modifiers.
    */
   public static ClassModifiers getInstance(boolean isSystem, boolean isFinal, boolean isAbstract,
@@ -186,16 +179,11 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
   /**
    * This method validates the consistence of the modifier flags.
    * 
-   * @param isSystem
-   *        is the value for the {@link #isSystem() system-flag}.
-   * @param isFinal
-   *        is the value for the {@link #isFinal() final-flag}.
-   * @param isAbstract
-   *        is the {@link #isAbstract() abstract-flag}.
-   * @param isExtendable
-   *        is the {@link #isExtendable() extendable-flag}.
-   * @throws IllegalModifiersException
-   *         if the flags are inconsistent.
+   * @param isSystem is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal is the value for the {@link #isFinal() final-flag}.
+   * @param isAbstract is the {@link #isAbstract() abstract-flag}.
+   * @param isExtendable is the {@link #isExtendable() extendable-flag}.
+   * @throws IllegalModifiersException if the flags are inconsistent.
    */
   protected static void validate(boolean isSystem, boolean isFinal, boolean isAbstract,
       boolean isExtendable) throws IllegalModifiersException {
@@ -329,6 +317,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
 
     /**
      * TODO: javadoc
+     * 
      * @param element
      * @param attributeName
      * @param defaultValue

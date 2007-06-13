@@ -64,8 +64,7 @@ public class MainNlsResourceBundle extends AbstractResourceBundle {
   public static final String ERR_ILLEGAL_ARG_2 = "The function \"{0}\" is not applicable for the arguments \"{1}\" and \"{2}\"!";
 
   /**
-   * exception message for illegal cast (conversion of a value to another
-   * type).
+   * exception message for illegal cast (conversion of a value to another type).
    * 
    * @see net.sf.mmm.term.impl.function.FctCast
    * @see net.sf.mmm.term.api.IllegalCastException

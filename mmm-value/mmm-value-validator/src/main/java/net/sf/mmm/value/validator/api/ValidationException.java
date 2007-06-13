@@ -25,9 +25,8 @@ public class ValidationException extends NlsException {
    * 
    * @see NlsException#NlsException(String, Object[])
    * 
-   * @param validationResult
-   *        is the result of the failed validation. The result must NOT be
-   *        {@link ValidationResult#isValid() valid}.
+   * @param validationResult is the result of the failed validation. The result
+   *        must NOT be {@link ValidationResult#isValid() valid}.
    */
   public ValidationException(ValidationResult validationResult) {
 
@@ -40,11 +39,9 @@ public class ValidationException extends NlsException {
    * 
    * @see NlsException#NlsException(Throwable, String, Object[])
    * 
-   * @param validationResult
-   *        is the result of the failed validation. The result must NOT be
-   *        {@link ValidationResult#isValid() valid}.
-   * @param nested
-   *        is the throwable that caused this error.
+   * @param validationResult is the result of the failed validation. The result
+   *        must NOT be {@link ValidationResult#isValid() valid}.
+   * @param nested is the throwable that caused this error.
    */
   public ValidationException(ValidationResult validationResult, Throwable nested) {
 

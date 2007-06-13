@@ -18,14 +18,11 @@ public class SearchResultPageImpl extends AbstractSearchResultPage {
   private final SearchHit[] hits;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param searchQuery
-   *        is the {@link #getQuery() query} that caused this page.
-   * @param totalHits
-   *        is the {@link #getTotalHitCount() total number of hits}.
-   * @param hitPerPage
-   *        is the {@link #getHitsPerPage() number of hits per page}.
+   * @param searchQuery is the {@link #getQuery() query} that caused this page.
+   * @param totalHits is the {@link #getTotalHitCount() total number of hits}.
+   * @param hitPerPage is the {@link #getHitsPerPage() number of hits per page}.
    * @param pageNumber
    * @param searchHits
    */
@@ -51,5 +48,5 @@ public class SearchResultPageImpl extends AbstractSearchResultPage {
 
     return this.hits.length;
   }
-  
+
 }

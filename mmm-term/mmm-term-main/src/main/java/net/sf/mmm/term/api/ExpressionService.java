@@ -18,11 +18,9 @@ public interface ExpressionService extends TermParser {
    * This method parses an expression given as XML element. Use this method to
    * create an Expression.
    * 
-   * @param expression
-   *        the expression to parse. TODO specify grammar.
+   * @param expression the expression to parse. TODO specify grammar.
    * @return the parsed expression
-   * @throws TermParseException
-   *         if expression is invalid.
+   * @throws TermParseException if expression is invalid.
    */
   Term parse(Element expression) throws TermParseException;
 

@@ -49,12 +49,10 @@ public abstract class AbstractSearchConfigurator implements SearchConfigurator {
    * {@link #XML_ATR_SEARCH_REFRESHDELAY refresh-delay} and if set it starts an
    * according refresh-thread for the given <code>searchEngine</code>.
    * 
-   * @param element
-   *        is the XML-element containing the configuration for the
+   * @param element is the XML-element containing the configuration for the
    *        search-engine.
-   * @param searchEngine
-   *        is the search-engine that has already been created from the
-   *        configuration.
+   * @param searchEngine is the search-engine that has already been created from
+   *        the configuration.
    */
   protected void setupRefreshThread(Element element, final ManagedSearchEngine searchEngine) {
 

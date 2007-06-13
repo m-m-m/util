@@ -23,8 +23,8 @@ import net.sf.mmm.util.event.ChangeEvent;
 import junit.framework.TestCase;
 
 /**
- * This is the {@link TestCase} for the
- * {@link ConfigurationChangeEvent event} support of the
+ * This is the {@link TestCase} for the {@link ConfigurationChangeEvent event}
+ * support of the
  * {@link net.sf.mmm.configuration.api.Configuration configuration}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -72,18 +72,19 @@ public class ConfigurationEventTest extends TestCase {
     assertEquals(ChangeEvent.Type.REMOVE, event.getType());
     assertEquals("foo", event.getTopCause().getName());
     assertEquals(barAttr, event.getCause());
-    listener.eventQueue.clear();    
+    listener.eventQueue.clear();
   }
 
   private static class Listener implements ConfigurationChangeListener {
 
     private List<ConfigurationChangeEvent> eventQueue;
-    
+
     public Listener() {
+
       super();
       this.eventQueue = new ArrayList<ConfigurationChangeEvent>();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -91,7 +92,7 @@ public class ConfigurationEventTest extends TestCase {
 
       this.eventQueue.add(event);
     }
-    
+
   }
-  
+
 }

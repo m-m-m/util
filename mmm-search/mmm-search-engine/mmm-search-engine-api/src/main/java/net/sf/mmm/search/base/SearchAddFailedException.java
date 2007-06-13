@@ -20,10 +20,9 @@ public class SearchAddFailedException extends SearchException {
   private static final long serialVersionUID = -3642650920957925278L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param entry
-   *        is the entry that could NOT be added.
+   * @param entry is the entry that could NOT be added.
    */
   public SearchAddFailedException(SearchEntry entry) {
 
@@ -31,12 +30,10 @@ public class SearchAddFailedException extends SearchException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param entry
-   *        is the entry that could NOT be added.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param entry is the entry that could NOT be added.
    */
   public SearchAddFailedException(Throwable nested, SearchEntry entry) {
 

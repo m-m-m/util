@@ -61,14 +61,11 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
-   * @param swtMenu
-   *        is the menu to access.
-   * @param menuText
-   *        is the text of the menu.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
+   * @param swtMenu is the menu to access.
+   * @param menuText is the text of the menu.
    */
   public SyncMenuAccess(UIFactorySwt uiFactory, int swtStyle, Menu swtMenu, String menuText) {
 
@@ -117,8 +114,8 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
   /**
    * This method creates a sub-menu.
    * 
-   * @param menuText
-   *        is the {@link MenuItem#setText(String) text} of the sub-menu.
+   * @param menuText is the {@link MenuItem#setText(String) text} of the
+   *        sub-menu.
    * @return the sub-menu.
    */
   public Menu createSubMenu(String menuText) {
@@ -132,10 +129,9 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
   /**
    * This method creates a menu-item.
    * 
-   * @param menuText
-   *        is the {@link MenuItem#setText(String) text} of the menu-item.
-   * @param style
-   *        is the button-style of the menu-item.
+   * @param menuText is the {@link MenuItem#setText(String) text} of the
+   *        menu-item.
+   * @param style is the button-style of the menu-item.
    * @return the new menu-item.
    */
   public MenuItem createMenuItem(String menuText, ButtonStyle style) {
@@ -159,8 +155,7 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
   /**
    * This method sets the {@link MenuItem#setText(String) text} of the menu.
    * 
-   * @param newText
-   *        is the text to set.
+   * @param newText is the text to set.
    */
   public void setText(String newText) {
 

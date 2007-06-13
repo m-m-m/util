@@ -21,18 +21,15 @@ public class RegexStringTransformerRule extends RegexStringTransformer implement
   /**
    * The constructor.
    * 
-   * @param pattern
-   *        is the pattern used for conversion.
-   * @param replacement
-   *        is the replacement to fill in the string to convert.
-   * @param replaceAll -
-   *        if <code>true</code>
+   * @param pattern is the pattern used for conversion.
+   * @param replacement is the replacement to fill in the string to convert.
+   * @param replaceAll - if <code>true</code>
    *        {@link java.util.regex.Matcher#replaceAll(String)} will be used,
    *        else if <code>false</code>
    *        {@link java.util.regex.Matcher#replaceFirst(String)}.
-   * @param stopOnMatch
-   *        if <code>true</code> and the {@link #getPattern() pattern} of this
-   *        rule matches no further rules will be executed.
+   * @param stopOnMatch if <code>true</code> and the
+   *        {@link #getPattern() pattern} of this rule matches no further rules
+   *        will be executed.
    */
   public RegexStringTransformerRule(Pattern pattern, String replacement, boolean replaceAll,
       boolean stopOnMatch) {

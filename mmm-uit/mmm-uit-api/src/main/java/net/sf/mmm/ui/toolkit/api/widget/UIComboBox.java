@@ -22,9 +22,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * {@link #getText()} instead of {@link #getSelectedValue()} to retrieve the
  * user selection if the combo is editable.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

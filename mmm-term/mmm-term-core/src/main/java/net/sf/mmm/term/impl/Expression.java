@@ -33,12 +33,10 @@ public class Expression extends AbstractTerm {
   /**
    * The constructor.
    * 
-   * @param theFunction
-   *        is the function for this expression.
-   * @param theArguments
-   *        are the arguments applied to the function.
-   * @throws ValueException
-   *         if the given terms are invalid arguments for the given function.
+   * @param theFunction is the function for this expression.
+   * @param theArguments are the arguments applied to the function.
+   * @throws ValueException if the given terms are invalid arguments for the
+   *         given function.
    */
   public Expression(Function theFunction, Term... theArguments) throws ValueException {
 

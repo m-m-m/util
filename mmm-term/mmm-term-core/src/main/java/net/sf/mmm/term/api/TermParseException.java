@@ -23,8 +23,7 @@ public class TermParseException extends NlsException {
   /**
    * The constructor.
    * 
-   * @param expression
-   *        is the expression that could NOT be parsed.
+   * @param expression is the expression that could NOT be parsed.
    */
   public TermParseException(String expression) {
 
@@ -34,10 +33,8 @@ public class TermParseException extends NlsException {
   /**
    * The constructor.
    * 
-   * @param expression
-   *        is the expression that could NOT be parsed.
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
+   * @param expression is the expression that could NOT be parsed.
+   * @param nested is the {@link #getCause() cause} of this exception.
    */
   public TermParseException(String expression, Throwable nested) {
 

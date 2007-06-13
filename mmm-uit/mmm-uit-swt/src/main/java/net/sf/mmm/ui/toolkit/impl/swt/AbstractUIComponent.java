@@ -24,10 +24,8 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIComponent(UIFactorySwt uiFactory, UISwtNode parentObject) {
 

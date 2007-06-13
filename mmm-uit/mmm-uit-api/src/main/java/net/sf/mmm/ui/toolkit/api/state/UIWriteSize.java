@@ -13,10 +13,8 @@ public interface UIWriteSize extends UIReadSize {
   /**
    * This method sets the size of this object.
    * 
-   * @param width
-   *        is the new width of the object.
-   * @param height
-   *        is the new height of the object.
+   * @param width is the new width of the object.
+   * @param height is the new height of the object.
    */
   void setSize(int width, int height);
 

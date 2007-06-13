@@ -23,152 +23,149 @@ import net.sf.mmm.value.impl.StringValue;
  */
 public class MutableContextImpl implements MutableContext {
 
-    /** maps variable names to {@link #getValue(String) values} */
-    private final Map<String, GenericValue> variableTable;
+  /** maps variable names to {@link #getValue(String) values} */
+  private final Map<String, GenericValue> variableTable;
 
-    /** the parent context */
-    private final Context parent;
+  /** the parent context */
+  private final Context parent;
 
-    /** the {@link #getImmutableContext() "immutable context"} */
-    private final Context immutableContext;
+  /** the {@link #getImmutableContext() "immutable context"} */
+  private final Context immutableContext;
 
-    /**
-     * The constructor for a root-context.
-     */
-    public MutableContextImpl() {
+  /**
+   * The constructor for a root-context.
+   */
+  public MutableContextImpl() {
 
-        this(null);
+    this(null);
+  }
+
+  /**
+   * The constructor for a {@link #createChildContext() sub-context}.
+   * 
+   * @param parentContext is the context the created one will derive from.
+   */
+  public MutableContextImpl(Context parentContext) {
+
+    super();
+    this.parent = parentContext;
+    this.variableTable = new HashMap<String, GenericValue>();
+    this.immutableContext = new ContextProxy(this);
+  }
+
+  /**
+   * @see net.sf.mmm.context.api.Context#getValue(java.lang.String)
+   * 
+   * 
+   * @param variableName is the name of the requested context value.
+   * @return the requested value or <code>null</code> if no such value exists.
+   */
+  private GenericValue get(String variableName) {
+
+    GenericValue result = this.variableTable.get(variableName);
+    if ((result == null) && (this.parent != null)) {
+      result = this.parent.getValue(variableName);
     }
+    return result;
+  }
 
-    /**
-     * The constructor for a {@link #createChildContext() sub-context}.
-     * 
-     * @param parentContext
-     *        is the context the created one will derive from.
-     */
-    public MutableContextImpl(Context parentContext) {
+  /**
+   * {@inheritDoc}
+   */
+  public GenericValue getValue(String variableName) {
 
-        super();
-        this.parent = parentContext;
-        this.variableTable = new HashMap<String, GenericValue>();
-        this.immutableContext = new ContextProxy(this);
+    GenericValue result = get(variableName);
+    if (result == null) {
+      result = new EmptyValue(variableName);
     }
+    return result;
+  }
 
-    /**
-     * @see net.sf.mmm.context.api.Context#getValue(java.lang.String)
-     *      
-     * 
-     * @param variableName
-     *        is the name of the requested context value.
-     * @return the requested value or <code>null</code> if no such value
-     *         exists.
-     */
-    private GenericValue get(String variableName) {
+  /**
+   * {@inheritDoc}
+   */
+  public Object getObject(String variableName) {
 
-        GenericValue result = this.variableTable.get(variableName);
-        if ((result == null) && (this.parent != null)) {
-            result = this.parent.getValue(variableName);
-        }
-        return result;
+    GenericValue value = get(variableName);
+    if (value == null) {
+      throw new ValueNotSetException(variableName);
     }
+    return value.getObject(null);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public GenericValue getValue(String variableName) {
+  /**
+   * {@inheritDoc}
+   */
+  public boolean hasValue(String variableName) {
 
-        GenericValue result = get(variableName);
-        if (result == null) {
-            result = new EmptyValue(variableName);
-        }
-        return result;
+    if (this.variableTable.containsKey(variableName)) {
+      return true;
+    } else {
+      if (this.parent == null) {
+        return false;
+      } else {
+        return this.parent.hasValue(variableName);
+      }
     }
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Object getObject(String variableName) {
+  /**
+   * {@inheritDoc}
+   */
+  public Set<String> getVariableNames() {
 
-        GenericValue value = get(variableName);
-        if (value == null) {
-            throw new ValueNotSetException(variableName);
-        }
-        return value.getObject(null);
+    Set<String> result;
+    if (this.parent == null) {
+      result = new HashSet<String>();
+    } else {
+      result = this.parent.getVariableNames();
     }
+    result.addAll(this.variableTable.keySet());
+    return result;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean hasValue(String variableName) {
+  /**
+   * {@inheritDoc}
+   */
+  public void setValue(String variableName, GenericValue value) {
 
-        if (this.variableTable.containsKey(variableName)) {
-            return true;
-        } else {
-            if (this.parent == null) {
-                return false;
-            } else {
-                return this.parent.hasValue(variableName);
-            }
-        }
+    this.variableTable.put(variableName, value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setObject(String variableName, Object value) {
+
+    if ((value != null) && (value instanceof String)) {
+      setValue(variableName, new StringValue((String) value));
+    } else {
+      setValue(variableName, new ObjectValue(value));
     }
+  }
 
-    /**
-     * {@inheritDoc} 
-     */
-    public Set<String> getVariableNames() {
+  /**
+   * {@inheritDoc}
+   */
+  public MutableContext createChildContext() {
 
-        Set<String> result;
-        if (this.parent == null) {
-            result = new HashSet<String>();
-        } else {
-            result = this.parent.getVariableNames();
-        }
-        result.addAll(this.variableTable.keySet());
-        return result;
-    }
+    return new MutableContextImpl(this);
+  }
 
-    /**
-     * {@inheritDoc} 
-     */
-    public void setValue(String variableName, GenericValue value) {
+  /**
+   * {@inheritDoc}
+   */
+  public void unsetValue(String variableName) {
 
-        this.variableTable.put(variableName, value);
-    }
+    this.variableTable.remove(variableName);
+  }
 
-    /**
-     * {@inheritDoc} 
-     */
-    public void setObject(String variableName, Object value) {
+  /**
+   * {@inheritDoc}
+   */
+  public Context getImmutableContext() {
 
-        if ((value != null) && (value instanceof String)) {
-            setValue(variableName, new StringValue((String) value));
-        } else {
-            setValue(variableName, new ObjectValue(value));
-        }
-    }
-
-    /**
-     * {@inheritDoc} 
-     */
-    public MutableContext createChildContext() {
-
-        return new MutableContextImpl(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void unsetValue(String variableName) {
-
-        this.variableTable.remove(variableName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Context getImmutableContext() {
-
-        return this.immutableContext;
-    }
+    return this.immutableContext;
+  }
 
 }

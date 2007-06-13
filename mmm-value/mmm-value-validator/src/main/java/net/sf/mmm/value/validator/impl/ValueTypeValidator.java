@@ -26,8 +26,7 @@ public class ValueTypeValidator extends AbstractValueValidator {
    * 
    * TODO: accept Type instead of Class
    * 
-   * @param valueType
-   *        is the required value type.
+   * @param valueType is the required value type.
    */
   public ValueTypeValidator(Class valueType) {
 

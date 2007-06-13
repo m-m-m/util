@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 public abstract class AbstractConfigurationFormatTest extends TestCase {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractConfigurationFormatTest() {
 
@@ -43,7 +43,7 @@ public abstract class AbstractConfigurationFormatTest extends TestCase {
     String mmmHost = "m-m-m.sf.net";
     Configuration server2Config = config.getDescendant("server[@host='" + mmmHost + "']");
     assertEquals(mmmHost, server2Config.getDescendant("@host").getValue().getString());
-    
+
     Configuration portAttribute = config.getDescendant("server/@port");
     assertNotNull(portAttribute);
     assertEquals(8080, portAttribute.getValue().getInteger());

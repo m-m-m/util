@@ -38,8 +38,7 @@ public abstract class AbstractAction implements Action {
   /**
    * The constructor.
    * 
-   * @param displayName
-   *        is the {@link #getName() name}.
+   * @param displayName is the {@link #getName() name}.
    */
   public AbstractAction(String displayName) {
 
@@ -53,8 +52,7 @@ public abstract class AbstractAction implements Action {
   /**
    * This method sets the {@link #getName() name}.
    * 
-   * @param newName
-   *        is the new name.
+   * @param newName is the new name.
    */
   public void setName(String newName) {
 
@@ -75,8 +73,7 @@ public abstract class AbstractAction implements Action {
   /**
    * This method sets the {@link #getId() id}.
    * 
-   * @param newId
-   *        is the new id to set.
+   * @param newId is the new id to set.
    */
   public void setId(String newId) {
 
@@ -94,8 +91,7 @@ public abstract class AbstractAction implements Action {
   /**
    * This method sets the {@link #getButtonStyle() style}.
    * 
-   * @param newStyle
-   *        is the style to set.
+   * @param newStyle is the style to set.
    */
   public void setButtonStyle(ButtonStyle newStyle) {
 
@@ -113,8 +109,7 @@ public abstract class AbstractAction implements Action {
   /**
    * This method set the {@link #getIcon() icon}.
    * 
-   * @param newIcon
-   *        is the new icon to set.
+   * @param newIcon is the new icon to set.
    */
   public void setIcon(UIPicture newIcon) {
 

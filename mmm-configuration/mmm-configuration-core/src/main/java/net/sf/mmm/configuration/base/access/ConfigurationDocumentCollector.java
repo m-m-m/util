@@ -16,8 +16,7 @@ public interface ConfigurationDocumentCollector {
   /**
    * This method adds a document to this container.
    * 
-   * @param document
-   *        is the document to add.
+   * @param document is the document to add.
    */
   void addDocument(ConfigurationDocument document);
 

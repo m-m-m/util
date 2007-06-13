@@ -22,7 +22,7 @@ public class FieldAccessorIterator implements Iterator<AbstractPojoPropertyAcces
 
   /** the current class */
   private Class<?> currentClass;
-  
+
   /** the fields */
   private Field[] fields;
 
@@ -36,10 +36,10 @@ public class FieldAccessorIterator implements Iterator<AbstractPojoPropertyAcces
   private AbstractPojoPropertyAccessor next;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param pojoClass
-   *        is the class for which the property-accessors should be iterated.
+   * @param pojoClass is the class for which the property-accessors should be
+   *        iterated.
    */
   public FieldAccessorIterator(Class<?> pojoClass) {
 

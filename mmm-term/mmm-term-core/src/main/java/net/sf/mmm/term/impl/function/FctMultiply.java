@@ -49,10 +49,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Double mul(Double argument1, Number argument2) {
@@ -63,10 +61,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Double mul(Number argument1, Double argument2) {
@@ -77,10 +73,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Integer mul(Integer argument1, Integer argument2) {
@@ -91,10 +85,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Long mul(Long argument1, Integer argument2) {
@@ -105,10 +97,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Long mul(Integer argument1, Long argument2) {
@@ -119,10 +109,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Long mul(Long argument1, Long argument2) {
@@ -133,10 +121,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float mul(Float argument1, Float argument2) {
@@ -147,10 +133,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float mul(Float argument1, Integer argument2) {
@@ -161,10 +145,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float mul(Integer argument1, Float argument2) {
@@ -175,10 +157,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float mul(Float argument1, Long argument2) {
@@ -189,10 +169,8 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static Float mul(Long argument1, Float argument2) {
@@ -203,15 +181,12 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the string <code>argument1</code> repeated <code>argument2</code>
    *         times.
-   * @throws CalculationException
-   *         if <code>argument2</code> is negative or the result would exceed
-   *         {@link FctMultiply#MAX_STRING_LENGTH}.
+   * @throws CalculationException if <code>argument2</code> is negative or the
+   *         result would exceed {@link FctMultiply#MAX_STRING_LENGTH}.
    */
   public static String mul(String argument1, Integer argument2) throws CalculationException {
 
@@ -239,15 +214,12 @@ public class FctMultiply {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the string <code>argument2</code> repeated <code>argument1</code>
    *         times.
-   * @throws CalculationException
-   *         if <code>argument1</code> is negative or the result would exceed
-   *         {@link FctMultiply#MAX_STRING_LENGTH}.
+   * @throws CalculationException if <code>argument1</code> is negative or the
+   *         result would exceed {@link FctMultiply#MAX_STRING_LENGTH}.
    */
   public static String mul(Integer argument1, String argument2) throws CalculationException {
 

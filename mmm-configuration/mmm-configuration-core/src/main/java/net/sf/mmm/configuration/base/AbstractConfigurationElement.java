@@ -35,8 +35,8 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
   /**
    * The constructor.
    * 
-   * @param parentConfiguration
-   *        is the {@link #getParent() parent} configuration.
+   * @param parentConfiguration is the {@link #getParent() parent}
+   *        configuration.
    */
   public AbstractConfigurationElement(AbstractConfiguration parentConfiguration) {
 
@@ -57,12 +57,11 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
    * {@link Configuration.Type#ATTRIBUTE attribute} as
    * {@link #getChildren(Type) child} of this configuration.
    * 
-   * @param name
-   *        is the {@link #getName() name} of the
+   * @param name is the {@link #getName() name} of the
    *        {@link Configuration.Type#ATTRIBUTE attribute} to create (including
    *        the {@link Configuration#NAME_PREFIX_ATTRIBUTE prefix}
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the attribute.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        attribute.
    * @return the new attribute.
    */
   protected abstract AbstractConfiguration createChildAttribute(String name, String namespaceUri);
@@ -71,11 +70,10 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
    * This method creates a new empty {@link Configuration.Type#ELEMENT element}
    * as child of this configuration.
    * 
-   * @param name
-   *        is the {@link #getName() name} of the
+   * @param name is the {@link #getName() name} of the
    *        {@link Configuration.Type#ATTRIBUTE attribute} to create.
-   * @param namespaceUri
-   *        is the {@link #getNamespaceUri() namespace} of the element.
+   * @param namespaceUri is the {@link #getNamespaceUri() namespace} of the
+   *        element.
    * @return the new element.
    */
   protected abstract AbstractConfiguration createChildElement(String name, String namespaceUri);
@@ -114,17 +112,17 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       if (child == null) {
         child = createChildAttribute(name, namespace);
         addChild(child, qName);
-        //this.children.put(qName, child);
+        // this.children.put(qName, child);
       }
       return child;
     } else {
       AbstractConfiguration newChild = createChildElement(name, namespace);
       addChild(newChild, qName);
-      //if (child == null) {
-      //  this.children.put(qName, newChild);
-      //} else {
-      //  child.addSibling(newChild);
-      //}
+      // if (child == null) {
+      // this.children.put(qName, newChild);
+      // } else {
+      // child.addSibling(newChild);
+      // }
       return newChild;
     }
   }
@@ -144,8 +142,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
    * {@link #getNamespaceUri() namespace}
    * {@link ConfigurationDocument#NAMESPACE_URI_CONFIGURATION}.
    * 
-   * @param child
-   *        is the child to handle.
+   * @param child is the child to handle.
    */
   protected void handleInternalChild(AbstractConfiguration child) {
 
@@ -251,11 +248,11 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
       default :
         throw new IllegalArgumentException("unknown type for " + child);
     }
-    if (modified) { 
+    if (modified) {
       AbstractConfigurationDocument ownerDoc = getOwnerDocument();
       if (ownerDoc != null) {
         ownerDoc.configurationChanged(child, ChangeEvent.Type.REMOVE);
-      }      
+      }
     }
     return modified;
   }

@@ -24,7 +24,7 @@ import junit.framework.TestCase;
 public class ContentParserPptTest extends TestCase {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserPptTest() {
 

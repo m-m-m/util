@@ -59,12 +59,12 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
       throw new IllegalStateException("Failed to initialize " + getClass().getName(), e);
     }
   }
-  
+
   /**
    * This method is the inverse of {@link #getObject(String)}.
    * 
-   * @param object
-   *        is the object (potentially) retrieved via {@link #getObject(String)}.
+   * @param object is the object (potentially) retrieved via
+   *        {@link #getObject(String)}.
    * @return the key for the given <code>object</code> or <code>null</code>
    *         if it was NOT retrieved via {@link #getObject(String)} from this
    *         instance.

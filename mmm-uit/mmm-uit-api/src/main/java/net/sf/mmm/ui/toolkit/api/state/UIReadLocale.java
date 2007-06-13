@@ -14,8 +14,8 @@ import java.util.Locale;
 public interface UIReadLocale {
 
   /**
-   * This method gets the locale set for this object. It is used for language
-   * or reginal specific settings.
+   * This method gets the locale set for this object. It is used for language or
+   * reginal specific settings.
    * 
    * @return the current locale.
    */

@@ -10,8 +10,7 @@ import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
  * 
  * @see net.sf.mmm.ui.toolkit.api.widget.UITable
  * 
- * @param <C>
- *        is the templated type of the objects in the table cells.
+ * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,8 +19,7 @@ public interface UITableModel<C> {
   /**
    * This method registers the given change listener to this model.
    * 
-   * @param listener
-   *        is the change listener to add.
+   * @param listener is the change listener to add.
    */
   void addListener(UITableModelListener listener);
 
@@ -30,8 +28,7 @@ public interface UITableModel<C> {
    * listener should have been registered via the addChangeListener method
    * before.
    * 
-   * @param listener
-   *        is the change listener to remove.
+   * @param listener is the change listener to remove.
    */
   void removeListener(UITableModelListener listener);
 
@@ -52,10 +49,8 @@ public interface UITableModel<C> {
   /**
    * This method gets the value of the specified cell.
    * 
-   * @param rowIndex
-   *        is the row index of the requested cell value.
-   * @param columnIndex
-   *        is the column index of the requested cell value.
+   * @param rowIndex is the row index of the requested cell value.
+   * @param columnIndex is the column index of the requested cell value.
    * @return the value at the specified cell. For an empty cell
    *         <code>null</code> can be returned.
    */
@@ -66,10 +61,8 @@ public interface UITableModel<C> {
    * 
    * @see #getCellValue(int, int)
    * 
-   * @param rowIndex
-   *        is the row index of the requested cell value.
-   * @param columnIndex
-   *        is the column index of the requested cell value.
+   * @param rowIndex is the row index of the requested cell value.
+   * @param columnIndex is the column index of the requested cell value.
    * @return the value at the specified cell. For an empty cell
    *         <code>null</code> can be returned.
    */

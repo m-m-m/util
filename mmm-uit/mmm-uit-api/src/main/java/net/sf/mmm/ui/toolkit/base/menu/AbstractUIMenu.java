@@ -31,10 +31,8 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactory instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactory instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIMenu(AbstractUIFactory uiFactory, UINode parentObject) {
 
@@ -119,10 +117,8 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.event.UIActionListener)
    * 
-   * @param name
-   *        is the name of the menu item.
-   * @param style
-   *        is the style defining how the item is visualized and behaves.
+   * @param name is the name of the menu item.
+   * @param style is the style defining how the item is visualized and behaves.
    * @return the created menu item.
    */
   protected abstract UIMenuItem createMenuItem(String name, ButtonStyle style);
@@ -142,8 +138,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    * 
    * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addSubMenu(java.lang.String)
    * 
-   * @param name
-   *        is the name of the sub-menu.
+   * @param name is the name of the sub-menu.
    * @return the created sub-menu.
    */
   protected abstract UIMenu createSubMenu(String name);
@@ -177,11 +172,11 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    */
   @Override
   public void refresh(UIRefreshEvent event) {
-  
+
     super.refresh(event);
     for (UIMenuItem menuItem : this.items) {
       ((AbstractUINode) menuItem).refresh(event);
     }
   }
-  
+
 }

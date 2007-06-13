@@ -19,10 +19,10 @@ public abstract class AbstractSearchResult implements SearchResult {
   private final String query;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param searchQuery
-   *        is the {@link #getQuery() query} that caused this result.
+   * @param searchQuery is the {@link #getQuery() query} that caused this
+   *        result.
    */
   public AbstractSearchResult(String searchQuery) {
 
@@ -55,7 +55,7 @@ public abstract class AbstractSearchResult implements SearchResult {
     if (total == 0) {
       return 1;
     } else {
-      return (getHitCount() + hitsPerPage - 1) / hitsPerPage;      
+      return (getHitCount() + hitsPerPage - 1) / hitsPerPage;
     }
   }
 
@@ -75,7 +75,7 @@ public abstract class AbstractSearchResult implements SearchResult {
    */
   public SearchResultPage getPage(int pageIndex, int hitsPerPage) {
 
-    int pageCount = getPageCount(hitsPerPage);    
+    int pageCount = getPageCount(hitsPerPage);
     int pageMax = pageCount - 1;
     if (pageIndex > pageMax) {
       pageIndex = pageMax;
@@ -86,7 +86,7 @@ public abstract class AbstractSearchResult implements SearchResult {
       // the last page may have less hits
       hitCount = getHitCount() - hitOffset;
     } else {
-      hitCount = hitsPerPage;      
+      hitCount = hitsPerPage;
     }
     SearchHit[] hits = new SearchHit[hitCount];
     for (int i = 0; i < hits.length; i++) {

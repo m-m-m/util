@@ -19,8 +19,7 @@ public interface UIWriteLocale extends UIReadLocale {
    * 
    * @see UIReadLocale#getLocale()
    * 
-   * @param newLocale
-   *        is the new locale to use.
+   * @param newLocale is the new locale to use.
    */
   void setLocale(Locale newLocale);
 

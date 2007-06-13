@@ -28,8 +28,8 @@ public final class LuceneFieldNameIterator implements Iterator<String> {
   /**
    * The constructor.
    * 
-   * @param luceneDocument
-   *        is the lucene document whose field names should be iterated.
+   * @param luceneDocument is the lucene document whose field names should be
+   *        iterated.
    */
   public LuceneFieldNameIterator(Document luceneDocument) {
 

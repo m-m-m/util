@@ -15,8 +15,7 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
  * This is the abstract base implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface.
  * 
- * @param <N>
- *        is the templated type of the tree nodes.
+ * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -54,8 +53,7 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * This method sends the given event to all registered listeners of this
    * model.
    * 
-   * @param event
-   *        is the event to send.
+   * @param event is the event to send.
    */
   protected void fireChangeEvent(UITreeModelEvent<N> event) {
 
@@ -73,10 +71,8 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * This method creates an event for the given change and sends it to all
    * registered listeners of this model.
    * 
-   * @param type
-   *        is the type change.
-   * @param node
-   *        is the node that changed.
+   * @param type is the type change.
+   * @param node is the node that changed.
    */
   protected void fireChangeEvent(Type type, N node) {
 
@@ -99,10 +95,8 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * This method is called by the {@link #fireChangeEvent(UITreeModelEvent)}
    * method if a listener caused an exception or error.
    * 
-   * @param listener
-   *        is the listener that threw the exception or error.
-   * @param t
-   *        is the exception or error.
+   * @param listener is the listener that threw the exception or error.
+   * @param t is the exception or error.
    */
   protected abstract void handleListenerException(UITreeModelListener listener, Throwable t);
 

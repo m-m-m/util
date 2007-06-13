@@ -41,11 +41,10 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the label.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        label.
    */
   public SyncLabelAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -110,8 +109,7 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
    * This method sets the
    * {@link org.eclipse.swt.widgets.Label#setText(String) text} of the label.
    * 
-   * @param buttonText
-   *        is the text to set.
+   * @param buttonText is the text to set.
    */
   public void setText(String buttonText) {
 
@@ -125,8 +123,7 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Label#setImage(org.eclipse.swt.graphics.Image) image}
    * of the label.
    * 
-   * @param icon
-   *        is the image to set.
+   * @param icon is the image to set.
    */
   public void setImage(Image icon) {
 

@@ -22,13 +22,11 @@ public interface MutableBlob extends Blob {
    * 
    * @see MutableBlob#writeData(InputStream, boolean)
    * 
-   * @param append
-   *        <code>true</code> if the data written to the stream should be
-   *        appended to the BLOB, <code>false</code> if the BLOB should be
+   * @param append <code>true</code> if the data written to the stream should
+   *        be appended to the BLOB, <code>false</code> if the BLOB should be
    *        overridden.
    * @return an output stream to write the BLOB data to.
-   * @throws ValueIOException
-   *         if the BLOB could not be opened for writing.
+   * @throws ValueIOException if the BLOB could not be opened for writing.
    */
   OutputStream getWriteAccess(boolean append) throws ValueIOException;
 
@@ -36,13 +34,11 @@ public interface MutableBlob extends Blob {
    * This method writes the data from the give input stream to this BLOB. The
    * given input stream will be closed at the end.
    * 
-   * @param inputStream
-   *        is an input stream containing the data to write to this BLOB.
-   * @param append
-   *        <code>true</code> if the data should be appended to the BLOB,
-   *        <code>false</code> if the BLOB should be overridden.
-   * @throws ValueIOException
-   *         if the writing fails.
+   * @param inputStream is an input stream containing the data to write to this
+   *        BLOB.
+   * @param append <code>true</code> if the data should be appended to the
+   *        BLOB, <code>false</code> if the BLOB should be overridden.
+   * @throws ValueIOException if the writing fails.
    */
   void writeData(InputStream inputStream, boolean append) throws ValueIOException;
 

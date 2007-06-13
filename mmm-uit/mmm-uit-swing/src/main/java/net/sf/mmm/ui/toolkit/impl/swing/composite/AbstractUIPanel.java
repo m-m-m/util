@@ -20,10 +20,8 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public AbstractUIPanel(UIFactorySwing uiFactory, UINode parentObject) {
 

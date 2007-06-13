@@ -18,8 +18,8 @@ public interface FileAccess {
    * 
    * @return a new input stream to the data. The stream should be
    *         {@link InputStream#close() closed} after usage.
-   * @throws IOException
-   *         if the file (data-source) could not be opened for reading.
+   * @throws IOException if the file (data-source) could not be opened for
+   *         reading.
    */
   InputStream getFile() throws IOException;
 
@@ -32,8 +32,8 @@ public interface FileAccess {
   String getFilename();
 
   /**
-   * This method gets the size of the data in bytes or <code>-1</code> if
-   * the size is unknown.
+   * This method gets the size of the data in bytes or <code>-1</code> if the
+   * size is unknown.
    * 
    * @return the size in bytes or <code>-1</code> if unknown.
    */

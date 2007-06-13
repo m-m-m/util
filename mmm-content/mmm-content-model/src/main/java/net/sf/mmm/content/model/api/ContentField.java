@@ -13,8 +13,8 @@ import net.sf.mmm.value.validator.api.ValueValidator;
  * {@link net.sf.mmm.content.model.api.ContentClass}.<br>
  * <b>ATTENTION:</b><br>
  * Do NOT get confused in comparison with {@link java.lang.reflect.Field fields}
- * in the java language specification. Better think of a {@link ContentField}
- * as something like a java {@link java.lang.reflect.Method method}.
+ * in the java language specification. Better think of a {@link ContentField} as
+ * something like a java {@link java.lang.reflect.Method method}.
  * 
  * @see FieldModifiers
  * 
@@ -57,7 +57,7 @@ public interface ContentField extends ContentReflectionObject {
    * the attribute for the {@link #getFieldType() type}.
    */
   String XML_ATR_ROOT_TYPE = "type";
-  
+
   /**
    * This method gets the content-class that declares this field. This does NOT
    * mean that the field is
@@ -136,17 +136,14 @@ public interface ContentField extends ContentReflectionObject {
    * This method dynamically determines the value of the field. It is only
    * applicable for {@link FieldModifiersImpl#isTransient() transient} fields.
    * 
-   * @param object
-   *        is the content-object for that the value of the current transient
-   *        field should be calculated.
+   * @param object is the content-object for that the value of the current
+   *        transient field should be calculated.
    * @return the calculated value of the current transient field for the given
    *         content-object. It will be <code>null</code> if the field is not
    *         transient.
-   * @throws CalculationException
-   *         if the calculation fails.
-   * @throws PermissionDeniedException
-   *         if the calculation performed an operation you (the current user) is
-   *         not permitted.
+   * @throws CalculationException if the calculation fails.
+   * @throws PermissionDeniedException if the calculation performed an operation
+   *         you (the current user) is not permitted.
    */
   // Object calculate(ContentObject object) throws CalculationException,
   // PermissionDeniedException;

@@ -38,7 +38,8 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
     public void actionPerformed(ActionEvent e) {
 
       UIFileUploadImpl.this.fileChooser.setDialogTitle(getText());
-      int selection = UIFileUploadImpl.this.fileChooser.showOpenDialog(UIFileUploadImpl.this.button);
+      int selection = UIFileUploadImpl.this.fileChooser
+          .showOpenDialog(UIFileUploadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
         File uploadFile = UIFileUploadImpl.this.fileChooser.getSelectedFile();
         UIFileUploadImpl.this.access = new SimpleFileAccess(uploadFile);
@@ -60,10 +61,8 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UIFileUploadImpl(UIFactorySwing uiFactory, UINode parentObject) {
 

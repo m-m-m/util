@@ -17,8 +17,7 @@ public interface UIWriteIcon extends UIReadIcon {
   /**
    * This method sets the icon of this object.
    * 
-   * @param icon
-   *        is the new icon for this object.
+   * @param icon is the new icon for this object.
    */
   void setIcon(UIPicture icon);
 

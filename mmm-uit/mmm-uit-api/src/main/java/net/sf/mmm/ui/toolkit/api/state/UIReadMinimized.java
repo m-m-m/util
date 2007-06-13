@@ -16,8 +16,8 @@ public interface UIReadMinimized {
   /**
    * This method determines if this object is maximized.
    * 
-   * @return <code>true</code> if the object is maximized,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if the object is maximized, <code>false</code>
+   *         otherwise.
    */
   boolean isMinimized();
 

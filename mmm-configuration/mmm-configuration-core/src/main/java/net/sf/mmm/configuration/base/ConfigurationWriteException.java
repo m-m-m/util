@@ -20,8 +20,7 @@ public class ConfigurationWriteException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param access
-   *        is the access where to read the configuration from.
+   * @param access is the access where to read the configuration from.
    */
   public ConfigurationWriteException(ConfigurationAccess access) {
 
@@ -31,10 +30,8 @@ public class ConfigurationWriteException extends ConfigurationException {
   /**
    * The constructor.
    * 
-   * @param access
-   *        is the access where to read the configuration from.
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param access is the access where to read the configuration from.
+   * @param nested is the throwable that caused this exception.
    */
   public ConfigurationWriteException(ConfigurationAccess access, Throwable nested) {
 

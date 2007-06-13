@@ -17,9 +17,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
  * icon or the text "+". The buttons should also be associated with the
  * arrow-up/down keys on the keyboard.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

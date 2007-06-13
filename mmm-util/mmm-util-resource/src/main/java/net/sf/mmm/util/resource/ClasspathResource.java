@@ -44,8 +44,7 @@ public class ClasspathResource extends AbstractResource {
   /**
    * The constructor.
    * 
-   * @param absolutePath
-   *        is the absolute path to the resource. E.g.
+   * @param absolutePath is the absolute path to the resource. E.g.
    *        "net/sf/mmm/util/resource/ClasspathResource.txt".
    */
   public ClasspathResource(String absolutePath) {
@@ -81,14 +80,12 @@ public class ClasspathResource extends AbstractResource {
    * 
    * @see #ClasspathResource(Package, String)
    * 
-   * @param someClass
-   *        is the class identifying the path where the resource is located and
-   *        the prefix of its filename.
-   * @param nameOrSuffix
-   *        is the filename of the resource or a suffix (e.g. ".properties" or
-   *        "-test.xml") for it depending on <code>append</code>.
-   * @param append -
-   *        if <code>true</code> the <code>nameOrSuffix</code>
+   * @param someClass is the class identifying the path where the resource is
+   *        located and the prefix of its filename.
+   * @param nameOrSuffix is the filename of the resource or a suffix (e.g.
+   *        ".properties" or "-test.xml") for it depending on
+   *        <code>append</code>.
+   * @param append - if <code>true</code> the <code>nameOrSuffix</code>
    */
   public ClasspathResource(Class<?> someClass, String nameOrSuffix, boolean append) {
 
@@ -114,10 +111,9 @@ public class ClasspathResource extends AbstractResource {
    * 
    * @see #ClasspathResource(Class, String, boolean)
    * 
-   * @param somePackage
-   *        is the package identifying the path where the resource is located.
-   * @param filename
-   *        is the name of the resource.
+   * @param somePackage is the package identifying the path where the resource
+   *        is located.
+   * @param filename is the name of the resource.
    */
   public ClasspathResource(Package somePackage, String filename) {
 
@@ -127,14 +123,12 @@ public class ClasspathResource extends AbstractResource {
   /**
    * @see #ClasspathResource(Class, String, boolean)
    * 
-   * @param someClass
-   *        is the class identifying the path where the resource is located and
-   *        the prefix of its filename.
-   * @param nameOrSuffix
-   *        is the filename of the resource or a suffix (e.g. ".properties" or
-   *        "-test.xml") for it depending on <code>append</code>.
-   * @param append -
-   *        if <code>true</code> the <code>nameOrSuffix</code>
+   * @param someClass is the class identifying the path where the resource is
+   *        located and the prefix of its filename.
+   * @param nameOrSuffix is the filename of the resource or a suffix (e.g.
+   *        ".properties" or "-test.xml") for it depending on
+   *        <code>append</code>.
+   * @param append - if <code>true</code> the <code>nameOrSuffix</code>
    * @return the absolute path.
    */
   private static String getAbsolutePath(Class<?> someClass, String nameOrSuffix, boolean append) {

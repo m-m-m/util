@@ -10,9 +10,8 @@ import javax.swing.ImageIcon;
 import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIPicture} interface using Swing as the
- * underlying implementation.
+ * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.UIPicture}
+ * interface using Swing as the underlying implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,10 +23,8 @@ public class UIPictureImpl extends AbstractUIPicture {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param imageUrl
-   *        is the URL to the image data.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param imageUrl is the URL to the image data.
    */
   public UIPictureImpl(UIFactorySwing uiFactory, URL imageUrl) {
 

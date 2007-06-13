@@ -24,7 +24,7 @@ public class ConfigurationBindingServiceImpl extends AbstractConfigurationBindin
   private ConfigurationBindingInjector injector;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ConfigurationBindingServiceImpl() {
 
@@ -34,8 +34,7 @@ public class ConfigurationBindingServiceImpl extends AbstractConfigurationBindin
   /**
    * This method sets the injector to use.
    * 
-   * @param configurationInjector
-   *        the injector to set
+   * @param configurationInjector the injector to set
    */
   @Resource()
   public void setInjector(ConfigurationBindingInjector configurationInjector) {

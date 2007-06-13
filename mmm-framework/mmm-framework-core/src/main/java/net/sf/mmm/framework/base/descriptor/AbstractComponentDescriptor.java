@@ -9,8 +9,7 @@ import net.sf.mmm.framework.api.ComponentDescriptor;
  * This is the abstract baee implementation of the {@link ComponentDescriptor}
  * interface.
  * 
- * @param <S>
- *        is the {@link #getSpecification() specification} of the provided
+ * @param <S> is the {@link #getSpecification() specification} of the provided
  *        component.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -38,8 +37,8 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   }
 
   /**
-   * This method should be called from the constructor of the implementing
-   * class to initialize the descriptor.
+   * This method should be called from the constructor of the implementing class
+   * to initialize the descriptor.
    */
   protected void initialize() {
 
@@ -101,8 +100,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   /**
    * This method sets the {@link #getCategory() category}.
    * 
-   * @param newCategory
-   *        is the category to set.
+   * @param newCategory is the category to set.
    */
   public void setCategory(String newCategory) {
 
@@ -112,8 +110,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   /**
    * This method sets the {@link #getDomain() domain}.
    * 
-   * @param newDomain
-   *        is the domain to set.
+   * @param newDomain is the domain to set.
    */
   public void setDomain(String newDomain) {
 
@@ -123,8 +120,7 @@ public abstract class AbstractComponentDescriptor<S> implements ComponentDescrip
   /**
    * This method sets the {@link #getName() name}.
    * 
-   * @param newName
-   *        is the name to set.
+   * @param newName is the name to set.
    */
   public void setName(String newName) {
 

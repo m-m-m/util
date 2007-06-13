@@ -17,11 +17,10 @@ public class IllegalModifiersException extends ContentModelRuntimeException {
   private static final long serialVersionUID = -9096716721784689821L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
    */
   public IllegalModifiersException(String internaitionalizedMessage) {
 

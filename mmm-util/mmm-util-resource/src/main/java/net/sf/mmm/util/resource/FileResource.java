@@ -25,8 +25,7 @@ public class FileResource extends AbstractResource {
   /**
    * The constructor.
    * 
-   * @param someFile
-   *        is the file.
+   * @param someFile is the file.
    */
   public FileResource(File someFile) {
 

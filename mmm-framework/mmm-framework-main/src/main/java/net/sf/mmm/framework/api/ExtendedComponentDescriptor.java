@@ -15,10 +15,8 @@ import net.sf.mmm.framework.api.Dependency.Type;
  * {@link ComponentProvider provider} how to manage a
  * {@link ExtendedComponentInstanceContainer#getPrivateInstance() component instance}.
  * 
- * @param <S>
- *        is the component {@link #getSpecification() specification}
- * @param <I>
- *        is the component {@link #getImplementation() implementation}
+ * @param <S> is the component {@link #getSpecification() specification}
+ * @param <I> is the component {@link #getImplementation() implementation}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -128,9 +126,9 @@ public interface ExtendedComponentDescriptor<S, I extends S> extends ComponentDe
    * 
    * @see #getLifecycleMethods()
    * 
-   * @param phase
-   *        is the {@link LifecycleMethod#getLifecyclePhase() lifecycle-phase}
-   *        of the requested method.
+   * @param phase is the
+   *        {@link LifecycleMethod#getLifecyclePhase() lifecycle-phase} of the
+   *        requested method.
    * @return the method associated with the given
    *         {@link LifecycleMethod#getLifecyclePhase() phase} or
    *         <code>null</code>, if the given <code>phase</code> is not
@@ -170,9 +168,8 @@ public interface ExtendedComponentDescriptor<S, I extends S> extends ComponentDe
    * 
    * @see Dependency#getInjectionType()
    * 
-   * @param type
-   *        is the {@link Dependency#getInjectionType() type} of the requested
-   *        dependencies.
+   * @param type is the {@link Dependency#getInjectionType() type} of the
+   *        requested dependencies.
    * @return a read-only iterator of the dependencies.
    */
   Iterator<Dependency> getDependencies(Type type);

@@ -45,10 +45,8 @@ public class FctLessEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is less than or equal to
    *         the second.
    */
@@ -60,10 +58,8 @@ public class FctLessEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is before or equal to the
    *         second.
    */
@@ -78,10 +74,8 @@ public class FctLessEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is lexicographically
    *         before or equal to the second.
    */

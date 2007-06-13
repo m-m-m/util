@@ -31,8 +31,7 @@ public class ValueTypeWidgetManager {
   /**
    * This method sets the model.
    * 
-   * @param model
-   *        is the model to set.
+   * @param model is the model to set.
    */
   @Resource(name = "ValueTypeModel")
   public void setModel(UIListModel<ValueManager> valueModel) {

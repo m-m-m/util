@@ -20,28 +20,27 @@ public enum ButtonStyle {
   DEFAULT,
 
   /**
-   * This is the style for a checkbox-button. Such button has a
-   * selection-status typically visualized by a box that contains a checkmark
-   * or not. If the button is selected, its selection-status will be inverted.
-   * The initial selection-status is deselected (NOT selected).
+   * This is the style for a checkbox-button. Such button has a selection-status
+   * typically visualized by a box that contains a checkmark or not. If the
+   * button is selected, its selection-status will be inverted. The initial
+   * selection-status is deselected (NOT selected).
    */
   CHECK,
 
   /**
    * This is the style for a toggle-button. The behaviour is the same as
-   * {@link #CHECK} except for the visualization. A toggle-button is viewed
-   * like a {@link #DEFAULT default} button, but if it is selected, its border
-   * will appear inverted so the button looks as it is pushed inside the GUI.
-   * After the button is selected again, it will be deselected and looks
-   * normal again.<br>
-   * ATTENTION: A {@link net.sf.mmm.ui.toolkit.api.menu.UIMenuItem} with
-   * this style is unspecified.
+   * {@link #CHECK} except for the visualization. A toggle-button is viewed like
+   * a {@link #DEFAULT default} button, but if it is selected, its border will
+   * appear inverted so the button looks as it is pushed inside the GUI. After
+   * the button is selected again, it will be deselected and looks normal again.<br>
+   * ATTENTION: A {@link net.sf.mmm.ui.toolkit.api.menu.UIMenuItem} with this
+   * style is unspecified.
    */
   TOGGLE,
 
   /**
-   * This is the style for a radio-button. The according button is
-   * automatically grouped with all other buttons of this style in the same
+   * This is the style for a radio-button. The according button is automatically
+   * grouped with all other buttons of this style in the same
    * {@link net.sf.mmm.ui.toolkit.api.composite.UIPanel panel} or
    * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenu menu}. Like for
    * {@link #CHECK} and {@link #TOGGLE} buttons of this style have a

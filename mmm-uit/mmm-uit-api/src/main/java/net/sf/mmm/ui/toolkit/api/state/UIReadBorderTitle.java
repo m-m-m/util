@@ -14,8 +14,8 @@ public interface UIReadBorderTitle {
   /**
    * This method gets the title of the objects border.
    * 
-   * @return the border title or <code>null</code> if the object has no
-   *         titled border.
+   * @return the border title or <code>null</code> if the object has no titled
+   *         border.
    */
   String getBorderTitle();
 

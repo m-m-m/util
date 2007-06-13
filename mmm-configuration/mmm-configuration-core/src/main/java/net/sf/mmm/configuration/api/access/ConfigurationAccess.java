@@ -53,8 +53,7 @@ public interface ConfigurationAccess {
    * This method gets read access to the configuration data.
    * 
    * @return an input stream to read the configuration.
-   * @throws ConfigurationException
-   *         on access error (e.g. I/O problems).
+   * @throws ConfigurationException on access error (e.g. I/O problems).
    */
   InputStream getReadAccess() throws ConfigurationException;
 
@@ -63,9 +62,9 @@ public interface ConfigurationAccess {
    * applicable if this accessor is NOT {@link #isReadOnly() read-only}.
    * 
    * @return an output stream to write the configuration.
-   * @throws ConfigurationException
-   *         if this accessor is {@link #isReadOnly() read-only} or on access
-   *         error (e.g. I/O problems) occured.
+   * @throws ConfigurationException if this accessor is
+   *         {@link #isReadOnly() read-only} or on access error (e.g. I/O
+   *         problems) occured.
    */
   OutputStream getWriteAccess() throws ConfigurationException;
 

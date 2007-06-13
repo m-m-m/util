@@ -19,9 +19,8 @@ public interface UIWriteMinimized extends UIReadMinimized {
    * that represents the frame. If it is unminimized, its will be shown again
    * with the same size and position as before it was minimized.
    * 
-   * @param minimize -
-   *        if <code>true</code>, the frame will be minimized (iconified),
-   *        else it will be unminimized.
+   * @param minimize - if <code>true</code>, the frame will be minimized
+   *        (iconified), else it will be unminimized.
    */
   void setMinimized(boolean minimize);
 

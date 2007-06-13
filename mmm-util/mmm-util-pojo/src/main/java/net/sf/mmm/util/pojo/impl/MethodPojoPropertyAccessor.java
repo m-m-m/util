@@ -24,18 +24,16 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   private final Method method;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param propertyName
-   *        is the {@link #getName() name} of the property.
-   * @param accessMode
-   *        is the {@link #getAccessMode() mode} of this accessor.
-   * @param propertyMethod
-   *        is the {@link #getAccessibleObject() method} to access the property.
-   * @param propertyType
-   *        is the {@link #getPropertyType() generic type} of the property.
-   * @param propertyClass
-   *        is the {@link #getPropertyClass() raw type} of the property.
+   * @param propertyName is the {@link #getName() name} of the property.
+   * @param accessMode is the {@link #getAccessMode() mode} of this accessor.
+   * @param propertyMethod is the {@link #getAccessibleObject() method} to
+   *        access the property.
+   * @param propertyType is the {@link #getPropertyType() generic type} of the
+   *        property.
+   * @param propertyClass is the {@link #getPropertyClass() raw type} of the
+   *        property.
    */
   public MethodPojoPropertyAccessor(String propertyName, PojoPropertyAccessMode accessMode,
       Type propertyType, Class<?> propertyClass, Method propertyMethod) {

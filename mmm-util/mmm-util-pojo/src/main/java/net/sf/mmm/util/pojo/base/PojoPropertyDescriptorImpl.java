@@ -28,8 +28,7 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
   /**
    * The constructor.
    * 
-   * @param propertyName
-   *        is the {@link #getName() name} of the property.
+   * @param propertyName is the {@link #getName() name} of the property.
    */
   public PojoPropertyDescriptorImpl(String propertyName) {
 
@@ -78,8 +77,7 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
    * 
    * @see #getAccessor(PojoPropertyAccessMode)
    * 
-   * @param accessor
-   *        is the accessor to set.
+   * @param accessor is the accessor to set.
    */
   protected void setAccessor(AbstractPojoPropertyAccessor accessor) {
 

@@ -18,13 +18,12 @@ import net.sf.mmm.content.model.api.ContentClass;
 public interface ContentClassFieldTableManager {
 
   /**
-   * This method gets the {@link FieldTableModel table-model} used to
-   * view the {@link net.sf.mmm.content.model.api.ContentField fields}
+   * This method gets the {@link FieldTableModel table-model} used to view the
+   * {@link net.sf.mmm.content.model.api.ContentField fields}
    * {@link ContentClass#getDeclaredFields() declared} by the given
    * {@link ContentClass content-class}.
    * 
-   * @param contentClass
-   *        is the class for which the table-model is requested.
+   * @param contentClass is the class for which the table-model is requested.
    * @return the requested table-model.
    */
   FieldTableModel getFieldTableModel(ContentClass contentClass);

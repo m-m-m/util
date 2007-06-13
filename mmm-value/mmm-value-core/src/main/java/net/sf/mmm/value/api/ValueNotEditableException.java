@@ -8,8 +8,7 @@ import net.sf.mmm.value.NlsBundleValueCore;
 /**
  * This is the exception thrown if a
  * {@link net.sf.mmm.value.api.MutableGenericValue value} was edited without
- * being
- * {@link net.sf.mmm.value.api.MutableGenericValue#isEditable() editable}.
+ * being {@link net.sf.mmm.value.api.MutableGenericValue#isEditable() editable}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,8 +20,7 @@ public class ValueNotEditableException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param genericValue
-   *        is the node that is NOT
+   * @param genericValue is the node that is NOT
    *        {@link net.sf.mmm.value.api.MutableGenericValue#isEditable() editable} .
    */
   public ValueNotEditableException(MutableGenericValue genericValue) {
@@ -33,11 +31,9 @@ public class ValueNotEditableException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param genericValue
-   *        is the node that is NOT
+   * @param genericValue is the node that is NOT
    *        {@link net.sf.mmm.value.api.MutableGenericValue#isEditable() editable} .
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param nested is the throwable that caused this exception.
    */
   public ValueNotEditableException(MutableGenericValue genericValue, Throwable nested) {
 

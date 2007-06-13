@@ -181,7 +181,8 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     final UIButton checkSystem = uiFactory.createButton("system", ButtonStyle.CHECK);
     checkSystem.setEnabled(false);
-    final UIButton classExtendableCheckbox = uiFactory.createButton("extendable", ButtonStyle.CHECK);
+    final UIButton classExtendableCheckbox = uiFactory
+        .createButton("extendable", ButtonStyle.CHECK);
     classExtendableCheckbox.setEnabled(false);
     classEditorPanel.addComponent(uiFactory.createLabeledComponents("Flags:", checkSystem,
         classExtendableCheckbox), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
@@ -235,12 +236,14 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
     classAddButton.addActionListener(new UIActionListener() {
 
       public void invoke(UINode source, ActionType action) {
+
         if (action == ActionType.SELECT) {
           ContentClass contentClass = classTree.getSelection();
           if (contentClass != null) {
             String name = classNameText.getText();
             try {
-              ContentModelEditorImpl.this.modelService.createClass(contentClass, name, ClassModifiersImpl.NORMAL);              
+              ContentModelEditorImpl.this.modelService.createClass(contentClass, name,
+                  ClassModifiersImpl.NORMAL);
             } catch (ContentModelException e) {
               classTree.getParentWindow().showMessage(e.getMessage(), "Error", MessageType.ERROR);
             }

@@ -18,8 +18,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTabItemAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel} interface using
- * SWT as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel} interface using SWT
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -34,10 +34,8 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UITabbedPanelImpl(UIFactorySwt uiFactory, AbstractUIComponent parentObject) {
 
@@ -50,7 +48,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
    * {@inheritDoc}
    */
   public void addComponent(UIComponent component) {
-  
+
     addComponent(component, "Tab " + (getComponentCount() + 1));
   }
 
@@ -71,7 +69,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
     this.tabItems.add(itemAccess);
     this.components.add(c);
   }
-  
+
   /**
    * {@inheritDoc}
    */

@@ -25,7 +25,7 @@ import net.sf.mmm.configuration.base.path.condition.Condition;
 public class DescendantPathWalker {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   private DescendantPathWalker() {
 
@@ -36,17 +36,12 @@ public class DescendantPathWalker {
    * This method adds all descendants that match the given <code>path</code>
    * to the given <code>set</code>.
    * 
-   * @param node
-   *        is the current node to work one.
-   * @param namespaceUri
-   *        is the namespace-URI to use or <code>null</code> if namespaces
-   *        should be ignored.
-   * @param path
-   *        is the parsed descendant path (simple path part).
-   * @param segmentIndex
-   *        is the current index in the path.
-   * @param set
-   *        is the set where to add the matching descendants.
+   * @param node is the current node to work one.
+   * @param namespaceUri is the namespace-URI to use or <code>null</code> if
+   *        namespaces should be ignored.
+   * @param path is the parsed descendant path (simple path part).
+   * @param segmentIndex is the current index in the path.
+   * @param set is the set where to add the matching descendants.
    */
   public static void addDescendants(AbstractConfiguration node, String namespaceUri,
       List<PathSegment> path, int segmentIndex, Set<AbstractConfiguration> set) {
@@ -81,12 +76,9 @@ public class DescendantPathWalker {
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String,
    *      String)
    * 
-   * @param node
-   *        is the current to work on.
-   * @param namespaceUri
-   *        is the namespace URI to use.
-   * @param pathSegments
-   *        are the segments of the descendant path.
+   * @param node is the current to work on.
+   * @param namespaceUri is the namespace URI to use.
+   * @param pathSegments are the segments of the descendant path.
    * @return the requested descendant or <code>null</code> if it does NOT
    *         exist and needs to be created.
    */
@@ -141,16 +133,11 @@ public class DescendantPathWalker {
    * @see net.sf.mmm.configuration.api.Configuration#getDescendant(String,
    *      String)
    * 
-   * @param node
-   *        is the current to work on.
-   * @param namespaceUri
-   *        is the namespace URI to use.
-   * @param pathSegments
-   *        are the segments of the descendant path.
-   * @param segmentIndex
-   *        is the current index in the segment path.
-   * @param match
-   *        is a container used to collect the current best match.
+   * @param node is the current to work on.
+   * @param namespaceUri is the namespace URI to use.
+   * @param pathSegments are the segments of the descendant path.
+   * @param segmentIndex is the current index in the segment path.
+   * @param match is a container used to collect the current best match.
    * @return the requested descendant or <code>null</code> if it does NOT
    *         exist and needs to be created.
    */
@@ -197,8 +184,7 @@ public class DescendantPathWalker {
     /**
      * The constructor.
      * 
-     * @param start
-     *        is the configuration node to start with.
+     * @param start is the configuration node to start with.
      */
     public BestPathMatch(AbstractConfiguration start) {
 
@@ -212,10 +198,9 @@ public class DescendantPathWalker {
      * {@link #node current} according to the given <code>segmentIndex</code>.
      * If it is better, the <code>match</code> is stored as best match.
      * 
-     * @param match
-     *        is the match to check.
-     * @param segmentIndex
-     *        is the current segment index of the <code>match</code>.
+     * @param match is the match to check.
+     * @param segmentIndex is the current segment index of the
+     *        <code>match</code>.
      * @return <code>true</code> if the given <code>match</code> is
      *         currently the best and has been stored, <code>false</code>
      *         otherwise.

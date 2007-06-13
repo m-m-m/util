@@ -20,12 +20,11 @@ public class MethodPropertyIntrospector implements PojoPropertyIntrospector {
   private final boolean publicOnly;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param onlyPublic
-   *        if <code>true</code> only public methods will be considered for
-   *        when searching for property-accessors, else if <code>false</code>
-   *        all implemented methods are introspected.
+   * @param onlyPublic if <code>true</code> only public methods will be
+   *        considered for when searching for property-accessors, else if
+   *        <code>false</code> all implemented methods are introspected.
    */
   public MethodPropertyIntrospector(boolean onlyPublic) {
 

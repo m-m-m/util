@@ -19,12 +19,10 @@ public class SearchRemoveFailedException extends SearchException {
   private static final long serialVersionUID = -7746309827926123365L;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param property
-   *        is the property used for remove.
-   * @param value
-   *        is the value used for remove.
+   * @param property is the property used for remove.
+   * @param value is the value used for remove.
    */
   public SearchRemoveFailedException(String property, String value) {
 
@@ -32,14 +30,11 @@ public class SearchRemoveFailedException extends SearchException {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param property
-   *        is the property used for remove.
-   * @param value
-   *        is the value used for remove.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param property is the property used for remove.
+   * @param value is the value used for remove.
    */
   public SearchRemoveFailedException(Throwable nested, String property, String value) {
 

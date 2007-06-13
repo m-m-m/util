@@ -40,7 +40,7 @@ public final class CollectionUtil {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   private CollectionUtil() {
 
@@ -51,19 +51,15 @@ public final class CollectionUtil {
    * This method creates a collection implementing the given collection
    * <code>type</code>.
    * 
-   * @param <C>
-   *        is the templated type of the collection.
-   * @param type
-   *        is the type of collection to create. This is either an interface ({@link List},
-   *        {@link Set}, {@link Queue}, etc.) or a non-abstract implementation
-   *        of a {@link Collection}.
+   * @param <C> is the templated type of the collection.
+   * @param type is the type of collection to create. This is either an
+   *        interface ({@link List}, {@link Set}, {@link Queue}, etc.) or a
+   *        non-abstract implementation of a {@link Collection}.
    * @return the new instance
-   * @throws InstantiationException
-   *         if the given <code>type</code> is a class that can NOT be
-   *         instantiated via {@link Class#newInstance()}.
-   * @throws IllegalAccessException
-   *         if you do NOT have access to create an instance of
-   *         <code>type</code>.
+   * @throws InstantiationException if the given <code>type</code> is a class
+   *         that can NOT be instantiated via {@link Class#newInstance()}.
+   * @throws IllegalAccessException if you do NOT have access to create an
+   *         instance of <code>type</code>.
    */
   @SuppressWarnings("unchecked")
   public static <C extends Collection> C create(Class<C> type) throws InstantiationException,

@@ -31,11 +31,10 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the widget.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        widget.
    */
   public AbstractSyncDialogAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -63,8 +62,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
    * parent of the dialog. Else if the control does NOT yet exist, the parent
    * will be set on {@link #create() creation}.
    * 
-   * @param newParentAccess
-   *        is the synchronous access to the new parent
+   * @param newParentAccess is the synchronous access to the new parent
    */
   public void setParentAccess(AbstractSyncControlAccess newParentAccess) {
 
@@ -124,8 +122,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
    * This method sets the
    * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the dialog.
    * 
-   * @param dialogText
-   *        is the text to set.
+   * @param dialogText is the text to set.
    */
   public void setText(String dialogText) {
 

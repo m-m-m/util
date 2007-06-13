@@ -63,8 +63,7 @@ public interface UIFactory extends UIWriteDisposed {
    * {@link net.sf.mmm.nls.api.NlsMessage}) as well as the
    * {@link #getScriptOrientation() script-orientation}.
    * 
-   * @param locale
-   *        is the locale to set.
+   * @param locale is the locale to set.
    */
   void setLocale(Locale locale);
 
@@ -88,8 +87,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @see #setLocale(Locale)
    * 
-   * @param scriptOrientation
-   *        is the orientation to set.
+   * @param scriptOrientation is the orientation to set.
    */
   void setScriptOrientation(ScriptOrientation scriptOrientation);
 
@@ -113,8 +111,7 @@ public interface UIFactory extends UIWriteDisposed {
    * set this value at the beginning before creating {@link UINode UI nodes}
    * with this factory.
    * 
-   * @param orientation
-   *        is the script-orientation of the designer.
+   * @param orientation is the script-orientation of the designer.
    */
   void setDesignOrientation(ScriptOrientation orientation);
 
@@ -128,8 +125,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new resizeable frame.
    * 
-   * @param title
-   *        is the title for the frame to create.
+   * @param title is the title for the frame to create.
    * @return the created frame.
    */
   UIFrame createFrame(String title);
@@ -137,10 +133,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new frame.
    * 
-   * @param title
-   *        is the title for the frame to create.
-   * @param resizeable -
-   *        if <code>true</code> the frame will be
+   * @param title is the title for the frame to create.
+   * @param resizeable - if <code>true</code> the frame will be
    *        {@link net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable() resizeable}
    * @return the created frame.
    */
@@ -151,8 +145,7 @@ public interface UIFactory extends UIWriteDisposed {
    * properly by all implementations. Especially only one workbench should be
    * created. Multiple calls to this method may return the same object.
    * 
-   * @param title
-   *        is the title of the workbench to create.
+   * @param title is the title of the workbench to create.
    * @return the created workbench.
    */
   UIWorkbench createWorkbench(String title);
@@ -162,8 +155,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @see #createButton(String, ButtonStyle)
    * 
-   * @param text
-   *        is the text that explains the action triggered by the button.
+   * @param text is the text that explains the action triggered by the button.
    * @return the created button.
    */
   UIButton createButton(String text);
@@ -172,11 +164,9 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a new button. According to the style this can be a
    * radio-, toggle-, check- or a regular button.
    * 
-   * @param icon
-   *        is the picture symbolizing the action triggered by the button. It
-   *        will be shown inside the button.
-   * @param style
-   *        is the style of the button.
+   * @param icon is the picture symbolizing the action triggered by the button.
+   *        It will be shown inside the button.
+   * @param style is the style of the button.
    * @return the created button.
    */
   UIButton createButton(UIPicture icon, ButtonStyle style);
@@ -185,14 +175,11 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a new button. According to the style this can be a
    * radio-, toggle-, check- or a regular button.
    * 
-   * @param text
-   *        is the text that explains the action triggered by the button. It
-   *        will be shown inside the button.
-   * @param icon
-   *        is the picture symbolizing the action triggered by the button. It
-   *        will be shown inside the button.
-   * @param style
-   *        is the style of the button.
+   * @param text is the text that explains the action triggered by the button.
+   *        It will be shown inside the button.
+   * @param icon is the picture symbolizing the action triggered by the button.
+   *        It will be shown inside the button.
+   * @param style is the style of the button.
    * @return the created button.
    */
   UIButton createButton(String text, UIPicture icon, ButtonStyle style);
@@ -200,8 +187,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new button.
    * 
-   * @param action
-   *        is the action to be represented as button.
+   * @param action is the action to be represented as button.
    * @return the created button.
    */
   UIButton createButton(Action action);
@@ -210,11 +196,9 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates a new button. According to the style this can be a
    * radio-, toggle-, check- or a regular button.
    * 
-   * @param text
-   *        is the text that explains the action triggered by the button. It
-   *        will be shown inside the button.
-   * @param style
-   *        is the style of the button.
+   * @param text is the text that explains the action triggered by the button.
+   *        It will be shown inside the button.
+   * @param style is the style of the button.
    * @return the created button.
    */
   UIButton createButton(String text, ButtonStyle style);
@@ -222,8 +206,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new panel without a border.
    * 
-   * @param orientation
-   *        is the orientation of the child-components in the panel.
+   * @param orientation is the orientation of the child-components in the panel.
    * @return the created panel.
    */
   UISlicePanel createPanel(Orientation orientation);
@@ -231,10 +214,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new {@link UISlicePanel panel} with a border.
    * 
-   * @param orientation
-   *        is the orientation of the child-components in the panel.
-   * @param borderTitle
-   *        is the label of the panels border.
+   * @param orientation is the orientation of the child-components in the panel.
+   * @param borderTitle is the label of the panels border.
    * @return the created panel.
    */
   UISlicePanel createPanel(Orientation orientation, String borderTitle);
@@ -246,15 +227,11 @@ public interface UIFactory extends UIWriteDisposed {
    * {@link UISlicePanel#addComponent(UIComponent) added} to a
    * {@link UISlicePanel panel}.
    * 
-   * @param <D>
-   *        is the templated type of the <code>decorator</code>.
-   * @param <C>
-   *        is the templated type of the <code>component</code>.
+   * @param <D> is the templated type of the <code>decorator</code>.
+   * @param <C> is the templated type of the <code>component</code>.
    * 
-   * @param decorator
-   *        is the decorating component.
-   * @param component
-   *        is the main component.
+   * @param decorator is the decorating component.
+   * @param component is the main component.
    * @return the decorated component.
    */
   <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
@@ -267,13 +244,10 @@ public interface UIFactory extends UIWriteDisposed {
    * {@link UISlicePanel#addComponent(UIComponent) added} to a
    * {@link UISlicePanel panel}.
    * 
-   * @param <C>
-   *        is the templated type of the <code>component</code>.
+   * @param <C> is the templated type of the <code>component</code>.
    * 
-   * @param label
-   *        is the label text.
-   * @param component
-   *        is the component.
+   * @param label is the label text.
+   * @param component is the component.
    * @return the labeled component.
    */
   <C extends UIComponent> UIDecoratedComponent<UILabel, C> createLabeledComponent(String label,
@@ -287,10 +261,9 @@ public interface UIFactory extends UIWriteDisposed {
    * {@link UISlicePanel#addComponent(UIComponent) added} to a
    * {@link UISlicePanel panel}.
    * 
-   * @param label
-   *        is the label text.
-   * @param components
-   *        are the components (should be at least two to make sense).
+   * @param label is the label text.
+   * @param components are the components (should be at least two to make
+   *        sense).
    * @return the labeled component.
    */
   UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
@@ -306,8 +279,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new scroll-panel with the given child inside.
    * 
-   * @param child
-   *        is the child contained in the scroll-panel.
+   * @param child is the child contained in the scroll-panel.
    * @return the created scroll-panel.
    */
   UIScrollPanel createScrollPanel(UIComposite child);
@@ -315,8 +287,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new split panel.
    * 
-   * @param orientation
-   *        is the orientation of the child-components in the panel.
+   * @param orientation is the orientation of the child-components in the panel.
    * 
    * @return the created split panel.
    */
@@ -332,11 +303,9 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a list with single-selection.
    * 
-   * @param <E>
-   *        is the templated type of the elements that can be selected with the
-   *        widget.
-   * @param model
-   *        is the model defining the the selectable elements.
+   * @param <E> is the templated type of the elements that can be selected with
+   *        the widget.
+   * @param model is the model defining the the selectable elements.
    * @return the created list.
    */
   <E> UIList<E> createList(UIListModel<E> model);
@@ -344,13 +313,10 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a list.
    * 
-   * @param <E>
-   *        is the templated type of the elements that can be selected with the
-   *        widget.
-   * @param model
-   *        is the model defining the the selectable elements.
-   * @param multiSelection
-   *        is the value of the
+   * @param <E> is the templated type of the elements that can be selected with
+   *        the widget.
+   * @param model is the model defining the the selectable elements.
+   * @param multiSelection is the value of the
    *        {@link net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag#isMultiSelection() multi-selection-flag}.
    * @return the created list.
    */
@@ -359,11 +325,9 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a combo-box that is NOT editable.
    * 
-   * @param <E>
-   *        is the templated type of the elements that can be selected with the
-   *        widget.
-   * @param model
-   *        is the model defining the the selectable elements.
+   * @param <E> is the templated type of the elements that can be selected with
+   *        the widget.
+   * @param model is the model defining the the selectable elements.
    * @return the created combo-box.
    */
   <E> UIComboBox<E> createComboBox(UIListModel<E> model);
@@ -371,13 +335,10 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a combo-box.
    * 
-   * @param <E>
-   *        is the templated type of the elements that can be selected with the
-   *        widget.
-   * @param model
-   *        is the model defining the the selectable elements.
-   * @param editable
-   *        is the (initial) value of the
+   * @param <E> is the templated type of the elements that can be selected with
+   *        the widget.
+   * @param model is the model defining the the selectable elements.
+   * @param editable is the (initial) value of the
    *        {@link net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable() editable-flag}.
    * @return the created combo-box.
    */
@@ -393,9 +354,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a tree.
    * 
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple items of the
-   *        tree, else only one.
+   * @param multiSelection - if <code>true</code> the user can select multiple
+   *        items of the tree, else only one.
    * @return the created tree.
    */
   UITree<?> createTree(boolean multiSelection);
@@ -403,13 +363,10 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a tree.
    * 
-   * @param <N>
-   *        is the templated type of the tree-nodes.
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple items of the
-   *        tree, else only one.
-   * @param model
-   *        is the model defining the content of the tree.
+   * @param <N> is the templated type of the tree-nodes.
+   * @param multiSelection - if <code>true</code> the user can select multiple
+   *        items of the tree, else only one.
+   * @param model is the model defining the content of the tree.
    * @return the created tree.
    */
   <N> UITree<N> createTree(boolean multiSelection, UITreeModel<N> model);
@@ -424,9 +381,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a table.
    * 
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple items/cells of
-   *        the table, else only one.
+   * @param multiSelection - if <code>true</code> the user can select multiple
+   *        items/cells of the table, else only one.
    * @return the created table.
    */
   UITable<?> createTable(boolean multiSelection);
@@ -434,14 +390,11 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a table.
    * 
-   * @param <C>
-   *        is the templated type of the objects in the table cells.
+   * @param <C> is the templated type of the objects in the table cells.
    * 
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple items/cells of
-   *        the table, else only one.
-   * @param model
-   *        is the model defining the content of the table.
+   * @param multiSelection - if <code>true</code> the user can select multiple
+   *        items/cells of the table, else only one.
+   * @param model is the model defining the content of the table.
    * @return the created table.
    */
   <C> UITable<C> createTable(boolean multiSelection, UITableModel<C> model);
@@ -457,8 +410,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new label.
    * 
-   * @param text
-   *        is the initial {@link UILabel#getText() label-text}.
+   * @param text is the initial {@link UILabel#getText() label-text}.
    * @return the created label.
    */
   UILabel createLabel(String text);
@@ -473,9 +425,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new text-field.
    * 
-   * @param editable
-   *        is the {@link UITextField#isEditable() editable flag} of the text
-   *        field.
+   * @param editable is the {@link UITextField#isEditable() editable flag} of
+   *        the text field.
    * @return the created text-field.
    */
   UITextField createTextField(boolean editable);
@@ -483,10 +434,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new spin-box.
    * 
-   * @param <E>
-   *        is the templated type of the list elements.
-   * @param model
-   *        is the model defining the the selectable elements.
+   * @param <E> is the templated type of the list elements.
+   * @param model is the model defining the the selectable elements.
    * @return the created spin-box.
    */
   <E> UISpinBox<E> createSpinBox(UIListModel<E> model);
@@ -494,11 +443,9 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new horizontal slide-bar.
    * 
-   * @param <E>
-   *        is the templated type of the elements that can be selected with the
-   *        widget.
-   * @param model
-   *        is the model for the slide bar. Use
+   * @param <E> is the templated type of the elements that can be selected with
+   *        the widget.
+   * @param model is the model for the slide bar. Use
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel} for a
    *        regular slide-bar.
    * @return the created slide-bar.
@@ -508,15 +455,12 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new slide-bar.
    * 
-   * @param <E>
-   *        is the templated type of the elements that can be selected with the
-   *        widget.
-   * @param model
-   *        is the model for the slide bar. Use
+   * @param <E> is the templated type of the elements that can be selected with
+   *        the widget.
+   * @param model is the model for the slide bar. Use
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel} for a
    *        regular slide-bar.
-   * @param orientation
-   *        defines the axis along which the slide-bar is oriented.
+   * @param orientation defines the axis along which the slide-bar is oriented.
    * @return the created slide-bar.
    */
   <E> UISlideBar<E> createSlideBar(UIListModel<E> model, Orientation orientation);
@@ -531,8 +475,8 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new progress-bar.
    * 
-   * @param orientation
-   *        defines the axis along which the progress-bar is oriented.
+   * @param orientation defines the axis along which the progress-bar is
+   *        oriented.
    * @return the new progress-bar.
    */
   UIProgressBar createProgressBar(Orientation orientation);
@@ -547,8 +491,7 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a new file-download.
    * 
-   * @param access
-   *        gives access to the file that can be downloaded.
+   * @param access gives access to the file that can be downloaded.
    * @return the new file-download.
    */
   UIFileDownload createFileDownload(FileAccess access);
@@ -563,22 +506,20 @@ public interface UIFactory extends UIWriteDisposed {
   /**
    * This method creates a picture.
    * 
-   * @param imageUrl
-   *        is the URL pointing to the according image data.
+   * @param imageUrl is the URL pointing to the according image data.
    * @return the picture object for the image at the given URL.
-   * @throws IOException
-   *         on I/O error opening or reading data from the given URL.
+   * @throws IOException on I/O error opening or reading data from the given
+   *         URL.
    */
   UIPicture createPicture(URL imageUrl) throws IOException;
 
   /**
    * This method creates a picture.
    * 
-   * @param imageFile
-   *        is the image file.
+   * @param imageFile is the image file.
    * @return the picture object for the image in the given file.
-   * @throws IOException
-   *         on I/O error opening or reading data from the given file.
+   * @throws IOException on I/O error opening or reading data from the given
+   *         file.
    */
   UIPicture createPicture(File imageFile) throws IOException;
 
@@ -586,8 +527,7 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates an action that prints the given component if its
    * {@link Action#getActionListener() listener} is invoked.
    * 
-   * @param component
-   *        is the component that is to be printed.
+   * @param component is the component that is to be printed.
    * @return the according action.
    */
   Action createPrintAction(UIComponent component);
@@ -596,10 +536,8 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates an action that prints the given component if its
    * {@link Action#getActionListener() listener} is invoked.
    * 
-   * @param component
-   *        is the component that is to be printed.
-   * @param actionName
-   *        is the {@link Action#getName() name} of the print action.
+   * @param component is the component that is to be printed.
+   * @param actionName is the {@link Action#getName() name} of the print action.
    * @return the according action.
    */
   Action createPrintAction(UIComponent component, String actionName);
@@ -608,12 +546,9 @@ public interface UIFactory extends UIWriteDisposed {
    * This method creates an action that prints the given component if its
    * {@link Action#getActionListener() listener} is invoked.
    * 
-   * @param component
-   *        is the component that is to be printed.
-   * @param actionName
-   *        is the {@link Action#getName() name} of the print action.
-   * @param jobName
-   *        is the name of the print job.
+   * @param component is the component that is to be printed.
+   * @param actionName is the {@link Action#getName() name} of the print action.
+   * @param jobName is the name of the print job.
    * @return the according action.
    */
   Action createPrintAction(UIComponent component, String actionName, String jobName);

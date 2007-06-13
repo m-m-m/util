@@ -191,12 +191,12 @@ public class UIDemoBuilder {
 
       public void invoke(UINode source, ActionType action) {
 
-        //panel.setOrientation(panel.getOrientation().getMirrored());
+        // panel.setOrientation(panel.getOrientation().getMirrored());
         ScriptOrientation so;
         if (factory.getScriptOrientation() == ScriptOrientation.LEFT_TO_RIGHT) {
           so = ScriptOrientation.RIGHT_TO_LEFT;
         } else {
-          so = ScriptOrientation.LEFT_TO_RIGHT;          
+          so = ScriptOrientation.LEFT_TO_RIGHT;
         }
         factory.setScriptOrientation(so);
       }
@@ -318,8 +318,8 @@ public class UIDemoBuilder {
 
     // radio menu
     UIMenu radioMenu = menubar.addMenu("Radio");
-    final UIMenuItem[] colors = new UIMenuItem[] {radioMenu.addItem("blue", ButtonStyle.RADIO),
-        radioMenu.addItem("green", ButtonStyle.RADIO), radioMenu.addItem("red", ButtonStyle.RADIO)};
+    final UIMenuItem[] colors = new UIMenuItem[] { radioMenu.addItem("blue", ButtonStyle.RADIO),
+        radioMenu.addItem("green", ButtonStyle.RADIO), radioMenu.addItem("red", ButtonStyle.RADIO) };
     radioMenu.addSeparator();
     UIActionListener colorAction = new UIActionListener() {
 
@@ -388,7 +388,8 @@ public class UIDemoBuilder {
 
   public static UISlicePanel createModelPanel(UIFactory factory) {
 
-    final UISlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL, "Model-View-Controller");
+    final UISlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL,
+        "Model-View-Controller");
     final DefaultUIListModel<String> listModel = createDemoListModel();
 
     // add combo-box

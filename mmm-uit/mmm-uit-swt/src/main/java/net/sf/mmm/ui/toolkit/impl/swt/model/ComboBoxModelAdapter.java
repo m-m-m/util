@@ -9,8 +9,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel}
- * to a {@link org.eclipse.swt.widgets.Combo}. It is the controller of the MVC
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
+ * a {@link org.eclipse.swt.widgets.Combo}. It is the controller of the MVC
  * pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -29,10 +29,8 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
   /**
    * The constructor.
    * 
-   * @param comboAccess
-   *        is the access to the SWT combo-box widget.
-   * @param listModel
-   *        is the model defining the elements to select.
+   * @param comboAccess is the access to the SWT combo-box widget.
+   * @param listModel is the model defining the elements to select.
    */
   public ComboBoxModelAdapter(SyncComboAccess comboAccess, UIListModel<?> listModel) {
 
@@ -62,11 +60,10 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
 
   /**
    * This method sets the list-model. If a model was already set, all items of
-   * that model will be removed. The items of the new model will be added to
-   * the widget.
+   * that model will be removed. The items of the new model will be added to the
+   * widget.
    * 
-   * @param newModel
-   *        is the new list-model.
+   * @param newModel is the new list-model.
    */
   public synchronized void setModel(UIListModel<?> newModel) {
 

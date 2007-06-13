@@ -19,8 +19,7 @@ public class ResourceMissingException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param resourceName
-   *        is the name of the missing resource.
+   * @param resourceName is the name of the missing resource.
    */
   public ResourceMissingException(String resourceName) {
 

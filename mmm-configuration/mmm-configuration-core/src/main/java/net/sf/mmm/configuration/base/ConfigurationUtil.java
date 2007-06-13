@@ -82,8 +82,7 @@ public final class ConfigurationUtil {
    * This method initializes the given {@link MutableContext environment} with
    * the defaults for the root {@link ConfigurationDocument document}.
    * 
-   * @param context
-   *        is the environment to modify.
+   * @param context is the environment to modify.
    */
   public static void initializeContext(MutableContext context) {
 
@@ -124,10 +123,10 @@ public final class ConfigurationUtil {
    * This method gets the factory used to interpret the format of the
    * configuration to include.
    * 
-   * @param includeConfiguration
-   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element.
-   * @param context
-   *        is the {@link ConfigurationDocument#getContext() document-context}.
+   * @param includeConfiguration is the
+   *        {@link ConfigurationDocument#NAME_INCLUDE include} element.
+   * @param context is the
+   *        {@link ConfigurationDocument#getContext() document-context}.
    * @return the configuration factory.
    */
   public static ConfigurationFactory getDocumentFactory(Configuration includeConfiguration,
@@ -149,10 +148,10 @@ public final class ConfigurationUtil {
   /**
    * This method gets the factory used to access the configuration to include.
    * 
-   * @param includeConfiguration
-   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element.
-   * @param context
-   *        is the {@link ConfigurationDocument#getContext() document-context}.
+   * @param includeConfiguration is the
+   *        {@link ConfigurationDocument#NAME_INCLUDE include} element.
+   * @param context is the
+   *        {@link ConfigurationDocument#getContext() document-context}.
    * @return the access factory.
    */
   public static ConfigurationAccessFactory getAccessFactory(Configuration includeConfiguration,
@@ -175,11 +174,10 @@ public final class ConfigurationUtil {
    * This method resolves the included configurations for the given
    * <code>includeElement</code>.
    * 
-   * @param includeElement
-   *        is the {@link ConfigurationDocument#NAME_INCLUDE include} element to
+   * @param includeElement is the
+   *        {@link ConfigurationDocument#NAME_INCLUDE include} element to
    *        resolve.
-   * @param targetList
-   *        is the list where to add the included child nodes.
+   * @param targetList is the list where to add the included child nodes.
    */
   public static void resolveInclude(AbstractConfiguration includeElement,
       List<AbstractConfiguration> targetList) {

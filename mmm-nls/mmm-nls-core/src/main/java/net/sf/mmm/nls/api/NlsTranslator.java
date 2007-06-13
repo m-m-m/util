@@ -32,8 +32,7 @@ public interface NlsTranslator {
    * @see net.sf.mmm.nls.base.AbstractResourceBundle
    * @see NlsTranslationSource#getInternationalizedMessage()
    * 
-   * @param source
-   *        contains the source-data to translate.
+   * @param source contains the source-data to translate.
    * @return the translation of the given message or <code>null</code> if no
    *         translation is available.
    */
@@ -44,12 +43,10 @@ public interface NlsTranslator {
    * additionally fills the given <code>arguments</code> into the translated
    * message using {@link java.text.MessageFormat}.
    * 
-   * @param source
-   *        contains the source-data to translate.
-   * @param arguments
-   *        are the variable arguments to fill in the message.
-   * @param messageBuffer
-   *        is the buffer where the translation will be appended to.
+   * @param source contains the source-data to translate.
+   * @param arguments are the variable arguments to fill in the message.
+   * @param messageBuffer is the buffer where the translation will be appended
+   *        to.
    * @return <code>true</code> if the (translated) message has been appended
    *         to the given <code>messageBuffer</code> or <code>false</code>
    *         if the translation failed.

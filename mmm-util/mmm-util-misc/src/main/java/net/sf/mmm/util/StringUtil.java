@@ -38,8 +38,7 @@ public final class StringUtil {
    * 
    * @see Boolean#valueOf(String)
    * 
-   * @param booleanValue
-   *        is the boolean value as string.
+   * @param booleanValue is the boolean value as string.
    * @return <code>true</code> if the given string
    *         {@link String#equalsIgnoreCase(java.lang.String) equals} to
    *         {@link #TRUE true}, <code>false</code> if it
@@ -61,12 +60,9 @@ public final class StringUtil {
    * This method replaces all occurrences of the string <code>match</code>
    * with the string <code>replace</code> in the given string.
    * 
-   * @param string
-   *        is the string where to replace.
-   * @param match
-   *        is the string that is searched and replaced.
-   * @param replace
-   *        is the string <code>match</code> is substituted with.
+   * @param string is the string where to replace.
+   * @param match is the string that is searched and replaced.
+   * @param replace is the string <code>match</code> is substituted with.
    * @return the given string with all occurrences of <code>match</code>
    *         replaced by <code>replace</code>.
    */
@@ -95,8 +91,7 @@ public final class StringUtil {
    * 
    * @see #isEmpty(String, boolean)
    * 
-   * @param string
-   *        is the string to check.
+   * @param string is the string to check.
    * @return <code>true</code> if the given string is <code>null</code> or
    *         has a trimmed length of zero, <code>false</code> otherwise.
    */
@@ -108,11 +103,9 @@ public final class StringUtil {
   /**
    * This method determines if the given string is empty.
    * 
-   * @param string
-   *        is the string to check.
-   * @param trim
-   *        if whitespaces should be ignored and a string with a trimmed length
-   *        of zero is considered as empty.
+   * @param string is the string to check.
+   * @param trim if whitespaces should be ignored and a string with a trimmed
+   *        length of zero is considered as empty.
    * @return <code>true</code> if the given string is <code>null</code> or
    *         has a (trimmed) length of zero, <code>false</code> otherwise.
    */
@@ -137,8 +130,7 @@ public final class StringUtil {
    * The asterisk ("*") can match any string including the empty string and the
    * questionmark ("?") can match any single character.
    * 
-   * @param pattern
-   *        is the glob pattern to compile.
+   * @param pattern is the glob pattern to compile.
    * @return the compiled pattern.
    */
   public static Pattern compileGlobPattern(String pattern) {
@@ -153,12 +145,10 @@ public final class StringUtil {
    * The asterisk ("*") can match any string including the empty string and the
    * questionmark ("?") can match any single character.
    * 
-   * @param pattern
-   *        is the glob pattern to compile.
-   * @param requireWildcard -
-   *        if <code>true</code> the given <code>pattern</code> needs to
-   *        have a wildcard character in order to be compiled,
-   *        <code>false</code> otherwise.
+   * @param pattern is the glob pattern to compile.
+   * @param requireWildcard - if <code>true</code> the given
+   *        <code>pattern</code> needs to have a wildcard character in order
+   *        to be compiled, <code>false</code> otherwise.
    * @return the compiled pattern or <code>null</code> if
    *         <code>requireWildcard</code> is <code>true</code> but the given
    *         <code>pattern</code> does NOT contain any wildcard.
@@ -195,13 +185,12 @@ public final class StringUtil {
    * This method escapes the given <code>string</code> for usage in XML (or
    * HTML, etc.).
    * 
-   * @param string
-   *        is the string to escape.
-   * @param escapeQuotations
-   *        if <code>true</code> also the ASCII quotation characters (apos
-   *        <code>'\''</code> and quot <code>'"'</code>) will be escaped,
-   *        else if <code>false</code> quotations are untouched. Set this to
-   *        <code>true</code> if you are writing the value of an attribute.
+   * @param string is the string to escape.
+   * @param escapeQuotations if <code>true</code> also the ASCII quotation
+   *        characters (apos <code>'\''</code> and quot <code>'"'</code>)
+   *        will be escaped, else if <code>false</code> quotations are
+   *        untouched. Set this to <code>true</code> if you are writing the
+   *        value of an attribute.
    * @return the escaped string.
    */
   public static String escapeXml(String string, boolean escapeQuotations) {
@@ -220,17 +209,14 @@ public final class StringUtil {
    * <code>writer</code> while escaping special characters for XML (or HTML,
    * etc.).
    * 
-   * @param string
-   *        is the string to escape.
-   * @param writer
-   *        is where to write the string to.
-   * @param escapeQuotations
-   *        if <code>true</code> also the ASCII quotation characters (apos
-   *        <code>'\''</code> and quot <code>'"'</code>) will be escaped,
-   *        else if <code>false</code> quotations are untouched. Set this to
-   *        <code>true</code> if you are writing the value of an attribute.
-   * @throws IOException
-   *         if the <code>writer</code> produced an I/O error.
+   * @param string is the string to escape.
+   * @param writer is where to write the string to.
+   * @param escapeQuotations if <code>true</code> also the ASCII quotation
+   *        characters (apos <code>'\''</code> and quot <code>'"'</code>)
+   *        will be escaped, else if <code>false</code> quotations are
+   *        untouched. Set this to <code>true</code> if you are writing the
+   *        value of an attribute.
+   * @throws IOException if the <code>writer</code> produced an I/O error.
    */
   public static void escapeXml(String string, Writer writer, boolean escapeQuotations)
       throws IOException {
@@ -268,10 +254,8 @@ public final class StringUtil {
    * <li><code>padNumber(100, 3)</code> will return <code>"100"</code></li>
    * </ul>
    * 
-   * @param number
-   *        is the positive number to format.
-   * @param digits
-   *        is the (minimum) number of digits required.
+   * @param number is the positive number to format.
+   * @param digits is the (minimum) number of digits required.
    * @return the number as string with the length of (at least)
    *         <code>digits</code>. If the number is less, leading zeros are
    *         appended.
@@ -300,8 +284,7 @@ public final class StringUtil {
    * 
    * @see #toCamlCase(String, char[])
    * 
-   * @param string
-   *        is the string to convert.
+   * @param string is the string to convert.
    * @return the given <code>string</code> in caml-case syntax.
    */
   public static String toCamlCase(String string) {
@@ -336,10 +319,9 @@ public final class StringUtil {
    * </tr>
    * </table>
    * 
-   * @param string
-   *        is the string to convert.
-   * @param separators
-   *        is the list of characters that are treated as word-separators.
+   * @param string is the string to convert.
+   * @param separators is the list of characters that are treated as
+   *        word-separators.
    * @return the given <code>string</code> in caml-case syntax.
    */
   public static String toCamlCase(String string, char... separators) {
@@ -387,8 +369,7 @@ public final class StringUtil {
    * {@link java.util.regex.Matcher#find()} instead of
    * {@link java.util.regex.Matcher#matches()}.
    * 
-   * @param pattern
-   *        is the pattern as string.
+   * @param pattern is the pattern as string.
    * @return the compiled pattern.
    */
   public static Pattern compileInfixPattern(String pattern) {

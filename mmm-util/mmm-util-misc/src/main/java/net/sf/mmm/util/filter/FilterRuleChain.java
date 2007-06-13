@@ -20,10 +20,8 @@ public class FilterRuleChain implements Filter<String> {
   /**
    * The constructor.
    * 
-   * @param rules
-   *        is the chain of rules.
-   * @param defaultResult
-   *        is the {@link #accept(String) result} if none of the
+   * @param rules is the chain of rules.
+   * @param defaultResult is the {@link #accept(String) result} if none of the
    *        <code>rules</code> match.
    */
   public FilterRuleChain(boolean defaultResult, FilterRule... rules) {
@@ -65,10 +63,9 @@ public class FilterRuleChain implements Filter<String> {
   /**
    * This method extends this chain with <code>additionalRules</code>.
    * 
-   * @param newDefaultResult
-   *        is the result of the new extended chain if none of the rules match.
-   * @param additionalRules
-   *        are the rules to add.
+   * @param newDefaultResult is the result of the new extended chain if none of
+   *        the rules match.
+   * @param additionalRules are the rules to add.
    * @return the chain that also checks the <code>additionalRules</code> if
    *         none of this rules match.
    */

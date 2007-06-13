@@ -60,15 +60,12 @@ public class ValueServiceTest extends TestCase {
    * string and checks that it can be converted to XML and back resulting in the
    * same value.
    * 
-   * @param <V>
-   *        is the templated type of the value.
-   * @param manager
-   *        is the manager of the value type V.
-   * @param valueAsString
-   *        is the {@link ValueManager#toString(V) "string representation"} of
-   *        an example value.
-   * @throws Exception
-   *         if the test fails.
+   * @param <V> is the templated type of the value.
+   * @param manager is the manager of the value type V.
+   * @param valueAsString is the
+   *        {@link ValueManager#toString(V) "string representation"} of an
+   *        example value.
+   * @throws Exception if the test fails.
    */
   private <V> void checkManager(ValueManager<V> manager, String valueAsString) throws Exception {
 
@@ -78,8 +75,8 @@ public class ValueServiceTest extends TestCase {
     manager.toXml(new DomXmlWriter(doc), value);
     Element rootElement = doc.getDocumentElement();
     V parsedValue = manager.parse(rootElement);
-    assertTrue("parsed " + manager.getName() + " value differs", manager.isEqual(value,
-        parsedValue));
+    assertTrue("parsed " + manager.getName() + " value differs", manager
+        .isEqual(value, parsedValue));
   }
 
   /**

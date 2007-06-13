@@ -7,11 +7,10 @@ import net.sf.mmm.framework.api.ComponentInstanceContainer;
 import net.sf.mmm.framework.api.ComponentManager;
 
 /**
- * This is the default implementation of the
- * {@link ComponentInstanceContainer} interface.
+ * This is the default implementation of the {@link ComponentInstanceContainer}
+ * interface.
  * 
- * @param <S>
- *        is the
+ * @param <S> is the
  *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
  *        of the {@link #getInstance() component}.
  * 
@@ -36,8 +35,7 @@ public class SimpleComponentInstanceContainer<S> implements ComponentInstanceCon
   /**
    * The constructor.
    * 
-   * @param componentInstance
-   *        is the component {@link #getInstance() instance}.
+   * @param componentInstance is the component {@link #getInstance() instance}.
    */
   public SimpleComponentInstanceContainer(S componentInstance) {
 
@@ -47,10 +45,9 @@ public class SimpleComponentInstanceContainer<S> implements ComponentInstanceCon
   /**
    * The constructor.
    * 
-   * @param componentInstance
-   *        is the component {@link #getInstance() instance}.
-   * @param componentId
-   *        is the {@link #getInstanceId() ID} of the component instance.
+   * @param componentInstance is the component {@link #getInstance() instance}.
+   * @param componentId is the {@link #getInstanceId() ID} of the component
+   *        instance.
    */
   public SimpleComponentInstanceContainer(S componentInstance, String componentId) {
 
@@ -68,11 +65,10 @@ public class SimpleComponentInstanceContainer<S> implements ComponentInstanceCon
   }
 
   /**
-   * This method sets the {@link #getInstance() instance}. It should be
-   * called only once.
+   * This method sets the {@link #getInstance() instance}. It should be called
+   * only once.
    * 
-   * @param newInstance
-   *        is the instance to set.
+   * @param newInstance is the instance to set.
    */
   public void setInstance(S newInstance) {
 
@@ -93,8 +89,7 @@ public class SimpleComponentInstanceContainer<S> implements ComponentInstanceCon
   /**
    * This method sets the {@link #getInstanceId() instanceId}.
    * 
-   * @param newInstanceId
-   *        is the instanceId to set.
+   * @param newInstanceId is the instanceId to set.
    */
   public void setInstanceId(String newInstanceId) {
 

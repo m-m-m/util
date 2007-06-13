@@ -21,9 +21,9 @@ public class ValueNotRegisteredException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueName
-   *        is the {@link net.sf.mmm.value.api.ValueManager#getName() name}
-   *        of the value that was requested but is NOT registered.
+   * @param valueName is the
+   *        {@link net.sf.mmm.value.api.ValueManager#getName() name} of the
+   *        value that was requested but is NOT registered.
    */
   public ValueNotRegisteredException(String valueName) {
 
@@ -33,8 +33,7 @@ public class ValueNotRegisteredException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueType
-   *        is the
+   * @param valueType is the
    *        {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of
    *        the value that was requested but is NOT registered.
    */
@@ -46,8 +45,8 @@ public class ValueNotRegisteredException extends ValueException {
   /**
    * This method gets the
    * {@link net.sf.mmm.value.api.ValueManager#getName() name} or
-   * {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of the
-   * value that was requested but NOT registered.
+   * {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of the value
+   * that was requested but NOT registered.
    * 
    * @return the value name or {@link Class#getName() type}.
    */

@@ -33,7 +33,8 @@ public class ContentParserPdf extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+      throws Exception {
 
     PDFParser parser = new PDFParser(inputStream);
     parser.parse();

@@ -40,12 +40,9 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param buttonStyle
-   *        determines the style of the button.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param buttonStyle determines the style of the button.
    */
   public UIButtonImpl(UIFactorySwing uiFactory, UINode parentObject, ButtonStyle buttonStyle) {
 

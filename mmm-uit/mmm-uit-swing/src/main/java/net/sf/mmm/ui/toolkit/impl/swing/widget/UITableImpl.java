@@ -24,8 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.TableModelAdapter;
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable} interface using Swing as the
  * UI toolkit.
  * 
- * @param <C>
- *        is the templated type of the objects in the table cells.
+ * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -43,10 +42,8 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UITableImpl(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -114,7 +111,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
         // has the mouse button already been released?
         if (!e.getValueIsAdjusting()) {
           if (getSelectedIndex() >= 0) {
-            invoke(ActionType.SELECT);            
+            invoke(ActionType.SELECT);
           } else {
             invoke(ActionType.DESELECT);
           }
@@ -151,7 +148,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
     } else if (newIndex == -1) {
       int rowCount = this.table.getRowCount();
       if (rowCount > 0) {
-        this.table.removeRowSelectionInterval(0, this.table.getRowCount() - 1);        
+        this.table.removeRowSelectionInterval(0, this.table.getRowCount() - 1);
       }
     } else {
       throw new IllegalArgumentException("illegal selection index: " + newIndex);

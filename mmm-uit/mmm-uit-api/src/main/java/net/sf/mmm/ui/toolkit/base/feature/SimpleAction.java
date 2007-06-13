@@ -20,10 +20,8 @@ public class SimpleAction extends AbstractAction {
   /**
    * The constructor.
    * 
-   * @param actionListener
-   *        is the {@link #getActionListener() listener}.
-   * @param displayName
-   *        is the {@link #getName() name}.
+   * @param actionListener is the {@link #getActionListener() listener}.
+   * @param displayName is the {@link #getName() name}.
    */
   public SimpleAction(UIActionListener actionListener, String displayName) {
 
@@ -33,12 +31,9 @@ public class SimpleAction extends AbstractAction {
   /**
    * The constructor.
    * 
-   * @param actionListener
-   *        is the {@link #getActionListener() listener}.
-   * @param displayName
-   *        is the {@link #getName() name}.
-   * @param displayIcon
-   *        is the {@link #getIcon() icon}.
+   * @param actionListener is the {@link #getActionListener() listener}.
+   * @param displayName is the {@link #getName() name}.
+   * @param displayIcon is the {@link #getIcon() icon}.
    */
   public SimpleAction(UIActionListener actionListener, String displayName, UIPicture displayIcon) {
 
@@ -49,8 +44,7 @@ public class SimpleAction extends AbstractAction {
   /**
    * This method sets the {@link #getActionListener() listener}.
    * 
-   * @param newListener
-   *        is the new listener to set.
+   * @param newListener is the new listener to set.
    */
   public void setActionListener(UIActionListener newListener) {
 

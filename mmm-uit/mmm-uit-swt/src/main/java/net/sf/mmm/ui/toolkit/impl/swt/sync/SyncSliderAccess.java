@@ -54,11 +54,10 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the slider.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        slider.
    */
   public SyncSliderAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -132,8 +131,7 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Slider#setSelection(int) selection} of the
    * slider.
    * 
-   * @param selectionValue
-   *        is the selection to set.
+   * @param selectionValue is the selection to set.
    */
   public void setSelection(int selectionValue) {
 
@@ -147,8 +145,7 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
    * {@link org.eclipse.swt.widgets.Slider#setMaximum(int) maximum} of the
    * slider.
    * 
-   * @param newMaximum
-   *        is the maximum to set.
+   * @param newMaximum is the maximum to set.
    */
   public void setMaximum(int newMaximum) {
 

@@ -14,8 +14,8 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
 public interface DurationIF extends XmlSerializable {
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
-   * value type.
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
+   * type.
    */
   String VALUE_NAME = "Duration";
 

@@ -22,10 +22,8 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UI factory instance.
-   * @param uiDevice
-   *        is the device the display belongs to.
+   * @param uiFactory is the UI factory instance.
+   * @param uiDevice is the device the display belongs to.
    */
   public AbstractUIDisplay(AbstractUIFactory uiFactory, UIDevice uiDevice) {
 

@@ -18,7 +18,7 @@ public class SimpleExecutor implements Executor {
   private ThreadFactory threadFactory;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public SimpleExecutor() {
 
@@ -27,10 +27,9 @@ public class SimpleExecutor implements Executor {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param factory
-   *        is the thread-factory to use.
+   * @param factory is the thread-factory to use.
    */
   public SimpleExecutor(ThreadFactory factory) {
 
@@ -47,8 +46,7 @@ public class SimpleExecutor implements Executor {
   }
 
   /**
-   * @param factory
-   *        the threadFactory to set
+   * @param factory the threadFactory to set
    */
   public void setThreadFactory(ThreadFactory factory) {
 

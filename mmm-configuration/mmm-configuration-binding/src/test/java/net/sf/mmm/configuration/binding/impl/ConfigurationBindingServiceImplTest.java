@@ -41,19 +41,19 @@ public class ConfigurationBindingServiceImplTest extends TestCase {
     serviceImpl.setDescriptorBuilder(descriptorBuilder);
     serviceImpl.initialize();
     ConfigurationBindingService service = serviceImpl;
-    
+
     // create example config...
     String href = ConfigurationBindingServiceImplTest.class.getName().replace('.', '/') + ".xml";
     ConfigurationAccess access = new ResourceAccess(href);
     ConfigurationFactory factory = new XmlFactory();
     ConfigurationDocument doc = factory.create(access);
     Configuration configuration = doc.getConfiguration();
-    
+
     // create example pojo...
     MyPojo pojo = new MyPojo();
-    
+
     service.configure(configuration, pojo);
-    
+
     assertEquals("SomeName", pojo.getPojoName());
     assertEquals(42, pojo.getSpecialNumber());
     Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));

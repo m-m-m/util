@@ -60,8 +60,7 @@ public class ThreadPoolProvider extends AbstractStaticSingletonComponentProvider
    * 
    * @see ThreadPoolExecutor#setCorePoolSize(int)
    * 
-   * @param newCorePoolSize
-   *        is the corePoolSize to set.
+   * @param newCorePoolSize is the corePoolSize to set.
    */
   public void setCorePoolSize(int newCorePoolSize) {
 
@@ -85,8 +84,7 @@ public class ThreadPoolProvider extends AbstractStaticSingletonComponentProvider
    * 
    * @see ThreadPoolExecutor#setMaximumPoolSize(int)
    * 
-   * @param newMaximumPoolSize
-   *        is the maximumPoolSize to set.
+   * @param newMaximumPoolSize is the maximumPoolSize to set.
    */
   public void setMaximumPoolSize(int newMaximumPoolSize) {
 

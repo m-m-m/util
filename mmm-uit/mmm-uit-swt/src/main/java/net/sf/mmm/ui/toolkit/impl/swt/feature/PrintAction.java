@@ -32,12 +32,9 @@ public class PrintAction extends AbstractAction implements UIActionListener {
   /**
    * The constructor.
    * 
-   * @param printComponent
-   *        is the component to be printed by this action.
-   * @param actionName
-   *        is the {@link Action#getName() name} of the print action.
-   * @param jobName
-   *        is the name of the print job.
+   * @param printComponent is the component to be printed by this action.
+   * @param actionName is the {@link Action#getName() name} of the print action.
+   * @param jobName is the name of the print job.
    */
   public PrintAction(AbstractUIComponent printComponent, String actionName, String jobName) {
 

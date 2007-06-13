@@ -43,18 +43,16 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
-   * @param microVersion
-   *        is the {@link Version#getMicroVersion() micro-version} number.
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
+   * @param microVersion is the {@link Version#getMicroVersion() micro-version}
+   *        number.
+   * @param versionSuffix is the suffix appended to the version.
    */
   public VersionImpl(String userComment, int majorVersion, int minorVersion, int milliVersion,
       int microVersion, String versionSuffix) {
@@ -83,16 +81,15 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
-   * @param microVersion
-   *        is the {@link Version#getMicroVersion() micro-version} number.
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
+   * @param microVersion is the {@link Version#getMicroVersion() micro-version}
+   *        number.
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -105,16 +102,15 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
-   * @param microVersion
-   *        is the {@link Version#getMicroVersion() micro-version} number.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
+   * @param microVersion is the {@link Version#getMicroVersion() micro-version}
+   *        number.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -127,14 +123,14 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
-   * @param microVersion
-   *        is the {@link Version#getMicroVersion() micro-version} number.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
+   * @param microVersion is the {@link Version#getMicroVersion() micro-version}
+   *        number.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -146,12 +142,12 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -163,14 +159,13 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -182,14 +177,13 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -201,16 +195,14 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param milliVersion
-   *        is the {@link Version#getMilliVersion() milli-version} number.
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param milliVersion is the {@link Version#getMilliVersion() milli-version}
+   *        number.
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -223,10 +215,10 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -238,12 +230,11 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -255,12 +246,11 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -272,14 +262,12 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param minorVersion
-   *        is the {@link Version#getMinorVersion() minor-version} number
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param minorVersion is the {@link Version#getMinorVersion() minor-version}
+   *        number
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -291,8 +279,8 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -304,10 +292,9 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -319,10 +306,9 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -334,12 +320,10 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param userComment
-   *        is the comment of the user who created this version.
-   * @param majorVersion
-   *        is the {@link Version#getMajorVersion() major-version} number.
-   * @param versionSuffix
-   *        is the suffix appended to the version.
+   * @param userComment is the comment of the user who created this version.
+   * @param majorVersion is the {@link Version#getMajorVersion() major-version}
+   *        number.
+   * @param versionSuffix is the suffix appended to the version.
    * 
    * @see #VersionImpl(String, int, int, int, int, String)
    */
@@ -351,10 +335,10 @@ public final class VersionImpl implements Version {
   /**
    * The constructor.
    * 
-   * @param versionAsString
-   *        is the version as String as retrieved by {@link Version#toString()}.
-   * @throws ValueParseException
-   *         if the given string is invalid and could not be parsed.
+   * @param versionAsString is the version as String as retrieved by
+   *        {@link Version#toString()}.
+   * @throws ValueParseException if the given string is invalid and could not be
+   *         parsed.
    */
   public VersionImpl(String versionAsString) throws ValueParseException {
 

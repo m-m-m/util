@@ -23,8 +23,7 @@ public class StringTransformerChain implements Transformer<String> {
   /**
    * The constructor.
    * 
-   * @param rules
-   *        are the rules of this chain.
+   * @param rules are the rules of this chain.
    */
   public StringTransformerChain(StringTransformerRule[] rules) {
 
@@ -51,17 +50,18 @@ public class StringTransformerChain implements Transformer<String> {
   /**
    * This method extends this chain with <code>additionalRules</code>.
    * 
-   * @param additionalRules
-   *        are the rules to add.
+   * @param additionalRules are the rules to add.
    * @return the chain that also checks the <code>additionalRules</code> if
    *         none of this rules match.
    */
   public StringTransformerChain extend(StringTransformerRule... additionalRules) {
-    StringTransformerRule[] newRules = new StringTransformerRule[this.rules.length + additionalRules.length];
+
+    StringTransformerRule[] newRules = new StringTransformerRule[this.rules.length
+        + additionalRules.length];
     System.arraycopy(this.rules, 0, newRules, 0, this.rules.length);
     System.arraycopy(additionalRules, 0, newRules, this.rules.length, additionalRules.length);
     return new StringTransformerChain(newRules);
-    
+
   }
-  
+
 }

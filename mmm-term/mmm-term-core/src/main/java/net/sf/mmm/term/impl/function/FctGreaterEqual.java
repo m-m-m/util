@@ -45,10 +45,8 @@ public class FctGreaterEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is greater than or equal
    *         to the second.
    */
@@ -60,10 +58,8 @@ public class FctGreaterEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is after the second.
    */
   @SuppressWarnings("deprecation")
@@ -77,10 +73,8 @@ public class FctGreaterEqual {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is lexicographically
    *         after or equal to the second.
    */

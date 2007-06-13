@@ -12,16 +12,15 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
- * a swing {@link javax.swing.SpinnerModel}.
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * swing {@link javax.swing.SpinnerModel}.
  * 
- * @param <E>
- *        is the templated type of the list-elements.
+ * @param <E> is the templated type of the list-elements.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
-    UIWriteSelectionIndex, UIWriteSelectionValue<E>, UIListModelListener {
+public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UIWriteSelectionIndex,
+    UIWriteSelectionValue<E>, UIListModelListener {
 
   /** the model to adapt */
   private UIListModel<E> model;
@@ -32,8 +31,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   /**
    * The constructor.
    * 
-   * @param listModel
-   *        is the model to adapt.
+   * @param listModel is the model to adapt.
    */
   public SpinnerModelAdapter(UIListModel<E> listModel) {
 
@@ -55,8 +53,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements
   /**
    * This method sets a new model.
    * 
-   * @param newModel
-   *        is the new model to set.
+   * @param newModel is the new model to set.
    */
   public void setModel(UIListModel<E> newModel) {
 

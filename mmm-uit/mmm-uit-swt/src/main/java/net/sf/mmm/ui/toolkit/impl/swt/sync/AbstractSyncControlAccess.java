@@ -156,11 +156,10 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the control.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        control.
    */
   public AbstractSyncControlAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -334,8 +333,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * as parent of this control. Else if the control does NOT yet exist, the
    * parent will be set on {@link #create() creation}.
    * 
-   * @param newParentAccess
-   *        is the synchronous access to the new parent
+   * @param newParentAccess is the synchronous access to the new parent
    */
   public void setParentAccess(AbstractSyncCompositeAccess newParentAccess) {
 
@@ -394,10 +392,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   /**
    * This method sets the {@link Control#setSize(int, int) size} of the control.
    * 
-   * @param width
-   *        is the width to set.
-   * @param height
-   *        is the height to set.
+   * @param width is the width to set.
+   * @param height is the height to set.
    */
   public void setSize(int width, int height) {
 
@@ -414,8 +410,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   /**
    * This method sets the {@link Control#setSize(int, int) size} of the control.
    * 
-   * @param newSize
-   *        is the new size.
+   * @param newSize is the new size.
    */
   public void setSize(Point newSize) {
 
@@ -428,10 +423,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * This method sets the {@link Control#setLocation(int, int) location} of the
    * control.
    * 
-   * @param x
-   *        is the x-coordinate to set.
-   * @param y
-   *        is the y-coordinate to set.
+   * @param x is the x-coordinate to set.
+   * @param y is the y-coordinate to set.
    */
   public void setLocation(int x, int y) {
 
@@ -449,8 +442,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * This method sets the {@link Control#getEnabled() "enabled-flag"} of the
    * control.
    * 
-   * @param enabledFlag
-   *        is the new status of the enabled flag.
+   * @param enabledFlag is the new status of the enabled flag.
    */
   public void setEnabled(boolean enabledFlag) {
 
@@ -478,8 +470,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * This method sets the {@link Control#setToolTipText(String) tooltip-text} of
    * the control.
    * 
-   * @param tooltipText
-   *        is the new tooltip text to set.
+   * @param tooltipText is the new tooltip text to set.
    */
   public void setTooltip(String tooltipText) {
 
@@ -504,8 +495,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * This method sets the {@link Control#setVisible(boolean) visible-flag} of
    * the control.
    * 
-   * @param isVisible
-   *        is the visible flag to set.
+   * @param isVisible is the visible flag to set.
    */
   public void setVisible(boolean isVisible) {
 
@@ -553,10 +543,9 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * This method {@link Control#computeSize(int, int) computes} the size of the
    * control.
    * 
-   * @param widthHint
-   *        the suggested width or {@link org.eclipse.swt.SWT#DEFAULT}.
-   * @param heightHint
-   *        the suggested height or {@link org.eclipse.swt.SWT#DEFAULT}.
+   * @param widthHint the suggested width or {@link org.eclipse.swt.SWT#DEFAULT}.
+   * @param heightHint the suggested height or
+   *        {@link org.eclipse.swt.SWT#DEFAULT}.
    * @return the computed size.
    */
   public Point computeSize(int widthHint, int heightHint) {
@@ -573,8 +562,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * {@link org.eclipse.swt.widgets.Control#setLayoutData(Object) "layout data"}
    * of the control.
    * 
-   * @param data
-   *        is the layout-data to set.
+   * @param data is the layout-data to set.
    */
   public void setLayoutData(Object data) {
 
@@ -600,8 +588,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font) font}
    * of the control.
    * 
-   * @param newFont
-   *        is the new font to set.
+   * @param newFont is the new font to set.
    */
   public void setFont(Font newFont) {
 
@@ -628,8 +615,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color) foreground-color}
    * of the control.
    * 
-   * @param foregroundColor
-   *        is the foreground-color to set.
+   * @param foregroundColor is the foreground-color to set.
    */
   public void setForeground(Color foregroundColor) {
 
@@ -656,8 +642,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color) background-color}
    * of the control.
    * 
-   * @param backgroundColor
-   *        is the background-color to set.
+   * @param backgroundColor is the background-color to set.
    */
   public void setBackground(Color backgroundColor) {
 

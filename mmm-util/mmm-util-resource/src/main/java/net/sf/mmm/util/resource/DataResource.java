@@ -39,8 +39,8 @@ public interface DataResource {
    * This method gets the size (content-length) of this resource.
    * 
    * @return the size of this resource.
-   * @throws ResourceNotAvailableException
-   *         if this resource is NOT {@link #isAvailable() available}.
+   * @throws ResourceNotAvailableException if this resource is NOT
+   *         {@link #isAvailable() available}.
    */
   long getSize() throws ResourceNotAvailableException;
 
@@ -48,8 +48,8 @@ public interface DataResource {
    * This method gets this resource as {@link URL}.
    * 
    * @return the url that represents this resource.
-   * @throws ResourceNotAvailableException
-   *         if this resource is NOT {@link #isAvailable() available}.
+   * @throws ResourceNotAvailableException if this resource is NOT
+   *         {@link #isAvailable() available}.
    */
   URL getUrl() throws ResourceNotAvailableException;
 
@@ -59,10 +59,9 @@ public interface DataResource {
    * @see URL#openStream()
    * 
    * @return the input stream where to read from.
-   * @throws ResourceNotAvailableException
-   *         if this resource is NOT {@link #isAvailable() available}.
-   * @throws IOException
-   *         if an input/output error occurred.
+   * @throws ResourceNotAvailableException if this resource is NOT
+   *         {@link #isAvailable() available}.
+   * @throws IOException if an input/output error occurred.
    */
   InputStream openStream() throws ResourceNotAvailableException, IOException;
 
@@ -73,9 +72,9 @@ public interface DataResource {
    * <code>relativePath</code> would be "../apt/sources.list" the resulting
    * resource would point to "/etc/apt/sources.list".
    * 
-   * @param relativePath
-   *        is the relative path pointing from the parent URI (directory) of
-   *        this resource to the required resource that will be returned.
+   * @param relativePath is the relative path pointing from the parent URI
+   *        (directory) of this resource to the required resource that will be
+   *        returned.
    * @return is the resource pointing to the given path relative to this
    *         resource.
    */

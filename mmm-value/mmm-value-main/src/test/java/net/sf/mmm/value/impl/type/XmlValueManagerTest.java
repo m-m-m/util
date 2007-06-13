@@ -38,10 +38,8 @@ public class XmlValueManagerTest extends TestCase {
   /**
    * This method produces some strange xml for testing.
    * 
-   * @param xmlWriter
-   *        is the serializer where to create the xml.
-   * @throws XmlException
-   *         if the xml is illegal or general error.
+   * @param xmlWriter is the serializer where to create the xml.
+   * @throws XmlException if the xml is illegal or general error.
    */
   public static void toXml(XmlWriter xmlWriter) throws XmlException {
 
@@ -52,7 +50,7 @@ public class XmlValueManagerTest extends TestCase {
     xmlWriter.writeStartElement("tag1");
     xmlWriter.writeNamespaceDeclaration("ns3", ns3);
     xmlWriter.writeAttribute("atr", "val");
-    xmlWriter.writeCharacters("Hello World!&<>äöüßÄÖÜ");
+    xmlWriter.writeCharacters("Hello World!&<>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     xmlWriter.writeStartElement("tag2", "ns2", "http://URI2");
     xmlWriter.writeAttribute("atr", "val&<>\"");
     xmlWriter.writeCharacters("Hello World!");
@@ -67,10 +65,8 @@ public class XmlValueManagerTest extends TestCase {
   /**
    * This method does the test.
    * 
-   * @throws XmlException
-   *         on xml problem.
-   * @throws ValueParseException
-   *         on parsing problem.
+   * @throws XmlException on xml problem.
+   * @throws ValueParseException on parsing problem.
    */
   public void test() throws XmlException, ValueParseException {
 

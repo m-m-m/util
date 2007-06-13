@@ -16,8 +16,7 @@ public interface SearchHighlighter {
    * 
    * @see net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()
    * 
-   * @param text
-   *        is the plain text to highlight.
+   * @param text is the plain text to highlight.
    * @return the highlighted text.
    */
   String getHighlightedText(String text);

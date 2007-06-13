@@ -21,10 +21,9 @@ public class LuceneSearchEntry extends AbstractSearchEntry {
   private final Document document;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param entry
-   *        is the lucene document that represents the actual entry.
+   * @param entry is the lucene document that represents the actual entry.
    */
   public LuceneSearchEntry(Document entry) {
 

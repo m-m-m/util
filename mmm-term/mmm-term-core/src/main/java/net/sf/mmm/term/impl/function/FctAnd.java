@@ -43,10 +43,8 @@ public class FctAnd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the binary AND of both arguments.
    */
   public static Integer and(Integer argument1, Integer argument2) {
@@ -57,10 +55,8 @@ public class FctAnd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the logical AND of both arguments (<code>true</code> if both
    *         arguments are <code>true</code>).
    */

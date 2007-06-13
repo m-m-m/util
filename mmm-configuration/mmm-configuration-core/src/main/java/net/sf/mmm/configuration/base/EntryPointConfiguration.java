@@ -22,10 +22,8 @@ public class EntryPointConfiguration extends ConfigurationProxy {
   /**
    * The constructor.
    * 
-   * @param parentConfiguration
-   *        is the parent of this configuration.
-   * @param entryPoint
-   *        is the configuration that should appear as child of the
+   * @param parentConfiguration is the parent of this configuration.
+   * @param entryPoint is the configuration that should appear as child of the
    *        <code>parentConfiguration</code>.
    */
   public EntryPointConfiguration(AbstractConfiguration parentConfiguration,

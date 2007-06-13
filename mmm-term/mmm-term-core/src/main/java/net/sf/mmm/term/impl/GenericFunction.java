@@ -82,8 +82,7 @@ public class GenericFunction extends BasicFunction {
   /**
    * The constructor.
    * 
-   * @param functionName
-   *        is the name of the function.
+   * @param functionName is the name of the function.
    */
   public GenericFunction(String functionName) {
 
@@ -93,10 +92,8 @@ public class GenericFunction extends BasicFunction {
   /**
    * The constructor.
    * 
-   * @param functionName
-   *        is the name of the function.
-   * @param operatorSymbol
-   *        is the symbol of the function as operator.
+   * @param functionName is the name of the function.
+   * @param operatorSymbol is the symbol of the function as operator.
    */
   public GenericFunction(String functionName, String operatorSymbol) {
 
@@ -106,12 +103,9 @@ public class GenericFunction extends BasicFunction {
   /**
    * The constructor.
    * 
-   * @param functionName
-   *        is the name of the function.
-   * @param operatorSymbol
-   *        is the symbol of the function as operator.
-   * @param operatorPriority
-   *        is the priority of the function as operator.
+   * @param functionName is the name of the function.
+   * @param operatorSymbol is the symbol of the function as operator.
+   * @param operatorPriority is the priority of the function as operator.
    */
   public GenericFunction(String functionName, String operatorSymbol,
       OperatorPriority operatorPriority) {
@@ -129,13 +123,12 @@ public class GenericFunction extends BasicFunction {
   /**
    * The constructor.
    * 
-   * @param partialFunction
-   *        is the initial implementation to
+   * @param partialFunction is the initial implementation to
    *        {@link #addImplementation(Class) add}. It must declare the fields
    *        {@link #FIELD_NAME_NAME}, {@link #FIELD_NAME_SYMBOL} and
    *        {@link #FIELD_NAME_PRIORITY}.
-   * @throws FunctionException
-   *         if the given <code>partialFunction</code> is illegal.
+   * @throws FunctionException if the given <code>partialFunction</code> is
+   *         illegal.
    */
   public GenericFunction(Class<?> partialFunction) throws FunctionException {
 
@@ -204,8 +197,7 @@ public class GenericFunction extends BasicFunction {
    * 
    * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
    * 
-   * @param minimumArgumentCount
-   *        is the new minimum argument count value.
+   * @param minimumArgumentCount is the new minimum argument count value.
    */
   public void setMinimumArgumentCount(int minimumArgumentCount) {
 
@@ -221,8 +213,7 @@ public class GenericFunction extends BasicFunction {
    * 
    * @see net.sf.mmm.term.api.Function#getMinimumArgumentCount()
    * 
-   * @param maximumArgumentCount
-   *        is the new maximum argument count value.
+   * @param maximumArgumentCount is the new maximum argument count value.
    */
   public void setMaximumArgumentCount(int maximumArgumentCount) {
 
@@ -246,15 +237,11 @@ public class GenericFunction extends BasicFunction {
    * {@link CalculationException} or {@link RuntimeException}.</li>
    * </ul>
    * 
-   * @param method
-   *        is the method to check.
-   * @param partialFunction
-   *        is the class containing the method.
-   * @param signature
-   *        is the signature of the given method.
-   * @throws FunctionException
-   *         if the given method applies to the points above except the last
-   *         one.
+   * @param method is the method to check.
+   * @param partialFunction is the class containing the method.
+   * @param signature is the signature of the given method.
+   * @throws FunctionException if the given method applies to the points above
+   *         except the last one.
    */
   protected void validateMethod(Method method, Class<?> partialFunction, Signature signature)
       throws FunctionException {
@@ -277,27 +264,23 @@ public class GenericFunction extends BasicFunction {
         return;
       }
     }
-    throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_METHOD, partialFunction,
-        this, signature);
+    throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_METHOD, partialFunction, this,
+        signature);
   }
 
   /**
    * This method gets the {@link Field#get(java.lang.Object) value} of a
    * {@link Modifier#isStatic(int) static} {@link Field field}.
    * 
-   * @param <T>
-   *        the templated type the requested field is assigned to.
-   * @param partialFunction
-   *        is the class containing the requested field.
-   * @param fieldName
-   *        is the {@link Field#getName() name} of the requested field.
-   * @param fieldType
-   *        is the type the requested field is assigned to. Therefore the field
-   *        declaration (!) must be assignable to this type.
+   * @param <T> the templated type the requested field is assigned to.
+   * @param partialFunction is the class containing the requested field.
+   * @param fieldName is the {@link Field#getName() name} of the requested
+   *        field.
+   * @param fieldType is the type the requested field is assigned to. Therefore
+   *        the field declaration (!) must be assignable to this type.
    * @return the value of the field with the given type.
-   * @throws FunctionException
-   *         if the requested field does NOT exist, is NOT accessable or has the
-   *         wrong type.
+   * @throws FunctionException if the requested field does NOT exist, is NOT
+   *         accessable or has the wrong type.
    */
   protected <T> T getStaticField(Class<?> partialFunction, String fieldName, Class<T> fieldType)
       throws FunctionException {
@@ -313,11 +296,9 @@ public class GenericFunction extends BasicFunction {
   /**
    * This method validates the given partial implementation.
    * 
-   * @param partialFunction
-   *        is a partial implemenetation of this function. See
+   * @param partialFunction is a partial implemenetation of this function. See
    *        {@link #addImplementation(Class)}.
-   * @throws FunctionException
-   *         if the given implementation is illegal.
+   * @throws FunctionException if the given implementation is illegal.
    */
   protected void validateClass(Class<?> partialFunction) throws FunctionException {
 
@@ -325,14 +306,13 @@ public class GenericFunction extends BasicFunction {
     int classModifiers = partialFunction.getModifiers();
     if (Modifier.isAbstract(classModifiers) || Modifier.isInterface(classModifiers)
         || !Modifier.isPublic(classModifiers)) {
-      throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_CLASS, partialFunction,
-          this);
+      throw new FunctionException(NlsBundleTermCore.ERR_FCT_ILLEGAL_CLASS, partialFunction, this);
     }
     // check if operator is valid...
     String operator = getStaticField(partialFunction, FIELD_NAME_SYMBOL, String.class);
     if (!BasicUtil.isEqual(this.symbol, operator)) {
-      throw new FunctionException(NlsBundleTermCore.ERR_FCT_WRONG_SYMBOL, partialFunction,
-          this, operator);
+      throw new FunctionException(NlsBundleTermCore.ERR_FCT_WRONG_SYMBOL, partialFunction, this,
+          operator);
     }
   }
 
@@ -342,14 +322,12 @@ public class GenericFunction extends BasicFunction {
    * merged to this generic function. <br>
    * See typdescription of this class for more details.
    * 
-   * @param partialFunction
-   *        is a partial implemenetation of this function. It is a class that
-   *        has one or more static methods with the name of this function.
-   *        Please follow the naming convention and use the "Fct" followed by
-   *        the capitalized name of this function as prefix for the classname of
-   *        your partial implementation.
-   * @throws FunctionException
-   *         if the implementation is illegal.
+   * @param partialFunction is a partial implemenetation of this function. It is
+   *        a class that has one or more static methods with the name of this
+   *        function. Please follow the naming convention and use the "Fct"
+   *        followed by the capitalized name of this function as prefix for the
+   *        classname of your partial implementation.
+   * @throws FunctionException if the implementation is illegal.
    */
   public void addImplementation(Class<?> partialFunction) throws FunctionException {
 
@@ -394,8 +372,7 @@ public class GenericFunction extends BasicFunction {
    * This method finds the method implementing the function for the given
    * signature.
    * 
-   * @param signature
-   *        is the signature the method is called with.
+   * @param signature is the signature the method is called with.
    * @return the method for the given signature.
    * @throws CalculationException
    */
@@ -441,14 +418,11 @@ public class GenericFunction extends BasicFunction {
    * @see Function#calculate(net.sf.mmm.context.api.Context,
    *      net.sf.mmm.term.api.Term...)
    * 
-   * @param method
-   *        is the method implementing the function call for the given
+   * @param method is the method implementing the function call for the given
    *        arguments.
-   * @param arguments
-   *        are the arguments given to this function.
+   * @param arguments are the arguments given to this function.
    * @return the result of
-   * @throws CalculationException
-   *         if the calculation fails.
+   * @throws CalculationException if the calculation fails.
    */
   protected Object doCalculate(Method method, Object[] arguments) throws CalculationException {
 
@@ -485,7 +459,7 @@ public class GenericFunction extends BasicFunction {
   public Object calculate(Object argument) throws ValueException {
 
     Method method = getMethod(new Signature(argument.getClass()));
-    return doCalculate(method, new Object[] {argument});
+    return doCalculate(method, new Object[] { argument });
   }
 
   /**
@@ -495,7 +469,7 @@ public class GenericFunction extends BasicFunction {
   public Object calculate(Object argument1, Object argument2) throws ValueException {
 
     Method method = getMethod(new Signature(argument1.getClass(), argument2.getClass()));
-    return doCalculate(method, new Object[] {argument1, argument2});
+    return doCalculate(method, new Object[] { argument1, argument2 });
   }
 
 }

@@ -24,10 +24,8 @@ public class DuplicateInstanceIdException extends ComponentException {
   /**
    * The constructor.
    * 
-   * @param instanceId
-   *        is the instance-ID that is already in use.
-   * @param descriptor
-   *        is the descriptor of the component.
+   * @param instanceId is the instance-ID that is already in use.
+   * @param descriptor is the descriptor of the component.
    */
   public DuplicateInstanceIdException(String instanceId, ComponentDescriptor descriptor) {
 

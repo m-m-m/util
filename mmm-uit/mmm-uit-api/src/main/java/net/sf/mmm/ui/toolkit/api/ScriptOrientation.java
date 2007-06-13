@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: ScriptOrientation.java 258 2007-05-10 21:24:53Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;

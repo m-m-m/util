@@ -58,8 +58,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * The constructor.
    * 
-   * @param indexModifier
-   *        is the index modifier to use.
+   * @param indexModifier is the index modifier to use.
    */
   public LuceneSearchIndexer(IndexModifier indexModifier) {
 
@@ -70,8 +69,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * This method sets the lucene analyzer used by this search engine.
    * 
-   * @param luceneAnalyzer
-   *        the analyzer to set
+   * @param luceneAnalyzer the analyzer to set
    */
   public void setAnalyzer(Analyzer luceneAnalyzer) {
 
@@ -79,8 +77,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
-   * @param modifier
-   *        the modifier to set
+   * @param modifier the modifier to set
    */
   public void setIndexModifier(IndexModifier modifier) {
 
@@ -91,8 +88,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * This method sets the path in the local filesystem where the search-index is
    * located. You can also use {@link #setIndexModifier(IndexModifier)} instead.
    * 
-   * @param searchIndexPath
-   *        the indexPath to set
+   * @param searchIndexPath the indexPath to set
    */
   public void setIndexPath(String searchIndexPath) {
 
@@ -105,8 +101,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * will be created when the indexing is started. The default is
    * <code>false</code>.
    * 
-   * @param update
-   *        the update flag to set.
+   * @param update the update flag to set.
    */
   public void setUpdate(boolean update) {
 
@@ -117,8 +112,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * This method initializes this class. It has to be called after construction
    * and injection is completed.
    * 
-   * @throws IOException
-   *         if the initialization fails with an I/O error.
+   * @throws IOException if the initialization fails with an I/O error.
    */
   @PostConstruct
   public void initialize() throws IOException {

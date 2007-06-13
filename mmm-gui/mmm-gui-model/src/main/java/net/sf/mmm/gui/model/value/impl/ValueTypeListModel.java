@@ -42,8 +42,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   /**
    * This method sets the valueService.
    * 
-   * @param service
-   *        is the value-service to set.
+   * @param service is the value-service to set.
    */
   @Resource
   public void setValueService(ValueService service) {

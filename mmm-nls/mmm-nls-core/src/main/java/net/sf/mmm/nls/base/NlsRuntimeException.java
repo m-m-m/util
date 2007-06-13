@@ -23,11 +23,9 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
-   * @param arguments
-   *        are the arguments filled into the
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public NlsRuntimeException(String internaitionalizedMessage, Object... arguments) {
@@ -38,13 +36,10 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * The constructor.
    * 
-   * @param nested
-   *        is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage
-   *        is a short description of the problem. It is used for
-   *        internationalization and should be in English language.
-   * @param arguments
-   *        are the arguments filled into the
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public NlsRuntimeException(Throwable nested, String internaitionalizedMessage,
@@ -56,8 +51,8 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage
-   *        the internationalized message describing the problem briefly.
+   * @param internationalizedMessage the internationalized message describing
+   *        the problem briefly.
    */
   public NlsRuntimeException(NlsMessage internationalizedMessage) {
 
@@ -68,10 +63,9 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * The constructor.
    * 
-   * @param nested
-   *        is the throwable that caused this exception.
-   * @param internationalizedMessage
-   *        the internationalized message describing the problem briefly.
+   * @param nested is the throwable that caused this exception.
+   * @param internationalizedMessage the internationalized message describing
+   *        the problem briefly.
    */
   public NlsRuntimeException(Throwable nested, NlsMessage internationalizedMessage) {
 

@@ -43,8 +43,7 @@ public class FctNot {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the bitwise negation of the given argument.
    */
   public static Integer not(Integer argument) {
@@ -55,8 +54,7 @@ public class FctNot {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument
-   *        is the argument of the function.
+   * @param argument is the argument of the function.
    * @return the logical negation of the given argument.
    */
   public static Boolean not(Boolean argument) {

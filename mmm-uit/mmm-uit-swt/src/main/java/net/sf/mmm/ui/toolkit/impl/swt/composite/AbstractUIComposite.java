@@ -30,12 +30,10 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param borderTitle
-   *        is the title of the border or <code>null</code> for NO border.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param borderTitle is the title of the border or <code>null</code> for NO
+   *        border.
    */
   public AbstractUIComposite(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle) {
 
@@ -53,10 +51,10 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    * {@inheritDoc}
    */
   public Orientation getOrientation() {
-  
+
     return Orientation.HORIZONTAL;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -133,8 +131,8 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   /**
    * This method determines if an SWT child will automatically be attached to
    * this the {@link #getActiveSyncAccess() composite}. Override this method
-   * and return <code>false</code> if you need special behaviour to build
-   * the SWT tree.
+   * and return <code>false</code> if you need special behaviour to build the
+   * SWT tree.
    * 
    * @return <code>true</code> if children should be attached automatically,
    *         <code>false</code> if your implementation needs special
@@ -158,5 +156,5 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
       component.refresh(event);
     }
   }
-  
+
 }

@@ -97,8 +97,8 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
       true, true, false, true);
 
   /** the modifier of a static and read-only system-field */
-  public static final FieldModifiersImpl SYSTEM_STATIC_READONLY = new FieldModifiersImpl(true, false, true,
-      true, false);
+  public static final FieldModifiersImpl SYSTEM_STATIC_READONLY = new FieldModifiersImpl(true,
+      false, true, true, false);
 
   /** the modifier of a read-only system-field */
   public static final FieldModifiersImpl SYSTEM_READONLY = new FieldModifiersImpl(true, false,
@@ -118,12 +118,10 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
    * 
    * @see AbstractModifiers#AbstractModifiers(boolean, boolean)
    * 
-   * @param isReadOnly
-   *        is the value for the {@link #isReadOnly() read-only flag}.
-   * @param isStatic
-   *        is the value for the {@link #isStatic() static-flag}.
-   * @param isTransient
-   *        is the value for the {@link #isTransient() transient-flag}.
+   * @param isReadOnly is the value for the {@link #isReadOnly() read-only flag}.
+   * @param isStatic is the value for the {@link #isStatic() static-flag}.
+   * @param isTransient is the value for the
+   *        {@link #isTransient() transient-flag}.
    */
   public FieldModifiersImpl(boolean isSystem, boolean isFinal, boolean isReadOnly,
       boolean isStatic, boolean isTransient) {
@@ -138,8 +136,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   /**
    * The constructor.
    * 
-   * @param modifiers
-   *        is the modifiers object to copy.
+   * @param modifiers is the modifiers object to copy.
    */
   public FieldModifiersImpl(FieldModifiers modifiers) {
 
@@ -155,20 +152,16 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   /**
    * This method gets the modifiers.
    * 
-   * @param isSystem
-   *        is the value for the {@link #isSystem() system-flag}.
-   * @param isFinal
-   *        is the value for the {@link #isFinal() final-flag}.
-   * @param isReadOnly
-   *        is the value for the {@link #isReadOnly() read-only flag}.
-   * @param isStatic
-   *        is the value for the {@link #isStatic() static-flag}.
-   * @param isTransient
-   *        is the value for the {@link #isTransient() transient-flag}.
+   * @param isSystem is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal is the value for the {@link #isFinal() final-flag}.
+   * @param isReadOnly is the value for the {@link #isReadOnly() read-only flag}.
+   * @param isStatic is the value for the {@link #isStatic() static-flag}.
+   * @param isTransient is the value for the
+   *        {@link #isTransient() transient-flag}.
    * @return the requested modifiers.
    */
-  public static FieldModifiers getInstance(boolean isSystem, boolean isFinal,
-      boolean isReadOnly, boolean isStatic, boolean isTransient) {
+  public static FieldModifiers getInstance(boolean isSystem, boolean isFinal, boolean isReadOnly,
+      boolean isStatic, boolean isTransient) {
 
     validate(isSystem, isFinal, isReadOnly, isStatic, isTransient);
     if (isSystem) {
@@ -253,18 +246,13 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
   /**
    * This method validates the consistence of the modifier flags.
    * 
-   * @param isSystem
-   *        is the value for the {@link #isSystem() system-flag}.
-   * @param isFinal
-   *        is the value for the {@link #isFinal() final-flag}.
-   * @param isReadOnly
-   *        is the value for the {@link #isReadOnly() read-only flag}.
-   * @param isStatic
-   *        is the value for the {@link #isStatic() static-flag}.
-   * @param isTransient
-   *        is the value for the {@link #isTransient() transient-flag}.
-   * @throws IllegalModifiersException
-   *         if the flags are inconsistent.
+   * @param isSystem is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal is the value for the {@link #isFinal() final-flag}.
+   * @param isReadOnly is the value for the {@link #isReadOnly() read-only flag}.
+   * @param isStatic is the value for the {@link #isStatic() static-flag}.
+   * @param isTransient is the value for the
+   *        {@link #isTransient() transient-flag}.
+   * @throws IllegalModifiersException if the flags are inconsistent.
    */
   protected static void validate(boolean isSystem, boolean isFinal, boolean isReadOnly,
       boolean isStatic, boolean isTransient) throws IllegalModifiersException {
@@ -429,7 +417,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
         buffer.append('R');
       } else if (value.isTransient()) {
         buffer.append('T');
-      } 
+      }
       if (buffer.length() == 0) {
         buffer.append('N');
       }
@@ -438,6 +426,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
 
     /**
      * TODO: javadoc
+     * 
      * @param element
      * @param attributeName
      * @param defaultValue

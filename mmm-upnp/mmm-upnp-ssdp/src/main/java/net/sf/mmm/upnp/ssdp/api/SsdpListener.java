@@ -20,8 +20,7 @@ public interface SsdpListener {
    * {@link SsdpListener listeners} is NOT allowd to modify the
    * <code>request</code> in any way!
    * 
-   * @param request
-   *        is the received request.
+   * @param request is the received request.
    */
   void receive(SsdpRequest request);
 

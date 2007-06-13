@@ -24,10 +24,8 @@ public abstract class AbstractModifiers implements Modifiers {
   /**
    * The constructor.
    * 
-   * @param isSystem
-   *        is the value for the {@link #isSystem() system-flag}.
-   * @param isFinal
-   *        is the value for the {@link #isFinal() final-flag}.
+   * @param isSystem is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal is the value for the {@link #isFinal() final-flag}.
    */
   public AbstractModifiers(boolean isSystem, boolean isFinal) {
 
@@ -39,8 +37,7 @@ public abstract class AbstractModifiers implements Modifiers {
   /**
    * The constructor.
    * 
-   * @param modifiers
-   *        is the modifiers object to copy.
+   * @param modifiers is the modifiers object to copy.
    */
   public AbstractModifiers(Modifiers modifiers) {
 

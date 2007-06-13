@@ -15,14 +15,12 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
  * @see net.sf.mmm.ui.toolkit.api.widget.UIComboBox
  * @see net.sf.mmm.ui.toolkit.api.widget.UISlideBar
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIListWidget<E> extends UIWidget, UIWriteSelectionIndex,
-    UIWriteSelectionValue<E> {
+public interface UIListWidget<E> extends UIWidget, UIWriteSelectionIndex, UIWriteSelectionValue<E> {
 
   /**
    * This method gets the model of this list.
@@ -34,8 +32,7 @@ public interface UIListWidget<E> extends UIWidget, UIWriteSelectionIndex,
   /**
    * This method sets the model of this list.
    * 
-   * @param newModel
-   *        is the new list model to set.
+   * @param newModel is the new list model to set.
    */
   void setModel(UIListModel<E> newModel);
 

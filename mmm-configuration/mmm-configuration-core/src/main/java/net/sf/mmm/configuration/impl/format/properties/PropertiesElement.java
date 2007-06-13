@@ -34,16 +34,13 @@ public class PropertiesElement extends AbstractConfigurationElement {
   /**
    * The constructor.
    * 
-   * @param parentConfiguration
-   *        is the {@link #getParent() parent} configuration.
-   * @param document
-   *        is the {@link #getOwnerDocument() owner-document}.
-   * @param propertyKey
-   *        is the {@link java.util.Properties#getProperty(String) property-key}.
-   * @param propertyName
-   *        is the {@link #getName() name}.
-   * @param propertyNamespace
-   *        is the {@link #getNamespaceUri() NameSpace-URI}.
+   * @param parentConfiguration is the {@link #getParent() parent}
+   *        configuration.
+   * @param document is the {@link #getOwnerDocument() owner-document}.
+   * @param propertyKey is the
+   *        {@link java.util.Properties#getProperty(String) property-key}.
+   * @param propertyName is the {@link #getName() name}.
+   * @param propertyNamespace is the {@link #getNamespaceUri() NameSpace-URI}.
    */
   public PropertiesElement(AbstractConfiguration parentConfiguration, PropertiesDocument document,
       String propertyKey, String propertyName, String propertyNamespace) {
@@ -68,10 +65,8 @@ public class PropertiesElement extends AbstractConfigurationElement {
   /**
    * This method gets the sub-name of a child.
    * 
-   * @param childName
-   *        is the name of the child.
-   * @param namespaceUri
-   *        is the namespace-URI.
+   * @param childName is the name of the child.
+   * @param namespaceUri is the namespace-URI.
    * @return the property-name of the child.
    */
   private String getSubName(String childName, String namespaceUri) {
@@ -88,7 +83,7 @@ public class PropertiesElement extends AbstractConfigurationElement {
       if (this.key.length() == 0) {
         subName = childName;
       } else {
-        subName = this.key + this.doc.getSeparator() + childName;        
+        subName = this.key + this.doc.getSeparator() + childName;
       }
       // this one is very tricky...
       AbstractConfiguration child = getChild(childName, namespaceUri);

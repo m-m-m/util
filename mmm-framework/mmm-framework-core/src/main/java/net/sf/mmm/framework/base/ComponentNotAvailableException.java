@@ -23,8 +23,7 @@ public class ComponentNotAvailableException extends ComponentException {
   /**
    * The constructor.
    * 
-   * @param specification
-   *        is the
+   * @param specification is the
    *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class) requested}
    *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}
    *        that is NOT

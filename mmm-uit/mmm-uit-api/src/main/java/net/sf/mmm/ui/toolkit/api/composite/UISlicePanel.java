@@ -52,26 +52,22 @@ public interface UISlicePanel extends UIPanel, UIWriteOrientation {
    * right. If the panel has vertical layout, the component will appear at the
    * bottom.
    * 
-   * @param component
-   *        is the component to add. The given component instance must be
-   *        created by the same factory.
-   * @param constraints
-   *        are the constraints that define the layout of the component in this
-   *        panel.
+   * @param component is the component to add. The given component instance must
+   *        be created by the same factory.
+   * @param constraints are the constraints that define the layout of the
+   *        component in this panel.
    */
   void addComponent(UIComponent component, LayoutConstraints constraints);
 
   /**
    * This method adds the given component at the given position.
    * 
-   * @param component
-   *        is the component to add. The given component instance must be
-   *        created by the same factory.
-   * @param constraints
-   *        are the constraints that define the layout of the component in this
-   *        panel.
-   * @param position
-   *        is the index position where the given component will be inserted.
+   * @param component is the component to add. The given component instance must
+   *        be created by the same factory.
+   * @param constraints are the constraints that define the layout of the
+   *        component in this panel.
+   * @param position is the index position where the given component will be
+   *        inserted.
    */
   void addComponent(UIComponent component, LayoutConstraints constraints, int position);
 

@@ -13,10 +13,8 @@ public interface UIWritePosition extends UIReadPosition {
   /**
    * This method sets the position of the object.
    * 
-   * @param x
-   *        is the position on the x-axsis (horizontal).
-   * @param y
-   *        is the position on the y-axsis (vertical).
+   * @param x is the position on the x-axsis (horizontal).
+   * @param y is the position on the y-axsis (vertical).
    */
   void setPosition(int x, int y);
 

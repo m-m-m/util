@@ -7,8 +7,8 @@ import net.sf.mmm.framework.api.IocContainer;
 import net.sf.mmm.framework.api.MutableIocContainer;
 
 /**
- * This is an implementation of the {@link IocContainer} interface that acts
- * as proxy on another instance.
+ * This is an implementation of the {@link IocContainer} interface that acts as
+ * proxy on another instance.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,8 +20,7 @@ public class IocContainerProxy implements IocContainer {
   /**
    * The constructor.
    * 
-   * @param proxyDelegate
-   *        is the instance this proxy delegates to.
+   * @param proxyDelegate is the instance this proxy delegates to.
    */
   public IocContainerProxy(IocContainer proxyDelegate) {
 

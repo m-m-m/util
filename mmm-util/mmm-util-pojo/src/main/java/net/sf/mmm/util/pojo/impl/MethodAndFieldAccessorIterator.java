@@ -24,15 +24,14 @@ public class MethodAndFieldAccessorIterator implements Iterator<AbstractPojoProp
   private final Iterator<AbstractPojoPropertyAccessor> fieldIterator;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param pojoClass
-   *        is the class for which the property-accessors should be iterated.
-   * @param onlyPublic
-   *        if <code>true</code> only {@link Modifier#isPublic(int) public}
-   *        methods will be considered for when searching for
-   *        property-accessors, else if <code>false</code> all implemented
-   *        methods are introspected.
+   * @param pojoClass is the class for which the property-accessors should be
+   *        iterated.
+   * @param onlyPublic if <code>true</code> only
+   *        {@link Modifier#isPublic(int) public} methods will be considered for
+   *        when searching for property-accessors, else if <code>false</code>
+   *        all implemented methods are introspected.
    */
   public MethodAndFieldAccessorIterator(Class<?> pojoClass, boolean onlyPublic) {
 

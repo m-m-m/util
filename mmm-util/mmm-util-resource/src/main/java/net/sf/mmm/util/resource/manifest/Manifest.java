@@ -58,8 +58,7 @@ public class Manifest {
   /**
    * The constructor.
    * 
-   * @param properties
-   *        is the map with the properties.
+   * @param properties is the map with the properties.
    */
   public Manifest(Map<String, String> properties) {
 

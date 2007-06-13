@@ -34,13 +34,12 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parentObject
-   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
-   *        that created this object. It may be <code>null</code>.
+   * @param parentObject is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        created this object. It may be <code>null</code>.
    */
   public AbstractUINode(AbstractUIFactory uiFactory, UINode parentObject) {
 
@@ -62,8 +61,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * is then added to a UI composite (or whenever it moves from one composite to
    * another).
    * 
-   * @param newParent
-   *        is the new parent of this object.
+   * @param newParent is the new parent of this object.
    */
   public void setParent(UINode newParent) {
 
@@ -75,10 +73,8 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * given <code>parentObject</code>. The method only exists for visibility
    * reasons (so the <code>setParent</code> method can be protected).
    * 
-   * @param childObject
-   *        is the UI object whos parent is to be set.
-   * @param parentObject
-   *        is the parent UI object to set.
+   * @param childObject is the UI object whos parent is to be set.
+   * @param parentObject is the parent UI object to set.
    */
   protected void setParent(AbstractUINode childObject, UINode parentObject) {
 
@@ -168,8 +164,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
   /**
    * This method invokes an action by notifying all registered listeners.
    * 
-   * @param action
-   *        is the action that is invoked.
+   * @param action is the action that is invoked.
    */
   public void invoke(ActionType action) {
 
@@ -200,14 +195,14 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * {@inheritDoc}
    */
   public void refresh() {
+
     refresh(UIRefreshEvent.DEFAULT);
   }
-  
+
   /**
    * This method refreshes this node.
    * 
-   * @param event
-   *        is the event with details about the refresh.
+   * @param event is the event with details about the refresh.
    */
   public void refresh(UIRefreshEvent event) {
 

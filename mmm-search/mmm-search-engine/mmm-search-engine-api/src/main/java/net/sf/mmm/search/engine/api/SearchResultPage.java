@@ -116,9 +116,8 @@ public interface SearchResultPage {
    * {@link SearchHit hit} is
    * <code>{@link #getPageIndex()}*{@link #getHitsPerPage()}+index</code>.
    * 
-   * @param index
-   *        is the index of the requested hit. It has to be in the range from
-   *        <code>0</code> to <code>{@link #getPageHitCount()} - 1</code>.
+   * @param index is the index of the requested hit. It has to be in the range
+   *        from <code>0</code> to <code>{@link #getPageHitCount()} - 1</code>.
    * @return the requested {@link SearchHit hit}.
    */
   SearchHit getPageHit(int index);
@@ -143,8 +142,7 @@ public interface SearchResultPage {
    * 
    * @see #getPagingEndIndex(int)
    * 
-   * @param pagingRange
-   *        the number of paging links forward and backwards.
+   * @param pagingRange the number of paging links forward and backwards.
    * @return the {@link #getPageIndex() page-index} to start paging with.
    */
   int getPagingStartIndex(int pagingRange);
@@ -169,8 +167,7 @@ public interface SearchResultPage {
    * 
    * @see #getPagingStartIndex(int)
    * 
-   * @param pagingRange
-   *        the number of paging links forward and backwards.
+   * @param pagingRange the number of paging links forward and backwards.
    * @return the {@link #getPageIndex() page-index} to end paging with.
    */
   int getPagingEndIndex(int pagingRange);

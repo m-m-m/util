@@ -19,36 +19,31 @@ import net.sf.mmm.framework.api.LifecycleMethod;
  */
 public class LifecycleException extends ComponentException {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = -6987247060118666045L;
+  /** UID for serialization. */
+  private static final long serialVersionUID = -6987247060118666045L;
 
-    /**
-     * The constructor.
-     * 
-     * @param instanceContainer
-     *        is the container of the component instance.
-     * @param lifecyclePhase
-     *        is the lifecycle phase that failed.
-     */
-    public LifecycleException(ComponentInstanceContainer instanceContainer, String lifecyclePhase) {
+  /**
+   * The constructor.
+   * 
+   * @param instanceContainer is the container of the component instance.
+   * @param lifecyclePhase is the lifecycle phase that failed.
+   */
+  public LifecycleException(ComponentInstanceContainer instanceContainer, String lifecyclePhase) {
 
-        super(NlsBundleFrameworkCore.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
-    }
+    super(NlsBundleFrameworkCore.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param instanceContainer
-     *        is the container of the component instance.
-     * @param lifecyclePhase
-     *        is the lifecycle phase that failed.
-     * @param nested
-     *        is the exception that caused this error.
-     */
-    public LifecycleException(ComponentInstanceContainer instanceContainer,
-            String lifecyclePhase, Throwable nested) {
+  /**
+   * The constructor.
+   * 
+   * @param instanceContainer is the container of the component instance.
+   * @param lifecyclePhase is the lifecycle phase that failed.
+   * @param nested is the exception that caused this error.
+   */
+  public LifecycleException(ComponentInstanceContainer instanceContainer, String lifecyclePhase,
+      Throwable nested) {
 
-        super(nested, NlsBundleFrameworkCore.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
-    }
+    super(nested, NlsBundleFrameworkCore.ERR_LIFECYCLE, lifecyclePhase, instanceContainer);
+  }
 
 }

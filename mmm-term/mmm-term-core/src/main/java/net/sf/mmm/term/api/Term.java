@@ -103,13 +103,11 @@ public interface Term extends XmlSerializable {
    * This method evaluates the current term to a value. The term might contain
    * variables that are resolved through the given <code>context</code>.
    * 
-   * @param context
-   *        is the environment holding the variables used for evaluation.
+   * @param context is the environment holding the variables used for
+   *        evaluation.
    * @return the result value. May be <code>null</code>.
-   * @throws CalculationException
-   *         if a calculation fails during evaluation.
-   * @throws ValueException
-   *         if an argument (e.g. a
+   * @throws CalculationException if a calculation fails during evaluation.
+   * @throws ValueException if an argument (e.g. a
    *         {@link Context#getValue(String) context value}) is
    *         {@link GenericValue#isEmpty() empty} or has the
    *         {@link net.sf.mmm.value.api.WrongValueTypeException wrong type}.

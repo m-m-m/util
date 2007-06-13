@@ -13,8 +13,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
 
 /**
- * This class is the implementation of the UIMenuBar interface using SWT as
- * the UI toolkit.
+ * This class is the implementation of the UIMenuBar interface using SWT as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,12 +26,9 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param swtMenuBar
-   *        is the SWT menu bar to wrap.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param swtMenuBar is the SWT menu bar to wrap.
    */
   public UIMenuBarImpl(UIFactorySwt uiFactory, UIWindowImpl parentObject, Menu swtMenuBar) {
 

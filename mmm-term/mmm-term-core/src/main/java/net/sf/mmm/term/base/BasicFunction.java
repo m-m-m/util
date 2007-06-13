@@ -64,18 +64,16 @@ public abstract class BasicFunction extends AbstractFunction {
    * 
    * @see net.sf.mmm.term.api.Function#calculate(Context, Term[])
    * 
-   * @param environment
-   *        is a set of variables used to evaluate the (conditional) terms
-   *        given as arguments.
-   * @param arguments
-   *        is an array containing all arguments for the function as terms.
-   *        The terms may be lazy evaluated meaning that they only need to be
-   *        evaluated as needed - e.g. <code>0*(...)</code> will be always
-   *        <code>0</code>. The array MUST NOT be modified by this method!
+   * @param environment is a set of variables used to evaluate the (conditional)
+   *        terms given as arguments.
+   * @param arguments is an array containing all arguments for the function as
+   *        terms. The terms may be lazy evaluated meaning that they only need
+   *        to be evaluated as needed - e.g. <code>0*(...)</code> will be
+   *        always <code>0</code>. The array MUST NOT be modified by this
+   *        method!
    * @return the result the calculation.
-   * @throws ValueException
-   *         if an error occurs during calculation e.g. zero divide or
-   *         incompatible types.
+   * @throws ValueException if an error occurs during calculation e.g. zero
+   *         divide or incompatible types.
    */
   public Object calculateBinary(Context environment, Term... arguments) throws ValueException {
 
@@ -94,15 +92,12 @@ public abstract class BasicFunction extends AbstractFunction {
   /**
    * This method performs the calculation of the two argument values.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
-   * @return the result of the calculation of this functions with the given
-   *         two argument values.
-   * @throws ValueException
-   *         if an error occurs during calculation e.g. zero divide or
-   *         incompatible types.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
+   * @return the result of the calculation of this functions with the given two
+   *         argument values.
+   * @throws ValueException if an error occurs during calculation e.g. zero
+   *         divide or incompatible types.
    */
   public Object calculate(Object argument1, Object argument2) throws ValueException {
 
@@ -112,11 +107,10 @@ public abstract class BasicFunction extends AbstractFunction {
   /**
    * This method performs the actual calculation of the unary function.
    * 
-   * @param argument
-   *        is the input value for this unary function.
+   * @param argument is the input value for this unary function.
    * @return the result of this function applied to the given argument.
-   * @throws ValueException
-   *         if the given argument value is illegal for this function.
+   * @throws ValueException if the given argument value is illegal for this
+   *         function.
    */
   public Object calculate(Object argument) throws ValueException {
 
@@ -127,8 +121,7 @@ public abstract class BasicFunction extends AbstractFunction {
    * This method performs the actual calculation of the non-arg function.
    * 
    * @return the result of this function with no arguments.
-   * @throws ValueException
-   *         if something went wrong.
+   * @throws ValueException if something went wrong.
    */
   public Object calculate() throws ValueException {
 

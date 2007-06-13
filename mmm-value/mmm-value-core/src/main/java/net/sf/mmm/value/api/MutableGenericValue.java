@@ -15,85 +15,71 @@ public interface MutableGenericValue extends GenericValue {
   /**
    * This method sets the value.
    * 
-   * @param newValue
-   *        is the new value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the value is NO string.
+   * @param newValue is the new value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the value is NO string.
    */
   void setString(String newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the value.
    * 
-   * @param newValue
-   *        is the new value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the value is NO boolean.
+   * @param newValue is the new value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the value is NO boolean.
    */
   void setBoolean(boolean newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the value.
    * 
-   * @param newValue
-   *        is the new value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the value is NO integer.
+   * @param newValue is the new value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the value is NO integer.
    */
   void setInteger(int newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the value.
    * 
-   * @param newValue
-   *        is the new value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the value is NO java-class.
+   * @param newValue is the new value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the value is NO java-class.
    */
   void setJavaClass(Class<?> newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the value.
    * 
-   * @param newValue
-   *        is the new value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the value is NO double.
+   * @param newValue is the new value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the value is NO double.
    */
   void setDouble(double newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the value.
    * 
-   * @param newValue
-   *        is the new value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the value is NO date.
+   * @param newValue is the new value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the value is NO date.
    */
   void setDate(Date newValue) throws ValueNotEditableException, WrongValueTypeException;
 
   /**
    * This method sets the actual value.
    * 
-   * @param newValue
-   *        is the value to set.
-   * @throws ValueNotEditableException
-   *         if the node is NOT {@link #isEditable() editable}.
-   * @throws WrongValueTypeException
-   *         if the type of the given object is NOT accepted by this
-   *         implementation.
+   * @param newValue is the value to set.
+   * @throws ValueNotEditableException if the node is NOT
+   *         {@link #isEditable() editable}.
+   * @throws WrongValueTypeException if the type of the given object is NOT
+   *         accepted by this implementation.
    */
   void setObject(Object newValue) throws ValueNotEditableException, WrongValueTypeException;
 

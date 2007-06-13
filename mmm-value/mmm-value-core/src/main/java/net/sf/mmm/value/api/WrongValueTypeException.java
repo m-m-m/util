@@ -20,10 +20,8 @@ public class WrongValueTypeException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param genericValue
-   *        is the generic value that has the wrong type.
-   * @param expectedType
-   *        is the expected type of the value.
+   * @param genericValue is the generic value that has the wrong type.
+   * @param expectedType is the expected type of the value.
    */
   public WrongValueTypeException(GenericValue genericValue, Class<?> expectedType) {
 
@@ -33,12 +31,9 @@ public class WrongValueTypeException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param genericValue
-   *        is the generic value that has the wrong type.
-   * @param expectedType
-   *        is the expected type of the value.
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param genericValue is the generic value that has the wrong type.
+   * @param expectedType is the expected type of the value.
+   * @param nested is the throwable that caused this exception.
    */
   public WrongValueTypeException(GenericValue genericValue, Class<?> expectedType, Throwable nested) {
 
@@ -50,8 +45,7 @@ public class WrongValueTypeException extends ValueException {
    * This method gets the type reflecting the actual value contained in the
    * <code>genericValue</code>.
    * 
-   * @param genericValue
-   *        is the value for which the type is requested.
+   * @param genericValue is the value for which the type is requested.
    * @return the type of the given <code>genericValue</code>.
    */
   private static Class<?> getType(GenericValue genericValue) {

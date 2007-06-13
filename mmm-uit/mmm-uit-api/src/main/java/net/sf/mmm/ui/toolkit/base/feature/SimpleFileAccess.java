@@ -25,8 +25,7 @@ public class SimpleFileAccess implements FileAccess {
   /**
    * The constructor.
    * 
-   * @param dataFile
-   *        is the file to access.
+   * @param dataFile is the file to access.
    */
   public SimpleFileAccess(File dataFile) {
 

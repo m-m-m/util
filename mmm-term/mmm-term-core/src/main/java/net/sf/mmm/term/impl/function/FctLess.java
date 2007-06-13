@@ -45,10 +45,8 @@ public class FctLess {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is less than the second.
    */
   public static Boolean less(Number argument1, Number argument2) {
@@ -59,10 +57,8 @@ public class FctLess {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is after the second.
    */
   public static Boolean less(Date argument1, Date argument2) {
@@ -73,10 +69,8 @@ public class FctLess {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is before the second.
    */
   public static Boolean less(String argument1, String argument2) {

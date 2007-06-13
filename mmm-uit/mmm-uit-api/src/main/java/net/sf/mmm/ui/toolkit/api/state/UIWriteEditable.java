@@ -23,9 +23,8 @@ public interface UIWriteEditable {
   /**
    * This method set the editable status.
    * 
-   * @param editableFlag
-   *        if <code>true</code> the object will become editable, if
-   *        <code>false</code> the object will become uneditable.
+   * @param editableFlag if <code>true</code> the object will become editable,
+   *        if <code>false</code> the object will become uneditable.
    */
   void setEditable(boolean editableFlag);
 

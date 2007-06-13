@@ -20,12 +20,11 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.ListModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using Swing as the
+ * UI toolkit.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected with this
- *        widget.
+ * @param <E> is the templated type of the elements that can be selected with
+ *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -43,10 +42,8 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
   public UIListImpl(UIFactorySwing uiFactory, UINode parentObject) {
 
@@ -77,9 +74,8 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   /**
    * This method sets the selection mode of this list.
    * 
-   * @param multiSelection -
-   *        if <code>true</code> the user can select multiple items, else ony
-   *        one.
+   * @param multiSelection - if <code>true</code> the user can select multiple
+   *        items, else ony one.
    */
   public void setMultiSelection(boolean multiSelection) {
 

@@ -48,15 +48,11 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the menu.
-   * @param swtMenuItem
-   *        is the menu-item to access.
-   * @param itemText
-   *        is the text of the <code>swtMenuItem</code>.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
+   * @param swtMenuItem is the menu-item to access.
+   * @param itemText is the text of the <code>swtMenuItem</code>.
    */
   public SyncMenuItemAccess(UIFactorySwt uiFactory, int swtStyle, MenuItem swtMenuItem,
       String itemText) {
@@ -97,8 +93,7 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
    * This method sets the {@link MenuItem#setText(String) text} of the
    * menu-item.
    * 
-   * @param newText
-   *        is the text to set.
+   * @param newText is the text to set.
    */
   public void setText(String newText) {
 
@@ -136,8 +131,7 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
    * {@link org.eclipse.swt.widgets.MenuItem#setSelection(boolean) selection-status}
    * of the menu-item.
    * 
-   * @param selection
-   *        is the selection-status to set.
+   * @param selection is the selection-status to set.
    */
   public void setSelected(boolean selection) {
 

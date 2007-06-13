@@ -45,13 +45,10 @@ public class FctDivide {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the division of both arguments.
-   * @throws CalculationException
-   *         if the second argument is <code>0</code>.
+   * @throws CalculationException if the second argument is <code>0</code>.
    */
   public static Double div(Number argument1, Number argument2) throws CalculationException {
 

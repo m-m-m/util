@@ -25,8 +25,7 @@ public class DecoratingLayoutManager extends Layout {
   /**
    * The constructor.
    * 
-   * @param decoratedComponent
-   *        is the decorated component to layout.
+   * @param decoratedComponent is the decorated component to layout.
    */
   public DecoratingLayoutManager(UIDecoratedComponent decoratedComponent) {
 
@@ -42,7 +41,7 @@ public class DecoratingLayoutManager extends Layout {
 
     return this.delegate.computeSize(composite, flushCache);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -60,8 +59,7 @@ public class DecoratingLayoutManager extends Layout {
     /**
      * The constructor.
      * 
-     * @param decoratedComponent
-     *        is the decorated component to layout.
+     * @param decoratedComponent is the decorated component to layout.
      */
     public Manager(UIDecoratedComponent decoratedComponent) {
 
@@ -71,11 +69,9 @@ public class DecoratingLayoutManager extends Layout {
     /**
      * @see LayoutManager#layout(org.eclipse.swt.widgets.Composite, boolean)
      * 
-     * @param composite
-     *        is the panel.
-     * @param flushCache -
-     *        <code>true</code> if all cached data must be refreshed,
-     *        <code>false</code> otherwise.
+     * @param composite is the panel.
+     * @param flushCache - <code>true</code> if all cached data must be
+     *        refreshed, <code>false</code> otherwise.
      */
     protected void layout(Composite composite, boolean flushCache) {
 
@@ -86,11 +82,9 @@ public class DecoratingLayoutManager extends Layout {
     /**
      * @see LayoutManager#computeSize(Composite, int, int, boolean)
      * 
-     * @param composite
-     *        is the panel.
-     * @param flushCache -
-     *        <code>true</code> if all cached data must be refreshed,
-     *        <code>false</code> otherwise.
+     * @param composite is the panel.
+     * @param flushCache - <code>true</code> if all cached data must be
+     *        refreshed, <code>false</code> otherwise.
      * @return the compited size.
      */
     protected Point computeSize(Composite composite, boolean flushCache) {

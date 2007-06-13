@@ -36,9 +36,8 @@ public class MaximumSizer implements UIReadSize {
   /**
    * The constructor.
    * 
-   * @param widthOverride
-   *        if <code>true</code> the {@link #getHeight() height} will be the
-   *        maximum height of all added sizes.
+   * @param widthOverride if <code>true</code> the {@link #getHeight() height}
+   *        will be the maximum height of all added sizes.
    * @param heightOverride
    */
   public MaximumSizer(boolean widthOverride, boolean heightOverride) {
@@ -54,8 +53,7 @@ public class MaximumSizer implements UIReadSize {
    * size-list. The maximum width/height will be determined over all sized in
    * the list.
    * 
-   * @param size
-   *        is the size to add.
+   * @param size is the size to add.
    */
   public void add(UIReadPreferredSize size) {
 
@@ -66,8 +64,7 @@ public class MaximumSizer implements UIReadSize {
    * This method removes the given {@link UIReadPreferredSize size} from the
    * size-list.
    * 
-   * @param size
-   *        is the size to remove.
+   * @param size is the size to remove.
    */
   public void remove(UIReadPreferredSize size) {
 

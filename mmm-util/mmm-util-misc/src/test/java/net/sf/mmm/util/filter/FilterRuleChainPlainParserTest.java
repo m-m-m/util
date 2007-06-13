@@ -35,6 +35,6 @@ public class FilterRuleChainPlainParserTest extends TestCase {
     assertFalse(chain.accept("/foo/bar/file.pdf"));
     assertFalse(chain.accept("/foo/bar/file.xml"));
     assertFalse(chain.accept("/foo/bar/file.XsL"));
-    assertTrue(chain.accept("/foo/bar/file.bar"));    
+    assertTrue(chain.accept("/foo/bar/file.bar"));
   }
 }

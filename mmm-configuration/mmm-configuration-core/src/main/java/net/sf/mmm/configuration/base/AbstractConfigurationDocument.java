@@ -65,11 +65,9 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /**
    * The constructor.
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param docContext
-   *        is the initial {@link #getContext() context} to use.
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param docContext is the initial {@link #getContext() context} to use.
    */
   public AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       MutableContext docContext) {
@@ -80,11 +78,10 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /**
    * The constructor.
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param parentConfiguration
-   *        is the {@link #getParentConfiguration() parent-configuration}.
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param parentConfiguration is the
+   *        {@link #getParentConfiguration() parent-configuration}.
    */
   public AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration) {
@@ -97,15 +94,13 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * 
    * @see ConfigurationUtil#createDefaultContext()
    * 
-   * @param configurationAccess
-   *        is the {@link #getConfigurationAccess() access} to the raw
-   *        configuration.
-   * @param parentConfiguration
-   *        is the {@link #getParentConfiguration() parent-configuration} or
+   * @param configurationAccess is the {@link #getConfigurationAccess() access}
+   *        to the raw configuration.
+   * @param parentConfiguration is the
+   *        {@link #getParentConfiguration() parent-configuration} or
    *        <code>null</code> if root-document.
-   * @param docContext
-   *        is the {@link #getContext() context} to use if root-document or
-   *        <code>null</code> otherwise.
+   * @param docContext is the {@link #getContext() context} to use if
+   *        root-document or <code>null</code> otherwise.
    */
   private AbstractConfigurationDocument(ConfigurationAccess configurationAccess,
       AbstractConfiguration parentConfiguration, MutableContext docContext) {
@@ -147,8 +142,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * This method checks this document to ensure that is was NOT caused by a
    * cyclic inclusion.
    * 
-   * @throws ConfigurationException
-   *         if a cyclic inclusion was detected.
+   * @throws ConfigurationException if a cyclic inclusion was detected.
    */
   protected void detectInclusionCycle() throws ConfigurationException {
 
@@ -297,10 +291,9 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * This method saves the configuration to the given output stream. The stream
    * must NOT be closed by this method.
    * 
-   * @param outputStream
-   *        is the output stream where to save the configuration to.
-   * @throws ConfigurationException
-   *         if the data can not be written.
+   * @param outputStream is the output stream where to save the configuration
+   *        to.
+   * @throws ConfigurationException if the data can not be written.
    */
   protected abstract void save(OutputStream outputStream) throws ConfigurationException;
 
@@ -309,8 +302,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * 
    * @return the {@link #getConfiguration() root-node} of the loaded and parsed
    *         configuration.
-   * @throws ConfigurationException
-   *         if the data can not be read or is illegal.
+   * @throws ConfigurationException if the data can not be read or is illegal.
    */
   protected final AbstractConfiguration load() throws ConfigurationException {
 
@@ -339,12 +331,12 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * This method loads the configuration from the given input stream. The stream
    * must NOT be closed by this method.
    * 
-   * @param inputStream
-   *        is the input stream where to load the configuration from.
+   * @param inputStream is the input stream where to load the configuration
+   *        from.
    * @return the {@link #getConfiguration() root-node} of the loaded and parsed
    *         configuration.
-   * @throws ConfigurationException
-   *         if the data can NOT be accessed or is illegal.
+   * @throws ConfigurationException if the data can NOT be accessed or is
+   *         illegal.
    */
   protected abstract AbstractConfiguration load(InputStream inputStream)
       throws ConfigurationException;
@@ -361,10 +353,9 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * This method registers the given <code>listener</code> for events in the
    * sub-tree of the given <code>configuration</code>.
    * 
-   * @param configuration
-   *        is the configuration where the listener was registered.
-   * @param listener
-   *        is the listener to add.
+   * @param configuration is the configuration where the listener was
+   *        registered.
+   * @param listener is the listener to add.
    */
   protected void addListener(Configuration configuration, ConfigurationChangeListener listener) {
 
@@ -380,10 +371,8 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /**
    * This method removes the given <code>listener</code>.
    * 
-   * @param configuration
-   *        is the configuration where the listener de-registered.
-   * @param listener
-   *        is the listener to remove.
+   * @param configuration is the configuration where the listener de-registered.
+   * @param listener is the listener to remove.
    * @return <code>true</code> if the listener has successfully be removed,
    *         <code>false</code> otherwise (the listener has NOT been
    *         registered).
@@ -415,10 +404,9 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    * @see #save()
    * @see #addListener(Configuration, ConfigurationChangeListener)
    * 
-   * @param configuration
-   *        is the configuration that has changed (been added/removed/updated).
-   * @param type
-   *        is the type of the change.
+   * @param configuration is the configuration that has changed (been
+   *        added/removed/updated).
+   * @param type is the type of the change.
    */
   protected void configurationChanged(AbstractConfiguration configuration, ChangeEvent.Type type) {
 
@@ -462,8 +450,7 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
   /**
    * This method sets the {@link #getTermParser() term parser}.
    * 
-   * @param parser
-   *        the term parser to use.
+   * @param parser the term parser to use.
    */
   public void setTermParser(TermParser parser) {
 
@@ -502,10 +489,9 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
     /**
      * The constructor.
      * 
-     * @param conf
-     *        is the configuration from where the listener starts listening.
-     * @param changeListener
-     *        is the actual listener that handles the events.
+     * @param conf is the configuration from where the listener starts
+     *        listening.
+     * @param changeListener is the actual listener that handles the events.
      */
     public FilteredListener(Configuration conf, ConfigurationChangeListener changeListener) {
 

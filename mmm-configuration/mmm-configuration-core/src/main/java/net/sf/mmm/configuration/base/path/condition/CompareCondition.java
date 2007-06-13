@@ -36,16 +36,14 @@ public class CompareCondition extends PathCondition {
   private final Comparator comparator;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param pathSegments
-   *        are the segments specifying the path to the descendant matched by
-   *        this condition.
-   * @param descendantValue
-   *        is the {@link #getValue() value} to compare the descendant with.
-   * @param cmp
-   *        is the comparator defining how to compare the descendant with the
-   *        value.
+   * @param pathSegments are the segments specifying the path to the descendant
+   *        matched by this condition.
+   * @param descendantValue is the {@link #getValue() value} to compare the
+   *        descendant with.
+   * @param cmp is the comparator defining how to compare the descendant with
+   *        the value.
    */
   public CompareCondition(SimplePathSegment[] pathSegments, String descendantValue, Comparator cmp) {
 
@@ -76,7 +74,7 @@ public class CompareCondition extends PathCondition {
    */
   @Override
   public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
-  
+
     AbstractConfiguration node = configuration;
     for (SimplePathSegment segment : getSegments()) {
       node = node.getChild(segment.getString(), namespaceUri);
@@ -90,7 +88,7 @@ public class CompareCondition extends PathCondition {
     }
     return this.comparator.accept(genericValue, this.value, this.valuePattern);
   }
-  
+
   /**
    * {@inheritDoc}
    */

@@ -38,20 +38,18 @@ public interface UIMenuBar extends UINode {
   /**
    * This method gets the menu for the given name.
    * 
-   * @param name
-   *        is the name of the menu.
+   * @param name is the name of the menu.
    * @return the menu with the given name or <code>null</code> if no menu
    *         exists for the given name.
    */
   UIMenu getMenu(String name);
 
   /**
-   * This method creates and adds a menu to this menu bar. If the menu with
-   * the given name already exists, no new menu will be created but the
-   * existing menu is returned.
+   * This method creates and adds a menu to this menu bar. If the menu with the
+   * given name already exists, no new menu will be created but the existing
+   * menu is returned.
    * 
-   * @param name
-   *        is the title for the new menu.
+   * @param name is the title for the new menu.
    * @return the created (or already existing) menu.
    */
   UIMenu addMenu(String name);

@@ -45,10 +45,8 @@ public class FctGreater {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is greater than the
    *         second.
    */
@@ -60,10 +58,8 @@ public class FctGreater {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is after the second.
    */
   public static Boolean greater(Date argument1, Date argument2) {
@@ -74,10 +70,8 @@ public class FctGreater {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return <code>true</code> if the first argument is lexicographically
    *         after the second.
    */

@@ -38,11 +38,9 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the item.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    */
   public AbstractSyncItemAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -102,8 +100,7 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
    * This method sets the
    * {@link org.eclipse.swt.widgets.Item#setText(String) text} of the item.
    * 
-   * @param buttonText
-   *        is the text to set.
+   * @param buttonText is the text to set.
    */
   public void setText(String buttonText) {
 
@@ -117,8 +114,7 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
    * {@link org.eclipse.swt.widgets.Item#setImage(org.eclipse.swt.graphics.Image) image}
    * of the item.
    * 
-   * @param icon
-   *        is the image to set.
+   * @param icon is the image to set.
    */
   public void setImage(Image icon) {
 

@@ -13,8 +13,8 @@ import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
  * order to notify about changes of the
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable table}.<br>
  * Be aware that only
- * {@link net.sf.mmm.util.event.ChangeEvent.Type#UPDATE update} events may
- * apply to incomplete columns (single column but
+ * {@link net.sf.mmm.util.event.ChangeEvent.Type#UPDATE update} events may apply
+ * to incomplete columns (single column but
  * {@link #getRowStartIndex() row-start} is not <code>0</code> or
  * {@link #getRowEndIndex() row-end} is not
  * <code>{@link net.sf.mmm.ui.toolkit.api.model.UITableModel#getRowCount() rowCount} -
@@ -37,14 +37,10 @@ public class UITableModelEvent extends UIModelEvent {
   /**
    * The constructor.
    * 
-   * @param eventType
-   *        is the type for the new event.
-   * @param rowStartIndex
-   *        is the index of the first row that has changed.
-   * @param rowEndIndex
-   *        is the index of the last row that has changed.
-   * @param columnIndex
-   *        is the index of the column that has changed.
+   * @param eventType is the type for the new event.
+   * @param rowStartIndex is the index of the first row that has changed.
+   * @param rowEndIndex is the index of the last row that has changed.
+   * @param columnIndex is the index of the column that has changed.
    */
   public UITableModelEvent(Type eventType, int rowStartIndex, int rowEndIndex, int columnIndex) {
 

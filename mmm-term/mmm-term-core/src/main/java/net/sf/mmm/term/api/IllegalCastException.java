@@ -21,10 +21,8 @@ public class IllegalCastException extends CalculationException {
   /**
    * The constructor.
    * 
-   * @param argument
-   *        is the argument that could not be casted.
-   * @param type
-   *        is the type the argument could not be casted to.
+   * @param argument is the argument that could not be casted.
+   * @param type is the type the argument could not be casted to.
    */
   public IllegalCastException(Object argument, Class<?> type) {
 
@@ -34,12 +32,9 @@ public class IllegalCastException extends CalculationException {
   /**
    * The constructor.
    * 
-   * @param argument
-   *        is the argument that could not be casted.
-   * @param type
-   *        is the type the argument could not be casted to.
-   * @param nested
-   *        is the throwable that caused this exception.
+   * @param argument is the argument that could not be casted.
+   * @param type is the type the argument could not be casted to.
+   * @param nested is the throwable that caused this exception.
    */
   public IllegalCastException(Object argument, Class<?> type, Throwable nested) {
 

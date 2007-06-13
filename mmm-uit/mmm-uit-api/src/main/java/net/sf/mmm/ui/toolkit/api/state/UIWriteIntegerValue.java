@@ -14,8 +14,7 @@ public interface UIWriteIntegerValue extends UIReadIntegerValue {
   /**
    * This method sets the current value to the given one.
    * 
-   * @param newValue
-   *        is the new value to set.
+   * @param newValue is the new value to set.
    */
   void setValue(int newValue);
 

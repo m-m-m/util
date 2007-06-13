@@ -18,20 +18,19 @@ import net.sf.mmm.framework.api.IocException;
  */
 public class InstantiationPolicyNotAvailableException extends IocException {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 3922899083538442911L;
+  /** UID for serialization. */
+  private static final long serialVersionUID = 3922899083538442911L;
 
-    /**
-     * The constructor.
-     * 
-     * @param descriptor
-     *        is the descriptor for which the instantiation policy is NOT
-     *        available.
-     */
-    public InstantiationPolicyNotAvailableException(ExtendedComponentDescriptor<?, ?> descriptor) {
+  /**
+   * The constructor.
+   * 
+   * @param descriptor is the descriptor for which the instantiation policy is
+   *        NOT available.
+   */
+  public InstantiationPolicyNotAvailableException(ExtendedComponentDescriptor<?, ?> descriptor) {
 
-        super(NlsBundleFrameworkCore.ERR_INSTANTIATION_POLICY_NOT_AVAILABLE, descriptor
-                .getInstantiationPolicy(), descriptor.getSpecification());
-    }
+    super(NlsBundleFrameworkCore.ERR_INSTANTIATION_POLICY_NOT_AVAILABLE, descriptor
+        .getInstantiationPolicy(), descriptor.getSpecification());
+  }
 
 }

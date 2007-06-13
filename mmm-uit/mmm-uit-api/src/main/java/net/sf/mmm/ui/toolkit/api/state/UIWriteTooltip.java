@@ -20,9 +20,8 @@ public interface UIWriteTooltip {
   /**
    * This method sets the tooltip text of this object.
    * 
-   * @param tooltip
-   *        is the new tooltip text or <code>null</code> to disable the
-   *        tooltip.
+   * @param tooltip is the new tooltip text or <code>null</code> to disable
+   *        the tooltip.
    */
   void setTooltipText(String tooltip);
 

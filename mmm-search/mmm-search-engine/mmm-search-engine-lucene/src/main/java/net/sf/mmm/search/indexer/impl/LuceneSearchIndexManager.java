@@ -31,7 +31,7 @@ public class LuceneSearchIndexManager implements SearchIndexManager {
   private Analyzer analyzer;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public LuceneSearchIndexManager() {
 
@@ -48,8 +48,7 @@ public class LuceneSearchIndexManager implements SearchIndexManager {
   }
 
   /**
-   * @param newAnalyzer
-   *        the analyzer to set
+   * @param newAnalyzer the analyzer to set
    */
   @Resource()
   public void setAnalyzer(Analyzer newAnalyzer) {

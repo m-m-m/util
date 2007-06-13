@@ -23,12 +23,11 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   private final Field field;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param propertyField
-   *        is the {@link #getAccessibleObject() method} to access the property.
-   * @param accessMode
-   *        is the {@link #getAccessMode() mode} of this accessor.
+   * @param propertyField is the {@link #getAccessibleObject() method} to access
+   *        the property.
+   * @param accessMode is the {@link #getAccessMode() mode} of this accessor.
    */
   public FieldPojoPropertyAccessor(Field propertyField, PojoPropertyAccessMode accessMode) {
 
@@ -37,18 +36,16 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
   }
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param propertyName
-   *        is the {@link #getName() name} of the property.
-   * @param accessMode
-   *        is the {@link #getAccessMode() mode} of this accessor.
-   * @param propertyType
-   *        is the {@link #getPropertyType() generic type} of the property.
-   * @param propertyClass
-   *        is the {@link #getPropertyClass() raw type} of the property.
-   * @param propertyField
-   *        is the {@link #getAccessibleObject() method} to access the property.
+   * @param propertyName is the {@link #getName() name} of the property.
+   * @param accessMode is the {@link #getAccessMode() mode} of this accessor.
+   * @param propertyType is the {@link #getPropertyType() generic type} of the
+   *        property.
+   * @param propertyClass is the {@link #getPropertyClass() raw type} of the
+   *        property.
+   * @param propertyField is the {@link #getAccessibleObject() method} to access
+   *        the property.
    */
   public FieldPojoPropertyAccessor(String propertyName, PojoPropertyAccessMode accessMode,
       Type propertyType, Class<?> propertyClass, Field propertyField) {

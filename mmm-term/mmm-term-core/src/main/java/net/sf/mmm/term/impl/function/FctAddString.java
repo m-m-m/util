@@ -24,10 +24,8 @@ public class FctAddString extends FctAdd {
   /**
    * The function implementation for the given signature.
    * 
-   * @param argument1
-   *        is the first argument.
-   * @param argument2
-   *        is the second argument.
+   * @param argument1 is the first argument.
+   * @param argument2 is the second argument.
    * @return the sum of both arguments.
    */
   public static String add(String argument1, Object argument2) {

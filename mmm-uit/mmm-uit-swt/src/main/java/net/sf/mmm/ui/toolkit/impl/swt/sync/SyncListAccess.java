@@ -63,11 +63,10 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the control.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        control.
    */
   public SyncListAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -147,8 +146,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   /**
    * This method selects the item with the given index.
    * 
-   * @param selectionIndex
-   *        is the index of the item to select.
+   * @param selectionIndex is the index of the item to select.
    */
   public void setSelection(int selectionIndex) {
 
@@ -171,8 +169,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
    * This method {@link org.eclipse.swt.widgets.List#add(java.lang.String) adds}
    * an item to the list at the end of the item-list.
    * 
-   * @param itemText
-   *        is the display text of the item.
+   * @param itemText is the display text of the item.
    */
   public void addItem(String itemText) {
 

@@ -32,14 +32,11 @@ public class ChildPatternIterator extends SiblingIterator {
   /**
    * The constructor.
    * 
-   * @param childIterator
-   *        is the iterator of all children to iterate.
-   * @param childNamePattern
-   *        is the pattern to be matched by the
+   * @param childIterator is the iterator of all children to iterate.
+   * @param childNamePattern is the pattern to be matched by the
    *        {@link net.sf.mmm.configuration.api.Configuration#getName() name} of
    *        the children.
-   * @param namespaceUri
-   *        is the
+   * @param namespaceUri is the
    *        {@link net.sf.mmm.configuration.api.Configuration#getNamespaceUri() namespace-URI}
    *        of the children to iterate or <code>null</code> if namespace will
    *        be ignored.
@@ -53,8 +50,7 @@ public class ChildPatternIterator extends SiblingIterator {
   /**
    * This method gets the type according to the given <code>pattern</code>.
    * 
-   * @param pattern
-   *        is the pattern to check.
+   * @param pattern is the pattern to check.
    * @return the according type.
    */
   private static Type getType(Pattern pattern) {
@@ -69,19 +65,15 @@ public class ChildPatternIterator extends SiblingIterator {
   /**
    * The constructor.
    * 
-   * @param childIterator
-   *        is the iterator of all children to iterate.
-   * @param childNamePattern
-   *        is the pattern to be matched by the
+   * @param childIterator is the iterator of all children to iterate.
+   * @param childNamePattern is the pattern to be matched by the
    *        {@link net.sf.mmm.configuration.api.Configuration#getName() name} of
    *        the children.
-   * @param namespaceUri
-   *        is the
+   * @param namespaceUri is the
    *        {@link net.sf.mmm.configuration.api.Configuration#getNamespaceUri() namespace-URI}
    *        of the children to iterate or <code>null</code> if namespace will
    *        be ignored.
-   * @param childType
-   *        is the type of the the children to iterate should
+   * @param childType is the type of the the children to iterate should
    *        {@link Configuration#getType() have} or <code>null</code> if the
    *        type should be ignored.
    */

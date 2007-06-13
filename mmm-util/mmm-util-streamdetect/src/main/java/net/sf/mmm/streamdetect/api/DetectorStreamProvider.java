@@ -39,9 +39,8 @@ public interface DetectorStreamProvider {
    * This method gets a {@link DetectorInputStream} that wrapps the given
    * <code>stream</code>.
    * 
-   * @param stream
-   *        is the stream to wrap. This stream must be a fresh stream that is
-   *        untouched since it was opened.
+   * @param stream is the stream to wrap. This stream must be a fresh stream
+   *        that is untouched since it was opened.
    * @return the wrapped input stream.
    */
   DetectorInputStream wrapInputStream(InputStream stream);
@@ -65,11 +64,9 @@ public interface DetectorStreamProvider {
    * also available in the detected
    * {@link DetectorStream#getMetadata() metadata}.
    * 
-   * @param stream
-   *        is the stream to wrap. This stream must be a fresh stream that is
-   *        untouched since it was opened.
-   * @param metadata
-   *        is the existing metadata already available.
+   * @param stream is the stream to wrap. This stream must be a fresh stream
+   *        that is untouched since it was opened.
+   * @param metadata is the existing metadata already available.
    * @return the wrapped input stream.
    */
   DetectorInputStream wrapInputStream(InputStream stream, Context metadata);
@@ -78,9 +75,8 @@ public interface DetectorStreamProvider {
    * This method gets a {@link DetectorOutputStream} that wrapps the given
    * <code>stream</code>.
    * 
-   * @param stream
-   *        is the stream to wrap. This stream must be a fresh stream that is
-   *        untouched since it was opened.
+   * @param stream is the stream to wrap. This stream must be a fresh stream
+   *        that is untouched since it was opened.
    * @return the wrapped output stream.
    */
   DetectorOutputStream wrapOutputStream(OutputStream stream);
@@ -104,11 +100,9 @@ public interface DetectorStreamProvider {
    * also available in the detected
    * {@link DetectorStream#getMetadata() metadata}.
    * 
-   * @param stream
-   *        is the stream to wrap. This stream must be a fresh stream that is
-   *        untouched since it was opened.
-   * @param metadata
-   *        is the existing metadata already available.
+   * @param stream is the stream to wrap. This stream must be a fresh stream
+   *        that is untouched since it was opened.
+   * @param metadata is the existing metadata already available.
    * @return the wrapped output stream.
    */
   DetectorOutputStream wrapOutputStream(OutputStream stream, Context metadata);

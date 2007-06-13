@@ -8,8 +8,7 @@ import net.sf.mmm.util.event.ChangeEvent.Type;
 /**
  * This inner class is the implementation of the {@link UITreeNodeIF} interface.
  * 
- * @param <T>
- *        is the templated type of the user data in the tree nodes.
+ * @param <T> is the templated type of the user data in the tree nodes.
  */
 public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
 
@@ -28,12 +27,9 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   /**
    * The constructor.
    * 
-   * @param treeModel
-   *        is the tree-model owning this node.
-   * @param parentNode
-   *        is the parent node of the node to create.
-   * @param nodeData
-   *        is the data of the node to create.
+   * @param treeModel is the tree-model owning this node.
+   * @param parentNode is the parent node of the node to create.
+   * @param nodeData is the data of the node to create.
    */
   protected DefaultUITreeNode(DefaultUITreeModel<T> treeModel, DefaultUITreeNode<T> parentNode,
       T nodeData) {
@@ -90,8 +86,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
    * 
    * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getData()
    * 
-   * @param newData
-   *        is the new node data.
+   * @param newData is the new node data.
    */
   public void setData(T newData) {
 
@@ -102,8 +97,8 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   /**
    * This method creates a child node of this node.
    * 
-   * @param childData
-   *        is the data object of this node. See {@link UITreeNodeIF#getData()}.
+   * @param childData is the data object of this node. See
+   *        {@link UITreeNodeIF#getData()}.
    * @return the created node.
    */
   public DefaultUITreeNode<T> createChildNode(T childData) {

@@ -49,8 +49,8 @@ public interface DateIF extends XmlSerializable {
   public static final int MONTH_DECEMBER = 12;
 
   /**
-   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this
-   * value type.
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
+   * type.
    */
   String VALUE_NAME = "Date";
 

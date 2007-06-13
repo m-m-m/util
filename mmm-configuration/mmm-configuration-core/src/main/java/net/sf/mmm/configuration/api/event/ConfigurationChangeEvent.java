@@ -29,13 +29,11 @@ public class ConfigurationChangeEvent implements ChangeEvent {
   /**
    * The constructor.
    * 
-   * @param changedConfiguration
-   *        is the {@link #getCause() configuration} that has been added,
-   *        removed or updated.
-   * @param changeType
-   *        is the {@link #getType() type} of the change.
-   * @param topConfiguration
-   *        is the {@link #getTopCause() top-cause} of this event.
+   * @param changedConfiguration is the {@link #getCause() configuration} that
+   *        has been added, removed or updated.
+   * @param changeType is the {@link #getType() type} of the change.
+   * @param topConfiguration is the {@link #getTopCause() top-cause} of this
+   *        event.
    */
   public ConfigurationChangeEvent(Configuration changedConfiguration, Type changeType,
       Configuration topConfiguration) {
@@ -88,5 +86,5 @@ public class ConfigurationChangeEvent implements ChangeEvent {
 
     return this.topCause;
   }
-  
+
 }

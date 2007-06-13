@@ -61,15 +61,12 @@ public interface GenericValue {
    * @see #getValue(Class, Object)
    * @see #isEmpty()
    * 
-   * @param <T>
-   *        is the templated type of the requested value type.
-   * @param type
-   *        is the class reflecting the requested value type.
+   * @param <T> is the templated type of the requested value type.
+   * @param type is the class reflecting the requested value type.
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this object {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NOT compatible with the given <code>type</code>.
+   * @throws ValueNotSetException if this object {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NOT compatible with the
+   *         given <code>type</code>.
    */
   <T> T getValue(Class<T> type) throws ValueNotSetException, WrongValueTypeException;
 
@@ -96,20 +93,16 @@ public interface GenericValue {
    * @see #isEmpty()
    * @see #isAddDefaults()
    * 
-   * @param <T>
-   *        is the templated type of the requested value type.
-   * @param type
-   *        is the class reflecting the requested value type.
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param <T> is the templated type of the requested value type.
+   * @param type is the class reflecting the requested value type.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if the value
    *         {@link #isEmpty() is empty}. Will only be <code>null</code> if
    *         this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NOT compatible with the given <code>type</code>
-   *         (see supported types above).
+   * @throws WrongValueTypeException if the value is NOT compatible with the
+   *         given <code>type</code> (see supported types above).
    */
   <T> T getValue(Class<T> type, T defaultValue) throws WrongValueTypeException;
 
@@ -120,8 +113,7 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if the value was NOT set.
+   * @throws ValueNotSetException if the value was NOT set.
    */
   Object getObject() throws ValueNotSetException;
 
@@ -131,9 +123,8 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
@@ -147,10 +138,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO string.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO string.
    */
   String getString() throws ValueNotSetException, WrongValueTypeException;
 
@@ -159,15 +148,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO string.
+   * @throws WrongValueTypeException if the value is NO string.
    */
   String getString(String defaultValue) throws WrongValueTypeException;
 
@@ -177,10 +164,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO char.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO char.
    */
   char getCharacter() throws ValueNotSetException, WrongValueTypeException;
 
@@ -189,28 +174,24 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO character.
+   * @throws WrongValueTypeException if the value is NO character.
    */
   Character getCharacter(Character defaultValue) throws WrongValueTypeException;
-  
+
   /**
    * This method gets the value as boolean.
    * 
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO boolean.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO boolean.
    */
   boolean getBoolean() throws ValueNotSetException, WrongValueTypeException;
 
@@ -219,15 +200,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO boolean.
+   * @throws WrongValueTypeException if the value is NO boolean.
    */
   Boolean getBoolean(Boolean defaultValue) throws WrongValueTypeException;
 
@@ -236,12 +215,11 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO boolean.
+   * @throws WrongValueTypeException if the value is NO boolean.
    */
   boolean getBoolean(boolean defaultValue) throws WrongValueTypeException;
 
@@ -251,10 +229,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this object {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO date.
+   * @throws ValueNotSetException if this object {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO date.
    */
   Date getDate() throws ValueNotSetException, WrongValueTypeException;
 
@@ -263,15 +239,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO date.
+   * @throws WrongValueTypeException if the value is NO date.
    */
   Date getDate(Date defaultValue) throws WrongValueTypeException;
 
@@ -281,10 +255,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO double.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO double.
    */
   double getDouble() throws ValueNotSetException, WrongValueTypeException;
 
@@ -293,15 +265,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO double.
+   * @throws WrongValueTypeException if the value is NO double.
    */
   Double getDouble(Double defaultValue) throws WrongValueTypeException;
 
@@ -311,10 +281,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO integer.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO integer.
    */
   int getInteger() throws ValueNotSetException, WrongValueTypeException;
 
@@ -323,15 +291,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO integer.
+   * @throws WrongValueTypeException if the value is NO integer.
    */
   Integer getInteger(Integer defaultValue) throws WrongValueTypeException;
 
@@ -345,10 +311,8 @@ public interface GenericValue {
    * @see #getDouble()
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO number.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO number.
    */
   Number getNumber() throws ValueNotSetException, WrongValueTypeException;
 
@@ -361,15 +325,13 @@ public interface GenericValue {
    * @see #getLong(Long)
    * @see #getDouble(Double)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO number.
+   * @throws WrongValueTypeException if the value is NO number.
    */
   Number getNumber(Number defaultValue) throws WrongValueTypeException;
 
@@ -379,23 +341,17 @@ public interface GenericValue {
    * 
    * @see #getNumber()
    * 
-   * @param <T>
-   *        is the templated numeric value type.
-   * @param minimum
-   *        is the minimum number allowed. Use MIN_VALUE (e.g.
+   * @param <T> is the templated numeric value type.
+   * @param minimum is the minimum number allowed. Use MIN_VALUE (e.g.
    *        {@link Double#MIN_VALUE}) if unbound.
-   * @param maximum
-   *        is the maximum number allowed. Use MAX_VALUE (e.g.
+   * @param maximum is the maximum number allowed. Use MAX_VALUE (e.g.
    *        {@link Long#MAX_VALUE}) if unbound.
    * @return the requested value in the given range from <code>minimum</code>
    *         and <code>maximum</code>.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO number.
-   * @throws ValueOutOfRangeException
-   *         if the value is NOT in the given range from <code>minimum</code>
-   *         to <code>maximum</code>.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO number.
+   * @throws ValueOutOfRangeException if the value is NOT in the given range
+   *         from <code>minimum</code> to <code>maximum</code>.
    */
   <T extends Number> T getNumber(T minimum, T maximum) throws ValueNotSetException,
       WrongValueTypeException, ValueOutOfRangeException;
@@ -406,28 +362,23 @@ public interface GenericValue {
    * 
    * @see #getNumber(Number)
    * 
-   * @param <T>
-   *        is the templated numeric value type.
-   * @param minimum
-   *        is the minimum number allowed. Use MIN_VALUE (e.g.
+   * @param <T> is the templated numeric value type.
+   * @param minimum is the minimum number allowed. Use MIN_VALUE (e.g.
    *        {@link Double#MIN_VALUE}) if unbound.
-   * @param maximum
-   *        is the maximum number allowed. Use MAX_VALUE (e.g.
+   * @param maximum is the maximum number allowed. Use MAX_VALUE (e.g.
    *        {@link Long#MAX_VALUE}) if unbound.
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>. Else it must be in the given range
-   *        from <code>minimum</code> to <code>maximum</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>. Else
+   *        it must be in the given range from <code>minimum</code> to
+   *        <code>maximum</code>.
    * @return the requested value in the range of <code>minimum</code> and
    *         <code>maximum</code> or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO number.
-   * @throws ValueOutOfRangeException
-   *         if the value is NOT in the given range from <code>minimum</code>
-   *         to <code>maximum</code>.
+   * @throws WrongValueTypeException if the value is NO number.
+   * @throws ValueOutOfRangeException if the value is NOT in the given range
+   *         from <code>minimum</code> to <code>maximum</code>.
    */
   <T extends Number> T getNumber(T minimum, T maximum, T defaultValue)
       throws WrongValueTypeException, ValueOutOfRangeException;
@@ -438,10 +389,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO long.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO long.
    */
   long getLong() throws ValueNotSetException, WrongValueTypeException;
 
@@ -450,15 +399,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO long.
+   * @throws WrongValueTypeException if the value is NO long.
    */
   Long getLong(Long defaultValue) throws WrongValueTypeException;
 
@@ -468,10 +415,8 @@ public interface GenericValue {
    * @see #getValue(Class)
    * 
    * @return the requested value.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO class.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO class.
    */
   Class<?> getJavaClass() throws ValueNotSetException, WrongValueTypeException;
 
@@ -480,15 +425,13 @@ public interface GenericValue {
    * 
    * @see #getValue(Class, Object)
    * 
-   * @param defaultValue
-   *        is the default returned if this value {@link #isEmpty() is empty}.
-   *        It may be <code>null</code>.
+   * @param defaultValue is the default returned if this value
+   *        {@link #isEmpty() is empty}. It may be <code>null</code>.
    * @return the requested value or the <code>defaultValue</code> if this
    *         value {@link #isEmpty() is empty}. Will only be <code>null</code>
    *         if this value {@link #isEmpty() is empty} and the
    *         <code>defaultValue</code> is <code>null</code>.
-   * @throws WrongValueTypeException
-   *         if the value is NO class.
+   * @throws WrongValueTypeException if the value is NO class.
    */
   Class<?> getJavaClass(Class<?> defaultValue) throws WrongValueTypeException;
 
@@ -499,19 +442,14 @@ public interface GenericValue {
    * 
    * @see #getJavaClass()
    * 
-   * @param <T>
-   *        is the templated type of the requested instance.
-   * @param superType
-   *        is the expected (super-)interface or (super-)class of the instance.
-   *        Use <code>Object.class</code> if any type is acceptable.
+   * @param <T> is the templated type of the requested instance.
+   * @param superType is the expected (super-)interface or (super-)class of the
+   *        instance. Use <code>Object.class</code> if any type is acceptable.
    * @return an instance of the value as java class.
-   * @throws ValueNotSetException
-   *         if this value {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO class or the java-class value does not implement
-   *         the given super-type.
-   * @throws ValueInstanciationException
-   *         if the instantiation failed.
+   * @throws ValueNotSetException if this value {@link #isEmpty() is empty}.
+   * @throws WrongValueTypeException if the value is NO class or the java-class
+   *         value does not implement the given super-type.
+   * @throws ValueInstanciationException if the instantiation failed.
    */
   <T> T getJavaClassInstance(Class<T> superType) throws ValueNotSetException,
       WrongValueTypeException, ValueInstanciationException;
@@ -527,23 +465,19 @@ public interface GenericValue {
    * 
    * @see #getJavaClass(Class)
    * 
-   * @param <T>
-   *        is the templated type of the requested instance.
-   * @param superType
-   *        is the expected (super-)interface or (super-)class of the instance.
-   *        Use <code>Object.class</code> if any type is acceptable.
-   * @param defaultValue
-   *        is the default used if this value {@link #isEmpty() is empty}.
-   *        Unlike the other getters with a default value, this
-   *        <code>defaultValue</code> must NOT be <code>null</code>.
+   * @param <T> is the templated type of the requested instance.
+   * @param superType is the expected (super-)interface or (super-)class of the
+   *        instance. Use <code>Object.class</code> if any type is acceptable.
+   * @param defaultValue is the default used if this value
+   *        {@link #isEmpty() is empty}. Unlike the other getters with a
+   *        default value, this <code>defaultValue</code> must NOT be
+   *        <code>null</code>.
    * @return an instance of the value as java class or the class given by
    *         <code>defaultValue</code> if this value
    *         {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO class or the java-class value does not implement
-   *         the given super-type.
-   * @throws ValueInstanciationException
-   *         if the instantiation failed.
+   * @throws WrongValueTypeException if the value is NO class or the java-class
+   *         value does not implement the given super-type.
+   * @throws ValueInstanciationException if the instantiation failed.
    */
   <T> T getJavaClassInstance(Class<T> superType, Class<? extends T> defaultValue)
       throws WrongValueTypeException, ValueInstanciationException;
@@ -555,27 +489,23 @@ public interface GenericValue {
    * 
    * @see #getJavaClass(Class)
    * 
-   * @param <T>
-   *        is the templated type of the requested instance.
-   * @param superType
-   *        is the expected (super-)interface or -class of the instance. Use
-   *        <code>Object.class</code> if any type is acceptable. It is ensured
-   *        that the resulting instance object can be casted to this type.
-   * @param defaultValue
-   *        is the default used if this value {@link #isEmpty() is empty}.
-   *        Unlike the other getters with a default value, this
-   *        <code>defaultValue</code> must NOT be <code>null</code>.
-   * @param setDefault
-   *        if <code>false</code> the flag {@link #isAddDefaults()} is
-   *        ignored.
+   * @param <T> is the templated type of the requested instance.
+   * @param superType is the expected (super-)interface or -class of the
+   *        instance. Use <code>Object.class</code> if any type is acceptable.
+   *        It is ensured that the resulting instance object can be casted to
+   *        this type.
+   * @param defaultValue is the default used if this value
+   *        {@link #isEmpty() is empty}. Unlike the other getters with a
+   *        default value, this <code>defaultValue</code> must NOT be
+   *        <code>null</code>.
+   * @param setDefault if <code>false</code> the flag {@link #isAddDefaults()}
+   *        is ignored.
    * @return an instance of the value as java class or the class given by
    *         <code>defaultValue</code> if this value
    *         {@link #isEmpty() is empty}.
-   * @throws WrongValueTypeException
-   *         if the value is NO class or the java-class value does not implement
-   *         the given super-type.
-   * @throws ValueInstanciationException
-   *         if the instantiation failed.
+   * @throws WrongValueTypeException if the value is NO class or the java-class
+   *         value does not implement the given super-type.
+   * @throws ValueInstanciationException if the instantiation failed.
    */
   <T> T getJavaClassInstance(Class<T> superType, Class<? extends T> defaultValue, boolean setDefault)
       throws WrongValueTypeException, ValueInstanciationException;

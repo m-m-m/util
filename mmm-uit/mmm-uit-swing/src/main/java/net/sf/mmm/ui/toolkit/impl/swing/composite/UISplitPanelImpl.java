@@ -33,21 +33,20 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
 
   /** @see #getOrientation() */
   private Orientation orientation;
-  
+
   /** @see #setDividerPosition(double) */
   private double dividerLocation;
-  
+
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwing instance.
-   * @param parentObject
-   *        is the parent of this object (may be <code>null</code>).
-   * @param orientation
-   *        is the orientation of the two child-components in this split-panel.
+   * @param uiFactory is the UIFactorySwing instance.
+   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param orientation is the orientation of the two child-components in this
+   *        split-panel.
    */
-  public UISplitPanelImpl(UIFactorySwing uiFactory, AbstractUIComponent parentObject, Orientation orientation) {
+  public UISplitPanelImpl(UIFactorySwing uiFactory, AbstractUIComponent parentObject,
+      Orientation orientation) {
 
     super(uiFactory, parentObject);
     this.splitPanel = new JSplitPane();
@@ -182,17 +181,17 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
 
     return 2;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void refresh(UIRefreshEvent event) {
-  
+
     super.refresh(event);
     if (event.isOrientationModified()) {
       setOrientation(this.orientation);
     }
   }
-  
+
 }

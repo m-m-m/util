@@ -29,16 +29,12 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   private final SearchHighlighter highlighter;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param searchEntry
-   *        is the actual entry this hit delegates to.
-   * @param id
-   *        is the {@link #getEntryId() entry ID}.
-   * @param hitScore
-   *        is the {@link #getScore() score} of the hit.
-   * @param searchHighlighter
-   *        is the highlighter used for
+   * @param searchEntry is the actual entry this hit delegates to.
+   * @param id is the {@link #getEntryId() entry ID}.
+   * @param hitScore is the {@link #getScore() score} of the hit.
+   * @param searchHighlighter is the highlighter used for
    *        {@link #getHighlightedText() highlighting}.
    */
   public SearchHitImpl(SearchEntry searchEntry, String id, double hitScore,

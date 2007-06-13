@@ -34,9 +34,8 @@ public class Size {
   /**
    * The constructor.
    * 
-   * @param size
-   *        is a {@link UIReadSize sized-object} that will be converted to a
-   *        {@link Size}.
+   * @param size is a {@link UIReadSize sized-object} that will be converted to
+   *        a {@link Size}.
    */
   public Size(UIReadSize size) {
 
@@ -46,10 +45,8 @@ public class Size {
   /**
    * The constructor.
    * 
-   * @param w
-   *        is the {@link #width}
-   * @param h
-   *        is the {@link #height}
+   * @param w is the {@link #width}
+   * @param h is the {@link #height}
    */
   public Size(int w, int h) {
 

@@ -21,12 +21,10 @@ public class XmlCloseElementException extends XmlException {
   /**
    * The constructor.
    * 
-   * @param openTagName
-   *        is the (qualified) tagname used to
+   * @param openTagName is the (qualified) tagname used to
    *        {@link net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String, String) open}
    *        the element.
-   * @param closeTagName
-   *        is the (qualified) tagname used to
+   * @param closeTagName is the (qualified) tagname used to
    *        {@link net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String, String) close}
    *        the element that differes.
    */

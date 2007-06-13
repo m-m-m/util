@@ -14,8 +14,7 @@ import net.sf.mmm.util.xml.api.XmlWriter;
  * {@link net.sf.mmm.term.api.Term term}. It simply holds a value as constant
  * that is always returned as {@link #evaluate(Context) evaluation} result.
  * 
- * @param <C>
- *        is the templated type of the constant.
+ * @param <C> is the templated type of the constant.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -35,8 +34,7 @@ public class Constant<C> extends AbstractTerm {
    * 
    * @see Constant#Constant(Object)
    * 
-   * @param <C>
-   *        is the templated type of the constant.
+   * @param <C> is the templated type of the constant.
    */
   private static class XmlSerializerImpl<C> implements XmlSerializer<C> {
 
@@ -80,8 +78,7 @@ public class Constant<C> extends AbstractTerm {
   /**
    * The dummy constructor. Only use for testing or outside the project.
    * 
-   * @param constantValue
-   *        is the value of this constant.
+   * @param constantValue is the value of this constant.
    */
   public Constant(C constantValue) {
 
@@ -91,10 +88,8 @@ public class Constant<C> extends AbstractTerm {
   /**
    * The constructor.
    * 
-   * @param constantValue
-   *        is the value of this constant.
-   * @param valueSerializer
-   *        is the serializer used for {@link #toXml(XmlWriter)}
+   * @param constantValue is the value of this constant.
+   * @param valueSerializer is the serializer used for {@link #toXml(XmlWriter)}
    */
   public Constant(C constantValue, XmlSerializer<C> valueSerializer) {
 

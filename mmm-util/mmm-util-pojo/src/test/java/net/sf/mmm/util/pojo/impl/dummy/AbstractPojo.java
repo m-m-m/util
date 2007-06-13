@@ -5,16 +5,16 @@ package net.sf.mmm.util.pojo.impl.dummy;
 
 /**
  * This is a dummy pojo for testing.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public abstract class AbstractPojo {
 
   private String name;
-  
+
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractPojo() {
 
@@ -31,5 +31,5 @@ public abstract class AbstractPojo {
 
     this.name = name;
   }
-  
+
 }

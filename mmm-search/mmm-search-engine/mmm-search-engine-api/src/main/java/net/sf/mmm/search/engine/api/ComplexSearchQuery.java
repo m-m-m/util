@@ -15,8 +15,7 @@ public interface ComplexSearchQuery extends SearchQuery {
    * {@link net.sf.mmm.search.api.SearchEntry entry} has to match the
    * <code>subQuery</code> in order to match this complex query.
    * 
-   * @param subQuery
-   *        is the sub-query to add.
+   * @param subQuery is the sub-query to add.
    */
   void addRequiredQuery(SearchQuery subQuery);
 
@@ -27,8 +26,7 @@ public interface ComplexSearchQuery extends SearchQuery {
    * sub-queries match, this complex query can still match with a lower
    * {@link SearchHit#getScore() score}.
    * 
-   * @param subQuery
-   *        is the sub-query to add.
+   * @param subQuery is the sub-query to add.
    */
   void addOptionalQuery(SearchQuery subQuery);
 
@@ -37,8 +35,7 @@ public interface ComplexSearchQuery extends SearchQuery {
    * A {@link net.sf.mmm.search.api.SearchEntry entry} must NOT match the
    * <code>subQuery</code> in order to match this complex query.
    * 
-   * @param subQuery
-   *        is the sub-query to add.
+   * @param subQuery is the sub-query to add.
    */
   void addExcludingQuery(SearchQuery subQuery);
 

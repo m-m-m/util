@@ -23,8 +23,7 @@ public class DependencyCycleException extends DependencyException {
   /**
    * The constructor.
    * 
-   * @param cycle
-   *        is a textual representation of the cycle (e.g. "A->B->C->A").
+   * @param cycle is a textual representation of the cycle (e.g. "A->B->C->A").
    */
   public DependencyCycleException(String cycle) {
 

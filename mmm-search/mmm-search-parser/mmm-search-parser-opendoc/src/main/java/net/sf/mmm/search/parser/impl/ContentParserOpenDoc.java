@@ -41,8 +41,8 @@ public class ContentParserOpenDoc extends AbstractContentParser {
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding,
-      Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+      throws Exception {
 
     ZipInputStream zipInputStream = new ZipInputStream(inputStream);
     // new BufferedInputStream(zipInputStream);

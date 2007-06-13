@@ -7,9 +7,10 @@ import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteOrientation;
 
 /**
- * This is the interface for a split panel. Such component is a special composite
- * that is split eigther horizontal or vertical. Therefore two components can be
- * added to this split panel. They appear eigther side-by-side (if the
+ * This is the interface for a split panel. Such component is a special
+ * composite that is split eigther horizontal or vertical. Therefore two
+ * components can be added to this split panel. They appear eigther side-by-side
+ * (if the
  * {@link net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation() orientation}
  * is {@link net.sf.mmm.ui.toolkit.api.composite.Orientation#HORIZONTAL}) or
  * top-to-bottom (if the
@@ -36,8 +37,7 @@ public interface UISplitPanel extends UIComposite, UIWriteOrientation {
    * This method sets the component placed to the top (horizontal orientation)
    * or the left (vertical orientation).
    * 
-   * @param component
-   *        is the component to add.
+   * @param component is the component to add.
    */
   void setTopOrLeftComponent(UIComponent component);
 
@@ -54,8 +54,7 @@ public interface UISplitPanel extends UIComposite, UIWriteOrientation {
    * This method sets the component placed to the bottom (horizontal
    * orientation) or the right (vertical orientation).
    * 
-   * @param component
-   *        is the component to add.
+   * @param component is the component to add.
    */
   void setBottomOrRightComponent(UIComponent component);
 
@@ -71,11 +70,10 @@ public interface UISplitPanel extends UIComposite, UIWriteOrientation {
   /**
    * This method sets the position of the divider used to split the panel.
    * 
-   * @param proportion
-   *        is a value in the range of 0.0 to 1.0. A value of 0.0 will set the
-   *        position of the divider to the top or left, a value of 1.0 will
-   *        set it to the bottom or right, a value of 0.5 will center the
-   *        divider, etc.
+   * @param proportion is a value in the range of 0.0 to 1.0. A value of 0.0
+   *        will set the position of the divider to the top or left, a value of
+   *        1.0 will set it to the bottom or right, a value of 0.5 will center
+   *        the divider, etc.
    */
   void setDividerPosition(double proportion);
 

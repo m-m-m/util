@@ -28,12 +28,10 @@ public class UIPictureImpl extends AbstractUIPicture {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the UIFactorySwt instance.
-   * @param imageUrl
-   *        is the URL to the image data.
-   * @throws IOException
-   *         on I/O error opening or reading data from the given URL.
+   * @param uiFactory is the UIFactorySwt instance.
+   * @param imageUrl is the URL to the image data.
+   * @throws IOException on I/O error opening or reading data from the given
+   *         URL.
    */
   public UIPictureImpl(UIFactorySwt uiFactory, URL imageUrl) throws IOException {
 

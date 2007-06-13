@@ -24,10 +24,8 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param pojoType
-   *        is the class reflecting the POJO.
-   * @param propertyName
-   *        is the name of the missing property.
+   * @param pojoType is the class reflecting the POJO.
+   * @param propertyName is the name of the missing property.
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName) {
 
@@ -39,12 +37,9 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    * 
    * TODO: own exception?
    * 
-   * @param pojoType
-   *        is the class reflecting the POJO.
-   * @param propertyName
-   *        is the name of the missing property.
-   * @param mode
-   *        is the access-mode for which the property is NOT available.
+   * @param pojoType is the class reflecting the POJO.
+   * @param propertyName is the name of the missing property.
+   * @param mode is the access-mode for which the property is NOT available.
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName,
       PojoPropertyAccessMode mode) {

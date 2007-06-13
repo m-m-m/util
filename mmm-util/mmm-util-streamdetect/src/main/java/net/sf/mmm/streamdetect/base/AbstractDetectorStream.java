@@ -15,55 +15,54 @@ import net.sf.mmm.streamdetect.api.DetectorStream;
  */
 public abstract class AbstractDetectorStream implements DetectorStream {
 
-    /** @see #getMetadata() */
-    private MutableContext context;
+  /** @see #getMetadata() */
+  private MutableContext context;
 
-    /** @see #isDone() */
-    private boolean done;
+  /** @see #isDone() */
+  private boolean done;
 
-    /**
-     * The constructor.
-     */
-    public AbstractDetectorStream() {
+  /**
+   * The constructor.
+   */
+  public AbstractDetectorStream() {
 
-        this(new MutableContextImpl());
-    }
+    this(new MutableContextImpl());
+  }
 
-    /**
-     * The constructor.
-     * 
-     * @param metadata
-     *        is the initial {@link #getMetadata() metadata}.
-     */
-    public AbstractDetectorStream(MutableContext metadata) {
+  /**
+   * The constructor.
+   * 
+   * @param metadata is the initial {@link #getMetadata() metadata}.
+   */
+  public AbstractDetectorStream(MutableContext metadata) {
 
-        super();
-        this.context = metadata;
-        this.done = false;
-    }
+    super();
+    this.context = metadata;
+    this.done = false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Context getMetadata() {
+  /**
+   * {@inheritDoc}
+   */
+  public Context getMetadata() {
 
-        return this.context.getImmutableContext();
-    }
+    return this.context.getImmutableContext();
+  }
 
-    /**
-     * This method sets the {@link #isDone() done} flag.
-     */
-    protected void setDone() {
+  /**
+   * This method sets the {@link #isDone() done} flag.
+   */
+  protected void setDone() {
 
-        this.done = true;
-    }
+    this.done = true;
+  }
 
-    /**
-     * {@inheritDoc} 
-     */
-    public boolean isDone() {
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isDone() {
 
-        return this.done;
-    }
+    return this.done;
+  }
 
 }

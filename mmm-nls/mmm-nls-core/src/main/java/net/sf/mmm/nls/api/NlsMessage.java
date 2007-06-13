@@ -29,8 +29,7 @@ public interface NlsMessage extends NlsObject {
    * This method gets the language independent argument at the given
    * <code>index</code>.
    * 
-   * @param index
-   *        is the position of the requested argument.
+   * @param index is the position of the requested argument.
    * @return the argument at the given index.
    */
   Object getArgument(int index);
@@ -65,8 +64,7 @@ public interface NlsMessage extends NlsObject {
    * 
    * @see NlsMessage#getLocalizedMessage(NlsTranslator, StringBuffer)
    * 
-   * @param nationalizer
-   *        is used to translate the message.
+   * @param nationalizer is used to translate the message.
    * @return the localized message.
    */
   String getLocalizedMessage(NlsTranslator nationalizer);
@@ -80,10 +78,8 @@ public interface NlsMessage extends NlsObject {
    * independent arguments will be filled in the translated message string
    * according to the locale of the translated message.
    * 
-   * @param nationalizer
-   *        is used to translates the original message.
-   * @param buffer
-   *        is the buffer where to write the message to.
+   * @param nationalizer is used to translates the original message.
+   * @param buffer is the buffer where to write the message to.
    */
   void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer buffer);
 

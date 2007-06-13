@@ -94,10 +94,9 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * The constructor.
    * 
-   * @param uiDevice
-   *        is the device the display of this factory belongs to.
-   * @param graphicConfiguration
-   *        is the graphics configuration for the display to represent.
+   * @param uiDevice is the device the display of this factory belongs to.
+   * @param graphicConfiguration is the graphics configuration for the display
+   *        to represent.
    */
   public UIFactorySwing(UIDeviceImpl uiDevice, GraphicsConfiguration graphicConfiguration) {
 
@@ -161,13 +160,13 @@ public class UIFactorySwing extends AbstractUIFactory {
    */
   public <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component) {
-  
+
     UIDecoratedComponent<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this, null);
     decoratedComponent.setDecorator(decorator);
     decoratedComponent.setComponent(component);
     return decoratedComponent;
   }
-  
+
   /**
    * {@inheritDoc}
    */

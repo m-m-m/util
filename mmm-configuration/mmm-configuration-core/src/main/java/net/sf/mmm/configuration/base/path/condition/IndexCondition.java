@@ -25,11 +25,10 @@ public class IndexCondition implements Condition {
   private final int index;
 
   /**
-   * The constructor. 
+   * The constructor.
    * 
-   * @param siblingIndex
-   *        is the {@link #getIndex() index} to check for. ATTENTION:
-   *        translation from 1-based to 0-based index required!
+   * @param siblingIndex is the {@link #getIndex() index} to check for.
+   *        ATTENTION: translation from 1-based to 0-based index required!
    */
   public IndexCondition(int siblingIndex) {
 
@@ -49,10 +48,10 @@ public class IndexCondition implements Condition {
    * {@inheritDoc}
    */
   public boolean canBeEstablished(AbstractConfiguration configuration, String namespaceUri) {
-  
+
     return true;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -74,7 +73,7 @@ public class IndexCondition implements Condition {
         String name = configuration.getName();
         String nsUri = namespaceUri;
         if (nsUri == null) {
-          nsUri = configuration.getNamespaceUri();          
+          nsUri = configuration.getNamespaceUri();
         }
         int diff = count - this.index + 1;
         if (diff > 20) {

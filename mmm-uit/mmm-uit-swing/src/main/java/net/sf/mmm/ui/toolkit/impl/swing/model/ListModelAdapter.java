@@ -11,11 +11,10 @@ import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
- * a swing {@link javax.swing.ListModel}.
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * swing {@link javax.swing.ListModel}.
  * 
- * @param <E>
- *        is the templated type of the elements that can be selected.
+ * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,8 +29,7 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
   /**
    * The constructor.
    * 
-   * @param listModel
-   *        is the list model to adapt to swing.
+   * @param listModel is the list model to adapt to swing.
    */
   public ListModelAdapter(UIListModel<E> listModel) {
 

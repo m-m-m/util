@@ -161,8 +161,7 @@ public abstract class AbstractUIFactory implements UIFactory {
    * {@link net.sf.mmm.ui.toolkit.api.UINode nodes} contained in the window.
    * This way all visible GUI elements are refreshed.
    * 
-   * @param event
-   *        is the event with details about the refresh.
+   * @param event is the event with details about the refresh.
    */
   public void refresh(UIRefreshEvent event) {
 
@@ -179,8 +178,7 @@ public abstract class AbstractUIFactory implements UIFactory {
    * This method adds (registers) the given <code>window</code> to this
    * factory.
    * 
-   * @param window
-   *        is the window to add.
+   * @param window is the window to add.
    */
   public void addWindow(AbstractUIWindow window) {
 
@@ -193,8 +191,7 @@ public abstract class AbstractUIFactory implements UIFactory {
    * This method removes (de-registers) the given <code>window</code> from
    * this factory.
    * 
-   * @param window
-   *        is the window to remove.
+   * @param window is the window to remove.
    */
   public void removeWindow(AbstractUIWindow window) {
 

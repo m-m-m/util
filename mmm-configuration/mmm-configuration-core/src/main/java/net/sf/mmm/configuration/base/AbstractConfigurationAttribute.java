@@ -22,8 +22,7 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
   /**
    * The constructor.
    * 
-   * @param parentConfiguration
-   *        is the parent configuration.
+   * @param parentConfiguration is the parent configuration.
    */
   public AbstractConfigurationAttribute(AbstractConfiguration parentConfiguration) {
 
@@ -69,10 +68,10 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
    */
   @Override
   public Iterator<AbstractConfiguration> getChildren(Pattern namePattern, String namespaceUri) {
-  
+
     return EmptyConfigurationIterator.getInstance();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -102,25 +101,25 @@ public abstract class AbstractConfigurationAttribute extends AbstractConfigurati
     // TODO: NLS
     throw new ConfigurationException("Attribute cannot have children!");
   }
- 
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void addSibling(AbstractConfiguration element) {
-  
+
     // TODO: NLS
     throw new ConfigurationException("Attribute cannot have siblings!");
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public boolean removeSibling(AbstractConfiguration element) {
-  
+
     // TODO: NLS
     throw new ConfigurationException("Attribute cannot have siblings!");
   }
-  
+
 }

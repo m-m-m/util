@@ -19,9 +19,9 @@ public interface ExtendedIdService extends IdService {
    * of a
    * {@link net.sf.mmm.content.resource.api.ContentResource content-resource}.
    * 
-   * @param existingId
-   *        is the {@link net.sf.mmm.content.api.ContentObject#getId() ID} of
-   *        the existing
+   * @param existingId is the
+   *        {@link net.sf.mmm.content.api.ContentObject#getId() ID} of the
+   *        existing
    *        {@link net.sf.mmm.content.resource.api.ContentResource content-resource}.
    * @return the new unique identifier.
    */

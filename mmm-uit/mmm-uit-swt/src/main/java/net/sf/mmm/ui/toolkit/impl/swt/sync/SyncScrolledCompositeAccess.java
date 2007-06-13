@@ -49,11 +49,9 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the menu.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
    */
   public SyncScrolledCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -63,13 +61,11 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the composite.
-   * @param swtScrolledComposite
-   *        is the scrolled composite to access.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        composite.
+   * @param swtScrolledComposite is the scrolled composite to access.
    */
   public SyncScrolledCompositeAccess(UIFactorySwt uiFactory, int swtStyle,
       ScrolledComposite swtScrolledComposite) {
@@ -129,8 +125,7 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
    * {@link ScrolledComposite#setContent(org.eclipse.swt.widgets.Control) content}
    * of the scrolled composite.
    * 
-   * @param swtContent
-   *        is the content to set.
+   * @param swtContent is the content to set.
    */
   public void setContent(Control swtContent) {
 
@@ -155,8 +150,8 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
    * {@link ScrolledComposite#setMinSize(org.eclipse.swt.graphics.Point) minimum-size}
    * of the scrolled composite.
    * 
-   * @param minSize
-   *        is the size required to display the content without scrollbars.
+   * @param minSize is the size required to display the content without
+   *        scrollbars.
    */
   public void setMinimumSize(Point minSize) {
 

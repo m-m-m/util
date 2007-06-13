@@ -21,8 +21,7 @@ public class UIDeviceImpl implements UIDevice {
   /**
    * The constructor.
    * 
-   * @param graphicsDevice
-   *        is the AWT device to represent.
+   * @param graphicsDevice is the AWT device to represent.
    */
   public UIDeviceImpl(GraphicsDevice graphicsDevice) {
 

@@ -146,7 +146,7 @@ public abstract class HttpMessage {
   private String version;
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public HttpMessage() {
 
@@ -173,8 +173,7 @@ public abstract class HttpMessage {
    * By {@link HttpMessage#HttpMessage() default} the version is
    * {@link #VERSION_1_1}.
    * 
-   * @param httpVersion
-   *        the HTTP version to set.
+   * @param httpVersion the HTTP version to set.
    */
   public void setVersion(String httpVersion) {
 
@@ -193,8 +192,8 @@ public abstract class HttpMessage {
    * <code>name</code> is NOT modified while
    * {@link #getHeaderProperty(String)} acts case in-sensitive.
    * 
-   * @param name
-   *        is the {@link #getHeaderProperty(String) header-name} to convert.
+   * @param name is the {@link #getHeaderProperty(String) header-name} to
+   *        convert.
    * @return an object that will be used as hash-key for the header with the
    *         given <code>name</code>.
    */
@@ -207,8 +206,7 @@ public abstract class HttpMessage {
    * This method gets the property with the given <code>name</code> from the
    * header of this HTTP message.
    * 
-   * @param name
-   *        is the name of the requested property.
+   * @param name is the name of the requested property.
    * @return the requested property or <code>null</code> if NOT set.
    */
   public String getHeaderProperty(String name) {
@@ -220,13 +218,10 @@ public abstract class HttpMessage {
    * This method sets a single attribute of the property with the given
    * <code>name</code> in the header of this HTTP message.<br>
    * 
-   * @param name
-   *        is the name of the property to manipulate.
-   * @param attributeName
-   *        is the name of the attribute to set.
-   * @param attributeValue
-   *        is the value of the attribute or the empty string ("") if the
-   *        attribute is just a flag.
+   * @param name is the name of the property to manipulate.
+   * @param attributeName is the name of the attribute to set.
+   * @param attributeValue is the value of the attribute or the empty string
+   *        ("") if the attribute is just a flag.
    */
   public void setHeaderPropertyAttribute(String name, String attributeName, String attributeValue) {
 
@@ -304,10 +299,8 @@ public abstract class HttpMessage {
    * {@link #getHeaderPropertyAttribute(String, String) getHeaderPropertyAttribute}({@link #HEADER_PROPERTY_CACHE_CONTROL "Cache-Control"}, {@link #HEADER_ATTRIBUTE_MAX_AGE "max-age"})
    * </pre>
    * 
-   * @param name
-   *        is the name of the requested property.
-   * @param attributeName
-   *        the name of the requested attribute.
+   * @param name is the name of the requested property.
+   * @param attributeName the name of the requested attribute.
    * @return the value of the requested attribute or <code>null</code> if the
    *         property is NOT set or does NOT contain the attribute. If the
    *         property is set but has no value, the empty string ("") is
@@ -349,10 +342,8 @@ public abstract class HttpMessage {
    * 
    * @see #appendHeaderProperty(String, String)
    * 
-   * @param name
-   *        is the name of the property to set.
-   * @param value
-   *        is the value of the property to set.
+   * @param name is the name of the property to set.
+   * @param value is the value of the property to set.
    */
   public void setHeaderProperty(String name, String value) {
 
@@ -365,10 +356,8 @@ public abstract class HttpMessage {
    * 
    * @see #appendHeaderProperty(String, String, String)
    * 
-   * @param name
-   *        is the name of the property to append to.
-   * @param appendValue
-   *        is the value to append to the header-property.
+   * @param name is the name of the property to append to.
+   * @param appendValue is the value to append to the header-property.
    */
   public void appendHeaderProperty(String name, String appendValue) {
 
@@ -382,14 +371,11 @@ public abstract class HttpMessage {
    * {@link #setHeaderProperty(String, String) setHeaderProperty}(name,
    * appendValue).
    * 
-   * @param name
-   *        is the name of the property to append to.
-   * @param appendValue
-   *        is the value to append to the header-property.
-   * @param separator
-   *        if NOT <code>null</code> and the header property is already set,
-   *        this string will be appended after the current value and before the
-   *        given <code>appendValue</code>.
+   * @param name is the name of the property to append to.
+   * @param appendValue is the value to append to the header-property.
+   * @param separator if NOT <code>null</code> and the header property is
+   *        already set, this string will be appended after the current value
+   *        and before the given <code>appendValue</code>.
    */
   public void appendHeaderProperty(String name, String appendValue, String separator) {
 
@@ -424,8 +410,7 @@ public abstract class HttpMessage {
   /**
    * This method sets the {@link #HEADER_PROPERTY_CONTENT_TYPE content-type}.
    * 
-   * @param contentType
-   *        is the content-type to set.
+   * @param contentType is the content-type to set.
    */
   public void setContentType(String contentType) {
 
@@ -449,8 +434,8 @@ public abstract class HttpMessage {
   /**
    * This method sets the {@link #HEADER_PROPERTY_CONTENT_LENGTH content-length}.
    * 
-   * @param contentLength
-   *        is the content-length to set. It should be a non-negative value.
+   * @param contentLength is the content-length to set. It should be a
+   *        non-negative value.
    */
   public void setContentLength(long contentLength) {
 
@@ -472,8 +457,7 @@ public abstract class HttpMessage {
    * This method sets the
    * {@link #HEADER_PROPERTY_CONTENT_ENCODING content-encoding}.
    * 
-   * @param encoding
-   *        is the content-encoding to set.
+   * @param encoding is the content-encoding to set.
    */
   public void setContentEncoding(String encoding) {
 
@@ -484,8 +468,7 @@ public abstract class HttpMessage {
    * This method sets the {@link #HEADER_ATTRIBUTE_MAX_AGE maximum age} (lease
    * time) in seconds.<br>
    * 
-   * @param seconds
-   *        is the max-age in seconds.
+   * @param seconds is the max-age in seconds.
    */
   public void setCacheControlMaxAge(int seconds) {
 
@@ -531,8 +514,7 @@ public abstract class HttpMessage {
    * 
    * TODO: implement HTTP date formatter
    * 
-   * @param date
-   *        is the date to set.
+   * @param date is the date to set.
    */
   public void setDate(String date) {
 
@@ -543,16 +525,14 @@ public abstract class HttpMessage {
    * This method writes the first line (request-line or status-line) of the HTTP
    * message.
    * 
-   * @param buffer
-   *        is the string-buffer where to append the first line.
+   * @param buffer is the string-buffer where to append the first line.
    */
   protected abstract void writeFirstLine(StringBuffer buffer);
 
   /**
    * This method serializes this HTTP-message to the given string buffer.
    * 
-   * @param buffer
-   *        is the string buffer where to append this HTTP-message to.
+   * @param buffer is the string buffer where to append this HTTP-message to.
    */
   public void serialize(StringBuffer buffer) {
 
@@ -590,10 +570,9 @@ public abstract class HttpMessage {
     private int hash;
 
     /**
-     * The constructor. 
+     * The constructor.
      * 
-     * @param key
-     *        is the name of the property.
+     * @param key is the name of the property.
      */
     public HeaderPropertyKey(String key) {
 

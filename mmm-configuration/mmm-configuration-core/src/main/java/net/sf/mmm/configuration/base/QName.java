@@ -25,10 +25,8 @@ public final class QName {
   /**
    * The constructor.
    * 
-   * @param localName
-   *        is the local {@link #name}.
-   * @param nsUri
-   *        is the {@link #namespaceUri}.
+   * @param localName is the local {@link #name}.
+   * @param nsUri is the {@link #namespaceUri}.
    */
   public QName(String localName, String nsUri) {
 
@@ -40,8 +38,7 @@ public final class QName {
   /**
    * The constructor.
    * 
-   * @param config
-   *        is the configuration where to take qualified name from.
+   * @param config is the configuration where to take qualified name from.
    */
   public QName(Configuration config) {
 

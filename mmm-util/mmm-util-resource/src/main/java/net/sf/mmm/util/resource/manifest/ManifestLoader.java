@@ -37,9 +37,8 @@ public class ManifestLoader {
   /**
    * The constructor.
    * 
-   * @throws IOException
-   *         if a general I/O error occurred while reflectively reading the
-   *         manifests.
+   * @throws IOException if a general I/O error occurred while reflectively
+   *         reading the manifests.
    */
   public ManifestLoader() throws IOException {
 
@@ -49,11 +48,9 @@ public class ManifestLoader {
   /**
    * The constructor.
    * 
-   * @param encoding
-   *        is the encoding used to read the manifest files.
-   * @throws IOException
-   *         if a general I/O error occurred while reflectively reading the
-   *         manifests.
+   * @param encoding is the encoding used to read the manifest files.
+   * @throws IOException if a general I/O error occurred while reflectively
+   *         reading the manifests.
    */
   public ManifestLoader(String encoding) throws IOException {
 

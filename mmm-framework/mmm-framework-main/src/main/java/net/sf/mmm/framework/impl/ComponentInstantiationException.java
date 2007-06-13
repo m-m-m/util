@@ -15,29 +15,26 @@ import net.sf.mmm.framework.api.ComponentException;
  */
 public class ComponentInstantiationException extends ComponentException {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 8168893735381325200L;
+  /** UID for serialization. */
+  private static final long serialVersionUID = 8168893735381325200L;
 
-    /**
-     * The constructor.
-     * 
-     * @param specification
-     *        is the component
-     *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}.
-     * @param implementation
-     *        is the component
-     *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getImplementation() implementation}.
-     * @param instanceId
-     *        is the
-     *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class, String) instance-ID}
-     *        of the component.
-     * @param cause
-     *        is the exception that caused this error.
-     */
-    public ComponentInstantiationException(Class specification, Class implementation,
-            String instanceId, Exception cause) {
+  /**
+   * The constructor.
+   * 
+   * @param specification is the component
+   *        {@link net.sf.mmm.framework.api.ComponentDescriptor#getSpecification() specification}.
+   * @param implementation is the component
+   *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getImplementation() implementation}.
+   * @param instanceId is the
+   *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class, String) instance-ID}
+   *        of the component.
+   * @param cause is the exception that caused this error.
+   */
+  public ComponentInstantiationException(Class specification, Class implementation,
+      String instanceId, Exception cause) {
 
-        super(cause, NlsBundleFrameworkCore.ERR_INSTANTIATION, specification, implementation, instanceId);
-    }
+    super(cause, NlsBundleFrameworkCore.ERR_INSTANTIATION, specification, implementation,
+        instanceId);
+  }
 
 }

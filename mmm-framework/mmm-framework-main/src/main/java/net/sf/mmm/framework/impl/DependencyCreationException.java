@@ -17,31 +17,27 @@ import net.sf.mmm.framework.api.Dependency;
  */
 public class DependencyCreationException extends DependencyException {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 6421581325810304694L;
+  /** UID for serialization. */
+  private static final long serialVersionUID = 6421581325810304694L;
 
-    /**
-     * The constructor.
-     * 
-     * @param sourceDescriptor
-     *        is the {@link ComponentDescriptor descriptor} of the component
-     *        that requested the
-     *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getDependencies() dependency}.
-     * @param sourceInstanceId
-     *        is the
-     *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class, String) instance-ID}
-     *        of the component causing this request.
-     * @param dependency
-     *        is the {@link Dependency descriptor} of the dependency that
-     *        could NOT be created.
-     * @param cause
-     *        is the exception that caused this error.
-     */
-    public DependencyCreationException(ComponentDescriptor<?> sourceDescriptor,
-            String sourceInstanceId, Dependency dependency, Exception cause) {
+  /**
+   * The constructor.
+   * 
+   * @param sourceDescriptor is the {@link ComponentDescriptor descriptor} of
+   *        the component that requested the
+   *        {@link net.sf.mmm.framework.api.ExtendedComponentDescriptor#getDependencies() dependency}.
+   * @param sourceInstanceId is the
+   *        {@link net.sf.mmm.framework.api.ComponentManager#requestComponent(Class, String) instance-ID}
+   *        of the component causing this request.
+   * @param dependency is the {@link Dependency descriptor} of the dependency
+   *        that could NOT be created.
+   * @param cause is the exception that caused this error.
+   */
+  public DependencyCreationException(ComponentDescriptor<?> sourceDescriptor,
+      String sourceInstanceId, Dependency dependency, Exception cause) {
 
-        super(cause, NlsBundleFrameworkCore.ERR_DEPENDENCY_CREATION, sourceDescriptor, sourceInstanceId,
-                dependency);
-    }
+    super(cause, NlsBundleFrameworkCore.ERR_DEPENDENCY_CREATION, sourceDescriptor,
+        sourceInstanceId, dependency);
+  }
 
 }

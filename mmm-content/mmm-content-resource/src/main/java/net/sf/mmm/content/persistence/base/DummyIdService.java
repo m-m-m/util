@@ -7,10 +7,9 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.value.api.Id;
 import net.sf.mmm.content.value.impl.IdImpl;
 
-
 /**
  * TODO: this class ...
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DummyIdService extends AbstractIdService {
@@ -23,10 +22,10 @@ public class DummyIdService extends AbstractIdService {
 
   /** @see #createResourceId(ContentClass) */
   private long resourceIdCounter;
-  
-   /**
-    * The constructor. 
-    */
+
+  /**
+   * The constructor.
+   */
   public DummyIdService() {
 
     super();

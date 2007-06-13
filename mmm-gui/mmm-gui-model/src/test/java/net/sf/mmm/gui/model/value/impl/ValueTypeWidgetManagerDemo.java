@@ -17,7 +17,7 @@ import net.sf.mmm.value.impl.StaticValueServiceImpl;
 
 /**
  * TODO This type ...
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ValueTypeWidgetManagerDemo {
@@ -29,16 +29,16 @@ public class ValueTypeWidgetManagerDemo {
 
     super();
   }
-  
+
   /**
    * The main method to run this class.
    * 
-   * @param args
-   *        are the command-line arguments.
+   * @param args are the command-line arguments.
    */
   public static void main(String[] args) {
+
     UIFactory uiFactory = new UIFactorySwing();
-    ValueService valueService = new StaticValueServiceImpl();    
+    ValueService valueService = new StaticValueServiceImpl();
     ValueTypeListModel valueTypeModel = new ValueTypeListModel();
     valueTypeModel.setValueService(valueService);
     valueTypeModel.initialize();
@@ -51,5 +51,5 @@ public class ValueTypeWidgetManagerDemo {
     frame.setComposite(panel);
     frame.setVisible(true);
   }
-  
+
 }

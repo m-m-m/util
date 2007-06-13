@@ -66,22 +66,20 @@ public abstract class AbstractConfigurationAccessFactory implements Configuratio
    *      net.sf.mmm.configuration.api.Configuration)
    * @see #getAccessors()
    * 
-   * @param prefix
-   *        is the prefix for the {@link Context#getValue(String) "variables"}.
-   * @param context
-   *        is the context (potentially) containing the required configuration.
-   * @param include
-   *        is the
+   * @param prefix is the prefix for the
+   *        {@link Context#getValue(String) "variables"}.
+   * @param context is the context (potentially) containing the required
+   *        configuration.
+   * @param include is the
    *        {@link net.sf.mmm.configuration.api.ConfigurationDocument#NAME_INCLUDE include}
    *        configuration.
-   * @param parent
-   *        is the parent access the given <code>href</code> may be relative
-   *        to. It should only be interpreted if the given <code>href</code>
-   *        is relative and may potentially be <code>null</code> in other
-   *        cases.
-   * @param href
-   *        is the value of the {@link ConfigurationDocument#NAME_INCLUDE_HREF}
-   *        attribute. It can be relative or absolute.
+   * @param parent is the parent access the given <code>href</code> may be
+   *        relative to. It should only be interpreted if the given
+   *        <code>href</code> is relative and may potentially be
+   *        <code>null</code> in other cases.
+   * @param href is the value of the
+   *        {@link ConfigurationDocument#NAME_INCLUDE_HREF} attribute. It can be
+   *        relative or absolute.
    * @return the {@link #getAccessors() accessors}.
    * @throws ConfigurationException
    */

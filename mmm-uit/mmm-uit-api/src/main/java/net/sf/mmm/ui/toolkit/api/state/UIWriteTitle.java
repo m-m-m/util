@@ -20,8 +20,7 @@ public interface UIWriteTitle {
   /**
    * This method sets the title of this object.
    * 
-   * @param newTitle
-   *        is the new title to set.
+   * @param newTitle is the new title to set.
    */
   void setTitle(String newTitle);
 

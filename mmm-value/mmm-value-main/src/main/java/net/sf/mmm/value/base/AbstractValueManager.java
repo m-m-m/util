@@ -24,8 +24,7 @@ import net.sf.mmm.value.api.ValueParseException;
  * 
  * @see net.sf.mmm.value.base.BasicValueManager
  * 
- * @param <V>
- *        is the templated type of the managed value type.
+ * @param <V> is the templated type of the managed value type.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -51,8 +50,8 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   public final synchronized NlsMessage getToStringMessage() {
 
     if (this.toStringMessage == null) {
-      this.toStringMessage = new NlsMessageImpl(NlsBundleValueMain.MSG_MANAGER_TO_STRING, getName(),
-          getValueClass());
+      this.toStringMessage = new NlsMessageImpl(NlsBundleValueMain.MSG_MANAGER_TO_STRING,
+          getName(), getValueClass());
     }
     return this.toStringMessage;
   }
@@ -78,17 +77,14 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
    * value. This default implementation uses {@link #toString(Object)} to
    * convert the value to string and then writes it as
    * {@link XmlWriter#writeCharacters(String) text} content.<br>
-   * Override this method to implement specific custom XML. If you override
-   * this method you should also override {@link #parse(Element)}.
+   * Override this method to implement specific custom XML. If you override this
+   * method you should also override {@link #parse(Element)}.
    * 
    * @see #toXml(XmlWriter, Object)
    * 
-   * @param xmlWriter
-   *        is where the XML is written to.
-   * @param value
-   *        is the value to serialize. It may be <code>null</code>.
-   * @throws XmlException
-   *         if the XML serialization fails.
+   * @param xmlWriter is where the XML is written to.
+   * @param value is the value to serialize. It may be <code>null</code>.
+   * @throws XmlException if the XML serialization fails.
    */
   protected void toXmlValue(XmlWriter xmlWriter, V value) throws XmlException {
 
@@ -116,13 +112,10 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
 
   /**
-   * This method validates the top-level element of the given XML encoded
-   * value.
+   * This method validates the top-level element of the given XML encoded value.
    * 
-   * @param valueAsXml
-   *        is the XML encoded value to validate.
-   * @throws ValueParseException
-   *         if the given XML is invalid.
+   * @param valueAsXml is the XML encoded value to validate.
+   * @throws ValueParseException if the given XML is invalid.
    */
   protected void checkXml(Element valueAsXml) throws ValueParseException {
 
@@ -156,34 +149,34 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
       throw new ValueParseException(null);
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public Type getValueType() {
-  
+
     return getValueClass();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public boolean isEqual(V value1, V value2) {
-  
+
     if (value1 == null) {
       return (value2 == null);
     } else {
       if (value2 == null) {
         return false;
       } else {
-        return value1.equals(value2);        
+        return value1.equals(value2);
       }
     }
   }
 
   /**
-   * This method gets the String that represents the <code>null</code>
-   * value. This method always returns the same (==) object ({@link GenericValue#NULL_STRING}).
+   * This method gets the String that represents the <code>null</code> value.
+   * This method always returns the same (==) object ({@link GenericValue#NULL_STRING}).
    * It can be overridden to change the <code>null</code> string.
    * 
    * @return the string that represents the <code>null</code> value.

@@ -48,8 +48,7 @@ public interface ConfigurationFactory {
   String CONTEXT_VARIABLE_PREFIX = "net.sf.mmm.configuration.format.";
 
   /**
-   * The suffix for the {@link Context#getValue(String) variable} containing
-   * the
+   * The suffix for the {@link Context#getValue(String) variable} containing the
    * {@link net.sf.mmm.value.api.GenericValue#getJavaClass(Class) factory implementation}.<br>
    * E.g. <code>{@link #CONTEXT_VARIABLE_PREFIX} + "xml" +
    * {@link #CONTEXT_VARIABLE_SUFFIX_FACTORY} =
@@ -68,24 +67,21 @@ public interface ConfigurationFactory {
   /**
    * This method configures the configuration factory.
    * 
-   * @param prefix
-   *        is the prefix for the {@link Context#getValue(String) variables}
-   *        containing the factory configuration. It is build by the
-   *        {@link #CONTEXT_VARIABLE_PREFIX} with
-   *        {@link ConfigurationDocument#NAME_INCLUDE_FORMAT format} and "."
-   *        appended.
-   * @param context
-   *        is the context (potentially) containing the required configuration
-   *        for this factory. The implementation should only read
-   *        {@link Context#getValue(String) variables} that start with the
-   *        given <code>prefix</code>.
-   * @param include
-   *        is the {@link ConfigurationDocument#NAME_INCLUDE include}
+   * @param prefix is the prefix for the
+   *        {@link Context#getValue(String) variables} containing the factory
+   *        configuration. It is build by the {@link #CONTEXT_VARIABLE_PREFIX}
+   *        with {@link ConfigurationDocument#NAME_INCLUDE_FORMAT format} and
+   *        "." appended.
+   * @param context is the context (potentially) containing the required
+   *        configuration for this factory. The implementation should only read
+   *        {@link Context#getValue(String) variables} that start with the given
+   *        <code>prefix</code>.
+   * @param include is the {@link ConfigurationDocument#NAME_INCLUDE include}
    *        configuration.
-   * @throws ConfigurationException
-   *         if the configuration is illegal for this implementation.
-   * @throws ValueException
-   *         if a configuration value is missing or has the wrong type.
+   * @throws ConfigurationException if the configuration is illegal for this
+   *         implementation.
+   * @throws ValueException if a configuration value is missing or has the wrong
+   *         type.
    */
   void configure(String prefix, Context context, Configuration include)
       throws ConfigurationException, ValueException;
@@ -95,11 +91,10 @@ public interface ConfigurationFactory {
    * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}
    * via the given {@link ConfigurationAccess access}.
    * 
-   * @param access
-   *        gives read/write access to the configuration data.
+   * @param access gives read/write access to the configuration data.
    * @return the loaded configuration.
-   * @throws ConfigurationException
-   *         if the configuration data could not be read or is illegal.
+   * @throws ConfigurationException if the configuration data could not be read
+   *         or is illegal.
    */
   AbstractConfigurationDocument create(ConfigurationAccess access) throws ConfigurationException;
 
@@ -110,14 +105,12 @@ public interface ConfigurationFactory {
    * 
    * @see net.sf.mmm.configuration.base.ConfigurationUtil#initializeContext(MutableContext)
    * 
-   * @param access
-   *        gives read/write access to the configuration data.
-   * @param context
-   *        is the {@link ConfigurationDocument#getContext() context} for the
-   *        document.
+   * @param access gives read/write access to the configuration data.
+   * @param context is the {@link ConfigurationDocument#getContext() context}
+   *        for the document.
    * @return the loaded configuration.
-   * @throws ConfigurationException
-   *         if the configuration data could not be read or is illegal.
+   * @throws ConfigurationException if the configuration data could not be read
+   *         or is illegal.
    */
   AbstractConfigurationDocument create(ConfigurationAccess access, MutableContext context)
       throws ConfigurationException;
@@ -127,14 +120,12 @@ public interface ConfigurationFactory {
    * {@link net.sf.mmm.configuration.api.ConfigurationDocument configuration-document}
    * via the given {@link ConfigurationAccess access}.
    * 
-   * @param access
-   *        gives read/write access to the configuration data.
-   * @param parentConfiguration
-   *        is the parent-configuration for the
+   * @param access gives read/write access to the configuration data.
+   * @param parentConfiguration is the parent-configuration for the
    *        {@link ConfigurationDocument#getConfiguration() "document configuration"}.
    * @return the loaded configuration.
-   * @throws ConfigurationException
-   *         if the configuration data could not be read or is illegal.
+   * @throws ConfigurationException if the configuration data could not be read
+   *         or is illegal.
    */
   AbstractConfigurationDocument create(ConfigurationAccess access,
       AbstractConfiguration parentConfiguration) throws ConfigurationException;

@@ -106,7 +106,7 @@ public interface ConfigurationDocument {
    * {@link Configuration.Type#ATTRIBUTE attribute} that determines if the
    * configuration to {@link #NAME_INCLUDE include} should be lazy-loaded. If
    * this attribute is set to <code>true</code>, the included
-   * configuration(s) will only be 
+   * configuration(s) will only be
    */
   String NAME_INCLUDE_LAZY = "@lazy";
 
@@ -181,17 +181,15 @@ public interface ConfigurationDocument {
   /**
    * This method saves the unsaved changes of this configuration document.
    * 
-   * @throws ConfigurationException
-   *         if the configuration data is illegal or writing failed (e.g. I/O
-   *         problem).
+   * @throws ConfigurationException if the configuration data is illegal or
+   *         writing failed (e.g. I/O problem).
    */
   void save() throws ConfigurationException;
 
   /**
    * This method reloads the configuration.
    * 
-   * @throws ConfigurationException
-   *         if the reload failed.
+   * @throws ConfigurationException if the reload failed.
    */
   void reload() throws ConfigurationException;
 

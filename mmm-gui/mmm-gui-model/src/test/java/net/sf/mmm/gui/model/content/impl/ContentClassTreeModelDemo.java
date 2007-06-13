@@ -43,8 +43,7 @@ public class ContentClassTreeModelDemo {
   /**
    * The main method to run this class.
    * 
-   * @param args
-   *        are the command-line arguments.
+   * @param args are the command-line arguments.
    * @throws Exception
    */
   public static void main(String[] args) throws Exception {

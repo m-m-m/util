@@ -35,8 +35,7 @@ public enum OperatorPriority {
   /**
    * The constructor.
    * 
-   * @param prio
-   *        is the actual priority value.
+   * @param prio is the actual priority value.
    */
   private OperatorPriority(int prio) {
 
@@ -47,12 +46,11 @@ public enum OperatorPriority {
    * This method gets the {@link OperatorPriority} with the given
    * {@link #priority}.
    * 
-   * @param prio
-   *        is the {@link #priority} of the requested {@link OperatorPriority}.
+   * @param prio is the {@link #priority} of the requested
+   *        {@link OperatorPriority}.
    * @return the requested {@link OperatorPriority}.
-   * @throws IllegalArgumentException
-   *         if no {@link OperatorPriority} exists with a {@link #priority} of
-   *         <code>prio</code>.
+   * @throws IllegalArgumentException if no {@link OperatorPriority} exists with
+   *         a {@link #priority} of <code>prio</code>.
    */
   public static OperatorPriority valueOf(int prio) {
 

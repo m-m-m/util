@@ -29,13 +29,12 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is the
+   * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
    *        instance.
-   * @param parentObject
-   *        is the {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent}
-   *        that created this object. It may be <code>null</code>.
+   * @param parentObject is the
+   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        created this object. It may be <code>null</code>.
    */
   public UIWindowImpl(AbstractUIFactory uiFactory, UINode parentObject) {
 
@@ -225,7 +224,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    */
   @Override
   public void refresh(UIRefreshEvent event) {
-  
+
     super.refresh(event);
     ScriptOrientation orientation = getFactory().getScriptOrientation();
     if (orientation.isLeftToRight()) {
@@ -234,5 +233,5 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
       getAwtWindow().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     }
   }
-  
+
 }

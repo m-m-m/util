@@ -20,21 +20,22 @@ import net.sf.mmm.framework.base.provider.AbstractPerRequestComponentProvider;
  */
 public class LoggerProvider extends AbstractPerRequestComponentProvider<Log> {
 
-    /**
-     * The constructor.
-     */
-    public LoggerProvider() {
+  /**
+   * The constructor.
+   */
+  public LoggerProvider() {
 
-        super(Log.class);
-    }
+    super(Log.class);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Log requestDefault(ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId, ComponentManager componentManager) throws ComponentException {
-    
-        return new Log4JLogger(sourceDescriptor.getCategory());
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Log requestDefault(ComponentDescriptor<?> sourceDescriptor, String sourceInstanceId,
+      ComponentManager componentManager) throws ComponentException {
+
+    return new Log4JLogger(sourceDescriptor.getCategory());
+  }
 
 }

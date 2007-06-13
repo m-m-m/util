@@ -56,8 +56,8 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   /** the column names */
   // private static final String[] COLUMN_NAMES = {"Name", "Class", "Type",
   // "Deleted", "Modifiers"};
-  private static final String[] COLUMN_NAMES = {"Name", "Class", "Type", "Deleted", "System",
-      "Static", "Final", "Read-only", "Transient"};
+  private static final String[] COLUMN_NAMES = { "Name", "Class", "Type", "Deleted", "System",
+      "Static", "Final", "Read-only", "Transient" };
 
   /** the content class for the */
   private final ContentClass cClass;
@@ -81,7 +81,7 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
     this.fields = new ArrayList<ContentField>();
     this.model = modelService;
     for (ContentField field : this.cClass.getDeclaredFields()) {
-      this.fields.add(field);      
+      this.fields.add(field);
     }
     this.model.getEventRegistrar().addListener(this);
   }
@@ -144,17 +144,17 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
       case COLUMN_DELETED:
         return Boolean.valueOf(field.isDeleted());
         // return Boolean.valueOf(field.isDeletedFlagSet());
-      //case COLUMN_MODIFIERS:
-      //  return field.getModifiers();
-      case COLUMN_SYSTEM: 
+        // case COLUMN_MODIFIERS:
+        // return field.getModifiers();
+      case COLUMN_SYSTEM:
         return Boolean.valueOf(field.getModifiers().isSystem());
-      case COLUMN_STATIC: 
+      case COLUMN_STATIC:
         return Boolean.valueOf(field.getModifiers().isStatic());
-      case COLUMN_FINAL: 
+      case COLUMN_FINAL:
         return Boolean.valueOf(field.getModifiers().isFinal());
-      case COLUMN_READ_ONLY: 
+      case COLUMN_READ_ONLY:
         return Boolean.valueOf(field.getModifiers().isReadOnly());
-      case COLUMN_TRANSIENT: 
+      case COLUMN_TRANSIENT:
         return Boolean.valueOf(field.getModifiers().isTransient());
     }
     throw new ArrayIndexOutOfBoundsException("Illegal column-index: " + columnIndex);
@@ -188,8 +188,8 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
    * {@inheritDoc}
    */
   public ContentField getField(int rowIndex) {
-  
+
     return this.fields.get(rowIndex);
   }
-  
+
 }

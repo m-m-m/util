@@ -56,12 +56,9 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the property with the given <code>name</code> to the
    * given <code>value</code>.
    * 
-   * @param name
-   *        is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}.
-   * @param value
-   *        is the value of the property to set.
-   * @param mode
-   *        determines how the property is indexed and stored.
+   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}.
+   * @param value is the value of the property to set.
+   * @param mode determines how the property is indexed and stored.
    */
   void setProperty(String name, String value, Mode mode);
 
@@ -82,10 +79,8 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param name
-   *        is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}.
-   * @param valueReader
-   *        is a reader to the value of the property to set.
+   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}.
+   * @param valueReader is a reader to the value of the property to set.
    */
   void setProperty(String name, Reader valueReader);
 
@@ -94,8 +89,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param uri
-   *        is the URI to set.
+   * @param uri is the URI to set.
    */
   void setUri(String uri);
 
@@ -104,8 +98,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param uid
-   *        is the UID to set.
+   * @param uid is the UID to set.
    */
   void setUid(String uid);
 
@@ -114,8 +107,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param title
-   *        is the title to set.
+   * @param title is the title to set.
    */
   void setTitle(String title);
 
@@ -124,8 +116,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param text
-   *        is the text to set.
+   * @param text is the text to set.
    */
   void setText(String text);
 
@@ -134,8 +125,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param keywords
-   *        are the keywords to set.
+   * @param keywords are the keywords to set.
    */
   void setKeywords(String keywords);
 
@@ -144,8 +134,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param author
-   *        is the author to set.
+   * @param author is the author to set.
    */
   void setAuthor(String author);
 
@@ -154,8 +143,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param type
-   *        is the type to set.
+   * @param type is the type to set.
    */
   void setType(String type);
 
@@ -164,18 +152,16 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param source
-   *        is the source to set.
+   * @param source is the source to set.
    */
   void setSource(String source);
-  
+
   /**
    * This method sets the {@link #PROPERTY_SIZE size}.
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param size
-   *        is the size to set.
+   * @param size is the size to set.
    */
   void setSize(long size);
 
@@ -183,8 +169,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the boost of this this entry. The boost is a positive
    * value. The higher the boost, the
    * 
-   * @param boost
-   *        is the
+   * @param boost is the
    */
   void setBoost(double boost);
 

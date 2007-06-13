@@ -15,11 +15,10 @@ import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to
- * a Swing {@link javax.swing.tree.TreeModel}.
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to a
+ * Swing {@link javax.swing.tree.TreeModel}.
  * 
- * @param <N>
- *        is the templated type of the tree nodes.
+ * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,8 +36,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * The constructor.
    * 
-   * @param treeModel
-   *        is the tree model to adapt.
+   * @param treeModel is the tree model to adapt.
    */
   @SuppressWarnings("unchecked")
   public TreeModelAdapter(UITreeModel<N> treeModel) {
@@ -126,8 +124,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * This method fires an update event to all registered listeners.
    * 
-   * @param event
-   *        is the event to fire.
+   * @param event is the event to fire.
    */
   private void fireUpdateEvent(UITreeModelEvent<N> event) {
 
@@ -144,8 +141,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * This method fires an add event to all registered listeners.
    * 
-   * @param event
-   *        is the event to fire.
+   * @param event is the event to fire.
    */
   @SuppressWarnings("unchecked")
   private void fireAddEvent(UITreeModelEvent<N> event) {
@@ -164,8 +160,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * This method fires a remove event to all registered listeners.
    * 
-   * @param event
-   *        is the event to fire.
+   * @param event is the event to fire.
    */
   @SuppressWarnings("unchecked")
   private void fireRemoveEvent(UITreeModelEvent<N> event) {
@@ -184,8 +179,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * This method gets the tree-path of a given node.
    * 
-   * @param node
-   *        is the tree-node.
+   * @param node is the tree-node.
    * @return the tree-path from the root-node to the according node.
    */
   @SuppressWarnings("unchecked")

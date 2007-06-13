@@ -15,10 +15,8 @@ public interface SsdpSender {
   /**
    * This method sends the given <code>request</code> as multicast via UDP.
    * 
-   * @param request
-   *        is the request to send.
-   * @throws IOException
-   *         if the operation failed with an I/O problem.
+   * @param request is the request to send.
+   * @throws IOException if the operation failed with an I/O problem.
    */
   void send(SsdpRequest request) throws IOException;
 

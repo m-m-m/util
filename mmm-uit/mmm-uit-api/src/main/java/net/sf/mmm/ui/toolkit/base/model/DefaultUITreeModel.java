@@ -8,8 +8,7 @@ import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 /**
  * This is the default implementation of the UIListModel interface.
  * 
- * @param <T>
- *        is the templated type of the user data in the tree nodes.
+ * @param <T> is the templated type of the user data in the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -29,8 +28,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> 
   /**
    * The constructor.
    * 
-   * @param rootNodeData
-   *        is the data object for the root node.
+   * @param rootNodeData is the data object for the root node.
    */
   public DefaultUITreeModel(T rootNodeData) {
 

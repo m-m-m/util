@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 public abstract class AbstractHttpMessageTest extends TestCase {
 
   /**
-   * The constructor. 
+   * The constructor.
    */
   public AbstractHttpMessageTest() {
 
@@ -24,14 +24,14 @@ public abstract class AbstractHttpMessageTest extends TestCase {
   public void checkMessage(HttpMessage message) {
 
     int maxage = 1800;
-    String ccStart =  "amax-age=12345; max-ageing=42";
-    message.setHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL,
-        ccStart);
+    String ccStart = "amax-age=12345; max-ageing=42";
+    message.setHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL, ccStart);
     message.setCacheControlMaxAge(maxage);
     String ccMain = ccStart + ",max-age=" + maxage;
     assertEquals(ccMain, message.getHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL));
     message.appendHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL, "foo-bar", "; ");
-    assertEquals(ccMain + "; foo-bar", message.getHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL));
+    assertEquals(ccMain + "; foo-bar", message
+        .getHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL));
     assertEquals(maxage, message.getCacheControlMaxAge());
   }
 }

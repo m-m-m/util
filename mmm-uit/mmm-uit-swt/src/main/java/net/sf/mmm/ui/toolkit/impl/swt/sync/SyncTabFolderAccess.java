@@ -58,11 +58,10 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the tab-folder.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        tab-folder.
    */
   public SyncTabFolderAccess(UIFactorySwt uiFactory, int swtStyle) {
 
@@ -72,13 +71,11 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   *        is used to do the synchronization.
-   * @param swtStyle
-   *        is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of
-   *        the tab-folder.
-   * @param swtTabFolder
-   *        is the widget to access.
+   * @param uiFactory is used to do the synchronization.
+   * @param swtStyle is the
+   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
+   *        tab-folder.
+   * @param swtTabFolder is the widget to access.
    */
   public SyncTabFolderAccess(UIFactorySwt uiFactory, int swtStyle, TabFolder swtTabFolder) {
 
@@ -137,8 +134,7 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
    * This method {@link TabFolder#setSelection(int) selects} the tab with the
    * given <code>selectionIndex</code>.
    * 
-   * @param selection
-   *        is the index of the tab to select.
+   * @param selection is the index of the tab to select.
    */
   public void setSelectionIndex(int selection) {
 
@@ -163,13 +159,10 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
   /**
    * This method creates a new tab-item with the given <code>title</code>.
    * 
-   * @param control
-   *        is the control to display in the new tab.
-   * @param title
-   *        is the title for the new tab-item.
-   * @param index
-   *        is the index where to insert the new tab-item or <code>-1</code>
-   *        to add the new item to the end.
+   * @param control is the control to display in the new tab.
+   * @param title is the title for the new tab-item.
+   * @param index is the index where to insert the new tab-item or
+   *        <code>-1</code> to add the new item to the end.
    * @return the created tab-item.
    */
   public TabItem createTabItem(Control control, String title, int index) {
