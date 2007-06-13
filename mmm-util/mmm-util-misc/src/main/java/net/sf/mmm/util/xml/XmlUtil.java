@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -214,12 +213,6 @@ public final class XmlUtil {
       this.delegate.close();
     }
 
-  }
-
-  public static void main(String[] args) throws Exception {
-
-    System.out.println(new XmlInputStream(new FileInputStream("pom.xml"), Charset.defaultCharset()).getCharset()
-        .displayName());
   }
 
 }
