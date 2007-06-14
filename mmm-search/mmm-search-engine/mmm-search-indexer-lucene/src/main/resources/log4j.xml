@@ -9,9 +9,8 @@
 			<param name="ConversionPattern" value="[%d{dd MMM yyyy HH:mm:ss}] %-5p [%c][%M]: %m%n"/>
 		</layout>
 	</appender>
-	<logger name="net.sf.mmm" additivity="false">
+	<logger name="net.sf.mmm">
 		<level value="debug"/>
-		<appender-ref ref="DefaultAppender"/>
 	</logger>
 	<root>
 		<level value="warn"/>
