@@ -116,7 +116,8 @@ public class ContentParserHtml extends ContentParserTextMarkupAware {
   /**
    * {@inheritDoc}
    */
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties) throws Exception {
+  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+      throws Exception {
 
     if ((filesize > 0) && (filesize < getMaximumBufferSize())) {
       parseJtidy(inputStream, filesize, properties);
@@ -141,10 +142,8 @@ public class ContentParserHtml extends ContentParserTextMarkupAware {
    * <code>element</code> with the given
    * <code>{@link Element#getTagName() tagname}</code>.
    * 
-   * @param element
-   *        is the element where the child is requested from.
-   * @param tagname
-   *        is the tagname of the requested child element.
+   * @param element is the element where the child is requested from.
+   * @param tagname is the tagname of the requested child element.
    * @return the first child-element with the given <code>tagname</code> or
    *         <code>null</code> if no such child exists.
    */
@@ -167,8 +166,7 @@ public class ContentParserHtml extends ContentParserTextMarkupAware {
    * This method gets all text content from the given <code>element</code>
    * recursively including the text of all children.
    * 
-   * @param element
-   *        is the element for which the text is requested.
+   * @param element is the element for which the text is requested.
    * @return the requested text.
    */
   private String getTextContent(Element element) {
@@ -182,10 +180,8 @@ public class ContentParserHtml extends ContentParserTextMarkupAware {
    * This method recursively collects the text from the given
    * <code>element</code> and appends it to the given <code>buffer</code>.
    * 
-   * @param element
-   *        is the element for which the text is requested.
-   * @param buffer
-   *        is the buffer where the text will be appended to.
+   * @param element is the element for which the text is requested.
+   * @param buffer is the buffer where the text will be appended to.
    */
   private void collectTextContent(Element element, StringBuffer buffer) {
 

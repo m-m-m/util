@@ -49,8 +49,8 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   private String detailsView;
 
   /** The search engine. */
-  private ManagedSearchEngine searchEngine; 
-  
+  private ManagedSearchEngine searchEngine;
+
   /**
    * The constructor.
    */
@@ -68,14 +68,13 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   }
 
   /**
-   * @param searchEngine
-   *        the searchEngine to set
+   * @param searchEngine the searchEngine to set
    */
   public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngine = searchEngine;
     if (this.configuration != null) {
-      this.configuration.setSearchEngine(searchEngine);      
+      this.configuration.setSearchEngine(searchEngine);
     }
   }
 
@@ -113,8 +112,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
    * This method configures this servlet with the given
    * <code>xmlConfiguration</code>.
    * 
-   * @param xmlConfiguration
-   *        is the top-level element of the XML-configuration.
+   * @param xmlConfiguration is the top-level element of the XML-configuration.
    */
   protected void configure(Element xmlConfiguration) {
 
@@ -128,12 +126,9 @@ public abstract class AbstractSearchServlet extends HttpServlet {
    * This method extends the given <code>complexQuery</code> with a query for
    * the given <code>property</code>.
    * 
-   * @param complexQuery
-   *        is the existing query to extend.
-   * @param property
-   *        is the name of the property to add to the query.
-   * @param value
-   *        is the value to search in the given <code>property</code>.
+   * @param complexQuery is the existing query to extend.
+   * @param property is the name of the property to add to the query.
+   * @param value is the value to search in the given <code>property</code>.
    */
   private void appendFieldQuery(ComplexSearchQuery complexQuery, String property, String value) {
 

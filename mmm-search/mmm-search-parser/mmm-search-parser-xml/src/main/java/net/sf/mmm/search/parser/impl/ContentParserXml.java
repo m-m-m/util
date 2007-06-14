@@ -78,6 +78,7 @@ public class ContentParserXml extends AbstractContentParser {
       if (textBuffer.length() > maxChars) {
         break;
       }
+      textBuffer.append('\n');
       line = bufferedReader.readLine();
     }
   }

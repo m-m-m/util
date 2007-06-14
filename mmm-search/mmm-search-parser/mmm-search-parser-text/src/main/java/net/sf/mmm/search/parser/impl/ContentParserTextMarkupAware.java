@@ -41,6 +41,7 @@ public class ContentParserTextMarkupAware extends ContentParserText {
       if (textBuffer.length() > maxChars) {
         break;
       }
+      textBuffer.append('\n');
       line = bufferedReader.readLine();
     }
   }

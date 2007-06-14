@@ -15,8 +15,8 @@ package net.sf.mmm.search.parser.base;
  */
 public interface LimitBufferSize {
 
-  /** The default maximum is 100 KB */
-  int DEFAULT_MAX_BUFFER_SIZE = 100 * 1024;
+  /** The default maximum is 1 MB */
+  int DEFAULT_MAX_BUFFER_SIZE = 1024 * 1024;
 
   /**
    * This method can be called to configure the maximum size used for buffers
