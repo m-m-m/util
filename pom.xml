@@ -133,6 +133,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
+          <aggregate>true</aggregate>
           <encoding>UTF-8</encoding>
           <!--
           <overview>${basedir}/src/main/java/overview.html</overview>          
