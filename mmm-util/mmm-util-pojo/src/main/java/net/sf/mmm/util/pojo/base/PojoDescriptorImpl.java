@@ -19,9 +19,7 @@ import net.sf.mmm.util.pojo.api.PojoPropertyNotFoundException;
  * This is the abstract base implementation of the {@link PojoDescriptor}
  * interface.
  * 
- * @param
- * <P>
- * is the templated type of the {@link #getPojoType() POJO}.
+ * @param <P> is the templated type of the {@link #getPojoType() POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

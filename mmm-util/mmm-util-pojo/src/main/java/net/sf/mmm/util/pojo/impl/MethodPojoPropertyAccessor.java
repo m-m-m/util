@@ -67,4 +67,12 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
     this.method.invoke(pojoInstance, value);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Class<?> getDeclaringClass() {
+  
+    return this.method.getDeclaringClass();
+  }
+  
 }

@@ -12,9 +12,7 @@ import java.util.Collection;
  * object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.
  * 
- * @param
- * <P>
- * is the templated type of the {@link #getPojoType() POJO}.
+ * @param <P> is the templated type of the {@link #getPojoType() POJO}.
  * 
  * @see PojoPropertyDescriptor
  * 

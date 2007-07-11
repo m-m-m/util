@@ -4,11 +4,8 @@
 package net.sf.mmm.util.pojo.api;
 
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Collection;
 
 /**
  * A {@link PojoPropertyAccessor} gives {@link #getAccessibleObject() access} to
@@ -71,15 +68,27 @@ public interface PojoPropertyAccessor {
   Class<?> getPropertyClass();
 
   /**
+   * This method gets the class reflecting the type that declared this accessor.
+   * It may be the pojo-class this accessor was created from but it may also be
+   * a super-class where the {@link #getAccessibleObject() field or method} of
+   * this accessor is inherited from and is NOT overridden.<br>
+   * E.g. the read-accessor for the property "class" will have the
+   * declaring-class {@link java.lang.Object}.
+   * 
+   * @return the class reflecting the type that declared this accessor.
+   */
+  Class<?> getDeclaringClass();
+
+  /**
    * This method gets the generic component type of a list property.
    * 
    * @see Class#getComponentType()
-   * @see GenericArrayType#getGenericComponentType()
-   * @see ParameterizedType#getActualTypeArguments()
+   * @see java.lang.reflect.GenericArrayType#getGenericComponentType()
+   * @see java.lang.reflect.ParameterizedType#getActualTypeArguments()
    * 
    * @return the component type of this property or <code>null</code> if the
    *         {@link #getPropertyType() type} is no {@link Class#isArray() array}
-   *         or {@link Collection collection}.
+   *         or {@link java.util.Collection collection}.
    */
   Type getPropertyComponentType();
 
@@ -123,7 +132,6 @@ public interface PojoPropertyAccessor {
    * @throws InvocationTargetException if the POJO itself (the getter) throws an
    *         exception.
    */
-  public abstract Object get(Object pojoInstance) throws IllegalAccessException,
-      InvocationTargetException;
+  Object get(Object pojoInstance) throws IllegalAccessException, InvocationTargetException;
 
 }

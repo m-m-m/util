@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.impl;
 
-import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
 import net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor;
@@ -29,9 +28,9 @@ public class MethodAndFieldAccessorIterator implements Iterator<AbstractPojoProp
    * @param pojoClass is the class for which the property-accessors should be
    *        iterated.
    * @param onlyPublic if <code>true</code> only
-   *        {@link Modifier#isPublic(int) public} methods will be considered for
-   *        when searching for property-accessors, else if <code>false</code>
-   *        all implemented methods are introspected.
+   *        {@link java.lang.reflect.Modifier#isPublic(int) public} methods will
+   *        be considered for when searching for property-accessors, else if
+   *        <code>false</code> all implemented methods are introspected.
    */
   public MethodAndFieldAccessorIterator(Class<?> pojoClass, boolean onlyPublic) {
 

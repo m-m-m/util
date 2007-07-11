@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.base;
 
-import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
-
 /**
- * This is the generic implementation of the {@link PojoDescriptorBuilder}
- * interface.
+ * This is the generic implementation of the
+ * {@link net.sf.mmm.util.pojo.api.PojoDescriptorBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

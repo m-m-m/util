@@ -78,5 +78,13 @@ public class FieldPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
 
     return this.field;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Class<?> getDeclaringClass() {
+  
+    return this.field.getDeclaringClass();
+  }
 
 }

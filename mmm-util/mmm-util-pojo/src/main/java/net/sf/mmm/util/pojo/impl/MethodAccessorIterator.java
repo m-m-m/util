@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.base.AbstractPojoPropertyAccessor;
 
 /**
@@ -212,8 +211,8 @@ public class MethodAccessorIterator implements Iterator<AbstractPojoPropertyAcce
 
   /**
    * This method gets the according
-   * {@link PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>.<br>
+   * {@link net.sf.mmm.util.pojo.api.PojoPropertyDescriptor#getName() property-name}
+   * for the given <code>methodName</code>.<br>
    * This is the un-capitalized substring of the <code>methodName</code> after
    * the prefix (given via <code>prefixLength</code>).
    * 
