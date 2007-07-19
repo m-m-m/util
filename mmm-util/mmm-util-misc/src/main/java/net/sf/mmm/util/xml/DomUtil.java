@@ -223,8 +223,9 @@ public final class DomUtil {
       } else if (Boolean.FALSE.toString().equalsIgnoreCase(flag)) {
         result = false;
       } else {
+        // TODO: NLS?
         throw new IllegalArgumentException("XML-Attribute " + attribute
-            + " must be either 'true' or 'false'!");
+            + " must be either 'true' or 'false' but was '" + flag + "'!");
       }
     }
     return result;
@@ -332,6 +333,7 @@ public final class DomUtil {
    *        at the end of this method (on success as well as in an exceptional
    *        state).
    * @return the parsed XML DOM document.
+   * @throws XmlException if the XML is invalid and could NOT be parsed.
    * @throws IOException if the input stream produced an error while reading.
    */
   public static Document parseDocument(InputStream inputStream) throws XmlException, IOException {

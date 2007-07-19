@@ -5,11 +5,10 @@ package net.sf.mmm.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import net.sf.mmm.util.filter.CharFilter;
-
-import sun.util.calendar.ZoneInfo;
 
 /**
  * This class is a collection of utility functions for formatting and parsing
@@ -67,20 +66,23 @@ import sun.util.calendar.ZoneInfo;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class Iso8601Util {
+public final class Iso8601Util {
 
-  /** the ID for Coordinated Universal Time */
+  /** The ID for UTC (Coordinated Universal Time). */
   private static final String UTC_ID = "UTC";
 
+  /** The UTC TimeZone. */
+  private static final TimeZone TZ_UTC = TimeZone.getTimeZone(UTC_ID);
+  
   /**
-   * The forbidden constructor
+   * The forbidden constructor.
    */
   private Iso8601Util() {
 
   }
 
   /**
-   * This method fromats the given <code>date</code> in the format
+   * This method formats the given <code>date</code> in the format
    * "yyyy-MM-dd" in GMT according to {@link Iso8601Util ISO 8601}.
    * 
    * @param date is the date to format.
@@ -94,7 +96,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as a date in the
+   * This method formats the given <code>calendar</code> as a date in the
    * format "yyyy-MM-dd" according to {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
@@ -106,7 +108,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as a date in the
+   * This method formats the given <code>calendar</code> as a date in the
    * format "yyyy-MM-dd" according to {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
@@ -125,7 +127,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as a date according
+   * This method formats the given <code>calendar</code> as a date according
    * to {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
@@ -160,7 +162,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>date</code> as a date and time in the
+   * This method formats the given <code>date</code> as a date and time in the
    * format "yyyy-MM-ddTHH:mm:ssZ" (UTC) according to
    * {@link Iso8601Util ISO 8601}.
    * 
@@ -181,7 +183,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as a date and time in
+   * This method formats the given <code>calendar</code> as a date and time in
    * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
    * {@link Iso8601Util ISO 8601}.
    * 
@@ -194,7 +196,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as a date and time in
+   * This method formats the given <code>calendar</code> as a date and time in
    * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
    * {@link Iso8601Util ISO 8601}.
    * 
@@ -223,7 +225,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>calendar</code> as time according to
+   * This method formats the given <code>calendar</code> as time according to
    * {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
@@ -261,7 +263,7 @@ public class Iso8601Util {
   }
 
   /**
-   * This method fromats the given <code>timezone</code> according to
+   * This method formats the given <code>timezone</code> according to
    * {@link Iso8601Util ISO 8601}.<br>
    * 
    * @param timezone is the date to format.
@@ -394,12 +396,22 @@ public class Iso8601Util {
       if (negate) {
         timezoneOffset = -timezoneOffset;
       }
-      return new ZoneInfo("GMT", timezoneOffset);
+      String tzName = "GMT";
+      if (hour != 0) {
+        if (negate) {
+          tzName += "-";
+        } else {
+          tzName += "+";
+        }
+        tzName += hour;        
+      }
+      return new SimpleTimeZone(timezoneOffset, tzName);
+      //return new ZoneInfo("GMT", timezoneOffset);
     } else if (c == 0) {
       return null;
     } else if (c == 'Z') {
       // UTC
-      return new ZoneInfo(UTC_ID, 0);
+      return TZ_UTC;
     }
     throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
   }
