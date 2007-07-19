@@ -49,6 +49,18 @@ public interface PojoPropertyAccessor {
   AccessibleObject getAccessibleObject();
 
   /**
+   * This method gets the {@link java.lang.reflect.Modifier modifiers} of the
+   * {@link #getAccessibleObject() accessible object}.
+   * 
+   * @see java.lang.reflect.Modifier
+   * @see java.lang.reflect.Field#getModifiers()
+   * @see java.lang.reflect.Method#getModifiers()
+   * 
+   * @return the modifiers of the field or method.
+   */
+  int getModifiers();
+
+  /**
    * This method gets the required type to {@link #getAccessibleObject() access}
    * (read/write) this property.
    * 

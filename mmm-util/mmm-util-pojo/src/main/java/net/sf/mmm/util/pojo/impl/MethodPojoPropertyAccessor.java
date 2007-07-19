@@ -75,4 +75,12 @@ public class MethodPojoPropertyAccessor extends AbstractPojoPropertyAccessor {
     return this.method.getDeclaringClass();
   }
   
+  /**
+   * {@inheritDoc}
+   */
+  public int getModifiers() {
+  
+    return this.method.getModifiers();
+  }
+  
 }
