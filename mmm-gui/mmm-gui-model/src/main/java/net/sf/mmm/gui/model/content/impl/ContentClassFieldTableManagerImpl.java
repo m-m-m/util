@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelService;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
 
@@ -26,7 +26,7 @@ public class ContentClassFieldTableManagerImpl implements ContentClassFieldTable
   private ContentModelService model;
 
   /** the map with the table-models */
-  private final Map<Id, ContentClassTableModel> id2modelMap;
+  private final Map<ContentId, ContentClassTableModel> id2modelMap;
 
   /**
    * The constructor.
@@ -34,7 +34,7 @@ public class ContentClassFieldTableManagerImpl implements ContentClassFieldTable
   public ContentClassFieldTableManagerImpl() {
 
     super();
-    this.id2modelMap = new HashMap<Id, ContentClassTableModel>();
+    this.id2modelMap = new HashMap<ContentId, ContentClassTableModel>();
   }
 
   /**

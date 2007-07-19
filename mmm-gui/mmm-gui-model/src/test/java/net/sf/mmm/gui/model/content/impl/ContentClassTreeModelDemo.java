@@ -4,11 +4,8 @@
 package net.sf.mmm.gui.model.content.impl;
 
 import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.model.api.MutableContentModelService;
-import net.sf.mmm.content.model.impl.AbstractMutableContentModelService;
-import net.sf.mmm.content.model.impl.ConfiguredModelService;
-import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
-import net.sf.mmm.gui.model.content.impl.ContentClassTreeModel;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
@@ -49,7 +46,7 @@ public class ContentClassTreeModelDemo {
   public static void main(String[] args) throws Exception {
 
     UIFactory uiFactory = new UIFactorySwing();
-    MutableContentModelService modelService = new ConfiguredModelService();
+    ContentModelService modelService = new ConfiguredModelService();
     ContentClassTreeModel classModel = new ContentClassTreeModel();
     classModel.setModelService(modelService);
     classModel.initialize();
