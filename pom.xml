@@ -24,7 +24,7 @@
   <modules>
     <module>mmm-configuration</module>
     <module>mmm-content</module>
-    <module>mmm-framework</module>
+    <!-- <module>mmm-framework</module> -->
     <module>mmm-gui</module>
     <module>mmm-nls</module>
     <module>mmm-search</module>
