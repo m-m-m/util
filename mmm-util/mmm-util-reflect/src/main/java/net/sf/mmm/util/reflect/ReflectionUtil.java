@@ -19,7 +19,7 @@ import java.lang.reflect.WildcardType;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ReflectionUtil {
+public final class ReflectionUtil {
 
   /** an empty class array */
   public static final Class<?>[] NO_PARAMETERS = new Class[0];
@@ -179,10 +179,13 @@ public class ReflectionUtil {
    *         with the given <code>fieldName</code>.
    * @throws IllegalAccessException if you do not have permission to read the
    *         field (e.g. field is private).
+   * @throws IllegalArgumentException if the field is NOT static (or final) or
+   *         has the wrong type.
    */
   @SuppressWarnings("unchecked")
   public static <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
-      boolean mustBeFinal) throws NoSuchFieldException, IllegalAccessException {
+      boolean mustBeFinal) throws NoSuchFieldException, IllegalAccessException,
+      IllegalArgumentException {
 
     Field field = type.getField(fieldName);
     int modifiers = field.getModifiers();
@@ -199,6 +202,35 @@ public class ReflectionUtil {
           + "') has type '" + field.getType() + "' but requested type was '" + fieldType + "'!");
     }
     return (T) field.get(null);
+  }
+
+  /**
+   * 
+   * @param <T> the templated type the requested field is assigned to.
+   * @param type is the class or interface containing the requested field.
+   * @param fieldName is the {@link Field#getName() name} of the requested
+   *        field.
+   * @param fieldType is the type the requested field is assigned to. Therefore
+   *        the field declaration (!) must be assignable to this type.
+   * @param mustBeFinal - if <code>true</code>, an
+   *        {@link IllegalArgumentException} is thrown if the specified static
+   *        field exists but is NOT {@link Modifier#isFinal(int) final},
+   *        <code>false</code> otherwise.
+   * @return the value of the field with the given type or <code>null</code>
+   *         if the field does NOT exist or is NOT accessible.
+   * @throws IllegalArgumentException if the field is NOT static (or final) or
+   *         has the wrong type.
+   */
+  public static <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType,
+      boolean mustBeFinal) throws IllegalArgumentException {
+
+    try {
+      return getStaticField(type, fieldName, fieldType, mustBeFinal);
+    } catch (NoSuchFieldException e) {
+      return null;
+    } catch (IllegalAccessException e) {
+      return null;
+    }
   }
 
   /**
