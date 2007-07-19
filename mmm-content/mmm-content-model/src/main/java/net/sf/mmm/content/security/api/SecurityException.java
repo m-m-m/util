@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.security.api;
 
-import net.sf.mmm.nls.base.NlsException;
+import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
  * This exception is used if a
@@ -12,13 +12,18 @@ import net.sf.mmm.nls.base.NlsException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SecurityException extends NlsException {
+public class SecurityException extends NlsRuntimeException {
 
   /** uid for serialization */
   private static final long serialVersionUID = 3257285846510940725L;
 
   /**
-   * @see NlsException#NlsException(String, Object[])
+   * The constructor.
+   * 
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public SecurityException(String internaitionalizedMessage, Object... arguments) {
 
@@ -26,7 +31,13 @@ public class SecurityException extends NlsException {
   }
 
   /**
-   * @see NlsException#NlsException(Throwable, String, Object[])
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public SecurityException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

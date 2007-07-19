@@ -4,7 +4,8 @@
 package net.sf.mmm.content.model.base;
 
 import net.sf.mmm.content.NlsBundleContentModel;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.value.api.ContentId;
 
 /**
  * This is the exception thrown if a
@@ -15,7 +16,7 @@ import net.sf.mmm.content.value.api.Id;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DuplicateFieldException extends ContentModelRuntimeException {
+public class DuplicateFieldException extends ContentModelException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -6393217248604007769L;
@@ -35,7 +36,7 @@ public class DuplicateFieldException extends ContentModelRuntimeException {
    * 
    * @param id is the ID already in use.
    */
-  public DuplicateFieldException(Id id) {
+  public DuplicateFieldException(ContentId id) {
 
     super(NlsBundleContentModel.ERR_DUPLICATE_FIELD_ID, id);
   }

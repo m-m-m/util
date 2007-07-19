@@ -4,7 +4,7 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.content.NlsBundleContentModel;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 
 /**
  * This exception is thrown if a {@link ContentClass} was requested that does
@@ -34,7 +34,7 @@ public class ClassNotExistsException extends ContentModelException {
    * @param id is the {@link ContentClass#getId() ID} of the class that does NOT
    *        exist.
    */
-  public ClassNotExistsException(Id id) {
+  public ClassNotExistsException(ContentId id) {
 
     super(NlsBundleContentModel.ERR_NO_SUCH_CLASS_ID, id);
   }

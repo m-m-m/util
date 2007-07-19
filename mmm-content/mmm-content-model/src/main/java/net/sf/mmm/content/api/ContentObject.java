@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.api;
 
-import java.util.Map;
+import java.io.Serializable;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.api.Id;
-import net.sf.mmm.util.xml.api.XmlSerializable;
+import net.sf.mmm.content.value.api.ContentId;
+import net.sf.mmm.content.value.api.MetaData;
 
 /**
  * This is the abstract interface for any content object. This can be a
@@ -22,10 +22,19 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentObject extends XmlSerializable {
+public interface ContentObject extends Serializable {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "Object";
+
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 0;
+
+  /** the namespace used for project internal metadata. */
+  String METADATA_NAMESPACE_MMM = "mmm";
+
+  /** the namespace used to reflect the fields as metadata. */
+  String METADATA_NAMESPACE_NONE = "";
 
   /**
    * the variable-name of the current object in the
@@ -36,46 +45,44 @@ public interface ContentObject extends XmlSerializable {
   String ENV_VARIABLE_THIS = "this";
 
   /**
-   * the attribute for the {@link #getName() name}.
-   */
-  String XML_ATR_ROOT_NAME = "name";
-
-  /**
-   * the attribute for the {@link #getName() name}.
-   */
-  String XML_ATR_ROOT_ID = "id";
-
-  /**
-   * the attribute for the {@link #isDeleted() deleted-flag}.
-   */
-  String XML_ATR_ROOT_DELETED = "deleted";
-
-  /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getId() ID} for generic access via {@link #getFieldValue(String)}.
+   * {@link #getId() ID} for generic access via {@link #getValue(String)}.
    */
   String FIELD_NAME_ID = "id";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getName() name} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getName() name} for generic access via {@link #getValue(String)}.
    */
   String FIELD_NAME_NAME = "name";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #isDeleted() deleted} for generic access via
+   * {@link #getValue(String)}.
+   */
+  String FIELD_NAME_DELETED = "deleted";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getContentClass() contentClass} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_CONTENT_CLASS = "contentClass";
+
+  /**
+   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
+   * {@link #getMetaData(String) metadata} for generic access via
+   * {@link #getValue(String)}.
+   */
+  String FIELD_NAME_METADATA = "metadata";
 
   /**
    * This method gets the unique identifier of this content-object.
    * 
    * @return the unique ID.
    */
-  Id getId();
+  ContentId getId();
 
   /**
    * This method gets the name of this content-object. The name must be unique
@@ -110,13 +117,27 @@ public interface ContentObject extends XmlSerializable {
   boolean isDeleted();
 
   /**
-   * This method gets the meta-data of this object.
+   * This method gets all {@link #getMetaData(String)} meta-data of this object.
+   * The keys are in the form <code>&lt;namespace&gt;:&lt;local-key&gt;</code>
+   * (e.g. <code>mmm:proxy</code>). This method is rather expensive. Use
+   * {@link #getMetaData(String)} whenever possible.
    * 
    * @return the meta-data.
-   * @throws PermissionDeniedException if you (the current user) does not have
-   *         permission to perform the operation.
    */
-  Map<String, String> getMetaData();
+  // Map<String, String> getMetaData();
+  /**
+   * This method gets the meta-data of this object for a given
+   * <code>namespace</code>. The metadata can store arbitrary informations as
+   * string that is NOT specified via the content-model.
+   * 
+   * @param namespace is the namespace (prefix) for which the metadata is
+   *        requested. The value needs to consist only of the characters
+   *        <code>'a-Z', '0-9', '.'</code> and <code>'-'</code>. Especially
+   *        it must NOT contain the character <code>':'</code>. Please note
+   *        that {@link #METADATA_NAMESPACE_MMM mmm} and
+   * @return the meta-data.
+   */
+  MetaData getMetaData(String namespace);
 
   /**
    * This method gets the value of the specified
@@ -139,7 +160,7 @@ public interface ContentObject extends XmlSerializable {
    *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
    *         but an error occurred calculating its value.
    */
-  Object getFieldValue(String fieldName) throws FieldNotExistsException, PermissionDeniedException,
+  Object getValue(String fieldName) throws FieldNotExistsException, PermissionDeniedException,
       ContentException;
 
   /**
@@ -151,7 +172,7 @@ public interface ContentObject extends XmlSerializable {
    * field can only be set on a {@link ContentClass content-class}. Other
    * fields only on a resource.
    * 
-   * @see #getFieldValue(String)
+   * @see #getValue(String)
    * 
    * @param fieldName is the {@link ContentObject#getName() name} of the
    *        {@link net.sf.mmm.content.model.api.ContentField field} to set. The
@@ -170,7 +191,7 @@ public interface ContentObject extends XmlSerializable {
    * @throws ContentException TODO: if the field has an incompatible type for
    *         the given value.
    */
-  void setFieldValue(String fieldName, Object value) throws FieldNotExistsException,
+  void setValue(String fieldName, Object value) throws FieldNotExistsException,
       PermissionDeniedException, ContentException;
 
   /**

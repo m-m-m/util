@@ -3,15 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
-import net.sf.mmm.content.model.api.Modifiers;
+import net.sf.mmm.content.model.api.ContentModelException;
 
 /**
- * This is the exception thrown if some {@link Modifiers} were created with an
+ * This is the exception thrown if some
+ * {@link net.sf.mmm.content.model.api.Modifiers Modifiers} were created with an
  * illegal combination of flags.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class IllegalModifiersException extends ContentModelRuntimeException {
+public class IllegalModifiersException extends ContentModelException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -9096716721784689821L;

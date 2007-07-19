@@ -5,7 +5,7 @@ package net.sf.mmm.content.persistence.api;
 
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.value.api.ValueParseException;
 
 /**
@@ -18,43 +18,43 @@ import net.sf.mmm.value.api.ValueParseException;
 public interface IdService {
 
   /**
-   * This method gets the {@link Id ID} of the root-folder.
+   * This method gets the {@link ContentId ID} of the root-folder.
    * 
    * @return the ID of the root-folder.
    */
-  Id getRootFolderId();
+  ContentId getRootFolderId();
 
   /**
-   * This method gets the {@link Id ID} of the folder containing the content
+   * This method gets the {@link ContentId ID} of the folder containing the content
    * (the real resources).
    * 
    * @return the ID of the content-folder.
    */
-  Id getContentFolderId();
+  ContentId getContentFolderId();
 
   /**
-   * This method gets the {@link Id ID} of the
+   * This method gets the {@link ContentId ID} of the
    * {@link net.sf.mmm.content.model.api.ContentModelService#getRootClass() root-class}.
    * 
    * @return the ID of the root-class.
    */
-  Id getRootClassId();
+  ContentId getRootClassId();
 
   /**
-   * This method crates an {@link Id ID} given in its string representation. The
+   * This method crates an {@link ContentId ID} given in its string representation. The
    * method can be used if an ID is given from outside the system (e.g. via an
    * URI).<br>
    * The same thing can be done via the
-   * {@link net.sf.mmm.value.api.ValueManager} of {@link Id ids}. It can be
+   * {@link net.sf.mmm.value.api.ValueManager} of {@link ContentId ids}. It can be
    * retrieved via {@link net.sf.mmm.value.api.ValueService#getManager(Class)}
-   * if the if implementation of {@link Id ID} is known.
+   * if the if implementation of {@link ContentId ID} is known.
    * 
    * @param id is the ID as string.
    * @return the corresponding ID object.
    * @throws ValueParseException if the given string is illegal and could not be
    *         parsed as ID.
    */
-  Id toId(String id) throws ValueParseException;
+  ContentId toId(String id) throws ValueParseException;
 
   /**
    * This method creates a new unique identifier.
@@ -63,7 +63,7 @@ public interface IdService {
    *        that will get the new id.
    * @return the new unique identifier.
    */
-  Id createId(ContentClass type);
+  ContentId createId(ContentClass type);
 
   /**
    * This method releases a unique identifier that is unused. Identifiers are
@@ -72,16 +72,16 @@ public interface IdService {
    * 
    * @param unusedId is an identifier that is not used by any resource.
    */
-  void releaseId(Id unusedId);
+  void releaseId(ContentId unusedId);
 
   /**
    * This method gets the ID of the {@link ContentClass content-class}
-   * refelecting the content object owning the given id.
+   * reflecting the content object owning the given id.
    * 
    * @param id is the ID of a content object whos type is requested. The given
    *        id must be produced from the the current id store.
    * @return the id of the reflecting class.
    */
-  Id getContentClassId(Id id);
+  ContentId getContentClassId(ContentId id);
 
 }

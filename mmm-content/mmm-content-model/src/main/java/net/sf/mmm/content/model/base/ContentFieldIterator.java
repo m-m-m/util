@@ -1,4 +1,6 @@
-/* $ID: DataFieldEnumeration.java,v 1.0 25.01.2004 19:14:17 hohwille Exp $ */
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
 import java.util.Iterator;

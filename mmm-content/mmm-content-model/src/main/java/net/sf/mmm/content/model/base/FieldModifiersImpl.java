@@ -8,14 +8,14 @@ import org.w3c.dom.Element;
 import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the base implementation of the {@link FieldModifiersImpl} interface.
+ * This is the base implementation of the {@link FieldModifiers} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -118,6 +118,8 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
    * 
    * @see AbstractModifiers#AbstractModifiers(boolean, boolean)
    * 
+   * @param isSystem is the value for the {@link #isSystem() system-flag}.
+   * @param isFinal is the value for the {@link #isFinal() final-flag}.
    * @param isReadOnly is the value for the {@link #isReadOnly() read-only flag}.
    * @param isStatic is the value for the {@link #isStatic() static-flag}.
    * @param isTransient is the value for the
@@ -369,7 +371,7 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     public static final String VALUE_NAME = "FieldModifiers";
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getName()
+     * {@inheritDoc}
      */
     public String getName() {
 
@@ -425,30 +427,6 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     /**
-     * TODO: javadoc
-     * 
-     * @param element
-     * @param attributeName
-     * @param defaultValue
-     * @return
-     * @throws ValueParseException
-     */
-    private boolean getAttributeAsBoolean(Element element, String attributeName,
-        boolean defaultValue) throws ValueParseException {
-
-      if (element.hasAttribute(attributeName)) {
-        String value = element.getAttribute(attributeName);
-        Boolean result = StringUtil.parseBoolean(value);
-        if (result == null) {
-          throw new ValueParseStringException(value, boolean.class, VALUE_NAME);
-        }
-        return result.booleanValue();
-      } else {
-        return defaultValue;
-      }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -456,12 +434,17 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
 
       checkXml(valueAsXml);
 
-      boolean isSystem = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
-      boolean isStatic = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_STATIC, false);
-      boolean isFinal = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
-      boolean isReadOnly = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_READ_ONLY, false);
-      boolean isTransient = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_TRANSIENT, false);
-      return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient);
+      try {
+        boolean isSystem = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
+        boolean isStatic = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_STATIC, false);
+        boolean isFinal = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
+        boolean isReadOnly = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_READ_ONLY, false);
+        boolean isTransient = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_TRANSIENT, false);
+        return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient);
+      } catch (IllegalArgumentException e) {
+        // TODO
+        throw new ValueParseException("Failed to parse " + VALUE_NAME, e);
+      }
     }
 
     /**

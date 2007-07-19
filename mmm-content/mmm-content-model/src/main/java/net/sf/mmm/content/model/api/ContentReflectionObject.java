@@ -16,10 +16,13 @@ public interface ContentReflectionObject extends ContentObject {
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "ReflectionObject";
 
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 1;
+
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getModifiers() modifiers} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_MODIFIERS = "modifiers";
 

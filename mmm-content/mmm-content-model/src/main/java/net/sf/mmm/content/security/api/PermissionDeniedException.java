@@ -4,12 +4,11 @@
 package net.sf.mmm.content.security.api;
 
 import net.sf.mmm.content.NlsBundleContentModel;
-import net.sf.mmm.content.api.ContentObject;
 
 /**
- * This exception is thrown if a content-user tried to perfom an action on an
- * {@link ContentObject content-object} without having the appropriate
- * permissions.<br>
+ * This exception is thrown if a content-user tried to perform an action on an
+ * {@link net.sf.mmm.content.api.ContentObject ContentObject} without having the
+ * appropriate permissions.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

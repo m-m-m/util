@@ -6,7 +6,7 @@ package net.sf.mmm.content.value.api;
 /**
  * This is the interface for a version-information of a resource.
  * 
- * @see net.sf.mmm.content.value.api.Id
+ * @see net.sf.mmm.content.value.api.ContentId
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

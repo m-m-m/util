@@ -3,19 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.api;
 
-import net.sf.mmm.nls.base.NlsException;
+import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
  * This is the abstract base exception of all errors about the content.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class ContentException extends NlsException {
+public abstract class ContentException extends NlsRuntimeException {
 
   /**
    * The constructor.<br>
    * 
-   * @see NlsException#NlsException(String, Object[])
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
    * 
    * @param internaitionalizedMessage is a short description of the problem. It
    *        is used for internationalization and should be in English language.
@@ -30,7 +30,7 @@ public abstract class ContentException extends NlsException {
   /**
    * The constructor.<br>
    * 
-   * @see NlsException#NlsException(Throwable, String, Object[])
+   * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internaitionalizedMessage is a short description of the problem. It

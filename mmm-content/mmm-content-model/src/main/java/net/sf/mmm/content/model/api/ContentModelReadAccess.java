@@ -6,7 +6,7 @@ package net.sf.mmm.content.model.api;
 import java.util.Collection;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 
 /**
  * This interface gives read access to the content model.
@@ -31,7 +31,7 @@ public interface ContentModelReadAccess {
    * @return the content class for the given ID.
    * @throws ContentModelException if the requested class does not exist.
    */
-  ContentClass getClass(Id id) throws ContentModelException;
+  ContentClass getClass(ContentId id) throws ContentModelException;
 
   /**
    * This method gets the root content class that reflects the

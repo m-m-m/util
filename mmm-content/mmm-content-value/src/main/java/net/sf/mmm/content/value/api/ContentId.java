@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface Id extends Serializable {
+public interface ContentId extends Serializable {
 
   /**
    * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value

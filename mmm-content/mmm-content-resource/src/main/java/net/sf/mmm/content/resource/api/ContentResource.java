@@ -17,8 +17,8 @@ import net.sf.mmm.content.value.api.Version;
  * <i>collection</i> and files (and other resources) are called <i>document</i>.
  * <br>
  * A resource has various fields that can be read (via
- * {@link ContentResource#getFieldValue(String)}) and written (via
- * {@link ContentResource#setFieldValue(String, Object)}). Generic components
+ * {@link ContentResource#getValue(String)}) and written (via
+ * {@link ContentResource#setValue(String, Object)}). Generic components
  * of the project (including plugins) need to use this official API to access
  * resources. Like java objects a resource can be reflected via
  * {@link net.sf.mmm.content.api.ContentObject#getContentClass()}. Custom
@@ -44,41 +44,41 @@ public interface ContentResource extends ContentObject {
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * parentFolder for generic access via {@link #getFieldValue(String)}.
+   * parentFolder for generic access via {@link #getValue(String)}.
    */
   String FIELD_NAME_PARENT = "parent";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * path for generic access via {@link #getFieldValue(String)}.
+   * path for generic access via {@link #getValue(String)}.
    */
   String FIELD_NAME_PATH = "path";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getMetaData() metadata} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_METADATA = "metadata";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getRevisionHistory() revision-history} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_REVISION_HISTORY = "revisionHistory";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getVersion() version} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_VERSION = "version";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getRevision() revision} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_REVISION = "revision";
 

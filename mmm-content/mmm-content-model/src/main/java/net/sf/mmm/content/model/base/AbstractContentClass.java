@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.content.api.ContentException;
-import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.collection.CollectionIterable;
 import net.sf.mmm.util.collection.SizedIterable;
 
@@ -26,63 +25,66 @@ import net.sf.mmm.util.collection.SizedIterable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentClass extends AbstractContentObject implements ContentClass {
+public abstract class AbstractContentClass extends AbstractContentReflectionObject implements
+    ContentClass {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = -8298083039801634149L;
 
   /** the super-class of this class */
   private ContentClass superClass;
 
+  /** @see #getModifiers() */
+  private ClassModifiers modifiers;
+
   /** the list of direct sub-classes */
-  private final List<AbstractContentClass> subClasses;
+  private final List<ContentClass> subClasses;
 
   /** @see #getSubClasses() */
-  private final List<AbstractContentClass> subClassesView;
+  private final List<ContentClass> subClassesView;
 
   /** @see #getDeclaredFields() (map of content-fields by name) */
-  private final Map<String, AbstractContentField> declaredFields;
+  private final Map<String, ContentField> declaredFields;
 
   /** @see #getDeclaredFields() */
-  private final SizedIterable<AbstractContentField> declaredFieldsIterable;
+  private final SizedIterable<ContentField> declaredFieldsIterable;
 
   /** @see #getDeclaredFields() */
-  private final SizedIterable<AbstractContentField> fieldsIterable;
-
-  /** @see #getModifiers() */
-  private final ClassModifiers modifiers;
+  private final SizedIterable<ContentField> fieldsIterable;
 
   /**
    * The constructor.
-   * 
-   * @param classId is the {@link #getId() ID} of the class.
-   * @param className is the {@link #getName() name} of the class.
-   * @param parentClass is the {@link #getSuperClass() super-class} of the class
-   *        or <code>null</code> for creating the root-class.
-   * @param classModifiers are the {@link #getModifiers() modifiers}.
    */
-  public AbstractContentClass(IdImpl classId, String className, ContentClass parentClass,
-      ClassModifiers classModifiers) {
+  public AbstractContentClass() {
 
-    super(classId, className);
-    assert (classId.getObjectId() == IdImpl.OID_CLASS);
-    this.superClass = parentClass;
-    this.modifiers = classModifiers;
-    this.subClasses = new ArrayList<AbstractContentClass>();
+    super();
+    this.subClasses = new ArrayList<ContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
-    this.declaredFields = new HashMap<String, AbstractContentField>();
-    this.declaredFieldsIterable = new CollectionIterable<AbstractContentField>(this.declaredFields
-        .values());
+    this.declaredFields = new HashMap<String, ContentField>();
+    this.declaredFieldsIterable = new CollectionIterable<ContentField>(this.declaredFields.values());
     this.fieldsIterable = new FieldsIterable();
     if (this.superClass != null) {
       if (this.superClass.getModifiers().isFinal()) {
         // TODO: NLS
-        throw new ContentModelRuntimeException("Can NOT extend final class!");
+        throw new ContentModelException("Can NOT extend final class!");
       }
     }
   }
 
   /**
+   * This method sets the {@link #getSuperClass() super-class}.
+   * 
+   * @param superClass the super-class to set.
+   */
+  protected void setSuperClass(ContentClass superClass) {
+
+    this.superClass = superClass;
+  }
+
+  /**
    * {@inheritDoc}
    */
-  public SizedIterable<AbstractContentField> getDeclaredFields() {
+  public SizedIterable<ContentField> getDeclaredFields() {
 
     return this.declaredFieldsIterable;
   }
@@ -90,7 +92,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * {@inheritDoc}
    */
-  public AbstractContentField getDeclaredField(String name) {
+  public ContentField getDeclaredField(String name) {
 
     return this.declaredFields.get(name);
   }
@@ -110,7 +112,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * {@inheritDoc}
    */
-  public SizedIterable<AbstractContentField> getFields() {
+  public SizedIterable<ContentField> getFields() {
 
     return this.fieldsIterable;
   }
@@ -124,6 +126,14 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
+   * @param modifiers the modifiers to set
+   */
+  protected void setModifiers(ClassModifiers modifiers) {
+
+    this.modifiers = modifiers;
+  }
+
+  /**
    * {@inheritDoc}
    */
   public ContentClass getSuperClass() {
@@ -134,7 +144,7 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   /**
    * {@inheritDoc}
    */
-  public List<AbstractContentClass> getSubClasses() {
+  public List<ContentClass> getSubClasses() {
 
     return this.subClassesView;
   }
@@ -170,14 +180,6 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   public boolean isClass() {
 
     return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isDeletedFlagSet() {
-
-    return getDeletedFlag();
   }
 
   /**
@@ -221,11 +223,13 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * {@inheritDoc}
    */
   @Override
-  protected void setFieldValue(ContentField field, String fieldName, Object value)
+  protected void setValue(ContentField field, String fieldName, Object value)
       throws PermissionDeniedException, ContentException {
 
     if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
       // this.modifiers = (ClassModifiers) value;
+    } else {
+      super.setValue(field, fieldName, value);
     }
   }
 
@@ -233,21 +237,21 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * This method adds a {@link #getSubClasses() sub-class} to this class.
    * 
    * @param subClass is the sub-class to add.
-   * @throws ContentModelRuntimeException if the operation fails.
+   * @throws ContentModelException if the operation fails.
    */
-  public void addSubClass(AbstractContentClass subClass) throws ContentModelRuntimeException {
+  public void addSubClass(ContentClass subClass) throws ContentModelException {
 
     if (subClass.getSuperClass() != this) {
       // TODO: NLS
-      throw new ContentModelRuntimeException("Internal error!");
+      throw new ContentModelException("Class can not extend itself!");
     }
     if (subClass.getModifiers().isSystem() && !getModifiers().isSystem()) {
       // TODO: NLS
-      throw new ContentModelRuntimeException("System-class can NOT extend user-class!");
+      throw new ContentModelException("System-class can NOT extend user-class!");
     }
     if (getModifiers().isFinal()) {
       // TODO: NLS
-      throw new ContentModelRuntimeException("Can NOT extend final class!");
+      throw new ContentModelException("Can NOT extend final class!");
     }
     assert (!this.subClasses.contains(subClass));
     this.subClasses.add(subClass);
@@ -257,12 +261,12 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
    * This method adds the given <code>field</code> to this class.
    * 
    * @param field is the field to add.
-   * @throws ContentModelRuntimeException if the field could NOT be added.
+   * @throws ContentModelException if the field could NOT be added.
    */
-  public void addField(AbstractContentField field) throws ContentModelRuntimeException {
+  public void addField(ContentField field) throws ContentModelException {
 
     if (field.getDeclaringClass() != this) {
-      throw new ContentModelRuntimeException("Internal error!");
+      throw new ContentModelException("Can NOT add field if NOT declared by this class!");
     }
     ContentField duplicate = this.declaredFields.get(field.getName());
     if (duplicate != null) {
@@ -272,26 +276,9 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    return getName();
-    /*
-     * StringBuffer result = new StringBuffer(); result.append("Class:");
-     * result.append(getId()); result.append("["); if
-     * (getModifiers().isAbstract()) { result.append("A"); } if
-     * (getModifiers().isFinal()) { result.append("F"); } if
-     * (getModifiers().isSystem()) { result.append("S"); } if (isDeleted()) {
-     * result.append("D"); } result.append("]"); return result.toString();
-     */
-  }
-
-  /**
    * @see ContentClass#getFields()
    */
-  private class FieldsIterable implements SizedIterable<AbstractContentField> {
+  private class FieldsIterable implements SizedIterable<ContentField> {
 
     /**
      * {@inheritDoc}
@@ -299,8 +286,8 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     public int getSize() {
 
       int result = 0;
-      Iterator<AbstractContentField> fieldsIterator = AbstractContentClass.this.declaredFields
-          .values().iterator();
+      Iterator<ContentField> fieldsIterator = AbstractContentClass.this.declaredFields.values()
+          .iterator();
       while (fieldsIterator.hasNext()) {
         ContentField myField = fieldsIterator.next();
         if (myField.getSuperField() == null) {
@@ -319,10 +306,9 @@ public abstract class AbstractContentClass extends AbstractContentObject impleme
     /**
      * {@inheritDoc}
      */
-    public Iterator<AbstractContentField> iterator() {
+    public Iterator<ContentField> iterator() {
 
-      // TODO Auto-generated method stub
-      return null;
+      return new ContentFieldIterator(AbstractContentClass.this);
     }
 
   }

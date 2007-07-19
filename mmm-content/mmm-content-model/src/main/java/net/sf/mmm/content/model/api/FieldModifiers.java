@@ -43,7 +43,7 @@ public interface FieldModifiers extends Modifiers {
   /**
    * This method determines if the field is read-only. A read-only field can NOT
    * be written (at least NOT via
-   * {@link net.sf.mmm.content.api.ContentObject#setFieldValue(String, Object) setFieldValue}).
+   * {@link net.sf.mmm.content.api.ContentObject#setValue(String, Object) setFieldValue}).
    * 
    * @return <code>true</code> if the field is immutable.
    */
@@ -69,7 +69,7 @@ public interface FieldModifiers extends Modifiers {
    * described {@link FieldModifiers here}.<br>
    * From all instances of the {@link ContentClass content-class} declaring the
    * field, the value of the field can be
-   * {@link net.sf.mmm.content.api.ContentObject#getFieldValue(String) read}
+   * {@link net.sf.mmm.content.api.ContentObject#getValue(String) read}
    * what will always result in the same value. Writing the value via the
    * instance is NOT allowed and must be done via the declaring
    * {@link ContentClass content-class}.<br>

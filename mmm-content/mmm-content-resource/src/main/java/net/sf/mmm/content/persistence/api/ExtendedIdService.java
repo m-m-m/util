@@ -4,7 +4,7 @@
 package net.sf.mmm.content.persistence.api;
 
 import net.sf.mmm.content.persistence.api.IdService;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 
 /**
  * TODO This type ...
@@ -25,6 +25,6 @@ public interface ExtendedIdService extends IdService {
    *        {@link net.sf.mmm.content.resource.api.ContentResource content-resource}.
    * @return the new unique identifier.
    */
-  Id createRevisionId(Id existingId);
+  ContentId createRevisionId(ContentId existingId);
 
 }

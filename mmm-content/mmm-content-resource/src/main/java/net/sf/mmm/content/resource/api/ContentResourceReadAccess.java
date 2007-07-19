@@ -4,7 +4,7 @@
 package net.sf.mmm.content.resource.api;
 
 import net.sf.mmm.content.api.ContentException;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 
 /**
  * This is the abstract interface for any container of content resources.
@@ -20,7 +20,7 @@ public interface ContentResourceReadAccess {
    * @return the resource with the given identifier.
    * @throws ContentException if no resource exists for the given ID.
    */
-  ContentResource getResource(Id id) throws ContentException;
+  ContentResource getResource(ContentId id) throws ContentException;
 
   /**
    * This method gets the resource with the given URI. The URI in this context

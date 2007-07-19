@@ -4,7 +4,7 @@
 package net.sf.mmm.content.persistence.base;
 
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.impl.IdImpl;
 
 /**
@@ -38,7 +38,7 @@ public class DummyIdService extends AbstractIdService {
    * {@inheritDoc}
    */
   @Override
-  protected Id createClassId() {
+  protected ContentId createClassId() {
 
     return new IdImpl(this.classIdCounter++);
   }
@@ -47,7 +47,7 @@ public class DummyIdService extends AbstractIdService {
    * {@inheritDoc}
    */
   @Override
-  protected Id createFieldId() {
+  protected ContentId createFieldId() {
 
     return new IdImpl(this.fieldIdCounter++, IdImpl.CLASS_ID_FIELD);
   }
@@ -56,7 +56,7 @@ public class DummyIdService extends AbstractIdService {
    * {@inheritDoc}
    */
   @Override
-  protected Id createResourceId(ContentClass type) {
+  protected ContentId createResourceId(ContentClass type) {
 
     return new IdImpl(this.resourceIdCounter++, ((IdImpl) type.getId()).getClassId());
   }

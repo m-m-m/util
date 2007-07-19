@@ -17,7 +17,7 @@ public interface ContentResourceWriteAccess {
    * This method stores the given resource so its state is made persistent.
    * 
    * @param resource is the resource to save.
-   * @throws ContentException
+   * @throws ContentException if the operation fails.
    */
   void updateResource(ContentResource resource) throws ContentException;
 
@@ -25,7 +25,7 @@ public interface ContentResourceWriteAccess {
    * This method creates a new version of the current resource.
    * 
    * @param resource is the resource to create a version of.
-   * @param version is the explicit version tu use.
+   * @param version is the explicit version to use.
    * @return the new version of the resource.
    * @throws ContentException if the operation fails. This can have one of the
    *         following reasons:

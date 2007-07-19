@@ -5,7 +5,7 @@ package net.sf.mmm.content.persistence.base;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.persistence.api.IdService;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.value.api.ValueParseException;
 
@@ -19,12 +19,12 @@ public abstract class AbstractIdService implements IdService {
   /**
    * {@inheritDoc}
    */
-  public Id createId(ContentClass type) {
+  public ContentId createId(ContentClass type) {
 
     if (type.getModifiers().isAbstract()) {
       throw new IllegalArgumentException("Class is abstract!");
     }
-    Id classId = type.getId();
+    ContentId classId = type.getId();
     if (classId == IdImpl.ID_CLASS_CLASS) {
       // create class ID
       return createClassId();
@@ -41,18 +41,18 @@ public abstract class AbstractIdService implements IdService {
     return null;
   }
 
-  protected abstract Id createClassId();
+  protected abstract ContentId createClassId();
 
-  protected abstract Id createFieldId();
+  protected abstract ContentId createFieldId();
 
   // protected abstract Id createUserId();
 
-  protected abstract Id createResourceId(ContentClass type);
+  protected abstract ContentId createResourceId(ContentClass type);
 
   /**
    * {@inheritDoc}
    */
-  public Id getContentClassId(Id id) {
+  public ContentId getContentClassId(ContentId id) {
 
     IdImpl idImpl = (IdImpl) id;
     return new IdImpl(idImpl.getClassId());
@@ -61,7 +61,7 @@ public abstract class AbstractIdService implements IdService {
   /**
    * {@inheritDoc}
    */
-  public Id getContentFolderId() {
+  public ContentId getContentFolderId() {
 
     return IdImpl.ID_FOLDER_RESOURCES;
   }
@@ -69,7 +69,7 @@ public abstract class AbstractIdService implements IdService {
   /**
    * {@inheritDoc}
    */
-  public Id getRootClassId() {
+  public ContentId getRootClassId() {
 
     return IdImpl.ID_CLASS_ROOT;
   }
@@ -77,7 +77,7 @@ public abstract class AbstractIdService implements IdService {
   /**
    * {@inheritDoc}
    */
-  public Id getRootFolderId() {
+  public ContentId getRootFolderId() {
 
     return IdImpl.ID_FOLDER_ROOT;
   }
@@ -85,7 +85,7 @@ public abstract class AbstractIdService implements IdService {
   /**
    * {@inheritDoc}
    */
-  public void releaseId(Id unusedId) {
+  public void releaseId(ContentId unusedId) {
 
     IdImpl idImpl = (IdImpl) unusedId;
 
@@ -94,7 +94,7 @@ public abstract class AbstractIdService implements IdService {
   /**
    * {@inheritDoc}
    */
-  public Id toId(String id) throws ValueParseException {
+  public ContentId toId(String id) throws ValueParseException {
 
     return new IdImpl(id);
   }

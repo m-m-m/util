@@ -23,33 +23,41 @@ public interface ContentClass extends ContentReflectionObject {
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "Class";
 
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 2;
+
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getSuperClass() superClass} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_SUPER_CLASS = "superClass";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getSubClasses() subClasses} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_SUB_CLASSES = "subClasses";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getFields() fields} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_FIELDS = "fields";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getDeclaredFields() declaredFields} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_DECLARED_FIELDS = "declaredFields";
+
+  /**
+   * the attribute for the {@link #getName() name}.
+   */
+  String XML_TAG_CONTENT_MODEL = "ContentModel";
 
   /**
    * This method gets an iterator of all fields declared by this class. This

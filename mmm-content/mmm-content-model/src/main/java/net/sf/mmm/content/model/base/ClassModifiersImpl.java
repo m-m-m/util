@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import net.sf.mmm.content.NlsBundleContentModel;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueParseException;
@@ -15,7 +16,7 @@ import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the base implementation of the {@link ClassModifiersImpl} interface.
+ * This is the base implementation of the {@link ClassModifiers} interface.
  * 
  * @see net.sf.mmm.content.model.api.ContentClass#getModifiers()
  * 
@@ -109,6 +110,8 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
    * 
    * @see AbstractModifiers#AbstractModifiers(boolean, boolean)
    * 
+   * @param isSystem {@inheritDoc}
+   * @param isFinal {@inheritDoc}
    * @param isAbstract is the {@link #isAbstract() abstract-flag}.
    * @param isExtendable is the {@link #isExtendable() extendable-flag}.
    */
@@ -253,7 +256,7 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     public static final String VALUE_NAME = "ClassModifiers";
 
     /**
-     * @see net.sf.mmm.value.api.ValueManager#getName()
+     * {@inheritDoc}
      */
     public String getName() {
 
@@ -316,30 +319,6 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
     }
 
     /**
-     * TODO: javadoc
-     * 
-     * @param element
-     * @param attributeName
-     * @param defaultValue
-     * @return
-     * @throws ValueParseException
-     */
-    private boolean getAttributeAsBoolean(Element element, String attributeName,
-        boolean defaultValue) throws ValueParseException {
-
-      if (element.hasAttribute(attributeName)) {
-        String value = element.getAttribute(attributeName);
-        Boolean result = StringUtil.parseBoolean(value);
-        if (result == null) {
-          throw new ValueParseStringException(value, boolean.class, VALUE_NAME);
-        }
-        return result.booleanValue();
-      } else {
-        return defaultValue;
-      }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -347,11 +326,16 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
 
       checkXml(valueAsXml);
 
-      boolean isSystem = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
-      boolean isAbstract = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_ABSTRACT, false);
-      boolean isFinal = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
-      boolean isExtendable = getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_EXTENDABLE, !isFinal);
-      return getInstance(isSystem, isFinal, isAbstract, isExtendable);
+      try {
+        boolean isSystem = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
+        boolean isAbstract = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_ABSTRACT, false);
+        boolean isFinal = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
+        boolean isExtendable = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_EXTENDABLE, !isFinal);
+        return getInstance(isSystem, isFinal, isAbstract, isExtendable);
+      } catch (IllegalArgumentException e) {
+        // TODO
+        throw new ValueParseException("Failed to parse " + VALUE_NAME, e);        
+      }
     }
 
     /**

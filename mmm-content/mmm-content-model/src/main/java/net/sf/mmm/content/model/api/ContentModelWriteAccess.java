@@ -89,13 +89,14 @@ public interface ContentModelWriteAccess {
   // ContentField createField(ContentClass declaringClass, String name,
   // Class type,
   // FieldModifiersImpl modifiers, Term term) throws ContentModelException;
+  
   /**
    * This method sets the status of the deleted flag of the given class or
    * field.
    * 
    * @param classOrField is the class or field to mark as deleted.
    * @param newDeletedFlag - if <code>true</code> the class will be marked as
-   *        delted, else it will be undeleted.
+   *        deleted, else it will be undeleted.
    * @throws ContentModelException if the deleted flag could not be modified.
    *         This can have one of the following reasons:
    *         <ul>

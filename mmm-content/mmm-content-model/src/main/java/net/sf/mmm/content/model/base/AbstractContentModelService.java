@@ -12,8 +12,8 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelService;
-import net.sf.mmm.content.model.api.ClassNotExistsException;
-import net.sf.mmm.content.value.api.Id;
+import net.sf.mmm.content.model.base.DuplicateClassException;
+import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
@@ -29,13 +29,16 @@ public abstract class AbstractContentModelService extends
     ContentModelService {
 
   /** @see #getClass(String) */
-  private final Map<String, AbstractContentClass> name2class;
+  private final Map<String, ContentClass> name2class;
 
-  /** @see #getClass(Id) */
-  private final Map<Id, AbstractContentClass> id2class;
+  /** @see #getClass(ContentId) */
+  private final Map<ContentId, ContentClass> id2class;
 
   /** @see #getClasses() */
-  private final Collection<AbstractContentClass> classesView;
+  private final Collection<ContentClass> classesView;
+
+  /** @see #getRootClass() */
+  private ContentClass rootClass;
 
   /**
    * The constructor.
@@ -43,8 +46,8 @@ public abstract class AbstractContentModelService extends
   public AbstractContentModelService() {
 
     super();
-    this.name2class = new HashMap<String, AbstractContentClass>();
-    this.id2class = new HashMap<Id, AbstractContentClass>();
+    this.name2class = new HashMap<String, ContentClass>();
+    this.id2class = new HashMap<ContentId, ContentClass>();
     this.classesView = Collections.unmodifiableCollection(this.id2class.values());
   }
 
@@ -59,45 +62,15 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass getClass(String name) throws ContentModelException {
-
-    AbstractContentClass contentClass = this.name2class.get(name);
-    if (contentClass == null) {
-      throw new ClassNotExistsException(name);
-    }
-    return contentClass;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public AbstractContentClass getClass(Id id) throws ContentModelException {
-
-    AbstractContentClass contentClass = this.id2class.get(id);
-    if (contentClass == null) {
-      throw new ClassNotExistsException(id);
-    }
-    return contentClass;
-  }
-
-  /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(java.lang.String)
-   * 
-   * @param name the name of the requested class.
-   * @return the requested class or <code>null</code> if NOT found.
-   */
-  protected AbstractContentClass getClassOrNull(String name) {
+  public ContentClass getClass(String name) throws ContentModelException {
 
     return this.name2class.get(name);
   }
 
   /**
-   * @see net.sf.mmm.content.model.api.ContentModelReadAccess#getClass(net.sf.mmm.content.value.api.Id)
-   * 
-   * @param id the ID of the requested class.
-   * @return the requested class or <code>null</code> if NOT found.
+   * {@inheritDoc}
    */
-  protected AbstractContentClass getClassOrNull(Id id) {
+  public ContentClass getClass(ContentId id) throws ContentModelException {
 
     return this.id2class.get(id);
   }
@@ -105,9 +78,27 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public Collection<AbstractContentClass> getClasses() {
+  public Collection<? extends ContentClass> getClasses() {
 
     return this.classesView;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ContentClass getRootClass() {
+
+    return this.rootClass;
+  }
+
+  /**
+   * This method set the {@link #getRootClass() root-class}.
+   * 
+   * @param rootClass is the root-class to set.
+   */
+  protected void setRootClass(ContentClass rootClass) {
+
+    this.rootClass = rootClass;
   }
 
   /**
@@ -116,39 +107,61 @@ public abstract class AbstractContentModelService extends
    * It does NOT {@link #fireEvent(ContentModelEvent) fire} the according event.
    * 
    * @param contentClass is the class to add.
-   * @throws ContentModelRuntimeException if the class is already registered.
+   * @throws ContentModelException if the class is already registered.
    */
-  protected void addClass(AbstractContentClass contentClass) throws ContentModelRuntimeException {
+  protected void addClass(ContentClass contentClass) throws ContentModelException {
 
     ContentClass duplicate;
-    duplicate = this.id2class.get(contentClass.getId());
+    ContentId id = contentClass.getId();
+    duplicate = this.id2class.get(id);
     if (duplicate != null) {
-      throw new DuplicateClassException(contentClass.getId());
+      throw new DuplicateClassException(id);
     }
-    duplicate = this.name2class.get(contentClass.getName());
+    String name = contentClass.getName();
+    duplicate = this.name2class.get(name);
     if (duplicate != null) {
-      throw new DuplicateClassException(contentClass.getName());
+      throw new DuplicateClassException(name);
     }
-    this.name2class.put(contentClass.getName(), contentClass);
-    this.id2class.put(contentClass.getId(), contentClass);
+    this.name2class.put(name, contentClass);
+    this.id2class.put(id, contentClass);
   }
 
   /**
-   * This method {@link #addClass(AbstractContentClass) registers} the given
+   * This method {@link #addClass(ContentClass) registers} the given
    * <code>contentClass</code> recursive. Here recursive means that all
    * {@link ContentClass#getSubClasses() sub-classes} are also
-   * {@link #addClassRecursive(AbstractContentClass) registered} recursively.
+   * {@link #addClassRecursive(ContentClass) registered} recursively.
    * 
    * @param contentClass is the class to add.
-   * @throws ContentModelRuntimeException
+   * @throws ContentModelException if the class or one of its sub-classes
+   *         could NOT be registered.
    */
-  protected void addClassRecursive(AbstractContentClass contentClass)
-      throws ContentModelRuntimeException {
+  protected void addClassRecursive(ContentClass contentClass) throws ContentModelException {
 
     addClass(contentClass);
-    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+    for (ContentClass subClass : contentClass.getSubClasses()) {
       addClassRecursive(subClass);
     }
+  }
+
+  /**
+   * This method removes the given <code>contentClass</code> from the model.<br>
+   * <b>WARNING:</b><br>
+   * Use this feature with extreme care.
+   * 
+   * @param contentClass is the content-class to remove.
+   * @throws ContentModelException
+   */
+  protected void removeClass(ContentClass contentClass) throws ContentModelException {
+
+    if (contentClass.getModifiers().isSystem()) {
+      // TODO: NLS
+      throw new ContentModelException("Can NOT remove system class!");
+    }
+    ContentClass old = this.id2class.remove(contentClass.getId());
+    assert (old == contentClass);
+    old = this.name2class.remove(contentClass.getName());
+    assert (old == contentClass);
   }
 
 }

@@ -3,17 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.base;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.impl.IdImpl;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
+import net.sf.mmm.content.value.api.MetaData;
+import net.sf.mmm.content.value.base.SmartId;
+import net.sf.mmm.content.value.impl.MetaDataImpl;
 
 /**
  * This is the abstract base implementation of the {@link ContentObject}
@@ -21,99 +21,32 @@ import net.sf.mmm.util.xml.api.XmlWriter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentObject implements ContentObject {
+public abstract class AbstractContentObject implements ContentObject, MetaData {
 
   /** @see #getId() */
-  private final IdImpl id;
+  private SmartId id;
 
   /** @see #getName() */
   private String name;
 
-  /** the deleted-flag */
-  private boolean deletedFlag;
+  /** @see #isDeleted() */
+  private boolean deleted;
 
-  /** @see #getMetaData() */
-  private final Map<String, String> metaData;
+  /** @see #getMetaData(String) */
+  private Map<String, MetaData> metadataMap;
 
   /**
    * The constructor.
-   * 
-   * @param objectId is the {@link #getId() unique id} of the object.
-   * @param objectName is the {@link #getName() name} of the object to create.
    */
-  public AbstractContentObject(IdImpl objectId, String objectName) {
+  public AbstractContentObject() {
 
     super();
-    assert (objectId != null);
-    this.name = objectName;
-    this.deletedFlag = false;
-    this.id = objectId;
-    this.metaData = new HashMap<String, String>();
   }
 
   /**
    * {@inheritDoc}
    */
-  public IdImpl getId() {
-
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getName() {
-
-    return this.name;
-  }
-
-  /**
-   * This method gets the deleted flag of this object. This method gives direct
-   * access to the deleted flag and can be used if the method
-   * {@link AbstractContentObject#isDeleted()}has been overridden.
-   * 
-   * @see ContentObject#isDeleted()
-   * 
-   * @return the deleted flag of this object.
-   */
-  protected final boolean getDeletedFlag() {
-
-    return this.deletedFlag;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isDeleted() {
-
-    return this.deletedFlag;
-  }
-
-  /**
-   * This method sets the deleted flag to the given value.
-   * 
-   * @param deleted is the new value of the deleted flag.
-   */
-  public void setDeleted(boolean deleted) {
-
-    this.deletedFlag = deleted;
-  }
-
-  /**
-   * This method changes the {@link #getName() name} of this object.
-   * 
-   * @param newName is the new name to set.
-   */
-  protected void setName(String newName) {
-
-    this.name = newName;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public final Object getFieldValue(String fieldName) throws FieldNotExistsException,
-      PermissionDeniedException, ContentException {
+  public final Object getValue(String fieldName) throws ContentException {
 
     ContentField field = getContentClass().getField(fieldName);
     if (field == null) {
@@ -123,26 +56,17 @@ public abstract class AbstractContentObject implements ContentObject {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public Map<String, String> getMetaData() {
-
-    return this.metaData;
-  }
-
-  /**
    * This method gets the value of the given <code>field</code>.
    * 
-   * @see #getFieldValue(String)
+   * @see #getValue(String)
    * 
-   * @param field
-   * @param fieldName TODO
-   * @return
-   * @throws PermissionDeniedException
-   * @throws ContentException
+   * @param field is the reflecting field.
+   * @param fieldName is the name of the field.
+   * @return the value of the field or <code>null</code> if the field exists
+   *         but has no value.
+   * @throws ContentException if the operation fails.
    */
-  protected Object getFieldValue(ContentField field, String fieldName)
-      throws PermissionDeniedException, ContentException {
+  protected Object getFieldValue(ContentField field, String fieldName) throws ContentException {
 
     if (fieldName.equals(FIELD_NAME_ID)) {
       return getId();
@@ -157,8 +81,113 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * {@inheritDoc}
    */
-  public final void setFieldValue(String fieldName, Object value) throws FieldNotExistsException,
-      PermissionDeniedException, ContentException {
+  public SmartId getId() {
+
+    return this.id;
+  }
+
+  /**
+   * This method sets the {@link #getId() ID}.
+   * 
+   * @param id the id to set
+   */
+  protected void setId(SmartId id) {
+
+    this.id = id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public MetaData getMetaData(String namespace) {
+
+    if (METADATA_NAMESPACE_NONE.equals(namespace)) {
+      return this;
+    }
+    // TODO: synchronize / semaphore!
+    // TODO: make metadata immutable if object locked!
+    MetaData metadata = this.metadataMap.get(namespace);
+    if (metadata == null) {
+      metadata = loadMetaData(namespace);
+      this.metadataMap.put(namespace, metadata);
+    }
+    return metadata;
+  }
+
+  /**
+   * This method creates the metadata for the given namespace.
+   * 
+   * @param namespace is the namespace for which the metadata is requested.
+   * @return the metadata for the given namespace.
+   */
+  protected MetaData loadMetaData(String namespace) {
+
+    // TODO: here we need to load the metadata from db...
+    return new MetaDataImpl();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getName() {
+
+    return this.name;
+  }
+
+  /**
+   * This method sets the {@link #getName() name} of this object.
+   * 
+   * @param name the name to set
+   */
+  protected void setName(String name) {
+
+    this.name = name;
+  }
+
+  /**
+   * This method gets the deleted flag of this object. This method gives direct
+   * access to the deleted flag and can be used if the method
+   * {@link AbstractContentObject#isDeleted()}has been overridden.
+   * 
+   * @see ContentObject#isDeleted()
+   * 
+   * @return the deleted flag of this object.
+   */
+  protected final boolean getDeletedFlag() {
+
+    return this.deleted;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isDeleted() {
+
+    return this.deleted;
+  }
+
+  /**
+   * This method sets the {@link #isDeleted() deleted} flag.
+   * 
+   * @param deleted the deleted to set
+   */
+  protected void setDeletedFlag(boolean deleted) {
+
+    this.deleted = deleted;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Object removeValue(String key) {
+  
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setValue(String fieldName, Object value) throws ContentException {
 
     ContentField field = getContentClass().getField(fieldName);
     if (field == null) {
@@ -170,7 +199,7 @@ public abstract class AbstractContentObject implements ContentObject {
       throw new PermissionDeniedException("", "write " + field, "");
     }
     try {
-      setFieldValue(field, fieldName, value);
+      setValue(field, fieldName, value);
     } catch (ClassCastException e) {
       if ((value != null) && field.getFieldClass().isAssignableFrom(value.getClass())) {
         // TODO: create exception type
@@ -181,40 +210,38 @@ public abstract class AbstractContentObject implements ContentObject {
       throw new IllegalStateException("Internal Error");
     }
   }
-
+  
   /**
-   * TODO: javadoc
+   * This method sets the given <code>field</code> to the given
+   * <code>value</code>.
    * 
-   * @param field
-   * @param fieldName
-   * @param value
-   * @throws PermissionDeniedException
-   * @throws ContentException
+   * @param field is the reflecting field.
+   * @param fieldName is the name of the field.
+   * @param value is the new value to set.
+   * @throws ContentException if the operation failed.
    */
-  protected abstract void setFieldValue(ContentField field, String fieldName, Object value)
-      throws PermissionDeniedException, ContentException;
+  protected void setValue(ContentField field, String fieldName, Object value)
+      throws ContentException {
 
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter xmlWriter) throws XmlException {
-
-  // TODO Auto-generated method stub
-
+    if (fieldName.equals(FIELD_NAME_NAME)) {
+      setName((String) value);
+    } else {
+      throw new IllegalStateException("Internal Error!");
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String toString() {
-
-    StringBuffer buffer = new StringBuffer();
-    buffer.append(getContentClass().getName());
-    buffer.append(" [");
-    buffer.append(this.id);
-    buffer.append(']');
-    return buffer.toString();
+  public final int hashCode() {
+  
+    if (this.id == null) {
+      // this is actually a bug
+      return super.hashCode();
+    } else {
+      return ~this.id.hashCode();
+    }
   }
 
   /**
@@ -224,23 +251,36 @@ public abstract class AbstractContentObject implements ContentObject {
   public final boolean equals(Object other) {
 
     if ((other != null) && (other instanceof AbstractContentObject)) {
-      return getId().equals(((ContentObject) other).getId());
+      if (this.id == null) {
+        return (this == other);
+      } else {
+        return this.id.equals(((ContentObject) other).getId());        
+      }
     }
     return false;
   }
-
+  
   /**
    * {@inheritDoc}
    */
   @Override
-  public final int hashCode() {
+  public String toString() {
 
-    if (this.id == null) {
-      // this is actually a bug
-      return super.hashCode();
+    String className;
+    ContentClass contentClass = getContentClass();
+    if (contentClass == null) {
+      className = "-";
     } else {
-      return ~this.id.hashCode();
+      className = contentClass.getName();
     }
+    StringBuffer buffer = new StringBuffer(className.length() + this.name.length() + 10);
+    buffer.append(className);
+    buffer.append(':');
+    buffer.append(getName());
+    buffer.append(" [");
+    buffer.append(this.id);
+    buffer.append(']');
+    return buffer.toString();
   }
 
 }

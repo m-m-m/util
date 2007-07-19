@@ -46,7 +46,7 @@ public interface Modifiers extends XmlSerializable {
    * {@link java.lang.reflect.Modifier#isFinal(int) final}
    * {@link java.lang.reflect.Field fields} in the java language specification.
    * In this world, a {@link #isFinal() final} {@link ContentField field} can be
-   * {@link net.sf.mmm.content.api.ContentObject#setFieldValue(String, Object) modified}
+   * {@link net.sf.mmm.content.api.ContentObject#setValue(String, Object) modified}
    * any number of times as long as it is NOT
    * {@link FieldModifiers#isReadOnly() read-only}.
    * 

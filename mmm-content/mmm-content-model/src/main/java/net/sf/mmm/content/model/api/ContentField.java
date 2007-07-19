@@ -25,31 +25,34 @@ public interface ContentField extends ContentReflectionObject {
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "Field";
 
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 3;
+
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getFieldType() fieldType} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_FIELD_TYPE = "fieldType";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getFieldClass() fieldClass} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_FIELD_CLASS = "fieldClass";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getDeclaringClass() declaringClass} for generic access via
-   * {@link #getFieldValue(String)}.
+   * {@link #getValue(String)}.
    */
   String FIELD_NAME_DECLARING_CLASS = "declaringClass";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
    * {@link #getInitiallyDefiningClass() initiallyDefiningClass} for generic
-   * access via {@link #getFieldValue(String)}.
+   * access via {@link #getValue(String)}.
    */
   String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
 

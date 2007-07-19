@@ -6,25 +6,27 @@ package net.sf.mmm.content.model.base;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.content.api.ContentException;
-import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.impl.IdImpl;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.value.validator.api.ValueValidator;
-import net.sf.mmm.value.validator.impl.ValueTypeValidator;
 
 /**
- * This is the abstract base implementation of the ContentField interface.
+ * This is the abstract base implementation of the {@link ContentField}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentField extends AbstractContentObject implements ContentField {
+public abstract class AbstractContentField extends AbstractContentReflectionObject implements
+    ContentField {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = -4670093180071079593L;
 
   /** @see #getDeclaringClass() */
-  private final ContentClass declaringClass;
+  private ContentClass declaringClass;
 
   /** @see #getFieldClass() */
   private Class fieldClass;
@@ -40,45 +42,10 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
 
   /**
    * The constructor.
-   * 
-   * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(IdImpl,
-   *      String)
-   * 
-   * @param declaringContentClass is the content-class that
-   *        {@link #getDeclaringClass() declares} (or overrides) this field.
-   * @param type is the {@link #getFieldType() field-type}.
-   * @param fieldModifiers are the {@link #getModifiers() modifiers}.
    */
-  public AbstractContentField(IdImpl fieldId, String fieldName, ContentClass declaringContentClass,
-      Type type, FieldModifiers fieldModifiers) {
+  public AbstractContentField() {
 
-    // TODO
-    this(fieldId, fieldName, declaringContentClass, type, fieldModifiers, new ValueTypeValidator(
-        ReflectionUtil.toClass(type)));
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @see net.sf.mmm.content.base.AbstractContentObject#AbstractContentObject(IdImpl,
-   *      String)
-   * 
-   * @param declaringContentClass is the content-class that
-   *        {@link #getDeclaringClass() declares} (or overrides) this field.
-   * @param type is the {@link #getFieldType() field-type}.
-   * @param fieldModifiers are the {@link #getModifiers() modifiers}.
-   * @param validator is the {@link #getConstraint() constraint}.
-   */
-  public AbstractContentField(IdImpl fieldId, String fieldName, ContentClass declaringContentClass,
-      Type type, FieldModifiers fieldModifiers, ValueValidator validator) {
-
-    super(fieldId, fieldName);
-    assert (fieldId.getObjectId() == IdImpl.OID_FIELD);
-    this.declaringClass = declaringContentClass;
-    this.fieldType = type;
-    this.fieldClass = ReflectionUtil.toClass(type);
-    this.modifiers = fieldModifiers;
-    this.constraint = validator;
+    super();
   }
 
   /**
@@ -95,6 +62,14 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   public ContentClass getDeclaringClass() {
 
     return this.declaringClass;
+  }
+
+  /**
+   * @param declaringClass the declaringClass to set
+   */
+  protected void setDeclaringClass(ContentClass declaringClass) {
+
+    this.declaringClass = declaringClass;
   }
 
   /**
@@ -130,6 +105,18 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   }
 
   /**
+   * This method sets the fields {@link #getFieldType() type} and
+   * {@link #getFieldClass() class}.
+   * 
+   * @param type is the fields type.
+   */
+  protected void setFieldTypeAndClass(Type type) {
+
+    this.fieldType = type;
+    this.fieldClass = ReflectionUtil.toClass(type);
+  }
+
+  /**
    * {@inheritDoc}
    */
   public ValueValidator getConstraint() {
@@ -143,6 +130,16 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   public FieldModifiers getModifiers() {
 
     return this.modifiers;
+  }
+
+  /**
+   * This method sets the {@link #getModifiers() modifiers}.
+   * 
+   * @param modifiers the modifiers to set
+   */
+  public void setModifiers(FieldModifiers modifiers) {
+
+    this.modifiers = modifiers;
   }
 
   /**
@@ -179,14 +176,6 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
   /**
    * {@inheritDoc}
    */
-  public boolean isDeletedFlagSet() {
-
-    return getDeletedFlag();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Object getFieldValue(ContentField field, String fieldName)
       throws PermissionDeniedException, ContentException {
@@ -210,11 +199,13 @@ public abstract class AbstractContentField extends AbstractContentObject impleme
    * {@inheritDoc}
    */
   @Override
-  protected void setFieldValue(ContentField field, String fieldName, Object value)
+  protected void setValue(ContentField field, String fieldName, Object value)
       throws PermissionDeniedException, ContentException {
 
     if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
       this.modifiers = (FieldModifiers) value;
+    } else {
+      super.setValue(field, fieldName, value);
     }
   }
 
