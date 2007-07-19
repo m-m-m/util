@@ -19,7 +19,7 @@ public abstract class AbstractNlsTranslator implements NlsTranslator {
 
   /**
    * This method gets the locale used by
-   * {@link #translateFormat(NlsTranslationSource)}.
+   * {@link #translate(NlsTranslationSource, Object[], StringBuffer)}.
    * 
    * @return the locale of this translator.
    */
@@ -38,7 +38,7 @@ public abstract class AbstractNlsTranslator implements NlsTranslator {
     if (message == null) {
       return false;
     } else {
-      MessageFormat format = new MessageFormat(message);
+      MessageFormat format = new MessageFormat(message, getLocale());
       format.format(arguments, messageBuffer, null);
       return true;
     }

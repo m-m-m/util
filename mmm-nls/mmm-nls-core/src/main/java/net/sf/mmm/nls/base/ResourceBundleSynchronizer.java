@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import net.sf.mmm.nls.NlsBundleNlsCore;
 import net.sf.mmm.nls.api.NlsTranslator;
@@ -195,7 +196,7 @@ public class ResourceBundleSynchronizer {
    * @param bundle is the bundle instance as java object.
    * @throws IOException if the operation failed with an input/output error.
    */
-  public void synchronize(AbstractResourceBundle bundle) throws IOException {
+  public void synchronize(ResourceBundle bundle) throws IOException {
 
     if (bundle.keySet().isEmpty()) {
       System.out.println(bundle.getClass().getName() + " is empty - noting to do!");
@@ -336,7 +337,7 @@ public class ResourceBundleSynchronizer {
       throw new IllegalArgumentException("Given class '" + bundleClassName + "' does NOT extend '"
           + AbstractResourceBundle.class.getName() + "'!");
     }
-    AbstractResourceBundle bundle = (AbstractResourceBundle) bundleClass.newInstance();
+    ResourceBundle bundle = (ResourceBundle) bundleClass.newInstance();
     synchronizer.synchronize(bundle);
   }
 
