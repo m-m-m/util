@@ -9,18 +9,12 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-content-persistence-api</artifactId>
-  <name>MMM Content Persistence::API</name>
+  <artifactId>mmm-content-repository-api</artifactId>
+  <name>MMM Content Repository::API</name>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <description>API of the persistence layer for the content repository.</description>
+  <description>API of the content repository.</description>
   <dependencies>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-content-resource</artifactId>
