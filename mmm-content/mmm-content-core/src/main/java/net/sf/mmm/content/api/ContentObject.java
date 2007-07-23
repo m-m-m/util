@@ -12,17 +12,34 @@ import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.MetaData;
 
 /**
- * This is the abstract interface for any content object. This can be a
- * {@link net.sf.mmm.content.model.api.ContentReflectionObject reflection-object}
- * (class or field), or a resource (file, folder, user, group, etc.).<br>
- * 
+ * This is the abstract interface for any content object. Such object is a
+ * persistent entity stored in a repository.<br>
+ * The core Java OO-world is rewritten here as meta-model inside Java. The
+ * following table shows the mmm types to corresponding Java constructs:<br>
+ * <table border="1">
+ * <tr>
+ * <th>Java</th>
+ * <th>mmm</th>
+ * </tr>
+ * <tr>
+ * <td>{@link Object}</td>
+ * <td>{@link ContentObject}</td>
+ * </tr>
+ * <tr>
+ * <td>{@link Class}</td>
+ * <td>{@link ContentClass}</td>
+ * </tr>
+ * <tr>
+ * <td>{@link java.lang.reflect.Field Field}/{@link java.lang.reflect.Method Method}</td>
+ * <td>{@link net.sf.mmm.content.model.api.ContentField ContentField}</td>
+ * </tr>
+ * </table> <br>
  * TODO: add generic methods "ContentObject getParent()", "String getPath()"
  * "Collection&lt;ContentObject&gt; getChildren()" instead of content-folder?<br>
- * TODO: create external XmlSerializer instead of extend XmlSerializable here?
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentObject extends Serializable {
+public abstract interface ContentObject extends Serializable {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "Object";

@@ -11,7 +11,7 @@ import net.sf.mmm.content.api.ContentObject;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentReflectionObject extends ContentObject {
+public abstract interface ContentReflectionObject extends ContentObject {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "ReflectionObject";

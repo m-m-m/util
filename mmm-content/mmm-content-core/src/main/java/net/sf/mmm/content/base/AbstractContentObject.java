@@ -16,8 +16,7 @@ import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.impl.MetaDataImpl;
 
 /**
- * This is the abstract base implementation of the {@link ContentObject}
- * interface.
+ * This is the implementation of the abstract entity {@link ContentObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -34,6 +33,10 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
 
   /** @see #getMetaData(String) */
   private Map<String, MetaData> metadataMap;
+
+  /** @see #getModificationCount() */
+  //@javax.persistence.Version
+  private int modificationCount;
 
   /**
    * The constructor.
@@ -177,10 +180,31 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
   }
 
   /**
+   * This method gets the modification counter. It can be used to detect a
+   * conflict on an update of the entity if optimistic locking is used.
+   * 
+   * @return the modificationCount is the modification counter.
+   */
+  public int getModificationCount() {
+
+    return this.modificationCount;
+  }
+
+  /**
+   * This method sets the {@link #getModificationCount() modification counter}.
+   * 
+   * @param modificationCount the counter to set.
+   */
+  protected void setModificationCount(int modificationCount) {
+
+    this.modificationCount = modificationCount;
+  }
+
+  /**
    * {@inheritDoc}
    */
   public Object removeValue(String key) {
-  
+
     throw new UnsupportedOperationException();
   }
 
@@ -210,7 +234,7 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
       throw new IllegalStateException("Internal Error");
     }
   }
-  
+
   /**
    * This method sets the given <code>field</code> to the given
    * <code>value</code>.
@@ -235,7 +259,7 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
    */
   @Override
   public final int hashCode() {
-  
+
     if (this.id == null) {
       // this is actually a bug
       return super.hashCode();
@@ -254,12 +278,12 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
       if (this.id == null) {
         return (this == other);
       } else {
-        return this.id.equals(((ContentObject) other).getId());        
+        return this.id.equals(((ContentObject) other).getId());
       }
     }
     return false;
   }
-  
+
   /**
    * {@inheritDoc}
    */

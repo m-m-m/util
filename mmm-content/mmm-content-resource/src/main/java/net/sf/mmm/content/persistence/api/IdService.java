@@ -45,7 +45,7 @@ public interface IdService {
    * method can be used if an ID is given from outside the system (e.g. via an
    * URI).<br>
    * The same thing can be done via the
-   * {@link net.sf.mmm.value.api.ValueManager} of {@link ContentId ids}. It can be
+   * {@link net.sf.mmm.value.api.ValueManager} of {@link ContentId IDs}. It can be
    * retrieved via {@link net.sf.mmm.value.api.ValueService#getManager(Class)}
    * if the if implementation of {@link ContentId ID} is known.
    * 
@@ -67,7 +67,7 @@ public interface IdService {
 
   /**
    * This method releases a unique identifier that is unused. Identifiers are
-   * released e.g. if a transaction failed so instead of letting the garbarge
+   * released e.g. if a transaction failed so instead of letting the garbage
    * collector eat them they can be recycled. TOOD: whats gone happen with this?
    * 
    * @param unusedId is an identifier that is not used by any resource.
@@ -78,7 +78,7 @@ public interface IdService {
    * This method gets the ID of the {@link ContentClass content-class}
    * reflecting the content object owning the given id.
    * 
-   * @param id is the ID of a content object whos type is requested. The given
+   * @param id is the ID of a content object whose type is requested. The given
    *        id must be produced from the the current id store.
    * @return the id of the reflecting class.
    */

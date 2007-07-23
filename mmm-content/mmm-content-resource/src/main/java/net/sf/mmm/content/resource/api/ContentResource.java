@@ -11,31 +11,31 @@ import net.sf.mmm.content.value.api.Version;
  * This is the interface for a resource of the content repository. A resource is
  * a {@link net.sf.mmm.content.api.ContentObject content-object} that can be
  * versioned. <br>
- * There are two specific resources that must always be present:
- * {@link ContentFolder folder}) and {@link ContentFile file}. Any other
- * resource-class may be customized. In this context folders are often called
- * <i>collection</i> and files (and other resources) are called <i>document</i>.
- * <br>
- * A resource has various fields that can be read (via
- * {@link ContentResource#getValue(String)}) and written (via
- * {@link ContentResource#setValue(String, Object)}). Generic components
- * of the project (including plugins) need to use this official API to access
- * resources. Like java objects a resource can be reflected via
- * {@link net.sf.mmm.content.api.ContentObject#getContentClass()}. Custom
- * implementations are free to bypass this API and directly work on the
- * implementation if allowed by their policy (see javadoc, etc.). <br>
- * One implementation may wrap java bean-like classes as ContentClass and direct
- * object instances of those classes as {@link ContentResource} objects. On the
- * other hand another implementation may use dynamic containers (a la
- * {@link java.util.Map}) as {@link ContentResource}and re-implement the OO
- * world.
+ * There are specific resources that must always be present:
+ * <ul>
+ * <li>{@link ContentFolder}</li>
+ * <li>{@link ContentFile}</li>
+ * <li>{@link ContentDocument}</li>
+ * </ul>
+ * Additional resource-types may be customized and typically derive from
+ * {@link ContentDocument}. Generic components of the project (including
+ * plugins) need to access additional fields of a custom resource-type via
+ * {@link #getValue(String)} and {@link #setValue(String, Object)}. Depending
+ * on the implementation of the persistence these resource-types may NOT have a
+ * specific java implementation or it is NOT used. Custom implementations are
+ * free to bypass this API and directly work on the specific methods
+ * (getters/setters) of custom resources if allowed by their policy (see
+ * javadoc, etc.). <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentResource extends ContentObject {
+public abstract interface ContentResource extends ContentObject {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "Resource";
+
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 20;
 
   /**
    * the separator used for the {@link #getPath() path}
@@ -53,13 +53,6 @@ public interface ContentResource extends ContentObject {
    * path for generic access via {@link #getValue(String)}.
    */
   String FIELD_NAME_PATH = "path";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getMetaData() metadata} for generic access via
-   * {@link #getValue(String)}.
-   */
-  String FIELD_NAME_METADATA = "metadata";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
@@ -83,11 +76,11 @@ public interface ContentResource extends ContentObject {
   String FIELD_NAME_REVISION = "revision";
 
   /**
-   * This method gets the parent object of this content-object.
+   * This method gets the parent folder of this resource.
    * 
    * @return the parent or <code>null</code> if this is the root-folder.
    */
-  ContentFolder getParent();
+  ContentFolder getParentFolder();
 
   /**
    * This method gets the path to this content-object in the repository.<br>

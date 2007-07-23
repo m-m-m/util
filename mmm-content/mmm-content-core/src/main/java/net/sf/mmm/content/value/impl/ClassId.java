@@ -58,55 +58,6 @@ public final class ClassId implements SmartId {
    */
   public static final ClassId FIELD = valueOf(ContentField.CLASS_ID);
 
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects content-resource.
-   */
-  public static final ClassId RESOURCE = valueOf(CLASS_ID_RESOURCE);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects content-folder.
-   */
-  public static final ClassId FOLDER = valueOf(CLASS_ID_FOLDER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects content-file.
-   */
-  public static final ClassId FILE = valueOf(CLASS_ID_FILE);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects content-principal.
-   */
-  public static final ClassId PRINCIPAL = valueOf(CLASS_ID_PRINCIPAL);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a content-user.
-   */
-  public static final ClassId USER = valueOf(CLASS_ID_USER);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a content-group.
-   */
-  public static final ClassId GROUP = valueOf(CLASS_ID_GROUP);
-
-  /**
-   * the id of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} that
-   * reflects a content-action.
-   */
-  public static final ClassId ACTION = valueOf(CLASS_ID_ACTION);
-
   /** @see #getClassId() */
   private final int classId;
 

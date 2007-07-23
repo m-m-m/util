@@ -11,12 +11,15 @@ import net.sf.mmm.content.value.api.LinkList;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentFolder extends ContentResource {
+public abstract interface ContentFolder extends ContentResource {
 
   /**
    * the name of the class reflecting {@link ContentFolder}.
    */
   String CLASS_NAME = "Folder";
+
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 21;
 
   /**
    * The {@link net.sf.mmm.content.api.ContentObject#getName() name} of the
@@ -62,7 +65,7 @@ public interface ContentFolder extends ContentResource {
   /**
    * This method gets the link-list containing all direct children of this
    * folder. The direct children are the content-objects that have this folder
-   * as {@link ContentResource#getParent() parent-folder}.
+   * as {@link ContentResource#getParentFolder() parent-folder}.
    * 
    * @return the child resources.
    */

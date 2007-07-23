@@ -18,6 +18,9 @@ public interface ContentFile extends ContentResource {
    */
   String CLASS_NAME = "File";
 
+  /** the id of the {@link #getContentClass() class} reflecting this type. */
+  short CLASS_ID = 22;
+
   /**
    * This method gets the BLOB (Binary Large OBject) representing the data of
    * this file.

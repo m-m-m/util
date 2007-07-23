@@ -9,9 +9,7 @@ import java.util.Date;
 // import net.sf.mmm.content.api.security.ContentUserIF;
 
 /**
- * This is the interface for the history of a specific
- * {@link net.sf.mmm.content.api.resource.ContentResource content-resource}
- * revision.
+ * This is the interface for the history of a specific ContentResource.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,11 +24,9 @@ public interface RevisionHistory {
   /**
    * This method gets the date when this version/revision was created.
    * 
-   * @return the creation date of this version (=
-   *         {@link net.sf.mmm.content.api.resource.ContentResourceIF resource}
-   *         revision). If this resource has the revision <code>0</code>
-   *         (latest revision), this method gets the initial creation date of
-   *         the resource.
+   * @return the creation date of this version of the resource. If this resource
+   *         has the revision <code>0</code> (latest revision), this method
+   *         gets the initial creation date of the resource.
    */
   Date getDateOfCreation();
 

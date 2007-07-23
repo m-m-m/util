@@ -48,27 +48,6 @@ public interface SmartId extends ContentId {
   /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * content-resource.
-   */
-  int CLASS_ID_RESOURCE = 10;
-
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * content-folder.
-   */
-  int CLASS_ID_FOLDER = 11;
-
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
-   * content-file.
-   */
-  int CLASS_ID_FILE = 12;
-
-  /**
-   * the id number of the
-   * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * content-principal.
    */
   int CLASS_ID_PRINCIPAL = 7;
