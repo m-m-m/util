@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-content-repository</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-content-repository-file</artifactId>
+  <name>MMM Content Repository::File</name>
+  <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <description>Content repository implementation for storing BLOBs using commons-transactions.</description>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-content-repository-api</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+		<dependency>
+			<!-- connection pool -->
+			<!-- <groupId>org.apache.commons</groupId> -->
+			<groupId>commons-transaction</groupId>
+			<artifactId>commons-transaction</artifactId>
+			<version>1.2</version>
+		</dependency>		
+  </dependencies>
+</project>

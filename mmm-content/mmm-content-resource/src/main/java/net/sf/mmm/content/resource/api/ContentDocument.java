@@ -6,8 +6,8 @@ package net.sf.mmm.content.resource.api;
 /**
  * This is the interface for a document of the content-repository. A document is
  * an entity of the content-model that is neither a {@link ContentFolder folder}
- * nor a {@link ContentFile file}. Such entity contains metadata and is part of
- * the custom model.<br>
+ * nor a {@link ContentFile file}. Such entity contains structured metadata and
+ * is part of the custom model.<br>
  * Therefore the user can add and remove entities below this type to customize
  * the content-model. Please note that specific plugins (e.g. the multimedia
  * stuff) require that the according default entities are present. If you remove

@@ -17,6 +17,7 @@
   <modules>
     <module>mmm-content-repository-api</module>
     <module>mmm-content-repository-ibatis</module>
+    <module>mmm-content-repository-file</module>
   </modules>
   <dependencies>
   </dependencies>
