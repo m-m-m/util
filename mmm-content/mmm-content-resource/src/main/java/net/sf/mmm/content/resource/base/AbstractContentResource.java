@@ -27,7 +27,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
 
   /** @see #getVersion() */
   private Version version;
-  
+
   /**
    * The constructor.
    */
@@ -52,13 +52,11 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   /**
    * The constructor.
    * 
-   * @param id is the {@link #getId() ID}.
-   * @param contentClass is the {@link #getContentClass() content-class}.
-   * @param name is the {@link #getName() name}.
+   * @param name is the {@link #getName() name} of the resource.
    */
-  public AbstractContentResource(SmartId id, ContentClass contentClass, String name) {
+  public AbstractContentResource(String name) {
 
-    this(id, contentClass);
+    super();
     setName(name);
   }
 
@@ -117,10 +115,10 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
    * {@inheritDoc}
    */
   public int getRevision() {
-  
+
     return getId().getRevision();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -128,7 +126,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
 
     return this.version;
   }
-  
+
   /**
    * @param version the version to set
    */
@@ -136,7 +134,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
 
     this.version = version;
   }
-  
+
   /**
    * {@inheritDoc}
    */

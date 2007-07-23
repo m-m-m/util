@@ -9,14 +9,14 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-content-persistence</artifactId>
-  <name>MMM Content::Persistence</name>
+  <artifactId>mmm-content-repository</artifactId>
+  <name>MMM Content::Repository</name>
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <description>Persistence layer for the content repository.</description>
   <modules>
-    <module>mmm-content-persistence-api</module>
-    <module>mmm-content-persistence-ibatis</module>
+    <module>mmm-content-repository-api</module>
+    <module>mmm-content-repository-ibatis</module>
   </modules>
   <dependencies>
   </dependencies>

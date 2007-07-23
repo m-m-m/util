@@ -7,8 +7,8 @@
     <artifactId>mmm-content</artifactId>
     <version>1.0.0</version>
   </parent>
-  <name>MMM Content::Model</name>
-  <description>Content-Model for the ECMS of mmm.</description>
+  <name>MMM Content::Core</name>
+  <description>Core of the ECMS of mmm.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-content-core</artifactId>
   <packaging>jar</packaging>
