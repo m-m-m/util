@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-content-persistence</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-content-persistence-api</artifactId>
+  <name>MMM Content Persistence::API</name>
+  <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <description>API of the persistence layer for the content repository.</description>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-nls-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-content-resource</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
