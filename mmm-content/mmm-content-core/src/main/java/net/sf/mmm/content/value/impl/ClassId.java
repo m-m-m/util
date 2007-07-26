@@ -27,7 +27,7 @@ public final class ClassId implements SmartId {
   private static final Map<Integer, ClassId> POOL = new HashMap<Integer, ClassId>(64);
 
   /** @see #toString() */
-  private static final String PREFIX = Long.toString(OID_CLASS, 16) + SEPARATOR;
+  private static final String PREFIX = Long.toString(OID_CLASS, RADIX) + SEPARATOR;
 
   /**
    * the id of the root
@@ -143,7 +143,7 @@ public final class ClassId implements SmartId {
   @Override
   public String toString() {
 
-    return PREFIX + Integer.toString(this.classId, 16);
+    return PREFIX + Integer.toString(this.classId, RADIX);
   }
 
   /**

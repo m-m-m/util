@@ -22,9 +22,6 @@ public final class ContentClassImpl extends AbstractContentClass {
   /** @see #getContentClass() */
   private static ContentClass classClass;
 
-  /** @see #getImplementation() */
-  private Class<? extends ContentObject> implementation;
-
   /**
    * The constructor.
    */
@@ -50,28 +47,6 @@ public final class ContentClassImpl extends AbstractContentClass {
   static void setContentClass(ContentClass contentClass) {
 
     classClass = contentClass;
-  }
-
-  /**
-   * This method gets the class reflecting the closest type of this
-   * content-class.
-   * 
-   * @return the "implementation".
-   */
-  public Class<? extends ContentObject> getImplementation() {
-
-    return this.implementation;
-  }
-
-  /**
-   * This method sets the {@link #getImplementation() implementation} of this
-   * content-class.
-   * 
-   * @param implementation is the implementation to set.
-   */
-  public void setImplementation(Class<? extends ContentObject> implementation) {
-
-    this.implementation = implementation;
   }
 
   /**

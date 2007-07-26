@@ -88,13 +88,13 @@ public class SmartIdManagerImpl implements SmartIdManager {
         token.setLength(0);
         try {
           if (pos == 0) {
-            resourceId = Long.parseLong(s);
+            resourceId = Long.parseLong(s, SmartId.RADIX);
           } else if (pos == 1) {
-            classId = Integer.parseInt(s);
+            classId = Integer.parseInt(s, SmartId.RADIX);
           } else if (pos == 2) {
-            revision = Integer.parseInt(s);
+            revision = Integer.parseInt(s, SmartId.RADIX);
           } else if (pos == 3) {
-            storeId = Integer.parseInt(s);
+            storeId = Integer.parseInt(s, SmartId.RADIX);
           }
         } catch (NumberFormatException e) {
           throw new ValueParseStringException(idAsString, SmartId.class, "id");
@@ -135,9 +135,14 @@ public class SmartIdManagerImpl implements SmartIdManager {
       return ClassId.valueOf(classId);
     } else if (objectId == SmartId.OID_FIELD) {
       return FieldId.valueOf(classId);
+    } else if (storeId == 0) {
+      if (revision == 0) {
+        return new ObjectId(objectId, classId);  
+      } else {
+        return new RevisionId(objectId, classId, revision);
+      }
     } else {
-      // TODO:
-      return new ObjectId(objectId, classId);      
+      return new GenericId(objectId, classId, revision, storeId);
     }
   }
 

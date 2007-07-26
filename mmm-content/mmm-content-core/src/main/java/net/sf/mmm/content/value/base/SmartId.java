@@ -28,8 +28,8 @@ import net.sf.mmm.content.value.api.ContentId;
  * in combination with this store-id.</li>
  * <li>{@link #getRevision() revision} - a resource can have multiple revisions
  * (in the version history). All revisions of a resource (in the same branch)
- * share the same {@link #getObjectId() object-id}. An {@link ContentId} uniquely
- * identifies the specific resource-revision.</li>
+ * share the same {@link #getObjectId() object-id}. An {@link ContentId}
+ * uniquely identifies the specific resource-revision.</li>
  * <li>{@link #getClassId() class-id} - is the id of the content-class that
  * reflects the {@link net.sf.mmm.content.api.ContentObject content-object}
  * identified by this {@link ContentId}. See also {@link #getContentClassId()}.</li>
@@ -38,6 +38,9 @@ import net.sf.mmm.content.value.api.ContentId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface SmartId extends ContentId {
+
+  /** This radix is used to convert numbers to/from strings. */
+  public int RADIX = 32;
 
   /** the {@link #getObjectId() object-ID} of a class. */
   long OID_CLASS = 0;
@@ -190,5 +193,20 @@ public interface SmartId extends ContentId {
    * @return the ID of the associated content-class.
    */
   SmartId getContentClassId();
+
+  /**
+   * The string representation of the smart ID needs to be in the following
+   * form:
+   * 
+   * <pre>
+   * &lt;{@link #getObjectId() objectId}&gt;.&lt;{@link #getClassId() classId}&gt;[.&lt;{@link #getRevision() revision}&gt;][:&lt;{@link #getStoreId() storeId}&gt;]
+   * </pre>
+   * 
+   * The revision and/or storeId can be omitted if zero. All number values are
+   * {@link Long#toString(long, int) encoded} using the {@link #RADIX} constant.
+   * 
+   * {@inheritDoc}
+   */
+  String toString();
 
 }

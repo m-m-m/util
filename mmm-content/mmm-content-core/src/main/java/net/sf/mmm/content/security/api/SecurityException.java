@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.security.api;
 
-import net.sf.mmm.nls.base.NlsRuntimeException;
+import net.sf.mmm.content.api.ContentException;
 
 /**
  * This exception is used if a
@@ -12,7 +12,7 @@ import net.sf.mmm.nls.base.NlsRuntimeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SecurityException extends NlsRuntimeException {
+public class SecurityException extends ContentException {
 
   /** uid for serialization */
   private static final long serialVersionUID = 3257285846510940725L;

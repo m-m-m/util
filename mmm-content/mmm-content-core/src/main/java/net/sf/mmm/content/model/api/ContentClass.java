@@ -5,6 +5,7 @@ package net.sf.mmm.content.model.api;
 
 import java.util.List;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.util.collection.SizedIterable;
 
 /**
@@ -153,4 +154,6 @@ public interface ContentClass extends ContentReflectionObject {
    */
   boolean isSubClassOf(ContentClass contentClass);
 
+  Class<? extends ContentObject> getImplementation();
+  
 }

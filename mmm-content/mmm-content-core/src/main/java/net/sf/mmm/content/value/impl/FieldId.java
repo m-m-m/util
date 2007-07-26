@@ -23,7 +23,7 @@ public final class FieldId implements SmartId {
   private static final Map<Integer, FieldId> POOL = new HashMap<Integer, FieldId>();
 
   /** @see #toString() */
-  private static final String PREFIX = Long.toString(OID_FIELD, 16) + SEPARATOR;
+  private static final String PREFIX = Long.toString(OID_FIELD, RADIX) + SEPARATOR;
 
   /**
    * the id of the {@link net.sf.mmm.content.model.api.ContentField field}
@@ -116,7 +116,7 @@ public final class FieldId implements SmartId {
   @Override
   public String toString() {
 
-    return PREFIX + Integer.toString(this.fieldId, 16);
+    return PREFIX + Integer.toString(this.fieldId, RADIX);
   }
 
   /**

@@ -86,7 +86,7 @@ public abstract class AbstractContentModelXmlReader {
     // parse deleted flag
     boolean deleted = readAttribute(xmlReader, ContentObject.FIELD_NAME_DELETED, Boolean.class,
         Boolean.FALSE).booleanValue();
-    object.setDeletedFlag(deleted);
+    object.setDeleted(deleted);
   }
 
 }

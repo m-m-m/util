@@ -37,9 +37,9 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
    * {@inheritDoc}
    */
   @Override
-  protected void setDeletedFlag(boolean deleted) {
+  protected void setDeleted(boolean deleted) {
 
-    super.setDeletedFlag(deleted);
+    super.setDeleted(deleted);
   }
 
   /**

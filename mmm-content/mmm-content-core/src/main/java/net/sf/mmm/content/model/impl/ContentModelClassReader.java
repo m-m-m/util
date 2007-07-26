@@ -3,10 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
+import javax.annotation.PostConstruct;
+
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.AbstractContentField;
 import net.sf.mmm.content.model.base.AbstractContentModelClassReader;
+import net.sf.mmm.content.value.impl.SmartIdManagerImpl;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 
 /**
@@ -23,6 +26,18 @@ public class ContentModelClassReader extends AbstractContentModelClassReader {
   public ContentModelClassReader() {
 
     super();
+  }
+
+  /**
+   * This method initializes this class. It has to be called after construction
+   * and injection is completed.
+   */
+  @PostConstruct
+  public void initialize() {
+
+    if (getIdManager() == null) {
+      setIdManager(new SmartIdManagerImpl());
+    }
   }
 
   /**

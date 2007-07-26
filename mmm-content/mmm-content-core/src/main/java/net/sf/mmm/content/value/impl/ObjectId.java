@@ -78,4 +78,27 @@ public class ObjectId implements SmartId {
     return 0;
   }
 
+  /**
+   * This method implements the logic for {@link #toString()}.
+   * 
+   * @param buffer is the string buffer to use.
+   */
+  protected void toString(StringBuffer buffer) {
+
+    buffer.append(Long.toString(this.objectId, RADIX));
+    buffer.append(SEPARATOR_CHAR);
+    buffer.append(Integer.toString(this.classId, RADIX));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    StringBuffer buffer = new StringBuffer();
+    toString(buffer);
+    return buffer.toString();
+  }
+
 }

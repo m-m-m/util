@@ -21,7 +21,7 @@ public interface Blob {
    * type.
    */
   String VALUE_NAME = "Blob";
-
+  
   /**
    * This method gets the current size of this file.
    * 
@@ -64,4 +64,11 @@ public interface Blob {
    */
   void streamData(OutputStream outStream) throws ValueIOException;
 
+  /**
+   * 
+   * 
+   * @return
+   */
+  int getRevision();
+  
 }

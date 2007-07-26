@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.content.api.ContentException;
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
@@ -36,6 +37,9 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
 
   /** @see #getModifiers() */
   private ClassModifiers modifiers;
+
+  /** @see #getImplementation() */
+  private Class<? extends ContentObject> implementation;
 
   /** the list of direct sub-classes */
   private final List<ContentClass> subClasses;
@@ -273,6 +277,28 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
       throw new DuplicateFieldException(field.getName());
     }
     this.declaredFields.put(field.getName(), field);
+  }
+
+  /**
+   * This method gets the class reflecting the closest type of this
+   * content-class.
+   * 
+   * @return the "implementation".
+   */
+  public Class<? extends ContentObject> getImplementation() {
+
+    return this.implementation;
+  }
+
+  /**
+   * This method sets the {@link #getImplementation() implementation} of this
+   * content-class.
+   * 
+   * @param implementation is the implementation to set.
+   */
+  public void setImplementation(Class<? extends ContentObject> implementation) {
+
+    this.implementation = implementation;
   }
 
   /**

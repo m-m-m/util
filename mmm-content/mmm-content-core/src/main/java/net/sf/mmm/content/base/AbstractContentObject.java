@@ -35,7 +35,7 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
   private Map<String, MetaData> metadataMap;
 
   /** @see #getModificationCount() */
-  //@javax.persistence.Version
+  // @javax.persistence.Version
   private int modificationCount;
 
   /**
@@ -172,9 +172,10 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
   /**
    * This method sets the {@link #isDeleted() deleted} flag.
    * 
-   * @param deleted the deleted to set
+   * @param deleted - if <code>true</code> the object will be marked as
+   *        deleted.
    */
-  protected void setDeletedFlag(boolean deleted) {
+  protected void setDeleted(boolean deleted) {
 
     this.deleted = deleted;
   }

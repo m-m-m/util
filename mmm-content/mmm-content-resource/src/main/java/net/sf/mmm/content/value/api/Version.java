@@ -18,14 +18,19 @@ public interface Version {
    */
   String VALUE_NAME = "Version";
 
+  /** The {@link #getVersionSuffix() suffix} of an alpha version. */
   String SUFFIX_ALPHA = "alpha";
 
+  /** The {@link #getVersionSuffix() suffix} of a beta version. */
   String SUFFIX_BETA = "beta";
 
+  /** The {@link #getVersionSuffix() suffix} of a gamma version. */
   String SUFFIX_GAMMA = "gamma";
 
+  /** The {@link #getVersionSuffix() suffix} of a release candidate version. */
   String SUFFIX_RELEASE_CANDIDATE = "rc";
 
+  /** The {@link #getVersionSuffix() suffix} of a pre-release version. */
   String SUFFIX_PRE_RELEASE = "pre";
 
   /**
@@ -44,6 +49,7 @@ public interface Version {
    * @return the name of the branch (<code>null</code> for head).
    */
   // String getBranchName();
+  
   /**
    * This method gets the major version number. <br>
    * E.g. for version "3.42.1.5-test" the major version is "3".
@@ -88,7 +94,7 @@ public interface Version {
 
   /**
    * This method gets the string representation of this object in the form
-   * <code>{major}[.{minor}[.{milli}[.{micro}]]][-{suffix}]</code>
+   * <code>{major}[.{minor}[.{milli}[.{micro}]]][-{suffix}]</code>.
    * 
    * @see java.lang.Object#toString()
    */
