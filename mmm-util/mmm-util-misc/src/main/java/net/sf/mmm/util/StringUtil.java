@@ -262,7 +262,69 @@ public final class StringUtil {
    */
   public static String padNumber(long number, int digits) {
 
-    String result = Long.toString(number);
+    return padNumber(number, digits, 10);
+  }
+
+  /**
+   * This method formats a positive number to a string using the given
+   * <code>radix</code> with at least the given number of digits padding it
+   * with leading zeros.<br>
+   * Examples:
+   * <ul>
+   * <li><code>padNumber(31, 3, 16)</code> will return <code>"01f"</code></li>
+   * <li><code>padNumber(5, 6, 2)</code> will return <code>"000101"</code></li>
+   * </ul>
+   * 
+   * To pad a number to a constant length you can use the following value for
+   * <code>digits</code>: <br>
+   * <table border="1">
+   * <tr>
+   * <th>Radix</th>
+   * <th>byte</th>
+   * <th>short</th>
+   * <th>int</th>
+   * <th>long</th>
+   * </tr>
+   * <tr>
+   * <th>2</th>
+   * <td>8</td>
+   * <td>16</td>
+   * <td>32</td>
+   * <td>64</td>
+   * </tr>
+   * <tr>
+   * <th>8</th>
+   * <td>3</td>
+   * <td>6</td>
+   * <td>9</td>
+   * <td>12</td>
+   * </tr>
+   * <tr>
+   * <th>10</th>
+   * <td>3</td>
+   * <td>5</td>
+   * <td>9</td>
+   * <td>19</td>
+   * </tr>
+   * <tr>
+   * <th>16</th>
+   * <td>2</td>
+   * <td>4</td>
+   * <td>8</td>
+   * <td>16</td>
+   * </tr>
+   * </table>
+   * 
+   * @param number is the positive number to format.
+   * @param digits is the (minimum) number of digits required.
+   * @param radix is the radix to use.
+   * @return the number as string with the length of (at least)
+   *         <code>digits</code>. If the number is less, leading zeros are
+   *         appended.
+   */
+  public static String padNumber(long number, int digits, int radix) {
+
+    String result = Long.toString(number, radix);
     int leadingZeros = digits - result.length();
     if (leadingZeros > 0) {
       int capacity = result.length() + leadingZeros;

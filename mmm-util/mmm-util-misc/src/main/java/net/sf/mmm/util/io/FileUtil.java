@@ -98,6 +98,32 @@ public final class FileUtil {
   }
 
   /**
+   * This method copies the file given by <code>source</code> to the file
+   * given by <code>destination</code>.
+   * 
+   * TODO
+   * 
+   * @param source is the existing file to copy from.
+   * @param destination is the file to copy to. It will be created if it does
+   *        NOT exist and overridden otherwise.
+   * @throws IOException if the operation fails.
+   */
+  public static void copyFile(File source, File destination, boolean keepFlags) throws IOException {
+    
+    copyFile(source, destination);
+    if (keepFlags) {
+      if (source.canExecute()) {
+        destination.setExecutable(true, false);
+      }
+      if (!source.canWrite()) {
+        destination.setReadOnly();
+      }
+      long lastModified = source.lastModified();
+      destination.setLastModified(lastModified);
+    }
+  }
+  
+  /**
    * This method copies the file or directory given by <code>source</code>
    * into the given <code>destination</code>.<br>
    * <b>ATTENTION:</b><br>
