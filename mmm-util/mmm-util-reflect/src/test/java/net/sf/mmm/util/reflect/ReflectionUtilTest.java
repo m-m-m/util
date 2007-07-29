@@ -10,16 +10,15 @@ import java.lang.reflect.WildcardType;
 import java.util.List;
 
 import org.junit.Test;
-
-import junit.framework.TestCase;
+import static junit.framework.Assert.*;
 
 /**
- * This is the {@link TestCase} for {@link ReflectionUtil}.
+ * This is the test for {@link ReflectionUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ReflectionUtilTest extends TestCase {
+public class ReflectionUtilTest {
 
   private Class getComponentType(String methodName) throws Exception {
 
@@ -38,6 +37,28 @@ public class ReflectionUtilTest extends TestCase {
     assertEquals(String.class, getComponentType("getGenericStringArray"));
   }
 
+  private void checkTypeParser(String typeString) throws Exception {
+    
+    Type type = ReflectionUtil.toType(typeString);
+    String toString;
+    if (type instanceof Class) {
+      toString = ((Class) type).getName();
+    } else {
+      toString = type.toString();
+    }
+    assertEquals(typeString, toString);
+  }
+  
+  @Test
+  public void testTypeParser() throws Exception {
+    
+    checkTypeParser("java.lang.String");
+    checkTypeParser("java.util.List<java.lang.String>");
+    checkTypeParser("java.util.Map<java.lang.String, java.lang.String>");
+    checkTypeParser("java.util.List<?>");
+    checkTypeParser("java.util.Map<? super java.lang.String, ? extends java.lang.String>");
+  }
+  
   public static class TestClass {
 
     public String[] getStringArray() {

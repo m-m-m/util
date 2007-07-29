@@ -12,6 +12,17 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.mmm.util.StringParser;
+import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.reflect.type.GenericArrayTypeImpl;
+import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
+import net.sf.mmm.util.reflect.type.ParameterizedTypeImpl;
+import net.sf.mmm.util.reflect.type.UnboundedWildcardType;
+import net.sf.mmm.util.reflect.type.UpperBoundWildcardType;
 
 /**
  * This class is a collection of utility functions for dealing with
@@ -29,6 +40,9 @@ public final class ReflectionUtil {
 
   /** an empty object array */
   public static final Type[] NO_TYPES = new Type[0];
+
+  /** @see #toType(StringParser, ClassResolver, Type) */
+  private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
 
   /**
    * Forbidden constructor.
@@ -100,7 +114,7 @@ public final class ReflectionUtil {
   }
 
   /**
-   * This method gets the {@link Class} for the given <code>type</code>.<br>
+   * This method gets the raw-type of the given generic <code>type</code>.<br>
    * Examples: <br>
    * <table border="1">
    * <tr>
@@ -156,9 +170,165 @@ public final class ReflectionUtil {
     return null;
   }
 
-  // public static Type toType(String type) {
-  // return Class.forName(type);
-  // }
+  /**
+   * This method is the analogy to {@link Class#forName(String)} for creating a
+   * {@link Type} instance from {@link String}.
+   * 
+   * @see #toType(String, ClassResolver)
+   * 
+   * @param type is the string representation of the requested type.
+   * @return the requested type.
+   * @throws ClassNotFoundException if a class could NOT be found (e.g. in
+   *         <code>java.util.Map&lt;java.long.String&gt;</code> - what should
+   *         be <code>lang</code> instead of <code>long</code>).
+   * @throws IllegalArgumentException if the given <code>type</code> could NOT
+   *         be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
+   */
+  public static Type toType(String type) throws ClassNotFoundException, IllegalArgumentException {
+
+    return toType(type, ClassResolver.SIMPLE_CLASS_RESOLVER);
+  }
+
+  /**
+   * This method is the analogy to {@link Class#forName(String)} for creating a
+   * {@link Type} instance from {@link String}.
+   * 
+   * @param type is the string representation of the requested type.
+   * @param resolver is used to resolve classes.
+   * @return the requested type.
+   * @throws ClassNotFoundException if a class could NOT be found (e.g. in
+   *         <code>java.util.Map&lt;java.long.String&gt;</code> - what should
+   *         be <code>lang</code> instead of <code>long</code>).
+   * @throws IllegalArgumentException if the given <code>type</code> could NOT
+   *         be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
+   */
+  public static Type toType(String type, ClassResolver resolver) throws ClassNotFoundException,
+      IllegalArgumentException {
+
+    // List<String>
+    // Map<Integer, Date>
+    // Set<? extends Serializable>
+    StringParser parser = new StringParser(type);
+    Type result = toType(parser, resolver, null);
+    parser.skipWhile(' ');
+    if (parser.hasNext()) {
+      throw new IllegalArgumentException("Not terminated!");
+    }
+    return result;
+    // return Class.forName(type);
+  }
+
+  /**
+   * This method parses the given <code>type</code> as generic {@link Type}.<br>
+   * This would be easier when using <code>StringParser</code> but we want to
+   * avoid the dependency on <code>util-misc</code>.
+   * 
+   * @param parser is the string-parser on the type string to parse.
+   * @param resolver
+   * @param owner
+   * @return the parsed type.
+   * @throws ClassNotFoundException
+   */
+  private static Type toType(StringParser parser, ClassResolver resolver, Type owner)
+      throws ClassNotFoundException {
+
+    parser.skipWhile(' ');
+    // wildcard-type?
+    char c = parser.forcePeek();
+    if (c == '?') {
+      parser.next();
+      int spaces = parser.skipWhile(' ');
+      if (spaces > 0) {
+        String sequence = parser.readUntil(' ', false);
+        boolean lowerBound;
+        if ("super".equals(sequence)) {
+          lowerBound = false;
+        } else if ("extends".equals(sequence)) {
+          lowerBound = true;
+        } else {
+          // TODO: NLS
+          throw new IllegalArgumentException("Illegal sequence in wildcard type '" + sequence
+              + "'!");
+        }
+        Type bound = toType(parser, resolver, null);
+        if (lowerBound) {
+          return new LowerBoundWildcardType(bound);
+        } else {
+          return new UpperBoundWildcardType(bound);
+        }
+      } else {
+        return UnboundedWildcardType.INSTANCE;
+      }
+    }
+    String segment = parser.readWhile(CHAR_FILTER).trim();
+    c = parser.forceNext();
+    Type result;
+    if (c == '[') {
+      if (!parser.expect(']')) {
+        // TODO: NLS
+        throw new IllegalArgumentException("Illegal array!");
+      }
+      // array...
+      StringBuilder sb = new StringBuilder(segment.length() + 3);
+      sb.append("[L");
+      sb.append(segment);
+      sb.append(";");
+      result = resolver.resolve(sb.toString());
+    } else {
+      Class segmentClass = resolver.resolve(segment);
+      result = segmentClass;
+      if (c == '<') {
+        List<Type> typeArgList = new ArrayList<Type>();
+        while (true) {
+          Type arg = toType(parser, resolver, null);
+          typeArgList.add(arg);
+          char d = parser.forceNext();
+          if (d == '>') {
+            // list completed...
+            Type[] typeArguments = typeArgList.toArray(new Type[typeArgList.size()]);
+            result = new ParameterizedTypeImpl(segmentClass, typeArguments, owner);
+            parser.skipWhile(' ');
+            d = parser.forcePeek();
+            if (d == '[') {
+              parser.next();
+              if (!parser.expect(']')) {
+                // TODO: NLS
+                throw new IllegalArgumentException("Illegal array!");
+              }
+              result = new GenericArrayTypeImpl(result);
+            } else if (d == '.') {
+              parser.next();
+              result = toType(parser, resolver, result);
+            }
+            break;
+          } else if (d != ',') {
+            // TODO
+            throw new IllegalArgumentException("Failed to parse!");
+          }
+        }
+      } else if (c != 0) {
+        parser.stepBack();
+      }
+    }
+    return result;
+  }
+
+  /**
+   * This method gets the string representation of a {@link Type}. Instead of
+   * {@link Type#toString()} it returns {@link Class#getName()} if the type is a
+   * {@link Class}.
+   * 
+   * @param type is the type to get as string.
+   * @return the string representation of the given <code>type</code>.
+   */
+  public static String toString(Type type) {
+
+    if (type instanceof Class) {
+      return ((Class) type).getName();
+    } else {
+      return type.toString();
+    }
+  }
 
   /**
    * This method gets the {@link Field#get(java.lang.Object) value} of a
