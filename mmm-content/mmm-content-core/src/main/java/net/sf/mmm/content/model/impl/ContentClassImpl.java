@@ -69,4 +69,14 @@ public final class ContentClassImpl extends AbstractContentClass {
     super.setSuperClass(superClass);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setImplementation(Class<? extends ContentObject> implementation) {
+  
+    // make package visible...
+    super.setImplementation(implementation);
+  }
+  
 }

@@ -3,16 +3,22 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelException;
-import net.sf.mmm.content.model.base.AbstractContentModelService;
+import net.sf.mmm.content.model.base.AbstractContentClass;
+import net.sf.mmm.content.model.base.AbstractContentField;
+import net.sf.mmm.content.model.base.AbstractContentModelServiceBase;
+import net.sf.mmm.content.model.base.ContentClassLoaderStAX;
+import net.sf.mmm.content.model.base.ContentClassLoader;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.content.value.impl.SmartIdManagerImpl;
+import net.sf.mmm.util.resource.ClasspathResource;
+import net.sf.mmm.util.resource.DataResource;
 
 /**
  * This is an abstract base implementation of the
@@ -22,18 +28,33 @@ import net.sf.mmm.content.value.impl.SmartIdManagerImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class BasicContentModelService extends AbstractContentModelService {
+public class BasicContentModelService extends AbstractContentModelServiceBase {
 
-  /** @see #setIdManager(SmartIdManager) */
-  private SmartIdManager idManager;
+  /** The default class loader. */
+  private ContentClassLoader classLoader;
 
   /**
-   * @param idManager the idManager to set
+   * The constructor.
    */
-  @Resource
-  public void setIdManager(SmartIdManager idManager) {
+  public BasicContentModelService() {
 
-    this.idManager = idManager;
+    super();
+  }
+
+  /**
+   * @return the classLoader
+   */
+  public ContentClassLoader getClassLoader() {
+
+    return this.classLoader;
+  }
+
+  /**
+   * @param classLoader the classLoader to set
+   */
+  public void setClassLoader(ContentClassLoader classLoader) {
+
+    this.classLoader = classLoader;
   }
 
   /**
@@ -41,11 +62,21 @@ public abstract class BasicContentModelService extends AbstractContentModelServi
    * and injection is completed.
    */
   @PostConstruct
-  public void initialize() {
+  public void initialize() throws IOException {
 
-    if (this.idManager == null) {
-      this.idManager = new SmartIdManagerImpl();
+    if (getIdManager() == null) {
+      setIdManager(new SmartIdManagerImpl());
     }
+    if (this.classLoader == null) {
+      this.classLoader = new ContentClassLoaderStAX(this);
+    }
+    DataResource resource = getModelResource();
+    this.classLoader.loadClasses(resource);
+  }
+
+  protected DataResource getModelResource() {
+
+    return new ClasspathResource(XML_MODEL_LOCATION);
   }
 
   /**
@@ -56,11 +87,28 @@ public abstract class BasicContentModelService extends AbstractContentModelServi
 
     super.addClass(contentClass);
     ContentId id = contentClass.getId();
-    if (this.idManager.getClassClassId().equals(id)) {
+    if (getIdManager().getClassClassId().equals(id)) {
       ContentClassImpl.setContentClass(contentClass);
-    } else if (this.idManager.getFieldClassId().equals(id)) {
+    } else if (getIdManager().getFieldClassId().equals(id)) {
       ContentFieldImpl.setContentClass(contentClass);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected AbstractContentClass newClass() {
+
+    return new ContentClassImpl();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected AbstractContentField newField() {
+
+    return new ContentFieldImpl();
   }
 
 }

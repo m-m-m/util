@@ -3,11 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
+import java.io.IOException;
 import java.util.Set;
 
 import javax.annotation.Resource;
 
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.model.base.NativeContentClassLoader;
+import net.sf.mmm.content.model.base.NativeContentClassLoaderImpl;
 
 /**
  * TODO: this class ...
@@ -17,7 +20,7 @@ import net.sf.mmm.content.api.ContentObject;
 public class ReflectionContentModelService extends BasicContentModelService {
 
   /** The "class-loader" used to read the custom content-model. */
-  private ContentModelClassReader classReader;
+  private NativeContentClassLoader nativeClassLoader;
 
   /**
    * The constructor.
@@ -28,30 +31,29 @@ public class ReflectionContentModelService extends BasicContentModelService {
   }
 
   /**
-   * @param classReader the classReader to set
+   * @param classLoader the class-loader to set
    */
   @Resource
-  public void setClassReader(ContentModelClassReader classReader) {
+  public void setNativeClassLoader(NativeContentClassLoader classLoader) {
 
-    this.classReader = classReader;
+    this.nativeClassLoader = classLoader;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void initialize() {
+  public void initialize() throws IOException {
 
     super.initialize();
-    if (this.classReader == null) {
-      ContentModelClassReader reader = new ContentModelClassReader();
-      reader.initialize();
-      this.classReader = reader;
+    if (this.nativeClassLoader == null) {
+      this.nativeClassLoader = new NativeContentClassLoaderImpl(this);
     }
+    
   }
 
   public void initialize(Set<Class<? extends ContentObject>> entityTypes) {
 
-    this.classReader.readClasses(entityTypes, this);
+    this.nativeClassLoader.loadClasses(entityTypes);
   }
 }

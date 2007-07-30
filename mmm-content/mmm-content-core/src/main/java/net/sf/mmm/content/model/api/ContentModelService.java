@@ -4,6 +4,8 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.value.api.ContentId;
+import net.sf.mmm.content.value.api.ContentIdManager;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
 
@@ -26,6 +28,9 @@ import net.sf.mmm.util.event.EventSource;
  */
 public interface ContentModelService extends ContentModelReadAccess {
 
+  /** The location of the content-model. */
+  String XML_MODEL_LOCATION = "net/sf/mmm/content/model/ContentModel.xml";
+  
   /** the root tag-name of the content-model XML representation */
   String XML_TAG_ROOT = "model";
 
@@ -62,5 +67,12 @@ public interface ContentModelService extends ContentModelReadAccess {
    * @return the event registrar.
    */
   EventSource<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar();
+
+  /**
+   * This method gets the manager for {@link ContentId}s.
+   * 
+   * @return the ID manager.
+   */
+  ContentIdManager getIdManager();
 
 }

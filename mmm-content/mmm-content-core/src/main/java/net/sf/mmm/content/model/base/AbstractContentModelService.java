@@ -8,12 +8,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.model.base.DuplicateClassException;
 import net.sf.mmm.content.value.api.ContentId;
+import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
@@ -39,7 +42,7 @@ public abstract class AbstractContentModelService extends
 
   /** @see #getRootClass() */
   private ContentClass rootClass;
-
+  
   /**
    * The constructor.
    */
@@ -58,7 +61,7 @@ public abstract class AbstractContentModelService extends
 
     return this;
   }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -163,5 +166,5 @@ public abstract class AbstractContentModelService extends
     old = this.name2class.remove(contentClass.getName());
     assert (old == contentClass);
   }
-
+  
 }

@@ -296,7 +296,7 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
    * 
    * @param implementation is the implementation to set.
    */
-  public void setImplementation(Class<? extends ContentObject> implementation) {
+  protected void setImplementation(Class<? extends ContentObject> implementation) {
 
     this.implementation = implementation;
   }

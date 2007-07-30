@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
-<ContentModel xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
+<ContentModel xmlns:xi="http://www.w3.org/2001/XInclude">
   <Class id="0" name="Object" system="true" abstract="true" extendable="false">
     <Field id="0" name="id" type="Id" final="true" read-only="true"/>
     <Field id="1" name="name" type="String" final="true" read-only="true"/>
@@ -21,6 +21,6 @@
         <Field id="9" name="modifiers" type="FieldModifiers" final="true" read-only="true"/>        
       </Class>
     </Class>
-    <cfg:include type="xml" href="ContentModel-Main.xml" descendants="Class"/>
+    <xi:include href="ContentModel-Main.xml"/>
   </Class>
 </ContentModel>

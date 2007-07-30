@@ -8,17 +8,12 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
-import net.sf.mmm.content.model.base.ClassModifiersImpl;
-import net.sf.mmm.content.model.base.FieldModifiersImpl;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
@@ -28,48 +23,36 @@ import net.sf.mmm.util.pojo.impl.MethodPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
- * This is the abstract base implementation of a "classloader" for
- * {@link ContentClass}es. It is capable of reading a {@link ContentClass} from
- * the {@link Class type} reflecting the according entity.
+ * This is the implementation of the {@link NativeContentClassLoader} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentModelClassReader {
+public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
 
-  /** @see #readClass(Class, ContentClass) */
+  /** @see #loadClass(Class, ContentClass) */
   private PojoDescriptorBuilder methodDescriptorBuilder;
 
-  /** @see #setIdManager(SmartIdManager) */
-  private SmartIdManager idManager;
+  /** @see #getContentModelService() */
+  private AbstractContentModelServiceBase contentModelService;
 
   /**
    * The constructor.
+   * 
+   * @param contentModelService
    */
-  public AbstractContentModelClassReader() {
+  public NativeContentClassLoaderImpl(AbstractContentModelServiceBase contentModelService) {
 
     super();
+    this.contentModelService = contentModelService;
     this.methodDescriptorBuilder = new MethodPojoDescriptorBuilder();
   }
 
   /**
-   * This method gets the manager used to create IDs.
-   * 
-   * @return the idManager is the manager or <code>null</code> if NOT set.
+   * @return the contentModelService
    */
-  public SmartIdManager getIdManager() {
+  protected AbstractContentModelServiceBase getContentModelService() {
 
-    return this.idManager;
-  }
-
-  /**
-   * This method injects the ID-manager.
-   * 
-   * @param idManager the manager used to create IDs.
-   */
-  @Resource
-  public void setIdManager(SmartIdManager idManager) {
-
-    this.idManager = idManager;
+    return this.contentModelService;
   }
 
   /**
@@ -107,7 +90,7 @@ public abstract class AbstractContentModelClassReader {
     if (id.doubleValue() != classId) {
       throw new IllegalArgumentException("Id (" + id.doubleValue() + ") must be an integer value!");
     }
-    return this.idManager.getClassId(classId);
+    return this.contentModelService.getIdManager().getClassId(classId);
   }
 
   /**
@@ -274,7 +257,12 @@ public abstract class AbstractContentModelClassReader {
    * @param type is the type representing the entity.
    * @return the created instance of the according {@link ContentClass}.
    */
-  protected abstract AbstractContentClass createClass(Class<? extends ContentObject> type);
+  protected AbstractContentClass createClass(Class<? extends ContentObject> type) {
+
+    AbstractContentClass newClass = this.contentModelService.newClass();
+    newClass.setImplementation(type);
+    return newClass;
+  }
 
   /**
    * This method creates the actual {@link ContentField} instance choosing the
@@ -285,8 +273,12 @@ public abstract class AbstractContentModelClassReader {
    *        methods of the field.
    * @return the created instance of the according {@link ContentField}.
    */
-  protected abstract AbstractContentField createField(
-      PojoPropertyDescriptor methodPropertyDescriptor);
+  protected AbstractContentField createField(PojoPropertyDescriptor methodPropertyDescriptor) {
+
+    AbstractContentField newField = this.contentModelService.newField();
+    // TODO: add descriptor
+    return newField;
+  }
 
   /**
    * This method reads a {@link ContentClass} from the given <code>type</code>.
@@ -294,20 +286,18 @@ public abstract class AbstractContentModelClassReader {
    * has NOT already be read.
    * 
    * @param typeSet is the {@link Set} containing all types for which the
-   *        content-class should be read via
-   *        {@link #readClasses(Set, AbstractContentModelService)}. Some of
+   *        content-class should be read via {@link #loadClasses(Set)}. Some of
    *        them may have already been read.
-   * @param modelService is the service managing the content-model.
    * @param type is the current type to read.
    * @return the {@link ContentClass} representing the entity reflected by the
    *         given <code>type</code>.
    */
   protected ContentClass readClass(Set<Class<? extends ContentObject>> typeSet,
-      AbstractContentModelService modelService, Class<? extends ContentObject> type) {
+      Class<? extends ContentObject> type) {
 
     // maybe we already created the content-class before...
     SmartId classId = getClassId(type);
-    ContentClass result = modelService.getClass(classId);
+    ContentClass result = this.contentModelService.getClass(classId);
     if (result == null) {
       // okay the regular case, we need to create the class...
       // first we need to get or create the parent-class...
@@ -324,11 +314,11 @@ public abstract class AbstractContentModelClassReader {
         // maybe we already have the parent in our map...
         classId = getClassId(parentType);
         if (classId != null) {
-          parent = modelService.getClass(classId);
+          parent = this.contentModelService.getClass(classId);
           if (parent == null) {
             // or maybe the parentType is also a content-class to create...
             if (typeSet.contains(parentType)) {
-              parent = readClass(typeSet, modelService, parentType);
+              parent = readClass(typeSet, parentType);
             }
           } else if (parentType != parent.getImplementation()) {
             throw new DuplicateClassException(classId);
@@ -336,8 +326,8 @@ public abstract class AbstractContentModelClassReader {
         }
         parentType = parentType.getSuperclass();
       } while (parent == null);
-      result = readClass(type, parent);
-      modelService.addClass(result);
+      result = loadClass(type, parent);
+      this.contentModelService.addClass(result);
     } else if (result.getImplementation() != type) {
       throw new DuplicateClassException(classId);
     }
@@ -345,17 +335,9 @@ public abstract class AbstractContentModelClassReader {
   }
 
   /**
-   * This method reads all {@link ContentClass}es for the types given by
-   * <code>typeSet</code>. All top-level types from the hierarchy given by
-   * <code>typeSet</code> need to be derived from <code>superClass</code>
-   * what will become their direct
-   * {@link ContentClass#getSuperClass() super-class}.
-   * 
-   * @param typeSet is the set containing the types to read.
-   * @param modelService is the service managing the content-model.
+   * {@inheritDoc}
    */
-  public void readClasses(Set<Class<? extends ContentObject>> typeSet,
-      AbstractContentModelService modelService) {
+  public void loadClasses(Set<Class<? extends ContentObject>> typeSet) {
 
     // Map<Class, ContentClass> classesMap = new HashMap<Class,
     // ContentClass>(typeSet.size());
@@ -363,7 +345,7 @@ public abstract class AbstractContentModelClassReader {
     // classesMap.put(superClass.getImplementation(), superClass);
     // }
     for (Class<? extends ContentObject> type : typeSet) {
-      readClass(typeSet, modelService, type);
+      readClass(typeSet, type);
     }
   }
 
@@ -376,7 +358,7 @@ public abstract class AbstractContentModelClassReader {
    *        of the {@link ContentClass} to read.
    * @return the according {@link ContentClass}.
    */
-  public AbstractContentClass readClass(Class<? extends ContentObject> type, ContentClass superClass) {
+  public AbstractContentClass loadClass(Class<? extends ContentObject> type, ContentClass superClass) {
 
     // TODO: first read all classes and build hierarchy and the read fields in
     // second run!
@@ -433,4 +415,5 @@ public abstract class AbstractContentModelClassReader {
     }
     return contentClass;
   }
+
 }
