@@ -27,6 +27,12 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-resource</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
     <!-- for java 5 (included in jdk since java 6) -->
     <!--
     <dependency>
