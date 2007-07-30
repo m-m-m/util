@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
-<ContentModel xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
-  <Class id="10" name="Resource" system="true" abstract="true" extendable="false">
-    <Field id="32" name="parent" final="true" read-only="true" type="net.sf.mmm.content.resource.api.ContentFolder"/>
-    <Field id="33" name="path" type="String" final="true" read-only="true"/>
-    <Field id="34" name="metadata" type="Metadata" final="true" read-only="true"/>
-    <Field id="35" name="version" type="Version" final="true" read-only="true"/>
-    <Field id="36" name="revision" type="Integer" final="true" read-only="true"/>
-    <Class id="11" name="Folder" system="true" final="true">
-    </Class>
-    <Class id="12" name="File" system="true" final="true">
-      <Field id="40" name="blob" type="net.sf.mmm.content.value.api.MutableBlob" final="true" read-only="true"/>
-    </Class>
-    <Class id="13" name="Document" system="true" abstract="true">
-      <cfg:include type="xml" href="ContentModel-User.xml" descendants="Class"/>
-    </Class>
-    
+<Class xmlns:xi="http://www.w3.org/2001/XInclude" id="10" name="Resource"
+  system="true" abstract="true" extendable="false">
+  <Field id="32" name="parent" final="true" read-only="true"
+    type="net.sf.mmm.content.resource.api.ContentFolder"/>
+  <Field id="33" name="path" type="String" final="true" read-only="true"/>
+  <Field id="34" name="metadata" type="Metadata" final="true" read-only="true"/>
+  <Field id="35" name="version" type="Version" final="true" read-only="true"/>
+  <Field id="36" name="revision" type="Integer" final="true" read-only="true"/>
+  <Class id="11" name="Folder" system="true" final="true">
   </Class>
-</ContentModel>
+  <Class id="12" name="File" system="true" final="true">
+    <Field id="40" name="blob" type="net.sf.mmm.content.value.api.MutableBlob"
+      final="true" read-only="true"/>
+  </Class>
+  <Class id="13" name="Document" system="true" abstract="true">
+    <xi:include href="ContentModel-User.xml"/>
+  </Class>
+</Class>
