@@ -175,7 +175,7 @@ public class ClasspathResource extends AbstractResource {
     int lastSlash = this.path.lastIndexOf('/');
     String newPath = "";
     if (lastSlash > 0) {
-      newPath = this.path.substring(lastSlash);
+      newPath = this.path.substring(0, lastSlash + 1);
     }
     newPath = newPath + relativePath;
     // TODO: normalize path (remove . and ..)
