@@ -76,7 +76,7 @@ public class UpperBoundWildcardType implements WildcardType {
 
     // emulate hash code of
     // sun.reflect.generics.reflectiveObjects.WildcardTypeImpl
-    return ~(31 * this.upperBound.hashCode());
+    return ~(31 + this.upperBound.hashCode());
   }
 
   /**

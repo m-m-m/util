@@ -78,9 +78,8 @@ public class ParameterizedTypeImpl implements ParameterizedType {
         return true;
       } else {
         Type otherOwner = otherType.getOwnerType();
-        Type otherRaw = otherType.getRawType();
         return ((this.ownerType != null) ? this.ownerType.equals(otherOwner) : (otherOwner == null))
-            && ((this.rawType != null) ? this.rawType.equals(otherRaw) : (otherRaw == null))
+            && (this.rawType.equals(otherType.getRawType()))
             && Arrays.equals(this.actualTypeArguments, otherType.getActualTypeArguments());
       }
     } else {

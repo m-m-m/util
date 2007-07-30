@@ -76,7 +76,7 @@ public class LowerBoundWildcardType implements WildcardType {
 
     // emulate hash code of
     // sun.reflect.generics.reflectiveObjects.WildcardTypeImpl
-    return ~(31 * this.lowerBound.hashCode());
+    return ~(31 + this.lowerBound.hashCode());
   }
 
   /**
