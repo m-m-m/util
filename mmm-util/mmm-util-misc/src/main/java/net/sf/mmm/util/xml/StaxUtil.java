@@ -100,4 +100,49 @@ public final class StaxUtil {
     } while (true);
   }
 
+  /**
+   * This method gets the name for the given <code>eventType</code>.
+   * 
+   * @see XMLStreamConstants
+   * 
+   * @param eventType is an event type constant declared in
+   *        {@link XMLStreamConstants}.
+   * @return the according name.
+   */
+  public static String getEventTypeName(int eventType) {
+
+    switch (eventType) {
+      case XMLStreamConstants.ATTRIBUTE:
+        return "ATTRIBUTE";
+      case XMLStreamConstants.CDATA:
+        return "CDATA";
+      case XMLStreamConstants.CHARACTERS:
+        return "CHARACTERS";
+      case XMLStreamConstants.COMMENT:
+        return "COMMENT";
+      case XMLStreamConstants.DTD:
+        return "DTD";
+      case XMLStreamConstants.END_DOCUMENT:
+        return "END_DOCUMENT";
+      case XMLStreamConstants.END_ELEMENT:
+        return "END_ELEMENT";
+      case XMLStreamConstants.ENTITY_DECLARATION:
+        return "ENTITY_DECLARATION";
+      case XMLStreamConstants.ENTITY_REFERENCE:
+        return "ENTITY_REFERENCE";
+      case XMLStreamConstants.NAMESPACE:
+        return "NAMESPACE";
+      case XMLStreamConstants.NOTATION_DECLARATION:
+        return "NOTATION_DECLARATION";
+      case XMLStreamConstants.PROCESSING_INSTRUCTION:
+        return "PROCESSING_INSTRUCTION";
+      case XMLStreamConstants.SPACE:
+        return "SPACE";
+      case XMLStreamConstants.START_DOCUMENT:
+        return "START_DOCUMENT";
+      case XMLStreamConstants.START_ELEMENT:
+        return "START_ELEMENT";
+    }
+    return "UNKNOWN_EVENT_TYPE (" + String.valueOf(eventType) + ")";
+  }
 }
