@@ -305,7 +305,7 @@ public abstract class AbstractContentModelService extends
       if (!contentClass.getName().equals(name)) {
         // TODO:
         throw new ContentModelFeatureUnsupportedException(
-            "Changing the name of content-class is currently NOT supported!");
+            "Changing the name of a content-class is currently NOT supported!");
       }
       if (!modifiers.equals(contentClass.getModifiers())) {
         if (isSystem) {
@@ -333,7 +333,7 @@ public abstract class AbstractContentModelService extends
     }
     if (superClass != null) {
       superClass.addSubClass(contentClass);
-    }      
+    }
     return contentClass;
   }
 
@@ -384,7 +384,21 @@ public abstract class AbstractContentModelService extends
       contentField = newField();
       contentField.setId(id);
     } else {
-      // TODO: constraints
+      if (!contentField.getName().equals(name)) {
+        // TODO
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the name of a content-field is currently NOT supported!");
+      }
+      if (!contentField.getModifiers().equals(modifiers)) {
+        // TODO
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the modifiers of a content-field is currently NOT supported!");
+      }
+      if (!contentField.getFieldType().equals(type)) {
+        // TODO
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the type of a content-field is currently NOT supported!");
+      }
     }
     contentField.setName(name);
     contentField.setDeclaringClass(declaringClass);

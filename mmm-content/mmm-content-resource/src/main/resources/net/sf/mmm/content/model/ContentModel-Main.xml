@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
+<!--
+  ATTENTION: Each class has to declare its fields after all subclasses have 
+  been declared. This means that the XML element "Class" may NOT occur after a
+  "Field" element on the same level of the XML tree. Therefore the order of the
+  child elements is "Class", "xi:include" (,"Entities") and then "Field".
+  -->
 <Class xmlns:xi="http://www.w3.org/2001/XInclude" id="10" name="ContentResource" system="true" abstract="true" extendable="false">
   <Class id="11" name="ContentFolder" system="true" final="true">
     <Field id="32" name="children" final="true" type="ContentFolder" read-only="true"/>

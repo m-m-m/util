@@ -11,6 +11,7 @@ import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentReflectionObject;
 import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.AbstractContentField;
@@ -20,6 +21,7 @@ import net.sf.mmm.content.model.base.ContentClassLoaderStAX;
 import net.sf.mmm.content.model.base.ContentClassLoader;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.impl.StaticSmartIdManager;
+import net.sf.mmm.util.event.ChangeEvent;
 import net.sf.mmm.util.resource.ClasspathResource;
 import net.sf.mmm.util.resource.DataResource;
 
@@ -128,10 +130,10 @@ public class BasicContentModelService extends AbstractMutableContentModelService
   }
 
   /**
+   * This method loads the content-model.
    * 
-   * TODO: javadoc
-   * @throws IOException
-   * @throws ContentException
+   * @throws IOException if an I/O error was caused by the class-loader.
+   * @throws ContentException if the content-model is invalid.
    */
   protected void loadClasses() throws IOException, ContentException {
 
@@ -140,9 +142,24 @@ public class BasicContentModelService extends AbstractMutableContentModelService
   }
 
   /**
+   * This method reloads the content-model. If the external representation of
+   * the model has been modified, this method updates the model to import these
+   * changes.
    * 
-   * TODO: javadoc
-   * @return
+   * @throws IOException if an I/O error was caused by the class-loader.
+   * @throws ContentException if the content-model is invalid.
+   */
+  public void reaload() throws IOException, ContentException {
+
+    loadClasses();
+    fireEvent(new ContentModelEvent(getRootClass(), ChangeEvent.Type.UPDATE));
+  }
+
+  /**
+   * This method gets the resource that points to the external representation of
+   * the content-model.
+   * 
+   * @return the resource pointing to the content-model.
    */
   protected DataResource getModelResource() {
 

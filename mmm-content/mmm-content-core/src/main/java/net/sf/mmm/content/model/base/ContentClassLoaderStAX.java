@@ -91,8 +91,8 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
   /**
    * This method parses the type given by <code>typeString</code>.
    * 
-   * @param typeSpecification is the type given as string (e.g. <code>String</code>
-   *        or <code>List&lt;ContentObject&gt;</code>).
+   * @param typeSpecification is the type given as string (e.g.
+   *        <code>String</code> or <code>List&lt;ContentObject&gt;</code>).
    * @return the parsed type.
    */
   protected Type parseFieldType(String typeSpecification) {
@@ -176,9 +176,15 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
   /**
    * This method reads a class-hierarchy from the given <code>xmlReader</code>.<br>
    * <b>ATTENTION:</b><br>
-   * The {@link ContentObject#getContentClass() content-class} of the
+   * <ul>
+   * <li>The order of the elements in the XML is important to this method.
+   * Field elements have to occur after Class elements on the same level in the
+   * XML tree.</li>
+   * <li>The {@link ContentObject#getContentClass() content-class} of the
    * de-serialized classes and fields is NOT set by this method so it may be
-   * <code>null</code> if NOT initialized.
+   * <code>null</code> if NOT initialized via the
+   * {@link net.sf.mmm.content.model.api.ContentModelService model-service}.</li>
+   * </ul>
    * 
    * @param xmlReader is where to read the XML from.
    * @param superClass is the super-class or <code>null</code> when loading
@@ -223,13 +229,28 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
       } else if (ContentField.XML_TAG_FIELD.equals(tagName)) {
         // field
         loadField(xmlReader, contentClass);
-        //contentClass.addField(contentField);
+        // contentClass.addField(contentField);
       } else {
-        StaxUtil.skipOpenElement(xmlReader);        
+        parseClassChildElement(xmlReader, contentClass);
       }
       xmlEvent = xmlReader.nextTag();
     }
     return contentClass;
+  }
+
+  /**
+   * This method parses the XML at the point where an unknown child-element of a
+   * Class element was hit. The method has to consume this element including all
+   * its children and point to the end of the unknown element.
+   * 
+   * @param xmlReader is where to read the XML from.
+   * @param superClass is the class that owns the unknown child-element.
+   * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
+   */
+  protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass)
+      throws XMLStreamException {
+
+    StaxUtil.skipOpenElement(xmlReader);
   }
 
   /**
@@ -268,10 +289,11 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
     FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal, isReadOnly,
         isStatic, isTransient);
     // parse type
-    String typeSpecification = parseAttribute(xmlReader, ContentField.XML_ATR_FIELD_TYPE, String.class);
+    String typeSpecification = parseAttribute(xmlReader, ContentField.XML_ATR_FIELD_TYPE,
+        String.class);
     Type fieldType = parseFieldType(typeSpecification);
-    AbstractContentField contentField = getContentModelService()
-        .createOrUpdateField(id, name, declaringClass, modifiers, fieldType, typeSpecification, deleted);
+    AbstractContentField contentField = getContentModelService().createOrUpdateField(id, name,
+        declaringClass, modifiers, fieldType, typeSpecification, deleted);
     xmlReader.nextTag();
     if (xmlReader.isStartElement()) {
       StaxUtil.skipOpenElement(xmlReader);

@@ -8,6 +8,9 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Set;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
@@ -31,7 +34,10 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
  */
 public class ContentClassLoaderNative extends ContentClassLoaderStAX {
 
-  /** @see #loadClass(Class, ContentClass) */
+  /** */
+  public static final String XML_TAG_CLASS_LIST = "Entities";
+  
+  /** @see #loadClass(Class, AbstractContentClass) */
   private PojoDescriptorBuilder methodDescriptorBuilder;
 
   /**
@@ -43,6 +49,15 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
 
     super(contentModelService);
     this.methodDescriptorBuilder = new MethodPojoDescriptorBuilder();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass) throws XMLStreamException {
+
+    super.parseClassChildElement(xmlReader, superClass);
   }
 
   /**

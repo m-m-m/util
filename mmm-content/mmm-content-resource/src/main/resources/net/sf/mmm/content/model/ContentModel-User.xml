@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
+<!--
+  ATTENTION: Each class has to declare its fields after all subclasses have 
+  been declared. This means that the XML element "Class" may NOT occur after a
+  "Field" element on the same level of the XML tree. Therefore the order of the
+  child elements is "Class", "xi:include" (,"Entities") and then "Field".
+  -->
 <ContentModel xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration">
   <Class name="Content" abstract="true">
   </Class>
