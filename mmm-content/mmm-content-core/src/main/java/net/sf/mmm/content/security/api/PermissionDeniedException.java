@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.security.api;
 
-import net.sf.mmm.content.NlsBundleContentModel;
+import net.sf.mmm.content.NlsBundleContentCore;
 
 /**
  * This exception is thrown if a content-user tried to perform an action on an
@@ -26,7 +26,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(String subject, String action, String object) {
 
-    super(NlsBundleContentModel.ERR_PERMISSION_DENIED, subject, action, object);
+    super(NlsBundleContentCore.ERR_PERMISSION_DENIED, subject, action, object);
   }
 
   /**

@@ -4,13 +4,12 @@
 package net.sf.mmm.util.reflect;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.WildcardType;
 import java.util.List;
 
 import org.junit.Test;
-import static junit.framework.Assert.*;
+
+import static org.junit.Assert.*;
 
 /**
  * This is the test for {@link ReflectionUtil}.

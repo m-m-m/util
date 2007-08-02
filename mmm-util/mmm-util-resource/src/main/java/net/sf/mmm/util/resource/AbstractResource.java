@@ -56,7 +56,7 @@ public abstract class AbstractResource implements DataResource {
 
     String simpleName = getClass().getSimpleName();
     String path = getPath();
-    StringBuffer result = new StringBuffer(simpleName.length() + path.length() + 2);
+    StringBuilder result = new StringBuilder(simpleName.length() + path.length() + 2);
     result.append(simpleName);
     result.append('[');
     result.append(path);

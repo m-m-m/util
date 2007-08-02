@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for the class {@link AnnotationUtil}.
@@ -20,7 +20,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class AnnotationUtilTest extends TestCase {
+public class AnnotationUtilTest {
 
   private static final String FOO_IF = "interface";
 
@@ -29,7 +29,7 @@ public class AnnotationUtilTest extends TestCase {
   private static final String BAR_CLASS = "Foo-class";
 
   @Test
-  public static void testMethodAnnotation() throws Exception {
+  public void testMethodAnnotation() throws Exception {
 
     // annotation with retention "runtime" ?
     assertTrue(AnnotationUtil.isRuntimeAnnotation(MyAnnotation.class));

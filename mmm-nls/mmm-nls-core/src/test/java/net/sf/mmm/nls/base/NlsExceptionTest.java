@@ -5,10 +5,12 @@ package net.sf.mmm.nls.base;
 
 import java.util.Locale;
 
+import org.junit.Test;
+
 import net.sf.mmm.nls.MyResourceBundle;
 import net.sf.mmm.nls.api.NlsTranslator;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link net.sf.mmm.nls.base.NlsException}.
@@ -16,7 +18,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NlsExceptionTest extends TestCase {
+public class NlsExceptionTest {
 
   /**
    * The constructor.
@@ -26,6 +28,7 @@ public class NlsExceptionTest extends TestCase {
     super();
   }
 
+  @Test
   public void testNlsException() {
 
     String source = "bad boy";

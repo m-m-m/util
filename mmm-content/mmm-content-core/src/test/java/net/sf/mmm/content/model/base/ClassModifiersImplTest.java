@@ -8,7 +8,7 @@ import org.junit.Test;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.FieldModifiers;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link ClassModifiersImpl}.
@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ClassModifiersImplTest extends TestCase {
+public class ClassModifiersImplTest {
 
   private void checkModifiers(ClassModifiers modifiers) {
 

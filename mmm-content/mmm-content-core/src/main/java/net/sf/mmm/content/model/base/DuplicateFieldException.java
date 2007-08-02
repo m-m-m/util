@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
-import net.sf.mmm.content.NlsBundleContentModel;
+import net.sf.mmm.content.NlsBundleContentCore;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.value.api.ContentId;
 
@@ -28,7 +28,7 @@ public class DuplicateFieldException extends ContentModelException {
    */
   public DuplicateFieldException(String name) {
 
-    super(NlsBundleContentModel.ERR_DUPLICATE_FIELD_NAME, name);
+    super(NlsBundleContentCore.ERR_DUPLICATE_FIELD_NAME, name);
   }
 
   /**
@@ -38,7 +38,7 @@ public class DuplicateFieldException extends ContentModelException {
    */
   public DuplicateFieldException(ContentId id) {
 
-    super(NlsBundleContentModel.ERR_DUPLICATE_FIELD_ID, id);
+    super(NlsBundleContentCore.ERR_DUPLICATE_FIELD_ID, id);
   }
 
 }

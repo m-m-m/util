@@ -7,18 +7,21 @@ import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.value.api.ValueParseStringException;
 
-
 /**
- * TODO: this class ...
- *
+ * This is the abstract base implementation of the {@link SmartIdManager}
+ * interface.<br>
+ * The only method that is left to be implemented is
+ * {@link #createUniqueId(int)} because there may be various different
+ * strategies.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SmartIdManagerImpl implements SmartIdManager {
+public abstract class AbstractSmartIdManager implements SmartIdManager {
 
   /**
    * The constructor.
    */
-  public SmartIdManagerImpl() {
+  public AbstractSmartIdManager() {
 
     super();
   }
@@ -137,7 +140,7 @@ public class SmartIdManagerImpl implements SmartIdManager {
       return FieldId.valueOf(classId);
     } else if (storeId == 0) {
       if (revision == 0) {
-        return new ObjectId(objectId, classId);  
+        return new ObjectId(objectId, classId);
       } else {
         return new RevisionId(objectId, classId, revision);
       }

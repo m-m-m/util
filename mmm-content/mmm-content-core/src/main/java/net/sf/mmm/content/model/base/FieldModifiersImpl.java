@@ -5,7 +5,7 @@ package net.sf.mmm.content.model.base;
 
 import org.w3c.dom.Element;
 
-import net.sf.mmm.content.NlsBundleContentModel;
+import net.sf.mmm.content.NlsBundleContentCore;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.DomUtil;
@@ -261,10 +261,10 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
 
     if (isTransient) {
       if (!isReadOnly) {
-        throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_TRANSIENT_MUTABLE);
+        throw new IllegalModifiersException(NlsBundleContentCore.ERR_MODIFIERS_TRANSIENT_MUTABLE);
       }
       if (isStatic) {
-        throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_TRANSIENT_STATIC);
+        throw new IllegalModifiersException(NlsBundleContentCore.ERR_MODIFIERS_TRANSIENT_STATIC);
       }
     }
   }

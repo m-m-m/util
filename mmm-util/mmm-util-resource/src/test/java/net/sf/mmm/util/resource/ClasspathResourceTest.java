@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for the class {@link ClasspathUtil}.
@@ -17,7 +17,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ClasspathResourceTest extends TestCase {
+public class ClasspathResourceTest {
 
   public void verifyResource(DataResource resource) throws Exception {
 

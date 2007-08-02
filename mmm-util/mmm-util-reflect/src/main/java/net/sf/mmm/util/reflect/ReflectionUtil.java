@@ -273,9 +273,9 @@ public final class ReflectionUtil {
       sb.append("[L");
       sb.append(segment);
       sb.append(";");
-      result = resolver.resolve(sb.toString());
+      result = resolver.resolveClass(sb.toString());
     } else {
-      Class segmentClass = resolver.resolve(segment);
+      Class segmentClass = resolver.resolveClass(segment);
       result = segmentClass;
       if (c == '<') {
         List<Type> typeArgList = new ArrayList<Type>();

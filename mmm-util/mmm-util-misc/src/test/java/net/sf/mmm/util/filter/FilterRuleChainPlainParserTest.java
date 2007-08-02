@@ -8,15 +8,15 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the {@link TestCase} for {@link FilterRuleChainPlainParser}.
+ * This is the test-case for {@link FilterRuleChainPlainParser}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FilterRuleChainPlainParserTest extends TestCase {
+public class FilterRuleChainPlainParserTest {
 
   @Test
   public void test() throws Exception {

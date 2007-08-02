@@ -10,12 +10,9 @@ import org.junit.Test;
 
 import net.sf.mmm.util.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
-import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.impl.dummy.MyPojo;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link FieldPojoDescriptorBuilder}.

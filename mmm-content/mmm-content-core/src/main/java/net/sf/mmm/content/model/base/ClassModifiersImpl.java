@@ -5,7 +5,7 @@ package net.sf.mmm.content.model.base;
 
 import org.w3c.dom.Element;
 
-import net.sf.mmm.content.NlsBundleContentModel;
+import net.sf.mmm.content.NlsBundleContentCore;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.xml.DomUtil;
@@ -192,13 +192,13 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
       boolean isExtendable) throws IllegalModifiersException {
 
     if (isFinal && isExtendable) {
-      throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_FINAL_EXTENDABLE);
+      throw new IllegalModifiersException(NlsBundleContentCore.ERR_MODIFIERS_FINAL_EXTENDABLE);
     }
     if (!isExtendable && !isFinal && !isSystem) {
-      throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_USER_UNEXTENDABLE);
+      throw new IllegalModifiersException(NlsBundleContentCore.ERR_MODIFIERS_USER_UNEXTENDABLE);
     }
     if (isAbstract && isFinal) {
-      throw new IllegalModifiersException(NlsBundleContentModel.ERR_MODIFIERS_ABSTRACT_FINAL);
+      throw new IllegalModifiersException(NlsBundleContentCore.ERR_MODIFIERS_ABSTRACT_FINAL);
     }
   }
 

@@ -6,7 +6,11 @@ package net.sf.mmm.content.api;
 import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
- * This is the abstract base exception of all errors about the content.
+ * This is the abstract base exception of all failures related to
+ * {@link ContentObject content}.
+ * 
+ * @see net.sf.mmm.content.model.api.ContentModelException
+ * @see net.sf.mmm.content.security.api.SecurityException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

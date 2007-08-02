@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,12 +11,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.model.api.ContentModelFeatureUnsupportedException;
 import net.sf.mmm.content.model.api.ContentModelService;
+import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.base.DuplicateClassException;
 import net.sf.mmm.content.value.api.ContentId;
+import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.event.EventListener;
@@ -32,26 +37,51 @@ public abstract class AbstractContentModelService extends
     ContentModelService {
 
   /** @see #getClass(String) */
-  private final Map<String, ContentClass> name2class;
+  private final Map<String, AbstractContentClass> name2class;
 
   /** @see #getClass(ContentId) */
-  private final Map<ContentId, ContentClass> id2class;
+  private final Map<ContentId, AbstractContentClass> id2class;
 
   /** @see #getClasses() */
-  private final Collection<ContentClass> classesView;
+  private final Collection<AbstractContentClass> classesView;
+
+  /** @see #getField(ContentId) */
+  private final Map<ContentId, AbstractContentField> id2field;
 
   /** @see #getRootClass() */
-  private ContentClass rootClass;
-  
+  private AbstractContentClass rootClass;
+
+  /** @see #getIdManager() */
+  private SmartIdManager idManager;
+
   /**
    * The constructor.
    */
   public AbstractContentModelService() {
 
     super();
-    this.name2class = new HashMap<String, ContentClass>();
-    this.id2class = new HashMap<ContentId, ContentClass>();
+    // TODO: use concurrent map?
+    this.name2class = new HashMap<String, AbstractContentClass>();
+    this.id2class = new HashMap<ContentId, AbstractContentClass>();
     this.classesView = Collections.unmodifiableCollection(this.id2class.values());
+    this.id2field = new HashMap<ContentId, AbstractContentField>();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SmartIdManager getIdManager() {
+
+    return this.idManager;
+  }
+
+  /**
+   * @param idManager the idManager to set
+   */
+  @Resource
+  public void setIdManager(SmartIdManager idManager) {
+
+    this.idManager = idManager;
   }
 
   /**
@@ -61,11 +91,11 @@ public abstract class AbstractContentModelService extends
 
     return this;
   }
-  
+
   /**
    * {@inheritDoc}
    */
-  public ContentClass getClass(String name) throws ContentModelException {
+  public AbstractContentClass getClass(String name) {
 
     return this.name2class.get(name);
   }
@@ -73,7 +103,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public ContentClass getClass(ContentId id) throws ContentModelException {
+  public AbstractContentClass getClass(ContentId id) {
 
     return this.id2class.get(id);
   }
@@ -81,7 +111,15 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public Collection<? extends ContentClass> getClasses() {
+  public AbstractContentField getField(ContentId id) {
+
+    return this.id2field.get(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Collection<AbstractContentClass> getClasses() {
 
     return this.classesView;
   }
@@ -89,7 +127,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public ContentClass getRootClass() {
+  public AbstractContentClass getRootClass() {
 
     return this.rootClass;
   }
@@ -99,7 +137,7 @@ public abstract class AbstractContentModelService extends
    * 
    * @param rootClass is the root-class to set.
    */
-  protected void setRootClass(ContentClass rootClass) {
+  protected void setRootClass(AbstractContentClass rootClass) {
 
     this.rootClass = rootClass;
   }
@@ -112,11 +150,10 @@ public abstract class AbstractContentModelService extends
    * @param contentClass is the class to add.
    * @throws ContentModelException if the class is already registered.
    */
-  protected void addClass(ContentClass contentClass) throws ContentModelException {
+  protected void addClass(AbstractContentClass contentClass) throws ContentModelException {
 
-    ContentClass duplicate;
     ContentId id = contentClass.getId();
-    duplicate = this.id2class.get(id);
+    AbstractContentClass duplicate = this.id2class.get(id);
     if (duplicate != null) {
       throw new DuplicateClassException(id);
     }
@@ -130,21 +167,38 @@ public abstract class AbstractContentModelService extends
   }
 
   /**
-   * This method {@link #addClass(ContentClass) registers} the given
+   * This method {@link #addClass(AbstractContentClass) registers} the given
    * <code>contentClass</code> recursive. Here recursive means that all
-   * {@link ContentClass#getSubClasses() sub-classes} are also
-   * {@link #addClassRecursive(ContentClass) registered} recursively.
+   * {@link net.sf.mmm.content.model.api.ContentClass#getSubClasses() sub-classes}
+   * are also {@link #addClassRecursive(AbstractContentClass) registered}
+   * recursively.
    * 
    * @param contentClass is the class to add.
-   * @throws ContentModelException if the class or one of its sub-classes
-   *         could NOT be registered.
+   * @throws ContentModelException if the class or one of its sub-classes could
+   *         NOT be registered.
    */
-  protected void addClassRecursive(ContentClass contentClass) throws ContentModelException {
+  protected void addClassRecursive(AbstractContentClass contentClass) throws ContentModelException {
 
     addClass(contentClass);
-    for (ContentClass subClass : contentClass.getSubClasses()) {
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
       addClassRecursive(subClass);
     }
+  }
+
+  /**
+   * This method registers the <code>contentField</code> to this service.
+   * 
+   * @param contentField is the field to add.
+   * @throws ContentModelException if a field with the same ID is already
+   *         registered.
+   */
+  protected void addField(AbstractContentField contentField) throws ContentModelException {
+
+    ContentId id = contentField.getId();
+    if (this.id2field.containsKey(id)) {
+      throw new DuplicateFieldException(id);
+    }
+    this.id2field.put(id, contentField);
   }
 
   /**
@@ -152,19 +206,212 @@ public abstract class AbstractContentModelService extends
    * <b>WARNING:</b><br>
    * Use this feature with extreme care.
    * 
-   * @param contentClass is the content-class to remove.
-   * @throws ContentModelException
+   * @param contentClass is the class to remove.
+   * @throws ContentModelException if the operation fails (e.g. the class is
+   *         required by the system).
    */
-  protected void removeClass(ContentClass contentClass) throws ContentModelException {
+  protected void removeClass(AbstractContentClass contentClass) throws ContentModelException {
 
     if (contentClass.getModifiers().isSystem()) {
-      // TODO: NLS
-      throw new ContentModelException("Can NOT remove system class!");
+      throw new ContentModelSystemModifyException(contentClass);
     }
-    ContentClass old = this.id2class.remove(contentClass.getId());
+    AbstractContentClass old = this.id2class.remove(contentClass.getId());
     assert (old == contentClass);
     old = this.name2class.remove(contentClass.getName());
     assert (old == contentClass);
   }
-  
+
+  /**
+   * This method removes the given <code>contentField</code> from the model.<br>
+   * <b>WARNING:</b><br>
+   * Use this feature with extreme care.
+   * 
+   * @param contentField is the field to remove.
+   * @throws ContentModelException if the operation fails (e.g. the field is
+   *         required by the system).
+   */
+  protected void removeField(AbstractContentField contentField) throws ContentModelException {
+
+    if (contentField.getModifiers().isSystem()) {
+      throw new ContentModelSystemModifyException(contentField);
+    }
+  }
+
+  /**
+   * This method creates a new
+   * {@link net.sf.mmm.content.model.api.ContentClass class} with the given
+   * arguments,
+   * {@link AbstractContentModelService#addClass(AbstractContentClass) registers}
+   * it to the content-model and
+   * {@link AbstractContentClass#addSubClass(AbstractContentClass) adds} it to
+   * the <code> super-class</code>. If a class with the given <code>id</code>
+   * already exists, no new class is created but the existing one is updated to
+   * the values given as arguments. <br>
+   * <b>ATTENTION:</b><br>
+   * Updating an existing class is a very sensible operation. E.g. you can NOT
+   * make a class abstract that already has instances or final if it already has
+   * subclasses. Further changing the super-class may NOT be supported by the
+   * content-repository.
+   * 
+   * @param id is the unique
+   *        {@link net.sf.mmm.content.model.api.ContentClass#getId() ID} of the
+   *        class.
+   * @param name is the
+   *        {@link net.sf.mmm.content.model.api.ContentClass#getName() name} of
+   *        the class.
+   * @param superClass is the
+   *        {@link net.sf.mmm.content.model.api.ContentClass#getSuperClass() super-class}
+   *        of the class. May be <code>null</code> if the root-class is to be
+   *        created/updated.
+   * @param modifiers are the
+   *        {@link net.sf.mmm.content.model.api.ContentClass#getModifiers() modifiers}
+   *        of the class.
+   * @param deleted is the
+   *        {@link net.sf.mmm.content.model.api.ContentClass#isDeleted() deleted flag}
+   *        of the class.
+   * @param javaClass is the associated
+   *        {@link net.sf.mmm.content.model.api.ContentClass#getJavaClass() java-class}
+   *        or <code>null</code>.
+   * @return the new or updated class.
+   */
+  protected AbstractContentClass createOrUpdateClass(SmartId id, String name,
+      AbstractContentClass superClass, ClassModifiers modifiers, boolean deleted,
+      Class<? extends ContentObject> javaClass) {
+
+    AbstractContentClass contentClass = getClass(id);
+    if (getIdManager().getRootClassId().equals(id)) {
+      if (superClass != null) {
+        // TODO: NLS
+        throw new ContentModelException("Root-class can NOT have super-class!");
+      }
+    } else if (superClass == null) {
+      // TODO: NLS
+      throw new ContentModelException("Only root-class has NO super-class!");
+    }
+    boolean create = (contentClass == null);
+    if (create) {
+      contentClass = newClass();
+      contentClass.setId(id);
+    } else {
+      boolean isSystem = contentClass.getModifiers().isSystem();
+      if (superClass != contentClass.getSuperClass()) {
+        // class-hierarchy has been modified...
+        if (isSystem) {
+          // TODO: NLS
+          throw new ContentModelException(
+              "Changing class-hierarchy of system class is NOT permitted!");
+        }
+      }
+      if (!contentClass.getName().equals(name)) {
+        // TODO:
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the name of content-class is currently NOT supported!");
+      }
+      if (!modifiers.equals(contentClass.getModifiers())) {
+        if (isSystem) {
+          // TODO: NLS
+          throw new ContentModelException("Changing modifiers of system class is NOT permitted!");
+        }
+        // TODO:
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the modifiers of a content-class is currently NOT supported!");
+      }
+      if ((deleted != contentClass.isDeleted()) && (isSystem)) {
+        // TODO: NLS
+        throw new ContentModelException("Changing deleted-flag of system class is NOT permitted!");
+      }
+    }
+    contentClass.setName(name);
+    contentClass.setSuperClass(superClass);
+    contentClass.setModifiers(modifiers);
+    contentClass.setDeleted(deleted);
+    if (javaClass != null) {
+      contentClass.setJavaClass(javaClass);
+    }
+    if (create) {
+      addClass(contentClass);
+    }
+    if (superClass != null) {
+      superClass.addSubClass(contentClass);
+    }      
+    return contentClass;
+  }
+
+  /**
+   * This method creates a new
+   * {@link net.sf.mmm.content.model.api.ContentField field} with the given
+   * arguments,
+   * {@link AbstractContentModelService#addField(AbstractContentField) registers}
+   * it to the content-model and
+   * {@link AbstractContentClass#addField(AbstractContentField) adds} it to the
+   * <code>declaringClass</code>. If a field with the given <code>id</code>
+   * already exists, no new field is created but the existing one is updated to
+   * the values given as arguments. <br>
+   * <b>ATTENTION:</b><br>
+   * Updating an existing field is a very sensible operation. E.g. you can NOT
+   * make a field final if it is already overridden in a subclasses.
+   * 
+   * @param id is the unique
+   *        {@link net.sf.mmm.content.model.api.ContentField#getId() ID} of the
+   *        field.
+   * @param name is the
+   *        {@link net.sf.mmm.content.model.api.ContentField#getName() name} of
+   *        the field.
+   * @param declaringClass is the class
+   *        {@link net.sf.mmm.content.model.api.ContentField#getDeclaringClass() declaring}
+   *        the field.
+   * @param modifiers are the
+   *        {@link net.sf.mmm.content.model.api.ContentField#getModifiers() modifiers}
+   *        of the field.
+   * @param type is the
+   *        {@link net.sf.mmm.content.model.api.ContentField#getFieldType() type}
+   *        of the field.
+   * @param typeSpecification is the
+   *        {@link net.sf.mmm.content.model.api.ContentField#getFieldTypeSpecification() specification}
+   *        of the fields type.
+   * @param deleted is the
+   *        {@link net.sf.mmm.content.model.api.ContentField#isDeleted() deleted flag}
+   *        of the field.
+   * @return the new or updated field.
+   */
+  protected AbstractContentField createOrUpdateField(SmartId id, String name,
+      AbstractContentClass declaringClass, FieldModifiers modifiers, Type type,
+      String typeSpecification, boolean deleted) {
+
+    AbstractContentField contentField = getField(id);
+    boolean create = (contentField == null);
+    if (create) {
+      contentField = newField();
+      contentField.setId(id);
+    } else {
+      // TODO: constraints
+    }
+    contentField.setName(name);
+    contentField.setDeclaringClass(declaringClass);
+    contentField.setModifiers(modifiers);
+    if (typeSpecification != null) {
+      contentField.setFieldTypeSpecification(typeSpecification);
+    }
+    contentField.setFieldTypeAndClass(type);
+    if (create) {
+      addField(contentField);
+      declaringClass.addField(contentField);
+    }
+    return contentField;
+  }
+
+  /**
+   * This method creates a new un-initialized content-class instance.
+   * 
+   * @return the new class.
+   */
+  protected abstract AbstractContentClass newClass();
+
+  /**
+   * This method creates a new un-initialized content-field instance.
+   * 
+   * @return the new field.
+   */
+  protected abstract AbstractContentField newField();
+
 }

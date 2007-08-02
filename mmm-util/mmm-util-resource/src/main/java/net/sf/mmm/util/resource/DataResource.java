@@ -29,7 +29,8 @@ public interface DataResource {
   boolean isAvailable();
 
   /**
-   * This method gets the path of this resource.
+   * This method gets the path of this resource. Please note that the path is
+   * including the name of the resource.
    * 
    * @return the path that was used to identify this resource when creating.
    */

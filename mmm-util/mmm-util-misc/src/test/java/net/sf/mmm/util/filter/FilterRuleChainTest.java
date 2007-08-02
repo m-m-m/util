@@ -7,13 +7,15 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
+import static org.junit.Assert.*;
+
 /**
- * This is the {@link TestCase} for {@link FilterRuleChain}.
+ * This is the test-case for {@link FilterRuleChain}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FilterRuleChainTest extends TestCase {
+public class FilterRuleChainTest {
 
   private void check(FilterRuleChain chain) {
 

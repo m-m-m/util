@@ -5,6 +5,7 @@ package net.sf.mmm.content.model.api;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
@@ -14,7 +15,8 @@ import net.sf.mmm.value.validator.api.ValueValidator;
  * <b>ATTENTION:</b><br>
  * Do NOT get confused in comparison with {@link java.lang.reflect.Field fields}
  * in the java language specification. Better think of a {@link ContentField} as
- * something like a java {@link java.lang.reflect.Method method}.
+ * something like a java {@link java.lang.reflect.Method method} or even more
+ * precise of a Java-Bean property.
  * 
  * @see FieldModifiers
  * 
@@ -23,10 +25,16 @@ import net.sf.mmm.value.validator.api.ValueValidator;
 public interface ContentField extends ContentReflectionObject {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
-  String CLASS_NAME = "Field";
+  String CLASS_NAME = "ContentField";
 
   /** the id of the {@link #getContentClass() class} reflecting this type. */
   short CLASS_ID = 3;
+
+  /** the xml tag for a {@link ContentField}. */
+  String XML_TAG_FIELD = "Field";
+
+  /** the attribute for the {@link #getFieldType() type}. */
+  String XML_ATR_FIELD_TYPE = "type";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
@@ -57,11 +65,6 @@ public interface ContentField extends ContentReflectionObject {
   String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
 
   /**
-   * the attribute for the {@link #getFieldType() type}.
-   */
-  String XML_ATR_ROOT_TYPE = "type";
-
-  /**
    * This method gets the content-class that declares this field. This does NOT
    * mean that the field is
    * {@link #getInitiallyDefiningClass() initially defined} by that class. It
@@ -79,7 +82,7 @@ public interface ContentField extends ContentReflectionObject {
    * This method gets the content-class that initially defined by this field.
    * This means that the returned content-class does not inherit this field and
    * its parent class (if not root) has no field with the same
-   * {@link net.sf.mmm.content.api.ContentObject#getName() name}.
+   * {@link #getName() name}.
    * 
    * @return the class that initially defines this field.
    */
@@ -96,17 +99,32 @@ public interface ContentField extends ContentReflectionObject {
   ContentField getSuperField();
 
   /**
+   * This method gets the specification of the fields type. This is the most
+   * precise description of the fields type.
+   * 
+   * @see #getFieldType()
+   * 
+   * @return the type specification.
+   */
+  String getFieldTypeSpecification();
+
+  /**
    * This method gets the value type of the field. Only values of this type can
-   * be stored in this field.
+   * be stored in this field. According to the content-model different
+   * {@link ContentObject entities} may be realized by the same Java
+   * {@link Class}.
+   * 
+   * @see #getFieldClass()
    * 
    * @return the type of this field.
    */
   Type getFieldType();
 
   /**
-   * This method gets the {@link #getFieldType() field-type} as {@link Class}.
+   * This method gets the {@link Class raw-type} of the
+   * {@link #getFieldType() field-type}.
    * 
-   * @return the type of this field.
+   * @return the raw-type of this field.
    */
   Class<?> getFieldClass();
 
@@ -124,9 +142,8 @@ public interface ContentField extends ContentReflectionObject {
    * <ul>
    * <li>is NOT <code>null</code>.</li>
    * <li>does NOT exceed a specific length (e.g. for strings or lists).</li>
-   * <li>is a {@link net.sf.mmm.content.value.api.LinkList linklist} that only
-   * contains links of a specific
-   * {@link net.sf.mmm.content.api.ContentObject#getContentClass() type}.</li>
+   * <li>is a {@link java.util.List list} that only contains entities of a
+   * specific {@link #getContentClass() type}.</li>
    * </ul>
    * 
    * @see net.sf.mmm.value.validator.api.ValueValidator

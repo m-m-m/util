@@ -15,6 +15,12 @@ import java.io.Serializable;
 public interface MetaData extends Serializable {
 
   /**
+   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
+   * type.
+   */
+  String VALUE_NAME = "MetaData";
+
+  /**
    * This method gets the meta-data value for the given <code>key</code>.
    * 
    * @see java.util.Map#get(Object)

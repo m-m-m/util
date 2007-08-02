@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
-<Class xmlns:xi="http://www.w3.org/2001/XInclude" id="10" name="Resource"
-  system="true" abstract="true" extendable="false">
+<Class id="10" name="ContentResource" system="true" abstract="true"
+  extendable="false" xmlns:xi="http://www.w3.org/2001/XInclude">
   <Field id="33" name="path" type="String" final="true" read-only="true"/>
 </Class>

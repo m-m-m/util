@@ -14,7 +14,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.util.resource.ClasspathResource;
 import net.sf.mmm.util.resource.DataResource;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link AbstractPoiContentParser}.
@@ -22,7 +22,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class AbstractPoiContentParserTest extends TestCase {
+public class AbstractPoiContentParserTest {
 
   /**
    * The constructor.

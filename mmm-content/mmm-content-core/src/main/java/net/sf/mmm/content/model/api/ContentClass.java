@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.util.collection.SizedIterable;
 
 /**
  * This is the interface of a content-class. It reflects the structure of the
@@ -20,12 +20,15 @@ import net.sf.mmm.util.collection.SizedIterable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface ContentClass extends ContentReflectionObject {
-
+  
   /** the name of the {@link #getContentClass() class} reflecting this type. */
-  String CLASS_NAME = "Class";
+  String CLASS_NAME = "ContentClass";
 
   /** the id of the {@link #getContentClass() class} reflecting this type. */
   short CLASS_ID = 2;
+
+  /** the xml tag for a {@link ContentClass}. */
+  String XML_TAG_CLASS = "Class";
 
   /**
    * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
@@ -66,12 +69,12 @@ public interface ContentClass extends ContentReflectionObject {
    * {@link #getSuperClass() super-class} except they are overridden by this
    * class. An inherited field can be overridden (if supported by the
    * {@link ContentModelService content-model}) in order to declare it more
-   * specific meaning. Then the type of the field is a subtype of the field that
-   * is overridden or the validator is more restrictive.<br>
+   * specific. Then the type of the field is a subtype of the field that is
+   * overridden or the validator is more restrictive.<br>
    * 
-   * @return a (read-only) iterable of all declared fields.
+   * @return a (read-only) collection of all declared fields.
    */
-  SizedIterable<? extends ContentField> getDeclaredFields();
+  Collection<? extends ContentField> getDeclaredFields();
 
   /**
    * This method gets the declared field with the given
@@ -107,11 +110,14 @@ public interface ContentClass extends ContentReflectionObject {
   /**
    * This method gets all fields defined in this class or inherited by the
    * super-class(es). An inherited field can be identified via
-   * {@link ContentField#getDeclaringClass()}.
+   * {@link ContentField#getDeclaringClass()}.<br>
+   * <b>ATTENTION:</b><br>
+   * The {@link Collection#size()} method of the returned instance may be very
+   * expensive. Please avoid unnecessary or repetitive calls.
    * 
-   * @return a (read-only) iterable of fields of this class.
+   * @return a (read-only) collection of fields of this class.
    */
-  SizedIterable<? extends ContentField> getFields();
+  Collection<? extends ContentField> getFields();
 
   /**
    * This method gets the super-class of this class.
@@ -154,6 +160,20 @@ public interface ContentClass extends ContentReflectionObject {
    */
   boolean isSubClassOf(ContentClass contentClass);
 
-  Class<? extends ContentObject> getImplementation();
-  
+  /**
+   * This method gets the Java {@link Class} that realizes the entity reflected
+   * by this {@link ContentClass}. It is the analogy to this
+   * {@link ContentClass}.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a very specific method that may be used to create dynamic proxies
+   * for lazy loading. Only use this method if you know what you are doing.
+   * Please also note, that depending on the implementation of the
+   * {@link ContentModelService content-model} various different
+   * {@link ContentClass} instances may share the same
+   * {@link #getJavaClass() Java Class}.
+   * 
+   * @return the actual Java {@link Class} realizing the entity.
+   */
+  Class<? extends ContentObject> getJavaClass();
+
 }

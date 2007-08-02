@@ -5,15 +5,15 @@ package net.sf.mmm.util;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * TODO: this class ...
+ * This is the test-case for {@link StringUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringUtilTest extends TestCase {
+public class StringUtilTest {
 
   @Test
   public void testEmpty() {

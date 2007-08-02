@@ -3,7 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,8 +19,6 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.util.collection.CollectionIterable;
-import net.sf.mmm.util.collection.SizedIterable;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}
@@ -33,28 +33,28 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   private static final long serialVersionUID = -8298083039801634149L;
 
   /** the super-class of this class */
-  private ContentClass superClass;
+  private AbstractContentClass superClass;
 
   /** @see #getModifiers() */
   private ClassModifiers modifiers;
 
-  /** @see #getImplementation() */
-  private Class<? extends ContentObject> implementation;
+  /** @see #getJavaClass() */
+  private Class<? extends ContentObject> javaClass;
 
   /** the list of direct sub-classes */
-  private final List<ContentClass> subClasses;
+  private final List<AbstractContentClass> subClasses;
 
   /** @see #getSubClasses() */
-  private final List<ContentClass> subClassesView;
+  private final List<AbstractContentClass> subClassesView;
 
   /** @see #getDeclaredFields() (map of content-fields by name) */
-  private final Map<String, ContentField> declaredFields;
+  private final Map<String, AbstractContentField> declaredFields;
 
   /** @see #getDeclaredFields() */
-  private final SizedIterable<ContentField> declaredFieldsIterable;
+  private final Collection<AbstractContentField> declaredFieldsView;
 
   /** @see #getDeclaredFields() */
-  private final SizedIterable<ContentField> fieldsIterable;
+  private final Collection<AbstractContentField> fieldsView;
 
   /**
    * The constructor.
@@ -62,11 +62,11 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   public AbstractContentClass() {
 
     super();
-    this.subClasses = new ArrayList<ContentClass>();
+    this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
-    this.declaredFields = new HashMap<String, ContentField>();
-    this.declaredFieldsIterable = new CollectionIterable<ContentField>(this.declaredFields.values());
-    this.fieldsIterable = new FieldsIterable();
+    this.declaredFields = new HashMap<String, AbstractContentField>();
+    this.declaredFieldsView = Collections.unmodifiableCollection(this.declaredFields.values());
+    this.fieldsView = new FieldsCollection();
     if (this.superClass != null) {
       if (this.superClass.getModifiers().isFinal()) {
         // TODO: NLS
@@ -80,7 +80,7 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
    * 
    * @param superClass the super-class to set.
    */
-  protected void setSuperClass(ContentClass superClass) {
+  protected void setSuperClass(AbstractContentClass superClass) {
 
     this.superClass = superClass;
   }
@@ -88,9 +88,9 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public SizedIterable<ContentField> getDeclaredFields() {
+  public Collection<AbstractContentField> getDeclaredFields() {
 
-    return this.declaredFieldsIterable;
+    return this.declaredFieldsView;
   }
 
   /**
@@ -116,9 +116,9 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public SizedIterable<ContentField> getFields() {
+  public Collection<AbstractContentField> getFields() {
 
-    return this.fieldsIterable;
+    return this.fieldsView;
   }
 
   /**
@@ -140,7 +140,7 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public ContentClass getSuperClass() {
+  public AbstractContentClass getSuperClass() {
 
     return this.superClass;
   }
@@ -148,7 +148,7 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public List<ContentClass> getSubClasses() {
+  public List<AbstractContentClass> getSubClasses() {
 
     return this.subClassesView;
   }
@@ -238,16 +238,19 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   }
 
   /**
-   * This method adds a {@link #getSubClasses() sub-class} to this class.
+   * This method adds a {@link #getSubClasses() sub-class} to this class.<br>
+   * It is an idem-potent operation. Therefore it will have no effect if the
+   * given <code>subClass</code> is already a
+   * {@link #getSubClasses() registered sub-class} of this class.
    * 
    * @param subClass is the sub-class to add.
    * @throws ContentModelException if the operation fails.
    */
-  public void addSubClass(ContentClass subClass) throws ContentModelException {
+  public void addSubClass(AbstractContentClass subClass) throws ContentModelException {
 
     if (subClass.getSuperClass() != this) {
       // TODO: NLS
-      throw new ContentModelException("Class can not extend itself!");
+      throw new ContentModelException("Sub-Class must have this class as super-class!");
     }
     if (subClass.getModifiers().isSystem() && !getModifiers().isSystem()) {
       // TODO: NLS
@@ -257,8 +260,10 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
       // TODO: NLS
       throw new ContentModelException("Can NOT extend final class!");
     }
-    assert (!this.subClasses.contains(subClass));
-    this.subClasses.add(subClass);
+    // idem-potent operation
+    if (!this.subClasses.contains(subClass)) {
+      this.subClasses.add(subClass);
+    }
   }
 
   /**
@@ -267,16 +272,17 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
    * @param field is the field to add.
    * @throws ContentModelException if the field could NOT be added.
    */
-  public void addField(ContentField field) throws ContentModelException {
+  public void addField(AbstractContentField field) throws ContentModelException {
 
     if (field.getDeclaringClass() != this) {
       throw new ContentModelException("Can NOT add field if NOT declared by this class!");
     }
     ContentField duplicate = this.declaredFields.get(field.getName());
-    if (duplicate != null) {
+    if (duplicate != field) {
+      this.declaredFields.put(field.getName(), field);
+    } else if (duplicate != null) {
       throw new DuplicateFieldException(field.getName());
     }
-    this.declaredFields.put(field.getName(), field);
   }
 
   /**
@@ -285,38 +291,38 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
    * 
    * @return the "implementation".
    */
-  public Class<? extends ContentObject> getImplementation() {
+  public Class<? extends ContentObject> getJavaClass() {
 
-    return this.implementation;
+    return this.javaClass;
   }
 
   /**
-   * This method sets the {@link #getImplementation() implementation} of this
+   * This method sets the {@link #getJavaClass() Java-class} of this
    * content-class.
    * 
-   * @param implementation is the implementation to set.
+   * @param javaClass is the class realizing the entity.
    */
-  protected void setImplementation(Class<? extends ContentObject> implementation) {
+  protected void setJavaClass(Class<? extends ContentObject> javaClass) {
 
-    this.implementation = implementation;
+    this.javaClass = javaClass;
   }
 
   /**
    * @see ContentClass#getFields()
    */
-  private class FieldsIterable implements SizedIterable<ContentField> {
+  private class FieldsCollection extends AbstractCollection<AbstractContentField> {
 
     /**
      * {@inheritDoc}
+     * 
+     * TODO: This implementation is extremely expensive. Is there a better way
+     * to do this?
      */
-    public int getSize() {
+    public int size() {
 
       int result = 0;
-      Iterator<ContentField> fieldsIterator = AbstractContentClass.this.declaredFields.values()
-          .iterator();
-      while (fieldsIterator.hasNext()) {
-        ContentField myField = fieldsIterator.next();
-        if (myField.getSuperField() == null) {
+      for (ContentField field : AbstractContentClass.this.declaredFields.values()) {
+        if (field.getSuperField() == null) {
           result++;
         }
       }
@@ -324,7 +330,7 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
       // the only problem is that the value may change if a super-class
       // changes.
       if (AbstractContentClass.this.superClass != null) {
-        result += AbstractContentClass.this.superClass.getFields().getSize();
+        result += AbstractContentClass.this.superClass.getFields().size();
       }
       return result;
     }
@@ -332,9 +338,82 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
     /**
      * {@inheritDoc}
      */
-    public Iterator<ContentField> iterator() {
+    public Iterator<AbstractContentField> iterator() {
 
       return new ContentFieldIterator(AbstractContentClass.this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean contains(Object o) {
+
+      if (o instanceof ContentField) {
+        ContentField field = (ContentField) o;
+        ContentClass declaringClass = field.getDeclaringClass();
+        if ((declaringClass == AbstractContentClass.this)
+            || (declaringClass.isSuperClassOf(AbstractContentClass.this))) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isEmpty() {
+
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean add(AbstractContentField e) {
+
+      throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean addAll(Collection<? extends AbstractContentField> c) {
+
+      throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void clear() {
+
+      throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean remove(Object o) {
+
+      throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean removeAll(Collection<?> c) {
+
+      throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean retainAll(Collection<?> c) {
+
+      throw new UnsupportedOperationException();
     }
 
   }

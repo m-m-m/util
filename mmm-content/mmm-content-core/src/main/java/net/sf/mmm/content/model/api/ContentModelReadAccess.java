@@ -19,19 +19,28 @@ public interface ContentModelReadAccess {
    * This method gets the content class for the given name.
    * 
    * @param name is the name of the requested class.
-   * @return the content class for the given name.
-   * @throws ContentModelException if the requested class does not exist.
+   * @return the content class for the given name or <code>null</code> if it
+   *         does NOT exist.
    */
-  ContentClass getClass(String name) throws ContentModelException;
+  ContentClass getClass(String name);
 
   /**
-   * This method gets the content class for the given ID.
+   * This method gets the {@link ContentClass} for the given <code>id</code>.
    * 
-   * @param id is the ID of the requested class.
-   * @return the content class for the given ID.
-   * @throws ContentModelException if the requested class does not exist.
+   * @param id is the unique ID of the requested class.
+   * @return the content class for the given ID or <code>null</code> if it
+   *         does NOT exist.
    */
-  ContentClass getClass(ContentId id) throws ContentModelException;
+  ContentClass getClass(ContentId id);
+
+  /**
+   * This method gets the {@link ContentField} for the given <code>id</code>.
+   * 
+   * @param id is the unique ID of the requested class.
+   * @return the content field for the given ID or <code>null</code> if it
+   *         does NOT exist.
+   */
+  ContentField getField(ContentId id);
 
   /**
    * This method gets the root content class that reflects the

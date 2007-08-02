@@ -23,36 +23,26 @@ import net.sf.mmm.util.pojo.impl.MethodPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
- * This is the implementation of the {@link NativeContentClassLoader} interface.
+ * This is an extension of {@link ContentClassLoaderStAX} that also allows to
+ * load {@link ContentClass}es from the native Java implementations of
+ * entities.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
+public class ContentClassLoaderNative extends ContentClassLoaderStAX {
 
   /** @see #loadClass(Class, ContentClass) */
   private PojoDescriptorBuilder methodDescriptorBuilder;
-
-  /** @see #getContentModelService() */
-  private AbstractContentModelServiceBase contentModelService;
 
   /**
    * The constructor.
    * 
    * @param contentModelService
    */
-  public NativeContentClassLoaderImpl(AbstractContentModelServiceBase contentModelService) {
+  public ContentClassLoaderNative(AbstractMutableContentModelService contentModelService) {
 
-    super();
-    this.contentModelService = contentModelService;
+    super(contentModelService);
     this.methodDescriptorBuilder = new MethodPojoDescriptorBuilder();
-  }
-
-  /**
-   * @return the contentModelService
-   */
-  protected AbstractContentModelServiceBase getContentModelService() {
-
-    return this.contentModelService;
   }
 
   /**
@@ -90,7 +80,7 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
     if (id.doubleValue() != classId) {
       throw new IllegalArgumentException("Id (" + id.doubleValue() + ") must be an integer value!");
     }
-    return this.contentModelService.getIdManager().getClassId(classId);
+    return getContentModelService().getIdManager().getClassId(classId);
   }
 
   /**
@@ -259,8 +249,8 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
    */
   protected AbstractContentClass createClass(Class<? extends ContentObject> type) {
 
-    AbstractContentClass newClass = this.contentModelService.newClass();
-    newClass.setImplementation(type);
+    AbstractContentClass newClass = getContentModelService().newClass();
+    newClass.setJavaClass(type);
     return newClass;
   }
 
@@ -275,7 +265,7 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
    */
   protected AbstractContentField createField(PojoPropertyDescriptor methodPropertyDescriptor) {
 
-    AbstractContentField newField = this.contentModelService.newField();
+    AbstractContentField newField = getContentModelService().newField();
     // TODO: add descriptor
     return newField;
   }
@@ -292,16 +282,16 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
    * @return the {@link ContentClass} representing the entity reflected by the
    *         given <code>type</code>.
    */
-  protected ContentClass readClass(Set<Class<? extends ContentObject>> typeSet,
+  protected AbstractContentClass loadClass(Set<Class<? extends ContentObject>> typeSet,
       Class<? extends ContentObject> type) {
 
     // maybe we already created the content-class before...
     SmartId classId = getClassId(type);
-    ContentClass result = this.contentModelService.getClass(classId);
+    AbstractContentClass result = getContentModelService().getClass(classId);
     if (result == null) {
       // okay the regular case, we need to create the class...
       // first we need to get or create the parent-class...
-      ContentClass parent = null;
+      AbstractContentClass parent = null;
       Class parentType = type.getSuperclass();
       // our main loop ascends the super-classes of the type
       do {
@@ -314,21 +304,21 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
         // maybe we already have the parent in our map...
         classId = getClassId(parentType);
         if (classId != null) {
-          parent = this.contentModelService.getClass(classId);
+          parent = getContentModelService().getClass(classId);
           if (parent == null) {
             // or maybe the parentType is also a content-class to create...
             if (typeSet.contains(parentType)) {
-              parent = readClass(typeSet, parentType);
+              parent = loadClass(typeSet, parentType);
             }
-          } else if (parentType != parent.getImplementation()) {
+          } else if (parentType != parent.getJavaClass()) {
             throw new DuplicateClassException(classId);
           }
         }
         parentType = parentType.getSuperclass();
       } while (parent == null);
       result = loadClass(type, parent);
-      this.contentModelService.addClass(result);
-    } else if (result.getImplementation() != type) {
+      getContentModelService().addClass(result);
+    } else if (result.getJavaClass() != type) {
       throw new DuplicateClassException(classId);
     }
     return result;
@@ -345,7 +335,7 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
     // classesMap.put(superClass.getImplementation(), superClass);
     // }
     for (Class<? extends ContentObject> type : typeSet) {
-      readClass(typeSet, type);
+      loadClass(typeSet, type);
     }
   }
 
@@ -358,14 +348,15 @@ public class NativeContentClassLoaderImpl implements NativeContentClassLoader {
    *        of the {@link ContentClass} to read.
    * @return the according {@link ContentClass}.
    */
-  public AbstractContentClass loadClass(Class<? extends ContentObject> type, ContentClass superClass) {
+  public AbstractContentClass loadClass(Class<? extends ContentObject> type,
+      AbstractContentClass superClass) {
 
     // TODO: first read all classes and build hierarchy and the read fields in
     // second run!
 
     AbstractContentClass contentClass = createClass(type);
     contentClass.setSuperClass(superClass);
-    contentClass.setImplementation(type);
+    contentClass.setJavaClass(type);
     contentClass.setName(getClassName(type));
     contentClass.setDeleted(isClassDeleted(type));
     ClassModifiers classModifiers = ClassModifiersImpl.getInstance(isClassSystem(type),

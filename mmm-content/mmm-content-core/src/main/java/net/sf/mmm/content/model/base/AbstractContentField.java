@@ -28,6 +28,9 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /** @see #getDeclaringClass() */
   private ContentClass declaringClass;
 
+  /** @see #getFieldTypeSpecification() */
+  private String fieldTypeSpecification;
+
   /** @see #getFieldClass() */
   private Class fieldClass;
 
@@ -91,6 +94,22 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
+  public String getFieldTypeSpecification() {
+
+    return this.fieldTypeSpecification;
+  }
+
+  /**
+   * @param fieldTypeSpecification the fieldTypeSpecification to set
+   */
+  protected void setFieldTypeSpecification(String fieldTypeSpecification) {
+
+    this.fieldTypeSpecification = fieldTypeSpecification;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Type getFieldType() {
 
     return this.fieldType;
@@ -114,6 +133,13 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
 
     this.fieldType = type;
     this.fieldClass = ReflectionUtil.toClass(type);
+    if (this.fieldTypeSpecification == null) {
+      if (type instanceof Class) {
+        this.fieldTypeSpecification = ((Class) type).getName();
+      } else {
+        this.fieldTypeSpecification = type.toString();
+      }
+    }
   }
 
   /**
@@ -137,7 +163,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
    * 
    * @param modifiers the modifiers to set
    */
-  public void setModifiers(FieldModifiers modifiers) {
+  protected void setModifiers(FieldModifiers modifiers) {
 
     this.modifiers = modifiers;
   }

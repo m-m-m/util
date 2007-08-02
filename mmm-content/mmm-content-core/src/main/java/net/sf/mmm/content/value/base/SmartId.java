@@ -49,6 +49,13 @@ public interface SmartId extends ContentId {
   long OID_FIELD = 1;
 
   /**
+   * the first {@link #getObjectId() object-id} that can be used for custom
+   * resources. All object-IDs lower than this are reserved for system resources
+   * (e.g. root-folder, etc.).
+   */
+  long OID_MINIMUM_CUSTOM = 4096;
+
+  /**
    * the id number of the
    * {@link net.sf.mmm.content.model.api.ContentClass content-class} of a
    * content-principal.
@@ -87,13 +94,13 @@ public interface SmartId extends ContentId {
    * the first {@link #getClassId() class-id} that can be used for custom
    * classes. All class-IDs lower than this are reserved for system classes.
    */
-  int MINIMUM_CUSTOM_CLASS_ID = 4096;
+  int CLASS_ID_MINIMUM_CUSTOM = 4096;
 
   /**
    * the first {@link #getObjectId() object-id} that can be used for custom
    * fields. All field-IDs lower than this are reserved for system fields.
    */
-  int MINIMUM_CUSTOM_FIELD_ID = 4096;
+  int FIELD_ID_MINIMUM_CUSTOM = 4096;
 
   /** the id of the root-folder. */
   long FOLDER_ID_ROOT = 2;
@@ -121,13 +128,6 @@ public interface SmartId extends ContentId {
 
   /** the id of the resources-folder. */
   long FOLDER_ID_RESOURCES = 10;
-
-  /**
-   * the first {@link #getObjectId() object-id} that can be used for custom
-   * resources. All object-IDs lower than this are reserved for system resources
-   * (e.g. root-folder, etc.).
-   */
-  long MINIMUM_CUSTOM_RESOURCE_ID = 4096;
 
   /** the delimiter used in the string representations of an id */
   char SEPARATOR_CHAR = '.';

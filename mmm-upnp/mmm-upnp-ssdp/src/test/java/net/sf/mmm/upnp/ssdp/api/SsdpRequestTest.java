@@ -4,7 +4,6 @@
 package net.sf.mmm.upnp.ssdp.api;
 
 import java.io.ByteArrayInputStream;
-import java.nio.charset.Charset;
 
 import org.junit.Test;
 
@@ -12,15 +11,15 @@ import net.sf.mmm.util.http.HttpMessage;
 import net.sf.mmm.util.http.HttpParser;
 import net.sf.mmm.util.http.HttpRequest;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is a {@link TestCase test-case} for {@link SsdpRequest}.
+ * This is a test-case for {@link SsdpRequest}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class SsdpRequestTest extends TestCase {
+public class SsdpRequestTest {
 
   @Test
   public void testPingPong() throws Exception {

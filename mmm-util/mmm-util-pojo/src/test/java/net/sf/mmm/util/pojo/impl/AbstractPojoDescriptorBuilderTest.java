@@ -8,16 +8,16 @@ import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
 import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the abstract test-case for
- * {@link net.sf.mmm.util.pojo.api.PojoDescriptorBuilder} implementations.
+ * This is the abstract test-case for implementations of
+ * {@link net.sf.mmm.util.pojo.api.PojoDescriptorBuilder}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoDescriptorBuilderTest extends TestCase {
-
+public abstract class AbstractPojoDescriptorBuilderTest {
+  
   /**
    * This method checks read/write accessors to the property
    * <code>propertyName</code> of the <code>pojoDescriptor</code> according

@@ -11,7 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.junit.Test;
 import org.w3c.dom.Element;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link StringTransformerChainXmlParser}.
@@ -19,7 +19,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringTransformerChainXmlParserTest extends TestCase {
+public class StringTransformerChainXmlParserTest {
 
   @Test
   public void test() throws Exception {

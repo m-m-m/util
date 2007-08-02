@@ -15,7 +15,7 @@ import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.impl.dummy.MyPojo;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link PublicMethodPojoDescriptorBuilder}.

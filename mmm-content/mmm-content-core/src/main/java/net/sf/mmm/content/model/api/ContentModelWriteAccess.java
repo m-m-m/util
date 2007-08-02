@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
+import java.lang.reflect.Type;
+
 /**
  * This interface gives write access to the content model.
  * 
@@ -24,8 +26,9 @@ public interface ContentModelWriteAccess {
    * @throws ContentModelException if the class could not be created. This can
    *         have one of the following reasons:
    *         <ul>
-   *         <li>the given class is final</li>
-   *         <li>the given id already identifies another class</li>
+   *         <li>the given <code>superClass</code> is final</li>
+   *         <li>the given <code>id</code> already identifies another class</li>
+   *         <li>the given <code>name</code> already identifies another class</li>
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
@@ -56,7 +59,7 @@ public interface ContentModelWriteAccess {
    *         </li>
    *         </ul>
    */
-  ContentField createField(ContentClass declaringClass, String name, Class type,
+  ContentField createField(ContentClass declaringClass, String name, Type type,
       FieldModifiers modifiers) throws ContentModelException;
 
   /**
@@ -89,7 +92,6 @@ public interface ContentModelWriteAccess {
   // ContentField createField(ContentClass declaringClass, String name,
   // Class type,
   // FieldModifiersImpl modifiers, Term term) throws ContentModelException;
-  
   /**
    * This method sets the status of the deleted flag of the given class or
    * field.

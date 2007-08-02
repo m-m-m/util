@@ -7,15 +7,15 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the {@link TestCase} for {@link FilterRuleChainXmlParser}.
+ * This is the test-case for {@link FilterRuleChainXmlParser}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FilterRuleChainXmlParserTest extends TestCase {
+public class FilterRuleChainXmlParserTest {
 
   @Test
   public void test() throws Exception {

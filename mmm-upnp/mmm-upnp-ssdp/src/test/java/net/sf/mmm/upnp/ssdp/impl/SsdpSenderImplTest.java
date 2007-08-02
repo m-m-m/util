@@ -5,11 +5,10 @@ package net.sf.mmm.upnp.ssdp.impl;
 
 import org.junit.Test;
 
-import net.sf.mmm.upnp.ssdp.api.SsdpListener;
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.api.SsdpSender;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is a {@link TestCase test-case} for {@link SsdpSenderImpl}.
@@ -17,7 +16,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class SsdpSenderImplTest extends TestCase {
+public class SsdpSenderImplTest {
 
   private static final String USN = SsdpRequest.PREFIX_UUID + "device-UUID::"
       + SsdpRequest.UPNP_ROOT_DEVICE;

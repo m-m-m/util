@@ -1,26 +1,30 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
+<!--
+  ATTENTION: Each class has the declare its fields after all subclasses have 
+  been declared. This means that the XML element "Class" may NOT occur after a
+  "Field" element on the same level of the XML tree. Therefore the order of the
+  child elements is "Class", "xi:include" and then "Field".
+  -->
 <ContentModel xmlns:xi="http://www.w3.org/2001/XInclude">
-  <Class id="0" name="Object" system="true" abstract="true" extendable="false">
-    <Field id="0" name="id" type="Id" final="true" read-only="true"/>
-    <Field id="1" name="name" type="String" final="true" read-only="true"/>
-    <!-- TODO: avoid absolute class-names -->
-    <Field id="2" name="contentClass" type="net.sf.mmm.content.model.api.ContentClass" final="true" read-only="true"/>
-    <Class id="1" name="ReflectionObject" system="true" abstract="true" extendable="false">
-      <Field id="3" name="modifiers" type="net.sf.mmm.content.model.api.FieldModifiers" final="true" read-only="true"/>
-      <Class id="2" name="Class" system="true" final="true">
+  <Class id="0" name="ContentObject" system="true" abstract="true" extendable="false">
+    <Class id="1" name="ContentReflectionObject" system="true" abstract="true" extendable="false">
+      <Class id="2" name="ContentClass" system="true" final="true">
         <Field id="4" name="modifiers" type="ClassModifiers" final="true" read-only="true"/>
-        <Field id="5" name="superClass" type="net.sf.mmm.content.model.api.ContentClass" final="true" read-only="true"/>
-        <!-- TODO: allow generic construct: List<ContentClass> -->
-        <Field id="6" name="subClasses" type="java.util.List" final="true" read-only="true"/>
+        <Field id="5" name="superClass" type="ContentClass" final="true" read-only="true"/>
+        <Field id="6" name="subClasses" type="List&lt;ContentClass&gt;" final="true" read-only="true"/>
         <!-- TODO: Linklist[Field] -->
-        <Field id="7" name="fields" type="net.sf.mmm.util.io.SizedIterable" final="true" read-only="true"/>
-        <Field id="8" name="declaredFields" type="net.sf.mmm.util.io.SizedIterable" final="true" read-only="true"/>
+        <Field id="7" name="fields" type="SizedIterable&lt;ContentField&gt;" final="true" read-only="true"/>
+        <Field id="8" name="declaredFields" type="SizedIterable&lt;ContentField&gt;" final="true" read-only="true"/>
       </Class>
-      <Class id="3" name="Field" system="true" final="true">
+      <Class id="3" name="ContentField" system="true" final="true">
         <Field id="9" name="modifiers" type="FieldModifiers" final="true" read-only="true"/>        
       </Class>
+      <Field id="3" name="modifiers" type="Modifiers" final="true" read-only="true"/>
     </Class>
     <xi:include href="ContentModel-Main.xml"/>
+    <Field id="0" name="id" type="Id" final="true" read-only="true"/>
+    <Field id="1" name="name" type="String" final="true" read-only="true"/>
+    <Field id="2" name="contentClass" type="ContentClass" final="true" read-only="true"/>
   </Class>
 </ContentModel>

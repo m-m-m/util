@@ -7,16 +7,19 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import net.sf.mmm.content.api.ContentException;
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.ContentReflectionObject;
 import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.AbstractContentField;
-import net.sf.mmm.content.model.base.AbstractContentModelServiceBase;
+import net.sf.mmm.content.model.base.AbstractMutableContentModelService;
+import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.ContentClassLoaderStAX;
 import net.sf.mmm.content.model.base.ContentClassLoader;
-import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.content.value.impl.SmartIdManagerImpl;
+import net.sf.mmm.content.value.impl.StaticSmartIdManager;
 import net.sf.mmm.util.resource.ClasspathResource;
 import net.sf.mmm.util.resource.DataResource;
 
@@ -28,10 +31,13 @@ import net.sf.mmm.util.resource.DataResource;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class BasicContentModelService extends AbstractContentModelServiceBase {
+public class BasicContentModelService extends AbstractMutableContentModelService {
 
-  /** The default class loader. */
+  /** @see #getClassLoader() */
   private ContentClassLoader classLoader;
+
+  /** @see #isEditable() */
+  private boolean editable;
 
   /**
    * The constructor.
@@ -39,6 +45,25 @@ public class BasicContentModelService extends AbstractContentModelServiceBase {
   public BasicContentModelService() {
 
     super();
+    this.editable = false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isEditable() {
+
+    return this.editable;
+  }
+
+  /**
+   * This method sets the {@link #isEditable() editable} flag.
+   * 
+   * @param editable the editable to set
+   */
+  public void setEditable(boolean editable) {
+
+    this.editable = editable;
   }
 
   /**
@@ -60,38 +85,68 @@ public class BasicContentModelService extends AbstractContentModelServiceBase {
   /**
    * This method initializes this class. It has to be called after construction
    * and injection is completed.
+   * 
+   * @throws IOException if an I/O error was caused by the class-loader.
    */
   @PostConstruct
   public void initialize() throws IOException {
 
     if (getIdManager() == null) {
-      setIdManager(new SmartIdManagerImpl());
+      setIdManager(new StaticSmartIdManager());
     }
     if (this.classLoader == null) {
       this.classLoader = new ContentClassLoaderStAX(this);
     }
+    initializeSystemClasses();
+    loadClasses();
+  }
+
+  /**
+   * This method initializes the system classes.
+   */
+  protected void initializeSystemClasses() {
+
+    // object
+    AbstractContentClass rootClass = createOrUpdateClass(getIdManager().getRootClassId(),
+        ContentObject.CLASS_NAME, null, ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, false,
+        ContentObject.class);
+    setRootClass(rootClass);
+    // reflection object
+    AbstractContentClass reflectionClass = createOrUpdateClass(getIdManager().getClassId(
+        ContentReflectionObject.CLASS_ID), ContentReflectionObject.CLASS_NAME, rootClass,
+        ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, false, ContentReflectionObject.class);
+    // class
+    AbstractContentClass classClass = createOrUpdateClass(getIdManager().getClassClassId(),
+        ContentClass.CLASS_NAME, reflectionClass, ClassModifiersImpl.SYSTEM_FINAL, false,
+        ContentClass.class);
+    ContentClassImpl.setContentClass(classClass);
+    // field
+    AbstractContentClass fieldClass = createOrUpdateClass(getIdManager().getFieldClassId(),
+        ContentField.CLASS_NAME, reflectionClass, ClassModifiersImpl.SYSTEM_FINAL, false,
+        ContentField.class);
+    ContentFieldImpl.setContentClass(fieldClass);
+  }
+
+  /**
+   * 
+   * TODO: javadoc
+   * @throws IOException
+   * @throws ContentException
+   */
+  protected void loadClasses() throws IOException, ContentException {
+
     DataResource resource = getModelResource();
     this.classLoader.loadClasses(resource);
   }
 
+  /**
+   * 
+   * TODO: javadoc
+   * @return
+   */
   protected DataResource getModelResource() {
 
     return new ClasspathResource(XML_MODEL_LOCATION);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void addClass(ContentClass contentClass) throws ContentModelException {
-
-    super.addClass(contentClass);
-    ContentId id = contentClass.getId();
-    if (getIdManager().getClassClassId().equals(id)) {
-      ContentClassImpl.setContentClass(contentClass);
-    } else if (getIdManager().getFieldClassId().equals(id)) {
-      ContentFieldImpl.setContentClass(contentClass);
-    }
   }
 
   /**

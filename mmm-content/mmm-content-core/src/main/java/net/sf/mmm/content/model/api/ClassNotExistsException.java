@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.content.NlsBundleContentModel;
+import net.sf.mmm.content.NlsBundleContentCore;
 import net.sf.mmm.content.value.api.ContentId;
 
 /**
@@ -25,7 +25,7 @@ public class ClassNotExistsException extends ContentModelException {
    */
   public ClassNotExistsException(String name) {
 
-    super(NlsBundleContentModel.ERR_NO_SUCH_CLASS_NAME, name);
+    super(NlsBundleContentCore.ERR_NO_SUCH_CLASS_NAME, name);
   }
 
   /**
@@ -36,7 +36,7 @@ public class ClassNotExistsException extends ContentModelException {
    */
   public ClassNotExistsException(ContentId id) {
 
-    super(NlsBundleContentModel.ERR_NO_SUCH_CLASS_ID, id);
+    super(NlsBundleContentCore.ERR_NO_SUCH_CLASS_ID, id);
   }
 
 }

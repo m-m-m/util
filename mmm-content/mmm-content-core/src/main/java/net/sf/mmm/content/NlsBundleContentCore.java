@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content;
 
-import net.sf.mmm.content.model.base.IllegalModifiersException;
 import net.sf.mmm.nls.base.AbstractResourceBundle;
 
 /**
@@ -11,12 +10,12 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NlsBundleContentModel extends AbstractResourceBundle {
+public class NlsBundleContentCore extends AbstractResourceBundle {
 
   /**
    * The constructor.
    */
-  public NlsBundleContentModel() {
+  public NlsBundleContentCore() {
 
     super();
   }
@@ -54,22 +53,31 @@ public class NlsBundleContentModel extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.model.base.DuplicateFieldException */
   public static final String ERR_DUPLICATE_FIELD_ID = "The field with the ID \"{0}\" already exists!";
 
-  /** @see IllegalModifiersException */
+  /** @see net.sf.mmm.content.model.base.IllegalModifiersException */
   public static final String ERR_MODIFIERS_TRANSIENT_MUTABLE = "A transient field has to be read-only!";
 
-  /** @see IllegalModifiersException */
+  /** @see net.sf.mmm.content.model.base.IllegalModifiersException */
   public static final String ERR_MODIFIERS_TRANSIENT_STATIC = "A transient field can NOT be static!";
 
-  /** @see IllegalModifiersException */
+  /** @see net.sf.mmm.content.model.base.IllegalModifiersException */
   public static final String ERR_MODIFIERS_ABSTRACT_FINAL = "An abstract class can NOT be final!";
 
-  /** @see IllegalModifiersException */
+  /** @see net.sf.mmm.content.model.base.IllegalModifiersException */
   public static final String ERR_MODIFIERS_FINAL_EXTENDABLE = "A final class can NOT be extendable!";
 
-  /** @see IllegalModifiersException */
+  /** @see net.sf.mmm.content.model.base.IllegalModifiersException */
   public static final String ERR_MODIFIERS_USER_UNEXTENDABLE = "Only system-classes can be un-extendable without being final!";
+
+  /** @see net.sf.mmm.content.model.api.ContentModelNotEditableException */
+  public static final String ERR_MODEL_NOT_EDITABLE = "Failed to modify the content-model because it is NOT editable!";
 
   /** exception message if user tried to delete a class or field that is system. */
   public static final String ERR_DELETE_SYSTEM = "Can NOT delete \"{0}\" because it is required by the system!";
+
+  /** @see net.sf.mmm.content.model.base.ContentModelSystemModifyException */
+  public static final String ERR_MODIFY_SYSTEM = "Can NOT modify \"{0}\" because it is required by the system!";
+
+  /** @see net.sf.mmm.content.base.ContentCastException */
+  public static final String ERR_CAST = "Can NOT cast from \"{0}\" to \"{1}\"!";
 
 }

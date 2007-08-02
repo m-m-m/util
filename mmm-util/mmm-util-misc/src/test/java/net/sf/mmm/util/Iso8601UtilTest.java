@@ -11,15 +11,15 @@ import java.util.TimeZone;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the {@link TestCase test-case} for {@link DateUtil}.
+ * This is the test-case for {@link DateUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class Iso8601UtilTest extends TestCase {
+public class Iso8601UtilTest {
 
   private void dump(Date date) {
 

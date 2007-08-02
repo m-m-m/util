@@ -3,13 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.upnp.ssdp.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpListener;
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.api.SsdpSender;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is a {@link TestCase test-case} for {@link SimpleSsdpReceiver}.
@@ -17,13 +18,14 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class SimpleSsdpReceiverTest extends TestCase {
+public class SimpleSsdpReceiverTest {
 
   public void testDummy() {
 
   // this test-case is currently disabled...
   }
 
+  @Ignore
   @Test
   public void disableTestReceive() throws Exception {
 

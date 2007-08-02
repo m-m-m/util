@@ -33,7 +33,13 @@ import net.sf.mmm.content.value.api.MetaData;
  * <td>{@link java.lang.reflect.Field Field}/{@link java.lang.reflect.Method Method}</td>
  * <td>{@link net.sf.mmm.content.model.api.ContentField ContentField}</td>
  * </tr>
+ * <tr>
+ * <td>{@link ClassLoader}</td>
+ * <td>{@link net.sf.mmm.content.model.base.ContentClassLoader ContentClassLoader}</td>
+ * </tr>
  * </table> <br>
+ * In this context {@link ContentObject this} type and its specific sub-types
+ * are called <em>entity</em>.<br>
  * TODO: add generic methods "ContentObject getParent()", "String getPath()"
  * "Collection&lt;ContentObject&gt; getChildren()" instead of content-folder?<br>
  * 
@@ -42,7 +48,7 @@ import net.sf.mmm.content.value.api.MetaData;
 public abstract interface ContentObject extends Serializable {
 
   /** the name of the {@link #getContentClass() class} reflecting this type. */
-  String CLASS_NAME = "Object";
+  String CLASS_NAME = "ContentObject";
 
   /** the id of the {@link #getContentClass() class} reflecting this type. */
   short CLASS_ID = 0;
@@ -103,8 +109,8 @@ public abstract interface ContentObject extends Serializable {
 
   /**
    * This method gets the name of this content-object. The name must be unique
-   * for all content-objects in the same folder (that have the same parent
-   * folder). <br>
+   * for all classes, for all fields, or resources with the same parent folder.
+   * <br>
    * The root-folder has the empty string as name while any other content-object
    * must have a name with a length greater zero.
    * 
@@ -134,15 +140,6 @@ public abstract interface ContentObject extends Serializable {
   boolean isDeleted();
 
   /**
-   * This method gets all {@link #getMetaData(String)} meta-data of this object.
-   * The keys are in the form <code>&lt;namespace&gt;:&lt;local-key&gt;</code>
-   * (e.g. <code>mmm:proxy</code>). This method is rather expensive. Use
-   * {@link #getMetaData(String)} whenever possible.
-   * 
-   * @return the meta-data.
-   */
-  // Map<String, String> getMetaData();
-  /**
    * This method gets the meta-data of this object for a given
    * <code>namespace</code>. The metadata can store arbitrary informations as
    * string that is NOT specified via the content-model.
@@ -161,8 +158,10 @@ public abstract interface ContentObject extends Serializable {
    * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic
    * getter for all fields of this object. <br>
    * E.g. <code>getFieldValue("id")</code> will produce the same result as
-   * {@link ContentObject#getId()}. Additionally all fields that are defined in
-   * sub-types are accessible.
+   * {@link ContentObject#getId()}. If called on a sub-type, all fields
+   * available fields of that entity are accessible.
+   * 
+   * @see #getValue(String, Class)
    * 
    * @param fieldName is the {@link ContentObject#getName() name} of the
    *        {@link net.sf.mmm.content.model.api.ContentField field} to get.
@@ -171,14 +170,36 @@ public abstract interface ContentObject extends Serializable {
    *         {@link #getContentClass() content-class} does not have a
    *         {@link net.sf.mmm.content.model.api.ContentField field} with the
    *         given {@link ContentObject#getName() name}.
-   * @throws PermissionDeniedException if you (the current user) does not have
-   *         permission to perform the operation.
    * @throws ContentException TODO: if the specified field is
    *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
    *         but an error occurred calculating its value.
    */
-  Object getValue(String fieldName) throws FieldNotExistsException, PermissionDeniedException,
-      ContentException;
+  Object getValue(String fieldName) throws ContentException;
+
+  /**
+   * This method gets the value of the specified
+   * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic
+   * getter for all fields of this object. <br>
+   * E.g. <code>getFieldValue("id")</code> will produce the same result as
+   * {@link ContentObject#getId()}. Additionally all fields that are defined in
+   * sub-types are accessible.
+   * 
+   * @param <V> is the generic for the <code>type</code>.
+   * @param fieldName is the {@link ContentObject#getName() name} of the
+   *        {@link net.sf.mmm.content.model.api.ContentField field} to get.
+   * @param type is the type of the requested field value. It has to be
+   *        {@link Class#isAssignableFrom(Class) compatible} with the
+   *        {@link net.sf.mmm.content.model.api.ContentField#getFieldClass() fields class}.
+   * @return the value of the specified field or <code>null</code> if not set.
+   * @throws FieldNotExistsException if the objects
+   *         {@link #getContentClass() content-class} does not have a
+   *         {@link net.sf.mmm.content.model.api.ContentField field} with the
+   *         given {@link ContentObject#getName() name}.
+   * @throws ContentException TODO: if the specified field is
+   *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
+   *         but an error occurred calculating its value.
+   */
+  <V> V getValue(String fieldName, Class<V> type) throws ContentException;
 
   /**
    * This method sets the value of the specified

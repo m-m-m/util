@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import net.sf.mmm.search.parser.api.ContentParser;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link ContentParserJava}.
@@ -21,7 +21,7 @@ import junit.framework.TestCase;
  * @author Nobody Else
  */
 @SuppressWarnings("all")
-public class ContentParserJavaTest extends TestCase {
+public class ContentParserJavaTest {
 
   private Properties parse(ContentParser parser, String basePath, Class clazz) throws Exception {
 

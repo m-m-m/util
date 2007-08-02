@@ -6,7 +6,6 @@ package net.sf.mmm.nls.base;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.junit.Test;
@@ -14,19 +13,16 @@ import org.junit.Test;
 import net.sf.mmm.nls.MyResourceBundle;
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.api.NlsTranslator;
-import net.sf.mmm.nls.base.AbstractResourceBundle;
-import net.sf.mmm.nls.base.NlsMessageImpl;
-import net.sf.mmm.nls.base.SimpleStringTranslator;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the test case for {@link AbstractResourceBundle}.
+ * This is the test-case for {@link AbstractResourceBundle}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class AbstractResourceBundleTest extends TestCase {
+public class AbstractResourceBundleTest {
 
   public AbstractResourceBundleTest() {
 

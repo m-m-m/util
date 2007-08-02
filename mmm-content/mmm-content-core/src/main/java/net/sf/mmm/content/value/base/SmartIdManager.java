@@ -94,4 +94,31 @@ public interface SmartIdManager extends ContentIdManager {
    */
   SmartId getId(long objectId, int classId, int revision, int storeId);
 
+  /**
+   * This method creates a new, unique {@link SmartId ID} for an
+   * {@link net.sf.mmm.content.api.ContentObject object} of the
+   * {@link net.sf.mmm.content.api.ContentObject#getContentClass() type}
+   * identified by the given <code>{@link SmartId#getClassId() classId}</code>.
+   * 
+   * @param classId is the {@link SmartId#getClassId() classId}.
+   * @return the created ID.
+   */
+  SmartId createUniqueId(int classId);
+
+  /**
+   * This method creates a new, unique {@link SmartId ID} for a
+   * {@link net.sf.mmm.content.model.api.ContentClass class}.
+   * 
+   * @return the created ID.
+   */
+  SmartId createUniqueClassId();
+
+  /**
+   * This method creates a new, unique {@link SmartId ID} for a
+   * {@link net.sf.mmm.content.model.api.ContentField field}.
+   * 
+   * @return the created ID.
+   */
+  SmartId createUniqueFieldId();
+
 }

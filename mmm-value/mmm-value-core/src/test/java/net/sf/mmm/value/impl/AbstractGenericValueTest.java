@@ -15,18 +15,17 @@ import net.sf.mmm.value.api.ValueNotEditableException;
 import net.sf.mmm.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.ValueOutOfRangeException;
 import net.sf.mmm.value.api.WrongValueTypeException;
-import net.sf.mmm.value.base.AbstractGenericValue;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the abstract {@link TestCase} for testing sub-classes of
+ * This is the abstract test-case for testing sub-classes of
  * {@link AbstractGenericValue}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public abstract class AbstractGenericValueTest extends TestCase {
+public abstract class AbstractGenericValueTest {
 
   /**
    * The constructor.

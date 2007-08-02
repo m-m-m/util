@@ -5,20 +5,16 @@ package net.sf.mmm.util.xml;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.io.Writer;
 
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import junit.framework.TestCase;
-
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlWriterUtil;
 import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.util.xml.impl.DomXmlWriter;
-import net.sf.mmm.util.xml.impl.OutputXmlWriter;
+
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link XmlWriter}.
@@ -26,7 +22,7 @@ import net.sf.mmm.util.xml.impl.OutputXmlWriter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class XmlWriterTest extends TestCase {
+public class XmlWriterTest {
 
   /**
    * This method produces some strange xml for testing.
@@ -78,16 +74,6 @@ public class XmlWriterTest extends TestCase {
     XmlWriter domWriter = new DomXmlWriter(doc);
     toXml(domWriter);
     Element rootElement = doc.getDocumentElement();
-  }
-
-  /**
-   * @param args
-   */
-  public static void main(String[] args) throws IOException {
-
-    Writer w = XmlWriterUtil.createXmlAttributeWriter(new OutputStreamWriter(System.out));
-    w.write("<&>abc\"def<ghi>");
-    w.flush();
   }
 
 }

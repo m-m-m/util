@@ -5,7 +5,6 @@ package net.sf.mmm.content.model.base;
 
 import java.util.Iterator;
 
-import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
 
@@ -15,13 +14,13 @@ import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<ContentField> {
+public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<AbstractContentField> {
 
   /** the current class */
-  private ContentClass currentClass;
+  private AbstractContentClass currentClass;
 
   /** the current own field enumeration */
-  private Iterator<? extends ContentField> currentIt;
+  private Iterator<AbstractContentField> currentIt;
 
   /**
    * The constructor.
@@ -29,7 +28,7 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
    * @param contentClass is the class of that all {@link ContentField fields}
    *        are to be iterated.
    */
-  public ContentFieldIterator(ContentClass contentClass) {
+  public ContentFieldIterator(AbstractContentClass contentClass) {
 
     super();
     this.currentClass = contentClass;
@@ -41,10 +40,10 @@ public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<Cont
    * {@inheritDoc}
    */
   @Override
-  protected ContentField findNext() {
+  protected AbstractContentField findNext() {
 
     while (this.currentIt.hasNext()) {
-      ContentField field = this.currentIt.next();
+      AbstractContentField field = this.currentIt.next();
       if (field.getSuperField() == null) {
         return field;
       }

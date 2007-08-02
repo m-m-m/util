@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.ClassResolver;
  * (e.g. if the name or package of such type will be changed on refactoring, you
  * do NOT want to change this in various configuration files). Therefore a
  * logical name (e.g. <code>Date</code>) is used that can be
- * {@link #resolve(String) resolved} uniquely by this service.
+ * {@link #resolveClass(String) resolved} uniquely by this service.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

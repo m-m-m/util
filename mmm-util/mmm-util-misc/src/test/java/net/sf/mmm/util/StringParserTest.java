@@ -7,16 +7,15 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
- * This is the {@link TestCase test-case} for
- * {@link net.sf.mmm.util.NumericUtil}.
+ * This is the test-case for {@link StringParser}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringParserTest extends TestCase {
+public class StringParserTest {
 
   private void checkSkipOver(StringParser parser, String substring, boolean ignoreCase) {
 
@@ -133,7 +132,8 @@ public class StringParserTest extends TestCase {
     for (int i = 0; i < 10; i++) {
       assertTrue(parser.hasNext());
       char c = parser.next();
-      assertEquals('0' + i, c);
+      int expected = '0' + i;
+      assertEquals(expected, (int) c);
     }
     assertFalse(parser.hasNext());
     try {

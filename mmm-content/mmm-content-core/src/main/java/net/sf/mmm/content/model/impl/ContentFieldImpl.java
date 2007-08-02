@@ -21,7 +21,7 @@ public final class ContentFieldImpl extends AbstractContentField {
 
   /** @see #getContentClass() */
   private static ContentClass fieldClass;
-  
+
   /**
    * The constructor.
    */
@@ -34,10 +34,10 @@ public final class ContentFieldImpl extends AbstractContentField {
    * {@inheritDoc}
    */
   public ContentClass getContentClass() {
-  
+
     return fieldClass;
   }
-  
+
   /**
    * This method sets the {@link #getContentClass() content-class} reflecting
    * the type content-field.
@@ -45,7 +45,9 @@ public final class ContentFieldImpl extends AbstractContentField {
    * @param contentClass is the content-class reflecting this type.
    */
   static void setContentClass(ContentClass contentClass) {
-    
+
+    assert ((fieldClass == null) || (fieldClass == contentClass));
+    assert (contentClass != null);
     fieldClass = contentClass;
   }
 
@@ -68,5 +70,5 @@ public final class ContentFieldImpl extends AbstractContentField {
     // make package visible...
     super.setFieldTypeAndClass(type);
   }
-  
+
 }

@@ -51,11 +51,22 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
    */
   public final Object getValue(String fieldName) throws ContentException {
 
+    return getValue(fieldName, Object.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <V> V getValue(String fieldName, Class<V> type) throws ContentException {
+
     ContentField field = getContentClass().getField(fieldName);
     if (field == null) {
       throw new FieldNotExistsException(fieldName, getContentClass());
     }
-    return getFieldValue(field, fieldName);
+    if (!field.getFieldClass().isAssignableFrom(type)) {
+      throw new ContentCastException(field.getFieldClass(), type);
+    }
+    return type.cast(getFieldValue(field, fieldName));
   }
 
   /**
@@ -227,12 +238,9 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
       setValue(field, fieldName, value);
     } catch (ClassCastException e) {
       if ((value != null) && field.getFieldClass().isAssignableFrom(value.getClass())) {
-        // TODO: create exception type
-        // throw new FieldTypeNotCompatibleException(e, field, value.getClass(),
-        // field.getFieldType());
-        throw new IllegalStateException("Field type NOT compatible!");
+        throw new ContentCastException(value.getClass(), field.getFieldClass());
       }
-      throw new IllegalStateException("Internal Error");
+      throw new IllegalStateException("Internal Error!");
     }
   }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link ManifestLoader}.
@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ManifestLoaderTest extends TestCase {
+public class ManifestLoaderTest {
 
   @Test
   public void testLoader() throws IOException {

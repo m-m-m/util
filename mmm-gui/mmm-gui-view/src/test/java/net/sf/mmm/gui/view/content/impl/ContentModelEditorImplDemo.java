@@ -11,9 +11,8 @@ import net.sf.mmm.configuration.impl.access.resource.ResourceAccess;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
 import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.FieldModifiersImpl;
-import net.sf.mmm.content.model.impl.AbstractMutableContentModelService;
-import net.sf.mmm.content.model.impl.ConfiguredModelService;
-import net.sf.mmm.content.value.impl.IdImpl;
+import net.sf.mmm.content.model.impl.BasicContentModelService;
+import net.sf.mmm.content.model.impl.DummyClassResolver;
 import net.sf.mmm.content.value.impl.VersionImpl;
 import net.sf.mmm.gui.model.content.impl.ContentClassFieldTableManagerImpl;
 import net.sf.mmm.gui.model.content.impl.ContentClassTreeModel;
@@ -44,21 +43,11 @@ public class ContentModelEditorImplDemo {
 
     // static initialization
     UIFactory uiFactory = new UIFactorySwing();
-    ConfiguredModelService modelServiceImpl = new ConfiguredModelService();
-    ConfigurationAccess access = new ResourceAccess("net/sf/mmm/content/model/ContentModel.xml");
-    ConfigurationFactory factory = new XmlFactory();
-    ConfigurationDocument doc = factory.create(access);
-    Configuration configuration = doc.getConfiguration();
-    ValueServiceImpl valueServiceImpl = new StaticValueServiceImpl();
-    valueServiceImpl.addManager(new IdImpl.Manager());
-    valueServiceImpl.addManager(new ClassModifiersImpl.Manager());
-    valueServiceImpl.addManager(new FieldModifiersImpl.Manager());
-    valueServiceImpl.addManager(new VersionImpl.Manager());
-    ValueService valueService = valueServiceImpl;
-    modelServiceImpl.setValueService(valueService);
-    modelServiceImpl.setConfiguration(configuration);
-    modelServiceImpl.initialize();
-    AbstractMutableContentModelService modelService = modelServiceImpl;
+    BasicContentModelService modelService = new BasicContentModelService();
+    DummyClassResolver resolver = new DummyClassResolver();
+    resolver.initialize();
+    modelService.setClassResolver(resolver);
+    modelService.initialize();
     // IdService idService = new DummyIdService();
     // modelService.setIdService(idService);
     ContentClassTreeModel classModel = new ContentClassTreeModel();

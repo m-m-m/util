@@ -8,6 +8,8 @@ import java.util.List;
 import net.sf.mmm.util.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.impl.dummy.MyPojo;
 
+import static org.junit.Assert.*;
+
 /**
  * This is the abstract test-case for
  * {@link net.sf.mmm.util.pojo.api.PojoDescriptorBuilder} implementations using
@@ -16,7 +18,7 @@ import net.sf.mmm.util.pojo.impl.dummy.MyPojo;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
+public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
 
   protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance)
       throws Exception {

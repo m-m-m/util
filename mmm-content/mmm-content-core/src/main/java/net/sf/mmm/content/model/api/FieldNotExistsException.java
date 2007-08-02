@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.content.NlsBundleContentModel;
+import net.sf.mmm.content.NlsBundleContentCore;
 
 /**
  * This exception is thrown if a
@@ -29,7 +29,7 @@ public class FieldNotExistsException extends ContentModelException {
    */
   public FieldNotExistsException(String fieldName, ContentClass declaringClass) {
 
-    super(NlsBundleContentModel.ERR_NO_SUCH_FIELD, fieldName, declaringClass);
+    super(NlsBundleContentCore.ERR_NO_SUCH_FIELD, fieldName, declaringClass);
   }
 
   /**

@@ -5,10 +5,8 @@ package net.sf.mmm.util.http;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 /**
- * This is a {@link TestCase test-case} for {@link HttpRequest}.
+ * This is a test-case for {@link HttpRequest}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

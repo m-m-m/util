@@ -3,16 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
- * This is the {@link TestCase test-case} for
- * {@link net.sf.mmm.util.NumericUtil}.
+ * This is the test-case for {@link NumericUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NumericUtilTest extends TestCase {
+public class NumericUtilTest {
 
   private void verifySimplestNumber(Number value, Class simplestType) {
 
@@ -21,9 +22,7 @@ public class NumericUtilTest extends TestCase {
     assertSame(simpleValue.getClass(), simplestType);
   }
 
-  /**
-   * 
-   */
+  @Test
   public void testToSimplestNumber() {
 
     verifySimplestNumber(new Double(1.0), Byte.class);
