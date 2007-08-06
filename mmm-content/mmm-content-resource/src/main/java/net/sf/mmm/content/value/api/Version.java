@@ -49,7 +49,6 @@ public interface Version {
    * @return the name of the branch (<code>null</code> for head).
    */
   // String getBranchName();
-  
   /**
    * This method gets the major version number. <br>
    * E.g. for version "3.42.1.5-test" the major version is "3".
@@ -83,8 +82,8 @@ public interface Version {
   int getMicroVersion();
 
   /**
-   * This method gets the version suffix. E.g. for version "3.42.1.5-test" the
-   * version suffix is "test".<br>
+   * This method gets the version suffix.<br>
+   * E.g. for version "3.42.1.5-test" the version suffix is "test".<br>
    * A suffix reduces the rank of a version: e.g. "1.0" is
    * {@link #isHigherThan(Version) higher-than} "1.0-stable".
    * 
@@ -98,7 +97,7 @@ public interface Version {
    * 
    * @see java.lang.Object#toString()
    */
-  public String toString();
+  String toString();
 
   /**
    * This method determines if this version is higher than the given one.<br>
@@ -108,6 +107,6 @@ public interface Version {
    * @return <code>true</code> if this version is higher than the given
    *         version and <code>false</code> otherwise.
    */
-  public boolean isHigherThan(Version otherVersion);
+  boolean isHigherThan(Version otherVersion);
 
 }

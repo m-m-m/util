@@ -7,7 +7,6 @@ import net.sf.mmm.content.value.api.Version;
 import net.sf.mmm.util.BasicUtil;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
-import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
  * This is the implementation of the {@link Version} interface.
@@ -488,11 +487,16 @@ public final class VersionImpl implements Version {
   }
 
   /**
+   * This method gets the rating for the given <code>suffix</code>.
    * 
-   * @param suffix
-   * @return
+   * @param suffix is the {@link #getVersionSuffix() version suffix}. It may be
+   *        <code>null</code>.
+   * @return the rating of the given suffix. If two versions are equal except
+   *         for their suffix, the version with the higher
+   *         {@link #getSuffixRating(String) suffix-rating} is
+   *         {@link #isHigherThan(Version) higher} than the other.
    */
-  public static int getSuffixRating(String suffix) {
+  protected static int getSuffixRating(String suffix) {
 
     if (suffix == null) {
       return 6;
@@ -519,7 +523,7 @@ public final class VersionImpl implements Version {
    * @param lowerSuffix
    * @return
    */
-  public static boolean isHigher(String higherSuffix, String lowerSuffix) {
+  protected static boolean isHigher(String higherSuffix, String lowerSuffix) {
 
     if (higherSuffix == null) {
       return (lowerSuffix != null);
@@ -582,45 +586,6 @@ public final class VersionImpl implements Version {
       result.append(this.suffix);
     }
     return result.toString();
-  }
-
-  /**
-   * This inner class is the manager for the value.
-   */
-  public static class Manager extends AbstractValueManager<VersionImpl> {
-
-    /**
-     * The constructor.
-     */
-    public Manager() {
-
-      super();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getName() {
-
-      return VALUE_NAME;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public VersionImpl parse(String valueAsString) throws ValueParseException {
-
-      return new VersionImpl(valueAsString);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<VersionImpl> getValueClass() {
-
-      return VersionImpl.class;
-    }
-
   }
 
 }

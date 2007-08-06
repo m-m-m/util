@@ -8,6 +8,8 @@ import java.util.Date;
 import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.value.api.ValueNotSetException;
+import net.sf.mmm.value.api.WrongValueTypeException;
 
 /**
  * TODO: this class ...

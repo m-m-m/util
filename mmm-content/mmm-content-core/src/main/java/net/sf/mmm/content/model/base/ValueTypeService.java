@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import java.util.List;
+
 import net.sf.mmm.util.reflect.ClassResolver;
 
 /**
@@ -18,4 +20,11 @@ import net.sf.mmm.util.reflect.ClassResolver;
  */
 public interface ValueTypeService extends ClassResolver {
 
+  /**
+   * This method gets the names of the value-types 
+   * 
+   * @return
+   */
+  List<String> getTypeNames();
+  
 }

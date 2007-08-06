@@ -6,8 +6,6 @@ package net.sf.mmm.value.validator.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.validator.api.ValidationResult;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
@@ -18,8 +16,8 @@ import net.sf.mmm.value.validator.api.ValueValidator;
  */
 public abstract class AbstractCompositeValueValidator implements ValueValidator {
 
-  /** the list of child validators */
-  List<ValueValidator> children;
+  /** the list of child validators. */
+  private List<ValueValidator> children;
 
   /**
    * The constructor.
@@ -130,19 +128,6 @@ public abstract class AbstractCompositeValueValidator implements ValueValidator 
       }
     }
     return getResult(details, invalidCount, succeedCount);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter xmlWriter) throws XmlException {
-
-    xmlWriter.writeStartElement(XML_TAG_VALIDATOR);
-    xmlWriter.writeAttribute(XML_ATR_VALIDATOR_TYPE, getClass().toString());
-    for (int i = 0; i < getChildCount(); i++) {
-      getChild(i).toXml(xmlWriter);
-    }
-    xmlWriter.writeEndElement(XML_TAG_VALIDATOR);
   }
 
 }

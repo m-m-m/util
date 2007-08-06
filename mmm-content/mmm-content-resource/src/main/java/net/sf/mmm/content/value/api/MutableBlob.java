@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.api;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import net.sf.mmm.value.api.ValueIOException;
 
 /**
  * This is the interface for a BLOB (Binary Large OBject) value. This method
@@ -26,9 +25,9 @@ public interface MutableBlob extends Blob {
    *        be appended to the BLOB, <code>false</code> if the BLOB should be
    *        overridden.
    * @return an output stream to write the BLOB data to.
-   * @throws ValueIOException if the BLOB could not be opened for writing.
+   * @throws IOException if the BLOB could not be opened for writing.
    */
-  OutputStream getWriteAccess(boolean append) throws ValueIOException;
+  OutputStream getWriteAccess(boolean append) throws IOException;
 
   /**
    * This method writes the data from the give input stream to this BLOB. The
@@ -38,8 +37,8 @@ public interface MutableBlob extends Blob {
    *        BLOB.
    * @param append <code>true</code> if the data should be appended to the
    *        BLOB, <code>false</code> if the BLOB should be overridden.
-   * @throws ValueIOException if the writing fails.
+   * @throws IOException if the writing fails.
    */
-  void writeData(InputStream inputStream, boolean append) throws ValueIOException;
+  void writeData(InputStream inputStream, boolean append) throws IOException;
 
 }

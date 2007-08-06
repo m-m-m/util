@@ -3,16 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
-import org.w3c.dom.Element;
-
 import net.sf.mmm.content.NlsBundleContentCore;
 import net.sf.mmm.content.model.api.FieldModifiers;
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
-import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
  * This is the base implementation of the {@link FieldModifiers} interface.
@@ -300,34 +292,6 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
    * {@inheritDoc}
    */
   @Override
-  protected void setXmlAttributes(XmlWriter xmlWriter) throws XmlException {
-
-    super.setXmlAttributes(xmlWriter);
-    if (!isSystem() && isReadOnly()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_READ_ONLY, StringUtil.TRUE);
-    }
-    if (isStatic()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_STATIC, StringUtil.TRUE);
-    }
-    if (isTransient()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_TRANSIENT, StringUtil.TRUE);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter xmlWriter) throws XmlException {
-
-    xmlWriter.writeStartElement(XML_TAG_ROOT);
-    setXmlAttributes(xmlWriter);
-    xmlWriter.writeEndElement(XML_TAG_ROOT);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String toString() {
 
     StringBuffer result = new StringBuffer();
@@ -360,116 +324,6 @@ public class FieldModifiersImpl extends AbstractModifiers implements FieldModifi
     }
 
     return result.toString();
-  }
-
-  /**
-   * This inner class is the manager for the value.
-   */
-  public static class Manager extends AbstractValueManager<FieldModifiers> {
-
-    /** @see #getName() */
-    public static final String VALUE_NAME = "FieldModifiers";
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getName() {
-
-      return VALUE_NAME;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<FieldModifiers> getValueClass() {
-
-      return FieldModifiers.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public FieldModifiers parse(String valueAsString) throws ValueParseException {
-
-      if ("N".equals(valueAsString)) {
-        return NORMAL;
-      }
-      boolean isSystem = (valueAsString.indexOf('X') >= 0);
-      boolean isStatic = (valueAsString.indexOf('S') >= 0);
-      boolean isFinal = (valueAsString.indexOf('F') >= 0);
-      boolean isReadOnly = (valueAsString.indexOf('R') >= 0);
-      boolean isTransient = (valueAsString.indexOf('T') >= 0);
-      return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString(FieldModifiers value) {
-
-      StringBuffer buffer = new StringBuffer(4);
-      if (value.isSystem()) {
-        buffer.append('X');
-      } else if (value.isStatic()) {
-        buffer.append('S');
-      } else if (value.isFinal()) {
-        buffer.append('F');
-      } else if (value.isReadOnly()) {
-        buffer.append('R');
-      } else if (value.isTransient()) {
-        buffer.append('T');
-      }
-      if (buffer.length() == 0) {
-        buffer.append('N');
-      }
-      return buffer.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public FieldModifiers parse(Element valueAsXml) throws ValueParseException {
-
-      checkXml(valueAsXml);
-
-      try {
-        boolean isSystem = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
-        boolean isStatic = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_STATIC, false);
-        boolean isFinal = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
-        boolean isReadOnly = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_READ_ONLY, false);
-        boolean isTransient = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_TRANSIENT, false);
-        return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient);
-      } catch (IllegalArgumentException e) {
-        // TODO
-        throw new ValueParseException("Failed to parse " + VALUE_NAME, e);
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void toXmlValue(XmlWriter xmlWriter, FieldModifiers value) throws XmlException {
-
-      if (value.isSystem()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_SYSTEM, StringUtil.TRUE);
-      }
-      if (value.isStatic()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_STATIC, StringUtil.TRUE);
-      }
-      if (value.isFinal()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_FINAL, StringUtil.TRUE);
-      }
-      if (value.isReadOnly()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_READ_ONLY, StringUtil.TRUE);
-      }
-      if (value.isTransient()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_TRANSIENT, StringUtil.TRUE);
-      }
-    }
-
   }
 
 }

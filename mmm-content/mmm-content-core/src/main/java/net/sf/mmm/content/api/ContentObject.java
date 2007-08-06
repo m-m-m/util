@@ -40,8 +40,7 @@ import net.sf.mmm.content.value.api.MetaData;
  * </table> <br>
  * In this context {@link ContentObject this} type and its specific sub-types
  * are called <em>entity</em>.<br>
- * TODO: add generic methods "ContentObject getParent()", "String getPath()"
- * "Collection&lt;ContentObject&gt; getChildren()" instead of content-folder?<br>
+ * TODO: add lock support
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -60,10 +59,7 @@ public abstract interface ContentObject extends Serializable {
   String METADATA_NAMESPACE_NONE = "";
 
   /**
-   * the variable-name of the current object in the
-   * {@link net.sf.mmm.context.api.Context context} for link
-   * net.sf.mmm.content.model.api.ContentField#calculate(ContentObject)
-   * calculation.
+   * the variable-name of the current object in the context for calculation.
    */
   String ENV_VARIABLE_THIS = "this";
 

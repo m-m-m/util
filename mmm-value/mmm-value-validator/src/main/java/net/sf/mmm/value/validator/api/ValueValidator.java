@@ -3,14 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.api;
 
-import net.sf.mmm.util.xml.api.XmlSerializable;
+import java.io.Serializable;
 
 /**
  * This is the interface for a validator of values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ValueValidator extends XmlSerializable {
+public interface ValueValidator extends Serializable {
 
   /** the XML tag for a validator */
   String XML_TAG_VALIDATOR = "validator";

@@ -4,9 +4,6 @@
 package net.sf.mmm.content.model.base;
 
 import net.sf.mmm.content.model.api.Modifiers;
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This is the base implementation of the {@link Modifiers} interface.
@@ -58,21 +55,6 @@ public abstract class AbstractModifiers implements Modifiers {
   public boolean isFinal() {
 
     return this.finalFlag;
-  }
-
-  /**
-   * @param xmlWriter
-   * @throws XmlException
-   * @see net.sf.mmm.util.xml.api.XmlSerializable#toXml(XmlWriter)
-   */
-  protected void setXmlAttributes(XmlWriter xmlWriter) throws XmlException {
-
-    if (isSystem()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_SYSTEM, StringUtil.TRUE);
-    }
-    if (isFinal()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_FINAL, StringUtil.TRUE);
-    }
   }
 
 }

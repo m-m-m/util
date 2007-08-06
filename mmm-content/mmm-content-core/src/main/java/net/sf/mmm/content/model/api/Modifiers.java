@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.util.xml.api.XmlSerializable;
+import java.io.Serializable;
 
 /**
  * This is the interface for the modifiers of a
@@ -14,7 +14,7 @@ import net.sf.mmm.util.xml.api.XmlSerializable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface Modifiers extends XmlSerializable {
+public abstract interface Modifiers extends Serializable {
 
   /**
    * the attribute for the {@link #isSystem() system-flag}.

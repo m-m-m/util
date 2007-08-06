@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import net.sf.mmm.content.value.api.MutableBlob;
-import net.sf.mmm.value.api.ValueIOException;
 
 /**
  * This is the abstract base implementation of the Blob interface.
@@ -39,7 +38,7 @@ public abstract class AbstractBlob implements MutableBlob {
   /**
    * {@inheritDoc}
    */
-  public void writeData(InputStream inputStream, boolean append) throws ValueIOException {
+  public void writeData(InputStream inputStream, boolean append) throws IOException {
 
     try {
       OutputStream outputStream = null;
@@ -70,14 +69,14 @@ public abstract class AbstractBlob implements MutableBlob {
       }
     } catch (IOException e) {
       // TODO Tx ? - better use Aspect
-      throw new ValueIOException(e.getMessage(), e);
+      throw e; //new ValueIOException(e.getMessage(), e);
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public void streamData(OutputStream outStream) throws ValueIOException {
+  public void streamData(OutputStream outStream) throws IOException {
 
     InputStream inputStream = getReadAccess();
     try {

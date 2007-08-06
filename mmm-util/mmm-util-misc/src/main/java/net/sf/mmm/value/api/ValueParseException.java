@@ -1,25 +1,24 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value;
+package net.sf.mmm.value.api;
 
 import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
- * This exception is thrown if a something goes wrong about values. This can be
- * an invalid "casting", a parse error, etc.
+ * This exception is thrown if the parsing of a value fails.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueException extends NlsRuntimeException {
+public class ValueParseException extends ValueException {
 
-  /** UID for serialization. */
-  private static final long serialVersionUID = -8445209659250789499L;
+  /** uid for serialization */
+  private static final long serialVersionUID = 662961335483675913L;
 
   /**
    * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
    */
-  public ValueException(String internaitionalizedMessage, Object... arguments) {
+  public ValueParseException(String internaitionalizedMessage, Object... arguments) {
 
     super(internaitionalizedMessage, arguments);
   }
@@ -27,7 +26,8 @@ public class ValueException extends NlsRuntimeException {
   /**
    * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
    */
-  public ValueException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  public ValueParseException(Throwable nested, String internaitionalizedMessage,
+      Object... arguments) {
 
     super(nested, internaitionalizedMessage, arguments);
   }

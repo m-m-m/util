@@ -3,17 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
-import org.w3c.dom.Element;
-
 import net.sf.mmm.content.NlsBundleContentCore;
 import net.sf.mmm.content.model.api.ClassModifiers;
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
-import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.api.ValueParseStringException;
-import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
  * This is the base implementation of the {@link ClassModifiers} interface.
@@ -222,141 +213,6 @@ public class ClassModifiersImpl extends AbstractModifiers implements ClassModifi
       return this.extendableFlag;
     }
     return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void setXmlAttributes(XmlWriter xmlWriter) throws XmlException {
-
-    super.setXmlAttributes(xmlWriter);
-    if (isAbstract()) {
-      xmlWriter.writeAttribute(XML_ATR_ROOT_ABSTRACT, Boolean.toString(this.abstractFlag));
-      xmlWriter.writeAttribute(XML_ATR_ROOT_EXTENDABLE, Boolean.toString(this.extendableFlag));
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter xmlWriter) throws XmlException {
-
-    xmlWriter.writeStartElement(XML_TAG_ROOT);
-    setXmlAttributes(xmlWriter);
-    xmlWriter.writeEndElement(XML_TAG_ROOT);
-  }
-
-  /**
-   * This inner class is the manager for the value.
-   */
-  public static class Manager extends AbstractValueManager<ClassModifiers> {
-
-    /** @see #getName() */
-    public static final String VALUE_NAME = "ClassModifiers";
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getName() {
-
-      return VALUE_NAME;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<ClassModifiers> getValueClass() {
-
-      return ClassModifiers.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public ClassModifiers parse(String valueAsString) throws ValueParseException {
-
-      if ("N".equals(valueAsString)) {
-        return NORMAL;
-      } else if ("X".equals(valueAsString)) {
-        return SYSTEM;
-      } else if ("A".equals(valueAsString)) {
-        return ABSTRACT;
-      } else if ("F".equals(valueAsString)) {
-        return FINAL;
-      } else if ("XA".equals(valueAsString)) {
-        return SYSTEM_ABSTRACT;
-      } else if ("XF".equals(valueAsString)) {
-        return SYSTEM_FINAL;
-      } else if ("XAU".equals(valueAsString)) {
-        return SYSTEM_ABSTRACT_UNEXTENDABLE;
-      } else if ("XU".equals(valueAsString)) {
-        return SYSTEM_UNEXTENDABLE;
-      } else {
-        throw new ValueParseStringException(valueAsString, ClassModifiers.class, VALUE_NAME);
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString(ClassModifiers value) {
-
-      StringBuffer buffer = new StringBuffer(4);
-      if (value.isSystem()) {
-        buffer.append('X');
-      } else if (value.isAbstract()) {
-        buffer.append('A');
-      } else if (!value.isExtendable() && !value.isFinal()) {
-        buffer.append('U');
-      } else if (value.isFinal()) {
-        buffer.append('F');
-      } else if (buffer.length() == 0) {
-        buffer.append('N');
-      }
-      return buffer.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ClassModifiers parse(Element valueAsXml) throws ValueParseException {
-
-      checkXml(valueAsXml);
-
-      try {
-        boolean isSystem = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_SYSTEM, false);
-        boolean isAbstract = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_ABSTRACT, false);
-        boolean isFinal = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_FINAL, false);
-        boolean isExtendable = DomUtil.getAttributeAsBoolean(valueAsXml, XML_ATR_ROOT_EXTENDABLE, !isFinal);
-        return getInstance(isSystem, isFinal, isAbstract, isExtendable);
-      } catch (IllegalArgumentException e) {
-        // TODO
-        throw new ValueParseException("Failed to parse " + VALUE_NAME, e);        
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void toXmlValue(XmlWriter xmlWriter, ClassModifiers value) throws XmlException {
-
-      if (value.isSystem()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_SYSTEM, StringUtil.TRUE);
-      }
-      if (value.isAbstract()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_ABSTRACT, StringUtil.TRUE);
-      }
-      if (value.isFinal()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_FINAL, StringUtil.TRUE);
-      } else if (!value.isExtendable()) {
-        xmlWriter.writeAttribute(XML_ATR_ROOT_EXTENDABLE, StringUtil.FALSE);
-      }
-    }
-
   }
 
 }

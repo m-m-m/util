@@ -21,14 +21,14 @@
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-content-value</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
+      <artifactId>mmm-value-validator</artifactId>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-value-validator</artifactId>
-      <version>0.0.1</version>
+      <artifactId>mmm-util-event</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

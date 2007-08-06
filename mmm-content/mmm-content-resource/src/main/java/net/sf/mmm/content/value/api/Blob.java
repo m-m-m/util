@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.api;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import net.sf.mmm.value.api.ValueIOException;
 
 /**
  * This is the interface for a BLOB (Binary Large OBject) value. The interface
@@ -16,12 +15,9 @@ import net.sf.mmm.value.api.ValueIOException;
  */
 public interface Blob {
 
-  /**
-   * The {@link net.sf.mmm.value.api.ValueManager#getName() name} of this value
-   * type.
-   */
+  /** The name of this value type. */
   String VALUE_NAME = "Blob";
-  
+
   /**
    * This method gets the current size of this file.
    * 
@@ -51,18 +47,18 @@ public interface Blob {
    * @see MutableBlob#streamData(OutputStream)
    * 
    * @return the BLOB data as input stream.
-   * @throws ValueIOException if the BLOB could not be opened for reading.
+   * @throws IOException if the BLOB could not be opened for reading.
    */
-  InputStream getReadAccess() throws ValueIOException;
+  InputStream getReadAccess() throws IOException;
 
   /**
    * This method writes the data of this BLOB to the given output stream. The
    * given output stream will NOT be closed.
    * 
    * @param outStream is the stream where to write the data to.
-   * @throws ValueIOException if the streaming fails.
+   * @throws IOException if the streaming fails.
    */
-  void streamData(OutputStream outStream) throws ValueIOException;
+  void streamData(OutputStream outStream) throws IOException;
 
   /**
    * 
@@ -70,5 +66,5 @@ public interface Blob {
    * @return
    */
   int getRevision();
-  
+
 }

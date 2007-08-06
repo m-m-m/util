@@ -195,6 +195,8 @@ public interface SmartId extends ContentId {
   SmartId getContentClassId();
 
   /**
+   * {@inheritDoc}
+   * 
    * The string representation of the smart ID needs to be in the following
    * form:
    * 
@@ -204,8 +206,6 @@ public interface SmartId extends ContentId {
    * 
    * The revision and/or storeId can be omitted if zero. All number values are
    * {@link Long#toString(long, int) encoded} using the {@link #RADIX} constant.
-   * 
-   * {@inheritDoc}
    */
   String toString();
 

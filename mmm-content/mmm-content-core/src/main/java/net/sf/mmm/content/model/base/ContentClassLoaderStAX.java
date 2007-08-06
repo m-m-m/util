@@ -24,7 +24,7 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.resource.DataResource;
 import net.sf.mmm.util.value.ValueUtil;
 import net.sf.mmm.util.xml.StaxUtil;
-import net.sf.mmm.util.xml.XIncludeStreamReader;
+import net.sf.mmm.util.xml.stream.XIncludeStreamReader;
 import net.sf.mmm.value.api.ValueException;
 
 /**

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.impl;
 
+import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.value.api.ValueParseStringException;
@@ -100,7 +101,7 @@ public abstract class AbstractSmartIdManager implements SmartIdManager {
             storeId = Integer.parseInt(s, SmartId.RADIX);
           }
         } catch (NumberFormatException e) {
-          throw new ValueParseStringException(idAsString, SmartId.class, "id");
+          throw new ValueParseStringException(idAsString, SmartId.class, ContentId.VALUE_NAME);
         }
         pos++;
       } else {
@@ -108,7 +109,7 @@ public abstract class AbstractSmartIdManager implements SmartIdManager {
       }
     }
     if ((pos < 2) || (pos > 4)) {
-      throw new ValueParseStringException(idAsString, SmartId.class, "id");
+      throw new ValueParseStringException(idAsString, SmartId.class, ContentId.VALUE_NAME);
     }
     return getId(resourceId, classId, revision, storeId);
   }

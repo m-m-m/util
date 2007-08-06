@@ -1,10 +1,13 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.xml;
+package net.sf.mmm.util.xml.stream;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -12,16 +15,20 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.util.StreamReaderDelegate;
 
+import net.sf.mmm.util.io.StreamUtil;
 import net.sf.mmm.util.resource.DataResource;
+import net.sf.mmm.util.xml.StaxUtil;
+import net.sf.mmm.util.xml.XmlUtil;
 
 /**
  * This is an implementation of the {@link XMLStreamReader} interface that
  * adapts an {@link XMLStreamReader} adding simple support for XInclude.<br>
  * For details about XInclude see: <a
  * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>
- * Please note that only plain inclusion is currently supported but no XPointer.
+ * Please note that only plain XML inclusion is currently supported and no
+ * XPointer.
  * 
- * TODO
+ * TODO: detect infinity loops via inclusions
  * 
  * <pre>
  * &lt;include&gt; depth=1, fallback=false
@@ -38,6 +45,9 @@ import net.sf.mmm.util.resource.DataResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XIncludeStreamReader extends StreamReaderDelegate {
+
+  /** the parent reader or <code>null</code> if this is the root. */
+  private final XIncludeStreamReader parent;
 
   /** The factory used to create additional readers. */
   private final XMLInputFactory factory;
@@ -59,6 +69,12 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
    * currently have no active XInclude.
    */
   private XMLStreamReader includeReader;
+
+  /**
+   * The included text or <code>null</code> if currently no text is to be
+   * included.
+   */
+  private String includeText;
 
   /**
    * The current depth in the XML tree relative to the first "include" tag of
@@ -83,9 +99,26 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
   public XIncludeStreamReader(XMLInputFactory factory, DataResource resource)
       throws XMLStreamException, IOException {
 
+    this(factory, resource, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param factory is the input factory used to create raw XML-readers.
+   * @param resource is where to read the XML from.
+   * @param parent is the parent {@link XMLStreamReader}.
+   * @throws XMLStreamException
+   * @throws IOException
+   */
+  protected XIncludeStreamReader(XMLInputFactory factory, DataResource resource,
+      XIncludeStreamReader parent) throws XMLStreamException, IOException {
+
     super();
+    this.parent = parent;
     this.factory = factory;
     this.resource = resource;
+
     this.inputStream = resource.openStream();
     try {
       this.mainReader = factory.createXMLStreamReader(this.inputStream);
@@ -94,6 +127,30 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
       throw e;
     }
     setParent(this.mainReader);
+  }
+
+  /**
+   * This method detects if a recursive inclusion takes place.<br>
+   * 
+   * TODO: Potentially the same resource could cause an inclusion cycle without
+   *        causing an infinity loop by using different XPointer expressions.
+   * 
+   * @param dataResource is the current data-resource to include.
+   * @throws XMLStreamException if the given <code>dataResource</code> has
+   *         already been included causing an infinity loop.
+   */
+  protected void detectRecursiveInclusion(DataResource dataResource) throws XMLStreamException {
+
+    if (this.resource.equals(dataResource)) {
+      throw new XMLStreamException("Recursive inclusion: " + this.resource.getPath());
+    }
+    if (this.parent != null) {
+      try {
+        detectRecursiveInclusion(dataResource);
+      } catch (RuntimeException e) {
+        throw new XMLStreamException("Recursive inclusion: " + this.resource.getPath(), e);
+      }
+    }
   }
 
   /**
@@ -148,26 +205,44 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
     int eventType = -1;
     // read attributes...
     String href = getAttributeValue(null, "href");
-    String parse = getAttributeValue(null, "parse");
-    if ((parse != null) && (!"xml".equals(parse))) {
-      // TODO: support for "text", honor "encoding" attribute.
-      throw new XMLStreamException("Unsupported XInclude parse type:" + parse);
-    }
+    String xpointer = getAttributeValue(null, "xpointer");
     // get the included resource...
     DataResource includeResource = this.resource.navigate(href);
     // and try to include it...
     boolean success = false;
     if (includeResource.isAvailable()) {
       try {
-        this.includeReader = new XIncludeStreamReader(this.factory, includeResource);
-        setParent(this.includeReader);
-        eventType = this.includeReader.nextTag();
-        // we ascend the XML until the initial include is closed.
-        closeInitialInclude();
-        success = true;
+        // determine inclusion format type...
+        String parse = getAttributeValue(null, "parse");
+        if ((parse == null) || ("xml".equals(parse))) {
+          this.includeReader = new XIncludeStreamReader(this.factory, includeResource, this);
+          eventType = this.includeReader.nextTag();
+          setParent(this.includeReader);
+          if (xpointer != null) {
+            // shorthand form: id
+            // scheme-based form: e.g. element(/1/*)
+          }
+          // we ascend the XML until the initial include is closed.
+          closeInitialInclude();
+          success = true;
+        } else if ("text".equals(parse)) {
+          String encoding = getAttributeValue(null, "encoding");
+          Charset charset;
+          if (encoding == null) {
+            charset = Charset.defaultCharset();
+          } else {
+            charset = Charset.forName(encoding);
+          }
+          InputStream textInputStream = includeResource.openStream();
+          Reader reader = new InputStreamReader(textInputStream, charset);
+          this.includeText = StreamUtil.read(reader);
+          return XMLStreamConstants.CHARACTERS;
+        } else {
+          throw new XMLStreamException("Unsupported XInclude parse type:" + parse);
+        }
       } catch (IOException e) {
-        e.printStackTrace();
         // TODO: log error!
+        e.printStackTrace();
       }
     }
     if (!success) {
@@ -216,6 +291,7 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
   @Override
   public int next() throws XMLStreamException {
 
+    this.includeText = null;
     int eventType = super.next();
     if (this.includeReader == null) {
       if ((eventType == XMLStreamConstants.START_ELEMENT)
@@ -264,7 +340,8 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
   /**
    * {@inheritDoc}
    * 
-   * We override this method to get sure that it delegates to {@link #next()}.
+   * We override this method to get sure that it delegates to our
+   * {@link #next()} instead of the {@link #next()} of the delegate.
    */
   @Override
   public int nextTag() throws javax.xml.stream.XMLStreamException {
@@ -286,6 +363,58 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
     }
 
     return eventType;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getText() {
+
+    if (this.includeText == null) {
+      return super.getText();
+    } else {
+      return this.includeText;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public char[] getTextCharacters() {
+
+    if (this.includeText == null) {
+      return super.getTextCharacters();
+    } else {
+      return this.includeText.toCharArray();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getTextLength() {
+
+    if (this.includeText == null) {
+      return super.getTextLength();
+    } else {
+      return this.includeText.length();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getTextStart() {
+
+    if (this.includeText == null) {
+      return super.getTextStart();
+    } else {
+      return 0;
+    }
   }
 
 }
