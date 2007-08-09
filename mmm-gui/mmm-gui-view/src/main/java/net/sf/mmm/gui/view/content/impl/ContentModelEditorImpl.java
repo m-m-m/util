@@ -11,7 +11,7 @@ import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.model.base.ClassModifiersImpl;
-import net.sf.mmm.gui.model.content.api.ContentClassFieldTableManager;
+import net.sf.mmm.gui.model.content.api.ContentReflectionModelManager;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.gui.view.content.api.ContentModelEditorView;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
@@ -44,8 +44,8 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
   /** @see #setContentClassTreeModel(UITreeModel) */
   private UITreeModel<ContentClass> classTreeModel;
 
-  /** @see #setFieldTableManager(ContentClassFieldTableManager) */
-  private ContentClassFieldTableManager fieldTableManager;
+  /** @see #setFieldTableManager(ContentReflectionModelManager) */
+  private ContentReflectionModelManager fieldTableManager;
 
   /** the current field table model */
   private FieldTableModel fieldTableModel;
@@ -80,13 +80,13 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
   }
 
   /**
-   * This method injects the {@link ContentClassFieldTableManager} required by
+   * This method injects the {@link ContentReflectionModelManager} required by
    * this component.
    * 
    * @param tableManager
    */
   @Resource
-  public void setFieldTableManager(ContentClassFieldTableManager tableManager) {
+  public void setFieldTableManager(ContentReflectionModelManager tableManager) {
 
     this.fieldTableManager = tableManager;
   }

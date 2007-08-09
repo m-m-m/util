@@ -11,7 +11,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.content.value.api.MetaData;
+import net.sf.mmm.content.value.api.MutableMetaData;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.impl.MetaDataImpl;
 
@@ -20,7 +20,7 @@ import net.sf.mmm.content.value.impl.MetaDataImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentObject implements ContentObject, MetaData {
+public abstract class AbstractContentObject implements ContentObject, MutableMetaData {
 
   /** @see #getId() */
   private SmartId id;
@@ -32,7 +32,7 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
   private boolean deleted;
 
   /** @see #getMetaData(String) */
-  private Map<String, MetaData> metadataMap;
+  private Map<String, MutableMetaData> metadataMap;
 
   /** @see #getModificationCount() */
   // @javax.persistence.Version
@@ -113,14 +113,14 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
   /**
    * {@inheritDoc}
    */
-  public MetaData getMetaData(String namespace) {
+  public MutableMetaData getMetaData(String namespace) {
 
     if (METADATA_NAMESPACE_NONE.equals(namespace)) {
       return this;
     }
     // TODO: synchronize / semaphore!
     // TODO: make metadata immutable if object locked!
-    MetaData metadata = this.metadataMap.get(namespace);
+    MutableMetaData metadata = this.metadataMap.get(namespace);
     if (metadata == null) {
       metadata = loadMetaData(namespace);
       this.metadataMap.put(namespace, metadata);
@@ -134,7 +134,7 @@ public abstract class AbstractContentObject implements ContentObject, MetaData {
    * @param namespace is the namespace for which the metadata is requested.
    * @return the metadata for the given namespace.
    */
-  protected MetaData loadMetaData(String namespace) {
+  protected MutableMetaData loadMetaData(String namespace) {
 
     // TODO: here we need to load the metadata from db...
     return new MetaDataImpl();

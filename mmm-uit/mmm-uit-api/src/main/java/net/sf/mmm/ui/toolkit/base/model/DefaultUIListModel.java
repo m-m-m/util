@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Vector;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
@@ -46,15 +45,6 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   public E getElement(int index) {
 
     return this.elements.get(index);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void handleListenerException(UIListModelListener listener, Throwable t) {
-
-  // we ignore this...
   }
 
   /**
@@ -122,7 +112,6 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
-  @Override
   public int getIndexOf(E element) {
 
     return this.elements.indexOf(element);

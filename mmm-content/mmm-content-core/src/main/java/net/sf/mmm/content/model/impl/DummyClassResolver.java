@@ -1,3 +1,6 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
 import java.util.Collection;
@@ -13,13 +16,9 @@ import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.value.api.ContentId;
-import net.sf.mmm.content.value.api.MetaData;
+import net.sf.mmm.content.value.api.MutableMetaData;
 import net.sf.mmm.util.collection.SizedIterable;
 import net.sf.mmm.util.reflect.ClassResolver;
-
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
- * http://www.apache.org/licenses/LICENSE-2.0 */
 
 /**
  * TODO: this class ...
@@ -77,7 +76,7 @@ public class DummyClassResolver implements ClassResolver {
     register(FieldModifiers.class);
     register(ClassModifiers.class);
     register(ContentId.VALUE_NAME, ContentId.class);
-    register(MetaData.VALUE_NAME, MetaData.class);    
+    register(MutableMetaData.VALUE_NAME, MutableMetaData.class);
  }
 
   /**

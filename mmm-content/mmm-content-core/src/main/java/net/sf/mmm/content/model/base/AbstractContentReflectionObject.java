@@ -52,4 +52,26 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
     super.setId(id);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+  
+    String name = getName();
+    SmartId id = getId();
+    String idString;
+    if (id == null) {
+      idString = "-";
+    } else {
+      idString = id.toString();      
+    }
+    StringBuffer buffer = new StringBuffer(name.length() + idString.length() + 3);
+    buffer.append(name);
+    buffer.append(" [");
+    buffer.append(idString);
+    buffer.append(']');
+    return buffer.toString();
+  }
+  
 }

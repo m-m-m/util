@@ -141,6 +141,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
     int newIndex = this.modelAdapter.getModel().getIndexOf(newValue);
     if (newIndex != -1) {
       this.comboBox.setSelectedIndex(newIndex);
+      this.comboBox.repaint();
     }
   }
 

@@ -8,27 +8,24 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
+import net.sf.mmm.content.model.base.ValueTypeService;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUIListModel;
-import net.sf.mmm.value.api.ValueManager;
-import net.sf.mmm.value.api.ValueService;
 
 /**
  * This is the implementation of the {@link UIListModel} interface for the
- * {@link ValueManager value-managers} provided by the
- * {@link ValueService value-service}.
+ * values provided by the {@link ValueTypeService value-service}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Resource(type = UIListModel.class, name = "ValueTypeListModel")
-public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
+public class ValueTypeListModel extends AbstractUIListModel<String> {
 
-  /** @see #setValueService(ValueService) */
-  private ValueService valueService;
+  /** @see #setValueService(ValueTypeService) */
+  private ValueTypeService valueService;
 
   /** @see #initialize() */
-  private ValueManager[] managers;
+  private String[] valueNames;
 
   /**
    * The constructor.
@@ -45,7 +42,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
    * @param service is the value-service to set.
    */
   @Resource
-  public void setValueService(ValueService service) {
+  public void setValueService(ValueTypeService service) {
 
     this.valueService = service;
   }
@@ -56,24 +53,17 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
   @PostConstruct
   public void initialize() {
 
-    Collection<ValueManager> managerCollection = this.valueService.getManagers();
-    this.managers = managerCollection.toArray(new ValueManager<?>[managerCollection.size()]);
+    // TODO: the valueService may be a dynamic service!
+    Collection<String> managerCollection = this.valueService.getTypeNames();
+    this.valueNames = managerCollection.toArray(new String[managerCollection.size()]);
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
-  protected void handleListenerException(UIListModelListener listener, Throwable t) {
+  public String getElement(int index) {
 
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ValueManager getElement(int index) {
-
-    return this.managers[index];
+    return this.valueNames[index];
   }
 
   /**
@@ -81,7 +71,7 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
    */
   public int getElementCount() {
 
-    return this.managers.length;
+    return this.valueNames.length;
   }
 
   /**
@@ -89,24 +79,32 @@ public class ValueTypeListModel extends AbstractUIListModel<ValueManager> {
    */
   public int getIndexOfString(String element) {
 
-    for (int i = 0; i < this.managers.length; i++) {
-      if (this.managers[i].getName().equals(element)) {
-        return i;
-      }
-    }
-    return -1;
+    return getIndexOf(element);
   }
 
   /**
    * {@inheritDoc}
    */
+  public int getIndexOf(String element) {
+  
+    for (int i = 0; i < this.valueNames.length; i++) {
+      if (this.valueNames[i].equals(element)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  public String toString(ValueManager element) {
+  public String toString(String element) {
 
     if (element == null) {
       return "";
     }
-    return element.getName();
+    return element;
   }
 
 }

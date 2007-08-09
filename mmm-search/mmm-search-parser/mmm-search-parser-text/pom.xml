@@ -27,7 +27,7 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.glaforge</groupId>
+      <groupId>org.codehaus.guessencoding</groupId>
       <artifactId>guessencoding</artifactId>
       <version>1.0</version>
       <scope>compile</scope>

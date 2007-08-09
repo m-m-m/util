@@ -55,7 +55,9 @@ public final class ContentModelEvent implements ChangeEvent {
   }
 
   /**
-   * This method gets the class this event is about.
+   * This method gets the class this event is about. If this event notifies
+   * about the change of a {@link #getContentField() field} this method gets the
+   * {@link ContentField#getDeclaringClass() declaring class} of that field.
    * 
    * @return the class the event is about.
    */

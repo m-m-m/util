@@ -86,6 +86,7 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * {@link #getRootNode() root-node} as node-type. Please override this method
    * if this is NOT applicable.
    */
+  @SuppressWarnings("unchecked")
   public Class<? extends N> getNodeType() {
 
     return (Class<? extends N>) getRootNode().getClass();
@@ -98,7 +99,9 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * @param listener is the listener that threw the exception or error.
    * @param t is the exception or error.
    */
-  protected abstract void handleListenerException(UITreeModelListener listener, Throwable t);
+  protected void handleListenerException(UITreeModelListener listener, Throwable t) {
+    
+  }
 
   /**
    * {@inheritDoc}

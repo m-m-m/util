@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface MetaData extends Serializable {
+public interface MutableMetaData extends Serializable {
 
   /** The name of this value type. */
   String VALUE_NAME = "MetaData";

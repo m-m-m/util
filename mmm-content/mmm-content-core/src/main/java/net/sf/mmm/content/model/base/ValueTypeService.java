@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.sf.mmm.util.reflect.ClassResolver;
@@ -21,10 +22,19 @@ import net.sf.mmm.util.reflect.ClassResolver;
 public interface ValueTypeService extends ClassResolver {
 
   /**
-   * This method gets the names of the value-types 
+   * This method gets the type with the given logical <code>name</code>.<br>
    * 
-   * @return
+   * @param name is the logical name of the requested type.
+   * @return the class reflecting the type with the given <code>name</code> or
+   *         <code>null</code> if no such type is registered.
    */
-  List<String> getTypeNames();
-  
+  Class getType(String name);
+
+  /**
+   * This method gets the names of the registered value-types.
+   * 
+   * @return the registered value types.
+   */
+  Collection<String> getTypeNames();
+
 }

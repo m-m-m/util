@@ -5,14 +5,14 @@ package net.sf.mmm.content.value.impl;
 
 import java.util.Map;
 
-import net.sf.mmm.content.value.api.MetaData;
+import net.sf.mmm.content.value.api.MutableMetaData;
 
 /**
- * This is a simple implementation of the {@link MetaData} interface.
+ * This is a simple implementation of the {@link MutableMetaData} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class MetaDataImpl implements MetaData {
+public class MetaDataImpl implements MutableMetaData {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2350369253408863852L;

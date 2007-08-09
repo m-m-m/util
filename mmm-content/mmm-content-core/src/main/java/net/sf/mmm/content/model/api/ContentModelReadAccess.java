@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import java.util.Collection;
+import java.util.List;
 
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.value.api.ContentId;
@@ -53,8 +53,8 @@ public interface ContentModelReadAccess {
   /**
    * This method gets the list of all registered content classes.
    * 
-   * @return an enumeration of all content classes.
+   * @return the immutable list of all content classes.
    */
-  Collection<? extends ContentClass> getClasses();
+  List<? extends ContentClass> getClasses();
 
 }

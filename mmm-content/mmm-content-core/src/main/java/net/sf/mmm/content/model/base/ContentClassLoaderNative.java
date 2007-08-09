@@ -6,8 +6,10 @@ package net.sf.mmm.content.model.base;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
@@ -24,6 +26,7 @@ import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.impl.MethodPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.xml.StaxUtil;
 
 /**
  * This is an extension of {@link ContentClassLoaderStAX} that also allows to
@@ -36,7 +39,7 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
 
   /** */
   public static final String XML_TAG_CLASS_LIST = "Entities";
-  
+
   /** @see #loadClass(Class, AbstractContentClass) */
   private PojoDescriptorBuilder methodDescriptorBuilder;
 
@@ -50,14 +53,54 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
     super(contentModelService);
     this.methodDescriptorBuilder = new MethodPojoDescriptorBuilder();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass) throws XMLStreamException {
+  protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass)
+      throws XMLStreamException {
 
-    super.parseClassChildElement(xmlReader, superClass);
+    if (XML_TAG_CLASS_LIST.equals(xmlReader.getLocalName())) {
+      int xmlEvent = xmlReader.nextTag();
+      Set<Class<? extends ContentObject>> entityClasses = new HashSet<Class<? extends ContentObject>>();
+      while (XMLStreamConstants.START_ELEMENT == xmlEvent) {
+        String tagName = xmlReader.getLocalName();
+        if ("Entity".equals(tagName)) {
+          String className = xmlReader.getAttributeValue(null, "class");
+          if (className != null) {
+            try {
+              Class entityClass = Class.forName(className);
+              entityClasses.add(entityClass);
+            } catch (ClassNotFoundException e) {
+              e.printStackTrace();
+            }
+          }
+        } else {
+          parseEntitiesChildElement(xmlReader, superClass);
+        }
+        xmlEvent = xmlReader.nextTag();
+      }
+      // proceeded Entity tags
+      loadClasses(entityClasses);
+    } else {
+      super.parseClassChildElement(xmlReader, superClass);
+    }
+  }
+
+  /**
+   * This method parses the XML at the point where an unknown child-element of a
+   * Entities element was hit. The method has to consume this element including
+   * all its children and point to the end of the unknown element.
+   * 
+   * @param xmlReader is where to read the XML from.
+   * @param superClass is the class that owns the unknown child-element.
+   * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
+   */
+  protected void parseEntitiesChildElement(XMLStreamReader xmlReader,
+      AbstractContentClass superClass) throws XMLStreamException {
+
+    StaxUtil.skipOpenElement(xmlReader);
   }
 
   /**
@@ -147,7 +190,7 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
    */
   protected boolean isClassExtendable(Class<? extends ContentObject> type) {
 
-    // TODO: unextendable system classes...
+    // TODO: un-extendable system classes...
     return !isClassFinal(type);
   }
 

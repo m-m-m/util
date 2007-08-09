@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.model;
 
-import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
-
 /**
  * This is the default implementation of the UIListModel interface.
  * 
@@ -34,15 +32,6 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> 
 
     super();
     this.rootNode = new DefaultUITreeNode<T>(this, null, rootNodeData);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void handleListenerException(UITreeModelListener listener, Throwable t) {
-
-  // we ignore this...
   }
 
   /**

@@ -4,6 +4,8 @@
 package net.sf.mmm.gui.model.content.api;
 
 import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 
 /**
  * This is the interface for the manager that
@@ -15,7 +17,23 @@ import net.sf.mmm.content.model.api.ContentClass;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentClassFieldTableManager {
+public interface ContentReflectionModelManager {
+
+  /**
+   * This method gets the {@link UITreeModel tree-model} containing the 
+   * {@link ContentClass}es of the content-model.
+   * 
+   * @return the class tree-model.
+   */
+  UITreeModel<ContentClass> getContentClassTreeModel();
+  
+  /**
+   * This method gets the {@link UIListModel list-model} containing the
+   * {@link ContentClass}es of the content-model.
+   * 
+   * @return the class list-model.
+   */
+  UIListModel<ContentClass> getContentClassListModel();
 
   /**
    * This method gets the {@link FieldTableModel table-model} used to view the

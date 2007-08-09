@@ -8,17 +8,16 @@
   -->
 <Class xmlns:xi="http://www.w3.org/2001/XInclude" id="10" name="ContentResource" system="true" abstract="true" extendable="false">
   <Class id="11" name="ContentFolder" system="true" final="true">
-    <Field id="32" name="children" final="true" type="ContentFolder" read-only="true"/>
+    <Field id="40" name="children" final="true" type="List&lt;ContentResource&gt;" read-only="true"/>
   </Class>
   <Class id="12" name="ContentFile" system="true" final="true">
-    <Field id="40" name="blob" type="Blob" final="true" read-only="true"/>
+    <Field id="48" name="blob" type="Blob" final="true" read-only="true"/>
   </Class>
   <Class id="13" name="ContentDocument" system="true" abstract="true">
     <xi:include href="ContentModel-User.xml"/>
   </Class>
   <Field id="32" name="parent" final="true" type="ContentFolder" read-only="true"/>
   <Field id="33" name="path" type="String" final="true" read-only="true"/>
-  <Field id="34" name="metadata" type="Metadata" final="true" read-only="true"/>
-  <Field id="35" name="version" type="Version" final="true" read-only="true"/>
-  <Field id="36" name="revision" type="Integer" final="true" read-only="true"/>
+  <Field id="34" name="version" type="Version" final="true" read-only="true"/>
+  <Field id="35" name="revision" type="Integer" final="true" read-only="true"/>
 </Class>

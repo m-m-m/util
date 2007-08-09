@@ -4,9 +4,10 @@
 package net.sf.mmm.content.model.base;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -43,7 +44,10 @@ public abstract class AbstractContentModelService extends
   private final Map<ContentId, AbstractContentClass> id2class;
 
   /** @see #getClasses() */
-  private final Collection<AbstractContentClass> classesView;
+  private final List<AbstractContentClass> classes;
+
+  /** @see #getClasses() */
+  private final List<AbstractContentClass> classesView;
 
   /** @see #getField(ContentId) */
   private final Map<ContentId, AbstractContentField> id2field;
@@ -63,7 +67,8 @@ public abstract class AbstractContentModelService extends
     // TODO: use concurrent map?
     this.name2class = new HashMap<String, AbstractContentClass>();
     this.id2class = new HashMap<ContentId, AbstractContentClass>();
-    this.classesView = Collections.unmodifiableCollection(this.id2class.values());
+    this.classes = new ArrayList<AbstractContentClass>();
+    this.classesView = Collections.unmodifiableList(this.classes);
     this.id2field = new HashMap<ContentId, AbstractContentField>();
   }
 
@@ -119,7 +124,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public Collection<AbstractContentClass> getClasses() {
+  public List<AbstractContentClass> getClasses() {
 
     return this.classesView;
   }
@@ -164,6 +169,8 @@ public abstract class AbstractContentModelService extends
     }
     this.name2class.put(name, contentClass);
     this.id2class.put(id, contentClass);
+    // TODO: sort list!
+    this.classes.add(contentClass);
   }
 
   /**
@@ -219,6 +226,8 @@ public abstract class AbstractContentModelService extends
     assert (old == contentClass);
     old = this.name2class.remove(contentClass.getName());
     assert (old == contentClass);
+    boolean removed = this.classes.remove(contentClass);
+    assert (removed);
   }
 
   /**

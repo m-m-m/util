@@ -3,14 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.gui.model.content.impl;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelService;
-import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITreeModel;
 import net.sf.mmm.util.event.EventListener;
@@ -25,16 +23,20 @@ import net.sf.mmm.util.event.EventListener;
 public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> implements
     EventListener<ContentModelEvent> {
 
-  /** @see #setModelService(ContentModelService) */
-  private ContentModelService model;
+  /** The content-model to view as tree. */
+  private final ContentModelService contentModel;
 
   /**
    * The constructor.
+   * 
+   * @param contentModel is the content-model providing the {@link ContentClass}es
+   *        to view as tree.
    */
-  public ContentClassTreeModel() {
+  public ContentClassTreeModel(ContentModelService contentModel) {
 
     super();
-    this.model = null;
+    this.contentModel = contentModel;
+    this.contentModel.getEventRegistrar().addListener(this);
   }
 
   /**
@@ -47,41 +49,12 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
   }
 
   /**
-   * This method sets the {@link ContentModelService modelService} adapted by
-   * this tree-model.
-   * 
-   * @param modelService is the modelService to set.
-   */
-  @Resource
-  public void setModelService(ContentModelService modelService) {
-
-    this.model = modelService;
-  }
-
-  /**
-   * This method initializes the model.
-   */
-  @PostConstruct
-  public void initialize() {
-
-    this.model.getEventRegistrar().addListener(this);
-  }
-
-  /**
    * This method disposes the model.
    */
   @PreDestroy
   public void dispose() {
 
-    this.model.getEventRegistrar().removeListener(this);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void handleListenerException(UITreeModelListener listener, Throwable t) {
-
+    this.contentModel.getEventRegistrar().removeListener(this);
   }
 
   /**
@@ -121,7 +94,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
    */
   public ContentClass getRootNode() {
 
-    return this.model.getRootClass();
+    return this.contentModel.getRootClass();
   }
 
 }

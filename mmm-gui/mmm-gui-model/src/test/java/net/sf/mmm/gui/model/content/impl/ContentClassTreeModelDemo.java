@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.gui.model.content.impl;
 
+import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.impl.BasicContentModelService;
 import net.sf.mmm.content.model.impl.DummyClassResolver;
@@ -14,8 +15,12 @@ import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.widget.UIButton;
+import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
+import net.sf.mmm.ui.toolkit.api.widget.UIList;
 import net.sf.mmm.ui.toolkit.api.widget.UITable;
 import net.sf.mmm.ui.toolkit.api.widget.UITextField;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
@@ -51,9 +56,11 @@ public class ContentClassTreeModelDemo {
     resolver.initialize();
     modelService.setClassResolver(resolver);
     modelService.initialize();
-    ContentClassTreeModel classModel = new ContentClassTreeModel();
-    classModel.setModelService(modelService);
-    classModel.initialize();
+
+    final ContentReflectionModelManagerImpl modelManager = new ContentReflectionModelManagerImpl();
+    modelManager.setContentModelService(modelService);
+    modelManager.initialize();
+    UITreeModel<ContentClass> classModel = modelManager.getContentClassTreeModel();
 
     /*
      * ValueService valueService = new StaticValueServiceImpl(); ValueTypeModel
@@ -79,18 +86,20 @@ public class ContentClassTreeModelDemo {
     checkExtendable.setEnabled(false);
     panel.addComponent(uiFactory.createLabeledComponents("Flags:", checkSystem, checkExtendable),
         LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    UIButton radioNormal = uiFactory.createButton("normal", ButtonStyle.RADIO);
-    UIButton radioFinal = uiFactory.createButton("final", ButtonStyle.RADIO);
-    UIButton radioAbstract = uiFactory.createButton("abstract", ButtonStyle.RADIO);
+    final UIButton radioNormal = uiFactory.createButton("normal", ButtonStyle.RADIO);
+    final UIButton radioFinal = uiFactory.createButton("final", ButtonStyle.RADIO);
+    final UIButton radioAbstract = uiFactory.createButton("abstract", ButtonStyle.RADIO);
     panel.addComponent(uiFactory.createLabeledComponents("Flags2:", radioNormal, radioAbstract,
         radioFinal), LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    UIListModel<ContentClass> classListModel = modelManager.getContentClassListModel();
+    final UIComboBox<ContentClass> comboClass = uiFactory.createComboBox(classListModel);
+    panel.addComponent(uiFactory.createLabeledComponent("class-list (test)", comboClass),
+        LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     final UITree<ContentClass> tree = uiFactory.createTree(false, classModel);
     UISplitPanel splitPanel = uiFactory.createSplitPanel(Orientation.HORIZONTAL);
     splitPanel.setTopOrLeftComponent(tree);
     UIFrame frame = uiFactory.createFrame("test");
-    final ContentClassFieldTableManagerImpl tableFactory = new ContentClassFieldTableManagerImpl();
-    tableFactory.setContentModelService(modelService);
-    final UITable<Object> table = uiFactory.createTable(false, tableFactory
+    final UITable<Object> table = uiFactory.createTable(false, modelManager
         .getFieldTableModel(modelService.getRootClass()));
     tree.addActionListener(new UIActionListener() {
 
@@ -98,11 +107,20 @@ public class ContentClassTreeModelDemo {
 
         if (action == ActionType.SELECT) {
           ContentClass contentClass = tree.getSelection();
-          table.setModel(tableFactory.getFieldTableModel(contentClass));
+          comboClass.setSelectedValue(contentClass);
+          table.setModel(modelManager.getFieldTableModel(contentClass));
           textId.setText(contentClass.getId().toString());
           textName.setText(contentClass.getName());
-          checkSystem.setSelected(contentClass.getModifiers().isSystem());
-          checkExtendable.setSelected(contentClass.getModifiers().isExtendable());
+          ClassModifiers modifiers = contentClass.getModifiers();
+          checkSystem.setSelected(modifiers.isSystem());
+          checkExtendable.setSelected(modifiers.isExtendable());
+          if (modifiers.isAbstract()) {
+            radioAbstract.setSelected(true);
+          } else if (modifiers.isFinal()) {
+            radioFinal.setSelected(true);
+          } else {
+            radioNormal.setSelected(true);
+          }
         }
       }
     });

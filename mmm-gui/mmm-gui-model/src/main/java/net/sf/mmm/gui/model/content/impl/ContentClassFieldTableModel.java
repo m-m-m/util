@@ -12,18 +12,18 @@ import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 import net.sf.mmm.util.event.EventListener;
 
 /**
- * This is an implementation of the {@link UITableModel} interface for the
- * {@link ContentField fields} of a {@link ContentClass}.
+ * This is an implementation of the
+ * {@link net.sf.mmm.ui.toolkit.api.model.UITableModel UITableModel} interface
+ * for the {@link ContentField fields} of a {@link ContentClass}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentClassTableModel extends AbstractUITableModel<Object> implements
+public class ContentClassFieldTableModel extends AbstractUITableModel<Object> implements
     EventListener<ContentModelEvent>, FieldTableModel {
 
   /** index of the "name" column */
@@ -71,10 +71,10 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
   /**
    * The constructor.
    * 
-   * @param contentClass
-   * @param modelService
+   * @param contentClass is the class for which the fields should be viewed.
+   * @param modelService is the service providing the content-model.
    */
-  public ContentClassTableModel(ContentClass contentClass, ContentModelService modelService) {
+  public ContentClassFieldTableModel(ContentClass contentClass, ContentModelService modelService) {
 
     super();
     this.cClass = contentClass;
@@ -122,6 +122,8 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
                 fireRowChangeEvent(Type.UPDATE, rowIndex);
               }
               break;
+            default :
+              // unknown event: ignore
           }
         }
       }
@@ -156,8 +158,9 @@ public class ContentClassTableModel extends AbstractUITableModel<Object> impleme
         return Boolean.valueOf(field.getModifiers().isReadOnly());
       case COLUMN_TRANSIENT:
         return Boolean.valueOf(field.getModifiers().isTransient());
+      default :
+        throw new ArrayIndexOutOfBoundsException("Illegal column-index: " + columnIndex);
     }
-    throw new ArrayIndexOutOfBoundsException("Illegal column-index: " + columnIndex);
   }
 
   /**

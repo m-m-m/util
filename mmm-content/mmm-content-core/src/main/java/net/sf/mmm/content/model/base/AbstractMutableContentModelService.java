@@ -67,6 +67,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     if (contentClass == null) {
       result = this.classResolver.resolveClass(name);
     } else {
+      //
       result = contentClass.getJavaClass();
     }
     assert (result != null);

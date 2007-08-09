@@ -214,8 +214,21 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
         Boolean.FALSE).booleanValue();
     ClassModifiers modifiers = ClassModifiersImpl.getInstance(isSystem, isFinal, isAbstract,
         isExtendable);
+    Class javaClass = null;
+    if (modifiers.isSystem()) {
+      //lookup!
+      // TODO: this is a hack!
+      try {
+        javaClass = Class.forName("net.sf.mmm.content.resource.api." + name);
+      } catch (ClassNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    } else if (superClass != null) {
+      //javaClass = superClass.getJavaClass();
+    }
     AbstractContentClass contentClass = getContentModelService().createOrUpdateClass(id, name,
-        superClass, modifiers, deleted, null);
+        superClass, modifiers, deleted, javaClass);
     // parse XML-child elements
     int xmlEvent = xmlReader.nextTag();
     while (XMLStreamConstants.START_ELEMENT == xmlEvent) {

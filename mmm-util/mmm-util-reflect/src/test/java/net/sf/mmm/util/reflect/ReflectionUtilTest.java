@@ -6,8 +6,13 @@ package net.sf.mmm.util.reflect;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Set;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.Result;
+
+import net.sf.mmm.util.reflect.type.TypeVariableImpl;
 
 import static org.junit.Assert.*;
 
@@ -37,7 +42,7 @@ public class ReflectionUtilTest {
   }
 
   private void checkTypeParser(String typeString) throws Exception {
-    
+
     Type type = ReflectionUtil.toType(typeString);
     String toString;
     if (type instanceof Class) {
@@ -47,17 +52,43 @@ public class ReflectionUtilTest {
     }
     assertEquals(typeString, toString);
   }
-  
+
   @Test
   public void testTypeParser() throws Exception {
-    
+
     checkTypeParser("java.lang.String");
     checkTypeParser("java.util.List<java.lang.String>");
     checkTypeParser("java.util.Map<java.lang.String, java.lang.String>");
     checkTypeParser("java.util.List<?>");
     checkTypeParser("java.util.Map<? super java.lang.String, ? extends java.lang.String>");
   }
-  
+
+  @Test
+  public void testFindClassNames() throws Exception {
+
+    // test directories
+    Set<String> classNameSet = ReflectionUtil.findClassNames(ReflectionUtil.class.getPackage()
+        .getName(), false);
+    assertTrue(classNameSet.contains(ReflectionUtil.class.getName()));
+    assertTrue(classNameSet.contains(ReflectionUtilTest.class.getName()));
+
+    // test sub-package functionality
+    assertFalse(classNameSet.contains(TypeVariableImpl.class.getName()));
+    classNameSet = ReflectionUtil.findClassNames(ReflectionUtil.class.getPackage()
+        .getName(), true);
+    assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));    
+    
+    // test JAR files
+    classNameSet = ReflectionUtil.findClassNames(Test.class.getPackage().getName(), false);
+    assertTrue(classNameSet.contains(Test.class.getName()));
+    assertTrue(classNameSet.contains(Assert.class.getName()));
+    
+    // test sub-package functionality
+    assertFalse(classNameSet.contains(Result.class.getName()));
+    classNameSet = ReflectionUtil.findClassNames(Test.class.getPackage().getName(), true);
+    assertTrue(classNameSet.contains(Result.class.getName()));    
+  }
+
   public static class TestClass {
 
     public String[] getStringArray() {

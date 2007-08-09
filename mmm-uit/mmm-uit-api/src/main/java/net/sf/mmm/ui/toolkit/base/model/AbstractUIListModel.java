@@ -9,6 +9,7 @@ import java.util.Vector;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.util.event.ChangeEvent.Type;
 
 /**
  * This is the abstract base implementation of the
@@ -67,13 +68,28 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   }
 
   /**
+   * This method creates an event for the given change and sends it to all
+   * registered listeners of this model.
+   * 
+   * @param type is the type change.
+   * @param startIndex is the index of the first item that has changed.
+   * @param endIndex is the index of the last item that has changed.
+   */
+  protected void fireChangeEvent(Type type, int startIndex, int endIndex) {
+
+    fireChangeEvent(new UIListModelEvent(type, startIndex, endIndex));
+  }
+
+  /**
    * This method is called by the <code>fireChangeEvent</code> method if a
    * listener caused an exception or error.
    * 
    * @param listener is the listener that threw the exception or error.
    * @param t is the exception or error.
    */
-  protected abstract void handleListenerException(UIListModelListener listener, Throwable t);
+  protected void handleListenerException(UIListModelListener listener, Throwable t) {
+    // TODO: log?
+  }
 
   /**
    * {@inheritDoc}
@@ -93,14 +109,6 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
   public String getElementAsString(int index) {
 
     return toString(getElement(index));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getIndexOf(E element) {
-
-    return -1;
   }
 
 }

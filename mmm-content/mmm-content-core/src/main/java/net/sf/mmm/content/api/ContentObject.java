@@ -9,7 +9,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.ContentId;
-import net.sf.mmm.content.value.api.MetaData;
+import net.sf.mmm.content.value.api.MutableMetaData;
 
 /**
  * This is the abstract interface for any content object. Such object is a
@@ -147,7 +147,7 @@ public abstract interface ContentObject extends Serializable {
    *        that {@link #METADATA_NAMESPACE_MMM mmm} and
    * @return the meta-data.
    */
-  MetaData getMetaData(String namespace);
+  MutableMetaData getMetaData(String namespace);
 
   /**
    * This method gets the value of the specified

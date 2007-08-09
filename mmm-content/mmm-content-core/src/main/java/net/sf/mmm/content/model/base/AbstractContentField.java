@@ -235,19 +235,4 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    StringBuffer result = new StringBuffer();
-    result.append("Field:");
-    result.append(getName());
-    result.append("[");
-    result.append(getModifiers());
-    result.append("]");
-    return result.toString();
-  }
-
 }

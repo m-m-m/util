@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.base.model;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRange;
 import net.sf.mmm.util.event.ChangeEvent.Type;
 
@@ -44,15 +43,6 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
     super();
     this.minimum = min;
     this.maximum = max;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void handleListenerException(UIListModelListener listener, Throwable t) {
-
-    t.printStackTrace();
   }
 
   /**
@@ -143,7 +133,6 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
-  @Override
   public int getIndexOf(Integer element) {
 
     if ((element.intValue() < this.minimum) || (element.intValue() > this.maximum)) {

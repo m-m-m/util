@@ -50,6 +50,8 @@ public class ClasspathResource extends AbstractResource {
   public ClasspathResource(String absolutePath) {
 
     super();
+    assert (absolutePath != null);
+    assert (!absolutePath.startsWith("/"));
     this.path = absolutePath;
     this.url = Thread.currentThread().getContextClassLoader().getResource(absolutePath);
   }
