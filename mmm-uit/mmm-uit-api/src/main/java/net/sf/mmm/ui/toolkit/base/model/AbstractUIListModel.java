@@ -88,7 +88,8 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
    * @param t is the exception or error.
    */
   protected void handleListenerException(UIListModelListener listener, Throwable t) {
-    // TODO: log?
+
+  // TODO: log?
   }
 
   /**
@@ -96,19 +97,28 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
    */
   public String toString(E element) {
 
-    if (element == null) {
-      return "";
-    } else {
-      return element.toString();
-    }
+    return element.toString();
   }
 
   /**
    * {@inheritDoc}
    */
+  public String getNullString() {
+  
+    return "";
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   public String getElementAsString(int index) {
 
-    return toString(getElement(index));
+    E element = getElement(index);
+    if (element == null) {
+      // actually elements should NOT be null...
+      return getNullString();
+    }
+    return toString(element);
   }
 
 }

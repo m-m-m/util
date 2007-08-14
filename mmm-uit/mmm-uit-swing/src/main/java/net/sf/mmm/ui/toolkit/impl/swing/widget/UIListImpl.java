@@ -199,7 +199,13 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
         boolean isSelected, boolean cellHasFocus) {
 
       super.getListCellRendererComponent(swingList, value, index, isSelected, cellHasFocus);
-      setText(UIListImpl.this.modelAdapter.getModel().toString((E) value));
+      String text;
+      if (value == null) {
+        text = UIListImpl.this.modelAdapter.getModel().getNullString();
+      } else {
+        text = UIListImpl.this.modelAdapter.getModel().toString((E) value);
+      }
+      setText(text);
       return this;
     }
   }

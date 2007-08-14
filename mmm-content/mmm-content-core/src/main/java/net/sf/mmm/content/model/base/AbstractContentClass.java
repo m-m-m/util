@@ -12,13 +12,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelException;
-import net.sf.mmm.content.security.api.PermissionDeniedException;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}
@@ -198,42 +196,6 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
       return false;
     } else {
       return this.superClass.isDeleted();
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected Object getFieldValue(ContentField field, String fieldName)
-      throws PermissionDeniedException, ContentException {
-
-    if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
-      return getModifiers();
-    } else if (fieldName.equals(FIELD_NAME_SUPER_CLASS)) {
-      return getSuperClass();
-    } else if (fieldName.equals(FIELD_NAME_SUB_CLASSES)) {
-      return getSubClasses();
-    } else if (fieldName.equals(FIELD_NAME_FIELDS)) {
-      return getFields();
-    } else if (fieldName.equals(FIELD_NAME_DECLARED_FIELDS)) {
-      return getDeclaredFields();
-    } else {
-      return super.getFieldValue(field, fieldName);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void setValue(ContentField field, String fieldName, Object value)
-      throws PermissionDeniedException, ContentException {
-
-    if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
-      // this.modifiers = (ClassModifiers) value;
-    } else {
-      super.setValue(field, fieldName, value);
     }
   }
 

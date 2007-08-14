@@ -7,7 +7,7 @@ package net.sf.mmm.util.filter;
  * This is the interface for a filter that {@link #accept(Object) decides} if a
  * given value is acceptable or should be filtered.
  * 
- * @param <V> is the templated type of the value.
+ * @param <V> is the generic type of the value to check.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -22,5 +22,17 @@ public interface Filter<V> {
    *         acceptable, <code>false</code> if it should be filtered.
    */
   boolean accept(V value);
+
+  /**
+   * A filter instance that {@link #accept(Object) accepts} every object. To be
+   * reusable it is NOT generic but may be casted.
+   */
+  Filter ACCEPT_ALL = new Filter() {
+
+    public boolean accept(Object value) {
+
+      return true;
+    }
+  };
 
 }

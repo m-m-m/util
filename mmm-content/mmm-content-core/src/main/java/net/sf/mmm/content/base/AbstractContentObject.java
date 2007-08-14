@@ -66,30 +66,8 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
     if (!field.getFieldClass().isAssignableFrom(type)) {
       throw new ContentCastException(field.getFieldClass(), type);
     }
-    return type.cast(getFieldValue(field, fieldName));
-  }
-
-  /**
-   * This method gets the value of the given <code>field</code>.
-   * 
-   * @see #getValue(String)
-   * 
-   * @param field is the reflecting field.
-   * @param fieldName is the name of the field.
-   * @return the value of the field or <code>null</code> if the field exists
-   *         but has no value.
-   * @throws ContentException if the operation fails.
-   */
-  protected Object getFieldValue(ContentField field, String fieldName) throws ContentException {
-
-    if (fieldName.equals(FIELD_NAME_ID)) {
-      return getId();
-    } else if (fieldName.equals(FIELD_NAME_CONTENT_CLASS)) {
-      return getContentClass();
-    } else if (fieldName.equals(FIELD_NAME_NAME)) {
-      return getName();
-    }
-    return null;
+    Object result = field.getAccessor().get(this);
+    return type.cast(result);
   }
 
   /**
@@ -235,30 +213,11 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
       throw new PermissionDeniedException("", "write " + field, "");
     }
     try {
-      setValue(field, fieldName, value);
+      field.getAccessor().set(this, value);
     } catch (ClassCastException e) {
       if ((value != null) && field.getFieldClass().isAssignableFrom(value.getClass())) {
         throw new ContentCastException(value.getClass(), field.getFieldClass());
       }
-      throw new IllegalStateException("Internal Error!");
-    }
-  }
-
-  /**
-   * This method sets the given <code>field</code> to the given
-   * <code>value</code>.
-   * 
-   * @param field is the reflecting field.
-   * @param fieldName is the name of the field.
-   * @param value is the new value to set.
-   * @throws ContentException if the operation failed.
-   */
-  protected void setValue(ContentField field, String fieldName, Object value)
-      throws ContentException {
-
-    if (fieldName.equals(FIELD_NAME_NAME)) {
-      setName((String) value);
-    } else {
       throw new IllegalStateException("Internal Error!");
     }
   }

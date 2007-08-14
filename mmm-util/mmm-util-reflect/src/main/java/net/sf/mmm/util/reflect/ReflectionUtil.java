@@ -18,6 +18,7 @@ import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.jar.JarFile;
 
 import net.sf.mmm.util.StringParser;
 import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.Filter;
 import net.sf.mmm.util.filter.ListCharFilter;
 import net.sf.mmm.util.reflect.type.GenericArrayTypeImpl;
 import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
@@ -196,7 +198,7 @@ public final class ReflectionUtil {
    */
   public static Type toType(String type) throws ClassNotFoundException, IllegalArgumentException {
 
-    return toType(type, ClassResolver.SIMPLE_CLASS_RESOLVER);
+    return toType(type, ClassResolver.CLASS_FOR_NAME_RESOLVER);
   }
 
   /**
@@ -341,6 +343,48 @@ public final class ReflectionUtil {
   }
 
   /**
+   * This method gets the according non-{@link Class#isPrimitive() primitive}
+   * type for the class given by <code>type</code>.<br>
+   * E.g.
+   * <code>{@link #getNonPrimitiveType(Class) getNonPrimitiveType}(int.class)</code>
+   * will return <code>Integer.class</code>.
+   * 
+   * @see Class#isPrimitive()
+   * 
+   * @param type is the (potentially) {@link Class#isPrimitive() primitive}
+   *        type.
+   * @return the according object-type for the given <code>type</code>. This
+   *         will be the given <code>type</code> itself if it is NOT
+   *         {@link Class#isPrimitive() primitive}.
+   */
+  public static Class<?> getNonPrimitiveType(Class<?> type) {
+
+    Class<?> result = type;
+    if (type.isPrimitive()) {
+      if (int.class == type) {
+        return Integer.class;
+      } else if (long.class == type) {
+        return Long.class;
+      } else if (double.class == type) {
+        return Double.class;
+      } else if (boolean.class == type) {
+        return Boolean.class;
+      } else if (float.class == type) {
+        return Float.class;
+      } else if (char.class == type) {
+        return Character.class;
+      } else if (byte.class == type) {
+        return Byte.class;
+      } else if (short.class == type) {
+        return Short.class;
+      } else {
+        throw new IllegalStateException("Class-loader isolation trap!");
+      }
+    }
+    return result;
+  }
+
+  /**
    * This method gets the {@link Field#get(java.lang.Object) value} of a
    * {@link Modifier#isStatic(int) static} {@link Field field}.
    * 
@@ -350,6 +394,12 @@ public final class ReflectionUtil {
    *        field.
    * @param fieldType is the type the requested field is assigned to. Therefore
    *        the field declaration (!) must be assignable to this type.
+   * @param exactTypeMatch - if <code>true</code>, the <code>fieldType</code>
+   *        must match exactly the type of the static field, else if
+   *        <code>false</code> the type of the field may be a sub-type of
+   *        <code>fieldType</code> or one of the types may be
+   *        {@link Class#isPrimitive() primitive} while the other is the
+   *        {@link #getNonPrimitiveType(Class) according} object-type.
    * @param mustBeFinal - if <code>true</code>, an
    *        {@link IllegalArgumentException} is thrown if the specified static
    *        field exists but is NOT {@link Modifier#isFinal(int) final},
@@ -364,8 +414,8 @@ public final class ReflectionUtil {
    */
   @SuppressWarnings("unchecked")
   public static <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
-      boolean mustBeFinal) throws NoSuchFieldException, IllegalAccessException,
-      IllegalArgumentException {
+      boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws NoSuchFieldException,
+      IllegalAccessException, IllegalArgumentException {
 
     Field field = type.getField(fieldName);
     int modifiers = field.getModifiers();
@@ -377,7 +427,22 @@ public final class ReflectionUtil {
       throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type
           + "') is not final!");
     }
-    if (!fieldType.isAssignableFrom(field.getType())) {
+    Class<?> actualType = field.getType();
+    boolean typeMismatch = false;
+    if (exactTypeMatch) {
+      typeMismatch = !actualType.equals(fieldType);
+    } else {
+      Class actualObjectType = getNonPrimitiveType(actualType);
+      Class expectedObjectType = getNonPrimitiveType(fieldType);
+      if (!expectedObjectType.isAssignableFrom(actualObjectType)) {
+        typeMismatch = true;
+      }
+    }
+    if ((!inherit) && (field.getDeclaringClass() != type)) {
+      // TODO: this sucks
+      throw new NoSuchFieldException(fieldName);
+    }
+    if (typeMismatch) {
       throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type
           + "') has type '" + field.getType() + "' but requested type was '" + fieldType + "'!");
     }
@@ -392,6 +457,12 @@ public final class ReflectionUtil {
    *        field.
    * @param fieldType is the type the requested field is assigned to. Therefore
    *        the field declaration (!) must be assignable to this type.
+   * @param exactTypeMatch - if <code>true</code>, the <code>fieldType</code>
+   *        must match exactly the type of the static field, else if
+   *        <code>false</code> the type of the field may be a sub-type of
+   *        <code>fieldType</code> or one of the types may be
+   *        {@link Class#isPrimitive() primitive} while the other is the
+   *        {@link #getNonPrimitiveType(Class) according} object-type.
    * @param mustBeFinal - if <code>true</code>, an
    *        {@link IllegalArgumentException} is thrown if the specified static
    *        field exists but is NOT {@link Modifier#isFinal(int) final},
@@ -402,10 +473,10 @@ public final class ReflectionUtil {
    *         has the wrong type.
    */
   public static <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType,
-      boolean mustBeFinal) throws IllegalArgumentException {
+      boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
 
     try {
-      return getStaticField(type, fieldName, fieldType, mustBeFinal);
+      return getStaticField(type, fieldName, fieldType, exactTypeMatch, mustBeFinal, inherit);
     } catch (NoSuchFieldException e) {
       return null;
     } catch (IllegalAccessException e) {
@@ -565,7 +636,6 @@ public final class ReflectionUtil {
     Enumeration<URL> urls = classLoader.getResources(path);
     StringBuilder qualifiedNameBuilder = new StringBuilder(packageName);
     qualifiedNameBuilder.append('.');
-    String packagePrefix = qualifiedNameBuilder.toString();
     int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
     while (urls.hasMoreElements()) {
       URL packageUrl = urls.nextElement();
@@ -630,4 +700,74 @@ public final class ReflectionUtil {
     }
     return classSet;
   }
+
+  /**
+   * This method loads the classes given as {@link Collection} of
+   * {@link Class#getName() fully qualified names} by
+   * <code>qualifiedClassNames</code> and returns them as {@link Set}.
+   * 
+   * @param qualifiedClassNames is a collection containing the
+   *        {@link Class#getName() qualified names} of the classes to load.
+   * @return a {@link Set} with all loaded classes.
+   * @throws ClassNotFoundException if one of the classes could NOT be loaded.
+   */
+  @SuppressWarnings("unchecked")
+  public static Set<Class> loadClasses(Collection<String> qualifiedClassNames)
+      throws ClassNotFoundException {
+
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
+        Filter.ACCEPT_ALL);
+  }
+
+  /**
+   * This method loads the classes given as {@link Collection} of
+   * {@link Class#getName() fully qualified names} by
+   * <code>qualifiedClassNames</code>. It returns a {@link Set} containing
+   * only those loaded classes that are {@link Filter#accept(Object) accepted}
+   * by the given <code>filter</code>.
+   * 
+   * @param qualifiedClassNames is a collection containing the
+   *        {@link Class#getName() qualified names} of the classes to load.
+   * @param filter is used to filter the loaded classes.
+   * @return a {@link Set} with all loaded classes that are
+   *         {@link Filter#accept(Object) accepted} by the given
+   *         <code>filter</code>.
+   * @throws ClassNotFoundException if one of the classes could NOT be loaded.
+   */
+  public static Set<Class> loadClasses(Collection<String> qualifiedClassNames, Filter<Class> filter)
+      throws ClassNotFoundException {
+
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
+  }
+
+  /**
+   * This method loads the classes given as {@link Collection} of names by
+   * <code>classNames</code> using the given <code>classResolver</code>. It
+   * returns a {@link Set} containing only those loaded classes that are
+   * {@link Filter#accept(Object) accepted} by the given <code>filter</code>.
+   * 
+   * @param classNames is a collection containing the names of the classes to
+   *        load. The class names should typically be the
+   *        {@link Class#getName() qualified names} of the classes to load. But
+   *        this may differ depending on the <code>classResolver</code>.
+   * @param classResolver is used to load/resolve the classes by their names.
+   * @param filter is used to filter the loaded classes.
+   * @return a {@link Set} with all loaded classes that are
+   *         {@link Filter#accept(Object) accepted} by the given
+   *         <code>filter</code>.
+   * @throws ClassNotFoundException if one of the classes could NOT be loaded.
+   */
+  public static Set<Class> loadClasses(Collection<String> classNames, ClassResolver classResolver,
+      Filter<Class> filter) throws ClassNotFoundException {
+
+    Set<Class> classesSet = new HashSet<Class>();
+    for (String className : classNames) {
+      Class clazz = classResolver.resolveClass(className);
+      if (filter.accept(clazz)) {
+        classesSet.add(clazz);
+      }
+    }
+    return classesSet;
+  }
+
 }

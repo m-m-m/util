@@ -59,6 +59,9 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
   public String toString() {
   
     String name = getName();
+    if (name == null) {
+      name = "-";
+    }
     SmartId id = getId();
     String idString;
     if (id == null) {

@@ -3,30 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.api;
 
-import java.io.Serializable;
-
 /**
- * This is the interface for a set of meta-data.<br>
- * Unfortunately the {@link java.util.Map} interface is so overloaded from the
- * collection API that we needed to define our own interface.
+ * This is the interface for a mutable set of {@link MetaData}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface MutableMetaData extends Serializable {
+public interface MutableMetaData extends MetaData {
 
   /** The name of this value type. */
   String VALUE_NAME = "MetaData";
-
-  /**
-   * This method gets the meta-data value for the given <code>key</code>.
-   * 
-   * @see java.util.Map#get(Object)
-   * 
-   * @param key is the key of the requested meta-data value.
-   * @return the meta-data value for the given <code>key</code> or
-   *         <code>null</code> if no meta-data is associated with this key.
-   */
-  Object getValue(String key);
 
   /**
    * This method sets the meta-data value for the given <code>key</code> to

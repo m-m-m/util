@@ -32,6 +32,9 @@ public class NlsBundleContentCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.model.api.ClassNotExistsException */
   public static final String ERR_NO_SUCH_CLASS_ID = "The content-class with ID \"{0}\" was NOT found!";
 
+  /** @see net.sf.mmm.content.model.base.ContentClassLoaderException */
+  public static final String ERR_LOAD_CLASS = "Failed to load class(es) (\"{0}\")!";
+
   /**
    * exception message if a class could NOT be created because the super-class
    * is NOT extendable.

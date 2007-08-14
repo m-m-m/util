@@ -3,22 +3,28 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
+import java.io.IOException;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.xml.stream.XMLStreamConstants;
+import javax.persistence.Entity;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ClassModifiers;
+import net.sf.mmm.content.model.api.ContentAccessor;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.value.base.SmartId;
+import net.sf.mmm.util.filter.ConjunctionFilter;
+import net.sf.mmm.util.filter.Filter;
+import net.sf.mmm.util.filter.ConjunctionFilter.Conjunction;
 import net.sf.mmm.util.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
@@ -26,6 +32,8 @@ import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.impl.MethodPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.filter.AnnotationFilter;
+import net.sf.mmm.util.reflect.filter.AssignableFromFilter;
 import net.sf.mmm.util.xml.StaxUtil;
 
 /**
@@ -37,11 +45,17 @@ import net.sf.mmm.util.xml.StaxUtil;
  */
 public class ContentClassLoaderNative extends ContentClassLoaderStAX {
 
-  /** */
+  /** The XML tag name defining the entities. */
   public static final String XML_TAG_CLASS_LIST = "Entities";
+
+  /** The XML attribute name for the package containing the entities. */
+  public static final String XML_ATR_ENTITIES_PACKAGE = "package";
 
   /** @see #loadClass(Class, AbstractContentClass) */
   private PojoDescriptorBuilder methodDescriptorBuilder;
+
+  /** A filter that only accepts types that are annotated as {@link Entity}. */
+  private final Filter<Class> entityFilter;
 
   /**
    * The constructor.
@@ -52,6 +66,7 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
 
     super(contentModelService);
     this.methodDescriptorBuilder = new MethodPojoDescriptorBuilder();
+    this.entityFilter = new AnnotationFilter(Entity.class);
   }
 
   /**
@@ -59,30 +74,25 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
    */
   @Override
   protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass)
-      throws XMLStreamException {
+      throws XMLStreamException, IOException {
 
     if (XML_TAG_CLASS_LIST.equals(xmlReader.getLocalName())) {
-      int xmlEvent = xmlReader.nextTag();
-      Set<Class<? extends ContentObject>> entityClasses = new HashSet<Class<? extends ContentObject>>();
-      while (XMLStreamConstants.START_ELEMENT == xmlEvent) {
-        String tagName = xmlReader.getLocalName();
-        if ("Entity".equals(tagName)) {
-          String className = xmlReader.getAttributeValue(null, "class");
-          if (className != null) {
-            try {
-              Class entityClass = Class.forName(className);
-              entityClasses.add(entityClass);
-            } catch (ClassNotFoundException e) {
-              e.printStackTrace();
-            }
-          }
-        } else {
-          parseEntitiesChildElement(xmlReader, superClass);
-        }
-        xmlEvent = xmlReader.nextTag();
+
+      String packageName = parseAttribute(xmlReader, XML_ATR_ENTITIES_PACKAGE, String.class);
+      try {
+        Set<String> classNames = ReflectionUtil.findClassNames(packageName, true);
+        Class superType = superClass.getJavaClass();
+        Filter<Class> typeFilter = new AssignableFromFilter(superType);
+        Filter<Class> filter = new ConjunctionFilter<Class>(Conjunction.AND, typeFilter,
+            this.entityFilter);
+        Set<Class> entityClasses = ReflectionUtil.loadClasses(classNames, filter);
+        // proceeded Entity tags
+        loadClasses(entityClasses, superClass);
+      } catch (IOException e) {
+        throw new ContentClassLoaderException(e, packageName);
+      } catch (ClassNotFoundException e) {
+        throw new ContentClassLoaderException(e, packageName);
       }
-      // proceeded Entity tags
-      loadClasses(entityClasses);
     } else {
       super.parseClassChildElement(xmlReader, superClass);
     }
@@ -113,7 +123,8 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
   protected String getClassName(Class<? extends ContentObject> type) {
 
     // TODO: check that field is NOT accidently inherited
-    String name = ReflectionUtil.getStaticFieldOrNull(type, "CLASS_NAME", String.class, true);
+    String name = ReflectionUtil.getStaticFieldOrNull(type, "CLASS_NAME", String.class, true, true,
+        false);
     if (name == null) {
       name = type.getSimpleName();
     }
@@ -130,7 +141,8 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
   protected SmartId getClassId(Class<? extends ContentObject> type) {
 
     // TODO: check that field is NOT accidently inherited
-    Number id = ReflectionUtil.getStaticFieldOrNull(type, "CLASS_ID", Number.class, true);
+    Number id = ReflectionUtil.getStaticFieldOrNull(type, "CLASS_ID", Number.class, false, true,
+        false);
     if (id == null) {
       return null;
     }
@@ -298,34 +310,24 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
   }
 
   /**
-   * This method creates the actual {@link ContentClass} instance choosing the
-   * implementation. It does NOT initialize the {@link ContentClass} (except
-   * maybe some hidden features that are implementation specific).
-   * 
-   * @param type is the type representing the entity.
-   * @return the created instance of the according {@link ContentClass}.
-   */
-  protected AbstractContentClass createClass(Class<? extends ContentObject> type) {
-
-    AbstractContentClass newClass = getContentModelService().newClass();
-    newClass.setJavaClass(type);
-    return newClass;
-  }
-
-  /**
-   * This method creates the actual {@link ContentField} instance choosing the
-   * implementation. It does NOT initialize the {@link ContentField} (except
-   * maybe some hidden features that are implementation specific).
+   * This method gets (creates) the {@link ContentField#getAccessor() accessor}
+   * for the field given by <code>methodPropertyDescriptor</code>.
    * 
    * @param methodPropertyDescriptor is the descriptor holding the accessor
    *        methods of the field.
-   * @return the created instance of the according {@link ContentField}.
+   * @return the field accessor.
    */
-  protected AbstractContentField createField(PojoPropertyDescriptor methodPropertyDescriptor) {
+  protected ContentAccessor getFieldAccessor(PojoPropertyDescriptor methodPropertyDescriptor) {
 
-    AbstractContentField newField = getContentModelService().newField();
-    // TODO: add descriptor
-    return newField;
+    Method getter = (Method) methodPropertyDescriptor.getAccessor(PojoPropertyAccessMode.READ)
+        .getAccessibleObject();
+    Method setter = null;
+    PojoPropertyAccessor writeAccessor = methodPropertyDescriptor
+        .getAccessor(PojoPropertyAccessMode.WRITE);
+    if (writeAccessor != null) {
+      setter = (Method) writeAccessor.getAccessibleObject();
+    }
+    return new MethodContentAccessor(getter, setter);
   }
 
   /**
@@ -334,66 +336,84 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
    * has NOT already be read.
    * 
    * @param typeSet is the {@link Set} containing all types for which the
-   *        content-class should be read via {@link #loadClasses(Set)}. Some of
-   *        them may have already been read.
+   *        content-class should be read via
+   *        {@link #loadClasses(Set, AbstractContentClass)}. Some of them may
+   *        have already been read.
    * @param type is the current type to read.
    * @return the {@link ContentClass} representing the entity reflected by the
    *         given <code>type</code>.
    */
-  protected AbstractContentClass loadClass(Set<Class<? extends ContentObject>> typeSet,
-      Class<? extends ContentObject> type) {
+  protected AbstractContentClass loadClass(Set<Class> typeSet, Class<? extends ContentObject> type,
+      AbstractContentClass superClass) {
 
-    // maybe we already created the content-class before...
-    SmartId classId = getClassId(type);
-    AbstractContentClass result = getContentModelService().getClass(classId);
-    if (result == null) {
-      // okay the regular case, we need to create the class...
-      // first we need to get or create the parent-class...
-      AbstractContentClass parent = null;
-      Class parentType = type.getSuperclass();
-      // our main loop ascends the super-classes of the type
-      do {
-        // TODO: currently interfaces are not supported as content-class
-        if (parentType == null) {
-          // TODO: if no base/root class is given we will end up here!
-          // we need to do an isAssignableFrom on ContentObject in main loop
-          throw new IllegalStateException("Illegal entity type: " + type.getName());
+    try {
+      // maybe we already created the content-class before...
+      SmartId classId = getClassId(type);
+      AbstractContentClass result = getContentModelService().getClass(classId);
+      if (result == null) {
+        // okay the regular case, we need to create the class...
+        // first we need to get or create the parent-class...
+        AbstractContentClass parent = null;
+        Class upperBound = superClass.getJavaClass();
+        // TODO: this is only a temporary HACK!!!
+        try {
+          upperBound = Class.forName("net.sf.mmm.content.resource.base.AbstractContentDocument");
+        } catch (ClassNotFoundException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
         }
-        // maybe we already have the parent in our map...
-        classId = getClassId(parentType);
-        if (classId != null) {
-          parent = getContentModelService().getClass(classId);
-          if (parent == null) {
-            // or maybe the parentType is also a content-class to create...
-            if (typeSet.contains(parentType)) {
-              parent = loadClass(typeSet, parentType);
-            }
-          } else if (parentType != parent.getJavaClass()) {
-            throw new DuplicateClassException(classId);
+        Class parentType = type.getSuperclass();
+        // our main loop ascends the super-classes of the type
+        do {
+          // TODO: currently interfaces are not supported as content-class
+          if (parentType == null) {
+            // TODO: if no base/root class is given we will end up here!
+            // we need to do an isAssignableFrom on ContentObject in main loop
+            throw new IllegalStateException("Illegal entity type: " + type.getName());
           }
-        }
-        parentType = parentType.getSuperclass();
-      } while (parent == null);
-      result = loadClass(type, parent);
-      getContentModelService().addClass(result);
-    } else if (result.getJavaClass() != type) {
-      throw new DuplicateClassException(classId);
+          if (parentType == upperBound) {
+            parent = superClass;
+          } else {
+            // maybe we already have the parent in our map...
+            classId = getClassId(parentType);
+            if (classId != null) {
+              parent = getContentModelService().getClass(classId);
+              if (parent == null) {
+                // or maybe the parentType is also a content-class to create...
+                if (typeSet.contains(parentType)) {
+                  parent = loadClass(typeSet, parentType, superClass);
+                }
+              } else if (parentType != parent.getJavaClass()) {
+                throw new DuplicateClassException(classId);
+              }
+            }
+            parentType = parentType.getSuperclass();
+          }
+        } while (parent == null);
+        result = loadClass(type, parent);
+        // getContentModelService().addClass(result);
+      } else if (result.getJavaClass() != type) {
+        throw new DuplicateClassException(classId);
+      }
+      return result;
+    } catch (ContentModelException e) {
+      throw new ContentModelException(e, "Failed to load class \"{0}\"!", type);
     }
-    return result;
   }
 
   /**
-   * {@inheritDoc}
+   * TODO:
    */
-  public void loadClasses(Set<Class<? extends ContentObject>> typeSet) {
+  public void loadClasses(Set<Class> typeSet, AbstractContentClass superClass) {
 
-    // Map<Class, ContentClass> classesMap = new HashMap<Class,
-    // ContentClass>(typeSet.size());
-    // if (superClass != null) {
-    // classesMap.put(superClass.getImplementation(), superClass);
-    // }
+    // pass 1: create class-hierarchy
     for (Class<? extends ContentObject> type : typeSet) {
-      loadClass(typeSet, type);
+      loadClass(typeSet, type, superClass);
+    }
+    // pass 2: create fields of classes along their hierarchy
+    // walk hierarchy down from superClass ignoring all classes not in typeSet
+    for (Class<? extends ContentObject> type : typeSet) {
+    // loadClassFields(typeSet, type, superClass);
     }
   }
 
@@ -406,26 +426,28 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
    *        of the {@link ContentClass} to read.
    * @return the according {@link ContentClass}.
    */
-  public AbstractContentClass loadClass(Class<? extends ContentObject> type,
+  protected AbstractContentClass loadClass(Class<? extends ContentObject> type,
       AbstractContentClass superClass) {
 
-    // TODO: first read all classes and build hierarchy and the read fields in
-    // second run!
-
-    AbstractContentClass contentClass = createClass(type);
-    contentClass.setSuperClass(superClass);
-    contentClass.setJavaClass(type);
-    contentClass.setName(getClassName(type));
-    contentClass.setDeleted(isClassDeleted(type));
-    ClassModifiers classModifiers = ClassModifiersImpl.getInstance(isClassSystem(type),
-        isClassFinal(type), isClassAbstract(type), isClassExtendable(type));
-    contentClass.setModifiers(classModifiers);
-    SmartId classId = getClassId(type);
-    if (classId == null) {
+    SmartId id = getClassId(type);
+    if (id == null) {
       // TODO:
       throw new IllegalArgumentException("Entity " + type.getName() + " does NOT define CLASS_ID!");
     }
-    contentClass.setId(classId);
+    String name = getClassName(type);
+    ClassModifiers modifiers = ClassModifiersImpl.getInstance(isClassSystem(type),
+        isClassFinal(type), isClassAbstract(type), isClassExtendable(type));
+    boolean deleted = isClassDeleted(type);
+    AbstractContentClass contentClass = getContentModelService().createOrUpdateClass(id, name,
+        superClass, modifiers, deleted, type);
+    return contentClass;
+  }
+
+  protected void loadClassFields(AbstractContentClass contentClass) {
+
+    Class<? extends ContentObject> type = contentClass.getJavaClass();
+    AbstractContentClass superClass = contentClass.getSuperClass();
+    // TODO: this has to be done in 2nd pass!
     PojoDescriptor<? extends ContentObject> methodPojoDescriptor = this.methodDescriptorBuilder
         .getDescriptor(type);
     for (PojoPropertyDescriptor methodPropertyDescriptor : methodPojoDescriptor
@@ -437,9 +459,10 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
         if (superClass != null) {
           superField = superClass.getField(accessor.getName());
         }
-        FieldModifiers fieldModifiers = FieldModifiersImpl.getInstance(classModifiers.isSystem(),
-            isFieldFinal(methodPropertyDescriptor), isFieldReadOnly(methodPropertyDescriptor),
-            isFieldStatic(methodPropertyDescriptor), isFieldTransient(methodPropertyDescriptor));
+        FieldModifiers fieldModifiers = FieldModifiersImpl.getInstance(contentClass.getModifiers()
+            .isSystem(), isFieldFinal(methodPropertyDescriptor),
+            isFieldReadOnly(methodPropertyDescriptor), isFieldStatic(methodPropertyDescriptor),
+            isFieldTransient(methodPropertyDescriptor));
         boolean isFieldDeleted = isFieldDeleted(methodPropertyDescriptor);
         Type fieldType = accessor.getPropertyType();
         boolean declareField = true;
@@ -451,18 +474,16 @@ public class ContentClassLoaderNative extends ContentClassLoaderStAX {
           }
         }
         if (declareField) {
-          AbstractContentField contentField = createField(methodPropertyDescriptor);
-          contentField.setName(accessor.getName());
-          contentField.setFieldTypeAndClass(fieldType);
-          contentField.setDeleted(isFieldDeleted);
-          contentField.setDeclaringClass(contentClass);
-          contentField.setModifiers(fieldModifiers);
           // TODO: How to get the ID of the field? Use annotation? Use counter
           // and persist the model?
+          SmartId fieldId = null;
+          fieldId = getContentModelService().getIdManager().createUniqueFieldId();
+          AbstractContentField contentField = getContentModelService().createOrUpdateField(fieldId,
+              accessor.getName(), contentClass, fieldModifiers, fieldType, null, isFieldDeleted);
+          contentField.setAccessor(getFieldAccessor(methodPropertyDescriptor));
         }
       }
     }
-    return contentClass;
   }
 
 }

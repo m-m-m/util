@@ -63,7 +63,8 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
       throws ValueException {
 
     String value = xmlReader.getAttributeValue(null, localAttributeName);
-    return ValueUtil.convertValue(localAttributeName, value, type);
+    String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
+    return ValueUtil.convertValue(valueSource, value, type);
   }
 
   /**
@@ -195,7 +196,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
   public AbstractContentClass loadClassRecursive(XMLStreamReader xmlReader,
-      AbstractContentClass superClass) throws ValueException, XMLStreamException {
+      AbstractContentClass superClass) throws ValueException, XMLStreamException, IOException {
 
     assert (xmlReader.isStartElement());
     assert (ContentClass.XML_TAG_CLASS.equals(xmlReader.getLocalName()));
@@ -216,7 +217,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
         isExtendable);
     Class javaClass = null;
     if (modifiers.isSystem()) {
-      //lookup!
+      // lookup!
       // TODO: this is a hack!
       try {
         javaClass = Class.forName("net.sf.mmm.content.resource.api." + name);
@@ -225,7 +226,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
         e.printStackTrace();
       }
     } else if (superClass != null) {
-      //javaClass = superClass.getJavaClass();
+      // javaClass = superClass.getJavaClass();
     }
     AbstractContentClass contentClass = getContentModelService().createOrUpdateClass(id, name,
         superClass, modifiers, deleted, javaClass);
@@ -261,7 +262,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
   protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass)
-      throws XMLStreamException {
+      throws XMLStreamException, IOException {
 
     StaxUtil.skipOpenElement(xmlReader);
   }
@@ -328,7 +329,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
   public AbstractContentClass loadModel(XMLStreamReader xmlReader) throws ValueException,
-      XMLStreamException {
+      XMLStreamException, IOException {
 
     // TODO: how should this work:
     // 1. load complete class tree without modifying the model

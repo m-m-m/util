@@ -182,7 +182,13 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
         boolean isSelected, boolean cellHasFocus) {
 
       super.getListCellRendererComponent(swingList, value, index, isSelected, cellHasFocus);
-      setText(UIComboBoxImpl.this.modelAdapter.getModel().toString((E) value));
+      String text;
+      if (value == null) {
+        text = UIComboBoxImpl.this.modelAdapter.getModel().getNullString();
+      } else {
+        text = UIComboBoxImpl.this.modelAdapter.getModel().toString((E) value);
+      }
+      setText(text);
       return this;
     }
   }

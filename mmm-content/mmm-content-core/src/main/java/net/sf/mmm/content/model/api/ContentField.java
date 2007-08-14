@@ -153,18 +153,13 @@ public interface ContentField extends ContentReflectionObject {
   ValueValidator getConstraint();
 
   /**
-   * This method dynamically determines the value of the field. It is only
-   * applicable for {@link FieldModifiersImpl#isTransient() transient} fields.
+   * This method gets the accessor used to read or write the field. According to
+   * the fields {@link #getModifiers() modifiers} the field may be
+   * {@link FieldModifiers#isReadOnly() read-only}. Then the write access will
+   * NOT be allowed and therefore fail.
    * 
-   * @param object is the content-object for that the value of the current
-   *        transient field should be calculated.
-   * @return the calculated value of the current transient field for the given
-   *         content-object. It will be <code>null</code> if the field is not
-   *         transient.
-   * @throws CalculationException if the calculation fails.
-   * @throws PermissionDeniedException if the calculation performed an operation
-   *         you (the current user) is not permitted.
+   * @return the accessor.
    */
-  // Object calculate(ContentObject object) throws CalculationException,
-  // PermissionDeniedException;
+  ContentAccessor getAccessor();
+
 }

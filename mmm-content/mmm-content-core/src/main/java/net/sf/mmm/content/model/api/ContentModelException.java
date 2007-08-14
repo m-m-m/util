@@ -6,7 +6,8 @@ package net.sf.mmm.content.model.api;
 import net.sf.mmm.content.api.ContentException;
 
 /**
- * This exception is thrown if something went wrong with the content model.
+ * This exception is thrown if something went wrong with the
+ * {@link ContentModelService content-model}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

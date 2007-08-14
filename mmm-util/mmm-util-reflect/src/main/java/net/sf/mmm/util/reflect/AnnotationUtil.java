@@ -5,7 +5,6 @@ package net.sf.mmm.util.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -17,7 +16,7 @@ import java.lang.reflect.Method;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AnnotationUtil {
+public final class AnnotationUtil {
 
   /** an empty element-type array */
   public static final ElementType[] NO_TARGET = new ElementType[0];
@@ -79,28 +78,29 @@ public class AnnotationUtil {
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of
    * the type given by <code>annotation</code> in the class
-   * {@link Class#getSuperclass() hierarchie} of the given
+   * {@link Class#getSuperclass() hierarchy} of the given
    * <code>annotatedClass</code>.<br>
-   * This method is only usefull if the given <code>annotation</code> is a
+   * <b>INFORMATION:</b><br>
+   * This method is only useful if the given <code>annotation</code> is a
    * {@link #isRuntimeAnnotation(Class) runtime annotation} that is
    * {@link #isAnnotationForType(Class, ElementType) applicable} for
    * {@link ElementType#TYPE classes}. If the <code>annotation</code> is
-   * {@link Inherited inherited} you can directly use
-   * {@link Class#getAnnotation(Class)} instead.
+   * {@link java.lang.annotation.Inherited inherited} you may want to directly
+   * use {@link Class#getAnnotation(Class)} instead.
    * 
    * @see #getTypeAnnotation(Class, Class)
    * 
    * @param <A> is the type of the requested annotation.
    * @param annotatedClass is the class potentially annotated with the given
-   *        <code>annotation</code>. This sould NOT be an
+   *        <code>annotation</code>. This should NOT be an
    *        {@link Class#isInterface() interface},
    *        {@link Class#isPrimitive() primitive},
    *        {@link Class#isArray() array}, {@link Class#isEnum() enum}, or
    *        {@link Class#isAnnotation() annotation}.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if neigther the
+   * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedClass</code> nor one of its
-   *         {@link Class#getSuperclass() superclasses} are
+   *         {@link Class#getSuperclass() super-classes} are
    *         {@link Class#getAnnotation(Class) annotated} with the given
    *         <code>annotation</code>.
    * @throws IllegalArgumentException if the given annotation is no
@@ -109,7 +109,7 @@ public class AnnotationUtil {
    *         {@link ElementType#TYPE classes}.
    */
   public static <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass,
-      Class<A> annotation) {
+      Class<A> annotation) throws IllegalArgumentException {
 
     if (!isRuntimeAnnotation(annotation)) {
       throw new IllegalArgumentException("Given annotation (" + annotation
@@ -134,21 +134,21 @@ public class AnnotationUtil {
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of
    * the type given by <code>annotation</code> in the
-   * {@link Class#getInterfaces() hierarchie} of the given
+   * {@link Class#getInterfaces() hierarchy} of the given
    * <code>annotatedInterface</code>.<br>
-   * This method is only usefull if the given <code>annotation</code> is a
+   * This method is only useful if the given <code>annotation</code> is a
    * {@link #isRuntimeAnnotation(Class) runtime annotation} that is
    * {@link #isAnnotationForType(Class, ElementType) applicable} for
    * {@link ElementType#TYPE classes}.
    * 
    * @param <A> is the type of the requested annotation.
    * @param annotatedType is the type potentially implementing an interface
-   *        annotated with the given <code>annotation</code>. This sould NOT
+   *        annotated with the given <code>annotation</code>. This should NOT
    *        be an {@link Class#isPrimitive() primitive},
    *        {@link Class#isArray() array}, {@link Class#isEnum() enum}, or
    *        {@link Class#isAnnotation() annotation}.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if neigther the
+   * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedInterface</code> nor one of its
    *         {@link Class#getInterfaces() super-interfaces} are
    *         {@link Class#getAnnotation(Class) annotated} with the given
@@ -177,20 +177,20 @@ public class AnnotationUtil {
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of
    * the type given by <code>annotation</code> in the declaration of the given
    * <code>annotatedType</code>.<br>
-   * This method is only usefull if the given <code>annotation</code> is a
+   * This method is only useful if the given <code>annotation</code> is a
    * {@link RetentionPolicy#RUNTIME runtime}.
    * 
    * @param <A> is the type of the requested annotation.
    * @param annotatedType is the class or interface potentially annotated with
-   *        the given <code>annotation</code>. This sould NOT be an
+   *        the given <code>annotation</code>. This should NOT be an
    *        {@link Class#isPrimitive() primitive},
    *        {@link Class#isArray() array}, {@link Class#isEnum() enum}, or
    *        {@link Class#isAnnotation() annotation}.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if neigther the
+   * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedType</code> nor one of its
-   *         {@link Class#getSuperclass() superclasses}, or any implemented
-   *         {@link Class#getInterfaces() interfaces} (no matter if impleneted
+   *         {@link Class#getSuperclass() super-classes}, or any implemented
+   *         {@link Class#getInterfaces() interfaces} (no matter if implemented
    *         directly or indirectly) are
    *         {@link Class#getAnnotation(Class) annotated} with the given
    *         <code>annotation</code>.
@@ -212,16 +212,16 @@ public class AnnotationUtil {
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of
    * the type given by <code>annotation</code> in the
-   * {@link ReflectionUtil#getParentMethod(Method) hierarchie} of the given
+   * {@link ReflectionUtil#getParentMethod(Method) hierarchy} of the given
    * {@link Method method}.<br>
-   * This method is only usefull if the given <code>annotation</code> is a
+   * This method is only useful if the given <code>annotation</code> is a
    * {@link RetentionPolicy#RUNTIME runtime} annotation.
    * 
    * @param <A> is the type of the requested annotation.
    * @param annotatedMethod is the method potentially annotated with the given
    *        <code>annotation</code>.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if neigther the
+   * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedMethod</code> nor one of its
    *         {@link ReflectionUtil#getParentMethod(Method) parent methods} are
    *         {@link Method#getAnnotation(Class) annotated} with the given

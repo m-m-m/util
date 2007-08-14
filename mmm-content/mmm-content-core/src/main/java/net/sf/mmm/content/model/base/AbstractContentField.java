@@ -5,11 +5,10 @@ package net.sf.mmm.content.model.base;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.content.api.ContentException;
+import net.sf.mmm.content.model.api.ContentAccessor;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
-import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
@@ -42,6 +41,9 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
 
   /** @see #getConstraint() */
   private ValueValidator constraint;
+  
+  /** @see #getAccessor() */
+  private ContentAccessor accessor;
 
   /**
    * The constructor.
@@ -202,37 +204,17 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  @Override
-  protected Object getFieldValue(ContentField field, String fieldName)
-      throws PermissionDeniedException, ContentException {
-
-    if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
-      return getModifiers();
-    } else if (fieldName.equals(FIELD_NAME_FIELD_CLASS)) {
-      return getFieldClass();
-    } else if (fieldName.equals(FIELD_NAME_FIELD_TYPE)) {
-      return getFieldType();
-    } else if (fieldName.equals(FIELD_NAME_DECLARING_CLASS)) {
-      return getDeclaringClass();
-    } else if (fieldName.equals(FIELD_NAME_INITIALLY_DEFINING_CLASS)) {
-      return getInitiallyDefiningClass();
-    } else {
-      return super.getFieldValue(field, fieldName);
-    }
+  public ContentAccessor getAccessor() {
+  
+    return this.accessor;
   }
-
+  
   /**
-   * {@inheritDoc}
+   * @param accessor the accessor to set
    */
-  @Override
-  protected void setValue(ContentField field, String fieldName, Object value)
-      throws PermissionDeniedException, ContentException {
+  protected void setAccessor(ContentAccessor accessor) {
 
-    if (fieldName.equals(FIELD_NAME_MODIFIERS)) {
-      this.modifiers = (FieldModifiers) value;
-    } else {
-      super.setValue(field, fieldName, value);
-    }
+    this.accessor = accessor;
   }
-
+  
 }

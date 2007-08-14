@@ -67,16 +67,31 @@ public interface UIListModel<E> {
 
   /**
    * This method gets the string representation of the given
-   * <code>element</code>. The given <code>element</code> may be
-   * <code>null</code>. In this case the empty string should be returned. If
-   * the <code>element</code> is NOT <code>null</code>, this method should
-   * return {@link Object#toString()} by default. In specific situations an
-   * individual string representation can be implemented here.
+   * <code>element</code>. The default implementation of this method should
+   * return <code>element.{@link #toString()}</code> by default. In specific
+   * situations an individual string representation can be implemented here.
    * 
-   * @param element is the element to convert. May be <code>null</code>.
+   * @see #getNullString()
+   * 
+   * @param element is the element to convert.
    * @return the string representation of the given <code>element</code>.
    */
   String toString(E element);
+
+  /**
+   * This method gets the string representation of the <code>null</code>
+   * selection. This is used e.g. if the model is assigned to a a combo-box and
+   * that combo-box is rendered with no selection.<br>
+   * The <code>{@link #toString(Object)}</code> method is NOT used with
+   * <code>null</code> as argument to prevent {@link NullPointerException}s.
+   * The default implementation of this method will return the empty string what
+   * should suite in most situations. You may individually implement this method
+   * anyways (e.g. returning "-" or "*** please choose ***") but keep in mind
+   * that this option may NOT be supported on all platforms.
+   * 
+   * @return the display string for <code>null</code> (no selection).
+   */
+  String getNullString();
 
   /**
    * This method gets the (first) index of the given element or <code>-1</code>
@@ -108,9 +123,12 @@ public interface UIListModel<E> {
    * <code>element</code> or <code>-1</code> if NO such element exists.<br>
    * If a value other than <code>-1</code> is returned, the following equation
    * must be <code>true</code>:<br>
-   * 
-   * <pre>element.{@link Object#equals(java.lang.Object) equals}(model.{@link #toString(Object) toString}(model.{@link #getElement(int) getElement}(model.{@link #getIndexOfString(String) getIndexOfString}(element))))</pre>
-   * 
+   * <p>
+   * <code>element.{@link Object#equals(java.lang.Object) equals}(
+   * model.{@link #toString(Object) toString}(
+   * model.{@link #getElement(int) getElement}(
+   * model.{@link #getIndexOfString(String) getIndexOfString}(element))))</code>
+   * <p>
    * This method is only required by
    * {@link net.sf.mmm.ui.toolkit.api.widget.UISpinBox} and
    * {@link net.sf.mmm.ui.toolkit.api.widget.UISlideBar} - if used in other
