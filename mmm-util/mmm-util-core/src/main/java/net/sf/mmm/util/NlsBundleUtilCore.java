@@ -10,7 +10,7 @@ import net.sf.mmm.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NlsBundleUtilMisc extends AbstractResourceBundle {
+public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.value.api.WrongValueTypeException */
   public static final String ERR_VALUE_WRONG_TYPE = "The value \"{0}\" with the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";

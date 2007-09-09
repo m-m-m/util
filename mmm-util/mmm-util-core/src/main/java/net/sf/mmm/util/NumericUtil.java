@@ -9,7 +9,7 @@ package net.sf.mmm.util;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NumericUtil {
+public final class NumericUtil {
 
   /**
    * The constructor.

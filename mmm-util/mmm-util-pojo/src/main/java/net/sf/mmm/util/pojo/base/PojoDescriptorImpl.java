@@ -50,8 +50,15 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
     while (accessorIterator.hasNext()) {
       AbstractPojoPropertyAccessor accessor = accessorIterator.next();
       PojoPropertyDescriptorImpl descriptor = getOrCreateProperty(accessor.getName());
-      if (descriptor.getAccessor(accessor.getAccessMode()) == null) {
+      AbstractPojoPropertyAccessor duplicate = descriptor.getAccessor(accessor.getAccessMode()); 
+      if (duplicate == null) {
         descriptor.setAccessor(accessor);
+      } else {
+        // this is a workaround for java bug #
+        if (duplicate.getPropertyClass().isAssignableFrom(accessor.getPropertyClass())) {
+          //System.out.println("Replacing accessor " + duplicate + " by " + accessor);
+          descriptor.setAccessor(accessor);          
+        }
       }
     }
   }

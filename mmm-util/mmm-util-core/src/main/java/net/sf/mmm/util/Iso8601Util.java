@@ -171,7 +171,7 @@ public final class Iso8601Util {
    */
   public static String formatDateTime(Date date) {
 
-    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(UTC_ID));
+    Calendar calendar = Calendar.getInstance(TZ_UTC);
     calendar.setTime(date);
     // "yyyy-MM-ddTHH:mm:ssZ".length() == 20
     StringBuffer buffer = new StringBuffer(20);

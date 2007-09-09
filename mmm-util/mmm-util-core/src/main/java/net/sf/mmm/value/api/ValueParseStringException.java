@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.util.NlsBundleUtilMisc;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * This exception is thrown if the parsing of a value as string fails.
@@ -24,7 +24,7 @@ public class ValueParseStringException extends ValueParseException {
    */
   public ValueParseStringException(String stringToParse, Class valueType, String valueName) {
 
-    super(NlsBundleUtilMisc.ERR_PARSE_STRING, stringToParse, valueType, valueName);
+    super(NlsBundleUtilCore.ERR_PARSE_STRING, stringToParse, valueType, valueName);
   }
 
   /**
@@ -38,7 +38,7 @@ public class ValueParseStringException extends ValueParseException {
   public ValueParseStringException(String stringToParse, Class valueType, String valueName,
       Throwable nested) {
 
-    super(nested, NlsBundleUtilMisc.ERR_PARSE_STRING, stringToParse, valueType, valueName);
+    super(nested, NlsBundleUtilCore.ERR_PARSE_STRING, stringToParse, valueType, valueName);
   }
 
 }

@@ -12,6 +12,11 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.w3c.dom.Node;
+
+import net.sf.mmm.util.value.ValueUtil;
+import net.sf.mmm.value.api.ValueException;
+
 /**
  * This utility class contains methods that help to work with the StAX API (JSR
  * 173).
@@ -55,6 +60,67 @@ public final class StaxUtil {
   public static XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
 
     return OUTPUT_FACTORY.createXMLStreamWriter(writer);
+  }
+
+  /**
+   * This method parses the attribute with the given
+   * <code>localAttributeName</code> from the given <code>xmlReader</code>
+   * as given by <code>type</code>.
+   * 
+   * @param <V> is the generic for the <code>type</code>.
+   * @param xmlReader is where to read the XML from.
+   * @param localAttributeName is the local name of the requested attribute.
+   * @param type is the type the requested attribute should be converted to.
+   * @return the requested attribute as the given <code>type</code>.
+   * @throws ValueException if the attribute is NOT defined or its value can NOT
+   *         be converted to <code>type</code>.
+   */
+  public static <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
+      String localAttributeName, Class<V> type) throws ValueException {
+
+    String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
+    String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
+    return ValueUtil.convertValue(valueSource, value, type);
+  }
+
+  /**
+   * This method parses the attribute with the given
+   * <code>localAttributeName</code> from the given <code>xmlReader</code>
+   * as given by <code>type</code>.
+   * 
+   * @param <V> is the generic for the <code>type</code>.
+   * @param xmlReader is where to read the XML from.
+   * @param localAttributeName is the local name of the requested attribute.
+   * @param type is the type the requested attribute should be converted to.
+   * @param defaultValue is the default value returned if the requested
+   *        attribute is NOT defined. It may be <code>null</code>.
+   * @return the requested attribute as the given <code>type</code>.
+   * @throws ValueException if the attribute value can NOT be converted to
+   *         <code>type</code>.
+   */
+  public static <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
+      String localAttributeName, Class<V> type, V defaultValue) throws ValueException {
+
+    String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
+    return ValueUtil.convertValue(localAttributeName, value, type, defaultValue);
+  }
+
+  public static String readText(XMLStreamReader xmlReader) throws XMLStreamException {
+
+    int eventType = xmlReader.getEventType();
+    if (eventType == XMLStreamConstants.START_ELEMENT) {
+      eventType = xmlReader.next();
+    }
+    while (eventType == XMLStreamConstants.ATTRIBUTE) {
+      eventType = xmlReader.next();      
+    }
+    if (eventType == XMLStreamConstants.END_ELEMENT) {
+      return "";
+    }
+    if ((eventType == XMLStreamConstants.CHARACTERS) || (eventType == XMLStreamConstants.CDATA)) {
+      return xmlReader.getText();
+    }
+    throw new IllegalStateException("Not implemented!");
   }
 
   /**
@@ -145,4 +211,16 @@ public final class StaxUtil {
     }
     return "UNKNOWN_EVENT_TYPE (" + String.valueOf(eventType) + ")";
   }
+
+  public static void writeToDom(XMLStreamReader xmlReader, Node node) throws XMLStreamException {
+
+    int nodeType = node.getNodeType();
+    int eventType = xmlReader.getEventType();
+
+  }
+
+  public static void readFromDom(Node node, XMLStreamWriter xmlWriter) throws XMLStreamException {
+
+  }
+
 }

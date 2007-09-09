@@ -404,6 +404,11 @@ public final class ReflectionUtil {
    *        {@link IllegalArgumentException} is thrown if the specified static
    *        field exists but is NOT {@link Modifier#isFinal(int) final},
    *        <code>false</code> otherwise.
+   * @param inherit if <code>true</code> the field may be inherited from a
+   *        {@link Class#getSuperclass() super-class} or
+   *        {@link Class#getInterfaces() super-interface} of <code>type</code>,
+   *        else if <code>false</code> the field is only accepted if it is
+   *        declared in <code>type</code>.
    * @return the value of the field with the given type.
    * @throws NoSuchFieldException if the given <code>type</code> has no field
    *         with the given <code>fieldName</code>.
@@ -617,7 +622,7 @@ public final class ReflectionUtil {
    * the given <code>packageName</code>.<br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath
-   * multiple directories,JAR, and WAR files may need to scanned.
+   * multiple directories,JAR-, and WAR-files may need to be scanned.
    * 
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
@@ -630,6 +635,26 @@ public final class ReflectionUtil {
       throws IOException {
 
     Set<String> classSet = new HashSet<String>();
+    findClassNames(packageName, includeSubPackages, classSet);
+    return classSet;
+  }
+
+  /**
+   * This method finds all classes that are located in the package identified by
+   * the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories,JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan.
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param classSet is where to add the classes.
+   * @throws IOException if the operation failed with an I/O error.
+   */
+  public static void findClassNames(String packageName, boolean includeSubPackages,
+      Set<String> classSet) throws IOException {
+
     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
     String path = packageName.replace('.', '/');
     String pathWithPrefix = path + '/';
@@ -698,7 +723,6 @@ public final class ReflectionUtil {
         // TODO: unknown protocol - log this?
       }
     }
-    return classSet;
   }
 
   /**

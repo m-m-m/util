@@ -102,4 +102,13 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+  
+    return "Descriptor for property " + this.name;
+  }
+  
 }

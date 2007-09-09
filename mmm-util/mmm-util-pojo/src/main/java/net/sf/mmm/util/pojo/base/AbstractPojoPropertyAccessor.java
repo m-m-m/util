@@ -113,4 +113,13 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
     return this.componentType;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return this.mode + "-Accessor of property '" + this.name + "' with type " + this.clazz;
+  }
+
 }

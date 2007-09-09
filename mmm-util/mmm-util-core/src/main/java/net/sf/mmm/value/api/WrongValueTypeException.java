@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
-import net.sf.mmm.util.NlsBundleUtilMisc;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * This exception is thrown if a value has the wrong type (a different value
@@ -25,7 +25,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, Class<?> expectedType, Throwable nested) {
 
-    super(nested, NlsBundleUtilMisc.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value),
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value),
         expectedType);
   }
 
@@ -37,7 +37,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, Class<?> expectedType) {
 
-    super(NlsBundleUtilMisc.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value),
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value),
         expectedType);
   }
 
@@ -53,7 +53,7 @@ public class WrongValueTypeException extends ValueException {
   public WrongValueTypeException(Object value, String valueSource, Class<?> expectedType,
       Throwable nested) {
 
-    super(nested, NlsBundleUtilMisc.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
         expectedType, valueSource);
   }
 
@@ -67,7 +67,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, String valueSource, Class<?> expectedType) {
 
-    super(NlsBundleUtilMisc.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
         expectedType, valueSource);
   }
 
