@@ -3,8 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
+import net.sf.mmm.content.base.ClassAnnotation;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.base.AbstractContentClass;
+import net.sf.mmm.content.value.base.SmartId;
 
 /**
  * This is the implementation of the
@@ -12,6 +14,7 @@ import net.sf.mmm.content.model.base.AbstractContentClass;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ClassAnnotation(id = ContentClass.CLASS_ID, name = ContentClass.CLASS_NAME)
 public final class ContentClassImpl extends AbstractContentClass {
 
   /** UID for serialization. */
@@ -26,6 +29,16 @@ public final class ContentClassImpl extends AbstractContentClass {
   public ContentClassImpl() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param id is the {@link #getId() id}.
+   */
+  public ContentClassImpl(SmartId id) {
+
+    super(id);
   }
 
   /**

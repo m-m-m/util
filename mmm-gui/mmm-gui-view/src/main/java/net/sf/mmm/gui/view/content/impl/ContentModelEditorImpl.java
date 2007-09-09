@@ -137,7 +137,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
 
     // field table
     this.fieldTableModel = this.fieldTableManager.getFieldTableModel(this.modelService
-        .getRootClass());
+        .getRootContentClass());
     final UITable<Object> table = uiFactory.createTable(false, this.fieldTableModel);
     table.addActionListener(new UIActionListener() {
 
@@ -242,7 +242,7 @@ public class ContentModelEditorImpl implements ContentModelEditorView {
           if (contentClass != null) {
             String name = classNameText.getText();
             try {
-              ContentModelEditorImpl.this.modelService.createClass(contentClass, name,
+              ContentModelEditorImpl.this.modelService.createContentClass(contentClass, name,
                   ClassModifiersImpl.NORMAL);
             } catch (ContentModelException e) {
               classTree.getParentWindow().showMessage(e.getMessage(), "Error", MessageType.ERROR);

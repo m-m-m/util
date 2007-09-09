@@ -8,7 +8,7 @@ import net.sf.mmm.value.NlsBundleValueMain;
 /**
  * This exception is thrown if the parsing of a value as string fails.
  * 
- * @see net.sf.mmm.value.api.ValueManager#parse(String)
+ * @see net.sf.mmm.value.api.ValueManager#fromString(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -71,7 +71,7 @@ public class ValueParseStringException extends ValueParseException {
 
   /**
    * This method gets the string that could not be
-   * {@link ValueManager#parse(String) parsed} and is the reason of this
+   * {@link ValueManager#fromString(String) parsed} and is the reason of this
    * exception.
    * 
    * @return the malformed value string.

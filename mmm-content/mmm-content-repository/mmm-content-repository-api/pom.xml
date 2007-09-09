@@ -17,7 +17,7 @@
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-content-resource</artifactId>
+      <artifactId>mmm-content-core</artifactId>
       <version>0.9.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

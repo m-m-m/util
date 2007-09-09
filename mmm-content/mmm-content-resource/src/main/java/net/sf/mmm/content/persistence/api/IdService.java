@@ -34,7 +34,7 @@ public interface IdService {
 
   /**
    * This method gets the {@link ContentId ID} of the
-   * {@link net.sf.mmm.content.model.api.ContentModelService#getRootClass() root-class}.
+   * {@link net.sf.mmm.content.model.api.ContentModelService#getRootContentClass() root-class}.
    * 
    * @return the ID of the root-class.
    */

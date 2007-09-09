@@ -4,9 +4,7 @@
 package net.sf.mmm.gui.view.content.impl;
 
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.model.impl.AdvancedDummyClassResolver;
-import net.sf.mmm.content.model.impl.BasicContentModelService;
-import net.sf.mmm.content.model.impl.DummyClassResolver;
+import net.sf.mmm.content.model.impl.CoreContentModelService;
 import net.sf.mmm.gui.model.content.impl.ContentReflectionModelManagerImpl;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
@@ -33,10 +31,8 @@ public class ContentModelEditorImplDemo {
 
     // static initialization
     UIFactory uiFactory = new UIFactorySwing();
-    BasicContentModelService modelService = new BasicContentModelService();
-    DummyClassResolver resolver = new AdvancedDummyClassResolver();
-    resolver.initialize();
-    modelService.setClassResolver(resolver);
+    CoreContentModelService modelService = new CoreContentModelService();
+    //modelService.setClassResolver(resolver);
     modelService.initialize();
     
 

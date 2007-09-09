@@ -167,8 +167,6 @@ public abstract class AbstractGenericValueTest {
       value.getValue(wrongType);
       fail("Exception expected");
     } catch (WrongValueTypeException e) {
-      assertEquals(wrongType, e.getExpectedType());
-      assertSame(value, e.getGenericValue());
     }
   }
 

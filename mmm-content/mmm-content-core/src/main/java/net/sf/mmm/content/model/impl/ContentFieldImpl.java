@@ -5,8 +5,11 @@ package net.sf.mmm.content.model.impl;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.content.base.ClassAnnotation;
 import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.base.AbstractContentField;
+import net.sf.mmm.content.value.base.SmartId;
 
 /**
  * This is the implementation of the
@@ -14,6 +17,7 @@ import net.sf.mmm.content.model.base.AbstractContentField;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ClassAnnotation(id = ContentField.CLASS_ID, name = ContentField.CLASS_NAME)
 public final class ContentFieldImpl extends AbstractContentField {
 
   /** UID for serialization. */
@@ -28,6 +32,16 @@ public final class ContentFieldImpl extends AbstractContentField {
   public ContentFieldImpl() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param id is the {@link #getId() id}.
+   */
+  public ContentFieldImpl(SmartId id) {
+
+    super(id);
   }
 
   /**

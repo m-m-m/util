@@ -7,8 +7,6 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
-import org.w3c.dom.Element;
-
 /**
  * This is the interface for the component that manages the values.
  * 
@@ -18,13 +16,15 @@ import org.w3c.dom.Element;
 public interface ValueService {
 
   /**
-   * This method parses an xml element that represents a value.
+   * This method gets a generic manager that is capable to (de-)serialize all
+   * value-types {@link #getManager(Class) available} in this service.<br>
+   * <b>ATTENTION:</b><br>
+   * The method {@link ValueManager#fromString(String)} of the returned manager
+   * will NOT be efficient.
    * 
-   * @param xmlElement is the value encoded as XML element.
-   * @return the value represented by the xml element.
-   * @throws ValueException if the given xml element is no legal value.
+   * @return the generic XML serializer.
    */
-  Object xml2value(Element xmlElement) throws ValueException;
+  ValueManager<Object> getGenericManager();
 
   /**
    * This method gets the {@link ValueManager value manager} for the given

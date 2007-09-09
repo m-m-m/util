@@ -4,6 +4,7 @@
 package net.sf.mmm.content.model.base;
 
 import net.sf.mmm.content.NlsBundleContentCore;
+import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.value.api.ContentId;
 
@@ -39,6 +40,32 @@ public class DuplicateClassException extends ContentModelException {
   public DuplicateClassException(ContentId id) {
 
     super(NlsBundleContentCore.ERR_DUPLICATE_CLASS_ID, id);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param contentClass is the original content-class.
+   * @param duplicateClass is the new content-class that is a duplicate.
+   */
+  public DuplicateClassException(ContentClass contentClass, ContentClass duplicateClass) {
+
+    super(NlsBundleContentCore.ERR_DUPLICATE_CLASS, contentClass, duplicateClass);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param contentClass is the
+   *        {@link ContentClass#toString() string-representation} of the
+   *        original content-class.
+   * @param duplicateClass is the
+   *        {@link ContentClass#toString() string-representation} of the new
+   *        content-class that is a duplicate.
+   */
+  public DuplicateClassException(String contentClass, String duplicateClass) {
+
+    super(NlsBundleContentCore.ERR_DUPLICATE_CLASS, contentClass, duplicateClass);
   }
 
 }

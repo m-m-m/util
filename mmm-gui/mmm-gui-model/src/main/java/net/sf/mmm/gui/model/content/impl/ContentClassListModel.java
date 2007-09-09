@@ -14,7 +14,7 @@ import net.sf.mmm.util.event.EventListener;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel UIListModel} interface for
- * the {@link ContentModelService#getClasses() classes} of the
+ * the {@link ContentModelService#getContentClasses() classes} of the
  * {@link ContentModelService content-model}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -42,7 +42,7 @@ public class ContentClassListModel extends AbstractUIListModel<ContentClass> imp
    */
   public ContentClass getElement(int index) {
 
-    return this.contentModel.getClasses().get(index);
+    return this.contentModel.getContentClasses().get(index);
   }
 
   /**
@@ -50,7 +50,7 @@ public class ContentClassListModel extends AbstractUIListModel<ContentClass> imp
    */
   public int getElementCount() {
 
-    return this.contentModel.getClasses().size();
+    return this.contentModel.getContentClasses().size();
   }
 
   /**
@@ -58,8 +58,8 @@ public class ContentClassListModel extends AbstractUIListModel<ContentClass> imp
    */
   public int getIndexOfString(String element) {
 
-    ContentClass contentClass = this.contentModel.getClass(element);
-    return this.contentModel.getClasses().indexOf(contentClass);
+    ContentClass contentClass = this.contentModel.getContentClass(element);
+    return this.contentModel.getContentClasses().indexOf(contentClass);
   }
 
   /**
@@ -82,7 +82,7 @@ public class ContentClassListModel extends AbstractUIListModel<ContentClass> imp
 
     if (event.getContentField() == null) {
       ContentClass changedClass = event.getContentClass();
-      int index = this.contentModel.getClasses().indexOf(changedClass);
+      int index = this.contentModel.getContentClasses().indexOf(changedClass);
       fireChangeEvent(event.getType(), index, index);
     }
   }
@@ -92,7 +92,7 @@ public class ContentClassListModel extends AbstractUIListModel<ContentClass> imp
    */
   public int getIndexOf(ContentClass element) {
   
-    return this.contentModel.getClasses().indexOf(element);
+    return this.contentModel.getContentClasses().indexOf(element);
   }
   
   /**

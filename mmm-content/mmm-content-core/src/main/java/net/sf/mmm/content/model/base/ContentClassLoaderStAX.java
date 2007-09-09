@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.base;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Map;
 
-import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -16,15 +15,14 @@ import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
+import net.sf.mmm.util.reflect.ClassResolver;
 import net.sf.mmm.util.reflect.ReflectionUtil;
-import net.sf.mmm.util.resource.DataResource;
-import net.sf.mmm.util.value.ValueUtil;
 import net.sf.mmm.util.xml.StaxUtil;
-import net.sf.mmm.util.xml.stream.XIncludeStreamReader;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -33,7 +31,7 @@ import net.sf.mmm.value.api.ValueException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentClassLoaderStAX extends AbstractContentClassLoader {
+public class ContentClassLoaderStAX extends ContentClassLoaderNative {
 
   /**
    * The constructor.
@@ -47,46 +45,22 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
   }
 
   /**
-   * This method parses the attribute with the given
-   * <code>localAttributeName</code> from the given <code>xmlReader</code>
-   * as given by <code>type</code>.
-   * 
-   * @param <V> is the generic for the <code>type</code>.
-   * @param xmlReader is where to read the XML from.
-   * @param localAttributeName is the local name of the requested attribute.
-   * @param type is the type the requested attribute should be converted to.
-   * @return the requested attribute as the given <code>type</code>.
-   * @throws ValueException if the attribute is NOT defined or its value can NOT
-   *         be converted to <code>type</code>.
+   * {@inheritDoc}
    */
-  protected <V> V parseAttribute(XMLStreamReader xmlReader, String localAttributeName, Class<V> type)
-      throws ValueException {
+  @Override
+  protected void parseConfiguration(XMLStreamReader xmlReader, Context context)
+      throws XMLStreamException {
 
-    String value = xmlReader.getAttributeValue(null, localAttributeName);
-    String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
-    return ValueUtil.convertValue(valueSource, value, type);
+    String tagName = xmlReader.getLocalName();
+    if (ContentModelService.XML_TAG_CLASS.equals(tagName)) {
+      loadClassRecursive(xmlReader, context);
+    }
+    super.parseConfiguration(xmlReader, context);
   }
 
-  /**
-   * This method parses the attribute with the given
-   * <code>localAttributeName</code> from the given <code>xmlReader</code>
-   * as given by <code>type</code>.
-   * 
-   * @param <V> is the generic for the <code>type</code>.
-   * @param xmlReader is where to read the XML from.
-   * @param localAttributeName is the local name of the requested attribute.
-   * @param type is the type the requested attribute should be converted to.
-   * @param defaultValue is the default value returned if the requested
-   *        attribute is NOT defined. It may be <code>null</code>.
-   * @return the requested attribute as the given <code>type</code>.
-   * @throws ValueException if the attribute value can NOT be converted to
-   *         <code>type</code>.
-   */
-  protected <V> V parseAttribute(XMLStreamReader xmlReader, String localAttributeName,
-      Class<V> type, V defaultValue) throws ValueException {
+  protected Class getContentJavaClass(String name) {
 
-    String value = xmlReader.getAttributeValue(null, localAttributeName);
-    return ValueUtil.convertValue(localAttributeName, value, type, defaultValue);
+    return getContentModelService().getName2JavaClassMap().get(name);
   }
 
   /**
@@ -96,12 +70,13 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    *        <code>String</code> or <code>List&lt;ContentObject&gt;</code>).
    * @return the parsed type.
    */
-  protected Type parseFieldType(String typeSpecification) {
+  protected Type parseFieldType(String typeSpecification, ClassResolver classResolver) {
 
     try {
-      return ReflectionUtil.toType(typeSpecification, getContentModelService());
+      return ReflectionUtil.toType(typeSpecification, classResolver);
     } catch (Exception e) {
-      throw new ContentModelException("Illegal Type '" + typeSpecification + "'!", e);
+      // TODO: NLS
+      throw new ContentModelException(e, "Illegal Type '" + typeSpecification + "'!", e);
     }
   }
 
@@ -115,7 +90,8 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
 
     boolean isClass = ContentClass.XML_TAG_CLASS.equals(xmlReader.getLocalName());
     // parse ID
-    int id = parseAttribute(xmlReader, ContentObject.FIELD_NAME_ID, Integer.class).intValue();
+    int id = StaxUtil.parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_ID, Integer.class)
+        .intValue();
     SmartId uid;
     SmartIdManager idManager = getContentModelService().getIdManager();
     if (isClass) {
@@ -135,7 +111,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    */
   protected String parseName(XMLStreamReader xmlReader) {
 
-    return parseAttribute(xmlReader, ContentObject.FIELD_NAME_NAME, String.class);
+    return StaxUtil.parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_NAME, String.class);
   }
 
   /**
@@ -147,31 +123,8 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    */
   protected boolean parseDeletedFlag(XMLStreamReader xmlReader) {
 
-    return parseAttribute(xmlReader, ContentObject.FIELD_NAME_DELETED, Boolean.class, Boolean.FALSE)
-        .booleanValue();
-  }
-
-  /**
-   * This method loads the basic fields of a {@link ContentClass} or
-   * {@link ContentField}.
-   * 
-   * @param xmlReader is where to read the XML from.
-   * @param object is the class or field.
-   * @throws ValueException if a value was illegal.
-   * @throws XMLStreamException if the XML was illegal.
-   */
-  protected void loadBasicFields(XMLStreamReader xmlReader, AbstractContentReflectionObject object)
-      throws ValueException, XMLStreamException {
-
-    // parse ID
-    SmartId uid = parseId(xmlReader);
-    object.setId(uid);
-    // parse name
-    String name = parseName(xmlReader);
-    object.setName(name);
-    // parse deleted flag
-    boolean deleted = parseDeletedFlag(xmlReader);
-    object.setDeleted(deleted);
+    return StaxUtil.parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_DELETED,
+        Boolean.class, Boolean.FALSE).booleanValue();
   }
 
   /**
@@ -188,15 +141,13 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    * </ul>
    * 
    * @param xmlReader is where to read the XML from.
-   * @param superClass is the super-class or <code>null</code> when loading
-   *        the root-class.
    * @return the class-hierarchy de-serialized via the given
    *         <code>xmlReader</code>.
    * @throws ValueException if a value is missing or invalid.
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
-  public AbstractContentClass loadClassRecursive(XMLStreamReader xmlReader,
-      AbstractContentClass superClass) throws ValueException, XMLStreamException, IOException {
+  public AbstractContentClass loadClassRecursive(XMLStreamReader xmlReader, Context context)
+      throws ValueException, XMLStreamException {
 
     assert (xmlReader.isStartElement());
     assert (ContentClass.XML_TAG_CLASS.equals(xmlReader.getLocalName()));
@@ -205,45 +156,63 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
     String name = parseName(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
-    boolean isFinal = parseAttribute(xmlReader, Modifiers.XML_ATR_ROOT_FINAL, Boolean.class,
-        Boolean.FALSE).booleanValue();
-    boolean isAbstract = parseAttribute(xmlReader, ClassModifiers.XML_ATR_ROOT_ABSTRACT,
+    boolean isSystem = StaxUtil.parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_SYSTEM,
         Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isExtendable = parseAttribute(xmlReader, ClassModifiers.XML_ATR_ROOT_EXTENDABLE,
-        Boolean.class, Boolean.valueOf(!isFinal)).booleanValue();
-    boolean isSystem = parseAttribute(xmlReader, Modifiers.XML_ATR_ROOT_SYSTEM, Boolean.class,
-        Boolean.FALSE).booleanValue();
+    boolean isFinal = StaxUtil.parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_FINAL,
+        Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isAbstract = StaxUtil.parseAttribute(xmlReader, null,
+        ClassModifiers.XML_ATR_ROOT_ABSTRACT, Boolean.class, Boolean.FALSE).booleanValue();
+    // default value for extendable is...
+    boolean isExtendable = !(isFinal || (isSystem && isAbstract));
+    // configured value is therefore...
+    isExtendable = StaxUtil.parseAttribute(xmlReader, null, ClassModifiers.XML_ATR_ROOT_EXTENDABLE,
+        Boolean.class, Boolean.valueOf(isExtendable)).booleanValue();
     ClassModifiers modifiers = ClassModifiersImpl.getInstance(isSystem, isFinal, isAbstract,
         isExtendable);
-    Class javaClass = null;
-    if (modifiers.isSystem()) {
-      // lookup!
-      // TODO: this is a hack!
-      try {
-        javaClass = Class.forName("net.sf.mmm.content.resource.api." + name);
-      } catch (ClassNotFoundException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+
+    AbstractContentClass contentClass = context.getContentClass(id);
+    if (contentClass == null) {
+      contentClass = getContentReflectionFactory().createNewClass(id);
+      contentClass.setName(name);
+      // contentClass.setSuperClass(superClass);
+      contentClass.setModifiers(modifiers);
+      contentClass.setDeletedFlag(deleted);
+    } else {
+      if (!name.equals(contentClass.getName())) {
+        // TODO:
+        throw new DuplicateClassException(id);
       }
-    } else if (superClass != null) {
-      // javaClass = superClass.getJavaClass();
+      // TODO ...
     }
-    AbstractContentClass contentClass = getContentModelService().createOrUpdateClass(id, name,
-        superClass, modifiers, deleted, javaClass);
+
+    String javaClassName = xmlReader.getAttributeValue(null, "javaClass");
+    if (javaClassName != null) {
+      try {
+        Class javaClass = getClassResolver().resolveClass(javaClassName);
+        Class oldClass = contentClass.getJavaClass();
+        if ((oldClass != null) && (!oldClass.equals(javaClass))) {
+          // TODO:
+          throw new ContentModelException("Java-class mismatch for content-class " + name);
+        }
+        contentClass.setJavaClass(javaClass);
+      } catch (ClassNotFoundException e) {
+        // TODO: NLS
+        throw new ContentModelException(e, "Java class NOT found for content-class " + name);
+      }
+    }
+
     // parse XML-child elements
     int xmlEvent = xmlReader.nextTag();
     while (XMLStreamConstants.START_ELEMENT == xmlEvent) {
       String tagName = xmlReader.getLocalName();
       if (ContentClass.XML_TAG_CLASS.equals(tagName)) {
-        // class
-        // AbstractContentClass childClass =
-        loadClassRecursive(xmlReader, contentClass);
-        // childClass.setSuperClass(contentClass);
-        // contentClass.addSubClass(childClass);
+        AbstractContentClass subClass = loadClassRecursive(xmlReader, context);
+        subClass.setSuperClass(contentClass);
+        contentClass.addSubClass(subClass);
       } else if (ContentField.XML_TAG_FIELD.equals(tagName)) {
         // field
-        loadField(xmlReader, contentClass);
-        // contentClass.addField(contentField);
+        AbstractContentField contentField = loadField(xmlReader, contentClass);
+        contentClass.addField(contentField);
       } else {
         parseClassChildElement(xmlReader, contentClass);
       }
@@ -262,7 +231,7 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
   protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass)
-      throws XMLStreamException, IOException {
+      throws XMLStreamException {
 
     StaxUtil.skipOpenElement(xmlReader);
   }
@@ -291,23 +260,30 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
     String name = parseName(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
-    boolean isFinal = parseAttribute(xmlReader, Modifiers.XML_ATR_ROOT_FINAL, Boolean.class,
-        Boolean.FALSE).booleanValue();
-    boolean isReadOnly = parseAttribute(xmlReader, FieldModifiers.XML_ATR_ROOT_READ_ONLY,
+    boolean isFinal = StaxUtil.parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_FINAL,
         Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isStatic = parseAttribute(xmlReader, FieldModifiers.XML_ATR_ROOT_STATIC, Boolean.class,
-        Boolean.FALSE).booleanValue();
+    boolean isReadOnly = StaxUtil.parseAttribute(xmlReader, null,
+        FieldModifiers.XML_ATR_ROOT_READ_ONLY, Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isStatic = StaxUtil.parseAttribute(xmlReader, null, FieldModifiers.XML_ATR_ROOT_STATIC,
+        Boolean.class, Boolean.FALSE).booleanValue();
     boolean isSystem = declaringClass.getModifiers().isSystem();
-    boolean isTransient = parseAttribute(xmlReader, FieldModifiers.XML_ATR_ROOT_TRANSIENT,
-        Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isTransient = StaxUtil.parseAttribute(xmlReader, null,
+        FieldModifiers.XML_ATR_ROOT_TRANSIENT, Boolean.class, Boolean.FALSE).booleanValue();
     FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal, isReadOnly,
         isStatic, isTransient);
     // parse type
-    String typeSpecification = parseAttribute(xmlReader, ContentField.XML_ATR_FIELD_TYPE,
-        String.class);
-    Type fieldType = parseFieldType(typeSpecification);
-    AbstractContentField contentField = getContentModelService().createOrUpdateField(id, name,
-        declaringClass, modifiers, fieldType, typeSpecification, deleted);
+    String typeSpecification = StaxUtil.parseAttribute(xmlReader, null,
+        ContentField.XML_ATR_FIELD_TYPE, String.class);
+    // Type fieldType = parseFieldType(typeSpecification);
+    AbstractContentField contentField = getContentReflectionFactory().createNewField(id);
+    contentField.setName(name);
+    contentField.setDeclaringClass(declaringClass);
+    contentField.setModifiers(modifiers);
+    contentField.setFieldTypeSpecification(typeSpecification);
+    contentField.setDeletedFlag(deleted);
+    // AbstractContentField contentField =
+    // getContentModelService().createOrUpdateField(id, name,
+    // declaringClass, modifiers, fieldType, typeSpecification, deleted);
     xmlReader.nextTag();
     if (xmlReader.isStartElement()) {
       StaxUtil.skipOpenElement(xmlReader);
@@ -316,50 +292,21 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
   }
 
   /**
-   * This method reads a class-hierarchy from the given <code>xmlReader</code>.<br>
-   * <b>ATTENTION:</b><br>
-   * The {@link ContentObject#getContentClass() content-class} of the
-   * de-serialized classes and fields is NOT set by this method so it may be
-   * <code>null</code> if NOT initialized.
    * 
-   * @param xmlReader is where to read the XML from.
-   * @return the class-hierarchy de-serialized via the given
-   *         <code>xmlReader</code>.
-   * @throws ValueException if a value is missing or invalid.
-   * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
+   * TODO: javadoc
+   * 
+   * @param contentClass
    */
-  public AbstractContentClass loadModel(XMLStreamReader xmlReader) throws ValueException,
-      XMLStreamException, IOException {
+  protected void initializeModel(AbstractContentClass contentClass, ClassResolver resolver) {
 
-    // TODO: how should this work:
-    // 1. load complete class tree without modifying the model
-    // and add the tree or update existing tree after validation as
-    // "transaction".
-    // 2. while loading the classes all changes directly effect the
-    // content-model. If an error occurs while reloading there is no
-    // "transaction" and maybe only parts of the model are loaded.
-    assert (xmlReader.isStartElement());
-    if (!ContentClass.XML_TAG_CONTENT_MODEL.equals(xmlReader.getLocalName())) {
-      // TODO:
-      throw new IllegalArgumentException("wrong tag for content-model: " + xmlReader.getLocalName());
+    for (AbstractContentField contentField : contentClass.getDeclaredFields()) {
+      String typeSpecification = contentField.getFieldTypeSpecification();
+      Type type = parseFieldType(typeSpecification, resolver);
+      contentField.setFieldTypeAndClass(type);
     }
-    AbstractContentClass rootClass = null;
-    while (XMLStreamConstants.START_ELEMENT == xmlReader.nextTag()) {
-      if (ContentClass.XML_TAG_CLASS.equals(xmlReader.getLocalName())) {
-        if (rootClass != null) {
-          // TODO:
-          throw new IllegalArgumentException("Multiple root-classes in contentmodel!");
-        }
-        rootClass = loadClassRecursive(xmlReader, null);
-      } else {
-        StaxUtil.skipOpenElement(xmlReader);
-      }
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+      initializeModel(subClass, resolver);
     }
-    if (rootClass == null) {
-      // TODO:
-      throw new IllegalArgumentException("Missing root-class!");
-    }
-    return rootClass;
   }
 
   /**
@@ -368,43 +315,17 @@ public class ContentClassLoaderStAX extends AbstractContentClassLoader {
    * 
    * @param contentClass
    */
-  protected void initializeModel(ContentClass contentClass) {
+  protected void fillClassMapRecursive(AbstractContentClass contentClass,
+      Map<String, AbstractContentClass> classMap) {
 
-    for (ContentField contentField : contentClass.getDeclaredFields()) {
-      // TODO: only parse if changed
-      String typeSpecification = contentField.getFieldTypeSpecification();
-      Type type = parseFieldType(typeSpecification);
-      ((AbstractContentField) contentField).setFieldTypeAndClass(type);
+    String name = contentClass.getName();
+    AbstractContentClass old = classMap.put(name, contentClass);
+    if (old != null) {
+      throw new DuplicateClassException(name);
     }
-    for (ContentClass subClass : contentClass.getSubClasses()) {
-      initializeModel(subClass);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void loadClasses(DataResource resource) throws IOException, ContentModelException {
-
-    XMLInputFactory factory = XMLInputFactory.newInstance();
-    XMLStreamReader xmlReader = null;
-    try {
-      xmlReader = new XIncludeStreamReader(factory, resource);
-      xmlReader.nextTag();
-      ContentClass rootClass = loadModel(xmlReader);
-      initializeModel(rootClass);
-    } catch (XMLStreamException e) {
-      throw new ContentModelException("Failed to parse content-model from " + resource.getPath(), e);
-    } finally {
-      try {
-        if (xmlReader != null) {
-          xmlReader.close();
-        }
-      } catch (XMLStreamException e) {
-        throw new ContentModelException("Failed to parse content-model from " + resource.getPath(),
-            e);
-      }
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+      fillClassMapRecursive(subClass, classMap);
     }
   }
-
+  
 }

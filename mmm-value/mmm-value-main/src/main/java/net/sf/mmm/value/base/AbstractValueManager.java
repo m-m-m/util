@@ -5,22 +5,20 @@ package net.sf.mmm.value.base;
 
 import java.lang.reflect.Type;
 
-import org.w3c.dom.Element;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.base.NlsMessageImpl;
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
+import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.value.NlsBundleValueMain;
-import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueManager;
-import net.sf.mmm.value.api.ValueParseException;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.value.api.ValueManager} interface. It is recommended to
- * extend this class rather than implementing the interface from scratch.
+ * This is the abstract base implementation of the {@link ValueManager}
+ * interface. It is recommended to extend this class rather than implementing
+ * the interface from scratch.
  * 
  * @see net.sf.mmm.value.base.BasicValueManager
  * 
@@ -57,97 +55,63 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
 
   /**
-   * The default implementation expects the {@link #toString(Object) string}
-   * representation of the value encoded as text in the XML element.
-   * 
-   * @see net.sf.mmm.value.api.ValueManager#parse(org.w3c.dom.Element)
+   * {@inheritDoc}
    */
-  public V parse(Element valueAsXml) throws ValueParseException {
+  public V fromXml(XMLStreamReader xmlReader) throws XMLStreamException {
 
-    checkXml(valueAsXml);
-    String valueAsString = DomUtil.getNodeText(valueAsXml);
-    if (valueAsString.equals(getNullString())) {
+    assert (xmlReader.isStartElement());
+    assert (XML_TAG_VALUE.equals(xmlReader.getLocalName()));
+    String valueName = xmlReader.getAttributeValue(null, XML_ATR_VALUE_NAME);
+    if (NULL_VALUE_NAME.equals(valueName)) {
       return null;
     }
-    return parse(valueAsString);
+    if (!getName().equals(valueName)) {
+      // TODO:
+      throw new IllegalArgumentException();
+    }
+    V value = fromXmlContent(xmlReader);
+    StaxUtil.skipOpenElement(xmlReader);
+    return value;
   }
 
   /**
-   * This method creates the content of the XML representation for the given
-   * value. This default implementation uses {@link #toString(Object)} to
-   * convert the value to string and then writes it as
-   * {@link XmlWriter#writeCharacters(String) text} content.<br>
-   * Override this method to implement specific custom XML. If you override this
-   * method you should also override {@link #parse(Element)}.
+   * @see #fromXml(XMLStreamReader)
    * 
-   * @see #toXml(XmlWriter, Object)
-   * 
-   * @param xmlWriter is where the XML is written to.
-   * @param value is the value to serialize. It may be <code>null</code>.
-   * @throws XmlException if the XML serialization fails.
+   * @param xmlReader is where to read the XML from.
+   * @return the parsed value.
+   * @throws XMLStreamException if the de-serialization fails.
    */
-  protected void toXmlValue(XmlWriter xmlWriter, V value) throws XmlException {
+  protected V fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
-    xmlWriter.writeCharacters(toString(value));
+    String textContent = StaxUtil.readText(xmlReader);
+    return fromString(textContent);
   }
 
   /**
-   * This method creates a default XML representation of the given value. It
-   * will have the following form:
-   * 
-   * <pre>
-   * &lt;value type=&quot;{@link ValueManager#getName() manager.getName()}&quot;&gt;
-   * {@link #toXml(XmlWriter, Object) toXmlValue(value)}
-   * &lt;/value&gt;
-   * </pre>
-   * 
-   * @see net.sf.mmm.value.api.ValueManager#toXml(XmlWriter, Object)
+   * {@inheritDoc}
    */
-  public final void toXml(XmlWriter xmlWriter, V value) throws XmlException {
+  public void toXml(XMLStreamWriter xmlWriter, V value) throws XMLStreamException {
 
     xmlWriter.writeStartElement(XML_TAG_VALUE);
-    xmlWriter.writeAttribute(XML_ATR_VALUE_NAME, getName());
-    toXmlValue(xmlWriter, value);
-    xmlWriter.writeEndElement(XML_TAG_VALUE);
+    if (value == null) {
+      xmlWriter.writeAttribute(XML_ATR_VALUE_NAME, NULL_VALUE_NAME);
+    } else {
+      xmlWriter.writeAttribute(XML_ATR_VALUE_NAME, getName());
+      toXmlContent(xmlWriter, value);
+    }
+    xmlWriter.writeEndElement();
   }
 
   /**
-   * This method validates the top-level element of the given XML encoded value.
+   * @see #toXml(XMLStreamWriter, Object)
    * 
-   * @param valueAsXml is the XML encoded value to validate.
-   * @throws ValueParseException if the given XML is invalid.
+   * @param xmlWriter is where to write the XML to.
+   * @param value is the value to serialize.
+   * @throws XMLStreamException if the serialization fails.
    */
-  protected void checkXml(Element valueAsXml) throws ValueParseException {
+  protected void toXmlContent(XMLStreamWriter xmlWriter, V value) throws XMLStreamException {
 
-    if (!XML_TAG_VALUE.equals(valueAsXml.getTagName())) {
-      // TODO
-      throw new ValueParseException(null);
-    }
-    if (valueAsXml.hasAttribute(XML_ATR_VALUE_NAME)) {
-      if (!valueAsXml.getAttribute(XML_ATR_VALUE_NAME).equals(getName())) {
-        // TODO
-        throw new ValueParseException(null);
-      }
-    } else if (valueAsXml.hasAttribute(XML_ATR_VALUE_CLASS)) {
-      String className = valueAsXml.getAttribute(XML_ATR_VALUE_CLASS);
-      if (!getValueClass().getName().equals(className)) {
-        try {
-          Class clazz = Class.forName(className);
-          if (!getValueClass().isAssignableFrom(clazz)) {
-            // TODO
-            throw new ValueParseException(null);
-          }
-        } catch (ClassNotFoundException e) {
-          // TODO
-          throw new ValueParseException(null, e);
-        }
-        // TODO
-        throw new ValueParseException(null);
-      }
-    } else {
-      // TODO
-      throw new ValueParseException(null);
-    }
+    xmlWriter.writeCharacters(value.toString());
   }
 
   /**
@@ -175,25 +139,29 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   }
 
   /**
-   * This method gets the String that represents the <code>null</code> value.
-   * This method always returns the same (==) object ({@link GenericValue#NULL_STRING}).
-   * It can be overridden to change the <code>null</code> string.
+   * {@inheritDoc}
    * 
-   * @return the string that represents the <code>null</code> value.
+   * <b>INFORMATION:</b><br>
+   * This method is final. You have to override the method
+   * {@link #toStringNotNull(Object)}
    */
-  protected String getNullString() {
+  public final String toString(V value) {
 
-    return GenericValue.NULL_STRING;
+    if (value == null) {
+      return NULL_STRING;
+    }
+    return toStringNotNull(value);
   }
 
   /**
-   * {@inheritDoc}
+   * This method is the internal version of {@link #toString(Object)} that is
+   * called if the given <code>value</code> is NOT <code>null</code>.
+   * 
+   * @param value is the value to get a string.
+   * @return the string representation of the given value.
    */
-  public String toString(V value) {
+  protected String toStringNotNull(V value) {
 
-    if (value == null) {
-      return getNullString();
-    }
     return value.toString();
   }
 

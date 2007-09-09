@@ -13,34 +13,7 @@ import net.sf.mmm.content.value.api.ContentId;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentModelReadAccess {
-
-  /**
-   * This method gets the content class for the given name.
-   * 
-   * @param name is the name of the requested class.
-   * @return the content class for the given name or <code>null</code> if it
-   *         does NOT exist.
-   */
-  ContentClass getClass(String name);
-
-  /**
-   * This method gets the {@link ContentClass} for the given <code>id</code>.
-   * 
-   * @param id is the unique ID of the requested class.
-   * @return the content class for the given ID or <code>null</code> if it
-   *         does NOT exist.
-   */
-  ContentClass getClass(ContentId id);
-
-  /**
-   * This method gets the {@link ContentField} for the given <code>id</code>.
-   * 
-   * @param id is the unique ID of the requested class.
-   * @return the content field for the given ID or <code>null</code> if it
-   *         does NOT exist.
-   */
-  ContentField getField(ContentId id);
+public interface ContentModelReadAccess extends SimpleContentModelReadAccess {
 
   /**
    * This method gets the root content class that reflects the
@@ -48,13 +21,13 @@ public interface ContentModelReadAccess {
    * 
    * @return the root class.
    */
-  ContentClass getRootClass();
+  ContentClass getRootContentClass();
 
   /**
    * This method gets the list of all registered content classes.
    * 
    * @return the immutable list of all content classes.
    */
-  List<? extends ContentClass> getClasses();
+  List<? extends ContentClass> getContentClasses();
 
 }

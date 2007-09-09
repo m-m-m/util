@@ -4,7 +4,12 @@
 package net.sf.mmm.content.model.base;
 
 import net.sf.mmm.content.base.AbstractContentObject;
+import net.sf.mmm.content.base.ClassAnnotation;
+import net.sf.mmm.content.base.FieldAnnotation;
 import net.sf.mmm.content.model.api.ContentReflectionObject;
+import net.sf.mmm.content.model.api.Modifiers;
+import net.sf.mmm.content.value.api.Lock;
+import net.sf.mmm.content.value.api.MetaDataSet;
 import net.sf.mmm.content.value.base.SmartId;
 
 /**
@@ -13,23 +18,41 @@ import net.sf.mmm.content.value.base.SmartId;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ClassAnnotation(id = ContentReflectionObject.CLASS_ID, name = ContentReflectionObject.CLASS_NAME, isExtendable = false)
 public abstract class AbstractContentReflectionObject extends AbstractContentObject implements
     ContentReflectionObject {
 
   /**
-   * {@inheritDoc}
+   * The constructor.
    */
-  public boolean isDeletedFlagSet() {
+  public AbstractContentReflectionObject() {
 
-    return getDeletedFlag();
+    super();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param id is the {@link #getId() id}.
+   */
+  public AbstractContentReflectionObject(SmartId id) {
+
+    super(id);
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
-  protected void setName(String name) {
+  @FieldAnnotation(id = 20)
+  public abstract Modifiers getModifiers();
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setName(java.lang.String name) {
+
+    // make package visible...
     super.setName(name);
   }
 
@@ -37,19 +60,30 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
    * {@inheritDoc}
    */
   @Override
-  protected void setDeleted(boolean deleted) {
+  protected void setDeletedFlag(boolean deleted) {
 
-    super.setDeleted(deleted);
+    // make package visible...
+    super.setDeletedFlag(deleted);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void setId(SmartId id) {
+  protected void setLock(Lock lock) {
 
     // make package visible...
-    super.setId(id);
+    super.setLock(lock);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setMetaDataSet(MetaDataSet metaDataSet) {
+
+    // make package visible...
+    super.setMetaDataSet(metaDataSet);
   }
 
   /**
@@ -57,7 +91,7 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
    */
   @Override
   public String toString() {
-  
+
     String name = getName();
     if (name == null) {
       name = "-";
@@ -67,7 +101,7 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
     if (id == null) {
       idString = "-";
     } else {
-      idString = id.toString();      
+      idString = id.toString();
     }
     StringBuffer buffer = new StringBuffer(name.length() + idString.length() + 3);
     buffer.append(name);
@@ -76,5 +110,5 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
     buffer.append(']');
     return buffer.toString();
   }
-  
+
 }

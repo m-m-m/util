@@ -50,6 +50,9 @@ public class NlsBundleContentCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.model.base.DuplicateClassException */
   public static final String ERR_DUPLICATE_CLASS_ID = "The class with the ID \"{0}\" already exists!";
 
+  /** @see net.sf.mmm.content.model.base.DuplicateClassException */
+  public static final String ERR_DUPLICATE_CLASS = "The class \"{1}\" is a duplicate of the class \"{0}\" - both ID and name has to be unique!";
+
   /** @see net.sf.mmm.content.model.base.DuplicateFieldException */
   public static final String ERR_DUPLICATE_FIELD_NAME = "The field with the name \"{0}\" already exists!";
 
@@ -82,5 +85,8 @@ public class NlsBundleContentCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.content.base.ContentCastException */
   public static final String ERR_CAST = "Can NOT cast from \"{0}\" to \"{1}\"!";
+
+  /** @see net.sf.mmm.content.value.api.LockNotOwnerExecption */
+  public static final String ERR_LOCK_NOT_OWNER = "User \"{1}\" can NOT modify lock of user \"{0}\" on object \"{2}\"!";
 
 }

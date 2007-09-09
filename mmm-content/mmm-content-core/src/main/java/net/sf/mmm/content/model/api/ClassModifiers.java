@@ -39,7 +39,7 @@ public interface ClassModifiers extends Modifiers {
 
   /**
    * This method determines if the class can be
-   * {@link ContentModelWriteAccess#createClass(ContentClass, String, ClassModifiers) extended}
+   * {@link ContentModelWriteAccess#createContentClass(ContentClass, String, ClassModifiers) extended}
    * by the user.<br>
    * A {@link Modifiers#isFinal() final} class is NOT extendable. In advance a
    * {@link Modifiers#isSystem() system} class that is NOT

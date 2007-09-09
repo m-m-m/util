@@ -13,10 +13,10 @@ package net.sf.mmm.value.base;
 public abstract class BasicValueManager<V> extends AbstractValueManager<V> {
 
   /** the name of the value manager */
-  protected final String name;
+  private final String name;
 
   /** the class of the managed value */
-  protected final Class<V> valueType;
+  private final Class<V> valueType;
 
   /**
    * The constructor.

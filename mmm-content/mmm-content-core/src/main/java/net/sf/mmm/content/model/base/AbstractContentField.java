@@ -4,11 +4,14 @@
 package net.sf.mmm.content.model.base;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.mmm.content.model.api.ContentAccessor;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
+import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
@@ -41,7 +44,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
 
   /** @see #getConstraint() */
   private ValueValidator constraint;
-  
+
   /** @see #getAccessor() */
   private ContentAccessor accessor;
 
@@ -51,6 +54,52 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   public AbstractContentField() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param id is the {@link #getId() id}.
+   */
+  public AbstractContentField(SmartId id) {
+
+    super(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ContentField getParent() {
+
+    return getSuperField();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<? extends ContentField> getChildren() {
+
+    List<ContentField> fields = new ArrayList<ContentField>();
+    collectSubFieldsRecursive(getDeclaringClass(), fields);
+    return fields;
+  }
+
+  /**
+   * @see #getChildren()
+   * 
+   * @param contentClass is the current content-class.
+   * @param fields is the list where the fields are added.
+   */
+  private void collectSubFieldsRecursive(ContentClass contentClass, List<ContentField> fields) {
+
+    for (ContentClass subClass : contentClass.getSubClasses()) {
+      ContentField declaredField = subClass.getDeclaredField(getName());
+      if (declaredField != null) {
+        fields.add(declaredField);
+      }
+      collectSubFieldsRecursive(subClass, fields);
+    }
   }
 
   /**
@@ -192,23 +241,27 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   @Override
   public boolean isDeleted() {
 
-    if (isDeletedFlagSet()) {
+    if (getDeletedFlag()) {
       return true;
-    } else if (getSuperField() != null) {
-      return getSuperField().isDeleted();
+    } else if (getDeclaringClass().isDeleted()) {
+      return true;
     } else {
-      return false;
+      ContentField superField = getSuperField();
+      if (superField != null) {
+        return superField.isDeleted();
+      }
     }
+    return false;
   }
 
   /**
    * {@inheritDoc}
    */
   public ContentAccessor getAccessor() {
-  
+
     return this.accessor;
   }
-  
+
   /**
    * @param accessor the accessor to set
    */
@@ -216,5 +269,5 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
 
     this.accessor = accessor;
   }
-  
+
 }

@@ -7,14 +7,16 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.XmlWriterUtil;
-import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
@@ -58,7 +60,15 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   /**
    * {@inheritDoc}
    */
-  public Element parse(String valueAsString) throws ValueParseException {
+  public String getName() {
+
+    return VALUE_NAME;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Element fromString(String valueAsString) throws ValueParseException {
 
     try {
       // TODO: this may cause encoding problems...
@@ -73,20 +83,18 @@ public class XmlValueManager extends AbstractValueManager<Element> {
    * {@inheritDoc}
    */
   @Override
-  public Element parse(Element valueAsXml) throws ValueParseException {
+  protected Element fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
-    checkXml(valueAsXml);
-    Element childElement = DomUtil.getFirstElement(valueAsXml.getChildNodes());
-    // create deep-copy in new XML document...
-    Document copyDocument = DomUtil.createDocument();
-    return (Element) copyDocument.importNode(childElement, true);
+    Document doc = DomUtil.createDocument();
+    StaxUtil.writeToDom(xmlReader, doc);
+    return doc.getDocumentElement();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String toString(Element value) {
+  public String toStringNotNull(Element value) {
 
     try {
       Writer writer = new StringWriter();
@@ -104,23 +112,6 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   public boolean isEqual(Element value1, Element value2) {
 
     return DomUtil.isEqual(value1, value2);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void toXmlValue(XmlWriter xmlWriter, Element value) throws XmlException {
-
-    XmlWriterUtil.toXml(xmlWriter, value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getName() {
-
-    return VALUE_NAME;
   }
 
 }

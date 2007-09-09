@@ -22,7 +22,7 @@
     </dependency>
   </dependencies>
   <modules>
-    <module>mmm-configuration</module>
+    <!-- <module>mmm-configuration</module> -->
     <module>mmm-content</module>
     <!-- <module>mmm-framework</module> -->
     <module>mmm-gui</module>

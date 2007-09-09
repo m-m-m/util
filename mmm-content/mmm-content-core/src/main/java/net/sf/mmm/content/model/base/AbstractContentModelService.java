@@ -24,6 +24,7 @@ import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
+import net.sf.mmm.util.event.ChangeEvent;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
 
@@ -35,24 +36,24 @@ import net.sf.mmm.util.event.EventSource;
  */
 public abstract class AbstractContentModelService extends
     AbstractSynchronizedEventSource<ContentModelEvent, EventListener<ContentModelEvent>> implements
-    ContentModelService {
+    ContentModelService, ContentReflectionFactory {
 
-  /** @see #getClass(String) */
+  /** @see #getContentClass(String) */
   private final Map<String, AbstractContentClass> name2class;
 
-  /** @see #getClass(ContentId) */
+  /** @see #getContentClass(ContentId) */
   private final Map<ContentId, AbstractContentClass> id2class;
 
-  /** @see #getClasses() */
+  /** @see #getContentClasses() */
   private final List<AbstractContentClass> classes;
 
-  /** @see #getClasses() */
+  /** @see #getContentClasses() */
   private final List<AbstractContentClass> classesView;
 
-  /** @see #getField(ContentId) */
+  /** @see #getContentField(ContentId) */
   private final Map<ContentId, AbstractContentField> id2field;
 
-  /** @see #getRootClass() */
+  /** @see #getRootContentClass() */
   private AbstractContentClass rootClass;
 
   /** @see #getIdManager() */
@@ -100,7 +101,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass getClass(String name) {
+  public AbstractContentClass getContentClass(String name) {
 
     return this.name2class.get(name);
   }
@@ -108,7 +109,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass getClass(ContentId id) {
+  public AbstractContentClass getContentClass(ContentId id) {
 
     return this.id2class.get(id);
   }
@@ -116,7 +117,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public AbstractContentField getField(ContentId id) {
+  public AbstractContentField getContentField(ContentId id) {
 
     return this.id2field.get(id);
   }
@@ -124,7 +125,7 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public List<AbstractContentClass> getClasses() {
+  public List<AbstractContentClass> getContentClasses() {
 
     return this.classesView;
   }
@@ -132,13 +133,13 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass getRootClass() {
+  public AbstractContentClass getRootContentClass() {
 
     return this.rootClass;
   }
 
   /**
-   * This method set the {@link #getRootClass() root-class}.
+   * This method set the {@link #getRootContentClass() root-class}.
    * 
    * @param rootClass is the root-class to set.
    */
@@ -166,6 +167,10 @@ public abstract class AbstractContentModelService extends
     duplicate = this.name2class.get(name);
     if (duplicate != null) {
       throw new DuplicateClassException(name);
+    }
+    for (AbstractContentField field : contentClass.getDeclaredFields()) {
+      // TODO:
+      //addField(field);
     }
     this.name2class.put(name, contentClass);
     this.id2class.put(id, contentClass);
@@ -246,6 +251,53 @@ public abstract class AbstractContentModelService extends
     }
   }
 
+  protected void syncClassRecursive(AbstractContentClass contentClass,
+      AbstractContentClass superClass) {
+
+    SmartId id = contentClass.getId();
+    AbstractContentClass existingClass = this.id2class.get(id);
+    if (existingClass == null) {
+      // new content class
+
+      // TODO: verification
+      superClass.addSubClass(contentClass);
+      addClass(contentClass);
+      fireEvent(new ContentModelEvent(contentClass, ChangeEvent.Type.ADD));
+    } else {
+      ClassModifiers existingModifiers = existingClass.getModifiers();
+      boolean modified = false;
+      if (!existingClass.getName().equals(contentClass.getName())) {
+        // Class has been renamed!
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the name of a content-class is currently NOT supported!");
+      }
+      if (existingClass.getJavaClass() != contentClass.getJavaClass()) {
+        // Java-Class has changed!
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the java-class of a content-class is currently NOT supported!");
+      }
+      if (!existingModifiers.equals(contentClass.getModifiers())) {
+        if (existingModifiers.isSystem()) {
+          // TODO: NLS
+          throw new ContentModelException("Changing modifiers of system class is NOT permitted!");
+        }
+        // TODO:
+        throw new ContentModelFeatureUnsupportedException(
+            "Changing the modifiers of a content-class is currently NOT supported!");
+      }
+      for (AbstractContentField field : contentClass.getDeclaredFields()) {
+        // syncField();
+      }
+      for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+        syncClassRecursive(subClass, contentClass);
+      }
+      if (modified) {
+        fireEvent(new ContentModelEvent(contentClass, ChangeEvent.Type.UPDATE));
+      }
+    }
+
+  }
+
   /**
    * This method creates a new
    * {@link net.sf.mmm.content.model.api.ContentClass class} with the given
@@ -287,7 +339,7 @@ public abstract class AbstractContentModelService extends
       AbstractContentClass superClass, ClassModifiers modifiers, boolean deleted,
       Class<? extends ContentObject> javaClass) {
 
-    AbstractContentClass contentClass = getClass(id);
+    AbstractContentClass contentClass = getContentClass(id);
     if (getIdManager().getRootClassId().equals(id)) {
       if (superClass != null) {
         // TODO: NLS
@@ -299,8 +351,7 @@ public abstract class AbstractContentModelService extends
     }
     boolean create = (contentClass == null);
     if (create) {
-      contentClass = newClass();
-      contentClass.setId(id);
+      contentClass = createNewClass(id);
     } else {
       boolean isSystem = contentClass.getModifiers().isSystem();
       if (superClass != contentClass.getSuperClass()) {
@@ -333,7 +384,7 @@ public abstract class AbstractContentModelService extends
     contentClass.setName(name);
     contentClass.setSuperClass(superClass);
     contentClass.setModifiers(modifiers);
-    contentClass.setDeleted(deleted);
+    contentClass.setDeletedFlag(deleted);
     if (javaClass != null) {
       contentClass.setJavaClass(javaClass);
     }
@@ -387,11 +438,10 @@ public abstract class AbstractContentModelService extends
       AbstractContentClass declaringClass, FieldModifiers modifiers, Type type,
       String typeSpecification, boolean deleted) {
 
-    AbstractContentField contentField = getField(id);
+    AbstractContentField contentField = getContentField(id);
     boolean create = (contentField == null);
     if (create) {
-      contentField = newField();
-      contentField.setId(id);
+      contentField = createNewField(id);
     } else {
       if (!contentField.getName().equals(name)) {
         // TODO
@@ -422,19 +472,5 @@ public abstract class AbstractContentModelService extends
     }
     return contentField;
   }
-
-  /**
-   * This method creates a new un-initialized content-class instance.
-   * 
-   * @return the new class.
-   */
-  protected abstract AbstractContentClass newClass();
-
-  /**
-   * This method creates a new un-initialized content-field instance.
-   * 
-   * @return the new field.
-   */
-  protected abstract AbstractContentField newField();
 
 }

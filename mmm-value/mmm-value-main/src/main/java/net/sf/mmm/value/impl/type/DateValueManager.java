@@ -5,31 +5,31 @@ package net.sf.mmm.value.impl.type;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.mmm.util.Iso8601Util;
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
-import net.sf.mmm.value.api.ValueManager;
+import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
- * This is the {@link ValueManager manager} for {@link java.util.Date date}
- * values.
+ * This is the {@link net.sf.mmm.value.api.ValueManager manager} for
+ * {@link Date} values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DateValueManager extends AbstractValueManager<Date> {
 
-  /** the {@link ValueManager#getName() "logical name"} of the managed value */
+  /** the {@link #getName() "logical name"} of the managed value. */
   public static final String VALUE_NAME = "Date";
 
-  /** the {@link ValueManager#getValueClass() type} of the managed value */
+  /** the {@link #getValueClass() type} of the managed value. */
   private static final Class<Date> VALUE_TYPE = Date.class;
 
   /** the XML tagname for the date */
@@ -55,6 +55,9 @@ public class DateValueManager extends AbstractValueManager<Date> {
 
   /** the XML attribute for the second */
   private static final String XML_ATR_TIME_SECOND = "second";
+
+  /** the XML attribute for the timezone */
+  private static final String XML_ATR_TIME_ZONE = "timezone";
 
   /**
    * The constructor.
@@ -83,7 +86,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   /**
    * {@inheritDoc}
    */
-  public Date parse(String valueAsString) throws ValueParseException {
+  public Date fromString(String valueAsString) throws ValueParseException {
 
     try {
       return Iso8601Util.parseDate(valueAsString);
@@ -93,78 +96,32 @@ public class DateValueManager extends AbstractValueManager<Date> {
   }
 
   /**
-   * 
-   * @param element
-   * @param attributeName
-   * @return the attribute as integer.
-   * @throws ValueParseException
-   */
-  protected int getAttributeAsInteger(Element element, String attributeName)
-      throws ValueParseException {
-
-    String value = "";
-    if (element != null) {
-      value = element.getAttribute(attributeName);
-      if (value.length() > 0) {
-        try {
-          return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-          throw new ValueParseStringException(value, int.class, getName(), e);
-        }
-      }
-    }
-    throw new ValueParseStringException(value, int.class, getName());
-  }
-
-  /**
-   * 
-   * @param element
-   * @param attributeName
-   * @param fallback
-   * @return the attribute as integer or the fallback if the attribute is NOT
-   *         defined.
-   * @throws ValueParseException
-   */
-  protected int getAttributeAsInteger(Element element, String attributeName, int fallback)
-      throws ValueParseException {
-
-    if (element != null) {
-      String value = element.getAttribute(attributeName);
-      if (value.length() > 0) {
-        try {
-          return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-          throw new ValueParseStringException(value, int.class, getName(), e);
-        }
-      }
-    }
-    return fallback;
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
-  public Date parse(Element valueAsXml) throws ValueParseException {
+  protected Date fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
-    Calendar calendar = Calendar.getInstance();
-    NodeList childNodes = valueAsXml.getChildNodes();
-
-    Element dateElement = DomUtil.getFirstElement(childNodes, XML_TAG_DATE);
-    int year = getAttributeAsInteger(dateElement, XML_ATR_DATE_YEAR);
-    calendar.set(Calendar.YEAR, year);
-    int month = getAttributeAsInteger(dateElement, XML_ATR_DATE_MONTH);
-    calendar.set(Calendar.MONTH, month - 1);
-    int day = getAttributeAsInteger(dateElement, XML_ATR_DATE_DAY);
-    calendar.set(Calendar.DAY_OF_MONTH, day);
-
-    Element timeElement = DomUtil.getFirstElement(childNodes, XML_TAG_TIME);
-    int hour = getAttributeAsInteger(timeElement, XML_ATR_TIME_HOUR, 0);
-    calendar.set(Calendar.HOUR_OF_DAY, hour);
-    int min = getAttributeAsInteger(timeElement, XML_ATR_TIME_MINUTE, 0);
-    calendar.set(Calendar.MINUTE, min);
-    int sec = getAttributeAsInteger(timeElement, XML_ATR_TIME_SECOND, 0);
-    calendar.set(Calendar.SECOND, sec);
+    // date
+    int year = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_DATE_YEAR, Integer.class)
+        .intValue();
+    int month = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_DATE_MONTH, Integer.class)
+        .intValue();
+    int day = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_DATE_DAY, Integer.class).intValue();
+    // time
+    Integer zero = Integer.valueOf(0);
+    int hour = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_TIME_HOUR, Integer.class, zero)
+        .intValue();
+    int min = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_TIME_MINUTE, Integer.class, zero)
+        .intValue();
+    int sec = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_TIME_SECOND, Integer.class, zero)
+        .intValue();
+    String tz = xmlReader.getAttributeValue(null, XML_ATR_TIME_ZONE);
+    if (tz == null) {
+      tz = "UTC";
+    }
+    TimeZone zone = TimeZone.getTimeZone(tz);
+    Calendar calendar = Calendar.getInstance(zone);
+    calendar.set(year, (month - 1), day, hour, min, sec);
     calendar.set(Calendar.MILLISECOND, 0);
     return calendar.getTime();
   }
@@ -173,7 +130,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
    * {@inheritDoc}
    */
   @Override
-  public String toString(Date value) {
+  protected String toStringNotNull(Date value) {
 
     return Iso8601Util.formatDateTime(value);
   }
@@ -182,22 +139,28 @@ public class DateValueManager extends AbstractValueManager<Date> {
    * {@inheritDoc}
    */
   @Override
-  protected void toXmlValue(XmlWriter xmlWriter, Date value) throws XmlException {
+  protected void toXmlContent(XMLStreamWriter xmlWriter, Date value) throws XMLStreamException {
 
-    Calendar calendar = Calendar.getInstance();
+    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
     calendar.setTime(value);
-    xmlWriter.writeStartElement(XML_TAG_DATE);
-    xmlWriter.writeAttribute(XML_ATR_DATE_YEAR, Integer.toString(calendar.get(Calendar.YEAR)));
-    xmlWriter
-        .writeAttribute(XML_ATR_DATE_MONTH, Integer.toString(calendar.get(Calendar.MONTH) + 1));
-    xmlWriter.writeAttribute(XML_ATR_DATE_DAY, Integer
-        .toString(calendar.get(Calendar.DAY_OF_MONTH)));
-    xmlWriter.writeEndElement(XML_TAG_DATE);
-    xmlWriter.writeStartElement(XML_TAG_TIME);
-    xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, Integer
-        .toString(calendar.get(Calendar.HOUR_OF_DAY)));
-    xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, Integer.toString(calendar.get(Calendar.MINUTE)));
-    xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, Integer.toString(calendar.get(Calendar.SECOND)));
-    xmlWriter.writeEndElement(XML_TAG_TIME);
+    int year = calendar.get(Calendar.YEAR);
+    xmlWriter.writeAttribute(XML_ATR_DATE_YEAR, Integer.toString(year));
+    int month = calendar.get(Calendar.MONTH) + 1;
+    xmlWriter.writeAttribute(XML_ATR_DATE_MONTH, Integer.toString(month));
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+    xmlWriter.writeAttribute(XML_ATR_DATE_DAY, Integer.toString(day));
+    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    if (hour != 0) {
+      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtil.padNumber(hour, 2));
+    }
+    int min = calendar.get(Calendar.MINUTE);
+    if (min != 0) {
+      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtil.padNumber(min, 2));
+    }
+    int sec = calendar.get(Calendar.SECOND);
+    if (sec != 0) {
+      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtil.padNumber(sec, 2));
+    }
   }
+
 }

@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.base.FieldAnnotation;
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.value.base.SmartId;
 
 /**
  * This is the abstract base implementation of the {@link ContentClass}
@@ -53,13 +55,26 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
 
   /** @see #getDeclaredFields() */
   private final Collection<AbstractContentField> fieldsView;
+  
+  /** @see #isFolderClass() */
+  private boolean isFolderClass;
 
   /**
    * The constructor.
    */
   public AbstractContentClass() {
 
-    super();
+    this(null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param id is the {@link #getId() id}.
+   */
+  public AbstractContentClass(SmartId id) {
+
+    super(id);
     this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
     this.declaredFields = new HashMap<String, AbstractContentField>();
@@ -73,6 +88,50 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 25)
+  public AbstractContentClass getSuperClass() {
+
+    return this.superClass;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public AbstractContentClass getParent() {
+
+    return this.superClass;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<? extends ContentClass> getChildren() {
+  
+    return getSubClasses();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 26)
+  public boolean isFolderClass() {
+  
+    return this.isFolderClass;
+  }
+  
+  
+  /**
+   * @param isFolderClass the isFolderClass to set
+   */
+  public void setFolderClass(boolean isFolderClass) {
+
+    this.isFolderClass = isFolderClass;
+  }
+  
   /**
    * This method sets the {@link #getSuperClass() super-class}.
    * 
@@ -138,17 +197,40 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass getSuperClass() {
+  public List<AbstractContentClass> getSubClasses() {
 
-    return this.superClass;
+    return this.subClassesView;
+  }
+
+  /**
+   * This method gets the class reflecting the closest type of this
+   * content-class.
+   * 
+   * @return the "implementation".
+   */
+  @FieldAnnotation(id = 33)
+  public Class<? extends ContentObject> getJavaClass() {
+
+    return this.javaClass;
+  }
+
+  /**
+   * This method sets the {@link #getJavaClass() Java-class} of this
+   * content-class.
+   * 
+   * @param javaClass is the class realizing the entity.
+   */
+  protected void setJavaClass(Class<? extends ContentObject> javaClass) {
+
+    this.javaClass = javaClass;
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<AbstractContentClass> getSubClasses() {
+  public boolean isClass() {
 
-    return this.subClassesView;
+    return true;
   }
 
   /**
@@ -174,29 +256,6 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   public boolean isSuperClassOf(ContentClass contentClass) {
 
     return contentClass.isSubClassOf(this);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isClass() {
-
-    return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isDeleted() {
-
-    if (getDeletedFlag()) {
-      return true;
-    } else if (this.superClass == null) {
-      return false;
-    } else {
-      return this.superClass.isDeleted();
-    }
   }
 
   /**
@@ -242,31 +301,9 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
     ContentField duplicate = this.declaredFields.get(field.getName());
     if (duplicate != field) {
       this.declaredFields.put(field.getName(), field);
-    } else if (duplicate != null) {
+    } else {
       throw new DuplicateFieldException(field.getName());
     }
-  }
-
-  /**
-   * This method gets the class reflecting the closest type of this
-   * content-class.
-   * 
-   * @return the "implementation".
-   */
-  public Class<? extends ContentObject> getJavaClass() {
-
-    return this.javaClass;
-  }
-
-  /**
-   * This method sets the {@link #getJavaClass() Java-class} of this
-   * content-class.
-   * 
-   * @param javaClass is the class realizing the entity.
-   */
-  protected void setJavaClass(Class<? extends ContentObject> javaClass) {
-
-    this.javaClass = javaClass;
   }
 
   /**

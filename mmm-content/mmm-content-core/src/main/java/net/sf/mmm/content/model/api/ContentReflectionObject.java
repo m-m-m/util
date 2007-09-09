@@ -48,16 +48,4 @@ public abstract interface ContentReflectionObject extends ContentObject {
    */
   boolean isClass();
 
-  /**
-   * The deleted-flag is inherited so {@link ContentObject#isDeleted()} will
-   * return <code>true</code> if a super-classes is marked as deleted. <br>
-   * This method gets the deleted flag of this class or field. The method does
-   * not inherit the flag from super-classes or extended fields.
-   * 
-   * @see ContentObject#isDeleted()
-   * 
-   * @return the deleted flag.
-   */
-  boolean isDeletedFlagSet();
-
 }

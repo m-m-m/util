@@ -5,11 +5,9 @@ package net.sf.mmm.value.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlSerializer;
-import net.sf.mmm.util.xml.api.XmlWriter;
-
 import org.w3c.dom.Element;
+
+import net.sf.mmm.util.xml.stream.XmlSerializer;
 
 /**
  * This interface is used for generic creation and management of value objects.
@@ -41,20 +39,24 @@ public interface ValueManager<V> extends XmlSerializer<V> {
   String XML_ATR_VALUE_NAME = "type";
 
   /**
-   * the attribute name used to represent the {@link Object#getClass() class} of
-   * the value. ATTENTION: please prefer to use the {@link #XML_ATR_VALUE_NAME}
-   * attribute prior to this attribute. Be also aware, that this attribute
-   * contains may contain the class of a value implementation, while the
-   * {@link #getValueClass() "value type"} of the according value may be an
-   * interface or abstract-superclass of the value.
+   * The value of the attribute {@link #XML_ATR_VALUE_NAME} for the
+   * <code>null</code> value.
    */
-  String XML_ATR_VALUE_CLASS = "class";
+  String NULL_VALUE_NAME = "null";
+
+  /**
+   * the {@link #toString(Object) string representation} of <code>null</code>
+   * value.
+   */
+  String NULL_STRING = "null";
 
   /**
    * This method gets the logical name of the managed value type.<br>
    * To avoid using implementation class-paths as reference for a logical value
    * type (e.g. in the content-model) the value type can be represented and
-   * identified by this name.
+   * identified by this name. Typically this will be the
+   * {@link Class#getSimpleName() simple-name} of the
+   * {@link #getValueClass() value-class}.
    * 
    * @see ValueService#getManager(String)
    * 
@@ -63,7 +65,10 @@ public interface ValueManager<V> extends XmlSerializer<V> {
   String getName();
 
   /**
-   * This method gets the type of the managed value as class.
+   * This method gets the class reflecting the type of the managed value.<br>
+   * If the implementing class can NOT be determined or is NOT unique for some
+   * reason the interface of the type should be used. A typical example for that
+   * case is the {@link Element "XML DOM element"}.
    * 
    * @see #getValueType()
    * 
@@ -73,10 +78,7 @@ public interface ValueManager<V> extends XmlSerializer<V> {
 
   /**
    * This method gets the type of the managed value. Typically this should be
-   * the class implementing the value.<br>
-   * If the implementing class can NOT be determined or is NOT unique for some
-   * reason the interface of the type may be used. A typical example for that
-   * case is the {@link Element "XML DOM element"}.
+   * the {@link #getValueClass() value-class}.
    * 
    * @return the value type.
    */
@@ -96,41 +98,11 @@ public interface ValueManager<V> extends XmlSerializer<V> {
    *         string value will accept any string and never throw this
    *         exception).
    */
-  V parse(String valueAsString) throws ValueParseException;
-
-  /**
-   * This method parses a value given as XML element. It is the inverse
-   * operation of the {@link #toXml(XmlWriter, Object)} method. <br>
-   * A more high-level version of this method is
-   * {@link ValueService#xml2value(Element)}.
-   * 
-   * @param valueAsXml is the value in its XML representation. This method
-   *        should only be called if the XML representation belongs to the value
-   *        managed by this implementation. The implementation should only parse
-   *        the child nodes of the given element.
-   * @return the parsed value.
-   * @throws ValueParseException if the XML representation is illegal for the
-   *         managed value.
-   */
-  V parse(Element valueAsXml) throws ValueParseException;
-
-  /**
-   * This method creates an XML representation of the given value. <br>
-   * E.g. the string "foo" may be represented as
-   * <code>&lt;value type="String"&gt;foo&lt;/value&gt;</code>
-   * 
-   * @see XmlSerializer#toXml(XmlWriter, Object)
-   * 
-   * @param xmlWriter is the writer where to write the XML to.
-   * @param value is the value to serialize. It may be <code>null</code>.
-   * @throws XmlException if the serialization fails (I/O error, invalid XML,
-   *         etc.).
-   */
-  void toXml(XmlWriter xmlWriter, V value) throws XmlException;
+  V fromString(String valueAsString) throws ValueParseException;
 
   /**
    * This method creates a string representation of the given value. The result
-   * has to be understood by the {@link #parse(String)} method.
+   * has to be understood by the {@link #fromString(String)} method.
    * 
    * @param value is the value to get a string. It may be <code>null</code>.
    * @return the string representation of the given value.

@@ -5,9 +5,9 @@ package net.sf.mmm.content.model.base;
 
 import java.io.IOException;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelException;
-import net.sf.mmm.util.resource.DataResource;
 
 /**
  * This is the interface of a "classloader" for {@link ContentClass}es. It is
@@ -19,17 +19,20 @@ import net.sf.mmm.util.resource.DataResource;
 public interface ContentClassLoader {
 
   /**
-   * This method loads the classes by parsing the configuration from the given
-   * <code>source</code>. This source may typically point to an XML file on
-   * the disc or in the classpath.
+   * This method loads the classes of the content-model. Depending on the
+   * implementation this can happen by parsing the model from an XML
+   * configuration file, reading from a database or analyzing the java-classes
+   * of the entities.<br>
+   * <b>ATTENTION:</b><br>
+   * The {@link ContentObject#getContentClass() content-class} of the
+   * de-serialized classes and fields is NOT set by this method so it may be
+   * <code>null</code> if NOT initialized.
    * 
-   * @param source is pointing to the origin of the configuration data for the
-   *        content-model.
-   * @throws IOException if an I/O error occurred when reading the configuration
-   *         data.
-   * @throws ContentModelException if the configuration data is illegal in any
+   * @return the root-class of the model.
+   * @throws IOException if an I/O error occurred when reading the model.
+   * @throws ContentModelException if the configured model is illegal in any
    *         way.
    */
-  void loadClasses(DataResource source) throws IOException, ContentModelException;
+  AbstractContentClass loadClasses() throws IOException, ContentModelException;
 
 }

@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.base;
 
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
@@ -11,16 +12,23 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
+import net.sf.mmm.content.value.api.Lock;
+import net.sf.mmm.content.value.api.MetaDataSet;
 import net.sf.mmm.content.value.api.MutableMetaData;
+import net.sf.mmm.content.value.api.RevisionHistory;
+import net.sf.mmm.content.value.api.Version;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.content.value.impl.MetaDataImpl;
 
 /**
  * This is the implementation of the abstract entity {@link ContentObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME, isExtendable = false)
 public abstract class AbstractContentObject implements ContentObject, MutableMetaData {
+
+  /** @see #getChildren() */
+  protected static final List<? extends ContentObject> EMPTY_CHILDREN = Collections.emptyList();
 
   /** @see #getId() */
   private SmartId id;
@@ -29,14 +37,19 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   private String name;
 
   /** @see #isDeleted() */
-  private boolean deleted;
-
-  /** @see #getMetaData(String) */
-  private Map<String, MutableMetaData> metadataMap;
+  private boolean deletedFlag;
 
   /** @see #getModificationCount() */
-  // @javax.persistence.Version
   private int modificationCount;
+
+  /** @see #getLock() */
+  private Lock lock;
+
+  /** @see #getMetaDataSet() */
+  private MetaDataSet metaDataSet;
+
+  /** @see #getVersion() */
+  private Version version;
 
   /**
    * The constructor.
@@ -47,39 +60,31 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   }
 
   /**
-   * {@inheritDoc}
+   * The constructor.
+   * 
+   * @param id is the {@link #getId() id}.
    */
-  public final Object getValue(String fieldName) throws ContentException {
+  public AbstractContentObject(SmartId id) {
 
-    return getValue(fieldName, Object.class);
+    super();
+    this.id = id;
   }
 
   /**
    * {@inheritDoc}
    */
-  public <V> V getValue(String fieldName, Class<V> type) throws ContentException {
-
-    ContentField field = getContentClass().getField(fieldName);
-    if (field == null) {
-      throw new FieldNotExistsException(fieldName, getContentClass());
-    }
-    if (!field.getFieldClass().isAssignableFrom(type)) {
-      throw new ContentCastException(field.getFieldClass(), type);
-    }
-    Object result = field.getAccessor().get(this);
-    return type.cast(result);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @FieldAnnotation(id = 0)
   public SmartId getId() {
 
     return this.id;
   }
 
   /**
-   * This method sets the {@link #getId() ID}.
+   * This method sets the {@link #getId() ID} of this object.<br>
+   * <b>ATTENTION:</b><br>
+   * This method should only be used internally. To create a new object you have
+   * to use the content-repository or if you directly construct a custom entity,
+   * you leave this field blank (<code>null</code>).
    * 
    * @param id the id to set
    */
@@ -91,43 +96,18 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   /**
    * {@inheritDoc}
    */
-  public MutableMetaData getMetaData(String namespace) {
-
-    if (METADATA_NAMESPACE_NONE.equals(namespace)) {
-      return this;
-    }
-    // TODO: synchronize / semaphore!
-    // TODO: make metadata immutable if object locked!
-    MutableMetaData metadata = this.metadataMap.get(namespace);
-    if (metadata == null) {
-      metadata = loadMetaData(namespace);
-      this.metadataMap.put(namespace, metadata);
-    }
-    return metadata;
-  }
-
-  /**
-   * This method creates the metadata for the given namespace.
-   * 
-   * @param namespace is the namespace for which the metadata is requested.
-   * @return the metadata for the given namespace.
-   */
-  protected MutableMetaData loadMetaData(String namespace) {
-
-    // TODO: here we need to load the metadata from db...
-    return new MetaDataImpl();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @FieldAnnotation(id = 1)
   public String getName() {
 
     return this.name;
   }
 
   /**
-   * This method sets the {@link #getName() name} of this object.
+   * This method sets the {@link #getName() name} of this object.<br>
+   * <b>ATTENTION:</b><br>
+   * This method should only be used internally. Especially this method can NOT
+   * be used to rename this entity. Therefore you have to use the
+   * content-repository.
    * 
    * @param name the name to set
    */
@@ -137,25 +117,131 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   }
 
   /**
-   * This method gets the deleted flag of this object. This method gives direct
-   * access to the deleted flag and can be used if the method
-   * {@link AbstractContentObject#isDeleted()}has been overridden.
-   * 
-   * @see ContentObject#isDeleted()
-   * 
-   * @return the deleted flag of this object.
+   * {@inheritDoc}
    */
-  protected final boolean getDeletedFlag() {
+  @FieldAnnotation(id = 2, isTransient = true, isFinal = true)
+  public abstract ContentClass getContentClass();
 
-    return this.deleted;
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 3)
+  public abstract ContentObject getParent();
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 4, isTransient = true)
+  public List<? extends ContentObject> getChildren() {
+
+    return EMPTY_CHILDREN;
+  }
+
+  /**
+   * {@inheritDoc}
+   * 
+   * This method is <code>transient</code> instead of <code>static</code>
+   * because it is a build in feature.
+   */
+  @FieldAnnotation(id = 5, isTransient = true)
+  public boolean isFolder() {
+
+    return getContentClass().isFolderClass();
   }
 
   /**
    * {@inheritDoc}
    */
+  @FieldAnnotation(id = 6)
+  public final String getPath() {
+
+    ContentObject parent = getParent();
+    if (parent == null) {
+      // root folder
+      return PATH_SEPARATOR;
+    } else {
+      StringBuilder pathBuilder = new StringBuilder();
+      buildPathRecursive(pathBuilder);
+      return pathBuilder.toString();
+    }
+  }
+
+  /**
+   * This method is used to build the {@link #getPath() path} using the given
+   * <code>stringBuilder</code>.
+   * 
+   * @param stringBuilder is the {@link StringBuilder} where the path is
+   *        appended to.
+   */
+  private void buildPathRecursive(StringBuilder stringBuilder) {
+
+    ContentObject parent = getParent();
+    if (parent != null) {
+      ((AbstractContentObject) parent).buildPathRecursive(stringBuilder);
+      stringBuilder.append(PATH_SEPARATOR);
+      stringBuilder.append(getName());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 7)
+  public MetaDataSet getMetaDataSet() {
+
+    return this.metaDataSet;
+  }
+
+  /**
+   * @param metaDataSet the metaDataSet to set
+   */
+  protected void setMetaDataSet(MetaDataSet metaDataSet) {
+
+    this.metaDataSet = metaDataSet;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 8)
+  public Lock getLock() {
+
+    return this.lock;
+  }
+
+  /**
+   * @param lock the lock to set
+   */
+  protected void setLock(Lock lock) {
+
+    this.lock = lock;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 9)
+  public final boolean getDeletedFlag() {
+
+    return this.deletedFlag;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 10, isInherited = true, isTransient = true)
   public boolean isDeleted() {
 
-    return this.deleted;
+    if (this.deletedFlag) {
+      return true;
+    } else {
+      ContentObject parent = getParent();
+      if (parent == null) {
+        return false;
+      } else {
+        return parent.isDeleted();
+      }
+    }
   }
 
   /**
@@ -164,9 +250,9 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
    * @param deleted - if <code>true</code> the object will be marked as
    *        deleted.
    */
-  protected void setDeleted(boolean deleted) {
+  protected void setDeletedFlag(boolean deleted) {
 
-    this.deleted = deleted;
+    this.deletedFlag = deleted;
   }
 
   /**
@@ -175,6 +261,7 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
    * 
    * @return the modificationCount is the modification counter.
    */
+  @FieldAnnotation(id = 11)
   public int getModificationCount() {
 
     return this.modificationCount;
@@ -188,6 +275,72 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   protected void setModificationCount(int modificationCount) {
 
     this.modificationCount = modificationCount;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 12)
+  public int getRevision() {
+
+    return this.id.getRevision();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 13, isReadOnly = true)
+  public Version getVersion() {
+
+    return this.version;
+  }
+
+  /**
+   * This method sets the {@link #getVersion() version}.
+   * 
+   * @param version the version to set.
+   */
+  public void setVersion(Version version) {
+
+    if ((this.version != null) && (getRevision() > 0)) {
+      // TODO: NLS + detail
+      throw new IllegalArgumentException("Can NOT change version of final revision!");
+    }
+    this.version = version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @FieldAnnotation(id = 14)
+  public RevisionHistory getRevisionHistory() {
+
+    // TODO
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final Object getValue(String fieldName) throws ContentException {
+
+    return getValue(fieldName, Object.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final <V> V getValue(String fieldName, Class<V> type) throws ContentException {
+
+    ContentField field = getContentClass().getField(fieldName);
+    if (field == null) {
+      throw new FieldNotExistsException(fieldName, getContentClass());
+    }
+    if (!field.getFieldClass().isAssignableFrom(type)) {
+      throw new ContentCastException(field.getFieldClass(), type);
+    }
+    Object result = field.getAccessor().get(this);
+    return type.cast(result);
   }
 
   /**

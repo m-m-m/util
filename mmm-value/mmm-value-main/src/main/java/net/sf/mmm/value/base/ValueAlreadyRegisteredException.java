@@ -26,7 +26,7 @@ public class ValueAlreadyRegisteredException extends ValueException {
    * @param valueName is the
    *        {@link net.sf.mmm.value.api.ValueManager#getName() name} of the
    *        value that is already
-   *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManager) registered}.
+   *        {@link net.sf.mmm.value.base.AbstractValueService#addValueManager(net.sf.mmm.value.api.ValueManager) registered}.
    */
   public ValueAlreadyRegisteredException(String valueName) {
 
@@ -39,7 +39,7 @@ public class ValueAlreadyRegisteredException extends ValueException {
    * @param valueType is the
    *        {@link net.sf.mmm.value.api.ValueManager#getValueClass() type} of
    *        the value that is already
-   *        {@link net.sf.mmm.value.base.AbstractValueService#addManager(net.sf.mmm.value.api.ValueManager) registered}.
+   *        {@link net.sf.mmm.value.base.AbstractValueService#addValueManager(net.sf.mmm.value.api.ValueManager) registered}.
    */
   public ValueAlreadyRegisteredException(Class valueType) {
 

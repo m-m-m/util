@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<ValueService>
+  <value class="java.lang.String"/>
+  <value class="java.lang.Boolean"/>
+  <value class="java.lang.Integer"/>
+  <value class="java.lang.Long"/>
+  <value class="java.lang.Double"/>
+  <value manager="net.sf.mmm.value.impl.type.DateValueManager"/>
+  <value manager="net.sf.mmm.value.impl.type.ListValueManager"/>
+</ValueService>

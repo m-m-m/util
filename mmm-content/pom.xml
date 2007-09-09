@@ -15,7 +15,6 @@
   <version>1.0.0</version>
   <modules>
     <module>mmm-content-core</module>
-    <module>mmm-content-resource</module>
     <module>mmm-content-entities</module>
     <module>mmm-content-repository</module>
   </modules>

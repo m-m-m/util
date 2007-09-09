@@ -94,7 +94,7 @@ public class ContentClassTreeModel extends AbstractUITreeModel<ContentClass> imp
    */
   public ContentClass getRootNode() {
 
-    return this.contentModel.getRootClass();
+    return this.contentModel.getRootContentClass();
   }
 
 }

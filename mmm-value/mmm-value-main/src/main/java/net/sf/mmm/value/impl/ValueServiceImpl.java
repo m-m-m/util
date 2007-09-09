@@ -4,7 +4,6 @@
 package net.sf.mmm.value.impl;
 
 import net.sf.mmm.value.api.ValueException;
-import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.base.AbstractValueService;
 
 /**
@@ -24,26 +23,35 @@ public class ValueServiceImpl extends AbstractValueService {
   }
 
   /**
-   * This method {@link #addManager(ValueManager) registers} a
-   * {@link GenericValueManager} for the given value to this service.
+   * This method
+   * {@link #addValueManager(net.sf.mmm.value.api.ValueManager) registers} a
+   * {@link GenericValueManager} for the given <code>valueType</code> to this
+   * service.
    * 
    * @param <V> is the value type to register.
-   * @param valueClass is the implementation of the value. It should have a
+   * @param valueType is the implementation of the value. It should have a
    *        String arg constructor and a compliant {@link Object#toString()}
    *        method.
-   * @param name is the {@link ValueManager#getName() "logical name"} of the
-   *        value.
+   * @param name is the
+   *        {@link net.sf.mmm.value.api.ValueManager#getName() logical name} of
+   *        the value.
    * @throws ValueException if the registration fails (e.g. value for this name
    *         is already registered).
    */
-  public <V> void addValue(Class<V> valueClass, String name) throws ValueException {
+  public <V> void addValueType(Class<V> valueType, String name) throws ValueException {
 
-    addManager(new GenericValueManager<V>(valueClass, name));
+    if (valueType.isEnum()) {
+      addValueManager(new GenericEnumValueManager(valueType, name));
+    } else {
+      addValueManager(new GenericValueManager<V>(valueType, name));      
+    }
   }
 
   /**
-   * This method {@link #addManager(ValueManager) registers} a
-   * {@link GenericValueManager} for the given value to this service.
+   * This method
+   * {@link #addValueManager(net.sf.mmm.value.api.ValueManager) registers} a
+   * {@link GenericValueManager} for the given <code>valueType</code> to this
+   * service.
    * 
    * @param <V> is the value type to register.
    * @param valueClass is the implementation of the value. It should have a
@@ -52,9 +60,9 @@ public class ValueServiceImpl extends AbstractValueService {
    * @throws ValueException if the registration fails (e.g. value for this name
    *         is already registered).
    */
-  public <V> void addValue(Class<V> valueClass) throws ValueException {
+  public <V> void addValueType(Class<V> valueClass) throws ValueException {
 
-    addManager(new GenericValueManager<V>(valueClass));
+    addValueManager(new GenericValueManager<V>(valueClass));
   }
 
 }

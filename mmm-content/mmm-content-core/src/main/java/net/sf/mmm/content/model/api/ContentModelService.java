@@ -30,27 +30,27 @@ public interface ContentModelService extends ContentModelReadAccess {
 
   /** The location of the content-model. */
   String XML_MODEL_LOCATION = "net/sf/mmm/content/model/ContentModel.xml";
-  
+
   /** the root tag-name of the content-model XML representation */
-  String XML_TAG_ROOT = "model";
+  String XML_TAG_ROOT = "content-model";
 
   /**
    * the tag-name of a {@link ContentClass content-class} in the content-model
    * XML representation
    */
-  String XML_TAG_CLASS = ContentClass.CLASS_NAME;
+  String XML_TAG_CLASS = "class";
 
   /**
    * the tag-name of a {@link ContentClass content-class} in the content-model
    * XML representation
    */
-  String XML_ATR_CLASS_NAME = ContentObject.FIELD_NAME_NAME;
+  String XML_ATR_NAME = ContentObject.FIELD_NAME_NAME;
 
   /**
    * the tag-name of a {@link ContentField content-field} in the content-model
    * XML representation
    */
-  String XML_TAG_FIELD = ContentField.CLASS_NAME;
+  String XML_TAG_FIELD = "field";
 
   /**
    * This method gets the event registrar where listeners can be registered so

@@ -15,7 +15,7 @@ import net.sf.mmm.value.base.BasicValueManager;
 
 /**
  * This is a generic implementation of the
- * {@link net.sf.mmm.value.api.ValueManager}interface.
+ * {@link net.sf.mmm.value.api.ValueManager} interface.
  * 
  * @param <V> is the managed value type.
  * 
@@ -50,8 +50,9 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
   public GenericValueManager(Class<V> valueClass, String typeName) {
 
     super(valueClass, typeName);
-    if (Modifier.isAbstract(this.valueType.getModifiers())
-        || Modifier.isInterface(this.valueType.getModifiers())) {
+    Class valueType = getValueClass();
+    if (Modifier.isAbstract(valueType.getModifiers())
+        || Modifier.isInterface(valueType.getModifiers())) {
       throw new ValueException(NlsBundleValueMain.ERR_GENERIC_CLASS_ABSTRACT, valueClass);
     }
     try {
@@ -70,18 +71,18 @@ public class GenericValueManager<V> extends BasicValueManager<V> {
   /**
    * {@inheritDoc}
    */
-  public V parse(String valueAsString) throws ValueParseException {
+  public V fromString(String valueAsString) throws ValueParseException {
 
     try {
       return this.stringConstructor.newInstance(new Object[] { valueAsString });
     } catch (IllegalArgumentException e) {
-      throw new ValueParseStringException(valueAsString, this.valueType, this.name, e);
+      throw new ValueParseStringException(valueAsString, getValueClass(), getName(), e);
     } catch (InstantiationException e) {
-      throw new ValueParseStringException(valueAsString, this.valueType, this.name, e);
+      throw new ValueParseStringException(valueAsString, getValueClass(), getName(), e);
     } catch (IllegalAccessException e) {
-      throw new ValueParseStringException(valueAsString, this.valueType, this.name, e);
+      throw new ValueParseStringException(valueAsString, getValueClass(), getName(), e);
     } catch (InvocationTargetException e) {
-      throw new ValueParseStringException(valueAsString, this.valueType, this.name, e);
+      throw new ValueParseStringException(valueAsString, getValueClass(), getName(), e);
     }
   }
 

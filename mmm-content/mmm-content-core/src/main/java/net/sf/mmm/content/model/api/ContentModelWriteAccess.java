@@ -32,7 +32,7 @@ public interface ContentModelWriteAccess {
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
-  ContentClass createClass(ContentClass superClass, String name, ClassModifiers modifiers)
+  ContentClass createContentClass(ContentClass superClass, String name, ClassModifiers modifiers)
       throws ContentModelException;
 
   /**
@@ -59,7 +59,7 @@ public interface ContentModelWriteAccess {
    *         </li>
    *         </ul>
    */
-  ContentField createField(ContentClass declaringClass, String name, Type type,
+  ContentField createContentField(ContentClass declaringClass, String name, Type type,
       FieldModifiers modifiers) throws ContentModelException;
 
   /**

@@ -56,7 +56,7 @@ public abstract class AbstractTemplatedGenericValue<V> extends AbstractGenericVa
 
     V value = getPlainValue();
     if (value == null) {
-      throw new ValueNotSetException(this);
+      throw new ValueNotSetException(toString());
     }
     return convertValue(type, value);
   }

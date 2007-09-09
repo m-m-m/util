@@ -5,7 +5,6 @@ package net.sf.mmm.value.impl;
 
 import net.sf.mmm.value.api.ValueException;
 import net.sf.mmm.value.impl.type.DateValueManager;
-import net.sf.mmm.value.impl.type.XmlValueManager;
 
 /**
  * This is an implementation of the {@link net.sf.mmm.value.api.ValueService}
@@ -22,14 +21,13 @@ public class StaticValueServiceImpl extends ValueServiceImpl {
 
     super();
     try {
-      addManager(new GenericValueManager<Boolean>(Boolean.class));
-      addManager(new DateValueManager());
-      addManager(new GenericValueManager<Integer>(Integer.class));
-      addManager(new GenericValueManager<Long>(Long.class));
-      addManager(new GenericValueManager<Float>(Float.class));
-      addManager(new GenericValueManager<Double>(Double.class));
-      addManager(new GenericValueManager<String>(String.class));
-      addManager(new XmlValueManager());
+      addValueType(Boolean.class);
+      addValueType(Integer.class);
+      addValueType(Long.class);
+      addValueType(Float.class);
+      addValueType(Double.class);
+      addValueType(String.class);
+      addValueManager(new DateValueManager());
     } catch (ValueException e) {
       throw new IllegalStateException("ValueService initialization is illegal!", e);
     }

@@ -6,12 +6,10 @@
 %><%@ page import="net.sf.mmm.util.StringUtil"
 %><%@ page import="net.sf.mmm.search.api.SearchEntry"
 %><%@ page import="net.sf.mmm.search.view.SearchViewConfiguration"
-%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%
-  // get parameters as attributes (already validated and prepared by the servlet)
+%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%// get parameters as attributes (already validated and prepared by the servlet)
   SearchViewContext searchContext = SearchViewContext.get(request);
   SearchViewConfiguration conf = searchContext.getConfiguration();
-  SearchEntry entry = searchContext.getEntry();
-%><html>
+  SearchEntry entry = searchContext.getEntry();%><html>
 <head>
   <title>Details for your search-result</title>
   <meta name="description" content="Details for your search-result"/>
@@ -28,8 +26,8 @@
   Back to the <a href="search">search</a>.
 </div>
 <%
-  if (entry == null) {
-    %>
+if (entry == null) {
+%>
 <div id="hitlisttop">
 An error has occurred while getting the details of your search-result.
 </div>
@@ -37,31 +35,33 @@ An error has occurred while getting the details of your search-result.
 Error while getting the details:<br/>
 <br/>
     <%
-    Exception error = searchContext.getException();
-    if (error == null) {
-      %>
+        Exception error = searchContext.getException();
+        if (error == null) {
+    %>
 The parameter for the search-result is missing. Maybe this page was not called
 from the <a href="search">search-page</a>.
       <%
-    } else {      
-      %>
+    } else {
+    %>
 <pre>
-<% error.printStackTrace(new java.io.PrintWriter(out)); %>
+<%
+error.printStackTrace(new java.io.PrintWriter(out));
+%>
 </pre>
       <%
-    }
-    %>
+      }
+      %>
 </div>
 <div id="hitlistbottom">
 An error has occurred while getting the details of your search-result.
 </div>
     <%
-  } else {
-    String url = conf.getUrlPrefixBySource(entry.getSource()) + entry.getUri();
-    String title = SearchViewContext.getEntryTitle(entry);
+        } else {
+        String url = conf.getUrlPrefixBySource(entry.getSource()) + entry.getUri();
+        String title = SearchViewContext.getEntryTitle(entry);
     %>
 <div id="hitlisttop">
-Details for <a href="<%= url%>"><strong><%= title %></strong></a>.
+Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
 </div>
 <div id="hit">
 <table>
@@ -73,26 +73,26 @@ Details for <a href="<%= url%>"><strong><%= title %></strong></a>.
   </thead>
   <tbody>
     <%
-  Iterator<String> fieldIterator = entry.getPropertyNames();
-  int flipFlop = 0;
-  while (fieldIterator.hasNext()) {
-    String name = fieldIterator.next();
-    if (!name.equals(SearchEntry.PROPERTY_TEXT)) {
-      String styleClass = (flipFlop == 0) ? "even" : "odd";
-      %>
-    <tr class="<%= styleClass%>">
-      <td><%= name %></td>
-      <td><%= StringUtil.escapeXml(entry.getProperty(name), false) %></td>
-    </tr>
-      <%
-      flipFlop = (flipFlop + 1) % 2;
-    }
-  }  
-  String styleClass = (flipFlop == 0) ? "even" : "odd";
+      Iterator<String> fieldIterator = entry.getPropertyNames();
+      int flipFlop = 0;
+      while (fieldIterator.hasNext()) {
+        String name = fieldIterator.next();
+        if (!name.equals(SearchEntry.PROPERTY_TEXT)) {
+          String styleClass = (flipFlop == 0) ? "even" : "odd";
     %>
     <tr class="<%= styleClass%>">
-      <td><%= SearchEntry.PROPERTY_TEXT %></td>
-      <td><pre><%= StringUtil.escapeXml(entry.getProperty(SearchEntry.PROPERTY_TEXT), false) %></pre></td>
+      <td><%=name%></td>
+      <td><%=StringUtil.escapeXml(entry.getProperty(name), false)%></td>
+    </tr>
+      <%
+          flipFlop = (flipFlop + 1) % 2;
+          }
+        }  
+        String styleClass = (flipFlop == 0) ? "even" : "odd";
+      %>
+    <tr class="<%= styleClass%>">
+      <td><%=SearchEntry.PROPERTY_TEXT%></td>
+      <td><pre><%=StringUtil.escapeXml(entry.getProperty(SearchEntry.PROPERTY_TEXT), false)%></pre></td>
     </tr>
   </tbody>
 </table>

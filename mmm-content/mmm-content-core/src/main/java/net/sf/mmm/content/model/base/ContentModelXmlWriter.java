@@ -56,7 +56,7 @@ public class ContentModelXmlWriter {
       xmlWriter.writeAttribute(ContentObject.FIELD_NAME_ID, idString);
     }
     xmlWriter.writeAttribute(ContentObject.FIELD_NAME_NAME, contentObject.getName());
-    if (contentObject.isDeletedFlagSet()) {
+    if (contentObject.getDeletedFlag()) {
       xmlWriter.writeAttribute(ContentObject.FIELD_NAME_DELETED, StringUtil.TRUE);
     }
   }

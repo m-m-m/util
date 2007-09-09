@@ -5,8 +5,7 @@ package net.sf.mmm.gui.model.content.impl;
 
 import net.sf.mmm.content.model.api.ClassModifiers;
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.model.impl.BasicContentModelService;
-import net.sf.mmm.content.model.impl.DummyClassResolver;
+import net.sf.mmm.content.model.impl.CoreContentModelService;
 import net.sf.mmm.ui.toolkit.api.UIFactory;
 import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
@@ -51,10 +50,8 @@ public class ContentClassTreeModelDemo {
   public static void main(String[] args) throws Exception {
 
     UIFactory uiFactory = new UIFactorySwing();
-    BasicContentModelService modelService = new BasicContentModelService();
-    DummyClassResolver resolver = new DummyClassResolver();
-    resolver.initialize();
-    modelService.setClassResolver(resolver);
+    CoreContentModelService modelService = new CoreContentModelService();
+    //modelService.setClassResolver(resolver);
     modelService.initialize();
 
     final ContentReflectionModelManagerImpl modelManager = new ContentReflectionModelManagerImpl();
@@ -100,7 +97,7 @@ public class ContentClassTreeModelDemo {
     splitPanel.setTopOrLeftComponent(tree);
     UIFrame frame = uiFactory.createFrame("test");
     final UITable<Object> table = uiFactory.createTable(false, modelManager
-        .getFieldTableModel(modelService.getRootClass()));
+        .getFieldTableModel(modelService.getRootContentClass()));
     tree.addActionListener(new UIActionListener() {
 
       public void invoke(UINode source, ActionType action) {

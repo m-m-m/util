@@ -6,12 +6,10 @@
 %><%@ page import="net.sf.mmm.search.engine.api.SearchResultPage"
 %><%@ page import="net.sf.mmm.search.engine.api.SearchHit"
 %><%@ page import="net.sf.mmm.search.view.SearchViewConfiguration"
-%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%
-  // get parameters as attributes (already validated and prepared by the servlet)
+%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%// get parameters as attributes (already validated and prepared by the servlet)
   SearchViewContext searchContext = SearchViewContext.get(request);
   SearchResultPage searchPage = searchContext.getResultPage();
-  SearchViewConfiguration conf = searchContext.getConfiguration();
-%><html>
+  SearchViewConfiguration conf = searchContext.getConfiguration();%><html>
 <head>
   <title>Search</title>
   <meta name="description" content="Search result page"/>
@@ -86,32 +84,32 @@ function showPage(pageNum) {
       Source: 
       <select name="<%= SearchViewContext.PARAM_SOURCE %>" size="1">
         <%
-          for (String source: conf.getSourceNames()) {
-            String sourceKey = conf.getSourceByName(source);
-            String sourceSelected = "";
-            if (sourceKey.equals(searchContext.getSource())) {
-              sourceSelected = "selected=\"true\"";
-            }
-            %>
-        <option value="<%= sourceKey%>"<%= sourceSelected %>><%= source %></option>            
-            <%
-          }          
+                    for (String source: conf.getSourceNames()) {
+                    String sourceKey = conf.getSourceByName(source);
+                    String sourceSelected = "";
+                    if (sourceKey.equals(searchContext.getSource())) {
+                      sourceSelected = "selected=\"true\"";
+                    }
         %>
+        <option value="<%= sourceKey%>"<%= sourceSelected %>><%=source%></option>            
+            <%
+                        }
+                        %>
       </select>
       Filetype:
       <select name="<%= SearchViewContext.PARAM_TYPE %>" size="1">
         <%
-          for (String type: conf.getTypeNames()) {
-            String typeKey = conf.getTypeByName(type);
-            String typeSelected = "";
-            if (typeKey.equals(searchContext.getType())) {
-              typeSelected = " selected=\"true\"";
-            }
-            %>
-        <option value="<%= typeKey%>"<%= typeSelected %>><%= type %></option>            
-            <%
-          }          
+                    for (String type: conf.getTypeNames()) {
+                    String typeKey = conf.getTypeByName(type);
+                    String typeSelected = "";
+                    if (typeKey.equals(searchContext.getType())) {
+                      typeSelected = " selected=\"true\"";
+                    }
         %>
+        <option value="<%= typeKey%>"<%= typeSelected %>><%=type%></option>            
+            <%
+                        }
+                        %>
       </select>
       Author: <input type="text" maxlength="512" name="<%= SearchViewContext.PARAM_AUTHOR %>" value="<%= StringUtil.escapeXml(searchContext.getAuthor(), true) %>"/><br/>
     </div>

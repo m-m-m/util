@@ -16,12 +16,6 @@
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-configuration-core</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-util-xml</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
@@ -29,6 +23,12 @@
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-util-misc</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-resource</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

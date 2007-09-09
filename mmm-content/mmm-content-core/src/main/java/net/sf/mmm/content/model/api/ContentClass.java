@@ -20,7 +20,7 @@ import net.sf.mmm.content.api.ContentObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface ContentClass extends ContentReflectionObject {
-  
+
   /** the name of the {@link #getContentClass() class} reflecting this type. */
   String CLASS_NAME = "ContentClass";
 
@@ -62,6 +62,20 @@ public interface ContentClass extends ContentReflectionObject {
    * the attribute for the {@link #getName() name}.
    */
   String XML_TAG_CONTENT_MODEL = "ContentModel";
+
+  /**
+   * {@inheritDoc}
+   * 
+   * @return the {@link #getSuperClass() super-class}.
+   */
+  ContentClass getParent();
+
+  /**
+   * {@inheritDoc}
+   * 
+   * @return the {@link #getSubClasses() sub-classes}.
+   */
+  List<? extends ContentClass> getChildren();
 
   /**
    * This method gets an iterator of all fields declared by this class. This
@@ -120,7 +134,10 @@ public interface ContentClass extends ContentReflectionObject {
   Collection<? extends ContentField> getFields();
 
   /**
-   * This method gets the super-class of this class.
+   * This method gets the super-class of this class. Like in java this class
+   * inherits everything from its super-classes.<br>
+   * This method is equivalent to {@link #getParent()} and only exists for its
+   * more precise name.
    * 
    * @return the super-class that is extended by this class.
    */
@@ -175,5 +192,16 @@ public interface ContentClass extends ContentReflectionObject {
    * @return the actual Java {@link Class} realizing the entity.
    */
   Class<? extends ContentObject> getJavaClass();
+
+  /**
+   * This method determines if the {@link ContentObject entity} represented by
+   * this {@link ContentClass} is a {@link ContentObject#isFolder() folder}.
+   * 
+   * @see ContentObject#isFolder()
+   * 
+   * @return <code>true</code> if the represented entity is a folder,
+   *         <code>false</code> if it is a leaf.
+   */
+  boolean isFolderClass();
 
 }

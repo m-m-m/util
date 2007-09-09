@@ -4,6 +4,7 @@
 package net.sf.mmm.content.model.api;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.value.validator.api.ValueValidator;
@@ -64,6 +65,20 @@ public interface ContentField extends ContentReflectionObject {
    */
   String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
 
+  /**
+   * {@inheritDoc}
+   * 
+   * @return the {@link #getDeclaringClass() declaring-class}.
+   */
+  ContentField getParent();
+
+  /**
+   * {@inheritDoc}
+   * 
+   * @return the sub-fields of this field.
+   */
+  public List<? extends ContentField> getChildren();
+  
   /**
    * This method gets the content-class that declares this field. This does NOT
    * mean that the field is
