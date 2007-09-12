@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.sf.mmm.content.value.base.SmartId;
 
 /**
@@ -19,8 +16,11 @@ public final class FieldId implements SmartId {
   /** UID for serialization. */
   private static final long serialVersionUID = 2291237026928351257L;
 
+  /** @see #POOL */
+  private static final int POOL_SIZE = 256;
+
   /** @see #valueOf(int) */
-  private static final Map<Integer, FieldId> POOL = new HashMap<Integer, FieldId>();
+  private static final FieldId[] POOL = new FieldId[POOL_SIZE];
 
   /** @see #toString() */
   private static final String PREFIX = Long.toString(OID_FIELD, RADIX) + SEPARATOR;
@@ -132,12 +132,11 @@ public final class FieldId implements SmartId {
   public static FieldId valueOf(int fieldUid) {
 
     FieldId id;
-    if (fieldUid < 256) {
-      Integer key = Integer.valueOf(fieldUid);
-      id = POOL.get(key);
+    if (fieldUid < POOL_SIZE) {
+      id = POOL[fieldUid];
       if (id == null) {
         id = new FieldId(fieldUid);
-        POOL.put(key, id);
+        POOL[fieldUid] = id;
       }
     } else {
       id = new FieldId(fieldUid);

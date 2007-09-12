@@ -3,14 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.base;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
+import net.sf.mmm.content.model.api.access.ContentClassReadAccessByJavaClass;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Lock;
 import net.sf.mmm.content.value.api.MetaDataSet;
@@ -21,14 +22,13 @@ import net.sf.mmm.content.value.base.SmartId;
 
 /**
  * This is the implementation of the abstract entity {@link ContentObject}.
+ * Based on this implementation each sub-class has to be annotated with
+ * {@link ClassAnnotation} in order to be an entity-type.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @ClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME, isExtendable = false)
 public abstract class AbstractContentObject implements ContentObject, MutableMetaData {
-
-  /** @see #getChildren() */
-  protected static final List<? extends ContentObject> EMPTY_CHILDREN = Collections.emptyList();
 
   /** @see #getId() */
   private SmartId id;
@@ -50,6 +50,12 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
 
   /** @see #getVersion() */
   private Version version;
+
+  /** @see #getProxyTarget() */
+  private AbstractContentObject proxyTarget;
+
+  /** @see #getContentClass() */
+  private static ContentClassReadAccessByJavaClass classAccess;
 
   /**
    * The constructor.
@@ -118,9 +124,36 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
 
   /**
    * {@inheritDoc}
+   * 
+   * Override this method if you implement a generic entity that can represent
+   * multiple content-classes.
    */
   @FieldAnnotation(id = 2, isTransient = true, isFinal = true)
-  public abstract ContentClass getContentClass();
+  public ContentClass getContentClass() {
+
+    if (classAccess == null) {
+      throw new IllegalStateException("The system is NOT yet initialized!");
+    }
+    ContentClass contentClass = classAccess.getContentClass(getClass());
+    if (contentClass == null) {
+      throw new IllegalStateException("The system is NOT yet initialized!");
+    }
+    return contentClass;
+  }
+
+  /**
+   * This method sets the accessor used to get the
+   * {@link #getContentClass() content-class}. It has to be set once during the
+   * bootstrap of the system.
+   * 
+   * @param contentClassAccess is the classAccess to set.
+   */
+  public static void setClassAccess(ContentClassReadAccessByJavaClass contentClassAccess) {
+
+    assert (classAccess == null);
+    assert (contentClassAccess != null);
+    classAccess = contentClassAccess;
+  }
 
   /**
    * {@inheritDoc}
@@ -132,9 +165,9 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
    * {@inheritDoc}
    */
   @FieldAnnotation(id = 4, isTransient = true)
-  public List<? extends ContentObject> getChildren() {
+  public Collection<? extends ContentObject> getChildren() {
 
-    return EMPTY_CHILDREN;
+    return Collections.emptyList();
   }
 
   /**
@@ -228,8 +261,14 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
 
   /**
    * {@inheritDoc}
+   * 
+   * <b>ATTENTION:</b><br>
+   * This field/method is logically
+   * {@link FieldAnnotation#isInherited() inherited} but NOT annotated with
+   * <code>isInherited = true</code>. This feature is programmatically
+   * implemented since it is required at a very low level.
    */
-  @FieldAnnotation(id = 10, isInherited = true, isTransient = true)
+  @FieldAnnotation(id = 10, isTransient = true)
   public boolean isDeleted() {
 
     if (this.deletedFlag) {
@@ -317,6 +356,28 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
 
     // TODO
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public AbstractContentObject getProxyTarget() {
+
+    return this.proxyTarget;
+  }
+
+  /**
+   * This method gets the raw instance of this object.<br>
+   * According to {@link #getProxyTarget() proxying} and
+   * {@link #getParent() inheritance} this instance may be "manipulated" to add
+   * the according support. Therefore this method returns the original object
+   * without manipulations. This is needed e.g. for the editor GUI.
+   * 
+   * @return the raw object.
+   */
+  public AbstractContentObject getRawObject() {
+
+    return this;
   }
 
   /**

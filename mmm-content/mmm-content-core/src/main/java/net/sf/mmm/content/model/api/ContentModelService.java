@@ -4,18 +4,20 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.model.api.access.ContentModelReadAccess;
+import net.sf.mmm.content.model.api.access.ContentModelWriteAccess;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.ContentIdManager;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
 
 /**
- * This is the interface for a service that provides access to the content
- * model. <br>
+ * This is the interface for a service that provides access to the
+ * content-model. <br>
  * The content model is used to reflect the different types of
- * {@link net.sf.mmm.content.api.ContentObject content-object}s. It is used for
- * generic access to the content (UI for rendering editors, persistence for O/R
- * mapping, etc.).
+ * {@link net.sf.mmm.content.api.ContentObject content-object}s (also called
+ * entities). It is used for generic access to the content (UI for rendering
+ * editors, persistence for O/R mapping, etc.).
  * 
  * @see net.sf.mmm.content.model.api.ContentClass
  * 

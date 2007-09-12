@@ -4,7 +4,7 @@
 package net.sf.mmm.content.api;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
@@ -16,8 +16,9 @@ import net.sf.mmm.content.value.api.RevisionHistory;
 import net.sf.mmm.content.value.api.Version;
 
 /**
- * This is the abstract interface for any content object. Such object is a
- * persistent entity stored in a repository.<br>
+ * This is the abstract interface for any content object. An instance of
+ * {@link ContentObject this} interface is called <em>entity</em> and is
+ * stored in a persistent repository.<br>
  * The core Java OO-world is rewritten here as meta-model inside Java. The
  * following table shows the mmm types to corresponding Java constructs:<br>
  * <table border="1">
@@ -42,9 +43,11 @@ import net.sf.mmm.content.value.api.Version;
  * <td>{@link net.sf.mmm.content.model.base.ContentClassLoader ContentClassLoader}</td>
  * </tr>
  * </table> <br>
- * In this context {@link ContentObject this} type and its specific sub-types
- * are called <em>entity</em>.<br>
- * TODO: add lock support
+ * The tree spanned by the hierarchy of the {@link ContentClass}es is called
+ * <em>content-model</em>. A sub-type of this interface has to follow
+ * specific rules in order to be an entity-type that will have a
+ * {@link ContentClass}. For more details see
+ * {@link net.sf.mmm.content.base.AbstractContentObject AbstractContentObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -244,8 +247,8 @@ public abstract interface ContentObject extends Serializable {
   RevisionHistory getRevisionHistory();
 
   /**
-   * This method gets the parent of this object. This may typically be the
-   * folder containing the object.
+   * This method gets the parent of this object. This will typically be the
+   * {@link #isFolder() folder} containing the object.
    * 
    * @return the parent or <code>null</code> if this is the root-{@link net.sf.mmm.content.resource.api.ContentFolder folder}
    *         or the root-{@link ContentClass class}.
@@ -265,7 +268,7 @@ public abstract interface ContentObject extends Serializable {
    * 
    * @return the child resources.
    */
-  List<? extends ContentObject> getChildren();
+  Collection<? extends ContentObject> getChildren();
 
   /**
    * This method determines if this entity is a <em>folder</em> or a
@@ -280,6 +283,24 @@ public abstract interface ContentObject extends Serializable {
    *         if it is a leaf.
    */
   boolean isFolder();
+
+  /**
+   * This method gets the proxy-target of this object. If the proxy-target is
+   * NOT <code>null</code>, this object is a proxy on another instance of the
+   * same {@link #getContentClass() type}. Then all fields that are NOT set
+   * (that are <code>null</code>) are "inherited" from the
+   * {@link #getProxyTarget() proxy-target}. This rule applies before fields
+   * are inherited from the {@link #getParent() parent} and does NOT apply for
+   * {@link #getId() ID} and {@link #getName() name}. A proxy with no field set
+   * acts like a link in a unix filesystem.<br>
+   * <b>INFORMATION:</b><br>
+   * The returned object needs to have the same {@link #getContentClass() type}
+   * as this instance.
+   * 
+   * @return the proxy-target or <code>null</code> if this is a regular
+   *         content-object.
+   */
+  ContentObject getProxyTarget();
 
   /**
    * This method gets the value of the specified

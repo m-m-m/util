@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
+import net.sf.mmm.content.model.api.access.ContentModelWriteAccess;
+
 /**
  * This is the interface for the modifiers of a
  * {@link net.sf.mmm.content.model.api.ContentClass content-class}.

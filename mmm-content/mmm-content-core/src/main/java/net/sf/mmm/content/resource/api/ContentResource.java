@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.resource.api;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.content.api.ContentObject;
 
@@ -44,6 +44,6 @@ public abstract interface ContentResource extends ContentObject {
   /**
    * {@inheritDoc}
    */
-  public List<? extends ContentResource> getChildren();
+  public Collection<? extends ContentResource> getChildren();
 
 }

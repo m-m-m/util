@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
+import net.sf.mmm.content.model.api.access.ContentModelWriteAccess;
+
 /**
  * This interface extends the {@link ContentModelService} interface with methods
  * to edit the content model.<br>

@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.value.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
@@ -23,8 +20,11 @@ public final class ClassId implements SmartId {
   /** UID for serialization. */
   private static final long serialVersionUID = -7638229489656133262L;
 
+  /** @see #POOL */
+  private static final int POOL_SIZE = 256;
+
   /** @see #valueOf(int) */
-  private static final Map<Integer, ClassId> POOL = new HashMap<Integer, ClassId>(64);
+  private static final ClassId[] POOL = new ClassId[POOL_SIZE];
 
   /** @see #toString() */
   private static final String PREFIX = Long.toString(OID_CLASS, RADIX) + SEPARATOR;
@@ -159,12 +159,11 @@ public final class ClassId implements SmartId {
   public static ClassId valueOf(int classUid) {
 
     ClassId id;
-    if (classUid < 256) {
-      Integer key = Integer.valueOf(classUid);
-      id = POOL.get(key);
+    if (classUid < POOL_SIZE) {
+      id = POOL[classUid];
       if (id == null) {
         id = new ClassId(classUid);
-        POOL.put(key, id);
+        POOL[classUid] = id;
       }
     } else {
       id = new ClassId(classUid);

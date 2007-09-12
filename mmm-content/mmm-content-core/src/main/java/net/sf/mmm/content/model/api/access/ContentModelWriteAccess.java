@@ -1,9 +1,16 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.model.api;
+package net.sf.mmm.content.model.api.access;
 
 import java.lang.reflect.Type;
+
+import net.sf.mmm.content.model.api.ClassModifiers;
+import net.sf.mmm.content.model.api.ContentClass;
+import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.ContentModelException;
+import net.sf.mmm.content.model.api.ContentReflectionObject;
+import net.sf.mmm.content.model.api.FieldModifiers;
 
 /**
  * This interface gives write access to the content model.

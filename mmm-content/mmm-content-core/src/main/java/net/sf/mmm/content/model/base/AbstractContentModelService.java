@@ -19,6 +19,7 @@ import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelFeatureUnsupportedException;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.model.api.FieldModifiers;
+import net.sf.mmm.content.model.api.access.ContentClassReadAccessByJavaClass;
 import net.sf.mmm.content.model.base.DuplicateClassException;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
@@ -36,13 +37,16 @@ import net.sf.mmm.util.event.EventSource;
  */
 public abstract class AbstractContentModelService extends
     AbstractSynchronizedEventSource<ContentModelEvent, EventListener<ContentModelEvent>> implements
-    ContentModelService, ContentReflectionFactory {
+    ContentModelService, ContentReflectionFactory, ContentClassReadAccessByJavaClass {
 
   /** @see #getContentClass(String) */
   private final Map<String, AbstractContentClass> name2class;
 
   /** @see #getContentClass(ContentId) */
   private final Map<ContentId, AbstractContentClass> id2class;
+
+  /** @see #getContentClass(Class) */
+  private final Map<Class, AbstractContentClass> class2class;
 
   /** @see #getContentClasses() */
   private final List<AbstractContentClass> classes;
@@ -68,6 +72,7 @@ public abstract class AbstractContentModelService extends
     // TODO: use concurrent map?
     this.name2class = new HashMap<String, AbstractContentClass>();
     this.id2class = new HashMap<ContentId, AbstractContentClass>();
+    this.class2class = new HashMap<Class, AbstractContentClass>();
     this.classes = new ArrayList<AbstractContentClass>();
     this.classesView = Collections.unmodifiableList(this.classes);
     this.id2field = new HashMap<ContentId, AbstractContentField>();
@@ -117,6 +122,14 @@ public abstract class AbstractContentModelService extends
   /**
    * {@inheritDoc}
    */
+  public AbstractContentClass getContentClass(Class<? extends ContentObject> javaClass) {
+
+    return this.class2class.get(javaClass);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public AbstractContentField getContentField(ContentId id) {
 
     return this.id2field.get(id);
@@ -161,20 +174,25 @@ public abstract class AbstractContentModelService extends
     ContentId id = contentClass.getId();
     AbstractContentClass duplicate = this.id2class.get(id);
     if (duplicate != null) {
-      throw new DuplicateClassException(id);
+      throw new DuplicateClassException(contentClass, duplicate);
     }
     String name = contentClass.getName();
     duplicate = this.name2class.get(name);
     if (duplicate != null) {
-      throw new DuplicateClassException(name);
+      throw new DuplicateClassException(contentClass, duplicate);
     }
     for (AbstractContentField field : contentClass.getDeclaredFields()) {
-      // TODO:
-      //addField(field);
+      if (!this.id2field.containsKey(field.getId())) {
+        addField(field);        
+      }
     }
     this.name2class.put(name, contentClass);
     this.id2class.put(id, contentClass);
-    // TODO: sort list!
+    Class javaClass = contentClass.getJavaClass();
+    if (!this.class2class.containsKey(javaClass)) {
+      this.class2class.put(javaClass, contentClass);
+    }
+    // TODO: sorted list?!
     this.classes.add(contentClass);
   }
 

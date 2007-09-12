@@ -19,7 +19,6 @@ import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.widget.UIButton;
 import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
 import net.sf.mmm.ui.toolkit.api.widget.UITable;
 import net.sf.mmm.ui.toolkit.api.widget.UITextField;
 import net.sf.mmm.ui.toolkit.api.widget.UITree;
@@ -131,6 +130,10 @@ public class ContentClassTreeModelDemo {
     frame.setVisible(true);
     splitPanel.setDividerPosition(0.5);
     splitPanelRight.setDividerPosition(0.5);
+    while (frame.isVisible()) {
+      uiFactory.getDisplay().dispatch();
+    }
+    System.exit(0);
   }
 
 }

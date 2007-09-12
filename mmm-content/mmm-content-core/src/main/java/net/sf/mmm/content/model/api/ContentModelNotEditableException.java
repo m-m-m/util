@@ -4,6 +4,7 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.content.NlsBundleContentCore;
+import net.sf.mmm.content.model.api.access.ContentModelWriteAccess;
 
 /**
  * This exception is thrown if the

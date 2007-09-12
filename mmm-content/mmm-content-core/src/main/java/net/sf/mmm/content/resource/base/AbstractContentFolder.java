@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.resource.base;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
@@ -16,10 +16,7 @@ import net.sf.mmm.content.resource.api.ContentResource;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentFolder extends AbstractContentObject implements ContentFolder {
-
-  /** @see #getContentClass() */
-  private static ContentClass virtualFolderClass;
+public abstract class AbstractContentFolder extends AbstractContentResource implements ContentFolder {
 
   /**
    * The constructor.
@@ -41,31 +38,10 @@ public abstract class AbstractContentFolder extends AbstractContentObject implem
   /**
    * {@inheritDoc}
    */
-  public ContentClass getContentClass() {
-
-    return virtualFolderClass;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
-  public List<? extends ContentResource> getChildren() {
+  public Collection<? extends ContentResource> getChildren() {
   
     return null;
-  }
-  
-  /**
-   * This method sets the {@link #getContentClass() content-class} of this
-   * folder.
-   * 
-   * @param contentClass is the content-class.
-   */
-  public static void setContentClass(ContentClass contentClass) {
-
-    assert ((virtualFolderClass == null) || (virtualFolderClass == contentClass));
-    assert (contentClass != null);
-    virtualFolderClass = contentClass;
   }
 
 }

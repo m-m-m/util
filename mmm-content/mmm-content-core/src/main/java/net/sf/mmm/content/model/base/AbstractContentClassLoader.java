@@ -6,7 +6,9 @@ package net.sf.mmm.content.model.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.content.model.api.SimpleContentModelReadAccess;
+import net.sf.mmm.content.model.api.access.ContentClassReadAccessById;
+import net.sf.mmm.content.model.api.access.ContentClassReadAccessByName;
+import net.sf.mmm.content.model.api.access.ContentFieldReadAccessById;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
@@ -54,16 +56,17 @@ public abstract class AbstractContentClassLoader implements ContentClassLoader {
 
     return this.contentModelService;
   }
-  
+
   protected SmartIdManager getIdManager() {
-    
+
     return this.contentModelService.getIdManager();
   }
 
   /**
    * This inner class is the context used to cache results during class-loading.
    */
-  public static class Context implements SimpleContentModelReadAccess {
+  public static class Context implements ContentFieldReadAccessById, ContentClassReadAccessById,
+      ContentClassReadAccessByName {
 
     /** @see #getContentClass(String) */
     private final Map<String, AbstractContentClass> name2classMap;

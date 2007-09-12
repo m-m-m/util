@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.resource.base;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.sf.mmm.content.resource.api.ContentResource;
@@ -21,7 +22,7 @@ public final class VirtualContentFolder extends AbstractContentFolder {
   private static final long serialVersionUID = -3902226716325685268L;
 
   /** @see #getChildren() */
-  private List<ContentResource> children;
+  private Collection<ContentResource> children;
 
   /**
    * The constructor.
@@ -36,7 +37,7 @@ public final class VirtualContentFolder extends AbstractContentFolder {
    * 
    * @param children are the {@link #getChildren() children} of the folder.
    */
-  public VirtualContentFolder(List<ContentResource> children) {
+  public VirtualContentFolder(Collection<ContentResource> children) {
 
     super();
     this.children = children;
@@ -45,7 +46,7 @@ public final class VirtualContentFolder extends AbstractContentFolder {
   /**
    * {@inheritDoc}
    */
-  public List<ContentResource> getChildren() {
+  public Collection<ContentResource> getChildren() {
 
     return this.children;
   }

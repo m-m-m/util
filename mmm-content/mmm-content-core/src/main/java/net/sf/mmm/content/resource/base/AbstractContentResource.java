@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.resource.base;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.base.ClassAnnotation;
@@ -77,7 +77,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
    */
   @Override
   @FieldAnnotation(id = 56)
-  public List<? extends ContentResource> getChildren() {
+  public Collection<? extends ContentResource> getChildren() {
 
     return Collections.emptyList();
   }
