@@ -193,11 +193,13 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     requireEditableModel();
     assert (superClass == getContentClass(superClass.getId()));
     SmartId id = getIdManager().createUniqueClassId();
+    AbstractContentClass parentClass = (AbstractContentClass) superClass;
+    AbstractContentClass newClass = createNewClass(id, name, parentClass, modifiers, superClass
+        .getJavaClass(), false);
     // TODO
-    AbstractContentClass newClass = createOrUpdateClass(id, name,
-        (AbstractContentClass) superClass, modifiers, false, superClass.getJavaClass());
+    syncClassRecursive(newClass, parentClass);
     // fire update event on super-class?
-    fireEvent(new ContentModelEvent(newClass, ChangeEvent.Type.ADD));
+    // fireEvent(new ContentModelEvent(newClass, ChangeEvent.Type.ADD));
     return newClass;
   }
 
@@ -211,10 +213,11 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     assert (declaringClass == getContentClass(declaringClass.getId()));
     SmartId id = getIdManager().createUniqueFieldId();
     AbstractContentClass contentClass = (AbstractContentClass) declaringClass;
-    AbstractContentField field = newField(id, name, contentClass, modifiers, type);
+    AbstractContentField field = createNewField(id, name, contentClass, type, modifiers, false);
+    syncField(contentClass, field);
     // TODO: persist here...
-    contentClass.addField(field);
-    fireEvent(new ContentModelEvent(field, ChangeEvent.Type.ADD));
+    // contentClass.addField(field);
+    // fireEvent(new ContentModelEvent(field, ChangeEvent.Type.ADD));
     return field;
   }
 
@@ -232,31 +235,10 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     AbstractContentReflectionObject reflectionObject = (AbstractContentReflectionObject) classOrField;
     reflectionObject.setDeletedFlag(newDeletedFlag);
     if (classOrField.isClass()) {
-      fireEvent(new ContentModelEvent((ContentClass) classOrField, ChangeEvent.Type.UPDATE));      
+      fireEvent(new ContentModelEvent((ContentClass) classOrField, ChangeEvent.Type.UPDATE));
     } else {
-      fireEvent(new ContentModelEvent((ContentField) classOrField, ChangeEvent.Type.UPDATE));      
+      fireEvent(new ContentModelEvent((ContentField) classOrField, ChangeEvent.Type.UPDATE));
     }
-  }
-
-  /**
-   * This method creates a new un-initialized content-field instance.
-   * 
-   * @param id
-   * @param name
-   * @param declaringClass
-   * @param modifiers
-   * @param type
-   * @return the new field.
-   */
-  protected AbstractContentField newField(SmartId id, String name,
-      AbstractContentClass declaringClass, FieldModifiers modifiers, Type type) {
-
-    AbstractContentField contentField = createNewField(id);
-    contentField.setName(name);
-    contentField.setDeclaringClass(declaringClass);
-    contentField.setModifiers(modifiers);
-    contentField.setFieldTypeAndClass(type);
-    return contentField;
   }
 
 }

@@ -24,11 +24,8 @@ import net.sf.mmm.value.validator.api.ValueValidator;
 public abstract class AbstractContentField extends AbstractContentReflectionObject implements
     ContentField {
 
-  /** UID for serialization. */
-  private static final long serialVersionUID = -4670093180071079593L;
-
   /** @see #getDeclaringClass() */
-  private ContentClass declaringClass;
+  private AbstractContentClass declaringClass;
 
   /** @see #getFieldTypeSpecification() */
   private String fieldTypeSpecification;
@@ -59,30 +56,40 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /**
    * The constructor.
    * 
-   * @param id is the {@link #getId() id}.
+   * @param name is the {@link #getName() name}.
+   * @param id is the {@link #getId() ID}.
    */
-  public AbstractContentField(SmartId id) {
+  public AbstractContentField(String name, SmartId id) {
 
-    super(id);
+    super(name, id);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public ContentField getParent() {
+  public abstract AbstractContentClass getParent();
 
-    return getSuperField();
+  /**
+   * {@inheritDoc}
+   */
+  public List<? extends AbstractContentField> getChildren() {
+
+    List<AbstractContentField> fields = new ArrayList<AbstractContentField>();
+    collectSubFieldsRecursive(getDeclaringClass(), fields);
+    return fields;
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<? extends ContentField> getChildren() {
+  @Override
+  public AbstractContentField getChild(String childName) {
 
-    List<ContentField> fields = new ArrayList<ContentField>();
-    collectSubFieldsRecursive(getDeclaringClass(), fields);
-    return fields;
+    if (getName().equals(childName)) {
+      return findSubFieldRecursive(this.declaringClass);
+    }
+    return null;
   }
 
   /**
@@ -91,15 +98,35 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
    * @param contentClass is the current content-class.
    * @param fields is the list where the fields are added.
    */
-  private void collectSubFieldsRecursive(ContentClass contentClass, List<ContentField> fields) {
+  private void collectSubFieldsRecursive(AbstractContentClass contentClass,
+      List<AbstractContentField> fields) {
 
-    for (ContentClass subClass : contentClass.getSubClasses()) {
-      ContentField declaredField = subClass.getDeclaredField(getName());
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+      AbstractContentField declaredField = subClass.getDeclaredField(getName());
       if (declaredField != null) {
         fields.add(declaredField);
       }
       collectSubFieldsRecursive(subClass, fields);
     }
+  }
+
+  /**
+   * @see #getChild(String)
+   * 
+   * @param contentClass is the current content-class.
+   * @return the content-field with the given name or <code>null</code> if NOT
+   *         found.
+   */
+  private AbstractContentField findSubFieldRecursive(AbstractContentClass contentClass) {
+
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+      AbstractContentField declaredField = subClass.getDeclaredField(getName());
+      if (declaredField != null) {
+        return declaredField;
+      }
+      findSubFieldRecursive(subClass);
+    }
+    return null;
   }
 
   /**
@@ -113,7 +140,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public ContentClass getDeclaringClass() {
+  public AbstractContentClass getDeclaringClass() {
 
     return this.declaringClass;
   }
@@ -121,7 +148,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /**
    * @param declaringClass the declaringClass to set
    */
-  protected void setDeclaringClass(ContentClass declaringClass) {
+  protected void setDeclaringClass(AbstractContentClass declaringClass) {
 
     this.declaringClass = declaringClass;
   }
@@ -222,10 +249,11 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public ContentField getSuperField() {
+  public AbstractContentField getSuperField() {
 
-    ContentField superField = null;
-    ContentClass superClass = getContentClass().getSuperClass();
+    AbstractContentField superField = null;
+    // ATTENTION: if class-access is NOT set, this can cause infinity-loop!
+    AbstractContentClass superClass = getDeclaringClass().getSuperClass();
     if (superClass != null) {
       superField = superClass.getField(getName());
       if (superField == this) {

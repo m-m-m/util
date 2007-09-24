@@ -4,23 +4,25 @@
 package net.sf.mmm.content.api;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.model.api.FieldNotExistsException;
-import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.Lock;
 import net.sf.mmm.content.value.api.MetaDataSet;
 import net.sf.mmm.content.value.api.RevisionHistory;
-import net.sf.mmm.content.value.api.Version;
 
 /**
- * This is the abstract interface for any content object. An instance of
- * {@link ContentObject this} interface is called <em>entity</em> and is
- * stored in a persistent repository.<br>
+ * This is the abstract interface for any content-object. An instance of
+ * {@link ContentObject this} interface represents the
+ * {@link #getRevision() revision} of an <em>entity</em>. An entity is a
+ * persistent object stored in a repository. An entity always has a current
+ * state that is called
+ * <em>{@link #isRevisionClosed() latest} {@link #getRevision() revision}</em>
+ * and may have <em>{@link #isRevisionClosed() closed revisions}</em> that
+ * reflect the state of the entity at a time in its history.<br>
  * The core Java OO-world is rewritten here as meta-model inside Java. The
- * following table shows the mmm types to corresponding Java constructs:<br>
+ * following table shows the mmm types with its corresponding Java constructs:<br>
  * <table border="1">
  * <tr>
  * <th>Java</th>
@@ -44,9 +46,10 @@ import net.sf.mmm.content.value.api.Version;
  * </tr>
  * </table> <br>
  * The tree spanned by the hierarchy of the {@link ContentClass}es is called
- * <em>content-model</em>. A sub-type of this interface has to follow
- * specific rules in order to be an entity-type that will have a
- * {@link ContentClass}. For more details see
+ * <em>content-model</em>.<br>
+ * A sub-type of this interface has to follow specific rules in order to be an
+ * <em>entity-type</em> that will have an according {@link ContentClass}. For
+ * more details see
  * {@link net.sf.mmm.content.base.AbstractContentObject AbstractContentObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -84,56 +87,9 @@ public abstract interface ContentObject extends Serializable {
   String FIELD_NAME_DELETED = "deleted";
 
   /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getContentClass() contentClass} for generic access via
-   * {@link #getValue(String)}.
-   */
-  String FIELD_NAME_CONTENT_CLASS = "contentClass";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getMetaDataSet() metadata} for generic access via
-   * {@link #getValue(String)}.
-   */
-  String FIELD_NAME_METADATA = "metadata";
-
-  /**
    * the separator used for the {@link #getPath() path}
    */
   String PATH_SEPARATOR = "/";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * parentFolder for generic access via {@link #getValue(String)}.
-   */
-  String FIELD_NAME_PARENT = "parent";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * path for generic access via {@link #getValue(String)}.
-   */
-  String FIELD_NAME_PATH = "path";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getRevisionHistory() revision-history} for generic access via
-   * {@link #getValue(String)}.
-   */
-  String FIELD_NAME_REVISION_HISTORY = "revisionHistory";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getVersion() version} for generic access via
-   * {@link #getValue(String)}.
-   */
-  String FIELD_NAME_VERSION = "version";
-
-  /**
-   * The name of the {@link net.sf.mmm.content.model.api.ContentField field}
-   * {@link #getRevision() revision} for generic access via
-   * {@link #getValue(String)}.
-   */
-  String FIELD_NAME_REVISION = "revision";
 
   /**
    * This method gets the unique identifier of this content-object.
@@ -157,7 +113,8 @@ public abstract interface ContentObject extends Serializable {
 
   /**
    * This method gets the content-class used to reflect this content-object. The
-   * content-class represents the exact type of this content-object.
+   * content-class represents the exact type of this content-object. The
+   * content-class may also be called <em>entity-type</em>.
    * 
    * @return the content-class of this resource.
    */
@@ -219,20 +176,10 @@ public abstract interface ContentObject extends Serializable {
   String getPath();
 
   /**
-   * This method gets the version-information of this object (this revision).
-   * 
-   * @see #getRevision()
-   * 
-   * @return the version-information. May be <code>null</code> if this object
-   *         is the latest revision.
-   */
-  Version getVersion();
-
-  /**
-   * This method gets the sequential revision number of this resource.<br>
-   * A revision of <code>0</code> means that this is the latest revision. Any
-   * other number indicates that this is a revision that is frozen and can NOT
-   * be modified anymore.
+   * This method gets the revision number of this resource.<br>
+   * The revision is a sequential counter that is incremented for each
+   * {@link #isRevisionClosed() closed} revision. The initial revision of a new
+   * created object is <code>0</code>.
    * 
    * @return the revision number of this resource where <code>0</code> means
    *         the latest revision.
@@ -247,6 +194,19 @@ public abstract interface ContentObject extends Serializable {
   RevisionHistory getRevisionHistory();
 
   /**
+   * This method determines if this object represents a closed
+   * {@link #getRevision() revision} of the entities history. Such revision is
+   * immutable and can NOT be modified anymore.<br>
+   * In contrast each entity has a latest {@link #getRevision() revision} that
+   * is open for modifications.
+   * 
+   * @return <code>true</code> if this object is a closed revision of the
+   *         according entity and <code>false</code> if this is the latest
+   *         revision.
+   */
+  boolean isRevisionClosed();
+
+  /**
    * This method gets the parent of this object. This will typically be the
    * {@link #isFolder() folder} containing the object.
    * 
@@ -256,7 +216,9 @@ public abstract interface ContentObject extends Serializable {
   ContentObject getParent();
 
   /**
-   * This method gets the list containing all direct children of this object.
+   * This method gets the list containing all direct children of this object. If
+   * this object is NOT a {@link #isFolder() folder} the result will always be
+   * an empty list.<br>
    * Typically the direct children are the {@link ContentObject}s that have
    * this object as {@link #getParent() parent}.<br>
    * <b>ATTENTION:</b><br>
@@ -268,7 +230,17 @@ public abstract interface ContentObject extends Serializable {
    * 
    * @return the child resources.
    */
-  Collection<? extends ContentObject> getChildren();
+  List<? extends ContentObject> getChildren();
+
+  /**
+   * This method gets the {@link #getChildren() child} with the given
+   * <code>childName</code>.<br>
+   * 
+   * @param childName is the {@link #getName() name} of the requested child.
+   * @return the child with the given <code>childName</code> or
+   *         <code>null</code> if no such child exists.
+   */
+  ContentObject getChild(String childName);
 
   /**
    * This method determines if this entity is a <em>folder</em> or a
@@ -285,24 +257,6 @@ public abstract interface ContentObject extends Serializable {
   boolean isFolder();
 
   /**
-   * This method gets the proxy-target of this object. If the proxy-target is
-   * NOT <code>null</code>, this object is a proxy on another instance of the
-   * same {@link #getContentClass() type}. Then all fields that are NOT set
-   * (that are <code>null</code>) are "inherited" from the
-   * {@link #getProxyTarget() proxy-target}. This rule applies before fields
-   * are inherited from the {@link #getParent() parent} and does NOT apply for
-   * {@link #getId() ID} and {@link #getName() name}. A proxy with no field set
-   * acts like a link in a unix filesystem.<br>
-   * <b>INFORMATION:</b><br>
-   * The returned object needs to have the same {@link #getContentClass() type}
-   * as this instance.
-   * 
-   * @return the proxy-target or <code>null</code> if this is a regular
-   *         content-object.
-   */
-  ContentObject getProxyTarget();
-
-  /**
    * This method gets the value of the specified
    * {@link net.sf.mmm.content.model.api.ContentField field}. It is the generic
    * getter for all fields of this object. <br>
@@ -315,13 +269,21 @@ public abstract interface ContentObject extends Serializable {
    * @param fieldName is the {@link ContentObject#getName() name} of the
    *        {@link net.sf.mmm.content.model.api.ContentField field} to get.
    * @return the value of the specified field or <code>null</code> if not set.
-   * @throws FieldNotExistsException if the objects
-   *         {@link #getContentClass() content-class} does not have a
+   * @throws ContentException if the operation failed. This can have one of the
+   *         following reasons:
+   *         <ul>
+   *         <li>the object does not have a
    *         {@link net.sf.mmm.content.model.api.ContentField field} with the
-   *         given {@link ContentObject#getName() name}.
-   * @throws ContentException TODO: if the specified field is
-   *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
-   *         but an error occurred calculating its value.
+   *         given
+   *         <code>{@link net.sf.mmm.content.model.api.ContentField#getName() fieldName}</code>.
+   *         See
+   *         {@link net.sf.mmm.content.model.api.FieldNotExistsException FieldNotExistsException}</li>
+   *         <li>If {@link net.sf.mmm.content.security.api.ContentUser you} do
+   *         NOT have
+   *         {@link net.sf.mmm.content.security.api.ContentRule permission} to
+   *         do so. See
+   *         {@link net.sf.mmm.content.security.api.PermissionDeniedException PermissionDeniedException}.</li>
+   *         </ul>
    */
   Object getValue(String fieldName) throws ContentException;
 
@@ -340,13 +302,21 @@ public abstract interface ContentObject extends Serializable {
    *        {@link Class#isAssignableFrom(Class) compatible} with the
    *        {@link net.sf.mmm.content.model.api.ContentField#getFieldClass() fields class}.
    * @return the value of the specified field or <code>null</code> if not set.
-   * @throws FieldNotExistsException if the objects
-   *         {@link #getContentClass() content-class} does not have a
+   * @throws ContentException if the operation failed. This can have one of the
+   *         following reasons:
+   *         <ul>
+   *         <li>the object does not have a
    *         {@link net.sf.mmm.content.model.api.ContentField field} with the
-   *         given {@link ContentObject#getName() name}.
-   * @throws ContentException TODO: if the specified field is
-   *         {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}
-   *         but an error occurred calculating its value.
+   *         given
+   *         <code>{@link net.sf.mmm.content.model.api.ContentField#getName() fieldName}</code>.
+   *         See
+   *         {@link net.sf.mmm.content.model.api.FieldNotExistsException FieldNotExistsException}</li>
+   *         <li>If {@link net.sf.mmm.content.security.api.ContentUser you} do
+   *         NOT have
+   *         {@link net.sf.mmm.content.security.api.ContentRule permission} to
+   *         do so. See
+   *         {@link net.sf.mmm.content.security.api.PermissionDeniedException PermissionDeniedException}.</li>
+   *         </ul>
    */
   <V> V getValue(String fieldName, Class<V> type) throws ContentException;
 
@@ -369,28 +339,22 @@ public abstract interface ContentObject extends Serializable {
    *        {@link net.sf.mmm.content.model.api.ContentField#getFieldType() type}
    *        declared by the
    *        {@link net.sf.mmm.content.model.api.ContentField field}.
-   * @throws FieldNotExistsException if the objects
-   *         {@link #getContentClass() content-class} does not have a
+   * @throws ContentException if the operation failed. This can have one of the
+   *         following reasons:
+   *         <ul>
+   *         <li>the object does not have a
    *         {@link net.sf.mmm.content.model.api.ContentField field} with the
-   *         given {@link ContentObject#getName() name}.
-   * @throws PermissionDeniedException if you (the current user) does not have
-   *         permission to perform the operation.
-   * @throws ContentException TODO: if the field has an incompatible type for
-   *         the given value.
+   *         given
+   *         <code>{@link net.sf.mmm.content.model.api.ContentField#getName() fieldName}</code>.
+   *         See
+   *         {@link net.sf.mmm.content.model.api.FieldNotExistsException FieldNotExistsException}</li>
+   *         <li>If {@link net.sf.mmm.content.security.api.ContentUser you} do
+   *         NOT have
+   *         {@link net.sf.mmm.content.security.api.ContentRule permission} to
+   *         do so. See
+   *         {@link net.sf.mmm.content.security.api.PermissionDeniedException PermissionDeniedException}.</li>
+   *         </ul>
    */
-  void setValue(String fieldName, Object value) throws FieldNotExistsException,
-      PermissionDeniedException, ContentException;
+  void setValue(String fieldName, Object value) throws ContentException;
 
-  /**
-   * This method validates the given object. This is done by
-   * {@link net.sf.mmm.content.api.model.ContentFieldIF#validate(Object) validating}
-   * the {@link #getFieldValue(String) values} of all
-   * {@link net.sf.mmm.content.api.model.ContentFieldIF fields} as defined by
-   * the objects {@link #getContentClass() content-class}.
-   * 
-   * @return the result of the validation.
-   * @throws PermissionDeniedException if you (the current user) does not have
-   *         permission to perform the operation.
-   */
-  // ValidationResultIF validate() throws PermissionDeniedException;
 }

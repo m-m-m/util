@@ -8,16 +8,11 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 
 import net.sf.mmm.content.api.ContentException;
-import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.model.api.ContentClass;
-import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelException;
-import net.sf.mmm.content.model.api.ContentReflectionObject;
 import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.AbstractContentField;
 import net.sf.mmm.content.model.base.AbstractMutableContentModelService;
-import net.sf.mmm.content.model.base.ClassModifiersImpl;
 import net.sf.mmm.content.model.base.ContentClassLoaderStAX;
 import net.sf.mmm.content.model.base.ContentClassLoader;
 import net.sf.mmm.content.value.base.SmartId;
@@ -99,36 +94,9 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
     if (this.classLoader == null) {
       this.classLoader = new ContentClassLoaderStAX(this);
     }
-    //initializeSystemClasses();
     loadClasses();
   }
 
-  /**
-   * This method initializes the system classes.
-   */
-  protected void initializeSystemClasses() {
-
-    // object
-    AbstractContentClass rootClass = createOrUpdateClass(getIdManager().getRootClassId(),
-        ContentObject.CLASS_NAME, null, ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, false,
-        ContentObject.class);
-    setRootClass(rootClass);
-    // reflection object
-    AbstractContentClass reflectionClass = createOrUpdateClass(getIdManager().getClassId(
-        ContentReflectionObject.CLASS_ID), ContentReflectionObject.CLASS_NAME, rootClass,
-        ClassModifiersImpl.SYSTEM_ABSTRACT_UNEXTENDABLE, false, ContentReflectionObject.class);
-    // class
-    AbstractContentClass classClass = createOrUpdateClass(getIdManager().getClassClassId(),
-        ContentClass.CLASS_NAME, reflectionClass, ClassModifiersImpl.SYSTEM_FINAL, false,
-        ContentClass.class);
-    ContentClassImpl.setContentClass(classClass);
-    // field
-    AbstractContentClass fieldClass = createOrUpdateClass(getIdManager().getFieldClassId(),
-        ContentField.CLASS_NAME, reflectionClass, ClassModifiersImpl.SYSTEM_FINAL, false,
-        ContentField.class);
-    ContentFieldImpl.setContentClass(fieldClass);
-  }
-  
   /**
    * This method loads the content-model.
    * 
@@ -145,13 +113,13 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
       // TODO:
       throw new ContentModelException("Missing class for ContentClass!");
     }
-    ContentClassImpl.setContentClass(classClass);
+    // ContentClassImpl.setContentClass(classClass);
     AbstractContentClass fieldClass = getContentClass(getIdManager().getFieldClassId());
     if (fieldClass == null) {
       // TODO:
       throw new ContentModelException("Missing class for ContentField!");
     }
-    ContentFieldImpl.setContentClass(fieldClass);
+    // ContentFieldImpl.setContentClass(fieldClass);
   }
 
   /**
@@ -171,17 +139,21 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass createNewClass(SmartId id) {
+  public AbstractContentClass createNewClass(SmartId id, String name) {
 
-    return new ContentClassImpl(id);
+    AbstractContentClass contentClass = new ContentClassImpl(name, id);
+    setContentObjectId(contentClass, id);
+    return contentClass;
   }
 
   /**
    * {@inheritDoc}
    */
-  public AbstractContentField createNewField(SmartId id) {
+  public AbstractContentField createNewField(SmartId id, String name) {
 
-    return new ContentFieldImpl(id);
+    AbstractContentField contentField = new ContentFieldImpl(name, id);
+    setContentObjectId(contentField, id);
+    return contentField;
   }
-  
+
 }

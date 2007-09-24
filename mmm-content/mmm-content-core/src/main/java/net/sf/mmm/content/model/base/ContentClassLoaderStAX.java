@@ -4,7 +4,6 @@
 package net.sf.mmm.content.model.base;
 
 import java.lang.reflect.Type;
-import java.util.Map;
 
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -68,6 +67,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    * 
    * @param typeSpecification is the type given as string (e.g.
    *        <code>String</code> or <code>List&lt;ContentObject&gt;</code>).
+   * @param classResolver is the resolver used to resolve the classes.
    * @return the parsed type.
    */
   protected Type parseFieldType(String typeSpecification, ClassResolver classResolver) {
@@ -141,6 +141,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    * </ul>
    * 
    * @param xmlReader is where to read the XML from.
+   * @param context is where to add the configured classes to.
    * @return the class-hierarchy de-serialized via the given
    *         <code>xmlReader</code>.
    * @throws ValueException if a value is missing or invalid.
@@ -172,11 +173,8 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
 
     AbstractContentClass contentClass = context.getContentClass(id);
     if (contentClass == null) {
-      contentClass = getContentReflectionFactory().createNewClass(id);
-      contentClass.setName(name);
-      // contentClass.setSuperClass(superClass);
-      contentClass.setModifiers(modifiers);
-      contentClass.setDeletedFlag(deleted);
+      contentClass = getContentReflectionFactory().createNewClass(id, name, null, modifiers, null,
+          deleted);
     } else {
       if (!name.equals(contentClass.getName())) {
         // TODO:
@@ -274,13 +272,11 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
     // parse type
     String typeSpecification = StaxUtil.parseAttribute(xmlReader, null,
         ContentField.XML_ATR_FIELD_TYPE, String.class);
-    // Type fieldType = parseFieldType(typeSpecification);
-    AbstractContentField contentField = getContentReflectionFactory().createNewField(id);
-    contentField.setName(name);
-    contentField.setDeclaringClass(declaringClass);
-    contentField.setModifiers(modifiers);
+    Type fieldType = null;
+    // fieldType = parseFieldType(typeSpecification, getClassResolver());
+    AbstractContentField contentField = getContentReflectionFactory().createNewField(id, name,
+        declaringClass, fieldType, modifiers, deleted);
     contentField.setFieldTypeSpecification(typeSpecification);
-    contentField.setDeletedFlag(deleted);
     // AbstractContentField contentField =
     // getContentModelService().createOrUpdateField(id, name,
     // declaringClass, modifiers, fieldType, typeSpecification, deleted);
@@ -309,23 +305,4 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
     }
   }
 
-  /**
-   * 
-   * TODO: javadoc
-   * 
-   * @param contentClass
-   */
-  protected void fillClassMapRecursive(AbstractContentClass contentClass,
-      Map<String, AbstractContentClass> classMap) {
-
-    String name = contentClass.getName();
-    AbstractContentClass old = classMap.put(name, contentClass);
-    if (old != null) {
-      throw new DuplicateClassException(name);
-    }
-    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
-      fillClassMapRecursive(subClass, classMap);
-    }
-  }
-  
 }

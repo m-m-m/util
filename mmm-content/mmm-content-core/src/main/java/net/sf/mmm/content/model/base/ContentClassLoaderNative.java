@@ -73,7 +73,10 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
   /** @see #getRootEntity() */
   private Class<? extends ContentObject> rootEntity;
 
-  /** A filter that only accepts types that are annotated as {@link Entity}. */
+  /**
+   * A filter that only accepts types that are annotated as
+   * {@link ClassAnnotation}.
+   */
   private final Filter<Class> entityFilter;
 
   /** The XML input factory used to create the parser. */
@@ -258,11 +261,9 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
       ClassModifiers classModifiers = ClassModifiersImpl.getInstance(isSystem, isFinal, isAbstract,
           isExtendable);
       boolean deleted = javaClass.isAnnotationPresent(Deprecated.class);
-      contentClass = getContentReflectionFactory().createNewClass(classId);
-      contentClass.setName(name);
-      contentClass.setModifiers(classModifiers);
-      contentClass.setDeletedFlag(deleted);
-      contentClass.setJavaClass((Class<? extends ContentObject>) javaClass);
+      Class<? extends ContentObject> entityClass = (Class<? extends ContentObject>) javaClass;
+      contentClass = getContentReflectionFactory().createNewClass(classId, name, null,
+          classModifiers, entityClass, deleted);
       context.put(contentClass);
     } else {
       // the class has already been loaded: check!
@@ -303,6 +304,14 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
     return contentClass;
   }
 
+  /**
+   * This method "loads" the {@link ContentField field}s of the given
+   * <code>contentClass</code>. It acts recursive on all sub-classes and
+   * therefore loads the fields for the complete class-tree starting from the
+   * given <code>contentClass</code>.
+   * 
+   * @param contentClass is the class for which the fields should be loaded.
+   */
   protected void loadFieldsRecursive(AbstractContentClass contentClass) {
 
     Class<? extends ContentObject> type = contentClass.getJavaClass();
@@ -331,7 +340,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           } else if (superClass != null) {
             Class<?> declaringClass = accessor.getDeclaringClass();
             Class<? extends ContentObject> superType = superClass.getJavaClass();
-            if (!superType.isAssignableFrom(declaringClass)) {
+            if (!superType.isAssignableFrom(declaringClass) || (superType.equals(declaringClass))) {
               // getter inherited from super entity: ignore
               declareField = false;
             }
@@ -363,12 +372,8 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           if (fieldClass.isPrimitive()) {
             fieldType = ReflectionUtil.getNonPrimitiveType(fieldClass);
           }
-          AbstractContentField contentField = getContentReflectionFactory().createNewField(fieldId);
-          contentField.setName(name);
-          contentField.setDeclaringClass(contentClass);
-          contentField.setDeletedFlag(isDeleted);
-          contentField.setFieldTypeAndClass(fieldType);
-          contentField.setModifiers(fieldModifiers);
+          AbstractContentField contentField = getContentReflectionFactory().createNewField(fieldId,
+              name, contentClass, fieldType, fieldModifiers, isDeleted);
           contentField.setAccessor(getFieldAccessor(methodPropertyDescriptor));
           contentClass.addField(contentField);
         }
@@ -376,6 +381,10 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         throw new ContentModelException(e, "Error loading field '" + accessor.getName()
             + "' of class " + contentClass);
       }
+    }
+    // recursive invocation
+    for (AbstractContentClass subClass : contentClass.getSubClasses()) {
+      loadFieldsRecursive(subClass);
     }
   }
 

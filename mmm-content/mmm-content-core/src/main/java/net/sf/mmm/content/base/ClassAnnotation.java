@@ -58,12 +58,12 @@ public @interface ClassAnnotation {
   boolean isFolder() default false;
 
   /**
-   * @return the {@link Revisioning} that determines if the annotated entity
-   *         should be
-   *         {@link net.sf.mmm.content.api.ContentObject#getRevision() revisioned}
+   * @return the {@link RevisionControl} that determines if the annotated
+   *         entity-type should be
+   *         {@link net.sf.mmm.content.model.api.ContentClass#isRevisionControlled() revision-controlled}
    *         or NOT.
    */
-  Revisioning revisioning() default Revisioning.INHERIT;
+  RevisionControl revisionControl() default RevisionControl.INHERIT;
 
   /**
    * TODO: is this part of the model or configuration of the GUI?

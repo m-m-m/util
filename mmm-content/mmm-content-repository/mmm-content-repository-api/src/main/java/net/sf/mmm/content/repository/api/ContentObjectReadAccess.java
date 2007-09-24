@@ -24,19 +24,19 @@ public interface ContentObjectReadAccess {
   ContentObject get(ContentId id) throws ContentException;
 
   /**
-   * This method gets the {@link ContentObject} with the given URI. The URI in
-   * this context is the absolute path of the resource relative to this
-   * container (the current store or the repository).
+   * This method gets the {@link ContentObject} with the given
+   * <code>{@link ContentObject#getPath() path}</code>.
    * 
-   * @param uri is the URI of the requested object.
-   * @return the object with the given URI.
+   * @param path is the {@link ContentObject#getPath() path} of the requested
+   *        object.
+   * @return the object with the given <code>path</code>.
    * @throws ContentException if the operation failed. This can have one of the
    *         following reasons:
    *         <ul>
-   *         <li>the URI-format is illegal.</li>
-   *         <li>no resource exists for the given URI.</li>
+   *         <li>the path is illegal.</li>
+   *         <li>no resource exists for the given <code>path</code>.</li>
    *         </ul>
    */
-  ContentObject get(String uri) throws ContentException;
+  ContentObject get(String path) throws ContentException;
 
 }

@@ -568,6 +568,7 @@ public final class ReflectionUtil {
       // remove extension (".class".length() == 6)
       String nameWithoutExtension = fileName.substring(0, fileName.length() - 6);
       // handle inner classes...
+      /*
       int lastDollar = nameWithoutExtension.lastIndexOf('$');
       if (lastDollar > 0) {
         char innerClassStart = nameWithoutExtension.charAt(lastDollar + 1);
@@ -579,6 +580,8 @@ public final class ReflectionUtil {
       } else {
         return nameWithoutExtension;
       }
+      */
+      return nameWithoutExtension;
     }
     return null;
   }

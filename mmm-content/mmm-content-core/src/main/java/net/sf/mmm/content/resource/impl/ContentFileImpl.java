@@ -6,7 +6,6 @@ package net.sf.mmm.content.resource.impl;
 import net.sf.mmm.content.resource.api.ContentFile;
 import net.sf.mmm.content.resource.base.AbstractContentDocument;
 import net.sf.mmm.content.value.api.MutableBlob;
-import net.sf.mmm.content.value.base.SmartId;
 
 /**
  * This is the implementation of the {@link ContentFile} interface.
@@ -27,27 +26,6 @@ public final class ContentFileImpl extends AbstractContentDocument implements Co
   public ContentFileImpl() {
 
     super();
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getName() name} of the file.
-   */
-  public ContentFileImpl(String name) {
-
-    super(name);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param id
-   * @param name
-   */
-  public ContentFileImpl(SmartId id, String name) {
-
-    super(id, name);
   }
 
   /**

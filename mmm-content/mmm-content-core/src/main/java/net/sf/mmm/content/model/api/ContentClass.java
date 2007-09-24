@@ -9,13 +9,15 @@ import java.util.List;
 import net.sf.mmm.content.api.ContentObject;
 
 /**
- * This is the interface of a content-class. It reflects the structure of the
- * {@link net.sf.mmm.content.api.ContentObject content-object} types in an
+ * This is the interface for the type of an entity. It reflects the structure of
+ * the {@link net.sf.mmm.content.api.ContentObject content-object} types in an
  * object-oriented way. <br>
  * A content-class is the analogy to a {@link java.lang.Class} that reflects a
  * {@link java.lang.Object}. <br>
  * A content-class may be used to render a generic UI editor, synchronize the
  * schema of the persistence store (e.g. a DB), etc. <br>
+ * 
+ * @see ContentObject
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -66,9 +68,11 @@ public interface ContentClass extends ContentReflectionObject {
   /**
    * {@inheritDoc}
    * 
-   * @return the {@link #getSuperClass() super-class}.
+   * @return the {@link #getSuperClass() super-class} or the
+   *         {@link #isFolderClass() folder}
+   *         {@link ContentObject#getChildren() containing} the root-class.
    */
-  ContentClass getParent();
+  ContentObject getParent();
 
   /**
    * {@inheritDoc}
@@ -203,5 +207,21 @@ public interface ContentClass extends ContentReflectionObject {
    *         <code>false</code> if it is a leaf.
    */
   boolean isFolderClass();
+
+  /**
+   * This method determines if the {@link ContentObject entities} of this
+   * {@link ContentClass} are revision-controlled. Such entity can be frozen to
+   * a {@link ContentObject#isRevisionClosed() closed revision} creating a
+   * history. Besides the latest revision, the closed revisions can still be
+   * accessed.<br>
+   * If an entity that is NOT under revision-control is modified, every except
+   * the current state is lost.
+   * 
+   * @see net.sf.mmm.content.base.ClassAnnotation#revisionControl()
+   * 
+   * @return <code>true</code> if this type is revisioned, <code>false</code>
+   *         otherwise.
+   */
+  boolean isRevisionControlled();
 
 }

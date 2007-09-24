@@ -3,21 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.base;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.FieldNotExistsException;
-import net.sf.mmm.content.model.api.access.ContentClassReadAccessByJavaClass;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
 import net.sf.mmm.content.value.api.Lock;
 import net.sf.mmm.content.value.api.MetaDataSet;
 import net.sf.mmm.content.value.api.MutableMetaData;
 import net.sf.mmm.content.value.api.RevisionHistory;
-import net.sf.mmm.content.value.api.Version;
 import net.sf.mmm.content.value.base.SmartId;
 
 /**
@@ -27,7 +26,7 @@ import net.sf.mmm.content.value.base.SmartId;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@ClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME, isExtendable = false)
+@ClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME, isExtendable = false, revisionControl = RevisionControl.NO)
 public abstract class AbstractContentObject implements ContentObject, MutableMetaData {
 
   /** @see #getId() */
@@ -39,6 +38,9 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   /** @see #isDeleted() */
   private boolean deletedFlag;
 
+  /** @see #getRevision() */
+  private int revision;
+
   /** @see #getModificationCount() */
   private int modificationCount;
 
@@ -48,14 +50,8 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   /** @see #getMetaDataSet() */
   private MetaDataSet metaDataSet;
 
-  /** @see #getVersion() */
-  private Version version;
-
-  /** @see #getProxyTarget() */
-  private AbstractContentObject proxyTarget;
-
   /** @see #getContentClass() */
-  private static ContentClassReadAccessByJavaClass classAccess;
+  private ContentClassReadAccessByContentObject classAccess;
 
   /**
    * The constructor.
@@ -68,12 +64,28 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   /**
    * The constructor.
    * 
-   * @param id is the {@link #getId() id}.
+   * @param name is the {@link #getName() name}.
    */
-  public AbstractContentObject(SmartId id) {
+  public AbstractContentObject(String name) {
 
     super();
-    this.id = id;
+    if (name != null) {
+      setName(name);
+    }
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param name is the {@link #getName() name}.
+   * @param id is the {@link #getId() ID}.
+   */
+  public AbstractContentObject(String name, SmartId id) {
+
+    this(name);
+    if (id != null) {
+      setId(id);
+    }
   }
 
   /**
@@ -94,9 +106,10 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
    * 
    * @param id the id to set
    */
-  protected void setId(SmartId id) {
+  private void setId(SmartId id) {
 
     this.id = id;
+    this.revision = id.getRevision();
   }
 
   /**
@@ -117,9 +130,23 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
    * 
    * @param name the name to set
    */
-  protected void setName(String name) {
+  private void setName(String name) {
 
     this.name = name;
+  }
+
+  /**
+   * @return the classAccess
+   */
+  private ContentClassReadAccessByContentObject getClassAccess() {
+
+    if (this.classAccess == null) {
+      AbstractContentObject parent = getParent();
+      if (parent != null) {
+        return parent.getClassAccess();
+      }
+    }
+    return this.classAccess;
   }
 
   /**
@@ -131,10 +158,13 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   @FieldAnnotation(id = 2, isTransient = true, isFinal = true)
   public ContentClass getContentClass() {
 
-    if (classAccess == null) {
+    if (this.classAccess == null) {
+      this.classAccess = getClassAccess();
+    }
+    if (this.classAccess == null) {
       throw new IllegalStateException("The system is NOT yet initialized!");
     }
-    ContentClass contentClass = classAccess.getContentClass(getClass());
+    ContentClass contentClass = this.classAccess.getContentClass(this);
     if (contentClass == null) {
       throw new IllegalStateException("The system is NOT yet initialized!");
     }
@@ -142,32 +172,52 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   }
 
   /**
-   * This method sets the accessor used to get the
-   * {@link #getContentClass() content-class}. It has to be set once during the
-   * bootstrap of the system.
+   * This method sets the accessor used to determines the
+   * {@link #getContentClass() content-class}. It has to be set to the
+   * root-folder once during the bootstrap of the system.
    * 
    * @param contentClassAccess is the classAccess to set.
    */
-  public static void setClassAccess(ContentClassReadAccessByJavaClass contentClassAccess) {
+  private void setClassAccess(ContentClassReadAccessByContentObject contentClassAccess) {
 
-    assert (classAccess == null);
+    assert (this.classAccess == null);
     assert (contentClassAccess != null);
-    classAccess = contentClassAccess;
+    this.classAccess = contentClassAccess;
   }
 
   /**
    * {@inheritDoc}
    */
   @FieldAnnotation(id = 3)
-  public abstract ContentObject getParent();
+  public abstract AbstractContentObject getParent();
 
   /**
    * {@inheritDoc}
    */
-  @FieldAnnotation(id = 4, isTransient = true)
-  public Collection<? extends ContentObject> getChildren() {
+  @FieldAnnotation(id = 4, inverseRelationFieldId = 3)
+  public List<? extends AbstractContentObject> getChildren() {
 
+    if (isFolder()) {
+      throw new ContentModelException(
+          "An entity that is a folder has to implement (override) this method!");
+    }
     return Collections.emptyList();
+  }
+
+  /**
+   * This method gets the {@link #getChildren() child} with the given
+   * <code>childName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is an internal method. For the most implementations it only looks if
+   * the child is already available in a cache. TODO !?!?
+   * 
+   * @param childName is the {@link #getName() name} of the requested child.
+   * @return the child with the given <code>childName</code> or
+   *         <code>null</code> if NOT available.
+   */
+  public AbstractContentObject getChild(String childName) {
+
+    return null;
   }
 
   /**
@@ -188,7 +238,7 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   @FieldAnnotation(id = 6)
   public final String getPath() {
 
-    ContentObject parent = getParent();
+    AbstractContentObject parent = getParent();
     if (parent == null) {
       // root folder
       return PATH_SEPARATOR;
@@ -208,9 +258,9 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
    */
   private void buildPathRecursive(StringBuilder stringBuilder) {
 
-    ContentObject parent = getParent();
+    AbstractContentObject parent = getParent();
     if (parent != null) {
-      ((AbstractContentObject) parent).buildPathRecursive(stringBuilder);
+      parent.buildPathRecursive(stringBuilder);
       stringBuilder.append(PATH_SEPARATOR);
       stringBuilder.append(getName());
     }
@@ -260,6 +310,17 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   }
 
   /**
+   * This method sets the {@link #isDeleted() deleted} flag.
+   * 
+   * @param deleted - if <code>true</code> the object will be marked as
+   *        deleted.
+   */
+  protected void setDeletedFlag(boolean deleted) {
+
+    this.deletedFlag = deleted;
+  }
+
+  /**
    * {@inheritDoc}
    * 
    * <b>ATTENTION:</b><br>
@@ -274,24 +335,13 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
     if (this.deletedFlag) {
       return true;
     } else {
-      ContentObject parent = getParent();
+      AbstractContentObject parent = getParent();
       if (parent == null) {
         return false;
       } else {
         return parent.isDeleted();
       }
     }
-  }
-
-  /**
-   * This method sets the {@link #isDeleted() deleted} flag.
-   * 
-   * @param deleted - if <code>true</code> the object will be marked as
-   *        deleted.
-   */
-  protected void setDeletedFlag(boolean deleted) {
-
-    this.deletedFlag = deleted;
   }
 
   /**
@@ -322,30 +372,18 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   @FieldAnnotation(id = 12)
   public int getRevision() {
 
-    return this.id.getRevision();
+    return this.revision;
   }
 
   /**
    * {@inheritDoc}
    */
-  @FieldAnnotation(id = 13, isReadOnly = true)
-  public Version getVersion() {
+  public boolean isRevisionClosed() {
 
-    return this.version;
-  }
-
-  /**
-   * This method sets the {@link #getVersion() version}.
-   * 
-   * @param version the version to set.
-   */
-  public void setVersion(Version version) {
-
-    if ((this.version != null) && (getRevision() > 0)) {
-      // TODO: NLS + detail
-      throw new IllegalArgumentException("Can NOT change version of final revision!");
+    if (this.id != null) {
+      return (this.id.getRevision() == 0);
     }
-    this.version = version;
+    return false;
   }
 
   /**
@@ -356,28 +394,6 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
 
     // TODO
     return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public AbstractContentObject getProxyTarget() {
-
-    return this.proxyTarget;
-  }
-
-  /**
-   * This method gets the raw instance of this object.<br>
-   * According to {@link #getProxyTarget() proxying} and
-   * {@link #getParent() inheritance} this instance may be "manipulated" to add
-   * the according support. Therefore this method returns the original object
-   * without manipulations. This is needed e.g. for the editor GUI.
-   * 
-   * @return the raw object.
-   */
-  public AbstractContentObject getRawObject() {
-
-    return this;
   }
 
   /**
@@ -443,7 +459,7 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   public final int hashCode() {
 
     if (this.id == null) {
-      // this is actually a bug
+      // ATTENTION: if the ID is set the hash-code changes...
       return super.hashCode();
     } else {
       return ~this.id.hashCode();
@@ -456,10 +472,11 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   @Override
   public final boolean equals(Object other) {
 
+    if (this == other) {
+      return true;
+    }
     if ((other != null) && (other instanceof AbstractContentObject)) {
-      if (this.id == null) {
-        return (this == other);
-      } else {
+      if (this.id != null) {
         return this.id.equals(((ContentObject) other).getId());
       }
     }
@@ -487,6 +504,65 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
     buffer.append(this.id);
     buffer.append(']');
     return buffer.toString();
+  }
+
+  /**
+   * 
+   */
+  public abstract static class AbstractContentObjectModifier {
+
+    /**
+     * Sets the <code>{@link ContentObject#getName() name}</code> of the given
+     * <code>object</code>.
+     * 
+     * @param object is the object to modify.
+     * @param name is the {@link ContentObject#getName() name} to set.
+     */
+    protected void setContentObjectName(AbstractContentObject object, String name) {
+
+      object.setName(name);
+    }
+
+    /**
+     * Sets the <code>{@link ContentObject#getId() ID}</code> of the given
+     * <code>object</code>.
+     * 
+     * @param object is the object to modify.
+     * @param id is the {@link ContentObject#getId() ID} to set.
+     */
+    protected void setContentObjectId(AbstractContentObject object, SmartId id) {
+
+      object.setId(id);
+    }
+
+    /**
+     * Sets the <code>{@link ContentObject#getDeletedFlag() deleted-flag}</code>
+     * of the given <code>object</code>.
+     * 
+     * @param object is the object to modify.
+     * @param deleted is the {@link ContentObject#getDeletedFlag() deleted-flag}
+     *        to set.
+     */
+    protected void setContentObjectDeletedFlag(AbstractContentObject object, boolean deleted) {
+
+      object.setDeletedFlag(deleted);
+    }
+
+    /**
+     * Sets the
+     * <code>{@link AbstractContentObject#getClassAccess() class-access}</code>
+     * of the given <code>object</code>.
+     * 
+     * @param object is the object to modify.
+     * @param access gives access to determine the
+     *        {@link AbstractContentObject#getContentClass() content-class}.
+     */
+    protected void setContentObjectClassAccess(AbstractContentObject object,
+        ContentClassReadAccessByContentObject access) {
+
+      object.setClassAccess(access);
+    }
+
   }
 
 }

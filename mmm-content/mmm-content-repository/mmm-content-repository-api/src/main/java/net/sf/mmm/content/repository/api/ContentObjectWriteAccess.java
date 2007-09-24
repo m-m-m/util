@@ -24,8 +24,9 @@ public interface ContentObjectWriteAccess {
   void save(ContentObject object) throws ContentException;
 
   /**
-   * This method creates a new instance of a resource with the entity-type given
-   * by <code>contentClass</code>, the given
+   * This method creates a new instance of the {@link ContentObject object} with
+   * the {@link ContentObject#getContentClass() entity-type} given by
+   * <code>contentClass</code>, the given
    * <code>{@link ContentObject#getName() name}</code> and
    * <code>{@link ContentObject#getParent() parent}</code>.
    * 
@@ -37,7 +38,7 @@ public interface ContentObjectWriteAccess {
    * @return the created resource.
    * @throws ContentException if the operation fails.
    */
-  ContentResource create(ContentClass contentClass, String name, ContentResource parent)
+  ContentObject create(ContentClass contentClass, String name, ContentResource parent)
       throws ContentException;
 
   /**

@@ -76,4 +76,12 @@ public @interface FieldAnnotation {
    */
   boolean isInherited() default false;
 
+  /**
+   * @return the {@link #id()} of a field of some
+   *         {@link net.sf.mmm.content.api.ContentObject entity} <code>X</code>
+   *         that represents a relation on the annotated entity. The annotated
+   *         field is expected to be a collection of <code>X</code>.
+   */
+  int inverseRelationFieldId() default -1;
+
 }

@@ -8,8 +8,9 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 
 /**
- * This is the interface for a rule that determines if an operation if permitted
- * or NOT. A rule has NO {@link #getName() name}.
+ * This is the interface for a rule that determines if an
+ * {@link ContentAction operation} is permitted or NOT. A rule has NO
+ * {@link #getName() name}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

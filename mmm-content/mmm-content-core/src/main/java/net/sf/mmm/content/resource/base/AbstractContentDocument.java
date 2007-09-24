@@ -8,7 +8,6 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.resource.api.ContentDocument;
 import net.sf.mmm.content.resource.api.ContentResource;
-import net.sf.mmm.content.value.base.SmartId;
 
 /**
  * This is the implementation of the {@link ContentDocument} interface. You can
@@ -53,7 +52,8 @@ import net.sf.mmm.content.value.base.SmartId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @ClassAnnotation(id = 23, name = "ContentDocument")
-public abstract class AbstractContentDocument extends AbstractContentResource {
+public abstract class AbstractContentDocument extends AbstractContentResource implements
+    ContentDocument {
 
   /** @see #getParent() */
   private ContentResource parent;
@@ -64,36 +64,6 @@ public abstract class AbstractContentDocument extends AbstractContentResource {
   public AbstractContentDocument() {
 
     super();
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getName() name} of the entity.
-   */
-  public AbstractContentDocument(String name) {
-
-    super(name);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param id
-   * @param name
-   */
-  public AbstractContentDocument(SmartId id, String name) {
-
-    super(id, name);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ContentResource getParent() {
-
-    return this.parent;
   }
 
   /**

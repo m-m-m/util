@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.content.base.ClassAnnotation;
-import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
+import net.sf.mmm.content.model.base.AbstractContentClass;
 import net.sf.mmm.content.model.base.AbstractContentField;
 import net.sf.mmm.content.value.base.SmartId;
 
@@ -23,9 +21,6 @@ public final class ContentFieldImpl extends AbstractContentField {
   /** UID for serialization. */
   private static final long serialVersionUID = -2021919603941862430L;
 
-  /** @see #getContentClass() */
-  private static ContentClass fieldClass;
-
   /**
    * The constructor.
    */
@@ -36,53 +31,22 @@ public final class ContentFieldImpl extends AbstractContentField {
 
   /**
    * The constructor.
-   *
+   * 
+   * @param name is the {@link #getName() name}.
    * @param id is the {@link #getId() id}.
    */
-  public ContentFieldImpl(SmartId id) {
+  public ContentFieldImpl(String name, SmartId id) {
 
-    super(id);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ContentClass getContentClass() {
-
-    return fieldClass;
-  }
-
-  /**
-   * This method sets the {@link #getContentClass() content-class} reflecting
-   * the type content-field.
-   * 
-   * @param contentClass is the content-class reflecting this type.
-   */
-  static void setContentClass(ContentClass contentClass) {
-
-    assert ((fieldClass == null) || (fieldClass == contentClass));
-    assert (contentClass != null);
-    fieldClass = contentClass;
+    super(name, id);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void setDeclaringClass(ContentClass declaringClass) {
+  public AbstractContentClass getParent() {
 
-    // make package visible...
-    super.setDeclaringClass(declaringClass);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void setFieldTypeAndClass(Type type) {
-
-    // make package visible...
-    super.setFieldTypeAndClass(type);
+    return getDeclaringClass();
   }
 
 }

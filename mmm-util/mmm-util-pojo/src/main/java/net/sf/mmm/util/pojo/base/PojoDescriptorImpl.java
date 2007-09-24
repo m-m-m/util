@@ -19,7 +19,9 @@ import net.sf.mmm.util.pojo.api.PojoPropertyNotFoundException;
  * This is the abstract base implementation of the {@link PojoDescriptor}
  * interface.
  * 
- * @param <P> is the templated type of the {@link #getPojoType() POJO}.
+ * @param
+ * <P>
+ * is the templated type of the {@link #getPojoType() POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -50,14 +52,17 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
     while (accessorIterator.hasNext()) {
       AbstractPojoPropertyAccessor accessor = accessorIterator.next();
       PojoPropertyDescriptorImpl descriptor = getOrCreateProperty(accessor.getName());
-      AbstractPojoPropertyAccessor duplicate = descriptor.getAccessor(accessor.getAccessMode()); 
+      AbstractPojoPropertyAccessor duplicate = descriptor.getAccessor(accessor.getAccessMode());
       if (duplicate == null) {
         descriptor.setAccessor(accessor);
       } else {
         // this is a workaround for java bug #
-        if (duplicate.getPropertyClass().isAssignableFrom(accessor.getPropertyClass())) {
-          //System.out.println("Replacing accessor " + duplicate + " by " + accessor);
-          descriptor.setAccessor(accessor);          
+        Class<?> originalClass = accessor.getPropertyClass();
+        Class<?> duplicateClass = duplicate.getPropertyClass();
+        if ((originalClass != duplicateClass) && (duplicateClass.isAssignableFrom(originalClass))) {
+          // System.out.println("Replacing accessor " + duplicate + " by " +
+          // accessor);
+          descriptor.setAccessor(accessor);
         }
       }
     }

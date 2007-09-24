@@ -26,11 +26,7 @@ import net.sf.mmm.content.value.base.SmartId;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentClass extends AbstractContentReflectionObject implements
-    ContentClass {
-
-  /** UID for serialization. */
-  private static final long serialVersionUID = -8298083039801634149L;
+public abstract class AbstractContentClass extends AbstractContentReflectionObject implements ContentClass {
 
   /** the super-class of this class */
   private AbstractContentClass superClass;
@@ -55,26 +51,30 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
 
   /** @see #getDeclaredFields() */
   private final Collection<AbstractContentField> fieldsView;
-  
+
   /** @see #isFolderClass() */
   private boolean isFolderClass;
+
+  /** @see #isRevisionControlled() */
+  private boolean revisionControlled;
 
   /**
    * The constructor.
    */
   public AbstractContentClass() {
 
-    this(null);
+    this(null, null);
   }
 
   /**
    * The constructor.
-   * 
-   * @param id is the {@link #getId() id}.
+   *
+   * @param name is the {@link #getName() name}.
+   * @param id is the {@link #getId() ID}.
    */
-  public AbstractContentClass(SmartId id) {
+  public AbstractContentClass(String name, SmartId id) {
 
-    super(id);
+    super(name, id);
     this.subClasses = new ArrayList<AbstractContentClass>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
     this.declaredFields = new HashMap<String, AbstractContentField>();
@@ -96,34 +96,24 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
 
     return this.superClass;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public AbstractContentClass getParent() {
-
-    return this.superClass;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public List<? extends ContentClass> getChildren() {
   
+  /**
+   * {@inheritDoc}
+   */
+  public List<? extends AbstractContentClass> getChildren() {
+
     return getSubClasses();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @FieldAnnotation(id = 26)
   public boolean isFolderClass() {
-  
+
     return this.isFolderClass;
   }
-  
-  
+
   /**
    * @param isFolderClass the isFolderClass to set
    */
@@ -131,7 +121,23 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
 
     this.isFolderClass = isFolderClass;
   }
-  
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isRevisionControlled() {
+
+    return this.revisionControlled;
+  }
+
+  /**
+   * @param revisionControlled the revisionControlled to set
+   */
+  public void setRevisionControlled(boolean revisionControlled) {
+
+    this.revisionControlled = revisionControlled;
+  }
+
   /**
    * This method sets the {@link #getSuperClass() super-class}.
    * 
@@ -153,7 +159,7 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public ContentField getDeclaredField(String name) {
+  public AbstractContentField getDeclaredField(String name) {
 
     return this.declaredFields.get(name);
   }
@@ -161,9 +167,9 @@ public abstract class AbstractContentClass extends AbstractContentReflectionObje
   /**
    * {@inheritDoc}
    */
-  public ContentField getField(String name) {
+  public AbstractContentField getField(String name) {
 
-    ContentField field = this.declaredFields.get(name);
+    AbstractContentField field = this.declaredFields.get(name);
     if ((field == null) && (this.superClass != null)) {
       field = this.superClass.getField(name);
     }

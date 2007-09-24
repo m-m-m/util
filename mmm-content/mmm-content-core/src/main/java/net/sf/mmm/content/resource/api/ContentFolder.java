@@ -22,7 +22,7 @@ public abstract interface ContentFolder extends ContentResource {
   /**
    * the name of the class reflecting {@link ContentFolder}.
    */
-  String CLASS_NAME = ContentFolder.class.getSimpleName();
+  String CLASS_NAME = "ContentFolder";
 
   /** the id of the {@link #getContentClass() class} reflecting this type. */
   short CLASS_ID = 21;
@@ -39,6 +39,6 @@ public abstract interface ContentFolder extends ContentResource {
   /**
    * {@inheritDoc}
    */
-  public ContentFolder getParent();
+  ContentFolder getParent();
 
 }

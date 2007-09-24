@@ -70,7 +70,7 @@ public interface ContentField extends ContentReflectionObject {
    * 
    * @return the {@link #getDeclaringClass() declaring-class}.
    */
-  ContentField getParent();
+  ContentClass getParent();
 
   /**
    * {@inheritDoc}
@@ -78,7 +78,7 @@ public interface ContentField extends ContentReflectionObject {
    * @return the sub-fields of this field.
    */
   public List<? extends ContentField> getChildren();
-  
+
   /**
    * This method gets the content-class that declares this field. This does NOT
    * mean that the field is

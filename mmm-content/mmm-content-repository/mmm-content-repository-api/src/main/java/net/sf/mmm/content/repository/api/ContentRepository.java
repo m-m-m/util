@@ -27,6 +27,16 @@ public interface ContentRepository extends ContentObjectReadAccess, ContentObjec
   ContentModelService getContentModel();
 
   /**
+   * This method gets the root-folder of the repository.
+   * 
+   * @see ContentObject#getParent()
+   * @see net.sf.mmm.content.model.api.ContentClass#isFolderClass()
+   * 
+   * @return the root-folder.
+   */
+  ContentObject getRootFolder();
+
+  /**
    * This method gets the {@link ContentObject} with the given <code>id</code>.
    * 
    * @see #get(ContentId)
@@ -45,7 +55,7 @@ public interface ContentRepository extends ContentObjectReadAccess, ContentObjec
    * An {@link ContentObject entity} retrieved from this
    * {@link ContentRepository repository} (e.g. via
    * <code>{@link #get(ContentId)}</code>) will be "manipulated" to add
-   * support for {@link ContentObject#getProxyTarget() proxying} and
+   * support for {@link ContentResource#getProxyTarget() proxying} and
    * {@link ContentObject#getParent() inheritance}. Therefore this method
    * returns the original object without manipulations. This is needed e.g. for
    * the editor GUI.
@@ -57,28 +67,27 @@ public interface ContentRepository extends ContentObjectReadAccess, ContentObjec
    * @return the raw object with the original data.
    * @throws ContentException if the operation fails.
    */
-  <E extends ContentObject> E getRawObject(E entity) throws ContentException;
+  <E extends ContentResource> E getRawObject(E entity) throws ContentException;
 
   /**
-   * This method gets the {@link ContentObject} with the given URI. The URI in
-   * this context is the absolute path of the resource relative to this
-   * container (the current store or the repository).
+   * This method gets the {@link ContentObject} with the given <code>path</code>.
    * 
    * @see #get(String)
    * 
    * @param <E> is the generic entity type of the requested object.
-   * @param uri is the URI of the requested object.
+   * @param path is the {@link ContentObject#getPath() path} of the requested
+   *        object.
    * @param entityClass is the java-class reflecting the type of the requested
    *        entity.
-   * @return the object with the given URI.
+   * @return the object with the given <code>path</code>.
    * @throws ContentException if the operation failed. This can have one of the
    *         following reasons:
    *         <ul>
-   *         <li>the URI-format is illegal.</li>
-   *         <li>no resource exists for the given URI.</li>
+   *         <li>the path is illegal.</li>
+   *         <li>no resource exists for the given <code>path</code>.</li>
    *         </ul>
    */
-  <E extends ContentObject> E get(String uri, Class<E> entityClass) throws ContentException;
+  <E extends ContentObject> E get(String path, Class<E> entityClass) throws ContentException;
 
   /**
    * This method renames the given <code>contentObject</code>.

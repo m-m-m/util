@@ -53,10 +53,7 @@ public interface ContentModelWriteAccess {
    * @param type is the {@link ContentField#getFieldType() type} of the values
    *        that can be stored in the field to create.
    * @param modifiers are the {@link ContentField#getModifiers() modifiers} for
-   *        the field to create. They must NOT be
-   *        {@link FieldModifiers#isTransient() transient} (@see
-   *        #createField(ContentClass, String, Class, FieldModifiersImpl,
-   *        Term)).
+   *        the field to create.
    * @return the created field.
    * @throws ContentModelException if the field could not be created. This can
    *         have one of the following reasons:

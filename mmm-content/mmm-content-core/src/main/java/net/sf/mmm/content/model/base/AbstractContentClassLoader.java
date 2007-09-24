@@ -6,6 +6,7 @@ package net.sf.mmm.content.model.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.content.base.AbstractContentObject.AbstractContentObjectModifier;
 import net.sf.mmm.content.model.api.access.ContentClassReadAccessById;
 import net.sf.mmm.content.model.api.access.ContentClassReadAccessByName;
 import net.sf.mmm.content.model.api.access.ContentFieldReadAccessById;
@@ -20,7 +21,8 @@ import net.sf.mmm.util.reflect.ClassResolver;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentClassLoader implements ContentClassLoader {
+public abstract class AbstractContentClassLoader extends AbstractContentObjectModifier implements
+    ContentClassLoader {
 
   /** @see #getContentModelService() */
   private final AbstractMutableContentModelService contentModelService;

@@ -4,7 +4,6 @@
 package net.sf.mmm.content.model.base;
 
 import java.util.Collection;
-import java.util.List;
 
 import net.sf.mmm.util.reflect.ClassResolver;
 

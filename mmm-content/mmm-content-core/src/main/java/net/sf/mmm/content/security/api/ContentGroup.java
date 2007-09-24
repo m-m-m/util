@@ -7,8 +7,8 @@ import java.util.List;
 
 /**
  * This is the interface for a group. Such object is associated with a set of
- * permissions that determine if a {@link ContentUser} owning the group is
- * allowed to perform a specific operation.
+ * {@link #getRules() rules} that determines if a {@link ContentUser} owning the
+ * group is allowed to perform a specific {@link ContentAction operation}.
  * 
  * @see java.security.acl.Group
  * 

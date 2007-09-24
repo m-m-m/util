@@ -32,12 +32,13 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
 
   /**
    * The constructor.
-   * 
-   * @param id is the {@link #getId() id}.
+   *
+   * @param name is the {@link #getName() name}.
+   * @param id is the {@link #getId() ID}.
    */
-  public AbstractContentReflectionObject(SmartId id) {
+  public AbstractContentReflectionObject(String name, SmartId id) {
 
-    super(id);
+    super(name, id);
   }
 
   /**
@@ -45,16 +46,6 @@ public abstract class AbstractContentReflectionObject extends AbstractContentObj
    */
   @FieldAnnotation(id = 20)
   public abstract Modifiers getModifiers();
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void setName(java.lang.String name) {
-
-    // make package visible...
-    super.setName(name);
-  }
 
   /**
    * {@inheritDoc}
