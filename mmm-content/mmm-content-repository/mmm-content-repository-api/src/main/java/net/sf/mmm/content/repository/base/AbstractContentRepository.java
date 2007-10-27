@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.repository.base;
 
+import java.util.StringTokenizer;
+
 import javax.annotation.Resource;
 
 import net.sf.mmm.content.api.ContentException;
@@ -10,12 +12,13 @@ import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelException;
-import net.sf.mmm.content.model.api.ContentModelService;
+import net.sf.mmm.content.model.base.AbstractMutableContentModelService;
 import net.sf.mmm.content.repository.api.ContentObjectNotExistsException;
 import net.sf.mmm.content.repository.api.ContentObjectWrongTypeException;
 import net.sf.mmm.content.repository.api.ContentRepository;
 import net.sf.mmm.content.resource.api.ContentResource;
 import net.sf.mmm.content.resource.base.AbstractContentResource;
+import net.sf.mmm.content.resource.base.AbstractContentResource.AbstractContentResourceModifier;
 import net.sf.mmm.content.value.api.ContentId;
 
 /**
@@ -24,10 +27,11 @@ import net.sf.mmm.content.value.api.ContentId;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentRepository implements ContentRepository {
+public abstract class AbstractContentRepository extends AbstractContentResourceModifier implements
+    ContentRepository {
 
   /** @see #getContentModel() */
-  private ContentModelService contentModel;
+  private AbstractMutableContentModelService contentModel;
 
   /** @see #getRootFolder() */
   private AbstractContentObject rootFolder;
@@ -54,9 +58,24 @@ public abstract class AbstractContentRepository implements ContentRepository {
   public void setRootFolder(AbstractContentObject rootFolder) {
 
     this.rootFolder = rootFolder;
+    setContentObjectClassAccess(this.rootFolder, getContentModel());
+
   }
 
-  protected <E extends ContentObject> E cast(ContentObject object, Class<E> entityClass) {
+  /**
+   * This method handles the cast of a <code>object</code> to the given
+   * <code>entityClass</code>.
+   * 
+   * @param <E> is the generic type of the <code>entityClass</code>.
+   * @param object is the object to cast.
+   * @param entityClass is the expected type of the given <code>object</code>.
+   * @return the given <code>object</code> casted to <code>entityClass</code>.
+   * @throws ContentObjectWrongTypeException if the cast failed because the
+   *         given <code>object</code> is NOT compatible with the given
+   *         <code>entityClass</code>.
+   */
+  protected <E extends ContentObject> E cast(ContentObject object, Class<E> entityClass)
+      throws ContentObjectWrongTypeException {
 
     try {
       return entityClass.cast(object);
@@ -85,7 +104,7 @@ public abstract class AbstractContentRepository implements ContentRepository {
   /**
    * {@inheritDoc}
    */
-  public ContentModelService getContentModel() {
+  public AbstractMutableContentModelService getContentModel() {
 
     return this.contentModel;
   }
@@ -94,7 +113,7 @@ public abstract class AbstractContentRepository implements ContentRepository {
    * @param contentModel the {@link #getContentModel() content-model} to set.
    */
   @Resource
-  public void setContentModel(ContentModelService contentModel) {
+  public void setContentModel(AbstractMutableContentModelService contentModel) {
 
     this.contentModel = contentModel;
   }
@@ -115,8 +134,9 @@ public abstract class AbstractContentRepository implements ContentRepository {
   public ContentObject get(String path) throws ContentException {
 
     AbstractContentObject object = getRootFolder();
+    // use smart query on persistent store (recursive SQL)?
     // TODO: create Parser for Path
-    java.util.StringTokenizer st = new java.util.StringTokenizer(path, ContentObject.PATH_SEPARATOR);
+    StringTokenizer st = new StringTokenizer(path, ContentObject.PATH_SEPARATOR);
     while (st.hasMoreTokens()) {
       String segment = st.nextToken();
       object = object.getChild(segment);
@@ -148,7 +168,7 @@ public abstract class AbstractContentRepository implements ContentRepository {
       throws ContentException {
 
     AbstractContentObject object = (AbstractContentObject) createInstance(contentClass);
-    //object.setName(name);
+    // object.setName(name);
     return null;
   }
 

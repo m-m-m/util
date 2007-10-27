@@ -18,6 +18,7 @@
     <module>mmm-content-repository-api</module>
     <module>mmm-content-repository-ibatis</module>
     <module>mmm-content-repository-file</module>
+    <module>mmm-content-repository-rdbms</module>
   </modules>
   <dependencies>
   </dependencies>

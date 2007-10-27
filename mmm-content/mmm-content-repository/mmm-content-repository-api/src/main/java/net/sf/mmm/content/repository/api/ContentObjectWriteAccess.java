@@ -52,7 +52,8 @@ public interface ContentObjectWriteAccess {
    *         <ul>
    *         <li>the given resource is a closed version (not a current
    *         resource).</li>
-   *         <li>the entity type is NOT revisioned.</li>
+   *         <li>the entity type is NOT
+   *         {@link ContentClass#isRevisionControlled() revision-controlled}.</li>
    *         <li>the resource is locked by another user</li>
    *         </ul>
    */

@@ -12,10 +12,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.util.file.FileUtil;
 import net.sf.mmm.util.filter.FileFilterAdapter;
 import net.sf.mmm.util.filter.FilterRuleChain;
 import net.sf.mmm.util.filter.FilterRuleChainXmlParser;
-import net.sf.mmm.util.io.FileUtil;
 import net.sf.mmm.util.transformer.StringTransformerChainXmlParser;
 import net.sf.mmm.util.transformer.Transformer;
 

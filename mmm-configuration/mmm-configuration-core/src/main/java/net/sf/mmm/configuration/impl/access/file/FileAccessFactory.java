@@ -16,8 +16,8 @@ import net.sf.mmm.configuration.base.ConfigurationReadException;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccessFactory;
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.util.io.FileType;
-import net.sf.mmm.util.io.FileUtil;
+import net.sf.mmm.util.file.FileType;
+import net.sf.mmm.util.file.FileUtil;
 
 /**
  * This is the implementation of the

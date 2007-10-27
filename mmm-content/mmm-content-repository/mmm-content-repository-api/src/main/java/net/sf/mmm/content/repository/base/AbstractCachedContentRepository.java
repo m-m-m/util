@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.repository.api.ContentObjectNotExistsException;
 import net.sf.mmm.content.resource.api.ContentResource;
 import net.sf.mmm.content.resource.base.AbstractContentResource;
@@ -93,37 +94,46 @@ public abstract class AbstractCachedContentRepository extends AbstractContentRep
 
   }
 
+  protected AbstractContentObject getFromCache(SmartId id) throws ContentException {
+
+    AbstractContentObject result = null;
+    long oid = id.getObjectId();
+    if (oid < SmartId.OID_MINIMUM_RESOURCE) {
+      if (oid == SmartId.OID_CLASS) {
+        result = getContentModel().getContentClass(id);
+      } else if (oid == SmartId.OID_FIELD) {
+        result = getContentModel().getContentField(id);
+      } else {
+        // TODO: illegal ID        
+        throw new ContentObjectNotExistsException(id);
+      }      
+    } else {
+      // resource
+      int cid = id.getClassId();
+      if (cid < ContentResource.CLASS_ID) {
+        // internal entity
+        // TODO: should this be handled different at all?
+      } else {
+        // resource
+        AbstractContentResource resource = null;
+        if (id.getRevision() == 0) {
+          resource = this.latestResourceCache.get(id);
+        } else {
+          resource = this.closedResourceCache.get(id);
+        }
+      }
+    }
+    return result;
+  }
+
   /**
    * {@inheritDoc}
    */
   public ContentObject get(ContentId id) throws ContentException {
 
-    ContentObject result = null;
     SmartId smartId = (SmartId) id;
-    if (smartId.getObjectId() == SmartId.OID_CLASS) {
-      result = getContentModel().getContentClass(id);
-    } else if (smartId.getObjectId() == SmartId.OID_FIELD) {
-      result = getContentModel().getContentField(id);
-    } else if (smartId.getClassId() < ContentResource.CLASS_ID) {
-      // internal entity
-    } else {
-      // resource
-      AbstractContentResource resource = null;
-      if (smartId.getRevision() == 0) {
-        resource = this.latestResourceCache.get(id);
-      } else {
-        resource = this.closedResourceCache.get(id);
-      }
-      if (resource == null) {
-        resource = readResource(smartId);
-        if (smartId.getRevision() == 0) {
-          this.latestResourceCache.put(smartId, resource);
-        } else {
-          this.closedResourceCache.put(smartId, resource);
-        }
-      }
-      result = resource;
-    }
+    ContentObject result = getFromCache(smartId);
+    // TODO: read object from persistent store...
     if (result == null) {
       throw new ContentObjectNotExistsException(id);
     }

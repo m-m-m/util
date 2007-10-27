@@ -23,7 +23,7 @@ import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
-import net.sf.mmm.util.io.FileUtil;
+import net.sf.mmm.util.file.FileUtil;
 
 /**
  * This is the abstract base implementation of the controller

@@ -8,7 +8,7 @@ import java.io.FileFilter;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.io.FileType;
+import net.sf.mmm.util.file.FileType;
 
 /**
  * This is the implementation of a {@link FileFilter} that filters using a

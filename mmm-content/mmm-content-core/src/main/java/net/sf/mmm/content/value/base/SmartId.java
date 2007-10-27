@@ -49,6 +49,13 @@ public interface SmartId extends ContentId {
   long OID_FIELD = 1;
 
   /**
+   * the first {@link #getObjectId() object-ID} that can be used for a resource.
+   * All object-IDs lower than this are reserved for objects that use the
+   * {@link #getClassId() class-ID} as primary key.
+   */
+  long OID_MINIMUM_RESOURCE = 16;
+
+  /**
    * the first {@link #getObjectId() object-id} that can be used for custom
    * resources. All object-IDs lower than this are reserved for system resources
    * (e.g. root-folder, etc.).

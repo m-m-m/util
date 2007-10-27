@@ -205,15 +205,7 @@ public abstract class AbstractContentObject implements ContentObject, MutableMet
   }
 
   /**
-   * This method gets the {@link #getChildren() child} with the given
-   * <code>childName</code>.<br>
-   * <b>ATTENTION:</b><br>
-   * This is an internal method. For the most implementations it only looks if
-   * the child is already available in a cache. TODO !?!?
-   * 
-   * @param childName is the {@link #getName() name} of the requested child.
-   * @return the child with the given <code>childName</code> or
-   *         <code>null</code> if NOT available.
+   * {@inheritDoc}
    */
   public AbstractContentObject getChild(String childName) {
 
