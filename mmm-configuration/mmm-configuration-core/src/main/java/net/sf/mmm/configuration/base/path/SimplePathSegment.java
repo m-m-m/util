@@ -5,7 +5,7 @@ package net.sf.mmm.configuration.base.path;
 
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.pattern.GlobPatternCompiler;
 
 /**
  * This class represents a simple segment of a
@@ -22,10 +22,10 @@ public class SimplePathSegment {
   /**
    * the segment string ({@link net.sf.mmm.configuration.api.Configuration#getName() name})
    */
-  private String string;
+  private final String string;
 
   /** the {@link #string} as pattern, or <code>null</code> if no pattern. */
-  private Pattern pattern;
+  private final Pattern pattern;
 
   /**
    * The constructor.
@@ -36,12 +36,16 @@ public class SimplePathSegment {
 
     super();
     this.string = name;
-    this.pattern = StringUtil.compileGlobPattern(name, true);
+    if (name.contains("*") || (name.contains("?"))) {
+      this.pattern = GlobPatternCompiler.INSTANCE.compile(name);
+    } else {
+      this.pattern = null;
+    }
   }
 
   /**
    * This method determines if the {@link #getString() string} is a
-   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}.
+   * {@link GlobPatternCompiler glob-pattern}.
    * 
    * @return <code>true</code> if the {@link #getString() string} is a pattern
    *         and <code>false</code> if it is a regular
@@ -69,8 +73,8 @@ public class SimplePathSegment {
 
   /**
    * This method gets the {@link #getString() string} compiled as
-   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String, boolean) glob-pattern}
-   * or <code>null</code> if NOT a pattern.
+   * {@link GlobPatternCompiler glob-pattern} or <code>null</code> if NOT a
+   * pattern.
    * 
    * @return the pattern or <code>null</code>.
    */

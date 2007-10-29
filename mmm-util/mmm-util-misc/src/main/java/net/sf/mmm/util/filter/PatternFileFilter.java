@@ -7,8 +7,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.file.FileType;
+import net.sf.mmm.util.pattern.GlobPatternCompiler;
 
 /**
  * This is the implementation of a {@link FileFilter} that filters using a
@@ -61,16 +61,15 @@ public class PatternFileFilter implements FileFilter {
   /**
    * The constructor.
    * 
-   * @param filenamePattern is the
-   *        {@link StringUtil#compileGlobPattern(String) glob-pattern} that must
-   *        match in order to {@link #accept(File) accept} a file by its
+   * @param filenamePattern is the {@link GlobPatternCompiler glob-pattern} that
+   *        must match in order to {@link #accept(File) accept} a file by its
    *        {@link File#getName() name}.
    * @param type the type of the {@link #accept(File) acceptable} files or
    *        <code>null</code> if any type is acceptable.
    */
   public PatternFileFilter(String filenamePattern, FileType type) {
 
-    this(StringUtil.compileGlobPattern(filenamePattern), type);
+    this(new GlobPatternCompiler().compile(filenamePattern), type);
   }
 
   /**

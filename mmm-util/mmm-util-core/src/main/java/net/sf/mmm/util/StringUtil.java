@@ -124,64 +124,6 @@ public final class StringUtil {
   }
 
   /**
-   * This method compiles the given <code>pattern</code> to a
-   * {@link java.util.regex.Pattern} interpreting it as glob-pattern. In a
-   * glob-pattern only the wildcard characters "*" and "?" are treated special.
-   * The asterisk ("*") can match any string including the empty string and the
-   * questionmark ("?") can match any single character.
-   * 
-   * @param pattern is the glob pattern to compile.
-   * @return the compiled pattern.
-   */
-  public static Pattern compileGlobPattern(String pattern) {
-
-    return compileGlobPattern(pattern, false);
-  }
-
-  /**
-   * This method compiles the given <code>pattern</code> to a
-   * {@link java.util.regex.Pattern} interpreting it as glob-pattern. In a
-   * glob-pattern only the wildcard characters "*" and "?" are treated special.
-   * The asterisk ("*") can match any string including the empty string and the
-   * questionmark ("?") can match any single character.
-   * 
-   * @param pattern is the glob pattern to compile.
-   * @param requireWildcard - if <code>true</code> the given
-   *        <code>pattern</code> needs to have a wildcard character in order
-   *        to be compiled, <code>false</code> otherwise.
-   * @return the compiled pattern or <code>null</code> if
-   *         <code>requireWildcard</code> is <code>true</code> but the given
-   *         <code>pattern</code> does NOT contain any wildcard.
-   */
-  public static Pattern compileGlobPattern(String pattern, boolean requireWildcard) {
-
-    char[] chars = pattern.toCharArray();
-    StringBuffer buffer = new StringBuffer(pattern.length() + 8);
-    boolean hasWildcard = false;
-    for (int i = 0; i < chars.length; i++) {
-      char c = chars[i];
-      if (c == '*') {
-        hasWildcard = true;
-        buffer.append(".*");
-      } else if (c == '?') {
-        hasWildcard = true;
-        buffer.append('.');
-      } else if (c == '.') {
-        buffer.append("\\.");
-      } else if (c == '\\') {
-        buffer.append("\\\\");
-      } else {
-        buffer.append(c);
-      }
-    }
-    if (requireWildcard && !hasWildcard) {
-      return null;
-    } else {
-      return Pattern.compile(buffer.toString());
-    }
-  }
-
-  /**
    * This method escapes the given <code>string</code> for usage in XML (or
    * HTML, etc.).
    * 

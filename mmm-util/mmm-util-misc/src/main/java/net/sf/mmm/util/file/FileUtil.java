@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.filter.PatternFileFilter;
+import net.sf.mmm.util.pattern.GlobPatternCompiler;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and
@@ -316,7 +316,7 @@ public final class FileUtil {
   /**
    * This method gets all {@link File files} matching to the given
    * <code>path</code> and <code>fileType</code>. The <code>path</code>
-   * may be a {@link StringUtil#compileGlobPattern(String) glob-pattern}.<br>
+   * may contain {@link GlobPatternCompiler wildcards}.<br>
    * Examples:
    * <ul>
    * <li>
@@ -327,9 +327,9 @@ public final class FileUtil {
    * <li>
    * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
    * "*&#47;*.xml", {@link FileType#FILE})</code>
-   * will return all {@link File#isFile() files} from all
-   * {@link File#list() subdirectories} of <code>cwd</code> that end with
-   * ".xml" </li>
+   * will return all {@link File#isFile() files} from all direct
+   * {@link File#list() sub-folders} of <code>cwd</code> that end with ".xml"
+   * </li>
    * </ul>
    * 
    * @param cwd is the current working directory and should therefore point to
@@ -354,7 +354,7 @@ public final class FileUtil {
   /**
    * This method adds all files matching to the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may be contain {@link StringUtil#compileGlobPattern(String) wildcards}.
+   * may contain {@link GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
@@ -368,10 +368,9 @@ public final class FileUtil {
    * @param list is the list where to {@link List#add(Object) add} the collected
    *        files.
    * @return <code>false</code> if the path is a regular string and
-   *         <code>true</code> if the given path is a
-   *         {@link StringUtil#compileGlobPattern(String) glob-pattern},
-   *         meaning that it contained at least one of the characters '*' or
-   *         '?'.
+   *         <code>true</code> if the given path contains at least one
+   *         {@link GlobPatternCompiler wildcard} (<code>'*'</code> or
+   *         <code>'?'</code>).
    */
   public static boolean collectMatchingFiles(File cwd, String path, FileType fileType,
       List<File> list) {
@@ -390,7 +389,7 @@ public final class FileUtil {
   /**
    * This method adds all files matching to the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may be a {@link StringUtil#compileGlobPattern(String) glob-pattern}
+   * may contain {@link GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
@@ -474,7 +473,7 @@ public final class FileUtil {
         PathSegment segment = new PathSegment();
         segment.string = new String(pathChars, segmentStartIndex, length);
         if (segmentIsPattern) {
-          segment.pattern = StringUtil.compileGlobPattern(segment.string);
+          segment.pattern = GlobPatternCompiler.INSTANCE.compile(segment.string);
         } else {
           segment.pattern = null;
         }
@@ -494,7 +493,7 @@ public final class FileUtil {
       int length = currentIndex - segmentStartIndex;
       segment.string = new String(pathChars, segmentStartIndex, length);
       if (segmentIsPattern) {
-        segment.pattern = StringUtil.compileGlobPattern(segment.string);
+        segment.pattern = GlobPatternCompiler.INSTANCE.compile(segment.string);
       } else {
         segment.pattern = null;
       }

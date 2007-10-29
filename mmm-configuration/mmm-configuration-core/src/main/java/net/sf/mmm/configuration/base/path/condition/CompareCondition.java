@@ -10,7 +10,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.path.SimplePathSegment;
 import net.sf.mmm.configuration.base.path.comparator.Comparator;
 import net.sf.mmm.configuration.base.path.comparator.EqualsComparator;
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.pattern.GlobPatternCompiler;
 import net.sf.mmm.value.api.GenericValue;
 
 /**
@@ -49,7 +49,11 @@ public class CompareCondition extends PathCondition {
 
     super(pathSegments);
     this.value = descendantValue;
-    this.valuePattern = StringUtil.compileGlobPattern(this.value, true);
+    if (descendantValue.contains("*") || descendantValue.contains("?")) {
+      this.valuePattern = GlobPatternCompiler.INSTANCE.compile(this.value);
+    } else {
+      this.valuePattern = null;
+    }
     this.comparator = cmp;
   }
 
@@ -135,7 +139,7 @@ public class CompareCondition extends PathCondition {
 
   /**
    * This method determines if the {@link #getValue() value} is a
-   * {@link net.sf.mmm.util.StringUtil#compileGlobPattern(String) glob-pattern}.
+   * {@link GlobPatternCompiler glob-pattern}.
    * 
    * @return <code>true</code> if the {@link #getValue() value} is a pattern
    *         and <code>false</code> if it is a regular value.
