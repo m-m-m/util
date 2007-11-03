@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.api;
 
-import net.sf.mmm.nls.base.NlsRuntimeException;
 import net.sf.mmm.search.engine.api.SearchEngine;
+import net.sf.mmm.util.nls.NlsRuntimeException;
 
 /**
  * This is a technical exception that can be thrown by the {@link SearchEngine}

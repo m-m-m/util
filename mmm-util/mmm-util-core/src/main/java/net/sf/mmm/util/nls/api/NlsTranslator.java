@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.api;
+package net.sf.mmm.util.nls.api;
 
 /**
  * This is the callback interface for translating a text-message to a
@@ -20,7 +20,7 @@ public interface NlsTranslator {
    * and then perform a translation by forward mapping that key to the
    * nationalized message. To ensure that this will work, the original message
    * needs to be supplied from the constant defined by the
-   * {@link net.sf.mmm.nls.base.AbstractResourceBundle bundle}.<br>
+   * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle bundle}.<br>
    * To speed up repetitive translations of the same source the implementation
    * should store the key from the reverse lookup.<br>
    * A legal implementation of this interface does NOT throw
@@ -29,7 +29,7 @@ public interface NlsTranslator {
    * argument (except the localized bundles have been updated and the
    * implementation supports reloading this at runtime).
    * 
-   * @see net.sf.mmm.nls.base.AbstractResourceBundle
+   * @see net.sf.mmm.util.nls.base.AbstractResourceBundle
    * @see NlsTranslationSource#getInternationalizedMessage()
    * 
    * @param source contains the source-data to translate.

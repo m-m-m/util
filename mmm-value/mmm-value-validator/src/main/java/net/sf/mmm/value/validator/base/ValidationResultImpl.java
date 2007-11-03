@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.base;
 
-import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.base.NlsMessageImpl;
+import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.value.validator.api.ValidationResult;
 
 /**

@@ -7,12 +7,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.api.NlsTranslationSource;
-import net.sf.mmm.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsTranslationSource;
+import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.base.AbstractNlsTranslator;
 
 /**
- * This is the test-case for {@link net.sf.mmm.nls.base.NlsMessageImpl}.
+ * This is the test-case for {@link net.sf.mmm.util.nls.NlsMessageImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,7 +30,7 @@ public class NlsMessageTest {
   }
 
   /**
-   * This method tests the {@link net.sf.mmm.nls.api.NlsMessage} implementation ({@link net.sf.mmm.nls.base.NlsMessageImpl}).
+   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} implementation ({@link net.sf.mmm.util.nls.NlsMessageImpl}).
    */
   @Test
   public void testMessage() {

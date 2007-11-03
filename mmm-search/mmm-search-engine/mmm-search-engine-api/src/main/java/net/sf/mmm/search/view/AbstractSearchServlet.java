@@ -16,13 +16,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
+import net.sf.mmm.util.exception.ResourceMissingException;
 import net.sf.mmm.util.file.FileUtil;
 
 /**

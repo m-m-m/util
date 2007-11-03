@@ -15,7 +15,6 @@ import org.apache.lucene.index.IndexModifier;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
-import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchAddFailedException;
@@ -25,6 +24,7 @@ import net.sf.mmm.search.base.SearchPropertyValueInvalidException;
 import net.sf.mmm.search.base.SearchRemoveFailedException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
+import net.sf.mmm.util.exception.ResourceMissingException;
 
 /**
  * This is the implementation of the

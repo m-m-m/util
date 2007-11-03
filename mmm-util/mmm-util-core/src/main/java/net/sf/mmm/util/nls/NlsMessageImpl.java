@@ -1,15 +1,16 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.base;
+package net.sf.mmm.util.nls;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 
-import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.api.NlsObject;
-import net.sf.mmm.nls.api.NlsTranslationSource;
-import net.sf.mmm.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsObject;
+import net.sf.mmm.util.nls.api.NlsTranslationSource;
+import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.base.IdentityTranslator;
 
 /**
  * This is the implementation of the {@link NlsMessage} interface. It is NOT
@@ -77,7 +78,7 @@ public class NlsMessageImpl implements NlsMessage, NlsTranslationSource {
    * This method sets a universal {@link NlsTranslator translator} this is used
    * by {@link #getLocalizedMessage(NlsTranslator, StringBuffer)}, if
    * <code>null</code> is given as translator (e.g. via
-   * {@link net.sf.mmm.nls.api.NlsThrowable#getMessage()}). After the universal
+   * {@link net.sf.mmm.util.nls.api.NlsThrowable#getMessage()}). After the universal
    * translator is set, further calls of this method will have NO effect.<br>
    * The desired behaviour of a universal translator can depend from the
    * situation where it is used. E.g. a client application could use the

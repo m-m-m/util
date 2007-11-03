@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.api;
 
-import net.sf.mmm.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the interface for the result of a validation. If an object is invalid

@@ -14,8 +14,11 @@ import java.util.Set;
 import org.junit.Test;
 
 import net.sf.mmm.nls.MyResourceBundle;
-import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.base.AbstractResourceBundle;
+import net.sf.mmm.util.nls.base.SimpleStringTranslator;
 
 /**
  * This is the test-case for {@link AbstractResourceBundle}.

@@ -5,6 +5,9 @@ package net.sf.mmm.nls.api;
 
 import java.util.Locale;
 
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsTranslator;
+
 /**
  * This is the interface of a service that provides native language support
  * (NLS). This is done by a {@link NlsTranslator} that can be

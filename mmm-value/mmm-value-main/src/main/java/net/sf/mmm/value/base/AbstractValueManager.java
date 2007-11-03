@@ -9,8 +9,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.nls.api.NlsMessage;
-import net.sf.mmm.nls.base.NlsMessageImpl;
+import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.ValueManager;

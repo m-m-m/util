@@ -15,9 +15,9 @@ import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.gui.model.content.api.ContentReflectionModelManager;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
-import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
+import net.sf.mmm.util.exception.ResourceMissingException;
 
 /**
  * This is the implementation of the {@link ContentReflectionModelManager}

@@ -1,22 +1,22 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.base;
+package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.nls.api.NlsTranslationSource;
+import net.sf.mmm.util.nls.api.NlsTranslationSource;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.nls.api.NlsTranslator} interface. It
+ * {@link net.sf.mmm.util.nls.api.NlsTranslator} interface. It
  * {@link ResourceBundle#getBundle(String, Locale) looks} for a regular
  * {@link ResourceBundle bundle} with the same {@link Class#getName() name} as
  * the given {@link AbstractResourceBundle nls-bundle} using the given
  * {@link Locale}.
  * 
- * @see net.sf.mmm.nls.api.NlsMessage
+ * @see net.sf.mmm.util.nls.api.NlsMessage
  * @see ResourceBundle
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

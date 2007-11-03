@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.api;
 
-import net.sf.mmm.nls.base.NlsException;
+import net.sf.mmm.util.nls.NlsException;
 
 /**
  * This exception represents an error that occured because of an invalid

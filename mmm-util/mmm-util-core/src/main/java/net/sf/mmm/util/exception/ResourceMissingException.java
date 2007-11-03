@@ -1,10 +1,10 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.impl;
+package net.sf.mmm.util.exception;
 
-import net.sf.mmm.nls.base.NlsRuntimeException;
 import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.nls.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a resource is required but is NOT available.

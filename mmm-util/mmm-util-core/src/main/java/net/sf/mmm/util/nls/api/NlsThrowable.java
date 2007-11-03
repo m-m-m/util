@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.api;
+package net.sf.mmm.util.nls.api;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -21,12 +21,12 @@ import java.io.PrintWriter;
  * argument list that is inserted into the message after nationalization.</li>
  * <li>The throwable itself does not know the component that does the actual
  * localization which is done by the callback interface
- * {@link net.sf.mmm.nls.api.NlsTranslator}.</li>
+ * {@link net.sf.mmm.util.nls.api.NlsTranslator}.</li>
  * </ul>
  * 
  * @see NlsMessage
- * @see net.sf.mmm.nls.base.NlsException
- * @see net.sf.mmm.nls.base.NlsRuntimeException
+ * @see net.sf.mmm.util.nls.NlsException
+ * @see net.sf.mmm.util.nls.NlsRuntimeException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -59,7 +59,7 @@ public interface NlsThrowable {
    * language) will be used. After translation is done, the language independent
    * arguments will be filled in the translated message string.
    * 
-   * @see net.sf.mmm.nls.api.NlsMessage#getLocalizedMessage(NlsTranslator,
+   * @see net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(NlsTranslator,
    *      StringBuffer)
    * 
    * @param nationalizer is used to translate the original i18n message.

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls;
 
-import net.sf.mmm.nls.base.AbstractResourceBundle;
+import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 @SuppressWarnings("all")
 public class MyResourceBundle extends AbstractResourceBundle {

@@ -18,12 +18,12 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
 
-import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
+import net.sf.mmm.util.exception.ResourceMissingException;
 import net.sf.mmm.util.file.FileUtil;
 import net.sf.mmm.util.transformer.Transformer;
 

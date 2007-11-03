@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.api;
 
-import net.sf.mmm.nls.base.NlsException;
+import net.sf.mmm.util.nls.NlsException;
+import net.sf.mmm.util.nls.api.AbstractNlsException;
 
 /**
  * This exception is thrown if a validation failes. It describes why the value
@@ -12,7 +13,7 @@ import net.sf.mmm.nls.base.NlsException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValidationException extends NlsException {
+public class ValidationException extends AbstractNlsException {
 
   /** uid for serialization */
   private static final long serialVersionUID = 6180310118551885467L;

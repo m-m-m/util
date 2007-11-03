@@ -8,9 +8,9 @@ import javax.servlet.ServletException;
 
 import org.w3c.dom.Element;
 
-import net.sf.mmm.nls.impl.ResourceMissingException;
 import net.sf.mmm.search.base.SearchConfigurator;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.util.exception.ResourceMissingException;
 import net.sf.mmm.util.xml.DomUtil;
 
 /**

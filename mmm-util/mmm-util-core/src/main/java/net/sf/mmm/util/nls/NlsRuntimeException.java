@@ -1,9 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.base;
+package net.sf.mmm.util.nls;
 
-import net.sf.mmm.nls.api.AbstractNlsRuntimeException;
+import net.sf.mmm.util.nls.api.AbstractNlsRuntimeException;
 
 /**
  * This the base class for all runtime exceptions of the project.

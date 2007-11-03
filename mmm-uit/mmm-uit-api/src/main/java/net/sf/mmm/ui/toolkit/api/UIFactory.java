@@ -60,7 +60,7 @@ public interface UIFactory extends UIWriteDisposed {
    * nationalization of all existing GUI elements created by this factory, that
    * are currently attached to a window. The nationalization will cause
    * translation of the texts (as long as you provide them as
-   * {@link net.sf.mmm.nls.api.NlsMessage}) as well as the
+   * {@link net.sf.mmm.util.nls.api.NlsMessage}) as well as the
    * {@link #getScriptOrientation() script-orientation}.
    * 
    * @param locale is the locale to set.

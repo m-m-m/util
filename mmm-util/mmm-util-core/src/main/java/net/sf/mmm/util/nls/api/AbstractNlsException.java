@@ -1,26 +1,26 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.api;
+package net.sf.mmm.util.nls.api;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
- * This is an abstract base implementation of an unchecked exception with real
+ * This is an abstract base implementation of a checked exception with real
  * <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
- * Please prefer extending {@link net.sf.mmm.nls.base.NlsRuntimeException}
- * instead of this class.<br>
+ * Please prefer extending {@link net.sf.mmm.util.nls.NlsException} instead of
+ * this class.<br>
  * <b>INFORMATION:</b><br>
- * Unchecked exceptions should be used for technical errors and should only
- * occur in unexpected situations.
+ * Checked exceptions should be used for business errors and should only occur
+ * in unexpected situations.
  * 
  * @see NlsThrowable
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractNlsRuntimeException extends RuntimeException implements NlsThrowable {
+public abstract class AbstractNlsException extends Exception implements NlsThrowable {
 
   /** the internationalized message */
   private NlsMessage nlsMessage;
@@ -28,10 +28,10 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage the internationalized message describing
+   * @param internationalizedMessage is the internationalized message describing
    *        the problem briefly.
    */
-  public AbstractNlsRuntimeException(NlsMessage internationalizedMessage) {
+  public AbstractNlsException(NlsMessage internationalizedMessage) {
 
     super();
     this.nlsMessage = internationalizedMessage;
@@ -40,11 +40,11 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * The constructor.
    * 
-   * @param nested is the throwable that caused this exception.
-   * @param internationalizedMessage the internationalized message describing
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internationalizedMessage is the internationalized message describing
    *        the problem briefly.
    */
-  public AbstractNlsRuntimeException(Throwable nested, NlsMessage internationalizedMessage) {
+  public AbstractNlsException(Throwable nested, NlsMessage internationalizedMessage) {
 
     super(nested);
     this.nlsMessage = internationalizedMessage;
@@ -151,25 +151,6 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   public void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message) {
 
     getNlsMessage().getLocalizedMessage(nationalizer, message);
-    Throwable nested = getCause();
-    if (nested != null) {
-      NlsThrowable mt = null;
-      String msg = null;
-      if (nested instanceof NlsThrowable) {
-        mt = (NlsThrowable) nested;
-      } else {
-        msg = nested.getLocalizedMessage();
-      }
-      if ((mt != null) || (msg != null)) {
-        message.append(" [");
-        if (mt != null) {
-          mt.getLocalizedMessage(nationalizer, message);
-        } else {
-          message.append(msg);
-        }
-        message.append("]");
-      }
-    }
   }
 
 }

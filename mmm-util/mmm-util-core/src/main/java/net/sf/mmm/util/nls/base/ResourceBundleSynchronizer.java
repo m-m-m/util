@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.base;
+package net.sf.mmm.util.nls.base;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,8 +20,9 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.nls.api.NlsTranslator;
 import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.api.NlsTranslator;
 
 /**
  * This class can be used to create and update the localized bundles

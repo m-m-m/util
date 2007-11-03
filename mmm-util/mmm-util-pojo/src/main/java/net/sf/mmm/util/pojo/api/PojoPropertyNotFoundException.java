@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.api;
 
-import net.sf.mmm.nls.base.NlsRuntimeException;
+import net.sf.mmm.util.nls.NlsRuntimeException;
 import net.sf.mmm.util.pojo.NlsBundlePojo;
 
 /**

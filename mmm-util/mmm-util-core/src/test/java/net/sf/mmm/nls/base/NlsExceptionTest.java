@@ -12,10 +12,12 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import net.sf.mmm.nls.MyResourceBundle;
-import net.sf.mmm.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.NlsException;
+import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.base.SimpleStringTranslator;
 
 /**
- * This is the {@link TestCase} for {@link net.sf.mmm.nls.base.NlsException}.
+ * This is the {@link TestCase} for {@link net.sf.mmm.util.nls.NlsException}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

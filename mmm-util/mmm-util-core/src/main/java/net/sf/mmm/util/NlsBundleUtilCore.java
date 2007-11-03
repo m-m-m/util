@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
-import net.sf.mmm.nls.base.AbstractResourceBundle;
+import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
  * This class holds the internationalized messages for <code>util-misc</code>.
@@ -27,7 +27,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** to be used with resource bundle */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";
 
-  /** @see net.sf.mmm.nls.base.ResourceBundleSynchronizer */
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE = "Usage: {0} [<option>*] <bundle-class> [<locale>*]\n\n"
       + "Create and/or update resource bundle properties from <bundle-class>\n"
       + "for the given locales (including the root locale).\n\n"
