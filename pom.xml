@@ -139,6 +139,8 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <!-- Version 2.3 ist buggy: http://jira.codehaus.org/browse/MJAVADOC-141 -->
+        <version>2.2</version>        
         <configuration>
           <aggregate>true</aggregate>
           <encoding>UTF-8</encoding>
