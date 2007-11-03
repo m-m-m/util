@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.api;
 
-import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.base.NlsRuntimeException;
 import net.sf.mmm.search.engine.api.SearchEngine;
 
@@ -35,22 +34,6 @@ public class SearchException extends NlsRuntimeException {
   public SearchException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 
     super(nested, internaitionalizedMessage, arguments);
-  }
-
-  /**
-   * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
-   */
-  public SearchException(NlsMessage internationalizedMessage) {
-
-    super(internationalizedMessage);
-  }
-
-  /**
-   * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
-   */
-  public SearchException(Throwable nested, NlsMessage internationalizedMessage) {
-
-    super(nested, internationalizedMessage);
   }
 
 }
