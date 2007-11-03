@@ -7,8 +7,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
- * This is the interface that all exceptions and runtime exceptions of this
- * project should implement. <br>
+ * This is the interface for exceptions and runtime exceptions with real
+ * <em>native language support</em> (NLS).<br>
  * In extension to a regular {@link Throwable throwable} it brings enhanced
  * native language support (NLS). In a server environment there can be multiple
  * users active at a time with different locales. <br>

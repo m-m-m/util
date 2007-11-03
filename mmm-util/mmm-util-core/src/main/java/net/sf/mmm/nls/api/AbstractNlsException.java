@@ -10,6 +10,9 @@ import java.io.PrintWriter;
  * This is an abstract base implementation of a checked exception with real
  * <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
+ * Please prefer extending {@link net.sf.mmm.nls.base.NlsException} instead of
+ * this class.<br>
+ * <b>INFORMATION:</b><br>
  * Checked exceptions should be used for business errors and should only occur
  * in unexpected situations.
  * 
