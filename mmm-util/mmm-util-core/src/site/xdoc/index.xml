@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>MMM Util::Core</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM Util::Core">
+      <p>
+      This module contains fundamental utitlies that are used all over the mmm project.
+      Everything is designed for general purpose and can also be very helpful for any
+      other project.
+    	</p>
+    	<p>
+    	Here is a list of features provided by this module:
+    	<ul>
+        <li>Advanced <a href="apidocs/net/sf/mmm/util/nls/package-summary.html">Native Language Support (NLS)</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/pattern/package-summary.html">PatternCompiler</a> for glob- and ant-like path-patterns producing <code>java.util.regex.Pattern</code>.</li>
+    	</ul>
+    	</p>
+    </section>
+  </body>
+</document>

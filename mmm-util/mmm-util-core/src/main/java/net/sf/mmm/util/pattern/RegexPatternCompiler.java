@@ -11,15 +11,15 @@ import java.util.regex.Pattern;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class RegexpPatternCompiler implements PatternCompiler {
+public class RegexPatternCompiler implements PatternCompiler {
 
-  /** @see #RegexpCompiler(int) */
+  /** @see #RegexPatternCompiler(int) */
   private final int flags;
 
   /**
    * The constructor.
    */
-  public RegexpPatternCompiler() {
+  public RegexPatternCompiler() {
 
     this(0);
   }
@@ -29,7 +29,7 @@ public class RegexpPatternCompiler implements PatternCompiler {
    * 
    * @param flags are the {@link Pattern#compile(String, int) compiler flags}.
    */
-  public RegexpPatternCompiler(int flags) {
+  public RegexPatternCompiler(int flags) {
 
     super();
     this.flags = flags;

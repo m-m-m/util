@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 /**
  * This is the callback interface for translating a text-message to a
- * {@link java.util.Locale locale}-specific language.<br>
+ * {@link java.util.Locale}-specific language.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
