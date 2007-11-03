@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.impl;
 
-import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.base.NlsRuntimeException;
 
 /**
@@ -47,33 +46,6 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
       Object... arguments) {
 
     super(nested, internaitionalizedMessage, arguments);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @see NlsRuntimeException#NlsRuntimeException(NlsMessage)
-   * 
-   * @param internationalizedMessage the internationalized message describing
-   *        the problem briefly.
-   */
-  public NlsIllegalArgumentException(NlsMessage internationalizedMessage) {
-
-    super(internationalizedMessage);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @see NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)
-   * 
-   * @param nested is the throwable that caused this exception.
-   * @param internationalizedMessage the internationalized message describing
-   *        the problem briefly.
-   */
-  public NlsIllegalArgumentException(Throwable nested, NlsMessage internationalizedMessage) {
-
-    super(nested, internationalizedMessage);
   }
 
 }

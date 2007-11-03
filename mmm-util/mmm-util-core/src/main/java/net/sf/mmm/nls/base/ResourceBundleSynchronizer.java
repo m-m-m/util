@@ -90,9 +90,8 @@ public class ResourceBundleSynchronizer {
 
   /**
    * This method gets the locales of the bundles that should be
-   * {@link #synchronize(AbstractResourceBundle) synchronized}. Examples for
-   * locales (entries of the returned array) are <code>""</code>,
-   * <code></code>
+   * {@link #synchronize(ResourceBundle) synchronized}. Examples for locales
+   * (entries of the returned array) are <code>""</code>, <code></code>
    * 
    * @return the locales to create/update.
    */
@@ -332,10 +331,10 @@ public class ResourceBundleSynchronizer {
     }
     String[] localeArray = locales.toArray(new String[locales.size()]);
     synchronizer.setLocales(localeArray);
-    Class bundleClass = Class.forName(bundleClassName);
-    if (!AbstractResourceBundle.class.isAssignableFrom(bundleClass)) {
+    Class<?> bundleClass = Class.forName(bundleClassName);
+    if (!ResourceBundle.class.isAssignableFrom(bundleClass)) {
       throw new IllegalArgumentException("Given class '" + bundleClassName + "' does NOT extend '"
-          + AbstractResourceBundle.class.getName() + "'!");
+          + ResourceBundle.class.getName() + "'!");
     }
     ResourceBundle bundle = (ResourceBundle) bundleClass.newInstance();
     synchronizer.synchronize(bundle);
