@@ -13,15 +13,15 @@ import net.sf.mmm.util.filter.CharFilter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class FileModeMask implements Cloneable {
+public class FileAccessPermissions implements Cloneable {
 
-  /** @see #isReadable(FileModeClass) */
+  /** @see #isReadable(FileAccessClass) */
   public static final int MASK_READABLE = 4;
 
-  /** @see #isWritable(FileModeClass) */
+  /** @see #isWritable(FileAccessClass) */
   public static final int MASK_WRITABLE = 2;
 
-  /** @see #isExecutable(FileModeClass) */
+  /** @see #isExecutable(FileAccessClass) */
   public static final int MASK_EXECUTABLE = 1;
 
   /** @see #isSetuid() */
@@ -54,23 +54,23 @@ public class FileModeMask implements Cloneable {
   /**
    * The constructor.
    */
-  public FileModeMask() {
+  public FileAccessPermissions() {
 
     super();
   }
 
   /**
-   * This method create a new {@link FileModeMask} instance according to the
+   * This method create a new {@link FileAccessPermissions} instance according to the
    * given <code><a href="http://en.wikipedia.org/wiki/Umask">umask</a></code>
    * (user file creation mode mask).
    * 
    * @param umask is the umask.
-   * @param isDirectory <code>true</code> if the the {@link FileModeMask} is
+   * @param isDirectory <code>true</code> if the the {@link FileAccessPermissions} is
    *        to be created for a directory, <code>false</code> for a regular
    *        file.
-   * @return the according {@link FileModeMask}.
+   * @return the according {@link FileAccessPermissions}.
    */
-  public static FileModeMask createByUmask(int umask, boolean isDirectory) {
+  public static FileAccessPermissions createByUmask(int umask, boolean isDirectory) {
 
     int fullAccessMask;
     if (isDirectory) {
@@ -79,7 +79,7 @@ public class FileModeMask implements Cloneable {
       fullAccessMask = MASK_FULL_FILE_ACCESS;
     }
     int mask = fullAccessMask & ~umask;
-    return new FileModeMask(mask);
+    return new FileAccessPermissions(mask);
   }
 
   /**
@@ -87,14 +87,14 @@ public class FileModeMask implements Cloneable {
    * 
    * @param mask is the {@link #getMaskBits() mask}.
    */
-  public FileModeMask(int mask) {
+  public FileAccessPermissions(int mask) {
 
     super();
     setMaskBits(mask);
   }
 
   /**
-   * This method gets the {@link FileModeMask} encoded as a single integer
+   * This method gets the {@link FileAccessPermissions} encoded as a single integer
    * value. The value is in the same format as the octal notation for the
    * command <code>chmod</code>. Only the last 12 bits of the mask can be
    * set.
@@ -126,30 +126,30 @@ public class FileModeMask implements Cloneable {
    * This method determines if this {@link #getMaskBits() mask} is readable for
    * the given <code>fileModeClass</code>.
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @return <code>true</code> if the mask is readable for the given
    *         <code>fileModeClass</code>, <code>false</code> otherwise.
    */
-  public boolean isReadable(FileModeClass fileModeClass) {
+  public boolean isReadable(FileAccessClass fileModeClass) {
 
     return hasFlag(fileModeClass, MASK_READABLE);
   }
 
   /**
-   * This method sets the {@link #isReadable(FileModeClass) readable flag} of
+   * This method sets the {@link #isReadable(FileAccessClass) readable flag} of
    * this this {@link #getMaskBits() mask} for the given
    * <code>fileModeClass</code> to the given value (<code>readable</code>).
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @param readable if <code>true</code> the mask will be readable for the
    *        given <code>fileModeClass</code>, if <code>false</code> it will
    *        NOT be readable.
    */
-  public void setReadable(FileModeClass fileModeClass, boolean readable) {
+  public void setReadable(FileAccessClass fileModeClass, boolean readable) {
 
     setFlag(fileModeClass, MASK_READABLE, readable);
   }
@@ -158,30 +158,30 @@ public class FileModeMask implements Cloneable {
    * This method determines if this {@link #getMaskBits() mask} is writable for
    * the given <code>fileModeClass</code>.
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @return <code>true</code> if the mask is writable for the given
    *         <code>fileModeClass</code>, <code>false</code> otherwise.
    */
-  public boolean isWritable(FileModeClass fileModeClass) {
+  public boolean isWritable(FileAccessClass fileModeClass) {
 
     return hasFlag(fileModeClass, MASK_WRITABLE);
   }
 
   /**
-   * This method sets the {@link #isWritable(FileModeClass) writable flag} of
+   * This method sets the {@link #isWritable(FileAccessClass) writable flag} of
    * this this {@link #getMaskBits() mask} for the given
    * <code>fileModeClass</code> to the given value (<code>writable</code>).
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @param writable if <code>true</code> the mask will be writable for the
    *        given <code>fileModeClass</code>, if <code>false</code> it will
    *        NOT be writable.
    */
-  public void setWritable(FileModeClass fileModeClass, boolean writable) {
+  public void setWritable(FileAccessClass fileModeClass, boolean writable) {
 
     setFlag(fileModeClass, MASK_WRITABLE, writable);
   }
@@ -190,30 +190,30 @@ public class FileModeMask implements Cloneable {
    * This method determines if this {@link #getMaskBits() mask} is executable
    * for the given <code>fileModeClass</code>.
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @return <code>true</code> if the mask is executable for the given
    *         <code>fileModeClass</code>, <code>false</code> otherwise.
    */
-  public boolean isExecutable(FileModeClass fileModeClass) {
+  public boolean isExecutable(FileAccessClass fileModeClass) {
 
     return hasFlag(fileModeClass, MASK_EXECUTABLE);
   }
 
   /**
-   * This method sets the {@link #isExecutable(FileModeClass) executable flag}
+   * This method sets the {@link #isExecutable(FileAccessClass) executable flag}
    * of this this {@link #getMaskBits() mask} for the given
    * <code>fileModeClass</code> to the given value (<code>executable</code>).
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @param executable if <code>true</code> the mask will be executable for
    *        the given <code>fileModeClass</code>, if <code>false</code> it
    *        will NOT be executable.
    */
-  public void setExecutable(FileModeClass fileModeClass, boolean executable) {
+  public void setExecutable(FileAccessClass fileModeClass, boolean executable) {
 
     setFlag(fileModeClass, MASK_EXECUTABLE, executable);
   }
@@ -221,7 +221,7 @@ public class FileModeMask implements Cloneable {
   /**
    * This method determines the value of the <em>setuid</em> flag ("set user
    * ID"). If this flag is set and the file is executed, the according process
-   * will be started under the user of the file-{@link FileModeClass#USER owner}
+   * will be started under the user of the file-{@link FileAccessClass#USER owner}
    * instead of the user that performed the execution.
    * 
    * @return <code>true</code> if the flag is set, <code>false</code>
@@ -247,7 +247,7 @@ public class FileModeMask implements Cloneable {
   /**
    * This method determines the value of the <em>setgid</em> flag ("set group
    * ID"). If this flag is set and the file is executed, the according process
-   * will be started under the {@link FileModeClass#GROUP group owning the file}
+   * will be started under the {@link FileAccessClass#GROUP group owning the file}
    * instead of the group of the user that performed the execution.
    * 
    * @return <code>true</code> if the flag is set, <code>false</code>
@@ -298,19 +298,19 @@ public class FileModeMask implements Cloneable {
    * This method shifts the given <code>bitMask</code> according to the given
    * <code>fileModeClass</code>.
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @param bitMask is the bit-mask to shift.
    * @return the shifted <code>bitMask</code>.
    */
-  private int shiftMask(FileModeClass fileModeClass, int bitMask) {
+  private int shiftMask(FileAccessClass fileModeClass, int bitMask) {
 
-    if (fileModeClass == FileModeClass.USER) {
+    if (fileModeClass == FileAccessClass.USER) {
       return bitMask << 6;
-    } else if (fileModeClass == FileModeClass.GROUP) {
+    } else if (fileModeClass == FileAccessClass.GROUP) {
       return bitMask << 3;
-    } else if (fileModeClass == FileModeClass.OTHERS) {
+    } else if (fileModeClass == FileAccessClass.OTHERS) {
       return bitMask;
     }
     throw new IllegalArgumentException("Illegal FileModeClass: " + fileModeClass);
@@ -322,14 +322,14 @@ public class FileModeMask implements Cloneable {
    * the given value (<code>flag</code>).
    * 
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @param bitMask is the bit-mask of the flag(s) to set.
    * @param flag - if <code>true</code> the flag will be set, if
    *        <code>false</code> it will be unset.
    */
-  private void setFlag(FileModeClass fileModeClass, int bitMask, boolean flag) {
+  private void setFlag(FileAccessClass fileModeClass, int bitMask, boolean flag) {
 
     setBits(shiftMask(fileModeClass, bitMask), flag);
   }
@@ -339,14 +339,14 @@ public class FileModeMask implements Cloneable {
    * set in this {@link #getMaskBits() mask} for the given
    * <code>fileModeClass</code>.
    * 
-   * @param fileModeClass is the class of access (<code>{@link FileModeClass#USER}</code>,
-   *        <code>{@link FileModeClass#GROUP}</code>, or
-   *        <code>{@link FileModeClass#OTHERS}</code>).
+   * @param fileModeClass is the class of access (<code>{@link FileAccessClass#USER}</code>,
+   *        <code>{@link FileAccessClass#GROUP}</code>, or
+   *        <code>{@link FileAccessClass#OTHERS}</code>).
    * @param bitMask is the bit-mask of the flag(s) to get.
    * @return <code>true</code> if the flag is set, <code>false</code>
    *         otherwise.
    */
-  private boolean hasFlag(FileModeClass fileModeClass, int bitMask) {
+  private boolean hasFlag(FileAccessClass fileModeClass, int bitMask) {
 
     return hasBits(shiftMask(fileModeClass, bitMask));
   }
@@ -386,13 +386,13 @@ public class FileModeMask implements Cloneable {
    * modify.
    * <ul>
    * <li><code>u</code> indicates that the flags of the
-   * {@link FileModeClass#USER user} should be changed.</li>
+   * {@link FileAccessClass#USER user} should be changed.</li>
    * <li><code>g</code> indicates that the flags of the
-   * {@link FileModeClass#GROUP group} should be changed.</li>
+   * {@link FileAccessClass#GROUP group} should be changed.</li>
    * <li><code>o</code> indicates that the flags of the
-   * {@link FileModeClass#OTHERS others} should be changed.</li>
+   * {@link FileAccessClass#OTHERS others} should be changed.</li>
    * <li><code>a</code> indicates that the flags of all
-   * {@link FileModeClass classes} should be changed.</li>
+   * {@link FileAccessClass classes} should be changed.</li>
    * </ul>
    * 
    * @param parse is the current state of the parser.
@@ -586,20 +586,20 @@ public class FileModeMask implements Cloneable {
     if (obj == this) {
       return true;
     }
-    if (obj.getClass() != FileModeMask.class) {
+    if (obj.getClass() != FileAccessPermissions.class) {
       return false;
     }
-    FileModeMask otherMask = (FileModeMask) obj;
+    FileAccessPermissions otherMask = (FileAccessPermissions) obj;
     return (this.maskBits == otherMask.maskBits);
   }
 
   /**
    * {@inheritDoc}
    */
-  public FileModeMask clone() {
+  public FileAccessPermissions clone() {
 
     try {
-      return (FileModeMask) super.clone();
+      return (FileAccessPermissions) super.clone();
     } catch (CloneNotSupportedException e) {
       throw new IllegalStateException(e);
     }

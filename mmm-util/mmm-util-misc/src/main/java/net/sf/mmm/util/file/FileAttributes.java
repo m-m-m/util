@@ -8,7 +8,8 @@ import net.sf.mmm.util.BasicUtil;
 /**
  * This class represents the attributes of a file as defined in a Unix/Posix
  * Filesystem. They consist of a {@link #getUser() user}, a
- * {@link #getGroup() group} and a {@link #getModeMask() mode mask} (modifiers).
+ * {@link #getGroup() group} and a {@link #getPermissions() mode mask}
+ * (modifiers).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,8 +21,8 @@ public class FileAttributes implements Cloneable {
   /** @see #getGroup() */
   private String group;
 
-  /** @see #getModeMask() */
-  private FileModeMask modeMask;
+  /** @see #getPermissions() */
+  private FileAccessPermissions permissions;
 
   /**
    * The constructor.
@@ -35,12 +36,12 @@ public class FileAttributes implements Cloneable {
    * {@inheritDoc}
    */
   @Override
-  protected FileAttributes clone() {
+  public FileAttributes clone() {
 
     try {
       FileAttributes clone = (FileAttributes) super.clone();
-      if (clone.modeMask != null) {
-        clone.setModeMask(clone.modeMask.clone());
+      if (clone.permissions != null) {
+        clone.setPermissions(clone.permissions.clone());
       }
       return clone;
     } catch (CloneNotSupportedException e) {
@@ -83,17 +84,17 @@ public class FileAttributes implements Cloneable {
   /**
    * @return the userPermissions
    */
-  public FileModeMask getModeMask() {
+  public FileAccessPermissions getPermissions() {
 
-    return this.modeMask;
+    return this.permissions;
   }
 
   /**
    * @param mask the userPermissions to set
    */
-  public void setModeMask(FileModeMask mask) {
+  public void setPermissions(FileAccessPermissions mask) {
 
-    this.modeMask = mask;
+    this.permissions = mask;
   }
 
   /**
@@ -117,7 +118,7 @@ public class FileAttributes implements Cloneable {
     if (!BasicUtil.isEqual(this.group, otherAttributes.group)) {
       return false;
     }
-    if (!BasicUtil.isEqual(this.modeMask, otherAttributes.modeMask)) {
+    if (!BasicUtil.isEqual(this.permissions, otherAttributes.permissions)) {
       return false;
     }
     return true;
@@ -135,8 +136,8 @@ public class FileAttributes implements Cloneable {
     if (this.group != null) {
       hash = hash * 31 + this.group.hashCode();
     }
-    if (this.modeMask != null) {
-      hash = hash * 31 + this.modeMask.hashCode();
+    if (this.permissions != null) {
+      hash = hash * 31 + this.permissions.hashCode();
     }
     return super.hashCode();
   }

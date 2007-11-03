@@ -13,7 +13,7 @@ package net.sf.mmm.util.file;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public enum FileModeClass {
+public enum FileAccessClass {
 
   /** The class for the permissions of the user (owner). */
   USER,

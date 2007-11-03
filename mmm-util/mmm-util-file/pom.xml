@@ -6,14 +6,13 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-util-core</artifactId>
+  <artifactId>mmm-util-file</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Util::Core</name>
-  <description>core utilities</description>
+  <name>MMM Util::File</name>
+  <description>utilities for dealing with files</description>
   
   <dependencies>
     <dependency>

@@ -37,8 +37,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, Class<?> expectedType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value),
-        expectedType);
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value), expectedType);
   }
 
   /**
@@ -50,7 +49,7 @@ public class WrongValueTypeException extends ValueException {
    * @param expectedType is the expected type of the value.
    * @param nested is the throwable that caused this exception.
    */
-  public WrongValueTypeException(Object value, String valueSource, Class<?> expectedType,
+  public WrongValueTypeException(Object value, Object valueSource, Class<?> expectedType,
       Throwable nested) {
 
     super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
@@ -65,7 +64,7 @@ public class WrongValueTypeException extends ValueException {
    *        "element@id").
    * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Object value, String valueSource, Class<?> expectedType) {
+  public WrongValueTypeException(Object value, Object valueSource, Class<?> expectedType) {
 
     super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
         expectedType, valueSource);
