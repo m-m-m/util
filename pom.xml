@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
@@ -7,6 +9,8 @@
   <name>MMM</name>
   <description>The Multi-Media-Manager (MMM) is a generic plattform and a enterprise content management system (ECMS) build on top.</description>
   <url>http://m-m-m.sourceforge.net</url>
+  <inceptionYear>2001</inceptionYear>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -21,10 +25,10 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
   <modules>
     <!-- <module>mmm-configuration</module> -->
     <module>mmm-content</module>
-    <!-- <module>mmm-framework</module> -->
     <module>mmm-gui</module>
     <module>mmm-nls</module>
     <module>mmm-search</module>
@@ -35,7 +39,7 @@
     <module>mmm-uit</module>
     <module>mmm-value</module>
   </modules>
-  <inceptionYear>2001</inceptionYear>
+  
   <build>
     <plugins>
       <!-- activate java 5 language -->

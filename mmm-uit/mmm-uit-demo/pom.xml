@@ -7,13 +7,13 @@
     <artifactId>mmm-uit</artifactId>
     <version>0.9.0</version>
   </parent>
-  <name>MMM UIT::Demo</name>
-  <description>Demo application showing the same GUI with different implementations.</description>
-  <url>http://m-m-m.sourceforge.net/ui-toolkit/demo</url>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-uit-demo</artifactId>
-  <packaging>jar</packaging>
   <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM UIT::Demo</name>
+  <description>Demo application showing the same GUI with different implementations.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

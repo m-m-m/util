@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id$ -->
 <project>
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM::Streamdetect</name>
-  <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-util-streamdetect</artifactId>
-  <packaging>jar</packaging>
   <version>0.0.1</version>
+  <packaging>jar</packaging>
+  <name>MMM::Streamdetect</name>
   <description>library to detect metadata while streaming</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

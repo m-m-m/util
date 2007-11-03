@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id$ -->
 <project>
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Util::Resource</name>
-  <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-util-resource</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Util::Resource</name>
   <description>This project provides utilities for loading resources.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
+      <artifactId>mmm-util-core</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

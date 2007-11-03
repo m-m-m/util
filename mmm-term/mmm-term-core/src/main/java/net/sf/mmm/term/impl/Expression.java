@@ -8,8 +8,6 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.Function;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.base.AbstractTerm;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -98,19 +96,6 @@ public class Expression extends AbstractTerm {
       result.append(EXPRESSION_END);
     }
     return result.toString();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter serializer) throws XmlException {
-
-    serializer.writeStartElement(XML_TAG_EXPRESSION);
-    serializer.writeAttribute(XML_ATR_EXPRESSION_FKTNAME, getFunction().getName());
-    for (int i = 0; i < this.arguments.length; i++) {
-      this.arguments[i].toXml(serializer);
-    }
-    serializer.writeEndElement(XML_TAG_EXPRESSION);
   }
 
 }

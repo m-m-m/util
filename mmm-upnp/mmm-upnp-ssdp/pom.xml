@@ -7,19 +7,14 @@
     <artifactId>mmm-upnp</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <name>MMM UPnP::SSDP</name>
-  <description>This project provides support for the Simple Service Discovery Protocol.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-upnp-ssdp</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM UPnP::SSDP</name>
+  <description>This project provides support for the Simple Service Discovery Protocol.</description>
+  
   <dependencies>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-util-http</artifactId>

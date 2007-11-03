@@ -7,12 +7,13 @@
     <artifactId>mmm-gui</artifactId>
     <version>1.0.0</version>
   </parent>
-  <name>MMM GUI::Views</name>
-  <description>Views for the GUI of mmm.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-gui-view</artifactId>
-  <packaging>jar</packaging>
   <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM GUI::Views</name>
+  <description>Views for the GUI of mmm.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

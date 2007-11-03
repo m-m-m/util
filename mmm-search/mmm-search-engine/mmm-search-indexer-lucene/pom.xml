@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search Indexer::Lucene</name>
-  <description>This project provides an indexer for the search-engine lucene.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-indexer-lucene</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Search Indexer::Lucene</name>
+  <description>This project provides an indexer for the search-engine lucene.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

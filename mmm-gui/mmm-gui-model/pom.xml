@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-gui</artifactId>
     <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM GUI::Model</name>
-  <description>Models for the GUI of mmm.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-gui-model</artifactId>
-  <packaging>jar</packaging>
   <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM GUI::Model</name>
+  <description>Models for the GUI of mmm.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

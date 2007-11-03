@@ -7,17 +7,17 @@
     <artifactId>mmm-configuration</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <name>MMM Configuration::Core</name>
-  <description>API and implementation of the core configuration</description>
-  <url>http://m-m-m.sourceforge.net/configuration</url>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-configuration-core</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Configuration::Core</name>
+  <description>API and implementation of the core configuration</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
+      <artifactId>mmm-util-file</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

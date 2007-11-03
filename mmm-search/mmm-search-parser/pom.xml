@@ -6,14 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search::Parser</name>
-  <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-parser</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>MMM Search::Parser</name>
+  <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
+  
   <modules>
     <module>mmm-search-parser-api</module>
     <module>mmm-search-parser-xml</module>

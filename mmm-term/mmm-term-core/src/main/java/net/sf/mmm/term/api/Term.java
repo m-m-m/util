@@ -4,7 +4,6 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.util.xml.api.XmlSerializable;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.ValueException;
 
@@ -19,7 +18,7 @@ import net.sf.mmm.value.api.ValueException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface Term extends XmlSerializable {
+public interface Term {
 
   /**
    * This string indicates the start of an expression term as string. If

@@ -7,16 +7,23 @@
     <artifactId>mmm-search-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <name>MMM Search Engine::Lucene</name>
-  <description>This project provides an implementation of the search-engine using lucene as back-end.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-engine-lucene</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Search Engine::Lucene</name>
+  <description>This project provides an implementation of the search-engine using lucene as back-end.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-search-engine-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-xml</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

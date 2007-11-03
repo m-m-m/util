@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM::Framework</name>
-  <description>Leightweight, flexible non-invasive IOC Framework.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-framework</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>MMM::Framework</name>
+  <description>Leightweight, flexible non-invasive IOC Framework.</description>
+  
   <dependencies>
   </dependencies>
+  
   <modules>
     <module>mmm-framework-core</module>
     <module>mmm-framework-main</module>

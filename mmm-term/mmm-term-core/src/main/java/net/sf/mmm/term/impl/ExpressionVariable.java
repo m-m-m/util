@@ -8,8 +8,6 @@ import net.sf.mmm.term.NlsBundleTermCore;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.base.AbstractVariable;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
 import net.sf.mmm.value.api.ValueException;
 
 /**
@@ -55,16 +53,6 @@ public class ExpressionVariable extends AbstractVariable {
       throw new CalculationException(NlsBundleTermCore.ERR_EXPR_VAR_NULL, this);
     }
     return expressionResult.toString();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter serializer) throws XmlException {
-
-    serializer.writeStartElement(XML_TAG_VARIABLE);
-    this.term.toXml(serializer);
-    serializer.writeEndElement(XML_TAG_VARIABLE);
   }
 
   /**

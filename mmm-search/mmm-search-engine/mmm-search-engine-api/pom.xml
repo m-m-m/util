@@ -7,28 +7,29 @@
     <artifactId>mmm-search-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <name>MMM Search Engine::API</name>
-  <description>This project provides the API and base implementation of the search-engine.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-engine-api</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Search Engine::API</name>
+  <description>This project provides the API and base implementation of the search-engine.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-util-misc</artifactId>
+      <artifactId>mmm-util-file</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-util-resource</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-xml</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>

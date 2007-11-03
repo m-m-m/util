@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search-engine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search Engine::Webapp</name>
-  <description>This project a demo webapplication using lucene as search-engine.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-engine-webapp</artifactId>
-  <packaging>war</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>MMM Search Engine::Webapp</name>
+  <description>This project a demo webapplication using lucene as search-engine.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
@@ -33,6 +35,7 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  
   <build>
     <plugins>
       <plugin>

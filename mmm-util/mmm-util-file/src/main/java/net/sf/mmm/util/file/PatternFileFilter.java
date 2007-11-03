@@ -1,13 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.filter;
+package net.sf.mmm.util.file;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.file.FileType;
 import net.sf.mmm.util.pattern.GlobPatternCompiler;
 
 /**

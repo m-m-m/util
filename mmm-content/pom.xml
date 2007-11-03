@@ -6,24 +6,21 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM::Content</name>
-  <description>The content repository of mmm's enterprise content management system (ECMS).</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-content</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>MMM::Content</name>
+  <description>The content repository of mmm's enterprise content management system (ECMS).</description>
+  
+  <dependencies>
+  </dependencies>
+  
   <modules>
     <module>mmm-content-core</module>
     <module>mmm-content-entities</module>
     <module>mmm-content-repository</module>
   </modules>
-  <dependencies>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
 </project>

@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search-parser</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search Parser::Generic</name>
-  <description>This is the generic search parser used as fallback if no specific parser is available.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-parser-generic</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Search Parser::Generic</name>
+  <description>This is the generic search parser used as fallback if no specific parser is available.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

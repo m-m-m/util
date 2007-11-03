@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search-parser</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search Parser::Service</name>
-  <description>This project provides the actual service for content-parsers.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-parser-service</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Search Parser::Service</name>
+  <description>This project provides the actual service for content-parsers.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

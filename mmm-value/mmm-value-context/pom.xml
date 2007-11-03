@@ -6,16 +6,17 @@
     <artifactId>mmm-value</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <name>MMM Value::Context</name>
-  <description>Provides a context to store objects as generic values.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-value-context</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Value::Context</name>
+  <description>Provides a context to store objects as generic values.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
+      <artifactId>mmm-util-core</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

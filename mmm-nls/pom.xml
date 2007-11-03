@@ -6,7 +6,7 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
-    <relativePath>..</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <name>MMM::NLS</name>
   <description>True native language support</description>
@@ -17,7 +17,8 @@
   <dependencies>
   </dependencies>
   <modules>
-    <module>mmm-nls-core</module>
+    <!-- now bundled in mmm-util-core -->
+    <!-- <module>mmm-nls-core</module> -->
     <module>mmm-nls-main</module>
   </modules>
 </project>

@@ -13,8 +13,8 @@ import java.util.Map;
 
 import net.sf.mmm.term.NlsBundleTermCore;
 import net.sf.mmm.term.api.CalculationException;
-import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.api.Function;
+import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.api.IllegalArgumentCountException;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.api.OperatorPriority;
@@ -280,13 +280,13 @@ public class GenericFunction extends BasicFunction {
    *        the field declaration (!) must be assignable to this type.
    * @return the value of the field with the given type.
    * @throws FunctionException if the requested field does NOT exist, is NOT
-   *         accessable or has the wrong type.
+   *         accessible or has the wrong type.
    */
   protected <T> T getStaticField(Class<?> partialFunction, String fieldName, Class<T> fieldType)
       throws FunctionException {
 
     try {
-      return ReflectionUtil.getStaticField(partialFunction, fieldName, fieldType, true);
+      return ReflectionUtil.getStaticField(partialFunction, fieldName, fieldType, true, true, true);
     } catch (Throwable e) {
       throw new FunctionException(e, NlsBundleTermCore.ERR_FCT_FIELD, partialFunction, this,
           fieldName, fieldType);

@@ -6,17 +6,17 @@
     <artifactId>mmm-term</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <name>MMM Term::Core</name>
-  <description>Core of component for parsing and dynamic evaluation of expression terms.</description>
-  <url>http://m-m-m.sourceforge.net/term/core</url>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-term-core</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Term::Core</name>
+  <description>Core of component for parsing and dynamic evaluation of expression terms.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-nls-core</artifactId>
+      <artifactId>mmm-util-core</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

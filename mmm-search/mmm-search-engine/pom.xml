@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search::Engine</name>
-  <description>This project provides the engine used for full-text search indexing and retrieval.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-engine</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>MMM Search::Engine</name>
+  <description>This project provides the engine used for full-text search indexing and retrieval.</description>
+  
   <modules>
     <module>mmm-search-engine-api</module>
     <module>mmm-search-engine-lucene</module>

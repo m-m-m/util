@@ -6,13 +6,15 @@
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search-parser</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Search Parser::Text</name>
-  <description>This is the search parser for files of the mimetype "text/plain".</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-parser-text</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>MMM Search Parser::Text</name>
+  <description>This is the search parser for files of the mimetype "text/plain".</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

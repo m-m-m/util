@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.impl;
 
+import junit.framework.TestCase;
+
 import net.sf.mmm.term.api.OperatorPriority;
 import net.sf.mmm.term.impl.function.FctAdd;
 import net.sf.mmm.term.impl.function.FctAddNumeric;
 import net.sf.mmm.term.impl.function.FctAddString;
 import net.sf.mmm.value.api.ValueException;
-
-import junit.framework.TestCase;
 
 /**
  * This is the test case for {@link GenericFunction}.
@@ -28,9 +28,7 @@ public class GenericFunctionTest extends TestCase {
       throws ValueException {
 
     assertEquals(result, f.calculate(arg1, arg2));
-    // ATTENTION: for legal API usage no null arguments should be passed
-    // here - this is just a unit-test.
-    assertEquals(result, f.calculate(null, new Constant(arg1, null), new Constant(arg2, null)));
+    assertEquals(result, f.calculate(null, new Constant(arg1), new Constant(arg2)));
   }
 
   public void testAdd() throws Exception {

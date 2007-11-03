@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-framework</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Framework::Core</name>
-  <description>Core of the MMM IOC Framework.</description>
-  <url>http://m-m-m.sourceforge.net/framework</url>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-framework-core</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <name>MMM Framework::Core</name>
+  <description>Core of the MMM IOC Framework.</description>
+  
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>

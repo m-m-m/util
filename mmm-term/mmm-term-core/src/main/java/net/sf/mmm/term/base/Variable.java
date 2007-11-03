@@ -4,8 +4,6 @@
 package net.sf.mmm.term.base;
 
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.util.xml.XmlException;
-import net.sf.mmm.util.xml.api.XmlWriter;
 
 /**
  * This class represents a variable {@link net.sf.mmm.term.api.Term term}. The
@@ -53,16 +51,6 @@ public class Variable extends AbstractVariable {
   public String toString() {
 
     return VARIABLE_START + this.variableName + VARIABLE_END;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void toXml(XmlWriter xmlWriter) throws XmlException {
-
-    xmlWriter.writeStartElement(XML_TAG_VARIABLE);
-    xmlWriter.writeAttribute(XML_ATR_VARIABLE_NAME, this.variableName);
-    xmlWriter.writeEndElement(XML_TAG_VARIABLE);
   }
 
 }
