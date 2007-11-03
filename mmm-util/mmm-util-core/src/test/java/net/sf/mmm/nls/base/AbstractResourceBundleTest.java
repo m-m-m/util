@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.base;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Locale;
@@ -13,8 +16,6 @@ import org.junit.Test;
 import net.sf.mmm.nls.MyResourceBundle;
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.api.NlsTranslator;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link AbstractResourceBundle}.

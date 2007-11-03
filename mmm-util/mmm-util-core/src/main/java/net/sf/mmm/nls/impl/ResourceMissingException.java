@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.impl;
 
-import net.sf.mmm.nls.NlsBundleNlsCore;
 import net.sf.mmm.nls.base.NlsRuntimeException;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * This is the exception thrown if a resource is required but is NOT available.
@@ -23,7 +23,7 @@ public class ResourceMissingException extends NlsRuntimeException {
    */
   public ResourceMissingException(String resourceName) {
 
-    super(NlsBundleNlsCore.ERR_RESOURCE_MISSING, resourceName);
+    super(NlsBundleUtilCore.ERR_RESOURCE_MISSING, resourceName);
   }
 
 }

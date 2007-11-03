@@ -3,14 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.base;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Locale;
+
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
 import net.sf.mmm.nls.MyResourceBundle;
 import net.sf.mmm.nls.api.NlsTranslator;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link net.sf.mmm.nls.base.NlsException}.

@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.nls.base;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import net.sf.mmm.nls.api.NlsMessage;
 import net.sf.mmm.nls.api.NlsTranslationSource;
 import net.sf.mmm.nls.api.NlsTranslator;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link net.sf.mmm.nls.base.NlsMessageImpl}.
