@@ -12,3 +12,4 @@
  and {@link net.sf.mmm.util.pattern.PathPatternCompiler}.
  */
 package net.sf.mmm.util.filter;
+

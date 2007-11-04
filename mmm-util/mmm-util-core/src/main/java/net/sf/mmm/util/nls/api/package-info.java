@@ -1,6 +1,6 @@
 /* $Id$
-Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
-http://www.apache.org/licenses/LICENSE-2.0 */
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  Provides the API for the native language support (NLS).
  <h2>Native Language Support</h2>
@@ -18,3 +18,4 @@ http://www.apache.org/licenses/LICENSE-2.0 */
  </p>
  */
 package net.sf.mmm.util.nls.api;
+

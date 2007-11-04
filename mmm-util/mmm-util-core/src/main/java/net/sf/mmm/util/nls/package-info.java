@@ -88,3 +88,4 @@
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 package net.sf.mmm.util.nls;
+
