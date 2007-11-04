@@ -108,7 +108,7 @@ public final class ReflectionUtil {
   public static Class<?> getComponentType(Type type) {
 
     if (type instanceof Class) {
-      Class clazz = (Class) type;
+      Class<?> clazz = (Class<?>) type;
       if (clazz.isArray()) {
         return clazz.getComponentType();
       }
@@ -153,7 +153,7 @@ public final class ReflectionUtil {
   public static Class<?> toClass(Type type) {
 
     if (type instanceof Class) {
-      return (Class) type;
+      return (Class<?>) type;
     } else if (type instanceof ParameterizedType) {
       ParameterizedType pt = (ParameterizedType) type;
       return toClass(pt.getRawType());
@@ -169,11 +169,11 @@ public final class ReflectionUtil {
       }
     } else if (type instanceof GenericArrayType) {
       GenericArrayType gat = (GenericArrayType) type;
-      Class componentType = toClass(gat.getGenericComponentType());
+      Class<?> componentType = toClass(gat.getGenericComponentType());
       // this is sort of stupid but there seems no other way...
       return Array.newInstance(componentType, 0).getClass();
     } else if (type instanceof TypeVariable) {
-      TypeVariable tv = (TypeVariable) type;
+      TypeVariable<?> tv = (TypeVariable<?>) type;
       Type[] bounds = tv.getBounds();
       if (bounds.length == 1) {
         return toClass(bounds[0]);
@@ -287,7 +287,7 @@ public final class ReflectionUtil {
       sb.append(";");
       result = resolver.resolveClass(sb.toString());
     } else {
-      Class segmentClass = resolver.resolveClass(segment);
+      Class<?> segmentClass = resolver.resolveClass(segment);
       result = segmentClass;
       if (c == '<') {
         List<Type> typeArgList = new ArrayList<Type>();
@@ -336,7 +336,7 @@ public final class ReflectionUtil {
   public static String toString(Type type) {
 
     if (type instanceof Class) {
-      return ((Class) type).getName();
+      return ((Class<?>) type).getName();
     } else {
       return type.toString();
     }
@@ -472,6 +472,11 @@ public final class ReflectionUtil {
    *        {@link IllegalArgumentException} is thrown if the specified static
    *        field exists but is NOT {@link Modifier#isFinal(int) final},
    *        <code>false</code> otherwise.
+   * @param inherit if <code>true</code> the field may be inherited from a
+   *        {@link Class#getSuperclass() super-class} or
+   *        {@link Class#getInterfaces() super-interface} of <code>type</code>,
+   *        else if <code>false</code> the field is only accepted if it is
+   *        declared in <code>type</code>.
    * @return the value of the field with the given type or <code>null</code>
    *         if the field does NOT exist or is NOT accessible.
    * @throws IllegalArgumentException if the field is NOT static (or final) or
@@ -569,18 +574,13 @@ public final class ReflectionUtil {
       String nameWithoutExtension = fileName.substring(0, fileName.length() - 6);
       // handle inner classes...
       /*
-      int lastDollar = nameWithoutExtension.lastIndexOf('$');
-      if (lastDollar > 0) {
-        char innerClassStart = nameWithoutExtension.charAt(lastDollar + 1);
-        if ((innerClassStart >= '0') && (innerClassStart <= '9')) {
-          // ignore anonymous class
-        } else {
-          return nameWithoutExtension.replace('$', '.');
-        }
-      } else {
-        return nameWithoutExtension;
-      }
-      */
+       * int lastDollar = nameWithoutExtension.lastIndexOf('$'); if (lastDollar >
+       * 0) { char innerClassStart = nameWithoutExtension.charAt(lastDollar +
+       * 1); if ((innerClassStart >= '0') && (innerClassStart <= '9')) { //
+       * ignore anonymous class } else { return
+       * nameWithoutExtension.replace('$', '.'); } } else { return
+       * nameWithoutExtension; }
+       */
       return nameWithoutExtension;
     }
     return null;
@@ -739,7 +739,7 @@ public final class ReflectionUtil {
    * @throws ClassNotFoundException if one of the classes could NOT be loaded.
    */
   @SuppressWarnings("unchecked")
-  public static Set<Class> loadClasses(Collection<String> qualifiedClassNames)
+  public static Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames)
       throws ClassNotFoundException {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
@@ -761,8 +761,8 @@ public final class ReflectionUtil {
    *         <code>filter</code>.
    * @throws ClassNotFoundException if one of the classes could NOT be loaded.
    */
-  public static Set<Class> loadClasses(Collection<String> qualifiedClassNames, Filter<Class> filter)
-      throws ClassNotFoundException {
+  public static Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames,
+      Filter<? super Class<?>> filter) throws ClassNotFoundException {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
   }
@@ -784,12 +784,12 @@ public final class ReflectionUtil {
    *         <code>filter</code>.
    * @throws ClassNotFoundException if one of the classes could NOT be loaded.
    */
-  public static Set<Class> loadClasses(Collection<String> classNames, ClassResolver classResolver,
-      Filter<Class> filter) throws ClassNotFoundException {
+  public static Set<Class<?>> loadClasses(Collection<String> classNames,
+      ClassResolver classResolver, Filter<? super Class<?>> filter) throws ClassNotFoundException {
 
-    Set<Class> classesSet = new HashSet<Class>();
+    Set<Class<?>> classesSet = new HashSet<Class<?>>();
     for (String className : classNames) {
-      Class clazz = classResolver.resolveClass(className);
+      Class<?> clazz = classResolver.resolveClass(className);
       if (filter.accept(clazz)) {
         classesSet.add(clazz);
       }

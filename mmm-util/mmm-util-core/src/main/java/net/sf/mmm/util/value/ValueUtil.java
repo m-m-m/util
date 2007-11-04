@@ -154,6 +154,7 @@ public final class ValueUtil {
    *         <code>type</code> (e.g. if <code>value</code> is "12x" and
    *         <code>type</code> is <code>Integer.class</code>).
    */
+  @SuppressWarnings("unchecked")
   public static <V> V convertValue(String valueSource, String value, Class<V> type)
       throws ValueNotSetException, WrongValueTypeException {
 
@@ -210,5 +211,4 @@ public final class ValueUtil {
     // return type.cast(result);
     return (V) result;
   }
-
 }

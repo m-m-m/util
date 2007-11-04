@@ -27,7 +27,7 @@ public interface Filter<V> {
    * A filter instance that {@link #accept(Object) accepts} every object. To be
    * reusable it is NOT generic but may be casted.
    */
-  Filter ACCEPT_ALL = new Filter() {
+  Filter<Object> ACCEPT_ALL = new Filter<Object>() {
 
     public boolean accept(Object value) {
 
