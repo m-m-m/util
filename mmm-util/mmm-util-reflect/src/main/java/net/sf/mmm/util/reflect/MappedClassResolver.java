@@ -17,7 +17,7 @@ import java.util.Map;
 public class MappedClassResolver implements ClassResolver {
 
   /** @see #resolveClass(String) */
-  private final Map<String, Class> name2classMap;
+  private final Map<String, Class<?>> name2classMap;
 
   /**
    * The constructor.
@@ -25,7 +25,7 @@ public class MappedClassResolver implements ClassResolver {
   public MappedClassResolver() {
 
     super();
-    this.name2classMap = new HashMap<String, Class>();
+    this.name2classMap = new HashMap<String, Class<?>>();
   }
 
   /**
@@ -34,7 +34,7 @@ public class MappedClassResolver implements ClassResolver {
    * 
    * @param type is the type to add.
    */
-  public void addClassMapping(Class type) {
+  public void addClassMapping(Class<?> type) {
 
     addClassMapping(type.getSimpleName(), type);
   }
@@ -47,7 +47,7 @@ public class MappedClassResolver implements ClassResolver {
    *        {@link #resolveClass(String) mapped}.
    * @param type is the mapped class.
    */
-  public void addClassMapping(String name, Class type) {
+  public void addClassMapping(String name, Class<?> type) {
 
     this.name2classMap.put(name, type);
   }
@@ -55,9 +55,9 @@ public class MappedClassResolver implements ClassResolver {
   /**
    * {@inheritDoc}
    */
-  public Class resolveClass(String name) throws ClassNotFoundException {
+  public Class<?> resolveClass(String name) throws ClassNotFoundException {
 
-    Class result = this.name2classMap.get(name);
+    Class<?> result = this.name2classMap.get(name);
     if (result == null) {
       result = Class.forName(name);
     }

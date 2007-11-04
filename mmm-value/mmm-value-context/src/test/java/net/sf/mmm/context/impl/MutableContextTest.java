@@ -5,7 +5,7 @@ package net.sf.mmm.context.impl;
 
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
-import net.sf.mmm.value.api.ValueNotSetException;
+import net.sf.mmm.util.value.ValueNotSetException;
 
 import junit.framework.TestCase;
 

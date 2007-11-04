@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.value.api;
+package net.sf.mmm.util.value;
 
 import net.sf.mmm.util.nls.NlsRuntimeException;
 
@@ -17,7 +17,12 @@ public class ValueException extends NlsRuntimeException {
   private static final long serialVersionUID = -8445209659250789499L;
 
   /**
-   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * The constructor.
+   * 
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public ValueException(String internaitionalizedMessage, Object... arguments) {
 
@@ -25,7 +30,13 @@ public class ValueException extends NlsRuntimeException {
   }
 
   /**
-   * @see NlsRuntimeException#NlsRuntimeException(Throwable, String, Object[])
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internaitionalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
+   *        <code>internaitionalizedMessage</code> after nationalization.
    */
   public ValueException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 

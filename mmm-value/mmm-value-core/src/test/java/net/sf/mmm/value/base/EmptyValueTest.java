@@ -5,10 +5,10 @@ package net.sf.mmm.value.base;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.value.ValueNotSetException;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueNotEditableException;
-import net.sf.mmm.value.api.ValueNotSetException;
 
 import junit.framework.TestCase;
 

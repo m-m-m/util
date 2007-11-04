@@ -4,8 +4,8 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.context.api.Context;
+import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.value.api.GenericValue;
-import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the interface for a calculation term. A term is an object that can be
@@ -109,7 +109,7 @@ public interface Term {
    * @throws ValueException if an argument (e.g. a
    *         {@link Context#getValue(String) context value}) is
    *         {@link GenericValue#isEmpty() empty} or has the
-   *         {@link net.sf.mmm.value.api.WrongValueTypeException wrong type}.
+   *         {@link net.sf.mmm.util.value.WrongValueTypeException wrong type}.
    */
   Object evaluate(Context context) throws CalculationException, ValueException;
 

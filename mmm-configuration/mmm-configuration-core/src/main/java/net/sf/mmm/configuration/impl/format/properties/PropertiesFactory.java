@@ -12,7 +12,7 @@ import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationFactory;
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This is the implementation of the

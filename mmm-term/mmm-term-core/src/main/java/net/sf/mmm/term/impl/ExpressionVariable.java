@@ -8,7 +8,7 @@ import net.sf.mmm.term.NlsBundleTermCore;
 import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.base.AbstractVariable;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This class represents a variable as term. The name of the variable is given

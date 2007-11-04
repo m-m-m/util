@@ -13,7 +13,7 @@ import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.configuration.base.ConfigurationReadException;
 import net.sf.mmm.configuration.impl.access.url.UrlAccess;
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This is the implementation of the

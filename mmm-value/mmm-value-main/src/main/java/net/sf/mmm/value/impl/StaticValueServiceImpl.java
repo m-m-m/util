@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.impl;
 
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.value.impl.type.DateValueManager;
 
 /**

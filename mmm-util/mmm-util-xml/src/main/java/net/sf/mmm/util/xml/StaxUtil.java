@@ -14,8 +14,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.w3c.dom.Node;
 
+import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.util.value.ValueUtil;
-import net.sf.mmm.value.api.ValueException;
 
 /**
  * This utility class contains methods that help to work with the StAX API (JSR

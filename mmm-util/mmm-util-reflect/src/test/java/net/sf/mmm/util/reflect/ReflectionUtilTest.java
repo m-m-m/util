@@ -3,6 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -13,8 +17,6 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import net.sf.mmm.util.reflect.type.TypeVariableImpl;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test for {@link ReflectionUtil}.
@@ -74,19 +76,18 @@ public class ReflectionUtilTest {
 
     // test sub-package functionality
     assertFalse(classNameSet.contains(TypeVariableImpl.class.getName()));
-    classNameSet = ReflectionUtil.findClassNames(ReflectionUtil.class.getPackage()
-        .getName(), true);
-    assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));    
-    
+    classNameSet = ReflectionUtil.findClassNames(ReflectionUtil.class.getPackage().getName(), true);
+    assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));
+
     // test JAR files
     classNameSet = ReflectionUtil.findClassNames(Test.class.getPackage().getName(), false);
     assertTrue(classNameSet.contains(Test.class.getName()));
     assertTrue(classNameSet.contains(Assert.class.getName()));
-    
+
     // test sub-package functionality
     assertFalse(classNameSet.contains(Result.class.getName()));
     classNameSet = ReflectionUtil.findClassNames(Test.class.getPackage().getName(), true);
-    assertTrue(classNameSet.contains(Result.class.getName()));    
+    assertTrue(classNameSet.contains(Result.class.getName()));
   }
 
   public static class TestClass {

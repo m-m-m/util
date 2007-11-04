@@ -183,13 +183,13 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
       String tagName = xmlReader.getLocalName();
       if (XML_TAG_ENTITY.equals(tagName)) {
         String className = xmlReader.getAttributeValue(null, XML_ATR_ENTITY_CLASS);
-        Class entityClass = this.classResolver.resolveClass(className);
+        Class<?> entityClass = this.classResolver.resolveClass(className);
         loadClassRecursive(entityClass, context);
       } else if (XML_TAG_ENTITIES.equals(tagName)) {
         String packageName = xmlReader.getAttributeValue(null, XML_ATR_ENTITIES_PACKAGE);
         Set<String> classNames = ReflectionUtil.findClassNames(packageName, true);
-        Set<Class> entityClasses = ReflectionUtil.loadClasses(classNames, this.entityFilter);
-        for (Class entityClass : entityClasses) {
+        Set<Class<?>> entityClasses = ReflectionUtil.loadClasses(classNames, this.entityFilter);
+        for (Class<?> entityClass : entityClasses) {
           loadClassRecursive(entityClass, context);
         }
       }

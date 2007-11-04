@@ -8,8 +8,8 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.util.reflect.Arguments;
-import net.sf.mmm.value.api.ValueException;
-import net.sf.mmm.value.api.WrongValueTypeException;
+import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.WrongValueTypeException;
 
 /**
  * This is an abstract implementation of the

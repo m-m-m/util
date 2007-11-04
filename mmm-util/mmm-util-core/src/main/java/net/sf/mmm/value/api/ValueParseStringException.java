@@ -22,7 +22,7 @@ public class ValueParseStringException extends ValueParseException {
    * @param valueType is the type the given string should be parsed as.
    * @param valueName is the alias name of <code>valueType</code>.
    */
-  public ValueParseStringException(String stringToParse, Class valueType, String valueName) {
+  public ValueParseStringException(String stringToParse, Class<?> valueType, String valueName) {
 
     super(NlsBundleUtilCore.ERR_PARSE_STRING, stringToParse, valueType, valueName);
   }
@@ -35,7 +35,7 @@ public class ValueParseStringException extends ValueParseException {
    * @param valueName is the alias name of <code>valueType</code>.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
-  public ValueParseStringException(String stringToParse, Class valueType, String valueName,
+  public ValueParseStringException(String stringToParse, Class<?> valueType, String valueName,
       Throwable nested) {
 
     super(nested, NlsBundleUtilCore.ERR_PARSE_STRING, stringToParse, valueType, valueName);

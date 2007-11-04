@@ -4,7 +4,7 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This is the interface for a function. A function can perform a
@@ -143,7 +143,7 @@ public interface Function {
    *         {@link Context#getValue(String) "environment value"}) is
    *         {@link net.sf.mmm.value.api.GenericValue#isEmpty() empty} or has
    *         the
-   *         {@link net.sf.mmm.value.api.WrongValueTypeException "wrong type"}.
+   *         {@link net.sf.mmm.util.value.WrongValueTypeException "wrong type"}.
    */
   Object calculate(Context environment, Term... arguments) throws ValueException;
 

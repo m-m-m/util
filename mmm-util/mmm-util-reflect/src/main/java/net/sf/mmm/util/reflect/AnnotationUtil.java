@@ -120,12 +120,13 @@ public final class AnnotationUtil {
           + ") can NOT annotate classes!");
     }
     A result = annotatedClass.getAnnotation(annotation);
+    Class<?> currentClass = annotatedClass;
     while (result == null) {
-      annotatedClass = annotatedClass.getSuperclass();
-      if (annotatedClass == null) {
+      currentClass = currentClass.getSuperclass();
+      if (currentClass == null) {
         return null;
       } else {
-        result = annotatedClass.getAnnotation(annotation);
+        result = currentClass.getAnnotation(annotation);
       }
     }
     return result;
@@ -199,10 +200,11 @@ public final class AnnotationUtil {
       Class<A> annotation) {
 
     A result = getClassAnnotation(annotatedType, annotation);
+    Class<?> currentClass = annotatedType;
     while (result == null) {
-      result = getInterfacesAnnotation(annotatedType, annotation);
-      annotatedType = annotatedType.getSuperclass();
-      if (annotatedType == null) {
+      result = getInterfacesAnnotation(currentClass, annotation);
+      currentClass = currentClass.getSuperclass();
+      if (currentClass == null) {
         break;
       }
     }
@@ -244,13 +246,13 @@ public final class AnnotationUtil {
       Class<?>[] parameterTypes = annotatedMethod.getParameterTypes();
       Class<?> inheritingClass = annotatedMethod.getDeclaringClass();
       while (result == null) {
-        annotatedMethod = ReflectionUtil.getParentMethod(inheritingClass, methodName,
+        Method currentMethod = ReflectionUtil.getParentMethod(inheritingClass, methodName,
             parameterTypes);
-        if (annotatedMethod == null) {
+        if (currentMethod == null) {
           return null;
         } else {
-          result = annotatedMethod.getAnnotation(annotation);
-          inheritingClass = annotatedMethod.getDeclaringClass();
+          result = currentMethod.getAnnotation(annotation);
+          inheritingClass = currentMethod.getDeclaringClass();
         }
       }
     }

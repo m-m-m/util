@@ -8,7 +8,7 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.Function;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.base.AbstractTerm;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This class represents an expression as a simple combination of a function and

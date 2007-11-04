@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.base;
 
+import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.value.NlsBundleValueMain;
-import net.sf.mmm.value.api.ValueException;
 
 /**
  * This is the exception thrown if a value should be

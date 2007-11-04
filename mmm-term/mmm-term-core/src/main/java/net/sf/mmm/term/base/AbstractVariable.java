@@ -4,7 +4,7 @@
 package net.sf.mmm.term.base;
 
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This is the abstract base implementation of a the

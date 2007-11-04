@@ -12,13 +12,15 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  */
 public class NlsBundleUtilCore extends AbstractResourceBundle {
 
-  /** @see net.sf.mmm.value.api.WrongValueTypeException */
-  public static final String ERR_VALUE_WRONG_TYPE = "The value \"{0}\" with the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
+  /** @see net.sf.mmm.util.value.WrongValueTypeException */
+  public static final String ERR_VALUE_WRONG_TYPE = "The value \"{0}\" with the "
+      + "type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
 
-  /** @see net.sf.mmm.value.api.WrongValueTypeException */
-  public static final String ERR_VALUE_WRONG_TYPE_SOURCE = "The value \"{0}\" from \"{3}\" with the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
+  /** @see net.sf.mmm.util.value.WrongValueTypeException */
+  public static final String ERR_VALUE_WRONG_TYPE_SOURCE = "The value \"{0}\" "
+      + "from \"{3}\" with the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
 
-  /** @see net.sf.mmm.value.api.ValueNotSetException */
+  /** @see net.sf.mmm.util.value.ValueNotSetException */
   public static final String ERR_VALUE_NOT_SET = "The requested value \"{0}\" is not set!";
 
   /** @see net.sf.mmm.value.api.ValueParseStringException */

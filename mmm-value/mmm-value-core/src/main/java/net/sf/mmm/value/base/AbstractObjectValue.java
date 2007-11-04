@@ -7,7 +7,7 @@ import java.util.Date;
 
 import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.value.api.WrongValueTypeException;
+import net.sf.mmm.util.value.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the

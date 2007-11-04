@@ -23,7 +23,7 @@ import net.sf.mmm.util.BasicUtil;
 import net.sf.mmm.util.reflect.Arguments;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.Signature;
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 
 /**
  * This is an implementation of the {@link net.sf.mmm.term.api.Function}

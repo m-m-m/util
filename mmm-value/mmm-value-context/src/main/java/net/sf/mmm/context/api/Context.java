@@ -5,8 +5,8 @@ package net.sf.mmm.context.api;
 
 import java.util.Set;
 
+import net.sf.mmm.util.value.ValueNotSetException;
 import net.sf.mmm.value.api.GenericValue;
-import net.sf.mmm.value.api.ValueNotSetException;
 
 /**
  * This is the interface for a set of variables.

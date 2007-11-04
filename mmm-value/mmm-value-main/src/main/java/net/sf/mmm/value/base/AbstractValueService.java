@@ -14,7 +14,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.value.api.ValueException;
+import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueService;

@@ -26,7 +26,7 @@ public interface ClassResolver {
    * @return the class reflecting the type with the given <code>name</code>.
    * @throws ClassNotFoundException if the requested type was NOT found.
    */
-  Class resolveClass(String name) throws ClassNotFoundException;
+  Class<?> resolveClass(String name) throws ClassNotFoundException;
 
   /**
    * This is a singleton implementation of the {@link ClassResolver} interface
@@ -34,7 +34,7 @@ public interface ClassResolver {
    */
   ClassResolver CLASS_FOR_NAME_RESOLVER = new ClassResolver() {
 
-    public Class resolveClass(String name) throws ClassNotFoundException {
+    public Class<?> resolveClass(String name) throws ClassNotFoundException {
 
       return Class.forName(name);
     }

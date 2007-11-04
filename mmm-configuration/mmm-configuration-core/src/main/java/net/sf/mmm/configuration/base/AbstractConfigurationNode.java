@@ -6,8 +6,8 @@ package net.sf.mmm.configuration.base;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.term.api.Term;
 import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.value.api.MutableGenericValue;
-import net.sf.mmm.value.api.ValueException;
 import net.sf.mmm.value.base.AbstractStringValue;
 
 /**

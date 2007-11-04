@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.base;
 
+import net.sf.mmm.util.value.ValueNotSetException;
+import net.sf.mmm.util.value.WrongValueTypeException;
 import net.sf.mmm.value.api.ValueNotEditableException;
-import net.sf.mmm.value.api.ValueNotSetException;
-import net.sf.mmm.value.api.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the

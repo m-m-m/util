@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
+import net.sf.mmm.util.value.ValueException;
+
 /**
  * This exception is thrown if the parsing of a value fails.
  * 
