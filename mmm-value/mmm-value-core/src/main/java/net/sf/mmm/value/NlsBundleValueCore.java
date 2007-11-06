@@ -31,7 +31,7 @@ public class NlsBundleValueCore extends AbstractResourceBundle {
   /**
    * exception message if configuration value has wrong type.
    * 
-   * @see net.sf.mmm.value.api.ValueOutOfRangeException
+   * @see net.sf.mmm.util.value.ValueOutOfRangeException
    */
   public static final String ERR_VALUE_OUT_OF_RANGE = "The configuration \"{0}\" has the value \"{1}\" which is not in the expected range of \"[{2}-{3}]\"!";
 

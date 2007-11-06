@@ -25,8 +25,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, Class<?> expectedType, Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value),
-        expectedType);
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value, getType(value), expectedType);
   }
 
   /**
@@ -37,22 +36,24 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, Class<?> expectedType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value.toString(), getType(value), expectedType);
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value, getType(value), expectedType);
   }
 
   /**
    * The constructor.
    * 
    * @param value is the wrong value.
-   * @param valueSource is a string describing the origin of the value (e.g.
-   *        "element@id").
    * @param expectedType is the expected type of the value.
+   * @param valueSource describes the source of the value. This may be the
+   *        filename where the value was read from, an XPath where the value was
+   *        located in an XML document, etc. It is used in exceptions thrown if
+   *        something goes wrong. This will help to find the problem easier.
    * @param nested is the throwable that caused this exception.
    */
-  public WrongValueTypeException(Object value, Object valueSource, Class<?> expectedType,
+  public WrongValueTypeException(Object value, Class<?> expectedType, Object valueSource,
       Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value),
         expectedType, valueSource);
   }
 
@@ -60,14 +61,16 @@ public class WrongValueTypeException extends ValueException {
    * The constructor.
    * 
    * @param value is the wrong value.
-   * @param valueSource is a string describing the origin of the value (e.g.
-   *        "element@id").
+   * @param valueSource describes the source of the value. This may be the
+   *        filename where the value was read from, an XPath where the value was
+   *        located in an XML document, etc. It is used in exceptions thrown if
+   *        something goes wrong. This will help to find the problem easier.
    * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Object value, Object valueSource, Class<?> expectedType) {
+  public WrongValueTypeException(Object value, Class<?> expectedType, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value.toString(), getType(value),
-        expectedType, valueSource);
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value), expectedType,
+        valueSource);
   }
 
   /**

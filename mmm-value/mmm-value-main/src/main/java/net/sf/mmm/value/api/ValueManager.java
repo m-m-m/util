@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 
 import org.w3c.dom.Element;
 
+import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.util.xml.stream.XmlSerializer;
 
 /**

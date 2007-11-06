@@ -5,7 +5,10 @@ package net.sf.mmm.util.filter;
 
 /**
  * This is the interface for a filter that {@link #accept(char) decides} if a
- * given character is acceptable or should be filtered.
+ * given character is acceptable or should be filtered.<br>
+ * It is used by {@link net.sf.mmm.util.scanner.CharacterSequenceScanner} and avoids conversion of
+ * <code>char</code> to {@link Character} for performance reasons. In other
+ * cases please prefer to use {@link Filter}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -8,9 +8,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.w3c.dom.Element;
 
+import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.value.api.ValueManager;
-import net.sf.mmm.value.api.ValueParseException;
 
 import static org.junit.Assert.*;
 

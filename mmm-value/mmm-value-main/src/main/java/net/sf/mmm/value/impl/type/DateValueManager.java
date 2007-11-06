@@ -13,9 +13,9 @@ import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.value.ValueParseException;
+import net.sf.mmm.util.value.ValueParseStringException;
 import net.sf.mmm.util.xml.StaxUtil;
-import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**

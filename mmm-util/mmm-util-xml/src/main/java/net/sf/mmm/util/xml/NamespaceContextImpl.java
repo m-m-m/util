@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
 
-import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
+import net.sf.mmm.util.collection.AbstractIterator;
 
 /**
  * This is a public implementation of the {@link NamespaceContext} interface. It
@@ -102,7 +102,7 @@ public class NamespaceContextImpl implements NamespaceContext {
   /**
    * @see NamespaceContextImpl#getPrefixes(String)
    */
-  protected static class PrefixIterator extends AbstractReadOnlyLookaheadIterator<String> {
+  protected static class PrefixIterator extends AbstractIterator<String> {
 
     /** @see #next() */
     private final Iterator parentIterator;

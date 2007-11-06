@@ -9,6 +9,7 @@ import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.scanner.CharacterSequenceScanner;
 
 /**
  * This class is a collection of utility functions for formatting and parsing
@@ -342,7 +343,7 @@ public final class Iso8601Util {
    * @return the parsed timezone or <code>null</code> if parser already at the
    *         end of the string.
    */
-  private static TimeZone parseTimezone(StringParser parser) {
+  private static TimeZone parseTimezone(CharacterSequenceScanner parser) {
 
     char c = parser.forceNext();
     if ((c == '+') || (c == '-')) {
@@ -429,7 +430,7 @@ public final class Iso8601Util {
    *        of 1-12).
    * @param day is the day to set that has already been parsed.
    */
-  private static void parseTime(StringParser parser, Calendar calendar, int year, int month, int day) {
+  private static void parseTime(CharacterSequenceScanner parser, Calendar calendar, int year, int month, int day) {
 
     char c = parser.forceNext();
     if (c == 'T') {
@@ -495,7 +496,7 @@ public final class Iso8601Util {
    */
   public static void parseCalendar(String date, Calendar calendar) {
 
-    StringParser parser = new StringParser(date);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(date);
     int year = 0;
     int month = -1;
     int day = -1;

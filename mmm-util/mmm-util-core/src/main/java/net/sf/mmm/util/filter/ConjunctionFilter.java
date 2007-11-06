@@ -3,9 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter;
 
+import net.sf.mmm.util.Conjunction;
+
 /**
  * This is an implementation of the {@link Filter} interface that combines a
- * given list of filters using a boolean conjunction.
+ * given list of filters using a boolean {@link Conjunction}.
  * 
  * @param <V> is the generic type of the value to check.
  * 
@@ -22,8 +24,9 @@ public class ConjunctionFilter<V> implements Filter<V> {
   /**
    * The constructor.
    * 
-   * @param conjunction 
-   * @param filters
+   * @param conjunction is the {@link Conjunction} used to combine the
+   *        <code>filters</code>.
+   * @param filters are the filters to combine.
    */
   public ConjunctionFilter(Conjunction conjunction, Filter<V>... filters) {
 
@@ -40,19 +43,42 @@ public class ConjunctionFilter<V> implements Filter<V> {
 
     for (Filter<V> filter : this.filterList) {
       boolean accept = filter.accept(value);
-      if (this.conjunction == Conjunction.OR) {
-        if (accept) {
-          return true;
-        }
-      } else if (!accept) {
-        return false;
+      switch (this.conjunction) {
+        case OR:
+          if (accept) {
+            return true;
+          }
+          break;
+        case AND:
+          if (!accept) {
+            return false;
+          }
+          break;
+        case NOR:
+          if (accept) {
+            return false;
+          }
+          break;
+        case NAND:
+          if (!accept) {
+            return true;
+          }
+          break;
+        default :
+          throw new IllegalStateException("Unknown conjunction: " + this.conjunction);
       }
     }
-    return (this.conjunction == Conjunction.AND);
+    switch (this.conjunction) {
+      case OR:
+        return false;
+      case AND:
+        return true;
+      case NOR:
+        return true;
+      case NAND:
+        return false;
+      default :
+        throw new IllegalStateException("Unknown conjunction: " + this.conjunction);
+    }
   }
-
-  public static enum Conjunction {
-    AND, OR
-  }
-
 }

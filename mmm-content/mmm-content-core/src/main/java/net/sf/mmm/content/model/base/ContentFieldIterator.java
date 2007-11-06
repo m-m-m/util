@@ -6,7 +6,7 @@ package net.sf.mmm.content.model.base;
 import java.util.Iterator;
 
 import net.sf.mmm.content.model.api.ContentField;
-import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
+import net.sf.mmm.util.collection.AbstractIterator;
 
 /**
  * This class is an enumeration for the fields of a class. It will enumerate the
@@ -14,7 +14,7 @@ import net.sf.mmm.util.collection.AbstractReadOnlyLookaheadIterator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentFieldIterator extends AbstractReadOnlyLookaheadIterator<AbstractContentField> {
+public class ContentFieldIterator extends AbstractIterator<AbstractContentField> {
 
   /** the current class */
   private AbstractContentClass currentClass;

@@ -10,8 +10,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
+import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.value.api.ValueManager;
-import net.sf.mmm.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueService;
 import net.sf.mmm.value.base.AbstractValueManager;
 import net.sf.mmm.value.base.ValueServiceAware;

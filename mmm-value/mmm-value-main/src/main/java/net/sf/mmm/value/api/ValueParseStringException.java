@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.api;
 
+import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.value.NlsBundleValueMain;
 
 /**

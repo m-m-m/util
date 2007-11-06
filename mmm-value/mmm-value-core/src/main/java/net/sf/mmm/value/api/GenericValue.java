@@ -6,6 +6,7 @@ package net.sf.mmm.value.api;
 import java.util.Date;
 
 import net.sf.mmm.util.value.ValueNotSetException;
+import net.sf.mmm.util.value.ValueOutOfRangeException;
 import net.sf.mmm.util.value.WrongValueTypeException;
 
 /**

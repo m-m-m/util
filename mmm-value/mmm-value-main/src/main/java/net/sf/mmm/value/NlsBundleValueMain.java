@@ -23,21 +23,21 @@ public class NlsBundleValueMain extends AbstractResourceBundle {
   /**
    * exception message for a value that could not be parsed.
    * 
-   * @see net.sf.mmm.value.api.ValueParseStringException
+   * @see net.sf.mmm.util.value.ValueParseStringException
    */
   public static final String ERR_PARSE_STRING = "Failed to parse \"{0}\" as \"{2}\"-value[{1}]!";
 
   /**
    * exception message for a value that could not be parsed.
    * 
-   * @see net.sf.mmm.value.api.ValueParseException
+   * @see net.sf.mmm.util.value.ValueParseException
    */
   public static final String ERR_PARSE_XML_START_TAG = "Failed to parse XML as \"{0}\"-value! Illegal start tag \"{1}\"!";
 
   /**
    * exception message for a value that could not be parsed.
    * 
-   * @see net.sf.mmm.value.api.ValueParseException
+   * @see net.sf.mmm.util.value.ValueParseException
    */
   public static final String ERR_PARSE_XML_NO_TYEP_ATTRIBUTE = "Failed to parse XML as \"{0}\"-value! Illegal start tag \"{1}\"!";
 

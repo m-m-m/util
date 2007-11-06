@@ -21,10 +21,14 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
       + "from \"{3}\" with the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
 
   /** @see net.sf.mmm.util.value.ValueNotSetException */
-  public static final String ERR_VALUE_NOT_SET = "The requested value \"{0}\" is not set!";
+  public static final String ERR_VALUE_NOT_SET = "The value \"{0}\" is not set!";
 
-  /** @see net.sf.mmm.value.api.ValueParseStringException */
+  /** @see net.sf.mmm.util.value.ValueParseStringException */
   public static final String ERR_PARSE_STRING = "Failed to parse \"{0}\" as \"{2}\"-value[{1}]!";
+
+  /** @see net.sf.mmm.util.value.ValueOutOfRangeException */
+  public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{0}\" ({1}) "
+      + "is not in the expected range of \"[{2}-{3}]\"!";
 
   /** to be used with resource bundle */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";

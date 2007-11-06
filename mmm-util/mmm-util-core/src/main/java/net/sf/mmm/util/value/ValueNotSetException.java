@@ -18,11 +18,14 @@ public class ValueNotSetException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueName is the name of the required value that is not set.
+   * @param valueSource describes the source of the value. This may be the
+   *        filename where the value was read from, an XPath where the value was
+   *        located in an XML document, etc. It is used in exceptions thrown if
+   *        something goes wrong. This will help to find the problem easier.
    */
-  public ValueNotSetException(String valueName) {
+  public ValueNotSetException(Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_NOT_SET, valueName);
+    super(NlsBundleUtilCore.ERR_VALUE_NOT_SET, valueSource);
   }
 
 }

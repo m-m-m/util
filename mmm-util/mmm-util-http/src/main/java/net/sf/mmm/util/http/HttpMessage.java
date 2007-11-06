@@ -6,9 +6,9 @@ package net.sf.mmm.util.http;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.StringParser;
 import net.sf.mmm.util.filter.CharFilter;
 import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.scanner.CharacterSequenceScanner;
 
 /**
  * This class represents an HTTP message.
@@ -235,7 +235,7 @@ public abstract class HttpMessage {
         value = value + "=" + attributeValue;
       }
     } else {
-      StringParser parser = new StringParser(value);
+      CharacterSequenceScanner parser = new CharacterSequenceScanner(value);
       boolean found = false;
       while (parser.hasNext()) {
         boolean startsWith = parser.expect(attributeName, true);
@@ -314,7 +314,7 @@ public abstract class HttpMessage {
     }
     String value = getHeaderProperty(name);
     if (value != null) {
-      StringParser parser = new StringParser(value);
+      CharacterSequenceScanner parser = new CharacterSequenceScanner(value);
       while (parser.hasNext()) {
         if (parser.expect(attributeName, true)) {
           // be tolerant and ommit spaces

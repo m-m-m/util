@@ -15,8 +15,8 @@ import net.sf.mmm.configuration.base.path.condition.CompareCondition;
 import net.sf.mmm.configuration.base.path.condition.Condition;
 import net.sf.mmm.configuration.base.path.condition.IndexCondition;
 import net.sf.mmm.configuration.base.path.condition.PathCondition;
-import net.sf.mmm.util.StringParser;
 import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.scanner.CharacterSequenceScanner;
 
 /**
  * This is a parser for descendant-paths.
@@ -60,7 +60,7 @@ public class DescendantPathParser {
    *        permitted.
    * @return the parsed condition.
    */
-  public static Condition parseCondition(StringParser parser, List<SimplePathSegment> segmentList,
+  public static Condition parseCondition(CharacterSequenceScanner parser, List<SimplePathSegment> segmentList,
       boolean strict) {
 
     segmentList.clear();
@@ -147,7 +147,7 @@ public class DescendantPathParser {
    *        permitted.
    * @return the parsed segment.
    */
-  public static PathSegment parseSegment(StringParser parser, List<SimplePathSegment> segmentList,
+  public static PathSegment parseSegment(CharacterSequenceScanner parser, List<SimplePathSegment> segmentList,
       boolean strict) {
 
     String segment = parser.readWhile(SEGMENT_FILTER);
@@ -184,7 +184,7 @@ public class DescendantPathParser {
    *        permitted.
    * @return the parsed segments of the given <code>path</code>.
    */
-  public static PathSegment[] parsePath(StringParser parser, boolean strict) {
+  public static PathSegment[] parsePath(CharacterSequenceScanner parser, boolean strict) {
 
     List<PathSegment> segments = new ArrayList<PathSegment>();
     parsePath(parser, segments, strict, new ArrayList<SimplePathSegment>());
@@ -210,7 +210,7 @@ public class DescendantPathParser {
    *        permitted.
    * @param conditionSegments is a list used to collect path segments.
    */
-  public static void parsePath(StringParser parser, List<PathSegment> segments, boolean strict,
+  public static void parsePath(CharacterSequenceScanner parser, List<PathSegment> segments, boolean strict,
       List<SimplePathSegment> conditionSegments) {
 
     boolean todo = true;

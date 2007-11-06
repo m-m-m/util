@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.nio.channels.Channel;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -105,7 +104,8 @@ public final class StreamUtil {
 
   /**
    * This method transfers the contents of the given <code>inStream</code> to
-   * the given <code>outStream</code> using {@link Channel NIO-Channels}.
+   * the given <code>outStream</code> using
+   * {@link java.nio.channels.Channel NIO-Channels}.
    * 
    * @param inStream is where to read the content from. Will be
    *        {@link InputStream#close() closed} at the end.
@@ -142,7 +142,8 @@ public final class StreamUtil {
 
   /**
    * This method transfers the contents of the given <code>inStream</code> to
-   * the given <code>outStream</code> using {@link Channel NIO-Channels}.
+   * the given <code>outStream</code> using
+   * {@link java.nio.channels.Channel NIO-Channels}.
    * 
    * @param inStream is where to read the content from. Will be
    *        {@link InputStream#close() closed} at the end.

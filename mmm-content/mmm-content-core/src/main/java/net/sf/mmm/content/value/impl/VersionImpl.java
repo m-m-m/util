@@ -5,8 +5,8 @@ package net.sf.mmm.content.value.impl;
 
 import net.sf.mmm.content.value.api.Version;
 import net.sf.mmm.util.BasicUtil;
-import net.sf.mmm.value.api.ValueParseException;
-import net.sf.mmm.value.api.ValueParseStringException;
+import net.sf.mmm.util.value.ValueParseException;
+import net.sf.mmm.util.value.ValueParseStringException;
 
 /**
  * This is the implementation of the {@link Version} interface.

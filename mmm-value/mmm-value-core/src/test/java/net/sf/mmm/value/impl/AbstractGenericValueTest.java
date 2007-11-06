@@ -9,12 +9,12 @@ import org.junit.Test;
 
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.util.value.ValueNotSetException;
+import net.sf.mmm.util.value.ValueOutOfRangeException;
 import net.sf.mmm.util.value.WrongValueTypeException;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueInstanciationException;
 import net.sf.mmm.value.api.ValueNotEditableException;
-import net.sf.mmm.value.api.ValueOutOfRangeException;
 
 import static org.junit.Assert.*;
 

@@ -1,23 +1,26 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.scanner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Locale;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
- * This is the test-case for {@link StringParser}.
+ * This is the test-case for {@link CharacterSequenceScanner}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringParserTest {
+public class CharacterSequenceScannerTest {
 
-  private void checkSkipOver(StringParser parser, String substring, boolean ignoreCase) {
+  private void checkSkipOver(CharacterSequenceScanner parser, String substring, boolean ignoreCase) {
 
     boolean found = parser.skipOver(substring, ignoreCase);
     assertTrue(found);
@@ -37,9 +40,9 @@ public class StringParserTest {
 
     String substring = "xYz";
     String string = "xxYzFOOxYztheend";
-    StringParser parser = new StringParser(string);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(string);
     checkSkipOver(parser, substring, false);
-    parser = new StringParser(string.toLowerCase());
+    parser = new CharacterSequenceScanner(string.toLowerCase());
     checkSkipOver(parser, substring, true);
   }
 
@@ -47,14 +50,14 @@ public class StringParserTest {
   public void testSkipUntil() {
 
     // unescaped
-    StringParser parser = new StringParser("string");
+    CharacterSequenceScanner parser = new CharacterSequenceScanner("string");
     assertTrue(parser.skipUntil('n'));
     assertEquals(5, parser.getCurrentIndex());
     assertEquals('g', parser.next());
 
     // escaped
     String end = "12345";
-    parser = new StringParser("\"Quotet text with \\\" inside!\"" + end);
+    parser = new CharacterSequenceScanner("\"Quotet text with \\\" inside!\"" + end);
     assertEquals('\"', parser.next());
     assertTrue(parser.skipUntil('\"', '\\'));
     assertTrue(parser.expect(end, false));
@@ -64,14 +67,14 @@ public class StringParserTest {
   public void testReadUntil() {
 
     // unescaped
-    StringParser parser = new StringParser("string");
+    CharacterSequenceScanner parser = new CharacterSequenceScanner("string");
     assertEquals("stri", parser.readUntil('n', false));
     assertEquals(5, parser.getCurrentIndex());
     assertEquals('g', parser.next());
 
     // escaped
     String end = "12345";
-    parser = new StringParser("\"Quotet text with \\\" inside!\"" + end);
+    parser = new CharacterSequenceScanner("\"Quotet text with \\\" inside!\"" + end);
     assertEquals('\"', parser.next());
     assertEquals("Quotet text with \" inside!", parser.readUntil('\"', true, '\\'));
     assertTrue(parser.expect(end, false));
@@ -84,14 +87,14 @@ public class StringParserTest {
     String start = "hello ";
     String middle = "world";
     String end = " this is cool!";
-    StringParser parser = new StringParser(start + middle + end);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(start + middle + end);
     assertTrue(parser.expect(start, false));
     assertTrue(parser.expect(middle.toUpperCase(Locale.ENGLISH), true));
     assertTrue(parser.expect(end.toLowerCase(Locale.ENGLISH), true));
     assertFalse(parser.hasNext());
     // negative test
     String string = "string";
-    parser = new StringParser(string);
+    parser = new CharacterSequenceScanner(string);
     assertFalse(parser.expect("strign", false));
     assertEquals(4, parser.getCurrentIndex());
   }
@@ -100,7 +103,7 @@ public class StringParserTest {
   public void testBasic() {
 
     String string = "string";
-    StringParser parser = new StringParser(string);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(string);
     assertEquals(0, parser.getCurrentIndex());
     assertEquals(string, parser.getOriginalString());
     assertEquals(string.length(), parser.getLength());
@@ -115,7 +118,7 @@ public class StringParserTest {
   public void testSubstring() {
 
     String string = "string";
-    StringParser parser = new StringParser(string);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(string);
     for (int i = 0; i <= string.length(); i++) {
       for (int j = i; j <= string.length(); j++) {
         // System.out.println(i + "," + j + ":" + string.substring(i, j));
@@ -128,7 +131,7 @@ public class StringParserTest {
   public void testNext() {
 
     String string = "0123456789";
-    StringParser parser = new StringParser(string);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(string);
     for (int i = 0; i < 10; i++) {
       assertTrue(parser.hasNext());
       char c = parser.next();
@@ -150,7 +153,7 @@ public class StringParserTest {
     String start = "hello ";
     String middle = "world";
     String end = " this is cool!";
-    StringParser parser = new StringParser(start + middle + end);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(start + middle + end);
     String middleNew = "universe";
     String replaced = parser.getReplaced(middleNew, start.length(), start.length()
         + middle.length());

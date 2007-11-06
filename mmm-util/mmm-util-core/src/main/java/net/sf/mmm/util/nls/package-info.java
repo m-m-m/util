@@ -64,7 +64,8 @@
  * 
  * <pre>
  *  String usersName = "Lilli";
- *  {@link net.sf.mmm.util.nls.api.NlsMessage} msg = new {@link net.sf.mmm.util.nls.NlsMessageImpl}(MyResourceBundle.MSG_SAY_HI, usersName);
+ *  {@link net.sf.mmm.util.nls.api.NlsMessage} msg = 
+ *    new {@link net.sf.mmm.util.nls.NlsMessageImpl}(MyResourceBundle.MSG_SAY_HI, usersName);
  * </pre>
  * 
  * For exceptions there is additional support via <code>{@link net.sf.mmm.util.nls.NlsException}</code>

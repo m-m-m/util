@@ -7,16 +7,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This is an implementation of the {@link java.util.Iterator} interface that
- * gives a read-only view on an existing {@link java.util.Iterator} instance.<br>
- * The design of the JDK sucks: if only {@link java.util.Iterator} would extend
- * {@link java.util.Enumeration} the world could be so simple.
+ * This is an abstract base implementation of the {@link Iterator} interface. It
+ * allows to implement an read-only lookahead {@link Iterator} easier:<br>
+ * Simply extend this class and implement {@link #findNext()}. From your
+ * constructor or initializer call {@link #findFirst()}.
  * 
  * @param <E> is the templated type of the elements to iterate.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E> {
+public abstract class AbstractIterator<E> implements Iterator<E> {
 
   /** the next item or <code>null</code> if done */
   private E next;
@@ -26,7 +26,7 @@ public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E
    * 
    * @see #findFirst()
    */
-  public AbstractReadOnlyLookaheadIterator() {
+  public AbstractIterator() {
 
     super();
   }
@@ -76,7 +76,7 @@ public abstract class AbstractReadOnlyLookaheadIterator<E> implements Iterator<E
    * 
    * @throws UnsupportedOperationException whenever this method is called.
    */
-  public final void remove() {
+  public final void remove() throws UnsupportedOperationException {
 
     throw new UnsupportedOperationException();
   }

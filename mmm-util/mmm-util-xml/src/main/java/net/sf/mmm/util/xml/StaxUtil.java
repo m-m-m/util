@@ -14,8 +14,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.w3c.dom.Node;
 
+import net.sf.mmm.util.value.ValueConverter;
 import net.sf.mmm.util.value.ValueException;
-import net.sf.mmm.util.value.ValueUtil;
 
 /**
  * This utility class contains methods that help to work with the StAX API (JSR
@@ -80,7 +80,7 @@ public final class StaxUtil {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
-    return ValueUtil.convertValue(valueSource, value, type);
+    return ValueConverter.INSTANCE.convertValue(value, valueSource, type);
   }
 
   /**
@@ -102,7 +102,7 @@ public final class StaxUtil {
       String localAttributeName, Class<V> type, V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
-    return ValueUtil.convertValue(localAttributeName, value, type, defaultValue);
+    return ValueConverter.INSTANCE.convertValue(value, localAttributeName, type, defaultValue);
   }
 
   public static String readText(XMLStreamReader xmlReader) throws XMLStreamException {
@@ -112,7 +112,7 @@ public final class StaxUtil {
       eventType = xmlReader.next();
     }
     while (eventType == XMLStreamConstants.ATTRIBUTE) {
-      eventType = xmlReader.next();      
+      eventType = xmlReader.next();
     }
     if (eventType == XMLStreamConstants.END_ELEMENT) {
       return "";

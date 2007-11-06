@@ -6,7 +6,7 @@ package net.sf.mmm.content.value.impl;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
-import net.sf.mmm.value.api.ValueParseStringException;
+import net.sf.mmm.util.value.ValueParseStringException;
 
 /**
  * This is the abstract base implementation of the {@link SmartIdManager}

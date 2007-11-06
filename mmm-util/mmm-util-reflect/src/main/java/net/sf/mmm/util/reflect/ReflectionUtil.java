@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import net.sf.mmm.util.StringParser;
 import net.sf.mmm.util.filter.CharFilter;
 import net.sf.mmm.util.filter.Filter;
 import net.sf.mmm.util.filter.ListCharFilter;
@@ -35,6 +34,7 @@ import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
 import net.sf.mmm.util.reflect.type.ParameterizedTypeImpl;
 import net.sf.mmm.util.reflect.type.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.type.UpperBoundWildcardType;
+import net.sf.mmm.util.scanner.CharacterSequenceScanner;
 
 /**
  * This class is a collection of utility functions for dealing with
@@ -53,7 +53,7 @@ public final class ReflectionUtil {
   /** an empty object array */
   public static final Type[] NO_TYPES = new Type[0];
 
-  /** @see #toType(StringParser, ClassResolver, Type) */
+  /** @see #toType(CharacterSequenceScanner, ClassResolver, Type) */
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
 
   /**
@@ -220,7 +220,7 @@ public final class ReflectionUtil {
     // List<String>
     // Map<Integer, Date>
     // Set<? extends Serializable>
-    StringParser parser = new StringParser(type);
+    CharacterSequenceScanner parser = new CharacterSequenceScanner(type);
     Type result = toType(parser, resolver, null);
     parser.skipWhile(' ');
     if (parser.hasNext()) {
@@ -241,7 +241,7 @@ public final class ReflectionUtil {
    * @return the parsed type.
    * @throws ClassNotFoundException
    */
-  private static Type toType(StringParser parser, ClassResolver resolver, Type owner)
+  private static Type toType(CharacterSequenceScanner parser, ClassResolver resolver, Type owner)
       throws ClassNotFoundException {
 
     parser.skipWhile(' ');

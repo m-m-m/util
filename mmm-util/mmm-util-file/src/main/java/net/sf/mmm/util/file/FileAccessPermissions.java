@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.file;
 
-import net.sf.mmm.util.StringParser;
 import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.scanner.CharacterSequenceScanner;
 
 /**
  * This class represents the <a
@@ -398,7 +398,7 @@ public class FileAccessPermissions implements Cloneable {
    * @param parse is the current state of the parser.
    * @return the bit-mask with the UGO-flags.
    */
-  private static int parseUGO(StringParser parse) {
+  private static int parseUGO(CharacterSequenceScanner parse) {
 
     int ugo = 0;
     while (true) {
@@ -435,7 +435,7 @@ public class FileAccessPermissions implements Cloneable {
    * @param mask is the current modifier mask.
    * @return the changed <code>mask</code>.
    */
-  private static int parseSymbolicMode(StringParser parse, int mask) {
+  private static int parseSymbolicMode(CharacterSequenceScanner parse, int mask) {
 
     int ugo = parseUGO(parse);
     char mode = parse.forceNext();
@@ -508,7 +508,7 @@ public class FileAccessPermissions implements Cloneable {
    * @throws IllegalArgumentException if there are more the 4 digits or
    *         non-octal digits (8 or 9).
    */
-  private static int parseOctalMode(StringParser parse) throws IllegalArgumentException {
+  private static int parseOctalMode(CharacterSequenceScanner parse) throws IllegalArgumentException {
 
     String octals = parse.readWhile(CharFilter.LATIN_DIGIT_FILTER);
     if (octals.length() == 0) {
@@ -539,7 +539,7 @@ public class FileAccessPermissions implements Cloneable {
    */
   public void chmod(String chmod) {
 
-    StringParser parse = new StringParser(chmod);
+    CharacterSequenceScanner parse = new CharacterSequenceScanner(chmod);
     if (!parse.hasNext()) {
       throw new IllegalArgumentException();
     }
