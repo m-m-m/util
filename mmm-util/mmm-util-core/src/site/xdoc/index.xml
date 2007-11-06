@@ -14,10 +14,12 @@
       other project.
     	</p>
     	<p>
-    	Here is a list of features provided by this module:
+    	Here are some of the features provided by this module:
     	<ul>
         <li>Advanced <a href="apidocs/net/sf/mmm/util/nls/package-summary.html">Native Language Support (NLS)</a>.</li>
         <li><a href="apidocs/net/sf/mmm/util/pattern/package-summary.html">PatternCompiler</a> for glob- and ant-like path-patterns producing <code>java.util.regex.Pattern</code>.</li>
+        <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/package-summary.html">values</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/scanner/package-summary.html">Scanner</a> for parsing strings easily.</li>
     	</ul>
     	</p>
     </section>
