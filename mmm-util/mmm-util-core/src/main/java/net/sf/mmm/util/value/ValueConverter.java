@@ -47,7 +47,7 @@ public class ValueConverter {
       return NumericUtil.toSimplestNumber(d);
     } catch (NumberFormatException e) {
       // TODO: valueSource as first arg, booleanValue as additional arg!
-      throw new WrongValueTypeException(numberValue, Number.class, valueSource, e);
+      throw new WrongValueTypeException(numberValue, valueSource, Number.class, e);
     }
   }
 
@@ -133,7 +133,7 @@ public class ValueConverter {
 
     double d = value.doubleValue();
     if ((d < minimum.doubleValue()) || (d > maximum.doubleValue())) {
-      throw new ValueOutOfRangeException(value, minimum, maximum, valueSource);
+      throw new ValueOutOfRangeException(value, valueSource, minimum, maximum);
     }
   }
 
@@ -211,7 +211,7 @@ public class ValueConverter {
       } else if ((type == boolean.class) || (type == Boolean.class)) {
         result = StringUtil.parseBoolean(value);
         if (result == null) {
-          throw new WrongValueTypeException(value, type, valueSource);
+          throw new WrongValueTypeException(value, valueSource, type);
         }
       } else if ((type == int.class) || (type == Integer.class)) {
         result = Integer.valueOf(value);
@@ -235,7 +235,7 @@ public class ValueConverter {
         if (value.length() == 1) {
           result = Character.valueOf(value.charAt(0));
         } else {
-          throw new WrongValueTypeException(value, type, valueSource);
+          throw new WrongValueTypeException(value, valueSource, type);
         }
       } else if (type == Class.class) {
         result = Class.forName(value);
@@ -243,9 +243,9 @@ public class ValueConverter {
         return convertUnknownValue(value, type, valueSource);
       }
     } catch (NumberFormatException e) {
-      throw new WrongValueTypeException(value, type, valueSource, e);
+      throw new WrongValueTypeException(value, valueSource, type, e);
     } catch (ClassNotFoundException e) {
-      throw new WrongValueTypeException(value, type, valueSource, e);
+      throw new WrongValueTypeException(value, valueSource, type, e);
     }
     // ATTENTION: cast does NOT work if type is primitive
     // return type.cast(result);
@@ -283,7 +283,7 @@ public class ValueConverter {
       throws ValueNotSetException, WrongValueTypeException {
 
     // throw new UnknownValueType();
-    throw new WrongValueTypeException(value, type, valueSource);
+    throw new WrongValueTypeException(value, valueSource, type);
   }
 
 }

@@ -3,6 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Date;
 
 import org.junit.Test;
@@ -15,8 +22,7 @@ import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueInstanciationException;
 import net.sf.mmm.value.api.ValueNotEditableException;
-
-import static org.junit.Assert.*;
+import net.sf.mmm.value.base.AbstractGenericValue;
 
 /**
  * This is the abstract test-case for testing sub-classes of
@@ -232,7 +238,7 @@ public abstract class AbstractGenericValueTest {
         value.getNumber(greater, greater);
         fail("Exception expected");
       } catch (ValueOutOfRangeException e) {
-        assertSame(value, e.getGenericValue());
+        assertSame(value, e.getNlsMessage().getArgument(0));
       }
     }
     Double smaller = Double.valueOf(doubleValue - 1);
@@ -241,7 +247,7 @@ public abstract class AbstractGenericValueTest {
         value.getNumber(smaller, smaller);
         fail("Exception expected");
       } catch (ValueOutOfRangeException e) {
-        assertSame(value, e.getGenericValue());
+        assertSame(value, e.getNlsMessage().getArgument(0));
       }
     }
     Class type = number.getClass();

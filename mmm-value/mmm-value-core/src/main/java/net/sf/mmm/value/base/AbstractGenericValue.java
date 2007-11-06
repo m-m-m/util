@@ -9,9 +9,9 @@ import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.util.value.ValueNotSetException;
 import net.sf.mmm.util.value.ValueOutOfRangeException;
 import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueInstanciationException;
 import net.sf.mmm.value.api.ValueNotEditableException;
-import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
  * This is the very abstract base implementation of the
@@ -365,7 +365,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
     T value = getValue(type);
     if ((minimum.doubleValue() > value.doubleValue())
         || (maximum.doubleValue() < value.doubleValue())) {
-      throw new ValueOutOfRangeException(this, value, minimum, maximum);
+      throw new ValueOutOfRangeException(value, this, minimum, maximum);
     }
     return value;
   }
@@ -384,7 +384,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
     }
     if ((minimum.doubleValue() > value.doubleValue())
         || (maximum.doubleValue() < value.doubleValue())) {
-      throw new ValueOutOfRangeException(this, value, minimum, maximum);
+      throw new ValueOutOfRangeException(value, this, minimum, maximum);
     }
     return value;
   }

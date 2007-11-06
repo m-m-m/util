@@ -19,16 +19,15 @@ public class ValueOutOfRangeException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   * @param value is the number that is out of range.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was
    *        located in an XML document, etc. It is used in exceptions thrown if
    *        something goes wrong. This will help to find the problem easier.
-   * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
    */
-  public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
+  public ValueOutOfRangeException(Number value, Object valueSource, Number minimum, Number maximum) {
 
     super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE, valueSource, value, minimum, maximum);
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum
