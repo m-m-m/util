@@ -6,7 +6,7 @@ package net.sf.mmm.util.filter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.pattern.RegexInfixPatternCompiler;
 
 /**
  * This is an implementation of the {@link FilterRule} interface that matches
@@ -37,7 +37,7 @@ public class PatternFilterRule implements FilterRule {
    */
   public PatternFilterRule(String pattern, boolean resultOnMatch) {
 
-    this(StringUtil.compileInfixPattern(pattern), resultOnMatch);
+    this(RegexInfixPatternCompiler.INSTANCE.compile(pattern), resultOnMatch);
   }
 
   /**

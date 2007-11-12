@@ -315,6 +315,22 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
   /**
    * {@inheritDoc}
    */
+  public int readDigit() {
+
+    int result = -1;
+    if (this.pos < this.endIndex) {
+      char c = this.chars[this.pos];
+      if ((c >= '0') && (c <= '9')) {
+        result = c - '0';
+        this.pos++;
+      }      
+    }
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public boolean skipOver(String substring, boolean ignoreCase) {
 
     return skipOver(substring, ignoreCase, null);
@@ -489,8 +505,26 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
    */
   public int skipWhile(CharFilter filter) {
 
+    return skipWhile(filter, Integer.MAX_VALUE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int skipWhile(CharFilter filter, int max) {
+
+    if (max < 0) {
+      throw new IllegalArgumentException("Max must NOT be negative: " + max);
+    }
     int currentPos = this.pos;
-    while (this.pos < this.endIndex) {
+    int end = currentPos + max;
+    if (end < 0) {
+      end = max;
+    }
+    if (this.endIndex < end) {
+      end = this.endIndex;
+    }
+    while (this.pos < end) {
       char c = this.chars[this.pos];
       if (!filter.accept(c)) {
         break;
@@ -504,6 +538,20 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
    * {@inheritDoc}
    */
   public String readWhile(CharFilter filter) {
+
+    int currentPos = this.pos;
+    int len = skipWhile(filter);
+    if (len == 0) {
+      return "";
+    } else {
+      return new String(this.chars, currentPos, len);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String readWhile(CharFilter filter, int max) {
 
     int currentPos = this.pos;
     int len = skipWhile(filter);

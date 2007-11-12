@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.nls.base;
+package net.sf.mmm.util.nls.base;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import net.sf.mmm.nls.MyResourceBundle;
+import net.sf.mmm.util.nls.MyResourceBundle;
 import net.sf.mmm.util.nls.NlsException;
 import net.sf.mmm.util.nls.api.NlsTranslator;
 import net.sf.mmm.util.nls.base.SimpleStringTranslator;
@@ -39,5 +39,6 @@ public class NlsExceptionTest {
     NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
     assertEquals("NullPointerException caused by \"" + source + "\"!", e.getMessage());
     NlsTranslator st = new SimpleStringTranslator(new MyResourceBundle(), Locale.GERMAN);
+    assertEquals("NullZeigerAusnahme verursacht durch \"" + source + "\"!", e.getLocalizedMessage(st));
   }
 }

@@ -20,7 +20,7 @@ package net.sf.mmm.util.pattern;
  */
 public class GlobPatternCompiler extends AbstractGlobPatternCompiler {
 
-  /** The singleton instance. */
+  /** A singleton instance of this implementation. */
   public static final PatternCompiler INSTANCE = new GlobPatternCompiler();
 
   /**

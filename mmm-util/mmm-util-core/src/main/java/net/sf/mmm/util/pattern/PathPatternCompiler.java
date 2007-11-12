@@ -33,7 +33,7 @@ package net.sf.mmm.util.pattern;
  */
 public class PathPatternCompiler extends AbstractGlobPatternCompiler {
 
-  /** The singleton instance. */
+  /** A singleton instance of this instance. */
   public static final PatternCompiler INSTANCE = new PathPatternCompiler();
 
   /**

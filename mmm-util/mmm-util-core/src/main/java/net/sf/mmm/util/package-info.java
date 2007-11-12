@@ -4,8 +4,10 @@
 /**
  * Provides utilities for general purpose.
  * <h2>General Utilities</h2> 
- * This is the base package of all utilities of this project. This package 
- * itself contains utilities that are very general.
+ * This is the base-package of all utilities of this project. This package 
+ * itself contains utilities for dealing with the basic types 
+ * {@link java.lang.Object}, {@link java.lang.String}, {@link java.lang.Number}, 
+ * and {@link java.util.Date}.
  */
 package net.sf.mmm.util;
 

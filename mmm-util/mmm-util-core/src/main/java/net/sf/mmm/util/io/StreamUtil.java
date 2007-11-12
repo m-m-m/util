@@ -47,7 +47,11 @@ public final class StreamUtil {
 
   /**
    * This method reads the contents of the given <code>reader</code> into a
-   * string.
+   * string.<br>
+   * <b>ATTENTION:</b><br>
+   * Only use this method if you know what you are doing. This method will cause
+   * that the complete content of the given <code>reader</code> is read into
+   * memory.
    * 
    * @param reader is where to read the content from. It will be
    *        {@link Reader#close() closed} at the end.

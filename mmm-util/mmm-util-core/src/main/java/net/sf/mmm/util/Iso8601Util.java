@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
+import net.sf.mmm.util.exception.IllegalDateFormatException;
 import net.sf.mmm.util.filter.CharFilter;
 import net.sf.mmm.util.scanner.CharacterSequenceScanner;
 
@@ -74,7 +75,7 @@ public final class Iso8601Util {
 
   /** The UTC TimeZone. */
   private static final TimeZone TZ_UTC = TimeZone.getTimeZone(UTC_ID);
-  
+
   /**
    * The forbidden constructor.
    */
@@ -335,86 +336,47 @@ public final class Iso8601Util {
     return calendar;
   }
 
-  /**
-   * This method parses the timezone from the given <code>parser</code>.
-   * 
-   * @param parser is the parser pointing to the timezone or at the end of the
-   *        string
-   * @return the parsed timezone or <code>null</code> if parser already at the
-   *         end of the string.
-   */
-  private static TimeZone parseTimezone(CharacterSequenceScanner parser) {
+  private static int read2Digits(CharacterSequenceScanner parser) {
 
-    char c = parser.forceNext();
-    if ((c == '+') || (c == '-')) {
-      boolean negate = (c == '-');
-      int hour = -1;
-      int minute = -1;
-      int second = -1;
-      String hourString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-      if (hourString.length() == 2) {
-        // format is +/-hh[:mm[:ss]]
-        hour = Integer.parseInt(hourString);
-        c = parser.forceNext();
-        if (c == ':') {
-          String minuteString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-          if (minuteString.length() == 2) {
-            // format is +/-hh:mm[:ss]
-            minute = Integer.parseInt(minuteString);
-            c = parser.forceNext();
-            if (c == ':') {
-              String secondString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-              if (secondString.length() == 2) {
-                // format is +/-hh:mm:ss
-                second = Integer.parseInt(secondString);
-              }
-            } else if (c == 0) {
-              // format is +/-hh:mm
-              second = 0;
-            }
-          }
-        } else if (c == 0) {
-          // format is +/-hh
-          minute = 0;
-          second = 0;
-        }
-      } else if (hourString.length() == 4) {
-        // format is +/-hhmm
-        hour = Integer.parseInt(hourString.substring(0, 2));
-        minute = Integer.parseInt(hourString.substring(2, 4));
-        second = 0;
-      } else if (hourString.length() == 6) {
-        // format is +/-hhmmss
-        hour = Integer.parseInt(hourString.substring(0, 2));
-        minute = 0;
+    int highDigit = parser.readDigit();
+    if (highDigit == -1) {
+      return -1;
+    }
+    int lowDigit = parser.readDigit();
+    if (lowDigit == -1) {
+      throw new IllegalDateFormatException(parser.getOriginalString());
+    }
+    return (highDigit * 10) + lowDigit;
+  }
+
+  /**
+   * This method parses the time (or timezone offset) from the given
+   * <code>parser</code>. The format is <code>hh[[:]mm[[:]ss]]</code> 
+   * 
+   * @param parser is the parser pointing to the time.
+   */
+  private static int[] parseTime(CharacterSequenceScanner parser) {
+
+    int hour = read2Digits(parser);
+    boolean colon = parser.skipOver(":", false);
+    int minute = read2Digits(parser);
+    int second = 0;
+    if (minute == -1) {
+      if (!colon) {
+        minute = 0;        
+      }
+    } else {
+      colon = parser.skipOver(":", false);      
+      second = read2Digits(parser);
+      if ((second == -1) && (!colon)) {
         second = 0;
       }
       if (((hour < 0) || (hour > 23)) || ((minute < 0) || (minute > 59))
           || ((second < 0) || (second > 59))) {
-        throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
+        throw new IllegalDateFormatException(parser.getOriginalString());
       }
-      int timezoneOffset = ((((hour * 60) + minute) * 60) + second) * 1000;
-      if (negate) {
-        timezoneOffset = -timezoneOffset;
-      }
-      String tzName = "GMT";
-      if (hour != 0) {
-        if (negate) {
-          tzName += "-";
-        } else {
-          tzName += "+";
-        }
-        tzName += hour;        
-      }
-      return new SimpleTimeZone(timezoneOffset, tzName);
-      //return new ZoneInfo("GMT", timezoneOffset);
-    } else if (c == 0) {
-      return null;
-    } else if (c == 'Z') {
-      // UTC
-      return TZ_UTC;
     }
-    throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
+    return new int[] { hour, minute, second };
   }
 
   /**
@@ -430,59 +392,67 @@ public final class Iso8601Util {
    *        of 1-12).
    * @param day is the day to set that has already been parsed.
    */
-  private static void parseTime(CharacterSequenceScanner parser, Calendar calendar, int year, int month, int day) {
+  private static void parseTime(CharacterSequenceScanner parser, Calendar calendar, int year,
+      int month, int day) {
 
     char c = parser.forceNext();
     if (c == 'T') {
-      int hour = 0;
-      int minute = 0;
-      int second = -1;
-      String hourString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-      if (hourString.length() == 2) {
-        hour = Integer.parseInt(hourString);
-        c = parser.forceNext();
-        if (c == ':') {
-          String minuteString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-          if (minuteString.length() == 2) {
-            minute = Integer.parseInt(minuteString);
-            c = parser.forceNext();
-            if (c == ':') {
-              String secondString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-              if (secondString.length() == 2) {
-                second = Integer.parseInt(secondString);
-                TimeZone timeZone = parseTimezone(parser);
-                if (timeZone != null) {
-                  calendar.setTimeZone(timeZone);
-                }
-              }
-            } else if (c == 0) {
-              second = 0;
-            }
-          }
-        } else if (c == 0) {
-          minute = 0;
-          second = 0;
-        }
-      } else if (hourString.length() == 4) {
-        hour = Integer.parseInt(hourString.substring(0, 2));
-        minute = Integer.parseInt(hourString.substring(2, 4));
-        second = 0;
-      } else if (hourString.length() == 6) {
-        hour = Integer.parseInt(hourString.substring(0, 2));
-        minute = Integer.parseInt(hourString.substring(2, 4));
-        second = Integer.parseInt(hourString.substring(4, 6));
-      }
-      if (((hour < 0) || (hour > 23)) || ((minute < 0) || (minute > 59))
-          || ((second < 0) || (second > 59))) {
-        throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
-      }
+      int[] hourMinuteSecond = parseTime(parser);
+      int hour = hourMinuteSecond[0];
+      int minute = hourMinuteSecond[1];
+      int second = hourMinuteSecond[2];
       calendar.set(year, month - 1, day, hour, minute, second);
+      TimeZone timeZone = parseTimezone(parser);
+      if (timeZone != null) {
+        calendar.setTimeZone(timeZone);
+      }
     } else if (c == 0) {
       calendar.set(year, month - 1, day);
     } else {
       throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
     }
     calendar.set(Calendar.MILLISECOND, 0);
+  }
+
+  /**
+   * This method parses the timezone from the given <code>parser</code>.
+   * 
+   * @param parser is the parser pointing to the timezone or at the end of the
+   *        string
+   * @return the parsed timezone or <code>null</code> if parser already at the
+   *         end of the string.
+   */
+  private static TimeZone parseTimezone(CharacterSequenceScanner parser) {
+
+    char c = parser.forceNext();
+    if ((c == '+') || (c == '-')) {
+      boolean negate = (c == '-');
+      int[] hourMinuteSecond = parseTime(parser);
+      int hour = hourMinuteSecond[0];
+      int minute = hourMinuteSecond[1];
+      int second = hourMinuteSecond[2];
+      int timezoneOffset = ((((hour * 60) + minute) * 60) + second) * 1000;
+      if (negate) {
+        timezoneOffset = -timezoneOffset;
+      }
+      String tzName = "GMT";
+      if (hour != 0) {
+        if (negate) {
+          tzName += "-";
+        } else {
+          tzName += "+";
+        }
+        tzName += hour;
+      }
+      return new SimpleTimeZone(timezoneOffset, tzName);
+      // return new ZoneInfo("GMT", timezoneOffset);
+    } else if (c == 0) {
+      return null;
+    } else if (c == 'Z') {
+      // UTC
+      return TZ_UTC;
+    }
+    throw new IllegalArgumentException("Illegal date-format \"" + parser.toString() + "\"!");
   }
 
   /**
@@ -525,12 +495,12 @@ public final class Iso8601Util {
         day = Integer.parseInt(yearString.substring(6, 8));
       }
       if (((month < 1) || (month > 12)) || ((day < 1) || (day > 31))) {
-        throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!");
+        throw new IllegalDateFormatException(date);
       }
       // proceed time (and timezone)
       parseTime(parser, calendar, year, month, day);
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Illegal date-format \"" + date + "\"!", e);
+      throw new IllegalDateFormatException(date);
     }
   }
 

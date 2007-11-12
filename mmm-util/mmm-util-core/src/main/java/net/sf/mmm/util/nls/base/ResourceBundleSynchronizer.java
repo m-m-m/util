@@ -20,7 +20,6 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.NlsMessageImpl;
 import net.sf.mmm.util.nls.api.NlsTranslator;
 

@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.NlsRuntimeException;
+import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
 
 /**
  * This is the exception thrown if a resource is required but is NOT available.

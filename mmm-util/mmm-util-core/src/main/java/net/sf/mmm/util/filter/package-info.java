@@ -6,8 +6,8 @@
  <h2>Filters</h2>
  Using generics the {@link net.sf.mmm.util.filter.Filter} offers a simple but 
  powerful interface for generic filtering. It comes with an implementation 
- called {@link ConjunctionFilter} that allows to compose a list of
- {@link net.sf.mmm.util.filter.Filter}s.<br>
+ called {@link net.sf.mmm.util.filter.ConjunctionFilter} that allows to compose 
+ a list of {@link net.sf.mmm.util.filter.Filter}s.<br>
  */
 package net.sf.mmm.util.filter;
 

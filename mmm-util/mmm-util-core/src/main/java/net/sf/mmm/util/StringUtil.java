@@ -6,7 +6,6 @@ package net.sf.mmm.util;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.regex.Pattern;
 
 /**
  * This class is a collection of utility functions for {@link String} handling
@@ -359,34 +358,6 @@ public final class StringUtil {
       buffer.append(chars, pos, chars.length - pos);
     }
     return buffer.toString();
-  }
-
-  /**
-   * This method compiles the <code>pattern</code> given as string in a way
-   * similar to GNU-utilities like <code>sed</code> or <code>grep</code>.
-   * This means that if no leading "^" (or ".*") or no trailing "$" (or ".*") is
-   * present, an according ".*" prefix and/or suffix is added implicit. This
-   * causes that "\.xml$" matches "config.xml" and "^/etc/" matches
-   * "/etc/passwd".<br>
-   * <b>ATTENTION:</b><br>
-   * In many cases you may want to use {@link Pattern#compile(String)} with
-   * {@link java.util.regex.Matcher#find()} instead of
-   * {@link java.util.regex.Matcher#matches()}.
-   * 
-   * @param pattern is the pattern as string.
-   * @return the compiled pattern.
-   */
-  public static Pattern compileInfixPattern(String pattern) {
-
-    StringBuffer buffer = new StringBuffer(pattern.length());
-    if (!pattern.startsWith("^") && !pattern.startsWith(".*")) {
-      buffer.append(".*");
-    }
-    buffer.append(pattern);
-    if (!pattern.endsWith("$") && !pattern.endsWith(".*")) {
-      buffer.append(".*");
-    }
-    return Pattern.compile(buffer.toString());
   }
 
 }

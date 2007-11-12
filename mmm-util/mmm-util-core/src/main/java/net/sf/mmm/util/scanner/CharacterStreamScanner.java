@@ -73,6 +73,16 @@ public interface CharacterStreamScanner {
   char forcePeek();
 
   /**
+   * This method reads the {@link #next() next character} if it is a digit. Else
+   * the state remains unchanged.
+   * 
+   * @return the numeric value of the next Latin digit (e.g. <code>0</code> if
+   *         <code>'0'</code>) or <code>-1</code> if the
+   *         {@link #peek() current character} is no Latin digit.
+   */
+  int readDigit();
+
+  /**
    * This method reads the number of {@link #next() next characters} given by
    * <code>count</code> and returns them as string. If there are less
    * characters {@link #hasNext() available} the returned string will be shorter
@@ -209,6 +219,29 @@ public interface CharacterStreamScanner {
   String readWhile(CharFilter filter);
 
   /**
+   * This method reads all {@link #next() next characters} that are
+   * {@link CharFilter#accept(char) accepted} by the given <code>filter</code>.<br>
+   * After the call of this method, the {@link #getCurrentIndex() current index}
+   * will point to the next character that was NOT
+   * {@link CharFilter#accept(char) accepted} by the given <code>filter</code>.
+   * If the next <code>max</code> characters or the characters left until the
+   * {@link #hasNext() end} of this scanner are
+   * {@link CharFilter#accept(char) accepted}, only that amount of characters
+   * are skipped.
+   * 
+   * @see #skipWhile(char)
+   * 
+   * @param filter is used to {@link CharFilter#accept(char) decide} which
+   *        characters should be accepted.
+   * @param max is the maximum number of characters that should be read.
+   * @return a string with all characters
+   *         {@link CharFilter#accept(char) accepted} by the given
+   *         <code>filter</code> limited to the length of <code>max</code>
+   *         and the {@link #hasNext() end} of this scanner.
+   */
+  String readWhile(CharFilter filter, int max);
+
+  /**
    * This method reads all {@link #next() next characters} until the given
    * <code>substring</code> has been detected.<br>
    * After the call of this method, the {@link #getCurrentIndex() current index}
@@ -284,5 +317,25 @@ public interface CharacterStreamScanner {
    *         by the given <code>filter</code> that have been skipped.
    */
   int skipWhile(CharFilter filter);
+
+  /**
+   * This method reads all {@link #next() next characters} that are
+   * {@link CharFilter#accept(char) accepted} by the given <code>filter</code>.<br>
+   * After the call of this method, the {@link #getCurrentIndex() current index}
+   * will point to the next character that was NOT
+   * {@link CharFilter#accept(char) accepted} by the given <code>filter</code>.
+   * If the next <code>max</code> characters or the characters left until the
+   * {@link #hasNext() end} of this scanner are
+   * {@link CharFilter#accept(char) accepted}, only that amount of characters
+   * are skipped.
+   * 
+   * @see #skipWhile(char)
+   * 
+   * @param filter is used to {@link CharFilter#accept(char) decide} which
+   *        characters should be accepted.
+   * @param max is the maximum number of characters that should be skipped.
+   * @return the number of skipped characters.
+   */
+  int skipWhile(CharFilter filter, int max);
 
 }

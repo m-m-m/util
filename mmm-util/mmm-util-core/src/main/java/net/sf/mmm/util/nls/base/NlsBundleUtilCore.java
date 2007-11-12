@@ -1,9 +1,8 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.nls.base;
 
-import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
  * This class holds the internationalized messages for <code>util-misc</code>.
@@ -32,6 +31,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** to be used with resource bundle */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";
+
+  /** @see net.sf.mmm.util.exception.IllegalDateFormatException */
+  public static final String ERR_ILLEGAL_DATA_FORMAT = "Illegal date-format \"{0}\"!";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE = "Usage: {0} [<option>*] <bundle-class> [<locale>*]\n\n"
