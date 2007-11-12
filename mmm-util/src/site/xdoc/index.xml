@@ -10,7 +10,9 @@
     <section name="About MMM::Util">
       This project contains utilities for various purposes:
       <ul>
-        <li><a href="mmm-util-misc/index.html">mmm-util-misc</a> contains valuable utilities for 
+        <li><a href="mmm-util-core/index.html">mmm-util-misc</a> contains valuable utilities for 
+            general purpose (NLS, ISO-8601, generic value conversion, scanners, pattern compilers, etc.).</li>
+        <li><a href="mmm-util-misc/index.html">mmm-util-misc</a> contains various utilities for 
             general purpose (dealing with strings, etc.).</li>
         <li><a href="mmm-util-reflect/index.html">mmm-util-reflect</a> contains utilities that help 
             to deal with reflection, especially for java 5 features like annotations.</li>

@@ -14,7 +14,9 @@
       <item name="Home" href="http://m-m-m.sourceforge.net/" />
     </links>
 
-    <menu name="General Information" inherit="none">
+    <menu ref="parent" inherit="top"/>
+
+    <menu name="General Information">
       <item name="Introduction" href="index.html"/>
       <item name="Overview" href="overview.html"/>
       <item name="Getting Involved" href="getting-involved.html"/>
@@ -27,17 +29,17 @@
       -->
     </menu>
 
-    <menu name="Documentation" inherit="none">
+    <menu name="Documentation">
+      <item name="Javadoc" href="apidocs/index.html"/>
       <item name="FAQ" href="faq.html"/>
       <item name="Users Guide" href="users-guide.html"/>
     </menu>
 
-    <menu name="Developer Guides" inherit="none">
+    <menu name="Developer Guides">
       <item name="Setup" href="setup-devel.html"/>
       <item name="Conventions" href="conventions.html"/>
     </menu>
 
-    <menu ref="parent" inherit="bottom"/>
     <menu ref="modules" inherit="bottom"/>
     <menu ref="reports" inherit="bottom"/>
 

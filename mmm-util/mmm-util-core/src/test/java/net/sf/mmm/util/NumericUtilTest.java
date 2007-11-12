@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link NumericUtil}.
