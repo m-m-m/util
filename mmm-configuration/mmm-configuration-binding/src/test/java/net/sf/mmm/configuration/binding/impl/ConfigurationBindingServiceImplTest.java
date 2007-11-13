@@ -19,8 +19,8 @@ import net.sf.mmm.configuration.base.access.ConfigurationFactory;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.configuration.impl.access.resource.ResourceAccess;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
-import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.impl.PublicMethodPojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.PublicMethodPojoDescriptorBuilder;
 
 import junit.framework.TestCase;
 

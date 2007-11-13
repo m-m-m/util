@@ -14,9 +14,9 @@ import net.sf.mmm.configuration.binding.api.ConfigurationBindingException;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.util.collection.CollectionUtil;
-import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
@@ -38,7 +38,7 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
 
   /**
    * @see net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector#inject(net.sf.mmm.configuration.api.Configuration,
-   *      net.sf.mmm.util.pojo.api.PojoPropertyAccessor, Object,
+   *      net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor, Object,
    *      net.sf.mmm.configuration.binding.api.ConfigurationBindingService)
    */
   @SuppressWarnings("unchecked")

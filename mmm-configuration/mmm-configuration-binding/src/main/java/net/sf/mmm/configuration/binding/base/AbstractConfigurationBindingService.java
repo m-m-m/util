@@ -12,12 +12,12 @@ import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.exception.ResourceMissingException;
-import net.sf.mmm.util.pojo.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.pojo.api.PojoPropertyAccessor;
-import net.sf.mmm.util.pojo.api.PojoPropertyDescriptor;
-import net.sf.mmm.util.pojo.api.PojoPropertyNotFoundException;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
