@@ -126,6 +126,65 @@ public final class FileUtil {
   }
 
   /**
+   * This method gets the {@link FileAccessPermissions permissions} of the given
+   * <code>file</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This operation is only available since java 6. Further it is limited and
+   * can only determine the permissions granted to the current user running this
+   * application.
+   * 
+   * @param file is the file for which the permissions are requested.
+   * @param accessClass is the {@link FileAccessClass distinct class} the
+   *        permission should be applied to in the returned permissions. It may
+   *        be <code>null</code> to apply the permissions to all distinct
+   *        classes.
+   * @return the permissions of <code>file</code>.
+   */
+  public static FileAccessPermissions getPermissions(File file, FileAccessClass accessClass) {
+
+    FileAccessPermissions permissions = new FileAccessPermissions();
+    boolean x = file.canExecute();
+    boolean w = file.canWrite();
+    boolean r = file.canRead();
+    if (accessClass == null) {
+      permissions.setExecutable(x);
+      permissions.setWritable(w);
+      permissions.setReadable(r);
+    } else {
+      permissions.setExecutable(accessClass, x);
+      permissions.setWritable(accessClass, w);
+      permissions.setReadable(accessClass, r);
+    }
+    return permissions;
+  }
+
+  /**
+   * This method sets the <code>{@link FileAccessPermissions permissions}</code>
+   * of the given <code>file</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This operation is only available since java 6. Further it is limited to the
+   * permissions {@link FileAccessClass#OTHERS} and {@link FileAccessClass#USER}
+   * so {@link FileAccessClass#GROUP} flags are ignored as well as the global
+   * s-bits ({@link FileAccessPermissions#isSticky() sticky},
+   * {@link FileAccessPermissions#isSetgid() setgid} and
+   * {@link FileAccessPermissions#isSetgid() setuid}).
+   * 
+   * @param file is the file to modify.
+   * @param permissions are the permissions to set.
+   */
+  public static void setPermissions(File file, FileAccessPermissions permissions) {
+
+    // global permissions
+    file.setExecutable(permissions.isExecutable(FileAccessClass.OTHERS));
+    file.setWritable(permissions.isWritable(FileAccessClass.OTHERS));
+    file.setReadable(permissions.isReadable(FileAccessClass.OTHERS));
+    // user permissions
+    file.setExecutable(permissions.isExecutable(FileAccessClass.USER), true);
+    file.setWritable(permissions.isWritable(FileAccessClass.USER), true);
+    file.setReadable(permissions.isReadable(FileAccessClass.USER), true);
+  }
+
+  /**
    * This method copies the file or directory given by <code>source</code>
    * into the given <code>destination</code>.<br>
    * <b>ATTENTION:</b><br>

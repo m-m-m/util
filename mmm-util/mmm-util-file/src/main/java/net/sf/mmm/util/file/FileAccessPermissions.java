@@ -48,6 +48,15 @@ public class FileAccessPermissions implements Cloneable {
   /** @see #createByUmask(int, boolean) */
   private static final int MASK_FULL_DIRECTORY_ACCESS = 0777;
 
+  /** @see #setExecutable(boolean) */
+  private static final int MASK_ALL_EXECUTABLE = 0111;
+
+  /** @see #setWritable(boolean) */
+  private static final int MASK_ALL_WRITABLE = 0222;
+
+  /** @see #setReadable(boolean) */
+  private static final int MASK_ALL_READABLE = 0444;
+
   /** @see #getMaskBits() */
   private int maskBits;
 
@@ -60,14 +69,15 @@ public class FileAccessPermissions implements Cloneable {
   }
 
   /**
-   * This method create a new {@link FileAccessPermissions} instance according to the
-   * given <code><a href="http://en.wikipedia.org/wiki/Umask">umask</a></code>
+   * This method create a new {@link FileAccessPermissions} instance according
+   * to the given
+   * <code><a href="http://en.wikipedia.org/wiki/Umask">umask</a></code>
    * (user file creation mode mask).
    * 
    * @param umask is the umask.
-   * @param isDirectory <code>true</code> if the the {@link FileAccessPermissions} is
-   *        to be created for a directory, <code>false</code> for a regular
-   *        file.
+   * @param isDirectory <code>true</code> if the the
+   *        {@link FileAccessPermissions} is to be created for a directory,
+   *        <code>false</code> for a regular file.
    * @return the according {@link FileAccessPermissions}.
    */
   public static FileAccessPermissions createByUmask(int umask, boolean isDirectory) {
@@ -94,9 +104,9 @@ public class FileAccessPermissions implements Cloneable {
   }
 
   /**
-   * This method gets the {@link FileAccessPermissions} encoded as a single integer
-   * value. The value is in the same format as the octal notation for the
-   * command <code>chmod</code>. Only the last 12 bits of the mask can be
+   * This method gets the {@link FileAccessPermissions} encoded as a single
+   * integer value. The value is in the same format as the octal notation for
+   * the command <code>chmod</code>. Only the last 12 bits of the mask can be
    * set.
    * 
    * @return the encoded mask.
@@ -139,6 +149,19 @@ public class FileAccessPermissions implements Cloneable {
 
   /**
    * This method sets the {@link #isReadable(FileAccessClass) readable flag} of
+   * this this {@link #getMaskBits() mask} for ALL
+   * {@link FileAccessClass access-classes} to the given value (<code>readable</code>).
+   * 
+   * @param readable if <code>true</code> the mask will be readable, if
+   *        <code>false</code> it will NOT be readable.
+   */
+  public void setReadable(boolean readable) {
+
+    setBits(MASK_ALL_READABLE, readable);
+  }
+
+  /**
+   * This method sets the {@link #isReadable(FileAccessClass) readable flag} of
    * this this {@link #getMaskBits() mask} for the given
    * <code>fileModeClass</code> to the given value (<code>readable</code>).
    * 
@@ -171,6 +194,19 @@ public class FileAccessPermissions implements Cloneable {
 
   /**
    * This method sets the {@link #isWritable(FileAccessClass) writable flag} of
+   * this this {@link #getMaskBits() mask} for ALL
+   * {@link FileAccessClass access-classes} to the given value (<code>writable</code>).
+   * 
+   * @param writable if <code>true</code> the mask will be writable, if
+   *        <code>false</code> it will NOT be writable.
+   */
+  public void setWritable(boolean writable) {
+
+    setBits(MASK_ALL_WRITABLE, writable);
+  }
+
+  /**
+   * This method sets the {@link #isWritable(FileAccessClass) writable flag} of
    * this this {@link #getMaskBits() mask} for the given
    * <code>fileModeClass</code> to the given value (<code>writable</code>).
    * 
@@ -199,6 +235,19 @@ public class FileAccessPermissions implements Cloneable {
   public boolean isExecutable(FileAccessClass fileModeClass) {
 
     return hasFlag(fileModeClass, MASK_EXECUTABLE);
+  }
+
+  /**
+   * This method sets the {@link #isExecutable(FileAccessClass) executable flag}
+   * of this this {@link #getMaskBits() mask} for ALL
+   * {@link FileAccessClass access-classes} to the given value (<code>executable</code>).
+   * 
+   * @param executable if <code>true</code> the mask will be executable, if
+   *        <code>false</code> it will NOT be executable.
+   */
+  public void setExecutable(boolean executable) {
+
+    setBits(MASK_ALL_EXECUTABLE, executable);
   }
 
   /**
@@ -247,8 +296,9 @@ public class FileAccessPermissions implements Cloneable {
   /**
    * This method determines the value of the <em>setgid</em> flag ("set group
    * ID"). If this flag is set and the file is executed, the according process
-   * will be started under the {@link FileAccessClass#GROUP group owning the file}
-   * instead of the group of the user that performed the execution.
+   * will be started under the
+   * {@link FileAccessClass#GROUP group owning the file} instead of the group of
+   * the user that performed the execution.
    * 
    * @return <code>true</code> if the flag is set, <code>false</code>
    *         otherwise.
@@ -369,12 +419,12 @@ public class FileAccessPermissions implements Cloneable {
    * this {@link #getMaskBits() mask} according to the given <code>flag</code>.
    * 
    * @param bitMask is the bit-mask of the flag(s) to set or unset.
-   * @param flag - if <code>true</code> the flag(s) will be set, if
+   * @param set - if <code>true</code> the flag(s) will be set, if
    *        <code>false</code> they will be unset.
    */
-  private void setBits(int bitMask, boolean flag) {
+  private void setBits(int bitMask, boolean set) {
 
-    if (flag) {
+    if (set) {
       this.maskBits = this.maskBits | bitMask;
     } else {
       this.maskBits = this.maskBits & ~bitMask;
@@ -432,11 +482,12 @@ public class FileAccessPermissions implements Cloneable {
    * remains unchanged.
    * 
    * @param parse is the current state of the parser.
-   * @param mask is the current modifier mask.
+   * @param maskBits is the current modifier mask.
    * @return the changed <code>mask</code>.
    */
-  private static int parseSymbolicMode(CharacterSequenceScanner parse, int mask) {
+  private static int parseSymbolicMode(CharacterSequenceScanner parse, int maskBits) {
 
+    int mask = maskBits;
     int ugo = parseUGO(parse);
     char mode = parse.forceNext();
     int flags = 0;

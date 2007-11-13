@@ -13,6 +13,8 @@ import net.sf.mmm.util.pattern.GlobPatternCompiler;
  * This is the implementation of a {@link FileFilter} that filters using a
  * {@link java.util.regex.Pattern pattern}.
  * 
+ * @see net.sf.mmm.util.pattern.PatternCompiler
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class PatternFileFilter implements FileFilter {
