@@ -22,7 +22,7 @@ public abstract class AbstractPojo {
     this.name = null;
   }
 
-  public String getName() {
+  public CharSequence getName() {
 
     return this.name;
   }

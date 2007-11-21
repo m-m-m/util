@@ -6,13 +6,17 @@ package net.sf.mmm.util.reflect.pojo.api;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
+
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
  * POJO. A POJO (plain old java object) in this manner is more or less any java
  * object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.
  * 
- * @param <P> is the templated type of the {@link #getPojoType() POJO}.
+ * @param
+ * <P>
+ * is the templated type of the {@link #getPojoType() POJO}.
  * 
  * @see PojoPropertyDescriptor
  * 
@@ -52,9 +56,7 @@ public interface PojoDescriptor<P> {
    * This method gets the {@link #getPropertyDescriptor(String) property} with
    * the given <code>propertyName</code> from the given
    * <code>pojoInstance</code> using the
-   * {@link PojoPropertyAccessMode#READ read}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessMode) accessor}
-   * (e.g. getter).
+   * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        get the requested property value from.
@@ -62,13 +64,13 @@ public interface PojoDescriptor<P> {
    *        the property.
    * @return the value of the requested property. It will be an instance of the
    *         {@link PojoPropertyAccessor#getPropertyClass() type} of the
-   *         according {@link PojoPropertyAccessMode#READ read}
-   *         {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessMode) accessor}.
+   *         according
+   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
    *         Depending on the POJO, the value may be <code>null</code>.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link PojoPropertyAccessMode#READ readable}.
+   *         {@link #getPropertyDescriptor(String) found} or has no
+   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
@@ -82,9 +84,8 @@ public interface PojoDescriptor<P> {
    * This method sets the given <code>value</code> for the
    * {@link #getPropertyDescriptor(String) property} with the given
    * <code>propertyName</code> from the given <code>pojoInstance</code>
-   * using the {@link PojoPropertyAccessMode#WRITE write}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessMode) accessor}
-   * (e.g. setter).
+   * using the
+   * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#SET setter}.
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        set the given property <code>value</code>.
@@ -92,42 +93,47 @@ public interface PojoDescriptor<P> {
    *        the property.
    * @param value is the property value to set. Depending on the POJO the value
    *        may be <code>null</code>.
+   * @return the result of the setter method. Will be <code>null</code> if the
+   *         return type is <code>void</code> what should be the regular case.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link PojoPropertyAccessMode#WRITE writable}.
+   *         {@link #getPropertyDescriptor(String) found} or has no
+   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#SET setter}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
    * @throws InvocationTargetException if the POJO itself (typically the setter)
    *         throws an exception.
    */
-  void setProperty(P pojoInstance, String propertyName, Object value)
+  Object setProperty(P pojoInstance, String propertyName, Object value)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
   /**
    * This method adds the given <code>item</code> to the list-like
    * {@link #getPropertyDescriptor(String) property} with the given
    * <code>propertyName</code> from the given <code>pojoInstance</code>
-   * using the {@link PojoPropertyAccessMode#ADD add}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessMode) accessor}.
+   * using the
+   * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#ADD add}
+   * {@link PojoPropertyDescriptor#getAccessor(net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode) accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        add the given property <code>item</code>.
    * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
    *        the property.
    * @param item is the item to add to the property.
+   * @return the result of the add-method. Will be <code>null</code> if the
+   *         return type is <code>void</code> what should be the regular case.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link PojoPropertyAccessMode#ADD addable}.
+   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#ADD addable}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
    * @throws InvocationTargetException if the POJO itself (the adder) throws an
    *         exception.
    */
-  void addPropertyItem(P pojoInstance, String propertyName, Object item)
+  Object addPropertyItem(P pojoInstance, String propertyName, Object item)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
 }

@@ -15,7 +15,7 @@
  * (plain old java object) in this manner is more or less any java object.
  * In advance boolean getters can also use the prefix <code>has</code>. Further 
  * a list-type property can also define an 
- * {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode#ADD add-method} 
+ * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode#ADD add-method} 
  * allowing to add items to the list.<br>
  */
 package net.sf.mmm.util.reflect.pojo;

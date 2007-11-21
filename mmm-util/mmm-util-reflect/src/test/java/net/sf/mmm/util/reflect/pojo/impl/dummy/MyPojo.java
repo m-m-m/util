@@ -82,4 +82,13 @@ public class MyPojo extends AbstractPojo {
     return new String(this.privateString);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName() {
+
+    return super.getName().toString();
+  }
+
 }

@@ -22,7 +22,7 @@ import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
-import net.sf.mmm.util.exception.ResourceMissingException;
+import net.sf.mmm.util.component.ResourceMissingException;
 import net.sf.mmm.util.file.FileUtil;
 
 /**

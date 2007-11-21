@@ -11,8 +11,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.util.value.ValueParseStringException;
 import net.sf.mmm.util.xml.StaxUtil;

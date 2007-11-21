@@ -3,20 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
-import net.sf.mmm.util.reflect.pojo.impl.PublicMethodPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.impl.dummy.MyPojo;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link PublicMethodPojoDescriptorBuilder}.
@@ -29,8 +25,9 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
   @Test
   public void testPojoDescriptor() throws Exception {
 
-    PojoDescriptorBuilder factory = new PublicMethodPojoDescriptorBuilder();
-    PojoDescriptor<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
+    PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
+    builder.initialize();
+    PojoDescriptor<MyPojo> pojoDescriptor = builder.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
     MyPojo pojoInstance = new MyPojo();
     // test property "class"

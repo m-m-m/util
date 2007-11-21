@@ -3,18 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.reflect.pojo.impl.FieldAndPublicMethodPojoDescriptorBuilder;
-import net.sf.mmm.util.reflect.pojo.impl.PublicMethodPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.impl.dummy.MyPojo;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link PublicMethodPojoDescriptorBuilder}.
@@ -28,8 +28,11 @@ public class FieldAndPublicMethodPojoDescriptorBuilderTest extends
   @Test
   public void testPojoDescriptor() throws Exception {
 
-    PojoDescriptorBuilder factory = new FieldAndPublicMethodPojoDescriptorBuilder();
-    PojoDescriptor<MyPojo> pojoDescriptor = factory.getDescriptor(MyPojo.class);
+    PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
+    builder.setFieldIntrospector(new PojoFieldIntrospectorImpl(VisibilityModifier.PRIVATE, false));
+    builder.setMethodIntrospector(new PojoMethodIntrospectorImpl(VisibilityModifier.PUBLIC, false));
+    builder.initialize();
+    PojoDescriptor<MyPojo> pojoDescriptor = builder.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
     MyPojo pojoInstance = new MyPojo();
     // test property "class"

@@ -3,17 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.api;
 
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeName;
+
 /**
  * This interface represents a property of a POJO. It is an alternative to
  * {@link java.beans.PropertyDescriptor} but only has focus on reflectively
- * modifying properties. Therefore it works on any POJO. A POJO (plain old java
- * object) in this manner is more or less any java object. It has no restrictive
- * specification such as a Java Bean where the getter and setter of a property
- * needs to have the exact same type. In advance boolean getters can also use
- * the prefix <code>has</code>. Further a list-type property can also define
- * an {@link PojoPropertyAccessMode#ADD add-method} allowing to add items to the
- * list.<br>
- * <br>
+ * accessing objects. Therefore it works on any POJO. A POJO (plain old java
+ * object) in this manner is more or less any java object.<br>
  * Look at the following example:
  * 
  * <pre>
@@ -42,49 +40,49 @@ package net.sf.mmm.util.reflect.pojo.api;
  * <table>
  * <tr>
  * <th>Name</th>
- * <th>Access-Type</th>
+ * <th>Mode</th>
  * <th>Property-Class</th>
  * <th>Method</th>
  * <th>Component-Type</th>
  * </tr>
  * <tr>
  * <td>fooBar</td>
- * <td>read</td>
+ * <td>get</td>
  * <td>Integer</td>
  * <td>getFooBar()</td>
  * <td>-</td>
  * </tr>
  * <tr>
  * <td>fooBar</td>
- * <td>write</td>
+ * <td>set</td>
  * <td>int</td>
  * <td>setFooBar(int)</td>
  * <td>-</td>
  * </tr>
  * <tr>
  * <td>someFlag</td>
- * <td>read</td>
+ * <td>get</td>
  * <td>boolean</td>
  * <td>hasSomeFlag()</td>
  * <td>-</td>
  * </tr>
  * <tr>
  * <td>someFlag</td>
- * <td>write</td>
+ * <td>set</td>
  * <td>Boolean</td>
  * <td>setSomeFlag(Boolean)</td>
  * <td>-</td>
  * </tr>
  * <tr>
  * <td>cool</td>
- * <td>read</td>
+ * <td>get</td>
  * <td>boolean</td>
  * <td>isCool()</td>
  * <td>-</td>
  * </tr>
  * <tr>
  * <td>colors</td>
- * <td>read</td>
+ * <td>get</td>
  * <td>List&lt;String&gt;</td>
  * <td>getColors()</td>
  * <td>String</td>
@@ -100,30 +98,19 @@ package net.sf.mmm.util.reflect.pojo.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoPropertyDescriptor {
-
-  /**
-   * This method gets the programmatic (technical) name of the according
-   * property.<br>
-   * E.g. for the {@link PojoPropertyAccessMode#READ read}
-   * {@link #getAccessor(PojoPropertyAccessMode) accessor}
-   * <code>public String getFooBar()</code> the property name would be
-   * <code>fooBar</code>.
-   * 
-   * @see java.beans.PropertyDescriptor#getName()
-   * 
-   * @return the property name.
-   */
-  String getName();
+public interface PojoPropertyDescriptor extends PojoAttributeName {
 
   /**
    * This method gets the {@link PojoPropertyAccessor accessor} to access the
    * property in the way given by <code>mode</code>.
    * 
-   * @param mode is the mode of the requested accessor.
+   * @param <ACCESSOR> is the type of the requested accessor.
+   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
+   *        requested accessor.
    * @return the accessor for the given <code>mode</code> or <code>null</code>
    *         if no such accessor exists.
    */
-  PojoPropertyAccessor getAccessor(PojoPropertyAccessMode mode);
+  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(
+      PojoPropertyAccessorMode<ACCESSOR> mode);
 
 }

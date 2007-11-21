@@ -33,10 +33,11 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.filter.AnnotationFilter;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
-import net.sf.mmm.util.reflect.pojo.impl.PublicMethodPojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorBuilderImpl;
 import net.sf.mmm.util.resource.ClasspathResource;
 import net.sf.mmm.util.resource.DataResource;
 import net.sf.mmm.util.xml.StaxUtil;
@@ -96,7 +97,9 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
   public ContentClassLoaderNative(AbstractMutableContentModelService contentModelService) {
 
     super(contentModelService);
-    this.methodDescriptorBuilder = new PublicMethodPojoDescriptorBuilder();
+    PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
+    builder.initialize();
+    this.methodDescriptorBuilder = builder;
     this.rootEntity = AbstractContentObject.class;
     this.entityFilter = new AnnotationFilter(ClassAnnotation.class);
     this.factory = XMLInputFactory.newInstance();
@@ -324,7 +327,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
     for (PojoPropertyDescriptor methodPropertyDescriptor : methodPojoDescriptor
         .getPropertyDescriptors()) {
       PojoPropertyAccessor accessor = methodPropertyDescriptor
-          .getAccessor(PojoPropertyAccessMode.READ);
+          .getAccessor(PojoPropertyAccessorNonArgMode.GET);
       try {
         boolean declareField = true;
         FieldAnnotation fieldAnnotation = null;
@@ -360,7 +363,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           boolean isTransient = fieldAnnotation.isTransient();
           boolean isReadOnly = true;
           PojoPropertyAccessor writeAccessor = methodPropertyDescriptor
-              .getAccessor(PojoPropertyAccessMode.WRITE);
+              .getAccessor(PojoPropertyAccessorOneArgMode.SET);
           if ((writeAccessor != null) && (Modifier.isPublic(writeAccessor.getModifiers()))) {
             isReadOnly = fieldAnnotation.isReadOnly();
           }
@@ -398,11 +401,11 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
    */
   protected ContentAccessor getFieldAccessor(PojoPropertyDescriptor methodPropertyDescriptor) {
 
-    Method getter = (Method) methodPropertyDescriptor.getAccessor(PojoPropertyAccessMode.READ)
-        .getAccessibleObject();
+    Method getter = (Method) methodPropertyDescriptor.getAccessor(
+        PojoPropertyAccessorNonArgMode.GET).getAccessibleObject();
     Method setter = null;
     PojoPropertyAccessor writeAccessor = methodPropertyDescriptor
-        .getAccessor(PojoPropertyAccessMode.WRITE);
+        .getAccessor(PojoPropertyAccessorOneArgMode.SET);
     if (writeAccessor != null) {
       setter = (Method) writeAccessor.getAccessibleObject();
     }

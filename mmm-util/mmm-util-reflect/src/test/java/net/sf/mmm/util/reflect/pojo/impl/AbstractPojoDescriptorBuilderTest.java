@@ -3,12 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import static org.junit.Assert.*;
+import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
+import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
 
 /**
  * This is the abstract test-case for implementations of
@@ -17,7 +21,7 @@ import static org.junit.Assert.*;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractPojoDescriptorBuilderTest {
-  
+
   /**
    * This method checks read/write accessors to the property
    * <code>propertyName</code> of the <code>pojoDescriptor</code> according
@@ -36,22 +40,26 @@ public abstract class AbstractPojoDescriptorBuilderTest {
     PojoPropertyDescriptor propertyDescriptor = pojoDescriptor.getPropertyDescriptor(propertyName);
     assertNotNull(propertyDescriptor);
     assertEquals(propertyName, propertyDescriptor.getName());
-    PojoPropertyAccessor accessor;
+
     // test read accessor
-    accessor = propertyDescriptor.getAccessor(PojoPropertyAccessMode.READ);
+    PojoPropertyAccessorNonArg getAccessor = propertyDescriptor
+        .getAccessor(PojoPropertyAccessorNonArgMode.GET);
     if (readType == null) {
-      assertNull(accessor);
+      assertNull(getAccessor);
     } else {
-      assertEquals(propertyName, accessor.getName());
-      assertEquals(readType, accessor.getPropertyClass());
+      assertNotNull(getAccessor);
+      assertEquals(propertyName, getAccessor.getName());
+      assertEquals(readType, getAccessor.getPropertyClass());
     }
     // test write accessor
-    accessor = propertyDescriptor.getAccessor(PojoPropertyAccessMode.WRITE);
+    PojoPropertyAccessorOneArg setAccessor = propertyDescriptor
+        .getAccessor(PojoPropertyAccessorOneArgMode.SET);
     if (writeType == null) {
-      assertNull(accessor);
+      assertNull(setAccessor);
     } else {
-      assertEquals(propertyName, accessor.getName());
-      assertEquals(writeType, accessor.getPropertyClass());
+      assertNotNull(setAccessor);
+      assertEquals(propertyName, setAccessor.getName());
+      assertEquals(writeType, setAccessor.getPropertyClass());
     }
   }
 

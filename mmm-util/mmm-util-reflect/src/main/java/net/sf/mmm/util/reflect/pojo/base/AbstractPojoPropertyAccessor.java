@@ -8,11 +8,11 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessor} interface.
+ * This is the abstract base-implementation of the {@link PojoPropertyAccessor}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,9 +20,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
 
   /** @see #getName() */
   private final String name;
-
-  /** @see #getAccessMode() */
-  private final PojoPropertyAccessMode mode;
 
   /** @see #getPropertyType() */
   private final Type type;
@@ -37,18 +34,15 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
    * The constructor.
    * 
    * @param propertyName is the {@link #getName() name} of the property.
-   * @param accessMode is the {@link #getAccessMode() mode} of this accessor.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
    * @param propertyClass is the {@link #getPropertyClass() raw type} of the
    *        property.
    */
-  public AbstractPojoPropertyAccessor(String propertyName, PojoPropertyAccessMode accessMode,
-      Type propertyType, Class<?> propertyClass) {
+  public AbstractPojoPropertyAccessor(String propertyName, Type propertyType, Class<?> propertyClass) {
 
     super();
     this.name = propertyName;
-    this.mode = accessMode;
     this.clazz = propertyClass;
     this.type = propertyType;
     // determine component type...
@@ -84,14 +78,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessMode getAccessMode() {
-
-    return this.mode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Type getPropertyType() {
 
     return this.type;
@@ -119,7 +105,8 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   @Override
   public String toString() {
 
-    return this.mode + "-Accessor of property '" + this.name + "' with type " + this.clazz;
+    return getMode() + "-accessor of property '" + this.name + "' with type " + this.type + "("
+        + getClass().getSimpleName() + ")";
   }
 
 }

@@ -9,7 +9,7 @@ import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector;
 import net.sf.mmm.configuration.binding.base.AbstractConfigurationBindingService;
-import net.sf.mmm.util.exception.ResourceMissingException;
+import net.sf.mmm.util.component.ResourceMissingException;
 
 /**
  * This is the regular implementation of the

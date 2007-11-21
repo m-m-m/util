@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect.pojo.api;
 
 import net.sf.mmm.util.nls.NlsRuntimeException;
 import net.sf.mmm.util.reflect.pojo.NlsBundlePojo;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
 
 /**
  * A {@link PojoPropertyNotFoundException} is thrown if a property should be
@@ -42,7 +43,7 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    * @param mode is the access-mode for which the property is NOT available.
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName,
-      PojoPropertyAccessMode mode) {
+      PojoPropertyAccessorMode<?> mode) {
 
     super(NlsBundlePojo.ERR_PROPERTY_NOT_ACCESSABLE, propertyName, pojoType, mode);
   }

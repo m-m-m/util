@@ -23,7 +23,7 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
-import net.sf.mmm.util.exception.ResourceMissingException;
+import net.sf.mmm.util.component.ResourceMissingException;
 import net.sf.mmm.util.file.FileUtil;
 import net.sf.mmm.util.transformer.Transformer;
 

@@ -5,7 +5,7 @@ package net.sf.mmm.configuration.binding.api;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
  * This is a call-back interface used to create POJOs from {@link Configuration}
@@ -30,7 +30,7 @@ public interface ConfigurationBindingInjector {
    * @throws ConfigurationException if a problem occurred when reading from the
    *         given <code>configuration</code>.
    */
-  void inject(Configuration configuration, PojoPropertyAccessor accessor, Object pojo,
+  void inject(Configuration configuration, PojoPropertyAccessorOneArg accessor, Object pojo,
       ConfigurationBindingService bindingService) throws ConfigurationException;
 
 }

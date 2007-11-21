@@ -10,6 +10,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import net.sf.mmm.configuration.api.Configuration;
@@ -19,10 +21,7 @@ import net.sf.mmm.configuration.base.access.ConfigurationFactory;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.configuration.impl.access.resource.ResourceAccess;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.reflect.pojo.impl.PublicMethodPojoDescriptorBuilder;
-
-import junit.framework.TestCase;
+import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorBuilderImpl;
 
 /**
  * This is the {@link TestCase} for {@link ConfigurationBindingServiceImpl}.
@@ -36,7 +35,8 @@ public class ConfigurationBindingServiceImplTest extends TestCase {
   public void testBinding() {
 
     // create binding service...
-    PojoDescriptorBuilder descriptorBuilder = new PublicMethodPojoDescriptorBuilder();
+    PojoDescriptorBuilderImpl descriptorBuilder = new PojoDescriptorBuilderImpl();
+    descriptorBuilder.initialize();
     ConfigurationBindingServiceImpl serviceImpl = new ConfigurationBindingServiceImpl();
     serviceImpl.setDescriptorBuilder(descriptorBuilder);
     serviceImpl.initialize();

@@ -90,8 +90,52 @@ public final class ReflectionUtil {
   }
 
   /**
-   * This method gets the component type of the given <code>type</code>.<br>
-   * For example the following types all have the component-type MyClass:
+   * This method gets the component-type of the given <code>type</code>.<br>
+   * Here are some examples:<br>
+   * <table border="1">
+   * <tr>
+   * <th>type</th>
+   * <th>getComponentType(type)</th>
+   * </tr>
+   * <tr>
+   * <td><code>List&lt;Map&lt;String, Long&gt;&gt;</code></td>
+   * <td><code>Map&lt;String, Long&gt;</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>Foo&lt;Bar&gt;[]</code></td>
+   * <td><code>Foo&lt;Bar&gt;</code></td>
+   * </tr>
+   * </table>
+   * 
+   * @param type is the type where to get the component type from.
+   * @return the component type of the given <code>type</code> or
+   *         <code>null</code> if the given <code>type</code> does NOT have
+   *         a single (component) type (e.g.
+   *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
+   */
+  public static Type getComponentType(Type type) {
+
+    if (type instanceof Class) {
+      Class<?> clazz = (Class<?>) type;
+      if (clazz.isArray()) {
+        return clazz.getComponentType();
+      }
+    } else if (type instanceof ParameterizedType) {
+      ParameterizedType pt = (ParameterizedType) type;
+      Type[] generics = pt.getActualTypeArguments();
+      if (generics.length == 1) {
+        return generics[0];
+      }
+    } else if (type instanceof GenericArrayType) {
+      GenericArrayType gat = (GenericArrayType) type;
+      return gat.getGenericComponentType();
+    }
+    return null;
+  }
+
+  /**
+   * This method gets the component-class of the given <code>type</code>.<br>
+   * For example the following types all have the component-class MyClass:
    * <ul>
    * <li>MyClass[]</li>
    * <li>List&lt;MyClass&gt;</li>
@@ -100,12 +144,15 @@ public final class ReflectionUtil {
    * <li>&lt;T extends MyClass&gt; T[]</li>
    * </ul>
    * 
+   * @see #getComponentType(Type)
+   * 
    * @param type is the type where to get the component type from.
    * @return the component type of the given <code>type</code> or
    *         <code>null</code> if the given <code>type</code> does NOT have
-   *         a single (component) type.
+   *         a single (component) type (e.g.
+   *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
    */
-  public static Class<?> getComponentType(Type type) {
+  public static Class<?> getComponentClass(Type type) {
 
     if (type instanceof Class) {
       Class<?> clazz = (Class<?>) type;

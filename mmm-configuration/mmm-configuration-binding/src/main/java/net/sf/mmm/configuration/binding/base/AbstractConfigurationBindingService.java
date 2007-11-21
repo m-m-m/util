@@ -8,16 +8,16 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector;
+import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.exception.ResourceMissingException;
+import net.sf.mmm.util.component.ResourceMissingException;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
@@ -73,13 +73,13 @@ public abstract class AbstractConfigurationBindingService implements Configurati
    * @return <code>null</code> if the property-descriptor is <code>null</code>
    *         or it does NOT have an injectable accessor.
    */
-  private PojoPropertyAccessor findAccessor(PojoPropertyDescriptor propertyDescriptor) {
+  private PojoPropertyAccessorOneArg findAccessor(PojoPropertyDescriptor propertyDescriptor) {
 
-    PojoPropertyAccessor accessor = null;
+    PojoPropertyAccessorOneArg accessor = null;
     if (propertyDescriptor != null) {
-      accessor = propertyDescriptor.getAccessor(PojoPropertyAccessMode.WRITE);
+      accessor = propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.SET);
       if (accessor == null) {
-        accessor = propertyDescriptor.getAccessor(PojoPropertyAccessMode.ADD);
+        accessor = propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.ADD);
       }
     }
     return accessor;
@@ -95,10 +95,12 @@ public abstract class AbstractConfigurationBindingService implements Configurati
    * @param propertyName is the name of the property.
    * @return the accessor or <code>null</code> if none could be found.
    */
-  protected PojoPropertyAccessor findAccessor(PojoDescriptor<?> descriptor, String propertyName) {
+  protected PojoPropertyAccessorOneArg findAccessor(PojoDescriptor<?> descriptor,
+      String propertyName) {
 
     // TODO: extract first locating and rename to "findSingularAccessor"
-    PojoPropertyAccessor accessor = findAccessor(descriptor.getPropertyDescriptor(propertyName));
+    PojoPropertyAccessorOneArg accessor = findAccessor(descriptor
+        .getPropertyDescriptor(propertyName));
     if (accessor != null) {
       return accessor;
     }
@@ -181,7 +183,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
         propertyName = name;
       }
       propertyName = StringUtil.toCamlCase(propertyName);
-      PojoPropertyAccessor accessor = findAccessor(descriptor, propertyName);
+      PojoPropertyAccessorOneArg accessor = findAccessor(descriptor, propertyName);
       if (accessor == null) {
         throw new PojoPropertyNotFoundException(pojoType, propertyName + "[" + child.getPath()
             + "]");

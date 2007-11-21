@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-
 /**
  * This class holds the internationalized messages for <code>util-misc</code>.
  * 
@@ -29,10 +28,16 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{0}\" ({1}) "
       + "is not in the expected range of \"[{2}-{3}]\"!";
 
-  /** to be used with resource bundle */
+  /** @see net.sf.mmm.util.component.ResourceMissingException */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";
 
-  /** @see net.sf.mmm.util.exception.IllegalDateFormatException */
+  /** @see net.sf.mmm.util.component.AlreadyInitializedException */
+  public static final String ERR_ALREADY_INITIALIZED = "The object is already initialized!";
+
+  /** @see net.sf.mmm.util.component.NotInitializedException */
+  public static final String ERR_NOT_INITIALIZED = "The object is NOT initialized!";
+
+  /** @see net.sf.mmm.util.datexxx.IllegalDateFormatException */
   public static final String ERR_ILLEGAL_DATA_FORMAT = "Illegal date-format \"{0}\"!";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */

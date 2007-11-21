@@ -5,7 +5,7 @@ package net.sf.mmm.value.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.Iso8601Util;
+import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.value.WrongValueTypeException;
 
 /**

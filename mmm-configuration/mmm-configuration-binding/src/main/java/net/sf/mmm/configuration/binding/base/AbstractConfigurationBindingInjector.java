@@ -15,8 +15,8 @@ import net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.util.collection.CollectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessMode;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
@@ -37,17 +37,15 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
   }
 
   /**
-   * @see net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector#inject(net.sf.mmm.configuration.api.Configuration,
-   *      net.sf.mmm.util.reflect.pojo.api.PojoPropertyAccessor, Object,
-   *      net.sf.mmm.configuration.binding.api.ConfigurationBindingService)
+   * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public void inject(Configuration configuration, PojoPropertyAccessor accessor, Object pojo,
+  public void inject(Configuration configuration, PojoPropertyAccessorOneArg accessor, Object pojo,
       ConfigurationBindingService bindingService) throws ConfigurationException {
 
     try {
       Class<?> type = accessor.getPropertyClass();
-      if (accessor.getAccessMode() == PojoPropertyAccessMode.ADD) {
+      if (accessor.getMode() == PojoPropertyAccessorOneArgMode.ADD) {
         // handle add-accessor...
         boolean simpleType = isSimpleType(type);
         for (Configuration child : configuration.getDescendants("*")) {
@@ -58,12 +56,12 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
             value = create(child, type);
             bindingService.configure(configuration, value, this);
           }
-          accessor.set(pojo, value);
+          accessor.invoke(pojo, value);
         }
       } else if ((configuration.getType() == Configuration.Type.ATTRIBUTE) || isSimpleType(type)) {
         // handle plain simple type
         Object value = configuration.getValue().getValue(accessor.getPropertyClass());
-        accessor.set(pojo, value);
+        accessor.invoke(pojo, value);
       } else {
         Type componentType = accessor.getPropertyComponentType();
         if (componentType != null) {
@@ -90,11 +88,11 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
             elements[childIndex++] = value;
           }
           if (type.isArray()) {
-            accessor.set(pojo, elements);
+            accessor.invoke(pojo, elements);
           } else {
             Collection collection = CollectionUtil.create((Class<? extends Collection>) type);
             Collections.addAll(collection, elements);
-            accessor.set(pojo, collection);
+            accessor.invoke(pojo, collection);
           }
         } else {
           // handle plain complex property...
@@ -102,7 +100,7 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
           // TODO: what if the attributes have been used as constructor
           // arguments?
           bindingService.configure(configuration, value, this);
-          accessor.set(pojo, value);
+          accessor.invoke(pojo, value);
         }
       }
     } catch (ConfigurationBindingException e) {

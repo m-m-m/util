@@ -5,9 +5,9 @@ package net.sf.mmm.util.value;
 
 import java.util.Date;
 
-import net.sf.mmm.util.Iso8601Util;
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.date.Iso8601Util;
 
 /**
  * This is a utility class providing support for dealing with values (e.g. when
