@@ -6,6 +6,7 @@ package net.sf.mmm.util;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Locale;
 
 /**
  * This class is a collection of utility functions for {@link String} handling
@@ -13,7 +14,15 @@ import java.io.Writer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class StringUtil {
+public class StringUtil {
+
+  /**
+   * This is the singleton instance of this {@link StringUtil}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
+   */
+  public static final StringUtil INSTANCE = new StringUtil();
 
   /** a string representing the boolean value <code>true</code> */
   public static final String TRUE = String.valueOf(true);
@@ -25,9 +34,9 @@ public final class StringUtil {
   private static final char[] SEPARATORS = new char[] { ' ', '-', '_', '.' };
 
   /**
-   * Forbidden constructor.
+   * The constructor.
    */
-  private StringUtil() {
+  protected StringUtil() {
 
     super();
   }
@@ -44,7 +53,7 @@ public final class StringUtil {
    *         {@link String#equalsIgnoreCase(java.lang.String) equals} to
    *         {@link #FALSE false} and <code>null</code> in any other case.
    */
-  public static Boolean parseBoolean(String booleanValue) {
+  public Boolean parseBoolean(String booleanValue) {
 
     if (TRUE.equalsIgnoreCase(booleanValue)) {
       return Boolean.TRUE;
@@ -65,10 +74,19 @@ public final class StringUtil {
    * @return the given string with all occurrences of <code>match</code>
    *         replaced by <code>replace</code>.
    */
-  public static String replace(String string, String match, String replace) {
+  public String replace(String string, String match, String replace) {
 
-    StringBuffer result = new StringBuffer();
     int matchLen = match.length();
+    int replaceLen = replace.length();
+    int delta = replaceLen - matchLen;
+    if (delta < 0) {
+      // assume no replacement...
+      delta = 0;
+    } else {
+      // assume two replacements...
+      delta = delta + delta;
+    }
+    StringBuilder result = new StringBuilder(string.length() + delta);
     int oldPos = 0;
     int pos = string.indexOf(match);
     while (pos >= 0) {
@@ -86,6 +104,121 @@ public final class StringUtil {
   }
 
   /**
+   * This method delegates to
+   * {@link #replaceSuffixWithCase(String, int, String, Locale)} using
+   * {@link Locale#ENGLISH}.
+   * 
+   * @see #replaceSuffixWithCase(String, int, String, Locale)
+   * 
+   * @param string is the string to replace.
+   * @param suffixLength is the length of the suffix from <code>string</code>
+   *        to replace.
+   * @param newSuffixLowerCase is the new suffix for the given
+   *        <code>string</code> in {@link String#toLowerCase() lower-case}.
+   * @return the given <code>string</code> with the last
+   *         <code>suffixLength</code> characters cut off and replaced by
+   *         <code>newSuffixLowerCase</code> with respect to the original case
+   *         of <code>string</code>.
+   */
+  public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase) {
+
+    return replaceSuffixWithCase(string, suffixLength, newSuffixLowerCase, Locale.ENGLISH);
+  }
+
+  /**
+   * This method replaces the last <code>suffixLength</code> number of
+   * characters from <code>string</code> with the lower-case string
+   * <code>newSuffixLowerCase</code> with respect to the original case of the
+   * given <code>string</code>.<br>
+   * Here are some examples for {@link Locale#ENGLISH}:<br>
+   * <table border="1">
+   * <tr>
+   * <th><code>string</code></th>
+   * <th><code>suffixLength</code></th>
+   * <th><code>newSuffixLowerCase</code></th>
+   * <th><code>{@link #replaceSuffixWithCase(String, int, String)}</code></th>
+   * </tr>
+   * <tr>
+   * <td>foobar</td>
+   * <td>3</td>
+   * <td>foo</td>
+   * <td>foofoo</td>
+   * </tr>
+   * <tr>
+   * <td>FOOBAR</td>
+   * <td>3</td>
+   * <td>foo</td>
+   * <td>FOOFOO</td>
+   * </tr>
+   * <tr>
+   * <td>FooBar</td>
+   * <td>3</td>
+   * <td>foo</td>
+   * <td>FooFoo</td>
+   * </tr>
+   * <tr>
+   * <td>FooBar</td>
+   * <td>2</td>
+   * <td>foo</td>
+   * <td>FooBfoo</td>
+   * </tr>
+   * </table>
+   * 
+   * @param string is the string to replace.
+   * @param suffixLength is the length of the suffix from <code>string</code>
+   *        to replace.
+   * @param newSuffixLowerCase is the new suffix for the given
+   *        <code>string</code> in {@link String#toLowerCase() lower-case}.
+   * @param locale is the locale used for case transformation.
+   * @return the given <code>string</code> with the last
+   *         <code>suffixLength</code> characters cut off and replaced by
+   *         <code>newSuffixLowerCase</code> with respect to the original case
+   *         of <code>string</code>.
+   */
+  public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase,
+      Locale locale) {
+
+    int stringLength = string.length();
+    int newSuffixLength = newSuffixLowerCase.length();
+    int replaceIndex = stringLength - suffixLength;
+    if (replaceIndex < 0) {
+      replaceIndex = 0;
+    }
+    StringBuilder result = new StringBuilder(replaceIndex + newSuffixLength);
+    if (replaceIndex > 0) {
+      result.append(string.substring(0, replaceIndex));
+    }
+    if (suffixLength > 0) {
+      char c = string.charAt(replaceIndex);
+      // all lower case?
+      if (c == Character.toLowerCase(c)) {
+        result.append(newSuffixLowerCase);
+      } else {
+        // first replaced char is upper case!
+        if (suffixLength > 1) {
+          c = string.charAt(replaceIndex + 1);
+          // Capitalized or upper case?
+          if (c != Character.toLowerCase(c)) {
+            // all upper case
+            result.append(newSuffixLowerCase.toUpperCase(locale));
+          } else {
+            // capitalize
+            String capital = newSuffixLowerCase.substring(0, 1).toUpperCase(locale);
+            if (capital.length() == 1) {
+              result.append(newSuffixLowerCase);
+              result.setCharAt(replaceIndex, capital.charAt(0));
+            } else {
+              result.append(capital);
+              result.append(newSuffixLowerCase.substring(1));
+            }
+          }
+        }
+      }
+    }
+    return result.toString();
+  }
+
+  /**
    * This method determines if the given string contains no information.
    * 
    * @see #isEmpty(String, boolean)
@@ -94,7 +227,7 @@ public final class StringUtil {
    * @return <code>true</code> if the given string is <code>null</code> or
    *         has a trimmed length of zero, <code>false</code> otherwise.
    */
-  public static boolean isEmpty(String string) {
+  public boolean isEmpty(String string) {
 
     return isEmpty(string, true);
   }
@@ -108,7 +241,7 @@ public final class StringUtil {
    * @return <code>true</code> if the given string is <code>null</code> or
    *         has a (trimmed) length of zero, <code>false</code> otherwise.
    */
-  public static boolean isEmpty(String string, boolean trim) {
+  public boolean isEmpty(String string, boolean trim) {
 
     if (string == null) {
       return true;
@@ -134,7 +267,7 @@ public final class StringUtil {
    *        value of an attribute.
    * @return the escaped string.
    */
-  public static String escapeXml(String string, boolean escapeQuotations) {
+  public String escapeXml(String string, boolean escapeQuotations) {
 
     try {
       StringWriter writer = new StringWriter(string.length() + 8);
@@ -159,12 +292,11 @@ public final class StringUtil {
    *        value of an attribute.
    * @throws IOException if the <code>writer</code> produced an I/O error.
    */
-  public static void escapeXml(String string, Writer writer, boolean escapeQuotations)
-      throws IOException {
+  public void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException {
 
     char[] chars = string.toCharArray();
     for (char c : chars) {
-      if (c >= 127) {
+      if (c >= 128) {
         writer.append("&#");
         writer.append(Integer.toString(c));
         writer.append(";");
@@ -201,7 +333,7 @@ public final class StringUtil {
    *         <code>digits</code>. If the number is less, leading zeros are
    *         appended.
    */
-  public static String padNumber(long number, int digits) {
+  public String padNumber(long number, int digits) {
 
     return padNumber(number, digits, 10);
   }
@@ -263,7 +395,7 @@ public final class StringUtil {
    *         <code>digits</code>. If the number is less, leading zeros are
    *         appended.
    */
-  public static String padNumber(long number, int digits, int radix) {
+  public String padNumber(long number, int digits, int radix) {
 
     String result = Long.toString(number, radix);
     int leadingZeros = digits - result.length();
@@ -290,7 +422,7 @@ public final class StringUtil {
    * @param string is the string to convert.
    * @return the given <code>string</code> in caml-case syntax.
    */
-  public static String toCamlCase(String string) {
+  public String toCamlCase(String string) {
 
     return toCamlCase(string, SEPARATORS);
   }
@@ -327,7 +459,7 @@ public final class StringUtil {
    *        word-separators.
    * @return the given <code>string</code> in caml-case syntax.
    */
-  public static String toCamlCase(String string, char... separators) {
+  public String toCamlCase(String string, char... separators) {
 
     char[] chars = string.toCharArray();
     StringBuffer buffer = new StringBuffer(chars.length);

@@ -192,7 +192,7 @@ public class XmlElement extends AbstractConfigurationElement {
   protected String getPlainString() {
 
     String text = DomUtil.getNodeText(this.element);
-    if (StringUtil.isEmpty(text)) {
+    if (StringUtil.INSTANCE.isEmpty(text)) {
       return null;
     }
     return text;

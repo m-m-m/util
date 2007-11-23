@@ -44,7 +44,7 @@ public class ValueConverter {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return NumericUtil.toSimplestNumber(d);
+      return NumericUtil.INSTANCE.toSimplestNumber(d);
     } catch (NumberFormatException e) {
       // TODO: valueSource as first arg, booleanValue as additional arg!
       throw new WrongValueTypeException(numberValue, valueSource, Number.class, e);
@@ -209,7 +209,7 @@ public class ValueConverter {
       if (type.isAssignableFrom(String.class)) {
         result = value;
       } else if ((type == boolean.class) || (type == Boolean.class)) {
-        result = StringUtil.parseBoolean(value);
+        result = StringUtil.INSTANCE.parseBoolean(value);
         if (result == null) {
           throw new WrongValueTypeException(value, valueSource, type);
         }
@@ -230,7 +230,7 @@ public class ValueConverter {
       } else if (type == Number.class) {
         result = parseNumber(value, valueSource);
       } else if (type == Date.class) {
-        result = Iso8601Util.parseDate(value);
+        result = Iso8601Util.INSTANCE.parseDate(value);
       } else if (type == Character.class) {
         if (value.length() == 1) {
           result = Character.valueOf(value.charAt(0));

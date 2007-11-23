@@ -112,13 +112,13 @@ public class FileAttributes implements Cloneable {
       return false;
     }
     FileAttributes otherAttributes = (FileAttributes) obj;
-    if (!BasicUtil.isEqual(this.user, otherAttributes.user)) {
+    if (!BasicUtil.INSTANCE.isEqual(this.user, otherAttributes.user)) {
       return false;
     }
-    if (!BasicUtil.isEqual(this.group, otherAttributes.group)) {
+    if (!BasicUtil.INSTANCE.isEqual(this.group, otherAttributes.group)) {
       return false;
     }
-    if (!BasicUtil.isEqual(this.permissions, otherAttributes.permissions)) {
+    if (!BasicUtil.INSTANCE.isEqual(this.permissions, otherAttributes.permissions)) {
       return false;
     }
     return true;

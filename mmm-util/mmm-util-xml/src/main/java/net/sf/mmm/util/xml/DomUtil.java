@@ -474,15 +474,15 @@ public final class DomUtil {
         return false;
       }
       if (type == Node.ATTRIBUTE_NODE) {
-        if (!BasicUtil.isEqual(node1.getLocalName(), node2.getLocalName())) {
+        if (!BasicUtil.INSTANCE.isEqual(node1.getLocalName(), node2.getLocalName())) {
           return false;
         }
-        if (!BasicUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+        if (!BasicUtil.INSTANCE.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
           return false;
         }
         Attr attr1 = (Attr) node1;
         Attr attr2 = (Attr) node2;
-        if (!BasicUtil.isEqual(attr1.getValue(), attr2.getValue())) {
+        if (!BasicUtil.INSTANCE.isEqual(attr1.getValue(), attr2.getValue())) {
           return false;
         }
         return true;
@@ -494,14 +494,14 @@ public final class DomUtil {
         Document doc2 = (Document) node2;
         return isEqual(doc1.getDocumentElement(), doc2.getDocumentElement());
       } else if (type == Node.TEXT_NODE) {
-        return BasicUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
+        return BasicUtil.INSTANCE.isEqual(node1.getNodeValue(), node2.getNodeValue());
       } else if (type == Node.CDATA_SECTION_NODE) {
-        return BasicUtil.isEqual(node1.getNodeValue(), node2.getNodeValue());
+        return BasicUtil.INSTANCE.isEqual(node1.getNodeValue(), node2.getNodeValue());
       } else if (type == Node.ELEMENT_NODE) {
-        if (!BasicUtil.isEqual(getLocalNodeName(node1), getLocalNodeName(node2))) {
+        if (!BasicUtil.INSTANCE.isEqual(getLocalNodeName(node1), getLocalNodeName(node2))) {
           return false;
         }
-        if (!BasicUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+        if (!BasicUtil.INSTANCE.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
           return false;
         }
         // compare attributes

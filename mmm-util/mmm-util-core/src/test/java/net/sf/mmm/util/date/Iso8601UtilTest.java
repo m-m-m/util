@@ -13,7 +13,6 @@ import java.util.TimeZone;
 
 import org.junit.Test;
 
-
 /**
  * This is the test-case for {@link DateUtil}.
  * 
@@ -29,8 +28,8 @@ public class Iso8601UtilTest {
 
   public void checkCombined(String date) {
 
-    Calendar calendar = Iso8601Util.parseCalendar(date);
-    String newDate = Iso8601Util.formatDateTime(calendar);
+    Calendar calendar = Iso8601Util.INSTANCE.parseCalendar(date);
+    String newDate = Iso8601Util.INSTANCE.formatDateTime(calendar);
     assertEquals(date, newDate);
   }
 
@@ -41,7 +40,7 @@ public class Iso8601UtilTest {
     checkCombined("2000-01-01T00:00:00+00:00");
     checkCombined("2000-01-01T00:00:00-02:00");
     checkCombined("2000-01-01T00:00:00-00:30");
-    Calendar calendar = Iso8601Util.parseCalendar("2007-01-31T11:22:33Z");
+    Calendar calendar = Iso8601Util.INSTANCE.parseCalendar("2007-01-31T11:22:33Z");
     assertEquals(2007, calendar.get(Calendar.YEAR));
     assertEquals(1, calendar.get(Calendar.MONTH) + 1);
     assertEquals(31, calendar.get(Calendar.DAY_OF_MONTH));
@@ -51,7 +50,7 @@ public class Iso8601UtilTest {
     assertEquals(TimeZone.getTimeZone("UTC"), calendar.getTimeZone());
     Calendar newCalendar = Calendar.getInstance(Locale.GERMANY);
     newCalendar.setTime(calendar.getTime());
-    String newString = Iso8601Util.formatDateTime(newCalendar);
+    String newString = Iso8601Util.INSTANCE.formatDateTime(newCalendar);
     assertEquals("2007-01-31T12:22:33+01:00", newString);
   }
 

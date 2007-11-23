@@ -133,7 +133,7 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
    * This method detects if a recursive inclusion takes place.<br>
    * 
    * TODO: Potentially the same resource could cause an inclusion cycle without
-   *        causing an infinity loop by using different XPointer expressions.
+   * causing an infinity loop by using different XPointer expressions.
    * 
    * @param dataResource is the current data-resource to include.
    * @throws XMLStreamException if the given <code>dataResource</code> has
@@ -235,7 +235,7 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
           }
           InputStream textInputStream = includeResource.openStream();
           Reader reader = new InputStreamReader(textInputStream, charset);
-          this.includeText = StreamUtil.read(reader);
+          this.includeText = StreamUtil.INSTANCE.read(reader);
           return XMLStreamConstants.CHARACTERS;
         } else {
           throw new XMLStreamException("Unsupported XInclude parse type:" + parse);

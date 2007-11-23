@@ -89,7 +89,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   public Date fromString(String valueAsString) throws ValueParseException {
 
     try {
-      return Iso8601Util.parseDate(valueAsString);
+      return Iso8601Util.INSTANCE.parseDate(valueAsString);
     } catch (Exception e) {
       throw new ValueParseStringException(valueAsString, VALUE_TYPE, VALUE_NAME, e);
     }
@@ -132,7 +132,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   @Override
   protected String toStringNotNull(Date value) {
 
-    return Iso8601Util.formatDateTime(value);
+    return Iso8601Util.INSTANCE.formatDateTime(value);
   }
 
   /**
@@ -151,15 +151,15 @@ public class DateValueManager extends AbstractValueManager<Date> {
     xmlWriter.writeAttribute(XML_ATR_DATE_DAY, Integer.toString(day));
     int hour = calendar.get(Calendar.HOUR_OF_DAY);
     if (hour != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtil.padNumber(hour, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtil.INSTANCE.padNumber(hour, 2));
     }
     int min = calendar.get(Calendar.MINUTE);
     if (min != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtil.padNumber(min, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtil.INSTANCE.padNumber(min, 2));
     }
     int sec = calendar.get(Calendar.SECOND);
     if (sec != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtil.padNumber(sec, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtil.INSTANCE.padNumber(sec, 2));
     }
   }
 

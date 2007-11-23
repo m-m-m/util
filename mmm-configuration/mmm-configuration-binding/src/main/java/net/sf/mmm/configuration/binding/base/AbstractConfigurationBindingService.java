@@ -182,7 +182,7 @@ public abstract class AbstractConfigurationBindingService implements Configurati
       } else {
         propertyName = name;
       }
-      propertyName = StringUtil.toCamlCase(propertyName);
+      propertyName = StringUtil.INSTANCE.toCamlCase(propertyName);
       PojoPropertyAccessorOneArg accessor = findAccessor(descriptor, propertyName);
       if (accessor == null) {
         throw new PojoPropertyNotFoundException(pojoType, propertyName + "[" + child.getPath()

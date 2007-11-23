@@ -126,16 +126,16 @@ public class DurationImpl implements Duration {
       result.append(Long.toString(this.days));
       result.append("#");
     }
-    result.append(StringUtil.padNumber(this.hours, 2));
+    result.append(StringUtil.INSTANCE.padNumber(this.hours, 2));
     result.append(":");
-    result.append(StringUtil.padNumber(this.minutes, 2));
+    result.append(StringUtil.INSTANCE.padNumber(this.minutes, 2));
     result.append(":");
-    result.append(StringUtil.padNumber(this.seconds, 2));
+    result.append(StringUtil.INSTANCE.padNumber(this.seconds, 2));
     if (this.milliseconds == 0) {
       result.append(".");
-      result.append(StringUtil.padNumber(this.milliseconds, 4));
+      result.append(StringUtil.INSTANCE.padNumber(this.milliseconds, 4));
     }
     return result.toString();
   }
-  
+
 }

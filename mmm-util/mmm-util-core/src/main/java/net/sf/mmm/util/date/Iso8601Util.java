@@ -69,6 +69,14 @@ import net.sf.mmm.util.scanner.CharacterSequenceScanner;
  */
 public final class Iso8601Util {
 
+  /**
+   * This is the singleton instance of this {@link Iso8601Util}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
+   */
+  public static final Iso8601Util INSTANCE = new Iso8601Util();
+
   /** The ID for UTC (Coordinated Universal Time). */
   private static final String UTC_ID = "UTC";
 
@@ -76,10 +84,11 @@ public final class Iso8601Util {
   private static final TimeZone TZ_UTC = TimeZone.getTimeZone(UTC_ID);
 
   /**
-   * The forbidden constructor.
+   * The constructor.
    */
-  private Iso8601Util() {
+  protected Iso8601Util() {
 
+    super();
   }
 
   /**
@@ -89,7 +98,7 @@ public final class Iso8601Util {
    * @param date is the date to format.
    * @return the given <code>date</code> as date string.
    */
-  public static String formatDate(Date date) {
+  public String formatDate(Date date) {
 
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
@@ -103,7 +112,7 @@ public final class Iso8601Util {
    * @param calendar is the date to format.
    * @return the given <code>calendar</code> as date string.
    */
-  public static String formatDate(Calendar calendar) {
+  public String formatDate(Calendar calendar) {
 
     return formatDate(calendar, true);
   }
@@ -118,7 +127,7 @@ public final class Iso8601Util {
    *        used, if <code>true</code> the extended format ("yyyy-MM-dd") is
    *        used.
    */
-  public static String formatDate(Calendar calendar, boolean extended) {
+  public String formatDate(Calendar calendar, boolean extended) {
 
     // we could save 2*2 bytes here according to extended flag ;)
     // "yyyy-MM-dd".length() == 10
@@ -137,7 +146,7 @@ public final class Iso8601Util {
    *        is used, if <code>true</code> the extended date format
    *        ("yyyy-MM-dd") is used.
    */
-  private static void formatDate(Calendar calendar, StringBuffer buffer, boolean extended) {
+  private void formatDate(Calendar calendar, StringBuffer buffer, boolean extended) {
 
     // year
     String year = String.valueOf(calendar.get(Calendar.YEAR));
@@ -170,7 +179,7 @@ public final class Iso8601Util {
    * @param date is the date to format.
    * @return the given <code>calendar</code> as date string.
    */
-  public static String formatDateTime(Date date) {
+  public String formatDateTime(Date date) {
 
     Calendar calendar = Calendar.getInstance(TZ_UTC);
     calendar.setTime(date);
@@ -191,7 +200,7 @@ public final class Iso8601Util {
    * @param calendar is the date to format.
    * @return the given <code>calendar</code> as date string.
    */
-  public static String formatDateTime(Calendar calendar) {
+  public String formatDateTime(Calendar calendar) {
 
     return formatDateTime(calendar, true, true, true);
   }
@@ -213,8 +222,8 @@ public final class Iso8601Util {
    *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
    *        timezone format ("&#177;HH:mm[:ss]") is used.
    */
-  public static String formatDateTime(Calendar calendar, boolean extendedDate,
-      boolean extendedTime, boolean extendedTimezone) {
+  public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
+      boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
     StringBuffer buffer = new StringBuffer(25);
@@ -235,7 +244,7 @@ public final class Iso8601Util {
    *        used, if <code>true</code> the extended time format ("HH:mm:ss")
    *        is used.
    */
-  public static void formatTime(Calendar calendar, StringBuffer buffer, boolean extended) {
+  public void formatTime(Calendar calendar, StringBuffer buffer, boolean extended) {
 
     // append hours
     String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
@@ -273,7 +282,7 @@ public final class Iso8601Util {
    *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
    *        timezone format ("&#177;HH:mm[:ss]") is used.
    */
-  public static void formatTimeZone(TimeZone timezone, StringBuffer buffer, boolean extended) {
+  public void formatTimeZone(TimeZone timezone, StringBuffer buffer, boolean extended) {
 
     int offsetSeconds = timezone.getRawOffset() / 1000;
     if (offsetSeconds < 0) {
@@ -316,7 +325,7 @@ public final class Iso8601Util {
    * @param date is the date to parse.
    * @return the parsed date.
    */
-  public static Date parseDate(String date) {
+  public Date parseDate(String date) {
 
     return parseCalendar(date).getTime();
   }
@@ -328,7 +337,7 @@ public final class Iso8601Util {
    * @param date is the date to parse.
    * @return the parsed date.
    */
-  public static Calendar parseCalendar(String date) {
+  public Calendar parseCalendar(String date) {
 
     Calendar calendar = Calendar.getInstance();
     parseCalendar(date, calendar);
@@ -345,8 +354,7 @@ public final class Iso8601Util {
    * @throws IllegalDateFormatException if the <code>scanner</code> only
    *         contained a single digit.
    */
-  private static int read2Digits(CharacterSequenceScanner scanner)
-      throws IllegalDateFormatException {
+  private int read2Digits(CharacterSequenceScanner scanner) throws IllegalDateFormatException {
 
     int highDigit = scanner.readDigit();
     if (highDigit == -1) {
@@ -366,7 +374,7 @@ public final class Iso8601Util {
    * @param scanner is the parser pointing to the time.
    * @return an int-array containing the hour, minute and second in that order.
    */
-  private static int[] parseTime(CharacterSequenceScanner scanner) {
+  private int[] parseTime(CharacterSequenceScanner scanner) {
 
     int hour = read2Digits(scanner);
     boolean colon = scanner.skipOver(":", false);
@@ -403,8 +411,8 @@ public final class Iso8601Util {
    *        of 1-12).
    * @param day is the day to set that has already been parsed.
    */
-  private static void parseTime(CharacterSequenceScanner scanner, Calendar calendar, int year,
-      int month, int day) {
+  private void parseTime(CharacterSequenceScanner scanner, Calendar calendar, int year, int month,
+      int day) {
 
     char c = scanner.forceNext();
     if (c == 'T') {
@@ -433,7 +441,7 @@ public final class Iso8601Util {
    * @return the parsed timezone or <code>null</code> if parser already at the
    *         end of the string.
    */
-  private static TimeZone parseTimezone(CharacterSequenceScanner scanner) {
+  private TimeZone parseTimezone(CharacterSequenceScanner scanner) {
 
     char c = scanner.forceNext();
     if ((c == '+') || (c == '-')) {
@@ -475,7 +483,7 @@ public final class Iso8601Util {
    * @param date is the date to parse.
    * @param calendar is the calendar where the parsed date will be set.
    */
-  public static void parseCalendar(String date, Calendar calendar) {
+  public void parseCalendar(String date, Calendar calendar) {
 
     CharacterSequenceScanner parser = new CharacterSequenceScanner(date);
     int year = 0;

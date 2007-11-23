@@ -9,12 +9,20 @@ package net.sf.mmm.util;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class BasicUtil {
+public class BasicUtil {
 
   /**
-   * Forbidden constructor.
+   * This is the singleton instance of this {@link BasicUtil}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
    */
-  private BasicUtil() {
+  public static final BasicUtil INSTANCE = new BasicUtil();
+
+  /**
+   * The constructor.
+   */
+  protected BasicUtil() {
 
     super();
   }
@@ -30,7 +38,7 @@ public final class BasicUtil {
    *         first is NOT <code>null</code> and <code>o1.equals(o2)</code>,
    *         <code>false</code> otherwise.
    */
-  public static boolean isEqual(Object o1, Object o2) {
+  public boolean isEqual(Object o1, Object o2) {
 
     if (o1 == null) {
       return (o2 == null);
@@ -55,7 +63,7 @@ public final class BasicUtil {
    *         <code>length</code> and {@link #isEqual(Object, Object) equal}
    *         content, <code>false</code> otherwise.
    */
-  public static boolean isEqual(Object[] array1, Object[] array2) {
+  public boolean isEqual(Object[] array1, Object[] array2) {
 
     if (array1 == array2) {
       return true;
@@ -83,7 +91,7 @@ public final class BasicUtil {
    *         first is NOT <code>null</code> and <code>o1.equals(o2)</code>,
    *         <code>false</code> otherwise.
    */
-  public static boolean isDeepEqual(Object o1, Object o2) {
+  public boolean isDeepEqual(Object o1, Object o2) {
 
     if (o1 == o2) {
       return true;

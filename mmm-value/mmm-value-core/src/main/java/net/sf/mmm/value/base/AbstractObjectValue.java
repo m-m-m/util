@@ -162,7 +162,7 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
     try {
       return (Boolean) value;
     } catch (ClassCastException e) {
-      Boolean result = StringUtil.parseBoolean(value.toString());
+      Boolean result = StringUtil.INSTANCE.parseBoolean(value.toString());
       if (result == null) {
         throw new WrongValueTypeException(this, Boolean.class);
       } else {
@@ -185,7 +185,7 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
       return (Date) value;
     } catch (ClassCastException e) {
       try {
-        return Iso8601Util.parseDate(value.toString());
+        return Iso8601Util.INSTANCE.parseDate(value.toString());
       } catch (Exception e1) {
         throw new WrongValueTypeException(this, Date.class);
       }

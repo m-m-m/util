@@ -29,7 +29,15 @@ import java.nio.channels.WritableByteChannel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class StreamUtil {
+public class StreamUtil {
+
+  /**
+   * This is the singleton instance of this {@link StreamUtil}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
+   */
+  public static final StreamUtil INSTANCE = new StreamUtil();
 
   /** the size used for char buffers. */
   private static final int CHAR_BUFFER_SIZE = 2048;
@@ -40,7 +48,7 @@ public final class StreamUtil {
   /**
    * The constructor.
    */
-  private StreamUtil() {
+  protected StreamUtil() {
 
     super();
   }
@@ -58,7 +66,7 @@ public final class StreamUtil {
    * @return the content of the given <code>reader</code>.
    * @throws IOException if an error occurred with an I/O error.
    */
-  public static String read(Reader reader) throws IOException {
+  public String read(Reader reader) throws IOException {
 
     StringWriter writer = new StringWriter();
     transfer(reader, writer, false);
@@ -82,8 +90,7 @@ public final class StreamUtil {
    * @throws IOException if the operation failed. Closing is guaranteed even in
    *         exception state.
    */
-  public static long transfer(Reader reader, Writer writer, boolean keepWriterOpen)
-      throws IOException {
+  public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws IOException {
 
     char[] buffer = new char[CHAR_BUFFER_SIZE];
     try {
@@ -124,8 +131,8 @@ public final class StreamUtil {
    * @throws IOException if the operation failed. Closing is guaranteed even in
    *         exception state.
    */
-  public static long transfer(FileInputStream inStream, OutputStream outStream,
-      boolean keepOutStreamOpen) throws IOException {
+  public long transfer(FileInputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
+      throws IOException {
 
     FileChannel inChannel = inStream.getChannel();
     WritableByteChannel outChannel = Channels.newChannel(outStream);
@@ -163,8 +170,8 @@ public final class StreamUtil {
    * @throws IOException if the operation failed. Closing is guaranteed even in
    *         exception state.
    */
-  public static long transfer(InputStream inStream, FileOutputStream outStream,
-      boolean keepOutStreamOpen, long size) throws IOException {
+  public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen,
+      long size) throws IOException {
 
     ReadableByteChannel inChannel = Channels.newChannel(inStream);
     FileChannel outChannel = outStream.getChannel();
@@ -200,8 +207,8 @@ public final class StreamUtil {
    * @throws IOException if the operation failed. Closing is guaranteed even in
    *         exception state.
    */
-  public static long transfer(InputStream inStream, OutputStream outStream,
-      boolean keepOutStreamOpen) throws IOException {
+  public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
+      throws IOException {
 
     if (inStream instanceof FileInputStream) {
       return transfer((FileInputStream) inStream, outStream, keepOutStreamOpen);

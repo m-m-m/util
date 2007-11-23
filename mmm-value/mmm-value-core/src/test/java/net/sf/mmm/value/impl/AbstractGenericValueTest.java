@@ -223,7 +223,7 @@ public abstract class AbstractGenericValueTest {
     Number number = value.getNumber();
     assertEquals(number.toString(), value.getString());
     assertEquals(number, value.getValue(Number.class));
-    number = NumericUtil.toSimplestNumber(number);
+    number = NumericUtil.INSTANCE.toSimplestNumber(number);
     double doubleValue = number.doubleValue();
     assertEquals(doubleValue, value.getDouble(), 0);
     assertEquals(doubleValue, value.getDouble(null).doubleValue(), 0);

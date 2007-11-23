@@ -4,7 +4,6 @@
 package net.sf.mmm.util.nls;
 
 import net.sf.mmm.util.nls.api.AbstractNlsException;
-import net.sf.mmm.util.nls.api.NlsThrowable;
 
 /**
  * This is an abstract base implementation of a checked exception with real
@@ -13,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsThrowable;
  * Checked exceptions should be used for business errors and should only occur
  * in unexpected situations.
  * 
- * @see NlsThrowable
+ * @see net.sf.mmm.util.nls.api.NlsThrowable
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

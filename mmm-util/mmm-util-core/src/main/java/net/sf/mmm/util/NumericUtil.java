@@ -9,12 +9,20 @@ package net.sf.mmm.util;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class NumericUtil {
+public class NumericUtil {
+
+  /**
+   * This is the singleton instance of this {@link NumericUtil}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
+   */
+  public static final NumericUtil INSTANCE = new NumericUtil();
 
   /**
    * The constructor.
    */
-  private NumericUtil() {
+  protected NumericUtil() {
 
     super();
   }
@@ -33,7 +41,7 @@ public final class NumericUtil {
    * @return a number with the same {@link Number#doubleValue()} as the given
    *         value and the simplest possible type.
    */
-  public static Number toSimplestNumber(Number value) {
+  public Number toSimplestNumber(Number value) {
 
     double d = value.doubleValue();
     long l = value.longValue();

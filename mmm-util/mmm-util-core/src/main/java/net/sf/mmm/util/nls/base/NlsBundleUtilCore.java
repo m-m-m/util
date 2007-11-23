@@ -37,7 +37,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.component.NotInitializedException */
   public static final String ERR_NOT_INITIALIZED = "The object is NOT initialized!";
 
-  /** @see net.sf.mmm.util.datexxx.IllegalDateFormatException */
+  /** @see net.sf.mmm.util.date.IllegalDateFormatException */
   public static final String ERR_ILLEGAL_DATA_FORMAT = "Illegal date-format \"{0}\"!";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */

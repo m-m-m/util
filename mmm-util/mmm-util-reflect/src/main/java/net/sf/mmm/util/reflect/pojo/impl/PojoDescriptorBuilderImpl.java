@@ -16,6 +16,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
@@ -51,6 +52,16 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   public PojoDescriptorBuilderImpl() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param mapFactory is the factory used to create the descriptor cache.
+   */
+  public PojoDescriptorBuilderImpl(MapFactory mapFactory) {
+
+    super(mapFactory);
   }
 
   /**

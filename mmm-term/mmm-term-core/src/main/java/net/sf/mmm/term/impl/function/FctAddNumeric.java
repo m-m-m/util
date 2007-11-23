@@ -195,7 +195,7 @@ public class FctAddNumeric extends FctAdd {
   public static Number add(Number argument1, Number argument2) {
 
     Double sum = Double.valueOf(argument1.doubleValue() + argument2.doubleValue());
-    return NumericUtil.toSimplestNumber(sum);
+    return NumericUtil.INSTANCE.toSimplestNumber(sum);
   }
 
 }

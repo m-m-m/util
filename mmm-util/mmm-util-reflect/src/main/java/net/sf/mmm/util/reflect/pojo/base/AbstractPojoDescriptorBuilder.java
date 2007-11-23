@@ -3,15 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.base;
 
-import java.util.Hashtable;
 import java.util.Map;
 
+import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.component.AbstractInitializableComponent;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorImpl;
 
 /**
- * This is the implementation of the {@link PojoDescriptorBuilder} interface.
+ * This is the abstract base-implementation of the {@link PojoDescriptorBuilder}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,8 +27,19 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractInitializabl
    */
   public AbstractPojoDescriptorBuilder() {
 
+    this(MapFactory.INSTANCE_HASH_MAP);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param mapFactory the factory used to create the
+   *        {@link #getDescriptor(Class) descriptor-cache}.
+   */
+  public AbstractPojoDescriptorBuilder(MapFactory mapFactory) {
+
     super();
-    this.pojoMap = new Hashtable<Class<?>, PojoDescriptorImpl<?>>();
+    this.pojoMap = mapFactory.create();
   }
 
   /**

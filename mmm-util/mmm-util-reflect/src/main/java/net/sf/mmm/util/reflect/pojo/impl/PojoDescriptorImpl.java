@@ -46,6 +46,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   public PojoDescriptorImpl(Class<P> pojoClass) {
 
     this.pojoType = pojoClass;
+    // we do NOT want MapFactory here: no need for cache or to be thread-safe
     this.propertyMap = new HashMap<String, PojoPropertyDescriptorImpl>();
     this.properties = Collections.unmodifiableCollection(this.propertyMap.values());
   }

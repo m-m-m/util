@@ -22,7 +22,7 @@ import net.sf.mmm.value.api.ValueNotEditableException;
 public abstract class AbstractGenericValue implements MutableGenericValue {
 
   /** @see #isSupported(Class) */
-  private static final Class[] SUPPORTED_CLASSES = new Class[] { Object.class, String.class,
+  private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { Object.class, String.class,
       Boolean.class, boolean.class, Class.class, Number.class, Integer.class, int.class,
       Long.class, long.class, Double.class, double.class, Float.class, float.class, Short.class,
       short.class, Byte.class, byte.class, Date.class };
@@ -50,7 +50,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
    */
   public static boolean isSupported(Class<?> valueType) {
 
-    for (Class supportedType : SUPPORTED_CLASSES) {
+    for (Class<?> supportedType : SUPPORTED_CLASSES) {
       if (supportedType.equals(valueType)) {
         return true;
       }
@@ -400,7 +400,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return NumericUtil.toSimplestNumber(d);
+      return NumericUtil.INSTANCE.toSimplestNumber(d);
     } catch (NumberFormatException e) {
       throw new WrongValueTypeException(this, Number.class, e);
     }
