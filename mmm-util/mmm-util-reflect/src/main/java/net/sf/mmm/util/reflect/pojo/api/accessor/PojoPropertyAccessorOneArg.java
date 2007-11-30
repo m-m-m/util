@@ -21,20 +21,20 @@ public interface PojoPropertyAccessorOneArg extends PojoPropertyAccessor {
   public PojoPropertyAccessorOneArgMode getMode();
 
   /**
-   * This method sets the according property of <code>pojoInstance</code> to
-   * the given <code>value</code>.<br>
+   * This method invokes the according property-method of
+   * <code>pojoInstance</code> with the given arguments.<br>
    * 
-   * @param pojoInstance is the instance of the POJO where to set the property.
-   *        Has to be an instance of the
+   * @param pojoInstance is the instance of the POJO where to access the
+   *        property. Has to be an instance of the
    *        {@link PojoDescriptor#getPojoType() type} from where this accessor
    *        was created for.
    * @param argument is the value of the property to set.
    * @return the result of the invocation. Will be <code>null</code> if void
    *         (e.g. regular setter method).
    * @throws IllegalAccessException if you do NOT have permissions the access
-   *         the underlying getter method.
-   * @throws InvocationTargetException if the POJO itself (the getter) throws an
-   *         exception.
+   *         the underlying method.
+   * @throws InvocationTargetException if the POJO itself (the invoked method)
+   *         throws an exception.
    */
   Object invoke(Object pojoInstance, Object argument) throws IllegalAccessException,
       InvocationTargetException;

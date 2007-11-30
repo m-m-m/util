@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.pojo.impl;
+package net.sf.mmm.util.reflect.pojo.impl.accessor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgBuilder;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.reflect.pojo.base.AbstractPojoPropertyAccessorBuilder;
+import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder}
@@ -46,7 +46,7 @@ public class PojoPropertyAccessorSetBuilder extends
         Type[] argumentTypes = method.getGenericParameterTypes();
         assert (argumentTypes.length == 1);
         // found compliant setter
-        String propertyName = getPropertyName(methodName, METHOD_PREFIX_SET.length());
+        String propertyName = getPropertyName(methodName, METHOD_PREFIX_SET.length(), 0);
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, argumentTypes[0],
               argumentClasses[0], method, PojoPropertyAccessorOneArgMode.SET);

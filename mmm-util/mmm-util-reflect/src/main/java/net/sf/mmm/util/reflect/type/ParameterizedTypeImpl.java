@@ -19,7 +19,7 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
 public class ParameterizedTypeImpl implements ParameterizedType {
 
   /** @see #getRawType() */
-  private final Class rawType;
+  private final Class<?> rawType;
 
   /** @see #getOwnerType() */
   private final Type ownerType;
@@ -35,7 +35,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
    * @param ownerType is the {@link #getOwnerType() owner type} (may be
    *        <code>null</code>).
    */
-  public ParameterizedTypeImpl(Class rawType, Type[] typeArguments, Type ownerType) {
+  public ParameterizedTypeImpl(Class<?> rawType, Type[] typeArguments, Type ownerType) {
 
     super();
     this.rawType = rawType;
@@ -105,7 +105,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
 
     StringBuilder result = new StringBuilder();
     if (this.ownerType != null) {
-      result.append(ReflectionUtil.toString(this.ownerType));
+      result.append(ReflectionUtil.INSTANCE.toString(this.ownerType));
       result.append('.');
       // TODO: this is NOT as easy!
       result.append(this.rawType.getName());
@@ -120,7 +120,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
           result.append(", ");
         }
         if (typeArgument instanceof Class) {
-          result.append(((Class) typeArgument).getName());
+          result.append(((Class<?>) typeArgument).getName());
         } else {
           result.append(typeArgument.toString());
         }

@@ -3,14 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text;
 
+import net.sf.mmm.util.transformer.Transformer;
+
 /**
- * This is the interface for a {@link #toSingular(String) translation} of a term
+ * This is the interface for a {@link #transform(String) translation} of a term
  * given in plural form to the according singular form. The implementation will
  * typically work for a specific {@link java.util.Locale} (language).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface Singularizer {
+public interface Singularizer extends Transformer<String> {
 
   /**
    * This method gets the singular form of the given term (some word)
@@ -60,6 +62,6 @@ public interface Singularizer {
    * @param plural is a term (potentially) in plural form.
    * @return the according singular form
    */
-  String toSingular(String plural);
+  String transform(String plural);
 
 }

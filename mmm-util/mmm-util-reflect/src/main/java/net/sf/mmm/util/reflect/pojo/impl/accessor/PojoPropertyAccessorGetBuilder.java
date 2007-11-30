@@ -1,15 +1,16 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.pojo.impl;
+package net.sf.mmm.util.reflect.pojo.impl.accessor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgBuilder;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.reflect.pojo.base.AbstractPojoPropertyAccessorBuilder;
+import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder}
@@ -30,6 +31,10 @@ public class PojoPropertyAccessorGetBuilder extends
   /** alternative method name prefix for boolean getter. */
   private static final String METHOD_PREFIX_HAS = "has";
 
+  /** alternative method name prefixes for boolean getters. */
+  private static final String[] METHOD_PREFIXES_BOOLEAN = new String[] { METHOD_PREFIX_IS,
+      METHOD_PREFIX_HAS };
+
   /**
    * The constructor.
    */
@@ -49,15 +54,12 @@ public class PojoPropertyAccessorGetBuilder extends
       if (propertyClass != Void.class) {
         String methodName = method.getName();
         // is property read method (getter)?
-        if (methodName.startsWith(METHOD_PREFIX_GET)) {
-          propertyName = getPropertyName(methodName, METHOD_PREFIX_GET.length());
-        } else if ((propertyClass == boolean.class) || (propertyClass == Boolean.class)) {
+        propertyName = getPropertyName(methodName, METHOD_PREFIX_GET, "");
+        if ((propertyName == null)
+            && ((propertyClass == boolean.class) || (propertyClass == Boolean.class))) {
           // boolean getters may be is* or has* ...
-          if (methodName.startsWith(METHOD_PREFIX_IS)) {
-            propertyName = getPropertyName(methodName, METHOD_PREFIX_IS.length());
-          } else if (methodName.startsWith(METHOD_PREFIX_HAS)) {
-            propertyName = getPropertyName(methodName, METHOD_PREFIX_HAS.length());
-          }
+          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN,
+              StringUtil.EMPTY_STRING_ARRAY);
         }
         if (propertyName != null) {
           return new PojoPropertyAccessorNonArgMethod(propertyName, method.getGenericReturnType(),

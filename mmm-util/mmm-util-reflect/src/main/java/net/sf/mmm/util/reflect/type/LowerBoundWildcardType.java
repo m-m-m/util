@@ -85,7 +85,7 @@ public class LowerBoundWildcardType implements WildcardType {
   @Override
   public String toString() {
 
-    String lowerBoundString = ReflectionUtil.toString(this.lowerBound);
+    String lowerBoundString = ReflectionUtil.INSTANCE.toString(this.lowerBound);
     // "? extends ".length == 10
     StringBuilder result = new StringBuilder(lowerBoundString.length() + 10);
     result.append("? extends ");

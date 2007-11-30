@@ -13,7 +13,7 @@ import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingException;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingInjector;
 import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
-import net.sf.mmm.util.collection.CollectionUtil;
+import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
@@ -66,7 +66,7 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
         Type componentType = accessor.getPropertyComponentType();
         if (componentType != null) {
           // handle list-like property...
-          Class<?> componentClass = ReflectionUtil.toClass(componentType);
+          Class<?> componentClass = ReflectionUtil.INSTANCE.toClass(componentType);
           Collection<? extends Configuration> children = configuration.getDescendants("*");
           int childCount = children.size();
           Object[] elements;
@@ -90,7 +90,8 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
           if (type.isArray()) {
             accessor.invoke(pojo, elements);
           } else {
-            Collection collection = CollectionUtil.create((Class<? extends Collection>) type);
+            Collection collection = CollectionUtil.INSTANCE
+                .create((Class<? extends Collection>) type);
             Collections.addAll(collection, elements);
             accessor.invoke(pojo, collection);
           }

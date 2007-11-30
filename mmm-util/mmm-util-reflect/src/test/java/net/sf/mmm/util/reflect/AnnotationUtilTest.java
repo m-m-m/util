@@ -37,28 +37,30 @@ public class AnnotationUtilTest {
   public void testMethodAnnotation() throws Exception {
 
     // annotation with retention "runtime" ?
-    assertTrue(AnnotationUtil.isRuntimeAnnotation(MyAnnotation.class));
-    assertFalse(AnnotationUtil.isRuntimeAnnotation(SuppressWarnings.class));
-    assertTrue(AnnotationUtil.isRuntimeAnnotation(Inherited.class));
+    assertTrue(AnnotationUtil.INSTANCE.isRuntimeAnnotation(MyAnnotation.class));
+    assertFalse(AnnotationUtil.INSTANCE.isRuntimeAnnotation(SuppressWarnings.class));
+    assertTrue(AnnotationUtil.INSTANCE.isRuntimeAnnotation(Inherited.class));
 
     // annotation target type
-    assertTrue(AnnotationUtil.isAnnotationForType(MyAnnotation.class, ElementType.TYPE));
-    assertTrue(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.ANNOTATION_TYPE));
-    assertFalse(AnnotationUtil.isAnnotationForType(Inherited.class, ElementType.TYPE));
+    assertTrue(AnnotationUtil.INSTANCE.isAnnotationForType(MyAnnotation.class, ElementType.TYPE));
+    assertTrue(AnnotationUtil.INSTANCE.isAnnotationForType(Inherited.class,
+        ElementType.ANNOTATION_TYPE));
+    assertFalse(AnnotationUtil.INSTANCE.isAnnotationForType(Inherited.class, ElementType.TYPE));
 
     // annotation inheritance
-    MyAnnotation classAnnotation = AnnotationUtil.getClassAnnotation(Bar.class, MyAnnotation.class);
+    MyAnnotation classAnnotation = AnnotationUtil.INSTANCE.getClassAnnotation(Bar.class,
+        MyAnnotation.class);
     assertNotNull(classAnnotation);
     assertEquals(FOO_CLASS, classAnnotation.value());
     Method barMethod = Bar.class.getMethod("foo", ReflectionUtil.NO_PARAMETERS);
-    MyAnnotation methodAnnotation = AnnotationUtil.getMethodAnnotation(barMethod,
+    MyAnnotation methodAnnotation = AnnotationUtil.INSTANCE.getMethodAnnotation(barMethod,
         MyAnnotation.class);
     assertNotNull(methodAnnotation);
     assertEquals(FOO_IF, methodAnnotation.value());
 
     assertNotNull(FooIF.class.getAnnotation(SomeAnnotation.class));
 
-    SomeAnnotation typeAnnotation = AnnotationUtil.getTypeAnnotation(Bar.class,
+    SomeAnnotation typeAnnotation = AnnotationUtil.INSTANCE.getTypeAnnotation(Bar.class,
         SomeAnnotation.class);
     assertNotNull(typeAnnotation);
     assertEquals(FOO_IF, typeAnnotation.value());

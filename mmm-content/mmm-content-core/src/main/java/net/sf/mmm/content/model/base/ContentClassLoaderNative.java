@@ -78,7 +78,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
    * A filter that only accepts types that are annotated as
    * {@link ClassAnnotation}.
    */
-  private final Filter<Class> entityFilter;
+  private final Filter<Class<?>> entityFilter;
 
   /** The XML input factory used to create the parser. */
   private final XMLInputFactory factory;
@@ -183,6 +183,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
       throws XMLStreamException {
 
     try {
+      ReflectionUtil reflectionUtil = getReflectionUtil();
       String tagName = xmlReader.getLocalName();
       if (XML_TAG_ENTITY.equals(tagName)) {
         String className = xmlReader.getAttributeValue(null, XML_ATR_ENTITY_CLASS);
@@ -190,8 +191,8 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         loadClassRecursive(entityClass, context);
       } else if (XML_TAG_ENTITIES.equals(tagName)) {
         String packageName = xmlReader.getAttributeValue(null, XML_ATR_ENTITIES_PACKAGE);
-        Set<String> classNames = ReflectionUtil.findClassNames(packageName, true);
-        Set<Class<?>> entityClasses = ReflectionUtil.loadClasses(classNames, this.entityFilter);
+        Set<String> classNames = reflectionUtil.findClassNames(packageName, true);
+        Set<Class<?>> entityClasses = reflectionUtil.loadClasses(classNames, this.entityFilter);
         for (Class<?> entityClass : entityClasses) {
           loadClassRecursive(entityClass, context);
         }
@@ -373,7 +374,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           Type fieldType = accessor.getPropertyType();
           Class fieldClass = accessor.getPropertyClass();
           if (fieldClass.isPrimitive()) {
-            fieldType = ReflectionUtil.getNonPrimitiveType(fieldClass);
+            fieldType = getReflectionUtil().getNonPrimitiveType(fieldClass);
           }
           AbstractContentField contentField = getContentReflectionFactory().createNewField(fieldId,
               name, contentClass, fieldType, fieldModifiers, isDeleted);

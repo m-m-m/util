@@ -20,7 +20,6 @@ import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.reflect.ClassResolver;
-import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.util.xml.StaxUtil;
 
@@ -73,7 +72,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
   protected Type parseFieldType(String typeSpecification, ClassResolver classResolver) {
 
     try {
-      return ReflectionUtil.toType(typeSpecification, classResolver);
+      return getReflectionUtil().toType(typeSpecification, classResolver);
     } catch (Exception e) {
       // TODO: NLS
       throw new ContentModelException(e, "Illegal Type '" + typeSpecification + "'!", e);

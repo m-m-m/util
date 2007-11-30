@@ -286,7 +286,8 @@ public class GenericFunction extends BasicFunction {
       throws FunctionException {
 
     try {
-      return ReflectionUtil.getStaticField(partialFunction, fieldName, fieldType, true, true, true);
+      return ReflectionUtil.INSTANCE.getStaticField(partialFunction, fieldName, fieldType, true,
+          true, true);
     } catch (Throwable e) {
       throw new FunctionException(e, NlsBundleTermCore.ERR_FCT_FIELD, partialFunction, this,
           fieldName, fieldType);

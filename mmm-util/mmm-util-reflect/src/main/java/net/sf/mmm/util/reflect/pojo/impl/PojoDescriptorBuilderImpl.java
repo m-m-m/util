@@ -27,6 +27,9 @@ import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.base.AbstractPojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.base.PojoFieldIntrospector;
 import net.sf.mmm.util.reflect.pojo.base.PojoMethodIntrospector;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorAddBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorGetBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorSetBuilder;
 
 /**
  * This is the generic implementation of the

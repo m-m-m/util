@@ -85,7 +85,7 @@ public class UpperBoundWildcardType implements WildcardType {
   @Override
   public String toString() {
 
-    String upperBoundString = ReflectionUtil.toString(this.upperBound);
+    String upperBoundString = ReflectionUtil.INSTANCE.toString(this.upperBound);
     // "? super ".length == 8
     StringBuilder result = new StringBuilder(upperBoundString.length() + 8);
     result.append("? super ");

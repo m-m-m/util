@@ -5,7 +5,6 @@ package net.sf.mmm.util.nls.base;
 
 import net.sf.mmm.util.nls.NlsRuntimeException;
 
-
 /**
  * A {@link NlsIllegalArgumentException} is analog to an
  * {@link IllegalArgumentException} but with native language support.
@@ -16,6 +15,31 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -1537683835966488723L;
+
+  /**
+   * The constructor.
+   * 
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * 
+   * @param argument is the argument that is illegal. May be <code>null</code>.
+   */
+  public NlsIllegalArgumentException(Object argument) {
+
+    super(NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT, argument);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
+   * 
+   * @param argument is the argument that is illegal. May be <code>null</code>.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   */
+  public NlsIllegalArgumentException(Object argument, Throwable nested) {
+
+    super(nested, NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT, argument);
+  }
 
   /**
    * The constructor.

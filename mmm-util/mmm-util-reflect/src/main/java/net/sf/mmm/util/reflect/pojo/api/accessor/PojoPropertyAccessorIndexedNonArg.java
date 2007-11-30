@@ -9,16 +9,17 @@ import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
 
 /**
  * This is the interface for a {@link PojoPropertyAccessor property-accessor}
- * that allows to {@link #invoke(Object) read} a property.
+ * that allows to {@link #invoke(Object, int) perform something} (e.g. get or
+ * remove) for a given <code>index</code> of an indexed property.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoPropertyAccessorNonArg extends PojoPropertyAccessor {
+public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor {
 
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArgMode getMode();
+  public PojoPropertyAccessorIndexedNonArgMode getMode();
 
   /**
    * This method invokes the according property-method of
@@ -28,14 +29,16 @@ public interface PojoPropertyAccessorNonArg extends PojoPropertyAccessor {
    *        property. Has to be an instance of the
    *        {@link PojoDescriptor#getPojoType() type} from where this accessor
    *        was created for.
-   * @return the result of the invocation. It will be <code>null</code> if
-   *         void (e.g. initialize method). For a regular getter this will be
-   *         the value of the property.
+   * @param index is the position in the indexed property (e.g. where to get or
+   *        remove an item).
+   * @return the result of the invocation. Will be <code>null</code> if void
+   *         (e.g. remove method).
    * @throws IllegalAccessException if you do NOT have permissions the access
-   *         the underlying method.
+   *         the underlying getter method.
    * @throws InvocationTargetException if the POJO itself (the invoked method)
    *         throws an exception.
    */
-  Object invoke(Object pojoInstance) throws IllegalAccessException, InvocationTargetException;
+  Object invoke(Object pojoInstance, int index) throws IllegalAccessException,
+      InvocationTargetException;
 
 }

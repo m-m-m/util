@@ -8,11 +8,15 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
 /**
- * TODO: this class ...
+ * This is an implementation of the {@link TypeVariable} interface.
+ * 
+ * @param <DECLARATION> the type of generic declaration that declared the
+ *        underlying type variable.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class TypeVariableImpl implements TypeVariable {
+public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
+    TypeVariable<DECLARATION> {
 
   /** @see #getName() */
   private final String name;
@@ -21,7 +25,7 @@ public class TypeVariableImpl implements TypeVariable {
   private final Type[] bounds;
 
   /** @see #getGenericDeclaration() */
-  private final GenericDeclaration genericDeclaration;
+  private final DECLARATION genericDeclaration;
 
   /**
    * The constructor.
@@ -32,7 +36,7 @@ public class TypeVariableImpl implements TypeVariable {
    *        Method).
    * @param bounds TODO
    */
-  public TypeVariableImpl(String name, GenericDeclaration declaration, Type[] bounds) {
+  public TypeVariableImpl(String name, DECLARATION declaration, Type[] bounds) {
 
     super();
     this.name = name;
@@ -53,7 +57,7 @@ public class TypeVariableImpl implements TypeVariable {
   /**
    * {@inheritDoc}
    */
-  public GenericDeclaration getGenericDeclaration() {
+  public DECLARATION getGenericDeclaration() {
 
     return this.genericDeclaration;
   }
@@ -76,7 +80,7 @@ public class TypeVariableImpl implements TypeVariable {
       return true;
     }
     if (other instanceof TypeVariable) {
-      TypeVariable otherVariable = (TypeVariable) other;
+      TypeVariable<?> otherVariable = (TypeVariable<?>) other;
       return (this.name.equals(otherVariable.getName()) && this.genericDeclaration
           .equals(otherVariable.getGenericDeclaration()));
     }

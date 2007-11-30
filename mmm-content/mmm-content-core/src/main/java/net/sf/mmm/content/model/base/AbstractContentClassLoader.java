@@ -14,6 +14,7 @@ import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.reflect.ClassResolver;
+import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This is the abstract base implementation of the {@link ContentClassLoader}
@@ -62,6 +63,16 @@ public abstract class AbstractContentClassLoader extends AbstractContentObjectMo
   protected SmartIdManager getIdManager() {
 
     return this.contentModelService.getIdManager();
+  }
+
+  /**
+   * This method gets the {@link ReflectionUtil} instance.
+   * 
+   * @return the {@link ReflectionUtil}.
+   */
+  protected ReflectionUtil getReflectionUtil() {
+
+    return ReflectionUtil.INSTANCE;
   }
 
   /**

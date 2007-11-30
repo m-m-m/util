@@ -30,6 +30,9 @@ public class StringUtil {
   /** a string representing the boolean value <code>false</code> */
   public static final String FALSE = String.valueOf(false);
 
+  /** an empty {@link String} array */
+  public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
   /** @see #toCamlCase(String) */
   private static final char[] SEPARATORS = new char[] { ' ', '-', '_', '.' };
 

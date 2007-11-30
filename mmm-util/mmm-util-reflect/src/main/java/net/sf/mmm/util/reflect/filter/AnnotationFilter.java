@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.AnnotationUtil;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AnnotationFilter implements Filter<Class> {
+public class AnnotationFilter implements Filter<Class<?>> {
 
   /** The required annotation. */
   private final Class<? extends Annotation> annotationType;
@@ -57,7 +57,7 @@ public class AnnotationFilter implements Filter<Class> {
       throws IllegalArgumentException {
 
     super();
-    if (!AnnotationUtil.isRuntimeAnnotation(annotationType)) {
+    if (!AnnotationUtil.INSTANCE.isRuntimeAnnotation(annotationType)) {
       throw new IllegalArgumentException("Given annotation (" + annotationType
           + ") can NOT be resolved at runtime!");
     }
@@ -72,11 +72,12 @@ public class AnnotationFilter implements Filter<Class> {
    *         {@link Class#isAnnotationPresent(Class) annotation is present} for
    *         the given <code>type</code>, <code>false</code> otherwise.
    */
-  public boolean accept(Class type) {
+  public boolean accept(Class<?> type) {
 
     if (type != null) {
       if (this.forceInheritence) {
-        Annotation annotation = AnnotationUtil.getTypeAnnotation(type, this.annotationType);
+        Annotation annotation = AnnotationUtil.INSTANCE
+            .getTypeAnnotation(type, this.annotationType);
         return (annotation != null);
       } else {
         return type.isAnnotationPresent(this.annotationType);

@@ -26,7 +26,12 @@ public abstract class PojoPropertyAccessorNonArgMode extends
 
   /**
    * The mode for a {@link PojoPropertyAccessorNonArg reader} of the size of a
-   * property that holds a container type (array or {@link java.util.Collection}).
+   * property that holds a container type (array or {@link java.util.Collection}).<br>
+   * <b>ATTENTION:</b><br>
+   * The accessor may NOT only
+   * {@link PojoPropertyAccessorNonArg#invoke(Object) return} an {@link Integer}.
+   * It is also possible that it returns a {@link Byte} or {@link Short}. Use
+   * {@link Number} to avoid problems.
    */
   public static final PojoPropertyAccessorNonArgMode SIZE = new PojoPropertyAccessorNonArgMode(
       "size") {};

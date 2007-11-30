@@ -14,6 +14,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -23,12 +25,15 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import net.sf.mmm.util.filter.CharFilter;
 import net.sf.mmm.util.filter.Filter;
 import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.type.GenericArrayTypeImpl;
 import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
 import net.sf.mmm.util.reflect.type.ParameterizedTypeImpl;
@@ -40,9 +45,19 @@ import net.sf.mmm.util.scanner.CharacterSequenceScanner;
  * This class is a collection of utility functions for dealing with
  * {@link java.lang.reflect reflection}.
  * 
+ * @see #INSTANCE
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class ReflectionUtil {
+public class ReflectionUtil {
+
+  /**
+   * This is the singleton instance of this {@link ReflectionUtil}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
+   */
+  public static final ReflectionUtil INSTANCE = new ReflectionUtil();
 
   /** an empty class array */
   public static final Class<?>[] NO_PARAMETERS = new Class[0];
@@ -59,7 +74,7 @@ public final class ReflectionUtil {
   /**
    * Forbidden constructor.
    */
-  private ReflectionUtil() {
+  protected ReflectionUtil() {
 
     super();
   }
@@ -75,7 +90,7 @@ public final class ReflectionUtil {
    *         the object from the given array at the same position or
    *         <code>null</code>, if that object is <code>null</code>.
    */
-  public static Class<?>[] getClasses(Object[] objects) {
+  public Class<?>[] getClasses(Object[] objects) {
 
     Class<?>[] result = new Class[objects.length];
     for (int i = 0; i < objects.length; i++) {
@@ -113,7 +128,7 @@ public final class ReflectionUtil {
    *         a single (component) type (e.g.
    *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
    */
-  public static Type getComponentType(Type type) {
+  public Type getComponentType(Type type) {
 
     if (type instanceof Class) {
       Class<?> clazz = (Class<?>) type;
@@ -152,7 +167,7 @@ public final class ReflectionUtil {
    *         a single (component) type (e.g.
    *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
    */
-  public static Class<?> getComponentClass(Type type) {
+  public Class<?> getComponentClass(Type type) {
 
     if (type instanceof Class) {
       Class<?> clazz = (Class<?>) type;
@@ -197,7 +212,7 @@ public final class ReflectionUtil {
    * @param type is the type to convert.
    * @return the closest class representing the given <code>type</code>.
    */
-  public static Class<?> toClass(Type type) {
+  public Class<?> toClass(Type type) {
 
     if (type instanceof Class) {
       return (Class<?>) type;
@@ -243,7 +258,7 @@ public final class ReflectionUtil {
    * @throws IllegalArgumentException if the given <code>type</code> could NOT
    *         be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
    */
-  public static Type toType(String type) throws ClassNotFoundException, IllegalArgumentException {
+  public Type toType(String type) throws ClassNotFoundException, IllegalArgumentException {
 
     return toType(type, ClassResolver.CLASS_FOR_NAME_RESOLVER);
   }
@@ -261,7 +276,7 @@ public final class ReflectionUtil {
    * @throws IllegalArgumentException if the given <code>type</code> could NOT
    *         be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
    */
-  public static Type toType(String type, ClassResolver resolver) throws ClassNotFoundException,
+  public Type toType(String type, ClassResolver resolver) throws ClassNotFoundException,
       IllegalArgumentException {
 
     // List<String>
@@ -380,7 +395,7 @@ public final class ReflectionUtil {
    * @param type is the type to get as string.
    * @return the string representation of the given <code>type</code>.
    */
-  public static String toString(Type type) {
+  public String toString(Type type) {
 
     if (type instanceof Class) {
       return ((Class<?>) type).getName();
@@ -404,7 +419,7 @@ public final class ReflectionUtil {
    *         will be the given <code>type</code> itself if it is NOT
    *         {@link Class#isPrimitive() primitive}.
    */
-  public static Class<?> getNonPrimitiveType(Class<?> type) {
+  public Class<?> getNonPrimitiveType(Class<?> type) {
 
     Class<?> result = type;
     if (type.isPrimitive()) {
@@ -429,6 +444,48 @@ public final class ReflectionUtil {
       }
     }
     return result;
+  }
+
+  /**
+   * This method gets the {@link NumberType} for the given
+   * <code>numericType</code>.
+   * 
+   * @param numericType is the class reflecting a {@link Number}. It may be
+   *        {@link Class#isPrimitive() primitive} (such as
+   *        <code>int.class</code>). The signature is NOT
+   *        <code>Class&lt;? extends Number&gt;</code> to make it easy for the
+   *        caller (e.g. <code>Number.class.isAssignableFrom(int.class)</code>
+   *        is <code>false</code>).
+   * @return the {@link NumberType} representing the given
+   *         <code>numericType</code> or <code>null</code> if the given
+   *         <code>numericType</code> is no {@link Number} or is NOT known
+   *         (you may extend this {@link ReflectionUtil} in such case).
+   */
+  public NumberType getNumberType(Class<?> numericType) {
+
+    if ((numericType == int.class) || (numericType == Integer.class)) {
+      return NumberType.INTEGER;
+    } else if ((numericType == long.class) || (numericType == Long.class)) {
+      return NumberType.LONG;
+    } else if ((numericType == double.class) || (numericType == Double.class)) {
+      return NumberType.DOUBLE;
+    } else if ((numericType == float.class) || (numericType == Float.class)) {
+      return NumberType.FLOAT;
+    } else if ((numericType == short.class) || (numericType == Short.class)) {
+      return NumberType.SHORT;
+    } else if ((numericType == byte.class) || (numericType == Byte.class)) {
+      return NumberType.BYTE;
+    } else if ((BigInteger.class.isAssignableFrom(numericType))) {
+      return NumberType.BIG_INTEGER;
+    } else if ((BigDecimal.class.isAssignableFrom(numericType))) {
+      return NumberType.BIG_DECIMAL;
+    } else if ((AtomicInteger.class.isAssignableFrom(numericType))) {
+      return NumberType.ATOMIC_INTEGER;
+    } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
+      return NumberType.ATOMIC_LONG;
+    } else {
+      throw new NlsIllegalArgumentException("Unknown numeric type: " + numericType);
+    }
   }
 
   /**
@@ -465,7 +522,7 @@ public final class ReflectionUtil {
    *         has the wrong type.
    */
   @SuppressWarnings("unchecked")
-  public static <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
+  public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
       boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws NoSuchFieldException,
       IllegalAccessException, IllegalArgumentException {
 
@@ -529,7 +586,7 @@ public final class ReflectionUtil {
    * @throws IllegalArgumentException if the field is NOT static (or final) or
    *         has the wrong type.
    */
-  public static <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType,
+  public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType,
       boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
 
     try {
@@ -552,7 +609,7 @@ public final class ReflectionUtil {
    * @throws SecurityException if access has been denied by the
    *         {@link SecurityManager}.
    */
-  public static Method getParentMethod(Method method) throws SecurityException {
+  public Method getParentMethod(Method method) throws SecurityException {
 
     return getParentMethod(method.getDeclaringClass(), method.getName(), method.getParameterTypes());
   }
@@ -576,7 +633,7 @@ public final class ReflectionUtil {
    * @throws SecurityException if access has been denied by the
    *         {@link SecurityManager}.
    */
-  public static Method getParentMethod(Class<?> inheritingClass, String methodName,
+  public Method getParentMethod(Class<?> inheritingClass, String methodName,
       Class<?>[] parameterTypes) throws SecurityException {
 
     Class<?> parentClass = inheritingClass.getSuperclass();
@@ -681,7 +738,7 @@ public final class ReflectionUtil {
    *         classes.
    * @throws IOException if the operation failed with an I/O error.
    */
-  public static Set<String> findClassNames(String packageName, boolean includeSubPackages)
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages)
       throws IOException {
 
     Set<String> classSet = new HashSet<String>();
@@ -702,8 +759,8 @@ public final class ReflectionUtil {
    * @param classSet is where to add the classes.
    * @throws IOException if the operation failed with an I/O error.
    */
-  public static void findClassNames(String packageName, boolean includeSubPackages,
-      Set<String> classSet) throws IOException {
+  public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet)
+      throws IOException {
 
     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
     String path = packageName.replace('.', '/');
@@ -786,7 +843,7 @@ public final class ReflectionUtil {
    * @throws ClassNotFoundException if one of the classes could NOT be loaded.
    */
   @SuppressWarnings("unchecked")
-  public static Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames)
+  public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames)
       throws ClassNotFoundException {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
@@ -808,7 +865,7 @@ public final class ReflectionUtil {
    *         <code>filter</code>.
    * @throws ClassNotFoundException if one of the classes could NOT be loaded.
    */
-  public static Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames,
+  public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames,
       Filter<? super Class<?>> filter) throws ClassNotFoundException {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
@@ -831,8 +888,8 @@ public final class ReflectionUtil {
    *         <code>filter</code>.
    * @throws ClassNotFoundException if one of the classes could NOT be loaded.
    */
-  public static Set<Class<?>> loadClasses(Collection<String> classNames,
-      ClassResolver classResolver, Filter<? super Class<?>> filter) throws ClassNotFoundException {
+  public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
+      Filter<? super Class<?>> filter) throws ClassNotFoundException {
 
     Set<Class<?>> classesSet = new HashSet<Class<?>>();
     for (String className : classNames) {

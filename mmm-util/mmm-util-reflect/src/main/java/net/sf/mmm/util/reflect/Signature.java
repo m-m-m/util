@@ -62,7 +62,7 @@ public class Signature {
    */
   public Signature(Object... arguments) {
 
-    this(ReflectionUtil.getClasses(arguments));
+    this(ReflectionUtil.INSTANCE.getClasses(arguments));
   }
 
   /**

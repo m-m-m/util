@@ -12,7 +12,7 @@ import net.sf.mmm.util.filter.Filter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AssignableFromFilter implements Filter<Class> {
+public class AssignableFromFilter implements Filter<Class<?>> {
 
   /** The class */
   private final Class<?> superClass;
@@ -41,7 +41,7 @@ public class AssignableFromFilter implements Filter<Class> {
    *         given <code>type</code> has to implement/extend the super-type or
    *         be equal to it.
    */
-  public boolean accept(Class type) {
+  public boolean accept(Class<?> type) {
 
     if (type != null) {
       return this.superClass.isAssignableFrom(type);

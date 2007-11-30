@@ -13,6 +13,8 @@ import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
@@ -68,6 +70,27 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   }
 
   /**
+   * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all
+   * properties of the according {@link #getPojoType() pojo}.
+   * 
+   * @return a collection with all
+   *         {@link PojoPropertyDescriptorImpl property descriptor}s
+   */
+  public Collection<? extends PojoPropertyDescriptor> getPropertyDescriptors() {
+
+    return this.properties;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
+      PojoPropertyAccessorMode<ACCESSOR> mode) {
+
+    return getAccessor(propertyName, mode, false);
+  }
+
+  /**
    * This method gets the accessor for the given
    * <code>{@link PojoPropertyAccessor#getMode() mode}</code> from the
    * {@link #getPropertyDescriptor(String) descriptor} with the given
@@ -81,20 +104,28 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
    *        the property to access.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
    *        requested accessor.
-   * @return the requested accessor.
-   * @throws PojoPropertyNotFoundException if no property named
-   *         <code>propertyName</code> was found or no accessor exists for
-   *         that property with the given <code>mode</code>.
+   * @param required - if <code>true</code> the accessor is required and an
+   *        exception is thrown if NOT found.
+   * @return the requested accessor or <code>null</code> if NOT found and
+   *         <code>required</code> is <code>false</code>.
+   * @throws PojoPropertyNotFoundException if <code>required</code> is
+   *         <code>true</code> and no property named <code>propertyName</code>
+   *         was found or no accessor exists for that property with the given
+   *         <code>mode</code>.
    */
-  public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR requireAccessor(String propertyName,
-      PojoPropertyAccessorMode<ACCESSOR> mode) {
+  public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
+      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required) {
 
     PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(propertyName);
     if (descriptor == null) {
-      throw new PojoPropertyNotFoundException(this.pojoType, propertyName);
+      if (required) {
+        throw new PojoPropertyNotFoundException(this.pojoType, propertyName);
+      } else {
+        return null;
+      }
     }
     ACCESSOR accessor = descriptor.getAccessor(mode);
-    if (accessor == null) {
+    if ((accessor == null) && required) {
       throw new PojoPropertyNotFoundException(this.pojoType, propertyName, mode);
     }
     return accessor;
@@ -124,7 +155,7 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   public Object getProperty(P pojoInstance, String propertyName)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    return requireAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET).invoke(pojoInstance);
+    return getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET, true).invoke(pojoInstance);
   }
 
   /**
@@ -133,8 +164,25 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   public Object setProperty(P pojoInstance, String propertyName, Object value)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    return requireAccessor(propertyName, PojoPropertyAccessorOneArgMode.SET).invoke(pojoInstance,
+    return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.SET, true).invoke(pojoInstance,
         value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getPropertySize(P pojoInstance, String propertyName)
+      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+
+    Object result = getAccessor(propertyName, PojoPropertyAccessorNonArgMode.SIZE, true).invoke(
+        pojoInstance);
+    try {
+      Number size = (Number) result;
+      return size.intValue();
+    } catch (ClassCastException e) {
+      throw new IllegalStateException("Size of property '" + propertyName + "' in pojo '"
+          + pojoInstance + "' is no number: " + result);
+    }
   }
 
   /**
@@ -143,19 +191,28 @@ public class PojoDescriptorImpl<P> implements PojoDescriptor<P> {
   public Object addPropertyItem(P pojoInstance, String propertyName, Object item)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    return requireAccessor(propertyName, PojoPropertyAccessorOneArgMode.ADD).invoke(pojoInstance,
+    return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.ADD, true).invoke(pojoInstance,
         item);
   }
 
   /**
-   * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all
-   * properties of the according {@link #getPojoType() pojo}.
-   * 
-   * @return a collection with all
-   *         {@link PojoPropertyDescriptorImpl property descriptor}s
+   * {@inheritDoc}
    */
-  public Collection<? extends PojoPropertyDescriptor> getPropertyDescriptors() {
+  public Object getPropertyItem(P pojoInstance, String propertyName, int index)
+      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 
-    return this.properties;
+    return getAccessor(propertyName, PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED).invoke(
+        pojoInstance, index);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Object setPropertyItem(P pojoInstance, String propertyName, int index, Object item)
+      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+
+    return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(
+        pojoInstance, index, item);
+  }
+
 }

@@ -17,8 +17,8 @@ public class EnglishSingularizerTest {
 
   private void check(String singular, String plural) {
 
-    assertEquals(singular, EnglishSingularizer.INSTANCE.toSingular(plural));
-    assertEquals(singular, EnglishSingularizer.INSTANCE.toSingular(singular));
+    assertEquals(singular, EnglishSingularizer.INSTANCE.transform(plural));
+    assertEquals(singular, EnglishSingularizer.INSTANCE.transform(singular));
   }
 
   @Test

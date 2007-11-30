@@ -14,18 +14,40 @@ import java.lang.reflect.Method;
  * This class is a collection of utility functions for dealing with
  * {@link Annotation annotations}.
  * 
+ * @see #INSTANCE
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class AnnotationUtil {
+public class AnnotationUtil {
+
+  /**
+   * This is the singleton instance of this {@link AnnotationUtil}. Instead of
+   * declaring the methods static, we declare this static instance what gives
+   * the same way of access while still allowing a design for extension by
+   * inheriting from this class.
+   */
+  public static final AnnotationUtil INSTANCE = new AnnotationUtil();
 
   /** an empty element-type array */
   public static final ElementType[] NO_TARGET = new ElementType[0];
 
   /**
-   * The forbidden constructor.
+   * The constructor.
    */
-  private AnnotationUtil() {
+  protected AnnotationUtil() {
 
+    super();
+  }
+
+  /**
+   * This method gets the {@link ReflectionUtil} used by this
+   * {@link AnnotationUtil} instance.
+   * 
+   * @return the {@link ReflectionUtil} to use.
+   */
+  protected ReflectionUtil getReflectionUtil() {
+
+    return ReflectionUtil.INSTANCE;
   }
 
   /**
@@ -39,7 +61,7 @@ public final class AnnotationUtil {
    * @return <code>true</code> if the given <code>annotationType</code> can
    *         be resolved at runtime.
    */
-  public static <A extends Annotation> boolean isRuntimeAnnotation(Class<A> annotationType) {
+  public <A extends Annotation> boolean isRuntimeAnnotation(Class<A> annotationType) {
 
     Retention retention = annotationType.getAnnotation(Retention.class);
     if (retention != null) {
@@ -59,7 +81,7 @@ public final class AnnotationUtil {
    * @return <code>true</code> if the given <code>annotationType</code> can
    *         be used to annotate elements of the given <code>targetType</code>.
    */
-  public static <A extends Annotation> boolean isAnnotationForType(Class<A> annotationType,
+  public <A extends Annotation> boolean isAnnotationForType(Class<A> annotationType,
       ElementType targetType) {
 
     Target target = annotationType.getAnnotation(Target.class);
@@ -108,8 +130,8 @@ public final class AnnotationUtil {
    *         {@link #isAnnotationForType(Class, ElementType) applicable} for
    *         {@link ElementType#TYPE classes}.
    */
-  public static <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass,
-      Class<A> annotation) throws IllegalArgumentException {
+  public <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass, Class<A> annotation)
+      throws IllegalArgumentException {
 
     if (!isRuntimeAnnotation(annotation)) {
       throw new IllegalArgumentException("Given annotation (" + annotation
@@ -155,7 +177,7 @@ public final class AnnotationUtil {
    *         {@link Class#getAnnotation(Class) annotated} with the given
    *         <code>annotation</code>.
    */
-  private static <A extends Annotation> A getInterfacesAnnotation(Class<?> annotatedType,
+  private <A extends Annotation> A getInterfacesAnnotation(Class<?> annotatedType,
       Class<A> annotation) {
 
     Class<?>[] interfaces = annotatedType.getInterfaces();
@@ -196,8 +218,7 @@ public final class AnnotationUtil {
    *         {@link Class#getAnnotation(Class) annotated} with the given
    *         <code>annotation</code>.
    */
-  public static <A extends Annotation> A getTypeAnnotation(Class<?> annotatedType,
-      Class<A> annotation) {
+  public <A extends Annotation> A getTypeAnnotation(Class<?> annotatedType, Class<A> annotation) {
 
     A result = getClassAnnotation(annotatedType, annotation);
     Class<?> currentClass = annotatedType;
@@ -229,8 +250,7 @@ public final class AnnotationUtil {
    *         {@link Method#getAnnotation(Class) annotated} with the given
    *         <code>annotation</code>.
    */
-  public static <A extends Annotation> A getMethodAnnotation(Method annotatedMethod,
-      Class<A> annotation) {
+  public <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotation) {
 
     if (!isRuntimeAnnotation(annotation)) {
       throw new IllegalArgumentException("Given annotation (" + annotation
@@ -246,7 +266,7 @@ public final class AnnotationUtil {
       Class<?>[] parameterTypes = annotatedMethod.getParameterTypes();
       Class<?> inheritingClass = annotatedMethod.getDeclaringClass();
       while (result == null) {
-        Method currentMethod = ReflectionUtil.getParentMethod(inheritingClass, methodName,
+        Method currentMethod = getReflectionUtil().getParentMethod(inheritingClass, methodName,
             parameterTypes);
         if (currentMethod == null) {
           return null;
