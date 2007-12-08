@@ -24,6 +24,12 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
     super();
   }
 
+  /**
+   * This method gets the {@link PojoPropertyAccessor accessor} this proxy
+   * delegates to.
+   * 
+   * @return the delegate.
+   */
   protected abstract PojoPropertyAccessor getDelegate();
 
   /**
@@ -53,17 +59,25 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
-  public Class<?> getPropertyClass() {
+  public Type getReturnType() {
 
-    return getDelegate().getPropertyClass();
+    return getDelegate().getReturnType();
   }
 
   /**
    * {@inheritDoc}
    */
-  public Type getPropertyComponentType() {
+  public Type[] getArgumentTypes() {
 
-    return getDelegate().getPropertyComponentType();
+    return getDelegate().getArgumentTypes();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Class<?> getPropertyClass() {
+
+    return getDelegate().getPropertyClass();
   }
 
   /**

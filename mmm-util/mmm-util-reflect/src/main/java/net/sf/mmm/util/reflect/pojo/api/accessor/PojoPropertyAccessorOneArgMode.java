@@ -31,6 +31,18 @@ public abstract class PojoPropertyAccessorOneArgMode extends
   public static final PojoPropertyAccessorOneArgMode ADD = new PojoPropertyAccessorOneArgMode("add") {};
 
   /**
+   * The mode for a {@link PojoPropertyAccessorOneArg getter} of a mapped
+   * property.<br>
+   * For example an
+   * {@link PojoPropertyAccessorOneArg#invoke(Object, Object) invoke} with
+   * argument <code>key</code> for a property {@link #getName() named}
+   * "colors" might cause a <code>pojo.getColors().get(key)</code> or
+   * <code>pojo.getColors(key)</code>.
+   */
+  public static final PojoPropertyAccessorOneArgMode GET_MAPPED = new PojoPropertyAccessorOneArgMode(
+      "get-mapped") {};
+
+  /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.

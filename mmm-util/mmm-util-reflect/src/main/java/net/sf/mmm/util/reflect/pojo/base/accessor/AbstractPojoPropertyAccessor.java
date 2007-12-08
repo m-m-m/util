@@ -3,10 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.base.accessor;
 
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 
@@ -27,9 +24,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /** @see #getPropertyClass() */
   private final Class<?> clazz;
 
-  /** @see #getPropertyComponentType() */
-  private final Type componentType;
-
   /**
    * The constructor.
    * 
@@ -45,26 +39,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
     this.name = propertyName;
     this.clazz = propertyClass;
     this.type = propertyType;
-    // determine component type...
-    Type cmpType = null;
-    if (this.type instanceof GenericArrayType) {
-      cmpType = ((GenericArrayType) this.type).getGenericComponentType();
-    } else if (Collection.class.isAssignableFrom(this.clazz)) {
-      if (this.type instanceof ParameterizedType) {
-        Type[] genericTypes = ((ParameterizedType) this.type).getActualTypeArguments();
-        if (genericTypes.length == 1) {
-          cmpType = genericTypes[0];
-        } else {
-          // TODO
-          throw new IllegalArgumentException();
-        }
-      } else {
-        cmpType = Object.class;
-      }
-    } else if (this.clazz.isArray()) {
-      cmpType = this.clazz.getComponentType();
-    }
-    this.componentType = cmpType;
   }
 
   /**
@@ -89,14 +63,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   public Class<?> getPropertyClass() {
 
     return this.clazz;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Type getPropertyComponentType() {
-
-    return this.componentType;
   }
 
   /**

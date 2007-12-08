@@ -117,72 +117,50 @@ public class ReflectionUtil {
    * <td><code>Map&lt;String, Long&gt;</code></td>
    * </tr>
    * <tr>
+   * <td><code>List</code></td>
+   * <td><code>Object</code></td>
+   * </tr>
+   * <tr>
    * <td><code>Foo&lt;Bar&gt;[]</code></td>
    * <td><code>Foo&lt;Bar&gt;</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>Map&lt;String, Long&gt;</code></td>
+   * <td><code>null</code></td>
    * </tr>
    * </table>
    * 
    * @param type is the type where to get the component type from.
+   * @param requireCollectionOrArray - if <code>true</code> then
    * @return the component type of the given <code>type</code> or
    *         <code>null</code> if the given <code>type</code> does NOT have
-   *         a single (component) type (e.g.
+   *         a (single) component type (e.g.
    *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
    */
-  public Type getComponentType(Type type) {
+  public Type getComponentType(Type type, boolean requireCollectionOrArray) {
 
     if (type instanceof Class) {
       Class<?> clazz = (Class<?>) type;
       if (clazz.isArray()) {
         return clazz.getComponentType();
-      }
-    } else if (type instanceof ParameterizedType) {
-      ParameterizedType pt = (ParameterizedType) type;
-      Type[] generics = pt.getActualTypeArguments();
-      if (generics.length == 1) {
-        return generics[0];
+      } else if (Collection.class.isAssignableFrom(clazz)) {
+        return Object.class;
       }
     } else if (type instanceof GenericArrayType) {
       GenericArrayType gat = (GenericArrayType) type;
       return gat.getGenericComponentType();
-    }
-    return null;
-  }
-
-  /**
-   * This method gets the component-class of the given <code>type</code>.<br>
-   * For example the following types all have the component-class MyClass:
-   * <ul>
-   * <li>MyClass[]</li>
-   * <li>List&lt;MyClass&gt;</li>
-   * <li>Foo&lt;? extends MyClass&gt;</li>
-   * <li>Bar&lt;? super MyClass&gt;</li>
-   * <li>&lt;T extends MyClass&gt; T[]</li>
-   * </ul>
-   * 
-   * @see #getComponentType(Type)
-   * 
-   * @param type is the type where to get the component type from.
-   * @return the component type of the given <code>type</code> or
-   *         <code>null</code> if the given <code>type</code> does NOT have
-   *         a single (component) type (e.g.
-   *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
-   */
-  public Class<?> getComponentClass(Type type) {
-
-    if (type instanceof Class) {
-      Class<?> clazz = (Class<?>) type;
-      if (clazz.isArray()) {
-        return clazz.getComponentType();
-      }
     } else if (type instanceof ParameterizedType) {
       ParameterizedType pt = (ParameterizedType) type;
+      if (requireCollectionOrArray) {
+        Class<?> rawClass = toClass(pt.getRawType());
+        if (!Collection.class.isAssignableFrom(rawClass)) {
+          return null;
+        }
+      }
       Type[] generics = pt.getActualTypeArguments();
       if (generics.length == 1) {
-        return toClass(generics[0]);
+        return generics[0];
       }
-    } else if (type instanceof GenericArrayType) {
-      GenericArrayType gat = (GenericArrayType) type;
-      return toClass(gat.getGenericComponentType());
     }
     return null;
   }

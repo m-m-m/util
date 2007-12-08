@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect.pojo.api.accessor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeName;
 
@@ -53,19 +54,50 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   int getModifiers();
 
   /**
-   * This method gets the required type to {@link #getAccessibleObject() access}
-   * (read/write) this property.
+   * This method gets the type of the object returned when this accessor is
+   * <code>invoked</code>.
+   * 
+   * @see java.lang.reflect.Method#getGenericReturnType()
+   * @see java.lang.reflect.Field#getGenericType()
+   * @see net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type)
+   * 
+   * @return the return type.
+   */
+  Type getReturnType();
+
+  /**
+   * This method gets the types of the arguments required to <code>invoke</code>
+   * this accessor.
+   * 
+   * @see java.lang.reflect.Method#getGenericParameterTypes()
+   * @see java.lang.reflect.Field#getGenericType()
+   * @see net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type)
+   * 
+   * @return the argument types.
+   */
+  Type[] getArgumentTypes();
+
+  /**
+   * This method gets the type of this property.<br>
+   * For a {@link PojoPropertyAccessorNonArgMode#GET getter} this will be the
+   * {@link #getReturnType() return-type} while a
+   * {@link PojoPropertyAccessorOneArgMode#SET setter} typically has
+   * <code>void</code> as {@link #getReturnType() return-type} and this method
+   * will return the type of its argument. For mapped or indexed getters/setters
+   * this method will return the item type.
    * 
    * @see #getPropertyClass()
    * @see java.beans.PropertyDescriptor#getPropertyType()
+   * @see net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type)
    * 
-   * @return the required type to {@link #getAccessibleObject() access} this
-   *         property or <code>null</code> if this property is NOT readable.
+   * @return the type of this property.
    */
   Type getPropertyType();
 
   /**
-   * This method gets the {@link #getPropertyType() type} as raw class.
+   * This method gets the {@link #getPropertyType() type} as raw class. It is a
+   * convenience method for
+   * <code>{@link ReflectionUtil#INSTANCE}.{@link ReflectionUtil#toClass(Type) toClass}(accessor.{@link #getPropertyType()})</code>
    * 
    * @return the raw type.
    */
@@ -82,18 +114,5 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * @return the class reflecting the type that declared this accessor.
    */
   Class<?> getDeclaringClass();
-
-  /**
-   * This method gets the generic component type of a list property.
-   * 
-   * @see Class#getComponentType()
-   * @see java.lang.reflect.GenericArrayType#getGenericComponentType()
-   * @see java.lang.reflect.ParameterizedType#getActualTypeArguments()
-   * 
-   * @return the component type of this property or <code>null</code> if the
-   *         {@link #getPropertyType() type} is no {@link Class#isArray() array}
-   *         or {@link java.util.Collection collection}.
-   */
-  Type getPropertyComponentType();
 
 }

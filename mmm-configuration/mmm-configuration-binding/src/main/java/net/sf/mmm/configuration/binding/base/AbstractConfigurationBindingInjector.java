@@ -63,7 +63,9 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
         Object value = configuration.getValue().getValue(accessor.getPropertyClass());
         accessor.invoke(pojo, value);
       } else {
-        Type componentType = accessor.getPropertyComponentType();
+        Type propertyType = accessor.getPropertyType();
+        Type componentType = null;
+        componentType = ReflectionUtil.INSTANCE.getComponentType(propertyType, true);
         if (componentType != null) {
           // handle list-like property...
           Class<?> componentClass = ReflectionUtil.INSTANCE.toClass(componentType);

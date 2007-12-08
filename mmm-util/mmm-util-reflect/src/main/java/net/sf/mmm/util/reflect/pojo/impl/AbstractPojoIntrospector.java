@@ -3,7 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl;
 
-import net.sf.mmm.util.component.AbstractInitializableComponent;
+import javax.annotation.PostConstruct;
+
+import net.sf.mmm.util.component.InitializationState;
 import net.sf.mmm.util.reflect.VisibilityModifier;
 
 /**
@@ -13,7 +15,10 @@ import net.sf.mmm.util.reflect.VisibilityModifier;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoIntrospector extends AbstractInitializableComponent {
+public abstract class AbstractPojoIntrospector {
+
+  /** @see #initialize() */
+  private final InitializationState initializationState;
 
   /** @see #getVisibility() */
   private VisibilityModifier visibility;
@@ -27,6 +32,15 @@ public abstract class AbstractPojoIntrospector extends AbstractInitializableComp
   public AbstractPojoIntrospector() {
 
     super();
+    this.initializationState = new InitializationState();
+  }
+
+  /**
+   * @return the initializationState
+   */
+  protected InitializationState getInitializationState() {
+
+    return this.initializationState;
   }
 
   /**
@@ -38,7 +52,7 @@ public abstract class AbstractPojoIntrospector extends AbstractInitializableComp
    */
   public AbstractPojoIntrospector(VisibilityModifier visibility, boolean acceptStatic) {
 
-    super();
+    this();
     this.visibility = visibility;
     this.acceptStatic = acceptStatic;
     initialize();
@@ -65,7 +79,7 @@ public abstract class AbstractPojoIntrospector extends AbstractInitializableComp
    */
   public void setVisibility(VisibilityModifier visibility) {
 
-    requireNotInitilized();
+    this.initializationState.requireNotInitilized();
     this.visibility = visibility;
   }
 
@@ -82,18 +96,21 @@ public abstract class AbstractPojoIntrospector extends AbstractInitializableComp
    */
   public void setAcceptStatic(boolean acceptStatic) {
 
-    requireNotInitilized();
+    this.initializationState.requireNotInitilized();
     this.acceptStatic = acceptStatic;
   }
 
   /**
-   * {@inheritDoc}
+   * This method initializes this class. It has to be called after construction
+   * and injection is completed.
    */
-  @Override
-  protected void doInitialize() {
+  @PostConstruct
+  public void initialize() {
 
-    if (this.visibility == null) {
-      this.visibility = VisibilityModifier.PUBLIC;
+    if (this.initializationState.setInitialized()) {
+      if (this.visibility == null) {
+        this.visibility = VisibilityModifier.PUBLIC;
+      }
     }
   }
 

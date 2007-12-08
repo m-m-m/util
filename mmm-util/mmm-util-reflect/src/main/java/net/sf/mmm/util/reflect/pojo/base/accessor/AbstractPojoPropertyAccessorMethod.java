@@ -71,4 +71,20 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
     return this.method.getDeclaringClass();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Type getReturnType() {
+
+    return this.method.getGenericReturnType();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Type[] getArgumentTypes() {
+
+    return this.method.getGenericParameterTypes();
+  }
+
 }

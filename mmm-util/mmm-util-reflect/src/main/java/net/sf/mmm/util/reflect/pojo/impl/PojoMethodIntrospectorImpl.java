@@ -44,7 +44,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
    */
   public Iterator<Method> findMethods(Class<?> pojoType) {
 
-    requireInitilized();
+    getInitializationState().requireInitilized();
     return new PojoMethodIterator(pojoType);
   }
 

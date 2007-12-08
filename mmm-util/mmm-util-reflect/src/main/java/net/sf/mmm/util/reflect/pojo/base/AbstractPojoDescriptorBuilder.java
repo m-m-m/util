@@ -6,7 +6,6 @@ package net.sf.mmm.util.reflect.pojo.base;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.MapFactory;
-import net.sf.mmm.util.component.AbstractInitializableComponent;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorImpl;
 
@@ -16,8 +15,7 @@ import net.sf.mmm.util.reflect.pojo.impl.PojoDescriptorImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoDescriptorBuilder extends AbstractInitializableComponent
-    implements PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilder implements PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
   private final Map<Class<?>, PojoDescriptorImpl<?>> pojoMap;
@@ -48,7 +46,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractInitializabl
   @SuppressWarnings("unchecked")
   public <P> PojoDescriptorImpl<P> getDescriptor(Class<P> pojoType) {
 
-    requireInitilized();
     PojoDescriptorImpl<P> descriptor = (PojoDescriptorImpl<P>) this.pojoMap.get(pojoType);
     if (descriptor == null) {
       descriptor = createDescriptor(pojoType);

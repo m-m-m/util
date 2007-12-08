@@ -14,9 +14,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.component.InitializationState;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
@@ -40,6 +42,9 @@ import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorSetBuilder
 @Resource(shareable = true)
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
+  /** @see #initialize() */
+  private final InitializationState initializationState;
+
   /** @see #getMethodIntrospector() */
   private PojoMethodIntrospector methodIntrospector;
 
@@ -55,6 +60,15 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   public PojoDescriptorBuilderImpl() {
 
     super();
+    this.initializationState = new InitializationState();
+  }
+
+  /**
+   * @return the initializationState
+   */
+  protected InitializationState getInitializationState() {
+
+    return this.initializationState;
   }
 
   /**
@@ -65,6 +79,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   public PojoDescriptorBuilderImpl(MapFactory mapFactory) {
 
     super(mapFactory);
+    this.initializationState = new InitializationState();
   }
 
   /**
@@ -87,7 +102,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   @Resource
   public void setMethodIntrospector(PojoMethodIntrospector introspector) {
 
-    requireNotInitilized();
+    this.initializationState.requireNotInitilized();
     this.methodIntrospector = introspector;
   }
 
@@ -111,7 +126,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   @Resource
   public void setFieldIntrospector(PojoFieldIntrospector introspector) {
 
-    requireNotInitilized();
+    this.initializationState.requireNotInitilized();
     this.fieldIntrospector = introspector;
   }
 
@@ -137,7 +152,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   @Resource
   public void setAccessorBuilders(Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders) {
 
-    requireNotInitilized();
+    this.initializationState.requireNotInitilized();
     Set<PojoPropertyAccessorMode<?>> modeSet = new HashSet<PojoPropertyAccessorMode<?>>();
     List<PojoPropertyAccessorBuilder<?>> builderList = new ArrayList<PojoPropertyAccessorBuilder<?>>();
     for (PojoPropertyAccessorBuilder<?> builder : accessorBuilders) {
@@ -152,20 +167,24 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * {@inheritDoc}
+   * This method initializes this class. It has to be called after construction
+   * and injection is completed.
    */
-  public void doInitialize() {
+  @PostConstruct
+  public void initialize() {
 
-    if ((this.methodIntrospector == null) && (this.fieldIntrospector == null)) {
-      // by default only introspect public and non-static methods
-      this.methodIntrospector = new PojoMethodIntrospectorImpl(VisibilityModifier.PUBLIC, false);
-    }
-    if (this.accessorBuilders == null) {
-      this.accessorBuilders = new ArrayList<PojoPropertyAccessorBuilder<?>>();
-      this.accessorBuilders.add(new PojoPropertyAccessorGetBuilder());
-      this.accessorBuilders.add(new PojoPropertyAccessorSetBuilder());
-      this.accessorBuilders.add(new PojoPropertyAccessorAddBuilder());
-      // TODO: add, size/count, remove, indexed-get, indexed-set
+    if (this.initializationState.setInitialized()) {
+      if ((this.methodIntrospector == null) && (this.fieldIntrospector == null)) {
+        // by default only introspect public and non-static methods
+        this.methodIntrospector = new PojoMethodIntrospectorImpl(VisibilityModifier.PUBLIC, false);
+      }
+      if (this.accessorBuilders == null) {
+        this.accessorBuilders = new ArrayList<PojoPropertyAccessorBuilder<?>>();
+        this.accessorBuilders.add(new PojoPropertyAccessorGetBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorSetBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorAddBuilder());
+        // TODO: add, size/count, remove, indexed-get, indexed-set
+      }
     }
   }
 

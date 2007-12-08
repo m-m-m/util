@@ -30,7 +30,8 @@ public class ReflectionUtilTest {
 
     Method method = TestClass.class.getMethod(methodName, ReflectionUtil.NO_PARAMETERS);
     Type type = method.getGenericReturnType();
-    return ReflectionUtil.INSTANCE.getComponentClass(type);
+    Type componentType = ReflectionUtil.INSTANCE.getComponentType(type, false);
+    return ReflectionUtil.INSTANCE.toClass(componentType);
   }
 
   @Test

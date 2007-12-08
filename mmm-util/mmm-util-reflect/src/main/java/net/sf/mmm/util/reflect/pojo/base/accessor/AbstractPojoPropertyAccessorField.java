@@ -81,4 +81,12 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
     return this.field.getDeclaringClass();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Type getReturnType() {
+
+    return this.field.getGenericType();
+  }
+
 }

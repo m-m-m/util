@@ -372,7 +372,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
               isReadOnly, isStatic, isTransient);
           boolean isDeleted = accessor.getAccessibleObject().isAnnotationPresent(Deprecated.class);
           Type fieldType = accessor.getPropertyType();
-          Class fieldClass = accessor.getPropertyClass();
+          Class<?> fieldClass = accessor.getPropertyClass();
           if (fieldClass.isPrimitive()) {
             fieldType = getReflectionUtil().getNonPrimitiveType(fieldClass);
           }

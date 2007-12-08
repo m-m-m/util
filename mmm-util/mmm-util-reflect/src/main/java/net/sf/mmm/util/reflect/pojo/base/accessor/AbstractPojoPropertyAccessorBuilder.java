@@ -30,6 +30,44 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   }
 
   /**
+   * This method determines if the given <code>type</code> is a boolean type (<code>boolean.class</code>
+   * or <code>{@link Boolean}.class</code>
+   * 
+   * @param type is the class to check.
+   * @return <code>true</code> if type represents a boolean,
+   *         <code>false</code> otherwise.
+   */
+  protected static boolean isBooleanType(Class<?> type) {
+
+    if (type == boolean.class) {
+      return true;
+    } else if (type == Boolean.class) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * This method determines if the given <code>type</code> is an integer type (<code>int.class</code>
+   * or <code>{@link Integer}.class</code>
+   * 
+   * @param type is the class to check.
+   * @return <code>true</code> if type represents an integer,
+   *         <code>false</code> otherwise.
+   */
+  protected static boolean isIntegerType(Class<?> type) {
+
+    if (type == int.class) {
+      return true;
+    } else if (type == Integer.class) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * This method gets the according
    * {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getName() property-name}
    * for the given <code>methodName</code>.<br>

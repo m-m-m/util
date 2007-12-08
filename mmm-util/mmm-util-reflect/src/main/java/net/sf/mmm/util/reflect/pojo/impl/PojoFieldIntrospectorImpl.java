@@ -47,7 +47,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
    */
   public Iterator<Field> findFields(Class<?> pojoType) {
 
-    requireInitilized();
+    getInitializationState().requireInitilized();
     return new PojoFieldIterator(pojoType);
   }
 

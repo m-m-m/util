@@ -23,7 +23,7 @@ public class PojoPropertyAccessorSetBuilder extends
     AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> implements
     PojoPropertyAccessorOneArgBuilder {
 
-  /** method name prefix for classic getter */
+  /** method name prefix for classic setter */
   private static final String METHOD_PREFIX_SET = "set";
 
   /**

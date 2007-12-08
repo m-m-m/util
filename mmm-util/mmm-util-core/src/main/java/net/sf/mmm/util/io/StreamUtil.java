@@ -11,10 +11,18 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.channels.Channel;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.impl.Jdk14Logger;
+
+import net.sf.mmm.util.pool.api.Pool;
+import net.sf.mmm.util.pool.base.NoByteArrayPool;
+import net.sf.mmm.util.pool.base.NoCharArrayPool;
 
 /**
  * This class is a collection of utility functions to deal with
@@ -39,18 +47,62 @@ public class StreamUtil {
    */
   public static final StreamUtil INSTANCE = new StreamUtil();
 
-  /** the size used for char buffers. */
-  private static final int CHAR_BUFFER_SIZE = 2048;
-
-  /** the size used for char buffers. */
-  private static final int BYTE_BUFFER_SIZE = 4096;
+  /** @see #getLogger() */
+  private final Log logger;
 
   /**
    * The constructor.
    */
   protected StreamUtil() {
 
+    this(new Jdk14Logger(StreamUtil.class.getName()));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param logger the logger instance.
+   */
+  protected StreamUtil(Log logger) {
+
     super();
+    this.logger = logger;
+  }
+
+  /**
+   * This method gets the logger to be used.
+   * 
+   * @return the logger.
+   */
+  protected final Log getLogger() {
+
+    return this.logger;
+  }
+
+  /**
+   * This method gets the byte-array {@link Pool} used to transfer streams.<br>
+   * The implementation should create byte-arrays with a suitable length (at
+   * least 512, suggested is 4096). Override this method to use a real pool
+   * implementation.
+   * 
+   * @return the {@link Pool} instance.
+   */
+  protected Pool<byte[]> getByteArrayPool() {
+
+    return NoByteArrayPool.INSTANCE;
+  }
+
+  /**
+   * This method gets the char-array {@link Pool} used to transfer
+   * {@link Reader}s and {@link Writer}s. The implementation should create
+   * char-arrays with a suitable length (at least 512, suggested is 2048).<br>
+   * Override this method to use a real pool implementation.
+   * 
+   * @return the {@link Pool} instance.
+   */
+  protected Pool<char[]> getCharArrayPool() {
+
+    return NoCharArrayPool.INSTANCE;
   }
 
   /**
@@ -92,7 +144,7 @@ public class StreamUtil {
    */
   public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws IOException {
 
-    char[] buffer = new char[CHAR_BUFFER_SIZE];
+    char[] buffer = getCharArrayPool().borrow();
     try {
       long bytes = 0;
       int count = reader.read(buffer);
@@ -104,10 +156,11 @@ public class StreamUtil {
       return bytes;
     } finally {
       try {
-        reader.close();
+        getCharArrayPool().release(buffer);
       } finally {
+        close(reader);
         if (!keepWriterOpen) {
-          writer.close();
+          close(writer);
         }
       }
     }
@@ -139,14 +192,11 @@ public class StreamUtil {
     try {
       return inChannel.transferTo(0, inChannel.size(), outChannel);
     } finally {
-      try {
-        // inStream.close();
-        inChannel.close();
-      } finally {
-        if (!keepOutStreamOpen) {
-          // outStream.close();
-          outChannel.close();
-        }
+      // close(inStream);
+      close(inChannel);
+      if (!keepOutStreamOpen) {
+        // close(outStream);
+        close(outChannel);
       }
     }
   }
@@ -178,14 +228,11 @@ public class StreamUtil {
     try {
       return outChannel.transferFrom(inChannel, 0, size);
     } finally {
-      try {
-        // inStream.close();
-        inChannel.close();
-      } finally {
-        if (!keepOutStreamOpen) {
-          // outStream.close();
-          outChannel.close();
-        }
+      // close (inStream);
+      close(inChannel);
+      if (!keepOutStreamOpen) {
+        // close(outStream);
+        close(outChannel);
       }
     }
   }
@@ -210,10 +257,7 @@ public class StreamUtil {
   public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws IOException {
 
-    if (inStream instanceof FileInputStream) {
-      return transfer((FileInputStream) inStream, outStream, keepOutStreamOpen);
-    }
-    byte[] buffer = new byte[BYTE_BUFFER_SIZE];
+    byte[] buffer = getByteArrayPool().borrow();
     try {
       long size = 0;
       int count = inStream.read(buffer);
@@ -225,12 +269,89 @@ public class StreamUtil {
       return size;
     } finally {
       try {
-        inStream.close();
+        getByteArrayPool().release(buffer);
       } finally {
+        close(inStream);
         if (!keepOutStreamOpen) {
-          outStream.close();
+          close(outStream);
         }
       }
     }
   }
+
+  /**
+   * This method closes the given <code>inputStream</code> without throwing an
+   * {@link Exception}.
+   * 
+   * @param inputStream is the input-stream to close.
+   */
+  public void close(InputStream inputStream) {
+
+    try {
+      inputStream.close();
+    } catch (Exception e) {
+      this.logger.warn("Failed to close stream!", e);
+    }
+  }
+
+  /**
+   * This method closes the given <code>outputStream</code> without throwing
+   * an {@link Exception}.
+   * 
+   * @param outputStream is the output-stream to close.
+   */
+  public void close(OutputStream outputStream) {
+
+    try {
+      outputStream.close();
+    } catch (Exception e) {
+      this.logger.warn("Failed to close stream!", e);
+    }
+  }
+
+  /**
+   * This method closes the given <code>writer</code> without throwing an
+   * {@link Exception}.
+   * 
+   * @param writer is the writer to close.
+   */
+  public void close(Writer writer) {
+
+    try {
+      writer.close();
+    } catch (Exception e) {
+      this.logger.warn("Failed to close writer!", e);
+    }
+  }
+
+  /**
+   * This method closes the given <code>reader</code> without throwing an
+   * {@link Exception}.
+   * 
+   * @param reader is the reader to close.
+   */
+  public void close(Reader reader) {
+
+    try {
+      reader.close();
+    } catch (Exception e) {
+      this.logger.warn("Failed to close writer!", e);
+    }
+  }
+
+  /**
+   * This method closes the given <code>channel</code> without throwing an
+   * {@link Exception}.
+   * 
+   * @param channel is the channel to close.
+   */
+  public void close(Channel channel) {
+
+    try {
+      channel.close();
+    } catch (Exception e) {
+      this.logger.warn("Failed to close writer!", e);
+    }
+  }
+
 }
