@@ -9,6 +9,10 @@
     <src>http://m-m-m.sourceforge.net/maven/images/logo.png</src>
     <href>http://m-m-m.sourceforge.net</href>
   </bannerRight>
+  <breadcrumbs>
+    <item name="main" href="../index.html"/>
+    <item name="current module name" href="/index.html"/>
+  </breadcrumbs>
   <body>
     <links>
       <item name="Home" href="http://m-m-m.sourceforge.net/" />

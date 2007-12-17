@@ -39,7 +39,7 @@ public class StringUtil {
   /**
    * The constructor.
    */
-  protected StringUtil() {
+  public StringUtil() {
 
     super();
   }

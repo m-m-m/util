@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver;
-import net.sf.mmm.util.SimpleExecutor;
+import net.sf.mmm.util.concurrent.SimpleExecutor;
 import net.sf.mmm.util.http.HttpParser;
 
 /**

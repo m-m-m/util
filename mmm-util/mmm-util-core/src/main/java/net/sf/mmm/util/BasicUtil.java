@@ -22,7 +22,7 @@ public class BasicUtil {
   /**
    * The constructor.
    */
-  protected BasicUtil() {
+  public BasicUtil() {
 
     super();
   }

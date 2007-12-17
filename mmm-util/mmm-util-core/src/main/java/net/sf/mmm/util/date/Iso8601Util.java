@@ -86,7 +86,7 @@ public final class Iso8601Util {
   /**
    * The constructor.
    */
-  protected Iso8601Util() {
+  public Iso8601Util() {
 
     super();
   }

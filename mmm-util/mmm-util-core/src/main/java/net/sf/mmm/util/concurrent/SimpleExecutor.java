@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.concurrent;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -14,8 +14,13 @@ import java.util.concurrent.ThreadFactory;
  */
 public class SimpleExecutor implements Executor {
 
-  /** @see #getThreadFactory() */
-  private ThreadFactory threadFactory;
+  /**
+   * This is the singleton instance of this {@link SimpleExecutor}.
+   */
+  public static final SimpleExecutor INSTANCE = new SimpleExecutor();
+
+  /** @see #execute(Runnable) */
+  private final ThreadFactory threadFactory;
 
   /**
    * The constructor.
@@ -34,22 +39,6 @@ public class SimpleExecutor implements Executor {
   public SimpleExecutor(ThreadFactory factory) {
 
     super();
-    this.threadFactory = factory;
-  }
-
-  /**
-   * @return the threadFactory
-   */
-  public ThreadFactory getThreadFactory() {
-
-    return this.threadFactory;
-  }
-
-  /**
-   * @param factory the threadFactory to set
-   */
-  public void setThreadFactory(ThreadFactory factory) {
-
     this.threadFactory = factory;
   }
 

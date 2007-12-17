@@ -16,13 +16,21 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.FutureTask;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.impl.Jdk14Logger;
+import org.apache.commons.logging.LogFactory;
 
+import net.sf.mmm.util.component.AlreadyInitializedException;
+import net.sf.mmm.util.concurrent.SimpleExecutor;
 import net.sf.mmm.util.pool.api.Pool;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
+import net.sf.mmm.util.state.Stoppable;
 
 /**
  * This class is a collection of utility functions to deal with
@@ -47,26 +55,33 @@ public class StreamUtil {
    */
   public static final StreamUtil INSTANCE = new StreamUtil();
 
-  /** @see #getLogger() */
-  private final Log logger;
-
-  /**
-   * The constructor.
-   */
-  protected StreamUtil() {
-
-    this(new Jdk14Logger(StreamUtil.class.getName()));
+  static {
+    INSTANCE.setExecutor(SimpleExecutor.INSTANCE);
+    // INSTANCE.setLogger(new Jdk14Logger(StreamUtil.class.getName()));
+    // even more ugly...
+    INSTANCE.setLogger(LogFactory.getLog(StreamUtil.class));
+    INSTANCE.setByteArrayPool(NoByteArrayPool.INSTANCE);
+    INSTANCE.setCharArrayPool(NoCharArrayPool.INSTANCE);
   }
 
+  /** @see #getLogger() */
+  private Log logger;
+
+  /** @see #getExecutor() */
+  private Executor executor;
+
+  /** @see #getByteArrayPool() */
+  private Pool<byte[]> byteArrayPool;
+
+  /** @see #getCharArrayPool() */
+  private Pool<char[]> charArrayPool;
+
   /**
    * The constructor.
-   * 
-   * @param logger the logger instance.
    */
-  protected StreamUtil(Log logger) {
+  public StreamUtil() {
 
     super();
-    this.logger = logger;
   }
 
   /**
@@ -74,9 +89,48 @@ public class StreamUtil {
    * 
    * @return the logger.
    */
-  protected final Log getLogger() {
+  protected Log getLogger() {
 
     return this.logger;
+  }
+
+  /**
+   * This method sets the {@link #getLogger() logger}.
+   * 
+   * @param logger the logger to set
+   */
+  @Resource
+  public void setLogger(Log logger) {
+
+    if (this.logger != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.logger = logger;
+  }
+
+  /**
+   * This method gets the {@link Executor} used to run asynchronous tasks. It
+   * may use a thread-pool.
+   * 
+   * @return the executor.
+   */
+  protected Executor getExecutor() {
+
+    return this.executor;
+  }
+
+  /**
+   * This method sets the {@link #getExecutor() executor}.
+   * 
+   * @param executor the executor to set.
+   */
+  @Resource
+  public void setExecutor(Executor executor) {
+
+    if (this.executor != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.executor = executor;
   }
 
   /**
@@ -89,7 +143,21 @@ public class StreamUtil {
    */
   protected Pool<byte[]> getByteArrayPool() {
 
-    return NoByteArrayPool.INSTANCE;
+    return this.byteArrayPool;
+  }
+
+  /**
+   * This method sets the {@link #getByteArrayPool() byte-array-pool}.
+   * 
+   * @param byteArrayPool the byteArrayPool to set
+   */
+  @Resource
+  public void setByteArrayPool(Pool<byte[]> byteArrayPool) {
+
+    if (this.byteArrayPool != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.byteArrayPool = byteArrayPool;
   }
 
   /**
@@ -103,6 +171,20 @@ public class StreamUtil {
   protected Pool<char[]> getCharArrayPool() {
 
     return NoCharArrayPool.INSTANCE;
+  }
+
+  /**
+   * This method sets the {@link #getCharArrayPool() char-array-pool}.
+   * 
+   * @param charArrayPool the charArrayPool to set
+   */
+  @Resource
+  public void setCharArrayPool(Pool<char[]> charArrayPool) {
+
+    if (this.charArrayPool != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.charArrayPool = charArrayPool;
   }
 
   /**
@@ -144,26 +226,9 @@ public class StreamUtil {
    */
   public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws IOException {
 
-    char[] buffer = getCharArrayPool().borrow();
-    try {
-      long bytes = 0;
-      int count = reader.read(buffer);
-      while (count >= 0) {
-        bytes = bytes + count;
-        writer.write(buffer, 0, count);
-        count = reader.read(buffer);
-      }
-      return bytes;
-    } finally {
-      try {
-        getCharArrayPool().release(buffer);
-      } finally {
-        close(reader);
-        if (!keepWriterOpen) {
-          close(writer);
-        }
-      }
-    }
+    ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, null);
+    long bytes = transferrer.transfer();
+    return bytes;
   }
 
   /**
@@ -257,26 +322,102 @@ public class StreamUtil {
   public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws IOException {
 
-    byte[] buffer = getByteArrayPool().borrow();
-    try {
-      long size = 0;
-      int count = inStream.read(buffer);
-      while (count >= 0) {
-        size = size + count;
-        outStream.write(buffer, 0, count);
-        count = inStream.read(buffer);
-      }
-      return size;
-    } finally {
-      try {
-        getByteArrayPool().release(buffer);
-      } finally {
-        close(inStream);
-        if (!keepOutStreamOpen) {
-          close(outStream);
-        }
-      }
-    }
+    StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen,
+        null);
+    long bytes = transferrer.transfer();
+    return bytes;
+  }
+
+  /**
+   * This method transfers the contents of the given <code>inStream</code> to
+   * the given <code>outStream</code>.
+   * 
+   * @param inStream is where to read the content from. Will be
+   *        {@link InputStream#close() closed} at the end.
+   * @param outStream is where to write the content to. Will be
+   *        {@link OutputStream#close() closed} at the end if
+   *        <code>keepOutStreamOpen</code> is <code>false</code>.
+   * @param keepOutStreamOpen if <code>true</code> the given
+   *        <code>outStream</code> will remain open so that additional content
+   *        can be appended. Else if <code>false</code>, the
+   *        <code>outStream</code> will be {@link OutputStream#close() closed}.
+   * @return the number of bytes that have been transferred.
+   */
+  public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream,
+      boolean keepOutStreamOpen) {
+
+    return transferAsync(inStream, outStream, keepOutStreamOpen, null);
+  }
+
+  /**
+   * This method transfers the contents of the given <code>inStream</code> to
+   * the given <code>outStream</code>.
+   * 
+   * @param inStream is where to read the content from. Will be
+   *        {@link InputStream#close() closed} at the end.
+   * @param outStream is where to write the content to. Will be
+   *        {@link OutputStream#close() closed} at the end if
+   *        <code>keepOutStreamOpen</code> is <code>false</code>.
+   * @param keepOutStreamOpen if <code>true</code> the given
+   *        <code>outStream</code> will remain open so that additional content
+   *        can be appended. Else if <code>false</code>, the
+   *        <code>outStream</code> will be {@link OutputStream#close() closed}.
+   * @param callback is the callback that is invoked if the transfer is done.
+   * @return the number of bytes that have been transferred.
+   */
+  public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream,
+      boolean keepOutStreamOpen, TransferCallback callback) {
+
+    StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen,
+        callback);
+    AsyncTransferrerImpl task = new AsyncTransferrerImpl(transferrer);
+    this.executor.execute(task);
+    return task;
+  }
+
+  /**
+   * This method transfers the contents of the given <code>reader</code> to
+   * the given <code>writer</code>.
+   * 
+   * @param reader is where to read the content from. Will be
+   *        {@link Reader#close() closed} at the end.
+   * @param writer is where to write the content to. Will be
+   *        {@link Reader#close() closed} at the end if
+   *        <code>keepWriterOpen</code> is <code>false</code>.
+   * @param keepWriterOpen if <code>true</code> the given <code>writer</code>
+   *        will remain open so that additional content can be appended. Else if
+   *        <code>false</code>, the <code>writer</code> will be
+   *        {@link Reader#close() closed}.
+   * @return the number of bytes that have been transferred.
+   */
+  public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen) {
+
+    return transferAsync(reader, writer, keepWriterOpen, null);
+  }
+
+  /**
+   * This method transfers the contents of the given <code>reader</code> to
+   * the given <code>writer</code>.
+   * 
+   * @param reader is where to read the content from. Will be
+   *        {@link Reader#close() closed} at the end.
+   * @param writer is where to write the content to. Will be
+   *        {@link Reader#close() closed} at the end if
+   *        <code>keepWriterOpen</code> is <code>false</code>.
+   * @param keepWriterOpen if <code>true</code> the given <code>writer</code>
+   *        will remain open so that additional content can be appended. Else if
+   *        <code>false</code>, the <code>writer</code> will be
+   *        {@link Reader#close() closed}.
+   * @param callback is the callback that is invoked if the transfer is done.
+   * @return the number of bytes that have been transferred.
+   */
+  public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen,
+      TransferCallback callback) {
+
+    ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, callback);
+    AsyncTransferrerImpl task = new AsyncTransferrerImpl(transferrer);
+    this.executor.execute(task);
+    return task;
   }
 
   /**
@@ -351,6 +492,277 @@ public class StreamUtil {
       channel.close();
     } catch (Exception e) {
       this.logger.warn("Failed to close writer!", e);
+    }
+  }
+
+  /**
+   * This is the default implementation of the {@link AsyncTransferrer}
+   * interface.
+   */
+  protected static class AsyncTransferrerImpl extends FutureTask<Long> implements AsyncTransferrer {
+
+    /** the actual task. */
+    private final BaseTransferrer transferrer;
+
+    /**
+     * The constructor.
+     * 
+     * @param transferrer is the actual transferrer task.
+     */
+    public AsyncTransferrerImpl(BaseTransferrer transferrer) {
+
+      super(transferrer);
+      this.transferrer = transferrer;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean cancel(boolean mayInterruptIfRunning) {
+
+      this.transferrer.stop();
+      return super.cancel(mayInterruptIfRunning);
+    }
+
+  }
+
+  /**
+   * This is the abstract base class for the {@link Callable} that transfers
+   * data of streams or readers/writers.
+   */
+  protected abstract static class AbstractAsyncTransferrer implements Callable<Long>, Stoppable {
+
+    /** @see #stop() */
+    private volatile boolean stopped;
+
+    /** @see #isCompleted() */
+    private volatile boolean completed;
+
+    /**
+     * {@inheritDoc}
+     */
+    public void stop() {
+
+      this.stopped = true;
+    }
+
+    /**
+     * This method determines if this transferrer was {@link #stop() stopped}.
+     * 
+     * @return <code>true</code> if stopped, <code>false</code> otherwise.
+     */
+    public final boolean isStopped() {
+
+      return this.stopped;
+    }
+
+    /**
+     * This method determines if the transfer has been completed successfully.
+     * 
+     * @return <code>true</code> if successfully completed, <code>false</code>
+     *         if still running, {@link #isStopped() stopped} or an exception
+     *         occurred.
+     */
+    public final boolean isCompleted() {
+
+      return this.completed;
+    }
+
+    /**
+     * This method sets the {@link #isCompleted() completed-flag}.
+     */
+    protected void setCompleted() {
+
+      this.completed = true;
+    }
+
+  }
+
+  /**
+   * This is an abstract implementation of the {@link AsyncTransferrer}
+   * interface, that implements {@link Runnable} defining the main flow.
+   */
+  protected abstract class BaseTransferrer extends AbstractAsyncTransferrer {
+
+    /** The callback or <code>null</code>. */
+    private final TransferCallback callback;
+
+    /**
+     * The constructor.
+     * 
+     * @param callback is the callback or <code>null</code>.
+     */
+    public BaseTransferrer(TransferCallback callback) {
+
+      super();
+      this.callback = callback;
+    }
+
+    /**
+     * This method performs the actual transfer.
+     * 
+     * @return the number of bytes that have been transferred.
+     * @throws IOException if the transfer failed.
+     */
+    protected abstract long transfer() throws IOException;
+
+    /**
+     * {@inheritDoc}
+     */
+    public Long call() throws Exception {
+
+      try {
+        long bytes = transfer();
+        if (this.callback != null) {
+          if (isCompleted()) {
+            this.callback.transferCompleted(bytes);
+          } else {
+            this.callback.transferStopped(bytes);
+          }
+        }
+        return Long.valueOf(bytes);
+      } catch (Exception e) {
+        getLogger().error("Error during async transfer!", e);
+        if (this.callback != null) {
+          this.callback.transferFailed(e);
+        }
+        throw e;
+      }
+    }
+
+  }
+
+  /**
+   * This inner class is used to transfer an {@link InputStream} to an
+   * {@link OutputStream}.
+   */
+  protected class StreamTransferrer extends BaseTransferrer {
+
+    /** The source to read from (to copy). */
+    private final InputStream source;
+
+    /** The destination to write to. */
+    private final OutputStream destination;
+
+    /** <code>true</code> if {@link #destination} should be closed. */
+    private final boolean keepDestinationOpen;
+
+    /**
+     * The constructor.
+     * 
+     * @see StreamUtil#transfer(InputStream, OutputStream, boolean)
+     * 
+     * @param source is {@link InputStream} to read from.
+     * @param destination the {@link OutputStream} to write to.
+     * @param keepDestinationOpen <code>true</code> if the
+     *        <code>destination</code> should be closed.
+     * @param callback is the callback or <code>null</code>.
+     */
+    public StreamTransferrer(InputStream source, OutputStream destination,
+        boolean keepDestinationOpen, TransferCallback callback) {
+
+      super(callback);
+      this.source = source;
+      this.destination = destination;
+      this.keepDestinationOpen = keepDestinationOpen;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long transfer() throws IOException {
+
+      byte[] buffer = getByteArrayPool().borrow();
+      try {
+        long bytesTransferred = 0;
+        int count = this.source.read(buffer);
+        while ((count > 0) && !isStopped()) {
+          this.destination.write(buffer, 0, count);
+          bytesTransferred += count;
+          count = this.source.read(buffer);
+        }
+        if (count == -1) {
+          setCompleted();
+        }
+        return bytesTransferred;
+      } finally {
+        try {
+          getByteArrayPool().release(buffer);
+        } finally {
+          close(this.source);
+          if (!this.keepDestinationOpen) {
+            close(this.destination);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * This inner class is used to transfer a {@link Reader} to a {@link Writer}.
+   */
+  protected class ReaderTransferrer extends BaseTransferrer {
+
+    /** The source to read from (to copy). */
+    private final Reader source;
+
+    /** The destination to write to. */
+    private final Writer destination;
+
+    /** <code>true</code> if {@link #destination} should be closed. */
+    private final boolean keepDestinationOpen;
+
+    /**
+     * The constructor.
+     * 
+     * @see StreamUtil#transfer(Reader, Writer, boolean)
+     * 
+     * @param source is {@link Reader} to read from.
+     * @param destination the {@link Writer} to write to.
+     * @param keepDestinationOpen <code>true</code> if the
+     *        <code>destination</code> should be closed.
+     * @param callback is the callback or <code>null</code>.
+     */
+    public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen,
+        TransferCallback callback) {
+
+      super(callback);
+      this.source = source;
+      this.destination = destination;
+      this.keepDestinationOpen = keepDestinationOpen;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long transfer() throws IOException {
+
+      char[] buffer = getCharArrayPool().borrow();
+      try {
+        long bytesTransferred = 0;
+        int count = this.source.read(buffer);
+        while ((count > 0) && !isStopped()) {
+          this.destination.write(buffer, 0, count);
+          bytesTransferred += count;
+          count = this.source.read(buffer);
+        }
+        if (count == -1) {
+          setCompleted();
+        }
+        return bytesTransferred;
+      } finally {
+        try {
+          getCharArrayPool().release(buffer);
+        } finally {
+          close(this.source);
+          if (!this.keepDestinationOpen) {
+            close(this.destination);
+          }
+        }
+      }
     }
   }
 

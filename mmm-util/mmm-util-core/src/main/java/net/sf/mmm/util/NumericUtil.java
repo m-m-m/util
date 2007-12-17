@@ -22,7 +22,7 @@ public class NumericUtil {
   /**
    * The constructor.
    */
-  protected NumericUtil() {
+  public NumericUtil() {
 
     super();
   }

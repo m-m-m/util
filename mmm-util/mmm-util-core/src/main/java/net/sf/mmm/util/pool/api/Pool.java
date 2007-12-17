@@ -12,7 +12,11 @@ package net.sf.mmm.util.pool.api;
  * {@link #borrow() requests}. Such buffer should be limited to a maximum size
  * (capacity). While that size is reached, {@link #release(Object) released}
  * objects will NOT be cached anymore (and the garbage collector should free
- * them).
+ * them).<br>
+ * <b>ATTENTION:</b><br>
+ * Do NOT use this interface for a {@link Thread}-pool. There is already
+ * {@link java.util.concurrent.Executor} for this use-case (see
+ * {@link java.util.concurrent.Executors}).
  * 
  * @param <E> is the templated type of the elements in the pool.
  * 
