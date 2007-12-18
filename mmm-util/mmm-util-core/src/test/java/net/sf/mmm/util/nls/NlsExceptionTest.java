@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.nls.base;
+package net.sf.mmm.util.nls;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,9 +11,9 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.nls.MyResourceBundle;
 import net.sf.mmm.util.nls.NlsException;
 import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.base.SimpleStringTranslator;
 
 /**

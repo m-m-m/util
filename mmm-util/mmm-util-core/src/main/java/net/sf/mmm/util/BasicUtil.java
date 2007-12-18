@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * This class is a collection of utility functions for general purpose
  * operations.
@@ -96,17 +99,46 @@ public class BasicUtil {
     if (o1 == o2) {
       return true;
     } else if (o1 != null) {
-      if (o1 instanceof Object[]) {
-        if ((o2 != null) && (o2 instanceof Object[])) {
-          Object[] array1 = (Object[]) o1;
-          Object[] array2 = (Object[]) o2;
-          if (array1.length == array2.length) {
-            for (int i = 0; i < array1.length; i++) {
-              if (!isDeepEqual(array1[i], array2[i])) {
-                return false;
+      Class<?> class1 = o1.getClass();
+      if (class1.isArray()) {
+        if (o1 instanceof Object[]) {
+          if ((o2 != null) && (o2 instanceof Object[])) {
+            Object[] array1 = (Object[]) o1;
+            Object[] array2 = (Object[]) o2;
+            if (array1.length == array2.length) {
+              for (int i = 0; i < array1.length; i++) {
+                if (!isDeepEqual(array1[i], array2[i])) {
+                  return false;
+                }
+              }
+              return true;
+            }
+          }
+        } else {
+          // primitive array
+          Class<?> class2 = o2.getClass();
+          if ((o2 != null) && (class2.isArray()) && (class1.equals(class2))) {
+            int len1 = Array.getLength(o1);
+            int len2 = Array.getLength(o2);
+            if (len1 == len2) {
+              if (o1 instanceof byte[]) {
+                return Arrays.equals((byte[]) o1, (byte[]) o2);
+              } else if (o1 instanceof int[]) {
+                return Arrays.equals((int[]) o1, (int[]) o2);
+              } else if (o1 instanceof long[]) {
+                return Arrays.equals((long[]) o1, (long[]) o2);
+              } else if (o1 instanceof boolean[]) {
+                return Arrays.equals((boolean[]) o1, (boolean[]) o2);
+              } else if (o1 instanceof double[]) {
+                return Arrays.equals((double[]) o1, (double[]) o2);
+              } else if (o1 instanceof float[]) {
+                return Arrays.equals((float[]) o1, (float[]) o2);
+              } else if (o1 instanceof short[]) {
+                return Arrays.equals((short[]) o1, (short[]) o2);
+              } else if (o1 instanceof char[]) {
+                return Arrays.equals((char[]) o1, (char[]) o2);
               }
             }
-            return true;
           }
         }
       } else {

@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.nls.MyResourceBundle;
 import net.sf.mmm.util.nls.NlsMessageImpl;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTranslator;
