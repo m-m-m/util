@@ -16,13 +16,8 @@ import java.util.Locale;
  */
 public class StringUtil {
 
-  /**
-   * This is the singleton instance of this {@link StringUtil}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
-   */
-  public static final StringUtil INSTANCE = new StringUtil();
+  /** @see #getInstance() */
+  private static StringUtil instance;
 
   /** a string representing the boolean value <code>true</code> */
   public static final String TRUE = String.valueOf(true);
@@ -42,6 +37,32 @@ public class StringUtil {
   public StringUtil() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link StringUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static StringUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (StringUtil.class) {
+        if (instance == null) {
+          instance = new StringUtil();
+        }
+      }
+    }
+    return instance;
   }
 
   /**

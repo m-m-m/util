@@ -21,7 +21,6 @@ import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.reflect.ClassResolver;
 import net.sf.mmm.util.value.ValueException;
-import net.sf.mmm.util.xml.StaxUtil;
 
 /**
  * This is an implementation of the {@link ContentClassLoader} interface that
@@ -89,8 +88,8 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
 
     boolean isClass = ContentClass.XML_TAG_CLASS.equals(xmlReader.getLocalName());
     // parse ID
-    int id = StaxUtil.parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_ID, Integer.class)
-        .intValue();
+    int id = getStaxUtil().parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_ID,
+        Integer.class).intValue();
     SmartId uid;
     SmartIdManager idManager = getContentModelService().getIdManager();
     if (isClass) {
@@ -110,7 +109,8 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    */
   protected String parseName(XMLStreamReader xmlReader) {
 
-    return StaxUtil.parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_NAME, String.class);
+    return getStaxUtil().parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_NAME,
+        String.class);
   }
 
   /**
@@ -122,7 +122,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    */
   protected boolean parseDeletedFlag(XMLStreamReader xmlReader) {
 
-    return StaxUtil.parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_DELETED,
+    return getStaxUtil().parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_DELETED,
         Boolean.class, Boolean.FALSE).booleanValue();
   }
 
@@ -156,17 +156,18 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
     String name = parseName(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
-    boolean isSystem = StaxUtil.parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_SYSTEM,
+    boolean isSystem = getStaxUtil().parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_SYSTEM,
         Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isFinal = StaxUtil.parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_FINAL,
+    boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_FINAL,
         Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isAbstract = StaxUtil.parseAttribute(xmlReader, null,
+    boolean isAbstract = getStaxUtil().parseAttribute(xmlReader, null,
         ClassModifiers.XML_ATR_ROOT_ABSTRACT, Boolean.class, Boolean.FALSE).booleanValue();
     // default value for extendable is...
     boolean isExtendable = !(isFinal || (isSystem && isAbstract));
     // configured value is therefore...
-    isExtendable = StaxUtil.parseAttribute(xmlReader, null, ClassModifiers.XML_ATR_ROOT_EXTENDABLE,
-        Boolean.class, Boolean.valueOf(isExtendable)).booleanValue();
+    isExtendable = getStaxUtil().parseAttribute(xmlReader, null,
+        ClassModifiers.XML_ATR_ROOT_EXTENDABLE, Boolean.class, Boolean.valueOf(isExtendable))
+        .booleanValue();
     ClassModifiers modifiers = ClassModifiersImpl.getInstance(isSystem, isFinal, isAbstract,
         isExtendable);
 
@@ -230,7 +231,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
   protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractContentClass superClass)
       throws XMLStreamException {
 
-    StaxUtil.skipOpenElement(xmlReader);
+    getStaxUtil().skipOpenElement(xmlReader);
   }
 
   /**
@@ -257,19 +258,19 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
     String name = parseName(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
-    boolean isFinal = StaxUtil.parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_FINAL,
+    boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null, Modifiers.XML_ATR_ROOT_FINAL,
         Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isReadOnly = StaxUtil.parseAttribute(xmlReader, null,
+    boolean isReadOnly = getStaxUtil().parseAttribute(xmlReader, null,
         FieldModifiers.XML_ATR_ROOT_READ_ONLY, Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isStatic = StaxUtil.parseAttribute(xmlReader, null, FieldModifiers.XML_ATR_ROOT_STATIC,
-        Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isStatic = getStaxUtil().parseAttribute(xmlReader, null,
+        FieldModifiers.XML_ATR_ROOT_STATIC, Boolean.class, Boolean.FALSE).booleanValue();
     boolean isSystem = declaringClass.getModifiers().isSystem();
-    boolean isTransient = StaxUtil.parseAttribute(xmlReader, null,
+    boolean isTransient = getStaxUtil().parseAttribute(xmlReader, null,
         FieldModifiers.XML_ATR_ROOT_TRANSIENT, Boolean.class, Boolean.FALSE).booleanValue();
     FieldModifiers modifiers = FieldModifiersImpl.getInstance(isSystem, isFinal, isReadOnly,
         isStatic, isTransient);
     // parse type
-    String typeSpecification = StaxUtil.parseAttribute(xmlReader, null,
+    String typeSpecification = getStaxUtil().parseAttribute(xmlReader, null,
         ContentField.XML_ATR_FIELD_TYPE, String.class);
     Type fieldType = null;
     // fieldType = parseFieldType(typeSpecification, getClassResolver());
@@ -281,7 +282,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
     // declaringClass, modifiers, fieldType, typeSpecification, deleted);
     xmlReader.nextTag();
     if (xmlReader.isStartElement()) {
-      StaxUtil.skipOpenElement(xmlReader);
+      getStaxUtil().skipOpenElement(xmlReader);
     }
     return contentField;
   }

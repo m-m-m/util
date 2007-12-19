@@ -44,7 +44,7 @@ public class StreamUtilTest {
     String s = builder.toString();
     StringReader reader = new StringReader(s);
     StringWriter writer = new StringWriter();
-    long bytes = StreamUtil.INSTANCE.transfer(reader, writer, true);
+    long bytes = StreamUtil.getInstance().transfer(reader, writer, true);
     assertEquals(len, bytes);
     assertEquals(s, writer.toString());
   }
@@ -59,9 +59,9 @@ public class StreamUtilTest {
     }
     ByteArrayInputStream inStream = new ByteArrayInputStream(data);
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-    long bytes = StreamUtil.INSTANCE.transfer(inStream, outStream, true);
+    long bytes = StreamUtil.getInstance().transfer(inStream, outStream, true);
     assertEquals(len, bytes);
-    assertTrue(BasicUtil.INSTANCE.isDeepEqual(data, outStream.toByteArray()));
+    assertTrue(BasicUtil.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }
 
   @Test
@@ -74,10 +74,11 @@ public class StreamUtilTest {
     }
     ByteArrayInputStream inStream = new ByteArrayInputStream(data);
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-    AsyncTransferrer transferrer = StreamUtil.INSTANCE.transferAsync(inStream, outStream, true);
+    AsyncTransferrer transferrer = StreamUtil.getInstance()
+        .transferAsync(inStream, outStream, true);
     Long bytes = transferrer.get();
     assertEquals(len, bytes.longValue());
-    assertTrue(BasicUtil.INSTANCE.isDeepEqual(data, outStream.toByteArray()));
+    assertTrue(BasicUtil.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }
 
   @Test
@@ -91,20 +92,20 @@ public class StreamUtilTest {
     ByteArrayInputStream inStream = new ByteArrayInputStream(data);
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     Callback callback = new Callback();
-    AsyncTransferrer transferrer = StreamUtil.INSTANCE.transferAsync(inStream, outStream, true,
-        callback);
+    AsyncTransferrer transferrer = StreamUtil.getInstance().transferAsync(inStream, outStream,
+        true, callback);
     Long bytes = transferrer.get();
     assertEquals(len, bytes.longValue());
     assertEquals(len, callback.bytesCompleted.longValue());
-    assertTrue(BasicUtil.INSTANCE.isDeepEqual(data, outStream.toByteArray()));
+    assertTrue(BasicUtil.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }
 
   @Test
   public void testTransferStreamAsyncStop() throws Exception {
 
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-    AsyncTransferrer transferrer = StreamUtil.INSTANCE.transferAsync(DevZero.INSTANCE, outStream,
-        true);
+    AsyncTransferrer transferrer = StreamUtil.getInstance().transferAsync(DevZero.INSTANCE,
+        outStream, true);
     Thread.sleep(1);
     long size = outStream.size();
     transferrer.cancel(true);
@@ -120,7 +121,7 @@ public class StreamUtilTest {
 
     InputStreamReader reader = new InputStreamReader(DevZero.INSTANCE);
     StringWriter writer = new StringWriter();
-    AsyncTransferrer transferrer = StreamUtil.INSTANCE.transferAsync(reader, writer, true);
+    AsyncTransferrer transferrer = StreamUtil.getInstance().transferAsync(reader, writer, true);
     Thread.sleep(1);
     long size = writer.getBuffer().length();
     transferrer.cancel(true);
@@ -136,8 +137,8 @@ public class StreamUtilTest {
 
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     Callback callback = new Callback();
-    AsyncTransferrer transferrer = StreamUtil.INSTANCE.transferAsync(DevZero.INSTANCE, outStream,
-        true, callback);
+    AsyncTransferrer transferrer = StreamUtil.getInstance().transferAsync(DevZero.INSTANCE,
+        outStream, true, callback);
     Thread.sleep(1);
     long size = outStream.size();
     transferrer.cancel(true);

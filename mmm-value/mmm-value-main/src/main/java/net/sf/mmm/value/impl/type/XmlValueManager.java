@@ -17,7 +17,6 @@ import org.xml.sax.InputSource;
 import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.util.value.ValueParseStringException;
 import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
@@ -86,7 +85,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   protected Element fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
     Document doc = DomUtil.createDocument();
-    StaxUtil.writeToDom(xmlReader, doc);
+    getStaxUtil().writeToDom(xmlReader, doc);
     return doc.getDocumentElement();
   }
 

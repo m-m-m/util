@@ -18,7 +18,7 @@ public class NumericUtilTest {
 
   private void verifySimplestNumber(Number value, Class simplestType) {
 
-    Number simpleValue = NumericUtil.INSTANCE.toSimplestNumber(value);
+    Number simpleValue = NumericUtil.getInstance().toSimplestNumber(value);
     assertEquals(simpleValue.doubleValue(), value.doubleValue(), 0.0);
     assertSame(simpleValue.getClass(), simplestType);
   }

@@ -64,6 +64,9 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
    */
   private final InputStream inputStream;
 
+  /** @see #getStaxUtil() */
+  private StaxUtil staxUtil;
+
   /**
    * The reader to the current XInclude document or <code>null</code> if we
    * currently have no active XInclude.
@@ -127,6 +130,25 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
       throw e;
     }
     setParent(this.mainReader);
+  }
+
+  /**
+   * @return the staxUtil
+   */
+  public StaxUtil getStaxUtil() {
+
+    if (this.staxUtil == null) {
+      this.staxUtil = StaxUtil.getInstance();
+    }
+    return this.staxUtil;
+  }
+
+  /**
+   * @param staxUtil the staxUtil to set
+   */
+  public void setStaxUtil(StaxUtil staxUtil) {
+
+    this.staxUtil = staxUtil;
   }
 
   /**
@@ -235,7 +257,7 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
           }
           InputStream textInputStream = includeResource.openStream();
           Reader reader = new InputStreamReader(textInputStream, charset);
-          this.includeText = StreamUtil.INSTANCE.read(reader);
+          this.includeText = StreamUtil.getInstance().read(reader);
           return XMLStreamConstants.CHARACTERS;
         } else {
           throw new XMLStreamException("Unsupported XInclude parse type:" + parse);
@@ -357,9 +379,9 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
 
     if (eventType != XMLStreamConstants.START_ELEMENT
         && eventType != XMLStreamConstants.END_ELEMENT) {
-      throw new XMLStreamException("found: " + StaxUtil.getEventTypeName(eventType) + ", expected "
-          + StaxUtil.getEventTypeName(XMLStreamConstants.START_ELEMENT) + " or "
-          + StaxUtil.getEventTypeName(XMLStreamConstants.END_ELEMENT), getLocation());
+      throw new XMLStreamException("found: " + getStaxUtil().getEventTypeName(eventType)
+          + ", expected " + getStaxUtil().getEventTypeName(XMLStreamConstants.START_ELEMENT)
+          + " or " + getStaxUtil().getEventTypeName(XMLStreamConstants.END_ELEMENT), getLocation());
     }
 
     return eventType;

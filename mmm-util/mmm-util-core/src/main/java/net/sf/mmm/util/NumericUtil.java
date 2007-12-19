@@ -11,13 +11,8 @@ package net.sf.mmm.util;
  */
 public class NumericUtil {
 
-  /**
-   * This is the singleton instance of this {@link NumericUtil}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
-   */
-  public static final NumericUtil INSTANCE = new NumericUtil();
+  /** @see #getInstance() */
+  private static NumericUtil instance;
 
   /**
    * The constructor.
@@ -25,6 +20,32 @@ public class NumericUtil {
   public NumericUtil() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link NumericUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static NumericUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (NumericUtil.class) {
+        if (instance == null) {
+          instance = new NumericUtil();
+        }
+      }
+    }
+    return instance;
   }
 
   /**

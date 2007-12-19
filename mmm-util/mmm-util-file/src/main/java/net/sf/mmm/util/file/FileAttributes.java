@@ -24,12 +24,27 @@ public class FileAttributes implements Cloneable {
   /** @see #getPermissions() */
   private FileAccessPermissions permissions;
 
+  /** the {@link BasicUtil} instance to use. */
+  private BasicUtil basicUtil;
+
   /**
    * The constructor.
    */
   public FileAttributes() {
 
     super();
+    this.basicUtil = BasicUtil.getInstance();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param basicUtil the instance of {@link BasicUtil} to use.
+   */
+  public FileAttributes(BasicUtil basicUtil) {
+
+    super();
+    this.basicUtil = basicUtil;
   }
 
   /**
@@ -100,6 +115,7 @@ public class FileAttributes implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean equals(Object obj) {
 
     if (obj == null) {
@@ -112,13 +128,13 @@ public class FileAttributes implements Cloneable {
       return false;
     }
     FileAttributes otherAttributes = (FileAttributes) obj;
-    if (!BasicUtil.INSTANCE.isEqual(this.user, otherAttributes.user)) {
+    if (!this.basicUtil.isEqual(this.user, otherAttributes.user)) {
       return false;
     }
-    if (!BasicUtil.INSTANCE.isEqual(this.group, otherAttributes.group)) {
+    if (!this.basicUtil.isEqual(this.group, otherAttributes.group)) {
       return false;
     }
-    if (!BasicUtil.INSTANCE.isEqual(this.permissions, otherAttributes.permissions)) {
+    if (!this.basicUtil.isEqual(this.permissions, otherAttributes.permissions)) {
       return false;
     }
     return true;
@@ -127,6 +143,7 @@ public class FileAttributes implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int hashCode() {
 
     int hash = 0;
@@ -145,6 +162,7 @@ public class FileAttributes implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toString() {
 
     // TODO Auto-generated method stub

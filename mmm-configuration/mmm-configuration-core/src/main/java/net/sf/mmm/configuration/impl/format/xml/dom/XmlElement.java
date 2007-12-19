@@ -123,6 +123,7 @@ public class XmlElement extends AbstractConfigurationElement {
   /**
    * 
    */
+  @Override
   public void disable() {
 
     String prefix = this.element.lookupPrefix(ConfigurationDocument.NAMESPACE_URI_CONFIGURATION);
@@ -192,7 +193,7 @@ public class XmlElement extends AbstractConfigurationElement {
   protected String getPlainString() {
 
     String text = DomUtil.getNodeText(this.element);
-    if (StringUtil.INSTANCE.isEmpty(text)) {
+    if (StringUtil.getInstance().isEmpty(text)) {
       return null;
     }
     return text;

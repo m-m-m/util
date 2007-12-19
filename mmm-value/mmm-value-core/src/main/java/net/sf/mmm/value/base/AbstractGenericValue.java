@@ -400,7 +400,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return NumericUtil.INSTANCE.toSimplestNumber(d);
+      return NumericUtil.getInstance().toSimplestNumber(d);
     } catch (NumberFormatException e) {
       throw new WrongValueTypeException(this, Number.class, e);
     }

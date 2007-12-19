@@ -121,7 +121,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
       result = null;
     } else {
       if (value instanceof Date) {
-        result = Iso8601Util.INSTANCE.formatDateTime((Date) value);
+        result = Iso8601Util.getInstance().formatDateTime((Date) value);
       } else if (value instanceof Class) {
         result = ((Class<?>) value).getName();
       } else {
@@ -159,7 +159,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   protected Date parseDate(String dateValue) throws WrongValueTypeException {
 
     try {
-      return Iso8601Util.INSTANCE.parseDate(dateValue);
+      return Iso8601Util.getInstance().parseDate(dateValue);
     } catch (Exception e) {
       throw new WrongValueTypeException(this, Date.class, e);
     }

@@ -5,8 +5,11 @@ package net.sf.mmm.util.value;
 
 import java.util.Date;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.util.NumericUtil;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.date.Iso8601Util;
 
 /**
@@ -17,8 +20,11 @@ import net.sf.mmm.util.date.Iso8601Util;
  */
 public class ValueConverter {
 
-  /** The singleton instance. */
-  public static final ValueConverter INSTANCE = new ValueConverter();
+  /** @see #getInstance() */
+  private static ValueConverter instance;
+
+  /** @see #getIso8601Util() */
+  private Iso8601Util iso8601Util;
 
   /**
    * The constructor.
@@ -26,6 +32,58 @@ public class ValueConverter {
   public ValueConverter() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link ValueConverter}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static ValueConverter getInstance() {
+
+    if (instance == null) {
+      synchronized (ValueConverter.class) {
+        if (instance == null) {
+          instance = new ValueConverter();
+          instance.setIso8601Util(Iso8601Util.getInstance());
+        }
+      }
+    }
+    return instance;
+  }
+
+  /**
+   * This method gets the util used to parse and format date and time according
+   * to the standard <code>ISO-8601</code>.
+   * 
+   * @return the iso8601Util
+   */
+  protected Iso8601Util getIso8601Util() {
+
+    return this.iso8601Util;
+  }
+
+  /**
+   * This method sets the {@link #getIso8601Util() Iso8601Util}.
+   * 
+   * @param iso8601Util the iso8601Util to set
+   */
+  @Resource
+  public void setIso8601Util(Iso8601Util iso8601Util) {
+
+    if (this.iso8601Util != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.iso8601Util = iso8601Util;
   }
 
   /**
@@ -44,7 +102,7 @@ public class ValueConverter {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return NumericUtil.INSTANCE.toSimplestNumber(d);
+      return NumericUtil.getInstance().toSimplestNumber(d);
     } catch (NumberFormatException e) {
       // TODO: valueSource as first arg, booleanValue as additional arg!
       throw new WrongValueTypeException(numberValue, valueSource, Number.class, e);
@@ -209,7 +267,7 @@ public class ValueConverter {
       if (type.isAssignableFrom(String.class)) {
         result = value;
       } else if ((type == boolean.class) || (type == Boolean.class)) {
-        result = StringUtil.INSTANCE.parseBoolean(value);
+        result = StringUtil.getInstance().parseBoolean(value);
         if (result == null) {
           throw new WrongValueTypeException(value, valueSource, type);
         }
@@ -230,7 +288,7 @@ public class ValueConverter {
       } else if (type == Number.class) {
         result = parseNumber(value, valueSource);
       } else if (type == Date.class) {
-        result = Iso8601Util.INSTANCE.parseDate(value);
+        result = this.iso8601Util.parseDate(value);
       } else if (type == Character.class) {
         if (value.length() == 1) {
           result = Character.valueOf(value.charAt(0));

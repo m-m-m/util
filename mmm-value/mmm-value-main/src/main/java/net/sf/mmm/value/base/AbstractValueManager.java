@@ -31,6 +31,8 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   /** the to string message */
   private NlsMessage toStringMessage;
 
+  private StaxUtil staxUtil;
+
   /**
    * The constructor.
    */
@@ -38,6 +40,25 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
 
     super();
     this.toStringMessage = null;
+  }
+
+  /**
+   * @return the staxUtil
+   */
+  public StaxUtil getStaxUtil() {
+
+    if (this.staxUtil == null) {
+      this.staxUtil = StaxUtil.getInstance();
+    }
+    return this.staxUtil;
+  }
+
+  /**
+   * @param staxUtil the staxUtil to set
+   */
+  public void setStaxUtil(StaxUtil staxUtil) {
+
+    this.staxUtil = staxUtil;
   }
 
   /**
@@ -70,7 +91,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
       throw new IllegalArgumentException();
     }
     V value = fromXmlContent(xmlReader);
-    StaxUtil.skipOpenElement(xmlReader);
+    getStaxUtil().skipOpenElement(xmlReader);
     return value;
   }
 
@@ -83,7 +104,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
    */
   protected V fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
-    String textContent = StaxUtil.readText(xmlReader);
+    String textContent = getStaxUtil().readText(xmlReader);
     return fromString(textContent);
   }
 

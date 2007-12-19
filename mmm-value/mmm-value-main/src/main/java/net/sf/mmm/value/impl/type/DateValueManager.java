@@ -15,7 +15,6 @@ import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.value.ValueParseException;
 import net.sf.mmm.util.value.ValueParseStringException;
-import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**
@@ -89,7 +88,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   public Date fromString(String valueAsString) throws ValueParseException {
 
     try {
-      return Iso8601Util.INSTANCE.parseDate(valueAsString);
+      return Iso8601Util.getInstance().parseDate(valueAsString);
     } catch (Exception e) {
       throw new ValueParseStringException(valueAsString, VALUE_TYPE, VALUE_NAME, e);
     }
@@ -102,19 +101,20 @@ public class DateValueManager extends AbstractValueManager<Date> {
   protected Date fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
     // date
-    int year = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_DATE_YEAR, Integer.class)
+    int year = getStaxUtil().parseAttribute(xmlReader, null, XML_ATR_DATE_YEAR, Integer.class)
         .intValue();
-    int month = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_DATE_MONTH, Integer.class)
+    int month = getStaxUtil().parseAttribute(xmlReader, null, XML_ATR_DATE_MONTH, Integer.class)
         .intValue();
-    int day = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_DATE_DAY, Integer.class).intValue();
+    int day = getStaxUtil().parseAttribute(xmlReader, null, XML_ATR_DATE_DAY, Integer.class)
+        .intValue();
     // time
     Integer zero = Integer.valueOf(0);
-    int hour = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_TIME_HOUR, Integer.class, zero)
-        .intValue();
-    int min = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_TIME_MINUTE, Integer.class, zero)
-        .intValue();
-    int sec = StaxUtil.parseAttribute(xmlReader, null, XML_ATR_TIME_SECOND, Integer.class, zero)
-        .intValue();
+    int hour = getStaxUtil()
+        .parseAttribute(xmlReader, null, XML_ATR_TIME_HOUR, Integer.class, zero).intValue();
+    int min = getStaxUtil().parseAttribute(xmlReader, null, XML_ATR_TIME_MINUTE, Integer.class,
+        zero).intValue();
+    int sec = getStaxUtil().parseAttribute(xmlReader, null, XML_ATR_TIME_SECOND, Integer.class,
+        zero).intValue();
     String tz = xmlReader.getAttributeValue(null, XML_ATR_TIME_ZONE);
     if (tz == null) {
       tz = "UTC";
@@ -132,7 +132,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   @Override
   protected String toStringNotNull(Date value) {
 
-    return Iso8601Util.INSTANCE.formatDateTime(value);
+    return Iso8601Util.getInstance().formatDateTime(value);
   }
 
   /**
@@ -151,15 +151,15 @@ public class DateValueManager extends AbstractValueManager<Date> {
     xmlWriter.writeAttribute(XML_ATR_DATE_DAY, Integer.toString(day));
     int hour = calendar.get(Calendar.HOUR_OF_DAY);
     if (hour != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtil.INSTANCE.padNumber(hour, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtil.getInstance().padNumber(hour, 2));
     }
     int min = calendar.get(Calendar.MINUTE);
     if (min != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtil.INSTANCE.padNumber(min, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtil.getInstance().padNumber(min, 2));
     }
     int sec = calendar.get(Calendar.SECOND);
     if (sec != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtil.INSTANCE.padNumber(sec, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtil.getInstance().padNumber(sec, 2));
     }
   }
 

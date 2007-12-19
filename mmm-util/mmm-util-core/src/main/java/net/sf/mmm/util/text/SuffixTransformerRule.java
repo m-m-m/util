@@ -44,7 +44,7 @@ public class SuffixTransformerRule extends TransformerRule {
   public String transform(String string, String stringLowerCase) {
 
     if (stringLowerCase.endsWith(this.sourceSuffix)) {
-      return StringUtil.INSTANCE.replaceSuffixWithCase(string, this.sourceSuffix.length(),
+      return StringUtil.getInstance().replaceSuffixWithCase(string, this.sourceSuffix.length(),
           this.destinationSuffix);
     }
     return null;

@@ -10,6 +10,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -89,6 +90,8 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
   /** @see #setClassResolver(ClassResolver) */
   private ClassResolver classResolver;
 
+  private StaxUtil staxUtil;
+
   /**
    * The constructor.
    * 
@@ -105,6 +108,26 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
     this.factory = XMLInputFactory.newInstance();
     this.classResolver = ClassResolver.CLASS_FOR_NAME_RESOLVER;
     this.configurationResource = new ClasspathResource(ContentModelService.XML_MODEL_LOCATION);
+  }
+
+  /**
+   * @return the staxUtil
+   */
+  public StaxUtil getStaxUtil() {
+
+    if (this.staxUtil == null) {
+      this.staxUtil = StaxUtil.getInstance();
+    }
+    return this.staxUtil;
+  }
+
+  /**
+   * @param staxUtil the staxUtil to set
+   */
+  @Resource
+  public void setStaxUtil(StaxUtil staxUtil) {
+
+    this.staxUtil = staxUtil;
   }
 
   /**
@@ -197,7 +220,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           loadClassRecursive(entityClass, context);
         }
       }
-      StaxUtil.skipOpenElement(xmlReader);
+      getStaxUtil().skipOpenElement(xmlReader);
     } catch (Exception e) {
       // TODO: exception handling!!!
       throw new IllegalArgumentException(e);

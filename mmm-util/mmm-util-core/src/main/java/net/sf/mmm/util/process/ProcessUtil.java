@@ -26,27 +26,14 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.state.Stoppable;
 
 /**
- * TODO: this class ...
+ * This class is a collection of utility functions to deal with {@link Process}es.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ProcessUtil {
 
-  /**
-   * This is the singleton instance of this {@link ProcessUtil}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
-   */
-  public static final ProcessUtil INSTANCE = new ProcessUtil();
-
-  static {
-    // INSTANCE.setLogger(new Jdk14Logger(ProcessUtil.class.getName()));
-    // even more ugly...
-    INSTANCE.setLogger(LogFactory.getLog(ProcessUtil.class));
-    INSTANCE.setExecutor(SimpleExecutor.INSTANCE);
-    INSTANCE.setStreamUtil(StreamUtil.INSTANCE);
-  }
+  /** @see #getInstance() */
+  private static ProcessUtil instance;
 
   /** @see #getStreamUtil() */
   private StreamUtil streamUtil;
@@ -59,11 +46,41 @@ public class ProcessUtil {
 
   /**
    * The constructor.
-   * 
    */
   public ProcessUtil() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link ProcessUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static ProcessUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (ProcessUtil.class) {
+        if (instance == null) {
+          instance = new ProcessUtil();
+          // instance.setLogger(new Jdk14Logger(ProcessUtil.class.getName()));
+          // even more ugly...
+          instance.setLogger(LogFactory.getLog(ProcessUtil.class));
+          instance.setExecutor(SimpleExecutor.INSTANCE);
+          instance.setStreamUtil(StreamUtil.getInstance());
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -136,11 +153,12 @@ public class ProcessUtil {
    * <b>ATTENTION:</b><br>
    * This method spins up multiple {@link Thread threads}, especially when
    * multiple processes are piped (2*n+1[+1] threads). Therefore you should NOT
-   * use the {@link #INSTANCE singleton} variant of this util except you are
-   * writing a simple command-line client that does a simple job and then
+   * use the {@link #getInstance() singleton} variant of this util except you
+   * are writing a simple command-line client that does a simple job and then
    * terminates. When writing a server-application or library, that makes such
-   * calls repetitive, you should NOT use the {@link #INSTANCE singleton} and
-   * configure a thread-pool as {@link java.util.concurrent.Executor}.
+   * calls repetitive, you should create your own instance of
+   * {@link ProcessUtil} and configure a thread-pool as
+   * {@link java.util.concurrent.Executor}.
    * 
    * @param context is the context of the process pipe (fist <code>stdin</code>,
    *        last <code>stdout</code> and <code>stderr</code> for all

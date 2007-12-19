@@ -75,7 +75,7 @@ public final class Iso8601Util {
    * the same way of access while still allowing a design for extension by
    * inheriting from this class.
    */
-  public static final Iso8601Util INSTANCE = new Iso8601Util();
+  private static Iso8601Util instance;
 
   /** The ID for UTC (Coordinated Universal Time). */
   private static final String UTC_ID = "UTC";
@@ -89,6 +89,32 @@ public final class Iso8601Util {
   public Iso8601Util() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link Iso8601Util}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static Iso8601Util getInstance() {
+
+    if (instance == null) {
+      synchronized (Iso8601Util.class) {
+        if (instance == null) {
+          instance = new Iso8601Util();
+        }
+      }
+    }
+    return instance;
   }
 
   /**

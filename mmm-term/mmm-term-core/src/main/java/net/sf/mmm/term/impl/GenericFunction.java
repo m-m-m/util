@@ -311,7 +311,7 @@ public class GenericFunction extends BasicFunction {
     }
     // check if operator is valid...
     String operator = getStaticField(partialFunction, FIELD_NAME_SYMBOL, String.class);
-    if (!BasicUtil.INSTANCE.isEqual(this.symbol, operator)) {
+    if (!BasicUtil.getInstance().isEqual(this.symbol, operator)) {
       throw new FunctionException(NlsBundleTermCore.ERR_FCT_WRONG_SYMBOL, partialFunction, this,
           operator);
     }

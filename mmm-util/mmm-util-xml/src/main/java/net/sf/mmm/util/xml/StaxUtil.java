@@ -6,6 +6,7 @@ package net.sf.mmm.util.xml;
 import java.io.OutputStream;
 import java.io.Writer;
 
+import javax.annotation.Resource;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -14,6 +15,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.w3c.dom.Node;
 
+import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.value.ValueConverter;
 import net.sf.mmm.util.value.ValueException;
 
@@ -25,8 +27,13 @@ import net.sf.mmm.util.value.ValueException;
  */
 public final class StaxUtil {
 
+  /** @see #getInstance() */
+  private static StaxUtil instance;
+
   /** the StAX output factory */
   private static final XMLOutputFactory OUTPUT_FACTORY = XMLOutputFactory.newInstance();
+
+  private ValueConverter valueConverter;
 
   /**
    * Forbidden constructor.
@@ -34,6 +41,54 @@ public final class StaxUtil {
   private StaxUtil() {
 
     super();
+    this.valueConverter = ValueConverter.getInstance();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link StaxUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static StaxUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (StaxUtil.class) {
+        if (instance == null) {
+          instance = new StaxUtil();
+          instance.setValueConverter(ValueConverter.getInstance());
+        }
+      }
+    }
+    return instance;
+  }
+
+  /**
+   * @return the valueConverter
+   */
+  protected ValueConverter getValueConverter() {
+
+    return this.valueConverter;
+  }
+
+  /**
+   * @param valueConverter the valueConverter to set
+   */
+  @Resource
+  public void setValueConverter(ValueConverter valueConverter) {
+
+    if (this.valueConverter != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.valueConverter = valueConverter;
   }
 
   /**
@@ -44,7 +99,7 @@ public final class StaxUtil {
    * @throws XMLStreamException if the creation of the stream writer failed
    *         (StAX not available or misconfigured).
    */
-  public static XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException {
+  public XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException {
 
     return OUTPUT_FACTORY.createXMLStreamWriter(out);
   }
@@ -57,7 +112,7 @@ public final class StaxUtil {
    * @throws XMLStreamException if the creation of the stream writer failed
    *         (StAX not available or misconfigured).
    */
-  public static XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
+  public XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
 
     return OUTPUT_FACTORY.createXMLStreamWriter(writer);
   }
@@ -75,12 +130,12 @@ public final class StaxUtil {
    * @throws ValueException if the attribute is NOT defined or its value can NOT
    *         be converted to <code>type</code>.
    */
-  public static <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
       String localAttributeName, Class<V> type) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
-    return ValueConverter.INSTANCE.convertValue(value, valueSource, type);
+    return this.valueConverter.convertValue(value, valueSource, type);
   }
 
   /**
@@ -98,14 +153,14 @@ public final class StaxUtil {
    * @throws ValueException if the attribute value can NOT be converted to
    *         <code>type</code>.
    */
-  public static <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
       String localAttributeName, Class<V> type, V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
-    return ValueConverter.INSTANCE.convertValue(value, localAttributeName, type, defaultValue);
+    return this.valueConverter.convertValue(value, localAttributeName, type, defaultValue);
   }
 
-  public static String readText(XMLStreamReader xmlReader) throws XMLStreamException {
+  public String readText(XMLStreamReader xmlReader) throws XMLStreamException {
 
     int eventType = xmlReader.getEventType();
     if (eventType == XMLStreamConstants.START_ELEMENT) {
@@ -149,7 +204,7 @@ public final class StaxUtil {
    *        of the next sibling or to end-element of the parent.
    * @throws XMLStreamException if the operation failed.
    */
-  public static void skipOpenElement(XMLStreamReader xmlReader) throws XMLStreamException {
+  public void skipOpenElement(XMLStreamReader xmlReader) throws XMLStreamException {
 
     int depth = 1;
     do {
@@ -175,7 +230,7 @@ public final class StaxUtil {
    *        {@link XMLStreamConstants}.
    * @return the according name.
    */
-  public static String getEventTypeName(int eventType) {
+  public String getEventTypeName(int eventType) {
 
     switch (eventType) {
       case XMLStreamConstants.ATTRIBUTE:
@@ -212,14 +267,14 @@ public final class StaxUtil {
     return "UNKNOWN_EVENT_TYPE (" + String.valueOf(eventType) + ")";
   }
 
-  public static void writeToDom(XMLStreamReader xmlReader, Node node) throws XMLStreamException {
+  public void writeToDom(XMLStreamReader xmlReader, Node node) throws XMLStreamException {
 
     int nodeType = node.getNodeType();
     int eventType = xmlReader.getEventType();
 
   }
 
-  public static void readFromDom(Node node, XMLStreamWriter xmlWriter) throws XMLStreamException {
+  public void readFromDom(Node node, XMLStreamWriter xmlWriter) throws XMLStreamException {
 
   }
 

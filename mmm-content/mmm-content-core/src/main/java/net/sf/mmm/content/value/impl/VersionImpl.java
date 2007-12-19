@@ -404,7 +404,8 @@ public final class VersionImpl implements Version {
       if (getMajorVersion() == otherVersion.getMajorVersion()
           && getMinorVersion() == otherVersion.getMinorVersion()
           && getMicroVersion() == otherVersion.getMicroVersion()) {
-        return (BasicUtil.INSTANCE.isEqual(getVersionSuffix(), otherVersion.getVersionSuffix()));
+        return (BasicUtil.getInstance()
+            .isEqual(getVersionSuffix(), otherVersion.getVersionSuffix()));
       }
     }
     return false;
