@@ -277,10 +277,10 @@ public class ResourceBundleSynchronizer {
    */
   public static void usage(int code) {
 
-    NlsMessageImpl message = new NlsMessageImpl(NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE,
+    NlsMessageImpl message = new NlsMessageImpl(NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE,
         ResourceBundleSynchronizer.class.getName(), DEFAULT_ENCODING, DEFAULT_BASE_PATH,
-        DEFAULT_DATE_PATTERN, NlsBundleUtilCore.class.getName());
-    NlsTranslator nationalizer = new SimpleStringTranslator(new NlsBundleUtilCore(), Locale
+        DEFAULT_DATE_PATTERN, NlsBundleSynchronizer.class.getName());
+    NlsTranslator nationalizer = new SimpleStringTranslator(new NlsBundleSynchronizer(), Locale
         .getDefault());
     System.out.println(message.getLocalizedMessage(nationalizer));
     System.exit(code);
