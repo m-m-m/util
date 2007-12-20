@@ -109,7 +109,7 @@ public class StreamUtilTest {
 
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(DevZero.INSTANCE, outStream, true);
-    Thread.sleep(1);
+    Thread.sleep(10);
     long size = outStream.size();
     transferrer.cancel(true);
     assertTrue(size > 0);
@@ -125,7 +125,7 @@ public class StreamUtilTest {
     InputStreamReader reader = new InputStreamReader(DevZero.INSTANCE);
     StringWriter writer = new StringWriter();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(reader, writer, true);
-    Thread.sleep(1);
+    Thread.sleep(10);
     long size = writer.getBuffer().length();
     transferrer.cancel(true);
     assertTrue(size > 0);
@@ -142,7 +142,7 @@ public class StreamUtilTest {
     Callback callback = new Callback();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(DevZero.INSTANCE, outStream, true,
         callback);
-    Thread.sleep(1);
+    Thread.sleep(10);
     long size = outStream.size();
     transferrer.cancel(true);
     assertTrue(size > 0);
