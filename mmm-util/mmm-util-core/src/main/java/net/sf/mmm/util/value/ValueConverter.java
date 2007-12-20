@@ -264,7 +264,9 @@ public class ValueConverter {
     }
     Object result;
     try {
-      if (type.isAssignableFrom(String.class)) {
+      if (type.isEnum()) {
+        result = Enum.valueOf((Class<Enum>) type, value);
+      } else if (type.isAssignableFrom(String.class)) {
         result = value;
       } else if ((type == boolean.class) || (type == Boolean.class)) {
         result = StringUtil.getInstance().parseBoolean(value);
@@ -289,7 +291,7 @@ public class ValueConverter {
         result = parseNumber(value, valueSource);
       } else if (type == Date.class) {
         result = this.iso8601Util.parseDate(value);
-      } else if (type == Character.class) {
+      } else if ((type == Character.class) || ((type == char.class))) {
         if (value.length() == 1) {
           result = Character.valueOf(value.charAt(0));
         } else {
