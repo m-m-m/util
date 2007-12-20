@@ -17,38 +17,43 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class StringUtilTest {
 
+  public StringUtil getStringUtil() {
+
+    return StringUtil.getInstance();
+  }
+
   @Test
   public void testEmpty() {
 
-    assertTrue(StringUtil.getInstance().isEmpty(null));
-    assertTrue(StringUtil.getInstance().isEmpty(""));
-    assertTrue(StringUtil.getInstance().isEmpty("\t"));
-    assertTrue(StringUtil.getInstance().isEmpty("\n"));
-    assertTrue(StringUtil.getInstance().isEmpty("\r"));
-    assertTrue(StringUtil.getInstance().isEmpty(" "));
-    assertTrue(StringUtil.getInstance().isEmpty("\t\n\r \r\n"));
-    assertFalse(StringUtil.getInstance().isEmpty("a"));
-    assertFalse(StringUtil.getInstance().isEmpty(" a "));
-    assertFalse(StringUtil.getInstance().isEmpty(" ", false));
+    assertTrue(getStringUtil().isEmpty(null));
+    assertTrue(getStringUtil().isEmpty(""));
+    assertTrue(getStringUtil().isEmpty("\t"));
+    assertTrue(getStringUtil().isEmpty("\n"));
+    assertTrue(getStringUtil().isEmpty("\r"));
+    assertTrue(getStringUtil().isEmpty(" "));
+    assertTrue(getStringUtil().isEmpty("\t\n\r \r\n"));
+    assertFalse(getStringUtil().isEmpty("a"));
+    assertFalse(getStringUtil().isEmpty(" a "));
+    assertFalse(getStringUtil().isEmpty(" ", false));
   }
 
   @Test
   public void testCamlCase() {
 
-    assertEquals("abc", StringUtil.getInstance().toCamlCase("abc"));
-    assertEquals("aaBbCc", StringUtil.getInstance().toCamlCase("aa-bb-cc"));
-    assertEquals("aaBbCc", StringUtil.getInstance().toCamlCase("aa bb_cc"));
-    assertEquals("aaBb", StringUtil.getInstance().toCamlCase("aa -_bb_ "));
+    assertEquals("abc", getStringUtil().toCamlCase("abc"));
+    assertEquals("aaBbCc", getStringUtil().toCamlCase("aa-bb-cc"));
+    assertEquals("aaBbCc", getStringUtil().toCamlCase("aa bb_cc"));
+    assertEquals("aaBb", getStringUtil().toCamlCase("aa -_bb_ "));
   }
 
   @Test
   public void testReplaceSuffixWithCase() {
 
-    assertEquals("foofoo", StringUtil.getInstance().replaceSuffixWithCase("foobar", 3, "foo"));
-    assertEquals("FOOFOO", StringUtil.getInstance().replaceSuffixWithCase("FOOBAR", 3, "foo"));
-    assertEquals("FooFoo", StringUtil.getInstance().replaceSuffixWithCase("FooBar", 3, "foo"));
-    assertEquals("FooBfoo", StringUtil.getInstance().replaceSuffixWithCase("FooBar", 2, "foo"));
-    assertEquals("FUSS", StringUtil.getInstance().replaceSuffixWithCase("FOO", 2, "u\u00df"));
+    assertEquals("foofoo", getStringUtil().replaceSuffixWithCase("foobar", 3, "foo"));
+    assertEquals("FOOFOO", getStringUtil().replaceSuffixWithCase("FOOBAR", 3, "foo"));
+    assertEquals("FooFoo", getStringUtil().replaceSuffixWithCase("FooBar", 3, "foo"));
+    assertEquals("FooBfoo", getStringUtil().replaceSuffixWithCase("FooBar", 2, "foo"));
+    assertEquals("FUSS", getStringUtil().replaceSuffixWithCase("FOO", 2, "u\u00df"));
   }
 
 }

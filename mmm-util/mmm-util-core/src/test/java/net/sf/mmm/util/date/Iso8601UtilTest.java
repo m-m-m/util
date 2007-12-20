@@ -21,6 +21,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class Iso8601UtilTest {
 
+  public Iso8601Util getIso8601Util() {
+
+    return Iso8601Util.getInstance();
+  }
+
   private void dump(Date date) {
 
     System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(date));
@@ -28,8 +33,8 @@ public class Iso8601UtilTest {
 
   public void checkCombined(String date) {
 
-    Calendar calendar = Iso8601Util.getInstance().parseCalendar(date);
-    String newDate = Iso8601Util.getInstance().formatDateTime(calendar);
+    Calendar calendar = getIso8601Util().parseCalendar(date);
+    String newDate = getIso8601Util().formatDateTime(calendar);
     assertEquals(date, newDate);
   }
 
@@ -40,7 +45,7 @@ public class Iso8601UtilTest {
     checkCombined("2000-01-01T00:00:00+00:00");
     checkCombined("2000-01-01T00:00:00-02:00");
     checkCombined("2000-01-01T00:00:00-00:30");
-    Calendar calendar = Iso8601Util.getInstance().parseCalendar("2007-01-31T11:22:33Z");
+    Calendar calendar = getIso8601Util().parseCalendar("2007-01-31T11:22:33Z");
     assertEquals(2007, calendar.get(Calendar.YEAR));
     assertEquals(1, calendar.get(Calendar.MONTH) + 1);
     assertEquals(31, calendar.get(Calendar.DAY_OF_MONTH));
@@ -50,7 +55,7 @@ public class Iso8601UtilTest {
     assertEquals(TimeZone.getTimeZone("UTC"), calendar.getTimeZone());
     Calendar newCalendar = Calendar.getInstance(Locale.GERMANY);
     newCalendar.setTime(calendar.getTime());
-    String newString = Iso8601Util.getInstance().formatDateTime(newCalendar);
+    String newString = getIso8601Util().formatDateTime(newCalendar);
     assertEquals("2007-01-31T12:22:33+01:00", newString);
   }
 

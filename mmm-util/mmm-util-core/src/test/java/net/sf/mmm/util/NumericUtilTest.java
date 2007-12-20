@@ -16,9 +16,14 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class NumericUtilTest {
 
+  public NumericUtil getNumericUtil() {
+
+    return NumericUtil.getInstance();
+  }
+
   private void verifySimplestNumber(Number value, Class simplestType) {
 
-    Number simpleValue = NumericUtil.getInstance().toSimplestNumber(value);
+    Number simpleValue = getNumericUtil().toSimplestNumber(value);
     assertEquals(simpleValue.doubleValue(), value.doubleValue(), 0.0);
     assertSame(simpleValue.getClass(), simplestType);
   }

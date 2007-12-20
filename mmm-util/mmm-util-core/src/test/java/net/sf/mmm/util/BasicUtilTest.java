@@ -17,26 +17,31 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class BasicUtilTest {
 
+  public BasicUtil getBasicUtil() {
+
+    return BasicUtil.getInstance();
+  }
+
   @Test
   public void testIsEqual() {
 
-    assertTrue(BasicUtil.getInstance().isEqual(null, null));
-    assertFalse(BasicUtil.getInstance().isEqual("", null));
-    assertFalse(BasicUtil.getInstance().isEqual(null, Boolean.TRUE));
-    assertTrue(BasicUtil.getInstance().isEqual(Boolean.TRUE, Boolean.TRUE));
+    assertTrue(getBasicUtil().isEqual(null, null));
+    assertFalse(getBasicUtil().isEqual("", null));
+    assertFalse(getBasicUtil().isEqual(null, Boolean.TRUE));
+    assertTrue(getBasicUtil().isEqual(Boolean.TRUE, Boolean.TRUE));
     String string = "test42";
     String newString = new String(string);
     assertNotSame(string, newString);
-    assertTrue(BasicUtil.getInstance().isEqual(string, newString));
+    assertTrue(getBasicUtil().isEqual(string, newString));
   }
 
   @Test
   public void testIsEqualArray() {
 
-    assertTrue(BasicUtil.getInstance().isEqual((Object[]) null, (Object[]) null));
-    assertTrue(BasicUtil.getInstance().isEqual(new Object[0], new Object[0]));
-    assertFalse(BasicUtil.getInstance().isEqual((Object[]) null, new Object[0]));
-    assertFalse(BasicUtil.getInstance().isEqual(new Object[0], (Object[]) null));
+    assertTrue(getBasicUtil().isEqual((Object[]) null, (Object[]) null));
+    assertTrue(getBasicUtil().isEqual(new Object[0], new Object[0]));
+    assertFalse(getBasicUtil().isEqual((Object[]) null, new Object[0]));
+    assertFalse(getBasicUtil().isEqual(new Object[0], (Object[]) null));
     String[] array1 = new String[] { "foo", "bar", "42" };
     Object[] array2 = new Object[array1.length];
     for (int i = 0; i < array1.length; i++) {
@@ -46,15 +51,15 @@ public class BasicUtilTest {
         array2[i] = new String(array1[i]);
       }
     }
-    assertTrue(BasicUtil.getInstance().isEqual(array1, array2));
+    assertTrue(getBasicUtil().isEqual(array1, array2));
   }
 
   @Test
   public void testIsDeepEqual() {
 
-    assertTrue(BasicUtil.getInstance().isDeepEqual(null, null));
-    assertFalse(BasicUtil.getInstance().isDeepEqual("", null));
-    assertFalse(BasicUtil.getInstance().isDeepEqual(null, Boolean.TRUE));
+    assertTrue(getBasicUtil().isDeepEqual(null, null));
+    assertFalse(getBasicUtil().isDeepEqual("", null));
+    assertFalse(getBasicUtil().isDeepEqual(null, Boolean.TRUE));
     int[] intArray1 = new int[] { 42, 1, 7, -42 };
     int[] intArray2 = new int[intArray1.length];
     for (int i = 0; i < intArray1.length; i++) {
@@ -64,7 +69,7 @@ public class BasicUtilTest {
     int[][] subArray2 = new int[][] { intArray2, intArray1 };
     Object[] array1 = new Object[] { intArray1, null, subArray1 };
     Object[] array2 = new Object[] { intArray2, null, subArray2 };
-    assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+    assertTrue(getBasicUtil().isDeepEqual(array1, array2));
 
   }
 
@@ -80,7 +85,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // short arrays
@@ -90,7 +95,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // int arrays
@@ -100,7 +105,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // long arrays
@@ -110,7 +115,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // float arrays
@@ -120,7 +125,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // double arrays
@@ -130,7 +135,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // char arrays
@@ -140,7 +145,7 @@ public class BasicUtilTest {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
     {
       // boolean arrays
@@ -150,7 +155,7 @@ public class BasicUtilTest {
         array1[i] = ((i % 3) == 0);
         array2[i] = array1[i];
       }
-      assertTrue(BasicUtil.getInstance().isDeepEqual(array1, array2));
+      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
     }
   }
 
