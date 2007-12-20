@@ -328,10 +328,10 @@ public class ProcessUtil {
         OutputStream err = context.getErrStream();
         for (int i = 0; i < builders.length; i++) {
           Process process = builders[i].start();
-          AsyncTransferrer inOutTransferrer = streamUtility.transferAsync(in, this.processes[i]
+          AsyncTransferrer inOutTransferrer = streamUtility.transferAsync(in, process
               .getOutputStream(), false);
-          AsyncTransferrer errTransferrer = streamUtility.transferAsync(this.processes[i]
-              .getErrorStream(), err, true);
+          AsyncTransferrer errTransferrer = streamUtility.transferAsync(process.getErrorStream(),
+              err, true);
           this.processes[i] = process;
           in = this.processes[i].getInputStream();
           int transferrersIndex = i + i;
