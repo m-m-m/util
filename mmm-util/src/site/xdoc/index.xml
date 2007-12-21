@@ -18,8 +18,6 @@
             to deal with reflection, especially for java 5 features like annotations.</li>
         <li><a href="mmm-util-resource/index.html">mmm-util-resource</a> gives access to resources 
             from classpath (or other sources).</li>
-        <li><a href="mmm-util-pojo/index.html">mmm-util-pojo</a> is an alternative approach to 
-            commons-beanutils that works with any POJO.</li>
         <li><a href="mmm-util-xml/index.html">mmm-util-xml</a> contains stuff for dealing with XML.</li>
         <li><a href="mmm-util-event/index.html">mmm-util-event</a> makes the event-sender and 
             receiver-pattern reuseable via java 5 generics.</li>
