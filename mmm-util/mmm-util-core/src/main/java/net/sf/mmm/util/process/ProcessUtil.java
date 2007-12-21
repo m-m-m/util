@@ -186,11 +186,12 @@ public class ProcessUtil {
    * <b>ATTENTION:</b><br>
    * This method spins up multiple {@link Thread threads}, especially when
    * multiple processes are piped (2*n+1[+1] threads). Therefore you should NOT
-   * use the {@link #INSTANCE singleton} variant of this util except you are
-   * writing a simple command-line client that does a simple job and then
+   * use the {@link #getInstance() singleton} variant of this util except you
+   * are writing a simple command-line client that does a simple job and then
    * terminates. When writing a server-application or library, that makes such
-   * calls repetitive, you should NOT use the {@link #INSTANCE singleton} and
-   * configure a thread-pool as {@link java.util.concurrent.Executor}.
+   * calls repetitive, you should create your own instance of
+   * {@link ProcessUtil} and configure a thread-pool as
+   * {@link java.util.concurrent.Executor}.
    * 
    * @param context is the context of the process pipe (fist <code>stdin</code>,
    *        last <code>stdout</code> and <code>stderr</code> for all
@@ -235,16 +236,18 @@ public class ProcessUtil {
    * <b>ATTENTION:</b><br>
    * This method spins up multiple {@link Thread threads}, especially when
    * multiple processes are piped (2*n+1[+1] threads). Therefore you should NOT
-   * use the {@link #INSTANCE singleton} variant of this util except you are
-   * writing a simple command-line client that does a simple job and then
+   * use the {@link #getInstance() singleton} variant of this util except you
+   * are writing a simple command-line client that does a simple job and then
    * terminates. When writing a server-application or library, that makes such
-   * calls repetitive, you should NOT use the {@link #INSTANCE singleton} and
-   * configure a thread-pool as {@link java.util.concurrent.Executor}.
+   * calls repetitive, you should create your own instance of
+   * {@link ProcessUtil} and configure a thread-pool as
+   * {@link java.util.concurrent.Executor}.
    * 
    * @param context is the context of the process pipe (fist <code>stdin</code>,
    *        last <code>stdout</code> and <code>stderr</code> for all
    *        processes as well as a potential timeout).
-   * @param builders are the configurations of the
+   * @param builders are the configurations of the {@link Process}(es) to
+   *        execute. The array needs to have a length greater than zero.
    * @return the {@link Process#waitFor() exit-code} of the {@link Process}-pipe
    *         configured by the given <code>builders</code>.
    * @throws IOException if an input/output-error occurred while setting up the
@@ -296,17 +299,22 @@ public class ProcessUtil {
    */
   protected class ProcessExecutor implements Callable<Integer>, Stoppable {
 
-    /** */
+    /** @see ProcessExecutor#ProcessExecutor(ProcessContext, ProcessBuilder[]) */
     private final ProcessContext context;
 
-    /** */
+    /** @see ProcessExecutor#ProcessExecutor(ProcessContext, ProcessBuilder[]) */
     private final Process[] processes;
 
-    /** */
+    /** @see ProcessExecutor#ProcessExecutor(ProcessContext, ProcessBuilder[]) */
     private final AsyncTransferrer[] transferrers;
 
     /**
      * The constructor.
+     * 
+     * @param context is the context of the process pipe.
+     * @param builders are the configurations of the {@link Process}(es) to
+     *        execute. The array needs to have a length greater than zero.
+     * @throws IOException if an input/output error occurred.
      */
     public ProcessExecutor(ProcessContext context, ProcessBuilder[] builders) throws IOException {
 
@@ -341,9 +349,6 @@ public class ProcessUtil {
         this.transferrers[builders.length + builders.length] = streamUtility.transferAsync(in,
             context.getOutStream(), false);
         success = true;
-        // if (this.mainThread != null) {
-        // this.mainThread.interrupt();
-        // }
       } finally {
         if (!success) {
           stop();
