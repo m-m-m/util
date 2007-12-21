@@ -7,6 +7,9 @@
   </properties>
   <body>
     <section name="Project History">
+      <subsection name="2007-11-16">
+        After quite a long while <a href="http://www.koders.com">koders</a> has approved the project.
+      </subsection>
       <subsection name="2007-05-03">
         Made <a href="http://springframework.org">Spring</a> to understand 
         commons-annotations (JSR-250) using 

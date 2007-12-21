@@ -8,17 +8,147 @@
 
   <body>
     <section name="Roadmap">
-      <p>This vision of mmm is to build an ECMS with 
-      <a href="mmm-content/index.html">mmm-content</a> on top of the 
-      <a href="mmm-framework/index.html">mmm-framework</a> using the 
-      <a href="mmm-uit/index.html">mmm-uit</a> and all the other useful modules.</p>
-      <p>There is still a long way to go. Anyhow the first sub-projects are about
-      to be released soon. This will include <a href="mmm-search/index.html">mmm-search</a>
-      and according parts of <a href="mmm-util/index.html">mmm-util</a>.</p>
-      <p>The mmm-uit needs intensive improvements and web-support, etc.</p>
-      <p>The ECMS content module (OO-database layer) is NOT yet available.
-      It is still unclear if JCR (JSR 170) will be used as generic API, because it sucks.
-      </p>
+      <subsection name="Release Plan">
+        <table>
+          <thead>
+            <tr>
+              <td>Module</td>
+              <td>Version</td>
+              <td>Release-Date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>mmm-util-core</td>
+              <td>1.0.0</td>
+              <td>15.01.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-util-file</td>
+              <td>1.0.0</td>
+              <td>01.02.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-util-reflect</td>
+              <td>1.0.0</td>
+              <td>01.02.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-util-resource</td>
+              <td>1.0.0</td>
+              <td>01.02.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-api</td>
+              <td>1.0.0</td>
+              <td>01.02.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-java</td>
+              <td>1.0.0</td>
+              <td>01.02.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-text</td>
+              <td>1.0.0</td>
+              <td>01.02.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-html</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-xml</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-pdf</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-poi</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-doc</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-xls</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-content-parser-ppt</td>
+              <td>1.0.0</td>
+              <td>01.03.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-util-xml</td>
+              <td>1.0.0</td>
+              <td>01.04.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-util-misc</td>
+              <td>1.0.0</td>
+              <td>01.04.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-engine-api</td>
+              <td>1.0.0</td>
+              <td>01.04.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-engine-lucene</td>
+              <td>1.0.0</td>
+              <td>01.04.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-engine-webapp</td>
+              <td>1.0.0</td>
+              <td>01.04.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-indexer</td>
+              <td>1.0.0</td>
+              <td>01.05.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-indexer-lucene</td>
+              <td>1.0.0</td>
+              <td>01.05.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-parser-opendoc</td>
+              <td>1.0.0</td>
+              <td>01.05.2008</td>
+            </tr>
+            <tr>
+              <td>mmm-search-parser-service</td>
+              <td>1.0.0</td>
+              <td>01.05.2008</td>
+            </tr>
+          </tbody>
+        </table>      
+      </subsection>
+      <subsection name="Vision">
+        <p>This vision of mmm is to build an ECMS with 
+        <a href="mmm-content/index.html">mmm-content</a> on top of the 
+        <a href="mmm-framework/index.html">mmm-framework</a> using the 
+        <a href="mmm-uit/index.html">mmm-uit</a> and all the other useful modules.</p>
+        <p>There is still a long way to go. Anyhow the first sub-projects are about
+        to be released soon. This will include <a href="mmm-search/index.html">mmm-search</a>
+        and according parts of <a href="mmm-util/index.html">mmm-util</a>.</p>
+        <p>The mmm-uit needs intensive improvements and web-support, etc.</p>
+        <p>The ECMS content module (OO-database layer) is NOT yet available.
+        It is still unclear if JCR (JSR 170) will be used as generic API, because it sucks.
+        </p>
+      </subsection>
     </section>
   </body>
 </document>

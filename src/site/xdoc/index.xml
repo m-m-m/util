@@ -7,12 +7,6 @@
   </properties>
 
   <body>
-    <!-- 
-    Designed with elegance.
-    Coded with passion.
-    Documented with devotion.
-    Tested with care.
-    -->
     <section name="Introduction">
       Welcome to the Project Multi-Media-Manager (MMM). The project is still under development.
       Before you get lost, first some words of what you can already find here before we 
@@ -29,14 +23,24 @@
       The Multi-Media-Manager (MMM) is a generic application plattform and 
       a enterprise content management system (ECMS) with custom modules for 
       multi-media management build on top.
-      <subsection name="Codex">
+      <subsection name="Mission Statement">
+        <ul>
+          <li>Designed with beaty.</li>
+          <li>Coded with passion.</li>
+          <li>Tested with care.</li>
+          <li>Documented with devotion.</li>
+        </ul>      
         MMM is entirely written in Java. It makes extensive use of the Java 5 syntax.
         All code is written with focus on design &amp; quality and comes with detailed API
         documentation.<br/>
         The application is heavily based on the idioms separation of concerns (SoC) and
         inversion of control (IoC) and therefore split into tiny components 
         (see <a href="overview.html">overview</a>). This open architecture allows any 
-        component implementation to be reused (by other projects) or be replaced (for custom needs).
+        component implementation to be reused (by other projects) or be replaced (for custom needs).<br/>
+        <b>ATTENTION:</b><br/>
+        This mission statement applies to subprojects (modules) that are released. Modules that are NOT 
+        released (version less than <code>1.0.0</code> including <code>1.0.0-SNAPSHOT</code>) may be 
+        completely refactored, change their API or even dissappear completely.
       </subsection>
       <subsection name="Project State">
         Even though the project exists for 6 years now, there is no CMS and no multi-media
