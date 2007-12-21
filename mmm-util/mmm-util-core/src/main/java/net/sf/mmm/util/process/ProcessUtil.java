@@ -215,8 +215,8 @@ public class ProcessUtil {
   public int execute(ProcessContext context, long timeout, TimeUnit unit,
       ProcessBuilder... builders) throws IOException, TimeoutException, InterruptedException {
 
+    AsyncProcessExecutor processExecutor = executeAsync(context, builders);
     try {
-      AsyncProcessExecutor processExecutor = executeAsync(context, builders);
       return processExecutor.get(timeout, unit).intValue();
     } catch (ExecutionException e) {
       Throwable cause = e.getCause();
@@ -226,6 +226,8 @@ public class ProcessUtil {
         // should NOT happen...
         throw new IllegalStateException(e);
       }
+    } finally {
+      processExecutor.cancel(true);
     }
   }
 
@@ -364,13 +366,21 @@ public class ProcessUtil {
 
       for (int i = 0; i < this.processes.length; i++) {
         if (this.processes[i] != null) {
-          this.processes[i].destroy();
+          try {
+            this.processes[i].destroy();
+          } catch (RuntimeException e) {
+            getLogger().warn(e);
+          }
           this.processes[i] = null;
         }
       }
       for (int i = 0; i < this.transferrers.length; i++) {
         if (this.transferrers[i] != null) {
-          this.transferrers[i].cancel(true);
+          try {
+            this.transferrers[i].cancel(true);
+          } catch (RuntimeException e) {
+            getLogger().warn(e);
+          }
           this.transferrers[i] = null;
         }
       }
