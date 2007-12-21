@@ -18,6 +18,8 @@ import java.util.concurrent.TimeoutException;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import net.sf.mmm.util.StringUtil;
+
 /**
  * This is the test-case for {@link ProcessUtil}.
  * 
@@ -59,7 +61,7 @@ public class ProcessUtilTest {
     assertTrue(errString.contains("java version"));
   }
 
-  @Test(timeout = 10000)
+  @Test
   public void testExecuteAsyncTimeout() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -78,7 +80,7 @@ public class ProcessUtilTest {
     }
   }
 
-  @Test(timeout = 10000)
+  @Test
   public void testExecuteAsyncStop() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -104,7 +106,7 @@ public class ProcessUtilTest {
   }
 
   @Ignore
-  @Test(timeout = 10000)
+  @Test
   public void testExecuteAsyncStopChildProcess() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -114,6 +116,38 @@ public class ProcessUtilTest {
     Thread.sleep(2000);
     boolean stopped = executor.cancel(true);
     assertTrue(stopped);
+  }
+
+  @Test
+  public void testExecutePipe() throws Exception {
+
+    ProcessContext context = new ProcessContext();
+    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+    context.setOutStream(outStream);
+    ByteArrayOutputStream errStream = new ByteArrayOutputStream();
+    context.setErrStream(errStream);
+    ProcessBuilder app1Builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
+        PipeApp1.class.getName());
+    ProcessBuilder app2Builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
+        PipeApp2.class.getName());
+    int exitCode = getProcessUtil().execute(context, app1Builder, app2Builder);
+    assertEquals(0, exitCode);
+    // test output of stdout
+    byte[] outBytes = outStream.toByteArray();
+    String outString = new String(outBytes);
+    StringBuilder expectedOutString = new StringBuilder(30);
+    for (int i = 1; i <= 10; i++) {
+      expectedOutString.append(Integer.toString(i));
+      expectedOutString.append(StringUtil.LINE_SEPARATOR);
+    }
+    assertEquals(expectedOutString.toString(), outString);
+    // test output of stderr
+    byte[] errBytes = errStream.toByteArray();
+    String errString = new String(errBytes);
+    String expectedErrString = PipeApp1.class.getSimpleName() + " done."
+        + StringUtil.LINE_SEPARATOR + PipeApp2.class.getSimpleName() + " done."
+        + StringUtil.LINE_SEPARATOR;
+    assertEquals(expectedErrString, errString);
   }
 
   protected static class DummyInputStream extends InputStream {

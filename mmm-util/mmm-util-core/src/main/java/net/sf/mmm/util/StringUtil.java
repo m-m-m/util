@@ -25,6 +25,9 @@ public class StringUtil {
   /** a string representing the boolean value <code>false</code> */
   public static final String FALSE = String.valueOf(false);
 
+  /** The line-separator string. */
+  public static final String LINE_SEPARATOR = System.getProperty("line.separator");;
+
   /** an empty {@link String} array */
   public static final String[] EMPTY_STRING_ARRAY = new String[0];
 
