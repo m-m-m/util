@@ -39,7 +39,7 @@ svn --version
   "Tortoise SVN > checkout". With the commandline client go to the directory 
 	where you want to checkout and type:
           <source>
-svn co https://m-m-m.googlecode.com/svn/trunk mmm
+svn co http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/ mmm
           </source>
   </li>
   <li>Install <a href="http://www.eclipse.org">eclipse</a> on your system.

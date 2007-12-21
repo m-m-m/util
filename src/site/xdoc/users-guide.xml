@@ -32,7 +32,7 @@
           <li>Read the tutorials.</li>
           <li>Have a look at the testcases (e.g. see 
 	      "Project Reports > Test Source Xref").</li>
-          <li>Have a look at the javadocs.</li>
+          <li>Have a look at the <a href="apidocs/index.html>javadocs</a>.</li>
           <li>Subscribe to the <a href="mail-lists.html">mailing list</a>.</li>
           <li>Dig in the sources.</li>
           <li>Find bugs and supply patches :)</li>
