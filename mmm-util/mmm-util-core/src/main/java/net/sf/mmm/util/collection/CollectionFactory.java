@@ -6,7 +6,7 @@ package net.sf.mmm.util.collection;
 import java.util.Collection;
 
 /**
- * This is the interface for a factory of {@link Collection maps}. It allows to
+ * This is the interface for a factory of {@link Collection}s. It allows to
  * abstract from {@link Collection} implementations.<br>
  * A {@link Collection} instance can be used for different purposes such as a
  * set or a list or with different aspects such as a thread-safe collection. If
