@@ -30,7 +30,8 @@
     <!-- <module>mmm-configuration</module> -->
     <module>mmm-content</module>
     <module>mmm-gui</module>
-    <module>mmm-nls</module>
+    <!-- NLS has moved to util-core -->
+    <!-- <module>mmm-nls</module> -->
     <module>mmm-search</module>
     <module>mmm-setup</module>
     <!-- <module>mmm-term</module> -->
@@ -55,7 +56,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <!-- <version>2.0-beta-6-SNAPSHOT</version> -->
+        <version>2.0-beta-5</version>
       </plugin>
       <!-- advanced manifests -->
       <plugin>

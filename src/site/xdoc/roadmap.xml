@@ -12,9 +12,9 @@
         <table>
           <thead>
             <tr>
-              <td>Module</td>
-              <td>Version</td>
-              <td>Release-Date</td>
+              <th>Module</th>
+              <th>Version</th>
+              <th>Release-Date</th>
             </tr>
           </thead>
           <tbody>

@@ -8,9 +8,9 @@
 
   <body>
     <section name="Introduction">
-      Welcome to the Project Multi-Media-Manager (MMM). The project is still under development.
-      Before you get lost, first some words of what you can already find here before we 
-      talk about the TODOs.
+      Welcome to the Project Multi-Media-Manager (MMM). The project is still 
+      under development. Before you get lost, first some words of what you can 
+      already find here.
       <subsection name="Ready to use">
         This project provides the following generic components that can already be used now:
         <ul>
