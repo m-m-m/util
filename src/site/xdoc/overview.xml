@@ -8,9 +8,63 @@
 
   <body>
     <section name="Project overview">
-      <p>This project is seperated into many sub-projects. This page should help
-      you NOT to get lost.<br/>
-      <img src="images/components.png" alt="components" title="components"/></p>
+      <p>This project is seperated into many sub-projects (modules).
+      This page should help you NOT to get lost.</p>
+      <subsection name="Modules">
+<img src="images/modules.png" usemap="#maven-modules" border="0" />
+<map name="maven-modules">
+<area shape="rect" coords="46,194,157,254" href="mmm-upnp/mmm-upnp-event/index.html"/>
+<area shape="rect" coords="46,269,156,329" href="mmm-upnp/mmm-upnp-ssdp/index.html"/>
+<area shape="rect" coords="10,133,200,367" href="mmm-upnp/index.html"/>
+<area shape="rect" coords="763,289,893,349" href="mmm-gui/mmm-gui-model/index.html"/>
+<area shape="rect" coords="940,289,1080,349" href="mmm-gui/mmm-gui-view/index.html"/>
+<area shape="rect" coords="746,200,1127,367" href="mmm-gui/index.html"/>
+<area shape="rect" coords="262,194,444,254" href="mmm-content/mmm-content-repository/mmm-content-repository-impl-db-dynamic/index.html"/>
+<area shape="rect" coords="470,109,652,169" href="mmm-content/mmm-content-repository/mmm-content-repository-impl-db-static/index.html"/>
+<area shape="rect" coords="262,109,444,169" href="mmm-content/mmm-content-repository/mmm-content-repository-impl-file/index.html"/>
+<area shape="rect" coords="470,196,652,254" href="mmm-content/mmm-content-repository/mmm-content-repository-api/index.html"/>
+<area shape="rect" coords="244,55,700,270" href="mmm-content/mmm-content-repository/index.html"/>
+<area shape="rect" coords="580,288,690,348" href="mmm-content/mmm-content-entities/index.html"/>
+<area shape="rect" coords="432,288,549,348" href="mmm-content/mmm-content-core/index.html"/>
+<area shape="rect" coords="227,10,719,367" href="mmm-content/index.html"/>
+<area shape="rect" coords="1005,544,1115,604" href="mmm-uit/mmm-uit-demo/index.html"/>
+<area shape="rect" coords="862,544,980,604" href="mmm-uit/mmm-uit-impl-web/index.html"/>
+<area shape="rect" coords="732,544,845,604" href="mmm-uit/mmm-uit-impl-swt/index.html"/>
+<area shape="rect" coords="863,451,973,511" href="mmm-uit/mmm-uit-impl-swing/index.html"/>
+<area shape="rect" coords="722,451,832,511" href="mmm-uit/mmm-uit-api/index.html"/>
+<area shape="rect" coords="701,405,1127,639" href="mmm-uit/index.html"/>
+<area shape="rect" coords="614,1397,724,1457" href="mmm-search/mmm-search-parser/mmm-search-parser-service/index.html"/>
+<area shape="rect" coords="772,1223,948,1281" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-xps/index.html"/>
+<area shape="rect" coords="772,1020,948,1078" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-xml/index.html"/>
+<area shape="rect" coords="402,1202,512,1276" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-xls/index.html"/>
+<area shape="rect" coords="521,1202,631,1276" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-text/index.html"/>
+<area shape="rect" coords="772,1156,948,1214" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-rtf/index.html"/>
+<area shape="rect" coords="259,1202,369,1276" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-ppt/index.html"/>
+<area shape="rect" coords="334,1103,444,1177" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-poi/index.html"/>
+<area shape="rect" coords="772,1290,948,1348" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-pdf/index.html"/>
+<area shape="rect" coords="772,1088,948,1146" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-opendoc/index.html"/>
+<area shape="rect" coords="590,1292,756,1350" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-java/index.html"/>
+<area shape="rect" coords="412,1291,578,1349" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-html/index.html"/>
+<area shape="rect" coords="265,1018,431,1076" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-generic/index.html"/>
+<area shape="rect" coords="273,1291,403,1349" href="mmm-search/mmm-search-parser/mmm-search-parser-impl-doc/index.html"/>
+<area shape="rect" coords="466,1018,621,1076" href="mmm-search/mmm-search-parser/mmm-search-parser-api/index.html"/>
+<area shape="rect" coords="508,782,672,840" href="mmm-search/mmm-search-engine/mmm-search-engine-impl-lucene/index.html"/>
+<area shape="rect" coords="625,870,735,928" href="mmm-search/mmm-search-engine/mmm-search-indexer-lucene/index.html"/>
+<area shape="rect" coords="461,869,571,929" href="mmm-search/mmm-search-engine/mmm-search-indexer/index.html"/>
+<area shape="rect" coords="809,782,928,840" href="mmm-search/mmm-search-engine/mmm-search-engine-webapp/index.html"/>
+<area shape="rect" coords="261,782,371,840" href="mmm-search/mmm-search-engine/mmm-search-engine-api/index.html"/>
+<area shape="rect" coords="240,459,350,519" href="mmm-util/mmm-util-http/index.html"/>
+<area shape="rect" coords="529,459,648,519" href="mmm-util/mmm-util-resource/index.html"/>
+<area shape="rect" coords="383,546,493,606" href="mmm-util/mmm-util-xml/index.html"/>
+<area shape="rect" coords="240,546,350,606" href="mmm-util/mmm-util-file/index.html"/>
+<area shape="rect" coords="383,459,493,519" href="mmm-util/mmm-util-reflect/index.html"/>
+<area shape="rect" coords="531,546,641,606" href="mmm-util/mmm-util-core/index.html"/>
+<area shape="rect" coords="221,405,670,639" href="mmm-util/index.html"/>
+<area shape="rect" coords="236,968,985,1470" href="mmm-search/mmm-search-parser/index.html"/>
+<area shape="rect" coords="236,736,985,951" href="mmm-search/mmm-search-engine/index.html"/>
+<area shape="rect" coords="222,684,1004,1488" href="mmm-search/index.html"/>
+</map>
+      </subsection>
     </section>
   </body>
 </document>
