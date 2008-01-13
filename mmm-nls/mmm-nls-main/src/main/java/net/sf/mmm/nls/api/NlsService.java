@@ -6,26 +6,26 @@ package net.sf.mmm.nls.api;
 import java.util.Locale;
 
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
  * This is the interface of a service that provides native language support
- * (NLS). This is done by a {@link NlsTranslator} that can be
+ * (NLS). This is done by a {@link NlsTemplateResolver} that can be
  * {@link #getTranslator(Locale) retrieved} for a given {@link Locale}.
  * 
- * @see NlsMessage#getLocalizedMessage(NlsTranslator)
+ * @see NlsMessage#getLocalizedMessage(Locale, NlsTemplateResolver)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface NlsService {
 
   /**
-   * This method gets the {@link NlsTranslator} for the given
+   * This method gets the {@link NlsTemplateResolver} for the given
    * <code>locale</code>.
    * 
    * @param locale is the locale that should be translated to.
    * @return the according translator.s
    */
-  NlsTranslator getTranslator(Locale locale);
+  NlsTemplateResolver getTranslator(Locale locale);
 
 }

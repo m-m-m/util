@@ -20,8 +20,10 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.util.nls.NlsMessageImpl;
-import net.sf.mmm.util.nls.api.NlsTranslator;
+import net.sf.mmm.util.nls.NlsMessageFactoryAccess;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.impl.SingleNlsTemplateResolver;
 
 /**
  * This class can be used to create and update the localized bundles
@@ -277,12 +279,11 @@ public class ResourceBundleSynchronizer {
    */
   public static void usage(int code) {
 
-    NlsMessageImpl message = new NlsMessageImpl(NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE,
+    NlsMessage message = NlsMessageFactoryAccess.getInstance().create(
         ResourceBundleSynchronizer.class.getName(), DEFAULT_ENCODING, DEFAULT_BASE_PATH,
         DEFAULT_DATE_PATTERN, NlsBundleSynchronizer.class.getName());
-    NlsTranslator nationalizer = new SimpleStringTranslator(new NlsBundleSynchronizer(), Locale
-        .getDefault());
-    System.out.println(message.getLocalizedMessage(nationalizer));
+    NlsTemplateResolver nationalizer = new SingleNlsTemplateResolver(new NlsBundleSynchronizer());
+    System.out.println(message.getLocalizedMessage(null, nationalizer));
     System.exit(code);
   }
 

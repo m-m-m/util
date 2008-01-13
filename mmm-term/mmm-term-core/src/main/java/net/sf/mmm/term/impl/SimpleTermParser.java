@@ -12,7 +12,7 @@ import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.api.TermParser;
 import net.sf.mmm.term.base.Variable;
 import net.sf.mmm.term.impl.function.FunctionConcat;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This is a simple parser for {@link Term}s that replace variables in plain
@@ -65,7 +65,7 @@ public class SimpleTermParser implements TermParser {
    */
   public Term parse(String expression) throws TermParseException {
 
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(expression);
+    CharSequenceScanner parser = new CharSequenceScanner(expression);
     List<Term> arguments = new ArrayList<Term>();
     while (parser.hasNext()) {
       String plainText = parser.readUntil(VARIABLE_START_CHAR1, true);

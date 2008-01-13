@@ -11,7 +11,7 @@ import net.sf.mmm.util.filter.CharFilter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface CharacterStreamScanner {
+public interface CharStreamScanner {
 
   /**
    * This method gets the current position in the stream to scan. It will
@@ -81,6 +81,24 @@ public interface CharacterStreamScanner {
    *         {@link #peek() current character} is no Latin digit.
    */
   int readDigit();
+
+  /**
+   * This method reads the long starting at the
+   * {@link #getCurrentIndex() current position} by reading as many Latin digits
+   * as available but at maximum the given <code>maxDigits</code> and returns
+   * its {@link Long#parseLong(String) parsed} value.<br>
+   * <b>ATTENTION:</b><br>
+   * This method does NOT treat signs (<code>+</code> or <code>-</code>)
+   * to do so, scan them yourself before and negate the result as needed.
+   * 
+   * @param maxDigits is the maximum number of digits that will be read. The
+   *        value has to be positive (greater than zero).
+   * @return the parsed number.
+   * @throws NumberFormatException if the current
+   *         {@link #getCurrentIndex() current position} does NOT point to a
+   *         number.
+   */
+  long readLong(int maxDigits) throws NumberFormatException;
 
   /**
    * This method reads the number of {@link #next() next characters} given by
@@ -182,9 +200,9 @@ public interface CharacterStreamScanner {
   /**
    * This method reads all {@link #next() next characters} until the given
    * <code>stop</code> character or the end of the string to parse is reached.
-   * In advance to {@link #readUntil(char, boolean)}, this method will read
-   * over the <code>stop</code> character if it is escaped with the given
-   * <code>escape</code> character. <br>
+   * In advance to {@link #readUntil(char, boolean)}, this method will scan the
+   * input using the given <code>syntax</code> which e.g. allows to
+   * {@link CharScannerSyntax#getEscape() escape} the stop character. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index}
    * will point to the next character after the (first) <code>stop</code>
    * character or to the end of the string if NO such character exists.
@@ -192,13 +210,12 @@ public interface CharacterStreamScanner {
    * @param stop is the character to read until.
    * @param acceptEof if <code>true</code> EOF will be treated as
    *        <code>stop</code>, too.
-   * @param escape is the character used to escape the stop character (e.g.
-   *        '\').
+   * @param syntax contains the characters specific for the syntax to read.
    * @return the string with all read characters excluding the <code>stop</code>
    *         character or <code>null</code> if there was no <code>stop</code>
    *         character.
    */
-  String readUntil(char stop, boolean acceptEof, char escape);
+  String readUntil(char stop, boolean acceptEof, CharScannerSyntax syntax);
 
   /**
    * This method reads all {@link #next() next characters} that are

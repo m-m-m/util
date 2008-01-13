@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import net.sf.mmm.util.filter.CharFilter;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This is a utility class used to parse {@link HttpMessage HTTP-messages}.
@@ -103,7 +103,7 @@ public class HttpParser {
           message.appendHeaderProperty(currentProperty, line);
         }
       } else {
-        CharacterSequenceScanner parser = new CharacterSequenceScanner(line);
+        CharSequenceScanner parser = new CharSequenceScanner(line);
         String property = parser.readWhile(TOKEN_FILTER);
         c = parser.forceNext();
         if (c == ':') {
@@ -153,7 +153,7 @@ public class HttpParser {
 
     byte[] buffer = new byte[256];
     String line = parseLine(stream, buffer, charset);
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(line);
+    CharSequenceScanner parser = new CharSequenceScanner(line);
     String method = parser.readUntil(' ', false);
     if (method == null) {
       throw new IllegalStateException("Illegal HTTP header!");

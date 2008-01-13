@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.Locale;
 
 /**
  * This is an abstract base implementation of an unchecked exception with real
@@ -51,9 +52,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   }
 
   /**
-   * This method gets the internationalized message describing the problem.
-   * 
-   * @return the internationalized message.
+   * {@inheritDoc}
    */
   public final NlsMessage getNlsMessage() {
 
@@ -66,7 +65,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   @Override
   public void printStackTrace(PrintStream s) {
 
-    printStackTrace(s, null);
+    printStackTrace(Locale.getDefault(), null, s);
   }
 
   /**
@@ -75,55 +74,15 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   @Override
   public void printStackTrace(PrintWriter s) {
 
-    printStackTrace(s, null);
+    printStackTrace(Locale.getDefault(), null, s);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void printStackTrace(PrintStream stream, NlsTranslator nationalizer) {
+  public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
-    synchronized (stream) {
-      stream.println(getLocalizedMessage(nationalizer));
-      StackTraceElement[] trace = getStackTrace();
-      for (int i = 0; i < trace.length; i++) {
-        stream.println("\tat " + trace[i]);
-      }
-
-      Throwable nested = getCause();
-      if (nested != null) {
-        stream.println("Caused by: ");
-        if (nested instanceof NlsThrowable) {
-          ((NlsThrowable) nested).printStackTrace(stream, nationalizer);
-        } else {
-          nested.printStackTrace(stream);
-        }
-      }
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void printStackTrace(PrintWriter writer, NlsTranslator nationalizer) {
-
-    synchronized (writer) {
-      writer.println(getLocalizedMessage(nationalizer));
-      StackTraceElement[] trace = getStackTrace();
-      for (int i = 0; i < trace.length; i++) {
-        writer.println("\tat " + trace[i]);
-      }
-
-      Throwable nested = getCause();
-      if (nested != null) {
-        writer.println("Caused by: ");
-        if (nested instanceof NlsThrowable) {
-          ((NlsThrowable) nested).printStackTrace(writer, nationalizer);
-        } else {
-          nested.printStackTrace(writer);
-        }
-      }
-    }
+    AbstractNlsException.printStackTrace(this, locale, resolver, buffer);
   }
 
   /**
@@ -132,44 +91,41 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   @Override
   public String getMessage() {
 
-    return getLocalizedMessage(null);
+    return getNlsMessage().getLocalizedMessage();
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getLocalizedMessage(NlsTranslator nationalizer) {
+  public String getLocalizedMessage(Locale locale) {
+
+    return getLocalizedMessage(locale, null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     StringBuffer message = new StringBuffer();
-    getLocalizedMessage(nationalizer, message);
+    getLocalizedMessage(null, resolver, message);
     return message.toString();
   }
 
   /**
    * {@inheritDoc}
    */
-  public void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message) {
+  public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
-    getNlsMessage().getLocalizedMessage(nationalizer, message);
-    Throwable nested = getCause();
-    if (nested != null) {
-      NlsThrowable mt = null;
-      String msg = null;
-      if (nested instanceof NlsThrowable) {
-        mt = (NlsThrowable) nested;
-      } else {
-        msg = nested.getLocalizedMessage();
-      }
-      if ((mt != null) || (msg != null)) {
-        message.append(" [");
-        if (mt != null) {
-          mt.getLocalizedMessage(nationalizer, message);
-        } else {
-          message.append(msg);
-        }
-        message.append("]");
-      }
-    }
+    AbstractNlsException.getLocalizedMessage(this, locale, resolver, buffer);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public NlsMessage toNlsMessage() {
+
+    return getNlsMessage();
   }
 
 }

@@ -5,13 +5,16 @@ package net.sf.mmm.util.nls;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Locale;
+
 import org.junit.Test;
 
-import net.sf.mmm.util.nls.NlsMessageImpl;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsTranslationSource;
-import net.sf.mmm.util.nls.api.NlsTranslator;
-import net.sf.mmm.util.nls.base.AbstractNlsTranslator;
+import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
+import net.sf.mmm.util.nls.impl.FormattedNlsTemplate;
+import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
  * This is the test-case for {@link net.sf.mmm.util.nls.NlsMessageImpl}.
@@ -30,7 +33,8 @@ public class NlsMessageImplTest {
   }
 
   /**
-   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} implementation ({@link net.sf.mmm.util.nls.NlsMessageImpl}).
+   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage}
+   * implementation ({@link net.sf.mmm.util.nls.NlsMessageImpl}).
    */
   @Test
   public void testMessage() {
@@ -46,18 +50,18 @@ public class NlsMessageImplTest {
     assertEquals(testMessage.getArgumentCount(), 1);
     assertEquals(testMessage.getArgument(0), arg);
     assertEquals(testMessage.getMessage(), hello + arg + suffix);
-    NlsTranslator translatorDe = new AbstractNlsTranslator() {
+    NlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
-      public String translate(NlsTranslationSource source) {
+      public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
-        String message = source.getInternationalizedMessage();
-        if (message.equals(msg)) {
-          return msgDe;
+        if (internationalizedMessage.equals(msg)) {
+          return new GermanTemplate(msgDe);
         }
         return null;
       }
     };
-    assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(translatorDe));
+    assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(Locale.GERMAN,
+        translatorDe));
   }
 
   @Test
@@ -70,26 +74,51 @@ public class NlsMessageImplTest {
     NlsMessage simpleMessageInteger = new NlsMessageImpl(integer);
     NlsMessage simpleMessageReal = new NlsMessageImpl(real, Double.valueOf(-5), Double.valueOf(5));
     final String err = "The given value must be of the type \"{0}\" but has the type \"{1}\"!";
-    final String errDe = "Der angegebene Wert muss vom Typ \"{0}\" sein hat aber den Typ \"{1}\"!";
+    final String errDe = "Der angegebene Wert muss vom Typ \"{0}\" sein, hat aber den Typ \"{1}\"!";
     NlsMessage cascadedMessage = new NlsMessageImpl(err, simpleMessageInteger, simpleMessageReal);
-    NlsTranslator translatorDe = new AbstractNlsTranslator() {
+    NlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
-      public String translate(NlsTranslationSource source) {
+      public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
-        String message = source.getInternationalizedMessage();
-        if (message.equals(integer)) {
-          return integerDe;
-        } else if (message.equals(real)) {
-          return realDe;
-        } else if (message.equals(err)) {
-          return errDe;
+        if (internationalizedMessage.equals(integer)) {
+          return new GermanTemplate(integerDe);
+        } else if (internationalizedMessage.equals(real)) {
+          return new GermanTemplate(realDe);
+        } else if (internationalizedMessage.equals(err)) {
+          return new GermanTemplate(errDe);
         }
         return null;
       }
+
     };
-    String msgDe = cascadedMessage.getLocalizedMessage(translatorDe);
-    assertEquals(
-        "Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein hat aber den Typ \"relle Zahl[-5,5]\"!",
-        msgDe);
+    String msgDe = cascadedMessage.getLocalizedMessage(Locale.GERMAN, translatorDe);
+    assertEquals("Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, "
+        + "hat aber den Typ \"relle Zahl[-5,5]\"!", msgDe);
+  }
+
+  /**
+   * A very stupid and insane template implementation for testing.
+   */
+  private static class GermanTemplate extends FormattedNlsTemplate {
+
+    private final String msgDe;
+
+    public GermanTemplate(String msgDe) {
+
+      super();
+      this.msgDe = msgDe;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String translate(Locale locale) {
+
+      if ("de".equals(locale.getLanguage())) {
+        return this.msgDe;
+      }
+      return null;
+    }
+
   }
 }

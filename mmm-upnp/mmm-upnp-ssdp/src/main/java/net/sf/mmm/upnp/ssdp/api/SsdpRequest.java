@@ -4,7 +4,7 @@
 package net.sf.mmm.upnp.ssdp.api;
 
 import net.sf.mmm.util.http.HttpRequest;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This class represents an SSDP request. It is a specific HTTP-Request that is
@@ -277,7 +277,7 @@ public class SsdpRequest extends HttpRequest {
     // and versions do NOT contain the whitespace character ' '.
     String serverText = getHeaderProperty(HEADER_PROPERTY_SERVER);
     if (serverText != null) {
-      CharacterSequenceScanner parser = new CharacterSequenceScanner(serverText);
+      CharSequenceScanner parser = new CharSequenceScanner(serverText);
       boolean okay = parser.skipOver(" UPnP/", true);
       if (okay) {
         okay = parser.skipUntil(' ');
@@ -302,7 +302,7 @@ public class SsdpRequest extends HttpRequest {
     // and versions do NOT contain the whitespace character ' '.
     String serverText = getHeaderProperty(HEADER_PROPERTY_SERVER);
     if (serverText != null) {
-      CharacterSequenceScanner parser = new CharacterSequenceScanner(serverText);
+      CharSequenceScanner parser = new CharSequenceScanner(serverText);
       boolean okay = parser.skipOver(" UPnP/", true);
       if (okay) {
         okay = parser.skipUntil(' ');

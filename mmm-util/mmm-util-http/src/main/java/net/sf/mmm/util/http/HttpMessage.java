@@ -8,7 +8,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.filter.CharFilter;
 import net.sf.mmm.util.filter.ListCharFilter;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This class represents an HTTP message.
@@ -235,7 +235,7 @@ public abstract class HttpMessage {
         value = value + "=" + attributeValue;
       }
     } else {
-      CharacterSequenceScanner parser = new CharacterSequenceScanner(value);
+      CharSequenceScanner parser = new CharSequenceScanner(value);
       boolean found = false;
       while (parser.hasNext()) {
         boolean startsWith = parser.expect(attributeName, true);
@@ -314,7 +314,7 @@ public abstract class HttpMessage {
     }
     String value = getHeaderProperty(name);
     if (value != null) {
-      CharacterSequenceScanner parser = new CharacterSequenceScanner(value);
+      CharSequenceScanner parser = new CharSequenceScanner(value);
       while (parser.hasNext()) {
         if (parser.expect(attributeName, true)) {
           // be tolerant and ommit spaces

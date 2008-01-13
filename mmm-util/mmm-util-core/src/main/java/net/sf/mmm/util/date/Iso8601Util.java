@@ -3,13 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import net.sf.mmm.util.filter.CharFilter;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for formatting and parsing
@@ -158,7 +159,7 @@ public final class Iso8601Util {
     // we could save 2*2 bytes here according to extended flag ;)
     // "yyyy-MM-dd".length() == 10
     StringBuffer buffer = new StringBuffer(10);
-    formatDate(calendar, buffer, extended);
+    formatDate(calendar, extended, buffer);
     return buffer.toString();
   }
 
@@ -167,34 +168,38 @@ public final class Iso8601Util {
    * to {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
-   * @param buffer is where to append the formatted date.
    * @param extended if <code>false</code> the basic date format ("yyyyMMdd")
    *        is used, if <code>true</code> the extended date format
    *        ("yyyy-MM-dd") is used.
+   * @param buffer is where to append the formatted date.
    */
-  private void formatDate(Calendar calendar, StringBuffer buffer, boolean extended) {
+  public void formatDate(Calendar calendar, boolean extended, Appendable buffer) {
 
-    // year
-    String year = String.valueOf(calendar.get(Calendar.YEAR));
-    buffer.append(year);
-    if (extended) {
-      buffer.append('-');
+    try {
+      // year
+      String year = String.valueOf(calendar.get(Calendar.YEAR));
+      buffer.append(year);
+      if (extended) {
+        buffer.append('-');
+      }
+      // month
+      String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+      if (month.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(month);
+      if (extended) {
+        buffer.append('-');
+      }
+      // day
+      String day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+      if (day.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(day);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
     }
-    // month
-    String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
-    if (month.length() < 2) {
-      buffer.append('0');
-    }
-    buffer.append(month);
-    if (extended) {
-      buffer.append('-');
-    }
-    // day
-    String day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-    if (day.length() < 2) {
-      buffer.append('0');
-    }
-    buffer.append(day);
   }
 
   /**
@@ -211,9 +216,9 @@ public final class Iso8601Util {
     calendar.setTime(date);
     // "yyyy-MM-ddTHH:mm:ssZ".length() == 20
     StringBuffer buffer = new StringBuffer(20);
-    formatDate(calendar, buffer, true);
+    formatDate(calendar, true, buffer);
     buffer.append('T');
-    formatTime(calendar, buffer, true);
+    formatTime(calendar, true, buffer);
     buffer.append('Z');
     return buffer.toString();
   }
@@ -237,27 +242,54 @@ public final class Iso8601Util {
    * {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
-   * @return the given <code>calendar</code> as date string.
    * @param extendedDate if <code>false</code> the basic date format
    *        ("yyyyMMdd") is used, if <code>true</code> the extended date
    *        format ("yyyy-MM-dd") is used.
    * @param extendedTime if <code>false</code> the basic time format
    *        ("HHmmss") is used, if <code>true</code> the extended time format
    *        ("HH:mm:ss") is used.
-   * @param extendedTimezone if <code>false</code> the basic timzone format
+   * @param extendedTimezone if <code>false</code> the basic timezone format
    *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
    *        timezone format ("&#177;HH:mm[:ss]") is used.
+   * @return the given <code>calendar</code> as date string.
    */
   public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
       boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
     StringBuffer buffer = new StringBuffer(25);
-    formatDate(calendar, buffer, extendedDate);
-    buffer.append('T');
-    formatTime(calendar, buffer, extendedTime);
-    formatTimeZone(calendar.getTimeZone(), buffer, extendedTimezone);
+    formatDateTime(calendar, extendedDate, extendedTime, extendedTimezone, buffer);
     return buffer.toString();
+  }
+
+  /**
+   * This method formats the given <code>calendar</code> as a date and time in
+   * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
+   * {@link Iso8601Util ISO 8601}.
+   * 
+   * @param calendar is the date to format.
+   * @param extendedDate if <code>false</code> the basic date format
+   *        ("yyyyMMdd") is used, if <code>true</code> the extended date
+   *        format ("yyyy-MM-dd") is used.
+   * @param extendedTime if <code>false</code> the basic time format
+   *        ("HHmmss") is used, if <code>true</code> the extended time format
+   *        ("HH:mm:ss") is used.
+   * @param extendedTimezone if <code>false</code> the basic timezone format
+   *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
+   *        timezone format ("&#177;HH:mm[:ss]") is used.
+   * @param buffer is where to append the formatted date and time.
+   */
+  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
+      boolean extendedTimezone, Appendable buffer) {
+
+    try {
+      formatDate(calendar, extendedDate, buffer);
+      buffer.append('T');
+      formatTime(calendar, extendedTime, buffer);
+      formatTimeZone(calendar.getTimeZone(), extendedTimezone, buffer);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
   }
 
   /**
@@ -265,37 +297,41 @@ public final class Iso8601Util {
    * {@link Iso8601Util ISO 8601}.
    * 
    * @param calendar is the date to format.
-   * @param buffer is where to append the formatted date.
    * @param extended if <code>false</code> the basic time format ("HHmmss") is
    *        used, if <code>true</code> the extended time format ("HH:mm:ss")
    *        is used.
+   * @param buffer is where to append the formatted date.
    */
-  public void formatTime(Calendar calendar, StringBuffer buffer, boolean extended) {
+  public void formatTime(Calendar calendar, boolean extended, Appendable buffer) {
 
-    // append hours
-    String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
-    if (hour.length() < 2) {
-      buffer.append('0');
+    try {
+      // append hours
+      String hour = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
+      if (hour.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(hour);
+      if (extended) {
+        buffer.append(':');
+      }
+      String minute = String.valueOf(calendar.get(Calendar.MINUTE));
+      // append minutes
+      if (minute.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(minute);
+      if (extended) {
+        buffer.append(':');
+      }
+      // append seconds
+      String second = String.valueOf(calendar.get(Calendar.SECOND));
+      if (second.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(second);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
     }
-    buffer.append(hour);
-    if (extended) {
-      buffer.append(':');
-    }
-    String minute = String.valueOf(calendar.get(Calendar.MINUTE));
-    // append minutes
-    if (minute.length() < 2) {
-      buffer.append('0');
-    }
-    buffer.append(minute);
-    if (extended) {
-      buffer.append(':');
-    }
-    // append seconds
-    String second = String.valueOf(calendar.get(Calendar.SECOND));
-    if (second.length() < 2) {
-      buffer.append('0');
-    }
-    buffer.append(second);
   }
 
   /**
@@ -303,44 +339,48 @@ public final class Iso8601Util {
    * {@link Iso8601Util ISO 8601}.<br>
    * 
    * @param timezone is the date to format.
-   * @param buffer is where to append the formatted timezone.
-   * @param extended - if <code>false</code> the basic timzone format
+   * @param extended - if <code>false</code> the basic timezone format
    *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
    *        timezone format ("&#177;HH:mm[:ss]") is used.
+   * @param buffer is where to append the formatted timezone.
    */
-  public void formatTimeZone(TimeZone timezone, StringBuffer buffer, boolean extended) {
+  public void formatTimeZone(TimeZone timezone, boolean extended, Appendable buffer) {
 
-    int offsetSeconds = timezone.getRawOffset() / 1000;
-    if (offsetSeconds < 0) {
-      buffer.append('-');
-      offsetSeconds = -offsetSeconds;
-    } else {
-      buffer.append('+');
-    }
-    int offsetMinutes = offsetSeconds / 60;
-    String hours = String.valueOf(offsetMinutes / 60);
-    if (hours.length() < 2) {
-      buffer.append('0');
-    }
-    buffer.append(hours);
-    if (extended) {
-      buffer.append(':');
-    }
-    String minutes = String.valueOf(offsetMinutes % 60);
-    if (minutes.length() < 2) {
-      buffer.append('0');
-    }
-    buffer.append(minutes);
-    int seconds = offsetSeconds % 60;
-    if (seconds != 0) {
+    try {
+      int offsetSeconds = timezone.getRawOffset() / 1000;
+      if (offsetSeconds < 0) {
+        buffer.append('-');
+        offsetSeconds = -offsetSeconds;
+      } else {
+        buffer.append('+');
+      }
+      int offsetMinutes = offsetSeconds / 60;
+      String hours = String.valueOf(offsetMinutes / 60);
+      if (hours.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(hours);
       if (extended) {
         buffer.append(':');
-        String secs = String.valueOf(seconds);
-        if (secs.length() < 2) {
-          buffer.append('0');
-        }
-        buffer.append(secs);
       }
+      String minutes = String.valueOf(offsetMinutes % 60);
+      if (minutes.length() < 2) {
+        buffer.append('0');
+      }
+      buffer.append(minutes);
+      int seconds = offsetSeconds % 60;
+      if (seconds != 0) {
+        if (extended) {
+          buffer.append(':');
+          String secs = String.valueOf(seconds);
+          if (secs.length() < 2) {
+            buffer.append('0');
+          }
+          buffer.append(secs);
+        }
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
     }
   }
 
@@ -380,7 +420,7 @@ public final class Iso8601Util {
    * @throws IllegalDateFormatException if the <code>scanner</code> only
    *         contained a single digit.
    */
-  private int read2Digits(CharacterSequenceScanner scanner) throws IllegalDateFormatException {
+  private int read2Digits(CharSequenceScanner scanner) throws IllegalDateFormatException {
 
     int highDigit = scanner.readDigit();
     if (highDigit == -1) {
@@ -400,7 +440,7 @@ public final class Iso8601Util {
    * @param scanner is the parser pointing to the time.
    * @return an int-array containing the hour, minute and second in that order.
    */
-  private int[] parseTime(CharacterSequenceScanner scanner) {
+  private int[] parseTime(CharSequenceScanner scanner) {
 
     int hour = read2Digits(scanner);
     boolean colon = scanner.skipOver(":", false);
@@ -437,7 +477,7 @@ public final class Iso8601Util {
    *        of 1-12).
    * @param day is the day to set that has already been parsed.
    */
-  private void parseTime(CharacterSequenceScanner scanner, Calendar calendar, int year, int month,
+  private void parseTime(CharSequenceScanner scanner, Calendar calendar, int year, int month,
       int day) {
 
     char c = scanner.forceNext();
@@ -467,7 +507,7 @@ public final class Iso8601Util {
    * @return the parsed timezone or <code>null</code> if parser already at the
    *         end of the string.
    */
-  private TimeZone parseTimezone(CharacterSequenceScanner scanner) {
+  private TimeZone parseTimezone(CharSequenceScanner scanner) {
 
     char c = scanner.forceNext();
     if ((c == '+') || (c == '-')) {
@@ -511,7 +551,7 @@ public final class Iso8601Util {
    */
   public void parseCalendar(String date, Calendar calendar) {
 
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(date);
+    CharSequenceScanner parser = new CharSequenceScanner(date);
     int year = 0;
     int month = -1;
     int day = -1;

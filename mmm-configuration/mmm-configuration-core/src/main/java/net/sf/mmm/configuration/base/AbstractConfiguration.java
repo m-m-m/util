@@ -24,7 +24,7 @@ import net.sf.mmm.configuration.base.path.PathSegment;
 import net.sf.mmm.configuration.base.path.SimplePathSegment;
 import net.sf.mmm.term.api.TermParser;
 import net.sf.mmm.term.impl.SimpleTermParser;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This is the abstract base implementation of the
@@ -532,7 +532,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
     // </foo>
 
     // parse the given descendant path
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(path);
+    CharSequenceScanner parser = new CharSequenceScanner(path);
     PathSegment[] pathSegments = DescendantPathParser.parsePath(parser, true);
     if (parser.hasNext() || pathSegments.length == 0) {
       throw new IllegalDescendantPathException(path);
@@ -553,7 +553,7 @@ public abstract class AbstractConfiguration implements MutableConfiguration {
    */
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(path);
+    CharSequenceScanner parser = new CharSequenceScanner(path);
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
     List<SimplePathSegment> conditionSegments = new ArrayList<SimplePathSegment>();
     Set<AbstractConfiguration> resultSet = new LinkedHashSet<AbstractConfiguration>();

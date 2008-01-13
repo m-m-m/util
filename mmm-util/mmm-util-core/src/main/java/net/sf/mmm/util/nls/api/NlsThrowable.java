@@ -3,8 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
+import java.util.Locale;
 
 /**
  * This is the interface for exceptions and runtime exceptions with real
@@ -21,7 +20,7 @@ import java.io.PrintWriter;
  * argument list that is inserted into the message after nationalization.</li>
  * <li>The throwable itself does not know the component that does the actual
  * localization which is done by the callback interface
- * {@link net.sf.mmm.util.nls.api.NlsTranslator}.</li>
+ * {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}.</li>
  * </ul>
  * 
  * @see NlsMessage
@@ -30,7 +29,7 @@ import java.io.PrintWriter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface NlsThrowable {
+public interface NlsThrowable extends NlsObject {
 
   /**
    * @return the {@link Throwable#getCause() cause}.
@@ -43,46 +42,65 @@ public interface NlsThrowable {
   String getMessage();
 
   /**
+   * This method gets the {@link NlsMessage} describing the problem.
+   * 
+   * @return the {@link NlsMessage}.
+   */
+  NlsMessage getNlsMessage();
+
+  /**
    * This method gets the localized message as string.
    * 
-   * @see NlsThrowable#getLocalizedMessage(NlsTranslator, StringBuffer)
+   * @see #getLocalizedMessage(Locale, NlsTemplateResolver, Appendable)
    * 
-   * @param nationalizer is used to translate the original i18n message.
+   * @param locale is the locale to translate to.
    * @return the localized message.
    */
-  String getLocalizedMessage(NlsTranslator nationalizer);
+  String getLocalizedMessage(Locale locale);
+
+  /**
+   * This method gets the localized message as string.
+   * 
+   * @see #getLocalizedMessage(Locale, NlsTemplateResolver, Appendable)
+   * 
+   * @param locale is the locale to translate to.
+   * @param resolver is used to resolve the template in order to translate the
+   *        original i18n message.
+   * @return the localized message.
+   */
+  String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver);
 
   /**
    * This method writes the localized message to the given string buffer. <br>
-   * The actual localization is done by the given translator. If this translator
-   * fails (returns <code>null</code>), the original message (in English
-   * language) will be used. After translation is done, the language independent
-   * arguments will be filled in the translated message string.
    * 
-   * @see net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(NlsTranslator,
-   *      StringBuffer)
+   * @see net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(Locale,
+   *      NlsTemplateResolver, Appendable)
    * 
-   * @param nationalizer is used to translate the original i18n message.
-   * @param message is the buffer where to write the message to.
+   * @param locale is the locale to translate to.
+   * @param resolver is used to resolve the template required to translate the
+   *        {@link #getNlsMessage() internationalized message}.
+   * @param buffer is the buffer where to write the message to.
+   * @throws IllegalStateException if the given <code>buffer</code> produced
+   *         an {@link java.io.IOException}.
    */
-  void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message);
+  void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
+      throws IllegalStateException;
 
   /**
    * This method prints the stack trace with localized exception message(s).
    * 
-   * @param stream is where to write the stack trace.
-   * @param nationalizer translates the original message. May be
-   *        <code>null</code>.
+   * @param locale is the locale to translate to.
+   * @param resolver translates the original message.
+   * @param buffer is where to write the stack trace to.
+   * @throws IllegalStateException if the given <code>buffer</code> produced
+   *         an {@link java.io.IOException}.
    */
-  void printStackTrace(PrintStream stream, NlsTranslator nationalizer);
+  void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
+      throws IllegalStateException;
 
   /**
-   * This method prints the strack trace with localized exception message(s).
-   * 
-   * @param writer is where to write the strack trace.
-   * @param nationalizer translates the original message. Mey be
-   *        <code>null</code>.
+   * @return the {@link Throwable#getStackTrace() stack-trace}.
    */
-  void printStackTrace(PrintWriter writer, NlsTranslator nationalizer);
+  StackTraceElement[] getStackTrace();
 
 }

@@ -4,6 +4,7 @@
 package net.sf.mmm.util.nls;
 
 import net.sf.mmm.util.nls.api.AbstractNlsException;
+import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is an abstract base implementation of a checked exception with real
@@ -21,28 +22,34 @@ public abstract class NlsException extends AbstractNlsException {
   /**
    * The constructor.<br>
    * 
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization}
+   *        and should be in English language.
    * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   *        <code>internaitionalizedMessage</code> after nationalization. May
+   *        be empty if no variable arguments exist.
    */
-  public NlsException(String internaitionalizedMessage, Object... arguments) {
+  public NlsException(String internationalizedMessage, Object... arguments) {
 
-    super(new NlsMessageImpl(internaitionalizedMessage, arguments));
+    super(NlsMessageFactoryAccess.getInstance().create(internationalizedMessage, arguments));
   }
 
   /**
    * The constructor.<br>
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization}
+   *        and should be in English language.
    * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   *        <code>internaitionalizedMessage</code> after nationalization. May
+   *        be empty if no variable arguments exist.
    */
-  public NlsException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  public NlsException(Throwable nested, String internationalizedMessage, Object... arguments) {
 
-    super(nested, new NlsMessageImpl(internaitionalizedMessage, arguments));
+    super(nested, NlsMessageFactoryAccess.getInstance().create(internationalizedMessage, arguments));
   }
 
 }

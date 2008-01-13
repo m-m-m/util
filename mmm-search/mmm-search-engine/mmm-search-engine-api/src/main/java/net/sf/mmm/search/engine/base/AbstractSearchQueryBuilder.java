@@ -9,7 +9,7 @@ import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.util.filter.CharFilter;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This is the abstract base implementation of the {@link SearchQueryBuilder}
@@ -57,7 +57,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    *         greater than <code>0</code> and the parsed query segment was
    *         void.
    */
-  private SearchQuery parseStandardQuery(CharacterSequenceScanner parser, boolean requireTerms,
+  private SearchQuery parseStandardQuery(CharSequenceScanner parser, boolean requireTerms,
       String defaultProperty, int depth) {
 
     ComplexSearchQuery complexQuery = createComplexQuery();
@@ -122,7 +122,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    * @return the parsed query or <code>null</code> if the parsed query segment
    *         was void.
    */
-  private SearchQuery parseStandardClause(CharacterSequenceScanner parser, String defaultProperty, int depth) {
+  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultProperty, int depth) {
 
     char c;
     String property = defaultProperty;
@@ -170,7 +170,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    */
   public SearchQuery parseStandardQuery(String query, boolean requireTerms) {
 
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(query);
+    CharSequenceScanner parser = new CharSequenceScanner(query);
     return parseStandardQuery(parser, requireTerms, SearchEntry.PROPERTY_TEXT, 0);
   }
 }

@@ -19,7 +19,7 @@ import net.sf.mmm.util.filter.CharFilter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class CharacterSequenceScanner implements CharacterStreamScanner {
+public class CharSequenceScanner implements CharStreamScanner {
 
   /** @see #getOriginalString() */
   private String str;
@@ -47,7 +47,7 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
    * 
    * @param charSequence is the {@link #getOriginalString() string} to scan.
    */
-  public CharacterSequenceScanner(CharSequence charSequence) {
+  public CharSequenceScanner(CharSequence charSequence) {
 
     this(charSequence.toString());
   }
@@ -57,7 +57,7 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
    * 
    * @param string is the {@link #getOriginalString() string} to parse.
    */
-  public CharacterSequenceScanner(String string) {
+  public CharSequenceScanner(String string) {
 
     this(string.toCharArray());
     this.str = string;
@@ -68,7 +68,7 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
    * 
    * @param characters is an array containing the characters to scan.
    */
-  public CharacterSequenceScanner(char[] characters) {
+  public CharSequenceScanner(char[] characters) {
 
     this(characters, 0, characters.length);
   }
@@ -84,7 +84,7 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
    *        <code>characters</code> starting at <code>offset</code>
    *        (typically <code>characters.length - offset</code>).
    */
-  public CharacterSequenceScanner(char[] characters, int offset, int length) {
+  public CharSequenceScanner(char[] characters, int offset, int length) {
 
     super();
     if (offset < 0) {
@@ -301,6 +301,128 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
   /**
    * {@inheritDoc}
    */
+  public String readUntil(char stop, boolean acceptEof, CharScannerSyntax syntax) {
+
+    StringBuilder result = new StringBuilder();
+    char escape = syntax.getEscape();
+    char quoteStart = syntax.getQuoteStart();
+    char altQuoteStart = syntax.getAltQuoteStart();
+    char entityStart = syntax.getEntityStart();
+    boolean escapeActive = false;
+    boolean done = false;
+    char quoteEnd = 0;
+    char quoteEscape = 0;
+    char entityEnd = 0;
+    boolean quoteLazy = false;
+    int index = this.pos;
+    int restIndex = this.endIndex;
+    while (this.pos < this.endIndex) {
+      char c = this.chars[this.pos++];
+      boolean append = false;
+      boolean newEscapeActive = false;
+      if (quoteEnd != 0) {
+        // in quotation
+        if (escapeActive) {
+          // current character c was escaped
+          // it will be taken as is on the next append
+        } else if (c == quoteEscape) {
+          // escape in quote --> lookahead
+          if (this.pos < this.endIndex) {
+            c = this.chars[this.pos];
+            if (c == quoteEnd) {
+              // quoteEnd was escaped
+              append = true;
+              newEscapeActive = true;
+            } else if (quoteEscape == quoteEnd) {
+              // quotation done
+              quoteEnd = 0;
+              append = true;
+            }
+          } else {
+            // end reached without stop char
+            if (quoteEscape == quoteEnd) {
+              // omit quote on appending of rest
+              restIndex--;
+            }
+            break;
+          }
+        } else if (c == quoteEnd) {
+          // quotation done
+          quoteEnd = 0;
+          append = true;
+        }
+      } else if (entityEnd != 0) {
+        if (c == entityEnd) {
+          // entity end detected...
+          entityEnd = 0;
+          int len = this.pos - index - 1;
+          String entity = new String(this.chars, index, len);
+          result.append(syntax.resolveEntity(entity));
+          index = this.pos;
+        }
+      } else if (escapeActive) {
+        // current character c was escaped
+        // it will be taken as is on the next append
+      } else if (c == stop) {
+        append = true;
+        done = true;
+      } else if (c == escape) {
+        append = true;
+        newEscapeActive = true;
+      } else if (c == entityStart) {
+        entityEnd = syntax.getEntityEnd();
+        append = true;
+      } else {
+        if (c == quoteStart) {
+          quoteEnd = syntax.getQuoteEnd();
+          quoteEscape = syntax.getQuoteEscape();
+          quoteLazy = syntax.isQuoteEscapeLazy();
+        } else if (c == altQuoteStart) {
+          quoteEnd = syntax.getAltQuoteEnd();
+          quoteEscape = syntax.getAltQuoteEscape();
+          quoteLazy = syntax.isAltQuoteEscapeLazy();
+        }
+        if (quoteEnd != 0) {
+          append = true;
+          if ((quoteEnd == quoteEscape) && (c == quoteEscape) && (quoteLazy)) {
+            // lazy quotation mode active --> lookahead
+            if (this.pos < this.endIndex) {
+              if (this.chars[this.pos] == quoteEscape) {
+                // lazy quotation detected
+                quoteEnd = 0;
+                newEscapeActive = true;
+              }
+            }
+          }
+        }
+      }
+      if (append) {
+        int len = this.pos - index - 1;
+        if (len > 0) {
+          result.append(this.chars, index, len);
+        }
+        if (done) {
+          return result.toString();
+        }
+        index = this.pos;
+      }
+      escapeActive = newEscapeActive;
+    }
+    if (acceptEof) {
+      int len = restIndex - index;
+      if (len > 0) {
+        // append rest
+        result.append(this.chars, index, len);
+      }
+      return result.toString();
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public String read(int count) {
 
     int len = this.endIndex - this.pos;
@@ -323,9 +445,34 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
       if ((c >= '0') && (c <= '9')) {
         result = c - '0';
         this.pos++;
-      }      
+      }
     }
     return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public long readLong(int maxDigits) throws NumberFormatException {
+
+    if (maxDigits <= 0) {
+      throw new IllegalArgumentException();
+    }
+    int index = this.pos;
+    int end = this.pos + maxDigits;
+    if (end > this.endIndex) {
+      end = this.endIndex;
+    }
+    while (this.pos < end) {
+      char c = this.chars[this.pos];
+      if ((c < '0') || (c > '9')) {
+        break;
+      }
+      this.pos++;
+    }
+    int len = this.pos - index;
+    String number = new String(this.chars, index, len);
+    return Long.parseLong(number);
   }
 
   /**
@@ -453,41 +600,6 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
   /**
    * {@inheritDoc}
    */
-  public String readUntil(char stop, boolean acceptEof, char escape) {
-
-    StringBuilder result = new StringBuilder();
-    boolean escapeActive = false;
-    int index = this.pos;
-    while (this.pos < this.endIndex) {
-      char c = this.chars[this.pos++];
-      if (c == escape) {
-        if (escapeActive) {
-          result.append(escape);
-        } else {
-          int len = this.pos - index - 1;
-          if (len > 0) {
-            result.append(this.chars, index, len);
-          }
-        }
-        index = this.pos;
-        escapeActive = !escapeActive;
-      } else {
-        if ((c == stop) && (!escapeActive)) {
-          int len = this.pos - index - 1;
-          if (len > 0) {
-            result.append(this.chars, index, len);
-          }
-          return result.toString();
-        }
-        escapeActive = false;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public int skipWhile(char c) {
 
     int currentPos = this.pos;
@@ -565,7 +677,7 @@ public class CharacterSequenceScanner implements CharacterStreamScanner {
   /**
    * This method gets the original string to parse.
    * 
-   * @see CharacterSequenceScanner#CharacterSequenceScanner(String)
+   * @see CharSequenceScanner#CharSequenceScanner(String)
    * 
    * @return the original string.
    */

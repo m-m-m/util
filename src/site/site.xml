@@ -17,6 +17,8 @@
   -->
   <body>
     <links>
+      <item name="Javadoc" href="http://m-m-m.sourceforge.net/maven/apidocs/index.html" />
+      <item name="Overview" href="http://m-m-m.sourceforge.net/maven/overview.html" />
       <item name="Home" href="http://m-m-m.sourceforge.net/" />
     </links>
 

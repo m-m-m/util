@@ -9,12 +9,12 @@
  * However in some situations it is more suitable to write a handwritten parser.
  * The tradeoff is that this may result in ugly monolithic code that is hard to 
  * maintain.<br>
- * The {@link net.sf.mmm.util.scanner.CharacterStreamScanner} is an interface 
+ * The {@link net.sf.mmm.util.scanner.CharStreamScanner} is an interface 
  * that covers typical tasks when paring strings or streams and therefore makes 
  * your life a lot easier. You can concentrate on the syntax you want to parse 
  * and do NOT need to repeat checks if the end is already reached all the time.
  * For parsing strings there is the implementation 
- * {@link net.sf.mmm.util.scanner.CharacterSequenceScanner} that bundles the 
+ * {@link net.sf.mmm.util.scanner.CharSequenceScanner} that bundles the 
  * string together with the state (parsing position) so you can easily delegate 
  * a step to another method or class. Otherwise you would need to pass the current 
  * position to that method and return the new one from there. This is tricky if 

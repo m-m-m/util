@@ -3,8 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Locale;
+
+import net.sf.mmm.util.StringUtil;
 
 /**
  * This is an abstract base implementation of a checked exception with real
@@ -51,9 +56,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   }
 
   /**
-   * This method gets the internationalized message describing the problem.
-   * 
-   * @return the internationalized message.
+   * {@inheritDoc}
    */
   public final NlsMessage getNlsMessage() {
 
@@ -66,7 +69,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   @Override
   public void printStackTrace(PrintStream s) {
 
-    printStackTrace(s, null);
+    printStackTrace(Locale.getDefault(), null, s);
   }
 
   /**
@@ -75,54 +78,62 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   @Override
   public void printStackTrace(PrintWriter s) {
 
-    printStackTrace(s, null);
+    printStackTrace(Locale.getDefault(), null, s);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void printStackTrace(PrintStream stream, NlsTranslator nationalizer) {
+  public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
-    synchronized (stream) {
-      stream.println(getLocalizedMessage(nationalizer));
-      StackTraceElement[] trace = getStackTrace();
-      for (int i = 0; i < trace.length; i++) {
-        stream.println("\tat " + trace[i]);
-      }
-
-      Throwable nested = getCause();
-      if (nested != null) {
-        stream.println("Caused by: ");
-        if (nested instanceof NlsThrowable) {
-          ((NlsThrowable) nested).printStackTrace(stream, nationalizer);
-        } else {
-          nested.printStackTrace(stream);
-        }
-      }
-    }
+    printStackTrace(this, locale, resolver, buffer);
   }
 
   /**
-   * {@inheritDoc}
+   * @see NlsThrowable#printStackTrace(Locale, NlsTemplateResolver, Appendable)
+   * 
+   * @param throwable is the throwable to print.
+   * @param locale is the locale to translate to.
+   * @param resolver translates the original message.
+   * @param buffer is where to write the stack trace to.
    */
-  public void printStackTrace(PrintWriter writer, NlsTranslator nationalizer) {
+  static void printStackTrace(NlsThrowable throwable, Locale locale, NlsTemplateResolver resolver,
+      Appendable buffer) {
 
-    synchronized (writer) {
-      writer.println(getLocalizedMessage(nationalizer));
-      StackTraceElement[] trace = getStackTrace();
-      for (int i = 0; i < trace.length; i++) {
-        writer.println("\tat " + trace[i]);
-      }
+    try {
+      synchronized (buffer) {
+        throwable.getLocalizedMessage(locale, resolver, buffer);
+        buffer.append(StringUtil.LINE_SEPARATOR);
+        StackTraceElement[] trace = throwable.getStackTrace();
+        for (int i = 0; i < trace.length; i++) {
+          buffer.append("\tat ");
+          buffer.append(trace[i].toString());
+          buffer.append(StringUtil.LINE_SEPARATOR);
+        }
 
-      Throwable nested = getCause();
-      if (nested != null) {
-        writer.println("Caused by: ");
-        if (nested instanceof NlsThrowable) {
-          ((NlsThrowable) nested).printStackTrace(writer, nationalizer);
-        } else {
-          nested.printStackTrace(writer);
+        Throwable nested = throwable.getCause();
+        if (nested != null) {
+          buffer.append("Caused by: ");
+          buffer.append(StringUtil.LINE_SEPARATOR);
+          if (nested instanceof NlsThrowable) {
+            ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
+          } else {
+            if (buffer instanceof PrintStream) {
+              nested.printStackTrace((PrintStream) buffer);
+            } else if (buffer instanceof PrintWriter) {
+              nested.printStackTrace((PrintWriter) buffer);
+            } else {
+              StringWriter writer = new StringWriter();
+              PrintWriter printWriter = new PrintWriter(writer);
+              nested.printStackTrace(printWriter);
+              printWriter.flush();
+              buffer.append(writer.toString());
+            }
+          }
         }
       }
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
     }
   }
 
@@ -132,25 +143,81 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   @Override
   public String getMessage() {
 
-    return getLocalizedMessage(null);
+    return getNlsMessage().getLocalizedMessage();
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getLocalizedMessage(NlsTranslator nationalizer) {
+  public String getLocalizedMessage(Locale locale) {
 
-    StringBuffer message = new StringBuffer();
-    getLocalizedMessage(nationalizer, message);
-    return message.toString();
+    return getLocalizedMessage(locale, null);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void getLocalizedMessage(NlsTranslator nationalizer, StringBuffer message) {
+  public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
-    getNlsMessage().getLocalizedMessage(nationalizer, message);
+    StringBuffer buffer = new StringBuffer();
+    getLocalizedMessage(locale, resolver, buffer);
+    return buffer.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
+
+    getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
+  }
+
+  /**
+   * @see NlsThrowable#getLocalizedMessage(Locale, NlsTemplateResolver,
+   *      Appendable)
+   * 
+   * @param throwable is the {@link NlsThrowable} for which the localized
+   *        message is requested.
+   * @param locale is the locale to translate to.
+   * @param resolver is used to resolve the template required to translate the
+   *        {@link #getNlsMessage() internationalized message}.
+   * @param buffer is the buffer where to write the message to.
+   */
+  static void getLocalizedMessage(NlsThrowable throwable, Locale locale,
+      NlsTemplateResolver resolver, Appendable buffer) {
+
+    try {
+      throwable.getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
+      Throwable nested = throwable.getCause();
+      if (nested != null) {
+        NlsThrowable mt = null;
+        String msg = null;
+        if (nested instanceof NlsThrowable) {
+          mt = (NlsThrowable) nested;
+        } else {
+          msg = nested.getLocalizedMessage();
+        }
+        if ((mt != null) || (msg != null)) {
+          buffer.append(" [");
+          if (mt != null) {
+            mt.getLocalizedMessage(locale, resolver, buffer);
+          } else {
+            buffer.append(msg);
+          }
+          buffer.append("]");
+        }
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public NlsMessage toNlsMessage() {
+
+    return getNlsMessage();
   }
 
 }

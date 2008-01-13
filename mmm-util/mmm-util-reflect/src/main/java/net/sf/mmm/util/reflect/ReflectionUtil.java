@@ -39,7 +39,7 @@ import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
 import net.sf.mmm.util.reflect.type.ParameterizedTypeImpl;
 import net.sf.mmm.util.reflect.type.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.type.UpperBoundWildcardType;
-import net.sf.mmm.util.scanner.CharacterSequenceScanner;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for dealing with
@@ -68,7 +68,7 @@ public class ReflectionUtil {
   /** an empty object array */
   public static final Type[] NO_TYPES = new Type[0];
 
-  /** @see #toType(CharacterSequenceScanner, ClassResolver, Type) */
+  /** @see #toType(CharSequenceScanner, ClassResolver, Type) */
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
 
   /**
@@ -260,7 +260,7 @@ public class ReflectionUtil {
     // List<String>
     // Map<Integer, Date>
     // Set<? extends Serializable>
-    CharacterSequenceScanner parser = new CharacterSequenceScanner(type);
+    CharSequenceScanner parser = new CharSequenceScanner(type);
     Type result = toType(parser, resolver, null);
     parser.skipWhile(' ');
     if (parser.hasNext()) {
@@ -281,7 +281,7 @@ public class ReflectionUtil {
    * @return the parsed type.
    * @throws ClassNotFoundException
    */
-  private static Type toType(CharacterSequenceScanner parser, ClassResolver resolver, Type owner)
+  private static Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner)
       throws ClassNotFoundException {
 
     parser.skipWhile(' ');
