@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.nls.api.NlsFormatter;
-import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 /**
  * This is the implementation of the
@@ -53,11 +52,7 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
    * {@inheritDoc}
    */
   @Override
-  public NlsFormatter<Object> getFormatter() {
-
-    // Please override with better implementation...
-    return NlsFormatterFallback.INSTANCE;
-  }
+  public abstract NlsFormatter<Object> getFormatter();
 
   /**
    * {@inheritDoc}
@@ -87,8 +82,9 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
    * {@link #registerFormatter(NlsFormatter, String, String) register} and
    * {@link #getFormatter(String, String) retrieve} {@link NlsFormatter}s.<br>
    * <b>ATTENTION:</b><br>
-   * The {@link NlsFormatterManager#getFormatter() default formatter} is NOT
-   * stored in this map.
+   * The
+   * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default formatter}
+   * is NOT stored in this map.
    */
   protected static class NlsFormatterMap {
 

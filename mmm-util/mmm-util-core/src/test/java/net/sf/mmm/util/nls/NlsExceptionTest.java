@@ -7,16 +7,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
 
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
-import net.sf.mmm.util.nls.impl.SingleNlsTemplateResolver;
+import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
- * This is the {@link TestCase} for {@link net.sf.mmm.util.nls.NlsException}.
+ * This is the test-case for {@link net.sf.mmm.util.nls.NlsException}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,7 +35,7 @@ public class NlsExceptionTest {
     String source = "bad boy";
     NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
     assertEquals("NullPointerException caused by \"" + source + "\"!", e.getMessage());
-    NlsTemplateResolver st = new SingleNlsTemplateResolver(new MyResourceBundle());
+    NlsTemplateResolver st = new NlsTemplateResolverImpl(new MyResourceBundle());
     assertEquals("NullZeigerAusnahme verursacht durch \"" + source + "\"!", e.getLocalizedMessage(
         Locale.GERMAN, st));
   }

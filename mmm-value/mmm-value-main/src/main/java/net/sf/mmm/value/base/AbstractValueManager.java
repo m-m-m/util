@@ -9,7 +9,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.value.NlsBundleValueMain;
@@ -69,8 +69,8 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   public final synchronized NlsMessage getToStringMessage() {
 
     if (this.toStringMessage == null) {
-      this.toStringMessage = new NlsMessageImpl(NlsBundleValueMain.MSG_MANAGER_TO_STRING,
-          getName(), getValueClass());
+      this.toStringMessage = NlsAccess.getFactory().create(
+          NlsBundleValueMain.MSG_MANAGER_TO_STRING, getName(), getValueClass());
     }
     return this.toStringMessage;
   }

@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
+import net.sf.mmm.util.nls.AbstractResourceBundle;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
  * This is an implementation of the
@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class NlsTemplateResolverImpl extends AbstractSmartNlsTemplateResolver {
+public class NlsTemplateResolverImpl extends AbstractResourceBundleNlsTemplateResolver {
 
   /** the original bundles */
   private final AbstractResourceBundle[] nlsBundles;

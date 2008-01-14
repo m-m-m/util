@@ -22,7 +22,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
    */
   public NlsRuntimeException(String internaitionalizedMessage, Object... arguments) {
 
-    super(NlsMessageFactoryAccess.getInstance().create(internaitionalizedMessage, arguments));
+    super(NlsAccess.getFactory().create(internaitionalizedMessage, arguments));
   }
 
   /**
@@ -37,7 +37,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   public NlsRuntimeException(Throwable nested, String internaitionalizedMessage,
       Object... arguments) {
 
-    super(nested, NlsMessageFactoryAccess.getInstance().create(internaitionalizedMessage, arguments));
+    super(nested, NlsAccess.getFactory().create(internaitionalizedMessage, arguments));
   }
 
 }

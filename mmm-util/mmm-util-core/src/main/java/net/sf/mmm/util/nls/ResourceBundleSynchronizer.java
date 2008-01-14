@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.nls.base;
+package net.sf.mmm.util.nls;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,10 +20,10 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.util.nls.NlsMessageFactoryAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.impl.SingleNlsTemplateResolver;
+import net.sf.mmm.util.nls.base.NlsBundleSynchronizer;
+import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
  * This class can be used to create and update the localized bundles
@@ -279,10 +279,10 @@ public class ResourceBundleSynchronizer {
    */
   public static void usage(int code) {
 
-    NlsMessage message = NlsMessageFactoryAccess.getInstance().create(
+    NlsMessage message = NlsAccess.getFactory().create(
         ResourceBundleSynchronizer.class.getName(), DEFAULT_ENCODING, DEFAULT_BASE_PATH,
         DEFAULT_DATE_PATTERN, NlsBundleSynchronizer.class.getName());
-    NlsTemplateResolver nationalizer = new SingleNlsTemplateResolver(new NlsBundleSynchronizer());
+    NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
     System.out.println(message.getLocalizedMessage(null, nationalizer));
     System.exit(code);
   }

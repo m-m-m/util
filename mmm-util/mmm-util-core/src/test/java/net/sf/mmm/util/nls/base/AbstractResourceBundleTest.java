@@ -13,10 +13,11 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.nls.AbstractResourceBundle;
+import net.sf.mmm.util.nls.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.impl.NlsMessageImpl;
-import net.sf.mmm.util.nls.impl.SingleNlsTemplateResolver;
+import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
  * This is the test-case for {@link AbstractResourceBundle}.
@@ -47,8 +48,9 @@ public class AbstractResourceBundleTest {
       count++;
     }
     assertEquals(count, expectedKeys.size());
-    NlsTemplateResolver st = new SingleNlsTemplateResolver(myRB);
-    NlsMessage msg = new NlsMessageImpl(MyResourceBundle.MSG_WELCOME, "Paul") {};
+    NlsTemplateResolver st = new NlsTemplateResolverImpl(myRB);
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME,
+        "Paul");
     assertEquals("Welcome \"Paul\"!", msg.getMessage());
     assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, st));
   }

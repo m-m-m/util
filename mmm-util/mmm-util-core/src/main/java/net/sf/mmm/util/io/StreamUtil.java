@@ -27,10 +27,10 @@ import org.apache.commons.logging.LogFactory;
 
 import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.concurrent.SimpleExecutor;
+import net.sf.mmm.util.concurrent.Stoppable;
 import net.sf.mmm.util.pool.api.Pool;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
-import net.sf.mmm.util.state.Stoppable;
 
 /**
  * This class is a collection of utility functions to deal with

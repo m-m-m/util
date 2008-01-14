@@ -39,7 +39,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatter<Object> {
   /**
    * The constructor.
    * 
-   * @param templateResolver
+   * @param templateResolver is the resolver used for {@link NlsObject}s.
    */
   public NlsFormatterDefault(NlsTemplateResolver templateResolver) {
 

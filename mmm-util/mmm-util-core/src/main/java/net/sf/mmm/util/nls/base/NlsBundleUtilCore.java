@@ -3,8 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import net.sf.mmm.util.nls.AbstractResourceBundle;
+
 /**
- * This class holds the internationalized messages for <code>util-misc</code>.
+ * This class holds the internationalized messages for this module.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

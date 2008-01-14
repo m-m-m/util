@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.impl;
 
-import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.NlsAccess;
 import net.sf.mmm.value.validator.api.ValidationResult;
 import net.sf.mmm.value.validator.base.AbstractCompositeValueValidator;
 import net.sf.mmm.value.validator.base.ValidationResultImpl;
@@ -37,8 +37,8 @@ public class ValueAndValidator extends AbstractCompositeValueValidator {
       return ValidationResultImpl.VALID_RESULT;
     } else {
       // TODO: i18n
-      return new ValidationResultImpl(new NlsMessageImpl("\"{0}\" error(s):", Integer
-          .valueOf(detailCount)), details, detailCount);
+      return new ValidationResultImpl(NlsAccess.getFactory().create("\"{0}\" error(s):",
+          Integer.valueOf(detailCount)), details, detailCount);
     }
   }
 }

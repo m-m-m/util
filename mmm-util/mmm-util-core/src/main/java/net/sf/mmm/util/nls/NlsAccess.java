@@ -13,25 +13,28 @@ import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class NlsMessageFactoryAccess {
+public final class NlsAccess {
 
-  /** @see #getInstance() */
-  private static NlsMessageFactory instance = new NlsMessageFactoryImpl();
+  /** @see #getFactory() */
+  private static NlsMessageFactory factory = new NlsMessageFactoryImpl();
 
   /**
    * The constructor.
    */
-  private NlsMessageFactoryAccess() {
+  private NlsAccess() {
 
     super();
   }
 
   /**
-   * @return the instance
+   * This method gets the {@link NlsMessageFactory} used to create instances of
+   * {@link net.sf.mmm.util.nls.api.NlsMessage}.
+   * 
+   * @return the factory instance.
    */
-  public static NlsMessageFactory getInstance() {
+  public static NlsMessageFactory getFactory() {
 
-    return instance;
+    return factory;
   }
 
   /**
@@ -61,9 +64,9 @@ public final class NlsMessageFactoryAccess {
    * 
    * @param instance the factory-instance to use.
    */
-  public static void setInstance(NlsMessageFactory instance) {
+  public static void setFactory(NlsMessageFactory instance) {
 
-    NlsMessageFactoryAccess.instance = instance;
+    NlsAccess.factory = instance;
   }
 
 }

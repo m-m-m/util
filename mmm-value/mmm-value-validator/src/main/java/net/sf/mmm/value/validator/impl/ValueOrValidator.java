@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.impl;
 
-import net.sf.mmm.util.nls.NlsMessageImpl;
+import net.sf.mmm.util.nls.NlsAccess;
 import net.sf.mmm.value.validator.api.ValidationResult;
 import net.sf.mmm.value.validator.base.AbstractCompositeValueValidator;
 import net.sf.mmm.value.validator.base.ValidationResultImpl;
@@ -37,7 +37,7 @@ public class ValueOrValidator extends AbstractCompositeValueValidator {
       return ValidationResultImpl.VALID_RESULT;
     } else {
       // TODO: i18n
-      return new ValidationResultImpl(new NlsMessageImpl(
+      return new ValidationResultImpl(NlsAccess.getFactory().create(
           "At least one of the \"{0}\" error(s) must be fixed:", Integer.valueOf(detailCount)),
           details, detailCount);
     }

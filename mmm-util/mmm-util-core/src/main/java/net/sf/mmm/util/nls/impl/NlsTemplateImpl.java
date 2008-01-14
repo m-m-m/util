@@ -7,6 +7,8 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
+
 /**
  * This class is the straight forward implementation of the
  * {@link net.sf.mmm.util.nls.api.NlsTemplate} interface.
@@ -31,6 +33,21 @@ public class NlsTemplateImpl extends FormattedNlsTemplate {
   public NlsTemplateImpl(String name, String key) {
 
     super();
+    this.name = name;
+    this.key = key;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param name is the {@link #getName() name} of the bundle.
+   * @param key is the {@link #getKey() key} of the string to lookup in the
+   *        bundle.
+   * @param formatterManager is the {@link NlsFormatterManager} to use.
+   */
+  public NlsTemplateImpl(String name, String key, NlsFormatterManager formatterManager) {
+
+    super(formatterManager);
     this.name = name;
     this.key = key;
   }

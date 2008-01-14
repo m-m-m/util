@@ -10,6 +10,7 @@
  </p>
  <p>
  The localization (translation to native language) is performed by the 
+ {@link net.sf.mmm.util.nls.api.NlsTemplate} resolved by the 
  {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}.
  </p>
  <p>

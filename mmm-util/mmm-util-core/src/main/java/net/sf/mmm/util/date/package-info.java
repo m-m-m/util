@@ -10,8 +10,8 @@
  * The {@link java.text.SimpleDateFormat} is nice but unfortunately NOT 
  * thread-safe. For representation of date and time there is a common 
  * standard with ISO 8601. Therefore {@link net.sf.mmm.util.date.Iso8601Util}
- * comes with support to format and parse date and time. It is very fast and 
- * thread-safe.
+ * comes with support to format and parse date and time according to this standard. 
+ * It is very fast and thread-safe.
  */
 package net.sf.mmm.util.date;
 

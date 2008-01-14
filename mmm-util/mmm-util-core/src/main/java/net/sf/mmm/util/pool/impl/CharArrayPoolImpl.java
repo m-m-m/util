@@ -59,9 +59,9 @@ public class CharArrayPoolImpl extends AbstractPool<char[]> {
       return false;
     }
     // could be faster with System.arraycopy
-    for (int i = 0; i < element.length; i++) {
-      element[i] = 0;
-    }
+    // for (int i = 0; i < element.length; i++) {
+    // element[i] = 0;
+    // }
     return super.reset(element);
   }
 

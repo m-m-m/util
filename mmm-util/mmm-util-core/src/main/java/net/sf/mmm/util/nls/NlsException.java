@@ -4,11 +4,10 @@
 package net.sf.mmm.util.nls;
 
 import net.sf.mmm.util.nls.api.AbstractNlsException;
-import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is an abstract base implementation of a checked exception with real
- * <em>native language support</em> (NLS). <br>
+ * <em>native language support</em> (NLS).<br>
  * <b>ATTENTION:</b><br>
  * Checked exceptions should be used for business errors and should only occur
  * in unexpected situations.
@@ -24,7 +23,7 @@ public abstract class NlsException extends AbstractNlsException {
    * 
    * @param internationalizedMessage is a short description of the problem. It
    *        is used for
-   *        {@link NlsMessage#getInternationalizedMessage() internationalization}
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization}
    *        and should be in English language.
    * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization. May
@@ -32,7 +31,7 @@ public abstract class NlsException extends AbstractNlsException {
    */
   public NlsException(String internationalizedMessage, Object... arguments) {
 
-    super(NlsMessageFactoryAccess.getInstance().create(internationalizedMessage, arguments));
+    super(NlsAccess.getFactory().create(internationalizedMessage, arguments));
   }
 
   /**
@@ -41,7 +40,7 @@ public abstract class NlsException extends AbstractNlsException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It
    *        is used for
-   *        {@link NlsMessage#getInternationalizedMessage() internationalization}
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization}
    *        and should be in English language.
    * @param arguments are the arguments filled into the
    *        <code>internaitionalizedMessage</code> after nationalization. May
@@ -49,7 +48,7 @@ public abstract class NlsException extends AbstractNlsException {
    */
   public NlsException(Throwable nested, String internationalizedMessage, Object... arguments) {
 
-    super(nested, NlsMessageFactoryAccess.getInstance().create(internationalizedMessage, arguments));
+    super(nested, NlsAccess.getFactory().create(internationalizedMessage, arguments));
   }
 
 }

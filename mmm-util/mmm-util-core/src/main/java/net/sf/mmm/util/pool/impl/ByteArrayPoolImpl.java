@@ -59,9 +59,10 @@ public class ByteArrayPoolImpl extends AbstractPool<byte[]> {
     if (element.length != this.arrayLength) {
       return false;
     }
-    for (int i = 0; i < element.length; i++) {
-      element[i] = 0;
-    }
+    // could be faster with System.arraycopy
+    // for (int i = 0; i < element.length; i++) {
+    // element[i] = 0;
+    // }
     return super.reset(element);
   }
 

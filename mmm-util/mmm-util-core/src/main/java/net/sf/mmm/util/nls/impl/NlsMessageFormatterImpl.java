@@ -74,11 +74,12 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
     while (scanner.hasNext()) {
       // an argument index > 9999 would be insane, so we limit to 4 digits
       long index = scanner.readLong(4);
-      NlsFormatter<Object> formatter = null;
       char c = scanner.next();
+      String formatType = null;
+      String formatStyle = null;
       if (c == ',') {
-        String formatType = scanner.readWhile(NO_COMMA_OR_CCB);
-        String formatStyle = null;
+        formatType = scanner.readWhile(NO_COMMA_OR_CCB);
+        formatStyle = null;
         c = scanner.next();
         if (c == ',') {
           formatStyle = scanner.readUntil('}', false);
@@ -86,11 +87,11 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
             c = '}';
           }
         }
-        formatter = this.formatterManager.getFormatter(formatType, formatStyle);
       }
       if (c != '}') {
         throw new IllegalArgumentException("Unmatched braces in the pattern.");
       }
+      NlsFormatter<Object> formatter = this.formatterManager.getFormatter(formatType, formatStyle);
       PatternSegment segment = new PatternSegment(prefix, (int) index, formatter);
       segmentList.add(segment);
       prefix = scanner.readUntil('{', true, SYNTAX);

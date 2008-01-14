@@ -17,12 +17,27 @@ import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
  */
 public abstract class FormattedNlsTemplate extends AbstractNlsTemplate {
 
+  /** @see #createFormatter(String, Locale) */
+  private final NlsFormatterManager formatterManager;
+
   /**
    * The constructor.
    */
   public FormattedNlsTemplate() {
 
+    this(NlsFormatterManagerImpl.INSTANCE);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param formatterManager is the
+   *        {@link #getFormatterManager() formatter-manager} to use.
+   */
+  public FormattedNlsTemplate(NlsFormatterManager formatterManager) {
+
     super();
+    this.formatterManager = formatterManager;
   }
 
   /**
@@ -41,7 +56,7 @@ public abstract class FormattedNlsTemplate extends AbstractNlsTemplate {
    */
   protected NlsFormatterManager getFormatterManager() {
 
-    return NlsFormatterManagerImpl.INSTANCE;
+    return this.formatterManager;
   }
 
 }

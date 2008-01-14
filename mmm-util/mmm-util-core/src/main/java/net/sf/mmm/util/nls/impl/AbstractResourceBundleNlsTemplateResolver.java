@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import net.sf.mmm.util.nls.api.NlsFormatter;
-import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.nls.AbstractResourceBundle;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
-import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
  * This is an abstract base implementation of the
@@ -23,7 +21,7 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * {@link Class#getName() name}.<br>
  * This implementation allows localization of chained
  * {@link net.sf.mmm.util.nls.api.NlsObject}s by injecting itself into the
- * {@link NlsFormatterManager} used by the
+ * {@link net.sf.mmm.util.nls.api.NlsFormatterManager} used by the
  * {@link #resolveTemplate(String) resolved} {@link NlsTemplate templates}.<br>
  * 
  * @see net.sf.mmm.util.nls.api.NlsMessage
@@ -31,31 +29,14 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSmartNlsTemplateResolver extends AbstractNlsTemplateResolver {
-
-  /** The formatter manager to use. */
-  private final NlsFormatterManager formatterManager;
+public abstract class AbstractResourceBundleNlsTemplateResolver extends AbstractNlsTemplateResolver {
 
   /**
    * The constructor.
    */
-  public AbstractSmartNlsTemplateResolver() {
+  public AbstractResourceBundleNlsTemplateResolver() {
 
     super();
-    this.formatterManager = createFormatterManager();
-  }
-
-  /**
-   * This method creates the actual {@link NlsFormatterManager} used by this
-   * implementation. It is called once from the constructor. You may override it
-   * to add custom features.
-   * 
-   * @return the {@link NlsFormatterManager} to use.
-   */
-  protected NlsFormatterManager createFormatterManager() {
-
-    NlsFormatter<Object> defaultFormatter = new NlsFormatterDefault(this);
-    return new NlsFormatterManagerImpl(defaultFormatter);
   }
 
   /**
@@ -76,7 +57,7 @@ public abstract class AbstractSmartNlsTemplateResolver extends AbstractNlsTempla
     String key = resourceBundle.getKey(internationalizedMessage);
     if (key != null) {
       String name = resourceBundle.getClass().getName();
-      return new SmartNlsTemplateImpl(name, key, this.formatterManager);
+      return new NlsTemplateImpl(name, key, getFormatterManager());
     }
     return null;
   }

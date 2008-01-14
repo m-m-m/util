@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -55,7 +56,7 @@ public class NlsMessageImplTest {
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
         if (internationalizedMessage.equals(msg)) {
-          return new GermanTemplate(msgDe);
+          return new GermanTemplate(msgDe, getFormatterManager());
         }
         return null;
       }
@@ -81,11 +82,11 @@ public class NlsMessageImplTest {
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
         if (internationalizedMessage.equals(integer)) {
-          return new GermanTemplate(integerDe);
+          return new GermanTemplate(integerDe, getFormatterManager());
         } else if (internationalizedMessage.equals(real)) {
-          return new GermanTemplate(realDe);
+          return new GermanTemplate(realDe, getFormatterManager());
         } else if (internationalizedMessage.equals(err)) {
-          return new GermanTemplate(errDe);
+          return new GermanTemplate(errDe, getFormatterManager());
         }
         return null;
       }
@@ -103,9 +104,9 @@ public class NlsMessageImplTest {
 
     private final String msgDe;
 
-    public GermanTemplate(String msgDe) {
+    public GermanTemplate(String msgDe, NlsFormatterManager formatterManager) {
 
-      super();
+      super(formatterManager);
       this.msgDe = msgDe;
     }
 
