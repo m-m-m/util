@@ -19,6 +19,9 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 public class NlsMessageImpl implements NlsMessage {
 
+  /** Locale.ROOT is only available since java 6. */
+  private static final Locale LOCALE_ROOT = new Locale("");
+
   /** The {@link #message} as {@link NlsTemplate}. */
   private NlsTemplate template;
 
@@ -84,7 +87,7 @@ public class NlsMessageImpl implements NlsMessage {
   public String getInternationalizedMessage() {
 
     if (this.message == null) {
-      this.message = this.template.translate(Locale.ROOT);
+      this.message = this.template.translate(LOCALE_ROOT);
     }
     return this.message;
   }
@@ -187,7 +190,7 @@ public class NlsMessageImpl implements NlsMessage {
    */
   public String getMessage() {
 
-    return getLocalizedMessage(Locale.ROOT, null);
+    return getLocalizedMessage(LOCALE_ROOT, null);
   }
 
   /**

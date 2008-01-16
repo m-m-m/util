@@ -27,7 +27,9 @@ import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
  * This class can be used to create and update the localized bundles
- * (properties) from an {@link AbstractResourceBundle}.
+ * (properties) from an {@link AbstractResourceBundle}.<br>
+ * <b>ATTENTION:</b><br>
+ * This class only works with java 6 or above.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -279,9 +281,9 @@ public class ResourceBundleSynchronizer {
    */
   public static void usage(int code) {
 
-    NlsMessage message = NlsAccess.getFactory().create(
-        ResourceBundleSynchronizer.class.getName(), DEFAULT_ENCODING, DEFAULT_BASE_PATH,
-        DEFAULT_DATE_PATTERN, NlsBundleSynchronizer.class.getName());
+    NlsMessage message = NlsAccess.getFactory().create(ResourceBundleSynchronizer.class.getName(),
+        DEFAULT_ENCODING, DEFAULT_BASE_PATH, DEFAULT_DATE_PATTERN,
+        NlsBundleSynchronizer.class.getName());
     NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
     System.out.println(message.getLocalizedMessage(null, nationalizer));
     System.exit(code);

@@ -6,14 +6,13 @@ package net.sf.mmm.util.nls.impl;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
-import java.text.NumberFormat;
 import java.util.Locale;
 
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
- * using {@link NumberFormat#getInstance(Locale)}.
+ * using {@link DecimalFormat}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -39,7 +38,10 @@ public final class NlsFormatterNumberPattern extends SimpleNlsFormatter<Object> 
   @Override
   public Format createFormat(Locale locale) {
 
-    return new DecimalFormat(this.pattern, DecimalFormatSymbols.getInstance(locale));
+    // only available since java 6
+    // DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance(locale)
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+    return new DecimalFormat(this.pattern, symbols);
   }
 
 }
