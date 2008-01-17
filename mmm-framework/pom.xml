@@ -12,7 +12,7 @@
   <artifactId>mmm-framework</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>MMM::Framework</name>
+  <name>framework</name>
   <description>Leightweight, flexible non-invasive IOC Framework.</description>
   
   <dependencies>

@@ -7,7 +7,7 @@
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
   </parent>
-  <name>MMM::Value</name>
+  <name>value</name>
   <description>The value management component.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-value</artifactId>

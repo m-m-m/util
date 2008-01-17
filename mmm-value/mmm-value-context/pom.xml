@@ -10,7 +10,7 @@
   <artifactId>mmm-value-context</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Value::Context</name>
+  <name>value-context</name>
   <description>Provides a context to store objects as generic values.</description>
   
   <dependencies>

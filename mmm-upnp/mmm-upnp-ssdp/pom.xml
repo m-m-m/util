@@ -11,7 +11,7 @@
   <artifactId>mmm-upnp-ssdp</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM UPnP::SSDP</name>
+  <name>upnp-ssdp</name>
   <description>This project provides support for the Simple Service Discovery Protocol.</description>
   
   <dependencies>

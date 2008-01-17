@@ -7,7 +7,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Util::Misc</name>
+  <name>util-misc</name>
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-util-misc</artifactId>

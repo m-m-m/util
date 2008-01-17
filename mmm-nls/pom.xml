@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM::NLS</name>
+  <name>nls</name>
   <description>True native language support</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-nls</artifactId>

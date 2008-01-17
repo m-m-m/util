@@ -12,7 +12,7 @@
   <artifactId>mmm-util-streamdetect</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
-  <name>MMM::Streamdetect</name>
+  <name>util-streamdetect</name>
   <description>library to detect metadata while streaming</description>
   
   <dependencies>

@@ -11,7 +11,7 @@
   <artifactId>mmm-search-indexer</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search::Indexer</name>
+  <name>search-indexer</name>
   <description>This project provides an indexer using the provided search-engine.</description>
   
   <dependencies>

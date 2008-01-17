@@ -12,7 +12,7 @@
   <artifactId>mmm-framework-demo</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
-  <name>MMM Framework::Demo</name>
+  <name>framework-demo</name>
   <description>Demo Application using the MMM IOC Framework.</description>
   
   <dependencies>

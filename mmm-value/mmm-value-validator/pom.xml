@@ -11,7 +11,7 @@
   <artifactId>mmm-value-validator</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
-  <name>MMM Value::Validator</name>
+  <name>value-validator</name>
   <description>Component for validation.</description>
   
   <dependencies>

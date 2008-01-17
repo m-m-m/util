@@ -8,7 +8,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM Configuration::Binding</name>
+  <name>configuration-binding</name>
   <description>Binding used to inject configuration into POJOs.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-configuration-binding</artifactId>

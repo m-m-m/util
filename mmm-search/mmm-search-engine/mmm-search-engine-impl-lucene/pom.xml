@@ -11,7 +11,7 @@
   <artifactId>mmm-search-engine-lucene</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search Engine::Lucene</name>
+  <name>search-engine-lucene</name>
   <description>This project provides an implementation of the search-engine using lucene as back-end.</description>
   
   <dependencies>

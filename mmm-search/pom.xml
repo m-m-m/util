@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <relativePath>..</relativePath>
   </parent>
-  <name>MMM::Search</name>
+  <name>search</name>
   <description>This project provides full-text search indexing and retrieval.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search</artifactId>

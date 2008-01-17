@@ -12,7 +12,7 @@
   <artifactId>mmm-content</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>MMM::Content</name>
+  <name>content</name>
   <description>The content repository of mmm's enterprise content management system (ECMS).</description>
   
   <dependencies>

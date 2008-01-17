@@ -12,7 +12,7 @@
   <artifactId>mmm-framework-main</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
-  <name>MMM Framework::Main</name>
+  <name>framework-main</name>
   <description>Main of the MMM IOC Framework.</description>
   
   <dependencies>

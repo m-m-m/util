@@ -11,7 +11,7 @@
   <artifactId>mmm-nls-core</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM NLS::Core</name>
+  <name>nls-core</name>
   <description>Core Native Language Support</description>
   
   <dependencies>

@@ -12,7 +12,7 @@
   <artifactId>mmm-framework-core</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
-  <name>MMM Framework::Core</name>
+  <name>framework-core</name>
   <description>Core of the MMM IOC Framework.</description>
   
   <dependencies>

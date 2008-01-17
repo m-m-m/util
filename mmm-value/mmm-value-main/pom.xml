@@ -10,7 +10,7 @@
   <artifactId>mmm-value-main</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Value::Main</name>
+  <name>value-main</name>
   <description>Main of component for value management.</description>
   
   <dependencies>

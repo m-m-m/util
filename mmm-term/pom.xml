@@ -7,7 +7,7 @@
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
   </parent>
-  <name>MMM::Term</name>
+  <name>term</name>
   <description>Component for parsing and dynamic evaluation of expression terms.</description>
   <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-term</artifactId>

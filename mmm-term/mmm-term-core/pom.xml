@@ -10,7 +10,7 @@
   <artifactId>mmm-term-core</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Term::Core</name>
+  <name>term-core</name>
   <description>Core of component for parsing and dynamic evaluation of expression terms.</description>
   
   <dependencies>
