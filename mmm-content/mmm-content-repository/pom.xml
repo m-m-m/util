@@ -16,7 +16,7 @@
   <modules>
     <module>mmm-content-repository-api</module>
     <module>mmm-content-repository-impl-file</module>
-    <module>mmm-content-repository-impl-rdbms</module>
+    <module>mmm-content-repository-impl-db-static</module>
   </modules>
   <dependencies>
   </dependencies>

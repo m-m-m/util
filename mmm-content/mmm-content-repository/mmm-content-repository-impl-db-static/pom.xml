@@ -8,12 +8,11 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-content-repository-rdbms</artifactId>
+  <artifactId>mmm-content-repository-impl-db-static</artifactId>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Content Repository::RDBMS</name>
-  <description>Content repository persistence implementation for relational database management systems.</description>
+  <name>content-repository-impl-db-static</name>
+  <description>Content repository persistence implementation for database using static model-model.</description>
   
   <dependencies>
     <dependency>
