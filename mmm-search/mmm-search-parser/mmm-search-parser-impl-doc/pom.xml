@@ -17,7 +17,7 @@
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-search-parser-poi</artifactId>
+      <artifactId>mmm-search-parser-impl-poi</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
