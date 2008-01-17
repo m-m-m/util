@@ -8,26 +8,25 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-parser</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>MMM Search::Parser</name>
+  <name>search-parser</name>
   <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
   
   <modules>
     <module>mmm-search-parser-api</module>
-    <module>mmm-search-parser-xml</module>
-    <module>mmm-search-parser-html</module>
-    <module>mmm-search-parser-pdf</module>
-    <module>mmm-search-parser-poi</module>
-    <module>mmm-search-parser-doc</module>
-    <module>mmm-search-parser-xls</module>
-    <module>mmm-search-parser-ppt</module>
-    <module>mmm-search-parser-opendoc</module>
-    <module>mmm-search-parser-generic</module>
-    <module>mmm-search-parser-text</module>
-    <module>mmm-search-parser-java</module>
+    <module>mmm-search-parser-impl-xml</module>
+    <module>mmm-search-parser-impl-html</module>
+    <module>mmm-search-parser-impl-pdf</module>
+    <module>mmm-search-parser-impl-poi</module>
+    <module>mmm-search-parser-impl-doc</module>
+    <module>mmm-search-parser-impl-xls</module>
+    <module>mmm-search-parser-impl-ppt</module>
+    <module>mmm-search-parser-impl-opendoc</module>
+    <module>mmm-search-parser-impl-generic</module>
+    <module>mmm-search-parser-impl-text</module>
+    <module>mmm-search-parser-impl-java</module>
     <module>mmm-search-parser-service</module>
   </modules>  
 </project>

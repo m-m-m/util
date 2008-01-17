@@ -8,17 +8,16 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-search-parser-xls</artifactId>
+  <artifactId>mmm-search-parser-impl-opendoc</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search Parser::XLS</name>
-  <description>This is the search parser for files of the mimetype "application/vnd.ms-excel".</description>
+  <name>search-parser-impl-opendoc</name>
+  <description>This is the search parser for files of the mimetypes "application/vnd.oasis.opendocument.*".</description>
   
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-search-parser-poi</artifactId>
+      <artifactId>mmm-search-parser-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

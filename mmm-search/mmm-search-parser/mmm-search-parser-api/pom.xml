@@ -8,11 +8,10 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-parser-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search Parser::API</name>
+  <name>search-parser-api</name>
   <description>This is the API of the search parsers.</description>
   
   <dependencies>

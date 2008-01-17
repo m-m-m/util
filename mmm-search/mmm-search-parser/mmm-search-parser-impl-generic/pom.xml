@@ -8,17 +8,16 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-search-parser-doc</artifactId>
+  <artifactId>mmm-search-parser-impl-generic</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search Parser::DOC</name>
-  <description>This is the search parser for files of the mimetype "application/msword".</description>
+  <name>search-parser-impl-generic</name>
+  <description>This is the generic search parser used as fallback if no specific parser is available.</description>
   
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-search-parser-poi</artifactId>
+      <artifactId>mmm-search-parser-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

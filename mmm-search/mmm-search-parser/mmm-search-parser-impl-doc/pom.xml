@@ -8,17 +8,16 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-search-parser-opendoc</artifactId>
+  <artifactId>mmm-search-parser-impl-doc</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search Parser::OpenDoc</name>
-  <description>This is the search parser for files of the mimetypes "application/vnd.oasis.opendocument.*".</description>
+  <name>search-parser-impl-doc</name>
+  <description>This is the search parser for files of the mimetype "application/msword".</description>
   
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-search-parser-api</artifactId>
+      <artifactId>mmm-search-parser-poi</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

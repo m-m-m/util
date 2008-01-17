@@ -8,12 +8,11 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-search-parser-html</artifactId>
+  <artifactId>mmm-search-parser-impl-poi</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Search Parser::HTML</name>
-  <description>This is the search parser for files of the mimetype "text/html".</description>
+  <name>search-parser-impl-poi</name>
+  <description>This module provides an abstract base parser for MS office documents using apache POI.</description>
   
   <dependencies>
     <dependency>
@@ -23,17 +22,19 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-search-parser-text</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${poi.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>jtidy</groupId>
-      <artifactId>jtidy</artifactId>
-      <!-- <version>8.0</version> -->
-      <version>4aug2000r7-dev</version>
-      <scope>compile</scope>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-resource</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+  <properties>
+    <poi.version>3.0-FINAL</poi.version>
+  </properties>
 </project>
