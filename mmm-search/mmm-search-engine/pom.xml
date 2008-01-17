@@ -8,16 +8,15 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-search-engine</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>MMM Search::Engine</name>
+  <name>search-engine</name>
   <description>This project provides the engine used for full-text search indexing and retrieval.</description>
   
   <modules>
     <module>mmm-search-engine-api</module>
-    <module>mmm-search-engine-lucene</module>
+    <module>mmm-search-engine-impl-lucene</module>
     <module>mmm-search-indexer</module>
     <module>mmm-search-indexer-lucene</module>
     <module>mmm-search-engine-webapp</module>
