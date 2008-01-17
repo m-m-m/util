@@ -8,11 +8,10 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-content-repository-ibatis</artifactId>
+  <artifactId>mmm-content-repository-impl-ibatis</artifactId>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM Content Repository::IBatis</name>
+  <name>content-repository-impl-ibatis</name>
   <description>Content repository persistence implementation using ibatis.</description>
   
   <dependencies>

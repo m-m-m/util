@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id$ -->
 <project>
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-content</artifactId>
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-content-repository</artifactId>
-  <name>MMM Content::Repository</name>
   <version>1.0.0</version>
   <packaging>pom</packaging>
+  <name>content-repository</name>
   <description>Persistence layer for the content repository.</description>
   <modules>
     <module>mmm-content-repository-api</module>
-    <module>mmm-content-repository-ibatis</module>
-    <module>mmm-content-repository-file</module>
-    <module>mmm-content-repository-rdbms</module>
+    <module>mmm-content-repository-impl-file</module>
+    <module>mmm-content-repository-impl-rdbms</module>
   </modules>
   <dependencies>
   </dependencies>
