@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id$ -->
 <project>
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <name>MMM::Util</name>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-util</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>util</name>
   <description>This project provides basic utilities used by various other projects.</description>
+
   <modules>
     <module>mmm-util-core</module>
     <module>mmm-util-file</module>

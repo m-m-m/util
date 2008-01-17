@@ -7,11 +7,10 @@
     <artifactId>mmm-gui</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-gui-view</artifactId>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM GUI::Views</name>
+  <name>gui-view</name>
   <description>Views for the GUI of mmm.</description>
   
   <dependencies>
@@ -26,12 +25,6 @@
       <artifactId>mmm-uit-api</artifactId>
       <version>0.9.0-SNAPSHOT</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>net.sf.mmm</groupId>
-      <artifactId>mmm-uit-swing</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>net.sf.mmm</groupId>

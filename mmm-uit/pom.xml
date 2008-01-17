@@ -7,18 +7,18 @@
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
   </parent>
-  <name>MMM::UIT</name>
-  <description>The UI-Toolkit is an abstraction layer for GUI toolkits.</description>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-uit</artifactId>
-  <packaging>pom</packaging>
   <version>0.9.0</version>
+  <packaging>pom</packaging>
+  <name>uit</name>
+  <description>The UI-Toolkit is an abstraction layer for GUI toolkits.</description>
   <dependencies>
   </dependencies>
+
   <modules>
     <module>mmm-uit-api</module>
-    <module>mmm-uit-swt</module>
-    <module>mmm-uit-swing</module>
+    <module>mmm-uit-impl-swt</module>
+    <module>mmm-uit-impl-swing</module>
     <module>mmm-uit-demo</module>
   </modules>
 </project>

@@ -7,11 +7,10 @@
     <artifactId>mmm-uit</artifactId>
     <version>0.9.0</version>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-uit-api</artifactId>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>MMM UIT::API</name>
+  <name>uit-api</name>
   <description>API and base implementation for the UI-Toolkit</description>
   
   <dependencies>
