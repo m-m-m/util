@@ -117,20 +117,28 @@ public class NlsMessageTest {
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
     Date date = Iso8601Util.getInstance().parseDate("1999-12-31T23:59:59");
-    NlsMessage dateMsg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
     assertEquals(
         "Date formatted by locale: 12/31/99 11:59 PM, by ISO-8601: 1999-12-31T23:59:59+01:00 and by custom pattern: 1999.12.31-23:59:59+0100!",
-        dateMsg.getMessage());
+        msg.getMessage());
     assertEquals(
-        "Datum formatiert nach Locale: 31.12.99 23:59, nach ISO-8601: 1999-12-31T23:59:59+01:00 und mittels individuellem Muster: 1999.12.31-23:59:59+0100!",
-        dateMsg.getLocalizedMessage(Locale.GERMAN, resolver));
+        "Datum formatiert nach Locale: 31.12.99 23:59, nach ISO-8601: 1999-12-31T23:59:59+01:00 und nach individueller Vorlage: 1999.12.31-23:59:59+0100!",
+        msg.getLocalizedMessage(Locale.GERMAN, resolver));
   }
 
+  @Test
   public void testMessageFormatNumber() {
 
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
-
+    Number number = new Double(0.42);
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_NUMBER, number);
+    assertEquals(
+        "Number formatted by default: 0.42, as percent: 42%, as currency: ¤ 0.42 and by custom pattern: #0.42!",
+        msg.getMessage());
+    assertEquals(
+        "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
+        msg.getLocalizedMessage(Locale.GERMANY, resolver));
   }
 
   /**

@@ -16,4 +16,6 @@ public class MyResourceBundle extends AbstractResourceBundle {
 
   public static final String MSG_TEST_DATE = "Date formatted by locale: {0}, by ISO-8601: {0,datetime,iso8601} and by custom pattern: {0,date,yyyy.MM.dd-HH:mm:ssZ}!";
 
+  public static final String MSG_TEST_NUMBER = "Number formatted by default: {0}, as percent: {0,number,percent}, as currency: {0,number,currency} and by custom pattern: {0,number,'#'##.##}!";
+
 }
