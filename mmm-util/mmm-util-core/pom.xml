@@ -16,6 +16,14 @@
   
   <dependencies>
     <dependency>
+      <!-- only required for java5, included since java6 -->
+      <groupId>javax.annotation</groupId>
+      <artifactId>jsr250-api</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <!-- <groupId>org.apache.commons.logging</groupId> -->
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging-api</artifactId>
