@@ -6,7 +6,7 @@
   <artifactId>mmm</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>MMM</name>
+  <name>mmm</name>
   <description>The Multi-Media-Manager (MMM) is a generic plattform and a enterprise content management system (ECMS) build on top.</description>
   <url>http://m-m-m.sourceforge.net</url>
   <inceptionYear>2001</inceptionYear>
@@ -285,8 +285,8 @@
   </scm>
   <distributionManagement>
     <site>
-      <id>localhost</id>
-      <url>scpexe://shell.sourceforge.net/</url>
+      <id>ssh-repository</id>
+      <url>scpexe://shell.sourceforge.net/home/groups/m/m-/m-m-m/htdocs/repository</url>
     </site>
   </distributionManagement>
   <mailingLists>
