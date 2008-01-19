@@ -5,17 +5,21 @@ package net.sf.mmm.util.nls;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
 import java.util.Locale;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
+import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.FormattedNlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
+import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
  * This is the test-case for {@link net.sf.mmm.util.nls.NlsMessageImpl}.
@@ -23,12 +27,12 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NlsMessageImplTest {
+public class NlsMessageTest {
 
   /**
    * The constructor.
    */
-  public NlsMessageImplTest() {
+  public NlsMessageTest() {
 
     super();
   }
@@ -95,6 +99,24 @@ public class NlsMessageImplTest {
     String msgDe = cascadedMessage.getLocalizedMessage(Locale.GERMAN, translatorDe);
     assertEquals("Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, "
         + "hat aber den Typ \"relle Zahl[-5,5]\"!", msgDe);
+  }
+
+  @Test
+  public void testMessageResolved() {
+
+    MyResourceBundle myRB = new MyResourceBundle();
+    NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME, "Paul");
+    assertEquals("Welcome \"Paul\"!", msg.getMessage());
+    assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, resolver));
+    Date date = Iso8601Util.getInstance().parseDate("1999-12-31T23:59:59");
+    NlsMessage dateMsg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
+    assertEquals(
+        "Date formatted by locale: 12/31/99 11:59 PM, by ISO-8601: 1999-12-31T23:59:59+01:00 and by custom pattern: 1999.12.31-23:59:59+0100!",
+        dateMsg.getMessage());
+    assertEquals(
+        "Datum formatiert nach Locale: 31.12.99 23:59, nach ISO-8601: 1999-12-31T23:59:59+01:00 und mittels individuellem Muster: 1999.12.31-23:59:59+0100!",
+        dateMsg.getLocalizedMessage(Locale.GERMAN, resolver));
   }
 
   /**

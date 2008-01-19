@@ -8,16 +8,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import org.junit.Test;
 
 import net.sf.mmm.util.nls.AbstractResourceBundle;
-import net.sf.mmm.util.nls.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
  * This is the test-case for {@link AbstractResourceBundle}.
@@ -35,11 +30,12 @@ public class AbstractResourceBundleTest {
   @Test
   public void testKeys() {
 
-    final MyResourceBundle myRB = new MyResourceBundle();
+    MyResourceBundle myRB = new MyResourceBundle();
     Set<String> expectedKeys = new HashSet<String>();
     expectedKeys.add("ERR_NULL");
     expectedKeys.add("MSG_WELCOME");
     expectedKeys.add("MSG_BYE");
+    expectedKeys.add("MSG_DATE");
     Enumeration<String> keys = myRB.getKeys();
     int count = 0;
     while (keys.hasMoreElements()) {
@@ -48,10 +44,5 @@ public class AbstractResourceBundleTest {
       count++;
     }
     assertEquals(count, expectedKeys.size());
-    NlsTemplateResolver st = new NlsTemplateResolverImpl(myRB);
-    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME,
-        "Paul");
-    assertEquals("Welcome \"Paul\"!", msg.getMessage());
-    assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, st));
   }
 }
