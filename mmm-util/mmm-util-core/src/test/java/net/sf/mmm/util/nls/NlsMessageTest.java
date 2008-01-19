@@ -109,6 +109,13 @@ public class NlsMessageTest {
     NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME, "Paul");
     assertEquals("Welcome \"Paul\"!", msg.getMessage());
     assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, resolver));
+  }
+
+  @Test
+  public void testMessageFormatDate() {
+
+    MyResourceBundle myRB = new MyResourceBundle();
+    NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
     Date date = Iso8601Util.getInstance().parseDate("1999-12-31T23:59:59");
     NlsMessage dateMsg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
     assertEquals(
@@ -117,6 +124,13 @@ public class NlsMessageTest {
     assertEquals(
         "Datum formatiert nach Locale: 31.12.99 23:59, nach ISO-8601: 1999-12-31T23:59:59+01:00 und mittels individuellem Muster: 1999.12.31-23:59:59+0100!",
         dateMsg.getLocalizedMessage(Locale.GERMAN, resolver));
+  }
+
+  public void testMessageFormatNumber() {
+
+    MyResourceBundle myRB = new MyResourceBundle();
+    NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
+
   }
 
   /**

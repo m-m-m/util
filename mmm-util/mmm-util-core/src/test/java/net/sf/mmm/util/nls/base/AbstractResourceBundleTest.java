@@ -30,19 +30,30 @@ public class AbstractResourceBundleTest {
   @Test
   public void testKeys() {
 
-    MyResourceBundle myRB = new MyResourceBundle();
-    Set<String> expectedKeys = new HashSet<String>();
-    expectedKeys.add("ERR_NULL");
-    expectedKeys.add("MSG_WELCOME");
-    expectedKeys.add("MSG_BYE");
-    expectedKeys.add("MSG_DATE");
+    String[] expectedKeys = new String[] { "ERR_TEST", "MSG_TEST", "XYZ_TEST" };
+    MyBundle myRB = new MyBundle();
+    Set<String> expectedKeySet = new HashSet<String>(expectedKeys.length);
+    for (String key : expectedKeys) {
+      expectedKeySet.add(key);
+      assertEquals(key + ".value", myRB.getString(key));
+    }
     Enumeration<String> keys = myRB.getKeys();
     int count = 0;
     while (keys.hasMoreElements()) {
       String key = keys.nextElement();
-      assertTrue(expectedKeys.contains(key));
+      assertTrue(expectedKeySet.contains(key));
       count++;
     }
-    assertEquals(count, expectedKeys.size());
+    assertEquals(count, expectedKeySet.size());
+  }
+
+  public static class MyBundle extends AbstractResourceBundle {
+
+    public static final String ERR_TEST = "ERR_TEST.value";
+
+    public static final String MSG_TEST = "MSG_TEST.value";
+
+    public static final String XYZ_TEST = "XYZ_TEST.value";
+
   }
 }
