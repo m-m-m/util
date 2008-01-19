@@ -284,9 +284,13 @@
     <url>http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</url>
   </scm>
   <distributionManagement>
-    <site>
-      <id>ssh-repository</id>
+    <repository>
+      <id>sourceforge</id>
       <url>scpexe://shell.sourceforge.net/home/groups/m/m-/m-m-m/htdocs/repository</url>
+    </repository>
+    <site>
+      <id>sourceforge</id>
+      <url>scpexe://shell.sourceforge.net/home/groups/m/m-/m-m-m/htdocs/maven</url>
     </site>
   </distributionManagement>
   <mailingLists>
