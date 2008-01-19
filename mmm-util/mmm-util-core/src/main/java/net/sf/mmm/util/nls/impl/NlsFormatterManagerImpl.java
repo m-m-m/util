@@ -16,11 +16,13 @@ import net.sf.mmm.util.nls.base.MappedNlsFormatterManager;
  */
 public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
 
-  /** The singleton instance. */
-  public static final NlsFormatterManagerImpl INSTANCE = new NlsFormatterManagerImpl();
+  // ATTENTION: reordering static final fields breaks code!
 
   /** The map with the static formatters. */
   private static final NlsFormatterMap FORMATTER_MAP = createFormatterMap();
+
+  /** The singleton instance. */
+  public static final NlsFormatterManagerImpl INSTANCE = new NlsFormatterManagerImpl();
 
   /** The {@link #getFormatter() default formatter}. */
   private final NlsFormatter<Object> defaultFormatter;
