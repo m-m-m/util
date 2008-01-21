@@ -329,7 +329,7 @@ public class DirectorySearchIndexer {
     String filename = file.getName();
     String fullPath = relativePath + "/" + filename;
     long fileSize = file.length();
-    String extension = FileUtil.getExtension(filename);
+    String extension = FileUtil.getInstance().getExtension(filename);
     MutableSearchEntry entry = this.indexer.createEntry();
     String uri = fullPath;
     if (this.uriRewriter != null) {

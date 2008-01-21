@@ -7,11 +7,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.Configuration;
-import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
+import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
 import net.sf.mmm.configuration.base.ConfigurationReadException;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccess;
 import net.sf.mmm.configuration.base.access.AbstractConfigurationAccessFactory;
@@ -73,7 +73,8 @@ public class FileAccessFactory extends AbstractConfigurationAccessFactory {
       cwd = new File("");
     }
     List<File> fileList = new ArrayList<File>();
-    boolean hasPattern = FileUtil.collectMatchingFiles(cwd, href, FileType.FILE, fileList);
+    boolean hasPattern = FileUtil.getInstance().collectMatchingFiles(cwd, href, FileType.FILE,
+        fileList);
     this.singleAccess = !hasPattern;
     int count = fileList.size();
     if (this.singleAccess && (count != 1)) {

@@ -21,14 +21,43 @@ import net.sf.mmm.util.pattern.GlobPatternCompiler;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class FileUtil {
+public class FileUtil {
+
+  /** @see #getInstance() */
+  private static FileUtil instance;
 
   /**
    * The constructor.
    */
-  private FileUtil() {
+  public FileUtil() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link FileUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static FileUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (FileUtil.class) {
+        if (instance == null) {
+          instance = new FileUtil();
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -41,7 +70,7 @@ public final class FileUtil {
    * @param path is the path to resolve.
    * @return the resolved path.
    */
-  public static String resolvePath(String path) {
+  public String resolvePath(String path) {
 
     if (path.startsWith("~/")) {
       return System.getProperty("user.home") + path.substring(1);
@@ -51,15 +80,21 @@ public final class FileUtil {
   }
 
   /**
-   * This method extracts the extension from the given <code>filename</code>.
+   * This method extracts the extension from the given <code>filename</code>.<br>
+   * Example:
+   * <code>{@link #getExtension(String) getExtension}("test.java")</code>
+   * would return <code>"java"</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * If the <code>filename</code> is just a dot followed by the extension
+   * (e.g. <code>".java"</code>), the empty string is returned.
    * 
    * @param filename is the filename and may include an absolute or relative
    *        path.
-   * @return the extension of the given <code>filename</code> in
-   *         {@link String#toLowerCase() lowercase} or <code>null</code> if
-   *         NOT present.
+   * @return the extension of the given <code>filename</code> excluding the
+   *         dot in {@link String#toLowerCase() lowercase} or the empty string
+   *         if NOT present.
    */
-  public static String getExtension(String filename) {
+  public String getExtension(String filename) {
 
     int lastDot = filename.lastIndexOf('.');
     String extension = "";
@@ -80,7 +115,7 @@ public final class FileUtil {
    *        NOT exist and overridden otherwise.
    * @throws IOException if the operation fails.
    */
-  public static void copyFile(File source, File destination) throws IOException {
+  public void copyFile(File source, File destination) throws IOException {
 
     FileInputStream sourceStream = new FileInputStream(source);
     try {
@@ -110,7 +145,7 @@ public final class FileUtil {
    *        created with default flags and only the content is copied).
    * @throws IOException if the operation fails.
    */
-  public static void copyFile(File source, File destination, boolean keepFlags) throws IOException {
+  public void copyFile(File source, File destination, boolean keepFlags) throws IOException {
 
     copyFile(source, destination);
     if (keepFlags) {
@@ -140,7 +175,7 @@ public final class FileUtil {
    *        classes.
    * @return the permissions of <code>file</code>.
    */
-  public static FileAccessPermissions getPermissions(File file, FileAccessClass accessClass) {
+  public FileAccessPermissions getPermissions(File file, FileAccessClass accessClass) {
 
     FileAccessPermissions permissions = new FileAccessPermissions();
     boolean x = file.canExecute();
@@ -172,7 +207,7 @@ public final class FileUtil {
    * @param file is the file to modify.
    * @param permissions are the permissions to set.
    */
-  public static void setPermissions(File file, FileAccessPermissions permissions) {
+  public void setPermissions(File file, FileAccessPermissions permissions) {
 
     // global permissions
     file.setExecutable(permissions.isExecutable(FileAccessClass.OTHERS));
@@ -211,7 +246,7 @@ public final class FileUtil {
    *        will be overwritten.
    * @throws IOException if the operation fails.
    */
-  public static void copyRecursive(File source, File destination, boolean allowOverwrite)
+  public void copyRecursive(File source, File destination, boolean allowOverwrite)
       throws IOException {
 
     copyRecursive(source, destination, allowOverwrite, null);
@@ -248,8 +283,8 @@ public final class FileUtil {
    *        directories are copied, others will be ignored.
    * @throws IOException if the operation fails.
    */
-  public static void copyRecursive(File source, File destination, boolean allowOverwrite,
-      FileFilter filter) throws IOException {
+  public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter)
+      throws IOException {
 
     if (!allowOverwrite && (destination.exists())) {
       throw new IOException("Destination path \"" + destination.getAbsolutePath()
@@ -285,8 +320,7 @@ public final class FileUtil {
    *        directories are copied, others will be ignored.
    * @throws IOException if the operation fails.
    */
-  private static void copyRecursive(File source, File destination, FileFilter filter)
-      throws IOException {
+  private void copyRecursive(File source, File destination, FileFilter filter) throws IOException {
 
     if (source.isDirectory()) {
       boolean okay = destination.mkdir();
@@ -320,7 +354,7 @@ public final class FileUtil {
    * @throws IOException if a file or directory could NOT be
    *         {@link File#delete() deleted}.
    */
-  public static int deleteRecursive(File path) throws IOException {
+  public int deleteRecursive(File path) throws IOException {
 
     int deleteCount = 0;
     if (path.exists()) {
@@ -351,7 +385,7 @@ public final class FileUtil {
    * @throws IOException if a file or directory could NOT be
    *         {@link File#delete() deleted}.
    */
-  public static int deleteChildren(File directory) throws IOException {
+  public int deleteChildren(File directory) throws IOException {
 
     int deleteCount = 0;
     File[] children = directory.listFiles();
@@ -402,7 +436,7 @@ public final class FileUtil {
    * @return an array containing all the {@link File files} that match the given
    *         <code>path</code> and apply to <code>ignore</code>
    */
-  public static File[] getMatchingFiles(File cwd, String path, FileType fileType) {
+  public File[] getMatchingFiles(File cwd, String path, FileType fileType) {
 
     List<File> list = new ArrayList<File>();
     collectMatchingFiles(cwd, path, fileType, list);
@@ -430,8 +464,7 @@ public final class FileUtil {
    *         {@link GlobPatternCompiler wildcard} (<code>'*'</code> or
    *         <code>'?'</code>).
    */
-  public static boolean collectMatchingFiles(File cwd, String path, FileType fileType,
-      List<File> list) {
+  public boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list) {
 
     if ((path == null) || (path.length() == 0)) {
       throw new IllegalArgumentException("Path must not be empty");
@@ -464,7 +497,7 @@ public final class FileUtil {
    * @param list is the list where to {@link List#add(Object) add} the collected
    *        files.
    */
-  private static void collectMatchingFiles(File cwd, PathSegment[] segments, int segmentIndex,
+  private void collectMatchingFiles(File cwd, PathSegment[] segments, int segmentIndex,
       FileType fileType, List<File> list) {
 
     boolean lastSegment;
@@ -513,7 +546,7 @@ public final class FileUtil {
    * @return <code>true</code> if the path is a glob-pattern (contains '*' or
    *         '?'), <code>false</code> otherwise.
    */
-  private static boolean tokenizePath(String path, List<PathSegment> list) {
+  private boolean tokenizePath(String path, List<PathSegment> list) {
 
     char[] pathChars = path.toCharArray();
     int segmentStartIndex = 0;
@@ -564,7 +597,7 @@ public final class FileUtil {
    * This inner class represents a segment of a glob-matching path. It is a
    * simple container for a string and a pattern.
    */
-  private static class PathSegment {
+  protected static class PathSegment {
 
     /** the pattern */
     private Pattern pattern;
