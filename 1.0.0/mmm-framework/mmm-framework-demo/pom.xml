@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-framework</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-framework-demo</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+  <name>framework-demo</name>
+  <description>Demo Application using the MMM IOC Framework.</description>
+  
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-framework-annotation</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging-api</artifactId>
+      <version>1.0.4</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- required for jdk less than 6.0 -->
+    <!-- 
+    <dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>jsr250-api</artifactId>
+    <version>1.0-20050927.133100</version>
+    <scope>compile</scope>
+    </dependency>
+    -->
+  </dependencies>
+</project>

@@ -1,0 +1,70 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.content.value.api;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/**
+ * This is the interface for a BLOB (Binary Large OBject) value. The interface
+ * only declares read methods.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public interface Blob {
+
+  /** The name of this value type. */
+  String VALUE_NAME = "Blob";
+
+  /**
+   * This method gets the current size of this file.
+   * 
+   * @return the file size.
+   */
+  long getSize();
+
+  /**
+   * This method gets the MD5 checksum of this BLOB.
+   * 
+   * @todo return type? String / BigInt
+   * 
+   * @return the MD5 checksum.
+   */
+  String getChecksum();
+
+  /**
+   * This method gets the mimetype of this file.
+   * 
+   * @return the files mimetype.
+   */
+  String getMimeType();
+
+  /**
+   * This method gets read access to the data of this BLOB.
+   * 
+   * @see MutableBlob#streamData(OutputStream)
+   * 
+   * @return the BLOB data as input stream.
+   * @throws IOException if the BLOB could not be opened for reading.
+   */
+  InputStream getReadAccess() throws IOException;
+
+  /**
+   * This method writes the data of this BLOB to the given output stream. The
+   * given output stream will NOT be closed.
+   * 
+   * @param outStream is the stream where to write the data to.
+   * @throws IOException if the streaming fails.
+   */
+  void streamData(OutputStream outStream) throws IOException;
+
+  /**
+   * 
+   * 
+   * @return
+   */
+  int getRevision();
+
+}

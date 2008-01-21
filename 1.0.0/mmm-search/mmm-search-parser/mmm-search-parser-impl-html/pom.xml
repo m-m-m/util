@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-search-parser</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-search-parser-impl-html</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>search-parser-impl-html</name>
+  <description>This is the search parser for files of the mimetype "text/html".</description>
+  
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-search-parser-impl-text</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>jtidy</groupId>
+      <artifactId>jtidy</artifactId>
+      <!-- <version>8.0</version> -->
+      <version>4aug2000r7-dev</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

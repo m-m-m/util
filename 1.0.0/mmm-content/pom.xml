@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 7 2006-08-30 17:48:07Z joerg.hohwiller $ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-content</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>content</name>
+  <description>The content repository of mmm's enterprise content management system (ECMS).</description>
+  
+  <dependencies>
+  </dependencies>
+  
+  <modules>
+    <module>mmm-content-core</module>
+    <module>mmm-content-entities</module>
+    <module>mmm-content-repository</module>
+  </modules>
+</project>

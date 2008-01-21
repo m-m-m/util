@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>MMM - Stories</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="The Train Story">
+      <p>Most of the code and documentation for this project was written on
+      my daily trainrides to and from work. I needed some training to be
+      able to switch contexts so quickly. At the beginning I have not really
+      got my thoughts into the project before I had to switch trains.
+      After some time I got used to it and now I just sit down and start
+      developing. But maybe if you find a bug that was because I sat beside a
+      beatyful girl in the train ;)</p>
+    </section>
+  </body>
+</document>

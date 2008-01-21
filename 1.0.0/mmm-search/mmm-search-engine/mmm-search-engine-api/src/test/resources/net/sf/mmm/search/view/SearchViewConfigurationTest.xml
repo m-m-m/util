@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<search>
+  <!-- configuration of sources for view (webapp) -->
+  <sources>
+    <source id="" name="All"/>
+    <source id="twiki" name="Wiki" url-prefix="http://foo.bar/twiki/bin/view/"/>
+    <source id="svn" name="Subversion" url-prefix="http://foo.bar/svn/trunk/"/>
+  </sources>
+  <!-- configuration of file-types for view (webapp) -->
+  <filetypes default-icon="file.png">
+    <type id="" name="All"/>
+    <type id="pdf" name="PDF" icon="pdf.png"/>
+    <type id="doc" name="Word" icon="word.png"/>
+    <type id="txt" icon="text.png"/>
+    <type id="xml" icon="xml.png"/>
+    <type id="html" name="HTML" icon="firefox.png"/>
+    <type id="htm" icon="ie.png"/>
+  </filetypes>  
+</search>

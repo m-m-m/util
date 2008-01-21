@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>HTTP Util</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM Util::HTTP">
+      This utility mainly targeted to be used by <a href="../../mmm-upnp/index.html">mmm-upnp</a>.
+      If you look for HTTP-Client support please consider to use <a href="http://jakarta.apache.org/commons/httpclient/">commons-httpclient</a>.
+      The reason for mmm-util-http is that I could NOT find an acceptable way to do HTTPMU with commons-httpclient.
+    </section>
+  </body>
+</document>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-uit</artifactId>
+    <version>0.9.0</version>
+  </parent>
+  <artifactId>mmm-uit-demo</artifactId>
+  <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>uit-demo</name>
+  <description>Demo application showing the same GUI with different implementations.</description>
+  
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-uit-api</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-uit-impl-swing</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-uit-impl-swt</artifactId>
+      <version>0.9.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

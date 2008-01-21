@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Search-Engine</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM Search::Engine">
+      This project provides an API for indexing &#38; searching content
+      as well as an implementation based on <a href="http://lucene.apache.org">lucene</a>.
+      Implementations for other search-solutions like 
+      <a href="http://egothor.org">egothor</a> are planned.<br/>
+      This project has the following goals:
+      <ul>
+        <li>Easy integration of search-engine into your application.</li>
+        <li>Standardized, fault-tolerant query-parser for independence from underlying 
+        search-technology. This includes the ability to enable prefix-queries
+        with lucene (e.g. <code>*foo</code>).</li>
+        <li>Native query parser for advanced features.</li>
+        <li>Standardized, extendable model for index structure.</li>
+        <li>Paging of search results.</li>
+        <li>Highlighting search results.</li>
+      </ul>
+      The trade-off is that you can only access features available via the API.
+      If you want to use very specific lucene features you might want to use lucene directly.
+      <subsection name="Getting startet">
+        Please take a look at the <a href="tutorial.html">tutorial</a> to get startet.
+      </subsection>
+    </section>
+  </body>
+</document>

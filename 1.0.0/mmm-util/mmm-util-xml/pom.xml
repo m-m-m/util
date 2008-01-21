@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm-util</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <groupId>net.sf.mmm</groupId>
+  <artifactId>mmm-util-xml</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>util-xml</name>
+  <description>This project provides utilities for dealing with xml.</description>
+  
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mmm</groupId>
+      <artifactId>mmm-util-resource</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- for java 5 (included in jdk since java 6) -->
+    <!--
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax</artifactId>
+      <version>1.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    -->
+  </dependencies>
+</project>

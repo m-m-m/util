@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<valueService>
+  <value>java.lang.Boolean</value>
+  <value>java.lang.String</value>
+  <value>java.lang.Integer</value>
+  <value>java.lang.Long</value>
+  <value>java.lang.Double</value>
+  <manager>net.sf.mmm.value.impl.type.XmlValueManager</manager>
+</valueService>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Multi Media Manager</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="Introduction">
+      Welcome to the Project Multi-Media-Manager (MMM). The project is still 
+      under development. Before you get lost, first some words of what you can 
+      already find here.
+      <subsection name="Ready to use">
+        This project provides the following generic components that can already be used now:
+        <ul>
+          <li><a href="mmm-search/index.html">mmm-search</a> provides a full-text solution base on lucene.</li>
+          <li><a href="mmm-util/index.html">mmm-util</a> contains powerful utilities.</li>
+        </ul>
+      </subsection>
+    </section>
+    <section name="About MMM">
+      The Multi-Media-Manager (MMM) is a generic application plattform and 
+      a enterprise content management system (ECMS) with custom modules for 
+      multi-media management build on top.
+      <subsection name="Mission Statement">
+        <ul>
+          <li>Designed with beauty.</li>
+          <li>Coded with passion.</li>
+          <li>Tested with care.</li>
+          <li>Documented with devotion.</li>
+        </ul>      
+        MMM is entirely written in Java. It makes extensive use of the Java 5 syntax.
+        All code is written with focus on design &amp; quality and comes with detailed API
+        documentation.<br/>
+        The application is heavily based on the idioms separation of concerns (SoC) and
+        inversion of control (IoC) and therefore split into tiny components 
+        (see <a href="overview.html">overview</a>). This open architecture allows any 
+        component implementation to be reused (by other projects) or be replaced (for custom needs).<br/>
+        <b>ATTENTION:</b><br/>
+        This mission statement applies to subprojects (modules) that are released. Modules that are NOT 
+        released (version less than <code>1.0.0</code> including <code>1.0.0-SNAPSHOT</code>) may be 
+        completely refactored, change their API or even dissappear completely.
+      </subsection>
+      <subsection name="Project State">
+        Even though the project exists for 6 years now, there is no CMS and no multi-media
+        management available. If you are looking for open, flexible and well-designed software
+        components (see "Ready to use") or you want to get involved (see 
+        <a href="getting-involved.html">getting-involved</a>) and let the vision of 
+        MMM become reality then you are at the right place.
+      </subsection>
+    </section>
+  </body>
+</document>

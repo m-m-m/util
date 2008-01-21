@@ -1,0 +1,45 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.configuration.impl.format.xml.dom;
+
+import java.net.URL;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.junit.Test;
+
+import net.sf.mmm.configuration.api.ConfigurationDocument;
+import net.sf.mmm.configuration.api.access.ConfigurationAccess;
+import net.sf.mmm.configuration.base.access.ConfigurationFactory;
+import net.sf.mmm.configuration.impl.access.resource.ResourceAccess;
+import net.sf.mmm.configuration.impl.format.AbstractConfigurationFormatTest;
+import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
+
+import junit.framework.TestCase;
+
+/**
+ * This is the {@link TestCase test-case} for the
+ * {@link net.sf.mmm.configuration.api.Configuration configuration}
+ * implementation {@link net.sf.mmm.configuration.impl.format.xml.dom}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+@SuppressWarnings("all")
+public class XmlConfigurationFormatTest extends AbstractConfigurationFormatTest {
+
+  public XmlConfigurationFormatTest() {
+
+    super();
+  }
+
+  @Test
+  public void testConfiguration() {
+
+    String href = XmlConfigurationFormatTest.class.getName().replace('.', '/') + ".xml";
+    ConfigurationAccess access = new ResourceAccess(href);
+    ConfigurationFactory factory = new XmlFactory();
+    ConfigurationDocument doc = factory.create(access);
+    checkConfiguration(factory, access);
+  }
+}

@@ -1,0 +1,70 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.ui.toolkit.impl.swt;
+
+import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.base.AbstractUINode;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
+/**
+ * This class is the SWT listener implementation that
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public class SwtListenerAdapter implements Listener {
+
+  /** the component that triggers the event */
+  private AbstractUINode object;
+
+  /**
+   * The constructor.
+   * 
+   * @param uiObject is the UI object that registers this listener and will send
+   *        the events to registered listeners.
+   */
+  public SwtListenerAdapter(AbstractUINode uiObject) {
+
+    super();
+    this.object = uiObject;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void handleEvent(Event event) {
+
+    switch (event.type) {
+      case SWT.Selection:
+        this.object.invoke(ActionType.SELECT);
+        break;
+      case SWT.Hide:
+        this.object.invoke(ActionType.HIDE);
+        break;
+      case SWT.Show:
+        this.object.invoke(ActionType.SHOW);
+        break;
+      case SWT.Iconify:
+        this.object.invoke(ActionType.ICONIFY);
+        break;
+      case SWT.Deiconify:
+        this.object.invoke(ActionType.DEICONIFY);
+        break;
+      case SWT.Activate:
+        this.object.invoke(ActionType.ACTIVATE);
+        break;
+      case SWT.Deactivate:
+        this.object.invoke(ActionType.DEACTIVATE);
+        break;
+      case SWT.Dispose:
+        this.object.invoke(ActionType.DISPOSE);
+        break;
+      default :
+        return;
+    }
+  }
+
+}

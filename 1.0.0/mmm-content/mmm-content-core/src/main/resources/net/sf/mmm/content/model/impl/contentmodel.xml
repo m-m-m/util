@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  This XML file contains the core contentmodell that is required by the system.
+  Be aware that all names are only used for technical reasons. Use short and
+  clear english terms for them. Nationalization, etc. is not done here but in 
+  the nls component via another configuration.
+   -->
+<model xmlns="http://m-m-m.sf.net/xml/modell" xmlns:ui="http://m-m-m.sf.net/xml/ui">
+  <!-- CLASS: Object -->
+  <class name="Object" abstract="true" final="false" system="true">
+    <!--
+      Use type="Link" typeConstraint="Folder" instead of type="Link[Folder]"???
+      -->
+    <field name="id" type="ID" transient="false" read-only="true" final="true" system="true">
+      <!-- <ui:view class="net.sf.mmm.ui.impl.IdFieldEditor"/> -->
+      <!-- <initializer class=""/> -->
+      <!-- <validator class=""/> -->
+    </field>
+    <field name="name" type="String" read-only="false" final="true" system="true"/>
+    <field name="contentClass" type="ContentClass" read-only="true" final="true" system="true"/>
+    <field type="String" read-only="true" final="true" system="true">
+      <name>path</name>
+    </field>
+    <field type="MetaData" read-only="false" final="true" system="true">
+      <name>metadata</name>
+    </field>
+    <field type="Boolean" read-only="false" final="true" system="true">
+      <name>isDeleted</name>
+    </field>
+    
+    <!-- CLASS: ReflectionObject -->
+    <class abstract="true" final="false" system="true">
+      <name>ReflectionObject</name>
+      <field type="Boolean" read-only="false" system="true">
+        <name>isFinal</name>
+      </field>
+      <field type="Boolean" read-only="true" system="true">
+        <name>isSystem</name>
+      </field>
+      <!-- <field name="isClass" type="Boolean" transient="true" read-only="true" system="true"/> -->
+      <!-- CLASS: Class -->
+      <class abstract="false" final="true" system="true">
+        <name>Class</name>
+        <field type="Link[Class]" read-only="false" system="true">
+          <name>superClass</name>
+        </field>
+        <field type="Boolean" read-only="false" system="true">
+          <name>isAbstract</name>
+        </field>
+        <field type="LinkList[Field]" read-only="false" system="true">
+          <!-- declaredFields -->
+          <name>fields</name>
+        </field>
+        <field type="LinkList[Class]" read-only="false" system="true">
+          <name>subClasses</name>
+        </field>
+      </class>
+      <!-- CLASS: Field -->
+      <class abstract="false" final="true" system="true">
+        <name>Field</name>
+      </class>
+    </class>
+    
+    <!-- CLASS: Resource -->
+    <class abstract="true" final="false" system="true">
+      <name>Resource</name>
+      <field type="Link[Folder]" read-only="false" final="true" system="true">
+        <name>parentFolder</name>
+      </field>
+      <field type="Integer" final="true" read-only="true" system="true">
+        <name>revision</name>
+      </field>
+      <field type="Version" final="true" read-only="true" system="true">
+        <name>version</name>
+      </field>
+      <field type="Integer" final="true" read-only="true" system="true">
+        <name>revision</name>
+      </field>
+      <!-- CLASS: Folder -->
+      <class abstract="false" final="false" system="true">
+        <name>Folder</name>
+        <field type="LinkList[Object]" read-only="true" system="true">
+          <name>children</name>
+        </field>
+      </class>
+      <!-- CLASS: File -->
+      <class abstract="false" final="false" system="true" extendable="true">
+        <name>File</name>
+        <field type="BLOB" final="true" read-only="true" system="true">
+          <name>blob</name>
+        </field>
+      </class>
+      <!-- custom classes go here -->
+    </class>
+
+    <!-- CLASS: SecurityObject -->
+    <class abstract="true" final="false" system="true">
+      <name>SecurityObject</name>
+      <!-- CLASS: Principal -->
+      <class name="Principal" abstract="true" final="false" system="true">
+        <!-- CLASS: User -->
+        <class name="User" abstract="false" final="true" system="true">
+          <field name="group" type="Link[Group]" read-only="false" system="true"/>          
+        </class>
+        <!-- CLASS: Group -->
+        <class name="Group" abstract="false" final="true" system="true">
+          <field name="parentGroup" type="Link[Group]" read-only="false" system="true"/>
+          <!-- ??? -->
+          <field name="childGroups" type="LinkList[Group]" read-only="false" system="true"/>         
+          <!-- ??? -->
+          <field name="permissions" type="LinkList[Permission]" read-only="false" system="true"/>         
+        </class>      
+      </class>  
+
+      <!-- CLASS: Permission -->
+      <class name="Permission" abstract="false" final="true" system="true">
+        <field name="subject" type="Link[Principal]" read-only="false" system="true"/>
+        <field name="object" type="Link[Object]" read-only="false" system="true"/>
+        <field name="action" type="Link[Action]" read-only="false" system="true"/>        
+      </class>  
+
+      <!-- CLASS: Action -->
+      <class name="Action" abstract="false" final="true" system="true">
+        <field name="parentAction" type="Link[Action]" read-only="false" system="true"/>
+        <field name="implementation" type="JavaClass" read-only="false" system="true"/>
+      </class>
+    </class>
+  </class>
+  <!-- Types (Attributes: ImplementationClass, StoreMapper, Manager)
+    JavaClass = java.lang.Class
+    String = java.lang.String
+    Boolean = java.lang.Boolean
+    Integer = java.lang.Integer
+    Double = java.lang.Double
+    Float = java.lang.Float
+    Long = java.lang.Long
+    XML = org.w3c.Document
+    BLOB = <implementation of MutableBlobIF>
+    MetaData = <implementation of MutableMetaDataSetIF>
+    Link = <implementation of LinkIF>
+    LinkList = <implementation of LinkListIF>
+    History = <implementation of RevisionHistoryIF>
+    Version = <implementation of VersionIF>
+    Date = <implementation of DateIF>
+    Time = <implementation of TimeIF>
+    Duration = <implementation of DurationIF>
+    DateAndTime = <implementation of DateAndTimeIF>
+    -->
+</model>

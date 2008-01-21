@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Create Initial Configuration</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    Please ensure you have read the <a href="tutorial.html">tutorial</a> before.
+    <section name="Create initial configuration">
+      Now you want to know how to read and create the initial root configuration.
+      This part is a little tricky but please note that you only have to do it once.
+      First of all you need to get an accessor for the configuration. Here is an example
+      how to get access to a simple file.
+      <source>
+File configFile = new File("myConfig.xml");
+ConfigurationAccess accessor = new FileAccess(configFile);
+      </source>
+      Now you have to create a document using a factory for the proper format of the 
+      configuration. As we can guess from the filename the format will be XML in our 
+      example. So we use the following code:
+      <source>
+ConfigurationFactory factory = new XmlFactory();
+ConfigurationDocument document = factory.create(accessor);
+Configuration configuration = document.getConfiguration();
+      </source>
+      Puh! That was the heavy part. Anyways this allows you to access your configuration 
+      from anywhere (file, URL, database, etc.) and in any format (XML, properties, etc.).
+      <subsection name="Access">
+        TODO
+      </subsection>
+      <subsection name="Formats">
+        TODO
+      </subsection>
+    </section>
+  </body>
+</document>

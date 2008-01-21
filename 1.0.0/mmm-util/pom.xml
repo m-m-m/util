@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.mmm</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-util</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>util</name>
+  <description>provides basic utilities used by various other projects.</description>
+
+  <modules>
+    <module>mmm-util-core</module>
+    <module>mmm-util-file</module>
+    <module>mmm-util-event</module>
+    <module>mmm-util-http</module>
+    <module>mmm-util-misc</module>
+    <module>mmm-util-reflect</module>
+    <module>mmm-util-resource</module>
+    <module>mmm-util-xml</module>
+    <!-- <module>mmm-util-streamdetect</module> -->
+  </modules>
+</project>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Universal Plug and Play</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM::UPnP">
+      <p>
+      <a href="http://www.upnp.org">UPnP</a> is a protocol stack that allows to communicate with devices over an IP network.
+      This project focuses on an open implementation of the neccessary parts to build an UPnP-AV media server. 
+      This consists of the following modules:
+      <ul>
+        <li><a href="mmm-upnp-ssdp/index.html">Discovery</a></li>
+        <li><a href="mmm-upnp-description/index.html">Description</a></li>
+        <li><a href="mmm-upnp-control/index.html">Control</a></li>
+        <li><a href="mmm-upnp-notification/index.html">Notification</a></li>
+        <li><a href="mmm-upnp-presentation/index.html">Presentation</a></li>
+      </ul>
+      </p>
+    </section>
+    <section name="Links">
+      <p>
+        <ul>
+          <li><a href="http://www.upnp.org">UPnP Forum</a></li>
+          <li><a href="http://www.upnp-ic.org/">UPnP Implementers Corporation</a></li>
+          <li><a href="http://www.cybergarage.org/net/upnp/java/index.html">CyberLink</a> is an alternative open-source implementation.</li>
+        </ul>        
+      </p>
+    </section>
+  </body>
+</document>
