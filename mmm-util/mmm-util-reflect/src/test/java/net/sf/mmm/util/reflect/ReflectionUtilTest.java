@@ -26,12 +26,17 @@ import net.sf.mmm.util.reflect.type.TypeVariableImpl;
 @SuppressWarnings("all")
 public class ReflectionUtilTest {
 
+  protected ReflectionUtil getReflectionUtil() {
+
+    return ReflectionUtil.getInstance();
+  }
+
   private Class getComponentType(String methodName) throws Exception {
 
     Method method = TestClass.class.getMethod(methodName, ReflectionUtil.NO_PARAMETERS);
     Type type = method.getGenericReturnType();
-    Type componentType = ReflectionUtil.INSTANCE.getComponentType(type, false);
-    return ReflectionUtil.INSTANCE.toClass(componentType);
+    Type componentType = getReflectionUtil().getComponentType(type, false);
+    return getReflectionUtil().toClass(componentType);
   }
 
   @Test
@@ -46,7 +51,7 @@ public class ReflectionUtilTest {
 
   private void checkTypeParser(String typeString) throws Exception {
 
-    Type type = ReflectionUtil.INSTANCE.toType(typeString);
+    Type type = getReflectionUtil().toType(typeString);
     String toString;
     if (type instanceof Class) {
       toString = ((Class) type).getName();
@@ -69,26 +74,26 @@ public class ReflectionUtilTest {
   @Test
   public void testFindClassNames() throws Exception {
 
+    ReflectionUtil util = getReflectionUtil();
     // test directories
-    Set<String> classNameSet = ReflectionUtil.INSTANCE.findClassNames(ReflectionUtil.class
-        .getPackage().getName(), false);
+    Set<String> classNameSet = util.findClassNames(ReflectionUtil.class.getPackage().getName(),
+        false);
     assertTrue(classNameSet.contains(ReflectionUtil.class.getName()));
     assertTrue(classNameSet.contains(ReflectionUtilTest.class.getName()));
 
     // test sub-package functionality
     assertFalse(classNameSet.contains(TypeVariableImpl.class.getName()));
-    classNameSet = ReflectionUtil.INSTANCE.findClassNames(ReflectionUtil.class.getPackage()
-        .getName(), true);
+    classNameSet = util.findClassNames(ReflectionUtil.class.getPackage().getName(), true);
     assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));
 
     // test JAR files
-    classNameSet = ReflectionUtil.INSTANCE.findClassNames(Test.class.getPackage().getName(), false);
+    classNameSet = util.findClassNames(Test.class.getPackage().getName(), false);
     assertTrue(classNameSet.contains(Test.class.getName()));
     assertTrue(classNameSet.contains(Assert.class.getName()));
 
     // test sub-package functionality
     assertFalse(classNameSet.contains(Result.class.getName()));
-    classNameSet = ReflectionUtil.INSTANCE.findClassNames(Test.class.getPackage().getName(), true);
+    classNameSet = util.findClassNames(Test.class.getPackage().getName(), true);
     assertTrue(classNameSet.contains(Result.class.getName()));
   }
 

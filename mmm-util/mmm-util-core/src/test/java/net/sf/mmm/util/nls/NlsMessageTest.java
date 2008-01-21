@@ -116,7 +116,7 @@ public class NlsMessageTest {
 
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
-    Date date = Iso8601Util.getInstance().parseDate("1999-12-31T23:59:59");
+    Date date = Iso8601Util.getInstance().parseDate("1999-12-31T23:59:59+01:00");
     NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
     assertEquals(
         "Date formatted by locale: 12/31/99 11:59 PM, by ISO-8601: 1999-12-31T23:59:59+01:00 and by custom pattern: 1999.12.31-23:59:59+0100!",

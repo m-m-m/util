@@ -45,19 +45,14 @@ import net.sf.mmm.util.scanner.CharSequenceScanner;
  * This class is a collection of utility functions for dealing with
  * {@link java.lang.reflect reflection}.
  * 
- * @see #INSTANCE
+ * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ReflectionUtil {
 
-  /**
-   * This is the singleton instance of this {@link ReflectionUtil}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
-   */
-  public static final ReflectionUtil INSTANCE = new ReflectionUtil();
+  /** @see #getInstance() */
+  private static ReflectionUtil instance;
 
   /** an empty class array */
   public static final Class<?>[] NO_PARAMETERS = new Class[0];
@@ -77,6 +72,32 @@ public class ReflectionUtil {
   protected ReflectionUtil() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link ReflectionUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static ReflectionUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (ReflectionUtil.class) {
+        if (instance == null) {
+          instance = new ReflectionUtil();
+        }
+      }
+    }
+    return instance;
   }
 
   /**

@@ -44,7 +44,7 @@ public class PojoPropertyAccessorSizeBuilder extends
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
-      NumberType numberType = ReflectionUtil.INSTANCE.getNumberType(propertyClass);
+      NumberType numberType = ReflectionUtil.getInstance().getNumberType(propertyClass);
       if ((numberType != null) && (!numberType.isDecimal())) {
         if (NumberType.INTEGER.getExactnessDifference(numberType) >= 0) {
           String methodName = method.getName();

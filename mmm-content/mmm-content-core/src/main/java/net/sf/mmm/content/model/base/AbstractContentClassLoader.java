@@ -72,7 +72,7 @@ public abstract class AbstractContentClassLoader extends AbstractContentObjectMo
    */
   protected ReflectionUtil getReflectionUtil() {
 
-    return ReflectionUtil.INSTANCE;
+    return ReflectionUtil.getInstance();
   }
 
   /**

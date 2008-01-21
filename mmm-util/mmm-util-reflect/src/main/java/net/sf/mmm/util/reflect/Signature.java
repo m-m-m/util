@@ -62,7 +62,7 @@ public class Signature {
    */
   public Signature(Object... arguments) {
 
-    this(ReflectionUtil.INSTANCE.getClasses(arguments));
+    this(ReflectionUtil.getInstance().getClasses(arguments));
   }
 
   /**
@@ -124,6 +124,7 @@ public class Signature {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int hashCode() {
 
     return this.hash;
@@ -132,6 +133,7 @@ public class Signature {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean equals(Object other) {
 
     if ((other != null) && (other.getClass() == Signature.class)) {
@@ -151,6 +153,7 @@ public class Signature {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toString() {
 
     StringBuffer result = new StringBuffer();

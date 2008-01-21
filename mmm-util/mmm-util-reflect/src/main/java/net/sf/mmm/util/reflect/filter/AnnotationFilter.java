@@ -57,7 +57,7 @@ public class AnnotationFilter implements Filter<Class<?>> {
       throws IllegalArgumentException {
 
     super();
-    if (!AnnotationUtil.INSTANCE.isRuntimeAnnotation(annotationType)) {
+    if (!AnnotationUtil.getInstance().isRuntimeAnnotation(annotationType)) {
       throw new IllegalArgumentException("Given annotation (" + annotationType
           + ") can NOT be resolved at runtime!");
     }
@@ -76,8 +76,8 @@ public class AnnotationFilter implements Filter<Class<?>> {
 
     if (type != null) {
       if (this.forceInheritence) {
-        Annotation annotation = AnnotationUtil.INSTANCE
-            .getTypeAnnotation(type, this.annotationType);
+        Annotation annotation = AnnotationUtil.getInstance().getTypeAnnotation(type,
+            this.annotationType);
         return (annotation != null);
       } else {
         return type.isAnnotationPresent(this.annotationType);

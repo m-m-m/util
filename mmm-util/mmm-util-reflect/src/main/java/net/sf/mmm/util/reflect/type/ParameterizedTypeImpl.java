@@ -70,6 +70,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean equals(Object other) {
 
     if (other instanceof ParameterizedType) {
@@ -90,6 +91,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int hashCode() {
 
     return Arrays.hashCode(this.actualTypeArguments)
@@ -105,7 +107,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
 
     StringBuilder result = new StringBuilder();
     if (this.ownerType != null) {
-      result.append(ReflectionUtil.INSTANCE.toString(this.ownerType));
+      result.append(ReflectionUtil.getInstance().toString(this.ownerType));
       result.append('.');
       // TODO: this is NOT as easy!
       result.append(this.rawType.getName());

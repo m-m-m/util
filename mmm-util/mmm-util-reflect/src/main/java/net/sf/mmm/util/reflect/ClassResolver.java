@@ -30,7 +30,7 @@ public interface ClassResolver {
 
   /**
    * This is a singleton implementation of the {@link ClassResolver} interface
-   * that simple delegates to {@link Class#forName(String)}.
+   * that simply delegates to {@link Class#forName(String)}.
    */
   ClassResolver CLASS_FOR_NAME_RESOLVER = new ClassResolver() {
 

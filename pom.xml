@@ -30,8 +30,6 @@
     <!-- <module>mmm-configuration</module> -->
     <module>mmm-content</module>
     <module>mmm-gui</module>
-    <!-- NLS has moved to util-core -->
-    <!-- <module>mmm-nls</module> -->
     <module>mmm-search</module>
     <module>mmm-setup</module>
     <!-- <module>mmm-term</module> -->

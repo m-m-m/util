@@ -14,19 +14,14 @@ import java.lang.reflect.Method;
  * This class is a collection of utility functions for dealing with
  * {@link Annotation annotations}.
  * 
- * @see #INSTANCE
+ * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class AnnotationUtil {
 
-  /**
-   * This is the singleton instance of this {@link AnnotationUtil}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
-   */
-  public static final AnnotationUtil INSTANCE = new AnnotationUtil();
+  /** @see #getInstance() */
+  private static AnnotationUtil instance;
 
   /** an empty element-type array */
   public static final ElementType[] NO_TARGET = new ElementType[0];
@@ -40,6 +35,32 @@ public class AnnotationUtil {
   }
 
   /**
+   * This method gets the singleton instance of this {@link AnnotationUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static AnnotationUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (AnnotationUtil.class) {
+        if (instance == null) {
+          instance = new AnnotationUtil();
+        }
+      }
+    }
+    return instance;
+  }
+
+  /**
    * This method gets the {@link ReflectionUtil} used by this
    * {@link AnnotationUtil} instance.
    * 
@@ -47,7 +68,7 @@ public class AnnotationUtil {
    */
   protected ReflectionUtil getReflectionUtil() {
 
-    return ReflectionUtil.INSTANCE;
+    return ReflectionUtil.getInstance();
   }
 
   /**
