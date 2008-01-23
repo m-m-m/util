@@ -1,7 +1,7 @@
 rem $Id$
 
 cd %~dp0
-call include.inc
+call include.bat
 if exists %ECLIPSE_WORKSPACE% (
   echo Setting up eclipse projects...
   cd %MMM_BASE%
