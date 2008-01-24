@@ -98,7 +98,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       if (configPath == null) {
         throw new ResourceMissingException(PARAM_CONFIG_FILE);
       }
-      configPath = FileUtil.getInstance().resolvePath(configPath);
+      configPath = FileUtil.getInstance().normalizePath(configPath);
       File configFile = new File(configPath);
       Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
           configFile);

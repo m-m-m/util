@@ -10,10 +10,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.pattern.GlobPatternCompiler;
+import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and
@@ -22,6 +25,12 @@ import net.sf.mmm.util.pattern.GlobPatternCompiler;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class FileUtil {
+
+  /**
+   * The key of the {@link System#getProperty(String) system property} with the
+   * users home directory.
+   */
+  public static final String PROPERTY_USER_HOME = "user.home";
 
   /** @see #getInstance() */
   private static FileUtil instance;
@@ -61,22 +70,88 @@ public class FileUtil {
   }
 
   /**
-   * This method resolves a given path. In most cases the given
-   * <code>path</code> will simply be returned. Anyhow Java is NOT able to
-   * resolve paths like "~/foo" that work properly in bash-scripts. Therefore
+   * This method normalizes a given <code>path</code>. In most cases the
+   * given <code>path</code> will simply be returned. Anyhow Java is NOT able
+   * to resolve paths like "~/foo" that work properly in bash-scripts. Therefore
    * this method resolves the path in such situations (e.g. to
    * "/home/login/foo") and returns a physical path.
    * 
    * @param path is the path to resolve.
    * @return the resolved path.
    */
-  public String resolvePath(String path) {
+  public String normalizePath(String path) {
 
-    if (path.startsWith("~/")) {
-      return System.getProperty("user.home") + path.substring(1);
+    int len = path.length();
+    if (len == 0) {
+      return path;
     }
-    // TODO: also support "~user/"...
-    return path;
+    StringBuilder buffer = new StringBuilder(len + 4);
+    char systemSlash = File.separatorChar;
+    char wrongSlash;
+    if (systemSlash == '/') {
+      wrongSlash = '\\';
+    } else {
+      wrongSlash = '/';
+    }
+    // TODO: work on toCharArray to avoid overhead?
+    String systemPath = path.replace(wrongSlash, systemSlash);
+    CharSequenceScanner scanner = new CharSequenceScanner(systemPath);
+    boolean appendSlash = false;
+    char c = scanner.next();
+    if (c == '~') {
+      appendSlash = true;
+      String userHome = System.getProperty(PROPERTY_USER_HOME);
+      String user = scanner.readUntil(systemSlash, true);
+      if (user.length() == 0) {
+        buffer.append(userHome);
+      } else {
+        // ~<user> can not be resolved properly
+        // we would need to do OS-specific assumtions and look into
+        // /etc/passwd or whatever what might fail by missing read permissions
+        // This is just a hack that might work in most cases:
+        // we use the user.home dir get the dirname and append the user
+        int lastSlash = userHome.lastIndexOf(systemSlash);
+        if (lastSlash <= 0) {
+          lastSlash = userHome.lastIndexOf(wrongSlash);
+        }
+        String homeDir = userHome.substring(0, lastSlash);
+        buffer.append(homeDir);
+        buffer.append(systemSlash);
+        buffer.append(user);
+      }
+    } else {
+      buffer.append(c);
+    }
+    // TODO: handle \\server\...
+    // TODO: handle <schema>://
+    Deque<String> segments = new LinkedList<String>();
+    while (scanner.hasNext()) {
+      String segment = scanner.readUntil(systemSlash, true);
+      int segmentLength = segment.length();
+      if ("..".equals(segment)) {
+        if (!segments.isEmpty()) {
+          segments.removeLast();
+        }
+      } else if ((segmentLength > 0) && !(".".equals(segment))) {
+        // ignore "" (duplicated slashes) and "."
+        segments.add(segment);
+      }
+    }
+    for (String segment : segments) {
+      if (appendSlash) {
+        buffer.append(systemSlash);
+      } else {
+        appendSlash = true;
+      }
+      buffer.append(segment);
+    }
+    if (systemPath.endsWith(File.separator)) {
+      char last = buffer.charAt(buffer.length() - 1);
+      if (last != systemSlash) {
+        buffer.append(systemSlash);
+      }
+    }
+    return buffer.toString();
   }
 
   /**
@@ -104,6 +179,152 @@ public class FileUtil {
       }
     }
     return extension;
+  }
+
+  /**
+   * This method gets the <em>basename</em> of the given <code>filename</code>
+   * (path). The basename is the raw name of the file without the
+   * {@link #getDirname(String) path}.<br>
+   * Examples: <table border="1">
+   * <tr>
+   * <th>filename</th>
+   * <th><code>{@link #getBasename(String) getBasename}(filename)</code></th>
+   * </tr>
+   * <tr>
+   * <td>&nbsp;</td>
+   * <td>&nbsp;</td>
+   * </tr>
+   * <tr>
+   * <td>/</td>
+   * <td>/</td>
+   * </tr>
+   * <tr>
+   * <td>\/\</td>
+   * <td>\</td>
+   * </tr>
+   * <tr>
+   * <td>.</td>
+   * <td>/.</td>
+   * </tr>
+   * <tr>
+   * <td>/foo.bar</td>
+   * <td>foo.bar</td>
+   * </tr>
+   * <tr>
+   * <td>/foo/bar/</td>
+   * <td>bar</td>
+   * </tr>
+   * <tr>
+   * <td>c:\\</td>
+   * <td>&nbsp;</td>
+   * </tr>
+   * <tr>
+   * <td>c:\\foo</td>
+   * <td>foo</td>
+   * </tr>
+   * <tr>
+   * <td>http://foo.org/bar</td>
+   * <td>bar</td>
+   * </tr>
+   * </table>
+   * 
+   * @param filename is the path to a file or directory.
+   * @return the basename of the given <code>filename</code>.
+   */
+  public String getBasename(String filename) {
+
+    int len = filename.length();
+    if (len == 0) {
+      return filename;
+    }
+    // remove trailing slashes
+    int end = len - 1;
+    char last = filename.charAt(end);
+    while ((last == '/') || (last == '\\')) {
+      end--;
+      if (end < 0) {
+        return Character.toString(last);
+      }
+      last = filename.charAt(end);
+    }
+    int start = filename.lastIndexOf('/', end);
+    if (start < 0) {
+      start = filename.lastIndexOf('\\', end);
+    }
+    if ((last == ':') && (start < 0)) {
+      return "";
+    }
+    return filename.substring(start + 1, end + 1);
+  }
+
+  /**
+   * This method gets the directory-name of the given <code>filename</code>
+   * (path).<br>
+   * Examples: <table border="1">
+   * <tr>
+   * <th>filename</th>
+   * <th>{@link #getDirname(String)}</th>
+   * </tr>
+   * <tr>
+   * <td>foo</td>
+   * <td>.</td>
+   * </tr>
+   * <tr>
+   * <td>/foo</td>
+   * <td>/</td>
+   * </tr>
+   * </table>
+   * 
+   * @param filename is the path to a file or directory.
+   * @return the path to the directory containing the file denoted by the given
+   *         <code>filename</code>.
+   */
+  public String getDirname(String filename) {
+
+    int len = filename.length();
+    if (len == 0) {
+      return ".";
+    }
+    // remove slashes at the end of the path (trailing slashes of filename)
+    int pathEnd = len - 1;
+    char last = filename.charAt(pathEnd);
+    while ((last == '/') || (last == '\\')) {
+      pathEnd--;
+      if (pathEnd < 0) {
+        return Character.toString(last);
+      }
+      last = filename.charAt(pathEnd);
+    }
+    // remove slashes at the end of dirname
+    char c = '/';
+    int dirEnd = filename.lastIndexOf(c, pathEnd);
+    if (dirEnd < 0) {
+      c = '\\';
+      dirEnd = filename.lastIndexOf(c, pathEnd);
+    }
+    if (dirEnd >= 0) {
+      int lastDirSlash = dirEnd;
+      while ((c == '/') || (c == '\\')) {
+        dirEnd--;
+        if (dirEnd < 0) {
+          return Character.toString(c);
+        }
+        c = filename.charAt(dirEnd);
+      }
+      if (c == ':') {
+        if ((filename.lastIndexOf('/', dirEnd) < 0) && (filename.lastIndexOf('/', dirEnd) < 0)) {
+          // special path (e.g. "C:\\" or "http://")
+          dirEnd = lastDirSlash;
+        }
+      }
+      return filename.substring(0, dirEnd + 1);
+    } else if (last == ':') {
+      // special path (e.g. "C:\\" or "http://")
+      return filename;
+    } else {
+      // only trailing slashes or none
+      return ".";
+    }
   }
 
   /**

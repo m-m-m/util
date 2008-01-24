@@ -192,7 +192,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
             }
           }
           setUriRewriter(urlRewriter);
-          path = FileUtil.getInstance().resolvePath(path);
+          path = FileUtil.getInstance().normalizePath(path);
           File directory = new File(path);
           if (directory.isDirectory()) {
             String relativePath = element.getAttribute(XML_ATR_DIRECTORY_INDEXBASEPATH);
