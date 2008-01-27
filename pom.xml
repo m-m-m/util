@@ -210,6 +210,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>changes-maven-plugin</artifactId>
         <configuration>
+          <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
           <link_template>%URL%/&#38;id=%ISSUE%</link_template>
           <issueLinkTemplate>%URL%/&#38;id=%ISSUE%</issueLinkTemplate>
         </configuration>
@@ -359,7 +360,7 @@
       -->
       <id>mmm</id>
       <name>MMM Repository</name>
-      <url>http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/repository/</url>
+      <url>http://m-m-m.sourceforge.net/repository</url>
       <layout>default</layout>
     </repository>
   </repositories>  
