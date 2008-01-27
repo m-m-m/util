@@ -33,6 +33,7 @@ public final class StaxUtil {
   /** the StAX output factory */
   private static final XMLOutputFactory OUTPUT_FACTORY = XMLOutputFactory.newInstance();
 
+  /** @see #getValueConverter() */
   private ValueConverter valueConverter;
 
   /**
@@ -41,7 +42,6 @@ public final class StaxUtil {
   private StaxUtil() {
 
     super();
-    this.valueConverter = ValueConverter.getInstance();
   }
 
   /**
