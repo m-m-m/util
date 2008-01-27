@@ -134,7 +134,7 @@ public class NlsMessageTest {
     Number number = new Double(0.42);
     NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_NUMBER, number);
     assertEquals(
-        "Number formatted by default: 0.42, as percent: 42%, as currency: ¤ 0.42 and by custom pattern: #0.42!",
+        "Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!",
         msg.getMessage());
     assertEquals(
         "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
