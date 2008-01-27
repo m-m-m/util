@@ -8,7 +8,7 @@
   <body>
     <release version="1.1" date="2008-02-01" description="Subsequent release">
       <action dev="hohwille" type="add">
-        Added <code>StringUtil.replace(char[], char, char)</code>.
+        Added StringUtil.replace(char[], char, char).
       </action>
     </release>
 
