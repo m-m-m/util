@@ -92,6 +92,25 @@ public class StringUtil {
   }
 
   /**
+   * This method replaces all occurrences of <code>oldChar</code> in the
+   * char-array given by <code>string</code> with <code>newChar</code>.
+   * 
+   * @see String#replace(char, char)
+   * 
+   * @param string is the char-array where the replacement should take place.
+   * @param oldChar is the character to be replaced.
+   * @param newChar is the replacement for <code>oldChar</code>.
+   */
+  public void replace(char[] string, char oldChar, char newChar) {
+
+    for (int i = 0; i < string.length; i++) {
+      if (string[i] == oldChar) {
+        string[i] = newChar;
+      }
+    }
+  }
+
+  /**
    * This method replaces all occurrences of the string <code>match</code>
    * with the string <code>replace</code> in the given string.
    * 

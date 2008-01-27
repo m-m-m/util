@@ -26,7 +26,7 @@ public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
   /** @see #getQuoteEscape() */
   private char quoteEscape;
 
-  /** @see */
+  /** @see #isQuoteEscapeLazy() */
   private boolean quoteEscapeLazy;
 
   /** @see #getAltQuoteStart() */
@@ -38,7 +38,7 @@ public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
   /** @see #getAltQuoteEscape() */
   private char altQuoteEscape;
 
-  /** @see */
+  /** @see #isAltQuoteEscapeLazy() */
   private boolean altQuoteEscapeLazy;
 
   /** @see #getEntityStart() */

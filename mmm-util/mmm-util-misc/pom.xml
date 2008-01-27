@@ -18,7 +18,7 @@
     <dependency>
       <groupId>net.sf.mmm</groupId>
       <artifactId>mmm-util-core</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>mmm-util-core</title>
+    <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
+  </properties>
+  <body>
+    <release version="1.1" date="2008-02-01" description="Subsequent release">
+      <action dev="hohwille" type="add">
+        Added <code>StringUtil.replace(char[], char, char)</code>.
+      </action>
+    </release>
+
+    <release version="1.0" date="2008-01-19" description="initial release">
+      <action dev="hohwille" type="add">
+        Everything is new in the initial release.
+      </action>
+    </release>
+  </body>
+</document>

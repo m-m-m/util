@@ -110,11 +110,7 @@ public class FileUtil {
         // /etc/passwd or whatever what might fail by missing read permissions
         // This is just a hack that might work in most cases:
         // we use the user.home dir get the dirname and append the user
-        int lastSlash = userHome.lastIndexOf(systemSlash);
-        if (lastSlash <= 0) {
-          lastSlash = userHome.lastIndexOf(wrongSlash);
-        }
-        String homeDir = userHome.substring(0, lastSlash);
+        String homeDir = getDirname(userHome);
         buffer.append(homeDir);
         buffer.append(systemSlash);
         buffer.append(user);
@@ -665,7 +661,7 @@ public class FileUtil {
   }
 
   /**
-   * This method adds all files matching to the given <code>path</code> and
+   * This method adds all files matching the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
    * may contain {@link GlobPatternCompiler wildcards}.
    * 
@@ -769,6 +765,8 @@ public class FileUtil {
    */
   private boolean tokenizePath(String path, List<PathSegment> list) {
 
+    String slashPath = path.replace('\\', '/');
+    CharSequenceScanner scanner = new CharSequenceScanner();
     char[] pathChars = path.toCharArray();
     int segmentStartIndex = 0;
     int currentIndex = 0;
