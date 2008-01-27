@@ -33,9 +33,7 @@
       <!-- <item name="Release Notes" href="changes-report.html"/> -->
       <item name="History" href="history.html"/>
       <item name="Stories" href="story.html"/>
-      <!--
       <item name="Downloads" href="download.html"/>
-      -->
     </menu>
 
     <menu name="Documentation">
