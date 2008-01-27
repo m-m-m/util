@@ -13,42 +13,6 @@
   <name>uit-impl-swt</name>
   <description>Implementation of the UI-Toolkit API using SWT as the native toolkit</description>
 
-  <profiles>
-    <profile>
-      <id>linux</id>
-      <activation>
-        <os>
-          <name>linux</name>
-        </os>
-      </activation>
-      <properties>
-        <swt.variant>linux-gtk</swt.variant>
-      </properties>
-    </profile>
-    <profile>
-      <id>windows</id>
-      <activation>
-        <os>
-          <family>windows</family>
-        </os>
-      </activation>
-      <properties>
-        <swt.variant>win32</swt.variant>
-      </properties>
-    </profile>
-    <profile>
-      <!-- TODO -->
-      <id>mac</id>
-      <activation>
-        <os>
-          <family>mac</family>
-        </os>
-      </activation>
-      <properties>
-        <swt.variant>mac</swt.variant>
-      </properties>
-    </profile>
-  </profiles>
   <dependencies>
     <dependency>
       <groupId>net.sf.mmm</groupId>
@@ -58,13 +22,10 @@
     </dependency>
     <dependency>
       <groupId>org.eclipse.swt</groupId>
-      <artifactId>swt-${swt.variant}</artifactId>
-      <version>${swt.version}</version>
+      <artifactId>swt</artifactId>
+      <version>3.3.1.1</version>
+      <type>pom</type>
       <scope>compile</scope>
     </dependency>
   </dependencies>
-  <properties>
-    <swt.version>3.3</swt.version>
-    <swt.variant>_swt.variant_undefined</swt.variant>
-  </properties>
 </project>
