@@ -2,9 +2,9 @@ rem $Id$
 
 rem This file is included to activate the custom settings
 
-set MMM_BASE=../../../..
+set MMM_BASE=..\..\..\..
 if exist settings.bat (
-  settings.bat
+  call settings.bat
 ) else (
   copy settings.bat.template settings.bat
   echo Welcome to the Multi-Media-Manager project!
