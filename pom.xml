@@ -325,6 +325,18 @@
   </developers>
   <contributors>
     <contributor>
+      <name>Marc Gagnon</name>
+      <email>gagnon@users.sourceforge.net</email>
+      <url/>
+      <organization/>
+      <organizationUrl/>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-6</timezone>
+      <properties/>
+    </contributor>
+    <contributor>
       <name>Christoph Bauer</name>
       <email>fridolin@users.sourceforge.net</email>
       <url>http://www.christoph-bauer.net/</url>
