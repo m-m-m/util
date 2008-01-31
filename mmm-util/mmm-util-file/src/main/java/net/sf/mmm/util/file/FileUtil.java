@@ -15,7 +15,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.pattern.GlobPatternCompiler;
+import net.sf.mmm.util.pattern.PathPatternCompiler;
+import net.sf.mmm.util.pattern.PatternCompiler;
+import net.sf.mmm.util.pattern.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
@@ -26,14 +34,47 @@ import net.sf.mmm.util.scanner.CharSequenceScanner;
  */
 public class FileUtil {
 
+  /** The path segment indicating the current folder itself. */
+  public static final String PATH_SEGMENT_CURRENT = ".";
+
+  /** The path segment indicating the parent folder. */
+  public static final String PATH_SEGMENT_PARENT = "..";
+
   /**
-   * The key of the {@link System#getProperty(String) system property} with the
-   * users home directory.
+   * The key of the {@link System#getProperty(String) system property}
+   * <code>{@value}</code>. It contains the home directory of the user that
+   * started this JVM.<br>
+   * Examples are <code>/home/mylogin</code> or
+   * <code>C:\Windows\Profiles\mylogin</code>.
    */
   public static final String PROPERTY_USER_HOME = "user.home";
 
+  /**
+   * The key of the {@link System#getProperty(String) system property}
+   * <code>{@value}</code>. It contains the directory to use for temporary
+   * files.<br>
+   * Examples are <code>/tmp</code>, <code>C:\Temp</code> or
+   * <code>/usr/local/tomcat/temp</code>.
+   */
+  public static final String PROPERTY_TMP_DIR = "java.io.tmpdir";
+
   /** @see #getInstance() */
   private static FileUtil instance;
+
+  /** @see #getStringUtil() */
+  private StringUtil stringUtil;
+
+  /** @see #setUserHomeDirectoryPath(String) */
+  private String userHomeDirectoryPath;
+
+  /** @see #getUserHomeDirectory() */
+  private File userHomeDirectory;
+
+  /** @see #setTemporaryDirectoryPath(String) */
+  private String temporaryDirectoryPath;
+
+  /** @see #getTemporaryDirectory() */
+  private File temporaryDirectory;
 
   /**
    * The constructor.
@@ -62,11 +103,113 @@ public class FileUtil {
     if (instance == null) {
       synchronized (FileUtil.class) {
         if (instance == null) {
-          instance = new FileUtil();
+          FileUtil util = new FileUtil();
+          util.setStringUtil(StringUtil.getInstance());
+          util.initialize();
+          instance = util;
         }
       }
     }
     return instance;
+  }
+
+  /**
+   * This method initializes this class. It has to be called after construction
+   * and injection is completed.
+   */
+  @PostConstruct
+  public void initialize() {
+
+    if (this.temporaryDirectoryPath == null) {
+      this.temporaryDirectoryPath = System.getProperty(PROPERTY_TMP_DIR);
+    }
+    if (this.temporaryDirectory == null) {
+      this.temporaryDirectory = new File(this.temporaryDirectoryPath);
+    }
+    if (this.userHomeDirectoryPath == null) {
+      this.userHomeDirectoryPath = System.getProperty(PROPERTY_USER_HOME);
+    }
+    if (this.userHomeDirectory == null) {
+      this.userHomeDirectory = new File(this.userHomeDirectoryPath);
+    }
+  }
+
+  /**
+   * This method gets the {@link StringUtil} that is used by this
+   * {@link FileUtil}.
+   * 
+   * @return the stringUtil the {@link StringUtil}.
+   */
+  protected StringUtil getStringUtil() {
+
+    return this.stringUtil;
+  }
+
+  /**
+   * This method sets the {@link #getStringUtil() StringUtil}. It can only be
+   * set once during initialization.
+   * 
+   * @param stringUtil the stringUtil to set.
+   * @throws AlreadyInitializedException if the value has already been set.
+   */
+  @Resource
+  public void setStringUtil(StringUtil stringUtil) throws AlreadyInitializedException {
+
+    if (this.stringUtil != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.stringUtil = stringUtil;
+  }
+
+  /**
+   * This method gets the {@link File} representing the
+   * {@link #PROPERTY_USER_HOME home directory of the user}.
+   * 
+   * @return the home directory of the user.
+   */
+  public File getUserHomeDirectory() {
+
+    return this.userHomeDirectory;
+  }
+
+  /**
+   * This method set the {@link #getUserHomeDirectory() users home directory}.
+   * It can only be set once during initialization.
+   * 
+   * @param userHome is the home directory of the user.
+   * @throws AlreadyInitializedException if the value has already been set.
+   */
+  protected void setUserHomeDirectoryPath(String userHome) throws AlreadyInitializedException {
+
+    if (this.userHomeDirectoryPath != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.userHomeDirectoryPath = userHome;
+  }
+
+  /**
+   * This method gets the {@link File} representing the
+   * {@link #PROPERTY_TMP_DIR temporary directory}.
+   * 
+   * @return the tmp directory.
+   */
+  public File getTemporaryDirectory() {
+
+    return this.temporaryDirectory;
+  }
+
+  /**
+   * This method sets the {@link #getTemporaryDirectory() tmp directory}.
+   * 
+   * @param tmpDir the tmpDir to set
+   * @throws AlreadyInitializedException if the value has already been set.
+   */
+  protected void setTemporaryDirectoryPath(String tmpDir) throws AlreadyInitializedException {
+
+    if (this.temporaryDirectoryPath != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.temporaryDirectoryPath = tmpDir;
   }
 
   /**
@@ -94,23 +237,23 @@ public class FileUtil {
       wrongSlash = '/';
     }
     // TODO: work on toCharArray to avoid overhead?
-    String systemPath = path.replace(wrongSlash, systemSlash);
-    CharSequenceScanner scanner = new CharSequenceScanner(systemPath);
+    char[] chars = path.toCharArray();
+    getStringUtil().replace(chars, wrongSlash, systemSlash);
+    CharSequenceScanner scanner = new CharSequenceScanner(chars);
     boolean appendSlash = false;
     char c = scanner.next();
     if (c == '~') {
       appendSlash = true;
-      String userHome = System.getProperty(PROPERTY_USER_HOME);
       String user = scanner.readUntil(systemSlash, true);
       if (user.length() == 0) {
-        buffer.append(userHome);
+        buffer.append(this.userHomeDirectoryPath);
       } else {
         // ~<user> can not be resolved properly
         // we would need to do OS-specific assumtions and look into
         // /etc/passwd or whatever what might fail by missing read permissions
         // This is just a hack that might work in most cases:
         // we use the user.home dir get the dirname and append the user
-        String homeDir = getDirname(userHome);
+        String homeDir = getDirname(this.userHomeDirectoryPath);
         buffer.append(homeDir);
         buffer.append(systemSlash);
         buffer.append(user);
@@ -124,11 +267,11 @@ public class FileUtil {
     while (scanner.hasNext()) {
       String segment = scanner.readUntil(systemSlash, true);
       int segmentLength = segment.length();
-      if ("..".equals(segment)) {
+      if (PATH_SEGMENT_PARENT.equals(segment)) {
         if (!segments.isEmpty()) {
           segments.removeLast();
         }
-      } else if ((segmentLength > 0) && !(".".equals(segment))) {
+      } else if ((segmentLength > 0) && !(PATH_SEGMENT_CURRENT.equals(segment))) {
         // ignore "" (duplicated slashes) and "."
         segments.add(segment);
       }
@@ -141,7 +284,7 @@ public class FileUtil {
       }
       buffer.append(segment);
     }
-    if (systemPath.endsWith(File.separator)) {
+    if (chars[chars.length - 1] == systemSlash) {
       char last = buffer.charAt(buffer.length() - 1);
       if (last != systemSlash) {
         buffer.append(systemSlash);
@@ -269,7 +412,25 @@ public class FileUtil {
    * <td>/foo</td>
    * <td>/</td>
    * </tr>
+   * <tr>
+   * <td>/foo/bar</td>
+   * <td>/foo</td>
+   * </tr>
+   * <tr>
+   * <td>/foo/bar/</td>
+   * <td>/foo</td>
+   * </tr>
+   * <tr>
+   * <td>./foo/bar/</td>
+   * <td>./foo</td>
+   * </tr>
+   * <tr>
+   * <td>./foo/bar/../</td>
+   * <td>./foo/bar</td>
+   * </tr>
    * </table>
+   * 
+   * @see #normalizePath(String)
    * 
    * @param filename is the path to a file or directory.
    * @return the path to the directory containing the file denoted by the given
@@ -279,7 +440,7 @@ public class FileUtil {
 
     int len = filename.length();
     if (len == 0) {
-      return ".";
+      return PATH_SEGMENT_CURRENT;
     }
     // remove slashes at the end of the path (trailing slashes of filename)
     int pathEnd = len - 1;
@@ -319,7 +480,7 @@ public class FileUtil {
       return filename;
     } else {
       // only trailing slashes or none
-      return ".";
+      return PATH_SEGMENT_CURRENT;
     }
   }
 
@@ -625,7 +786,7 @@ public class FileUtil {
   /**
    * This method gets all {@link File files} matching to the given
    * <code>path</code> and <code>fileType</code>. The <code>path</code>
-   * may contain {@link GlobPatternCompiler wildcards}.<br>
+   * may contain {@link PathPatternCompiler wildcards}.<br>
    * Examples:
    * <ul>
    * <li>
@@ -639,7 +800,14 @@ public class FileUtil {
    * will return all {@link File#isFile() files} from all direct
    * {@link File#list() sub-folders} of <code>cwd</code> that end with ".xml"
    * </li>
+   * <li>
+   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
+   * "**&#47;*.xml", {@link FileType#FILE})</code>
+   * will return all {@link File#isFile() files} in <code>cwd</code> or any of
+   * its transitive {@link File#list() sub-folders} that end with ".xml" </li>
    * </ul>
+   * 
+   * @see #collectMatchingFiles(File, String, FileType, List)
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
@@ -688,7 +856,7 @@ public class FileUtil {
     }
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
     // TODO initialize cwd according to absolute or relative path
-    boolean pathIsPattern = tokenizePath(path, segmentList);
+    boolean pathIsPattern = tokenizePath(path, segmentList, WildcardGlobPatternCompiler.INSTANCE);
     PathSegment[] segments = segmentList.toArray(new PathSegment[segmentList.size()]);
     collectMatchingFiles(cwd, segments, 0, fileType, list);
     return pathIsPattern;
@@ -735,6 +903,12 @@ public class FileUtil {
           collectMatchingFiles(newCwd, segments, segmentIndex + 1, fileType, list);
         }
       }
+    } else if ("**".equals(segments[segmentIndex].string)) {
+      collectMatchingFiles(cwd, segments, segmentIndex + 1, fileType, list);
+      File[] children = cwd.listFiles(DirectoryFilter.getInstance());
+      for (File file : children) {
+        collectMatchingFiles(file, segments, segmentIndex, fileType, list);
+      }
     } else {
       FileType filterType = fileType;
       if (!lastSegment) {
@@ -760,54 +934,37 @@ public class FileUtil {
    * 
    * @param path is the path to tokenized
    * @param list is the list where to add the segment tokens.
+   * @param patternCompiler is the {@link PatternCompiler} used to compile the
+   *        individual {@link PathSegment segments} of the given
+   *        <code>path</code>.
    * @return <code>true</code> if the path is a glob-pattern (contains '*' or
    *         '?'), <code>false</code> otherwise.
    */
-  private boolean tokenizePath(String path, List<PathSegment> list) {
+  private boolean tokenizePath(String path, List<PathSegment> list, PatternCompiler patternCompiler) {
 
-    String slashPath = path.replace('\\', '/');
-    CharSequenceScanner scanner = new CharSequenceScanner();
-    char[] pathChars = path.toCharArray();
-    int segmentStartIndex = 0;
-    int currentIndex = 0;
+    char[] chars = path.toCharArray();
+    getStringUtil().replace(chars, '\\', '/');
     boolean pathIsPattern = false;
-    boolean segmentIsPattern = false;
-    char c = 0;
-    while (currentIndex < pathChars.length) {
-      c = pathChars[currentIndex++];
-      if ((c == '/') || (c == '\\')) {
-        int length = currentIndex - segmentStartIndex - 1;
-        if (length == 0) {
-          throw new IllegalArgumentException("Duplicate separator in path!");
-        }
-        PathSegment segment = new PathSegment();
-        segment.string = new String(pathChars, segmentStartIndex, length);
-        if (segmentIsPattern) {
-          segment.pattern = GlobPatternCompiler.INSTANCE.compile(segment.string);
+    CharSequenceScanner scanner = new CharSequenceScanner(chars);
+    while (scanner.hasNext()) {
+      String segmentString = scanner.readUntil('/', true);
+      // ignore double slashes ("//") and segment "."
+      if ((segmentString.length() > 0) && (!PATH_SEGMENT_CURRENT.equals(segmentString))) {
+        if (PATH_SEGMENT_PARENT.equals(segmentString)) {
+          // ".." --> remove last segment from list...
+          int lastIndex = list.size() - 1;
+          if (lastIndex >= 0) {
+            list.remove(lastIndex);
+          }
         } else {
-          segment.pattern = null;
+          Pattern segmentPattern = patternCompiler.compile(segmentString);
+          if (segmentPattern != null) {
+            pathIsPattern = true;
+          }
+          PathSegment segment = new PathSegment(segmentString, segmentPattern);
+          list.add(segment);
         }
-        list.add(segment);
-        segmentStartIndex = currentIndex;
-        segmentIsPattern = false;
       }
-      if ((c == '*') || (c == '?')) {
-        segmentIsPattern = true;
-        pathIsPattern = true;
-      }
-    }
-    if ((c == '/') || (c == '\\')) {
-      // allow this in any case?
-    } else {
-      PathSegment segment = new PathSegment();
-      int length = currentIndex - segmentStartIndex;
-      segment.string = new String(pathChars, segmentStartIndex, length);
-      if (segmentIsPattern) {
-        segment.pattern = GlobPatternCompiler.INSTANCE.compile(segment.string);
-      } else {
-        segment.pattern = null;
-      }
-      list.add(segment);
     }
     return pathIsPattern;
   }
@@ -818,11 +975,57 @@ public class FileUtil {
    */
   protected static class PathSegment {
 
-    /** the pattern */
-    private Pattern pattern;
+    /** @see #getString() */
+    private final String string;
 
-    /** the string */
-    private String string;
+    /** @see #getPattern() */
+    private final Pattern pattern;
+
+    /**
+     * The constructor.
+     * 
+     * @param string is the {@link #getString() string} of the segment.
+     */
+    public PathSegment(String string) {
+
+      this(string, null);
+    }
+
+    /**
+     * The constructor.
+     * 
+     * @param string is the {@link #getString() string} of the segment.
+     * @param pattern is the <code>string</code> parsed as
+     *        {@link #getPattern() pattern}.
+     */
+    public PathSegment(String string, Pattern pattern) {
+
+      super();
+      this.pattern = pattern;
+      this.string = string;
+    }
+
+    /**
+     * This method gets the segment as raw string. This may be a
+     * {@link #getPattern() pattern}.
+     * 
+     * @return the string.
+     */
+    public String getString() {
+
+      return this.string;
+    }
+
+    /**
+     * This method gets the pattern.
+     * 
+     * @return the pattern or <code>null</code> if the
+     *         {@link #getString() string} is to be matched exactly.
+     */
+    public Pattern getPattern() {
+
+      return this.pattern;
+    }
 
     /**
      * {@inheritDoc}

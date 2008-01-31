@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import net.sf.mmm.util.io.StreamUtil;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.NlsBundleSynchronizer;
@@ -58,6 +59,9 @@ public class ResourceBundleSynchronizer {
 
   /** @see #getDatePattern() */
   private String datePattern;
+
+  /** @see #getStreamUtil() */
+  private StreamUtil streamUtil;
 
   /**
    * The constructor.
@@ -191,6 +195,29 @@ public class ResourceBundleSynchronizer {
   }
 
   /**
+   * This method gets the {@link StreamUtil} instance to use.
+   * 
+   * @return the {@link StreamUtil}.
+   */
+  public StreamUtil getStreamUtil() {
+
+    if (this.streamUtil == null) {
+      this.streamUtil = StreamUtil.getInstance();
+    }
+    return this.streamUtil;
+  }
+
+  /**
+   * This method sets the {@link #getStreamUtil() StreamUtil}.
+   * 
+   * @param streamUtil is the {@link StreamUtil} instance to use.
+   */
+  public void setStreamUtil(StreamUtil streamUtil) {
+
+    this.streamUtil = streamUtil;
+  }
+
+  /**
    * This method synchronizes (creates or updates) the localized bundles
    * (properties). If a bundle already exists, it will NOT just be overwritten
    * but the missing keys are appended to the end of the file. If no keys are
@@ -218,19 +245,16 @@ public class ResourceBundleSynchronizer {
       }
       pathBuffer.append(".properties");
       File file = new File(pathBuffer.toString());
-      Properties existingBundle = new Properties();
+      Properties existingBundle;
       boolean update = file.exists();
       if (update) {
         System.out.println("Updating " + file.getPath());
         FileInputStream in = new FileInputStream(file);
-        try {
-          Reader reader = new InputStreamReader(in, this.encoding);
-          existingBundle.load(reader);
-        } finally {
-          in.close();
-        }
+        Reader reader = new InputStreamReader(in, this.encoding);
+        existingBundle = getStreamUtil().loadProperties(reader);
       } else {
         System.out.println("Creating " + file.getPath());
+        existingBundle = new Properties();
       }
       StringBuffer buffer = new StringBuffer();
       for (String key : bundle.keySet()) {
@@ -285,7 +309,7 @@ public class ResourceBundleSynchronizer {
         DEFAULT_ENCODING, DEFAULT_BASE_PATH, DEFAULT_DATE_PATTERN,
         NlsBundleSynchronizer.class.getName());
     NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
-    System.out.println(message.getLocalizedMessage(null, nationalizer));
+    System.out.println(message.getLocalizedMessage(Locale.getDefault(), nationalizer));
     System.exit(code);
   }
 

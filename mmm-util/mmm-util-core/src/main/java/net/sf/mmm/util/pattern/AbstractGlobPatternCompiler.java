@@ -33,15 +33,57 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
    */
   public Pattern compile(String pattern) throws IllegalArgumentException {
 
+    String regexPattern = convertPattern(pattern);
+    if (regexPattern == null) {
+      return null;
+    }
+    return Pattern.compile(regexPattern);
+  }
+
+  /**
+   * This method gets the flag that determines if wildcards are required.<br>
+   * This implementation always returns <code>false</code>. Override to
+   * change.
+   * 
+   * @return <code>true</code> if wildcards are required. In that case
+   *         <code>null</code> is {@link #compile(String) returned} if the
+   *         given <code>pattern</code> contains no wildcard ('*' or '?').
+   *         <code>false</code> otherwise.
+   */
+  protected boolean isRequireWildcard() {
+
+    return false;
+  }
+
+  /**
+   * This method converts the given <code>pattern</code> to a
+   * {@link Pattern#compile(String) regex-pattern}.
+   * 
+   * @param pattern is the pattern to convert.
+   * @return the converted regex-pattern or <code>null</code> if
+   *         {@link #isRequireWildcard()} is <code>true</code> and the given
+   *         <code>pattern</code> contains no wildcard ('*' or '?').
+   */
+  protected String convertPattern(String pattern) {
+
+    boolean wildcard = false;
     char[] chars = pattern.toCharArray();
     StringBuilder buffer = new StringBuilder(chars.length + 8);
     int i = 0;
     while (i < chars.length) {
+      char c = chars[i];
+      if ((c == '*') || (c == '?')) {
+        wildcard = true;
+      }
       int next = process(chars, i, buffer);
       assert (next > i);
       i = next;
     }
-    return Pattern.compile(buffer.toString());
+    if (isRequireWildcard() && !wildcard) {
+      return null;
+    } else {
+      return buffer.toString();
+    }
   }
 
   /**

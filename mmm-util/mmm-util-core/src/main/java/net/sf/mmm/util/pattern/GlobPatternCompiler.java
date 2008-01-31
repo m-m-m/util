@@ -28,6 +28,7 @@ public class GlobPatternCompiler extends AbstractGlobPatternCompiler {
    */
   public GlobPatternCompiler() {
 
+    super();
   }
 
 }

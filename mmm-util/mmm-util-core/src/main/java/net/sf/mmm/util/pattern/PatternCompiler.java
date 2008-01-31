@@ -20,7 +20,10 @@ public interface PatternCompiler {
    * @see Pattern#compile(String)
    * 
    * @param pattern is the expression to be compiled as pattern.
-   * @return the compiled pattern.
+   * @return the compiled pattern. May only return <code>null</code> if
+   *         explicitly documented by the underlying implementation. E.g. if the
+   *         given <code>pattern</code> is just a plain string without
+   *         wildcards.
    * @throws IllegalArgumentException if the given <code>pattern</code> has
    *         illegal syntax for the underlying compiler.
    */

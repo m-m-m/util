@@ -16,6 +16,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
@@ -436,6 +437,54 @@ public class StreamUtil {
     AsyncTransferrerImpl task = new AsyncTransferrerImpl(transferrer);
     this.executor.execute(task);
     return task;
+  }
+
+  /**
+   * This method loads the {@link Properties} from the given
+   * <code>inStream</code> and {@link InputStream#close() closes} it.<br>
+   * <b>ATTENTION:</b><br>
+   * This method loads the properties using the encoding <code>ISO-8859-1</code>.
+   * Use {@link #loadProperties(Reader)} instead to use an explicit encoding
+   * (e.g. <code>UTF-8</code>).
+   * 
+   * @see Properties#load(InputStream)
+   * 
+   * @param inStream is the {@link InputStream} to the properties data.
+   * @return the properties read from the given <code>inStream</code>.
+   * @throws IOException if the operation failed. Closing is guaranteed even in
+   *         exception state.
+   */
+  public Properties loadProperties(InputStream inStream) throws IOException {
+
+    try {
+      Properties properties = new Properties();
+      properties.load(inStream);
+      return properties;
+    } finally {
+      close(inStream);
+    }
+  }
+
+  /**
+   * This method loads the {@link Properties} from the given <code>reader</code>
+   * and {@link Reader#close() closes} it.<br>
+   * 
+   * @see Properties#load(Reader)
+   * 
+   * @param reader is the {@link Reader} to the properties data.
+   * @return the properties read from the given <code>reader</code>.
+   * @throws IOException if the operation failed. Closing is guaranteed even in
+   *         exception state.
+   */
+  public Properties loadProperties(Reader reader) throws IOException {
+
+    try {
+      Properties properties = new Properties();
+      properties.load(reader);
+      return properties;
+    } finally {
+      close(reader);
+    }
   }
 
   /**
