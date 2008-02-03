@@ -8,18 +8,17 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-framework-demo</artifactId>
-  <version>0.0.1</version>
+  <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>framework-demo</name>
   <description>Demo Application using the MMM IOC Framework.</description>
   
   <dependencies>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-framework-annotation</artifactId>
-      <version>0.0.1</version>
+      <version>0.9.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

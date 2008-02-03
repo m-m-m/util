@@ -5,11 +5,11 @@
   <parent>
     <groupId>net.sf.mmm</groupId>
     <artifactId>mmm-search</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-search-parser</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>search-parser</name>
   <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>

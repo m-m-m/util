@@ -7,14 +7,12 @@
     <artifactId>mmm</artifactId>
     <version>1.0.0</version>
   </parent>
+  <artifactId>mmm-term</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
   <name>term</name>
   <description>Component for parsing and dynamic evaluation of expression terms.</description>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-term</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0.0-SNAPSHOT</version>
-  <dependencies>
-  </dependencies>
+
   <modules>
     <module>mmm-term-core</module>
     <module>mmm-term-main</module>

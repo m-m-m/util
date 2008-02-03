@@ -8,22 +8,21 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
   <artifactId>mmm-framework-core</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>0.9.0-SNAPSHOT</version>
   <name>framework-core</name>
   <description>Core of the MMM IOC Framework.</description>
   
   <dependencies>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-misc</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-nls-core</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>

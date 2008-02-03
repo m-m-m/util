@@ -126,7 +126,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <dependencies>
           <dependency>
-            <groupId>net.sf.mmm</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mmm-setup</artifactId>
             <version>SNAPSHOT</version>
           </dependency>

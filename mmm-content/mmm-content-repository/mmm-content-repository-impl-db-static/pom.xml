@@ -16,7 +16,7 @@
   
   <dependencies>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-repository-api</artifactId>
       <version>0.9.0-SNAPSHOT</version>
       <scope>compile</scope>

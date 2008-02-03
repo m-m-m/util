@@ -12,9 +12,10 @@
   <packaging>pom</packaging>
   <name>gui</name>
   <description>The Graphical User Interface (GUI) for the ECMS.</description>
+  
   <dependencies>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-uit-impl-swing</artifactId>
       <version>0.9.0-SNAPSHOT</version>
       <scope>test</scope>

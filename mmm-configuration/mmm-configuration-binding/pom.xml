@@ -8,21 +8,21 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+  <artifactId>mmm-configuration-binding</artifactId>
+  <version>0.9.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>configuration-binding</name>
   <description>Binding used to inject configuration into POJOs.</description>
-  <groupId>net.sf.mmm</groupId>
-  <artifactId>mmm-configuration-binding</artifactId>
-  <packaging>jar</packaging>
-  <version>0.9.0-SNAPSHOT</version>
+
   <dependencies>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-configuration-core</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-reflect</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>

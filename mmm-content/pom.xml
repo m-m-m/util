@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>net.sf.mmm</groupId>
+
   <artifactId>mmm-content</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>

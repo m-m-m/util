@@ -7,7 +7,7 @@
     <artifactId>mmm-content</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>net.sf.mmm</groupId>
+
   <artifactId>mmm-content-core</artifactId>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -16,25 +16,25 @@
   
   <dependencies>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-value-validator</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
       <version>1.0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-reflect</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-resource</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
@@ -49,7 +49,7 @@
     -->
     <!--
     <dependency>
-      <groupId>net.sf.mmm</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-value-main</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
