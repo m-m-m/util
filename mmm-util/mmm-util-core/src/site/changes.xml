@@ -7,9 +7,15 @@
   </properties>
   <body>
     <!--
-    <release version="1.0.1" date="2008-02-01" description="Subsequent release">
+    <release version="1.0.1" date="2008-02-10" description="Subsequent release">
       <action dev="hohwille" type="add">
-        Added StringUtil.replace(char[], char, char).
+        <![CDATA[<Added <code>net.sf.mmm.util.file</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[<Added <code>net.sf.mmm.util.event</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[<Added <code>StringUtil.replace(char[], char, char)</code>.]]>
       </action>
     </release>
     -->
