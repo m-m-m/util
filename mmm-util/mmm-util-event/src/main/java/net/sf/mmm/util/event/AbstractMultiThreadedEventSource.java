@@ -4,10 +4,12 @@
 package net.sf.mmm.util.event;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+
+import net.sf.mmm.util.component.AlreadyInitializedException;
+import net.sf.mmm.util.concurrent.SimpleExecutor;
 
 /**
  * This class extends {@link AbstractSynchronizedEventSource} with the ability
@@ -36,23 +38,26 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   }
 
   /**
-   * This method sets the thread-pool to use.
+   * This method sets the {@link #getExecutor() executor} to use.
    * 
    * @param threadPool is used to dispatch events in separate threads.
    */
   @Resource
-  public void setThreadPool(Executor threadPool) {
+  public void setExecutor(Executor threadPool) {
 
-    assert (this.executor == null);
+    if (this.executor != null) {
+      throw new AlreadyInitializedException();
+    }
     this.executor = threadPool;
   }
 
   /**
-   * This method gets the thread-pool
+   * This method gets the {@link Executor} used to run asynchronous tasks. It
+   * may use a thread-pool.
    * 
-   * @return the thread-pool.
+   * @return the executor.
    */
-  public Executor getThreadPool() {
+  public Executor getExecutor() {
 
     return this.executor;
   }
@@ -64,7 +69,7 @@ public class AbstractMultiThreadedEventSource<E extends Event, L extends EventLi
   public void initialize() {
 
     if (this.executor == null) {
-      this.executor = Executors.newCachedThreadPool();
+      this.executor = SimpleExecutor.INSTANCE;
     }
   }
 

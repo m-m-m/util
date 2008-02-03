@@ -132,7 +132,7 @@ public class FileUtilTest {
   }
 
   @Test
-  public void testCopyDir() throws IOException {
+  public void testDirectoryTree() throws IOException {
 
     FileUtil util = getFileUtil();
     File tempDir = util.getTemporaryDirectory();
@@ -154,6 +154,7 @@ public class FileUtilTest {
     File fooFile = new File(subsubdir, "foo.properties");
     success = fooFile.createNewFile();
     assertTrue(success);
+    // test matching files
     File[] matchingFiles = util.getMatchingFiles(subdir, "*/*.properties", FileType.FILE);
     assertEquals(1, matchingFiles.length);
     assertEquals(matchingFiles[0], fooFile);
@@ -170,8 +171,20 @@ public class FileUtilTest {
       }
     }
     assertEquals(7, magic);
+    matchingFiles = util.getMatchingFiles(subdir, "**/fo*", null);
+    magic = 0;
+    for (File file : matchingFiles) {
+      if (file.equals(fooFile)) {
+        magic += 1;
+      } else if (file.equals(subsubdir)) {
+        magic += 2;
+      }
+    }
+    assertEquals(3, magic);
+    // copy recursive
     File copyDir = new File(tempDir, uidName + "-copy");
     util.copyRecursive(subdir, copyDir, false);
+    // collect matching files of copy
     matchingFiles = util.getMatchingFiles(copyDir, "*/*.properties", FileType.FILE);
     assertEquals(1, matchingFiles.length);
     assertEquals(matchingFiles[0].getName(), fooFile.getName());
@@ -189,9 +202,11 @@ public class FileUtilTest {
       }
     }
     assertEquals(7, magic);
+    // delete recursive
     util.deleteRecursive(subdir);
     util.deleteRecursive(copyDir);
     assertFalse(subdir.exists());
+    assertFalse(copyDir.exists());
   }
 
 }

@@ -52,23 +52,25 @@ public class ReflectionUtilTest {
   private void checkTypeParser(String typeString) throws Exception {
 
     Type type = getReflectionUtil().toType(typeString);
-    String toString;
-    if (type instanceof Class) {
-      toString = ((Class) type).getName();
-    } else {
-      toString = type.toString();
-    }
+    String toString = getReflectionUtil().toString(type);
     assertEquals(typeString, toString);
   }
 
   @Test
   public void testTypeParser() throws Exception {
 
+    checkTypeParser("?");
+    checkTypeParser("? extends java.lang.String");
+    checkTypeParser("? super java.lang.String");
     checkTypeParser("java.lang.String");
+    assertEquals(String.class, getReflectionUtil().toType("java.lang.String"));
     checkTypeParser("java.util.List<java.lang.String>");
     checkTypeParser("java.util.Map<java.lang.String, java.lang.String>");
     checkTypeParser("java.util.List<?>");
     checkTypeParser("java.util.Map<? super java.lang.String, ? extends java.lang.String>");
+    checkTypeParser("java.util.Map<java.util.List<java.lang.String>, java.util.Set<java.lang.String>>");
+    checkTypeParser("?[]");
+    checkTypeParser("java.util.List<?>[]");
   }
 
   @Test

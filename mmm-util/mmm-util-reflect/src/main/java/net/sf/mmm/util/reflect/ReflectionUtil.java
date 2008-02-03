@@ -306,6 +306,7 @@ public class ReflectionUtil {
       throws ClassNotFoundException {
 
     parser.skipWhile(' ');
+    Type result;
     // wildcard-type?
     char c = parser.forcePeek();
     if (c == '?') {
@@ -319,27 +320,36 @@ public class ReflectionUtil {
         } else if ("extends".equals(sequence)) {
           lowerBound = true;
         } else {
-          // TODO: NLS
-          throw new IllegalArgumentException("Illegal sequence in wildcard type '" + sequence
-              + "'!");
+          throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_TYPE_ILLEGAL_WILDCARD,
+              sequence);
         }
         Type bound = toType(parser, resolver, null);
         if (lowerBound) {
-          return new LowerBoundWildcardType(bound);
+          result = new LowerBoundWildcardType(bound);
         } else {
-          return new UpperBoundWildcardType(bound);
+          result = new UpperBoundWildcardType(bound);
         }
       } else {
-        return UnboundedWildcardType.INSTANCE;
+        result = UnboundedWildcardType.INSTANCE;
       }
+      parser.skipWhile(' ');
+      c = parser.forcePeek();
+      if (c == '[') {
+        parser.next();
+        if (!parser.expect(']')) {
+          // TODO: NLS
+          throw new NlsIllegalArgumentException("Illegal array!");
+        }
+        result = new GenericArrayTypeImpl(result);
+      }
+      return result;
     }
     String segment = parser.readWhile(CHAR_FILTER).trim();
     c = parser.forceNext();
-    Type result;
     if (c == '[') {
       if (!parser.expect(']')) {
         // TODO: NLS
-        throw new IllegalArgumentException("Illegal array!");
+        throw new NlsIllegalArgumentException("Illegal array!");
       }
       // array...
       StringBuilder sb = new StringBuilder(segment.length() + 3);

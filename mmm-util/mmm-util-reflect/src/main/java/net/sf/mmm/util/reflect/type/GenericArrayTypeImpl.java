@@ -40,4 +40,13 @@ public class GenericArrayTypeImpl implements GenericArrayType {
     return this.genericComponentType;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return this.genericComponentType + "[]";
+  }
+
 }

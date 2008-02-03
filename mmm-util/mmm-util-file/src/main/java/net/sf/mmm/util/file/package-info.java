@@ -9,8 +9,9 @@
  * allows to copy or delete files and directories (recursively), to collect 
  * files that match a given path-pattern and many other useful tasks.<br>
  * The {@link net.sf.mmm.util.file.FileAccessPermissions} represent the 
- * permissions of a file in a POSIX (Unix/Linux) filesystem and implements the
- * logic of {@link net.sf.mmm.util.file.FileAccessPermissions#createByUmask(int, boolean) umask}
+ * permissions of a file in a POSIX (Unix/Linux) filesystem and virtually 
+ * implements the logic of 
+ * {@link net.sf.mmm.util.file.FileAccessPermissions#createByUmask(int, boolean) umask}
  * and {@link net.sf.mmm.util.file.FileAccessPermissions#chmod(String) chmod}.
  */
 package net.sf.mmm.util.file;

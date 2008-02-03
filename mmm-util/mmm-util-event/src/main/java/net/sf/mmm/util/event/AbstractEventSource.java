@@ -68,9 +68,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    */
   protected void fireEvent(E event) {
 
-    int length = this.listeners.size();
-    for (int i = 0; i < length; i++) {
-      L listener = this.listeners.get(i);
+    for (L listener : this.listeners) {
       try {
         fireEvent(event, listener);
       } catch (RuntimeException e) {
