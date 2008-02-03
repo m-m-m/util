@@ -16,7 +16,6 @@
 
   <modules>
     <module>mmm-util-core</module>
-    <module>mmm-util-file</module>
     <module>mmm-util-event</module>
     <module>mmm-util-http</module>
     <module>mmm-util-misc</module>
