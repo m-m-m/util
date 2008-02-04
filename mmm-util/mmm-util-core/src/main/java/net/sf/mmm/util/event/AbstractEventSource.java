@@ -34,7 +34,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * The constructor
+   * The constructor.
    * 
    * @param listenerList is the list used to store the listeners.
    */

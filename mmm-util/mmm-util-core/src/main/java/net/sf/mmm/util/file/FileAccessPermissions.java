@@ -124,7 +124,7 @@ public class FileAccessPermissions implements Cloneable {
    *         negative or greater than <code>07777</code> (==
    *         <code>0xFFF</code> == <code>4095</code>).
    */
-  public void setMaskBits(int mask) {
+  public void setMaskBits(int mask) throws IllegalArgumentException {
 
     if ((mask > 07777) || (mask < 0)) {
       throw new IllegalArgumentException("File mode mask out of range: " + mask);
@@ -621,6 +621,7 @@ public class FileAccessPermissions implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int hashCode() {
 
     return this.maskBits;
@@ -629,6 +630,7 @@ public class FileAccessPermissions implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean equals(Object obj) {
 
     if (obj == null) {
@@ -647,6 +649,7 @@ public class FileAccessPermissions implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public FileAccessPermissions clone() {
 
     try {
@@ -659,6 +662,7 @@ public class FileAccessPermissions implements Cloneable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toString() {
 
     String result = Integer.toString(this.maskBits, 8);

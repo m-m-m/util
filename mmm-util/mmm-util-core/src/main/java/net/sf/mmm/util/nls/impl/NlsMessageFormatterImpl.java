@@ -4,7 +4,6 @@
 package net.sf.mmm.util.nls.impl;
 
 import java.io.IOException;
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -25,8 +24,8 @@ import net.sf.mmm.util.scanner.SimpleCharScannerSyntax;
  * syntax-compatible with the
  * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern}-format.
  * Some special (and somewhat sick) features as modifying internal
- * {@link Format}s or {@link java.text.FieldPosition} are NOT supported.
- * Currently also parsing is NOT supported.<br>
+ * {@link java.text.Format}s or {@link java.text.FieldPosition} are NOT
+ * supported. Currently also parsing is NOT supported.<br>
  * Therefore this implementation is immutable and thread-safe. Further it works
  * on any {@link Appendable} rather than only on {@link StringBuffer}. It also
  * uses the same {@link Appendable} for recursive invocations.
