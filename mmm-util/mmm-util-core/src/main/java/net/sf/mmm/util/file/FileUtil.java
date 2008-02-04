@@ -10,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -20,8 +18,6 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.component.AlreadyInitializedException;
-import net.sf.mmm.util.pattern.GlobPatternCompiler;
-import net.sf.mmm.util.pattern.PathPatternCompiler;
 import net.sf.mmm.util.pattern.PatternCompiler;
 import net.sf.mmm.util.pattern.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
@@ -263,13 +259,13 @@ public class FileUtil {
     }
     // TODO: handle \\server\...
     // TODO: handle <schema>://
-    Deque<String> segments = new LinkedList<String>();
+    List<String> segments = new ArrayList<String>();
     while (scanner.hasNext()) {
       String segment = scanner.readUntil(systemSlash, true);
       int segmentLength = segment.length();
       if (PATH_SEGMENT_PARENT.equals(segment)) {
         if (!segments.isEmpty()) {
-          segments.removeLast();
+          segments.remove(segments.size() - 1);
         }
       } else if ((segmentLength > 0) && !(PATH_SEGMENT_CURRENT.equals(segment))) {
         // ignore "" (duplicated slashes) and "."
@@ -786,7 +782,7 @@ public class FileUtil {
   /**
    * This method gets all {@link File files} matching to the given
    * <code>path</code> and <code>fileType</code>. The <code>path</code>
-   * may contain {@link PathPatternCompiler wildcards}.<br>
+   * may contain {@link net.sf.mmm.util.pattern.PathPatternCompiler wildcards}.<br>
    * Examples:
    * <ul>
    * <li>
@@ -831,7 +827,7 @@ public class FileUtil {
   /**
    * This method adds all files matching the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may contain {@link GlobPatternCompiler wildcards}.
+   * may contain {@link net.sf.mmm.util.pattern.GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
@@ -846,8 +842,8 @@ public class FileUtil {
    *        files.
    * @return <code>false</code> if the path is a regular string and
    *         <code>true</code> if the given path contains at least one
-   *         {@link GlobPatternCompiler wildcard} (<code>'*'</code> or
-   *         <code>'?'</code>).
+   *         {@link net.sf.mmm.util.pattern.GlobPatternCompiler wildcard} (<code>'*'</code>
+   *         or <code>'?'</code>).
    */
   public boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list) {
 
@@ -865,7 +861,7 @@ public class FileUtil {
   /**
    * This method adds all files matching to the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may contain {@link GlobPatternCompiler wildcards}.
+   * may contain {@link net.sf.mmm.util.pattern.GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
