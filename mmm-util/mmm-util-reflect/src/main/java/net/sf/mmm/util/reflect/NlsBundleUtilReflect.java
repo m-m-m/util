@@ -15,4 +15,10 @@ public class NlsBundleUtilReflect extends AbstractResourceBundle {
   /** @see ReflectionUtil#toType(String, ClassResolver) */
   public static final String ERR_TYPE_ILLEGAL_WILDCARD = "Illegal sequence in wildcard type \"{0}\"!";
 
+  /** @see AnnotationUtil#getMethodAnnotation(java.lang.reflect.Method, Class) */
+  public static final String ERR_ANNOTATION_NOT_RUNTIME = "The given annotation \"{0}\" can NOT be resolved at runtime!";
+
+  /** @see AnnotationUtil#getMethodAnnotation(java.lang.reflect.Method, Class) */
+  public static final String ERR_ANNOTATION_NOT_FOR_TARGET = "The given annotation \"{0}\" can NOT annotate the target \"{1}\"!";
+
 }

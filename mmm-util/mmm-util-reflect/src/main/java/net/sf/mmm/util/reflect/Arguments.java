@@ -52,14 +52,14 @@ public class Arguments {
   }
 
   /**
-   * This method gets the argument at the given position.
+   * This method gets the argument at the given <code>position</code>.
    * 
    * @param position is the index of the requested type. This value must be in
    *        the range from <code>0</code> to
    *        <code>{@link #getArgumentCount()} - 1</code>.
    * @return the argument at the given index.
    */
-  public Object getType(int position) {
+  public Object getArgument(int position) {
 
     return this.args[position];
   }
@@ -67,6 +67,7 @@ public class Arguments {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int hashCode() {
 
     return this.hash;
@@ -75,6 +76,7 @@ public class Arguments {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean equals(Object other) {
 
     if ((other != null) && (other.getClass() == Arguments.class)) {
@@ -94,6 +96,7 @@ public class Arguments {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toString() {
 
     StringBuffer result = new StringBuffer();

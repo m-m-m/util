@@ -3,8 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import net.sf.mmm.util.collection.MapFactory;
 
 /**
  * This is an implementation of the {@link ClassResolver} interface that uses an
@@ -24,8 +25,18 @@ public class MappedClassResolver implements ClassResolver {
    */
   public MappedClassResolver() {
 
+    this(MapFactory.INSTANCE_HASH_MAP);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param mapFactory the factory used to create the underlying {@link Map}.
+   */
+  public MappedClassResolver(MapFactory mapFactory) {
+
     super();
-    this.name2classMap = new HashMap<String, Class<?>>();
+    this.name2classMap = mapFactory.create();
   }
 
   /**

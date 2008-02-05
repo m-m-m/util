@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
@@ -73,7 +72,7 @@ public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAcc
       InvocationTargetException {
 
     Object arrayOrList = this.containerGetAccessor.invoke(pojoInstance);
-    return CollectionUtil.INSTANCE.get(arrayOrList, index);
+    return getCollectionUtil().get(arrayOrList, index);
   }
 
   /**

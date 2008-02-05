@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorProxy;
@@ -75,7 +74,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
     if (arrayMapOrCollection == null) {
       size = 0;
     } else {
-      size = CollectionUtil.INSTANCE.getSize(arrayMapOrCollection);
+      size = getCollectionUtil().getSize(arrayMapOrCollection);
     }
     return Integer.valueOf(size);
   }

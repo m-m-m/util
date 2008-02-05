@@ -8,7 +8,6 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -29,26 +28,12 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
  */
 public class CollectionUtil {
 
-  /**
-   * This is the singleton instance of this {@link CollectionUtil}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
-   */
-  public static final CollectionUtil INSTANCE = new CollectionUtil();
+  /** @see #getInstance() */
+  public static CollectionUtil instance;
 
   /** @see #create(Class) */
   @SuppressWarnings("unchecked")
-  private static final Map<Class<? extends Collection>, Class<? extends Collection>> COLLECTION_IMPLEMENTATIONS = new HashMap<Class<? extends Collection>, Class<? extends Collection>>();
-
-  static {
-    COLLECTION_IMPLEMENTATIONS.put(Collection.class, ArrayList.class);
-    COLLECTION_IMPLEMENTATIONS.put(List.class, ArrayList.class);
-    COLLECTION_IMPLEMENTATIONS.put(Set.class, HashSet.class);
-    COLLECTION_IMPLEMENTATIONS.put(SortedSet.class, TreeSet.class);
-    COLLECTION_IMPLEMENTATIONS.put(Queue.class, LinkedList.class);
-    COLLECTION_IMPLEMENTATIONS.put(Deque.class, LinkedList.class);
-  }
+  private final Map<Class<? extends Collection>, Class<? extends Collection>> collectionImplementations;
 
   /**
    * The constructor.
@@ -56,6 +41,45 @@ public class CollectionUtil {
   protected CollectionUtil() {
 
     super();
+    this.collectionImplementations = new HashMap<Class<? extends Collection>, Class<? extends Collection>>();
+    this.collectionImplementations.put(Collection.class, ArrayList.class);
+    this.collectionImplementations.put(List.class, ArrayList.class);
+    this.collectionImplementations.put(Set.class, HashSet.class);
+    this.collectionImplementations.put(SortedSet.class, TreeSet.class);
+    this.collectionImplementations.put(Queue.class, LinkedList.class);
+    try {
+      Class dequeClass = Class.forName("java.util.Deque");
+      this.collectionImplementations.put(dequeClass, LinkedList.class);
+    } catch (ClassNotFoundException e) {
+      // Deque not available before java6, ignore...
+    }
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link CollectionUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static CollectionUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (CollectionUtil.class) {
+        if (instance == null) {
+          CollectionUtil util = new CollectionUtil();
+          instance = util;
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -70,7 +94,7 @@ public class CollectionUtil {
   protected Class<? extends Collection> getCollectionImplementation(
       Class<? extends Collection> collectionInterface) {
 
-    return COLLECTION_IMPLEMENTATIONS.get(collectionInterface);
+    return this.collectionImplementations.get(collectionInterface);
   }
 
   /**

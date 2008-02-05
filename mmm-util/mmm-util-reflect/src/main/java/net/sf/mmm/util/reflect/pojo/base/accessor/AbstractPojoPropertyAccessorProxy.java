@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect.pojo.base.accessor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 
 /**
@@ -22,6 +23,19 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   public AbstractPojoPropertyAccessorProxy() {
 
     super();
+  }
+
+  /**
+   * This method gets the {@link CollectionUtil} instance.
+   * 
+   * @see CollectionUtil#getInstance()
+   * 
+   * @return the collection util.
+   */
+  protected CollectionUtil getCollectionUtil() {
+
+    // TODO: get from PojoBuilder
+    return CollectionUtil.getInstance();
   }
 
   /**

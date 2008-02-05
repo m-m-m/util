@@ -11,7 +11,8 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * This class represents the {@link Class type} of a {@link Number}. It allows
  * to check attributes like {@link #isDecimal()} or to
- * {@link #getExactnessDifference(NumberType) compare} {@link NumberType}s.
+ * {@link #getExactnessDifference(NumberType) compare} {@link NumberType}s.<br>
+ * This is a class and NOT an {@link Enum} to be extensible.
  * 
  * @see ReflectionUtil#getNumberType(Class)
  * 

@@ -10,6 +10,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.component.AlreadyInitializedException;
+import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+
 /**
  * This class is a collection of utility functions for dealing with
  * {@link Annotation annotations}.
@@ -25,6 +30,9 @@ public class AnnotationUtil {
 
   /** an empty element-type array */
   public static final ElementType[] NO_TARGET = new ElementType[0];
+
+  /** @see #getReflectionUtil() */
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -53,7 +61,9 @@ public class AnnotationUtil {
     if (instance == null) {
       synchronized (AnnotationUtil.class) {
         if (instance == null) {
-          instance = new AnnotationUtil();
+          AnnotationUtil util = new AnnotationUtil();
+          util.setReflectionUtil(ReflectionUtil.getInstance());
+          instance = util;
         }
       }
     }
@@ -68,7 +78,19 @@ public class AnnotationUtil {
    */
   protected ReflectionUtil getReflectionUtil() {
 
-    return ReflectionUtil.getInstance();
+    return this.reflectionUtil;
+  }
+
+  /**
+   * @param reflectionUtil the reflectionUtil to set
+   */
+  @Resource
+  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
+
+    if (this.reflectionUtil != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.reflectionUtil = reflectionUtil;
   }
 
   /**
@@ -155,12 +177,12 @@ public class AnnotationUtil {
       throws IllegalArgumentException {
 
     if (!isRuntimeAnnotation(annotation)) {
-      throw new IllegalArgumentException("Given annotation (" + annotation
-          + ") can NOT be resolved at runtime!");
+      throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_ANNOTATION_NOT_RUNTIME,
+          annotation);
     }
     if (!isAnnotationForType(annotation, ElementType.TYPE)) {
-      throw new IllegalArgumentException("Given annotation (" + annotation
-          + ") can NOT annotate classes!");
+      throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_ANNOTATION_NOT_FOR_TARGET,
+          annotation, ElementType.TYPE);
     }
     A result = annotatedClass.getAnnotation(annotation);
     Class<?> currentClass = annotatedClass;
@@ -274,12 +296,12 @@ public class AnnotationUtil {
   public <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotation) {
 
     if (!isRuntimeAnnotation(annotation)) {
-      throw new IllegalArgumentException("Given annotation (" + annotation
-          + ") can NOT be resolved at runtime!");
+      throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_ANNOTATION_NOT_RUNTIME,
+          annotation);
     }
     if (!isAnnotationForType(annotation, ElementType.METHOD)) {
-      throw new IllegalArgumentException("Given annotation (" + annotation
-          + ") can NOT annotate methods!");
+      throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_ANNOTATION_NOT_FOR_TARGET,
+          annotation, ElementType.METHOD);
     }
     A result = annotatedMethod.getAnnotation(annotation);
     if (result == null) {

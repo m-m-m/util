@@ -92,8 +92,8 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
           if (type.isArray()) {
             accessor.invoke(pojo, elements);
           } else {
-            Collection collection = CollectionUtil.INSTANCE
-                .create((Class<? extends Collection>) type);
+            Collection collection = CollectionUtil.getInstance().create(
+                (Class<? extends Collection>) type);
             Collections.addAll(collection, elements);
             accessor.invoke(pojo, collection);
           }
