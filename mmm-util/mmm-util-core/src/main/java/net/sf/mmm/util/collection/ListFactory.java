@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the interface for a {@link CollectionFactory} that guarantees to
- * {@link #create() create} a {@link List}.
+ * This is the interface for a {@link CollectionFactory} that
+ * {@link #create() creates} instances of {@link List}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ListFactory extends CollectionFactory {
+public interface ListFactory extends CollectionFactory<List> {
 
   /**
    * {@inheritDoc}
@@ -25,7 +25,15 @@ public interface ListFactory extends CollectionFactory {
   <E> List<E> create(int capacity);
 
   /** The default instance creating an {@link ArrayList}. */
-  ListFactory INSTANCE_ARRAY_LIST = new ListFactory() {
+  ListFactory INSTANCE_ARRAY_LIST = new AbstractListFactory() {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Class<? extends List> getCollectionImplementation() {
+
+      return ArrayList.class;
+    }
 
     /**
      * {@inheritDoc}

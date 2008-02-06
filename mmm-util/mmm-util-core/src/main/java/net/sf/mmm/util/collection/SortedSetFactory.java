@@ -3,8 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -12,43 +13,44 @@ import java.util.Set;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface SetFactory extends CollectionFactory<Set> {
+public interface SortedSetFactory extends CollectionFactory<SortedSet> {
 
   /**
    * {@inheritDoc}
    */
-  <E> Set<E> create();
+  <E> SortedSet<E> create();
 
   /**
    * {@inheritDoc}
    */
-  <E> Set<E> create(int capacity);
+  <E> SortedSet<E> create(int capacity);
 
-  /** The default instance creating a {@link HashSet}. */
-  SetFactory INSTANCE_HASH_SET = new AbstractSetFactory() {
+  /** The default instance creating a {@link TreeSet}. */
+  SortedSetFactory INSTANCE_TREE_SET = new AbstractSortedSetFactory() {
 
     /**
      * {@inheritDoc}
      */
-    public Class<? extends Set> getCollectionImplementation() {
+    public Class<? extends SortedSet> getCollectionImplementation() {
 
-      return HashSet.class;
+      return TreeSet.class;
     }
 
     /**
      * {@inheritDoc}
      */
-    public <E> Set<E> create() {
+    public <E> SortedSet<E> create() {
 
-      return new HashSet<E>();
+      return new TreeSet<E>();
     }
 
     /**
      * {@inheritDoc}
      */
-    public <E> Set<E> create(int capacity) {
+    public <E> SortedSet<E> create(int capacity) {
 
-      return new HashSet<E>(capacity);
+      // capacity does NOT make sense here...
+      return new TreeSet<E>();
     }
   };
 

@@ -4,20 +4,19 @@
 package net.sf.mmm.util.reflect;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.collection.CollectionFactory;
+import net.sf.mmm.util.collection.CollectionFactoryManager;
+import net.sf.mmm.util.collection.CollectionFactoryManagerImpl;
+import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 
 /**
@@ -28,12 +27,17 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
  */
 public class CollectionUtil {
 
+  /**
+   * The default value for the maximum growth of the {@link List#size() size} of
+   * a {@link List}: {@value}
+   */
+  private static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
+
   /** @see #getInstance() */
   public static CollectionUtil instance;
 
-  /** @see #create(Class) */
-  @SuppressWarnings("unchecked")
-  private final Map<Class<? extends Collection>, Class<? extends Collection>> collectionImplementations;
+  /** @see #getCollectionFactoryManager() */
+  private CollectionFactoryManager collectionFactoryManager;
 
   /**
    * The constructor.
@@ -41,18 +45,6 @@ public class CollectionUtil {
   protected CollectionUtil() {
 
     super();
-    this.collectionImplementations = new HashMap<Class<? extends Collection>, Class<? extends Collection>>();
-    this.collectionImplementations.put(Collection.class, ArrayList.class);
-    this.collectionImplementations.put(List.class, ArrayList.class);
-    this.collectionImplementations.put(Set.class, HashSet.class);
-    this.collectionImplementations.put(SortedSet.class, TreeSet.class);
-    this.collectionImplementations.put(Queue.class, LinkedList.class);
-    try {
-      Class dequeClass = Class.forName("java.util.Deque");
-      this.collectionImplementations.put(dequeClass, LinkedList.class);
-    } catch (ClassNotFoundException e) {
-      // Deque not available before java6, ignore...
-    }
   }
 
   /**
@@ -75,6 +67,7 @@ public class CollectionUtil {
       synchronized (CollectionUtil.class) {
         if (instance == null) {
           CollectionUtil util = new CollectionUtil();
+          util.setCollectionFactoryManager(CollectionFactoryManagerImpl.getInstance());
           instance = util;
         }
       }
@@ -83,18 +76,29 @@ public class CollectionUtil {
   }
 
   /**
-   * This method gets the implementation to use for the given
-   * <code>collectionInterface</code>.
+   * This method gets the {@link CollectionFactoryManager} instance used by this
+   * util.
    * 
-   * @param collectionInterface is the interface of a specific collection.
-   * @return the implementation to used for the given
-   *         <code>collectionInterface</code>.
+   * @return the {@link CollectionFactoryManager} instance.
    */
-  @SuppressWarnings("unchecked")
-  protected Class<? extends Collection> getCollectionImplementation(
-      Class<? extends Collection> collectionInterface) {
+  public CollectionFactoryManager getCollectionFactoryManager() {
 
-    return this.collectionImplementations.get(collectionInterface);
+    return this.collectionFactoryManager;
+  }
+
+  /**
+   * This method sets the {@link CollectionFactoryManager} instance to use.
+   * 
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager}
+   *        instance.
+   */
+  @Resource
+  public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
+
+    if (this.collectionFactoryManager != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.collectionFactoryManager = collectionFactoryManager;
   }
 
   /**
@@ -105,29 +109,24 @@ public class CollectionUtil {
    * @param type is the type of collection to create. This is either an
    *        interface ({@link List}, {@link Set}, {@link Queue}, etc.) or a
    *        non-abstract implementation of a {@link Collection}.
-   * @return the new instance
-   * @throws InstantiationException if the given <code>type</code> is a class
-   *         that can NOT be instantiated via {@link Class#newInstance()}.
-   * @throws IllegalAccessException if you do NOT have access to create an
-   *         instance of <code>type</code>.
+   * @return the new instance of the given <code>type</code>.
    */
   @SuppressWarnings("unchecked")
-  public <C extends Collection> C create(Class<C> type) throws InstantiationException,
-      IllegalAccessException {
+  public <C extends Collection> C create(Class<C> type) {
 
-    Class<C> implementation;
     if (type.isInterface()) {
-      implementation = (Class<C>) getCollectionImplementation(type);
-      if (implementation == null) {
-        throw new IllegalArgumentException("Unknown collection interface: " + type);
+      CollectionFactory<C> factory = getCollectionFactoryManager().getFactory(type);
+      if (factory == null) {
+        throw new NlsIllegalArgumentException(
+            NlsBundleUtilReflect.ERR_UNKNOWN_COLLECTION_INTERFACE, type);
       }
-    } else {
-      implementation = type;
-      if (Modifier.isAbstract(implementation.getModifiers())) {
-        throw new IllegalArgumentException("Can NOT instantiate abstract class: " + type);
-      }
+      return factory.createGeneric();
     }
-    return implementation.newInstance();
+    try {
+      return type.newInstance();
+    } catch (Exception e) {
+      throw new InstantiationFailedException(e, type);
+    }
   }
 
   /**
@@ -184,9 +183,10 @@ public class CollectionUtil {
 
   /**
    * This method sets the given <code>item</code> at the given
-   * <code>index</code> in <code>arrayOrCollection</code>.
+   * <code>index</code> in <code>arrayOrCollection</code>. It uses a
+   * <code>maximumGrowth</code> of {@link #DEFAULT_MAXIMUM_LIST_GROWTH}.
    * 
-   * @see List#set(int, Object)
+   * @see #set(Object, int, Object, int)
    * 
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position where to set the item.
@@ -197,13 +197,62 @@ public class CollectionUtil {
   @SuppressWarnings("unchecked")
   public void set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
 
+    set(arrayOrList, index, item, DEFAULT_MAXIMUM_LIST_GROWTH);
+  }
+
+  /**
+   * This method sets the given <code>item</code> at the given
+   * <code>index</code> in <code>arrayOrCollection</code>. If a
+   * {@link List} is given that has a {@link List#size() size} less or equal to
+   * the given <code>index</code>, the {@link List#size() size} of the
+   * {@link List} will be increased to <code>index + 1</code> by
+   * {@link List#add(Object) adding} <code>null</code> values so the
+   * <code>item</code> can be set. However the number of
+   * {@link List#add(Object) adds} is limited to <code>maximumGrowth</code>.
+   * 
+   * @see List#set(int, Object)
+   * 
+   * @param arrayOrList is the array or {@link List}.
+   * @param index is the position where to set the item.
+   * @param item is the item to set.
+   * @param maximumGrowth is the maximum number by which the
+   *        {@link List#size() size} of a {@link List} will be increased to
+   *        reach <code>index + 1</code> so the <code>item</code> can be
+   *        set. Set this value to <code>0</code> to turn of this feature
+   *        (leave {@link List#size() list-size} untouched). Please always
+   *        specify a real maximum (<code>&lt;=65536</code>) and do NOT use
+   *        {@link Integer#MAX_VALUE} since this might cause memory holes if
+   *        something goes wrong.
+   * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
+   *         is invalid (<code>null</code> or neither array nor {@link List}).
+   */
+  @SuppressWarnings("unchecked")
+  public void set(Object arrayOrList, int index, Object item, int maximumGrowth)
+      throws NlsIllegalArgumentException {
+
     if (arrayOrList != null) {
       Class<?> type = arrayOrList.getClass();
       if (type.isArray()) {
         Array.set(arrayOrList, index, item);
         return;
       } else if (List.class.isAssignableFrom(type)) {
-        ((List) arrayOrList).set(index, item);
+        List list = (List) arrayOrList;
+        int growth = index - list.size() + 1;
+        if (growth > 0) {
+          if (growth > maximumGrowth) {
+            throw new NlsIllegalArgumentException("Can not increase size of list by " + growth
+                + ", because limit is" + maximumGrowth);
+          } else {
+            growth--;
+            while (growth > 0) {
+              list.add(null);
+              growth--;
+            }
+            list.add(item);
+          }
+        } else {
+          list.set(index, item);
+        }
         return;
       }
     }

@@ -21,4 +21,10 @@ public class NlsBundleUtilReflect extends AbstractResourceBundle {
   /** @see AnnotationUtil#getMethodAnnotation(java.lang.reflect.Method, Class) */
   public static final String ERR_ANNOTATION_NOT_FOR_TARGET = "The given annotation \"{0}\" can NOT annotate the target \"{1}\"!";
 
+  /** @see CollectionUtil#create(Class) */
+  public static final String ERR_UNKNOWN_COLLECTION_INTERFACE = "Unknown collection interface \"{0}\"!";
+
+  /** @see InstantiationFailedException */
+  public static final String ERR_INSTANTIATION_FAILED = "Failed to create an instance of \"{0}\"!";
+
 }
