@@ -4,7 +4,7 @@
 package net.sf.mmm.util.event;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * This is the abstract base implementation of the
@@ -22,7 +22,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
     EventSource<E, L> {
 
   /** the registered listeners */
-  private final List<L> listeners;
+  private final Collection<L> listeners;
 
   /**
    * The constructor.
@@ -38,7 +38,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    * 
    * @param listenerList is the list used to store the listeners.
    */
-  protected AbstractEventSource(List<L> listenerList) {
+  protected AbstractEventSource(Collection<L> listenerList) {
 
     super();
     this.listeners = listenerList;
@@ -55,9 +55,9 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   /**
    * {@inheritDoc}
    */
-  public void removeListener(L listener) {
+  public boolean removeListener(L listener) {
 
-    this.listeners.remove(listener);
+    return this.listeners.remove(listener);
   }
 
   /**

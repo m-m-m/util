@@ -13,7 +13,7 @@ import net.sf.mmm.util.concurrent.SimpleExecutor;
 
 /**
  * This class extends {@link AbstractSynchronizedEventSource} with the ability
- * to send events asynchronous in separate threads.
+ * to send events asynchronous in separate {@link Thread}s.
  * 
  * @param <E> is the templated type of the events to send.
  * @param <L> is the templated type of the listeners that can be
@@ -26,7 +26,7 @@ import net.sf.mmm.util.concurrent.SimpleExecutor;
 public class AbstractMultiThreadedEventSource<E extends Event, L extends EventListener<E>> extends
     AbstractSynchronizedEventSource<E, L> {
 
-  /** the thread-pool */
+  /** @see #getExecutor() */
   private Executor executor;
 
   /**

@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -90,9 +91,55 @@ public class CollectionUtilTest {
     assertEquals(two, list.get(1));
     assertEquals(three, list.get(2));
     list = new ArrayList<String>();
-    util.set(list, 127, one, 128);
-    assertEquals(128, list.size());
+    int maxGrowth = 128;
+    util.set(list, maxGrowth - 1, one, maxGrowth);
+    assertEquals(maxGrowth, list.size());
+    assertEquals(one, list.get(maxGrowth - 1));
+    assertEquals(null, list.get(0));
+    list = new ArrayList<String>();
+    try {
+      util.set(list, maxGrowth, one, maxGrowth);
+      fail("Exception expected!");
+    } catch (Exception e) {
+    }
+  }
 
+  @Test
+  public void testGetSize() {
+
+    CollectionUtil util = getCollectionUtil();
+    int size = 42;
+    Integer[] array = new Integer[size];
+    assertEquals(array.length, util.getSize(array));
+    List<ClassLoader> list = new ArrayList<ClassLoader>();
+    for (int i = 0; i < size; i++) {
+      list.add(ClassLoader.getSystemClassLoader());
+    }
+    assertEquals(list.size(), util.getSize(list));
+  }
+
+  @Test
+  public void testGet() {
+
+    CollectionUtil util = getCollectionUtil();
+
+    // test array...
+    String one = "The first one!";
+    String two = "Second...";
+    String three = "Third and last.";
+    String[] array = new String[] { one, two, three };
+    for (int i = 0; i < array.length; i++) {
+      assertEquals(array[i], util.get(array, i));
+    }
+
+    // test list...
+    List<String> list = new ArrayList<String>();
+    for (int i = 0; i < array.length; i++) {
+      list.add(array[i]);
+      assertEquals(list.get(i), util.get(list, i));
+    }
+    // verify test-case ;)
+    assertEquals(array.length, list.size());
   }
 
 }

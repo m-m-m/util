@@ -31,7 +31,7 @@ public class CollectionUtil {
    * The default value for the maximum growth of the {@link List#size() size} of
    * a {@link List}: {@value}
    */
-  private static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
+  protected static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
 
   /** @see #getInstance() */
   public static CollectionUtil instance;

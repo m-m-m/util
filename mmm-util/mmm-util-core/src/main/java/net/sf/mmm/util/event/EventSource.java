@@ -18,8 +18,7 @@ package net.sf.mmm.util.event;
 public interface EventSource<E extends Event, L extends EventListener<E>> {
 
   /**
-   * This method registers a listener that is interested in events about changes
-   * of the content model.
+   * This method registers a listener that is interested in {@link Event}s.
    * 
    * @param listener is the listener to add.
    */
@@ -30,7 +29,11 @@ public interface EventSource<E extends Event, L extends EventListener<E>> {
    * this method does not do any change.
    * 
    * @param listener is the listener to remove.
+   * @return <code>true</code> if the given <code>listener</code> has
+   *         successfully been removed, <code>false</code> if the
+   *         <code>listener</code> was NOT
+   *         {@link #addListener(EventListener) registered}.
    */
-  void removeListener(L listener);
+  boolean removeListener(L listener);
 
 }

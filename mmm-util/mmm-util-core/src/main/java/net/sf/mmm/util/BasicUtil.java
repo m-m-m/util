@@ -120,6 +120,9 @@ public class BasicUtil {
     if (o1 == o2) {
       return true;
     } else if (o1 != null) {
+      if (o2 == null) {
+        return false;
+      }
       Class<?> class1 = o1.getClass();
       if (class1.isArray()) {
         if (o1 instanceof Object[]) {
@@ -138,7 +141,7 @@ public class BasicUtil {
         } else {
           // primitive array
           Class<?> class2 = o2.getClass();
-          if ((o2 != null) && (class2.isArray()) && (class1.equals(class2))) {
+          if ((class2.isArray()) && (class1.equals(class2))) {
             int len1 = Array.getLength(o1);
             int len2 = Array.getLength(o2);
             if (len1 == len2) {

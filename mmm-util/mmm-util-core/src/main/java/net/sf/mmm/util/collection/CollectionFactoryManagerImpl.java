@@ -39,7 +39,7 @@ public class CollectionFactoryManagerImpl implements CollectionFactoryManager {
       CollectionFactory instance = (CollectionFactory) dequeFactoryClass.getField(
           "INSTANCE_LINKED_LIST").get(null);
       registerFactory(instance);
-    } catch (Exception e) {
+    } catch (Throwable e) {
       // Deque not available before java6, ignore...
     }
   }
