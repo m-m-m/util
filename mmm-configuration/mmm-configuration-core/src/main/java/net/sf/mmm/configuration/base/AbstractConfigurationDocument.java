@@ -21,7 +21,7 @@ import net.sf.mmm.configuration.base.access.ConfigurationDocumentCollector;
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
 import net.sf.mmm.term.api.TermParser;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This is the abstract base implementation of the {@link ConfigurationDocument}
@@ -408,14 +408,14 @@ public abstract class AbstractConfigurationDocument implements ConfigurationDocu
    *        added/removed/updated).
    * @param type is the type of the change.
    */
-  protected void configurationChanged(AbstractConfiguration configuration, ChangeEvent.Type type) {
+  protected void configurationChanged(AbstractConfiguration configuration, ChangeEventType type) {
 
     this.modifiedFlag = true;
     if (this.parentDoc == null) {
       if (this.listeners.size() > 0) {
         synchronized (this.listeners) {
           AbstractConfiguration topCause = configuration;
-          if (type != ChangeEvent.Type.UPDATE) {
+          if (type != ChangeEventType.UPDATE) {
             topCause = configuration.getParent();
           }
           ConfigurationChangeEvent event = new ConfigurationChangeEvent(configuration, type,

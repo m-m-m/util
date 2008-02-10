@@ -8,7 +8,7 @@ import javax.swing.AbstractListModel;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.util.event.ChangeEvent.Type;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
@@ -59,12 +59,12 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
    */
   public void listModelChanged(UIListModelEvent event) {
 
-    if (event.getType() == Type.ADD) {
+    if (event.getType() == ChangeEventType.ADD) {
       fireIntervalAdded(this, event.getStartIndex(), event.getEndIndex());
-    } else if (event.getType() == Type.REMOVE) {
+    } else if (event.getType() == ChangeEventType.REMOVE) {
       fireIntervalRemoved(this, event.getStartIndex(), event.getEndIndex());
       System.out.println(event.getStartIndex() + "-" + event.getEndIndex());
-    } else if (event.getType() == Type.UPDATE) {
+    } else if (event.getType() == ChangeEventType.UPDATE) {
       fireContentsChanged(this, event.getStartIndex(), event.getEndIndex());
     }
   }

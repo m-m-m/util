@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.configuration.base.iterator.EmptyConfigurationIterator;
-import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.base.EmptyValue;
 
@@ -124,6 +123,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
     return Collections.emptyList();
@@ -233,6 +233,7 @@ public class EmptyConfiguration extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void disable() throws ConfigurationException {
 
   }
@@ -247,8 +248,9 @@ public class EmptyConfiguration extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
-  public void removeListener(ConfigurationChangeListener listener) {
+  public boolean removeListener(ConfigurationChangeListener listener) {
 
+    return false;
   }
 
   /**

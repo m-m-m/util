@@ -13,8 +13,8 @@ import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
-import net.sf.mmm.util.event.ChangeEvent.Type;
 import net.sf.mmm.util.event.EventListener;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This is an implementation of the
@@ -113,13 +113,13 @@ public class ContentClassFieldTableModel extends AbstractUITableModel<Object> im
           switch (event.getType()) {
             case ADD:
               this.fields.add(changedField);
-              fireRowChangeEvent(Type.ADD, this.fields.size());
+              fireRowChangeEvent(ChangeEventType.ADD, this.fields.size());
               break;
             case REMOVE:
             case UPDATE:
               int rowIndex = this.fields.indexOf(changedField);
               if (rowIndex >= 0) {
-                fireRowChangeEvent(Type.UPDATE, rowIndex);
+                fireRowChangeEvent(ChangeEventType.UPDATE, rowIndex);
               }
               break;
             default :

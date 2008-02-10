@@ -5,6 +5,7 @@ package net.sf.mmm.configuration.api.event;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This class represents an {@link net.sf.mmm.util.event.Event event} that
@@ -18,7 +19,7 @@ import net.sf.mmm.util.event.ChangeEvent;
 public class ConfigurationChangeEvent implements ChangeEvent {
 
   /** @see #getType() */
-  private final Type type;
+  private final ChangeEventType type;
 
   /** @see #getCause() */
   private final Configuration cause;
@@ -35,28 +36,28 @@ public class ConfigurationChangeEvent implements ChangeEvent {
    * @param topConfiguration is the {@link #getTopCause() top-cause} of this
    *        event.
    */
-  public ConfigurationChangeEvent(Configuration changedConfiguration, Type changeType,
+  public ConfigurationChangeEvent(Configuration changedConfiguration, ChangeEventType changeType,
       Configuration topConfiguration) {
 
     super();
     this.type = changeType;
     this.cause = changedConfiguration;
     this.topCause = topConfiguration;
-    assert (this.type == Type.UPDATE) ? (this.cause == this.topCause) : (this.cause
+    assert (this.type == ChangeEventType.UPDATE) ? (this.cause == this.topCause) : (this.cause
         .getAncestorDistance(this.topCause) == 1);
   }
 
   /**
-   * This method gets the type of this event. An {@link Type#UPDATE update}
+   * This method gets the type of this event. An {@link ChangeEventType#UPDATE update}
    * means that the {@link Configuration#getValue() value} of the
    * {@link #getCause() changed configuration} has been modified.<br>
-   * An {@link Type#ADD add} or {@link Type#REMOVE remove} means that the
+   * An {@link ChangeEventType#ADD add} or {@link ChangeEventType#REMOVE remove} means that the
    * {@link #getCause() changed configuration} has been added or removed from
    * the {@link #getTopCause()}.
    * 
    * @see net.sf.mmm.util.event.ChangeEvent#getType()
    */
-  public Type getType() {
+  public ChangeEventType getType() {
 
     return this.type;
   }
@@ -75,10 +76,10 @@ public class ConfigurationChangeEvent implements ChangeEvent {
   /**
    * This method gets the top-level configuration affected by the change. This
    * will be the parent configuration where the
-   * {@link #getCause() changed configuration} has been {@link Type#ADD added}
-   * or {@link Type#REMOVE removed} or the
+   * {@link #getCause() changed configuration} has been {@link ChangeEventType#ADD added}
+   * or {@link ChangeEventType#REMOVE removed} or the
    * {@link #getCause() changed configuration} itself in case of an
-   * {@link Type#UPDATE update}.
+   * {@link ChangeEventType#UPDATE update}.
    * 
    * @return the top-level configuration affected by the change.
    */

@@ -4,6 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.event;
 
 import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This is the abstract base class of all events sent from models of the UI.
@@ -13,14 +14,14 @@ import net.sf.mmm.util.event.ChangeEvent;
 public abstract class UIModelEvent implements ChangeEvent {
 
   /** the event type */
-  private Type type;
+  private ChangeEventType type;
 
   /**
    * The constructor.
    * 
    * @param eventType is the type for the new event.
    */
-  protected UIModelEvent(Type eventType) {
+  protected UIModelEvent(ChangeEventType eventType) {
 
     super();
     this.type = eventType;
@@ -29,7 +30,7 @@ public abstract class UIModelEvent implements ChangeEvent {
   /**
    * {@inheritDoc}
    */
-  public Type getType() {
+  public ChangeEventType getType() {
 
     return this.type;
   }

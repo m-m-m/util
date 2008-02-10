@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
-import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.value.api.MutableGenericValue;
 
 /**
@@ -109,6 +108,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public AbstractConfiguration getDescendant(String path, String namespaceUri) {
 
     return getDelegate().getDescendant(path, namespaceUri);
@@ -117,6 +117,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<AbstractConfiguration> getDescendants(String path, String namespaceUri) {
 
     return getDelegate().getDescendants(path, namespaceUri);
@@ -208,6 +209,7 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void disable() throws ConfigurationException {
 
     getDelegate().disable();
@@ -224,9 +226,9 @@ public abstract class ConfigurationProxy extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
-  public void removeListener(ConfigurationChangeListener listener) {
+  public boolean removeListener(ConfigurationChangeListener listener) {
 
-    getDelegate().removeListener(listener);
+    return getDelegate().removeListener(listener);
   }
 
 }

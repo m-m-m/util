@@ -4,6 +4,7 @@
 package net.sf.mmm.content.model.api;
 
 import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This class represents an event that is sent to notify about changes of the
@@ -15,7 +16,7 @@ import net.sf.mmm.util.event.ChangeEvent;
 public final class ContentModelEvent implements ChangeEvent {
 
   /** the type of the event */
-  private final Type type;
+  private final ChangeEventType type;
 
   /** the data class this event is about */
   private final ContentClass contentClass;
@@ -30,7 +31,7 @@ public final class ContentModelEvent implements ChangeEvent {
    * @param changedClass is the class that has been added, removed, or updated.
    * @param changeType is the type of event.
    */
-  public ContentModelEvent(ContentClass changedClass, Type changeType) {
+  public ContentModelEvent(ContentClass changedClass, ChangeEventType changeType) {
 
     super();
     this.type = changeType;
@@ -46,7 +47,7 @@ public final class ContentModelEvent implements ChangeEvent {
    * @param changeType is the type of event (add/remove/update). Use only the
    *        static constant fields (TYPE_*)!
    */
-  public ContentModelEvent(ContentField changedField, Type changeType) {
+  public ContentModelEvent(ContentField changedField, ChangeEventType changeType) {
 
     super();
     this.type = changeType;
@@ -80,7 +81,7 @@ public final class ContentModelEvent implements ChangeEvent {
   /**
    * {@inheritDoc}
    */
-  public Type getType() {
+  public ChangeEventType getType() {
 
     return this.type;
   }

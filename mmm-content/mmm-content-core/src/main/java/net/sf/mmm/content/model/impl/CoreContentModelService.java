@@ -17,7 +17,7 @@ import net.sf.mmm.content.model.base.ContentClassLoaderStAX;
 import net.sf.mmm.content.model.base.ContentClassLoader;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.impl.StaticSmartIdManager;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This is an abstract base implementation of the
@@ -133,7 +133,7 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
   public void reaload() throws IOException, ContentException {
 
     loadClasses();
-    fireEvent(new ContentModelEvent(getRootContentClass(), ChangeEvent.Type.UPDATE));
+    fireEvent(new ContentModelEvent(getRootContentClass(), ChangeEventType.UPDATE));
   }
 
   /**

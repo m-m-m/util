@@ -28,7 +28,7 @@ import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.MutableMetaData;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 import net.sf.mmm.util.reflect.ClassResolver;
 import net.sf.mmm.util.reflect.MappedClassResolver;
 
@@ -235,9 +235,9 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     AbstractContentReflectionObject reflectionObject = (AbstractContentReflectionObject) classOrField;
     reflectionObject.setDeletedFlag(newDeletedFlag);
     if (classOrField.isClass()) {
-      fireEvent(new ContentModelEvent((ContentClass) classOrField, ChangeEvent.Type.UPDATE));
+      fireEvent(new ContentModelEvent((ContentClass) classOrField, ChangeEventType.UPDATE));
     } else {
-      fireEvent(new ContentModelEvent((ContentField) classOrField, ChangeEvent.Type.UPDATE));
+      fireEvent(new ContentModelEvent((ContentField) classOrField, ChangeEventType.UPDATE));
     }
   }
 

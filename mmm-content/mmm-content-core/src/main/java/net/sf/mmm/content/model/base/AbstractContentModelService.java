@@ -24,12 +24,11 @@ import net.sf.mmm.content.model.api.ContentModelFeatureUnsupportedException;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.access.ContentClassReadAccessByJavaClass;
-import net.sf.mmm.content.model.base.DuplicateClassException;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 import net.sf.mmm.util.event.EventListener;
 import net.sf.mmm.util.event.EventSource;
 
@@ -337,7 +336,7 @@ public abstract class AbstractContentModelService extends AbstractContentObjectM
       // TODO: verification
       superClass.addSubClass(contentClass);
       addClass(contentClass);
-      fireEvent(new ContentModelEvent(contentClass, ChangeEvent.Type.ADD));
+      fireEvent(new ContentModelEvent(contentClass, ChangeEventType.ADD));
     } else {
       ClassModifiers existingModifiers = existingClass.getModifiers();
       boolean modified = false;
@@ -367,7 +366,7 @@ public abstract class AbstractContentModelService extends AbstractContentObjectM
         syncClassRecursive(subClass, contentClass);
       }
       if (modified) {
-        fireEvent(new ContentModelEvent(contentClass, ChangeEvent.Type.UPDATE));
+        fireEvent(new ContentModelEvent(contentClass, ChangeEventType.UPDATE));
       }
     }
 

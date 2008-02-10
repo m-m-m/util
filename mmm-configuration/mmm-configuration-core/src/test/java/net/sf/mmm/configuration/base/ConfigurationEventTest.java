@@ -18,7 +18,7 @@ import net.sf.mmm.configuration.base.access.ConfigurationFactory;
 import net.sf.mmm.configuration.impl.access.resource.ResourceAccess;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlConfigurationFormatTest;
 import net.sf.mmm.configuration.impl.format.xml.dom.XmlFactory;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 import junit.framework.TestCase;
 
@@ -48,12 +48,12 @@ public class ConfigurationEventTest extends TestCase {
     assertEquals(2, listener.eventQueue.size());
     // check first event
     ConfigurationChangeEvent event = listener.eventQueue.get(0);
-    assertEquals(ChangeEvent.Type.ADD, event.getType());
+    assertEquals(ChangeEventType.ADD, event.getType());
     assertEquals(config.getName(), event.getTopCause().getName());
     assertEquals("foo", event.getCause().getName());
     // check second event
     event = listener.eventQueue.get(1);
-    assertEquals(ChangeEvent.Type.ADD, event.getType());
+    assertEquals(ChangeEventType.ADD, event.getType());
     assertEquals("foo", event.getTopCause().getName());
     assertEquals("@bar", event.getCause().getName());
     listener.eventQueue.clear();
@@ -61,7 +61,7 @@ public class ConfigurationEventTest extends TestCase {
     barAttr.getValue().setString("hello");
     assertEquals(1, listener.eventQueue.size());
     event = listener.eventQueue.get(0);
-    assertEquals(ChangeEvent.Type.UPDATE, event.getType());
+    assertEquals(ChangeEventType.UPDATE, event.getType());
     assertSame(barAttr, event.getTopCause());
     assertEquals(barAttr, event.getCause());
     listener.eventQueue.clear();
@@ -69,7 +69,7 @@ public class ConfigurationEventTest extends TestCase {
     barAttr.remove();
     assertEquals(1, listener.eventQueue.size());
     event = listener.eventQueue.get(0);
-    assertEquals(ChangeEvent.Type.REMOVE, event.getType());
+    assertEquals(ChangeEventType.REMOVE, event.getType());
     assertEquals("foo", event.getTopCause().getName());
     assertEquals(barAttr, event.getCause());
     listener.eventQueue.clear();

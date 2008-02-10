@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTreeAccess;
-import net.sf.mmm.util.event.ChangeEvent.Type;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to
@@ -199,7 +199,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
       this.model.addListener(this);
     } else {
       N node = this.event.getTreeNode();
-      if (this.event.getType() == Type.ADD) {
+      if (this.event.getType() == ChangeEventType.ADD) {
         if (!this.node2itemMap.containsKey(node)) {
           N parentNode = this.model.getParent(node);
           TreeItem parentItem = this.node2itemMap.get(parentNode);
@@ -210,13 +210,13 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
             }
           }
         }
-      } else if (this.event.getType() == Type.REMOVE) {
+      } else if (this.event.getType() == ChangeEventType.REMOVE) {
         TreeItem item = this.node2itemMap.remove(node);
         if (item != null) {
           item.dispose();
           removeNodes(node);
         }
-      } else if (this.event.getType() == Type.UPDATE) {
+      } else if (this.event.getType() == ChangeEventType.UPDATE) {
         TreeItem item = this.node2itemMap.get(node);
         if (item != null) {
           item.setText(this.model.toString(node));

@@ -5,7 +5,7 @@ package net.sf.mmm.configuration.base;
 
 import net.sf.mmm.configuration.api.event.ConfigurationChangeListener;
 import net.sf.mmm.term.api.Term;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 import net.sf.mmm.util.value.ValueException;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.base.AbstractStringValue;
@@ -52,6 +52,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
    * @return the parent configuration or <code>null</code> if this is the root
    *         configuration.
    */
+  @Override
   public AbstractConfiguration getParent() {
 
     return this.parent;
@@ -179,12 +180,13 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   /**
    * {@inheritDoc}
    */
-  public void removeListener(ConfigurationChangeListener listener) {
+  public boolean removeListener(ConfigurationChangeListener listener) {
 
     AbstractConfigurationDocument ownerDoc = getOwnerDocument();
     if (ownerDoc != null) {
-      ownerDoc.removeListener(this, listener);
+      return ownerDoc.removeListener(this, listener);
     }
+    return false;
   }
 
   /**
@@ -194,7 +196,7 @@ public abstract class AbstractConfigurationNode extends AbstractConfiguration {
   protected void fireUpdate() {
 
     if (getOwnerDocument() != null) {
-      getOwnerDocument().configurationChanged(this, ChangeEvent.Type.UPDATE);
+      getOwnerDocument().configurationChanged(this, ChangeEventType.UPDATE);
     }
   }
 

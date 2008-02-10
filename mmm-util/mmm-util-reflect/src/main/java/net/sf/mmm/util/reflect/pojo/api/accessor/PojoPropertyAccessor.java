@@ -97,7 +97,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   /**
    * This method gets the {@link #getPropertyType() type} as raw class. It is a
    * convenience method for
-   * <code>{@link ReflectionUtil#INSTANCE}.{@link ReflectionUtil#toClass(Type) toClass}(accessor.{@link #getPropertyType()})</code>
+   * <code>{@link ReflectionUtil#getInstance()}.{@link ReflectionUtil#toClass(Type) toClass}(accessor.{@link #getPropertyType()})</code>
    * 
    * @return the raw type.
    */

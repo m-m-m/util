@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationDocument;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationNotEditableException;
 import net.sf.mmm.configuration.api.MutableConfiguration;
 import net.sf.mmm.configuration.base.iterator.ChildPatternIterator;
 import net.sf.mmm.configuration.base.iterator.ChildTypeIterator;
-import net.sf.mmm.util.event.ChangeEvent;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This is the abstract base implementation of the
@@ -210,7 +210,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
     }
     AbstractConfigurationDocument ownerDoc = getOwnerDocument();
     if (ownerDoc != null) {
-      ownerDoc.configurationChanged(child, ChangeEvent.Type.ADD);
+      ownerDoc.configurationChanged(child, ChangeEventType.ADD);
     }
   }
 
@@ -251,7 +251,7 @@ public abstract class AbstractConfigurationElement extends AbstractConfiguration
     if (modified) {
       AbstractConfigurationDocument ownerDoc = getOwnerDocument();
       if (ownerDoc != null) {
-        ownerDoc.configurationChanged(child, ChangeEvent.Type.REMOVE);
+        ownerDoc.configurationChanged(child, ChangeEventType.REMOVE);
       }
     }
     return modified;

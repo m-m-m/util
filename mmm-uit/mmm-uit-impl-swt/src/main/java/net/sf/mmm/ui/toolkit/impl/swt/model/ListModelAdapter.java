@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncListAccess;
-import net.sf.mmm.util.event.ChangeEvent.Type;
+import net.sf.mmm.util.event.ChangeEventType;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
@@ -101,15 +101,15 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
     int start = this.event.getStartIndex();
     int end = this.event.getEndIndex();
     // TODO synchonization!!!
-    if (this.event.getType() == Type.ADD) {
+    if (this.event.getType() == ChangeEventType.ADD) {
       for (int i = start; i <= end; i++) {
         // TODO maybe define method that performs the string conversion
         list.add(this.model.getElementAsString(i), i);
       }
-    } else if (this.event.getType() == Type.REMOVE) {
+    } else if (this.event.getType() == ChangeEventType.REMOVE) {
       // for (int i = start; i <= end; i++) { list.remove(i); }
       list.remove(start, end);
-    } else if (this.event.getType() == Type.UPDATE) {
+    } else if (this.event.getType() == ChangeEventType.UPDATE) {
       for (int i = start; i <= end; i++) {
         // TODO maybe define method that performs the string conversion
         list.setItem(i, this.model.getElementAsString(i));

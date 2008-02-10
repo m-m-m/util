@@ -8,12 +8,97 @@ import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeName;
+import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeType;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
  * POJO. A POJO (plain old java object) in this manner is more or less any java
  * object.<br>
- * This interface is an alternative to {@link java.beans.BeanInfo}.
+ * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
+ * Look at the following example:
+ * 
+ * <pre>
+ * public interface Pojo {
+ *   Integer getFooBar();
+ *   void setFooBar(int s);
+ *   
+ *   boolean hasSomeFlag();
+ *   void setSomeFlag(Boolean flag);
+ *   
+ *   boolean isCool();
+ *   void setCool();
+ *   
+ *   List&lt;String&gt; getColors();
+ *   void addColor(String color);
+ * }
+ * </pre>
+ * 
+ * This interface does NOT completely follow the JAVA-Beans specification. The
+ * properties "fooBar" and "someFlag" do NOT have the same type for reading and
+ * writing. Therefore {@link java.beans} or
+ * <code>org.apache.commons.beanutils</code> can NOT be used to read and write
+ * these properties. Using this utility the properties can be accessed as
+ * described in the following table:<br>
+ * <br>
+ * <table border="1">
+ * <tr>
+ * <th>{@link PojoAttributeName#getName() Name}</th>
+ * <th>{@link PojoPropertyAccessorMode Mode}</th>
+ * <th>{@link PojoAttributeType#getPojoType() Property-Type}</th>
+ * <th>{@link PojoPropertyAccessor#getAccessibleObject() Method}</th>
+ * <th>Component-Type</th>
+ * </tr>
+ * <tr>
+ * <td>fooBar</td>
+ * <td>get</td>
+ * <td>Integer</td>
+ * <td>getFooBar()</td>
+ * <td>-</td>
+ * </tr>
+ * <tr>
+ * <td>fooBar</td>
+ * <td>set</td>
+ * <td>int</td>
+ * <td>setFooBar(int)</td>
+ * <td>-</td>
+ * </tr>
+ * <tr>
+ * <td>someFlag</td>
+ * <td>get</td>
+ * <td>boolean</td>
+ * <td>hasSomeFlag()</td>
+ * <td>-</td>
+ * </tr>
+ * <tr>
+ * <td>someFlag</td>
+ * <td>set</td>
+ * <td>Boolean</td>
+ * <td>setSomeFlag(Boolean)</td>
+ * <td>-</td>
+ * </tr>
+ * <tr>
+ * <td>cool</td>
+ * <td>get</td>
+ * <td>boolean</td>
+ * <td>isCool()</td>
+ * <td>-</td>
+ * </tr>
+ * <tr>
+ * <td>colors</td>
+ * <td>get</td>
+ * <td>List&lt;String&gt;</td>
+ * <td>getColors()</td>
+ * <td>String</td>
+ * </tr>
+ * <tr>
+ * <td>color</td>
+ * <td>add</td>
+ * <td>String</td>
+ * <td>addColor(String)</td>
+ * <td>-</td>
+ * </tr>
+ * </table>
  * 
  * @param
  * <P>
@@ -23,15 +108,7 @@ import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoDescriptor<P> {
-
-  /**
-   * This method gets the type reflecting the POJO represented by this
-   * descriptor.
-   * 
-   * @return the type of the according POJO.
-   */
-  Class<P> getPojoType();
+public interface PojoDescriptor<P> extends PojoAttributeType<P> {
 
   /**
    * This method gets the {@link PojoPropertyDescriptor descriptor} for the
@@ -87,8 +164,8 @@ public interface PojoDescriptor<P> {
    *         Depending on the POJO, the value may be <code>null</code>.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no
-   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
@@ -115,8 +192,8 @@ public interface PojoDescriptor<P> {
    *         return type is <code>void</code> what should be the regular case.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no
-   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#SET setter}.
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
@@ -139,8 +216,8 @@ public interface PojoDescriptor<P> {
    * @return the size of the requested property.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no
-   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
@@ -167,8 +244,8 @@ public interface PojoDescriptor<P> {
    *         return type is <code>void</code> what should be the regular case.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#ADD addable}.
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
@@ -196,8 +273,8 @@ public interface PojoDescriptor<P> {
    *         return type is <code>void</code> what should be the regular case.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#ADD addable}.
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
@@ -227,8 +304,8 @@ public interface PojoDescriptor<P> {
    *         return type is <code>void</code> what should be the regular case.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or is NOT
-   *         {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#ADD addable}.
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
    * @throws IllegalAccessException if you do NOT have permissions to access the
    *         underlying
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
