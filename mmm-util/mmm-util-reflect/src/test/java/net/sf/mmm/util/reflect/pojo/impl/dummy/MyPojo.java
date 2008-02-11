@@ -24,6 +24,8 @@ public class MyPojo extends AbstractPojo {
 
   private String privateString;
 
+  private String privateProperty;
+
   public MyPojo() {
 
     super();
@@ -80,6 +82,16 @@ public class MyPojo extends AbstractPojo {
   public String getPrivateString() {
 
     return new String(this.privateString);
+  }
+
+  private String getPrivateProperty() {
+
+    return this.privateProperty;
+  }
+
+  private void setPrivateProperty(String privateProperty) {
+
+    this.privateProperty = privateProperty;
   }
 
   /**

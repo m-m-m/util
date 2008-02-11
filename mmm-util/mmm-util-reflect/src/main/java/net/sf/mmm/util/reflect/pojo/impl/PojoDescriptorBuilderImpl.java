@@ -17,6 +17,9 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.component.InitializationState;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
@@ -54,12 +57,26 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /** @see PojoDescriptorBuilderImpl */
   private Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders;
 
+  /** @see #getLogger() */
+  private Log logger;
+
   /**
    * The constructor.
    */
   public PojoDescriptorBuilderImpl() {
 
     super();
+    this.initializationState = new InitializationState();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param mapFactory is the factory used to create the descriptor cache.
+   */
+  public PojoDescriptorBuilderImpl(MapFactory mapFactory) {
+
+    super(mapFactory);
     this.initializationState = new InitializationState();
   }
 
@@ -72,14 +89,21 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * The constructor.
-   * 
-   * @param mapFactory is the factory used to create the descriptor cache.
+   * @return the logger
    */
-  public PojoDescriptorBuilderImpl(MapFactory mapFactory) {
+  protected Log getLogger() {
 
-    super(mapFactory);
-    this.initializationState = new InitializationState();
+    return this.logger;
+  }
+
+  /**
+   * @param logger the logger to set
+   */
+  @Resource
+  public void setLogger(Log logger) {
+
+    this.initializationState.requireNotInitilized();
+    this.logger = logger;
   }
 
   /**
@@ -185,6 +209,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         this.accessorBuilders.add(new PojoPropertyAccessorAddBuilder());
         // TODO: add, size/count, remove, indexed-get, indexed-set
       }
+      if (this.logger == null) {
+        this.logger = LogFactory.getLog(getClass());
+      }
     }
   }
 
@@ -267,9 +294,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    */
   protected void logDuplicateAccessor(PojoPropertyAccessor accessor, PojoPropertyAccessor duplicate) {
 
-  // TODO: log-statement
-  // System.out.println("Already having " + accessor + " - ignoring duplicate "
-  // + duplicate);
+    if (accessor.getDeclaringClass().isAssignableFrom(duplicate.getDeclaringClass())) {
+      this.logger.warn("duplicate accessor '" + duplicate + "' - already have '" + accessor + "'!");
+    }
   }
 
 }

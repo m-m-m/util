@@ -101,7 +101,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
           }
         }
       }
-      if (this.currentClass != null) {
+      if ((next == null) && (this.currentClass != null)) {
         this.currentClass = this.currentClass.getSuperclass();
         if (this.currentClass != null) {
           this.methods = this.currentClass.getDeclaredMethods();

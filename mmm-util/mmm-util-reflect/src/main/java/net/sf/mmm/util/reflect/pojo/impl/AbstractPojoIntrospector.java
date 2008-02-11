@@ -60,7 +60,7 @@ public abstract class AbstractPojoIntrospector {
 
   /**
    * This method gets the {@link VisibilityModifier#getOrder() lowest}
-   * {@link VisibilityModifier visibility} to be considered when ) searching for
+   * {@link VisibilityModifier visibility} to be considered when searching for
    * methods or fields.
    * 
    * @return the visibility
