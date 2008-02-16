@@ -11,6 +11,7 @@ import java.util.SortedSet;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractSortedSetFactory implements SortedSetFactory {
 
   /**

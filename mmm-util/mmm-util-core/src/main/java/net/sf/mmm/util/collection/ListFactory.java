@@ -12,6 +12,7 @@ import java.util.List;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public interface ListFactory extends CollectionFactory<List> {
 
   /**

@@ -3,21 +3,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection;
 
-import java.util.Queue;
+import java.util.SortedMap;
 
 /**
- * This is the abstract base implementation of the {@link QueueFactory}
+ * This is the abstract base implementation of the {@link SortedMapFactory}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractQueueFactory implements QueueFactory {
+public abstract class AbstractSortedMapFactory implements SortedMapFactory {
 
   /**
    * The constructor.
    */
-  public AbstractQueueFactory() {
+  public AbstractSortedMapFactory() {
 
     super();
   }
@@ -25,15 +25,15 @@ public abstract class AbstractQueueFactory implements QueueFactory {
   /**
    * {@inheritDoc}
    */
-  public Class<Queue> getCollectionInterface() {
+  public Class<SortedMap> getMapInterface() {
 
-    return Queue.class;
+    return SortedMap.class;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Queue createGeneric() {
+  public SortedMap createGeneric() {
 
     return create();
   }
@@ -41,7 +41,7 @@ public abstract class AbstractQueueFactory implements QueueFactory {
   /**
    * {@inheritDoc}
    */
-  public Queue createGeneric(int capacity) {
+  public SortedMap createGeneric(int capacity) {
 
     return create(capacity);
   }

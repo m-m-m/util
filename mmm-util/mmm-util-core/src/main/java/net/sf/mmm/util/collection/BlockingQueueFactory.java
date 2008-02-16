@@ -12,6 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public interface BlockingQueueFactory extends CollectionFactory<BlockingQueue> {
 
   /**

@@ -3,16 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection;
 
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
- * {@link #create() creates} instances of {@link Set}.
+ * {@link #create() creates} instances of {@link SortedSet}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public interface SortedSetFactory extends CollectionFactory<SortedSet> {
 
   /**

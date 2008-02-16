@@ -11,6 +11,7 @@ import java.util.List;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractListFactory implements ListFactory {
 
   /**

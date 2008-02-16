@@ -11,6 +11,7 @@ import java.util.concurrent.BlockingQueue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractBlockingQueueFactory implements BlockingQueueFactory {
 
   /**

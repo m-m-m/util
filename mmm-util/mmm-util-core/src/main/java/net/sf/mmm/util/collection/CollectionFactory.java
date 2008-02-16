@@ -26,9 +26,11 @@ import java.util.Collection;
  * that the {@link Collection} should be empty and/or NOT shared with others.
  * Anyways the interface can obviously NOT guarantee this.
  * 
+ * @param <COLLECTION> is the generic {@link Collection}-type.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract interface CollectionFactory<C extends Collection> {
+@SuppressWarnings("unchecked")
+public abstract interface CollectionFactory<COLLECTION extends Collection> {
 
   /**
    * This method gets the interface of the {@link Collection} managed by this
@@ -36,7 +38,7 @@ public abstract interface CollectionFactory<C extends Collection> {
    * 
    * @return the {@link Collection} interface.
    */
-  Class<C> getCollectionInterface();
+  Class<COLLECTION> getCollectionInterface();
 
   /**
    * This method gets the implementation of the
@@ -45,32 +47,35 @@ public abstract interface CollectionFactory<C extends Collection> {
    * 
    * @return the {@link Collection} implementation.
    */
-  Class<? extends C> getCollectionImplementation();
+  Class<? extends COLLECTION> getCollectionImplementation();
 
   /**
    * This method creates a new instance of the generic {@link Collection} type
-   * <code>&lt;C></code>.
+   * <code>&lt;COLLECTION&gt;</code>.
    * 
    * @return the new collection instance.
    */
-  C createGeneric();
+  COLLECTION createGeneric();
 
   /**
    * This method creates a new instance of the generic {@link Collection} type
-   * <code>&lt;C></code> with the given initial <code>capacity</code>.
+   * <code>&lt;COLLECTION&gt;</code> with the given initial
+   * <code>capacity</code>.
    * 
    * @param capacity is the initial capacity of the collection.
    * @return the new collection instance.
    */
-  C createGeneric(int capacity);
+  COLLECTION createGeneric(int capacity);
 
   /**
    * This method creates a new {@link Collection} instance.<br>
    * It is explicitly typed and respects the generic element type of the
    * collection. Therefore the type of the {@link Collection} can NOT be bound
-   * to the generic type <code>&lt;C></code> because of limitations in Java's
-   * generic type system. You need to work on the actual sub-interface (e.g.
-   * {@link ListFactory}) to get the proper result type.
+   * to the generic type <code>&lt;COLLECTION&gt;</code> because of
+   * limitations in Java's generic type system. You need to work on the actual
+   * sub-interface (e.g. {@link ListFactory}) to get the proper result type.
+   * 
+   * @see #createGeneric()
    * 
    * @param <E> the type of elements contained in the collection.
    * @return the new collection instance.
@@ -82,9 +87,11 @@ public abstract interface CollectionFactory<C extends Collection> {
    * initial <code>capacity</code>.<br>
    * It is explicitly typed and respects the generic element type of the
    * collection. Therefore the type of the {@link Collection} can NOT be bound
-   * to the generic type <code>&lt;C></code> because of limitations in Java's
-   * generic type system. You need to work on the actual sub-interface (e.g.
-   * {@link ListFactory}) to get the proper result type.
+   * to the generic type <code>&lt;COLLECTION&gt;</code> because of
+   * limitations in Java's generic type system. You need to work on the actual
+   * sub-interface (e.g. {@link ListFactory}) to get the proper result type.
+   * 
+   * @see #createGeneric(int)
    * 
    * @param <E> the type of elements contained in the collection.
    * @param capacity is the initial capacity of the collection.

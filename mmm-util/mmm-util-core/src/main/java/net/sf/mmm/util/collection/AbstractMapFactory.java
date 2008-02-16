@@ -3,21 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection;
 
-import java.util.Queue;
+import java.util.Map;
 
 /**
- * This is the abstract base implementation of the {@link QueueFactory}
- * interface.
+ * This is the abstract base implementation of the {@link MapFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractQueueFactory implements QueueFactory {
+public abstract class AbstractMapFactory implements MapFactory<Map> {
 
   /**
    * The constructor.
    */
-  public AbstractQueueFactory() {
+  public AbstractMapFactory() {
 
     super();
   }
@@ -25,15 +24,15 @@ public abstract class AbstractQueueFactory implements QueueFactory {
   /**
    * {@inheritDoc}
    */
-  public Class<Queue> getCollectionInterface() {
+  public Class<Map> getMapInterface() {
 
-    return Queue.class;
+    return Map.class;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Queue createGeneric() {
+  public Map createGeneric() {
 
     return create();
   }
@@ -41,7 +40,7 @@ public abstract class AbstractQueueFactory implements QueueFactory {
   /**
    * {@inheritDoc}
    */
-  public Queue createGeneric(int capacity) {
+  public Map createGeneric(int capacity) {
 
     return create(capacity);
   }

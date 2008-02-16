@@ -4,19 +4,31 @@
 package net.sf.mmm.util.collection;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * This is the interface for a manager of {@link CollectionFactory} instances.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public interface CollectionFactoryManager {
+
+  /**
+   * This method gets the {@link MapFactory} for the given <code>mapType</code>.
+   * 
+   * @param <MAP> is the generic type of the {@link Map}.
+   * @param mapType is the type of the {@link Map}. This should be the
+   *        interface such as {@link Map}.class or {@link java.util.SortedMap}.class.
+   * @return the {@link MapFactory} for the given <code>mapType</code>.
+   */
+  <MAP extends Map> MapFactory getMapFactory(Class<MAP> mapType);
 
   /**
    * This method gets the {@link CollectionFactory} for the given
    * <code>collectionType</code>.
    * 
-   * @param <C> is the generic type of the {@link Collection}.
+   * @param <COLLECTION> is the generic type of the {@link Collection}.
    * @param collectionType is the type of the {@link Collection}. This should
    *        be the {@link Collection} interface such as
    *        <code>{@link java.util.List}.class</code>.
@@ -26,6 +38,7 @@ public interface CollectionFactoryManager {
    *         {@link CollectionFactory#getCollectionInterface()} of the returned
    *         instance. Typically it will be equal.
    */
-  <C extends Collection> CollectionFactory<C> getFactory(Class<C> collectionType);
+  <COLLECTION extends Collection> CollectionFactory<COLLECTION> getCollectionFactory(
+      Class<COLLECTION> collectionType);
 
 }

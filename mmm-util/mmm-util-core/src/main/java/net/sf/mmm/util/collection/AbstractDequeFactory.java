@@ -11,6 +11,7 @@ import java.util.Deque;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractDequeFactory implements DequeFactory {
 
   /**

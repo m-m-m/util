@@ -12,6 +12,7 @@ import java.util.Queue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public interface QueueFactory extends CollectionFactory<Queue> {
 
   /**

@@ -31,7 +31,7 @@ public class CollectionFactoryManagerImplTest {
 
   protected <C extends Collection> void checkCollection(Class<C> collectionInterface) {
 
-    CollectionFactory<C> factory = getCollectionFactoryManager().getFactory(collectionInterface);
+    CollectionFactory<C> factory = getCollectionFactoryManager().getCollectionFactory(collectionInterface);
     assertNotNull(factory);
     assertTrue(collectionInterface.isAssignableFrom(factory.getCollectionInterface()));
     C collection = factory.createGeneric();

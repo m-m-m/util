@@ -12,6 +12,7 @@ import java.util.LinkedList;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public interface DequeFactory extends CollectionFactory<Deque> {
 
   /**

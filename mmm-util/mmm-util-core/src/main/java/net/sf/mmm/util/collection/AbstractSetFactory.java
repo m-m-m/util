@@ -10,6 +10,7 @@ import java.util.Set;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractSetFactory implements SetFactory {
 
   /**
