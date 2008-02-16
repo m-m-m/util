@@ -7,16 +7,14 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgBuilder;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgBuilder;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder}
- * interface for {@link PojoPropertyAccessorNonArgMode#GET getter-access}.
+ * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder}
+ * interface for {@link PojoPropertyAccessorOneArgMode#ADD add-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

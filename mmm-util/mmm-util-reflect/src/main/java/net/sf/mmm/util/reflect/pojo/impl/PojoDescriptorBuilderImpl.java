@@ -24,8 +24,6 @@ import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.component.InitializationState;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.VisibilityModifier;
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorBuilder;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
@@ -74,6 +72,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * 
    * @param mapFactory is the factory used to create the descriptor cache.
    */
+  @SuppressWarnings("unchecked")
   public PojoDescriptorBuilderImpl(MapFactory mapFactory) {
 
     super(mapFactory);
@@ -109,7 +108,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * This method gets the introspector used to find potential
    * {@link Method methods} for {@link PojoPropertyAccessor accessing}
-   * {@link PojoPropertyDescriptor properties} of a {@link PojoDescriptor POJO}.
+   * {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor properties}
+   * of a {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor POJO}.
    * 
    * @return the introspector to use.
    */
@@ -133,7 +133,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * This method gets the introspector used to find potential
    * {@link Field fields} for {@link PojoPropertyAccessor accessing}
-   * {@link PojoPropertyDescriptor properties} of a {@link PojoDescriptor POJO}.
+   * {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor properties}
+   * of a {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor POJO}.
    * 
    * @return the introspector to use.
    */
@@ -157,7 +158,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * This method gets the accessor-builders used to create the
    * {@link PojoPropertyAccessor accessors} for
-   * {@link PojoPropertyDescriptor properties} of a {@link PojoDescriptor POJO}.
+   * {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor properties}
+   * of a {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor POJO}.
    * 
    * @return the accessorBuilders.
    */

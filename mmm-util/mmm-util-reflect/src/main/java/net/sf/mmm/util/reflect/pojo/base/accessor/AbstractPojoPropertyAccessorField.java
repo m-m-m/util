@@ -7,10 +7,9 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
-
 /**
- * This is the abstract implementation of the {@link PojoPropertyAccessor}
+ * This is the abstract implementation of the
+ * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor}
  * interface used to access a {@link Field}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

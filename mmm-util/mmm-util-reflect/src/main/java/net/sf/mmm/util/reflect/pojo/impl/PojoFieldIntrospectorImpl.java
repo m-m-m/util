@@ -10,10 +10,10 @@ import java.util.Iterator;
 import net.sf.mmm.util.collection.AbstractIterator;
 import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.base.PojoFieldIntrospector;
-import net.sf.mmm.util.reflect.pojo.base.PojoMethodIntrospector;
 
 /**
- * This is the implementation of the {@link PojoMethodIntrospector} interface.
+ * This is the implementation of the
+ * {@link net.sf.mmm.util.reflect.pojo.base.PojoMethodIntrospector} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -72,7 +72,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
      * @param pojoClass is the class for which the property-accessors should be
      *        iterated.
      */
-    private PojoFieldIterator(Class<?> pojoClass) {
+    protected PojoFieldIterator(Class<?> pojoClass) {
 
       super();
       this.index = 0;

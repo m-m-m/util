@@ -5,8 +5,6 @@ package net.sf.mmm.util.reflect.pojo.api.accessor;
 
 import java.lang.reflect.InvocationTargetException;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
-
 /**
  * This is the interface for a {@link PojoPropertyAccessor property-accessor}
  * that allows to {@link #invoke(Object, int) perform something} (e.g. get or
@@ -19,7 +17,7 @@ public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor 
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedNonArgMode getMode();
+  PojoPropertyAccessorIndexedNonArgMode getMode();
 
   /**
    * This method invokes the according property-method of
@@ -27,8 +25,8 @@ public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor 
    * 
    * @param pojoInstance is the instance of the POJO where to access the
    *        property. Has to be an instance of the
-   *        {@link PojoDescriptor#getPojoType() type} from where this accessor
-   *        was created for.
+   *        {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor#getPojoType() type}
+   *        from where this accessor was created for.
    * @param index is the position in the indexed property (e.g. where to get or
    *        remove an item).
    * @return the result of the invocation. Will be <code>null</code> if void

@@ -3,14 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.api.accessor;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
-
 /**
  * This is the abstract base class for the mode of a specific
  * {@link PojoPropertyAccessor}.
  * 
  * @see PojoPropertyAccessor#getMode()
- * @see PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+ * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
  * 
  * @param <ACCESSOR> is the type of the accessor
  * 

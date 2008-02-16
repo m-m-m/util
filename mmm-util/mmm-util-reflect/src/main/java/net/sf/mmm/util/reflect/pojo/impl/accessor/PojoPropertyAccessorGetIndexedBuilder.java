@@ -9,14 +9,12 @@ import java.lang.reflect.Method;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgBuilder;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgBuilder;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder}
- * interface for
- * {@link PojoPropertyAccessorOneArgMode#GET_MAPPED mapped getter-access}.
+ * This is the implementation of the
+ * {@link PojoPropertyAccessorIndexedNonArgBuilder} interface for
+ * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

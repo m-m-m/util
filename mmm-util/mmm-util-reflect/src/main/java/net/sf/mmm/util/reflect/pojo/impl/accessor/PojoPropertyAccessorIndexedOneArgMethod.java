@@ -9,11 +9,10 @@ import java.lang.reflect.Type;
 
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorMethod;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorNonArg}
+ * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArg}
  * interface for accessing a {@link Method}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
@@ -16,8 +15,8 @@ import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.base.AbstractPojoDescriptor;
 
 /**
- * This is the abstract base implementation of the {@link PojoDescriptor}
- * interface.
+ * This is the abstract base implementation of the
+ * {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor} interface.
  * 
  * @param <POJO> is the templated type of the {@link #getPojoType() POJO}.
  * 

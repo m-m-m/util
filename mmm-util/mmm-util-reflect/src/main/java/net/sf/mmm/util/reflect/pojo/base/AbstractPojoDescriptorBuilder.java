@@ -34,6 +34,7 @@ public abstract class AbstractPojoDescriptorBuilder implements PojoDescriptorBui
    * @param mapFactory the factory used to create the
    *        {@link #getDescriptor(Class) descriptor-cache}.
    */
+  @SuppressWarnings("unchecked")
   public AbstractPojoDescriptorBuilder(MapFactory mapFactory) {
 
     super();
@@ -44,9 +45,9 @@ public abstract class AbstractPojoDescriptorBuilder implements PojoDescriptorBui
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public <P> PojoDescriptorImpl<P> getDescriptor(Class<P> pojoType) {
+  public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoType) {
 
-    PojoDescriptorImpl<P> descriptor = (PojoDescriptorImpl<P>) this.pojoMap.get(pojoType);
+    PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoType);
     if (descriptor == null) {
       descriptor = createDescriptor(pojoType);
       this.pojoMap.put(pojoType, descriptor);
@@ -61,13 +62,11 @@ public abstract class AbstractPojoDescriptorBuilder implements PojoDescriptorBui
    * 
    * @see net.sf.mmm.util.reflect.pojo.api.PojoDescriptorBuilder#getDescriptor(java.lang.Class)
    * 
-   * @param
-   * <P>
-   * is the templated type of the <code>pojoType</code>.
+   * @param <POJO> is the templated type of the <code>pojoType</code>.
    * @param pojoType is the type reflecting the POJO.
    * @return the descriptor used to get information about the properties of the
    *         given <code>pojoType</code>.
    */
-  protected abstract <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoType);
+  protected abstract <POJO> PojoDescriptorImpl<POJO> createDescriptor(Class<POJO> pojoType);
 
 }

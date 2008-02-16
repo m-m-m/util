@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.base;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
 
 /**
- * This is the interface for a generic enhancer of a {@link PojoDescriptor}.
+ * This is the interface for a generic enhancer of a
+ * {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor}.
  * 
  * @see #enhanceDescriptor(AbstractPojoDescriptor)
  * 

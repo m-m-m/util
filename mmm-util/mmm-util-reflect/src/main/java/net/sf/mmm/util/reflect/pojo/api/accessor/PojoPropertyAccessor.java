@@ -6,15 +6,13 @@ package net.sf.mmm.util.reflect.pojo.api.accessor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeName;
 
 /**
  * A {@link PojoPropertyAccessor} gives {@link #getAccessibleObject() access} to
  * a specific {@link #getName() property} of a POJO.<br>
  * 
- * @see PojoPropertyDescriptor
+ * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -107,7 +105,9 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   /**
    * This method gets the {@link #getPropertyType() type} as raw class. It is a
    * convenience method for
-   * <code>{@link ReflectionUtil#getInstance()}.{@link ReflectionUtil#toClass(Type) toClass}(accessor.{@link #getPropertyType()})</code>
+   * <code>{@link net.sf.mmm.util.reflect.ReflectionUtil#getInstance()}.
+   * {@link net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type) toClass}(accessor.{@link #getPropertyType()})
+   * </code>
    * 
    * @return the raw type.
    */

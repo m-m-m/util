@@ -69,7 +69,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
      * @param pojoClass is the class for which the property-accessors should be
      *        iterated.
      */
-    private PojoMethodIterator(Class<?> pojoClass) {
+    protected PojoMethodIterator(Class<?> pojoClass) {
 
       super();
       this.index = 0;
