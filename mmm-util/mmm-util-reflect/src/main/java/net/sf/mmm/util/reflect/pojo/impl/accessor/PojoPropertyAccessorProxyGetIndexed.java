@@ -3,28 +3,25 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl.accessor;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorProxy;
+import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorNonArg}
- * interface for {@link PojoPropertyAccessorNonArgMode#GET getting} a
- * {@link Field}.
+ * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg}
+ * interface for
+ * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED getting} an element
+ * from another accessor returning an array or {@link java.util.List}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAccessorProxy
-    implements PojoPropertyAccessorIndexedNonArg {
-
-  /** @see #PojoPropertyAccessorProxyGetIndexed(PojoPropertyAccessorNonArg) */
-  private final PojoPropertyAccessorNonArg containerGetAccessor;
+public class PojoPropertyAccessorProxyGetIndexed extends
+    AbstractPojoPropertyAccessorProxyAdapterComponentType implements
+    PojoPropertyAccessorIndexedNonArg {
 
   /**
    * The constructor.
@@ -34,24 +31,32 @@ public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAcc
    */
   public PojoPropertyAccessorProxyGetIndexed(PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super();
-    this.containerGetAccessor = containerGetAccessor;
+    super(containerGetAccessor);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected PojoPropertyAccessorNonArg getDelegate() {
+  public PojoPropertyAccessorIndexedNonArgMode getMode() {
 
-    return this.containerGetAccessor;
+    return PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Type getPropertyType() {
+  public Type getReturnType() {
+
+    return getPropertyType();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Class<?> getReturnClass() {
 
     return getPropertyClass();
   }
@@ -60,9 +65,18 @@ public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAcc
    * {@inheritDoc}
    */
   @Override
+  public Type getPropertyType() {
+
+    return getPropertyType();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public Class<?> getPropertyClass() {
 
-    return int.class;
+    return getPropertyClass();
   }
 
   /**
@@ -71,16 +85,8 @@ public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAcc
   public Object invoke(Object pojoInstance, int index) throws IllegalAccessException,
       InvocationTargetException {
 
-    Object arrayOrList = this.containerGetAccessor.invoke(pojoInstance);
+    Object arrayOrList = getDelegate().invoke(pojoInstance);
     return getCollectionUtil().get(arrayOrList, index);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public PojoPropertyAccessorIndexedNonArgMode getMode() {
-
-    return PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED;
   }
 
 }

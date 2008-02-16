@@ -8,11 +8,11 @@ package net.sf.mmm.util.reflect.pojo.api.attribute;
  * {@link net.sf.mmm.util.reflect.pojo.api.PojoDescriptor POJO} and therefore
  * contains the {@link #getPojoType() POJO-type}.
  * 
- * @param <P> is the {@link #getPojoType() POJO-type}.
+ * @param <POJO> is the {@link #getPojoType() POJO-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract interface PojoAttributeType<P> {
+public abstract interface PojoAttributeType<POJO> {
 
   /**
    * This method gets the type reflecting the
@@ -21,6 +21,6 @@ public abstract interface PojoAttributeType<P> {
    * 
    * @return the type of the according POJO.
    */
-  Class<P> getPojoType();
+  Class<POJO> getPojoType();
 
 }

@@ -6,8 +6,8 @@ package net.sf.mmm.util.reflect.pojo.base.accessor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
 
 /**
  * This is the abstract implementation of the {@link PojoPropertyAccessor}
@@ -23,19 +23,6 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   public AbstractPojoPropertyAccessorProxy() {
 
     super();
-  }
-
-  /**
-   * This method gets the {@link CollectionUtil} instance.
-   * 
-   * @see CollectionUtil#getInstance()
-   * 
-   * @return the collection util.
-   */
-  protected CollectionUtil getCollectionUtil() {
-
-    // TODO: get from PojoBuilder
-    return CollectionUtil.getInstance();
   }
 
   /**
@@ -81,6 +68,14 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
+  public Class<?> getReturnClass() {
+
+    return getDelegate().getReturnClass();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Type[] getArgumentTypes() {
 
     return getDelegate().getArgumentTypes();
@@ -108,6 +103,14 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   public String getName() {
 
     return getDelegate().getName();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public PojoPropertyAccessorMode<? extends PojoPropertyAccessor> getMode() {
+
+    return getDelegate().getMode();
   }
 
 }

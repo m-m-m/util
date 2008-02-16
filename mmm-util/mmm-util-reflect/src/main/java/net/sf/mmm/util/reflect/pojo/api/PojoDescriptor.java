@@ -100,15 +100,13 @@ import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeType;
  * </tr>
  * </table>
  * 
- * @param
- * <P>
- * is the templated type of the {@link #getPojoType() POJO}.
+ * @param <POJO> is the templated type of the {@link #getPojoType() POJO}.
  * 
  * @see PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoDescriptor<P> extends PojoAttributeType<P> {
+public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
 
   /**
    * This method gets the {@link PojoPropertyDescriptor descriptor} for the
@@ -172,7 +170,7 @@ public interface PojoDescriptor<P> extends PojoAttributeType<P> {
    * @throws InvocationTargetException if the POJO itself (typically the getter)
    *         throws an exception.
    */
-  Object getProperty(P pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
+  Object getProperty(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
       IllegalAccessException, InvocationTargetException;
 
   /**
@@ -200,7 +198,7 @@ public interface PojoDescriptor<P> extends PojoAttributeType<P> {
    * @throws InvocationTargetException if the POJO itself (typically the setter)
    *         throws an exception.
    */
-  Object setProperty(P pojoInstance, String propertyName, Object value)
+  Object setProperty(POJO pojoInstance, String propertyName, Object value)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
   /**
@@ -224,7 +222,7 @@ public interface PojoDescriptor<P> extends PojoAttributeType<P> {
    * @throws InvocationTargetException if the POJO itself (typically the getter)
    *         throws an exception.
    */
-  int getPropertySize(P pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
+  int getPropertySize(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
       IllegalAccessException, InvocationTargetException;
 
   /**
@@ -252,7 +250,7 @@ public interface PojoDescriptor<P> extends PojoAttributeType<P> {
    * @throws InvocationTargetException if the POJO itself (the adder) throws an
    *         exception.
    */
-  Object addPropertyItem(P pojoInstance, String propertyName, Object item)
+  Object addPropertyItem(POJO pojoInstance, String propertyName, Object item)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
   /**
@@ -281,7 +279,7 @@ public interface PojoDescriptor<P> extends PojoAttributeType<P> {
    * @throws InvocationTargetException if the POJO itself (the adder) throws an
    *         exception.
    */
-  Object getPropertyItem(P pojoInstance, String propertyName, int index)
+  Object getPropertyItem(POJO pojoInstance, String propertyName, int index)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
   /**
@@ -312,7 +310,7 @@ public interface PojoDescriptor<P> extends PojoAttributeType<P> {
    * @throws InvocationTargetException if the POJO itself (the adder) throws an
    *         exception.
    */
-  Object setPropertyItem(P pojoInstance, String propertyName, int index, Object item)
+  Object setPropertyItem(POJO pojoInstance, String propertyName, int index, Object item)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
 }

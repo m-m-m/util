@@ -23,6 +23,8 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
  * This class is a collection of utility functions for reflectively dealing with
  * {@link Collections}.
  * 
+ * @see ReflectionUtil#getComponentType(java.lang.reflect.Type, boolean)
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class CollectionUtil {
@@ -115,7 +117,7 @@ public class CollectionUtil {
   public <C extends Collection> C create(Class<C> type) {
 
     if (type.isInterface()) {
-      CollectionFactory<C> factory = getCollectionFactoryManager().getFactory(type);
+      CollectionFactory<C> factory = getCollectionFactoryManager().getCollectionFactory(type);
       if (factory == null) {
         throw new NlsIllegalArgumentException(
             NlsBundleUtilReflect.ERR_UNKNOWN_COLLECTION_INTERFACE, type);

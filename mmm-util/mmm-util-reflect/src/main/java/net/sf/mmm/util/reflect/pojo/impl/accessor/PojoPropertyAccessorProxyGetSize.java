@@ -3,26 +3,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl.accessor;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorProxy;
+import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorProxyAdapter;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArg}
- * interface for {@link PojoPropertyAccessorNonArgMode#GET getting} a
- * {@link Field}.
+ * interface for {@link PojoPropertyAccessorNonArgMode#GET getting} the size of
+ * an array, {@link java.util.List} or {@link java.util.Map} from another
+ * accessor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccessorProxy implements
-    PojoPropertyAccessorNonArg {
-
-  /** @see #PojoPropertyAccessorProxyGetSize(PojoPropertyAccessorNonArg) */
-  private final PojoPropertyAccessorNonArg containerGetAccessor;
+public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccessorProxyAdapter
+    implements PojoPropertyAccessorNonArg {
 
   /**
    * The constructor.
@@ -32,17 +29,16 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
    */
   public PojoPropertyAccessorProxyGetSize(PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super();
-    this.containerGetAccessor = containerGetAccessor;
+    super(containerGetAccessor);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected PojoPropertyAccessorNonArg getDelegate() {
+  public PojoPropertyAccessorNonArgMode getMode() {
 
-    return this.containerGetAccessor;
+    return PojoPropertyAccessorNonArgMode.SIZE;
   }
 
   /**
@@ -66,10 +62,28 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
   /**
    * {@inheritDoc}
    */
+  @Override
+  public Type getReturnType() {
+
+    return getPropertyType();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Class<?> getReturnClass() {
+
+    return getPropertyClass();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Object invoke(Object pojoInstance) throws IllegalAccessException,
       InvocationTargetException {
 
-    Object arrayMapOrCollection = this.containerGetAccessor.invoke(pojoInstance);
+    Object arrayMapOrCollection = getDelegate().invoke(pojoInstance);
     int size;
     if (arrayMapOrCollection == null) {
       size = 0;
@@ -77,14 +91,6 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
       size = getCollectionUtil().getSize(arrayMapOrCollection);
     }
     return Integer.valueOf(size);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public PojoPropertyAccessorNonArgMode getMode() {
-
-    return PojoPropertyAccessorNonArgMode.SIZE;
   }
 
 }

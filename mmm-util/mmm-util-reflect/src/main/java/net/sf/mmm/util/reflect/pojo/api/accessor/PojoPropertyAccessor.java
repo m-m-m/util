@@ -59,11 +59,21 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * 
    * @see java.lang.reflect.Method#getGenericReturnType()
    * @see java.lang.reflect.Field#getGenericType()
-   * @see net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type)
    * 
    * @return the return type.
    */
   Type getReturnType();
+
+  /**
+   * This method gets the {@link Class} of the object returned when this
+   * accessor is <code>invoked</code>.
+   * 
+   * @see java.lang.reflect.Method#getReturnType()
+   * @see java.lang.reflect.Field#getType()
+   * 
+   * @return the return class.
+   */
+  Class<?> getReturnClass();
 
   /**
    * This method gets the types of the arguments required to <code>invoke</code>
