@@ -79,9 +79,15 @@ public class ParameterizedTypeImpl implements ParameterizedType {
         return true;
       } else {
         Type otherOwner = otherType.getOwnerType();
-        return ((this.ownerType != null) ? this.ownerType.equals(otherOwner) : (otherOwner == null))
-            && (this.rawType.equals(otherType.getRawType()))
+        boolean result;
+        if (this.ownerType == null) {
+          result = (otherOwner == null);
+        } else {
+          result = this.ownerType.equals(otherOwner);
+        }
+        result = result && (this.rawType.equals(otherType.getRawType()))
             && Arrays.equals(this.actualTypeArguments, otherType.getActualTypeArguments());
+        return result;
       }
     } else {
       return false;
@@ -94,9 +100,14 @@ public class ParameterizedTypeImpl implements ParameterizedType {
   @Override
   public int hashCode() {
 
-    return Arrays.hashCode(this.actualTypeArguments)
-        ^ (this.rawType != null ? this.rawType.hashCode() : 0)
-        ^ (this.ownerType != null ? this.ownerType.hashCode() : 0);
+    int hash = Arrays.hashCode(this.actualTypeArguments);
+    if (this.rawType != null) {
+      hash = hash ^ this.rawType.hashCode();
+    }
+    if (this.ownerType != null) {
+      hash = hash ^ this.ownerType.hashCode();
+    }
+    return hash;
   }
 
   /**

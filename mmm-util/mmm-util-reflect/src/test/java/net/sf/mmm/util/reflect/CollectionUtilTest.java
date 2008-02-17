@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -71,13 +72,27 @@ public class CollectionUtilTest {
     String one = "The first one!";
     String two = "Second...";
     String three = "Third and last.";
-    String[] all = new String[3];
-    util.set(all, 0, one);
-    util.set(all, 1, two);
-    util.set(all, 2, three);
-    assertEquals(one, all[0]);
-    assertEquals(two, all[1]);
-    assertEquals(three, all[2]);
+    String[] array = new String[3];
+    util.set(array, 0, one);
+    util.set(array, 1, two);
+    util.set(array, 2, three);
+    assertEquals(one, array[0]);
+    assertEquals(two, array[1]);
+    assertEquals(three, array[2]);
+    String[] arrayCopy = (String[]) util.set(array, 3, one, 0, 1);
+    assertEquals(4, arrayCopy.length);
+    assertEquals(one, arrayCopy[0]);
+    assertEquals(two, arrayCopy[1]);
+    assertEquals(three, arrayCopy[2]);
+    assertEquals(one, arrayCopy[3]);
+    Object result = util.set(array, 0, three, 0, 0);
+    assertSame(array, result);
+    assertEquals(three, array[0]);
+    try {
+      util.set(array, 4, one, 0, 1);
+      fail("Exception expected!");
+    } catch (Exception e) {
+    }
 
     // test list...
     List<String> list = new ArrayList<String>();
@@ -92,13 +107,13 @@ public class CollectionUtilTest {
     assertEquals(three, list.get(2));
     list = new ArrayList<String>();
     int maxGrowth = 128;
-    util.set(list, maxGrowth - 1, one, maxGrowth);
+    util.set(list, maxGrowth - 1, one, maxGrowth, 0);
     assertEquals(maxGrowth, list.size());
     assertEquals(one, list.get(maxGrowth - 1));
     assertEquals(null, list.get(0));
     list = new ArrayList<String>();
     try {
-      util.set(list, maxGrowth, one, maxGrowth);
+      util.set(list, maxGrowth, one, maxGrowth, 0);
       fail("Exception expected!");
     } catch (Exception e) {
     }

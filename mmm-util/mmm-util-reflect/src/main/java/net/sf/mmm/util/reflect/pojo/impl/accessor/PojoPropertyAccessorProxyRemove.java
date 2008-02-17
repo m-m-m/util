@@ -6,57 +6,48 @@ package net.sf.mmm.util.reflect.pojo.impl.accessor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedOneArg;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArg}
- * interface for
- * {@link PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED setting} an indexed
- * property using the getter from another accessor returning an array or
- * {@link java.util.List}.
+ * This is the implementation of the {@link PojoPropertyAccessorOneArg}
+ * interface for {@link PojoPropertyAccessorOneArgMode#REMOVE removing} an
+ * element using the getter from another accessor returning an array or
+ * {@link java.util.Collection}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyAccessorProxySetIndexed extends
-    AbstractPojoPropertyAccessorProxyAdapterComponentType implements
-    PojoPropertyAccessorIndexedOneArg {
+public class PojoPropertyAccessorProxyRemove extends
+    AbstractPojoPropertyAccessorProxyAdapterComponentType implements PojoPropertyAccessorOneArg {
 
   /** The according setter to use if array has to be resized. */
   private final PojoPropertyAccessorOneArg containerSetAccessor;
-
-  private int maximumListGrowth;
-
-  private int maximumArrayGrowth;
 
   /**
    * The constructor.
    * 
    * @param containerGetAccessor is the accessor delegate that gets an array, or
-   *        {@link java.util.List} property.
+   *        list property.
    * @param containerSetAccessor is the accessor that sets the array, or
-   *        {@link java.util.List} property. May be <code>null</code> if NOT
-   *        available.
+   *        {@link java.util.Collection} property. May be <code>null</code> if
+   *        NOT available.
    */
-  public PojoPropertyAccessorProxySetIndexed(PojoPropertyAccessorNonArg containerGetAccessor,
+  public PojoPropertyAccessorProxyRemove(PojoPropertyAccessorNonArg containerGetAccessor,
       PojoPropertyAccessorOneArg containerSetAccessor) {
 
     super(containerGetAccessor);
     this.containerSetAccessor = containerSetAccessor;
-    this.maximumListGrowth = 64;
-    this.maximumArrayGrowth = 64;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public PojoPropertyAccessorIndexedOneArgMode getMode() {
+  public PojoPropertyAccessorOneArgMode getMode() {
 
-    return PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED;
+    return PojoPropertyAccessorOneArgMode.REMOVE;
   }
 
   /**
@@ -80,13 +71,14 @@ public class PojoPropertyAccessorProxySetIndexed extends
   /**
    * {@inheritDoc}
    */
-  public Object invoke(Object pojoInstance, int index, Object item) throws IllegalAccessException,
+  public Object invoke(Object pojoInstance, Object argument) throws IllegalAccessException,
       InvocationTargetException {
 
-    Object arrayOrList = getDelegate().invoke(pojoInstance);
-    Object arrayCopy = getCollectionUtil().set(arrayOrList, index, item, this.maximumListGrowth,
-        this.maximumArrayGrowth);
-    if ((arrayCopy != arrayOrList) && (this.containerSetAccessor != null)) {
+    Object arrayOrCollection = getDelegate().invoke(pojoInstance);
+    Object arrayCopy = getCollectionUtil().remove(arrayOrCollection, argument);
+    if ((arrayCopy != arrayOrCollection) && (this.containerSetAccessor != null)) {
+      // we will NOT create this proxy if the setter is missing for an array
+      // type getter.
       this.containerSetAccessor.invoke(pojoInstance, arrayCopy);
     }
     return null;

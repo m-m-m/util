@@ -13,7 +13,7 @@ package net.sf.mmm.util.reflect.pojo.api.accessor;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class PojoPropertyAccessorTwoArgMode extends
+public class PojoPropertyAccessorTwoArgMode extends
     PojoPropertyAccessorMode<PojoPropertyAccessorTwoArg> {
 
   /**
@@ -21,14 +21,14 @@ public abstract class PojoPropertyAccessorTwoArgMode extends
    * property.
    */
   public static final PojoPropertyAccessorTwoArgMode SET_MAPPED = new PojoPropertyAccessorTwoArgMode(
-      "set-mapped") {};
+      "set-mapped");
 
   /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
    */
-  public PojoPropertyAccessorTwoArgMode(String name) {
+  protected PojoPropertyAccessorTwoArgMode(String name) {
 
     super(name);
   }

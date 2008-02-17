@@ -54,7 +54,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
           // is property read method (getter)?
           String propertyName = getPropertyName(methodName, METHOD_PREFIXES, METHOD_SUFFIXES);
           boolean isBooblean = isBooleanType(propertyClass);
-          if (!isBooblean && !propertyName.startsWith(METHOD_PREFIX_GET)) {
+          if (!isBooblean && !methodName.startsWith(METHOD_PREFIX_GET)) {
             // only boolean getters may use is* or has* ...
             propertyName = null;
           }

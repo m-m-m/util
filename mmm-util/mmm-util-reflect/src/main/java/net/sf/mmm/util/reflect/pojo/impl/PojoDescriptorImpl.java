@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
@@ -58,7 +57,8 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
    * @return a collection with all
    *         {@link PojoPropertyDescriptorImpl property descriptor}s
    */
-  public Collection<? extends PojoPropertyDescriptor> getPropertyDescriptors() {
+  @Override
+  public Collection<PojoPropertyDescriptorImpl> getPropertyDescriptors() {
 
     return this.properties;
   }

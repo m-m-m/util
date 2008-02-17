@@ -60,7 +60,10 @@ public interface Singularizer extends Transformer<String> {
    * </table>
    * 
    * @param plural is a term (potentially) in plural form.
-   * @return the according singular form
+   * @return the according singular form. This will be
+   *         {@link Object#equals(Object) equal} to the given string
+   *         <code>plural</code> if already singular or no singular form is
+   *         known.
    */
   String transform(String plural);
 

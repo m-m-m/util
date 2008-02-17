@@ -5,11 +5,8 @@ package net.sf.mmm.util.reflect;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -21,7 +18,7 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 
 /**
  * This class is a collection of utility functions for reflectively dealing with
- * {@link Collections}.
+ * {@link Collection}s.
  * 
  * @see ReflectionUtil#getComponentType(java.lang.reflect.Type, boolean)
  * 
@@ -36,7 +33,7 @@ public class CollectionUtil {
   protected static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
 
   /** @see #getInstance() */
-  public static CollectionUtil instance;
+  private static CollectionUtil instance;
 
   /** @see #getCollectionFactoryManager() */
   private CollectionFactoryManager collectionFactoryManager;
@@ -109,8 +106,9 @@ public class CollectionUtil {
    * 
    * @param <C> is the templated type of the collection.
    * @param type is the type of collection to create. This is either an
-   *        interface ({@link List}, {@link Set}, {@link Queue}, etc.) or a
-   *        non-abstract implementation of a {@link Collection}.
+   *        interface ({@link java.util.List}, {@link java.util.Set},
+   *        {@link java.util.Queue}, etc.) or a non-abstract implementation of
+   *        a {@link Collection}.
    * @return the new instance of the given <code>type</code>.
    */
   @SuppressWarnings("unchecked")
@@ -186,9 +184,10 @@ public class CollectionUtil {
   /**
    * This method sets the given <code>item</code> at the given
    * <code>index</code> in <code>arrayOrCollection</code>. It uses a
-   * <code>maximumGrowth</code> of {@link #DEFAULT_MAXIMUM_LIST_GROWTH}.
+   * <code>maximumListGrowth</code> of {@link #DEFAULT_MAXIMUM_LIST_GROWTH}
+   * and <code>maximumArrayGrowth</code> of <code>0</code>.
    * 
-   * @see #set(Object, int, Object, int)
+   * @see #set(Object, int, Object, int, int)
    * 
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position where to set the item.
@@ -199,7 +198,7 @@ public class CollectionUtil {
   @SuppressWarnings("unchecked")
   public void set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
 
-    set(arrayOrList, index, item, DEFAULT_MAXIMUM_LIST_GROWTH);
+    set(arrayOrList, index, item, DEFAULT_MAXIMUM_LIST_GROWTH, 0);
   }
 
   /**
@@ -217,48 +216,163 @@ public class CollectionUtil {
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position where to set the item.
    * @param item is the item to set.
-   * @param maximumGrowth is the maximum number by which the
+   * @param maximumListGrowth is the maximum number by which the
    *        {@link List#size() size} of a {@link List} will be increased to
    *        reach <code>index + 1</code> so the <code>item</code> can be
-   *        set. Set this value to <code>0</code> to turn of this feature
-   *        (leave {@link List#size() list-size} untouched). Please always
+   *        set. Set this value to <code>0</code> to turn off this feature
+   *        (and leave {@link List#size() list-size} untouched). Please always
    *        specify a real maximum (<code>&lt;=65536</code>) and do NOT use
    *        {@link Integer#MAX_VALUE} since this might cause memory holes if
    *        something goes wrong.
+   * @param maximumArrayGrowth is the maximum number by which the
+   *        {@link Array#getLength(Object) length} of an array will be
+   *        "increased" if the <code>item</code> does NOT fit. In this case an
+   *        new array will be created with the size of <code>index + 1</code>.
+   *        The original items are
+   *        {@link System#arraycopy(Object, int, Object, int, int) copied}, the
+   *        given <code>item</code> is set on the copy instead and the copy is
+   *        returned while the original array remains unchanged. Set this value
+   *        to <code>0</code> to turn off this feature. Please always specify
+   *        a real maximum (<code>&lt;=65536</code>) and do NOT use
+   *        {@link Integer#MAX_VALUE} since this might cause memory holes if
+   *        something goes wrong.
+   * @return the given <code>arrayOrList</code> or an array-copy with
+   *         increased size (as described for parameter
+   *         <code>maximumArrayGrowth</code>).
    * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
    *         is invalid (<code>null</code> or neither array nor {@link List}).
    */
   @SuppressWarnings("unchecked")
-  public void set(Object arrayOrList, int index, Object item, int maximumGrowth)
-      throws NlsIllegalArgumentException {
+  public Object set(Object arrayOrList, int index, Object item, int maximumListGrowth,
+      int maximumArrayGrowth) throws NlsIllegalArgumentException {
 
-    if (arrayOrList != null) {
-      Class<?> type = arrayOrList.getClass();
-      if (type.isArray()) {
+    if (arrayOrList == null) {
+      throw new NlsIllegalArgumentException(arrayOrList);
+    }
+    int maximumGrowth;
+    Class<?> type = arrayOrList.getClass();
+    List list = null;
+    int size;
+    if (type.isArray()) {
+      size = Array.getLength(arrayOrList);
+      maximumGrowth = maximumArrayGrowth;
+    } else if (List.class.isAssignableFrom(type)) {
+      list = (List) arrayOrList;
+      size = list.size();
+      maximumGrowth = maximumListGrowth;
+    } else {
+      throw new NlsIllegalArgumentException(arrayOrList);
+    }
+    int growth = index - size + 1;
+    if (growth > maximumGrowth) {
+      throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_INCREASE_EXCEEDS_MAX_GROWTH,
+          Integer.valueOf(growth), Integer.valueOf(maximumGrowth));
+    }
+    if (type.isArray()) {
+      if (growth > 0) {
+        Object newArray = Array.newInstance(type.getComponentType(), index + 1);
+        System.arraycopy(arrayOrList, 0, newArray, 0, size);
+        Array.set(newArray, index, item);
+        return newArray;
+      } else {
         Array.set(arrayOrList, index, item);
-        return;
-      } else if (List.class.isAssignableFrom(type)) {
-        List list = (List) arrayOrList;
-        int growth = index - list.size() + 1;
-        if (growth > 0) {
-          if (growth > maximumGrowth) {
-            throw new NlsIllegalArgumentException("Can not increase size of list by " + growth
-                + ", because limit is" + maximumGrowth);
-          } else {
-            growth--;
-            while (growth > 0) {
-              list.add(null);
-              growth--;
-            }
-            list.add(item);
-          }
-        } else {
-          list.set(index, item);
+      }
+    } else {
+      // arrayOrList is list...
+      // increase size of list
+      if (growth > 0) {
+        growth--;
+        while (growth > 0) {
+          list.add(null);
+          growth--;
         }
-        return;
+        list.add(item);
+      } else {
+        list.set(index, item);
       }
     }
-    throw new NlsIllegalArgumentException(arrayOrList);
+    return arrayOrList;
   }
 
+  /**
+   * This method adds the given <code>item</code> to the given
+   * <code>arrayOrCollection</code>.
+   * 
+   * @param arrayOrCollection is the array or {@link Collection}.
+   * @param item is the item to add.
+   * @return the given <code>arrayOrCollection</code> if it was a
+   *         {@link Collection}. Otherwise, in case of an array, a new array
+   *         with a {@link Array#getLength(Object) length} increased by
+   *         <code>1</code> and the elements of <code>arrayOrCollection</code>
+   *         appended with the given <code>item</code> is returned.
+   */
+  @SuppressWarnings("unchecked")
+  public Object add(Object arrayOrCollection, Object item) {
+
+    if (arrayOrCollection == null) {
+      throw new NlsIllegalArgumentException(arrayOrCollection);
+    }
+    Class<?> type = arrayOrCollection.getClass();
+    if (type.isArray()) {
+      int size = Array.getLength(arrayOrCollection);
+      Object newArray = Array.newInstance(type.getComponentType(), size + 1);
+      System.arraycopy(arrayOrCollection, 0, newArray, 0, size);
+      Array.set(newArray, size, item);
+      return newArray;
+    } else if (Collection.class.isAssignableFrom(type)) {
+      Collection collection = (Collection) arrayOrCollection;
+      collection.add(item);
+    } else {
+      throw new NlsIllegalArgumentException(arrayOrCollection);
+    }
+    return arrayOrCollection;
+  }
+
+  /**
+   * This method removes the given <code>item</code> from the given
+   * <code>arrayOrCollection</code>.
+   * 
+   * @param arrayOrCollection is the array or {@link Collection}.
+   * @param item is the item to remove.
+   * @return <code>null</code> if the given <code>item</code> was NOT
+   *         contained in <code>arrayOrCollection</code>, the given
+   *         <code>arrayOrCollection</code> if it was a {@link Collection} and
+   *         the <code>item</code> has been removed. Otherwise, in case of an
+   *         array, a new array with a {@link Array#getLength(Object) length}
+   *         decreased by <code>1</code> and the elements of
+   *         <code>arrayOrCollection</code> without the first occurrence of
+   *         the given <code>item</code> is returned.
+   */
+  @SuppressWarnings("unchecked")
+  public Object remove(Object arrayOrCollection, Object item) {
+
+    if (arrayOrCollection == null) {
+      throw new NlsIllegalArgumentException(arrayOrCollection);
+    }
+    Class<?> type = arrayOrCollection.getClass();
+    if (type.isArray()) {
+      int size = Array.getLength(arrayOrCollection);
+      for (int index = 0; index < size; index++) {
+        Object currentItem = Array.get(arrayOrCollection, index);
+        if ((item == currentItem) || ((item != null) && (item.equals(currentItem)))) {
+          // found
+          Object newArray = Array.newInstance(type.getComponentType(), size - 1);
+          System.arraycopy(arrayOrCollection, 0, newArray, 0, index);
+          System.arraycopy(arrayOrCollection, index + 1, newArray, index, size - index - 1);
+          return newArray;
+        }
+      }
+      return null;
+    } else if (Collection.class.isAssignableFrom(type)) {
+      Collection collection = (Collection) arrayOrCollection;
+      boolean removed = collection.remove(item);
+      if (removed) {
+        return arrayOrCollection;
+      } else {
+        return null;
+      }
+    } else {
+      throw new NlsIllegalArgumentException(arrayOrCollection);
+    }
+  }
 }

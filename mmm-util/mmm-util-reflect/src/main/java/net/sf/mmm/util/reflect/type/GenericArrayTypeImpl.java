@@ -6,12 +6,10 @@ package net.sf.mmm.util.reflect.type;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
-
 /**
  * This is an implementation of the {@link GenericArrayType} interface.
  * 
- * @see ReflectionUtil#toType(String)
+ * @see net.sf.mmm.util.reflect.ReflectionUtil#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

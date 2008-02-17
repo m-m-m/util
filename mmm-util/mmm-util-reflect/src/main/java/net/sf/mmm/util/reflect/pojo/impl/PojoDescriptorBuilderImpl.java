@@ -28,11 +28,17 @@ import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorBuilder;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.base.AbstractPojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.base.PojoDescriptorEnhancer;
 import net.sf.mmm.util.reflect.pojo.base.PojoFieldIntrospector;
 import net.sf.mmm.util.reflect.pojo.base.PojoMethodIntrospector;
 import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorAddBuilder;
 import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorGetBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorGetIndexedBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorRemoveBuilder;
 import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorSetBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorSetIndexedBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorSetMappedBuilder;
+import net.sf.mmm.util.reflect.pojo.impl.accessor.PojoPropertyAccessorSizeBuilder;
 
 /**
  * This is the generic implementation of the
@@ -49,11 +55,14 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /** @see #getMethodIntrospector() */
   private PojoMethodIntrospector methodIntrospector;
 
-  /** the introspector to use. */
+  /** @see #getFieldIntrospector() */
   private PojoFieldIntrospector fieldIntrospector;
 
-  /** @see PojoDescriptorBuilderImpl */
+  /** @see #getAccessorBuilders() */
   private Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders;
+
+  /** @see #getDescriptorEnhancer() */
+  private PojoDescriptorEnhancer descriptorEnhancer;
 
   /** @see #getLogger() */
   private Log logger;
@@ -185,11 +194,34 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
       PojoPropertyAccessorMode<?> mode = builder.getMode();
       boolean duplicate = modeSet.add(mode);
       if (duplicate) {
+        // TODO: NLS
         throw new NlsIllegalArgumentException("Duplicate accessor for mode \"{0}\"!", mode);
       }
       builderList.add(builder);
     }
-    this.accessorBuilders = Collections.unmodifiableList(builderList);
+    this.accessorBuilders = Collections.unmodifiableCollection(builderList);
+  }
+
+  /**
+   * This method gets the {@link PojoDescriptorEnhancer} to use.
+   * 
+   * @return the {@link PojoDescriptorEnhancer}.
+   */
+  public PojoDescriptorEnhancer getDescriptorEnhancer() {
+
+    return this.descriptorEnhancer;
+  }
+
+  /**
+   * This method sets the {@link #getDescriptorEnhancer() descriptor-enhancer}.
+   * 
+   * @param descriptorEnhancer is the {@link PojoDescriptorEnhancer} to set.
+   */
+  @Resource
+  public void setDescriptorEnhancer(PojoDescriptorEnhancer descriptorEnhancer) {
+
+    this.initializationState.requireNotInitilized();
+    this.descriptorEnhancer = descriptorEnhancer;
   }
 
   /**
@@ -209,7 +241,15 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         this.accessorBuilders.add(new PojoPropertyAccessorGetBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorSetBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorAddBuilder());
-        // TODO: add, size/count, remove, indexed-get, indexed-set
+        this.accessorBuilders.add(new PojoPropertyAccessorRemoveBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorGetIndexedBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorSetIndexedBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorSetMappedBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorSizeBuilder());
+        this.accessorBuilders = Collections.unmodifiableCollection(this.accessorBuilders);
+      }
+      if (this.descriptorEnhancer == null) {
+        this.descriptorEnhancer = new DefaultPojoDescriptorEnhancer();
       }
       if (this.logger == null) {
         this.logger = LogFactory.getLog(getClass());
@@ -280,6 +320,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         }
       }
     }
+    getDescriptorEnhancer().enhanceDescriptor(descriptor);
     return descriptor;
   }
 

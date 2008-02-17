@@ -17,14 +17,15 @@ public class PojoPropertyAccessorOneArgMode extends
     PojoPropertyAccessorMode<PojoPropertyAccessorOneArg> {
 
   /**
-   * The mode for a regular {@link PojoPropertyAccessorOneArg writer} of a
+   * The mode for a regular {@link PojoPropertyAccessorOneArg setter} of a
    * property.
    */
   public static final PojoPropertyAccessorOneArgMode SET = new PojoPropertyAccessorOneArgMode("set");
 
   /**
    * The mode for an {@link PojoPropertyAccessorOneArg accessor} used to add an
-   * item to a list-like property.
+   * item to a property with an array or {@link java.util.Collection}
+   * {@link PojoPropertyAccessor#getPropertyType() type}.
    */
   public static final PojoPropertyAccessorOneArgMode ADD = new PojoPropertyAccessorOneArgMode("add");
 
@@ -35,10 +36,18 @@ public class PojoPropertyAccessorOneArgMode extends
    * {@link PojoPropertyAccessorOneArg#invoke(Object, Object) invoke} with
    * argument <code>key</code> for a property {@link #getName() named}
    * "colors" might cause a <code>pojo.getColors().get(key)</code> or
-   * <code>pojo.getColors(key)</code>.
+   * <code>pojo.getColors(key)</code> or even <code>pojo.getColor(key)</code>.
    */
   public static final PojoPropertyAccessorOneArgMode GET_MAPPED = new PojoPropertyAccessorOneArgMode(
       "get-mapped");
+
+  /**
+   * The mode for an {@link PojoPropertyAccessorOneArg accessor} used to remove
+   * an item from a property with an array or {@link java.util.Collection}
+   * {@link PojoPropertyAccessor#getPropertyType() type}.
+   */
+  public static final PojoPropertyAccessorOneArgMode REMOVE = new PojoPropertyAccessorOneArgMode(
+      "remove");
 
   /**
    * The constructor.

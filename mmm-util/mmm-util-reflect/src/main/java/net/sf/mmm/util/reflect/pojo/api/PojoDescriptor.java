@@ -8,7 +8,6 @@ import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
-import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeName;
 import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeType;
 
 /**
@@ -43,7 +42,7 @@ import net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeType;
  * <br>
  * <table border="1">
  * <tr>
- * <th>{@link PojoAttributeName#getName() Name}</th>
+ * <th>{@link net.sf.mmm.util.reflect.pojo.api.attribute.PojoAttributeName#getName() Name}</th>
  * <th>{@link PojoPropertyAccessorMode Mode}</th>
  * <th>{@link PojoAttributeType#getPojoType() Property-Type}</th>
  * <th>{@link PojoPropertyAccessor#getAccessibleObject() Method}</th>
@@ -231,7 +230,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * <code>propertyName</code> from the given <code>pojoInstance</code>
    * using the
    * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArgMode#ADD add}
-   * {@link PojoPropertyDescriptor#getAccessor(net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode) accessor}.
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        access the property.
@@ -259,7 +258,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * <code>propertyName</code> of the given <code>pojoInstance</code> using
    * the
    * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter}
-   * {@link PojoPropertyDescriptor#getAccessor(net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode) accessor}.
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        add the given property <code>item</code>.
@@ -289,7 +288,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * <code>propertyName</code> of the given <code>pojoInstance</code> using
    * the
    * {@link net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed setter}
-   * {@link PojoPropertyDescriptor#getAccessor(net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode) accessor}.
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        access the property.

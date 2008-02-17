@@ -13,7 +13,7 @@ package net.sf.mmm.util.reflect.pojo.api.accessor;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class PojoPropertyAccessorIndexedNonArgMode extends
+public class PojoPropertyAccessorIndexedNonArgMode extends
     PojoPropertyAccessorMode<PojoPropertyAccessorIndexedNonArg> {
 
   /**
@@ -21,14 +21,14 @@ public abstract class PojoPropertyAccessorIndexedNonArgMode extends
    * {@link PojoPropertyAccessorIndexedOneArg setter of an indexed property}.
    */
   public static final PojoPropertyAccessorIndexedNonArgMode GET_INDEXED = new PojoPropertyAccessorIndexedNonArgMode(
-      "get-indexed") {};
+      "get-indexed");
 
   /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
    */
-  public PojoPropertyAccessorIndexedNonArgMode(String name) {
+  protected PojoPropertyAccessorIndexedNonArgMode(String name) {
 
     super(name);
   }

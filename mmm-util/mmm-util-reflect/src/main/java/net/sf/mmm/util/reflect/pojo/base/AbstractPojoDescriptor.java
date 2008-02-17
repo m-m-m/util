@@ -4,9 +4,9 @@
 package net.sf.mmm.util.reflect.pojo.base;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
@@ -48,17 +48,23 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public abstract Collection<? extends AbstractPojoPropertyDescriptor> getPropertyDescriptors();
+
+  /**
    * This method gets the accessor for the given
    * <code>{@link PojoPropertyAccessor#getMode() mode}</code> from the
    * {@link #getPropertyDescriptor(String) descriptor} with the given
-   * <code>{@link PojoPropertyDescriptor#getName() propertyName}</code>.
+   * <code>{@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getName() propertyName}</code>.
    * 
    * @see #getPropertyDescriptor(String)
-   * @see PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+   * @see net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
    * 
    * @param <ACCESSOR> is the type of the requested accessor.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property to access.
+   * @param propertyName is the
+   *        {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor#getName() name}
+   *        of the property to access.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
    *        requested accessor.
    * @param required - if <code>true</code> the accessor is required and an
@@ -71,7 +77,8 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    *         <code>mode</code>.
    */
   public abstract <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
-      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required);
+      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required)
+      throws PojoPropertyNotFoundException;
 
   /**
    * This method gets the property-descriptor for the given
@@ -147,6 +154,15 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
 
     return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(
         pojoInstance, index, item);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return "Descriptor for POJO " + this.pojoType;
   }
 
 }

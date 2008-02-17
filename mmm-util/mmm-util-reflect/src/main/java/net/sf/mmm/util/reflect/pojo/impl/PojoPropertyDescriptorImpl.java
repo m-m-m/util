@@ -3,25 +3,28 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.reflect.pojo.base.AbstractPojoPropertyDescriptor;
 
 /**
- * This is the implementation of the {@link PojoPropertyDescriptor} interface.
+ * This is the implementation of the
+ * {@link net.sf.mmm.util.reflect.pojo.api.PojoPropertyDescriptor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
-
-  /** @see #getName() */
-  private final String name;
+public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
 
   /** @see #getAccessor(PojoPropertyAccessorMode) */
   private final Map<PojoPropertyAccessorMode<?>, PojoPropertyAccessor> accessorMap;
+
+  /** @see #getAccessors() */
+  private final Collection<? extends PojoPropertyAccessor> accessors;
 
   /**
    * The constructor.
@@ -30,17 +33,9 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
    */
   public PojoPropertyDescriptorImpl(String propertyName) {
 
-    super();
-    this.name = propertyName;
+    super(propertyName);
     this.accessorMap = new HashMap<PojoPropertyAccessorMode<?>, PojoPropertyAccessor>();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getName() {
-
-    return this.name;
+    this.accessors = Collections.unmodifiableCollection(this.accessorMap.values());
   }
 
   /**
@@ -54,18 +49,18 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
   }
 
   /**
-   * This method adds the given <code>accessor</code> to this
-   * property-descriptor.
-   * 
-   * @see #getAccessor(PojoPropertyAccessorMode)
-   * 
-   * @param accessor is the accessor to add.
-   * @return <code>false</code> if this descriptor already contains an
-   *         accessor for the same {@link PojoPropertyAccessor#getMode() mode}
-   *         and <code>true</code> if the given <code>accessor</code> has
-   *         been added successfully.
+   * {@inheritDoc}
    */
-  protected boolean addAccessor(PojoPropertyAccessor accessor) {
+  public Collection<? extends PojoPropertyAccessor> getAccessors() {
+
+    return this.accessors;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean addAccessor(PojoPropertyAccessor accessor) {
 
     PojoPropertyAccessorMode<?> mode = accessor.getMode();
     if (this.accessorMap.containsKey(mode)) {
@@ -73,15 +68,6 @@ public class PojoPropertyDescriptorImpl implements PojoPropertyDescriptor {
     }
     this.accessorMap.put(mode, accessor);
     return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    return "Descriptor for property " + this.name;
   }
 
 }

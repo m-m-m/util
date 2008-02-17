@@ -15,10 +15,15 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class EnglishSingularizerTest {
 
+  protected Singularizer getEnglishSingularizer() {
+
+    return EnglishSingularizer.INSTANCE;
+  }
+
   private void check(String singular, String plural) {
 
-    assertEquals(singular, EnglishSingularizer.INSTANCE.transform(plural));
-    assertEquals(singular, EnglishSingularizer.INSTANCE.transform(singular));
+    assertEquals(singular, getEnglishSingularizer().transform(plural));
+    assertEquals(singular, getEnglishSingularizer().transform(singular));
   }
 
   @Test

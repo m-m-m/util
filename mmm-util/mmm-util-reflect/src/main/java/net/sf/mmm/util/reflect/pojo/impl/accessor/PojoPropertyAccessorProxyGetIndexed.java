@@ -64,24 +64,6 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Type getPropertyType() {
-
-    return getPropertyType();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Class<?> getPropertyClass() {
-
-    return getPropertyClass();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Object invoke(Object pojoInstance, int index) throws IllegalAccessException,
       InvocationTargetException {
 

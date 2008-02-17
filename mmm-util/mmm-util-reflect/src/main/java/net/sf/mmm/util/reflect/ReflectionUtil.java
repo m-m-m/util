@@ -197,15 +197,15 @@ public class ReflectionUtil {
    * <tr>
    * <td><code>String</code></td>
    * <td><code>String</code></td>
-   * </td>
+   * </tr>
    * <tr>
    * <td><code>List&lt;String&gt;</code></td>
    * <td><code>List</code></td>
-   * </td>
+   * </tr>
    * <tr>
    * <td><code>&lt;T extends MyClass&gt; T[]</code></td>
    * <td><code>MyClass[]</code></td>
-   * </td>
+   * </tr>
    * </table>
    * 
    * @param type is the type to convert.
@@ -297,12 +297,14 @@ public class ReflectionUtil {
    * avoid the dependency on <code>util-misc</code>.
    * 
    * @param parser is the string-parser on the type string to parse.
-   * @param resolver
-   * @param owner
+   * @param resolver is used to resolve classes.
+   * @param owner is the
+   *        {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type}
+   *        or <code>null</code>.
    * @return the parsed type.
-   * @throws ClassNotFoundException
+   * @throws ClassNotFoundException if a class could NOT be resolved.
    */
-  private static Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner)
+  private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner)
       throws ClassNotFoundException {
 
     parser.skipWhile(' ');
@@ -493,7 +495,7 @@ public class ReflectionUtil {
     } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
       return NumberType.ATOMIC_LONG;
     } else {
-      throw new NlsIllegalArgumentException("Unknown numeric type: " + numericType);
+      return null;
     }
   }
 
