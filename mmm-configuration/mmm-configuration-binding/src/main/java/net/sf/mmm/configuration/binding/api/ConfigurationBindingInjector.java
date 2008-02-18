@@ -5,7 +5,7 @@ package net.sf.mmm.configuration.binding.api;
 
 import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.ConfigurationException;
-import net.sf.mmm.util.reflect.pojo.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
  * This is a call-back interface used to create POJOs from {@link Configuration}
