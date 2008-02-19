@@ -4,13 +4,13 @@
 package net.sf.mmm.util.reflect;
 
 import net.sf.mmm.util.nls.NlsRuntimeException;
-import net.sf.mmm.util.nls.api.NlsThrowable;
 
 /**
  * An {@link InstantiationFailedException} indicates that the
  * {@link Class#newInstance() instantiation} of a {@link Class} failed for
  * arbitrary reasons. Unlike {@link InstantiationException} this is a
- * {@link RuntimeException} and has {@link NlsThrowable native-language-support}.
+ * {@link RuntimeException} and has
+ * {@link net.sf.mmm.util.nls.api.NlsThrowable native-language-support}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

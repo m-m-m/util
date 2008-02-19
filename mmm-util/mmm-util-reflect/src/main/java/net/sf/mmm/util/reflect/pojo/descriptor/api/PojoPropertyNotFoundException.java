@@ -4,7 +4,7 @@
 package net.sf.mmm.util.reflect.pojo.descriptor.api;
 
 import net.sf.mmm.util.nls.NlsRuntimeException;
-import net.sf.mmm.util.reflect.pojo.descriptor.NlsBundlePojo;
+import net.sf.mmm.util.reflect.pojo.NlsBundlePojo;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 
 /**

@@ -139,6 +139,20 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
+  public Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item)
+      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+
+    Object result = getAccessor(propertyName, PojoPropertyAccessorOneArgMode.REMOVE, true).invoke(
+        pojoInstance, item);
+    if (result instanceof Boolean) {
+      return (Boolean) result;
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Object getPropertyItem(POJO pojoInstance, String propertyName, int index)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
 

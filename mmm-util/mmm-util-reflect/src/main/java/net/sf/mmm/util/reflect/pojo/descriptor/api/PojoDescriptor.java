@@ -30,6 +30,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
  *   
  *   List&lt;String&gt; getColors();
  *   void addColor(String color);
+ *   void removeColor(String color);
  * }
  * </pre>
  * 
@@ -46,7 +47,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
  * <th>{@link PojoPropertyAccessorMode Mode}</th>
  * <th>{@link PojoAttributeType#getPojoType() Property-Type}</th>
  * <th>{@link PojoPropertyAccessor#getAccessibleObject() Method}</th>
- * <th>Component-Type</th>
+ * <th>Note</th>
  * </tr>
  * <tr>
  * <td>fooBar</td>
@@ -88,7 +89,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
  * <td>get</td>
  * <td>List&lt;String&gt;</td>
  * <td>getColors()</td>
- * <td>String</td>
+ * <td>-</td>
  * </tr>
  * <tr>
  * <td>color</td>
@@ -96,6 +97,33 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
  * <td>String</td>
  * <td>addColor(String)</td>
  * <td>-</td>
+ * </tr>
+ * <tr>
+ * <td>color</td>
+ * <td>remove</td>
+ * <td>String</td>
+ * <td>removeColor(String)</td>
+ * <td>-</td>
+ * <tr>
+ * <td>colors</td>
+ * <td>add</td>
+ * <td>String</td>
+ * <td>addColor(String)</td>
+ * <td>enhanced copy</td>
+ * </tr>
+ * <tr>
+ * <td>colors</td>
+ * <td>remove</td>
+ * <td>String</td>
+ * <td>removeColor(String)</td>
+ * <td>enhanced copy</td>
+ * </tr>
+ * <tr>
+ * <td>colors</td>
+ * <td>indexed-set</td>
+ * <td>String</td>
+ * <td>getColors().set(int, String)</td>
+ * <td>enhanced virtual accessor</td>
  * </tr>
  * </table>
  * 
@@ -250,6 +278,37 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         exception.
    */
   Object addPropertyItem(POJO pojoInstance, String propertyName, Object item)
+      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
+
+  /**
+   * This method removes the given <code>item</code> from an array or
+   * {@link Collection} using the
+   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#REMOVE remove}
+   * 
+   * {@link #getPropertyDescriptor(String) property} with the given
+   * <code>propertyName</code> from the given <code>pojoInstance</code>
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
+   * 
+   * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
+   *        access the property.
+   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
+   *        the property.
+   * @param item is the item to remove from the property.
+   * @return {@link Boolean#TRUE} if the item has been removed successfully and
+   *         {@link Boolean#FALSE} if the item was NOT present in the array or
+   *         {@link Collection}, or <code>null</code> if the accessor is
+   *         pointing to a remove method that returns no boolean.
+   * @throws PojoPropertyNotFoundException if the property with the given
+   *         <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such
+   *         {@link PojoPropertyAccessor accessor}.
+   * @throws IllegalAccessException if you do NOT have permissions to access the
+   *         underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
+   * @throws InvocationTargetException if the POJO itself (the adder) throws an
+   *         exception.
+   */
+  Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item)
       throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
 
   /**
