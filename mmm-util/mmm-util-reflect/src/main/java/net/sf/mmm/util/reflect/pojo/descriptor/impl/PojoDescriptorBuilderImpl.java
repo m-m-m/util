@@ -3,9 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.impl;
 
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,7 +45,8 @@ import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccesso
 
 /**
  * This is the generic implementation of the
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder} interface.
+ * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -118,7 +122,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the introspector used to find potential
    * {@link Method methods} for {@link PojoPropertyAccessor accessing}
    * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}.
+   * of a
+   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the introspector to use.
    */
@@ -143,7 +148,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the introspector used to find potential
    * {@link Field fields} for {@link PojoPropertyAccessor accessing}
    * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}.
+   * of a
+   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the introspector to use.
    */
@@ -168,7 +174,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the accessor-builders used to create the
    * {@link PojoPropertyAccessor accessors} for
    * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}.
+   * of a
+   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the accessorBuilders.
    */
@@ -265,6 +272,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
     PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType);
     // process methods...
+    List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();
     if (this.methodIntrospector != null) {
       Iterator<Method> methodIterator = this.methodIntrospector.findMethods(pojoType);
       while (methodIterator.hasNext()) {
@@ -285,10 +293,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
           }
         }
         if (methodUsed && !Modifier.isPublic(method.getModifiers())) {
-          // enable reflective access that violates visibility - this will
-          // fail if disallowed by security-manager. To avoid such trouble
-          // set visibility of introspector to public!
-          method.setAccessible(true);
+          // reflective access that violates visibility
+          nonPublicAccessibleObjects.add(method);
         }
       }
     }
@@ -313,13 +319,24 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
           }
         }
         if (fieldUsed && !Modifier.isPublic(field.getModifiers())) {
-          // enable reflective access that violates visibility - this will
-          // fail if disallowed by security-manager. To avoid such trouble
-          // set visibility of introspector to public!
-          field.setAccessible(true);
+          // reflective access that violates visibility
+          nonPublicAccessibleObjects.add(field);
         }
       }
     }
+    final AccessibleObject[] nonPublicAccessibles = new AccessibleObject[nonPublicAccessibleObjects
+        .size()];
+    nonPublicAccessibleObjects.toArray(nonPublicAccessibles);
+    // enable reflective access that violates visibility - this will
+    // fail if disallowed by security-manager.
+    AccessController.doPrivileged(new PrivilegedAction<Object>() {
+
+      public Object run() {
+
+        AccessibleObject.setAccessible(nonPublicAccessibles, true);
+        return null;
+      }
+    });
     getDescriptorEnhancer().enhanceDescriptor(descriptor);
     return descriptor;
   }

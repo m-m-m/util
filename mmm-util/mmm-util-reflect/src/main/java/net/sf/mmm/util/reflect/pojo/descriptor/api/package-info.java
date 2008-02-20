@@ -14,11 +14,9 @@
  * instead of the {@link java.beans.Introspector} for java-beans or
  * <a href="http://commons.apache.org/commons-beanutils">commons-beanutils</a>,
  * you are NOT limited by such restrictions.<br>
- * <br>
- * Further 
- * a list-type property can also define an 
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#ADD add-method} 
- * allowing to add items to the list.<br>
+ * Further there are many advanced features such as mapped or indexed 
+ * getter/setter support, support to add and remove items from a container 
+ * property, etc.
  */
 package net.sf.mmm.util.reflect.pojo.descriptor.api;
 

@@ -4,9 +4,9 @@
 package net.sf.mmm.util.reflect.pojo.descriptor.api;
 
 /**
- * This is the interface used to {@link #getDescriptor(Class) get} the
- * {@link PojoDescriptor descriptor} for a given POJO. A POJO (plain old java
- * object) in this manner is more or less any java object.<br>
+ * This is the interface used to {@link #getDescriptor(Class) get} (or create)
+ * the {@link PojoDescriptor descriptor} for a given POJO. A POJO (plain old
+ * java object) in this manner is more or less any java object.<br>
  * This functionality is an advanced alternative to
  * {@link java.beans.Introspector} or <a
  * href="http://commons.apache.org/commons-beanutils">commons-beanutils</a>.
