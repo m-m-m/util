@@ -3,7 +3,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>net.sf.mmm</groupId>
+    <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-util</artifactId>
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
@@ -14,15 +14,31 @@
   <name>util-core</name>
   <description>provides core utilities that fill gaps in the jdk.</description>
   
+  <profiles>
+    <profile>
+      <id>java5</id>
+			<activation>
+				<jdk>1.5</jdk>
+			</activation>      
+      <dependency>
+        <!-- only required for java5, included since java6 -->
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
+        <scope>compile</scope>
+      </dependency>
+    </profile>
+    <profile>
+      <id>pre-java5</id>
+			<activation>
+				<jdk>1.5</jdk>
+			</activation>
+			
+    </profile>
+  </profiles>
+  
+  
   <dependencies>
-    <dependency>
-      <!-- only required for java5, included since java6 -->
-      <groupId>javax.annotation</groupId>
-      <artifactId>jsr250-api</artifactId>
-      <version>1.0</version>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <!-- <groupId>org.apache.commons.logging</groupId> -->
       <groupId>commons-logging</groupId>
