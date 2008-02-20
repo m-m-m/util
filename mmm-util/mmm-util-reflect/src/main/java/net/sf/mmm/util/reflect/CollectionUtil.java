@@ -143,17 +143,19 @@ public class CollectionUtil {
    */
   public int getSize(Object arrayMapOrCollection) throws NlsIllegalArgumentException {
 
-    if (arrayMapOrCollection != null) {
-      Class<?> type = arrayMapOrCollection.getClass();
-      if (type.isArray()) {
-        return Array.getLength(arrayMapOrCollection);
-      } else if (Collection.class.isAssignableFrom(type)) {
-        return ((Collection<?>) arrayMapOrCollection).size();
-      } else if (Map.class.isAssignableFrom(type)) {
-        return ((Map<?, ?>) arrayMapOrCollection).size();
-      }
+    if (arrayMapOrCollection == null) {
+      throw new NlsIllegalArgumentException(null);
     }
-    throw new NlsIllegalArgumentException(arrayMapOrCollection);
+    Class<?> type = arrayMapOrCollection.getClass();
+    if (type.isArray()) {
+      return Array.getLength(arrayMapOrCollection);
+    } else if (Collection.class.isAssignableFrom(type)) {
+      return ((Collection<?>) arrayMapOrCollection).size();
+    } else if (Map.class.isAssignableFrom(type)) {
+      return ((Map<?, ?>) arrayMapOrCollection).size();
+    } else {
+      throw new NlsIllegalArgumentException(arrayMapOrCollection);
+    }
   }
 
   /**
@@ -170,15 +172,17 @@ public class CollectionUtil {
    */
   public Object get(Object arrayOrList, int index) throws NlsIllegalArgumentException {
 
-    if (arrayOrList != null) {
-      Class<?> type = arrayOrList.getClass();
-      if (type.isArray()) {
-        return Array.get(arrayOrList, index);
-      } else if (List.class.isAssignableFrom(type)) {
-        return ((List<?>) arrayOrList).get(index);
-      }
+    if (arrayOrList == null) {
+      throw new NlsIllegalArgumentException(null);
     }
-    throw new NlsIllegalArgumentException(arrayOrList);
+    Class<?> type = arrayOrList.getClass();
+    if (type.isArray()) {
+      return Array.get(arrayOrList, index);
+    } else if (List.class.isAssignableFrom(type)) {
+      return ((List<?>) arrayOrList).get(index);
+    } else {
+      throw new NlsIllegalArgumentException(arrayOrList);
+    }
   }
 
   /**
@@ -247,7 +251,7 @@ public class CollectionUtil {
       int maximumArrayGrowth) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
-      throw new NlsIllegalArgumentException(arrayOrList);
+      throw new NlsIllegalArgumentException(null);
     }
     int maximumGrowth;
     Class<?> type = arrayOrList.getClass();
@@ -310,7 +314,7 @@ public class CollectionUtil {
   public Object add(Object arrayOrCollection, Object item) {
 
     if (arrayOrCollection == null) {
-      throw new NlsIllegalArgumentException(arrayOrCollection);
+      throw new NlsIllegalArgumentException(null);
     }
     Class<?> type = arrayOrCollection.getClass();
     if (type.isArray()) {
@@ -347,7 +351,7 @@ public class CollectionUtil {
   public Object remove(Object arrayOrCollection, Object item) {
 
     if (arrayOrCollection == null) {
-      throw new NlsIllegalArgumentException(arrayOrCollection);
+      throw new NlsIllegalArgumentException(null);
     }
     Class<?> type = arrayOrCollection.getClass();
     if (type.isArray()) {

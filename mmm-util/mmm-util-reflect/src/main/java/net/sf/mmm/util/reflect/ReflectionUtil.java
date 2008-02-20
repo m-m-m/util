@@ -811,7 +811,7 @@ public class ReflectionUtil {
           String absoluteFileName = jarEntry.getName();
           if (absoluteFileName.endsWith(".class")) {
             if (absoluteFileName.startsWith("/")) {
-              absoluteFileName.substring(1);
+              absoluteFileName = absoluteFileName.substring(1);
             }
             // special treatment for WAR files...
             // "WEB-INF/lib/" entries should be opened directly in contained jar
