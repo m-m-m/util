@@ -157,4 +157,73 @@ public class CollectionUtilTest {
     assertEquals(array.length, list.size());
   }
 
+  @Test
+  public void testAdd() {
+
+    CollectionUtil util = getCollectionUtil();
+
+    String one = "The first one!";
+    String two = "Second...";
+    String three = "Third and last.";
+
+    // test array...
+    String[] array = new String[0];
+    array = (String[]) util.add(array, one);
+    assertEquals(1, array.length);
+    assertEquals(one, array[0]);
+    array = (String[]) util.add(array, two);
+    assertEquals(2, array.length);
+    assertEquals(one, array[0]);
+    assertEquals(two, array[1]);
+    array = (String[]) util.add(array, three);
+    assertEquals(3, array.length);
+    assertEquals(one, array[0]);
+    assertEquals(two, array[1]);
+    assertEquals(three, array[2]);
+
+    // test list...
+    List<String> list = new ArrayList<String>();
+    util.add(list, one);
+    assertEquals(1, list.size());
+    util.add(list, two);
+    assertEquals(2, list.size());
+    util.add(list, three);
+    assertEquals(3, list.size());
+    assertEquals(one, list.get(0));
+    assertEquals(two, list.get(1));
+    assertEquals(three, list.get(2));
+  }
+
+  @Test
+  public void testRemove() {
+
+    CollectionUtil util = getCollectionUtil();
+
+    String one = "The first one!";
+    String two = "Second...";
+    String three = "Third and last.";
+    String four = "number four";
+    String five = "fifth element";
+    String notContained = "none";
+
+    // test array...
+    String[] array = new String[] { one, two, three, four, five };
+    assertEquals(null, util.remove(array, notContained));
+    String[] newArray = (String[]) util.remove(array, three);
+    assertEquals(4, newArray.length);
+    assertSame(one, newArray[0]);
+    assertSame(two, newArray[1]);
+    assertSame(four, newArray[2]);
+    assertSame(five, newArray[3]);
+    array = new String[] { one, new String(two), two, three, four, five };
+    newArray = (String[]) util.remove(array, two);
+    assertEquals(5, newArray.length);
+    assertSame(one, newArray[0]);
+    assertSame(two, newArray[1]);
+    assertSame(three, newArray[2]);
+    assertSame(four, newArray[3]);
+    assertSame(five, newArray[4]);
+
+  }
+
 }

@@ -3,12 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.upnp.ssdp.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import junit.framework.TestCase;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.api.SsdpSender;
-
-import static org.junit.Assert.*;
 
 /**
  * This is a {@link TestCase test-case} for {@link SsdpSenderImpl}.
@@ -44,6 +47,7 @@ public class SsdpSenderImplTest {
   }
 
   @Test
+  @Ignore
   public void testSend() throws Exception {
 
     SsdpSenderImpl senderImpl = new SsdpSenderImpl();

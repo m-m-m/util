@@ -29,12 +29,13 @@ public class CollectionFactoryManagerImplTest {
     return CollectionFactoryManagerImpl.getInstance();
   }
 
-  protected <C extends Collection> void checkCollection(Class<C> collectionInterface) {
+  protected <COLLECTION extends Collection> void checkCollection(Class<COLLECTION> collectionInterface) {
 
-    CollectionFactory<C> factory = getCollectionFactoryManager().getCollectionFactory(collectionInterface);
+    CollectionFactory<COLLECTION> factory = getCollectionFactoryManager().getCollectionFactory(
+        collectionInterface);
     assertNotNull(factory);
     assertTrue(collectionInterface.isAssignableFrom(factory.getCollectionInterface()));
-    C collection = factory.createGeneric();
+    COLLECTION collection = factory.createGeneric();
     assertTrue(collectionInterface.isInstance(collection));
     assertTrue(collection.isEmpty());
   }
