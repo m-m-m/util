@@ -224,6 +224,36 @@ public class CollectionUtilTest {
     assertSame(four, newArray[3]);
     assertSame(five, newArray[4]);
 
+    // test list...
+    List<String> list = new ArrayList<String>();
+    list.add(one);
+    list.add(two);
+    list.add(three);
+    list.add(four);
+    list.add(five);
+    assertEquals(null, util.remove(list, notContained));
+    Object result = util.remove(list, three);
+    assertSame(list, result);
+    assertEquals(4, list.size());
+    assertSame(one, list.get(0));
+    assertSame(two, list.get(1));
+    assertSame(four, list.get(2));
+    assertSame(five, list.get(3));
+
+    list = new ArrayList<String>();
+    list.add(one);
+    list.add(new String(two));
+    list.add(two);
+    list.add(three);
+    list.add(four);
+    list.add(five);
+    util.remove(list, two);
+    assertEquals(5, list.size());
+    assertSame(one, list.get(0));
+    assertSame(two, list.get(1));
+    assertSame(three, list.get(2));
+    assertSame(four, list.get(3));
+    assertSame(five, list.get(4));
   }
 
 }
