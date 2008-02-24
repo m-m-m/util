@@ -4,7 +4,7 @@
 /**
  * Contains utilities for textual operations.
  * <h2>Text Utilities</h2>
- * The {@link net.sf.mmm.util.text.AbstractCharSequence} helps write 
+ * The {@link net.sf.mmm.util.text.AbstractCharSequence} helps to write 
  * implementations of the interface {@link java.lang.CharSequence} easily.
  * The {@link net.sf.mmm.util.text.Singularizer} transforms a term in plural 
  * form to its according singular form (e.g. <code>"children"</code> to 

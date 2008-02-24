@@ -19,8 +19,49 @@
  * a step to another method or class. Otherwise you would need to pass the current 
  * position to that method and return the new one from there. This is tricky if 
  * the method should already return something else.<br>
+ * Here is a little example of an entirely handwritten parser:
  * <pre>
- * TODO: example without and with scanner.
+ * String input = getInputString();
+ * int i = 0;
+ * boolean colonFound = false;
+ * while (i < input.length()) {
+ *   char c = input.charAt(i++);
+ *   if (c == ':') {
+ *     colonFound = true;
+ *     break;
+ *   }
+ * }
+ * if (!colonFound) {
+ *   throw new IllegalArgumentException("Expected character ':' not found!");
+ * }
+ * String key = input.substring(0, i - 1);
+ * String value = null;
+ * if (i < input.length()) {
+ *   while ((i < input.length()) && (input.charAt(i) == ' ')) {
+ *     i++;
+ *   }
+ *   int start = i;
+ *   while (i < input.length()) {
+ *     char c = input.charAt(i);
+ *     if ((c < '0') || (c > '9')) {
+ *       break;
+ *     }
+ *     i++;
+ *   }
+ *   value = input.substring(start, i);
+ * }
+ * </pre>
+ * Here is the same thing when using {@link net.sf.mmm.util.scanner.CharSequenceScanner}:
+ * <pre>
+ * String input = getInputString();
+ * {@link net.sf.mmm.util.scanner.CharSequenceScanner} scanner = new {@link net.sf.mmm.util.scanner.CharSequenceScanner}(input);
+ * String key = scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#readUntil(char, boolean) readUntil}(':', false);
+ * if (key == null) {
+ *   throw new IllegalArgumentException("Expected character ':' not found!");
+ * }
+ * scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#skipWhile(char) skipWhile}(' ');
+ * String value = scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#readWhile(net.sf.mmm.util.filter.CharFilter) 
+ * readWhile}({@link net.sf.mmm.util.filter.CharFilter#LATIN_DIGIT_FILTER});
  * </pre>
  */
 package net.sf.mmm.util.scanner;

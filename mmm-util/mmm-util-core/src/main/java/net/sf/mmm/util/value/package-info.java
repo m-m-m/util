@@ -39,7 +39,7 @@
  * Here is the same thing when using {@link net.sf.mmm.util.value.ValueConverter}:
  * <pre>
  * String value = getValueFromSomewhere();
- * ValueConverter converter = ValueConverter.INSTANCE;
+ * {@link net.sf.mmm.util.value.ValueConverter} converter = {@link net.sf.mmm.util.value.ValueConverter#getInstance()};
  * int valueAsInt = converter.{@link net.sf.mmm.util.value.ValueConverter#convertValue(String, Object, 
  * Number, Number) convertValue}(value, "somewhere", 0, 123456789);
  * </pre>

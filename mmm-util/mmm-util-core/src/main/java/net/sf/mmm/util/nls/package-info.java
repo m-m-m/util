@@ -19,7 +19,7 @@
  * <p>
  * Java already comes with great i18n support. But IMHO there are some tiny
  * peaces missing to complete the great puzzle of NLS:<br>
- * There is almost no support if an application needs NLS support that is
+ * There is almost no support if an application needs NLS that is
  * handling multiple users with different locales concurrently (e.g. a
  * web-application).<br>
  * You will typically store your messages in a
@@ -102,8 +102,6 @@
  * actually displayed to the end-user. At these places you need to figure out
  * the users locale and provide a proper 
  * <code>{@link net.sf.mmm.util.nls.api.NlsTemplateResolver}</code>.
- * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 package net.sf.mmm.util.nls;
 
