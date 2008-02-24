@@ -17,7 +17,10 @@
 	However another project was already registered with that name at sourceforge
 	so the sourceforge project id is m-m-m. Since m-m-m can not be used in some
 	technical situations (e.g. Java package names), it is only used for
-	sourceforge related stuff.</p>
+	sourceforge related stuff. The java package namespace is net.sf.mmm while the 
+	maven-groupId is net.sf.m-m-m.</p>
+	See also 
+	http://sourceforge.net/tracker/index.php?func=detail&aid=1898052&group_id=40062&atid=427657
       </answer>
     </faq>
   </part>
