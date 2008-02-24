@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.resource.manifest;
+package net.sf.mmm.util.reflect.manifest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * TODO: this class ...
+ * This class loads all {@link Manifest}s from your classpath. After
+ * construction an instance of this class allows you to
+ * {@link #getManifests() get} the list of {@link Manifest}s. This allows you
+ * to determine details (e.g. the name and version) about the libraries in your
+ * classpath.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
