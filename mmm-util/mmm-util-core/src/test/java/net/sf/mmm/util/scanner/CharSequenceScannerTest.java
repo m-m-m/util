@@ -19,7 +19,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class CharacterSequenceScannerTest {
+public class CharSequenceScannerTest {
 
   private void checkSkipOver(CharSequenceScanner parser, String substring, boolean ignoreCase) {
 
