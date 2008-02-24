@@ -7,6 +7,12 @@
   </properties>
   <body>
     <section name="Project History">
+      <subsection name="2008-02-20">
+        Changed the project maven-groupId from <code>net.sf.mmm</code> to <code>net.sf.m-m-m</code>.
+      </subsection>
+      <subsection name="2008-01-19">
+        The module <code>mmm-util-core</code> was released as version <code>1.0.0</code>.
+      </subsection>
       <subsection name="2007-11-16">
         After quite a long while <a href="http://www.koders.com">koders</a> has approved the project.
         Current development costs of the projects codebase is estimated at about $191000.
