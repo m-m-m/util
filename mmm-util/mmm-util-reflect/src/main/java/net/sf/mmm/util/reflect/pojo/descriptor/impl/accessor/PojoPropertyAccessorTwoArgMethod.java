@@ -7,6 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.AccessFailedException;
+import net.sf.mmm.util.reflect.InvocationFailedException;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorMethod;
@@ -44,10 +46,15 @@ public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccess
   /**
    * {@inheritDoc}
    */
-  public Object invoke(Object pojoInstance, Object argument1, Object argument2)
-      throws IllegalAccessException, InvocationTargetException {
+  public Object invoke(Object pojoInstance, Object argument1, Object argument2) {
 
-    return getMethod().invoke(pojoInstance, argument1, argument2);
+    try {
+      return getMethod().invoke(pojoInstance, argument1, argument2);
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, getMethod());
+    } catch (InvocationTargetException e) {
+      throw new InvocationFailedException(e, getMethod(), pojoInstance);
+    }
   }
 
   /**

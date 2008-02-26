@@ -20,14 +20,16 @@ public interface PojoPathContext {
 
   /**
    * This method provides a cache that is used by the {@link PojoPathNavigator}
-   * to speed up repetitive calls with the same initial POJO and POJO-paths with
-   * a common prefix.<br>
+   * to speed up repetitive calls with the same initial
+   * {@link net.sf.mmm.util.reflect.pojo.Pojo} and {@link PojoPath}s with a
+   * common prefix.<br>
    * <b>ATTENTION:</b><br>
    * Never make assumptions about the content of this cache. It is provided here
    * to allow the {@link PojoPathNavigator} to be thread-safe and more efficient
    * and NOT to expose it for external usage. The internal structure of the
    * cache may change in future releases. Use the
-   * {@link #getRecognizer() recognizer} to track visited POJOs.
+   * {@link #getRecognizer() recognizer} to track visited
+   * {@link net.sf.mmm.util.reflect.pojo.Pojo}s.
    * 
    * @see java.util.HashMap
    * @see java.util.WeakHashMap
@@ -35,7 +37,7 @@ public interface PojoPathContext {
    * @return a mutable {@link Map} to use as cache or <code>null</code> to
    *         disable caching.
    */
-  Map<String, Object> getCache();
+  Map<Object, Object> getCache();
 
   /**
    * This method gets the properties of the context. These can be accessed from
@@ -44,7 +46,7 @@ public interface PojoPathContext {
    * {@link PojoPathFunction}s are declared to be NOT
    * {@link PojoPathFunction#isDeterministic() deterministic}.
    * 
-   * @return the properties of the context. We do NOT use
+   * @return the properties of this context.
    */
   Properties getProperties();
 
@@ -52,8 +54,8 @@ public interface PojoPathContext {
    * This method gets an optional {@link PojoPathRecognizer recognizer} that
    * adds support for the visitor-pattern. Therefore all POJOs traversed by the
    * {@link PojoPathNavigator} are
-   * {@link PojoPathRecognizer#recognize(Object) recognized} by the returned
-   * object.
+   * {@link PojoPathRecognizer#recognize(Object, PojoPath) recognized}
+   * by the returned object.
    * 
    * @return the {@link PojoPathRecognizer} or <code>null</code> to turn this
    *         feature off.
@@ -76,6 +78,13 @@ public interface PojoPathContext {
    */
   PojoPathFunctionManager getAdditionalFunctionManager();
 
+  /**
+   * This method gets the {@link PojoFactory} instance used to
+   * {@link PojoPathMode#CREATE_IF_NULL create} new
+   * {@link net.sf.mmm.util.reflect.pojo.Pojo}s.
+   * 
+   * @return the {@link PojoFactory}.
+   */
   PojoFactory getPojoFactory();
 
 }

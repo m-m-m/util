@@ -19,7 +19,7 @@ public class DefaultPojoPathContext extends PojoPathContextBean {
   public DefaultPojoPathContext() {
 
     super();
-    setCache(new HashMap<String, Object>());
+    setCache(new HashMap<Object, Object>());
     setProperties(new Properties());
   }
 }

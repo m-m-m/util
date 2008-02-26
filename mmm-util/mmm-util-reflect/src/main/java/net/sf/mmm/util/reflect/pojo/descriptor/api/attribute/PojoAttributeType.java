@@ -5,10 +5,10 @@ package net.sf.mmm.util.reflect.pojo.descriptor.api.attribute;
 
 /**
  * This is the interface for an object that is related to a
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO} and
- * therefore contains the {@link #getPojoType() POJO-type}.
+ * {@link net.sf.mmm.util.reflect.pojo.Pojo} and therefore contains the
+ * {@link #getPojoType() pojo-type}.
  * 
- * @param <POJO> is the {@link #getPojoType() POJO-type}.
+ * @param <POJO> is the {@link #getPojoType() pojo-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -16,10 +16,9 @@ public abstract interface PojoAttributeType<POJO> {
 
   /**
    * This method gets the type reflecting the
-   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor POJO}
-   * represented by this descriptor.
+   * {@link net.sf.mmm.util.reflect.pojo.Pojo} this object is related to.
    * 
-   * @return the type of the according POJO.
+   * @return the type of the according {@link net.sf.mmm.util.reflect.pojo.Pojo}.
    */
   Class<POJO> getPojoType();
 

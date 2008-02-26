@@ -7,9 +7,11 @@ import net.sf.mmm.util.reflect.InstantiationFailedException;
 
 /**
  * This is the interface for a generic factory used to
- * {@link #newInstance(Class) create new instances} of POJOs.<br>
- * POJO is a shortcut for <em>Plain Old Java Object</em> and simply means any
- * Java object. Typically a POJO has a public non-arg constructor.
+ * {@link #newInstance(Class) create new instances} of
+ * {@link net.sf.mmm.util.reflect.pojo.Pojo}s.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.Pojo} is a shortcut for
+ * <em>Plain Old Java Object</em> and simply means any Java object. Typically
+ * a {@link net.sf.mmm.util.reflect.pojo.Pojo} has a public non-arg constructor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -22,9 +24,11 @@ public interface PojoFactory {
    * problems such as if the given <code>pojoType</code> has no non-arg
    * constructor, or it is an interface or abstract class.
    * 
-   * @param <POJO> is the generic type of the POJO to create.
-   * @param pojoType is the {@link Class} reflecting the POJO to create.
-   * @return the new instance of the given POJO.
+   * @param <POJO> is the generic type of the
+   *        {@link net.sf.mmm.util.reflect.pojo.Pojo} to create.
+   * @param pojoType is the {@link Class} reflecting the
+   *        {@link net.sf.mmm.util.reflect.pojo.Pojo} to create.
+   * @return the new instance of the given <code>pojoType</code>.
    * @throws InstantiationFailedException if the instantiation failed.
    */
   <POJO> POJO newInstance(Class<POJO> pojoType) throws InstantiationFailedException;

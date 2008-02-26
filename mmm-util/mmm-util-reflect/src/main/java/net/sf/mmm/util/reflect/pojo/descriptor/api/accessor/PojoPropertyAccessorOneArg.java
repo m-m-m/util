@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.api.accessor;
 
-import java.lang.reflect.InvocationTargetException;
+import net.sf.mmm.util.reflect.ReflectionException;
 
 /**
  * This is the interface for a {@link PojoPropertyAccessor property-accessor}
@@ -29,12 +29,10 @@ public interface PojoPropertyAccessorOneArg extends PojoPropertyAccessor {
    * @param argument is the value of the property to set.
    * @return the result of the invocation. Will be <code>null</code> if void
    *         (e.g. regular setter method).
-   * @throws IllegalAccessException if you do NOT have permissions the access
-   *         the underlying method.
-   * @throws InvocationTargetException if the POJO itself (the invoked method)
-   *         throws an exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
-  Object invoke(Object pojoInstance, Object argument) throws IllegalAccessException,
-      InvocationTargetException;
+  Object invoke(Object pojoInstance, Object argument) throws ReflectionException;
 
 }

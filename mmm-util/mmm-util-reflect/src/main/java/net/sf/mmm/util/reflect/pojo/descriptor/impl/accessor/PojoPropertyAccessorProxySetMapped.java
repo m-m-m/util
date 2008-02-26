@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -65,8 +64,7 @@ public class PojoPropertyAccessorProxySetMapped extends
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public Object invoke(Object pojoInstance, Object key, Object value)
-      throws IllegalAccessException, InvocationTargetException {
+  public Object invoke(Object pojoInstance, Object key, Object value) {
 
     Map map = (Map) getDelegate().invoke(pojoInstance);
     Object result = null;

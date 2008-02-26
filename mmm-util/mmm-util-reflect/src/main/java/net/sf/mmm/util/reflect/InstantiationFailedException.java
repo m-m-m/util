@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect;
 
-import net.sf.mmm.util.nls.NlsRuntimeException;
 
 /**
  * An {@link InstantiationFailedException} indicates that the
@@ -14,7 +13,7 @@ import net.sf.mmm.util.nls.NlsRuntimeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class InstantiationFailedException extends NlsRuntimeException {
+public class InstantiationFailedException extends ReflectionException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -5506046383771496547L;

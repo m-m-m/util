@@ -3,17 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.api;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import net.sf.mmm.util.reflect.ReflectionException;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
- * POJO. A POJO (plain old java object) in this manner is more or less any java
- * object.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.Pojo}. A
+ * {@link net.sf.mmm.util.reflect.pojo.Pojo} in this manner is more or less any
+ * java object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
  * Look at the following example:
  * 
@@ -191,14 +192,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (typically the getter)
-   *         throws an exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   Object getProperty(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
-      IllegalAccessException, InvocationTargetException;
+      ReflectionException;
 
   /**
    * This method sets the given <code>value</code> for the
@@ -219,14 +218,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (typically the setter)
-   *         throws an exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   Object setProperty(POJO pojoInstance, String propertyName, Object value)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
+      throws PojoPropertyNotFoundException, ReflectionException;
 
   /**
    * This method gets the
@@ -243,14 +240,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (typically the getter)
-   *         throws an exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   int getPropertySize(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
-      IllegalAccessException, InvocationTargetException;
+      ReflectionException;
 
   /**
    * This method adds the given <code>item</code> to the list-like
@@ -271,14 +266,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (the adder) throws an
-   *         exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   Object addPropertyItem(POJO pojoInstance, String propertyName, Object item)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
+      throws PojoPropertyNotFoundException, ReflectionException;
 
   /**
    * This method removes the given <code>item</code> from an array or
@@ -302,14 +295,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (the adder) throws an
-   *         exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
+      throws PojoPropertyNotFoundException, ReflectionException;
 
   /**
    * This method gets the item with the given <code>index</code> from the
@@ -331,14 +322,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (the adder) throws an
-   *         exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   Object getPropertyItem(POJO pojoInstance, String propertyName, int index)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
+      throws PojoPropertyNotFoundException, ReflectionException;
 
   /**
    * This method sets the given <code>item</code> at the given
@@ -362,13 +351,11 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
    *         {@link PojoPropertyAccessor accessor}.
-   * @throws IllegalAccessException if you do NOT have permissions to access the
-   *         underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor}.
-   * @throws InvocationTargetException if the POJO itself (the adder) throws an
-   *         exception.
+   * @throws ReflectionException if the underlying
+   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
+   *         an error during reflection.
    */
   Object setPropertyItem(POJO pojoInstance, String propertyName, int index, Object item)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException;
+      throws PojoPropertyNotFoundException, ReflectionException;
 
 }

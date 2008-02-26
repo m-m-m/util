@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
@@ -64,8 +63,7 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   /**
    * {@inheritDoc}
    */
-  public Object invoke(Object pojoInstance, int index) throws IllegalAccessException,
-      InvocationTargetException {
+  public Object invoke(Object pojoInstance, int index) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
     return getCollectionUtil().get(arrayOrList, index);

@@ -21,15 +21,15 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
   /**
    * The constructor.
    * 
-   * @param pojoPath is the {@link PojoPathNavigator POJO-Path} that could NOT
+   * @param pojoPath is the {@link PojoPathNavigator POJO-path} that could NOT
    *        be evaluated.
-   * @param pojo is the initial POJO supplied to the {@link PojoPathNavigator}.
+   * @param initialPojo is the initial POJO supplied to the {@link PojoPathNavigator}.
    * @param pathToNullSegment is the part of the <code>pojoPath</code> that
    *        evaluated to <code>null</code>.
    */
-  public PojoPathSegmentIsNullException(String pojoPath, Object pojo, String pathToNullSegment) {
+  public PojoPathSegmentIsNullException(String pojoPath, Object initialPojo, String pathToNullSegment) {
 
-    super(NlsBundlePojo.ERR_PATH_SEGMENT_IS_NULL, pojoPath, pojo, pathToNullSegment);
+    super(NlsBundlePojo.ERR_PATH_SEGMENT_IS_NULL, pojoPath, initialPojo, pathToNullSegment);
   }
 
 }

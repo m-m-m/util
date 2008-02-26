@@ -28,4 +28,9 @@ public class NlsBundleResource extends AbstractResourceBundle {
    */
   public static final String ERR_RESOURCE_NOT_AVAILABLE = "The resource \"{0}\" is not available in your classpath!";
 
+  /**
+   * Exception message if a path for a resource is illegal.
+   */
+  public static final String ERR_ILLEGAL_PATH = "The path \"{0}\" is illegal!";
+
 }

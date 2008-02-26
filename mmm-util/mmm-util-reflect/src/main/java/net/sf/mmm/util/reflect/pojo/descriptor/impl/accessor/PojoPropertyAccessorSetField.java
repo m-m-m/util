@@ -4,9 +4,9 @@
 package net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.AccessFailedException;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorField;
@@ -34,13 +34,16 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
   /**
    * {@inheritDoc}
    */
-  public Object invoke(Object pojoInstance, Object argument) throws IllegalAccessException,
-      InvocationTargetException {
+  public Object invoke(Object pojoInstance, Object argument) {
 
     Field field = getField();
-    Object old = field.get(pojoInstance);
-    field.set(pojoInstance, argument);
-    return old;
+    try {
+      Object old = field.get(pojoInstance);
+      field.set(pojoInstance, argument);
+      return old;
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, field);
+    }
   }
 
   /**

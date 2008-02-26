@@ -15,9 +15,9 @@ public enum PojoPathMode {
 
   /**
    * This mode causes the {@link PojoPathNavigator} to
-   * {@link PojoFactory#newInstance(Class) create} POJOs if they are
-   * <code>null</code>. This applies to intermediate POJOs as well as the
-   * final result of the POJO-path.<br>
+   * {@link net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory#newInstance(Class) create}
+   * POJOs if they are <code>null</code>. This applies to intermediate POJOs
+   * as well as the final result of the POJO-path.<br>
    * <ul>
    * <li>For a &#171;Property&#187; this is done via the {@link Class type} of
    * the according setter.</li>
@@ -37,7 +37,8 @@ public enum PojoPathMode {
    * {@link PojoPathFunction#create(Object, String, PojoPathContext)}.</li>
    * </ul>
    * The creation in case of &#171;Property&#187; or &#171;Index&#187; will
-   * happen via the {@link PojoFactory} provided by the {@link PojoPathContext}.
+   * happen via the {@link net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory}
+   * provided by the {@link PojoPathContext}.
    */
   CREATE_IF_NULL,
 

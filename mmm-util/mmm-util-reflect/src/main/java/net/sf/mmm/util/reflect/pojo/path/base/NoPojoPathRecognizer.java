@@ -3,11 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.path.base;
 
+import net.sf.mmm.util.reflect.pojo.path.api.PojoPath;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;
 
 /**
  * This is a dummy implementation of the {@link PojoPathRecognizer} that
- * {@link #recognize(Object) does} nothing.
+ * {@link #recognize(Object, PojoPath) does} nothing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -27,7 +28,7 @@ public final class NoPojoPathRecognizer implements PojoPathRecognizer {
   /**
    * {@inheritDoc}
    */
-  public void recognize(Object pojo) {
+  public void recognize(Object pojo, PojoPath currentPath) {
 
   }
 

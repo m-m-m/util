@@ -160,26 +160,68 @@ public class CollectionUtil {
 
   /**
    * This method gets the item at the given <code>index</code> from
+   * <code>arrayOrCollection</code>.<br>
+   * It sets <code>ignoreIndexOverflow</code> to <code>true</code>.
+   * 
+   * @see #get(Object, int, boolean)
+   * 
+   * @param arrayOrList is the array or {@link List}.
+   * @param index is the position of the requested item.
+   * @return the item at the given <code>index</code>. May be
+   *         <code>null</code> if the item itself is <code>null</code> or
+   *         the index is greater than the {@link #getSize(Object) size} or
+   *         <code>arrayOrCollection</code>.
+   * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
+   *         is invalid (<code>null</code> or neither array nor {@link List}).
+   */
+  public Object get(Object arrayOrList, int index) throws NlsIllegalArgumentException {
+
+    return get(arrayOrList, index, true);
+  }
+
+  /**
+   * This method gets the item at the given <code>index</code> from
    * <code>arrayOrCollection</code>.
    * 
    * @see List#get(int)
    * 
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position of the requested item.
-   * @return the item at the given <code>index</code>.
+   * @param ignoreIndexOverflow - if <code>false</code> an the given
+   *        <code>index</code> is greater or equal to the
+   *        {@link #getSize(Object) size} of <code>arrayOrCollection</code> an
+   *        {@link IndexOutOfBoundsException} will be thrown. Else if
+   *        <code>true</code>, <code>null</code> is returned in this case.
+   * @return the item at the given <code>index</code>. May be
+   *         <code>null</code> if the item itself is <code>null</code> or
+   *         the index is greater or equal to the {@link #getSize(Object) size}
+   *         of <code>arrayOrCollection</code>.
    * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
    *         is invalid (<code>null</code> or neither array nor {@link List}).
    */
-  public Object get(Object arrayOrList, int index) throws NlsIllegalArgumentException {
+  public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow)
+      throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsIllegalArgumentException(null);
     }
     Class<?> type = arrayOrList.getClass();
     if (type.isArray()) {
+      if (ignoreIndexOverflow) {
+        int length = Array.getLength(arrayOrList);
+        if (index >= length) {
+          return null;
+        }
+      }
       return Array.get(arrayOrList, index);
     } else if (List.class.isAssignableFrom(type)) {
-      return ((List<?>) arrayOrList).get(index);
+      List<?> list = (List<?>) arrayOrList;
+      if (ignoreIndexOverflow) {
+        if (index >= list.size()) {
+          return null;
+        }
+      }
+      return list.get(index);
     } else {
       throw new NlsIllegalArgumentException(arrayOrList);
     }

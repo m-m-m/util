@@ -7,6 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.AccessFailedException;
+import net.sf.mmm.util.reflect.InvocationFailedException;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorMethod;
@@ -55,14 +57,19 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
   /**
    * {@inheritDoc}
    */
-  public Object invoke(Object pojoInstance, int index, Object item) throws IllegalAccessException,
-      InvocationTargetException {
+  public Object invoke(Object pojoInstance, int index, Object item) {
 
-    Integer i = Integer.valueOf(index);
-    if (this.inverted) {
-      return getMethod().invoke(pojoInstance, item, i);
-    } else {
-      return getMethod().invoke(pojoInstance, i, item);
+    try {
+      Integer i = Integer.valueOf(index);
+      if (this.inverted) {
+        return getMethod().invoke(pojoInstance, item, i);
+      } else {
+        return getMethod().invoke(pojoInstance, i, item);
+      }
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, getMethod());
+    } catch (InvocationTargetException e) {
+      throw new InvocationFailedException(e, getMethod(), pojoInstance);
     }
   }
 

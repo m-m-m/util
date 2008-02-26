@@ -4,12 +4,25 @@
 package net.sf.mmm.util.reflect.pojo.path.api;
 
 /**
- * TODO: this class ...
+ * This is the interface used to
+ * {@link #recognize(Object, PojoPath) recognize}
+ * {@link net.sf.mmm.util.reflect.pojo.Pojo}s traversed by a
+ * {@link PojoPathNavigator}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface PojoPathRecognizer {
 
-  void recognize(Object pojo);
+  /**
+   * This method is called to recognize the <code>actualPojo</code>. It is
+   * called by the {@link PojoPathNavigator} (an {@link PojoPathFunction}s) for
+   * each {@link net.sf.mmm.util.reflect.pojo.Pojo} that has been traversed.
+   * 
+   * @param actualPojo is the actual {@link net.sf.mmm.util.reflect.pojo.Pojo}
+   *        to recognize.
+   * @param currentPath is the {@link PojoPath} that lead to the
+   *        <code>actualPojo</code>.
+   */
+  void recognize(Object actualPojo, PojoPath currentPath);
 
 }

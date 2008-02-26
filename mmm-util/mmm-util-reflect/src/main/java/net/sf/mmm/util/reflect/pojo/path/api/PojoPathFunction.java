@@ -18,9 +18,10 @@ package net.sf.mmm.util.reflect.pojo.path.api;
  * {@link PojoPathFunctionManager#getFunction(String) registered} with different
  * names and can behave different according to the name it was invoked for.<br>
  * 
- * @param <ACTUAL> is the actual POJO this function operates on.
- * @param <VALUE> is the value this function traverses to starting from the
- *        actual POJO.
+ * @param <ACTUAL> is the actual {@link net.sf.mmm.util.reflect.pojo.Pojo} this
+ *        function operates on.
+ * @param <VALUE> is the value this function traverses to, starting from the
+ *        actual {@link net.sf.mmm.util.reflect.pojo.Pojo}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -40,7 +41,7 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * <code>&#64;myFunction</code> based on the result retrieved for
    * <code>foo.bar</code>.
    */
-  String FUNCTION_NAME_PREFIX = "@";
+  char FUNCTION_NAME_PREFIX = '@';
 
   /**
    * This method determines if this {@link PojoPathFunction} is deterministic.
@@ -82,8 +83,8 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * @param context is the {@link PojoPathContext} providing additional context
    *        information. Objects traversed between <code>actual</code> and the
    *        returned value should be
-   *        {@link PojoPathRecognizer#recognize(Object) recognized} via the
-   *        {@link PojoPathContext#getRecognizer() recognizer}.
+   *        {@link PojoPathRecognizer#recognize(Object, PojoPath) recognized}
+   *        via the {@link PojoPathContext#getRecognizer() recognizer}.
    * @return the value of this function or <code>null</code> if NOT available.
    */
   VALUE get(ACTUAL actual, String functionName, PojoPathContext context);
@@ -94,7 +95,7 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * if the mode is {@link PojoPathMode#CREATE_IF_NULL} after
    * {@link #get(Object, String, PojoPathContext) get} returned
    * <code>null</code>.<br>
-   * A typical implementation may create a new instance of {@literal <VALUE>}
+   * A typical implementation may create a new instance of &lt;VALUE&gt;
    * explicitly or via {@link Class#newInstance() reflection}. Further in most
    * cases the created value instance will be attached to the given
    * <code>actual</code> POJO.
@@ -108,8 +109,8 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * @param context is the {@link PojoPathContext} providing additional context
    *        information. Objects traversed between <code>actual</code> and the
    *        returned value should be
-   *        {@link PojoPathRecognizer#recognize(Object) recognized} via the
-   *        {@link PojoPathContext#getRecognizer() recognizer}.
+   *        {@link PojoPathRecognizer#recognize(Object, PojoPath) recognized}
+   *        via the {@link PojoPathContext#getRecognizer() recognizer}.
    * @return the created value. It may be <code>null</code> if creation is NOT
    *         possible. However returning <code>null</code> here will cause the
    *         {@link PojoPathNavigator} to fail with an exception.
@@ -133,8 +134,8 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * @param context is the {@link PojoPathContext} providing additional context
    *        information. Objects traversed between <code>actual</code> and the
    *        returned value should be
-   *        {@link PojoPathRecognizer#recognize(Object) recognized} via the
-   *        {@link PojoPathContext#getRecognizer() recognizer}.
+   *        {@link PojoPathRecognizer#recognize(Object, PojoPath) recognized}
+   *        via the {@link PojoPathContext#getRecognizer() recognizer}.
    * @return the previous value that has been replaced or <code>null</code>.
    */
   VALUE set(ACTUAL actual, String functionName, VALUE value, PojoPathContext context);

@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.base;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
@@ -93,8 +92,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object getProperty(POJO pojoInstance, String propertyName)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public Object getProperty(POJO pojoInstance, String propertyName) {
 
     return getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET, true).invoke(pojoInstance);
   }
@@ -102,8 +100,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object setProperty(POJO pojoInstance, String propertyName, Object value)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public Object setProperty(POJO pojoInstance, String propertyName, Object value) {
 
     return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.SET, true).invoke(pojoInstance,
         value);
@@ -112,8 +109,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public int getPropertySize(POJO pojoInstance, String propertyName)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public int getPropertySize(POJO pojoInstance, String propertyName) {
 
     Object result = getAccessor(propertyName, PojoPropertyAccessorNonArgMode.SIZE, true).invoke(
         pojoInstance);
@@ -129,8 +125,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object addPropertyItem(POJO pojoInstance, String propertyName, Object item)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public Object addPropertyItem(POJO pojoInstance, String propertyName, Object item) {
 
     return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.ADD, true).invoke(pojoInstance,
         item);
@@ -139,8 +134,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item) {
 
     Object result = getAccessor(propertyName, PojoPropertyAccessorOneArgMode.REMOVE, true).invoke(
         pojoInstance, item);
@@ -153,8 +147,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object getPropertyItem(POJO pojoInstance, String propertyName, int index)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public Object getPropertyItem(POJO pojoInstance, String propertyName, int index) {
 
     return getAccessor(propertyName, PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED).invoke(
         pojoInstance, index);
@@ -163,8 +156,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object setPropertyItem(POJO pojoInstance, String propertyName, int index, Object item)
-      throws PojoPropertyNotFoundException, IllegalAccessException, InvocationTargetException {
+  public Object setPropertyItem(POJO pojoInstance, String propertyName, int index, Object item) {
 
     return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(
         pojoInstance, index, item);

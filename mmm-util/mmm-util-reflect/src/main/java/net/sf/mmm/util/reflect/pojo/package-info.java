@@ -2,7 +2,7 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Provides utilities for reflecting on POJOs.
+ * Provides utilities for reflecting on {@link Pojo}s.
  * <h2>POJO Utilities</h2>
  * POJO is a shortcut for Plain Old Java Object and more or less means any java 
  * object. While the java beans specification is generally a good idea to 

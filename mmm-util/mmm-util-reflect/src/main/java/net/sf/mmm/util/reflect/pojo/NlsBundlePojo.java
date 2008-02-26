@@ -31,4 +31,10 @@ public class NlsBundlePojo extends AbstractResourceBundle {
   public static final String ERR_PATH_SEGMENT_IS_NULL = "Failed to evaluate the "
       + "POJO-path \"{0}\" for object \"{1}\" because the segment at \"{2}\" is null!";
 
+  /** @see net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException */
+  public static final String ERR_ILLEGAL_PATH = "Illegal POJO-path \"{0}\"!";
+
+  /** @see net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException */
+  public static final String ERR_FUNCTION_UNDEFINED = "Undefined function \"{0}\"!";
+
 }

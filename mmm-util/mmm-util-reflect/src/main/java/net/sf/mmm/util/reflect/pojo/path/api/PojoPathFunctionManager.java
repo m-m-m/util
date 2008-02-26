@@ -28,6 +28,7 @@ public interface PojoPathFunctionManager {
    *         {@link PojoPathFunction} is registered for the given
    *         <code>functionName</code>.
    */
+  @SuppressWarnings("unchecked")
   PojoPathFunction getFunction(String functionName);
 
 }

@@ -7,6 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.AccessFailedException;
+import net.sf.mmm.util.reflect.InvocationFailedException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
@@ -45,10 +47,15 @@ public class PojoPropertyAccessorNonArgMethod extends AbstractPojoPropertyAccess
   /**
    * {@inheritDoc}
    */
-  public Object invoke(Object pojoInstance) throws IllegalAccessException,
-      InvocationTargetException {
+  public Object invoke(Object pojoInstance) {
 
-    return getMethod().invoke(pojoInstance, ReflectionUtil.NO_ARGUMENTS);
+    try {
+      return getMethod().invoke(pojoInstance, ReflectionUtil.NO_ARGUMENTS);
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, getMethod());
+    } catch (InvocationTargetException e) {
+      throw new InvocationFailedException(e, getMethod(), pojoInstance);
+    }
   }
 
   /**

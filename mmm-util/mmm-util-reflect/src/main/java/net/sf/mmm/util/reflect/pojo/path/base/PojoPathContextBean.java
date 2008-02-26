@@ -13,9 +13,7 @@ import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;
 
 /**
  * This is an implementation of the {@link PojoPathContext} interface as simple
- * Java bean. The {@link #getRecognizer() recognizer} is initialized with
- * {@link NoPojoPathRecognizer#INSTANCE}. All other fields are initially
- * <code>null</code>.
+ * Java bean.
  * 
  * @see DefaultPojoPathContext
  * 
@@ -24,7 +22,7 @@ import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;
 public class PojoPathContextBean implements PojoPathContext {
 
   /** @see #getCache() */
-  private Map<String, Object> cache;
+  private Map<Object, Object> cache;
 
   /** @see #getProperties() */
   private Properties properties;
@@ -35,16 +33,15 @@ public class PojoPathContextBean implements PojoPathContext {
   /** @see #getAdditionalFunctionManager() */
   private PojoPathFunctionManager additionalFunctionManager;
 
-  /** @see #get */
+  /** @see #getPojoFactory() */
   private PojoFactory pojoFactory;
 
   /**
-   * The constructor.
+   * The constructor. All fields are initially <code>null</code>.
    */
   public PojoPathContextBean() {
 
     super();
-    this.recognizer = NoPojoPathRecognizer.INSTANCE;
   }
 
   /**
@@ -70,7 +67,7 @@ public class PojoPathContextBean implements PojoPathContext {
   /**
    * {@inheritDoc}
    */
-  public Map<String, Object> getCache() {
+  public Map<Object, Object> getCache() {
 
     return this.cache;
   }
@@ -80,7 +77,7 @@ public class PojoPathContextBean implements PojoPathContext {
    * 
    * @param cache is the cache to set.
    */
-  public void setCache(Map<String, Object> cache) {
+  public void setCache(Map<Object, Object> cache) {
 
     this.cache = cache;
   }

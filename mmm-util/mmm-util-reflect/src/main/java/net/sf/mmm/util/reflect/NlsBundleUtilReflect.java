@@ -33,4 +33,13 @@ public class NlsBundleUtilReflect extends AbstractResourceBundle {
   /** @see InstantiationFailedException */
   public static final String ERR_INSTANTIATION_FAILED = "Failed to create an instance of \"{0}\"!";
 
+  /** @see InvocationFailedException */
+  public static final String ERR_INVOCATION_FAILED = "Reflective invocation failed!";
+
+  /** @see InvocationFailedException */
+  public static final String ERR_INVOCATION_FAILED_ON = "Reflective invocation of \"{0}\" on \"{1}\" failed!";
+
+  /** @see AccessFailedException */
+  public static final String ERR_ACCESS_FAILED = "Reflective access for \"{0}\" failed!";
+
 }

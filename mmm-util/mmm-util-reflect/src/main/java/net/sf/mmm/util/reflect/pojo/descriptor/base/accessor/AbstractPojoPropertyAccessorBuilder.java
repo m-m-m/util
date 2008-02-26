@@ -38,13 +38,10 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
    */
   protected static boolean isBooleanType(Class<?> type) {
 
-    if (type == boolean.class) {
+    if ((type == boolean.class) || (type == Boolean.class)) {
       return true;
-    } else if (type == Boolean.class) {
-      return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   /**
@@ -57,13 +54,10 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
    */
   protected static boolean isIntegerType(Class<?> type) {
 
-    if (type == int.class) {
+    if ((type == int.class) || (type == Integer.class)) {
       return true;
-    } else if (type == Integer.class) {
-      return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   /**
