@@ -41,12 +41,12 @@ public class PojoPathCreationException extends PojoPathException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>
-   *        but could NOT be created.
    * @param initialPojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
    *        supplied to the {@link PojoPathNavigator}.
+   * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>
+   *        but could NOT be created.
    */
-  public PojoPathCreationException(Object initialPojo, String pojoPath, Exception nested) {
+  public PojoPathCreationException(Exception nested, Object initialPojo, String pojoPath) {
 
     super(nested, NlsBundlePojo.ERR_PATH_CREATION, initialPojo, pojoPath);
   }

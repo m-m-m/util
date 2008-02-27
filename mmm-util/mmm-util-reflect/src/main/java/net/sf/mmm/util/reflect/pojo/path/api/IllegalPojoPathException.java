@@ -40,7 +40,7 @@ public class IllegalPojoPathException extends PojoPathException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param pojoPath is the {@link PojoPathNavigator POJO-path} that is illegal.
    */
-  public IllegalPojoPathException(String pojoPath, Throwable nested) {
+  public IllegalPojoPathException(Throwable nested, String pojoPath) {
 
     super(nested, NlsBundlePojo.ERR_PATH_ILLEGAL, pojoPath);
   }

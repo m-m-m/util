@@ -28,8 +28,8 @@ public class NlsBundlePojo extends AbstractResourceBundle {
       + "accessible for \"{2}\" in \"{1}\"!";
 
   /** @see net.sf.mmm.util.reflect.pojo.path.api.PojoPathSegmentIsNullException */
-  public static final String ERR_PATH_SEGMENT_IS_NULL = "Failed to evaluate the "
-      + "pojo-path \"{0}\" for object \"{1}\" because the segment at \"{2}\" is null!";
+  public static final String ERR_PATH_SEGMENT_IS_NULL = "The "
+      + "pojo-path \"{0}\" for object \"{1}\" evaluates to null!";
 
   /** @see net.sf.mmm.util.reflect.pojo.path.api.PojoPathCreationException */
   public static final String ERR_PATH_CREATION = "Failed to create the "

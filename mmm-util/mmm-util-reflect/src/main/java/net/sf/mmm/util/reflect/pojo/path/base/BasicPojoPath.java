@@ -67,7 +67,7 @@ public class BasicPojoPath implements PojoPath {
         try {
           this.index = Integer.valueOf(this.segment);
         } catch (NumberFormatException e) {
-          throw new IllegalPojoPathException(pojoPath, e);
+          throw new IllegalPojoPathException(e, pojoPath);
         }
       } else {
         this.index = null;
