@@ -8,7 +8,9 @@ package net.sf.mmm.util.collection;
  * as {@link java.util.Map#get(Object) hash-key}. It only
  * {@link #equals(Object) matches} the exact same instance regardless of the
  * {@link Object#equals(Object)} method of the
- * {@link #getDelegate() delegate object}.
+ * {@link #getDelegate() delegate-object}. Additionally it sill matches even if
+ * the {@link #getDelegate() delegate-object} has been modified and therefore
+ * changed its {@link Object#hashCode() hash-code}.
  * 
  * @param <T> is the templated type of the
  *        {@link #getDelegate() delegate-object}.
@@ -47,19 +49,16 @@ public class HashKey<T> {
   @Override
   public int hashCode() {
 
-    if (this.delegate == null) {
-      return 0;
-    }
-    return this.delegate.hashCode();
+    return System.identityHashCode(this.delegate);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(Object other) {
 
-    return (this.delegate == obj);
+    return (this.delegate == other);
   }
 
 }

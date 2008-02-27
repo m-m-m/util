@@ -108,7 +108,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       throw new NlsIllegalArgumentException("Initial POJO can NOT be null!");
     }
     SegmentCache segmentCache = getSegmentCache(pojo, context);
-    return getRecursive(pojo, pojoPath, mode, context, segmentCache);
+    SimplePojoPath path = getRecursive(pojo, pojoPath, mode, context, segmentCache);
+    return path.getPojo();
   }
 
   /**
@@ -137,7 +138,19 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     if (segmentCache != null) {
       parentPath = segmentCache.get(pojoPath);
       if (parentPath != null) {
-        return parentPath;
+        boolean useCache = context.isCachingUnsafe();
+        if ((!useCache) && (parentPath.pojo != null)) {
+          // modification check...
+          if (parentPath.pojoHashCode == parentPath.pojo.hashCode()) {
+            useCache = true;
+          } else {
+            // nuke object in cache...
+            parentPath.pojo = null;
+          }
+        }
+        if (useCache) {
+          return parentPath;
+        }
       }
     }
     SimplePojoPath currentPath = new SimplePojoPath(pojoPath);
@@ -291,8 +304,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * This method gets the value of the specified <code>property</code> from
    * the given <code>pojo</code>.
    * 
-   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} where
-   *        to get the <code>property</code> from.
+   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+   *        where to get the <code>property</code> from.
    * @param property is the name of the property to get.
    * @param mode is the {@link PojoPathMode} that determines how to deal with
    *        <code>null</code> values.
@@ -304,8 +317,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * This method sets the specified <code>property</code> of the given
    * <code>pojo</code> to the given <code>value</code>.
    * 
-   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} where
-   *        to set the <code>property</code>.
+   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+   *        where to set the <code>property</code>.
    * @param property is the name of the property to set.
    * @param value is the value to set. It may be <code>null</code>.
    */
@@ -414,6 +427,178 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     public void setDisabled() {
 
       this.disabled = true;
+    }
+
+  }
+
+  /**
+   * This inner class
+   */
+  protected static class PojoHashProxy {
+
+    /** the actual pojo. */
+    private final Object pojo;
+
+    /**
+     * The constructor.
+     */
+    public PojoHashProxy(Object pojo) {
+
+      super();
+      this.pojo = pojo;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+
+      return System.identityHashCode(this.pojo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object other) {
+
+      return (this.pojo == other);
+    }
+
+  }
+
+  /**
+   * This class represents a
+   * {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath}. It contains the
+   * internal logic to validate and parse the
+   * {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath}. Additional it can
+   * also hold the {@link #getPojo() result} of the evaluation and the
+   * {@link #getPojoType() generic type}.
+   * 
+   * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+   */
+  protected static class SimplePojoPath extends BasicPojoPath {
+
+    /** @see #getParent() */
+    private SimplePojoPath parent;
+
+    /** @see #getPojoType() */
+    private Type pojoType;
+
+    /** @see #getPojo() */
+    private Object pojo;
+
+    /** @see #getPojoHashCode() */
+    private int pojoHashCode;
+
+    /**
+     * The constructor.
+     * 
+     * @param pojoPath is the {@link #getPojoPath() path} to represent.
+     */
+    public SimplePojoPath(String pojoPath) {
+
+      super(pojoPath);
+    }
+
+    /**
+     * @return the parent
+     */
+    public SimplePojoPath getParent() {
+
+      return this.parent;
+    }
+
+    /**
+     * @param parent is the parent to set
+     */
+    public void setParent(SimplePojoPath parent) {
+
+      this.parent = parent;
+    }
+
+    /**
+     * This method gets the {@link Type type} of the {@link #getPojo() Pojo}
+     * this {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} is leading
+     * to.
+     * 
+     * @return the property-type or <code>null</code> if NOT set.
+     */
+    public Type getPojoType() {
+
+      return this.pojoType;
+    }
+
+    /**
+     * This method sets the {@link #getPojoType() pojo-type}.
+     * 
+     * @param propertyType is the property-type to set.
+     */
+    public void setPojoType(Type propertyType) {
+
+      this.pojoType = propertyType;
+    }
+
+    /**
+     * This method gets the {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+     * instance this {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} is
+     * leading to.
+     * 
+     * @return the {@link net.sf.mmm.util.reflect.pojo.api.Pojo} or
+     *         <code>null</code>.
+     */
+    public Object getPojo() {
+
+      return this.pojo;
+    }
+
+    /**
+     * This method sets the {@link #getPojo() pojo-instance}.
+     * 
+     * @param pojo is the {@link #getPojo() pojo-instance}.
+     */
+    public void setPojo(Object pojo) {
+
+      this.pojo = pojo;
+    }
+
+    /**
+     * @return the pojoHashCode
+     */
+    public int getPojoHashCode() {
+
+      return this.pojoHashCode;
+    }
+
+    /**
+     * @param pojoHashCode is the pojoHashCode to set
+     */
+    public void setPojoHashCode(int pojoHashCode) {
+
+      this.pojoHashCode = pojoHashCode;
+    }
+
+    protected boolean checkForSafeCaching() {
+
+      boolean safe = false;
+      if (this.pojo != null) {
+        int hash = this.pojo.hashCode();
+        if (this.pojoHashCode == hash) {
+          safe = true;
+        }
+      }
+      if (this.parent != null) {
+        boolean parentSafe = this.parent.checkForSafeCaching();
+        if (!parentSafe) {
+          safe = false;
+        }
+      }
+      if (!safe) {
+        // nuke cached pojo...
+        this.pojo = null;
+      }
+      return safe;
     }
 
   }

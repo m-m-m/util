@@ -7,8 +7,8 @@ import net.sf.mmm.util.reflect.InstantiationFailedException;
 
 /**
  * This is the interface for the navigator used to traverse the object-web
- * spanned by an initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo} reflectively
- * according to a given {@link PojoPath}.
+ * spanned by an initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+ * reflectively according to a given {@link PojoPath}.
  * 
  * <h3>Design</h3>
  * The {@link PojoPathNavigator} is designed to be thread-safe and extendable.
@@ -31,7 +31,11 @@ public interface PojoPathNavigator {
   /**
    * This method evaluates the given <code>pojoPath</code> for the given
    * <code>pojo</code> using the given <code>mode</code> and
-   * <code>context</code>. It returns the result of the evaluation.
+   * <code>context</code>. It returns the result of the evaluation.<br>
+   * <b>ATTENTION:</b><br>
+   * If you use {@link PojoPathContext#getCache() caching} for repetitive calls
+   * on the same initial <code>pojo</code>, you might get wrong results if
+   * intermediate objects have changed in the meantime.
    * 
    * @param pojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to
    *        operate on.
