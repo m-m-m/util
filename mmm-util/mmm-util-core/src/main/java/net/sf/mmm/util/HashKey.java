@@ -58,7 +58,29 @@ public class HashKey<T> {
   @Override
   public boolean equals(Object other) {
 
-    return (this.delegate == other);
+    if (other == this) {
+      return true;
+    }
+    if (other == null) {
+      return false;
+    }
+    if (!getClass().equals(other.getClass())) {
+      return false;
+    }
+    HashKey<?> otherKey = (HashKey<?>) other;
+    return (this.delegate == otherKey.delegate);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    if (this.delegate == null) {
+      return "<null>";
+    }
+    return this.delegate.toString();
   }
 
 }
