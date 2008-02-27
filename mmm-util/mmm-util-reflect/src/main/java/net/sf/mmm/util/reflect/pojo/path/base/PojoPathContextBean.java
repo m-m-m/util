@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.pojo.path.base;
 import java.util.Map;
 import java.util.Properties;
 
-import net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory;
+import net.sf.mmm.util.reflect.pojo.api.PojoFactory;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunctionManager;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;

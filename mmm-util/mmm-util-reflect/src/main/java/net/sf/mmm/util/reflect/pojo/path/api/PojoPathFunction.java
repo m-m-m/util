@@ -18,10 +18,10 @@ package net.sf.mmm.util.reflect.pojo.path.api;
  * {@link PojoPathFunctionManager#getFunction(String) registered} with different
  * names and can behave different according to the name it was invoked for.<br>
  * 
- * @param <ACTUAL> is the actual {@link net.sf.mmm.util.reflect.pojo.Pojo} this
+ * @param <ACTUAL> is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} this
  *        function operates on.
  * @param <VALUE> is the value this function traverses to, starting from the
- *        actual {@link net.sf.mmm.util.reflect.pojo.Pojo}.
+ *        actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

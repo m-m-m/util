@@ -31,7 +31,7 @@ public class IllegalPojoPathException extends PojoPathException {
    */
   public IllegalPojoPathException(String pojoPath) {
 
-    super(NlsBundlePojo.ERR_ILLEGAL_PATH, pojoPath);
+    super(NlsBundlePojo.ERR_PATH_ILLEGAL, pojoPath);
   }
 
   /**
@@ -42,7 +42,7 @@ public class IllegalPojoPathException extends PojoPathException {
    */
   public IllegalPojoPathException(String pojoPath, Throwable nested) {
 
-    super(nested, NlsBundlePojo.ERR_ILLEGAL_PATH, pojoPath);
+    super(nested, NlsBundlePojo.ERR_PATH_ILLEGAL, pojoPath);
   }
 
 }

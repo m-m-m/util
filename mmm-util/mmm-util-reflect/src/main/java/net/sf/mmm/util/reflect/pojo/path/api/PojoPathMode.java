@@ -16,8 +16,9 @@ public enum PojoPathMode {
   /**
    * This mode causes the {@link PojoPathNavigator} to
    * {@link net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory#newInstance(Class) create}
-   * POJOs if they are <code>null</code>. This applies to intermediate POJOs
-   * as well as the final result of the POJO-path.<br>
+   * {@link net.sf.mmm.util.reflect.pojo.Pojo}s if they are <code>null</code>.
+   * This applies to intermediate {@link net.sf.mmm.util.reflect.pojo.Pojo}s as
+   * well as the final result of the {@link PojoPath}.<br>
    * <ul>
    * <li>For a &#171;Property&#187; this is done via the {@link Class type} of
    * the according setter.</li>
@@ -43,17 +44,23 @@ public enum PojoPathMode {
   CREATE_IF_NULL,
 
   /**
-   * This mode causes the {@link PojoPathNavigator} to fail with an exception if
-   * an intermediate POJO is <code>null</code>. In case an &#171;Index&#187;
-   * a NlsIndexOutOfBoundsException is thrown.
+   * This mode causes the {@link PojoPathNavigator} to fail with an
+   * {@link PojoPathSegmentIsNullException} if an intermediate
+   * {@link net.sf.mmm.util.reflect.pojo.Pojo} is <code>null</code>. However
+   * if only the last segment of the {@link PojoPath} evaluates to
+   * <code>null</code>, then <code>null</code> is returned. If an
+   * &#171;Index&#187; is greater or equal to the
+   * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size} of the
+   * ordered container,a NlsIndexOutOfBoundsException is thrown.
    */
   FAIL_IF_NULL,
 
   /**
    * This mode causes the {@link PojoPathNavigator} to return <code>null</code>
-   * if an intermediate POJO is <code>null</code>. This also applies for
-   * ordered containers if &#171;Index&#187; is greater or equal to the
-   * containers size.
+   * if an intermediate {@link net.sf.mmm.util.reflect.pojo.Pojo} is
+   * <code>null</code>. This also applies for ordered containers if
+   * &#171;Index&#187; is greater or equal to the containers
+   * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size}.
    */
   RETURN_IF_NULL,
 

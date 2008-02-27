@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.path.base;
 
+import java.lang.reflect.Type;
+
 import net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPath;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction;
@@ -10,7 +12,9 @@ import net.sf.mmm.util.reflect.pojo.path.api.PojoPathNavigator;
 
 /**
  * This class represents a {@link PojoPath}. It contains the internal logic to
- * validate and parse the {@link PojoPath}.
+ * validate and parse the {@link PojoPath}. Additional it can also hold the
+ * {@link #getPojo() result} of the evaluation and the
+ * {@link #getPojoType() generic type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,6 +34,12 @@ public class SimplePojoPath implements PojoPath {
 
   /** @see #getIndex() */
   private final Integer index;
+
+  /** @see #getPojoType() */
+  private Type pojoType;
+
+  /** @see #getPojo() */
+  private Object pojo;
 
   /**
    * The constructor.
@@ -124,6 +134,48 @@ public class SimplePojoPath implements PojoPath {
   public Integer getIndex() {
 
     return this.index;
+  }
+
+  /**
+   * This method gets the {@link Type type} of the {@link #getPojo() Pojo} this
+   * {@link PojoPath} is leading to.
+   * 
+   * @return the property-type or <code>null</code> if NOT set.
+   */
+  public Type getPojoType() {
+
+    return this.pojoType;
+  }
+
+  /**
+   * This method sets the {@link #getPojoType() pojo-type}.
+   * 
+   * @param propertyType is the property-type to set.
+   */
+  public void setPojoType(Type propertyType) {
+
+    this.pojoType = propertyType;
+  }
+
+  /**
+   * This method gets the {@link net.sf.mmm.util.reflect.pojo.api.Pojo} instance
+   * this {@link PojoPath} is leading to.
+   * 
+   * @return the {@link net.sf.mmm.util.reflect.pojo.api.Pojo} or <code>null</code>.
+   */
+  public Object getPojo() {
+
+    return this.pojo;
+  }
+
+  /**
+   * This method sets the {@link #getPojo() pojo-instance}.
+   * 
+   * @param pojo is the {@link #getPojo() pojo-instance}.
+   */
+  public void setPojo(Object pojo) {
+
+    this.pojo = pojo;
   }
 
   /**

@@ -8,8 +8,8 @@ import net.sf.mmm.util.reflect.pojo.NlsBundlePojo;
 /**
  * A {@link PojoPathSegmentIsNullException} is thrown by the
  * {@link PojoPathNavigator} if the supplied {@link PojoPathMode mode} is
- * {@link PojoPathMode#FAIL_IF_NULL} and an intermediate POJO was
- * <code>null</code>.
+ * {@link PojoPathMode#FAIL_IF_NULL} and an intermediate
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} was <code>null</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,13 +21,14 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
   /**
    * The constructor.
    * 
-   * @param pojoPath is the {@link PojoPathNavigator POJO-path} that could NOT
-   *        be evaluated.
-   * @param initialPojo is the initial POJO supplied to the {@link PojoPathNavigator}.
+   * @param pojoPath is the {@link PojoPath} that could NOT be evaluated.
+   * @param initialPojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+   *        supplied to the {@link PojoPathNavigator}.
    * @param pathToNullSegment is the part of the <code>pojoPath</code> that
    *        evaluated to <code>null</code>.
    */
-  public PojoPathSegmentIsNullException(String pojoPath, Object initialPojo, String pathToNullSegment) {
+  public PojoPathSegmentIsNullException(String pojoPath, Object initialPojo,
+      String pathToNullSegment) {
 
     super(NlsBundlePojo.ERR_PATH_SEGMENT_IS_NULL, pojoPath, initialPojo, pathToNullSegment);
   }

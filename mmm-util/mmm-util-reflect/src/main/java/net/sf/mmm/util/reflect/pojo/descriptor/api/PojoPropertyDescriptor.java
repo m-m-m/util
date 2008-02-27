@@ -11,10 +11,10 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeName;
 
 /**
  * This interface represents a property of a
- * {@link net.sf.mmm.util.reflect.pojo.Pojo}. It is an alternative to
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}. It is an alternative to
  * {@link java.beans.PropertyDescriptor} but only has focus on reflectively
  * accessing objects. Therefore it works on any
- * {@link net.sf.mmm.util.reflect.pojo.Pojo}.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -72,7 +72,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   private Log logger;
 
   /**
-   * The constructor.
+   * The constructor. By default it only introspects {@link Method methods} that
+   * are public and NOT static.<br>
+   * <b>ATTENTION:</b><br>
+   * You need to {@link #initialize()} this component before it can be used.
    */
   public PojoDescriptorBuilderImpl() {
 
@@ -81,7 +84,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * The constructor.
+   * The constructor. By default it only introspects {@link Method methods} that
+   * are public and NOT static.<br>
+   * <b>ATTENTION:</b><br>
+   * You need to {@link #initialize()} this component before it can be used.
    * 
    * @param mapFactory is the factory used to create the descriptor cache.
    */
@@ -270,6 +276,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   @Override
   protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoType) {
 
+    this.initializationState.requireInitilized();
     PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType);
     // process methods...
     List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();

@@ -1,10 +1,10 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.pojo.factory.base;
+package net.sf.mmm.util.reflect.pojo.base;
 
 import net.sf.mmm.util.reflect.InstantiationFailedException;
-import net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory;
+import net.sf.mmm.util.reflect.pojo.api.PojoFactory;
 
 /**
  * This is the simplest implementation of the {@link PojoFactory} interface.<br>

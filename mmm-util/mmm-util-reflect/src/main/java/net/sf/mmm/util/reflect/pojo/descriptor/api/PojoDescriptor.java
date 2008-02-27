@@ -12,8 +12,8 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
- * {@link net.sf.mmm.util.reflect.pojo.Pojo}. A
- * {@link net.sf.mmm.util.reflect.pojo.Pojo} in this manner is more or less any
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}. A
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} in this manner is more or less any
  * java object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
  * Look at the following example:

@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.pojo.factory.base;
+package net.sf.mmm.util.reflect.pojo.base;
 
 import java.util.Collection;
 import java.util.Map;
@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.InstantiationFailedException;
 
 /**
  * This is the default implementation of the
- * {@link net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory} interface.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.api.PojoFactory} interface.<br>
  * It extends {@link SimplePojoFactory} with the ability to create {@link Map}s
  * and {@link Collection}s from their interfaces.
  * 

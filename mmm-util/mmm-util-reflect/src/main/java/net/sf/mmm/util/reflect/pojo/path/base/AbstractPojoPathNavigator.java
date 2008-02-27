@@ -3,13 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.path.base;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.InstantiationFailedException;
+import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
+import net.sf.mmm.util.reflect.pojo.path.api.PojoPathCreationException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunctionManager;
@@ -58,6 +62,16 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
   }
 
   /**
+   * This method gets the {@link ReflectionUtil}.
+   * 
+   * @return the {@link ReflectionUtil}.
+   */
+  protected ReflectionUtil getReflectionUtil() {
+
+    return ReflectionUtil.getInstance();
+  }
+
+  /**
    * This method gets the segment-cache from the given <code>context</code>.
    * 
    * @param initialPojo is the initial POJO this {@link PojoPathNavigator} was
@@ -69,11 +83,11 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
   protected SegmentCache getSegmentCache(Object initialPojo, PojoPathContext context) {
 
     Map<Object, Object> masterCache = context.getCache();
-    Map<String, Object> segmentCache = null;
+    Map<String, SimplePojoPath> segmentCache = null;
     if (masterCache != null) {
-      segmentCache = (Map<String, Object>) masterCache.get(initialPojo);
+      segmentCache = (Map<String, SimplePojoPath>) masterCache.get(initialPojo);
       if (segmentCache == null) {
-        segmentCache = new HashMap<String, Object>();
+        segmentCache = new HashMap<String, SimplePojoPath>();
         masterCache.put(initialPojo, segmentCache);
       }
     }
@@ -100,7 +114,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
   /**
    * This method recursively navigates the given <code>pojoPath</code>.
    * 
-   * @param pojo is the initial {@link net.sf.mmm.util.reflect.pojo.Pojo} to
+   * @param pojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to
    *        operate on.
    * @param pojoPath is the current
    *        {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} to navigate.
@@ -116,33 +130,35 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    *         {@link PojoPathMode mode}.
    */
   @SuppressWarnings("unchecked")
-  protected Object getRecursive(Object pojo, String pojoPath, PojoPathMode mode,
+  protected SimplePojoPath getRecursive(Object pojo, String pojoPath, PojoPathMode mode,
       PojoPathContext context, SegmentCache segmentCache) {
 
+    SimplePojoPath parentPath = null;
     if (segmentCache != null) {
-      Object cachedResult = segmentCache.getPojo(pojoPath);
-      if (cachedResult != null) {
-        return cachedResult;
+      parentPath = segmentCache.get(pojoPath);
+      if (parentPath != null) {
+        return parentPath;
       }
     }
-    SimplePojoPath path = new SimplePojoPath(pojoPath);
-    String parent = path.getParentPath();
+    SimplePojoPath currentPath = new SimplePojoPath(pojoPath);
+    String parentPathString = currentPath.getParentPath();
     Object current = pojo;
-    if (parent != null) {
-      current = getRecursive(pojo, parent, mode, context, segmentCache);
+    if (parentPathString != null) {
+      parentPath = getRecursive(pojo, parentPathString, mode, context, segmentCache);
+      current = parentPath.getPojo();
     }
     if (current == null) {
       switch (mode) {
         case FAIL_IF_NULL:
-          throw new PojoPathSegmentIsNullException(pojoPath, pojo, parent);
+          throw new PojoPathSegmentIsNullException(pojoPath, pojo, parentPathString);
         case RETURN_IF_NULL:
           return null;
         default :
           // this is actually an internal error
-          throw new PojoPathSegmentIsNullException(pojoPath, pojo, parent);
+          throw new PojoPathSegmentIsNullException(pojoPath, pojo, parentPathString);
       }
     } else {
-      String functionName = path.getFunction();
+      String functionName = currentPath.getFunction();
       Object result;
       if (functionName != null) {
         PojoPathFunction function = getFunction(functionName, context);
@@ -156,32 +172,83 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       } else {
         if (current instanceof Map) {
           Map map = (Map) current;
-          result = map.get(path.getSegment());
+          // determine pojo type
+          Type currentType = null;
+          if (parentPath != null) {
+            Type pojoType = parentPath.getPojoType();
+            if ((pojoType != null) && (pojoType instanceof ParameterizedType)) {
+              ParameterizedType type = (ParameterizedType) pojoType;
+              Type[] genericArgs = type.getActualTypeArguments();
+              if (genericArgs.length == 2) {
+                currentType = genericArgs[1];
+              }
+            }
+          }
+          if (currentType != null) {
+            currentPath.setPojoType(currentType);
+          }
+          result = map.get(currentPath.getSegment());
+          if ((result == null) && (mode == PojoPathMode.CREATE_IF_NULL)) {
+            if (currentType == null) {
+              throw new PojoPathCreationException(pojo, pojoPath);
+            }
+            Class<?> currentClass = getReflectionUtil().toClass(currentType);
+            try {
+              result = context.getPojoFactory().newInstance(currentClass);
+              map.put(currentPath.getSegment(), result);
+            } catch (InstantiationFailedException e) {
+              throw new PojoPathCreationException(pojo, pojoPath, e);
+            }
+          }
         } else {
-          Integer index = path.getIndex();
+          Integer index = currentPath.getIndex();
           if (index != null) {
             result = getCollectionUtil().get(current, index.intValue());
+            Type pojoType = null;
+            if (parentPath != null) {
+              pojoType = parentPath.getPojoType();
+            }
+            if ((pojoType == null) && (result != null)) {
+              pojoType = result.getClass();
+            }
+            Type currentType = getReflectionUtil().getComponentType(pojoType, true);
+            if (currentType != null) {
+              currentPath.setPojoType(currentType);
+            }
+            if ((result == null) && (mode == PojoPathMode.CREATE_IF_NULL)) {
+              if (currentType == null) {
+                throw new PojoPathCreationException(pojo, pojoPath);
+              }
+              Class<?> currentClass = getReflectionUtil().toClass(currentType);
+              try {
+                result = context.getPojoFactory().newInstance(currentClass);
+                getCollectionUtil().set(current, index.intValue(), result);
+              } catch (InstantiationFailedException e) {
+                throw new PojoPathCreationException(pojo, pojoPath, e);
+              }
+            }
           } else {
             // TODO
-            result = getProperty(current, path.getSegment(), mode);
+            result = getProperty(current, currentPath.getSegment(), mode);
           }
         }
       }
       if (result == null) {
         // creation has already taken place...
         if (mode != PojoPathMode.RETURN_IF_NULL) {
-          throw new PojoPathSegmentIsNullException(pojoPath, pojo, parent);
+          throw new PojoPathSegmentIsNullException(pojoPath, pojo, parentPathString);
         }
       } else {
+        currentPath.setPojo(result);
         if (segmentCache != null) {
-          segmentCache.setPojo(pojoPath, result);
+          segmentCache.set(pojoPath, currentPath);
         }
         PojoPathRecognizer recognizer = context.getRecognizer();
         if (recognizer != null) {
-          recognizer.recognize(result, path);
+          recognizer.recognize(result, currentPath);
         }
       }
-      return result;
+      return currentPath;
     }
   }
 
@@ -224,7 +291,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * This method gets the value of the specified <code>property</code> from
    * the given <code>pojo</code>.
    * 
-   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.Pojo} where
+   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} where
    *        to get the <code>property</code> from.
    * @param property is the name of the property to get.
    * @param mode is the {@link PojoPathMode} that determines how to deal with
@@ -237,7 +304,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * This method sets the specified <code>property</code> of the given
    * <code>pojo</code> to the given <code>value</code>.
    * 
-   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.Pojo} where
+   * @param pojo is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} where
    *        to set the <code>property</code>.
    * @param property is the name of the property to set.
    * @param value is the value to set. It may be <code>null</code>.
@@ -274,16 +341,16 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
   /**
    * This inner class represents a Cache that maps a
    * {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath#getPojoPath() PojoPath}
-   * to the resulting {@link net.sf.mmm.util.reflect.pojo.Pojo}.
+   * to the resulting {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.
    */
   protected static class SegmentCache {
 
     /**
      * The actual cache that maps a
      * {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath#getPojoPath() PojoPath}
-     * to the resulting {@link net.sf.mmm.util.reflect.pojo.Pojo}.
+     * to the resulting {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.
      */
-    private final Map<String, Object> cache;
+    private final Map<String, SimplePojoPath> cache;
 
     /** @see #setDisabled() */
     private boolean disabled;
@@ -293,44 +360,56 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
      * 
      * @param cache is the underlying {@link Map} used for caching.
      */
-    public SegmentCache(Map<String, Object> cache) {
+    public SegmentCache(Map<String, SimplePojoPath> cache) {
 
       super();
       this.cache = cache;
     }
 
     /**
-     * This method gets a {@link net.sf.mmm.util.reflect.pojo.Pojo} from this
-     * cache.
+     * This method gets the {@link SimplePojoPath} from this cache.
      * 
      * @param pojoPath is the
      *        {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} to lookup.
-     * @return the cached {@link net.sf.mmm.util.reflect.pojo.Pojo} or
-     *         <code>null</code> if NOT (yet) cached.
+     * @return the cached {@link SimplePojoPath} or <code>null</code> if NOT
+     *         (yet) cached.
      */
-    public Object getPojo(String pojoPath) {
+    public SimplePojoPath get(String pojoPath) {
 
       return this.cache.get(pojoPath);
     }
 
     /**
-     * This method stored a {@link net.sf.mmm.util.reflect.pojo.Pojo} in this
-     * cache.
+     * This method stored a {@link SimplePojoPath} in this cache. This method
+     * will do nothing after it was {@link #isDisabled() disabled}.
      * 
      * @param pojoPath is the
      *        {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} leading to
      *        the given <code>pojo</code>.
-     * @param pojo is the {@link net.sf.mmm.util.reflect.pojo.Pojo} to cache.
+     * @param evaluatedPojoPath is the {@link SimplePojoPath} that has been
+     *        evaluated and should be cached.
      */
-    public void setPojo(String pojoPath, Object pojo) {
+    public void set(String pojoPath, SimplePojoPath evaluatedPojoPath) {
 
       if (!this.disabled) {
-        this.cache.put(pojoPath, pojo);
+        this.cache.put(pojoPath, evaluatedPojoPath);
       }
     }
 
     /**
-     * This method disables further {@link #setPojo(String, Object) caching}.
+     * This method determines if this cache has been
+     * {@link #setDisabled() disabled}.
+     * 
+     * @return <code>true</code> if this cache is disabled, <code>false</code>
+     *         otherwise.
+     */
+    public boolean isDisabled() {
+
+      return this.disabled;
+    }
+
+    /**
+     * This method disables further {@link #set(String, SimplePojoPath) caching}.
      */
     public void setDisabled() {
 

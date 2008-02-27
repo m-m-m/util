@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.pojo.path.api;
 /**
  * A {@link PojoPath} is a {@link String} that acts as expression to
  * {@link PojoPathNavigator navigate} (traverse) the object-web spanned by an
- * initial {@link net.sf.mmm.util.reflect.pojo.Pojo} reflectively.<br>
+ * initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo} reflectively.<br>
  * As part of the API this interface is mainly used for documentation of what a
  * {@link PojoPath} is all about. For the API-user a {@link PojoPath} is just a
  * {@link #getPojoPath() String} with a specific syntax and semantic.

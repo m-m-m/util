@@ -1,17 +1,17 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.pojo.factory.api;
+package net.sf.mmm.util.reflect.pojo.api;
 
 import net.sf.mmm.util.reflect.InstantiationFailedException;
 
 /**
  * This is the interface for a generic factory used to
  * {@link #newInstance(Class) create new instances} of
- * {@link net.sf.mmm.util.reflect.pojo.Pojo}s.<br>
- * {@link net.sf.mmm.util.reflect.pojo.Pojo} is a shortcut for
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} is a shortcut for
  * <em>Plain Old Java Object</em> and simply means any Java object. Typically
- * a {@link net.sf.mmm.util.reflect.pojo.Pojo} has a public non-arg constructor.
+ * a {@link net.sf.mmm.util.reflect.pojo.api.Pojo} has a public non-arg constructor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,9 +25,9 @@ public interface PojoFactory {
    * constructor, or it is an interface or abstract class.
    * 
    * @param <POJO> is the generic type of the
-   *        {@link net.sf.mmm.util.reflect.pojo.Pojo} to create.
+   *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to create.
    * @param pojoType is the {@link Class} reflecting the
-   *        {@link net.sf.mmm.util.reflect.pojo.Pojo} to create.
+   *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to create.
    * @return the new instance of the given <code>pojoType</code>.
    * @throws InstantiationFailedException if the instantiation failed.
    */

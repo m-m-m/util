@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.pojo.path.api;
 import java.util.Map;
 import java.util.Properties;
 
-import net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory;
+import net.sf.mmm.util.reflect.pojo.api.PojoFactory;
 
 /**
  * This is the interface of an object that carries the context for a
@@ -21,7 +21,7 @@ public interface PojoPathContext {
   /**
    * This method provides a cache that is used by the {@link PojoPathNavigator}
    * to speed up repetitive calls with the same initial
-   * {@link net.sf.mmm.util.reflect.pojo.Pojo} and {@link PojoPath}s with a
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} and {@link PojoPath}s with a
    * common prefix.<br>
    * <b>ATTENTION:</b><br>
    * Never make assumptions about the content of this cache. It is provided here
@@ -29,7 +29,7 @@ public interface PojoPathContext {
    * and NOT to expose it for external usage. The internal structure of the
    * cache may change in future releases. Use the
    * {@link #getRecognizer() recognizer} to track visited
-   * {@link net.sf.mmm.util.reflect.pojo.Pojo}s.
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s.
    * 
    * @see java.util.HashMap
    * @see java.util.WeakHashMap
@@ -81,7 +81,7 @@ public interface PojoPathContext {
   /**
    * This method gets the {@link PojoFactory} instance used to
    * {@link PojoPathMode#CREATE_IF_NULL create} new
-   * {@link net.sf.mmm.util.reflect.pojo.Pojo}s.
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s.
    * 
    * @return the {@link PojoFactory}.
    */
