@@ -75,7 +75,6 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   /**
    * {@inheritDoc}
    */
-  @Override
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
       PojoPropertyAccessorMode<ACCESSOR> mode, boolean required) {
 

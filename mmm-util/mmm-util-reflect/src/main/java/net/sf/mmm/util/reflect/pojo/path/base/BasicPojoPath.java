@@ -52,7 +52,7 @@ public class BasicPojoPath implements PojoPath {
       throw new IllegalPojoPathException(pojoPath);
     } else {
       this.parentPath = pojoPath.substring(0, lastDot);
-      this.segment = pojoPath.substring(lastDot);
+      this.segment = pojoPath.substring(lastDot + 1);
     }
     char firstChar = this.segment.charAt(0);
     if (firstChar == PojoPathFunction.FUNCTION_NAME_PREFIX) {

@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -19,6 +20,8 @@ import java.util.Vector;
 import java.util.concurrent.BlockingQueue;
 
 import org.junit.Test;
+
+import net.sf.mmm.util.GenericBean;
 
 /**
  * This is the test-case for {@link CollectionUtil}.
@@ -67,6 +70,7 @@ public class CollectionUtilTest {
   public void testSet() {
 
     CollectionUtil util = getCollectionUtil();
+    Object result;
 
     // test array...
     String one = "The first one!";
@@ -79,41 +83,61 @@ public class CollectionUtilTest {
     assertEquals(one, array[0]);
     assertEquals(two, array[1]);
     assertEquals(three, array[2]);
-    String[] arrayCopy = (String[]) util.set(array, 3, one, 0, 1);
+    try {
+      util.set(array, 3, one, 1, null);
+      fail("Exception expected!");
+    } catch (Exception e) {
+    }
+    String[] arrayCopy;
+    GenericBean<String[]> arrayBean = new GenericBean<String[]>();
+    GenericBean arrayReceiver = (GenericBean) arrayBean;
+    result = util.set(array, 3, one, 1, arrayReceiver);
+    assertNull(result);
+    arrayCopy = arrayBean.getValue();
+    assertNotNull(arrayCopy);
     assertEquals(4, arrayCopy.length);
     assertEquals(one, arrayCopy[0]);
     assertEquals(two, arrayCopy[1]);
     assertEquals(three, arrayCopy[2]);
     assertEquals(one, arrayCopy[3]);
-    Object result = util.set(array, 0, three, 0, 0);
-    assertSame(array, result);
+    arrayBean.setValue(null);
+    result = util.set(array, 0, three, 0, arrayReceiver);
+    assertNull(arrayBean.getValue());
+    assertSame(one, result);
     assertEquals(three, array[0]);
     try {
-      util.set(array, 4, one, 0, 1);
+      util.set(array, 4, one, 0, arrayReceiver);
       fail("Exception expected!");
     } catch (Exception e) {
     }
 
     // test list...
     List<String> list = new ArrayList<String>();
-    util.set(list, 0, one);
+    result = util.set(list, 0, one);
+    assertNull(result);
     assertEquals(1, list.size());
-    util.set(list, 1, two);
+    result = util.set(list, 1, two);
+    assertNull(result);
     assertEquals(2, list.size());
-    util.set(list, 2, three);
+    result = util.set(list, 2, three);
+    assertNull(result);
     assertEquals(3, list.size());
     assertEquals(one, list.get(0));
     assertEquals(two, list.get(1));
     assertEquals(three, list.get(2));
-    list = new ArrayList<String>();
+    result = util.set(list, 1, one);
+    assertSame(two, result);
+    assertSame(one, list.get(1));
     int maxGrowth = 128;
-    util.set(list, maxGrowth - 1, one, maxGrowth, 0);
+    list = new ArrayList<String>();
+    result = util.set(list, maxGrowth - 1, one, maxGrowth, null);
+    assertNull(result);
     assertEquals(maxGrowth, list.size());
     assertEquals(one, list.get(maxGrowth - 1));
     assertEquals(null, list.get(0));
     list = new ArrayList<String>();
     try {
-      util.set(list, maxGrowth, one, maxGrowth, 0);
+      util.set(list, maxGrowth, one, maxGrowth, null);
       fail("Exception expected!");
     } catch (Exception e) {
     }

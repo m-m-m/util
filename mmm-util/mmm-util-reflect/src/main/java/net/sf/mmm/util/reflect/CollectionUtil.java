@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.util.GenericBean;
 import net.sf.mmm.util.collection.CollectionFactory;
 import net.sf.mmm.util.collection.CollectionFactoryManager;
 import net.sf.mmm.util.collection.CollectionFactoryManagerImpl;
@@ -27,10 +28,10 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 public class CollectionUtil {
 
   /**
-   * The default value for the maximum growth of the {@link List#size() size} of
-   * a {@link List}: {@value}
+   * The default value for the maximum growth of the
+   * {@link #getSize(Object) size} of an array or {@link List}: {@value}
    */
-  protected static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
+  public static final int DEFAULT_MAXIMUM_GROWTH = 128;
 
   /** @see #getInstance() */
   private static CollectionUtil instance;
@@ -127,6 +128,28 @@ public class CollectionUtil {
     } catch (Exception e) {
       throw new InstantiationFailedException(e, type);
     }
+  }
+
+  /**
+   * This method determines if the given <code>object</code> is an array or
+   * {@link List}.
+   * 
+   * @param object is the object to check.
+   * @return <code>true</code> if the given object is an array or {@link List},
+   *         <code>false</code> otherwise.
+   */
+  public boolean isArrayOrList(Object object) {
+
+    if (object == null) {
+      throw new NlsIllegalArgumentException(null);
+    }
+    Class<?> type = object.getClass();
+    if (type.isArray()) {
+      return true;
+    } else if (List.class.isAssignableFrom(type)) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -230,21 +253,26 @@ public class CollectionUtil {
   /**
    * This method sets the given <code>item</code> at the given
    * <code>index</code> in <code>arrayOrCollection</code>. It uses a
-   * <code>maximumListGrowth</code> of {@link #DEFAULT_MAXIMUM_LIST_GROWTH}
-   * and <code>maximumArrayGrowth</code> of <code>0</code>.
+   * <code>maximumGrowth</code> of {@link #DEFAULT_MAXIMUM_GROWTH} and no
+   * <code>arrayReceiver</code> (<code>null</code>).
    * 
-   * @see #set(Object, int, Object, int, int)
+   * @see #set(Object, int, Object, int, GenericBean)
    * 
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position where to set the item.
    * @param item is the item to set.
+   * @return the item at position <code>index</code> in
+   *         <code>arrayOrList</code> that has been replaced by
+   *         <code>item</code>. This can be <code>null</code>. Additional
+   *         if the <code>arrayOrList</code> has been increased,
+   *         <code>null</code> is returned.
    * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
    *         is invalid (<code>null</code> or neither array nor {@link List}).
    */
   @SuppressWarnings("unchecked")
-  public void set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
+  public Object set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
 
-    set(arrayOrList, index, item, DEFAULT_MAXIMUM_LIST_GROWTH, 0);
+    return set(arrayOrList, index, item, DEFAULT_MAXIMUM_GROWTH, null);
   }
 
   /**
@@ -262,66 +290,77 @@ public class CollectionUtil {
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position where to set the item.
    * @param item is the item to set.
-   * @param maximumListGrowth is the maximum number by which the
-   *        {@link List#size() size} of a {@link List} will be increased to
-   *        reach <code>index + 1</code> so the <code>item</code> can be
-   *        set. Set this value to <code>0</code> to turn off this feature
-   *        (and leave {@link List#size() list-size} untouched). Please always
-   *        specify a real maximum (<code>&lt;=65536</code>) and do NOT use
-   *        {@link Integer#MAX_VALUE} since this might cause memory holes if
-   *        something goes wrong.
-   * @param maximumArrayGrowth is the maximum number by which the
-   *        {@link Array#getLength(Object) length} of an array will be
-   *        "increased" if the <code>item</code> does NOT fit. In this case an
-   *        new array will be created with the size of <code>index + 1</code>.
-   *        The original items are
-   *        {@link System#arraycopy(Object, int, Object, int, int) copied}, the
-   *        given <code>item</code> is set on the copy instead and the copy is
-   *        returned while the original array remains unchanged. Set this value
-   *        to <code>0</code> to turn off this feature. Please always specify
+   * @param maximumGrowth is the maximum number by which the
+   *        {@link #getSize(Object) size} of <code>arrayOrList</code> will be
+   *        increased (with <code>null</code> values) to reach
+   *        <code>index + 1</code> so the <code>item</code> can be set. Set
+   *        this value to <code>0</code> to turn off this feature (and leave
+   *        the {@link #getSize(Object) size} untouched). Please always specify
    *        a real maximum (<code>&lt;=65536</code>) and do NOT use
    *        {@link Integer#MAX_VALUE} since this might cause memory holes if
-   *        something goes wrong.
-   * @return the given <code>arrayOrList</code> or an array-copy with
-   *         increased size (as described for parameter
-   *         <code>maximumArrayGrowth</code>).
+   *        something goes wrong. If <code>arrayOrList</code> is an array,
+   *        increasing can only happen by creating a new array. To receive such
+   *        new array, you need to supply an <code>arrayReceiver</code>.
+   *        Otherwise (if <code>null</code>) this method behaves for arrays
+   *        as if <code>maximumGrowth</code> was <code>0</code>. If an
+   *        array should be increased, a new array with the size of
+   *        <code>index + 1</code> is created. The original items are
+   *        {@link System#arraycopy(Object, int, Object, int, int) copied}, the
+   *        given <code>item</code> is set on the copy instead while the
+   *        original array remains unchanged. Then the new array is
+   *        {@link GenericBean#setValue(Object) set} to the
+   *        <code>arrayReceiver</code>.
+   * @param arrayReceiver is a {@link GenericBean} that allows to receive an
+   *        {@link System#arraycopy(Object, int, Object, int, int) array-copy}
+   *        of <code>arrayOrList</code> with an increased
+   *        {@link Array#getLength(Object) length}. It can be <code>null</code>
+   *        to disable array-copying.
+   * @return the item at position <code>index</code> in
+   *         <code>arrayOrList</code> that has been replaced by
+   *         <code>item</code>. This can be <code>null</code>. Additional
+   *         if the <code>arrayOrList</code> has been increased,
+   *         <code>null</code> is returned.
    * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
    *         is invalid (<code>null</code> or neither array nor {@link List}).
    */
   @SuppressWarnings("unchecked")
-  public Object set(Object arrayOrList, int index, Object item, int maximumListGrowth,
-      int maximumArrayGrowth) throws NlsIllegalArgumentException {
+  public Object set(Object arrayOrList, int index, Object item, int maximumGrowth,
+      GenericBean<Object> arrayReceiver) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsIllegalArgumentException(null);
     }
-    int maximumGrowth;
+    int maxGrowth = maximumGrowth;
     Class<?> type = arrayOrList.getClass();
     List list = null;
     int size;
     if (type.isArray()) {
       size = Array.getLength(arrayOrList);
-      maximumGrowth = maximumArrayGrowth;
+      if (arrayReceiver == null) {
+        maxGrowth = 0;
+      }
     } else if (List.class.isAssignableFrom(type)) {
       list = (List) arrayOrList;
       size = list.size();
-      maximumGrowth = maximumListGrowth;
     } else {
       throw new NlsIllegalArgumentException(arrayOrList);
     }
     int growth = index - size + 1;
-    if (growth > maximumGrowth) {
+    if (growth > maxGrowth) {
       throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_INCREASE_EXCEEDS_MAX_GROWTH,
-          Integer.valueOf(growth), Integer.valueOf(maximumGrowth));
+          Integer.valueOf(growth), Integer.valueOf(maxGrowth));
     }
     if (type.isArray()) {
       if (growth > 0) {
         Object newArray = Array.newInstance(type.getComponentType(), index + 1);
         System.arraycopy(arrayOrList, 0, newArray, 0, size);
         Array.set(newArray, index, item);
-        return newArray;
+        arrayReceiver.setValue(newArray);
+        return null;
       } else {
+        Object old = Array.get(arrayOrList, index);
         Array.set(arrayOrList, index, item);
+        return old;
       }
     } else {
       // arrayOrList is list...
@@ -333,11 +372,11 @@ public class CollectionUtil {
           growth--;
         }
         list.add(item);
+        return null;
       } else {
-        list.set(index, item);
+        return list.set(index, item);
       }
     }
-    return arrayOrList;
   }
 
   /**

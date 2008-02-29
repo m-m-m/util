@@ -6,11 +6,8 @@ package net.sf.mmm.util.reflect.pojo.descriptor.base;
 import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyNotFoundException;
-import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
-import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
@@ -50,34 +47,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    * {@inheritDoc}
    */
   public abstract Collection<? extends AbstractPojoPropertyDescriptor> getPropertyDescriptors();
-
-  /**
-   * This method gets the accessor for the given
-   * <code>{@link PojoPropertyAccessor#getMode() mode}</code> from the
-   * {@link #getPropertyDescriptor(String) descriptor} with the given
-   * <code>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getName() propertyName}</code>.
-   * 
-   * @see #getPropertyDescriptor(String)
-   * @see net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
-   * 
-   * @param <ACCESSOR> is the type of the requested accessor.
-   * @param propertyName is the
-   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getName() name}
-   *        of the property to access.
-   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
-   *        requested accessor.
-   * @param required - if <code>true</code> the accessor is required and an
-   *        exception is thrown if NOT found.
-   * @return the requested accessor or <code>null</code> if NOT found and
-   *         <code>required</code> is <code>false</code>.
-   * @throws PojoPropertyNotFoundException if <code>required</code> is
-   *         <code>true</code> and no property named <code>propertyName</code>
-   *         was found or no accessor exists for that property with the given
-   *         <code>mode</code>.
-   */
-  public abstract <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
-      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required)
-      throws PojoPropertyNotFoundException;
 
   /**
    * This method gets the property-descriptor for the given

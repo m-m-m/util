@@ -9,8 +9,8 @@ import net.sf.mmm.util.reflect.pojo.NlsBundlePojo;
  * A {@link PojoPathCreationException} is thrown by the
  * {@link PojoPathNavigator} if the supplied {@link PojoPathMode mode} is
  * {@link PojoPathMode#CREATE_IF_NULL} and an intermediate
- * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} was <code>null</code> but could
- * NOT be created.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} was <code>null</code> but
+ * could NOT be created.<br>
  * This can happen because the
  * {@link net.sf.mmm.util.reflect.pojo.api.PojoFactory#newInstance(Class) instantiation}
  * failed or there is insufficient information about what to create (e.g. the
@@ -29,8 +29,9 @@ public class PojoPathCreationException extends PojoPathException {
    * 
    * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>
    *        but could NOT be created.
-   * @param initialPojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
-   *        supplied to the {@link PojoPathNavigator}.
+   * @param initialPojo is the initial
+   *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} supplied to the
+   *        {@link PojoPathNavigator}.
    */
   public PojoPathCreationException(Object initialPojo, String pojoPath) {
 
@@ -41,12 +42,13 @@ public class PojoPathCreationException extends PojoPathException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param initialPojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
-   *        supplied to the {@link PojoPathNavigator}.
+   * @param initialPojo is the initial
+   *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} supplied to the
+   *        {@link PojoPathNavigator}.
    * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>
    *        but could NOT be created.
    */
-  public PojoPathCreationException(Exception nested, Object initialPojo, String pojoPath) {
+  public PojoPathCreationException(Throwable nested, Object initialPojo, String pojoPath) {
 
     super(nested, NlsBundlePojo.ERR_PATH_CREATION, initialPojo, pojoPath);
   }

@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.path.impl;
 
+import java.lang.reflect.Type;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
@@ -11,7 +13,10 @@ import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
+import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunctionManager;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathMode;
 import net.sf.mmm.util.reflect.pojo.path.base.AbstractPojoPathNavigator;
@@ -164,21 +169,33 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    */
   @Override
   @SuppressWarnings("unchecked")
-  protected Object getProperty(Object pojo, String property, PojoPathMode mode) {
+  protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context,
+      PojoPathState state, Object parentPojo) {
 
-    PojoDescriptor descriptor = getDescriptorBuilder().getDescriptor(pojo.getClass());
-    descriptor.getProperty(pojo, property);
-    return null;
+    PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
+    // descriptor.getProperty(parentPojo, currentPath.getSegment());
+    PojoPropertyAccessorNonArg getter;
+    getter = descriptor.getAccessor(currentPath.getSegment(), PojoPropertyAccessorNonArgMode.GET,
+        true);
+    Type type = getter.getPropertyType();
+    currentPath.setPojoType(type);
+    Object result = getter.invoke(parentPojo);
+    if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {
+      Class<?> clazz = getReflectionUtil().toClass(type);
+      result = context.getPojoFactory().newInstance(clazz);
+    }
+    return result;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void setProperty(Object pojo, String property, Object value) {
+  protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
+      PojoPathState state, Object parentPojo, Object value) {
 
-  // TODO Auto-generated method stub
-
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

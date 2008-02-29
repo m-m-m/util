@@ -83,7 +83,7 @@ public class PojoPropertyAccessorProxySetIndexed extends
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
     Object arrayCopy = getCollectionUtil().set(arrayOrList, index, item, this.maximumListGrowth,
-        this.maximumArrayGrowth);
+        null);
     if ((arrayCopy != arrayOrList) && (this.containerSetAccessor != null)) {
       this.containerSetAccessor.invoke(pojoInstance, arrayCopy);
     }

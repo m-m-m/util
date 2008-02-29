@@ -13,8 +13,8 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
  * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}. A
- * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} in this manner is more or less any
- * java object.<br>
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} in this manner is more or less
+ * any java object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
  * Look at the following example:
  * 
@@ -126,9 +126,17 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
  * <td>getColors().set(int, String)</td>
  * <td>enhanced virtual accessor</td>
  * </tr>
- * </table>
+ * </table><br>
+ * <b>ATTENTION:</b><br>
+ * When using this interface without generic parameterization you can NOT
+ * properly call the
+ * {@link #getAccessor(String, PojoPropertyAccessorMode, boolean) getAccessor}
+ * methods. If the type of your {@link net.sf.mmm.util.reflect.pojo.api.Pojo} is
+ * unknown at compile-time, you need to parameterize with the unbound wildcard
+ * as <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not
+ * call the <code>get</code> or <code>set</code> methods.
  * 
- * @param <POJO> is the templated type of the {@link #getPojoType() POJO}.
+ * @param <POJO> is the templated type of the {@link #getPojoType() pojo}.
  * 
  * @see PojoPropertyDescriptor
  * 
@@ -143,7 +151,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @param propertyName is the name of the requested property.
    * @return the descriptor for the property identified by the given
    *         <code>propertyName</code> or <code>null</code> if no such
-   *         property exists for the according {@link #getPojoType() POJO}.
+   *         property exists for the according {@link #getPojoType() pojo}.
    */
   PojoPropertyDescriptor getPropertyDescriptor(String propertyName);
 
@@ -172,6 +180,34 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    */
   <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
       PojoPropertyAccessorMode<ACCESSOR> mode);
+
+  /**
+   * This method gets the accessor for the given
+   * <code>{@link PojoPropertyAccessor#getMode() mode}</code> from the
+   * {@link #getPropertyDescriptor(String) descriptor} with the given
+   * <code>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getName() propertyName}</code>.
+   * 
+   * @see #getPropertyDescriptor(String)
+   * @see net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+   * 
+   * @param <ACCESSOR> is the type of the requested accessor.
+   * @param propertyName is the
+   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getName() name}
+   *        of the property to access.
+   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
+   *        requested accessor.
+   * @param required - if <code>true</code> the accessor is required and an
+   *        exception is thrown if NOT found.
+   * @return the requested accessor or <code>null</code> if NOT found and
+   *         <code>required</code> is <code>false</code>.
+   * @throws PojoPropertyNotFoundException if <code>required</code> is
+   *         <code>true</code> and no property named <code>propertyName</code>
+   *         was found or no accessor exists for that property with the given
+   *         <code>mode</code>.
+   */
+  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
+      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required)
+      throws PojoPropertyNotFoundException;
 
   /**
    * This method gets the {@link #getPropertyDescriptor(String) property} with

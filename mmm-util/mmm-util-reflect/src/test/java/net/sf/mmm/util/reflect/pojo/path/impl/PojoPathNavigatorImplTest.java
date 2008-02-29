@@ -4,6 +4,7 @@
 package net.sf.mmm.util.reflect.pojo.path.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -25,6 +26,7 @@ import net.sf.mmm.util.reflect.pojo.path.base.DefaultPojoPathContext;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@SuppressWarnings("all")
 public class PojoPathNavigatorImplTest {
 
   protected PojoPathNavigator createNavigator() {
@@ -73,5 +75,77 @@ public class PojoPathNavigatorImplTest {
 
     assertEquals("", "");
     assertTrue(true);
+  }
+
+  @Test
+  public void testSetArrayLengthOverflow() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    // prepare test-data
+    Map<String, String[]> map = new HashMap<String, String[]>();
+    String key = "foo";
+    String one = "first";
+    String two = "second";
+    String three = "third";
+    String[] array = new String[] { one, two };
+    map.put(key, array);
+
+    // do sanity check
+    Object result;
+    result = navigator.get(map, key, PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(array, result);
+    result = navigator.get(map, key + ".0", PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(one, result);
+    result = navigator.get(map, key + ".1", PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(two, result);
+    result = navigator.get(map, key + ".2", PojoPathMode.RETURN_IF_NULL, context);
+    assertNull(result);
+
+    // test array overflow set
+    result = navigator.set(map, key + ".2", PojoPathMode.FAIL_IF_NULL, context, three);
+    assertNull(result);
+    String[] newArray = map.get(key);
+    assertNotNull(newArray);
+    assertTrue(newArray.length == 3);
+    assertEquals(one, newArray[0]);
+    assertEquals(two, newArray[1]);
+    assertEquals(three, newArray[2]);
+    result = navigator.get(map, key + ".2", PojoPathMode.FAIL_IF_NULL, context);
+  }
+
+  @Test
+  public void testCaching() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    // prepare test-data
+    Map<String, String[]> map = new HashMap<String, String[]>();
+    String key = "foo";
+    String one = "first";
+    String two = "second";
+    String three = "third";
+    String four = "fourth";
+    String[] array = new String[] { one, two };
+    map.put(key, array);
+
+    // do sanity check
+    Object result;
+    result = navigator.get(map, key, PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(array, result);
+    result = navigator.get(map, key + ".0", PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(one, result);
+    result = navigator.get(map, key + ".1", PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(two, result);
+
+    // change content and get again...
+    array[0] = three;
+    array[1] = four;
+    result = navigator.get(map, key + ".0", PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(three, result);
+    result = navigator.get(map, key + ".1", PojoPathMode.RETURN_IF_NULL, context);
+    assertSame(four, result);
   }
 }
