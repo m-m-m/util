@@ -30,9 +30,11 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
 
   /**
    * This is the prefix used to indicate a {@link PojoPathFunction} in a
-   * {@link PojoPathNavigator POJO-path}.<br>
-   * For example the segment <code>&#64;myFunction</code> as part of a
-   * POJO-path such as <code>foo.bar.&#64;myFunction</code> indicates that the
+   * {@link PojoPath}. The value ({@value}) will never change. It is NOT
+   * necessary to use this constant to construct a {@link PojoPath}.<br>
+   * For example the {@link PojoPath#getSegment() segment}
+   * <code>&#64;myFunction</code> as part of a {@link PojoPath} such as
+   * <code>foo.bar.&#64;myFunction</code> indicates that the
    * {@link PojoPathFunction}
    * {@link PojoPathFunctionManager#getFunction(String) named}
    * <code>myFunction</code> should be invoked to
@@ -41,6 +43,8 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * {@link #set(Object, String, Object, PojoPathContext) set} the value for
    * <code>&#64;myFunction</code> based on the result retrieved for
    * <code>foo.bar</code>.
+   * 
+   * @see PojoPath#getFunction()
    */
   char FUNCTION_NAME_PREFIX = '@';
 
@@ -48,7 +52,8 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * This method determines if this {@link PojoPathFunction} is deterministic.
    * In this case it has to guarantee that repetitive calls of
    * {@link #get(Object, String, PojoPathContext) get} with the same
-   * (unmodified) actual POJO will produce the same result.<br>
+   * (unmodified) actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} will
+   * produce the same result.<br>
    * Typically a {@link PojoPathFunction} should be deterministic. However in
    * some cases the calculation of a {@link PojoPathFunction} may depend on the
    * current time or a random value and will therefore be indeterministic.<br>
@@ -68,16 +73,17 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * {@link PojoPathNavigator}.{@link PojoPathNavigator#get(Object, String, PojoPathMode, PojoPathContext) get}
    * independent of the {@link PojoPathMode}. A regular implementation should
    * only return what is already there. However in specific cases this may NOT
-   * (initially) be available from the given POJO <code>actual</code> and
+   * (initially) be available from the given
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} <code>actual</code> and
    * therefore be retrieved from somewhere else (e.g. a database using a primary
    * key given via a {@link PojoPathContext#getProperties() property} of the
    * given <code>context</code>). Further it can be legal to modify the
-   * <code>actual</code> POJO e.g. by attaching the externally retrieved
-   * result.
+   * <code>actual</code> {@link net.sf.mmm.util.reflect.pojo.api.Pojo} e.g. by
+   * attaching the externally retrieved result.
    * 
-   * @param actual is the actual POJO where this function is invoked on.
-   *        Typically the returned value should be retrieved via this actual
-   *        object.
+   * @param actual is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+   *        where this function is invoked on. Typically the returned value
+   *        should be retrieved via this actual object.
    * @param functionName is the name under which this {@link PojoPathFunction}
    *        was invoked via the {@link PojoPathNavigator} excluding the
    *        {@link #FUNCTION_NAME_PREFIX}.
@@ -96,14 +102,14 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
    * if the mode is {@link PojoPathMode#CREATE_IF_NULL} after
    * {@link #get(Object, String, PojoPathContext) get} returned
    * <code>null</code>.<br>
-   * A typical implementation may create a new instance of &lt;VALUE&gt;
-   * explicitly or via {@link Class#newInstance() reflection}. Further in most
+   * A typical implementation may create a new instance of &lt;VALUE&gt; via the
+   * {@link PojoPathContext#getPojoFactory() pojo-factory}. Further in most
    * cases the created value instance will be attached to the given
-   * <code>actual</code> POJO.
+   * <code>actual</code> {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.
    * 
-   * @param actual is the actual POJO where this function is invoked on.
-   *        Typically the returned value should be retrieved via this actual
-   *        object.
+   * @param actual is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+   *        where this function is invoked on. Typically the returned value
+   *        should be retrieved via this actual object.
    * @param functionName is the name under which this {@link PojoPathFunction}
    *        was invoked via the {@link PojoPathNavigator} excluding the
    *        {@link #FUNCTION_NAME_PREFIX}.
@@ -120,14 +126,14 @@ public interface PojoPathFunction<ACTUAL, VALUE> {
 
   /**
    * This method sets the given <code>value</code> for the given
-   * <code>actual</code> POJO.<br>
+   * <code>actual</code> {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.<br>
    * After this method has been successfully invoked, the method
    * {@link #get(Object, String, PojoPathContext) get} should return the same
    * <code>value</code> for identical arguments.
    * 
-   * @param actual is the actual POJO where this function is invoked on.
-   *        Typically the returned value should be retrieved via this actual
-   *        object.
+   * @param actual is the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}
+   *        where this function is invoked on. Typically the returned value
+   *        should be retrieved via this actual object.
    * @param functionName is the name under which this {@link PojoPathFunction}
    *        was invoked via the {@link PojoPathNavigator} excluding the
    *        {@link #FUNCTION_NAME_PREFIX}.

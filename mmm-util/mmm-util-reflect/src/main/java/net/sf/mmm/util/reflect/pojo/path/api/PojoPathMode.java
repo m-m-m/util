@@ -15,10 +15,11 @@ public enum PojoPathMode {
 
   /**
    * This mode causes the {@link PojoPathNavigator} to
-   * {@link net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory#newInstance(Class) create}
-   * {@link net.sf.mmm.util.reflect.pojo.Pojo}s if they are <code>null</code>.
-   * This applies to intermediate {@link net.sf.mmm.util.reflect.pojo.Pojo}s as
-   * well as the final result of the {@link PojoPath}.<br>
+   * {@link net.sf.mmm.util.reflect.pojo.api.PojoFactory#newInstance(Class) create}
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s if they are
+   * <code>null</code>. This applies to intermediate
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s as well as the final result
+   * of the {@link PojoPath}.<br>
    * <ul>
    * <li>For a &#171;Property&#187; this is done via the {@link Class type} of
    * the according setter.</li>
@@ -38,7 +39,7 @@ public enum PojoPathMode {
    * {@link PojoPathFunction#create(Object, String, PojoPathContext)}.</li>
    * </ul>
    * The creation in case of &#171;Property&#187; or &#171;Index&#187; will
-   * happen via the {@link net.sf.mmm.util.reflect.pojo.factory.api.PojoFactory}
+   * happen via the {@link net.sf.mmm.util.reflect.pojo.api.PojoFactory}
    * provided by the {@link PojoPathContext}.
    */
   CREATE_IF_NULL,
@@ -46,8 +47,8 @@ public enum PojoPathMode {
   /**
    * This mode causes the {@link PojoPathNavigator} to fail with an
    * {@link PojoPathSegmentIsNullException} if an intermediate
-   * {@link net.sf.mmm.util.reflect.pojo.Pojo} is <code>null</code>. However
-   * if only the last segment of the {@link PojoPath} evaluates to
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} is <code>null</code>.
+   * However if only the last segment of the {@link PojoPath} evaluates to
    * <code>null</code>, then <code>null</code> is returned. If an
    * &#171;Index&#187; is greater or equal to the
    * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size} of the
@@ -57,7 +58,7 @@ public enum PojoPathMode {
 
   /**
    * This mode causes the {@link PojoPathNavigator} to return <code>null</code>
-   * if an intermediate {@link net.sf.mmm.util.reflect.pojo.Pojo} is
+   * if an intermediate {@link net.sf.mmm.util.reflect.pojo.api.Pojo} is
    * <code>null</code>. This also applies for ordered containers if
    * &#171;Index&#187; is greater or equal to the containers
    * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size}.

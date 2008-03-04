@@ -121,7 +121,13 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       throws PojoPathException, InstantiationFailedException {
 
     if (pojo == null) {
-      throw new PojoPathSegmentIsNullException(null, pojoPath);
+      if (mode == PojoPathMode.RETURN_IF_NULL) {
+        return null;
+      } else if (mode == PojoPathMode.RETURN_IF_NULL) {
+        throw new PojoPathCreationException(null, pojoPath);
+      } else {
+        throw new PojoPathSegmentIsNullException(null, pojoPath);
+      }
     }
     PojoPathState state = createState(pojo, mode, context);
     CachingPojoPath path = getRecursive(pojoPath, context, state);
@@ -150,32 +156,24 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     // try to read from cache...
     if (state != null) {
       currentPath = state.getCached(pojoPath);
-      if (currentPath != null) {
-        // cached path available - use it as is?
-        boolean useCache = context.isCachingUnsafe();
-        if (!useCache) {
-          // ensure safe caching...
-          if (state.isSafeCachingChecked()) {
-            useCache = !currentPath.isInvalidated();
-          } else {
-            useCache = currentPath.checkForSafeCaching();
-            state.setSafeCachingChecked();
-          }
-        }
-        if (useCache) {
-          return currentPath;
-        }
+      if ((currentPath != null) && (currentPath.pojo != null)) {
+        // stop recursion and deliver from cache...
+        return currentPath;
       }
     }
+
     // if we can NOT use the cached result as is, we can still reuse the
     // currentPath object that holds the entire parsed pojoPath.
     if (currentPath == null) {
       currentPath = new CachingPojoPath(pojoPath);
     }
+
     String parentPathString = currentPath.getParentPath();
-    Object parentPojo = state.initialPojo;
-    if (parentPathString != null) {
-      // if out pojoPath is more than a segment, we do a recursive invocation
+    Object parentPojo;
+    if (parentPathString == null) {
+      parentPojo = state.initialPojo;
+    } else {
+      // if our pojoPath is more than a segment, we do a recursive invocation
       CachingPojoPath parentPath = getRecursive(parentPathString, context, state);
       // get the result of the parent-path evaluation
       parentPojo = parentPath.pojo;
@@ -198,21 +196,14 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
 
     // now we start our actual evaluation...
     Object result = get(currentPath, context, state, parentPojo);
+    currentPath.pojo = result;
+    state.setCached(pojoPath, currentPath);
     if (result == null) {
-      currentPath.pojo = null;
-      currentPath.pojoHashCode = 0;
       // creation has already taken place...
       if (state.mode != PojoPathMode.RETURN_IF_NULL) {
         throw new PojoPathSegmentIsNullException(state.initialPojo, pojoPath);
       }
     } else {
-      currentPath.pojo = result;
-      if (state != null) {
-        if (!context.isCachingUnsafe() && !state.isCachingDisabled()) {
-          currentPath.pojoHashCode = result.hashCode();
-        }
-        state.setCached(pojoPath, currentPath);
-      }
       PojoPathRecognizer recognizer = context.getRecognizer();
       if (recognizer != null) {
         recognizer.recognize(result, currentPath);
@@ -504,17 +495,27 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       Object value) throws PojoPathException, InstantiationFailedException {
 
     if (pojo == null) {
-      throw new PojoPathSegmentIsNullException(null, pojoPath);
+      if (mode == PojoPathMode.RETURN_IF_NULL) {
+        return null;
+      } else if (mode == PojoPathMode.RETURN_IF_NULL) {
+        throw new PojoPathCreationException(null, pojoPath);
+      } else {
+        throw new PojoPathSegmentIsNullException(null, pojoPath);
+      }
     }
-    PojoPathState state = createState(pojo, mode, context);
-    CachingPojoPath currentPath = new CachingPojoPath(pojoPath);
-    String parentPathString = currentPath.getParentPath();
-    CachingPojoPath parentPath = null;
     Object current = pojo;
-    if (parentPathString != null) {
-      parentPath = getRecursive(parentPathString, context, state);
-      current = parentPath.pojo;
-      currentPath.setParent(parentPath);
+    PojoPathState state = createState(pojo, mode, context);
+    CachingPojoPath currentPath = state.getCached(pojoPath);
+    if (currentPath == null) {
+      currentPath = new CachingPojoPath(pojoPath);
+      String parentPathString = currentPath.getParentPath();
+      if (parentPathString != null) {
+        CachingPojoPath parentPath = getRecursive(parentPathString, context, state);
+        current = parentPath.pojo;
+        currentPath.setParent(parentPath);
+      }
+    } else if (currentPath.parent != null) {
+      current = currentPath.parent.pojo;
     }
     if (current == null) {
       if (mode == PojoPathMode.RETURN_IF_NULL) {
@@ -524,7 +525,10 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       // have been created.
       throw new PojoPathSegmentIsNullException(pojo, pojoPath);
     }
-    return set(currentPath, context, state, current, value);
+    Object old = set(currentPath, context, state, current, value);
+    // update cache...
+    currentPath.pojo = value;
+    return old;
   }
 
   /**
@@ -535,7 +539,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * <code>mode</code> is {@link PojoPathMode#CREATE_IF_NULL} it creates and
    * attaches (sets) the missing object.
    * 
-   * @param currentPath is the current {@link CachingPojoPath} to evaluate.
+   * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
    *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
@@ -584,7 +588,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * <code>mode</code> is {@link PojoPathMode#CREATE_IF_NULL} it creates and
    * attaches (sets) the missing object.
    * 
-   * @param currentPath is the current {@link CachingPojoPath} to evaluate.
+   * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
    *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
@@ -606,7 +610,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * <code>mode</code> is {@link PojoPathMode#CREATE_IF_NULL} it creates and
    * attaches (sets) the missing object.
    * 
-   * @param currentPath is the current {@link CachingPojoPath} to evaluate.
+   * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
    *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
@@ -690,7 +694,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       if (currentHash != this.cachedHash) {
         // initial POJO has changed, lets nuke the cached POJOs...
         for (CachingPojoPath path : this.cache.values()) {
-          path.invalidate();
+          path.pojo = null;
+          path.pojoType = null;
         }
         this.cachedHash = currentHash;
       }
@@ -720,9 +725,6 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
 
     /** @see #setCachingDisabled() */
     private boolean cachingDisabled;
-
-    /** @see #isSafeCachingChecked() */
-    private boolean safeCachingChecked;
 
     /**
      * The constructor for no caching.
@@ -827,27 +829,6 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       this.cachingDisabled = true;
     }
 
-    /**
-     * This method determines if the first cached {@link CachingPojoPath} has
-     * been
-     * {@link CachingPojoPath#checkForSafeCaching() checked for safe-caching}.
-     * 
-     * @return the safeCachingChecked
-     */
-    public boolean isSafeCachingChecked() {
-
-      return this.safeCachingChecked;
-    }
-
-    /**
-     * This method sets the {@link #isSafeCachingChecked() safe-caching-checked}
-     * flag.
-     */
-    public void setSafeCachingChecked() {
-
-      this.safeCachingChecked = true;
-    }
-
   }
 
   /**
@@ -871,9 +852,6 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     /** @see #getPojo() */
     private Object pojo;
 
-    /** @see #getPojoHashCode() */
-    private int pojoHashCode;
-
     /**
      * The constructor.
      * 
@@ -882,8 +860,6 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     public CachingPojoPath(String pojoPath) {
 
       super(pojoPath);
-      // initially invalidated
-      this.pojoHashCode = -1;
     }
 
     /**
@@ -945,82 +921,6 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     public void setPojo(Object pojo) {
 
       this.pojo = pojo;
-    }
-
-    /**
-     * @return the pojoHashCode
-     */
-    public int getPojoHashCode() {
-
-      return this.pojoHashCode;
-    }
-
-    /**
-     * @param pojoHashCode is the pojoHashCode to set
-     */
-    public void setPojoHashCode(int pojoHashCode) {
-
-      this.pojoHashCode = pojoHashCode;
-    }
-
-    /**
-     * This method invalidates the {@link #getPojo() cached result} for this
-     * path.
-     */
-    protected void invalidate() {
-
-      // nuke cached pojo...
-      this.pojo = null;
-      this.pojoHashCode = -1;
-      this.pojoType = null;
-    }
-
-    /**
-     * This method determines if this path has been
-     * {@link #invalidate() invalidated}.
-     * 
-     * @return <code>true</code> if invalidated, <code>false</code>
-     *         otherwise.
-     */
-    protected boolean isInvalidated() {
-
-      if ((this.pojo == null) && (this.pojoHashCode != 0)) {
-        return true;
-      }
-      return false;
-    }
-
-    /**
-     * This method checks if the this
-     * {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} is safe to be used
-     * as cached result.
-     * 
-     * @return <code>true</code> if cached result is safe, <code>false</code>
-     *         otherwise.
-     */
-    protected boolean checkForSafeCaching() {
-
-      boolean safe = false;
-      if (this.pojo == null) {
-        if (this.pojoHashCode == 0) {
-          safe = true;
-        }
-      } else {
-        int hash = this.pojo.hashCode();
-        if (this.pojoHashCode == hash) {
-          safe = true;
-        }
-      }
-      if (this.parent != null) {
-        boolean parentSafe = this.parent.checkForSafeCaching();
-        if (!parentSafe) {
-          safe = false;
-        }
-      }
-      if (!safe) {
-        invalidate();
-      }
-      return safe;
     }
 
   }

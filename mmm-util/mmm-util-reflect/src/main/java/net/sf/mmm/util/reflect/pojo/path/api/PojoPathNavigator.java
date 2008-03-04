@@ -23,12 +23,6 @@ import net.sf.mmm.util.reflect.InstantiationFailedException;
 public interface PojoPathNavigator {
 
   /**
-   * The character that separates the &#171;Segment&#187;s of a
-   * <em>{@link net.sf.mmm.util.reflect.pojo.api.Pojo}-path</em>.
-   */
-  char SEPARATOR = '.';
-
-  /**
    * This method evaluates the given <code>pojoPath</code> for the given
    * <code>pojo</code> using the given <code>mode</code> and
    * <code>context</code>. It returns the result of the evaluation.<br>
@@ -68,7 +62,26 @@ public interface PojoPathNavigator {
    * {@link #get(Object, String, PojoPathMode, PojoPathContext) get} on the
    * {@link PojoPath#getParentPath() parent-path} and then setting the
    * <code>value</code> for the remaining
-   * {@link PojoPath#getSegment() segment} on the result.
+   * {@link PojoPath#getSegment() segment} on the result.<br>
+   * The result of this method is defined as following:<br>
+   * <ul>
+   * <li>If the last {@link PojoPath#getSegment() segment} points to a
+   * {@link PojoPathFunction} the result of its
+   * {@link PojoPathFunction#set(Object, String, Object, PojoPathContext) set}-method
+   * is returned.</li>
+   * <li>Otherwise if {@link PojoPath#getSegment() segment} points to an index,</li>
+   * <li>the depends on the result of the
+   * {@link PojoPath#getParentPath() parent-path} is a {@link java.util.List},
+   * {@link java.util.Map} or array, this will be the old
+   * {@link #get(Object, String, PojoPathMode, PojoPathContext) value} of the
+   * given <code>pojoPath</code> that has been replaced by <code>value</code>.</li>
+   * <li></li>
+   * <li></li>
+   * <li></li>
+   * <li></li>
+   * </ul>
+   * If <code>pojo</code> is This will typically be the value that replaced
+   * value. It may be <code>null</code>.
    * 
    * @param pojo is the initial {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to
    *        operate on.
@@ -77,12 +90,7 @@ public interface PojoPathNavigator {
    *        <code>null</code> values.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param value is the value to set. It may be <code>null</code>.
-   * @return the value that has actually been set. This will typically be the
-   *         given <code>value</code> itself. However in specific situations
-   *         the value may have been converted. The result will be
-   *         <code>null</code> if the value has NOT been set (because an
-   *         intermediate {@link net.sf.mmm.util.reflect.pojo.api.Pojo} was
-   *         <code>null</code>).
+   * @return the result of the <code>set</code> operation.
    * @throws IllegalPojoPathException if the given <code>pojoPath</code> is
    *         illegal.
    * @throws PojoPathSegmentIsNullException if an intermediate

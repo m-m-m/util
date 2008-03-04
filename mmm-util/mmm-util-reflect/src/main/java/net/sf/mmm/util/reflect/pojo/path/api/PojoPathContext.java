@@ -23,6 +23,16 @@ public interface PojoPathContext {
    * to speed up repetitive calls with the same initial
    * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} and {@link PojoPath}s with a
    * common prefix.<br>
+   * <b>WARNING:</b><br>
+   * If caching is enabled and the initial or an intermediate
+   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} changed outside the
+   * {@link PojoPathNavigator#set(Object, String, PojoPathMode, PojoPathContext, Object) navigator}
+   * the result will be wrong because the evaluation used an old value from the
+   * cache.<br>
+   * Please also note that the {@link PojoPathNavigator} only adds objects from
+   * the {@link #getCache() cache}. It will never remove cached objects. To
+   * avoid memory-leaks, you should use a {@link PojoPathContext} instance only
+   * per transaction, per request, or whatever your grouping block will be.<br>
    * <b>ATTENTION:</b><br>
    * Never make assumptions about the content of this cache. It is provided here
    * to allow the {@link PojoPathNavigator} to be thread-safe and more efficient
@@ -30,17 +40,7 @@ public interface PojoPathContext {
    * cache may change in future releases. Use the
    * {@link #getRecognizer() recognizer} to track visited
    * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s.<br>
-   * <b>WARNING:</b><br>
-   * If caching is enabled and the initial or an intermediate
-   * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} changed it may happen that
-   * the result is wrong because the evaluation used an old value from the
-   * cache. See {@link #isCachingUnsafe()} for more details.<br>
-   * Please also note that the {@link PojoPathNavigator} only adds objects from
-   * the {@link #getCache() cache}. It will never remove cached objects. To
-   * avoid memory-leaks, you should use a {@link PojoPathContext} instance only
-   * per transaction, per request, or whatever you grouping block will be.
    * 
-   * @see #isCachingUnsafe()
    * @see java.util.HashMap
    * @see java.util.WeakHashMap
    * 
@@ -48,30 +48,6 @@ public interface PojoPathContext {
    *         disable caching.
    */
   Map<Object, Object> getCache();
-
-  /**
-   * This method determines if the caching should be <em>unsafe</em>. By
-   * default caching should be <em>safe</em> (NOT <em>unsafe</em>) so all
-   * cached objects on the {@link PojoPath} are checked if they have been
-   * modified since they have been put into the cache. This should prevent from
-   * reading old objects from the cache and ending up with a wrong result.
-   * Therefore by default this method should always return <code>true</code>.
-   * <br>
-   * The modification-check is an implementation secret. However it will
-   * typically test if the {@link Object#hashCode() hash-code} has changed. So
-   * changes that can NOT be tracked via modification-check will be missed. If
-   * you are unsure about these details and whether your object-web might change
-   * during repetitive calls you should {@link #getCache() disable caching}.<br>
-   * <b>ATTENTION:</b><br>
-   * If you enable {@link #isCachingUnsafe() unsafe caching} with active
-   * {@link #getCache() cache} you can speed up repetitive calls. Anyhow you
-   * need to ensure that the traversed object-web does NOT change in the
-   * meantime or you will get unpredictable results.
-   * 
-   * @return <code>true</code> if caching should be unsafe, <code>false</code>
-   *         otherwise.
-   */
-  boolean isCachingUnsafe();
 
   /**
    * This method gets the properties of the context. These can be accessed from

@@ -36,9 +36,6 @@ public class PojoPathContextBean implements PojoPathContext {
   /** @see #getPojoFactory() */
   private PojoFactory pojoFactory;
 
-  /** @see #isCachingUnsafe() */
-  private boolean cachingUnsafe;
-
   /**
    * The constructor. All fields are initially <code>null</code>.
    */
@@ -137,25 +134,6 @@ public class PojoPathContextBean implements PojoPathContext {
   public void setPojoFactory(PojoFactory pojoFactory) {
 
     this.pojoFactory = pojoFactory;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isCachingUnsafe() {
-
-    return this.cachingUnsafe;
-  }
-
-  /**
-   * This method sets the {@link #isCachingUnsafe() unsafe-caching} flag.
-   * 
-   * @param unsafeCaching is the {@link #isCachingUnsafe() unsafe-caching} flag
-   *        to set.
-   */
-  public void setCachingUnsafe(boolean unsafeCaching) {
-
-    this.cachingUnsafe = unsafeCaching;
   }
 
 }

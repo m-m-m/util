@@ -6,11 +6,10 @@ package net.sf.mmm.util.reflect.pojo.path.base;
 import net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPath;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction;
-import net.sf.mmm.util.reflect.pojo.path.api.PojoPathNavigator;
 
 /**
  * This class represents a {@link PojoPath}. It contains the internal logic to
- * validate and parse the {@link PojoPath}.
+ * validate and parse a {@link PojoPath}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -43,7 +42,7 @@ public class BasicPojoPath implements PojoPath {
       throw new IllegalPojoPathException(pojoPath);
     }
     this.pojoPath = pojoPath;
-    int lastDot = pojoPath.lastIndexOf(PojoPathNavigator.SEPARATOR);
+    int lastDot = pojoPath.lastIndexOf(PojoPath.SEPARATOR);
     if (lastDot < 0) {
       this.parentPath = null;
       this.segment = pojoPath;
@@ -100,13 +99,7 @@ public class BasicPojoPath implements PojoPath {
   }
 
   /**
-   * This method gets the name of the {@link PojoPathFunction} identified by the
-   * {@link #getSegment() segment} or <code>null</code> if no
-   * {@link PojoPathFunction}.
-   * 
-   * @return the name of the {@link PojoPathFunction} or <code>null</code> if
-   *         the {@link #getSegment() segment} does NOT start with
-   *         {@link PojoPathFunction#FUNCTION_NAME_PREFIX}.
+   * {@inheritDoc}
    */
   public String getFunction() {
 
@@ -114,12 +107,7 @@ public class BasicPojoPath implements PojoPath {
   }
 
   /**
-   * This method gets the index given by the {@link #getSegment() segment} or
-   * <code>null</code> if no index.
-   * 
-   * @return the index given by the {@link #getSegment() segment} or
-   *         <code>null</code> if the {@link #getSegment() segment} does NOT
-   *         start with a Latin digit.
+   * {@inheritDoc}
    */
   public Integer getIndex() {
 

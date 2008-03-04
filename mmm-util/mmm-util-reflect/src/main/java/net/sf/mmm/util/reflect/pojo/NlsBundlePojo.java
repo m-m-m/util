@@ -41,4 +41,8 @@ public class NlsBundlePojo extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException */
   public static final String ERR_FUNCTION_UNDEFINED = "Undefined function \"{0}\"!";
 
+  /** @see net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunctionUnsupportedOperationException */
+  public static final String ERR_FUNCTION_UNSUPPORTED_OPERATION = "The function "
+      + "\"{1}\" does NOT support the operation \"{0}\"!";
+
 }
