@@ -117,7 +117,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    */
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
-    AbstractNlsException.getLocalizedMessage(this, locale, resolver, buffer);
+    getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
   }
 
   /**

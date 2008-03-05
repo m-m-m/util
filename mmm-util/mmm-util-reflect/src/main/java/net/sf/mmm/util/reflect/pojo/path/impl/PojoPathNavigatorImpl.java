@@ -183,6 +183,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {
       Class<?> clazz = getReflectionUtil().toClass(type);
       result = context.getPojoFactory().newInstance(clazz);
+      setInPojo(currentPath, context, state, parentPojo, result);
     }
     return result;
   }
@@ -191,11 +192,12 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * {@inheritDoc}
    */
   @Override
+  @SuppressWarnings("unchecked")
   protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, Object value) {
 
-    // TODO Auto-generated method stub
-    return null;
+    PojoDescriptor descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
+    return descriptor.setProperty(parentPojo, currentPath.getSegment(), value);
   }
 
 }

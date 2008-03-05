@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.collection.CollectionFactoryManager;
 import net.sf.mmm.util.collection.CollectionFactoryManagerImpl;
+import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.reflect.InstantiationFailedException;
 
 /**
@@ -55,12 +56,17 @@ public class DefaultPojoFactory extends SimplePojoFactory {
   }
 
   /**
+   * This method is invoked from {@link #newInstance(Class)} if the given
+   * {@link Class} is an {@link Class#isInterface() interface}.
    * 
-   * @param <POJO>
-   * @param pojoInterface
-   * @return
-   * @throws InstantiationFailedException
+   * @param <POJO> is the generic type of the
+   *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to create.
+   * @param pojoInterface is the interface reflecting the
+   *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to create.
+   * @return the new instance of the given <code>pojoType</code>.
+   * @throws InstantiationFailedException if the instantiation failed.
    */
+  @SuppressWarnings("unchecked")
   protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface)
       throws InstantiationFailedException {
 
@@ -68,8 +74,12 @@ public class DefaultPojoFactory extends SimplePojoFactory {
       return pojoInterface.cast(getCollectionFactoryManager().getCollectionFactory(
           (Class<? extends Collection>) pojoInterface).createGeneric());
     } else if (Map.class.isAssignableFrom(pojoInterface)) {
-      return pojoInterface.cast(getCollectionFactoryManager().getMapFactory(
-          (Class<? extends Map>) pojoInterface).createGeneric());
+      MapFactory mapFactory = getCollectionFactoryManager().getMapFactory(
+          (Class<? extends Map>) pojoInterface);
+      if (mapFactory == null) {
+        throw new InstantiationFailedException(pojoInterface);
+      }
+      return pojoInterface.cast(mapFactory.createGeneric());
     }
     throw new InstantiationFailedException(pojoInterface);
   }
@@ -85,6 +95,8 @@ public class DefaultPojoFactory extends SimplePojoFactory {
         return newInstanceForInterface(pojoType);
       }
       return super.newInstance(pojoType);
+    } catch (InstantiationFailedException e) {
+      throw e;
     } catch (Exception e) {
       throw new InstantiationFailedException(e, pojoType);
     }

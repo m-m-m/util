@@ -326,8 +326,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
 
     // determine pojo type
     Type currentType = null;
-    if (currentPath != null) {
-      Type pojoType = currentPath.getPojoType();
+    if (currentPath.parent != null) {
+      Type pojoType = currentPath.parent.pojoType;
       if ((pojoType != null) && (pojoType instanceof ParameterizedType)) {
         ParameterizedType type = (ParameterizedType) pojoType;
         Type[] genericArgs = type.getActualTypeArguments();
@@ -377,8 +377,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     boolean ignoreIndexOverflow = (state.mode != PojoPathMode.FAIL_IF_NULL);
     Object result = getCollectionUtil().get(parentPojo, index, ignoreIndexOverflow);
     Type pojoType = null;
-    if (currentPath != null) {
-      pojoType = currentPath.getPojoType();
+    if (currentPath.parent != null) {
+      pojoType = currentPath.parent.pojoType;
     }
     if ((pojoType == null) && (result != null)) {
       pojoType = result.getClass();
@@ -392,8 +392,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     }
     if ((result == null) && (state.mode == PojoPathMode.CREATE_IF_NULL)) {
       result = create(currentPath, context, state, currentType);
-      // TODO: newParent = set(..., int, int)
-      getCollectionUtil().set(parentPojo, index, result);
+      setInArrayOrList(currentPath, context, state, parentPojo, result, index);
     }
     return result;
   }

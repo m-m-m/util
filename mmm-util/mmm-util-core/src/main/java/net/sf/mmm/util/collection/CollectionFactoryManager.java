@@ -20,7 +20,11 @@ public interface CollectionFactoryManager {
    * @param <MAP> is the generic type of the {@link Map}.
    * @param mapType is the type of the {@link Map}. This should be the
    *        interface such as {@link Map}.class or {@link java.util.SortedMap}.class.
-   * @return the {@link MapFactory} for the given <code>mapType</code>.
+   * @return the {@link MapFactory} for the given <code>mapType</code>. The
+   *         <code>mapType</code> has to be
+   *         {@link Class#isAssignableFrom(Class) assignable from}
+   *         {@link MapFactory#getMapInterface()} of the returned instance.
+   *         Typically it will be equal.
    */
   <MAP extends Map> MapFactory getMapFactory(Class<MAP> mapType);
 

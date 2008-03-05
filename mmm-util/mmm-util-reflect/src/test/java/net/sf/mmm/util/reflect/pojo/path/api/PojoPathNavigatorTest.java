@@ -138,6 +138,40 @@ public abstract class PojoPathNavigatorTest {
   }
 
   @Test
+  public void testCreate() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    CollectionPojo pojo = new CollectionPojo();
+    String key = "key";
+    Object result;
+
+    // simple test: create in POJO
+    result = navigator.get(pojo, "string", PojoPathMode.CREATE_IF_NULL, context);
+    assertSame(pojo.getString(), result);
+
+    // create through generic POJO-property including map, list and array...
+    int listIndex = 1;
+    int arrayIndex = 2;
+    result = navigator.get(pojo, "map." + key + "." + listIndex + "." + arrayIndex,
+        PojoPathMode.CREATE_IF_NULL, context);
+    assertEquals("", result);
+    String value = pojo.getMap().get(key).get(listIndex)[arrayIndex];
+    assertSame(value, result);
+    assertEquals(2, pojo.getMap().get(key).size());
+    // rerun with different indices...
+    listIndex = 2;
+    arrayIndex = 1;
+    result = navigator.get(pojo, "map." + key + "." + listIndex + "." + arrayIndex,
+        PojoPathMode.CREATE_IF_NULL, context);
+    assertEquals("", result);
+    value = pojo.getMap().get(key).get(listIndex)[arrayIndex];
+    assertSame(value, result);
+    assertEquals(3, pojo.getMap().get(key).size());
+  }
+
+  @Test
   public void testSetArrayLengthOverflow() {
 
     PojoPathNavigator navigator = createNavigator();
@@ -315,6 +349,8 @@ public abstract class PojoPathNavigatorTest {
 
     private Map<String, List<String[]>> map;
 
+    private String string;
+
     public Map<String, List<String[]>> getMap() {
 
       return this.map;
@@ -323,6 +359,16 @@ public abstract class PojoPathNavigatorTest {
     public void setMap(Map<String, List<String[]>> map) {
 
       this.map = map;
+    }
+
+    public String getString() {
+
+      return this.string;
+    }
+
+    public void setString(String string) {
+
+      this.string = string;
     }
   }
 

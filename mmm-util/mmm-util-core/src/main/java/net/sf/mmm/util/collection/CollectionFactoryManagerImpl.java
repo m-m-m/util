@@ -125,7 +125,7 @@ public class CollectionFactoryManagerImpl implements CollectionFactoryManager {
   protected <MAP extends Map> MapFactory registerMapFactory(MapFactory<? extends MAP> factory,
       Class<MAP> mapInterface) {
 
-    return this.mapFactoryMap.get(mapInterface);
+    return this.mapFactoryMap.put(mapInterface, factory);
   }
 
   /**

@@ -173,46 +173,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   }
 
   /**
-   * @see NlsThrowable#getLocalizedMessage(Locale, NlsTemplateResolver,
-   *      Appendable)
-   * 
-   * @param throwable is the {@link NlsThrowable} for which the localized
-   *        message is requested.
-   * @param locale is the locale to translate to.
-   * @param resolver is used to resolve the template required to translate the
-   *        {@link #getNlsMessage() internationalized message}.
-   * @param buffer is the buffer where to write the message to.
-   */
-  static void getLocalizedMessage(NlsThrowable throwable, Locale locale,
-      NlsTemplateResolver resolver, Appendable buffer) {
-
-    try {
-      throwable.getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
-      Throwable nested = throwable.getCause();
-      if (nested != null) {
-        NlsThrowable mt = null;
-        String msg = null;
-        if (nested instanceof NlsThrowable) {
-          mt = (NlsThrowable) nested;
-        } else {
-          msg = nested.getLocalizedMessage();
-        }
-        if ((mt != null) || (msg != null)) {
-          buffer.append(" [");
-          if (mt != null) {
-            mt.getLocalizedMessage(locale, resolver, buffer);
-          } else {
-            buffer.append(msg);
-          }
-          buffer.append("]");
-        }
-      }
-    } catch (IOException e) {
-      throw new IllegalStateException(e);
-    }
-  }
-
-  /**
    * {@inheritDoc}
    */
   public NlsMessage toNlsMessage() {

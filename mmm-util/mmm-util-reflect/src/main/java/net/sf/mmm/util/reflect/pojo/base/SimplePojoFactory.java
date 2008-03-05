@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.base;
 
+import java.lang.reflect.Array;
+
 import net.sf.mmm.util.reflect.InstantiationFailedException;
 import net.sf.mmm.util.reflect.pojo.api.PojoFactory;
 
@@ -21,7 +23,11 @@ public class SimplePojoFactory implements PojoFactory {
   public <POJO> POJO newInstance(Class<POJO> pojoType) throws InstantiationFailedException {
 
     try {
-      return pojoType.newInstance();
+      if (pojoType.isArray()) {
+        return pojoType.cast(Array.newInstance(pojoType.getComponentType(), 0));
+      } else {
+        return pojoType.newInstance();
+      }
     } catch (Exception e) {
       throw new InstantiationFailedException(e, pojoType);
     }
