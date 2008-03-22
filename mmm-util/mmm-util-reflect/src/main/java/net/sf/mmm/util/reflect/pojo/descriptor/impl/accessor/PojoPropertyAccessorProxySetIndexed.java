@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.GenericBean;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -82,12 +83,13 @@ public class PojoPropertyAccessorProxySetIndexed extends
   public Object invoke(Object pojoInstance, int index, Object item) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
-    Object arrayCopy = getCollectionUtil().set(arrayOrList, index, item, this.maximumListGrowth,
-        null);
-    if ((arrayCopy != arrayOrList) && (this.containerSetAccessor != null)) {
-      this.containerSetAccessor.invoke(pojoInstance, arrayCopy);
+    GenericBean<Object> arrayReceiver = new GenericBean<Object>();
+    Object result = getCollectionUtil().set(arrayOrList, index, item, this.maximumListGrowth,
+        arrayReceiver);
+    if ((arrayReceiver.getValue() != null) && (this.containerSetAccessor != null)) {
+      this.containerSetAccessor.invoke(pojoInstance, arrayReceiver.getValue());
     }
-    return null;
+    return result;
   }
 
 }

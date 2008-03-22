@@ -14,8 +14,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -25,8 +23,6 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -67,9 +63,9 @@ public class ReflectionUtil {
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
 
   /**
-   * Forbidden constructor.
+   * The constructor.
    */
-  protected ReflectionUtil() {
+  public ReflectionUtil() {
 
     super();
   }
@@ -416,6 +412,34 @@ public class ReflectionUtil {
   }
 
   /**
+   * This method compares the given classes.
+   * 
+   * @param class1 is the first class.
+   * @param class2 is the second class.
+   * @return
+   *        <ul>
+   *        <li><code>0</code> if both classes are equal to each other. </li>
+   *        <li><code>1</code> if <code>class1</code> inherits from
+   *        <code>class2</code>.</li>
+   *        <li><code>-1</code> if <code>class2</code> inherits from
+   *        <code>class1</code>.</li>
+   *        <li>{@link Integer#MIN_VALUE} otherwise.</li>
+   *        </ul>
+   */
+  public int compare(Class<?> class1, Class<?> class2) {
+
+    if (class1.equals(class2)) {
+      return 0;
+    } else if (class1.isAssignableFrom(class2)) {
+      return -1;
+    } else if (class2.isAssignableFrom(class1)) {
+      return 1;
+    } else {
+      return Integer.MIN_VALUE;
+    }
+  }
+
+  /**
    * This method gets the according non-{@link Class#isPrimitive() primitive}
    * type for the class given by <code>type</code>.<br>
    * E.g.
@@ -455,48 +479,6 @@ public class ReflectionUtil {
       }
     }
     return result;
-  }
-
-  /**
-   * This method gets the {@link NumberType} for the given
-   * <code>numericType</code>.
-   * 
-   * @param numericType is the class reflecting a {@link Number}. It may be
-   *        {@link Class#isPrimitive() primitive} (such as
-   *        <code>int.class</code>). The signature is NOT
-   *        <code>Class&lt;? extends Number&gt;</code> to make it easy for the
-   *        caller (e.g. <code>Number.class.isAssignableFrom(int.class)</code>
-   *        is <code>false</code>).
-   * @return the {@link NumberType} representing the given
-   *         <code>numericType</code> or <code>null</code> if the given
-   *         <code>numericType</code> is no {@link Number} or is NOT known
-   *         (you may extend this {@link ReflectionUtil} in such case).
-   */
-  public NumberType getNumberType(Class<?> numericType) {
-
-    if ((numericType == int.class) || (numericType == Integer.class)) {
-      return NumberType.INTEGER;
-    } else if ((numericType == long.class) || (numericType == Long.class)) {
-      return NumberType.LONG;
-    } else if ((numericType == double.class) || (numericType == Double.class)) {
-      return NumberType.DOUBLE;
-    } else if ((numericType == float.class) || (numericType == Float.class)) {
-      return NumberType.FLOAT;
-    } else if ((numericType == short.class) || (numericType == Short.class)) {
-      return NumberType.SHORT;
-    } else if ((numericType == byte.class) || (numericType == Byte.class)) {
-      return NumberType.BYTE;
-    } else if ((BigInteger.class.isAssignableFrom(numericType))) {
-      return NumberType.BIG_INTEGER;
-    } else if ((BigDecimal.class.isAssignableFrom(numericType))) {
-      return NumberType.BIG_DECIMAL;
-    } else if ((AtomicInteger.class.isAssignableFrom(numericType))) {
-      return NumberType.ATOMIC_INTEGER;
-    } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
-      return NumberType.ATOMIC_LONG;
-    } else {
-      return null;
-    }
   }
 
   /**

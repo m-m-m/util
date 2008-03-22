@@ -12,14 +12,6 @@ import net.sf.mmm.util.nls.AbstractResourceBundle;
  */
 public class NlsBundlePojo extends AbstractResourceBundle {
 
-  /**
-   * The constructor.
-   */
-  public NlsBundlePojo() {
-
-    super();
-  }
-
   /** @see net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyNotFoundException */
   public static final String ERR_PROPERTY_NOT_FOUND = "Property \"{0}\" not found in \"{1}\"!";
 

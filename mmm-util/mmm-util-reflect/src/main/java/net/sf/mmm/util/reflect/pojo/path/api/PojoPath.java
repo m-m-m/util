@@ -14,19 +14,20 @@ package net.sf.mmm.util.reflect.pojo.path.api;
  * The syntax of a {@link PojoPath} is defined as follows:<br>
  * <code>{@link PojoPath} = &#171;Segment&#187; | &#171;{@link PojoPath}&#187;.&#171;Segment&#187;</code><br>
  * <code>{@link #getSegment() Segment} = &#171;Property&#187; | &#171;Index&#187; | &#171;Function&#187;</code><br>
- * <code>Property = [a-zA-Z][a-zA-Z0-9]*</code><br>
+ * <code>Property = [a-zA-Z][^.]*</code><br>
  * <code>{@link #getIndex() Index} = [0-9]+</code><br>
- * <code>{@link #getFunction() Function} = &#64;[a-zA-Z0-9]+</code><br>
+ * <code>{@link #getFunction() Function} = &#64;[^.]+</code><br>
  * 
  * <h3>Semantic</h3>
- * &#171;Property&#187; stands for the name of a property.
+ * &#171;Property&#187; stands for a property of the
+ * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.
  * <ul>
  * <li>If the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo} is a
  * {@link java.util.Map}, the &#171;Property&#187; is the key to
  * {@link java.util.Map#get(Object) get} and
  * {@link java.util.Map#put(Object, Object) set} the value.</li>
  * <li>Otherwise the &#171;Property&#187; is the
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getName() name of a property}
+ * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor#getProperty(Object, String) name of a property}
  * of the actual {@link net.sf.mmm.util.reflect.pojo.api.Pojo}. If the actual
  * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} does NOT have such property,
  * the {@link PojoPath} will be illegal and cause a {@link PojoPathException}.</li>

@@ -15,9 +15,7 @@ import java.util.concurrent.TimeoutException;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.concurrent.SimpleExecutor;
 import net.sf.mmm.util.concurrent.Stoppable;
@@ -30,16 +28,13 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ProcessUtil {
+public class ProcessUtil extends AbstractLoggable {
 
   /** @see #getInstance() */
   private static ProcessUtil instance;
 
   /** @see #getStreamUtil() */
   private StreamUtil streamUtil;
-
-  /** @see #getLogger() */
-  private Log logger;
 
   /** @see #getExecutor() */
   private Executor executor;
@@ -71,12 +66,9 @@ public class ProcessUtil {
     if (instance == null) {
       synchronized (ProcessUtil.class) {
         if (instance == null) {
-          instance = new ProcessUtil();
-          // instance.setLogger(new Jdk14Logger(ProcessUtil.class.getName()));
-          // even more ugly...
-          instance.setLogger(LogFactory.getLog(ProcessUtil.class));
-          instance.setExecutor(SimpleExecutor.INSTANCE);
-          instance.setStreamUtil(StreamUtil.getInstance());
+          ProcessUtil util = new ProcessUtil();
+          util.initialize();
+          instance = util;
         }
       }
     }
@@ -84,20 +76,18 @@ public class ProcessUtil {
   }
 
   /**
-   * @return the logger
+   * {@inheritDoc}
    */
-  protected Log getLogger() {
+  @Override
+  protected void doInitialize() {
 
-    return this.logger;
-  }
-
-  /**
-   * @param logger the logger to set
-   */
-  @Resource
-  public void setLogger(Log logger) {
-
-    this.logger = logger;
+    super.doInitialize();
+    if (this.executor == null) {
+      this.executor = SimpleExecutor.INSTANCE;
+    }
+    if (this.streamUtil == null) {
+      this.streamUtil = StreamUtil.getInstance();
+    }
   }
 
   /**

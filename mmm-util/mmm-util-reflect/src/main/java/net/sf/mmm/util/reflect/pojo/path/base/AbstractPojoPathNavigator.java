@@ -93,17 +93,19 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param initialPojo is the initial
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} this
    *        {@link PojoPathNavigator} was invoked with.
+   * @param pojoPath TODO
    * @param mode TODO
    * @param context is the {@link PojoPathContext context} for this operation.
    * @return the {@link PojoPathState} or <code>null</code> if caching is
    *         disabled.
    */
   @SuppressWarnings("unchecked")
-  protected PojoPathState createState(Object initialPojo, PojoPathMode mode, PojoPathContext context) {
+  protected PojoPathState createState(Object initialPojo, String pojoPath, PojoPathMode mode,
+      PojoPathContext context) {
 
     Map<Object, Object> rawCache = context.getCache();
     if (rawCache == null) {
-      return new PojoPathState(initialPojo, mode);
+      return new PojoPathState(initialPojo, mode, pojoPath);
     }
     HashKey<Object> hashKey = new HashKey<Object>(initialPojo);
     PojoPathCache masterCache = (PojoPathCache) rawCache.get(hashKey);
@@ -111,7 +113,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       masterCache = new PojoPathCache(initialPojo);
       rawCache.put(hashKey, masterCache);
     }
-    return masterCache.createState(mode);
+    return masterCache.createState(mode, pojoPath);
   }
 
   /**
@@ -129,7 +131,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
         throw new PojoPathSegmentIsNullException(null, pojoPath);
       }
     }
-    PojoPathState state = createState(pojo, mode, context);
+    PojoPathState state = createState(pojo, pojoPath, mode, context);
     CachingPojoPath path = getRecursive(pojoPath, context, state);
     return path.pojo;
   }
@@ -141,8 +143,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    *        {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} to navigate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) state} of
-   *        this operation.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        of this operation.
    * @return the result of the navigation of the given <code>pojoPath</code>
    *         starting at the given <code>pojo</code>. It may be
    *         <code>null</code> according to the given
@@ -187,7 +189,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
         case FAIL_IF_NULL:
           throw new PojoPathSegmentIsNullException(state.initialPojo, pojoPath);
         case RETURN_IF_NULL:
-          return null;
+          return currentPath;
         default :
           // this is actually an internal error
           throw new PojoPathSegmentIsNullException(state.initialPojo, pojoPath);
@@ -201,7 +203,9 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     if (result == null) {
       // creation has already taken place...
       if (state.mode != PojoPathMode.RETURN_IF_NULL) {
-        throw new PojoPathSegmentIsNullException(state.initialPojo, pojoPath);
+        if (pojoPath != state.pojoPath) {
+          throw new PojoPathSegmentIsNullException(state.initialPojo, pojoPath);
+        }
       }
     } else {
       PojoPathRecognizer recognizer = context.getRecognizer();
@@ -224,8 +228,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
-   *        use or <code>null</code> to disable caching.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache}
+   *        to use or <code>null</code> to disable caching.
    * @param parentPojo is the parent object to work on.
    * @return the result of the evaluation of the given <code>pojoPath</code>
    *         starting at the given <code>pojo</code>. It may be
@@ -275,8 +279,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) state} of
-   *        this operation.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        of this operation.
    * @param parentPojo is the parent object to work on.
    * @param function is the {@link PojoPathFunction} for evaluation.
    * @return the result of the evaluation. It might be <code>null</code>
@@ -314,8 +318,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) state} of
-   *        this operation.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        of this operation.
    * @param parentPojo is the parent object to work on.
    * @return the result of the evaluation. It might be <code>null</code>
    *         according to the {@link PojoPathState#getMode() mode}.
@@ -361,8 +365,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) state} of
-   *        this operation.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        of this operation.
    * @param parentPojo is the parent object to work on. It should be an array or
    *        a {@link java.util.List}.
    * @param index is the {@link java.util.List}-{@link java.util.List#get(int) index}.
@@ -404,8 +408,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) state} of
-   *        this operation.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        of this operation.
    * @param pojoType is the type reflecting the
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to create.
    * @return the created {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.
@@ -442,8 +446,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) state} of
-   *        this operation.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        of this operation.
    * @param parentPojo is the parent
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to work on.
    * @return the result of the evaluation. It might be <code>null</code>
@@ -503,7 +507,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       }
     }
     Object current = pojo;
-    PojoPathState state = createState(pojo, mode, context);
+    PojoPathState state = createState(pojo, pojoPath, mode, context);
     CachingPojoPath currentPath = state.getCached(pojoPath);
     if (currentPath == null) {
       currentPath = new CachingPojoPath(pojoPath);
@@ -541,8 +545,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
-   *        use or <code>null</code> to disable caching.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache}
+   *        to use or <code>null</code> to disable caching.
    * @param parentPojo is the parent
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to work on.
    * @param value is the value to set in <code>parentPojo</code>.
@@ -590,8 +594,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
-   *        use or <code>null</code> to disable caching.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache}
+   *        to use or <code>null</code> to disable caching.
    * @param parentPojo is the parent
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to work on.
    * @param value is the value to set in <code>parentPojo</code>.
@@ -612,8 +616,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, PojoPathMode, PojoPathContext) cache} to
-   *        use or <code>null</code> to disable caching.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache}
+   *        to use or <code>null</code> to disable caching.
    * @param parentPojo is the parent
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to work on.
    * @param value is the value to set in <code>parentPojo</code>.
@@ -685,9 +689,10 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
      * 
      * @param mode is the {@link PojoPathMode mode} that determines how to deal
      *        <code>null</code> values.
+     * @param pojoPath is the initial pojo-path.
      * @return the new {@link PojoPathState} instance.
      */
-    protected PojoPathState createState(PojoPathMode mode) {
+    protected PojoPathState createState(PojoPathMode mode, String pojoPath) {
 
       int currentHash = this.initialPojo.hashCode();
       if (currentHash != this.cachedHash) {
@@ -698,7 +703,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
         }
         this.cachedHash = currentHash;
       }
-      return new PojoPathState(this.initialPojo, mode, this.cache);
+      return new PojoPathState(this.initialPojo, mode, pojoPath, this.cache);
     }
 
   }
@@ -722,6 +727,9 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     /** @see #getMode() */
     private final PojoPathMode mode;
 
+    /** @see #getPojoPath() */
+    private final String pojoPath;
+
     /** @see #setCachingDisabled() */
     private boolean cachingDisabled;
 
@@ -732,14 +740,12 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
      *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} for this cache.
      * @param mode is the {@link PojoPathMode mode} that determines how to deal
      *        <code>null</code> values.
+     * @param pojoPath is the {@link #getPojoPath() pojo-path}.
      */
     @SuppressWarnings("unchecked")
-    protected PojoPathState(Object initialPojo, PojoPathMode mode) {
+    protected PojoPathState(Object initialPojo, PojoPathMode mode, String pojoPath) {
 
-      super();
-      this.initialPojo = initialPojo;
-      this.mode = mode;
-      this.cache = Collections.EMPTY_MAP;
+      this(initialPojo, mode, pojoPath, Collections.EMPTY_MAP);
       this.cachingDisabled = true;
     }
 
@@ -750,14 +756,16 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
      *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} for this cache.
      * @param mode is the {@link PojoPathMode mode} that determines how to deal
      *        <code>null</code> values.
+     * @param pojoPath is the {@link #getPojoPath() pojo-path}.
      * @param cache is the underlying {@link Map} used for caching.
      */
-    protected PojoPathState(Object initialPojo, PojoPathMode mode,
+    protected PojoPathState(Object initialPojo, PojoPathMode mode, String pojoPath,
         Map<String, CachingPojoPath> cache) {
 
       super();
       this.initialPojo = initialPojo;
       this.mode = mode;
+      this.pojoPath = pojoPath;
       this.cache = cache;
     }
 
@@ -805,6 +813,14 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     public PojoPathMode getMode() {
 
       return this.mode;
+    }
+
+    /**
+     * @return the initial pojoPath
+     */
+    public String getPojoPath() {
+
+      return this.pojoPath;
     }
 
     /**

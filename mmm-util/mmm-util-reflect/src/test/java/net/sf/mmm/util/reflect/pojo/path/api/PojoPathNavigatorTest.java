@@ -8,6 +8,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -257,10 +258,62 @@ public abstract class PojoPathNavigatorTest {
     Map<String, String[]> newMap = new HashMap<String, String[]>();
     newMap.put(key, array);
     result = navigator.get(newMap, key + ".0", PojoPathMode.RETURN_IF_NULL, context);
-    // just for documentation - we do NOT want to assert a bad behaviour...
     assertSame(one, result);
     result = navigator.get(newMap, key + ".1", PojoPathMode.RETURN_IF_NULL, context);
     assertSame(two, result);
+  }
+
+  @Test
+  public void testErrors() {
+
+    PojoPathNavigator navigator = createNavigator();
+    FooOrBarFunction function = new FooOrBarFunction();
+    DefaultPojoPathFunctionManager functionManager = new DefaultPojoPathFunctionManager();
+    String functionName = "fooOrBar";
+    functionManager.registerFunction(function, functionName);
+    DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
+    defaultContext.setAdditionalFunctionManager(functionManager);
+    PojoPathContext context = defaultContext;
+    // illegal path...
+    try {
+      navigator.get("foo", ".", PojoPathMode.RETURN_IF_NULL, context);
+      fail("exception expected");
+    } catch (IllegalPojoPathException e) {
+    }
+    // array index out of bounds...
+    Object result = navigator.get(new String[0], "0.class", PojoPathMode.RETURN_IF_NULL, context);
+    assertNull(result);
+    try {
+      navigator.get(new String[0], "0.class", PojoPathMode.FAIL_IF_NULL, context);
+      fail("exception expected");
+    } catch (IndexOutOfBoundsException e) {
+    }
+    // intermediate segment is null...
+    result = navigator.get(new String[] { null }, "0", PojoPathMode.FAIL_IF_NULL, context);
+    assertNull(result);
+    try {
+      navigator.get(new String[] { null }, "0.class", PojoPathMode.FAIL_IF_NULL, context);
+      fail("exception expected");
+    } catch (PojoPathSegmentIsNullException e) {
+    }
+    // undefined function...
+    try {
+      navigator.get("foo", "@undefined", PojoPathMode.RETURN_IF_NULL, context);
+      fail("exception expected");
+    } catch (PojoPathFunctionUndefinedException e) {
+    }
+    // path segment creation impossible...
+    try {
+      navigator.get(new String[0], "1", PojoPathMode.CREATE_IF_NULL, context);
+      fail("exception expected");
+    } catch (PojoPathCreationException e) {
+    }
+    // function with unsupported operation...
+    try {
+      navigator.set(new MyPojo(), "@" + functionName, PojoPathMode.CREATE_IF_NULL, context, "foo");
+      fail("exception expected");
+    } catch (PojoPathFunctionUnsupportedOperationException e) {
+    }
   }
 
   public static class MyPojo {

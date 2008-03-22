@@ -3,17 +3,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyNotFoundException;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.dummy.MyPojo;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the abstract test-case for
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder} implementations using
- * {@link MyPojo}.
+ * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder}
+ * implementations using {@link MyPojo}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -43,6 +53,95 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     assertEquals(Boolean.valueOf(flag), pojoDescriptor.getProperty(pojoInstance, "flag"));
     // test property "items"/"item"
     checkProperty(pojoDescriptor, "items", List.class, List.class);
+
+    // check non-existent property
+    try {
+      pojoDescriptor.getAccessor("not-existent", PojoPropertyAccessorNonArgMode.GET, true);
+      fail("Exception expected");
+    } catch (PojoPropertyNotFoundException e) {
+    }
+    // check non-existent accessor
+    try {
+      pojoDescriptor.getAccessor("name", PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, true);
+      fail("Exception expected");
+    } catch (PojoPropertyNotFoundException e) {
+    }
+  }
+
+  protected void checkItems(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance,
+      boolean viaMethods) {
+
+    // test property "items"
+    List<String> myList = new ArrayList<String>();
+    pojoDescriptor.setProperty(pojoInstance, "items", myList);
+    assertSame(myList, pojoDescriptor.getProperty(pojoInstance, "items"));
+    String item1 = "item1";
+    if (viaMethods) {
+      pojoDescriptor.addPropertyItem(pojoInstance, "item", item1);
+    } else {
+      pojoDescriptor.addPropertyItem(pojoInstance, "items", item1);
+    }
+    assertEquals(1, myList.size());
+    assertEquals(item1, myList.get(0));
+    if (viaMethods) {
+      // ensure add was invoked via method instead of directly on list
+      assertNotSame(item1, myList.get(0));
+    } else {
+      assertSame(item1, myList.get(0));
+    }
+    Object result = pojoDescriptor.getProperty(pojoInstance, "items[0]");
+    assertEquals(item1, result);
+    if (viaMethods) {
+      // ensure get was invoked via indexed-getter instead of directly on list
+      assertNotSame(item1, result);
+    } else {
+      assertSame(item1, result);
+    }
+    if (viaMethods) {
+      pojoDescriptor.addPropertyItem(pojoInstance, "item", item1);
+    } else {
+      pojoDescriptor.addPropertyItem(pojoInstance, "items", item1);
+    }
+    String item2 = "item2";
+    pojoDescriptor.setProperty(pojoInstance, "items[1]", item2);
+    assertEquals(2, myList.size());
+    assertEquals(2, pojoDescriptor.getPropertySize(pojoInstance, "items"));
+    assertEquals(item2, myList.get(1));
+    if (viaMethods) {
+      // ensure set was invoked via indexed-setter instead of directly on list
+      assertNotSame(item2, myList.get(1));
+    } else {
+      assertSame(item2, myList.get(1));
+    }
+    assertEquals(item2, pojoDescriptor.getProperty(pojoInstance, "items[1]"));
+  }
+
+  protected void checkValues(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance,
+      boolean viaMethods) {
+
+    // test property "values"
+    Map<String, String> values = new HashMap<String, String>();
+    pojoDescriptor.setProperty(pojoInstance, "values", values);
+    assertSame(values, pojoDescriptor.getProperty(pojoInstance, "values"));
+    String key1 = "key1";
+    String value1 = "value1";
+    String property = "values['" + key1 + "']";
+    pojoDescriptor.setProperty(pojoInstance, property, value1);
+    assertEquals(value1, values.get(key1));
+    if (viaMethods) {
+      // ensure put was invoked via mapped setter instead of directly on map
+      assertNotSame(value1, values.get(key1));
+    } else {
+      assertSame(value1, values.get(key1));
+    }
+    assertEquals(value1, pojoDescriptor.getProperty(pojoInstance, property));
+    if (viaMethods) {
+      // ensure get was invoked via mapped getter instead of directly on map
+      assertNotSame(value1, pojoDescriptor.getProperty(pojoInstance, property));
+    } else {
+      assertSame(value1, pojoDescriptor.getProperty(pojoInstance, property));
+    }
+
   }
 
 }

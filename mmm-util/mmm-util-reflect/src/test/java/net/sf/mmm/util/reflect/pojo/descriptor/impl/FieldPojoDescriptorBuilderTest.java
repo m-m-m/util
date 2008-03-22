@@ -4,17 +4,13 @@
 package net.sf.mmm.util.reflect.pojo.descriptor.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
 import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
-import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoFieldIntrospectorImpl;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.dummy.MyPojo;
 
 /**
@@ -42,16 +38,9 @@ public class FieldPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuil
     // test property "items"/"item"
     checkProperty(pojoDescriptor, "items", List.class, List.class);
 
-    List<String> myList = new ArrayList<String>();
-    pojoDescriptor.setProperty(pojoInstance, "items", myList);
-    assertSame(myList, pojoDescriptor.getProperty(pojoInstance, "items"));
-    /*
-     * String item1 = "item1"; pojoDescriptor.addPropertyItem(pojoInstance,
-     * "item", item1); assertEquals(1, myList.size()); assertEquals(item1,
-     * myList.get(0)); String item2 = "item2";
-     * pojoDescriptor.addPropertyItem(pojoInstance, "item", item2);
-     * assertEquals(2, myList.size()); assertEquals(item1, myList.get(1));
-     */
+    checkItems(pojoDescriptor, pojoInstance, false);
+
+    checkValues(pojoDescriptor, pojoInstance, false);
   }
 
 }

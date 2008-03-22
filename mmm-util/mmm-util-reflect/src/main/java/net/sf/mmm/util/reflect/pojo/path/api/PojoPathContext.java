@@ -89,6 +89,15 @@ public interface PojoPathContext {
   PojoPathFunctionManager getAdditionalFunctionManager();
 
   /**
+   * This method gets an optional {@link PojoPathGenericConverter} that is used
+   * in favor to {@link PojoPathConverter}s registered to the
+   * {@link PojoPathNavigator} itself.
+   * 
+   * @return
+   */
+  PojoPathGenericConverter getAdditionalConverter();
+
+  /**
    * This method gets the {@link PojoFactory} instance used to
    * {@link PojoPathMode#CREATE_IF_NULL create} new
    * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}s.

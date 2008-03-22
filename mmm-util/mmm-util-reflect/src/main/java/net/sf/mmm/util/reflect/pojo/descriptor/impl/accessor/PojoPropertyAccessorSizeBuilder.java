@@ -6,8 +6,8 @@ package net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import net.sf.mmm.util.reflect.NumberType;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.math.NumberType;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
@@ -44,7 +44,7 @@ public class PojoPropertyAccessorSizeBuilder extends
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
-      NumberType numberType = ReflectionUtil.getInstance().getNumberType(propertyClass);
+      NumberType<? extends Number> numberType = MathUtil.getInstance().getNumberType(propertyClass);
       if ((numberType != null) && (!numberType.isDecimal())) {
         if (NumberType.INTEGER.getExactnessDifference(numberType) >= 0) {
           String methodName = method.getName();
@@ -53,7 +53,7 @@ public class PojoPropertyAccessorSizeBuilder extends
           if (propertyName != null) {
             return new PojoPropertyAccessorNonArgMethod(propertyName,
                 method.getGenericReturnType(), propertyClass, method,
-                PojoPropertyAccessorNonArgMode.SIZE);
+                PojoPropertyAccessorNonArgMode.GET_SIZE);
           }
         }
       }
@@ -75,7 +75,7 @@ public class PojoPropertyAccessorSizeBuilder extends
    */
   public PojoPropertyAccessorNonArgMode getMode() {
 
-    return PojoPropertyAccessorNonArgMode.SIZE;
+    return PojoPropertyAccessorNonArgMode.GET_SIZE;
   }
 
 }

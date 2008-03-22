@@ -9,7 +9,7 @@ package net.sf.mmm.util.reflect.pojo.descriptor.api;
  * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.<br>
  * This functionality is an advanced alternative to
  * {@link java.beans.Introspector} or <a
- * href="http://commons.apache.org/commons-beanutils">commons-beanutils</a>.
+ * href="http://commons.apache.org/beanutils">commons-beanutils</a>.
  * 
  * @see PojoDescriptor
  * 

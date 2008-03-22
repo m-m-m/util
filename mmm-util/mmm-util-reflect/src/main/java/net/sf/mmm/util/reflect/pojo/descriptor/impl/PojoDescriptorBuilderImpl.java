@@ -37,6 +37,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.base.PojoMethodIntrospector;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorAddBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetIndexedBuilder;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetMappedBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorRemoveBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetIndexedBuilder;
@@ -256,6 +257,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         this.accessorBuilders.add(new PojoPropertyAccessorAddBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorRemoveBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorGetIndexedBuilder());
+        this.accessorBuilders.add(new PojoPropertyAccessorGetMappedBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorSetIndexedBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorSetMappedBuilder());
         this.accessorBuilders.add(new PojoPropertyAccessorSizeBuilder());

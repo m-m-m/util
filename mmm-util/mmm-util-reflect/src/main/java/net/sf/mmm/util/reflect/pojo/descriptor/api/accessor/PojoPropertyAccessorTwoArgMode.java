@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.pojo.descriptor.api.accessor;
 /**
  * An instance of this class represents a specific
  * {@link PojoPropertyAccessorMode accessor-mode} for a
- * {@link PojoPropertyAccessorOneArg one-arg accessor} of a
+ * {@link PojoPropertyAccessorTwoArg two-arg accessor} of a
  * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor property}.
  * This abstract base class acts like an {@link Enum} but allows you to define
  * your own custom mode by extending this class.
@@ -18,7 +18,7 @@ public class PojoPropertyAccessorTwoArgMode extends
 
   /**
    * The mode for the {@link PojoPropertyAccessorOneArg setter} of a mapped
-   * property.
+   * property. The suggested argument order is <code>key, value</code>.
    */
   public static final PojoPropertyAccessorTwoArgMode SET_MAPPED = new PojoPropertyAccessorTwoArgMode(
       "set-mapped");

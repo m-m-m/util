@@ -37,7 +37,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
   @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
-    return PojoPropertyAccessorNonArgMode.SIZE;
+    return PojoPropertyAccessorNonArgMode.GET_SIZE;
   }
 
   /**

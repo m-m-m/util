@@ -12,7 +12,7 @@
  * Using this utilities you are NOT limited by such restrictions.<br>
  * <br>
  * Instead of the {@link java.beans.Introspector} for java-beans or
- * <a href="http://commons.apache.org/commons-beanutils">commons-beanutils</a>,
+ * <a href="http://commons.apache.org/beanutils">commons-beanutils</a>,
  * you can use the advanced introspection offered by
  * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder}.<br>
  * Further there is support to traverse a complete object-web spanned by an 

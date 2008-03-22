@@ -5,6 +5,7 @@ package net.sf.mmm.util.collection;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -44,4 +45,25 @@ public interface QueueFactory extends CollectionFactory<Queue> {
       return new LinkedList<E>();
     }
   };
+
+  /** An instance creating a {@link ConcurrentLinkedQueue}. */
+  QueueFactory INSTANCE_CONCURRENT_LINKED_QUEUE = new AbstractQueueFactory() {
+
+    public Class<? extends Queue> getCollectionImplementation() {
+
+      return ConcurrentLinkedQueue.class;
+    }
+
+    public <E> Queue<E> create() {
+
+      return new ConcurrentLinkedQueue<E>();
+    }
+
+    public <E> Queue<E> create(int capacity) {
+
+      // capacity does NOT make sense here...
+      return new ConcurrentLinkedQueue<E>();
+    }
+  };
+
 }

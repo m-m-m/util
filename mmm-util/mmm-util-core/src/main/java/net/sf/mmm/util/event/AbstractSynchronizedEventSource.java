@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.event;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
+import net.sf.mmm.util.collection.QueueFactory;
 
 /**
  * This class extends {@link AbstractEventSource} with the ability of
@@ -25,7 +25,7 @@ public class AbstractSynchronizedEventSource<E extends Event, L extends EventLis
    */
   public AbstractSynchronizedEventSource() {
 
-    super(new ConcurrentLinkedQueue<L>());
+    super(QueueFactory.INSTANCE_CONCURRENT_LINKED_QUEUE);
   }
 
 }

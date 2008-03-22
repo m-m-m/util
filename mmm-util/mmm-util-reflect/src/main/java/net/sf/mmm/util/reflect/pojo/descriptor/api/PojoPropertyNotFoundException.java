@@ -36,8 +36,6 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * TODO: own exception?
-   * 
    * @param pojoType is the class reflecting the POJO.
    * @param propertyName is the name of the missing property.
    * @param mode is the access-mode for which the property is NOT available.

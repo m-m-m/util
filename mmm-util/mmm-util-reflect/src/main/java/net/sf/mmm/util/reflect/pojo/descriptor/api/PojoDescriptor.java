@@ -263,7 +263,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#SIZE size}
+   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE size}
    * of the {@link #getPropertyDescriptor(String) property} with the given
    * <code>propertyName</code> from the given <code>pojoInstance</code>.
    * 

@@ -14,9 +14,6 @@ import org.junit.Test;
 
 import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
-import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoFieldIntrospectorImpl;
-import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoMethodIntrospectorImpl;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.dummy.MyPojo;
 
 /**
@@ -76,6 +73,9 @@ public class FieldAndPublicMethodPojoDescriptorBuilderTest extends
     pojoDescriptor.setProperty(pojoInstance, "string", secret);
     assertSame(secret, pojoDescriptor.getProperty(pojoInstance, "renamedProperty"));
 
+    checkItems(pojoDescriptor, pojoInstance, true);
+
+    checkValues(pojoDescriptor, pojoInstance, true);
   }
 
 }

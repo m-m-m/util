@@ -3,8 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.event;
 
-import java.util.ArrayList;
 import java.util.Collection;
+
+import net.sf.mmm.util.collection.CollectionFactory;
+import net.sf.mmm.util.collection.ListFactory;
 
 /**
  * This is the abstract base implementation of the
@@ -29,19 +31,20 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    */
   public AbstractEventSource() {
 
-    super();
-    this.listeners = new ArrayList<L>();
+    this(ListFactory.INSTANCE_ARRAY_LIST);
   }
 
   /**
    * The constructor.
    * 
-   * @param listenerList is the list used to store the listeners.
+   * @param collectionFactory is the collection factory used to create the
+   *        internal {@link Collection} for the listeners.
    */
-  protected AbstractEventSource(Collection<L> listenerList) {
+  @SuppressWarnings("unchecked")
+  protected AbstractEventSource(CollectionFactory<? extends Collection> collectionFactory) {
 
     super();
-    this.listeners = listenerList;
+    this.listeners = collectionFactory.create();
   }
 
   /**

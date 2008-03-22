@@ -42,9 +42,7 @@ public enum VisibilityModifier {
    * 
    * @see javax.lang.model.element.Modifier#PUBLIC
    */
-  PUBLIC(Modifier.PUBLIC),
-
-  ;
+  PUBLIC(Modifier.PUBLIC);
 
   /** @see #getBits() */
   private final int bits;
@@ -72,10 +70,11 @@ public enum VisibilityModifier {
 
   /**
    * This method gets a non-negative integer value that follows the strict order
-   * of the visibility so that the following equation applies:
+   * of the visibility. The following equation applies:
    * 
    * <pre>
-   * {@link #PRIVATE}.{@link #getOrder()} &lt; {@link #FRIENDLY}.{@link #getOrder()} &lt; {@link #PROTECTED}.{@link #getOrder()} &lt; {@link #PUBLIC}.{@link #getOrder()}
+   * {@link #PRIVATE}.{@link #getOrder()} &lt; {@link #FRIENDLY}.{@link #getOrder()}
+   * &lt; {@link #PROTECTED}.{@link #getOrder()} &lt; {@link #PUBLIC}.{@link #getOrder()}
    * </pre>
    * 
    * @return the order number of the visibility.

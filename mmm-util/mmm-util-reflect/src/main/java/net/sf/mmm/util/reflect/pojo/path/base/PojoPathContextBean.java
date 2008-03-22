@@ -9,6 +9,7 @@ import java.util.Properties;
 import net.sf.mmm.util.reflect.pojo.api.PojoFactory;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunctionManager;
+import net.sf.mmm.util.reflect.pojo.path.api.PojoPathGenericConverter;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;
 
 /**
@@ -29,6 +30,9 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /** @see #getRecognizer() */
   private PojoPathRecognizer recognizer;
+
+  /** @see #getAdditionalConverter() */
+  private PojoPathGenericConverter additionalConverter;
 
   /** @see #getAdditionalFunctionManager() */
   private PojoPathFunctionManager additionalFunctionManager;
@@ -62,6 +66,24 @@ public class PojoPathContextBean implements PojoPathContext {
   public void setAdditionalFunctionManager(PojoPathFunctionManager additionalFunctionManager) {
 
     this.additionalFunctionManager = additionalFunctionManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public PojoPathGenericConverter getAdditionalConverter() {
+
+    return this.additionalConverter;
+  }
+
+  /**
+   * This method sets the {@link #getAdditionalConverter() additional converter}.
+   * 
+   * @param additionalConverter is the {@link PojoPathGenericConverter} to set.
+   */
+  public void setAdditionalConverter(PojoPathGenericConverter additionalConverter) {
+
+    this.additionalConverter = additionalConverter;
   }
 
   /**

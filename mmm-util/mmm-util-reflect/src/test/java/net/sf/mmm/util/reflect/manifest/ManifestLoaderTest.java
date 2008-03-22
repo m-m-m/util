@@ -3,12 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.manifest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
+import junit.framework.TestCase;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * This is the {@link TestCase} for {@link ManifestLoader}.
@@ -25,16 +30,24 @@ public class ManifestLoaderTest {
     List<Manifest> manifests = loader.getManifests();
     assertNotNull(manifests);
     assertTrue(manifests.size() > 0);
-    Manifest log4jManifest = null;
+    Manifest servletManifest = null;
     for (Manifest manifest : manifests) {
-      if ("log4j".equals(manifest.getImplementationTitle())) {
-        log4jManifest = manifest;
+      if ("javax.servlet".equals(manifest.getImplementationTitle())) {
+        servletManifest = manifest;
       }
     }
-    assertNotNull(log4jManifest);
-    assertEquals("1.2.14", log4jManifest.getImplementationVersion());
-    assertEquals("\"Apache Software Foundation\"", log4jManifest.getImplementationVendor());
-    assertEquals("1.0", log4jManifest.getManifestVersion());
+    assertNotNull(servletManifest);
+    assertEquals("1.0", servletManifest.getManifestVersion());
+
+    assertEquals("Java API for Servlets", servletManifest.getSpecificationTitle());
+    assertEquals("Sun Microsystems, Inc.", servletManifest.getSpecificationVendor());
+    assertEquals("2.4", servletManifest.getSpecificationVersion());
+
+    assertEquals("javax.servlet", servletManifest.getImplementationTitle());
+    assertEquals("2.4.public_draft", servletManifest.getImplementationVersion());
+    assertEquals("Apache Software Foundation", servletManifest.getImplementationVendor());
+    assertNull(servletManifest.getImplementationVendorId());
+    assertEquals("Apache Ant 1.6.2", servletManifest.getProperties().get("Ant-Version"));
   }
 
 }

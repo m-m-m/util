@@ -68,7 +68,7 @@ public class PojoPropertyAccessorProxySetMapped extends
 
     Map map = (Map) getDelegate().invoke(pojoInstance);
     Object result = null;
-    if (map == null) {
+    if (map != null) {
       result = map.put(key, value);
     }
     return result;

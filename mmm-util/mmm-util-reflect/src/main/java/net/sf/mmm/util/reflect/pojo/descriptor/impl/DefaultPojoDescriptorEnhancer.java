@@ -209,13 +209,14 @@ public class DefaultPojoDescriptorEnhancer implements PojoDescriptorEnhancer {
           }
           if (this.addVirtualAccessors) {
             // add size accessor
-            if (propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.SIZE) == null) {
+            if (propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET_SIZE) == null) {
               propertyDescriptor.addAccessor(new PojoPropertyAccessorProxyGetSize(getAccessor));
             }
             if (isMap) {
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED) == null) {
                 propertyDescriptor.addAccessor(new PojoPropertyAccessorProxyGetMapped(getAccessor));
-              } else if (propertyDescriptor.getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED) == null) {
+              }
+              if (propertyDescriptor.getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED) == null) {
                 propertyDescriptor.addAccessor(new PojoPropertyAccessorProxySetMapped(getAccessor));
               }
             } else {
@@ -239,8 +240,8 @@ public class DefaultPojoDescriptorEnhancer implements PojoDescriptorEnhancer {
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED) == null) {
                 propertyDescriptor
                     .addAccessor(new PojoPropertyAccessorProxyGetIndexed(getAccessor));
-              } else if (propertyDescriptor
-                  .getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED) == null) {
+              }
+              if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED) == null) {
                 propertyDescriptor.addAccessor(new PojoPropertyAccessorProxySetIndexed(getAccessor,
                     setAccessor));
               }

@@ -31,8 +31,8 @@ public class PojoPropertyAccessorNonArgMode extends
    * It is also possible that it returns a {@link Byte} or {@link Short}. Use
    * {@link Number} to avoid problems.
    */
-  public static final PojoPropertyAccessorNonArgMode SIZE = new PojoPropertyAccessorNonArgMode(
-      "size");
+  public static final PojoPropertyAccessorNonArgMode GET_SIZE = new PojoPropertyAccessorNonArgMode(
+      "get-size");
 
   /**
    * The constructor.

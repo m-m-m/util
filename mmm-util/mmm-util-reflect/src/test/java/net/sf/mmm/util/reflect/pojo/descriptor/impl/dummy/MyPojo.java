@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect.pojo.descriptor.impl.dummy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is a dummy pojo for testing.
@@ -25,6 +26,8 @@ public class MyPojo extends AbstractPojo {
   private String privateString;
 
   private String privateProperty;
+
+  private Map<String, String> values;
 
   public MyPojo() {
 
@@ -61,12 +64,30 @@ public class MyPojo extends AbstractPojo {
 
   public void addItem(String item) {
 
-    this.items.add(item);
+    this.items.add(new String(item));
+  }
+
+  public String getItem(int index) {
+
+    return new String(this.items.get(index));
+  }
+
+  public void setItem(int index, String item) {
+
+    this.items.set(index, new String(item));
   }
 
   public void setItems(List<String> items) {
 
     this.items = items;
+  }
+
+  public int getItemCount() {
+
+    if (this.items == null) {
+      return 0;
+    }
+    return this.items.size();
   }
 
   public void setRenamedProperty(String value) {
@@ -94,9 +115,26 @@ public class MyPojo extends AbstractPojo {
     this.privateProperty = privateProperty;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  public Map<String, String> getValues() {
+
+    return this.values;
+  }
+
+  public void setValues(Map<String, String> values) {
+
+    this.values = values;
+  }
+
+  public String getValue(String key) {
+
+    return new String(this.values.get(key));
+  }
+
+  public String setValue(String key, String value) {
+
+    return this.values.put(key, new String(value));
+  }
+
   @Override
   public String getName() {
 

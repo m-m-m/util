@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -35,7 +36,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
    *        to check.
    */
   protected void checkProperty(PojoDescriptor<?> pojoDescriptor, String propertyName,
-      Class readType, Class writeType) {
+      Class<?> readType, Class<?> writeType) {
 
     PojoPropertyDescriptor propertyDescriptor = pojoDescriptor.getPropertyDescriptor(propertyName);
     assertNotNull(propertyDescriptor);
@@ -50,6 +51,9 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(getAccessor);
       assertEquals(propertyName, getAccessor.getName());
       assertEquals(readType, getAccessor.getPropertyClass());
+      assertEquals(readType, ReflectionUtil.getInstance().toClass(getAccessor.getPropertyType()));
+      assertEquals(readType, getAccessor.getReturnClass());
+      assertEquals(readType, ReflectionUtil.getInstance().toClass(getAccessor.getReturnType()));
     }
     // test write accessor
     PojoPropertyAccessorOneArg setAccessor = propertyDescriptor
@@ -60,6 +64,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(setAccessor);
       assertEquals(propertyName, setAccessor.getName());
       assertEquals(writeType, setAccessor.getPropertyClass());
+      assertEquals(writeType, ReflectionUtil.getInstance().toClass(setAccessor.getPropertyType()));
     }
   }
 
