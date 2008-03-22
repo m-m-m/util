@@ -103,7 +103,16 @@
             <property name="option" value="text"/>
         </module>
         <module name="GenericIllegalRegexp">
-            <property name="format" value="System\.(out|err)"/>
+            <property name="format" value="System\.(out|err)\.print"/>
+            <property name="message" value="Use logger"/>
+        </module>
+        <module name="GenericIllegalRegexp">
+            <property name="severity" value="info"/>
+            <property name="format" value="System\.exit"/>
+            <property name="message" value="Only exit from main methods"/>
+        </module>
+        <module name="GenericIllegalRegexp">
+            <property name="format" value="printStackTrace\(\)"/>
             <property name="message" value="Use logger"/>
         </module>
     </module>
