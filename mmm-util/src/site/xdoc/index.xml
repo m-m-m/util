@@ -8,14 +8,22 @@
 
   <body>
     <section name="About MMM::Util">
-      This project contains utilities for various purposes:
+      This project provides utilities for various purposes. They are NOT project
+      specific and are all designed to be useful for everybody. Unlike older projects
+      such as the <a href="http://commons.apache.org/">apache commons</a> we are
+      NOT limited by legacy support down to JVMs lower than 5.0.
+      Therefore we can make intensive use of the language and offer 
+      sophisicated APIs.
+      <subsection name="Subprojects">
+      Here is a list of the available utility-projects:
       <ul>
         <li><a href="mmm-util-core/index.html">mmm-util-core</a> contains valuable utilities for 
             general purpose (NLS, ISO-8601, generic value conversion, scanners, pattern compilers, etc.).</li>
+        <li><a href="mmm-util-reflect/index.html">mmm-util-reflect</a> contains utilities that help 
+            to deal with reflection, especially for java 5 features like generics and annotations.
+            It also offeres advanced introspection and object-web navigation.</li>
         <li><a href="mmm-util-misc/index.html">mmm-util-misc</a> contains various utilities for 
             general purpose (dealing with strings, etc.).</li>
-        <li><a href="mmm-util-reflect/index.html">mmm-util-reflect</a> contains utilities that help 
-            to deal with reflection, especially for java 5 features like annotations.</li>
         <li><a href="mmm-util-resource/index.html">mmm-util-resource</a> gives access to resources 
             from classpath (or other sources).</li>
         <li><a href="mmm-util-xml/index.html">mmm-util-xml</a> contains stuff for dealing with XML.</li>
@@ -24,6 +32,7 @@
         <li><a href="mmm-util-http/index.html">mmm-util-http</a> is an HTTP utility NOT wired up 
             with the protocol (to be used for HTTPMU in UPnP).</li>
       </ul>
+      </subsection>
     </section>
   </body>
 </document>

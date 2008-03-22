@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>MMM Util::Reflect</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM Util::Reflect">
+      <p>
+      This module contains utitlies to make reflection easier.
+    	</p>
+    	<p>
+    	Here are some of the features provided by this module:
+    	<ul>
+        <li><a href="apidocs/net/sf/mmm/util/reflect/package-summary.html">General utilities</a> for dealing with reflection, generics and annotations.</li>
+        <li>Support for <a href="apidocs/net/sf/mmm/util/reflect/manifest/package-summary.html">manifests</a>.</li>
+        <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/package-summary.html">values</a>.</li>
+        <li>Advanced <a href="apidocs/net/sf/mmm/util/reflect/pojo/descriptor/api/package-summary.html">POJO-Introspection</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/reflect/pojo/path/api/package-summary.html">POJO-Navigation</a> for accessing entire object-webs easily.</li>
+        <li>and many more...</li>
+    	</ul>
+    	</p>
+    </section>
+  </body>
+</document>
