@@ -772,30 +772,30 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     /**
      * This method gets the {@link CachingPojoPath} from the cache.
      * 
-     * @param pojoPath is the
+     * @param currentPojoPath is the
      *        {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} to lookup.
      * @return the cached {@link CachingPojoPath} or <code>null</code> if NOT
      *         (yet) cached.
      */
-    public CachingPojoPath getCached(String pojoPath) {
+    public CachingPojoPath getCached(String currentPojoPath) {
 
-      return this.cache.get(pojoPath);
+      return this.cache.get(currentPojoPath);
     }
 
     /**
      * This method stored a {@link CachingPojoPath} in the cache. This method
      * will do nothing if this state is {@link #isCachingDisabled() disabled}.
      * 
-     * @param pojoPath is the
+     * @param currentPojoPath is the
      *        {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} leading to
      *        the given <code>pojo</code>.
      * @param evaluatedPojoPath is the {@link CachingPojoPath} that has been
      *        evaluated and should be cached.
      */
-    public void setCached(String pojoPath, CachingPojoPath evaluatedPojoPath) {
+    public void setCached(String currentPojoPath, CachingPojoPath evaluatedPojoPath) {
 
       if (!this.cachingDisabled) {
-        this.cache.put(pojoPath, evaluatedPojoPath);
+        this.cache.put(currentPojoPath, evaluatedPojoPath);
       }
     }
 

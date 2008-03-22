@@ -91,7 +91,7 @@ public interface MapFactory<MAP extends Map> {
   MAP createGeneric(int capacity);
 
   /** The default instance creating a {@link HashMap}. */
-  MapFactory INSTANCE_HASH_MAP = new AbstractMapFactory() {
+  MapFactory<Map> INSTANCE_HASH_MAP = new AbstractMapFactory() {
 
     /**
      * {@inheritDoc}

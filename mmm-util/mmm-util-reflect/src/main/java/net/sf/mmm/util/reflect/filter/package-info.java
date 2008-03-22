@@ -4,10 +4,11 @@
 /**
  * Provides utilities for reflective {@link net.sf.mmm.util.filter.Filter}s.
  * <h2>Reflective Filters</h2>
- * This package provides {@link net.sf.mmm.util.filter.Filter}s to that only 
- * {@link net.sf.mmm.util.filter.Filter#accept(Object) accept}  
- * {@link java.lang.Class}es with specific reflective attributes such as
+ * This package provides {@link net.sf.mmm.util.filter.Filter}s such as
  * {@link net.sf.mmm.util.reflect.filter.AnnotationFilter} and 
- * {@link net.sf.mmm.util.reflect.filter.AssignableFromFilter}.
+ * {@link net.sf.mmm.util.reflect.filter.AssignableFromFilter} that only 
+ * {@link net.sf.mmm.util.filter.Filter#accept(Object) accept}  
+ * {@link java.lang.Class}es with specific reflective attributes.
  */
 package net.sf.mmm.util.reflect.filter;
+

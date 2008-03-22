@@ -32,8 +32,6 @@ public class AssignableFromFilter implements Filter<Class<?>> {
   /**
    * {@inheritDoc}
    * 
-   * This implementation only accepts types that are implement/extend equal to
-   * 
    * @return <code>true</code> if and only if the given <code>type</code> is
    *         {@link Class#isAssignableFrom(Class) assignable from} the
    *         super-type defined at
