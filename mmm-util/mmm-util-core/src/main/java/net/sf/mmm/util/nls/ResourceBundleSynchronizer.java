@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
@@ -63,6 +64,9 @@ public class ResourceBundleSynchronizer {
   /** @see #getStreamUtil() */
   private StreamUtil streamUtil;
 
+  /** @see #getOut() */
+  private PrintStream out;
+
   /**
    * The constructor.
    */
@@ -74,6 +78,15 @@ public class ResourceBundleSynchronizer {
     this.encoding = DEFAULT_ENCODING;
     this.newline = "\n";
     this.locales = new String[] { "" };
+    this.out = System.out;
+  }
+
+  /**
+   * @return the out-stream where to print information to.
+   */
+  public PrintStream getOut() {
+
+    return this.out;
   }
 
   /**
@@ -229,7 +242,7 @@ public class ResourceBundleSynchronizer {
   public void synchronize(ResourceBundle bundle) throws IOException {
 
     if (bundle.keySet().isEmpty()) {
-      System.out.println(bundle.getClass().getName() + " is empty - noting to do!");
+      this.out.println(bundle.getClass().getName() + " is empty - noting to do!");
       return;
     }
     SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
@@ -248,12 +261,12 @@ public class ResourceBundleSynchronizer {
       Properties existingBundle;
       boolean update = file.exists();
       if (update) {
-        System.out.println("Updating " + file.getPath());
+        this.out.println("Updating " + file.getPath());
         FileInputStream in = new FileInputStream(file);
         Reader reader = new InputStreamReader(in, this.encoding);
         existingBundle = getStreamUtil().loadProperties(reader);
       } else {
-        System.out.println("Creating " + file.getPath());
+        this.out.println("Creating " + file.getPath());
         existingBundle = new Properties();
       }
       StringBuffer buffer = new StringBuffer();
@@ -300,71 +313,93 @@ public class ResourceBundleSynchronizer {
 
   /**
    * This method prints the usage of this class.
-   * 
-   * @param code is the exit-code.
    */
-  public static void usage(int code) {
+  public void usage() {
 
-    NlsMessage message = NlsAccess.getFactory().create(ResourceBundleSynchronizer.class.getName(),
+    NlsMessage message = NlsAccess.getFactory().create(
+        NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE, ResourceBundleSynchronizer.class.getName(),
         DEFAULT_ENCODING, DEFAULT_BASE_PATH, DEFAULT_DATE_PATTERN,
         NlsBundleSynchronizer.class.getName());
     NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
-    System.out.println(message.getLocalizedMessage(Locale.getDefault(), nationalizer));
-    System.exit(code);
+    this.out.println(message.getLocalizedMessage(Locale.getDefault(), nationalizer));
   }
 
   /**
-   * This is the main method used to run this class as application.
+   * The non-static version of the {@link #main(String[]) main-method}.
    * 
    * @param arguments are the commandline arguments.
-   * @throws Exception if the operation fails for arbitrary reasons.
+   * @return the exit-code. <code>0</code> for success, anything else if
+   *         something went wrong.
+   * @throws Exception if the operation failed.
    */
-  public static void main(String[] arguments) throws Exception {
+  public int run(String[] arguments) throws Exception {
 
-    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
     String bundleClassName = null;
-    List<String> locales = new ArrayList<String>();
-    locales.add("");
+    List<String> currentLocales = new ArrayList<String>();
+    currentLocales.add("");
     for (int argIndex = 0; argIndex < arguments.length; argIndex++) {
       String arg = arguments[argIndex];
       if ((arg.length() > 0) && (arg.charAt(0) == '-')) {
         if ("--help".equals(arg)) {
-          usage(0);
+          usage();
+          return 0;
         }
         argIndex++;
         if ((bundleClassName != null) || (argIndex < arguments.length)) {
-          usage(-1);
+          usage();
+          return -1;
         }
         String value = arguments[argIndex];
         if ("--encoding".equals(arg)) {
-          synchronizer.setEncoding(value);
+          setEncoding(value);
         } else if ("--path".equals(arg)) {
-          synchronizer.setBasePath(value);
+          setBasePath(value);
         } else if ("--date-pattern".equals(arg)) {
-          synchronizer.setDatePattern(value);
+          setDatePattern(value);
         } else {
-          System.out.println("Error: unknown option '" + arg + "'!");
-          usage(-1);
+          this.out.println("Error: unknown option '" + arg + "'!");
+          usage();
+          return -1;
         }
       } else if (bundleClassName == null) {
         bundleClassName = arg;
       } else {
-        locales.add(arg);
+        currentLocales.add(arg);
       }
     }
     if (bundleClassName == null) {
-      System.out.println("Error: <bundle-class> not specified!");
-      usage(-1);
+      this.out.println("Error: <bundle-class> not specified!");
+      usage();
+      return -1;
     }
-    String[] localeArray = locales.toArray(new String[locales.size()]);
-    synchronizer.setLocales(localeArray);
+    String[] localeArray = currentLocales.toArray(new String[currentLocales.size()]);
+    setLocales(localeArray);
     Class<?> bundleClass = Class.forName(bundleClassName);
     if (!ResourceBundle.class.isAssignableFrom(bundleClass)) {
       throw new IllegalArgumentException("Given class '" + bundleClassName + "' does NOT extend '"
           + ResourceBundle.class.getName() + "'!");
     }
     ResourceBundle bundle = (ResourceBundle) bundleClass.newInstance();
-    synchronizer.synchronize(bundle);
+    synchronize(bundle);
+    return 0;
+  }
+
+  /**
+   * This is the main method used to run this class as application.
+   * 
+   * @param arguments are the commandline arguments.
+   */
+  public static void main(String[] arguments) {
+
+    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
+    int exitCode;
+    try {
+      exitCode = synchronizer.run(arguments);
+      System.exit(exitCode);
+    } catch (Exception e) {
+      e.printStackTrace(System.out);
+      System.exit(-1);
+    }
   }
 
 }
