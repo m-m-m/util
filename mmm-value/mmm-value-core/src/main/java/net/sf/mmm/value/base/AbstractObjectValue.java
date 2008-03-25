@@ -7,7 +7,7 @@ import java.util.Date;
 
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the
@@ -351,7 +351,7 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
       try {
         return Class.forName(value.toString());
       } catch (ClassNotFoundException e1) {
-        throw new WrongValueTypeException(this, Class.class, e1);
+        throw new WrongValueTypeException(e1, this, Class.class);
       }
     }
   }

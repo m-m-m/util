@@ -7,9 +7,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-import net.sf.mmm.util.value.ValueException;
-import net.sf.mmm.util.value.ValueParseException;
-import net.sf.mmm.util.value.ValueParseStringException;
+import net.sf.mmm.util.value.api.ValueException;
+import net.sf.mmm.util.value.api.ValueParseException;
+import net.sf.mmm.util.value.api.ValueParseStringException;
 import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.base.BasicValueManager;
 

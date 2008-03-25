@@ -12,21 +12,21 @@ import net.sf.mmm.util.nls.AbstractResourceBundle;
  */
 public class NlsBundleUtilCore extends AbstractResourceBundle {
 
-  /** @see net.sf.mmm.util.value.WrongValueTypeException */
+  /** @see net.sf.mmm.util.value.api.WrongValueTypeException */
   public static final String ERR_VALUE_WRONG_TYPE = "The value \"{0}\" with the "
       + "type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
 
-  /** @see net.sf.mmm.util.value.WrongValueTypeException */
+  /** @see net.sf.mmm.util.value.api.WrongValueTypeException */
   public static final String ERR_VALUE_WRONG_TYPE_SOURCE = "The value \"{0}\" "
       + "from \"{3}\" with the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
 
-  /** @see net.sf.mmm.util.value.ValueNotSetException */
+  /** @see net.sf.mmm.util.value.api.ValueNotSetException */
   public static final String ERR_VALUE_NOT_SET = "The value \"{0}\" is not set!";
 
-  /** @see net.sf.mmm.util.value.ValueParseStringException */
+  /** @see net.sf.mmm.util.value.api.ValueParseStringException */
   public static final String ERR_PARSE_STRING = "Failed to parse \"{0}\" as \"{2}\"-value[{1}]!";
 
-  /** @see net.sf.mmm.util.value.ValueOutOfRangeException */
+  /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
   public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{0}\" ({1}) "
       + "is not in the expected range of \"[{2}-{3}]\"!";
 

@@ -5,10 +5,10 @@ package net.sf.mmm.value.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.NumericUtil;
-import net.sf.mmm.util.value.ValueNotSetException;
-import net.sf.mmm.util.value.ValueOutOfRangeException;
-import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.value.api.ValueNotSetException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueInstanciationException;
 import net.sf.mmm.value.api.ValueNotEditableException;
@@ -400,9 +400,9 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return NumericUtil.getInstance().toSimplestNumber(d);
+      return MathUtil.getInstance().toSimplestNumber(d);
     } catch (NumberFormatException e) {
-      throw new WrongValueTypeException(this, Number.class, e);
+      throw new WrongValueTypeException(e, this, Number.class);
     }
   }
 

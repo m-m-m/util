@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import net.sf.mmm.util.reflect.pojo.api.PojoFactory;
+import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
  * This is the interface of an object that carries the context for a
@@ -95,7 +96,7 @@ public interface PojoPathContext {
    * 
    * @return
    */
-  PojoPathGenericConverter getAdditionalConverter();
+  ComposedValueConverter getAdditionalConverter();
 
   /**
    * This method gets the {@link PojoFactory} instance used to

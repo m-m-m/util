@@ -5,7 +5,7 @@ package net.sf.mmm.value.api;
 
 import java.util.Date;
 
-import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the interface for a generic value that may be edited.

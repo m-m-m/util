@@ -16,8 +16,8 @@ import javax.xml.stream.XMLStreamWriter;
 import org.w3c.dom.Node;
 
 import net.sf.mmm.util.component.AlreadyInitializedException;
-import net.sf.mmm.util.value.ValueConverter;
-import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.api.ValueException;
+import net.sf.mmm.util.value.base.StringValueConverter;
 
 /**
  * This utility class contains methods that help to work with the StAX API (JSR
@@ -34,7 +34,7 @@ public final class StaxUtil {
   private static final XMLOutputFactory OUTPUT_FACTORY = XMLOutputFactory.newInstance();
 
   /** @see #getValueConverter() */
-  private ValueConverter valueConverter;
+  private StringValueConverter valueConverter;
 
   /**
    * Forbidden constructor.
@@ -64,7 +64,7 @@ public final class StaxUtil {
       synchronized (StaxUtil.class) {
         if (instance == null) {
           instance = new StaxUtil();
-          instance.setValueConverter(ValueConverter.getInstance());
+          instance.setValueConverter(StringValueConverter.getInstance());
         }
       }
     }
@@ -74,7 +74,7 @@ public final class StaxUtil {
   /**
    * @return the valueConverter
    */
-  protected ValueConverter getValueConverter() {
+  protected StringValueConverter getValueConverter() {
 
     return this.valueConverter;
   }
@@ -83,7 +83,7 @@ public final class StaxUtil {
    * @param valueConverter the valueConverter to set
    */
   @Resource
-  public void setValueConverter(ValueConverter valueConverter) {
+  public void setValueConverter(StringValueConverter valueConverter) {
 
     if (this.valueConverter != null) {
       throw new AlreadyInitializedException();
@@ -157,7 +157,7 @@ public final class StaxUtil {
       String localAttributeName, Class<V> type, V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
-    return this.valueConverter.convertValue(value, localAttributeName, type, defaultValue);
+    return this.valueConverter.convertValue(value, localAttributeName, type, type, defaultValue);
   }
 
   public String readText(XMLStreamReader xmlReader) throws XMLStreamException {

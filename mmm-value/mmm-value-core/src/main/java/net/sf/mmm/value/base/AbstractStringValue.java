@@ -6,7 +6,7 @@ package net.sf.mmm.value.base;
 import java.util.Date;
 
 import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the
@@ -68,9 +68,9 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
           result = toValue(type, value);
         }
       } catch (NumberFormatException e) {
-        throw new WrongValueTypeException(this, type, e);
+        throw new WrongValueTypeException(e, this, type);
       } catch (ClassNotFoundException e) {
-        throw new WrongValueTypeException(this, type, e);
+        throw new WrongValueTypeException(e, this, type);
       }
     }
     if (type.isPrimitive()) {
@@ -161,7 +161,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
     try {
       return Iso8601Util.getInstance().parseDate(dateValue);
     } catch (Exception e) {
-      throw new WrongValueTypeException(this, Date.class, e);
+      throw new WrongValueTypeException(e, this, Date.class);
     }
   }
 

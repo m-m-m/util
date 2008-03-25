@@ -13,8 +13,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.value.ValueParseException;
-import net.sf.mmm.util.value.ValueParseStringException;
+import net.sf.mmm.util.value.api.ValueParseException;
+import net.sf.mmm.util.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
 /**

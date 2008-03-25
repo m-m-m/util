@@ -37,10 +37,10 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.attribute.PojoAttributeType;
  * 
  * This interface does NOT completely follow the JAVA-Beans specification. The
  * properties "fooBar" and "someFlag" do NOT have the same type for reading and
- * writing. Therefore {@link java.beans} or
- * <code>org.apache.commons.beanutils</code> can NOT be used to read and write
- * these properties. Using this utility the properties can be accessed as
- * described in the following table:<br>
+ * writing. Therefore the {@link java.beans.Introspector} for java-beans or <a
+ * href="http://commons.apache.org/beanutils">commons-beanutils</a> can NOT be
+ * used to read and write these properties. Using this utility the properties
+ * can be accessed as described in the following table:<br>
  * <br>
  * <table border="1">
  * <tr>
@@ -210,15 +210,55 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
       throws PojoPropertyNotFoundException;
 
   /**
-   * This method gets the {@link #getPropertyDescriptor(String) property} with
-   * the given <code>propertyName</code> from the given
-   * <code>pojoInstance</code> using the
-   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
+   * This method gets the {@link #getPropertyDescriptor(String) property}
+   * identified by the given <code>property</code> from the given
+   * <code>pojoInstance</code>. The result depends on the form of the given
+   * <code>property</code> as shown by the following table:<br>
+   * <table border="1">
+   * <tr>
+   * <th><code>property</code></th>
+   * <th>accessor</th>
+   * <th>example</th>
+   * <th>equivalent</th>
+   * </tr>
+   * <tr>
+   * <td><code>[a-zA-Z][a-zA-Z0-9]*</code></td>
+   * <td><small>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET}</small></td>
+   * <td>fooBar</td>
+   * <td>
+   * <ul>
+   * <li>getFooBar()</li>
+   * </ul>
+   * </td>
+   * </tr>
+   * <tr>
+   * <td><code>[a-zA-Z][a-zA-Z0-9]* "[" [0-9]+ "]"</code></td>
+   * <td><small>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED}</small></td>
+   * <td>fooBar[42]</td>
+   * <td>
+   * <ul>
+   * <li><code>getFooBar(42)</code></li>
+   * <li><code>getFooBar()[42]</code></li>
+   * <li><code>getFooBar().get(42)</code></li>
+   * </ul>
+   * </td>
+   * </tr>
+   * <tr>
+   * <td><code>[a-zA-Z][a-zA-Z0-9]* "['" [a-zA-Z0-9]+ "']"</code></td>
+   * <td><small>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED}</small></td>
+   * <td>fooBar['key']</td>
+   * <td>
+   * <ul>
+   * <li><code>getFooBar("key")</code></li>
+   * <li><code>getFooBar().get("key")</code></li>
+   * </ul>
+   * </td>
+   * </tr>
+   * </table>
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        access the property.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
+   * @param property identifies the property to get as described above.
    * @return the value of the requested property. It will be an instance of the
    *         {@link PojoPropertyAccessor#getPropertyClass() type} of the
    *         according
@@ -232,20 +272,60 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
    *         an error during reflection.
    */
-  Object getProperty(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
+  Object getProperty(POJO pojoInstance, String property) throws PojoPropertyNotFoundException,
       ReflectionException;
 
   /**
    * This method sets the given <code>value</code> for the
    * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> from the given <code>pojoInstance</code>
-   * using the
-   * {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET setter}.
+   * <code>property</code> of the given <code>pojoInstance</code>. The
+   * effect depends on the form of the given <code>property</code> as shown by
+   * the following table:<br>
+   * <table border="1">
+   * <tr>
+   * <th><code>property</code></th>
+   * <th>accessor</th>
+   * <th>example</th>
+   * <th>equivalent</th>
+   * </tr>
+   * <tr>
+   * <td><code>[a-zA-Z][a-zA-Z0-9]*</code></td>
+   * <td><small>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET}</small></td>
+   * <td>fooBar</td>
+   * <td>
+   * <ul>
+   * <li>setFooBar(value)</li>
+   * </ul>
+   * </td>
+   * </tr>
+   * <tr>
+   * <td><code>[a-zA-Z][a-zA-Z0-9]* "[" [0-9]+ "]"</code></td>
+   * <td><small>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED}</small></td>
+   * <td>fooBar[42]</td>
+   * <td>
+   * <ul>
+   * <li><code>setFooBar(42, value)</code></li>
+   * <li><code>getFooBar()[42]=value</code></li>
+   * <li><code>getFooBar().set(42, value)</code></li>
+   * </ul>
+   * </td>
+   * </tr>
+   * <tr>
+   * <td><code>[a-zA-Z][a-zA-Z0-9]* "['" [a-zA-Z0-9]+ "']"</code></td>
+   * <td><small>{@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED}</small></td>
+   * <td>fooBar['key']</td>
+   * <td>
+   * <ul>
+   * <li><code>setFooBar("key", value)</code></li>
+   * <li><code>getFooBar().put("key", value)</code></li>
+   * </ul>
+   * </td>
+   * </tr>
+   * </table>
    * 
    * @param pojoInstance is the {@link #getPojoType() POJO} instance where to
    *        access the property.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
+   * @param property identifies the property to set as explained above.
    * @param value is the property value to set. Depending on the POJO the value
    *        may be <code>null</code>.
    * @return the result of the setter method. Will be <code>null</code> if the
@@ -258,7 +338,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
    *         an error during reflection.
    */
-  Object setProperty(POJO pojoInstance, String propertyName, Object value)
+  Object setProperty(POJO pojoInstance, String property, Object value)
       throws PojoPropertyNotFoundException, ReflectionException;
 
   /**

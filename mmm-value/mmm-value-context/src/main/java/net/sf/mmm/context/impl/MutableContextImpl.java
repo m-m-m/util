@@ -10,7 +10,7 @@ import java.util.Set;
 
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
-import net.sf.mmm.util.value.ValueNotSetException;
+import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.base.EmptyValue;
 import net.sf.mmm.value.impl.ObjectValue;

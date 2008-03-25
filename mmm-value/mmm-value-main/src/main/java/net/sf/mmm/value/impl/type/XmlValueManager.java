@@ -14,8 +14,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import net.sf.mmm.util.value.ValueParseException;
-import net.sf.mmm.util.value.ValueParseStringException;
+import net.sf.mmm.util.value.api.ValueParseException;
+import net.sf.mmm.util.value.api.ValueParseStringException;
 import net.sf.mmm.util.xml.DomUtil;
 import net.sf.mmm.util.xml.XmlException;
 import net.sf.mmm.value.base.AbstractValueManager;

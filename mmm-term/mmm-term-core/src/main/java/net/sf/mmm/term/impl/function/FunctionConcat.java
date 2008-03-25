@@ -7,7 +7,7 @@ import net.sf.mmm.term.api.CalculationException;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.base.BasicFunction;
 import net.sf.mmm.util.reflect.Arguments;
-import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This class represents the {@link net.sf.mmm.term.api.Function function}

@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value;
+package net.sf.mmm.util.value.api;
 
 import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
 
@@ -21,18 +21,6 @@ public class WrongValueTypeException extends ValueException {
    * 
    * @param value is the wrong value.
    * @param expectedType is the expected type of the value.
-   * @param nested is the throwable that caused this exception.
-   */
-  public WrongValueTypeException(Object value, Class<?> expectedType, Throwable nested) {
-
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value, getType(value), expectedType);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param value is the wrong value.
-   * @param expectedType is the expected type of the value.
    */
   public WrongValueTypeException(Object value, Class<?> expectedType) {
 
@@ -42,19 +30,13 @@ public class WrongValueTypeException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param value is the wrong value.
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier.
-   * @param expectedType is the expected type of the value.
    * @param nested is the throwable that caused this exception.
+   * @param value is the wrong value.
+   * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Object value, Object valueSource, Class<?> expectedType,
-      Throwable nested) {
+  public WrongValueTypeException(Throwable nested, Object value, Class<?> expectedType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value),
-        expectedType, valueSource);
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value, getType(value), expectedType);
   }
 
   /**
@@ -71,6 +53,24 @@ public class WrongValueTypeException extends ValueException {
 
     super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value), expectedType,
         valueSource);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the throwable that caused this exception.
+   * @param value is the wrong value.
+   * @param valueSource describes the source of the value. This may be the
+   *        filename where the value was read from, an XPath where the value was
+   *        located in an XML document, etc. It is used in exceptions thrown if
+   *        something goes wrong. This will help to find the problem easier.
+   * @param expectedType is the expected type of the value.
+   */
+  public WrongValueTypeException(Throwable nested, Object value, Object valueSource,
+      Class<?> expectedType) {
+
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value),
+        expectedType, valueSource);
   }
 
   /**

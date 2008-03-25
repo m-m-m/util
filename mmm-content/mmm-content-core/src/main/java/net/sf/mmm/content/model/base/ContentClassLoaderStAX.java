@@ -20,7 +20,7 @@ import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
 import net.sf.mmm.util.reflect.ClassResolver;
-import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is an implementation of the {@link ContentClassLoader} interface that

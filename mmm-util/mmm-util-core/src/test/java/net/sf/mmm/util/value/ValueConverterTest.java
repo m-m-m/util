@@ -16,18 +16,29 @@ import org.junit.Test;
 
 import net.sf.mmm.util.Conjunction;
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.value.api.GenericValueConverter;
+import net.sf.mmm.util.value.api.ValueNotSetException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
+import net.sf.mmm.util.value.base.StringValueConverter;
 
 /**
- * This is the test-case for {@link ValueConverter}.
+ * This is the test-case for {@link StringValueConverter}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class ValueConverterTest {
 
-  public ValueConverter getConverter() {
+  public GenericValueConverter<String> getConverter() {
 
-    return ValueConverter.getInstance();
+    return StringValueConverter.getInstance();
+  }
+
+  protected Iso8601Util getIso8601Util() {
+
+    return Iso8601Util.getInstance();
   }
 
   @Test
@@ -100,7 +111,7 @@ public class ValueConverterTest {
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
     Date date = calendar.getTime();
-    String dateString = getConverter().getIso8601Util().formatDateTime(date);
+    String dateString = getIso8601Util().formatDateTime(date);
     assertEquals(date, getConverter().convertValue(dateString, source, Date.class));
     // test class
     Class<?> type = Void.class;
@@ -113,8 +124,9 @@ public class ValueConverterTest {
     assertEquals(conjunction, getConverter().convertValue(conjunction.name(), source,
         Conjunction.class));
     // test default-value
-    assertEquals(valueString, getConverter().convertValue(null, source, String.class, valueString));
-    assertEquals(valueString, getConverter().convertValue(valueString, source, String.class,
+    assertEquals(valueString, getConverter().convertValue(null, source, String.class, type,
+        valueString));
+    assertEquals(valueString, getConverter().convertValue(valueString, source, String.class, type,
         "default"));
     integerObject = getConverter().convertValue(null, source, value, value, value);
     assertEquals(value, integerObject.intValue());

@@ -1,14 +1,14 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value;
+package net.sf.mmm.util.value.api;
 
 import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
 
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
  * 
- * @see ValueConverter#convertValue(String, Object, Number, Number)
+ * @see GenericValueConverter#convertValue(Object, Object, Number, Number)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -19,6 +19,7 @@ public class ValueOutOfRangeException extends ValueException {
 
   /**
    * The constructor.
+   * 
    * @param value is the number that is out of range.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was

@@ -24,21 +24,21 @@ public class NlsBundleValueCore extends AbstractResourceBundle {
   /**
    * exception message if configuration value has wrong type.
    * 
-   * @see net.sf.mmm.util.value.WrongValueTypeException
+   * @see net.sf.mmm.util.value.api.WrongValueTypeException
    */
   public static final String ERR_VALUE_WRONG_TYPE = "The value \"{0}\" of the type \"{1}\" can NOT be converted to the requested type \"{2}\"!";
 
   /**
    * exception message if configuration value has wrong type.
    * 
-   * @see net.sf.mmm.util.value.ValueOutOfRangeException
+   * @see net.sf.mmm.util.value.api.ValueOutOfRangeException
    */
   public static final String ERR_VALUE_OUT_OF_RANGE = "The configuration \"{0}\" has the value \"{1}\" which is not in the expected range of \"[{2}-{3}]\"!";
 
   /**
    * exception message if required value is NOT set.
    * 
-   * @see net.sf.mmm.util.value.ValueNotSetException
+   * @see net.sf.mmm.util.value.api.ValueNotSetException
    */
   public static final String ERR_VALUE_NOT_SET = "The requested value \"{0}\" is not set!";
 

@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect.pojo.descriptor.base;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorImpl;
 
@@ -15,7 +16,8 @@ import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoDescriptorBuilder implements PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable implements
+    PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
   private final Map<Class<?>, PojoDescriptorImpl<?>> pojoMap;

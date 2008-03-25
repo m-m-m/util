@@ -5,15 +5,15 @@ package net.sf.mmm.value.api;
 
 import java.util.Date;
 
-import net.sf.mmm.util.value.ValueNotSetException;
-import net.sf.mmm.util.value.ValueOutOfRangeException;
-import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.util.value.api.ValueNotSetException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the interface for a generic value.<br>
  * The actual value can be {@link #isEmpty() empty}. In that case the non-arg
  * getter methods (e.g. {@link #getObject()}) will throw a
- * {@link net.sf.mmm.util.value.ValueNotSetException}. Use the
+ * {@link net.sf.mmm.util.value.api.ValueNotSetException}. Use the
  * {@link #isEmpty()} method to determine if the generic-value is empty.<br>
  * If possible the default-argument getter methods (e.g.
  * {@link #getObject(Object)}) should be used instead. Depending on
@@ -26,7 +26,7 @@ import net.sf.mmm.util.value.WrongValueTypeException;
  * be a {@link Long} or {@link Double} use
  * <code>{@link #getNumber()}.{@link java.lang.Number#intValue() intValue()}</code>
  * instead {@link #getInteger()} to avoid a
- * {@link net.sf.mmm.util.value.WrongValueTypeException}.<br>
+ * {@link net.sf.mmm.util.value.api.WrongValueTypeException}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

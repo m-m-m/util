@@ -9,7 +9,7 @@ import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.configuration.api.access.ConfigurationAccessFactory;
 import net.sf.mmm.configuration.api.access.ConfigurationAccess;
 import net.sf.mmm.context.api.Context;
-import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is the abstract base implementation of the

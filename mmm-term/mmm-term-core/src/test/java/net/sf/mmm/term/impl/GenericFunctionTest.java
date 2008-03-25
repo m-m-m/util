@@ -9,7 +9,7 @@ import net.sf.mmm.term.api.OperatorPriority;
 import net.sf.mmm.term.impl.function.FctAdd;
 import net.sf.mmm.term.impl.function.FctAddNumeric;
 import net.sf.mmm.term.impl.function.FctAddString;
-import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is the test case for {@link GenericFunction}.

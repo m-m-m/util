@@ -5,7 +5,7 @@ package net.sf.mmm.context.api;
 
 import java.util.Set;
 
-import net.sf.mmm.util.value.ValueNotSetException;
+import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.value.api.GenericValue;
 
 /**

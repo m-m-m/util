@@ -11,7 +11,7 @@ import net.sf.mmm.configuration.base.AbstractConfiguration;
 import net.sf.mmm.configuration.base.AbstractConfigurationDocument;
 import net.sf.mmm.context.api.Context;
 import net.sf.mmm.context.api.MutableContext;
-import net.sf.mmm.util.value.ValueException;
+import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is the interface for factory that creates (loads) a

@@ -14,10 +14,10 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.NumericUtil;
-import net.sf.mmm.util.value.ValueNotSetException;
-import net.sf.mmm.util.value.ValueOutOfRangeException;
-import net.sf.mmm.util.value.WrongValueTypeException;
+import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.value.api.ValueNotSetException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.value.api.WrongValueTypeException;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.api.MutableGenericValue;
 import net.sf.mmm.value.api.ValueInstanciationException;
@@ -223,7 +223,7 @@ public abstract class AbstractGenericValueTest {
     Number number = value.getNumber();
     assertEquals(number.toString(), value.getString());
     assertEquals(number, value.getValue(Number.class));
-    number = NumericUtil.getInstance().toSimplestNumber(number);
+    number = MathUtil.getInstance().toSimplestNumber(number);
     double doubleValue = number.doubleValue();
     assertEquals(doubleValue, value.getDouble(), 0);
     assertEquals(doubleValue, value.getDouble(null).doubleValue(), 0);

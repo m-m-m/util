@@ -1,28 +1,26 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.pojo.path.api;
+package net.sf.mmm.util.value.api;
 
 /**
- * This is the interface for a generic {@link PojoPathConverter}. The idea of
- * the {@link PojoPathConverter} interface is the idiom
+ * This is the interface for a {@link ValueConverter} that is composed out of
+ * individual {@link ValueConverter}s. The idea of this interface is the idiom
  * <em>separations of concerns</em>. Therefore you can write an individual
- * {@link PojoPathConverter} for each type of
- * {@link net.sf.mmm.util.reflect.pojo.api.Pojo} you want to deal with.<br>
- * The idea of this interface is to combine various individual
- * {@link PojoPathConverter}s to one generic converter following the
- * composition-pattern. Therefore this generic converter needs to choose the
- * individual {@link PojoPathConverter} that is appropriate for a specific
- * {@link #convert(Object, Class, java.lang.reflect.Type, PojoPath) conversion}.<br>
+ * {@link ValueConverter} for each type of value you want to deal with.<br>
+ * The idea is to combine various individual {@link ValueConverter}s to one
+ * generic converter following the composition-pattern. Therefore this generic
+ * converter needs to choose the individual {@link ValueConverter} that is
+ * appropriate for a specific
+ * {@link #convert(Object, Object, Class, java.lang.reflect.Type) conversion}.<br>
  * <br>
  * The meaning of <em>appropriate</em> here can depend on the implementation.
- * However it needs to guarantee that the
- * {@link PojoPathConverter#getSourceType() source-type} of the chosen
- * {@link PojoPathConverter}
+ * However it needs to guarantee that the {@link #getSourceType() source-type}
+ * of the chosen {@link ValueConverter}
  * {@link Class#isAssignableFrom(Class) is assignable from} the actual
  * {@link Object#getClass() type} of the object to convert. Additionally the
- * {@link PojoPathConverter#getTargetType() target-type} of the chosen
- * {@link PojoPathConverter} needs to be
+ * {@link ValueConverter#getTargetType() target-type} of the chosen
+ * {@link ValueConverter} needs to be
  * {@link Class#isAssignableFrom(Class) assignable from} the actual type to
  * convert to or vice versa. The following table illustrates this with some
  * examples:<br>
@@ -30,7 +28,7 @@ package net.sf.mmm.util.reflect.pojo.path.api;
  * <tr>
  * <th>sourceType</th>
  * <th>targetType</th>
- * <th>{@link PojoPathConverter}</th>
+ * <th>{@link ValueConverter}</th>
  * <th>applicable</th>
  * </tr>
  * <tr>
@@ -107,14 +105,14 @@ package net.sf.mmm.util.reflect.pojo.path.api;
  * </tr>
  * </table> <br>
  * However the chosen converter may
- * {@link #convert(Object, Class, java.lang.reflect.Type, PojoPath) return}
+ * {@link #convert(Object, Object, Class, java.lang.reflect.Type) return}
  * <code>null</code> to indicate that conversion is NOT possible. This
- * {@link PojoPathGenericConverter} should therefore try all applicable
- * converters starting from most to least specific until conversion succeeds. If
- * all applicable converters fail it will also fail and return <code>null</code>.<br>
+ * {@link ComposedValueConverter} should therefore try all applicable converters
+ * starting from most to least specific until conversion succeeds. If all
+ * applicable converters fail it will also fail and return <code>null</code>.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoPathGenericConverter extends PojoPathConverter<Object, Object> {
+public interface ComposedValueConverter extends ValueConverter<Object, Object> {
 
 }
