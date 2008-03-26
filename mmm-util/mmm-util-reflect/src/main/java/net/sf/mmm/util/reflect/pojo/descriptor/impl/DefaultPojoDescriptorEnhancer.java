@@ -123,9 +123,6 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
   /** @see #getCollectionUtil() */
   private CollectionUtil collectionUtil;
 
-  /** @see #getMaximumListGrowth() */
-  private int maximumListGrowth;
-
   /**
    * The constructor.
    */
@@ -215,24 +212,6 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
 
     getInitializationState().requireNotInitilized();
     this.reflectionUtil = reflectionUtil;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getMaximumListGrowth() {
-
-    return this.maximumListGrowth;
-  }
-
-  /**
-   * @param maximumListGrowth is the maximumListGrowth to set
-   */
-  @Resource
-  public void setMaximumListGrowth(int maximumListGrowth) {
-
-    getInitializationState().requireNotInitilized();
-    this.maximumListGrowth = maximumListGrowth;
   }
 
   /**

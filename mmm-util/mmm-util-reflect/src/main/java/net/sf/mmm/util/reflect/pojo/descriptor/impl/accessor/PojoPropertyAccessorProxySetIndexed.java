@@ -82,7 +82,7 @@ public class PojoPropertyAccessorProxySetIndexed extends
     Object arrayOrList = getDelegate().invoke(pojoInstance);
     GenericBean<Object> arrayReceiver = new GenericBean<Object>();
     Object result = getConfiguration().getCollectionUtil().set(arrayOrList, index, item,
-        getConfiguration().getMaximumListGrowth(), arrayReceiver);
+        arrayReceiver);
     if ((arrayReceiver.getValue() != null) && (this.containerSetAccessor != null)) {
       this.containerSetAccessor.invoke(pojoInstance, arrayReceiver.getValue());
     }

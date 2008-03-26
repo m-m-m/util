@@ -5,12 +5,18 @@ package net.sf.mmm.util.reflect.pojo.path.base;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import net.sf.mmm.util.GenericBean;
 import net.sf.mmm.util.HashKey;
+import net.sf.mmm.util.collection.CollectionList;
+import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.InstantiationFailedException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
@@ -30,7 +36,23 @@ import net.sf.mmm.util.reflect.pojo.path.api.PojoPathSegmentIsNullException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
+public abstract class AbstractPojoPathNavigator extends AbstractLoggable implements
+    PojoPathNavigator {
+
+  /**
+   * The reserved {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath}-suffix
+   * used to cache a {@link CollectionList}.
+   */
+  private static final String PATH_SUFFIX_COLLECTION_LIST = "._collection2list";
+
+  /** @see #getReflectionUtil() */
+  private ReflectionUtil reflectionUtil;
+
+  /** @see #getCollectionUtil() */
+  private CollectionUtil collectionUtil;
+
+  /** @see #getFunctionManager() */
+  private PojoPathFunctionManager functionManager;
 
   /**
    * The constructor.
@@ -38,16 +60,6 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
   public AbstractPojoPathNavigator() {
 
     super();
-  }
-
-  /**
-   * 
-   * 
-   * @return the maximum growth of lists and arrays.
-   */
-  protected int getMaximumGrowth() {
-
-    return CollectionUtil.DEFAULT_MAXIMUM_GROWTH;
   }
 
   /**
@@ -63,27 +75,75 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    */
   protected PojoPathFunctionManager getFunctionManager() {
 
-    return null;
+    return this.functionManager;
   }
 
   /**
-   * This method gets the {@link CollectionUtil}.
+   * This method gets the {@link CollectionUtil} instance to use.
    * 
-   * @return the {@link CollectionUtil}.
+   * @return the {@link CollectionUtil} to use.
    */
-  protected CollectionUtil getCollectionUtil() {
+  public CollectionUtil getCollectionUtil() {
 
-    return CollectionUtil.getInstance();
+    return this.collectionUtil;
   }
 
   /**
-   * This method gets the {@link ReflectionUtil}.
-   * 
-   * @return the {@link ReflectionUtil}.
+   * @param collectionUtil is the collectionUtil to set
    */
-  protected ReflectionUtil getReflectionUtil() {
+  @Resource
+  public void setCollectionUtil(CollectionUtil collectionUtil) {
 
-    return ReflectionUtil.getInstance();
+    getInitializationState().requireNotInitilized();
+    this.collectionUtil = collectionUtil;
+  }
+
+  /**
+   * This method gets the {@link ReflectionUtil} instance to use.
+   * 
+   * @return the {@link ReflectionUtil} to use.
+   */
+  public ReflectionUtil getReflectionUtil() {
+
+    return this.reflectionUtil;
+  }
+
+  /**
+   * @param reflectionUtil is the reflectionUtil to set
+   */
+  @Resource
+  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.reflectionUtil = reflectionUtil;
+  }
+
+  /**
+   * This method sets the {@link #getFunctionManager() function-manager} used
+   * for global {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction}s.
+   * 
+   * @param functionManager is the {@link PojoPathFunctionManager}.
+   */
+  @Resource
+  public void setFunctionManager(PojoPathFunctionManager functionManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.functionManager = functionManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.reflectionUtil == null) {
+      this.reflectionUtil = ReflectionUtil.getInstance();
+    }
+    if (this.collectionUtil == null) {
+      this.collectionUtil = CollectionUtil.getInstance();
+    }
   }
 
   /**
@@ -254,7 +314,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
         Integer index = currentPath.getIndex();
         if (index != null) {
           // handle indexed segment for list or array...
-          result = getFromArrayOrList(currentPath, context, state, parentPojo, index.intValue());
+          result = getFromList(currentPath, context, state, parentPojo, index.intValue());
         } else {
           // in all other cases get via reflection from POJO...
           result = getFromPojo(currentPath, context, state, parentPojo);
@@ -374,12 +434,13 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    *         according to the {@link PojoPathState#getMode() mode}.
    */
   @SuppressWarnings("unchecked")
-  protected Object getFromArrayOrList(CachingPojoPath currentPath, PojoPathContext context,
+  protected Object getFromList(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, int index) {
 
-    // handle indexed segment for list or array...
+    // handle indexed segment for collection/list or array...
+    Object arrayOrList = convertList(currentPath, context, state, parentPojo);
     boolean ignoreIndexOverflow = (state.mode != PojoPathMode.FAIL_IF_NULL);
-    Object result = getCollectionUtil().get(parentPojo, index, ignoreIndexOverflow);
+    Object result = getCollectionUtil().get(arrayOrList, index, ignoreIndexOverflow);
     Type pojoType = null;
     if (currentPath.parent != null) {
       pojoType = currentPath.parent.pojoType;
@@ -396,7 +457,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
     }
     if ((result == null) && (state.mode == PojoPathMode.CREATE_IF_NULL)) {
       result = create(currentPath, context, state, currentType);
-      setInArrayOrList(currentPath, context, state, parentPojo, result, index);
+      setInList(currentPath, context, state, parentPojo, result, index);
     }
     return result;
   }
@@ -571,8 +632,7 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
         Integer index = currentPath.getIndex();
         if (index != null) {
           // handle indexed segment for list or array...
-          result = setInArrayOrList(currentPath, context, state, parentPojo, value, index
-              .intValue());
+          result = setInList(currentPath, context, state, parentPojo, value, index.intValue());
         } else {
           // in all other cases get via reflection from POJO...
           result = setInPojo(currentPath, context, state, parentPojo, value);
@@ -594,8 +654,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache}
-   *        to use or <code>null</code> to disable caching.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        to use.
    * @param parentPojo is the parent
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to work on.
    * @param value is the value to set in <code>parentPojo</code>.
@@ -605,8 +665,48 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
       PojoPathState state, Object parentPojo, Object value);
 
   /**
+   * This method converts the given <code>arrayOrCollection</code> to a
+   * {@link List} as necessary.
+   * 
+   * @param currentPath is the current {@link CachingPojoPath} that lead to
+   *        <code>arrayOrCollection</code>.
+   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param state is the
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        to use.
+   * @param arrayOrCollection is the object to be accessed at a given index.
+   * @return a {@link List} that adapts <code>arrayOrCollection</code> if it
+   *         is a {@link Collection} but NOT a {@link List}. Otherwise the
+   *         given <code>arrayOrCollection</code> itself.
+   */
+  @SuppressWarnings("unchecked")
+  protected Object convertList(CachingPojoPath currentPath, PojoPathContext context,
+      PojoPathState state, Object arrayOrCollection) {
+
+    Object arrayOrList = arrayOrCollection;
+    if (arrayOrCollection instanceof Collection) {
+      if (!(arrayOrCollection instanceof List)) {
+        // non-list collection (e.g. Set) - create Proxy-List
+        if (state.cachingDisabled) {
+          // throw exception...
+        }
+        String collection2ListPath = currentPath.getPojoPath() + PATH_SUFFIX_COLLECTION_LIST;
+        CachingPojoPath listPath = state.getCached(collection2ListPath);
+        if (listPath == null) {
+          listPath = new CachingPojoPath(collection2ListPath);
+          listPath.parent = currentPath;
+          listPath.pojo = new CollectionList((Collection) arrayOrCollection);
+          state.setCached(collection2ListPath, listPath);
+        }
+        arrayOrList = listPath.pojo;
+      }
+    }
+    return arrayOrList;
+  }
+
+  /**
    * This method
-   * {@link CollectionUtil#set(Object, int, Object, int, GenericBean) sets} the
+   * {@link CollectionUtil#set(Object, int, Object, GenericBean) sets} the
    * single {@link CachingPojoPath#getSegment() segment} of the given
    * <code>currentPath</code> from the array or {@link java.util.List} given
    * by <code>parentPojo</code>. If the result is <code>null</code> and
@@ -616,8 +716,8 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the
-   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache}
-   *        to use or <code>null</code> to disable caching.
+   *        {@link #createState(Object, String, PojoPathMode, PojoPathContext) state}
+   *        to use.
    * @param parentPojo is the parent
    *        {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to work on.
    * @param value is the value to set in <code>parentPojo</code>.
@@ -625,12 +725,12 @@ public abstract class AbstractPojoPathNavigator implements PojoPathNavigator {
    *        array or {@link java.util.List} given by <code>parentPojo</code>.
    * @return the replaced value. It may be <code>null</code>.
    */
-  protected Object setInArrayOrList(CachingPojoPath currentPath, PojoPathContext context,
+  protected Object setInList(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, Object value, int index) {
 
+    Object arrayOrList = convertList(currentPath, context, state, parentPojo);
     GenericBean<Object> arrayReceiver = new GenericBean<Object>();
-    Object result = getCollectionUtil().set(parentPojo, index, value, getMaximumGrowth(),
-        arrayReceiver);
+    Object result = getCollectionUtil().set(arrayOrList, index, value, arrayReceiver);
     Object newArray = arrayReceiver.getValue();
     if (newArray != null) {
       if (currentPath.parent == null) {

@@ -31,7 +31,7 @@ public class CollectionUtil {
    * The default value for the maximum growth of the
    * {@link #getSize(Object) size} of an array or {@link List}: {@value}
    */
-  public static final int DEFAULT_MAXIMUM_GROWTH = 128;
+  public static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
 
   /** @see #getInstance() */
   private static CollectionUtil instance;
@@ -39,12 +39,16 @@ public class CollectionUtil {
   /** @see #getCollectionFactoryManager() */
   private CollectionFactoryManager collectionFactoryManager;
 
+  /** @see #getMaximumListGrowth() */
+  private int maximumListGrowth;
+
   /**
    * The constructor.
    */
   protected CollectionUtil() {
 
     super();
+    this.maximumListGrowth = DEFAULT_MAXIMUM_LIST_GROWTH;
   }
 
   /**
@@ -99,6 +103,29 @@ public class CollectionUtil {
       throw new AlreadyInitializedException();
     }
     this.collectionFactoryManager = collectionFactoryManager;
+  }
+
+  /**
+   * This method gets the maximum growth for arrays or {@link List}s.
+   * 
+   * @see #set(Object, int, Object, GenericBean)
+   * @see #setMaximumListGrowth(int)
+   * 
+   * @return the maximumListGrowth
+   */
+  public int getMaximumListGrowth() {
+
+    return this.maximumListGrowth;
+  }
+
+  /**
+   * This method sets the {@link #getMaximumListGrowth() maximumListGrowth}.
+   * 
+   * @param maximumListGrowth is the maximumListGrowth to set.
+   */
+  public void setMaximumListGrowth(int maximumListGrowth) {
+
+    this.maximumListGrowth = maximumListGrowth;
   }
 
   /**
@@ -253,10 +280,10 @@ public class CollectionUtil {
   /**
    * This method sets the given <code>item</code> at the given
    * <code>index</code> in <code>arrayOrCollection</code>. It uses a
-   * <code>maximumGrowth</code> of {@link #DEFAULT_MAXIMUM_GROWTH} and no
+   * <code>maximumGrowth</code> of {@link #DEFAULT_MAXIMUM_LIST_GROWTH} and no
    * <code>arrayReceiver</code> (<code>null</code>).
    * 
-   * @see #set(Object, int, Object, int, GenericBean)
+   * @see #set(Object, int, Object, GenericBean, int)
    * 
    * @param arrayOrList is the array or {@link List}.
    * @param index is the position where to set the item.
@@ -272,7 +299,44 @@ public class CollectionUtil {
   @SuppressWarnings("unchecked")
   public Object set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
 
-    return set(arrayOrList, index, item, DEFAULT_MAXIMUM_GROWTH, null);
+    return set(arrayOrList, index, item, null, this.maximumListGrowth);
+  }
+
+  /**
+   * This method sets the given <code>item</code> at the given
+   * <code>index</code> in <code>arrayOrCollection</code>. If a
+   * {@link List} is given that has a {@link List#size() size} less or equal to
+   * the given <code>index</code>, the {@link List#size() size} of the
+   * {@link List} will be increased to <code>index + 1</code> by
+   * {@link List#add(Object) adding} <code>null</code> values so the
+   * <code>item</code> can be set. However the number of
+   * {@link List#add(Object) adds} is limited to
+   * {@link #getMaximumListGrowth() maximumListGrowth}.
+   * 
+   * @see List#set(int, Object)
+   * @see #set(Object, int, Object, GenericBean, int)
+   * 
+   * @param arrayOrList is the array or {@link List}.
+   * @param index is the position where to set the item.
+   * @param item is the item to set.
+   * @param arrayReceiver is a {@link GenericBean} that allows to receive an
+   *        {@link System#arraycopy(Object, int, Object, int, int) array-copy}
+   *        of <code>arrayOrList</code> with an increased
+   *        {@link Array#getLength(Object) length}. It can be <code>null</code>
+   *        to disable array-copying.
+   * @return the item at position <code>index</code> in
+   *         <code>arrayOrList</code> that has been replaced by
+   *         <code>item</code>. This can be <code>null</code>. Additional
+   *         if the <code>arrayOrList</code> has been increased,
+   *         <code>null</code> is returned.
+   * @throws NlsIllegalArgumentException if the given <code>arrayOrList</code>
+   *         is invalid (<code>null</code> or neither array nor {@link List}).
+   */
+  @SuppressWarnings("unchecked")
+  public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver)
+      throws NlsIllegalArgumentException {
+
+    return set(arrayOrList, index, item, arrayReceiver, this.maximumListGrowth);
   }
 
   /**
@@ -324,8 +388,8 @@ public class CollectionUtil {
    *         is invalid (<code>null</code> or neither array nor {@link List}).
    */
   @SuppressWarnings("unchecked")
-  public Object set(Object arrayOrList, int index, Object item, int maximumGrowth,
-      GenericBean<Object> arrayReceiver) throws NlsIllegalArgumentException {
+  public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver,
+      int maximumGrowth) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsIllegalArgumentException(null);

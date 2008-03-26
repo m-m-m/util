@@ -4,6 +4,7 @@
 package net.sf.mmm.util.reflect.pojo.path.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
@@ -12,8 +13,10 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -170,6 +173,37 @@ public abstract class PojoPathNavigatorTest {
     value = pojo.getMap().get(key).get(listIndex)[arrayIndex];
     assertSame(value, result);
     assertEquals(3, pojo.getMap().get(key).size());
+  }
+
+  @Test
+  public void testCollection2List() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    CollectionPojo pojo = new CollectionPojo();
+    Set<String> set = new HashSet<String>();
+    pojo.setSet(set);
+    String foo = "foo";
+    set.add(foo);
+    Object result;
+    // test get...
+    result = navigator.get(pojo, "set.0", PojoPathMode.FAIL_IF_NULL, context);
+    assertSame(foo, result);
+
+    // perform set...
+    String bar = "bar";
+    navigator.set(pojo, "set.1", PojoPathMode.FAIL_IF_NULL, context, bar);
+    assertEquals(2, set.size());
+    assertTrue(set.contains(foo));
+    assertTrue(set.contains(bar));
+    // perform set with override...
+    String newFoo = "newFoo";
+    navigator.set(pojo, "set.0", PojoPathMode.FAIL_IF_NULL, context, newFoo);
+    assertEquals(2, set.size());
+    assertFalse(set.contains(foo));
+    assertTrue(set.contains(newFoo));
+    assertTrue(set.contains(bar));
   }
 
   @Test
@@ -404,6 +438,8 @@ public abstract class PojoPathNavigatorTest {
 
     private String string;
 
+    private Set<String> set;
+
     public Map<String, List<String[]>> getMap() {
 
       return this.map;
@@ -422,6 +458,16 @@ public abstract class PojoPathNavigatorTest {
     public void setString(String string) {
 
       this.string = string;
+    }
+
+    public Set<String> getSet() {
+
+      return this.set;
+    }
+
+    public void setSet(Set<String> set) {
+
+      this.set = set;
     }
   }
 

@@ -84,14 +84,14 @@ public class CollectionUtilTest {
     assertEquals(two, array[1]);
     assertEquals(three, array[2]);
     try {
-      util.set(array, 3, one, 1, null);
+      util.set(array, 3, one, null, 1);
       fail("Exception expected!");
     } catch (Exception e) {
     }
     String[] arrayCopy;
     GenericBean<String[]> arrayBean = new GenericBean<String[]>();
     GenericBean arrayReceiver = (GenericBean) arrayBean;
-    result = util.set(array, 3, one, 1, arrayReceiver);
+    result = util.set(array, 3, one, arrayReceiver, 1);
     assertNull(result);
     arrayCopy = arrayBean.getValue();
     assertNotNull(arrayCopy);
@@ -101,12 +101,12 @@ public class CollectionUtilTest {
     assertEquals(three, arrayCopy[2]);
     assertEquals(one, arrayCopy[3]);
     arrayBean.setValue(null);
-    result = util.set(array, 0, three, 0, arrayReceiver);
+    result = util.set(array, 0, three, arrayReceiver, 0);
     assertNull(arrayBean.getValue());
     assertSame(one, result);
     assertEquals(three, array[0]);
     try {
-      util.set(array, 4, one, 0, arrayReceiver);
+      util.set(array, 4, one, arrayReceiver, 0);
       fail("Exception expected!");
     } catch (Exception e) {
     }
@@ -130,14 +130,14 @@ public class CollectionUtilTest {
     assertSame(one, list.get(1));
     int maxGrowth = 128;
     list = new ArrayList<String>();
-    result = util.set(list, maxGrowth - 1, one, maxGrowth, null);
+    result = util.set(list, maxGrowth - 1, one, null, maxGrowth);
     assertNull(result);
     assertEquals(maxGrowth, list.size());
     assertEquals(one, list.get(maxGrowth - 1));
     assertEquals(null, list.get(0));
     list = new ArrayList<String>();
     try {
-      util.set(list, maxGrowth, one, maxGrowth, null);
+      util.set(list, maxGrowth, one, null, maxGrowth);
       fail("Exception expected!");
     } catch (Exception e) {
     }

@@ -27,15 +27,4 @@ public interface PojoDescriptorConfiguration {
    */
   CollectionUtil getCollectionUtil();
 
-  /**
-   * This method gets the maximum growth for arrays or
-   * {@link java.util.List lists}.
-   * 
-   * @see CollectionUtil#set(Object, int, Object, int,
-   *      net.sf.mmm.util.GenericBean)
-   * 
-   * @return the maximum growth.
-   */
-  int getMaximumListGrowth();
-
 }
