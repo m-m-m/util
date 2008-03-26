@@ -179,7 +179,7 @@ public abstract class PojoPathNavigatorTest {
   public void testCollection2List() {
 
     PojoPathNavigator navigator = createNavigator();
-    PojoPathContext context = new DefaultPojoPathContext();
+    DefaultPojoPathContext context = new DefaultPojoPathContext();
 
     CollectionPojo pojo = new CollectionPojo();
     Set<String> set = new HashSet<String>();
@@ -204,6 +204,14 @@ public abstract class PojoPathNavigatorTest {
     assertFalse(set.contains(foo));
     assertTrue(set.contains(newFoo));
     assertTrue(set.contains(bar));
+
+    // conversion only works if caching is active...
+    context.setCache(null);
+    try {
+      navigator.get(pojo, "set.0", PojoPathMode.FAIL_IF_NULL, context);
+      fail("Exception expected");
+    } catch (PojoPathException e) {
+    }
   }
 
   @Test

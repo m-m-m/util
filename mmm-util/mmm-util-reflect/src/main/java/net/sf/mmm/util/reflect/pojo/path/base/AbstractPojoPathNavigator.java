@@ -20,6 +20,7 @@ import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.InstantiationFailedException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.pojo.path.api.PojoPathAccessException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathCreationException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathException;
@@ -688,7 +689,10 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       if (!(arrayOrCollection instanceof List)) {
         // non-list collection (e.g. Set) - create Proxy-List
         if (state.cachingDisabled) {
-          // throw exception...
+          PojoPathCachingDisabledException cachingException = new PojoPathCachingDisabledException(
+              currentPath.getPojoPath());
+          throw new PojoPathAccessException(cachingException, currentPath.getPojoPath(),
+              arrayOrCollection.getClass());
         }
         String collection2ListPath = currentPath.getPojoPath() + PATH_SUFFIX_COLLECTION_LIST;
         CachingPojoPath listPath = state.getCached(collection2ListPath);

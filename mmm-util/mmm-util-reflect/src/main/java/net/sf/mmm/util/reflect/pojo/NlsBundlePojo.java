@@ -27,6 +27,10 @@ public class NlsBundlePojo extends AbstractResourceBundle {
   public static final String ERR_PATH_CREATION = "Failed to create the "
       + "object at the pojo-path \"{0}\" for object \"{1}\"!";
 
+  /** @see net.sf.mmm.util.reflect.pojo.path.api.PojoPathAccessException */
+  public static final String ERR_PATH_ACCESS = "Failed to access the pojo-path "
+      + "\"{0}\" for current object of type \"{1}\"!";
+
   /** @see net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException */
   public static final String ERR_PATH_ILLEGAL = "Illegal pojo-path \"{0}\"!";
 
@@ -36,5 +40,9 @@ public class NlsBundlePojo extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunctionUnsupportedOperationException */
   public static final String ERR_FUNCTION_UNSUPPORTED_OPERATION = "The function "
       + "\"{1}\" does NOT support the operation \"{0}\"!";
+
+  /** @see net.sf.mmm.util.reflect.pojo.path.base.PojoPathCachingDisabledException */
+  public static final String ERR_PATH_CACHING_DISABLED = "Caching was required "
+      + "for pojo-path \"{0}\" but is disabled!";
 
 }
