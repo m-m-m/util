@@ -90,11 +90,13 @@ public interface PojoPathContext {
   PojoPathFunctionManager getAdditionalFunctionManager();
 
   /**
-   * This method gets an optional {@link PojoPathGenericConverter} that is used
-   * in favor to {@link PojoPathConverter}s registered to the
+   * This method gets an optional {@link ComposedValueConverter} that is used in
+   * favor to {@link ComposedValueConverter} registered to the
    * {@link PojoPathNavigator} itself.
    * 
-   * @return
+   * @return the {@link ComposedValueConverter} of this context or
+   *         <code>null</code> if no context-specific
+   *         {@link ComposedValueConverter} is provided.
    */
   ComposedValueConverter getAdditionalConverter();
 
