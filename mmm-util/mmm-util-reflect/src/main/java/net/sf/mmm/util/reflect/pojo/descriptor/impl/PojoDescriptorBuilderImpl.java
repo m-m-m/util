@@ -21,8 +21,6 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
-import net.sf.mmm.util.reflect.CollectionUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder;
@@ -49,8 +47,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.impl.accessor.PojoPropertyAccesso
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Resource(shareable = true)
-public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder implements
-    PojoDescriptorConfiguration {
+public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /** @see #getMethodIntrospector() */
   private PojoMethodIntrospector methodIntrospector;
@@ -63,15 +60,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder imp
 
   /** @see #getDescriptorEnhancer() */
   private PojoDescriptorEnhancer descriptorEnhancer;
-
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
-
-  /** @see #getCollectionUtil() */
-  private CollectionUtil collectionUtil;
-
-  /** @see #getMaximumListGrowth() */
-  private int maximumListGrowth;
 
   /**
    * The constructor. By default it only introspects {@link Method methods} that
@@ -101,70 +89,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder imp
   /**
    * {@inheritDoc}
    */
-  public CollectionUtil getCollectionUtil() {
-
-    return this.collectionUtil;
-  }
-
-  /**
-   * @param collectionUtil is the collectionUtil to set
-   */
-  @Resource
-  public void setCollectionUtil(CollectionUtil collectionUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.collectionUtil = collectionUtil;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ReflectionUtil getReflectionUtil() {
-
-    return this.reflectionUtil;
-  }
-
-  /**
-   * @param reflectionUtil is the reflectionUtil to set
-   */
-  @Resource
-  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.reflectionUtil = reflectionUtil;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getMaximumListGrowth() {
-
-    return this.maximumListGrowth;
-  }
-
-  /**
-   * @param maximumListGrowth is the maximumListGrowth to set
-   */
-  @Resource
-  public void setMaximumListGrowth(int maximumListGrowth) {
-
-    getInitializationState().requireNotInitilized();
-    this.maximumListGrowth = maximumListGrowth;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtil.getInstance();
-    }
-    if (this.collectionUtil == null) {
-      this.collectionUtil = CollectionUtil.getInstance();
-    }
     if ((this.methodIntrospector == null) && (this.fieldIntrospector == null)) {
       // by default only introspect public and non-static methods
       this.methodIntrospector = new PojoMethodIntrospectorImpl(VisibilityModifier.PUBLIC, false);
@@ -183,7 +111,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder imp
       this.accessorBuilders = Collections.unmodifiableCollection(this.accessorBuilders);
     }
     if (this.descriptorEnhancer == null) {
-      this.descriptorEnhancer = new DefaultPojoDescriptorEnhancer();
+      DefaultPojoDescriptorEnhancer enhancer = new DefaultPojoDescriptorEnhancer();
+      enhancer.initialize();
+      this.descriptorEnhancer = enhancer;
     }
   }
 

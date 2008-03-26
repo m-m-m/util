@@ -9,6 +9,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg}
@@ -25,12 +26,14 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param containerGetAccessor is the accessor delegate that gets an array,
    *        map or collection property.
    */
-  public PojoPropertyAccessorProxyGetIndexed(PojoPropertyAccessorNonArg containerGetAccessor) {
+  public PojoPropertyAccessorProxyGetIndexed(PojoDescriptorConfiguration configuration,
+      PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super(containerGetAccessor);
+    super(configuration, containerGetAccessor);
   }
 
   /**
@@ -66,7 +69,7 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   public Object invoke(Object pojoInstance, int index) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
-    return getCollectionUtil().get(arrayOrList, index);
+    return getConfiguration().getCollectionUtil().get(arrayOrList, index);
   }
 
 }

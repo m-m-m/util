@@ -11,6 +11,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArg}
@@ -28,26 +29,22 @@ public class PojoPropertyAccessorProxySetIndexed extends
   /** The according setter to use if array has to be resized. */
   private final PojoPropertyAccessorOneArg containerSetAccessor;
 
-  private int maximumListGrowth;
-
-  private int maximumArrayGrowth;
-
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, or
    *        {@link java.util.List} property.
    * @param containerSetAccessor is the accessor that sets the array, or
    *        {@link java.util.List} property. May be <code>null</code> if NOT
    *        available.
    */
-  public PojoPropertyAccessorProxySetIndexed(PojoPropertyAccessorNonArg containerGetAccessor,
+  public PojoPropertyAccessorProxySetIndexed(PojoDescriptorConfiguration configuration,
+      PojoPropertyAccessorNonArg containerGetAccessor,
       PojoPropertyAccessorOneArg containerSetAccessor) {
 
-    super(containerGetAccessor);
+    super(configuration, containerGetAccessor);
     this.containerSetAccessor = containerSetAccessor;
-    this.maximumListGrowth = 64;
-    this.maximumArrayGrowth = 64;
   }
 
   /**
@@ -84,8 +81,8 @@ public class PojoPropertyAccessorProxySetIndexed extends
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
     GenericBean<Object> arrayReceiver = new GenericBean<Object>();
-    Object result = getCollectionUtil().set(arrayOrList, index, item, this.maximumListGrowth,
-        arrayReceiver);
+    Object result = getConfiguration().getCollectionUtil().set(arrayOrList, index, item,
+        getConfiguration().getMaximumListGrowth(), arrayReceiver);
     if ((arrayReceiver.getValue() != null) && (this.containerSetAccessor != null)) {
       this.containerSetAccessor.invoke(pojoInstance, arrayReceiver.getValue());
     }

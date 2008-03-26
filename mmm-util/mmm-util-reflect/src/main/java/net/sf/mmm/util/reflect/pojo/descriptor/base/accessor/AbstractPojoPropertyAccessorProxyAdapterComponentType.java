@@ -5,7 +5,9 @@ package net.sf.mmm.util.reflect.pojo.descriptor.base.accessor;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the abstract base implementation of a
@@ -33,19 +35,20 @@ public class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param containerGetAccessor is the accessor delegate that gets an array or
    *        {@link java.util.Collection} property.
    */
   public AbstractPojoPropertyAccessorProxyAdapterComponentType(
-      PojoPropertyAccessorNonArg containerGetAccessor) {
+      PojoDescriptorConfiguration configuration, PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super(containerGetAccessor);
-    this.propertyType = getReflectionUtil().getComponentType(containerGetAccessor.getReturnType(),
-        true);
+    super(configuration, containerGetAccessor);
+    ReflectionUtil reflectionUtil = getConfiguration().getReflectionUtil();
+    this.propertyType = reflectionUtil.getComponentType(containerGetAccessor.getReturnType(), true);
     if (this.propertyType == null) {
       this.propertyClass = null;
     } else {
-      this.propertyClass = getReflectionUtil().toClass(this.propertyType);
+      this.propertyClass = reflectionUtil.toClass(this.propertyType);
     }
   }
 

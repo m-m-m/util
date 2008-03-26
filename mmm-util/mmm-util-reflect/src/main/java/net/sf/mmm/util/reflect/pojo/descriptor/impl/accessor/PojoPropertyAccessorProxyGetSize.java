@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapter;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArg}
@@ -23,12 +24,14 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param containerGetAccessor is the accessor delegate that gets an array,
    *        map or collection property.
    */
-  public PojoPropertyAccessorProxyGetSize(PojoPropertyAccessorNonArg containerGetAccessor) {
+  public PojoPropertyAccessorProxyGetSize(PojoDescriptorConfiguration configuration,
+      PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super(containerGetAccessor);
+    super(configuration, containerGetAccessor);
   }
 
   /**
@@ -86,7 +89,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
     if (arrayMapOrCollection == null) {
       size = 0;
     } else {
-      size = getCollectionUtil().getSize(arrayMapOrCollection);
+      size = getConfiguration().getCollectionUtil().getSize(arrayMapOrCollection);
     }
     return Integer.valueOf(size);
   }

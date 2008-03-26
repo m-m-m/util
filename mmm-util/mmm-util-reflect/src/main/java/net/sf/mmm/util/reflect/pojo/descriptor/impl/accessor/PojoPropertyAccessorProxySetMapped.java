@@ -10,6 +10,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorTwoArg}
@@ -24,12 +25,14 @@ public class PojoPropertyAccessorProxySetMapped extends
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param mapGetAccessor is the accessor delegate that gets a
    *        {@link java.util.Map} property.
    */
-  public PojoPropertyAccessorProxySetMapped(PojoPropertyAccessorNonArg mapGetAccessor) {
+  public PojoPropertyAccessorProxySetMapped(PojoDescriptorConfiguration configuration,
+      PojoPropertyAccessorNonArg mapGetAccessor) {
 
-    super(mapGetAccessor);
+    super(configuration, mapGetAccessor);
     assert (Map.class.isAssignableFrom(mapGetAccessor.getReturnClass()));
   }
 

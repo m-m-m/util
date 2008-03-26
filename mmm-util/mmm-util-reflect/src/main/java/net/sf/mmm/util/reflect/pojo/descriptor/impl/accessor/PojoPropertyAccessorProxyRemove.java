@@ -9,6 +9,7 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArg}
@@ -27,16 +28,18 @@ public class PojoPropertyAccessorProxyRemove extends
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, or
    *        list property.
    * @param containerSetAccessor is the accessor that sets the array, or
    *        {@link java.util.Collection} property. May be <code>null</code> if
    *        NOT available.
    */
-  public PojoPropertyAccessorProxyRemove(PojoPropertyAccessorNonArg containerGetAccessor,
+  public PojoPropertyAccessorProxyRemove(PojoDescriptorConfiguration configuration,
+      PojoPropertyAccessorNonArg containerGetAccessor,
       PojoPropertyAccessorOneArg containerSetAccessor) {
 
-    super(containerGetAccessor);
+    super(configuration, containerGetAccessor);
     this.containerSetAccessor = containerSetAccessor;
   }
 
@@ -73,7 +76,7 @@ public class PojoPropertyAccessorProxyRemove extends
   public Object invoke(Object pojoInstance, Object argument) {
 
     Object arrayOrCollection = getDelegate().invoke(pojoInstance);
-    Object arrayCopy = getCollectionUtil().remove(arrayOrCollection, argument);
+    Object arrayCopy = getConfiguration().getCollectionUtil().remove(arrayOrCollection, argument);
     if ((arrayCopy != arrayOrCollection) && (this.containerSetAccessor != null)) {
       // we will NOT create this proxy if the setter is missing for an array
       // type getter.

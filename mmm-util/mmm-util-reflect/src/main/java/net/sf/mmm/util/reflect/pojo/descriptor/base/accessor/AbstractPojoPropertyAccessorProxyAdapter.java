@@ -3,9 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.pojo.descriptor.base.accessor;
 
-import net.sf.mmm.util.reflect.CollectionUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the abstract base implementation of a
@@ -29,16 +28,22 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapter extends
   /** @see #getDelegate() */
   private final PojoPropertyAccessorNonArg containerGetAccessor;
 
+  /** @see #getConfiguration() */
+  private final PojoDescriptorConfiguration configuration;
+
   /**
    * The constructor.
    * 
+   * @param configuration is the configuration to use.
    * @param containerGetAccessor is the accessor delegate that gets an array,
    *        map or collection property.
    */
-  public AbstractPojoPropertyAccessorProxyAdapter(PojoPropertyAccessorNonArg containerGetAccessor) {
+  public AbstractPojoPropertyAccessorProxyAdapter(PojoDescriptorConfiguration configuration,
+      PojoPropertyAccessorNonArg containerGetAccessor) {
 
     super();
     this.containerGetAccessor = containerGetAccessor;
+    this.configuration = configuration;
   }
 
   /**
@@ -51,28 +56,11 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapter extends
   }
 
   /**
-   * This method gets the {@link CollectionUtil} instance.
-   * 
-   * @see CollectionUtil#getInstance()
-   * 
-   * @return the collection util.
+   * @return the configuration
    */
-  protected CollectionUtil getCollectionUtil() {
+  protected PojoDescriptorConfiguration getConfiguration() {
 
-    // TODO: get from PojoBuilder
-    return CollectionUtil.getInstance();
-  }
-
-  /**
-   * This method gets the {@link ReflectionUtil} instance.
-   * 
-   * @see ReflectionUtil#getInstance()
-   * 
-   * @return the {@link ReflectionUtil}.
-   */
-  protected ReflectionUtil getReflectionUtil() {
-
-    return ReflectionUtil.getInstance();
+    return this.configuration;
   }
 
 }
