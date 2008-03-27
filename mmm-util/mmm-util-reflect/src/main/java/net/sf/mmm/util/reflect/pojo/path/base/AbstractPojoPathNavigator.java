@@ -20,8 +20,10 @@ import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.InstantiationFailedException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathAccessException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
+import net.sf.mmm.util.reflect.pojo.path.api.PojoPathConversionException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathCreationException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathException;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction;
@@ -31,6 +33,7 @@ import net.sf.mmm.util.reflect.pojo.path.api.PojoPathMode;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathNavigator;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathSegmentIsNullException;
+import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
  * This is the abstract base implementation of the {@link PojoPathNavigator}.
@@ -55,6 +58,9 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   /** @see #getFunctionManager() */
   private PojoPathFunctionManager functionManager;
 
+  /** @see #getValueConverter() */
+  private ComposedValueConverter valueConverter;
+
   /**
    * The constructor.
    */
@@ -77,6 +83,45 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   protected PojoPathFunctionManager getFunctionManager() {
 
     return this.functionManager;
+  }
+
+  /**
+   * This method sets the {@link #getFunctionManager() function-manager} used
+   * for global {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction}s.
+   * 
+   * @param functionManager is the {@link PojoPathFunctionManager}.
+   */
+  @Resource
+  public void setFunctionManager(PojoPathFunctionManager functionManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.functionManager = functionManager;
+  }
+
+  /**
+   * This method gets the {@link ComposedValueConverter} used by default to
+   * convert values that are NOT compatible.
+   * 
+   * @see PojoPathContext#getAdditionalConverter()
+   * 
+   * @return the valueConverter
+   */
+  protected ComposedValueConverter getValueConverter() {
+
+    return this.valueConverter;
+  }
+
+  /**
+   * This method sets the {@link #getValueConverter() value-converter} used by
+   * default.
+   * 
+   * @param valueConverter is the {@link ComposedValueConverter} to set.
+   */
+  @Resource
+  public void setValueConverter(ComposedValueConverter valueConverter) {
+
+    getInitializationState().requireNotInitilized();
+    this.valueConverter = valueConverter;
   }
 
   /**
@@ -117,19 +162,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     getInitializationState().requireNotInitilized();
     this.reflectionUtil = reflectionUtil;
-  }
-
-  /**
-   * This method sets the {@link #getFunctionManager() function-manager} used
-   * for global {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPathFunction}s.
-   * 
-   * @param functionManager is the {@link PojoPathFunctionManager}.
-   */
-  @Resource
-  public void setFunctionManager(PojoPathFunctionManager functionManager) {
-
-    getInitializationState().requireNotInitilized();
-    this.functionManager = functionManager;
   }
 
   /**
@@ -195,6 +227,28 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     PojoPathState state = createState(pojo, pojoPath, mode, context);
     CachingPojoPath path = getRecursive(pojoPath, context, state);
     return path.pojo;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  public <TYPE> TYPE get(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context,
+      Class<TYPE> targetClass) throws PojoPathException, IllegalPojoPathException,
+      PojoPathSegmentIsNullException, InstantiationFailedException, PojoPathConversionException {
+
+    if (pojo == null) {
+      if (mode == PojoPathMode.RETURN_IF_NULL) {
+        return null;
+      } else if (mode == PojoPathMode.RETURN_IF_NULL) {
+        throw new PojoPathCreationException(null, pojoPath);
+      } else {
+        throw new PojoPathSegmentIsNullException(null, pojoPath);
+      }
+    }
+    PojoPathState state = createState(pojo, pojoPath, mode, context);
+    CachingPojoPath path = getRecursive(pojoPath, context, state);
+    return (TYPE) convert(path, context, path.pojo, targetClass, targetClass);
   }
 
   /**
@@ -569,9 +623,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       }
     }
     Object current = pojo;
+    boolean addToCache = false;
     PojoPathState state = createState(pojo, pojoPath, mode, context);
     CachingPojoPath currentPath = state.getCached(pojoPath);
     if (currentPath == null) {
+      addToCache = true;
       currentPath = new CachingPojoPath(pojoPath);
       String parentPathString = currentPath.getParentPath();
       if (parentPathString != null) {
@@ -593,6 +649,9 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     Object old = set(currentPath, context, state, current, value);
     // update cache...
     currentPath.pojo = value;
+    if (addToCache) {
+      state.setCached(pojoPath, currentPath);
+    }
     return old;
   }
 
@@ -640,7 +699,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
         }
       }
     }
-    // TODO: caching?
     return result;
   }
 
@@ -664,6 +722,61 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    */
   protected abstract Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, Object value);
+
+  /**
+   * This method converts the given <code>pojo</code> to the given
+   * <code>targetClass</code> (or even <code>targetType</code>) as
+   * necessary.
+   * 
+   * @param currentPath is the current {@link CachingPojoPath} that lead to
+   *        <code>pojo</code>.
+   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param pojo is the {@link net.sf.mmm.util.reflect.pojo.api.Pojo} to convert
+   *        as necessary.
+   * @param targetClass is the expected {@link Class}.
+   * @param targetType is the expected {@link Type}.
+   * @return the <code>pojo</code> converted to the <code>targetType</code>
+   *         as necessary.
+   * @throws PojoPathConversionException if the given <code>pojo</code> is NOT
+   *         compatible and could NOT be converted.
+   */
+  protected Object convert(CachingPojoPath currentPath, PojoPathContext context, Object pojo,
+      Class<?> targetClass, Type targetType) throws PojoPathConversionException {
+
+    Object result = pojo;
+    // null does NOT need to be converted...
+    if (pojo != null) {
+      Class<?> pojoClass = pojo.getClass();
+      // only convert if NOT compatible
+      if (!targetClass.isAssignableFrom(pojoClass)) {
+        // conversion required...
+        ComposedValueConverter converter = context.getAdditionalConverter();
+        result = null;
+        try {
+          if (converter != null) {
+            result = converter.convert(pojo, currentPath, targetClass, currentPath.pojoType);
+          }
+          if (result == null) {
+            result = this.valueConverter.convert(pojo, currentPath, targetClass,
+                currentPath.pojoType);
+          }
+        } catch (RuntimeException e) {
+          throw new PojoPathConversionException(currentPath.getPojoPath(), pojoClass,
+              currentPath.pojoType);
+        }
+        if (result == null) {
+          throw new PojoPathConversionException(currentPath.getPojoPath(), pojoClass,
+              currentPath.pojoType);
+        }
+        if (!targetClass.isAssignableFrom(result.getClass())) {
+          IllegalStateException illegalState = new IllegalStateException("Illegal conversion!");
+          throw new PojoPathConversionException(illegalState, currentPath.getPojoPath(), pojoClass,
+              targetType);
+        }
+      }
+    }
+    return result;
+  }
 
   /**
    * This method converts the given <code>arrayOrCollection</code> to a
@@ -1002,7 +1115,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * this {@link net.sf.mmm.util.reflect.pojo.path.api.PojoPath} is leading
      * to.
      * 
-     * @return the property-type or <code>null</code> if NOT set.
+     * @return the POJO-type or <code>null</code> if NOT set.
      */
     public Type getPojoType() {
 

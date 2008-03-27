@@ -11,6 +11,8 @@ import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathMode;
@@ -107,8 +109,14 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
   protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, Object value) {
 
-    PojoDescriptor descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
-    return descriptor.setProperty(parentPojo, currentPath.getSegment(), value);
+    PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
+    PojoPropertyAccessorOneArg setAccessor = descriptor.getAccessor(currentPath.getSegment(),
+        PojoPropertyAccessorOneArgMode.SET, true);
+    Type targetType = setAccessor.getPropertyType();
+    currentPath.setPojoType(targetType);
+    Object convertedValue = convert(currentPath, context, value, setAccessor.getPropertyClass(),
+        targetType);
+    return setAccessor.invoke(parentPojo, convertedValue);
   }
 
 }

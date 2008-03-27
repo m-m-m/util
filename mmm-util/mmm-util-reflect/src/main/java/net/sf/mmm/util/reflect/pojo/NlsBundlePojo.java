@@ -45,4 +45,8 @@ public class NlsBundlePojo extends AbstractResourceBundle {
   public static final String ERR_PATH_CACHING_DISABLED = "Caching was required "
       + "for pojo-path \"{0}\" but is disabled!";
 
+  /** @see net.sf.mmm.util.reflect.pojo.path.api.PojoPathConversionException */
+  public static final String ERR_PATH_CONVERSION = "Can NOT convert from \"{1}\""
+      + " to \"{2}\" for pojo-path \"{0}\"!";
+
 }
