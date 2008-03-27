@@ -11,7 +11,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
- * This is the test-case for the class {@link Property}.
+ * This is the test-case for the class {@link PojoProperty}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -22,7 +22,7 @@ public class PropertyTest {
   public void testPlain() {
 
     String propertyName = "fooBar";
-    Property property = new Property(propertyName);
+    PojoProperty property = new PojoProperty(propertyName);
     assertEquals(propertyName, property.getName());
     assertNull(property.getIndex());
     assertNull(property.getKey());
@@ -33,7 +33,7 @@ public class PropertyTest {
 
     int index = 42;
     String propertyName = "fooBar";
-    Property property = new Property(propertyName + "[" + index + "]");
+    PojoProperty property = new PojoProperty(propertyName + "[" + index + "]");
     assertEquals(propertyName, property.getName());
     assertNotNull(property.getIndex());
     assertEquals(index, property.getIndex().intValue());
@@ -45,7 +45,7 @@ public class PropertyTest {
 
     String key = "0.key";
     String propertyName = "fooBar";
-    Property property = new Property(propertyName + "['" + key + "']");
+    PojoProperty property = new PojoProperty(propertyName + "['" + key + "']");
     assertEquals(propertyName, property.getName());
     assertNull(property.getIndex());
     assertEquals(key, property.getKey());
@@ -55,31 +55,31 @@ public class PropertyTest {
   public void testNegative() {
 
     try {
-      new Property("");
+      new PojoProperty("");
       fail("Exception expected");
     } catch (RuntimeException e) {
     }
 
     try {
-      new Property("foo[");
+      new PojoProperty("foo[");
       fail("Exception expected");
     } catch (RuntimeException e) {
     }
 
     try {
-      new Property("foo[]");
+      new PojoProperty("foo[]");
       fail("Exception expected");
     } catch (RuntimeException e) {
     }
 
     try {
-      new Property("foo[bar]");
+      new PojoProperty("foo[bar]");
       fail("Exception expected");
     } catch (RuntimeException e) {
     }
 
     try {
-      new Property("foo[']");
+      new PojoProperty("foo[']");
       fail("Exception expected");
     } catch (RuntimeException e) {
     }

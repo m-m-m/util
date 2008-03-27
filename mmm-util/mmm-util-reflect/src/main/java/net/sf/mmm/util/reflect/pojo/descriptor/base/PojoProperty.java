@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.pojo.descriptor.base;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 
 /**
- * This class represents the {@link Property} of a
+ * This class represents the property of a
  * {@link net.sf.mmm.util.reflect.pojo.api.Pojo}.<br>
  * It can be a <em>simple property</em> such as <code>fooBar</code>, an
  * <em>indexed property</em> such as <code>fooBar[42]</code> or a
@@ -16,7 +16,7 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class Property {
+public class PojoProperty {
 
   /** @see #getName() */
   private final String name;
@@ -32,7 +32,7 @@ public class Property {
    * 
    * @param propertyName is the raw property-name.
    */
-  public Property(String propertyName) {
+  public PojoProperty(String propertyName) {
 
     super();
     int len = propertyName.length();
@@ -71,7 +71,7 @@ public class Property {
    * Examples: <table border="1">
    * <tr>
    * <th>propertyName</th>
-   * <th>new {@link Property}(propertyName).{@link #getName()}</th>
+   * <th>new {@link PojoProperty}(propertyName).{@link #getName()}</th>
    * </tr>
    * <tr>
    * <td>fooBar</td>
@@ -97,8 +97,8 @@ public class Property {
   /**
    * This method gets the optional index.
    * 
-   * @return the index or <code>null</code> if this {@link Property} does NOT
-   *         represent an indexed property.
+   * @return the index or <code>null</code> if this {@link PojoProperty} does
+   *         NOT represent an indexed property.
    */
   public Integer getIndex() {
 
@@ -108,8 +108,8 @@ public class Property {
   /**
    * This method gets the optional key.
    * 
-   * @return the key of <code>null</code> if this {@link Property} does NOT
-   *         represent a mapped property.
+   * @return the key of <code>null</code> if this {@link PojoProperty} does
+   *         NOT represent a mapped property.
    */
   public String getKey() {
 

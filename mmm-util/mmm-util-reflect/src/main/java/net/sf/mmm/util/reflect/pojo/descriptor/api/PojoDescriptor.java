@@ -170,15 +170,20 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * <code>mode</code>.
    * 
    * @param <ACCESSOR> is the type of the requested accessor.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
+   * @param property is the {@link PojoPropertyDescriptor#getName() name} of the
+   *        property. If the given <code>mode</code> is
+   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET GET}
+   *        it is treated as for {@link #getProperty(Object, String)}. If the
+   *        given <code>mode</code> is
+   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET SET}
+   *        it is treated as for {@link #setProperty(Object, String, Object)}.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
    *        requested accessor.
    * @return the requested accessor or <code>null</code> if NOT found (there
    *         is no property named <code>propertyName</code>, the property has
    *         no accessor for the given <code>mode</code>, etc.).
    */
-  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
+  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode);
 
   /**
@@ -191,9 +196,13 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @see net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
    * 
    * @param <ACCESSOR> is the type of the requested accessor.
-   * @param propertyName is the
-   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.PojoPropertyDescriptor#getName() name}
-   *        of the property to access.
+   * @param property is the {@link PojoPropertyDescriptor#getName() name} of the
+   *        property. If the given <code>mode</code> is
+   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET GET}
+   *        it is treated as for {@link #getProperty(Object, String)}. If the
+   *        given <code>mode</code> is
+   *        {@link net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET SET}
+   *        it is treated as for {@link #setProperty(Object, String, Object)}.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
    *        requested accessor.
    * @param required - if <code>true</code> the accessor is required and an
@@ -205,7 +214,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         was found or no accessor exists for that property with the given
    *         <code>mode</code>.
    */
-  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String propertyName,
+  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode, boolean required)
       throws PojoPropertyNotFoundException;
 

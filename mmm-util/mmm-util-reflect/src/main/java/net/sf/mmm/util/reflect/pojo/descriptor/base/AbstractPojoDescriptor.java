@@ -6,8 +6,10 @@ package net.sf.mmm.util.reflect.pojo.descriptor.base;
 import java.util.Collection;
 
 import net.sf.mmm.util.reflect.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
+import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
@@ -62,18 +64,26 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object getProperty(POJO pojoInstance, String propertyName) {
+  public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
+      PojoPropertyAccessorMode<ACCESSOR> mode) {
 
-    Property property = new Property(propertyName);
-    if (property.getIndex() != null) {
-      return getAccessor(property.getName(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED,
-          true).invoke(pojoInstance, property.getIndex().intValue());
-    } else if (property.getKey() != null) {
-      return getAccessor(property.getName(), PojoPropertyAccessorOneArgMode.GET_MAPPED, true)
-          .invoke(pojoInstance, property.getKey());
+    return getAccessor(property, mode, false);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Object getProperty(POJO pojoInstance, String property) {
+
+    PojoProperty pojoProperty = new PojoProperty(property);
+    if (pojoProperty.getIndex() != null) {
+      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED,
+          true).invoke(pojoInstance, pojoProperty.getIndex().intValue());
+    } else if (pojoProperty.getKey() != null) {
+      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorOneArgMode.GET_MAPPED, true)
+          .invoke(pojoInstance, pojoProperty.getKey());
     } else {
-      return getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET, true).invoke(
-          pojoInstance);
+      return getAccessor(property, PojoPropertyAccessorNonArgMode.GET, true).invoke(pojoInstance);
     }
   }
 
@@ -82,7 +92,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    */
   public Object setProperty(POJO pojoInstance, String propertyName, Object value) {
 
-    Property property = new Property(propertyName);
+    PojoProperty property = new PojoProperty(propertyName);
     if (property.getIndex() != null) {
       return getAccessor(property.getName(), PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED,
           true).invoke(pojoInstance, property.getIndex().intValue(), value);
@@ -100,8 +110,8 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    */
   public int getPropertySize(POJO pojoInstance, String propertyName) {
 
-    Object result = getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET_SIZE, true).invoke(
-        pojoInstance);
+    Object result = getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET_SIZE, true)
+        .invoke(pojoInstance);
     try {
       Number size = (Number) result;
       return size.intValue();
