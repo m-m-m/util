@@ -16,7 +16,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class PropertyTest {
+public class PojoPropertyTest {
 
   @Test
   public void testPlain() {
