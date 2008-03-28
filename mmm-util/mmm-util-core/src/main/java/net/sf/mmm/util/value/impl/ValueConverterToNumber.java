@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 
 import net.sf.mmm.util.math.MathUtil;
 import net.sf.mmm.util.math.NumberType;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.value.api.ValueConverter;
 
 /**
@@ -17,12 +16,12 @@ import net.sf.mmm.util.value.api.ValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPathConverterToNumber implements ValueConverter<Object, Number> {
+public class ValueConverterToNumber implements ValueConverter<Object, Number> {
 
   /**
    * The constructor.
    */
-  public PojoPathConverterToNumber() {
+  public ValueConverterToNumber() {
 
     super();
   }
@@ -55,26 +54,6 @@ public class PojoPathConverterToNumber implements ValueConverter<Object, Number>
   /**
    * {@inheritDoc}
    */
-  public Number convert(Object value, Object valueSource, Class<? extends Number> targetClass,
-      Type targetType) {
-
-    if (value == null) {
-      throw new NlsIllegalArgumentException(null);
-    }
-    NumberType<? extends Number> numberType = getMathUtil().getNumberType(targetClass);
-    if (numberType != null) {
-      if (value instanceof Number) {
-        return numberType.valueOf((Number) value, isFailIfUnprecise());
-      } else if (value instanceof CharSequence) {
-        return numberType.valueOf(value.toString());
-      }
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Class<Object> getSourceType() {
 
     return Object.class;
@@ -86,6 +65,26 @@ public class PojoPathConverterToNumber implements ValueConverter<Object, Number>
   public Class<Number> getTargetType() {
 
     return Number.class;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Number convert(Object value, Object valueSource, Class<? extends Number> targetClass,
+      Type targetType) {
+
+    if (value == null) {
+      return null;
+    }
+    NumberType<? extends Number> numberType = getMathUtil().getNumberType(targetClass);
+    if (numberType != null) {
+      if (value instanceof Number) {
+        return numberType.valueOf((Number) value, isFailIfUnprecise());
+      } else if (value instanceof CharSequence) {
+        return numberType.valueOf(value.toString());
+      }
+    }
+    return null;
   }
 
 }

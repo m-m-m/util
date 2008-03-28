@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * An implementation of this interface should be stateless and thread-safe.
  * 
  * @param <SOURCE> is the generic {@link #getSourceType() source-type}.
- * @param <TARGET> is the generic {@link #getTargetType() target.type}.
+ * @param <TARGET> is the generic {@link #getTargetType() target-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
