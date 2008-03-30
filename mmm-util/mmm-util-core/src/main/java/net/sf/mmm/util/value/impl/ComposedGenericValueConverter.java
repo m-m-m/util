@@ -105,12 +105,12 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
     Class<?> currentClass = currentTargetClass;
     while (currentClass != null) {
       if (logger.isTraceEnabled()) {
-        logger.trace("searcher converter for target-class " + currentClass);
+        logger.trace("searching converter for target-class " + currentClass);
       }
       ValueConverter converter = this.targetClass2converterMap.get(currentClass);
-      if (converter != null) {
+      if ((converter != null) && (converter.getTargetType().isAssignableFrom(targetClass))) {
         if (logger.isDebugEnabled()) {
-          logger.debug("trying converter for target-class " + currentClass);
+          logger.debug("trying converter for target-class " + converter.getTargetType());
         }
         Object result = converter.convert(value, valueSource, targetClass, targetType);
         if (result != null) {

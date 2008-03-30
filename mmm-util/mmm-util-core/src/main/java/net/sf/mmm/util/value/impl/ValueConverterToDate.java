@@ -16,12 +16,12 @@ import net.sf.mmm.util.value.api.ValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueConverterToString implements ValueConverter<Object, String> {
+public class ValueConverterToDate implements ValueConverter<Object, Date> {
 
   /**
    * The constructor.
    */
-  public ValueConverterToString() {
+  public ValueConverterToDate() {
 
     super();
   }
@@ -47,28 +47,30 @@ public class ValueConverterToString implements ValueConverter<Object, String> {
   /**
    * {@inheritDoc}
    */
-  public Class<String> getTargetType() {
+  public Class<Date> getTargetType() {
 
-    return String.class;
+    return Date.class;
   }
 
   /**
    * {@inheritDoc}
    */
-  public String convert(Object value, Object valueSource, Class<? extends String> targetClass,
+  public Date convert(Object value, Object valueSource, Class<? extends Date> targetClass,
       Type targetType) {
 
     if (value == null) {
       return null;
     }
-    if (value instanceof Class) {
-      return ((Class<?>) value).getName();
-    } else if (value instanceof Date) {
-      return getIso8601Util().formatDateTime((Date) value);
-    } else if (value instanceof Calendar) {
-      return getIso8601Util().formatDateTime((Calendar) value);
+    if (value instanceof Calendar) {
+      return ((Calendar) value).getTime();
     }
-    return value.toString();
+    if (value instanceof String) {
+      return getIso8601Util().parseDate((String) value);
+    }
+    if (value instanceof Long) {
+      return new Date(((Long) value).longValue());
+    }
+    return null;
   }
 
 }
