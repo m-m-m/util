@@ -59,4 +59,19 @@ public class Iso8601UtilTest {
     assertEquals("2007-01-31T12:22:33+01:00", newString);
   }
 
+  @Test
+  public void testNow() {
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(Calendar.MILLISECOND, 0);
+    String formatted = getIso8601Util().formatDateTime(calendar);
+    Calendar parsed = getIso8601Util().parseCalendar(formatted);
+    assertEquals(formatted, getIso8601Util().formatDateTime(parsed));
+    // ATTENTION: parsed and calendar may NOT be equal because the timezone
+    // may have changed to the fixed UTC-Offset...
+    assertEquals(calendar.getTimeInMillis(), parsed.getTimeInMillis());
+    assertEquals(calendar.getTimeZone().getOffset(calendar.getTimeInMillis()), parsed.getTimeZone()
+        .getOffset(parsed.getTimeInMillis()));
+  }
+
 }

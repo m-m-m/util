@@ -286,7 +286,9 @@ public final class Iso8601Util {
       formatDate(calendar, extendedDate, buffer);
       buffer.append('T');
       formatTime(calendar, extendedTime, buffer);
-      formatTimeZone(calendar.getTimeZone(), extendedTimezone, buffer);
+      TimeZone timezone = calendar.getTimeZone();
+      int timezoneOffset = timezone.getOffset(calendar.getTimeInMillis());
+      formatTimeZone(timezoneOffset, extendedTimezone, buffer);
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
@@ -338,16 +340,16 @@ public final class Iso8601Util {
    * This method formats the given <code>timezone</code> according to
    * {@link Iso8601Util ISO 8601}.<br>
    * 
-   * @param timezone is the date to format.
+   * @param timezoneOffset is the timezone-offset in milliseconds.
    * @param extended - if <code>false</code> the basic timezone format
    *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
    *        timezone format ("&#177;HH:mm[:ss]") is used.
    * @param buffer is where to append the formatted timezone.
    */
-  public void formatTimeZone(TimeZone timezone, boolean extended, Appendable buffer) {
+  public void formatTimeZone(int timezoneOffset, boolean extended, Appendable buffer) {
 
     try {
-      int offsetSeconds = timezone.getRawOffset() / 1000;
+      int offsetSeconds = timezoneOffset / 1000;
       if (offsetSeconds < 0) {
         buffer.append('-');
         offsetSeconds = -offsetSeconds;
