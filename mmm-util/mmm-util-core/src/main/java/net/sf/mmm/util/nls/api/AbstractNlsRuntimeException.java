@@ -6,6 +6,9 @@ package net.sf.mmm.util.nls.api;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Locale;
+import java.util.UUID;
+
+import net.sf.mmm.util.uuid.UuidAccess;
 
 /**
  * This is an abstract base implementation of an unchecked exception with real
@@ -24,7 +27,10 @@ import java.util.Locale;
 public abstract class AbstractNlsRuntimeException extends RuntimeException implements NlsThrowable {
 
   /** the internationalized message */
-  private NlsMessage nlsMessage;
+  private final NlsMessage nlsMessage;
+
+  /** @see #getUuid() */
+  private final UUID uuid;
 
   /**
    * The constructor.
@@ -36,6 +42,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
 
     super();
     this.nlsMessage = internationalizedMessage;
+    this.uuid = createUuid();
   }
 
   /**
@@ -49,6 +56,30 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
 
     super(nested);
     this.nlsMessage = internationalizedMessage;
+    if ((nested != null) && (nested instanceof NlsThrowable)) {
+      this.uuid = ((NlsThrowable) nested).getUuid();
+    } else {
+      this.uuid = createUuid();
+    }
+  }
+
+  /**
+   * This method creates a new {@link UUID}.
+   * 
+   * @return the new {@link UUID} or <code>null</code> to turn this feature
+   *         off.
+   */
+  protected UUID createUuid() {
+
+    return UuidAccess.getFactory().createUuid();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final UUID getUuid() {
+
+    return this.uuid;
   }
 
   /**

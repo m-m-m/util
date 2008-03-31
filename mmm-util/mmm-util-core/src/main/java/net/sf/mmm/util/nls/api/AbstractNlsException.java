@@ -8,8 +8,10 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Locale;
+import java.util.UUID;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.uuid.UuidAccess;
 
 /**
  * This is an abstract base implementation of a checked exception with real
@@ -28,7 +30,10 @@ import net.sf.mmm.util.StringUtil;
 public abstract class AbstractNlsException extends Exception implements NlsThrowable {
 
   /** the internationalized message */
-  private NlsMessage nlsMessage;
+  private final NlsMessage nlsMessage;
+
+  /** @see #getUuid() */
+  private final UUID uuid;
 
   /**
    * The constructor.
@@ -40,6 +45,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
     super();
     this.nlsMessage = internationalizedMessage;
+    this.uuid = createUuid();
   }
 
   /**
@@ -53,6 +59,30 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
     super(nested);
     this.nlsMessage = internationalizedMessage;
+    if ((nested != null) && (nested instanceof NlsThrowable)) {
+      this.uuid = ((NlsThrowable) nested).getUuid();
+    } else {
+      this.uuid = createUuid();
+    }
+  }
+
+  /**
+   * This method creates a new {@link UUID}.
+   * 
+   * @return the new {@link UUID} or <code>null</code> to turn this feature
+   *         off.
+   */
+  protected UUID createUuid() {
+
+    return UuidAccess.getFactory().createUuid();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final UUID getUuid() {
+
+    return this.uuid;
   }
 
   /**
@@ -104,6 +134,11 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
       synchronized (buffer) {
         throwable.getLocalizedMessage(locale, resolver, buffer);
         buffer.append(StringUtil.LINE_SEPARATOR);
+        UUID uuid = throwable.getUuid();
+        if (uuid != null) {
+          buffer.append(uuid.toString());
+          buffer.append(StringUtil.LINE_SEPARATOR);
+        }
         StackTraceElement[] trace = throwable.getStackTrace();
         for (int i = 0; i < trace.length; i++) {
           buffer.append("\tat ");

@@ -4,6 +4,7 @@
 package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
+import java.util.UUID;
 
 /**
  * This is the interface for exceptions and runtime exceptions with real
@@ -102,5 +103,15 @@ public interface NlsThrowable extends NlsObject {
    * @return the {@link Throwable#getStackTrace() stack-trace}.
    */
   StackTraceElement[] getStackTrace();
+
+  /**
+   * This method gets the {@link UUID} of this exception. The UUID is created
+   * when the exception is {@link #NlsException(String, Object...) constructed}.
+   * If a {@link #getCause() cause} is (it's root-{@link #getCause() cause})
+   * was created.
+   * 
+   * @return the uuid
+   */
+  UUID getUuid();
 
 }
