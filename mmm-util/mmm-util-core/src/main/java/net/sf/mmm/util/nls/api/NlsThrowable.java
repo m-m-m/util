@@ -106,11 +106,17 @@ public interface NlsThrowable extends NlsObject {
 
   /**
    * This method gets the {@link UUID} of this exception. The UUID is created
-   * when the exception is {@link #NlsException(String, Object...) constructed}.
-   * If a {@link #getCause() cause} is (it's root-{@link #getCause() cause})
-   * was created.
+   * when the exception is constructed or copied from the given
+   * {@link #getCause() cause} if it is also a {@link NlsThrowable}.<br>
+   * The {@link UUID} will appear in the
+   * {@link #printStackTrace(Locale, NlsTemplateResolver, Appendable) printed stacktrace}
+   * but NOT in the {@link #getMessage() message} and should therefore be
+   * written to log-files if the {@link NlsThrowable} is logged. If you supply
+   * the {@link UUID} to the end-user in case of an unexpected error, he can
+   * easily find the stacktrace in the log-files.
    * 
-   * @return the uuid
+   * @return the uuid of this exception. It may be <code>null</code> if this
+   *         feature is turned of (it is turned on by default).
    */
   UUID getUuid();
 
