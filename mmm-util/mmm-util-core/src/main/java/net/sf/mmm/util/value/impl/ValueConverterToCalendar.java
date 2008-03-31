@@ -13,16 +13,16 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to a {@link Date}.
+ * {@link Object} to a {@link Calendar}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueConverterToDate extends AbstractValueConverter<Object, Date> {
+public class ValueConverterToCalendar extends AbstractValueConverter<Object, Calendar> {
 
   /**
    * The constructor.
    */
-  public ValueConverterToDate() {
+  public ValueConverterToCalendar() {
 
     super();
   }
@@ -48,30 +48,35 @@ public class ValueConverterToDate extends AbstractValueConverter<Object, Date> {
   /**
    * {@inheritDoc}
    */
-  public Class<Date> getTargetType() {
+  public Class<Calendar> getTargetType() {
 
-    return Date.class;
+    return Calendar.class;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Date convert(Object value, Object valueSource, Class<? extends Date> targetClass,
+  public Calendar convert(Object value, Object valueSource, Class<? extends Calendar> targetClass,
       Type targetType) {
 
     if (value == null) {
       return null;
     }
-    if (value instanceof Calendar) {
-      return ((Calendar) value).getTime();
+    if (value instanceof Date) {
+      // TODO
+      Calendar calendar = Calendar.getInstance();
+      calendar.setTime((Date) value);
+      return calendar;
     }
     if (value instanceof String) {
-      return getIso8601Util().parseDate((String) value);
+      return getIso8601Util().parseCalendar((String) value);
     }
     if (value instanceof Long) {
-      return new Date(((Long) value).longValue());
+      // TODO
+      Calendar calendar = Calendar.getInstance();
+      calendar.setTimeInMillis(((Long) value).longValue());
+      return calendar;
     }
     return null;
   }
-
 }

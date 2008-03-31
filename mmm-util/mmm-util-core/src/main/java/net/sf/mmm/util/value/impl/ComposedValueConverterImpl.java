@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
+import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import net.sf.mmm.util.collection.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
+import net.sf.mmm.util.value.base.AbstractValueConverter;
 
 /**
  * This is the implementation of the
@@ -20,7 +22,7 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ComposedGenericValueConverter extends AbstractComposedValueConverter {
+public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
   /** @see #addConverter(ValueConverter) */
   private final TargetClass2ConverterMap targetClass2converterMap;
@@ -28,7 +30,7 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
   /**
    * The constructor.
    */
-  public ComposedGenericValueConverter() {
+  public ComposedValueConverterImpl() {
 
     super();
     this.targetClass2converterMap = new TargetClass2ConverterMap();
@@ -51,7 +53,7 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
     getInitializationState().requireNotInitilized();
     Class<?> targetType = converter.getTargetType();
     ComposedTargetTypeConverter targetConverter = this.targetClass2converterMap.get(targetType);
-    if (targetConverter == null) {
+    if ((targetConverter == null) || !targetType.equals(targetConverter.getTargetType())) {
       targetConverter = new ComposedTargetTypeConverter(targetType);
       this.targetClass2converterMap.put(targetType, targetConverter);
     }
@@ -67,7 +69,12 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
     if (value == null) {
       return null;
     }
-    return convertRecursive(value, valueSource, targetClass, targetType, targetClass);
+    Log logger = getLogger();
+    if (logger.isDebugEnabled()) {
+      logger.debug("starting conversion of '" + value + "' from '" + value.getClass().getName()
+          + "' to '" + targetType + "'");
+    }
+    return convertRecursive(value, valueSource, targetClass, targetType, targetClass, null);
   }
 
   /**
@@ -92,6 +99,9 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
    *        <code>targetClass</code> again here.
    * @param currentTargetClass is the current
    *        {@link ValueConverter#getTargetType() target-type} to try.
+   * @param previousConverter is the converter that has been tried last time
+   *        without success. It is used to avoid trying the same converter
+   *        again. Will initially be <code>null</code>.
    * @return the converted <code>value</code> or <code>null</code> if the
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given
@@ -99,26 +109,38 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
    */
   @SuppressWarnings("unchecked")
   protected Object convertRecursive(Object value, Object valueSource, Class<?> targetClass,
-      Type targetType, Class<?> currentTargetClass) {
+      Type targetType, Class<?> currentTargetClass, ValueConverter previousConverter) {
 
     Log logger = getLogger();
+    ValueConverter lastConverter = previousConverter;
     Class<?> currentClass = currentTargetClass;
     while (currentClass != null) {
       if (logger.isTraceEnabled()) {
-        logger.trace("searching converter for target-class " + currentClass);
+        logger.trace("searching converter for target-type '" + currentClass + "'");
       }
       ValueConverter converter = this.targetClass2converterMap.get(currentClass);
-      if ((converter != null) && (converter.getTargetType().isAssignableFrom(targetClass))) {
+      if ((converter != null) && (converter != lastConverter)
+          && (converter.getTargetType().isAssignableFrom(targetClass))) {
         if (logger.isDebugEnabled()) {
-          logger.debug("trying converter for target-class " + converter.getTargetType());
+          StringWriter sw = new StringWriter(50);
+          sw.append("trying converter for target-type '");
+          sw.append(converter.getTargetType().toString());
+          sw.append("'");
+          if (!converter.getTargetType().equals(currentClass)) {
+            sw.append(" for current-type '");
+            sw.append(currentClass.toString());
+            sw.append("'");
+          }
+          logger.debug(sw);
         }
         Object result = converter.convert(value, valueSource, targetClass, targetType);
         if (result != null) {
           return result;
         }
+        lastConverter = converter;
       }
       for (Class<?> superInterface : currentClass.getInterfaces()) {
-        convertRecursive(value, valueSource, targetClass, targetType, superInterface);
+        convertRecursive(value, valueSource, targetClass, targetType, superInterface, lastConverter);
       }
       currentClass = currentClass.getSuperclass();
     }
@@ -131,7 +153,8 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
    * 
    * @param <TARGET> is the generic {@link #getTargetType() target-type}.
    */
-  protected class ComposedTargetTypeConverter<TARGET> implements ValueConverter<Object, TARGET> {
+  protected class ComposedTargetTypeConverter<TARGET> extends
+      AbstractValueConverter<Object, TARGET> {
 
     /** @see #getTargetType() */
     private final Class<TARGET> targetType;
@@ -231,18 +254,19 @@ public class ComposedGenericValueConverter extends AbstractComposedValueConverte
       Class<?> currentClass = sourceClass;
       while (currentClass != null) {
         if (logger.isTraceEnabled()) {
-          logger.trace("searching converter for source-class " + currentClass);
+          logger.trace("searching converter for source-type '" + currentClass + "'");
         }
         ValueConverter<Object, TARGET> converter = (ValueConverter<Object, TARGET>) this.sourceClass2converterMap
             .get(currentClass);
         if (converter != null) {
           if (logger.isDebugEnabled()) {
-            logger.debug("trying converter for source-class " + currentClass);
+            logger.debug("trying converter for source-type '" + currentClass + "': "
+                + converter.getClass().getSimpleName());
           }
           TARGET result = converter.convert(value, valueSource, targetClass, genericTargetType);
           if (result != null) {
             if (logger.isDebugEnabled()) {
-              logger.debug("conversion successful using " + converter.getClass().getName());
+              logger.debug("conversion successful using '" + converter.getClass().getName() + "'");
             }
             return result;
           }

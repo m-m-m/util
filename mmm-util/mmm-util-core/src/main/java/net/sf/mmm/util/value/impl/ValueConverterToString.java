@@ -8,15 +8,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.value.api.ValueConverter;
+import net.sf.mmm.util.value.base.AbstractValueConverter;
 
 /**
- * This is an implementation of the {@link ValueConverter} interface that
- * converts an {@link Object} to a {@link String}.
+ * This is an implementation of the
+ * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link String}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueConverterToString implements ValueConverter<Object, String> {
+public class ValueConverterToString extends AbstractValueConverter<Object, String> {
 
   /**
    * The constructor.

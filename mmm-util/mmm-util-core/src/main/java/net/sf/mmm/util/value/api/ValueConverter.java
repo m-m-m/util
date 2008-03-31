@@ -56,6 +56,25 @@ public interface ValueConverter<SOURCE, TARGET> {
    * This method converts the given <code>pojo</code> to the
    * &lt;TARGET&gt;-type.
    * 
+   * @see #convert(Object, Object, Class, Type)
+   * 
+   * @param value is the value to convert.
+   * @param valueSource describes the source of the value. This may be the
+   *        filename where the value was read from, an XPath where the value was
+   *        located in an XML document, etc. It is used in exceptions thrown if
+   *        something goes wrong. This will help to find the problem easier.
+   * @param targetClass is the type to convert the <code>value</code> to.
+   * @return the converted <code>value</code> or <code>null</code> if the
+   *         conversion is NOT possible. The returned value has to be an
+   *         {@link Class#isInstance(Object) instance} of the given
+   *         <code>targetType</code>.
+   */
+  TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass);
+
+  /**
+   * This method converts the given <code>pojo</code> to the
+   * &lt;TARGET&gt;-type.
+   * 
    * @param value is the value to convert.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was
@@ -70,8 +89,9 @@ public interface ValueConverter<SOURCE, TARGET> {
    *        <code>targetType</code> could be
    *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if
    *        the <code>value</code> is a string like
-   *        <code>"2, 47, 4252525"</code>. The caller may supply the
-   *        <code>targetClass</code> again here.
+   *        <code>"2, 47, 4252525"</code>. If no generic {@link Type} is
+   *        available please use {@link #convert(Object, Object, Class)} in
+   *        advance.
    * @return the converted <code>value</code> or <code>null</code> if the
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given

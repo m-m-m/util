@@ -7,16 +7,17 @@ import java.lang.reflect.Type;
 
 import net.sf.mmm.util.math.MathUtil;
 import net.sf.mmm.util.math.NumberType;
-import net.sf.mmm.util.value.api.ValueConverter;
+import net.sf.mmm.util.value.base.AbstractValueConverter;
 
 /**
- * This is an implementation of the {@link ValueConverter} interface that
- * converts an {@link Object} to a {@link Number}. It supports objects given as
+ * This is an implementation of the
+ * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link Number}. It supports objects given as
  * {@link CharSequence} (e.g. {@link String}) or {@link Number}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueConverterToNumber implements ValueConverter<Object, Number> {
+public class ValueConverterToNumber extends AbstractValueConverter<Object, Number> {
 
   /**
    * The constructor.

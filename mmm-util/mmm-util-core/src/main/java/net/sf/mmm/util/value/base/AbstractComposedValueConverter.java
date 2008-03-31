@@ -39,4 +39,12 @@ public abstract class AbstractComposedValueConverter extends AbstractLoggable im
     return Object.class;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Object convert(Object value, Object valueSource, Class<? extends Object> targetClass) {
+
+    return convert(value, valueSource, targetClass, targetClass);
+  }
+
 }
