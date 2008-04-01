@@ -21,12 +21,5 @@
       <version>1.0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    <dependency>
-      <!-- this is only needed to test the manifest loader -->
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
