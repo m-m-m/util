@@ -19,12 +19,27 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
  */
 public class ValueConverterToNumber extends AbstractValueConverter<Object, Number> {
 
+  /** @see #getMathUtil() */
+  private final MathUtil mathUtil;
+
   /**
    * The constructor.
    */
   public ValueConverterToNumber() {
 
     super();
+    this.mathUtil = MathUtil.getInstance();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param mathUtil is the {@link MathUtil} to use.
+   */
+  public ValueConverterToNumber(MathUtil mathUtil) {
+
+    super();
+    this.mathUtil = mathUtil;
   }
 
   /**
@@ -34,7 +49,7 @@ public class ValueConverterToNumber extends AbstractValueConverter<Object, Numbe
    */
   protected MathUtil getMathUtil() {
 
-    return MathUtil.getInstance();
+    return this.mathUtil;
   }
 
   /**

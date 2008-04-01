@@ -12,7 +12,7 @@
       specific and are all designed to be useful for everybody. Unlike older projects
       such as the <a href="http://commons.apache.org/">apache commons</a> we are
       NOT limited by legacy support down to JVMs lower than 5.0.
-      Therefore we can make intensive use of the language and offer 
+      Therefore we can make intensive use of the advanced language features and offer 
       sophisicated APIs.
       <subsection name="Subprojects">
       Here is a list of the available utility-projects:

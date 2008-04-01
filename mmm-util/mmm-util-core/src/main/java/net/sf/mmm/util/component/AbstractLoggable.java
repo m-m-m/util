@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
@@ -15,10 +14,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractLoggable {
-
-  /** @see #getInitializationState() */
-  private final InitializationState initializationState;
+public abstract class AbstractLoggable extends AbstractComponent {
 
   /** @see #getLogger() */
   private Log logger;
@@ -29,7 +25,6 @@ public abstract class AbstractLoggable {
   public AbstractLoggable() {
 
     super();
-    this.initializationState = new InitializationState();
   }
 
   /**
@@ -62,50 +57,21 @@ public abstract class AbstractLoggable {
   @Resource
   public void setLogger(Log logger) throws AlreadyInitializedException {
 
-    this.initializationState.requireNotInitilized();
+    getInitializationState().requireNotInitilized();
     this.logger = logger;
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public final void initialize() {
-
-    if (this.initializationState.setInitialized()) {
-      if (this.logger == null) {
-        // new Jdk14Logger(getClass()));
-        // even more ugly...
-        this.logger = LogFactory.getLog(getClass());
-      }
-      doInitialize();
-    }
-  }
-
-  /**
-   * This method performs the actual {@link #initialize() initialization}. It
-   * is called when {@link #initialize()} is invoked for the first time.<br>
-   * <b>ATTENTION:</b><br>
-   * When you override this method you need to do a
-   * <code>super.{@link #doInitialize()}</code>.
-   */
+  @Override
   protected void doInitialize() {
 
-  }
-
-  /**
-   * This method gets the {@link InitializationState} of this component.
-   * 
-   * @see #initialize()
-   * @see InitializationState#requireInitilized()
-   * @see InitializationState#requireNotInitilized()
-   * 
-   * @return the initializationState
-   */
-  protected final InitializationState getInitializationState() {
-
-    return this.initializationState;
+    if (this.logger == null) {
+      // new Jdk14Logger(getClass()));
+      // even more ugly...
+      this.logger = LogFactory.getLog(getClass());
+    }
   }
 
 }

@@ -34,6 +34,7 @@ import net.sf.mmm.util.reflect.pojo.path.api.PojoPathNavigator;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathRecognizer;
 import net.sf.mmm.util.reflect.pojo.path.api.PojoPathSegmentIsNullException;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
+import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
  * This is the abstract base implementation of the {@link PojoPathNavigator}.
@@ -176,6 +177,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     }
     if (this.collectionUtil == null) {
       this.collectionUtil = CollectionUtil.getInstance();
+    }
+    if (this.valueConverter == null) {
+      DefaultComposedValueConverter converter = new DefaultComposedValueConverter();
+      converter.initialize();
+      this.valueConverter = converter;
     }
   }
 

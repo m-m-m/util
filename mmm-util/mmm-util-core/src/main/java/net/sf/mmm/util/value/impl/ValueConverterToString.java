@@ -19,12 +19,27 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
  */
 public class ValueConverterToString extends AbstractValueConverter<Object, String> {
 
+  /** @see #getIso8601Util() */
+  private final Iso8601Util iso8601Util;
+
   /**
    * The constructor.
    */
   public ValueConverterToString() {
 
     super();
+    this.iso8601Util = Iso8601Util.getInstance();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param iso8601Util is the {@link Iso8601Util} to use.
+   */
+  public ValueConverterToString(Iso8601Util iso8601Util) {
+
+    super();
+    this.iso8601Util = iso8601Util;
   }
 
   /**
@@ -34,7 +49,7 @@ public class ValueConverterToString extends AbstractValueConverter<Object, Strin
    */
   protected Iso8601Util getIso8601Util() {
 
-    return Iso8601Util.getInstance();
+    return this.iso8601Util;
   }
 
   /**

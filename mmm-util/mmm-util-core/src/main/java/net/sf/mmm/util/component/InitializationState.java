@@ -3,24 +3,36 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class represents the state of an initialization.<br>
  * It therefore offers the method {@link #requireNotInitilized()} that can be
  * called before initialization e.g. from
  * {@link javax.annotation.Resource injection-setters} so nothing can be
- * re-injected after {@link #setInitialized() initialization}. Additionally
+ * re-injected after {@link #setInitializing() initialization}. Additionally
  * there is {@link #requireInitilized()} that can be called after initialization
  * e.g. from functional methods of the component to ensure that the component
- * has been {@link #setInitialized() initialized}.
+ * has been {@link #setInitializing() initialized}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class InitializationState {
 
-  /** @see #isInitialized() */
-  private AtomicBoolean initialized;
+  /** The initial {@link #state}. */
+  private static final int STATE_UNINITIALIZED = 0;
+
+  /** The {@link #state} during {@link #setInitializing() initialization}. */
+  private static final int STATE_INITIALIZING = 1;
+
+  /**
+   * The {@link #state} if {@link #setInitialized() initialization} has
+   * completed.
+   */
+  private static final int STATE_INITIALIZED = 2;
+
+  /** This field holds the atomic state of this object. */
+  private AtomicInteger state;
 
   /**
    * The constructor.
@@ -28,33 +40,53 @@ public class InitializationState {
   public InitializationState() {
 
     super();
-    this.initialized = new AtomicBoolean();
+    this.state = new AtomicInteger(STATE_UNINITIALIZED);
   }
 
   /**
-   * This method atomically sets the state to
-   * {@link #isInitialized() initialized}.
+   * This method sets the state to <em>initializing</em>. This should be done
+   * to start the initialization in a thread-safe and atomic way. After the
+   * initialization has completed, the method {@link #setInitialized()} should
+   * be invoked.
    * 
    * @return <code>true</code> if the state was NOT
    *         {@link #isInitialized() initialized} and is now
    *         {@link #isInitialized() initialized}, <code>false</code> if the
    *         state is already {@link #isInitialized() initialized}.
    */
-  public boolean setInitialized() {
+  public boolean setInitializing() {
 
-    return this.initialized.compareAndSet(false, true);
+    return this.state.compareAndSet(STATE_UNINITIALIZED, STATE_INITIALIZING);
+  }
+
+  /**
+   * This method sets the state to {@link #isInitialized() initialized}.<br>
+   * <b>ATTENTION:</b><br>
+   * You need to call {@link #setInitializing()} before you invoke this method!
+   * 
+   */
+  public void setInitialized() {
+
+    boolean okay = this.state.compareAndSet(STATE_INITIALIZING, STATE_INITIALIZED);
+    if (!okay) {
+      if (isInitialized()) {
+        throw new AlreadyInitializedException();
+      } else {
+        throw new IllegalStateException("You need to call setInitializing() before!");
+      }
+    }
   }
 
   /**
    * This method gets the status of the {@link #setInitialized() initialization}.
    * 
    * @return <code>true</code> if this component has been
-   *         {@link #setInitialized() initialized}, <code>false</code>
+   *         {@link #setInitializing() initialized}, <code>false</code>
    *         otherwise.
    */
   public boolean isInitialized() {
 
-    return this.initialized.get();
+    return (this.state.get() == STATE_INITIALIZED);
   }
 
   /**
@@ -65,7 +97,7 @@ public class InitializationState {
    */
   public void requireInitilized() throws NotInitializedException {
 
-    if (!this.initialized.get()) {
+    if (!isInitialized()) {
       throw new NotInitializedException();
     }
   }
@@ -79,7 +111,7 @@ public class InitializationState {
    */
   public void requireNotInitilized() throws AlreadyInitializedException {
 
-    if (this.initialized.get()) {
+    if (isInitialized()) {
       throw new AlreadyInitializedException();
     }
   }

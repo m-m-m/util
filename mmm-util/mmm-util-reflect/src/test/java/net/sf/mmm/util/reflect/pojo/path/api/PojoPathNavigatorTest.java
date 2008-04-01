@@ -12,6 +12,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -358,6 +360,23 @@ public abstract class PojoPathNavigatorTest {
     }
   }
 
+  @Test
+  public void testConverter() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    Object value;
+    // test using pojo
+    MyPojo myPojo = new MyPojo();
+    String foo = "42";
+    // navigator.set(myPojo, "foo", PojoPathMode.RETURN_IF_NULL, context, foo);
+    // value = navigator.get(myPojo, "foo", PojoPathMode.RETURN_IF_NULL,
+    // context);
+    // assertEquals(Integer.valueOf(foo), value);
+
+  }
+
   public static class MyPojo {
 
     private Integer foo;
@@ -367,6 +386,12 @@ public abstract class PojoPathNavigatorTest {
     private boolean flag;
 
     private MyPojo parent;
+
+    private Date date;
+
+    private Calendar calendar;
+
+    private String string;
 
     public Integer getFoo() {
 
@@ -406,6 +431,36 @@ public abstract class PojoPathNavigatorTest {
     public void setParent(MyPojo parent) {
 
       this.parent = parent;
+    }
+
+    public Date getDate() {
+
+      return this.date;
+    }
+
+    public void setDate(Date date) {
+
+      this.date = date;
+    }
+
+    public Calendar getCalendar() {
+
+      return this.calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+
+      this.calendar = calendar;
+    }
+
+    public String getString() {
+
+      return this.string;
+    }
+
+    public void setString(String string) {
+
+      this.string = string;
     }
 
   }

@@ -10,8 +10,8 @@ import net.sf.mmm.util.reflect.VisibilityModifier;
 
 /**
  * This is the abstract base class for the default implementation of
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.base.PojoMethodIntrospector} or
- * {@link net.sf.mmm.util.reflect.pojo.descriptor.base.PojoFieldIntrospector}.
+ * {@link net.sf.mmm.util.reflect.pojo.descriptor.base.PojoMethodIntrospector}
+ * or {@link net.sf.mmm.util.reflect.pojo.descriptor.base.PojoFieldIntrospector}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -107,10 +107,11 @@ public abstract class AbstractPojoIntrospector {
   @PostConstruct
   public void initialize() {
 
-    if (this.initializationState.setInitialized()) {
+    if (this.initializationState.setInitializing()) {
       if (this.visibility == null) {
         this.visibility = VisibilityModifier.PUBLIC;
       }
+      this.initializationState.setInitialized();
     }
   }
 
