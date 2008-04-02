@@ -18,10 +18,9 @@
       Here is a list of the available utility-projects:
       <ul>
         <li><a href="mmm-util-core/index.html">mmm-util-core</a> contains valuable utilities for 
-            general purpose (NLS, ISO-8601, generic value conversion, scanners, pattern compilers, etc.).</li>
-        <li><a href="mmm-util-reflect/index.html">mmm-util-reflect</a> contains utilities that help 
-            to deal with reflection, especially for java 5 features like generics and annotations.
-            It also offeres advanced introspection and object-web navigation.</li>
+            general purpose (NLS, ISO-8601, generic value conversion, scanners, pattern compilers, reflection, etc.).</li>
+        <li><a href="mmm-util-pojo/index.html">mmm-util-pojo</a> contains utilities that help 
+            to deal with POJOs. It offeres advanced introspection and object-web navigation.</li>
         <li><a href="mmm-util-misc/index.html">mmm-util-misc</a> contains various utilities for 
             general purpose (dealing with strings, etc.).</li>
         <li><a href="mmm-util-resource/index.html">mmm-util-resource</a> gives access to resources 

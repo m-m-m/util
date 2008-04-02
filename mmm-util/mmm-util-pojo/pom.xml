@@ -8,11 +8,11 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-util-reflect</artifactId>
+  <artifactId>mmm-util-pojo</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>util-reflect</name>
-  <description>This project provides utilities for reflection.</description>
+  <name>util-pojo</name>
+  <description>This project provides utilities to deal with POJOs.</description>
   
   <dependencies>
     <dependency>

@@ -13,19 +13,22 @@
       Everything is designed for general purpose and can also be very helpful for any
       other project.
     	</p>
-    	<p>
+      <subsection name="Features">
     	Here are some of the features provided by this module:
     	<ul>
         <li>Advanced <a href="apidocs/net/sf/mmm/util/nls/package-summary.html">Native Language Support (NLS)</a>.</li>
         <li><a href="apidocs/net/sf/mmm/util/pattern/package-summary.html">PatternCompiler</a> for glob- and ant-like path-patterns producing <code>java.util.regex.Pattern</code>.</li>
-        <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/package-summary.html">values</a>.</li>
+        <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/api/package-summary.html">values</a>.</li>
         <li><a href="apidocs/net/sf/mmm/util/scanner/package-summary.html">Scanner</a> for parsing strings easily.</li>
         <li><a href="apidocs/net/sf/mmm/util/date/package-summary.html">Date-Utilities</a> for parsing and formatting date and/or time according to ISO-8601.</li>
         <li><a href="apidocs/net/sf/mmm/util/io/package-summary.html">Stream-Utilities</a> for dealing with streams and readers/writers easily.</li>
         <li><a href="apidocs/net/sf/mmm/util/process/package-summary.html">Process-Utilities</a> for dealing with external processes and creating pipes.</li>
+        <li><a href="apidocs/net/sf/mmm/util/reflect/package-summary.html">Utilities</a> for dealing with reflection, generics and annotations.</li>
+        <li>Generic code for the typical pattern to send and receive <a href="apidocs/net/sf/mmm/util/event/package-summary.html">events</a>.</li>
+        <li>Support for <a href="apidocs/net/sf/mmm/util/reflect/manifest/package-summary.html">manifests</a>.</li>
         <li>and many more...</li>
     	</ul>
-    	</p>
+    	</subsection>
     </section>
   </body>
 </document>

@@ -16,9 +16,9 @@
 
   <modules>
     <module>mmm-util-core</module>
+    <module>mmm-util-pojo</module>
     <module>mmm-util-http</module>
     <module>mmm-util-misc</module>
-    <module>mmm-util-reflect</module>
     <module>mmm-util-resource</module>
     <module>mmm-util-xml</module>
     <!-- <module>mmm-util-streamdetect</module> -->

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>MMM Util::Reflect</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM Util::Reflect">
+      <p>
+      This module contains utitlies to deal with POJOs (Plain Old Java Objecgts) easily.
+      </p>
+      <subsection name="Features">
+      Here are some of the features provided by this module:
+      <ul>
+        <li>Advanced <a href="apidocs/net/sf/mmm/util/reflect/pojo/descriptor/api/package-summary.html">POJO-Introspection</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/reflect/pojo/path/api/package-summary.html">POJO-Navigation</a> for accessing entire object-webs easily.</li>
+      </ul>
+      </subsection>
+    </section>
+  </body>
+</document>
