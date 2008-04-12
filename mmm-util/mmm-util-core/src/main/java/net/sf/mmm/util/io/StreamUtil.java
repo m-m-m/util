@@ -90,13 +90,14 @@ public class StreamUtil {
     if (instance == null) {
       synchronized (StreamUtil.class) {
         if (instance == null) {
-          instance = new StreamUtil();
-          instance.setExecutor(SimpleExecutor.INSTANCE);
-          // INSTANCE.setLogger(new Jdk14Logger(StreamUtil.class.getName()));
+          StreamUtil util = new StreamUtil();
+          util.setExecutor(SimpleExecutor.INSTANCE);
+          // util.setLogger(new Jdk14Logger(StreamUtil.class.getName()));
           // even more ugly...
-          instance.setLogger(LogFactory.getLog(StreamUtil.class));
-          instance.setByteArrayPool(NoByteArrayPool.INSTANCE);
-          instance.setCharArrayPool(NoCharArrayPool.INSTANCE);
+          util.setLogger(LogFactory.getLog(StreamUtil.class));
+          util.setByteArrayPool(NoByteArrayPool.INSTANCE);
+          util.setCharArrayPool(NoCharArrayPool.INSTANCE);
+          instance = util;
         }
       }
     }
