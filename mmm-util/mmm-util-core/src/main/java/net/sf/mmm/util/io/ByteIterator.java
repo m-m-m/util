@@ -34,4 +34,18 @@ public interface ByteIterator {
    */
   byte getNext() throws NoSuchElementException;
 
+  /**
+   * This method skips the number of bytes given by <code>byteCount</code>.
+   * 
+   * @see java.io.InputStream#skip(long)
+   * 
+   * @param byteCount is the expected number of bytes to skip.
+   * @return the number of bytes that have actually been skipped. This will
+   *         typically be equal to <code>byteCount</code>. However the value
+   *         may be less if the end of this iterator has been reached before the
+   *         according number of bytes have been skipped. The value will always
+   *         be greater or equal to <code>0</code>.
+   */
+  long skip(long byteCount);
+
 }

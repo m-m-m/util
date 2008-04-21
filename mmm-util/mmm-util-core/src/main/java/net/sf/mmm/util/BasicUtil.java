@@ -7,8 +7,12 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * This class is a collection of utility functions for general purpose
- * operations.
+ * This class is a collection of utility functions for very general operations
+ * especially for dealing with arrays.
+ * 
+ * @see Arrays
+ * @see Array
+ * @see net.sf.mmm.util.reflect.ReflectionUtil
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -170,6 +174,106 @@ public class BasicUtil {
       }
     }
     return false;
+  }
+
+  /**
+   * This method returns the index of the first element in the given
+   * <code>array</code> that equals (see <code>checkEqual</code>) to the
+   * given <code>value</code>.
+   * 
+   * @param value is the value to check. It may be <code>null</code>.
+   * @param array is the array to check.
+   * @param checkEqual - if <code>true</code> the <code>value</code> only
+   *        needs to be {@link #isEqual(Object, Object) equal} to an element, if
+   *        <code>false</code> it needs to be the same (<code>==</code>).
+   * @return the according index or <code>-1</code> if <code>value</code> is
+   *         NOT contained in <code>array</code>.
+   */
+  public int findInArray(Object value, Object[] array, boolean checkEqual) {
+
+    int length = array.length;
+    for (int i = 0; i < length; i++) {
+      Object current = array[i];
+      if ((value == current) || (checkEqual && value.equals(current))) {
+        return i;
+      }
+    }
+    return -1;
+
+  }
+
+  /**
+   * This method returns the index of the first element in the given
+   * <code>array</code> that equals (see <code>checkEqual</code>) to the
+   * given <code>value</code>.<br>
+   * Unlike {@link #findInArray(Object, Object[], boolean)} this method also
+   * works for {@link Class#isPrimitive() primitive} arrays (such as
+   * <code>int[]</code>). In such case you need to supply the according
+   * {@link net.sf.mmm.util.reflect.ReflectionUtil#getNonPrimitiveType(Class) object-type}
+   * for <code>value</code>.
+   * 
+   * @param value is the value to check. It may be <code>null</code>.
+   * @param array is the array to check.
+   * @param checkEqual - if <code>true</code> the <code>value</code> only
+   *        needs to be {@link #isEqual(Object, Object) equal} to an element, if
+   *        <code>false</code> it needs to be the same (<code>==</code>).
+   * @return the according index or <code>-1</code> if <code>value</code> is
+   *         NOT contained in <code>array</code>.
+   */
+  public int findInArray(Object value, Object array, boolean checkEqual) {
+
+    if (array instanceof Object[]) {
+      return findInArray(value, (Object[]) array, checkEqual);
+    }
+    int length = Array.getLength(array);
+    for (int i = 0; i < length; i++) {
+      Object current = Array.get(array, i);
+      if ((value == current) || (checkEqual && value.equals(current))) {
+        return i;
+      }
+    }
+    return -1;
+
+  }
+
+  /**
+   * This method determines if the given <code>array</code> contains an
+   * element that equals (see <code>checkEqual</code>) to the given
+   * <code>value</code>.
+   * 
+   * @see #findInArray(Object, Object[], boolean)
+   * 
+   * @param value is the value to check. It may be <code>null</code>.
+   * @param array is the array to check.
+   * @param checkEqual - if <code>true</code> the <code>value</code> only
+   *        needs to be {@link #isEqual(Object, Object) equal} to an element, if
+   *        <code>false</code> it needs to be the same (<code>==</code>).
+   * @return <code>true</code> if the <code>array</code> contains
+   *         <code>value</code>.
+   */
+  public boolean isInArray(Object value, Object[] array, boolean checkEqual) {
+
+    return (findInArray(value, array, checkEqual) >= 0);
+  }
+
+  /**
+   * This method determines if the given <code>array</code> contains an
+   * element that equals (see <code>checkEqual</code>) to the given
+   * <code>value</code>.
+   * 
+   * @see #findInArray(Object, Object, boolean)
+   * 
+   * @param value is the value to check. It may be <code>null</code>.
+   * @param array is the array to check.
+   * @param checkEqual - if <code>true</code> the <code>value</code> only
+   *        needs to be {@link #isEqual(Object, Object) equal} to an element, if
+   *        <code>false</code> it needs to be the same (<code>==</code>).
+   * @return <code>true</code> if the <code>array</code> contains
+   *         <code>value</code>.
+   */
+  public boolean isInArray(Object value, Object array, boolean checkEqual) {
+
+    return (findInArray(value, array, checkEqual) >= 0);
   }
 
 }

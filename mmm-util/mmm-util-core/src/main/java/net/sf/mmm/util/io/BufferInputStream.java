@@ -6,6 +6,8 @@ package net.sf.mmm.util.io;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+
 /**
  * This class represents a {@link InputStream} that works like a
  * {@link java.io.BufferedInputStream} but exposes its internal state to be used
@@ -19,7 +21,7 @@ import java.io.InputStream;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-class BufferInputStream extends InputStream {
+class BufferInputStream extends InputStream implements ByteProcessable {
 
   /** The default capacity used by {@link #BufferInputStream(InputStream)}. */
   private static final int DEFAULT_CAPACITY = 2048;
@@ -30,17 +32,20 @@ class BufferInputStream extends InputStream {
    */
   private InputStream inStream;
 
-  /** @see #getCurrentBuffer() */
-  private ByteArrayBuffer currentBuffer;
-
-  /** @see #getLookaheadBuffer() */
-  private ByteArrayBuffer lookaheadBuffer;
+  /** the internal buffer. */
+  private final ByteArrayBufferBuffer buffer;
 
   /**
    * <code>true</code> if the end of the stream has been reached,
    * <code>false</code> otherwise.
    */
   private boolean eos;
+
+  /**
+   * The processor used to copy the bytes from the {@link #buffer} to the
+   * readers buffer.
+   */
+  private CopyProcessor copyProcessor;
 
   /**
    * The constructor.
@@ -61,45 +66,27 @@ class BufferInputStream extends InputStream {
    */
   public BufferInputStream(InputStream inStream, int capacity) {
 
+    this(inStream, capacity, 2);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param inStream is the {@link InputStream} to adapt.
+   * @param capacity is the capacity for each of the two {@link ByteArrayBuffer}s.
+   *        Please note that therefore the double amount of memory is allocated.
+   * @param bufferCount is the number of buffers to use.
+   */
+  private BufferInputStream(InputStream inStream, int capacity, int bufferCount) {
+
     super();
     this.inStream = inStream;
-    this.currentBuffer = new ByteArrayBuffer(capacity);
-    this.lookaheadBuffer = new ByteArrayBuffer(capacity);
-  }
-
-  /**
-   * This is the current buffer where to {@link #read() read} from. It is
-   * initially empty until the first call of {@link #fill()} is made (what is
-   * also called from the <code>read</code>-methods). Whenever it gets
-   * <em>consumed</em> ({@link ByteArrayBuffer#hasNext() has} no next byte),
-   * the {@link #fill()}-method will swap it with the
-   * {@link #getLookaheadBuffer() lookahead-buffer} and refill it. It remains
-   * {@link ByteArrayBuffer#hasNext() consumed} after {@link #fill()}, if the
-   * end of the stream has been reached.
-   * 
-   * @return the current buffer.
-   */
-  public ByteArrayBuffer getCurrentBuffer() {
-
-    return this.currentBuffer;
-  }
-
-  /**
-   * This is the lookahead buffer. It allows to do lookahead reads even if the
-   * {@link #getCurrentBuffer() current-buffer} is almost consumed. This will
-   * guarantee you to do a lookahead of the buffers capacity given at
-   * {@link #BufferInputStream(InputStream, int) construction}.<br>
-   * This buffer is initially empty until the first call of {@link #fill()} is
-   * made (what is also called from the <code>read</code>-methods).<br>
-   * <b>ATTENTION:</b><br>
-   * This buffer should never be consumed externally or the result will be
-   * unpredictable so be very careful NOT to modify this buffer.
-   * 
-   * @return the lookahead buffer.
-   */
-  public ByteArrayBuffer getLookaheadBuffer() {
-
-    return this.lookaheadBuffer;
+    ByteArrayBuffer[] buffers = new ByteArrayBuffer[bufferCount];
+    for (int i = 0; i < bufferCount; i++) {
+      buffers[i] = new ByteArrayBuffer(capacity);
+    }
+    this.buffer = new ByteArrayBufferBuffer(buffers);
+    this.copyProcessor = new CopyProcessor();
   }
 
   /**
@@ -121,64 +108,48 @@ class BufferInputStream extends InputStream {
   public void close() throws IOException {
 
     InputStream stream = this.inStream;
-    this.inStream = null;
-    stream.close();
+    if (stream != null) {
+      this.inStream = null;
+      stream.close();
+    }
   }
 
   /**
-   * This method (re-)fills the {@link #getCurrentBuffer() current} and
-   * {@link #getLookaheadBuffer() lookahead} buffer as far as data is available
-   * from the underlying {@link InputStream} without {@link #read() consuming}
-   * data from the stream.<br>
+   * This method (re-)fills the internal buffer as far as data is available from
+   * the underlying {@link InputStream} without {@link #read() consuming} data
+   * from the stream. If the internal buffer is already filled, the call of this
+   * method will have no effect.<br>
    * 
-   * @return <code>true</code> if the
-   *         {@link #getCurrentBuffer() current buffer} is (or has been) filled,
-   *         <code>false</code> if the end of the stream was encountered and
-   *         all data is consumed.
+   * @return <code>true</code> if the end of the stream was encountered while
+   *         (re)filling the internal buffer, <code>false</code> otherwise.
    * @throws IOException if the operation fails.
    */
-  public boolean fill() throws IOException {
+  protected boolean fill() throws IOException {
 
-    if (!this.currentBuffer.hasNext()) {
-      if (this.lookaheadBuffer.hasNext()) {
-        // this is the first read at all or we reached the end of the stream...
-        // fill current buffer...
-        if (this.eos) {
-          return false;
-        }
-        int bytes = this.inStream.read(this.currentBuffer.getBytes());
-        if (bytes == 0) {
-          // strange API but however give it another try...
-          bytes = this.inStream.read(this.currentBuffer.getBytes());
-        }
-        if (bytes > 0) {
-          this.currentBuffer.setCurrentIndex(0);
-          this.currentBuffer.setMaximumIndex(bytes - 1);
-        } else {
-          this.eos = true;
-          return false;
-        }
-      } else {
-        // swap the two buffers...
-        ByteArrayBuffer swap = this.currentBuffer;
-        this.currentBuffer = this.lookaheadBuffer;
-        this.lookaheadBuffer = swap;
-      }
-      if (!this.eos) {
-        int bytes = this.inStream.read(this.lookaheadBuffer.getBytes());
-        if (bytes == 0) {
-          // strange API but however give it another try...
-          bytes = this.inStream.read(this.lookaheadBuffer.getBytes());
-        }
-        if (bytes > 0) {
-          this.lookaheadBuffer.setCurrentIndex(0);
-          this.lookaheadBuffer.setMaximumIndex(bytes - 1);
-        } else if (bytes == -1) {
-          this.eos = true;
-        }
-      }
+    if (!this.eos) {
+      this.eos = this.buffer.fill(this.inStream);
     }
-    return true;
+    return this.eos;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long skip(long skipCount) throws IOException {
+
+    if (skipCount < 0) {
+      throw new NlsIllegalArgumentException(Long.valueOf(skipCount));
+    }
+    if (skipCount == 0) {
+      return 0;
+    }
+    long skipped = this.buffer.skip(skipCount);
+    if ((skipped < skipCount) && (!this.eos)) {
+      skipped = skipped + this.inStream.skip(skipCount - skipped);
+    }
+    fill();
+    return skipped;
   }
 
   /**
@@ -188,53 +159,134 @@ class BufferInputStream extends InputStream {
   public int read() throws IOException {
 
     ensureOpen();
-    boolean end = fill();
-    if (end) {
-      return -1;
+    if (!this.buffer.hasNext()) {
+      fill();
+      if (this.eos) {
+        return -1;
+      }
     }
-    return this.currentBuffer.getNext();
+    int result = this.buffer.getNext();
+    fill();
+    return result;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int read(byte[] buffer, int offset, int len) throws IOException {
+  public int read(final byte[] bytes, final int offset, final int length) throws IOException {
 
     ensureOpen();
-    int length = len;
     int offPlusLen = offset + length;
-    if ((offset < 0) || (length < 0) || (offPlusLen < 0) || (buffer.length < offPlusLen)) {
+    if ((offset < 0) || (length < 0) || (offPlusLen < 0) || (bytes.length < offPlusLen)) {
       throw new IndexOutOfBoundsException();
     } else if (length == 0) {
       return 0;
     }
-    boolean end = fill();
-    if (end) {
-      return -1;
-    }
-    // currentBuffer NOT empty, lookahead should be filled as far as data left
-    int index = this.currentBuffer.getCurrentIndex();
-    int count = this.currentBuffer.getMaximumIndex() - index + 1;
-    if (count > length) {
-      count = length;
-    }
-    System.arraycopy(this.currentBuffer.getBytes(), index, buffer, offset, count);
-    this.currentBuffer.setCurrentIndex(index + count);
-    length = length - count;
-    if (length > 0) {
-      end = fill();
-      if (!end) {
-        index = this.currentBuffer.getCurrentIndex();
-        int count2 = this.currentBuffer.getMaximumIndex() - index + 1;
-        if (count2 > length) {
-          count2 = length;
+    this.copyProcessor.targetBuffer = bytes;
+    this.copyProcessor.targetOffset = offset;
+    int processed = (int) this.buffer.process(this.copyProcessor, length);
+    int len = length - processed;
+    if (len > 0) {
+      int bytesRead = this.inStream.read(bytes, offset + processed, len);
+      if (bytesRead == -1) {
+        if (processed == 0) {
+          return -1;
         }
-        System.arraycopy(this.currentBuffer.getBytes(), index, buffer, offset + count, count2);
-        this.currentBuffer.setCurrentIndex(index + count2);
-        count = count + count2;
+      } else {
+        processed = processed + bytesRead;
       }
     }
-    return count;
+    fill();
+    return processed;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int available() throws IOException {
+
+    return super.available();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public long process(ByteProcessor processor, long length) {
+
+    try {
+      long len = length;
+      while (len > 0) {
+        fill();
+        long processed = this.buffer.process(processor, length);
+        if (processed <= 0) {
+          assert (processed == 0);
+          break;
+        }
+        len = len - processed;
+      }
+      return length - len;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e);
+    }
+  }
+
+  /**
+   * This method creates a new {@link ProcessableByteArrayBuffer buffer} for
+   * lookahead operations on the data from the underlying stream. That buffer is
+   * a view on the internal buffer of this stream with its own state for the
+   * read position. Consuming data from that buffer will NOT influence the state
+   * of this buffer, while consuming data from this stream will refill the
+   * returned buffer.
+   * 
+   * @return the lookahead buffer.
+   */
+  public ProcessableByteArrayBuffer createLookaheadBuffer() {
+
+    return new LookaheadByteArrayBufferBuffer(this.buffer);
+  }
+
+  /**
+   * This inner class is the {@link ByteProcessor} used to copy bytes from the
+   * buffer to the reader.
+   */
+  private static class CopyProcessor implements ByteProcessor {
+
+    /** The buffer to copy to. */
+    private byte[] targetBuffer;
+
+    /** The offset in {@link #targetBuffer}. */
+    private int targetOffset;
+
+    /**
+     * The constructor.
+     */
+    public CopyProcessor() {
+
+      super();
+    }
+
+    /**
+     * The constructor.
+     * 
+     * @param targetBuffer the buffer to copy to.
+     * @param targetOffset the offset in <code>targetBuffer</code>.
+     */
+    public CopyProcessor(byte[] targetBuffer, int targetOffset) {
+
+      super();
+      this.targetBuffer = targetBuffer;
+      this.targetOffset = targetOffset;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void process(byte[] buffer, int offset, int length) {
+
+      System.arraycopy(buffer, offset, this.targetBuffer, this.targetOffset, length);
+      this.targetOffset = this.targetOffset + length;
+    }
   }
 }

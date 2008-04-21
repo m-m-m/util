@@ -109,10 +109,16 @@ class ByteArrayBuffer implements ByteIterator {
    * <b>ATTENTION:</b><br>
    * Be very careful and only use this method if you know what you are doing!
    * 
-   * @param currentIndex is the currentIndex to set
+   * @param currentIndex is the {@link #getCurrentIndex() currentIndex} to set.
+   *        It has to be in the range from <code>0</code> to
+   *        <code>{@link #getMaximumIndex() maximumIndex} + 1</code>. A value
+   *        of <code>{@link #getMaximumIndex() maximumIndex} + 1</code>
+   *        indicates that the buffer is consumed.
    */
   public void setCurrentIndex(int currentIndex) {
 
+    assert (currentIndex >= 0);
+    assert (currentIndex <= (this.maximumIndex + 1));
     this.currentIndex = currentIndex;
   }
 
@@ -154,7 +160,33 @@ class ByteArrayBuffer implements ByteIterator {
    */
   public boolean hasNext() {
 
-    return (this.currentIndex > this.maximumIndex);
+    return (this.currentIndex <= this.maximumIndex);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public long skip(long byteCount) {
+
+    int bytesLeft = this.maximumIndex - this.currentIndex + 1;
+    int skip;
+    if (bytesLeft > byteCount) {
+      skip = (int) byteCount;
+    } else {
+      skip = bytesLeft;
+    }
+    this.currentIndex = this.currentIndex + skip;
+    return skip;
+  }
+
+  /**
+   * This method gets the number of bytes available in this buffer.
+   * 
+   * @return the bytes left in this buffer.
+   */
+  public int getBytesAvailable() {
+
+    return this.maximumIndex - this.currentIndex + 1;
   }
 
 }

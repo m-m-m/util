@@ -149,19 +149,37 @@ public class RankMap<E> {
   }
 
   /**
-   * This method gets the element that has currently the best (highest)
+   * This method gets the element that has currently the best (highest) positive
    * {@link #getRank(Object) rank}. If there are multiple best elements, it is
    * unspecified which one is returned.
    * 
    * @see #getBests()
    * 
-   * @return the element with the best rank or <code>null</code> if there is
-   *         no element with a positive rank.
+   * @return the element with the best positive rank or <code>null</code> if
+   *         there is no element with a positive rank.
    */
   public E getBest() {
 
+    return getBest(1);
+  }
+
+  /**
+   * This method gets the element that has currently the best (highest)
+   * {@link #getRank(Object) rank} greater or equal to the given
+   * <code>threshold</code>. If there are multiple best elements, it is
+   * unspecified which one is returned.
+   * 
+   * @see #getBests()
+   * 
+   * @param threshold is the minimum rank accepted for the best element.
+   * @return the element with the best rank greater or equal to the given
+   *         <code>threshold</code> or <code>null</code> if there is no such
+   *         element.
+   */
+  public E getBest(int threshold) {
+
     E best = null;
-    int bestRank = RANK_UNACCEPTABLE + 1;
+    int bestRank = threshold - 1;
     for (E element : this.map.keySet()) {
       Ranking ranking = this.map.get(element);
       if (ranking != null) {

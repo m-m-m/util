@@ -48,4 +48,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.math.NumberConversionException */
   public static final String ERR_NUMBER_CONVERSION = "Can not convert number \"{0}\" to \"{1}\"!";
 
+  /** @see net.sf.mmm.util.io.RuntimeIoException */
+  public static final String ERR_IO = "An unexpected input/output error has ocurred!";
+
 }
