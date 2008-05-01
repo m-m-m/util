@@ -23,6 +23,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfigurationImpl;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyAdd;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGetIndexed;
@@ -31,14 +33,13 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyRemove;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetIndexed;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetMapped;
-import net.sf.mmm.util.reflect.CollectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.text.EnglishSingularizer;
 import net.sf.mmm.util.text.Singularizer;
 
 /**
- * This is an implementation of the {@link PojoDescriptorEnhancer} that scans
- * all
+ * This is an implementation of the {@link PojoDescriptorEnhancer} interface
+ * that scans all
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPropertyDescriptors() PropertyDescriptor}s
  * for accessing {@link java.util.Collection}s, {@link Map}s or arrays. For
  * such {@link PojoPropertyDescriptor}s additional
@@ -106,7 +107,7 @@ import net.sf.mmm.util.text.Singularizer;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
-    PojoDescriptorEnhancer, PojoDescriptorConfiguration {
+    PojoDescriptorEnhancer {
 
   /** The singularizer */
   private final Singularizer singularizer;
@@ -117,11 +118,8 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
   /** @see #DefaultPojoDescriptorEnhancer(Singularizer, boolean, boolean) */
   private final boolean addVirtualAccessors;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
-
-  /** @see #getCollectionUtil() */
-  private CollectionUtil collectionUtil;
+  /** @see #getConfiguration() */
+  private PojoDescriptorConfiguration configuration;
 
   /**
    * The constructor.
@@ -179,39 +177,24 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
   }
 
   /**
-   * {@inheritDoc}
+   * This method gets the configuration required for this descriptor.
+   * 
+   * @return the configuration.
    */
-  public CollectionUtil getCollectionUtil() {
+  protected PojoDescriptorConfiguration getConfiguration() {
 
-    return this.collectionUtil;
+    return this.configuration;
   }
 
   /**
-   * @param collectionUtil is the collectionUtil to set
+   * This method sets the {@link #getConfiguration() configuration}.
+   * 
+   * @param configuration is the configuration to set.
    */
   @Resource
-  public void setCollectionUtil(CollectionUtil collectionUtil) {
+  public void setConfiguration(PojoDescriptorConfiguration configuration) {
 
-    getInitializationState().requireNotInitilized();
-    this.collectionUtil = collectionUtil;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ReflectionUtil getReflectionUtil() {
-
-    return this.reflectionUtil;
-  }
-
-  /**
-   * @param reflectionUtil is the reflectionUtil to set
-   */
-  @Resource
-  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.reflectionUtil = reflectionUtil;
+    this.configuration = configuration;
   }
 
   /**
@@ -221,11 +204,10 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtil.getInstance();
-    }
-    if (this.collectionUtil == null) {
-      this.collectionUtil = CollectionUtil.getInstance();
+    if (this.configuration == null) {
+      PojoDescriptorConfigurationImpl config = new PojoDescriptorConfigurationImpl();
+      config.initialize();
+      this.configuration = config;
     }
   }
 
@@ -251,13 +233,14 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
    */
   public void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor) {
 
+    ReflectionUtil reflectionUtil = getConfiguration().getReflectionUtil();
     for (AbstractPojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
       PojoPropertyAccessorNonArg getAccessor = propertyDescriptor
           .getAccessor(PojoPropertyAccessorNonArgMode.GET);
       if (getAccessor != null) {
         Type type = getAccessor.getReturnType();
         Class<?> typeClass = getAccessor.getReturnClass();
-        Type componentType = getReflectionUtil().getComponentType(type, true);
+        Type componentType = reflectionUtil.getComponentType(type, true);
         boolean isMap = Map.class.isAssignableFrom(typeClass);
         if ((componentType != null) || isMap) {
           // getter type is container (map, array or collection)...
@@ -284,17 +267,17 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
           if (this.addVirtualAccessors) {
             // add size accessor
             if (propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET_SIZE) == null) {
-              addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetSize(this,
-                  getAccessor));
+              addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetSize(
+                  this.configuration, getAccessor));
             }
             if (isMap) {
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED) == null) {
-                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetMapped(this,
-                    getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetMapped(
+                    this.configuration, getAccessor));
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED) == null) {
-                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetMapped(this,
-                    getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetMapped(
+                    this.configuration, getAccessor));
               }
             } else {
               // array or collection
@@ -303,24 +286,24 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.ADD) == null) {
                 // we can NOT add 'add'-accessor for arrays without setter
                 if (!typeClass.isArray() || (setAccessor != null)) {
-                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyAdd(this,
-                      getAccessor, setAccessor));
+                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyAdd(
+                      this.configuration, getAccessor, setAccessor));
                 }
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.REMOVE) == null) {
                 // we can NOT add 'remove'-accessor for arrays without setter
                 if (!typeClass.isArray() || (setAccessor != null)) {
-                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyRemove(this,
-                      getAccessor, setAccessor));
+                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyRemove(
+                      this.configuration, getAccessor, setAccessor));
                 }
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED) == null) {
                 addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetIndexed(
-                    this, getAccessor));
+                    this.configuration, getAccessor));
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED) == null) {
                 addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetIndexed(
-                    this, getAccessor, setAccessor));
+                    this.configuration, getAccessor, setAccessor));
               }
             }
           }

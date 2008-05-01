@@ -25,7 +25,7 @@ public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor 
    * 
    * @param pojoInstance is the instance of the POJO where to access the
    *        property. Has to be an instance of the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoType() type}
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass() type}
    *        from where this accessor was created for.
    * @param index is the position in the indexed property (e.g. where to get or
    *        remove an item).

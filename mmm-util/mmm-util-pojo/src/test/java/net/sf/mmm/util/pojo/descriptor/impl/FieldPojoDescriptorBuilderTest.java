@@ -30,7 +30,7 @@ public class FieldPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuil
     builder.setFieldIntrospector(new PojoFieldIntrospectorImpl(VisibilityModifier.PRIVATE, false));
     builder.initialize();
     PojoDescriptor<MyPojo> pojoDescriptor = builder.getDescriptor(MyPojo.class);
-    assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
+    assertEquals(MyPojo.class, pojoDescriptor.getPojoClass());
     MyPojo pojoInstance = new MyPojo();
     checkPojo(pojoDescriptor, pojoInstance);
     // test property "port"

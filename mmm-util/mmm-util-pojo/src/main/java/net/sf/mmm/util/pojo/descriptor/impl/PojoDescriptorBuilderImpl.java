@@ -7,6 +7,7 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
@@ -41,8 +42,7 @@ import net.sf.mmm.util.reflect.VisibilityModifier;
 
 /**
  * This is the generic implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
- * interface.
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -112,6 +112,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     }
     if (this.descriptorEnhancer == null) {
       DefaultPojoDescriptorEnhancer enhancer = new DefaultPojoDescriptorEnhancer();
+      enhancer.setConfiguration(getConfiguration());
       enhancer.initialize();
       this.descriptorEnhancer = enhancer;
     }
@@ -121,8 +122,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the introspector used to find potential
    * {@link Method methods} for {@link PojoPropertyAccessor accessing}
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the introspector to use.
    */
@@ -147,8 +147,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the introspector used to find potential
    * {@link Field fields} for {@link PojoPropertyAccessor accessing}
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the introspector to use.
    */
@@ -173,8 +172,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the accessor-builders used to create the
    * {@link PojoPropertyAccessor accessors} for
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the accessorBuilders.
    */
@@ -234,14 +232,14 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * {@inheritDoc}
    */
   @Override
-  protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoType) {
+  protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoClass, Type pojoType) {
 
     getInitializationState().requireInitilized();
-    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType);
+    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoClass, pojoType);
     // process methods...
     List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();
     if (this.methodIntrospector != null) {
-      Iterator<Method> methodIterator = this.methodIntrospector.findMethods(pojoType);
+      Iterator<Method> methodIterator = this.methodIntrospector.findMethods(pojoClass);
       while (methodIterator.hasNext()) {
         Method method = methodIterator.next();
         boolean methodUsed = false;
@@ -267,7 +265,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     }
     // process fields...
     if (this.fieldIntrospector != null) {
-      Iterator<Field> fieldIterator = this.fieldIntrospector.findFields(pojoType);
+      Iterator<Field> fieldIterator = this.fieldIntrospector.findFields(pojoClass);
       while (fieldIterator.hasNext()) {
         Field field = fieldIterator.next();
         boolean fieldUsed = false;

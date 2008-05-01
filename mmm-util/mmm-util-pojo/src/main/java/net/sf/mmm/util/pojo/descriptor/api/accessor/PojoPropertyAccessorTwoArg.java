@@ -25,7 +25,7 @@ public interface PojoPropertyAccessorTwoArg extends PojoPropertyAccessor {
    * 
    * @param pojoInstance is the instance of the POJO where to access the
    *        property. Has to be an instance of the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoType() type}
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass() type}
    *        from where this accessor was created for.
    * @param argument1 is the first argument.
    * @param argument2 is the second argument.

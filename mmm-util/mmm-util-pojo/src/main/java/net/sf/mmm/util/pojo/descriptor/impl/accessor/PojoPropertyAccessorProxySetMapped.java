@@ -9,8 +9,8 @@ import java.util.Map;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorTwoArg}

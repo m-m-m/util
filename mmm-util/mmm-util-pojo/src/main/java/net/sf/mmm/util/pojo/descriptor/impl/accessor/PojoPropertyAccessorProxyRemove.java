@@ -8,8 +8,8 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorConfiguration;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArg}

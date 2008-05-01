@@ -29,7 +29,7 @@ public class PrivateMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescri
         .setMethodIntrospector(new PojoMethodIntrospectorImpl(VisibilityModifier.PRIVATE, false));
     builder.initialize();
     PojoDescriptor<MyPojo> pojoDescriptor = builder.getDescriptor(MyPojo.class);
-    assertEquals(MyPojo.class, pojoDescriptor.getPojoType());
+    assertEquals(MyPojo.class, pojoDescriptor.getPojoClass());
     MyPojo pojoInstance = new MyPojo();
     // test property "class"
     assertEquals(MyPojo.class, pojoDescriptor.getProperty(pojoInstance, "class"));

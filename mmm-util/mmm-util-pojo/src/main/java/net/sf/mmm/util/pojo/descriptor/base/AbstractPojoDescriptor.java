@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -19,29 +20,42 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
  * This is the abstract base implementation of the {@link PojoDescriptor}
  * interface.
  * 
- * @param <POJO> is the templated type of the {@link #getPojoType() POJO}.
+ * @param <POJO> is the templated type of the {@link #getPojoClass() POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJO> {
 
+  /** @see #getPojoClass() */
+  private final Class<POJO> pojoClass;
+
   /** @see #getPojoType() */
-  private final Class<POJO> pojoType;
+  private final Type pojoType;
 
   /**
    * The constructor.
    * 
-   * @param pojoClass is the {@link #getPojoType() pojo-class}.
+   * @param pojoClass is the {@link #getPojoClass() pojo-class}.
+   * @param pojoType is the {@link #getPojoType() pojo-type}.
    */
-  public AbstractPojoDescriptor(Class<POJO> pojoClass) {
+  public AbstractPojoDescriptor(Class<POJO> pojoClass, Type pojoType) {
 
-    this.pojoType = pojoClass;
+    this.pojoClass = pojoClass;
+    this.pojoType = pojoType;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Class<POJO> getPojoType() {
+  public Class<POJO> getPojoClass() {
+
+    return this.pojoClass;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Type getPojoType() {
 
     return this.pojoType;
   }
@@ -167,7 +181,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   @Override
   public String toString() {
 
-    return "Descriptor for POJO " + this.pojoType;
+    return "Descriptor for POJO " + this.pojoClass;
   }
 
 }

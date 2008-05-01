@@ -38,40 +38,44 @@ public class BasicPojoPath implements PojoPath {
   public BasicPojoPath(String pojoPath) {
 
     super();
-    if ((pojoPath == null) || (pojoPath.length() == 0)) {
+    if (pojoPath == null) {
       throw new IllegalPojoPathException(pojoPath);
     }
     this.pojoPath = pojoPath;
-    int lastDot = pojoPath.lastIndexOf(PojoPath.SEPARATOR);
-    if (lastDot < 0) {
-      this.parentPath = null;
-      this.segment = pojoPath;
-    } else if ((lastDot == 0) || (lastDot == (pojoPath.length() - 1))) {
-      // starts or ends with dot
-      throw new IllegalPojoPathException(pojoPath);
-    } else {
-      this.parentPath = pojoPath.substring(0, lastDot);
-      this.segment = pojoPath.substring(lastDot + 1);
-    }
-    char firstChar = this.segment.charAt(0);
-    if (firstChar == PojoPathFunction.FUNCTION_NAME_PREFIX) {
-      this.function = this.segment.substring(1);
-      if (this.function.length() == 0) {
+    String pParentPath = null;
+    String pSegment = pojoPath;
+    String pFunction = null;
+    Integer pIndex = null;
+    if (pojoPath.length() > 0) {
+      int lastDot = pojoPath.lastIndexOf(PojoPath.SEPARATOR);
+      if ((lastDot == 0) || (lastDot == (pojoPath.length() - 1))) {
+        // starts or ends with dot
         throw new IllegalPojoPathException(pojoPath);
       }
-      this.index = null;
-    } else {
-      this.function = null;
-      if ((firstChar >= '0') && (firstChar <= '9')) {
-        try {
-          this.index = Integer.valueOf(this.segment);
-        } catch (NumberFormatException e) {
-          throw new IllegalPojoPathException(e, pojoPath);
+      if (lastDot > 0) {
+        pParentPath = pojoPath.substring(0, lastDot);
+        pSegment = pojoPath.substring(lastDot + 1);
+      }
+      char firstChar = pSegment.charAt(0);
+      if (firstChar == PojoPathFunction.FUNCTION_NAME_PREFIX) {
+        pFunction = pSegment.substring(1);
+        if (pFunction.length() == 0) {
+          throw new IllegalPojoPathException(pojoPath);
         }
       } else {
-        this.index = null;
+        if ((firstChar >= '0') && (firstChar <= '9')) {
+          try {
+            pIndex = Integer.valueOf(pSegment);
+          } catch (NumberFormatException e) {
+            throw new IllegalPojoPathException(e, pojoPath);
+          }
+        }
       }
     }
+    this.segment = pSegment;
+    this.parentPath = pParentPath;
+    this.function = pFunction;
+    this.index = pIndex;
   }
 
   /**

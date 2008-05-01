@@ -20,6 +20,10 @@ public class NlsBundlePojo extends AbstractResourceBundle {
       + "accessible for \"{2}\" in \"{1}\"!";
 
   /** @see net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException */
+  public static final String ERR_PATH_UNSAFE = "The pojo-path \"{0}\" "
+      + "is unsafe for type \"{1}\"!";
+
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException */
   public static final String ERR_PATH_SEGMENT_IS_NULL = "The pojo-path \"{0}\" "
       + "for object \"{1}\" evaluates to null!";
 

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySe
  * This is the abstract base implementation of the
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor} interface.
  * 
- * @param <POJO> is the templated type of the {@link #getPojoType() POJO}.
+ * @param <POJO> is the templated type of the {@link #getPojoClass() POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -46,11 +47,12 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   /**
    * The constructor.
    * 
-   * @param pojoClass is the {@link #getPojoType() pojo-class}.
+   * @param pojoClass is the {@link #getPojoClass() pojo-class}.
+   * @param pojoType is the {@link #getPojoType() pojo-type}.
    */
-  public PojoDescriptorImpl(Class<POJO> pojoClass) {
+  public PojoDescriptorImpl(Class<POJO> pojoClass, Type pojoType) {
 
-    super(pojoClass);
+    super(pojoClass, pojoType);
     // we do NOT want MapFactory here: no need for cache or to be thread-safe
     this.propertyMap = new HashMap<String, PojoPropertyDescriptorImpl>();
     this.properties = Collections.unmodifiableCollection(this.propertyMap.values());
@@ -66,7 +68,7 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
 
   /**
    * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all
-   * properties of the according {@link #getPojoType() pojo}.
+   * properties of the according {@link #getPojoClass() pojo}.
    * 
    * @return a collection with all
    *         {@link PojoPropertyDescriptorImpl property descriptor}s
@@ -84,54 +86,51 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode, boolean required) {
 
-    PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(property);
+    PojoProperty pojoProperty = new PojoProperty(property);
+    PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(pojoProperty.getName());
     if (descriptor == null) {
       if (required) {
-        throw new PojoPropertyNotFoundException(getPojoType(), property);
+        throw new PojoPropertyNotFoundException(getPojoClass(), pojoProperty.getName());
       } else {
         return null;
       }
     }
     ACCESSOR accessor = descriptor.getAccessor(mode);
-    if (accessor == null) {
+    if (pojoProperty.getIndex() != null) {
       if (mode == PojoPropertyAccessorNonArgMode.GET) {
-        PojoProperty pojoProperty = new PojoProperty(property);
-        if (pojoProperty.getIndex() != null) {
-          PojoPropertyAccessorIndexedNonArg indexedGetAccessor = descriptor
-              .getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED);
-          if (indexedGetAccessor != null) {
-            accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor,
-                pojoProperty.getIndex().intValue());
-          }
-        } else if (pojoProperty.getKey() != null) {
-          PojoPropertyAccessorOneArg mappedGetAccessor = descriptor
-              .getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED);
-          if (mappedGetAccessor != null) {
-            accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByKey(mappedGetAccessor,
-                pojoProperty.getKey());
-          }
+        PojoPropertyAccessorIndexedNonArg indexedGetAccessor = descriptor
+            .getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED);
+        if (indexedGetAccessor != null) {
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor,
+              pojoProperty.getIndex().intValue());
         }
       } else if (mode == PojoPropertyAccessorOneArgMode.SET) {
-        PojoProperty pojoProperty = new PojoProperty(property);
-        if (pojoProperty.getIndex() != null) {
-          PojoPropertyAccessorIndexedOneArg indexedSetAccessor = descriptor
-              .getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED);
-          if (indexedSetAccessor != null) {
-            accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor,
-                pojoProperty.getIndex().intValue());
-          }
-        } else if (pojoProperty.getKey() != null) {
-          PojoPropertyAccessorTwoArg mappedSetAccessor = descriptor
-              .getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED);
-          if (mappedSetAccessor != null) {
-            accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByKey(mappedSetAccessor,
-                pojoProperty.getKey());
-          }
+        PojoPropertyAccessorIndexedOneArg indexedSetAccessor = descriptor
+            .getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED);
+        if (indexedSetAccessor != null) {
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor,
+              pojoProperty.getIndex().intValue());
+        }
+      }
+    } else if (pojoProperty.getKey() != null) {
+      if (mode == PojoPropertyAccessorNonArgMode.GET) {
+        PojoPropertyAccessorOneArg mappedGetAccessor = descriptor
+            .getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED);
+        if (mappedGetAccessor != null) {
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByKey(mappedGetAccessor,
+              pojoProperty.getKey());
+        }
+      } else if (mode == PojoPropertyAccessorOneArgMode.SET) {
+        PojoPropertyAccessorTwoArg mappedSetAccessor = descriptor
+            .getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED);
+        if (mappedSetAccessor != null) {
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByKey(mappedSetAccessor,
+              pojoProperty.getKey());
         }
       }
     }
     if ((accessor == null) && required) {
-      throw new PojoPropertyNotFoundException(getPojoType(), property, mode);
+      throw new PojoPropertyNotFoundException(getPojoClass(), property, mode);
     }
     return accessor;
   }

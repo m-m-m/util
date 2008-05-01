@@ -4,7 +4,7 @@
 package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 
 /**
  * This is the abstract base implementation of a

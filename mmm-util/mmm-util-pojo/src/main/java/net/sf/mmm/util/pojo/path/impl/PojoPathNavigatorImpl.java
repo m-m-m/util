@@ -83,20 +83,30 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
   @Override
   @SuppressWarnings("unchecked")
   protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context,
-      PojoPathState state, Object parentPojo) {
+      PojoPathState state) {
 
-    PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
-    // descriptor.getProperty(parentPojo, currentPath.getSegment());
-    PojoPropertyAccessorNonArg getter;
-    getter = descriptor.getAccessor(currentPath.getSegment(), PojoPropertyAccessorNonArgMode.GET,
-        true);
-    Type type = getter.getPropertyType();
-    currentPath.setPojoType(type);
-    Object result = getter.invoke(parentPojo);
-    if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {
-      Class<?> clazz = getReflectionUtil().toClass(type);
-      result = context.getPojoFactory().newInstance(clazz);
-      setInPojo(currentPath, context, state, parentPojo, result);
+    CachingPojoPath parentPath = currentPath.getParent();
+    Class<?> parentPojoClass = parentPath.getPojoClass();
+    // TODO: improve Pojo-descriptor using Type ?
+    PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojoClass);
+    PojoPropertyAccessorNonArg getter = descriptor.getAccessor(currentPath.getSegment(),
+        PojoPropertyAccessorNonArgMode.GET, !state.isGetType());
+    if (getter == null) {
+      return null;
+    }
+    Type pojoType = getter.getPropertyType();
+    currentPath.setPojoType(pojoType);
+    Class pojoClass = getReflectionUtil().toClass(pojoType);
+    currentPath.setPojoClass(pojoClass);
+    Object result = null;
+    if (!state.isGetType()) {
+      Object parentPojo = parentPath.getPojo();
+      result = getter.invoke(parentPojo);
+      if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {
+        Class<?> clazz = getReflectionUtil().toClass(pojoType);
+        result = context.getPojoFactory().newInstance(clazz);
+        setInPojo(currentPath, context, state, parentPojo, result);
+      }
     }
     return result;
   }

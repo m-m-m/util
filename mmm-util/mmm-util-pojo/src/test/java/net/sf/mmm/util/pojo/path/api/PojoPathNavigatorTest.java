@@ -11,6 +11,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,19 +23,10 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
-import net.sf.mmm.util.pojo.path.api.PojoPathContext;
-import net.sf.mmm.util.pojo.path.api.PojoPathCreationException;
-import net.sf.mmm.util.pojo.path.api.PojoPathException;
-import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
-import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUndefinedException;
-import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationException;
-import net.sf.mmm.util.pojo.path.api.PojoPathMode;
-import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
-import net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
+import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This is the abstract test-case for {@link PojoPathNavigator} implementations.
@@ -387,6 +379,34 @@ public abstract class PojoPathNavigatorTest {
 
   }
 
+  @Test
+  public void testGetType() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    Type result;
+
+    result = navigator.getType(Object.class, "class", true, context);
+    assertEquals(Class.class, ReflectionUtil.getInstance().toClass(result));
+
+    result = navigator.getType(Object.class, "class.name", true, context);
+    assertEquals(String.class, ReflectionUtil.getInstance().toClass(result));
+
+    result = navigator.getType(CollectionPojo.class, "map.key.0.1", true, context);
+    assertEquals(String.class, ReflectionUtil.getInstance().toClass(result));
+
+    result = navigator.getType(CollectionPojo.class, "list.0.foo", false, context);
+    assertNull(result);
+
+    try {
+      result = navigator.getType(CollectionPojo.class, "list.0.foo", true, context);
+      fail("Exception expected");
+    } catch (PojoPathUnsafeException e) {
+      // okay
+    }
+  }
+
   public static class MyPojo {
 
     private Integer foo;
@@ -480,6 +500,22 @@ public abstract class PojoPathNavigatorTest {
     /**
      * {@inheritDoc}
      */
+    public Class<MyPojo> getInputClass() {
+
+      return MyPojo.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Class<Integer> getOutputClass() {
+
+      return Integer.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public Integer get(MyPojo actual, String functionName, PojoPathContext context) {
 
       if (actual != null) {
@@ -513,6 +549,8 @@ public abstract class PojoPathNavigatorTest {
 
     private Set<String> set;
 
+    private List<Object> list;
+
     public Map<String, List<String[]>> getMap() {
 
       return this.map;
@@ -542,6 +580,17 @@ public abstract class PojoPathNavigatorTest {
 
       this.set = set;
     }
+
+    public List<Object> getList() {
+
+      return this.list;
+    }
+
+    public void setList(List<Object> list) {
+
+      this.list = list;
+    }
+
   }
 
 }

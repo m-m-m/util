@@ -17,7 +17,10 @@ import java.util.Map;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 
 /**
@@ -53,6 +56,15 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     assertEquals(Boolean.valueOf(flag), pojoDescriptor.getProperty(pojoInstance, "flag"));
     // test property "items"/"item"
     checkProperty(pojoDescriptor, "items", List.class, List.class);
+
+    // generic access
+    String indexedPropertyName = "items[0]";
+    PojoPropertyAccessorNonArg getter = pojoDescriptor.getAccessor(indexedPropertyName,
+        PojoPropertyAccessorNonArgMode.GET, true);
+    assertEquals(String.class, getter.getPropertyClass());
+    PojoPropertyAccessorOneArg setter = pojoDescriptor.getAccessor(indexedPropertyName,
+        PojoPropertyAccessorOneArgMode.SET, true);
+    assertEquals(String.class, setter.getPropertyClass());
 
     // check non-existent property
     try {

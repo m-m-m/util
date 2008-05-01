@@ -51,4 +51,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.RuntimeIoException */
   public static final String ERR_IO = "An unexpected input/output error has ocurred!";
 
+  /** @see net.sf.mmm.util.nls.base.NlsNullPointerException */
+  public static final String ERR_ARGUMENT_NULL = "The argument \"{0}\" is null!";
+
 }
