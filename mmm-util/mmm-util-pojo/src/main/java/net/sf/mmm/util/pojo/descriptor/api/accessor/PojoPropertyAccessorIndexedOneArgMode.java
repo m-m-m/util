@@ -21,16 +21,18 @@ public class PojoPropertyAccessorIndexedOneArgMode extends
    * {@link PojoPropertyAccessorIndexedOneArg setter of an indexed property}.
    */
   public static final PojoPropertyAccessorIndexedOneArgMode SET_INDEXED = new PojoPropertyAccessorIndexedOneArgMode(
-      "set-indexed");
+      "set-indexed", false);
 
   /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
+   * @param reading is a flag that determines if this mode is for
+   *        {@link #isReading() reading}.
    */
-  protected PojoPropertyAccessorIndexedOneArgMode(String name) {
+  protected PojoPropertyAccessorIndexedOneArgMode(String name, boolean reading) {
 
-    super(name);
+    super(name, reading);
   }
 
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -169,7 +170,7 @@ public class ReflectionUtil {
     } else if (type instanceof ParameterizedType) {
       ParameterizedType pt = (ParameterizedType) type;
       if (requireCollectionOrArray) {
-        Class<?> rawClass = toClass(pt.getRawType());
+        Class<?> rawClass = getClass(pt.getRawType(), false);
         if (!Collection.class.isAssignableFrom(rawClass)) {
           return null;
         }
@@ -183,60 +184,309 @@ public class ReflectionUtil {
   }
 
   /**
+   * This method gets the most specific {@link Class} available by the type-safe
+   * analyzation of the given generic <code>type</code>. Unlike
+   * {@link #getClass(Type, boolean)} this method resolves {@link TypeVariable}s
+   * with the proper type they have been bound with.<br>
+   * 
+   * Examples: <br>
+   * <table border="1">
+   * <tr>
+   * <th><code>type</code></th>
+   * <th><code>owningType</code></th>
+   * <th><code>{@link #getClass(Type, boolean, Type) getClass}(type, owningType)</code></th>
+   * <th>comment</th>
+   * </tr>
+   * <tr>
+   * <td>E</td>
+   * <td>{@link List}&lt;Foo&gt;</td>
+   * <td>Foo</td>
+   * <td>E is a {@link TypeVariable} representing the generic return-type of
+   * the method {@link List#get(int)}</td>
+   * </tr>
+   * </table>
+   * 
+   * @param type is the type to convert.
+   * @param forAssignment - <code>true</code> if the requested {@link Class}
+   *        should be suitable as parameter or for assignment,
+   *        <code>false</code> if the requested {@link Class} should be
+   *        suitable as return-type of for retrieval.
+   * @param owningType is the type where the given <code>type</code> was
+   *        retrieved from.
+   * @return the closest class representing the given <code>type</code>.
+   */
+  public Class<?> getClass(Type type, boolean forAssignment, Type owningType) {
+
+    if (type instanceof Class) {
+      return (Class<?>) type;
+    } else if (type instanceof ParameterizedType) {
+      ParameterizedType pt = (ParameterizedType) type;
+      return getClass(pt.getRawType(), forAssignment, owningType);
+    } else if (type instanceof WildcardType) {
+      WildcardType wt = (WildcardType) type;
+      if (forAssignment) {
+        Type[] lower = wt.getLowerBounds();
+        if (lower.length == 1) {
+          return getClass(lower[0], forAssignment, owningType);
+        }
+      }
+      Type[] upper = wt.getUpperBounds();
+      if (upper.length == 1) {
+        return getClass(upper[0], forAssignment, owningType);
+      }
+    } else if (type instanceof GenericArrayType) {
+      GenericArrayType gat = (GenericArrayType) type;
+      Class<?> componentType = getClass(gat.getGenericComponentType(), forAssignment, owningType);
+      // this is sort of stupid but there seems no other way...
+      return Array.newInstance(componentType, 0).getClass();
+    } else if (type instanceof TypeVariable) {
+      TypeVariable<?> variable = (TypeVariable<?>) type;
+      if (owningType != null) {
+        GenericDeclaration genericDeclaration = variable.getGenericDeclaration();
+        if (genericDeclaration instanceof Class) {
+          Class<?> declaringClass = (Class<?>) genericDeclaration;
+          TypeVariable<?>[] variables = genericDeclaration.getTypeParameters();
+          for (int variableIndex = 0; variableIndex < variables.length; variableIndex++) {
+            TypeVariable<?> currentVariable = variables[variableIndex];
+            if (variable == currentVariable) {
+              Class<?> owningClass = getClass(owningType, false);
+              Type declaringType = null;
+              if (owningClass == declaringClass) {
+                declaringType = owningType;
+              } else {
+                declaringType = getGenericDeclaration(declaringClass, owningClass);
+                assert (declaringType != null);
+              }
+              if ((declaringType != null) && (declaringType instanceof ParameterizedType)) {
+                ParameterizedType parameterizedSuperType = (ParameterizedType) declaringType;
+                Type[] typeArguments = parameterizedSuperType.getActualTypeArguments();
+                Type variableType = typeArguments[variableIndex];
+                return getClass(variableType, forAssignment, owningType);
+              }
+            }
+          }
+          // } else if (genericDeclaration instanceof Method) {
+        }
+      }
+      Type[] bounds = variable.getBounds();
+      if (bounds.length == 1) {
+        return getClass(bounds[0], forAssignment, owningType);
+      }
+    }
+    return Object.class;
+  }
+
+  /**
+   * This method gets the raw-type of the given generic <code>type</code>.
+   * 
+   * @see #getClass(Type, boolean)
+   * 
+   * @param type is the type to convert.
+   * @return the closest class representing the given <code>type</code>.
+   */
+  public Class<?> getClass(Type type) {
+
+    return getClass(type, false);
+  }
+
+  /**
    * This method gets the raw-type of the given generic <code>type</code>.<br>
    * Examples: <br>
    * <table border="1">
    * <tr>
    * <th><code>type</code></th>
-   * <th><code>{@link #toClass(Type) getSimpleType}(type)</code></th>
+   * <th><code>{@link #getClass(Type, boolean) getRawClass}(type, false)</code></th>
+   * <th><code>{@link #getClass(Type, boolean) getRawClass}(type, true)</code></th>
    * </tr>
    * <tr>
+   * <td><code>String</code></td>
    * <td><code>String</code></td>
    * <td><code>String</code></td>
    * </tr>
    * <tr>
    * <td><code>List&lt;String&gt;</code></td>
    * <td><code>List</code></td>
+   * <td><code>List</code></td>
    * </tr>
    * <tr>
    * <td><code>&lt;T extends MyClass&gt; T[]</code></td>
    * <td><code>MyClass[]</code></td>
+   * <td><code>MyClass[]</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>? super MyClass</code></td>
+   * <td><code>Object</code></td>
+   * <td><code>MyClass</code></td>
    * </tr>
    * </table>
    * 
    * @param type is the type to convert.
+   * @param forAssignment - <code>true</code> if the requested {@link Class}
+   *        should be suitable as parameter or for assignment,
+   *        <code>false</code> if the requested {@link Class} should be
+   *        suitable as return-type of for retrieval.
    * @return the closest class representing the given <code>type</code>.
    */
-  public Class<?> toClass(Type type) {
+  public Class<?> getClass(Type type, boolean forAssignment) {
 
-    if (type instanceof Class) {
-      return (Class<?>) type;
-    } else if (type instanceof ParameterizedType) {
-      ParameterizedType pt = (ParameterizedType) type;
-      return toClass(pt.getRawType());
-    } else if (type instanceof WildcardType) {
-      WildcardType wt = (WildcardType) type;
-      Type[] lower = wt.getLowerBounds();
-      if (lower.length == 1) {
-        return toClass(lower[0]);
-      }
-      Type[] upper = wt.getUpperBounds();
-      if (upper.length == 1) {
-        return toClass(upper[0]);
-      }
-    } else if (type instanceof GenericArrayType) {
-      GenericArrayType gat = (GenericArrayType) type;
-      Class<?> componentType = toClass(gat.getGenericComponentType());
-      // this is sort of stupid but there seems no other way...
-      return Array.newInstance(componentType, 0).getClass();
-    } else if (type instanceof TypeVariable) {
-      TypeVariable<?> tv = (TypeVariable<?>) type;
-      Type[] bounds = tv.getBounds();
-      if (bounds.length == 1) {
-        return toClass(bounds[0]);
-      }
+    return getClass(type, forAssignment, null);
+  }
+
+  /**
+   * This method walks up the {@link Class}-hierarchy from
+   * <code>descendant</code> up to <code>ancestor</code> and returns the
+   * sub-class or sub-interface of <code>ancestor</code> on that
+   * hierarchy-path.<br>
+   * Please note that if <code>ancestor</code> is an
+   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
+   * such case it will be unspecified which of the possible paths is used.
+   * 
+   * @param ancestor is the super-class or super-interface of
+   *        <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of
+   *        <code>ancestor</code>.
+   * @return the sub-class or sub-interface on the hierarchy-path from
+   *         <code>descendant</code> up to <code>ancestor</code>.
+   */
+  protected Class<?> getSubClass(Class<?> ancestor, Class<?> descendant) {
+
+    if (ancestor == descendant) {
+      return null;
     }
-    return null;
+    if (!ancestor.isAssignableFrom(descendant)) {
+      return null;
+    }
+    Class<?> child = descendant;
+    if (ancestor.isInterface()) {
+      while (true) {
+        for (Class<?> childInterface : child.getInterfaces()) {
+          if (childInterface == ancestor) {
+            return child;
+          } else if (ancestor.isAssignableFrom(childInterface)) {
+            child = childInterface;
+            break;
+          }
+        }
+      }
+    } else {
+      Class<?> parent = child.getSuperclass();
+      while (parent != ancestor) {
+        child = parent;
+        parent = child.getSuperclass();
+      }
+      return child;
+    }
+  }
+
+  /**
+   * This method walks up the {@link Class}-hierarchy from
+   * <code>descendant</code> up to <code>ancestor</code> and returns the
+   * sub-class or sub-interface of <code>ancestor</code> on that
+   * hierarchy-path.<br>
+   * Please note that if <code>ancestor</code> is an
+   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
+   * such case it will be unspecified which of the possible paths is used.
+   * 
+   * @param ancestor is the super-class or super-interface of
+   *        <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of
+   *        <code>ancestor</code>.
+   * @return the sub-class or sub-interface on the hierarchy-path from
+   *         <code>descendant</code> up to <code>ancestor</code>.
+   */
+  protected Type getGenericDeclaration(Class<?> ancestor, Class<?> descendant) {
+
+    if (ancestor == descendant) {
+      return null;
+    }
+    if (!ancestor.isAssignableFrom(descendant)) {
+      return null;
+    }
+    Class<?> child = descendant;
+    if (ancestor.isInterface()) {
+      while (true) {
+        Class<?>[] interfaces = child.getInterfaces();
+        for (int i = 0; i < interfaces.length; i++) {
+          Class<?> childInterface = interfaces[i];
+          if (childInterface == ancestor) {
+            return child.getGenericInterfaces()[i];
+          } else if (ancestor.isAssignableFrom(childInterface)) {
+            child = childInterface;
+            break;
+          }
+        }
+      }
+    } else {
+      Class<?> parent = child.getSuperclass();
+      while (parent != ancestor) {
+        child = parent;
+        parent = child.getSuperclass();
+      }
+      return child.getGenericSuperclass();
+    }
+  }
+
+  /**
+   * This method collects the {@link Class} objects in the hierarchy from
+   * <code>descendant</code> up to <code>ancestor</code> excluding these two
+   * classes themselves.<br>
+   * Please note that if <code>ancestor</code> is an
+   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
+   * such case it will be unspecified which of the possible paths is used.
+   * 
+   * @param ancestor is the super-class or super-interface of
+   *        <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of
+   *        <code>ancestor</code>.
+   * @param hierarchyList is the {@link List} where to add the {@link Class}es.
+   * @return <code>true</code> if <code>ancestor</code> is
+   *         {@link Class#isAssignableFrom(Class) assignable} from
+   *         <code>descendant</code>, <code>false</code> otherwise.
+   */
+  protected boolean collectClassHierarchy(Class<?> ancestor, Class<?> descendant,
+      List<Class<?>> hierarchyList) {
+
+    if (ancestor == descendant) {
+      return true;
+    }
+    if (!ancestor.isAssignableFrom(descendant)) {
+      return false;
+    }
+    if (ancestor.isInterface()) {
+      Class<?> child = descendant;
+      while (true) {
+        for (Class<?> childInterface : child.getInterfaces()) {
+          if (childInterface == ancestor) {
+            return true;
+          } else if (ancestor.isAssignableFrom(childInterface)) {
+            hierarchyList.add(childInterface);
+            child = childInterface;
+            break;
+          }
+        }
+      }
+    } else {
+      Class<?> child = descendant.getSuperclass();
+      while (child != ancestor) {
+        hierarchyList.add(child);
+        child = child.getSuperclass();
+      }
+      return true;
+    }
+  }
+
+  /**
+   * This method creates the {@link Class} reflecting an
+   * {@link Class#isArray() array} of the given
+   * <code>{@link Class#getComponentType() componentType}</code>.
+   * 
+   * @param componentType is the {@link Class#getComponentType() component type}.
+   * @return the according {@link Class#isArray() array}-class.
+   */
+  public Class<?> getArrayClass(Class<?> componentType) {
+
+    // this is sort of stupid but there seems no other way...
+    return Array.newInstance(componentType, 0).getClass();
   }
 
   /**
@@ -323,9 +573,9 @@ public class ReflectionUtil {
         }
         Type bound = toType(parser, resolver, null);
         if (lowerBound) {
-          result = new LowerBoundWildcardType(bound);
-        } else {
           result = new UpperBoundWildcardType(bound);
+        } else {
+          result = new LowerBoundWildcardType(bound);
         }
       } else {
         result = UnboundedWildcardType.INSTANCE;

@@ -29,6 +29,8 @@ public class MyPojo extends AbstractPojo {
 
   private Map<String, String> values;
 
+  private GenericPojo<Long> genericPojo;
+
   public MyPojo() {
 
     super();
@@ -139,6 +141,16 @@ public class MyPojo extends AbstractPojo {
   public String getName() {
 
     return super.getName().toString();
+  }
+
+  public GenericPojo<Long> getGenericPojo() {
+
+    return this.genericPojo;
+  }
+
+  public void setGenericPojo(GenericPojo<Long> genericPojo) {
+
+    this.genericPojo = genericPojo;
   }
 
 }

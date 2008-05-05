@@ -6,8 +6,10 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorField;
 import net.sf.mmm.util.reflect.AccessFailedException;
 
@@ -24,11 +26,14 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
   /**
    * The constructor.
    * 
+   * @param descriptor is the descriptor this accessor is intended for.
+   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
    * @param field is the {@link #getField() field} to access.
    */
-  public PojoPropertyAccessorSetField(Field field) {
+  public PojoPropertyAccessorSetField(PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration, Field field) {
 
-    super(field);
+    super(PojoPropertyAccessorOneArgMode.SET, descriptor, configuration, field);
   }
 
   /**
@@ -51,7 +56,7 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
    */
   public Type[] getArgumentTypes() {
 
-    return new Type[] { getField().getGenericType() };
+    return new Type[] { getPropertyType() };
   }
 
   /**

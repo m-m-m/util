@@ -48,7 +48,7 @@ public class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
     if (this.propertyType == null) {
       this.propertyClass = null;
     } else {
-      this.propertyClass = reflectionUtil.toClass(this.propertyType);
+      this.propertyClass = reflectionUtil.getClass(this.propertyType, false);
     }
   }
 

@@ -21,16 +21,18 @@ public class PojoPropertyAccessorTwoArgMode extends
    * property. The suggested argument order is <code>key, value</code>.
    */
   public static final PojoPropertyAccessorTwoArgMode SET_MAPPED = new PojoPropertyAccessorTwoArgMode(
-      "set-mapped");
+      "set-mapped", false);
 
   /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
+   * @param reading is a flag that determines if this mode is for
+   *        {@link #isReading() reading}.
    */
-  protected PojoPropertyAccessorTwoArgMode(String name) {
+  protected PojoPropertyAccessorTwoArgMode(String name, boolean reading) {
 
-    super(name);
+    super(name, reading);
   }
 
 }

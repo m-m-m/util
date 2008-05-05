@@ -19,15 +19,21 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
   /** @see #getName() */
   private final String name;
 
+  /** @see #isReading() */
+  private final boolean reading;
+
   /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
+   * @param reading is a flag that determines if this mode is for
+   *        {@link #isReading() reading}.
    */
-  PojoPropertyAccessorMode(String name) {
+  PojoPropertyAccessorMode(String name, boolean reading) {
 
     super();
     this.name = name;
+    this.reading = reading;
   }
 
   /**
@@ -38,6 +44,23 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
   public String getName() {
 
     return this.name;
+  }
+
+  /**
+   * This method determines if this mode is for a reading
+   * {@link PojoPropertyAccessor accessor}.
+   * 
+   * @return <code>true</code> if this mode is for a reading
+   *         {@link PojoPropertyAccessor accessor} that
+   *         {@link PojoPropertyAccessor#getReturnType() returns} a
+   *         property-value, <code>false</code> if this mode is for a
+   *         modifying {@link PojoPropertyAccessor accessor} that expects a
+   *         property-value as
+   *         {@link PojoPropertyAccessor#getArgumentTypes() argument}.
+   */
+  public boolean isReading() {
+
+    return this.reading;
   }
 
   /**

@@ -97,7 +97,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    */
   public PojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
-    Class<?> pojoClass = this.configuration.getReflectionUtil().toClass(pojoType);
+    Class<?> pojoClass = this.configuration.getReflectionUtil().getClass(pojoType, false);
     return getDescriptor(pojoClass, pojoType);
   }
 
@@ -113,7 +113,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    * @param pojoClass is the {@link Class} reflecting the
    *        {@link net.sf.mmm.util.pojo.api.Pojo} to introspect. It has to be
    *        the
-   *        {@link net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type) raw-type}
+   *        {@link net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean) raw-type}
    *        of the given <code>pojoType</code>.
    * @param pojoType is the {@link Type} reflecting the
    *        {@link net.sf.mmm.util.pojo.api.Pojo} to introspect.

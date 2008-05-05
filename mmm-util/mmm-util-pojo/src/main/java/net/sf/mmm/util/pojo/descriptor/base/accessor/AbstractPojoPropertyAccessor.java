@@ -5,7 +5,11 @@ package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This is the abstract base-implementation of the {@link PojoPropertyAccessor}
@@ -19,10 +23,10 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   private final String name;
 
   /** @see #getPropertyType() */
-  private final Type type;
+  private final Type propertyType;
 
   /** @see #getPropertyClass() */
-  private final Class<?> clazz;
+  private final Class<?> propertyClass;
 
   /**
    * The constructor.
@@ -30,15 +34,20 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
-   * @param propertyClass is the {@link #getPropertyClass() raw type} of the
-   *        property.
+   * @param mode is the {@link #getMode() mode} of access.
+   * @param descriptor is the descriptor this accessor is intended for.
+   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
    */
-  public AbstractPojoPropertyAccessor(String propertyName, Type propertyType, Class<?> propertyClass) {
+  public AbstractPojoPropertyAccessor(String propertyName, Type propertyType,
+      PojoPropertyAccessorMode<?> mode, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     super();
     this.name = propertyName;
-    this.clazz = propertyClass;
-    this.type = propertyType;
+    this.propertyType = propertyType;
+    boolean forAssignment = !mode.isReading();
+    ReflectionUtil util = configuration.getReflectionUtil();
+    this.propertyClass = util.getClass(propertyType, forAssignment, descriptor.getPojoType());
   }
 
   /**
@@ -54,7 +63,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
    */
   public Type getPropertyType() {
 
-    return this.type;
+    return this.propertyType;
   }
 
   /**
@@ -62,7 +71,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
    */
   public Class<?> getPropertyClass() {
 
-    return this.clazz;
+    return this.propertyClass;
   }
 
   /**
@@ -71,8 +80,8 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   @Override
   public String toString() {
 
-    return getMode() + "-accessor of property '" + this.name + "' with type " + this.type + "("
-        + getClass().getSimpleName() + ")";
+    return getMode() + "-accessor of property '" + this.name + "' with type " + this.propertyType
+        + "(" + getClass().getSimpleName() + ")";
   }
 
 }

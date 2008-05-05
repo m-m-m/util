@@ -33,7 +33,7 @@ public class PrivateMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescri
     MyPojo pojoInstance = new MyPojo();
     // test property "class"
     assertEquals(MyPojo.class, pojoDescriptor.getProperty(pojoInstance, "class"));
-    checkPojo(pojoDescriptor, pojoInstance);
+    checkPojo(pojoDescriptor, pojoInstance, builder);
     // test property "port"
     checkProperty(pojoDescriptor, "port", Integer.class, int.class);
     // test property "flag"

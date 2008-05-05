@@ -388,13 +388,13 @@ public abstract class PojoPathNavigatorTest {
     Type result;
 
     result = navigator.getType(Object.class, "class", true, context);
-    assertEquals(Class.class, ReflectionUtil.getInstance().toClass(result));
+    assertEquals(Class.class, ReflectionUtil.getInstance().getClass(result, false));
 
     result = navigator.getType(Object.class, "class.name", true, context);
-    assertEquals(String.class, ReflectionUtil.getInstance().toClass(result));
+    assertEquals(String.class, ReflectionUtil.getInstance().getClass(result, false));
 
     result = navigator.getType(CollectionPojo.class, "map.key.0.1", true, context);
-    assertEquals(String.class, ReflectionUtil.getInstance().toClass(result));
+    assertEquals(String.class, ReflectionUtil.getInstance().getClass(result, false));
 
     result = navigator.getType(CollectionPojo.class, "list.0.foo", false, context);
     assertNull(result);

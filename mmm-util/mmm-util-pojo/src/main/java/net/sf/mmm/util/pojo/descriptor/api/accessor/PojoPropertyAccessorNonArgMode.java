@@ -41,7 +41,7 @@ public class PojoPropertyAccessorNonArgMode extends
    */
   protected PojoPropertyAccessorNonArgMode(String name) {
 
-    super(name);
+    super(name, true);
   }
 
 }

@@ -244,7 +244,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         Method method = methodIterator.next();
         boolean methodUsed = false;
         for (PojoPropertyAccessorBuilder<?> builder : this.accessorBuilders) {
-          PojoPropertyAccessor accessor = builder.create(method);
+          PojoPropertyAccessor accessor = builder.create(method, descriptor, getConfiguration());
           if (accessor != null) {
             PojoPropertyDescriptorImpl propertyDescriptor = descriptor
                 .getOrCreatePropertyDescriptor(accessor.getName());
@@ -270,7 +270,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         Field field = fieldIterator.next();
         boolean fieldUsed = false;
         for (PojoPropertyAccessorBuilder<?> builder : this.accessorBuilders) {
-          PojoPropertyAccessor accessor = builder.create(field);
+          PojoPropertyAccessor accessor = builder.create(field, descriptor, getConfiguration());
           if (accessor != null) {
             PojoPropertyDescriptorImpl propertyDescriptor = descriptor
                 .getOrCreatePropertyDescriptor(accessor.getName());

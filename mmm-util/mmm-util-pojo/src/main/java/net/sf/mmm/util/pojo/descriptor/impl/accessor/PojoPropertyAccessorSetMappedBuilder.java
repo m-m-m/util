@@ -8,9 +8,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -45,7 +47,7 @@ public class PojoPropertyAccessorSetMappedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorTwoArg create(Method method) {
+  public PojoPropertyAccessorTwoArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     String methodName = method.getName();
     String propertyName = getPropertyName(methodName, METHOD_PREFIXES,
@@ -57,7 +59,7 @@ public class PojoPropertyAccessorSetMappedBuilder extends
         assert (argumentTypes.length == 2);
         // found compliant setter
         return new PojoPropertyAccessorTwoArgMethod(propertyName, argumentTypes[1],
-            argumentClasses[1], method, PojoPropertyAccessorTwoArgMode.SET_MAPPED);
+            PojoPropertyAccessorTwoArgMode.SET_MAPPED, descriptor, configuration, method);
       }
     }
     return null;
@@ -66,7 +68,7 @@ public class PojoPropertyAccessorSetMappedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorTwoArg create(Field field) {
+  public PojoPropertyAccessorTwoArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     return null;
   }

@@ -6,9 +6,11 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -42,7 +44,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedNonArg create(Method method) {
+  public PojoPropertyAccessorIndexedNonArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     if (parameterTypes.length == 1) {
@@ -60,8 +62,8 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
           }
           if (propertyName != null) {
             return new PojoPropertyAccessorIndexedNonArgMethod(propertyName, method
-                .getGenericReturnType(), propertyClass, method,
-                PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED);
+                .getGenericReturnType(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, descriptor,
+                configuration, method);
           }
         }
       }
@@ -72,7 +74,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedNonArg create(Field field) {
+  public PojoPropertyAccessorIndexedNonArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     return null;
   }

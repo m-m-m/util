@@ -8,9 +8,11 @@ import java.lang.reflect.Method;
 
 import net.sf.mmm.util.math.MathUtil;
 import net.sf.mmm.util.math.NumberType;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -40,7 +42,7 @@ public class PojoPropertyAccessorSizeBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArg create(Method method) {
+  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
@@ -52,8 +54,8 @@ public class PojoPropertyAccessorSizeBuilder extends
           String propertyName = getPropertyName(methodName, METHOD_PREFIXES, METHOD_SUFFIXES);
           if (propertyName != null) {
             return new PojoPropertyAccessorNonArgMethod(propertyName,
-                method.getGenericReturnType(), propertyClass, method,
-                PojoPropertyAccessorNonArgMode.GET_SIZE);
+                method.getGenericReturnType(), PojoPropertyAccessorNonArgMode.GET_SIZE, descriptor,
+                configuration, method);
           }
         }
       }
@@ -64,7 +66,7 @@ public class PojoPropertyAccessorSizeBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArg create(Field field) {
+  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     // return new PojoPropertyAccessorGetField(field);
     return null;

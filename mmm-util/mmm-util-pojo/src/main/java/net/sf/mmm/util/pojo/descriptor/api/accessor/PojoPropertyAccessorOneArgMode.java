@@ -20,7 +20,8 @@ public class PojoPropertyAccessorOneArgMode extends
    * The mode for a regular {@link PojoPropertyAccessorOneArg setter} of a
    * property.
    */
-  public static final PojoPropertyAccessorOneArgMode SET = new PojoPropertyAccessorOneArgMode("set");
+  public static final PojoPropertyAccessorOneArgMode SET = new PojoPropertyAccessorOneArgMode(
+      "set", false);
 
   /**
    * The mode for an {@link PojoPropertyAccessorOneArg accessor} used to add an
@@ -33,7 +34,8 @@ public class PojoPropertyAccessorOneArgMode extends
    * 
    * @see java.util.Collection#add(Object)
    */
-  public static final PojoPropertyAccessorOneArgMode ADD = new PojoPropertyAccessorOneArgMode("add");
+  public static final PojoPropertyAccessorOneArgMode ADD = new PojoPropertyAccessorOneArgMode(
+      "add", false);
 
   /**
    * The mode for an {@link PojoPropertyAccessorOneArg accessor} used to remove
@@ -50,7 +52,7 @@ public class PojoPropertyAccessorOneArgMode extends
    * @see java.util.Collection#remove(Object)
    */
   public static final PojoPropertyAccessorOneArgMode REMOVE = new PojoPropertyAccessorOneArgMode(
-      "remove");
+      "remove", false);
 
   /**
    * The mode for a {@link PojoPropertyAccessorOneArg getter} of a mapped
@@ -62,16 +64,18 @@ public class PojoPropertyAccessorOneArgMode extends
    * <code>pojo.getColors(key)</code> or even <code>pojo.getColor(key)</code>.
    */
   public static final PojoPropertyAccessorOneArgMode GET_MAPPED = new PojoPropertyAccessorOneArgMode(
-      "get-mapped");
+      "get-mapped", true);
 
   /**
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
+   * @param reading is a flag that determines if this mode is for
+   *        {@link #isReading() reading}.
    */
-  protected PojoPropertyAccessorOneArgMode(String name) {
+  protected PojoPropertyAccessorOneArgMode(String name, boolean reading) {
 
-    super(name);
+    super(name, reading);
   }
 
 }

@@ -7,6 +7,10 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+
 /**
  * This is the abstract implementation of the
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}
@@ -22,11 +26,15 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
   /**
    * The constructor.
    * 
+   * @param mode is the {@link #getMode() mode} of access.
+   * @param descriptor is the descriptor this accessor is intended for.
+   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
    * @param field is the {@link #getField() field} to access.
    */
-  public AbstractPojoPropertyAccessorField(Field field) {
+  public AbstractPojoPropertyAccessorField(PojoPropertyAccessorMode<?> mode,
+      PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration, Field field) {
 
-    this(field.getName(), field.getGenericType(), field.getType(), field);
+    this(field.getName(), field.getGenericType(), mode, descriptor, configuration, field);
   }
 
   /**
@@ -35,14 +43,16 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
-   * @param propertyClass is the {@link #getPropertyClass() raw type} of the
-   *        property.
+   * @param mode is the {@link #getMode() mode} of access.
+   * @param descriptor is the descriptor this accessor is intended for.
+   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
    * @param field is the {@link #getField() field} to access.
    */
   public AbstractPojoPropertyAccessorField(String propertyName, Type propertyType,
-      Class<?> propertyClass, Field field) {
+      PojoPropertyAccessorMode<?> mode, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration, Field field) {
 
-    super(propertyName, propertyType, propertyClass);
+    super(propertyName, propertyType, mode, descriptor, configuration);
     this.field = field;
   }
 
@@ -85,7 +95,7 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
    */
   public Type getReturnType() {
 
-    return this.field.getGenericType();
+    return getPropertyType();
   }
 
   /**
@@ -93,7 +103,7 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
    */
   public Class<?> getReturnClass() {
 
-    return this.field.getType();
+    return getPropertyClass();
   }
 
 }

@@ -211,7 +211,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
   protected void setFieldTypeAndClass(Type type) {
 
     this.fieldType = type;
-    this.fieldClass = ReflectionUtil.getInstance().toClass(type);
+    this.fieldClass = ReflectionUtil.getInstance().getClass(type, false);
     if (this.fieldTypeSpecification == null) {
       if (type instanceof Class) {
         this.fieldTypeSpecification = ((Class<?>) type).getName();

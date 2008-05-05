@@ -79,7 +79,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * 
    * @see java.lang.reflect.Method#getGenericParameterTypes()
    * @see java.lang.reflect.Field#getGenericType()
-   * @see net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type)
+   * @see net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean, Type)
    * 
    * @return the argument types.
    */
@@ -96,7 +96,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * 
    * @see #getPropertyClass()
    * @see java.beans.PropertyDescriptor#getPropertyType()
-   * @see net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type)
+   * @see net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean)
    * 
    * @return the type of this property.
    */
@@ -106,7 +106,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * This method gets the {@link #getPropertyType() type} as raw class. It is a
    * convenience method for
    * <code>{@link net.sf.mmm.util.reflect.ReflectionUtil#getInstance()}.
-   * {@link net.sf.mmm.util.reflect.ReflectionUtil#toClass(Type) toClass}(accessor.{@link #getPropertyType()})
+   * {@link net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean) toClass}(accessor.{@link #getPropertyType()})
    * </code>
    * 
    * @return the raw type.

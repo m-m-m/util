@@ -8,9 +8,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -37,7 +39,7 @@ public class PojoPropertyAccessorSetBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Method method) {
+  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     String methodName = method.getName();
     if (methodName.startsWith(METHOD_PREFIX_SET)) {
@@ -49,7 +51,7 @@ public class PojoPropertyAccessorSetBuilder extends
         String propertyName = getPropertyName(methodName, METHOD_PREFIX_SET.length(), 0);
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, argumentTypes[0],
-              argumentClasses[0], method, PojoPropertyAccessorOneArgMode.SET);
+              PojoPropertyAccessorOneArgMode.SET, descriptor, configuration, method);
         }
       }
     }
@@ -59,10 +61,10 @@ public class PojoPropertyAccessorSetBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Field field) {
+  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     if (!Modifier.isFinal(field.getModifiers())) {
-      return new PojoPropertyAccessorSetField(field);
+      return new PojoPropertyAccessorSetField(descriptor, configuration, field);
     }
     // even though it is possible to set final fields via reflection since
     // java5, it is sick to do so and we therefore do NOT support this.

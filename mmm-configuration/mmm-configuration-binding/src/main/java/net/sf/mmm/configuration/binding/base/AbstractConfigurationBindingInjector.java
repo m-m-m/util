@@ -68,7 +68,7 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
         componentType = ReflectionUtil.getInstance().getComponentType(propertyType, true);
         if (componentType != null) {
           // handle list-like property...
-          Class<?> componentClass = ReflectionUtil.getInstance().toClass(componentType);
+          Class<?> componentClass = ReflectionUtil.getInstance().getClass(componentType, false);
           Collection<? extends Configuration> children = configuration.getDescendants("*");
           int childCount = children.size();
           Object[] elements;

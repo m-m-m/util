@@ -30,7 +30,7 @@ public class PojoPropertyAccessorIndexedNonArgMode extends
    */
   protected PojoPropertyAccessorIndexedNonArgMode(String name) {
 
-    super(name);
+    super(name, true);
   }
 
 }

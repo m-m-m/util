@@ -51,9 +51,9 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(getAccessor);
       assertEquals(propertyName, getAccessor.getName());
       assertEquals(readType, getAccessor.getPropertyClass());
-      assertEquals(readType, ReflectionUtil.getInstance().toClass(getAccessor.getPropertyType()));
+      assertEquals(readType, ReflectionUtil.getInstance().getClass(getAccessor.getPropertyType(), false));
       assertEquals(readType, getAccessor.getReturnClass());
-      assertEquals(readType, ReflectionUtil.getInstance().toClass(getAccessor.getReturnType()));
+      assertEquals(readType, ReflectionUtil.getInstance().getClass(getAccessor.getReturnType(), false));
     }
     // test write accessor
     PojoPropertyAccessorOneArg setAccessor = propertyDescriptor
@@ -64,7 +64,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(setAccessor);
       assertEquals(propertyName, setAccessor.getName());
       assertEquals(writeType, setAccessor.getPropertyClass());
-      assertEquals(writeType, ReflectionUtil.getInstance().toClass(setAccessor.getPropertyType()));
+      assertEquals(writeType, ReflectionUtil.getInstance().getClass(setAccessor.getPropertyType(), false));
     }
   }
 

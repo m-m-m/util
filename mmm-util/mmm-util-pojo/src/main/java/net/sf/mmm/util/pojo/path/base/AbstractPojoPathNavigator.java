@@ -240,13 +240,13 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     Map<Object, Object> rawCache = context.getCache();
     if (rawCache == null) {
-      Class<?> initialPojoClass = getReflectionUtil().toClass(initialPojoType);
+      Class<?> initialPojoClass = getReflectionUtil().getClass(initialPojoType, false);
       CachingPojoPath rootPath = new CachingPojoPath(null, initialPojoClass, initialPojoType);
       return new PojoPathState(rootPath, mode, pojoPath);
     }
     PojoPathCache masterCache = (PojoPathCache) rawCache.get(initialPojoType);
     if (masterCache == null) {
-      Class<?> initialPojoClass = getReflectionUtil().toClass(initialPojoType);
+      Class<?> initialPojoClass = getReflectionUtil().getClass(initialPojoType, false);
       masterCache = new PojoPathCache(initialPojoClass, initialPojoType);
       rawCache.put(initialPojoType, masterCache);
     }
@@ -522,7 +522,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       Type[] genericArgs = type.getActualTypeArguments();
       if (genericArgs.length == 2) {
         currentPath.pojoType = genericArgs[1];
-        currentPath.pojoClass = getReflectionUtil().toClass(currentPath.pojoType);
+        currentPath.pojoClass = getReflectionUtil().getClass(currentPath.pojoType, false);
       }
     } else {
       currentPath.pojoClass = Object.class;
@@ -565,7 +565,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     // handle indexed segment for collection/list or array...
     currentPath.pojoType = getReflectionUtil().getComponentType(currentPath.parent.pojoType, true);
-    currentPath.pojoClass = getReflectionUtil().toClass(currentPath.pojoType);
+    currentPath.pojoClass = getReflectionUtil().getClass(currentPath.pojoType, false);
     Object result = null;
     if (!state.isGetType()) {
       Object parentPojo = currentPath.parent.pojo;

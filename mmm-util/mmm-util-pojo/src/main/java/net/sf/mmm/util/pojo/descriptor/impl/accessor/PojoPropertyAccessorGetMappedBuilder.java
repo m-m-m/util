@@ -7,9 +7,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -47,7 +49,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Method method) {
+  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     if (parameterTypes.length == 1) {
@@ -65,7 +67,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
         }
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, method.getGenericReturnType(),
-              propertyClass, method, PojoPropertyAccessorOneArgMode.GET_MAPPED);
+              PojoPropertyAccessorOneArgMode.GET_MAPPED, descriptor, configuration, method);
         }
       }
     }
@@ -75,7 +77,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Field field) {
+  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     return null;
   }

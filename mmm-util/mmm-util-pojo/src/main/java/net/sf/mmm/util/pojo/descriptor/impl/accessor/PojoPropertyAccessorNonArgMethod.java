@@ -7,8 +7,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorMethod;
 import net.sf.mmm.util.reflect.AccessFailedException;
 import net.sf.mmm.util.reflect.InvocationFailedException;
@@ -32,15 +34,16 @@ public class PojoPropertyAccessorNonArgMethod extends AbstractPojoPropertyAccess
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
-   * @param propertyClass is the {@link #getPropertyClass() raw type} of the
-   *        property.
-   * @param method is the {@link #getMethod() method} to access.
    * @param mode is the {@link #getMode() mode} of access.
+   * @param descriptor is the descriptor this accessor is intended for.
+   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
+   * @param method is the {@link #getMethod() method} to access.
    */
   public PojoPropertyAccessorNonArgMethod(String propertyName, Type propertyType,
-      Class<?> propertyClass, Method method, PojoPropertyAccessorNonArgMode mode) {
+      PojoPropertyAccessorNonArgMode mode, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration, Method method) {
 
-    super(propertyName, propertyType, propertyClass, method);
+    super(propertyName, propertyType, mode, descriptor, configuration, method);
     this.mode = mode;
   }
 

@@ -96,15 +96,14 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     }
     Type pojoType = getter.getPropertyType();
     currentPath.setPojoType(pojoType);
-    Class pojoClass = getReflectionUtil().toClass(pojoType);
+    Class pojoClass = getter.getPropertyClass();
     currentPath.setPojoClass(pojoClass);
     Object result = null;
     if (!state.isGetType()) {
       Object parentPojo = parentPath.getPojo();
       result = getter.invoke(parentPojo);
       if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {
-        Class<?> clazz = getReflectionUtil().toClass(pojoType);
-        result = context.getPojoFactory().newInstance(clazz);
+        result = context.getPojoFactory().newInstance(pojoClass);
         setInPojo(currentPath, context, state, parentPojo, result);
       }
     }

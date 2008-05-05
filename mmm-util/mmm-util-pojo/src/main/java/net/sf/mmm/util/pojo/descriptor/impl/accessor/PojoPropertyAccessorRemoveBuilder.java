@@ -7,9 +7,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -36,7 +38,7 @@ public class PojoPropertyAccessorRemoveBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Method method) {
+  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     String methodName = method.getName();
     if (methodName.startsWith(METHOD_PREFIX_REMOVE)) {
@@ -48,7 +50,7 @@ public class PojoPropertyAccessorRemoveBuilder extends
         String propertyName = getPropertyName(methodName, METHOD_PREFIX_REMOVE.length(), 0);
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, argumentTypes[0],
-              argumentClasses[0], method, PojoPropertyAccessorOneArgMode.REMOVE);
+              PojoPropertyAccessorOneArgMode.REMOVE, descriptor, configuration, method);
         }
       }
     }
@@ -58,7 +60,7 @@ public class PojoPropertyAccessorRemoveBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Field field) {
+  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     return null;
   }

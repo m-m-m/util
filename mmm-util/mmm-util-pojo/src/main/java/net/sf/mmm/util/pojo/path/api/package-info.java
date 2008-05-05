@@ -11,3 +11,4 @@
  * your life much easier.
  */
 package net.sf.mmm.util.pojo.path.api;
+

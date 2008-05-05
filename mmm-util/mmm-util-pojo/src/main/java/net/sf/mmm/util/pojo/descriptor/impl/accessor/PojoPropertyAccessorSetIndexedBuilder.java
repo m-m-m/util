@@ -6,9 +6,11 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 
 /**
@@ -39,7 +41,7 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedOneArg create(Method method) {
+  public PojoPropertyAccessorIndexedOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     String methodName = method.getName();
     // is property read method (getter)?
@@ -51,10 +53,10 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
         Class<?> argument2Class = parameterTypes[1];
         if (isIntegerType(argument1Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument2Class,
-              argument2Class, method, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, false);
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method, false);
         } else if (isIntegerType(argument2Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument1Class,
-              argument1Class, method, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, true);
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method, true);
         }
       }
     }
@@ -64,7 +66,7 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedOneArg create(Field field) {
+  public PojoPropertyAccessorIndexedOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     return null;
   }
