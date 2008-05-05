@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
  */
 class LookaheadByteArrayBufferBuffer extends AbstractByteArrayBufferBuffer {
 
+  /** The master buffer adapted by this buffer. */
   private final AbstractByteArrayBufferBuffer master;
 
   /**

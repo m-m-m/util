@@ -243,6 +243,11 @@ abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuff
     return byteCount - count;
   }
 
+  /**
+   * This method synchronizes the buffer with the given <code>master</code>.
+   * 
+   * @param master is the buffer this buffer was created from.
+   */
   protected void sync(AbstractByteArrayBufferBuffer master) {
 
     int bufferDist = master.bufferStepCount - this.bufferStepCount;
