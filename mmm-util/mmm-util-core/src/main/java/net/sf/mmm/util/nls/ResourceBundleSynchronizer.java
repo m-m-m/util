@@ -37,6 +37,18 @@ import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
  */
 public class ResourceBundleSynchronizer {
 
+  /**
+   * The commandline option to
+   * {@link #setDatePattern(String) set the date-pattern}.
+   */
+  public static final String OPTION_DATE_PATTERN = "--date-pattern";
+
+  /** The commandline option to {@link #setEncoding(String) set the encoding}. */
+  public static final String OPTION_ENCODING = "--encoding";
+
+  /** The commandline option to {@link #setBasePath(String) set the path}. */
+  public static final String OPTION_PATH = "--path";
+
   /** @see #getBasePath() */
   private static final String DEFAULT_BASE_PATH = "src/main/resources";
 
@@ -345,16 +357,16 @@ public class ResourceBundleSynchronizer {
           return 0;
         }
         argIndex++;
-        if ((bundleClassName != null) || (argIndex < arguments.length)) {
+        if ((bundleClassName != null) || (argIndex >= arguments.length)) {
           usage();
           return -1;
         }
         String value = arguments[argIndex];
-        if ("--encoding".equals(arg)) {
+        if (OPTION_ENCODING.equals(arg)) {
           setEncoding(value);
-        } else if ("--path".equals(arg)) {
+        } else if (OPTION_PATH.equals(arg)) {
           setBasePath(value);
-        } else if ("--date-pattern".equals(arg)) {
+        } else if (OPTION_DATE_PATTERN.equals(arg)) {
           setDatePattern(value);
         } else {
           this.out.println("Error: unknown option '" + arg + "'!");
@@ -374,14 +386,21 @@ public class ResourceBundleSynchronizer {
     }
     String[] localeArray = currentLocales.toArray(new String[currentLocales.size()]);
     setLocales(localeArray);
-    Class<?> bundleClass = Class.forName(bundleClassName);
-    if (!ResourceBundle.class.isAssignableFrom(bundleClass)) {
-      throw new IllegalArgumentException("Given class '" + bundleClassName + "' does NOT extend '"
-          + ResourceBundle.class.getName() + "'!");
+    Class<?> bundleClass;
+    try {
+      bundleClass = Class.forName(bundleClassName);
+      if (!ResourceBundle.class.isAssignableFrom(bundleClass)) {
+        throw new IllegalArgumentException("Given class '" + bundleClassName
+            + "' does NOT extend '" + ResourceBundle.class.getName() + "'!");
+      }
+      ResourceBundle bundle = (ResourceBundle) bundleClass.newInstance();
+      synchronize(bundle);
+      return 0;
+    } catch (Throwable e) {
+      this.out.println("Error loading class '" + bundleClassName + "': " + e.getMessage());
+      usage();
+      return -1;
     }
-    ResourceBundle bundle = (ResourceBundle) bundleClass.newInstance();
-    synchronize(bundle);
-    return 0;
   }
 
   /**
