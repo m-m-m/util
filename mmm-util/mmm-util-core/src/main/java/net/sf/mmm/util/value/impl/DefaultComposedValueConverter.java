@@ -5,6 +5,7 @@ package net.sf.mmm.util.value.impl;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.math.MathUtil;
 
@@ -23,6 +24,9 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
 
   /** @see #getMathUtil() */
   private MathUtil mathUtil;
+
+  /** @see #getStringUtil() */
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -77,6 +81,26 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   }
 
   /**
+   * This method gets the {@link StringUtil} to use.
+   * 
+   * @return the {@link StringUtil} instance.
+   */
+  protected StringUtil getStringUtil() {
+
+    return this.stringUtil;
+  }
+
+  /**
+   * @param stringUtil is the stringUtil to set
+   */
+  @Resource
+  public void setStringUtil(StringUtil stringUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.stringUtil = stringUtil;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -89,10 +113,14 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
     if (this.mathUtil == null) {
       this.mathUtil = MathUtil.getInstance();
     }
+    if (this.stringUtil == null) {
+      this.stringUtil = StringUtil.getInstance();
+    }
     addConverter(new ValueConverterToDate(this.iso8601Util));
     addConverter(new ValueConverterToCalendar(this.iso8601Util));
     addConverter(new ValueConverterToNumber(this.mathUtil));
-    addConverter(new ValueConverterToString(this.iso8601Util));
+    addConverter(new ValueConverterToString(this.iso8601Util, this.stringUtil));
+    addConverter(new ValueConverterToEnum(this.stringUtil));
   }
 
 }

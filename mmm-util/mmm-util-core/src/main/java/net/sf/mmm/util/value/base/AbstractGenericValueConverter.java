@@ -107,7 +107,7 @@ public abstract class AbstractGenericValueConverter<SOURCE> implements
 
     double d = value.doubleValue();
     if ((d < minimum.doubleValue()) || (d > maximum.doubleValue())) {
-      throw new ValueOutOfRangeException(value, valueSource, minimum, maximum);
+      throw new ValueOutOfRangeException(value, minimum, maximum, valueSource);
     }
   }
 

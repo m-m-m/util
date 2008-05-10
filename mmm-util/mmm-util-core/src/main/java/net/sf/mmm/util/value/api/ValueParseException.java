@@ -3,10 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-
-
 /**
- * This exception is thrown if the parsing of a value fails.
+ * This is the base-class of exceptions thrown if the parsing of a value failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

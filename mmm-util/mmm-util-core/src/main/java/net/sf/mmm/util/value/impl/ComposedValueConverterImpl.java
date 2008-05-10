@@ -13,6 +13,8 @@ import org.apache.commons.logging.Log;
 import net.sf.mmm.util.collection.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.value.api.ValueConverter;
+import net.sf.mmm.util.value.api.ValueException;
+import net.sf.mmm.util.value.api.ValueParseGenericException;
 import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
 import net.sf.mmm.util.value.base.AbstractValueConverter;
 
@@ -133,7 +135,14 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
           }
           logger.debug(sw);
         }
-        Object result = converter.convert(value, valueSource, targetClass, targetType);
+        Object result;
+        try {
+          result = converter.convert(value, valueSource, targetClass, targetType);
+        } catch (ValueException e) {
+          throw e;
+        } catch (RuntimeException e) {
+          throw new ValueParseGenericException(e, value, targetType, valueSource);
+        }
         if (result != null) {
           return result;
         }

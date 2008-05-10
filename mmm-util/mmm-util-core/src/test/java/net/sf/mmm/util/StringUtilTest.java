@@ -38,12 +38,22 @@ public class StringUtilTest {
   }
 
   @Test
-  public void testCamlCase() {
+  public void testToCamlCase() {
 
     assertEquals("abc", getStringUtil().toCamlCase("abc"));
     assertEquals("aaBbCc", getStringUtil().toCamlCase("aa-bb-cc"));
     assertEquals("aaBbCc", getStringUtil().toCamlCase("aa bb_cc"));
     assertEquals("aaBb", getStringUtil().toCamlCase("aa -_bb_ "));
+  }
+
+  @Test
+  public void testFromCamlCase() {
+
+    assertEquals("abc", getStringUtil().fromCamlCase("abc", ' '));
+    assertEquals("foo-bar", getStringUtil().fromCamlCase("FooBar", '-'));
+    assertEquals("some.word.mix", getStringUtil().fromCamlCase("someWordMix", '.'));
+    assertEquals("abbreviations_like_xmlshould_not_be_capitalized", getStringUtil().fromCamlCase(
+        "AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));
   }
 
   @Test

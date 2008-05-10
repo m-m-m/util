@@ -68,8 +68,12 @@ public interface ValueConverter<SOURCE, TARGET> {
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given
    *         <code>targetType</code>.
+   * @throws ValueException if the conversion failed (e.g. the given
+   *         <code>value</code> is illegal for the given
+   *         <code>targetClass</code>).
    */
-  TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass);
+  TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass)
+      throws ValueException;
 
   /**
    * This method converts the given <code>pojo</code> to the
@@ -96,8 +100,11 @@ public interface ValueConverter<SOURCE, TARGET> {
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given
    *         <code>targetType</code>.
+   * @throws ValueException if the conversion failed (e.g. the given
+   *         <code>value</code> is illegal for the given
+   *         <code>targetClass</code>).
    */
   TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass,
-      Type targetType);
+      Type targetType) throws ValueException;
 
 }

@@ -27,11 +27,7 @@ public class ComposedValueConverterImplTest {
   @Test
   public void testConverter() throws Exception {
 
-    ComposedValueConverterImpl converter = new ComposedValueConverterImpl();
-    converter.addConverter(new ValueConverterToDate());
-    converter.addConverter(new ValueConverterToCalendar());
-    converter.addConverter(new ValueConverterToNumber());
-    converter.addConverter(new ValueConverterToString());
+    ComposedValueConverterImpl converter = new DefaultComposedValueConverter();
     converter.initialize();
     assertEquals(Object.class, converter.getSourceType());
     assertEquals(Object.class, converter.getTargetType());
@@ -66,6 +62,12 @@ public class ComposedValueConverterImplTest {
     assertEquals(dateString, value);
     value = converter.convert(String.class, valueSource, String.class);
     assertEquals(String.class.getName(), value);
+    value = converter.convert(TestEnum.SOME_ENUM_CONSTANT, valueSource, String.class);
+    String someEnumConstant = "SomeEnumConstant";
+    assertEquals(someEnumConstant, value);
+    // convert to enum
+    value = converter.convert(someEnumConstant, valueSource, TestEnum.class);
+    assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
   }
 
   @Test
@@ -166,5 +168,11 @@ public class ComposedValueConverterImplTest {
       }
       return null;
     }
+  }
+
+  private static enum TestEnum {
+    SOME_ENUM_CONSTANT,
+
+    OTHER_CONSTANT
   }
 }

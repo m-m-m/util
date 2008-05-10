@@ -447,7 +447,7 @@ public class StringUtil {
     int leadingZeros = digits - result.length();
     if (leadingZeros > 0) {
       int capacity = result.length() + leadingZeros;
-      StringBuffer buffer = new StringBuffer(capacity);
+      StringBuilder buffer = new StringBuilder(capacity);
       buffer.append(result);
       while (leadingZeros > 0) {
         buffer.append('0');
@@ -508,7 +508,7 @@ public class StringUtil {
   public String toCamlCase(String string, char... separators) {
 
     char[] chars = string.toCharArray();
-    StringBuffer buffer = new StringBuffer(chars.length);
+    StringBuilder buffer = new StringBuilder(chars.length);
     int pos = 0;
     boolean lastSeparator = false;
     for (int i = 0; i < chars.length; i++) {
@@ -538,4 +538,59 @@ public class StringUtil {
     return buffer.toString();
   }
 
+  /**
+   * This method converts the given <code>string</code> from caml-case syntax
+   * to lower-case using the given <code>separator</code> as word-boundary.<br>
+   * Example:<br>
+   * <table border="1">
+   * <tr>
+   * <th>string</th>
+   * <th>separator</th>
+   * <th>{@link #fromCamlCase(String, char) fromCamlCase}(string, separator)</th>
+   * </tr>
+   * <tr>
+   * <td>FooBar</td>
+   * <td>-</td>
+   * <td>foo-bar</td>
+   * </tr>
+   * <tr>
+   * <td>someWordMix</td>
+   * <td>.</td>
+   * <td>some.word.mix</td>
+   * </tr>
+   * <tr>
+   * <td>AbbreviationsLikeXMLshouldNotBeCapitalized</td>
+   * <td>_</td>
+   * <td>abbreviations_like_xmlshould_not_be_capitalized</td>
+   * </tr>
+   * </table>
+   * 
+   * @see #toCamlCase(String, char...)
+   * 
+   * @param string is the string to convert.
+   * @param separator is the character to insert at word-boundaries indicated by
+   *        a switch from lower- to upper-case.
+   * @return the given <code>string</code> in lower-case with the given
+   *         <code>separator</code> inserted at word-boundaries.
+   */
+  public String fromCamlCase(String string, char separator) {
+
+    char[] chars = string.toCharArray();
+    StringBuilder buffer = new StringBuilder(chars.length + 4);
+    boolean lastCharWasLowerCase = false;
+    for (int i = 0; i < chars.length; i++) {
+      char c = chars[i];
+      char lower = Character.toLowerCase(c);
+      if (c == lower) {
+        lastCharWasLowerCase = true;
+      } else {
+        if (lastCharWasLowerCase) {
+          buffer.append(separator);
+        }
+        lastCharWasLowerCase = false;
+      }
+      buffer.append(lower);
+    }
+    return buffer.toString();
+  }
 }

@@ -10,6 +10,7 @@ import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Deprecated
 public class ValueParseStringException extends ValueParseException {
 
   /** uid for serialization */

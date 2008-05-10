@@ -23,7 +23,7 @@ public class NlsBundleValueMain extends AbstractResourceBundle {
   /**
    * exception message for a value that could not be parsed.
    * 
-   * @see net.sf.mmm.util.value.api.ValueParseStringException
+   * @see net.sf.mmm.value.api.ValueParseStringException
    */
   public static final String ERR_PARSE_STRING = "Failed to parse \"{0}\" as \"{2}\"-value[{1}]!";
 

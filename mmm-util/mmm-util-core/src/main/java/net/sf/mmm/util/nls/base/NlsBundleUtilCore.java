@@ -23,12 +23,24 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.value.api.ValueNotSetException */
   public static final String ERR_VALUE_NOT_SET = "The value \"{0}\" is not set!";
 
+  /** @see net.sf.mmm.util.value.api.ValueParseGenericException */
+  public static final String ERR_PARSE = "Failed to parse value \"{0}\" as value"
+      + " of the type \"{1}\"!";
+
+  /** @see net.sf.mmm.util.value.api.ValueParseGenericException */
+  public static final String ERR_PARSE_SOURCE = "Failed to parse value \"{0}\" from "
+      + "\"{2}\" as value of the type \"{1}\"!";
+
   /** @see net.sf.mmm.util.value.api.ValueParseStringException */
   public static final String ERR_PARSE_STRING = "Failed to parse \"{0}\" as \"{2}\"-value[{1}]!";
 
   /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
-  public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{0}\" ({1}) "
-      + "is not in the expected range of \"[{2}-{3}]\"!";
+  public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{0}\" "
+      + "is not in the expected range of \"[{1}-{2}]\"!";
+
+  /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
+  public static final String ERR_VALUE_OUT_OF_RANGE_SOURCE = "The value \"{0}\" from \"{3}\" "
+      + "is not in the expected range of \"[{1}-{2}]\"!";
 
   /** @see net.sf.mmm.util.component.ResourceMissingException */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";

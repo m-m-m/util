@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.Date;
 
+import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.value.base.AbstractValueConverter;
 
@@ -22,24 +23,28 @@ public class ValueConverterToString extends AbstractValueConverter<Object, Strin
   /** @see #getIso8601Util() */
   private final Iso8601Util iso8601Util;
 
+  /** @see #getStringUtil() */
+  private final StringUtil stringUtil;
+
   /**
    * The constructor.
    */
   public ValueConverterToString() {
 
-    super();
-    this.iso8601Util = Iso8601Util.getInstance();
+    this(Iso8601Util.getInstance(), StringUtil.getInstance());
   }
 
   /**
    * The constructor.
    * 
    * @param iso8601Util is the {@link Iso8601Util} to use.
+   * @param stringUtil is the {@link StringUtil} to use.
    */
-  public ValueConverterToString(Iso8601Util iso8601Util) {
+  public ValueConverterToString(Iso8601Util iso8601Util, StringUtil stringUtil) {
 
     super();
     this.iso8601Util = iso8601Util;
+    this.stringUtil = stringUtil;
   }
 
   /**
@@ -50,6 +55,16 @@ public class ValueConverterToString extends AbstractValueConverter<Object, Strin
   protected Iso8601Util getIso8601Util() {
 
     return this.iso8601Util;
+  }
+
+  /**
+   * This method gets the {@link StringUtil} to use.
+   * 
+   * @return the {@link StringUtil} instance.
+   */
+  protected StringUtil getStringUtil() {
+
+    return this.stringUtil;
   }
 
   /**
@@ -83,6 +98,12 @@ public class ValueConverterToString extends AbstractValueConverter<Object, Strin
       return getIso8601Util().formatDateTime((Date) value);
     } else if (value instanceof Calendar) {
       return getIso8601Util().formatDateTime((Calendar) value);
+    } else if (value instanceof Enum) {
+      String name = ((Enum<?>) value).name();
+      if (name.length() > 1) {
+        name = name.charAt(0) + name.substring(1).toLowerCase();
+      }
+      return this.stringUtil.toCamlCase(name, '_');
     }
     return value.toString();
   }
