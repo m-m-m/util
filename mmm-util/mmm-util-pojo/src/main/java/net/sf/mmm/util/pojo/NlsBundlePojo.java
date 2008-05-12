@@ -29,7 +29,7 @@ public class NlsBundlePojo extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.pojo.path.api.PojoPathCreationException */
   public static final String ERR_PATH_CREATION = "Failed to create the "
-      + "object at the pojo-path \"{0}\" for object \"{1}\"!";
+      + "object at the pojo-path \"{1}\" for object \"{0}\"!";
 
   /** @see net.sf.mmm.util.pojo.path.api.PojoPathAccessException */
   public static final String ERR_PATH_ACCESS = "Failed to access the pojo-path "

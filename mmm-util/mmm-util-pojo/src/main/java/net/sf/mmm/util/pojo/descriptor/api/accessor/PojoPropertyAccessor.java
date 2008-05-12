@@ -7,6 +7,7 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * A {@link PojoPropertyAccessor} gives {@link #getAccessibleObject() access} to
@@ -52,19 +53,20 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   int getModifiers();
 
   /**
-   * This method gets the type of the object returned when this accessor is
-   * <code>invoked</code>.
+   * This method gets the {@link GenericType} of the object returned when this
+   * accessor is <code>invoked</code>.
    * 
    * @see java.lang.reflect.Method#getGenericReturnType()
    * @see java.lang.reflect.Field#getGenericType()
    * 
    * @return the return type.
    */
-  Type getReturnType();
+  GenericType getReturnType();
 
   /**
    * This method gets the {@link Class} of the object returned when this
-   * accessor is <code>invoked</code>.
+   * accessor is <code>invoked</code>.<br>
+   * is a convenience method for {@link #getReturnType()}.{@link GenericType#getUpperBound() getUpperBound()}
    * 
    * @see java.lang.reflect.Method#getReturnType()
    * @see java.lang.reflect.Field#getType()
@@ -74,19 +76,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   Class<?> getReturnClass();
 
   /**
-   * This method gets the types of the arguments required to <code>invoke</code>
-   * this accessor.
-   * 
-   * @see java.lang.reflect.Method#getGenericParameterTypes()
-   * @see java.lang.reflect.Field#getGenericType()
-   * @see net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean, Type)
-   * 
-   * @return the argument types.
-   */
-  Type[] getArgumentTypes();
-
-  /**
-   * This method gets the type of this property.<br>
+   * This method gets the {@link GenericType} of this property.<br>
    * For a {@link PojoPropertyAccessorNonArgMode#GET getter} this will be the
    * {@link #getReturnType() return-type} while a
    * {@link PojoPropertyAccessorOneArgMode#SET setter} typically has
@@ -98,18 +88,19 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * @see java.beans.PropertyDescriptor#getPropertyType()
    * @see net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean)
    * 
-   * @return the type of this property.
+   * @return the {@link GenericType} reflecting the property.
    */
-  Type getPropertyType();
+  GenericType getPropertyType();
 
   /**
-   * This method gets the {@link #getPropertyType() type} as raw class. It is a
-   * convenience method for
-   * <code>{@link net.sf.mmm.util.reflect.ReflectionUtil#getInstance()}.
-   * {@link net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean) toClass}(accessor.{@link #getPropertyType()})
-   * </code>
+   * This method gets the {@link #getPropertyType() type} as {@link Class}. It
+   * is a convenience method for {@link #getPropertyType()}.{@link GenericType#getUpperBound() getUpperBound()}
+   * if the {@link #getMode() mode} is for
+   * {@link PojoPropertyAccessorMode#isReading() reading} and
+   * {@link #getPropertyType()}.{@link GenericType#getLowerBound() getLowerBound()}
+   * otherwise.
    * 
-   * @return the raw type.
+   * @return the {@link Class} reflecting the property.
    */
   Class<?> getPropertyClass();
 

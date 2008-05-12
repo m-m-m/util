@@ -12,6 +12,7 @@ import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract base-implementation of the {@link PojoDescriptorBuilder}
@@ -23,7 +24,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
     PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
-  private final Map<Type, PojoDescriptorImpl<?>> pojoMap;
+  private final Map<GenericType, PojoDescriptorImpl<?>> pojoMap;
 
   /** @see #getConfiguration() */
   private PojoDescriptorConfiguration configuration;
@@ -89,7 +90,8 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    */
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
-    return getDescriptor(pojoClass, pojoClass);
+    GenericType genericType = this.configuration.getReflectionUtil().createGenericType(pojoClass);
+    return getDescriptor(pojoClass, genericType);
   }
 
   /**
@@ -97,8 +99,16 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    */
   public PojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
-    Class<?> pojoClass = this.configuration.getReflectionUtil().getClass(pojoType, false);
-    return getDescriptor(pojoClass, pojoType);
+    GenericType genericType = this.configuration.getReflectionUtil().createGenericType(pojoType);
+    return getDescriptor(genericType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public PojoDescriptorImpl<?> getDescriptor(GenericType pojoType) {
+
+    return getDescriptor(pojoType.getUpperBound(), pojoType);
   }
 
   /**
@@ -120,7 +130,8 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    * @return the according descriptor.
    */
   @SuppressWarnings("unchecked")
-  protected <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass, Type pojoType) {
+  protected <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass,
+      GenericType pojoType) {
 
     PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoType);
     if (descriptor == null) {
@@ -140,7 +151,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    * @param <POJO> is the templated type of the <code>pojoType</code>.
    * @param pojoClass is the {@link Class} reflecting the
    *        {@link net.sf.mmm.util.pojo.api.Pojo}.
-   * @param pojoType is the {@link Type} reflecting the
+   * @param pojoType is the {@link GenericType} reflecting the
    *        {@link net.sf.mmm.util.pojo.api.Pojo}. If you do NOT have generic
    *        type information, simply pass the <code>pojoClass</code> again
    *        here.
@@ -148,6 +159,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    *         according {@link net.sf.mmm.util.pojo.api.Pojo}.
    */
   protected abstract <POJO> PojoDescriptorImpl<POJO> createDescriptor(Class<POJO> pojoClass,
-      Type pojoType);
+      GenericType pojoType);
 
 }

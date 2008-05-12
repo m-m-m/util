@@ -28,7 +28,7 @@ public abstract class AbstractValueConverter<SOURCE, TARGET> implements
   /**
    * {@inheritDoc}
    */
-  public TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass) {
+  public final TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass) {
 
     return convert(value, valueSource, targetClass, targetClass);
   }

@@ -90,10 +90,10 @@ public class ValueConverterTest {
       fail("Exception expected");
     } catch (ValueOutOfRangeException e) {
       // this is expected
-      assertEquals(source, e.getNlsMessage().getArgument(0));
-      assertEquals(Integer.valueOf(value), e.getNlsMessage().getArgument(1));
-      assertEquals(minimum, e.getNlsMessage().getArgument(2));
-      assertEquals(maximum, e.getNlsMessage().getArgument(3));
+      assertEquals(Integer.valueOf(value), e.getNlsMessage().getArgument(0));
+      assertEquals(minimum, e.getNlsMessage().getArgument(1));
+      assertEquals(maximum, e.getNlsMessage().getArgument(2));
+      assertEquals(source, e.getNlsMessage().getArgument(3));
     }
     // test string
     assertEquals(valueString, getConverter().convertValue(valueString, source, String.class));

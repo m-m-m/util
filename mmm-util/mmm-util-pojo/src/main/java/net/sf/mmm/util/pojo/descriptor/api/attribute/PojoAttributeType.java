@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.api.attribute;
 
-import java.lang.reflect.Type;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the interface for an object that is related to a
@@ -25,11 +25,11 @@ public abstract interface PojoAttributeType<POJO> {
   Class<POJO> getPojoClass();
 
   /**
-   * This method gets the generic type reflecting the
+   * This method gets the {@link GenericType} reflecting the
    * {@link net.sf.mmm.util.pojo.api.Pojo} this object is related to.
    * 
    * @return the type of the according {@link net.sf.mmm.util.pojo.api.Pojo}.
    */
-  Type getPojoType();
+  GenericType getPojoType();
 
 }

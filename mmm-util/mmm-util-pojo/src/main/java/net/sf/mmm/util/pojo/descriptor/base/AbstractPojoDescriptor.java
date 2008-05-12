@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import java.lang.reflect.Type;
 import java.util.Collection;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -15,6 +14,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract base implementation of the {@link PojoDescriptor}
@@ -30,7 +30,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   private final Class<POJO> pojoClass;
 
   /** @see #getPojoType() */
-  private final Type pojoType;
+  private final GenericType pojoType;
 
   /**
    * The constructor.
@@ -38,7 +38,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    * @param pojoClass is the {@link #getPojoClass() pojo-class}.
    * @param pojoType is the {@link #getPojoType() pojo-type}.
    */
-  public AbstractPojoDescriptor(Class<POJO> pojoClass, Type pojoType) {
+  public AbstractPojoDescriptor(Class<POJO> pojoClass, GenericType pojoType) {
 
     this.pojoClass = pojoClass;
     this.pojoType = pojoType;
@@ -55,7 +55,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Type getPojoType() {
+  public GenericType getPojoType() {
 
     return this.pojoType;
   }

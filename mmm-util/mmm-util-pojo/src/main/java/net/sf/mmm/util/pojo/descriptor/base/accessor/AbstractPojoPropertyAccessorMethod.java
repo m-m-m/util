@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
@@ -25,7 +26,7 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
   private final Method method;
 
   /** @see #getReturnType() */
-  private final Type returnType;
+  private final GenericType returnType;
 
   /** @see #getReturnClass() */
   private final Class<?> returnClass;
@@ -51,9 +52,10 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
       this.returnType = getPropertyType();
       this.returnClass = getPropertyClass();
     } else {
-      this.returnType = method.getGenericReturnType();
       ReflectionUtil util = configuration.getReflectionUtil();
-      this.returnClass = util.getClass(this.returnType, true, descriptor.getPojoType());
+      this.returnType = util.createGenericType(method.getGenericReturnType(), descriptor
+          .getPojoType());
+      this.returnClass = this.returnType.getUpperBound();
     }
   }
 
@@ -94,7 +96,7 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
   /**
    * {@inheritDoc}
    */
-  public Type getReturnType() {
+  public GenericType getReturnType() {
 
     return this.returnType;
   }
@@ -105,14 +107,6 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
   public Class<?> getReturnClass() {
 
     return this.returnClass;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Type[] getArgumentTypes() {
-
-    return this.method.getGenericParameterTypes();
   }
 
 }

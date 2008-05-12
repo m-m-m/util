@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract implementation of the
@@ -93,7 +94,7 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
-  public Type getReturnType() {
+  public GenericType getReturnType() {
 
     return getPropertyType();
   }

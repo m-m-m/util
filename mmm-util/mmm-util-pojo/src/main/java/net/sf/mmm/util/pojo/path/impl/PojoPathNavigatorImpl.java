@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.impl;
 
-import java.lang.reflect.Type;
-
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -17,6 +15,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathMode;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the implementation of the
@@ -86,15 +85,15 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
       PojoPathState state) {
 
     CachingPojoPath parentPath = currentPath.getParent();
-    Class<?> parentPojoClass = parentPath.getPojoClass();
-    // TODO: improve Pojo-descriptor using Type ?
-    PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojoClass);
+    PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPath.getPojoType());
     PojoPropertyAccessorNonArg getter = descriptor.getAccessor(currentPath.getSegment(),
         PojoPropertyAccessorNonArgMode.GET, !state.isGetType());
     if (getter == null) {
+      // TODO
+      // throw new PojoPathAccessException();
       return null;
     }
-    Type pojoType = getter.getPropertyType();
+    GenericType pojoType = getter.getPropertyType();
     currentPath.setPojoType(pojoType);
     Class pojoClass = getter.getPropertyClass();
     currentPath.setPojoClass(pojoClass);
@@ -121,10 +120,10 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
     PojoPropertyAccessorOneArg setAccessor = descriptor.getAccessor(currentPath.getSegment(),
         PojoPropertyAccessorOneArgMode.SET, true);
-    Type targetType = setAccessor.getPropertyType();
+    GenericType targetType = setAccessor.getPropertyType();
     currentPath.setPojoType(targetType);
     Object convertedValue = convert(currentPath, context, value, setAccessor.getPropertyClass(),
-        targetType);
+        targetType.getType());
     return setAccessor.invoke(parentPojo, convertedValue);
   }
 

@@ -9,6 +9,7 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
@@ -22,11 +23,11 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /** @see #getName() */
   private final String name;
 
-  /** @see #getPropertyType() */
-  private final Type propertyType;
-
   /** @see #getPropertyClass() */
   private final Class<?> propertyClass;
+
+  /** @see #getPropertyType() */
+  private final GenericType propertyType;
 
   /**
    * The constructor.
@@ -44,10 +45,13 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
 
     super();
     this.name = propertyName;
-    this.propertyType = propertyType;
-    boolean forAssignment = !mode.isReading();
     ReflectionUtil util = configuration.getReflectionUtil();
-    this.propertyClass = util.getClass(propertyType, forAssignment, descriptor.getPojoType());
+    this.propertyType = util.createGenericType(propertyType, descriptor.getPojoType());
+    if (mode.isReading()) {
+      this.propertyClass = this.propertyType.getUpperBound();
+    } else {
+      this.propertyClass = this.propertyType.getLowerBound();
+    }
   }
 
   /**
@@ -61,7 +65,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /**
    * {@inheritDoc}
    */
-  public Type getPropertyType() {
+  public GenericType getPropertyType() {
 
     return this.propertyType;
   }

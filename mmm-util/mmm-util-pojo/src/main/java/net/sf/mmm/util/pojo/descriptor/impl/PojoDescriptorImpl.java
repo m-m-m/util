@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +26,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGetByKey;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetByIndex;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetByKey;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract base implementation of the
@@ -50,7 +50,7 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
    * @param pojoClass is the {@link #getPojoClass() pojo-class}.
    * @param pojoType is the {@link #getPojoType() pojo-type}.
    */
-  public PojoDescriptorImpl(Class<POJO> pojoClass, Type pojoType) {
+  public PojoDescriptorImpl(Class<POJO> pojoClass, GenericType pojoType) {
 
     super(pojoClass, pojoType);
     // we do NOT want MapFactory here: no need for cache or to be thread-safe

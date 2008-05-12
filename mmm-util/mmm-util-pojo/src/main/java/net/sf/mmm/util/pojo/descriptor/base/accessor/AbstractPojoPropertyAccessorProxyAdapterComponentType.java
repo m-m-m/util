@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract base implementation of a
@@ -16,18 +14,17 @@ import net.sf.mmm.util.reflect.ReflectionUtil;
  * ways to access a property.<br>
  * It extends {@link AbstractPojoPropertyAccessorProxyAdapter} implementing
  * {@link #getPropertyType()} to return the
- * {@link net.sf.mmm.util.reflect.ReflectionUtil#getComponentType(Type, boolean) component-type}
- * for the
+ * {@link GenericType#getComponentType() component-type} from the
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getReturnType() return-type}
  * of the {@link #getDelegate() delegate}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
+public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
     AbstractPojoPropertyAccessorProxyAdapter {
 
   /** @see #getPropertyType() */
-  private final Type propertyType;
+  private final GenericType propertyType;
 
   /** @see #getPropertyClass() */
   private final Class<?> propertyClass;
@@ -43,12 +40,12 @@ public class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
       PojoDescriptorConfiguration configuration, PojoPropertyAccessorNonArg containerGetAccessor) {
 
     super(configuration, containerGetAccessor);
-    ReflectionUtil reflectionUtil = getConfiguration().getReflectionUtil();
-    this.propertyType = reflectionUtil.getComponentType(containerGetAccessor.getReturnType(), true);
-    if (this.propertyType == null) {
-      this.propertyClass = null;
+    this.propertyType = containerGetAccessor.getReturnType().getComponentType();
+    assert (this.propertyType != null) : "propertyType is null";
+    if (getMode().isReading()) {
+      this.propertyClass = this.propertyType.getUpperBound();
     } else {
-      this.propertyClass = reflectionUtil.getClass(this.propertyType, false);
+      this.propertyClass = this.propertyType.getLowerBound();
     }
   }
 
@@ -56,7 +53,7 @@ public class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
    * {@inheritDoc}
    */
   @Override
-  public Type getPropertyType() {
+  public GenericType getPropertyType() {
 
     return this.propertyType;
   }

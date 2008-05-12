@@ -11,7 +11,6 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +25,7 @@ import org.junit.Test;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract test-case for {@link PojoPathNavigator} implementations.
@@ -162,8 +161,8 @@ public abstract class PojoPathNavigatorTest {
     // create through generic POJO-property including map, list and array...
     int listIndex = 1;
     int arrayIndex = 2;
-    result = navigator.get(pojo, "map." + key + "." + listIndex + "." + arrayIndex,
-        PojoPathMode.CREATE_IF_NULL, context);
+    String path = "map." + key + "." + listIndex + "." + arrayIndex;
+    result = navigator.get(pojo, path, PojoPathMode.CREATE_IF_NULL, context);
     assertEquals("", result);
     String value = pojo.getMap().get(key).get(listIndex)[arrayIndex];
     assertSame(value, result);
@@ -385,16 +384,16 @@ public abstract class PojoPathNavigatorTest {
     PojoPathNavigator navigator = createNavigator();
     PojoPathContext context = new DefaultPojoPathContext();
 
-    Type result;
+    GenericType result;
 
     result = navigator.getType(Object.class, "class", true, context);
-    assertEquals(Class.class, ReflectionUtil.getInstance().getClass(result, false));
+    assertEquals(Class.class, result.getUpperBound());
 
     result = navigator.getType(Object.class, "class.name", true, context);
-    assertEquals(String.class, ReflectionUtil.getInstance().getClass(result, false));
+    assertEquals(String.class, result.getUpperBound());
 
     result = navigator.getType(CollectionPojo.class, "map.key.0.1", true, context);
-    assertEquals(String.class, ReflectionUtil.getInstance().getClass(result, false));
+    assertEquals(String.class, result.getUpperBound());
 
     result = navigator.getType(CollectionPojo.class, "list.0.foo", false, context);
     assertNull(result);

@@ -7,7 +7,6 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
@@ -38,6 +37,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetBuil
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetIndexedBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetMappedBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBuilder;
+import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.util.reflect.VisibilityModifier;
 
 /**
@@ -232,7 +232,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * {@inheritDoc}
    */
   @Override
-  protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoClass, Type pojoType) {
+  protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoClass, GenericType pojoType) {
 
     getInitializationState().requireInitilized();
     PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoClass, pojoType);

@@ -6,6 +6,7 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -13,7 +14,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This is the abstract test-case for implementations of
@@ -51,9 +51,9 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(getAccessor);
       assertEquals(propertyName, getAccessor.getName());
       assertEquals(readType, getAccessor.getPropertyClass());
-      assertEquals(readType, ReflectionUtil.getInstance().getClass(getAccessor.getPropertyType(), false));
-      assertEquals(readType, getAccessor.getReturnClass());
-      assertEquals(readType, ReflectionUtil.getInstance().getClass(getAccessor.getReturnType(), false));
+      assertEquals(readType, getAccessor.getPropertyType().getUpperBound());
+      assertEquals(getAccessor.getPropertyType(), getAccessor.getReturnType());
+      assertSame(getAccessor.getPropertyClass(), getAccessor.getReturnClass());
     }
     // test write accessor
     PojoPropertyAccessorOneArg setAccessor = propertyDescriptor
@@ -64,7 +64,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(setAccessor);
       assertEquals(propertyName, setAccessor.getName());
       assertEquals(writeType, setAccessor.getPropertyClass());
-      assertEquals(writeType, ReflectionUtil.getInstance().getClass(setAccessor.getPropertyType(), false));
+      assertEquals(writeType, setAccessor.getPropertyType().getLowerBound());
     }
   }
 

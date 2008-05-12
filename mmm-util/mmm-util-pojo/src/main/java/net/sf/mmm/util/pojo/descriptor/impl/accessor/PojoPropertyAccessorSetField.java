@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -49,14 +48,6 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
     } catch (IllegalAccessException e) {
       throw new AccessFailedException(e, field);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Type[] getArgumentTypes() {
-
-    return new Type[] { getPropertyType() };
   }
 
   /**

@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import java.lang.reflect.Type;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -33,7 +32,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyRemove;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetIndexed;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetMapped;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.util.text.EnglishSingularizer;
 import net.sf.mmm.util.text.Singularizer;
 
@@ -233,14 +232,13 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
    */
   public void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor) {
 
-    ReflectionUtil reflectionUtil = getConfiguration().getReflectionUtil();
     for (AbstractPojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
       PojoPropertyAccessorNonArg getAccessor = propertyDescriptor
           .getAccessor(PojoPropertyAccessorNonArgMode.GET);
       if (getAccessor != null) {
-        Type type = getAccessor.getReturnType();
+        GenericType type = getAccessor.getReturnType();
         Class<?> typeClass = getAccessor.getReturnClass();
-        Type componentType = reflectionUtil.getComponentType(type, true);
+        GenericType componentType = type.getComponentType();
         boolean isMap = Map.class.isAssignableFrom(typeClass);
         if ((componentType != null) || isMap) {
           // getter type is container (map, array or collection)...

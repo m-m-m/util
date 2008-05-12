@@ -54,10 +54,10 @@ public class ReflectionUtil {
   /** an empty class array */
   public static final Class<?>[] NO_PARAMETERS = new Class[0];
 
-  /** an empty object array */
+  /** an empty {@link Object}-array */
   public static final Object[] NO_ARGUMENTS = new Object[0];
 
-  /** an empty object array */
+  /** an empty {@link Type}-array */
   public static final Type[] NO_TYPES = new Type[0];
 
   /** @see #toType(CharSequenceScanner, ClassResolver, Type) */
@@ -274,6 +274,79 @@ public class ReflectionUtil {
       }
     }
     return Object.class;
+  }
+
+  /**
+   * This method creates the {@link GenericType} representing the given
+   * <code>type</code> in the context of the given <code>definingType</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * If you know the {@link Type} where the given <code>type</code> was
+   * defined you should use {@link #createGenericType(Type, GenericType)}
+   * instead to get a more precise result.
+   * 
+   * @param type is the {@link Type} to represent.
+   * @return the according {@link GenericType}.
+   */
+  public GenericType createGenericType(Type type) {
+
+    if (type instanceof Class) {
+      return new SimpleGenericType((Class<?>) type);
+    } else {
+      return new GenericTypeImpl(type);
+    }
+  }
+
+  /**
+   * This method creates the {@link GenericType} representing the given
+   * <code>type</code> in the context of the given <code>definingType</code>.<br>
+   * Here is some typical example of how to use this:
+   * 
+   * <pre>
+   * {@link ReflectionUtil} util = {@link ReflectionUtil#getInstance()};
+   * Class&lt;?&gt; myClass = getSomeClass();
+   * GenericType definingType = util.{@link #createGenericType(Type) createGenericType}(myClass);
+   * {@link Method} myMethod = findSomeMethod(myClass);
+   * Type returnType = myMethod.{@link Method#getGenericReturnType() getGenericReturnType()};
+   * GenericType type = util.{@link #createGenericType(Type, GenericType) createGenericType}(returnType, definingType);
+   * Class&lt;?&gt; returnClass = type.{@link GenericType#getUpperBound()};
+   * </pre>
+   * 
+   * Now if you ask your self my all this instead of just using
+   * <code>myMethod.{@link Method#getReturnType() getReturnType()}</code>?
+   * Read the javadoc of {@link GenericType} to get the answer.<br>
+   * <b>NOTE:</b><br>
+   * Please look at <code>mmm-util-pojo</code> which allows to use this
+   * features at a higher level and therefore much easier.
+   * 
+   * @see #createGenericType(Type, Class)
+   * 
+   * @param type is the {@link Type} to represent.
+   * @param definingType is the {@link GenericType} where the given
+   *        <code>type</code> is defined in. It is needed to resolve
+   *        {@link java.lang.reflect.TypeVariable}s.
+   * @return the according {@link GenericType}.
+   */
+  public GenericType createGenericType(Type type, GenericType definingType) {
+
+    return new GenericTypeImpl(type, definingType);
+  }
+
+  /**
+   * This method creates the {@link GenericType} representing the given
+   * <code>type</code> in the context of the given <code>definingType</code>.<br>
+   * It is a convenience method for
+   * <code>{@link #createGenericType(Type, GenericType) createGenericType}(type, 
+   * {@link #createGenericType(Type) createGenericType}(definingType))</code>
+   * 
+   * @param type is the {@link Type} to represent.
+   * @param definingType is the {@link Class} where the given <code>type</code>
+   *        is defined in. It is needed to resolve
+   *        {@link java.lang.reflect.TypeVariable}s.
+   * @return the according {@link GenericType}.
+   */
+  public GenericType createGenericType(Type type, Class<?> definingType) {
+
+    return new GenericTypeImpl(type, new SimpleGenericType(definingType));
   }
 
   /**

@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapter;
+import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.SimpleGenericType;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArg}
@@ -47,9 +47,9 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
    * {@inheritDoc}
    */
   @Override
-  public Type getPropertyType() {
+  public GenericType getPropertyType() {
 
-    return getPropertyClass();
+    return SimpleGenericType.TYPE_INT;
   }
 
   /**
@@ -65,7 +65,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
    * {@inheritDoc}
    */
   @Override
-  public Type getReturnType() {
+  public GenericType getReturnType() {
 
     return getPropertyType();
   }

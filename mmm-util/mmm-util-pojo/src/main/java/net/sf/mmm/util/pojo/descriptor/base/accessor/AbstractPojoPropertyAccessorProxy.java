@@ -4,10 +4,10 @@
 package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract implementation of the {@link PojoPropertyAccessor}
@@ -60,14 +60,6 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
-  public Type getReturnType() {
-
-    return getDelegate().getReturnType();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Class<?> getReturnClass() {
 
     return getDelegate().getReturnClass();
@@ -76,9 +68,9 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
-  public Type[] getArgumentTypes() {
+  public GenericType getReturnType() {
 
-    return getDelegate().getArgumentTypes();
+    return getDelegate().getReturnType();
   }
 
   /**
@@ -92,7 +84,7 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
-  public Type getPropertyType() {
+  public GenericType getPropertyType() {
 
     return getDelegate().getPropertyType();
   }

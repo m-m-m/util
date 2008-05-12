@@ -55,8 +55,8 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
    *         {@link PojoPropertyAccessor#getReturnType() returns} a
    *         property-value, <code>false</code> if this mode is for a
    *         modifying {@link PojoPropertyAccessor accessor} that expects a
-   *         property-value as
-   *         {@link PojoPropertyAccessor#getArgumentTypes() argument}.
+   *         {@link PojoPropertyAccessor#getPropertyType() property}-value as
+   *         argument.
    */
   public boolean isReading() {
 

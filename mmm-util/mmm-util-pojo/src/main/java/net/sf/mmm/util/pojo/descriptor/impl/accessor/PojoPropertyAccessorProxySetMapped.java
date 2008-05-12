@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
-import java.lang.reflect.Type;
 import java.util.Map;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -11,6 +10,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorTwoArg}
@@ -49,7 +49,7 @@ public class PojoPropertyAccessorProxySetMapped extends
    * {@inheritDoc}
    */
   @Override
-  public Type getReturnType() {
+  public GenericType getReturnType() {
 
     return getPropertyType();
   }

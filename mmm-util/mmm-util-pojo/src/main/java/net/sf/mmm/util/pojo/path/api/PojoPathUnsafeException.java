@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.util.pojo.NlsBundlePojo;
 
 /**
@@ -13,7 +11,8 @@ import net.sf.mmm.util.pojo.NlsBundlePojo;
  * {@link PojoPathMode#FAIL_IF_NULL} and the {@link PojoPath} was
  * <em>unsafe</em>.
  * 
- * @see PojoPathNavigator#getType(Type, String, boolean, PojoPathContext)
+ * @see PojoPathNavigator#getType(net.sf.mmm.util.reflect.GenericType, String,
+ *      boolean, PojoPathContext)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,11 +24,11 @@ public class PojoPathUnsafeException extends PojoPathException {
   /**
    * The constructor.
    * 
-   * @param initialPojoType is the initial {@link net.sf.mmm.util.pojo.api.Pojo}-{@link Type}
+   * @param initialPojoType is the initial {@link net.sf.mmm.util.pojo.api.Pojo}-type
    *        supplied to the {@link PojoPathNavigator}.
    * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>.
    */
-  public PojoPathUnsafeException(Type initialPojoType, String pojoPath) {
+  public PojoPathUnsafeException(Object initialPojoType, String pojoPath) {
 
     super(NlsBundlePojo.ERR_PATH_UNSAFE, pojoPath, initialPojoType);
   }

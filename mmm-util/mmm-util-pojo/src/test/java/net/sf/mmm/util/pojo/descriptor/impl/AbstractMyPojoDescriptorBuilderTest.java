@@ -9,7 +9,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +23,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
+import net.sf.mmm.util.reflect.GenericType;
 
 /**
  * This is the abstract test-case for
@@ -69,7 +69,7 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     assertEquals(String.class, setter.getPropertyClass());
 
     getter = pojoDescriptor.getAccessor("genericPojo", PojoPropertyAccessorNonArgMode.GET, true);
-    Type genericPojoType = getter.getPropertyType();
+    GenericType genericPojoType = getter.getPropertyType();
     PojoDescriptor<?> genericPojoDescriptor = builder.getDescriptor(genericPojoType);
     getter = genericPojoDescriptor.getAccessor("element", PojoPropertyAccessorNonArgMode.GET, true);
     assertEquals(Long.class, getter.getPropertyClass());
