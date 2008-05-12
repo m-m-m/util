@@ -69,7 +69,7 @@
         <module name="InnerAssignment"/>
         <module name="MagicNumber">
             <property name="severity" value="info"/>
-            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 6, 8, 10, 16, 23, 24, 59, 60, 100, 128, 256, 512, 1000, 1024"/>
+            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 6, 8, 10, 16, 23, 24, 31, 59, 60, 64, 100, 128, 256, 512, 1000, 1024"/>
         </module>
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
@@ -114,6 +114,10 @@
         <module name="GenericIllegalRegexp">
             <property name="format" value="printStackTrace\(\)"/>
             <property name="message" value="Use logger"/>
+        </module>
+        <module name="GenericIllegalRegexp">
+            <property name="format" value="public class Abstract"/>
+            <property name="message" value="Abstract class not abstract"/>
         </module>
     </module>
     <module name="Translation"/>
