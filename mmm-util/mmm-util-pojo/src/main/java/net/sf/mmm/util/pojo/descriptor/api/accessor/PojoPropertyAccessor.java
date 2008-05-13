@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.descriptor.api.accessor;
 
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
 import net.sf.mmm.util.reflect.GenericType;
@@ -86,7 +85,6 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * 
    * @see #getPropertyClass()
    * @see java.beans.PropertyDescriptor#getPropertyType()
-   * @see net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean)
    * 
    * @return the {@link GenericType} reflecting the property.
    */

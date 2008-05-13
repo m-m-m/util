@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
  * This class is a collection of utility functions for reflectively dealing with
  * {@link Collection}s.
  * 
- * @see ReflectionUtil#getComponentType(java.lang.reflect.Type, boolean)
+ * @see GenericType#getComponentType()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -394,7 +394,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           FieldModifiers fieldModifiers = FieldModifiersImpl.getInstance(isSystem, isFinal,
               isReadOnly, isStatic, isTransient);
           boolean isDeleted = accessor.getAccessibleObject().isAnnotationPresent(Deprecated.class);
-          Type fieldType = accessor.getPropertyType();
+          Type fieldType = accessor.getPropertyType().getType();
           Class<?> fieldClass = accessor.getPropertyClass();
           if (fieldClass.isPrimitive()) {
             fieldType = getReflectionUtil().getNonPrimitiveType(fieldClass);

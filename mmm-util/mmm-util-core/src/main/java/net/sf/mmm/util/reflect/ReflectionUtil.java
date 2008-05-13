@@ -7,14 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -123,177 +118,24 @@ public class ReflectionUtil {
   }
 
   /**
-   * This method gets the component-type of the given <code>type</code>.<br>
-   * Here are some examples:<br>
-   * <table border="1">
-   * <tr>
-   * <th>type</th>
-   * <th>getComponentType(type)</th>
-   * </tr>
-   * <tr>
-   * <td><code>List&lt;Map&lt;String, Long&gt;&gt;</code></td>
-   * <td><code>Map&lt;String, Long&gt;</code></td>
-   * </tr>
-   * <tr>
-   * <td><code>List</code></td>
-   * <td><code>Object</code></td>
-   * </tr>
-   * <tr>
-   * <td><code>Foo&lt;Bar&gt;[]</code></td>
-   * <td><code>Foo&lt;Bar&gt;</code></td>
-   * </tr>
-   * <tr>
-   * <td><code>Map&lt;String, Long&gt;</code></td>
-   * <td><code>null</code></td>
-   * </tr>
-   * </table>
-   * 
-   * @param type is the type where to get the component type from.
-   * @param requireCollectionOrArray - if <code>true</code> then
-   * @return the component type of the given <code>type</code> or
-   *         <code>null</code> if the given <code>type</code> does NOT have
-   *         a (single) component type (e.g.
-   *         <code>Map&lt;String, Integer&gt;</code> or <code>MyClass</code>).
-   */
-  public Type getComponentType(Type type, boolean requireCollectionOrArray) {
-
-    if (type instanceof Class) {
-      Class<?> clazz = (Class<?>) type;
-      if (clazz.isArray()) {
-        return clazz.getComponentType();
-      } else if (Collection.class.isAssignableFrom(clazz)) {
-        return Object.class;
-      }
-    } else if (type instanceof GenericArrayType) {
-      GenericArrayType gat = (GenericArrayType) type;
-      return gat.getGenericComponentType();
-    } else if (type instanceof ParameterizedType) {
-      ParameterizedType pt = (ParameterizedType) type;
-      if (requireCollectionOrArray) {
-        Class<?> rawClass = getClass(pt.getRawType(), false);
-        if (!Collection.class.isAssignableFrom(rawClass)) {
-          return null;
-        }
-      }
-      Type[] generics = pt.getActualTypeArguments();
-      if (generics.length == 1) {
-        return generics[0];
-      }
-    }
-    return null;
-  }
-
-  /**
-   * This method gets the most specific {@link Class} available by the type-safe
-   * analyzation of the given generic <code>type</code>. Unlike
-   * {@link #getClass(Type, boolean)} this method resolves {@link TypeVariable}s
-   * with the proper type they have been bound with.<br>
-   * 
-   * Examples: <br>
-   * <table border="1">
-   * <tr>
-   * <th><code>type</code></th>
-   * <th><code>owningType</code></th>
-   * <th><code>{@link #getClass(Type, boolean, Type) getClass}(type, owningType)</code></th>
-   * <th>comment</th>
-   * </tr>
-   * <tr>
-   * <td>E</td>
-   * <td>{@link List}&lt;Foo&gt;</td>
-   * <td>Foo</td>
-   * <td>E is a {@link TypeVariable} representing the generic return-type of
-   * the method {@link List#get(int)}</td>
-   * </tr>
-   * </table>
-   * 
-   * @param type is the type to convert.
-   * @param forAssignment - <code>true</code> if the requested {@link Class}
-   *        should be suitable as parameter or for assignment,
-   *        <code>false</code> if the requested {@link Class} should be
-   *        suitable as return-type of for retrieval.
-   * @param owningType is the type where the given <code>type</code> was
-   *        retrieved from.
-   * @return the closest class representing the given <code>type</code>.
-   */
-  public Class<?> getClass(Type type, boolean forAssignment, Type owningType) {
-
-    if (type instanceof Class) {
-      return (Class<?>) type;
-    } else if (type instanceof ParameterizedType) {
-      ParameterizedType pt = (ParameterizedType) type;
-      return getClass(pt.getRawType(), forAssignment, owningType);
-    } else if (type instanceof WildcardType) {
-      WildcardType wt = (WildcardType) type;
-      if (forAssignment) {
-        Type[] lower = wt.getLowerBounds();
-        if (lower.length == 1) {
-          return getClass(lower[0], forAssignment, owningType);
-        }
-      }
-      Type[] upper = wt.getUpperBounds();
-      if (upper.length == 1) {
-        return getClass(upper[0], forAssignment, owningType);
-      }
-    } else if (type instanceof GenericArrayType) {
-      GenericArrayType gat = (GenericArrayType) type;
-      Class<?> componentType = getClass(gat.getGenericComponentType(), forAssignment, owningType);
-      // this is sort of stupid but there seems no other way...
-      return Array.newInstance(componentType, 0).getClass();
-    } else if (type instanceof TypeVariable) {
-      TypeVariable<?> variable = (TypeVariable<?>) type;
-      if (owningType != null) {
-        GenericDeclaration genericDeclaration = variable.getGenericDeclaration();
-        if (genericDeclaration instanceof Class) {
-          Class<?> declaringClass = (Class<?>) genericDeclaration;
-          TypeVariable<?>[] variables = genericDeclaration.getTypeParameters();
-          for (int variableIndex = 0; variableIndex < variables.length; variableIndex++) {
-            TypeVariable<?> currentVariable = variables[variableIndex];
-            if (variable == currentVariable) {
-              Class<?> owningClass = getClass(owningType, false);
-              Type declaringType = null;
-              if (owningClass == declaringClass) {
-                declaringType = owningType;
-              } else {
-                declaringType = getGenericDeclaration(declaringClass, owningClass);
-                assert (declaringType != null);
-              }
-              if ((declaringType != null) && (declaringType instanceof ParameterizedType)) {
-                ParameterizedType parameterizedSuperType = (ParameterizedType) declaringType;
-                Type[] typeArguments = parameterizedSuperType.getActualTypeArguments();
-                Type variableType = typeArguments[variableIndex];
-                return getClass(variableType, forAssignment, owningType);
-              }
-            }
-          }
-          // } else if (genericDeclaration instanceof Method) {
-        }
-      }
-      Type[] bounds = variable.getBounds();
-      if (bounds.length == 1) {
-        return getClass(bounds[0], forAssignment, owningType);
-      }
-    }
-    return Object.class;
-  }
-
-  /**
    * This method creates the {@link GenericType} representing the given
    * <code>type</code> in the context of the given <code>definingType</code>.<br>
    * <b>ATTENTION:</b><br>
    * If you know the {@link Type} where the given <code>type</code> was
-   * defined you should use {@link #createGenericType(Type, GenericType)}
-   * instead to get a more precise result.
+   * defined (e.g. the {@link Class} where you retrieved the given
+   * <code>type</code> from as parameter, return-type or field-type) you
+   * should use {@link #createGenericType(Type, GenericType)} instead to get a
+   * more precise result.
    * 
    * @param type is the {@link Type} to represent.
    * @return the according {@link GenericType}.
    */
   public GenericType createGenericType(Type type) {
 
-    if (type instanceof Class) {
-      return new SimpleGenericType((Class<?>) type);
-    } else {
-      return new GenericTypeImpl(type);
+    if (type == null) {
+      return null;
     }
+    return new GenericTypeImpl(type);
   }
 
   /**
@@ -347,62 +189,6 @@ public class ReflectionUtil {
   public GenericType createGenericType(Type type, Class<?> definingType) {
 
     return new GenericTypeImpl(type, new SimpleGenericType(definingType));
-  }
-
-  /**
-   * This method gets the raw-type of the given generic <code>type</code>.
-   * 
-   * @see #getClass(Type, boolean)
-   * 
-   * @param type is the type to convert.
-   * @return the closest class representing the given <code>type</code>.
-   */
-  public Class<?> getClass(Type type) {
-
-    return getClass(type, false);
-  }
-
-  /**
-   * This method gets the raw-type of the given generic <code>type</code>.<br>
-   * Examples: <br>
-   * <table border="1">
-   * <tr>
-   * <th><code>type</code></th>
-   * <th><code>{@link #getClass(Type, boolean) getRawClass}(type, false)</code></th>
-   * <th><code>{@link #getClass(Type, boolean) getRawClass}(type, true)</code></th>
-   * </tr>
-   * <tr>
-   * <td><code>String</code></td>
-   * <td><code>String</code></td>
-   * <td><code>String</code></td>
-   * </tr>
-   * <tr>
-   * <td><code>List&lt;String&gt;</code></td>
-   * <td><code>List</code></td>
-   * <td><code>List</code></td>
-   * </tr>
-   * <tr>
-   * <td><code>&lt;T extends MyClass&gt; T[]</code></td>
-   * <td><code>MyClass[]</code></td>
-   * <td><code>MyClass[]</code></td>
-   * </tr>
-   * <tr>
-   * <td><code>? super MyClass</code></td>
-   * <td><code>Object</code></td>
-   * <td><code>MyClass</code></td>
-   * </tr>
-   * </table>
-   * 
-   * @param type is the type to convert.
-   * @param forAssignment - <code>true</code> if the requested {@link Class}
-   *        should be suitable as parameter or for assignment,
-   *        <code>false</code> if the requested {@link Class} should be
-   *        suitable as return-type of for retrieval.
-   * @return the closest class representing the given <code>type</code>.
-   */
-  public Class<?> getClass(Type type, boolean forAssignment) {
-
-    return getClass(type, forAssignment, null);
   }
 
   /**

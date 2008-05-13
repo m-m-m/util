@@ -122,9 +122,8 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    * 
    * @param pojoClass is the {@link Class} reflecting the
    *        {@link net.sf.mmm.util.pojo.api.Pojo} to introspect. It has to be
-   *        the
-   *        {@link net.sf.mmm.util.reflect.ReflectionUtil#getClass(Type, boolean) raw-type}
-   *        of the given <code>pojoType</code>.
+   *        the {@link GenericType#getUpperBound() upper bound} of the given
+   *        <code>pojoType</code>.
    * @param pojoType is the {@link Type} reflecting the
    *        {@link net.sf.mmm.util.pojo.api.Pojo} to introspect.
    * @return the according descriptor.

@@ -4,7 +4,6 @@
 package net.sf.mmm.configuration.binding.base;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -16,7 +15,7 @@ import net.sf.mmm.configuration.binding.api.ConfigurationBindingService;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.CollectionUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.value.api.GenericValue;
 import net.sf.mmm.value.base.AbstractGenericValue;
 
@@ -63,12 +62,11 @@ public abstract class AbstractConfigurationBindingInjector implements Configurat
         Object value = configuration.getValue().getValue(accessor.getPropertyClass());
         accessor.invoke(pojo, value);
       } else {
-        Type propertyType = accessor.getPropertyType();
-        Type componentType = null;
-        componentType = ReflectionUtil.getInstance().getComponentType(propertyType, true);
+        GenericType propertyType = accessor.getPropertyType();
+        GenericType componentType = propertyType.getComponentType();
         if (componentType != null) {
           // handle list-like property...
-          Class<?> componentClass = ReflectionUtil.getInstance().getClass(componentType, false);
+          Class<?> componentClass = componentType.getUpperBound();
           Collection<? extends Configuration> children = configuration.getDescendants("*");
           int childCount = children.size();
           Object[] elements;

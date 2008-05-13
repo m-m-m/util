@@ -10,7 +10,9 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,36 +67,40 @@ public class GenericTypeImpl extends AbstractGenericType {
     ClassBounds bounds = getClassBounds(this.type);
     this.lowerBound = bounds.lowerBound;
     this.upperBound = bounds.upperBound;
-    GenericType genericComponentType = null;
+    Type genericComponentType = null;
     if (valueType instanceof ParameterizedType) {
       ParameterizedType parameterizedType = (ParameterizedType) valueType;
       this.typeArgs = parameterizedType.getActualTypeArguments();
       this.typesArguments = new GenericType[this.typeArgs.length];
-      if (Collection.class.isAssignableFrom(this.upperBound)) {
-        if (this.typeArgs.length == 1) {
-          genericComponentType = getTypeArgument(0);
-        } else {
-          genericComponentType = SimpleGenericType.TYPE_OBJECT;
-        }
-      } else if (Map.class.isAssignableFrom(this.upperBound)) {
-        if (this.typeArgs.length == 2) {
-          genericComponentType = getTypeArgument(1);
-        } else {
-          genericComponentType = SimpleGenericType.TYPE_OBJECT;
-        }
-      }
     } else {
       this.typeArgs = ReflectionUtil.NO_TYPES;
       this.typesArguments = NO_TYPES;
       if (valueType instanceof GenericArrayType) {
         GenericArrayType arrayType = (GenericArrayType) valueType;
-        genericComponentType = create(arrayType.getGenericComponentType(), definingType);
+        genericComponentType = arrayType.getGenericComponentType();
       }
     }
-    if ((genericComponentType == null) && (this.upperBound.isArray())) {
-      genericComponentType = create(this.upperBound.getComponentType(), definingType);
+    if (genericComponentType == null) {
+      TypeVariable<?> componentTypeVariable = null;
+      if (this.upperBound.isArray()) {
+        genericComponentType = this.upperBound.getComponentType();
+      } else if (Collection.class.isAssignableFrom(this.upperBound)) {
+        componentTypeVariable = CommonTypeVariables.TYPE_VARIABLE_COLLECTION_ELEMENT;
+      } else if (Map.class.isAssignableFrom(this.upperBound)) {
+        componentTypeVariable = CommonTypeVariables.TYPE_VARIABLE_MAP_VALUE;
+      }
+      if (componentTypeVariable != null) {
+        genericComponentType = resolveTypeVariable(componentTypeVariable, this);
+        if (genericComponentType == null) {
+          genericComponentType = componentTypeVariable;
+        }
+      }
     }
-    this.componentType = genericComponentType;
+    if (genericComponentType == null) {
+      this.componentType = null;
+    } else {
+      this.componentType = create(genericComponentType, definingType);
+    }
   }
 
   /**
@@ -145,23 +151,21 @@ public class GenericTypeImpl extends AbstractGenericType {
       return getClassBounds(pt.getRawType());
     } else if (currentType instanceof WildcardType) {
       WildcardType wt = (WildcardType) currentType;
-      Class<?> lowerBoundClass;
-      Type[] lower = wt.getLowerBounds();
-      if (lower.length > 0) {
-        ClassBounds bounds = getClassBounds(lower[0]);
-        lowerBoundClass = bounds.lowerBound;
-      } else {
-        // TODO
-        lowerBoundClass = Object.class;
-      }
       Class<?> upperBoundClass;
       Type[] upper = wt.getUpperBounds();
       if (upper.length > 0) {
         ClassBounds bounds = getClassBounds(upper[0]);
         upperBoundClass = bounds.upperBound;
       } else {
-        // TODO
         upperBoundClass = Object.class;
+      }
+      Class<?> lowerBoundClass;
+      Type[] lower = wt.getLowerBounds();
+      if (lower.length > 0) {
+        ClassBounds bounds = getClassBounds(lower[0]);
+        lowerBoundClass = bounds.lowerBound;
+      } else {
+        lowerBoundClass = upperBoundClass;
       }
       return new ClassBounds(lowerBoundClass, upperBoundClass);
     } else if (currentType instanceof GenericArrayType) {
@@ -178,35 +182,13 @@ public class GenericTypeImpl extends AbstractGenericType {
     } else if (currentType instanceof TypeVariable) {
       TypeVariable<?> variable = (TypeVariable<?>) currentType;
       if (this.definingType != null) {
-        GenericDeclaration genericDeclaration = variable.getGenericDeclaration();
-        if (genericDeclaration instanceof Class) {
-          Class<?> declaringClass = (Class<?>) genericDeclaration;
-          TypeVariable<?>[] variables = genericDeclaration.getTypeParameters();
-          for (int variableIndex = 0; variableIndex < variables.length; variableIndex++) {
-            TypeVariable<?> currentVariable = variables[variableIndex];
-            if (variable == currentVariable) {
-              Class<?> owningClass = this.definingType.getUpperBound();
-              Type owningType = this.definingType.getType();
-              Type declaringType = null;
-              if (owningClass == declaringClass) {
-                declaringType = owningType;
-              } else {
-                declaringType = getGenericDeclaration(declaringClass, owningClass);
-                assert (declaringType != null);
-              }
-              if ((declaringType != null) && (declaringType instanceof ParameterizedType)) {
-                ParameterizedType parameterizedSuperType = (ParameterizedType) declaringType;
-                Type[] typeArguments = parameterizedSuperType.getActualTypeArguments();
-                Type variableType = typeArguments[variableIndex];
-                return getClassBounds(variableType);
-              }
-            }
-          }
-          // } else if (genericDeclaration instanceof Method) {
+        Type resolvedType = resolveTypeVariable(variable, this.definingType);
+        if ((resolvedType != null) && (resolvedType != variable)) {
+          return getClassBounds(resolvedType);
         }
       }
       Type[] bounds = variable.getBounds();
-      if (bounds.length == 1) {
+      if (bounds.length > 0) {
         return getClassBounds(bounds[0]);
       }
     }
@@ -226,6 +208,137 @@ public class GenericTypeImpl extends AbstractGenericType {
 
     // this is sort of stupid but there seems no other way...
     return Array.newInstance(componentClass, 0).getClass();
+  }
+
+  /**
+   * This method gets the declaration-index of the given
+   * <code>typeVariable</code>.
+   * 
+   * @param typeVariable is the {@link TypeVariable}.
+   * @return the index of the given <code>typeVariable</code> in its
+   *         {@link TypeVariable#getGenericDeclaration() declaration}.
+   */
+  protected int getDeclarationIndex(TypeVariable<?> typeVariable) {
+
+    GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
+    TypeVariable<?>[] variables = genericDeclaration.getTypeParameters();
+    for (int variableIndex = 0; variableIndex < variables.length; variableIndex++) {
+      if (variables[variableIndex] == typeVariable) {
+        return variableIndex;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * This method resolves the given <code>typeVariable</code> in the context
+   * of the given <code>declaringType</code>.
+   * 
+   * @param typeVariable is the {@link TypeVariable} to resolve.
+   * @param declaringType is the {@link GenericType} where the given
+   *        <code>typeVariable</code> occurs or is replaced.
+   * @return the resolved {@link Type} or <code>null</code> if the given
+   *         <code>typeVariable</code> could NOT be resolved (e.g. it was
+   *         {@link TypeVariable#getGenericDeclaration() declared} in a
+   *         {@link Class} that is NOT
+   *         {@link Class#isAssignableFrom(Class) assignable from} the given
+   *         <code>declaringType</code>) .
+   */
+  protected Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType declaringType) {
+
+    GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
+    if (genericDeclaration instanceof Class) {
+      Class<?> declaringClass = (Class<?>) genericDeclaration;
+      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getUpperBound());
+      if (hierarchy != null) {
+        TypeVariable<?> currentVariable = typeVariable;
+        for (int i = hierarchy.size() - 1; i >= -1; i--) {
+          Type hierarchyType;
+          if (i >= 0) {
+            hierarchyType = hierarchy.get(i);
+          } else {
+            hierarchyType = declaringType.getType();
+          }
+          if (hierarchyType instanceof ParameterizedType) {
+            ParameterizedType pt = (ParameterizedType) hierarchyType;
+            Type[] typeArguments = pt.getActualTypeArguments();
+            int variableIndex = getDeclarationIndex(currentVariable);
+            if (variableIndex >= 0) {
+              Type typeArgument = typeArguments[variableIndex];
+              if (typeArgument instanceof TypeVariable) {
+                currentVariable = (TypeVariable<?>) typeArgument;
+              } else {
+                return typeArgument;
+              }
+            }
+          }
+        }
+        if (currentVariable != typeVariable) {
+          // NOT really resolved, but maybe bounds are more specific...
+          return currentVariable;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * This method walks up the {@link Class}-hierarchy from
+   * <code>descendant</code> up to <code>ancestor</code> and collects the
+   * generic {@link Class#getGenericSuperclass() super-classes} or
+   * {@link Class#getGenericInterfaces() super-interfaces} of
+   * <code>ancestor</code> on that hierarchy-path.<br>
+   * Please note that if <code>ancestor</code> is an
+   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
+   * such case it will be unspecified which of the possible paths is used.
+   * 
+   * @param ancestor is the super-class or super-interface of
+   *        <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of
+   *        <code>ancestor</code>.
+   * @return the {@link List} of the generic super-{@link Type}s from
+   *         <code>descendant</code> up to <code>ancestor</code>, where the
+   *         first element represents the super-{@link Type} of
+   *         <code>descendant</code> and the last element represents the
+   *         generic declaration of <code>ancestor</code> itself.
+   */
+  protected List<Type> getGenericDeclarations(Class<?> ancestor, Class<?> descendant) {
+
+    if (!ancestor.isAssignableFrom(descendant)) {
+      return null;
+    }
+    List<Type> declarations = new ArrayList<Type>();
+    if (ancestor != descendant) {
+      Class<?> child = descendant;
+      if (ancestor.isInterface()) {
+        while (child != ancestor) {
+          Class<?>[] interfaces = child.getInterfaces();
+          Class<?> superInterface = null;
+          for (int i = 0; i < interfaces.length; i++) {
+            Class<?> currentInterface = interfaces[i];
+            if (ancestor.isAssignableFrom(currentInterface)) {
+              superInterface = currentInterface;
+              Type genericDeclaration = child.getGenericInterfaces()[i];
+              declarations.add(genericDeclaration);
+              break;
+            }
+          }
+          if (superInterface == null) {
+            declarations.add(child.getGenericSuperclass());
+            child = child.getSuperclass();
+          } else {
+            child = superInterface;
+          }
+        }
+      } else {
+        while (child != ancestor) {
+          Type genericDeclaration = child.getGenericSuperclass();
+          declarations.add(genericDeclaration);
+          child = child.getSuperclass();
+        }
+      }
+    }
+    return declarations;
   }
 
   /**

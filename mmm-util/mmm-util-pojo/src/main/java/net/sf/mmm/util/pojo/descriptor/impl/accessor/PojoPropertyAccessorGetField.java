@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -12,7 +11,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorField;
 import net.sf.mmm.util.reflect.AccessFailedException;
-import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArg}
@@ -47,14 +45,6 @@ public class PojoPropertyAccessorGetField extends AbstractPojoPropertyAccessorFi
     } catch (IllegalAccessException e) {
       throw new AccessFailedException(e, getField());
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Type[] getArgumentTypes() {
-
-    return ReflectionUtil.NO_TYPES;
   }
 
   /**
