@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!-- $Id$ -->
-<root xmlns:mmm="http://m-m-m.sf.net/namespaces/configuration">
-  <server>
-    <service name="ServiceD" class="java.lang.String" policy="singleton"/>
-    <service name="ServiceE" class="java.lang.Integer" policy="per-request"/>
-  </server>
-</root>

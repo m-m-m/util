@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id$ -->
-<root>
-  <server port="8080" host="localhost">
-    <service name="ServiceA" class="java.lang.String" policy="singleton"/>
-    <service name="ServiceB" class="java.lang.Integer" policy="per-request"/>
-  </server>
-</root>
