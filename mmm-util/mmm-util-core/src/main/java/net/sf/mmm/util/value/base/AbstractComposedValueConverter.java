@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
-import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
@@ -12,8 +11,8 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractComposedValueConverter extends AbstractLoggable implements
-    ComposedValueConverter {
+public abstract class AbstractComposedValueConverter extends AbstractValueConverter<Object, Object>
+    implements ComposedValueConverter {
 
   /**
    * The constructor.
@@ -37,14 +36,6 @@ public abstract class AbstractComposedValueConverter extends AbstractLoggable im
   public final Class<Object> getTargetType() {
 
     return Object.class;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Object convert(Object value, Object valueSource, Class<? extends Object> targetClass) {
-
-    return convert(value, valueSource, targetClass, targetClass);
   }
 
 }

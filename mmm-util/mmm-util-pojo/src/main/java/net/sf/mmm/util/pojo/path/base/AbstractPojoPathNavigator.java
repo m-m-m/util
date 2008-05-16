@@ -842,12 +842,10 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
         result = null;
         try {
           if (converter != null) {
-            result = converter.convert(pojo, currentPath, targetClass, currentPath.pojoType
-                .getType());
+            result = converter.convert(pojo, currentPath, targetClass);
           }
           if (result == null) {
-            result = this.valueConverter.convert(pojo, currentPath, targetClass,
-                currentPath.pojoType.getType());
+            result = this.valueConverter.convert(pojo, currentPath, targetClass);
           }
         } catch (RuntimeException e) {
           throw new PojoPathConversionException(currentPath.getPojoPath(), pojoClass,

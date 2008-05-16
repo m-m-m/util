@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.component.ResourceMissingException;
@@ -55,16 +54,17 @@ public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends
   @Resource
   public void setComposedValueConverter(ComposedValueConverter composedValueConverter) {
 
+    getInitializationState().requireNotInitilized();
     this.composedValueConverter = composedValueConverter;
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() {
+  @Override
+  protected void doInitialize() {
 
+    super.doInitialize();
     if (this.composedValueConverter == null) {
       throw new ResourceMissingException("composedValueConverter");
     }

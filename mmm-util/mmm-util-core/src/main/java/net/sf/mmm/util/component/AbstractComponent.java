@@ -45,7 +45,9 @@ public abstract class AbstractComponent {
    * When you override this method from a sub-class you need to do a
    * <code>super.{@link #doInitialize()}</code>.
    */
-  protected abstract void doInitialize();
+  protected void doInitialize() {
+
+  }
 
   /**
    * This method gets the {@link InitializationState} of this component.

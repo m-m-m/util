@@ -5,7 +5,6 @@ package net.sf.mmm.term.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.configuration.api.Configuration;
 import net.sf.mmm.term.base.AbstractFunctionService;
 
 /**
@@ -23,16 +22,6 @@ public class FunctionServiceImpl extends AbstractFunctionService {
   public FunctionServiceImpl() {
 
     super();
-  }
-
-  /**
-   * This method configures this service.
-   * 
-   * @param configuration is the configuration to inject.
-   */
-  @Resource
-  public void configure(Configuration configuration) {
-
   }
 
 }

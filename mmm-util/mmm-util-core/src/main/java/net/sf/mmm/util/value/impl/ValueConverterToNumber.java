@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.util.math.MathUtil;
 import net.sf.mmm.util.math.NumberType;
-import net.sf.mmm.util.value.base.AbstractValueConverter;
+import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
  * This is an implementation of the
@@ -17,7 +15,7 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueConverterToNumber extends AbstractValueConverter<Object, Number> {
+public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object, Number> {
 
   /** @see #getMathUtil() */
   private final MathUtil mathUtil;
@@ -86,8 +84,7 @@ public class ValueConverterToNumber extends AbstractValueConverter<Object, Numbe
   /**
    * {@inheritDoc}
    */
-  public Number convert(Object value, Object valueSource, Class<? extends Number> targetClass,
-      Type targetType) {
+  public Number convert(Object value, Object valueSource, Class<? extends Number> targetClass) {
 
     if (value == null) {
       return null;

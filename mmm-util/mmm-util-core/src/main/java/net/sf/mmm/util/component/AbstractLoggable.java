@@ -67,6 +67,7 @@ public abstract class AbstractLoggable extends AbstractComponent {
   @Override
   protected void doInitialize() {
 
+    super.doInitialize();
     if (this.logger == null) {
       // new Jdk14Logger(getClass()));
       // even more ugly...

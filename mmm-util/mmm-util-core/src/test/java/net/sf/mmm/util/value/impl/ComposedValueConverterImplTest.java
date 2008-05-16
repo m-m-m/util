@@ -4,17 +4,18 @@
 package net.sf.mmm.util.value.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
-import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 
 import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
-import net.sf.mmm.util.value.base.AbstractValueConverter;
+import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
  * This is the test-case for {@link ComposedValueConverterImpl}.
@@ -68,6 +69,34 @@ public class ComposedValueConverterImplTest {
     // convert to enum
     value = converter.convert(someEnumConstant, valueSource, TestEnum.class);
     assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
+    value = converter.convert(TestEnum.SOME_ENUM_CONSTANT.name(), valueSource, TestEnum.class);
+    assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
+    // convert to collection
+    String first = "first";
+    String second = "2nd";
+    String third = "3.";
+    String[] array = new String[] { first, second, third };
+    value = converter.convert(array, valueSource, List.class);
+    assertNotNull(value);
+    List list = (List) value;
+    assertEquals(array.length, list.size());
+    for (int index = 0; index < array.length; index++) {
+      assertSame(array[index], list.get(index));
+    }
+    StringBuilder buffer = new StringBuilder();
+    for (int index = 0; index < array.length; index++) {
+      buffer.append(array[index]);
+      if (index < array.length - 1) {
+        buffer.append(',');
+      }
+    }
+    value = converter.convert(buffer.toString(), valueSource, List.class);
+    assertNotNull(value);
+    list = (List) value;
+    assertEquals(array.length, list.size());
+    for (int index = 0; index < array.length; index++) {
+      assertEquals(array[index], list.get(index));
+    }
   }
 
   @Test
@@ -108,7 +137,8 @@ public class ComposedValueConverterImplTest {
     assertSame(ValueConverterFooToObject.MAGIC, value);
   }
 
-  private static class ValueConverterToInteger extends AbstractValueConverter<Object, Integer> {
+  private static class ValueConverterToInteger extends
+      AbstractSimpleValueConverter<Object, Integer> {
 
     public static final Integer MAGIC = Integer.valueOf(4242);
 
@@ -122,8 +152,7 @@ public class ComposedValueConverterImplTest {
       return Integer.class;
     }
 
-    public Integer convert(Object value, Object valueSource, Class<? extends Integer> targetClass,
-        Type targetType) {
+    public Integer convert(Object value, Object valueSource, Class<? extends Integer> targetClass) {
 
       if ((value != null) && (value instanceof String)) {
         return MAGIC;
@@ -137,7 +166,7 @@ public class ComposedValueConverterImplTest {
 
   }
 
-  private static class ValueConverterFooToObject extends AbstractValueConverter<Foo, Object> {
+  private static class ValueConverterFooToObject extends AbstractSimpleValueConverter<Foo, Object> {
 
     public static final Integer MAGIC = Integer.valueOf(42);
 
@@ -160,8 +189,7 @@ public class ComposedValueConverterImplTest {
     /**
      * {@inheritDoc}
      */
-    public Object convert(Foo value, Object valueSource, Class<? extends Object> targetClass,
-        Type targetType) {
+    public Object convert(Foo value, Object valueSource, Class<? extends Object> targetClass) {
 
       if ((value != null) && (Integer.class.equals(targetClass))) {
         return MAGIC;

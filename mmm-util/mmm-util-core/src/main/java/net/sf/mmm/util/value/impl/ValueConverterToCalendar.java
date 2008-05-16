@@ -3,12 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.Date;
 
 import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.value.base.AbstractValueConverter;
+import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
  * This is an implementation of the
@@ -17,7 +16,7 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ValueConverterToCalendar extends AbstractValueConverter<Object, Calendar> {
+public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Object, Calendar> {
 
   /** @see #getIso8601Util() */
   private final Iso8601Util iso8601Util;
@@ -71,10 +70,9 @@ public class ValueConverterToCalendar extends AbstractValueConverter<Object, Cal
   /**
    * {@inheritDoc}
    */
-  public Calendar convert(Object value, Object valueSource, Class<? extends Calendar> targetClass,
-      Type targetType) {
+  public Calendar convert(Object value, Object valueSource, Class<? extends Calendar> targetClass) {
 
-    if (value == null) {
+    if ((value == null) || (targetClass != Calendar.class)) {
       return null;
     }
     if (value instanceof Date) {

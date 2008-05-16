@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
+
 /**
  * This is the interface for a {@link ValueConverter} that is composed out of
  * individual {@link ValueConverter}s. The idea of this interface is the idiom
@@ -12,7 +13,7 @@ package net.sf.mmm.util.value.api;
  * generic converter following the composition-pattern. Therefore this generic
  * converter needs to choose the individual {@link ValueConverter} that is
  * appropriate for a specific
- * {@link #convert(Object, Object, Class, java.lang.reflect.Type) conversion}.<br>
+ * {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) conversion}.<br>
  * <br>
  * The meaning of <em>appropriate</em> here can depend on the implementation.
  * However it needs to guarantee that the {@link #getSourceType() source-type}
@@ -105,7 +106,7 @@ package net.sf.mmm.util.value.api;
  * </tr>
  * </table> <br>
  * However the chosen converter may
- * {@link #convert(Object, Object, Class, java.lang.reflect.Type) return}
+ * {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) return}
  * <code>null</code> to indicate that conversion is NOT possible. This
  * {@link ComposedValueConverter} should therefore try all applicable converters
  * starting from most to least specific until conversion succeeds. If all

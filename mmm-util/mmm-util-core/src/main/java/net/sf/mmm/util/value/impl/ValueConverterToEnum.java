@@ -3,10 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.value.base.AbstractValueConverter;
+import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
  * This is an implementation of the
@@ -17,7 +15,7 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("unchecked")
-public class ValueConverterToEnum extends AbstractValueConverter<Object, Enum> {
+public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, Enum> {
 
   /** @see #getStringUtil() */
   private final StringUtil stringUtil;
@@ -70,8 +68,7 @@ public class ValueConverterToEnum extends AbstractValueConverter<Object, Enum> {
   /**
    * {@inheritDoc}
    */
-  public Enum convert(Object value, Object valueSource, Class<? extends Enum> targetClass,
-      Type targetType) {
+  public Enum convert(Object value, Object valueSource, Class<? extends Enum> targetClass) {
 
     if (value == null) {
       return null;

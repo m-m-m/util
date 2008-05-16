@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.date.Iso8601Util;
 import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.reflect.CollectionReflectionUtil;
 
 /**
  * This is a default {@link net.sf.mmm.util.value.api.ComposedValueConverter}.
@@ -27,6 +28,9 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
 
   /** @see #getStringUtil() */
   private StringUtil stringUtil;
+
+  /** @see #getCollectionReflectionUtil() */
+  private CollectionReflectionUtil collectionReflectionUtil;
 
   /**
    * The constructor.
@@ -101,6 +105,26 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   }
 
   /**
+   * This method gets the {@link CollectionReflectionUtil} instance to use.
+   * 
+   * @return the {@link CollectionReflectionUtil} to use.
+   */
+  protected CollectionReflectionUtil getCollectionReflectionUtil() {
+
+    return this.collectionReflectionUtil;
+  }
+
+  /**
+   * @param collectionReflectionUtil is the collectionReflectionUtil to set
+   */
+  @Resource
+  public void setCollectionReflectionUtil(CollectionReflectionUtil collectionReflectionUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.collectionReflectionUtil = collectionReflectionUtil;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -116,11 +140,16 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
     if (this.stringUtil == null) {
       this.stringUtil = StringUtil.getInstance();
     }
-    addConverter(new ValueConverterToDate(this.iso8601Util));
-    addConverter(new ValueConverterToCalendar(this.iso8601Util));
-    addConverter(new ValueConverterToNumber(this.mathUtil));
-    addConverter(new ValueConverterToString(this.iso8601Util, this.stringUtil));
-    addConverter(new ValueConverterToEnum(this.stringUtil));
+    addConverter(new ValueConverterToDate(getIso8601Util()));
+    addConverter(new ValueConverterToCalendar(getIso8601Util()));
+    addConverter(new ValueConverterToNumber(getMathUtil()));
+    addConverter(new ValueConverterToString(getIso8601Util(), getStringUtil()));
+    addConverter(new ValueConverterToEnum(getStringUtil()));
+    ValueConverterToCollection converter2collection = new ValueConverterToCollection();
+    converter2collection.setReflectionUtil(getReflectionUtil());
+    converter2collection.setCollectionReflectionUtil(getCollectionReflectionUtil());
+    converter2collection.setComposedValueConverter(this);
+    converter2collection.initialize();
+    addConverter(converter2collection);
   }
-
 }

@@ -74,6 +74,7 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
   @Override
   protected void doInitialize() {
 
+    super.doInitialize();
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtil.getInstance();
     }

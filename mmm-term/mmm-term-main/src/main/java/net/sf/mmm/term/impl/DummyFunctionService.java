@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.impl;
 
-import net.sf.mmm.configuration.api.ConfigurationException;
 import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.base.AbstractFunctionService;
 import net.sf.mmm.term.impl.function.FctAbsolute;
@@ -27,6 +26,7 @@ import net.sf.mmm.term.impl.function.FctOr;
 import net.sf.mmm.term.impl.function.FctSubtract;
 import net.sf.mmm.term.impl.function.FunctionElse;
 import net.sf.mmm.term.impl.function.FunctionSwitch;
+import net.sf.mmm.util.nls.NlsRuntimeException;
 
 /**
  * This is a dummy implementation of the
@@ -75,7 +75,8 @@ public class DummyFunctionService extends AbstractFunctionService {
       registerFunction(new GenericFunction(FctOr.class));
       registerFunction(new GenericFunction(FctSubtract.class));
     } catch (FunctionException e) {
-      throw new ConfigurationException("Function-service initialization failed!", e);
+      // TODO
+      throw new NlsRuntimeException("Function-service initialization failed!", e) {};
     }
   }
 

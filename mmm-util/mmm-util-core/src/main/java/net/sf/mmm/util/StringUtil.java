@@ -582,7 +582,7 @@ public class StringUtil {
       char c = chars[i];
       char lower = Character.toLowerCase(c);
       if (c == lower) {
-        lastCharWasLowerCase = true;
+        lastCharWasLowerCase = Character.isLowerCase(c);
       } else {
         if (lastCharWasLowerCase) {
           buffer.append(separator);

@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import java.lang.reflect.Type;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the interface for a converter that
- * {@link #convert(Object, Object, Class, Type) converts} a value from a
+ * {@link #convert(Object, Object, GenericType) converts} a value from a
  * {@link #getSourceType() source-type} to a specific
  * {@link #getTargetType() target-type}.<br>
  * <b>ATTENTION:</b><br>
@@ -31,7 +31,7 @@ public interface ValueConverter<SOURCE, TARGET> {
 
   /**
    * Is the guaranteed return-type of the
-   * {@link #convert(Object, Object, Class, Type) conversion}. This information
+   * {@link #convert(Object, Object, GenericType) conversion}. This information
    * is used externally to choose the most specific {@link ValueConverter} that
    * is {@link Class#isAssignableFrom(Class) appropriate} for the conversion.<br>
    * E.g. a generic converter can have {@link Object} as
@@ -43,7 +43,7 @@ public interface ValueConverter<SOURCE, TARGET> {
    * objects the generic converter is chosen.<br>
    * Please note that the {@link #getTargetType() target-type} is often more
    * general than the actual
-   * {@link #convert(Object, Object, Class, Type) returned result}. So a
+   * {@link #convert(Object, Object, GenericType) returned result}. So a
    * {@link ValueConverter} that converts a comma-separated {@link String} to an
    * {@link java.util.ArrayList} will typically declare {@link java.util.List}
    * as {@link #getTargetType() target-type}.
@@ -56,7 +56,7 @@ public interface ValueConverter<SOURCE, TARGET> {
    * This method converts the given <code>pojo</code> to the
    * &lt;TARGET&gt;-type.
    * 
-   * @see #convert(Object, Object, Class, Type)
+   * @see #convert(Object, Object, GenericType)
    * 
    * @param value is the value to convert.
    * @param valueSource describes the source of the value. This may be the
@@ -84,18 +84,13 @@ public interface ValueConverter<SOURCE, TARGET> {
    *        filename where the value was read from, an XPath where the value was
    *        located in an XML document, etc. It is used in exceptions thrown if
    *        something goes wrong. This will help to find the problem easier.
-   * @param targetClass is the type to convert the <code>value</code> to. It
-   *        is the raw-type of the given <code>targetType</code>.
-   * @param targetType is the type to convert the <code>value</code> to. It is
-   *        potentially generic and therefore contains more detailed information
-   *        than <code>targetClass</code>. E.g. the <code>targetClass</code>
-   *        may be <code>java.util.List</code> while this
+   * @param targetType is the {@link GenericType} to convert the
+   *        <code>value</code> to. It is potentially generic and therefore
+   *        contains more detailed information than a {@link Class}. E.g. the
    *        <code>targetType</code> could be
    *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if
    *        the <code>value</code> is a string like
-   *        <code>"2, 47, 4252525"</code>. If no generic {@link Type} is
-   *        available please use {@link #convert(Object, Object, Class)} in
-   *        advance.
+   *        <code>"2, 47, 4252525"</code>.
    * @return the converted <code>value</code> or <code>null</code> if the
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given
@@ -104,7 +99,7 @@ public interface ValueConverter<SOURCE, TARGET> {
    *         <code>value</code> is illegal for the given
    *         <code>targetClass</code>).
    */
-  TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass,
-      Type targetType) throws ValueException;
+  TARGET convert(SOURCE value, Object valueSource, GenericType<? extends TARGET> targetType)
+      throws ValueException;
 
 }
