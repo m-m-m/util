@@ -27,12 +27,10 @@
   </dependencies>
   
   <modules>
-    <!-- <module>mmm-configuration</module> -->
     <module>mmm-content</module>
     <module>mmm-gui</module>
     <module>mmm-search</module>
     <module>mmm-setup</module>
-    <!-- <module>mmm-term</module> -->
     <module>mmm-upnp</module>
     <module>mmm-util</module>
     <module>mmm-uit</module>
