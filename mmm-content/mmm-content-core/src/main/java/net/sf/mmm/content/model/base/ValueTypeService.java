@@ -5,7 +5,7 @@ package net.sf.mmm.content.model.base;
 
 import java.util.Collection;
 
-import net.sf.mmm.util.reflect.ClassResolver;
+import net.sf.mmm.util.reflect.api.ClassResolver;
 
 /**
  * This is the call-back interface used by the content-model to resolve the

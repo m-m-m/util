@@ -1,11 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect;
+package net.sf.mmm.util.reflect.base;
 
 import java.util.Map;
 
 import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.reflect.api.ClassResolver;
 
 /**
  * This is an implementation of the {@link ClassResolver} interface that uses an

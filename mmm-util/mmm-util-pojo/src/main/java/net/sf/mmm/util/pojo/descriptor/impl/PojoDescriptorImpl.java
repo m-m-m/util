@@ -26,7 +26,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGetByKey;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetByIndex;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetByKey;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the abstract base implementation of the

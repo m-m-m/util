@@ -24,22 +24,22 @@ import org.junit.Test;
 import net.sf.mmm.util.GenericBean;
 
 /**
- * This is the test-case for {@link CollectionUtil}.
+ * This is the test-case for {@link CollectionReflectionUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class CollectionUtilTest {
+public class CollectionReflectionUtilTest {
 
-  protected CollectionUtil getCollectionUtil() {
+  protected CollectionReflectionUtil getCollectionReflectionUtil() {
 
-    return CollectionUtil.getInstance();
+    return CollectionReflectionUtil.getInstance();
   }
 
   @Test
   public void testCreate() {
 
-    CollectionUtil util = getCollectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
     List<String> list = util.create(List.class);
     assertNotNull(list);
     assertTrue(list.isEmpty());
@@ -69,7 +69,7 @@ public class CollectionUtilTest {
   @Test
   public void testSet() {
 
-    CollectionUtil util = getCollectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
     Object result;
 
     // test array...
@@ -146,7 +146,7 @@ public class CollectionUtilTest {
   @Test
   public void testGetSize() {
 
-    CollectionUtil util = getCollectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
     int size = 42;
     Integer[] array = new Integer[size];
     assertEquals(array.length, util.getSize(array));
@@ -160,7 +160,7 @@ public class CollectionUtilTest {
   @Test
   public void testGet() {
 
-    CollectionUtil util = getCollectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
 
     // test array...
     String one = "The first one!";
@@ -184,7 +184,7 @@ public class CollectionUtilTest {
   @Test
   public void testAdd() {
 
-    CollectionUtil util = getCollectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
 
     String one = "The first one!";
     String two = "Second...";
@@ -221,7 +221,7 @@ public class CollectionUtilTest {
   @Test
   public void testRemove() {
 
-    CollectionUtil util = getCollectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
 
     String one = "The first one!";
     String two = "Second...";

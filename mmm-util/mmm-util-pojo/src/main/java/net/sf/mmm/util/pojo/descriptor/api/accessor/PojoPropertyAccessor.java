@@ -6,7 +6,7 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
 import java.lang.reflect.AccessibleObject;
 
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * A {@link PojoPropertyAccessor} gives {@link #getAccessibleObject() access} to

@@ -5,8 +5,8 @@ package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.util.reflect.InstantiationFailedException;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the interface for the navigator used to traverse the object-web
@@ -138,7 +138,7 @@ public interface PojoPathNavigator {
    *         by <code>mode</code>.
    * @throws PojoPathException if the operation failed for arbitrary reasons.
    */
-  GenericType getType(GenericType pojoType, String pojoPath, boolean failOnUnsafePath,
+  GenericType<?> getType(GenericType<?> pojoType, String pojoPath, boolean failOnUnsafePath,
       PojoPathContext context) throws PojoPathException, IllegalPojoPathException,
       PojoPathUnsafeException;
 
@@ -181,7 +181,7 @@ public interface PojoPathNavigator {
    *         by <code>mode</code>.
    * @throws PojoPathException if the operation failed for arbitrary reasons.
    */
-  GenericType getType(Type pojoType, String pojoPath, boolean failOnUnsafePath,
+  GenericType<?> getType(Type pojoType, String pojoPath, boolean failOnUnsafePath,
       PojoPathContext context) throws PojoPathException, IllegalPojoPathException,
       PojoPathUnsafeException;
 

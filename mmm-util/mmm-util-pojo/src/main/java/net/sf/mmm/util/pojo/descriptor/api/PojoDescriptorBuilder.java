@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.descriptor.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the interface used to {@link #getDescriptor(Class) get} (or create)

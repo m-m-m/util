@@ -26,6 +26,10 @@ import net.sf.mmm.util.filter.CharFilter;
 import net.sf.mmm.util.filter.Filter;
 import net.sf.mmm.util.filter.ListCharFilter;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.reflect.type.GenericArrayTypeImpl;
 import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
 import net.sf.mmm.util.reflect.type.ParameterizedTypeImpl;
@@ -119,7 +123,32 @@ public class ReflectionUtil {
 
   /**
    * This method creates the {@link GenericType} representing the given
-   * <code>type</code> in the context of the given <code>definingType</code>.<br>
+   * <code>type</code>.<br>
+   * The {@link GenericType#getType() type},
+   * {@link GenericType#getLowerBound() lower bound} and
+   * {@link GenericType#getUpperBound() upper bound} of the returned
+   * {@link GenericType} will all be identical to the given <code>type</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * If you know the {@link Type} where the given <code>type</code> was
+   * {@link net.sf.mmm.util.reflect.base.AbstractGenericType#getDefiningType() defined}
+   * you should use {@link #createGenericType(Type, GenericType)} instead to get
+   * a more precise result. <br>
+   * 
+   * @param <T> is the templated type of the {@link Class} to convert.
+   * 
+   * @param type is the {@link Type} to represent.
+   * @return the according {@link GenericType}.
+   */
+  public <T> GenericType<T> createGenericType(Class<T> type) {
+
+    return new SimpleGenericTypeImpl<T>(type);
+  }
+
+  /**
+   * This method creates the {@link GenericType} representing the given
+   * <code>type</code>.<br>
+   * If the given <code>type</code> is a {@link Class}, the methods behaves
+   * like {@link #createGenericType(Class)}.<br>
    * <b>ATTENTION:</b><br>
    * If you know the {@link Type} where the given <code>type</code> was
    * defined (e.g. the {@link Class} where you retrieved the given
@@ -130,12 +159,14 @@ public class ReflectionUtil {
    * @param type is the {@link Type} to represent.
    * @return the according {@link GenericType}.
    */
-  public GenericType createGenericType(Type type) {
+  @SuppressWarnings("unchecked")
+  public GenericType<?> createGenericType(Type type) {
 
-    if (type == null) {
-      return null;
+    if (type instanceof Class) {
+      return createGenericType((Class<?>) type);
+    } else {
+      return new GenericTypeImpl(type);
     }
-    return new GenericTypeImpl(type);
   }
 
   /**
@@ -168,7 +199,8 @@ public class ReflectionUtil {
    *        {@link java.lang.reflect.TypeVariable}s.
    * @return the according {@link GenericType}.
    */
-  public GenericType createGenericType(Type type, GenericType definingType) {
+  @SuppressWarnings("unchecked")
+  public GenericType<?> createGenericType(Type type, GenericType<?> definingType) {
 
     return new GenericTypeImpl(type, definingType);
   }
@@ -186,9 +218,10 @@ public class ReflectionUtil {
    *        {@link java.lang.reflect.TypeVariable}s.
    * @return the according {@link GenericType}.
    */
-  public GenericType createGenericType(Type type, Class<?> definingType) {
+  @SuppressWarnings("unchecked")
+  public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
-    return new GenericTypeImpl(type, new SimpleGenericType(definingType));
+    return new GenericTypeImpl(type, createGenericType(definingType));
   }
 
   /**
@@ -282,55 +315,6 @@ public class ReflectionUtil {
         parent = child.getSuperclass();
       }
       return child.getGenericSuperclass();
-    }
-  }
-
-  /**
-   * This method collects the {@link Class} objects in the hierarchy from
-   * <code>descendant</code> up to <code>ancestor</code> excluding these two
-   * classes themselves.<br>
-   * Please note that if <code>ancestor</code> is an
-   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
-   * such case it will be unspecified which of the possible paths is used.
-   * 
-   * @param ancestor is the super-class or super-interface of
-   *        <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of
-   *        <code>ancestor</code>.
-   * @param hierarchyList is the {@link List} where to add the {@link Class}es.
-   * @return <code>true</code> if <code>ancestor</code> is
-   *         {@link Class#isAssignableFrom(Class) assignable} from
-   *         <code>descendant</code>, <code>false</code> otherwise.
-   */
-  protected boolean collectClassHierarchy(Class<?> ancestor, Class<?> descendant,
-      List<Class<?>> hierarchyList) {
-
-    if (ancestor == descendant) {
-      return true;
-    }
-    if (!ancestor.isAssignableFrom(descendant)) {
-      return false;
-    }
-    if (ancestor.isInterface()) {
-      Class<?> child = descendant;
-      while (true) {
-        for (Class<?> childInterface : child.getInterfaces()) {
-          if (childInterface == ancestor) {
-            return true;
-          } else if (ancestor.isAssignableFrom(childInterface)) {
-            hierarchyList.add(childInterface);
-            child = childInterface;
-            break;
-          }
-        }
-      }
-    } else {
-      Class<?> child = descendant.getSuperclass();
-      while (child != ancestor) {
-        hierarchyList.add(child);
-        child = child.getSuperclass();
-      }
-      return true;
     }
   }
 

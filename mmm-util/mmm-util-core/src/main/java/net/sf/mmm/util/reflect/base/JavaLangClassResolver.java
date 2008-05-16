@@ -1,7 +1,8 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect;
+package net.sf.mmm.util.reflect.base;
+
 
 /**
  * This is a {@link MappedClassResolver} that contains the mapping for typical

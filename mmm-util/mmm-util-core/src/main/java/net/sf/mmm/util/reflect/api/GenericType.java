@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect;
+package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.Type;
 
@@ -33,14 +33,18 @@ import java.lang.reflect.Type;
  * API and might step into one of the many pitfalls on this way. Or you simply
  * use this API.<br>
  * 
- * @see ReflectionUtil
+ * @see net.sf.mmm.util.reflect.ReflectionUtil#createGenericType(Type)
+ * @see net.sf.mmm.util.reflect.ReflectionUtil#createGenericType(Type,
+ *      GenericType)
+ * 
+ * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface GenericType {
+public interface GenericType<T> {
 
   /** An empty {@link GenericType}-array. */
-  GenericType[] NO_TYPES = new GenericType[0];
+  GenericType<?>[] NO_TYPES = new GenericType[0];
 
   /**
    * This method gets the {@link Class} that reflects the lower bound of the
@@ -56,7 +60,7 @@ public interface GenericType {
    * 
    * @return the {@link Class} that is the lower bound.
    */
-  Class<?> getLowerBound();
+  Class<? extends T> getLowerBound();
 
   /**
    * This method gets the {@link Class} that reflects the upper bound of the
@@ -73,10 +77,17 @@ public interface GenericType {
    * 
    * @return the {@link Class} that is the upper bound.
    */
-  Class<?> getUpperBound();
+  Class<T> getUpperBound();
 
   /**
    * This method gets the {@link Type} represented by this {@link GenericType}.
+   * 
+   * @see Class#getGenericSuperclass()
+   * @see Class#getGenericInterfaces()
+   * @see java.lang.reflect.Method#getGenericReturnType()
+   * @see java.lang.reflect.Method#getGenericParameterTypes()
+   * @see java.lang.reflect.Field#getGenericType()
+   * @see java.lang.reflect.Constructor#getGenericParameterTypes()
    * 
    * @return the value-type.
    */
@@ -121,7 +132,7 @@ public interface GenericType {
    *         if this {@link GenericType} does NOT represent an array,
    *         {@link java.util.Collection} or {@link java.util.Map}.
    */
-  GenericType getComponentType();
+  GenericType<?> getComponentType();
 
   /**
    * This method gets the number of {@link #getTypeArgument(int) type-arguments}.
@@ -146,7 +157,7 @@ public interface GenericType {
    *        <code>{@link #getTypeArgumentCount()} - 1</code>.
    * @return the type-argument at the given <code>index</code>.
    */
-  GenericType getTypeArgument(int index);
+  GenericType<?> getTypeArgument(int index);
 
   /**
    * This method gets the string representation of this {@link GenericType}. In

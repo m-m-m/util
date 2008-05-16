@@ -14,18 +14,20 @@ import net.sf.mmm.util.GenericBean;
 import net.sf.mmm.util.collection.CollectionFactory;
 import net.sf.mmm.util.collection.CollectionFactoryManager;
 import net.sf.mmm.util.collection.CollectionFactoryManagerImpl;
+import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.base.NlsNullPointerException;
 
 /**
  * This class is a collection of utility functions for reflectively dealing with
  * {@link Collection}s.
  * 
- * @see GenericType#getComponentType()
+ * @see net.sf.mmm.util.reflect.api.GenericType#getComponentType()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class CollectionUtil {
+public class CollectionReflectionUtil extends AbstractLoggable {
 
   /**
    * The default value for the maximum growth of the
@@ -34,7 +36,7 @@ public class CollectionUtil {
   public static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
 
   /** @see #getInstance() */
-  private static CollectionUtil instance;
+  private static CollectionReflectionUtil instance;
 
   /** @see #getCollectionFactoryManager() */
   private CollectionFactoryManager collectionFactoryManager;
@@ -45,14 +47,14 @@ public class CollectionUtil {
   /**
    * The constructor.
    */
-  protected CollectionUtil() {
+  protected CollectionReflectionUtil() {
 
     super();
     this.maximumListGrowth = DEFAULT_MAXIMUM_LIST_GROWTH;
   }
 
   /**
-   * This method gets the singleton instance of this {@link CollectionUtil}.<br>
+   * This method gets the singleton instance of this {@link CollectionReflectionUtil}.<br>
    * This design is the best compromise between easy access (via this
    * indirection you have direct, static access to all offered functionality)
    * and IoC-style design which allows extension and customization.<br>
@@ -65,13 +67,14 @@ public class CollectionUtil {
    * 
    * @return the singleton instance.
    */
-  public static CollectionUtil getInstance() {
+  public static CollectionReflectionUtil getInstance() {
 
     if (instance == null) {
-      synchronized (CollectionUtil.class) {
+      synchronized (CollectionReflectionUtil.class) {
         if (instance == null) {
-          CollectionUtil util = new CollectionUtil();
+          CollectionReflectionUtil util = new CollectionReflectionUtil();
           util.setCollectionFactoryManager(CollectionFactoryManagerImpl.getInstance());
+          util.initialize();
           instance = util;
         }
       }
@@ -125,6 +128,7 @@ public class CollectionUtil {
    */
   public void setMaximumListGrowth(int maximumListGrowth) {
 
+    getInitializationState().requireNotInitilized();
     this.maximumListGrowth = maximumListGrowth;
   }
 
@@ -253,7 +257,7 @@ public class CollectionUtil {
       throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
-      throw new NlsIllegalArgumentException(null);
+      throw new NlsNullPointerException("arrayOrList");
     }
     Class<?> type = arrayOrList.getClass();
     if (type.isArray()) {
@@ -392,7 +396,7 @@ public class CollectionUtil {
       int maximumGrowth) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
-      throw new NlsIllegalArgumentException(null);
+      throw new NlsNullPointerException("arrayOrList");
     }
     int maxGrowth = maximumGrowth;
     Class<?> type = arrayOrList.getClass();
@@ -416,6 +420,9 @@ public class CollectionUtil {
     }
     if (type.isArray()) {
       if (growth > 0) {
+        if (getLogger().isTraceEnabled()) {
+          getLogger().trace("Increasing array size by " + growth);
+        }
         Object newArray = Array.newInstance(type.getComponentType(), index + 1);
         System.arraycopy(arrayOrList, 0, newArray, 0, size);
         Array.set(newArray, index, item);
@@ -430,6 +437,9 @@ public class CollectionUtil {
       // arrayOrList is list...
       // increase size of list
       if (growth > 0) {
+        if (getLogger().isTraceEnabled()) {
+          getLogger().trace("Increasing list size by " + growth);
+        }
         growth--;
         while (growth > 0) {
           list.add(null);

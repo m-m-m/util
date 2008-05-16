@@ -8,8 +8,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
-import net.sf.mmm.util.reflect.GenericType;
-import net.sf.mmm.util.reflect.SimpleGenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArg}
@@ -57,7 +57,7 @@ public class PojoPropertyAccessorProxyAdd extends
    */
   public GenericType getReturnType() {
 
-    return SimpleGenericType.TYPE_VOID;
+    return SimpleGenericTypeImpl.TYPE_VOID;
   }
 
   /**
@@ -75,7 +75,7 @@ public class PojoPropertyAccessorProxyAdd extends
   public Object invoke(Object pojoInstance, Object argument) {
 
     Object arrayOrCollection = getDelegate().invoke(pojoInstance);
-    Object arrayCopy = getConfiguration().getCollectionUtil().add(arrayOrCollection, argument);
+    Object arrayCopy = getConfiguration().getCollectionReflectionUtil().add(arrayOrCollection, argument);
     if ((arrayCopy != arrayOrCollection) && (this.containerSetAccessor != null)) {
       // we will NOT create this proxy if the setter is missing for an array
       // type getter.

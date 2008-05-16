@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.api.attribute;
 
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the interface for an object that is related to a

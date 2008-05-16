@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the abstract base implementation of a

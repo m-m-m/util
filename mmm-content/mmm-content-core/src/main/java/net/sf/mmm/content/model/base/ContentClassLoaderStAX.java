@@ -19,7 +19,7 @@ import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
-import net.sf.mmm.util.reflect.ClassResolver;
+import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**

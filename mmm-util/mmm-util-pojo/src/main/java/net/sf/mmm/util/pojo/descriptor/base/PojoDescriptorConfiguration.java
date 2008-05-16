@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import net.sf.mmm.util.reflect.CollectionUtil;
+import net.sf.mmm.util.reflect.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
@@ -21,10 +21,10 @@ public interface PojoDescriptorConfiguration {
   ReflectionUtil getReflectionUtil();
 
   /**
-   * This method gets the {@link CollectionUtil} instance to use.
+   * This method gets the {@link CollectionReflectionUtil} instance to use.
    * 
-   * @return the {@link CollectionUtil} to use.
+   * @return the {@link CollectionReflectionUtil} to use.
    */
-  CollectionUtil getCollectionUtil();
+  CollectionReflectionUtil getCollectionReflectionUtil();
 
 }

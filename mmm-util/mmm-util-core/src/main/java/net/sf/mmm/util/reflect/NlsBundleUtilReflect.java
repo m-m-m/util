@@ -12,7 +12,10 @@ import net.sf.mmm.util.nls.AbstractResourceBundle;
  */
 public class NlsBundleUtilReflect extends AbstractResourceBundle {
 
-  /** @see ReflectionUtil#toType(String, ClassResolver) */
+  /**
+   * @see ReflectionUtil#toType(String,
+   *      net.sf.mmm.util.reflect.api.ClassResolver)
+   */
   public static final String ERR_TYPE_ILLEGAL_WILDCARD = "Illegal sequence in wildcard type \"{0}\"!";
 
   /** @see AnnotationUtil#getMethodAnnotation(java.lang.reflect.Method, Class) */
@@ -23,11 +26,11 @@ public class NlsBundleUtilReflect extends AbstractResourceBundle {
   public static final String ERR_ANNOTATION_NOT_FOR_TARGET = "The given annotation "
       + "\"{0}\" can NOT annotate the target \"{1}\"!";
 
-  /** @see CollectionUtil#create(Class) */
+  /** @see CollectionReflectionUtil#create(Class) */
   public static final String ERR_INCREASE_EXCEEDS_MAX_GROWTH = "Can not increase "
       + "size of array or list by \"{0}\", because limit is \"{1}\"!";
 
-  /** @see CollectionUtil#create(Class) */
+  /** @see CollectionReflectionUtil#create(Class) */
   public static final String ERR_UNKNOWN_COLLECTION_INTERFACE = "Unknown collection interface \"{0}\"!";
 
   /** @see InstantiationFailedException */

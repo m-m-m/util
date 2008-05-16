@@ -10,8 +10,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
-import net.sf.mmm.util.reflect.GenericType;
-import net.sf.mmm.util.reflect.SimpleGenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArg}
@@ -62,7 +62,7 @@ public class PojoPropertyAccessorProxySetIndexed extends
   @Override
   public GenericType getReturnType() {
 
-    return SimpleGenericType.TYPE_VOID;
+    return SimpleGenericTypeImpl.TYPE_VOID;
   }
 
   /**
@@ -81,7 +81,7 @@ public class PojoPropertyAccessorProxySetIndexed extends
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
     GenericBean<Object> arrayReceiver = new GenericBean<Object>();
-    Object result = getConfiguration().getCollectionUtil().set(arrayOrList, index, item,
+    Object result = getConfiguration().getCollectionReflectionUtil().set(arrayOrList, index, item,
         arrayReceiver);
     if ((arrayReceiver.getValue() != null) && (this.containerSetAccessor != null)) {
       this.containerSetAccessor.invoke(pojoInstance, arrayReceiver.getValue());

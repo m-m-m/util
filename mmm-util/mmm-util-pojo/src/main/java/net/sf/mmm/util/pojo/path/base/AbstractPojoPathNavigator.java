@@ -31,10 +31,10 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
 import net.sf.mmm.util.pojo.path.api.PojoPathRecognizer;
 import net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException;
 import net.sf.mmm.util.pojo.path.api.PojoPathUnsafeException;
-import net.sf.mmm.util.reflect.CollectionUtil;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
-import net.sf.mmm.util.reflect.SimpleGenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
@@ -55,8 +55,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;
 
-  /** @see #getCollectionUtil() */
-  private CollectionUtil collectionUtil;
+  /** @see #getCollectionReflectionUtil() */
+  private CollectionReflectionUtil collectionReflectionUtil;
 
   /** @see #getFunctionManager() */
   private PojoPathFunctionManager functionManager;
@@ -128,23 +128,23 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   }
 
   /**
-   * This method gets the {@link CollectionUtil} instance to use.
+   * This method gets the {@link CollectionReflectionUtil} instance to use.
    * 
-   * @return the {@link CollectionUtil} to use.
+   * @return the {@link CollectionReflectionUtil} to use.
    */
-  public CollectionUtil getCollectionUtil() {
+  public CollectionReflectionUtil getCollectionReflectionUtil() {
 
-    return this.collectionUtil;
+    return this.collectionReflectionUtil;
   }
 
   /**
    * @param collectionUtil is the collectionUtil to set
    */
   @Resource
-  public void setCollectionUtil(CollectionUtil collectionUtil) {
+  public void setCollectionReflectionUtil(CollectionReflectionUtil collectionUtil) {
 
     getInitializationState().requireNotInitilized();
-    this.collectionUtil = collectionUtil;
+    this.collectionReflectionUtil = collectionUtil;
   }
 
   /**
@@ -177,8 +177,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtil.getInstance();
     }
-    if (this.collectionUtil == null) {
-      this.collectionUtil = CollectionUtil.getInstance();
+    if (this.collectionReflectionUtil == null) {
+      this.collectionReflectionUtil = CollectionReflectionUtil.getInstance();
     }
     if (this.valueConverter == null) {
       DefaultComposedValueConverter converter = new DefaultComposedValueConverter();
@@ -422,7 +422,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       PojoPathFunction function = getFunction(functionName, context);
       if (state.isGetType()) {
         result = null;
-        currentPath.pojoType = new SimpleGenericType(function.getOutputClass());
+        currentPath.pojoType = new SimpleGenericTypeImpl(function.getOutputClass());
       } else {
         result = getFromFunction(currentPath, context, state, function);
       }
@@ -446,7 +446,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     if (result != null) {
       Class<?> resultType = result.getClass();
       if (currentPath.pojoType == null) {
-        currentPath.pojoType = new SimpleGenericType(resultType);
+        currentPath.pojoType = new SimpleGenericTypeImpl(resultType);
       }
       if (currentPath.pojoClass != resultType) {
         currentPath.pojoClass = resultType;
@@ -538,15 +538,15 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   }
 
   /**
-   * This method {@link CollectionUtil#get(Object, int) gets} the single
-   * {@link CachingPojoPath#getIndex() segment} of the given
+   * This method {@link CollectionReflectionUtil#get(Object, int) gets} the
+   * single {@link CachingPojoPath#getIndex() segment} of the given
    * <code>currentPath</code> from the array or {@link java.util.List} given
    * by <code>parentPojo</code>. If the result is <code>null</code> and
    * <code>{@link PojoPathState#getMode() mode}</code> is
    * {@link PojoPathMode#CREATE_IF_NULL} it creates and
-   * {@link CollectionUtil#set(Object, int, Object) sets} the missing object.
-   * For arrays a new array has to be created and set in the parent of the
-   * <code>parentPojo</code>.
+   * {@link CollectionReflectionUtil#set(Object, int, Object) sets} the missing
+   * object. For arrays a new array has to be created and set in the parent of
+   * the <code>parentPojo</code>.
    * 
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
@@ -569,7 +569,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       Object parentPojo = currentPath.parent.pojo;
       Object arrayOrList = convertList(currentPath, context, state, parentPojo);
       boolean ignoreIndexOverflow = (state.mode != PojoPathMode.FAIL_IF_NULL);
-      result = getCollectionUtil().get(arrayOrList, index, ignoreIndexOverflow);
+      result = getCollectionReflectionUtil().get(arrayOrList, index, ignoreIndexOverflow);
       if ((result == null) && (state.mode == PojoPathMode.CREATE_IF_NULL)) {
         result = create(currentPath, context, state, currentPath.pojoClass);
         setInList(currentPath, context, state, parentPojo, result, index);
@@ -667,18 +667,18 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   /**
    * {@inheritDoc}
    */
-  public GenericType getType(Type pojoType, String pojoPath, boolean failOnUnsafePath,
+  public GenericType<?> getType(Type pojoType, String pojoPath, boolean failOnUnsafePath,
       PojoPathContext context) throws PojoPathException, IllegalPojoPathException,
       PojoPathUnsafeException {
 
-    GenericType genericType = getReflectionUtil().createGenericType(pojoType);
+    GenericType<?> genericType = getReflectionUtil().createGenericType(pojoType);
     return getType(genericType, pojoPath, failOnUnsafePath, context);
   }
 
   /**
    * {@inheritDoc}
    */
-  public GenericType getType(GenericType pojoType, String pojoPath, boolean failOnUnsafePath,
+  public GenericType<?> getType(GenericType<?> pojoType, String pojoPath, boolean failOnUnsafePath,
       PojoPathContext context) {
 
     if (pojoType == null) {
@@ -912,8 +912,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
   /**
    * This method
-   * {@link CollectionUtil#set(Object, int, Object, GenericBean) sets} the
-   * single {@link CachingPojoPath#getSegment() segment} of the given
+   * {@link CollectionReflectionUtil#set(Object, int, Object, GenericBean) sets}
+   * the single {@link CachingPojoPath#getSegment() segment} of the given
    * <code>currentPath</code> from the array or {@link java.util.List} given
    * by <code>parentPojo</code>. If the result is <code>null</code> and
    * <code>mode</code> is {@link PojoPathMode#CREATE_IF_NULL} it creates and
@@ -936,7 +936,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     Object arrayOrList = convertList(currentPath, context, state, parentPojo);
     GenericBean<Object> arrayReceiver = new GenericBean<Object>();
-    Object result = getCollectionUtil().set(arrayOrList, index, value, arrayReceiver);
+    Object result = getCollectionReflectionUtil().set(arrayOrList, index, value, arrayReceiver);
     Object newArray = arrayReceiver.getValue();
     if (newArray != null) {
       if (currentPath.parent.parent == null) {
@@ -997,7 +997,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * @param initialPojoType is the initial
      *        {@link net.sf.mmm.util.pojo.api.Pojo}-type for this cache.
      */
-    public PojoPathCache(Class<?> initialPojoClass, GenericType initialPojoType) {
+    public PojoPathCache(Class<?> initialPojoClass, GenericType<?> initialPojoType) {
 
       super();
       this.rootPath = new CachingPojoPath(null, initialPojoClass, initialPojoType);
@@ -1202,7 +1202,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     private CachingPojoPath parent;
 
     /** @see #getPojoType() */
-    private GenericType pojoType;
+    private GenericType<?> pojoType;
 
     /** @see #getPojoClass() */
     private Class<?> pojoClass;
@@ -1228,9 +1228,10 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      *        {@link PojoPathNavigator#getType(GenericType, String, boolean, PojoPathContext) getType}.
      * @param pojoClass is the initial {@link #getPojoClass() pojo-class}.
      */
+    @SuppressWarnings("unchecked")
     public CachingPojoPath(Object pojo, Class<?> pojoClass) {
 
-      this(pojo, pojoClass, new SimpleGenericType(pojoClass));
+      this(pojo, pojoClass, new SimpleGenericTypeImpl(pojoClass));
     }
 
     /**
@@ -1242,7 +1243,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * @param pojoClass is the initial {@link #getPojoClass() pojo-class}.
      * @param pojoType is the initial {@link #getPojoType() pojo-type}.
      */
-    public CachingPojoPath(Object pojo, Class<?> pojoClass, GenericType pojoType) {
+    public CachingPojoPath(Object pojo, Class<?> pojoClass, GenericType<?> pojoType) {
 
       super("");
       this.pojo = pojo;
@@ -1272,7 +1273,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * 
      * @return the pojo-type or <code>null</code> if NOT set.
      */
-    public GenericType getPojoType() {
+    public GenericType<?> getPojoType() {
 
       return this.pojoType;
     }
@@ -1282,7 +1283,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * 
      * @param pojoType is the pojo-type to set.
      */
-    public void setPojoType(GenericType pojoType) {
+    public void setPojoType(GenericType<?> pojoType) {
 
       this.pojoType = pojoType;
     }

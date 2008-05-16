@@ -6,7 +6,7 @@ package net.sf.mmm.util.pojo.descriptor.base;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.component.AbstractComponent;
-import net.sf.mmm.util.reflect.CollectionUtil;
+import net.sf.mmm.util.reflect.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
@@ -21,8 +21,8 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;
 
-  /** @see #getCollectionUtil() */
-  private CollectionUtil collectionUtil;
+  /** @see #getCollectionReflectionUtil() */
+  private CollectionReflectionUtil collectionReflectionUtil;
 
   /**
    * The constructor.
@@ -35,19 +35,19 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
   /**
    * {@inheritDoc}
    */
-  public CollectionUtil getCollectionUtil() {
+  public CollectionReflectionUtil getCollectionReflectionUtil() {
 
-    return this.collectionUtil;
+    return this.collectionReflectionUtil;
   }
 
   /**
    * @param collectionUtil is the collectionUtil to set
    */
   @Resource
-  public void setCollectionUtil(CollectionUtil collectionUtil) {
+  public void setCollectionReflectionUtil(CollectionReflectionUtil collectionUtil) {
 
     getInitializationState().requireNotInitilized();
-    this.collectionUtil = collectionUtil;
+    this.collectionReflectionUtil = collectionUtil;
   }
 
   /**
@@ -77,8 +77,8 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtil.getInstance();
     }
-    if (this.collectionUtil == null) {
-      this.collectionUtil = CollectionUtil.getInstance();
+    if (this.collectionReflectionUtil == null) {
+      this.collectionReflectionUtil = CollectionReflectionUtil.getInstance();
     }
   }
 

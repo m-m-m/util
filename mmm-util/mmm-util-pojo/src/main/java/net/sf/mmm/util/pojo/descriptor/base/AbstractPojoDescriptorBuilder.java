@@ -12,7 +12,7 @@ import net.sf.mmm.util.collection.MapFactory;
 import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the abstract base-implementation of the {@link PojoDescriptorBuilder}

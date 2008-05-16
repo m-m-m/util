@@ -37,8 +37,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetBuil
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetIndexedBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetMappedBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBuilder;
-import net.sf.mmm.util.reflect.GenericType;
 import net.sf.mmm.util.reflect.VisibilityModifier;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the generic implementation of the

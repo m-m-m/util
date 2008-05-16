@@ -1,54 +1,57 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect;
+package net.sf.mmm.util.reflect.impl;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
+
+import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.base.AbstractGenericType;
 
 /**
  * This is the implementation of the {@link GenericType} interface.
  * 
+ * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class GenericTypeImpl extends AbstractGenericType {
+public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /** @see #getDefiningType() */
-  private final GenericType definingType;
+  private final GenericType<?> definingType;
 
   /** @see #getType() */
   private final Type type;
 
   /** @see #getLowerBound() */
-  private final Class<?> lowerBound;
+  private final Class<? extends T> lowerBound;
 
   /** @see #getUpperBound() */
-  private final Class<?> upperBound;
+  private final Class<T> upperBound;
 
   /** @see #getComponentType() */
-  private final GenericType componentType;
+  private final GenericType<?> componentType;
 
   /** @see #getTypeArgument(int) */
   private final Type[] typeArgs;
 
   /** @see #getTypeArgument(int) */
-  private final GenericType[] typesArguments;
+  private final GenericType<?>[] typesArguments;
 
   /**
    * The constructor.
    * 
    * @param type is the {@link #getType() type}.
    */
-  protected GenericTypeImpl(Type type) {
+  public GenericTypeImpl(Type type) {
 
     this(type, null);
   }
@@ -59,14 +62,15 @@ public class GenericTypeImpl extends AbstractGenericType {
    * @param valueType is the {@link #getType() value-type}.
    * @param definingType is the {@link #getDefiningType() defining-type}.
    */
-  protected GenericTypeImpl(Type valueType, GenericType definingType) {
+  @SuppressWarnings("unchecked")
+  public GenericTypeImpl(Type valueType, GenericType<?> definingType) {
 
     super();
     this.type = valueType;
     this.definingType = definingType;
     ClassBounds bounds = getClassBounds(this.type);
-    this.lowerBound = bounds.lowerBound;
-    this.upperBound = bounds.upperBound;
+    this.lowerBound = (Class<? extends T>) bounds.lowerBound;
+    this.upperBound = (Class<T>) bounds.upperBound;
     Type genericComponentType = null;
     if (valueType instanceof ParameterizedType) {
       ParameterizedType parameterizedType = (ParameterizedType) valueType;
@@ -111,7 +115,8 @@ public class GenericTypeImpl extends AbstractGenericType {
    * @param genericDefiningType is the {@link #getDefiningType() defining-type}.
    * @return a new {@link GenericType} instance.
    */
-  protected GenericTypeImpl create(Type genericType, GenericType genericDefiningType) {
+  @SuppressWarnings("unchecked")
+  protected AbstractGenericType<T> create(Type genericType, GenericType<?> genericDefiningType) {
 
     return new GenericTypeImpl(genericType, genericDefiningType);
   }
@@ -211,188 +216,9 @@ public class GenericTypeImpl extends AbstractGenericType {
   }
 
   /**
-   * This method gets the declaration-index of the given
-   * <code>typeVariable</code>.
-   * 
-   * @param typeVariable is the {@link TypeVariable}.
-   * @return the index of the given <code>typeVariable</code> in its
-   *         {@link TypeVariable#getGenericDeclaration() declaration}.
-   */
-  protected int getDeclarationIndex(TypeVariable<?> typeVariable) {
-
-    GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
-    TypeVariable<?>[] variables = genericDeclaration.getTypeParameters();
-    for (int variableIndex = 0; variableIndex < variables.length; variableIndex++) {
-      if (variables[variableIndex] == typeVariable) {
-        return variableIndex;
-      }
-    }
-    return -1;
-  }
-
-  /**
-   * This method resolves the given <code>typeVariable</code> in the context
-   * of the given <code>declaringType</code>.
-   * 
-   * @param typeVariable is the {@link TypeVariable} to resolve.
-   * @param declaringType is the {@link GenericType} where the given
-   *        <code>typeVariable</code> occurs or is replaced.
-   * @return the resolved {@link Type} or <code>null</code> if the given
-   *         <code>typeVariable</code> could NOT be resolved (e.g. it was
-   *         {@link TypeVariable#getGenericDeclaration() declared} in a
-   *         {@link Class} that is NOT
-   *         {@link Class#isAssignableFrom(Class) assignable from} the given
-   *         <code>declaringType</code>) .
-   */
-  protected Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType declaringType) {
-
-    GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
-    if (genericDeclaration instanceof Class) {
-      Class<?> declaringClass = (Class<?>) genericDeclaration;
-      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getUpperBound());
-      if (hierarchy != null) {
-        TypeVariable<?> currentVariable = typeVariable;
-        for (int i = hierarchy.size() - 1; i >= -1; i--) {
-          Type hierarchyType;
-          if (i >= 0) {
-            hierarchyType = hierarchy.get(i);
-          } else {
-            hierarchyType = declaringType.getType();
-          }
-          if (hierarchyType instanceof ParameterizedType) {
-            ParameterizedType pt = (ParameterizedType) hierarchyType;
-            Type[] typeArguments = pt.getActualTypeArguments();
-            int variableIndex = getDeclarationIndex(currentVariable);
-            if (variableIndex >= 0) {
-              Type typeArgument = typeArguments[variableIndex];
-              if (typeArgument instanceof TypeVariable) {
-                currentVariable = (TypeVariable<?>) typeArgument;
-              } else {
-                return typeArgument;
-              }
-            }
-          }
-        }
-        if (currentVariable != typeVariable) {
-          // NOT really resolved, but maybe bounds are more specific...
-          return currentVariable;
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * This method walks up the {@link Class}-hierarchy from
-   * <code>descendant</code> up to <code>ancestor</code> and collects the
-   * generic {@link Class#getGenericSuperclass() super-classes} or
-   * {@link Class#getGenericInterfaces() super-interfaces} of
-   * <code>ancestor</code> on that hierarchy-path.<br>
-   * Please note that if <code>ancestor</code> is an
-   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
-   * such case it will be unspecified which of the possible paths is used.
-   * 
-   * @param ancestor is the super-class or super-interface of
-   *        <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of
-   *        <code>ancestor</code>.
-   * @return the {@link List} of the generic super-{@link Type}s from
-   *         <code>descendant</code> up to <code>ancestor</code>, where the
-   *         first element represents the super-{@link Type} of
-   *         <code>descendant</code> and the last element represents the
-   *         generic declaration of <code>ancestor</code> itself.
-   */
-  protected List<Type> getGenericDeclarations(Class<?> ancestor, Class<?> descendant) {
-
-    if (!ancestor.isAssignableFrom(descendant)) {
-      return null;
-    }
-    List<Type> declarations = new ArrayList<Type>();
-    if (ancestor != descendant) {
-      Class<?> child = descendant;
-      if (ancestor.isInterface()) {
-        while (child != ancestor) {
-          Class<?>[] interfaces = child.getInterfaces();
-          Class<?> superInterface = null;
-          for (int i = 0; i < interfaces.length; i++) {
-            Class<?> currentInterface = interfaces[i];
-            if (ancestor.isAssignableFrom(currentInterface)) {
-              superInterface = currentInterface;
-              Type genericDeclaration = child.getGenericInterfaces()[i];
-              declarations.add(genericDeclaration);
-              break;
-            }
-          }
-          if (superInterface == null) {
-            declarations.add(child.getGenericSuperclass());
-            child = child.getSuperclass();
-          } else {
-            child = superInterface;
-          }
-        }
-      } else {
-        while (child != ancestor) {
-          Type genericDeclaration = child.getGenericSuperclass();
-          declarations.add(genericDeclaration);
-          child = child.getSuperclass();
-        }
-      }
-    }
-    return declarations;
-  }
-
-  /**
-   * This method walks up the {@link Class}-hierarchy from
-   * <code>descendant</code> up to <code>ancestor</code> and returns the
-   * sub-class or sub-interface of <code>ancestor</code> on that
-   * hierarchy-path.<br>
-   * Please note that if <code>ancestor</code> is an
-   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
-   * such case it will be unspecified which of the possible paths is used.
-   * 
-   * @param ancestor is the super-class or super-interface of
-   *        <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of
-   *        <code>ancestor</code>.
-   * @return the sub-class or sub-interface on the hierarchy-path from
-   *         <code>descendant</code> up to <code>ancestor</code>.
-   */
-  protected Type getGenericDeclaration(Class<?> ancestor, Class<?> descendant) {
-
-    if (ancestor == descendant) {
-      return null;
-    }
-    if (!ancestor.isAssignableFrom(descendant)) {
-      return null;
-    }
-    Class<?> child = descendant;
-    if (ancestor.isInterface()) {
-      while (true) {
-        Class<?>[] interfaces = child.getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
-          Class<?> childInterface = interfaces[i];
-          if (childInterface == ancestor) {
-            return child.getGenericInterfaces()[i];
-          } else if (ancestor.isAssignableFrom(childInterface)) {
-            child = childInterface;
-            break;
-          }
-        }
-      }
-    } else {
-      Class<?> parent = child.getSuperclass();
-      while (parent != ancestor) {
-        child = parent;
-        parent = child.getSuperclass();
-      }
-      return child.getGenericSuperclass();
-    }
-  }
-
-  /**
    * {@inheritDoc}
    */
-  public GenericType getComponentType() {
+  public GenericType<?> getComponentType() {
 
     return this.componentType;
   }
@@ -403,7 +229,7 @@ public class GenericTypeImpl extends AbstractGenericType {
    * @return the defining type or <code>null</code> if NOT available.
    */
   @Override
-  public GenericType getDefiningType() {
+  public GenericType<?> getDefiningType() {
 
     return this.definingType;
   }
@@ -411,7 +237,7 @@ public class GenericTypeImpl extends AbstractGenericType {
   /**
    * {@inheritDoc}
    */
-  public Class<?> getLowerBound() {
+  public Class<? extends T> getLowerBound() {
 
     return this.lowerBound;
   }
@@ -419,7 +245,7 @@ public class GenericTypeImpl extends AbstractGenericType {
   /**
    * {@inheritDoc}
    */
-  public Class<?> getUpperBound() {
+  public Class<T> getUpperBound() {
 
     return this.upperBound;
   }
@@ -443,9 +269,9 @@ public class GenericTypeImpl extends AbstractGenericType {
   /**
    * {@inheritDoc}
    */
-  public GenericType getTypeArgument(int index) {
+  public GenericType<?> getTypeArgument(int index) {
 
-    GenericType result = this.typesArguments[index];
+    GenericType<?> result = this.typesArguments[index];
     if (result == null) {
       result = create(this.typeArgs[index], this.definingType);
       this.typesArguments[index] = result;

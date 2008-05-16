@@ -32,7 +32,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyGe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyRemove;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetIndexed;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetMapped;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.text.EnglishSingularizer;
 import net.sf.mmm.util.text.Singularizer;
 

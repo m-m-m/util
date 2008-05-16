@@ -29,8 +29,8 @@ import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.MutableMetaData;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.util.event.ChangeEventType;
-import net.sf.mmm.util.reflect.ClassResolver;
-import net.sf.mmm.util.reflect.MappedClassResolver;
+import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.base.MappedClassResolver;
 
 /**
  * This an the abstract base implementation of the

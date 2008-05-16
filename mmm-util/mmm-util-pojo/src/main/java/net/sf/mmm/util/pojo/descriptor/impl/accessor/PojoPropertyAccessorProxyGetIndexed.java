@@ -8,7 +8,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedN
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
-import net.sf.mmm.util.reflect.GenericType;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg}
@@ -68,7 +68,7 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   public Object invoke(Object pojoInstance, int index) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
-    return getConfiguration().getCollectionUtil().get(arrayOrList, index);
+    return getConfiguration().getCollectionReflectionUtil().get(arrayOrList, index);
   }
 
 }
