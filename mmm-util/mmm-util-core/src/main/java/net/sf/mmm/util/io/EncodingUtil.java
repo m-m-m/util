@@ -225,38 +225,38 @@ public class EncodingUtil extends AbstractLoggable {
    * used by MS-DOS and is based on {@link #ENCODING_US_ASCII} but NOT
    * completely compatible.
    */
-  public static final String ENCODING_CP_437 = "Cp437";
+  public static final String ENCODING_CP_437 = "IBM437";
 
   /**
    * The encoding <code>CP737</code>. It is used by MS-DOS for Greek and is
    * therefore related to {@link #ENCODING_CP_869} and
    * {@link #ENCODING_ISO_8859_7}.
    */
-  public static final String ENCODING_CP_737 = "Cp737";
+  public static final String ENCODING_CP_737 = "x-IBM737";
 
   /**
    * The encoding <code>CP850</code>. It is used by MS-DOS for Western
    * European languages and is therefore related to {@link #ENCODING_ISO_8859_1}.
    */
-  public static final String ENCODING_CP_850 = "Cp850";
+  public static final String ENCODING_CP_850 = "IBM850";
 
   /**
    * The encoding <code>CP852</code>. It is used by MS-DOS for Central
    * European languages and is therefore related to {@link #ENCODING_ISO_8859_2}.
    */
-  public static final String ENCODING_CP_852 = "Cp852";
+  public static final String ENCODING_CP_852 = "IBM852";
 
   /**
    * The encoding <code>CP855</code>. It is used by MS-DOS for Cyrillic
    * letters and is therefore related to {@link #ENCODING_ISO_8859_5}.
    */
-  public static final String ENCODING_CP_855 = "Cp855";
+  public static final String ENCODING_CP_855 = "IBM855";
 
   /**
    * The encoding <code>CP857</code>. It is used by MS-DOS for Turkish and is
    * therefore related to {@link #ENCODING_ISO_8859_9}.
    */
-  public static final String ENCODING_CP_857 = "Cp857";
+  public static final String ENCODING_CP_857 = "IBM857";
 
   /**
    * The encoding <code>CP857</code>. It is used by MS-DOS for Western
@@ -264,47 +264,47 @@ public class EncodingUtil extends AbstractLoggable {
    * character with the euro-sign. It is therefore related to
    * {@link #ENCODING_ISO_8859_15}.
    */
-  public static final String ENCODING_CP_858 = "Cp858";
+  public static final String ENCODING_CP_858 = "IBM00858";
 
   /**
    * The encoding <code>CP860</code>. It is used by MS-DOS for Portuguese and
    * is therefore related to {@link #ENCODING_ISO_8859_1}.
    */
-  public static final String ENCODING_CP_860 = "Cp860";
+  public static final String ENCODING_CP_860 = "IBM860";
 
   /**
    * The encoding <code>CP861</code>. It is used by MS-DOS for Nordic
    * languages especially for Icelandic and is therefore related to
    * {@link #ENCODING_ISO_8859_10}.
    */
-  public static final String ENCODING_CP_861 = "Cp861";
+  public static final String ENCODING_CP_861 = "IBM861";
 
   /**
    * The encoding <code>CP863</code>. It is used by MS-DOS for French and is
    * therefore related to {@link #ENCODING_ISO_8859_15}.
    */
-  public static final String ENCODING_CP_863 = "Cp863";
+  public static final String ENCODING_CP_863 = "IBM863";
 
   /**
    * The encoding <code>CP865</code>. It is used by MS-DOS for Nordic
    * languages except Icelandic for which {@link #ENCODING_CP_861} is used. It
    * is therefore related to {@link #ENCODING_ISO_8859_10}.
    */
-  public static final String ENCODING_CP_865 = "Cp865";
+  public static final String ENCODING_CP_865 = "IBM865";
 
   /**
    * The encoding <code>CP866</code>. It is used by MS-DOS for Cyrillic
    * letters and is therefore related to {@link #ENCODING_CP_855} and
    * {@link #ENCODING_ISO_8859_5}.
    */
-  public static final String ENCODING_CP_866 = "Cp866";
+  public static final String ENCODING_CP_866 = "IBM866";
 
   /**
    * The encoding <code>CP869</code>. It is used by MS-DOS for Greek and is
    * therefore related to {@link #ENCODING_CP_737} and
    * {@link #ENCODING_ISO_8859_7}.
    */
-  public static final String ENCODING_CP_869 = "Cp869";
+  public static final String ENCODING_CP_869 = "IBM869";
 
   /**
    * The encoding <code>CP1250</code> also called <code>Windows-1250</code>.
@@ -880,6 +880,9 @@ public class EncodingUtil extends AbstractLoggable {
     /** The number of ASCII bytes available to read from {@link #inputStream}. */
     private int asciiBytesAvailable;
 
+    /** <code>true</code> if end of stream is reached. */
+    private boolean eos;
+
     /**
      * The constructor.
      * 
@@ -905,6 +908,9 @@ public class EncodingUtil extends AbstractLoggable {
     @Override
     public String getEncoding() {
 
+      if ((this.encoding == null) && this.eos) {
+        return ENCODING_US_ASCII;
+      }
       return this.encoding;
     }
 
@@ -944,11 +950,11 @@ public class EncodingUtil extends AbstractLoggable {
             // number of next bytes that are ensured to be ASCII...
 
             // refill our buffer...
-            boolean eos = this.inputStream.fill();
+            this.eos = this.inputStream.fill();
             if (this.detectionBuffer.hasNext()) {
               int lookahead = (int) this.detectionBuffer.process(this.detectionProcessor,
                   Integer.MAX_VALUE);
-              if ((!eos) && (!this.detectionProcessor.maybeAscii)) {
+              if ((!this.eos) && (!this.detectionProcessor.maybeAscii)) {
                 int nonAsciiOffset = (int) (this.detectionProcessor.bytePosition - this.detectionProcessor.firstNonAsciiPosition);
                 if (nonAsciiOffset < REQUIRED_LOOKAHEAD) {
                   this.encoding = this.detectionProcessor.getLowByteEncoding();
@@ -968,7 +974,7 @@ public class EncodingUtil extends AbstractLoggable {
                 }
               }
             } else {
-              assert (eos);
+              assert (this.eos);
               break;
             }
           }

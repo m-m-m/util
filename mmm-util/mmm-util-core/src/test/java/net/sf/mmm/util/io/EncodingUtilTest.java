@@ -9,7 +9,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
@@ -69,10 +68,11 @@ public class EncodingUtilTest {
 
   public void checkUtfReader(DataProducer producer, String encoding) throws Exception {
 
-    System.out.println(encoding);
     String nonUtfEncoding = encoding.toLowerCase();
     if (nonUtfEncoding.startsWith("utf") || nonUtfEncoding.endsWith("ascii")) {
       nonUtfEncoding = "invalid-encoding";
+    } else {
+      nonUtfEncoding = encoding;
     }
     // produce data as byte-array using the given encoding
     ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -86,18 +86,15 @@ public class EncodingUtilTest {
     String expectedData = stringWriter.toString();
     // test reading character per character
     ByteArrayInputStream in = new ByteArrayInputStream(data);
-    Reader reader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
+    EncodingDetectionReader reader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
     int len = expectedData.length();
     for (int i = 0; i < len; i++) {
       int c = reader.read();
-      if (c != expectedData.charAt(i)) {
-        System.out.println("'" + ((char) c) + "' (" + c + ") - '" + expectedData.charAt(i) + "' ("
-            + ((int) expectedData.charAt(i)) + ")");
-      }
-      // assertEquals((int) expectedData.charAt(i), c);
+      assertEquals((int) expectedData.charAt(i), c);
     }
     int c = reader.read();
     assertEquals(-1, c);
+    assertEquals(encoding, reader.getEncoding());
     reader.close();
 
     // test using buffer
