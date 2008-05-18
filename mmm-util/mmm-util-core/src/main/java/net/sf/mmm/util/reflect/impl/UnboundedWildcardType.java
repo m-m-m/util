@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.type;
+package net.sf.mmm.util.reflect.impl;
 
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
@@ -9,27 +9,24 @@ import java.lang.reflect.WildcardType;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
- * This is an implementation of the {@link WildcardType} interface for a single
- * lower bound.
+ * This is an implementation of the {@link WildcardType} interface for the
+ * unbounded wildcard (<code>?</code>).
  * 
  * @see ReflectionUtil#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class LowerBoundWildcardType implements WildcardType {
+public final class UnboundedWildcardType implements WildcardType {
 
-  /** @see #getLowerBounds() */
-  private final Type lowerBound;
+  /** The singleton instance. */
+  public static final WildcardType INSTANCE = new UnboundedWildcardType();
 
   /**
    * The constructor.
-   * 
-   * @param lowerBound is the single {@link #getLowerBounds() lower-bound}.
    */
-  public LowerBoundWildcardType(Type lowerBound) {
+  private UnboundedWildcardType() {
 
     super();
-    this.lowerBound = lowerBound;
   }
 
   /**
@@ -37,7 +34,7 @@ public class LowerBoundWildcardType implements WildcardType {
    */
   public Type[] getLowerBounds() {
 
-    return new Type[] { this.lowerBound };
+    return ReflectionUtil.NO_TYPES;
   }
 
   /**
@@ -59,9 +56,8 @@ public class LowerBoundWildcardType implements WildcardType {
     }
     if ((other != null) && (other instanceof WildcardType)) {
       WildcardType otherWildcard = (WildcardType) other;
-      if ((otherWildcard.getLowerBounds().length == 1)
-          && (otherWildcard.getUpperBounds().length == 0)
-          && (this.lowerBound.equals(otherWildcard.getLowerBounds()[0]))) {
+      if ((otherWildcard.getLowerBounds().length == 0)
+          && (otherWildcard.getUpperBounds().length == 0)) {
         return true;
       }
     }
@@ -74,9 +70,9 @@ public class LowerBoundWildcardType implements WildcardType {
   @Override
   public int hashCode() {
 
-    // emulate hash code of
+    // hardcoded hash code of the unbounded wildcard as
     // sun.reflect.generics.reflectiveObjects.WildcardTypeImpl
-    return ~(31 + this.lowerBound.hashCode());
+    return 22474412;
   }
 
   /**
@@ -85,12 +81,7 @@ public class LowerBoundWildcardType implements WildcardType {
   @Override
   public String toString() {
 
-    String upperBoundString = ReflectionUtil.getInstance().toString(this.lowerBound);
-    // "? super ".length == 8
-    StringBuilder result = new StringBuilder(upperBoundString.length() + 8);
-    result.append("? super ");
-    result.append(upperBoundString);
-    return result.toString();
+    return "?";
   }
 
 }

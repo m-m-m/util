@@ -28,13 +28,13 @@ import net.sf.mmm.util.filter.ListCharFilter;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.GenericArrayTypeImpl;
 import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
+import net.sf.mmm.util.reflect.impl.LowerBoundWildcardType;
+import net.sf.mmm.util.reflect.impl.ParameterizedTypeImpl;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
-import net.sf.mmm.util.reflect.type.GenericArrayTypeImpl;
-import net.sf.mmm.util.reflect.type.LowerBoundWildcardType;
-import net.sf.mmm.util.reflect.type.ParameterizedTypeImpl;
-import net.sf.mmm.util.reflect.type.UnboundedWildcardType;
-import net.sf.mmm.util.reflect.type.UpperBoundWildcardType;
+import net.sf.mmm.util.reflect.impl.UnboundedWildcardType;
+import net.sf.mmm.util.reflect.impl.UpperBoundWildcardType;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**

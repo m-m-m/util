@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runner.Result;
 
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.type.TypeVariableImpl;
+import net.sf.mmm.util.reflect.impl.TypeVariableImpl;
 
 /**
  * This is the test for {@link ReflectionUtil}.
