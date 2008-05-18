@@ -7,7 +7,12 @@ import net.sf.mmm.util.collection.QueueFactory;
 
 /**
  * This class extends {@link AbstractEventSource} with the ability of
- * synchronization and therefore is thread-safe.
+ * synchronization and therefore is thread-safe.<br>
+ * It uses a {@link java.util.concurrent.ConcurrentLinkedQueue} and therefore
+ * allows {@link #addListener(EventListener) adding} or
+ * {@link #removeListener(EventListener) removing} of
+ * {@link EventListener listeners} during
+ * {@link EventListener#handleEvent(Event) event-handling}.
  * 
  * @param <E> is the templated type of the events to send.
  * @param <L> is the templated type of the listeners that can be
