@@ -23,8 +23,8 @@ import net.sf.mmm.util.concurrent.SimpleExecutor;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AbstractMultiThreadedEventSource<E extends Event, L extends EventListener<E>> extends
-    AbstractSynchronizedEventSource<E, L> {
+public abstract class AbstractMultiThreadedEventSource<E extends Event, L extends EventListener<E>>
+    extends AbstractSynchronizedEventSource<E, L> {
 
   /** @see #getExecutor() */
   private Executor executor;

@@ -17,8 +17,8 @@ import net.sf.mmm.util.collection.QueueFactory;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AbstractSynchronizedEventSource<E extends Event, L extends EventListener<E>> extends
-    AbstractEventSource<E, L> {
+public abstract class AbstractSynchronizedEventSource<E extends Event, L extends EventListener<E>>
+    extends AbstractEventSource<E, L> {
 
   /**
    * The constructor.
