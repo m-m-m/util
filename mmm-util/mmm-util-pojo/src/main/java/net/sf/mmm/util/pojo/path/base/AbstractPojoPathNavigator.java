@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.GenericBean;
 import net.sf.mmm.util.HashKey;
-import net.sf.mmm.util.collection.CollectionList;
+import net.sf.mmm.util.collection.base.CollectionList;
 import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.nls.base.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
