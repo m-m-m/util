@@ -4,9 +4,6 @@
 package net.sf.mmm.util.reflect;
 
 import net.sf.mmm.util.nls.AbstractResourceBundle;
-import net.sf.mmm.util.reflect.api.AccessFailedException;
-import net.sf.mmm.util.reflect.api.InstantiationFailedException;
-import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
  * This class holds the internationalized messages for this module.
@@ -36,16 +33,16 @@ public class NlsBundleUtilReflect extends AbstractResourceBundle {
   /** @see CollectionReflectionUtil#create(Class) */
   public static final String ERR_UNKNOWN_COLLECTION_INTERFACE = "Unknown collection interface \"{0}\"!";
 
-  /** @see InstantiationFailedException */
+  /** @see net.sf.mmm.util.reflect.api.InstantiationFailedException */
   public static final String ERR_INSTANTIATION_FAILED = "Failed to create an instance of \"{0}\"!";
 
-  /** @see InvocationFailedException */
+  /** @see net.sf.mmm.util.reflect.api.InvocationFailedException */
   public static final String ERR_INVOCATION_FAILED = "Reflective invocation failed!";
 
-  /** @see InvocationFailedException */
+  /** @see net.sf.mmm.util.reflect.api.InvocationFailedException */
   public static final String ERR_INVOCATION_FAILED_ON = "Reflective invocation of \"{0}\" on \"{1}\" failed!";
 
-  /** @see AccessFailedException */
+  /** @see net.sf.mmm.util.reflect.api.AccessFailedException */
   public static final String ERR_ACCESS_FAILED = "Reflective access for \"{0}\" failed!";
 
 }

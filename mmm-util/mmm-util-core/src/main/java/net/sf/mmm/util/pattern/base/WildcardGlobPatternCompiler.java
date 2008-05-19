@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pattern.base;
 
-import net.sf.mmm.util.pattern.AbstractGlobPatternCompiler;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 
 /**
