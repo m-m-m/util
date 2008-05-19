@@ -60,8 +60,8 @@
  *   throw new IllegalArgumentException("Expected character ':' not found!");
  * }
  * scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#skipWhile(char) skipWhile}(' ');
- * String value = scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#readWhile(net.sf.mmm.util.filter.CharFilter) 
- * readWhile}({@link net.sf.mmm.util.filter.CharFilter#LATIN_DIGIT_FILTER});
+ * String value = scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#readWhile(net.sf.mmm.util.filter.api.CharFilter) 
+ * readWhile}({@link net.sf.mmm.util.filter.api.CharFilter#LATIN_DIGIT_FILTER});
  * </pre>
  */
 package net.sf.mmm.util.scanner;

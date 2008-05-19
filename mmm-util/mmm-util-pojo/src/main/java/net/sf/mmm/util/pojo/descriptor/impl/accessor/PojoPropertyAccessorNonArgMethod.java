@@ -12,9 +12,9 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorMethod;
-import net.sf.mmm.util.reflect.AccessFailedException;
-import net.sf.mmm.util.reflect.InvocationFailedException;
 import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.AccessFailedException;
+import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArg}

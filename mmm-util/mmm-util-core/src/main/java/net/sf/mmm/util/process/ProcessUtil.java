@@ -19,9 +19,11 @@ import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.concurrent.SimpleExecutor;
 import net.sf.mmm.util.concurrent.Stoppable;
-import net.sf.mmm.util.io.AsyncTransferrer;
 import net.sf.mmm.util.io.StreamUtil;
+import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.process.api.AsyncProcessExecutor;
+import net.sf.mmm.util.process.api.ProcessContext;
 
 /**
  * This class is a collection of utility functions to deal with {@link Process}es.

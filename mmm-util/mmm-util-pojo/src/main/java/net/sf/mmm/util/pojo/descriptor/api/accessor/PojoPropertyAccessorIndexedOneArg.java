@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.api.accessor;
 
-import net.sf.mmm.util.reflect.ReflectionException;
+import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This is the interface for a {@link PojoPropertyAccessor property-accessor}

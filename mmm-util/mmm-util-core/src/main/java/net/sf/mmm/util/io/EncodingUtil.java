@@ -8,8 +8,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import net.sf.mmm.util.collection.RankMap;
+import net.sf.mmm.util.collection.base.RankMap;
 import net.sf.mmm.util.component.AbstractLoggable;
+import net.sf.mmm.util.io.api.ByteOrderMark;
+import net.sf.mmm.util.io.api.ByteProcessor;
+import net.sf.mmm.util.io.api.EncodingDetectionReader;
+import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
+import net.sf.mmm.util.io.impl.BufferInputStream;
 
 /**
  * This class is a collection of utility functions to deal with

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This is the default implementation of the

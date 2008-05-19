@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;

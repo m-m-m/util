@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
-import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**

@@ -6,7 +6,7 @@ package net.sf.mmm.content.value.impl;
 import net.sf.mmm.content.value.api.Version;
 import net.sf.mmm.util.BasicUtil;
 import net.sf.mmm.util.value.api.ValueParseException;
-import net.sf.mmm.util.value.api.ValueParseStringException;
+import net.sf.mmm.util.value.api.ValueParseGenericException;
 
 /**
  * This is the implementation of the {@link Version} interface.
@@ -377,7 +377,7 @@ public final class VersionImpl implements Version {
             microVersion = Integer.parseInt(s);
           }
         } catch (NumberFormatException e) {
-          throw new ValueParseStringException(versionAsString, VersionImpl.class, VALUE_NAME, e);
+          throw new ValueParseGenericException(e, versionAsString, VersionImpl.class, VALUE_NAME);
         }
         pos++;
       } else {

@@ -13,8 +13,8 @@ import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.gui.model.content.api.FieldTableModel;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
-import net.sf.mmm.util.event.EventListener;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.EventListener;
 
 /**
  * This is an implementation of the

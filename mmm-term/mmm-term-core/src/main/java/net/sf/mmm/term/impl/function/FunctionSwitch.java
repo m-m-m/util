@@ -5,7 +5,7 @@ package net.sf.mmm.term.impl.function;
 
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.base.BasicFunction;
-import net.sf.mmm.util.reflect.Arguments;
+import net.sf.mmm.util.reflect.api.Arguments;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**

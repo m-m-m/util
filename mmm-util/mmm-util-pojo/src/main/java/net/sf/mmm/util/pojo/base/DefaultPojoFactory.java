@@ -6,10 +6,10 @@ package net.sf.mmm.util.pojo.base;
 import java.util.Collection;
 import java.util.Map;
 
-import net.sf.mmm.util.collection.CollectionFactoryManager;
-import net.sf.mmm.util.collection.CollectionFactoryManagerImpl;
-import net.sf.mmm.util.collection.MapFactory;
-import net.sf.mmm.util.reflect.InstantiationFailedException;
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.api.MapFactory;
+import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the default implementation of the

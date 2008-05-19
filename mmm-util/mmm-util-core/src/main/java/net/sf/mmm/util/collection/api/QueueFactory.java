@@ -1,0 +1,71 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.collection.api;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import net.sf.mmm.util.collection.base.AbstractQueueFactory;
+
+/**
+ * This is the interface for a {@link CollectionFactory} that
+ * {@link #create() creates} instances of {@link Queue}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+@SuppressWarnings("unchecked")
+public interface QueueFactory extends CollectionFactory<Queue> {
+
+  /**
+   * {@inheritDoc}
+   */
+  <E> Queue<E> create();
+
+  /**
+   * {@inheritDoc}
+   */
+  <E> Queue<E> create(int capacity);
+
+  /** The default instance creating a {@link LinkedList}. */
+  QueueFactory INSTANCE_LINKED_LIST = new AbstractQueueFactory() {
+
+    public Class<? extends Queue> getCollectionImplementation() {
+
+      return LinkedList.class;
+    }
+
+    public <E> Queue<E> create() {
+
+      return new LinkedList<E>();
+    }
+
+    public <E> Queue<E> create(int capacity) {
+
+      // capacity does NOT make sense here...
+      return new LinkedList<E>();
+    }
+  };
+
+  /** An instance creating a {@link ConcurrentLinkedQueue}. */
+  QueueFactory INSTANCE_CONCURRENT_LINKED_QUEUE = new AbstractQueueFactory() {
+
+    public Class<? extends Queue> getCollectionImplementation() {
+
+      return ConcurrentLinkedQueue.class;
+    }
+
+    public <E> Queue<E> create() {
+
+      return new ConcurrentLinkedQueue<E>();
+    }
+
+    public <E> Queue<E> create(int capacity) {
+
+      // capacity does NOT make sense here...
+      return new ConcurrentLinkedQueue<E>();
+    }
+  };
+
+}

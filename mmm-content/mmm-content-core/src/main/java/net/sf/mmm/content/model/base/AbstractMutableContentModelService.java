@@ -28,7 +28,7 @@ import net.sf.mmm.content.model.api.MutableContentModelService;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.MutableMetaData;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.base.MappedClassResolver;
 

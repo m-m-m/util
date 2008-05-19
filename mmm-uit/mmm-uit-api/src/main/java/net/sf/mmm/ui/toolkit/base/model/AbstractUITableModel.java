@@ -9,7 +9,7 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This is the abstract base implementation of the

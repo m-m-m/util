@@ -6,8 +6,8 @@ package net.sf.mmm.util.http;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.filter.CharFilter;
-import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**

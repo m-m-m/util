@@ -18,8 +18,8 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.StringUtil;
 import net.sf.mmm.util.component.AlreadyInitializedException;
-import net.sf.mmm.util.pattern.PatternCompiler;
-import net.sf.mmm.util.pattern.WildcardGlobPatternCompiler;
+import net.sf.mmm.util.pattern.api.PatternCompiler;
+import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**
@@ -782,7 +782,7 @@ public class FileUtil {
   /**
    * This method gets all {@link File files} matching to the given
    * <code>path</code> and <code>fileType</code>. The <code>path</code>
-   * may contain {@link net.sf.mmm.util.pattern.PathPatternCompiler wildcards}.<br>
+   * may contain {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}.<br>
    * Examples:
    * <ul>
    * <li>
@@ -827,7 +827,7 @@ public class FileUtil {
   /**
    * This method adds all files matching the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may contain {@link net.sf.mmm.util.pattern.GlobPatternCompiler wildcards}.
+   * may contain {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
@@ -842,7 +842,7 @@ public class FileUtil {
    *        files.
    * @return <code>false</code> if the path is a regular string and
    *         <code>true</code> if the given path contains at least one
-   *         {@link net.sf.mmm.util.pattern.GlobPatternCompiler wildcard} (<code>'*'</code>
+   *         {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcard} (<code>'*'</code>
    *         or <code>'?'</code>).
    */
   public boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list) {
@@ -861,7 +861,7 @@ public class FileUtil {
   /**
    * This method adds all files matching to the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may contain {@link net.sf.mmm.util.pattern.GlobPatternCompiler wildcards}.
+   * may contain {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.demo;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * TODO This type ...

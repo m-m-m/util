@@ -6,7 +6,7 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 import javax.annotation.PostConstruct;
 
 import net.sf.mmm.util.component.InitializationState;
-import net.sf.mmm.util.reflect.VisibilityModifier;
+import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the abstract base class for the default implementation of

@@ -7,7 +7,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxy;
-import net.sf.mmm.util.reflect.ReflectionException;
+import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This is an implementation of the {@link PojoPropertyAccessorOneArg} acting as

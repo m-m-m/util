@@ -8,8 +8,8 @@ import net.sf.mmm.content.model.api.access.ContentModelReadAccess;
 import net.sf.mmm.content.model.api.access.ContentModelWriteAccess;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.api.ContentIdManager;
-import net.sf.mmm.util.event.EventListener;
-import net.sf.mmm.util.event.EventSource;
+import net.sf.mmm.util.event.api.EventListener;
+import net.sf.mmm.util.event.api.EventSource;
 
 /**
  * This is the interface for a service that provides access to the

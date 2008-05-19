@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
 
-import net.sf.mmm.util.collection.AbstractIterator;
+import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
  * This is a public implementation of the {@link NamespaceContext} interface. It

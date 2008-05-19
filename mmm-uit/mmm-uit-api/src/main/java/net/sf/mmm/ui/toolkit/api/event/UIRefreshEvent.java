@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.event;
 
-import net.sf.mmm.util.event.Event;
+import net.sf.mmm.util.event.api.Event;
 
 /**
  * This is the event send internally from the

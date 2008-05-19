@@ -7,13 +7,13 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.pattern.GlobPatternCompiler;
+import net.sf.mmm.util.pattern.base.GlobPatternCompiler;
 
 /**
  * This is the implementation of a {@link FileFilter} that filters using a
  * {@link java.util.regex.Pattern pattern}.
  * 
- * @see net.sf.mmm.util.pattern.PatternCompiler
+ * @see net.sf.mmm.util.pattern.api.PatternCompiler
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

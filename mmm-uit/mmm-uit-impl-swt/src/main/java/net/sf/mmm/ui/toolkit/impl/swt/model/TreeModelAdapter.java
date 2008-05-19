@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTreeAccess;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to

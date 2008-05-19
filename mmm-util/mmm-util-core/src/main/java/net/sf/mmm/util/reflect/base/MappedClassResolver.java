@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.base;
 
 import java.util.Map;
 
-import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 
 /**

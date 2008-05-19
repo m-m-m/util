@@ -5,6 +5,10 @@ package net.sf.mmm.util.pattern;
 
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.pattern.api.PatternCompiler;
+import net.sf.mmm.util.pattern.base.GlobPatternCompiler;
+import net.sf.mmm.util.pattern.base.PathPatternCompiler;
+
 /**
  * This is an abstract base-implementation of the {@link PatternCompiler}
  * interface for glob-patterns.

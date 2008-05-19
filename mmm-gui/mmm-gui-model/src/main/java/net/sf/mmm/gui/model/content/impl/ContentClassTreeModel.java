@@ -11,7 +11,7 @@ import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITreeModel;
-import net.sf.mmm.util.event.EventListener;
+import net.sf.mmm.util.event.api.EventListener;
 
 /**
  * This is an implementation of the {@link UITreeModel} interface for the

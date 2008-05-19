@@ -9,7 +9,7 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentModelEvent;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUIListModel;
-import net.sf.mmm.util.event.EventListener;
+import net.sf.mmm.util.event.api.EventListener;
 
 /**
  * This is the implementation of the

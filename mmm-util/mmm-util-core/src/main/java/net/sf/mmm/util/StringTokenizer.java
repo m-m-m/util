@@ -5,7 +5,7 @@ package net.sf.mmm.util;
 
 import java.util.Iterator;
 
-import net.sf.mmm.util.collection.AbstractIterator;
+import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
  * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided

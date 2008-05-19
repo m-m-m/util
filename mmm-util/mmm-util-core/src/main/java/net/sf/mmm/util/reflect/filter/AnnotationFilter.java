@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.filter;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.mmm.util.filter.Filter;
+import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.AnnotationUtil;
 
 /**

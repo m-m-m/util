@@ -28,7 +28,7 @@ import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.model.api.ContentModelService;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.util.filter.Filter;
+import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;

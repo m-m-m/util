@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.model;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.model.UIMutableListModel;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This is the abstract base implementation of the

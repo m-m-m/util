@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner;
 
-import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
 
 /**
  * This is the interface for a scanner that can be used to parse a stream or

@@ -6,7 +6,7 @@ package net.sf.mmm.util.pojo.base;
 import java.lang.reflect.Array;
 
 import net.sf.mmm.util.pojo.api.PojoFactory;
-import net.sf.mmm.util.reflect.InstantiationFailedException;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the simplest implementation of the {@link PojoFactory} interface.<br>

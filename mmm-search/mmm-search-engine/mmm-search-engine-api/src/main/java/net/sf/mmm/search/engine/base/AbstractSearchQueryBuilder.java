@@ -8,7 +8,7 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
-import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**

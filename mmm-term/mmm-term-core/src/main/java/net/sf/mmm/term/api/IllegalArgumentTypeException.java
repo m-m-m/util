@@ -4,8 +4,8 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.term.NlsBundleTermCore;
-import net.sf.mmm.util.reflect.Arguments;
-import net.sf.mmm.util.reflect.Signature;
+import net.sf.mmm.util.reflect.api.Arguments;
+import net.sf.mmm.util.reflect.api.Signature;
 
 /**
  * This exception represents an error that occured during the calculation of a

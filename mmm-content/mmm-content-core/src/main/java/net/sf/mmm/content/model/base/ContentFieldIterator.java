@@ -6,7 +6,7 @@ package net.sf.mmm.content.model.base;
 import java.util.Iterator;
 
 import net.sf.mmm.content.model.api.ContentField;
-import net.sf.mmm.util.collection.AbstractIterator;
+import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
  * This class is an enumeration for the fields of a class. It will enumerate the

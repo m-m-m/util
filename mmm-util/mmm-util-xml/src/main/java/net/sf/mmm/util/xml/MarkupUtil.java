@@ -6,13 +6,19 @@ package net.sf.mmm.util.xml;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.component.AbstractComponent;
+import net.sf.mmm.util.io.EncodingUtil;
+
 /**
  * This utility class contains methods that help to deal with markup such as
  * XML, SGML, HTML, etc.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class MarkupUtil {
+public class MarkupUtil extends AbstractComponent {
+
+  /** @see #getInstance() */
+  private static MarkupUtil instance;
 
   /** @see #resolveEntity(String) */
   private static final Map<String, Character> ENTITY_MAP;
@@ -280,8 +286,37 @@ public final class MarkupUtil {
   /**
    * The constructor.
    */
-  private MarkupUtil() {
+  public MarkupUtil() {
 
+    super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link EncodingUtil}.<br>
+   * This design is the best compromise between easy access (via this
+   * indirection you have direct, static access to all offered functionality)
+   * and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
+   * construct new instances via the container-framework of your choice (like
+   * plexus, pico, springframework, etc.). To wire up the dependent components
+   * everything is properly annotated using common-annotations (JSR-250). If
+   * your container does NOT support this, you should consider using a better
+   * one.
+   * 
+   * @return the singleton instance.
+   */
+  public static MarkupUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (MarkupUtil.class) {
+        if (instance == null) {
+          MarkupUtil util = new MarkupUtil();
+          util.initialize();
+          instance = util;
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -317,7 +352,7 @@ public final class MarkupUtil {
    *         this as <code>parserState</code> argument on subsequent call to
    *         continue parsing.
    */
-  public static ParserState extractPlainText(String htmlFragment, StringBuffer buffer,
+  public static ParserState extractPlainText(String htmlFragment, StringBuilder buffer,
       ParserState parserState) {
 
     ParserState state = new ParserState(parserState);
@@ -430,7 +465,7 @@ public final class MarkupUtil {
 
   /**
    * This inner class contains the state of an HTML
-   * {@link MarkupUtil#extractPlainText(String, StringBuffer, net.sf.mmm.util.xml.MarkupUtil.ParserState) parsing}
+   * {@link MarkupUtil#extractPlainText(String, StringBuilder, ParserState) parsing}
    * process.
    */
   public static class ParserState {

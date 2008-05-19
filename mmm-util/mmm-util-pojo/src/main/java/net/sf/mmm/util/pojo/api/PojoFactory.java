@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.api;
 
-import net.sf.mmm.util.reflect.InstantiationFailedException;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the interface for a generic factory used to

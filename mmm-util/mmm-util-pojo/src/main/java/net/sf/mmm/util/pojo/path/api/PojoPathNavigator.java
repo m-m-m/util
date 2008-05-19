@@ -5,8 +5,8 @@ package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.reflect.InstantiationFailedException;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the interface for the navigator used to traverse the object-web

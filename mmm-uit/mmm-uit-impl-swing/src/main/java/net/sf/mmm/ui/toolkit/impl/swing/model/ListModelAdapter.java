@@ -8,7 +8,7 @@ import javax.swing.AbstractListModel;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a

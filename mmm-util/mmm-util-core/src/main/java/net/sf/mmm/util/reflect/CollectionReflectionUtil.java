@@ -11,13 +11,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.GenericBean;
-import net.sf.mmm.util.collection.CollectionFactory;
-import net.sf.mmm.util.collection.CollectionFactoryManager;
-import net.sf.mmm.util.collection.CollectionFactoryManagerImpl;
+import net.sf.mmm.util.collection.api.CollectionFactory;
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.component.AlreadyInitializedException;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.base.NlsNullPointerException;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This class is a collection of utility functions for reflectively dealing with

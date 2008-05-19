@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.filter;
 
-import net.sf.mmm.util.filter.Filter;
+import net.sf.mmm.util.filter.api.Filter;
 
 /**
  * This is a filter that only {@link #accept(Class) accepts} {@link Class types}

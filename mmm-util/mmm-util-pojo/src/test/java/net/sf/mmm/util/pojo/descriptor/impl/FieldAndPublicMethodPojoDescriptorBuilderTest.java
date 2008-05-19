@@ -17,7 +17,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoFieldIntrospectorImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoMethodIntrospectorImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
-import net.sf.mmm.util.reflect.VisibilityModifier;
+import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the test-case for {@link PublicMethodPojoDescriptorBuilder}.

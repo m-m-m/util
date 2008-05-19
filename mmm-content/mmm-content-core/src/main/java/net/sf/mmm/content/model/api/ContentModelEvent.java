@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.api;
 
-import net.sf.mmm.util.event.ChangeEvent;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEvent;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This class represents an event that is sent to notify about changes of the

@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.util.Properties;
 
 import net.sf.mmm.util.xml.MarkupUtil;
+import net.sf.mmm.util.xml.MarkupParserState;
 
 /**
  * This is the implementation of the
@@ -29,11 +30,11 @@ public class ContentParserTextMarkupAware extends ContentParserText {
    * {@inheritDoc}
    */
   @Override
-  public void parse(BufferedReader bufferedReader, Properties properties, StringBuffer textBuffer)
+  public void parse(BufferedReader bufferedReader, Properties properties, StringBuilder textBuffer)
       throws Exception {
 
     long maxChars = getMaximumBufferSize() / 2;
-    MarkupUtil.ParserState parserState = null;
+    MarkupParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
       parseLine(properties, line);

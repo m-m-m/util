@@ -22,9 +22,9 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import net.sf.mmm.util.filter.CharFilter;
-import net.sf.mmm.util.filter.Filter;
-import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;

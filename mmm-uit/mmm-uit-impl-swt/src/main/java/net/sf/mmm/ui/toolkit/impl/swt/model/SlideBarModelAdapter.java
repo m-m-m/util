@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to

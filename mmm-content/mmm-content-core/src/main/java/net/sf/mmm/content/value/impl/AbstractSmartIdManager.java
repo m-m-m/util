@@ -6,7 +6,7 @@ package net.sf.mmm.content.value.impl;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
-import net.sf.mmm.util.value.api.ValueParseStringException;
+import net.sf.mmm.util.value.api.ValueParseGenericException;
 
 /**
  * This is the abstract base implementation of the {@link SmartIdManager}
@@ -78,7 +78,7 @@ public abstract class AbstractSmartIdManager implements SmartIdManager {
     int revision = 0;
     int storeId = 0;
 
-    StringBuffer token = new StringBuffer();
+    StringBuilder token = new StringBuilder();
     int end = idAsString.length() - 1;
     int pos = 0;
     for (int i = 0; i <= end; i++) {
@@ -101,7 +101,7 @@ public abstract class AbstractSmartIdManager implements SmartIdManager {
             storeId = Integer.parseInt(s, SmartId.RADIX);
           }
         } catch (NumberFormatException e) {
-          throw new ValueParseStringException(idAsString, SmartId.class, ContentId.VALUE_NAME);
+          throw new ValueParseGenericException(e, idAsString, SmartId.class, ContentId.VALUE_NAME);
         }
         pos++;
       } else {
@@ -109,7 +109,7 @@ public abstract class AbstractSmartIdManager implements SmartIdManager {
       }
     }
     if ((pos < 2) || (pos > 4)) {
-      throw new ValueParseStringException(idAsString, SmartId.class, ContentId.VALUE_NAME);
+      throw new ValueParseGenericException(idAsString, SmartId.class, ContentId.VALUE_NAME);
     }
     return getId(resourceId, classId, revision, storeId);
   }

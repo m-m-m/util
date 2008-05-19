@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.sf.mmm.util.filter.CharFilter;
-import net.sf.mmm.util.filter.ListCharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;

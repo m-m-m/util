@@ -6,7 +6,7 @@ package net.sf.mmm.util.filter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.pattern.RegexInfixPatternCompiler;
+import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
 
 /**
  * This is an implementation of the {@link FilterRule} interface that matches

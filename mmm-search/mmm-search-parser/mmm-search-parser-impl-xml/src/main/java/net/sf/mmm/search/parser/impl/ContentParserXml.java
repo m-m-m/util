@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import net.sf.mmm.search.parser.base.AbstractContentParser;
 import net.sf.mmm.util.xml.MarkupUtil;
+import net.sf.mmm.util.xml.MarkupParserState;
 import net.sf.mmm.util.xml.XmlUtil;
 
 /**
@@ -42,7 +43,7 @@ public class ContentParserXml extends AbstractContentParser {
       throws Exception {
 
     int maxChars = getMaximumBufferSize() / 2;
-    StringBuffer textBuffer = new StringBuffer(maxChars);
+    StringBuilder textBuffer = new StringBuilder(maxChars);
     Charset defaultCharset;
     if (encoding == null) {
       defaultCharset = Charset.defaultCharset();
@@ -67,11 +68,11 @@ public class ContentParserXml extends AbstractContentParser {
    *        appended to.
    * @throws Exception if something goes wrong.
    */
-  public void parse(BufferedReader bufferedReader, Properties properties, StringBuffer textBuffer)
+  public void parse(BufferedReader bufferedReader, Properties properties, StringBuilder textBuffer)
       throws Exception {
 
     long maxChars = getMaximumBufferSize() / 2;
-    MarkupUtil.ParserState parserState = null;
+    MarkupParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
       parserState = MarkupUtil.extractPlainText(line, textBuffer, parserState);

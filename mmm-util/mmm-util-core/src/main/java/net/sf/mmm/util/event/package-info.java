@@ -10,9 +10,9 @@
  * once in a generic way. This prevents you from typical mistakes as dead-locks
  * in listeners that want to de-register themselves during event-handling.<br>
  * Create your custom event by implementing the marker interface 
- * {@link net.sf.mmm.util.event.Event} or if suitable implementing
- * {@link net.sf.mmm.util.event.ChangeEvent}. Then the producer of the events 
- * only needs to extends {@link net.sf.mmm.util.event.AbstractEventSource} or
+ * {@link net.sf.mmm.util.event.api.Event} or if suitable implementing
+ * {@link net.sf.mmm.util.event.api.ChangeEvent}. Then the producer of the events 
+ * only needs to extends {@link net.sf.mmm.util.event.base.AbstractEventSource} or
  * one of its sub-classes.
  */
 package net.sf.mmm.util.event;

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.event;
 
 import net.sf.mmm.ui.toolkit.api.event.UIModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This class represents the event sent by the
@@ -14,7 +14,7 @@ import net.sf.mmm.util.event.ChangeEventType;
  * order to notify about changes of the
  * {@link net.sf.mmm.ui.toolkit.api.widget.UITable table}.<br>
  * Be aware that only
- * {@link net.sf.mmm.util.event.ChangeEventType#UPDATE update} events may apply
+ * {@link net.sf.mmm.util.event.api.ChangeEventType#UPDATE update} events may apply
  * to incomplete columns (single column but
  * {@link #getRowStartIndex() row-start} is not <code>0</code> or
  * {@link #getRowEndIndex() row-end} is not

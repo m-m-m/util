@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter;
 
+import net.sf.mmm.util.filter.api.Filter;
+
 /**
  * This class is a {@link Filter}&lt;String&gt; implementation that is based on
  * a chain of {@link FilterRule}s.

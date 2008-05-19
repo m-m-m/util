@@ -31,9 +31,6 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_PARSE_SOURCE = "Failed to parse value \"{0}\" from "
       + "\"{2}\" as value of the type \"{1}\"!";
 
-  /** @see net.sf.mmm.util.value.api.ValueParseStringException */
-  public static final String ERR_PARSE_STRING = "Failed to parse \"{0}\" as \"{2}\"-value[{1}]!";
-
   /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
   public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{0}\" "
       + "is not in the expected range of \"[{1}-{2}]\"!";
@@ -60,7 +57,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.math.NumberConversionException */
   public static final String ERR_NUMBER_CONVERSION = "Can not convert number \"{0}\" to \"{1}\"!";
 
-  /** @see net.sf.mmm.util.io.RuntimeIoException */
+  /** @see net.sf.mmm.util.io.api.RuntimeIoException */
   public static final String ERR_IO = "An unexpected input/output error has ocurred!";
 
   /** @see net.sf.mmm.util.nls.base.NlsNullPointerException */

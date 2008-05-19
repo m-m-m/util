@@ -18,6 +18,7 @@ import java.nio.charset.Charset;
 import org.junit.Test;
 
 import net.sf.mmm.util.BasicUtil;
+import net.sf.mmm.util.io.api.EncodingDetectionReader;
 
 /**
  * This is the test-case for {@link EncodingUtil}.

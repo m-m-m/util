@@ -19,7 +19,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder;
@@ -37,8 +37,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetBuil
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetIndexedBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetMappedBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBuilder;
-import net.sf.mmm.util.reflect.VisibilityModifier;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the generic implementation of the

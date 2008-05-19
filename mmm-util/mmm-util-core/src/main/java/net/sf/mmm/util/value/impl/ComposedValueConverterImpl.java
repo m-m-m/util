@@ -9,8 +9,8 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 
-import net.sf.mmm.util.collection.AdvancedClassHierarchieMap;
-import net.sf.mmm.util.collection.MapFactory;
+import net.sf.mmm.util.collection.api.MapFactory;
+import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.api.ValueException;

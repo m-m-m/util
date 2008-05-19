@@ -20,9 +20,9 @@ import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.api.OperatorPriority;
 import net.sf.mmm.term.base.BasicFunction;
 import net.sf.mmm.util.BasicUtil;
-import net.sf.mmm.util.reflect.Arguments;
 import net.sf.mmm.util.reflect.ReflectionUtil;
-import net.sf.mmm.util.reflect.Signature;
+import net.sf.mmm.util.reflect.api.Arguments;
+import net.sf.mmm.util.reflect.api.Signature;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**

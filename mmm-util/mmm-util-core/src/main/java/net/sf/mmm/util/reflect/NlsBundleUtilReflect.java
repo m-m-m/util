@@ -4,6 +4,9 @@
 package net.sf.mmm.util.reflect;
 
 import net.sf.mmm.util.nls.AbstractResourceBundle;
+import net.sf.mmm.util.reflect.api.AccessFailedException;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
+import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
  * This class holds the internationalized messages for this module.

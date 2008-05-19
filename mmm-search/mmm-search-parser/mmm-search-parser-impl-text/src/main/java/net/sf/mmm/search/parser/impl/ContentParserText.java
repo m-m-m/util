@@ -11,9 +11,12 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
+
 import com.glaforge.i18n.io.SmartEncodingInputStream;
 
 import net.sf.mmm.search.parser.base.AbstractContentParser;
+import net.sf.mmm.util.io.EncodingUtil;
 import net.sf.mmm.util.xml.MarkupUtil;
 
 /**
@@ -27,6 +30,9 @@ public class ContentParserText extends AbstractContentParser {
 
   /** @see #getDefaultCapacity() */
   private int defaultCapacity;
+
+  /** @see #getEncodingUtil() */
+  private EncodingUtil encodingUtil;
 
   /**
    * The constructor.
@@ -60,7 +66,40 @@ public class ContentParserText extends AbstractContentParser {
    */
   public void setDefaultCapacity(int newBufferSize) {
 
+    getInitializationState().requireNotInitilized();
     this.defaultCapacity = newBufferSize;
+  }
+
+  /**
+   * This method gets the {@link EncodingUtil} to use.
+   * 
+   * @return the {@link EncodingUtil} to use.
+   */
+  protected EncodingUtil getEncodingUtil() {
+
+    return this.encodingUtil;
+  }
+
+  /**
+   * @param encodingUtil is the encodingUtil to set
+   */
+  @Resource
+  public void setEncodingUtil(EncodingUtil encodingUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.encodingUtil = encodingUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.encodingUtil == null) {
+      this.encodingUtil = EncodingUtil.getInstance();
+    }
   }
 
   /**
@@ -88,7 +127,7 @@ public class ContentParserText extends AbstractContentParser {
   /**
    * This method checks if the property identified by <code>propertyName</code>
    * already exists. If NOT, it tries to extract it using the given
-   * <code>pattern</code> that has to produce it in the given
+   * <code>pattern</code> that produces the property in the given
    * <code>{@link Matcher#group(int) group}</code>.
    * 
    * @param properties are the properties with the collected metadata.
@@ -105,7 +144,7 @@ public class ContentParserText extends AbstractContentParser {
     if (value == null) {
       value = parseProperty(line, pattern, group);
       if (value != null) {
-        StringBuffer buffer = new StringBuffer(value.length());
+        StringBuilder buffer = new StringBuilder(value.length());
         MarkupUtil.extractPlainText(value, buffer, null);
         properties.setProperty(propertyName, buffer.toString());
       }
@@ -115,6 +154,7 @@ public class ContentParserText extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
       throws Exception {
 
@@ -130,7 +170,7 @@ public class ContentParserText extends AbstractContentParser {
         capacity = this.defaultCapacity;
       }
     }
-    StringBuffer textBuffer = new StringBuffer(capacity);
+    StringBuilder textBuffer = new StringBuilder(capacity);
     int bufferLength = 4096;
     if (bufferLength > maxBufferSize) {
       bufferLength = maxBufferSize;
@@ -162,7 +202,7 @@ public class ContentParserText extends AbstractContentParser {
    *        appended to.
    * @throws Exception if something goes wrong.
    */
-  public void parse(BufferedReader bufferedReader, Properties properties, StringBuffer textBuffer)
+  public void parse(BufferedReader bufferedReader, Properties properties, StringBuilder textBuffer)
       throws Exception {
 
     int maxChars = getMaximumBufferSize() / 2;

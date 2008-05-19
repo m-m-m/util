@@ -3,7 +3,7 @@ package net.sf.mmm.ui.toolkit.base.model;
 import java.util.List;
 import java.util.Vector;
 
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This inner class is the implementation of the {@link UITreeNodeIF} interface.

@@ -10,7 +10,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorField;
-import net.sf.mmm.util.reflect.AccessFailedException;
+import net.sf.mmm.util.reflect.api.AccessFailedException;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArg}

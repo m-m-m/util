@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.file;
 
-import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 
 /**

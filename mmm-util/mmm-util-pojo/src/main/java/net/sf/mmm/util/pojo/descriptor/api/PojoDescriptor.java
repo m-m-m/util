@@ -8,7 +8,7 @@ import java.util.Collection;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeType;
-import net.sf.mmm.util.reflect.ReflectionException;
+import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a

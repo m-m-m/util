@@ -9,7 +9,7 @@ import java.util.Collection;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.StringTokenizer;
-import net.sf.mmm.util.collection.CollectionFactoryManager;
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.reflect.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;

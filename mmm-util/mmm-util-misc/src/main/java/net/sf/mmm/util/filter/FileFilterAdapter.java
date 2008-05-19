@@ -6,6 +6,8 @@ package net.sf.mmm.util.filter;
 import java.io.File;
 import java.io.FileFilter;
 
+import net.sf.mmm.util.filter.api.Filter;
+
 /**
  * TODO: this class ...
  * 

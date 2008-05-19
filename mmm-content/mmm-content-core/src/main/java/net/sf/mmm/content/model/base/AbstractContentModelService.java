@@ -27,10 +27,10 @@ import net.sf.mmm.content.model.api.access.ContentClassReadAccessByJavaClass;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
-import net.sf.mmm.util.event.AbstractSynchronizedEventSource;
-import net.sf.mmm.util.event.ChangeEventType;
-import net.sf.mmm.util.event.EventListener;
-import net.sf.mmm.util.event.EventSource;
+import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.EventListener;
+import net.sf.mmm.util.event.api.EventSource;
+import net.sf.mmm.util.event.base.AbstractSynchronizedEventSource;
 
 /**
  * This is the abstract base implementation of the {@link ContentModelService}

@@ -7,9 +7,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
-import net.sf.mmm.util.collection.AbstractIterator;
+import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector;
-import net.sf.mmm.util.reflect.VisibilityModifier;
+import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the implementation of the {@link PojoMethodIntrospector} interface.

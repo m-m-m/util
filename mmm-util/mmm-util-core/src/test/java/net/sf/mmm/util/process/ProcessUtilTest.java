@@ -19,6 +19,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.process.api.AsyncProcessExecutor;
+import net.sf.mmm.util.process.api.ProcessContext;
 
 /**
  * This is the test-case for {@link ProcessUtil}.

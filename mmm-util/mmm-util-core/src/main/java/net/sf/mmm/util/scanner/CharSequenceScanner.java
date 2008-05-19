@@ -5,7 +5,7 @@ package net.sf.mmm.util.scanner;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.filter.CharFilter;
+import net.sf.mmm.util.filter.api.CharFilter;
 
 /**
  * This class represents a {@link String} or better a sequence of characters (<code>char[]</code>)

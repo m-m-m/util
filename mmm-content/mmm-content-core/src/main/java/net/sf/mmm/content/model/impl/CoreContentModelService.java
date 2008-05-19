@@ -17,7 +17,7 @@ import net.sf.mmm.content.model.base.ContentClassLoaderStAX;
 import net.sf.mmm.content.model.base.ContentClassLoader;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.impl.StaticSmartIdManager;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This is an abstract base implementation of the

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.sf.mmm.search.parser.api.ContentParser;
+import net.sf.mmm.util.component.AbstractLoggable;
 
 /**
  * This is the abstract base implementation of a {@link ContentParser} that
@@ -14,7 +15,8 @@ import net.sf.mmm.search.parser.api.ContentParser;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentParser implements ContentParser, LimitBufferSize {
+public abstract class AbstractContentParser extends AbstractLoggable implements ContentParser,
+    LimitBufferSize {
 
   /** @see #getMaximumBufferSize() */
   private int maximumBufferSize;

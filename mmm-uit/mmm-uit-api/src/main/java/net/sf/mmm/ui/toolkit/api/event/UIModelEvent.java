@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.event;
 
-import net.sf.mmm.util.event.ChangeEvent;
-import net.sf.mmm.util.event.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeEvent;
+import net.sf.mmm.util.event.api.ChangeEventType;
 
 /**
  * This is the abstract base class of all events sent from models of the UI.
