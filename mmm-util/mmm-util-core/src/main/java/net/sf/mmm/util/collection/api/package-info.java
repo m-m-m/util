@@ -2,8 +2,8 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains utilities for dealing with {@link java.util.Collections}.
- * <h2>Collection Utilities</h2>
+ * Contains the API for utilities that help to dealing with {@link java.util.Collections}.
+ * <h2>Collection-Util API</h2>
  * This package contains interfaces for factories (especially 
  * {@link net.sf.mmm.util.collection.api.CollectionFactory} and 
  * {@link net.sf.mmm.util.collection.api.MapFactory}) of the various 
@@ -16,5 +16,5 @@
  * Finally the {@link net.sf.mmm.util.collection.base.AbstractIterator} makes it 
  * easier to implement read-only custom {@link java.util.Iterator}s.
  */
-package net.sf.mmm.util.collection;
+package net.sf.mmm.util.collection.api;
 

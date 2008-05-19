@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.api;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.mmm.util.collection.base.AbstractSetFactory;
+import net.sf.mmm.util.collection.base.HashSetFactory;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -27,32 +26,7 @@ public interface SetFactory extends CollectionFactory<Set> {
    */
   <E> Set<E> create(int capacity);
 
-  /** The default instance creating a {@link HashSet}. */
-  SetFactory INSTANCE_HASH_SET = new AbstractSetFactory() {
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<? extends Set> getCollectionImplementation() {
-
-      return HashSet.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <E> Set<E> create() {
-
-      return new HashSet<E>();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <E> Set<E> create(int capacity) {
-
-      return new HashSet<E>(capacity);
-    }
-  };
+  /** The default instance creating a {@link java.util.HashSet}. */
+  SetFactory INSTANCE_HASH_SET = new HashSetFactory();
 
 }

@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.api;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.collection.base.AbstractMapFactory;
+import net.sf.mmm.util.collection.base.HashMapFactory;
 
 /**
  * This is the interface for a factory of {@link Map maps}. It allows to
@@ -92,32 +91,7 @@ public interface MapFactory<MAP extends Map> {
    */
   MAP createGeneric(int capacity);
 
-  /** The default instance creating a {@link HashMap}. */
-  MapFactory<Map> INSTANCE_HASH_MAP = new AbstractMapFactory() {
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<? extends Map> getMapImplementation() {
-
-      return HashMap.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <K, V> Map<K, V> create() {
-
-      return new HashMap<K, V>();
-    };
-
-    /**
-     * {@inheritDoc}
-     */
-    public <K, V> Map<K, V> create(int capacity) {
-
-      return new HashMap<K, V>(capacity);
-    }
-  };
+  /** The default instance creating a {@link java.util.HashMap}. */
+  MapFactory<Map> INSTANCE_HASH_MAP = new HashMapFactory();
 
 }

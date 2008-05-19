@@ -4,9 +4,8 @@
 package net.sf.mmm.util.collection.api;
 
 import java.util.SortedSet;
-import java.util.TreeSet;
 
-import net.sf.mmm.util.collection.base.AbstractSortedSetFactory;
+import net.sf.mmm.util.collection.base.TreeSetFactory;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -27,33 +26,7 @@ public interface SortedSetFactory extends CollectionFactory<SortedSet> {
    */
   <E> SortedSet<E> create(int capacity);
 
-  /** The default instance creating a {@link TreeSet}. */
-  SortedSetFactory INSTANCE_TREE_SET = new AbstractSortedSetFactory() {
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<? extends SortedSet> getCollectionImplementation() {
-
-      return TreeSet.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <E> SortedSet<E> create() {
-
-      return new TreeSet<E>();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <E> SortedSet<E> create(int capacity) {
-
-      // capacity does NOT make sense here...
-      return new TreeSet<E>();
-    }
-  };
+  /** The default instance creating a {@link java.util.TreeSet}. */
+  SortedSetFactory INSTANCE_TREE_SET = new TreeSetFactory();
 
 }

@@ -4,9 +4,8 @@
 package net.sf.mmm.util.collection.api;
 
 import java.util.Deque;
-import java.util.LinkedList;
 
-import net.sf.mmm.util.collection.base.AbstractDequeFactory;
+import net.sf.mmm.util.collection.base.LinkedListDequeFactory;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -27,23 +26,6 @@ public interface DequeFactory extends CollectionFactory<Deque> {
    */
   <E> Deque<E> create(int capacity);
 
-  /** The default instance creating a {@link LinkedList}. */
-  DequeFactory INSTANCE_LINKED_LIST = new AbstractDequeFactory() {
-
-    public Class<? extends Deque> getCollectionImplementation() {
-
-      return LinkedList.class;
-    }
-
-    public <E> Deque<E> create() {
-
-      return new LinkedList<E>();
-    }
-
-    public <E> Deque<E> create(int capacity) {
-
-      // capacity does NOT make sense here...
-      return new LinkedList<E>();
-    }
-  };
+  /** The default instance creating a {@link java.util.LinkedList}. */
+  DequeFactory INSTANCE_LINKED_LIST = new LinkedListDequeFactory();
 }

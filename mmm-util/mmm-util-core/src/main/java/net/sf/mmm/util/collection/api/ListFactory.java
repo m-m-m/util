@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.util.collection.base.AbstractListFactory;
+import net.sf.mmm.util.collection.base.ArrayListFactory;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -27,32 +26,7 @@ public interface ListFactory extends CollectionFactory<List> {
    */
   <E> List<E> create(int capacity);
 
-  /** The default instance creating an {@link ArrayList}. */
-  ListFactory INSTANCE_ARRAY_LIST = new AbstractListFactory() {
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<? extends List> getCollectionImplementation() {
-
-      return ArrayList.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <E> List<E> create() {
-
-      return new ArrayList<E>();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <E> List<E> create(int capacity) {
-
-      return new ArrayList<E>(capacity);
-    }
-  };
+  /** The default instance creating an {@link java.util.ArrayList}. */
+  ListFactory INSTANCE_ARRAY_LIST = new ArrayListFactory();
 
 }

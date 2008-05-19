@@ -4,9 +4,8 @@
 package net.sf.mmm.util.collection.api;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
-import net.sf.mmm.util.collection.base.AbstractBlockingQueueFactory;
+import net.sf.mmm.util.collection.base.LinkedBlockingQueueFactory;
 
 /**
  * This is the interface for a {@link CollectionFactory} that
@@ -27,23 +26,9 @@ public interface BlockingQueueFactory extends CollectionFactory<BlockingQueue> {
    */
   <E> BlockingQueue<E> create(int capacity);
 
-  /** The default instance creating a {@link LinkedBlockingQueue}. */
-  BlockingQueueFactory INSTANCE_LINKED_BLOCKING_QUEUE = new AbstractBlockingQueueFactory() {
-
-    public Class<? extends BlockingQueue> getCollectionImplementation() {
-
-      return LinkedBlockingQueue.class;
-    }
-
-    public <E> BlockingQueue<E> create() {
-
-      return new LinkedBlockingQueue<E>();
-    }
-
-    public <E> BlockingQueue<E> create(int capacity) {
-
-      // ATTENTION: capacity is the fixed capacity here, so does NOT make sense
-      return new LinkedBlockingQueue<E>();
-    }
-  };
+  /**
+   * The default instance creating a
+   * {@link java.util.concurrent.LinkedBlockingQueue}.
+   */
+  BlockingQueueFactory INSTANCE_LINKED_BLOCKING_QUEUE = new LinkedBlockingQueueFactory();
 }
