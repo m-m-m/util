@@ -158,7 +158,7 @@ public final class Iso8601Util {
 
     // we could save 2*2 bytes here according to extended flag ;)
     // "yyyy-MM-dd".length() == 10
-    StringBuffer buffer = new StringBuffer(10);
+    StringBuilder buffer = new StringBuilder(10);
     formatDate(calendar, extended, buffer);
     return buffer.toString();
   }
@@ -215,7 +215,7 @@ public final class Iso8601Util {
     Calendar calendar = Calendar.getInstance(TZ_UTC);
     calendar.setTime(date);
     // "yyyy-MM-ddTHH:mm:ssZ".length() == 20
-    StringBuffer buffer = new StringBuffer(20);
+    StringBuilder buffer = new StringBuilder(20);
     formatDate(calendar, true, buffer);
     buffer.append('T');
     formatTime(calendar, true, buffer);
@@ -257,7 +257,7 @@ public final class Iso8601Util {
       boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
-    StringBuffer buffer = new StringBuffer(25);
+    StringBuilder buffer = new StringBuilder(25);
     formatDateTime(calendar, extendedDate, extendedTime, extendedTimezone, buffer);
     return buffer.toString();
   }
@@ -488,11 +488,11 @@ public final class Iso8601Util {
       int hour = hourMinuteSecond[0];
       int minute = hourMinuteSecond[1];
       int second = hourMinuteSecond[2];
-      calendar.set(year, month - 1, day, hour, minute, second);
       TimeZone timeZone = parseTimezone(scanner);
       if (timeZone != null) {
         calendar.setTimeZone(timeZone);
       }
+      calendar.set(year, month - 1, day, hour, minute, second);
     } else if (c == 0) {
       calendar.set(year, month - 1, day);
     } else {
