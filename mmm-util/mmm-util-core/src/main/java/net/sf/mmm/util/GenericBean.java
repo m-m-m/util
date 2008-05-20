@@ -4,7 +4,7 @@
 package net.sf.mmm.util;
 
 /**
- * This class is a simple java bean, that has one generic property named
+ * This class is a simple java bean that has one generic property named
  * {@link #getValue() value}. It can be used for various purposes - e.g. to
  * receive a value by passing it as argument to a method that already returns
  * something else.

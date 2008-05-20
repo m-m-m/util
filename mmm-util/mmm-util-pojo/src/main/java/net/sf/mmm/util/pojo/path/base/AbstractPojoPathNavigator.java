@@ -13,8 +13,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.GenericBean;
-import net.sf.mmm.util.HashKey;
 import net.sf.mmm.util.collection.base.CollectionList;
+import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.nls.base.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
@@ -520,7 +520,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     // determine pojo type
     GenericType pojoType = currentPath.parent.pojoType;
     GenericType componentType = pojoType.getComponentType();
-    if (componentType.getType() == Object.class) {
+    if (componentType.getUpperBound() == Object.class) {
       currentPath.pojoClass = Object.class;
     } else {
       currentPath.pojoType = componentType;
@@ -563,6 +563,10 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     // handle indexed segment for collection/list or array...
     currentPath.pojoType = currentPath.parent.pojoType.getComponentType();
+    if (currentPath.pojoType == null) {
+      currentPath.pojoType = getReflectionUtil().createGenericType(currentPath.parent.pojoClass)
+          .getComponentType();
+    }
     currentPath.pojoClass = currentPath.pojoType.getLowerBound();
     Object result = null;
     if (!state.isGetType()) {

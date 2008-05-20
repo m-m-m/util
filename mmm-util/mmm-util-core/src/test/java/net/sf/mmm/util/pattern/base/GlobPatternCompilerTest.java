@@ -1,10 +1,10 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.pattern;
+package net.sf.mmm.util.pattern.base;
 
-import static net.sf.mmm.util.pattern.PatternAssert.assertMatches;
-import static net.sf.mmm.util.pattern.PatternAssert.assertMatchesNot;
+import static net.sf.mmm.util.pattern.base.PatternAssert.assertMatches;
+import static net.sf.mmm.util.pattern.base.PatternAssert.assertMatchesNot;
 
 import java.util.regex.Pattern;
 

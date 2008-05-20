@@ -15,6 +15,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.api.QueueFactory;
 import net.sf.mmm.util.collection.api.SetFactory;
 import net.sf.mmm.util.collection.api.SortedSetFactory;
+import net.sf.mmm.util.component.AbstractLoggable;
 
 /**
  * This is the default implementation of the {@link CollectionFactoryManager}
@@ -23,7 +24,8 @@ import net.sf.mmm.util.collection.api.SortedSetFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("unchecked")
-public class CollectionFactoryManagerImpl implements CollectionFactoryManager {
+public class CollectionFactoryManagerImpl extends AbstractLoggable implements
+    CollectionFactoryManager {
 
   /** @see #getInstance() */
   private static CollectionFactoryManager instance;
@@ -39,8 +41,18 @@ public class CollectionFactoryManagerImpl implements CollectionFactoryManager {
    */
   public CollectionFactoryManagerImpl() {
 
+    super();
     this.mapFactoryMap = new HashMap<Class<? extends Map>, MapFactory>();
     this.collectionFactoryMap = new HashMap<Class<? extends Collection>, CollectionFactory>();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
     registerMapFactory(MapFactory.INSTANCE_HASH_MAP);
     registerCollectionFactory(ListFactory.INSTANCE_ARRAY_LIST, Collection.class);
     registerCollectionFactory(ListFactory.INSTANCE_ARRAY_LIST);
@@ -48,14 +60,18 @@ public class CollectionFactoryManagerImpl implements CollectionFactoryManager {
     registerCollectionFactory(SortedSetFactory.INSTANCE_TREE_SET);
     registerCollectionFactory(QueueFactory.INSTANCE_LINKED_LIST);
     registerCollectionFactory(BlockingQueueFactory.INSTANCE_LINKED_BLOCKING_QUEUE);
-    // allow this class to work with java 5 as well...
+    // Deque is only available since java6, allow this class to work with
+    // java5 as well...
     try {
-      Class dequeFactoryClass = Class.forName("net.sf.mmm.util.collection.DequeFactory");
+      Class dequeFactoryClass = Class.forName("net.sf.mmm.util.collection.api.DequeFactory");
       CollectionFactory dequeFactory = (CollectionFactory) dequeFactoryClass.getField(
           "INSTANCE_LINKED_LIST").get(null);
       registerCollectionFactory(dequeFactory);
     } catch (Throwable e) {
       // Deque not available before java6, ignore...
+      getLogger().info(
+          "Deque is NOT available before java 6 - support disabled: " + e.getClass().getName()
+              + ": " + e.getMessage());
     }
   }
 
@@ -79,7 +95,9 @@ public class CollectionFactoryManagerImpl implements CollectionFactoryManager {
     if (instance == null) {
       synchronized (CollectionFactoryManagerImpl.class) {
         if (instance == null) {
-          instance = new CollectionFactoryManagerImpl();
+          CollectionFactoryManagerImpl manager = new CollectionFactoryManagerImpl();
+          manager.initialize();
+          instance = manager;
         }
       }
     }
