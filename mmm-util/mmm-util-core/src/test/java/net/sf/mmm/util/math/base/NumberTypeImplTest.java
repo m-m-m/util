@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.math;
+package net.sf.mmm.util.math.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,7 +25,7 @@ import net.sf.mmm.util.math.api.NumberType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NumberTypeTest {
+public class NumberTypeImplTest {
 
   protected <NUMBER extends Number> void checkNumberType(NumberType<NUMBER> numberType, NUMBER value) {
 
@@ -59,7 +59,7 @@ public class NumberTypeTest {
   @Test
   public void testByte() {
 
-    NumberType<Byte> numberType = NumberType.BYTE;
+    NumberType<Byte> numberType = NumberTypeImpl.BYTE;
     assertEquals(Byte.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     byte b = 123;
@@ -71,7 +71,7 @@ public class NumberTypeTest {
   @Test
   public void testShort() {
 
-    NumberType<Short> numberType = NumberType.SHORT;
+    NumberType<Short> numberType = NumberTypeImpl.SHORT;
     assertEquals(Short.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     short s = 12345;
@@ -83,7 +83,7 @@ public class NumberTypeTest {
   @Test
   public void testInteger() {
 
-    NumberType<Integer> numberType = NumberType.INTEGER;
+    NumberType<Integer> numberType = NumberTypeImpl.INTEGER;
     assertEquals(Integer.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     Integer value = Integer.valueOf(1234567890);
@@ -94,7 +94,7 @@ public class NumberTypeTest {
   @Test
   public void testAtomicInteger() {
 
-    NumberType<AtomicInteger> numberType = NumberType.ATOMIC_INTEGER;
+    NumberType<AtomicInteger> numberType = NumberTypeImpl.ATOMIC_INTEGER;
     assertEquals(AtomicInteger.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     AtomicInteger value = new AtomicInteger(1234567890);
@@ -113,7 +113,7 @@ public class NumberTypeTest {
   @Test
   public void testLong() {
 
-    NumberType<Long> numberType = NumberType.LONG;
+    NumberType<Long> numberType = NumberTypeImpl.LONG;
     assertEquals(Long.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     Long value = Long.valueOf(1234567890123456L);
@@ -124,7 +124,7 @@ public class NumberTypeTest {
   @Test
   public void testAtomicLong() {
 
-    NumberType<AtomicLong> numberType = NumberType.ATOMIC_LONG;
+    NumberType<AtomicLong> numberType = NumberTypeImpl.ATOMIC_LONG;
     assertEquals(AtomicLong.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     AtomicLong value = new AtomicLong(1234567890123456L);
@@ -143,7 +143,7 @@ public class NumberTypeTest {
   @Test
   public void testBigInteger() {
 
-    NumberType<BigInteger> numberType = NumberType.BIG_INTEGER;
+    NumberType<BigInteger> numberType = NumberTypeImpl.BIG_INTEGER;
     assertEquals(BigInteger.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     BigInteger value = BigInteger.valueOf(1234567890123456L);
@@ -152,7 +152,7 @@ public class NumberTypeTest {
     value = new BigInteger("1234567890123456789012345678901234567890");
     BigInteger parsed = numberType.valueOf(value.toString());
     assertEquals(value, parsed);
-    NumberType<Long> longType = NumberType.LONG;
+    NumberType<Long> longType = NumberTypeImpl.LONG;
     try {
       longType.valueOf(value, true);
       fail("exception expected");
@@ -163,7 +163,7 @@ public class NumberTypeTest {
   @Test
   public void testFloat() {
 
-    NumberType<Float> numberType = NumberType.FLOAT;
+    NumberType<Float> numberType = NumberTypeImpl.FLOAT;
     assertEquals(Float.class, numberType.getNumberClass());
     assertTrue(numberType.isDecimal());
     Float value = Float.valueOf(123456789.123456789F);
@@ -184,7 +184,7 @@ public class NumberTypeTest {
   @Test
   public void testDouble() {
 
-    NumberType<Double> numberType = NumberType.DOUBLE;
+    NumberType<Double> numberType = NumberTypeImpl.DOUBLE;
     assertEquals(Double.class, numberType.getNumberClass());
     assertTrue(numberType.isDecimal());
     Double value = Double.valueOf(123456789.123456789);
@@ -197,7 +197,7 @@ public class NumberTypeTest {
   @Test
   public void testBigDecimal() {
 
-    NumberType<BigDecimal> numberType = NumberType.BIG_DECIMAL;
+    NumberType<BigDecimal> numberType = NumberTypeImpl.BIG_DECIMAL;
     assertEquals(BigDecimal.class, numberType.getNumberClass());
     assertTrue(numberType.isDecimal());
     BigDecimal value = BigDecimal.valueOf(123456789.123456789);
@@ -208,7 +208,7 @@ public class NumberTypeTest {
     value = new BigDecimal("1234567890123456789.012345678901234567890");
     BigDecimal parsed = numberType.valueOf(value.toString());
     assertEquals(value, parsed);
-    NumberType<Double> doubleType = NumberType.DOUBLE;
+    NumberType<Double> doubleType = NumberTypeImpl.DOUBLE;
     Double convertedDouble = doubleType.valueOf(value, false);
     assertEquals(value.doubleValue(), convertedDouble.doubleValue(), 0);
     try {
@@ -220,8 +220,8 @@ public class NumberTypeTest {
   @Test
   public void testExcactnesDifference() {
 
-    NumberType[] numberTypeOrder = new NumberType[] { NumberType.BYTE, NumberType.SHORT,
-        NumberType.INTEGER, NumberType.LONG, NumberType.BIG_INTEGER };
+    NumberType[] numberTypeOrder = new NumberType[] { NumberTypeImpl.BYTE, NumberTypeImpl.SHORT,
+        NumberTypeImpl.INTEGER, NumberTypeImpl.LONG, NumberTypeImpl.BIG_INTEGER };
     for (int i = 1; i < numberTypeOrder.length; i++) {
       NumberType lessExact = numberTypeOrder[i - i];
       NumberType moreExact = numberTypeOrder[i];
@@ -231,9 +231,9 @@ public class NumberTypeTest {
       assertEquals(diff, -inverseDiff);
     }
 
-    int diff = NumberType.ATOMIC_INTEGER.getExactnessDifference(NumberType.INTEGER);
+    int diff = NumberTypeImpl.ATOMIC_INTEGER.getExactnessDifference(NumberTypeImpl.INTEGER);
     assertEquals(0, diff);
-    diff = NumberType.ATOMIC_LONG.getExactnessDifference(NumberType.LONG);
+    diff = NumberTypeImpl.ATOMIC_LONG.getExactnessDifference(NumberTypeImpl.LONG);
     assertEquals(0, diff);
   }
 }

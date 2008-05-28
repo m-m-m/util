@@ -2,7 +2,7 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains utilities for dealing with {@link java.lang.Process}es.
+ * Provides utilities for dealing with {@link java.lang.Process}es.
  * <h2>Process Utilities</h2>
  * Dealing with {@link java.lang.Process} is NOT an easy task. The streams for
  * <code>stdin</code>, <code>stdout</code>, and <code>stderr</code> need to be 

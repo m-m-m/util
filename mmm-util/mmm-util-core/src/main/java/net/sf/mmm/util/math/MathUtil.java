@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import net.sf.mmm.util.math.api.NumberType;
+import net.sf.mmm.util.math.base.NumberTypeImpl;
 
 /**
  * This class is a collection of utility functions for dealing with numbers.
@@ -75,25 +76,25 @@ public class MathUtil {
   public NumberType<? extends Number> getNumberType(Class<?> numericType) {
 
     if ((numericType == int.class) || (numericType == Integer.class)) {
-      return NumberType.INTEGER;
+      return NumberTypeImpl.INTEGER;
     } else if ((numericType == long.class) || (numericType == Long.class)) {
-      return NumberType.LONG;
+      return NumberTypeImpl.LONG;
     } else if ((numericType == double.class) || (numericType == Double.class)) {
-      return NumberType.DOUBLE;
+      return NumberTypeImpl.DOUBLE;
     } else if ((numericType == float.class) || (numericType == Float.class)) {
-      return NumberType.FLOAT;
+      return NumberTypeImpl.FLOAT;
     } else if ((numericType == short.class) || (numericType == Short.class)) {
-      return NumberType.SHORT;
+      return NumberTypeImpl.SHORT;
     } else if ((numericType == byte.class) || (numericType == Byte.class)) {
-      return NumberType.BYTE;
+      return NumberTypeImpl.BYTE;
     } else if ((BigInteger.class.isAssignableFrom(numericType))) {
-      return NumberType.BIG_INTEGER;
+      return NumberTypeImpl.BIG_INTEGER;
     } else if ((BigDecimal.class.isAssignableFrom(numericType))) {
-      return NumberType.BIG_DECIMAL;
+      return NumberTypeImpl.BIG_DECIMAL;
     } else if ((AtomicInteger.class.isAssignableFrom(numericType))) {
-      return NumberType.ATOMIC_INTEGER;
+      return NumberTypeImpl.ATOMIC_INTEGER;
     } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
-      return NumberType.ATOMIC_LONG;
+      return NumberTypeImpl.ATOMIC_LONG;
     } else {
       return null;
     }

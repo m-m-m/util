@@ -7,6 +7,7 @@ import java.text.DateFormat;
 
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.base.MappedNlsFormatterManager;
+import net.sf.mmm.util.nls.base.NlsFormatterMap;
 
 /**
  * This is the implementation of the
@@ -59,11 +60,10 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   }
 
   /**
-   * This method creates and initializes the
-   * {@link MappedNlsFormatterManager.NlsFormatterMap} that contains the static
-   * {@link NlsFormatter}s managed by this class.
+   * This method creates and initializes the {@link NlsFormatterMap} that
+   * contains the static {@link NlsFormatter}s managed by this class.
    * 
-   * @return the {@link MappedNlsFormatterManager.NlsFormatterMap} instance.
+   * @return the {@link NlsFormatterMap} instance.
    */
   protected static NlsFormatterMap createFormatterMap() {
 

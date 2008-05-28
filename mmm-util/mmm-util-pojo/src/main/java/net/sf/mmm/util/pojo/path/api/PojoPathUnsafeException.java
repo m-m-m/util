@@ -11,8 +11,8 @@ import net.sf.mmm.util.pojo.NlsBundlePojo;
  * {@link PojoPathMode#FAIL_IF_NULL} and the {@link PojoPath} was
  * <em>unsafe</em>.
  * 
- * @see PojoPathNavigator#getType(net.sf.mmm.util.reflect.GenericType, String,
- *      boolean, PojoPathContext)
+ * @see PojoPathNavigator#getType(net.sf.mmm.util.reflect.api.GenericType,
+ *      String, boolean, PojoPathContext)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

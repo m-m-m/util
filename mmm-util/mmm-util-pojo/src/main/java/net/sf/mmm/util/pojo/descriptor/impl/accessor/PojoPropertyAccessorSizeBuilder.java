@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 
 import net.sf.mmm.util.math.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
+import net.sf.mmm.util.math.base.NumberTypeImpl;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgBuilder;
@@ -42,13 +43,14 @@ public class PojoPropertyAccessorSizeBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
       NumberType<? extends Number> numberType = MathUtil.getInstance().getNumberType(propertyClass);
       if ((numberType != null) && (!numberType.isDecimal())) {
-        if (NumberType.INTEGER.getExactnessDifference(numberType) >= 0) {
+        if (NumberTypeImpl.INTEGER.getExactnessDifference(numberType) >= 0) {
           String methodName = method.getName();
           // is property read method (getter)?
           String propertyName = getPropertyName(methodName, METHOD_PREFIXES, METHOD_SUFFIXES);
@@ -66,7 +68,8 @@ public class PojoPropertyAccessorSizeBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     // return new PojoPropertyAccessorGetField(field);
     return null;

@@ -30,6 +30,6 @@ public abstract interface PojoAttributeType<POJO> {
    * 
    * @return the type of the according {@link net.sf.mmm.util.pojo.api.Pojo}.
    */
-  GenericType getPojoType();
+  GenericType<POJO> getPojoType();
 
 }

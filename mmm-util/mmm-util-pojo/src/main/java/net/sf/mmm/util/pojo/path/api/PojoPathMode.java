@@ -23,12 +23,12 @@ public enum PojoPathMode {
    * <li>For a &#171;Property&#187; this is done via the {@link Class type} of
    * the according setter.</li>
    * <li>For an &#171;Index&#187; this is done via the
-   * {@link net.sf.mmm.util.reflect.ReflectionUtil#getComponentType(java.lang.reflect.Type, boolean) component-type}
+   * {@link net.sf.mmm.util.reflect.api.GenericType#getComponentType() component-type}
    * of the according getter.<br>
    * Therfore {@link java.util.List}s need to be declared using generics. If
    * the &#171;Index&#187; is greater or equal to the
-   * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size} of the
-   * ordered container, its size is increased as necessary. For
+   * {@link net.sf.mmm.util.reflect.CollectionReflectionUtil#getSize(Object) size}
+   * of the ordered container, its size is increased as necessary. For
    * {@link java.util.List}s this is done by
    * {@link java.util.List#add(Object) adding} <code>null</code>-values. For
    * arrays a compliant setter has to be present. Then a
@@ -50,8 +50,8 @@ public enum PojoPathMode {
    * only the last segment of the {@link PojoPath} evaluates to
    * <code>null</code>, then <code>null</code> is returned. If an
    * &#171;Index&#187; is greater or equal to the
-   * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size} of the
-   * ordered container,a NlsIndexOutOfBoundsException is thrown.
+   * {@link net.sf.mmm.util.reflect.CollectionReflectionUtil#getSize(Object) size}
+   * of the ordered container,a NlsIndexOutOfBoundsException is thrown.
    */
   FAIL_IF_NULL,
 
@@ -60,7 +60,7 @@ public enum PojoPathMode {
    * if an intermediate {@link net.sf.mmm.util.pojo.api.Pojo} is
    * <code>null</code>. This also applies for ordered containers if
    * &#171;Index&#187; is greater or equal to the containers
-   * {@link net.sf.mmm.util.reflect.CollectionUtil#getSize(Object) size}.
+   * {@link net.sf.mmm.util.reflect.CollectionReflectionUtil#getSize(Object) size}.
    */
   RETURN_IF_NULL,
 

@@ -51,7 +51,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see NlsIllegalArgumentException */
   public static final String ERR_ILLEGAL_ARGUMENT = "The given argument \"{0}\" is illegal!";
 
-  /** @see net.sf.mmm.util.date.IllegalDateFormatException */
+  /** @see net.sf.mmm.util.date.api.IllegalDateFormatException */
   public static final String ERR_ILLEGAL_DATA_FORMAT = "Illegal date-format \"{0}\"!";
 
   /** @see net.sf.mmm.util.math.api.NumberConversionException */

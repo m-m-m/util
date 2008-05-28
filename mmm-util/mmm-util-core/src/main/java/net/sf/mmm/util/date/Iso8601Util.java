@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
+import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
 

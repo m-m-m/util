@@ -2,7 +2,7 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains the API for utilities that help to dealing with 
+ * Provides the API for utilities that help to dealing with 
  * {@link java.util.Collections}.
  * <h2>Collection-Util API</h2>
  * This package contains interfaces for factories (especially 

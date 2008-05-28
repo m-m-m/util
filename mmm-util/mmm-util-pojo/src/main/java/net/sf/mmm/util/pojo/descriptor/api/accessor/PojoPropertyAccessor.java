@@ -60,7 +60,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * 
    * @return the return type.
    */
-  GenericType getReturnType();
+  GenericType<?> getReturnType();
 
   /**
    * This method gets the {@link Class} of the object returned when this
@@ -88,7 +88,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * 
    * @return the {@link GenericType} reflecting the property.
    */
-  GenericType getPropertyType();
+  GenericType<?> getPropertyType();
 
   /**
    * This method gets the {@link #getPropertyType() type} as {@link Class}. It

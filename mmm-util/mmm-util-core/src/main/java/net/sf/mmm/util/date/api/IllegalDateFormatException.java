@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.date;
+package net.sf.mmm.util.date.api;
 
 import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;

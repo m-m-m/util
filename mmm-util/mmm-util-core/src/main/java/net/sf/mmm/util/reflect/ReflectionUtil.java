@@ -489,8 +489,8 @@ public class ReflectionUtil {
 
   /**
    * This method gets the string representation of a {@link Type}. Instead of
-   * {@link Type#toString()} it returns {@link Class#getName()} if the type is a
-   * {@link Class}.
+   * <code>{@link Type}.toString()</code> it returns {@link Class#getName()}
+   * if the type is a {@link Class}.
    * 
    * @param type is the type to get as string.
    * @return the string representation of the given <code>type</code>.

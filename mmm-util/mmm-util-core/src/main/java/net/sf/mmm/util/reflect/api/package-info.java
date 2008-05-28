@@ -8,9 +8,9 @@
  * that allows simple access to the complex generic type-system introduced with 
  * Java5.<br>
  * Further the interface {@link net.sf.mmm.util.reflect.api.ClassResolver} allows
- * to retrieve {@link java.lang.Class}es by name in order to abstract from {@link ClassLoader}s
- * as well as to do name mappings (e.g. <code>Object</code> to 
- * <code>java.lang.Object</code>).
+ * to retrieve {@link java.lang.Class}es by name in order to abstract from 
+ * {@link java.lang.ClassLoader}s as well as to do name mappings (e.g. 
+ * <code>Object</code> to <code>java.lang.Object</code>).
  */
 package net.sf.mmm.util.reflect.api;
 

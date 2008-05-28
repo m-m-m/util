@@ -2,7 +2,7 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains utilities for dealing with date and time.
+ * Provides utilities for dealing with date and time.
  * <h2>Date/Time Utilities</h2>
  * The JDK comes with rich support for date and time. On the other side the
  * APIs to do so are very poor. This package contains utilities to help you 

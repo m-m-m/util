@@ -40,8 +40,8 @@
  * <pre>
  * String value = getValueFromSomewhere();
  * {@link net.sf.mmm.util.value.api.GenericValueConverter} converter = {@link net.sf.mmm.util.value.base.StringValueConverter#getInstance()};
- * int valueAsInt = converter.{@link net.sf.mmm.util.value.base.StringValueConverter#convertValue(String, Object, 
- * Number, Number) convertValue}(value, "somewhere", 0, 123456789);
+ * int valueAsInt = converter.\\
+ * {@link net.sf.mmm.util.value.base.StringValueConverter#convertValue(String, Object, Number, Number) convertValue}(value, "somewhere", 0, 123456789);
  * </pre>
  */
 package net.sf.mmm.util.value.api;
