@@ -43,7 +43,7 @@ public class PojoPropertyAccessorNonArgMethod extends AbstractPojoPropertyAccess
       PojoPropertyAccessorNonArgMode mode, PojoDescriptor<?> descriptor,
       PojoDescriptorConfiguration configuration, Method method) {
 
-    super(propertyName, propertyType, mode, descriptor, configuration, method);
+    super(propertyName, propertyType, descriptor, configuration, method);
     this.mode = mode;
   }
 

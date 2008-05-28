@@ -68,7 +68,7 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
-  public GenericType getReturnType() {
+  public GenericType<?> getReturnType() {
 
     return getDelegate().getReturnType();
   }
@@ -84,7 +84,7 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
-  public GenericType getPropertyType() {
+  public GenericType<?> getPropertyType() {
 
     return getDelegate().getPropertyType();
   }

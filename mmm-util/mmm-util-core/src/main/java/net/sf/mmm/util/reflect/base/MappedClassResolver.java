@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect.base;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
+import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 
 /**
@@ -26,7 +27,7 @@ public class MappedClassResolver implements ClassResolver {
    */
   public MappedClassResolver() {
 
-    this(MapFactory.INSTANCE_HASH_MAP);
+    this(HashMapFactory.INSTANCE);
   }
 
   /**

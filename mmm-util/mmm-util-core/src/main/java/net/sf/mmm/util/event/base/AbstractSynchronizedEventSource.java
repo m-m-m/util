@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.event.base;
 
-import net.sf.mmm.util.collection.api.QueueFactory;
+import net.sf.mmm.util.collection.base.ConcurrentLinkedQueueFactory;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 
@@ -32,7 +32,7 @@ public abstract class AbstractSynchronizedEventSource<E extends Event, L extends
    */
   public AbstractSynchronizedEventSource() {
 
-    super(QueueFactory.INSTANCE_CONCURRENT_LINKED_QUEUE);
+    super(ConcurrentLinkedQueueFactory.INSTANCE);
   }
 
 }

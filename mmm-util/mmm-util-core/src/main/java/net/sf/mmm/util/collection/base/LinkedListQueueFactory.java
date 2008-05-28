@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import net.sf.mmm.util.collection.api.QueueFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates
@@ -14,6 +16,9 @@ import java.util.Queue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LinkedListQueueFactory extends AbstractQueueFactory {
+
+  /** The singleton instance. */
+  public static final QueueFactory INSTANCE = new LinkedListQueueFactory();
 
   /**
    * {@inheritDoc}

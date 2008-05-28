@@ -5,8 +5,6 @@ package net.sf.mmm.util.collection.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.collection.base.HashMapFactory;
-
 /**
  * This is the interface for a factory of {@link Map maps}. It allows to
  * abstract from {@link Map} implementations.<br>
@@ -25,6 +23,8 @@ import net.sf.mmm.util.collection.base.HashMapFactory;
  * compatibility of the users of your code. Additionally you may want to express
  * that the {@link Map} should be empty and/or NOT shared with others. Anyways
  * the interface can obviously NOT guarantee this.
+ * 
+ * @see net.sf.mmm.util.collection.base.HashMapFactory#INSTANCE
  * 
  * @param <MAP> is the generic {@link Map}-type.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -90,8 +90,5 @@ public interface MapFactory<MAP extends Map> {
    * @return the new {@link Map} instance.
    */
   MAP createGeneric(int capacity);
-
-  /** The default instance creating a {@link java.util.HashMap}. */
-  MapFactory<Map> INSTANCE_HASH_MAP = new HashMapFactory();
 
 }

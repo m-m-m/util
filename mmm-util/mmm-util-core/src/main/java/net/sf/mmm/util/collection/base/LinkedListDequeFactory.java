@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import net.sf.mmm.util.collection.api.DequeFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.DequeFactory} interface that creates
@@ -14,6 +16,9 @@ import java.util.LinkedList;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LinkedListDequeFactory extends AbstractDequeFactory {
+
+  /** The singleton instance. */
+  public static final DequeFactory INSTANCE = new LinkedListDequeFactory();
 
   /**
    * {@inheritDoc}

@@ -6,7 +6,7 @@ package net.sf.mmm.util.event.base;
 import java.util.Collection;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
-import net.sf.mmm.util.collection.api.ListFactory;
+import net.sf.mmm.util.collection.base.ArrayListFactory;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
@@ -34,7 +34,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    */
   public AbstractEventSource() {
 
-    this(ListFactory.INSTANCE_ARRAY_LIST);
+    this(ArrayListFactory.INSTANCE);
   }
 
   /**

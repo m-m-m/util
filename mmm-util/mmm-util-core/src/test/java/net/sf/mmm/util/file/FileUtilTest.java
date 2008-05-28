@@ -15,6 +15,8 @@ import java.util.UUID;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.file.api.FileType;
+
 /**
  * This is the test-case for {@link FileUtil}.
  * 

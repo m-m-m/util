@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import net.sf.mmm.util.collection.api.BlockingQueueFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.BlockingQueueFactory} interface that
@@ -14,6 +16,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
+
+  /** The singleton instance. */
+  public static final BlockingQueueFactory INSTANCE = new LinkedBlockingQueueFactory();
 
   /**
    * {@inheritDoc}

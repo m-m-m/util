@@ -236,9 +236,9 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
       PojoPropertyAccessorNonArg getAccessor = propertyDescriptor
           .getAccessor(PojoPropertyAccessorNonArgMode.GET);
       if (getAccessor != null) {
-        GenericType type = getAccessor.getReturnType();
+        GenericType<?> type = getAccessor.getReturnType();
         Class<?> typeClass = getAccessor.getReturnClass();
-        GenericType componentType = type.getComponentType();
+        GenericType<?> componentType = type.getComponentType();
         boolean isMap = Map.class.isAssignableFrom(typeClass);
         if ((componentType != null) || isMap) {
           // getter type is container (map, array or collection)...

@@ -32,7 +32,7 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
   public PojoPropertyAccessorSetField(PojoDescriptor<?> descriptor,
       PojoDescriptorConfiguration configuration, Field field) {
 
-    super(PojoPropertyAccessorOneArgMode.SET, descriptor, configuration, field);
+    super(descriptor, configuration, field);
   }
 
   /**

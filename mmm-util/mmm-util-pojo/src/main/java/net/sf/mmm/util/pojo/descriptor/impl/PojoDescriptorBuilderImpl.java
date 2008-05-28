@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.collection.api.MapFactory;
+import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder;
@@ -69,7 +70,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    */
   public PojoDescriptorBuilderImpl() {
 
-    this(MapFactory.INSTANCE_HASH_MAP);
+    this(HashMapFactory.INSTANCE);
   }
 
   /**
@@ -232,10 +233,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * {@inheritDoc}
    */
   @Override
-  protected <P> PojoDescriptorImpl<P> createDescriptor(Class<P> pojoClass, GenericType pojoType) {
+  protected <P> PojoDescriptorImpl<P> createDescriptor(GenericType<P> pojoType) {
 
     getInitializationState().requireInitilized();
-    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoClass, pojoType);
+    Class<P> pojoClass = pojoType.getUpperBound();
+    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType);
     // process methods...
     List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();
     if (this.methodIntrospector != null) {

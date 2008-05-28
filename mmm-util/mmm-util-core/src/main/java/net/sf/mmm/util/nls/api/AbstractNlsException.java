@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.uuid.UuidAccess;
+import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * This is an abstract base implementation of a checked exception with real

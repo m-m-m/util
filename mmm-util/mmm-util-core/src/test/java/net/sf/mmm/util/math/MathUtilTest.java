@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.math.api.NumberType;
+
 /**
  * This is the test-case for {@link MathUtil}.
  * 

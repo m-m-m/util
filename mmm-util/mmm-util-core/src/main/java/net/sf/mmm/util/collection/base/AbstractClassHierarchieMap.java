@@ -25,7 +25,7 @@ public abstract class AbstractClassHierarchieMap<E> {
    */
   public AbstractClassHierarchieMap() {
 
-    this(MapFactory.INSTANCE_HASH_MAP);
+    this(HashMapFactory.INSTANCE);
   }
 
   /**

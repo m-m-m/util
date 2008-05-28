@@ -26,21 +26,16 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJO> {
 
-  /** @see #getPojoClass() */
-  private final Class<POJO> pojoClass;
-
   /** @see #getPojoType() */
-  private final GenericType pojoType;
+  private final GenericType<POJO> pojoType;
 
   /**
    * The constructor.
    * 
-   * @param pojoClass is the {@link #getPojoClass() pojo-class}.
    * @param pojoType is the {@link #getPojoType() pojo-type}.
    */
-  public AbstractPojoDescriptor(Class<POJO> pojoClass, GenericType pojoType) {
+  public AbstractPojoDescriptor(GenericType<POJO> pojoType) {
 
-    this.pojoClass = pojoClass;
     this.pojoType = pojoType;
   }
 
@@ -49,13 +44,13 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    */
   public Class<POJO> getPojoClass() {
 
-    return this.pojoClass;
+    return this.pojoType.getUpperBound();
   }
 
   /**
    * {@inheritDoc}
    */
-  public GenericType getPojoType() {
+  public GenericType<POJO> getPojoType() {
 
     return this.pojoType;
   }
@@ -181,7 +176,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   @Override
   public String toString() {
 
-    return "Descriptor for POJO " + this.pojoClass;
+    return "Descriptor for POJO " + this.pojoType;
   }
 
 }

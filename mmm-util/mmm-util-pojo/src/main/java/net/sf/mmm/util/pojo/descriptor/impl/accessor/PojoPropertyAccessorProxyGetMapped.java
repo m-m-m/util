@@ -49,7 +49,7 @@ public class PojoPropertyAccessorProxyGetMapped extends
    * {@inheritDoc}
    */
   @Override
-  public GenericType getReturnType() {
+  public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }

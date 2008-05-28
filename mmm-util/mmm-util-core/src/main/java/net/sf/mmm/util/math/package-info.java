@@ -5,10 +5,10 @@
  * Contains utilities for dealing with {@link java.lang.Number}s.
  * <h2>Math Utilities</h2>
  * This package offers support for dealing with {@link java.lang.Number}s in a 
- * generic way via the class {@link net.sf.mmm.util.math.NumberType}.
+ * generic way via the class {@link net.sf.mmm.util.math.api.NumberType}.
  * The {@link MathUtil} allows to 
  * {@link MathUtil#getNumberType(java.lang.Class) get} the 
- * {@link net.sf.mmm.util.math.NumberType} for a given {@link java.lang.Class}.
+ * {@link net.sf.mmm.util.math.api.NumberType} for a given {@link java.lang.Class}.
  * <br>
  */
 package net.sf.mmm.util.math;

@@ -47,12 +47,11 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   /**
    * The constructor.
    * 
-   * @param pojoClass is the {@link #getPojoClass() pojo-class}.
    * @param pojoType is the {@link #getPojoType() pojo-type}.
    */
-  public PojoDescriptorImpl(Class<POJO> pojoClass, GenericType pojoType) {
+  public PojoDescriptorImpl(GenericType<POJO> pojoType) {
 
-    super(pojoClass, pojoType);
+    super(pojoType);
     // we do NOT want MapFactory here: no need for cache or to be thread-safe
     this.propertyMap = new HashMap<String, PojoPropertyDescriptorImpl>();
     this.properties = Collections.unmodifiableCollection(this.propertyMap.values());

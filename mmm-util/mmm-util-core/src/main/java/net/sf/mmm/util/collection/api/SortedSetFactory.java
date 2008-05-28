@@ -5,11 +5,11 @@ package net.sf.mmm.util.collection.api;
 
 import java.util.SortedSet;
 
-import net.sf.mmm.util.collection.base.TreeSetFactory;
-
 /**
  * This is the interface for a {@link CollectionFactory} that
  * {@link #create() creates} instances of {@link SortedSet}.
+ * 
+ * @see net.sf.mmm.util.collection.base.TreeSetFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,8 +25,5 @@ public interface SortedSetFactory extends CollectionFactory<SortedSet> {
    * {@inheritDoc}
    */
   <E> SortedSet<E> create(int capacity);
-
-  /** The default instance creating a {@link java.util.TreeSet}. */
-  SortedSetFactory INSTANCE_TREE_SET = new TreeSetFactory();
 
 }

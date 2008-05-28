@@ -24,10 +24,7 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType exte
     AbstractPojoPropertyAccessorProxyAdapter {
 
   /** @see #getPropertyType() */
-  private final GenericType propertyType;
-
-  /** @see #getPropertyClass() */
-  private final Class<?> propertyClass;
+  private final GenericType<?> propertyType;
 
   /**
    * The constructor.
@@ -42,18 +39,13 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType exte
     super(configuration, containerGetAccessor);
     this.propertyType = containerGetAccessor.getReturnType().getComponentType();
     assert (this.propertyType != null) : "propertyType is null";
-    if (getMode().isReading()) {
-      this.propertyClass = this.propertyType.getUpperBound();
-    } else {
-      this.propertyClass = this.propertyType.getLowerBound();
-    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public GenericType getPropertyType() {
+  public GenericType<?> getPropertyType() {
 
     return this.propertyType;
   }
@@ -64,7 +56,11 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType exte
   @Override
   public Class<?> getPropertyClass() {
 
-    return this.propertyClass;
+    if (getMode().isReading()) {
+      return this.propertyType.getUpperBound();
+    } else {
+      return this.propertyType.getLowerBound();
+    }
   }
 
 }

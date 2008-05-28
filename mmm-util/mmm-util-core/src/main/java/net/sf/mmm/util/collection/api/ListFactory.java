@@ -5,11 +5,11 @@ package net.sf.mmm.util.collection.api;
 
 import java.util.List;
 
-import net.sf.mmm.util.collection.base.ArrayListFactory;
-
 /**
  * This is the interface for a {@link CollectionFactory} that
  * {@link #create() creates} instances of {@link List}.
+ * 
+ * @see net.sf.mmm.util.collection.base.ArrayListFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,8 +25,5 @@ public interface ListFactory extends CollectionFactory<List> {
    * {@inheritDoc}
    */
   <E> List<E> create(int capacity);
-
-  /** The default instance creating an {@link java.util.ArrayList}. */
-  ListFactory INSTANCE_ARRAY_LIST = new ArrayListFactory();
 
 }

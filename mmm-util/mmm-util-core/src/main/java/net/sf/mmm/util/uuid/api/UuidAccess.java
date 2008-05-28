@@ -1,7 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.uuid;
+package net.sf.mmm.util.uuid.api;
+
+import net.sf.mmm.util.uuid.base.RandomUuidFactory;
 
 /**
  * This is an ugly static accessor for the {@link UuidFactory} used to create

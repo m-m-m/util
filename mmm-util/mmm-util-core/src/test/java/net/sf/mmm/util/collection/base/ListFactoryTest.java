@@ -12,10 +12,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.collection.api.ListFactory;
 
 /**
- * This is the test-case for {@link ListFactory#INSTANCE_ARRAY_LIST}.
+ * This is the test-case for {@link ArrayListFactory#INSTANCE}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,11 +24,11 @@ public class ListFactoryTest {
   @Test
   public void testHashMap() {
 
-    List<String> list = ListFactory.INSTANCE_ARRAY_LIST.create();
+    List<String> list = ArrayListFactory.INSTANCE.create();
     assertNotNull(list);
     assertEquals(ArrayList.class, list.getClass());
     assertTrue(list.isEmpty());
-    list = ListFactory.INSTANCE_ARRAY_LIST.create(42);
+    list = ArrayListFactory.INSTANCE.create(42);
     // we can NOT easily check the capacity. Only chance would be to use
     // reflection. But we do not want to test the JDK here. Anyway it would be
     // 64 rather than 42.

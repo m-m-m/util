@@ -4,7 +4,7 @@
 package net.sf.mmm.util.value.impl;
 
 import net.sf.mmm.util.math.MathUtil;
-import net.sf.mmm.util.math.NumberType;
+import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
@@ -53,7 +53,7 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
   /**
    * This method determines if the conversion from one
    * {@link Number number-type} to another should
-   * {@link net.sf.mmm.util.math.NumberConversionException fail} if it is
+   * {@link net.sf.mmm.util.math.api.NumberConversionException fail} if it is
    * unprecise.
    * 
    * @see NumberType#valueOf(Number, boolean)

@@ -12,10 +12,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.collection.api.SetFactory;
 
 /**
- * This is the test-case for {@link SetFactory#INSTANCE_HASH_SET}.
+ * This is the test-case for {@link HashSetFactory#INSTANCE}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,11 +24,11 @@ public class SetFactoryTest {
   @Test
   public void testHashMap() {
 
-    Set<String> list = SetFactory.INSTANCE_HASH_SET.create();
+    Set<String> list = HashSetFactory.INSTANCE.create();
     assertNotNull(list);
     assertEquals(HashSet.class, list.getClass());
     assertTrue(list.isEmpty());
-    list = SetFactory.INSTANCE_HASH_SET.create(42);
+    list = HashSetFactory.INSTANCE.create(42);
     // we can NOT easily check the capacity. Only chance would be to use
     // reflection. But we do not want to test the JDK here. Anyway it would be
     // 64 rather than 42.

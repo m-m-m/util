@@ -60,7 +60,7 @@ public class PojoPropertyAccessorProxySetIndexed extends
    * {@inheritDoc}
    */
   @Override
-  public GenericType getReturnType() {
+  public GenericType<?> getReturnType() {
 
     return SimpleGenericTypeImpl.TYPE_VOID;
   }

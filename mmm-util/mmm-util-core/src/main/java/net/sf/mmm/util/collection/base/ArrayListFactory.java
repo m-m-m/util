@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.util.collection.api.ListFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.ListFactory} interface that creates
@@ -14,6 +16,9 @@ import java.util.List;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ArrayListFactory extends AbstractListFactory {
+
+  /** The default instance creating an {@link java.util.ArrayList}. */
+  public static final ListFactory INSTANCE = new ArrayListFactory();
 
   /**
    * {@inheritDoc}

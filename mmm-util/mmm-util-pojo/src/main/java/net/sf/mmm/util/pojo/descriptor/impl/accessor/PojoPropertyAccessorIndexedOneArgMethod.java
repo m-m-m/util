@@ -49,10 +49,9 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
    */
   public PojoPropertyAccessorIndexedOneArgMethod(String propertyName, Type propertyType,
       PojoPropertyAccessorIndexedOneArgMode mode, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration, Method method,
-      boolean inverted) {
+      PojoDescriptorConfiguration configuration, Method method, boolean inverted) {
 
-    super(propertyName, propertyType, mode, descriptor, configuration, method);
+    super(propertyName, propertyType, descriptor, configuration, method);
     this.mode = mode;
     this.inverted = inverted;
   }

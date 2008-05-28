@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.util.Properties;
 
 import net.sf.mmm.util.xml.MarkupUtil;
-import net.sf.mmm.util.xml.MarkupParserState;
+import net.sf.mmm.util.xml.MarkupUtil.ParserState;
 
 /**
  * This is the implementation of the
@@ -34,7 +34,7 @@ public class ContentParserTextMarkupAware extends ContentParserText {
       throws Exception {
 
     long maxChars = getMaximumBufferSize() / 2;
-    MarkupParserState parserState = null;
+    ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
       parseLine(properties, line);

@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import net.sf.mmm.util.uuid.UuidAccess;
+import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * This is an abstract base implementation of an unchecked exception with real

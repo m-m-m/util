@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.file;
+package net.sf.mmm.util.file.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,6 +9,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import net.sf.mmm.util.file.api.FileAccessClass;
+import net.sf.mmm.util.file.base.FileAccessPermissions;
 
 /**
  * This is the test-case for {@link FileAccessPermissions}.

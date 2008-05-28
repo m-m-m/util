@@ -29,6 +29,7 @@ public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropert
 
   /**
    * The constructor.
+   * 
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
@@ -38,10 +39,10 @@ public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropert
    * @param method is the {@link #getMethod() method} to access.
    */
   public PojoPropertyAccessorIndexedNonArgMethod(String propertyName, Type propertyType,
-      PojoPropertyAccessorIndexedNonArgMode mode, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration,
-      Method method) {
+      PojoPropertyAccessorIndexedNonArgMode mode, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration, Method method) {
 
-    super(propertyName, propertyType, mode, descriptor, configuration, method);
+    super(propertyName, propertyType, descriptor, configuration, method);
     this.mode = mode;
   }
 

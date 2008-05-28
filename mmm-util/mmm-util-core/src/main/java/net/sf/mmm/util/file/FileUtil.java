@@ -13,11 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.component.AbstractLoggable;
 import net.sf.mmm.util.component.AlreadyInitializedException;
+import net.sf.mmm.util.file.api.FileAccessClass;
+import net.sf.mmm.util.file.api.FileType;
+import net.sf.mmm.util.file.base.DirectoryFilter;
+import net.sf.mmm.util.file.base.FileAccessPermissions;
+import net.sf.mmm.util.file.base.PatternFileFilter;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.CharSequenceScanner;
@@ -28,7 +33,7 @@ import net.sf.mmm.util.scanner.CharSequenceScanner;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class FileUtil {
+public class FileUtil extends AbstractLoggable {
 
   /** The path segment indicating the current folder itself. */
   public static final String PATH_SEGMENT_CURRENT = ".";
@@ -110,12 +115,12 @@ public class FileUtil {
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() {
+  @Override
+  protected void doInitialize() {
 
+    super.doInitialize();
     if (this.temporaryDirectoryPath == null) {
       this.temporaryDirectoryPath = System.getProperty(PROPERTY_TMP_DIR);
     }
@@ -782,7 +787,8 @@ public class FileUtil {
   /**
    * This method gets all {@link File files} matching to the given
    * <code>path</code> and <code>fileType</code>. The <code>path</code>
-   * may contain {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}.<br>
+   * may contain
+   * {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}.<br>
    * Examples:
    * <ul>
    * <li>
@@ -827,7 +833,8 @@ public class FileUtil {
   /**
    * This method adds all files matching the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may contain {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
+   * may contain
+   * {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given
@@ -861,7 +868,8 @@ public class FileUtil {
   /**
    * This method adds all files matching to the given <code>path</code> and
    * <code>fileType</code> to the <code>list</code>. The <code>path</code>
-   * may contain {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
+   * may contain
+   * {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
    * 
    * @param cwd is the current working directory and should therefore point to
    *        an existing {@link File#isDirectory() directory}. If the given

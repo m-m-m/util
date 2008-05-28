@@ -8,6 +8,8 @@ import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import net.sf.mmm.util.math.api.NumberType;
+
 /**
  * This class is a collection of utility functions for dealing with numbers.
  * 

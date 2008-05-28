@@ -55,7 +55,8 @@ public class PojoPropertyAccessorProxyAdd extends
   /**
    * {@inheritDoc}
    */
-  public GenericType getReturnType() {
+  @Override
+  public GenericType<?> getReturnType() {
 
     return SimpleGenericTypeImpl.TYPE_VOID;
   }
@@ -75,7 +76,8 @@ public class PojoPropertyAccessorProxyAdd extends
   public Object invoke(Object pojoInstance, Object argument) {
 
     Object arrayOrCollection = getDelegate().invoke(pojoInstance);
-    Object arrayCopy = getConfiguration().getCollectionReflectionUtil().add(arrayOrCollection, argument);
+    Object arrayCopy = getConfiguration().getCollectionReflectionUtil().add(arrayOrCollection,
+        argument);
     if ((arrayCopy != arrayOrCollection) && (this.containerSetAccessor != null)) {
       // we will NOT create this proxy if the setter is missing for an array
       // type getter.

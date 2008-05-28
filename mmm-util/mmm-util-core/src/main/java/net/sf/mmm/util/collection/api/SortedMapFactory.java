@@ -5,12 +5,11 @@ package net.sf.mmm.util.collection.api;
 
 import java.util.SortedMap;
 
-import net.sf.mmm.util.collection.base.TreeMapFactory;
-
-
 /**
  * This is the interface for a {@link MapFactory} that {@link #create() creates}
  * instances of {@link SortedMap}.
+ * 
+ * @see net.sf.mmm.util.collection.base.TreeMapFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,10 +25,5 @@ public interface SortedMapFactory extends MapFactory<SortedMap> {
    * {@inheritDoc}
    */
   <K, V> SortedMap<K, V> create(int capacity);
-
-  /**
-   * 
-   */
-  SortedMapFactory INSTANCE_TREE_MAP = new TreeMapFactory();
 
 }

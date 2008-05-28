@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.sf.mmm.util.collection.api.SetFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.SetFactory} interface that creates
@@ -14,6 +16,9 @@ import java.util.Set;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class HashSetFactory extends AbstractSetFactory {
+
+  /** The singleton instance. */
+  public static final SetFactory INSTANCE = new HashSetFactory();
 
   /**
    * {@inheritDoc}

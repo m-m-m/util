@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.collection.api.MapFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.MapFactory} interface that creates
@@ -14,6 +16,10 @@ import java.util.Map;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class HashMapFactory extends AbstractMapFactory {
+
+  /** The singleton instance. */
+  @SuppressWarnings("unchecked")
+  public static final MapFactory<Map> INSTANCE = new HashMapFactory();
 
   /**
    * {@inheritDoc}

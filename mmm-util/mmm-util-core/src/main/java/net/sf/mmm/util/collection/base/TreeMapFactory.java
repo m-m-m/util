@@ -6,6 +6,8 @@ package net.sf.mmm.util.collection.base;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import net.sf.mmm.util.collection.api.SortedMapFactory;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.collection.api.SortedMapFactory} interface that
@@ -14,6 +16,9 @@ import java.util.TreeMap;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class TreeMapFactory extends AbstractSortedMapFactory {
+
+  /** The singleton instance. */
+  public static final SortedMapFactory INSTANCE = new TreeMapFactory();
 
   /**
    * {@inheritDoc}

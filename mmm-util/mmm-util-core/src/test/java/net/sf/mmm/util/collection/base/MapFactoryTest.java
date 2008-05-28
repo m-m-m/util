@@ -12,10 +12,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.collection.api.MapFactory;
-
 /**
- * This is the test-case for {@link MapFactory#INSTANCE_HASH_MAP}.
+ * This is the test-case for {@link HashMapFactory#INSTANCE}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,11 +23,11 @@ public class MapFactoryTest {
   @Test
   public void testHashMap() {
 
-    Map<String, Integer> map = MapFactory.INSTANCE_HASH_MAP.create();
+    Map<String, Integer> map = HashMapFactory.INSTANCE.create();
     assertNotNull(map);
     assertEquals(HashMap.class, map.getClass());
     assertTrue(map.isEmpty());
-    map = MapFactory.INSTANCE_HASH_MAP.create(42);
+    map = HashMapFactory.INSTANCE.create(42);
     // we can NOT easily check the capacity. Only chance would be to use
     // reflection. But we do not want to test the JDK here. Anyway it would be
     // 64 rather than 42.

@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -26,10 +25,7 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
   private final Method method;
 
   /** @see #getReturnType() */
-  private final GenericType returnType;
-
-  /** @see #getReturnClass() */
-  private final Class<?> returnClass;
+  private final GenericType<?> returnType;
 
   /**
    * The constructor.
@@ -37,26 +33,31 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
-   * @param mode is the {@link #getMode() mode} of access.
    * @param descriptor is the descriptor this accessor is intended for.
    * @param configuration is the {@link PojoDescriptorConfiguration} to use.
    * @param method is the {@link #getMethod() method} to access.
    */
   public AbstractPojoPropertyAccessorMethod(String propertyName, Type propertyType,
-      PojoPropertyAccessorMode<?> mode, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration, Method method) {
+      PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration, Method method) {
 
-    super(propertyName, propertyType, mode, descriptor, configuration);
+    super(propertyName, propertyType, descriptor, configuration);
     this.method = method;
-    if (mode.isReading()) {
+    Type type = method.getGenericReturnType();
+    // == or equals ???
+    if (type == propertyType) {
       this.returnType = getPropertyType();
-      this.returnClass = getPropertyClass();
     } else {
       ReflectionUtil util = configuration.getReflectionUtil();
-      this.returnType = util.createGenericType(method.getGenericReturnType(), descriptor
-          .getPojoType());
-      this.returnClass = this.returnType.getUpperBound();
+      this.returnType = util.createGenericType(type, descriptor.getPojoType());
     }
+    // if (mode.isReading()) {
+    // this.returnType = getPropertyType();
+    // } else {
+    // ReflectionUtil util = configuration.getReflectionUtil();
+    // this.returnType = util.createGenericType(method.getGenericReturnType(),
+    // descriptor
+    // .getPojoType());
+    // }
   }
 
   /**
@@ -96,9 +97,13 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
   /**
    * {@inheritDoc}
    */
-  public GenericType getReturnType() {
+  public GenericType<?> getReturnType() {
 
-    return this.returnType;
+    if (getMode().isReading()) {
+      return getPropertyType();
+    } else {
+      return this.returnType;
+    }
   }
 
   /**
@@ -106,7 +111,11 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
    */
   public Class<?> getReturnClass() {
 
-    return this.returnClass;
+    if (getMode().isReading()) {
+      return getPropertyClass();
+    } else {
+      return getReturnType().getUpperBound();
+    }
   }
 
 }

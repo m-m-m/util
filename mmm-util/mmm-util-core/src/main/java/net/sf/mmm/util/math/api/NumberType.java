@@ -1,12 +1,14 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.math;
+package net.sf.mmm.util.math.api;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+
+import net.sf.mmm.util.math.MathUtil;
 
 /**
  * This class represents the {@link Class type} reflecting a specific

@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -23,11 +22,8 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /** @see #getName() */
   private final String name;
 
-  /** @see #getPropertyClass() */
-  private final Class<?> propertyClass;
-
   /** @see #getPropertyType() */
-  private final GenericType propertyType;
+  private final GenericType<?> propertyType;
 
   /**
    * The constructor.
@@ -35,23 +31,16 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
-   * @param mode is the {@link #getMode() mode} of access.
    * @param descriptor is the descriptor this accessor is intended for.
    * @param configuration is the {@link PojoDescriptorConfiguration} to use.
    */
   public AbstractPojoPropertyAccessor(String propertyName, Type propertyType,
-      PojoPropertyAccessorMode<?> mode, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
 
     super();
     this.name = propertyName;
     ReflectionUtil util = configuration.getReflectionUtil();
     this.propertyType = util.createGenericType(propertyType, descriptor.getPojoType());
-    if (mode.isReading()) {
-      this.propertyClass = this.propertyType.getUpperBound();
-    } else {
-      this.propertyClass = this.propertyType.getLowerBound();
-    }
   }
 
   /**
@@ -65,7 +54,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /**
    * {@inheritDoc}
    */
-  public GenericType getPropertyType() {
+  public GenericType<?> getPropertyType() {
 
     return this.propertyType;
   }
@@ -75,7 +64,11 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
    */
   public Class<?> getPropertyClass() {
 
-    return this.propertyClass;
+    if (getMode().isReading()) {
+      return this.propertyType.getUpperBound();
+    } else {
+      return this.propertyType.getLowerBound();
+    }
   }
 
   /**

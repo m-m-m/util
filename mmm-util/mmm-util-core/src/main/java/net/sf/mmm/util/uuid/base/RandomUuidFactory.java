@@ -1,9 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.uuid;
+package net.sf.mmm.util.uuid.base;
 
 import java.util.UUID;
+
+import net.sf.mmm.util.uuid.api.UuidFactory;
 
 /**
  * This is an implementation of the {@link UuidFactory} interface that simply

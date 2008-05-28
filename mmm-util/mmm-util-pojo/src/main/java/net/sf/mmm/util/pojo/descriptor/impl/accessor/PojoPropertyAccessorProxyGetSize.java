@@ -47,7 +47,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
    * {@inheritDoc}
    */
   @Override
-  public GenericType getPropertyType() {
+  public GenericType<?> getPropertyType() {
 
     return SimpleGenericTypeImpl.TYPE_INT;
   }
@@ -65,7 +65,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
    * {@inheritDoc}
    */
   @Override
-  public GenericType getReturnType() {
+  public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }

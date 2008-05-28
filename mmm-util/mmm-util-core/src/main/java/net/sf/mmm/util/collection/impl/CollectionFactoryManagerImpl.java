@@ -7,14 +7,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.collection.api.BlockingQueueFactory;
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
-import net.sf.mmm.util.collection.api.ListFactory;
 import net.sf.mmm.util.collection.api.MapFactory;
-import net.sf.mmm.util.collection.api.QueueFactory;
-import net.sf.mmm.util.collection.api.SetFactory;
-import net.sf.mmm.util.collection.api.SortedSetFactory;
+import net.sf.mmm.util.collection.base.ArrayListFactory;
+import net.sf.mmm.util.collection.base.HashMapFactory;
+import net.sf.mmm.util.collection.base.HashSetFactory;
+import net.sf.mmm.util.collection.base.LinkedBlockingQueueFactory;
+import net.sf.mmm.util.collection.base.LinkedListQueueFactory;
+import net.sf.mmm.util.collection.base.TreeSetFactory;
 import net.sf.mmm.util.component.AbstractLoggable;
 
 /**
@@ -53,20 +54,24 @@ public class CollectionFactoryManagerImpl extends AbstractLoggable implements
   protected void doInitialize() {
 
     super.doInitialize();
-    registerMapFactory(MapFactory.INSTANCE_HASH_MAP);
-    registerCollectionFactory(ListFactory.INSTANCE_ARRAY_LIST, Collection.class);
-    registerCollectionFactory(ListFactory.INSTANCE_ARRAY_LIST);
-    registerCollectionFactory(SetFactory.INSTANCE_HASH_SET);
-    registerCollectionFactory(SortedSetFactory.INSTANCE_TREE_SET);
-    registerCollectionFactory(QueueFactory.INSTANCE_LINKED_LIST);
-    registerCollectionFactory(BlockingQueueFactory.INSTANCE_LINKED_BLOCKING_QUEUE);
+    registerMapFactory(HashMapFactory.INSTANCE);
+    registerCollectionFactory(ArrayListFactory.INSTANCE, Collection.class);
+    registerCollectionFactory(ArrayListFactory.INSTANCE);
+    registerCollectionFactory(HashSetFactory.INSTANCE);
+    registerCollectionFactory(TreeSetFactory.INSTANCE);
+    registerCollectionFactory(LinkedListQueueFactory.INSTANCE);
+    registerCollectionFactory(LinkedBlockingQueueFactory.INSTANCE);
     // Deque is only available since java6, allow this class to work with
     // java5 as well...
     try {
-      Class dequeFactoryClass = Class.forName("net.sf.mmm.util.collection.api.DequeFactory");
-      CollectionFactory dequeFactory = (CollectionFactory) dequeFactoryClass.getField(
-          "INSTANCE_LINKED_LIST").get(null);
-      registerCollectionFactory(dequeFactory);
+      registerCollectionFactory(net.sf.mmm.util.collection.base.LinkedListDequeFactory.INSTANCE);
+      /*
+       * Class dequeFactoryClass =
+       * Class.forName("net.sf.mmm.util.collection.api.DequeFactory");
+       * CollectionFactory dequeFactory = (CollectionFactory)
+       * dequeFactoryClass.getField( "INSTANCE_LINKED_LIST").get(null);
+       * registerCollectionFactory(dequeFactory);
+       */
     } catch (Throwable e) {
       // Deque not available before java6, ignore...
       getLogger().info(
