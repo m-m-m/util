@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.junit.Test;
 
@@ -118,6 +119,8 @@ public class NlsMessageTest {
     NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
     Date date = Iso8601Util.getInstance().parseDate("1999-12-31T23:59:59+01:00");
     NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
+    // Make os/locale independent... 
+    TimeZone.setDefault(TimeZone.getTimeZone("GMT+01:00"));
     assertEquals(
         "Date formatted by locale: 12/31/99 11:59 PM, by ISO-8601: 1999-12-31T23:59:59+01:00 and by custom pattern: 1999.12.31-23:59:59+0100!",
         msg.getMessage());
