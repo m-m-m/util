@@ -4,11 +4,17 @@
 package net.sf.mmm.util.io;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
@@ -18,6 +24,8 @@ import java.nio.charset.Charset;
 import org.junit.Test;
 
 import net.sf.mmm.util.BasicUtil;
+import net.sf.mmm.util.file.base.DirectoryFilter;
+import net.sf.mmm.util.file.base.PlainFileFilter;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
 
 /**
@@ -105,6 +113,69 @@ public class EncodingUtilTest {
     StreamUtil.getInstance().transfer(reader, stringWriter, false);
     String dataString = stringWriter.toString();
     assertEquals(expectedData, dataString);
+  }
+
+  public void checkUtfReader(File testFile, String encoding) throws Exception {
+
+    String nonUtfEncoding = encoding.toLowerCase();
+    if (nonUtfEncoding.startsWith("utf") || nonUtfEncoding.endsWith("ascii")) {
+      nonUtfEncoding = "invalid-encoding";
+    } else {
+      nonUtfEncoding = encoding;
+    }
+    // read testFile as byte-array using the given encoding
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    Writer writer = new OutputStreamWriter(out, encoding);
+    InputStream in = new FileInputStream(testFile);
+    StreamUtil.getInstance().transfer(in, out, false);
+    writer.close();
+    byte[] data = out.toByteArray();
+    // read testFile again as string for assertions
+    in = new FileInputStream(testFile);
+    StringWriter stringWriter = new StringWriter();
+    Reader reader = new InputStreamReader(in, encoding);
+    String expectedData = StreamUtil.getInstance().read(reader);
+    // test reading character per character
+    in = new ByteArrayInputStream(data);
+    EncodingDetectionReader utfReader = getEncodingUtil().createUtfDetectionReader(in,
+        nonUtfEncoding);
+    int len = expectedData.length();
+    for (int i = 0; i < len; i++) {
+      int c = utfReader.read();
+      assertEquals((int) expectedData.charAt(i), c);
+    }
+    int c = utfReader.read();
+    assertEquals(-1, c);
+    assertEquals(encoding, utfReader.getEncoding());
+    utfReader.close();
+
+    // test using buffer
+    in = new ByteArrayInputStream(data);
+    utfReader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
+    String dataString = StreamUtil.getInstance().read(utfReader);
+    assertEquals(expectedData, dataString);
+  }
+
+  @Test
+  public void testUtfReader() throws Exception {
+
+    File encodingTestDir = new File("src/test/resources/net/sf/mmm/util/io/encoding");
+    assertTrue(encodingTestDir.isDirectory());
+    File[] encodingDirList = encodingTestDir.listFiles(DirectoryFilter.getInstance());
+    for (File encodingFolder : encodingDirList) {
+      String encoding = encodingFolder.getName();
+      if (!encoding.startsWith(".")) {
+        encoding = encoding.replace('_', '-');
+        Charset charset = Charset.forName(encoding);
+        encoding = charset.name();
+        System.out.println("testing UTF-reader for encoding " + encoding);
+        File[] testFileList = encodingFolder.listFiles(PlainFileFilter.getInstance());
+        for (File testFile : testFileList) {
+          System.out.println("  testing file " + testFile.getName());
+          checkUtfReader(testFile, encoding);
+        }
+      }
+    }
   }
 
   @Test

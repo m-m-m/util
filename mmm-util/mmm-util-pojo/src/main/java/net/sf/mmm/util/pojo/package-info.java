@@ -10,6 +10,8 @@
  * boolean getter with the prefix "has" or want to have a primitive type as 
  * setter argument while the getter has the according object type.
  * Using this utilities you are NOT limited by such restrictions.<br>
+ * Further the generic type-system introduced with Java 5 is quite complex and
+ * poorly supported by existing bean-utilities.
  * <br>
  * Instead of the {@link java.beans.Introspector} for java-beans or
  * <a href="http://commons.apache.org/beanutils">commons-beanutils</a>,

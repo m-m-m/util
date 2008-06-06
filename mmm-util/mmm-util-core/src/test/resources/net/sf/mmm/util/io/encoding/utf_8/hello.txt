@@ -1,0 +1,160 @@
+Hello World! This is a text encoded in latin-1.
+exclamation mark:!
+question mark:?
+quote:"
+single quote:'
+dollar:$
+percent:%
+ampersand:&
+slash:/
+backslash:\
+opening brace:(
+closing brace:)
+opening curly brace:{
+closing curly brace:}
+opening angled brace:[
+closing angled brace:]
+equals:=
+at:@
+less:<
+greater:>
+hash:#
+asterisk:*
+tilde:~
+roof:^
+underscore:_
+plus:+
+hyphen:-
+pipe:|
+
+
+
+And now the non-ASCII characters:
+euro:€
+single-b-quote:‚
+fnof(f):ƒ
+b-double-quote("):„
+hellip(...):…
+dagger(+):†
+Dagger:‡
+(^):ˆ
+permil(%):‰
+S-xxx:Š
+left-single-angle-quote(<):‹
+OE-ligature:Œ
+Z-xxx:Ž
+left-single-quote('):‘
+right-single-quote('):’
+left-double-quote("):“
+right-double-quote("):”
+bullet(.):•
+soft-hyphen(-):–
+m-dash(-):—
+upper-tilde(~):˜
+trademark:™
+scaron:š
+right-single-angle-quote(>):›
+oe-ligature:œ
+z-xxx:ž
+Y-umlaut:Ÿ
+non-breaking-space( ): 
+inverted-exclamation-mark(!):¡
+cent(c):¢
+pound(L):£
+currency(o):¤
+yen(Y):¥
+broken-vertical-bar(|):¦
+section(S):§
+spacing-diaeresis(umlaut):¨
+copyright(c):©
+feminine-ordinal-indicator(a):ª
+left-angle-quote(<<):«
+not(-,):¬
+n-dash(-):­
+registered-trademark(R):®
+spacing-macron(_):¯
+degree(o):°
+plus-or-minus(+-):±
+superscript-2:²
+superscript-3:³
+spacing-acute:´
+micro(u):µ
+paragraph(q):¶
+middle-dot(.):·
+spacing-cedillala:¸
+superscript-1:¹
+masculine-ordinal-indicator:º
+right-angle-quote(>>):»
+fraction 1/4:¼
+fraction 1/2:½
+fraction 3/4:¾
+inverted-question-mark(?):¿
+A-grave:À
+A-acute:Á
+A-circumflex:Â
+A-tilde:Ã
+A-umlaut:Ä
+A-ring:Å
+AE-lig::Æ
+C-cedilla:Ç
+E-grave:È
+E-acute:É
+E-circumflex:Ê
+E-umlaut:Ë
+I-grave:Ì
+I-acute:Í
+I-circumflex:Î
+I-umlaut:Ï
+ETH(D):Ð
+N-tilde:Ñ
+O-grave:Ò
+O-acute:Ó
+O-circumflex:Ô
+O-tilde:Õ
+O-umöaut:Ö
+multiplication/times(x):×
+O-slash:Ø
+U-grave:Ù
+U-acute:Ú
+U-circumflex:Û
+U-umlaut:Ü
+Y-acute:Ý
+THORN:Þ
+sz-ligature:ß
+a-grave:à
+a-acute:á
+a-circumflex:â
+a-tilde:ã
+a-umlaut:ä
+a-ring:å
+ae-lig:æ
+c-cedilla:ç
+e-grave:è
+e-acute:é
+e-circumflex:ê
+e-umlaut:ë
+i-grave:ì
+i-acute:í
+i-circumflex:î
+i-umlaut:ï
+eth(a):ð
+n-tilde:ñ
+o-grave:ò
+o-acute:ó
+o-circumflex:ô
+o-tilde:õ
+o-umlaut:ö
+division(%):÷
+o-slash:ø
+u-grave:ù
+u-acute:ú
+u-circumflex:û
+u-umlaut:ü
+y-acute:ý
+thorn(p):þ
+y-umlaut:ÿ
+
+
+
+Now some non ISO-8859 characters:
+G-clev:
