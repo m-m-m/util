@@ -54,6 +54,8 @@ public class Iso8601UtilTest {
     assertEquals(33, calendar.get(Calendar.SECOND));
     assertEquals(TimeZone.getTimeZone("UTC"), calendar.getTimeZone());
     Calendar newCalendar = Calendar.getInstance(Locale.GERMANY);
+    // bug in linux JDK 1.5.x
+    newCalendar.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
     newCalendar.setTime(calendar.getTime());
     String newString = getIso8601Util().formatDateTime(newCalendar);
     assertEquals("2007-01-31T12:22:33+01:00", newString);
