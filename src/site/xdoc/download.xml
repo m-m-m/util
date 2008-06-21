@@ -11,8 +11,8 @@
       <p>MMM is still under development and therefore no complete
       download package is available. However the
       subprojects that have already been <a href="roadmap.html">released</a>
-      are available via our 
-      <a href="http://m-m-m.sourceforge.net/repository/net/sf/mmm/">maven repository</a>.
+      are available via the central
+      <a href="http://repo1.maven.org/maven2/net/sf/m-m-m/">maven repository</a>.
       </p>
       <!--<p>Downloads will be available <a href="http://sourceforge.net/project/showfiles.php?group_id=40062">here</a>.</p>-->
     </section>

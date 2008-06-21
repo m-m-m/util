@@ -7,6 +7,14 @@
   </properties>
   <body>
     <section name="Project History">
+      <subsection name="2008-06-16">
+        <a href="http://jira.codehaus.org/browse/MAVENUPLOAD-1902">MAVENUPLOAD-1902</a> was completed so the 
+        mmm-repository is now synced to the central maven repository 
+        (see <a href="http://repo1.maven.org/maven2/net/sf/m-m-m/">here</a>).
+      </subsection>
+      <subsection name="2008-06-09">
+        Released <code>mmm-util-core</code> in version <code>1.0.1</code> and <code>mmm-util-pojo</code> version <code>1.0.0</code>.
+      </subsection>
       <subsection name="2008-02-20">
         Changed the project maven-groupId from <code>net.sf.mmm</code> to <code>net.sf.m-m-m</code>.
       </subsection>
