@@ -68,14 +68,14 @@ public class StringValueConverterTest {
     assertEquals(value, longObject.longValue());
     // test float
     float floatValue = getConverter().convertValue(valueString, source, float.class);
-    assertEquals(value, floatValue);
+    assertEquals(value, floatValue, 0.0);
     Float floatObject = getConverter().convertValue(valueString, source, Float.class);
-    assertEquals(value, floatObject.floatValue());
+    assertEquals(value, floatObject.floatValue(), 0.0);
     // test double
     double doubleValue = getConverter().convertValue(valueString, source, double.class);
-    assertEquals(value, doubleValue);
+    assertEquals(value, doubleValue, 0.0);
     Double doubleObject = getConverter().convertValue(valueString, source, Double.class);
-    assertEquals(value, doubleObject.doubleValue());
+    assertEquals(value, doubleObject.doubleValue(), 0.0);
     // test number
     Number numberObject = getConverter().convertValue(valueString, source, Number.class);
     assertEquals(value, numberObject.intValue());
@@ -104,8 +104,9 @@ public class StringValueConverterTest {
     // test char
     char c = '\u0223';
     String charString = Character.toString(c);
-    assertEquals(c, getConverter().convertValue(charString, source, char.class));
-    assertEquals(c, getConverter().convertValue(charString, source, Character.class));
+    assertEquals(Character.valueOf(c), getConverter().convertValue(charString, source, char.class));
+    assertEquals(Character.valueOf(c), getConverter().convertValue(charString, source,
+        Character.class));
     // test date
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
