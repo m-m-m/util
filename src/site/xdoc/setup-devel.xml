@@ -7,45 +7,32 @@
   </properties>
 
   <body>
-    <section name="Setup">
-      <p>
-      To setup your development environment follow these steps:
-      <ol>
-  <li>Install the <a href="http://java.sun.com">Java JDK</a> version 6 (1.6). 
-  Open a shell and type the following command to verify your installation:
-    <source>
+    <h2>Setup</h2>
+    To setup your development environment follow these steps:
+    <macro name="toc"/>
+      
+    <section name="Install JDK 6">
+      Install the <a href="http://java.sun.com">Java JDK</a> version 6 (1.6). 
+      Open a shell and type the following command to verify your installation:
+      <source>
 java -version
-    </source>
-  </li>
-  <li>Install <a href="http://maven.apache.org">maven</a>.
-	Open a shell and type the following command to verify your installation:
-    <source>
+      </source>
+    </section>
+    <section name="Install Maven">
+      Install <a href="http://maven.apache.org">maven</a>.
+	    Open a shell and type the following command to verify your installation:
+      <source>
 mvn -version
-    </source>
-  </li>
-        <li>Install <a href="http://subversion.tigris.org">subversion</a>. It is recommended
-	to install the native commandline client tool. If you are using Windows you might
-	want to use <a href="http://tortoisesvn.tigris.org">tortoiseSVN</a> instead or 
-	additionally.
-	If you installed the commandline client, open a shell and type the following command 
-	to verify your installation:
-    <source>
-svn --version
-    </source>
-        </li>
-  <li>Check out the <a href="source-repository.html">source-repository</a> 
-	with your subversion client. With tortoiseSVN go to the folder where you want 
-	to checkout in your Windows-Exporer, perform a right-click and choose 
-  "Tortoise SVN > checkout". With the commandline client go to the directory 
-	where you want to checkout and type:
-          <source>
-svn co http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/ mmm
-          </source>
-  </li>
-  <li>Install <a href="http://www.eclipse.org">eclipse</a> on your system.
-	You can use an IDE of your choice instead but eclipse is the only IDE supported
-	in this manual. Start eclipse (it is suggested to use the default for your workspace, 
-	you can start eclipse with "-data some/other/workspace" if you need another eclipse setup).
+      </source>
+    </section>
+    <section name="Install Eclipse">
+      Install <a href="http://www.eclipse.org">eclipse</a> 
+      (choose "Eclipse IDE for Java Developers") on your system.
+	    You can use an IDE of your choice instead but eclipse is the only 
+	    IDE supported in this manual. 	    
+	    <!--
+	    Start eclipse (it is suggested to use
+	    the default for your workspace, you can start eclipse with "-data some/other/workspace" if you need another eclipse setup).
 	Create a directory "eclipse-plugins" that is writeable for the account
 	you are using (e.g. somewhere in your home directory). In the eclipse workbench
 	select "Help > Software updates > Find and Install...". In the dialog click the button
@@ -57,22 +44,41 @@ svn co http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/ mmm
 	Then finish the installation.<br/>
   You may also install the 
   <a href="http://maven.apache.org/eclipse-plugin.html">m2eclipse plugin</a> if you 
-	like (current version 0.0.9 is NOT recommended).
-  </li>
-  <li>Open a shell and go to the directory where you checked out the repository and call
-  the following command:
-  <source>
-    setup
-  </source>
-  Follow the instructions of the script. It will call 
-  <code>mvn eclipse:eclipse -DdownloadSources=true</code> to generate the eclipse project 
-  configuration. When you import these projects into your eclipse workbench via 
-  "Import... > Existing Projects into Workspace" then select the toplevel directory of your
-  checked out repository. This will allow to import all sub-projects (there are many) in one 
-  step.
-  </li>
-      </ol>
-      </p>
+	like (current version 0.0.9 is NOT recommended). -->
+    </section>
+    <section name="Install Subversion">
+      Install <a href="http://subversion.tigris.org">subversion</a>. 
+      It is recommended to install the native commandline client tool. 
+      If you are using Windows you might want to use 
+      <a href="http://tortoisesvn.tigris.org">tortoiseSVN</a> instead or 
+	    additionally. If you installed the commandline client, open a shell 
+	    and type the following command to verify your installation:
+      <source>
+svn --version
+      </source>
+    </section>
+    <section name="Checkout">
+      Check out the <a href="source-repository.html">source-repository</a> 
+	    with your subversion client. With tortoiseSVN go to the folder where 
+	    you want to checkout in your Windows-Exporer, perform a right-click 
+	    and choose "Tortoise SVN > checkout". With the commandline client 
+	    go to the directory where you want to checkout and type:
+      <source>
+svn co http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/ mmm
+      </source>
+    </section>
+    <section name="Setup">
+      Open a shell and go to the directory where you checked out the repository
+      and call the following command:
+      <source>
+setup
+      </source>
+      Follow the instructions of the script. It will call 
+      <code>mvn eclipse:eclipse -DdownloadSources=true</code> to generate the 
+      eclipse project configuration. When you import these projects into your 
+      eclipse workbench via "Import... > Existing Projects into Workspace" then 
+      select the toplevel directory of your checked out repository. This will 
+      allow to import all sub-projects (there are many) in one step.
     </section>
   </body>
 </document>
