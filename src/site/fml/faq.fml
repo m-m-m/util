@@ -19,8 +19,7 @@
 	technical situations (e.g. Java package names), it is only used for
 	sourceforge related stuff. The java package namespace is net.sf.mmm while the 
 	maven-groupId is net.sf.m-m-m.</p>
-	See also 
-	http://sourceforge.net/tracker/index.php?func=detail&aid=1898052&group_id=40062&atid=427657
+	See also <a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1898052&amp;group_id=40062&amp;atid=427657">issue 427657</a>
       </answer>
     </faq>
   </part>
