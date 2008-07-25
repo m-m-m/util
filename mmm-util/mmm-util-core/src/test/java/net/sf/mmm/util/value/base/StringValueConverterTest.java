@@ -14,9 +14,10 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.Conjunction;
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.api.Conjunction;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
@@ -37,7 +38,7 @@ public class StringValueConverterTest {
 
   protected Iso8601Util getIso8601Util() {
 
-    return Iso8601Util.getInstance();
+    return Iso8601UtilImpl.getInstance();
   }
 
   @Test

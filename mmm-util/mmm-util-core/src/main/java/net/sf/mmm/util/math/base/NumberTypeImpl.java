@@ -14,7 +14,7 @@ import net.sf.mmm.util.math.api.NumberType;
 /**
  * This is the implementation of the {@link NumberType} interface.
  * 
- * @see net.sf.mmm.util.math.MathUtil#getNumberType(Class)
+ * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
  * @param <NUMBER> is the generic type of the
  *        {@link #getNumberClass() represented number-class}.
  * 

@@ -9,6 +9,9 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.util.filter.api.FilterRule;
+import net.sf.mmm.util.filter.base.FilterRuleChain;
+
 /**
  * This class allows to parse a list of including and excluding regex
  * {@link PatternFilterRule}s and build an according {@link FilterRuleChain}.
@@ -138,40 +141,39 @@ public class FilterRuleChainPlainParser {
 
   /**
    * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described
-   * {@link FilterRuleChainPlainParser above}.
+   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser
+   * above}.
    * 
    * @param reader is where to read from. It will be closed at the end of this
    *        method (on success and in an exceptional state).
-   * @param defaultResult is the
-   *        {@link FilterRuleChain#getDefaultResult() default-result} of the
-   *        chain.
+   * @param defaultResult is the {@link FilterRuleChain#getDefaultResult()
+   *        default-result} of the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
    */
-  public FilterRuleChain parse(Reader reader, boolean defaultResult) throws IOException {
+  public FilterRuleChain<String> parse(Reader reader, boolean defaultResult) throws IOException {
 
     return parse(new BufferedReader(reader), defaultResult);
   }
 
   /**
    * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described
-   * {@link FilterRuleChainPlainParser above}.
+   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser
+   * above}.
    * 
    * @param reader is where to read from. It will be closed at the end of this
    *        method (on success and in an exceptional state).
-   * @param defaultResult is the
-   *        {@link FilterRuleChain#getDefaultResult() default-result} of the
-   *        chain.
+   * @param defaultResult is the {@link FilterRuleChain#getDefaultResult()
+   *        default-result} of the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
    */
-  public FilterRuleChain parse(BufferedReader reader, boolean defaultResult) throws IOException {
+  public FilterRuleChain<String> parse(BufferedReader reader, boolean defaultResult)
+      throws IOException {
 
     try {
       int lineCount = 0;
-      List<FilterRule> rules = new ArrayList<FilterRule>();
+      List<FilterRule<String>> rules = new ArrayList<FilterRule<String>>();
       String line = reader.readLine();
       while (line != null) {
         line = line.trim();
@@ -181,7 +183,7 @@ public class FilterRuleChainPlainParser {
           if ((first == this.acceptChar) || (first == this.denyChar)) {
             String regex = line.substring(1);
             boolean accept = (first == this.acceptChar);
-            FilterRule rule = new PatternFilterRule(regex, accept);
+            FilterRule<String> rule = new PatternFilterRule(regex, accept);
             rules.add(rule);
           } else if (first == this.commentChar) {
             // ignore line
@@ -192,8 +194,8 @@ public class FilterRuleChainPlainParser {
         }
         line = reader.readLine();
       }
-      FilterRule[] ruleArray = rules.toArray(new FilterRule[rules.size()]);
-      return new FilterRuleChain(defaultResult, ruleArray);
+      FilterRule<String>[] ruleArray = rules.toArray(new FilterRule[rules.size()]);
+      return new FilterRuleChain<String>(defaultResult, ruleArray);
     } finally {
       reader.close();
     }

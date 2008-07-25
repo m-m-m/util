@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.w3c.dom.Element;
 
 import net.sf.mmm.util.resource.ClasspathResource;
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 import junit.framework.TestCase;
 
@@ -28,7 +28,7 @@ public class SearchViewConfigurationTest extends TestCase {
     Locale.setDefault(Locale.US);
     ClasspathResource resource = new ClasspathResource(SearchViewConfigurationTest.class, ".xml",
         true);
-    Element element = DomUtil.parseDocument(resource.openStream()).getDocumentElement();
+    Element element = DomUtilImpl.parseDocument(resource.openStream()).getDocumentElement();
     SearchViewConfiguration configuration = new SearchViewConfiguration(element);
     // icon mapping
     assertEquals("pdf.png", configuration.getIconName("pdf"));

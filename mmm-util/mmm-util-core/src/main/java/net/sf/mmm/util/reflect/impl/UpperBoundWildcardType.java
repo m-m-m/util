@@ -6,13 +6,14 @@ package net.sf.mmm.util.reflect.impl;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link WildcardType} interface for a single
  * upper bound.
  * 
- * @see ReflectionUtil#toType(String)
+ * @see ReflectionUtilImpl#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -85,7 +86,7 @@ public class UpperBoundWildcardType implements WildcardType {
   @Override
   public String toString() {
 
-    String lowerBoundString = ReflectionUtil.getInstance().toString(this.upperBound);
+    String lowerBoundString = ReflectionUtilImpl.getInstance().toString(this.upperBound);
     // "? extends ".length == 10
     StringBuilder result = new StringBuilder(lowerBoundString.length() + 10);
     result.append("? extends ");

@@ -23,13 +23,16 @@ import java.nio.charset.Charset;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.BasicUtil;
 import net.sf.mmm.util.file.base.DirectoryFilter;
 import net.sf.mmm.util.file.base.PlainFileFilter;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
+import net.sf.mmm.util.io.api.EncodingUtil;
+import net.sf.mmm.util.io.base.EncodingUtilImpl;
+import net.sf.mmm.util.io.base.StreamUtilImpl;
+import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
 /**
- * This is the test-case for {@link EncodingUtil}.
+ * This is the test-case for {@link EncodingUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -42,7 +45,7 @@ public class EncodingUtilTest {
 
   protected EncodingUtil getEncodingUtil() {
 
-    return EncodingUtil.getInstance();
+    return EncodingUtilImpl.getInstance();
   }
 
   protected void checkEncoding(String encoding) {
@@ -67,7 +70,7 @@ public class EncodingUtilTest {
         String name = field.getName();
         if (name.startsWith("ENCODING_")) {
           String encoding = (String) field.get(null);
-          if (!BasicUtil.getInstance().isInArray(encoding, UNSUPPORTED_ENCODINGS, true)) {
+          if (!BasicUtilImpl.getInstance().isInArray(encoding, UNSUPPORTED_ENCODINGS, true)) {
             checkEncoding(encoding);
           }
         }
@@ -110,7 +113,7 @@ public class EncodingUtilTest {
     in = new ByteArrayInputStream(data);
     reader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
     stringWriter = new StringWriter();
-    StreamUtil.getInstance().transfer(reader, stringWriter, false);
+    StreamUtilImpl.getInstance().transfer(reader, stringWriter, false);
     String dataString = stringWriter.toString();
     assertEquals(expectedData, dataString);
   }
@@ -127,14 +130,14 @@ public class EncodingUtilTest {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     Writer writer = new OutputStreamWriter(out, encoding);
     InputStream in = new FileInputStream(testFile);
-    StreamUtil.getInstance().transfer(in, out, false);
+    StreamUtilImpl.getInstance().transfer(in, out, false);
     writer.close();
     byte[] data = out.toByteArray();
     // read testFile again as string for assertions
     in = new FileInputStream(testFile);
     StringWriter stringWriter = new StringWriter();
     Reader reader = new InputStreamReader(in, encoding);
-    String expectedData = StreamUtil.getInstance().read(reader);
+    String expectedData = StreamUtilImpl.getInstance().read(reader);
     // test reading character per character
     in = new ByteArrayInputStream(data);
     EncodingDetectionReader utfReader = getEncodingUtil().createUtfDetectionReader(in,
@@ -152,7 +155,7 @@ public class EncodingUtilTest {
     // test using buffer
     in = new ByteArrayInputStream(data);
     utfReader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
-    String dataString = StreamUtil.getInstance().read(utfReader);
+    String dataString = StreamUtilImpl.getInstance().read(utfReader);
     assertEquals(expectedData, dataString);
   }
 

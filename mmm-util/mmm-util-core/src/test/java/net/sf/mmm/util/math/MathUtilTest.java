@@ -14,10 +14,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
+import net.sf.mmm.util.math.base.MathUtilImpl;
 
 /**
- * This is the test-case for {@link MathUtil}.
+ * This is the test-case for {@link MathUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,7 +28,7 @@ public class MathUtilTest {
 
   protected MathUtil getMathUtil() {
 
-    return MathUtil.getInstance();
+    return MathUtilImpl.getInstance();
   }
 
   protected <NUMBER extends Number> void check(Class<NUMBER> numberClass, Class<?> primitiveClass) {

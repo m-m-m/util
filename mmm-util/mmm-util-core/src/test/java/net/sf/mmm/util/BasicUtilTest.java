@@ -9,8 +9,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.lang.api.BasicUtil;
+import net.sf.mmm.util.lang.base.BasicUtilImpl;
+
 /**
- * This is the test-case for {@link BasicUtil}.
+ * This is the test-case for {@link BasicUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -19,7 +22,7 @@ public class BasicUtilTest {
 
   public BasicUtil getBasicUtil() {
 
-    return BasicUtil.getInstance();
+    return BasicUtilImpl.getInstance();
   }
 
   @Test

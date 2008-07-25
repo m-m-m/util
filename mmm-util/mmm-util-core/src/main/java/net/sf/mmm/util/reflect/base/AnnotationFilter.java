@@ -6,7 +6,6 @@ package net.sf.mmm.util.reflect.base;
 import java.lang.annotation.Annotation;
 
 import net.sf.mmm.util.filter.api.Filter;
-import net.sf.mmm.util.reflect.AnnotationUtil;
 
 /**
  * This is a filter that only {@link #accept(Class) accepts} {@link Class types}
@@ -17,8 +16,8 @@ import net.sf.mmm.util.reflect.AnnotationUtil;
  */
 public class AnnotationFilter implements Filter<Class<?>> {
 
-  /** The {@link AnnotationUtil} to use. */
-  private AnnotationUtil annotationUtil;
+  /** The {@link AnnotationUtilImpl} to use. */
+  private AnnotationUtilImpl annotationUtil;
 
   /** The required annotation. */
   private final Class<? extends Annotation> annotationType;
@@ -26,7 +25,7 @@ public class AnnotationFilter implements Filter<Class<?>> {
   /**
    * If <code>true</code> then also types are accepted if one of their
    * super-types (including implemented interfaces) is properly annotated (see
-   * {@link AnnotationUtil#getTypeAnnotation(Class, Class)}).
+   * {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
    */
   private final boolean forceInheritence;
 
@@ -38,7 +37,7 @@ public class AnnotationFilter implements Filter<Class<?>> {
    *        {@link #accept(Class) accepted}.
    * @throws IllegalArgumentException if the given <code>annotationType</code>
    *         is NO
-   *         {@link AnnotationUtil#isRuntimeAnnotation(Class) runtime annotation}.
+   *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType)
       throws IllegalArgumentException {
@@ -55,15 +54,15 @@ public class AnnotationFilter implements Filter<Class<?>> {
    * @param forceInheritence if <code>true</code> then also types are accepted
    *        if one of their super-types (including implemented interfaces) is
    *        properly annotated (see
-   *        {@link AnnotationUtil#getTypeAnnotation(Class, Class)}).
+   *        {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
    * @throws IllegalArgumentException if the given <code>annotationType</code>
    *         is NO
-   *         {@link AnnotationUtil#isRuntimeAnnotation(Class) runtime annotation}.
+   *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType, boolean forceInheritence)
       throws IllegalArgumentException {
 
-    this(annotationType, forceInheritence, AnnotationUtil.getInstance());
+    this(annotationType, forceInheritence, AnnotationUtilImpl.getInstance());
   }
 
   /**
@@ -75,14 +74,14 @@ public class AnnotationFilter implements Filter<Class<?>> {
    * @param forceInheritence if <code>true</code> then also types are accepted
    *        if one of their super-types (including implemented interfaces) is
    *        properly annotated (see
-   *        {@link AnnotationUtil#getTypeAnnotation(Class, Class)}).
-   * @param annotationUtil is the {@link AnnotationUtil} instance to use.
+   *        {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
+   * @param annotationUtil is the {@link AnnotationUtilImpl} instance to use.
    * @throws IllegalArgumentException if the given <code>annotationType</code>
    *         is NO
-   *         {@link AnnotationUtil#isRuntimeAnnotation(Class) runtime annotation}.
+   *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType, boolean forceInheritence,
-      AnnotationUtil annotationUtil) throws IllegalArgumentException {
+      AnnotationUtilImpl annotationUtil) throws IllegalArgumentException {
 
     super();
     if (!annotationUtil.isRuntimeAnnotation(annotationType)) {

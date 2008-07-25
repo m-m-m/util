@@ -47,7 +47,7 @@ public interface NlsFormatterManager {
   /** @see java.text.NumberFormat#getPercentInstance() */
   String STYLE_PERCENT = "percent";
 
-  /** @see net.sf.mmm.util.date.Iso8601Util */
+  /** @see net.sf.mmm.util.date.base.Iso8601UtilImpl */
   String STYLE_ISO_8601 = "iso8601";
 
   /**

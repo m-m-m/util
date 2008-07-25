@@ -3,11 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-import static org.junit.Assert.*;
+import net.sf.mmm.util.filter.api.FilterRule;
+import net.sf.mmm.util.filter.base.FilterRuleChain;
 
 /**
  * This is the test-case for {@link FilterRuleChain}.
@@ -33,7 +35,7 @@ public class FilterRuleChainTest {
   @Test
   public void test() {
 
-    FilterRule[] rules = new FilterRule[] { new PatternFilterRule("^/doc/", true),
+    FilterRule<String>[] rules = new FilterRule[] { new PatternFilterRule("^/doc/", true),
         new PatternFilterRule("(?i)\\.pdf$", false), new PatternFilterRule("^/data/", true),
         new PatternFilterRule("(?i)\\.(xml|xsl)$", false), };
     FilterRuleChain chain = new FilterRuleChain(true, rules);

@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.file.base;
 
-import net.sf.mmm.util.BasicUtil;
+import net.sf.mmm.util.lang.api.BasicUtil;
+import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
 /**
  * This class represents the attributes of a file as defined in a Unix/Posix
@@ -24,7 +25,7 @@ public class FileAttributes implements Cloneable {
   /** @see #getPermissions() */
   private FileAccessPermissions permissions;
 
-  /** the {@link BasicUtil} instance to use. */
+  /** the {@link BasicUtilImpl} instance to use. */
   private BasicUtil basicUtil;
 
   /**
@@ -33,13 +34,13 @@ public class FileAttributes implements Cloneable {
   public FileAttributes() {
 
     super();
-    this.basicUtil = BasicUtil.getInstance();
+    this.basicUtil = BasicUtilImpl.getInstance();
   }
 
   /**
    * The constructor.
    * 
-   * @param basicUtil the instance of {@link BasicUtil} to use.
+   * @param basicUtil the instance of {@link BasicUtilImpl} to use.
    */
   public FileAttributes(BasicUtil basicUtil) {
 

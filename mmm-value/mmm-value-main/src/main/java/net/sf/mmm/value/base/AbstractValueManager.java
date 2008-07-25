@@ -9,9 +9,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.util.nls.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.xml.StaxUtil;
+import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.base.StaxUtilImpl;
 import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.ValueManager;
 
@@ -31,6 +32,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   /** the to string message */
   private NlsMessage toStringMessage;
 
+  /** @see #getStaxUtil() */
   private StaxUtil staxUtil;
 
   /**
@@ -48,7 +50,7 @@ public abstract class AbstractValueManager<V> implements ValueManager<V> {
   public StaxUtil getStaxUtil() {
 
     if (this.staxUtil == null) {
-      this.staxUtil = StaxUtil.getInstance();
+      this.staxUtil = StaxUtilImpl.getInstance();
     }
     return this.staxUtil;
   }

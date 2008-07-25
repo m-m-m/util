@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.nls.NlsRuntimeException;
-import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * A {@link RuntimeIoException} is like an {@link java.io.IOException} but as a

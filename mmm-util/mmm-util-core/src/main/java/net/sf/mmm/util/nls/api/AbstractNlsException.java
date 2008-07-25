@@ -10,14 +10,14 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * This is an abstract base implementation of a checked exception with real
  * <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
- * Please prefer extending {@link net.sf.mmm.util.nls.NlsException} instead of
+ * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsException} instead of
  * this class.<br>
  * <b>INFORMATION:</b><br>
  * Checked exceptions should be used for business errors and should only occur

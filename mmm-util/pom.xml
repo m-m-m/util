@@ -21,6 +21,6 @@
     <module>mmm-util-misc</module>
     <module>mmm-util-resource</module>
     <module>mmm-util-xml</module>
-    <!-- <module>mmm-util-streamdetect</module> -->
+    <module>mmm-util-contenttype</module>
   </modules>
 </project>

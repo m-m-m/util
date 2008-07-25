@@ -12,8 +12,8 @@ import java.lang.reflect.WildcardType;
 import java.util.Collection;
 import java.util.Map;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AbstractGenericType;
 
 /**

@@ -9,10 +9,9 @@ import java.lang.reflect.Type;
  * This is the interface of a generic type and allows simple and powerful access
  * to the complex generic type-system introduced in Java5.<br>
  * It represents a {@link Type} (available via {@link #getType()}) but allows
- * easy access to resolve the actual {@link Class} for
- * {@link #getLowerBound() assignment} and {@link #getUpperBound() retrieval}.
- * This includes resolving {@link java.lang.reflect.TypeVariable}s as far as
- * possible.<br>
+ * easy access to resolve the actual {@link Class} for {@link #getLowerBound()
+ * assignment} and {@link #getUpperBound() retrieval}. This includes resolving
+ * {@link java.lang.reflect.TypeVariable}s as far as possible.<br>
  * Have a look at the following example:<br>
  * 
  * <pre>
@@ -31,10 +30,10 @@ import java.lang.reflect.Type;
  * If you want to determine the type of <code>Some.getA()</code> reflectively,
  * you will have to dive into the deepest and trickiest part of the reflection
  * API and might step into one of the many pitfalls on this way. Or you simply
- * use this API.<br>
+ * use the features offered via this API.<br>
  * 
- * @see net.sf.mmm.util.reflect.ReflectionUtil#createGenericType(Type)
- * @see net.sf.mmm.util.reflect.ReflectionUtil#createGenericType(Type,
+ * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type)
+ * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type,
  *      GenericType)
  * 
  * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
@@ -135,7 +134,8 @@ public interface GenericType<T> {
   GenericType<?> getComponentType();
 
   /**
-   * This method gets the number of {@link #getTypeArgument(int) type-arguments}.
+   * This method gets the number of {@link #getTypeArgument(int) type-arguments}
+   * .
    * 
    * @return the type-argument count.
    */
@@ -145,8 +145,8 @@ public interface GenericType<T> {
    * This method gets the type-argument at the given <code>index</code>.<br>
    * E.g. for the {@link GenericType} representing
    * <code>Map&lt;String, List&lt;Integer&gt;&gt;</code> this method would
-   * return <code>String</code> for an <code>index</code> of <code>0</code>
-   * and <code>List&lt;Integer&gt;</code> for an <code>index</code> of
+   * return <code>String</code> for an <code>index</code> of <code>0</code> and
+   * <code>List&lt;Integer&gt;</code> for an <code>index</code> of
    * <code>1</code>.
    * 
    * @see #getTypeArgumentCount()
@@ -162,10 +162,11 @@ public interface GenericType<T> {
   /**
    * This method gets the string representation of this {@link GenericType}. In
    * case the underlying {@link #getType() value-type} is a regular
-   * {@link Class}, this method will return its
-   * {@link Class#getName() qualified name} otherwise it will return the string
-   * representation of the generic type information (e.g.
-   * <code>java.util.Map&lt;java.lang.String, java.util.List&lt;java.lang.Integer&gt;&gt;[]</code>).
+   * {@link Class}, this method will return its {@link Class#getName() qualified
+   * name} otherwise it will return the string representation of the generic
+   * type information (e.g.
+   * <code>java.util.Map&lt;java.lang.String, java.util.List&lt;java.lang.Integer&gt;&gt;[]</code>
+   * ).
    * 
    * @return this {@link GenericType} as string.
    */

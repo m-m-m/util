@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.sf.mmm.util.text.api.Singularizer;
+
 /**
  * This is the singularizer for English language.
  * 

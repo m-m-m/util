@@ -6,8 +6,8 @@ package net.sf.mmm.util.process.api;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.mmm.util.io.base.DevNullSource;
-import net.sf.mmm.util.io.base.DevNullTarget;
+import net.sf.mmm.util.io.api.DevNullSource;
+import net.sf.mmm.util.io.api.DevNullTarget;
 
 /**
  * This class represents the context for a process. It is a java-bean that holds

@@ -5,6 +5,7 @@ package net.sf.mmm.util.text;
 
 import java.util.List;
 
+import net.sf.mmm.util.text.api.Singularizer;
 import net.sf.mmm.util.transformer.Transformer;
 
 /**

@@ -7,12 +7,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link ParameterizedType} interface.
  * 
- * @see ReflectionUtil#toType(String)
+ * @see ReflectionUtilImpl#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -118,7 +118,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
 
     StringBuilder result = new StringBuilder();
     if (this.ownerType != null) {
-      result.append(ReflectionUtil.getInstance().toString(this.ownerType));
+      result.append(ReflectionUtilImpl.getInstance().toString(this.ownerType));
       result.append('.');
       // TODO: this is NOT as easy!
       result.append(this.rawType.getName());

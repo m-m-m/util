@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This class allows to parse a list of {@link StringTransformerRule}s from XML
@@ -94,8 +94,8 @@ public class StringTransformerChainXmlParser {
   public StringTransformerRule parseRule(Element xmlElement) {
 
     if (XML_TAG_RULE.equals(xmlElement.getTagName())) {
-      boolean replaceAll = DomUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL, false);
-      boolean stopOnMatch = DomUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_STOPONMATCH, false);
+      boolean replaceAll = DomUtilImpl.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL, false);
+      boolean stopOnMatch = DomUtilImpl.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_STOPONMATCH, false);
       String patternString = xmlElement.getAttribute(XML_ATR_RULE_PATTERN);
       Pattern pattern = Pattern.compile(patternString);
       String replacement = xmlElement.getAttribute(XML_ATR_RULE_REPLACEMENT);

@@ -4,7 +4,7 @@
 package net.sf.mmm.search.api;
 
 import net.sf.mmm.search.engine.api.SearchEngine;
-import net.sf.mmm.util.nls.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is a technical exception that can be thrown by the {@link SearchEngine}

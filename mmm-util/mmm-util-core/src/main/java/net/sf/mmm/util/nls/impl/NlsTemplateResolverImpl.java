@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import net.sf.mmm.util.nls.AbstractResourceBundle;
 import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
  * This is an implementation of the

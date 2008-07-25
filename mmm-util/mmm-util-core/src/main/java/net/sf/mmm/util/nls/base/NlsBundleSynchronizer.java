@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import net.sf.mmm.util.nls.AbstractResourceBundle;
 
 /**
  * This class holds the internationalized messages for <code>util-misc</code>.
@@ -12,7 +11,7 @@ import net.sf.mmm.util.nls.AbstractResourceBundle;
  */
 public class NlsBundleSynchronizer extends AbstractResourceBundle {
 
-  /** @see net.sf.mmm.util.nls.ResourceBundleSynchronizer */
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE = "Usage: {0} [<option>*] <bundle-class> [<locale>*]\n\n"
       + "Create and/or update resource bundle properties from <bundle-class>\n"
       + "for the given locales (including the root locale).\n\n"

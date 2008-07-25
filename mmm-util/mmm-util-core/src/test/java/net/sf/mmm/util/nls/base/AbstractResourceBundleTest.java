@@ -12,7 +12,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.nls.AbstractResourceBundle;
 
 /**
  * This is the test-case for {@link AbstractResourceBundle}.

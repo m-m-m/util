@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource;
 
-import net.sf.mmm.util.nls.AbstractResourceBundle;
+import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
  * This class holds the internationalized messages for the configuration

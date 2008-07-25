@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * This exception is thrown if parsing of a value failed.

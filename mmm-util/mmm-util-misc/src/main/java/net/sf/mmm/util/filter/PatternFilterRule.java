@@ -6,6 +6,7 @@ package net.sf.mmm.util.filter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.filter.api.FilterRule;
 import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
 
 /**
@@ -14,7 +15,7 @@ import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PatternFilterRule implements FilterRule {
+public class PatternFilterRule implements FilterRule<String> {
 
   /** @see #accept(String) */
   private final Pattern pattern;
@@ -29,9 +30,9 @@ public class PatternFilterRule implements FilterRule {
    *        rule. Before this given string is compiled via
    *        {@link Pattern#compile(String)} the following manipulation is
    *        performed: If the pattern string does NOT start with the character
-   *        <code>^</code> the implicit prefix <code>.*</code> is added. If
-   *        the pattern does NOT end with the character <code>$</code> the
-   *        implicit suffix <code>.*</code> is appended.
+   *        <code>^</code> the implicit prefix <code>.*</code> is added. If the
+   *        pattern does NOT end with the character <code>$</code> the implicit
+   *        suffix <code>.*</code> is appended.
    * @param resultOnMatch is the result {@link #accept(String) returned} if the
    *        pattern matches.
    */

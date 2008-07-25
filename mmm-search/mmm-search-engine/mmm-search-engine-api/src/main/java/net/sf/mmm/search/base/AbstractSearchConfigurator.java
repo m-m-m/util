@@ -6,7 +6,7 @@ package net.sf.mmm.search.base;
 import org.w3c.dom.Element;
 
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This is an abstract base implementation of the {@link SearchConfigurator}
@@ -56,7 +56,7 @@ public abstract class AbstractSearchConfigurator implements SearchConfigurator {
    */
   protected void setupRefreshThread(Element element, final ManagedSearchEngine searchEngine) {
 
-    Element searchElement = DomUtil.getFirstChildElement(element, XML_TAG_SEARCH);
+    Element searchElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_SEARCH);
     if (searchElement != null) {
       if (searchElement.hasAttribute(XML_ATR_SEARCH_REFRESHDELAY)) {
         String refreshDelayString = searchElement.getAttribute(XML_ATR_SEARCH_REFRESHDELAY);

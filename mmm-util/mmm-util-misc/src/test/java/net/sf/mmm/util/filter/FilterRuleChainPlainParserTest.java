@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.filter.base.FilterRuleChain;
+
 import static org.junit.Assert.*;
 
 /**

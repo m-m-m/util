@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * This is the exception thrown if a required value was not set.

@@ -6,13 +6,14 @@ package net.sf.mmm.util.reflect.impl;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link WildcardType} interface for a single
  * lower bound.
  * 
- * @see ReflectionUtil#toType(String)
+ * @see ReflectionUtilImpl#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -85,7 +86,7 @@ public class LowerBoundWildcardType implements WildcardType {
   @Override
   public String toString() {
 
-    String upperBoundString = ReflectionUtil.getInstance().toString(this.lowerBound);
+    String upperBoundString = ReflectionUtilImpl.getInstance().toString(this.lowerBound);
     // "? super ".length == 8
     StringBuilder result = new StringBuilder(upperBoundString.length() + 8);
     result.append("? super ");

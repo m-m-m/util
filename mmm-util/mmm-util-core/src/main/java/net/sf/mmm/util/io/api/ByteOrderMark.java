@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.io.EncodingUtil;
+import net.sf.mmm.util.io.base.EncodingUtilImpl;
 
 /**
  * This type represents a Byte-Order-Mark (<a

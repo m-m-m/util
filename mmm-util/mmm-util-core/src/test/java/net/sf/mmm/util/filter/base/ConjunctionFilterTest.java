@@ -8,9 +8,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.Conjunction;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConjunctionFilter;
+import net.sf.mmm.util.lang.api.Conjunction;
 
 /**
  * This is the test-case for {@link ConjunctionFilter}.

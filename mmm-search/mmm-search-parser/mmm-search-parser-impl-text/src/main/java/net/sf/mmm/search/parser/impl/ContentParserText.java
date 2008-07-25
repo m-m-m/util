@@ -16,7 +16,8 @@ import javax.annotation.Resource;
 import com.glaforge.i18n.io.SmartEncodingInputStream;
 
 import net.sf.mmm.search.parser.base.AbstractContentParser;
-import net.sf.mmm.util.io.EncodingUtil;
+import net.sf.mmm.util.io.api.EncodingUtil;
+import net.sf.mmm.util.io.base.EncodingUtilImpl;
 import net.sf.mmm.util.xml.MarkupUtil;
 
 /**
@@ -71,9 +72,9 @@ public class ContentParserText extends AbstractContentParser {
   }
 
   /**
-   * This method gets the {@link EncodingUtil} to use.
+   * This method gets the {@link EncodingUtilImpl} to use.
    * 
-   * @return the {@link EncodingUtil} to use.
+   * @return the {@link EncodingUtilImpl} to use.
    */
   protected EncodingUtil getEncodingUtil() {
 
@@ -98,7 +99,7 @@ public class ContentParserText extends AbstractContentParser {
 
     super.doInitialize();
     if (this.encodingUtil == null) {
-      this.encodingUtil = EncodingUtil.getInstance();
+      this.encodingUtil = EncodingUtilImpl.getInstance();
     }
   }
 

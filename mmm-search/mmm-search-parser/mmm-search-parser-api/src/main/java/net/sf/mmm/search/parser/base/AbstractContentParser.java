@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.sf.mmm.search.parser.api.ContentParser;
-import net.sf.mmm.util.component.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 
 /**
  * This is the abstract base implementation of a {@link ContentParser} that

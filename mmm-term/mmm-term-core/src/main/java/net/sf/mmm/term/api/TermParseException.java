@@ -4,7 +4,7 @@
 package net.sf.mmm.term.api;
 
 import net.sf.mmm.term.NlsBundleTermCore;
-import net.sf.mmm.util.nls.NlsException;
+import net.sf.mmm.util.nls.api.NlsException;
 
 /**
  * This exception is thrown if an error occurred while parsing a

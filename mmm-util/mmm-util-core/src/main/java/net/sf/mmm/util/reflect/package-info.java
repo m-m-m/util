@@ -27,9 +27,9 @@
  * This project provides utilities that make reflection a lot easier. It also
  * offers features that you may not even know they where possible such as 
  * finding all classes located in the classpath or a specific package.<br>
- * Therefore {@link net.sf.mmm.util.reflect.ReflectionUtil} will help you to 
+ * Therefore {@link net.sf.mmm.util.reflect.api.ReflectionUtil} will help you to 
  * deal with reflection. For advanced support when reading annotations have a 
- * look at {@link net.sf.mmm.util.reflect.AnnotationUtil}.
+ * look at {@link net.sf.mmm.util.reflect.api.AnnotationUtil}.
  */
 package net.sf.mmm.util.reflect;
 

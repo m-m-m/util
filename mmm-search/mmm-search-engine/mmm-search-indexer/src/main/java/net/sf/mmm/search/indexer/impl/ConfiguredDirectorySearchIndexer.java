@@ -12,10 +12,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.search.indexer.api.SearchIndexer;
-import net.sf.mmm.util.file.FileUtil;
-import net.sf.mmm.util.filter.FileFilterAdapter;
-import net.sf.mmm.util.filter.FilterRuleChain;
+import net.sf.mmm.util.file.base.FileStringFilterAdapter;
+import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.filter.FilterRuleChainXmlParser;
+import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.StringTransformerChainXmlParser;
 import net.sf.mmm.util.transformer.Transformer;
 
@@ -36,8 +36,8 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
   public static final String XML_TAG_URITRANSFORMERS = "uri-transformers";
 
   /**
-   * The name of the XML element for a list of
-   * {@link #XML_TAG_DIRECTORY directories}.
+   * The name of the XML element for a list of {@link #XML_TAG_DIRECTORY
+   * directories}.
    */
   public static final String XML_TAG_DIRECTORIES = "directories";
 
@@ -64,22 +64,21 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
 
   /**
    * The name of the XML attribute pointing to the ID of the
-   * <code>filter-chain</code> to use for indexing a
-   * {@link #XML_TAG_DIRECTORY directory}.
+   * <code>filter-chain</code> to use for indexing a {@link #XML_TAG_DIRECTORY
+   * directory}.
    */
   public static final String XML_ATR_DIRECTORY_FILTER = "filter";
 
   /**
    * The name of the XML attribute pointing to the ID of the
-   * <code>transformer-chain</code> to use for rewriting the URIs when
-   * indexing a {@link #XML_TAG_DIRECTORY directory}.
+   * <code>transformer-chain</code> to use for rewriting the URIs when indexing
+   * a {@link #XML_TAG_DIRECTORY directory}.
    */
   public static final String XML_ATR_DIRECTORY_URITRANSFORMER = "uri-transformer";
 
   /**
-   * The name of the XML attribute with the <code>base-path</code> used for
-   * the URI of the resources of a {@link #XML_TAG_DIRECTORY directory} to
-   * index.
+   * The name of the XML attribute with the <code>base-path</code> used for the
+   * URI of the resources of a {@link #XML_TAG_DIRECTORY directory} to index.
    */
   public static final String XML_ATR_DIRECTORY_INDEXBASEPATH = "index-base-path";
 
@@ -146,7 +145,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
     }
     // parse filters...
     FilterRuleChainXmlParser filterParser = new FilterRuleChainXmlParser();
-    Map<String, FilterRuleChain> chainMap = filterParser.parseChains(filtersElement);
+    Map<String, FilterRuleChain<String>> chainMap = filterParser.parseChains(filtersElement);
 
     Map<String, ? extends Transformer<String>> transformerMap;
     if (transformersElement == null) {
@@ -175,12 +174,12 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
           setEncoding(encoding);
           // set filter...
           String filterId = element.getAttribute(XML_ATR_DIRECTORY_FILTER);
-          FilterRuleChain chain = chainMap.get(filterId);
+          FilterRuleChain<String> chain = chainMap.get(filterId);
           if (chain == null) {
             throw new IllegalArgumentException("Directory (" + path + ") points to filter ("
                 + filterId + ") that does NOT exist!");
           }
-          setFilter(FileFilterAdapter.convertStringFilter(chain));
+          setFilter(new FileStringFilterAdapter(chain));
           // set transformer/rewriter
           Transformer<String> urlRewriter = null;
           if (element.hasAttribute(XML_ATR_DIRECTORY_URITRANSFORMER)) {
@@ -192,7 +191,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
             }
           }
           setUriRewriter(urlRewriter);
-          path = FileUtil.getInstance().normalizePath(path);
+          path = FileUtilImpl.getInstance().normalizePath(path);
           File directory = new File(path);
           if (directory.isDirectory()) {
             String relativePath = element.getAttribute(XML_ATR_DIRECTORY_INDEXBASEPATH);

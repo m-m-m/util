@@ -8,10 +8,11 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.StringTokenizer;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
-import net.sf.mmm.util.reflect.CollectionReflectionUtil;
+import net.sf.mmm.util.lang.api.StringTokenizer;
+import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueParseGenericException;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
@@ -39,9 +40,9 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
   }
 
   /**
-   * This method gets the {@link CollectionReflectionUtil} instance to use.
+   * This method gets the {@link CollectionReflectionUtilImpl} instance to use.
    * 
-   * @return the {@link CollectionReflectionUtil} to use.
+   * @return the {@link CollectionReflectionUtilImpl} to use.
    */
   protected CollectionReflectionUtil getCollectionReflectionUtil() {
 
@@ -66,7 +67,7 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
 
     super.doInitialize();
     if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtil.getInstance();
+      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
   }
 

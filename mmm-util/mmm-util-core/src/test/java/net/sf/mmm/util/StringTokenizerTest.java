@@ -12,6 +12,8 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.lang.api.StringTokenizer;
+
 /**
  * This is the test-case for {@link StringTokenizer}.
  * 

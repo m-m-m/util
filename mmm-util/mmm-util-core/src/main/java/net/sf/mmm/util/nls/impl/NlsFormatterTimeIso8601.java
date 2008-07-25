@@ -6,11 +6,11 @@ package net.sf.mmm.util.nls.impl;
 import java.util.Calendar;
 import java.util.Locale;
 
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
- * using {@link Iso8601Util}.
+ * using {@link Iso8601UtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,7 +33,7 @@ public class NlsFormatterTimeIso8601 extends AbstractNlsFormatterDate {
   @Override
   protected void format(Calendar calendar, Locale locale, Appendable buffer) {
 
-    Iso8601Util.getInstance().formatTime(calendar, true, buffer);
+    Iso8601UtilImpl.getInstance().formatTime(calendar, true, buffer);
   }
 
 }

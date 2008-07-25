@@ -3,14 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.model.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.ContentModelService;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test-case for {@link CoreContentModelService}.
@@ -28,6 +32,7 @@ public class CoreContentModelServiceTest {
   }
 
   @Test
+  @Ignore
   public void testModelService() throws Exception {
 
     CoreContentModelService modelService = new CoreContentModelService();

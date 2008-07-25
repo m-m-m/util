@@ -6,8 +6,10 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
@@ -30,14 +32,14 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
    */
   public ValueConverterToString() {
 
-    this(Iso8601Util.getInstance(), StringUtil.getInstance());
+    this(Iso8601UtilImpl.getInstance(), StringUtilImpl.getInstance());
   }
 
   /**
    * The constructor.
    * 
    * @param iso8601Util is the {@link Iso8601Util} to use.
-   * @param stringUtil is the {@link StringUtil} to use.
+   * @param stringUtil is the {@link StringUtilImpl} to use.
    */
   public ValueConverterToString(Iso8601Util iso8601Util, StringUtil stringUtil) {
 
@@ -57,9 +59,9 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
   }
 
   /**
-   * This method gets the {@link StringUtil} to use.
+   * This method gets the {@link StringUtilImpl} to use.
    * 
-   * @return the {@link StringUtil} instance.
+   * @return the {@link StringUtilImpl} instance.
    */
   protected StringUtil getStringUtil() {
 

@@ -15,10 +15,11 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.util.StreamReaderDelegate;
 
-import net.sf.mmm.util.io.StreamUtil;
+import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.resource.DataResource;
-import net.sf.mmm.util.xml.StaxUtil;
 import net.sf.mmm.util.xml.XmlUtil;
+import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.base.StaxUtilImpl;
 
 /**
  * This is an implementation of the {@link XMLStreamReader} interface that
@@ -138,7 +139,7 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
   public StaxUtil getStaxUtil() {
 
     if (this.staxUtil == null) {
-      this.staxUtil = StaxUtil.getInstance();
+      this.staxUtil = StaxUtilImpl.getInstance();
     }
     return this.staxUtil;
   }
@@ -257,7 +258,7 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
           }
           InputStream textInputStream = includeResource.openStream();
           Reader reader = new InputStreamReader(textInputStream, charset);
-          this.includeText = StreamUtil.getInstance().read(reader);
+          this.includeText = StreamUtilImpl.getInstance().read(reader);
           return XMLStreamConstants.CHARACTERS;
         } else {
           throw new XMLStreamException("Unsupported XInclude parse type:" + parse);

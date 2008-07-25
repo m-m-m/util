@@ -19,10 +19,10 @@ import net.sf.mmm.term.api.IllegalArgumentCountException;
 import net.sf.mmm.term.api.IllegalArgumentTypeException;
 import net.sf.mmm.term.api.OperatorPriority;
 import net.sf.mmm.term.base.BasicFunction;
-import net.sf.mmm.util.BasicUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.reflect.api.Arguments;
 import net.sf.mmm.util.reflect.api.Signature;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
@@ -286,7 +286,7 @@ public class GenericFunction extends BasicFunction {
       throws FunctionException {
 
     try {
-      return ReflectionUtil.getInstance().getStaticField(partialFunction, fieldName, fieldType,
+      return ReflectionUtilImpl.getInstance().getStaticField(partialFunction, fieldName, fieldType,
           true, true, true);
     } catch (Throwable e) {
       throw new FunctionException(e, NlsBundleTermCore.ERR_FCT_FIELD, partialFunction, this,
@@ -311,7 +311,7 @@ public class GenericFunction extends BasicFunction {
     }
     // check if operator is valid...
     String operator = getStaticField(partialFunction, FIELD_NAME_SYMBOL, String.class);
-    if (!BasicUtil.getInstance().isEqual(this.symbol, operator)) {
+    if (!BasicUtilImpl.getInstance().isEqual(this.symbol, operator)) {
       throw new FunctionException(NlsBundleTermCore.ERR_FCT_WRONG_SYMBOL, partialFunction, this,
           operator);
     }

@@ -50,11 +50,11 @@
  * reverse lookup to get the technical key. Then we can lookup the proper
  * message in the according bundle to translate it to the according locale.<br>
  * All you have to do is creating a subclass of
- * <code>{@link net.sf.mmm.util.nls.AbstractResourceBundle}</code> that declares 
+ * <code>{@link net.sf.mmm.util.nls.base.AbstractResourceBundle}</code> that declares 
  * public string constants.
  * 
  * <pre>
- * public class MyResourceBundle extends {@link net.sf.mmm.util.nls.AbstractResourceBundle} {
+ * public class MyResourceBundle extends {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} {
  *   public static final String MSG_SAY_HI = "Hi {0}! How are you?";
  *   public static final String ERR_LOGIN_IN_USE = "Sorry. The login \"{0}\" is " +
  *     "already in use. Please choose a different login.";
@@ -68,17 +68,17 @@
  * <p>
  * <code>&nbsp;&nbsp;String usersName = "Lilli";</code><br>
  * <code>&nbsp;&nbsp;{@link net.sf.mmm.util.nls.api.NlsMessage} msg = 
- * {@link net.sf.mmm.util.nls.NlsAccess#getFactory()}.<!--
+ * {@link net.sf.mmm.util.nls.api.NlsAccess#getFactory()}.<!--
  * -->{@link net.sf.mmm.util.nls.api.NlsMessageFactory#create(String, Object...) create}<!--
  * -->(MyResourceBundle.MSG_SAY_HI, usersName);</code>
  * </p>
  * 
- * For exceptions there is additional support via <code>{@link net.sf.mmm.util.nls.NlsException}</code>
- * and <code>{@link net.sf.mmm.util.nls.NlsRuntimeException}</code>. Simply
+ * For exceptions there is additional support via <code>{@link net.sf.mmm.util.nls.api.NlsException}</code>
+ * and <code>{@link net.sf.mmm.util.nls.api.NlsRuntimeException}</code>. Simply
  * derive your declared exceptions from one of these classes:
  * 
  * <pre>
- * public class IllegalLoginException extends {@link net.sf.mmm.util.nls.NlsException} {
+ * public class IllegalLoginException extends {@link net.sf.mmm.util.nls.api.NlsException} {
  *   public IllegalLoginException(String usedLogin) {
  *     super(MyResourceBundle.ERR_LOGIN_IN_USE, usedLogin);
  *   }
@@ -92,7 +92,7 @@
  * <code>{@link net.sf.mmm.util.nls.api.NlsTemplateResolver}</code> 
  * as argument. You can use {@link net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl}
  * as implementation. All you need to do is register all of your 
- * {@link net.sf.mmm.util.nls.AbstractResourceBundle}s (such as 
+ * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}s (such as 
  * <code>MyResourceBundle</code>) and provide them at construction. 
  * 
  * <h3>Conclusion</h3>

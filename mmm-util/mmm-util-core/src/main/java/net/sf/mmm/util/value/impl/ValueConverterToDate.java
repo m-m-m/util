@@ -6,7 +6,8 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
@@ -27,7 +28,7 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
   public ValueConverterToDate() {
 
     super();
-    this.iso8601Util = Iso8601Util.getInstance();
+    this.iso8601Util = Iso8601UtilImpl.getInstance();
   }
 
   /**

@@ -9,8 +9,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
- * This is an ugly factory pattern implementation used to create instances of
- * {@link NlsMessage} and allowing to exchange the default implementation.
+ * This is the implementation of the {@link NlsMessageFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

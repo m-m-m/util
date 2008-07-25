@@ -3,8 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
+import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
@@ -26,13 +27,13 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
   public ValueConverterToNumber() {
 
     super();
-    this.mathUtil = MathUtil.getInstance();
+    this.mathUtil = MathUtilImpl.getInstance();
   }
 
   /**
    * The constructor.
    * 
-   * @param mathUtil is the {@link MathUtil} to use.
+   * @param mathUtil is the {@link MathUtilImpl} to use.
    */
   public ValueConverterToNumber(MathUtil mathUtil) {
 
@@ -41,9 +42,9 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
   }
 
   /**
-   * This method gets the {@link MathUtil} to use.
+   * This method gets the {@link MathUtilImpl} to use.
    * 
-   * @return the {@link MathUtil}.
+   * @return the {@link MathUtilImpl}.
    */
   protected MathUtil getMathUtil() {
 

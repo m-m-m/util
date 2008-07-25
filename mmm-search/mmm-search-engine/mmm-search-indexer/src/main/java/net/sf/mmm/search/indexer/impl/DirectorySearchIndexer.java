@@ -23,8 +23,8 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
-import net.sf.mmm.util.component.ResourceMissingException;
-import net.sf.mmm.util.file.FileUtil;
+import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.transformer.Transformer;
 
 /**
@@ -329,7 +329,7 @@ public class DirectorySearchIndexer {
     String filename = file.getName();
     String fullPath = relativePath + "/" + filename;
     long fileSize = file.length();
-    String extension = FileUtil.getInstance().getExtension(filename);
+    String extension = FileUtilImpl.getInstance().getExtension(filename);
     MutableSearchEntry entry = this.indexer.createEntry();
     String uri = fullPath;
     if (this.uriRewriter != null) {

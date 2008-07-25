@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.base;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.component.ResourceMissingException;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**

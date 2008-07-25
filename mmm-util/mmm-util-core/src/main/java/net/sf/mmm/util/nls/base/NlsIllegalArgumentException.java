@@ -3,11 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import net.sf.mmm.util.nls.NlsRuntimeException;
+import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * A {@link NlsIllegalArgumentException} is analog to an
- * {@link IllegalArgumentException} but with native language support.
+ * {@link IllegalArgumentException} but with true native language support.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

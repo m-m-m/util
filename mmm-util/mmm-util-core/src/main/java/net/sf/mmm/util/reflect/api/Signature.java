@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.Method;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This class represents a
@@ -64,7 +64,7 @@ public class Signature {
    */
   public Signature(Object... arguments) {
 
-    this(ReflectionUtil.getInstance().getClasses(arguments));
+    this(ReflectionUtilImpl.getInstance().getClasses(arguments));
   }
 
   /**

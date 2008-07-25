@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
@@ -25,13 +26,13 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
    */
   public ValueConverterToEnum() {
 
-    this(StringUtil.getInstance());
+    this(StringUtilImpl.getInstance());
   }
 
   /**
    * The constructor.
    * 
-   * @param stringUtil is the {@link StringUtil} to use.
+   * @param stringUtil is the {@link StringUtilImpl} to use.
    */
   public ValueConverterToEnum(StringUtil stringUtil) {
 
@@ -40,9 +41,9 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
   }
 
   /**
-   * This method gets the {@link StringUtil} to use.
+   * This method gets the {@link StringUtilImpl} to use.
    * 
-   * @return the {@link StringUtil} instance.
+   * @return the {@link StringUtilImpl} instance.
    */
   protected StringUtil getStringUtil() {
 

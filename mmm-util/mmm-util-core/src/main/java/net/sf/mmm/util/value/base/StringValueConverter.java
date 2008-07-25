@@ -8,10 +8,11 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.component.AlreadyInitializedException;
-import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.component.api.AlreadyInitializedException;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
@@ -58,7 +59,7 @@ public class StringValueConverter extends AbstractGenericValueConverter<String> 
       synchronized (StringValueConverter.class) {
         if (instance == null) {
           instance = new StringValueConverter();
-          instance.setIso8601Util(Iso8601Util.getInstance());
+          instance.setIso8601Util(Iso8601UtilImpl.getInstance());
         }
       }
     }
@@ -106,7 +107,7 @@ public class StringValueConverter extends AbstractGenericValueConverter<String> 
 
     try {
       Double d = Double.valueOf(numberValue);
-      return MathUtil.getInstance().toSimplestNumber(d);
+      return MathUtilImpl.getInstance().toSimplestNumber(d);
     } catch (NumberFormatException e) {
       throw new WrongValueTypeException(e, numberValue, valueSource, Number.class);
     }
@@ -129,7 +130,7 @@ public class StringValueConverter extends AbstractGenericValueConverter<String> 
       } else if (type.isAssignableFrom(String.class)) {
         result = value;
       } else if ((type == boolean.class) || (type == Boolean.class)) {
-        result = StringUtil.getInstance().parseBoolean(value);
+        result = StringUtilImpl.getInstance().parseBoolean(value);
         if (result == null) {
           throw new WrongValueTypeException(value, valueSource, type);
         }
@@ -177,11 +178,11 @@ public class StringValueConverter extends AbstractGenericValueConverter<String> 
    * given <code>type</code>. It is called from
    * {@link #convertValue(String, Object, Class, Type)} if the given
    * <code>type</code> is unknown. This default implementation simply throws a
-   * new {@link WrongValueTypeException}. You can extend this class and
-   * override this method in order to support the conversion for additional
-   * types. You should first handle the conversion for all value types you like.
-   * Then for all other types you should delegate to the <code>super</code>
-   * method implementation.
+   * new {@link WrongValueTypeException}. You can extend this class and override
+   * this method in order to support the conversion for additional types. You
+   * should first handle the conversion for all value types you like. Then for
+   * all other types you should delegate to the <code>super</code> method
+   * implementation.
    * 
    * @param value is the value to convert.
    * @param type is the type the <code>value</code> should be converted to.

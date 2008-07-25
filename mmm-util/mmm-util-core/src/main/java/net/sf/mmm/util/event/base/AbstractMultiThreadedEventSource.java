@@ -8,8 +8,8 @@ import java.util.concurrent.Executor;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.component.AlreadyInitializedException;
-import net.sf.mmm.util.concurrent.SimpleExecutor;
+import net.sf.mmm.util.component.api.AlreadyInitializedException;
+import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 

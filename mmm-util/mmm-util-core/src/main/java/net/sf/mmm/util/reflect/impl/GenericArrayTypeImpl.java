@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 /**
  * This is an implementation of the {@link GenericArrayType} interface.
  * 
- * @see net.sf.mmm.util.reflect.ReflectionUtil#toType(String)
+ * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

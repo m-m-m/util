@@ -5,8 +5,9 @@ package net.sf.mmm.util.value.base;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.component.AbstractLoggable;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.value.api.ValueConverter;
 
 /**
@@ -33,9 +34,9 @@ public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLog
   }
 
   /**
-   * This method gets the {@link ReflectionUtil} instance to use.
+   * This method gets the {@link ReflectionUtilImpl} instance to use.
    * 
-   * @return the {@link ReflectionUtil} to use.
+   * @return the {@link ReflectionUtilImpl} to use.
    */
   public ReflectionUtil getReflectionUtil() {
 
@@ -60,7 +61,7 @@ public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLog
 
     super.doInitialize();
     if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtil.getInstance();
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
   }
 

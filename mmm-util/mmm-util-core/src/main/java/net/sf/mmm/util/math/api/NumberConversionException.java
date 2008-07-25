@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.math.api;
 
-import net.sf.mmm.util.nls.NlsRuntimeException;
-import net.sf.mmm.util.nls.base.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a numeric value can NOT converted to a

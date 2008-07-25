@@ -15,8 +15,8 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import net.sf.mmm.util.value.api.ValueParseException;
-import net.sf.mmm.util.xml.DomUtil;
-import net.sf.mmm.util.xml.XmlException;
+import net.sf.mmm.util.xml.api.XmlException;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
 
@@ -71,8 +71,8 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     try {
       // TODO: this may cause encoding problems...
-      return DomUtil.parseDocument(new InputSource(new StringReader(valueAsString)))
-          .getDocumentElement();
+      return DomUtilImpl.getInstance().parseDocument(
+          new InputSource(new StringReader(valueAsString))).getDocumentElement();
     } catch (XmlException e) {
       throw new ValueParseStringException(valueAsString, VALUE_TYPE, VALUE_NAME, e);
     }
@@ -84,7 +84,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   @Override
   protected Element fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
-    Document doc = DomUtil.createDocument();
+    Document doc = DomUtilImpl.getInstance().createDocument();
     getStaxUtil().writeToDom(xmlReader, doc);
     return doc.getDocumentElement();
   }
@@ -97,7 +97,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
 
     try {
       Writer writer = new StringWriter();
-      DomUtil.writeXml(value, writer, false);
+      DomUtilImpl.getInstance().writeXml(value, writer, false);
       return writer.toString();
     } catch (XmlException e) {
       return "toString failed for " + value;
@@ -110,7 +110,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   @Override
   public boolean isEqual(Element value1, Element value2) {
 
-    return DomUtil.isEqual(value1, value2);
+    return DomUtilImpl.getInstance().isEqual(value1, value2);
   }
 
 }

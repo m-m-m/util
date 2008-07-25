@@ -5,7 +5,7 @@
  * Provides utilities for dealing with files.
  * <h2>File Utilities</h2> 
  * This package contains utilities that allow easy and efficient operations 
- * related to {@link java.io.File}. The {@link net.sf.mmm.util.file.FileUtil} 
+ * related to {@link java.io.File}. The {@link net.sf.mmm.util.file.base.FileUtilImpl} 
  * allows to copy or delete files and directories (recursively), to collect 
  * files that match a given path-pattern and many other useful tasks.<br>
  */

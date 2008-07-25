@@ -26,7 +26,7 @@ import net.sf.mmm.term.impl.function.FctOr;
 import net.sf.mmm.term.impl.function.FctSubtract;
 import net.sf.mmm.term.impl.function.FunctionElse;
 import net.sf.mmm.term.impl.function.FunctionSwitch;
-import net.sf.mmm.util.nls.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is a dummy implementation of the

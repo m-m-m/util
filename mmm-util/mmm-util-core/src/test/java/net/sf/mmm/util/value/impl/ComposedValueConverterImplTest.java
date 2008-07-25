@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
@@ -47,7 +47,7 @@ public class ComposedValueConverterImplTest {
     Date date = calendar.getTime();
     value = converter.convert(calendar, valueSource, Date.class);
     assertEquals(date, value);
-    String dateString = Iso8601Util.getInstance().formatDateTime(date);
+    String dateString = Iso8601UtilImpl.getInstance().formatDateTime(date);
     value = converter.convert(dateString, valueSource, Date.class);
     assertEquals(date, value);
     value = converter.convert(Long.valueOf(date.getTime()), valueSource, Date.class);
@@ -55,7 +55,7 @@ public class ComposedValueConverterImplTest {
     // convert to calendar
     value = converter.convert(date, valueSource, Calendar.class);
     assertEquals(calendar, value);
-    String calendarString = Iso8601Util.getInstance().formatDateTime(calendar);
+    String calendarString = Iso8601UtilImpl.getInstance().formatDateTime(calendar);
     value = converter.convert(calendarString, valueSource, Calendar.class);
     assertEquals(calendar.getTime(), ((Calendar) value).getTime());
     // convert to string

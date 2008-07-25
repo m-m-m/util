@@ -19,10 +19,9 @@ import net.sf.mmm.util.reflect.api.Manifest;
 
 /**
  * This class loads all {@link Manifest}s from your classpath. After
- * construction an instance of this class allows you to
- * {@link #getManifests() get} the list of {@link Manifest}s. This allows you
- * to determine details (e.g. the name and version) about the libraries in your
- * classpath.
+ * construction an instance of this class allows you to {@link #getManifests()
+ * get} the list of {@link Manifest}s. This allows you to determine details
+ * (e.g. the name and version) about the libraries in your classpath.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -31,11 +30,8 @@ public class ManifestLoader {
   /** the class-path to the manifest. */
   private static final String MANIFEST_PATH = "META-INF/MANIFEST.MF";
 
-  /** the default {@link #encoding} */
+  /** the default encoding. */
   public static final String DEFAULT_ENCODING = "UTF-8";
-
-  /** the encoding used to read the manifest files */
-  private final String encoding;
 
   /** the list of the manifests */
   private final List<Manifest> manifests;
@@ -61,7 +57,6 @@ public class ManifestLoader {
   public ManifestLoader(String encoding) throws IOException {
 
     super();
-    this.encoding = encoding;
     List<Manifest> mutableList = new ArrayList<Manifest>();
     Enumeration<URL> urls = Thread.currentThread().getContextClassLoader().getResources(
         MANIFEST_PATH);
@@ -69,7 +64,7 @@ public class ManifestLoader {
       URL url = urls.nextElement();
       InputStream inputStream = url.openStream();
       try {
-        InputStreamReader reader = new InputStreamReader(inputStream, DEFAULT_ENCODING);
+        InputStreamReader reader = new InputStreamReader(inputStream, encoding);
         Properties properties = new Properties();
         properties.load(reader);
         Map<String, String> map = new HashMap<String, String>();

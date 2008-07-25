@@ -25,8 +25,8 @@ import java.util.UUID;
  * </ul>
  * 
  * @see NlsMessage
- * @see net.sf.mmm.util.nls.NlsException
- * @see net.sf.mmm.util.nls.NlsRuntimeException
+ * @see net.sf.mmm.util.nls.api.NlsException
+ * @see net.sf.mmm.util.nls.api.NlsRuntimeException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

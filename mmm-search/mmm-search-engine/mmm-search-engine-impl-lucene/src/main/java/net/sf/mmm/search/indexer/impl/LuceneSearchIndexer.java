@@ -24,7 +24,7 @@ import net.sf.mmm.search.base.SearchPropertyValueInvalidException;
 import net.sf.mmm.search.base.SearchRemoveFailedException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
-import net.sf.mmm.util.component.ResourceMissingException;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 
 /**
  * This is the implementation of the

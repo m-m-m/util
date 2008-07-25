@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter.base;
 
-import net.sf.mmm.util.Conjunction;
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.lang.api.Conjunction;
 
 /**
  * This is an implementation of the {@link Filter} interface that combines a

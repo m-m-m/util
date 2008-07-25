@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
 
 import net.sf.mmm.search.base.SearchConfigurator;
 import net.sf.mmm.search.impl.LuceneSearchConfigurator;
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This class represents a search-indexer using lucene as underlying
@@ -84,7 +84,7 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
       throw e;
     }
     LuceneSearchConfigurator configurator = new LuceneSearchConfigurator();
-    Element searchEngineElement = DomUtil.requireFirstChildElement(element,
+    Element searchEngineElement = DomUtilImpl.requireFirstChildElement(element,
         SearchConfigurator.XML_TAG_SEARCH_ENGINE);
     LuceneSearchIndexer luceneIndexer = configurator.createSearchIndexer(searchEngineElement);
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);

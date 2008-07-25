@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.impl.type;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.value.api.type.Duration;
 import net.sf.mmm.value.api.type.Time;
 
@@ -126,14 +126,14 @@ public class DurationImpl implements Duration {
       result.append(Long.toString(this.days));
       result.append("#");
     }
-    result.append(StringUtil.getInstance().padNumber(this.hours, 2));
+    result.append(StringUtilImpl.getInstance().padNumber(this.hours, 2));
     result.append(":");
-    result.append(StringUtil.getInstance().padNumber(this.minutes, 2));
+    result.append(StringUtilImpl.getInstance().padNumber(this.minutes, 2));
     result.append(":");
-    result.append(StringUtil.getInstance().padNumber(this.seconds, 2));
+    result.append(StringUtilImpl.getInstance().padNumber(this.seconds, 2));
     if (this.milliseconds == 0) {
       result.append(".");
-      result.append(StringUtil.getInstance().padNumber(this.milliseconds, 4));
+      result.append(StringUtilImpl.getInstance().padNumber(this.milliseconds, 4));
     }
     return result.toString();
   }

@@ -20,16 +20,18 @@ import java.util.concurrent.ExecutionException;
 import org.apache.commons.logging.impl.NoOpLog;
 import org.junit.Test;
 
-import net.sf.mmm.util.BasicUtil;
-import net.sf.mmm.util.concurrent.SimpleExecutor;
+import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
+import net.sf.mmm.util.io.api.DevZero;
+import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
-import net.sf.mmm.util.io.base.DevZero;
+import net.sf.mmm.util.io.base.StreamUtilImpl;
+import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
 
 /**
- * This is the test-case for {@link StreamUtil}.
+ * This is the test-case for {@link StreamUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -38,7 +40,7 @@ public class StreamUtilTest {
 
   public StreamUtil getStreamUtil() {
 
-    return StreamUtil.getInstance();
+    return StreamUtilImpl.getInstance();
   }
 
   @Test
@@ -69,7 +71,7 @@ public class StreamUtilTest {
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     long bytes = getStreamUtil().transfer(inStream, outStream, true);
     assertEquals(len, bytes);
-    assertTrue(BasicUtil.getInstance().isDeepEqual(data, outStream.toByteArray()));
+    assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }
 
   @Test
@@ -85,7 +87,7 @@ public class StreamUtilTest {
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(inStream, outStream, true);
     Long bytes = transferrer.get();
     assertEquals(len, bytes.longValue());
-    assertTrue(BasicUtil.getInstance().isDeepEqual(data, outStream.toByteArray()));
+    assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }
 
   @Test
@@ -104,7 +106,7 @@ public class StreamUtilTest {
     Long bytes = transferrer.get();
     assertEquals(len, bytes.longValue());
     assertEquals(len, callback.bytesCompleted.longValue());
-    assertTrue(BasicUtil.getInstance().isDeepEqual(data, outStream.toByteArray()));
+    assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }
 
   @Test
@@ -167,7 +169,7 @@ public class StreamUtilTest {
     };
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     Callback callback = new Callback();
-    StreamUtil streamUtil = new StreamUtil();
+    StreamUtilImpl streamUtil = new StreamUtilImpl();
     streamUtil.setExecutor(SimpleExecutor.INSTANCE);
     streamUtil.setLogger(new NoOpLog());
     streamUtil.setByteArrayPool(NoByteArrayPool.INSTANCE);

@@ -5,10 +5,14 @@ package net.sf.mmm.util.value.impl;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.date.Iso8601Util;
-import net.sf.mmm.util.math.MathUtil;
-import net.sf.mmm.util.reflect.CollectionReflectionUtil;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.math.api.MathUtil;
+import net.sf.mmm.util.math.base.MathUtilImpl;
+import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 
 /**
  * This is a default {@link net.sf.mmm.util.value.api.ComposedValueConverter}.
@@ -63,9 +67,9 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   }
 
   /**
-   * This method gets the {@link MathUtil} to use.
+   * This method gets the {@link MathUtilImpl} to use.
    * 
-   * @return the {@link MathUtil}.
+   * @return the {@link MathUtilImpl}.
    */
   protected MathUtil getMathUtil() {
 
@@ -73,9 +77,9 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   }
 
   /**
-   * This method sets (injects) the {@link MathUtil} to use.
+   * This method sets (injects) the {@link MathUtilImpl} to use.
    * 
-   * @param mathUtil is the {@link MathUtil} to use.
+   * @param mathUtil is the {@link MathUtilImpl} to use.
    */
   @Resource
   public void setMathUtil(MathUtil mathUtil) {
@@ -85,9 +89,9 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   }
 
   /**
-   * This method gets the {@link StringUtil} to use.
+   * This method gets the {@link StringUtilImpl} to use.
    * 
-   * @return the {@link StringUtil} instance.
+   * @return the {@link StringUtilImpl} instance.
    */
   protected StringUtil getStringUtil() {
 
@@ -132,13 +136,16 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
 
     super.doInitialize();
     if (this.iso8601Util == null) {
-      this.iso8601Util = Iso8601Util.getInstance();
+      this.iso8601Util = Iso8601UtilImpl.getInstance();
     }
     if (this.mathUtil == null) {
-      this.mathUtil = MathUtil.getInstance();
+      this.mathUtil = MathUtilImpl.getInstance();
     }
     if (this.stringUtil == null) {
-      this.stringUtil = StringUtil.getInstance();
+      this.stringUtil = StringUtilImpl.getInstance();
+    }
+    if (this.collectionReflectionUtil == null) {
+      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
     addConverter(new ValueConverterToDate(getIso8601Util()));
     addConverter(new ValueConverterToCalendar(getIso8601Util()));

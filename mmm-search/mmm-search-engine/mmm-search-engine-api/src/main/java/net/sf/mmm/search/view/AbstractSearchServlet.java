@@ -22,8 +22,8 @@ import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
-import net.sf.mmm.util.component.ResourceMissingException;
-import net.sf.mmm.util.file.FileUtil;
+import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.file.base.FileUtilImpl;
 
 /**
  * This is the abstract base implementation of the controller
@@ -98,7 +98,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       if (configPath == null) {
         throw new ResourceMissingException(PARAM_CONFIG_FILE);
       }
-      configPath = FileUtil.getInstance().normalizePath(configPath);
+      configPath = FileUtilImpl.getInstance().normalizePath(configPath);
       File configFile = new File(configPath);
       Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
           configFile);

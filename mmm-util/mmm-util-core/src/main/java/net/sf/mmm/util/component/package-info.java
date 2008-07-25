@@ -8,7 +8,7 @@
  * therefore component-oriented applications.<br>
  * This package provides some common runtime exceptions for typical errors
  * of components (or whatever you call it).<br>
- * Additionally {@link net.sf.mmm.util.component.InitializationState}
+ * Additionally {@link net.sf.mmm.util.component.base.InitializationState}
  * can be used to implement a component that requires strict
  * {@link javax.annotation.PostConstruct initialization} and wants to ensure 
  * that some methods have to be called before and others after initialization.

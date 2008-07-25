@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-import net.sf.mmm.util.reflect.ReflectionUtil;
 
 /**
  * This class represents an argument list. It is a container for an

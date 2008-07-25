@@ -13,7 +13,7 @@ package net.sf.mmm.util.math.api;
  * {@link NumberType#valueOf(String) by converting an given number}.<br>
  * This is a class and NOT an {@link Enum} to be extensible.
  * 
- * @see net.sf.mmm.util.math.MathUtil#getNumberType(Class)
+ * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
  * @param <NUMBER> is the generic type of the
  *        {@link #getNumberClass() represented number-class}.
  * 

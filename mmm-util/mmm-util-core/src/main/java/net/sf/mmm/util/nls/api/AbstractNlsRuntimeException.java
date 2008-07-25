@@ -14,7 +14,7 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * This is an abstract base implementation of an unchecked exception with real
  * <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
- * Please prefer extending {@link net.sf.mmm.util.nls.NlsRuntimeException}
+ * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsRuntimeException}
  * instead of this class.<br>
  * <b>INFORMATION:</b><br>
  * Unchecked exceptions should be used for technical errors and should only

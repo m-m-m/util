@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text;
 
+
 /**
  * This is the abstract base class for a rule used to
  * {@link #transform(String, String) replace} a given string.
@@ -12,14 +13,13 @@ package net.sf.mmm.util.text;
 public abstract class TransformerRule {
 
   /**
-   * @see Singularizer#transform(String)
+   * @see net.sf.mmm.util.text.api.Singularizer#transform(String)
    * 
    * @param string is the original string to modify.
    * @param stringLowerCase is the <code>string</code> in
    *        {@link String#toLowerCase() lower-case}.
-   * @return the replaced <code>string</code> or <code>null</code> if this
-   *         rule does NOT apply and the <code>string</code> should NOT be
-   *         replaced.
+   * @return the replaced <code>string</code> or <code>null</code> if this rule
+   *         does NOT apply and the <code>string</code> should NOT be replaced.
    */
   public abstract String transform(String string, String stringLowerCase);
 

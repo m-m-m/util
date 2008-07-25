@@ -12,7 +12,7 @@ package net.sf.mmm.util.io.api;
  * different {@link Thread}. Please ensure that your implementation is
  * thread-safe.
  * 
- * @see net.sf.mmm.util.io.StreamUtil#transferAsync(java.io.InputStream,
+ * @see net.sf.mmm.util.io.base.StreamUtilImpl#transferAsync(java.io.InputStream,
  *      java.io.OutputStream, boolean, TransferCallback)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

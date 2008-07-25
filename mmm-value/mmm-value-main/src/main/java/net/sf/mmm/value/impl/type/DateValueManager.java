@@ -11,8 +11,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.api.ValueParseException;
 import net.sf.mmm.value.api.ValueParseStringException;
 import net.sf.mmm.value.base.AbstractValueManager;
@@ -88,7 +88,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   public Date fromString(String valueAsString) throws ValueParseException {
 
     try {
-      return Iso8601Util.getInstance().parseDate(valueAsString);
+      return Iso8601UtilImpl.getInstance().parseDate(valueAsString);
     } catch (Exception e) {
       throw new ValueParseStringException(valueAsString, VALUE_TYPE, VALUE_NAME, e);
     }
@@ -132,7 +132,7 @@ public class DateValueManager extends AbstractValueManager<Date> {
   @Override
   protected String toStringNotNull(Date value) {
 
-    return Iso8601Util.getInstance().formatDateTime(value);
+    return Iso8601UtilImpl.getInstance().formatDateTime(value);
   }
 
   /**
@@ -151,15 +151,15 @@ public class DateValueManager extends AbstractValueManager<Date> {
     xmlWriter.writeAttribute(XML_ATR_DATE_DAY, Integer.toString(day));
     int hour = calendar.get(Calendar.HOUR_OF_DAY);
     if (hour != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtil.getInstance().padNumber(hour, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_HOUR, StringUtilImpl.getInstance().padNumber(hour, 2));
     }
     int min = calendar.get(Calendar.MINUTE);
     if (min != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtil.getInstance().padNumber(min, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_MINUTE, StringUtilImpl.getInstance().padNumber(min, 2));
     }
     int sec = calendar.get(Calendar.SECOND);
     if (sec != 0) {
-      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtil.getInstance().padNumber(sec, 2));
+      xmlWriter.writeAttribute(XML_ATR_TIME_SECOND, StringUtilImpl.getInstance().padNumber(sec, 2));
     }
   }
 

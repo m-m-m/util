@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.term.impl.function;
 
-import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.math.base.MathUtilImpl;
 
 /**
  * This class partially implements a binary function that builds the sum of its
@@ -195,7 +195,7 @@ public class FctAddNumeric extends FctAdd {
   public static Number add(Number argument1, Number argument2) {
 
     Double sum = Double.valueOf(argument1.doubleValue() + argument2.doubleValue());
-    return MathUtil.getInstance().toSimplestNumber(sum);
+    return MathUtilImpl.getInstance().toSimplestNumber(sum);
   }
 
 }

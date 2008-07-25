@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 
 /**
  * This is a simple implementation of the {@link TransformerRule}. If the given
@@ -44,7 +44,7 @@ public class SuffixTransformerRule extends TransformerRule {
   public String transform(String string, String stringLowerCase) {
 
     if (stringLowerCase.endsWith(this.sourceSuffix)) {
-      return StringUtil.getInstance().replaceSuffixWithCase(string, this.sourceSuffix.length(),
+      return StringUtilImpl.getInstance().replaceSuffixWithCase(string, this.sourceSuffix.length(),
           this.destinationSuffix);
     }
     return null;

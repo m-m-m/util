@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 import net.sf.mmm.value.api.ValueManager;
 import net.sf.mmm.value.api.ValueService;
 import net.sf.mmm.value.impl.type.XmlValueManager;

@@ -12,7 +12,7 @@ import org.w3c.dom.Element;
 import net.sf.mmm.search.base.AbstractSearchConfigurator;
 import net.sf.mmm.search.engine.impl.LuceneSearchEngine;
 import net.sf.mmm.search.indexer.impl.LuceneSearchIndexer;
-import net.sf.mmm.util.xml.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This is the implementation of the
@@ -74,7 +74,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private String getIndexPath(Element element) {
 
-    Element indexElement = DomUtil.requireFirstChildElement(element, XML_TAG_INDEX);
+    Element indexElement = DomUtilImpl.requireFirstChildElement(element, XML_TAG_INDEX);
     String indexPath = indexElement.getAttribute(XML_ATR_INDEX_PATH);
     if (indexPath.length() == 0) {
       throw new IllegalArgumentException("Missing attribute " + XML_ATR_INDEX_PATH + " in element "
@@ -95,7 +95,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private Analyzer createAnalyzer(Element element) {
 
-    Element analyzerElement = DomUtil.getFirstChildElement(element, XML_TAG_ANALYZER);
+    Element analyzerElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_ANALYZER);
     Analyzer analyzer = null;
     if (analyzerElement != null) {
       if (analyzerElement.hasAttribute(XML_ATR_ANALYZER_CLASS)) {
@@ -122,11 +122,11 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private boolean isIgnoreLeadingWildcards(Element element) {
 
-    Element queryElement = DomUtil.getFirstChildElement(element, XML_TAG_SEARCH);
+    Element queryElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_SEARCH);
     if (queryElement == null) {
       return true;
     } else {
-      return !DomUtil.getAttributeAsBoolean(queryElement, XML_ATR_SEARCH_LEADINGWILDCARD, false);
+      return !DomUtilImpl.getAttributeAsBoolean(queryElement, XML_ATR_SEARCH_LEADINGWILDCARD, false);
     }
   }
 
@@ -139,11 +139,11 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private boolean isUpdate(Element element) {
 
-    Element indexElement = DomUtil.getFirstChildElement(element, XML_TAG_INDEX);
+    Element indexElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_INDEX);
     if (indexElement == null) {
       return false;
     } else {
-      return DomUtil.getAttributeAsBoolean(indexElement, XML_ATR_INDEX_UPDATE, false);
+      return DomUtilImpl.getAttributeAsBoolean(indexElement, XML_ATR_INDEX_UPDATE, false);
     }
   }
 

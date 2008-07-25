@@ -1,0 +1,65 @@
+/* $Id: $
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.contenttype.base;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.contenttype.api.ContentType;
+import net.sf.mmm.util.contenttype.api.ContentTypeManager;
+import net.sf.mmm.util.nls.base.DuplicateObjectException;
+
+/**
+ * This is the abstract base implementation of the {@link ContentTypeManager}
+ * interface.
+ * 
+ * @param <TYPE> is the generic type of the {@link ContentType} implementation
+ *        to manage.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public abstract class AbstractContentTypeManager<TYPE extends ContentType<?>> extends
+    AbstractLoggable implements ContentTypeManager {
+
+  /** @see #getContentType(String) */
+  private final Map<String, TYPE> id2contentTypeMap;
+
+  /**
+   * The constructor.
+   */
+  public AbstractContentTypeManager() {
+
+    super();
+    this.id2contentTypeMap = new HashMap<String, TYPE>();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public TYPE getContentType(String id) {
+
+    return this.id2contentTypeMap.get(id);
+  }
+
+  /**
+   * This method registers the given <code>contentType</code> in this
+   * {@link ContentTypeManager}.
+   * 
+   * @see #getContentType(String)
+   * 
+   * @param contentType is the {@link ContentType} to add.
+   * @throws DuplicateObjectException if a {@link ContentType} with the same
+   *         {@link ContentType#getId() ID} has already been registered.
+   */
+  protected void addContentType(TYPE contentType) throws DuplicateObjectException {
+
+    String id = contentType.getId();
+    if (this.id2contentTypeMap.containsKey(id)) {
+      throw new DuplicateObjectException(contentType, id);
+    }
+    this.id2contentTypeMap.put(id, contentType);
+  }
+
+}

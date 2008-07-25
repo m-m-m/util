@@ -13,7 +13,7 @@
  * sub-interfaces. Unlike {@link java.lang.Class#forName(String)} there is no 
  * build in way to create a generic {@link java.lang.reflect.Type} from a given 
  * string. This lack is covered by 
- * {@link net.sf.mmm.util.reflect.ReflectionUtil#toType(String)} that uses the 
+ * {@link net.sf.mmm.util.reflect.base.ReflectionUtilImpl#toType(String)} that uses the 
  * dummy type-implementations of this package.
  */
 package net.sf.mmm.util.reflect.impl;
