@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.value.validator.api;
 
-import net.sf.mmm.util.nls.NlsException;
+import net.sf.mmm.util.nls.api.NlsException;
 import net.sf.mmm.util.nls.api.AbstractNlsException;
 
 /**
