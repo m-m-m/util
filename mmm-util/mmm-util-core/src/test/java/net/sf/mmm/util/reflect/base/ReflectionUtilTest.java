@@ -24,6 +24,7 @@ import org.junit.runner.Result;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
+import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.TypeVariableImpl;
 
 /**
@@ -200,7 +201,7 @@ public class ReflectionUtilTest {
 
     // test sub-package functionality
     assertFalse(classNameSet.contains(TypeVariableImpl.class.getName()));
-    classNameSet = util.findClassNames(ReflectionUtilImpl.class.getPackage().getName(), true);
+    classNameSet = util.findClassNames(GenericTypeImpl.class.getPackage().getName(), true);
     assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));
 
     // test JAR files
