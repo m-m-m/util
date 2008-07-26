@@ -28,7 +28,7 @@ public class SearchViewConfigurationTest extends TestCase {
     Locale.setDefault(Locale.US);
     ClasspathResource resource = new ClasspathResource(SearchViewConfigurationTest.class, ".xml",
         true);
-    Element element = DomUtilImpl.parseDocument(resource.openStream()).getDocumentElement();
+    Element element = DomUtilImpl.getInstance().parseDocument(resource.openStream()).getDocumentElement();
     SearchViewConfiguration configuration = new SearchViewConfiguration(element);
     // icon mapping
     assertEquals("pdf.png", configuration.getIconName("pdf"));

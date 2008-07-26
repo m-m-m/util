@@ -12,7 +12,8 @@ import net.sf.mmm.content.model.api.ContentClass;
 import net.sf.mmm.content.model.api.ContentField;
 import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.value.validator.api.ValueValidator;
 
 /**
@@ -212,7 +213,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
 
     this.fieldType = type;
     // TODO use GenericType instead of Type and Class for fieldType/fieldClass
-    this.fieldClass = ReflectionUtil.getInstance().createGenericType(type).getUpperBound();
+    this.fieldClass = ReflectionUtilImpl.getInstance().createGenericType(type).getUpperBound();
     if (this.fieldTypeSpecification == null) {
       if (type instanceof Class) {
         this.fieldTypeSpecification = ((Class<?>) type).getName();

@@ -75,7 +75,8 @@ public class ContentParserXml extends AbstractContentParser {
     ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
-      parserState = MarkupUtil.extractPlainText(line, textBuffer, parserState);
+    	// TODO: use IoC
+      parserState = MarkupUtil.getInstance().extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

@@ -85,7 +85,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   protected Element fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
     Document doc = DomUtilImpl.getInstance().createDocument();
-    getStaxUtil().writeToDom(xmlReader, doc);
+    //getStaxUtil().writeToDom(xmlReader, doc);
     return doc.getDocumentElement();
   }
 

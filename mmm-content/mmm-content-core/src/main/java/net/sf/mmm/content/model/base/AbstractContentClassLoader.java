@@ -13,8 +13,9 @@ import net.sf.mmm.content.model.api.access.ContentFieldReadAccessById;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
 import net.sf.mmm.content.value.base.SmartIdManager;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is the abstract base implementation of the {@link ContentClassLoader}
@@ -72,7 +73,7 @@ public abstract class AbstractContentClassLoader extends AbstractContentObjectMo
    */
   protected ReflectionUtil getReflectionUtil() {
 
-    return ReflectionUtil.getInstance();
+    return ReflectionUtilImpl.getInstance();
   }
 
   /**

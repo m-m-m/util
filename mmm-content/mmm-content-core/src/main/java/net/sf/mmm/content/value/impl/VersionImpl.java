@@ -4,7 +4,8 @@
 package net.sf.mmm.content.value.impl;
 
 import net.sf.mmm.content.value.api.Version;
-import net.sf.mmm.util.BasicUtil;
+import net.sf.mmm.util.lang.api.BasicUtil;
+import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.value.api.ValueParseException;
 import net.sf.mmm.util.value.api.ValueParseGenericException;
 
@@ -404,7 +405,7 @@ public final class VersionImpl implements Version {
       if (getMajorVersion() == otherVersion.getMajorVersion()
           && getMinorVersion() == otherVersion.getMinorVersion()
           && getMicroVersion() == otherVersion.getMicroVersion()) {
-        return (BasicUtil.getInstance()
+        return (BasicUtilImpl.getInstance()
             .isEqual(getVersionSuffix(), otherVersion.getVersionSuffix()));
       }
     }

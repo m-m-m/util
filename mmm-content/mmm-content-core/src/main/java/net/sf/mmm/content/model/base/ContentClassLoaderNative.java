@@ -36,12 +36,13 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.base.AnnotationFilter;
 import net.sf.mmm.util.resource.ClasspathResource;
 import net.sf.mmm.util.resource.DataResource;
-import net.sf.mmm.util.xml.StaxUtil;
+import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.base.StaxUtilImpl;
 
 /**
  * This is an extension of {@link ContentClassLoaderStAX} that also allows to
@@ -116,7 +117,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
   public StaxUtil getStaxUtil() {
 
     if (this.staxUtil == null) {
-      this.staxUtil = StaxUtil.getInstance();
+      this.staxUtil = StaxUtilImpl.getInstance();
     }
     return this.staxUtil;
   }

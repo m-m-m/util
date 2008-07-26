@@ -15,7 +15,7 @@ import net.sf.mmm.content.model.api.FieldModifiers;
 import net.sf.mmm.content.model.api.Modifiers;
 import net.sf.mmm.content.value.api.ContentId;
 import net.sf.mmm.content.value.base.SmartId;
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
  * This class allows to serialize the content-model to XML using StAX.

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.api;
 
-import net.sf.mmm.util.nls.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is the abstract base exception of all failures related to

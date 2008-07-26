@@ -146,7 +146,8 @@ public class ContentParserText extends AbstractContentParser {
       value = parseProperty(line, pattern, group);
       if (value != null) {
         StringBuilder buffer = new StringBuilder(value.length());
-        MarkupUtil.extractPlainText(value, buffer, null);
+        // TODO: use IoC
+        MarkupUtil.getInstance().extractPlainText(value, buffer, null);
         properties.setProperty(propertyName, buffer.toString());
       }
     }

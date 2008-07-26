@@ -11,7 +11,7 @@ import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.model.api.ContentAccessor;
 import net.sf.mmm.content.model.api.ContentModelException;
 import net.sf.mmm.content.security.api.PermissionDeniedException;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * TODO: this class ...

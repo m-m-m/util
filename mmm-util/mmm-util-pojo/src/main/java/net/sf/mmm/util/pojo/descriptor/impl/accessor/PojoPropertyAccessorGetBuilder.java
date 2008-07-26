@@ -6,7 +6,7 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgBuilder;

@@ -5,9 +5,11 @@ package net.sf.mmm.util.pojo.descriptor.base;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.component.AbstractComponent;
-import net.sf.mmm.util.reflect.CollectionReflectionUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is the implementation of the {@link PojoDescriptorConfiguration}
@@ -76,10 +78,10 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
 
     super.doInitialize();
     if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtil.getInstance();
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
     if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtil.getInstance();
+      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
   }
 

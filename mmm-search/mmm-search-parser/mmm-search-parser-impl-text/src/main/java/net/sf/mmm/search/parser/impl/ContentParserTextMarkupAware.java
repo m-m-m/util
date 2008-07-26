@@ -38,7 +38,8 @@ public class ContentParserTextMarkupAware extends ContentParserText {
     String line = bufferedReader.readLine();
     while (line != null) {
       parseLine(properties, line);
-      parserState = MarkupUtil.extractPlainText(line, textBuffer, parserState);
+      // TODO: use IoC
+      parserState = MarkupUtil.getInstance().extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

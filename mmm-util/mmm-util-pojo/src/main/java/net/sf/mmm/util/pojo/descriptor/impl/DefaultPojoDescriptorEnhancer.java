@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 
-import net.sf.mmm.util.component.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
@@ -34,7 +34,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetMapped;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.text.EnglishSingularizer;
-import net.sf.mmm.util.text.Singularizer;
+import net.sf.mmm.util.text.api.Singularizer;
 
 /**
  * This is an implementation of the {@link PojoDescriptorEnhancer} interface

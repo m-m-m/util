@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 
 import javax.annotation.PostConstruct;
 
-import net.sf.mmm.util.component.InitializationState;
+import net.sf.mmm.util.component.base.InitializationState;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**

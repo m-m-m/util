@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.StringUtil;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgBuilder;

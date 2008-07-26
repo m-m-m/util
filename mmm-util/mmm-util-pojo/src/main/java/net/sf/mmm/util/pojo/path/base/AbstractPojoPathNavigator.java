@@ -12,10 +12,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.GenericBean;
+import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.collection.base.CollectionList;
 import net.sf.mmm.util.collection.base.HashKey;
-import net.sf.mmm.util.component.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.nls.base.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.pojo.path.api.PojoPathAccessException;
@@ -31,9 +31,11 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
 import net.sf.mmm.util.pojo.path.api.PojoPathRecognizer;
 import net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException;
 import net.sf.mmm.util.pojo.path.api.PojoPathUnsafeException;
-import net.sf.mmm.util.reflect.CollectionReflectionUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
@@ -175,10 +177,10 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     super.doInitialize();
     if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtil.getInstance();
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
     if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtil.getInstance();
+      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
     if (this.valueConverter == null) {
       DefaultComposedValueConverter converter = new DefaultComposedValueConverter();

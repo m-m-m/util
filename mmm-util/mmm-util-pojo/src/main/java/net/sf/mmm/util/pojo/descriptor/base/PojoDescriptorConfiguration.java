@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import net.sf.mmm.util.reflect.CollectionReflectionUtil;
-import net.sf.mmm.util.reflect.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This interface bundles the configuration for the POJO-introspection.
