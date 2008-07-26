@@ -14,7 +14,8 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.math.api.MathUtil;
+import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
@@ -223,7 +224,7 @@ public abstract class AbstractGenericValueTest {
     Number number = value.getNumber();
     assertEquals(number.toString(), value.getString());
     assertEquals(number, value.getValue(Number.class));
-    number = MathUtil.getInstance().toSimplestNumber(number);
+    number = MathUtilImpl.getInstance().toSimplestNumber(number);
     double doubleValue = number.doubleValue();
     assertEquals(doubleValue, value.getDouble(), 0);
     assertEquals(doubleValue, value.getDouble(null).doubleValue(), 0);

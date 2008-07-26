@@ -5,7 +5,8 @@ package net.sf.mmm.value.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
@@ -121,7 +122,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
       result = null;
     } else {
       if (value instanceof Date) {
-        result = Iso8601Util.getInstance().formatDateTime((Date) value);
+        result = Iso8601UtilImpl.getInstance().formatDateTime((Date) value);
       } else if (value instanceof Class) {
         result = ((Class<?>) value).getName();
       } else {
@@ -159,7 +160,7 @@ public abstract class AbstractStringValue extends AbstractTemplatedGenericValue<
   protected Date parseDate(String dateValue) throws WrongValueTypeException {
 
     try {
-      return Iso8601Util.getInstance().parseDate(dateValue);
+      return Iso8601UtilImpl.getInstance().parseDate(dateValue);
     } catch (Exception e) {
       throw new WrongValueTypeException(e, this, Date.class);
     }

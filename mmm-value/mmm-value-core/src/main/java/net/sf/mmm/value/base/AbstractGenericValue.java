@@ -5,7 +5,8 @@ package net.sf.mmm.value.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.math.MathUtil;
+import net.sf.mmm.util.math.api.MathUtil;
+import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
@@ -400,7 +401,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return MathUtil.getInstance().toSimplestNumber(d);
+      return MathUtilImpl.getInstance().toSimplestNumber(d);
     } catch (NumberFormatException e) {
       throw new WrongValueTypeException(e, this, Number.class);
     }

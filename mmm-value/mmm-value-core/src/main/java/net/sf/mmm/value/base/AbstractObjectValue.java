@@ -5,8 +5,10 @@ package net.sf.mmm.value.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.StringUtil;
-import net.sf.mmm.util.date.Iso8601Util;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
@@ -162,7 +164,7 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
     try {
       return (Boolean) value;
     } catch (ClassCastException e) {
-      Boolean result = StringUtil.getInstance().parseBoolean(value.toString());
+      Boolean result = StringUtilImpl.getInstance().parseBoolean(value.toString());
       if (result == null) {
         throw new WrongValueTypeException(this, Boolean.class);
       } else {
@@ -185,7 +187,7 @@ public abstract class AbstractObjectValue extends AbstractTemplatedGenericValue<
       return (Date) value;
     } catch (ClassCastException e) {
       try {
-        return Iso8601Util.getInstance().parseDate(value.toString());
+        return Iso8601UtilImpl.getInstance().parseDate(value.toString());
       } catch (Exception e1) {
         throw new WrongValueTypeException(this, Date.class);
       }
