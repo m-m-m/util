@@ -8,11 +8,7 @@
 
   <body>
     <h2>Conventions</h2>
-    <macro name="toc">
-      <!-- <param name="section" value="2"/> -->
-      <!-- <param name="fromDepth" value="0"/> -->
-      <!-- <param name="toDepth" value="4"/> -->
-    </macro>
+    <macro name="toc" fromDepth="0"/>
     <section name="General">
       <p>This project aims to produce high quality software. Therefore it is very
       important that the code is well designed, documented and tested.

@@ -9,7 +9,8 @@
   <body>
     <h2>Setup</h2>
     To setup your development environment follow these steps:
-    <macro name="toc"/>
+    <macro name="toc" fromDepth="0">
+    </macro>
       
     <section name="Install JDK 6">
       Install the <a href="http://java.sun.com">Java JDK</a> version 6 (1.6). 
