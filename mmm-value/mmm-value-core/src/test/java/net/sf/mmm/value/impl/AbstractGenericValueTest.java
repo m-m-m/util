@@ -239,7 +239,7 @@ public abstract class AbstractGenericValueTest {
         value.getNumber(greater, greater);
         fail("Exception expected");
       } catch (ValueOutOfRangeException e) {
-        assertSame(value.getObject(), e.getNlsMessage().getArgument(0));
+        assertEquals(value.getValue(Number.class), e.getNlsMessage().getArgument(0));
       }
     }
     Double smaller = Double.valueOf(doubleValue - 1);
@@ -248,7 +248,7 @@ public abstract class AbstractGenericValueTest {
         value.getNumber(smaller, smaller);
         fail("Exception expected");
       } catch (ValueOutOfRangeException e) {
-        assertSame(value.getObject(), e.getNlsMessage().getArgument(0));
+    	  assertEquals(value.getValue(Number.class), e.getNlsMessage().getArgument(0));
       }
     }
     Class type = number.getClass();
