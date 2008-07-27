@@ -366,7 +366,7 @@ public abstract class AbstractGenericValue implements MutableGenericValue {
     T value = getValue(type);
     if ((minimum.doubleValue() > value.doubleValue())
         || (maximum.doubleValue() < value.doubleValue())) {
-      throw new ValueOutOfRangeException(value, minimum, maximum, this);
+      throw new ValueOutOfRangeException(getValue(Number.class), minimum, maximum, this);
     }
     return value;
   }
