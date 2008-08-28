@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
 import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;

@@ -39,10 +39,12 @@
   
   <build>  
     <plugins>
+      <!-- http://jira.codehaus.org/browse/MENFORCER-42 -->
+      <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <!-- <version>1.0-alpha-3</version> -->
+        <version>1.0-SNAPSHOT</version>
         <executions>
           <execution>
             <id>enforce-versions</id>
@@ -51,11 +53,11 @@
             </goals>
             <configuration>
               <rules>
-                <!--
+                <!- -
                 <requireMavenVersion>
                   <version>2.0.6</version>
                 </requireMavenVersion>
-                -->
+                - ->
                 <requireJavaVersion>
                   <version>1.6</version>
                 </requireJavaVersion>
@@ -63,7 +65,8 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>    
+      </plugin>   
+      --> 
       <!-- activate java 5 language -->
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
@@ -381,6 +384,7 @@
       <comments/>
     </license>
   </licenses>
+  <!--
   <repositories>
     <repository>
       <id>mmm</id>
@@ -389,4 +393,5 @@
       <layout>default</layout>
     </repository>
   </repositories>  
+  -->
 </project>

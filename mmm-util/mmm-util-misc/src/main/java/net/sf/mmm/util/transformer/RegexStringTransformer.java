@@ -6,6 +6,8 @@ package net.sf.mmm.util.transformer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.transformer.api.Transformer;
+
 /**
  * This class converts a string by
  * {@link Pattern#matcher(CharSequence) matching} a given regular expression

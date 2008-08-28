@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.text;
+package net.sf.mmm.util.text.base;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +29,7 @@ public class EnglishSingularizer extends AbstractTextTransformer implements Sing
 
     rules.add(new SuffixTransformerRule("amountis", "amount"));
     // regular but conflicts with "tis" rule: e.g. "bronchitis"
-    rules.add(new SuffixTransformerRule("antis", "anit"));
+    rules.add(new SuffixTransformerRule("antis", "anti"));
     rules.add(new SuffixTransformerRule("automata", "automaton"));
     rules.add(new SuffixTransformerRule("axes", "axis"));
     rules.add(new SuffixTransformerRule("blues", "blues"));

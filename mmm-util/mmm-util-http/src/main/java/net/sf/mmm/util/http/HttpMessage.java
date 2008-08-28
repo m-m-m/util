@@ -8,7 +8,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class represents an HTTP message.

@@ -9,7 +9,7 @@ import java.util.Map;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.contenttype.api.ContentType;
 import net.sf.mmm.util.contenttype.api.ContentTypeManager;
-import net.sf.mmm.util.nls.base.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
  * This is the abstract base implementation of the {@link ContentTypeManager}

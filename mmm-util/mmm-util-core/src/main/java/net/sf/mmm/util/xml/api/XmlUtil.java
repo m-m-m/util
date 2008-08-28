@@ -1,22 +1,26 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.xml;
+package net.sf.mmm.util.xml.api;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Writer;
 import java.nio.charset.Charset;
 
 /**
- * This utility class contains methods that held to deal with XML.
+ * This is the interface for a collection of utility functions that help to deal
+ * with XML.
  * 
- * @see net.sf.mmm.util.xml.base.DomUtilImpl
+ * @see DomUtil
+ * @see StaxUtil
+ * 
+ * @see net.sf.mmm.util.xml.base.XmlUtilImpl#getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class XmlUtil {
+public interface XmlUtil {
 
   /** the URI of the xmlns namespace */
   public static final String NAMESPACE_URI_XML = "http://www.w3.org/XML/1998/namespace".intern();
@@ -99,11 +103,33 @@ public final class XmlUtil {
       .intern();
 
   /**
-   * The constructor.
+   * This method escapes the given <code>string</code> for usage in XML (or
+   * HTML, etc.).
+   * 
+   * @param string is the string to escape.
+   * @param escapeQuotations if <code>true</code> also the ASCII quotation
+   *        characters (apos <code>'\''</code> and quot <code>'"'</code>) will
+   *        be escaped, else if <code>false</code> quotations are untouched. Set
+   *        this to <code>true</code> if you are writing the value of an
+   *        attribute.
+   * @return the escaped string.
    */
-  private XmlUtil() {
+  String escapeXml(String string, boolean escapeQuotations);
 
-  }
+  /**
+   * This method writes the given <code>string</code> to the <code>writer</code>
+   * while escaping special characters for XML (or HTML, etc.).
+   * 
+   * @param string is the string to escape.
+   * @param writer is where to write the string to.
+   * @param escapeQuotations if <code>true</code> also the ASCII quotation
+   *        characters (apos <code>'\''</code> and quot <code>'"'</code>) will
+   *        be escaped, else if <code>false</code> quotations are untouched. Set
+   *        this to <code>true</code> if you are writing the value of an
+   *        attribute.
+   * @throws IOException if the <code>writer</code> produced an I/O error.
+   */
+  void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException;
 
   /**
    * This method creates a {@link Reader} from the given
@@ -118,10 +144,7 @@ public final class XmlUtil {
    * @throws IOException if an I/O error occurred when trying to read the XML
    *         header.
    */
-  public static Reader createXmlReader(InputStream inputStream) throws IOException {
-
-    return createXmlReader(inputStream, Charset.defaultCharset());
-  }
+  Reader createXmlReader(InputStream inputStream) throws IOException;
 
   /**
    * This method creates a {@link Reader} from the given
@@ -138,155 +161,38 @@ public final class XmlUtil {
    * @throws IOException if an I/O error occurred when trying to read the XML
    *         header.
    */
-  public static Reader createXmlReader(InputStream inputStream, Charset defaultCharset)
-      throws IOException {
-
-    XmlInputStream streamAdapter = new XmlInputStream(inputStream, defaultCharset);
-    return new InputStreamReader(streamAdapter, streamAdapter.getCharset());
-  }
+  Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws IOException;
 
   /**
-   * This inner class is an input-stream that detects the encoding from the
-   * header of an XML stream.
+   * This method resolves an HTML entity given by <code>entityName</code>.
+   * 
+   * @param entityName is the bare name of the entity (e.g. "amp" or "uuml").
+   *        Please note that entity-names are case-sensitive.
+   * @return the value of the entity or <code>null</code> if no entity exists
+   *         for the given <code>entityName</code>.
    */
-  private static final class XmlInputStream extends InputStream {
+  Character resolveEntity(String entityName);
 
-    /** the start of the XML header (<code>"<?xml"</code>). */
-    private static final byte[] XML_HEADER_START = new byte[] { '<', '?', 'x', 'm', 'l', ' ' };
-
-    /** the start of the XML encoding attribute (<code>"encoding="</code>). */
-    private static final byte[] XML_ENCODING_ATRIBUTE = new byte[] { 'e', 'n', 'c', 'o', 'd', 'i',
-        'n', 'g', '=' };
-
-    /** The original input-stream to adapt. */
-    private final InputStream delegate;
-
-    /** The buffer read to lookahead the encoding from the XML header. */
-    private final byte[] buffer;
-
-    /** the length of the buffered data (may be less than the array length). */
-    private final int length;
-
-    /** The current index position in the {@link #buffer}. */
-    private int index;
-
-    /**
-     * The encoding detected from the XML header or <code>null</code> if it
-     * was NOT specified.
-     */
-    private Charset charset;
-
-    /**
-     * The constructor.
-     * 
-     * @param delegate is the input-stream to adapt.
-     * @param defaultCharset is the {@link Charset} used if NO encoding was
-     *        specified via an XML header.
-     * @throws IOException if an I/O error was caused by <code>delegate</code>
-     *         when trying to read the XML header.
-     */
-    public XmlInputStream(InputStream delegate, Charset defaultCharset) throws IOException {
-
-      super();
-      this.index = 0;
-      this.delegate = delegate;
-      this.buffer = new byte[128];
-      this.length = this.delegate.read(this.buffer);
-      String encoding = null;
-      int bufferIndex = 0;
-      if (this.length > 20) {
-        boolean okay = true;
-        for (byte c : XML_HEADER_START) {
-          if (c != this.buffer[bufferIndex++]) {
-            okay = false;
-            break;
-          }
-        }
-        if (okay) {
-          // XML header present...
-          int encodingIndex = 0;
-          while (bufferIndex < this.length) {
-            if (this.buffer[bufferIndex++] == XML_ENCODING_ATRIBUTE[encodingIndex]) {
-              encodingIndex++;
-              if (encodingIndex == XML_ENCODING_ATRIBUTE.length) {
-                if (bufferIndex < this.length) {
-                  byte quote = this.buffer[bufferIndex++];
-                  if ((quote == '"') || (quote == '\'')) {
-                    // encoding declaration detected
-                    int encodingStartIndex = bufferIndex;
-                    while (bufferIndex < this.length) {
-                      if (quote == this.buffer[bufferIndex++]) {
-                        encoding = new String(this.buffer, encodingStartIndex, bufferIndex
-                            - encodingStartIndex - 1);
-                      }
-                    }
-                  }
-                }
-                break;
-              }
-            } else {
-              encodingIndex = 0;
-            }
-          }
-        }
-      }
-      if (encoding == null) {
-        this.charset = defaultCharset;
-      } else {
-        try {
-          this.charset = Charset.forName(encoding);
-        } catch (RuntimeException e) {
-          this.charset = defaultCharset;
-        }
-      }
-    }
-
-    /**
-     * This method gets the {@link Charset} that was detected.
-     * 
-     * @return the charset.
-     */
-    public Charset getCharset() {
-
-      return this.charset;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int read() throws IOException {
-
-      if (this.index < this.length) {
-        return this.buffer[this.index++];
-      } else {
-        return this.delegate.read();
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int read(byte[] b, int off, int len) throws IOException {
-
-      if (this.index < this.length) {
-        // keep it simple ;)
-        return super.read(b, off, len);
-      } else {
-        return this.delegate.read(b, off, len);
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void close() throws IOException {
-
-      this.delegate.close();
-    }
-
-  }
+  /**
+   * This method extracts the plain text from the given
+   * <code>htmlFragment</code> and appends it to the given <code>buffer</code>.
+   * This includes removing tags, un-escaping entities and parsing CDATA
+   * sections. Unlike DOM parsers this method is completely fault tolerant, fast
+   * and uses a minimum amount of memory.<br>
+   * <b>ATTENTION:</b><br>
+   * Be aware that the caller is responsible for reading the HTML with the
+   * proper encoding (according to Content-Type from HTTP header and/or META
+   * tag).
+   * 
+   * @param htmlFragment is the HTML fragment to parse.
+   * @param buffer is the buffer where the plain text will be appended to.
+   * @param parserState is the state to continue on a subsequent call for
+   *        multiple <code>htmlFragment</code>s of the same HTML-document or
+   *        <code>null</code> for a fresh start.
+   * @return the state at the end of <code>htmlFragment</code>. You can pass
+   *         this as <code>parserState</code> argument on subsequent call to
+   *         continue parsing.
+   */
+  ParserState extractPlainText(String htmlFragment, StringBuilder buffer, ParserState parserState);
 
 }

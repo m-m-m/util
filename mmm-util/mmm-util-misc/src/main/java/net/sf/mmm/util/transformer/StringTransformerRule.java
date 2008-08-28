@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transformer;
 
+import net.sf.mmm.util.transformer.api.Transformer;
+
 /**
  * This is the interface for a {@link Transformer} of {@link String}s that is
  * typically used as part of a {@link StringTransformerChain}.

@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Locale;
 
 /**
@@ -160,35 +158,6 @@ public interface StringUtil {
    *         (trimmed) length of zero, <code>false</code> otherwise.
    */
   boolean isEmpty(String string, boolean trim);
-
-  /**
-   * This method escapes the given <code>string</code> for usage in XML (or
-   * HTML, etc.).
-   * 
-   * @param string is the string to escape.
-   * @param escapeQuotations if <code>true</code> also the ASCII quotation
-   *        characters (apos <code>'\''</code> and quot <code>'"'</code>) will
-   *        be escaped, else if <code>false</code> quotations are untouched. Set
-   *        this to <code>true</code> if you are writing the value of an
-   *        attribute.
-   * @return the escaped string.
-   */
-  String escapeXml(String string, boolean escapeQuotations);
-
-  /**
-   * This method writes the given <code>string</code> to the <code>writer</code>
-   * while escaping special characters for XML (or HTML, etc.).
-   * 
-   * @param string is the string to escape.
-   * @param writer is where to write the string to.
-   * @param escapeQuotations if <code>true</code> also the ASCII quotation
-   *        characters (apos <code>'\''</code> and quot <code>'"'</code>) will
-   *        be escaped, else if <code>false</code> quotations are untouched. Set
-   *        this to <code>true</code> if you are writing the value of an
-   *        attribute.
-   * @throws IOException if the <code>writer</code> produced an I/O error.
-   */
-  void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException;
 
   /**
    * This method formats a positive number to a string with at least the given

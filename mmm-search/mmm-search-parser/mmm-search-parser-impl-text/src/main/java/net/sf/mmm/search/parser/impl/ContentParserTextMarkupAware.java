@@ -6,8 +6,8 @@ package net.sf.mmm.search.parser.impl;
 import java.io.BufferedReader;
 import java.util.Properties;
 
-import net.sf.mmm.util.xml.MarkupUtil;
-import net.sf.mmm.util.xml.MarkupUtil.ParserState;
+import net.sf.mmm.util.xml.api.ParserState;
+import net.sf.mmm.util.xml.base.XmlUtilImpl;
 
 /**
  * This is the implementation of the
@@ -39,7 +39,7 @@ public class ContentParserTextMarkupAware extends ContentParserText {
     while (line != null) {
       parseLine(properties, line);
       // TODO: use IoC
-      parserState = MarkupUtil.getInstance().extractPlainText(line, textBuffer, parserState);
+      parserState = XmlUtilImpl.getInstance().extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

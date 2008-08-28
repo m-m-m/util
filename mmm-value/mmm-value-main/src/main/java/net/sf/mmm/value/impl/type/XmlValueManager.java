@@ -110,7 +110,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   @Override
   public boolean isEqual(Element value1, Element value2) {
 
-    return DomUtilImpl.getInstance().isEqual(value1, value2);
+    return DomUtilImpl.getInstance().isEqual(value1, value2, mode);
   }
 
 }

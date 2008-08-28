@@ -8,8 +8,8 @@ import java.util.List;
 
 import net.sf.mmm.util.collection.api.ListFactory;
 import net.sf.mmm.util.collection.api.TreeNode;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.base.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link TreeNode} interface.

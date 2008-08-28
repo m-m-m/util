@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This class represents the property of a

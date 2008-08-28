@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.lang.base;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.BasicUtil;
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
 /**
  * This is the test-case for {@link BasicUtilImpl}.

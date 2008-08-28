@@ -18,7 +18,7 @@ import com.glaforge.i18n.io.SmartEncodingInputStream;
 import net.sf.mmm.search.parser.base.AbstractContentParser;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.EncodingUtilImpl;
-import net.sf.mmm.util.xml.MarkupUtil;
+import net.sf.mmm.util.xml.base.XmlUtilImpl;
 
 /**
  * This is the implementation of the
@@ -57,9 +57,9 @@ public class ContentParserText extends AbstractContentParser {
   /**
    * If content is {@link #parse(InputStream, long) parsed} the capacity of the
    * used {@link StringBuffer} is set to
-   * <code>{@link #getMaximumBufferSize() maximumBufferSize}/2</code> limited
-   * to the <code>filesize</code>. If the <code>filesize</code> is
-   * undefined, this value is used as limit.<br>
+   * <code>{@link #getMaximumBufferSize() maximumBufferSize}/2</code> limited to
+   * the <code>filesize</code>. If the <code>filesize</code> is undefined, this
+   * value is used as limit.<br>
    * Since textual files are typically quite small, you should NOT use a too
    * large value here. The default is <code>1024</code>.
    * 
@@ -112,8 +112,8 @@ public class ContentParserText extends AbstractContentParser {
    * @param pattern is the regular expression pattern.
    * @param group is the {@link Matcher#group(int) group} number of the property
    *        in the <code>pattern</code>.
-   * @return the property or <code>null</code> if the <code>pattern</code>
-   *         did NOT match.
+   * @return the property or <code>null</code> if the <code>pattern</code> did
+   *         NOT match.
    */
   protected String parseProperty(String line, Pattern pattern, int group) {
 
@@ -147,7 +147,7 @@ public class ContentParserText extends AbstractContentParser {
       if (value != null) {
         StringBuilder buffer = new StringBuilder(value.length());
         // TODO: use IoC
-        MarkupUtil.getInstance().extractPlainText(value, buffer, null);
+        XmlUtilImpl.getInstance().extractPlainText(value, buffer, null);
         properties.setProperty(propertyName, buffer.toString());
       }
     }
@@ -193,10 +193,9 @@ public class ContentParserText extends AbstractContentParser {
   }
 
   /**
-   * This method parses the content of the given <code>bufferedReader</code>
-   * and appends the textual content to the <code>textBuffer</code>.
-   * Additional metadata can directly be set in the given
-   * <code>properties</code>.
+   * This method parses the content of the given <code>bufferedReader</code> and
+   * appends the textual content to the <code>textBuffer</code>. Additional
+   * metadata can directly be set in the given <code>properties</code>.
    * 
    * @param bufferedReader is where to read the content from.
    * @param properties is where the metadata is collected.

@@ -6,7 +6,7 @@ package net.sf.mmm.util.resource;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is the implementation of the {@link DataResource} interface for a

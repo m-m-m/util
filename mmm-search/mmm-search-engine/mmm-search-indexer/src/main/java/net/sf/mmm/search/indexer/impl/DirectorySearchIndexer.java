@@ -25,7 +25,7 @@ import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.file.base.FileUtilImpl;
-import net.sf.mmm.util.transformer.Transformer;
+import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
  * This class contains functionality to recursively walk through directories and

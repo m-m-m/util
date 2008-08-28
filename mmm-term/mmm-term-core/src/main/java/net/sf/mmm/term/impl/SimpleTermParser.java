@@ -12,7 +12,7 @@ import net.sf.mmm.term.api.Term;
 import net.sf.mmm.term.api.TermParser;
 import net.sf.mmm.term.base.Variable;
 import net.sf.mmm.term.impl.function.FunctionConcat;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is a simple parser for {@link Term}s that replace variables in plain

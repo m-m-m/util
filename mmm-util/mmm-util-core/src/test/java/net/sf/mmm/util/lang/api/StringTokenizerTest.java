@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util;
+package net.sf.mmm.util.lang.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,8 +11,6 @@ import static org.junit.Assert.fail;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
-
-import net.sf.mmm.util.lang.api.StringTokenizer;
 
 /**
  * This is the test-case for {@link StringTokenizer}.

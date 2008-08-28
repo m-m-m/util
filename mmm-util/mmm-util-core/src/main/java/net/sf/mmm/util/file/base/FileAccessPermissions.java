@@ -5,7 +5,7 @@ package net.sf.mmm.util.file.base;
 
 import net.sf.mmm.util.file.api.FileAccessClass;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class represents the <a

@@ -9,7 +9,7 @@ import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is the abstract base implementation of the {@link SearchQueryBuilder}

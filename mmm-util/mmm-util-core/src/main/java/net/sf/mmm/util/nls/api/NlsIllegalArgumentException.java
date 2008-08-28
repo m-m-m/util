@@ -1,10 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.nls.base;
+package net.sf.mmm.util.nls.api;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * A {@link NlsIllegalArgumentException} is analog to an

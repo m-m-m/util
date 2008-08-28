@@ -33,8 +33,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxyRe
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetIndexed;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySetMapped;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.text.EnglishSingularizer;
 import net.sf.mmm.util.text.api.Singularizer;
+import net.sf.mmm.util.text.base.EnglishSingularizer;
 
 /**
  * This is an implementation of the {@link PojoDescriptorEnhancer} interface

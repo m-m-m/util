@@ -13,6 +13,10 @@ import java.util.Locale;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.scanner.api.CharScannerSyntax;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
+
 /**
  * This is the test-case for {@link CharSequenceScanner}.
  * 

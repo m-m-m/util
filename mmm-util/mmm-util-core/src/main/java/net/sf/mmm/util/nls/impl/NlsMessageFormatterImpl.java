@@ -14,8 +14,8 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
-import net.sf.mmm.util.scanner.SimpleCharScannerSyntax;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
 
 /**
  * This is the implementation of the {@link NlsMessageFormatter} interface.<br>

@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.collection.base.CollectionList;
 import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.component.base.AbstractLoggable;
-import net.sf.mmm.util.nls.base.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.pojo.path.api.PojoPathAccessException;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;

@@ -17,7 +17,7 @@ import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.filter.FilterRuleChainXmlParser;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.StringTransformerChainXmlParser;
-import net.sf.mmm.util.transformer.Transformer;
+import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
  * This class contains functionality to recursively walk through directories and

@@ -9,12 +9,12 @@
  * However in some situations it is more suitable to write a handwritten parser.
  * The tradeoff is that this may result in ugly monolithic code that is hard to 
  * maintain.<br>
- * The {@link net.sf.mmm.util.scanner.CharStreamScanner} is an interface 
+ * The {@link net.sf.mmm.util.scanner.api.CharStreamScanner} is an interface 
  * that covers typical tasks when paring strings or streams and therefore makes 
  * your life a lot easier. You can concentrate on the syntax you want to parse 
  * and do NOT need to repeat checks if the end is already reached all the time.
  * For parsing strings there is the implementation 
- * {@link net.sf.mmm.util.scanner.CharSequenceScanner} that bundles the 
+ * {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} that bundles the 
  * string together with the state (parsing position) so you can easily delegate 
  * a step to another method or class. Otherwise you would need to pass the current 
  * position to that method and return the new one from there. This is tricky if 
@@ -51,16 +51,16 @@
  *   value = input.substring(start, i);
  * }
  * </pre>
- * Here is the same thing when using {@link net.sf.mmm.util.scanner.CharSequenceScanner}:
+ * Here is the same thing when using {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}:
  * <pre>
  * String input = getInputString();
- * {@link net.sf.mmm.util.scanner.CharSequenceScanner} scanner = new {@link net.sf.mmm.util.scanner.CharSequenceScanner}(input);
- * String key = scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#readUntil(char, boolean) readUntil}(':', false);
+ * {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} scanner = new {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}(input);
+ * String key = scanner.{@link net.sf.mmm.util.scanner.base.CharSequenceScanner#readUntil(char, boolean) readUntil}(':', false);
  * if (key == null) {
  *   throw new IllegalArgumentException("Expected character ':' not found!");
  * }
- * scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#skipWhile(char) skipWhile}(' ');
- * String value = scanner.{@link net.sf.mmm.util.scanner.CharSequenceScanner#readWhile(net.sf.mmm.util.filter.api.CharFilter) 
+ * scanner.{@link net.sf.mmm.util.scanner.base.CharSequenceScanner#skipWhile(char) skipWhile}(' ');
+ * String value = scanner.{@link net.sf.mmm.util.scanner.base.CharSequenceScanner#readWhile(net.sf.mmm.util.filter.api.CharFilter) 
  * readWhile}({@link net.sf.mmm.util.filter.api.CharFilter#LATIN_DIGIT_FILTER});
  * </pre>
  */

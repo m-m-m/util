@@ -10,7 +10,10 @@ import java.util.NoSuchElementException;
  * This is an abstract base implementation of the {@link Iterator} interface. It
  * allows to implement an read-only lookahead {@link Iterator} easier:<br>
  * Simply extend this class and implement {@link #findNext()}. From your
- * constructor or initializer call {@link #findFirst()}.
+ * constructor or initializer call {@link #findFirst()}.<br>
+ * <b>ATTENTION:</b><br>
+ * Do NOT forget to call {@link #findFirst()} from your constructor or your
+ * iterator will always be empty.
  * 
  * @param <E> is the templated type of the elements to iterate.
  * 

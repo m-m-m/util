@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is a utility class used to parse {@link HttpMessage HTTP-messages}.

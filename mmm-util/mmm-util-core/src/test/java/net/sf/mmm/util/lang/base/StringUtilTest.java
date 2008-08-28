@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
 
 /**
  * This is the test-case for {@link StringUtilImpl}.

@@ -3,18 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
-
 /**
  * This is the interface for a collection of utility functions for very general
  * operations especially for dealing with Arrays.
  * 
- * @see BasicUtilImpl#getInstance()
- * @see Arrays
- * @see Array
+ * @see net.sf.mmm.util.lang.base.BasicUtilImpl#getInstance()
+ * @see java.util.Arrays
+ * @see java.lang.reflect.Array
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -134,5 +129,16 @@ public interface BasicUtil {
    *         <code>value</code>.
    */
   boolean isInArray(Object value, Object array, boolean checkEqual);
+
+  /**
+   * This method compares the given {@link CharIterator} instances char by char.
+   * 
+   * @param charIterator1 is the first {@link CharIterator}.
+   * @param charIterator2 is the second {@link CharIterator}.
+   * @return <code>true</code> if both {@link CharIterator}s produced the same
+   *         {@link CharIterator#next() next} chars until both ended at the same
+   *         time.
+   */
+  boolean compare(CharIterator charIterator1, CharIterator charIterator2);
 
 }

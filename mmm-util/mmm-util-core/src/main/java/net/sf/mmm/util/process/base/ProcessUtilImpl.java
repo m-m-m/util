@@ -22,7 +22,7 @@ import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
 import net.sf.mmm.util.process.api.ProcessUtil;

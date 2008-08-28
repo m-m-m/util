@@ -1,23 +1,34 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.xml;
+package net.sf.mmm.util.xml.base;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.xml.api.ParserState;
+import net.sf.mmm.util.xml.api.XmlUtil;
 
 /**
- * This utility class contains methods that help to deal with markup such as
- * XML, SGML, HTML, etc.
+ * This utility class contains methods that help to deal with XML.
+ * 
+ * @see net.sf.mmm.util.xml.base.DomUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class MarkupUtil extends AbstractComponent {
+public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
 
   /** @see #getInstance() */
-  private static MarkupUtil instance;
+  private static XmlUtil instance;
 
   /** @see #resolveEntity(String) */
   private static final Map<String, Character> ENTITY_MAP;
@@ -285,13 +296,13 @@ public class MarkupUtil extends AbstractComponent {
   /**
    * The constructor.
    */
-  public MarkupUtil() {
+  public XmlUtilImpl() {
 
     super();
   }
 
   /**
-   * This method gets the singleton instance of this {@link MarkupUtil}.<br>
+   * This method gets the singleton instance of this {@link XmlUtilImpl}.<br>
    * This design is the best compromise between easy access (via this
    * indirection you have direct, static access to all offered functionality)
    * and IoC-style design which allows extension and customization.<br>
@@ -304,12 +315,12 @@ public class MarkupUtil extends AbstractComponent {
    * 
    * @return the singleton instance.
    */
-  public static MarkupUtil getInstance() {
+  public static XmlUtil getInstance() {
 
     if (instance == null) {
-      synchronized (MarkupUtil.class) {
+      synchronized (XmlUtilImpl.class) {
         if (instance == null) {
-          MarkupUtil util = new MarkupUtil();
+          XmlUtilImpl util = new XmlUtilImpl();
           util.initialize();
           instance = util;
         }
@@ -319,12 +330,68 @@ public class MarkupUtil extends AbstractComponent {
   }
 
   /**
-   * This method resolves an HTML entity given by <code>entityName</code>.
-   * 
-   * @param entityName is the bare name of the entity (e.g. "amp" or "uuml").
-   *        Please note that entity-names are case-sensitive.
-   * @return the value of the entity or <code>null</code> if no entity exists
-   *         for the given <code>entityName</code>.
+   * {@inheritDoc}
+   */
+  public Reader createXmlReader(InputStream inputStream) throws IOException {
+
+    return createXmlReader(inputStream, Charset.defaultCharset());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws IOException {
+
+    XmlInputStream streamAdapter = new XmlInputStream(inputStream, defaultCharset);
+    return new InputStreamReader(streamAdapter, streamAdapter.getCharset());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String escapeXml(String string, boolean escapeQuotations) {
+
+    try {
+      StringWriter writer = new StringWriter(string.length() + 8);
+      escapeXml(string, writer, escapeQuotations);
+      return writer.toString();
+    } catch (IOException e) {
+      throw new NlsIllegalStateException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException {
+
+    // TODO: make more efficient
+    char[] chars = string.toCharArray();
+    for (char c : chars) {
+      if (c >= 128) {
+        writer.append("&#");
+        writer.append(Integer.toString(c));
+        writer.append(";");
+      } else if (c == '&') {
+        writer.append("&amp;");
+      } else if (c == '<') {
+        writer.append("&lt;");
+      } else if (c == '>') {
+        writer.append("&gt;");
+      } else if (escapeQuotations && (c == '\'')) {
+        // writer.append("&apos;");
+        writer.append("&#39;");
+      } else if (escapeQuotations && (c == '"')) {
+        writer.append("&quot;");
+      } else {
+        // TODO: make more efficient
+        writer.append(c);
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
    */
   public Character resolveEntity(String entityName) {
 
@@ -332,38 +399,31 @@ public class MarkupUtil extends AbstractComponent {
   }
 
   /**
-   * This method extracts the plain text from the given
-   * <code>htmlFragment</code> and appends it to the given <code>buffer</code>.
-   * This includes removing tags, un-escaping entities and parsing CDATA
-   * sections. Unlike DOM parsers this method is completely fault tolerant, fast
-   * and uses a minimum amount of memory.<br>
-   * <b>ATTENTION:</b><br>
-   * Be aware that the caller is responsible for reading the HTML with the
-   * proper encoding (according to Content-Type from HTTP header and/or META
-   * tag).
-   * 
-   * @param htmlFragment is the HTML fragment to parse.
-   * @param buffer is the buffer where the plain text will be appended to.
-   * @param parserState is the state to continue on a subsequent call for
-   *        multiple <code>htmlFragment</code>s of the same HTML-document or
-   *        <code>null</code> for a fresh start.
-   * @return the state at the end of <code>htmlFragment</code>. You can pass
-   *         this as <code>parserState</code> argument on subsequent call to
-   *         continue parsing.
+   * {@inheritDoc}
    */
   public ParserState extractPlainText(String htmlFragment, StringBuilder buffer,
       ParserState parserState) {
 
-    ParserState state = new ParserState(parserState);
     int len = htmlFragment.length();
+
+    int tagStartIndex = 0;
+    int cdataCloseCount = 0;
+    char inAttribute = 0;
+    if (parserState != null) {
+      if (parserState.getTagStartIndex() != 0) {
+        tagStartIndex = -1;
+      }
+      cdataCloseCount = parserState.getCdataCloseCount();
+      inAttribute = parserState.getInAttribute();
+    }
     for (int i = 0; i < len; i++) {
       char c = htmlFragment.charAt(i);
-      if (state.tagStartIndex > 0) {
+      if (tagStartIndex > 0) {
         // in tag...
-        int tagLen = i - state.tagStartIndex;
+        int tagLen = i - tagStartIndex;
         if (tagLen == 2) {
           // check for BR tag
-          String substring = htmlFragment.substring(state.tagStartIndex, i);
+          String substring = htmlFragment.substring(tagStartIndex, i);
           if (substring.toLowerCase().equals("br")) {
             if ((c == ' ') || (c == '/') || (c == '>')) {
               // BR tag detected...
@@ -373,39 +433,39 @@ public class MarkupUtil extends AbstractComponent {
         } else if (tagLen == 8) {
           // check for CDATA section
           // "![CDATA[".length() == 8
-          String substring = htmlFragment.substring(state.tagStartIndex, i);
+          String substring = htmlFragment.substring(tagStartIndex, i);
           if ("![CDATA[".equals(substring)) {
             // start of CDATA section detected...
-            state.cdataCloseCount = 3;
+            cdataCloseCount = 3;
           }
         }
       }
       // main proceeding
-      if (state.cdataCloseCount > 0) {
+      if (cdataCloseCount > 0) {
         // in CDATA section...
-        if ((c == ']') && (state.cdataCloseCount > 1)) {
-          state.cdataCloseCount--;
-        } else if ((c == '>') && (state.cdataCloseCount == 1)) {
-          state.cdataCloseCount = 0;
-        } else if (state.cdataCloseCount == 3) {
+        if ((c == ']') && (cdataCloseCount > 1)) {
+          cdataCloseCount--;
+        } else if ((c == '>') && (cdataCloseCount == 1)) {
+          cdataCloseCount = 0;
+        } else if (cdataCloseCount == 3) {
           buffer.append(c);
         } else {
           buffer.append(']');
-          if (state.cdataCloseCount == 1) {
+          if (cdataCloseCount == 1) {
             buffer.append(']');
           }
-          state.cdataCloseCount = 3;
+          cdataCloseCount = 3;
         }
       } else if (c == '<') {
         // start of tag detected...
         // '<' must be escaped outside CDATA sections, even in attributes...
-        state.tagStartIndex = i + 1;
+        tagStartIndex = i + 1;
       } else if (c == '>') {
         // end of tag detected if not in attribute...
-        if (state.inAttribute == 0) {
-          state.tagStartIndex = 0;
+        if (inAttribute == 0) {
+          tagStartIndex = 0;
         }
-      } else if (state.tagStartIndex == 0) {
+      } else if (tagStartIndex == 0) {
         // in regular text...
         if (c == '&') {
           // un-escaping of entities...
@@ -450,67 +510,20 @@ public class MarkupUtil extends AbstractComponent {
         }
       } else if ((c == '"') || (c == '\'')) {
         // quotation inside tag...
-        if (state.inAttribute == 0) {
+        if (inAttribute == 0) {
           // start of attribute value...
-          state.inAttribute = c;
-        } else if (state.inAttribute == c) {
+          inAttribute = c;
+        } else if (inAttribute == c) {
           // end of attribute value...
-          state.inAttribute = 0;
+          inAttribute = 0;
         }
       }
     }
+    ParserState state = new ParserState();
+    state.setTagStartIndex(tagStartIndex);
+    state.setInAttribute(inAttribute);
+    state.setCdataCloseCount(cdataCloseCount);
     return state;
-  }
-
-  /**
-   * This inner class contains the state of an HTML
-   * {@link MarkupUtil#extractPlainText(String, StringBuilder, ParserState)
-   * parsing} process.
-   */
-  public static class ParserState {
-
-/** index of first char after '<' in string or 0 if not in tag. */
-    private int tagStartIndex;
-
-    /** the opening quotation char if inside attribute, else 0. */
-    private char inAttribute;
-
-    /**
-     * set to 3 at start of CDATA section, count down for closing "]]>" but
-     * reset to 3 on mismatch.
-     */
-    private int cdataCloseCount;
-
-    /**
-     * The constructor.
-     */
-    public ParserState() {
-
-      super();
-      this.tagStartIndex = 0;
-      this.inAttribute = 0;
-      this.cdataCloseCount = 0;
-    }
-
-    /**
-     * The constructor.
-     * 
-     * @param other is the state to continue with.
-     */
-    public ParserState(ParserState other) {
-
-      this();
-      if (other != null) {
-        if (other.tagStartIndex != 0) {
-          this.tagStartIndex = -1;
-        } else {
-          this.tagStartIndex = 0;
-        }
-        this.inAttribute = other.inAttribute;
-        this.cdataCloseCount = other.cdataCloseCount;
-      }
-    }
-
   }
 
 }

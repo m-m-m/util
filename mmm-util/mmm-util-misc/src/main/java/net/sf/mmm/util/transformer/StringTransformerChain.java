@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transformer;
 
+import net.sf.mmm.util.transformer.api.Transformer;
+
 /**
  * This class represents a {@link Transformer} for {@link String}s that is
  * build out of a list of {@link StringTransformerRule rules}. It performs its

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
-import net.sf.mmm.util.transformer.Transformer;
+import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
  * This is the interface for a {@link #transform(String) translation} of a term

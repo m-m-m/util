@@ -3,10 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
-import net.sf.mmm.util.nls.base.DuplicateObjectException;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.base.NlsNullPointerException;
 
 /**
  * This class holds the internationalized messages for this module.
@@ -63,16 +61,16 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.api.RuntimeIoException */
   public static final String ERR_IO = "An unexpected input/output error has ocurred!";
 
-  /** @see net.sf.mmm.util.nls.base.NlsNullPointerException */
+  /** @see net.sf.mmm.util.nls.api.NlsNullPointerException */
   public static final String ERR_ARGUMENT_NULL = "The argument \"{0}\" is null!";
 
-  /** @see net.sf.mmm.util.nls.base.DuplicateObjectException */
+  /** @see net.sf.mmm.util.nls.api.DuplicateObjectException */
   public static final String ERR_DUPLICATE_OBJECT = "Duplicate object \"{0}\"!";
 
-  /** @see net.sf.mmm.util.nls.base.DuplicateObjectException */
+  /** @see net.sf.mmm.util.nls.api.DuplicateObjectException */
   public static final String ERR_DUPLICATE_OBJECT_WITH_KEY = "Duplicate object \"{0}\" for key \"{1}\"!";
 
-  /** @see net.sf.mmm.util.nls.base.IllegalStateException */
+  /** @see net.sf.mmm.util.nls.api.NlsIllegalStateException */
   public static final String ERR_ILLEGAL_STATE = "Illegal state!";
 
 }

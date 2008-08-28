@@ -24,7 +24,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and

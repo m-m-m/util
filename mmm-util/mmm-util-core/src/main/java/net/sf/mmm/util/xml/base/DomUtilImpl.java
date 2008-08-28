@@ -8,11 +8,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.Iterator;
 
+import javax.annotation.Resource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.events.ProcessingInstruction;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -24,9 +27,9 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -34,9 +37,15 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.BasicUtil;
+import net.sf.mmm.util.lang.api.CharIterator;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
-import net.sf.mmm.util.nls.base.NlsIllegalStateException;
+import net.sf.mmm.util.lang.base.SpaceNormalizingCharIterator;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.xml.api.DomUtil;
+import net.sf.mmm.util.xml.api.XmlCompareMode;
 import net.sf.mmm.util.xml.api.XmlException;
 
 /**
@@ -55,6 +64,9 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
 
   /** the transformer factory used to transform or write xml */
   private TransformerFactory transformerFactory;
+
+  /** @see #getBasicUtil() */
+  private BasicUtil basicUtil;
 
   /**
    * The constructor.
@@ -108,6 +120,28 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
+   * This method gets the {@link BasicUtil}.
+   * 
+   * @return the {@link BasicUtil} to use.
+   */
+  protected BasicUtil getBasicUtil() {
+
+    return this.basicUtil;
+  }
+
+  /**
+   * This method sets the {@link #getBasicUtil() BasicUtil}.
+   * 
+   * @param basicUtil is the {@link BasicUtil} to set
+   */
+  @Resource
+  public void setBasicUtil(BasicUtil basicUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.basicUtil = basicUtil;
+  }
+
+  /**
    * This method gets the singleton instance of this {@link DomUtilImpl}.<br>
    * This design is the best compromise between easy access (via this
    * indirection you have direct, static access to all offered functionality)
@@ -127,25 +161,41 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
       synchronized (DomUtilImpl.class) {
         if (instance == null) {
           DomUtilImpl util = new DomUtilImpl();
-          try {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            documentBuilderFactory.setNamespaceAware(true);
-            util.setDocumentBuilderFactory(documentBuilderFactory);
-          } catch (FactoryConfigurationError e) {
-            throw new NlsIllegalStateException(e);
-          }
-          try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            util.setTransformerFactory(transformerFactory);
-          } catch (TransformerFactoryConfigurationError e) {
-            throw new NlsIllegalStateException(e);
-          }
           util.initialize();
           instance = util;
         }
       }
     }
     return instance;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.documentBuilderFactory == null) {
+      try {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        this.documentBuilderFactory = factory;
+      } catch (FactoryConfigurationError e) {
+        throw new NlsIllegalStateException(e);
+      }
+    }
+    if (this.transformerFactory == null) {
+      try {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        this.transformerFactory = factory;
+      } catch (TransformerFactoryConfigurationError e) {
+        throw new NlsIllegalStateException(e);
+      }
+    }
+    if (this.basicUtil == null) {
+      this.basicUtil = BasicUtilImpl.getInstance();
+    }
   }
 
   /**
@@ -186,33 +236,17 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
-   * This method gets the first element of the given node-list.
-   * 
-   * @see #getFirstElement(NodeList, String)
-   * 
-   * @param nodeList is the node-list (potentially) containing the requested
-   *        element.
-   * @return the first element in the node-list or <code>null</code>, if the
-   *         node-list contains NO element.
+   * {@inheritDoc}
    */
-  public static Element getFirstElement(NodeList nodeList) {
+  public Element getFirstElement(NodeList nodeList) {
 
     return getFirstElement(nodeList, null);
   }
 
   /**
-   * This method gets the first element of the given node-list with the
-   * specified tag-name.
-   * 
-   * @param nodeList is the node-list (potentially) containing the requested
-   *        element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the
-   *        requested element or <code>null</code> if any element is acceptable.
-   * @return the first element in the node-list with the given tag-name (or at
-   *         all if tag-name is <code>null</code>). If no such element exists in
-   *         the node-list, <code>null</code> is returned.
+   * {@inheritDoc}
    */
-  public static Element getFirstElement(NodeList nodeList, String tagName) {
+  public Element getFirstElement(NodeList nodeList, String tagName) {
 
     int len = nodeList.getLength();
     for (int i = 0; i < len; i++) {
@@ -228,40 +262,22 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
-   * This method gets the first child-element of the given <code>element</code>
-   * with the specified <code>tagName</code>.
-   * 
-   * @param element is the element (potentially) containing the requested
-   *        child-element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the
-   *        requested element or <code>null</code> if any element is acceptable.
-   * @return the first element in the node-list with the given tag-name (or at
-   *         all if tag-name is <code>null</code>). If no such element exists in
-   *         the node-list, <code>null</code> is returned.
+   * {@inheritDoc}
    */
-  public static Element getFirstChildElement(Element element, String tagName) {
+  public Element getFirstChildElement(Element element, String tagName) {
 
     return getFirstElement(element.getChildNodes(), tagName);
   }
 
   /**
-   * This method requires the first child-element of the given
-   * <code>element</code> with the specified <code>tagName</code>.
-   * 
-   * @param element is the element (potentially) containing the requested
-   *        child-element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the
-   *        requested element or <code>null</code> if any element is acceptable.
-   * @return the first element in the node-list with the given tag-name (or at
-   *         all if tag-name is <code>null</code>).
-   * @throws IllegalArgumentException if the requested child element does NOT
-   *         exist.
+   * {@inheritDoc}
    */
-  public static Element requireFirstChildElement(Element element, String tagName)
+  public Element requireFirstChildElement(Element element, String tagName)
       throws IllegalArgumentException {
 
     Element result = getFirstChildElement(element, tagName);
     if (result == null) {
+      // TODO: NLS
       throw new IllegalArgumentException("Missing element '" + tagName + "' in element '"
           + element.getTagName() + "'!");
     }
@@ -269,28 +285,17 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
-   * This method gets the value of the <code>attribute</code> from the given
-   * <code>element</code> as a boolean value.
-   * 
-   * @param element is the element potentially containing the requested boolean
-   *        attribute.
-   * @param attribute is the name of the requested attribute.
-   * @param defaultValue is the default returned if the attribute is NOT
-   *        present.
-   * @return the value of the specified <code>attribute</code> or the
-   *         <code>defaultValue</code> if the attribute is NOT present.
-   * @throws IllegalArgumentException if the value of the specified attribute
-   *         does NOT represent a boolean value.
+   * {@inheritDoc}
    */
-  public static boolean getAttributeAsBoolean(Element element, String attribute,
-      boolean defaultValue) throws IllegalArgumentException {
+  public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
+      throws IllegalArgumentException {
 
     boolean result = defaultValue;
     if (element.hasAttribute(attribute)) {
       String flag = element.getAttribute(attribute);
-      if (Boolean.TRUE.toString().equalsIgnoreCase(flag)) {
+      if (StringUtil.TRUE.equalsIgnoreCase(flag)) {
         result = true;
-      } else if (Boolean.FALSE.toString().equalsIgnoreCase(flag)) {
+      } else if (StringUtil.FALSE.equalsIgnoreCase(flag)) {
         result = false;
       } else {
         // TODO: NLS?
@@ -302,31 +307,17 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
-   * This method gets the text of the given node excluding the text of child
-   * elements (depth=0).
-   * 
-   * @see DomUtilImpl#getNodeText(Node, StringBuffer, int)
-   * 
-   * @param node is the xml node containing the text.
-   * @return the text of the node.
+   * {@inheritDoc}
    */
-  public static String getNodeText(Node node) {
+  public String getNodeText(Node node) {
 
     return getNodeText(node, 0);
   }
 
   /**
-   * This method gets the text of the given node as string.
-   * 
-   * @see DomUtilImpl#getNodeText(Node, StringBuffer, int)
-   * 
-   * @param node is the xml node containing the text.
-   * @param depth specifies how deep to step into child elements. If less than
-   *        1, the text of child elements is ignored.
-   * @return the text of the node including child nodes down to the specified
-   *         depth.
+   * {@inheritDoc}
    */
-  public static String getNodeText(Node node, int depth) {
+  public String getNodeText(Node node, int depth) {
 
     StringBuffer buffer = new StringBuffer();
     getNodeText(node, buffer, depth);
@@ -334,45 +325,34 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
-   * This method appends the text of the given node to the string buffer. Text
-   * means the plain characters between the opening and the closing tag of the
-   * element including the text of CDATA sections. The text of child elements is
-   * only appended according to the given depth. If the depth is less than 1,
-   * child elements are ignored, if equal to 1, the text of child elements is
-   * included without their child elements. For an infinite depth use
-   * <code>Integer.MAX_VALUE</code>. E.g. for the a element <code>a</code> in <br>
-   * <code>&lt;a&gt;123&lt;b/&gt;4&lt;c&gt;5&lt;d&gt;6&lt;/d&gt;&lt;/c&gt;
-   * &lt;![CDATA[7]]&gt;8&lt;/a&gt;</code> <br>
-   * the call of <code>getNodeText(a, buffer, depth)</code> will append the
-   * following text to the buffer according to the given depth. <ol start="0">
-   * <li>"123478"</li> <li>"1234578"</li> <li>"12345678"</li> </ol>
-   * 
-   * @param node is the xml node containing the text.
-   * @param buffer is the string buffer where to append the text.
-   * @param depth specifies how deep to step into child elements. If less than
-   *        1, the text of child elements is ignored.
+   * {@inheritDoc}
    */
-  public static void getNodeText(Node node, StringBuffer buffer, int depth) {
+  public void getNodeText(Node node, Appendable buffer, int depth) {
 
-    NodeList nodeList = node.getChildNodes();
-    for (int i = 0; i < nodeList.getLength(); i++) {
-      Node childNode = nodeList.item(i);
-      if ((childNode.getNodeType() == Node.TEXT_NODE)
-          || (childNode.getNodeType() == Node.CDATA_SECTION_NODE)) {
+    try {
+      NodeList nodeList = node.getChildNodes();
+      for (int i = 0; i < nodeList.getLength(); i++) {
+        Node childNode = nodeList.item(i);
+        if ((childNode.getNodeType() == Node.TEXT_NODE)
+            || (childNode.getNodeType() == Node.CDATA_SECTION_NODE)) {
 
-        buffer.append(childNode.getNodeValue());
-      } else if ((depth > 0) && (childNode.getNodeType() == Node.ELEMENT_NODE)) {
-        getNodeText(childNode, buffer, depth - 1);
+          buffer.append(childNode.getNodeValue());
+        } else if ((depth > 0) && (childNode.getNodeType() == Node.ELEMENT_NODE)) {
+          getNodeText(childNode, buffer, depth - 1);
+        }
       }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e);
     }
   }
 
   /**
-   * This method removes all child nodes of the given node.
+   * This method removes all {@link Node#getChildNodes() child nodes} of the
+   * given node.
    * 
    * @param node is the node to clean of children.
    */
-  public static void removeAllChildren(Element node) {
+  public void removeChildren(Element node) {
 
     NodeList children = node.getChildNodes();
     for (int i = (children.getLength() - 1); i >= 0; i--) {
@@ -456,213 +436,33 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   /**
    * {@inheritDoc}
    */
-  public String getLocalNodeName(Node element) {
+  public String getLocalName(Node node) {
 
-    String localName = element.getLocalName();
+    String localName = node.getLocalName();
     if (localName == null) {
-      localName = element.getNodeName();
+      localName = node.getNodeName();
     }
     return localName;
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public boolean isEqual(Node node1, Node node2) {
-
-    if (node1 == null) {
-      return (node2 == null);
-    } else {
-      if (node2 == null) {
-        return false;
-      }
-      short type = node1.getNodeType();
-      if (type != node2.getNodeType()) {
-        return false;
-      }
-      if (type == Node.ATTRIBUTE_NODE) {
-        if (!BasicUtilImpl.getInstance().isEqual(node1.getLocalName(), node2.getLocalName())) {
-          return false;
-        }
-        if (!BasicUtilImpl.getInstance().isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
-          return false;
-        }
-        Attr attr1 = (Attr) node1;
-        Attr attr2 = (Attr) node2;
-        if (!BasicUtilImpl.getInstance().isEqual(attr1.getValue(), attr2.getValue())) {
-          return false;
-        }
-        return true;
-      } else if (type == Node.COMMENT_NODE) {
-        // ignore comments
-        return true;
-      } else if (type == Node.DOCUMENT_NODE) {
-        Document doc1 = (Document) node1;
-        Document doc2 = (Document) node2;
-        return isEqual(doc1.getDocumentElement(), doc2.getDocumentElement());
-      } else if (type == Node.TEXT_NODE) {
-        return BasicUtilImpl.getInstance().isEqual(node1.getNodeValue(), node2.getNodeValue());
-      } else if (type == Node.CDATA_SECTION_NODE) {
-        return BasicUtilImpl.getInstance().isEqual(node1.getNodeValue(), node2.getNodeValue());
-      } else if (type == Node.ELEMENT_NODE) {
-        if (!BasicUtilImpl.getInstance().isEqual(getLocalNodeName(node1), getLocalNodeName(node2))) {
-          return false;
-        }
-        if (!BasicUtilImpl.getInstance().isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
-          return false;
-        }
-        // compare attributes
-        NamedNodeMap attributes1 = node1.getAttributes();
-        NamedNodeMap attributes2 = node2.getAttributes();
-        int length = attributes1.getLength();
-        if (attributes2.getLength() != length) {
-          return false;
-        }
-        for (int i = 0; i < length; i++) {
-          Attr attr1 = (Attr) attributes1.item(i);
-          Attr attr2 = (Attr) attributes2.getNamedItemNS(attr1.getNamespaceURI(), attr1
-              .getLocalName());
-          if (attr2 == null) {
-            attr2 = (Attr) attributes2.getNamedItem(attr1.getName());
-          }
-          if (attr2 == null) {
-            return false;
-          }
-          if (!attr1.getValue().equals(attr2.getValue())) {
-            return false;
-          }
-        }
-        // compare child nodes
-        NodeList children1 = node1.getChildNodes();
-        NodeList children2 = node2.getChildNodes();
-        return isEqual(children1, children2);
-      }
-      // TODO
-      return false;
-    }
-  }
-
-  /**
+   * This method determines if the given nodes have the same
+   * {@link #getLocalName(Node) name} and {@link Node#getNamespaceURI()
+   * namespace}.
    * 
-   * @param nodeList1
-   * @param nodeList2
-   * @return <code>true</code> if the XML fragment represented by the given
-   *         node-lists equals, <code>false</code> otherwise.
+   * @param node1 is the first node.
+   * @param node2 is the second node.
+   * @return <code>true</code> if both nodes have equal
+   *         {@link #getLocalName(Node) name} and {@link Node#getNamespaceURI()
+   *         namespace}.
    */
-  private boolean isEqual(NodeList nodeList1, NodeList nodeList2) {
+  private boolean isEqualName(Node node1, Node node2) {
 
-    int length1 = nodeList1.getLength();
-    int length2 = nodeList2.getLength();
-    int index1 = 0;
-    int index2 = 0;
-    StringBuffer text1 = new StringBuffer();
-    StringBuffer text2 = new StringBuffer();
-    while ((index1 < length1) || (index2 < length2)) {
-
-      Node node1 = null;
-      Node node2 = null;
-      if (index1 < length1) {
-        node1 = nodeList1.item(index1);
-        index1++;
-      }
-      if (index2 < length2) {
-        node2 = nodeList2.item(index2);
-        index2++;
-      }
-      if (node1 == null) {
-        if (!isEqualLast(node2, text2)) {
-          return false;
-        }
-      } else if (node2 == null) {
-        if (!isEqualLast(node1, text1)) {
-          return false;
-        }
-      } else {
-        if (isEqual(node1, node2)) {
-          if (!text1.toString().equals(text2.toString())) {
-            return false;
-          }
-          text1.setLength(0);
-          text2.setLength(0);
-        } else {
-          // nodes may NOT be normalized...
-          if (node1.getNodeType() == Node.COMMENT_NODE) {
-            // skip node1
-            index2--;
-          } else if (node2.getNodeType() == Node.COMMENT_NODE) {
-            // skip node2
-            index1--;
-          } else if (isTextualNode(node1)) {
-            int code = equalsTextNode(node1, text1, node2, text2);
-            if (code == -1) {
-              // skip node1
-              index2--;
-            } else if (code == 0) {
-              return false;
-            }
-          } else if (isTextualNode(node2)) {
-            int code = equalsTextNode(node2, text2, node1, text1);
-            if (code == -1) {
-              // skip node2
-              index1--;
-            } else if (code == 0) {
-              return false;
-            }
-          } else {
-            return false;
-          }
-        }
-      }
-    }
-    if (text1.toString().equals(text2.toString())) {
-      return true;
-    } else {
+    if (!this.basicUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
       return false;
     }
-  }
-
-  /**
-   * @param textNode1
-   * @param sb1
-   * @param node2
-   * @param sb2
-   */
-  private int equalsTextNode(Node textNode1, StringBuffer sb1, Node node2, StringBuffer sb2) {
-
-    sb1.append(textNode1.getNodeValue());
-    if (isTextualNode(node2)) {
-      sb2.append(node2.getNodeValue());
-      return 1;
-    } else {
-      if (sb1.toString().trim().length() == 0) {
-        // skip node1
-        return -1;
-      } else if (sb1.toString().equals(sb2.toString())) {
-        sb1.setLength(0);
-        sb2.setLength(0);
-        // skip node1
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-  }
-
-  /**
-   * 
-   * @param node
-   * @param sb
-   * @return
-   */
-  private boolean isEqualLast(Node node, StringBuffer sb) {
-
-    if (node.getNodeType() == Node.ELEMENT_NODE) {
+    if (!this.basicUtil.isEqual(getLocalName(node1), getLocalName(node2))) {
       return false;
-    }
-    if (isTextualNode(node)) {
-      sb.append(node.getNodeValue());
-    } else {
-      // ignore comments, entities, etc.
     }
     return true;
   }
@@ -670,9 +470,183 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   /**
    * {@inheritDoc}
    */
-  public boolean isTextualNode(Node node) {
+  public boolean isEqual(Node node1, Node node2, XmlCompareMode mode) {
 
-    return ((node.getNodeType() == Node.TEXT_NODE) || (node.getNodeType() == Node.CDATA_SECTION_NODE));
+    if (node1 == null) {
+      return (node2 == null);
+    } else {
+      if (node2 == null) {
+        return false;
+      }
+    }
+
+    short type1 = node1.getNodeType();
+    short type2 = node2.getNodeType();
+    if (type1 != type2) {
+      boolean accept = false;
+      if (mode.isJoinText() && mode.isJoinCData()) {
+        if (((type1 == Node.TEXT_NODE) && (type2 == Node.CDATA_SECTION_NODE))
+            || ((type1 == Node.CDATA_SECTION_NODE) && (type2 == Node.TEXT_NODE))) {
+          accept = true;
+        }
+      }
+      if (!accept) {
+        return false;
+      }
+    }
+    if (type1 == Node.ELEMENT_NODE) {
+      return isEqual((Element) node1, (Element) node2, mode);
+    } else if (type1 == Node.ATTRIBUTE_NODE) {
+      if (!isEqualName(node1, node2)) {
+        return false;
+      }
+      if (!this.basicUtil.isEqual(node1.getNodeValue(), node2.getNodeValue())) {
+        return false;
+      }
+      return true;
+    } else if ((type1 == Node.COMMENT_NODE) && !mode.isCheckComments()) {
+      return true;
+    } else if ((type1 == Node.TEXT_NODE) || (type1 == Node.CDATA_SECTION_NODE)
+        || (type1 == Node.COMMENT_NODE)) {
+      CharIterator charIterator1 = new NodeValueCharIterator(node1);
+      CharIterator charIterator2 = new NodeValueCharIterator(node2);
+      return isEqual(charIterator1, charIterator2, mode);
+    } else if (type1 == Node.DOCUMENT_NODE) {
+      Document doc1 = (Document) node1;
+      Document doc2 = (Document) node2;
+      return isEqual(doc1.getDocumentElement(), doc2.getDocumentElement(), mode);
+    } else if (type1 == Node.DOCUMENT_FRAGMENT_NODE) {
+      // this should actually never happen...
+      return isEqual(node1.getChildNodes(), node1.getChildNodes(), mode);
+    } else if (type1 == Node.ENTITY_NODE) {
+      // TODO
+      Entity entity1 = (Entity) node1;
+      Entity entity2 = (Entity) node2;
+      if (!this.basicUtil.isEqual(entity1.getNotationName(), entity2.getNotationName())) {
+        return false;
+      }
+      return true;
+    } else if (type1 == Node.PROCESSING_INSTRUCTION_NODE) {
+      ProcessingInstruction pi1 = (ProcessingInstruction) node1;
+      ProcessingInstruction pi2 = (ProcessingInstruction) node2;
+      if (!this.basicUtil.isEqual(pi1.getTarget(), pi2.getTarget())) {
+        return false;
+      }
+      if (!this.basicUtil.isEqual(pi1.getData(), pi2.getData())) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * This method determines if the given {@link CharSequence}s are equal.
+   * 
+   * @see #isEqual(Node, Node, XmlCompareMode)
+   * 
+   * @param charIterator1 is the first {@link CharIterator}.
+   * @param charIterator2 is the second {@link CharIterator}.
+   * @param mode is the mode of comparison.
+   * @return <code>true</code> if equal, <code>false</code> otherwise.
+   */
+  protected boolean isEqual(CharIterator charIterator1, CharIterator charIterator2,
+      XmlCompareMode mode) {
+
+    CharIterator c1, c2;
+    if (mode.isNormalizeSpaces()) {
+      c1 = new SpaceNormalizingCharIterator(charIterator1);
+      c2 = new SpaceNormalizingCharIterator(charIterator2);
+    } else {
+      c1 = charIterator1;
+      c2 = charIterator2;
+    }
+    return this.basicUtil.compare(c1, c2);
+  }
+
+  /**
+   * This method determines if the given {@link Element elements} are equal.
+   * 
+   * @see #isEqual(Node, Node, XmlCompareMode)
+   * 
+   * @param element1 is the first {@link Element}.
+   * @param element2 is the second {@link Element}.
+   * @param mode is the mode of comparison.
+   * @return <code>true</code> if equal, <code>false</code> otherwise.
+   */
+  protected boolean isEqual(Element element1, Element element2, XmlCompareMode mode) {
+
+    if (!isEqualName(element1, element2)) {
+      return false;
+    }
+    // compare attributes
+    NamedNodeMap attributes1 = element1.getAttributes();
+    NamedNodeMap attributes2 = element2.getAttributes();
+    int length = attributes1.getLength();
+    if (attributes2.getLength() != length) {
+      return false;
+    }
+    for (int i = 0; i < length; i++) {
+      Node attr1 = attributes1.item(i);
+      String namespaceUri = attr1.getNamespaceURI();
+      String name = getLocalName(attr1);
+      Node attr2;
+      if (namespaceUri == null) {
+        attr2 = attributes2.getNamedItem(name);
+      } else {
+        attr2 = attributes2.getNamedItemNS(namespaceUri, name);
+      }
+      if (attr2 == null) {
+        return false;
+      }
+      if (!attr1.getNodeValue().equals(attr2.getNodeValue())) {
+        return false;
+      }
+    }
+    if (!isEqual(element1.getChildNodes(), element2.getChildNodes(), mode)) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * 
+   * @param nodeList1
+   * @param nodeList2
+   * @param mode TODO
+   * @return <code>true</code> if the XML fragment represented by the given
+   *         node-lists equals, <code>false</code> otherwise.
+   */
+  protected boolean isEqual(NodeList nodeList1, NodeList nodeList2, XmlCompareMode mode) {
+
+    // compare child nodes
+    Iterator<Node> nodeIterator1 = new JoiningNodeIterator(nodeList1, mode);
+    Iterator<Node> nodeIterator2 = new JoiningNodeIterator(nodeList2, mode);
+    while (nodeIterator1.hasNext()) {
+      Node child1 = nodeIterator1.next();
+      if (!nodeIterator2.hasNext()) {
+        return false;
+      }
+      Node child2 = nodeIterator2.next();
+      if ((child1.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE)
+          && (child2.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE)) {
+        // according to DOM-spec nodes can never return DocumentFragment as
+        // child - in our case this indicates that the JoiningNodeIterator has
+        // joined CharacterData according to "mode" into a DocumentFragment.
+        CharIterator charIterator1 = new NodeValueCharIterator(child1.getChildNodes());
+        CharIterator charIterator2 = new NodeValueCharIterator(child2.getChildNodes());
+        if (!isEqual(charIterator1, charIterator2, mode)) {
+          return false;
+        }
+      }
+      if (!isEqual(child1, child2, mode)) {
+        return false;
+      }
+    }
+    if (nodeIterator2.hasNext()) {
+      return false;
+    }
+    return true;
   }
 
 }

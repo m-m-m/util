@@ -17,8 +17,8 @@ import javax.xml.stream.util.StreamReaderDelegate;
 
 import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.resource.DataResource;
-import net.sf.mmm.util.xml.XmlUtil;
 import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.api.XmlUtil;
 import net.sf.mmm.util.xml.base.StaxUtilImpl;
 
 /**

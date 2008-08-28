@@ -10,9 +10,8 @@ import java.nio.charset.Charset;
 import java.util.Properties;
 
 import net.sf.mmm.search.parser.base.AbstractContentParser;
-import net.sf.mmm.util.xml.MarkupUtil;
-import net.sf.mmm.util.xml.XmlUtil;
-import net.sf.mmm.util.xml.MarkupUtil.ParserState;
+import net.sf.mmm.util.xml.api.ParserState;
+import net.sf.mmm.util.xml.base.XmlUtilImpl;
 
 /**
  * This is the implementation of the
@@ -50,17 +49,16 @@ public class ContentParserXml extends AbstractContentParser {
     } else {
       defaultCharset = Charset.forName(encoding);
     }
-    Reader reader = XmlUtil.createXmlReader(inputStream, defaultCharset);
+    Reader reader = XmlUtilImpl.getInstance().createXmlReader(inputStream, defaultCharset);
     BufferedReader bufferedReader = new BufferedReader(reader);
     parse(bufferedReader, properties, textBuffer);
     properties.setProperty(PROPERTY_KEY_TEXT, textBuffer.toString());
   }
 
   /**
-   * This method parses the content of the given <code>bufferedReader</code>
-   * and appends the textual content to the <code>textBuffer</code>.
-   * Additional metadata can directly be set in the given
-   * <code>properties</code>.
+   * This method parses the content of the given <code>bufferedReader</code> and
+   * appends the textual content to the <code>textBuffer</code>. Additional
+   * metadata can directly be set in the given <code>properties</code>.
    * 
    * @param bufferedReader is where to read the content from.
    * @param properties is where the metadata is collected.
@@ -75,8 +73,8 @@ public class ContentParserXml extends AbstractContentParser {
     ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
-    	// TODO: use IoC
-      parserState = MarkupUtil.getInstance().extractPlainText(line, textBuffer, parserState);
+      // TODO: use IoC
+      parserState = XmlUtilImpl.getInstance().extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

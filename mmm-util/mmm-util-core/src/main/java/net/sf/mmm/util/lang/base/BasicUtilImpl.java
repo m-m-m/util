@@ -7,6 +7,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import net.sf.mmm.util.lang.api.BasicUtil;
+import net.sf.mmm.util.lang.api.CharIterator;
 
 /**
  * This is the implementation of the {@link BasicUtil} interface.
@@ -193,6 +194,22 @@ public class BasicUtilImpl implements BasicUtil {
   public boolean isInArray(Object value, Object array, boolean checkEqual) {
 
     return (findInArray(value, array, checkEqual) >= 0);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean compare(CharIterator charIterator1, CharIterator charIterator2) {
+
+    char c1, c2;
+    do {
+      c1 = charIterator1.next();
+      c2 = charIterator2.next();
+      if (c1 != c2) {
+        return false;
+      }
+    } while (c1 != CharIterator.END_OF_ITERATOR);
+    return true;
   }
 
 }

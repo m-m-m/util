@@ -11,7 +11,7 @@ import java.util.TimeZone;
 
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is the implementation of the

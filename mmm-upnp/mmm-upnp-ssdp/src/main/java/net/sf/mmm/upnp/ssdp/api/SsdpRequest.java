@@ -4,7 +4,7 @@
 package net.sf.mmm.upnp.ssdp.api;
 
 import net.sf.mmm.util.http.HttpRequest;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class represents an SSDP request. It is a specific HTTP-Request that is

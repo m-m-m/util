@@ -1,11 +1,13 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.scanner;
+package net.sf.mmm.util.scanner.base;
 
 import java.util.Locale;
 
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.scanner.api.CharScannerSyntax;
+import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
  * This class represents a {@link String} or better a sequence of characters (<code>char[]</code>)

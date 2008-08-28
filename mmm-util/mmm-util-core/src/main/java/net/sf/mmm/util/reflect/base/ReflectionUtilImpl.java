@@ -25,7 +25,7 @@ import java.util.jar.JarFile;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -37,7 +37,7 @@ import net.sf.mmm.util.reflect.impl.ParameterizedTypeImpl;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.impl.UpperBoundWildcardType;
-import net.sf.mmm.util.scanner.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for dealing with

@@ -6,7 +6,6 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
-    <!--
     <release version="1.0.1" date="2008-02-10" description="Subsequent release">
       <action dev="hohwille" type="add">
         <![CDATA[<Added <code>net.sf.mmm.util.file</code>.]]>
@@ -18,7 +17,6 @@
         <![CDATA[<Added <code>StringUtil.replace(char[], char, char)</code>.]]>
       </action>
     </release>
-    -->
     <release version="1.0.0" date="2008-01-19" description="initial release">
       <action dev="hohwille" type="add">
         Everything is new in the initial release.

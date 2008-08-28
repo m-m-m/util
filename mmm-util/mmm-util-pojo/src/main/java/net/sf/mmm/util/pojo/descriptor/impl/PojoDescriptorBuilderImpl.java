@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
-import net.sf.mmm.util.nls.base.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;

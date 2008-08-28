@@ -1,13 +1,16 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.scanner;
+package net.sf.mmm.util.scanner.base;
+
+import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
  * This class is a simple container for the special characters of a syntax to
  * scan.<br>
  * 
- * @see CharStreamScanner#readUntil(char, boolean, CharScannerSyntax)
+ * @see CharStreamScanner#readUntil(char, boolean,
+ *      net.sf.mmm.util.scanner.api.CharScannerSyntax)
  */
 public class SimpleCharScannerSyntax extends AbstractCharScannerSyntax {
 

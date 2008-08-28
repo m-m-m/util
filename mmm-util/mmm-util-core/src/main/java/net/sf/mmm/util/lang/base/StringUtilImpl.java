@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Locale;
 
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -194,48 +191,6 @@ public class StringUtilImpl implements StringUtil {
       s = string;
     }
     return (s.length() == 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String escapeXml(String string, boolean escapeQuotations) {
-
-    try {
-      StringWriter writer = new StringWriter(string.length() + 8);
-      escapeXml(string, writer, escapeQuotations);
-      return writer.toString();
-    } catch (IOException e) {
-      throw new IllegalStateException("Internal error!", e);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException {
-
-    char[] chars = string.toCharArray();
-    for (char c : chars) {
-      if (c >= 128) {
-        writer.append("&#");
-        writer.append(Integer.toString(c));
-        writer.append(";");
-      } else if (c == '&') {
-        writer.append("&amp;");
-      } else if (c == '<') {
-        writer.append("&lt;");
-      } else if (c == '>') {
-        writer.append("&gt;");
-      } else if (escapeQuotations && (c == '\'')) {
-        // writer.append("&apos;");
-        writer.append("&#39;");
-      } else if (escapeQuotations && (c == '"')) {
-        writer.append("&quot;");
-      } else {
-        writer.append(c);
-      }
-    }
   }
 
   /**
