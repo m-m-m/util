@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
@@ -35,12 +36,14 @@ public class StringTransformerChainXmlParser {
   /** The name of the XML element for a {@link StringTransformerChain}. */
   public static final String XML_TAG_CHAIN = "transformer-chain";
 
-  /** The name of the XML attribute for the ID of a {@link #XML_TAG_CHAIN chain}. */
+  /**
+   * The name of the XML attribute for the ID of a {@link #XML_TAG_CHAIN chain}.
+   */
   public static final String XML_ATR_CHAIN_ID = "id";
 
   /**
-   * The name of the XML attribute for the parent of a
-   * {@link #XML_TAG_CHAIN chain}.
+   * The name of the XML attribute for the parent of a {@link #XML_TAG_CHAIN
+   * chain}.
    */
   public static final String XML_ATR_CHAIN_PARENT = "parent";
 
@@ -73,12 +76,26 @@ public class StringTransformerChainXmlParser {
    */
   public static final String XML_ATR_RULE_STOPONMATCH = "stop-on-match";
 
+  /** {@link #StringTransformerChainXmlParser(DomUtil)} */
+  private final DomUtil domUtil;
+
   /**
    * The constructor.
    */
   public StringTransformerChainXmlParser() {
 
+    this(DomUtilImpl.getInstance());
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param domUtil is the {@link DomUtil} to use.
+   */
+  public StringTransformerChainXmlParser(DomUtil domUtil) {
+
     super();
+    this.domUtil = domUtil;
   }
 
   /**
@@ -87,15 +104,16 @@ public class StringTransformerChainXmlParser {
    * 
    * @see #XML_TAG_RULE
    * 
-   * @param xmlElement
-   *        is the XML element with the transformer-rule.
+   * @param xmlElement is the XML element with the transformer-rule.
    * @return the parsed rule.
    */
   public StringTransformerRule parseRule(Element xmlElement) {
 
     if (XML_TAG_RULE.equals(xmlElement.getTagName())) {
-      boolean replaceAll = DomUtilImpl.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL, false);
-      boolean stopOnMatch = DomUtilImpl.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_STOPONMATCH, false);
+      boolean replaceAll = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL,
+          false);
+      boolean stopOnMatch = this.domUtil.getAttributeAsBoolean(xmlElement,
+          XML_ATR_RULE_STOPONMATCH, false);
       String patternString = xmlElement.getAttribute(XML_ATR_RULE_PATTERN);
       Pattern pattern = Pattern.compile(patternString);
       String replacement = xmlElement.getAttribute(XML_ATR_RULE_REPLACEMENT);
@@ -111,12 +129,10 @@ public class StringTransformerChainXmlParser {
    * 
    * @see #XML_TAG_CHAIN
    * 
-   * @param xmlElement
-   *        is the XML element containing the transformer-rules (see
+   * @param xmlElement is the XML element containing the transformer-rules (see
    *        {@link #XML_TAG_RULE}) as children.
-   * @param parent
-   *        is the parent chain to extend or <code>null</code> if no rules
-   *        should be inherited.
+   * @param parent is the parent chain to extend or <code>null</code> if no
+   *        rules should be inherited.
    * @return the parsed filter-chain.
    */
   public StringTransformerChain parseChain(Element xmlElement, StringTransformerChain parent) {
@@ -142,8 +158,7 @@ public class StringTransformerChainXmlParser {
    * This method parses a map of {@link StringTransformerChain chain}s given by
    * <code>xmlElement</code>.
    * 
-   * @param xmlElement
-   *        is the XML element containing the transformer-chains (see
+   * @param xmlElement is the XML element containing the transformer-chains (see
    *        {@link #XML_TAG_CHAIN}) as children and puts them into a map with
    *        the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or
    *        attributes are simply ignored.

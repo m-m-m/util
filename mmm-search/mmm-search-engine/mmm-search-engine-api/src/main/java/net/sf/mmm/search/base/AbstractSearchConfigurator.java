@@ -56,13 +56,14 @@ public abstract class AbstractSearchConfigurator implements SearchConfigurator {
    */
   protected void setupRefreshThread(Element element, final ManagedSearchEngine searchEngine) {
 
-    Element searchElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_SEARCH);
+    Element searchElement = DomUtilImpl.getInstance().getFirstChildElement(element, XML_TAG_SEARCH);
     if (searchElement != null) {
       if (searchElement.hasAttribute(XML_ATR_SEARCH_REFRESHDELAY)) {
         String refreshDelayString = searchElement.getAttribute(XML_ATR_SEARCH_REFRESHDELAY);
         final long refreshDelay = Long.parseLong(refreshDelayString) * 1000L;
         Thread refreshThread = new Thread() {
 
+          @Override
           public void run() {
 
             while (true) {

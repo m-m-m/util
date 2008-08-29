@@ -24,6 +24,8 @@ import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.file.base.FileUtilImpl;
+import net.sf.mmm.util.xml.api.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This is the abstract base implementation of the controller
@@ -51,12 +53,16 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** The search engine. */
   private ManagedSearchEngine searchEngine;
 
+  /** The {@link DomUtil} to use. */
+  private DomUtil domUtil;
+
   /**
    * The constructor.
    */
   public AbstractSearchServlet() {
 
     super();
+    this.domUtil = DomUtilImpl.getInstance();
   }
 
   /**
@@ -76,6 +82,22 @@ public abstract class AbstractSearchServlet extends HttpServlet {
     if (this.configuration != null) {
       this.configuration.setSearchEngine(searchEngine);
     }
+  }
+
+  /**
+   * @param domUtil is the domUtil to set
+   */
+  public void setDomUtil(DomUtil domUtil) {
+
+    this.domUtil = domUtil;
+  }
+
+  /**
+   * @return the domUtil
+   */
+  protected DomUtil getDomUtil() {
+
+    return this.domUtil;
   }
 
   /**

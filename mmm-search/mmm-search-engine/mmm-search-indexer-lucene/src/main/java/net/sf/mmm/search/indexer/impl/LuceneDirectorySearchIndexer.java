@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 
 import net.sf.mmm.search.base.SearchConfigurator;
 import net.sf.mmm.search.impl.LuceneSearchConfigurator;
+import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
@@ -25,9 +26,9 @@ import net.sf.mmm.util.xml.base.DomUtilImpl;
 public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndexer {
 
   /**
-   * The name of the XML attribute for the <code>create</code> flag. It
-   * contains a boolean value, that determines if the index will be updated
-   * (true) or rebuild every time (false). The default is <code>false</code>.
+   * The name of the XML attribute for the <code>create</code> flag. It contains
+   * a boolean value, that determines if the index will be updated (true) or
+   * rebuild every time (false). The default is <code>false</code>.
    */
   public static final String XML_ATR_INDEXER_UPDATE = "update";
 
@@ -84,7 +85,8 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
       throw e;
     }
     LuceneSearchConfigurator configurator = new LuceneSearchConfigurator();
-    Element searchEngineElement = DomUtilImpl.requireFirstChildElement(element,
+    DomUtil domUtil = DomUtilImpl.getInstance();
+    Element searchEngineElement = domUtil.requireFirstChildElement(element,
         SearchConfigurator.XML_TAG_SEARCH_ENGINE);
     LuceneSearchIndexer luceneIndexer = configurator.createSearchIndexer(searchEngineElement);
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);

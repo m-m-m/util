@@ -12,6 +12,7 @@ import org.w3c.dom.Element;
 import net.sf.mmm.search.base.AbstractSearchConfigurator;
 import net.sf.mmm.search.engine.impl.LuceneSearchEngine;
 import net.sf.mmm.search.indexer.impl.LuceneSearchIndexer;
+import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
@@ -42,9 +43,9 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
   public static final String XML_ATR_INDEX_PATH = "path";
 
   /**
-   * The name of the XML attribute for the <code>update</code> flag. It
-   * contains a boolean value, that determines if the index will be updated
-   * (true) or rebuild every time (false). The default is <code>false</code>.
+   * The name of the XML attribute for the <code>update</code> flag. It contains
+   * a boolean value, that determines if the index will be updated (true) or
+   * rebuild every time (false). The default is <code>false</code>.
    */
   public static final String XML_ATR_INDEX_UPDATE = "update";
 
@@ -56,6 +57,9 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   public static final String XML_ATR_SEARCH_LEADINGWILDCARD = "leading-wildcard";
 
+  /** The {@link DomUtil} to use. */
+  private DomUtil domUtil;
+
   /**
    * The constructor.
    * 
@@ -63,6 +67,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
   public LuceneSearchConfigurator() {
 
     super();
+    this.domUtil = DomUtilImpl.getInstance();
   }
 
   /**
@@ -74,7 +79,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private String getIndexPath(Element element) {
 
-    Element indexElement = DomUtilImpl.requireFirstChildElement(element, XML_TAG_INDEX);
+    Element indexElement = this.domUtil.requireFirstChildElement(element, XML_TAG_INDEX);
     String indexPath = indexElement.getAttribute(XML_ATR_INDEX_PATH);
     if (indexPath.length() == 0) {
       throw new IllegalArgumentException("Missing attribute " + XML_ATR_INDEX_PATH + " in element "
@@ -95,7 +100,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private Analyzer createAnalyzer(Element element) {
 
-    Element analyzerElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_ANALYZER);
+    Element analyzerElement = this.domUtil.getFirstChildElement(element, XML_TAG_ANALYZER);
     Analyzer analyzer = null;
     if (analyzerElement != null) {
       if (analyzerElement.hasAttribute(XML_ATR_ANALYZER_CLASS)) {
@@ -122,28 +127,29 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    */
   private boolean isIgnoreLeadingWildcards(Element element) {
 
-    Element queryElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_SEARCH);
+    Element queryElement = this.domUtil.getFirstChildElement(element, XML_TAG_SEARCH);
     if (queryElement == null) {
       return true;
     } else {
-      return !DomUtilImpl.getAttributeAsBoolean(queryElement, XML_ATR_SEARCH_LEADINGWILDCARD, false);
+      return !this.domUtil.getAttributeAsBoolean(queryElement, XML_ATR_SEARCH_LEADINGWILDCARD,
+          false);
     }
   }
 
   /**
-   * This method gets the flag <code>update</code> from the configuration
-   * given by <code>element</code>.
+   * This method gets the flag <code>update</code> from the configuration given
+   * by <code>element</code>.
    * 
    * @param element is the element containing the flag.
    * @return the flag.
    */
   private boolean isUpdate(Element element) {
 
-    Element indexElement = DomUtilImpl.getFirstChildElement(element, XML_TAG_INDEX);
+    Element indexElement = this.domUtil.getFirstChildElement(element, XML_TAG_INDEX);
     if (indexElement == null) {
       return false;
     } else {
-      return DomUtilImpl.getAttributeAsBoolean(indexElement, XML_ATR_INDEX_UPDATE, false);
+      return this.domUtil.getAttributeAsBoolean(indexElement, XML_ATR_INDEX_UPDATE, false);
     }
   }
 

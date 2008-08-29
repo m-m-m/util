@@ -11,7 +11,6 @@ import org.w3c.dom.Element;
 import net.sf.mmm.search.base.SearchConfigurator;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This is the controller {@link javax.servlet.Servlet servlet} for the search
@@ -67,7 +66,7 @@ public class GenericSearchServlet extends AbstractSearchServlet {
   protected void configure(Element xmlConfiguration) {
 
     try {
-      Element searchEngineElement = DomUtilImpl.requireFirstChildElement(xmlConfiguration,
+      Element searchEngineElement = getDomUtil().requireFirstChildElement(xmlConfiguration,
           SearchConfigurator.XML_TAG_SEARCH_ENGINE);
       ManagedSearchEngine searchEngine = this.configurator.createSearchEngine(searchEngineElement);
       setSearchEngine(searchEngine);

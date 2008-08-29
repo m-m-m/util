@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 
 import net.sf.mmm.util.filter.api.FilterRule;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
+import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
@@ -78,13 +79,26 @@ public class FilterRuleChainXmlParser {
    */
   public static final String XML_ATR_RULE_PATTERN = "pattern";
 
+  /** @see #FilterRuleChainXmlParser(DomUtil) */
+  private final DomUtil domUtil;
+
   /**
    * The constructor.
-   * 
    */
   public FilterRuleChainXmlParser() {
 
+    this(DomUtilImpl.getInstance());
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param domUtil is the {@link DomUtil} to use.
+   */
+  public FilterRuleChainXmlParser(DomUtil domUtil) {
+
     super();
+    this.domUtil = domUtil;
   }
 
   /**
@@ -179,9 +193,11 @@ public class FilterRuleChainXmlParser {
    *        parse.
    * @return the parsed filter-chain.
    */
+  @SuppressWarnings("unchecked")
   public FilterRuleChain<String> parseChain(Element xmlElement, FilterRuleChain<String> parent) {
 
-    boolean defaultResult = DomUtilImpl.getAttributeAsBoolean(xmlElement, XML_ATR_CHAIN_DEFAULT, true);
+    boolean defaultResult = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_CHAIN_DEFAULT,
+        true);
     List<FilterRule<String>> rules = new ArrayList<FilterRule<String>>();
     NodeList childList = xmlElement.getChildNodes();
     for (int childIndex = 0; childIndex < childList.getLength(); childIndex++) {

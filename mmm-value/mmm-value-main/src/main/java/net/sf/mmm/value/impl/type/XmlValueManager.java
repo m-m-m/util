@@ -15,6 +15,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import net.sf.mmm.util.value.api.ValueParseException;
+import net.sf.mmm.util.xml.api.XmlCompareMode;
 import net.sf.mmm.util.xml.api.XmlException;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 import net.sf.mmm.value.api.ValueParseStringException;
@@ -27,6 +28,9 @@ import net.sf.mmm.value.base.AbstractValueManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XmlValueManager extends AbstractValueManager<Element> {
+
+  /** The {@link XmlCompareMode}. */
+  private static final XmlCompareMode XML_COMPARE_MODE = new XmlCompareMode();
 
   /**
    * The {@link net.sf.mmm.value.api.ValueManager#getName() "logical name"} of
@@ -85,7 +89,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   protected Element fromXmlContent(XMLStreamReader xmlReader) throws XMLStreamException {
 
     Document doc = DomUtilImpl.getInstance().createDocument();
-    //getStaxUtil().writeToDom(xmlReader, doc);
+    // getStaxUtil().writeToDom(xmlReader, doc);
     return doc.getDocumentElement();
   }
 
@@ -110,7 +114,7 @@ public class XmlValueManager extends AbstractValueManager<Element> {
   @Override
   public boolean isEqual(Element value1, Element value2) {
 
-    return DomUtilImpl.getInstance().isEqual(value1, value2, mode);
+    return DomUtilImpl.getInstance().isEqual(value1, value2, XML_COMPARE_MODE);
   }
 
 }

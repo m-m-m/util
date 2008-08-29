@@ -117,7 +117,7 @@ public class DirectorySearchIndexer {
    * 
    * @see net.sf.mmm.util.filter.FilterRuleChainXmlParser
    * @see net.sf.mmm.util.filter.FilterRuleChainPlainParser
-   * @see net.sf.mmm.util.filter.FileFilterAdapter
+   * @see net.sf.mmm.util.file.base.FileFilterAdapter
    * 
    * @param filter the filter to set
    */
@@ -239,9 +239,8 @@ public class DirectorySearchIndexer {
    * This method starts the indexing from the given <code>directory</code>
    * adding the given <code>source</code> as metadata.
    * 
-   * @param source is the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
-   *        attribute of the indexed entries.
+   * @param source is the {@link net.sf.mmm.search.api.SearchEntry#getSource()
+   *        source} attribute of the indexed entries.
    * @param directory is the directory to index recursively.
    */
   public void indexDirectory(String source, File directory) {
@@ -255,22 +254,20 @@ public class DirectorySearchIndexer {
    * 
    * @see net.sf.mmm.search.api.SearchEntry#getSource()
    * 
-   * @param source is the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
-   *        attribute of the indexed entries.
+   * @param source is the {@link net.sf.mmm.search.api.SearchEntry#getSource()
+   *        source} attribute of the indexed entries.
    * @param directory is the directory to index recursively.
    * @param relativePath is the base path where used to build the
    *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the
-   *        indexed entries. E.g. when <code>source</code> is
-   *        <code>"svn"</code> and <code>directory</code> points to where
-   *        you checked out a subversion repository then
-   *        <code>relativePath</code> may be <code>"trunk"</code>. This is
-   *        especially useful, when you index multiple sub-directories from the
-   *        same <code>source</code>. You could also use
-   *        <code>"http://svn.foo.bar/trunk"</code> as
-   *        <code>relativePath</code> but this would cause a lot of
-   *        unnecessary redundancies in your index. Besides you would rather
-   *        search for <code>source:svn</code> than
+   *        indexed entries. E.g. when <code>source</code> is <code>"svn"</code>
+   *        and <code>directory</code> points to where you checked out a
+   *        subversion repository then <code>relativePath</code> may be
+   *        <code>"trunk"</code>. This is especially useful, when you index
+   *        multiple sub-directories from the same <code>source</code>. You
+   *        could also use <code>"http://svn.foo.bar/trunk"</code> as
+   *        <code>relativePath</code> but this would cause a lot of unnecessary
+   *        redundancies in your index. Besides you would rather search for
+   *        <code>source:svn</code> than
    *        <code>uri:http://svn.foo.bar/trunk/*</code>.
    */
   public void indexDirectory(String source, File directory, String relativePath) {
@@ -313,15 +310,13 @@ public class DirectorySearchIndexer {
   /**
    * This method indexes a single file.
    * 
-   * @param source is the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getSource() source}
-   *        attribute of the indexed entry.
+   * @param source is the {@link net.sf.mmm.search.api.SearchEntry#getSource()
+   *        source} attribute of the indexed entry.
    * @param file is the file to index.
    * @param relativePath is the path of the folder where the file is located
    *        relative to the path given when the indexing was started. This is
-   *        used to build the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the file
-   *        in the search index.
+   *        used to build the {@link net.sf.mmm.search.api.SearchEntry#getUri()
+   *        URI} of the file in the search index.
    */
   public void indexFile(String source, File file, String relativePath) {
 
