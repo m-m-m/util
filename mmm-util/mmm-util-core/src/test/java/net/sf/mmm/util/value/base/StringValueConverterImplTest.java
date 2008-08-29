@@ -24,16 +24,16 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
- * This is the test-case for {@link StringValueConverter}.
+ * This is the test-case for {@link StringValueConverterImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringValueConverterTest {
+public class StringValueConverterImplTest {
 
   public GenericValueConverter<String> getConverter() {
 
-    return StringValueConverter.getInstance();
+    return StringValueConverterImpl.getInstance();
   }
 
   protected Iso8601Util getIso8601Util() {

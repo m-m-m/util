@@ -10,6 +10,7 @@ import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
+import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -23,7 +24,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class Iso8601UtilImpl implements net.sf.mmm.util.date.api.Iso8601Util {
+public final class Iso8601UtilImpl implements Iso8601Util {
 
   /**
    * This is the singleton instance of this {@link Iso8601UtilImpl}. Instead of

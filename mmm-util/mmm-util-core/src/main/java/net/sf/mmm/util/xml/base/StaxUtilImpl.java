@@ -16,8 +16,9 @@ import javax.xml.stream.XMLStreamWriter;
 import org.w3c.dom.Node;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
-import net.sf.mmm.util.value.base.StringValueConverter;
+import net.sf.mmm.util.value.base.StringValueConverterImpl;
 import net.sf.mmm.util.xml.api.StaxUtil;
 
 /**
@@ -120,7 +121,7 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
 
     super.doInitialize();
     if (this.valueConverter == null) {
-      this.valueConverter = StringValueConverter.getInstance();
+      this.valueConverter = StringValueConverterImpl.getInstance();
     }
     if (this.xmlOutputFactory == null) {
       this.xmlOutputFactory = XMLOutputFactory.newInstance();

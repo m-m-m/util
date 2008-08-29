@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.io.base.EncodingUtilImpl;
-
 /**
  * This type represents a Byte-Order-Mark (<a
  * href="http://www.unicode.org/unicode/faq/utf_bom.html#BOM">BOM</a>) of an
@@ -53,8 +51,8 @@ public enum ByteOrderMark {
   },
 
   /**
-   * The {@link ByteOrderMark} for
-   * {@link EncodingUtil#ENCODING_UTF_16_BE UTF-16BE}:<br>
+   * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_16_BE
+   * UTF-16BE}:<br>
    * <code>0xfe 0xff</code>
    */
   UTF_16_BE() {
@@ -92,8 +90,8 @@ public enum ByteOrderMark {
   },
 
   /**
-   * The {@link ByteOrderMark} for
-   * {@link EncodingUtil#ENCODING_UTF_16_LE UTF16-LE}:<br>
+   * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_16_LE
+   * UTF16-LE}:<br>
    * <code>0xfe 0xff</code>
    */
   UTF_16_LE() {
@@ -131,8 +129,8 @@ public enum ByteOrderMark {
   },
 
   /**
-   * The {@link ByteOrderMark} for
-   * {@link EncodingUtil#ENCODING_UTF_32_BE UTF-32BE}:<br>
+   * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_32_BE
+   * UTF-32BE}:<br>
    * <code>0xfe 0xff</code>
    */
   UTF_32_BE() {
@@ -171,8 +169,8 @@ public enum ByteOrderMark {
   },
 
   /**
-   * The {@link ByteOrderMark} for
-   * {@link EncodingUtil#ENCODING_UTF_32_LE UTF-32LE}:<br>
+   * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_32_LE
+   * UTF-32LE}:<br>
    * <code>0xfe 0xff</code>
    */
   UTF_32_LE() {
@@ -239,8 +237,8 @@ public enum ByteOrderMark {
    * @param bytes is the buffer with the bytes to check.
    * @param offset is the index of the first data-byte in <code>bytes</code>.
    *        Will typically be <code>0</code>.
-   * @return <code>true</code> if this {@link ByteOrderMark BOM} was detected
-   *         in the
+   * @return <code>true</code> if this {@link ByteOrderMark BOM} was detected in
+   *         the
    */
   public final boolean isPresent(byte[] bytes, int offset) {
 
@@ -256,8 +254,8 @@ public enum ByteOrderMark {
    * @param bytes is the buffer with the bytes to check.
    * @param offset is the index of the first data-byte in <code>bytes</code>.
    *        Will typically be <code>0</code>.
-   * @return <code>true</code> if this {@link ByteOrderMark BOM} was detected
-   *         in the
+   * @return <code>true</code> if this {@link ByteOrderMark BOM} was detected in
+   *         the
    */
   protected abstract boolean checkPresent(byte[] bytes, int offset);
 

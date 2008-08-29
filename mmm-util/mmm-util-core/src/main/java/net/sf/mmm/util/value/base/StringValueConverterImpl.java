@@ -13,6 +13,7 @@ import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.math.base.MathUtilImpl;
+import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
@@ -22,10 +23,11 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class StringValueConverter extends AbstractGenericValueConverter<String> {
+public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements
+    StringValueConverter {
 
   /** @see #getInstance() */
-  private static StringValueConverter instance;
+  private static StringValueConverterImpl instance;
 
   /** @see #getIso8601Util() */
   private Iso8601Util iso8601Util;
@@ -33,14 +35,14 @@ public class StringValueConverter extends AbstractGenericValueConverter<String> 
   /**
    * The constructor.
    */
-  public StringValueConverter() {
+  public StringValueConverterImpl() {
 
     super();
   }
 
   /**
    * This method gets the singleton instance of this
-   * {@link StringValueConverter}.<br>
+   * {@link StringValueConverterImpl}.<br>
    * This design is the best compromise between easy access (via this
    * indirection you have direct, static access to all offered functionality)
    * and IoC-style design which allows extension and customization.<br>
@@ -53,12 +55,12 @@ public class StringValueConverter extends AbstractGenericValueConverter<String> 
    * 
    * @return the singleton instance.
    */
-  public static StringValueConverter getInstance() {
+  public static StringValueConverterImpl getInstance() {
 
     if (instance == null) {
-      synchronized (StringValueConverter.class) {
+      synchronized (StringValueConverterImpl.class) {
         if (instance == null) {
-          instance = new StringValueConverter();
+          instance = new StringValueConverterImpl();
           instance.setIso8601Util(Iso8601UtilImpl.getInstance());
         }
       }
