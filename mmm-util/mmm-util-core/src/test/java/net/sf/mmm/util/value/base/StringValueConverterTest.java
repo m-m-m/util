@@ -18,7 +18,7 @@ import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.value.api.GenericValueConverter;
+import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
@@ -29,9 +29,9 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringValueConverterImplTest {
+public class StringValueConverterTest {
 
-  public GenericValueConverter<String> getConverter() {
+  public StringValueConverter getStringValueConverter() {
 
     return StringValueConverterImpl.getInstance();
   }
@@ -48,45 +48,46 @@ public class StringValueConverterImplTest {
     int value = 42;
     String valueString = Integer.toString(value);
     // test byte
-    byte byteValue = getConverter().convertValue(valueString, source, byte.class);
+    byte byteValue = getStringValueConverter().convertValue(valueString, source, byte.class);
     assertEquals(value, byteValue);
-    Byte byteObject = getConverter().convertValue(valueString, source, Byte.class);
+    Byte byteObject = getStringValueConverter().convertValue(valueString, source, Byte.class);
     assertEquals(value, byteObject.byteValue());
     // test short
-    short shortValue = getConverter().convertValue(valueString, source, short.class);
+    short shortValue = getStringValueConverter().convertValue(valueString, source, short.class);
     assertEquals(value, shortValue);
-    Short shortObject = getConverter().convertValue(valueString, source, Short.class);
+    Short shortObject = getStringValueConverter().convertValue(valueString, source, Short.class);
     assertEquals(value, shortObject.shortValue());
     // test int
-    int intValue = getConverter().convertValue(valueString, source, int.class);
+    int intValue = getStringValueConverter().convertValue(valueString, source, int.class);
     assertEquals(value, intValue);
-    Integer integerObject = getConverter().convertValue(valueString, source, Integer.class);
+    Integer integerObject = getStringValueConverter().convertValue(valueString, source,
+        Integer.class);
     assertEquals(value, integerObject.intValue());
     // test long
-    long longValue = getConverter().convertValue(valueString, source, long.class);
+    long longValue = getStringValueConverter().convertValue(valueString, source, long.class);
     assertEquals(value, longValue);
-    Long longObject = getConverter().convertValue(valueString, source, Long.class);
+    Long longObject = getStringValueConverter().convertValue(valueString, source, Long.class);
     assertEquals(value, longObject.longValue());
     // test float
-    float floatValue = getConverter().convertValue(valueString, source, float.class);
+    float floatValue = getStringValueConverter().convertValue(valueString, source, float.class);
     assertEquals(value, floatValue, 0.0);
-    Float floatObject = getConverter().convertValue(valueString, source, Float.class);
+    Float floatObject = getStringValueConverter().convertValue(valueString, source, Float.class);
     assertEquals(value, floatObject.floatValue(), 0.0);
     // test double
-    double doubleValue = getConverter().convertValue(valueString, source, double.class);
+    double doubleValue = getStringValueConverter().convertValue(valueString, source, double.class);
     assertEquals(value, doubleValue, 0.0);
-    Double doubleObject = getConverter().convertValue(valueString, source, Double.class);
+    Double doubleObject = getStringValueConverter().convertValue(valueString, source, Double.class);
     assertEquals(value, doubleObject.doubleValue(), 0.0);
     // test number
-    Number numberObject = getConverter().convertValue(valueString, source, Number.class);
+    Number numberObject = getStringValueConverter().convertValue(valueString, source, Number.class);
     assertEquals(value, numberObject.intValue());
     assertEquals(Byte.class, numberObject.getClass());
-    integerObject = getConverter().convertValue(valueString, source, value, value);
+    integerObject = getStringValueConverter().convertValue(valueString, source, value, value);
     assertEquals(value, integerObject.intValue());
     Integer minimum = Integer.valueOf(value - 2);
     Integer maximum = Integer.valueOf(value - 1);
     try {
-      integerObject = getConverter().convertValue(valueString, source, minimum, maximum);
+      integerObject = getStringValueConverter().convertValue(valueString, source, minimum, maximum);
       fail("Exception expected");
     } catch (ValueOutOfRangeException e) {
       // this is expected
@@ -96,45 +97,50 @@ public class StringValueConverterImplTest {
       assertEquals(source, e.getNlsMessage().getArgument(3));
     }
     // test string
-    assertEquals(valueString, getConverter().convertValue(valueString, source, String.class));
+    assertEquals(valueString, getStringValueConverter().convertValue(valueString, source,
+        String.class));
     // test boolean
-    assertTrue(getConverter().convertValue(StringUtil.TRUE, source, Boolean.class).booleanValue());
-    assertTrue(getConverter().convertValue(StringUtil.TRUE, source, boolean.class));
-    assertFalse(getConverter().convertValue(StringUtil.FALSE, source, Boolean.class).booleanValue());
-    assertFalse(getConverter().convertValue(StringUtil.FALSE, source, boolean.class));
+    assertTrue(getStringValueConverter().convertValue(StringUtil.TRUE, source, Boolean.class)
+        .booleanValue());
+    assertTrue(getStringValueConverter().convertValue(StringUtil.TRUE, source, boolean.class));
+    assertFalse(getStringValueConverter().convertValue(StringUtil.FALSE, source, Boolean.class)
+        .booleanValue());
+    assertFalse(getStringValueConverter().convertValue(StringUtil.FALSE, source, boolean.class));
     // test char
     char c = '\u0223';
     String charString = Character.toString(c);
-    assertEquals(Character.valueOf(c), getConverter().convertValue(charString, source, char.class));
-    assertEquals(Character.valueOf(c), getConverter().convertValue(charString, source,
+    assertEquals(Character.valueOf(c), getStringValueConverter().convertValue(charString, source,
+        char.class));
+    assertEquals(Character.valueOf(c), getStringValueConverter().convertValue(charString, source,
         Character.class));
     // test date
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
     Date date = calendar.getTime();
     String dateString = getIso8601Util().formatDateTime(date);
-    assertEquals(date, getConverter().convertValue(dateString, source, Date.class));
+    assertEquals(date, getStringValueConverter().convertValue(dateString, source, Date.class));
     // test class
     Class<?> type = Void.class;
     String typeString = type.getName();
-    assertEquals(type, getConverter().convertValue(typeString, source, Class.class));
+    assertEquals(type, getStringValueConverter().convertValue(typeString, source, Class.class));
     // test enum
     RetentionPolicy policy = RetentionPolicy.RUNTIME;
-    assertEquals(policy, getConverter().convertValue(policy.name(), source, RetentionPolicy.class));
+    assertEquals(policy, getStringValueConverter().convertValue(policy.name(), source,
+        RetentionPolicy.class));
     Conjunction conjunction = Conjunction.NOR;
-    assertEquals(conjunction, getConverter().convertValue(conjunction.name(), source,
+    assertEquals(conjunction, getStringValueConverter().convertValue(conjunction.name(), source,
         Conjunction.class));
     // test default-value
-    assertEquals(valueString, getConverter().convertValue(null, source, String.class, type,
-        valueString));
-    assertEquals(valueString, getConverter().convertValue(valueString, source, String.class, type,
-        "default"));
-    integerObject = getConverter().convertValue(null, source, value, value, value);
+    assertEquals(valueString, getStringValueConverter().convertValue(null, source, String.class,
+        type, valueString));
+    assertEquals(valueString, getStringValueConverter().convertValue(valueString, source,
+        String.class, type, "default"));
+    integerObject = getStringValueConverter().convertValue(null, source, value, value, value);
     assertEquals(value, integerObject.intValue());
     // wrong value type
     String noIntegerValue = "twentyfive";
     try {
-      getConverter().convertValue(noIntegerValue, source, Integer.class);
+      getStringValueConverter().convertValue(noIntegerValue, source, Integer.class);
       fail("Exception expected");
     } catch (WrongValueTypeException e) {
       // expected
@@ -145,7 +151,7 @@ public class StringValueConverterImplTest {
     }
     // value not set
     try {
-      getConverter().convertValue(null, source, Integer.class);
+      getStringValueConverter().convertValue(null, source, Integer.class);
       fail("Exception expected");
     } catch (ValueNotSetException e) {
       // expected

@@ -12,9 +12,9 @@
  * base-implementation of the {@link net.sf.mmm.util.reflect.api.GenericType} 
  * interface. However end-users should create instances of 
  * {@link net.sf.mmm.util.reflect.api.GenericType} via 
- * {@link net.sf.mmm.util.reflect.base.ReflectionUtilImpl}.
- * Further this package provides {@link net.sf.mmm.util.filter.api.Filter}s such
- * as {@link net.sf.mmm.util.reflect.base.AnnotationFilter} and 
+ * {@link net.sf.mmm.util.reflect.api.ReflectionUtil}.
+ * Further this package provides {@link net.sf.mmm.util.filter.api.Filter}s for 
+ * end-users such as {@link net.sf.mmm.util.reflect.base.AnnotationFilter} and 
  * {@link net.sf.mmm.util.reflect.base.AssignableFromFilter} that only 
  * {@link net.sf.mmm.util.filter.api.Filter#accept(Object) accept}  
  * {@link java.lang.Class}es with specific reflective attributes.

@@ -5,6 +5,7 @@
   <import resource="classpath:net/sf/mmm/util/lang/beans-util-lang.xml" />
   <import resource="classpath:net/sf/mmm/util/math/beans-util-math.xml" />
   <import resource="classpath:net/sf/mmm/util/date/beans-util-date.xml" />
+  <import resource="classpath:net/sf/mmm/util/reflect/beans-util-reflect.xml" />
 
   <bean id="net.sf.mmm.util.value.api.StringValueConverter" class="net.sf.mmm.util.value.base.StringValueConverterImpl"/>
   <bean id="net.sf.mmm.util.value.api.ComposedValueConverter" class="net.sf.mmm.util.value.impl.DefaultComposedValueConverter"/>

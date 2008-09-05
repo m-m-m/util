@@ -23,7 +23,6 @@ import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
-import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 
 /**
  * This is the test-case for {@link CollectionReflectionUtilImpl}.
@@ -33,7 +32,7 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 @SuppressWarnings("all")
 public class CollectionReflectionUtilTest {
 
-  protected CollectionReflectionUtilImpl getCollectionReflectionUtil() {
+  protected CollectionReflectionUtil getCollectionReflectionUtil() {
 
     return CollectionReflectionUtilImpl.getInstance();
   }
@@ -41,7 +40,7 @@ public class CollectionReflectionUtilTest {
   @Test
   public void testCreate() {
 
-    CollectionReflectionUtilImpl util = getCollectionReflectionUtil();
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
     List<String> list = util.create(List.class);
     assertNotNull(list);
     assertTrue(list.isEmpty());

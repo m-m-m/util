@@ -8,7 +8,8 @@
 
   <body>
     <h2>Conventions</h2>
-    <macro name="toc" fromDepth="0"/>
+    <macro name="toc" fromDepth="0">
+    </macro>
     <section name="General">
       <p>This project aims to produce high quality software. Therefore it is very
       important that the code is well designed, documented and tested.
@@ -184,11 +185,18 @@
       missunderstood than the term component.
       <subsection name="Micro-Component">
         A <em>micro-component</em> is a piece of software located below some 
-        package <code><b>component.package</b></code>. It is mainly 
-        represented via a single interface <code><b>ComponentInterface</b></code>
-        that is locaed below the package <code><b>component.package</b>.api</code>.
-        All
-        checked exceptions 
+        package <code>&lt;component.package&gt;</code>. It is mainly 
+        represented via a single interface <code>&lt;ComponentInterface&gt;</code>
+        that is locaed below the package <code>&lt;component.package&gt;.api</code>
+        that defines an API in the sense as defined above.
+        This API (all code located in the package 
+        <code>&lt;component.package&gt;.api</code> and all its subpackages) 
+        only contains interfaces and exception classes. It may also contain simple 
+        container classes (e.g. event-classes or java-beans). All classes 
+        referenced from the API need to come from the API itself, an API of
+        another component, the ...
+        All arguments and return-types used in the interface need to 
+        All checked exceptions used in the API 
       </subsection>
       <subsection name="Component-Package">
       </subsection>

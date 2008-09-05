@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pool.impl;
 
+import net.sf.mmm.util.pool.api.ByteArrayPool;
 import net.sf.mmm.util.pool.base.AbstractPool;
 
 /**
@@ -11,7 +12,7 @@ import net.sf.mmm.util.pool.base.AbstractPool;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ByteArrayPoolImpl extends AbstractPool<byte[]> {
+public class ByteArrayPoolImpl extends AbstractPool<byte[]> implements ByteArrayPool {
 
   /** The default array length. */
   public static final int DEFAULT_ARRAY_LENGTH = 4096;

@@ -2,7 +2,7 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Provides the API for objects that help to deal with reflection.
+ * Provides the API for utilities that help to deal with reflection.
  * <h2>Reflection-Util API</h2>
  * Java reflection is a powerful mechanism that allows flexible and generic 
  * programming. With Java5 a generic type-system was introduced. However this
@@ -15,7 +15,9 @@
  * finding all classes located in the classpath or a specific package.<br>
  * Therefore {@link net.sf.mmm.util.reflect.api.ReflectionUtil} will help you to 
  * deal with reflection. For advanced support when reading annotations have a 
- * look at {@link net.sf.mmm.util.reflect.api.AnnotationUtil}.<br>
+ * look at {@link net.sf.mmm.util.reflect.api.AnnotationUtil}. Additionally
+ * {@link net.sf.mmm.util.reflect.api.CollectionReflectionUtil} offers 
+ * reflective and generic operations on {@link java.util.Collection}s.<br>
  * Further the interface {@link net.sf.mmm.util.reflect.api.ClassResolver} allows
  * to retrieve {@link java.lang.Class}es by name in order to abstract from 
  * {@link java.lang.ClassLoader}s as well as to do name mappings (e.g. 

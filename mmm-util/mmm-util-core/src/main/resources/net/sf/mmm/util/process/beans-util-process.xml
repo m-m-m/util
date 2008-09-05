@@ -2,7 +2,8 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <!-- $Id$ -->
 <beans>
-  <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
+  <!--<import resource="classpath:net/sf/mmm/util/concurrent/beans-util-concurrent.xml" />-->
+  <import resource="classpath:net/sf/mmm/util/io/beans-util-io.xml" />
 
   <bean id="net.sf.mmm.util.process.api.ProcessUtil" class="net.sf.mmm.util.process.base.ProcessUtilImpl"/>
 </beans>

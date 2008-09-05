@@ -2,8 +2,9 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains scanners to parse character sequences efficient and easily.
- * <h2>Character Scanners</h2>
+ * Provides the API for scanners that help to parse character sequences 
+ * efficient and easily.
+ * <h2>Character Scanner API</h2>
  * For efficient parsers of complex grammars it is best practice to use a parser
  * generator like <code>javacc</code> or <code>antlr</code>.<br>
  * However in some situations it is more suitable to write a handwritten parser.
@@ -54,15 +55,15 @@
  * Here is the same thing when using {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}:
  * <pre>
  * String input = getInputString();
- * {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} scanner = new {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}(input);
- * String key = scanner.{@link net.sf.mmm.util.scanner.base.CharSequenceScanner#readUntil(char, boolean) readUntil}(':', false);
+ * {@link net.sf.mmm.util.scanner.api.CharStreamScanner} scanner = new {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}(input);
+ * String key = scanner.{@link net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean) readUntil}(':', false);
  * if (key == null) {
  *   throw new IllegalArgumentException("Expected character ':' not found!");
  * }
- * scanner.{@link net.sf.mmm.util.scanner.base.CharSequenceScanner#skipWhile(char) skipWhile}(' ');
- * String value = scanner.{@link net.sf.mmm.util.scanner.base.CharSequenceScanner#readWhile(net.sf.mmm.util.filter.api.CharFilter) 
+ * scanner.{@link net.sf.mmm.util.scanner.api.CharStreamScanner#skipWhile(char) skipWhile}(' ');
+ * String value = scanner.{@link net.sf.mmm.util.scanner.api.CharStreamScanner#readWhile(net.sf.mmm.util.filter.api.CharFilter) 
  * readWhile}({@link net.sf.mmm.util.filter.api.CharFilter#LATIN_DIGIT_FILTER});
  * </pre>
  */
-package net.sf.mmm.util.scanner;
+package net.sf.mmm.util.scanner.api;
 

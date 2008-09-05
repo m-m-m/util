@@ -15,5 +15,11 @@
   <description>infrastructure for project setup</description>
   
   <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>

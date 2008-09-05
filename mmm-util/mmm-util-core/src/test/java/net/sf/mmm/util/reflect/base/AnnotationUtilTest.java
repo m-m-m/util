@@ -19,8 +19,8 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.AnnotationUtilImpl;
 
 /**
  * This is the {@link TestCase} for the class {@link AnnotationUtilImpl}.
@@ -36,7 +36,7 @@ public class AnnotationUtilTest {
 
   private static final String BAR_CLASS = "Foo-class";
 
-  protected AnnotationUtilImpl getAnnotationUtil() {
+  protected AnnotationUtil getAnnotationUtil() {
 
     return AnnotationUtilImpl.getInstance();
   }
@@ -44,7 +44,7 @@ public class AnnotationUtilTest {
   @Test
   public void testMethodAnnotation() throws Exception {
 
-    AnnotationUtilImpl util = getAnnotationUtil();
+    AnnotationUtil util = getAnnotationUtil();
     // annotation with retention "runtime" ?
     assertTrue(util.isRuntimeAnnotation(MyAnnotation.class));
     assertFalse(util.isRuntimeAnnotation(SuppressWarnings.class));

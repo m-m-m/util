@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.io;
+package net.sf.mmm.util.io.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -25,7 +25,6 @@ import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.io.api.DevZero;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
-import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
@@ -38,7 +37,7 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
 @SuppressWarnings("all")
 public class StreamUtilTest {
 
-  public StreamUtil getStreamUtil() {
+  protected StreamUtil getStreamUtil() {
 
     return StreamUtilImpl.getInstance();
   }

@@ -14,10 +14,9 @@ import java.util.TimeZone;
 import org.junit.Test;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
-import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 
 /**
- * This is the test-case for {@link DateUtil}.
+ * This is the test-case for {@link Iso8601UtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

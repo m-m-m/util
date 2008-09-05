@@ -3,12 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pool.base;
 
+import net.sf.mmm.util.pool.api.ByteArrayPool;
+
 /**
  * This is a {@link AbstractNoPool dummy pool} for byte-arrays.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public final class NoByteArrayPool extends AbstractNoPool<byte[]> {
+public final class NoByteArrayPool extends AbstractNoPool<byte[]> implements ByteArrayPool {
 
   /** The singleton instance. */
   public static final NoByteArrayPool INSTANCE = new NoByteArrayPool();

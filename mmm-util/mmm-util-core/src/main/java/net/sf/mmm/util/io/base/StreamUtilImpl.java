@@ -131,7 +131,7 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
    * 
    * @param byteArrayPool the byteArrayPool to set
    */
-  @Resource
+  // @Resource
   public void setByteArrayPool(Pool<byte[]> byteArrayPool) {
 
     getInitializationState().requireNotInitilized();
@@ -156,7 +156,7 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
    * 
    * @param charArrayPool the charArrayPool to set
    */
-  @Resource
+  // @Resource
   public void setCharArrayPool(Pool<char[]> charArrayPool) {
 
     getInitializationState().requireNotInitilized();

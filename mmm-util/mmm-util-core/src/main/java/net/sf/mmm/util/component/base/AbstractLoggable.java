@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.base;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -57,7 +55,7 @@ public abstract class AbstractLoggable extends AbstractComponent {
    * @throws AlreadyInitializedException if this component has already been
    *         {@link #initialize() initialized}.
    */
-  @Resource
+  // @Resource
   public void setLogger(Log logger) throws AlreadyInitializedException {
 
     getInitializationState().requireNotInitilized();
