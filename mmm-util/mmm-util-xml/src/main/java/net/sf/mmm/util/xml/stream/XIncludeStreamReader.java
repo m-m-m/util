@@ -16,7 +16,7 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.util.StreamReaderDelegate;
 
 import net.sf.mmm.util.io.base.StreamUtilImpl;
-import net.sf.mmm.util.resource.DataResource;
+import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.xml.api.StaxUtil;
 import net.sf.mmm.util.xml.api.XmlUtil;
 import net.sf.mmm.util.xml.base.StaxUtilImpl;
@@ -25,11 +25,9 @@ import net.sf.mmm.util.xml.base.StaxUtilImpl;
  * This is an implementation of the {@link XMLStreamReader} interface that
  * adapts an {@link XMLStreamReader} adding simple support for XInclude.<br>
  * For details about XInclude see: <a
- * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>
+ * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>.<br>
  * Please note that only plain XML inclusion is currently supported and no
  * XPointer.
- * 
- * TODO: detect infinity loops via inclusions
  * 
  * <pre>
  * &lt;include&gt; depth=1, fallback=false
@@ -82,8 +80,8 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
 
   /**
    * The current depth in the XML tree relative to the first "include" tag of
-   * the XInclude namespace that is currently active. Will be <code>0</code>
-   * if we are outside of an XInclude.
+   * the XInclude namespace that is currently active. Will be <code>0</code> if
+   * we are outside of an XInclude.
    */
   private int depth;
 

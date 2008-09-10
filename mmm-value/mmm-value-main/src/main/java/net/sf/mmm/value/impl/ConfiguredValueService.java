@@ -9,7 +9,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.util.resource.ClasspathResource;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.value.NlsBundleValueMain;
 import net.sf.mmm.value.api.ValueManager;

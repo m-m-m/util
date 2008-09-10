@@ -39,8 +39,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.base.AnnotationFilter;
-import net.sf.mmm.util.resource.ClasspathResource;
-import net.sf.mmm.util.resource.DataResource;
+import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.xml.api.StaxUtil;
 import net.sf.mmm.util.xml.base.StaxUtilImpl;
 

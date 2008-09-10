@@ -9,7 +9,7 @@ import java.util.Locale;
 import org.junit.Test;
 import org.w3c.dom.Element;
 
-import net.sf.mmm.util.resource.ClasspathResource;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 import junit.framework.TestCase;

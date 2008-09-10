@@ -10,8 +10,8 @@ import java.util.Properties;
 import org.junit.Test;
 
 import net.sf.mmm.search.parser.api.ContentParser;
-import net.sf.mmm.util.resource.ClasspathResource;
-import net.sf.mmm.util.resource.DataResource;
+import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 import junit.framework.TestCase;
 
