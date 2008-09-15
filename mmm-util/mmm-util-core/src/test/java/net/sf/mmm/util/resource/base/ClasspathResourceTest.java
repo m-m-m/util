@@ -3,6 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,19 +14,16 @@ import java.io.InputStreamReader;
 import org.junit.Test;
 
 import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.resource.base.ClasspathResource;
-
-import static org.junit.Assert.*;
 
 /**
- * This is the {@link TestCase} for the class {@link ClasspathUtil}.
+ * This is the test-case for the class {@link ClasspathUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class ClasspathResourceTest {
 
-  public void verifyResource(DataResource resource) throws Exception {
+  public static void verifyResource(DataResource resource) throws Exception {
 
     assertTrue(resource.isAvailable());
     assertEquals(41, resource.getSize());

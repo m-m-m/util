@@ -4,8 +4,6 @@
 package net.sf.mmm.util.io.api;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 /**
  * This is the interface for a collection of utility functions to that help deal
@@ -373,26 +371,27 @@ public interface EncodingUtil {
   String ENCODING_WINDOWS_1258 = "windows-1258";
 
   /**
-   * This method creates a new {@link Reader} for the given
-   * <code>inputStream</code>. The {@link Reader} automatically detects UTF
-   * (Unicode Transformation Format) encodings. If the data provided by
-   * <code>inputStream</code> is NOT in such encoding, it will use the given
+   * This method creates a new {@link java.io.Reader} for the given
+   * <code>inputStream</code>. The {@link EncodingDetectionReader} automatically
+   * detects UTF (Unicode Transformation Format) encodings. If the data provided
+   * by <code>inputStream</code> is NOT in such encoding, it will use the given
    * <code>nonUtfEncoding</code> as fallback.<br>
-   * The {@link Reader} will behave like {@link InputStreamReader} but with an
-   * encoding that is automatically detected whilst reading. It will use a
-   * lookahead buffer to detect the encoding. As long as no UTF characteristic
-   * was detected and only ASCII-characters (<code>&lt;128</code>) are hit, the
-   * encoding remains {@link #ENCODING_US_ASCII}. As soon as an UTF sequence was
-   * detected (e.g. {@link #ENCODING_UTF_8} or {@link #ENCODING_UTF_16_BE}), the
-   * encoding switches to that encoding. If a non-ASCII character is hit and no
-   * UTF encoding is detected, the {@link Reader} switches to the given
-   * <code>nonUtfEncoding</code>.
+   * The {@link EncodingDetectionReader} will behave like
+   * {@link java.io.InputStreamReader} but with an encoding that is
+   * automatically detected whilst reading. It will use a lookahead buffer to
+   * detect the encoding. As long as no UTF characteristic was detected and only
+   * ASCII-characters (<code>&lt;128</code>) are hit, the encoding remains
+   * {@link #ENCODING_US_ASCII}. As soon as an UTF sequence was detected (e.g.
+   * {@link #ENCODING_UTF_8} or {@link #ENCODING_UTF_16_BE}), the encoding
+   * switches to that encoding. If a non-ASCII character is hit and no UTF
+   * encoding is detected, the {@link EncodingDetectionReader} switches to the
+   * given <code>nonUtfEncoding</code>.
    * 
    * @param inputStream is the {@link InputStream} to decode and read.
    * @param nonUtfEncoding is the encoding to use in case the data is NOT
    *        encoded in UTF (e.g. {@link #ENCODING_ISO_8859_15}). It is pointless
    *        to use an UTF-based encoding or {@link #ENCODING_US_ASCII} here.
-   * @return a new {@link Reader} that can be used to read the
+   * @return a new {@link EncodingDetectionReader} that can be used to read the
    *         <code>inputStream</code>.
    */
   EncodingDetectionReader createUtfDetectionReader(InputStream inputStream, String nonUtfEncoding);

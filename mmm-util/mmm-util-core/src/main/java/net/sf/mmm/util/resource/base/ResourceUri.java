@@ -81,7 +81,7 @@ public class ResourceUri {
     Matcher matcher = SCHEME_PATTERN.matcher(uri);
     if (matcher.matches()) {
       this.schemePrefix = matcher.group(1);
-      this.path = matcher.group(2);
+      this.path = matcher.group(3);
     } else {
       this.schemePrefix = null;
       this.path = uri;

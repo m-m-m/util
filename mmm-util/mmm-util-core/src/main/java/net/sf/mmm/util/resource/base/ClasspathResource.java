@@ -19,7 +19,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * Anyways a typical mistake is illustrated by the following code example:
  * 
  * <pre>
- * MyClass.class.{@link Class#getResource(String) getResource}("config.xml")
+ * MyClass.class.{@link Class#getResourceAsStream(String) getResourceAsStream}("config.xml")
  * </pre>
  * 
  * This will NOT allow to override resources in other classpath entries and
@@ -31,7 +31,13 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * proper version of the example above is:
  * 
  * <pre>
- * new {@link ClasspathResource#ClasspathResource(String)}((MyClass.class.getPackage(), "config.xml")).{@link #getUrl()}
+ * {@link DataResource} resource = {@link ClasspathResource#ClasspathResource(String) ClasspathResource}((MyClass.class.getPackage(), "config.xml"));
+ * if (!resource.{@link DataResource#isAvailable() isAvailable()}) {
+ *   // possible fallback
+ *   resource = getFallbackResource();
+ * }
+ * InputStream inStream = resource.{@link DataResource#openStream() openStream()};
+ * ...
  * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

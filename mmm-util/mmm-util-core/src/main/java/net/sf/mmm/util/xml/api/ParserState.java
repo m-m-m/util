@@ -1,25 +1,23 @@
-/* $Id: $
+/* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.api;
 
-import net.sf.mmm.util.xml.base.XmlUtilImpl;
-
 /**
  * This inner class contains the state of an HTML
- * {@link XmlUtilImpl#extractPlainText(String, StringBuilder, ParserState) parsing}
+ * {@link XmlUtil#extractPlainText(String, StringBuilder, ParserState) parsing}
  * process.
  */
 public class ParserState {
 
   /** @see #getTagStartIndex() */
-  int tagStartIndex;
+  private int tagStartIndex;
 
   /** @see #getInAttribute() */
-  char inAttribute;
+  private char inAttribute;
 
   /** @see #getCdataCloseCount() */
-  int cdataCloseCount;
+  private int cdataCloseCount;
 
   /**
    * The constructor.

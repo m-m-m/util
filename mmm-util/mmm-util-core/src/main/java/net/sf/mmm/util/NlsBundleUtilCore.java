@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
@@ -49,7 +48,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.component.api.NotInitializedException */
   public static final String ERR_NOT_INITIALIZED = "The object is NOT initialized!";
 
-  /** @see NlsIllegalArgumentException */
+  /** @see net.sf.mmm.util.nls.api.NlsIllegalArgumentException */
   public static final String ERR_ILLEGAL_ARGUMENT = "The given argument \"{0}\" is illegal!";
 
   /** @see net.sf.mmm.util.date.api.IllegalDateFormatException */

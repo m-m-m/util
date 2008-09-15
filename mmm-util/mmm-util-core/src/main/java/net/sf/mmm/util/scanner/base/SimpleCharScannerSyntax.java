@@ -3,13 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.base;
 
-import net.sf.mmm.util.scanner.api.CharStreamScanner;
-
 /**
  * This class is a simple container for the special characters of a syntax to
  * scan.<br>
  * 
- * @see CharStreamScanner#readUntil(char, boolean,
+ * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean,
  *      net.sf.mmm.util.scanner.api.CharScannerSyntax)
  */
 public class SimpleCharScannerSyntax extends AbstractCharScannerSyntax {

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.List;
 
 import net.sf.mmm.util.file.base.FileAccessPermissions;
-import net.sf.mmm.util.file.base.FileUtilImpl;
 
 /**
  * This is the interface for a collection of utility functions for {@link File}
@@ -262,7 +261,7 @@ public interface FileUtil {
    * <pre>
    * {@link File} source = new {@link File}("/usr/local/foo");
    * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
-   * {@link FileUtilImpl}.copyRecursive(source, destination, true);
+   * {@link FileUtil fileUtil}.{@link #copyRecursive(File, File, boolean) copyRecursive}(source, destination, true);
    * </pre>
    * 
    * @param source is the file or directory to copy.
@@ -284,15 +283,8 @@ public interface FileUtil {
    * the final place where the copy should appear rather than the directory
    * where the copy will be located in.<br>
    * <br>
-   * E.g. the following code copies the folder "foo" located in "/usr/local"
-   * recursively to the directory "/tmp". The copy will have the same name
-   * "foo".
    * 
-   * <pre>
-   * {@link File} source = new {@link File}("/usr/local/foo");
-   * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
-   * {@link FileUtilImpl}.copyRecursive(source, destination, true);
-   * </pre>
+   * @see #copyRecursive(File, File, boolean)
    * 
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.

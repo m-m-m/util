@@ -15,11 +15,19 @@ import org.apache.commons.logging.LogFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("unchecked")
-public class CommonTypeVariables {
+public final class CommonTypeVariables {
 
   /**
-   * The {@link TypeVariable} <code>E</code> of
-   * <code>Collection&lt;E&gt;</code>.
+   * The forbidden constructor.
+   */
+  private CommonTypeVariables() {
+
+    super();
+  }
+
+  /**
+   * The {@link TypeVariable} <code>E</code> of <code>Collection&lt;E&gt;</code>
+   * .
    */
   public static final TypeVariable<Class<Collection>> TYPE_VARIABLE_COLLECTION_ELEMENT;
 

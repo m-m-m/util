@@ -4,16 +4,16 @@
 package net.sf.mmm.util.scanner.base;
 
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
-import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
  * This is the abstract base implementation of the {@link CharScannerSyntax}
  * interface.<br>
- * The actual <code>char</code>s like {@link #getEscape() escape} are
- * realized as simple bean-properties and initialized with <code>'\0'</code>
- * so they are disabled by default.
+ * The actual <code>char</code>s like {@link #getEscape() escape} are realized
+ * as simple bean-properties and initialized with <code>'\0'</code> so they are
+ * disabled by default.
  * 
- * @see CharStreamScanner#readUntil(char, boolean, CharScannerSyntax)
+ * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean,
+ *      CharScannerSyntax)
  */
 public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
 
@@ -169,8 +169,8 @@ public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
   }
 
   /**
-   * @param alternativeQuoteStart is the
-   *        {@link #getAltQuoteStart() alt-quote-start} character to set.
+   * @param alternativeQuoteStart is the {@link #getAltQuoteStart()
+   *        alt-quote-start} character to set.
    */
   public void setAltQuoteStart(char alternativeQuoteStart) {
 
@@ -238,8 +238,8 @@ public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
   }
 
   /**
-   * @param altQuoteEscapeLazy the
-   *        {@link #isAltQuoteEscapeLazy() alt-quote-lazy} flag to set
+   * @param altQuoteEscapeLazy the {@link #isAltQuoteEscapeLazy()
+   *        alt-quote-lazy} flag to set
    */
   public void setAltQuoteEscapeLazy(boolean altQuoteEscapeLazy) {
 

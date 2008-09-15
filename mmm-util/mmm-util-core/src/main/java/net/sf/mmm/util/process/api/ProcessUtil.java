@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import net.sf.mmm.util.process.base.ProcessUtilImpl;
-
 /**
  * This is the interface for a collection of utility functions to deal with
  * {@link Process}es.
@@ -50,8 +48,8 @@ public interface ProcessUtil {
    * singleton} variant of this util except you are writing a simple
    * command-line client that does a simple job and then terminates. When
    * writing a server-application or library, that makes such calls repetitive,
-   * you should create your own instance of {@link ProcessUtilImpl} and
-   * configure a thread-pool as {@link java.util.concurrent.Executor}.
+   * you should create your own instance of {@link ProcessUtil} and configure a
+   * thread-pool as {@link java.util.concurrent.Executor}.
    * 
    * @param context is the context of the process pipe (fist <code>stdin</code>,
    *        last <code>stdout</code> and <code>stderr</code> for all processes
@@ -86,8 +84,8 @@ public interface ProcessUtil {
    * singleton} variant of this util except you are writing a simple
    * command-line client that does a simple job and then terminates. When
    * writing a server-application or library, that makes such calls repetitive,
-   * you should create your own instance of {@link ProcessUtilImpl} and
-   * configure a thread-pool as {@link java.util.concurrent.Executor}.
+   * you should create your own instance of {@link ProcessUtil} and configure a
+   * thread-pool as {@link java.util.concurrent.Executor}.
    * 
    * @param context is the context of the process pipe (fist <code>stdin</code>,
    *        last <code>stdout</code> and <code>stderr</code> for all processes

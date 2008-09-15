@@ -25,6 +25,7 @@
         <li><a href="apidocs/net/sf/mmm/util/process/api/package-summary.html">Process-Utilities</a> for dealing with external processes and creating pipes.</li>
         <li><a href="apidocs/net/sf/mmm/util/reflect/api/package-summary.html">Utilities</a> for dealing with reflection, generics and annotations.</li>
         <li>Generic code for the typical pattern to send and receive <a href="apidocs/net/sf/mmm/util/event/api/package-summary.html">events</a>.</li>
+        <li>Support for loading <a href="apidocs/net/sf/mmm/util/resource/api/package-summary.html">resources</a> from arbitrary sources.</li>
         <li><a href="apidocs/net/sf/mmm/util/xml/api/package-summary.html">Utilities</a> for dealing with XML.</li>
         <li>A Factory for <a href="apidocs/net/sf/mmm/util/uuid/api/package-summary.html">creating UUIDs</a>.</li>
         <li>and many more...</li>

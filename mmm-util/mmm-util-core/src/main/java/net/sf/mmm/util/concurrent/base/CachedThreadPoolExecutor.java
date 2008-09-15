@@ -1,17 +1,16 @@
-/* $Id: $
+/* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.concurrent.base;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * This is an advanced {@link Executor} that uses a {@link Thread}-pool. It is
- * about the same as
+ * This is an advanced {@link java.util.concurrent.Executor} that uses a
+ * {@link Thread}-pool. It is about the same as
  * {@link java.util.concurrent.Executors#newCachedThreadPool()} and inherits all
  * its implementation from {@link ThreadPoolExecutor}. The only reason was to
  * make it easier to be managed as component in an IoC-Container such as spring.

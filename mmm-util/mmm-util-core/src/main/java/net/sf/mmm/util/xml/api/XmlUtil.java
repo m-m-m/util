@@ -23,84 +23,79 @@ import java.nio.charset.Charset;
 public interface XmlUtil {
 
   /** the URI of the xmlns namespace */
-  public static final String NAMESPACE_URI_XML = "http://www.w3.org/XML/1998/namespace".intern();
+  String NAMESPACE_URI_XML = "http://www.w3.org/XML/1998/namespace".intern();
 
   /** the reserved xmlns namespace prefix */
-  public static final String NAMESPACE_PREFIX_XML = "xml".intern();
+  String NAMESPACE_PREFIX_XML = "xml".intern();
 
   /** the URI of the xmlns namespace */
-  public static final String NAMESPACE_URI_XMLNS = "http://www.w3.org/2000/xmlns/".intern();
+  String NAMESPACE_URI_XMLNS = "http://www.w3.org/2000/xmlns/".intern();
 
   /** the reserved xmlns namespace prefix */
-  public static final String NAMESPACE_PREFIX_XMLNS = "xmlns".intern();
+  String NAMESPACE_PREFIX_XMLNS = "xmlns".intern();
 
   /** the URI of the XInclude namespace */
-  public static final String NAMESPACE_URI_XINCLUDE = "http://www.w3.org/2001/XInclude".intern();
+  String NAMESPACE_URI_XINCLUDE = "http://www.w3.org/2001/XInclude".intern();
 
   /** the default namespace prefix for XInclude */
-  public static final String NAMESPACE_PREFIX_XINCLUDE = "xi".intern();
+  String NAMESPACE_PREFIX_XINCLUDE = "xi".intern();
 
   /** the URI of the XLink namespace */
-  public static final String NAMESPACE_URI_XLINK = "http://www.w3.org/1999/xlink".intern();
+  String NAMESPACE_URI_XLINK = "http://www.w3.org/1999/xlink".intern();
 
   /** the default namespace prefix for XLink */
-  public static final String NAMESPACE_PREFIX_XLINK = "xlink".intern();
+  String NAMESPACE_PREFIX_XLINK = "xlink".intern();
 
   /** the URI of the XSLT namespace */
-  public static final String NAMESPACE_URI_XSLT = "http://www.w3.org/1999/XSL/Transform".intern();
+  String NAMESPACE_URI_XSLT = "http://www.w3.org/1999/XSL/Transform".intern();
 
   /** the default namespace prefix for XSLT */
-  public static final String NAMESPACE_PREFIX_XSLT = "xslt".intern();
+  String NAMESPACE_PREFIX_XSLT = "xslt".intern();
 
   /** the URI of the XML-Schema namespace */
-  public static final String NAMESPACE_URI_SCHEMA = "http://www.w3.org/2001/XMLSchema".intern();
+  String NAMESPACE_URI_SCHEMA = "http://www.w3.org/2001/XMLSchema".intern();
 
   /** the default namespace prefix for XML-Schema */
-  public static final String NAMESPACE_PREFIX_SCHEMA = "xs".intern();
+  String NAMESPACE_PREFIX_SCHEMA = "xs".intern();
 
   /** the URI of the XML-Schema namespace */
-  public static final String NAMESPACE_URI_SCHEMA_INSTANCE = "http://www.w3.org/2001/XMLSchema-instance"
-      .intern();
+  String NAMESPACE_URI_SCHEMA_INSTANCE = "http://www.w3.org/2001/XMLSchema-instance".intern();
 
   /** the default namespace prefix for XML-Schema */
-  public static final String NAMESPACE_PREFIX_SCHEMA_INSTANCE = "xsi".intern();
+  String NAMESPACE_PREFIX_SCHEMA_INSTANCE = "xsi".intern();
 
   /** the URI of the XML-Schema namespace */
-  public static final String NAMESPACE_URI_XPATH_FUNCTIONS = "http://www.w3.org/2005/xpath-functions"
-      .intern();
+  String NAMESPACE_URI_XPATH_FUNCTIONS = "http://www.w3.org/2005/xpath-functions".intern();
 
   /** the default namespace prefix for XML-Schema */
-  public static final String NAMESPACE_PREFIX_XPATH_FUNCTIONS = "fn".intern();
+  String NAMESPACE_PREFIX_XPATH_FUNCTIONS = "fn".intern();
 
   /** the URI of the SVG namespace */
-  public static final String NAMESPACE_URI_SVG = "http://www.w3.org/2000/svg".intern();
+  String NAMESPACE_URI_SVG = "http://www.w3.org/2000/svg".intern();
 
   /** the default namespace prefix for SVG */
-  public static final String NAMESPACE_PREFIX_SVG = "svg".intern();
+  String NAMESPACE_PREFIX_SVG = "svg".intern();
 
   /** the URI of the MathML namespace */
-  public static final String NAMESPACE_URI_MATHML = "http://www.w3.org/1998/Math/MathML".intern();
+  String NAMESPACE_URI_MATHML = "http://www.w3.org/1998/Math/MathML".intern();
 
   /** the URI of the XHTML namespace */
-  public static final String NAMESPACE_URI_XHTML = "http://www.w3.org/1999/xhtml".intern();
+  String NAMESPACE_URI_XHTML = "http://www.w3.org/1999/xhtml".intern();
 
   /** the default namespace prefix for XHTML */
-  public static final String NAMESPACE_PREFIX_XHTML = "xhtml".intern();
+  String NAMESPACE_PREFIX_XHTML = "xhtml".intern();
 
   /** the URI of the XML-Events namespace */
-  public static final String NAMESPACE_URI_XML_EVENTS = "http://www.w3.org/2001/xml-events"
-      .intern();
+  String NAMESPACE_URI_XML_EVENTS = "http://www.w3.org/2001/xml-events".intern();
 
   /** the default namespace prefix for XML-Events */
-  public static final String NAMESPACE_PREFIX_XML_EVENTS = "ev".intern();
+  String NAMESPACE_PREFIX_XML_EVENTS = "ev".intern();
 
   /** the URI of the RELAX-NG-Structure namespace */
-  public static final String NAMESPACE_URI_RELAXNG_STRUCTURE = "http://relaxng.org/ns/structure/1.0"
-      .intern();
+  String NAMESPACE_URI_RELAXNG_STRUCTURE = "http://relaxng.org/ns/structure/1.0".intern();
 
   /** the URI of the RELAX-NG-Structure namespace */
-  public static final String NAMESPACE_URI_RELAXNG_ANNOTATION = "http://relaxng.org/ns/annotation/1.0"
-      .intern();
+  String NAMESPACE_URI_RELAXNG_ANNOTATION = "http://relaxng.org/ns/annotation/1.0".intern();
 
   /**
    * This method escapes the given <code>string</code> for usage in XML (or

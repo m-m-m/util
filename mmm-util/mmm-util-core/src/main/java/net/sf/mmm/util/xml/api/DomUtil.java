@@ -146,7 +146,7 @@ public interface DomUtil {
    * @return the first element in the node-list or <code>null</code>, if the
    *         node-list contains NO element.
    */
-  public Element getFirstElement(NodeList nodeList);
+  Element getFirstElement(NodeList nodeList);
 
   /**
    * This method gets the first element of the given node-list with the
@@ -160,7 +160,7 @@ public interface DomUtil {
    *         all if tag-name is <code>null</code>). If no such element exists in
    *         the node-list, <code>null</code> is returned.
    */
-  public Element getFirstElement(NodeList nodeList, String tagName);
+  Element getFirstElement(NodeList nodeList, String tagName);
 
   /**
    * This method gets the first child-element of the given <code>element</code>
@@ -174,7 +174,7 @@ public interface DomUtil {
    *         all if tag-name is <code>null</code>). If no such element exists in
    *         the node-list, <code>null</code> is returned.
    */
-  public Element getFirstChildElement(Element element, String tagName);
+  Element getFirstChildElement(Element element, String tagName);
 
   /**
    * This method gets the value of the <code>attribute</code> from the given
@@ -190,7 +190,7 @@ public interface DomUtil {
    * @throws IllegalArgumentException if the value of the specified attribute
    *         does NOT represent a boolean value.
    */
-  public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
+  boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
       throws IllegalArgumentException;
 
   /**
@@ -202,7 +202,7 @@ public interface DomUtil {
    * @param node is the xml node containing the text.
    * @return the text of the node.
    */
-  public String getNodeText(Node node);
+  String getNodeText(Node node);
 
   /**
    * This method gets the text of the given node as string.
@@ -215,7 +215,7 @@ public interface DomUtil {
    * @return the text of the node including child nodes down to the specified
    *         depth.
    */
-  public String getNodeText(Node node, int depth);
+  String getNodeText(Node node, int depth);
 
 /**
    * This method appends the text of the given node to the string buffer. Text
@@ -238,7 +238,7 @@ public interface DomUtil {
    * @param depth specifies how deep to step into child elements. If less than
    *        1, the text of child elements is ignored.
    */
-  public void getNodeText(Node node, Appendable buffer, int depth);
+  void getNodeText(Node node, Appendable buffer, int depth);
 
   /**
    * This method requires the first child-element of the given
@@ -253,8 +253,7 @@ public interface DomUtil {
    * @throws IllegalArgumentException if the requested child element does NOT
    *         exist.
    */
-  public Element requireFirstChildElement(Element element, String tagName)
-      throws IllegalArgumentException;
+  Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException;
 
   /**
    * This method removes all {@link Node#getChildNodes() child nodes} of the
@@ -262,6 +261,6 @@ public interface DomUtil {
    * 
    * @param node is the node to clean of children.
    */
-  public void removeChildren(Element node);
+  void removeChildren(Element node);
 
 }

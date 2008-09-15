@@ -610,12 +610,12 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   }
 
   /**
+   * This method determines if the given {@link NodeList}s are equal.
    * 
-   * @param nodeList1
-   * @param nodeList2
-   * @param mode TODO
-   * @return <code>true</code> if the XML fragment represented by the given
-   *         node-lists equals, <code>false</code> otherwise.
+   * @param nodeList1 is the first {@link NodeList}.
+   * @param nodeList2 is the second {@link NodeList}.
+   * @param mode is the mode of comparison.
+   * @return <code>true</code> if equal, <code>false</code> otherwise.
    */
   protected boolean isEqual(NodeList nodeList1, NodeList nodeList2, XmlCompareMode mode) {
 

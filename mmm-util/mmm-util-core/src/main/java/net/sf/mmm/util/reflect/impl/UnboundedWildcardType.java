@@ -7,13 +7,12 @@ import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
 
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link WildcardType} interface for the
  * unbounded wildcard (<code>?</code>).
  * 
- * @see ReflectionUtilImpl#toType(String)
+ * @see ReflectionUtil#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
