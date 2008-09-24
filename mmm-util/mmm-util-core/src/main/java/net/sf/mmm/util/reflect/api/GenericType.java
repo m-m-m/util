@@ -52,7 +52,7 @@ public interface GenericType<T> {
    * of this {@link GenericType}. It will only differ from the
    * {@link #getUpperBound() upper bound} if this {@link GenericType} includes a
    * {@link java.lang.reflect.WildcardType}.<br>
-   * E.g. for <code>? super Integer</code> this method will return
+   * E.g. for <code>&lt;? super Integer&gt;</code> this method will return
    * <code>{@link Integer}</code>.<br>
    * The {@link #getLowerBound() lower bound} is always equal or more specific
    * to the {@link #getUpperBound() upper bound}.
@@ -68,8 +68,9 @@ public interface GenericType<T> {
    * value of this {@link GenericType}. It will only differ from the
    * {@link #getLowerBound() lower bound} if this {@link GenericType} includes a
    * {@link java.lang.reflect.WildcardType}.<br>
-   * E.g. for <code>? super Integer</code> this method will return
-   * <code>{@link Object}</code>.<br>
+   * E.g. for <code>&lt;? super Integer&gt;</code> this method will return
+   * <code>{@link Object}</code> and for <code>&lt;? extends Number&gt;</code>
+   * this method will return {@link Number}.<br>
    * The {@link #getUpperBound() upper bound} is always
    * {@link Class#isAssignableFrom(Class) assignable from} the
    * {@link #getLowerBound() lower bound}.
@@ -158,6 +159,18 @@ public interface GenericType<T> {
    * @return the type-argument at the given <code>index</code>.
    */
   GenericType<?> getTypeArgument(int index);
+
+  /**
+   * This method determines if this {@link GenericType} is equal to or a
+   * super-type of the given <code>subType</code>.
+   * 
+   * @see Class#isAssignableFrom(Class)
+   * 
+   * @param subType is the potential sub-type of this {@link GenericType}.
+   * @return <code>true</code> if objects of the type <code>subType</code> can
+   *         be assigned to this {@link GenericType}.
+   */
+  boolean isAssignableFrom(GenericType<?> subType);
 
   /**
    * This method gets the string representation of this {@link GenericType}. In

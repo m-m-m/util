@@ -65,7 +65,8 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   /**
    * This method gets the {@link Class} of the object returned when this
    * accessor is <code>invoked</code>.<br>
-   * is a convenience method for {@link #getReturnType()}.{@link GenericType#getUpperBound() getUpperBound()}
+   * is a convenience method for {@link #getReturnType()}.
+   * {@link GenericType#getUpperBound() getUpperBound()}
    * 
    * @see java.lang.reflect.Method#getReturnType()
    * @see java.lang.reflect.Field#getType()
@@ -92,11 +93,11 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
 
   /**
    * This method gets the {@link #getPropertyType() type} as {@link Class}. It
-   * is a convenience method for {@link #getPropertyType()}.{@link GenericType#getUpperBound() getUpperBound()}
-   * if the {@link #getMode() mode} is for
-   * {@link PojoPropertyAccessorMode#isReading() reading} and
-   * {@link #getPropertyType()}.{@link GenericType#getLowerBound() getLowerBound()}
-   * otherwise.
+   * is a convenience method for {@link #getPropertyType()}.
+   * {@link GenericType#getUpperBound() getUpperBound()} if the
+   * {@link #getMode() mode} is for {@link PojoPropertyAccessorMode#isReading()
+   * reading} and {@link #getPropertyType()}.{@link GenericType#getLowerBound()
+   * getLowerBound()} otherwise.
    * 
    * @return the {@link Class} reflecting the property.
    */

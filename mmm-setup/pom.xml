@@ -19,7 +19,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>2.5.1</version>
-      <scope>test</scope>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

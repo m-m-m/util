@@ -60,14 +60,10 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
    * {@inheritDoc}
    */
   @Override
-  public boolean addAccessor(PojoPropertyAccessor accessor) {
+  public PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor) {
 
     PojoPropertyAccessorMode<?> mode = accessor.getMode();
-    if (this.accessorMap.containsKey(mode)) {
-      return false;
-    }
-    this.accessorMap.put(mode, accessor);
-    return true;
+    return this.accessorMap.put(mode, accessor);
   }
 
 }

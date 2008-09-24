@@ -39,17 +39,17 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
 /**
  * This is an implementation of the {@link PojoDescriptorEnhancer} interface
  * that scans all
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPropertyDescriptors() PropertyDescriptor}s
- * for accessing {@link java.util.Collection}s, {@link Map}s or arrays. For
- * such {@link PojoPropertyDescriptor}s additional
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPropertyDescriptors()
+ * PropertyDescriptor}s for accessing {@link java.util.Collection}s, {@link Map}
+ * s or arrays. For such {@link PojoPropertyDescriptor}s additional
  * {@link PojoPropertyAccessor accessors} that are NOT already present are
  * created and added.<br>
  * <br>
  * In a first step the {@link PojoPropertyDescriptor#getName() name} of the
- * {@link PojoPropertyDescriptor} is
- * {@link Singularizer#transform(String) singularized}. If a different singular
- * form is determined, the {@link PojoPropertyAccessor accessors} of the
- * singular-named {@link PojoPropertyDescriptor} are copied to the original
+ * {@link PojoPropertyDescriptor} is {@link Singularizer#transform(String)
+ * singularized}. If a different singular form is determined, the
+ * {@link PojoPropertyAccessor accessors} of the singular-named
+ * {@link PojoPropertyDescriptor} are copied to the original
  * {@link PojoPropertyDescriptor} if such accessors do NOT already exist.<br>
  * In a second step {@link PojoPropertyAccessor accessors} that are (still) NOT
  * present in the original {@link PojoPropertyDescriptor} are created and added
@@ -69,18 +69,17 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * <pre>List&lt;Foo&gt; getChildren()</pre>
  * 
  * is available via the {@link PojoPropertyDescriptor}
- * {@link PojoPropertyDescriptor#getName() named} <code>children</code>.
- * Further the method
+ * {@link PojoPropertyDescriptor#getName() named} <code>children</code>. Further
+ * the method
  * 
  * <pre>void addChild(Foo child)</pre>
  * 
  * is available via the {@link PojoPropertyDescriptor}
  * {@link PojoPropertyDescriptor#getName() named} <code>child</code>. This
  * enhancer makes the <code>addChild</code>-method also available via
- * <code>children</code> which is the plural form of <code>child</code>.
- * Further it will add the virtual {@link PojoPropertyAccessor accessors} as
- * described above so it behaves as if the following method would also be
- * present:
+ * <code>children</code> which is the plural form of <code>child</code>. Further
+ * it will add the virtual {@link PojoPropertyAccessor accessors} as described
+ * above so it behaves as if the following method would also be present:
  * 
  * <pre>
  * Foo getChild(int index) {
@@ -109,12 +108,12 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
     PojoDescriptorEnhancer {
 
   /** The singularizer */
-  private final Singularizer singularizer;
+  private Singularizer singularizer;
 
-  /** @see #DefaultPojoDescriptorEnhancer(Singularizer, boolean, boolean) */
+  /** @see #DefaultPojoDescriptorEnhancer(boolean, boolean) */
   private final boolean addSingularAccessors;
 
-  /** @see #DefaultPojoDescriptorEnhancer(Singularizer, boolean, boolean) */
+  /** @see #DefaultPojoDescriptorEnhancer(boolean, boolean) */
   private final boolean addVirtualAccessors;
 
   /** @see #getConfiguration() */
@@ -125,31 +124,18 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
    */
   public DefaultPojoDescriptorEnhancer() {
 
-    this(EnglishSingularizer.INSTANCE);
+    this(true, true);
   }
 
   /**
    * The constructor.
-   * 
-   * @param singularizer the singularizer to use.
-   */
-  public DefaultPojoDescriptorEnhancer(Singularizer singularizer) {
-
-    this(singularizer, true, true);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param singularizer the singularizer to use.
    * 
    * @param addSingularAccessors - if <code>true</code> each
    *        {@link PojoPropertyAccessorNonArgMode#GET getter} that points to an
    *        array, {@link java.util.Collection} or {@link Map} is scanned. If it
-   *        has a plural form for that the
-   *        {@link #getSingularizer() singular form can be determined}, the
-   *        {@link PojoPropertyAccessor}s of the singular
-   *        {@link PojoPropertyDescriptor} are copied to the plural
+   *        has a plural form for that the {@link #getSingularizer() singular
+   *        form can be determined}, the {@link PojoPropertyAccessor}s of the
+   *        singular {@link PojoPropertyDescriptor} are copied to the plural
    *        {@link PojoPropertyDescriptor} as long as no such
    *        {@link PojoPropertyAccessor} already exists.
    * @param addVirtualAccessors - if <code>true</code> for each
@@ -158,21 +144,34 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
    *        {@link PojoPropertyAccessor}s are created and added as long as
    *        senseful and no such {@link PojoPropertyAccessor} already exists.
    */
-  public DefaultPojoDescriptorEnhancer(Singularizer singularizer, boolean addSingularAccessors,
-      boolean addVirtualAccessors) {
+  public DefaultPojoDescriptorEnhancer(boolean addSingularAccessors, boolean addVirtualAccessors) {
 
     super();
-    this.singularizer = singularizer;
     this.addSingularAccessors = addSingularAccessors;
     this.addVirtualAccessors = addVirtualAccessors;
   }
 
   /**
-   * @return the singularizer
+   * This method gets the {@link Singularizer}, which is used to determine
+   * singular forms so e.g. <code>getChildren</code> and <code>addChild</code>
+   * can be matched to the same property.
+   * 
+   * @return the {@link Singularizer} to use.
    */
   protected Singularizer getSingularizer() {
 
     return this.singularizer;
+  }
+
+  /**
+   * This method injects the {@link #getSingularizer() Singularizer}.
+   * 
+   * @param singularizer is the {@link Singularizer} to set.
+   */
+  @Resource
+  public void setSingularizer(Singularizer singularizer) {
+
+    this.singularizer = singularizer;
   }
 
   /**
@@ -208,6 +207,9 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
       config.initialize();
       this.configuration = config;
     }
+    if (this.singularizer == null) {
+      this.singularizer = EnglishSingularizer.INSTANCE;
+    }
   }
 
   /**
@@ -224,7 +226,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
     if (getLogger().isDebugEnabled()) {
       getLogger().debug("adding virtual accessor: " + accessor);
     }
-    propertyDescriptor.addAccessor(accessor);
+    propertyDescriptor.putAccessor(accessor);
   }
 
   /**
@@ -257,7 +259,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
                     logger.debug("copying accessor '" + singularAccessor + "' to '"
                         + propertyDescriptor + "'");
                   }
-                  propertyDescriptor.addAccessor(singularAccessor);
+                  propertyDescriptor.putAccessor(singularAccessor);
                 }
               }
             }

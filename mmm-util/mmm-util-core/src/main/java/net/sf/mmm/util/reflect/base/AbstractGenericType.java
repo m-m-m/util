@@ -81,16 +81,43 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public final String toString() {
+  public boolean isAssignableFrom(GenericType<?> subType) {
 
-    Type type = getType();
     Class<?> upperBound = getUpperBound();
-    if (upperBound == type) {
-      return upperBound.getName();
-    } else {
-      return type.toString();
+    Class<?> subTypeUpperBound = subType.getUpperBound();
+    // Integer i = null;
+    // Number n = i;
+    // i = n; --> compile error
+
+    // e.g. <? extends Number>.isAssignableFrom(<? extends Integer>)
+    if (!upperBound.isAssignableFrom(subTypeUpperBound)) {
+      return false;
     }
+
+    Class<?> lowerBound = getLowerBound();
+    Class<?> subTypeLowerBound = subType.getLowerBound();
+    if ((lowerBound != upperBound) || (subTypeLowerBound != subTypeUpperBound)) {
+      // List<? super Number> numberList = null;
+      // List<? super Integer> integerList = numberList;
+      // numberList = integerList; --> Compile error
+
+      // e.g. <? super Integer>.isAssignableFrom(<? super Number>)
+      // but Number.class.isAssignableFrom(Integer.class)
+      if (!subTypeLowerBound.isAssignableFrom(lowerBound)) {
+        return false;
+      }
+    }
+    // here comes the killer:
+    // * Map<Number,CharSequence>.isAssignableFrom(HashMap<Integer,String>)
+    // * Map<Number,CharSequence>.isAssignableFrom(MyMap<String>) for
+    // class MyMap<V> extends HashMap<Integer,V>
+    int argCount = getTypeArgumentCount();
+    for (int argIndex = 0; argIndex < argCount; argIndex++) {
+      GenericType<?> typeArgument = getTypeArgument(argIndex);
+      Type argType = typeArgument.getType();
+      // TODO: ...
+    }
+    return true;
   }
 
   /**
@@ -99,9 +126,9 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    * generic {@link Class#getGenericSuperclass() super-classes} or
    * {@link Class#getGenericInterfaces() super-interfaces} of
    * <code>ancestor</code> on that hierarchy-path.<br>
-   * Please note that if <code>ancestor</code> is an
-   * {@link Class#isInterface() interface}, the hierarchy may NOT be unique. In
-   * such case it will be unspecified which of the possible paths is used.
+   * Please note that if <code>ancestor</code> is an {@link Class#isInterface()
+   * interface}, the hierarchy may NOT be unique. In such case it will be
+   * unspecified which of the possible paths is used.
    * 
    * @param ancestor is the super-class or super-interface of
    *        <code>descendant</code>.
@@ -110,11 +137,11 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    * @return the {@link List} of the generic super-{@link Type}s from
    *         <code>descendant</code> up to <code>ancestor</code>, where the
    *         first element represents the super-{@link Type} of
-   *         <code>descendant</code> and the last element represents the
-   *         generic declaration of <code>ancestor</code> itself.
+   *         <code>descendant</code> and the last element represents the generic
+   *         declaration of <code>ancestor</code> itself.
    */
   protected List<Type> getGenericDeclarations(Class<?> ancestor, Class<?> descendant) {
-  
+
     if (!ancestor.isAssignableFrom(descendant)) {
       return null;
     }
@@ -161,7 +188,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    *         {@link TypeVariable#getGenericDeclaration() declaration}.
    */
   protected int getDeclarationIndex(TypeVariable<?> typeVariable) {
-  
+
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
     TypeVariable<?>[] variables = genericDeclaration.getTypeParameters();
     for (int variableIndex = 0; variableIndex < variables.length; variableIndex++) {
@@ -173,8 +200,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method resolves the given <code>typeVariable</code> in the context
-   * of the given <code>declaringType</code>.
+   * This method resolves the given <code>typeVariable</code> in the context of
+   * the given <code>declaringType</code>.
    * 
    * @param typeVariable is the {@link TypeVariable} to resolve.
    * @param declaringType is the {@link GenericType} where the given
@@ -182,12 +209,11 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    * @return the resolved {@link Type} or <code>null</code> if the given
    *         <code>typeVariable</code> could NOT be resolved (e.g. it was
    *         {@link TypeVariable#getGenericDeclaration() declared} in a
-   *         {@link Class} that is NOT
-   *         {@link Class#isAssignableFrom(Class) assignable from} the given
-   *         <code>declaringType</code>) .
+   *         {@link Class} that is NOT {@link Class#isAssignableFrom(Class)
+   *         assignable from} the given <code>declaringType</code>) .
    */
   protected Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType) {
-  
+
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
     if (genericDeclaration instanceof Class) {
       Class<?> declaringClass = (Class<?>) genericDeclaration;
@@ -222,6 +248,21 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
       }
     }
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final String toString() {
+
+    Type type = getType();
+    Class<?> upperBound = getUpperBound();
+    if (upperBound == type) {
+      return upperBound.getName();
+    } else {
+      return type.toString();
+    }
   }
 
 }

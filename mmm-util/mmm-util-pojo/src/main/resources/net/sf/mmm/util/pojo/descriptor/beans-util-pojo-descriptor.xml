@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<!-- $Id$ -->
+<beans>
+  <import resource="classpath:net/sf/mmm/util/beans-util-reflect.xml" />
+  
+  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector" class="net.sf.mmm.util.pojo.descriptor.impl.PojoMethodIntrospectorImpl"/>
+  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector" class="net.sf.mmm.util.pojo.descriptor.impl.PojoFieldIntrospectorImpl"/>
+  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration" class="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfigurationImpl"/>
+  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer" class="net.sf.mmm.util.pojo.descriptor.impl.DefaultPojoDescriptorEnhancer"/>
+  
+  <bean id="net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder" class="net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl">
+    <property name="accessorBuilders">
+      <list>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorAddBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorRemoveBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetIndexedBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetMappedBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetIndexedBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetMappedBuilder"/>
+        <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBuilder"/>        
+      </list>
+    </property>
+  </bean>
+</beans>

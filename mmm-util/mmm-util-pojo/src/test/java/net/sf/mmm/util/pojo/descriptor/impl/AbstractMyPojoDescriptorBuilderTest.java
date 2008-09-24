@@ -35,6 +35,13 @@ import net.sf.mmm.util.reflect.api.GenericType;
 @SuppressWarnings("all")
 public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
 
+  /**
+   * This method creates the {@link PojoDescriptorBuilder} to test.
+   * 
+   * @return the {@link PojoDescriptorBuilder}.
+   */
+  protected abstract PojoDescriptorBuilder getPojoDescriptorBuilder();
+
   protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance,
       PojoDescriptorBuilder builder) throws Exception {
 

@@ -10,8 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoFieldIntrospectorImpl;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
@@ -23,12 +22,22 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 @SuppressWarnings("all")
 public class FieldPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
-  @Test
-  public void testPojoDescriptor() throws Exception {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
     PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
     builder.setFieldIntrospector(new PojoFieldIntrospectorImpl(VisibilityModifier.PRIVATE, false));
     builder.initialize();
+    return builder;
+  }
+
+  @Test
+  public void testPojoDescriptor() throws Exception {
+
+    PojoDescriptorBuilder builder = getPojoDescriptorBuilder();
     PojoDescriptor<MyPojo> pojoDescriptor = builder.getDescriptor(MyPojo.class);
     assertEquals(MyPojo.class, pojoDescriptor.getPojoClass());
     MyPojo pojoInstance = new MyPojo();

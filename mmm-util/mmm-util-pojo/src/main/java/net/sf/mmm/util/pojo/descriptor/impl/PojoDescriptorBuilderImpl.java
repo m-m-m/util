@@ -120,10 +120,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method gets the introspector used to find potential
-   * {@link Method methods} for {@link PojoPropertyAccessor accessing}
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * This method gets the introspector used to find potential {@link Method
+   * methods} for {@link PojoPropertyAccessor accessing}
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
+   * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+   * POJO}.
    * 
    * @return the introspector to use.
    */
@@ -145,10 +146,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method gets the introspector used to find potential
-   * {@link Field fields} for {@link PojoPropertyAccessor accessing}
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * This method gets the introspector used to find potential {@link Field
+   * fields} for {@link PojoPropertyAccessor accessing}
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
+   * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+   * POJO}.
    * 
    * @return the introspector to use.
    */
@@ -172,8 +174,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * This method gets the accessor-builders used to create the
    * {@link PojoPropertyAccessor accessors} for
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties}
-   * of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
+   * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+   * POJO}.
    * 
    * @return the accessorBuilders.
    */
@@ -230,6 +233,33 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
+   * 
+   * @param descriptor
+   * @param accessor
+   * @return
+   */
+  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
+
+    PojoPropertyDescriptorImpl propertyDescriptor = descriptor
+        .getOrCreatePropertyDescriptor(accessor.getName());
+    boolean added = false;
+    PojoPropertyAccessor existing = propertyDescriptor.getAccessor(accessor.getMode());
+    if (existing == null) {
+      propertyDescriptor.putAccessor(accessor);
+      added = true;
+    } else {
+      if (existing.getReturnType().isAssignableFrom(accessor.getReturnType())) {
+        propertyDescriptor.putAccessor(accessor);
+        added = true;
+        logDuplicateAccessor(accessor, existing);
+      } else {
+        logDuplicateAccessor(existing, accessor);
+      }
+    }
+    return added;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -248,15 +278,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         for (PojoPropertyAccessorBuilder<?> builder : this.accessorBuilders) {
           PojoPropertyAccessor accessor = builder.create(method, descriptor, getConfiguration());
           if (accessor != null) {
-            PojoPropertyDescriptorImpl propertyDescriptor = descriptor
-                .getOrCreatePropertyDescriptor(accessor.getName());
-            PojoPropertyAccessor existing = propertyDescriptor.getAccessor(accessor.getMode());
-            if (existing == null) {
-              propertyDescriptor.addAccessor(accessor);
-              methodUsed = true;
-            } else {
-              logDuplicateAccessor(existing, accessor);
-            }
+            methodUsed = registerAccessor(descriptor, accessor);
           }
         }
         if (methodUsed && !Modifier.isPublic(method.getModifiers())) {
@@ -274,15 +296,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         for (PojoPropertyAccessorBuilder<?> builder : this.accessorBuilders) {
           PojoPropertyAccessor accessor = builder.create(field, descriptor, getConfiguration());
           if (accessor != null) {
-            PojoPropertyDescriptorImpl propertyDescriptor = descriptor
-                .getOrCreatePropertyDescriptor(accessor.getName());
-            PojoPropertyAccessor existing = propertyDescriptor.getAccessor(accessor.getMode());
-            if (existing == null) {
-              propertyDescriptor.addAccessor(accessor);
-              fieldUsed = true;
-            } else {
-              logDuplicateAccessor(existing, accessor);
-            }
+            fieldUsed = registerAccessor(descriptor, accessor);
           }
         }
         if (fieldUsed && !Modifier.isPublic(field.getModifiers())) {
@@ -313,8 +327,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * <code>duplicate</code> was ignored because it has the same
    * {@link PojoPropertyAccessor#getName() name} and
    * {@link PojoPropertyAccessor#getMode() mode} as the given
-   * <code>accessor</code> that is already registered. This method does
-   * nothing. It may be overridden to do some debug logging.
+   * <code>accessor</code> that is already registered. This method does nothing.
+   * It may be overridden to do some debug logging.
    * 
    * @param accessor is the accessor that is already registered.
    * @param duplicate is the duplicate that has been ignored.
@@ -322,7 +336,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   protected void logDuplicateAccessor(PojoPropertyAccessor accessor, PojoPropertyAccessor duplicate) {
 
     if (accessor.getDeclaringClass().isAssignableFrom(duplicate.getDeclaringClass())) {
-      getLogger().warn("duplicate accessor '" + duplicate + "' - already have '" + accessor + "'!");
+      getLogger().warn("accessor '" + duplicate + "' - is a duplicate of '" + accessor + "'!");
     }
   }
 

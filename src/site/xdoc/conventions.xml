@@ -178,11 +178,12 @@
       implementation is therefore exchangeable and can be composed using
       other components."<br/><br/>
       So far so good. While such definition is easily agreed by most developers
-      it is still very unprecise. However if we are talking about the term
-      component it is important that we mean the same thing. Therefore I want
-      to make it a bit more precise. The only successful chance to do so is by
-      defining new terms rather than redefining a term that is so widely used and
-      missunderstood than the term component.
+      it is still very unprecise. 
+      However if we are talking about the term component it is important 
+      that we mean the same thing. Therefore I want to make it a bit more precise. 
+      The only successful chance to do so is by defining new terms rather than 
+      redefining a term that is so widely used and missunderstood than the term 
+      component.
       <subsection name="Micro-Component">
         A <em>micro-component</em> is a piece of software located below some 
         package <code>&lt;component.package&gt;</code>. It is mainly 

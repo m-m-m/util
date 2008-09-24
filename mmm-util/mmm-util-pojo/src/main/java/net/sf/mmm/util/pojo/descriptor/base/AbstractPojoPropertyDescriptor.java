@@ -37,18 +37,22 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   }
 
   /**
-   * This method adds the given <code>accessor</code> to this
-   * property-descriptor.
+   * This method puts the given <code>accessor</code> into this
+   * property-descriptor.<br>
+   * <b>ATTENTION:</b><br>
+   * Be careful NOT to accidently replace existing {@link PojoPropertyAccessor
+   * accessors}.
    * 
    * @see #getAccessor(net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode)
    * 
    * @param accessor is the accessor to add.
-   * @return <code>false</code> if this descriptor already contains an
-   *         accessor for the same {@link PojoPropertyAccessor#getMode() mode}
-   *         and <code>true</code> if the given <code>accessor</code> has
-   *         been added successfully.
+   * @return the {@link PojoPropertyAccessor} with the same
+   *         {@link PojoPropertyAccessor#getMode() mode} as the given
+   *         <code>accessor</code> that has been replaced by
+   *         <code>accessor</code> or <code>null</code> if none has been
+   *         replaced.
    */
-  public abstract boolean addAccessor(PojoPropertyAccessor accessor);
+  public abstract PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor);
 
   /**
    * {@inheritDoc}
