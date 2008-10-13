@@ -37,6 +37,21 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
   /**
    * {@inheritDoc}
    */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.reflectionUtil == null) {
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
+    }
+    if (this.collectionReflectionUtil == null) {
+      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public CollectionReflectionUtil getCollectionReflectionUtil() {
 
     return this.collectionReflectionUtil;
@@ -68,21 +83,6 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
 
     getInitializationState().requireNotInitilized();
     this.reflectionUtil = reflectionUtil;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-    if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtilImpl.getInstance();
-    }
-    if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
-    }
   }
 
 }

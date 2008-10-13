@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -27,6 +28,9 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
   /** @see #getDescriptorBuilder() */
   private PojoDescriptorBuilder descriptorBuilder;
+
+  /** @see #setDescriptorBuilderFactory(PojoDescriptorBuilderFactory) */
+  private PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
   /**
    * The constructor.<br>
@@ -55,11 +59,19 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * 
    * @param descriptorBuilder is the descriptorBuilder to use.
    */
-  @Resource
   public void setDescriptorBuilder(PojoDescriptorBuilder descriptorBuilder) {
 
     getInitializationState().requireNotInitilized();
     this.descriptorBuilder = descriptorBuilder;
+  }
+
+  /**
+   * @param descriptorBuilderFactory is the descriptorBuilderFactory to set
+   */
+  @Resource
+  public void setDescriptorBuilderFactory(PojoDescriptorBuilderFactory descriptorBuilderFactory) {
+
+    this.descriptorBuilderFactory = descriptorBuilderFactory;
   }
 
   /**
@@ -70,9 +82,14 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
     super.doInitialize();
     if (this.descriptorBuilder == null) {
-      PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
-      builder.initialize();
-      this.descriptorBuilder = builder;
+      if (this.descriptorBuilderFactory != null) {
+        this.descriptorBuilder = this.descriptorBuilderFactory
+            .createPublicMethodDescriptorBuilder();
+      } else {
+        PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
+        builder.initialize();
+        this.descriptorBuilder = builder;
+      }
     }
   }
 

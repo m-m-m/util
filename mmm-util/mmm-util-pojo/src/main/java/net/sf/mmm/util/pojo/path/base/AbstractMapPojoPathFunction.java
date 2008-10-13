@@ -9,8 +9,8 @@ import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 
 /**
  * This is the abstract base implementation for a
- * {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction} that operates
- * on a {@link Map}.
+ * {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction} that operates on a
+ * {@link Map}.
  * 
  * @param <VALUE> is the value this function traverses to starting from the
  *        actual POJO.
@@ -18,11 +18,12 @@ import net.sf.mmm.util.pojo.path.api.PojoPathContext;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractMapPojoPathFunction<VALUE> extends
-    AbstractDeterministicPojoPathFunction<Map<String, Object>, VALUE> {
+    AbstractPojoPathFunction<Map<String, Object>, VALUE> {
 
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public VALUE get(Map<String, Object> current, String functionName, PojoPathContext context) {
 
@@ -32,6 +33,7 @@ public abstract class AbstractMapPojoPathFunction<VALUE> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public VALUE set(Map<String, Object> current, String functionName, VALUE value,
       PojoPathContext context) {

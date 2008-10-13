@@ -6,16 +6,15 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.math.base.NumberTypeImpl;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
+import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgBuilder;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder}
@@ -49,7 +48,8 @@ public class PojoPropertyAccessorSizeBuilder extends
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
-      NumberType<? extends Number> numberType = MathUtilImpl.getInstance().getNumberType(propertyClass);
+      NumberType<? extends Number> numberType = MathUtilImpl.getInstance().getNumberType(
+          propertyClass);
       if ((numberType != null) && (!numberType.isDecimal())) {
         if (NumberTypeImpl.INTEGER.getExactnessDifference(numberType) >= 0) {
           String methodName = method.getName();

@@ -6,6 +6,7 @@ package net.sf.mmm.util.pojo.path.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
 
@@ -15,7 +16,8 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("unchecked")
-public class DefaultPojoPathFunctionManager implements PojoPathFunctionManager {
+public class DefaultPojoPathFunctionManager extends AbstractComponent implements
+    PojoPathFunctionManager {
 
   /** @see #getFunction(String) */
   private final Map<String, PojoPathFunction> functionMap;

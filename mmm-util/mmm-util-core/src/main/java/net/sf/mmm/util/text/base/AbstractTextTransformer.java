@@ -5,12 +5,11 @@ package net.sf.mmm.util.text.base;
 
 import java.util.List;
 
-import net.sf.mmm.util.text.api.Singularizer;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
- * This is the abstract base implementation of the {@link Singularizer}
- * interface. It aims for simplicity rather than linguistic perfection.
+ * This is the abstract base implementation of a {@link Transformer} for
+ * strings.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

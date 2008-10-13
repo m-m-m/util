@@ -10,7 +10,8 @@ import java.util.List;
 import net.sf.mmm.util.text.api.Singularizer;
 
 /**
- * This is the singularizer for English language.
+ * This is the implementation of the {@link Singularizer} interface for English
+ * language. It aims for simplicity rather than linguistic perfection.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

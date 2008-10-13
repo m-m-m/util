@@ -8,10 +8,10 @@ import java.lang.reflect.Method;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
+import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexedNonArgBuilder;
 
 /**
  * This is the implementation of the

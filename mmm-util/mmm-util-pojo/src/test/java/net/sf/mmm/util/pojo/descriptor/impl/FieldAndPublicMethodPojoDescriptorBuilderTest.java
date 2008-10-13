@@ -18,7 +18,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the test-case for {@link PublicMethodPojoDescriptorBuilder}.
+ * This is the test-case for {@link PojoDescriptorBuilder} using combined
+ * introspection of private fields and public methods.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

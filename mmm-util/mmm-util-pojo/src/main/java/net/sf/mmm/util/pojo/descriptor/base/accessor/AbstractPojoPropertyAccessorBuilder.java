@@ -4,11 +4,10 @@
 package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder}
+ * {@link net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder}
  * interface.<br>
  * It provides some helpful methods that make it easier to write
  * implementations.

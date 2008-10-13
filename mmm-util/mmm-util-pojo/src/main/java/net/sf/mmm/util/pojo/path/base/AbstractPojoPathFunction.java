@@ -12,8 +12,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationExcepti
  * interface.
  * 
  * @param <ACTUAL> is the generic type of the actual
- *        {@link net.sf.mmm.util.pojo.api.Pojo} this function operates
- *        on.
+ *        {@link net.sf.mmm.util.pojo.api.Pojo} this function operates on.
  * @param <VALUE> is the generic type of the value this function traverses to,
  *        starting from the actual {@link net.sf.mmm.util.pojo.api.Pojo}.
  * 
@@ -28,6 +27,17 @@ public abstract class AbstractPojoPathFunction<ACTUAL, VALUE> implements
   public AbstractPojoPathFunction() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   * 
+   * This implementation always returns <code>true</code>. Override for
+   * indeterministic implementations.
+   */
+  public boolean isDeterministic() {
+
+    return true;
   }
 
   /**

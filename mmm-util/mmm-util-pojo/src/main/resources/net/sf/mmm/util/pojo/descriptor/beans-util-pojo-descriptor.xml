@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <!-- $Id$ -->
-<beans>
-  <import resource="classpath:net/sf/mmm/util/beans-util-reflect.xml" />
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  <import resource="classpath:net/sf/mmm/util/reflect/beans-util-reflect.xml" />
+  <import resource="classpath:net/sf/mmm/util/text/beans-util-text.xml" />
   
-  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector" class="net.sf.mmm.util.pojo.descriptor.impl.PojoMethodIntrospectorImpl"/>
-  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector" class="net.sf.mmm.util.pojo.descriptor.impl.PojoFieldIntrospectorImpl"/>
-  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration" class="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfigurationImpl"/>
   <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer" class="net.sf.mmm.util.pojo.descriptor.impl.DefaultPojoDescriptorEnhancer"/>
-  
-  <bean id="net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder" class="net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl">
+  <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration" class="net.sf.mmm.util.pojo.descriptor.impl.ExtendedPojoDescriptorConfigurationImpl">
     <property name="accessorBuilders">
       <list>
         <bean class="net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetBuilder"/>
@@ -24,4 +22,10 @@
       </list>
     </property>
   </bean>
+  <!-- 
+    <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector" class="net.sf.mmm.util.pojo.descriptor.impl.PojoMethodIntrospectorImpl"/>
+    <bean id="net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector" class="net.sf.mmm.util.pojo.descriptor.impl.PojoFieldIntrospectorImpl"/>
+    <bean id="net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder" class="net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl"/> 
+    -->
+  <bean id="net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory" class="net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl"/>
 </beans>

@@ -1,17 +1,18 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.pojo.descriptor.api.accessor;
+package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 
 /**
- * This is the interface used to create a
- * {@link PojoPropertyAccessorOneArg one-arg accessor}.
+ * This is the interface used to create a {@link PojoPropertyAccessor}.
  * 
  * @param <ACCESSOR> is the type of the accessor
  * 
@@ -30,8 +31,8 @@ public abstract interface PojoPropertyAccessorBuilder<ACCESSOR extends PojoPrope
    *        <code>method</code>.
    * @param configuration is the configuration with injected helper components.
    * @return the {@link PojoPropertyAccessor accessor} for the given
-   *         <code>method</code> or <code>null</code> if the
-   *         <code>method</code> is NOT suitable for this builder.
+   *         <code>method</code> or <code>null</code> if the <code>method</code>
+   *         is NOT suitable for this builder.
    */
   ACCESSOR create(Method method, PojoDescriptor<?> descriptor,
       PojoDescriptorConfiguration configuration);
@@ -47,8 +48,8 @@ public abstract interface PojoPropertyAccessorBuilder<ACCESSOR extends PojoPrope
    *        <code>field</code>.
    * @param configuration is the configuration with injected helper components.
    * @return the {@link PojoPropertyAccessor accessor} for the given
-   *         <code>field</code> or <code>null</code> if the
-   *         <code>field</code> is NOT suitable for this builder.
+   *         <code>field</code> or <code>null</code> if the <code>field</code>
+   *         is NOT suitable for this builder.
    */
   ACCESSOR create(Field field, PojoDescriptor<?> descriptor,
       PojoDescriptorConfiguration configuration);

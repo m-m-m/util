@@ -9,10 +9,10 @@ import java.lang.reflect.Method;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
+import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgBuilder;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder}

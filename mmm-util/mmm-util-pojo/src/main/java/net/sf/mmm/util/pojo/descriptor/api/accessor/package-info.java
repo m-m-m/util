@@ -8,8 +8,7 @@
  * For advanced introspection this package provides the API for various 
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}s
  * with their 
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode}s
- * and {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorBuilder}s.
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode}s.
  */
 package net.sf.mmm.util.pojo.descriptor.api.accessor;
 

@@ -12,8 +12,8 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 
 /**
- * This is the test-case for {@link PojoDescriptorBuilder} using
- * public-method-introspection.
+ * This is the test-case for {@link PojoDescriptorBuilder} using public method
+ * introspection.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
