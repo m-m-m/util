@@ -3,13 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-
 /**
  * This the base class for all runtime exceptions of the project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 6002426164465970398L;
 
   /**
    * The constructor.

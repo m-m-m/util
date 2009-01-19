@@ -234,7 +234,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   protected <P> PojoDescriptorImpl<P> createDescriptor(GenericType<P> pojoType) {
 
     getInitializationState().requireInitilized();
-    Class<P> pojoClass = pojoType.getUpperBound();
+    Class<P> pojoClass = pojoType.getRetrievalClass();
     PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType);
     // process methods...
     List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();

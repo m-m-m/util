@@ -44,7 +44,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    */
   public Class<POJO> getPojoClass() {
 
-    return this.pojoType.getUpperBound();
+    return this.pojoType.getRetrievalClass();
   }
 
   /**

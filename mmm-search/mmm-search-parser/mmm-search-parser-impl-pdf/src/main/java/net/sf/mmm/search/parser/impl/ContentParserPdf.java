@@ -22,6 +22,12 @@ import net.sf.mmm.search.parser.base.AbstractContentParser;
  */
 public class ContentParserPdf extends AbstractContentParser {
 
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE = "application/pdf";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION = "pdf";
+
   /**
    * The constructor.
    */
@@ -33,6 +39,16 @@ public class ContentParserPdf extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
+  @Override
+  public String[] getRegistryKeys() {
+
+    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
       throws Exception {
 

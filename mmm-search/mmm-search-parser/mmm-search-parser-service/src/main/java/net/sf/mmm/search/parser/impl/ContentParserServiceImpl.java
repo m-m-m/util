@@ -3,6 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.parser.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.base.AbstractContentParserService;
 
 /**
@@ -13,24 +17,55 @@ import net.sf.mmm.search.parser.base.AbstractContentParserService;
  */
 public class ContentParserServiceImpl extends AbstractContentParserService {
 
+  /** @see #setAlias2keyMap(Map) */
+  private Map<String, String> alias2keyMap;
+
   /**
    * The constructor.
    */
   public ContentParserServiceImpl() {
 
     super();
-    setGenericParser(new ContentParserGeneric());
-    addParser(new ContentParserPdf(), "pdf");
-    addParser(new ContentParserHtml(), "html", "htm");
-    addParser(new ContentParserDoc(), "doc", "dot");
-    addParser(new ContentParserXls(), "xls");
-    addParser(new ContentParserPpt(), "ppt");
-    addParser(new ContentParserXml(), "xml");
-    // even *.txt files may contain markup (e.g. twiki data files).
-    addParser(new ContentParserTextMarkupAware(), "txt", "php", "jsp", "jinc", "asp");
-    addParser(new ContentParserText(), "asc", "apt", "csv", "sql", "vbs", "bat", "sh", "c", "h",
-        "cpp", "c++", "cs", "net", "pl", "py", "js");
-    addParser(new ContentParserJava(), "java");
+  }
+
+  /**
+   * @param alias2keyMap is the alias2keyMap to set
+   */
+  public void setAlias2keyMap(Map<String, String> alias2keyMap) {
+
+    this.alias2keyMap = alias2keyMap;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ContentParser getParser(String key) {
+
+    ContentParser parser = super.getParser(key);
+    if (parser == null) {
+      String keyForAlias = this.alias2keyMap.get(key);
+      if (keyForAlias != null) {
+        parser = super.getParser(keyForAlias);
+      }
+    }
+    return parser;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (getGenericParser() == null) {
+      setGenericParser(new ContentParserGeneric());
+    }
+    if (this.alias2keyMap == null) {
+      this.alias2keyMap = new HashMap<String, String>();
+      this.alias2keyMap.put("htm", "html");
+    }
   }
 
 }

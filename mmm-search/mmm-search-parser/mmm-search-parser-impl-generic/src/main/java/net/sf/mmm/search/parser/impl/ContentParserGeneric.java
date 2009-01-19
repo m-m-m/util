@@ -29,6 +29,15 @@ public class ContentParserGeneric extends AbstractContentParser {
    * {@inheritDoc}
    */
   @Override
+  public String[] getRegistryKeys() {
+
+    return new String[0];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
       throws Exception {
 

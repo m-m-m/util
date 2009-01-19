@@ -48,7 +48,7 @@ public class ReflectionUtilTest {
 
   private GenericType getReturnType(GenericType definingType, String methodName) throws Exception {
 
-    Class<?> declaringClass = definingType.getUpperBound();
+    Class<?> declaringClass = definingType.getRetrievalClass();
     Method method = declaringClass.getMethod(methodName, ReflectionUtil.NO_PARAMETERS);
     return getReflectionUtil().createGenericType(method.getGenericReturnType(), definingType);
   }
@@ -56,19 +56,19 @@ public class ReflectionUtilTest {
   private Class<?> getReturnClass(Type declaringType, String methodName) throws Exception {
 
     GenericType type = getReturnType(declaringType, methodName);
-    return type.getUpperBound();
+    return type.getRetrievalClass();
   }
 
   private Class<?> getReturnClass(GenericType declaringType, String methodName) throws Exception {
 
     GenericType type = getReturnType(declaringType, methodName);
-    return type.getUpperBound();
+    return type.getRetrievalClass();
   }
 
   private Class getComponentType(Class<?> declaringClass, String methodName) throws Exception {
 
     GenericType type = getReturnType(declaringClass, methodName);
-    return type.getComponentType().getUpperBound();
+    return type.getComponentType().getRetrievalClass();
   }
 
   @Test
@@ -77,27 +77,27 @@ public class ReflectionUtilTest {
     GenericType type;
     type = getReturnType(TestClass.class, "getStringArray").getComponentType();
     assertEquals(String.class, type.getType());
-    assertEquals(String.class, type.getLowerBound());
-    assertEquals(String.class, type.getUpperBound());
+    assertEquals(String.class, type.getAssignmentClass());
+    assertEquals(String.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getStringList").getComponentType();
     assertEquals(String.class, type.getType());
-    assertEquals(String.class, type.getLowerBound());
-    assertEquals(String.class, type.getUpperBound());
+    assertEquals(String.class, type.getAssignmentClass());
+    assertEquals(String.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getStringListUpperWildcard").getComponentType();
-    assertEquals(String.class, type.getLowerBound());
-    assertEquals(String.class, type.getUpperBound());
+    assertEquals(String.class, type.getAssignmentClass());
+    assertEquals(String.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getStringListLowerWildcard").getComponentType();
-    assertEquals(String.class, type.getLowerBound());
-    assertEquals(Object.class, type.getUpperBound());
+    assertEquals(String.class, type.getAssignmentClass());
+    assertEquals(Object.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getGenericStringArray").getComponentType();
-    assertEquals(String.class, type.getLowerBound());
-    assertEquals(String.class, type.getUpperBound());
+    assertEquals(String.class, type.getAssignmentClass());
+    assertEquals(String.class, type.getRetrievalClass());
     // the really hard ones...
     type = getReflectionUtil().createGenericType(
         ExParameterizedStringList.class.getGenericSuperclass()).getComponentType();
-    assertEquals(String.class, type.getUpperBound());
+    assertEquals(String.class, type.getRetrievalClass());
     type = getReflectionUtil().createGenericType(StringList.class).getComponentType();
-    assertEquals(String.class, type.getUpperBound());
+    assertEquals(String.class, type.getRetrievalClass());
   }
 
   private void checkTypeParser(String typeString) throws Exception {
@@ -117,13 +117,13 @@ public class ReflectionUtilTest {
     // Collection<SubSubBar<? extends Byte>>
     GenericType subSubBarListType = getReturnType(TestClass.class, "getSubSubBarList");
     GenericType subSubBarType = subSubBarListType.getComponentType();
-    Class<?> subSubBarClass = subSubBarType.getUpperBound();
+    Class<?> subSubBarClass = subSubBarType.getRetrievalClass();
     assertEquals(SubSubBar.class, subSubBarClass);
     assertEquals(Short.class, getReturnClass(subSubBarType, "getF"));
     assertEquals(Byte.class, getReturnClass(subSubBarType, "getG"));
     GenericType hList = getReturnType(subSubBarClass, "getH");
-    assertEquals(List.class, hList.getUpperBound());
-    assertEquals(Double.class, hList.getComponentType().getUpperBound());
+    assertEquals(List.class, hList.getRetrievalClass());
+    assertEquals(Double.class, hList.getComponentType().getRetrievalClass());
   }
 
   @Test
@@ -136,38 +136,38 @@ public class ReflectionUtilTest {
 
     genericType = util.createGenericType(String.class);
     assertEquals(String.class, genericType.getType());
-    assertEquals(String.class, genericType.getLowerBound());
-    assertEquals(String.class, genericType.getUpperBound());
+    assertEquals(String.class, genericType.getAssignmentClass());
+    assertEquals(String.class, genericType.getRetrievalClass());
     assertEquals(0, genericType.getTypeArgumentCount());
     assertNull(genericType.getComponentType());
 
     type = util.toType("?");
     genericType = util.createGenericType(type);
     assertEquals(type, genericType.getType());
-    assertEquals(Object.class, genericType.getLowerBound());
-    assertEquals(Object.class, genericType.getUpperBound());
+    assertEquals(Object.class, genericType.getAssignmentClass());
+    assertEquals(Object.class, genericType.getRetrievalClass());
     assertEquals(0, genericType.getTypeArgumentCount());
     assertNull(genericType.getComponentType());
 
     type = util.toType("? extends java.lang.Integer");
     genericType = util.createGenericType(type);
     assertEquals(type, genericType.getType());
-    assertEquals(Integer.class, genericType.getLowerBound());
-    assertEquals(Integer.class, genericType.getUpperBound());
+    assertEquals(Integer.class, genericType.getAssignmentClass());
+    assertEquals(Integer.class, genericType.getRetrievalClass());
     assertEquals(0, genericType.getTypeArgumentCount());
     assertNull(genericType.getComponentType());
 
     type = util.toType("java.util.List<java.lang.String>");
     genericType = util.createGenericType(type);
     assertEquals(type, genericType.getType());
-    assertEquals(List.class, genericType.getLowerBound());
-    assertEquals(List.class, genericType.getUpperBound());
+    assertEquals(List.class, genericType.getAssignmentClass());
+    assertEquals(List.class, genericType.getRetrievalClass());
     assertEquals(1, genericType.getTypeArgumentCount());
     GenericType componentType = genericType.getComponentType();
     assertEquals(componentType, genericType.getTypeArgument(0));
     assertEquals(String.class, componentType.getType());
-    assertEquals(String.class, componentType.getLowerBound());
-    assertEquals(String.class, componentType.getUpperBound());
+    assertEquals(String.class, componentType.getAssignmentClass());
+    assertEquals(String.class, componentType.getRetrievalClass());
     assertEquals(0, componentType.getTypeArgumentCount());
     assertNull(componentType.getComponentType());
   }

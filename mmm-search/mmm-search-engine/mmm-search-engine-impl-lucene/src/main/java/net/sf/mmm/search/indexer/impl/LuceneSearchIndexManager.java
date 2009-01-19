@@ -6,7 +6,6 @@ package net.sf.mmm.search.indexer.impl;
 import java.io.File;
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -17,6 +16,7 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchIoException;
 import net.sf.mmm.search.indexer.api.SearchIndexManager;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 
 /**
  * This is the implementation of the
@@ -25,7 +25,7 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class LuceneSearchIndexManager implements SearchIndexManager {
+public class LuceneSearchIndexManager extends AbstractLoggable implements SearchIndexManager {
 
   /** @see #getAnalyzer() */
   private Analyzer analyzer;
@@ -42,7 +42,7 @@ public class LuceneSearchIndexManager implements SearchIndexManager {
   /**
    * @return the analyzer
    */
-  public Analyzer getAnalyzer() {
+  protected Analyzer getAnalyzer() {
 
     return this.analyzer;
   }
@@ -57,11 +57,12 @@ public class LuceneSearchIndexManager implements SearchIndexManager {
   }
 
   /**
-   * This muse be called to initialize this manager.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() {
+  @Override
+  protected void doInitialize() {
 
+    super.doInitialize();
     if (this.analyzer == null) {
       this.analyzer = new StandardAnalyzer();
     }

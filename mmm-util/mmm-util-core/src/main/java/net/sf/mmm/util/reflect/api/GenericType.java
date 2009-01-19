@@ -9,9 +9,10 @@ import java.lang.reflect.Type;
  * This is the interface of a generic type and allows simple and powerful access
  * to the complex generic type-system introduced in Java5.<br>
  * It represents a {@link Type} (available via {@link #getType()}) but allows
- * easy access to resolve the actual {@link Class} for {@link #getLowerBound()
- * assignment} and {@link #getUpperBound() retrieval}. This includes resolving
- * {@link java.lang.reflect.TypeVariable}s as far as possible.<br>
+ * easy access to resolve the actual {@link Class} for
+ * {@link #getAssignmentClass() assignment} and {@link #getRetrievalClass()
+ * retrieval}. This includes resolving {@link java.lang.reflect.TypeVariable}s
+ * as far as possible.<br>
  * Have a look at the following example:<br>
  * 
  * <pre>
@@ -36,7 +37,8 @@ import java.lang.reflect.Type;
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type,
  *      GenericType)
  * 
- * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper
+ *        bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -46,38 +48,72 @@ public interface GenericType<T> {
   GenericType<?>[] NO_TYPES = new GenericType[0];
 
   /**
-   * This method gets the {@link Class} that reflects the lower bound of the
-   * {@link #getType() value-type} represented by this {@link GenericType}.<br>
-   * It is the {@link Class} to be used for assignment (as parameter) of a value
-   * of this {@link GenericType}. It will only differ from the
-   * {@link #getUpperBound() upper bound} if this {@link GenericType} includes a
-   * {@link java.lang.reflect.WildcardType}.<br>
-   * E.g. for <code>&lt;? super Integer&gt;</code> this method will return
-   * <code>{@link Integer}</code>.<br>
-   * The {@link #getLowerBound() lower bound} is always equal or more specific
-   * to the {@link #getUpperBound() upper bound}.
+   * This method gets the {@link Class} to be used for assignment (as parameter)
+   * of a value of this {@link GenericType}.<br>
+   * It will only differ from the {@link #getRetrievalClass() retrieval-class}
+   * if this {@link GenericType} is a {@link java.lang.reflect.WildcardType}.<br>
+   * Unlike the {@link java.lang.reflect.WildcardType#getLowerBounds()
+   * lower-bound}, the assignment-class is never <code>null</code>. If there is
+   * no {@link java.lang.reflect.WildcardType#getLowerBounds() lower-bound}, the
+   * {@link #getAssignmentClass() assignment-class} is the same as the
+   * {@link #getRetrievalClass() retrieval-class}. Therefore the
+   * {@link #getAssignmentClass() assignment-class} is always equal or more
+   * specific to the {@link #getRetrievalClass() retrieval-class}. <br>
+   * Here are some examples:
+   * <table border="1">
+   * <tr>
+   * <th>Type</th>
+   * <th>{@link #getAssignmentClass()}</th>
+   * </tr>
+   * <tr>
+   * <td><code>&lt;? super Integer&gt;</code></td>
+   * <td><code>{@link Integer}</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>&lt;? extends CharSequence&gt;</code></td>
+   * <td><code>{@link CharSequence}</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>String</code></td>
+   * <td><code>{@link String}</code></td>
+   * </tr>
+   * </table>
    * 
    * @return the {@link Class} that is the lower bound.
    */
-  Class<? extends T> getLowerBound();
+  Class<? extends T> getAssignmentClass();
 
   /**
-   * This method gets the {@link Class} that reflects the upper bound of the
-   * {@link #getType() value-type} represented by this {@link GenericType}.<br>
-   * It is the {@link Class} to be used for retrieval (the return-type) of a
-   * value of this {@link GenericType}. It will only differ from the
-   * {@link #getLowerBound() lower bound} if this {@link GenericType} includes a
-   * {@link java.lang.reflect.WildcardType}.<br>
-   * E.g. for <code>&lt;? super Integer&gt;</code> this method will return
-   * <code>{@link Object}</code> and for <code>&lt;? extends Number&gt;</code>
-   * this method will return {@link Number}.<br>
-   * The {@link #getUpperBound() upper bound} is always
-   * {@link Class#isAssignableFrom(Class) assignable from} the
-   * {@link #getLowerBound() lower bound}.
+   * This method gets the {@link Class} to be used for retrieval (the
+   * return-type) of a value of this {@link GenericType}. <br>
+   * It will only differ from the {@link #getAssignmentClass() assignment-class}
+   * if this {@link GenericType} is a {@link java.lang.reflect.WildcardType}.<br>
+   * The {@link #getRetrievalClass() retrieval-class} is the
+   * {@link java.lang.reflect.WildcardType#getUpperBounds() upper-bound},
+   * however for usability and simplicity only one bound is supported.<br>
+   * Here are some examples:
+   * <table border="1">
+   * <tr>
+   * <th>Type</th>
+   * <th>{@link #getAssignmentClass()}</th>
+   * </tr>
+   * <tr>
+   * <td><code>&lt;? super Integer&gt;</code></td>
+   * <td><code>{@link Object}</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>&lt;? extends CharSequence&gt;</code></td>
+   * <td><code>{@link CharSequence}</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>String</code></td>
+   * <td><code>{@link String}</code></td>
+   * </tr>
+   * </table>
    * 
    * @return the {@link Class} that is the upper bound.
    */
-  Class<T> getUpperBound();
+  Class<T> getRetrievalClass();
 
   /**
    * This method gets the {@link Type} represented by this {@link GenericType}.
@@ -162,7 +198,9 @@ public interface GenericType<T> {
 
   /**
    * This method determines if this {@link GenericType} is equal to or a
-   * super-type of the given <code>subType</code>.
+   * super-type of the given <code>subType</code>.<br>
+   * If <code>X.isAssignableFrom(Y)</code> is <code>true</code>, then an
+   * instance of <code>Y</code> can be casted to <code>X</code>.
    * 
    * @see Class#isAssignableFrom(Class)
    * 

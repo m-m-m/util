@@ -55,6 +55,8 @@ public class ReflectionUtilImpl implements ReflectionUtil {
   /** @see #toType(CharSequenceScanner, ClassResolver, Type) */
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
 
+  // private static final WeakHashMap<K, V>
+
   /**
    * The constructor.
    */

@@ -20,9 +20,6 @@
     <module>mmm-search-parser-impl-html</module>
     <module>mmm-search-parser-impl-pdf</module>
     <module>mmm-search-parser-impl-poi</module>
-    <module>mmm-search-parser-impl-doc</module>
-    <module>mmm-search-parser-impl-xls</module>
-    <module>mmm-search-parser-impl-ppt</module>
     <module>mmm-search-parser-impl-opendoc</module>
     <module>mmm-search-parser-impl-generic</module>
     <module>mmm-search-parser-impl-text</module>

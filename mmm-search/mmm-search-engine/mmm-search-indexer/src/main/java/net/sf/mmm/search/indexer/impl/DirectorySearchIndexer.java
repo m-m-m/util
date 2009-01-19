@@ -12,11 +12,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.impl.NoOpLog;
 
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
@@ -24,6 +20,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
 import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.transformer.api.Transformer;
 
@@ -45,7 +42,7 @@ import net.sf.mmm.util.transformer.api.Transformer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DirectorySearchIndexer {
+public class DirectorySearchIndexer extends AbstractLoggable {
 
   /** @see #getIndexer() */
   private SearchIndexer indexer;
@@ -55,9 +52,6 @@ public class DirectorySearchIndexer {
 
   /** @see #getUriRewriter() */
   private Transformer<String> uriRewriter;
-
-  /** @see #getLogger() */
-  private Log logger;
 
   /** the parser service */
   private ContentParserService parserService;
@@ -115,8 +109,8 @@ public class DirectorySearchIndexer {
   /**
    * This method sets the {@link #getFilter() file-filter}.<br>
    * 
-   * @see net.sf.mmm.util.filter.FilterRuleChainXmlParser
-   * @see net.sf.mmm.util.filter.FilterRuleChainPlainParser
+   * @see net.sf.mmm.util.filter.base.FilterRuleChainXmlParser
+   * @see net.sf.mmm.util.filter.base.FilterRuleChainPlainParser
    * @see net.sf.mmm.util.file.base.FileFilterAdapter
    * 
    * @param filter the filter to set
@@ -149,23 +143,6 @@ public class DirectorySearchIndexer {
   public void setUriRewriter(Transformer<String> urlRewriter) {
 
     this.uriRewriter = urlRewriter;
-  }
-
-  /**
-   * @return the logger
-   */
-  public Log getLogger() {
-
-    return this.logger;
-  }
-
-  /**
-   * @param logger the logger to set
-   */
-  @Resource
-  public void setLogger(Log logger) {
-
-    this.logger = logger;
   }
 
   /**
@@ -209,14 +186,12 @@ public class DirectorySearchIndexer {
   /**
    * This method initializes this object.
    */
-  @PostConstruct
-  public void initialize() {
+  @Override
+  public void doInitialize() {
 
+    super.doInitialize();
     if (this.parserService == null) {
       this.parserService = new ContentParserServiceImpl();
-    }
-    if (this.logger == null) {
-      this.logger = new NoOpLog();
     }
     if (this.indexer == null) {
       throw new ResourceMissingException("indexer");
@@ -280,7 +255,7 @@ public class DirectorySearchIndexer {
           indexFile(source, child, relativePath);
         }
       } else {
-        this.logger.debug("Filtered " + child.getPath());
+        getLogger().debug("Filtered " + child.getPath());
       }
     }
   }
@@ -320,7 +295,7 @@ public class DirectorySearchIndexer {
    */
   public void indexFile(String source, File file, String relativePath) {
 
-    this.logger.debug("Indexing " + file.getPath());
+    getLogger().debug("Indexing " + file.getPath());
     String filename = file.getName();
     String fullPath = relativePath + "/" + filename;
     long fileSize = file.length();
@@ -355,14 +330,14 @@ public class DirectorySearchIndexer {
             entry.setText(text);
           }
         } catch (Exception e) {
-          this.logger.error("Failed to extract data from file: " + file.getPath(), e);
+          getLogger().error("Failed to extract data from file: " + file.getPath(), e);
           // TODO: this is just a temporary hack!!!
           StringWriter sw = new StringWriter();
           e.printStackTrace(new PrintWriter(sw));
           entry.setText(sw.toString());
         }
       } catch (FileNotFoundException e) {
-        this.logger.error("Filed disappeared while indexing " + file.getPath());
+        getLogger().error("Filed disappeared while indexing " + file.getPath());
       }
     }
     if (source != null) {

@@ -13,8 +13,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.w3c.dom.Node;
-
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
@@ -247,15 +245,19 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
     }
   }
 
-  public void writeToDom(XMLStreamReader xmlReader, Node node) throws XMLStreamException {
-
-    int nodeType = node.getNodeType();
-    int eventType = xmlReader.getEventType();
-
-  }
-
-  public void readFromDom(Node node, XMLStreamWriter xmlWriter) throws XMLStreamException {
-
-  }
+  /*
+   * public void writeToDom(XMLStreamReader xmlReader, Node node) throws
+   * XMLStreamException {
+   * 
+   * int nodeType = node.getNodeType(); int eventType =
+   * xmlReader.getEventType();
+   * 
+   * }
+   * 
+   * public void readFromDom(Node node, XMLStreamWriter xmlWriter) throws
+   * XMLStreamException {
+   * 
+   * }
+   */
 
 }

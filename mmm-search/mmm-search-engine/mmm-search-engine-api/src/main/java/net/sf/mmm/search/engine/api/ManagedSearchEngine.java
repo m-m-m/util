@@ -4,7 +4,8 @@
 package net.sf.mmm.search.engine.api;
 
 /**
- * TODO: this class ...
+ * This is the interface for a managed {@link SearchEngine}. It extends
+ * {@link SearchEngine} with additional management methods.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

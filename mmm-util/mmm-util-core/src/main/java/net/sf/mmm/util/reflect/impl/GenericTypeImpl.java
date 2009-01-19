@@ -19,7 +19,8 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
 /**
  * This is the implementation of the {@link GenericType} interface.
  * 
- * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper
+ *        bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -31,11 +32,11 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /** @see #getType() */
   private final Type type;
 
-  /** @see #getLowerBound() */
-  private final Class<? extends T> lowerBound;
+  /** @see #getAssignmentClass() */
+  private final Class<? extends T> assignmentClass;
 
-  /** @see #getUpperBound() */
-  private final Class<T> upperBound;
+  /** @see #getRetrievalClass() */
+  private final Class<T> retrievalClass;
 
   /** @see #getComponentType() */
   private final GenericType<?> componentType;
@@ -69,8 +70,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     this.type = valueType;
     this.definingType = definingType;
     ClassBounds bounds = getClassBounds(this.type);
-    this.lowerBound = (Class<? extends T>) bounds.lowerBound;
-    this.upperBound = (Class<T>) bounds.upperBound;
+    this.assignmentClass = (Class<? extends T>) bounds.assignmentClass;
+    this.retrievalClass = (Class<T>) bounds.retrievalClass;
     Type genericComponentType = null;
     if (valueType instanceof ParameterizedType) {
       ParameterizedType parameterizedType = (ParameterizedType) valueType;
@@ -86,11 +87,11 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     }
     if (genericComponentType == null) {
       TypeVariable<?> componentTypeVariable = null;
-      if (this.upperBound.isArray()) {
-        genericComponentType = this.upperBound.getComponentType();
-      } else if (Collection.class.isAssignableFrom(this.upperBound)) {
+      if (this.retrievalClass.isArray()) {
+        genericComponentType = this.retrievalClass.getComponentType();
+      } else if (Collection.class.isAssignableFrom(this.retrievalClass)) {
         componentTypeVariable = CommonTypeVariables.TYPE_VARIABLE_COLLECTION_ELEMENT;
-      } else if (Map.class.isAssignableFrom(this.upperBound)) {
+      } else if (Map.class.isAssignableFrom(this.retrievalClass)) {
         componentTypeVariable = CommonTypeVariables.TYPE_VARIABLE_MAP_VALUE;
       }
       if (componentTypeVariable != null) {
@@ -139,8 +140,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * <td>E</td>
    * <td>{@link java.util.List}&lt;Foo&gt;</td>
    * <td>Foo</td>
-   * <td>E is a {@link TypeVariable} representing the generic return-type of
-   * the method {@link java.util.List#get(int)}</td>
+   * <td>E is a {@link TypeVariable} representing the generic return-type of the
+   * method {@link java.util.List#get(int)}</td>
    * </tr>
    * </table>
    * 
@@ -160,7 +161,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
       Type[] upper = wt.getUpperBounds();
       if (upper.length > 0) {
         ClassBounds bounds = getClassBounds(upper[0]);
-        upperBoundClass = bounds.upperBound;
+        upperBoundClass = bounds.retrievalClass;
       } else {
         upperBoundClass = Object.class;
       }
@@ -168,7 +169,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
       Type[] lower = wt.getLowerBounds();
       if (lower.length > 0) {
         ClassBounds bounds = getClassBounds(lower[0]);
-        lowerBoundClass = bounds.lowerBound;
+        lowerBoundClass = bounds.assignmentClass;
       } else {
         lowerBoundClass = upperBoundClass;
       }
@@ -176,12 +177,12 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     } else if (currentType instanceof GenericArrayType) {
       GenericArrayType gat = (GenericArrayType) currentType;
       ClassBounds bounds = getClassBounds(gat.getGenericComponentType());
-      Class<?> lower = getArrayClass(bounds.lowerBound);
+      Class<?> lower = getArrayClass(bounds.assignmentClass);
       Class<?> upper;
-      if (bounds.lowerBound == bounds.upperBound) {
+      if (bounds.assignmentClass == bounds.retrievalClass) {
         upper = lower;
       } else {
-        upper = getArrayClass(bounds.upperBound);
+        upper = getArrayClass(bounds.retrievalClass);
       }
       return new ClassBounds(lower, upper);
     } else if (currentType instanceof TypeVariable) {
@@ -201,12 +202,12 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   }
 
   /**
-   * This method creates the {@link Class} reflecting an
-   * {@link Class#isArray() array} of the given
+   * This method creates the {@link Class} reflecting an {@link Class#isArray()
+   * array} of the given
    * <code>{@link Class#getComponentType() componentType}</code>.
    * 
-   * @param componentClass is the
-   *        {@link Class#getComponentType() component type}.
+   * @param componentClass is the {@link Class#getComponentType() component
+   *        type}.
    * @return the according {@link Class#isArray() array}-class.
    */
   public Class<?> getArrayClass(Class<?> componentClass) {
@@ -237,17 +238,17 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /**
    * {@inheritDoc}
    */
-  public Class<? extends T> getLowerBound() {
+  public Class<? extends T> getAssignmentClass() {
 
-    return this.lowerBound;
+    return this.assignmentClass;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Class<T> getUpperBound() {
+  public Class<T> getRetrievalClass() {
 
-    return this.upperBound;
+    return this.retrievalClass;
   }
 
   /**
@@ -284,17 +285,17 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    */
   protected static class ClassBounds {
 
-    /** @see #getLowerBound() */
-    private final Class<?> lowerBound;
+    /** @see #getAssignmentClass() */
+    private final Class<?> assignmentClass;
 
-    /** @see #getUpperBound() */
-    private final Class<?> upperBound;
+    /** @see #getRetrievalClass() */
+    private final Class<?> retrievalClass;
 
     /**
      * The constructor.
      * 
-     * @param bound is the {@link #getLowerBound() lower} and
-     *        {@link #getUpperBound() upper bound}.
+     * @param bound is the {@link Class} for {@link #getAssignmentClass()
+     *        assignment} and {@link #getRetrievalClass() retrieval}.
      */
     public ClassBounds(Class<?> bound) {
 
@@ -304,30 +305,36 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     /**
      * The constructor.
      * 
-     * @param lowerBound is the {@link #getLowerBound() lower bound}.
-     * @param upperBound is the {@link #getUpperBound() upper bound}.
+     * @param assignmentClass is the {@link #getAssignmentClass() assignment
+     *        class}.
+     * @param retrievalClass is the {@link #getRetrievalClass() retrieval class}
+     *        .
      */
-    public ClassBounds(Class<?> lowerBound, Class<?> upperBound) {
+    public ClassBounds(Class<?> assignmentClass, Class<?> retrievalClass) {
 
       super();
-      this.lowerBound = lowerBound;
-      this.upperBound = upperBound;
+      this.assignmentClass = assignmentClass;
+      this.retrievalClass = retrievalClass;
     }
 
     /**
-     * @return the lowerBound
+     * @see GenericType#getAssignmentClass()
+     * 
+     * @return the {@link Class} for assignment.
      */
-    public Class<?> getLowerBound() {
+    public Class<?> getAssignmentClass() {
 
-      return this.lowerBound;
+      return this.assignmentClass;
     }
 
     /**
-     * @return the upperBound
+     * @see GenericType#getRetrievalClass()
+     * 
+     * @return the {@link Class} for retrieval.
      */
-    public Class<?> getUpperBound() {
+    public Class<?> getRetrievalClass() {
 
-      return this.upperBound;
+      return this.retrievalClass;
     }
 
   }

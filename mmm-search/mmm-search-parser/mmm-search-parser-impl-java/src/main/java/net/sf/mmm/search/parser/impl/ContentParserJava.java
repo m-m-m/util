@@ -14,26 +14,43 @@ import java.util.regex.Pattern;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserJava extends ContentParserTextMarkupAware {
+public class ContentParserJava extends AbstractContentParserTextMarkupAware {
+
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE = "text/java-source";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION = "java";
 
   /** the string used to separate package names */
   private static final String PACKAGE_SEPARATOR = ".";
-  
+
   /** pattern to extract the package name */
   private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s+([\\w\\.]*).*");
 
   /** pattern to extract the class name */
-  private static final Pattern CLASS_PATTERN = Pattern.compile("[\\sa-z]*(class|interface)\\s+(\\w*).*");
+  private static final Pattern CLASS_PATTERN = Pattern
+      .compile("[\\sa-z]*(class|interface)\\s+(\\w*).*");
 
   /** pattern to extract the author */
-  private static final Pattern AUTHOR_PATTERN = Pattern.compile("[\\s/*]*@author\\s+(<[^>]*>)?\"?([^(</\"]*).*");
-  
+  private static final Pattern AUTHOR_PATTERN = Pattern
+      .compile("[\\s/*]*@author\\s+(<[^>]*>)?\"?([^(</\"]*).*");
+
   /**
-   * The constructor. 
+   * The constructor.
    */
   public ContentParserJava() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getRegistryKeys() {
+
+    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }
 
   /**
@@ -57,7 +74,7 @@ public class ContentParserJava extends ContentParserTextMarkupAware {
         properties.setProperty(PROPERTY_KEY_TITLE, title);
       }
       // author tag can only appear before class name was detected...
-      
+
       String author = parseProperty(line, AUTHOR_PATTERN, 2);
       if (author != null) {
         String authorProperty = properties.getProperty(PROPERTY_KEY_AUTHOR);
@@ -67,7 +84,7 @@ public class ContentParserJava extends ContentParserTextMarkupAware {
           authorProperty = authorProperty + ", " + author;
         }
         properties.setProperty(PROPERTY_KEY_AUTHOR, authorProperty);
-      }      
+      }
     }
   }
 

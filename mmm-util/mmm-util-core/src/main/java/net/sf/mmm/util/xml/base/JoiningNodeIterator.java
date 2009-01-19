@@ -1,22 +1,19 @@
-/* $Id: $
+/* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import java.util.Iterator;
-
-import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.util.xml.api.XmlCompareMode;
 
 /**
- * This class is used to {@link Iterator#next() iterate} the {@link Node}s of a
- * {@link NodeList}. Depending on the {@link XmlCompareMode} given at
- * {@link #JoiningNodeIterator(NodeList, XmlCompareMode) construction} it
- * automatically joins {@link Node}s of according {@link Node#getNodeType()
- * types} by returning them as a {@link DocumentFragment}.
+ * This class is used to {@link java.util.Iterator#next() iterate} the
+ * {@link Node}s of a {@link NodeList}. Depending on the {@link XmlCompareMode}
+ * given at {@link #JoiningNodeIterator(NodeList, XmlCompareMode) construction}
+ * it automatically joins {@link Node}s of according {@link Node#getNodeType()
+ * types} by returning them as a {@link org.w3c.dom.DocumentFragment}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

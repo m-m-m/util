@@ -14,7 +14,7 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
  * This is an implementation of the {@link GenericType} interface for a simple
  * {@link Class}.
  * 
- * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -90,7 +90,7 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
   /**
    * {@inheritDoc}
    */
-  public Class<T> getLowerBound() {
+  public Class<T> getAssignmentClass() {
 
     return this.type;
   }
@@ -98,7 +98,7 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
   /**
    * {@inheritDoc}
    */
-  public Class<T> getUpperBound() {
+  public Class<T> getRetrievalClass() {
 
     return this.type;
   }

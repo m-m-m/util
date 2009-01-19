@@ -8,6 +8,7 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -17,7 +18,8 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
+public abstract class AbstractSearchQueryBuilder extends AbstractLoggable implements
+    SearchQueryBuilder {
 
   /**
    * The constructor.
@@ -54,8 +56,7 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    * @param depth is the deepth of the query expression (number of open
    *        parenthesis).
    * @return the parsed query or <code>null</code> if this a call with a depth
-   *         greater than <code>0</code> and the parsed query segment was
-   *         void.
+   *         greater than <code>0</code> and the parsed query segment was void.
    */
   private SearchQuery parseStandardQuery(CharSequenceScanner parser, boolean requireTerms,
       String defaultProperty, int depth) {
@@ -122,7 +123,8 @@ public abstract class AbstractSearchQueryBuilder implements SearchQueryBuilder {
    * @return the parsed query or <code>null</code> if the parsed query segment
    *         was void.
    */
-  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultProperty, int depth) {
+  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultProperty,
+      int depth) {
 
     char c;
     String property = defaultProperty;

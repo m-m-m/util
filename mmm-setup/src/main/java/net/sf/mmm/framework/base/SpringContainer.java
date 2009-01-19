@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -57,11 +58,16 @@ public class SpringContainer implements IocContainer {
   public <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass,
       String componentId) {
 
-    COMPONENT_API component = (COMPONENT_API) this.applicationContext.getBean(apiClass.getName(),
-        apiClass);
-    if (component == null) {
+    COMPONENT_API component;
+    try {
+      component = (COMPONENT_API) this.applicationContext.getBean(componentId, apiClass);
+      if (component == null) {
+        throw new IocContainerException("Component '" + apiClass.getSimpleName()
+            + "' NOT found for '" + componentId + "'!");
+      }
+    } catch (NoSuchBeanDefinitionException e) {
       throw new IocContainerException("Component '" + apiClass.getSimpleName()
-          + "' NOT found for '" + componentId + "'!");
+          + "' NOT found for '" + componentId + "'!", e);
     }
     return component;
   }

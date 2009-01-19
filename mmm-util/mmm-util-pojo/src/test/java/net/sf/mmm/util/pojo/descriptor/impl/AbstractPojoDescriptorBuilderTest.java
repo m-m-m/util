@@ -51,7 +51,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(getAccessor);
       assertEquals(propertyName, getAccessor.getName());
       assertEquals(readType, getAccessor.getPropertyClass());
-      assertEquals(readType, getAccessor.getPropertyType().getUpperBound());
+      assertEquals(readType, getAccessor.getPropertyType().getRetrievalClass());
       assertEquals(getAccessor.getPropertyType(), getAccessor.getReturnType());
       assertSame(getAccessor.getPropertyClass(), getAccessor.getReturnClass());
     }
@@ -64,7 +64,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertNotNull(setAccessor);
       assertEquals(propertyName, setAccessor.getName());
       assertEquals(writeType, setAccessor.getPropertyClass());
-      assertEquals(writeType, setAccessor.getPropertyType().getLowerBound());
+      assertEquals(writeType, setAccessor.getPropertyType().getAssignmentClass());
     }
   }
 

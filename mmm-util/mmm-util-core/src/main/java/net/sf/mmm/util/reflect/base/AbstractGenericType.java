@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the implementation of the {@link GenericType} interface.
  * 
- * @param <T> is the templated type of the {@link #getUpperBound() upper bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -83,8 +83,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    */
   public boolean isAssignableFrom(GenericType<?> subType) {
 
-    Class<?> upperBound = getUpperBound();
-    Class<?> subTypeUpperBound = subType.getUpperBound();
+    Class<?> upperBound = getRetrievalClass();
+    Class<?> subTypeUpperBound = subType.getRetrievalClass();
     // Integer i = null;
     // Number n = i;
     // i = n; --> compile error
@@ -94,8 +94,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
       return false;
     }
 
-    Class<?> lowerBound = getLowerBound();
-    Class<?> subTypeLowerBound = subType.getLowerBound();
+    Class<?> lowerBound = getAssignmentClass();
+    Class<?> subTypeLowerBound = subType.getAssignmentClass();
     if ((lowerBound != upperBound) || (subTypeLowerBound != subTypeUpperBound)) {
       // List<? super Number> numberList = null;
       // List<? super Integer> integerList = numberList;
@@ -217,7 +217,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
     if (genericDeclaration instanceof Class) {
       Class<?> declaringClass = (Class<?>) genericDeclaration;
-      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getUpperBound());
+      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getRetrievalClass());
       if (hierarchy != null) {
         TypeVariable<?> currentVariable = typeVariable;
         for (int i = hierarchy.size() - 1; i >= -1; i--) {
@@ -257,7 +257,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   public final String toString() {
 
     Type type = getType();
-    Class<?> upperBound = getUpperBound();
+    Class<?> upperBound = getRetrievalClass();
     if (upperBound == type) {
       return upperBound.getName();
     } else {

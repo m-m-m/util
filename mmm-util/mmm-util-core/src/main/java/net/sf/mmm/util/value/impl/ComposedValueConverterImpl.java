@@ -74,7 +74,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       logger.trace("starting conversion of '" + value + "' from '" + value.getClass().getName()
           + "' to '" + targetType + "'");
     }
-    Class<? extends Object> targetClass = targetType.getUpperBound();
+    Class<? extends Object> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
       return value;
     }
@@ -117,7 +117,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
         }
         ValueConverter converter = this.targetClass2converterMap.get(currentClass);
         if ((converter != null) && (converter != lastConverter)
-            && (converter.getTargetType().isAssignableFrom(targetType.getUpperBound()))) {
+            && (converter.getTargetType().isAssignableFrom(targetType.getRetrievalClass()))) {
           if (logger.isTraceEnabled()) {
             StringWriter sw = new StringWriter(50);
             sw.append("trying converter for target-type '");

@@ -18,4 +18,13 @@
     <module>mmm-search-parser</module>
     <module>mmm-search-engine</module>
   </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-setup</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

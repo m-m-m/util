@@ -174,7 +174,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
     LuceneSearchEngine searchEngine = new LuceneSearchEngine();
     searchEngine.setAnalyzer(createAnalyzer(element));
     searchEngine.setIndexPath(getIndexPath(element));
-    searchEngine.setIgnoreLeadingWildcards(isIgnoreLeadingWildcards(element));
+    //searchEngine.setIgnoreLeadingWildcards(isIgnoreLeadingWildcards(element));
     searchEngine.initialize();
     setupRefreshThread(element, searchEngine);
     return searchEngine;

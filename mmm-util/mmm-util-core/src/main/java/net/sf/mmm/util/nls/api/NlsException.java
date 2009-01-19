@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-
 /**
  * This is an abstract base implementation of a checked exception with real
  * <em>native language support</em> (NLS).<br>
@@ -17,16 +16,19 @@ package net.sf.mmm.util.nls.api;
  */
 public abstract class NlsException extends AbstractNlsException {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 234915625705566691L;
+
   /**
    * The constructor.<br>
    * 
    * @param internationalizedMessage is a short description of the problem. It
    *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization}
-   *        and should be in English language.
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
    * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization. May
-   *        be empty if no variable arguments exist.
+   *        <code>internaitionalizedMessage</code> after nationalization. May be
+   *        empty if no variable arguments exist.
    */
   public NlsException(String internationalizedMessage, Object... arguments) {
 
@@ -39,11 +41,11 @@ public abstract class NlsException extends AbstractNlsException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It
    *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization}
-   *        and should be in English language.
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
    * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization. May
-   *        be empty if no variable arguments exist.
+   *        <code>internaitionalizedMessage</code> after nationalization. May be
+   *        empty if no variable arguments exist.
    */
   public NlsException(Throwable nested, String internationalizedMessage, Object... arguments) {
 

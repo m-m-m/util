@@ -241,7 +241,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   protected PojoPathState createStateByType(GenericType initialPojoType, String pojoPath,
       PojoPathMode mode, PojoPathContext context) {
 
-    Class<?> initialPojoClass = initialPojoType.getUpperBound();
+    Class<?> initialPojoClass = initialPojoType.getRetrievalClass();
     Map<Object, Object> rawCache = context.getCache();
     if (rawCache == null) {
       CachingPojoPath rootPath = new CachingPojoPath(null, initialPojoClass, initialPojoType);
@@ -516,11 +516,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     // determine pojo type
     GenericType pojoType = currentPath.parent.pojoType;
     GenericType componentType = pojoType.getComponentType();
-    if (componentType.getUpperBound() == Object.class) {
+    if (componentType.getRetrievalClass() == Object.class) {
       currentPath.pojoClass = Object.class;
     } else {
       currentPath.pojoType = componentType;
-      currentPath.pojoClass = componentType.getLowerBound();
+      currentPath.pojoClass = componentType.getAssignmentClass();
     }
     Object result = null;
     if (!state.isGetType()) {
@@ -563,7 +563,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       currentPath.pojoType = getReflectionUtil().createGenericType(currentPath.parent.pojoClass)
           .getComponentType();
     }
-    currentPath.pojoClass = currentPath.pojoType.getLowerBound();
+    currentPath.pojoClass = currentPath.pojoType.getAssignmentClass();
     Object result = null;
     if (!state.isGetType()) {
       Object parentPojo = currentPath.parent.pojo;

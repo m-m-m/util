@@ -21,6 +21,9 @@ public abstract class AbstractContentParser extends AbstractLoggable implements 
   /** @see #getMaximumBufferSize() */
   private int maximumBufferSize;
 
+  /** @see #doInitialize() */
+  private ContentParserRegistrar contentParserRegistrar;
+
   /**
    * The constructor.
    */
@@ -28,6 +31,35 @@ public abstract class AbstractContentParser extends AbstractLoggable implements 
 
     super();
     this.maximumBufferSize = DEFAULT_MAX_BUFFER_SIZE;
+  }
+
+  /**
+   * @param contentParserRegistrar is the contentParserRegistrar to set
+   */
+  public void setContentParserRegistrar(ContentParserRegistrar contentParserRegistrar) {
+
+    this.contentParserRegistrar = contentParserRegistrar;
+  }
+
+  /**
+   * This method gets the keys used to register this {@link ContentParser}.
+   * 
+   * @see ContentParserRegistrar#addParser(ContentParser, String...)
+   * 
+   * @return the keys (extensions and mimetypes) of this {@link ContentParser}.
+   */
+  public abstract String[] getRegistryKeys();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.contentParserRegistrar != null) {
+      this.contentParserRegistrar.addParser(this, getRegistryKeys());
+    }
   }
 
   /**

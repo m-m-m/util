@@ -8,20 +8,23 @@ import java.util.Map;
 
 import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.api.ContentParserService;
+import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
- * This is the abstract base implemenation of the {@link ContentParserService}
+ * This is the abstract base implementation of the {@link ContentParserService}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentParserService implements ContentParserService, LimitBufferSize {
+public abstract class AbstractContentParserService extends AbstractLoggable implements
+    ContentParserService, LimitBufferSize {
 
   /** @see #getGenericParser() */
   private ContentParser genericParser;
 
   /** @see #getParser(String) */
-  private final Map<String, ContentParser> ext2parserMap;
+  private final Map<String, ContentParser> key2parserMap;
 
   /** @see #getMaximumBufferSize() */
   private int maximumBufferSize;
@@ -32,7 +35,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   public AbstractContentParserService() {
 
     super();
-    this.ext2parserMap = new HashMap<String, ContentParser>();
+    this.key2parserMap = new HashMap<String, ContentParser>();
     this.maximumBufferSize = DEFAULT_MAX_BUFFER_SIZE;
   }
 
@@ -59,7 +62,7 @@ public abstract class AbstractContentParserService implements ContentParserServi
   private void updateBufferSize() {
 
     int bufferSize = this.maximumBufferSize;
-    for (ContentParser parser : this.ext2parserMap.values()) {
+    for (ContentParser parser : this.key2parserMap.values()) {
       if (parser instanceof LimitBufferSize) {
         ((LimitBufferSize) parser).setMaximumBufferSize(bufferSize);
       }
@@ -85,34 +88,34 @@ public abstract class AbstractContentParserService implements ContentParserServi
   /**
    * {@inheritDoc}
    */
-  public ContentParser getParser(String fileExtension) {
+  public ContentParser getParser(String key) {
 
-    return this.ext2parserMap.get(fileExtension);
+    return this.key2parserMap.get(key);
   }
 
   /**
-   * This method registeres the given <code>parser</code> for the given
+   * This method registers the given <code>parser</code> for the given
    * <code>extension</code>.
    * 
    * @see #getParser(String)
    * 
    * @param parser is the parser to register.
-   * @param extensions are the extensions the parser will be associated with.
+   * @param keys are the extensions the parser will be associated with.
    */
-  public void addParser(ContentParser parser, String... extensions) {
+  public void addParser(ContentParser parser, String... keys) {
 
-    if (extensions.length == 0) {
+    // getInitializationState().requireNotInitilized();
+    if (keys.length == 0) {
       throw new IllegalArgumentException("At least one extension is required!");
     }
-    for (int i = 0; i < extensions.length; i++) {
-      if (this.ext2parserMap.containsKey(extensions[i])) {
-        throw new IllegalArgumentException("Parser for extension '" + extensions[i]
-            + "'already registered!");
+    for (int i = 0; i < keys.length; i++) {
+      if (this.key2parserMap.containsKey(keys[i])) {
+        throw new DuplicateObjectException(parser, keys[i]);
       }
       if (parser instanceof LimitBufferSize) {
         ((LimitBufferSize) parser).setMaximumBufferSize(this.maximumBufferSize);
       }
-      this.ext2parserMap.put(extensions[i], parser);
+      this.key2parserMap.put(keys[i], parser);
     }
   }
 

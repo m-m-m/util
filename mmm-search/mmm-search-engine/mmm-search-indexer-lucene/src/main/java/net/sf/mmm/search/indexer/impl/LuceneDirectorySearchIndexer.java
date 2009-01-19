@@ -60,25 +60,27 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
   }
 
   /**
-   * The main method used to execute this class as program.
+   * This method is used to execute this class as program.
    * 
    * @param args are the command-line arguments.
+   * @return the exit-code of the program - <code>0</code> for success,
+   *         error-code otherwise.
    * @throws Exception if something goes wrong.
    */
-  public static void main(String[] args) throws Exception {
+  public int run(String[] args) throws Exception {
 
     // command-line options...
     if (args.length != 1) {
       usage();
-      System.exit(-1);
+      return -1;
     }
     // parse xml from file...
-    Element element;
+    Element xmlConfigElement;
     try {
       File xmlConfigFile = new File(args[0]);
       Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
           xmlConfigFile);
-      element = xmlConfigDoc.getDocumentElement();
+      xmlConfigElement = xmlConfigDoc.getDocumentElement();
     } catch (Exception e) {
       usage();
       System.out.println("Error: Failed to load configuration from file: " + args[0]);
@@ -86,13 +88,26 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
     }
     LuceneSearchConfigurator configurator = new LuceneSearchConfigurator();
     DomUtil domUtil = DomUtilImpl.getInstance();
-    Element searchEngineElement = domUtil.requireFirstChildElement(element,
+    Element searchEngineElement = domUtil.requireFirstChildElement(xmlConfigElement,
         SearchConfigurator.XML_TAG_SEARCH_ENGINE);
     LuceneSearchIndexer luceneIndexer = configurator.createSearchIndexer(searchEngineElement);
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);
     indexer.setLogger(LogFactory.getLog(LuceneDirectorySearchIndexer.class));
     indexer.initialize();
-    indexer.index(element);
+    indexer.index(xmlConfigElement);
+    return 0;
+  }
+
+  /**
+   * This method is used to execute this class as program.
+   * 
+   * @param args are the command-line arguments.
+   * @throws Exception if something goes wrong.
+   */
+  public static void main(String[] args) throws Exception {
+
+    int result = new LuceneDirectorySearchIndexer().run(args);
+    System.exit(result);
   }
 
 }

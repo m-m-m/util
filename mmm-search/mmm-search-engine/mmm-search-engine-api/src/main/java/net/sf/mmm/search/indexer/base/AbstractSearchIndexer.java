@@ -7,6 +7,7 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchUpdateMissingIdException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 
 /**
  * This is the abstract base implementation of the {@link SearchIndexer}
@@ -14,7 +15,7 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchIndexer implements SearchIndexer {
+public abstract class AbstractSearchIndexer extends AbstractLoggable implements SearchIndexer {
 
   /**
    * The constructor.

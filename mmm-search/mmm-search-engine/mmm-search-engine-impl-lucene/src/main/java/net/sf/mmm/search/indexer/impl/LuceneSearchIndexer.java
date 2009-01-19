@@ -6,13 +6,12 @@ package net.sf.mmm.search.indexer.impl;
 import java.io.File;
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexModifier;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
 import net.sf.mmm.search.api.SearchEntry;
@@ -25,6 +24,7 @@ import net.sf.mmm.search.base.SearchRemoveFailedException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the implementation of the
@@ -64,6 +64,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
     super();
     this.indexModifier = indexModifier;
+    initialize();
   }
 
   /**
@@ -71,8 +72,10 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * 
    * @param luceneAnalyzer the analyzer to set
    */
+  @Resource
   public void setAnalyzer(Analyzer luceneAnalyzer) {
 
+    getInitializationState().requireNotInitilized();
     this.analyzer = luceneAnalyzer;
   }
 
@@ -81,6 +84,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    */
   public void setIndexModifier(IndexModifier modifier) {
 
+    getInitializationState().requireNotInitilized();
     this.indexModifier = modifier;
   }
 
@@ -92,31 +96,30 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    */
   public void setIndexPath(String searchIndexPath) {
 
+    getInitializationState().requireNotInitilized();
     this.indexPath = searchIndexPath;
   }
 
   /**
-   * This method sets the update flag. If set to <code>true</code>, the index
-   * is updated if it already exists. Else if <code>false</code>, a new index
-   * will be created when the indexing is started. The default is
-   * <code>false</code>.
+   * This method sets the update flag. If set to <code>true</code>, the index is
+   * updated if it already exists. Else if <code>false</code>, a new index will
+   * be created when the indexing is started. The default is <code>false</code>.
    * 
    * @param update the update flag to set.
    */
   public void setUpdate(boolean update) {
 
+    getInitializationState().requireNotInitilized();
     this.update = update;
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
-   * 
-   * @throws IOException if the initialization fails with an I/O error.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() throws IOException {
+  @Override
+  protected void doInitialize() {
 
+    super.doInitialize();
     if (this.indexModifier == null) {
       if (this.indexPath == null) {
         throw new ResourceMissingException("indexPath");
@@ -137,7 +140,11 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
         indexDirectory.mkdirs();
         create = true;
       }
-      this.indexModifier = new IndexModifier(indexDirectory, this.analyzer, create);
+      try {
+        this.indexModifier = new IndexModifier(indexDirectory, this.analyzer, create);
+      } catch (IOException e) {
+        throw new RuntimeIoException(e);
+      }
     }
   }
 

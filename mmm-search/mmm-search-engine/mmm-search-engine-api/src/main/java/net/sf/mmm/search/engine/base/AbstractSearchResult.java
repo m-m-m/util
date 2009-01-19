@@ -77,12 +77,13 @@ public abstract class AbstractSearchResult implements SearchResult {
 
     int pageCount = getPageCount(hitsPerPage);
     int pageMax = pageCount - 1;
-    if (pageIndex > pageMax) {
-      pageIndex = pageMax;
+    int newPageIndex = pageIndex;
+    if (newPageIndex > pageMax) {
+      newPageIndex = pageMax;
     }
-    int hitOffset = pageIndex * hitsPerPage;
+    int hitOffset = newPageIndex * hitsPerPage;
     int hitCount;
-    if (pageIndex == pageMax) {
+    if (newPageIndex == pageMax) {
       // the last page may have less hits
       hitCount = getHitCount() - hitOffset;
     } else {
@@ -92,7 +93,7 @@ public abstract class AbstractSearchResult implements SearchResult {
     for (int i = 0; i < hits.length; i++) {
       hits[i] = getHit(i + hitOffset);
     }
-    return new SearchResultPageImpl(this.query, getHitCount(), hitsPerPage, pageIndex, hits);
+    return new SearchResultPageImpl(this.query, getHitCount(), hitsPerPage, newPageIndex, hits);
   }
 
 }

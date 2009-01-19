@@ -114,7 +114,7 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
     if (getMode().isReading()) {
       return getPropertyClass();
     } else {
-      return getReturnType().getUpperBound();
+      return getReturnType().getRetrievalClass();
     }
   }
 

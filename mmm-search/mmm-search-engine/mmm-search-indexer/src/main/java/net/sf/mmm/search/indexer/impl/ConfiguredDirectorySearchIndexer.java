@@ -14,10 +14,10 @@ import org.w3c.dom.NodeList;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.util.file.base.FileStringFilterAdapter;
 import net.sf.mmm.util.file.base.FileUtilImpl;
-import net.sf.mmm.util.filter.FilterRuleChainXmlParser;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
-import net.sf.mmm.util.transformer.StringTransformerChainXmlParser;
+import net.sf.mmm.util.filter.base.FilterRuleChainXmlParser;
 import net.sf.mmm.util.transformer.api.Transformer;
+import net.sf.mmm.util.transformer.base.StringTransformerChainXmlParser;
 
 /**
  * This class contains functionality to recursively walk through directories and

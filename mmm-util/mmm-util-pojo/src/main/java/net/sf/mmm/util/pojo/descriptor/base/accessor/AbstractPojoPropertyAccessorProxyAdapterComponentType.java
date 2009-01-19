@@ -57,9 +57,9 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType exte
   public Class<?> getPropertyClass() {
 
     if (getMode().isReading()) {
-      return this.propertyType.getUpperBound();
+      return this.propertyType.getRetrievalClass();
     } else {
-      return this.propertyType.getLowerBound();
+      return this.propertyType.getAssignmentClass();
     }
   }
 

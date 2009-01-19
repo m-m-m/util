@@ -26,12 +26,27 @@ import net.sf.mmm.util.xml.base.XmlUtilImpl;
  */
 public class ContentParserXml extends AbstractContentParser {
 
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE = "text/xml";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION = "xml";
+
   /**
    * The constructor.
    */
   public ContentParserXml() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getRegistryKeys() {
+
+    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }
 
   /**

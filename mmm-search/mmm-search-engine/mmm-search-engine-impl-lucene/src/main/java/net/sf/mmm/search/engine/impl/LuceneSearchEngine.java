@@ -5,7 +5,7 @@ package net.sf.mmm.search.engine.impl;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -16,20 +16,20 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.highlight.Formatter;
-import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.base.SearchIdInvalidException;
 import net.sf.mmm.search.base.SearchEntryIdMissingException;
+import net.sf.mmm.search.base.SearchIdInvalidException;
 import net.sf.mmm.search.base.SearchIoException;
-import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResult;
 import net.sf.mmm.search.engine.base.AbstractSearchEngine;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
 import net.sf.mmm.search.impl.LuceneSearchEntry;
+import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the implementation of the
@@ -55,9 +55,6 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /** @see #setIndexPath(String) */
   private String indexPath;
 
-  /** @see #setIgnoreLeadingWildcards(boolean) */
-  private boolean ignoreLeadingWildcards;
-
   /** @see #getHighlightFormatter() */
   private Formatter highlightFormatter;
 
@@ -67,7 +64,6 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   public LuceneSearchEngine() {
 
     super();
-    this.ignoreLeadingWildcards = true;
   }
 
   /**
@@ -75,8 +71,10 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * 
    * @param luceneAnalyzer the analyzer to set
    */
+  @Resource
   public void setAnalyzer(Analyzer luceneAnalyzer) {
 
+    getInitializationState().requireNotInitilized();
     this.analyzer = luceneAnalyzer;
   }
 
@@ -87,6 +85,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    */
   public void setSearcher(Searcher luceneSearcher) {
 
+    getInitializationState().requireNotInitilized();
     this.searcher = luceneSearcher;
   }
 
@@ -98,6 +97,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    */
   public void setIndexPath(String searchIndexPath) {
 
+    getInitializationState().requireNotInitilized();
     this.indexPath = searchIndexPath;
   }
 
@@ -116,13 +116,14 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    */
   public void setQueryBuilder(SearchQueryBuilder searchQueryBuilder) {
 
+    getInitializationState().requireNotInitilized();
     this.queryBuilder = searchQueryBuilder;
   }
 
   /**
    * @return the formatter
    */
-  public Formatter getHighlightFormatter() {
+  protected Formatter getHighlightFormatter() {
 
     return this.highlightFormatter;
   }
@@ -130,38 +131,11 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * @param formatter the formatter to set
    */
+  @Resource
   public void setHighlightFormatter(Formatter formatter) {
 
+    getInitializationState().requireNotInitilized();
     this.highlightFormatter = formatter;
-  }
-
-  /**
-   * @see #setIgnoreLeadingWildcards(boolean)
-   * 
-   * @return <code>true</code> if leading wildcards ('*' or '?') are ignored,
-   *         <code>false</code> otherwise.
-   */
-  public boolean isIgnoreLeadingWildcards() {
-
-    return this.ignoreLeadingWildcards;
-  }
-
-  /**
-   * This method sets the flag to ignore leading wildcards ('*' or '?') in
-   * search terms.<br>
-   * <b>ATTENTION:</b><br>
-   * Leading wildcards can potentially cause very expensive search queries that
-   * may kill your performance. Do NOT use this for a public search site because
-   * it allows simplistic DOS-Attacks.
-   * 
-   * @see SearchQueryBuilder#parseStandardQuery(String)
-   * 
-   * @param ignore - if <code>true</code>, leading wildcards ('*' or '?') are
-   *        ignored, <code>false</code> otherwise.
-   */
-  public void setIgnoreLeadingWildcards(boolean ignore) {
-
-    this.ignoreLeadingWildcards = ignore;
   }
 
   /**
@@ -169,29 +143,35 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * to inject the {@link #setIndexPath(String) index-path} or the
    * {@link #setSearcher(Searcher) searcher} before you can call this method.
    * 
-   * @throws IOException if the initialization fails with an I/O error.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() throws IOException {
+  @Override
+  public void doInitialize() {
 
-    if (this.analyzer == null) {
-      this.analyzer = new StandardAnalyzer();
-    }
-    if (this.queryParser == null) {
-      this.queryParser = new QueryParser(SearchEntry.PROPERTY_TEXT, this.analyzer);
-    }
-    if (this.searcher == null) {
-      if (this.indexPath == null) {
-        throw new IllegalStateException();
+    super.doInitialize();
+    try {
+      if (this.analyzer == null) {
+        this.analyzer = new StandardAnalyzer();
       }
-      this.searcher = new IndexSearcher(this.indexPath);
-    }
-    if (this.queryBuilder == null) {
-      this.queryBuilder = new LuceneSearchQueryBuilder(this.analyzer, this.ignoreLeadingWildcards);
-    }
-    if (this.highlightFormatter == null) {
-      this.highlightFormatter = new SimpleHTMLFormatter(SearchHit.HIGHLIGHT_START_TAG,
-          SearchHit.HIGHLIGHT_END_TAG);
+      if (this.queryParser == null) {
+        this.queryParser = new QueryParser(SearchEntry.PROPERTY_TEXT, this.analyzer);
+      }
+      if (this.searcher == null) {
+        if (this.indexPath == null) {
+          throw new ResourceMissingException("indexPath");
+        }
+        this.searcher = new IndexSearcher(this.indexPath);
+      }
+      if (this.queryBuilder == null) {
+        LuceneSearchQueryBuilder qb = new LuceneSearchQueryBuilder();
+        qb.setAnalyzer(this.analyzer);
+        this.queryBuilder = qb;
+      }
+      if (this.highlightFormatter == null) {
+        this.highlightFormatter = new HighlightFormatter();
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e);
     }
   }
 

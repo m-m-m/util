@@ -23,7 +23,13 @@ import org.w3c.tidy.Tidy;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserHtml extends ContentParserTextMarkupAware {
+public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
+
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE = "text/html";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION = "html";
 
   /** the head tag */
   private static final String TAG_HEAD = "head";
@@ -63,12 +69,21 @@ public class ContentParserHtml extends ContentParserTextMarkupAware {
   }
 
   /**
-   * @see net.sf.mmm.search.parser.impl.ContentParserText#parse(java.io.InputStream,
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getRegistryKeys() {
+
+    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+  }
+
+  /**
+   * @see net.sf.mmm.search.parser.impl.AbstractContentParserText#parse(java.io.InputStream,
    *      long)
    * 
    * @param inputStream
    * @param filesize
-   * @return the parsed properties.
+   * @param properties
    * @throws Exception
    */
   protected void parseJtidy(InputStream inputStream, long filesize, Properties properties)
@@ -116,6 +131,7 @@ public class ContentParserHtml extends ContentParserTextMarkupAware {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
       throws Exception {
 

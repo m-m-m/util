@@ -32,7 +32,7 @@ public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> implements
   public final TARGET convert(SOURCE value, Object valueSource,
       GenericType<? extends TARGET> targetType) {
 
-    return convert(value, valueSource, targetType.getUpperBound());
+    return convert(value, valueSource, targetType.getRetrievalClass());
   }
 
 }

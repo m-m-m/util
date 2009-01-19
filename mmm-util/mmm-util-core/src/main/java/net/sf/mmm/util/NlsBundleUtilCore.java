@@ -69,6 +69,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.nls.api.DuplicateObjectException */
   public static final String ERR_DUPLICATE_OBJECT_WITH_KEY = "Duplicate object \"{0}\" for key \"{1}\"!";
 
+  /** @see net.sf.mmm.util.nls.api.ObjectNotFoundException */
+  public static final String ERR_OBJECT_NOT_FOUND = "Could NOT find object \"{0}\"!";
+
+  /** @see net.sf.mmm.util.nls.api.ObjectNotFoundException */
+  public static final String ERR_OBJECT_NOT_FOUND_WITH_KEY = "Could NOT find object \"{0}\" for key \"{1}\"!";
+
   /** @see net.sf.mmm.util.nls.api.NlsIllegalStateException */
   public static final String ERR_ILLEGAL_STATE = "Illegal state!";
 
@@ -77,5 +83,11 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.resource.api.ResourceUriUndefinedException */
   public static final String ERR_RESOURCE_UNDEFINED_URI = "The resource URI \"{0}\" is undefined!";
+
+  /** @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException */
+  public static final String ERR_UNSUPPORTED_OPERATION = "An operation was invoked that is NOT supported!";
+
+  /** @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException */
+  public static final String ERR_UNSUPPORTED_OPERATION_WITH_NAME = "The operation \"{0}\" was invoked but is NOT supported!";
 
 }

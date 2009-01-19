@@ -22,12 +22,12 @@ public interface ContentParserService {
    * This method gets the {@link ContentParser parser} for the given
    * <code>key</code>.
    * 
-   * @param key is the key identifying the requested parser. It is recommendet
-   *        to use the extension of the filename excluding the dot (e.g. "xml",
-   *        "html", "htm", etc.) as key. Other things like the mimetype are
-   *        possible. Please see the javadoc of the implementation to get sure.
-   * @return the {@link ContentParser parser} for the given <code>key</code>
-   *         or <code>null</code> if no such parser is available (see
+   * @param key is the key identifying the requested parser. You can use the
+   *        extension of the filename excluding the dot (e.g. "txt", "xml",
+   *        "html", "pdf", etc.) or the mimetype (e.g. "text/plain", "text/xml",
+   *        "text/html", "application/pdf", etc.).
+   * @return the {@link ContentParser parser} for the given <code>key</code> or
+   *         <code>null</code> if no such parser is available (see
    *         {@link #getGenericParser()}).
    */
   ContentParser getParser(String key);

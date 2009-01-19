@@ -6,9 +6,12 @@ package net.sf.mmm.search.engine.impl;
 import java.io.IOException;
 import java.io.StringReader;
 
+import javax.annotation.Resource;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -39,35 +42,77 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   public static final LuceneSearchQuery NULL_QUERY = new LuceneSearchQuery(new MatchAllDocsQuery());
 
   /** the analyzer to use */
-  private final Analyzer analyzer;
+  private Analyzer analyzer;
 
   /**
    * <code>true</code> if leading wildcards ('*' or '?') are ignored,
    * <code>false</code> otherwise.
    */
-  private final boolean ignoreLeadingWildcard;
+  private boolean ignoreLeadingWildcard;
 
   /**
    * The constructor.
-   * 
-   * @param luceneAnalyzer is the analyzer to use.
-   * @param ignoreLeadingWildcards - if <code>true</code>, leading wildcards
-   *        ('*' or '?') are ignored, <code>false</code> otherwise.
    */
-  public LuceneSearchQueryBuilder(Analyzer luceneAnalyzer, boolean ignoreLeadingWildcards) {
+  public LuceneSearchQueryBuilder() {
 
     super();
-    this.analyzer = luceneAnalyzer;
-    this.ignoreLeadingWildcard = false;
   }
 
   /**
+   * This method determines if leading wildcards will be ignored.<br>
+   * <b>ATTENTION:</b><br>
+   * Leading wildcards can cause performance problems. If you run a public
+   * accessible search-engine and you want to avoid easy DOS-attacks, you should
+   * disable leading wildcards.
+   * 
    * @return <code>true</code> if leading wildcards ('*' or '?') are ignored,
    *         <code>false</code> otherwise.
    */
   public boolean isIgnoreLeadingWildcards() {
 
     return this.ignoreLeadingWildcard;
+  }
+
+  /**
+   * This method sets the {@link #isIgnoreLeadingWildcards()
+   * ignoreLeadingWildcard} flag. The default is <code>false</code>.
+   * 
+   * @param ignoreLeadingWildcard is the ignoreLeadingWildcard to set
+   */
+  public void setIgnoreLeadingWildcard(boolean ignoreLeadingWildcard) {
+
+    getInitializationState().requireNotInitilized();
+    this.ignoreLeadingWildcard = ignoreLeadingWildcard;
+  }
+
+  /**
+   * @return the analyzer
+   */
+  protected Analyzer getAnalyzer() {
+
+    return this.analyzer;
+  }
+
+  /**
+   * @param analyzer is the analyzer to set
+   */
+  @Resource
+  public void setAnalyzer(Analyzer analyzer) {
+
+    getInitializationState().requireNotInitilized();
+    this.analyzer = analyzer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.analyzer == null) {
+      this.analyzer = new StandardAnalyzer();
+    }
   }
 
   /**

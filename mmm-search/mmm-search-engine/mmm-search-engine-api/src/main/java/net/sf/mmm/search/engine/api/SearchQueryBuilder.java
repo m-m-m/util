@@ -7,7 +7,7 @@ import net.sf.mmm.search.api.SearchException;
 
 /**
  * This is the interface used to build {@link SearchQuery search-queries}.<br>
- * You can eigther specify the query as string and
+ * You can either specify the query as string and
  * {@link #parseStandardQuery(String, boolean) parse} it or
  * {@link #createComplexQuery() create} your query constructively.<br>
  * Here an example:<br>
@@ -32,10 +32,10 @@ import net.sf.mmm.search.api.SearchException;
 public interface SearchQueryBuilder {
 
   /**
-   * This method parses the given <code>query</code> string in the native
-   * query language of the underlying implementation. This allows to use
+   * This method parses the given <code>query</code> string in the native query
+   * language of the underlying implementation. This allows to use
    * power-features that are not available otherwise via this API. For an
-   * implementation independend query language use
+   * implementation independent query language use
    * {@link #parseStandardQuery(String, boolean)} instead.
    * 
    * @param query is the query to parse as string.
@@ -112,8 +112,8 @@ public interface SearchQueryBuilder {
    * <code>phrase</code> and <code>property</code>.
    * 
    * @param property is the name of the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getProperty(String) property}
-   *        where to search.
+   *        {@link net.sf.mmm.search.api.SearchEntry#getProperty(String)
+   *        property} where to search.
    * @param phrase is the exact phrase to search for.
    * @return the created query.
    */
@@ -124,8 +124,8 @@ public interface SearchQueryBuilder {
    * <code>term</code> and <code>property</code>.
    * 
    * @param property is the name of the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getProperty(String) property}
-   *        where to search.
+   *        {@link net.sf.mmm.search.api.SearchEntry#getProperty(String)
+   *        property} where to search.
    * @param term is the single term to search for. This is eigther a single word
    *        or or a glob pattern (e.g. "moon?i*" to match "moonlight" or
    *        "moonride") to match.

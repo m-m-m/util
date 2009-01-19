@@ -213,7 +213,7 @@ public abstract class AbstractContentField extends AbstractContentReflectionObje
 
     this.fieldType = type;
     // TODO use GenericType instead of Type and Class for fieldType/fieldClass
-    this.fieldClass = ReflectionUtilImpl.getInstance().createGenericType(type).getUpperBound();
+    this.fieldClass = ReflectionUtilImpl.getInstance().createGenericType(type).getRetrievalClass();
     if (this.fieldTypeSpecification == null) {
       if (type instanceof Class) {
         this.fieldTypeSpecification = ((Class<?>) type).getName();
