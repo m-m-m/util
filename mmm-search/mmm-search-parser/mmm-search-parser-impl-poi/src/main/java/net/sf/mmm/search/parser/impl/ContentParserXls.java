@@ -12,10 +12,12 @@ import org.apache.poi.hssf.eventusermodel.HSSFListener;
 import org.apache.poi.hssf.eventusermodel.HSSFRequest;
 import org.apache.poi.hssf.record.BOFRecord;
 import org.apache.poi.hssf.record.BoundSheetRecord;
+import org.apache.poi.hssf.record.DrawingRecord;
 import org.apache.poi.hssf.record.LabelSSTRecord;
 import org.apache.poi.hssf.record.NumberRecord;
 import org.apache.poi.hssf.record.Record;
 import org.apache.poi.hssf.record.SSTRecord;
+import org.apache.poi.hssf.record.TextObjectRecord;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
@@ -174,10 +176,18 @@ public class ContentParserXls extends AbstractContentParserPoi {
               append(this.sstrec.getString(lrec.getSSTIndex()).getString());
             }
             break;
+          case DrawingRecord.sid:
+            break;
+          case TextObjectRecord.sid:
+            TextObjectRecord txo = (TextObjectRecord) record;
+            append(txo.getStr().getString());
+            break;
+          default :
+            System.out.println(record);
+            break;
         }
       }
     }
-
   }
 
 }
