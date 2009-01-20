@@ -183,7 +183,6 @@ public class ContentParserXls extends AbstractContentParserPoi {
             append(txo.getStr().getString());
             break;
           default :
-            System.out.println(record);
             break;
         }
       }
