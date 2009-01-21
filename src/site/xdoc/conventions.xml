@@ -48,6 +48,22 @@
       </ul>
       </p>
     </section>
+    <section name="Components">
+      This project follows the principle of a component-oriented-design. 
+      So what is a component? First of all a common definition:<br/><br/>
+      "A <em>component</em> is a reusable piece of software that offers its 
+      functionallity through a well-defined and self-contained API. Its 
+      implementation is therefore exchangeable and can be composed using
+      other components."<br/><br/>
+      While such definition is easily agreed by most developers it is still 
+      very unprecise. If you want to drag the term component down to the
+      code, one might mean some specific interface another one thinks about 
+      the content of a java-package. The following section defines
+      rules that help to track this down to the code and give it a common
+      structure. However the most important part about the design is how 
+      functionallity is grouped and exposed in the API, what can never 
+      be expressed or checked by formal rules.
+    </section>
     <section name="Packages">
       <p>The projects package namespace is <code>net.sf.mmm</code>.
       All packages should be sub-packages of this namespace.
@@ -170,40 +186,22 @@
       </table>
       </p>
     </section>
-    <section name="Components">
-      This project follows the principle of component-oriented-design. 
-      So what is a component? First of all a common definition:<br/><br/>
-      "A <em>component</em> is a reusable piece of software that offers its 
-      functionallity through a well-defined and self-contained API. Its 
-      implementation is therefore exchangeable and can be composed using
-      other components."<br/><br/>
-      So far so good. While such definition is easily agreed by most developers
-      it is still very unprecise. 
-      However if we are talking about the term component it is important 
-      that we mean the same thing. Therefore I want to make it a bit more precise. 
-      The only successful chance to do so is by defining new terms rather than 
-      redefining a term that is so widely used and missunderstood than the term 
-      component.
-      <subsection name="Micro-Component">
-        A <em>micro-component</em> is a piece of software located below some 
-        package <code>&lt;component.package&gt;</code>. It is mainly 
-        represented via a single interface <code>&lt;ComponentInterface&gt;</code>
-        that is locaed below the package <code>&lt;component.package&gt;.api</code>
-        that defines an API in the sense as defined above.
-        This API (all code located in the package 
-        <code>&lt;component.package&gt;.api</code> and all its subpackages) 
-        only contains interfaces and exception classes. It may also contain simple 
-        container classes (e.g. event-classes or java-beans). All classes 
-        referenced from the API need to come from the API itself, an API of
-        another component, the ...
-        All arguments and return-types used in the interface need to 
-        All checked exceptions used in the API 
-      </subsection>
-      <subsection name="Component-Package">
-      </subsection>
-    </section>
     <section name="Utility-Classes">
       <p>
+      For utility functions it is quite common to write some class with
+      lots of nice static methods. While this makes it easy for the
+      user to access the functionallity it prevents an extendable
+      design. Some simple feature may end in a complex operation 
+      where a static method is NOT a suitable solution. Therefore 
+      utilities in this project are declared by an interface 
+      (<code>FooUtil</code>) and a default implementation 
+      (<code>FooUtilImpl</code>). To make it easy for the user the
+      implementation offeres a static <code>getInstance()</code>
+      method that gets a singleton instance of the utility.
+      However the suggested usage is to use an IoC-framework 
+      (e.g. spring &gt;=2.5) and manage the utilities as regular 
+      components. This dual usage principle is maybe the best
+      trade-off between ease-of-use and design for extension.
       </p>
     </section>
     <section name="Resources">
