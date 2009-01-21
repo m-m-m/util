@@ -15,7 +15,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the implementation of the {@link GenericType} interface.
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper
+ *        bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,6 +29,17 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
 
     super();
   }
+
+  /**
+   * This method creates the {@link GenericType} that encapsulates the given
+   * <code>type</code>.
+   * 
+   * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type)
+   * 
+   * @param type is the {@link Type} to get as {@link GenericType}.
+   * @return the according {@link GenericType}.
+   */
+  protected abstract GenericType<?> create(Type type);
 
   /**
    * This method gets the defining type. This will typically be the
@@ -85,11 +97,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
 
     Class<?> upperBound = getRetrievalClass();
     Class<?> subTypeUpperBound = subType.getRetrievalClass();
-    // Integer i = null;
-    // Number n = i;
-    // i = n; --> compile error
-
-    // e.g. <? extends Number>.isAssignableFrom(<? extends Integer>)
+    // <? extends Number>.isAssignableFrom(<? extends Integer>) = true
+    // <? extends Integer>.isAssignableFrom(<? extends Number>) = false
     if (!upperBound.isAssignableFrom(subTypeUpperBound)) {
       return false;
     }
@@ -107,15 +116,47 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
         return false;
       }
     }
-    // here comes the killer:
-    // * Map<Number,CharSequence>.isAssignableFrom(HashMap<Integer,String>)
-    // * Map<Number,CharSequence>.isAssignableFrom(MyMap<String>) for
-    // class MyMap<V> extends HashMap<Integer,V>
+
     int argCount = getTypeArgumentCount();
-    for (int argIndex = 0; argIndex < argCount; argIndex++) {
-      GenericType<?> typeArgument = getTypeArgument(argIndex);
-      Type argType = typeArgument.getType();
-      // TODO: ...
+    if (argCount > 0) {
+      if (upperBound == subTypeUpperBound) {
+        int subTypeArgCount = subType.getTypeArgumentCount();
+        if (subTypeArgCount != argCount) {
+          // this is actually an internal error...
+          return false;
+        }
+        for (int argIndex = 0; argIndex < argCount; argIndex++) {
+          GenericType<?> typeArgument = getTypeArgument(argIndex);
+          GenericType<?> subTypeArgument = subType.getTypeArgument(argIndex);
+          // infinity loop possible in case of recursive generic declarations?
+          // Enum<E extends Enum<E>>
+          if (!typeArgument.isAssignableFrom(subTypeArgument)) {
+            return false;
+          }
+        }
+      } else {
+        // here comes the killer:
+        // * Map<Number,CharSequence>.isAssignableFrom(HashMap<Integer,String>)
+        // * Map<Number,CharSequence>.isAssignableFrom(MyMap<String>) for
+        // class MyMap<V> extends HashMap<Integer,V>
+
+        // strategy:
+        // either both types are classes with a common super-class
+        // or this is an interface extended/implemented by subType
+        // this way we can find the common type and resolve type variables...
+
+        // strategy: find common super-type and resolve type variables
+        // is it possible that the interface does NOT have type-parameters???
+        for (TypeVariable<?> typeVariable : upperBound.getTypeParameters()) {
+          Type resolvedType = resolveTypeVariable(typeVariable, this);
+          Type resolvedSubType = resolveTypeVariable(typeVariable, subType);
+          GenericType<?> resolvedGenericType = create(resolvedType);
+          GenericType<?> resolvedGenericSubType = create(resolvedSubType);
+          if (!resolvedGenericType.isAssignableFrom(resolvedGenericSubType)) {
+            return false;
+          }
+        }
+      }
     }
     return true;
   }
@@ -217,7 +258,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
     if (genericDeclaration instanceof Class) {
       Class<?> declaringClass = (Class<?>) genericDeclaration;
-      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getRetrievalClass());
+      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType
+          .getRetrievalClass());
       if (hierarchy != null) {
         TypeVariable<?> currentVariable = typeVariable;
         for (int i = hierarchy.size() - 1; i >= -1; i--) {

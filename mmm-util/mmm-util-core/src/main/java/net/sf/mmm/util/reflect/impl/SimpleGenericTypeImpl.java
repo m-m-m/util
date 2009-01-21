@@ -14,7 +14,8 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
  * This is an implementation of the {@link GenericType} interface for a simple
  * {@link Class}.
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper
+ *        bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -60,6 +61,15 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
     } else {
       this.componentType = null;
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected GenericType<?> create(Type genericType) {
+
+    return new GenericTypeImpl<Object>(genericType);
   }
 
   /**

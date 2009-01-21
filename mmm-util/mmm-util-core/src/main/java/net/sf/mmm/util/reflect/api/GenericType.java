@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
  * This is the interface of a generic type and allows simple and powerful access
  * to the complex generic type-system introduced in Java5.<br>
  * It represents a {@link Type} (available via {@link #getType()}) but allows
- * easy access to resolve the actual {@link Class} for
+ * easy access to resolve the actual erasure {@link Class} for
  * {@link #getAssignmentClass() assignment} and {@link #getRetrievalClass()
  * retrieval}. This includes resolving {@link java.lang.reflect.TypeVariable}s
  * as far as possible.<br>
@@ -30,15 +30,22 @@ import java.lang.reflect.Type;
  * 
  * If you want to determine the type of <code>Some.getA()</code> reflectively,
  * you will have to dive into the deepest and trickiest part of the reflection
- * API and might step into one of the many pitfalls on this way. Or you simply
- * use the features offered via this API.<br>
+ * API and might step into one of the many pitfalls on this way. All this is
+ * solved for you, if you use what is offered via this API.<br>
+ * <b>LIMITATIONS:</b><br>
+ * This solution will only support one upper and one lower bound but NOT
+ * multiple bounds of the same kind. However this is more a feature than a
+ * limitation. There seems to be no way to express such generics in java-code,
+ * it would IMHO lead to code that is hard to understand. Further the API of
+ * this interface would be a lot more complicated and the implementation more
+ * complex and therefore NOT as fast.
  * 
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type)
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type,
  *      GenericType)
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper
- *        bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() retrieval
+ *        class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -200,7 +207,10 @@ public interface GenericType<T> {
    * This method determines if this {@link GenericType} is equal to or a
    * super-type of the given <code>subType</code>.<br>
    * If <code>X.isAssignableFrom(Y)</code> is <code>true</code>, then an
-   * instance of <code>Y</code> can be casted to <code>X</code>.
+   * instance of <code>Y</code> can be casted to <code>X</code>.<br>
+   * <b>NOTE:</b><br>
+   * In case of strange and deeply cascaded generic constructs this can be an
+   * expensive operation with many recursive invocations.
    * 
    * @see Class#isAssignableFrom(Class)
    * 

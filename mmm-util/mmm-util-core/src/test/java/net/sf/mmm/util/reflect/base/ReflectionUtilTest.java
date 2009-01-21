@@ -14,7 +14,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EventListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -23,7 +25,6 @@ import org.junit.runner.Result;
 
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.TypeVariableImpl;
 
@@ -72,7 +73,7 @@ public class ReflectionUtilTest {
   }
 
   @Test
-  public void testComponentType() throws Exception {
+  public void testGenericTypeComponent() throws Exception {
 
     GenericType type;
     type = getReturnType(TestClass.class, "getStringArray").getComponentType();
@@ -108,7 +109,7 @@ public class ReflectionUtilTest {
   }
 
   @Test
-  public void testGetClassWithTypeVariable() throws Exception {
+  public void testGenericTypeWithTypeVariable() throws Exception {
 
     assertEquals(Long.class, getReturnClass(TestClass.class, "getA"));
     assertEquals(Integer.class, getReturnClass(TestClass.class, "getB"));
@@ -127,7 +128,30 @@ public class ReflectionUtilTest {
   }
 
   @Test
-  public void testCreateType() throws Exception {
+  public void testGenericTypeAssignableFrom() throws Exception {
+
+    GenericType subType;
+    GenericType superType;
+
+    subType = getReturnType(AssignableFromTestClass.class, "getMapSubType");
+    superType = getReturnType(AssignableFromTestClass.class, "getMapSuperType");
+    assertTrue(subType.isAssignableFrom(subType));
+    assertTrue(superType.isAssignableFrom(superType));
+    assertTrue(superType.isAssignableFrom(subType));
+
+    subType = getReturnType(AssignableFromTestClass.class, "getListSubType");
+    superType = getReturnType(AssignableFromTestClass.class, "getListSuperType");
+    assertTrue(superType.isAssignableFrom(subType));
+
+    subType = getReturnType(AssignableFromTestClass.class, "getBarSubType");
+    superType = getReturnType(AssignableFromTestClass.class, "getBarSuperType");
+    assertTrue(superType.isAssignableFrom(subType));
+    superType = getReturnType(AssignableFromTestClass.class, "getBarNoSuperType");
+    assertFalse(superType.isAssignableFrom(subType));
+  }
+
+  @Test
+  public void testGenericTypeCreate() throws Exception {
 
     ReflectionUtil util = getReflectionUtil();
 
@@ -173,7 +197,7 @@ public class ReflectionUtilTest {
   }
 
   @Test
-  public void testTypeParser() throws Exception {
+  public void testToType() throws Exception {
 
     assertEquals(String.class, getReflectionUtil().toType("java.lang.String"));
     checkTypeParser("?");
@@ -303,6 +327,49 @@ public class ReflectionUtilTest {
       return null;
     }
 
+  }
+
+  public static class AssignableFromTestClass {
+
+    public Map<? extends Number, ? extends CharSequence> getMapSuperType() {
+
+      // legal downcast...
+      return getMapSubType();
+    }
+
+    public HashMap<Integer, String> getMapSubType() {
+
+      return new HashMap<Integer, String>();
+    }
+
+    public List<? super Integer> getListSuperType() {
+
+      // legal downcast...
+      return getListSubType();
+    }
+
+    public ArrayList<Number> getListSubType() {
+
+      return new ArrayList<Number>();
+    }
+
+    // -------
+
+    public Bar<Short, Number, Double> getBarSuperType() {
+
+      // legal downcast...
+      return getBarSubType();
+    }
+
+    public Bar<Long, Number, Double> getBarNoSuperType() {
+
+      return null;
+    }
+
+    public SubSubBar<Number> getBarSubType() {
+
+      return null;
+    }
   }
 
 }
