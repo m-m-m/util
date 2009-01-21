@@ -13,6 +13,9 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  */
 public abstract class ReflectionException extends NlsRuntimeException {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 6935836720426675909L;
+
   /**
    * The constructor.
    * 

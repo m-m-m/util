@@ -13,6 +13,9 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  */
 public abstract class PojoPathException extends NlsRuntimeException {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1514491167399845329L;
+
   /**
    * The constructor.
    * 

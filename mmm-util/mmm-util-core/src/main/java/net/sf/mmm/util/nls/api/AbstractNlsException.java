@@ -17,8 +17,8 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * This is an abstract base implementation of a checked exception with real
  * <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
- * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsException} instead of
- * this class.<br>
+ * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsException} instead
+ * of this class.<br>
  * <b>INFORMATION:</b><br>
  * Checked exceptions should be used for business errors and should only occur
  * in unexpected situations.
@@ -28,6 +28,9 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractNlsException extends Exception implements NlsThrowable {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = -9077132842682462106L;
 
   /** the internationalized message */
   private final NlsMessage nlsMessage;
@@ -69,8 +72,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * This method creates a new {@link UUID}.
    * 
-   * @return the new {@link UUID} or <code>null</code> to turn this feature
-   *         off.
+   * @return the new {@link UUID} or <code>null</code> to turn this feature off.
    */
   protected UUID createUuid() {
 

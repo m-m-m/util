@@ -26,6 +26,9 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  */
 public abstract class AbstractNlsRuntimeException extends RuntimeException implements NlsThrowable {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = -7838850701154079724L;
+
   /** the internationalized message */
   private final NlsMessage nlsMessage;
 
@@ -66,8 +69,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * This method creates a new {@link UUID}.
    * 
-   * @return the new {@link UUID} or <code>null</code> to turn this feature
-   *         off.
+   * @return the new {@link UUID} or <code>null</code> to turn this feature off.
    */
   protected UUID createUuid() {
 
