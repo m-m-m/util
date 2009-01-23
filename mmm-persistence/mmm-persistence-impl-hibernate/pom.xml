@@ -16,8 +16,8 @@
   
   <dependencies>
     <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>persistence-impl-jpa</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-persistence-impl-jpa</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
