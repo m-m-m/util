@@ -28,12 +28,12 @@
   
   <modules>
     <!-- <module>mmm-content</module> -->
+    <!-- <module>mmm-gui</module> -->
     <module>mmm-util</module>
     <module>mmm-search</module>
     <module>mmm-persistence</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
-    <module>mmm-gui</module>
     <module>mmm-value</module>
     <module>mmm-setup</module>
   </modules>
