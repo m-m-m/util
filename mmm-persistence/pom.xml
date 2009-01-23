@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-persistence</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>persistence</name>
+  <description>This project provides an API and base-implementations for persistence-layers (e.g. based on JPA).</description>
+  
+  <modules>
+    <module>mmm-persistence-api</module>
+    <module>mmm-persistence-impl-jpa</module>
+    <module>mmm-persistence-impl-hibernate</module>
+  </modules>
+
+</project>
