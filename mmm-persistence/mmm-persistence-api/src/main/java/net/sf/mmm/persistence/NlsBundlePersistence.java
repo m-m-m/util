@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence;
+package net.sf.mmm.persistence;
 
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  */
 public class NlsBundlePersistence extends AbstractResourceBundle {
 
-  /** @see net.sf.mmm.util.persistence.api.search.TimeoutException */
+  /** @see net.sf.mmm.persistence.api.search.TimeoutException */
   public static final String ERR_TIMEOUT = "Your query was canceled because it exceeded a configured timeout!";
 
 }

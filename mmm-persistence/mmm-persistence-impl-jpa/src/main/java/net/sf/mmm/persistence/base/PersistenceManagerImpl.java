@@ -1,17 +1,17 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence.base;
+package net.sf.mmm.persistence.base;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.persistence.api.PersistenceEntityManager;
+import net.sf.mmm.persistence.api.PersistenceEntityManager;
 
 /**
  * This is the default implementation of the
- * {@link net.sf.mmm.util.persistence.api.PersistenceManager} interface.
+ * {@link net.sf.mmm.persistence.api.PersistenceManager} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

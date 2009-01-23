@@ -1,18 +1,18 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence.impl.jpa;
+package net.sf.mmm.persistence.impl.jpa;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 
+import net.sf.mmm.persistence.api.PersistenceEntity;
+import net.sf.mmm.persistence.base.AbstractPersistenceEntityManager;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
-import net.sf.mmm.util.persistence.api.PersistenceEntity;
-import net.sf.mmm.util.persistence.base.AbstractPersistenceEntityManager;
 
 /**
  * This is the abstract base-implementation of a
- * {@link net.sf.mmm.util.persistence.api.PersistenceEntityManager} using the
+ * {@link net.sf.mmm.persistence.api.PersistenceEntityManager} using the
  * {@link javax.persistence JPA} (Java Persistence API).
  * 
  * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.

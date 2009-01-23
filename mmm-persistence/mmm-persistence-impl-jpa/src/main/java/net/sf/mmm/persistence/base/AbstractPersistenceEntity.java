@@ -1,11 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence.base;
+package net.sf.mmm.persistence.base;
 
 import javax.persistence.MappedSuperclass;
 
-import net.sf.mmm.util.persistence.api.PersistenceEntity;
+import net.sf.mmm.persistence.api.PersistenceEntity;
 
 /**
  * This is the abstract base-class that implementations of

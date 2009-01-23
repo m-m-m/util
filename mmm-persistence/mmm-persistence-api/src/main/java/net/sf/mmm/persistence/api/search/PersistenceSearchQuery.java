@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence.api.search;
+package net.sf.mmm.persistence.api.search;
 
 /**
  * This is the interface for a search query. Such object specifies the criteria

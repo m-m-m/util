@@ -1,13 +1,13 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence.impl.jpa;
+package net.sf.mmm.persistence.impl.jpa;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import net.sf.mmm.util.persistence.api.PersistenceEntity;
-import net.sf.mmm.util.persistence.base.AbstractPersistenceEntity;
+import net.sf.mmm.persistence.api.PersistenceEntity;
+import net.sf.mmm.persistence.base.AbstractPersistenceEntity;
 
 /**
  * This is the abstract base-implementation of a {@link PersistenceEntity} using

@@ -20,7 +20,6 @@
     <module>mmm-util-http</module>
     <module>mmm-util-xml</module>
     <module>mmm-util-contenttype</module>
-    <module>mmm-util-persistence</module>
     <module>mmm-util-metakeys</module>
   </modules>
   

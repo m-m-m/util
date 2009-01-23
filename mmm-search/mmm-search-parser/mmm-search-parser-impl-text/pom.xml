@@ -24,7 +24,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <version>1.0.3-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <!--

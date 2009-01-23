@@ -11,7 +11,7 @@ import net.sf.mmm.search.parser.api.ContentParser;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserXlsSpringTest extends ContentParserPptTest {
+public class ContentParserXlsSpringTest extends ContentParserXlsTest {
 
   /**
    * {@inheritDoc}

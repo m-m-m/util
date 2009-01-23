@@ -21,12 +21,12 @@
       <version>1.0.3-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    <!-- TODO: move to impl-jpa -->
+    <!-- to prevent javadoc warnings in IDE -->
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>persistence-api</artifactId>
       <version>1.0</version>
-      <scope>compile</scope>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

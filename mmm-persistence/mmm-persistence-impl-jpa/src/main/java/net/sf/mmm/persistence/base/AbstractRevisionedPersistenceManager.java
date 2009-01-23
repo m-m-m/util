@@ -1,13 +1,13 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.persistence.base;
+package net.sf.mmm.persistence.base;
 
+import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
+import net.sf.mmm.persistence.api.RevisionedPersistenceEntityManager;
+import net.sf.mmm.persistence.api.RevisionedPersistenceManager;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
-import net.sf.mmm.util.persistence.api.RevisionedPersistenceEntity;
-import net.sf.mmm.util.persistence.api.RevisionedPersistenceEntityManager;
-import net.sf.mmm.util.persistence.api.RevisionedPersistenceManager;
 
 /**
  * This is the abstract base-implementation of the
