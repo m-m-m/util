@@ -18,7 +18,7 @@
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>persistence-impl-jpa</artifactId>
-      <version>1.0</version>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
