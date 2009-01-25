@@ -218,7 +218,12 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
         // /etc/passwd or whatever what might fail by missing read permissions
         // This is just a hack that might work in most cases:
         // we use the user.home dir get the dirname and append the user
-        String homeDir = getDirname(this.userHomeDirectoryPath);
+    	  String homeDir;
+    	  if ("/root".equals(this.userHomeDirectoryPath)) {
+    		  homeDir = "/home";
+    	  } else {
+    	    homeDir = getDirname(this.userHomeDirectoryPath);
+    	  }
         buffer.append(homeDir);
         buffer.append(systemSlash);
         buffer.append(user);

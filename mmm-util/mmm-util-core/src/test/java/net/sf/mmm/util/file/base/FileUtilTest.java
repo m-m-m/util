@@ -54,7 +54,11 @@ public class FileUtilTest {
     assertEquals(System.getProperty("user.home"), util.normalizePath("~"));
     assertEquals(System.getProperty("user.home") + File.separator, util.normalizePath("~/"));
     assertEquals(System.getProperty("user.home"), util.normalizePath("~/foo/./.."));
-    assertEquals(util.normalizePath(System.getProperty("user.home") + "/../someuser"), util
+    String homeDir = System.getProperty("user.home");
+    if ("/root".equals(homeDir)) {
+      homeDir = "/home/nobody";
+    }
+    assertEquals(util.normalizePath(homeDir + "/../someuser"), util
         .normalizePath("~someuser"));
   }
 
