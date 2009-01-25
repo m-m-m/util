@@ -62,7 +62,7 @@
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-compiler-plugin</artifactId>
          <configuration>
-           <!-- <encoding>UTF-8</encoding> -->
+           <encoding>${project.build.sourceEncoding}</encoding>
            <source>1.5</source>
            <target>1.5</target>
          </configuration>
@@ -309,15 +309,14 @@
   </scm>
   <distributionManagement>
     <repository>
-      <id>sourceforge</id>
-      <url>file:///tmp/mmm/repository</url>
+        <id>cube-releases</id>
+        <name>cube-releases</name>
+        <url>http://localhost:8080/artifactory/local</url>
     </repository>
-    <!--
     <site>
       <id>sourceforge</id>
-      <url>scpexe://shell.sourceforge.net/home/groups/m/m-/m-m-m/htdocs/maven</url>
+      <url>file:///usr/local/tomcat/webapps/mmm-site/</url>
     </site>
-    -->
   </distributionManagement>
   <mailingLists>
     <mailingList>
