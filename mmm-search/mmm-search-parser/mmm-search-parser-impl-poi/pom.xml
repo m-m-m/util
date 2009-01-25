@@ -16,7 +16,7 @@
 
   <properties>
     <!-- <org.apache.poi.version>3.2-FINAL</org.apache.poi.version> -->
-    <org.apache.poi.version>3.5-beta3</org.apache.poi.version>
+    <org.apache.poi.version>3.5-beta4</org.apache.poi.version>
   </properties>
   
   <dependencies>
