@@ -32,12 +32,4 @@ public abstract class AbstractPersistenceEntity implements PersistenceEntity {
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public int getRevision() {
-
-    return 0;
-  }
-
 }

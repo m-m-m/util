@@ -34,14 +34,6 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public ENTITY load(Object id) throws ObjectNotFoundException {
-
-    return this.entityManager.find(getEntityClass(), id);
-  }
-
-  /**
    * @return the entityManager
    */
   protected EntityManager getEntityManager() {
@@ -57,6 +49,32 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
 
     getInitializationState().requireNotInitilized();
     this.entityManager = entityManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ENTITY load(Object id) throws ObjectNotFoundException {
+
+    return this.entityManager.find(getEntityClass(), id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void save(ENTITY entity) {
+
+    if (entity.isTransient()) {
+      this.entityManager.persist(entity);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void delete(ENTITY entity) {
+
+    this.entityManager.remove(entity);
   }
 
 }

@@ -9,7 +9,8 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the interface for a {@link PersistenceEntityManager} with the ability
- * of revision-control.
+ * of revision-control. It organizes a revision-history (journal) of the
+ * {@link #getEntityClass() managed entities}.
  * 
  * @see RevisionedPersistenceEntity
  * 
@@ -35,6 +36,17 @@ public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPer
   List<Integer> getRevisionHistory(ENTITY entity);
 
   /**
+   * This method will get the {@link List} of {@link RevisionMetadata} from the
+   * {@link RevisionedPersistenceEntity#getRevision() revision}-history of the
+   * {@link #getEntityClass() entity} with the given <code>id</code>.
+   * 
+   * @param id is the {@link PersistenceEntity#getId() primary key} of the
+   *        entity for which the history-metadata is requested.
+   * @return the requested {@link List} of {@link RevisionMetadata}.
+   */
+  List<RevisionMetadata> getRevisionHistoryMetadata(Object id);
+
+  /**
    * This method loads a historic
    * {@link RevisionedPersistenceEntity#getRevision() revision} of the
    * {@link PersistenceEntity} with the given <code>id</code> from the
@@ -49,12 +61,42 @@ public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPer
    *        revision} of the requested entity or
    *        {@link RevisionedPersistenceEntity#LATEST_REVISION} to get the
    *        {@link #load(Object) latest} revision.
-   * @return the requested {@link PersistenceEntity entity} or <code>null</code>
-   *         if no {@link PersistenceEntity} of the type
-   *         {@link #getEntityClass() ENTITY} exists with the given ID.
+   * @return the requested {@link PersistenceEntity entity}.
    * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
    *         entity} could NOT be found.
    */
   ENTITY load(Object id, int revision) throws ObjectNotFoundException;
+
+  /**
+   * This method creates a new {@link RevisionedPersistenceEntity#getRevision()
+   * revision} of the given entity. The given entity is saved and a copy is
+   * written to the revision-history
+   * 
+   * @param entity is the entity to create a new revision of.
+   * @return the {@link RevisionedPersistenceEntity#getRevision() revision} of
+   *         the created history-entry.
+   */
+  int createRevision(ENTITY entity);
+
+  /**
+   * {@inheritDoc}
+   * 
+   * The behaviour of this method depends on the revision-control strategy of
+   * the implementation.<br>
+   * <ul>
+   * <li>In case of an <em>audit-proof revision-history</em> the deletion of the
+   * {@link RevisionedPersistenceEntity#LATEST_REVISION latest revision} of an
+   * entity will only move it to the history while the deletion of a
+   * {@link RevisionedPersistenceEntity#getRevision() historic entity} is NOT
+   * permitted and will cause a {@link PersistenceException}.</li>
+   * <li>In case of an <em>on-demand revision-history</em> the deletion of the
+   * {@link RevisionedPersistenceEntity#LATEST_REVISION latest revision} of an
+   * entity will either move it to the history or</li>
+   * </ul>
+   * If the given <code>entity</code> is a
+   * {@link RevisionedPersistenceEntity#getRevision() historic entity} the
+   * according historic
+   */
+  void delete(ENTITY entity);
 
 }

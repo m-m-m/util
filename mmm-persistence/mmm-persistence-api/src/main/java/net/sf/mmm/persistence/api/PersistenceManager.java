@@ -65,6 +65,15 @@ public interface PersistenceManager {
   void save(PersistenceEntity entity);
 
   /**
+   * This method deletes the given <code>entity</code>.<br>
+   * 
+   * @see PersistenceEntityManager#delete(PersistenceEntity)
+   * 
+   * @param entity is the entity to delete.
+   */
+  void delete(PersistenceEntity entity);
+
+  /**
    * This method gets the {@link Class} reflecting the given
    * <code>{@link PersistenceEntity entity}</code>. Unlike
    * <code>entity.{@link #getClass()}</code> this method will always return the
