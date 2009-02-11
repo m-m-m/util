@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.base;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.NotInitializedException;
@@ -18,7 +18,7 @@ import net.sf.mmm.util.component.api.NotInitializedException;
 public abstract class AbstractLoggable extends AbstractComponent {
 
   /** @see #getLogger() */
-  private Log logger;
+  private Logger logger;
 
   /**
    * The constructor.
@@ -29,8 +29,9 @@ public abstract class AbstractLoggable extends AbstractComponent {
   }
 
   /**
-   * This method gets the {@link Log logger} for this component. It should only
-   * be invoked after the component has been {@link #initialize() initialized}.<br>
+   * This method gets the {@link Logger logger} for this component. It should
+   * only be invoked after the component has been {@link #initialize()
+   * initialized}.<br>
    * This method is NOT public because the logger should only be used by the
    * component itself and NOT externally.
    * 
@@ -38,7 +39,7 @@ public abstract class AbstractLoggable extends AbstractComponent {
    * @throws NotInitializedException if this component has NOT yet been
    *         {@link #initialize() initialized}.
    */
-  protected Log getLogger() throws NotInitializedException {
+  protected Logger getLogger() throws NotInitializedException {
 
     if (this.logger == null) {
       throw new NotInitializedException();
@@ -56,7 +57,7 @@ public abstract class AbstractLoggable extends AbstractComponent {
    *         {@link #initialize() initialized}.
    */
   // @Resource
-  public void setLogger(Log logger) throws AlreadyInitializedException {
+  public void setLogger(Logger logger) throws AlreadyInitializedException {
 
     getInitializationState().requireNotInitilized();
     this.logger = logger;
@@ -72,7 +73,7 @@ public abstract class AbstractLoggable extends AbstractComponent {
     if (this.logger == null) {
       // new Jdk14Logger(getClass()));
       // even more ugly...
-      this.logger = LogFactory.getLog(getClass());
+      this.logger = LoggerFactory.getLogger(getClass());
     }
   }
 

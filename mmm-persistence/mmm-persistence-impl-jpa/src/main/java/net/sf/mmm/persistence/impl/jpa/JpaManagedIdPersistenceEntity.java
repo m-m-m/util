@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
 import net.sf.mmm.persistence.api.PersistenceEntity;
-import net.sf.mmm.persistence.base.AbstractPersistenceEntity;
 
 /**
  * This is the abstract base-implementation of a {@link PersistenceEntity} using
@@ -16,16 +15,15 @@ import net.sf.mmm.persistence.base.AbstractPersistenceEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaPersistenceEntity extends AbstractPersistenceEntity {
+public abstract class JpaManagedIdPersistenceEntity extends JpaPersistenceEntity {
 
-  /** @see #getModificationCounter() */
-  @Version
-  private int modificationCounter;
+  /** @see #isPersistent() */
+  private transient boolean persistent;
 
   /**
    * The constructor.
    */
-  public JpaPersistenceEntity() {
+  public JpaManagedIdPersistenceEntity() {
 
     super();
   }
@@ -33,18 +31,26 @@ public abstract class JpaPersistenceEntity extends AbstractPersistenceEntity {
   /**
    * {@inheritDoc}
    */
-  @Version
-  public int getModificationCounter() {
+  @Override
+  public boolean isPersistent() {
 
-    return this.modificationCounter;
+    return this.persistent;
   }
 
   /**
-   * @param modificationCounter is the modificationCounter to set
+   * This method marks this entity as persistent, which means that it is NOT
+   * {@link #isPersistent() transient}.<br>
+   * <b>ATTENTION:</b><br>
    */
-  public void setModificationCounter(int modificationCounter) {
+  public void setPersistent() {
 
-    this.modificationCounter = modificationCounter;
+    this.persistent = true;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Id
+  public abstract Object getId();
 
 }

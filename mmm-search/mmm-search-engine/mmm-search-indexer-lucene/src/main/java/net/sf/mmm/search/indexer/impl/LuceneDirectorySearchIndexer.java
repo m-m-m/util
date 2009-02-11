@@ -7,7 +7,6 @@ import java.io.File;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -92,7 +91,6 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
         SearchConfigurator.XML_TAG_SEARCH_ENGINE);
     LuceneSearchIndexer luceneIndexer = configurator.createSearchIndexer(searchEngineElement);
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);
-    indexer.setLogger(LogFactory.getLog(LuceneDirectorySearchIndexer.class));
     indexer.initialize();
     indexer.index(xmlConfigElement);
     return 0;

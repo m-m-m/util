@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.sf.mmm.search.parser.api.ContentParser;
 import net.sf.mmm.search.parser.base.AbstractContentParserService;
+import net.sf.mmm.util.component.api.NotInitializedException;
 
 /**
  * This is the abstract base implementation of the
@@ -44,6 +45,9 @@ public class ContentParserServiceImpl extends AbstractContentParserService {
 
     ContentParser parser = super.getParser(key);
     if (parser == null) {
+      if (this.alias2keyMap == null) {
+        throw new NotInitializedException();
+      }
       String keyForAlias = this.alias2keyMap.get(key);
       if (keyForAlias != null) {
         parser = super.getParser(keyForAlias);

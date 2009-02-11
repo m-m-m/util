@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  
+  <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
+  
+  <bean id="javax.sql.DataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="url" value="${jdbc.url}"/>
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+  </bean>
+  
+  <bean id="LocalEntityManagerFactoryBean" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+    <property name="dataSource" ref="javax.sql.DataSource"/>
+  </bean>
+  <bean id="net.sf.mmm.persistence.api.PersistenceManager" class="net.sf.mmm.persistence.base.PersistenceManagerImpl">
+    <property name="managers">
+      <list>
+        <bean class="net.sf.mmm.persistence.impl.jpa.TestFooEntityManagerImpl"/>        
+        <bean class="net.sf.mmm.persistence.impl.jpa.TestBarEntityManagerImpl"/>        
+      </list>
+    </property>
+  </bean>
+</beans>

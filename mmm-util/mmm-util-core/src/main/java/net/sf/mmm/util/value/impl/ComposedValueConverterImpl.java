@@ -7,8 +7,6 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -42,11 +40,10 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * converter.
    * 
    * @param converter is the converter to add.
-   * @return the converter with the same
-   *         {@link ValueConverter#getSourceType() source-type} and
-   *         {@link ValueConverter#getTargetType() target-type} that has been
-   *         replaced by <code>converter</code> or <code>null</code> if no
-   *         converter has been replaced.
+   * @return the converter with the same {@link ValueConverter#getSourceType()
+   *         source-type} and {@link ValueConverter#getTargetType() target-type}
+   *         that has been replaced by <code>converter</code> or
+   *         <code>null</code> if no converter has been replaced.
    */
   @SuppressWarnings("unchecked")
   public ValueConverter<?, ?> addConverter(ValueConverter<?, ?> converter) {
@@ -69,10 +66,10 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     if (value == null) {
       return null;
     }
-    Log logger = getLogger();
-    if (logger.isTraceEnabled()) {
-      logger.trace("starting conversion of '" + value + "' from '" + value.getClass().getName()
-          + "' to '" + targetType + "'");
+    if (getLogger().isTraceEnabled()) {
+      getLogger().trace(
+          "starting conversion of '" + value + "' from '" + value.getClass().getName() + "' to '"
+              + targetType + "'");
     }
     Class<? extends Object> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
@@ -82,8 +79,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method performs the
-   * {@link #convert(Object, Object, GenericType) conversion} recursive.
+   * This method performs the {@link #convert(Object, Object, GenericType)
+   * conversion} recursive.
    * 
    * @param value is the value to convert.
    * @param valueSource describes the source of the value. This may be the
@@ -106,19 +103,19 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   protected Object convertRecursive(Object value, Object valueSource, GenericType<?> targetType,
       Class<?> currentTargetClass, ValueConverter previousConverter) {
 
-    Log logger = getLogger();
+    boolean traceEnabled = getLogger().isTraceEnabled();
     ValueConverter lastConverter = previousConverter;
     Class<?> currentClass = currentTargetClass;
     Object result = null;
     try {
       while (currentClass != null) {
-        if (logger.isTraceEnabled()) {
-          logger.trace("searching converter for target-type '" + currentClass + "'");
+        if (traceEnabled) {
+          getLogger().trace("searching converter for target-type '" + currentClass + "'");
         }
         ValueConverter converter = this.targetClass2converterMap.get(currentClass);
         if ((converter != null) && (converter != lastConverter)
             && (converter.getTargetType().isAssignableFrom(targetType.getRetrievalClass()))) {
-          if (logger.isTraceEnabled()) {
+          if (traceEnabled) {
             StringWriter sw = new StringWriter(50);
             sw.append("trying converter for target-type '");
             sw.append(converter.getTargetType().toString());
@@ -128,7 +125,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
               sw.append(currentClass.toString());
               sw.append("'");
             }
-            logger.trace(sw);
+            getLogger().trace(sw.toString());
           }
           result = converter.convert(value, valueSource, targetType);
           if (result != null) {
@@ -232,8 +229,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     }
 
     /**
-     * This method performs the
-     * {@link #convert(Object, Object, GenericType) conversion} recursive.
+     * This method performs the {@link #convert(Object, Object, GenericType)
+     * conversion} recursive.
      * 
      * @param value is the value to convert.
      * @param valueSource describes the source of the value. This may be the
@@ -243,8 +240,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      *        easier.
      * @param genericTargetType is the {@link GenericType} to convert the
      *        <code>value</code> to.
-     * @param sourceClass is the current
-     *        {@link ValueConverter#getSourceType() source-type} to try.
+     * @param sourceClass is the current {@link ValueConverter#getSourceType()
+     *        source-type} to try.
      * @return the converted <code>value</code> or <code>null</code> if the
      *         conversion is NOT possible. The returned value has to be an
      *         {@link Class#isInstance(Object) instance} of the given
@@ -254,23 +251,25 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     protected TARGET convertRecursive(Object value, Object valueSource,
         GenericType<? extends TARGET> genericTargetType, Class<?> sourceClass) {
 
-      Log logger = getLogger();
+      boolean traceEnabled = getLogger().isTraceEnabled();
       Class<?> currentClass = sourceClass;
       while (currentClass != null) {
-        if (logger.isTraceEnabled()) {
-          logger.trace("searching converter for source-type '" + currentClass + "'");
+        if (traceEnabled) {
+          getLogger().trace("searching converter for source-type '" + currentClass + "'");
         }
         ValueConverter<Object, TARGET> converter = (ValueConverter<Object, TARGET>) this.sourceClass2converterMap
             .get(currentClass);
         if (converter != null) {
-          if (logger.isTraceEnabled()) {
-            logger.debug("trying converter for source-type '" + currentClass + "': "
-                + converter.getClass().getSimpleName());
+          if (traceEnabled) {
+            getLogger().debug(
+                "trying converter for source-type '" + currentClass + "': "
+                    + converter.getClass().getSimpleName());
           }
           TARGET result = converter.convert(value, valueSource, genericTargetType);
           if (result != null) {
-            if (logger.isTraceEnabled()) {
-              logger.debug("conversion successful using '" + converter.getClass().getName() + "'");
+            if (traceEnabled) {
+              getLogger().debug(
+                  "conversion successful using '" + converter.getClass().getName() + "'");
             }
             return result;
           }

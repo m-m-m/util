@@ -7,8 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
@@ -254,10 +252,10 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
                     .getMode();
                 PojoPropertyAccessor pluralAccessor = propertyDescriptor.getAccessor(mode);
                 if (pluralAccessor == null) {
-                  Log logger = getLogger();
-                  if (logger.isDebugEnabled()) {
-                    logger.debug("copying accessor '" + singularAccessor + "' to '"
-                        + propertyDescriptor + "'");
+                  if (getLogger().isDebugEnabled()) {
+                    getLogger().debug(
+                        "copying accessor '" + singularAccessor + "' to '" + propertyDescriptor
+                            + "'");
                   }
                   propertyDescriptor.putAccessor(singularAccessor);
                 }

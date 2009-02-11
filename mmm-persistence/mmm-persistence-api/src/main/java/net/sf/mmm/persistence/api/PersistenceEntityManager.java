@@ -56,7 +56,7 @@ public interface PersistenceEntityManager<ENTITY extends PersistenceEntity> {
 
   /**
    * This method saves the given <code>entity</code> in the persistent store. If
-   * the <code>entity</code> is {@link PersistenceEntity#isTransient()
+   * the <code>entity</code> is {@link PersistenceEntity#isPersistent()
    * transient} it is initially created in the persistent store. If the
    * <code>entity</code> is configured to have a generated
    * {@link PersistenceEntity#getId() primary key} a unique ID is generated and
@@ -64,10 +64,10 @@ public interface PersistenceEntityManager<ENTITY extends PersistenceEntity> {
    * <code>entity</code> is updated in the persistent store.<br>
    * <b>ATTENTION:</b><br>
    * Depending on the underlying implementation the modification of a
-   * {@link PersistenceEntity#isTransient() persistent}
+   * {@link PersistenceEntity#isPersistent() persistent}
    * {@link PersistenceEntity entity} is automatically saved even if this method
    * has NOT been invoked. However you should always invoke this method after
-   * modifying a {@link PersistenceEntity#isTransient() persistent}
+   * modifying a {@link PersistenceEntity#isPersistent() persistent}
    * {@link PersistenceEntity entity} instead of relying on some implementation
    * specific behaviour. This will also guarantee that the custom-logic of your
    * {@link PersistenceEntityManager} is invoked.
@@ -79,7 +79,7 @@ public interface PersistenceEntityManager<ENTITY extends PersistenceEntity> {
   /**
    * This method deletes the given <code>entity</code> from the persistent
    * store.<br>
-   * If the <code>entity</code> is {@link PersistenceEntity#isTransient()
+   * If the <code>entity</code> is {@link PersistenceEntity#isPersistent()
    * transient} this method has no effect.<br>
    * 
    * @param entity is the {@link PersistenceEntity} to save.

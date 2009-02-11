@@ -7,6 +7,8 @@ package net.sf.mmm.persistence.api;
  * This is the interface for a {@link PersistenceEntity} that is
  * revision-controlled.
  * 
+ * @see RevisionedPersistenceEntityManager
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface RevisionedPersistenceEntity extends PersistenceEntity {

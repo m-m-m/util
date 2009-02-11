@@ -27,9 +27,17 @@ public abstract class AbstractPersistenceEntity implements PersistenceEntity {
   /**
    * {@inheritDoc}
    */
-  public int getModificationCounter() {
+  public boolean isPersistent() {
 
-    return 0;
+    return (getId() != null);
   }
+
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public int getModificationCounter() {
+  //
+  // return 0;
+  // }
 
 }

@@ -152,27 +152,43 @@
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId> 
         <version>1.0.0-beta-1</version>
-				<configuration>
-					<!-- <dialect>org.hibernate.dialect.HSQLDialect</dialect> -->
-					<dialect>org.hibernate.dialect.H2Dialect</dialect>
-					<driverClass>org.h2.Driver</driverClass>
-					<!-- <driverClass>org.hsqldb.jdbcDriver</driverClass> -->
-					<connectionUrl>jdbc:h2:${basedir}/src/dashboard/database</connectionUrl>
-					<username>sa</username>
-					<password></password>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.h2database</groupId>
-						<artifactId>h2</artifactId>
-						<version>1.1.106</version>
-					  <!--
-						<groupId>hsqldb</groupId>
-						<artifactId>hsqldb</artifactId>
-						<version>1.8.0.9</version>
-						-->
-					</dependency>
-				</dependencies>
+        <configuration>
+          <!-- 
+          <dialect>org.hibernate.dialect.HSQLDialect</dialect> 
+          <driverClass>org.hsqldb.jdbcDriver</driverClass>
+          <connectionUrl>jdbc:hsqldb:${basedir}/src/dashboard/database</connectionUrl>
+          -->
+          <dialect>org.hibernate.dialect.H2Dialect</dialect>
+          <driverClass>org.h2.Driver</driverClass>
+          <connectionUrl>jdbc:h2:${basedir}/src/dashboard/database;create=true</connectionUrl>
+          <!--
+          <dialect>org.hibernate.dialect.DerbyDialect</dialect>
+          <driverClass>org.apache.derby.jdbc.ClientDriver</driverClass>
+          <connectionUrl>jdbc:derby://localhost:1527/myDB;create=true</connectionUrl>
+          -->
+          <username>sa</username>
+          <password>none</password>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <!--
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.7</version>
+            -->
+            
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.1.106</version>
+            
+            <!--
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.2.1.6</version>
+            -->
+
+          </dependency>
+        </dependencies>
       </plugin>
       <!-- aggregated javadoc for a complete api-doc of the project -->
       <plugin>
@@ -186,14 +202,14 @@
             <link>http://m-m-m.sourceforge.net/maven/apidocs/</link>            
           </links>
         </configuration>
-				<executions>
-					<execution>
-						<goals>
+        <executions>
+          <execution>
+            <goals>
               <goal>javadoc</goal>
               <goal>aggregate</goal>
-						</goals>
-					</execution>
-				</executions>
+            </goals>
+          </execution>
+        </executions>
       </plugin>      
     </plugins>
   </build>
@@ -289,10 +305,12 @@
           <minimumTokens>100</minimumTokens>
         </configuration>
       </plugin>
+      <!--
       <plugin> 
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId>
       </plugin>
+      -->
     </plugins>
   </reporting>
   

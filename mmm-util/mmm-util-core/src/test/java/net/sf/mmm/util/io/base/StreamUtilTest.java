@@ -17,7 +17,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.commons.logging.impl.NoOpLog;
 import org.junit.Test;
 
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
@@ -170,14 +169,18 @@ public class StreamUtilTest {
     Callback callback = new Callback();
     StreamUtilImpl streamUtil = new StreamUtilImpl();
     streamUtil.setExecutor(SimpleExecutor.INSTANCE);
-    streamUtil.setLogger(new NoOpLog());
+    // streamUtil.setLogger(new NoOpLog());
     streamUtil.setByteArrayPool(NoByteArrayPool.INSTANCE);
     streamUtil.setCharArrayPool(NoCharArrayPool.INSTANCE);
+    streamUtil.initialize();
     AsyncTransferrer transferrer = streamUtil.transferAsync(inStream, outStream, true, callback);
     try {
       transferrer.get();
       fail("expected " + ExecutionException.class);
     } catch (ExecutionException e) {
+      if (error != e.getCause()) {
+        e.printStackTrace();
+      }
       assertSame(error, e.getCause());
     }
     assertEquals(0, outStream.size());

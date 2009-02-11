@@ -299,7 +299,7 @@ public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
           try {
             this.processes[i].destroy();
           } catch (RuntimeException e) {
-            getLogger().warn(e);
+            getLogger().warn(e.getLocalizedMessage(), e);
           }
           this.processes[i] = null;
         }
@@ -309,7 +309,7 @@ public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
           try {
             this.transferrers[i].cancel(true);
           } catch (RuntimeException e) {
-            getLogger().warn(e);
+            getLogger().warn(e.getLocalizedMessage(), e);
           }
           this.transferrers[i] = null;
         }

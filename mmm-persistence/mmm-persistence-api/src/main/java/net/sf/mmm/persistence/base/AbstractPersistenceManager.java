@@ -85,6 +85,17 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("all")
+  public void delete(PersistenceEntity entity) {
+
+    Class<? extends PersistenceEntity> entityClass = getEntityClass(entity);
+    PersistenceEntityManager manager = getManager(entityClass);
+    manager.delete(entity);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Class<? extends PersistenceEntity> getEntityClass(PersistenceEntity entity) {
 
     // this is a very simple way - it might be wrong...

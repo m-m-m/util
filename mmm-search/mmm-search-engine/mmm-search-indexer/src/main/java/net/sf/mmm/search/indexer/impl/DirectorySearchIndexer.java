@@ -191,7 +191,10 @@ public class DirectorySearchIndexer extends AbstractLoggable {
 
     super.doInitialize();
     if (this.parserService == null) {
-      this.parserService = new ContentParserServiceImpl();
+      ContentParserServiceImpl ps = new ContentParserServiceImpl();
+      ps.initialize();
+      this.parserService = ps;
+
     }
     if (this.indexer == null) {
       throw new ResourceMissingException("indexer");

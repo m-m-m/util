@@ -1,0 +1,19 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+  version="1.0">
+
+  <persistence-unit name="m-m-m" transaction-type="RESOURCE_LOCAL">
+    <!-- transaction-type="JTA"> -->
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- <jta-data-source>java:/DataSource</jta-data-source> -->
+    <!-- <mapping-file>META_INF/orm.xml</mapping-file> -->
+    <!-- <jar-file>persistence.jar</jar-file> -->
+    <!-- <class>Entity1</class> -->
+    <properties>
+      <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/> -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+    </properties>
+  </persistence-unit>
+</persistence>
