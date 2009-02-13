@@ -33,7 +33,6 @@ public abstract class JpaPersistenceEntity extends AbstractPersistenceEntity {
   /**
    * {@inheritDoc}
    */
-  @Version
   public int getModificationCounter() {
 
     return this.modificationCounter;
@@ -45,6 +44,11 @@ public abstract class JpaPersistenceEntity extends AbstractPersistenceEntity {
   public void setModificationCounter(int modificationCounter) {
 
     this.modificationCounter = modificationCounter;
+  }
+
+  void setPersistent(boolean p) {
+
+    throw new IllegalStateException("Hibernate sucks!");
   }
 
 }

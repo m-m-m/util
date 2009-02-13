@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.base.AbstractPersistenceEntityManager;
@@ -44,7 +44,7 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
   /**
    * @param entityManager is the entityManager to set
    */
-  @Resource
+  @PersistenceContext
   public void setEntityManager(EntityManager entityManager) {
 
     getInitializationState().requireNotInitilized();
