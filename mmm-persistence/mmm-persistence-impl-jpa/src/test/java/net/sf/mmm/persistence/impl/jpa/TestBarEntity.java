@@ -13,12 +13,31 @@ import javax.persistence.Entity;
 @Entity
 public class TestBarEntity extends JpaIntegerIdPersistenceEntity {
 
+  /** @see #getValue() */
+  private String value;
+
   /**
    * The constructor.
    */
   public TestBarEntity() {
 
     super();
+  }
+
+  /**
+   * @return the bar
+   */
+  public String getValue() {
+
+    return this.value;
+  }
+
+  /**
+   * @param bar is the bar to set
+   */
+  public void setValue(String bar) {
+
+    this.value = bar;
   }
 
 }

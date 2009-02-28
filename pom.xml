@@ -31,6 +31,7 @@
     <!-- <module>mmm-gui</module> -->
     <module>mmm-util</module>
     <module>mmm-search</module>
+    <module>mmm-transaction</module>
     <module>mmm-persistence</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>

@@ -10,11 +10,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
-import net.sf.mmm.util.event.base.AbstractEventSource;
 
 /**
  * This is the test-case for {@link AbstractEventSource}.
@@ -28,6 +29,10 @@ public class AbstractEventSourceTest {
   public void testEvent() {
 
     MyEventSource source = new MyEventSource();
+    TestLogger testLogger = new TestLogger();
+    source.setLogger(testLogger);
+    source.initialize();
+
     MyEventListener listener1 = new MyEventListener();
     source.addListener(listener1);
     // listener 1 added, fire event 1
@@ -59,10 +64,39 @@ public class AbstractEventSourceTest {
     assertEquals(2, listener2.getEvents().size());
     assertFalse(listener1.getEvents().contains(event4));
     assertFalse(listener2.getEvents().contains(event4));
+
+    // test error handling...
+    EvilEventListener evilListener = new EvilEventListener();
+    source.addListener(evilListener);
+    MyEvent event5 = new MyEvent();
+    // just to be sure ...
+    testLogger.getEventList().clear();
+    source.fireEvent(event5);
+    TestLogger.LogEvent logEntry = testLogger.getEventList().get(0);
+    Assert.assertSame(EvilEventListener.error, logEntry.throwable);
   }
 
   protected static class MyEvent implements Event {
 
+  }
+
+  protected static class EvilEventListener implements EventListener<MyEvent> {
+
+    static final IllegalStateException error = new IllegalStateException("this is only a test");
+
+    public void handleEvent(MyEvent event) {
+
+      throw this.error;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+
+      return getClass().getSimpleName();
+    }
   }
 
   protected static class MyEventListener implements EventListener<MyEvent> {

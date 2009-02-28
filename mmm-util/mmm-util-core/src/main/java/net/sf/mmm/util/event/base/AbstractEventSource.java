@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.base.ArrayListFactory;
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
@@ -18,13 +19,13 @@ import net.sf.mmm.util.event.api.EventSource;
  * @param <E> is the templated type of the events to send.
  * @param <L> is the templated type of the listeners that can be
  *        {@link #addListener(EventListener) registered} here and that will
- *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event) receive}
- *        the sent events.
+ *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event)
+ *        receive} the sent events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> implements
-    EventSource<E, L> {
+public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> extends
+    AbstractLoggable implements EventSource<E, L> {
 
   /** the registered listeners */
   private final Collection<L> listeners;
@@ -98,9 +99,9 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   /**
    * This method is called if a listener throws something while handling an
    * event.<br>
-   * The default implementation is to do nothing. Override this method to change
-   * the behaviour (e.g. log the problem, remove the "evil" listener, throw the
-   * error anyways).
+   * The default implementation is log the error. Override this method to change
+   * the behaviour (e.g. ignore the problem, remove the "evil" listener, throw
+   * the error anyways).
    * 
    * @param listener is the listener that caused the error.
    * @param event is the event that could not be handled.
@@ -109,7 +110,8 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    */
   protected void handleListenerError(L listener, E event, Throwable error) {
 
-  // by default do nothing
+    getLogger().debug("The listener (" + listener + ") failed to handle event (" + event + "):",
+        error);
   }
 
 }

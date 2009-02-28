@@ -4,7 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
   
-  <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
+  <import resource="classpath:net/sf/mmm/transaction/impl/spring/beans-transaction.xml" />
   
   <bean id="javax.sql.DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
     <!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource"> --> 
@@ -12,7 +12,7 @@
     <property name="user" value="sa"/>
     <property name="password" value="none"/>
     <property name="driverClass" value="org.h2.Driver"/>
-    <property name="jdbcUrl" value="jdbc:h2:target/test-classes/database"/>
+    <property name="jdbcUrl" value="jdbc:h2:target/database/database"/>
     <property name="initialPoolSize" value="0"/>
     <property name="maxPoolSize" value="1"/>
     <property name="minPoolSize" value="1"/>
@@ -37,6 +37,14 @@
     </property>
       -->
   </bean>
+  
+  <bean id="org.springframework.transaction.PlatformTransactionManager" 
+    class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory">
+      <ref bean="entityManagerFactory"/>
+    </property>
+  </bean>
+  
   <!--
   <bean id="LocalEntityManagerFactoryBean" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
     <property name="dataSource" ref="javax.sql.DataSource"/>

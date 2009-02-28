@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-transaction</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>transaction</name>
+  <description>This project provides an API and implementation for a transaction-manager (e.g. based on JTA).</description>
+  
+  <modules>
+    <module>mmm-transaction-api</module>
+    <module>mmm-transaction-impl-spring</module>
+    <module>mmm-transaction-impl-jta</module>
+  </modules>
+</project>

@@ -13,7 +13,11 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * {@link PersistenceEntityManager}
  * {@link PersistenceEntityManager#getEntityClass() responsible} for the
  * according {@link PersistenceEntity} in the invoked methods. This guarantees
- * that your individual custom logic is also invoked in case of generic access.
+ * that individual custom logic is also invoked in case of generic access.<br>
+ * <b>NOTE:</b><br>
+ * You will have to perform operations of this persistence-layer in a
+ * transactional context. The suggested way is to use
+ * {@link net.sf.mmm.transaction.api.TransactionExecutor}.
  * 
  * @see javax.persistence.EntityManager
  * 

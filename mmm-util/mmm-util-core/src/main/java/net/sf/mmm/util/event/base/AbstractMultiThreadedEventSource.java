@@ -5,7 +5,6 @@ package net.sf.mmm.util.event.base;
 
 import java.util.concurrent.Executor;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
@@ -20,8 +19,8 @@ import net.sf.mmm.util.event.api.EventListener;
  * @param <E> is the templated type of the events to send.
  * @param <L> is the templated type of the listeners that can be
  *        {@link #addListener(EventListener) registered} here and that will
- *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event) receive}
- *        the sent events.
+ *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event)
+ *        receive} the sent events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -67,9 +66,9 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
   /**
    * This method initializes this class.
    */
-  @PostConstruct
-  public void initialize() {
+  public void doinitialize() {
 
+    super.doInitialize();
     if (this.executor == null) {
       this.executor = SimpleExecutor.INSTANCE;
     }

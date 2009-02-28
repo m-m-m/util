@@ -79,5 +79,12 @@
       <version>0.9.1.2</version>    
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-transaction-impl-spring</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>    
   </dependencies>
 </project>
