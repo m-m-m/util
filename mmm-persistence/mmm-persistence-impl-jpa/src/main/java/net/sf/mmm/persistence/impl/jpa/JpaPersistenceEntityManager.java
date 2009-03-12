@@ -64,7 +64,7 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
    */
   public void save(ENTITY entity) {
 
-    if (entity.isPersistent()) {
+    if (!entity.isPersistent()) {
       this.entityManager.persist(entity);
     }
   }
