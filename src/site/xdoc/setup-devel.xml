@@ -9,7 +9,8 @@
   <body>
     <h2>Setup</h2>
     To setup your development environment follow these steps:
-    <macro name="toc" fromDepth="0">
+    <macro name="toc">
+      <param name="fromDepth" value="0"/>
     </macro>
       
     <section name="Install JDK 6">
