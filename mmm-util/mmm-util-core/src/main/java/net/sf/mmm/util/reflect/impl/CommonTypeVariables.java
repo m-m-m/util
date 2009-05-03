@@ -7,7 +7,7 @@ import java.lang.reflect.TypeVariable;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class contains common {@link TypeVariable}s.
@@ -42,7 +42,7 @@ public final class CommonTypeVariables {
     try {
       collectionElement = Collection.class.getTypeParameters()[0];
     } catch (RuntimeException e) {
-      LogFactory.getLog(CommonTypeVariables.class).error(e);
+      LoggerFactory.getLogger(CommonTypeVariables.class).error("Internal Error!", e);
     }
     TYPE_VARIABLE_COLLECTION_ELEMENT = collectionElement;
 
@@ -53,7 +53,7 @@ public final class CommonTypeVariables {
       mapKey = mapParameters[0];
       mapValue = mapParameters[1];
     } catch (RuntimeException e) {
-      LogFactory.getLog(CommonTypeVariables.class).error(e);
+      LoggerFactory.getLogger(CommonTypeVariables.class).error("Internal Error!", e);
     }
     TYPE_VARIABLE_MAP_KEY = mapKey;
     TYPE_VARIABLE_MAP_VALUE = mapValue;
