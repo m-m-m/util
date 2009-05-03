@@ -8,7 +8,10 @@ package net.sf.mmm.util.metakey.api;
  * metadata-properties.<br>
  * This is the root that all such interfaces inherit from. It defines the common
  * properties and is inspired by but NOT identical to the <a
- * href="http://dublincore.org">DCMI</a>.
+ * href="http://dublincore.org">DCMI</a>.<br>
+ * All properties defined by this interface and its sub-interfaces by default
+ * have values of the type {@link String}. Exceptions will be documented
+ * explicitly in the javadoc.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -32,6 +35,13 @@ public interface MetakeyCore {
    * </table>
    */
   String TITLE = "title";
+
+  /**
+   * The subtitle of the content. It informs about a specific detail of the
+   * content but is NOT part of the official {@link #TITLE}.<br>
+   * Examples: "Live in Budapest", "Digitally Remastered", "Limited Edition"
+   */
+  String SUBTITLE = "subtitle";
 
   /**
    * A short description (abstract) of the content.<br>
@@ -193,7 +203,7 @@ public interface MetakeyCore {
    * <table border="1">
    * <tr>
    * <td>DCMI Name:</td>
-   * <td>extend</td>
+   * <td>extent</td>
    * </tr>
    * <tr>
    * <td>DCMI Definition:</td>
@@ -205,7 +215,7 @@ public interface MetakeyCore {
    * </tr>
    * </table>
    */
-  String EXTEND = "extend";
+  String EXTENT = "extent";
 
   /**
    * <b>ATTENTION:</b><br>
