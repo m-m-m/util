@@ -169,7 +169,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     int i = this.buffersIndex;
     while (i != this.buffersEndIndex) {
       i++;
-      if (i > this.buffers.length) {
+      if (i >= this.buffers.length) {
         i = 0;
       }
       ByteArrayBuffer buffer = this.buffers[i];
