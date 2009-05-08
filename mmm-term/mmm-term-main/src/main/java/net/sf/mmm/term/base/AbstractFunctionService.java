@@ -12,7 +12,7 @@ import net.sf.mmm.term.api.FunctionException;
 import net.sf.mmm.term.api.Function;
 import net.sf.mmm.term.api.FunctionService;
 import net.sf.mmm.term.api.NoSuchFunctionException;
-import net.sf.mmm.util.collection.ReadOnlyIterator;
+import net.sf.mmm.util.collection.base.ReadOnlyIterator;
 
 /**
  * This is the abstract base implementation of the FunctionService interface.

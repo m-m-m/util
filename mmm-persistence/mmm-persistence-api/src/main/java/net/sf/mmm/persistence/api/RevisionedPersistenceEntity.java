@@ -17,21 +17,21 @@ public interface RevisionedPersistenceEntity extends PersistenceEntity {
    * The {@link PersistenceEntityManager#load(Object) latest}
    * {@link #getRevision() revision} of a {@link PersistenceEntity}. It can also
    * be used for generic
-   * {@link RevisionedPersistenceEntityManager#load(Object, int) requests} of
+   * {@link RevisionedPersistenceEntityManager#load(Object, Number) requests} of
    * the {@link PersistenceEntityManager#load(Object) latest} revision.<br>
    * Value is: {@value}
    */
-  int LATEST_REVISION = -1;
+  Number LATEST_REVISION = null;
 
   /**
-   * This method gets the revision of this entity. The latest revision of an
-   * entity will always return
-   * {@link RevisionedPersistenceEntity#LATEST_REVISION}. Otherwise this object
-   * is a <em>historic entity</em> and it will be read-only so modifications are
-   * NOT permitted.
+   * This method gets the revision of this entity. The
+   * {@link RevisionedPersistenceEntity#LATEST_REVISION latest revision} of an
+   * entity will always return <code>null</code>. Otherwise this object is a
+   * <em>historic entity</em> and it will be read-only so modifications are NOT
+   * permitted.
    * 
-   * @return the revision.
+   * @return the revision or <code>null</code> if this is the latest revision.
    */
-  int getRevision();
+  Number getRevision();
 
 }

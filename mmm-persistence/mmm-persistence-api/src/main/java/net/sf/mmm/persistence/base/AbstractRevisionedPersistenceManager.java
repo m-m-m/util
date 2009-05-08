@@ -39,7 +39,7 @@ public abstract class AbstractRevisionedPersistenceManager extends AbstractPersi
    * {@inheritDoc}
    */
   public <ENTITY extends RevisionedPersistenceEntity> ENTITY load(Class<ENTITY> entityClass,
-      Object id, int revision) throws ObjectNotFoundException, NlsUnsupportedOperationException {
+      Object id, Number revision) throws ObjectNotFoundException, NlsUnsupportedOperationException {
 
     RevisionedPersistenceEntityManager<ENTITY> manager = getRevisionedManager(entityClass);
     return manager.load(id, revision);

@@ -3,22 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-
 /**
- * This is the interface for provider of data bytes (a <code>byte[]</code>-Buffer)
- * that is {@link ByteIterator iterable} and {@link ByteProcessable processable}.<br>
- * Please note that {@link #process(ByteProcessor, long) processed} bytes are
- * consumed (as if they were {@link #getNext() iterated}).
+ * This is the interface for a provider of data bytes (a <code>byte[]</code>
+ * -Buffer) that is {@link ByteIterator iterable} and {@link ByteProcessable
+ * processable}.<br>
+ * Bytes that are {@link #process(ByteProcessor, long) processed} will be
+ * consumed (as if they were {@link #next() iterated}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ProcessableByteArrayBuffer extends ByteIterator, ByteProcessable {
-
-  /**
-   * This method gets the number of bytes currently available in this buffer.
-   * 
-   * @return the bytes left in this buffer.
-   */
-  int getBytesAvailable();
+public interface ProcessableByteArrayBuffer extends ByteBuffer, ByteProcessable {
 
 }

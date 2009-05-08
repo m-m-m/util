@@ -15,7 +15,6 @@ import java.util.Map;
  * 
  * <pre>
  *   {@link DetectorStreamProvider} provider = ...
- *   detector = ...
  *   OutputStream outStream = ...
  * 
  *   //writeData(outStream);
@@ -27,7 +26,7 @@ import java.util.Map;
  *   wrappedOutStream.close();
  * 
  *   {@link Map}&lt;String, Object&gt; metadata = detectorOutStream.{@link DetectorStream#getMetadata() getMetadata()}; 
- *   Long bytesWritten = metadata.{@link Map#get(Object) get}("file.size");
+ *   Long bytesWritten = metadata.{@link Map#get(Object) get}("filesize");
  * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -45,7 +44,7 @@ public interface DetectorStreamProvider {
   DetectorInputStream wrapInputStream(InputStream stream);
 
   /**
-   * This method gets a {@link DetectorInputStream} that wrapps the given
+   * This method gets a {@link DetectorInputStream} that wraps the given
    * <code>stream</code>. In addition to {@link #wrapInputStream(InputStream)}
    * an additional parameter <code>metadata</code> is supplied. If this context
    * contains metadata values, that are mutable, the stream wrapper manipulates
@@ -64,7 +63,7 @@ public interface DetectorStreamProvider {
    * 
    * @param stream is the stream to wrap. This stream must be a fresh stream
    *        that is untouched since it was opened.
-   * @param metadata is the existing metadata already available.
+   * @param metadata is the existing metadata to apply.
    * @return the wrapped input stream.
    */
   DetectorInputStream wrapInputStream(InputStream stream, Map<String, Object> metadata);
@@ -80,7 +79,7 @@ public interface DetectorStreamProvider {
   DetectorOutputStream wrapOutputStream(OutputStream stream);
 
   /**
-   * This method gets a {@link DetectorOutputStream} that wrapps the given
+   * This method gets a {@link DetectorOutputStream} that wraps the given
    * <code>stream</code>. In addition to {@link #wrapOutputStream(OutputStream)}
    * an additional parameter <code>metadata</code> is supplied. If this context
    * contains metadata values, that are mutable, the stream wrapper manipulates
@@ -90,7 +89,7 @@ public interface DetectorStreamProvider {
    * tag of the song (if supported by the implementation).<br>
    * If the metadata contains values that are immutable and NOT compatible with
    * the detected values (e.g. mimetype=text/plain is supplied, but mimetype is
-   * audio/midi) then the value will simple be overriden in the detected
+   * audio/midi) then the value will simple be overridden in the detected
    * {@link DetectorStream#getMetadata() metadata}.<br>
    * If the metadata contains values that are unknown to the detector
    * implementation (e.g. foo=bar), these values will also be untouched and are
@@ -99,7 +98,7 @@ public interface DetectorStreamProvider {
    * 
    * @param stream is the stream to wrap. This stream must be a fresh stream
    *        that is untouched since it was opened.
-   * @param metadata is the existing metadata already available.
+   * @param metadata is the existing metadata to apply.
    * @return the wrapped output stream.
    */
   DetectorOutputStream wrapOutputStream(OutputStream stream, Map<String, Object> metadata);

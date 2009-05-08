@@ -17,11 +17,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * {@link java.io.BufferedInputStream} but exposes its internal state to be used
  * for lookahead operations.<br>
  * <b>ATTENTION:</b><br>
- * This class is intended for class-internal usage only.<br>
- * <b>NOTE:</b><br>
- * This class is NOT public visible, because further releases might break it's
- * compatibility. Feel free to review and give feedback on the mailing list if
- * you want to use it directly.
+ * This class is intended for internal usage only.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -65,8 +61,9 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
    * The constructor.
    * 
    * @param inStream is the {@link InputStream} to adapt.
-   * @param capacity is the capacity for each of the two {@link ByteArrayBuffer}s.
-   *        Please note that therefore the double amount of memory is allocated.
+   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl}
+   *        s. Please note that therefore the double amount of memory is
+   *        allocated.
    */
   public BufferInputStream(InputStream inStream, int capacity) {
 
@@ -77,17 +74,18 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
    * The constructor.
    * 
    * @param inStream is the {@link InputStream} to adapt.
-   * @param capacity is the capacity for each of the two {@link ByteArrayBuffer}s.
-   *        Please note that therefore the double amount of memory is allocated.
+   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl}
+   *        s. Please note that therefore the double amount of memory is
+   *        allocated.
    * @param bufferCount is the number of buffers to use.
    */
   private BufferInputStream(InputStream inStream, int capacity, int bufferCount) {
 
     super();
     this.inStream = inStream;
-    ByteArrayBuffer[] buffers = new ByteArrayBuffer[bufferCount];
+    ByteArrayBufferImpl[] buffers = new ByteArrayBufferImpl[bufferCount];
     for (int i = 0; i < bufferCount; i++) {
-      buffers[i] = new ByteArrayBuffer(capacity);
+      buffers[i] = new ByteArrayBufferImpl(capacity);
     }
     this.buffer = new ByteArrayBufferBuffer(buffers);
     this.copyProcessor = new CopyProcessor();
@@ -169,7 +167,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
         return -1;
       }
     }
-    int result = this.buffer.getNext();
+    int result = this.buffer.next();
     fill();
     return result;
   }
@@ -178,7 +176,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
    * {@inheritDoc}
    */
   @Override
-  public int read(final byte[] bytes, final int offset, final int length) throws IOException {
+  public int read(byte[] bytes, int offset, int length) throws IOException {
 
     ensureOpen();
     int offPlusLen = offset + length;
@@ -211,7 +209,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   @Override
   public int available() throws IOException {
 
-    return super.available();
+    return this.buffer.getBytesAvailable() + this.inStream.available();
   }
 
   /**
@@ -253,9 +251,9 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
 
   /**
    * This inner class is the {@link ByteProcessor} used to copy bytes from the
-   * buffer to the reader.
+   * buffer to the caller consuming data from this stream.
    */
-  private static class CopyProcessor implements ByteProcessor {
+  protected static class CopyProcessor implements ByteProcessor {
 
     /** The buffer to copy to. */
     private byte[] targetBuffer;
@@ -287,10 +285,11 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
     /**
      * {@inheritDoc}
      */
-    public void process(byte[] buffer, int offset, int length) {
+    public int process(byte[] buffer, int offset, int length) {
 
       System.arraycopy(buffer, offset, this.targetBuffer, this.targetOffset, length);
       this.targetOffset = this.targetOffset + length;
+      return length;
     }
   }
 }

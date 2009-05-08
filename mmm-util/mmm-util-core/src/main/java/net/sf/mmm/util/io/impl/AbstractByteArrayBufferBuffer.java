@@ -9,18 +9,20 @@ import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.io.api.ByteProcessor;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
+import net.sf.mmm.util.io.base.ByteArrayBuffer;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of the
  * {@link ProcessableByteArrayBuffer} interface for a <code>byte[]</code>-Buffer
- * that represents the concatenation of multiple {@link ByteArrayBuffer}s. It
- * has its own state (read-pointer) and does NOT modify a contained
- * {@link ByteArrayBuffer buffer} when reading. If one of the underlying
- * {@link ByteArrayBuffer buffers} has been read to the
- * {@link ByteArrayBuffer#getMaximumIndex() end} this class steps to the next
- * one in a rotating way until the last buffer has been reached, that contains
- * data that has NOT been read before. Further this class allows to be
+ * that represents the concatenation of multiple {@link ByteArrayBufferImpl}s.
+ * It has its own state (read-pointer) and does NOT modify a contained
+ * {@link ByteArrayBufferImpl buffer} when reading. If one of the underlying
+ * {@link ByteArrayBufferImpl buffers} has been read to the
+ * {@link ByteArrayBufferImpl#getMaximumIndex() end} this class steps to the
+ * next one in a rotating way until the last buffer has been reached, that
+ * contains data that has NOT been read before. Further this class allows to be
  * {@link #fill(InputStream) (re)filled}.<br>
  * <b>NOTE:</b><br>
  * This class is NOT public visible, because further releases might break it's
@@ -32,7 +34,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuffer {
 
   /** The actual buffers. */
-  private final ByteArrayBuffer[] buffers;
+  private final ByteArrayBufferImpl[] buffers;
 
   /** The index of the current buffer out of {@link #buffers}. */
   private int buffersIndex;
@@ -51,13 +53,15 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
 
   /**
    * The value of
-   * <code>{@link #buffers}[{@link #buffersIndex}].{@link ByteArrayBuffer#getMaximumIndex() getMaximumIndex()}</code>.
+   * <code>{@link #buffers}[{@link #buffersIndex}].{@link ByteArrayBufferImpl#getMaximumIndex() getMaximumIndex()}</code>
+   * .
    */
   private int currentBufferMax;
 
   /**
    * The value of
-   * <code>{@link #buffers}[{@link #buffersIndex}].{@link ByteArrayBuffer#getBytes() getBytes()}</code>.
+   * <code>{@link #buffers}[{@link #buffersIndex}].{@link ByteArrayBufferImpl#getBytes() getBytes()}</code>
+   * .
    */
   private byte[] currentBufferBytes;
 
@@ -66,7 +70,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
    * 
    * @param buffers are the buffers to concat.
    */
-  public AbstractByteArrayBufferBuffer(ByteArrayBuffer... buffers) {
+  public AbstractByteArrayBufferBuffer(ByteArrayBufferImpl... buffers) {
 
     super();
     this.buffers = buffers;
@@ -106,9 +110,9 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method gets the current {@link ByteArrayBuffer}.
+   * This method gets the current {@link ByteArrayBufferImpl}.
    * 
-   * @return the current {@link ByteArrayBuffer}.
+   * @return the current {@link ByteArrayBufferImpl}.
    */
   protected ByteArrayBuffer getCurrentBuffer() {
 
@@ -116,8 +120,8 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method gets the current index in the
-   * {@link #getCurrentBuffer() current buffer}.
+   * This method gets the current index in the {@link #getCurrentBuffer()
+   * current buffer}.
    * 
    * @return the position in the {@link #getCurrentBuffer() current buffer}.
    */
@@ -131,13 +135,13 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
    * next available buffer. If this method is called when the last buffer has
    * already been reached, the {@link #getCurrentBufferIndex() index} will be
    * set to
-   * <code>{@link #getCurrentBuffer()}.{@link ByteArrayBuffer#getMaximumIndex() getMaximumIndex()}+1</code>
+   * <code>{@link #getCurrentBuffer()}.{@link ByteArrayBufferImpl#getMaximumIndex() getMaximumIndex()}+1</code>
    * so the end of this buffer is reached and {@link #hasNext()} will return
    * <code>false</code>.
    * 
    * @return <code>true</code> if there was a next buffer to switch to,
-   *         <code>false</code> if the
-   *         {@link #getCurrentBuffer() current buffer} is already the last one.
+   *         <code>false</code> if the {@link #getCurrentBuffer() current
+   *         buffer} is already the last one.
    */
   protected boolean nextBuffer() {
 
@@ -188,7 +192,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
-  public byte getNext() throws NoSuchElementException {
+  public byte next() throws NoSuchElementException {
 
     if (this.currentBufferIndex <= this.currentBufferMax) {
       byte result = this.currentBufferBytes[this.currentBufferIndex++];
@@ -196,6 +200,18 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
         nextBuffer();
       }
       return result;
+    } else {
+      throw new NoSuchElementException();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public byte peek() throws NoSuchElementException {
+
+    if (this.currentBufferIndex <= this.currentBufferMax) {
+      return this.currentBufferBytes[this.currentBufferIndex];
     } else {
       throw new NoSuchElementException();
     }
@@ -226,12 +242,17 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
       } else {
         len = bytesLeft;
       }
+      int consumed = len;
       if (processor != null) {
-        processor.process(this.currentBufferBytes, this.currentBufferIndex, len);
+        consumed = processor.process(this.currentBufferBytes, this.currentBufferIndex, len);
+        if ((consumed < 0) || (consumed > len)) {
+          throw new ValueOutOfRangeException(Integer.valueOf(consumed), Integer.valueOf(0), Integer
+              .valueOf(len), processor);
+        }
       }
-      this.currentBufferIndex = this.currentBufferIndex + len;
-      count = count - len;
-      if (count == 0) {
+      this.currentBufferIndex = this.currentBufferIndex + consumed;
+      count = count - consumed;
+      if ((count == 0) || (consumed < len)) {
         break;
       }
       if (this.currentBufferIndex <= this.currentBufferMax) {
@@ -265,8 +286,8 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method fills this buffer using the given <code>inputStream</code>.
-   * If the buffer is already filled, this method will have no effect and return
+   * This method fills this buffer using the given <code>inputStream</code>. If
+   * the buffer is already filled, this method will have no effect and return
    * <code>false</code>.
    * 
    * @param inputStream is the {@link InputStream} providing the data to fill
@@ -284,7 +305,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     }
     boolean todo = true;
     while (todo) {
-      ByteArrayBuffer buffer = this.buffers[nextEnd];
+      ByteArrayBufferImpl buffer = this.buffers[nextEnd];
       if (nextEnd == this.buffersIndex) {
         if (buffer.hasNext()) {
           break;

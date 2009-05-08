@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * This is the interface for the metadata associated with a
@@ -15,19 +15,20 @@ import java.sql.Timestamp;
 public interface RevisionMetadata {
 
   /**
-   * This method gets the date when this revision was created (opened).
+   * This method gets the {@link RevisionedPersistenceEntity#getRevision()
+   * revision number}.
    * 
-   * @return the date of creation.
+   * @return the revision number.
    */
-  Timestamp getDateOfCreation();
+  Number getRevision();
 
   /**
-   * This method gets the date when this revision was completed (closed).
+   * This method gets the date when this revision was created (closed).
    * 
    * @return the date of completion or <code>null</code> if the according entity
    *         is the latest revision.
    */
-  Timestamp getDateOfCompletion();
+  Date getDate();
 
   /**
    * This method gets the creator of this revision. This can be a string (such

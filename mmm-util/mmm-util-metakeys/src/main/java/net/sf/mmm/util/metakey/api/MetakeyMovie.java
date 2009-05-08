@@ -4,14 +4,21 @@
 package net.sf.mmm.util.metakey.api;
 
 /**
- * TODO: this class ...
+ * This interface is a collection of constants defining keys for
+ * metadata-properties of a movie (video content).<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface MetakeyMovie extends MetakeyAudioVideo {
 
+  /**
+   * The company "responsible for the movie".
+   */
   String COMPANY = "company";
 
+  /**
+   * The country where the movie was produced.
+   */
   String COUNTRY = "country";
 
   /**

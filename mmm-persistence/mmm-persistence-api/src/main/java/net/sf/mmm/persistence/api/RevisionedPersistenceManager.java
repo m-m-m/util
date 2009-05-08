@@ -36,7 +36,7 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    * {@link PersistenceEntity} with the given <code>entityClass</code> and
    * <code>id</code> from the persistent store.
    * 
-   * @see PersistenceEntityManager#load(Object)
+   * @see RevisionedPersistenceEntityManager#load(Object, Number)
    * 
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param entityClass is the class reflecting the type of the requested
@@ -56,6 +56,6 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    *         is NOT revision-controlled.
    */
   <ENTITY extends RevisionedPersistenceEntity> ENTITY load(Class<ENTITY> entityClass, Object id,
-      int revision) throws ObjectNotFoundException, NlsUnsupportedOperationException;
+      Number revision) throws ObjectNotFoundException, NlsUnsupportedOperationException;
 
 }

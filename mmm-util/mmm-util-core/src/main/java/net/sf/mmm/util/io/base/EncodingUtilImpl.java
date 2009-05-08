@@ -203,12 +203,13 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
     /**
      * {@inheritDoc}
      */
-    public void process(byte[] buffer, int offset, int length) {
+    public int process(byte[] buffer, int offset, int length) {
 
       int len = offset + length;
       for (int i = offset; i < len; i++) {
         this.charBuffer[this.charOffset++] = (char) buffer[i];
       }
+      return length;
     }
   }
 
@@ -295,7 +296,7 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
     /**
      * {@inheritDoc}
      */
-    public void process(byte[] buffer, int offset, int length) {
+    public int process(byte[] buffer, int offset, int length) {
 
       int len = offset + length;
       for (int i = offset; i < len; i++) {
@@ -414,6 +415,8 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
         }
         this.bytePosition++;
       }
+      // TODO
+      return length;
     }
 
     /**

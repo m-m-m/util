@@ -9,10 +9,9 @@ import java.io.InputStream;
 /**
  * This is the regular implementation of the
  * {@link AbstractByteArrayBufferBuffer}.<br>
- * <b>NOTE:</b><br>
- * This class is NOT public visible, because further releases might break it's
- * compatibility. Feel free to review and give feedback on the mailing list if
- * you want to use it directly.
+ * <b>ATTENTION:</b><br>
+ * This class is NOT intended to be exposed. It should only be used internally
+ * by some class or component.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,7 +22,7 @@ public class ByteArrayBufferBuffer extends AbstractByteArrayBufferBuffer {
    * 
    * @param buffers are the buffers to concat.
    */
-  public ByteArrayBufferBuffer(ByteArrayBuffer... buffers) {
+  public ByteArrayBufferBuffer(ByteArrayBufferImpl... buffers) {
 
     super(buffers);
   }

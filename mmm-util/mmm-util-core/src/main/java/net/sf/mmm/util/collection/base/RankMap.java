@@ -12,13 +12,13 @@ import java.util.Map;
 
 /**
  * This class is like a {@link Map} that maps elements (<code>&lt;E&gt;</code>)
- * to an <code>int</code> value that represents the
- * {@link #getRank(Object) rank} of the according element.<br>
+ * to an <code>int</code> value that represents the {@link #getRank(Object)
+ * rank} of the according element.<br>
  * This is useful for heuristic decisions where specific detections indicate a
  * {@link #addRank(Object, int) gain or loss} of a specific element
  * (representing a decision). Additionally an element can be
- * {@link #setUnacceptable(Object) declared}
- * {@link #RANK_UNACCEPTABLE unacceptable} so it is out of the decision.
+ * {@link #setUnacceptable(Object) declared} {@link #RANK_UNACCEPTABLE
+ * unacceptable} so it is out of the decision.
  * 
  * @param <E> is the type of the elements (decisions) to rank.
  * 
@@ -64,10 +64,10 @@ public class RankMap<E> {
   }
 
   /**
-   * This method gets the current rank for the given <code>element</code>.
-   * The rank is in the range from <code>{@link #RANK_UNACCEPTABLE -1}</code>
-   * to <code>{@link Integer#MAX_VALUE}</code>. If the <code>element</code>
-   * has no rank, a value of <code>0</code> will be returned.
+   * This method gets the current rank for the given <code>element</code>. The
+   * rank is in the range from <code>{@link #RANK_UNACCEPTABLE -1}</code> to
+   * <code>{@link Integer#MAX_VALUE}</code>. If the <code>element</code> has no
+   * rank, a value of <code>0</code> will be returned.
    * 
    * @see #RANK_UNACCEPTABLE
    * @see #addRank(Object, int)
@@ -105,8 +105,8 @@ public class RankMap<E> {
 
   /**
    * This method determines if the given <code>element</code> has been
-   * {@link #setUnacceptable(Object) declared}
-   * {@link #RANK_UNACCEPTABLE unacceptable}.
+   * {@link #setUnacceptable(Object) declared} {@link #RANK_UNACCEPTABLE
+   * unacceptable}.
    * 
    * @param element is the element to check.
    * @return <code>true</code> if the given <code>element</code> is
@@ -125,9 +125,9 @@ public class RankMap<E> {
   /**
    * This method adds the given <code>gain</code> to the current
    * {@link #getRank(Object) rank} of the given <code>element</code>. If the
-   * <code>element</code> is {@link #setUnacceptable(Object) unacceptable},
-   * this method will have no effect. This method guarantees that there will be
-   * no overflow of the {@link #getRank(Object) rank}.
+   * <code>element</code> is {@link #setUnacceptable(Object) unacceptable}, this
+   * method will have no effect. This method guarantees that there will be no
+   * overflow of the {@link #getRank(Object) rank}.
    * 
    * @param element is the element to rank.
    * @param gain is the value to add to the current rank. It may be negative to
@@ -241,20 +241,12 @@ public class RankMap<E> {
   }
 
   /**
-   * This inner class represents the {@link #getRank() rank} of an element.
+   * This inner class represents the {@link #rank} of an element.
    */
   private static class Ranking {
 
-    /** @see #getRank() */
+    /** The ranking value. */
     private int rank;
-
-    /**
-     * @return the rank
-     */
-    public int getRank() {
-
-      return this.rank;
-    }
 
     /**
      * @see RankMap#setUnacceptable(Object)
@@ -265,8 +257,8 @@ public class RankMap<E> {
     }
 
     /**
-     * @return <code>true</code> if
-     *         {@link RankMap#RANK_UNACCEPTABLE unacceptable}.
+     * @return <code>true</code> if {@link RankMap#RANK_UNACCEPTABLE
+     *         unacceptable}.
      */
     public boolean isUnacceptable() {
 

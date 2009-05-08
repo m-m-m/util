@@ -25,15 +25,15 @@ public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPer
    * This method will get the {@link List} of historic
    * {@link RevisionedPersistenceEntity#getRevision() revisions} before the
    * given <code>entity</code>. If the given <code>entity</code> is the
-   * {@link RevisionedPersistenceEntity#LATEST_REVISION latest revision} If the
-   * <code>entity</code> is NOT revision controlled, an
+   * {@link RevisionedPersistenceEntity#LATEST_REVISION latest revision} ...<br>
+   * If the <code>entity</code> is NOT revision controlled, an
    * {@link java.util.Collections#emptyList() empty list} is returned.
    * 
    * @param entity is the according {@link PersistenceEntity}.
    * @return the {@link List} of historic
    *         {@link RevisionedPersistenceEntity#getRevision() revisions}.
    */
-  List<Integer> getRevisionHistory(ENTITY entity);
+  List<Number> getRevisionHistory(ENTITY entity);
 
   /**
    * This method will get the {@link List} of {@link RevisionMetadata} from the
@@ -65,7 +65,7 @@ public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPer
    * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
    *         entity} could NOT be found.
    */
-  ENTITY load(Object id, int revision) throws ObjectNotFoundException;
+  ENTITY load(Object id, Number revision) throws ObjectNotFoundException;
 
   /**
    * This method creates a new {@link RevisionedPersistenceEntity#getRevision()
@@ -76,7 +76,7 @@ public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPer
    * @return the {@link RevisionedPersistenceEntity#getRevision() revision} of
    *         the created history-entry.
    */
-  int createRevision(ENTITY entity);
+  Number createRevision(ENTITY entity);
 
   /**
    * {@inheritDoc}

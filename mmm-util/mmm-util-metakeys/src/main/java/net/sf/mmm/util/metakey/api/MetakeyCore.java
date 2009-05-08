@@ -162,7 +162,7 @@ public interface MetakeyCore {
 
   /**
    * The date of creation of this content. {@link java.util.Date}-object if
-   * possible; in case of string-representation in the form "YYYY-mm-DD".
+   * possible; in case of string-representation in the form "YYYY[-mm-DD]".
    */
   String CREATION_DATE = "creation-date";
 
@@ -199,7 +199,7 @@ public interface MetakeyCore {
   /**
    * <b>ATTENTION:</b><br>
    * This property is too generic. Please use {@link #FILE_SIZE} or
-   * {@link MetakeyMultimedia#DURATION} instead.
+   * {@link MetakeyAudioVideo#DURATION} instead.
    * <table border="1">
    * <tr>
    * <td>DCMI Name:</td>

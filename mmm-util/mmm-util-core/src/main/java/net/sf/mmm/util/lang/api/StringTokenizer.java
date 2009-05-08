@@ -11,7 +11,7 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
  * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided
  * by the JDK. This implementation {@link #next() returns} an empty
  * {@link String} if a duplicate delimiter is detected. Further it implements
- * {@link Iterator} and can be used in enhanced for-loops.
+ * {@link Iterable} and can be used in enhanced for-loops.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -13,7 +13,7 @@ public interface MetakeyMusic extends MetakeyAudioVideo {
   /**
    * TODO: Name (Company)... Brand of the producing studio.
    */
-  String LABEL = "label";
+  String LABEL = PUBLISHER;
 
   /**
    * The artist(s) which performed this musical content.

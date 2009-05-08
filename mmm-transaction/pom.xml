@@ -17,6 +17,7 @@
   <modules>
     <module>mmm-transaction-api</module>
     <module>mmm-transaction-impl-spring</module>
+    <module>mmm-transaction-impl-jpa</module>
     <module>mmm-transaction-impl-jta</module>
   </modules>
 </project>

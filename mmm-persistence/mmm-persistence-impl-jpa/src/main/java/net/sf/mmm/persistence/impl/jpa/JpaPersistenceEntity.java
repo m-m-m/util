@@ -4,19 +4,23 @@
 package net.sf.mmm.persistence.impl.jpa;
 
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import net.sf.mmm.persistence.api.PersistenceEntity;
-import net.sf.mmm.persistence.base.AbstractPersistenceEntity;
 
 /**
  * This is the abstract base-implementation of a {@link PersistenceEntity} using
- * the {@link javax.persistence JPA} (Java Persistence API).
+ * the {@link javax.persistence JPA} (Java Persistence API).<br>
+ * We can NOT extend
+ * {@link net.sf.mmm.persistence.base.AbstractPersistenceEntity} because JPA
+ * forces superclasses to be annotated and prevents from overriding annotated
+ * features such as {@link Transient}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaPersistenceEntity extends AbstractPersistenceEntity {
+public abstract class JpaPersistenceEntity implements PersistenceEntity {
 
   /** @see #getModificationCounter() */
   @Version
@@ -46,9 +50,13 @@ public abstract class JpaPersistenceEntity extends AbstractPersistenceEntity {
     this.modificationCounter = modificationCounter;
   }
 
-  void setPersistent(boolean p) {
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public boolean isPersistent() {
 
-    throw new IllegalStateException("Hibernate sucks!");
+    return (getId() != null);
   }
 
 }

@@ -34,7 +34,12 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
   }
 
   /**
-   * @return the entityManager
+   * This method gets a thread-safe {@link EntityManager}. It acts as proxy to
+   * an {@link EntityManager} associated with the current thread (created when
+   * the transaction is opened e.g. via
+   * {@link net.sf.mmm.transaction.api.TransactionExecutor}).
+   * 
+   * @return the according {@link EntityManager}.
    */
   protected EntityManager getEntityManager() {
 
@@ -42,6 +47,28 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public ENTITY load(Object id) throws ObjectNotFoundException {
+
+    return getEntityManager().find(getEntityClass(), id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void save(ENTITY entity) {
+
+    if (!entity.isPersistent()) {
+      getEntityManager().persist(entity);
+    }
+  }
+
+  /**
+   * This method injects a thread-safe {@link EntityManager} instance that acts
+   * as proxy to an {@link EntityManager} associated with the current thread
+   * (created when the transaction is opened).
+   * 
    * @param entityManager is the entityManager to set
    */
   @PersistenceContext
@@ -54,27 +81,9 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
   /**
    * {@inheritDoc}
    */
-  public ENTITY load(Object id) throws ObjectNotFoundException {
-
-    return this.entityManager.find(getEntityClass(), id);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void save(ENTITY entity) {
-
-    if (!entity.isPersistent()) {
-      this.entityManager.persist(entity);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public void delete(ENTITY entity) {
 
-    this.entityManager.remove(entity);
+    getEntityManager().remove(entity);
   }
 
 }

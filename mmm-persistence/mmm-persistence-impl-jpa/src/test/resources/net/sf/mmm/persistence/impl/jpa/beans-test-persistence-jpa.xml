@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  
+  <import resource="classpath:net/sf/mmm/transaction/impl/spring/beans-transaction.xml" />
+  
+  <bean id="javax.sql.DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource"> --> 
+    <!-- class="org.apache.commons.dbcp.BasicDataSource"> -->
+    <property name="user" value="sa"/>
+    <property name="password" value="none"/>
+    <property name="driverClass" value="org.h2.Driver"/>
+    <property name="jdbcUrl" value="jdbc:h2:target/database/database"/>
+    <property name="initialPoolSize" value="0"/>
+    <property name="maxPoolSize" value="1"/>
+    <property name="minPoolSize" value="1"/>
+    <property name="acquireIncrement" value="1"/>
+    <property name="acquireRetryAttempts" value="0"/>
+    <!-- <property name="url" value="jdbc:hsqldb:hsql://localhost/"/> -->
+    <!-- <property name="url" value="jdbc:h2:target/test-classes/database"/> -->
+  </bean>
+  
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="javax.sql.DataSource"/>
+    <!--
+    <property name="jpaVendorAdapter">
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="showSql" value="true"/>
+        <property name="generateDdl" value="true"/>
+        <property name="databasePlatform" value="oracle.toplink.essentials.platform.database.HSQLPlatform"/>
+      </bean>
+    </property>
+    <property name="loadTimeWeaver">
+      <bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
+    </property>
+      -->
+  </bean>
+  
+  <bean id="org.springframework.transaction.PlatformTransactionManager" 
+    class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory">
+      <ref bean="entityManagerFactory"/>
+    </property>
+  </bean>
+  
+  <!--
+  <bean id="LocalEntityManagerFactoryBean" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+    <property name="dataSource" ref="javax.sql.DataSource"/>
+  </bean>
+    -->
+  
+  <!-- DAOs/PersisrenceManagers -->
+  <bean id="net.sf.mmm.persistence.impl.jpa.DummyFooEntityManager" class="net.sf.mmm.persistence.impl.jpa.DummyFooEntityManagerImpl"/>        
+  <bean id="net.sf.mmm.persistence.impl.jpa.DummyBarEntityManager" class="net.sf.mmm.persistence.impl.jpa.DummyBarEntityManagerImpl"/>        
+  
+  <bean id="net.sf.mmm.persistence.api.PersistenceManager" class="net.sf.mmm.persistence.base.PersistenceManagerImpl">
+    <property name="managers">
+      <list>
+        <ref bean="net.sf.mmm.persistence.impl.jpa.DummyFooEntityManager"/>        
+        <ref bean="net.sf.mmm.persistence.impl.jpa.DummyBarEntityManager"/>        
+      </list>
+    </property>
+  </bean>
+</beans>

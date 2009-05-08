@@ -23,7 +23,7 @@ public abstract class AbstractRevisionedPersistenceEntityManager<ENTITY extends 
   /**
    * {@inheritDoc}
    */
-  public ENTITY load(Object id, int revision) throws ObjectNotFoundException {
+  public ENTITY load(Object id, Number revision) throws ObjectNotFoundException {
 
     if (revision == RevisionedPersistenceEntity.LATEST_REVISION) {
       return load(id);
@@ -44,6 +44,6 @@ public abstract class AbstractRevisionedPersistenceEntityManager<ENTITY extends 
    * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
    *         entity} could NOT be found.
    */
-  protected abstract ENTITY loadRevision(Object id, int revision) throws ObjectNotFoundException;
+  protected abstract ENTITY loadRevision(Object id, Number revision) throws ObjectNotFoundException;
 
 }

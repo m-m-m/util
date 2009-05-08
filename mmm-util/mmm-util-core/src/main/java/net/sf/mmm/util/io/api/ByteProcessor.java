@@ -24,7 +24,11 @@ public interface ByteProcessor {
    * @param buffer contains the bytes to process.
    * @param offset is the index where to start in the <code>buffer</code>.
    * @param length is the number of bytes to proceed.
+   * @return the number of bytes that should be consumed. Typically you will
+   *         simply return <code>length</code>. However you can also return a
+   *         value less than length and greater or equal to zero, in order to
+   *         stop processing at a specific position.
    */
-  void process(byte[] buffer, int offset, int length);
+  int process(byte[] buffer, int offset, int length);
 
 }
