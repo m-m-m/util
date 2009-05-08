@@ -21,11 +21,13 @@
             general purpose (NLS, ISO-8601, generic value conversion, scanners, pattern compilers, reflection, etc.).</li>
         <li><a href="mmm-util-pojo/index.html">mmm-util-pojo</a> contains utilities that help 
             to deal with POJOs. It offeres advanced introspection and object-web navigation.</li>
-        <li><a href="mmm-util-misc/index.html">mmm-util-misc</a> contains various utilities for 
-            general purpose (dealing with strings, etc.).</li>
-        <li><a href="mmm-util-xml/index.html">mmm-util-xml</a> contains stuff for dealing with XML.</li>
         <li><a href="mmm-util-http/index.html">mmm-util-http</a> is an HTTP utility NOT wired up 
             with the protocol (to be used for HTTPMU in UPnP).</li>
+        <li><a href="mmm-util-metakeys/index.html">mmm-util-metakeys</a> contains various constants
+            for metadata properties from different standards.</li>
+        <li><a href="mmm-util-contenttype/index.html">mmm-util-xml</a> aims to provide a detailed tree
+            of various filetypes together with an implementation for the stream-detection-framework
+            in order to detect metadata on the fly while streaming.</li>
       </ul>
       </subsection>
     </section>
