@@ -5,7 +5,7 @@ package net.sf.mmm.util.io.impl;
 
 import java.util.NoSuchElementException;
 
-import net.sf.mmm.util.io.base.ByteArrayBuffer;
+import net.sf.mmm.util.io.api.ByteArrayBuffer;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler.

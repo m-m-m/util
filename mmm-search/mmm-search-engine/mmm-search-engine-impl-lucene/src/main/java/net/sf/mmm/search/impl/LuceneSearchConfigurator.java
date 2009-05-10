@@ -125,7 +125,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    * @param element is the element containing the flag.
    * @return the flag.
    */
-  private boolean isIgnoreLeadingWildcards(Element element) {
+  protected boolean isIgnoreLeadingWildcards(Element element) {
 
     Element queryElement = this.domUtil.getFirstChildElement(element, XML_TAG_SEARCH);
     if (queryElement == null) {
@@ -174,7 +174,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
     LuceneSearchEngine searchEngine = new LuceneSearchEngine();
     searchEngine.setAnalyzer(createAnalyzer(element));
     searchEngine.setIndexPath(getIndexPath(element));
-    //searchEngine.setIgnoreLeadingWildcards(isIgnoreLeadingWildcards(element));
+    // searchEngine.setIgnoreLeadingWildcards(isIgnoreLeadingWildcards(element));
     searchEngine.initialize();
     setupRefreshThread(element, searchEngine);
     return searchEngine;

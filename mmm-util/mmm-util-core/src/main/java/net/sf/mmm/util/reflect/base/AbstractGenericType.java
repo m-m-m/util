@@ -62,7 +62,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     if (other == this) {
       return true;
     }
-    if (other instanceof AbstractGenericType) {
+    if (other instanceof AbstractGenericType<?>) {
       AbstractGenericType<?> otherType = (AbstractGenericType<?>) other;
       if (getType().equals(otherType.getType())) {
         GenericType<?> definingType = getDefiningType();
@@ -256,7 +256,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   protected Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType) {
 
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
-    if (genericDeclaration instanceof Class) {
+    if (genericDeclaration instanceof Class<?>) {
       Class<?> declaringClass = (Class<?>) genericDeclaration;
       List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType
           .getRetrievalClass());
@@ -275,7 +275,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
             int variableIndex = getDeclarationIndex(currentVariable);
             if (variableIndex >= 0) {
               Type typeArgument = typeArguments[variableIndex];
-              if (typeArgument instanceof TypeVariable) {
+              if (typeArgument instanceof TypeVariable<?>) {
                 currentVariable = (TypeVariable<?>) typeArgument;
               } else {
                 return typeArgument;

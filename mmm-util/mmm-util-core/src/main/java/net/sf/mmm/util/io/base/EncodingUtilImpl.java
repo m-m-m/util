@@ -559,20 +559,22 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
      * {@inheritDoc}
      */
     @Override
-    public int read(char[] cbuf, int offset, int length) throws IOException {
+    public int read(char[] buffer, int offset, int length) throws IOException {
 
       int offPlusLen = offset + length;
-      if ((offset < 0) || (length < 0) || (offPlusLen < 0) || (cbuf.length < offPlusLen)) {
+      if ((offset < 0) || (length < 0) || (offPlusLen < 0) || (buffer.length < offPlusLen)) {
         throw new IndexOutOfBoundsException();
       } else if (length == 0) {
         return 0;
       }
       int bytesRead;
       if (this.reader != null) {
-        bytesRead = this.reader.read(cbuf, offset, length);
+        bytesRead = this.reader.read(buffer, offset, length);
       } else {
+        // prevent modifying parameters
         int off = offset;
         int len = length;
+        // start detection
         while (len > 0) {
           if (this.asciiBytesAvailable == 0) {
             // here we either need to detect the encoding or determine some
@@ -609,7 +611,7 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
           }
           if (this.encoding == null) {
             assert (this.asciiBytesAvailable > 0);
-            this.asciiProcessor.charBuffer = cbuf;
+            this.asciiProcessor.charBuffer = buffer;
             this.asciiProcessor.charOffset = off;
             int asciiCount = this.asciiBytesAvailable;
             if (asciiCount > len) {
@@ -627,7 +629,7 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
               getLogger().trace("detected encoding '" + this.encoding + "'");
             }
             this.reader = new InputStreamReader(this.inputStream, this.encoding);
-            return this.reader.read(cbuf, off, len);
+            return this.reader.read(buffer, off, len);
           }
         }
         bytesRead = length - len;

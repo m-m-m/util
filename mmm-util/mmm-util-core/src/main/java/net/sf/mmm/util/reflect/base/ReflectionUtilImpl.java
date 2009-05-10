@@ -387,7 +387,7 @@ public class ReflectionUtilImpl implements ReflectionUtil {
    */
   public String toString(Type type) {
 
-    if (type instanceof Class) {
+    if (type instanceof Class<?>) {
       return ((Class<?>) type).getName();
     } else {
       return type.toString();

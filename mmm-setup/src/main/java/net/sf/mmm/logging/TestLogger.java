@@ -278,6 +278,7 @@ public class TestLogger extends MarkerIgnoringBase {
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null, obj, obj1));
   }
 
+  @SuppressWarnings("all")
   private static enum LogLevel {
 
     TRACE,
@@ -291,6 +292,7 @@ public class TestLogger extends MarkerIgnoringBase {
     ERROR
   }
 
+  @SuppressWarnings("all")
   public static class LogEvent {
 
     /**

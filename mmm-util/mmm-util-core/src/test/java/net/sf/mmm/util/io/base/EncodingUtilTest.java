@@ -27,8 +27,6 @@ import net.sf.mmm.util.file.base.DirectoryFilter;
 import net.sf.mmm.util.file.base.PlainFileFilter;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
 import net.sf.mmm.util.io.api.EncodingUtil;
-import net.sf.mmm.util.io.base.EncodingUtilImpl;
-import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
 /**
@@ -182,6 +180,12 @@ public class EncodingUtilTest {
   }
 
   @Test
+  public void testEmpty() throws Exception {
+
+    checkUtfReader(new EmptyProducer(), EncodingUtil.ENCODING_US_ASCII);
+  }
+
+  @Test
   public void testAscii() throws Exception {
 
     checkUtfReader(new AsciiProducer(), EncodingUtil.ENCODING_US_ASCII);
@@ -231,6 +235,13 @@ public class EncodingUtilTest {
       for (int i = 32; i < (4 * 4096); i++) {
         writer.write(i);
       }
+    }
+  }
+
+  protected static class EmptyProducer implements DataProducer {
+
+    public void produce(Writer writer) throws IOException {
+
     }
   }
 

@@ -1,9 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.io.base;
-
-import net.sf.mmm.util.io.api.ByteBuffer;
+package net.sf.mmm.util.io.api;
 
 /**
  * This is the interface for a byte[] buffer. It is similar to
@@ -14,45 +12,19 @@ import net.sf.mmm.util.io.api.ByteBuffer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ByteArrayBuffer extends ByteBuffer {
+public interface ByteArrayBuffer extends ByteBuffer, ByteArray {
 
   /**
-   * This method gets the underlying byte-array of this buffer. You are only
-   * permitted to read the content from {@link #getCurrentIndex() currentIndex}
-   * to {@link #getMaximumIndex() maximumIndex}. Only the creator of this object
-   * may modify this array.
+   * {@inheritDoc}
    * 
-   * @see #getCurrentIndex()
-   * @see #getMaximumIndex()
-   * 
-   * @return the buffer
-   */
-  byte[] getBytes();
-
-  /**
-   * This method gets the current index in the {@link #getBytes() buffer}. It
-   * will be in the range from <code>0</code> to
-   * <code>{@link #getMaximumIndex() maximumIndex} + 1</code>. If this value is
-   * less or equal to {@link #getMaximumIndex() maximumIndex}, then
+   * If this value is less or equal to {@link #getMaximumIndex() maximumIndex},
+   * then
    * <code>{@link #getBytes() buffer}[{@link #getCurrentIndex() currentIndex}]</code>
    * is the next available byte. If it is greater than
    * {@link #getMaximumIndex() maximumIndex}, the {@link #getBytes() buffer} is
    * consumed ({@link #hasNext() has} no next byte).
-   * 
-   * @return the currentIndex is the current buffer position.
    */
-  int getCurrentIndex();
-
-  /**
-   * This method gets the maximum index in the {@link #getBytes() buffer}. It
-   * will be in the range from <code>-1</code> to
-   * <code>{@link #getBytes()}.length - 1</code>.<br>
-   * A negative value (<code>-1</code>) indicates that the {@link #getBytes()
-   * buffer} does NOT contain data (payload).
-   * 
-   * @return the maximumIndex
-   */
-  int getMaximumIndex();
+  public int getCurrentIndex();
 
   /**
    * This method sets the {@link #getCurrentIndex() currentIndex}. This can be
