@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
 import net.sf.mmm.util.io.api.ByteProcessor;
+import net.sf.mmm.util.io.api.ComposedByteBuffer;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
+import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
@@ -31,7 +34,8 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuffer {
+public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuffer,
+    ComposedByteBuffer {
 
   /** The actual buffers. */
   private final ByteArrayBufferImpl[] buffers;
@@ -336,4 +340,87 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     }
     return false;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ByteArray getByteArray(int index) {
+
+    assert (index >= 0);
+    assert (index < getByteArrayCount());
+    if (index == 0) {
+      // TODO: use inner class as view instead of construction new objects?
+      return new ByteArrayImpl(this.currentBufferBytes, this.currentBufferIndex,
+          this.currentBufferMax);
+    } else {
+      int newIndex = this.buffersIndex + index;
+      if (newIndex > this.buffers.length) {
+        if (this.buffersIndex <= this.buffersEndIndex) {
+          newIndex = newIndex - this.buffers.length;
+        } else {
+          throw new NlsIllegalArgumentException(Integer.valueOf(index));
+        }
+      }
+      if (newIndex > this.buffersEndIndex) {
+        throw new NlsIllegalArgumentException(Integer.valueOf(index));
+      }
+      return this.buffers[newIndex];
+
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getByteArrayCount() {
+
+    if (this.buffersIndex <= this.buffersEndIndex) {
+      return this.buffersEndIndex - this.buffersIndex + 1;
+    } else {
+      return (this.buffers.length - this.buffersIndex) + this.buffersEndIndex;
+    }
+  }
+
+  private class CurrentByteArray implements ByteArray {
+
+    /**
+     * {@inheritDoc}
+     */
+    public byte[] getBytes() {
+
+      if (AbstractByteArrayBufferBuffer.this.currentBufferIndex <= AbstractByteArrayBufferBuffer.this.currentBufferMax) {
+        return AbstractByteArrayBufferBuffer.this.currentBufferBytes;
+      } else {
+        throw new NoSuchElementException();
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getBytesAvailable() {
+
+      return 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getCurrentIndex() {
+
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getMaximumIndex() {
+
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+  }
+
 }

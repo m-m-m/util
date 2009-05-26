@@ -9,6 +9,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.DetectorOutputStream;
+import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
 
 /**
  * This is the implementation of the {@link DetectorOutputStream}.
@@ -26,24 +27,16 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
    * 
    * @param inputStream is the raw {@link InputStream} to {@link #getStream()
    *        warp}.
-   */
-  public ProcessableDetectorInputStream(InputStream inputStream) {
-
-    super();
-    this.wrapperInputStream = new WrapperInputStream(inputStream);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param inputStream is the raw {@link InputStream} to {@link #getStream()
-   *        warp}.
    * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable
    *        metadata}.
+   * @param provider is the
+   *        {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this
+   *        instance.
    */
-  public ProcessableDetectorInputStream(InputStream inputStream, Map<String, Object> mutableMetadata) {
+  public ProcessableDetectorInputStream(InputStream inputStream,
+      Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider) {
 
-    super(mutableMetadata);
+    super(mutableMetadata, provider);
     this.wrapperInputStream = new WrapperInputStream(inputStream);
   }
 

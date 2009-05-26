@@ -4,8 +4,7 @@
 package net.sf.mmm.util.io.api.spi;
 
 import net.sf.mmm.util.io.api.ByteArray;
-import net.sf.mmm.util.io.api.ByteArrayBuffer;
-import net.sf.mmm.util.io.api.ByteBuffer;
+import net.sf.mmm.util.io.api.ComposedByteBuffer;
 
 /**
  * This is the interface for a buffer of bytes from a stream. It allows to
@@ -13,7 +12,7 @@ import net.sf.mmm.util.io.api.ByteBuffer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DetectorStreamBuffer extends ByteBuffer {
+public interface DetectorStreamBuffer extends ComposedByteBuffer {
 
   /**
    * This method removes the number of bytes given by <code>byteCount</code>
@@ -52,37 +51,12 @@ public interface DetectorStreamBuffer extends ByteBuffer {
    */
   void insert(ByteArray data);
 
-  /* -- The following is to be reviewed/discussed/redesigned -- */
-
   /**
-   * This method gets a buffer with
-   * 
-   * @return
-   */
-  ByteArrayBuffer getCurrentBuffer();
-
-  /**
-   * 
-   * TODO: javadoc
-   * 
-   * @return <code>true</code> if a next {@link #getCurrentBuffer() buffer} is
-   *         available and <code>false</code> if the last lookahead buffer has
-   *         been consumed.
-   */
-  boolean stepNext();
-
-  /**
-   * 
-   */
-  void stepEnd();
-
-  /**
-   * This method gets the absolute position of the current pointer in bytes. The
-   * value represents the number of bytes that have been consumed and/or
-   * inserted. It excludes the number of bytes that have been removed.
-   * 
-   * TODO: change specification to position in the processed stream? Yep. Better
-   * usability!
+   * This method gets the absolute position of the current pointer in the
+   * logical stream (the data provided by this interface that origins from the
+   * previous member of the chain). The value represents the number of bytes
+   * that have been consumed. It excludes the number of bytes that have been
+   * {@link #insert(ByteArray) inserted}.
    * 
    * @return the current position in the stream.
    */

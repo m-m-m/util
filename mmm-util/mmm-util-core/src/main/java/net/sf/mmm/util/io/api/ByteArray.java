@@ -46,4 +46,13 @@ public interface ByteArray {
    */
   int getMaximumIndex();
 
+  /**
+   * This method gets the number of bytes available in this array. In other
+   * words this method returns
+   * <code>{@link #getMaximumIndex()} - {@link #getCurrentIndex()} + 1</code>.
+   * 
+   * @return the bytes left in this array.
+   */
+  int getBytesAvailable();
+
 }

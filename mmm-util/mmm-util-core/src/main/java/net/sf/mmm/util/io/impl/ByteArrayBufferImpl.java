@@ -6,6 +6,7 @@ package net.sf.mmm.util.io.impl;
 import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
+import net.sf.mmm.util.io.base.ByteArrayImpl;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler.
@@ -20,16 +21,7 @@ import net.sf.mmm.util.io.api.ByteArrayBuffer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ByteArrayBufferImpl implements ByteArrayBuffer {
-
-  /** @see #getBytes() */
-  private final byte[] buffer;
-
-  /** @see #getCurrentIndex() */
-  private int currentIndex;
-
-  /** @see #getMaximumIndex() */
-  private int maximumIndex;
+public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffer {
 
   /**
    * The constructor.
@@ -39,7 +31,7 @@ public class ByteArrayBufferImpl implements ByteArrayBuffer {
    */
   public ByteArrayBufferImpl(int capacity) {
 
-    this(new byte[capacity], 0, -1);
+    super(capacity);
   }
 
   /**
@@ -49,7 +41,7 @@ public class ByteArrayBufferImpl implements ByteArrayBuffer {
    */
   public ByteArrayBufferImpl(byte[] buffer) {
 
-    this(buffer, 0, buffer.length - 1);
+    super(buffer);
   }
 
   /**
@@ -61,132 +53,61 @@ public class ByteArrayBufferImpl implements ByteArrayBuffer {
    */
   public ByteArrayBufferImpl(byte[] buffer, int currentIndex, int maximumIndex) {
 
-    super();
-    this.buffer = buffer;
-    this.currentIndex = currentIndex;
-    this.maximumIndex = maximumIndex;
-  }
-
-  /**
-   * This method gets the underlying byte-array of this buffer. You are only
-   * permitted to read the content from {@link #getCurrentIndex() currentIndex}
-   * to {@link #getMaximumIndex() maximumIndex}. Only the creator of this object
-   * should modify this array.
-   * 
-   * @see #getCurrentIndex()
-   * @see #getMaximumIndex()
-   * 
-   * @return the buffer
-   */
-  public byte[] getBytes() {
-
-    return this.buffer;
+    super(buffer, currentIndex, maximumIndex);
   }
 
   /**
    * {@inheritDoc}
    */
-  public int getCurrentIndex() {
-
-    return this.currentIndex;
-  }
-
-  /**
-   * This method sets the {@link #getCurrentIndex() currentIndex}. This can be
-   * done if data from the {@link #getBytes() buffer} has been consumed
-   * externally.<br>
-   * <b>ATTENTION:</b><br>
-   * Be very careful and only use this method if you know what you are doing!
-   * 
-   * @param currentIndex is the {@link #getCurrentIndex() currentIndex} to set.
-   *        It has to be in the range from <code>0</code> to
-   *        <code>{@link #getMaximumIndex() maximumIndex} + 1</code>. A value of
-   *        <code>{@link #getMaximumIndex() maximumIndex} + 1</code> indicates that the
-   *        buffer is consumed.
-   */
+  @Override
   public void setCurrentIndex(int currentIndex) {
 
-    assert (currentIndex >= 0);
-    assert (currentIndex <= (this.maximumIndex + 1));
-    this.currentIndex = currentIndex;
+    super.setCurrentIndex(currentIndex);
   }
 
   /**
    * {@inheritDoc}
    */
-  public int getMaximumIndex() {
-
-    return this.maximumIndex;
-  }
-
-  /**
-   * This method sets the {@link #getMaximumIndex() maximumIndex}. This may be
-   * useful if the buffer should be reused.<br>
-   * <b>ATTENTION:</b><br>
-   * Be very careful and only use this method if you know what you are doing!
-   * 
-   * @param maximumIndex is the {@link #getMaximumIndex() maximumIndex} to set.
-   *        It has to be in the range from <code>0</code> (
-   *        <code>{@link #getCurrentIndex() currentIndex} - 1</code>) to
-   *        <code>{@link #getBytes()}.length</code>.
-   */
+  @Override
   public void setMaximumIndex(int maximumIndex) {
 
-    this.maximumIndex = maximumIndex;
+    super.setMaximumIndex(maximumIndex);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public byte next() throws NoSuchElementException {
 
-    if (this.currentIndex > this.maximumIndex) {
-      throw new NoSuchElementException();
-    }
-    return this.buffer[this.currentIndex++];
+    return super.next();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public byte peek() throws NoSuchElementException {
 
-    if (this.currentIndex > this.maximumIndex) {
-      throw new NoSuchElementException();
-    }
-    return this.buffer[this.currentIndex];
+    return super.peek();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean hasNext() {
 
-    return (this.currentIndex <= this.maximumIndex);
+    return super.hasNext();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public long skip(long byteCount) {
 
-    int bytesLeft = this.maximumIndex - this.currentIndex + 1;
-    int skip;
-    if (bytesLeft > byteCount) {
-      skip = (int) byteCount;
-    } else {
-      skip = bytesLeft;
-    }
-    this.currentIndex = this.currentIndex + skip;
-    return skip;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getBytesAvailable() {
-
-    return this.maximumIndex - this.currentIndex + 1;
+    return super.skip(byteCount);
   }
 
 }

@@ -3,19 +3,29 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api.spi;
 
+import java.util.Map;
+
 import net.sf.mmm.util.io.api.DetectorStream;
 
 /**
  * This is the interface for a processor that can be plugged into a
  * {@link DetectorStream}. Such {@link DetectorStream} holds a chain of
  * {@link DetectorStreamProcessor}s and routes the stream data through this
- * chain. At the end of this chain is the consumer of the data (the native
- * {@link java.io.OutputStream} or caller that wants to read from the wrapped
- * {@link java.io.InputStream}).<br>
+ * chain.<br>
+ * At the head of this chain is the producer of the data (the native
+ * {@link java.io.InputStream} or the caller that wants to write to the
+ * {@link net.sf.mmm.util.io.api.DetectorStreamProvider#wrapOutputStream(java.io.OutputStream)
+ * wrapped} {@link java.io.OutputStream}). The end of the chain is the consumer
+ * of the data (the native {@link java.io.OutputStream} or caller that wants to
+ * read from the
+ * {@link net.sf.mmm.util.io.api.DetectorStreamProvider#wrapInputStream(java.io.InputStream)
+ * wrapped} {@link java.io.InputStream}).<br>
  * An implementation of this interface can detect information (typically
  * metadata) from the streamed data. Additionally it is possible to manipulate
  * the streamed data by {@link DetectorStreamBuffer#remove(long) removing} data
- * from the stream and inserting new data into the stream.<br>
+ * from the stream and/or
+ * {@link DetectorStreamBuffer#insert(net.sf.mmm.util.io.api.ByteArray)
+ * inserting} new data into the stream.<br>
  * 
  * @see DetectorStream
  * @see DetectorStreamProcessorFactory
@@ -38,7 +48,8 @@ public interface DetectorStreamProcessor {
    * 
    * @param buffer allows you to read parts of the streamed data as well as to
    *        manipulate the data.
+   * @param metadata is the {@link Map} with the metadata.
    */
-  void process(DetectorStreamBuffer buffer);
+  void process(DetectorStreamBuffer buffer, Map<String, Object> metadata);
 
 }

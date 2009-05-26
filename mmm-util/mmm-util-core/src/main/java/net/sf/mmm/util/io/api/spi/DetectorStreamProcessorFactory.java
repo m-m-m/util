@@ -29,9 +29,9 @@ public interface DetectorStreamProcessorFactory {
    * '&lt;' is reached (@see {@link DetectorStreamBuffer#peek()}), he can check
    * if 4 more bytes are available. In that case he can consume all these bytes
    * and make its decision. Otherwise he returns from
-   * {@link DetectorStreamProcessor#process(DetectorStreamBuffer)} and waits for
-   * the next call that will guarantee the buffer is refilled with at least the
-   * specified lookahead.<br>
+   * {@link DetectorStreamProcessor#process(DetectorStreamBuffer, java.util.Map)}
+   * and waits for the next call that will guarantee the buffer is refilled with
+   * at least the specified lookahead.<br>
    * 
    * @return the required lookahead in bytes.
    */
