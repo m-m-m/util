@@ -9,7 +9,7 @@ import java.util.Map;
 import net.sf.mmm.framework.api.IocContainer;
 
 /**
- * This is just an ugly static pool used to simplify testing. It will cause
+ * This is just an ugly static pool used to simplify testing. It might cause
  * memory holes and should never be used in productive code.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -28,7 +28,8 @@ public class SpringContainerPool {
   }
 
   /**
-   * This method gets the container for the given <code>configPath</code>.
+   * This method gets the {@link IocContainer} for the given
+   * <code>configPath</code>.
    * 
    * @param configPath is the location to the XML-configuration in the
    *        class-path.
@@ -42,6 +43,22 @@ public class SpringContainerPool {
       containerMap.put(configPath, container);
     }
     return container;
+  }
+
+  /**
+   * This method disposes the {@link IocContainer} for the given
+   * <code>configPath</code> (if it exists because it was created via
+   * {@link #getContainer(String)}).
+   * 
+   * @param configPath is the location to the XML-configuration in the
+   *        class-path.
+   */
+  public static void disposeContainer(String configPath) {
+
+    SpringContainer container = containerMap.get(configPath);
+    if (container != null) {
+      container.dispose();
+    }
   }
 
 }

@@ -5,6 +5,7 @@ package net.sf.mmm.framework.base;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import net.sf.mmm.framework.api.IocContainer;
@@ -18,7 +19,7 @@ import net.sf.mmm.framework.api.IocContainerException;
 public class SpringContainer implements IocContainer {
 
   /** The {@link ApplicationContext} to delegate to. */
-  private final ApplicationContext applicationContext;
+  private final ConfigurableApplicationContext applicationContext;
 
   /**
    * The constructor.
@@ -28,8 +29,7 @@ public class SpringContainer implements IocContainer {
    */
   public SpringContainer(String configPath) {
 
-    super();
-    this.applicationContext = new ClassPathXmlApplicationContext(configPath);
+    this(new ClassPathXmlApplicationContext(configPath));
   }
 
   /**
@@ -37,7 +37,7 @@ public class SpringContainer implements IocContainer {
    * 
    * @param applicationContext is the {@link ApplicationContext} to adapt.
    */
-  public SpringContainer(ApplicationContext applicationContext) {
+  public SpringContainer(ConfigurableApplicationContext applicationContext) {
 
     super();
     this.applicationContext = applicationContext;
@@ -72,4 +72,12 @@ public class SpringContainer implements IocContainer {
     return component;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void dispose() {
+
+    this.applicationContext.stop();
+    this.applicationContext.close();
+  }
 }

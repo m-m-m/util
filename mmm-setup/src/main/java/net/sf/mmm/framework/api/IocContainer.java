@@ -42,4 +42,10 @@ public interface IocContainer {
    */
   <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass, String componentId);
 
+  /**
+   * This method disposes the container (performs a shutdown and destroys all
+   * components).
+   */
+  void dispose();
+
 }
