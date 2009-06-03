@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This configuration file was written by the eclipse-cs plugin configuration editor
+  This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: mmm
-    Description: none
+  Checkstyle-Configuration: mmm
+  Description: none
 -->
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 <module name="Checker">
-    <property name="severity" value="warning"/>
-    <module name="TreeWalker">
-        <property name="charset" value="UTF-8"/>
-        <module name="JavadocMethod"/>
-        <module name="JavadocType"/>
-        <module name="JavadocVariable"/>
-        <module name="JavadocStyle">
-            <property name="tokens" value="INTERFACE_DEF,CLASS_DEF,METHOD_DEF,CTOR_DEF"/>
-        </module>
-        <module name="ConstantName"/>
-        <module name="LocalFinalVariableName"/>
-        <module name="LocalVariableName"/>
-        <module name="MemberName"/>
-        <module name="MethodName"/>
-        <module name="PackageName"/>
-        <module name="ParameterName"/>
-        <module name="StaticVariableName"/>
-        <module name="TypeName"/>
-        <module name="AvoidStarImport"/>
-        <module name="IllegalImport"/>
-        <module name="RedundantImport"/>
-        <module name="UnusedImports"/>
-        <module name="FileLength"/>
-        <module name="LineLength">
-            <property name="ignorePattern" value="^.*@see.*$"/>
-            <property name="max" value="160"/>
-        </module>
-        <module name="MethodLength"/>
-        <module name="ParameterNumber"/>
-        <module name="EmptyForIteratorPad"/>
-        <module name="NoWhitespaceAfter">
-            <property name="tokens" value="BNOT,DEC,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
-        </module>
-        <module name="NoWhitespaceBefore"/>
-        <module name="OperatorWrap"/>
-        <module name="ParenPad"/>
-        <module name="TypecastParenPad"/>
-        <module name="TabCharacter"/>
-        <module name="WhitespaceAfter"/>
-        <module name="ModifierOrder"/>
-        <module name="RedundantModifier"/>
-        <module name="AvoidNestedBlocks"/>
-        <module name="LeftCurly"/>
-        <module name="NeedBraces"/>
-        <module name="RightCurly"/>
-        <module name="AvoidInlineConditionals"/>
-        <module name="DoubleCheckedLocking">
-            <property name="severity" value="info"/>
-        </module>
-        <module name="EmptyStatement"/>
-        <module name="EqualsHashCode">
-            <property name="severity" value="info"/>
-        </module>
-        <module name="HiddenField">
-            <property name="ignoreConstructorParameter" value="true"/>
-            <property name="ignoreSetter" value="true"/>
-        </module>
-        <module name="IllegalInstantiation"/>
-        <module name="InnerAssignment"/>
-        <module name="MagicNumber">
-            <property name="severity" value="info"/>
-            <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 6, 8, 10, 16, 23, 24, 31, 59, 60, 64, 100, 128, 256, 512, 1000, 1024"/>
-        </module>
-        <module name="MissingSwitchDefault"/>
-        <module name="SimplifyBooleanExpression"/>
-        <module name="SimplifyBooleanReturn"/>
-        <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
-        <module name="VisibilityModifier"/>
-        <module name="ArrayTypeStyle"/>
-        <module name="UpperEll"/>
-        <module name="ConstantName"/>
-        <module name="ParameterName"/>
-        <module name="RegexpHeader">
-            <property name="header" value="/\*[ ]\$[I]d:[ ]..*\$\n \* Copyright \(c\) The m-m-m Team, Licensed under the Apache License, Version 2\.0\n \* http://www\.apache\.org/licenses/LICENSE-2\.0 \*/"/>
-        </module>
-        <module name="WhitespaceAround">
-            <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND"/>
-        </module>
-        <module name="ExplicitInitialization"/>
-        <module name="PackageDeclaration"/>
-        <module name="ParameterAssignment"/>
-        <module name="RequireThis">
-            <property name="severity" value="info"/>
-            <property name="checkMethods" value="false"/>
-        </module>
-        <module name="SuperClone"/>
-        <module name="SuperFinalize"/>
-        <module name="TodoComment">
-            <property name="severity" value="ignore"/>
-        </module>
-        <module name="EmptyBlock">
-            <property name="option" value="text"/>
-        </module>
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="System\.(out|err)\.print"/>
-            <property name="message" value="Use logger"/>
-        </module>
-        <module name="GenericIllegalRegexp">
-            <property name="severity" value="info"/>
-            <property name="format" value="System\.exit"/>
-            <property name="message" value="Only exit from main methods"/>
-        </module>
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="printStackTrace\(\)"/>
-            <property name="message" value="Use logger"/>
-        </module>
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="public class Abstract"/>
-            <property name="message" value="Abstract class not abstract"/>
-        </module>
+  <property name="charset" value="UTF-8"/>
+  <property name="severity" value="warning"/>
+  <module name="FileLength"/>
+  <module name="FileTabCharacter"/>
+  <module name="RegexpHeader">
+    <property name="header" value="/\*[ ]\$[I]d:[ ]..*\$\n \* Copyright \(c\) The m-m-m Team, Licensed under the Apache License, Version 2\.0\n \* http://www\.apache\.org/licenses/LICENSE-2\.0 \*/"/>
+  </module>
+  <module name="TreeWalker">
+    <module name="JavadocMethod"/>
+    <module name="JavadocType"/>
+    <module name="JavadocVariable"/>
+    <module name="JavadocStyle">
+      <property name="tokens" value="INTERFACE_DEF,CLASS_DEF,METHOD_DEF,CTOR_DEF"/>
     </module>
-    <module name="Translation"/>
-    <module name="NewlineAtEndOfFile"/>
+    <module name="ConstantName"/>
+    <module name="LocalFinalVariableName"/>
+    <module name="LocalVariableName"/>
+    <module name="MemberName"/>
+    <module name="MethodName"/>
+    <module name="PackageName"/>
+    <module name="ParameterName"/>
+    <module name="StaticVariableName"/>
+    <module name="TypeName"/>
+    <module name="AvoidStarImport"/>
+    <module name="IllegalImport"/>
+    <module name="RedundantImport"/>
+    <module name="UnusedImports"/>
+    <module name="LineLength">
+      <property name="ignorePattern" value="^.*@see.*$"/>
+      <property name="max" value="160"/>
+    </module>
+    <module name="MethodLength"/>
+    <module name="ParameterNumber"/>
+    <module name="EmptyForIteratorPad"/>
+    <module name="NoWhitespaceAfter">
+      <property name="tokens" value="BNOT,DEC,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
+    </module>
+    <module name="NoWhitespaceBefore"/>
+    <module name="OperatorWrap"/>
+    <module name="ParenPad"/>
+    <module name="TypecastParenPad"/>
+    <module name="WhitespaceAfter"/>
+    <module name="ModifierOrder"/>
+    <module name="RedundantModifier"/>
+    <module name="AvoidNestedBlocks"/>
+    <module name="LeftCurly"/>
+    <module name="NeedBraces"/>
+    <module name="RightCurly"/>
+    <module name="AvoidInlineConditionals"/>
+    <module name="DoubleCheckedLocking">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="EmptyStatement"/>
+    <module name="EqualsHashCode">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="HiddenField">
+      <property name="ignoreConstructorParameter" value="true"/>
+      <property name="ignoreSetter" value="true"/>
+    </module>
+    <module name="IllegalInstantiation"/>
+    <module name="InnerAssignment"/>
+    <module name="MagicNumber">
+      <property name="severity" value="info"/>
+      <property name="ignoreNumbers" value="-1, 0, 1, 2, 3, 4, 5, 6, 8, 10, 16, 23, 24, 31, 59, 60, 64, 100, 128, 256, 512, 1000, 1024"/>
+    </module>
+    <module name="MissingSwitchDefault"/>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="FinalClass"/>
+    <module name="HideUtilityClassConstructor"/>
+    <module name="VisibilityModifier"/>
+    <module name="ArrayTypeStyle"/>
+    <module name="UpperEll"/>
+    <module name="ConstantName"/>
+    <module name="ParameterName"/>
+    <module name="WhitespaceAround">
+      <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND"/>
+    </module>
+    <module name="ExplicitInitialization"/>
+    <module name="PackageDeclaration"/>
+    <module name="ParameterAssignment"/>
+    <module name="RequireThis">
+      <property name="severity" value="info"/>
+      <property name="checkMethods" value="false"/>
+    </module>
+    <module name="SuperClone"/>
+    <module name="SuperFinalize"/>
+    <module name="TodoComment">
+      <property name="severity" value="ignore"/>
+    </module>
+    <module name="EmptyBlock">
+      <property name="option" value="text"/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="format" value="System\.(out|err)\.print"/>
+      <property name="message" value="Use logger"/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="severity" value="info"/>
+      <property name="format" value="System\.exit"/>
+      <property name="message" value="Only exit from main methods"/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="format" value="printStackTrace\(\)"/>
+      <property name="message" value="Use logger"/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="format" value="public class Abstract"/>
+      <property name="message" value="Abstract class not abstract"/>
+    </module>
+  </module>
+  <module name="Translation"/>
+  <module name="NewlineAtEndOfFile"/>
 </module>
