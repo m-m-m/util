@@ -301,7 +301,11 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     Type type = getType();
     Class<?> upperBound = getRetrievalClass();
     if (upperBound == type) {
-      return upperBound.getName();
+      if (upperBound.isArray()) {
+        return upperBound.getComponentType().getName() + "[]";
+      } else {
+        return upperBound.getName();
+      }
     } else {
       return type.toString();
     }

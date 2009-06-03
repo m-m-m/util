@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
+import org.junit.AfterClass;
+
 import net.sf.mmm.framework.base.SpringContainerPool;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
@@ -14,14 +16,24 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 @SuppressWarnings("all")
 public class ReflectionUtilSpringTest extends ReflectionUtilTest {
 
+  private static final String SPRING_CONFIG = AnnotationUtilSpringTest.SPRING_CONFIG;
+
   /**
    * {@inheritDoc}
    */
   @Override
   public ReflectionUtil getReflectionUtil() {
 
-    return SpringContainerPool.getContainer("net/sf/mmm/util/reflect/beans-util-reflect.xml")
-        .getComponent(ReflectionUtil.class);
+    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(ReflectionUtil.class);
+  }
+
+  /**
+   * This method is invoked after all tests of this class have completed.
+   */
+  @AfterClass
+  public static void tearDown() {
+
+    SpringContainerPool.disposeContainer(SPRING_CONFIG);
   }
 
 }

@@ -6,6 +6,8 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -22,30 +24,17 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 public class ValueConverterToString extends AbstractSimpleValueConverter<Object, String> {
 
   /** @see #getIso8601Util() */
-  private final Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
   /** @see #getStringUtil() */
-  private final StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
    */
   public ValueConverterToString() {
 
-    this(Iso8601UtilImpl.getInstance(), StringUtilImpl.getInstance());
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param iso8601Util is the {@link Iso8601Util} to use.
-   * @param stringUtil is the {@link StringUtilImpl} to use.
-   */
-  public ValueConverterToString(Iso8601Util iso8601Util, StringUtil stringUtil) {
-
     super();
-    this.iso8601Util = iso8601Util;
-    this.stringUtil = stringUtil;
   }
 
   /**
@@ -59,13 +48,50 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
   }
 
   /**
-   * This method gets the {@link StringUtilImpl} to use.
+   * This method sets the {@link Iso8601Util} to use.
    * 
-   * @return the {@link StringUtilImpl} instance.
+   * @param iso8601Util is the {@link Iso8601Util} instance.
+   */
+  @Resource
+  public void setIso8601Util(Iso8601Util iso8601Util) {
+
+    this.iso8601Util = iso8601Util;
+  }
+
+  /**
+   * This method gets the {@link StringUtil} to use.
+   * 
+   * @return the {@link StringUtil} instance.
    */
   protected StringUtil getStringUtil() {
 
     return this.stringUtil;
+  }
+
+  /**
+   * This method sets the {@link StringUtil} to use.
+   * 
+   * @param stringUtil is the {@link StringUtil} instance.
+   */
+  @Resource
+  public void setStringUtil(StringUtil stringUtil) {
+
+    this.stringUtil = stringUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.iso8601Util == null) {
+      this.iso8601Util = Iso8601UtilImpl.getInstance();
+    }
+    if (this.stringUtil == null) {
+      this.stringUtil = StringUtilImpl.getInstance();
+    }
   }
 
   /**

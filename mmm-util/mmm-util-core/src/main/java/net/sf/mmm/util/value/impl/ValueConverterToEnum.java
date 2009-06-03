@@ -19,35 +19,47 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, Enum> {
 
   /** @see #getStringUtil() */
-  private final StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
    */
   public ValueConverterToEnum() {
 
-    this(StringUtilImpl.getInstance());
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param stringUtil is the {@link StringUtilImpl} to use.
-   */
-  public ValueConverterToEnum(StringUtil stringUtil) {
-
     super();
-    this.stringUtil = stringUtil;
   }
 
   /**
-   * This method gets the {@link StringUtilImpl} to use.
+   * This method gets the {@link StringUtil} to use.
    * 
-   * @return the {@link StringUtilImpl} instance.
+   * @return the {@link StringUtil} instance.
    */
   protected StringUtil getStringUtil() {
 
     return this.stringUtil;
+  }
+
+  /**
+   * This method sets the {@link StringUtil} to use.
+   * 
+   * @param stringUtil is the {@link StringUtil} instance.
+   */
+  public void setStringUtil(StringUtil stringUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.stringUtil = stringUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.stringUtil == null) {
+      this.stringUtil = StringUtilImpl.getInstance();
+    }
   }
 
   /**

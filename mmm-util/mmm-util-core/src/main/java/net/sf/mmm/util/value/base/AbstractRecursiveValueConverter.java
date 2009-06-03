@@ -45,9 +45,9 @@ public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends
   }
 
   /**
-   * This method sets (injects) the
-   * {@link #getComposedValueConverter() composedValueConverter}. It has to be
-   * called before {@link #initialize()} is invoked.
+   * This method sets (injects) the {@link #getComposedValueConverter()
+   * composedValueConverter}. It has to be called before {@link #initialize()}
+   * is invoked.
    * 
    * @param composedValueConverter is the {@link ComposedValueConverter} to set.
    */

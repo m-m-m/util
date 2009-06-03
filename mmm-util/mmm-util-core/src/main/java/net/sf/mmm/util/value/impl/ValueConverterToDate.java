@@ -6,6 +6,8 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
@@ -20,7 +22,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, Date> {
 
   /** @see #getIso8601Util() */
-  private final Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
   /**
    * The constructor.
@@ -28,18 +30,6 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
   public ValueConverterToDate() {
 
     super();
-    this.iso8601Util = Iso8601UtilImpl.getInstance();
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param iso8601Util is the {@link Iso8601Util} to use.
-   */
-  public ValueConverterToDate(Iso8601Util iso8601Util) {
-
-    super();
-    this.iso8601Util = iso8601Util;
   }
 
   /**
@@ -50,6 +40,30 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
   protected Iso8601Util getIso8601Util() {
 
     return this.iso8601Util;
+  }
+
+  /**
+   * This method sets the {@link Iso8601Util} to use.
+   * 
+   * @param iso8601Util is the {@link Iso8601Util} to use.
+   */
+  @Resource
+  public void setIso8601Util(Iso8601Util iso8601Util) {
+
+    getInitializationState().requireNotInitilized();
+    this.iso8601Util = iso8601Util;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.iso8601Util == null) {
+      this.iso8601Util = Iso8601UtilImpl.getInstance();
+    }
   }
 
   /**

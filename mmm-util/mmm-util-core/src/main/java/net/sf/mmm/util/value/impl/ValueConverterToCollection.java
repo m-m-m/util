@@ -101,9 +101,10 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
     CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil()
         .getCollectionFactoryManager();
     ComposedValueConverter parentConverter = getComposedValueConverter();
-    Class<?> sourceClass = value.getClass();
-    if (sourceClass.isArray()) {
-      result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass()).create();
+    Class<?> valueClass = value.getClass();
+    if (valueClass.isArray()) {
+      result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass())
+          .create();
       int len = Array.getLength(value);
       for (int i = 0; i < len; i++) {
         Object element = Array.get(value, i);
@@ -114,8 +115,9 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
         }
         result.add(resultElement);
       }
-    } else if (CharSequence.class.isAssignableFrom(sourceClass)) {
-      result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass()).create();
+    } else if (value instanceof CharSequence) {
+      result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass())
+          .create();
       StringTokenizer tokenizer = new StringTokenizer(value.toString(), ',');
       for (String element : tokenizer) {
         Object resultElement = parentConverter.convert(element, valueSource, componentType);
@@ -125,8 +127,9 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
         }
         result.add(resultElement);
       }
-    } else if (Collection.class.isInstance(value)) {
-      result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass()).create();
+    } else if (value instanceof Collection) {
+      result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass())
+          .create();
       Collection collection = (Collection) value;
       for (Object element : collection) {
         Object resultElement = parentConverter.convert(element, valueSource, componentType);

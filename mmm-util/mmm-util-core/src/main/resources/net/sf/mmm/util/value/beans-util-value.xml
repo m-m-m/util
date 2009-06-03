@@ -10,6 +10,19 @@
   <import resource="classpath:net/sf/mmm/util/reflect/beans-util-reflect.xml" />
 
   <bean id="net.sf.mmm.util.value.api.StringValueConverter" class="net.sf.mmm.util.value.base.StringValueConverterImpl"/>
-  <bean id="net.sf.mmm.util.value.api.ComposedValueConverter" class="net.sf.mmm.util.value.impl.DefaultComposedValueConverter"/>
+  <bean id="net.sf.mmm.util.value.api.ComposedValueConverter" class="net.sf.mmm.util.value.impl.ComposedValueConverterImpl">
+    <property name="converters">
+      <list>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToDate"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToCalendar"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToNumber"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToString"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToEnum"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToCollection"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArray"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToCompatiblePojo"/>
+      </list>
+    </property>
+  </bean>
   
 </beans>

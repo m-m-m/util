@@ -7,9 +7,13 @@ import java.lang.reflect.Type;
 
 /**
  * This is the interface for generic conversion of values from a specific
- * source-type (<code>&lt;SOURCE&gt;</code>) to a given target-type (<code>&lt;TARGET&gt;</code>).<br>
+ * source-type (<code>&lt;SOURCE&gt;</code>) to a given target-type (
+ * <code>&lt;TARGET&gt;</code>).<br>
  * <b>ATTENTION:</b><br>
  * An implementation of this interface should be stateless and thread-safe.
+ * 
+ * @see ComposedValueConverter
+ * @see StringValueConverter
  * 
  * @param <SOURCE> is the generic type of the values to convert.
  * 
@@ -54,11 +58,10 @@ public interface GenericValueConverter<SOURCE> {
    *        to. It is the raw-type of the given <code>targetType</code>.
    * @param targetType is the type to convert the <code>value</code> to. It is
    *        potentially generic and therefore contains more detailed information
-   *        than <code>targetClass</code>. E.g. the <code>targetClass</code>
-   *        may be <code>java.util.List</code> while this
-   *        <code>targetType</code> could be
-   *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if
-   *        the <code>value</code> is a string like
+   *        than <code>targetClass</code>. E.g. the <code>targetClass</code> may
+   *        be <code>java.util.List</code> while this <code>targetType</code>
+   *        could be <code>java.util.List&lt;Long&gt;</code>. This could help
+   *        e.g. if the <code>value</code> is a string like
    *        <code>"2, 47, 4252525"</code>. The caller may supply the
    *        <code>targetClass</code> again here.
    * @return the <code>value</code> converted to <code>type</code>.
@@ -88,8 +91,8 @@ public interface GenericValueConverter<SOURCE> {
    *        <code>null</code>. It may also be <code>null</code>.
    * @return the <code>value</code> converted to <code>type</code> or the
    *         <code>defaultValue</code> if <code>value</code> was
-   *         <code>null</code>. It will only return <code>null</code> if
-   *         both <code>value</code> and <code>defaultValue</code> are
+   *         <code>null</code>. It will only return <code>null</code> if both
+   *         <code>value</code> and <code>defaultValue</code> are
    *         <code>null</code>.
    * @throws WrongValueTypeException if the given <code>value</code> is NOT
    *         <code>null</code> but can NOT be converted to the given
@@ -113,19 +116,18 @@ public interface GenericValueConverter<SOURCE> {
    *        to. It is the raw-type of the given <code>targetType</code>.
    * @param targetType is the type to convert the <code>value</code> to. It is
    *        potentially generic and therefore contains more detailed information
-   *        than <code>targetClass</code>. E.g. the <code>targetClass</code>
-   *        may be <code>java.util.List</code> while this
-   *        <code>targetType</code> could be
-   *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if
-   *        the <code>value</code> is a string like
+   *        than <code>targetClass</code>. E.g. the <code>targetClass</code> may
+   *        be <code>java.util.List</code> while this <code>targetType</code>
+   *        could be <code>java.util.List&lt;Long&gt;</code>. This could help
+   *        e.g. if the <code>value</code> is a string like
    *        <code>"2, 47, 4252525"</code>. The caller may supply the
    *        <code>targetClass</code> again here.
    * @param defaultValue is returned if the given <code>value</code> is
    *        <code>null</code>. It may also be <code>null</code>.
    * @return the <code>value</code> converted to <code>type</code> or the
    *         <code>defaultValue</code> if <code>value</code> was
-   *         <code>null</code>. It will only return <code>null</code> if
-   *         both <code>value</code> and <code>defaultValue</code> are
+   *         <code>null</code>. It will only return <code>null</code> if both
+   *         <code>value</code> and <code>defaultValue</code> are
    *         <code>null</code>.
    * @throws WrongValueTypeException if the given <code>value</code> is NOT
    *         <code>null</code> but can NOT be converted to the given
@@ -177,16 +179,14 @@ public interface GenericValueConverter<SOURCE> {
    * @param maximum is the maximum number allowed. Use MAX_VALUE (e.g.
    *        {@link Long#MAX_VALUE}) if unbound.
    * @param defaultValue is the default returned if <code>value</code> is
-   *        <code>null</code>. It may be <code>null</code>. Else it must
-   *        be in the given range from <code>minimum</code> to
-   *        <code>maximum</code>.
+   *        <code>null</code>. It may be <code>null</code>. Else it must be in
+   *        the given range from <code>minimum</code> to <code>maximum</code>.
    * @return the given <code>value</code> converted to
-   *         <code>&lt;TARGET&gt;</code> in the range from
-   *         <code>minimum</code> to <code>maximum</code> or the
-   *         <code>defaultValue</code> if <code>value</code> is
-   *         <code>null</code>. Will only be <code>null</code> if both
-   *         <code>value</code> and <code>defaultValue</code> are
-   *         <code>null</code>.
+   *         <code>&lt;TARGET&gt;</code> in the range from <code>minimum</code>
+   *         to <code>maximum</code> or the <code>defaultValue</code> if
+   *         <code>value</code> is <code>null</code>. Will only be
+   *         <code>null</code> if both <code>value</code> and
+   *         <code>defaultValue</code> are <code>null</code>.
    * @throws WrongValueTypeException if the value is NO number.
    * @throws ValueOutOfRangeException if the value is NOT in the given range
    *         from <code>minimum</code> to <code>maximum</code>.

@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect.base;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -16,6 +17,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -438,6 +440,23 @@ public class ReflectionUtilImpl implements ReflectionUtil {
       }
     }
     return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isMarkerInterface(Class<?> interfaceClass) {
+
+    if (Cloneable.class == interfaceClass) {
+      return true;
+    }
+    if (Serializable.class == interfaceClass) {
+      return true;
+    }
+    if (EventListener.class == interfaceClass) {
+      return true;
+    }
+    return false;
   }
 
   /**

@@ -4,11 +4,14 @@
 package net.sf.mmm.util.value.impl;
 
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
@@ -26,6 +29,12 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /** @see #addConverter(ValueConverter) */
   private final TargetClass2ConverterMap targetClass2converterMap;
 
+  /** @see #addConverter(ValueConverter) */
+  private final TargetClass2ConverterMap targetArrayClass2converterMap;
+
+  /** @see #setConverters(List) */
+  private List<ValueConverter<?, ?>> converters;
+
   /**
    * The constructor.
    */
@@ -33,6 +42,37 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     super();
     this.targetClass2converterMap = new TargetClass2ConverterMap();
+    this.targetArrayClass2converterMap = new TargetClass2ConverterMap();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.converters == null) {
+      throw new ResourceMissingException("converters");
+    }
+    for (ValueConverter<?, ?> converter : this.converters) {
+      addConverterInternal(converter);
+    }
+  }
+
+  /**
+   * This method registers the given <code>converter</code> to this composed
+   * converter.
+   * 
+   * @param converter is the converter to add.
+   */
+  public void addConverter(ValueConverter<?, ?> converter) {
+
+    getInitializationState().requireNotInitilized();
+    if (this.converters == null) {
+      this.converters = new ArrayList<ValueConverter<?, ?>>();
+    }
+    this.converters.add(converter);
   }
 
   /**
@@ -46,16 +86,39 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    *         <code>null</code> if no converter has been replaced.
    */
   @SuppressWarnings("unchecked")
-  public ValueConverter<?, ?> addConverter(ValueConverter<?, ?> converter) {
+  private ValueConverter<?, ?> addConverterInternal(ValueConverter<?, ?> converter) {
 
     getInitializationState().requireNotInitilized();
     Class<?> targetType = converter.getTargetType();
-    ComposedTargetTypeConverter targetConverter = this.targetClass2converterMap.get(targetType);
+    TargetClass2ConverterMap map;
+    if (targetType.isArray()) {
+      map = this.targetArrayClass2converterMap;
+      targetType = targetType.getComponentType();
+    } else {
+      map = this.targetClass2converterMap;
+    }
+    ComposedTargetTypeConverter targetConverter = map.get(targetType);
     if ((targetConverter == null) || !targetType.equals(targetConverter.getTargetType())) {
+      // if targetConverter is NOT null here, then a ValueConverter for a more
+      // specific (e.g. String or Integer) type than targetType (e.g. Object or
+      // Number) is currently registered here and will therefore be replaced by
+      // the new more general ValueConverter
       targetConverter = new ComposedTargetTypeConverter(targetType);
-      this.targetClass2converterMap.put(targetType, targetConverter);
+      map.put(targetType, targetConverter);
     }
     return targetConverter.addConverter(converter);
+  }
+
+  /**
+   * This method allows to {@link #addConverter(ValueConverter) add} a
+   * {@link List} of {@link ValueConverter}s.
+   * 
+   * @param converterList is the list of converters to register.
+   */
+  public void setConverters(List<ValueConverter<?, ?>> converterList) {
+
+    getInitializationState().requireNotInitilized();
+    this.converters = converterList;
   }
 
   /**
@@ -67,15 +130,109 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       return null;
     }
     if (getLogger().isTraceEnabled()) {
+      Class<?> valueClass = value.getClass();
+      String valueClassName;
+      if (valueClass.isArray()) {
+        valueClassName = valueClass.getComponentType().getName() + "[]";
+      } else {
+        valueClassName = value.getClass().getName();
+      }
       getLogger().trace(
-          "starting conversion of '" + value + "' from '" + value.getClass().getName() + "' to '"
-              + targetType + "'");
+          "starting conversion of '" + value + "' from '" + valueClassName + "' to '" + targetType
+              + "'");
     }
     Class<? extends Object> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
       return value;
     }
-    return convertRecursive(value, valueSource, targetType, targetClass, null);
+    TargetClass2ConverterMap converterMap;
+    if (targetClass.isArray()) {
+      converterMap = this.targetArrayClass2converterMap;
+      targetClass = targetClass.getComponentType();
+    } else {
+      converterMap = this.targetClass2converterMap;
+      if (targetClass.isPrimitive()) {
+        targetClass = getReflectionUtil().getNonPrimitiveType(targetClass);
+      }
+    }
+    return convertRecursive(value, valueSource, targetType, targetClass, null, converterMap);
+  }
+
+  /**
+   * This method determines if the given <code>converter</code> is applicable
+   * for the given <code>targetType</code>.
+   * 
+   * @see ValueConverter#getTargetType()
+   * 
+   * @param converter is the {@link ValueConverter} to check.
+   * @param targetType is the {@link GenericType} to match with
+   *        {@link ValueConverter#getTargetType()}.
+   * @return <code>true</code> if the given <code>converter</code> is
+   *         applicable, <code>false</code> otherwise.
+   */
+  protected boolean isApplicable(ValueConverter<?, ?> converter, GenericType<?> targetType) {
+
+    Class<?> expectedTargetClass = targetType.getRetrievalClass();
+    if (expectedTargetClass.isArray()) {
+      expectedTargetClass = expectedTargetClass.getComponentType();
+    }
+    return isApplicable(converter.getTargetType(), expectedTargetClass);
+  }
+
+  /**
+   * This method determines if the given <code>converterTargetClass</code> is
+   * applicable for the <code>expectedTargetClass</code>.
+   * 
+   * @param converterTargetClass is the {@link ValueConverter#getTargetType()
+   *        target-class} of the {@link ValueConverter} to check.
+   * @param expectedTargetClass is the target-class to convert to.
+   * @return <code>true</code> if the conversion is applicable.
+   */
+  protected boolean isApplicable(Class<?> converterTargetClass, Class<?> expectedTargetClass) {
+
+    if (converterTargetClass.isAssignableFrom(expectedTargetClass)) {
+      return true;
+    } else if (expectedTargetClass.isPrimitive()) {
+      Class<?> expectedNonPrimitiveClass = getReflectionUtil().getNonPrimitiveType(
+          expectedTargetClass);
+      return converterTargetClass.isAssignableFrom(expectedNonPrimitiveClass);
+      // } else if ((converterTargetClass.isArray()) &&
+      // (expectedTargetClass.isArray())) {
+      // return isApplicable(converterTargetClass.getComponentType(),
+      // expectedTargetClass
+      // .getComponentType());
+    }
+    return false;
+  }
+
+  /**
+   * This method determines if the given <code>type</code> is accepted as
+   * significant type for registration and lookup of {@link ValueConverter}s.
+   * E.g. interfaces such as {@link Cloneable} or {@link java.io.Serializable}
+   * are not more significant than {@link Object} in order to choose the
+   * appropriate {@link ValueConverter} and should therefore be skipped when the
+   * {@link Class}-hierarchy is recursively traversed.<br>
+   * <b>ATTENTION:</b><br>
+   * If this method returns <code>false</code> the behaviour differs between
+   * {@link Class#isInterface() interfaces} and regular classes. For an
+   * interface the entire traversal of super-interfaces is skipped, while for a
+   * regular class, just that class is skipped, but
+   * {@link Class#getSuperclass() super-classes} are recursively traversed.
+   * 
+   * @param type is the {@link Class} reflecting the type to check.
+   * @return <code>true</code> if the given <code>type</code> is acceptable,
+   *         <code>false</code> if the given <code>type</code> should be
+   *         ignored.
+   */
+  protected boolean isAccepted(Class<?> type) {
+
+    if (getReflectionUtil().isMarkerInterface(type)) {
+      return false;
+    }
+    if (type == Comparable.class) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -94,6 +251,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * @param previousConverter is the converter that has been tried last time
    *        without success. It is used to avoid trying the same converter
    *        again. Will initially be <code>null</code>.
+   * @param converterMap is the {@link TargetClass2ConverterMap}.
    * @return the converted <code>value</code> or <code>null</code> if the
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given
@@ -101,7 +259,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    */
   @SuppressWarnings("unchecked")
   protected Object convertRecursive(Object value, Object valueSource, GenericType<?> targetType,
-      Class<?> currentTargetClass, ValueConverter previousConverter) {
+      Class<?> currentTargetClass, ValueConverter previousConverter,
+      TargetClass2ConverterMap converterMap) {
 
     boolean traceEnabled = getLogger().isTraceEnabled();
     ValueConverter lastConverter = previousConverter;
@@ -109,34 +268,39 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     Object result = null;
     try {
       while (currentClass != null) {
-        if (traceEnabled) {
-          getLogger().trace("searching converter for target-type '" + currentClass + "'");
-        }
-        ValueConverter converter = this.targetClass2converterMap.get(currentClass);
-        if ((converter != null) && (converter != lastConverter)
-            && (converter.getTargetType().isAssignableFrom(targetType.getRetrievalClass()))) {
+        if (isAccepted(currentClass)) {
           if (traceEnabled) {
-            StringWriter sw = new StringWriter(50);
-            sw.append("trying converter for target-type '");
-            sw.append(converter.getTargetType().toString());
-            sw.append("'");
-            if (!converter.getTargetType().equals(currentClass)) {
-              sw.append(" for current-type '");
-              sw.append(currentClass.toString());
+            getLogger().trace("searching converter for target-type '" + currentClass + "'");
+          }
+          ValueConverter converter = converterMap.get(currentClass);
+          if ((converter != null) && (converter != lastConverter)
+              && (isApplicable(converter, targetType))) {
+            if (traceEnabled) {
+              StringWriter sw = new StringWriter(50);
+              sw.append("trying converter for target-type '");
+              sw.append(converter.getTargetType().toString());
               sw.append("'");
+              if (!converter.getTargetType().equals(currentClass)) {
+                sw.append(" for current-type '");
+                sw.append(currentClass.toString());
+                sw.append("'");
+              }
+              getLogger().trace(sw.toString());
             }
-            getLogger().trace(sw.toString());
+            result = converter.convert(value, valueSource, targetType);
+            if (result != null) {
+              return result;
+            }
+            lastConverter = converter;
           }
-          result = converter.convert(value, valueSource, targetType);
-          if (result != null) {
-            return result;
-          }
-          lastConverter = converter;
         }
         for (Class<?> superInterface : currentClass.getInterfaces()) {
-          result = convertRecursive(value, valueSource, targetType, superInterface, lastConverter);
-          if (result != null) {
-            return result;
+          if (isAccepted(superInterface)) {
+            result = convertRecursive(value, valueSource, targetType, superInterface,
+                lastConverter, converterMap);
+            if (result != null) {
+              return result;
+            }
           }
         }
         currentClass = currentClass.getSuperclass();
@@ -254,28 +418,32 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       boolean traceEnabled = getLogger().isTraceEnabled();
       Class<?> currentClass = sourceClass;
       while (currentClass != null) {
-        if (traceEnabled) {
-          getLogger().trace("searching converter for source-type '" + currentClass + "'");
-        }
-        ValueConverter<Object, TARGET> converter = (ValueConverter<Object, TARGET>) this.sourceClass2converterMap
-            .get(currentClass);
-        if (converter != null) {
+        if (isAccepted(currentClass)) {
           if (traceEnabled) {
-            getLogger().debug(
-                "trying converter for source-type '" + currentClass + "': "
-                    + converter.getClass().getSimpleName());
+            getLogger().trace("searching converter for source-type '" + currentClass + "'");
           }
-          TARGET result = converter.convert(value, valueSource, genericTargetType);
-          if (result != null) {
+          ValueConverter<Object, TARGET> converter = (ValueConverter<Object, TARGET>) this.sourceClass2converterMap
+              .get(currentClass);
+          if (converter != null) {
             if (traceEnabled) {
               getLogger().debug(
-                  "conversion successful using '" + converter.getClass().getName() + "'");
+                  "trying converter for source-type '" + currentClass + "': "
+                      + converter.getClass().getSimpleName());
             }
-            return result;
+            TARGET result = converter.convert(value, valueSource, genericTargetType);
+            if (result != null) {
+              if (traceEnabled) {
+                getLogger().debug(
+                    "conversion successful using '" + converter.getClass().getName() + "'");
+              }
+              return result;
+            }
           }
         }
         for (Class<?> superInterface : currentClass.getInterfaces()) {
-          convertRecursive(value, valueSource, genericTargetType, superInterface);
+          if (isAccepted(superInterface)) {
+            convertRecursive(value, valueSource, genericTargetType, superInterface);
+          }
         }
         currentClass = currentClass.getSuperclass();
       }
@@ -287,7 +455,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * This inner class is an {@link AdvancedClassHierarchieMap} for
    * {@link ComposedTargetTypeConverter}s.
    */
-  protected static class TargetClass2ConverterMap extends
+  protected class TargetClass2ConverterMap extends
       AdvancedClassHierarchieMap<ComposedTargetTypeConverter<?>> {
 
     /**
@@ -326,6 +494,18 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     public ComposedTargetTypeConverter<?> put(Class<?> type, ComposedTargetTypeConverter<?> element) {
 
       return super.put(type, element);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isAccepted(Class<?> type) {
+
+      if (!ComposedValueConverterImpl.this.isAccepted(type)) {
+        return false;
+      }
+      return super.isAccepted(type);
     }
 
   }

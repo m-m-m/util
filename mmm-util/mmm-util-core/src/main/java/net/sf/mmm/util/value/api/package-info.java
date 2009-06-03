@@ -41,7 +41,7 @@
  * String value = getValueFromSomewhere();
  * {@link net.sf.mmm.util.value.api.GenericValueConverter} converter = {@link net.sf.mmm.util.value.base.StringValueConverterImpl#getInstance()};
  * int valueAsInt = converter.\\
- * {@link net.sf.mmm.util.value.api.StringValueConverter#convertValue(String, Object, Number, Number) convertValue}(value, "somewhere", 0, 123456789);
+ * {@link net.sf.mmm.util.value.api.StringValueConverter#convert(String, Object, Number, Number) convertValue}(value, "somewhere", 0, 123456789);
  * </pre>
  */
 package net.sf.mmm.util.value.api;

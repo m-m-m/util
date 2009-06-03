@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.api;
 
 /**
  * This is a sub-interface of {@link GenericValueConverter} for the most common
- * value type {@link String}.
+ * value type {@link String}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

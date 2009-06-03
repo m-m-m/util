@@ -130,6 +130,19 @@ public interface ReflectionUtil extends GenericTypeFactory {
   Class<?> getNonPrimitiveType(Class<?> type);
 
   /**
+   * This method determines if the given <code>interfaceClass</code> is a
+   * marker-interface (e.g. {@link java.io.Serializable} or {@link Cloneable}).
+   * A marker-interface is also called a tagging-interface.
+   * 
+   * @param interfaceClass is the {@link Class} reflecting the interface to
+   *        check.
+   * @return <code>true</code> if the given <code>interfaceClass</code> is a
+   *         marker-interface, <code>false</code> otherwise (if regular
+   *         interface or no interface at all).
+   */
+  boolean isMarkerInterface(Class<?> interfaceClass);
+
+  /**
    * This method gets the {@link java.lang.reflect.Field#get(java.lang.Object)
    * value} of a {@link java.lang.reflect.Modifier#isStatic(int) static}
    * {@link java.lang.reflect.Field field} .

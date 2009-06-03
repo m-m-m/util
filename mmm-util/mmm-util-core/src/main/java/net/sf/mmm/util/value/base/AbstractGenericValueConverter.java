@@ -5,6 +5,7 @@ package net.sf.mmm.util.value.base;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
@@ -18,7 +19,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractGenericValueConverter<SOURCE> implements
+public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggable implements
     GenericValueConverter<SOURCE> {
 
   /**
