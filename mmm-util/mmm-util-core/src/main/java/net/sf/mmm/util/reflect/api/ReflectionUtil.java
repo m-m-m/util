@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.resource.api.DataResource;
 
 /**
  * This is the interface for a collection of utility functions to deal with
@@ -251,12 +252,12 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * the given <code>packageName</code>.<br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath
-   * multiple directories,JAR-, and WAR-files may need to be scanned.
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
    * 
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
    *        specified {@link Package} will be included in the search.
-   * @return a {@link Set} will the fully qualified names of all requested
+   * @return a {@link Set} with the fully qualified names of all requested
    *         classes.
    * @throws IOException if the operation failed with an I/O error.
    */
@@ -267,7 +268,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * the given <code>packageName</code>.<br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath
-   * multiple directories,JAR-, and WAR-files may need to be scanned.
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
    * 
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
@@ -327,5 +328,89 @@ public interface ReflectionUtil extends GenericTypeFactory {
    */
   Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
       Filter<? super Class<?>> filter) throws ClassNotFoundException;
+
+  /**
+   * This method finds all resources that are located in the package identified
+   * by the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan. Both "." and
+   *        "/" are accepted as separator (e.g. "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        resources. Typically you will exclude resources that end with
+   *        ".class" or only accept resources that end with ".xml".
+   * @return a {@link Set} with the fully qualified names of all requested
+   *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
+   * @throws IOException if the operation failed with an I/O error.
+   */
+  Set<String> findResourceNames(String packageName, boolean includeSubPackages,
+      Filter<String> filter) throws IOException;
+
+  /**
+   * This method finds all resources that are located in the package identified
+   * by the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan. Both "." and
+   *        "/" are accepted as separator (e.g. "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        resources. Typically you will exclude resources that end with
+   *        ".class" or only accept resources that end with ".xml".
+   * @param classLoader is the explicit {@link ClassLoader} to use.
+   * @return a {@link Set} with the fully qualified names of all requested
+   *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
+   * @throws IOException if the operation failed with an I/O error.
+   */
+  Set<String> findResourceNames(String packageName, boolean includeSubPackages,
+      Filter<String> filter, ClassLoader classLoader) throws IOException;
+
+  /**
+   * This method finds all resources that are located in the package identified
+   * by the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan. Both "." and
+   *        "/" are accepted as separator (e.g. "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        resources. Typically you will exclude resources that end with
+   *        ".class" or only accept resources that end with ".xml".
+   * @return a {@link Set} with all requested {@link DataResource resources}.
+   * @throws IOException if the operation failed with an I/O error.
+   */
+  Set<DataResource> findResources(String packageName, boolean includeSubPackages,
+      Filter<String> filter) throws IOException;
+
+  /**
+   * This method finds all resources that are located in the package identified
+   * by the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan. Both "." and
+   *        "/" are accepted as separator (e.g. "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        resources. Typically you will exclude resources that end with
+   *        ".class" or only accept resources that end with ".xml".
+   * @param classLoader is the explicit {@link ClassLoader} to use.
+   * @return a {@link Set} with all requested {@link DataResource resources}.
+   * @throws IOException if the operation failed with an I/O error.
+   */
+  Set<DataResource> findResources(String packageName, boolean includeSubPackages,
+      Filter<String> filter, ClassLoader classLoader) throws IOException;
 
 }

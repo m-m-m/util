@@ -24,8 +24,10 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
@@ -39,6 +41,7 @@ import net.sf.mmm.util.reflect.impl.ParameterizedTypeImpl;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.impl.UpperBoundWildcardType;
+import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
@@ -49,7 +52,13 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ReflectionUtilImpl implements ReflectionUtil {
+public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUtil {
+
+  /** TODO: javadoc. */
+  private static final String SUFFIX_CLASS = ".class";
+
+  /** TODO: javadoc. */
+  private static final String WEB_INF_CLASSES = "WEB-INF/classes/";
 
   /** @see #getInstance() */
   private static ReflectionUtil instance;
@@ -565,9 +574,10 @@ public class ReflectionUtilImpl implements ReflectionUtil {
    */
   private static String fixClassName(String fileName) {
 
-    if (fileName.endsWith(".class")) {
+    if (fileName.endsWith(SUFFIX_CLASS)) {
       // remove extension (".class".length() == 6)
-      String nameWithoutExtension = fileName.substring(0, fileName.length() - 6);
+      String nameWithoutExtension = fileName
+          .substring(0, fileName.length() - SUFFIX_CLASS.length());
       // handle inner classes...
       /*
        * int lastDollar = nameWithoutExtension.lastIndexOf('$'); if (lastDollar
@@ -612,6 +622,37 @@ public class ReflectionUtilImpl implements ReflectionUtil {
           qualifiedNameBuilder.append(simpleClassName);
           classSet.add(qualifiedNameBuilder.toString());
         }
+      }
+    }
+  }
+
+  /**
+   * This method scans the given <code>packageDirectory</code> recursively for
+   * resources.
+   * 
+   * @param packageDirectory is the directory representing the {@link Package}.
+   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the
+   *        qualified prefix (the {@link Package} with a trailing dot).
+   * @param qualifiedNamePrefixLength the length of the prefix used to rest the
+   *        string-builder after reuse.
+   * @param visitor is the {@link ResourceVisitor}.
+   */
+  private static void visitResources(File packageDirectory, StringBuilder qualifiedNameBuilder,
+      int qualifiedNamePrefixLength, ResourceVisitor visitor) {
+
+    for (File childFile : packageDirectory.listFiles()) {
+      String fileName = childFile.getName();
+      qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
+      if (childFile.isDirectory()) {
+        StringBuilder subBuilder = new StringBuilder(qualifiedNameBuilder);
+        subBuilder.append(fileName);
+        subBuilder.append('/');
+        if (visitor.visitPackage(subBuilder.toString())) {
+          visitResources(childFile, subBuilder, subBuilder.length(), visitor);
+        }
+      } else {
+        qualifiedNameBuilder.append(fileName);
+        visitor.visitResource(qualifiedNameBuilder.toString());
       }
     }
   }
@@ -669,13 +710,13 @@ public class ReflectionUtilImpl implements ReflectionUtil {
         while (jarEntryEnumeration.hasMoreElements()) {
           JarEntry jarEntry = jarEntryEnumeration.nextElement();
           String absoluteFileName = jarEntry.getName();
-          if (absoluteFileName.endsWith(".class")) {
+          if (absoluteFileName.endsWith(SUFFIX_CLASS)) {
             if (absoluteFileName.startsWith("/")) {
               absoluteFileName = absoluteFileName.substring(1);
             }
             // special treatment for WAR files...
             // "WEB-INF/lib/" entries should be opened directly in contained jar
-            if (absoluteFileName.startsWith("WEB-INF/classes/")) {
+            if (absoluteFileName.startsWith(WEB_INF_CLASSES)) {
               // "WEB-INF/classes/".length() == 16
               absoluteFileName = absoluteFileName.substring(16);
             }
@@ -706,11 +747,134 @@ public class ReflectionUtilImpl implements ReflectionUtil {
   /**
    * {@inheritDoc}
    */
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
+      Filter<String> filter) throws IOException {
+
+    return findResourceNames(packageName, includeSubPackages, filter, Thread.currentThread()
+        .getContextClassLoader());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
+      Filter<String> filter, ClassLoader classLoader) throws IOException {
+
+    Set<String> result = new HashSet<String>();
+    ResourceNameCollector visitor = new ResourceNameCollector(result, filter);
+    visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
+      Filter<String> filter) throws IOException {
+
+    return findResources(packageName, includeSubPackages, filter, Thread.currentThread()
+        .getContextClassLoader());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
+      Filter<String> filter, ClassLoader classLoader) throws IOException {
+
+    Set<DataResource> result = new HashSet<DataResource>();
+    ResourceVisitor visitor = new ResourceCollector(result, filter);
+    visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
+    return result;
+  }
+
+  /**
+   * This method does the actual magic to locate resources on the classpath.
+   * 
+   * @param packageName is the name of the {@link Package} to scan. Both "." and
+   *        "/" are accepted as separator (e.g. "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param classLoader is the explicit {@link ClassLoader} to use.
+   * @param visitor is the {@link ResourceVisitor}.
+   * @throws IOException if the operation failed with an I/O error.
+   */
+  public void visitResourceNames(String packageName, boolean includeSubPackages,
+      ClassLoader classLoader, ResourceVisitor visitor) throws IOException {
+
+    String path = packageName.replace('.', '/');
+    String pathWithPrefix = path + '/';
+    Enumeration<URL> urls = classLoader.getResources(path);
+    StringBuilder qualifiedNameBuilder = new StringBuilder(path);
+    qualifiedNameBuilder.append('/');
+    int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
+    while (urls.hasMoreElements()) {
+      URL packageUrl = urls.nextElement();
+      String urlString = URLDecoder.decode(packageUrl.getFile(), "UTF-8");
+      String protocol = packageUrl.getProtocol().toLowerCase();
+      if ("file".equals(protocol)) {
+        File packageDirectory = new File(urlString);
+        if (packageDirectory.isDirectory()) {
+          if (includeSubPackages) {
+            visitResources(packageDirectory, qualifiedNameBuilder, qualifiedNamePrefixLength,
+                visitor);
+          } else {
+            for (File child : packageDirectory.listFiles()) {
+              if (child.isFile()) {
+                qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
+                qualifiedNameBuilder.append(child.getName());
+                visitor.visitResource(qualifiedNameBuilder.toString());
+              }
+            }
+          }
+        }
+      } else if ("jar".equals(protocol)) {
+        // somehow the connection has no close method and can NOT be disposed
+        JarURLConnection connection = (JarURLConnection) packageUrl.openConnection();
+        JarFile jarFile = connection.getJarFile();
+        Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
+        while (jarEntryEnumeration.hasMoreElements()) {
+          JarEntry jarEntry = jarEntryEnumeration.nextElement();
+          String classpath = jarEntry.getName();
+          if (classpath.startsWith("/")) {
+            classpath = classpath.substring(1);
+          }
+          if (classpath.startsWith(WEB_INF_CLASSES)) {
+            // special treatment for WAR files...
+            // "WEB-INF/lib/" entries should be opened directly in contained jar
+            classpath = classpath.substring(WEB_INF_CLASSES.length());
+          }
+          if (classpath.startsWith(pathWithPrefix)) {
+            boolean accept = true;
+            if (!includeSubPackages) {
+              int index = classpath.indexOf('/', qualifiedNamePrefixLength + 1);
+              if (index != -1) {
+                accept = false;
+              }
+            }
+            if (accept) {
+              if (jarEntry.isDirectory()) {
+                visitor.visitPackage(classpath);
+              } else {
+                visitor.visitResource(classpath);
+              }
+            }
+          }
+        }
+      } else {
+        getLogger().warn("Unknown protocol '" + protocol + "' in classpath entry!");
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames)
       throws ClassNotFoundException {
 
-    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
-        Filter.ACCEPT_ALL);
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, ConstantFilter
+        .getInstance(true));
   }
 
   /**

@@ -14,25 +14,12 @@ package net.sf.mmm.util.filter.api;
 public interface Filter<V> {
 
   /**
-   * This method determines if the given <code>value</code> should be
-   * accepted.
+   * This method determines if the given <code>value</code> should be accepted.
    * 
    * @param value is the value to check.
-   * @return <code>true</code> if the given <code>value</code> is
-   *         acceptable, <code>false</code> if it should be filtered.
+   * @return <code>true</code> if the given <code>value</code> is acceptable,
+   *         <code>false</code> if it should be filtered.
    */
   boolean accept(V value);
-
-  /**
-   * A filter instance that {@link #accept(Object) accepts} every object. To be
-   * reusable it is NOT generic but may be casted.
-   */
-  Filter<Object> ACCEPT_ALL = new Filter<Object>() {
-
-    public boolean accept(Object value) {
-
-      return true;
-    }
-  };
 
 }

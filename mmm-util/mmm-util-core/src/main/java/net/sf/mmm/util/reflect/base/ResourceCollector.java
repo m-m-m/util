@@ -1,0 +1,59 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.reflect.base;
+
+import java.util.Set;
+
+import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.base.ClasspathResource;
+
+/**
+ * This is an implementation of the {@link ResourceVisitor} interface that
+ * collects the names of all resources {@link Filter#accept(Object) accepted} by
+ * a given filter in a {@link Set}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ */
+public class ResourceCollector implements ResourceVisitor {
+
+  /** {@link Set} to collect resource-names. */
+  private final Set<DataResource> resourceSet;
+
+  /** {@link Filter} to accept resource-names. */
+  private final Filter<String> filter;
+
+  /**
+   * The constructor.
+   * 
+   * @param resourceSet is the {@link Set} where collected resources will be
+   *        added.
+   * @param filter is used to {@link Filter#accept(Object) filter} resources by
+   *        name.
+   */
+  public ResourceCollector(Set<DataResource> resourceSet, Filter<String> filter) {
+
+    super();
+    this.resourceSet = resourceSet;
+    this.filter = filter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean visitPackage(String classpath) {
+
+    return this.filter.accept(classpath);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void visitResource(String classpath) {
+
+    if (this.filter.accept(classpath)) {
+      this.resourceSet.add(new ClasspathResource(classpath));
+    }
+  }
+}
