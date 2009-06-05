@@ -55,7 +55,7 @@ public class SpringContainerPool {
    */
   public static void disposeContainer(String configPath) {
 
-    SpringContainer container = containerMap.get(configPath);
+    SpringContainer container = containerMap.remove(configPath);
     if (container != null) {
       container.dispose();
     }
