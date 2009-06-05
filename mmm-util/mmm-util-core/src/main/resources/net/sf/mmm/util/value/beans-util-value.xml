@@ -27,7 +27,6 @@
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfLong"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfObject"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfShort"/>
-        <bean class="net.sf.mmm.util.value.impl.ValueConverterToCompatiblePojo"/>
       </list>
     </property>
   </bean>
