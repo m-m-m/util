@@ -42,7 +42,8 @@ public class ResourceNameCollector implements ResourceVisitor {
    */
   public boolean visitPackage(String classpath) {
 
-    return this.filter.accept(classpath);
+    // return this.filter.accept(classpath);
+    return true;
   }
 
   /**

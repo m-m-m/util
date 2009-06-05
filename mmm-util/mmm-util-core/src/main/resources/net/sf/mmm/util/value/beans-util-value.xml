@@ -19,7 +19,14 @@
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToString"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToEnum"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCollection"/>
-        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArray"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfBoolean"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfByte"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfDouble"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfFloat"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfInt"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfLong"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfObject"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfShort"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCompatiblePojo"/>
       </list>
     </property>

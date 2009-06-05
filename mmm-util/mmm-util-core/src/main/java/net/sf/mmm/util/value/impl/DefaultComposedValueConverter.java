@@ -27,11 +27,14 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
 
   /**
    * @see #addConverter(ValueConverter)
+   * 
+   * @param converter is the converter to add.
    */
+  @SuppressWarnings("unchecked")
   public void addConverterComponent(ValueConverter<?, ?> converter) {
 
     if (converter instanceof AbstractRecursiveValueConverter) {
-      ((AbstractRecursiveValueConverter) converter).setComposedValueConverter(this);
+      ((AbstractRecursiveValueConverter<?, ?>) converter).setComposedValueConverter(this);
     }
     if (converter instanceof AbstractComponent) {
       ((AbstractComponent) converter).initialize();

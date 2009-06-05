@@ -8,8 +8,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the interface for a converter that
  * {@link #convert(Object, Object, GenericType) converts} a value from a
- * {@link #getSourceType() source-type} to a specific
- * {@link #getTargetType() target-type}.<br>
+ * {@link #getSourceType() source-type} to a specific {@link #getTargetType()
+ * target-type}.<br>
  * <b>ATTENTION:</b><br>
  * An implementation of this interface should be stateless and thread-safe.
  * 
@@ -22,8 +22,8 @@ public interface ValueConverter<SOURCE, TARGET> {
 
   /**
    * This the type of the value accepted by this converter. Use {@link Object}
-   * if you want to accept any value. A very common
-   * {@link #getSourceType() source-type} is {@link String}.
+   * if you want to accept any value. A very common {@link #getSourceType()
+   * source-type} is {@link String}.
    * 
    * @return the source-type.
    */
@@ -42,11 +42,11 @@ public interface ValueConverter<SOURCE, TARGET> {
    * {@link java.util.List}, the specific converter is used while for other
    * objects the generic converter is chosen.<br>
    * Please note that the {@link #getTargetType() target-type} is often more
-   * general than the actual
-   * {@link #convert(Object, Object, GenericType) returned result}. So a
-   * {@link ValueConverter} that converts a comma-separated {@link String} to an
-   * {@link java.util.ArrayList} will typically declare {@link java.util.List}
-   * as {@link #getTargetType() target-type}.
+   * general than the actual {@link #convert(Object, Object, GenericType)
+   * returned result}. So a {@link ValueConverter} that converts a
+   * comma-separated {@link String} to an {@link java.util.ArrayList} will
+   * typically declare {@link java.util.List} as {@link #getTargetType()
+   * target-type}.
    * 
    * @return the target-type.
    */
@@ -88,9 +88,8 @@ public interface ValueConverter<SOURCE, TARGET> {
    *        <code>value</code> to. It is potentially generic and therefore
    *        contains more detailed information than a {@link Class}. E.g. the
    *        <code>targetType</code> could be
-   *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if
-   *        the <code>value</code> is a string like
-   *        <code>"2, 47, 4252525"</code>.
+   *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if the
+   *        <code>value</code> is a string like <code>"2, 47, 4252525"</code>.
    * @return the converted <code>value</code> or <code>null</code> if the
    *         conversion is NOT possible. The returned value has to be an
    *         {@link Class#isInstance(Object) instance} of the given

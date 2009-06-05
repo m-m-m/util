@@ -23,6 +23,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.Result;
 
+import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
@@ -214,6 +215,26 @@ public class ReflectionUtilTest {
   }
 
   @Test
+  public void testFindResourceNames() throws Exception {
+
+    ReflectionUtil util = getReflectionUtil();
+    // test resources
+    Set<String> resourceNameSet;
+    Filter<String> filter = new Filter<String>() {
+
+      public boolean accept(String value) {
+
+        if (value.endsWith(".xml")) {
+          return true;
+        }
+        return false;
+      }
+    };
+    resourceNameSet = util.findResourceNames("net.sf.mmm.util.reflect", true, filter);
+    assertTrue(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
+  }
+
+  @Test
   public void testFindClassNames() throws Exception {
 
     ReflectionUtil util = getReflectionUtil();
@@ -237,6 +258,7 @@ public class ReflectionUtilTest {
     assertFalse(classNameSet.contains(Result.class.getName()));
     classNameSet = util.findClassNames(Test.class.getPackage().getName(), true);
     assertTrue(classNameSet.contains(Result.class.getName()));
+
   }
 
   public static class StringList extends ArrayList<String> {

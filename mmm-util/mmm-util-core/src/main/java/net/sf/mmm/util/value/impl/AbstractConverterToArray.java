@@ -56,6 +56,7 @@ public abstract class AbstractConverterToArray<ARRAY> extends
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public ARRAY convert(Object value, Object valueSource, GenericType<? extends ARRAY> targetType) {
 
     if (value == null) {

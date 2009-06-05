@@ -415,7 +415,6 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
         }
         this.bytePosition++;
       }
-      // TODO
       return length;
     }
 
