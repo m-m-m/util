@@ -10,10 +10,10 @@
 		</layout>
 	</appender>
 	<logger name="net.sf.mmm">
-		<level value="debug"/>
+		<level value="trace"/>
 	</logger>
 	<root>
-		<level value="warn"/>
+		<level value="trace"/>
 		<appender-ref ref="DefaultAppender"/>
 	</root>
 </log4j:configuration>
