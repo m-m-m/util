@@ -20,6 +20,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * This class is intended for internal usage only.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class BufferInputStream extends InputStream implements ByteProcessable {
 
@@ -61,9 +62,9 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
    * The constructor.
    * 
    * @param inStream is the {@link InputStream} to adapt.
-   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl}
-   *        s. Please note that therefore the double amount of memory is
-   *        allocated.
+   * @param capacity is the capacity for each of the two
+   *        {@link ByteArrayBufferImpl} s. Please note that therefore the double
+   *        amount of memory is allocated.
    */
   public BufferInputStream(InputStream inStream, int capacity) {
 
@@ -74,9 +75,9 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
    * The constructor.
    * 
    * @param inStream is the {@link InputStream} to adapt.
-   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl}
-   *        s. Please note that therefore the double amount of memory is
-   *        allocated.
+   * @param capacity is the capacity for each of the two
+   *        {@link ByteArrayBufferImpl} s. Please note that therefore the double
+   *        amount of memory is allocated.
    * @param bufferCount is the number of buffers to use.
    */
   private BufferInputStream(InputStream inStream, int capacity, int bufferCount) {

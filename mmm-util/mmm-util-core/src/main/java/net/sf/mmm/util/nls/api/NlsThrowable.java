@@ -29,6 +29,7 @@ import java.util.UUID;
  * @see net.sf.mmm.util.nls.api.NlsRuntimeException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsThrowable extends NlsObject {
 
@@ -81,8 +82,8 @@ public interface NlsThrowable extends NlsObject {
    * @param resolver is used to resolve the template required to translate the
    *        {@link #getNlsMessage() internationalized message}.
    * @param buffer is the buffer where to write the message to.
-   * @throws IllegalStateException if the given <code>buffer</code> produced
-   *         an {@link java.io.IOException}.
+   * @throws IllegalStateException if the given <code>buffer</code> produced an
+   *         {@link java.io.IOException}.
    */
   void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
       throws IllegalStateException;
@@ -93,8 +94,8 @@ public interface NlsThrowable extends NlsObject {
    * @param locale is the locale to translate to.
    * @param resolver translates the original message.
    * @param buffer is where to write the stack trace to.
-   * @throws IllegalStateException if the given <code>buffer</code> produced
-   *         an {@link java.io.IOException}.
+   * @throws IllegalStateException if the given <code>buffer</code> produced an
+   *         {@link java.io.IOException}.
    */
   void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
       throws IllegalStateException;
@@ -109,11 +110,11 @@ public interface NlsThrowable extends NlsObject {
    * when the exception is constructed or copied from the given
    * {@link #getCause() cause} if it is also a {@link NlsThrowable}.<br>
    * The {@link UUID} will appear in the
-   * {@link #printStackTrace(Locale, NlsTemplateResolver, Appendable) printed stacktrace}
-   * but NOT in the {@link #getMessage() message} and should therefore be
-   * written to log-files if the {@link NlsThrowable} is logged. If you supply
-   * the {@link UUID} to the end-user in case of an unexpected error, he can
-   * easily find the stacktrace in the log-files.
+   * {@link #printStackTrace(Locale, NlsTemplateResolver, Appendable) printed
+   * stacktrace} but NOT in the {@link #getMessage() message} and should
+   * therefore be written to log-files if the {@link NlsThrowable} is logged. If
+   * you supply the {@link UUID} to the end-user in case of an unexpected error,
+   * he can easily find the stacktrace in the log-files.
    * 
    * @return the uuid of this exception. It may be <code>null</code> if this
    *         feature is turned of (it is turned on by default).

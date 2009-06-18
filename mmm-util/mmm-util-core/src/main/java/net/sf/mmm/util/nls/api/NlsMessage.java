@@ -7,15 +7,16 @@ import java.util.Locale;
 
 /**
  * This is the interface for an internationalized message. It stores a message
- * separated from language independent {@link #getArgument(int) arguments}.
- * This approach ensures that the message is always available in the
+ * separated from language independent {@link #getArgument(int) arguments}. This
+ * approach ensures that the message is always available in the
  * internationalized language (should be English) while it still allows to
  * {@link #getLocalizedMessage(Locale, NlsTemplateResolver) translate} the
  * message to a native language.<br>
- * For the term <em>internationalization</em> usually the shortcut
- * <em>i18n</em> is used.
+ * For the term <em>internationalization</em> usually the shortcut <em>i18n</em>
+ * is used.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsMessage extends NlsObject {
 
@@ -74,10 +75,10 @@ public interface NlsMessage extends NlsObject {
    * This method tries to get the localized message as string. Since no
    * {@link NlsTemplateResolver translator} is specified, the implementation may
    * try its best to do the translation on its own according to the callers
-   * {@link java.util.Locale locale}. Therefore this method has to do some
-   * magic behind the scenes. This may only work if you follow specific rules of
-   * the implementation of this interface. If this fails or is NOT supported,
-   * the {@link #getMessage() untranslated} message should be used.<br>
+   * {@link java.util.Locale locale}. Therefore this method has to do some magic
+   * behind the scenes. This may only work if you follow specific rules of the
+   * implementation of this interface. If this fails or is NOT supported, the
+   * {@link #getMessage() untranslated} message should be used.<br>
    * <b>ATTENTION:</b><br>
    * If possible try to avoid using this method and use
    * {@link #getLocalizedMessage(Locale, NlsTemplateResolver)} instead.
@@ -90,10 +91,10 @@ public interface NlsMessage extends NlsObject {
    * This method tries to get the localized message as string. Since no
    * {@link NlsTemplateResolver translator} is specified, the implementation may
    * try its best to do the translation on its own according to the callers
-   * {@link java.util.Locale locale}. Therefore this method has to do some
-   * magic behind the scenes. This may only work if you follow specific rules of
-   * the implementation of this interface. If this fails or is NOT supported,
-   * the {@link #getMessage() untranslated} message should be used.<br>
+   * {@link java.util.Locale locale}. Therefore this method has to do some magic
+   * behind the scenes. This may only work if you follow specific rules of the
+   * implementation of this interface. If this fails or is NOT supported, the
+   * {@link #getMessage() untranslated} message should be used.<br>
    * <b>ATTENTION:</b><br>
    * If possible try to avoid using this method and use
    * {@link #getLocalizedMessage(Locale, NlsTemplateResolver)} instead.
@@ -116,8 +117,7 @@ public interface NlsMessage extends NlsObject {
   String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver);
 
   /**
-   * This method writes the localized message to the given <code>buffer</code>.
-   * <br>
+   * This method writes the localized message to the given <code>buffer</code>. <br>
    * The actual localization is done by a {@link NlsTemplate template} that is
    * provided via the given <code>resolver</code>. If this fails, the
    * {@link #getInternationalizedMessage() original message} will be used. After
@@ -128,8 +128,8 @@ public interface NlsMessage extends NlsObject {
    * @param resolver is used to resolve the template required to translate the
    *        {@link #getInternationalizedMessage() internationalized message}.
    * @param buffer is the buffer where to write the message to.
-   * @throws IllegalStateException if the given <code>buffer</code> produced
-   *         an {@link java.io.IOException}.
+   * @throws IllegalStateException if the given <code>buffer</code> produced an
+   *         {@link java.io.IOException}.
    */
   void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
       throws IllegalStateException;

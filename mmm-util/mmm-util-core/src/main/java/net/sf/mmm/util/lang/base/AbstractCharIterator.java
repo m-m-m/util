@@ -15,6 +15,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * iterator will always be empty.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public abstract class AbstractCharIterator implements CharIterator {
 

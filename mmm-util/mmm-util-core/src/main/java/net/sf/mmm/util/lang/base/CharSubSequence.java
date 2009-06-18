@@ -12,6 +12,7 @@ package net.sf.mmm.util.lang.base;
  * shrink)!
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class CharSubSequence extends CoreCharSequence {
 

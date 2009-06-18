@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-
 /**
  * This class represents an argument list. It is a container for an
  * {@link java.lang.Object} array and can be used as
  * {@link java.util.Map#get(java.lang.Object) hash-key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class Arguments {
 

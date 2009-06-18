@@ -15,6 +15,7 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
  * using {@link DecimalFormat}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class NlsFormatterNumberPattern extends SimpleNlsFormatter<Object> {
 

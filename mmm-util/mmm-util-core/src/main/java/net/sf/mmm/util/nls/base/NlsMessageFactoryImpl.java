@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
  * This is the implementation of the {@link NlsMessageFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NlsMessageFactoryImpl implements NlsMessageFactory {
 

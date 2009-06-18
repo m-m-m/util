@@ -9,6 +9,7 @@ package net.sf.mmm.util.value.impl;
  * {@link Object} to <code>boolean[]</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class ValueConverterToArrayOfBoolean extends AbstractConverterToArray<boolean[]> {
 

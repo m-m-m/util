@@ -11,10 +11,10 @@ import java.io.Reader;
  * as API that additionally allows to {@link #getEncoding() get} the detected
  * encoding in case you need this information (e.g. to save it as meta-data).
  * 
- * @see net.sf.mmm.util.io.base.EncodingUtilImpl#createUtfDetectionReader(java.io.InputStream,
- *      String)
+ * @see EncodingUtil#createUtfDetectionReader(java.io.InputStream, String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class EncodingDetectionReader extends Reader {
 
@@ -24,8 +24,8 @@ public abstract class EncodingDetectionReader extends Reader {
    * 
    * @return the encoding or <code>null</code> if NOT yet detected (then
    *         typically
-   *         {@link net.sf.mmm.util.io.base.EncodingUtilImpl#ENCODING_US_ASCII ASCII} is
-   *         assumed so far).
+   *         {@link net.sf.mmm.util.io.base.EncodingUtilImpl#ENCODING_US_ASCII
+   *         ASCII} is assumed so far).
    */
   public abstract String getEncoding();
 

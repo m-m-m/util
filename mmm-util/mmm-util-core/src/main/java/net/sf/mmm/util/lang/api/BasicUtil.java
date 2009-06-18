@@ -13,6 +13,7 @@ package net.sf.mmm.util.lang.api;
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface BasicUtil {
 

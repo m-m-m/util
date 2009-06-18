@@ -23,6 +23,7 @@ import org.xml.sax.InputSource;
  * with the {@link org.w3c.dom.Node DOM} API.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface DomUtil {
 
@@ -217,7 +218,7 @@ public interface DomUtil {
    */
   String getNodeText(Node node, int depth);
 
-/**
+  /**
    * This method appends the text of the given node to the string buffer. Text
    * means the plain characters between the opening and the closing tag of the
    * element including the text of CDATA sections. The text of child elements is
@@ -225,13 +226,19 @@ public interface DomUtil {
    * child elements are ignored, if equal to 1, the text of child elements is
    * included without their child elements. For an infinite depth use
    * <code>Integer.MAX_VALUE</code>. E.g. for the a element <code>a</code> in <br>
+   * 
    * <pre>
    * <code>&lt;a&gt;123&lt;b/&gt;4&lt;c&gt;5&lt;d&gt;6&lt;/d&gt;&lt;/c&gt;&lt;![CDATA[7]]&gt;8&lt;/a&gt;</code>
    * </pre>
+   * 
    * <br>
    * the call of <code>getNodeText(a, buffer, depth)</code> will append the
-   * following text to the buffer according to the given depth. <ol start="0">
-   * <li>"123478"</li> <li>"1234578"</li> <li>"12345678"</li> </ol>
+   * following text to the buffer according to the given depth.
+   * <ol start="0">
+   * <li>"123478"</li>
+   * <li>"1234578"</li>
+   * <li>"12345678"</li>
+   * </ol>
    * 
    * @param node is the xml node containing the text.
    * @param buffer is the where to append the text to.

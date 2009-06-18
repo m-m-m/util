@@ -10,6 +10,7 @@ package net.sf.mmm.util.filter.api;
  * @param <V> is the generic type of the value to check.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface Filter<V> {
 

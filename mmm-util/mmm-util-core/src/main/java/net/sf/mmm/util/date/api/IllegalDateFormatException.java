@@ -10,6 +10,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * This is the exception thrown if a date given as string was illegal.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class IllegalDateFormatException extends NlsIllegalArgumentException {
 

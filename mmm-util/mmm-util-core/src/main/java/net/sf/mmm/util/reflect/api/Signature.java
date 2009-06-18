@@ -8,12 +8,12 @@ import java.lang.reflect.Method;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This class represents a
- * {@link java.lang.reflect.Method#getParameterTypes() "method signature"}. It
- * is a container for a {@link java.lang.Class} array and can be used as
- * {@link java.util.Map#get(java.lang.Object) hash-key}.
+ * This class represents a {@link java.lang.reflect.Method#getParameterTypes()
+ * "method signature"}. It is a container for a {@link java.lang.Class} array
+ * and can be used as {@link java.util.Map#get(java.lang.Object) hash-key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class Signature {
 
@@ -72,8 +72,8 @@ public class Signature {
    * signature. Here applicable means that if this is the signature of a method,
    * that method could be called with arguments of the given signature
    * <code>s</code>.<br>
-   * Only call this method if this signature does NOT
-   * {@link #getType(int) contain} <code>null</code>.
+   * Only call this method if this signature does NOT {@link #getType(int)
+   * contain} <code>null</code>.
    * 
    * @param s is the signature to test.
    * @return <code>true</code> if the given signature is applicable for this

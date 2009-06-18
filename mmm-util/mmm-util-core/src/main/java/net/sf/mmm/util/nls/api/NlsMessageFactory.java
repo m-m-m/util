@@ -8,6 +8,7 @@ package net.sf.mmm.util.nls.api;
  * {@link NlsMessage}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsMessageFactory {
 
@@ -16,10 +17,10 @@ public interface NlsMessageFactory {
    * arguments.
    * 
    * @param internationalizedMessage is the
-   *        {@link NlsMessage#getInternationalizedMessage() internationalized message}.
-   * @param messageArguments are the
-   *        {@link NlsMessage#getArgument(int) arguments} filled into the
-   *        message after nationalization.
+   *        {@link NlsMessage#getInternationalizedMessage() internationalized
+   *        message}.
+   * @param messageArguments are the {@link NlsMessage#getArgument(int)
+   *        arguments} filled into the message after nationalization.
    * @return the new {@link NlsMessage} instance.
    */
   NlsMessage create(String internationalizedMessage, Object... messageArguments);
@@ -29,9 +30,8 @@ public interface NlsMessageFactory {
    * arguments.
    * 
    * @param text is the bundled text of the message.
-   * @param messageArguments are the
-   *        {@link NlsMessage#getArgument(int) arguments} filled into the
-   *        message after nationalization.
+   * @param messageArguments are the {@link NlsMessage#getArgument(int)
+   *        arguments} filled into the message after nationalization.
    * 
    * @return the new {@link NlsMessage} instance.
    */

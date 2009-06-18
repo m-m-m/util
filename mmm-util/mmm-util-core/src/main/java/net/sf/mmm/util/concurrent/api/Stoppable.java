@@ -8,6 +8,7 @@ package net.sf.mmm.util.concurrent.api;
  * {@link #stop() stopped}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface Stoppable {
 

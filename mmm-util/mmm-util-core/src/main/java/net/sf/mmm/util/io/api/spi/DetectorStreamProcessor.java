@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api.spi;
 
+import java.io.IOException;
 import java.util.Map;
-
-import net.sf.mmm.util.io.api.DetectorStream;
 
 /**
  * This is the interface for a processor that can be plugged into a
- * {@link DetectorStream}. Such {@link DetectorStream} holds a chain of
+ * {@link net.sf.mmm.util.io.api.DetectorStream}. Such
+ * {@link net.sf.mmm.util.io.api.DetectorStream} holds a chain of
  * {@link DetectorStreamProcessor}s and routes the stream data through this
  * chain.<br>
  * At the head of this chain is the producer of the data (the native
@@ -27,10 +27,11 @@ import net.sf.mmm.util.io.api.DetectorStream;
  * {@link DetectorStreamBuffer#insert(net.sf.mmm.util.io.api.ByteArray)
  * inserting} new data into the stream.<br>
  * 
- * @see DetectorStream
+ * @see net.sf.mmm.util.io.api.DetectorStream
  * @see DetectorStreamProcessorFactory
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface DetectorStreamProcessor {
 
@@ -49,7 +50,12 @@ public interface DetectorStreamProcessor {
    * @param buffer allows you to read parts of the streamed data as well as to
    *        manipulate the data.
    * @param metadata is the {@link Map} with the metadata.
+   * @param eos - <code>true</code> if the end of the stream has been reached
+   *        and the given <code>buffer</code> has to be
+   * @throws IOException in case of an Input/Output error. Should only be used
+   *         internally.
    */
-  void process(DetectorStreamBuffer buffer, Map<String, Object> metadata);
+  void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos)
+      throws IOException;
 
 }

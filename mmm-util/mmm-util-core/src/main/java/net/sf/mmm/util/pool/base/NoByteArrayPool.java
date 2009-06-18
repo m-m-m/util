@@ -9,6 +9,7 @@ import net.sf.mmm.util.pool.api.ByteArrayPool;
  * This is a {@link AbstractNoPool dummy pool} for byte-arrays.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class NoByteArrayPool extends AbstractNoPool<byte[]> implements ByteArrayPool {
 

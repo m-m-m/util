@@ -15,6 +15,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
  * a given filter in a {@link Set}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class ResourceCollector implements ResourceVisitor {
 

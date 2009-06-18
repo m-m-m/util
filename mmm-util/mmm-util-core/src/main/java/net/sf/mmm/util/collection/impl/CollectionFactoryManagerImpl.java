@@ -23,6 +23,7 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 @SuppressWarnings("unchecked")
 public class CollectionFactoryManagerImpl extends AbstractLoggable implements
@@ -185,8 +186,8 @@ public class CollectionFactoryManagerImpl extends AbstractLoggable implements
    * @param collectionInterface is the interface of the associated
    *        {@link Collection}. It has to be
    *        {@link Class#isAssignableFrom(Class) assignable from} the
-   *        {@link CollectionFactory#getCollectionInterface() collection-interface}
-   *        of the given <code>factory</code>.
+   *        {@link CollectionFactory#getCollectionInterface()
+   *        collection-interface} of the given <code>factory</code>.
    * @return the {@link CollectionFactory} that was registered for the given
    *         <code>collectionInterface</code> before and has now been replaced
    *         with <code>factory</code> or <code>null</code> if none was

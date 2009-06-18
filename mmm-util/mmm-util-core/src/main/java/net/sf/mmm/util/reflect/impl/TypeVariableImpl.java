@@ -14,6 +14,7 @@ import java.lang.reflect.TypeVariable;
  *        underlying type variable.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     TypeVariable<DECLARATION> {
@@ -31,9 +32,8 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
    * The constructor.
    * 
    * @param name is the {@link #getName() name}.
-   * @param declaration is the
-   *        {@link #getGenericDeclaration() declaring element} (e.g. Class or
-   *        Method).
+   * @param declaration is the {@link #getGenericDeclaration() declaring
+   *        element} (e.g. Class or Method).
    * @param bounds are the {@link #getBounds()}.
    */
   public TypeVariableImpl(String name, DECLARATION declaration, Type[] bounds) {

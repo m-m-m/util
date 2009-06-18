@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transformer.api;
 
-
 /**
  * This is the interface for a {@link Transformer} of {@link String}s that is
  * typically used as part of a
  * {@link net.sf.mmm.util.transformer.base.StringTransformerChain}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface StringTransformerRule extends Transformer<String> {
 

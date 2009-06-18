@@ -17,6 +17,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * @see net.sf.mmm.util.reflect.api.GenericType#getComponentType()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface CollectionReflectionUtil {
 

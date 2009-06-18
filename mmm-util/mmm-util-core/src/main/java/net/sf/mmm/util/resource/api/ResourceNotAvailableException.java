@@ -10,6 +10,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * This exception is thrown if a resource was requested that is NOT available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class ResourceNotAvailableException extends NlsRuntimeException {
 

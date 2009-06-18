@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
  * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class GenericArrayTypeImpl implements GenericArrayType {
 
@@ -21,8 +22,8 @@ public class GenericArrayTypeImpl implements GenericArrayType {
   /**
    * The constructor.
    * 
-   * @param componentType is the
-   *        {@link #getGenericComponentType() generic component-type}.
+   * @param componentType is the {@link #getGenericComponentType() generic
+   *        component-type}.
    */
   public GenericArrayTypeImpl(Type componentType) {
 

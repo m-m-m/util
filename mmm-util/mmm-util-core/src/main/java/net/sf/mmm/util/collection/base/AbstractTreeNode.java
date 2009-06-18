@@ -18,6 +18,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  *        class should specialize this type to itself.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public abstract class AbstractTreeNode<NODE extends AbstractTreeNode<NODE>> implements
     TreeNode<NODE> {

@@ -27,6 +27,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class CollectionReflectionUtilImpl extends AbstractLoggable implements
     CollectionReflectionUtil {

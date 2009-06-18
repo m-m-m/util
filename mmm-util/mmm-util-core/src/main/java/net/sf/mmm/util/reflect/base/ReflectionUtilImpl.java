@@ -51,13 +51,11 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUtil {
 
-  /** TODO: javadoc. */
-  private static final String SUFFIX_CLASS = ".class";
-
-  /** TODO: javadoc. */
+  /** The prefix of resources in WAR-files. */
   private static final String WEB_INF_CLASSES = "WEB-INF/classes/";
 
   /** @see #getInstance() */
@@ -564,69 +562,6 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   }
 
   /**
-   * This method checks and transforms the filename of a potential {@link Class}
-   * given by <code>fileName</code>.
-   * 
-   * @param fileName is the filename.
-   * @return the according Java {@link Class#getName() class-name} for the given
-   *         <code>fileName</code> if it is a class-file that is no anonymous
-   *         {@link Class}, else <code>null</code>.
-   */
-  private static String fixClassName(String fileName) {
-
-    if (fileName.endsWith(SUFFIX_CLASS)) {
-      // remove extension (".class".length() == 6)
-      String nameWithoutExtension = fileName
-          .substring(0, fileName.length() - SUFFIX_CLASS.length());
-      // handle inner classes...
-      /*
-       * int lastDollar = nameWithoutExtension.lastIndexOf('$'); if (lastDollar
-       * > 0) { char innerClassStart = nameWithoutExtension.charAt(lastDollar +
-       * 1); if ((innerClassStart >= '0') && (innerClassStart <= '9')) { //
-       * ignore anonymous class } else { return
-       * nameWithoutExtension.replace('$', '.'); } } else { return
-       * nameWithoutExtension; }
-       */
-      return nameWithoutExtension;
-    }
-    return null;
-  }
-
-  /**
-   * This method finds the recursively scans the given
-   * <code>packageDirectory</code> for {@link Class} files and adds their
-   * according Java names to the given <code>classSet</code>.
-   * 
-   * @param packageDirectory is the directory representing the {@link Package}.
-   * @param classSet is where to add the Java {@link Class}-names to.
-   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the
-   *        qualified prefix (the {@link Package} with a trailing dot).
-   * @param qualifiedNamePrefixLength the length of the prefix used to rest the
-   *        string-builder after reuse.
-   */
-  private static void findClassNamesRecursive(File packageDirectory, Set<String> classSet,
-      StringBuilder qualifiedNameBuilder, int qualifiedNamePrefixLength) {
-
-    for (File childFile : packageDirectory.listFiles()) {
-      String fileName = childFile.getName();
-      if (childFile.isDirectory()) {
-        qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
-        StringBuilder subBuilder = new StringBuilder(qualifiedNameBuilder);
-        subBuilder.append(fileName);
-        subBuilder.append('.');
-        findClassNamesRecursive(childFile, classSet, subBuilder, subBuilder.length());
-      } else {
-        String simpleClassName = fixClassName(fileName);
-        if (simpleClassName != null) {
-          qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
-          qualifiedNameBuilder.append(simpleClassName);
-          classSet.add(qualifiedNameBuilder.toString());
-        }
-      }
-    }
-  }
-
-  /**
    * This method scans the given <code>packageDirectory</code> recursively for
    * resources.
    * 
@@ -674,74 +609,42 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet)
       throws IOException {
 
-    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    String path = packageName.replace('.', '/');
-    String pathWithPrefix = path + '/';
-    Enumeration<URL> urls = classLoader.getResources(path);
-    StringBuilder qualifiedNameBuilder = new StringBuilder(packageName);
-    qualifiedNameBuilder.append('.');
-    int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
-    while (urls.hasMoreElements()) {
-      URL packageUrl = urls.nextElement();
-      String urlString = URLDecoder.decode(packageUrl.getFile(), "UTF-8");
-      String protocol = packageUrl.getProtocol().toLowerCase();
-      if ("file".equals(protocol)) {
-        File packageDirectory = new File(urlString);
-        if (packageDirectory.isDirectory()) {
-          if (includeSubPackages) {
-            findClassNamesRecursive(packageDirectory, classSet, qualifiedNameBuilder,
-                qualifiedNamePrefixLength);
-          } else {
-            for (String fileName : packageDirectory.list()) {
-              String simpleClassName = fixClassName(fileName);
-              if (simpleClassName != null) {
-                qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
-                qualifiedNameBuilder.append(simpleClassName);
-                classSet.add(qualifiedNameBuilder.toString());
-              }
-            }
-          }
-        }
-      } else if ("jar".equals(protocol)) {
-        // somehow the connection has no close method and can NOT be disposed
-        JarURLConnection connection = (JarURLConnection) packageUrl.openConnection();
-        JarFile jarFile = connection.getJarFile();
-        Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
-        while (jarEntryEnumeration.hasMoreElements()) {
-          JarEntry jarEntry = jarEntryEnumeration.nextElement();
-          String absoluteFileName = jarEntry.getName();
-          if (absoluteFileName.endsWith(SUFFIX_CLASS)) {
-            if (absoluteFileName.startsWith("/")) {
-              absoluteFileName = absoluteFileName.substring(1);
-            }
-            // special treatment for WAR files...
-            // "WEB-INF/lib/" entries should be opened directly in contained jar
-            if (absoluteFileName.startsWith(WEB_INF_CLASSES)) {
-              // "WEB-INF/classes/".length() == 16
-              absoluteFileName = absoluteFileName.substring(16);
-            }
-            boolean accept = true;
-            if (absoluteFileName.startsWith(pathWithPrefix)) {
-              String qualifiedName = absoluteFileName.replace('/', '.');
-              if (!includeSubPackages) {
-                int index = absoluteFileName.indexOf('/', qualifiedNamePrefixLength + 1);
-                if (index != -1) {
-                  accept = false;
-                }
-              }
-              if (accept) {
-                String className = fixClassName(qualifiedName);
-                if (className != null) {
-                  classSet.add(className);
-                }
-              }
-            }
-          }
-        }
-      } else {
-        // TODO: unknown protocol - log this?
-      }
-    }
+    Filter<String> filter = ConstantFilter.getInstance(true);
+    findClassNames(packageName, includeSubPackages, classSet, filter, Thread.currentThread()
+        .getContextClassLoader());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages,
+      Filter<String> filter) throws IOException {
+
+    Set<String> result = new HashSet<String>();
+    findClassNames(packageName, includeSubPackages, result, filter, Thread.currentThread()
+        .getContextClassLoader());
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages,
+      Filter<String> filter, ClassLoader classLoader) throws IOException {
+
+    Set<String> result = new HashSet<String>();
+    findClassNames(packageName, includeSubPackages, result, filter, classLoader);
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet,
+      Filter<String> filter, ClassLoader classLoader) throws IOException {
+
+    ResourceVisitor visitor = new ClassNameCollector(classSet, filter);
+    visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
   }
 
   /**

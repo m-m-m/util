@@ -28,6 +28,7 @@ import java.util.Collection;
  * 
  * @param <COLLECTION> is the generic {@link Collection}-type.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
 public abstract interface CollectionFactory<COLLECTION extends Collection> {
@@ -71,9 +72,9 @@ public abstract interface CollectionFactory<COLLECTION extends Collection> {
    * This method creates a new {@link Collection} instance.<br>
    * It is explicitly typed and respects the generic element type of the
    * collection. Therefore the type of the {@link Collection} can NOT be bound
-   * to the generic type <code>&lt;COLLECTION&gt;</code> because of
-   * limitations in Java's generic type system. You need to work on the actual
-   * sub-interface (e.g. {@link ListFactory}) to get the proper result type.
+   * to the generic type <code>&lt;COLLECTION&gt;</code> because of limitations
+   * in Java's generic type system. You need to work on the actual sub-interface
+   * (e.g. {@link ListFactory}) to get the proper result type.
    * 
    * @see #createGeneric()
    * 
@@ -87,9 +88,9 @@ public abstract interface CollectionFactory<COLLECTION extends Collection> {
    * initial <code>capacity</code>.<br>
    * It is explicitly typed and respects the generic element type of the
    * collection. Therefore the type of the {@link Collection} can NOT be bound
-   * to the generic type <code>&lt;COLLECTION&gt;</code> because of
-   * limitations in Java's generic type system. You need to work on the actual
-   * sub-interface (e.g. {@link ListFactory}) to get the proper result type.
+   * to the generic type <code>&lt;COLLECTION&gt;</code> because of limitations
+   * in Java's generic type system. You need to work on the actual sub-interface
+   * (e.g. {@link ListFactory}) to get the proper result type.
    * 
    * @see #createGeneric(int)
    * 

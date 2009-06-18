@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-
 import net.sf.mmm.util.nls.api.NlsFormatter;
 
 /**
@@ -11,6 +10,7 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
  * {@link net.sf.mmm.util.nls.api.NlsFormatterManager} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterManager {
 
@@ -30,10 +30,10 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
 
   /**
    * This method creates the {@link NlsFormatter} for the given
-   * <code>formatType</code> and the custom <code>subformat</code>. It is
-   * called if no formatter is
-   * {@link NlsFormatterMap#registerFormatter(NlsFormatter, String, String) registered}
-   * for the given arguments.<br>
+   * <code>formatType</code> and the custom <code>subformat</code>. It is called
+   * if no formatter is
+   * {@link NlsFormatterMap#registerFormatter(NlsFormatter, String, String)
+   * registered} for the given arguments.<br>
    * 
    * @param formatType is the type to be formatted.
    * @param subformat is the custom formatStyle for which no static formatter is

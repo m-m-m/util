@@ -14,6 +14,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
  * {@link net.sf.mmm.util.nls.api.NlsTemplate} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NlsTemplateImpl extends FormattedNlsTemplate {
 
@@ -54,8 +55,9 @@ public class NlsTemplateImpl extends FormattedNlsTemplate {
 
   /**
    * This method gets the
-   * {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name}
-   * used to lookup the bundle (typically a {@link java.util.ResourceBundle}).
+   * {@link java.util.ResourceBundle#getBundle(String, java.util.Locale)
+   * base-name} used to lookup the bundle (typically a
+   * {@link java.util.ResourceBundle}).
    * 
    * @return the bundleName is the base-name of the associated bundle.
    */

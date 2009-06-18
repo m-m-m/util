@@ -24,6 +24,7 @@ import net.sf.mmm.util.xml.api.XmlUtil;
  * @see net.sf.mmm.util.xml.base.DomUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
 

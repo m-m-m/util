@@ -11,6 +11,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * {@link RuntimeException}. Besides it has native language support build in.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class RuntimeIoException extends NlsRuntimeException {
 

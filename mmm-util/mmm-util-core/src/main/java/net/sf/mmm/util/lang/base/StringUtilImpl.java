@@ -13,6 +13,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
  * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class StringUtilImpl implements StringUtil {
 

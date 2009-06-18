@@ -12,6 +12,7 @@ package net.sf.mmm.util.file.api;
  * @see #OTHERS
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public enum FileAccessClass {
 

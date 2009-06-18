@@ -7,8 +7,8 @@ import net.sf.mmm.util.transformer.api.StringTransformerRule;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
- * This class represents a {@link Transformer} for {@link String}s that is
- * build out of a list of {@link StringTransformerRule rules}. It performs its
+ * This class represents a {@link Transformer} for {@link String}s that is build
+ * out of a list of {@link StringTransformerRule rules}. It performs its
  * {@link #transform(String) transformation} by passing the given value to the
  * first rule and its result to the next rule and so on. If a rule matched, it
  * can stop further proceeding via the
@@ -17,6 +17,7 @@ import net.sf.mmm.util.transformer.api.Transformer;
  * in the chain is returned (like a left associative operator).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class StringTransformerChain implements Transformer<String> {
 
@@ -54,8 +55,8 @@ public class StringTransformerChain implements Transformer<String> {
    * This method extends this chain with <code>additionalRules</code>.
    * 
    * @param additionalRules are the rules to add.
-   * @return the chain that also checks the <code>additionalRules</code> if
-   *         none of this rules match.
+   * @return the chain that also checks the <code>additionalRules</code> if none
+   *         of this rules match.
    */
   public StringTransformerChain extend(StringTransformerRule... additionalRules) {
 

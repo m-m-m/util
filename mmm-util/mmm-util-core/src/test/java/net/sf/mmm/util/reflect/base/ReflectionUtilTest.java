@@ -3,11 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -78,54 +73,54 @@ public class ReflectionUtilTest {
 
     GenericType type;
     type = getReturnType(TestClass.class, "getStringArray").getComponentType();
-    assertEquals(String.class, type.getType());
-    assertEquals(String.class, type.getAssignmentClass());
-    assertEquals(String.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getType());
+    Assert.assertEquals(String.class, type.getAssignmentClass());
+    Assert.assertEquals(String.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getStringList").getComponentType();
-    assertEquals(String.class, type.getType());
-    assertEquals(String.class, type.getAssignmentClass());
-    assertEquals(String.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getType());
+    Assert.assertEquals(String.class, type.getAssignmentClass());
+    Assert.assertEquals(String.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getStringListUpperWildcard").getComponentType();
-    assertEquals(String.class, type.getAssignmentClass());
-    assertEquals(String.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getAssignmentClass());
+    Assert.assertEquals(String.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getStringListLowerWildcard").getComponentType();
-    assertEquals(String.class, type.getAssignmentClass());
-    assertEquals(Object.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getAssignmentClass());
+    Assert.assertEquals(Object.class, type.getRetrievalClass());
     type = getReturnType(TestClass.class, "getGenericStringArray").getComponentType();
-    assertEquals(String.class, type.getAssignmentClass());
-    assertEquals(String.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getAssignmentClass());
+    Assert.assertEquals(String.class, type.getRetrievalClass());
     // the really hard ones...
     type = getReflectionUtil().createGenericType(
         ExParameterizedStringList.class.getGenericSuperclass()).getComponentType();
-    assertEquals(String.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getRetrievalClass());
     type = getReflectionUtil().createGenericType(StringList.class).getComponentType();
-    assertEquals(String.class, type.getRetrievalClass());
+    Assert.assertEquals(String.class, type.getRetrievalClass());
   }
 
   private void checkTypeParser(String typeString) throws Exception {
 
     Type type = getReflectionUtil().toType(typeString);
     String toString = getReflectionUtil().toString(type);
-    assertEquals(typeString, toString);
+    Assert.assertEquals(typeString, toString);
   }
 
   @Test
   public void testGenericTypeWithTypeVariable() throws Exception {
 
-    assertEquals(Long.class, getReturnClass(TestClass.class, "getA"));
-    assertEquals(Integer.class, getReturnClass(TestClass.class, "getB"));
-    assertEquals(String.class, getReturnClass(TestClass.class, "getC"));
+    Assert.assertEquals(Long.class, getReturnClass(TestClass.class, "getA"));
+    Assert.assertEquals(Integer.class, getReturnClass(TestClass.class, "getB"));
+    Assert.assertEquals(String.class, getReturnClass(TestClass.class, "getC"));
 
     // Collection<SubSubBar<? extends Byte>>
     GenericType subSubBarListType = getReturnType(TestClass.class, "getSubSubBarList");
     GenericType subSubBarType = subSubBarListType.getComponentType();
     Class<?> subSubBarClass = subSubBarType.getRetrievalClass();
-    assertEquals(SubSubBar.class, subSubBarClass);
-    assertEquals(Short.class, getReturnClass(subSubBarType, "getF"));
-    assertEquals(Byte.class, getReturnClass(subSubBarType, "getG"));
+    Assert.assertEquals(SubSubBar.class, subSubBarClass);
+    Assert.assertEquals(Short.class, getReturnClass(subSubBarType, "getF"));
+    Assert.assertEquals(Byte.class, getReturnClass(subSubBarType, "getG"));
     GenericType hList = getReturnType(subSubBarClass, "getH");
-    assertEquals(List.class, hList.getRetrievalClass());
-    assertEquals(Double.class, hList.getComponentType().getRetrievalClass());
+    Assert.assertEquals(List.class, hList.getRetrievalClass());
+    Assert.assertEquals(Double.class, hList.getComponentType().getRetrievalClass());
   }
 
   @Test
@@ -136,19 +131,19 @@ public class ReflectionUtilTest {
 
     subType = getReturnType(AssignableFromTestClass.class, "getMapSubType");
     superType = getReturnType(AssignableFromTestClass.class, "getMapSuperType");
-    assertTrue(subType.isAssignableFrom(subType));
-    assertTrue(superType.isAssignableFrom(superType));
-    assertTrue(superType.isAssignableFrom(subType));
+    Assert.assertTrue(subType.isAssignableFrom(subType));
+    Assert.assertTrue(superType.isAssignableFrom(superType));
+    Assert.assertTrue(superType.isAssignableFrom(subType));
 
     subType = getReturnType(AssignableFromTestClass.class, "getListSubType");
     superType = getReturnType(AssignableFromTestClass.class, "getListSuperType");
-    assertTrue(superType.isAssignableFrom(subType));
+    Assert.assertTrue(superType.isAssignableFrom(subType));
 
     subType = getReturnType(AssignableFromTestClass.class, "getBarSubType");
     superType = getReturnType(AssignableFromTestClass.class, "getBarSuperType");
-    assertTrue(superType.isAssignableFrom(subType));
+    Assert.assertTrue(superType.isAssignableFrom(subType));
     superType = getReturnType(AssignableFromTestClass.class, "getBarNoSuperType");
-    assertFalse(superType.isAssignableFrom(subType));
+    Assert.assertFalse(superType.isAssignableFrom(subType));
   }
 
   @Test
@@ -160,47 +155,47 @@ public class ReflectionUtilTest {
     GenericType genericType;
 
     genericType = util.createGenericType(String.class);
-    assertEquals(String.class, genericType.getType());
-    assertEquals(String.class, genericType.getAssignmentClass());
-    assertEquals(String.class, genericType.getRetrievalClass());
-    assertEquals(0, genericType.getTypeArgumentCount());
-    assertNull(genericType.getComponentType());
+    Assert.assertEquals(String.class, genericType.getType());
+    Assert.assertEquals(String.class, genericType.getAssignmentClass());
+    Assert.assertEquals(String.class, genericType.getRetrievalClass());
+    Assert.assertEquals(0, genericType.getTypeArgumentCount());
+    Assert.assertNull(genericType.getComponentType());
 
     type = util.toType("?");
     genericType = util.createGenericType(type);
-    assertEquals(type, genericType.getType());
-    assertEquals(Object.class, genericType.getAssignmentClass());
-    assertEquals(Object.class, genericType.getRetrievalClass());
-    assertEquals(0, genericType.getTypeArgumentCount());
-    assertNull(genericType.getComponentType());
+    Assert.assertEquals(type, genericType.getType());
+    Assert.assertEquals(Object.class, genericType.getAssignmentClass());
+    Assert.assertEquals(Object.class, genericType.getRetrievalClass());
+    Assert.assertEquals(0, genericType.getTypeArgumentCount());
+    Assert.assertNull(genericType.getComponentType());
 
     type = util.toType("? extends java.lang.Integer");
     genericType = util.createGenericType(type);
-    assertEquals(type, genericType.getType());
-    assertEquals(Integer.class, genericType.getAssignmentClass());
-    assertEquals(Integer.class, genericType.getRetrievalClass());
-    assertEquals(0, genericType.getTypeArgumentCount());
-    assertNull(genericType.getComponentType());
+    Assert.assertEquals(type, genericType.getType());
+    Assert.assertEquals(Integer.class, genericType.getAssignmentClass());
+    Assert.assertEquals(Integer.class, genericType.getRetrievalClass());
+    Assert.assertEquals(0, genericType.getTypeArgumentCount());
+    Assert.assertNull(genericType.getComponentType());
 
     type = util.toType("java.util.List<java.lang.String>");
     genericType = util.createGenericType(type);
-    assertEquals(type, genericType.getType());
-    assertEquals(List.class, genericType.getAssignmentClass());
-    assertEquals(List.class, genericType.getRetrievalClass());
-    assertEquals(1, genericType.getTypeArgumentCount());
+    Assert.assertEquals(type, genericType.getType());
+    Assert.assertEquals(List.class, genericType.getAssignmentClass());
+    Assert.assertEquals(List.class, genericType.getRetrievalClass());
+    Assert.assertEquals(1, genericType.getTypeArgumentCount());
     GenericType componentType = genericType.getComponentType();
-    assertEquals(componentType, genericType.getTypeArgument(0));
-    assertEquals(String.class, componentType.getType());
-    assertEquals(String.class, componentType.getAssignmentClass());
-    assertEquals(String.class, componentType.getRetrievalClass());
-    assertEquals(0, componentType.getTypeArgumentCount());
-    assertNull(componentType.getComponentType());
+    Assert.assertEquals(componentType, genericType.getTypeArgument(0));
+    Assert.assertEquals(String.class, componentType.getType());
+    Assert.assertEquals(String.class, componentType.getAssignmentClass());
+    Assert.assertEquals(String.class, componentType.getRetrievalClass());
+    Assert.assertEquals(0, componentType.getTypeArgumentCount());
+    Assert.assertNull(componentType.getComponentType());
   }
 
   @Test
   public void testToType() throws Exception {
 
-    assertEquals(String.class, getReflectionUtil().toType("java.lang.String"));
+    Assert.assertEquals(String.class, getReflectionUtil().toType("java.lang.String"));
     checkTypeParser("?");
     checkTypeParser("? extends java.lang.String");
     checkTypeParser("? super java.lang.String");
@@ -230,8 +225,12 @@ public class ReflectionUtilTest {
         return false;
       }
     };
-    resourceNameSet = util.findResourceNames("net.sf.mmm.util.reflect", true, filter);
-    assertTrue(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
+    resourceNameSet = util.findResourceNames("net.sf.mmm.util", false, filter);
+    Assert.assertFalse(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
+    resourceNameSet = util.findResourceNames("net.sf.mmm.util.reflect", false, filter);
+    Assert.assertTrue(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
+    resourceNameSet = util.findResourceNames("net.sf.mmm.util", true, filter);
+    Assert.assertTrue(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
   }
 
   @Test
@@ -241,23 +240,23 @@ public class ReflectionUtilTest {
     // test directories
     Set<String> classNameSet = util.findClassNames(ReflectionUtilImpl.class.getPackage().getName(),
         false);
-    assertTrue(classNameSet.contains(ReflectionUtilImpl.class.getName()));
-    assertTrue(classNameSet.contains(ReflectionUtilTest.class.getName()));
+    Assert.assertTrue(classNameSet.contains(ReflectionUtilImpl.class.getName()));
+    Assert.assertTrue(classNameSet.contains(ReflectionUtilTest.class.getName()));
 
     // test sub-package functionality
-    assertFalse(classNameSet.contains(TypeVariableImpl.class.getName()));
+    Assert.assertFalse(classNameSet.contains(TypeVariableImpl.class.getName()));
     classNameSet = util.findClassNames(GenericTypeImpl.class.getPackage().getName(), true);
-    assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));
+    Assert.assertTrue(classNameSet.contains(TypeVariableImpl.class.getName()));
 
     // test JAR files
     classNameSet = util.findClassNames(Test.class.getPackage().getName(), false);
-    assertTrue(classNameSet.contains(Test.class.getName()));
-    assertTrue(classNameSet.contains(Assert.class.getName()));
+    Assert.assertTrue(classNameSet.contains(Test.class.getName()));
+    Assert.assertTrue(classNameSet.contains(Assert.class.getName()));
 
     // test sub-package functionality
-    assertFalse(classNameSet.contains(Result.class.getName()));
+    Assert.assertFalse(classNameSet.contains(Result.class.getName()));
     classNameSet = util.findClassNames(Test.class.getPackage().getName(), true);
-    assertTrue(classNameSet.contains(Result.class.getName()));
+    Assert.assertTrue(classNameSet.contains(Result.class.getName()));
 
   }
 

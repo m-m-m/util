@@ -10,6 +10,9 @@ import java.nio.charset.Charset;
 /**
  * This class is an input-stream that detects the encoding from the potential
  * XML-header of a stream.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 final class XmlInputStream extends InputStream {
 

@@ -18,6 +18,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
  * {@link Object} to a {@link Calendar}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Object, Calendar> {
 

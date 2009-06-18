@@ -8,6 +8,7 @@ package net.sf.mmm.util.math.api;
  * {@link Number}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface MathUtil {
 

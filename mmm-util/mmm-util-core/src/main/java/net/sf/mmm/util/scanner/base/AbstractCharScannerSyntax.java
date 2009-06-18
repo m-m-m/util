@@ -14,6 +14,9 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
  * 
  * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean,
  *      CharScannerSyntax)
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
 

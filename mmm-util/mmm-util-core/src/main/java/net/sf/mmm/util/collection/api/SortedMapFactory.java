@@ -12,6 +12,7 @@ import java.util.SortedMap;
  * @see net.sf.mmm.util.collection.base.TreeMapFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 @SuppressWarnings("unchecked")
 public interface SortedMapFactory extends MapFactory<SortedMap> {

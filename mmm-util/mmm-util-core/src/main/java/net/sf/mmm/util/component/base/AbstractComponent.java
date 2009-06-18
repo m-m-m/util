@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
  * {@link #initialize() initialization}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractComponent {
 
@@ -39,8 +40,8 @@ public abstract class AbstractComponent {
   }
 
   /**
-   * This method performs the actual {@link #initialize() initialization}. It
-   * is called when {@link #initialize()} is invoked for the first time.<br>
+   * This method performs the actual {@link #initialize() initialization}. It is
+   * called when {@link #initialize()} is invoked for the first time.<br>
    * <b>ATTENTION:</b><br>
    * When you override this method from a sub-class you need to do a
    * <code>super.{@link #doInitialize()}</code>.

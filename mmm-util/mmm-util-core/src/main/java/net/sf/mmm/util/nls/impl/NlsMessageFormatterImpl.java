@@ -22,13 +22,16 @@ import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
  * <b>NOTE:</b><br>
  * This is more or less a rewrite of {@link java.text.MessageFormat} and is
  * syntax-compatible with the
- * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern}-format.
- * Some special (and somewhat sick) features as modifying internal
+ * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern}
+ * -format. Some special (and somewhat sick) features as modifying internal
  * {@link java.text.Format}s or {@link java.text.FieldPosition} are NOT
  * supported. Currently also parsing is NOT supported.<br>
- * Therefore this implementation is immutable and thread-safe. Further it works
- * on any {@link Appendable} rather than only on {@link StringBuffer}. It also
- * uses the same {@link Appendable} for recursive invocations.
+ * Instead this implementation is immutable and thread-safe. Further it works on
+ * any {@link Appendable} rather than only on {@link StringBuffer}. It also uses
+ * the same {@link Appendable} for recursive invocations.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> implements
     NlsMessageFormatter {
@@ -130,11 +133,11 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
   /**
    * This inner class represents a segment out of the parsed message-pattern.<br>
    * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is
-   * parsed into two {@link PatternSegment}s. The first has a {@link #prefix}
-   * of <code>"Hi "</code> and {@link #argumentIndex} of <code>0</code> and
-   * the second has <code>" you have "</code> as {@link #prefix} and
-   * {@link #argumentIndex} of <code>1</code>. The rest of the pattern which
-   * is <code>" items!"</code> will be stored in
+   * parsed into two {@link PatternSegment}s. The first has a {@link #prefix} of
+   * <code>"Hi "</code> and {@link #argumentIndex} of <code>0</code> and the
+   * second has <code>" you have "</code> as {@link #prefix} and
+   * {@link #argumentIndex} of <code>1</code>. The rest of the pattern which is
+   * <code>" items!"</code> will be stored in
    * {@link NlsMessageFormatterImpl#suffix}.
    */
   protected static class PatternSegment {

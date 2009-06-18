@@ -14,6 +14,7 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
  * using {@link DateFormat#getDateTimeInstance(int, int, Locale)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class NlsFormatterDateTime extends SimpleNlsFormatter<Object> {
 

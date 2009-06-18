@@ -11,6 +11,7 @@ import java.util.concurrent.ThreadFactory;
  * This is a very simple implementation of the {@link Executor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SimpleExecutor implements Executor {
 

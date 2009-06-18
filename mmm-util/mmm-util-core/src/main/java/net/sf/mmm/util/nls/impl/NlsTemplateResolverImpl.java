@@ -20,6 +20,7 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * @see java.util.ResourceBundle
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NlsTemplateResolverImpl extends AbstractResourceBundleNlsTemplateResolver {
 

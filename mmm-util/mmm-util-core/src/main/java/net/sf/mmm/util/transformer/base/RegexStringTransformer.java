@@ -9,12 +9,13 @@ import java.util.regex.Pattern;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
- * This class converts a string by
- * {@link Pattern#matcher(CharSequence) matching} a given regular expression
- * {@link Pattern} and if it {@link Matcher#find() partially matches} replacing
- * the match(es) with a given replacement.
+ * This class converts a string by {@link Pattern#matcher(CharSequence)
+ * matching} a given regular expression {@link Pattern} and if it
+ * {@link Matcher#find() partially matches} replacing the match(es) with a given
+ * replacement.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class RegexStringTransformer implements Transformer<String> {
 
@@ -32,9 +33,9 @@ public class RegexStringTransformer implements Transformer<String> {
    * 
    * @param pattern is the pattern used for conversion.
    * @param replacement is the replacement to fill in the string to convert.
-   * @param replaceAll - if <code>true</code>
-   *        {@link Matcher#replaceAll(String)} will be used, else if
-   *        <code>false</code> {@link Matcher#replaceFirst(String)}.
+   * @param replaceAll - if <code>true</code> {@link Matcher#replaceAll(String)}
+   *        will be used, else if <code>false</code>
+   *        {@link Matcher#replaceFirst(String)}.
    */
   public RegexStringTransformer(Pattern pattern, String replacement, boolean replaceAll) {
 

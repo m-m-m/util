@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
-
 /**
  * This is the interface of a {@link ByteBuffer} that is internally composed out
  * of multiple {@link ByteArray}s. It allows to {@link #getByteArray(int)
@@ -12,16 +10,17 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
  * efficient processing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface ComposedByteBuffer extends ByteBuffer {
 
   /**
    * This method gets the {@link ByteArray} at the given <code>index</code>. The
-   * {@link DetectorStreamBuffer} is composed out of {@link ByteArray}s. This
-   * method allows efficient processing of bytes from <code>byte[]</code> rather
-   * then calling {@link #hasNext()} and {@link #next()} and repetitive.
-   * Additionally this way allows full lookahead up to the end of the buffer
-   * without consuming the data.<br>
+   * {@link net.sf.mmm.util.io.api.spi.DetectorStreamBuffer} is composed out of
+   * {@link ByteArray}s. This method allows efficient processing of bytes from
+   * <code>byte[]</code> rather then calling {@link #hasNext()} and
+   * {@link #next()} and repetitive. Additionally this way allows full lookahead
+   * up to the end of the buffer without consuming the data.<br>
    * <b>ATTENTION:</b><br>
    * Consuming operations such as {@link #next()} or {@link #skip(long)} will
    * invalidate the returned {@link ByteArray}. Please do NOT call these methods

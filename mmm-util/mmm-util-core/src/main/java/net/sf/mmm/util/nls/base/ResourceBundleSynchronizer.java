@@ -35,12 +35,13 @@ import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
  * This class only works with java 6 or above.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ResourceBundleSynchronizer {
 
   /**
-   * The commandline option to
-   * {@link #setDatePattern(String) set the date-pattern}.
+   * The commandline option to {@link #setDatePattern(String) set the
+   * date-pattern}.
    */
   public static final String OPTION_DATE_PATTERN = "--date-pattern";
 

@@ -9,6 +9,7 @@ import net.sf.mmm.util.pool.api.CharArrayPool;
  * This is a {@link AbstractNoPool dummy pool} for char-arrays.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class NoCharArrayPool extends AbstractNoPool<char[]> implements CharArrayPool {
 

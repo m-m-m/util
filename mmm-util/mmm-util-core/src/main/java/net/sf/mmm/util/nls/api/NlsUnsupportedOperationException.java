@@ -16,6 +16,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * @see UnsupportedOperationException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class NlsUnsupportedOperationException extends NlsRuntimeException {
 

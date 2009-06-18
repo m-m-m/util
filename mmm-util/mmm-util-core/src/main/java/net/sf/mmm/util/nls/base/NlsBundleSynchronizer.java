@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-
 /**
  * This class holds the internationalized messages for <code>util-misc</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NlsBundleSynchronizer extends AbstractResourceBundle {
 

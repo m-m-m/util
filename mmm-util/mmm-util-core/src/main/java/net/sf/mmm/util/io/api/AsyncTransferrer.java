@@ -12,6 +12,7 @@ import java.util.concurrent.TimeoutException;
  * This is the interface for an async transferrer of streams or readers/writers.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface AsyncTransferrer extends Future<Long> {
 

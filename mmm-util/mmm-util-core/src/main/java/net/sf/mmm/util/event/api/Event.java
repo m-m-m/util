@@ -7,6 +7,7 @@ package net.sf.mmm.util.event.api;
  * This is the interface for a generic event.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface Event {
 

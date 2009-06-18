@@ -11,6 +11,7 @@ import net.sf.mmm.util.pool.base.AbstractPool;
  * {@link net.sf.mmm.util.pool.api.Pool} interface for char-arrays.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class CharArrayPoolImpl extends AbstractPool<char[]> implements CharArrayPool {
 

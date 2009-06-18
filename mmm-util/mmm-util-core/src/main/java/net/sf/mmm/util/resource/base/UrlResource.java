@@ -16,6 +16,7 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  * resource that comes from an {@link URL}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class UrlResource extends AbstractDataResource {
 

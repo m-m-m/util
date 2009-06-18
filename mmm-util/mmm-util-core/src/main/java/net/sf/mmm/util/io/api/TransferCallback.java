@@ -16,6 +16,7 @@ package net.sf.mmm.util.io.api;
  *      java.io.OutputStream, boolean, TransferCallback)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface TransferCallback {
 

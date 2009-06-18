@@ -41,6 +41,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class ClasspathResource extends AbstractDataResource {
 

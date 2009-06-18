@@ -15,6 +15,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * @see ReflectionUtilImpl#toType(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ParameterizedTypeImpl implements ParameterizedType {
 

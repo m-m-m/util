@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-
 /**
  * This is the interface for a {@link ValueConverter} that is composed out of
  * individual {@link ValueConverter}s. The idea of this interface is the idiom
@@ -114,6 +113,7 @@ package net.sf.mmm.util.value.api;
  * applicable converters fail it will also fail and return <code>null</code>.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface ComposedValueConverter extends ValueConverter<Object, Object>,
     GenericValueConverter<Object> {

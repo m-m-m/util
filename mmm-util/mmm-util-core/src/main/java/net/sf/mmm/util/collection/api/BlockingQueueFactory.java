@@ -6,12 +6,13 @@ package net.sf.mmm.util.collection.api;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * This is the interface for a {@link CollectionFactory} that
- * {@link #create() creates} instances of {@link BlockingQueue}.
+ * This is the interface for a {@link CollectionFactory} that {@link #create()
+ * creates} instances of {@link BlockingQueue}.
  * 
  * @see net.sf.mmm.util.collection.base.LinkedBlockingQueueFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 @SuppressWarnings("unchecked")
 public interface BlockingQueueFactory extends CollectionFactory<BlockingQueue> {

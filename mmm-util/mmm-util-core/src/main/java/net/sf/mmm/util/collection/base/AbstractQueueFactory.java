@@ -12,6 +12,7 @@ import net.sf.mmm.util.collection.api.QueueFactory;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQueueFactory implements QueueFactory {

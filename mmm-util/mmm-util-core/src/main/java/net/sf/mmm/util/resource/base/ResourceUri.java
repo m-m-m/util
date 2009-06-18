@@ -51,6 +51,7 @@ import java.util.regex.Pattern;
  * </table>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class ResourceUri {
 

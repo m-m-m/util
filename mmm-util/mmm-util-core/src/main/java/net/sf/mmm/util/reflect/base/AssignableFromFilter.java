@@ -11,6 +11,7 @@ import net.sf.mmm.util.filter.api.Filter;
  * {@link #AssignableFromFilter(Class) special type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class AssignableFromFilter implements Filter<Class<?>> {
 
@@ -34,10 +35,9 @@ public class AssignableFromFilter implements Filter<Class<?>> {
    * 
    * @return <code>true</code> if and only if the given <code>type</code> is
    *         {@link Class#isAssignableFrom(Class) assignable from} the
-   *         super-type defined at
-   *         {@link #AssignableFromFilter(Class) construction}. This means the
-   *         given <code>type</code> has to implement/extend the super-type or
-   *         be equal to it.
+   *         super-type defined at {@link #AssignableFromFilter(Class)
+   *         construction}. This means the given <code>type</code> has to
+   *         implement/extend the super-type or be equal to it.
    */
   public boolean accept(Class<?> type) {
 

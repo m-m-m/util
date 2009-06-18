@@ -7,6 +7,7 @@ package net.sf.mmm.util.reflect.base;
  * This is the interface for a visitor of resources by their absolute classpath.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface ResourceVisitor {
 

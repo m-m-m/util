@@ -13,6 +13,7 @@ import net.sf.mmm.util.lang.api.Conjunction;
  * @param <V> is the generic type of the value to check.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ConjunctionFilter<V> implements Filter<V> {
 

@@ -7,6 +7,7 @@ package net.sf.mmm.util.value.api;
  * This is the base-class of exceptions thrown if the parsing of a value failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ValueParseException extends ValueException {
 

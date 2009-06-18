@@ -14,6 +14,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * {@link javax.annotation.PostConstruct initialization}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NotInitializedException extends NlsRuntimeException {
 

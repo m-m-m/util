@@ -17,6 +17,7 @@ import net.sf.mmm.util.file.base.FileAccessPermissions;
  * @see net.sf.mmm.util.file.base.FileUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface FileUtil {
 

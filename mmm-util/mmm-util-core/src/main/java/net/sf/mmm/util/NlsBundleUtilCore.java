@@ -9,6 +9,7 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * This class holds the internationalized messages for this module.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class NlsBundleUtilCore extends AbstractResourceBundle {
 

@@ -23,6 +23,7 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
  * {@link net.sf.mmm.util.value.api.ComposedValueConverter} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 

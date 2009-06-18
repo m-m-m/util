@@ -15,6 +15,7 @@ import java.util.Map;
  * @see net.sf.mmm.util.reflect.base.ManifestLoader
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class Manifest {
 

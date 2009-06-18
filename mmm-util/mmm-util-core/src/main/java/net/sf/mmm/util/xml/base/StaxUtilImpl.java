@@ -24,6 +24,7 @@ import net.sf.mmm.util.xml.api.StaxUtil;
  * 173).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
 

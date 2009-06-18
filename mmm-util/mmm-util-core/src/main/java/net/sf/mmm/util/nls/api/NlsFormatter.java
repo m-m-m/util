@@ -15,6 +15,7 @@ import java.util.Locale;
  *        {@link #format(Object, Locale)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsFormatter<O> {
 
@@ -24,7 +25,8 @@ public interface NlsFormatter<O> {
    * 
    * @param object is the object to format.
    * @param locale is the locale used for localized formatting.
-   * @return the formatted and localized string of the given <code>object</code>.
+   * @return the formatted and localized string of the given <code>object</code>
+   *         .
    */
   String format(O object, Locale locale);
 

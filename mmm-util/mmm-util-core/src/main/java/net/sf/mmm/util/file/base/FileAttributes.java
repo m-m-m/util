@@ -8,11 +8,11 @@ import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
 /**
  * This class represents the attributes of a file as defined in a Unix/Posix
- * Filesystem. They consist of a {@link #getUser() user}, a
- * {@link #getGroup() group} and a {@link #getPermissions() mode mask}
- * (modifiers).
+ * Filesystem. They consist of a {@link #getUser() user}, a {@link #getGroup()
+ * group} and a {@link #getPermissions() mode mask} (modifiers).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class FileAttributes implements Cloneable {
 

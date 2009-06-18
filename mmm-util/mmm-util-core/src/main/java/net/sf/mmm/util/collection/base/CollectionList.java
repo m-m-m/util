@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
  * 
  * @param <E> is the generic type of the elements.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class CollectionList<E> extends ArrayList<E> {
 

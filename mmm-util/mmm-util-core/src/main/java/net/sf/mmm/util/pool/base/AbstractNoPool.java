@@ -13,6 +13,7 @@ import net.sf.mmm.util.pool.api.Pool;
  * @param <E> is the templated type of the elements in the pool.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractNoPool<E> implements Pool<E> {
 

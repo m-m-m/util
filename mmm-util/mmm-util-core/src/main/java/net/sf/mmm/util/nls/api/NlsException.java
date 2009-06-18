@@ -13,6 +13,7 @@ package net.sf.mmm.util.nls.api;
  * @see net.sf.mmm.util.nls.api.NlsThrowable
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class NlsException extends AbstractNlsException {
 

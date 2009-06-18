@@ -13,6 +13,7 @@ import java.io.InputStream;
  * @see net.sf.mmm.util.io.base.EncodingUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface EncodingUtil {
 

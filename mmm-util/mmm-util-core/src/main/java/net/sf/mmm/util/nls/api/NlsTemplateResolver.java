@@ -8,6 +8,7 @@ package net.sf.mmm.util.nls.api;
  * {@link java.util.Locale}-specific language.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsTemplateResolver {
 
@@ -18,7 +19,8 @@ public interface NlsTemplateResolver {
    * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}(s).
    * 
    * @param internationalizedMessage is the
-   *        {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   *        {@link NlsMessage#getInternationalizedMessage() internationalized
+   *        message}.
    * @return the according {@link NlsTemplate} or <code>null</code> if this
    *         implementation failed to resolve the according template.
    */

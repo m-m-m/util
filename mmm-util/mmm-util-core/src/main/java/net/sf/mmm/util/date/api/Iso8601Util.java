@@ -36,7 +36,8 @@ import java.util.Date;
  * <td>&#177;HH[:mm[:ss]]</td>
  * <td>'Z'</td>
  * </tr>
- * </table><br>
+ * </table>
+ * <br>
  * Please note that the special timezone character <code>Z</code> means UTC.<br>
  * Out of these forms the following combinations are supported:
  * <ul>
@@ -61,6 +62,7 @@ import java.util.Date;
  * @see net.sf.mmm.util.date.base.Iso8601UtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface Iso8601Util {
 

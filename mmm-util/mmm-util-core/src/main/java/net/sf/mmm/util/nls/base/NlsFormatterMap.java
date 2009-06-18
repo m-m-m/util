@@ -13,9 +13,11 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
  * {@link #registerFormatter(NlsFormatter, String, String) register} and
  * {@link #getFormatter(String, String) retrieve} {@link NlsFormatter}s.<br>
  * <b>ATTENTION:</b><br>
- * The
- * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default formatter}
- * is NOT stored in this map.
+ * The {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default
+ * formatter} is NOT stored in this map.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class NlsFormatterMap {
 
@@ -74,9 +76,10 @@ public class NlsFormatterMap {
    * @param formatStyle is the style defining details of formatting. May be
    *        <code>null</code> for default formatter of the given
    *        <code>formatType</code>.
-   * @return the according {@link NlsFormatter} instance or <code>null</code>
-   *         if NO such {@link NlsFormatter} is
-   *         {@link #registerFormatter(NlsFormatter, String, String) registered}.
+   * @return the according {@link NlsFormatter} instance or <code>null</code> if
+   *         NO such {@link NlsFormatter} is
+   *         {@link #registerFormatter(NlsFormatter, String, String) registered}
+   *         .
    */
   public NlsFormatter<Object> getFormatter(String formatType, String formatStyle) {
 

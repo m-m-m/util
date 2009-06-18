@@ -10,6 +10,7 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
  * the pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class WildcardGlobPatternCompiler extends AbstractGlobPatternCompiler {
 

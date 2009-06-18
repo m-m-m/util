@@ -8,6 +8,7 @@ package net.sf.mmm.util.lang.base;
  * make life easier.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public abstract class AbstractCharSequence extends CoreCharSequence {
 

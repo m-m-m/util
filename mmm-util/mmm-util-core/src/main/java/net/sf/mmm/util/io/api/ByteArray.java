@@ -10,8 +10,9 @@ package net.sf.mmm.util.io.api;
  * in that array.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
-public interface ByteArray {
+public interface ByteArray extends ByteProvider {
 
   /**
    * This method gets the underlying byte-array of this buffer. You are only

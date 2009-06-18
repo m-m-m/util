@@ -12,17 +12,17 @@ import net.sf.mmm.util.event.api.EventListener;
  * synchronization and therefore is thread-safe.<br>
  * It uses a {@link java.util.concurrent.ConcurrentLinkedQueue} and therefore
  * allows {@link #addListener(EventListener) adding} or
- * {@link #removeListener(EventListener) removing} of
- * {@link EventListener listeners} during
- * {@link EventListener#handleEvent(Event) event-handling}.
+ * {@link #removeListener(EventListener) removing} of {@link EventListener
+ * listeners} during {@link EventListener#handleEvent(Event) event-handling}.
  * 
  * @param <E> is the templated type of the events to send.
  * @param <L> is the templated type of the listeners that can be
  *        {@link #addListener(EventListener) registered} here and that will
- *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event) receive}
- *        the sent events.
+ *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event)
+ *        receive} the sent events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractSynchronizedEventSource<E extends Event, L extends EventListener<E>>
     extends AbstractEventSource<E, L> {

@@ -19,6 +19,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  *        bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractGenericType<T> implements GenericType<T> {
 

@@ -7,6 +7,7 @@ package net.sf.mmm.util.nls.api;
  * This the base class for all runtime exceptions of the project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 

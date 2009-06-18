@@ -15,6 +15,7 @@ import net.sf.mmm.util.math.api.NumberType;
  * This class is a collection of utility functions for dealing with numbers.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class MathUtilImpl implements MathUtil {
 

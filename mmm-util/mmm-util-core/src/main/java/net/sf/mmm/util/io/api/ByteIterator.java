@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
  * -values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface ByteIterator {
 

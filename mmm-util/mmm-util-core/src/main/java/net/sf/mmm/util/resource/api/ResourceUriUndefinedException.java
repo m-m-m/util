@@ -11,6 +11,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * undefined or illegal (e.g. "hppt:\\.com/...").
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class ResourceUriUndefinedException extends NlsRuntimeException {
 

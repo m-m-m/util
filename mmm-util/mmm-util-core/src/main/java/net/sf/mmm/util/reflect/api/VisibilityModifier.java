@@ -13,6 +13,7 @@ import java.lang.reflect.Modifier;
  * @see javax.lang.model.element.Modifier
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public enum VisibilityModifier {
 

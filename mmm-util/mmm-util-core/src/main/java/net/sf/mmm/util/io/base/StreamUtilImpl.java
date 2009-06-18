@@ -39,6 +39,7 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
  * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
 

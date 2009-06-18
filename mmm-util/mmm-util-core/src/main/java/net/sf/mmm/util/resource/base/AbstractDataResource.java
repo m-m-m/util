@@ -14,6 +14,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public abstract class AbstractDataResource implements DataResource {
 

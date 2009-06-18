@@ -15,6 +15,7 @@ import java.util.List;
  *        simply use an unbound wildcard (<code>{@link TreeNode}&lt;?&gt;</code>).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface TreeNode<NODE extends TreeNode<NODE>> {
 

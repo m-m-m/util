@@ -13,6 +13,7 @@ import net.sf.mmm.util.filter.api.Filter;
  * annotation given at {@link #AnnotationFilter(Class) construction}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class AnnotationFilter implements Filter<Class<?>> {
 
@@ -36,8 +37,8 @@ public class AnnotationFilter implements Filter<Class<?>> {
    *        {@link Class#isAnnotationPresent(Class) present} if a type should be
    *        {@link #accept(Class) accepted}.
    * @throws IllegalArgumentException if the given <code>annotationType</code>
-   *         is NO
-   *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
+   *         is NO {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime
+   *         annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType)
       throws IllegalArgumentException {
@@ -56,8 +57,8 @@ public class AnnotationFilter implements Filter<Class<?>> {
    *        properly annotated (see
    *        {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
    * @throws IllegalArgumentException if the given <code>annotationType</code>
-   *         is NO
-   *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
+   *         is NO {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime
+   *         annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType, boolean forceInheritence)
       throws IllegalArgumentException {
@@ -77,8 +78,8 @@ public class AnnotationFilter implements Filter<Class<?>> {
    *        {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
    * @param annotationUtil is the {@link AnnotationUtilImpl} instance to use.
    * @throws IllegalArgumentException if the given <code>annotationType</code>
-   *         is NO
-   *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
+   *         is NO {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime
+   *         annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType, boolean forceInheritence,
       AnnotationUtilImpl annotationUtil) throws IllegalArgumentException {

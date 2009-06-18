@@ -15,6 +15,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * <code>null</code> or throw an {@link ObjectNotFoundException}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class ObjectNotFoundException extends NlsRuntimeException {
 

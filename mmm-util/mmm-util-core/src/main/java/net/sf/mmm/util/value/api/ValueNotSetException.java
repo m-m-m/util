@@ -9,6 +9,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * This is the exception thrown if a required value was not set.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ValueNotSetException extends ValueException {
 

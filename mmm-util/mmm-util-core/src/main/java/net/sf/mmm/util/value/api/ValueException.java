@@ -10,6 +10,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * an invalid "casting", a parse error, etc.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ValueException extends NlsRuntimeException {
 

@@ -8,6 +8,7 @@ package net.sf.mmm.util.lang.api;
  * one boolean result.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public enum Conjunction {
   /**
@@ -17,8 +18,8 @@ public enum Conjunction {
   AND,
 
   /**
-   * This conjunction is <code>true</code> if and only if at least one
-   * argument is <code>true</code>.
+   * This conjunction is <code>true</code> if and only if at least one argument
+   * is <code>true</code>.
    */
   OR,
 

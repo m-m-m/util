@@ -11,6 +11,7 @@ import net.sf.mmm.util.pool.api.Pool;
  * @param <E> is the generic type of the pooled elements.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractPool<E> implements Pool<E> {
 
@@ -31,7 +32,8 @@ public abstract class AbstractPool<E> implements Pool<E> {
    * 
    * <b>ATTENTION:</b><br>
    * This constructor uses a default capacity of {@value #DEFAULT_CAPACITY}. A
-   * suitable default capacity depends on the type of objects that are pooled (<code>&lt;E&gt;</code>).
+   * suitable default capacity depends on the type of objects that are pooled (
+   * <code>&lt;E&gt;</code>).
    */
   public AbstractPool() {
 
@@ -43,8 +45,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
    * 
    * @param capacity is the {@link #getCapacity() capacity}.
    * @param threadsafe if <code>true</code> the pool needs to be accessed by
-   *        multiple {@link Thread}s concurrently, <code>false</code>
-   *        otherwise.
+   *        multiple {@link Thread}s concurrently, <code>false</code> otherwise.
    */
   public AbstractPool(int capacity, boolean threadsafe) {
 
@@ -68,8 +69,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
    * The constructor.
    * 
    * @param threadsafe if <code>true</code> the pool needs to be accessed by
-   *        multiple {@link Thread}s concurrently, <code>false</code>
-   *        otherwise.
+   *        multiple {@link Thread}s concurrently, <code>false</code> otherwise.
    * @param capacity the capacity of this pool.
    * @param lock is an explicit synchronization-lock object. It may be
    *        <code>null</code>. If it is NOT <code>null</code>,
@@ -140,9 +140,8 @@ public abstract class AbstractPool<E> implements Pool<E> {
    * enough (because it may be vulnerably).
    * 
    * @param element the element to reset.
-   * @return <code>true</code> if the given <code>element</code> can be
-   *         reused and should be added to the pool, <code>false</code>
-   *         otherwise.
+   * @return <code>true</code> if the given <code>element</code> can be reused
+   *         and should be added to the pool, <code>false</code> otherwise.
    */
   protected boolean reset(E element) {
 

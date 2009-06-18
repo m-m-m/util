@@ -8,9 +8,10 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
  * 
- * @see GenericValueConverter#convert(Object, Object, Number, Number)
+ * @see GenericValueConverter#convertValue(Object, Object, Number, Number)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ValueOutOfRangeException extends ValueException {
 

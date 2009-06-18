@@ -14,6 +14,7 @@ import net.sf.mmm.util.collection.api.BlockingQueueFactory;
  * creates instances of {@link java.util.concurrent.LinkedBlockingQueue}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
 

@@ -23,6 +23,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @see #getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class Iso8601UtilImpl implements Iso8601Util {
 

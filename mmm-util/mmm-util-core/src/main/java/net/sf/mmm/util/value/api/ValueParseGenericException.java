@@ -11,6 +11,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * This exception is thrown if parsing of a value failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ValueParseGenericException extends ValueParseException {
 
@@ -21,8 +22,8 @@ public class ValueParseGenericException extends ValueParseException {
    * The constructor.
    * 
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be
-   *        converted to.
+   * @param targetType is type the given <code>value</code> should be converted
+   *        to.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was
    *        located in an XML document, etc. It is used in exceptions thrown if
@@ -38,8 +39,8 @@ public class ValueParseGenericException extends ValueParseException {
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be
-   *        converted to.
+   * @param targetType is type the given <code>value</code> should be converted
+   *        to.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was
    *        located in an XML document, etc. It is used in exceptions thrown if
@@ -55,8 +56,8 @@ public class ValueParseGenericException extends ValueParseException {
    * The constructor.
    * 
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be
-   *        converted to.
+   * @param targetType is type the given <code>value</code> should be converted
+   *        to.
    */
   public ValueParseGenericException(Object value, Type targetType) {
 
@@ -68,8 +69,8 @@ public class ValueParseGenericException extends ValueParseException {
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be
-   *        converted to.
+   * @param targetType is type the given <code>value</code> should be converted
+   *        to.
    */
   public ValueParseGenericException(Throwable nested, Object value, Type targetType) {
 

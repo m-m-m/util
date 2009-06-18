@@ -15,6 +15,7 @@ import net.sf.mmm.util.filter.api.Filter;
  * @see FileStringFilterAdapter
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public final class FileFilterAdapter implements FileFilter {
 

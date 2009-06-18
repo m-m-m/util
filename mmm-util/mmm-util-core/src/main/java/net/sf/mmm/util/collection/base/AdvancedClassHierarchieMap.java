@@ -18,6 +18,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
  * @param <E> is the generic type of the elements contained in this map.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AdvancedClassHierarchieMap<E> extends AbstractClassHierarchieMap<E> {
 
@@ -55,8 +56,8 @@ public abstract class AdvancedClassHierarchieMap<E> extends AbstractClassHierarc
    * using its {@link #getClass(Object) associated class}.
    * 
    * @param element is the element to put.
-   * @return the element that has been replaced or <code>null</code> if none
-   *         has been replaced.
+   * @return the element that has been replaced or <code>null</code> if none has
+   *         been replaced.
    */
   protected E put(E element) {
 

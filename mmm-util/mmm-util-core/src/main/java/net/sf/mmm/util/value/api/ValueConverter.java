@@ -17,6 +17,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface ValueConverter<SOURCE, TARGET> {
 

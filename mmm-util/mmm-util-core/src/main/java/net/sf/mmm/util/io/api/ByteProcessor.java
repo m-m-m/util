@@ -8,6 +8,7 @@ package net.sf.mmm.util.io.api;
  * byte-buffers.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface ByteProcessor {
 

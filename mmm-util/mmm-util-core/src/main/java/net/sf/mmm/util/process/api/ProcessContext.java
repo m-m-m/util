@@ -15,6 +15,7 @@ import net.sf.mmm.util.io.api.DevNullTarget;
  * {@link #getErrStream() stderr}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ProcessContext {
 

@@ -19,6 +19,7 @@ import java.nio.charset.Charset;
  * @see net.sf.mmm.util.xml.base.XmlUtilImpl#getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface XmlUtil {
 

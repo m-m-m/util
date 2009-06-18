@@ -7,13 +7,7 @@ package net.sf.mmm.util.io.api;
  * This is the interface for a buffer of bytes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
-public interface ByteBuffer extends ByteIterator {
-
-  /**
-   * This method gets the number of bytes available in this buffer.
-   * 
-   * @return the bytes left in this buffer.
-   */
-  int getBytesAvailable();
+public interface ByteBuffer extends ByteIterator, ByteProvider {
 }

@@ -18,6 +18,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @param <SOURCE> is the generic type of the values to convert.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggable implements
     GenericValueConverter<SOURCE> {

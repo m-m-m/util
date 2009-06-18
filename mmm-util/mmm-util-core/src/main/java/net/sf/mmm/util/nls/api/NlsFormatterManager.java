@@ -8,6 +8,7 @@ package net.sf.mmm.util.nls.api;
  * A legal implementation of this interface has to be thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsFormatterManager {
 
@@ -101,8 +102,8 @@ public interface NlsFormatterManager {
    * <b>ATTENTION:</b><br>
    * The support for {@link java.text.ChoiceFormat}s is NOT provided by hacking
    * internal arrays of {@link java.text.MessageFormat}. Instead they will be
-   * provided by this implementation using custom <code>formatStyle</code>s
-   * when <code>formatType</code> is <code>choice</code>.
+   * provided by this implementation using custom <code>formatStyle</code>s when
+   * <code>formatType</code> is <code>choice</code>.
    * 
    * @see java.text.MessageFormat
    * 

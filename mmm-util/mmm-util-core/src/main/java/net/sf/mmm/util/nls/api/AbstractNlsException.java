@@ -26,6 +26,7 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * @see NlsThrowable
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractNlsException extends Exception implements NlsThrowable {
 

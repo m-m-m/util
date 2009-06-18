@@ -12,6 +12,7 @@ import java.util.Locale;
  * @see net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface StringUtil {
 

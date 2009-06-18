@@ -11,16 +11,15 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
  * path-glob-pattern is like a {@link GlobPatternCompiler glob-pattern} but more
  * specific for matching directory paths:
  * <ul>
- * <li><code>'?'</code> matches any character except for a slash (<code>'/'</code>
- * or <code>'\\'</code>).</li>
+ * <li><code>'?'</code> matches any character except for a slash (
+ * <code>'/'</code> or <code>'\\'</code>).</li>
  * <li>A single <code>'*'</code> matches a sequence of characters excluding
  * slashes including the empty sequence.</li>
- * <li><code>'**'</code> matches any sequence of characters (including
- * slashes).</li>
+ * <li><code>'**'</code> matches any sequence of characters (including slashes).</li>
  * <li>the character <code>'/'</code> matches a slash (<code>'/'</code> or
  * <code>'\\'</code>).</li>
- * <li><code>'**&#47;'</code> matches any sequence terminated by a slash as
- * well as the empty sequence.</li>
+ * <li><code>'**&#47;'</code> matches any sequence terminated by a slash as well as the empty
+ * sequence.</li>
  * </ul>
  * The idea is taken from <a
  * href="http://ant.apache.org/manual/dirtasks.html#patterns">ant</a> even
@@ -32,6 +31,7 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class PathPatternCompiler extends AbstractGlobPatternCompiler {
 

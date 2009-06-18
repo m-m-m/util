@@ -12,6 +12,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * the same key.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class DuplicateObjectException extends NlsRuntimeException {
 

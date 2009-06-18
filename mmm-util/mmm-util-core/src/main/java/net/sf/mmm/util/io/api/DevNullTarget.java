@@ -11,6 +11,7 @@ import java.io.OutputStream;
  * ignores all the data written.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class DevNullTarget extends OutputStream {
 

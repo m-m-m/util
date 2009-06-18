@@ -33,6 +33,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * you want to use it directly.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuffer,
     ComposedByteBuffer {
@@ -180,6 +181,14 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
       count = count + buffer.getBytesAvailable();
     }
     return count;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isEmpty() {
+
+    return (getBytesAvailable() == 0);
   }
 
   /**
@@ -379,48 +388,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     } else {
       return (this.buffers.length - this.buffersIndex) + this.buffersEndIndex;
     }
-  }
-
-  private class CurrentByteArray implements ByteArray {
-
-    /**
-     * {@inheritDoc}
-     */
-    public byte[] getBytes() {
-
-      if (AbstractByteArrayBufferBuffer.this.currentBufferIndex <= AbstractByteArrayBufferBuffer.this.currentBufferMax) {
-        return AbstractByteArrayBufferBuffer.this.currentBufferBytes;
-      } else {
-        throw new NoSuchElementException();
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getBytesAvailable() {
-
-      return 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getCurrentIndex() {
-
-      // TODO Auto-generated method stub
-      return 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getMaximumIndex() {
-
-      // TODO Auto-generated method stub
-      return 0;
-    }
-
   }
 
 }

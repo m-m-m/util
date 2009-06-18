@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
  * reflection.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractResourceBundle extends ResourceBundle {
 
@@ -65,8 +66,8 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
    * 
    * @param object is the object (potentially) retrieved via
    *        {@link #getObject(String)}.
-   * @return the key for the given <code>object</code> or <code>null</code>
-   *         if it was NOT retrieved via {@link #getObject(String)} from this
+   * @return the key for the given <code>object</code> or <code>null</code> if
+   *         it was NOT retrieved via {@link #getObject(String)} from this
    *         instance.
    */
   public String getKey(Object object) {

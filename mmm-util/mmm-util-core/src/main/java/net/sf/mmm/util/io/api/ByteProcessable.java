@@ -17,6 +17,7 @@ package net.sf.mmm.util.io.api;
  * byte-arrays.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface ByteProcessable {
 

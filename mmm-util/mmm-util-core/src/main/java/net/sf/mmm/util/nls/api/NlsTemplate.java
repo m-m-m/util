@@ -12,6 +12,7 @@ import java.util.Locale;
  * @see NlsMessage
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsTemplate {
 
@@ -34,9 +35,9 @@ public interface NlsTemplate {
    * @param locale is the locale to translate to.
    * @param arguments are the variable arguments to fill in the message.
    * @param buffer is the buffer where the translation will be appended to.
-   * @return <code>true</code> if the (translated) message has been appended
-   *         to the given <code>messageBuffer</code> or <code>false</code>
-   *         if the translation failed.
+   * @return <code>true</code> if the (translated) message has been appended to
+   *         the given <code>messageBuffer</code> or <code>false</code> if the
+   *         translation failed.
    */
   boolean translate(Locale locale, Object[] arguments, Appendable buffer);
 

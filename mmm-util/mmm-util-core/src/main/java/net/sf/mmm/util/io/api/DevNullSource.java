@@ -13,6 +13,7 @@ import java.io.InputStream;
  * {@link InputStream#close() closed}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class DevNullSource extends InputStream {
 

@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * {@link #resolveTemplate(String)}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class NoTemplateResolver extends AbstractNlsTemplateResolver {
 

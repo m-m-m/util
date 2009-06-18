@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.impl;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -11,6 +12,7 @@ import java.util.Queue;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
+import net.sf.mmm.util.io.base.AbstractByteProvider;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
@@ -24,13 +26,13 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
+public class DetectorStreamBufferImpl extends AbstractByteProvider implements DetectorStreamBuffer {
 
   /** The actual processor served by this buffer. */
   private DetectorStreamProcessor processor;
 
   /** The predecessor in the chain or <code>null</code> if this is the first. */
-  private DetectorStreamBufferImpl chainPredecessor;
+  private DetectorStreamBufferImpl chainPredecessor2;
 
   /** The successor in the chain or <code>null</code> if this is the last. */
   private DetectorStreamBufferImpl chainSuccessor;
@@ -72,18 +74,19 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    * 
    * @param processor is the {@link DetectorStreamProcessor} served by this
    *        buffer.
-   * @param predecessor is the predecessor in the chain or <code>null</code> if
-   *        this is the first buffer/processor pair in the chain.
+   * @param successor is the successor in the chain or <code>null</code> if this
+   *        is the last buffer/processor pair in the chain.
    */
   public DetectorStreamBufferImpl(DetectorStreamProcessor processor,
-      DetectorStreamBufferImpl predecessor) {
+      DetectorStreamBufferImpl successor) {
 
     super();
     this.arrayQueue = new LinkedList<ByteArray>();
-    this.chainPredecessor = predecessor;
-    if (this.chainPredecessor != null) {
-      this.chainPredecessor.chainSuccessor = this;
-    }
+    this.chainSuccessor = successor;
+    // this.chainPredecessor = predecessor;
+    // if (this.chainPredecessor != null) {
+    // this.chainPredecessor.chainSuccessor = this;
+    // }
     this.currentArrayView = new CurrentByteArray();
   }
 
@@ -315,16 +318,19 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   }
 
   /**
+   * @see DetectorStreamProcessor#process(DetectorStreamBuffer, Map, boolean)
+   * 
    * @param metadata
+   * @param eos
+   * @throws IOException
    */
-  public void process(Map<String, Object> metadata) {
+  public void process(Map<String, Object> metadata, boolean eos) throws IOException {
 
-    if (this.chainPredecessor != null) {
-      this.chainPredecessor.process(metadata);
+    this.processor.process(this, metadata, eos);
+    if (this.chainSuccessor != null) {
+      this.chainSuccessor.process(metadata, eos);
       // TODO: sync this buffer...
-
     }
-    this.processor.process(this, metadata);
   }
 
   /**
@@ -332,7 +338,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    * 
    * @see DetectorStreamBufferImpl#getByteArray(int)
    */
-  protected class CurrentByteArray implements ByteArray {
+  protected class CurrentByteArray extends AbstractByteProvider implements ByteArray {
 
     /**
      * {@inheritDoc}

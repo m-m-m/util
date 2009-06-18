@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
  * @param <SOURCE> is the generic type of the values to convert.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface GenericValueConverter<SOURCE> {
 

@@ -9,6 +9,9 @@ package net.sf.mmm.util.scanner.base;
  * 
  * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean,
  *      net.sf.mmm.util.scanner.api.CharScannerSyntax)
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SimpleCharScannerSyntax extends AbstractCharScannerSyntax {
 

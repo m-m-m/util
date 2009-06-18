@@ -10,6 +10,7 @@ package net.sf.mmm.util.io.api.spi;
  * @see net.sf.mmm.util.io.api.DetectorStream
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface DetectorStreamProcessorFactory {
 
@@ -29,7 +30,7 @@ public interface DetectorStreamProcessorFactory {
    * '&lt;' is reached (@see {@link DetectorStreamBuffer#peek()}), he can check
    * if 4 more bytes are available. In that case he can consume all these bytes
    * and make its decision. Otherwise he returns from
-   * {@link DetectorStreamProcessor#process(DetectorStreamBuffer, java.util.Map)}
+   * {@link DetectorStreamProcessor#process(DetectorStreamBuffer, java.util.Map, boolean)}
    * and waits for the next call that will guarantee the buffer is refilled with
    * at least the specified lookahead.<br>
    * 

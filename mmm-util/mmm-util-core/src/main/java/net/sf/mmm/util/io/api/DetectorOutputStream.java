@@ -10,6 +10,7 @@ import java.io.OutputStream;
  * {@link OutputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface DetectorOutputStream extends DetectorStream {
 

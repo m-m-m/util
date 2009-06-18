@@ -14,6 +14,7 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  * typical {@link net.sf.mmm.util.value.api.ValueConverter}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
 

@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  * make it easier to be managed as component in an IoC-Container such as spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class CachedThreadPoolExecutor extends ThreadPoolExecutor {
 

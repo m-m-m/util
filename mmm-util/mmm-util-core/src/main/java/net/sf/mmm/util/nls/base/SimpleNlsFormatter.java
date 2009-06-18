@@ -17,6 +17,7 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
  *        {@link #format(Object, Locale)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class SimpleNlsFormatter<O> implements NlsFormatter<O> {
 

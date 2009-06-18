@@ -15,6 +15,7 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
  * @see PathPatternCompiler
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
 
@@ -44,12 +45,11 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
 
   /**
    * This method gets the flag that determines if wildcards are required.<br>
-   * This implementation always returns <code>false</code>. Override to
-   * change.
+   * This implementation always returns <code>false</code>. Override to change.
    * 
    * @return <code>true</code> if wildcards are required. In that case
-   *         <code>null</code> is {@link #compile(String) returned} if the
-   *         given <code>pattern</code> contains no wildcard ('*' or '?').
+   *         <code>null</code> is {@link #compile(String) returned} if the given
+   *         <code>pattern</code> contains no wildcard ('*' or '?').
    *         <code>false</code> otherwise.
    */
   protected boolean isRequireWildcard() {

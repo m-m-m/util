@@ -19,6 +19,7 @@ import net.sf.mmm.util.io.api.ByteArray;
  * @see java.nio.ByteBuffer#wrap(byte[], int, int)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class ByteArrayImpl implements ByteArray {
 
@@ -133,6 +134,14 @@ public class ByteArrayImpl implements ByteArray {
   public int getBytesAvailable() {
 
     return this.maximumIndex - this.currentIndex + 1;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isEmpty() {
+
+    return (getBytesAvailable() == 0);
   }
 
   /**

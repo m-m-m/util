@@ -14,6 +14,7 @@ import java.io.InputStream;
  * Please be careful NOT to cause infinity loops when using this class!
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class DevZero extends InputStream {
 

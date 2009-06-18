@@ -12,6 +12,7 @@ import java.io.FileFilter;
  * {@link #getInstance()} to get the instance of this filter.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public final class PlainFileFilter implements FileFilter {
 

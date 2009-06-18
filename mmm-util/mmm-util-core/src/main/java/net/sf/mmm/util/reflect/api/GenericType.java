@@ -48,6 +48,7 @@ import java.lang.reflect.Type;
  *        class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface GenericType<T> {
 

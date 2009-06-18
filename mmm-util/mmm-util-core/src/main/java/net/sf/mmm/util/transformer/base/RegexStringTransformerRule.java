@@ -13,6 +13,7 @@ import net.sf.mmm.util.transformer.api.StringTransformerRule;
  * {@link #isStopOnMatch() stop-on-match} flag.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class RegexStringTransformerRule extends RegexStringTransformer implements
     StringTransformerRule {
@@ -29,9 +30,8 @@ public class RegexStringTransformerRule extends RegexStringTransformer implement
    *        {@link java.util.regex.Matcher#replaceAll(String)} will be used,
    *        else if <code>false</code>
    *        {@link java.util.regex.Matcher#replaceFirst(String)}.
-   * @param stopOnMatch if <code>true</code> and the
-   *        {@link #getPattern() pattern} of this rule matches no further rules
-   *        will be executed.
+   * @param stopOnMatch if <code>true</code> and the {@link #getPattern()
+   *        pattern} of this rule matches no further rules will be executed.
    */
   public RegexStringTransformerRule(Pattern pattern, String replacement, boolean replaceAll,
       boolean stopOnMatch) {

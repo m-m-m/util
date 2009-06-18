@@ -19,6 +19,7 @@ import net.sf.mmm.util.resource.api.DataResource;
  * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface ReflectionUtil extends GenericTypeFactory {
 
@@ -273,6 +274,53 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
    *        specified {@link Package} will be included in the search.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        {@link Class}-names to be added to the resulting {@link Set}. The
+   *        {@link Filter} will receive {@link Class#getName() fully qualified
+   *        class-names} as argument (e.g.
+   *        "net.sf.mmm.reflect.api.ReflectionUtil").
+   * @return a {@link Set} with the fully qualified names of all requested
+   *         classes.
+   * @throws IOException if the operation failed with an I/O error.
+   * @since 1.0.3
+   */
+  Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter)
+      throws IOException;
+
+  /**
+   * This method finds all classes that are located in the package identified by
+   * the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan.
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        {@link Class}-names to be added to the resulting {@link Set}. The
+   *        {@link Filter} will receive {@link Class#getName() fully qualified
+   *        class-names} as argument (e.g.
+   *        "net.sf.mmm.reflect.api.ReflectionUtil").
+   * @param classLoader is the explicit {@link ClassLoader} to use.
+   * @return a {@link Set} with the fully qualified names of all requested
+   *         classes.
+   * @throws IOException if the operation failed with an I/O error.
+   * @since 1.0.3
+   */
+  Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+      ClassLoader classLoader) throws IOException;
+
+  /**
+   * This method finds all classes that are located in the package identified by
+   * the given <code>packageName</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This is a relative expensive operation. Depending on your classpath
+   * multiple directories, JAR-, and WAR-files may need to be scanned.
+   * 
+   * @param packageName is the name of the {@link Package} to scan.
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
    * @param classSet is where to add the classes.
    * @throws IOException if the operation failed with an I/O error.
    */
@@ -341,11 +389,15 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
    *        specified {@link Package} will be included in the search.
    * @param filter is used to {@link Filter#accept(Object) filter} the
-   *        resources. Typically you will exclude resources that end with
-   *        ".class" or only accept resources that end with ".xml".
+   *        resources. The {@link Filter} will receive fully qualified classpath
+   *        entries as argument (e.g.
+   *        "net/sf/mmm/util/reflect/beans-util-reflect.xml"). Typically you
+   *        will exclude resources that end with ".class" or only accept
+   *        resources that end with ".xml".
    * @return a {@link Set} with the fully qualified names of all requested
    *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
    * @throws IOException if the operation failed with an I/O error.
+   * @since 1.0.3
    */
   Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<String> filter) throws IOException;
@@ -362,12 +414,16 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
    *        specified {@link Package} will be included in the search.
    * @param filter is used to {@link Filter#accept(Object) filter} the
-   *        resources. Typically you will exclude resources that end with
-   *        ".class" or only accept resources that end with ".xml".
+   *        resources. The {@link Filter} will receive fully qualified classpath
+   *        entries as argument (e.g.
+   *        "net/sf/mmm/util/reflect/beans-util-reflect.xml"). Typically you
+   *        will exclude resources that end with ".class" or only accept
+   *        resources that end with ".xml".
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @return a {@link Set} with the fully qualified names of all requested
    *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
    * @throws IOException if the operation failed with an I/O error.
+   * @since 1.0.3
    */
   Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<String> filter, ClassLoader classLoader) throws IOException;
@@ -388,6 +444,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        ".class" or only accept resources that end with ".xml".
    * @return a {@link Set} with all requested {@link DataResource resources}.
    * @throws IOException if the operation failed with an I/O error.
+   * @since 1.0.3
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<String> filter) throws IOException;
@@ -409,6 +466,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @return a {@link Set} with all requested {@link DataResource resources}.
    * @throws IOException if the operation failed with an I/O error.
+   * @since 1.0.3
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<String> filter, ClassLoader classLoader) throws IOException;

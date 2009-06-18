@@ -10,6 +10,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * {@link java.lang.reflect reflection} failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class ReflectionException extends NlsRuntimeException {
 

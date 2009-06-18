@@ -6,12 +6,13 @@ package net.sf.mmm.util.collection.api;
 import java.util.Set;
 
 /**
- * This is the interface for a {@link CollectionFactory} that
- * {@link #create() creates} instances of {@link Set}.
+ * This is the interface for a {@link CollectionFactory} that {@link #create()
+ * creates} instances of {@link Set}.
  * 
  * @see net.sf.mmm.util.collection.base.HashSetFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
 public interface SetFactory extends CollectionFactory<Set> {

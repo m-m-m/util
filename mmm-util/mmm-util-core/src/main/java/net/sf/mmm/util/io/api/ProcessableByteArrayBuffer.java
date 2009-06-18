@@ -11,6 +11,7 @@ package net.sf.mmm.util.io.api;
  * consumed (as if they were {@link #next() iterated}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface ProcessableByteArrayBuffer extends ByteBuffer, ByteProcessable {
 

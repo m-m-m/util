@@ -10,6 +10,7 @@ import java.io.InputStream;
  * {@link InputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface DetectorInputStream extends DetectorStream {
 

@@ -6,13 +6,14 @@ package net.sf.mmm.util.collection.api;
 import java.util.Queue;
 
 /**
- * This is the interface for a {@link CollectionFactory} that
- * {@link #create() creates} instances of {@link Queue}.
+ * This is the interface for a {@link CollectionFactory} that {@link #create()
+ * creates} instances of {@link Queue}.
  * 
  * @see net.sf.mmm.util.collection.base.LinkedListQueueFactory#INSTANCE
  * @see net.sf.mmm.util.collection.base.ConcurrentLinkedQueueFactory#INSTANCE
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 @SuppressWarnings("unchecked")
 public interface QueueFactory extends CollectionFactory<Queue> {

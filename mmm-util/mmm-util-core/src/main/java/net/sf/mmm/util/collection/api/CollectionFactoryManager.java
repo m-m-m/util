@@ -10,6 +10,7 @@ import java.util.Map;
  * This is the interface for a manager of {@link CollectionFactory} instances.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 @SuppressWarnings("unchecked")
 public interface CollectionFactoryManager {
@@ -18,8 +19,8 @@ public interface CollectionFactoryManager {
    * This method gets the {@link MapFactory} for the given <code>mapType</code>.
    * 
    * @param <MAP> is the generic type of the {@link Map}.
-   * @param mapType is the type of the {@link Map}. This should be the
-   *        interface such as {@link Map}.class or {@link java.util.SortedMap}.class.
+   * @param mapType is the type of the {@link Map}. This should be the interface
+   *        such as {@link Map}.class or {@link java.util.SortedMap}.class.
    * @return the {@link MapFactory} for the given <code>mapType</code>. The
    *         <code>mapType</code> has to be
    *         {@link Class#isAssignableFrom(Class) assignable from}
@@ -33,12 +34,12 @@ public interface CollectionFactoryManager {
    * <code>collectionType</code>.
    * 
    * @param <COLLECTION> is the generic type of the {@link Collection}.
-   * @param collectionType is the type of the {@link Collection}. This should
-   *        be the {@link Collection} interface such as
+   * @param collectionType is the type of the {@link Collection}. This should be
+   *        the {@link Collection} interface such as
    *        <code>{@link java.util.List}.class</code>.
    * @return the {@link CollectionFactory} for the given
-   *         <code>collectionType</code>. The <code>collectionType</code>
-   *         has to be {@link Class#isAssignableFrom(Class) assignable from}
+   *         <code>collectionType</code>. The <code>collectionType</code> has to
+   *         be {@link Class#isAssignableFrom(Class) assignable from}
    *         {@link CollectionFactory#getCollectionInterface()} of the returned
    *         instance. Typically it will be equal.
    */

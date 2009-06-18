@@ -8,13 +8,14 @@ import java.io.InputStream;
 import java.util.Map;
 
 import net.sf.mmm.util.io.api.DetectorInputStream;
-import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
 
 /**
- * This is the implementation of the {@link DetectorOutputStream}.
+ * This is the implementation of the
+ * {@link net.sf.mmm.util.io.api.DetectorOutputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class ProcessableDetectorInputStream extends ProcessableDetectorStream implements
     DetectorInputStream {
@@ -48,6 +49,8 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     return this.wrapperInputStream;
   }
 
+  protected class 
+  
   /**
    * This inner class is the actual wrapper stream.
    * 
@@ -95,7 +98,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     public int read(byte[] buffer, int offset, int length) throws IOException {
 
       // fill();
-      process(buffer, offset, length);
+      process(buffer, offset, length, false);
       return super.read(buffer, offset, length);
     }
 

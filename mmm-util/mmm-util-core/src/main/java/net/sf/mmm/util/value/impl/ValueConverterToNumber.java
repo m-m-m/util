@@ -20,6 +20,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
  * {@link CharSequence} (e.g. {@link String}) or {@link Number}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object, Number> {
 

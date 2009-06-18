@@ -10,6 +10,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory;
  * {@link DetectorStreamProcessorFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public abstract class AbstractDetectorStreamProcessorFactory implements
     DetectorStreamProcessorFactory {

@@ -13,6 +13,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
  * @param <E> is the generic type of the elements contained in this map.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class SimpleClassHierarchieMap<E> extends AbstractClassHierarchieMap<E> {
 

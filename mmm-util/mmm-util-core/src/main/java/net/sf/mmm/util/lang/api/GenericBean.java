@@ -11,6 +11,7 @@ package net.sf.mmm.util.lang.api;
  * 
  * @param <TYPE> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class GenericBean<TYPE> {
 

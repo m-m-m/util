@@ -16,6 +16,7 @@ import net.sf.mmm.util.resource.base.UrlResource;
  * {@link net.sf.mmm.util.resource.api.DataResourceFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class DataResourceFactoryImpl extends AbstractDataResourceFactory {
 

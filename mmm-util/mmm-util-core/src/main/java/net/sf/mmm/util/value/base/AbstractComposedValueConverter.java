@@ -19,6 +19,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * {@link ComposedValueConverter} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractComposedValueConverter extends AbstractGenericValueConverter<Object>
     implements ComposedValueConverter {

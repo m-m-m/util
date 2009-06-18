@@ -28,6 +28,7 @@ import java.util.Map;
  * 
  * @param <MAP> is the generic {@link Map}-type.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
 public interface MapFactory<MAP extends Map> {
@@ -40,8 +41,8 @@ public interface MapFactory<MAP extends Map> {
   Class<MAP> getMapInterface();
 
   /**
-   * This method gets the implementation of the
-   * {@link #getMapInterface() map-interface} used by this factory.
+   * This method gets the implementation of the {@link #getMapInterface()
+   * map-interface} used by this factory.
    * 
    * @return the {@link Map} implementation.
    */
@@ -51,8 +52,8 @@ public interface MapFactory<MAP extends Map> {
    * This method creates a new {@link Map} instance.<br>
    * It is explicitly typed and respects the generic key and value type of the
    * map. Therefore the type of the {@link Map} can NOT be bound to the generic
-   * type <code>&lt;MAP&gt;</code> because of limitations in Java's generic
-   * type system. You need to work on the actual sub-interface (e.g.
+   * type <code>&lt;MAP&gt;</code> because of limitations in Java's generic type
+   * system. You need to work on the actual sub-interface (e.g.
    * {@link SortedMapFactory}) to get a more specific result type.
    * 
    * @param <K> the type of keys maintained by the map.
@@ -63,9 +64,9 @@ public interface MapFactory<MAP extends Map> {
 
   /**
    * This method creates a new {@link Map} instance with the given
-   * <code>capacity</code>. For a regular map this will be the initial
-   * capacity while a cache may never grow beyond this capacity limit and if
-   * reached force out entries last recently of frequently used.
+   * <code>capacity</code>. For a regular map this will be the initial capacity
+   * while a cache may never grow beyond this capacity limit and if reached
+   * force out entries last recently of frequently used.
    * 
    * @param <K> the type of keys maintained by the map.
    * @param <V> the type of mapped values.

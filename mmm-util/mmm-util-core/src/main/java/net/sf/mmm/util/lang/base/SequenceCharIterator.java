@@ -11,6 +11,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * {@link CharSequence}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class SequenceCharIterator implements CharIterator {
 

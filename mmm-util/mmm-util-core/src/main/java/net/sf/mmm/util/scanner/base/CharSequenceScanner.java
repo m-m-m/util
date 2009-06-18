@@ -10,16 +10,18 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
- * This class represents a {@link String} or better a sequence of characters (<code>char[]</code>)
- * together with a {@link #getCurrentIndex() position} in that sequence.<br>
+ * This class represents a {@link String} or better a sequence of characters (
+ * <code>char[]</code>) together with a {@link #getCurrentIndex() position} in
+ * that sequence.<br>
  * It has various useful methods for scanning the sequence. This scanner is
  * designed to be fast on long sequences and therefore internally
- * {@link String#toCharArray() converts} {@link String}s to a char array
- * instead of frequently calling {@link String#charAt(int)}.<br>
+ * {@link String#toCharArray() converts} {@link String}s to a char array instead
+ * of frequently calling {@link String#charAt(int)}.<br>
  * <b>ATTENTION:</b><br>
  * This implementation is NOT and has no intention to be thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class CharSequenceScanner implements CharStreamScanner {
 
@@ -80,11 +82,11 @@ public class CharSequenceScanner implements CharStreamScanner {
    * 
    * @param characters is an array containing the characters to scan.
    * @param offset is the index of the first char to scan in
-   *        <code>characters</code> (typically <code>0</code> to start at
-   *        the beginning of the array).
+   *        <code>characters</code> (typically <code>0</code> to start at the
+   *        beginning of the array).
    * @param length is the {@link #getLength() number of characters} to scan from
-   *        <code>characters</code> starting at <code>offset</code>
-   *        (typically <code>characters.length - offset</code>).
+   *        <code>characters</code> starting at <code>offset</code> (typically
+   *        <code>characters.length - offset</code>).
    */
   public CharSequenceScanner(char[] characters, int offset, int length) {
 
@@ -119,8 +121,8 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * @see java.lang.CharSequence#length()
    * 
-   * @return the total length of the
-   *         {@link #getOriginalString() string to parse}.
+   * @return the total length of the {@link #getOriginalString() string to
+   *         parse}.
    */
   public int getLength() {
 
@@ -142,8 +144,8 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method gets the {@link #getOriginalString() original string} where the
-   * {@link #substring(int, int) substring} specified by <code>start</code>
-   * and <code>end</code> is replaced by <code>substitute</code>.
+   * {@link #substring(int, int) substring} specified by <code>start</code> and
+   * <code>end</code> is replaced by <code>substitute</code>.
    * 
    * @param substitute is the string used as replacement.
    * @param start is the inclusive start index of the substring to replace.
@@ -163,8 +165,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method appends the {@link #substring(int, int) substring} specified by
-   * <code>start</code> and <code>end</code> to the given
-   * <code>buffer</code>.<br>
+   * <code>start</code> and <code>end</code> to the given <code>buffer</code>.<br>
    * This avoids the overhead of creating a new string and copying the char
    * array.
    * 
@@ -189,8 +190,8 @@ public class CharSequenceScanner implements CharStreamScanner {
    * This method sets the {@link #getCurrentIndex() current index}.
    * 
    * @param index is the next index position to set. The value has to be greater
-   *        or equal to <code>0</code> and less or equal to
-   *        {@link #getLength()}.
+   *        or equal to <code>0</code> and less or equal to {@link #getLength()}
+   *        .
    */
   public void setCurrentIndex(int index) {
 
@@ -253,8 +254,8 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method decrements the {@link #getCurrentIndex() index} by one. If the
-   * {@link #getCurrentIndex() index} is <code>0</code> this method will have
-   * no effect.<br>
+   * {@link #getCurrentIndex() index} is <code>0</code> this method will have no
+   * effect.<br>
    * E.g. use this method if you read a character too much.
    */
   public void stepBack() {

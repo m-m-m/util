@@ -22,6 +22,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory;
  * {@link DetectorStreamProvider}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public abstract class AbstractDetectorStreamProvider extends AbstractLoggable implements
     DetectorStreamProvider {

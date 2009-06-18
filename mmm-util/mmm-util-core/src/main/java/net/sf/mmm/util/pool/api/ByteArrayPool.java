@@ -7,6 +7,7 @@ package net.sf.mmm.util.pool.api;
  * This is the interface for a {@link Pool} of <code>byte[]</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface ByteArrayPool extends Pool<byte[]> {
 

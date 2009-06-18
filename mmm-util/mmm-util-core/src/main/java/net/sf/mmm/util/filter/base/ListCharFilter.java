@@ -12,6 +12,7 @@ import net.sf.mmm.util.filter.api.CharFilter;
  * whitelist.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ListCharFilter implements CharFilter {
 
@@ -26,8 +27,7 @@ public class ListCharFilter implements CharFilter {
    * 
    * @param accept - if <code>true</code> exactly the chars given by
    *        <code>charArray</code> are accepted (whitelist), if
-   *        <code>false</code> exactly these chars are NOT accepted
-   *        (blacklist).
+   *        <code>false</code> exactly these chars are NOT accepted (blacklist).
    * @param charArray are the chars to accept or to reject.
    */
   public ListCharFilter(boolean accept, char... charArray) {

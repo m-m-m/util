@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
  * empty. It will never have any {@link #hasNext() next} element.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class EmptyIterator implements Iterator<Object> {
 

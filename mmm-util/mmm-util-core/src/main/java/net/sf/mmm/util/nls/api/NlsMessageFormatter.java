@@ -10,6 +10,7 @@ import java.util.Locale;
  * view on something like {@link java.text.MessageFormat}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface NlsMessageFormatter extends NlsFormatter<Object[]> {
 

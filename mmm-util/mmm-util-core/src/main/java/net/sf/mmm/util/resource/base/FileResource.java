@@ -19,6 +19,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * resource that is a {@link File#isFile() regular} {@link File}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class FileResource extends AbstractDataResource {
 

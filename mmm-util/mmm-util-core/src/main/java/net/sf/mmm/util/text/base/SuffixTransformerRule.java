@@ -11,6 +11,7 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
  * the result form.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SuffixTransformerRule extends TransformerRule {
 
@@ -27,8 +28,8 @@ public class SuffixTransformerRule extends TransformerRule {
    *        with that suffix, this rule will apply and replace it with the given
    *        <code>singularSuffix</code>.
    * @param destinationSuffix is the suffix of the singular form. It is the
-   *        replacement for <code>pluralSuffix</code>. Use the empty string
-   *        if you just want to remove the <code>pluralSuffix</code>.
+   *        replacement for <code>pluralSuffix</code>. Use the empty string if
+   *        you just want to remove the <code>pluralSuffix</code>.
    */
   public SuffixTransformerRule(String sourceSuffix, String destinationSuffix) {
 

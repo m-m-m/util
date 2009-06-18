@@ -11,6 +11,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * specific number-type.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class NumberConversionException extends NlsRuntimeException {
 

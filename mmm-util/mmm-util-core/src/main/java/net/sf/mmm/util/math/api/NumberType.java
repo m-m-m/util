@@ -3,49 +3,48 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.math.api;
 
-
 /**
  * This class represents the {@link Class type} reflecting a specific
- * {@link Number}. It allows to check attributes like {@link #isDecimal()} or
- * to {@link #getExactnessDifference(NumberType) compare} {@link NumberType}s.<br>
+ * {@link Number}. It allows to check attributes like {@link #isDecimal()} or to
+ * {@link #getExactnessDifference(NumberType) compare} {@link NumberType}s.<br>
  * Further it acts as factory to create according numbers
  * {@link NumberType#valueOf(String) from string} or
  * {@link NumberType#valueOf(String) by converting an given number}.<br>
  * This is a class and NOT an {@link Enum} to be extensible.
  * 
  * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
- * @param <NUMBER> is the generic type of the
- *        {@link #getNumberClass() represented number-class}.
+ * @param <NUMBER> is the generic type of the {@link #getNumberClass()
+ *        represented number-class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface NumberType<NUMBER extends Number> {
 
   /**
-   * This method gets an instance of the
-   * {@link #getNumberClass() represented number-class} with the numeric value
-   * given by <code>number</code>.
+   * This method gets an instance of the {@link #getNumberClass() represented
+   * number-class} with the numeric value given by <code>number</code>.
    * 
    * @param number is the numeric value to convert.
    * @param failIfUnprecise - if <code>true</code> and conversion causes
    *        precision loss, a {@link NumberConversionException} is thrown, if
    *        <code>false</code> this method acts like a primitive cast and
    *        conversion is always successfully.
-   * @return a {@link Number} instance of the
-   *         {@link #getNumberClass() represented number-class} with the value
-   *         of the given <code>number</code>. This will be the same instance
-   *         as <code>number</code> if it is an
-   *         {@link Class#isInstance(Object) instance} of the
-   *         {@link #getNumberClass() represented number-class}.
+   * @return a {@link Number} instance of the {@link #getNumberClass()
+   *         represented number-class} with the value of the given
+   *         <code>number</code>. This will be the same instance as
+   *         <code>number</code> if it is an {@link Class#isInstance(Object)
+   *         instance} of the {@link #getNumberClass() represented number-class}
+   *         .
    * @throws NumberConversionException if the conversion will loose precision
    *         (e.g. when converting a decimal {@link Double} to {@link Integer})
    */
   NUMBER valueOf(Number number, boolean failIfUnprecise) throws NumberConversionException;
 
   /**
-   * This method gets an instance of the
-   * {@link #getNumberClass() represented number-class} with the numeric value
-   * identified by the given string <code>number</code>.
+   * This method gets an instance of the {@link #getNumberClass() represented
+   * number-class} with the numeric value identified by the given string
+   * <code>number</code>.
    * 
    * @param number is the string to be parsed as number.
    * @return the parsed number of the according type.
@@ -69,8 +68,8 @@ public interface NumberType<NUMBER extends Number> {
    * represent decimal values while {@link Integer} or {@link Long} are NOT
    * decimal.
    * 
-   * @return <code>true</code> if the represented
-   *         {@link #getNumberClass() Number} is a decimal value.
+   * @return <code>true</code> if the represented {@link #getNumberClass()
+   *         Number} is a decimal value.
    */
   boolean isDecimal();
 
@@ -96,9 +95,9 @@ public interface NumberType<NUMBER extends Number> {
    * 
    * @param otherType is the {@link NumberType} to compare with.
    * @return the difference of the exactness. Will be <code>0</code> if this
-   *         {@link NumberType} is equal to <code>otherType</code>, positive
-   *         if this {@link NumberType} is more exact (later in the examples
-   *         above) and negative if <code>otherType</code> is more exact.
+   *         {@link NumberType} is equal to <code>otherType</code>, positive if
+   *         this {@link NumberType} is more exact (later in the examples above)
+   *         and negative if <code>otherType</code> is more exact.
    */
   int getExactnessDifference(NumberType<?> otherType);
 

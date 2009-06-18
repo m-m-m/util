@@ -14,6 +14,7 @@ import net.sf.mmm.util.text.api.Singularizer;
  * language. It aims for simplicity rather than linguistic perfection.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class EnglishSingularizer extends AbstractTextTransformer implements Singularizer {
 

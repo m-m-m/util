@@ -14,6 +14,7 @@ import net.sf.mmm.util.collection.api.DequeFactory;
  * instances of {@link LinkedList}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class LinkedListDequeFactory extends AbstractDequeFactory {
 

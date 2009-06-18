@@ -22,6 +22,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * reading configurations).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements
     StringValueConverter {

@@ -11,6 +11,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * {@link CharIterator} such that spaces are normalized.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class SpaceNormalizingCharIterator implements CharIterator {
 

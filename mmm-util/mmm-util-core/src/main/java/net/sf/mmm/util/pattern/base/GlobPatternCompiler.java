@@ -7,11 +7,11 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
 
 /**
  * This is an implementation of the {@link PatternCompiler} interface that
- * {@link #compile(String) compiles} <em>glob-patterns</em>. A glob-pattern
- * is a pattern, where only the wildcard characters <code>'*'</code> and
- * <code>'?'</code> are treated special. The asterisk (<code>'*'</code>)
- * can match any string including the empty string and the questionmark (<code>'?'</code>)
- * can match any single character.<br>
+ * {@link #compile(String) compiles} <em>glob-patterns</em>. A glob-pattern is a
+ * pattern, where only the wildcard characters <code>'*'</code> and
+ * <code>'?'</code> are treated special. The asterisk (<code>'*'</code>) can
+ * match any string including the empty string and the questionmark (
+ * <code>'?'</code>) can match any single character.<br>
  * Examples:
  * <ul>
  * <li><code>A*bc?e</code> matches <code>Abcde</code> or
@@ -19,6 +19,7 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class GlobPatternCompiler extends AbstractGlobPatternCompiler {
 

@@ -9,6 +9,7 @@ package net.sf.mmm.util.event.api;
  * @param <E> is the templated type of events to listen to.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public interface EventListener<E extends Event> extends java.util.EventListener {
 

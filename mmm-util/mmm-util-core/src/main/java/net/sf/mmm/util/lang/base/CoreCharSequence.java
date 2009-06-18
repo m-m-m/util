@@ -8,6 +8,7 @@ package net.sf.mmm.util.lang.base;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public abstract class CoreCharSequence implements CharSequence {
 

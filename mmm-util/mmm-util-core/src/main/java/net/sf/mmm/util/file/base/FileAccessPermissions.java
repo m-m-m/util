@@ -13,6 +13,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * of a file.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class FileAccessPermissions implements Cloneable {
 

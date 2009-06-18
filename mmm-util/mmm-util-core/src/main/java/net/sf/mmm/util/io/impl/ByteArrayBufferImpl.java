@@ -20,6 +20,7 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
  * @see java.nio.ByteBuffer#wrap(byte[], int, int)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffer {
 

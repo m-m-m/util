@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.impl;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +24,8 @@ import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
  */
 public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
-  private List<DetectorStreamBufferImpl> buffers;
+  /** The first buffer of the chain. */
+  private final DetectorStreamBufferImpl firstBuffer;
 
   /**
    * The constructor.
@@ -36,22 +37,34 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
    *        instance.
    */
   public ProcessableDetectorStream(Map<String, Object> mutableMetadata,
-      AbstractDetectorStreamProvider provider) {
+      AbstractDetectorStreamProvider provider, DetectorStreamProcessor lastProcessor) {
 
     super(mutableMetadata);
     List<DetectorStreamProcessorFactory> factoryList = provider.getProcessorFactoryList();
-    this.buffers = new ArrayList<DetectorStreamBufferImpl>(factoryList.size());
-    DetectorStreamBufferImpl buffer = null;
-    for (DetectorStreamProcessorFactory factory : factoryList) {
+    int factoryCount = factoryList.size();
+    DetectorStreamBufferImpl buffer = new DetectorStreamBufferImpl(lastProcessor, null);
+    for (int factoryIndex = factoryCount - 1; factoryIndex >= 0; factoryIndex--) {
+      DetectorStreamProcessorFactory factory = factoryList.get(factoryIndex);
       DetectorStreamProcessor processor = factory.createProcessor();
       buffer = new DetectorStreamBufferImpl(processor, buffer);
-      this.buffers.add(buffer);
     }
+    this.firstBuffer = buffer;
   }
 
-  protected int process(byte[] buffer, int offset, int length) {
+  /**
+   * @see DetectorStreamProcessor#process(net.sf.mmm.util.io.api.spi.DetectorStreamBuffer,
+   *      Map, boolean)
+   * 
+   * @param buffer
+   * @param offset
+   * @param length
+   * @param eos
+   * @throws IOException
+   */
+  public void processInternal(byte[] buffer, int offset, int length, boolean eos)
+      throws IOException {
 
-    return 0;
+    this.firstBuffer.process(getMutableMetadata(), eos);
   }
 
 }

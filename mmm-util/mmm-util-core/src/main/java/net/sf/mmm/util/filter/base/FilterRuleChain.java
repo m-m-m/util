@@ -6,7 +6,6 @@ package net.sf.mmm.util.filter.base;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.api.FilterRule;
 
-
 /**
  * This class implements a {@link Filter} that is based on a chain of
  * {@link FilterRule}s.
@@ -14,6 +13,7 @@ import net.sf.mmm.util.filter.api.FilterRule;
  * @param <V> is the generic type of the value to check.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public class FilterRuleChain<V> implements Filter<V> {
 

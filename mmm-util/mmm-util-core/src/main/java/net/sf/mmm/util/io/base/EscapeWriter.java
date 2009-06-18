@@ -14,6 +14,7 @@ import java.io.Writer;
  * @see EscapeWriter#EscapeWriter(Object, String[], Writer)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class EscapeWriter extends Writer {
 

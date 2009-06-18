@@ -18,6 +18,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends
     AbstractValueConverter<SOURCE, TARGET> {

@@ -16,6 +16,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * {@link NlsMessage} interface to gain compatibility with further releases.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NlsMessageImpl implements NlsMessage {
 

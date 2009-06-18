@@ -15,6 +15,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * {@link #NodeValueCharIterator(NodeList) node-list}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 class NodeValueCharIterator implements CharIterator {
 

@@ -7,6 +7,9 @@ package net.sf.mmm.util.xml.api;
  * This inner class contains the state of an HTML
  * {@link XmlUtil#extractPlainText(String, StringBuilder, ParserState) parsing}
  * process.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public class ParserState {
 

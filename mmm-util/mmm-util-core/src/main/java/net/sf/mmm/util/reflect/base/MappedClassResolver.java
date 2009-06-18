@@ -16,6 +16,7 @@ import net.sf.mmm.util.reflect.api.ClassResolver;
  * {@link Class#forName(String)} is used.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public class MappedClassResolver implements ClassResolver {
 
@@ -54,8 +55,8 @@ public class MappedClassResolver implements ClassResolver {
   }
 
   /**
-   * This method adds a mapping for the given <code>type</code> using the
-   * given <code>name</code>.
+   * This method adds a mapping for the given <code>type</code> using the given
+   * <code>name</code>.
    * 
    * @param name is the name under which the class is
    *        {@link #resolveClass(String) mapped}.

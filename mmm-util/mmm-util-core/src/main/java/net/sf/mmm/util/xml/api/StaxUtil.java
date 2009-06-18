@@ -19,6 +19,7 @@ import net.sf.mmm.util.value.api.ValueException;
  * @see net.sf.mmm.util.xml.base.StaxUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
  */
 public interface StaxUtil {
 

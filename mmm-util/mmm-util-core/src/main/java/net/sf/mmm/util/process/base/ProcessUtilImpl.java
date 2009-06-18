@@ -39,8 +39,8 @@ import net.sf.mmm.util.process.api.ProcessUtil;
  * {@link #setExecutor(Executor) configure} a thread-pool as
  * {@link java.util.concurrent.Executor}.
  * 
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
 

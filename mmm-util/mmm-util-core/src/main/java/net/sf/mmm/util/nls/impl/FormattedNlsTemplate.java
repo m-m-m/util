@@ -14,6 +14,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
  * {@link net.sf.mmm.util.nls.api.NlsTemplate} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class FormattedNlsTemplate extends AbstractNlsTemplate {
 
@@ -31,8 +32,8 @@ public abstract class FormattedNlsTemplate extends AbstractNlsTemplate {
   /**
    * The constructor.
    * 
-   * @param formatterManager is the
-   *        {@link #getFormatterManager() formatter-manager} to use.
+   * @param formatterManager is the {@link #getFormatterManager()
+   *        formatter-manager} to use.
    */
   public FormattedNlsTemplate(NlsFormatterManager formatterManager) {
 

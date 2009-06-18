@@ -10,13 +10,14 @@ import net.sf.mmm.util.filter.api.CharFilter;
  * sequence of characters.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface CharStreamScanner {
 
   /**
    * This method gets the current position in the stream to scan. It will
-   * initially be <code>0</code>. In other words this method returns the
-   * number of characters that have already been {@link #next() consumed}.
+   * initially be <code>0</code>. In other words this method returns the number
+   * of characters that have already been {@link #next() consumed}.
    * 
    * @return the current index position.
    */
@@ -41,11 +42,11 @@ public interface CharStreamScanner {
   char next();
 
   /**
-   * Like {@link #next()} this method reads the
-   * {@link #getCurrentIndex() current} character and increments the
-   * {@link #getCurrentIndex() index}. If there is no character
-   * {@link #hasNext() available} this method will do nothing and returns
-   * <code>0</code> (the NULL character and NOT <code>'0'</code>).
+   * Like {@link #next()} this method reads the {@link #getCurrentIndex()
+   * current} character and increments the {@link #getCurrentIndex() index}. If
+   * there is no character {@link #hasNext() available} this method will do
+   * nothing and returns <code>0</code> (the NULL character and NOT
+   * <code>'0'</code>).
    * 
    * @return the current character or <code>0</code> if none is
    *         {@link #hasNext() available}.
@@ -54,8 +55,8 @@ public interface CharStreamScanner {
 
   /**
    * This method reads the current character without incrementing the
-   * {@link #getCurrentIndex() index}. You need to {@link #hasNext() check} if
-   * a character is available before calling this method.
+   * {@link #getCurrentIndex() index}. You need to {@link #hasNext() check} if a
+   * character is available before calling this method.
    * 
    * @return the current character.
    */
@@ -63,9 +64,9 @@ public interface CharStreamScanner {
 
   /**
    * This method reads the {@link #getCurrentIndex() current} character without
-   * incrementing the {@link #getCurrentIndex() index}. If there is no
-   * character {@link #hasNext() available} this method will return
-   * <code>0</code> (the NULL character and NOT <code>'0'</code>).
+   * incrementing the {@link #getCurrentIndex() index}. If there is no character
+   * {@link #hasNext() available} this method will return <code>0</code> (the
+   * NULL character and NOT <code>'0'</code>).
    * 
    * @return the current character or <code>0</code> if none is
    *         {@link #hasNext() available}.
@@ -77,34 +78,33 @@ public interface CharStreamScanner {
    * the state remains unchanged.
    * 
    * @return the numeric value of the next Latin digit (e.g. <code>0</code> if
-   *         <code>'0'</code>) or <code>-1</code> if the
-   *         {@link #peek() current character} is no Latin digit.
+   *         <code>'0'</code>) or <code>-1</code> if the {@link #peek() current
+   *         character} is no Latin digit.
    */
   int readDigit();
 
   /**
-   * This method reads the long starting at the
-   * {@link #getCurrentIndex() current position} by reading as many Latin digits
-   * as available but at maximum the given <code>maxDigits</code> and returns
-   * its {@link Long#parseLong(String) parsed} value.<br>
+   * This method reads the long starting at the {@link #getCurrentIndex()
+   * current position} by reading as many Latin digits as available but at
+   * maximum the given <code>maxDigits</code> and returns its
+   * {@link Long#parseLong(String) parsed} value.<br>
    * <b>ATTENTION:</b><br>
-   * This method does NOT treat signs (<code>+</code> or <code>-</code>)
-   * to do so, scan them yourself before and negate the result as needed.
+   * This method does NOT treat signs (<code>+</code> or <code>-</code>) to do
+   * so, scan them yourself before and negate the result as needed.
    * 
    * @param maxDigits is the maximum number of digits that will be read. The
    *        value has to be positive (greater than zero).
    * @return the parsed number.
-   * @throws NumberFormatException if the current
-   *         {@link #getCurrentIndex() current position} does NOT point to a
-   *         number.
+   * @throws NumberFormatException if the current {@link #getCurrentIndex()
+   *         current position} does NOT point to a number.
    */
   long readLong(int maxDigits) throws NumberFormatException;
 
   /**
    * This method reads the number of {@link #next() next characters} given by
-   * <code>count</code> and returns them as string. If there are less
-   * characters {@link #hasNext() available} the returned string will be shorter
-   * than <code>count</code> and only contain the available characters.
+   * <code>count</code> and returns them as string. If there are less characters
+   * {@link #hasNext() available} the returned string will be shorter than
+   * <code>count</code> and only contain the available characters.
    * 
    * @param count is the number of characters to read. You may use
    *        {@link Integer#MAX_VALUE} to read until the end of data if the
@@ -154,14 +154,14 @@ public interface CharStreamScanner {
 
   /**
    * This method skips all {@link #next() next characters} until the given
-   * <code>stop</code> character or the end is reached. If the
-   * <code>stop</code> character was reached, this scanner will point to the
-   * next character after <code>stop</code> when this method returns.
+   * <code>stop</code> character or the end is reached. If the <code>stop</code>
+   * character was reached, this scanner will point to the next character after
+   * <code>stop</code> when this method returns.
    * 
    * @param stop is the character to read until.
    * @return <code>true</code> if the first occurrence of the given
-   *         <code>stop</code> character has been passed, <code>false</code>
-   *         if there is no such character.
+   *         <code>stop</code> character has been passed, <code>false</code> if
+   *         there is no such character.
    */
   boolean skipUntil(char stop);
 
@@ -176,8 +176,8 @@ public interface CharStreamScanner {
    * @param escape is the character used to escape the stop character (e.g.
    *        '\').
    * @return <code>true</code> if the first occurrence of the given
-   *         <code>stop</code> character has been passed, <code>false</code>
-   *         if there is no such character.
+   *         <code>stop</code> character has been passed, <code>false</code> if
+   *         there is no such character.
    */
   boolean skipUntil(char stop, char escape);
 
@@ -229,9 +229,8 @@ public interface CharStreamScanner {
    * 
    * @param filter is used to {@link CharFilter#accept(char) decide} which
    *        characters should be accepted.
-   * @return a string with all characters
-   *         {@link CharFilter#accept(char) accepted} by the given
-   *         <code>filter</code>.
+   * @return a string with all characters {@link CharFilter#accept(char)
+   *         accepted} by the given <code>filter</code>.
    */
   String readWhile(CharFilter filter);
 
@@ -242,19 +241,17 @@ public interface CharStreamScanner {
    * will point to the next character that was NOT
    * {@link CharFilter#accept(char) accepted} by the given <code>filter</code>.
    * If the next <code>max</code> characters or the characters left until the
-   * {@link #hasNext() end} of this scanner are
-   * {@link CharFilter#accept(char) accepted}, only that amount of characters
-   * are skipped.
+   * {@link #hasNext() end} of this scanner are {@link CharFilter#accept(char)
+   * accepted}, only that amount of characters are skipped.
    * 
    * @see #skipWhile(char)
    * 
    * @param filter is used to {@link CharFilter#accept(char) decide} which
    *        characters should be accepted.
    * @param max is the maximum number of characters that should be read.
-   * @return a string with all characters
-   *         {@link CharFilter#accept(char) accepted} by the given
-   *         <code>filter</code> limited to the length of <code>max</code>
-   *         and the {@link #hasNext() end} of this scanner.
+   * @return a string with all characters {@link CharFilter#accept(char)
+   *         accepted} by the given <code>filter</code> limited to the length of
+   *         <code>max</code> and the {@link #hasNext() end} of this scanner.
    */
   String readWhile(CharFilter filter, int max);
 
@@ -270,9 +267,9 @@ public interface CharStreamScanner {
    *        {@link #getCurrentIndex() current index}.
    * @param ignoreCase - if <code>true</code> the case of the characters is
    *        ignored when compared with characters from <code>substring</code>.
-   * @return <code>true</code> if the given <code>substring</code> occurred
-   *         and has been passed and <code>false</code> if the end of the
-   *         string has been reached without any occurrence of the given
+   * @return <code>true</code> if the given <code>substring</code> occurred and
+   *         has been passed and <code>false</code> if the end of the string has
+   *         been reached without any occurrence of the given
    *         <code>substring</code>.
    */
   boolean skipOver(String substring, boolean ignoreCase);
@@ -291,27 +288,26 @@ public interface CharStreamScanner {
    *        {@link #getCurrentIndex() current index}.
    * @param ignoreCase - if <code>true</code> the case of the characters is
    *        ignored when compared with characters from <code>substring</code>.
-   * @param stopFilter is the filter used to
-   *        {@link CharFilter#accept(char) detect} stop characters. If such
-   *        character was detected, the skip is stopped and the parser points to
-   *        the character after the stop character. The <code>substring</code>
-   *        should NOT contain a {@link CharFilter#accept(char) stop character}.
-   * @return <code>true</code> if the given <code>substring</code> occurred
-   *         and has been passed and <code>false</code> if a stop character
-   *         has been detected or the end of the string has been reached without
-   *         any occurrence of the given <code>substring</code> or stop
-   *         character.
+   * @param stopFilter is the filter used to {@link CharFilter#accept(char)
+   *        detect} stop characters. If such character was detected, the skip is
+   *        stopped and the parser points to the character after the stop
+   *        character. The <code>substring</code> should NOT contain a
+   *        {@link CharFilter#accept(char) stop character}.
+   * @return <code>true</code> if the given <code>substring</code> occurred and
+   *         has been passed and <code>false</code> if a stop character has been
+   *         detected or the end of the string has been reached without any
+   *         occurrence of the given <code>substring</code> or stop character.
    */
   boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter);
 
   /**
    * This method reads all {@link #next() next characters} that are identical to
    * the character given by <code>c</code>.<br>
-   * E.g. use <code>{@link #skipWhile(char) readWhile}(' ')</code> to skip
-   * all blanks from the {@link #getCurrentIndex() current index}. After the
-   * call of this method, the {@link #getCurrentIndex() current index} will
-   * point to the next character that is different to <code>c</code> or to the
-   * end if NO such character exists.
+   * E.g. use <code>{@link #skipWhile(char) readWhile}(' ')</code> to skip all blanks
+   * from the {@link #getCurrentIndex() current index}. After the call of this
+   * method, the {@link #getCurrentIndex() current index} will point to the next
+   * character that is different to <code>c</code> or to the end if NO such
+   * character exists.
    * 
    * @param c is the character to read over.
    * @return the number of characters that have been skipped.
@@ -342,9 +338,8 @@ public interface CharStreamScanner {
    * will point to the next character that was NOT
    * {@link CharFilter#accept(char) accepted} by the given <code>filter</code>.
    * If the next <code>max</code> characters or the characters left until the
-   * {@link #hasNext() end} of this scanner are
-   * {@link CharFilter#accept(char) accepted}, only that amount of characters
-   * are skipped.
+   * {@link #hasNext() end} of this scanner are {@link CharFilter#accept(char)
+   * accepted}, only that amount of characters are skipped.
    * 
    * @see #skipWhile(char)
    * 

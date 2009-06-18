@@ -9,6 +9,7 @@ import java.io.File;
  * This enum contains the available types of a {@link java.io.File file}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public enum FileType {
 

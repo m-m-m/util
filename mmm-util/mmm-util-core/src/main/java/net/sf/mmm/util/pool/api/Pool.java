@@ -4,9 +4,9 @@
 package net.sf.mmm.util.pool.api;
 
 /**
- * This is the interface for a simple pool. It allows to
- * {@link #borrow() borrow} an object from the pool. If that object is NOT
- * needed anymore, it should be {@link #release(Object) released}.<br>
+ * This is the interface for a simple pool. It allows to {@link #borrow()
+ * borrow} an object from the pool. If that object is NOT needed anymore, it
+ * should be {@link #release(Object) released}.<br>
  * A typical pool implementation will have an internal buffer to cache
  * {@link #release(Object) released} objects so they can be reused for further
  * {@link #borrow() requests}. Such buffer should be limited to a maximum size
@@ -21,6 +21,7 @@ package net.sf.mmm.util.pool.api;
  * @param <E> is the templated type of the elements in the pool.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface Pool<E> {
 
@@ -28,13 +29,12 @@ public interface Pool<E> {
    * This method borrows an element from this pool. If you do NOT need the
    * object anymore you should {@link #release(Object) release} it.<br>
    * If this pool is {@link #isEmpty() empty}, a new instance is created for
-   * you. Otherwise a existing instance (that has been
-   * {@link #release(Object) released} before) will be returned so it can be
-   * reused.
+   * you. Otherwise a existing instance (that has been {@link #release(Object)
+   * released} before) will be returned so it can be reused.
    * 
    * @return an element from the pool. Typically this method never returns
-   *         <code>null</code>. This may only happen if explicitly documented
-   *         by the chosen implementation.
+   *         <code>null</code>. This may only happen if explicitly documented by
+   *         the chosen implementation.
    */
   E borrow();
 

@@ -15,10 +15,11 @@ import net.sf.mmm.util.math.api.NumberType;
  * This is the implementation of the {@link NumberType} interface.
  * 
  * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
- * @param <NUMBER> is the generic type of the
- *        {@link #getNumberClass() represented number-class}.
+ * @param <NUMBER> is the generic type of the {@link #getNumberClass()
+ *        represented number-class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.1
  */
 public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberType<NUMBER> {
 
@@ -481,9 +482,9 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   }
 
   /**
-   * This method gets an instance of the
-   * {@link #getNumberClass() represented number-class} with the numeric value
-   * identified by the given string <code>number</code>.
+   * This method gets an instance of the {@link #getNumberClass() represented
+   * number-class} with the numeric value identified by the given string
+   * <code>number</code>.
    * 
    * @param number is the string to be parsed as number.
    * @return the parsed number of the according type.
@@ -518,10 +519,9 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
    * 
    * @param otherType is the {@link NumberTypeImpl} to compare with.
    * @return the difference of the exactness. Will be <code>0</code> if this
-   *         {@link NumberTypeImpl} is equal to <code>otherType</code>,
-   *         positive if this {@link NumberTypeImpl} is more exact (later in the
-   *         examples above) and negative if <code>otherType</code> is more
-   *         exact.
+   *         {@link NumberTypeImpl} is equal to <code>otherType</code>, positive
+   *         if this {@link NumberTypeImpl} is more exact (later in the examples
+   *         above) and negative if <code>otherType</code> is more exact.
    */
   public int getExactnessDifference(NumberType<?> otherType) {
 
