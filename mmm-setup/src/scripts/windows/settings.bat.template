@@ -1,20 +1,21 @@
-rem $Id: $
+@ECHO OFF
+REM $Id: $
 
-rem This script is used to define your custom settings.
-rem ATTENTION: Please do NOT modify the settings.bat.template file!
-rem            Make your local modifications in settings.bat!
+REM This script is used to define your custom settings.
+REM ATTENTION: Please do NOT modify the settings.bat.template file!
+REM            Make your local modifications in settings.bat!
 
-rem ##JAVA settings
-rem set JAVA_HOME=%ProgramFiles%/Java/jdk1.6
-rem set PATH=%JAVA_HOME%/bin:%PATH%
+REM ##JAVA settings
+REM set JAVA_HOME=%ProgramFiles%/Java/jdk1.6
+REM set PATH=%JAVA_HOME%/bin:%PATH%
 
-rem ## Maven settings
-rem set MAVEN_HOME=%ProgramFiles%/maven
-rem set PATH=%MAVEN_HOME%/bin:%PATH%
+REM ## Maven settings
+REM set MAVEN_HOME=%ProgramFiles%/maven
+REM set PATH=%MAVEN_HOME%/bin:%PATH%
 
-rem ## Subversion settings
-rem set SVN_HOME=%ProgramFiles%/subversion
-rem set PATH=%SVN_HOME%/bin:%PATH%
+REM ## Subversion settings
+REM set SVN_HOME=%ProgramFiles%/subversion
+REM set PATH=%SVN_HOME%/bin:%PATH%
 
-rem ## Comment out if you are NOT using eclipse
-set ECLIPSE_WORKSPACE=%USERPROFILE%/workspace
+REM ## Comment out if you are NOT using eclipse
+SET ECLIPSE_WORKSPACE=%USERPROFILE%/mmm/workspace

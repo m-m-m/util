@@ -1,4 +1,4 @@
-@echo off
+@ECHO OFF
 REM $Id$
 
 CD %~dp0
@@ -30,17 +30,6 @@ ECHO checking maven installation...
 call mvn -version || (ECHO Maven is NOT properly installed!
 PAUSE
 GOTO:EOF
-)
-echo checking maven configuration...
-IF NOT EXIST "%USERPROFILE%\.m2" (
-  MD "%USERPROFILE%\.m2"
-)
-IF EXIST "%USERPROFILE%\.m2\settings.xml" (
-  ECHO Maven configuration already available at %USERPROFILE%\.m2\settings.xml...
-) ELSE (
-  ECHO Copying maven configuration template to %USERPROFILE%/.m2/settings.xml
-  COPY "..\..\settings\maven\settings.xml" "%USERPROFILE%\.m2\"
-  ECHO ATTENTION: If you need a proxy server to reach the internet please modify this file now!
 )
 ECHO OK
 ECHO .

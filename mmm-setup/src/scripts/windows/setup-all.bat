@@ -1,7 +1,7 @@
-@echo off
-rem $Id$
+@ECHO OFF
+REM $Id$
 
-cd %~dp0
-call setup-maven.bat
-call setup-subversion.bat
-call setup-eclipse.bat
+CD %~dp0
+CALL setup-maven.bat
+CALL setup-subversion.bat
+CALL setup-eclipse.bat
