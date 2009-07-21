@@ -1,5 +1,5 @@
 @ECHO OFF
-REM $Id: $
+REM $Id$
 
 REM This script is used to define your custom settings.
 REM ATTENTION: Please do NOT modify the settings.bat.template file!
