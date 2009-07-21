@@ -1,9 +1,8 @@
-@echo off
-rem $Id: $
+@ECHO OFF
+REM $Id$
 
-set PWD=%~dp0
-cd %PWD%
-call mmm-setup/src/scripts/windows/setup-all.bat
-cd %PWD%
-echo EW=%ECLIPSE_WORKSPACE%
-pause
+SET PWD=%~dp0
+CD %PWD%
+CALL mmm-setup/src/scripts/windows/setup-all.bat
+CD %PWD%
+PAUSE
