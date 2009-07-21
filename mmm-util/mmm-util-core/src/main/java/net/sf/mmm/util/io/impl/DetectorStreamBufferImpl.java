@@ -12,9 +12,10 @@ import java.util.Queue;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
-import net.sf.mmm.util.io.base.AbstractByteProvider;
+import net.sf.mmm.util.io.base.AbstractByteArray;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.pool.api.ByteArrayPool;
 
 /**
  * This is the implementation of the {@link DetectorStreamBuffer} interface.<br>
@@ -26,13 +27,10 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DetectorStreamBufferImpl extends AbstractByteProvider implements DetectorStreamBuffer {
+public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /** The actual processor served by this buffer. */
   private DetectorStreamProcessor processor;
-
-  /** The predecessor in the chain or <code>null</code> if this is the first. */
-  private DetectorStreamBufferImpl chainPredecessor2;
 
   /** The successor in the chain or <code>null</code> if this is the last. */
   private DetectorStreamBufferImpl chainSuccessor;
@@ -45,6 +43,8 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
 
   /** @see #seek(long, SeekMode) */
   private SeekMode seekMode;
+
+  private ByteArray currentByteArray;
 
   /** The current {@link ByteArray} to work on. */
   private byte[] currentArray;
@@ -67,7 +67,11 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
    */
   private final LinkedList<ByteArray> arrayQueue;
 
+  /** @see #getByteArray(int) */
   private final ByteArray currentArrayView;
+
+  /** The {@link ByteArrayPool}. */
+  private ByteArrayPool byteArrayPool;
 
   /**
    * The constructor.
@@ -97,6 +101,21 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
 
     seek(byteCount, SeekMode.SKIP);
     return byteCount;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public long skip() {
+
+    if (this.currentArray == null) {
+      return 0;
+    }
+    int bytesAvailable = this.currentArrayMax - this.currentArrayIndex + 1;
+    for (ByteArray array : this.arrayQueue) {
+      bytesAvailable = bytesAvailable + array.getBytesAvailable();
+    }
+    return bytesAvailable;
   }
 
   /**
@@ -149,16 +168,33 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
   }
 
   /**
-   * TODO: javadoc
+   * This method is called when a {@link ByteArray} is wiped out of the chain.
+   * 
+   * @param byteArray is the array to release.
+   */
+  protected void release(ByteArray byteArray) {
+
+    if (byteArray instanceof PooledByteArray) {
+      this.byteArrayPool.release(byteArray.getBytes());
+    }
+  }
+
+  /**
+   * This method switches over to the next internal {@link #getByteArray(int)
+   * byte-array}.
    * 
    * @return <code>true</code> if a new buffer is available, <code>false</code>
    *         if the buffer queue is empty.
    */
   private boolean nextArray() {
 
-    if ((this.currentArray != null) && (this.currentArrayMin < this.currentArrayMax)) {
-      this.chainSuccessor.append(new ByteArrayImpl(this.currentArray, this.currentArrayMin,
-          this.currentArrayMax));
+    if (this.currentArray != null) {
+      if ((this.currentArrayMin < this.currentArrayMax) && (this.chainSuccessor != null)) {
+        this.chainSuccessor.append(this.currentByteArray.createSubArray(this.currentArrayMin,
+            this.currentArrayMax));
+      } else {
+        release(this.currentByteArray);
+      }
     }
     if (this.arrayQueue.isEmpty()) {
       this.currentArray = null;
@@ -172,8 +208,10 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
         if (this.seekCount >= bytesAvailable) {
           this.seekCount = this.seekCount - bytesAvailable;
           this.streamPosition = this.streamPosition + bytesAvailable;
-          if (this.seekMode == SeekMode.SKIP) {
+          if ((this.chainSuccessor != null) && (this.seekMode == SeekMode.SKIP)) {
             this.chainSuccessor.append(nextArray);
+          } else {
+            release(this.currentByteArray);
           }
           if (this.arrayQueue.isEmpty()) {
             this.currentArray = null;
@@ -191,6 +229,7 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
           // break;
         }
       }
+      this.currentByteArray = nextArray;
       this.currentArray = nextArray.getBytes();
       int currentIndex = nextArray.getCurrentIndex();
       this.currentArrayMin = currentIndex + offsetMin;
@@ -334,11 +373,49 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public int fill(byte[] buffer, int offset, int length) {
+
+    if ((length + offset) > buffer.length) {
+      // TODO exceed exception
+      throw new NlsIllegalArgumentException("Length \"{0}\" exceeds buffer!", Integer
+          .valueOf(length));
+    }
+    if (!hasNext()) {
+      // buffer is empty...
+      return 0;
+    }
+    int bufferIndex = offset;
+    int bytesLeft = length;
+
+    while (bytesLeft > 0) {
+      int count = this.currentArrayMax - this.currentArrayIndex + 1;
+      if (count > bytesLeft) {
+        count = bytesLeft;
+        bytesLeft = 0;
+      } else {
+        bytesLeft = bytesLeft - count;
+      }
+      System.arraycopy(this.currentArray, this.currentArrayIndex, buffer, bufferIndex, count);
+      bufferIndex = bufferIndex + count;
+      this.currentArrayIndex = this.currentArrayIndex + count;
+      if (this.currentArrayIndex > this.currentArrayMax) {
+        boolean bufferLeft = nextArray();
+        if (!bufferLeft) {
+          break;
+        }
+      }
+    }
+    return (length - bytesLeft);
+  }
+
+  /**
    * This inner class is a view on the current {@link ByteArray}.
    * 
    * @see DetectorStreamBufferImpl#getByteArray(int)
    */
-  protected class CurrentByteArray extends AbstractByteProvider implements ByteArray {
+  protected class CurrentByteArray extends AbstractByteArray implements ByteArray {
 
     /**
      * {@inheritDoc}
@@ -351,10 +428,19 @@ public class DetectorStreamBufferImpl extends AbstractByteProvider implements De
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getBytesAvailable() {
 
       return DetectorStreamBufferImpl.this.currentArrayMax
           - DetectorStreamBufferImpl.this.currentArrayIndex + 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getMinimumIndex() {
+
+      return DetectorStreamBufferImpl.this.currentArrayIndex;
     }
 
     /**

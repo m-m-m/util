@@ -20,12 +20,4 @@ public abstract interface ByteProvider {
    */
   int getBytesAvailable();
 
-  /**
-   * This method determines if this {@link ByteProvider} is empty. In other
-   * words this method returns <code>{@link #getBytesAvailable()} == 0</code>.
-   * 
-   * @return <code>true</code> if empty, <code>false</code> otherwise.
-   */
-  boolean isEmpty();
-
 }

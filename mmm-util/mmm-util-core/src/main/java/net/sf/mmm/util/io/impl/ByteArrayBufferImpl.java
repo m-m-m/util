@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler.
@@ -23,6 +24,9 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
  * @since 1.0.1
  */
 public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffer {
+
+  /** @see #getCurrentIndex() */
+  private int currentIndex;
 
   /**
    * The constructor.
@@ -43,6 +47,7 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
   public ByteArrayBufferImpl(byte[] buffer) {
 
     super(buffer);
+    this.currentIndex = 0;
   }
 
   /**
@@ -55,15 +60,32 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
   public ByteArrayBufferImpl(byte[] buffer, int currentIndex, int maximumIndex) {
 
     super(buffer, currentIndex, maximumIndex);
+    this.currentIndex = currentIndex;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
+  public int getCurrentIndex() {
+
+    return this.currentIndex;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void setCurrentIndex(int currentIndex) {
 
-    super.setCurrentIndex(currentIndex);
+    if (currentIndex >= getMinimumIndex()) {
+      // TODO: exceed-exception
+      throw new NlsIllegalArgumentException(Integer.valueOf(currentIndex));
+    }
+    if (currentIndex <= (getMaximumIndex() + 1)) {
+      // TODO: exceed-exception
+      throw new NlsIllegalArgumentException(Integer.valueOf(currentIndex));
+    }
+    this.currentIndex = currentIndex;
   }
 
   /**
@@ -78,37 +100,57 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
   /**
    * {@inheritDoc}
    */
-  @Override
   public byte next() throws NoSuchElementException {
 
-    return super.next();
+    if (this.currentIndex > getMaximumIndex()) {
+      throw new NoSuchElementException();
+    }
+    return getBytes()[this.currentIndex++];
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
   public byte peek() throws NoSuchElementException {
 
-    return super.peek();
+    if (this.currentIndex > getMaximumIndex()) {
+      throw new NoSuchElementException();
+    }
+    return getBytes()[this.currentIndex];
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
   public boolean hasNext() {
 
-    return super.hasNext();
+    return (this.currentIndex <= getMaximumIndex());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public long skip(long byteCount) {
+
+    int bytesLeft = getMaximumIndex() - this.currentIndex + 1;
+    int skip;
+    if (bytesLeft > byteCount) {
+      skip = (int) byteCount;
+    } else {
+      skip = bytesLeft;
+    }
+    this.currentIndex = this.currentIndex + skip;
+    return skip;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public long skip(long byteCount) {
+  public ByteArrayImpl createSubArray(int minimum, int maximum) {
 
-    return super.skip(byteCount);
+    checkSubArray(minimum, maximum);
+    return new ByteArrayBufferImpl(getBytes(), minimum, maximum);
   }
 
 }

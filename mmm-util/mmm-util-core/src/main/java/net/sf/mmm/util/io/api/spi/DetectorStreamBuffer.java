@@ -45,6 +45,16 @@ public interface DetectorStreamBuffer extends ComposedByteBuffer {
   long skip(long byteCount);
 
   /**
+   * This method skips all bytes {@link #getBytesAvailable() available} in this
+   * buffer. This is logically the same as
+   * <code>{@link #skip(long) skip}({@link #getBytesAvailable()})</code> but
+   * more efficient.
+   * 
+   * @return the number of bytes that have been skipped.
+   */
+  long skip();
+
+  /**
    * This method inserts the given <code>data</code> at the current position
    * into the stream.
    * 

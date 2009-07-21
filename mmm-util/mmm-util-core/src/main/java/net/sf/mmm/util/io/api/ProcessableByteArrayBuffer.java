@@ -3,6 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
+
+
+
+
+
+
 /**
  * This is the interface for a provider of data bytes (a <code>byte[]</code>
  * -Buffer) that is {@link ByteIterator iterable} and {@link ByteProcessable

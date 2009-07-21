@@ -3,11 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
+
+
+
+
+
 /**
- * This is the interface of a {@link ByteBuffer} that is internally composed out
- * of multiple {@link ByteArray}s. It allows to {@link #getByteArray(int)
- * access} these {@link ByteArray}s for read-only lookahead operations or more
- * efficient processing.
+ * This is the interface of a {@link ByteBuffer} that is internally
+ * composed out of multiple {@link ByteArray}s. It allows to
+ * {@link #getByteArray(int) access} these {@link ByteArray}s for read-only
+ * lookahead operations or more efficient processing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.3
@@ -50,5 +55,29 @@ public interface ComposedByteBuffer extends ByteBuffer {
    * @return the number of currently available {@link ByteArray}s.
    */
   int getByteArrayCount();
+
+  /**
+   * This method fills the given <code>buffer</code> starting at
+   * <code>offset</code> with the {@link #next() next} bytes from this
+   * {@link ComposedByteBuffer}. The bytes that are filled into the given
+   * <code>buffer</code> will therefore be consumed. This method can be used to
+   * write data from this buffer to an {@link java.io.OutputStream} or supply it
+   * to the consumer of an {@link java.io.InputStream}.
+   * 
+   * @param buffer is the buffer to fill.
+   * @param offset is the index in the given <code>buffer</code> where to fill
+   *        in the first byte. See {@link ByteArray#getCurrentIndex()}.
+   * @param length is the expected number of bytes to fill into
+   *        <code>buffer</code>. Has to be positive and less or equal to
+   *        <code>buffer.length - offset</code>. However at most the number of
+   *        {@link #getBytesAvailable() available bytes} can be filled even if
+   *        <code>length</code> is greater.
+   * @return the number of bytes that have actually been filled into the
+   *         <code>buffer</code>. Will be positive and less or equal to the
+   *         given <code>length</code>. Should be only less than
+   *         <code>maxLength</code> if NOT enough {@link #getBytesAvailable()
+   *         bytes are available}.
+   */
+  int fill(byte[] buffer, int offset, int length);
 
 }

@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
 import net.sf.mmm.util.io.api.ByteProcessor;
-import net.sf.mmm.util.io.api.ComposedByteBuffer;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
@@ -35,8 +34,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuffer,
-    ComposedByteBuffer {
+public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteArrayBuffer { // ,
+                                                                                            // ComposedByteBuffer
+                                                                                            // {
 
   /** The actual buffers. */
   private final ByteArrayBufferImpl[] buffers;
@@ -186,14 +186,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
-  public boolean isEmpty() {
-
-    return (getBytesAvailable() == 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public boolean hasNext() {
 
     if (this.currentBufferIndex <= this.currentBufferMax) {
@@ -338,6 +330,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
           buffer.setCurrentIndex(0);
           buffer.setMaximumIndex(bytes - 1);
         } else {
+          // TODO bytes can still be 0 - not eos!
           return true;
         }
       }
@@ -353,12 +346,50 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  public int fill(byte[] buffer, int offset, int length) {
+
+    if ((length + offset) > buffer.length) {
+      throw new NlsIllegalArgumentException("Maximum length \"{0}\" exceeds buffer!", Integer
+          .valueOf(length));
+    }
+    if (!hasNext()) {
+      // buffer is empty...
+      return 0;
+    }
+    int bufferIndex = offset;
+    int bytesLeft = length;
+
+    while (bytesLeft > 0) {
+      int count = this.currentBufferMax - this.currentBufferIndex + 1;
+      if (count > bytesLeft) {
+        count = bytesLeft;
+        bytesLeft = 0;
+      } else {
+        bytesLeft = bytesLeft - count;
+      }
+      System
+          .arraycopy(this.currentBufferBytes, this.currentBufferIndex, buffer, bufferIndex, count);
+      bufferIndex = bufferIndex + count;
+      this.currentBufferIndex = this.currentBufferIndex + count;
+      if (this.currentBufferIndex > this.currentBufferMax) {
+        boolean bufferLeft = nextBuffer();
+        if (!bufferLeft) {
+          break;
+        }
+      }
+    }
+    return (length - bytesLeft);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public ByteArray getByteArray(int index) {
 
     assert (index >= 0);
     assert (index < getByteArrayCount());
     if (index == 0) {
-      // TODO: use inner class as view instead of construction new objects?
+      // TODO: use inner class as view instead of new object?
       return new ByteArrayImpl(this.currentBufferBytes, this.currentBufferIndex,
           this.currentBufferMax);
     } else {
@@ -374,7 +405,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
         throw new NlsIllegalArgumentException(Integer.valueOf(index));
       }
       return this.buffers[newIndex];
-
     }
   }
 

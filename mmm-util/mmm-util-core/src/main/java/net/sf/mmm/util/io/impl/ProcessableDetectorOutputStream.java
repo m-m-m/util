@@ -42,27 +42,9 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
   public ProcessableDetectorOutputStream(OutputStream outputStream,
       Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider) {
 
-    this(mutableMetadata, provider);
+    super(mutableMetadata, null);
     this.wrapperOutputStream = new WrapperOutputStream(outputStream);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param outputStream is the raw {@link OutputStream} to {@link #getStream()
-   *        warp}.
-   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable
-   *        metadata}.
-   * @param provider is the
-   *        {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this
-   *        instance.
-   */
-  private ProcessableDetectorOutputStream(OutputStream outputStream,
-      Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider,
-      WrapperOutputStream wrapperOutputStream) {
-
-    super(mutableMetadata, provider, wrapperOutputStream);
-    this.wrapperOutputStream = wrapperOutputStream;
+    initialize(provider, this.wrapperOutputStream);
   }
 
   /**
@@ -100,7 +82,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void close() throws IOException {
 
-      this.delegate.close();
+      processInternal(null, 0, 0, true);
     }
 
     /**
@@ -153,6 +135,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
         this.delegate.write(byteArray.getBytes(), byteArray.getCurrentIndex(), byteArray
             .getBytesAvailable());
       }
+      buffer.skip();
     }
 
   }
