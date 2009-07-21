@@ -1,36 +1,54 @@
-rem $Id$
+@echo off
+REM $Id$
 
-cd %~dp0
-call include.bat
+CD %~dp0
+CALL include.bat
 
-java -version 2>&1 | find "java version"
-rem JAVA_VERSION=`java -version 2>&1 | grep 'java version'`
-rem V=${JAVA_VERSION:14:3}
-rem if [ "${V}" = "1.5" ] || [ "${V}" = "1.6" ]
-rem then
-rem   echo "Found java version ${V} which is okay"
-rem   echo
-rem else
-rem   echo "Your java version must be 1.5 or 1.6 - found ${V}"
-rem   echo "Please install a jdk in version 1.5 or 1.6 and ensure it is firt java in your path"
-rem   exit 1
-rem fi
-mvn -version
-
-rem f_requireCmd mvn -version
-if not %ERRORLEVEL% == 0 (
-  echo Maven2 is NOT installed property.
-  echo Please install maven2 and make it available in your PATH variable.
+ECHO checking java installation...
+java -version 2>&1 || (ECHO Java is NOT properly installed!
+PAUSE
+GOTO:EOF
 )
-rem if [ ! -e "~/.m2/settings.xml" ]
-rem then
-rem   echo "Copying maven configuration template to ~/.m2/settings.xml"
-rem   echo "ATTENTION: If you need a proxy server to reach the internet please modify this file now!"
-rem   mkdir -p "~/.m2/"
-rem   cp ../../settings/maven/settings.xml "~/.m2/"
-rem else
-rem   echo "Maven configuration already available..."
-rem fi
-rem #f_requireCmd svn --version
-rem 
-rem echo "Your installation seems to be okay."
+java -version 2>&1 | FIND "java version" | find "1.5">nul
+IF %ERRORLEVEL% NEQ 0 (
+  REM NOT java 5
+  java -version 2>&1 | FIND "java version" | find "1.6">nul
+  IF %ERRORLEVEL% NEQ 0 (
+    REM NOT java 6
+    java -version 2>&1 | FIND "java version" | find "1.7">nul
+    IF %ERRORLEVEL% NEQ 0 (
+      ECHO Wrong Java version! Has to be at least 1.5!
+      PAUSE
+      GOTO:EOF
+    )
+  )
+)
+ECHO OK
+ECHO .
+
+ECHO checking maven installation...
+call mvn -version || (ECHO Maven is NOT properly installed!
+PAUSE
+GOTO:EOF
+)
+echo checking maven configuration...
+IF NOT EXIST "%USERPROFILE%\.m2" (
+  MD "%USERPROFILE%\.m2"
+)
+IF EXIST "%USERPROFILE%\.m2\settings.xml" (
+  ECHO Maven configuration already available at %USERPROFILE%\.m2\settings.xml...
+) ELSE (
+  ECHO Copying maven configuration template to %USERPROFILE%/.m2/settings.xml
+  COPY "..\..\settings\maven\settings.xml" "%USERPROFILE%\.m2\"
+  ECHO ATTENTION: If you need a proxy server to reach the internet please modify this file now!
+)
+ECHO OK
+ECHO .
+
+REM ECHO checking svn installation...
+REM svn -version || (ECHO Subversion is NOT properly installed!
+REM PAUSE
+REM GOTO:EOF
+REM )
+
+ECHO Your installation seems to be okay.
