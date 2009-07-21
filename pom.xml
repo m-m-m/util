@@ -36,7 +36,7 @@
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
     <module>mmm-value</module>
-    <!-- <module>mmm-setup</module> -->
+    <module>mmm-setup</module>
   </modules>
   
   <properties>
@@ -71,7 +71,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>2.0-beta-8-SNAPSHOT</version>
+        <version>2.0.1</version>
       </plugin>
       <!-- advanced manifests -->
       <plugin>
@@ -198,7 +198,7 @@
           <!-- <encoding>UTF-8</encoding> -->
           <links>
             <link>http://java.sun.com/javase/6/docs/api/</link>
-            <link>http://m-m-m.sourceforge.net/maven/apidocs/</link>            
+            <link>http://m-m-m.sourceforge.net/maven/apidocs/</link>
           </links>
         </configuration>
         <executions>
@@ -315,8 +315,8 @@
   
   
   <issueManagement>
-    <system>sourceforge</system>
-    <url>http://sourceforge.net/tracker/?group_id=40062&#038;atid=427657</url>
+    <system>trac</system>
+    <url>https://sourceforge.net/apps/trac/m-m-m/report</url>
   </issueManagement>
   <scm>
     <connection>scm:svn:http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</connection>
@@ -330,10 +330,6 @@
         <name>cube-releases</name>
         <url>http://localhost:8080/artifactory/local</url>
     </repository>
-    <site>
-      <id>sourceforge</id>
-      <url>file:///usr/local/tomcat/webapps/mmm-site/</url>
-    </site>
   </distributionManagement>
   <mailingLists>
     <mailingList>
