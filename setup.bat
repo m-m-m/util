@@ -1,8 +1,9 @@
 @ECHO OFF
 REM $Id$
 
-SET PWD=%~dp0
-CD %PWD%
+cd %~dp0
 CALL mmm-setup/src/scripts/windows/setup-all.bat
-CD %PWD%
+
+CD %~dp0
+CALL mvn -Dmaven.test.skip=true install
 PAUSE
