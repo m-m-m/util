@@ -79,6 +79,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.nls.api.NlsIllegalStateException */
   public static final String ERR_ILLEGAL_STATE = "Illegal state!";
 
+  /** @see net.sf.mmm.util.nls.api.IllegalCaseException */
+  public static final String ERR_ILLEGAL_CASE = "The case \"{0}\" is NOT covered!";
+
   /** @see net.sf.mmm.util.resource.api.ResourceNotAvailableException */
   public static final String ERR_RESOURCE_NOT_AVAILABLE = "The resource \"{0}\" is not available in your classpath!";
 

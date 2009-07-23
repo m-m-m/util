@@ -157,7 +157,7 @@ public class FileAttributes implements Cloneable {
     if (this.permissions != null) {
       hash = hash * 31 + this.permissions.hashCode();
     }
-    return super.hashCode();
+    return hash;
   }
 
   /**

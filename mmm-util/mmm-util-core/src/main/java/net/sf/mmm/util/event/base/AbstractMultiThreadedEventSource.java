@@ -65,9 +65,10 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
   }
 
   /**
-   * This method initializes this class.
+   * {@inheritDoc}
    */
-  public void doinitialize() {
+  @Override
+  protected void doInitialize() {
 
     super.doInitialize();
     if (this.executor == null) {

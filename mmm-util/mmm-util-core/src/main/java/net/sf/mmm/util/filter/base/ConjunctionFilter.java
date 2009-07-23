@@ -5,6 +5,7 @@ package net.sf.mmm.util.filter.base;
 
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.lang.api.Conjunction;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is an implementation of the {@link Filter} interface that combines a
@@ -67,20 +68,18 @@ public class ConjunctionFilter<V> implements Filter<V> {
           }
           break;
         default :
-          throw new IllegalStateException("Unknown conjunction: " + this.conjunction);
+          throw new IllegalCaseException(Conjunction.class, this.conjunction);
       }
     }
     switch (this.conjunction) {
       case OR:
-        return false;
-      case AND:
-        return true;
-      case NOR:
-        return true;
       case NAND:
         return false;
+      case AND:
+      case NOR:
+        return true;
       default :
-        throw new IllegalStateException("Unknown conjunction: " + this.conjunction);
+        throw new IllegalCaseException(Conjunction.class, this.conjunction);
     }
   }
 }

@@ -32,21 +32,9 @@ public enum ByteOrderMark {
      * {@inheritDoc}
      */
     @Override
-    public int getLength() {
+    public byte[] getBytes() {
 
-      return 3;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean checkPresent(byte[] bytes, int offset) {
-
-      if ((bytes[offset] == 0xef) && (bytes[offset + 1] == 0xbb) && (bytes[offset + 2] == 0xbf)) {
-        return true;
-      }
-      return false;
+      return MAGIC_BYTES_UTF8;
     }
 
   },
@@ -71,21 +59,9 @@ public enum ByteOrderMark {
      * {@inheritDoc}
      */
     @Override
-    public int getLength() {
+    public byte[] getBytes() {
 
-      return 2;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean checkPresent(byte[] bytes, int offset) {
-
-      if ((bytes[offset] == 0xfe) && (bytes[offset + 1] == 0xff)) {
-        return true;
-      }
-      return false;
+      return MAGIC_BYTES_UTF16_BE;
     }
 
   },
@@ -93,7 +69,7 @@ public enum ByteOrderMark {
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_16_LE
    * UTF16-LE}:<br>
-   * <code>0xfe 0xff</code>
+   * <code>0xff 0xfe</code>
    */
   UTF_16_LE() {
 
@@ -110,21 +86,9 @@ public enum ByteOrderMark {
      * {@inheritDoc}
      */
     @Override
-    public int getLength() {
+    public byte[] getBytes() {
 
-      return 2;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean checkPresent(byte[] bytes, int offset) {
-
-      if ((bytes[offset] == 0xff) && (bytes[offset + 1] == 0xfe)) {
-        return true;
-      }
-      return false;
+      return MAGIC_BYTES_UTF16_LE;
     }
 
   },
@@ -132,7 +96,7 @@ public enum ByteOrderMark {
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_32_BE
    * UTF-32BE}:<br>
-   * <code>0xfe 0xff</code>
+   * <code>0x00 0x00 0xfe 0xff</code>
    */
   UTF_32_BE() {
 
@@ -149,22 +113,9 @@ public enum ByteOrderMark {
      * {@inheritDoc}
      */
     @Override
-    public int getLength() {
+    public byte[] getBytes() {
 
-      return 4;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean checkPresent(byte[] bytes, int offset) {
-
-      if ((bytes[offset] == 0x00) && (bytes[offset + 1] == 0x00) && (bytes[offset + 2] == 0xfe)
-          && (bytes[offset + 3] == 0xff)) {
-        return true;
-      }
-      return false;
+      return MAGIC_BYTES_UTF32_BE;
     }
 
   },
@@ -172,7 +123,7 @@ public enum ByteOrderMark {
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_32_LE
    * UTF-32LE}:<br>
-   * <code>0xfe 0xff</code>
+   * <code>0xff 0xfe 0x00 0x00</code>
    */
   UTF_32_LE() {
 
@@ -189,25 +140,29 @@ public enum ByteOrderMark {
      * {@inheritDoc}
      */
     @Override
-    public int getLength() {
+    public byte[] getBytes() {
 
-      return 4;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean checkPresent(byte[] bytes, int offset) {
-
-      if ((bytes[offset] == 0xff) && (bytes[offset + 1] == 0xfe) && (bytes[offset + 2] == 0x00)
-          && (bytes[offset + 3] == 0x00)) {
-        return true;
-      }
-      return false;
+      return MAGIC_BYTES_UTF32_LE;
     }
 
   };
+
+  /** @see #UTF_8 */
+  private static final byte[] MAGIC_BYTES_UTF8 = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
+
+  /** @see #UTF_16_BE */
+  private static final byte[] MAGIC_BYTES_UTF16_BE = new byte[] { (byte) 0xfe, (byte) 0xff };
+
+  /** @see #UTF_16_LE */
+  private static final byte[] MAGIC_BYTES_UTF16_LE = new byte[] { (byte) 0xff, (byte) 0xfe };
+
+  /** @see #UTF_32_BE */
+  private static final byte[] MAGIC_BYTES_UTF32_BE = new byte[] { 0x00, 0x00, (byte) 0xfe,
+      (byte) 0xff };
+
+  /** @see #UTF_32_LE */
+  private static final byte[] MAGIC_BYTES_UTF32_LE = new byte[] { (byte) 0xff, (byte) 0xfe, 0x00,
+      0x00 };
 
   /**
    * This method gets the encoding indicated by this {@link ByteOrderMark}.
@@ -221,7 +176,10 @@ public enum ByteOrderMark {
    * 
    * @return the length.
    */
-  public abstract int getLength();
+  public final int getLength() {
+
+    return getBytes().length;
+  }
 
   /**
    * This method detects if this {@link ByteOrderMark} is present in the given
@@ -243,22 +201,24 @@ public enum ByteOrderMark {
    */
   public final boolean isPresent(byte[] bytes, int offset) {
 
-    if (offset + getLength() <= bytes.length) {
-      return checkPresent(bytes, offset);
+    byte[] bom = getBytes();
+    if (offset + bom.length <= bytes.length) {
+      for (int i = 0; i < bom.length; i++) {
+        if (bytes[offset + i] != bom[i]) {
+          return false;
+        }
+      }
+      return true;
     }
     return false;
   }
 
   /**
-   * This is an internal variant of {@link #isPresent(byte[], int)}.
+   * This method gets the bytes of this BOM.
    * 
-   * @param bytes is the buffer with the bytes to check.
-   * @param offset is the index of the first data-byte in <code>bytes</code>.
-   *        Will typically be <code>0</code>.
-   * @return <code>true</code> if this {@link ByteOrderMark BOM} was detected in
-   *         the
+   * @return the magic bytes of this BOM.
    */
-  protected abstract boolean checkPresent(byte[] bytes, int offset);
+  protected abstract byte[] getBytes();
 
   /**
    * This method detects the {@link ByteOrderMark} that may be

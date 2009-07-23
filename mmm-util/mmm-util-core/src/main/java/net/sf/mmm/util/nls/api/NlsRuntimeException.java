@@ -17,29 +17,28 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage is a short description of the problem. It
+   * @param internationalizedMessage is a short description of the problem. It
    *        is used for internationalization and should be in English language.
    * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   *        <code>internationalizedMessage</code> after nationalization.
    */
-  public NlsRuntimeException(String internaitionalizedMessage, Object... arguments) {
+  public NlsRuntimeException(String internationalizedMessage, Object... arguments) {
 
-    super(NlsAccess.getFactory().create(internaitionalizedMessage, arguments));
+    super(NlsAccess.getFactory().create(internationalizedMessage, arguments));
   }
 
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage is a short description of the problem. It
+   * @param internationalizedMessage is a short description of the problem. It
    *        is used for internationalization and should be in English language.
    * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   *        <code>internationalizedMessage</code> after nationalization.
    */
-  public NlsRuntimeException(Throwable nested, String internaitionalizedMessage,
-      Object... arguments) {
+  public NlsRuntimeException(Throwable nested, String internationalizedMessage, Object... arguments) {
 
-    super(nested, NlsAccess.getFactory().create(internaitionalizedMessage, arguments));
+    super(nested, NlsAccess.getFactory().create(internationalizedMessage, arguments));
   }
 
 }

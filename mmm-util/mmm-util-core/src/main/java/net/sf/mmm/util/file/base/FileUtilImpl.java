@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
@@ -273,7 +274,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
     String extension = "";
     if (lastDot > 0) {
       if ((filename.lastIndexOf('/', lastDot) == -1) && (filename.lastIndexOf('\\', lastDot) == -1)) {
-        extension = filename.substring(lastDot + 1).toLowerCase();
+        extension = filename.substring(lastDot + 1).toLowerCase(Locale.US);
       }
     }
     return extension;
