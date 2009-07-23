@@ -22,25 +22,29 @@ public abstract class PersistenceException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage
-   * @param arguments
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
+   *        <code>internationalizedMessage</code> after nationalization.
    */
-  public PersistenceException(String internaitionalizedMessage, Object... arguments) {
+  public PersistenceException(String internationalizedMessage, Object... arguments) {
 
-    super(internaitionalizedMessage, arguments);
+    super(internationalizedMessage, arguments);
   }
 
   /**
    * The constructor.
    * 
-   * @param nested
-   * @param internaitionalizedMessage
-   * @param arguments
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for internationalization and should be in English language.
+   * @param arguments are the arguments filled into the
+   *        <code>internationalizedMessage</code> after nationalization.
    */
-  public PersistenceException(Throwable nested, String internaitionalizedMessage,
+  public PersistenceException(Throwable nested, String internationalizedMessage,
       Object... arguments) {
 
-    super(nested, internaitionalizedMessage, arguments);
+    super(nested, internationalizedMessage, arguments);
   }
 
 }

@@ -9,7 +9,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import net.sf.mmm.transaction.api.TransactionAdapter;
 import net.sf.mmm.transaction.api.TransactionSettings;
 import net.sf.mmm.transaction.base.AbstractTransactionExecutor;
 
@@ -60,8 +59,9 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
   }
 
   /**
-   * This is the implementation of the {@link TransactionAdapter} interface
-   * using spring-tx.
+   * This is the implementation of the
+   * {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using
+   * spring-tx.
    */
   private class SpringTransactionAdapter extends AbstractTransactionAdapter<TransactionStatus> {
 

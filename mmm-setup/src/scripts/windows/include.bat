@@ -1,6 +1,7 @@
 @ECHO OFF
 REM $Id$
 
+CD %~dp0
 REM This file is included to activate the custom settings
 
 SET MMM_BASE=..\..\..\..
