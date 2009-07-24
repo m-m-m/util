@@ -17,7 +17,7 @@
   -->
   <body>
     <links>
-      <item name="Wiki" href="http://m-m-m.wiki.sourceforge.net/" />
+      <item name="Trac" href="http://sourceforge.net/apps/trac/m-m-m/" />
       <item name="Javadoc" href="http://m-m-m.sourceforge.net/maven/apidocs/index.html" />
       <item name="Overview" href="http://m-m-m.sourceforge.net/maven/overview.html" />
       <item name="Home" href="http://m-m-m.sourceforge.net/" />
