@@ -120,8 +120,7 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
-  public <RESULT, EXCEPTION extends Exception> RESULT doInTransaction(
-      TransactionCallable<RESULT, EXCEPTION> callable) throws EXCEPTION {
+  public <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable) {
 
     return doInTransaction(callable, getDefaultSettings());
   }
@@ -129,9 +128,8 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
-  public <RESULT, EXCEPTION extends Exception> RESULT doInTransaction(
-      TransactionCallable<RESULT, EXCEPTION> callable, TransactionSettings settings)
-      throws EXCEPTION {
+  public <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable,
+      TransactionSettings settings) {
 
     AbstractTransactionAdapter<?> transactionAdapter = openTransactionAdapter(settings);
     transactionAdapter.start();

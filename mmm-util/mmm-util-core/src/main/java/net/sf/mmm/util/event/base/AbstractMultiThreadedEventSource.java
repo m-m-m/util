@@ -37,6 +37,7 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
   public AbstractMultiThreadedEventSource() {
 
     super();
+    this.executor = null;
   }
 
   /**

@@ -9,7 +9,7 @@ SET SVN_DIR=%APPDATA%\Subversion
 IF NOT EXIST "%SVN_DIR%" (
   MD "%SVN_DIR%"
 )
-IF NOT EXIST "%SVN_DIR%\_mmm-stop" (
+IF NOT EXIST "%SVN_DIR%\_mmm-stop_" (
   IF EXIST "%SVN_DIR%\config" (
     IF NOT EXIST "%SVN_DIR%\config.bak.mmm" (
       ECHO creating backup of original subversion config.

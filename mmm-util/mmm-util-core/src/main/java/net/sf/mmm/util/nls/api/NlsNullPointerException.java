@@ -42,4 +42,42 @@ public class NlsNullPointerException extends NlsRuntimeException {
     super(nested, NlsBundleUtilCore.ERR_ARGUMENT_NULL, argument);
   }
 
+  /**
+   * This method checks if the given <code>object</code> is <code>null</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This method is only intended to be used for specific types. It then not
+   * only saves you from a single <code>if</code>-statement, but also defines a
+   * common pattern that is refactoring-safe.<br>
+   * Anyhow you should never use this method with generic {@link Class}es for
+   * <code>type</code> such as {@link Object}, {@link String}, {@link Integer},
+   * etc.<br>
+   * <br>
+   * Here is an example:
+   * 
+   * <pre>
+   * public void myMethod(MySpecificBusinessObject businessObject, String myName) {
+   *   {@link NlsNullPointerException}.checkNotNull(MySpecificBusinessObject.class, businessObject);
+   *   if (name == null) {
+   *     throw new {@link NlsNullPointerException}("myName");
+   *   }
+   *   doTheWork();
+   * }
+   * </pre>
+   * 
+   * @param <O> is the generic type of the <code>object</code>.
+   * @param type is the class reflecting the <code>object</code>. Its
+   *        {@link Class#getSimpleName() simple name} will be used in the
+   *        exception-message if <code>object</code> is <code>null</code>.
+   * @param object is the object that is checked and should NOT be
+   *        <code>null</code>.
+   * @throws NlsNullPointerException if the given <code>object</code> is
+   *         <code>null</code>.
+   */
+  public static <O> void checkNotNull(Class<O> type, O object) throws NlsNullPointerException {
+
+    if (object == null) {
+      throw new NlsNullPointerException(type.getSimpleName());
+    }
+  }
+
 }

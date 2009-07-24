@@ -22,7 +22,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-setup</artifactId>
+      <artifactId>mmm-test</artifactId>
       <version>SNAPSHOT</version>
       <scope>test</scope>
     </dependency>

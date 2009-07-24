@@ -64,18 +64,13 @@ public interface TransactionExecutor extends
    * transaction is automatically committed if your <code>callable</code>
    * succeeds while a rollback is performed in case it fails (throws anything).
    * 
-   * 
    * @param <RESULT> is the generic type returned from your
    *        <code>callable</code>.
-   * @param <EXCEPTION> is the generic type of the exception potentially thrown.
    * @param callable is the {@link Callable} to be {@link Callable#call()
    *        executed} within a transaction.
    * @return the result of the <code>callable</code>.
-   * @throws EXCEPTION
-   * @throws Exception if the <code>callable</code> failed.
    */
-  <RESULT, EXCEPTION extends Exception> RESULT doInTransaction(
-      TransactionCallable<RESULT, EXCEPTION> callable) throws EXCEPTION;
+  <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable);
 
   /**
    * This method executes the given <code>callable</code> in the context of a
@@ -86,19 +81,13 @@ public interface TransactionExecutor extends
    * transaction is automatically committed if your <code>callable</code>
    * succeeds while a rollback is performed in case it fails (throws anything).
    * 
-   * 
    * @param <RESULT> is the generic type returned from your
    *        <code>callable</code>.
-   * @param <EXCEPTION> is the generic type of the exception potentially thrown.
    * @param callable is the {@link Callable} to be {@link Callable#call()
    *        executed} within a transaction.
    * @param settings are the settings to configure transactions.
    * @return the result of the <code>callable</code>.
-   * @throws EXCEPTION
-   * @throws Exception if the <code>callable</code> failed.
    */
-  <RESULT, EXCEPTION extends Exception> RESULT doInTransaction(
-      TransactionCallable<RESULT, EXCEPTION> callable, TransactionSettings settings)
-      throws EXCEPTION;
+  <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable, TransactionSettings settings);
 
 }

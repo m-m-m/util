@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler.
@@ -77,14 +77,8 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
    */
   public void setCurrentIndex(int currentIndex) {
 
-    if (currentIndex >= getMinimumIndex()) {
-      // TODO: exceed-exception
-      throw new NlsIllegalArgumentException(Integer.valueOf(currentIndex));
-    }
-    if (currentIndex <= (getMaximumIndex() + 1)) {
-      // TODO: exceed-exception
-      throw new NlsIllegalArgumentException(Integer.valueOf(currentIndex));
-    }
+    ValueOutOfRangeException.checkRange(Integer.valueOf(currentIndex), Integer
+        .valueOf(getMinimumIndex()), Integer.valueOf(getMaximumIndex() + 1), "currentIndex");
     this.currentIndex = currentIndex;
   }
 

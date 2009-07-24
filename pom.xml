@@ -35,8 +35,8 @@
     <module>mmm-persistence</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
-    <module>mmm-value</module>
-    <module>mmm-setup</module>
+    <!-- <module>mmm-setup</module> -->
+    <module>mmm-test</module>
   </modules>
   
   <properties>
@@ -44,7 +44,127 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   
+  
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-compiler-plugin</artifactId>
+           <version>2.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-eclipse-plugin</artifactId>
+           <version>2.7</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>2.0.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-changes-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-changelog-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>2.1.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.4.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>2.4.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>taglist-maven-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin> 
+          <groupId>org.codehaus.mojo</groupId> 
+          <artifactId>dashboard-maven-plugin</artifactId> 
+          <version>1.0.0-beta-1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>cobertura-maven-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <!-- Only for maven 2.1 and above... -->
     <!-- <sourceEncoding>UTF-8</sourceEncoding> -->
     
@@ -52,9 +172,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <!-- <version>2.2</version> -->
         <configuration>
           <encoding>UTF-8</encoding>
+          <includeEmptyDirs>true</includeEmptyDirs>
         </configuration>
       </plugin>
       
@@ -67,11 +187,6 @@
            <source>1.5</source>
            <target>1.5</target>
          </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>2.0.1</version>
       </plugin>
       <!-- advanced manifests -->
       <plugin>
@@ -104,12 +219,16 @@
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-eclipse-plugin</artifactId>
          <configuration>
+           <buildOutputDirectory>eclipse-target</buildOutputDirectory>
            <additionalBuildcommands>
              <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
            </additionalBuildcommands>
            <additionalProjectnatures>
              <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
            </additionalProjectnatures>
+           <classpathContainers>
+             <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+           </classpathContainers>
            <additionalConfig>
              <file>
                <name>.checkstyle</name>
@@ -126,15 +245,9 @@
 </fileset-config>
 ]]></content>
              </file>
-           </additionalConfig>         
+           </additionalConfig>
          </configuration>
       </plugin>      
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <tagBase>https://m-m-m.svn.sourceforge.net/svnroot/m-m-m/tags/</tagBase>
-        </configuration>
-      </plugin>
       <!-- make checkstyle settings available -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -147,10 +260,21 @@
           </dependency>
         </dependencies>
       </plugin>
+      <!-- make findbugs settings available -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mmm-setup</artifactId>
+            <version>SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+      </plugin>
       <plugin> 
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId> 
-        <version>1.0.0-beta-1</version>
         <configuration>
           <!-- 
           <dialect>org.hibernate.dialect.HSQLDialect</dialect> 
@@ -185,32 +309,20 @@
             <artifactId>derbyclient</artifactId>
             <version>10.2.1.6</version>
             -->
-
           </dependency>
         </dependencies>
       </plugin>
-      <!-- aggregated javadoc for a complete api-doc of the project -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.5</version>        
-        <configuration>
-          <!-- <encoding>UTF-8</encoding> -->
-          <links>
-            <link>http://java.sun.com/javase/6/docs/api/</link>
-            <link>http://m-m-m.sourceforge.net/maven/apidocs/</link>
-          </links>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>javadoc</goal>
-              <goal>aggregate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>      
     </plugins>
+    <!-- http://jira.codehaus.org/browse/MNG-4184 -->
+    <!--
+    <extensions>
+      <extension>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-setup</artifactId>
+        <version>SNAPSHOT</version>
+      </extension>
+    </extensions>
+    -->
   </build>
   
   
@@ -226,12 +338,47 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
       </plugin>
+      <!-- Waiting for update! -->
+      <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
           <configLocation>net/sf/mmm/checkstyle.xml</configLocation>
         </configuration>
+      </plugin>
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <maxmemory>512m</maxmemory>
+          <show>private</show>
+          <encoding>UTF-8</encoding>
+          <!-- <docencoding>UTF-8</docencoding> -->
+          <charset>UTF-8</charset>
+          <links>
+            <link>http://java.sun.com/javase/6/docs/api/</link>
+            <link>http://m-m-m.sourceforge.net/maven/apidocs/</link>
+          </links>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <id>non-aggregate</id>
+            <reports>
+              <report>javadoc</report>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+          <!--
+          <reportSet>
+            <id>aggregate</id>
+            <reports>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+          -->
+        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -247,8 +394,11 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changelog-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
-        <version>2.1</version>
         <configuration>
           <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
           <!-- <link_template>%URL%/&#38;id=%ISSUE%</link_template>
@@ -265,12 +415,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.3</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
-        <version>2.2</version>
       </plugin>
       <!--
       <plugin>
@@ -285,6 +433,9 @@
           <xmlOutput>true</xmlOutput>
           <threshold>Low</threshold>
           <effort>Default</effort>
+          <!--
+          <excludeFilterFile>net/sf/mmm/findbugs-exclude.xml</excludeFilterFile>
+          -->
         </configuration>
       </plugin>
       <plugin>
@@ -304,16 +455,12 @@
           <minimumTokens>100</minimumTokens>
         </configuration>
       </plugin>
-      <!--
       <plugin> 
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId>
       </plugin>
-      -->
     </plugins>
   </reporting>
-  
-  
   <issueManagement>
     <system>trac</system>
     <url>https://sourceforge.net/apps/trac/m-m-m/report</url>
@@ -324,6 +471,7 @@
     <tag/>
     <url>http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</url>
   </scm>
+  <!--
   <distributionManagement>
     <repository>
         <id>cube-releases</id>
@@ -331,6 +479,7 @@
         <url>http://localhost:8080/artifactory/local</url>
     </repository>
   </distributionManagement>
+  -->
   <mailingLists>
     <mailingList>
       <name>mmm-devel</name>

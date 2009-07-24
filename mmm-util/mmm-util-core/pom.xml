@@ -20,7 +20,7 @@
       <activation>
         <jdk>1.5</jdk>
       </activation>
-      <dependencies>      
+      <dependencies>
         <!-- these dependencies are only required for java5, they are included since java6 -->
         <dependency>
           <groupId>javax.annotation</groupId>
@@ -80,12 +80,6 @@
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-setup</artifactId>
-      <version>SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

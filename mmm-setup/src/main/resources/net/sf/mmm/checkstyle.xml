@@ -141,4 +141,5 @@
   </module>
   <module name="Translation"/>
   <module name="NewlineAtEndOfFile"/>
+  <module name="JavadocPackage"/>
 </module>

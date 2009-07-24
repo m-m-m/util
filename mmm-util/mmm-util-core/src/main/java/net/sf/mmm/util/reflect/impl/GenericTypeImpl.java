@@ -160,7 +160,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    */
   protected ClassBounds getClassBounds(Type currentType) {
 
-    if (currentType instanceof Class) {
+    if (currentType instanceof Class<?>) {
       return new ClassBounds((Class<?>) currentType);
     } else if (currentType instanceof ParameterizedType) {
       ParameterizedType pt = (ParameterizedType) currentType;
@@ -195,7 +195,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
         upper = getArrayClass(bounds.retrievalClass);
       }
       return new ClassBounds(lower, upper);
-    } else if (currentType instanceof TypeVariable) {
+    } else if (currentType instanceof TypeVariable<?>) {
       TypeVariable<?> variable = (TypeVariable<?>) currentType;
       if (this.definingType != null) {
         Type resolvedType = resolveTypeVariable(variable, this.definingType);

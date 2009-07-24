@@ -11,21 +11,17 @@ package net.sf.mmm.transaction.api;
  * 
  * @param <RESULT> the generic type of the returned object. Use {@link Void} to
  *        return nothing (<code>null</code>).
- * @param <EXCEPTION> is the generic type of the potential exception thrown. Use
- *        {@link java.lang.Exception} to allow multiple checked exceptions of
- *        different types.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface TransactionCallable<RESULT, EXCEPTION extends Exception> {
+public interface TransactionCallable<RESULT> {
 
   /**
    * Computes a result, or throws an exception if unable to do so.
    * 
    * @param transactionContext is the {@link TransactionAdapter}.
    * @return computed result.
-   * @throws Exception if unable to compute a result.
    */
-  RESULT call(TransactionAdapter transactionContext) throws EXCEPTION;
+  RESULT call(TransactionAdapter transactionContext);
 
 }

@@ -50,4 +50,32 @@ public class ValueOutOfRangeException extends ValueException {
         .doubleValue()));
   }
 
+  /**
+   * This method checks that the given <code>value</code> is in the inclusive
+   * range from <code>minimum</code> to <code>maximum</code>.
+   * 
+   * @param value is the value to check.
+   * @param minimum is the minimum number allowed.
+   * @param maximum is the maximum number allowed.
+   * @param valueSource describes the source of the value. This may be the
+   *        filename where the value was read from, an XPath where the value was
+   *        located in an XML document, etc. It is used in exceptions thrown if
+   *        something goes wrong. This will help to find the problem easier. It
+   *        may be <code>null</code> if there is no helpful source available.
+   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT
+   *         in the range from <code>minimum</code> to <code>maximum</code>.
+   */
+  public static void checkRange(Number value, Number minimum, Number maximum, Object valueSource)
+      throws ValueOutOfRangeException {
+
+    double d = value.doubleValue();
+    if ((d < minimum.doubleValue()) || (d > maximum.doubleValue())) {
+      if (valueSource == null) {
+        throw new ValueOutOfRangeException(value, minimum, maximum);
+      } else {
+        throw new ValueOutOfRangeException(value, minimum, maximum, valueSource);
+      }
+    }
+  }
+
 }

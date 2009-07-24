@@ -133,7 +133,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
         if (i > 0) {
           result.append(", ");
         }
-        if (typeArgument instanceof Class) {
+        if (typeArgument instanceof Class<?>) {
           result.append(((Class<?>) typeArgument).getName());
         } else {
           result.append(typeArgument.toString());

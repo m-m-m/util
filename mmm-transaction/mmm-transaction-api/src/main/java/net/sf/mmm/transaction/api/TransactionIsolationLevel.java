@@ -36,9 +36,7 @@ public enum TransactionIsolationLevel {
   /**
    * @see Connection#TRANSACTION_SERIALIZABLE
    */
-  SERIALIZABLE(Connection.TRANSACTION_SERIALIZABLE),
-
-  ;
+  SERIALIZABLE(Connection.TRANSACTION_SERIALIZABLE);
 
   /** @see #getJdbcCode() */
   private final int jdbcCode;

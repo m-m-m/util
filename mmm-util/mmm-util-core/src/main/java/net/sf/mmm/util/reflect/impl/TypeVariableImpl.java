@@ -79,7 +79,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     if (other == this) {
       return true;
     }
-    if (other instanceof TypeVariable) {
+    if (other instanceof TypeVariable<?>) {
       TypeVariable<?> otherVariable = (TypeVariable<?>) other;
       return (this.name.equals(otherVariable.getName()) && this.genericDeclaration
           .equals(otherVariable.getGenericDeclaration()));
