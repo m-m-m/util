@@ -72,18 +72,18 @@ public class CharSequenceScannerTest {
   public void testReadUntil() {
 
     CharSequenceScanner scanner;
-    // unescaped
+    // not escaped
     scanner = new CharSequenceScanner("string");
     assertEquals("stri", scanner.readUntil('n', false));
     assertEquals(5, scanner.getCurrentIndex());
     assertEquals('g', scanner.next());
 
-    // no eof
+    // no EOF
     scanner.setCurrentIndex(0); // also test reset
     assertSame(null, scanner.readUntil('x', false));
     assertFalse(scanner.hasNext());
 
-    // eof
+    // EOF
     scanner.setCurrentIndex(0); // also test reset
     assertEquals("string", scanner.readUntil('x', true));
     assertFalse(scanner.hasNext());

@@ -308,6 +308,11 @@ public interface StringUtil {
    * <td>_</td>
    * <td>abbreviations_like_xmlshould_not_be_capitalized</td>
    * </tr>
+   * <tr>
+   * <td>FOO_BAR</td>
+   * <td>*</td>
+   * <td>foo_bar</td>
+   * </tr>
    * </table>
    * 
    * @see #toCamlCase(String, char...)

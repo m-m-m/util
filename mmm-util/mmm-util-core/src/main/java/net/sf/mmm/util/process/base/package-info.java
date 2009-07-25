@@ -2,8 +2,7 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains the implementation of the 
- * {@link net.sf.mmm.util.value.api value API}.
+ * Provides the base-implementation for {@link net.sf.mmm.util.process.api process API}.
  */
-package net.sf.mmm.util.value.impl;
+package net.sf.mmm.util.process.base;
 

@@ -49,7 +49,7 @@ public class Signature {
   /**
    * The constructor.
    * 
-   * @param method is the method whos signature to wrap.
+   * @param method is the method whose signature should be wrapped.
    */
   @SuppressWarnings("all")
   public Signature(Method method) {

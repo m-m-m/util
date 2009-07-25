@@ -33,7 +33,7 @@ public interface CollectionReflectionUtil {
    * This method creates a collection implementing the given collection
    * <code>type</code>.
    * 
-   * @param <C> is the templated type of the collection.
+   * @param <C> is the generic type of the collection.
    * @param type is the type of collection to create. This is either an
    *        interface ({@link java.util.List}, {@link java.util.Set},
    *        {@link java.util.Queue}, etc.) or a non-abstract implementation of a

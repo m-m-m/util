@@ -53,6 +53,7 @@ public class StringUtilTest {
 
     assertEquals("abc", getStringUtil().fromCamlCase("abc", ' '));
     assertEquals("foo-bar", getStringUtil().fromCamlCase("FooBar", '-'));
+    assertEquals("foo_bar", getStringUtil().fromCamlCase("FOO_BAR", '*'));
     assertEquals("some.word.mix", getStringUtil().fromCamlCase("someWordMix", '.'));
     assertEquals("abbreviations_like_xmlshould_not_be_capitalized", getStringUtil().fromCamlCase(
         "AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));

@@ -27,7 +27,7 @@ public interface GenericTypeFactory {
    * defined} you should use {@link #createGenericType(Type, GenericType)}
    * instead to get a more precise result. <br>
    * 
-   * @param <T> is the templated type of the {@link Class} to convert.
+   * @param <T> is the generic type of the {@link Class} to convert.
    * 
    * @param type is the {@link Type} to represent.
    * @return the according {@link GenericType}.
@@ -66,7 +66,7 @@ public interface GenericTypeFactory {
    * Class&lt;?&gt; returnClass = type.{@link GenericType#getRetrievalClass()};
    * </pre>
    * 
-   * Now if you ask your self my all this instead of just using
+   * Now if you ask your self why all this instead of just using
    * <code>myMethod.{@link java.lang.reflect.Method#getReturnType() getReturnType()}</code>
    * ? Read the javadoc of {@link GenericType} to get the answer.<br>
    * <b>NOTE:</b><br>

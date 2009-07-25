@@ -40,6 +40,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_VALUE_OUT_OF_RANGE_SOURCE = "The value \"{0}\" from \"{3}\" "
       + "is not in the expected range of \"[{1}-{2}]\"!";
 
+  /** @see net.sf.mmm.util.value.api.ValueConvertException */
+  public static final String ERR_VALUE_CONVERT = "The value \"{0}\" could NOT be converted to \"{1}\"";
+
+  /** @see net.sf.mmm.util.value.api.ValueConvertException */
+  public static final String ERR_VALUE_CONVERT_SOURCE = "The value \"{0}\" from \"{2}\" could NOT be converted to \"{1}\"";
+
   /** @see net.sf.mmm.util.component.api.ResourceMissingException */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{0}\" is missing!";
 

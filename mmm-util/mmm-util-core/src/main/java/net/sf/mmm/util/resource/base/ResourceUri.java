@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * Here are some examples:
  * <table border="1">
  * <tr>
- * <th>{@link #getUri() uri}</th>
+ * <th>{@link #getUri() URI}</th>
  * <th>{@link #getSchemePrefix() scheme-prefix}</th>
  * <th>{@link #getPath() path}</th>
  * </tr>

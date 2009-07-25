@@ -44,13 +44,13 @@ import java.lang.reflect.Type;
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type,
  *      GenericType)
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() retrieval
+ * @param <T> is the generic type of the {@link #getRetrievalClass() retrieval
  *        class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public interface GenericType<T> {
+public interface GenericType<T> extends Type {
 
   /** An empty {@link GenericType}-array. */
   GenericType<?>[] NO_TYPES = new GenericType[0];

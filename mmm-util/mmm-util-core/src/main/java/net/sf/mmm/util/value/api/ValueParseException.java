@@ -9,7 +9,7 @@ package net.sf.mmm.util.value.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ValueParseException extends ValueException {
+public abstract class ValueParseException extends ValueException {
 
   /** uid for serialization */
   private static final long serialVersionUID = 662961335483675913L;
