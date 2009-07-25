@@ -58,8 +58,6 @@ mvn -version
       For eclipse there is <a href="http://subclipse.tigris.org/">subclipse</a>
       and <a href="http://www.eclipse.org/subversive/">subversive</a>.
       Suggested is to use this update site: http://subclipse.tigris.org/update_1.4.x<br/>
-      <br/>
-      You will also need to <a href="setup-eclipse.html">configure eclipse</a>.
     </section>
     <section name="Setup">
       Open a shell and go to the directory where you checked out the repository
@@ -73,6 +71,9 @@ setup
       eclipse workbench via "Import... > Existing Projects into Workspace" then 
       select the toplevel directory of your checked out repository. This will 
       allow to import all sub-projects (there are many) in one step.
+    </section>
+    <section name="Configure Eclipse">
+      See <a href="setup-eclipse.html">here</a>.
     </section>
   </body>
 </document>

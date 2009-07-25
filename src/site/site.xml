@@ -44,6 +44,7 @@
 
     <menu name="Developer Guides">
       <item name="Setup" href="setup-devel.html"/>
+      <item name="Eclipse" href="setup-eclipse.html"/>
       <item name="Conventions" href="conventions.html"/>
     </menu>
 

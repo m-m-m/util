@@ -20,6 +20,19 @@
           eclipse -data /some/other/workspace
         </source>
       </subsection>
+      <subsection name="Projects">
+        Ensure you have completed <a href="setup-devel.html">setup</a>.
+        Choose <code>File > Import > Existing projects into workspace</code> and
+        then select root directory via <code>Browse</code> and select the root-folder
+        where you checked out the project (should be <code>mmm</code> or <code>m-m-m</code>).
+      </subsection>
+      <subsection name="Spelling">
+        Go to <code>Window > Preferences > General > Editors > Text Editors > Spelling</code>
+        and ensure <code>Enable spell checking</code> is checked.
+        For <code>User defined dictionary</code> click <code>Browse</code> and select
+        <code>mmm-setup\src\settings\eclipse\team.dictionary</code>.
+        <code>Encoding</code> is <code>UTF-8</code> what should be default.
+      </subsection>
       <subsection name="Code Templates">
         Go to <code>Window > Preferences > Java > Code Style > Code Templates</code>
         and click the button <code>Import...</code>. Then choose the file
@@ -36,7 +49,8 @@
         <code>mmm-setup/src/settings/eclipse/cleanup.xml</code> and proceed.
       </subsection>
       <subsection name="Compiler">
-        TODO
+        Currently there is no XML import/export. Ask <code>hohwille</code> 
+        for screenshots if you miss these settings.
       </subsection>
     </section>
   </body>
