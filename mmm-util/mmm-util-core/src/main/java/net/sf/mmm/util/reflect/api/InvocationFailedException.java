@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.api;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.InvocationTargetException;
 
-import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link InvocationFailedException} is thrown if a {@link java.lang.reflect
@@ -29,7 +29,7 @@ public class InvocationFailedException extends ReflectionException {
    */
   public InvocationFailedException(InvocationTargetException nested) {
 
-    super(nested.getCause(), NlsBundleUtilReflect.ERR_INVOCATION_FAILED);
+    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED);
   }
 
   /**
@@ -48,7 +48,7 @@ public class InvocationFailedException extends ReflectionException {
   public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible,
       Object instance) {
 
-    super(nested.getCause(), NlsBundleUtilReflect.ERR_INVOCATION_FAILED, accessible, instance);
+    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED, accessible, instance);
   }
 
 }

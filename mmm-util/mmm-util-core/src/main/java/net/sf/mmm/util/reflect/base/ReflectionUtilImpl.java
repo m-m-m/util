@@ -24,13 +24,13 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -315,7 +315,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
         } else if ("extends".equals(sequence)) {
           lowerBound = true;
         } else {
-          throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_TYPE_ILLEGAL_WILDCARD,
+          throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_TYPE_ILLEGAL_WILDCARD,
               sequence);
         }
         Type bound = toType(parser, resolver, null);
@@ -638,10 +638,22 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   }
 
   /**
-   * {@inheritDoc}
+   * @see #findClassNames(String, boolean, Filter, ClassLoader)
+   * 
+   * @param packageName is the name of the {@link Package} to scan.
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the
+   *        specified {@link Package} will be included in the search.
+   * @param classSet is where to add the classes.
+   * @param filter is used to {@link Filter#accept(Object) filter} the
+   *        {@link Class}-names to be added to the resulting {@link Set}. The
+   *        {@link Filter} will receive {@link Class#getName() fully qualified
+   *        class-names} as argument (e.g.
+   *        "net.sf.mmm.reflect.api.ReflectionUtil").
+   * @param classLoader is the explicit {@link ClassLoader} to use.
+   * @throws IOException if the operation failed with an I/O error.
    */
-  public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet,
-      Filter<String> filter, ClassLoader classLoader) throws IOException {
+  protected void findClassNames(String packageName, boolean includeSubPackages,
+      Set<String> classSet, Filter<String> filter, ClassLoader classLoader) throws IOException {
 
     ResourceVisitor visitor = new ClassNameCollector(classSet, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);

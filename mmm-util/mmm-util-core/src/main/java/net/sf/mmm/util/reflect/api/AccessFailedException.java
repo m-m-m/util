@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.AccessibleObject;
 
-import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link AccessFailedException} is thrown if a {@link java.lang.reflect
@@ -32,7 +32,7 @@ public class AccessFailedException extends ReflectionException {
    */
   public AccessFailedException(IllegalAccessException nested, AccessibleObject accessible) {
 
-    super(nested, NlsBundleUtilReflect.ERR_ACCESS_FAILED, accessible);
+    super(nested, NlsBundleUtilCore.ERR_ACCESS_FAILED, accessible);
   }
 
   /**
@@ -43,7 +43,7 @@ public class AccessFailedException extends ReflectionException {
    */
   public AccessFailedException(IllegalAccessException nested, Class<?> clazz) {
 
-    super(nested, NlsBundleUtilReflect.ERR_ACCESS_FAILED, clazz);
+    super(nested, NlsBundleUtilCore.ERR_ACCESS_FAILED, clazz);
   }
 
 }

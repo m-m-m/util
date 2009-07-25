@@ -149,10 +149,15 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     }
 
     /**
-     * TODO: javadoc
+     * This method tries to ensure that the internal buffer has at least the
+     * given number of bytes available. If less bytes are available, the buffer
+     * is filled up accordingly using the underlying stream.<br>
+     * <b>ATTENTION:</b><br>
+     * If EOS is hit, the requested buffer size can NOT be ensured.
      * 
-     * @param requiredBufferLength
-     * @throws IOException
+     * @param requiredBufferLength is the desired number of bytes for the
+     *        buffer.
+     * @throws IOException if an I/O error occurred.
      */
     protected void fill(int requiredBufferLength) throws IOException {
 

@@ -94,4 +94,43 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException */
   public static final String ERR_UNSUPPORTED_OPERATION_WITH_NAME = "The operation \"{0}\" was invoked but is NOT supported!";
 
+  /**
+   * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl#toType(String,
+   *      net.sf.mmm.util.reflect.api.ClassResolver)
+   */
+  public static final String ERR_TYPE_ILLEGAL_WILDCARD = "Illegal sequence in wildcard type \"{0}\"!";
+
+  /**
+   * @see net.sf.mmm.util.reflect.base.AnnotationUtilImpl#getMethodAnnotation(java.lang.reflect.Method,
+   *      Class)
+   */
+  public static final String ERR_ANNOTATION_NOT_RUNTIME = "The given annotation "
+      + "\"{0}\" can NOT be resolved at runtime!";
+
+  /**
+   * @see net.sf.mmm.util.reflect.base.AnnotationUtilImpl#getMethodAnnotation(java.lang.reflect.Method,
+   *      Class)
+   */
+  public static final String ERR_ANNOTATION_NOT_FOR_TARGET = "The given annotation "
+      + "\"{0}\" can NOT annotate the target \"{1}\"!";
+
+  /** @see net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl#create(Class) */
+  public static final String ERR_INCREASE_EXCEEDS_MAX_GROWTH = "Can not increase "
+      + "size of array or list by \"{0}\", because limit is \"{1}\"!";
+
+  /** @see net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl#create(Class) */
+  public static final String ERR_UNKNOWN_COLLECTION_INTERFACE = "Unknown collection interface \"{0}\"!";
+
+  /** @see net.sf.mmm.util.reflect.api.InstantiationFailedException */
+  public static final String ERR_INSTANTIATION_FAILED = "Failed to create an instance of \"{0}\"!";
+
+  /** @see net.sf.mmm.util.reflect.api.InvocationFailedException */
+  public static final String ERR_INVOCATION_FAILED = "Reflective invocation failed!";
+
+  /** @see net.sf.mmm.util.reflect.api.InvocationFailedException */
+  public static final String ERR_INVOCATION_FAILED_ON = "Reflective invocation of \"{0}\" on \"{1}\" failed!";
+
+  /** @see net.sf.mmm.util.reflect.api.AccessFailedException */
+  public static final String ERR_ACCESS_FAILED = "Reflective access for \"{0}\" failed!";
+
 }

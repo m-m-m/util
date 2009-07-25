@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
+import java.util.Locale;
 
 import net.sf.mmm.util.collection.base.RankMap;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -169,12 +171,21 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
   public EncodingDetectionReader createUtfDetectionReader(InputStream inputStream,
       String nonUtfEncoding) {
 
-    String enc = nonUtfEncoding.toLowerCase();
-    if ((enc.startsWith("utf")) || (enc.endsWith("ascii"))) {
-      getLogger().warn(
-          "using encoding '" + nonUtfEncoding + "' for nonUtfEncoding does NOT really make sense.");
+    String encoding = nonUtfEncoding;
+    if (encoding == null) {
+      encoding = Charset.defaultCharset().name();
+      String enc = encoding.toLowerCase(Locale.US);
+      if ((enc.startsWith("utf")) || (enc.endsWith("ascii"))) {
+        encoding = ENCODING_ISO_8859_1;
+      }
+    } else {
+      String enc = encoding.toLowerCase(Locale.US);
+      if ((enc.startsWith("utf")) || (enc.endsWith("ascii"))) {
+        getLogger().info(
+            "using encoding '" + encoding + "' for 'nonUtfEncoding' does NOT really make sense.");
+      }
     }
-    return new UtfDetectionReader(inputStream, nonUtfEncoding);
+    return new UtfDetectionReader(inputStream, encoding);
   }
 
   /**

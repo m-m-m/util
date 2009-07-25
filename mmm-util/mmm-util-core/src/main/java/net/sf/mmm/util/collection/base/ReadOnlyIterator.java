@@ -23,7 +23,7 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
   /**
    * The constructor.
    * 
-   * @param iterator
+   * @param iterator is the {@link Iterator} to adapt.
    */
   public ReadOnlyIterator(Iterator<E> iterator) {
 
@@ -54,7 +54,7 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
    * 
    * @throws UnsupportedOperationException whenever this method is called.
    */
-  public void remove() {
+  public void remove() throws UnsupportedOperationException {
 
     throw new UnsupportedOperationException();
   }

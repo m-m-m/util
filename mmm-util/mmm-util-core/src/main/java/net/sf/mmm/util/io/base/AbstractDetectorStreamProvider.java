@@ -59,7 +59,8 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggable im
    * 
    * @see #setProcessorFactoryList(List)
    * 
-   * @param processorFactory
+   * @param processorFactory is the {@link DetectorStreamProcessorFactory} to
+   *        add.
    */
   public void addProcessorFactory(DetectorStreamProcessorFactory processorFactory) {
 

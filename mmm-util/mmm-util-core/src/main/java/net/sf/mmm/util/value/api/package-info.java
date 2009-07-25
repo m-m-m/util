@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for generic handling of values.
- * <h2>Value Handling API</h2>
+ * <h2>Value-Util API</h2>
  * When reading values from sources like configuration data or user input you 
  * always need to handle failure situations. The value can be <code>null</code> 
  * and often has to be converted to a specific type (e.g. from 
@@ -41,7 +41,7 @@
  * String value = getValueFromSomewhere();
  * {@link net.sf.mmm.util.value.api.GenericValueConverter} converter = {@link net.sf.mmm.util.value.base.StringValueConverterImpl#getInstance()};
  * int valueAsInt = converter.\\
- * {@link net.sf.mmm.util.value.api.StringValueConverter#convert(String, Object, Number, Number) convertValue}(value, "somewhere", 0, 123456789);
+ * {@link net.sf.mmm.util.value.api.StringValueConverter#convertValue(String, Object, Number, Number) convertValue}(value, "somewhere", 0, 123456789);
  * </pre>
  */
 package net.sf.mmm.util.value.api;

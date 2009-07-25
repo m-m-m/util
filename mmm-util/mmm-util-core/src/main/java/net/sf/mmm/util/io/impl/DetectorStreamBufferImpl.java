@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Queue;
 
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
@@ -44,6 +43,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /** @see #seek(long, SeekMode) */
   private SeekMode seekMode;
 
+  /** @see #getByteArray(int) */
   private ByteArray currentByteArray;
 
   /** The current {@link ByteArray} to work on. */
@@ -62,8 +62,8 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   private int currentArrayMax;
 
   /**
-   * The {@link Queue} of available {@link ByteArray}s that have NOT yet been
-   * processed.
+   * The {@link java.util.Queue} of available {@link ByteArray}s that have NOT
+   * yet been processed.
    */
   private final LinkedList<ByteArray> arrayQueue;
 
@@ -359,9 +359,11 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /**
    * @see DetectorStreamProcessor#process(DetectorStreamBuffer, Map, boolean)
    * 
-   * @param metadata
-   * @param eos
-   * @throws IOException
+   * @param metadata is the {@link Map} with the metadata.
+   * @param eos - <code>true</code> if the end of the stream has been reached
+   *        and the given <code>buffer</code> has to be
+   * @throws IOException in case of an Input/Output error. Should only be used
+   *         internally.
    */
   public void process(Map<String, Object> metadata, boolean eos) throws IOException {
 

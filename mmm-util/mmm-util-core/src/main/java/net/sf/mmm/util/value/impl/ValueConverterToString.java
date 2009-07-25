@@ -119,13 +119,13 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
     if (value == null) {
       return null;
     }
-    if (value instanceof Class) {
+    if (value instanceof Class<?>) {
       return ((Class<?>) value).getName();
     } else if (value instanceof Date) {
       return getIso8601Util().formatDateTime((Date) value);
     } else if (value instanceof Calendar) {
       return getIso8601Util().formatDateTime((Calendar) value);
-    } else if (value instanceof Enum) {
+    } else if (value instanceof Enum<?>) {
       String name = ((Enum<?>) value).name();
       if (name.length() > 1) {
         name = name.charAt(0) + name.substring(1).toLowerCase();

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link InstantiationFailedException} indicates that the
@@ -28,7 +28,7 @@ public class InstantiationFailedException extends ReflectionException {
    */
   public InstantiationFailedException(Class<?> clazz) {
 
-    super(NlsBundleUtilReflect.ERR_INSTANTIATION_FAILED, clazz);
+    super(NlsBundleUtilCore.ERR_INSTANTIATION_FAILED, clazz);
   }
 
   /**
@@ -40,7 +40,7 @@ public class InstantiationFailedException extends ReflectionException {
    */
   public InstantiationFailedException(Throwable nested, Class<?> clazz) {
 
-    super(nested, NlsBundleUtilReflect.ERR_INSTANTIATION_FAILED, clazz);
+    super(nested, NlsBundleUtilCore.ERR_INSTANTIATION_FAILED, clazz);
   }
 
 }

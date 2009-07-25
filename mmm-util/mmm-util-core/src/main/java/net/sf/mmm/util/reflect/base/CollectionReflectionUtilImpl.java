@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
@@ -17,7 +18,6 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.reflect.NlsBundleUtilReflect;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -152,7 +152,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
       CollectionFactory<C> factory = getCollectionFactoryManager().getCollectionFactory(type);
       if (factory == null) {
         throw new NlsIllegalArgumentException(
-            NlsBundleUtilReflect.ERR_UNKNOWN_COLLECTION_INTERFACE, type);
+            NlsBundleUtilCore.ERR_UNKNOWN_COLLECTION_INTERFACE, type);
       }
       return factory.createGeneric();
     }
@@ -283,7 +283,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
     }
     int growth = index - size + 1;
     if (growth > maxGrowth) {
-      throw new NlsIllegalArgumentException(NlsBundleUtilReflect.ERR_INCREASE_EXCEEDS_MAX_GROWTH,
+      throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_INCREASE_EXCEEDS_MAX_GROWTH,
           Integer.valueOf(growth), Integer.valueOf(maxGrowth));
     }
     if (type.isArray()) {

@@ -15,6 +15,7 @@ import net.sf.mmm.util.lang.api.BasicUtil;
  */
 public class BasicUtilSpringTest extends BasicUtilTest {
 
+  /** @see #getBasicUtil() */
   public static final String SPRING_CONFIG = "net/sf/mmm/util/lang/beans-util-lang.xml";
 
   /**

@@ -15,14 +15,12 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
 import net.sf.mmm.util.process.api.ProcessUtil;
-import net.sf.mmm.util.process.base.ProcessUtilImpl;
 
 /**
  * This is the test-case for {@link ProcessUtilImpl}.
@@ -109,8 +107,8 @@ public class ProcessUtilTest {
     assertTrue(errStream.isClosed());
   }
 
-  @Ignore
-  @Test
+  // @Ignore
+  // @Test
   public void testExecuteAsyncStopChildProcess() throws Exception {
 
     ProcessContext context = new ProcessContext();
