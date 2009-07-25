@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -107,8 +108,8 @@ public class ProcessUtilTest {
     assertTrue(errStream.isClosed());
   }
 
-  // @Ignore
-  // @Test
+  @Ignore("manual test, cannot run headless")
+  @Test
   public void testExecuteAsyncStopChildProcess() throws Exception {
 
     ProcessContext context = new ProcessContext();
