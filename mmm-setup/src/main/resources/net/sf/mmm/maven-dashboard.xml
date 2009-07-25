@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration version="1.0">
+  <sections>
+    <section id="cobertura.summary" title="Cobertura Report Summary" groupId="org.codehaus.mojo" artifactId="cobertura-maven-plugin">
+      <historicgraphs>
+        <graph id="cobertura.thisyear" title="Cobertura this Year" timeUnit="month" startPeriod="Startof_thisyear" endPeriod="Endof_thisyear"/>
+        <graph id="cobertura.lastyear" title="Cobertura last Year" timeUnit="month" startPeriod="Startof_lastyear" endPeriod="Endof_lastyear"/>
+      </historicgraphs>
+    </section>
+    <section id="surefire.summary" title="Surefire Report Summary" groupId="org.apache.maven.plugins" artifactId="maven-surefire-report-plugin">
+      <historicgraphs>
+        <graph id="surefire.thisyear" title="Surefire this Year" timeUnit="month" startPeriod="Startof_thisyear" endPeriod="Endof_thisyear"/>
+        <graph id="surefire.lastyear" title="Surefire last Year" timeUnit="month" startPeriod="Startof_lastyear" endPeriod="Endof_lastyear"/>
+      </historicgraphs>
+    </section>
+    <section id="checkstyle.summary" title="Checkstyle Report Summary" groupId="org.apache.maven.plugins" artifactId="maven-checkstyle-plugin">
+      <historicgraphs>
+        <graph id="checkstyle.thisyear" title="Checkstyle this Year" timeUnit="month" startPeriod="Startof_thisyear" endPeriod="Endof_thisyear"/>
+        <graph id="checkstyle.lastyear" title="Checkstyle last Year" timeUnit="month" startPeriod="Startof_lastyear" endPeriod="Endof_lastyear"/>
+      </historicgraphs>
+    </section>
+    <section id="pmd.summary" title="PMD Report Summary" groupId="org.apache.maven.plugins" artifactId="maven-pmd-plugin">
+      <historicgraphs>
+        <graph id="pmd.thisyear" title="PMD this Year" timeUnit="month" startPeriod="Startof_thisyear" endPeriod="Endof_thisyear"/>
+        <graph id="pmd.lastyear" title="PMD last Year" timeUnit="month" startPeriod="Startof_lastyear" endPeriod="Endof_lastyear"/>
+      </historicgraphs>
+    </section>
+    <section id="cpd.summary" title="CPD Report Summary" groupId="org.apache.maven.plugins" artifactId="maven-pmd-plugin">
+      <historicgraphs>
+        <graph id="cpd.thisyear" title="Checkstyle this Year" timeUnit="month" startPeriod="Startof_thisyear" endPeriod="Endof_thisyear"/>
+        <graph id="cpd.lastyear" title="Checkstyle last Year" timeUnit="month" startPeriod="Startof_lastyear" endPeriod="Endof_lastyear"/>
+      </historicgraphs>
+    </section>
+    <section id="findbugs.summary" title="FindBugs Report Summary" groupId="org.codehaus.mojo" artifactId="findbugs-maven-plugin">
+      <historicgraphs>
+        <graph id="findbugs.thisyear" title="FindBugs this Year" timeUnit="month" startPeriod="Startof_thisyear" endPeriod="Endof_thisyear"/>
+        <graph id="findbugs.lastyear" title="FindBugs last Year" timeUnit="month" startPeriod="Startof_lastyear" endPeriod="Endof_lastyear"/>
+      </historicgraphs>
+    </section>
+  </sections>
+</configuration>

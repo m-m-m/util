@@ -12,6 +12,7 @@
   <property name="severity" value="warning"/>
   <property name="charset" value="UTF-8"/>
   <module name="TreeWalker">
+    <module name="FileContentsHolder"/>
     <module name="JavadocMethod"/>
     <module name="JavadocType"/>
     <module name="JavadocVariable"/>
@@ -99,19 +100,22 @@
       <property name="option" value="text"/>
     </module>
     <module name="RegexpSinglelineJava">
-      <property name="format" value="System\.(out|err)\.print"/>
+      <metadata name="net.sf.eclipsecs.core.comment" value="System.out/err"/>
+      <property name="format" value="System\.(out|err)"/>
       <property name="message" value="Use logger"/>
     </module>
     <module name="RegexpSinglelineJava">
-      <property name="severity" value="info"/>
+      <metadata name="net.sf.eclipsecs.core.comment" value="System.exit"/>
       <property name="format" value="System\.exit"/>
       <property name="message" value="Only exit from main methods"/>
     </module>
     <module name="RegexpSinglelineJava">
+      <metadata name="net.sf.eclipsecs.core.comment" value="printStackTrace()"/>
       <property name="format" value="printStackTrace\(\)"/>
       <property name="message" value="Use logger"/>
     </module>
     <module name="RegexpSinglelineJava">
+      <metadata name="net.sf.eclipsecs.core.comment" value="Abstract class not abstract"/>
       <property name="format" value="public class Abstract"/>
       <property name="message" value="Abstract class not abstract"/>
     </module>
@@ -130,8 +134,14 @@
       <property name="methodMaximum" value="100"/>
     </module>
     <module name="RegexpSinglelineJava">
+      <metadata name="net.sf.eclipsecs.core.comment" value="Supply version"/>
       <property name="format" value="@since X"/>
       <property name="message" value="Supply actual version"/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <metadata name="net.sf.eclipsecs.core.comment" value="System.gc()"/>
+      <property name="format" value="System.gc\(\)"/>
+      <property name="message" value="Never invoke gc() explicitly!"/>
     </module>
   </module>
   <module name="FileLength"/>
@@ -142,4 +152,7 @@
   <module name="Translation"/>
   <module name="NewlineAtEndOfFile"/>
   <module name="JavadocPackage"/>
+  <module name="SuppressionCommentFilter">
+    <property name="onCommentFormat" value="CHECKSTYLE\:ON \([a-zA-Z].*\)"/>
+  </module>
 </module>
