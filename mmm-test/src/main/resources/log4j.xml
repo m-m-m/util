@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <appender name="NullAppender" class="org.apache.log4j.varia.NullAppender"/>
+	<appender name="DefaultAppender" class="org.apache.log4j.ConsoleAppender">
+		<!-- <param name="Threshold" value="debug"/> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd MMM yyyy HH:mm:ss}] %-5p [%c][%M]: %m%n"/>
+		</layout>
+	</appender>
+	<logger name="net.sf.mmm">
+		<level value="trace"/>
+	</logger>
+	<root>
+		<level value="trace"/>
+		<appender-ref ref="DefaultAppender"/>
+	</root>
+</log4j:configuration>
