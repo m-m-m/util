@@ -46,6 +46,8 @@
   
   
   <build>
+    <!-- Only for maven 3.0 and above... -->
+    <!-- <sourceEncoding>UTF-8</sourceEncoding> -->
     <pluginManagement>
       <plugins>
         <plugin>
@@ -165,8 +167,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <!-- Only for maven 2.1 and above... -->
-    <!-- <sourceEncoding>UTF-8</sourceEncoding> -->
     
     <plugins>
       <plugin>
@@ -276,39 +276,25 @@
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId> 
         <configuration>
-          <!-- 
           <dialect>org.hibernate.dialect.HSQLDialect</dialect> 
           <driverClass>org.hsqldb.jdbcDriver</driverClass>
-          <connectionUrl>jdbc:hsqldb:${basedir}/src/dashboard/database</connectionUrl>
-          -->
-          <dialect>org.hibernate.dialect.H2Dialect</dialect>
-          <driverClass>org.h2.Driver</driverClass>
-          <connectionUrl>jdbc:h2:${basedir}/src/dashboard/database;create=true</connectionUrl>
-          <!--
-          <dialect>org.hibernate.dialect.DerbyDialect</dialect>
-          <driverClass>org.apache.derby.jdbc.ClientDriver</driverClass>
-          <connectionUrl>jdbc:derby://localhost:1527/myDB;create=true</connectionUrl>
-          -->
+          <connectionUrl>jdbc:hsqldb:${basedir}/src/dashboard/database.hsql</connectionUrl>
           <username>sa</username>
           <password>none</password>
+          
+          <configLocation>net/sf/mmm/maven-dashboard.xml</configLocation>
+          
         </configuration>
         <dependencies>
           <dependency>
-            <!--
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mmm-setup</artifactId>
+            <version>SNAPSHOT</version>
+          </dependency>
+          <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>1.8.0.7</version>
-            -->
-            
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.1.106</version>
-            
-            <!--
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derbyclient</artifactId>
-            <version>10.2.1.6</version>
-            -->
           </dependency>
         </dependencies>
       </plugin>
@@ -327,7 +313,7 @@
   
   
   <reporting>
-    <!-- Only for maven 2.1 and above... -->
+    <!-- Only for maven 3.0 and above... -->
     <!-- <outputEncoding>UTF-8</outputEncoding> -->
     <plugins>
       <plugin>
@@ -395,6 +381,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changelog-plugin</artifactId>
+        <inherited>false</inherited>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -455,7 +442,7 @@
           <minimumTokens>100</minimumTokens>
         </configuration>
       </plugin>
-      <plugin> 
+      <plugin>
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId>
       </plugin>
