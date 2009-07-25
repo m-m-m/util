@@ -1,18 +1,13 @@
-/* $Id$
+/* $Id: $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-
-
-
-
-
 /**
- * This is the interface of a {@link ByteBuffer} that is internally
- * composed out of multiple {@link ByteArray}s. It allows to
- * {@link #getByteArray(int) access} these {@link ByteArray}s for read-only
- * lookahead operations or more efficient processing.
+ * This is the interface of a {@link ByteBuffer} that is internally composed out
+ * of multiple {@link ByteArray}s. It allows to {@link #getByteArray(int)
+ * access} these {@link ByteArray}s for read-only lookahead operations or more
+ * efficient processing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.3
