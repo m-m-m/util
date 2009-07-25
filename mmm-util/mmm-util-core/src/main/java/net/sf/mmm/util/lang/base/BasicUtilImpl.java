@@ -100,7 +100,7 @@ public class BasicUtilImpl implements BasicUtil {
       Class<?> class1 = o1.getClass();
       if (class1.isArray()) {
         if (o1 instanceof Object[]) {
-          if ((o2 != null) && (o2 instanceof Object[])) {
+          if (o2 instanceof Object[]) {
             Object[] array1 = (Object[]) o1;
             Object[] array2 = (Object[]) o2;
             if (array1.length == array2.length) {

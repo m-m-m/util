@@ -103,6 +103,7 @@ public class MathUtilImpl implements MathUtil {
     double d = value.doubleValue();
     long l = value.longValue();
     // is the value a numeric integer value?
+    // findbugs is wrong here!
     if (l == d) {
       if (value.byteValue() == d) {
         return Byte.valueOf(value.byteValue());

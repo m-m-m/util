@@ -3,16 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.parser.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import net.sf.mmm.search.parser.api.ContentParser;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the {@link TestCase} for {@link ContentParserJava}.
@@ -41,6 +43,7 @@ public class ContentParserJavaTest {
   public void testJavaParser() throws Exception {
 
     ContentParserJava parser = new ContentParserJava();
+    parser.initialize();
     Properties metadata = parse(parser, "src/test/java/", ContentParserJavaTest.class);
     assertEquals("Jörg Hohwiller, Nobody Else", metadata
         .getProperty(ContentParser.PROPERTY_KEY_AUTHOR));

@@ -81,6 +81,8 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
 
       super();
       this.delegate = inputStream;
+      this.targetBuffer = null;
+      this.endOfStream = false;
     }
 
     /**

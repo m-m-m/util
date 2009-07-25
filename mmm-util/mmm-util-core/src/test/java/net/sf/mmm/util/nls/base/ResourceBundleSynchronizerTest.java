@@ -18,8 +18,6 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
-import net.sf.mmm.util.nls.base.AbstractResourceBundle;
-import net.sf.mmm.util.nls.base.ResourceBundleSynchronizer;
 
 /**
  * This is the test-case for {@link ResourceBundleSynchronizer}.
@@ -65,7 +63,7 @@ public class ResourceBundleSynchronizerTest {
   @Test
   public void testSynchronizer() throws Exception {
 
-    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
+    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer(System.out);
     String targetPath = "target/test";
     FileUtilImpl.getInstance().deleteRecursive(new File(targetPath));
     Class<? extends AbstractResourceBundle> bundleClass = NlsBundleUtilCore.class;

@@ -40,15 +40,15 @@ import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 public class ResourceBundleSynchronizer {
 
   /**
-   * The commandline option to {@link #setDatePattern(String) set the
+   * The command-line option to {@link #setDatePattern(String) set the
    * date-pattern}.
    */
   public static final String OPTION_DATE_PATTERN = "--date-pattern";
 
-  /** The commandline option to {@link #setEncoding(String) set the encoding}. */
+  /** The command-line option to {@link #setEncoding(String) set the encoding}. */
   public static final String OPTION_ENCODING = "--encoding";
 
-  /** The commandline option to {@link #setBasePath(String) set the path}. */
+  /** The command-line option to {@link #setBasePath(String) set the path}. */
   public static final String OPTION_PATH = "--path";
 
   /** @see #getBasePath() */
@@ -86,13 +86,25 @@ public class ResourceBundleSynchronizer {
    */
   public ResourceBundleSynchronizer() {
 
+    // CHECKSTYLE:OFF (compatibility fallback)
+    this(System.out);
+    // CHECKSTYLE:ON
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param out a {@link PrintStream}, typically {@link System#out}.
+   */
+  public ResourceBundleSynchronizer(PrintStream out) {
+
     super();
     this.basePath = DEFAULT_BASE_PATH;
     this.datePattern = DEFAULT_DATE_PATTERN;
     this.encoding = DEFAULT_ENCODING;
     this.newline = "\n";
     this.locales = new String[] { "" };
-    this.out = System.out;
+    this.out = out;
   }
 
   /**
@@ -304,21 +316,21 @@ public class ResourceBundleSynchronizer {
         OutputStream outStream = new FileOutputStream(file, update);
         try {
           Writer writer = new OutputStreamWriter(outStream, this.encoding);
-          if (update) {
-            writer.append("# Updated ");
-          } else {
-            writer.append("# Generated ");
+          try {
+            if (update) {
+              writer.append("# Updated ");
+            } else {
+              writer.append("# Generated ");
+            }
+            writer.append(date);
+            writer.append(this.newline);
+            writer.write(buffer.toString());
+            writer.flush();
+          } finally {
+            writer.close();
           }
-          writer.append(date);
-          writer.append(this.newline);
-          writer.write(buffer.toString());
-          writer.flush();
-          writer.close();
-          outStream = null;
         } finally {
-          if (outStream != null) {
-            outStream.close();
-          }
+          outStream.close();
         }
       }
 
@@ -341,7 +353,7 @@ public class ResourceBundleSynchronizer {
   /**
    * The non-static version of the {@link #main(String[]) main-method}.
    * 
-   * @param arguments are the commandline arguments.
+   * @param arguments are the command-line arguments.
    * @return the exit-code. <code>0</code> for success, anything else if
    *         something went wrong.
    * @throws Exception if the operation failed.
@@ -408,19 +420,25 @@ public class ResourceBundleSynchronizer {
   /**
    * This is the main method used to run this class as application.
    * 
-   * @param arguments are the commandline arguments.
+   * @param arguments are the command-line arguments.
    */
   public static void main(String[] arguments) {
 
-    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
+    // CHECKSTYLE:OFF (OK for main methods)
+    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer(System.out);
+    // CHECKSTYLE:ON
     int exitCode;
     try {
       exitCode = synchronizer.run(arguments);
-      System.exit(exitCode);
     } catch (Exception e) {
-      e.printStackTrace(System.out);
-      System.exit(-1);
+      // CHECKSTYLE:OFF (OK for main methods)
+      e.printStackTrace();
+      // CHECKSTYLE:ON
+      exitCode = -1;
     }
+    // CHECKSTYLE:OFF (OK for main methods)
+    System.exit(exitCode);
+    // CHECKSTYLE:ON
   }
 
 }

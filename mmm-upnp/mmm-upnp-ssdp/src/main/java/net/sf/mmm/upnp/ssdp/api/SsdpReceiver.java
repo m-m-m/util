@@ -21,9 +21,9 @@ public interface SsdpReceiver {
   void addListener(SsdpListener listener);
 
   /**
-   * This method adds the given <code>listener</code>
+   * This method adds the given <code>listener</code>.
    * 
-   * @param listener
+   * @param listener is the {@link SsdpListener} to add.
    */
   void removeListener(SsdpListener listener);
 

@@ -63,11 +63,12 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
     List<DetectorStreamProcessorFactory> factoryList = provider.getProcessorFactoryList();
     int factoryCount = factoryList.size();
-    DetectorStreamBufferImpl buffer = new DetectorStreamBufferImpl(lastProcessor, null);
+    DetectorStreamBufferImpl buffer = new DetectorStreamBufferImpl(lastProcessor, null,
+        this.byteArrayPool);
     for (int factoryIndex = factoryCount - 1; factoryIndex >= 0; factoryIndex--) {
       DetectorStreamProcessorFactory factory = factoryList.get(factoryIndex);
       DetectorStreamProcessor processor = factory.createProcessor();
-      buffer = new DetectorStreamBufferImpl(processor, buffer);
+      buffer = new DetectorStreamBufferImpl(processor, buffer, this.byteArrayPool);
     }
     this.firstBuffer = buffer;
   }

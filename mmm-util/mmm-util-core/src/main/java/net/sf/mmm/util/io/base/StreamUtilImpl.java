@@ -61,6 +61,9 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
   public StreamUtilImpl() {
 
     super();
+    this.executor = null;
+    this.byteArrayPool = null;
+    this.charArrayPool = null;
   }
 
   /**

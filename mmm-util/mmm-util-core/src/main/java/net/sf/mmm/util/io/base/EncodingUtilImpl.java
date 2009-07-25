@@ -213,6 +213,16 @@ public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
     private int charOffset;
 
     /**
+     * The constructor.
+     */
+    public AsciiProcessor() {
+
+      super();
+      this.charBuffer = null;
+      this.charOffset = 0;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public int process(byte[] buffer, int offset, int length) {

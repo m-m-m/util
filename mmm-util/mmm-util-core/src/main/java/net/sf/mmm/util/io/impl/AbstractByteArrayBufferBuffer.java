@@ -79,9 +79,9 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
 
     super();
     this.buffers = buffers;
-    // this.buffersIndex = 0;
-    // this.buffersEndIndex = 0;
-    // this.bufferStepCount = 0;
+    this.buffersIndex = 0;
+    this.buffersEndIndex = 0;
+    this.bufferStepCount = 0;
     ByteArrayBuffer buffer = this.buffers[this.buffersIndex];
     this.currentBufferIndex = buffer.getCurrentIndex();
     this.currentBufferMax = buffer.getMaximumIndex();

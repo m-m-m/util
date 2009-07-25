@@ -56,7 +56,9 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
           }
         }
       }
-    } catch (Exception e) {
+    } catch (IllegalAccessException e) {
+      throw new IllegalStateException("Failed to initialize " + getClass().getName(), e);
+    } catch (RuntimeException e) {
       throw new IllegalStateException("Failed to initialize " + getClass().getName(), e);
     }
   }

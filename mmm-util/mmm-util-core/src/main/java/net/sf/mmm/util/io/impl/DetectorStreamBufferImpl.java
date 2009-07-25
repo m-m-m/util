@@ -80,17 +80,20 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    *        buffer.
    * @param successor is the successor in the chain or <code>null</code> if this
    *        is the last buffer/processor pair in the chain.
+   * @param byteArrayPool is the {@link ByteArrayPool} to use.
    */
   public DetectorStreamBufferImpl(DetectorStreamProcessor processor,
-      DetectorStreamBufferImpl successor) {
+      DetectorStreamBufferImpl successor, ByteArrayPool byteArrayPool) {
 
     super();
     this.arrayQueue = new LinkedList<ByteArray>();
     this.chainSuccessor = successor;
+    this.byteArrayPool = byteArrayPool;
     // this.chainPredecessor = predecessor;
     // if (this.chainPredecessor != null) {
     // this.chainPredecessor.chainSuccessor = this;
     // }
+    this.processor = processor;
     this.currentArrayView = new CurrentByteArray();
   }
 
@@ -359,7 +362,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /**
    * @see DetectorStreamProcessor#process(DetectorStreamBuffer, Map, boolean)
    * 
-   * @param metadata is the {@link Map} with the metadata.
+   * @param metadata is the {@link Map} with the meta-data.
    * @param eos - <code>true</code> if the end of the stream has been reached
    *        and the given <code>buffer</code> has to be
    * @throws IOException in case of an Input/Output error. Should only be used
@@ -417,7 +420,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    * 
    * @see DetectorStreamBufferImpl#getByteArray(int)
    */
-  protected class CurrentByteArray extends AbstractByteArray implements ByteArray {
+  protected class CurrentByteArray extends AbstractByteArray {
 
     /**
      * {@inheritDoc}

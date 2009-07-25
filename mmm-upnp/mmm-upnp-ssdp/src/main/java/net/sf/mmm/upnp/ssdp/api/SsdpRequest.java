@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.upnp.ssdp.api;
 
+import java.util.Locale;
+
 import net.sf.mmm.util.http.HttpRequest;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -61,7 +63,8 @@ public class SsdpRequest extends HttpRequest {
   public static final String PREFIX_UUID = "uuid:";
 
   /**
-   * The prefix for the device followed by <code>deviceType</code>:<code>version</code>.
+   * The prefix for the device followed by <code>deviceType</code>:
+   * <code>version</code>.
    * 
    * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
    * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
@@ -69,7 +72,8 @@ public class SsdpRequest extends HttpRequest {
   public static final String PREFIX_DEVICE = "urn:schemas-upnp-org:device:";
 
   /**
-   * The prefix for the service followed by <code>serviceType</code>:<code>version</code>.
+   * The prefix for the service followed by <code>serviceType</code>:
+   * <code>version</code>.
    * 
    * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
    * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
@@ -175,7 +179,7 @@ public class SsdpRequest extends HttpRequest {
   @Override
   protected Object createHeaderNameHash(String name) {
 
-    return name.toUpperCase();
+    return name.toUpperCase(Locale.US);
   }
 
   /**
