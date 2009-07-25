@@ -44,6 +44,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.lang.base.SpaceNormalizingCharIterator;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.value.api.ValueParseGenericException;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.api.XmlCompareMode;
 import net.sf.mmm.util.xml.api.XmlException;
@@ -60,10 +61,10 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
   /** @see #getInstance() */
   private static DomUtil instance;
 
-  /** the document builder factory used to read and parse xml */
+  /** the document builder factory used to read and parse XML */
   private DocumentBuilderFactory documentBuilderFactory;
 
-  /** the transformer factory used to transform or write xml */
+  /** the transformer factory used to transform or write XML */
   private TransformerFactory transformerFactory;
 
   /** @see #getBasicUtil() */
@@ -299,9 +300,8 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
       } else if (StringUtil.FALSE.equalsIgnoreCase(flag)) {
         result = false;
       } else {
-        // TODO: NLS?
-        throw new IllegalArgumentException("XML-Attribute " + attribute
-            + " must be either 'true' or 'false' but was '" + flag + "'!");
+        throw new ValueParseGenericException(flag, boolean.class, element.getTagName() + "@"
+            + attribute);
       }
     }
     return result;
@@ -520,7 +520,6 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
       // this should actually never happen...
       return isEqual(node1.getChildNodes(), node1.getChildNodes(), mode);
     } else if (type1 == Node.ENTITY_NODE) {
-      // TODO
       Entity entity1 = (Entity) node1;
       Entity entity2 = (Entity) node2;
       if (!this.basicUtil.isEqual(entity1.getNotationName(), entity2.getNotationName())) {

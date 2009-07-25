@@ -34,6 +34,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /** @see #resolveEntity(String) */
   private static final Map<String, Character> ENTITY_MAP;
 
+  // CHECKSTYLE:OFF (documentation out in the web)
   static {
     ENTITY_MAP = new HashMap<String, Character>(256);
     // XML
@@ -293,6 +294,8 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     ENTITY_MAP.put("rsaquo", Character.valueOf((char) 8250));
     ENTITY_MAP.put("euro", Character.valueOf((char) 8364));
   }
+
+  // CHECKSTYLE:ON
 
   /**
    * The constructor.

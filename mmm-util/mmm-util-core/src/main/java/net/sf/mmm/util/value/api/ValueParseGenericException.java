@@ -29,7 +29,7 @@ public class ValueParseGenericException extends ValueParseException {
    *        located in an XML document, etc. It is used in exceptions thrown if
    *        something goes wrong. This will help to find the problem easier.
    */
-  public ValueParseGenericException(Object value, Object targetType, Object valueSource) {
+  public ValueParseGenericException(Object value, Type targetType, Object valueSource) {
 
     super(NlsBundleUtilCore.ERR_PARSE_SOURCE, value, targetType, valueSource);
   }
@@ -46,7 +46,7 @@ public class ValueParseGenericException extends ValueParseException {
    *        located in an XML document, etc. It is used in exceptions thrown if
    *        something goes wrong. This will help to find the problem easier.
    */
-  public ValueParseGenericException(Throwable nested, Object value, Object targetType,
+  public ValueParseGenericException(Throwable nested, Object value, Type targetType,
       Object valueSource) {
 
     super(nested, NlsBundleUtilCore.ERR_PARSE_SOURCE, value, targetType, valueSource);

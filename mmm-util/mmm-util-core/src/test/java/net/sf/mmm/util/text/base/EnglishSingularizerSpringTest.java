@@ -17,7 +17,7 @@ import net.sf.mmm.util.text.api.Singularizer;
 @SuppressWarnings("all")
 public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
 
-  /** TODO: javadoc. */
+  /** @see #getEnglishSingularizer() */
   private static final String SPRING_CONFIG = "net/sf/mmm/util/text/beans-util-text.xml";
 
   /**

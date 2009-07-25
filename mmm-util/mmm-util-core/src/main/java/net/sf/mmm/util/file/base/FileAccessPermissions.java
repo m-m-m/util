@@ -17,7 +17,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 public class FileAccessPermissions implements Cloneable {
 
-  /** TODO: javadoc. */
+  /** @see #parseUGO(CharSequenceScanner) */
   private static final int MASK_MAX = 07777;
 
   /** @see #parseUGO(CharSequenceScanner) */

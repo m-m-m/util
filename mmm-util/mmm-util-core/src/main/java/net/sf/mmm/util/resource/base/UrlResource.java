@@ -62,7 +62,6 @@ public class UrlResource extends AbstractDataResource {
     if (this.url == null) {
       return "url:";
     } else {
-      // TODO: suffix correct?
       return this.url.getProtocol() + "://";
     }
   }

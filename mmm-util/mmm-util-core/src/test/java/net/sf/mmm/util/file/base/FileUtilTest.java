@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
-import net.sf.mmm.util.file.base.FileUtilImpl;
 
 /**
  * This is the test-case for {@link FileUtilImpl}.
@@ -58,8 +57,11 @@ public class FileUtilTest {
     if ("/root".equals(homeDir)) {
       homeDir = "/home/nobody";
     }
-    assertEquals(util.normalizePath(homeDir + "/../someuser"), util
-        .normalizePath("~someuser"));
+    assertEquals(util.normalizePath(homeDir + "/../someuser"), util.normalizePath("~someuser"));
+    String uncPath = "\\\\10.0.0.1\\share";
+    assertEquals(uncPath, util.normalizePath(uncPath));
+    assertEquals("http://www.host.com/foo/bar", util
+        .normalizePath("http://www.host.com/foo/bar/./test/../."));
   }
 
   @Test

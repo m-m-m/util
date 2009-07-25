@@ -27,6 +27,12 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 public final class Iso8601UtilImpl implements Iso8601Util {
 
+  /** The maximum day of the month. */
+  private static final int MAX_DAY_OF_MONTH = 31;
+
+  /** The maximum month of the year. */
+  private static final int MAX_MONTH = 12;
+
   /**
    * This is the singleton instance of this {@link Iso8601UtilImpl}. Instead of
    * declaring the methods static, we declare this static instance what gives
@@ -428,7 +434,6 @@ public final class Iso8601UtilImpl implements Iso8601Util {
     int day = -1;
     // proceed date
     try {
-      // TODO: peek for +/-
       String yearString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
       char c = parser.forceNext();
       if (c == '-') {
@@ -450,7 +455,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
         month = Integer.parseInt(yearString.substring(4, 6));
         day = Integer.parseInt(yearString.substring(6, 8));
       }
-      if (((month < 1) || (month > 12)) || ((day < 1) || (day > 31))) {
+      if (((month < 1) || (month > MAX_MONTH)) || ((day < 1) || (day > MAX_DAY_OF_MONTH))) {
         throw new IllegalDateFormatException(date);
       }
       // proceed time (and timezone)

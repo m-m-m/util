@@ -166,7 +166,18 @@ public class FileAttributes implements Cloneable {
   @Override
   public String toString() {
 
-    // TODO Auto-generated method stub
+    StringBuilder sb = new StringBuilder();
+    if (this.user != null) {
+      sb.append(this.user);
+    }
+    sb.append(':');
+    if (this.group != null) {
+      sb.append(this.group);
+    }
+    sb.append(' ');
+    if (this.permissions != null) {
+      sb.append(this.permissions);
+    }
     return super.toString();
   }
 

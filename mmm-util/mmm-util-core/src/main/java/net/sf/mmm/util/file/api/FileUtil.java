@@ -199,9 +199,9 @@ public interface FileUtil {
 
   /**
    * This method copies the file given by <code>source</code> to the file given
-   * by <code>destination</code>.
-   * 
-   * TODO
+   * by <code>destination</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * This method will only work with java 1.6 and above!
    * 
    * @param source is the existing file to copy from.
    * @param destination is the file to copy to. It will be created if it does

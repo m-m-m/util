@@ -13,6 +13,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.sf.mmm.util.pattern.api.PatternCompiler;
+import net.sf.mmm.util.pattern.base.RegexPatternCompiler;
 import net.sf.mmm.util.transformer.api.StringTransformerRule;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
@@ -78,8 +80,11 @@ public class StringTransformerChainXmlParser {
    */
   public static final String XML_ATR_RULE_STOPONMATCH = "stop-on-match";
 
-  /** {@link #StringTransformerChainXmlParser(DomUtil)} */
+  /** @see #StringTransformerChainXmlParser(DomUtil) */
   private final DomUtil domUtil;
+
+  /** @see #StringTransformerChainXmlParser(DomUtil, PatternCompiler) */
+  private PatternCompiler patternCompiler;
 
   /**
    * The constructor.
@@ -96,8 +101,20 @@ public class StringTransformerChainXmlParser {
    */
   public StringTransformerChainXmlParser(DomUtil domUtil) {
 
+    this(domUtil, new RegexPatternCompiler());
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param domUtil is the {@link DomUtil} to use.
+   * @param patternCompiler is the {@link PatternCompiler} to use.
+   */
+  public StringTransformerChainXmlParser(DomUtil domUtil, PatternCompiler patternCompiler) {
+
     super();
     this.domUtil = domUtil;
+    this.patternCompiler = patternCompiler;
   }
 
   /**
@@ -117,8 +134,7 @@ public class StringTransformerChainXmlParser {
       boolean stopOnMatch = this.domUtil.getAttributeAsBoolean(xmlElement,
           XML_ATR_RULE_STOPONMATCH, false);
       String patternString = xmlElement.getAttribute(XML_ATR_RULE_PATTERN);
-      // TODO: use PatternCompiler
-      Pattern pattern = Pattern.compile(patternString);
+      Pattern pattern = this.patternCompiler.compile(patternString);
       String replacement = xmlElement.getAttribute(XML_ATR_RULE_REPLACEMENT);
       return new RegexStringTransformerRule(pattern, replacement, replaceAll, stopOnMatch);
     } else {

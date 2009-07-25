@@ -12,6 +12,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
@@ -37,6 +39,18 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @since 1.0.1
  */
 public class FileUtilImpl extends AbstractLoggable implements FileUtil {
+
+  /**
+   * The prefix of an UNC (Uniform Naming Convention) path (e.g.
+   * <code>\\10.0.0.1\share</code>).
+   */
+  private static final String UNC_PATH_PREFIX = "\\\\";
+
+  /**
+   * The {@link Pattern} for an URL schema such as <code>http://</code> or
+   * <code>ftp://</code>.
+   */
+  private static final Pattern URL_SCHEMA_PATTERN = Pattern.compile("([a-zA-Z]+://)(.*)");
 
   /** @see #getInstance() */
   private static FileUtil instance;
@@ -191,21 +205,42 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
    */
   public String normalizePath(String path) {
 
+    if (path == null) {
+      throw new NlsNullPointerException("path");
+    }
     int len = path.length();
     if (len == 0) {
       return path;
     }
-    StringBuilder buffer = new StringBuilder(len + 4);
+    if (path.startsWith(UNC_PATH_PREFIX)) {
+      return path;
+    }
     char systemSlash = File.separatorChar;
+    Matcher matcher = URL_SCHEMA_PATTERN.matcher(path);
+    if (matcher.matches()) {
+      String urlPath = normalizePath(matcher.group(2).toCharArray(), '/');
+      return matcher.group(1) + urlPath;
+    }
     char wrongSlash;
     if (systemSlash == '/') {
       wrongSlash = '\\';
     } else {
       wrongSlash = '/';
     }
-    // TODO: work on toCharArray to avoid overhead?
     char[] chars = path.toCharArray();
     getStringUtil().replace(chars, wrongSlash, systemSlash);
+    return normalizePath(chars, systemSlash);
+  }
+
+  /**
+   * This method handles {@link #normalizePath(String)} internally.
+   * 
+   * @param chars is the path as char[].
+   * @param systemSlash is the slash of the OS (or the context of the path).
+   */
+  private String normalizePath(char[] chars, char systemSlash) {
+
+    StringBuilder buffer = new StringBuilder(chars.length + 4);
     CharSequenceScanner scanner = new CharSequenceScanner(chars);
     boolean appendSlash = false;
     char c = scanner.next();
@@ -216,7 +251,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
         buffer.append(this.userHomeDirectoryPath);
       } else {
         // ~<user> can not be resolved properly
-        // we would need to do OS-specific assumtions and look into
+        // we would need to do OS-specific assumptions and look into
         // /etc/passwd or whatever what might fail by missing read permissions
         // This is just a hack that might work in most cases:
         // we use the user.home dir get the dirname and append the user
@@ -233,8 +268,6 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
     } else {
       buffer.append(c);
     }
-    // TODO: handle \\server\...
-    // TODO: handle <schema>://
     List<String> segments = new ArrayList<String>();
     while (scanner.hasNext()) {
       String segment = scanner.readUntil(systemSlash, true);

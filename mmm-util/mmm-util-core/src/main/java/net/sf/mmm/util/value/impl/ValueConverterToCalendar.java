@@ -91,14 +91,12 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
       return null;
     }
     if (value instanceof Date) {
-      // TODO
       Calendar calendar = Calendar.getInstance();
       calendar.setTime((Date) value);
       return calendar;
     } else if (value instanceof String) {
       return getIso8601Util().parseCalendar((String) value);
     } else if (value instanceof Long) {
-      // TODO
       Calendar calendar = Calendar.getInstance();
       calendar.setTimeInMillis(((Long) value).longValue());
       return calendar;
