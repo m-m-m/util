@@ -6,9 +6,14 @@ package net.sf.mmm.util.value.impl;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.pojo.api.PojoFactory;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.value.api.ValueConvertException;
 import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
@@ -27,8 +32,10 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   /** @see #setPojoFactory(PojoFactory) */
   private PojoFactory pojoFactory;
 
+  /** @see #setPojoDescriptorBuilder(PojoDescriptorBuilder) */
   private PojoDescriptorBuilder pojoDescriptorBuilder;
 
+  /** @see #setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory) */
   private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
 
   /**
@@ -37,6 +44,15 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   public ValueConverterToCompatiblePojo() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
   }
 
   /**
@@ -65,15 +81,29 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
     if (value == null) {
       return null;
     }
-    Class<?> valueClass = value.getClass();
+    Class<?> sourceClass = value.getClass();
     Class<?> targetClass = targetType.getAssignmentClass();
-    if (valueClass.isEnum()) {
-      if (targetClass.isEnum()) {
-        Enum<?> enumValue = (Enum<?>) value;
-        return Enum.valueOf((Class<? extends Enum>) targetClass, enumValue.name());
+    Object result = this.pojoFactory.newInstance(targetClass);
+    PojoDescriptor sourceDescriptor = this.pojoDescriptorBuilder.getDescriptor(sourceClass);
+    PojoDescriptor<?> targetDescriptor = this.pojoDescriptorBuilder.getDescriptor(targetType);
+    for (PojoPropertyDescriptor targetPropertyDescriptor : targetDescriptor
+        .getPropertyDescriptors()) {
+      PojoPropertyAccessorOneArg setter = targetPropertyDescriptor
+          .getAccessor(PojoPropertyAccessorOneArgMode.SET);
+      if (setter != null) {
+        try {
+          Object sourcePropertyValue = sourceDescriptor.getProperty(value, targetPropertyDescriptor
+              .getName());
+          GenericType<?> targetPropertyType = setter.getPropertyType();
+          Object targetPropertyValue = getComposedValueConverter().convert(sourcePropertyValue,
+              valueSource, targetPropertyType);
+          setter.invoke(result, targetPropertyValue);
+        } catch (Exception e) {
+          throw new ValueConvertException(e, value, targetType, valueSource);
+        }
       }
     }
-    return null;
+    return result;
   }
 
   /**
