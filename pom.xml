@@ -123,7 +123,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.5</version>
+          <version>2.6</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -353,13 +353,30 @@
         </configuration>
         <reportSets>
           <reportSet>
-            <id>non-aggregate</id>
+            <id>aggregate</id>
+            <configuration>
+              <aggregate>true</aggregate>
+            </configuration>
             <reports>
               <report>javadoc</report>
-              <report>aggregate</report>
+            </reports>
+          </reportSet>
+          <reportSet>
+            <id>non-aggregate</id>
+            <configuration>
+              <aggregate>false</aggregate>
+            </configuration>
+            <reports>
+              <report>javadoc</report>
             </reports>
           </reportSet>
           <!--
+          <reportSet>
+            <id>non-aggregate</id>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
           <reportSet>
             <id>aggregate</id>
             <reports>
@@ -453,7 +470,7 @@
   </reporting>
   <issueManagement>
     <system>trac</system>
-    <url>https://sourceforge.net/apps/trac/m-m-m/report</url>
+    <url>http://sourceforge.net/apps/trac/m-m-m/report</url>
   </issueManagement>
   <scm>
     <connection>scm:svn:http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</connection>
