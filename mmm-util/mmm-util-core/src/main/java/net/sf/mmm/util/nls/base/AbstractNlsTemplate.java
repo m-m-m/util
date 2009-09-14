@@ -4,6 +4,7 @@
 package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
+import java.util.Map;
 
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -43,7 +44,7 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
   /**
    * {@inheritDoc}
    */
-  public boolean translate(Locale locale, Object[] arguments, Appendable buffer) {
+  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer) {
 
     String translation = translate(locale);
     if (translation == null) {

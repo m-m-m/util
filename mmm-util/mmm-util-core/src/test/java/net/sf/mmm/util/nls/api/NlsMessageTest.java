@@ -12,15 +12,9 @@ import java.util.TimeZone;
 import org.junit.Test;
 
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.FormattedNlsTemplate;
-import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
@@ -50,12 +44,12 @@ public class NlsMessageTest {
     String helloDe = "Hallo ";
     String arg = "Joelle";
     String suffix = "!";
-    final String msg = hello + "{0}" + suffix;
-    final String msgDe = helloDe + "{0}" + suffix;
-    NlsMessageImpl testMessage = new NlsMessageImpl(msg, arg);
+    String key = "name";
+    final String msg = hello + "{" + key + "}" + suffix;
+    final String msgDe = helloDe + "{" + key + "}" + suffix;
+    NlsMessage testMessage = NlsAccess.getFactory().create(msg, key, arg);
     assertEquals(testMessage.getInternationalizedMessage(), msg);
-    assertEquals(testMessage.getArgumentCount(), 1);
-    assertEquals(testMessage.getArgument(0), arg);
+    assertEquals(testMessage.getArgument(key), arg);
     assertEquals(testMessage.getMessage(), hello + arg + suffix);
     NlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
@@ -76,13 +70,22 @@ public class NlsMessageTest {
 
     final String integer = "integer";
     final String integerDe = "Ganze Zahl";
-    final String real = "real[{0},{1}]";
-    final String realDe = "relle Zahl[{0},{1}]";
-    NlsMessage simpleMessageInteger = new NlsMessageImpl(integer);
-    NlsMessage simpleMessageReal = new NlsMessageImpl(real, Double.valueOf(-5), Double.valueOf(5));
-    final String err = "The given value must be of the type \"{0}\" but has the type \"{1}\"!";
-    final String errDe = "Der angegebene Wert muss vom Typ \"{0}\" sein, hat aber den Typ \"{1}\"!";
-    NlsMessage cascadedMessage = new NlsMessageImpl(err, simpleMessageInteger, simpleMessageReal);
+    String keyMin = "min";
+    String keyMax = "max";
+    final String real = "real[{" + keyMin + "},{" + keyMax + "}]";
+    final String realDe = "relle Zahl[{" + keyMin + "},{" + keyMax + "}]";
+    NlsMessage simpleMessageInteger = NlsAccess.getFactory().create(integer);
+    NlsMessage simpleMessageReal = NlsAccess.getFactory().create(real, keyMin, Double.valueOf(-5),
+        keyMax, Double.valueOf(5));
+
+    String keyExpected = "expectedType";
+    String keyActual = "actualType";
+    final String err = "The given value must be of the type \"{" + keyExpected
+        + "}\" but has the type \"{" + keyActual + "}\"!";
+    final String errDe = "Der angegebene Wert muss vom Typ \"{" + keyExpected
+        + "}\" sein, hat aber den Typ \"{" + keyActual + "}\"!";
+    NlsMessage cascadedMessage = NlsAccess.getFactory().create(err, keyExpected,
+        simpleMessageInteger, keyActual, simpleMessageReal);
     NlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
@@ -120,7 +123,7 @@ public class NlsMessageTest {
     NlsTemplateResolver resolver = new NlsTemplateResolverImpl(myRB);
     Date date = Iso8601UtilImpl.getInstance().parseDate("1999-12-31T23:59:59+01:00");
     NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
-    // Make os/locale independent... 
+    // Make os/locale independent...
     TimeZone.setDefault(TimeZone.getTimeZone("GMT+01:00"));
     assertEquals(
         "Date formatted by locale: 12/31/99 11:59 PM, by ISO-8601: 1999-12-31T23:59:59+01:00 and by custom pattern: 1999.12.31-23:59:59+0100!",

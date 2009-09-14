@@ -49,7 +49,7 @@ public interface DetectorStreamProcessor {
    * 
    * @param buffer allows you to read parts of the streamed data as well as to
    *        manipulate the data.
-   * @param metadata is the {@link Map} with the metadata.
+   * @param metadata is the {@link Map} with the meta-data.
    * @param eos - <code>true</code> if the end of the stream has been reached
    *        and the given <code>buffer</code> has to be
    * @throws IOException in case of an Input/Output error. Should only be used

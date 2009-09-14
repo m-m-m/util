@@ -3,7 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.pojo.NlsBundlePojo;
+import java.lang.reflect.Type;
+
+import net.sf.mmm.util.pojo.NlsBundleUtilPojo;
 
 /**
  * A {@link PojoPathConversionException} is thrown if a
@@ -20,6 +22,9 @@ public class PojoPathConversionException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -577255365330996887L;
 
+  /** Key for the NLS message. */
+  private static final String KEY_TARGET_TYPE = "targetType";
+
   /**
    * The constructor.
    * 
@@ -28,9 +33,10 @@ public class PojoPathConversionException extends PojoPathException {
    * @param pojoClass is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
    * @param targetType is the required type for the given <code>pojoPath</code>.
    */
-  public PojoPathConversionException(String pojoPath, Class<?> pojoClass, Object targetType) {
+  public PojoPathConversionException(String pojoPath, Type pojoClass, Type targetType) {
 
-    super(NlsBundlePojo.ERR_PATH_CONVERSION, pojoPath, pojoClass, targetType);
+    super(NlsBundleUtilPojo.ERR_PATH_CONVERSION, toMap(KEY_PATH, pojoPath, KEY_TYPE, pojoClass,
+        KEY_TARGET_TYPE, targetType));
   }
 
   /**
@@ -45,7 +51,8 @@ public class PojoPathConversionException extends PojoPathException {
   public PojoPathConversionException(Throwable nested, String pojoPath, Class<?> pojoClass,
       Object targetType) {
 
-    super(nested, NlsBundlePojo.ERR_PATH_CONVERSION, pojoPath, pojoClass, targetType);
+    super(nested, NlsBundleUtilPojo.ERR_PATH_CONVERSION, toMap(KEY_PATH, pojoPath, KEY_TYPE,
+        pojoClass, KEY_TARGET_TYPE, targetType));
   }
 
 }

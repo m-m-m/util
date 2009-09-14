@@ -30,7 +30,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    */
   public ObjectNotFoundException(Object object) {
 
-    super(NlsBundleUtilCore.ERR_OBJECT_NOT_FOUND, object);
+    super(NlsBundleUtilCore.ERR_OBJECT_NOT_FOUND, toMap(KEY_OBJECT, object));
   }
 
   /**
@@ -42,7 +42,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    */
   public ObjectNotFoundException(Object object, Object key) {
 
-    super(NlsBundleUtilCore.ERR_OBJECT_NOT_FOUND_WITH_KEY, object, key);
+    super(NlsBundleUtilCore.ERR_OBJECT_NOT_FOUND_WITH_KEY, toMap(KEY_OBJECT, object, KEY_KEY, key));
   }
 
 }

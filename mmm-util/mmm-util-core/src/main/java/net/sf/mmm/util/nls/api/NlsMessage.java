@@ -7,8 +7,8 @@ import java.util.Locale;
 
 /**
  * This is the interface for an internationalized message. It stores a message
- * separated from language independent {@link #getArgument(int) arguments}. This
- * approach ensures that the message is always available in the
+ * separated from language independent {@link #getArgument(String) arguments}.
+ * This approach ensures that the message is always available in the
  * internationalized language (should be English) while it still allows to
  * {@link #getLocalizedMessage(Locale, NlsTemplateResolver) translate} the
  * message to a native language.<br>
@@ -31,13 +31,13 @@ public interface NlsMessage extends NlsObject {
    * {@link NlsTemplateResolver#resolveTemplate(String) translated} to a native
    * language. The language independent arguments are filled into the message
    * after the translation process. <br>
-   * E.g. the i18n message may be <code>"Welcome {0}!"</code> and there is one
-   * argument that is the string <code>"Joelle"</code>. The final result will
-   * then be <code>"Welcome Joelle!"</code>. If the message is translated to
-   * German as <code>"Willkommen {0}!"</code> the final result will be
+   * E.g. the i18n message may be <code>"Welcome {name}!"</code> and there is
+   * one argument that is the string <code>"Joelle"</code>. The final result
+   * will then be <code>"Welcome Joelle!"</code>. If the message is translated
+   * to German as <code>"Willkommen {name}!"</code> the final result will be
    * <code>"Willkommen Joelle!"</code>.
    * 
-   * @see NlsMessage#getArgument(int)
+   * @see NlsMessage#getArgument(String)
    * @see java.text.MessageFormat
    * 
    * @return the message for internationalization.
@@ -49,16 +49,30 @@ public interface NlsMessage extends NlsObject {
    * exception.
    * 
    * @return the argument count.
+   * @deprecated this method does NOT make sense anymore.
    */
+  @Deprecated
   int getArgumentCount();
+
+  /**
+   * This method gets the language independent argument for the given
+   * <code>key</code>.
+   * 
+   * @param key is the name of the requested argument.
+   * @return the argument for the given key.
+   */
+  Object getArgument(String key);
 
   /**
    * This method gets the language independent argument at the given
    * <code>index</code>.
    * 
-   * @param index is the position of the requested argument.
-   * @return the argument at the given index.
+   * @param index is the index of the requested argument.
+   * @return the argument for the given key.
+   * @deprecated use {@link #getArgument(String)} instead (and use named keys
+   *             instead of numbers where possible).
    */
+  @Deprecated
   Object getArgument(int index);
 
   /**

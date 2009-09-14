@@ -55,6 +55,15 @@ public interface DetectorStreamBuffer extends ComposedByteBuffer {
   long skip();
 
   /**
+   * This method inserts the given bytes at the current position into the
+   * stream.<br>
+   * It is only a convenience-method for {@link #insert(ByteArray)}.
+   * 
+   * @param data is a {@link ByteArray} with the data to insert.
+   */
+  void insert(byte... data);
+
+  /**
    * This method inserts the given <code>data</code> at the current position
    * into the stream.
    * 

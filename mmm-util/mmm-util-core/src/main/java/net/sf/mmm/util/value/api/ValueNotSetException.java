@@ -26,7 +26,7 @@ public class ValueNotSetException extends ValueException {
    */
   public ValueNotSetException(Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_NOT_SET, valueSource);
+    super(NlsBundleUtilCore.ERR_VALUE_NOT_SET, toMap(KEY_VALUE, valueSource));
   }
 
 }

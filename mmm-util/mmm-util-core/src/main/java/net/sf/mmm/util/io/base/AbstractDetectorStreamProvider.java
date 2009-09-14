@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -16,6 +18,8 @@ import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.api.DetectorStreamProvider;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory;
+import net.sf.mmm.util.pool.api.ByteArrayPool;
+import net.sf.mmm.util.pool.base.NoByteArrayPool;
 
 /**
  * This is the abstract base implementation of the
@@ -29,6 +33,9 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggable im
 
   /** @see #getProcessorFactoryList() */
   private List<DetectorStreamProcessorFactory> processorFactoryList;
+
+  /** @see #getByteArrayPool() */
+  private ByteArrayPool byteArrayPool;
 
   /**
    * The constructor.
@@ -86,6 +93,28 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggable im
   }
 
   /**
+   * This method sets the {@link ByteArrayPool} to use.
+   * 
+   * @param byteArrayPool is the {@link ByteArrayPool} to set.
+   */
+  @Resource
+  public void setByteArrayPool(ByteArrayPool byteArrayPool) {
+
+    this.byteArrayPool = byteArrayPool;
+  }
+
+  /**
+   * This method gets the {@link ByteArrayPool} used to
+   * {@link ByteArrayPool#borrow() borrow} byte-arrays.
+   * 
+   * @return the {@link ByteArrayPool}.
+   */
+  public ByteArrayPool getByteArrayPool() {
+
+    return this.byteArrayPool;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -94,6 +123,9 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggable im
     super.doInitialize();
     if (getProcessorFactoryList().size() == 0) {
       throw new ResourceMissingException("processorFactoryList");
+    }
+    if (this.byteArrayPool == null) {
+      this.byteArrayPool = NoByteArrayPool.INSTANCE;
     }
   }
 

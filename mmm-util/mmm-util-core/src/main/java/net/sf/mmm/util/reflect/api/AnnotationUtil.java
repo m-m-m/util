@@ -86,6 +86,8 @@ public interface AnnotationUtil {
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of
    * the type given by <code>annotation</code> in the declaration of the given
    * <code>annotatedType</code>.<br>
+   * Instead of {@link #getClassAnnotation(Class, Class)} this method will also
+   * scan implemented interfaces for the given <code>annotation</code>.<br>
    * This method is only useful if the given <code>annotation</code> is a
    * {@link java.lang.annotation.RetentionPolicy#RUNTIME runtime}.
    * 

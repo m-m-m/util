@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.io.api.BufferExceedException;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
 import net.sf.mmm.util.io.api.ByteProcessor;
@@ -348,9 +349,11 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
    */
   public int fill(byte[] buffer, int offset, int length) {
 
+    if (offset >= buffer.length) {
+      throw new BufferExceedException(offset, buffer.length);
+    }
     if ((length + offset) > buffer.length) {
-      throw new NlsIllegalArgumentException("Maximum length \"{0}\" exceeds buffer!", Integer
-          .valueOf(length));
+      throw new BufferExceedException(length, buffer.length - offset);
     }
     if (!hasNext()) {
       // buffer is empty...

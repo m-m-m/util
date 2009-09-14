@@ -12,9 +12,9 @@ import java.lang.reflect.Method;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.reflect.api.AnnotationNotForTargetException;
+import net.sf.mmm.util.reflect.api.AnnotationNotRuntimeException;
 import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
@@ -132,12 +132,10 @@ public class AnnotationUtilImpl implements AnnotationUtil {
       throws IllegalArgumentException {
 
     if (!isRuntimeAnnotation(annotation)) {
-      throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_ANNOTATION_NOT_RUNTIME,
-          annotation);
+      throw new AnnotationNotRuntimeException(annotation);
     }
     if (!isAnnotationForType(annotation, ElementType.TYPE)) {
-      throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_ANNOTATION_NOT_FOR_TARGET,
-          annotation, ElementType.TYPE);
+      throw new AnnotationNotForTargetException(annotation, ElementType.TYPE);
     }
     A result = annotatedClass.getAnnotation(annotation);
     Class<?> currentClass = annotatedClass;
@@ -217,12 +215,10 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   public <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotation) {
 
     if (!isRuntimeAnnotation(annotation)) {
-      throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_ANNOTATION_NOT_RUNTIME,
-          annotation);
+      throw new AnnotationNotRuntimeException(annotation);
     }
     if (!isAnnotationForType(annotation, ElementType.METHOD)) {
-      throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_ANNOTATION_NOT_FOR_TARGET,
-          annotation, ElementType.METHOD);
+      throw new AnnotationNotForTargetException(annotation, ElementType.METHOD);
     }
     A result = annotatedMethod.getAnnotation(annotation);
     if (result == null) {

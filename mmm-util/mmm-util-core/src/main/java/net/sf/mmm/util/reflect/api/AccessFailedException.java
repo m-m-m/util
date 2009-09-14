@@ -4,6 +4,7 @@
 package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Type;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
 
@@ -32,18 +33,18 @@ public class AccessFailedException extends ReflectionException {
    */
   public AccessFailedException(IllegalAccessException nested, AccessibleObject accessible) {
 
-    super(nested, NlsBundleUtilCore.ERR_ACCESS_FAILED, accessible);
+    super(nested, NlsBundleUtilCore.ERR_ACCESS_FAILED, toMap(KEY_ACCESSIBLE, accessible));
   }
 
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param clazz is the {@link Class} that is NOT accessible.
+   * @param type is the {@link Class} that is NOT accessible.
    */
-  public AccessFailedException(IllegalAccessException nested, Class<?> clazz) {
+  public AccessFailedException(IllegalAccessException nested, Type type) {
 
-    super(nested, NlsBundleUtilCore.ERR_ACCESS_FAILED, clazz);
+    super(nested, NlsBundleUtilCore.ERR_ACCESS_FAILED, toMap(KEY_ACCESSIBLE, type));
   }
 
 }

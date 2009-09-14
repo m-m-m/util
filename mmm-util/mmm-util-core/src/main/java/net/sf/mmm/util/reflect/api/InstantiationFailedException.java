@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
+import java.lang.reflect.Type;
+
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
@@ -23,24 +25,24 @@ public class InstantiationFailedException extends ReflectionException {
   /**
    * The constructor.
    * 
-   * @param clazz is the {@link Class} that could NOT be
+   * @param type is the {@link Class} that could NOT be
    *        {@link Class#newInstance() instantiated}.
    */
-  public InstantiationFailedException(Class<?> clazz) {
+  public InstantiationFailedException(Type type) {
 
-    super(NlsBundleUtilCore.ERR_INSTANTIATION_FAILED, clazz);
+    super(NlsBundleUtilCore.ERR_INSTANTIATION_FAILED, toMap(KEY_TYPE, type));
   }
 
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param clazz is the {@link Class} that could NOT be
+   * @param type is the {@link Class} that could NOT be
    *        {@link Class#newInstance() instantiated}.
    */
-  public InstantiationFailedException(Throwable nested, Class<?> clazz) {
+  public InstantiationFailedException(Throwable nested, Type type) {
 
-    super(nested, NlsBundleUtilCore.ERR_INSTANTIATION_FAILED, clazz);
+    super(nested, NlsBundleUtilCore.ERR_INSTANTIATION_FAILED, toMap(KEY_TYPE, type));
   }
 
 }

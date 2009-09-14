@@ -40,7 +40,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
   public ProcessableDetectorInputStream(InputStream inputStream,
       Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider) {
 
-    super(mutableMetadata, null);
+    super(mutableMetadata, provider.getByteArrayPool());
     this.wrapperInputStream = new WrapperInputStream(inputStream);
     initialize(provider, this.wrapperInputStream);
   }
@@ -169,7 +169,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
       }
       int readCount = 0;
       while (bufferLength < requiredBufferLength) {
-        if (readCount > 5) {
+        if (readCount > 15) {
           throw new NlsIllegalStateException();
         }
         byte[] buffer = getByteArrayPool().borrow();
@@ -199,7 +199,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
         throws IOException {
 
       if (this.endOfStream) {
-        throw new NlsIllegalStateException();
+        // throw new NlsIllegalStateException();
       }
       this.targetBuffer = buffer;
       this.endOfStream = eos;

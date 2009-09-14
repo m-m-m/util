@@ -42,7 +42,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
   public ProcessableDetectorOutputStream(OutputStream outputStream,
       Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider) {
 
-    super(mutableMetadata, null);
+    super(mutableMetadata, provider.getByteArrayPool());
     this.wrapperOutputStream = new WrapperOutputStream(outputStream);
     initialize(provider, this.wrapperOutputStream);
   }

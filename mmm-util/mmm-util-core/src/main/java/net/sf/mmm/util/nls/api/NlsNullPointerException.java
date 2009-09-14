@@ -20,26 +20,22 @@ public class NlsNullPointerException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
-   * 
    * @param argument is the argument that is illegal. May be <code>null</code>.
    */
   public NlsNullPointerException(String argument) {
 
-    super(NlsBundleUtilCore.ERR_ARGUMENT_NULL, argument);
+    super(NlsBundleUtilCore.ERR_ARGUMENT_NULL, toMap(KEY_OBJECT, argument));
   }
 
   /**
    * The constructor.
-   * 
-   * @see NlsRuntimeException#NlsRuntimeException(String, Object[])
    * 
    * @param argument is the argument that is illegal. May be <code>null</code>.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
   public NlsNullPointerException(String argument, Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_ARGUMENT_NULL, argument);
+    super(nested, NlsBundleUtilCore.ERR_ARGUMENT_NULL, toMap(KEY_OBJECT, argument));
   }
 
   /**
@@ -57,7 +53,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
    * <pre>
    * public void myMethod(MySpecificBusinessObject businessObject, String myName) {
    *   {@link NlsNullPointerException}.checkNotNull(MySpecificBusinessObject.class, businessObject);
-   *   if (name == null) {
+   *   if (myName == null) {
    *     throw new {@link NlsNullPointerException}("myName");
    *   }
    *   doTheWork();

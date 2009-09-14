@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
@@ -33,7 +34,7 @@ import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> implements
+public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Map<String, Object>> implements
     NlsMessageFormatter {
 
   /** A char filter that accepts everything except ',' and '}'. */
@@ -74,8 +75,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
     CharSequenceScanner scanner = new CharSequenceScanner(pattern);
     String prefix = scanner.readUntil('{', true, SYNTAX);
     while (scanner.hasNext()) {
-      // an argument index > 9999 would be insane, so we limit to 4 digits
-      long index = scanner.readLong(4);
+      String key = scanner.readWhile(CharFilter.LATIN_DIGIT_OR_LETTER_FILTER);
       char c = scanner.next();
       String formatType = null;
       String formatStyle = null;
@@ -94,7 +94,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
         throw new IllegalArgumentException("Unmatched braces in the pattern.");
       }
       NlsFormatter<Object> formatter = this.formatterManager.getFormatter(formatType, formatStyle);
-      PatternSegment segment = new PatternSegment(prefix, (int) index, formatter);
+      PatternSegment segment = new PatternSegment(prefix, key, formatter);
       segmentList.add(segment);
       prefix = scanner.readUntil('{', true, SYNTAX);
     }
@@ -105,23 +105,26 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
   /**
    * {@inheritDoc}
    */
-  public final void format(Object[] arguments, Locale locale, Appendable buffer) {
+  public final void format(Map<String, Object> arguments, Locale locale, Appendable buffer) {
 
     try {
       for (PatternSegment segment : this.segments) {
         buffer.append(segment.prefix);
-        if (arguments == null || segment.argumentIndex >= arguments.length) {
+        Object argument = null;
+        if (arguments != null) {
+          argument = arguments.get(segment.key);
+        }
+        if (argument == null) {
           buffer.append('{');
-          buffer.append(Integer.toString(segment.argumentIndex));
+          buffer.append(segment.key);
           buffer.append('}');
         } else {
-          Object arg = arguments[segment.argumentIndex];
           NlsFormatter<Object> formatter = segment.formatter;
           if (formatter == null) {
             // should actually never happen...
             formatter = NlsFormatterDefault.INSTANCE;
           }
-          formatter.format(arg, locale, buffer);
+          formatter.format(argument, locale, buffer);
         }
       }
       buffer.append(this.suffix);
@@ -134,19 +137,18 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
    * This inner class represents a segment out of the parsed message-pattern.<br>
    * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is
    * parsed into two {@link PatternSegment}s. The first has a {@link #prefix} of
-   * <code>"Hi "</code> and {@link #argumentIndex} of <code>0</code> and the
-   * second has <code>" you have "</code> as {@link #prefix} and
-   * {@link #argumentIndex} of <code>1</code>. The rest of the pattern which is
-   * <code>" items!"</code> will be stored in
-   * {@link NlsMessageFormatterImpl#suffix}.
+   * <code>"Hi "</code> and {@link #key} of <code>0</code> and the second has
+   * <code>" you have "</code> as {@link #prefix} and {@link #key} of
+   * <code>1</code>. The rest of the pattern which is <code>" items!"</code>
+   * will be stored in {@link NlsMessageFormatterImpl#suffix}.
    */
   protected static class PatternSegment {
 
     /** @see #getPrefix() */
     private final String prefix;
 
-    /** @see #getArgumentIndex() */
-    private final int argumentIndex;
+    /** @see #getKey() */
+    private final String key;
 
     /** @see #getFormatter() */
     private final NlsFormatter<Object> formatter;
@@ -155,14 +157,14 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
      * The constructor.
      * 
      * @param prefix is the {@link #getPrefix() prefix}.
-     * @param argumentIndex is the {@link #getArgumentIndex() argument index}
+     * @param key is the {@link #getKey() key}.
      * @param formatter is the {@link #getFormatter() formatter}.
      */
-    public PatternSegment(String prefix, int argumentIndex, NlsFormatter<Object> formatter) {
+    public PatternSegment(String prefix, String key, NlsFormatter<Object> formatter) {
 
       super();
       this.prefix = prefix;
-      this.argumentIndex = argumentIndex;
+      this.key = key;
       this.formatter = formatter;
     }
 
@@ -178,24 +180,33 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Object[]> impl
     }
 
     /**
-     * This method gets the index of the argument to format and append after the
+     * This method gets the key of the argument to format and append after the
      * {@link #getPrefix() prefix}.
      * 
-     * @return the argumentIndex
+     * @return the key
      */
-    public int getArgumentIndex() {
+    public String getKey() {
 
-      return this.argumentIndex;
+      return this.key;
     }
 
     /**
-     * Is the formatter used to format the {@link #getArgumentIndex() argument}.
+     * Is the formatter used to format the {@link #getKey() argument}.
      * 
      * @return the formatter
      */
     public NlsFormatter<Object> getFormatter() {
 
       return this.formatter;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+
+      return this.prefix + "{" + this.key + "}";
     }
 
   }

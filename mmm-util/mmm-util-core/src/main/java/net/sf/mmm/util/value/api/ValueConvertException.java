@@ -28,7 +28,7 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Object value, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_CONVERT, value, targetType);
+    super(NlsBundleUtilCore.ERR_VALUE_CONVERT, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
   /**
@@ -43,7 +43,8 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Object value, Type targetType, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_CONVERT, value, targetType, valueSource);
+    super(NlsBundleUtilCore.ERR_VALUE_CONVERT_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType,
+        KEY_SOURCE, valueSource));
   }
 
   /**
@@ -55,7 +56,8 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Throwable nested, Object value, Type targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_CONVERT, value, targetType);
+    super(nested, NlsBundleUtilCore.ERR_VALUE_CONVERT,
+        toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
   /**
@@ -71,7 +73,8 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Throwable nested, Object value, Type targetType, Object valueSource) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_CONVERT, value, targetType, valueSource);
+    super(nested, NlsBundleUtilCore.ERR_VALUE_CONVERT_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE,
+        targetType, KEY_SOURCE, valueSource));
   }
 
 }

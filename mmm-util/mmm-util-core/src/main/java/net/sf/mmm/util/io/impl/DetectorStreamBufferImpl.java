@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.io.api.BufferExceedException;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
@@ -89,10 +90,6 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     this.arrayQueue = new LinkedList<ByteArray>();
     this.chainSuccessor = successor;
     this.byteArrayPool = byteArrayPool;
-    // this.chainPredecessor = predecessor;
-    // if (this.chainPredecessor != null) {
-    // this.chainPredecessor.chainSuccessor = this;
-    // }
     this.processor = processor;
     this.currentArrayView = new CurrentByteArray();
   }
@@ -138,7 +135,11 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    */
   public int getByteArrayCount() {
 
-    return this.arrayQueue.size() + 1;
+    int arrayCount = this.arrayQueue.size();
+    if (this.currentArray != null) {
+      arrayCount++;
+    }
+    return arrayCount;
   }
 
   /**
@@ -277,11 +278,21 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /**
    * {@inheritDoc}
    */
+  public void insert(byte... data) {
+
+    insert(new ByteArrayImpl(data));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void insert(ByteArray data) {
 
     if (this.currentArray != null) {
-      this.chainSuccessor.append(new ByteArrayImpl(this.currentArray, this.currentArrayMin,
-          this.currentArrayIndex));
+      int max = this.currentArrayIndex - 1;
+      if (this.currentArrayMin <= max) {
+        this.chainSuccessor.append(new ByteArrayImpl(this.currentArray, this.currentArrayMin, max));
+      }
       this.currentArrayMin = this.currentArrayIndex;
     }
     this.chainSuccessor.append(data);
@@ -299,6 +310,8 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     if (this.seekMode == null) {
       this.seekMode = mode;
     } else if (this.seekMode != mode) {
+      // TODO: add dedicated exception or constructor to
+      // IllegalStateException...
       throw new NlsIllegalArgumentException("remove and skip can NOT be mixed!");
     }
     this.seekCount = this.seekCount + byteCount;
@@ -311,7 +324,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
         }
       }
       long currentBytesAvailable = this.currentArrayMax - this.currentArrayIndex + 1;
-      if (currentBytesAvailable < this.seekCount) {
+      if (currentBytesAvailable > this.seekCount) {
         this.currentArrayIndex = (int) (this.currentArrayIndex + this.seekCount);
         this.seekCount = 0;
         this.seekMode = null;
@@ -323,6 +336,9 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
         if (mode == SeekMode.SKIP) {
           this.chainSuccessor.append(new ByteArrayImpl(this.currentArray, this.currentArrayMin,
               this.currentArrayMax));
+        }
+        if (this.seekCount == 0) {
+          this.seekMode = null;
         }
         this.currentArray = null;
         nextArray();
@@ -373,7 +389,6 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     this.processor.process(this, metadata, eos);
     if (this.chainSuccessor != null) {
       this.chainSuccessor.process(metadata, eos);
-      // TODO: sync this buffer...
     }
   }
 
@@ -382,14 +397,15 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    */
   public int fill(byte[] buffer, int offset, int length) {
 
+    if (offset >= buffer.length) {
+      throw new BufferExceedException(offset, buffer.length);
+    }
     if ((length + offset) > buffer.length) {
-      // TODO exceed exception
-      throw new NlsIllegalArgumentException("Length \"{0}\" exceeds buffer!", Integer
-          .valueOf(length));
+      throw new BufferExceedException(length, buffer.length - offset);
     }
     if (!hasNext()) {
       // buffer is empty...
-      return 0;
+      return -1;
     }
     int bufferIndex = offset;
     int bytesLeft = length;

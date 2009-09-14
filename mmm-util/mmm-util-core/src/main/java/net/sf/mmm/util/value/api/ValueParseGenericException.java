@@ -31,7 +31,8 @@ public class ValueParseGenericException extends ValueParseException {
    */
   public ValueParseGenericException(Object value, Type targetType, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_SOURCE, value, targetType, valueSource);
+    super(NlsBundleUtilCore.ERR_PARSE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType,
+        KEY_SOURCE, valueSource));
   }
 
   /**
@@ -49,7 +50,8 @@ public class ValueParseGenericException extends ValueParseException {
   public ValueParseGenericException(Throwable nested, Object value, Type targetType,
       Object valueSource) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE_SOURCE, value, targetType, valueSource);
+    super(nested, NlsBundleUtilCore.ERR_PARSE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType,
+        KEY_SOURCE, valueSource));
   }
 
   /**
@@ -61,7 +63,7 @@ public class ValueParseGenericException extends ValueParseException {
    */
   public ValueParseGenericException(Object value, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_PARSE, value, targetType);
+    super(NlsBundleUtilCore.ERR_PARSE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
   /**
@@ -74,7 +76,7 @@ public class ValueParseGenericException extends ValueParseException {
    */
   public ValueParseGenericException(Throwable nested, Object value, Type targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE, value, targetType);
+    super(nested, NlsBundleUtilCore.ERR_PARSE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
 }

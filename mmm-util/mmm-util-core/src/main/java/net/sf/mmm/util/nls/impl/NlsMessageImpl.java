@@ -4,7 +4,9 @@
 package net.sf.mmm.util.nls.impl;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Map;
 
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -29,24 +31,28 @@ public class NlsMessageImpl implements NlsMessage {
   /** @see #getInternationalizedMessage() */
   private String message;
 
-  /** @see #getArgument(int) */
-  private final Object[] arguments;
+  /** @see #getArgument(String) */
+  private final Map<String, Object> arguments;
 
   /**
    * The constructor.
    * 
    * @param template is the {@link NlsTemplate} for the
    *        {@link #getInternationalizedMessage() raw message}.
-   * @param messageArguments are the {@link #getArgument(int) arguments} filled
-   *        into the message after nationalization.
+   * @param messageArguments are the {@link #getArgument(String) arguments}
+   *        filled into the message after nationalization.
    */
-  public NlsMessageImpl(NlsTemplate template, Object... messageArguments) {
+  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments) {
 
     super();
     assert (template != null);
     this.template = template;
     this.message = null;
-    this.arguments = messageArguments;
+    if (messageArguments == null) {
+      this.arguments = Collections.emptyMap();
+    } else {
+      this.arguments = messageArguments;
+    }
   }
 
   /**
@@ -54,10 +60,10 @@ public class NlsMessageImpl implements NlsMessage {
    * 
    * @param internationalizedMessage is the
    *        {@link #getInternationalizedMessage() internationalized message}.
-   * @param messageArguments are the {@link #getArgument(int) arguments} filled
-   *        into the message after nationalization.
+   * @param messageArguments are the {@link #getArgument(String) arguments}
+   *        filled into the message after nationalization.
    */
-  public NlsMessageImpl(String internationalizedMessage, Object... messageArguments) {
+  public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments) {
 
     super();
     assert (internationalizedMessage != null);
@@ -69,9 +75,23 @@ public class NlsMessageImpl implements NlsMessage {
   /**
    * {@inheritDoc}
    */
+  public Object getArgument(String key) {
+
+    return this.arguments.get(key);
+  }
+
+  /**
+   * This method gets the {@link #getArgument(String) Argument} for the given
+   * index.
+   * 
+   * @param index
+   * @return
+   * @deprecated
+   */
+  @Deprecated
   public Object getArgument(int index) {
 
-    return this.arguments[index];
+    return getArgument(Integer.toString(index));
   }
 
   /**
@@ -79,7 +99,7 @@ public class NlsMessageImpl implements NlsMessage {
    */
   public int getArgumentCount() {
 
-    return this.arguments.length;
+    return this.arguments.size();
   }
 
   /**

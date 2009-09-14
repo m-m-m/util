@@ -12,7 +12,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfigurationImpl;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
@@ -109,8 +109,7 @@ public class ExtendedPojoDescriptorConfigurationImpl extends PojoDescriptorConfi
       PojoPropertyAccessorMode<?> mode = builder.getMode();
       boolean added = modeSet.add(mode);
       if (!added) {
-        // TODO: NLS
-        throw new NlsIllegalArgumentException("Duplicate accessor for mode \"{0}\"!", mode);
+        throw new DuplicateObjectException(builder, mode);
       }
       builderList.add(builder);
     }

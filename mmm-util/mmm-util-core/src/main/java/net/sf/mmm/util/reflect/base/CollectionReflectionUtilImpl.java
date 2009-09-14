@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
@@ -151,8 +150,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
     if (type.isInterface()) {
       CollectionFactory<C> factory = getCollectionFactoryManager().getCollectionFactory(type);
       if (factory == null) {
-        throw new NlsIllegalArgumentException(
-            NlsBundleUtilCore.ERR_UNKNOWN_COLLECTION_INTERFACE, type);
+        throw new UnknownCollectionInterfaceException(type);
       }
       return factory.createGeneric();
     }
@@ -283,8 +281,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
     }
     int growth = index - size + 1;
     if (growth > maxGrowth) {
-      throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_INCREASE_EXCEEDS_MAX_GROWTH,
-          Integer.valueOf(growth), Integer.valueOf(maxGrowth));
+      throw new ContainerGrowthException(growth, maxGrowth);
     }
     if (type.isArray()) {
       if (growth > 0) {

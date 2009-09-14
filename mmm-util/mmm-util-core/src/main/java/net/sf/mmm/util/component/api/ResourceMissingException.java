@@ -24,7 +24,7 @@ public class ResourceMissingException extends NlsRuntimeException {
    */
   public ResourceMissingException(String resourceName) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_MISSING, resourceName);
+    super(NlsBundleUtilCore.ERR_RESOURCE_MISSING, toMap(KEY_RESOURCE, resourceName));
   }
 
 }

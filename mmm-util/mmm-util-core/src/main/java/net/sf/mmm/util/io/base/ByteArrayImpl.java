@@ -117,4 +117,13 @@ public class ByteArrayImpl extends AbstractByteArray {
     return new ByteArrayImpl(this.buffer, minimum, maximum);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return new String(this.buffer, this.minimumIndex, getBytesAvailable());
+  }
+
 }

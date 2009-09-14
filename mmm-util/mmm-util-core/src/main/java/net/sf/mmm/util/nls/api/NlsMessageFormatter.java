@@ -4,6 +4,7 @@
 package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * This is the interface for a formatter of a message-text. It is a simplified
@@ -12,7 +13,7 @@ import java.util.Locale;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface NlsMessageFormatter extends NlsFormatter<Object[]> {
+public interface NlsMessageFormatter extends NlsFormatter<Map<String, Object>> {
 
   /**
    * This method formats the underlying pattern by filling in the given
@@ -24,7 +25,7 @@ public interface NlsMessageFormatter extends NlsFormatter<Object[]> {
    * 
    * @param arguments are the argument-objects to be formatted and filled into
    *        the message.
-   * @param locale is the locale used for localized formatting. An
+   * @param locale is the {@link Locale} used for localized formatting. An
    *        implementation may ignore it if it was created locale specific like
    *        {@link java.text.MessageFormat} which is bound to a locale at
    *        construction. In order to allow a thread-safe implementation that
@@ -32,6 +33,6 @@ public interface NlsMessageFormatter extends NlsFormatter<Object[]> {
    *        <code>de_DE</code>) it was added in this signature.
    * @param buffer is where to append the formatted message.
    */
-  void format(Object[] arguments, Locale locale, Appendable buffer);
+  void format(Map<String, Object> arguments, Locale locale, Appendable buffer);
 
 }

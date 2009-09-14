@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory;
 import net.sf.mmm.util.io.base.AbstractDetectorStream;
@@ -88,7 +89,13 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
   public void processInternal(byte[] buffer, int offset, int length, boolean eos)
       throws IOException {
 
+    int maximumIndex = length - offset - 1;
+    ByteArray nextArray = new ByteArrayBufferImpl(buffer, offset, maximumIndex);
+    this.firstBuffer.append(nextArray);
     this.firstBuffer.process(getMutableMetadata(), eos);
+    if (eos) {
+      setDone();
+    }
   }
 
   /**

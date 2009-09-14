@@ -10,8 +10,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * invoked that is NOT implemented or generally NOT supported.<br>
  * <b>ATTENTION:</b><br>
  * Please always consider to avoid APIs that throw such exception and use
- * inheritance instead (e.g. if there was a <code>ReadOnlyIterator</code> (aka
- * <code>Enumeration</code>) that <code>Iterator</code> extends).
+ * inheritance instead (e.g. if there was a <code>ReadOnlyIterator</code> such
+ * as <code>Enumeration</code> that <code>Iterator</code> extends).
  * 
  * @see UnsupportedOperationException
  * 
@@ -22,6 +22,9 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 1008016155549441562L;
+
+  /** key for the NLS message. */
+  private static final String KEY_OPERATION = "object";
 
   /**
    * The constructor.
@@ -40,7 +43,7 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
    */
   public NlsUnsupportedOperationException(Object operation) {
 
-    super(NlsBundleUtilCore.ERR_UNSUPPORTED_OPERATION_WITH_NAME, operation);
+    super(NlsBundleUtilCore.ERR_UNSUPPORTED_OPERATION_WITH_NAME, toMap(KEY_OPERATION, operation));
   }
 
 }

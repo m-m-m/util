@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.pojo.NlsBundlePojo;
+import net.sf.mmm.util.pojo.NlsBundleUtilPojo;
 
 /**
  * A {@link PojoPathFunctionUnsupportedOperationException} is thrown if a
@@ -30,7 +30,8 @@ public class PojoPathFunctionUnsupportedOperationException extends PojoPathExcep
    */
   public PojoPathFunctionUnsupportedOperationException(String operation, String function) {
 
-    super(NlsBundlePojo.ERR_FUNCTION_UNSUPPORTED_OPERATION, operation, function);
+    super(NlsBundleUtilPojo.ERR_FUNCTION_UNSUPPORTED_OPERATION, toMap(KEY_OPERATION, operation,
+        KEY_FUNCTION, function));
   }
 
 }

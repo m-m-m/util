@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.pojo.NlsBundlePojo;
+import net.sf.mmm.util.pojo.NlsBundleUtilPojo;
 
 /**
  * A {@link PojoPathSegmentIsNullException} is thrown by the
@@ -20,14 +20,16 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
 
   /**
    * The constructor.
-   * @param initialPojo is the initial
-   *        {@link net.sf.mmm.util.pojo.api.Pojo} supplied to the
-   *        {@link PojoPathNavigator}.
-   * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>.
+   * 
+   * @param initialPojo is the initial {@link net.sf.mmm.util.pojo.api.Pojo}
+   *        supplied to the {@link PojoPathNavigator}.
+   * @param pojoPath is the {@link PojoPath} that evaluated to <code>null</code>
+   *        .
    */
   public PojoPathSegmentIsNullException(Object initialPojo, String pojoPath) {
 
-    super(NlsBundlePojo.ERR_PATH_SEGMENT_IS_NULL, pojoPath, initialPojo);
+    super(NlsBundleUtilPojo.ERR_PATH_SEGMENT_IS_NULL, toMap(KEY_PATH, pojoPath, KEY_OBJECT,
+        initialPojo));
   }
 
 }

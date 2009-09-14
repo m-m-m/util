@@ -3,7 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.pojo.NlsBundlePojo;
+import java.lang.reflect.Type;
+
+import net.sf.mmm.util.pojo.NlsBundleUtilPojo;
 
 /**
  * A {@link PojoPathAccessException} is thrown if a {@link PojoPath} could NOT
@@ -26,9 +28,9 @@ public class PojoPathAccessException extends PojoPathException {
    *        {@link PojoPath#getSegment() segment} of the given
    *        <code>pojoPath</code> could NOT be accessed.
    */
-  public PojoPathAccessException(String pojoPath, Class<?> currentPojoType) {
+  public PojoPathAccessException(String pojoPath, Type currentPojoType) {
 
-    super(NlsBundlePojo.ERR_PATH_ACCESS, pojoPath, currentPojoType);
+    super(NlsBundleUtilPojo.ERR_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE, currentPojoType));
   }
 
   /**
@@ -42,9 +44,10 @@ public class PojoPathAccessException extends PojoPathException {
    *        {@link PojoPath#getSegment() segment} of the given
    *        <code>pojoPath</code> could NOT be accessed.
    */
-  public PojoPathAccessException(Throwable nested, String pojoPath, Class<?> currentPojoType) {
+  public PojoPathAccessException(Throwable nested, String pojoPath, Type currentPojoType) {
 
-    super(nested, NlsBundlePojo.ERR_PATH_ACCESS, pojoPath, currentPojoType);
+    super(nested, NlsBundleUtilPojo.ERR_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE,
+        currentPojoType));
   }
 
 }

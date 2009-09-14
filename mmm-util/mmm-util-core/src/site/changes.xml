@@ -6,6 +6,14 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
+    <release version="1.0.3" date="2009-07-26" description="Subsequent release">
+      <action dev="hohwille" type="add">
+        <![CDATA[<Added support for URLs and UNC-paths in <code>FileUtil.normalizePath(String)</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[<Added <code>ReflectionUtil.findResourceNames(*)</code>.]]>
+      </action>
+    </release>
     <release version="1.0.1" date="2008-02-10" description="Subsequent release">
       <action dev="hohwille" type="add">
         <![CDATA[<Added <code>net.sf.mmm.util.file</code>.]]>

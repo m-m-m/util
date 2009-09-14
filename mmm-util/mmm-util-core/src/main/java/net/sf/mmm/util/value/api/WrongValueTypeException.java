@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
+import java.lang.reflect.Type;
+
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
@@ -17,15 +19,22 @@ public class WrongValueTypeException extends ValueException {
   /** UID for serialization. */
   private static final long serialVersionUID = 3681394831124284211L;
 
+  /** key for the NLS message. */
+  private static final String KEY_VALUE_TYPE = "valueType";
+
+  /** key for the NLS message. */
+  private static final String KEY_EXPECTED_TYPE = "expectedType";
+
   /**
    * The constructor.
    * 
    * @param value is the wrong value.
    * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Object value, Class<?> expectedType) {
+  public WrongValueTypeException(Object value, Type expectedType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value, getType(value), expectedType);
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE,
+        getType(value), KEY_EXPECTED_TYPE, expectedType));
   }
 
   /**
@@ -35,9 +44,10 @@ public class WrongValueTypeException extends ValueException {
    * @param value is the wrong value.
    * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Throwable nested, Object value, Class<?> expectedType) {
+  public WrongValueTypeException(Throwable nested, Object value, Type expectedType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, value, getType(value), expectedType);
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE,
+        getType(value), KEY_EXPECTED_TYPE, expectedType));
   }
 
   /**
@@ -50,10 +60,10 @@ public class WrongValueTypeException extends ValueException {
    *        something goes wrong. This will help to find the problem easier.
    * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Object value, Object valueSource, Class<?> expectedType) {
+  public WrongValueTypeException(Object value, Object valueSource, Type expectedType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value), expectedType,
-        valueSource);
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, addToMap(toMap(KEY_VALUE, value,
+        KEY_VALUE_TYPE, getType(value), KEY_EXPECTED_TYPE, expectedType), KEY_SOURCE, valueSource));
   }
 
   /**
@@ -70,8 +80,8 @@ public class WrongValueTypeException extends ValueException {
   public WrongValueTypeException(Throwable nested, Object value, Object valueSource,
       Class<?> expectedType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, value, getType(value),
-        expectedType, valueSource);
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, addToMap(toMap(KEY_VALUE, value,
+        KEY_VALUE_TYPE, getType(value), KEY_EXPECTED_TYPE, expectedType), KEY_SOURCE, valueSource));
   }
 
   /**
@@ -80,7 +90,7 @@ public class WrongValueTypeException extends ValueException {
    * @param value is the value for which the type is requested.
    * @return the type of the given <code>value</code>.
    */
-  private static Class<?> getType(Object value) {
+  private static Type getType(Object value) {
 
     if (value == null) {
       return null;

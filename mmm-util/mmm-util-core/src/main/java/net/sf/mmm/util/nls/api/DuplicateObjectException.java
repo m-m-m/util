@@ -26,7 +26,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object) {
 
-    super(NlsBundleUtilCore.ERR_DUPLICATE_OBJECT, object);
+    super(NlsBundleUtilCore.ERR_DUPLICATE_OBJECT, toMap(KEY_OBJECT, object));
   }
 
   /**
@@ -38,7 +38,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object, Object key) {
 
-    super(NlsBundleUtilCore.ERR_DUPLICATE_OBJECT_WITH_KEY, object, key);
+    super(NlsBundleUtilCore.ERR_DUPLICATE_OBJECT_WITH_KEY, toMap(KEY_OBJECT, object, KEY_KEY, key));
   }
 
 }

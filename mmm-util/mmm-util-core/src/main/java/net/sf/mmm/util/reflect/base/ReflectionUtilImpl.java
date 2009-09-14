@@ -24,7 +24,6 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
@@ -43,6 +42,7 @@ import net.sf.mmm.util.reflect.impl.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.impl.UpperBoundWildcardType;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.value.api.ValueParseGenericException;
 
 /**
  * This class is a collection of utility functions for dealing with
@@ -271,17 +271,17 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   public Type toType(String type, ClassResolver resolver) throws ClassNotFoundException,
       IllegalArgumentException {
 
-    // List<String>
-    // Map<Integer, Date>
-    // Set<? extends Serializable>
-    CharSequenceScanner parser = new CharSequenceScanner(type);
-    Type result = toType(parser, resolver, null);
-    parser.skipWhile(' ');
-    if (parser.hasNext()) {
-      throw new IllegalArgumentException("Not terminated!");
+    try {
+      CharSequenceScanner parser = new CharSequenceScanner(type);
+      Type result = toType(parser, resolver, null);
+      parser.skipWhile(' ');
+      if (parser.hasNext()) {
+        throw new IllegalArgumentException("Not terminated!");
+      }
+      return result;
+    } catch (RuntimeException e) {
+      throw new ValueParseGenericException(e, type, Type.class);
     }
-    return result;
-    // return Class.forName(type);
   }
 
   /**
@@ -315,8 +315,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
         } else if ("extends".equals(sequence)) {
           lowerBound = true;
         } else {
-          throw new NlsIllegalArgumentException(NlsBundleUtilCore.ERR_TYPE_ILLEGAL_WILDCARD,
-              sequence);
+          throw new IllegalWildcardSequenceException(sequence);
         }
         Type bound = toType(parser, resolver, null);
         if (lowerBound) {

@@ -17,6 +17,8 @@ package net.sf.mmm.util.io.api;
  * {@link #getBytes() byte-array} and therefore avoids
  * {@link System#arraycopy(Object, int, Object, int, int) arraycopy} overhead.
  * 
+ * @see net.sf.mmm.util.io.base.ByteArrayImpl
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.3
  */

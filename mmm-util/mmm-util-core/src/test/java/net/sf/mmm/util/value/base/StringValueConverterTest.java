@@ -91,10 +91,10 @@ public class StringValueConverterTest {
       fail("Exception expected");
     } catch (ValueOutOfRangeException e) {
       // this is expected
-      assertEquals(Integer.valueOf(value), e.getNlsMessage().getArgument(0));
-      assertEquals(minimum, e.getNlsMessage().getArgument(1));
-      assertEquals(maximum, e.getNlsMessage().getArgument(2));
-      assertEquals(source, e.getNlsMessage().getArgument(3));
+      assertEquals(Integer.valueOf(value), e.getNlsMessage().getArgument("value"));
+      assertEquals(minimum, e.getNlsMessage().getArgument("min"));
+      assertEquals(maximum, e.getNlsMessage().getArgument("max"));
+      assertEquals(source, e.getNlsMessage().getArgument("source"));
     }
     // test string
     assertEquals(valueString, getStringValueConverter().convertValue(valueString, source,
@@ -144,10 +144,10 @@ public class StringValueConverterTest {
       fail("Exception expected");
     } catch (WrongValueTypeException e) {
       // expected
-      assertEquals(noIntegerValue, e.getNlsMessage().getArgument(0));
-      assertEquals(String.class, e.getNlsMessage().getArgument(1));
-      assertEquals(Integer.class, e.getNlsMessage().getArgument(2));
-      assertEquals(source, e.getNlsMessage().getArgument(3));
+      assertEquals(noIntegerValue, e.getNlsMessage().getArgument("value"));
+      assertEquals(String.class, e.getNlsMessage().getArgument("valueType"));
+      assertEquals(Integer.class, e.getNlsMessage().getArgument("expectedType"));
+      assertEquals(source, e.getNlsMessage().getArgument("source"));
     }
     // value not set
     try {

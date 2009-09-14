@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
+import java.util.Map;
+
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -16,31 +18,52 @@ public abstract class PojoPathException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1514491167399845329L;
 
+  /** Key for the NLS message. */
+  protected static final String KEY_FUNCTION = "function";
+
+  /** Key for the NLS message. */
+  protected static final String KEY_OPERATION = "operation";
+
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   * @see #toMap(String, Object, String, Object)
+   * 
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   * @param arguments are the
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   *        arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        filled into <code>internationalizedMessage</code>}.
    */
-  public PojoPathException(String internaitionalizedMessage, Object... arguments) {
+  public PojoPathException(String internationalizedMessage, Map<String, Object> arguments) {
 
-    super(internaitionalizedMessage, arguments);
+    super(internationalizedMessage, arguments);
   }
 
   /**
    * The constructor.
    * 
+   * @see #toMap(String, Object, String, Object)
+   * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   * @param arguments are the
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   *        arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        filled into <code>internationalizedMessage</code>}.
    */
-  public PojoPathException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  public PojoPathException(Throwable nested, String internationalizedMessage,
+      Map<String, Object> arguments) {
 
-    super(nested, internaitionalizedMessage, arguments);
+    super(nested, internationalizedMessage, arguments);
   }
 
 }

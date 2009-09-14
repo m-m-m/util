@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
+import java.util.Map;
+
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -12,7 +14,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ValueException extends NlsRuntimeException {
+public abstract class ValueException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -8445209659250789499L;
@@ -20,28 +22,43 @@ public class ValueException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   * @see #toMap(String, Object, String, Object)
+   * 
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   * @param arguments are the
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   *        arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        filled into <code>internationalizedMessage</code>}.
    */
-  public ValueException(String internaitionalizedMessage, Object... arguments) {
+  public ValueException(String internationalizedMessage, Map<String, Object> arguments) {
 
-    super(internaitionalizedMessage, arguments);
+    super(internationalizedMessage, arguments);
   }
 
   /**
    * The constructor.
    * 
+   * @see #toMap(String, Object, String, Object)
+   * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   * @param arguments are the
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   *        arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        filled into <code>internationalizedMessage</code>}.
    */
-  public ValueException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  public ValueException(Throwable nested, String internationalizedMessage,
+      Map<String, Object> arguments) {
 
-    super(nested, internaitionalizedMessage, arguments);
+    super(nested, internationalizedMessage, arguments);
   }
 
 }

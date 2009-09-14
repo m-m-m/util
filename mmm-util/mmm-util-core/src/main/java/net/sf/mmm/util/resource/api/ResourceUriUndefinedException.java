@@ -18,6 +18,9 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -1483011818509137119L;
 
+  /** Key for the NLS message. */
+  private static final String KEY_URI = "uri";
+
   /**
    * The constructor.
    * 
@@ -25,7 +28,7 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
    */
   public ResourceUriUndefinedException(String uri) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_UNDEFINED_URI, uri);
+    super(NlsBundleUtilCore.ERR_RESOURCE_UNDEFINED_URI, toMap(KEY_URI, uri));
   }
 
   /**
@@ -36,7 +39,7 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
    */
   public ResourceUriUndefinedException(Throwable nested, String uri) {
 
-    super(nested, NlsBundleUtilCore.ERR_RESOURCE_UNDEFINED_URI, uri);
+    super(nested, NlsBundleUtilCore.ERR_RESOURCE_UNDEFINED_URI, toMap(KEY_URI, uri));
   }
 
 }

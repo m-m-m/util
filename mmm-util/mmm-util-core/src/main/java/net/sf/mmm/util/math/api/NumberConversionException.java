@@ -27,7 +27,7 @@ public class NumberConversionException extends NlsRuntimeException {
    */
   public NumberConversionException(Object value, Object targetType) {
 
-    super(NlsBundleUtilCore.ERR_NUMBER_CONVERSION, value, targetType);
+    super(NlsBundleUtilCore.ERR_NUMBER_CONVERSION, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
   /**
@@ -40,7 +40,8 @@ public class NumberConversionException extends NlsRuntimeException {
    */
   public NumberConversionException(Throwable nested, Object value, Object targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_NUMBER_CONVERSION, value, targetType);
+    super(nested, NlsBundleUtilCore.ERR_NUMBER_CONVERSION, toMap(KEY_VALUE, value, KEY_TYPE,
+        targetType));
   }
 
 }

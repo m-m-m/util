@@ -26,6 +26,20 @@ public interface CharFilter {
   boolean accept(char c);
 
   /**
+   * A filter that {@link #accept(char) accepts} only the Latin digits '0'-'9'
+   * or ASCII letters 'a'-'z' and 'A'-'Z'.
+   * 
+   * @since 1.0.3
+   */
+  CharFilter LATIN_DIGIT_OR_LETTER_FILTER = new CharFilter() {
+
+    public boolean accept(char c) {
+
+      return (((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
+    }
+  };
+
+  /**
    * A filter that {@link #accept(char) accepts} only the Latin digits '0'-'9'.
    */
   CharFilter LATIN_DIGIT_FILTER = new CharFilter() {
@@ -44,7 +58,7 @@ public interface CharFilter {
 
     public boolean accept(char c) {
 
-      return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c >= 'Z')));
+      return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
     }
   };
 

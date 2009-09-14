@@ -27,7 +27,8 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE, value, minimum, maximum);
+    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE, toMap(KEY_VALUE, value, KEY_MIN, minimum,
+        KEY_MAX, maximum));
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum
         .doubleValue()));
   }
@@ -45,7 +46,8 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE_SOURCE, value, minimum, maximum, valueSource);
+    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE_SOURCE, addToMap(toMap(KEY_VALUE, value,
+        KEY_MIN, minimum, KEY_MAX, maximum), KEY_SOURCE, valueSource));
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum
         .doubleValue()));
   }

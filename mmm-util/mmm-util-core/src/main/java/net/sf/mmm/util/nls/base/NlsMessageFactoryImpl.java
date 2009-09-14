@@ -3,18 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import java.util.Map;
+
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
- * This is the implementation of the {@link NlsMessageFactory} interface.
+ * This is the implementation of the
+ * {@link net.sf.mmm.util.nls.api.NlsMessageFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsMessageFactoryImpl implements NlsMessageFactory {
+public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
 
   /**
    * The constructor.
@@ -27,17 +29,17 @@ public class NlsMessageFactoryImpl implements NlsMessageFactory {
   /**
    * {@inheritDoc}
    */
-  public NlsMessage create(String internationalizedMessage, Object... messageArguments) {
+  public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(internationalizedMessage, messageArguments);
+    return new NlsMessageImpl(template, messageArguments);
   }
 
   /**
    * {@inheritDoc}
    */
-  public NlsMessage create(NlsTemplate template, Object... messageArguments) {
+  public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(template, messageArguments);
+    return new NlsMessageImpl(internationalizedMessage, messageArguments);
   }
 
 }

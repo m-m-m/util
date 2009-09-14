@@ -4,6 +4,7 @@
 package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * This interface represents the template for an internationalized text that can
@@ -39,6 +40,6 @@ public interface NlsTemplate {
    *         the given <code>messageBuffer</code> or <code>false</code> if the
    *         translation failed.
    */
-  boolean translate(Locale locale, Object[] arguments, Appendable buffer);
+  boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer);
 
 }

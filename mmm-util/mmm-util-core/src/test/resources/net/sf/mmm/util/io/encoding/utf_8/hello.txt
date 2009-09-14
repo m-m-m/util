@@ -1,4 +1,4 @@
-Hello World! This is a text encoded in latin-1.
+Hello World! This is a text encoded in UTF-8.
 exclamation mark:!
 question mark:?
 quote:"

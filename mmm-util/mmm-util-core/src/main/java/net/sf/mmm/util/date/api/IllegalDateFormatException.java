@@ -4,7 +4,7 @@
 package net.sf.mmm.util.date.api;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a date given as string was illegal.
@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class IllegalDateFormatException extends NlsIllegalArgumentException {
+public class IllegalDateFormatException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -5008989969842672695L;
@@ -25,7 +25,7 @@ public class IllegalDateFormatException extends NlsIllegalArgumentException {
    */
   public IllegalDateFormatException(String dateString) {
 
-    super(NlsBundleUtilCore.ERR_ILLEGAL_DATA_FORMAT, dateString);
+    super(NlsBundleUtilCore.ERR_ILLEGAL_DATE, toMap(KEY_VALUE, dateString));
   }
 
   /**
@@ -37,7 +37,7 @@ public class IllegalDateFormatException extends NlsIllegalArgumentException {
    */
   public IllegalDateFormatException(String dateString, Exception nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_ILLEGAL_DATA_FORMAT, dateString);
+    super(nested, NlsBundleUtilCore.ERR_ILLEGAL_DATE, toMap(KEY_VALUE, dateString));
   }
 
 }

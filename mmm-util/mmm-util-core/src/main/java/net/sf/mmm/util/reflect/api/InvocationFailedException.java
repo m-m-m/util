@@ -48,7 +48,8 @@ public class InvocationFailedException extends ReflectionException {
   public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible,
       Object instance) {
 
-    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED, accessible, instance);
+    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED_ON, toMap(KEY_ACCESSIBLE,
+        accessible, KEY_OBJECT, instance));
   }
 
 }
