@@ -145,6 +145,7 @@
   <module name="FileTabCharacter"/>
   <module name="RegexpHeader">
     <property name="header" value="/\*[ ]\$[I]d:[ ]..*\$\n \* Copyright \(c\) The m-m-m Team, Licensed under the Apache License, Version 2\.0\n \* http://www\.apache\.org/licenses/LICENSE-2\.0 \*/"/>
+    <property name="fileExtensions" value="java"/>
   </module>
   <module name="Translation"/>
   <module name="NewlineAtEndOfFile"/>
