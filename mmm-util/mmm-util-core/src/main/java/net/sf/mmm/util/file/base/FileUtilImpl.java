@@ -237,6 +237,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
    * 
    * @param chars is the path as char[].
    * @param systemSlash is the slash of the OS (or the context of the path).
+   * @return the resolved path.
    */
   private String normalizePath(char[] chars, char systemSlash) {
 

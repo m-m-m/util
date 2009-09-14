@@ -133,4 +133,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.api.BufferExceedException */
   public static final String ERR_BUFFER_LENGTH_EXCEED = "Offset or length \"{value}\" exceeds buffer with capacity \"{capacity}\"!";
 
+  /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
+  public static final String ERR_XML_INVALID = "Invalid XML!";
+
 }

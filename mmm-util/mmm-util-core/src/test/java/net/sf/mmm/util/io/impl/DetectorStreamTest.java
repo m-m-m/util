@@ -32,6 +32,12 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
  */
 public class DetectorStreamTest {
 
+  /**
+   * Gets (creates) a {@link DetectorStreamProvider} for this test.
+   * 
+   * @param pool is the {@link ByteArrayPool} to use.
+   * @return the {@link DetectorStreamProvider}.
+   */
   protected DetectorStreamProvider getProvider(ByteArrayPool pool) {
 
     DetectorStreamProviderImpl provider = new DetectorStreamProviderImpl();
@@ -46,11 +52,23 @@ public class DetectorStreamTest {
     return provider;
   }
 
+  /**
+   * Gets (creates) a {@link DummyByteArrayPool}.
+   * 
+   * @return the {@link ByteArrayPool}.
+   */
   protected DummyByteArrayPool getByteArrayPool() {
 
     return new DummyByteArrayPool(16);
   }
 
+  /**
+   * Test that a text file is properly scanned by
+   * {@link DetectorStreamProcessorCountX} and afterwards manipulated by
+   * {@link DetectorStreamProcessorReplaceXx}.
+   * 
+   * @throws Exception on error.
+   */
   @Test
   public void testFoo() throws Exception {
 
@@ -87,21 +105,29 @@ public class DetectorStreamTest {
     }
   }
 
+  /**
+   * This inner class is a {@link ByteArrayPool} that can be used to test that
+   * {@link #borrow() borrowed} buffers get {@link #release(byte[]) released}
+   * properly.
+   */
   protected static class DummyByteArrayPool implements ByteArrayPool {
 
     /** @see #release(byte[]) */
     private final Set<byte[]> bufferSet;
 
-    private final int bufferSize;
+    /** the size of the byte-arrays. */
+    private final int arraySize;
 
     /**
      * The constructor.
+     * 
+     * @param arraySize is the size of the {@link #borrow() byte-arrays}.
      */
-    public DummyByteArrayPool(int bufferSize) {
+    public DummyByteArrayPool(int arraySize) {
 
       super();
       this.bufferSet = new HashSet<byte[]>();
-      this.bufferSize = bufferSize;
+      this.arraySize = arraySize;
     }
 
     /**
@@ -109,7 +135,7 @@ public class DetectorStreamTest {
      */
     public byte[] borrow() {
 
-      byte[] buffer = new byte[this.bufferSize];
+      byte[] buffer = new byte[this.arraySize];
       this.bufferSet.add(buffer);
       return buffer;
     }
@@ -129,7 +155,7 @@ public class DetectorStreamTest {
 
       boolean okay = this.bufferSet.remove(element);
       if (!okay) {
-        if (element.length != this.bufferSize) {
+        if (element.length != this.arraySize) {
           throw new IllegalStateException("Foreign byte-buffer released!");
         } else {
           throw new IllegalStateException("Foreign/duplicate byte-buffer released!");

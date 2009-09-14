@@ -18,10 +18,13 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
  */
 public class DetectorStreamProcessorCountX implements DetectorStreamProcessor {
 
+  /** metadata-key. */
   public static final String KEY_X_COUNT = "x-count";
 
+  /** total byte count. */
   private int countTotal;
 
+  /** x count. */
   private int countX;
 
   /**

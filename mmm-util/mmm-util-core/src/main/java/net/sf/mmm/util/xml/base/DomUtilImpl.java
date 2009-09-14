@@ -377,8 +377,7 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
     try {
       return createDocumentBuilder().parse(inputStream);
     } catch (SAXException e) {
-      // TODO: NLS, etc.
-      throw new XmlException(e.getMessage(), e);
+      throw new XmlInvalidException(e);
     } finally {
       inputStream.close();
     }
@@ -400,9 +399,9 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
     try {
       return createDocumentBuilder().parse(inputSource);
     } catch (SAXException e) {
-      throw new XmlException(e.getMessage(), e);
+      throw new XmlInvalidException(e);
     } catch (IOException e) {
-      throw new XmlException(e.getMessage(), e);
+      throw new RuntimeIoException(e);
     }
   }
 
@@ -430,7 +429,7 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
     try {
       createTransformer(indent).transform(source, result);
     } catch (TransformerException e) {
-      throw new XmlException(e.getMessage(), e);
+      throw new XmlInvalidException(e);
     }
   }
 

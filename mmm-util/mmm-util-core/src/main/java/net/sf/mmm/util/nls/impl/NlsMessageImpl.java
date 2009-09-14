@@ -84,9 +84,10 @@ public class NlsMessageImpl implements NlsMessage {
    * This method gets the {@link #getArgument(String) Argument} for the given
    * index.
    * 
-   * @param index
-   * @return
-   * @deprecated
+   * @param index is the index of the requested argument.
+   * @return the argument at the given index or <code>null</code> if no such
+   *         argument exists.
+   * @deprecated use {@link #getArgument(String)}
    */
   @Deprecated
   public Object getArgument(int index) {
@@ -99,7 +100,7 @@ public class NlsMessageImpl implements NlsMessage {
    */
   public int getArgumentCount() {
 
-    return this.arguments.size();
+    return 0;
   }
 
   /**

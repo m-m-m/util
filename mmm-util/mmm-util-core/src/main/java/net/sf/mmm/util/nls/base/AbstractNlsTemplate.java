@@ -34,9 +34,9 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
    *        <code>locale</code>.
    * @param locale is the locale to use. The implementation may ignore it here
    *        because it is also supplied at
-   *        {@link NlsMessageFormatter#format(Object[], Locale, Appendable)}.
-   *        Anyhow it allows the implementation to do smart caching of the
-   *        parsed formatter in association with the locale.
+   *        {@link NlsMessageFormatter#format(Map, Locale, Appendable)}. Anyhow
+   *        it allows the implementation to do smart caching of the parsed
+   *        formatter in association with the locale.
    * @return the formatter instance.
    */
   protected abstract NlsMessageFormatter createFormatter(String messageTemplate, Locale locale);

@@ -61,8 +61,7 @@ public interface DomUtil {
    * 
    * @param inputSource is the input source to the XML data.
    * @return the parsed XML DOM document.
-   * @throws XmlException if the input stream produced an IOException or the XML
-   *         is invalid.
+   * @throws XmlException if the XML is invalid.
    */
   Document parseDocument(InputSource inputSource) throws XmlException;
 
@@ -74,10 +73,9 @@ public interface DomUtil {
    *        Document or just a single Element).
    * @param outputStream is where the serialized XML is written to.
    * @param indent - <code>true</code> if the XML should be indented
-   *        (automatically add linebreaks before opening tags),
+   *        (automatically add line-breaks before opening tags),
    *        <code>false</code> otherwise.
-   * @throws XmlException if the output stream produced an IOException or
-   *         whatever.
+   * @throws XmlException if XML is inconsistent.
    */
   void writeXml(Node xmlNode, OutputStream outputStream, boolean indent) throws XmlException;
 
@@ -88,10 +86,9 @@ public interface DomUtil {
    *        Document or just a single Element).
    * @param writer is where the serialized XML is written to.
    * @param indent - <code>true</code> if the XML should be indented
-   *        (automatically add linebreaks before opening tags),
+   *        (automatically add line-breaks before opening tags),
    *        <code>false</code> otherwise.
-   * @throws XmlException if the output stream produced an IOException or
-   *         whatever.
+   * @throws XmlException if XML is inconsistent.
    */
   void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException;
 
@@ -102,10 +99,9 @@ public interface DomUtil {
    * @param source is a source (e.g. DomSource, etc.)
    * @param result is a result (e.g. DomResult, StreamResult, etc.)
    * @param indent - <code>true</code> if the XML should be indented
-   *        (automatically add linebreaks before opening tags),
+   *        (automatically add line-breaks before opening tags),
    *        <code>false</code> otherwise.
-   * @throws XmlException if the transformation failed (e.g. I/O error, invalid
-   *         XML, or whatever).
+   * @throws XmlException if the transformation failed (e.g. invalid XML).
    */
   void transformXml(Source source, Result result, boolean indent) throws XmlException;
 
