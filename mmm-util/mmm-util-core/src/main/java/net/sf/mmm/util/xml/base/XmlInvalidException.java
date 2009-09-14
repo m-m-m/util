@@ -1,0 +1,33 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.xml.base;
+
+import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.xml.api.XmlException;
+
+/**
+ * A {@link XmlInvalidException} is like a {@link org.xml.sax.SAXException} but
+ * as a {@link RuntimeException}. Besides it has native language support build
+ * in.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.3
+ */
+public class XmlInvalidException extends XmlException {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1309150847866589344L;
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception - e.g. a
+   *        {@link org.xml.sax.SAXException}.
+   */
+  public XmlInvalidException(Throwable nested) {
+
+    super(nested, NlsBundleUtilCore.ERR_XML_INVALID);
+  }
+
+}
