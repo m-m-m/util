@@ -179,7 +179,10 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   protected void release(ByteArray byteArray) {
 
     if (byteArray instanceof PooledByteArray) {
-      this.byteArrayPool.release(byteArray.getBytes());
+      PooledByteArray pooledArray = (PooledByteArray) byteArray;
+      if (pooledArray.release()) {
+        this.byteArrayPool.release(byteArray.getBytes());
+      }
     }
   }
 
@@ -193,12 +196,13 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   private boolean nextArray() {
 
     if (this.currentArray != null) {
-      if ((this.currentArrayMin < this.currentArrayMax) && (this.chainSuccessor != null)) {
-        this.chainSuccessor.append(this.currentByteArray.createSubArray(this.currentArrayMin,
-            this.currentArrayMax));
-      } else {
-        release(this.currentByteArray);
+      if ((this.currentArrayMin < this.currentArrayMax) && (this.chainSuccessor != null)
+          && (this.seekMode != SeekMode.REMOVE)) {
+        ByteArray subArray = this.currentByteArray.createSubArray(this.currentArrayMin,
+            this.currentArrayMax);
+        this.chainSuccessor.append(subArray);
       }
+      release(this.currentByteArray);
     }
     if (this.arrayQueue.isEmpty()) {
       this.currentArray = null;
@@ -319,8 +323,12 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
       // if removeCount was > 0 before, then currentArray had been null.
       if (mode == SeekMode.REMOVE) {
         if (this.currentArrayMin < this.currentArrayIndex) {
-          this.chainSuccessor.append(new ByteArrayImpl(this.currentArray, this.currentArrayMin,
-              this.currentArrayIndex - 1));
+          // there are bytes that have been consumed before remove was
+          // invoked...
+          ByteArray subArray = this.currentByteArray.createSubArray(this.currentArrayMin,
+              this.currentArrayIndex - 1);
+          this.chainSuccessor.append(subArray);
+          this.currentArrayMin = this.currentArrayIndex;
         }
       }
       long currentBytesAvailable = this.currentArrayMax - this.currentArrayIndex + 1;
@@ -333,15 +341,10 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
         }
       } else {
         this.seekCount = this.seekCount - currentBytesAvailable;
-        if (mode == SeekMode.SKIP) {
-          this.chainSuccessor.append(new ByteArrayImpl(this.currentArray, this.currentArrayMin,
-              this.currentArrayMax));
-        }
+        nextArray();
         if (this.seekCount == 0) {
           this.seekMode = null;
         }
-        this.currentArray = null;
-        nextArray();
       }
     }
   }

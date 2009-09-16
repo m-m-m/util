@@ -90,7 +90,7 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
       throws IOException {
 
     int maximumIndex = length - offset - 1;
-    ByteArray nextArray = new ByteArrayBufferImpl(buffer, offset, maximumIndex);
+    ByteArray nextArray = new PooledByteArray(buffer, offset, maximumIndex);
     this.firstBuffer.append(nextArray);
     this.firstBuffer.process(getMutableMetadata(), eos);
     if (eos) {

@@ -154,7 +154,12 @@ public class DetectorStreamTest {
     public void release(byte[] element) {
 
       boolean okay = this.bufferSet.remove(element);
-      if (!okay) {
+      if (okay) {
+        // nuke data to reveal bugs if element was released too early...
+        for (int i = 0; i < element.length; i++) {
+          element[i] = -1;
+        }
+      } else {
         if (element.length != this.arraySize) {
           throw new IllegalStateException("Foreign byte-buffer released!");
         } else {
