@@ -408,8 +408,9 @@
         <artifactId>maven-changes-plugin</artifactId>
         <configuration>
           <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
+          <issueLinkTemplate>%URL%/ticket/%ISSUE%</issueLinkTemplate>
           <!-- <link_template>%URL%/&#38;id=%ISSUE%</link_template>
-          <issueLinkTemplate>%URL%/&#38;id=%ISSUE%</issueLinkTemplate> -->
+           -->
         </configuration>
         <reportSets>
           <reportSet>
@@ -470,7 +471,7 @@
   </reporting>
   <issueManagement>
     <system>trac</system>
-    <url>http://sourceforge.net/apps/trac/m-m-m/report</url>
+    <url>http://sourceforge.net/apps/trac/m-m-m/</url>
   </issueManagement>
   <scm>
     <connection>scm:svn:http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</connection>
