@@ -136,7 +136,7 @@ public abstract class AbstractNlsMessageFactory implements NlsMessageFactory {
    */
   public NlsMessage create(String internationalizedMessage) {
 
-    return create(internationalizedMessage, Collections.emptyMap());
+    return create(internationalizedMessage, Collections.<String, Object> emptyMap());
   }
 
 }
