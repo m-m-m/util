@@ -24,11 +24,9 @@ public abstract class AbstractByteArray implements ByteArray {
   protected void checkSubArray(int minimum, int maximum) {
 
     if (minimum < getMinimumIndex()) {
-      // TODO: exceed-exception
-      throw new NlsIllegalArgumentException("current");
+      throw new NlsIllegalArgumentException("minimum");
     }
     if (maximum > getMaximumIndex()) {
-      // TODO: exceed-exception
       throw new NlsIllegalArgumentException("maximum");
     }
   }

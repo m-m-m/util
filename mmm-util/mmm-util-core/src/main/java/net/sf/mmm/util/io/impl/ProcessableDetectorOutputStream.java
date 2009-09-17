@@ -23,9 +23,6 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
 public class ProcessableDetectorOutputStream extends ProcessableDetectorStream implements
     DetectorOutputStream {
 
-  /** @see WrapperOutputStream#write(int) */
-  private static final byte[] SINGLE_BYTE_ARRAY = new byte[1];
-
   /** @see #getStream() */
   private final WrapperOutputStream wrapperOutputStream;
 
@@ -66,6 +63,12 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     /** The delegate adapted by this wrapper. */
     private final OutputStream delegate;
 
+    /** An array of buffered bytes or <code>null</code>. */
+    private byte[] bytes;
+
+    /** The number of bytes buffered in {@link #bytes}. */
+    private int count;
+
     /**
      * The constructor.
      * 
@@ -75,6 +78,8 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
 
       super();
       this.delegate = outputStream;
+      this.bytes = null;
+      this.count = 0;
     }
 
     /**
@@ -83,6 +88,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void close() throws IOException {
 
+      flushBuffer();
       processInternal(null, true);
     }
 
@@ -92,7 +98,23 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void flush() throws IOException {
 
+      flushBuffer();
       this.delegate.flush();
+    }
+
+    /**
+     * This method flushes the internal {@link #bytes buffer}.
+     * 
+     * @throws IOException if the underlying {@link OutputStream} caused such
+     *         exception.
+     */
+    private void flushBuffer() throws IOException {
+
+      if (this.count > 0) {
+        processInternal(new PooledByteArray(this.bytes, 0, this.count - 1), false);
+        this.count = 0;
+        this.bytes = null;
+      }
     }
 
     /**
@@ -101,6 +123,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void write(byte[] b, int off, int len) throws IOException {
 
+      flushBuffer();
       processInternal(new ByteArrayImpl(b, off, len - off - 1), false);
     }
 
@@ -110,6 +133,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void write(byte[] b) throws IOException {
 
+      flushBuffer();
       processInternal(new ByteArrayImpl(b), false);
     }
 
@@ -119,9 +143,13 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void write(int b) throws IOException {
 
-      // TODO: This is pure nuts!!!
-      SINGLE_BYTE_ARRAY[0] = (byte) b;
-      write(SINGLE_BYTE_ARRAY);
+      if ((this.count > 0) && (this.count >= this.bytes.length)) {
+        flushBuffer();
+      }
+      if (this.bytes == null) {
+        this.bytes = getByteArrayPool().borrow();
+      }
+      this.bytes[this.count++] = (byte) b;
     }
 
     /**

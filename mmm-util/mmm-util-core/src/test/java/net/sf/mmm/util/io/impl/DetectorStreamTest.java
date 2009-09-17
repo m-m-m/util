@@ -163,6 +163,33 @@ public class DetectorStreamTest {
   }
 
   /**
+   * Test that some data is properly written byte-per-byte while scanned by
+   * {@link DetectorStreamProcessorCountX} and afterwards manipulated by
+   * {@link DetectorStreamProcessorReplaceXx}.
+   * 
+   * @see DetectorStreamProvider#wrapOutputStream(java.io.OutputStream)
+   * 
+   * @throws Exception on error.
+   */
+  @Test
+  public void testOutputStreamSingleBytes() throws Exception {
+
+    DummyByteArrayPool pool = getByteArrayPool();
+    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+    DetectorOutputStream detectorStream = getProvider(pool).wrapOutputStream(outStream);
+    OutputStream wrappedStream = detectorStream.getStream();
+    StringBuilder sb = new StringBuilder();
+    for (byte b = 'a'; b < 'x'; b++) {
+      wrappedStream.write(b);
+      sb.append((char) b);
+    }
+    wrappedStream.close();
+    String data = outStream.toString();
+    Assert.assertEquals(sb.toString(), data);
+    Assert.assertEquals(0, pool.bufferSet.size());
+  }
+
+  /**
    * This inner class is a {@link ByteArrayPool} that can be used to test that
    * {@link #borrow() borrowed} buffers get {@link #release(byte[]) released}
    * properly.
