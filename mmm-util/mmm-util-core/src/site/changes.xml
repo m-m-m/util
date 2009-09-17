@@ -7,22 +7,31 @@
   </properties>
   <body>
     <release version="1.0.3" date="2009-07-26" description="Subsequent release">
-      <action dev="hohwille" type="add">
-        <![CDATA[<Added support for URLs and UNC-paths in <code>FileUtil.normalizePath(String)</code>.]]>
+      <action dev="hohwille" type="add" issue="3">
+        <![CDATA[Merged <code>mmm-util-pojo</code> into <code>mmm-util-core</code>.]]>
+      </action>
+      <action dev="hohwille" type="add" issue="1">
+        <![CDATA[Completed stream-detector-framework]]>
+      </action>
+      <action dev="hohwille" type="add" issue="2">
+        <![CDATA[Added suppored for map-keys in NlsMessage rather than index.]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[<Added <code>ReflectionUtil.findResourceNames(*)</code>.]]>
+        <![CDATA[Added support for URLs and UNC-paths in <code>FileUtil.normalizePath(String)</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[Added <code>ReflectionUtil.findResourceNames(*)</code>.]]>
       </action>
     </release>
     <release version="1.0.1" date="2008-02-10" description="Subsequent release">
       <action dev="hohwille" type="add">
-        <![CDATA[<Added <code>net.sf.mmm.util.file</code>.]]>
+        <![CDATA[Added <code>net.sf.mmm.util.file</code>.]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[<Added <code>net.sf.mmm.util.event</code>.]]>
+        <![CDATA[Added <code>net.sf.mmm.util.event</code>.]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[<Added <code>StringUtil.replace(char[], char, char)</code>.]]>
+        <![CDATA[Added <code>StringUtil.replace(char[], char, char)</code>.]]>
       </action>
     </release>
     <release version="1.0.0" date="2008-01-19" description="initial release">

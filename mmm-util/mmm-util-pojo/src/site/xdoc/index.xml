@@ -7,18 +7,10 @@
   </properties>
 
   <body>
-    <section name="About MMM Util::Reflect">
+    <section name="About MMM Util::Pojo">
       <p>
-      This module contains utilities to deal with POJOs (Plain Old Java Objecgts) easily.
-      It fully supports the generic type-system of Java5+ and is NOT limited to Java-beans.
+      This module has been integrated into util-core and is therefore obsolete.
       </p>
-      <subsection name="Features">
-      Here are some of the features provided by this module:
-      <ul>
-        <li>Advanced <a href="apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html">POJO-Introspection</a>.</li>
-        <li><a href="apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html">POJO-Navigation</a> for accessing entire object-webs easily.</li>
-      </ul>
-      </subsection>
     </section>
   </body>
 </document>
