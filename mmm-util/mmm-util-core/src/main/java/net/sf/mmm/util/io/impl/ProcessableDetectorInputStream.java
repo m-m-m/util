@@ -183,10 +183,11 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
           }
         }
         if (length == -1) {
-          processInternal(buffer, 0, 0, true);
+          processInternal(null, true);
+          getByteArrayPool().release(buffer);
           return;
         } else {
-          processInternal(buffer, 0, length, false);
+          processInternal(new PooledByteArray(buffer, 0, length - 1), false);
         }
         bufferLength = this.targetBuffer.getBytesAvailable();
       }

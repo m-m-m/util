@@ -12,6 +12,7 @@ import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
+import net.sf.mmm.util.io.base.ByteArrayImpl;
 
 /**
  * This is the implementation of the {@link DetectorOutputStream}.
@@ -82,7 +83,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void close() throws IOException {
 
-      processInternal(null, 0, 0, true);
+      processInternal(null, true);
     }
 
     /**
@@ -91,7 +92,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void flush() throws IOException {
 
-      // TODO: flush internal buffer!!! Might not work!!!
       this.delegate.flush();
     }
 
@@ -101,7 +101,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void write(byte[] b, int off, int len) throws IOException {
 
-      processInternal(b, off, len, false);
+      processInternal(new ByteArrayImpl(b, off, len - off - 1), false);
     }
 
     /**
@@ -110,7 +110,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void write(byte[] b) throws IOException {
 
-      processInternal(b, 0, b.length, false);
+      processInternal(new ByteArrayImpl(b), false);
     }
 
     /**
@@ -119,6 +119,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     @Override
     public void write(int b) throws IOException {
 
+      // TODO: This is pure nuts!!!
       SINGLE_BYTE_ARRAY[0] = (byte) b;
       write(SINGLE_BYTE_ARRAY);
     }

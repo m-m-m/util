@@ -176,7 +176,7 @@ public class NlsMessageImpl implements NlsMessage {
 
     try {
       NlsTemplate nlsTemplate = getTemplate(resolver);
-      if (getArgumentCount() == 0) {
+      if (this.arguments.isEmpty()) {
         String text = null;
         if (nlsTemplate != null) {
           text = nlsTemplate.translate(locale);

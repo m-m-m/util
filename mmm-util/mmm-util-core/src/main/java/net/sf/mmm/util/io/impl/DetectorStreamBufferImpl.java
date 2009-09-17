@@ -4,6 +4,7 @@
 package net.sf.mmm.util.io.impl;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -112,8 +113,22 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
       return 0;
     }
     int bytesAvailable = this.currentArrayMax - this.currentArrayIndex + 1;
-    for (ByteArray array : this.arrayQueue) {
+    if (this.chainSuccessor != null) {
+      this.chainSuccessor.append(this.currentByteArray.createSubArray(this.currentArrayIndex,
+          this.currentArrayMax));
+    }
+    release(this.currentByteArray);
+    this.currentArray = null;
+    Iterator<ByteArray> arrayIterator = this.arrayQueue.iterator();
+    while (arrayIterator.hasNext()) {
+      ByteArray array = arrayIterator.next();
+      arrayIterator.remove();
       bytesAvailable = bytesAvailable + array.getBytesAvailable();
+      if (this.chainSuccessor == null) {
+        release(array);
+      } else {
+        this.chainSuccessor.append(array);
+      }
     }
     return bytesAvailable;
   }

@@ -79,19 +79,16 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
    *      Map, boolean)
    * 
    * @param buffer is the next part of the streamed data.
-   * @param offset is the start-index in <code>buffer</code>.
-   * @param length is the number of bytes to append/process.
    * @param eos - <code>true</code> if the end of the stream has been reached
    *        and the given <code>buffer</code> has to be
    * @throws IOException in case of an Input/Output error. Should only be used
    *         internally.
    */
-  public void processInternal(byte[] buffer, int offset, int length, boolean eos)
-      throws IOException {
+  public void processInternal(ByteArray buffer, boolean eos) throws IOException {
 
-    int maximumIndex = length - offset - 1;
-    ByteArray nextArray = new PooledByteArray(buffer, offset, maximumIndex);
-    this.firstBuffer.append(nextArray);
+    if (buffer != null) {
+      this.firstBuffer.append(buffer);
+    }
     this.firstBuffer.process(getMutableMetadata(), eos);
     if (eos) {
       setDone();
