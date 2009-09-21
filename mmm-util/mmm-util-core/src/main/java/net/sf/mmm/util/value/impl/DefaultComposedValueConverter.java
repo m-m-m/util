@@ -54,6 +54,7 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
     addConverterComponent(new ValueConverterToNumber());
     addConverterComponent(new ValueConverterToString());
     addConverterComponent(new ValueConverterToEnum());
+    addConverterComponent(new ValueConverterToCompatiblePojo());
     addConverterComponent(new ValueConverterToCollection());
     addConverterComponent(new ValueConverterToArrayOfBoolean());
     addConverterComponent(new ValueConverterToArrayOfByte());

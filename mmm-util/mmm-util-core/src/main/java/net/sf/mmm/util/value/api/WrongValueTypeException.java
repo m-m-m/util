@@ -23,7 +23,7 @@ public class WrongValueTypeException extends ValueException {
   private static final String KEY_VALUE_TYPE = "valueType";
 
   /** key for the NLS message. */
-  private static final String KEY_EXPECTED_TYPE = "expectedType";
+  private static final String KEY_TARGET_TYPE = "targetType";
 
   /**
    * The constructor.
@@ -34,7 +34,7 @@ public class WrongValueTypeException extends ValueException {
   public WrongValueTypeException(Object value, Type expectedType) {
 
     super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE,
-        getType(value), KEY_EXPECTED_TYPE, expectedType));
+        getType(value), KEY_TARGET_TYPE, expectedType));
   }
 
   /**
@@ -47,7 +47,7 @@ public class WrongValueTypeException extends ValueException {
   public WrongValueTypeException(Throwable nested, Object value, Type expectedType) {
 
     super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE,
-        getType(value), KEY_EXPECTED_TYPE, expectedType));
+        getType(value), KEY_TARGET_TYPE, expectedType));
   }
 
   /**
@@ -63,7 +63,7 @@ public class WrongValueTypeException extends ValueException {
   public WrongValueTypeException(Object value, Object valueSource, Type expectedType) {
 
     super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, addToMap(toMap(KEY_VALUE, value,
-        KEY_VALUE_TYPE, getType(value), KEY_EXPECTED_TYPE, expectedType), KEY_SOURCE, valueSource));
+        KEY_VALUE_TYPE, getType(value), KEY_TARGET_TYPE, expectedType), KEY_SOURCE, valueSource));
   }
 
   /**
@@ -81,7 +81,7 @@ public class WrongValueTypeException extends ValueException {
       Class<?> expectedType) {
 
     super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, addToMap(toMap(KEY_VALUE, value,
-        KEY_VALUE_TYPE, getType(value), KEY_EXPECTED_TYPE, expectedType), KEY_SOURCE, valueSource));
+        KEY_VALUE_TYPE, getType(value), KEY_TARGET_TYPE, expectedType), KEY_SOURCE, valueSource));
   }
 
   /**

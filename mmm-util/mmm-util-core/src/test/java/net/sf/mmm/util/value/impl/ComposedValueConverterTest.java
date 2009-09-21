@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,11 @@ import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
+import net.sf.mmm.util.value.impl.pojo1.FooEnum;
+import net.sf.mmm.util.value.impl.pojo1.MyPojoImpl;
+import net.sf.mmm.util.value.impl.pojo1.SubPojo;
+import net.sf.mmm.util.value.impl.pojo1.SubPojoImpl;
+import net.sf.mmm.util.value.impl.pojo2.MyPojo;
 
 /**
  * This is the test-case for {@link ComposedValueConverterImpl}.
@@ -77,33 +83,33 @@ public class ComposedValueConverterTest {
   public void testConvert2Calendar() throws Exception {
 
     ComposedValueConverter converter = getComposedValueConverter();
-    Object value;
+    Calendar value;
     String valueSource = "test-case";
     // convert to calendar
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
     Date date = calendar.getTime();
-    value = converter.convert(date, valueSource, Calendar.class);
+    value = converter.convertValue(date, valueSource, Calendar.class);
     Assert.assertEquals(calendar, value);
     String calendarString = Iso8601UtilImpl.getInstance().formatDateTime(calendar);
-    value = converter.convert(calendarString, valueSource, Calendar.class);
-    Assert.assertEquals(calendar.getTime(), ((Calendar) value).getTime());
+    value = converter.convertValue(calendarString, valueSource, Calendar.class);
+    Assert.assertEquals(calendar.getTime(), value.getTime());
   }
 
   @Test
   public void testConvert2String() throws Exception {
 
     ComposedValueConverter converter = getComposedValueConverter();
-    Object value;
+    String value;
     String valueSource = "test-case";
     // convert to string
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
     Date date = calendar.getTime();
     String dateString = Iso8601UtilImpl.getInstance().formatDateTime(date);
-    value = converter.convert(date, valueSource, String.class);
+    value = converter.convertValue(date, valueSource, String.class);
     Assert.assertEquals(dateString, value);
-    value = converter.convert(String.class, valueSource, String.class);
+    value = converter.convertValue(String.class, valueSource, String.class);
     Assert.assertEquals(String.class.getName(), value);
   }
 
@@ -111,15 +117,16 @@ public class ComposedValueConverterTest {
   public void testConvert2Enum() throws Exception {
 
     ComposedValueConverter converter = getComposedValueConverter();
-    Object value;
     String valueSource = "test-case";
     // convert to enum
-    value = converter.convert(TestEnum.SOME_ENUM_CONSTANT, valueSource, String.class);
+    String valueString = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT, valueSource,
+        String.class);
     String someEnumConstant = "SomeEnumConstant";
-    Assert.assertEquals(someEnumConstant, value);
-    value = converter.convert(someEnumConstant, valueSource, TestEnum.class);
+    Assert.assertEquals(someEnumConstant, valueString);
+    TestEnum value;
+    value = converter.convertValue(someEnumConstant, valueSource, TestEnum.class);
     Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
-    value = converter.convert(TestEnum.SOME_ENUM_CONSTANT.name(), valueSource, TestEnum.class);
+    value = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT.name(), valueSource, TestEnum.class);
     Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
   }
 
@@ -127,19 +134,18 @@ public class ComposedValueConverterTest {
   public void testConvert2Collection() throws Exception {
 
     ComposedValueConverter converter = getComposedValueConverter();
-    Object value;
+    List value;
     String valueSource = "test-case";
     // convert to collection
     String first = "first";
     String second = "2nd";
     String third = "3.";
     String[] array = new String[] { first, second, third };
-    value = converter.convert(array, valueSource, List.class);
+    value = converter.convertValue(array, valueSource, List.class);
     Assert.assertNotNull(value);
-    List list = (List) value;
-    Assert.assertEquals(array.length, list.size());
+    Assert.assertEquals(array.length, value.size());
     for (int index = 0; index < array.length; index++) {
-      Assert.assertSame(array[index], list.get(index));
+      Assert.assertSame(array[index], value.get(index));
     }
     StringBuilder buffer = new StringBuilder();
     for (int index = 0; index < array.length; index++) {
@@ -148,12 +154,11 @@ public class ComposedValueConverterTest {
         buffer.append(',');
       }
     }
-    value = converter.convert(buffer.toString(), valueSource, List.class);
+    value = converter.convertValue(buffer.toString(), valueSource, List.class);
     Assert.assertNotNull(value);
-    list = (List) value;
-    Assert.assertEquals(array.length, list.size());
+    Assert.assertEquals(array.length, value.size());
     for (int index = 0; index < array.length; index++) {
-      Assert.assertEquals(array[index], list.get(index));
+      Assert.assertEquals(array[index], value.get(index));
     }
   }
 
@@ -200,6 +205,39 @@ public class ComposedValueConverterTest {
       Assert.assertEquals(intArray[i], intArray2[i]);
     }
 
+  }
+
+  @Test
+  public void testConvert2CompatiblePojo() throws Exception {
+
+    ComposedValueConverter converter = getComposedValueConverter();
+    String valueSource = "test-case";
+    MyPojoImpl pojo = new MyPojoImpl();
+    List<SubPojo> subPojos = new ArrayList<SubPojo>();
+    SubPojoImpl subPojo;
+    subPojo = new SubPojoImpl();
+    subPojo.setFoo(FooEnum.SOME_THING);
+    subPojo.setInteger(42);
+    subPojo.setString("Hello world!");
+    subPojos.add(subPojo);
+    subPojo = new SubPojoImpl();
+    subPojo.setFoo(FooEnum.FOO_BAR);
+    subPojo.setInteger(4711);
+    subPojo.setString("Magic");
+    subPojos.add(subPojo);
+    pojo.setSubPojos(subPojos);
+    MyPojo result = converter.convertValue(pojo, valueSource, MyPojo.class);
+    Assert.assertNotNull(result);
+    List<net.sf.mmm.util.value.impl.pojo2.SubPojo> newSubPojos = result.getSubPojos();
+    Assert.assertEquals(subPojos.size(), newSubPojos.size());
+    for (int i = 0; i < subPojos.size(); i++) {
+      SubPojo sp1 = subPojos.get(i);
+      net.sf.mmm.util.value.impl.pojo2.SubPojo sp2 = newSubPojos.get(i);
+      Assert.assertNotNull(sp2);
+      Assert.assertEquals(Integer.valueOf(sp1.getInteger()), sp2.getInteger());
+      Assert.assertEquals(sp1.getString(), sp2.getString());
+      Assert.assertEquals(sp1.getFoo().name(), sp2.getFoo().name());
+    }
   }
 
   protected void addConverter(ComposedValueConverterImpl composedConverter,

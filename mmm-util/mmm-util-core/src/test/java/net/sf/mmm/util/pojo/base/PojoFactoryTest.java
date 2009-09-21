@@ -27,7 +27,9 @@ public class PojoFactoryTest {
 
   protected PojoFactory getPojoFactory() {
 
-    return new DefaultPojoFactory();
+    DefaultPojoFactory factory = new DefaultPojoFactory();
+    factory.initialize();
+    return factory;
   }
 
   @Test

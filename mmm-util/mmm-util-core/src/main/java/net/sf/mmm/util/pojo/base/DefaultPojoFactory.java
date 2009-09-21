@@ -6,6 +6,9 @@ package net.sf.mmm.util.pojo.base;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
@@ -29,7 +32,8 @@ public class DefaultPojoFactory extends SimplePojoFactory {
    */
   public DefaultPojoFactory() {
 
-    this(CollectionFactoryManagerImpl.getInstance());
+    super();
+    this.collectionFactoryManager = null;
   }
 
   /**
@@ -56,6 +60,29 @@ public class DefaultPojoFactory extends SimplePojoFactory {
   }
 
   /**
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager}
+   *        instance used to create {@link Map}s and {@link Collection}s.
+   */
+  @Resource
+  public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.collectionFactoryManager = collectionFactoryManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.collectionFactoryManager == null) {
+      this.collectionFactoryManager = CollectionFactoryManagerImpl.getInstance();
+    }
+  }
+
+  /**
    * This method is invoked from {@link #newInstance(Class)} if the given
    * {@link Class} is an {@link Class#isInterface() interface}.
    * 
@@ -66,13 +93,18 @@ public class DefaultPojoFactory extends SimplePojoFactory {
    * @return the new instance of the given <code>pojoType</code>.
    * @throws InstantiationFailedException if the instantiation failed.
    */
+  @Override
   @SuppressWarnings("unchecked")
   protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface)
       throws InstantiationFailedException {
 
     if (Collection.class.isAssignableFrom(pojoInterface)) {
-      return pojoInterface.cast(getCollectionFactoryManager().getCollectionFactory(
-          (Class<? extends Collection>) pojoInterface).createGeneric());
+      CollectionFactory<? extends Collection> collectionFactory = getCollectionFactoryManager()
+          .getCollectionFactory((Class<? extends Collection>) pojoInterface);
+      if (collectionFactory == null) {
+        throw new InstantiationFailedException(pojoInterface);
+      }
+      return pojoInterface.cast(collectionFactory.createGeneric());
     } else if (Map.class.isAssignableFrom(pojoInterface)) {
       MapFactory mapFactory = getCollectionFactoryManager().getMapFactory(
           (Class<? extends Map>) pojoInterface);
@@ -81,24 +113,7 @@ public class DefaultPojoFactory extends SimplePojoFactory {
       }
       return pojoInterface.cast(mapFactory.createGeneric());
     }
-    throw new InstantiationFailedException(pojoInterface);
+    return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public <POJO> POJO newInstance(Class<POJO> pojoType) throws InstantiationFailedException {
-
-    try {
-      if (pojoType.isInterface()) {
-        return newInstanceForInterface(pojoType);
-      }
-      return super.newInstance(pojoType);
-    } catch (InstantiationFailedException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new InstantiationFailedException(e, pojoType);
-    }
-  }
 }

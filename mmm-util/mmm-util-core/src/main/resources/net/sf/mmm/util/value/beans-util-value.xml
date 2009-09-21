@@ -2,22 +2,28 @@
 <!-- $Id$ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
   
   <import resource="classpath:net/sf/mmm/util/lang/beans-util-lang.xml" />
   <import resource="classpath:net/sf/mmm/util/math/beans-util-math.xml" />
   <import resource="classpath:net/sf/mmm/util/date/beans-util-date.xml" />
   <import resource="classpath:net/sf/mmm/util/reflect/beans-util-reflect.xml" />
+  <import resource="classpath:net/sf/mmm/util/pojo/beans-util-pojo.xml" />
+  <import resource="classpath:net/sf/mmm/util/pojo/descriptor/beans-util-pojo-descriptor.xml" />
 
   <bean id="net.sf.mmm.util.value.api.StringValueConverter" class="net.sf.mmm.util.value.base.StringValueConverterImpl"/>
   <bean id="net.sf.mmm.util.value.api.ComposedValueConverter" class="net.sf.mmm.util.value.impl.ComposedValueConverterImpl">
     <property name="converters">
-      <list>
+      <util:list>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToDate"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCalendar"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToNumber"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToString"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToEnum"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToCompatiblePojo"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCollection"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfBoolean"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfByte"/>
@@ -27,7 +33,7 @@
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfLong"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfObject"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfShort"/>
-      </list>
+      </util:list>
     </property>
   </bean>
   

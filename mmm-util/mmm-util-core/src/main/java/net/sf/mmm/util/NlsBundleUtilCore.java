@@ -19,7 +19,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.value.api.WrongValueTypeException */
   public static final String ERR_VALUE_WRONG_TYPE_SOURCE = "The value \"{value}\" "
-      + "from \"{3}\" with the type \"{valueType}\" can NOT be converted to the requested type \"{targetType}\"!";
+      + "from \"{source}\" with the type \"{valueType}\" can NOT be converted to the requested type \"{targetType}\"!";
 
   /** @see net.sf.mmm.util.value.api.ValueNotSetException */
   public static final String ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!";

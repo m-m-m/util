@@ -5,7 +5,9 @@ package net.sf.mmm.util.value.impl;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -125,6 +127,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public Object convert(Object value, Object valueSource, GenericType<? extends Object> targetType) {
 
     if (value == null) {
@@ -144,7 +147,52 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     }
     Class<? extends Object> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
-      return value;
+      // generic collections or maps might need converting of their items...
+      boolean conversionRequired = false;
+      if (value instanceof Collection<?>) {
+        Collection<?> collection = (Collection<?>) value;
+        // find first non-null item...
+        Iterator<?> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+          Object item = iterator.next();
+          if (item != null) {
+            GenericType<?> itemType = getReflectionUtil().createGenericType(item.getClass());
+            GenericType<?> componentType = targetType.getComponentType();
+            if (!componentType.isAssignableFrom(itemType)) {
+              conversionRequired = true;
+            }
+            break;
+          }
+        }
+      } else if (value instanceof Map<?, ?>) {
+        conversionRequired = true;
+        // bug: does not compile if unbound wildcards are used
+        Map map = (Map) value;
+        // find first non-null item...
+        if (map.isEmpty()) {
+          Iterator<Map.Entry> iterator = map.entrySet().iterator();
+          while (iterator.hasNext()) {
+            Map.Entry entry = iterator.next();
+            Object item = entry.getValue();
+            if (item != null) {
+              Object key = entry.getKey();
+              GenericType<?> itemType = getReflectionUtil().createGenericType(item.getClass());
+              GenericType<?> componentType = targetType.getComponentType();
+              if (!componentType.isAssignableFrom(itemType)) {
+                conversionRequired = true;
+              }
+              if (key != null) {
+                // currently we do not care about the key...
+              }
+              break;
+            }
+          }
+        }
+      }
+      if (!conversionRequired) {
+        getLogger().trace("Value is already an instance of expected type.");
+        return value;
+      }
     }
     TargetClass2ConverterMap converterMap;
     if (targetClass.isArray()) {
@@ -304,7 +352,11 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
             }
           }
         }
-        currentClass = currentClass.getSuperclass();
+        if ((currentClass.isInterface()) && (targetType.getRetrievalClass() == currentClass)) {
+          currentClass = Object.class;
+        } else {
+          currentClass = currentClass.getSuperclass();
+        }
       }
     } catch (ValueException e) {
       throw e;
@@ -446,7 +498,12 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
             convertRecursive(value, valueSource, genericTargetType, superInterface);
           }
         }
-        currentClass = currentClass.getSuperclass();
+        // TODO:
+        if (currentClass.isInterface() && (value.getClass() == currentClass)) {
+          currentClass = Object.class;
+        } else {
+          currentClass = currentClass.getSuperclass();
+        }
       }
       return null;
     }

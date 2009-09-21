@@ -4,5 +4,6 @@
 <beans>
   <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
 
-  <bean id="net.sf.mmm.util.pojo.api.PojoFactory" class="net.sf.mmm.util.pojo.base.DefaultPojoFactory"/>
+  <!-- <bean id="net.sf.mmm.util.pojo.api.PojoFactory" class="net.sf.mmm.util.pojo.base.DefaultPojoFactory"/>  -->
+  <bean id="net.sf.mmm.util.pojo.api.PojoFactory" class="net.sf.mmm.util.pojo.base.GuessingPojoFactory"/>
 </beans>
