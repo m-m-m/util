@@ -5,6 +5,7 @@ package net.sf.mmm.util.pojo.path.impl;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
@@ -119,7 +120,11 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
       Object parentPojo = parentPath.getPojo();
       result = getter.invoke(parentPojo);
       if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {
-        result = context.getPojoFactory().newInstance(pojoClass);
+        PojoFactory factory = context.getPojoFactory();
+        if (factory == null) {
+          factory = getPojoFactory();
+        }
+        result = factory.newInstance(pojoClass);
         setInPojo(currentPath, context, state, parentPojo, result);
       }
     }

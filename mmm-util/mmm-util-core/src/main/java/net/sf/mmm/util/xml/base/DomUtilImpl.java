@@ -54,7 +54,7 @@ import net.sf.mmm.util.xml.api.XmlException;
  * {@link org.w3c.dom.Node DOM} API.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.0.2
  */
 public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
 

@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
  * {@link net.sf.mmm.util.io.api.DetectorOutputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class ProcessableDetectorInputStream extends ProcessableDetectorStream implements
     DetectorInputStream {

@@ -22,14 +22,14 @@ public interface PojoPathContext {
   /**
    * This method provides a cache that is used by the {@link PojoPathNavigator}
    * to speed up repetitive calls with the same initial
-   * {@link net.sf.mmm.util.pojo.api.Pojo} and {@link PojoPath}s with a
-   * common prefix.<br>
+   * {@link net.sf.mmm.util.pojo.api.Pojo} and {@link PojoPath}s with a common
+   * prefix.<br>
    * <b>WARNING:</b><br>
    * If caching is enabled and the initial or an intermediate
    * {@link net.sf.mmm.util.pojo.api.Pojo} changed outside the
-   * {@link PojoPathNavigator#set(Object, String, PojoPathMode, PojoPathContext, Object) navigator}
-   * the result will be wrong because the evaluation used an old value from the
-   * cache.<br>
+   * {@link PojoPathNavigator#set(Object, String, PojoPathMode, PojoPathContext, Object)
+   * navigator} the result will be wrong because the evaluation used an old
+   * value from the cache.<br>
    * Please also note that the {@link PojoPathNavigator} only adds objects from
    * the {@link #getCache() cache}. It will never remove cached objects. To
    * avoid memory-leaks, you should use a {@link PojoPathContext} instance only
@@ -38,9 +38,8 @@ public interface PojoPathContext {
    * Never make assumptions about the content of this cache. It is provided here
    * to allow the {@link PojoPathNavigator} to be thread-safe and more efficient
    * and NOT to expose it for external usage. The internal structure of the
-   * cache may change in future releases. Use the
-   * {@link #getRecognizer() recognizer} to track visited
-   * {@link net.sf.mmm.util.pojo.api.Pojo}s.<br>
+   * cache may change in future releases. Use the {@link #getRecognizer()
+   * recognizer} to track visited {@link net.sf.mmm.util.pojo.api.Pojo}s.<br>
    * 
    * @see java.util.HashMap
    * @see java.util.WeakHashMap
@@ -77,11 +76,11 @@ public interface PojoPathContext {
    * This method gets an optional {@link PojoPathFunctionManager}.
    * {@link PojoPathFunction}s
    * {@link PojoPathFunctionManager#getFunction(String) provided} by this
-   * manager overrules the {@link PojoPathFunction}s that may be provided by
-   * the {@link PojoPathNavigator} itself. While {@link PojoPathFunction}s that
-   * may be registered globally in the {@link PojoPathNavigator} should be
-   * stateless and thread-safe, the {@link PojoPathFunction}s provided here may
-   * be stateful depending on the usage of this context.
+   * manager overrules the {@link PojoPathFunction}s that may be provided by the
+   * {@link PojoPathNavigator} itself. While {@link PojoPathFunction}s that may
+   * be registered globally in the {@link PojoPathNavigator} should be stateless
+   * and thread-safe, the {@link PojoPathFunction}s provided here may be
+   * stateful depending on the usage of this context.
    * 
    * @return the {@link PojoPathFunctionManager} of this context or
    *         <code>null</code> if no context-specific {@link PojoPathFunction}s
@@ -101,11 +100,13 @@ public interface PojoPathContext {
   ComposedValueConverter getAdditionalConverter();
 
   /**
-   * This method gets the {@link PojoFactory} instance used to
-   * {@link PojoPathMode#CREATE_IF_NULL create} new
-   * {@link net.sf.mmm.util.pojo.api.Pojo}s.
+   * This method gets an optional {@link PojoFactory} instance used if favor to
+   * the {@link PojoFactory} registered to the {@link PojoPathNavigator} itself.
+   * The {@link PojoFactory} is used to {@link PojoPathMode#CREATE_IF_NULL
+   * create} new {@link net.sf.mmm.util.pojo.api.Pojo}s.
    * 
-   * @return the {@link PojoFactory}.
+   * @return the {@link PojoFactory} or <code>null</code> if no context-specific
+   *         {@link PojoFactory} is provided.
    */
   PojoFactory getPojoFactory();
 

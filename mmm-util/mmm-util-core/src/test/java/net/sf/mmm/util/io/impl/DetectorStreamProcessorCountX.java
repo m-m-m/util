@@ -14,7 +14,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
  * number of bytes that are equal to the ASCII-char 'x'.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class DetectorStreamProcessorCountX implements DetectorStreamProcessor {
 

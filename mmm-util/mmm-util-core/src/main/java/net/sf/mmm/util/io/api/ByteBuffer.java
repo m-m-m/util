@@ -7,7 +7,7 @@ package net.sf.mmm.util.io.api;
  * This is the interface for a buffer of bytes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public interface ByteBuffer extends ByteIterator, ByteProvider {
 }

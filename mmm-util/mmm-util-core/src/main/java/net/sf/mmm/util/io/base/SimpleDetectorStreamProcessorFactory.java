@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * {@link net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class SimpleDetectorStreamProcessorFactory extends AbstractDetectorStreamProcessorFactory {
 

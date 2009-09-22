@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
  * XML-header of a stream.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.0.2
  */
 final class XmlInputStream extends InputStream {
 

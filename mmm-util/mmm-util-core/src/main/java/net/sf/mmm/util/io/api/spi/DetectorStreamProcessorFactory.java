@@ -10,7 +10,7 @@ package net.sf.mmm.util.io.api.spi;
  * @see net.sf.mmm.util.io.api.DetectorStream
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public interface DetectorStreamProcessorFactory {
 

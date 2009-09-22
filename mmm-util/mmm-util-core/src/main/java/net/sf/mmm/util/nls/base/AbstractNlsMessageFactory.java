@@ -15,7 +15,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
  * This is the implementation of the {@link NlsMessageFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public abstract class AbstractNlsMessageFactory implements NlsMessageFactory {
 

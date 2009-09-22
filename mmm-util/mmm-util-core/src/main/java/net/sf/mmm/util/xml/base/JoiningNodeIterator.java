@@ -16,7 +16,7 @@ import net.sf.mmm.util.xml.api.XmlCompareMode;
  * types} by returning them as a {@link org.w3c.dom.DocumentFragment}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.0.2
  */
 class JoiningNodeIterator extends NodeIterator {
 

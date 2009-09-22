@@ -23,7 +23,7 @@ import org.xml.sax.InputSource;
  * with the {@link org.w3c.dom.Node DOM} API.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.0.2
  */
 public interface DomUtil {
 

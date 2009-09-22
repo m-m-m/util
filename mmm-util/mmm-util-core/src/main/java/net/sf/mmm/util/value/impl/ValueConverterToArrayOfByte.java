@@ -9,7 +9,7 @@ package net.sf.mmm.util.value.impl;
  * {@link Object} to <code>byte[]</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class ValueConverterToArrayOfByte extends AbstractConverterToArray<byte[]> {
 

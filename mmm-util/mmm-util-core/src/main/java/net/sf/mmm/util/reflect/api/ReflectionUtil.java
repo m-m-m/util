@@ -282,7 +282,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return a {@link Set} with the fully qualified names of all requested
    *         classes.
    * @throws IOException if the operation failed with an I/O error.
-   * @since 1.0.3
+   * @since 1.1.0
    */
   Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter)
       throws IOException;
@@ -306,7 +306,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return a {@link Set} with the fully qualified names of all requested
    *         classes.
    * @throws IOException if the operation failed with an I/O error.
-   * @since 1.0.3
+   * @since 1.1.0
    */
   Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
       ClassLoader classLoader) throws IOException;
@@ -397,7 +397,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return a {@link Set} with the fully qualified names of all requested
    *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
    * @throws IOException if the operation failed with an I/O error.
-   * @since 1.0.3
+   * @since 1.1.0
    */
   Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<String> filter) throws IOException;
@@ -423,7 +423,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return a {@link Set} with the fully qualified names of all requested
    *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
    * @throws IOException if the operation failed with an I/O error.
-   * @since 1.0.3
+   * @since 1.1.0
    */
   Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<String> filter, ClassLoader classLoader) throws IOException;
@@ -444,7 +444,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        ".class" or only accept resources that end with ".xml".
    * @return a {@link Set} with all requested {@link DataResource resources}.
    * @throws IOException if the operation failed with an I/O error.
-   * @since 1.0.3
+   * @since 1.1.0
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<String> filter) throws IOException;
@@ -466,7 +466,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @return a {@link Set} with all requested {@link DataResource resources}.
    * @throws IOException if the operation failed with an I/O error.
-   * @since 1.0.3
+   * @since 1.1.0
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<String> filter, ClassLoader classLoader) throws IOException;

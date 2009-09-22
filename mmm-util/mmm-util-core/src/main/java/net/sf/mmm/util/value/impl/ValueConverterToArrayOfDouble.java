@@ -9,7 +9,7 @@ package net.sf.mmm.util.value.impl;
  * {@link Object} to <code>double[]</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class ValueConverterToArrayOfDouble extends AbstractConverterToArray<double[]> {
 

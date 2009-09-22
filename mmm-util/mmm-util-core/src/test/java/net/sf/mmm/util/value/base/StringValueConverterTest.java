@@ -146,7 +146,7 @@ public class StringValueConverterTest {
       // expected
       assertEquals(noIntegerValue, e.getNlsMessage().getArgument("value"));
       assertEquals(String.class, e.getNlsMessage().getArgument("valueType"));
-      assertEquals(Integer.class, e.getNlsMessage().getArgument("expectedType"));
+      assertEquals(Integer.class, e.getNlsMessage().getArgument("targetType"));
       assertEquals(source, e.getNlsMessage().getArgument("source"));
     }
     // value not set

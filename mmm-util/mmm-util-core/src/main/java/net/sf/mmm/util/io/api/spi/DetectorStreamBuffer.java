@@ -11,7 +11,7 @@ import net.sf.mmm.util.io.api.ComposedByteBuffer;
  * consume such bytes in order to detect metadata or even manipulate the stream.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public interface DetectorStreamBuffer extends ComposedByteBuffer {
 

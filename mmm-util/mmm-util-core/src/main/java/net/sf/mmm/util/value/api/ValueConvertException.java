@@ -13,11 +13,11 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * value failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class ValueConvertException extends ValueException {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = 9211949231445626445L;
 
   /**

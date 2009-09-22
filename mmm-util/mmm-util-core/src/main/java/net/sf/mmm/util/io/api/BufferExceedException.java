@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * bytes or chars) is exceeded (e.g. offset or length are out of range).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class BufferExceedException extends NlsRuntimeException {
 

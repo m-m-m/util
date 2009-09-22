@@ -16,11 +16,12 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * <ul>
  * <li><code>some.package.api.FooImpl</code></li>
  * <li><code>some.package.api.impl.FooImpl</code></li>
- * <li><code>some.package.impl.FooImpl</code></li>
+ * <li><code>some.package.impl.FooImpl</code> (only if package of interface ends
+ * with ".api")</li>
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class GuessingPojoFactory extends DefaultPojoFactory {
 

@@ -17,6 +17,8 @@ import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.pojo.api.PojoFactory;
+import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.pojo.path.api.PojoPathAccessException;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
@@ -65,6 +67,9 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
   /** @see #getValueConverter() */
   private ComposedValueConverter valueConverter;
+
+  /** @see #getPojoFactory() */
+  private PojoFactory pojoFactory;
 
   /**
    * The constructor.
@@ -169,6 +174,31 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   }
 
   /**
+   * This method gets the {@link PojoFactory} instance used to
+   * {@link PojoPathMode#CREATE_IF_NULL create} new
+   * {@link net.sf.mmm.util.pojo.api.Pojo}s.
+   * 
+   * @see PojoPathContext#getPojoFactory()
+   * 
+   * @return the {@link PojoFactory} to use.
+   */
+  protected PojoFactory getPojoFactory() {
+
+    return this.pojoFactory;
+  }
+
+  /**
+   * This method sets the {@link #getPojoFactory() PojoFactory to use}.
+   * 
+   * @param pojoFactory is the {@link PojoFactory} to use.
+   */
+  @Resource
+  public void setPojoFactory(PojoFactory pojoFactory) {
+
+    this.pojoFactory = pojoFactory;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -185,6 +215,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       DefaultComposedValueConverter converter = new DefaultComposedValueConverter();
       converter.initialize();
       this.valueConverter = converter;
+    }
+    if (this.pojoFactory == null) {
+      GuessingPojoFactory factory = new GuessingPojoFactory();
+      factory.initialize();
+      this.pojoFactory = factory;
     }
   }
 
@@ -600,7 +635,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     }
     Object result;
     try {
-      result = context.getPojoFactory().newInstance(pojoClass);
+      PojoFactory factory = context.getPojoFactory();
+      if (factory == null) {
+        factory = this.pojoFactory;
+      }
+      result = factory.newInstance(pojoClass);
     } catch (RuntimeException e) {
       throw new PojoPathCreationException(e, state.rootPath.pojo, currentPath.getPojoPath());
     }

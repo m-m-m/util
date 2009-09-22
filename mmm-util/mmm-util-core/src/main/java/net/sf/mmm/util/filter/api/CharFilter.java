@@ -29,7 +29,7 @@ public interface CharFilter {
    * A filter that {@link #accept(char) accepts} only the Latin digits '0'-'9'
    * or ASCII letters 'a'-'z' and 'A'-'Z'.
    * 
-   * @since 1.0.3
+   * @since 1.1.0
    */
   CharFilter LATIN_DIGIT_OR_LETTER_FILTER = new CharFilter() {
 

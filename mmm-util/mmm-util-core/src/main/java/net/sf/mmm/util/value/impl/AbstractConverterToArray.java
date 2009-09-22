@@ -23,7 +23,7 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  *        target-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public abstract class AbstractConverterToArray<ARRAY> extends
     AbstractRecursiveValueConverter<Object, ARRAY> {

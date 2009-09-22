@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * serialization or parsing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.0.2
  */
 public abstract class XmlException extends NlsRuntimeException {
 

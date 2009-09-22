@@ -31,7 +31,7 @@ import java.util.Map;
  * @see DetectorStreamProcessorFactory
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public interface DetectorStreamProcessor {
 

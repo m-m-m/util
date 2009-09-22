@@ -12,7 +12,7 @@ import net.sf.mmm.util.xml.api.XmlException;
  * in.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class XmlInvalidException extends XmlException {
 

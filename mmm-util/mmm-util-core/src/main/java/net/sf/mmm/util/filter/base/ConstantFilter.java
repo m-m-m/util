@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
  * @param <V> is the generic type of the filtered objects.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 @SuppressWarnings("unchecked")
 public final class ConstantFilter<V> implements Filter<V> {

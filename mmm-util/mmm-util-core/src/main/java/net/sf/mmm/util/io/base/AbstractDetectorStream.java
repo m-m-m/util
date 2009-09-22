@@ -13,7 +13,7 @@ import net.sf.mmm.util.io.api.DetectorStream;
  * This is the abstract base implementation of a {@link DetectorStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public abstract class AbstractDetectorStream implements DetectorStream {
 

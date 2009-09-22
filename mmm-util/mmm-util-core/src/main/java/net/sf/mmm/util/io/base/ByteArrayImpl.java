@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @see java.nio.ByteBuffer#wrap(byte[], int, int)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class ByteArrayImpl extends AbstractByteArray {
 

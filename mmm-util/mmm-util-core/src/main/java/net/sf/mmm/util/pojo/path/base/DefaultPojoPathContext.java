@@ -6,8 +6,6 @@ package net.sf.mmm.util.pojo.path.base;
 import java.util.HashMap;
 import java.util.Properties;
 
-import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
-
 /**
  * This is the default implementation of the
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathContext} interface.
@@ -24,6 +22,5 @@ public class DefaultPojoPathContext extends PojoPathContextBean {
     super();
     setCache(new HashMap<Object, Object>());
     setProperties(new Properties());
-    setPojoFactory(new DefaultPojoFactory());
   }
 }

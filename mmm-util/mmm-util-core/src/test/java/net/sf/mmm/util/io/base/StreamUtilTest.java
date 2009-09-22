@@ -17,16 +17,17 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.concurrent.ExecutionException;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
-import net.sf.mmm.util.concurrent.base.SimpleExecutor;
+import net.sf.mmm.logging.TestLogger;
+import net.sf.mmm.logging.TestLogger.LogEvent;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.io.api.DevZero;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
-import net.sf.mmm.util.pool.base.NoByteArrayPool;
-import net.sf.mmm.util.pool.base.NoCharArrayPool;
 
 /**
  * This is the test-case for {@link StreamUtilImpl}.
@@ -168,10 +169,8 @@ public class StreamUtilTest {
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     Callback callback = new Callback();
     StreamUtilImpl streamUtil = new StreamUtilImpl();
-    streamUtil.setExecutor(SimpleExecutor.INSTANCE);
-    // streamUtil.setLogger(new NoOpLog());
-    streamUtil.setByteArrayPool(NoByteArrayPool.INSTANCE);
-    streamUtil.setCharArrayPool(NoCharArrayPool.INSTANCE);
+    TestLogger logger = new TestLogger();
+    streamUtil.setLogger(logger);
     streamUtil.initialize();
     AsyncTransferrer transferrer = streamUtil.transferAsync(inStream, outStream, true, callback);
     try {
@@ -185,6 +184,13 @@ public class StreamUtilTest {
     }
     assertEquals(0, outStream.size());
     assertSame(error, callback.exception);
+    boolean errorWasLogged = false;
+    for (LogEvent logEvent : logger.getEventList()) {
+      if (logEvent.throwable == error) {
+        errorWasLogged = true;
+      }
+    }
+    Assert.assertTrue(errorWasLogged);
   }
 
   private static class Callback implements TransferCallback {

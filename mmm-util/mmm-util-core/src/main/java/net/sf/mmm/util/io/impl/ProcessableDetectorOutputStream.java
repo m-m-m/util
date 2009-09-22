@@ -18,7 +18,7 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
  * This is the implementation of the {@link DetectorOutputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class ProcessableDetectorOutputStream extends ProcessableDetectorStream implements
     DetectorOutputStream {

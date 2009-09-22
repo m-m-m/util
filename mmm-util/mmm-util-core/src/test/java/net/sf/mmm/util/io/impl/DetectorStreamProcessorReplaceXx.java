@@ -15,7 +15,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
  * sequence of two ASCII 'x' bytes with one ASCII 'y'.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public class DetectorStreamProcessorReplaceXx implements DetectorStreamProcessor {
 

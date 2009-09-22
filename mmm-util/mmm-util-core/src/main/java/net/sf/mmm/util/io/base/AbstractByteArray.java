@@ -10,7 +10,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * This is the abstract base implementation of the {@link ByteArray} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.3
+ * @since 1.1.0
  */
 public abstract class AbstractByteArray implements ByteArray {
 
