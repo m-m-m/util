@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!-- $Id$ -->
 <project>
   <modelVersion>4.0.0</modelVersion>
@@ -17,10 +17,10 @@
   <profiles>
     <profile>
       <id>java5</id>
-			<activation>
-				<jdk>1.5</jdk>
-			</activation>
-			<dependencies>      
+      <activation>
+        <jdk>1.5</jdk>
+      </activation>
+      <dependencies>      
         <dependency>
           <!-- only required for java5, included since java6 -->
           <groupId>stax</groupId>
@@ -36,7 +36,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>1.1.0</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
