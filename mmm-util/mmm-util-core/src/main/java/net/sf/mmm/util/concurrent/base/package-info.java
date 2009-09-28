@@ -6,8 +6,10 @@
  * <h2>Concurrent-Util Base</h2> 
  * This package provides {@link SimpleExecutor} that executes all 
  * {@link java.lang.Runnable}s in a new {@link java.lang.Thread}. 
- * It is used by some other utils as fallback but can be replaced easily with a
- * full-fledged thread-pool as provided via {@link CachedThreadPoolExecutor}.
+ * It is used by some other utilities as fallback but can be replaced easily 
+ * with a full-fledged thread-pool as provided via 
+ * {@link CachedThreadPoolExecutor}.
+ * 
  * @see java.util.concurrent.Executors
  */
 package net.sf.mmm.util.concurrent.base;
