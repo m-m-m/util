@@ -14,11 +14,11 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.content.parser.api.ContentParserService;
+import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
-import net.sf.mmm.search.parser.api.ContentParser;
-import net.sf.mmm.search.parser.api.ContentParserService;
-import net.sf.mmm.search.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.file.base.FileUtilImpl;

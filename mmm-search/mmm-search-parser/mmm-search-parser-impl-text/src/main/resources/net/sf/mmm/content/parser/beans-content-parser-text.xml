@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: $ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  
+  <import resource="classpath:net/sf/mmm/util/xml/beans-util-xml.xml" />
+  <!-- <bean id="net.sf.mmm.content.parser.api.ContentParser-txt" class="net.sf.mmm.content.parser.impl.ContentParserText"/> -->
+  <bean id="net.sf.mmm.content.parser.api.ContentParser-txt_with_markup" class="net.sf.mmm.content.parser.impl.ContentParserTextMarkupAware"/>
+  
+</beans>
