@@ -15,5 +15,7 @@
   <description>This project provides an indexer using the provided search-engine.</description>
   
   <modules>
+    <module>mmm-search-indexer-api</module>
+    <module>mmm-search-indexer-impl-lucene</module>
   </modules>
 </project>

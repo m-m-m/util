@@ -5,14 +5,14 @@
     <version>1.0.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>mmm-search-indexer-lucene</artifactId>
-  <name>search-indexer-lucene</name>
+  <artifactId>mmm-search-indexer-impl-lucene</artifactId>
+  <name>search-indexer-impl-lucene</name>
   <version>1.0.0-SNAPSHOT</version>
   <description>This project provides an indexer for the search-engine lucene.</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-indexer</artifactId>
+      <artifactId>mmm-search-indexer-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

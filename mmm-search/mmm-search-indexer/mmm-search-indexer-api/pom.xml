@@ -7,16 +7,16 @@
     <artifactId>mmm-search-engine</artifactId>
     <version>1.0.0</version>
   </parent>
-  <artifactId>mmm-search-indexer</artifactId>
+  <artifactId>mmm-search-indexer-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>search-indexer</name>
-  <description>This project provides an indexer using the provided search-engine.</description>
+  <name>search-indexer-api</name>
+  <description>This project provides the API of an indexer using the provided search-engine.</description>
   
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-service</artifactId>
+      <artifactId>mmm-content-parser-service</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
