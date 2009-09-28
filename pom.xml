@@ -31,6 +31,7 @@
     <!-- <module>mmm-gui</module> -->
     <module>mmm-util</module>
     <module>mmm-search</module>
+    <module>mmm-content-parser</module>
     <module>mmm-transaction</module>
     <module>mmm-persistence</module>
     <module>mmm-upnp</module>
@@ -409,8 +410,6 @@
         <configuration>
           <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
           <issueLinkTemplate>%URL%/ticket/%ISSUE%</issueLinkTemplate>
-          <!-- <link_template>%URL%/&#38;id=%ISSUE%</link_template>
-           -->
         </configuration>
         <reportSets>
           <reportSet>
