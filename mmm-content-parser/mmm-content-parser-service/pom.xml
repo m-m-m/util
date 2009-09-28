@@ -4,64 +4,64 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-search-parser</artifactId>
+    <artifactId>mmm-content-parser</artifactId>
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-search-parser-service</artifactId>
+  <artifactId>mmm-content-parser-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>search-parser-service</name>
+  <name>content-parser-service</name>
   <description>This project provides the actual service for content-parsers.</description>
   
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-api</artifactId>
+      <artifactId>mmm-content-parser-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-html</artifactId>
+      <artifactId>mmm-content-parser-impl-html</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-xml</artifactId>
+      <artifactId>mmm-content-parser-impl-xml</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-pdf</artifactId>
+      <artifactId>mmm-content-parser-impl-pdf</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <!-- MS-Office support -->
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-poi</artifactId>
+      <artifactId>mmm-content-parser-impl-poi</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-java</artifactId>
+      <artifactId>mmm-content-parser-impl-java</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <!-- Open-Office support -->
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-opendoc</artifactId>
+      <artifactId>mmm-content-parser-impl-opendoc</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-parser-impl-generic</artifactId>
+      <artifactId>mmm-content-parser-impl-generic</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

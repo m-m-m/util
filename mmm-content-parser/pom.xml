@@ -8,22 +8,22 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-search-parser</artifactId>
+  <artifactId>mmm-content-parser</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>search-parser</name>
+  <name>content-parser</name>
   <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
   
   <modules>
-    <module>mmm-search-parser-api</module>
-    <module>mmm-search-parser-impl-xml</module>
-    <module>mmm-search-parser-impl-html</module>
-    <module>mmm-search-parser-impl-pdf</module>
-    <module>mmm-search-parser-impl-poi</module>
-    <module>mmm-search-parser-impl-opendoc</module>
-    <module>mmm-search-parser-impl-generic</module>
-    <module>mmm-search-parser-impl-text</module>
-    <module>mmm-search-parser-impl-java</module>
-    <module>mmm-search-parser-service</module>
+    <module>mmm-content-parser-api</module>
+    <module>mmm-content-parser-impl-xml</module>
+    <module>mmm-content-parser-impl-html</module>
+    <module>mmm-content-parser-impl-pdf</module>
+    <module>mmm-content-parser-impl-poi</module>
+    <module>mmm-content-parser-impl-opendoc</module>
+    <module>mmm-content-parser-impl-generic</module>
+    <module>mmm-content-parser-impl-text</module>
+    <module>mmm-content-parser-impl-java</module>
+    <module>mmm-content-parser-service</module>
   </modules>  
 </project>
