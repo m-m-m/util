@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentParserGeneric extends AbstractContentParser implements
+public abstract class AbstractContentParserGeneric extends AbstractContentParserBase implements
     ContentParserGeneric {
 
   /**

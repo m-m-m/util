@@ -8,7 +8,6 @@ import java.util.Map;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.base.AbstractContentParserService;
-import net.sf.mmm.content.parser.impl.ContentParserGeneric;
 import net.sf.mmm.util.component.api.NotInitializedException;
 
 /**
@@ -64,9 +63,6 @@ public class ContentParserServiceImpl extends AbstractContentParserService {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (getGenericParser() == null) {
-      setGenericParser(new ContentParserGeneric());
-    }
     if (this.alias2keyMap == null) {
       this.alias2keyMap = new HashMap<String, String>();
       this.alias2keyMap.put("htm", "html");

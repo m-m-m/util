@@ -44,6 +44,9 @@ public class ContentParserServiceImplHardwired extends ContentParserServiceImpl 
   protected void doInitialize() {
 
     super.doInitialize();
+    if (getGenericParser() == null) {
+      setGenericParser(new ContentParserGeneric());
+    }
 
     addParser(new ContentParserPdf());
     addParser(new ContentParserHtml());
@@ -66,9 +69,9 @@ public class ContentParserServiceImplHardwired extends ContentParserServiceImpl 
     addParser(new ContentParserOtt());
 
     addParser(new ContentParserXml());
-    // even.txt files may contain markup (e.g. twiki data files).
     addParser(new ContentParserTextMarkupAware());
-    addParser(new ContentParserText());
+    // even.txt files may contain markup (e.g. twiki data files).
+    // addParser(new ContentParserText());
     addParser(new ContentParserJava());
 
     Map<String, String> alias2keyMap = new HashMap<String, String>();

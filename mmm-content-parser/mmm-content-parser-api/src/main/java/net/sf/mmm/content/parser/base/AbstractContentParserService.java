@@ -6,6 +6,8 @@ package net.sf.mmm.content.parser.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -82,6 +84,7 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
   /**
    * @param genericParser is the generic Parser to set.
    */
+  @Resource
   public void setGenericParser(ContentParserGeneric genericParser) {
 
     getInitializationState().requireNotInitilized();
@@ -110,7 +113,7 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
     // This method is called for injection after initialization
     // can NOT do: getInitializationState().requireNotInitilized();
     if (keys.length == 0) {
-      // TODO
+      // TODO NLS
       throw new NlsIllegalArgumentException("At least one extension is required!");
     }
     for (int i = 0; i < keys.length; i++) {

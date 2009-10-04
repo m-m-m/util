@@ -26,7 +26,7 @@ public class ContentParserTextMarkupAware extends AbstractContentParserText {
   @Override
   public String[] getRegistryKeys() {
 
-    return new String[] { "php", "jsp", "jinc", "asp" };
+    return new String[] { "txt", "php", "jsp", "jinc", "asp", "text/plain" };
   }
 
 }
