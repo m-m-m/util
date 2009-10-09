@@ -7,6 +7,12 @@
   </properties>
   <body>
     <release version="1.1.0" date="2009-09-26" description="Subsequent release">
+      <action dev="hohwille" type="add">
+        <![CDATA[Added <code>net.sf.mmm.util.context</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[Added <code>ConcurrentMapFactory</code>.]]>
+      </action>
       <action dev="hohwille" type="add" issue="3">
         <![CDATA[Merged <code>mmm-util-pojo</code> into <code>mmm-util-core</code>.]]>
       </action>
