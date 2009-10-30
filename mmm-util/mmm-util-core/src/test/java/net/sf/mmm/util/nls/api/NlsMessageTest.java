@@ -5,9 +5,12 @@ package net.sf.mmm.util.nls.api;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -131,6 +134,12 @@ public class NlsMessageTest {
     assertEquals(
         "Datum formatiert nach Locale: 31.12.99 23:59, nach ISO-8601: 1999-12-31T23:59:59+01:00 und nach individueller Vorlage: 1999.12.31-23:59:59+0100!",
         msg.getLocalizedMessage(Locale.GERMAN, resolver));
+    // test custom format
+    String customFormat = "yyyyMMdd";
+    msg = NlsAccess.getFactory().create("{date,date," + customFormat + "}", "date", date);
+    String expected = new SimpleDateFormat(customFormat).format(date);
+    // expected="19991231"
+    Assert.assertEquals(expected, msg.getMessage());
   }
 
   @Test
@@ -146,6 +155,30 @@ public class NlsMessageTest {
     assertEquals(
         "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
         msg.getLocalizedMessage(Locale.GERMANY, resolver));
+  }
+
+  /**
+   * 
+   */
+  @Test
+  public void testMessageFormatJustification() {
+
+    String key = "value";
+    Integer value = Integer.valueOf(42);
+
+    // right
+    NlsMessage msg = NlsAccess.getFactory().create("{" + key + "{0+4}}", key, value);
+    Assert.assertEquals("0042", msg.getMessage());
+    // left
+    msg = NlsAccess.getFactory().create("{" + key + "{.-4}}", key, value);
+    Assert.assertEquals("42..", msg.getMessage());
+    // center
+    msg = NlsAccess.getFactory().create("{" + key + "{_~11}}", key, value);
+    Assert.assertEquals("____42_____", msg.getMessage());
+    // combined
+    msg = NlsAccess.getFactory().create("Value {" + key + ",number,currency{_+15}}", key, value);
+    String message = msg.getLocalizedMessage(Locale.GERMANY);
+    Assert.assertEquals("Value ________42,00 €", message);
   }
 
   /**

@@ -17,42 +17,6 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 6002426164465970398L;
 
-  /** Key for the NLS message. */
-  protected static final String KEY_OBJECT = "object";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_KEY = "key";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_VALUE = "value";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_TYPE = "type";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_SOURCE = "source";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_MIN = "min";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_MAX = "max";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_RESOURCE = "resource";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_SIZE = "size";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_CAPACITY = "capacity";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_PROPERTY = "property";
-
-  /** Key for the NLS message. */
-  protected static final String KEY_PATH = "path";
-
   /**
    * The constructor.
    * 

@@ -6,6 +6,7 @@ package net.sf.mmm.util.resource.impl;
 import org.junit.AfterClass;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 
 /**
@@ -15,16 +16,13 @@ import net.sf.mmm.util.resource.api.DataResourceFactory;
  */
 public class DataResourceFactorySpringTest extends DataResourceFactoryTest {
 
-  /** @see SpringContainerPool */
-  private static final String SPRING_CONFIG = "net/sf/mmm/util/resource/beans-util-resource.xml";
-
   /**
    * {@inheritDoc}
    */
   @Override
   public DataResourceFactory getDataResourceFactory() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(DataResourceFactory.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_RESOURCE).getComponent(DataResourceFactory.class);
   }
 
   /**
@@ -33,7 +31,7 @@ public class DataResourceFactorySpringTest extends DataResourceFactoryTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SPRING_CONFIG);
+    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_RESOURCE);
   }
 
 }

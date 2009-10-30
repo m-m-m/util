@@ -33,6 +33,42 @@ import java.util.UUID;
  */
 public interface NlsThrowable extends NlsObject {
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_OBJECT = "object";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_KEY = "key";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_VALUE = "value";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_TYPE = "type";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_SOURCE = "source";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_MIN = "min";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_MAX = "max";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_RESOURCE = "resource";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_SIZE = "size";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_CAPACITY = "capacity";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_PROPERTY = "property";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_PATH = "path";
+
   /**
    * @return the {@link Throwable#getCause() cause}.
    */
@@ -116,8 +152,8 @@ public interface NlsThrowable extends NlsObject {
    * you supply the {@link UUID} to the end-user in case of an unexpected error,
    * he can easily find the stacktrace in the log-files.
    * 
-   * @return the uuid of this exception. It may be <code>null</code> if this
-   *         feature is turned of (it is turned on by default).
+   * @return the {@link UUID} of this exception. It may be <code>null</code> if
+   *         this feature is turned of (it is turned on by default).
    */
   UUID getUuid();
 

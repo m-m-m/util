@@ -4,6 +4,7 @@
 package net.sf.mmm.util.io.base;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.io.api.StreamUtil;
 
 /**
@@ -19,8 +20,7 @@ public class StreamUtilSpringTest extends StreamUtilTest {
   @Override
   protected StreamUtil getStreamUtil() {
 
-    return SpringContainerPool.getContainer("net/sf/mmm/util/io/beans-util-io.xml").getComponent(
-        StreamUtil.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_IO).getComponent(StreamUtil.class);
   }
 
 }

@@ -343,8 +343,9 @@ public class ResourceBundleSynchronizer {
   public void usage() {
 
     NlsMessage message = NlsAccess.getFactory().create(
-        NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE, ResourceBundleSynchronizer.class.getName(),
-        DEFAULT_ENCODING, DEFAULT_BASE_PATH, DEFAULT_DATE_PATTERN,
+        NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE, "mainClass",
+        ResourceBundleSynchronizer.class.getName(), "encoding", DEFAULT_ENCODING, "path",
+        DEFAULT_BASE_PATH, "datePattern", DEFAULT_DATE_PATTERN,
         NlsBundleSynchronizer.class.getName());
     NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
     this.out.println(message.getLocalizedMessage(Locale.getDefault(), nationalizer));

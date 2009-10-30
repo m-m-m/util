@@ -26,7 +26,24 @@ public interface CharFilter {
   boolean accept(char c);
 
   /**
-   * A filter that {@link #accept(char) accepts} only the Latin digits '0'-'9'
+   * A filter that only {@link #accept(char) accepts} characters valid for a
+   * technical identifier-string (e.g. literal oder variable-name). This means
+   * accepted characters are Latin digits, ASCII letters or one of '.', '_' or
+   * '-'.
+   * 
+   * @since 1.1.1
+   */
+  CharFilter IDENTIFIER_FILTER = new CharFilter() {
+
+    public boolean accept(char c) {
+
+      return (((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'z'))
+          || ((c >= 'A') && (c <= 'Z')) || (c == '_') || (c == '-') || (c == '.'));
+    }
+  };
+
+  /**
+   * A filter that only {@link #accept(char) accepts} the Latin digits '0'-'9'
    * or ASCII letters 'a'-'z' and 'A'-'Z'.
    * 
    * @since 1.1.0
@@ -40,7 +57,7 @@ public interface CharFilter {
   };
 
   /**
-   * A filter that {@link #accept(char) accepts} only the Latin digits '0'-'9'.
+   * A filter that only {@link #accept(char) accepts} the Latin digits '0'-'9'.
    */
   CharFilter LATIN_DIGIT_FILTER = new CharFilter() {
 
@@ -51,7 +68,7 @@ public interface CharFilter {
   };
 
   /**
-   * A filter that {@link #accept(char) accepts} only the Latin ASCII letters
+   * A filter that only {@link #accept(char) accepts} the Latin ASCII letters
    * 'a'-'z' and 'A'-'Z'.
    */
   CharFilter ASCII_LETTER_FILTER = new CharFilter() {

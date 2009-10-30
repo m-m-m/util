@@ -38,6 +38,7 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
   @Override
   public Format createFormat(Locale locale) {
 
+    // reimplement thread-safe SimpleDateFormat?
     return new SimpleDateFormat(this.pattern, locale);
   }
 

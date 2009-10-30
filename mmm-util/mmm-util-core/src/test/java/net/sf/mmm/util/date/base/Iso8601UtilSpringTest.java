@@ -4,6 +4,7 @@
 package net.sf.mmm.util.date.base;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.date.api.Iso8601Util;
 
 /**
@@ -19,8 +20,8 @@ public class Iso8601UtilSpringTest extends Iso8601UtilTest {
   @Override
   public Iso8601Util getIso8601Util() {
 
-    return SpringContainerPool.getContainer("net/sf/mmm/util/date/beans-util-date.xml")
-        .getComponent(Iso8601Util.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_DATE).getComponent(
+        Iso8601Util.class);
   }
 
 }

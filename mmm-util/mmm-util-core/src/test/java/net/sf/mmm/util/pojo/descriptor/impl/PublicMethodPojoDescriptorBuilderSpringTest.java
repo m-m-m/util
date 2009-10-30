@@ -4,6 +4,7 @@
 package net.sf.mmm.util.pojo.descriptor.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 
@@ -24,8 +25,8 @@ public class PublicMethodPojoDescriptorBuilderSpringTest extends
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
     PojoDescriptorBuilderFactory factory = SpringContainerPool.getContainer(
-        "net/sf/mmm/util/pojo/descriptor/beans-util-pojo-descriptor.xml").getComponent(
-        PojoDescriptorBuilderFactory.class);
+        SpringConfigsUtilCore.UTIL_POJO_DESCRIPTOR)
+        .getComponent(PojoDescriptorBuilderFactory.class);
     return factory.createPublicMethodDescriptorBuilder();
   }
 

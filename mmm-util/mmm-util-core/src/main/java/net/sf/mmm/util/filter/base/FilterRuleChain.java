@@ -3,6 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter.base;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.api.FilterRule;
 
@@ -15,12 +20,15 @@ import net.sf.mmm.util.filter.api.FilterRule;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FilterRuleChain<V> implements Filter<V> {
 
   /** the rules */
+  @XmlElement(name = "include,exclude")
   private final FilterRule<V>[] rules;
 
   /** @see #getDefaultResult() */
+  @XmlAttribute(name = "default-result", required = false)
   private final boolean defaultResult;
 
   /**

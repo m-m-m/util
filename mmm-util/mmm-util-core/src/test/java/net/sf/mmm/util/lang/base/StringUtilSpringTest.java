@@ -6,6 +6,7 @@ package net.sf.mmm.util.lang.base;
 import org.junit.AfterClass;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
@@ -15,16 +16,14 @@ import net.sf.mmm.util.lang.api.StringUtil;
  */
 public class StringUtilSpringTest extends StringUtilTest {
 
-  /** @see SpringContainerPool */
-  private static final String SPRING_CONFIG = BasicUtilSpringTest.SPRING_CONFIG;
-
   /**
    * {@inheritDoc}
    */
   @Override
   public StringUtil getStringUtil() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(StringUtil.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_LANG).getComponent(
+        StringUtil.class);
   }
 
   /**
@@ -33,7 +32,7 @@ public class StringUtilSpringTest extends StringUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SPRING_CONFIG);
+    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_LANG);
   }
 
 }

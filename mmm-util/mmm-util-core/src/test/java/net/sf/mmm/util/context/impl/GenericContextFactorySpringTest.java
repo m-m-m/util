@@ -4,6 +4,7 @@
 package net.sf.mmm.util.context.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 
 /**
@@ -15,16 +16,13 @@ import net.sf.mmm.util.context.api.GenericContextFactory;
  */
 public class GenericContextFactorySpringTest extends GenericContextFactoryTest {
 
-  /** */
-  private static final String SPRING_CONFIG = "net/sf/mmm/util/context/beans-util-context.xml";
-
   /**
    * {@inheritDoc}
    */
   @Override
   protected GenericContextFactory getFactory() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG)
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_CONTEXT)
         .getComponent(GenericContextFactory.class);
   }
 

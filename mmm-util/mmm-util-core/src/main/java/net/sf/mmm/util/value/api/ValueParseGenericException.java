@@ -12,7 +12,9 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
+ * @deprecated use {@link net.sf.mmm.util.nls.api.NlsParseException}.
  */
+@Deprecated
 public class ValueParseGenericException extends ValueParseException {
 
   /** UID for serialization. */
@@ -31,7 +33,7 @@ public class ValueParseGenericException extends ValueParseException {
    */
   public ValueParseGenericException(Object value, Type targetType, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType,
+    super(NlsBundleUtilCore.ERR_PARSE_TYPE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType,
         KEY_SOURCE, valueSource));
   }
 
@@ -50,8 +52,8 @@ public class ValueParseGenericException extends ValueParseException {
   public ValueParseGenericException(Throwable nested, Object value, Type targetType,
       Object valueSource) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType,
-        KEY_SOURCE, valueSource));
+    super(nested, NlsBundleUtilCore.ERR_PARSE_TYPE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE,
+        targetType, KEY_SOURCE, valueSource));
   }
 
   /**
@@ -63,7 +65,7 @@ public class ValueParseGenericException extends ValueParseException {
    */
   public ValueParseGenericException(Object value, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_PARSE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
+    super(NlsBundleUtilCore.ERR_PARSE_TYPE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
   /**
@@ -76,7 +78,7 @@ public class ValueParseGenericException extends ValueParseException {
    */
   public ValueParseGenericException(Throwable nested, Object value, Type targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
+    super(nested, NlsBundleUtilCore.ERR_PARSE_TYPE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
   }
 
 }

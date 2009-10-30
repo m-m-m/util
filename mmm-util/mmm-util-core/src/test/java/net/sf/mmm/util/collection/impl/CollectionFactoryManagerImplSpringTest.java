@@ -4,6 +4,7 @@
 package net.sf.mmm.util.collection.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 
 /**
@@ -20,8 +21,8 @@ public class CollectionFactoryManagerImplSpringTest extends CollectionFactoryMan
   @Override
   protected CollectionFactoryManager getCollectionFactoryManager() {
 
-    return SpringContainerPool.getContainer("net/sf/mmm/util/collection/beans-util-collection.xml")
-        .getComponent(CollectionFactoryManager.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_COLLECTION).getComponent(
+        CollectionFactoryManager.class);
   }
 
 }

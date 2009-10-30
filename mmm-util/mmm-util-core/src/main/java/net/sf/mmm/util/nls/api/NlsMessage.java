@@ -5,13 +5,68 @@ package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
 
+import net.sf.mmm.util.text.api.JustificationBuilder;
+
 /**
- * This is the interface for an internationalized message. It stores a message
- * separated from language independent {@link #getArgument(String) arguments}.
- * This approach ensures that the message is always available in the
+ * This is the interface for an internationalized message. It stores an
+ * {@link #getInternationalizedMessage() internationalized-message} separated
+ * from language independent {@link #getArgument(String) arguments}. This
+ * approach ensures that the message is always available in the
  * internationalized language (should be English) while it still allows to
  * {@link #getLocalizedMessage(Locale, NlsTemplateResolver) translate} the
  * message to a native language.<br>
+ * The format of the {@link #getInternationalizedMessage()
+ * internationalized-message} is compatible to {@link java.text.MessageFormat}.
+ * This allows to migrate existing code from {@link java.text.MessageFormat} to
+ * {@link NlsMessage} easily. However there are some advanced features
+ * available. While using numbers to identify the {@link #getArgument(int)
+ * argument} is a maintenance-hell for large messages, it is also possible to
+ * use {@link #getArgument(String) named arguments}. Further there is also
+ * support for additional styles as well as
+ * {@link net.sf.mmm.util.text.api.Justification}. The format specification for
+ * parameter-syntax is as following:
+ * 
+ * <pre>'{' ArgumentKey [ ',' FormatType [ ',' FormatStyle ] ] [ '{' Justification '}' ] '}'</pre>
+ * 
+ * The literals are explained in this table.
+ * <table border="1">
+ * <tr>
+ * <th>literal</th>
+ * <th>explanation</th>
+ * </tr>
+ * <tr>
+ * <td>ArgumentKey</td>
+ * <td>is the key of the parameter (may be numeric for legacy support)</td>
+ * </tr>
+ * <tr>
+ * <td>FormatType</td>
+ * <td>one of <code>number</code>,<code>date</code>,<code>time</code> or
+ * <code>datetime</code></td>
+ * </tr>
+ * <tr>
+ * <td>FormatStyle</td>
+ * <td>a style according to FormatType (see below).</td>
+ * </tr>
+ * <tr>
+ * <td>Justification</td>
+ * <td>{@link JustificationBuilder}</td>
+ * </tr>
+ * </table>
+ * 
+ * FormatType: one of number date time choice
+ * 
+ * FormatStyle: short medium long full integer currency percent SubformatPattern
+ * 
+ * String: StringPartopt String StringPart
+ * 
+ * StringPart: '' ' QuotedString ' UnquotedString
+ * 
+ * SubformatPattern: SubformatPatternPartopt SubformatPattern
+ * SubformatPatternPart
+ * 
+ * SubFormatPatternPart: ' QuotedPattern ' UnquotedPattern
+ * 
+ * 
  * For the term <em>internationalization</em> usually the shortcut <em>i18n</em>
  * is used.
  * 

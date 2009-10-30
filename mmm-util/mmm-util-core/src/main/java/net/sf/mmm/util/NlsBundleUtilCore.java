@@ -24,13 +24,27 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.value.api.ValueNotSetException */
   public static final String ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!";
 
-  /** @see net.sf.mmm.util.value.api.ValueParseGenericException */
-  public static final String ERR_PARSE = "Failed to parse value \"{value}\" as value"
-      + " of the type \"{type}\"!";
+  /**
+   * @see net.sf.mmm.util.value.api.ValueParseGenericException
+   * @see net.sf.mmm.util.nls.api.NlsParseException
+   */
+  public static final String ERR_PARSE_TYPE = "Failed to parse \"{value}\" as value "
+      + "of the type \"{type}\"!";
 
-  /** @see net.sf.mmm.util.value.api.ValueParseGenericException */
-  public static final String ERR_PARSE_SOURCE = "Failed to parse value \"{value}\" from "
-      + "\"{source}\" as value of the type \"{type}\"!";
+  /**
+   * @see net.sf.mmm.util.value.api.ValueParseGenericException
+   * @see net.sf.mmm.util.nls.api.NlsParseException
+   */
+  public static final String ERR_PARSE_TYPE_SOURCE = "Failed to parse \"{value}\" "
+      + "from \"{source}\" as value of the type \"{type}\"!";
+
+  /** @see net.sf.mmm.util.nls.api.NlsParseException */
+  public static final String ERR_PARSE_FORMAT = "Failed to parse \"{value}\" as "
+      + "\"{type}\" - required format is \"{format}\"!";
+
+  /** @see net.sf.mmm.util.nls.api.NlsParseException */
+  public static final String ERR_PARSE_FORMAT_SOURCE = "Failed to parse \"{value}\" "
+      + "from \"{source}\" as \"{type}\" - required format is \"{format}\"!";
 
   /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
   public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{value}\" "

@@ -6,6 +6,7 @@ package net.sf.mmm.util.text.base;
 import org.junit.AfterClass;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.text.api.Singularizer;
 
 /**
@@ -17,16 +18,13 @@ import net.sf.mmm.util.text.api.Singularizer;
 @SuppressWarnings("all")
 public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
 
-  /** @see #getEnglishSingularizer() */
-  private static final String SPRING_CONFIG = "net/sf/mmm/util/text/beans-util-text.xml";
-
   /**
    * {@inheritDoc}
    */
   @Override
   public Singularizer getEnglishSingularizer() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(Singularizer.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_TEXT).getComponent(Singularizer.class);
   }
 
   /**
@@ -35,7 +33,7 @@ public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SPRING_CONFIG);
+    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_TEXT);
   }
 
 }

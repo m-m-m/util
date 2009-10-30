@@ -17,6 +17,8 @@ import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
+import net.sf.mmm.util.text.api.Justification;
+import net.sf.mmm.util.text.base.JustificationImpl;
 
 /**
  * This is the implementation of the {@link NlsMessageFormatter} interface.<br>
@@ -37,8 +39,22 @@ import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
 public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Map<String, Object>> implements
     NlsMessageFormatter {
 
+  /** The character used to start a variable expression. */
+  private static final char START_EXPRESSION = '{';
+
+  /** The character used to end a variable expression. */
+  private static final char END_EXPRESSION = '}';
+
+  /** The character used to separate format type and style. */
+  private static final char FORMAT_SEPARATOR = ',';
+
   /** A char filter that accepts everything except ',' and '}'. */
-  private static final CharFilter NO_COMMA_OR_CCB = new ListCharFilter(false, ',', '}');
+  private static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(false,
+      FORMAT_SEPARATOR, END_EXPRESSION);
+
+  /** A char filter that accepts everything except ',' and '}'. */
+  private static final CharFilter NO_EXPRESSION = new ListCharFilter(false, START_EXPRESSION,
+      END_EXPRESSION);
 
   /** The syntax of the message-format patterns. */
   private static final SimpleCharScannerSyntax SYNTAX = new SimpleCharScannerSyntax();
@@ -73,30 +89,34 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Map<String, Ob
     this.formatterManager = formatterManager;
     List<PatternSegment> segmentList = new ArrayList<PatternSegment>();
     CharSequenceScanner scanner = new CharSequenceScanner(pattern);
-    String prefix = scanner.readUntil('{', true, SYNTAX);
+    String prefix = scanner.readUntil(START_EXPRESSION, true, SYNTAX);
     while (scanner.hasNext()) {
-      String key = scanner.readWhile(CharFilter.LATIN_DIGIT_OR_LETTER_FILTER);
+      String key = scanner.readWhile(CharFilter.IDENTIFIER_FILTER);
       char c = scanner.next();
       String formatType = null;
       String formatStyle = null;
-      if (c == ',') {
-        formatType = scanner.readWhile(NO_COMMA_OR_CCB);
-        formatStyle = null;
-        c = scanner.next();
-        if (c == ',') {
-          formatStyle = scanner.readUntil('}', false);
-          if (formatStyle != null) {
-            c = '}';
-          }
+      if (c == FORMAT_SEPARATOR) {
+        formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
+        c = scanner.forceNext();
+        if (c == FORMAT_SEPARATOR) {
+          formatStyle = scanner.readWhile(NO_EXPRESSION);
+          c = scanner.forceNext();
         }
       }
-      if (c != '}') {
+      Justification justification = null;
+      if (c == START_EXPRESSION) {
+        String formatJustification = scanner.readUntil(END_EXPRESSION, false);
+        justification = new JustificationImpl(formatJustification);
+        c = scanner.forceNext();
+      }
+      if (c != END_EXPRESSION) {
+        // TODO: proper exception, NLS
         throw new IllegalArgumentException("Unmatched braces in the pattern.");
       }
       NlsFormatter<Object> formatter = this.formatterManager.getFormatter(formatType, formatStyle);
-      PatternSegment segment = new PatternSegment(prefix, key, formatter);
+      PatternSegment segment = new PatternSegment(prefix, key, formatter, justification);
       segmentList.add(segment);
-      prefix = scanner.readUntil('{', true, SYNTAX);
+      prefix = scanner.readUntil(START_EXPRESSION, true, SYNTAX);
     }
     this.suffix = prefix;
     this.segments = segmentList.toArray(new PatternSegment[segmentList.size()]);
@@ -115,16 +135,22 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Map<String, Ob
           argument = arguments.get(segment.key);
         }
         if (argument == null) {
-          buffer.append('{');
+          buffer.append(START_EXPRESSION);
           buffer.append(segment.key);
-          buffer.append('}');
+          buffer.append(END_EXPRESSION);
         } else {
           NlsFormatter<Object> formatter = segment.formatter;
           if (formatter == null) {
             // should actually never happen...
             formatter = NlsFormatterDefault.INSTANCE;
           }
-          formatter.format(argument, locale, buffer);
+          if (segment.justification == null) {
+            formatter.format(argument, locale, buffer);
+          } else {
+            StringBuilder sb = new StringBuilder();
+            formatter.format(argument, locale, sb);
+            segment.justification.justify(sb, buffer);
+          }
         }
       }
       buffer.append(this.suffix);
@@ -153,19 +179,25 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Map<String, Ob
     /** @see #getFormatter() */
     private final NlsFormatter<Object> formatter;
 
+    /** @see #getJustification() */
+    private final Justification justification;
+
     /**
      * The constructor.
      * 
      * @param prefix is the {@link #getPrefix() prefix}.
      * @param key is the {@link #getKey() key}.
      * @param formatter is the {@link #getFormatter() formatter}.
+     * @param justification is the {@link #getJustification() justification}.
      */
-    public PatternSegment(String prefix, String key, NlsFormatter<Object> formatter) {
+    public PatternSegment(String prefix, String key, NlsFormatter<Object> formatter,
+        Justification justification) {
 
       super();
       this.prefix = prefix;
       this.key = key;
       this.formatter = formatter;
+      this.justification = justification;
     }
 
     /**
@@ -201,12 +233,32 @@ public class NlsMessageFormatterImpl extends AbstractNlsFormatter<Map<String, Ob
     }
 
     /**
+     * This method gets the optional {@link JustificationImpl}.
+     * 
+     * @return the justification or <code>null</code> for none.
+     */
+    public Justification getJustification() {
+
+      return this.justification;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
 
-      return this.prefix + "{" + this.key + "}";
+      StringBuilder sb = new StringBuilder();
+      sb.append(this.prefix);
+      sb.append(START_EXPRESSION);
+      sb.append(this.key);
+      if (this.justification != null) {
+        sb.append(START_EXPRESSION);
+        sb.append(this.justification);
+        sb.append(END_EXPRESSION);
+      }
+      sb.append(END_EXPRESSION);
+      return sb.toString();
     }
 
   }

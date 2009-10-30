@@ -56,6 +56,23 @@ public abstract class AbstractNlsMessageFactory implements NlsMessageFactory {
   /**
    * {@inheritDoc}
    */
+  // CHECKSTYLE:OFF (many arguments for convenience)
+  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
+      Object argument2, String key3, Object argument3, String key4, Object argument4) {
+
+    // CHECKSTYLE:ON
+
+    Map<String, Object> arguments = new HashMap<String, Object>();
+    arguments.put(key1, argument1);
+    arguments.put(key2, argument2);
+    arguments.put(key3, argument3);
+    arguments.put(key4, argument4);
+    return create(template, arguments);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
       Object argument2, String key3, Object argument3) {
 
@@ -86,6 +103,23 @@ public abstract class AbstractNlsMessageFactory implements NlsMessageFactory {
     Map<String, Object> arguments = new HashMap<String, Object>();
     arguments.put(key1, argument1);
     return create(template, arguments);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  // CHECKSTYLE:OFF (many arguments for convenience)
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1,
+      String key2, Object argument2, String key3, Object argument3, String key4, Object argument4) {
+
+    // CHECKSTYLE:ON
+
+    Map<String, Object> arguments = new HashMap<String, Object>();
+    arguments.put(key1, argument1);
+    arguments.put(key2, argument2);
+    arguments.put(key3, argument3);
+    arguments.put(key4, argument4);
+    return create(internationalizedMessage, arguments);
   }
 
   /**

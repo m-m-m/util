@@ -4,6 +4,7 @@
 package net.sf.mmm.util.file.base;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.file.api.FileUtil;
 
 /**
@@ -19,8 +20,7 @@ public class FileUtilSpringTest extends FileUtilTest {
   @Override
   protected FileUtil getFileUtil() {
 
-    return SpringContainerPool.getContainer("net/sf/mmm/util/file/beans-util-file.xml")
-        .getComponent(FileUtil.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_FILE).getComponent(FileUtil.class);
   }
 
 }

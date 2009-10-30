@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect.base;
 import org.junit.AfterClass;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
@@ -16,15 +17,14 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 @SuppressWarnings("all")
 public class ReflectionUtilSpringTest extends ReflectionUtilTest {
 
-  private static final String SPRING_CONFIG = AnnotationUtilSpringTest.SPRING_CONFIG;
-
   /**
    * {@inheritDoc}
    */
   @Override
   public ReflectionUtil getReflectionUtil() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(ReflectionUtil.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_REFLECT).getComponent(
+        ReflectionUtil.class);
   }
 
   /**
@@ -33,7 +33,7 @@ public class ReflectionUtilSpringTest extends ReflectionUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SPRING_CONFIG);
+    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_REFLECT);
   }
 
 }

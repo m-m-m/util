@@ -14,10 +14,10 @@ import java.util.Map;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
-import net.sf.mmm.util.value.api.ValueParseGenericException;
 import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
 
 /**
@@ -361,7 +361,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     } catch (ValueException e) {
       throw e;
     } catch (RuntimeException e) {
-      throw new ValueParseGenericException(e, value, targetType, valueSource);
+      throw new NlsParseException(e, value, targetType, valueSource);
     }
     return null;
   }

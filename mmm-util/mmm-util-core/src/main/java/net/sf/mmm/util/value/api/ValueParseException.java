@@ -10,7 +10,9 @@ import java.util.Map;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link net.sf.mmm.util.nls.api.NlsParseException}.
  */
+@Deprecated
 public abstract class ValueParseException extends ValueException {
 
   /**

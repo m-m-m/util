@@ -10,11 +10,11 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.lang.api.StringTokenizer;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
-import net.sf.mmm.util.value.api.ValueParseGenericException;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
@@ -111,8 +111,8 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
         Object element = Array.get(value, i);
         Object resultElement = parentConverter.convert(element, valueSource, componentType);
         if ((resultElement == null) && (element != null)) {
-          Exception cause = new ValueParseGenericException(element, componentType, valueSource);
-          throw new ValueParseGenericException(cause, value, targetType, valueSource);
+          Exception cause = new NlsParseException(element, componentType, valueSource);
+          throw new NlsParseException(cause, value, targetType, valueSource);
         }
         result.add(resultElement);
       }
@@ -123,8 +123,8 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
       for (String element : tokenizer) {
         Object resultElement = parentConverter.convert(element, valueSource, componentType);
         if ((resultElement == null) && (element != null)) {
-          Exception cause = new ValueParseGenericException(element, componentType, valueSource);
-          throw new ValueParseGenericException(cause, value, targetType, valueSource);
+          Exception cause = new NlsParseException(element, componentType, valueSource);
+          throw new NlsParseException(cause, value, targetType, valueSource);
         }
         result.add(resultElement);
       }
@@ -135,8 +135,8 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
       for (Object element : collection) {
         Object resultElement = parentConverter.convert(element, valueSource, componentType);
         if ((resultElement == null) && (element != null)) {
-          Exception cause = new ValueParseGenericException(element, componentType, valueSource);
-          throw new ValueParseGenericException(cause, value, targetType, valueSource);
+          Exception cause = new NlsParseException(element, componentType, valueSource);
+          throw new NlsParseException(cause, value, targetType, valueSource);
         }
         result.add(resultElement);
       }

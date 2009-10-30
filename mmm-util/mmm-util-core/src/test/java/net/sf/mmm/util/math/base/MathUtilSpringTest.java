@@ -6,6 +6,7 @@ package net.sf.mmm.util.math.base;
 import org.junit.AfterClass;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.math.api.MathUtil;
 
 /**
@@ -16,16 +17,13 @@ import net.sf.mmm.util.math.api.MathUtil;
 @SuppressWarnings("all")
 public class MathUtilSpringTest extends MathUtilTest {
 
-  /** @see SpringContainerPool */
-  private static final String SPRING_CONFIG = "net/sf/mmm/util/math/beans-util-math.xml";
-
   /**
    * {@inheritDoc}
    */
   @Override
   public MathUtil getMathUtil() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(MathUtil.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_MATH).getComponent(MathUtil.class);
   }
 
   /**
@@ -34,7 +32,7 @@ public class MathUtilSpringTest extends MathUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SPRING_CONFIG);
+    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_MATH);
   }
 
 }

@@ -166,6 +166,67 @@ public interface NlsMessageFactory {
    * @param internationalizedMessage is the
    *        {@link NlsMessage#getInternationalizedMessage() internationalized
    *        message}.
+   * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first
+   *        argument.
+   * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the
+   *        first argument.
+   * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second
+   *        argument.
+   * @param argument2 is the {@link NlsMessage#getArgument(String) value} of the
+   *        second argument.
+   * @param key3 is the {@link NlsMessage#getArgument(String) key} of the third
+   *        argument.
+   * @param argument3 is the {@link NlsMessage#getArgument(String) value} of the
+   *        third argument.
+   * @param key4 is the {@link NlsMessage#getArgument(String) key} of the fourth
+   *        argument.
+   * @param argument4 is the {@link NlsMessage#getArgument(String) value} of the
+   *        fourth argument.
+   * @return the new {@link NlsMessage} instance.
+   */
+  // CHECKSTYLE:OFF (many arguments for convenience)
+  NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
+      Object argument2, String key3, Object argument3, String key4, Object argument4);
+
+  // CHECKSTYLE:ON
+
+  /**
+   * This method creates a new instance of {@link NlsMessage} from the given
+   * arguments.
+   * 
+   * @param template is the {@link NlsTemplate} for the
+   *        {@link NlsMessage#getInternationalizedMessage() raw message}.
+   * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first
+   *        argument.
+   * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the
+   *        first argument.
+   * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second
+   *        argument.
+   * @param argument2 is the {@link NlsMessage#getArgument(String) value} of the
+   *        second argument.
+   * @param key3 is the {@link NlsMessage#getArgument(String) key} of the third
+   *        argument.
+   * @param argument3 is the {@link NlsMessage#getArgument(String) value} of the
+   *        third argument.
+   * @param key4 is the {@link NlsMessage#getArgument(String) key} of the fourth
+   *        argument.
+   * @param argument4 is the {@link NlsMessage#getArgument(String) value} of the
+   *        fourth argument.
+   * @return the new {@link NlsMessage} instance.
+   */
+  // CHECKSTYLE:OFF (many arguments for convenience)
+  NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
+      Object argument2, String key3, Object argument3, String key4, Object argument4);
+
+  // CHECKSTYLE:ON
+
+  /**
+   * This method creates a new instance of {@link NlsMessage} from the given
+   * arguments.
+   * 
+   * @param internationalizedMessage is the
+   *        {@link NlsMessage#getInternationalizedMessage() internationalized
+   *        message}.
    * @param messageArguments are the {@link NlsMessage#getArgument(String)
    *        arguments} filled into the message after nationalization.
    * @return the new {@link NlsMessage} instance.

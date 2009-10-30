@@ -6,6 +6,7 @@ package net.sf.mmm.util.process.base;
 import org.junit.AfterClass;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.process.api.ProcessUtil;
 
 /**
@@ -16,16 +17,13 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 @SuppressWarnings("all")
 public class ProcessUtilSpringTest extends ProcessUtilTest {
 
-  /** @see SpringContainerPool */
-  private static final String SPRING_CONFIG = "net/sf/mmm/util/process/beans-util-process.xml";
-
   /**
    * {@inheritDoc}
    */
   @Override
   public ProcessUtil getProcessUtil() {
 
-    return SpringContainerPool.getContainer(SPRING_CONFIG).getComponent(ProcessUtil.class);
+    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_PROCESS).getComponent(ProcessUtil.class);
   }
 
   /**
@@ -34,7 +32,7 @@ public class ProcessUtilSpringTest extends ProcessUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SPRING_CONFIG);
+    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_PROCESS);
   }
 
 }
