@@ -16,6 +16,7 @@
   
   <modules>
     <module>mmm-search-indexer-api</module>
+    <module>mmm-search-indexer-base</module>
     <module>mmm-search-indexer-impl-lucene</module>
   </modules>
 </project>

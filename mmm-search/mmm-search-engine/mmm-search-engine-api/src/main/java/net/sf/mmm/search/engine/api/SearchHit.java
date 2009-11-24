@@ -6,9 +6,9 @@ package net.sf.mmm.search.engine.api;
 import net.sf.mmm.search.api.SearchEntry;
 
 /**
- * This is the interface for a single hit of a search. It represents any content
- * (web-page, document, etc.) that is represented by a single
- * {@link #getUri() URI}.<br>
+ * This is the interface for a single hit of a {@link SearchResult search}. It
+ * represents any content (web-page, document, etc.) that is represented by a
+ * single {@link #getUri() URI}.<br>
  * ATTENTION: Depending on the implementation it might be expensive to call
  * methods multiple times.
  * 
@@ -35,11 +35,10 @@ public interface SearchHit extends SearchEntry {
 
   /**
    * This method gets the score of this hit. It is a positive value in the range
-   * from <code>0</code> to <code>1</code>, where <code>1</code>
-   * represents a perfect hit and <code>0</code> represents a hit that has
-   * nothing in common with the search query. A hit will typically NOT have a
-   * {@link #getScore() score} of <code>0</code> but the score may be close to
-   * <code>0</code>.
+   * from <code>0</code> to <code>1</code>, where <code>1</code> represents a
+   * perfect hit and <code>0</code> represents a hit that has nothing in common
+   * with the search query. A hit will typically NOT have a {@link #getScore()
+   * score} of <code>0</code> but the score may be close to <code>0</code>.
    * 
    * @return the score of this hit.
    */

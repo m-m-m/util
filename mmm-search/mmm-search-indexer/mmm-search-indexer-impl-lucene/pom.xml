@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project>
   <parent>
-    <artifactId>mmm-search-engine</artifactId>
+    <artifactId>mmm-search-indexer</artifactId>
     <groupId>net.sf.m-m-m</groupId>
     <version>1.0.0</version>
   </parent>
@@ -12,7 +12,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-indexer-api</artifactId>
+      <artifactId>mmm-search-indexer-base</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

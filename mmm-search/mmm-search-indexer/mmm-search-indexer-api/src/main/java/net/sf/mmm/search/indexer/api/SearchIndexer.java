@@ -4,11 +4,13 @@
 package net.sf.mmm.search.indexer.api;
 
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.indexer.api.MutableSearchEntry.Mode;
 
 /**
  * This is the interface for the indexer used to create and modify a search
- * index.
+ * index. After a search-index is created, the contained information can be
+ * searched and found via a {@link net.sf.mmm.search.engine.api.SearchEngine}.
+ * 
+ * @see SearchIndexManager
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -17,8 +19,9 @@ public interface SearchIndexer {
   /**
    * This method creates a new and empty entry for the search-index. After the
    * entry is
-   * {@link MutableSearchEntry#setProperty(String, String, Mode) filled} with
-   * data, use {@link #add(MutableSearchEntry)} to add it to the search index.
+   * {@link MutableSearchEntry#setProperty(String, String, MutableSearchEntry.Mode)
+   * filled} with data, use {@link #add(MutableSearchEntry)} to add it to the
+   * search index.
    * 
    * @return a new and empty search-index entry.
    */
@@ -33,8 +36,8 @@ public interface SearchIndexer {
   void add(MutableSearchEntry entry) throws SearchException;
 
   /**
-   * This method updates the given <code>entry</code> in the search-index.
-   * This method assumes that the property
+   * This method updates the given <code>entry</code> in the search-index. This
+   * method assumes that the property
    * {@link net.sf.mmm.search.api.SearchEntry#PROPERTY_UID} (prior) or
    * {@link net.sf.mmm.search.api.SearchEntry#PROPERTY_URI} (fallback) is used
    * as unique identifier for entries.
@@ -77,9 +80,9 @@ public interface SearchIndexer {
    *        previously {@link #add(MutableSearchEntry) added} to the index.
    * @return the number of entries that have been removed. This should typically
    *         be <code>1</code> if one entry exists with the given
-   *         <code>uid</code> or <code>0</code> if no such entry exists. A
-   *         value greater than <code>1</code> indicates that multiple entries
-   *         have been removed that all have the given <code>uri</code> what
+   *         <code>uid</code> or <code>0</code> if no such entry exists. A value
+   *         greater than <code>1</code> indicates that multiple entries have
+   *         been removed that all have the given <code>uri</code> what
    *         indicates a mistake of your index(er).
    * @throws SearchException if the operation failed.
    */
@@ -95,9 +98,9 @@ public interface SearchIndexer {
    *        previously {@link #add(MutableSearchEntry) added} to the index.
    * @return the number of entries that have been removed. This should typically
    *         be <code>1</code> if one entry exists with the given
-   *         <code>uri</code> or <code>0</code> if no such entry exists. A
-   *         value greater than <code>1</code> indicates that multiple entries
-   *         have been removed that all have the given <code>uri</code> what
+   *         <code>uri</code> or <code>0</code> if no such entry exists. A value
+   *         greater than <code>1</code> indicates that multiple entries have
+   *         been removed that all have the given <code>uri</code> what
    *         indicates a mistake of your index(er).
    * @throws SearchException if the operation failed.
    */
@@ -110,13 +113,13 @@ public interface SearchIndexer {
    * <b>ATTENTION:</b><br>
    * Please use this method with care.
    * 
-   * @param property is the property where the <code>value</code> is expected
-   *        to occur. Therefore the property has to be
+   * @param property is the property where the <code>value</code> is expected to
+   *        occur. Therefore the property has to be
    *        {@link MutableSearchEntry.Mode#NOT_TOKENIZED}.
    * @param value is the
-   *        {@link MutableSearchEntry#setProperty(String, String, Mode) value}
-   *        of an entry previously {@link #add(MutableSearchEntry) added} to the
-   *        index.
+   *        {@link MutableSearchEntry#setProperty(String, String, MutableSearchEntry.Mode)
+   *        value} of an entry previously {@link #add(MutableSearchEntry) added}
+   *        to the index.
    * @return the number of entries that have been removed.
    * @throws SearchException if the operation failed.
    */

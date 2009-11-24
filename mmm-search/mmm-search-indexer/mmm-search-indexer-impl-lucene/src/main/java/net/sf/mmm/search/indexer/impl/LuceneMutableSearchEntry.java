@@ -11,6 +11,7 @@ import org.apache.lucene.document.Field;
 
 import net.sf.mmm.search.impl.LuceneFieldNameIterator;
 import net.sf.mmm.search.indexer.base.AbstractMutableSearchEntry;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is the implementation of the
@@ -73,6 +74,8 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
       case NOT_TOKENIZED:
         index = Field.Index.UN_TOKENIZED;
         break;
+      default :
+        throw new IllegalCaseException(Mode.class, mode);
     }
     Field field = new Field(name, value, store, index);
     this.document.add(field);

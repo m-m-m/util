@@ -12,6 +12,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.search.indexer.api.config.SearchConfiguration;
 import net.sf.mmm.util.file.base.FileStringFilterAdapter;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
@@ -204,4 +205,15 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
     }
     getIndexer().close();
   }
+
+  /**
+   * This method builds the search-index from the given
+   * <code>configurationElement</code>.
+   * 
+   * @param configuration is the configuration.
+   */
+  public void index(SearchConfiguration configuration) {
+
+  }
+
 }

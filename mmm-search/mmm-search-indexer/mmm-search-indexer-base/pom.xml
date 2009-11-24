@@ -1,28 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id$ -->
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <parent>
-    <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-search-indexer</artifactId>
+    <groupId>net.sf.m-m-m</groupId>
     <version>1.0.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>mmm-search-indexer-api</artifactId>
+  <artifactId>mmm-search-indexer-base</artifactId>
+  <name>search-indexer-base</name>
   <version>1.0.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>search-indexer-api</name>
-  <description>This project provides the API of an indexer using the provided search-engine.</description>
-  
+  <description>This project provides the base-implementation for an indexer using the provided search-engine.</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-content-parser-service</artifactId>
+      <artifactId>mmm-search-indexer-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-search-engine-api</artifactId>
+      <artifactId>mmm-util-cli</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
