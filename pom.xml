@@ -99,7 +99,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.3</version>
+          <version>2.4</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -478,15 +478,18 @@
     <tag/>
     <url>http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/</url>
   </scm>
-  <!--
   <distributionManagement>
     <repository>
-        <id>cube-releases</id>
-        <name>cube-releases</name>
-        <url>http://localhost:8080/artifactory/local</url>
+      <id>mmm-releases</id>
+      <name>MMM Staging Repository</name>
+      <url>http://oss.sonatype.org/content/groups/sourceforge-with-staging</url>
     </repository>
+    <snapshotRepository>
+      <id>mmm-snapshots</id>
+      <name>MMM Snapshot Repository</name>
+      <url>http://oss.sonatype.org/content/repositories/sourceforge-snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
-  -->
   <mailingLists>
     <mailingList>
       <name>mmm-devel</name>
