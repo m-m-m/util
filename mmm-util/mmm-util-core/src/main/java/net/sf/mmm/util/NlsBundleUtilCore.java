@@ -25,14 +25,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!";
 
   /**
-   * @see net.sf.mmm.util.value.api.ValueParseGenericException
    * @see net.sf.mmm.util.nls.api.NlsParseException
    */
   public static final String ERR_PARSE_TYPE = "Failed to parse \"{value}\" as value "
       + "of the type \"{type}\"!";
 
   /**
-   * @see net.sf.mmm.util.value.api.ValueParseGenericException
    * @see net.sf.mmm.util.nls.api.NlsParseException
    */
   public static final String ERR_PARSE_TYPE_SOURCE = "Failed to parse \"{value}\" "

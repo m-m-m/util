@@ -4,6 +4,7 @@
 package net.sf.mmm.util.pojo.descriptor.api;
 
 import java.lang.reflect.Type;
+import java.util.Map;
 
 import net.sf.mmm.util.reflect.api.GenericType;
 
@@ -59,5 +60,20 @@ public interface PojoDescriptorBuilder {
    *         given <code>pojoType</code>.
    */
   <POJO> PojoDescriptor<POJO> getDescriptor(GenericType<POJO> pojoType);
+
+  /**
+   * This method creates a lazy, immutable {@link Map} reflecting the given
+   * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+   * <b>ATTENTION:</b><br>
+   * The {@link Map} may be
+   * {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple}.
+   * 
+   * @see net.sf.mmm.util.pojo.path.api.PojoPathNavigator#pojo2Map(Object)
+   * 
+   * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} to convert.
+   * @return the {@link Map} reflecting the given
+   *         {@link net.sf.mmm.util.pojo.api.Pojo}.
+   */
+  Map<String, Object> pojo2Map(Object pojo);
 
 }

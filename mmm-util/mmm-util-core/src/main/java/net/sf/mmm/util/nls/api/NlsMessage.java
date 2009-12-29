@@ -5,8 +5,6 @@ package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.text.api.JustificationBuilder;
-
 /**
  * This is the interface for an internationalized message. It stores an
  * {@link #getInternationalizedMessage() internationalized-message} separated
@@ -49,7 +47,7 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
  * </tr>
  * <tr>
  * <td>Justification</td>
- * <td>{@link JustificationBuilder}</td>
+ * <td>{@link net.sf.mmm.util.text.api.JustificationBuilder}</td>
  * </tr>
  * </table>
  * 

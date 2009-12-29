@@ -20,6 +20,6 @@ public class NlsBundleSynchronizer extends AbstractResourceBundle {
       + "\t--encoding <enc>   use the specified encoding (Default is \"{encoding}\").\n"
       + "\t--path <path>      use the specified base path (Default is \"{path}\").\n"
       + "\t--date-pattern <p> use the specified date pattern (Default is \"{datePattern}\").\n\n"
-      + "Example:\n" + "{0} {4} de de_DE en en_US en_GB fr zh ja_JP zh_TW\n";
+      + "Example:\n" + "{mainClass} {exampleClass} de de_DE en en_US en_GB fr zh ja_JP zh_TW\n";
 
 }

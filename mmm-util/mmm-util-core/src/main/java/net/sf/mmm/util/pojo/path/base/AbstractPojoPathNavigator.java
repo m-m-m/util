@@ -990,6 +990,22 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public Map<String, Object> pojo2Map(Object pojo) {
+
+    return new PojoPathMap(this, pojo);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Map<String, Object> pojo2Map(Object pojo, PojoPathContext context) {
+
+    return new PojoPathMap(this, pojo, context);
+  }
+
+  /**
    * This inner class represents the cache for {@link CachingPojoPath}s based on
    * an initial {@link net.sf.mmm.util.pojo.api.Pojo}.
    */

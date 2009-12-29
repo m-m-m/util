@@ -4,6 +4,7 @@
 package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
+import java.util.Map;
 
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
@@ -41,7 +42,7 @@ public interface PojoPathNavigator {
    * @param pojoPath is the {@link PojoPath} to navigate.
    * @param mode is the {@link PojoPathMode mode} that determines how to deal
    *        with <code>null</code> values.
-   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param context is the {@link PojoPathContext} for this operation.
    * @return the result of the navigation of the given <code>pojoPath</code>
    *         starting at the given <code>pojo</code>. It may be
    *         <code>null</code> according to the given {@link PojoPathMode mode}.
@@ -76,7 +77,7 @@ public interface PojoPathNavigator {
    * @param pojoPath is the {@link PojoPath} to navigate.
    * @param mode is the {@link PojoPathMode mode} that determines how to deal
    *        with <code>null</code> values.
-   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param context is the {@link PojoPathContext} for this operation.
    * @param targetClass is the required result-type.
    * @return the result of the navigation of the given <code>pojoPath</code>
    *         starting at the given <code>pojo</code>. It may be
@@ -122,7 +123,7 @@ public interface PojoPathNavigator {
    *        an {@link PojoPathUnsafeException} is thrown and if
    *        <code>false</code> this method returns <code>null</code> in such
    *        case.
-   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param context is the {@link PojoPathContext} for this operation.
    * @return the guaranteed result-type of the navigation of the given
    *         <code>pojoPath</code> starting at the given <code>pojoType</code>.
    *         It may be <code>Object.class</code> e.g. in case an untyped
@@ -165,7 +166,7 @@ public interface PojoPathNavigator {
    *        an {@link PojoPathUnsafeException} is thrown and if
    *        <code>false</code> this method returns <code>null</code> in such
    *        case.
-   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param context is the {@link PojoPathContext} for this operation.
    * @return the guaranteed result-type of the navigation of the given
    *         <code>pojoPath</code> starting at the given <code>pojoType</code>.
    *         It may be <code>Object.class</code> e.g. in case an untyped
@@ -216,7 +217,7 @@ public interface PojoPathNavigator {
    * @param pojoPath is the {@link PojoPath} to navigate.
    * @param mode is the {@link PojoPathMode mode} that determines how to deal
    *        with <code>null</code> values.
-   * @param context is the {@link PojoPathContext context} for this operation.
+   * @param context is the {@link PojoPathContext} for this operation.
    * @param value is the value to set. It may be <code>null</code>.
    * @return the result of the <code>set</code> operation.
    * @throws IllegalPojoPathException if the given <code>pojoPath</code> is
@@ -235,5 +236,38 @@ public interface PojoPathNavigator {
   Object set(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context, Object value)
       throws PojoPathException, IllegalPojoPathException, PojoPathSegmentIsNullException,
       InstantiationFailedException, PojoPathConversionException;
+
+  /**
+   * This method creates a lazy, immutable {@link Map} reflecting the given
+   * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+   * <b>ATTENTION:</b><br>
+   * The {@link Map} will be
+   * {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple} and will
+   * NOT support {@link Map#size() size} or {@link Map#keySet() iteration}.
+   * 
+   * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#pojo2Map(Object)
+   * 
+   * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} to convert.
+   * @return the {@link Map} reflecting the given
+   *         {@link net.sf.mmm.util.pojo.api.Pojo}.
+   */
+  Map<String, Object> pojo2Map(Object pojo);
+
+  /**
+   * This method creates a lazy, immutable {@link Map} reflecting the given
+   * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+   * <b>ATTENTION:</b><br>
+   * The {@link Map} will be
+   * {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple} and will
+   * NOT support {@link Map#size() size} or {@link Map#keySet() iteration}.
+   * 
+   * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#pojo2Map(Object)
+   * 
+   * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} to convert.
+   * @param context is the {@link PojoPathContext} for this operation.
+   * @return the {@link Map} reflecting the given
+   *         {@link net.sf.mmm.util.pojo.api.Pojo}.
+   */
+  Map<String, Object> pojo2Map(Object pojo, PojoPathContext context);
 
 }

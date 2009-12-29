@@ -16,8 +16,10 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -342,11 +344,14 @@ public class ResourceBundleSynchronizer {
    */
   public void usage() {
 
+    Map<String, Object> arguments = new HashMap<String, Object>();
+    arguments.put("mainClass", ResourceBundleSynchronizer.class.getName());
+    arguments.put("encoding", DEFAULT_ENCODING);
+    arguments.put("path", DEFAULT_BASE_PATH);
+    arguments.put("datePattern", DEFAULT_DATE_PATTERN);
+    arguments.put("exampleClass", NlsBundleSynchronizer.class.getName());
     NlsMessage message = NlsAccess.getFactory().create(
-        NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE, "mainClass",
-        ResourceBundleSynchronizer.class.getName(), "encoding", DEFAULT_ENCODING, "path",
-        DEFAULT_BASE_PATH, "datePattern", DEFAULT_DATE_PATTERN,
-        NlsBundleSynchronizer.class.getName());
+        NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE, arguments);
     NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
     this.out.println(message.getLocalizedMessage(Locale.getDefault(), nationalizer));
   }

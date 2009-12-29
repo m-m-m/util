@@ -27,15 +27,6 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicUtil;
@@ -44,10 +35,19 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.lang.base.SpaceNormalizingCharIterator;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.value.api.ValueParseGenericException;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.api.XmlCompareMode;
 import net.sf.mmm.util.xml.api.XmlException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * This utility class contains methods that help to deal with the
@@ -300,8 +300,7 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
       } else if (StringUtil.FALSE.equalsIgnoreCase(flag)) {
         result = false;
       } else {
-        throw new ValueParseGenericException(flag, boolean.class, element.getTagName() + "@"
-            + attribute);
+        throw new NlsParseException(flag, element.getTagName() + "@" + attribute, boolean.class);
       }
     }
     return result;

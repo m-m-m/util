@@ -3,21 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import java.util.Iterator;
+import net.sf.mmm.util.collection.base.AbstractIterator;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import net.sf.mmm.util.collection.base.AbstractIterator;
-
 /**
- * This class is used to {@link Iterator#next() iterate} the {@link Node}s of a
- * {@link NodeList}.
+ * This class is used to {@link java.util.Iterator#next() iterate} the
+ * {@link Node}s of a {@link NodeList}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public class NodeIterator extends AbstractIterator<Node> implements Iterator<Node> {
+public class NodeIterator extends AbstractIterator<Node> {
 
   /** The {@link NodeList} to iterate. */
   private final NodeList nodeList;

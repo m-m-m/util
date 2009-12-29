@@ -101,4 +101,12 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    */
   protected abstract <POJO> PojoDescriptorImpl<POJO> createDescriptor(GenericType<POJO> pojoType);
 
+  /**
+   * {@inheritDoc}
+   */
+  public Map<String, Object> pojo2Map(Object pojo) {
+
+    return new PojoMap(this, pojo);
+  }
+
 }

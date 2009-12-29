@@ -66,13 +66,13 @@ public class JustificationImpl implements Justification {
 
     super();
     if (format.length() < 2) {
-      throw new NlsParseException(format, Justification.class.getSimpleName(), FORMAT_PATTERN);
+      throw new NlsParseException(format, FORMAT_PATTERN, Justification.class.getSimpleName());
     }
     this.filler = format.charAt(0);
     this.alignment = format.charAt(1);
     if ((this.alignment != ALIGN_CENTER) && (this.alignment != ALIGN_LEFT)
         && (this.alignment != ALIGN_RIGHT)) {
-      throw new NlsParseException(format, Justification.class.getSimpleName(), FORMAT_PATTERN);
+      throw new NlsParseException(format, FORMAT_PATTERN, Justification.class.getSimpleName());
     }
     int endIndex = format.length();
     char modeChar = format.charAt(format.length() - 1);
@@ -82,7 +82,7 @@ public class JustificationImpl implements Justification {
       this.mode = modeChar;
       endIndex--;
       if (this.mode != MODE_TRUNCATE) {
-        throw new NlsParseException(format, Justification.class.getSimpleName(), FORMAT_PATTERN);
+        throw new NlsParseException(format, FORMAT_PATTERN, Justification.class.getSimpleName());
       }
     }
     this.width = Integer.parseInt(format.substring(2, endIndex));

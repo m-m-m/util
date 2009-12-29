@@ -30,6 +30,7 @@ import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -42,7 +43,6 @@ import net.sf.mmm.util.reflect.impl.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.impl.UpperBoundWildcardType;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
-import net.sf.mmm.util.value.api.ValueParseGenericException;
 
 /**
  * This class is a collection of utility functions for dealing with
@@ -280,7 +280,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
       }
       return result;
     } catch (RuntimeException e) {
-      throw new ValueParseGenericException(e, type, Type.class);
+      throw new NlsParseException(e, type, Type.class);
     }
   }
 
