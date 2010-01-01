@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.scanner;
+package net.sf.mmm.util.scanner.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,11 +11,9 @@ import static org.junit.Assert.fail;
 
 import java.util.Locale;
 
-import org.junit.Test;
-
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
-import net.sf.mmm.util.scanner.base.CharSequenceScanner;
-import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link CharSequenceScanner}.

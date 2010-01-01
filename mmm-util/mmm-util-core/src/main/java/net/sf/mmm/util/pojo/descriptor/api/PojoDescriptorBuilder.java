@@ -69,6 +69,7 @@ public interface PojoDescriptorBuilder {
    * {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple}.
    * 
    * @see net.sf.mmm.util.pojo.path.api.PojoPathNavigator#pojo2Map(Object)
+   * @since 1.1.1
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} to convert.
    * @return the {@link Map} reflecting the given

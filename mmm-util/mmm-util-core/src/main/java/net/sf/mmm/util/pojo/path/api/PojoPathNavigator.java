@@ -246,6 +246,7 @@ public interface PojoPathNavigator {
    * NOT support {@link Map#size() size} or {@link Map#keySet() iteration}.
    * 
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#pojo2Map(Object)
+   * @since 1.1.1
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} to convert.
    * @return the {@link Map} reflecting the given
@@ -262,6 +263,7 @@ public interface PojoPathNavigator {
    * NOT support {@link Map#size() size} or {@link Map#keySet() iteration}.
    * 
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#pojo2Map(Object)
+   * @since 1.1.1
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} to convert.
    * @param context is the {@link PojoPathContext} for this operation.

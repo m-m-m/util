@@ -47,7 +47,7 @@ import java.util.Locale;
  * </tr>
  * <tr>
  * <td>Justification</td>
- * <td>{@link net.sf.mmm.util.text.api.JustificationBuilder}</td>
+ * <td>a {@link net.sf.mmm.util.text.api.JustificationBuilder justification}</td>
  * </tr>
  * </table>
  * 
