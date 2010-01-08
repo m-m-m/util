@@ -18,10 +18,17 @@ import java.util.List;
 public interface SearchConfiguration {
 
   /**
-   * This method gets the {@link List} of {@link SearchSource source}s.
+   * This method gets the {@link List} of {@link SearchSource sources}.
    * 
-   * @return the {@link List} of {@link SearchSource directories}.
+   * @return the {@link List} of {@link SearchSource}s.
    */
   List<? extends SearchSource> getSources();
+
+  /**
+   * This method gets the {@link List} of {@link SearchDirectory directories}.
+   * 
+   * @return the {@link List} of {@link SearchDirectory}.
+   */
+  List<? extends SearchDirectory> getDirectories();
 
 }

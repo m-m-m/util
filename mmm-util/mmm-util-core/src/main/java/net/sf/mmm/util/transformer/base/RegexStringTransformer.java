@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.sf.mmm.util.transformer.api.Transformer;
+import net.sf.mmm.util.xml.base.jaxb.XmlAdapterPattern;
 
 /**
  * This class converts a string by {@link Pattern#matcher(CharSequence)
@@ -26,10 +28,8 @@ public class RegexStringTransformer implements Transformer<String> {
 
   /** @see #getPattern() */
   @XmlAttribute(name = "pattern", required = true)
-  private String patternString;
-
-  /** @see #getPattern() */
-  private transient Pattern pattern;
+  @XmlJavaTypeAdapter(value = XmlAdapterPattern.class)
+  private Pattern pattern;
 
   /** @see #getReplacement() */
   @XmlAttribute(name = "replacement")
@@ -65,7 +65,6 @@ public class RegexStringTransformer implements Transformer<String> {
     this.pattern = pattern;
     this.replacement = replacement;
     this.replaceAll = replaceAll;
-    this.patternString = this.pattern.pattern();
   }
 
   /**
@@ -73,9 +72,6 @@ public class RegexStringTransformer implements Transformer<String> {
    */
   public Pattern getPattern() {
 
-    if (this.pattern == null) {
-      this.pattern = Pattern.compile(this.patternString);
-    }
     return this.pattern;
   }
 
@@ -100,7 +96,7 @@ public class RegexStringTransformer implements Transformer<String> {
    */
   public String transform(String original) {
 
-    Matcher matcher = getPattern().matcher(original);
+    Matcher matcher = this.pattern.matcher(original);
     if (matcher.find()) {
       if (this.replaceAll) {
         return matcher.replaceAll(this.replacement);

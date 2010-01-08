@@ -34,7 +34,7 @@ public class StringTransformerChain implements Transformer<String> {
   @XmlAttribute(name = "id")
   private String id;
 
-  /** The parent that is extended by this cain or <code>null</code>. */
+  /** The parent that is extended by this chain or <code>null</code>. */
   @XmlIDREF
   private StringTransformerChain parent;
 
@@ -119,7 +119,7 @@ public class StringTransformerChain implements Transformer<String> {
   }
 
   /**
-   * This method gets the ID used to identify this rule.
+   * This method gets the ID used to identify this chain.
    * 
    * @return the ID or <code>null</code> if undefined.
    */

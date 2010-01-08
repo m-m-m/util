@@ -4,34 +4,44 @@
 package net.sf.mmm.search.indexer.base.config;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.indexer.api.config.SearchConfiguration;
-import net.sf.mmm.search.indexer.base.SearchConfigurationDirectoryBean;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
-import net.sf.mmm.util.transformer.api.Transformer;
+import net.sf.mmm.util.transformer.base.StringTransformerChain;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link SearchConfiguration} as JAXB-ready
+ * Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since X 12.10.2009
+ * @since 1.0.0
  */
-@XmlRootElement(name = "sources")
+@XmlRootElement(name = "configuration")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchConfigurationBean implements SearchConfiguration {
 
-  private transient Map<String, FilterRuleChain<String>> filters;
+  @XmlElementWrapper(name = "filters")
+  @XmlElement(name = "filter-chain")
+  private List<FilterRuleChain<String>> filters;
 
-  private transient Map<String, ? extends Transformer<String>> transformers;
+  /** @see #getTransformers() */
+  @XmlElementWrapper(name = "uri-rewriters")
+  @XmlElement(name = "transformer-chain")
+  private List<StringTransformerChain> transformers;
 
-  private transient List<SearchConfigurationDirectoryBean> directories;
+  /** @see #getDirectories() */
+  @XmlElementWrapper(name = "directories")
+  @XmlElement(name = "directory")
+  private List<SearchDirectoryBean> directories;
 
+  /** @see #getSources() */
+  @XmlElementWrapper(name = "sources")
   @XmlElement(name = "source")
   private List<SearchSourceBean> sources;
 
@@ -59,4 +69,45 @@ public class SearchConfigurationBean implements SearchConfiguration {
     this.sources = sources;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public List<SearchDirectoryBean> getDirectories() {
+
+    return this.directories;
+  }
+
+  /**
+   * @param directories is the directories to set
+   */
+  public void setDirectories(List<SearchDirectoryBean> directories) {
+
+    this.directories = directories;
+  }
+
+  /**
+   * @return the transformers
+   */
+  public List<StringTransformerChain> getTransformers() {
+
+    return this.transformers;
+  }
+
+  /**
+   * @param transformers is the transformers to set
+   */
+  public void setTransformers(List<StringTransformerChain> transformers) {
+
+    this.transformers = transformers;
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @param filters
+   */
+  public void setFilters(List<FilterRuleChain<String>> filters) {
+
+    this.filters = filters;
+  }
 }

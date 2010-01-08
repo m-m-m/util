@@ -6,19 +6,23 @@ package net.sf.mmm.search.indexer.base.config;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.indexer.api.config.SearchSource;
 
 /**
- * This is the implementation of the {@link SearchSource} interface.
+ * This is the implementation of {@link SearchSource} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@XmlRootElement(name = "source")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchSourceBean implements SearchSource {
 
   /** @see #getId() */
+  @XmlID
   @XmlAttribute(name = "id")
   private String id;
 

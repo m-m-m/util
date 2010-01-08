@@ -6,8 +6,14 @@ package net.sf.mmm.util.filter.base;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import net.sf.mmm.util.filter.api.FilterRule;
 import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
+import net.sf.mmm.util.xml.base.jaxb.XmlAdapterPattern;
 
 /**
  * This is an implementation of the {@link FilterRule} interface that matches
@@ -16,13 +22,28 @@ import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PatternFilterRule implements FilterRule<String> {
 
   /** @see #accept(String) */
-  private final Pattern pattern;
+  @XmlAttribute(name = "pattern", required = true)
+  @XmlJavaTypeAdapter(value = XmlAdapterPattern.class)
+  private Pattern pattern;
 
   /** @see #accept(String) */
-  private final Boolean result;
+  @XmlAttribute(name = "include", required = true)
+  private Boolean result;
+
+  /**
+   * The non-arg constructor.<br>
+   * <b>NOTE:</b><br>
+   * This constructor should not be called directly! It is only intended for
+   * reflective access (e.g. for JAXB).
+   */
+  public PatternFilterRule() {
+
+    super();
+  }
 
   /**
    * The constructor.

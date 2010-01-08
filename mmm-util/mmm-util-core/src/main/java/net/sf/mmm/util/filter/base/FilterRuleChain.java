@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.api.FilterRule;
@@ -23,13 +25,34 @@ import net.sf.mmm.util.filter.api.FilterRule;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FilterRuleChain<V> implements Filter<V> {
 
+  /** @see #getId() */
+  @XmlID
+  @XmlAttribute(name = "id")
+  private String id;
+
+  /** The parent that is extended by this chain or <code>null</code>. */
+  @XmlIDREF
+  @XmlAttribute(name = "parent")
+  private FilterRuleChain<V> parent;
+
   /** the rules */
-  @XmlElement(name = "include,exclude")
-  private final FilterRule<V>[] rules;
+  @XmlElement(name = "rule", type = PatternFilterRule.class)
+  private FilterRule<V>[] rules;
 
   /** @see #getDefaultResult() */
   @XmlAttribute(name = "default-result", required = false)
-  private final boolean defaultResult;
+  private boolean defaultResult;
+
+  /**
+   * The non-arg constructor.<br>
+   * <b>NOTE:</b><br>
+   * This constructor should not be called directly! It is only intended for
+   * reflective access (e.g. for JAXB).
+   */
+  public FilterRuleChain() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -41,6 +64,26 @@ public class FilterRuleChain<V> implements Filter<V> {
   public FilterRuleChain(boolean defaultResult, FilterRule<V>... rules) {
 
     super();
+    this.rules = rules;
+    this.defaultResult = defaultResult;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param id is the {@link #getId() ID}.
+   * @param parent is the parent-{@link FilterRuleChain chain} to extend or
+   *        <code>null</code> for a root-chain.
+   * @param rules is the chain of rules.
+   * @param defaultResult is the {@link #accept(Object) result} if none of the
+   *        <code>rules</code> match.
+   */
+  public FilterRuleChain(String id, FilterRuleChain<V> parent, boolean defaultResult,
+      FilterRule<V>... rules) {
+
+    super();
+    this.id = id;
+    this.parent = parent;
     this.rules = rules;
     this.defaultResult = defaultResult;
   }
@@ -63,15 +106,40 @@ public class FilterRuleChain<V> implements Filter<V> {
    * first matching rule. If no rule matches,
    * <code>{@link #getDefaultResult()}</code> is returned.
    */
-  public boolean accept(V string) {
+  public boolean accept(V value) {
 
-    for (FilterRule<V> rule : this.rules) {
-      Boolean result = rule.accept(string);
+    Boolean result = acceptRecursive(value);
+    if (result != null) {
+      return result.booleanValue();
+    } else {
+      return this.defaultResult;
+    }
+  }
+
+  /**
+   * This method implements {@link #accept(Object)} recursively.
+   * 
+   * @param value is the value to filter.
+   * @return <code>true</code> if the value is accepted, <code>false</code> if
+   *         the value is NOT accepted, or <code>null</code> if no decision is
+   *         made.
+   */
+  private Boolean acceptRecursive(V value) {
+
+    Boolean result = null;
+    if (this.parent != null) {
+      result = this.parent.acceptRecursive(value);
       if (result != null) {
-        return result.booleanValue();
+        return result;
       }
     }
-    return this.defaultResult;
+    for (FilterRule<V> rule : this.rules) {
+      result = rule.accept(value);
+      if (result != null) {
+        return result;
+      }
+    }
+    return result;
   }
 
   /**
@@ -91,4 +159,15 @@ public class FilterRuleChain<V> implements Filter<V> {
     System.arraycopy(additionalRules, 0, newRules, this.rules.length, additionalRules.length);
     return new FilterRuleChain<V>(newDefaultResult, newRules);
   }
+
+  /**
+   * This method gets the ID used to identify this chain.
+   * 
+   * @return the ID or <code>null</code> if undefined.
+   */
+  public String getId() {
+
+    return this.id;
+  }
+
 }

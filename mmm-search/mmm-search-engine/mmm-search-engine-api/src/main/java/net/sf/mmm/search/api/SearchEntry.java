@@ -105,7 +105,8 @@ public interface SearchEntry {
 
   /**
    * This method gets the URI that identifies the original content and allows to
-   * link to it.
+   * link to it. Typically this is not an entire URL but a path relative to the
+   * base URL of the according {@link #getSource() source}.
    * 
    * @see SearchEntry#PROPERTY_URI
    * 
