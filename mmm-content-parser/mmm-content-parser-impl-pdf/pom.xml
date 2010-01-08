@@ -22,9 +22,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <!-- <groupId>org.apache.pdfbox</groupId> -->
       <groupId>pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
-      <version>0.7.1</version>
+      <version>0.7.3</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

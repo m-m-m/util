@@ -34,16 +34,18 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-envers</artifactId>
-      <version>3.4.0-SNAPSHOT</version>
+      <groupId>org.jboss.envers</groupId>
+      <artifactId>jboss-envers</artifactId>
+      <version>1.2.2.GA-hibernate-3.3</version>
       <scope>compile</scope>
+      <!--
       <exclusions>
         <exclusion>
           <groupId>hsqldb</groupId>
           <artifactId>hsqldb</artifactId>
         </exclusion>
       </exclusions>
+      -->
     </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
