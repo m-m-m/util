@@ -6,6 +6,10 @@ package net.sf.mmm.util.transformer.base;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
@@ -17,16 +21,34 @@ import net.sf.mmm.util.transformer.api.Transformer;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RegexStringTransformer implements Transformer<String> {
 
   /** @see #getPattern() */
-  private final Pattern pattern;
+  @XmlAttribute(name = "pattern", required = true)
+  private String patternString;
+
+  /** @see #getPattern() */
+  private transient Pattern pattern;
 
   /** @see #getReplacement() */
-  private final String replacement;
+  @XmlAttribute(name = "replacement")
+  private String replacement;
 
   /** @see #isReplaceAll() */
-  private final boolean replaceAll;
+  @XmlAttribute(name = "replace-all")
+  private boolean replaceAll;
+
+  /**
+   * The non-arg constructor.<br>
+   * <b>NOTE:</b><br>
+   * This constructor should not be called directly! It is only intended for
+   * reflective access (e.g. for JAXB).
+   */
+  public RegexStringTransformer() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -43,6 +65,7 @@ public class RegexStringTransformer implements Transformer<String> {
     this.pattern = pattern;
     this.replacement = replacement;
     this.replaceAll = replaceAll;
+    this.patternString = this.pattern.pattern();
   }
 
   /**
@@ -50,6 +73,9 @@ public class RegexStringTransformer implements Transformer<String> {
    */
   public Pattern getPattern() {
 
+    if (this.pattern == null) {
+      this.pattern = Pattern.compile(this.patternString);
+    }
     return this.pattern;
   }
 
@@ -74,7 +100,7 @@ public class RegexStringTransformer implements Transformer<String> {
    */
   public String transform(String original) {
 
-    Matcher matcher = this.pattern.matcher(original);
+    Matcher matcher = getPattern().matcher(original);
     if (matcher.find()) {
       if (this.replaceAll) {
         return matcher.replaceAll(this.replacement);

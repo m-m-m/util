@@ -12,11 +12,10 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import junit.framework.TestCase;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 import org.junit.Test;
 import org.w3c.dom.Element;
-
-import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
  * This is the {@link TestCase} for {@link StringTransformerChainXmlParser}.
@@ -30,8 +29,8 @@ public class StringTransformerChainXmlParserTest {
   public void test() throws Exception {
 
     StringTransformerChainXmlParser parser = new StringTransformerChainXmlParser();
-    InputStream inStream = new ClasspathResource(StringTransformerChainXmlParserTest.class, ".xml",
-        true).openStream();
+    InputStream inStream = new ClasspathResource(StringTransformerList.class, ".xml", true)
+        .openStream();
     Element xmlElement = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inStream)
         .getDocumentElement();
     Map<String, StringTransformerChain> chainMap = parser.parseChains(xmlElement);

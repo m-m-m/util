@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.RegexPatternCompiler;
 import net.sf.mmm.util.transformer.api.StringTransformerRule;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * This class allows to parse a list of {@link StringTransformerRule}s from XML
@@ -34,7 +34,14 @@ import net.sf.mmm.util.xml.base.DomUtilImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
+ * @deprecated - use JAXB directly:
+ * 
+ * <pre>
+ * JAXBContext context = JAXBContext.newInstance(StringTransformerList.class);
+ * StringTransformerList chains = (StringTransformerList) context.createUnmarshaller().unmarshal(source);
+ * </pre>
  */
+@Deprecated
 public class StringTransformerChainXmlParser {
 
   /** The name of the XML element for a {@link StringTransformerChain}. */

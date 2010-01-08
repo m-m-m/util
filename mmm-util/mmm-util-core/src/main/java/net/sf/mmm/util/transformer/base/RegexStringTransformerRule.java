@@ -5,6 +5,8 @@ package net.sf.mmm.util.transformer.base;
 
 import java.util.regex.Pattern;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 import net.sf.mmm.util.transformer.api.StringTransformerRule;
 
 /**
@@ -19,7 +21,19 @@ public class RegexStringTransformerRule extends RegexStringTransformer implement
     StringTransformerRule {
 
   /** @see #isStopOnMatch() */
+  @XmlAttribute(name = "stop-on-match")
   private boolean stopOnMatch;
+
+  /**
+   * The non-arg constructor.<br>
+   * <b>NOTE:</b><br>
+   * This constructor should not be called directly! It is only intended for
+   * reflective access (e.g. for JAXB).
+   */
+  public RegexStringTransformerRule() {
+
+    super();
+  }
 
   /**
    * The constructor.
