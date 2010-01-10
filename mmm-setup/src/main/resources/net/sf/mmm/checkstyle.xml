@@ -92,6 +92,7 @@
     <module name="SuperFinalize"/>
     <module name="TodoComment">
       <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="EmptyBlock">
       <property name="option" value="text"/>
@@ -126,6 +127,7 @@
     <module name="ImportControl">
       <property name="severity" value="ignore"/>
       <property name="file" value="net/sf/mmm/import-control.xml"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="JavaNCSS">
       <property name="methodMaximum" value="100"/>
@@ -145,10 +147,11 @@
   <module name="FileTabCharacter"/>
   <module name="RegexpHeader">
     <property name="header" value="/\*[ ]\$[I]d:[ ]..*\$\n \* Copyright \(c\) The m-m-m Team, Licensed under the Apache License, Version 2\.0\n \* http://www\.apache\.org/licenses/LICENSE-2\.0 \*/"/>
-    <property name="fileExtensions" value="java"/>
   </module>
   <module name="Translation"/>
-  <module name="NewlineAtEndOfFile"/>
+  <module name="NewlineAtEndOfFile">
+    <property name="lineSeparator" value="lf"/>
+  </module>
   <module name="JavadocPackage"/>
   <module name="SuppressionCommentFilter">
     <property name="offCommentFormat" value="CHECKSTYLE\:OFF \([a-zA-Z].*\)"/>
