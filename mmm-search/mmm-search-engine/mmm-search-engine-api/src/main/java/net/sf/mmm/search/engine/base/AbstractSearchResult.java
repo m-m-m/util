@@ -68,10 +68,10 @@ public abstract class AbstractSearchResult implements SearchResult {
   }
 
   /**
+   * {@inheritDoc}
+   * 
    * This method is a simple implementation of this method. Please override if
    * there is a more efficient way to do this.
-   * 
-   * @see net.sf.mmm.search.engine.api.SearchResult#getPage(int, int)
    */
   public SearchResultPage getPage(int pageIndex, int hitsPerPage) {
 

@@ -5,7 +5,7 @@ package net.sf.mmm.search.engine.base;
 
 /**
  * This is the interface of the highlighter used for
- * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()}
+ * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

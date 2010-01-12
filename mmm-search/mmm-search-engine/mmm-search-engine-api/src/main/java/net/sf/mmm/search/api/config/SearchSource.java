@@ -1,7 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.search.indexer.api.config;
+package net.sf.mmm.search.api.config;
+
+import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
 /**
  * This is the interface for the configuration of a source of information for
@@ -12,7 +14,13 @@ package net.sf.mmm.search.indexer.api.config;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface SearchSource {
+public interface SearchSource extends AttributeReadId<String> {
+
+  /**
+   * The {@link #getId() ID} of the {@link SearchSource} that represents any
+   * source. In a search it can be used as wildcard to match all sources.
+   */
+  String ID_ANY = "";
 
   /**
    * This method gets the ID of this source. The ID should be a short, technical

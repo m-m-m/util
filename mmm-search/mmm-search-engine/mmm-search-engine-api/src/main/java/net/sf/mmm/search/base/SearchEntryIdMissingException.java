@@ -26,7 +26,7 @@ public class SearchEntryIdMissingException extends SearchException {
    */
   public SearchEntryIdMissingException(String entryId) {
 
-    super(NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, entryId);
+    super(NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, toMap(KEY_ID, entryId));
   }
 
   /**
@@ -37,7 +37,7 @@ public class SearchEntryIdMissingException extends SearchException {
    */
   public SearchEntryIdMissingException(Throwable nested, String entryId) {
 
-    super(nested, NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, entryId);
+    super(nested, NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, toMap(KEY_ID, entryId));
   }
 
 }

@@ -26,7 +26,8 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(String propertyName, String value) {
 
-    super(NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
+    super(NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value, KEY_PROPERTY,
+        propertyName));
   }
 
   /**
@@ -38,7 +39,8 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(Throwable nested, String propertyName, String value) {
 
-    super(nested, NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, value, propertyName);
+    super(nested, NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value,
+        KEY_PROPERTY, propertyName));
   }
 
 }

@@ -27,7 +27,7 @@ public class SearchParseException extends SearchException {
    */
   public SearchParseException(String query) {
 
-    super(NlsBundleSearchApi.ERR_PARSE, query);
+    super(NlsBundleSearchApi.ERR_PARSE, toMap(KEY_QUERY, query));
   }
 
   /**
@@ -38,7 +38,7 @@ public class SearchParseException extends SearchException {
    */
   public SearchParseException(Throwable nested, String query) {
 
-    super(nested, NlsBundleSearchApi.ERR_PARSE, query);
+    super(nested, NlsBundleSearchApi.ERR_PARSE, toMap(KEY_QUERY, query));
   }
 
 }

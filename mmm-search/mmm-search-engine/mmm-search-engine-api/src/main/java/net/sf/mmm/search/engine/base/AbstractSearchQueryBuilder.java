@@ -50,10 +50,13 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggable implem
   /**
    * @see #parseStandardQuery(String, boolean)
    * 
-   * @param parser
-   * @param requireTerms
-   * @param defaultProperty
-   * @param depth is the deepth of the query expression (number of open
+   * @param parser is the scanner of the query-string.
+   * @param requireTerms is <code>true</code> if terms should be
+   *        {@link ComplexSearchQuery#addRequiredQuery(SearchQuery) required} by
+   *        default, or <code>false</code> for optional terms by default.
+   * @param defaultProperty is the property to use as default for unqualified
+   *        search-terms.
+   * @param depth is the depth of the query expression (number of open
    *        parenthesis).
    * @return the parsed query or <code>null</code> if this a call with a depth
    *         greater than <code>0</code> and the parsed query segment was void.
@@ -116,8 +119,9 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggable implem
 
   /**
    * 
-   * @param parser
-   * @param defaultProperty
+   * @param parser is the scanner of the query-string.
+   * @param defaultProperty is the property to use as default for unqualified
+   *        search-terms.
    * @param depth is the deepth of the query expression (number of open
    *        parenthesis).
    * @return the parsed query or <code>null</code> if the parsed query segment

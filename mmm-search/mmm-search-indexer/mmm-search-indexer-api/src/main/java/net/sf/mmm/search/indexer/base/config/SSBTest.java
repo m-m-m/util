@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import net.sf.mmm.search.indexer.api.config.SearchConfiguration;
+import net.sf.mmm.search.base.config.SearchSourceBean;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.filter.base.PatternFilterRule;
 import net.sf.mmm.util.io.api.EncodingUtil;
@@ -37,22 +38,22 @@ public class SSBTest {
    */
   public static void main(String[] args) throws Exception {
 
-    JAXBContext context = JAXBContext.newInstance(SearchConfigurationBean.class);
-    SearchConfigurationBean config = new SearchConfigurationBean();
+    JAXBContext context = JAXBContext.newInstance(SearchIndexerConfigurationBean.class);
+    SearchIndexerConfigurationBean config = new SearchIndexerConfigurationBean();
     // sources
-    List<SearchSourceBean> sourceList = new ArrayList<SearchSourceBean>();
-    config.setSources(sourceList);
+    List<SearchSourceBean> sources = new ArrayList<SearchSourceBean>();
+    config.setSources(sources);
     SearchSourceBean source;
     source = new SearchSourceBean();
     source.setId("Wiki");
     source.setTitle("Wiki");
     source.setUrlPrefix("http://foo.org/twiki/");
-    sourceList.add(source);
+    sources.add(source);
     source = new SearchSourceBean();
     source.setId("SVN");
     source.setTitle("Subversion");
     source.setUrlPrefix("http://foo.org/svn/trunk");
-    sourceList.add(source);
+    sources.add(source);
 
     // transformers
     List<StringTransformerChain> transformerList = new ArrayList<StringTransformerChain>();
@@ -79,12 +80,12 @@ public class SSBTest {
     filters.add(filter);
 
     // directories
-    List<SearchDirectoryBean> directoryList = new ArrayList<SearchDirectoryBean>();
-    config.setDirectories(directoryList);
-    SearchDirectoryBean directory = new SearchDirectoryBean();
+    List<SearchIndexLocationBean> directoryList = new ArrayList<SearchIndexLocationBean>();
+    config.setLocations(directoryList);
+    SearchIndexLocationBean directory = new SearchIndexLocationBean();
     directory.setEncoding(EncodingUtil.ENCODING_UTF_8);
     directory.setFilter(filter);
-    directory.setPath("/data/repository");
+    directory.setLocaltion("/data/repository");
     directory.setSource(source);
     directory.setUriTransformer(transformer);
     directoryList.add(directory);
@@ -93,8 +94,8 @@ public class SSBTest {
     String xml = buffer.toString();
     System.out.println(xml);
     StringReader reader = new StringReader(xml);
-    SearchConfiguration newConfig = (SearchConfiguration) context.createUnmarshaller().unmarshal(
-        reader);
+    SearchIndexerConfiguration newConfig = (SearchIndexerConfiguration) context
+        .createUnmarshaller().unmarshal(reader);
     buffer = new StringWriter();
     context.createMarshaller().marshal(newConfig, buffer);
     String xml2 = buffer.toString();
@@ -107,8 +108,8 @@ public class SSBTest {
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     context.createMarshaller().marshal(newConfig, document);
     DomUtilImpl.getInstance().writeXml(document, System.out, true);
-    System.out.println(newConfig.getDirectories().get(0).getSource().getTitle());
-    System.out.println(((StringTransformerChain) newConfig.getDirectories().get(0)
+    System.out.println(newConfig.getLocations().get(0).getSource().getTitle());
+    System.out.println(((StringTransformerChain) newConfig.getLocations().get(0)
         .getUriTransformer()).getId());
   }
 }

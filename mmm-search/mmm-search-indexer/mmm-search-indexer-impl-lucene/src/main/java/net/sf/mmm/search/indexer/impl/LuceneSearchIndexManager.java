@@ -8,15 +8,15 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.index.IndexModifier;
-
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.base.SearchIoException;
 import net.sf.mmm.search.indexer.api.SearchIndexManager;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.index.IndexModifier;
 
 /**
  * This is the implementation of the
@@ -89,7 +89,7 @@ public class LuceneSearchIndexManager extends AbstractLoggable implements Search
       IndexModifier modifier = new IndexModifier(indexPath, this.analyzer, create);
       return new LuceneSearchIndexer(modifier);
     } catch (IOException e) {
-      throw new SearchIoException(e);
+      throw new RuntimeIoException(e);
     }
   }
 

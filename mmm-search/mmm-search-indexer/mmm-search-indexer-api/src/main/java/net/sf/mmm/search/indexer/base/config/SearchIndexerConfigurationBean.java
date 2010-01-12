@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base.config;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,21 +12,24 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.sf.mmm.search.indexer.api.config.SearchConfiguration;
+import net.sf.mmm.search.base.config.SearchConfigurationBean;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
 
 /**
- * This is the implementation of {@link SearchConfiguration} as JAXB-ready
- * Java-Bean.
+ * This is the implementation of {@link SearchIndexerConfiguration} as
+ * JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @XmlRootElement(name = "configuration")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchConfigurationBean implements SearchConfiguration {
+public class SearchIndexerConfigurationBean extends SearchConfigurationBean implements
+    SearchIndexerConfiguration {
 
+  /** @see #getFilters() */
   @XmlElementWrapper(name = "filters")
   @XmlElement(name = "filter-chain")
   private List<FilterRuleChain<String>> filters;
@@ -35,54 +39,33 @@ public class SearchConfigurationBean implements SearchConfiguration {
   @XmlElement(name = "transformer-chain")
   private List<StringTransformerChain> transformers;
 
-  /** @see #getDirectories() */
-  @XmlElementWrapper(name = "directories")
-  @XmlElement(name = "directory")
-  private List<SearchDirectoryBean> directories;
-
-  /** @see #getSources() */
-  @XmlElementWrapper(name = "sources")
-  @XmlElement(name = "source")
-  private List<SearchSourceBean> sources;
+  /** @see #getLocations() */
+  @XmlElementWrapper(name = "locations")
+  @XmlElement(name = "location")
+  private List<SearchIndexLocationBean> locations;
 
   /**
    * The constructor.
    */
-  public SearchConfigurationBean() {
+  public SearchIndexerConfigurationBean() {
 
     super();
   }
 
   /**
-   * @return the sources
-   */
-  public List<SearchSourceBean> getSources() {
-
-    return this.sources;
-  }
-
-  /**
-   * @param sources is the sources to set
-   */
-  public void setSources(List<SearchSourceBean> sources) {
-
-    this.sources = sources;
-  }
-
-  /**
    * {@inheritDoc}
    */
-  public List<SearchDirectoryBean> getDirectories() {
+  public List<SearchIndexLocationBean> getLocations() {
 
-    return this.directories;
+    return this.locations;
   }
 
   /**
    * @param directories is the directories to set
    */
-  public void setDirectories(List<SearchDirectoryBean> directories) {
+  public void setLocations(List<SearchIndexLocationBean> directories) {
 
-    this.directories = directories;
+    this.locations = directories;
   }
 
   /**
@@ -102,9 +85,24 @@ public class SearchConfigurationBean implements SearchConfiguration {
   }
 
   /**
-   * TODO: javadoc
+   * This method gets the {@link List} of
+   * {@link net.sf.mmm.util.filter.api.Filter}s that
+   * {@link net.sf.mmm.util.filter.api.Filter#accept(Object) decide} which
+   * resources should be indexed.
    * 
-   * @param filters
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexLocation#getFilter()
+   * 
+   * @return the {@link Collection} with the {@link FilterRuleChain}s.
+   */
+  public Collection<FilterRuleChain<String>> getFilters() {
+
+    return this.filters;
+  }
+
+  /**
+   * This method sets the {@link #getFilters() filters}.
+   * 
+   * @param filters is the list of {@link FilterRuleChain}.
    */
   public void setFilters(List<FilterRuleChain<String>> filters) {
 

@@ -9,16 +9,16 @@ import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.state.UIWritePosition;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteSize;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteTitle;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteVisible;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
 
 /**
  * This is the abstract interface for a window of the UIFactory.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize, UIWriteTitle,
-    UIWritePosition, UIWriteVisible {
+public interface UIWindow extends UINode, UIWriteDisposed, UIWriteSize,
+    AttributeWriteTitle<String>, UIWritePosition, UIWriteVisible {
 
   /**
    * This method creates a dialog as child of this window.

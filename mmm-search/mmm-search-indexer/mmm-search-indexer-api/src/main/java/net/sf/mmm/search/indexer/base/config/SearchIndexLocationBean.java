@@ -9,25 +9,26 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.sf.mmm.search.indexer.api.config.SearchDirectory;
-import net.sf.mmm.search.indexer.api.config.SearchSource;
+import net.sf.mmm.search.api.config.SearchSource;
+import net.sf.mmm.search.base.config.SearchSourceBean;
+import net.sf.mmm.search.indexer.api.config.SearchIndexLocation;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
 
 /**
- * This is the implementation of {@link SearchDirectory} as JAXB-ready
+ * This is the implementation of {@link SearchIndexLocation} as JAXB-ready
  * Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlRootElement(name = "directory")
+@XmlRootElement(name = "location")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchDirectoryBean implements SearchDirectory {
+public class SearchIndexLocationBean implements SearchIndexLocation {
 
-  /** @see #getUrl() */
-  @XmlAttribute(name = "path")
-  private String path;
+  /** @see #getLocation() */
+  @XmlAttribute(name = "location")
+  private String localtion;
 
   /** @see #getSource() */
   @XmlIDREF
@@ -51,7 +52,7 @@ public class SearchDirectoryBean implements SearchDirectory {
   /**
    * The constructor.
    */
-  public SearchDirectoryBean() {
+  public SearchIndexLocationBean() {
 
     super();
   }
@@ -59,17 +60,17 @@ public class SearchDirectoryBean implements SearchDirectory {
   /**
    * {@inheritDoc}
    */
-  public String getUrl() {
+  public String getLocation() {
 
-    return this.path;
+    return this.localtion;
   }
 
   /**
    * @param path is the path to set
    */
-  public void setPath(String path) {
+  public void setLocaltion(String path) {
 
-    this.path = path;
+    this.localtion = path;
   }
 
   /**

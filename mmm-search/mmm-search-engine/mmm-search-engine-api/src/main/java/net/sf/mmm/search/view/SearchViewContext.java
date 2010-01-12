@@ -7,6 +7,7 @@ import javax.servlet.ServletRequest;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.SearchResultPage;
+import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 
 /**
  * This class contains represents the context of a search-request.
@@ -16,8 +17,8 @@ import net.sf.mmm.search.engine.api.SearchResultPage;
 public class SearchViewContext {
 
   /**
-   * the name of this object as
-   * {@link ServletRequest#getAttribute(String) request attribute}.
+   * the name of this object as {@link ServletRequest#getAttribute(String)
+   * request attribute}.
    */
   public static final String ATTRIBUTE_NAME = SearchViewContext.class.getName();
 
@@ -49,7 +50,7 @@ public class SearchViewContext {
   private ServletRequest servletRequest;
 
   /** @see #getConfiguration() */
-  private SearchViewConfiguration configuration;
+  private SearchEngineConfiguration configuration;
 
   /** @see #getPageNumber() */
   private int pageNumber;
@@ -89,8 +90,8 @@ public class SearchViewContext {
 
   /**
    * This method gets the {@link ServletRequest#getParameter(String) parameter}
-   * with the given <code>name</code> from the
-   * {@link #getServletRequest() request}.
+   * with the given <code>name</code> from the {@link #getServletRequest()
+   * request}.
    * 
    * @param name is the name of the requested parameter.
    * @return the parameter as {@link String#trim() trimmed} string. If the
@@ -109,8 +110,8 @@ public class SearchViewContext {
 
   /**
    * This method gets the {@link ServletRequest#getParameter(String) parameter}
-   * with the given <code>name</code> from the
-   * {@link #getServletRequest() request}.
+   * with the given <code>name</code> from the {@link #getServletRequest()
+   * request}.
    * 
    * @param name is the name of the requested parameter.
    * @param defaultValue is returned if the parameter is NOT set or invalid.
@@ -167,7 +168,7 @@ public class SearchViewContext {
   /**
    * @return the configuration
    */
-  public SearchViewConfiguration getConfiguration() {
+  public SearchEngineConfiguration getConfiguration() {
 
     return this.configuration;
   }
@@ -175,7 +176,7 @@ public class SearchViewContext {
   /**
    * @param configuration the configuration to set
    */
-  public void setConfiguration(SearchViewConfiguration configuration) {
+  public void setConfiguration(SearchEngineConfiguration configuration) {
 
     this.configuration = configuration;
   }

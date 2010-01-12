@@ -21,43 +21,38 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
   }
 
   /**
-   * @see net.sf.mmm.search.base.SearchUpdateMissingIdException
+   * @see net.sf.mmm.search.indexer.base.SearchUpdateMissingIdException
    */
   public static final String ERR_UPDATE_MISSING_ID = "Can not update entry: neither UID nor URI is set!";
 
   /**
-   * @see net.sf.mmm.search.base.SearchIdInvalidException
+   * @see net.sf.mmm.search.base.SearchEntryIdInvalidException
    */
-  public static final String ERR_ID_INVALID = "Invalid entry ID \"{0}\"!";
+  public static final String ERR_ID_INVALID = "Invalid entry ID \"{id}\"!";
 
   /**
    * @see net.sf.mmm.search.base.SearchEntryIdMissingException
    */
-  public static final String ERR_ENTRY_ID_MISSING = "Entry for ID \"{0}\" does NOT exist!";
+  public static final String ERR_ENTRY_ID_MISSING = "Entry for ID \"{id}\" does NOT exist!";
 
   /**
-   * @see net.sf.mmm.search.base.SearchIdInvalidException
+   * @see net.sf.mmm.search.base.SearchPropertyValueInvalidException
    */
-  public static final String ERR_SEARCH_IO = "Search engine failed with I/O error!";
+  public static final String ERR_PROPERTY_VALUE_INVALID = "The value \"{value}\" is invalid for property \"{property}\"!";
 
   /**
-   * @see net.sf.mmm.search.base.SearchEntryIdMissingException
-   */
-  public static final String ERR_PROPERTY_VALUE_INVALID = "The value \"{0}\" is invalid for property \"{1}\"!";
-
-  /**
-   * @see net.sf.mmm.search.base.SearchEntryIdMissingException
+   * @see net.sf.mmm.search.indexer.base.SearchRemoveFailedException
    */
   public static final String ERR_REMOVE_FAILED = "Failed to remove entry with value \"{0}\" for property \"{1}\"!";
 
   /**
-   * @see net.sf.mmm.search.base.SearchEntryIdMissingException
+   * @see net.sf.mmm.search.indexer.base.SearchAddFailedException
    */
   public static final String ERR_ADD_FAILED = "Failed to add entry \"{0}\"!";
 
   /**
    * @see net.sf.mmm.search.base.SearchParseException
    */
-  public static final String ERR_PARSE = "Failed to parse the query \"{0}\"!";
+  public static final String ERR_PARSE = "Failed to parse the query \"{query}\"!";
 
 }

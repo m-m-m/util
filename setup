@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-cd `dirname "${0}"`
+cd `dirname "$0"`
+pwd
 cd mmm-setup/src/scripts/linux/
-setup-all.sh
+pwd
+./setup-all.sh

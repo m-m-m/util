@@ -1,11 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.search.base;
+package net.sf.mmm.search.indexer.base;
 
 import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.indexer.api.SearchIndexer;
 
 /**
  * This is the exception thrown from

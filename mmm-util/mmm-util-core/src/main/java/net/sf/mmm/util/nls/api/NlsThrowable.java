@@ -40,6 +40,9 @@ public interface NlsThrowable extends NlsObject {
   String KEY_KEY = "key";
 
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_ID = "id";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_VALUE = "value";
 
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */

@@ -8,23 +8,22 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.base.SearchEntryIdInvalidException;
+import net.sf.mmm.search.base.SearchPropertyValueInvalidException;
+import net.sf.mmm.search.indexer.api.MutableSearchEntry;
+import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
+import net.sf.mmm.search.indexer.base.SearchAddFailedException;
+import net.sf.mmm.search.indexer.base.SearchRemoveFailedException;
+import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexModifier;
 import org.apache.lucene.index.Term;
-
-import net.sf.mmm.search.api.SearchEntry;
-import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.base.SearchAddFailedException;
-import net.sf.mmm.search.base.SearchIdInvalidException;
-import net.sf.mmm.search.base.SearchIoException;
-import net.sf.mmm.search.base.SearchPropertyValueInvalidException;
-import net.sf.mmm.search.base.SearchRemoveFailedException;
-import net.sf.mmm.search.indexer.api.MutableSearchEntry;
-import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
-import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the implementation of the
@@ -170,7 +169,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     try {
       this.indexModifier.close();
     } catch (IOException e) {
-      throw new SearchIoException(e);
+      throw new RuntimeIoException(e);
     }
   }
 
@@ -182,7 +181,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     try {
       this.indexModifier.flush();
     } catch (IOException e) {
-      throw new SearchIoException(e);
+      throw new RuntimeIoException(e);
     }
   }
 
@@ -202,7 +201,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     try {
       this.indexModifier.optimize();
     } catch (IOException e) {
-      throw new SearchIoException(e);
+      throw new RuntimeIoException(e);
     }
   }
 
@@ -217,7 +216,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
       this.indexModifier.deleteDocument(docId);
       return true;
     } catch (NumberFormatException e) {
-      throw new SearchIdInvalidException(e, entryId);
+      throw new SearchEntryIdInvalidException(e, entryId);
     } catch (IOException e) {
       throw new SearchRemoveFailedException("ID", entryId);
     }

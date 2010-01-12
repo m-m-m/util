@@ -4,7 +4,6 @@
 package net.sf.mmm.search.indexer.base;
 
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.base.SearchUpdateMissingIdException;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.util.component.base.AbstractLoggable;

@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.search.base;
+package net.sf.mmm.search.indexer.base;
 
 import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
@@ -13,20 +13,17 @@ import net.sf.mmm.search.api.SearchException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SearchIoException extends SearchException {
+public class SearchUpdateMissingIdException extends SearchException {
 
   /** UID for serialization. */
-  private static final long serialVersionUID = -8896253123083824658L;
+  private static final long serialVersionUID = 1458156115842499131L;
 
   /**
    * The constructor.
-   * 
-   * @param ioException is the {@link java.io.IOException} that caused this
-   *        error.
    */
-  public SearchIoException(Throwable ioException) {
+  public SearchUpdateMissingIdException() {
 
-    super(ioException, NlsBundleSearchApi.ERR_SEARCH_IO);
+    super(NlsBundleSearchApi.ERR_UPDATE_MISSING_ID);
   }
 
 }

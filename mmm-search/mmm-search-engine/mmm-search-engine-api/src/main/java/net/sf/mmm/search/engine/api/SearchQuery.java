@@ -11,12 +11,12 @@ package net.sf.mmm.search.engine.api;
 public interface SearchQuery {
 
   /**
+   * {@inheritDoc}
+   * 
    * This method gets a string representation of this query.
    * 
    * @see SearchQueryBuilder#parseNativeQuery(String)
    * @see SearchQueryBuilder#parseStandardQuery(String, boolean)
-   * 
-   * @see java.lang.Object#toString()
    */
   String toString();
 

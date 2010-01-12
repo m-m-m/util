@@ -13,7 +13,7 @@ import net.sf.mmm.search.api.SearchException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SearchIdInvalidException extends SearchException {
+public class SearchEntryIdInvalidException extends SearchException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3613794146407350907L;
@@ -23,9 +23,9 @@ public class SearchIdInvalidException extends SearchException {
    * 
    * @param entryId is the invalid entry ID.
    */
-  public SearchIdInvalidException(String entryId) {
+  public SearchEntryIdInvalidException(String entryId) {
 
-    super(NlsBundleSearchApi.ERR_ID_INVALID, entryId);
+    super(NlsBundleSearchApi.ERR_ID_INVALID, toMap(KEY_ID, entryId));
   }
 
   /**
@@ -34,9 +34,9 @@ public class SearchIdInvalidException extends SearchException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param entryId is the invalid entry ID.
    */
-  public SearchIdInvalidException(Throwable nested, String entryId) {
+  public SearchEntryIdInvalidException(Throwable nested, String entryId) {
 
-    super(nested, NlsBundleSearchApi.ERR_ID_INVALID, entryId);
+    super(nested, NlsBundleSearchApi.ERR_ID_INVALID, toMap(KEY_ID, entryId));
   }
 
 }

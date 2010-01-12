@@ -111,7 +111,10 @@ public class ClasspathResource extends AbstractDataResource {
    * @param nameOrSuffix is the filename of the resource or a suffix (e.g.
    *        ".properties" or "-test.xml") for it depending on
    *        <code>append</code>.
-   * @param append - if <code>true</code> the <code>nameOrSuffix</code>
+   * @param append - if <code>true</code> the <code>nameOrSuffix</code> is
+   *        appended to the {@link Class#getSimpleName() simple classname} of
+   *        <code>someClass</code> or <code>false</code> if the simple name is
+   *        replaced by <code>nameOrSuffix</code>.
    */
   public ClasspathResource(Class<?> someClass, String nameOrSuffix, boolean append) {
 
@@ -163,7 +166,10 @@ public class ClasspathResource extends AbstractDataResource {
    * @param nameOrSuffix is the filename of the resource or a suffix (e.g.
    *        ".properties" or "-test.xml") for it depending on
    *        <code>append</code>.
-   * @param append - if <code>true</code> the <code>nameOrSuffix</code>
+   * @param append - if <code>true</code> the <code>nameOrSuffix</code> is
+   *        appended to the {@link Class#getSimpleName() simple classname} of
+   *        <code>someClass</code> or <code>false</code> if the simple name is
+   *        replaced by <code>nameOrSuffix</code>.
    * @return the absolute path.
    */
   private static String getAbsolutePath(Class<?> someClass, String nameOrSuffix, boolean append) {

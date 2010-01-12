@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base;
 
-import org.w3c.dom.Element;
-
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.search.indexer.api.SearchIndexer;
+
+import org.w3c.dom.Element;
 
 /**
  * This is the interface for a configurator that allows to create a
@@ -24,8 +23,8 @@ public interface SearchConfigurator {
   String XML_TAG_SEARCH_ENGINE = "search-engine";
 
   /**
-   * This method parses the XML-configuration given by <code>element</code>
-   * and creates an according {@link SearchIndexer}.
+   * This method parses the XML-configuration given by <code>element</code> and
+   * creates an according {@link SearchIndexer}.
    * 
    * @param element is the XML-element containing the configuration for the
    *        requested {@link SearchIndexer}. See {@link #XML_TAG_SEARCH_ENGINE}.
@@ -34,11 +33,12 @@ public interface SearchConfigurator {
    * @throws IllegalArgumentException if the configuration is invalid.
    * @throws Exception if the {@link SearchIndexer} could NOT be created.
    */
-  SearchIndexer createSearchIndexer(Element element) throws IllegalArgumentException, Exception;
+  // SearchIndexer createSearchIndexer(Element element) throws
+  // IllegalArgumentException, Exception;
 
   /**
-   * This method parses the XML-configuration given by <code>element</code>
-   * and creates an according {@link ManagedSearchEngine search-engine}.
+   * This method parses the XML-configuration given by <code>element</code> and
+   * creates an according {@link ManagedSearchEngine search-engine}.
    * 
    * @param element is the XML-element containing the configuration for the
    *        requested {@link ManagedSearchEngine search-engine}. See

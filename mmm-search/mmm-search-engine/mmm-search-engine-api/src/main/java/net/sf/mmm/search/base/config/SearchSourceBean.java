@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.search.indexer.base.config;
+package net.sf.mmm.search.base.config;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.sf.mmm.search.indexer.api.config.SearchSource;
+import net.sf.mmm.search.api.config.SearchSource;
 
 /**
  * This is the implementation of {@link SearchSource} as JAXB-ready Java-Bean.

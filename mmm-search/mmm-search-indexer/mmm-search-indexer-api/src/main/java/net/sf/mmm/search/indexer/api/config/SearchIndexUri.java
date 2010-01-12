@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api.config;
 
+import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**

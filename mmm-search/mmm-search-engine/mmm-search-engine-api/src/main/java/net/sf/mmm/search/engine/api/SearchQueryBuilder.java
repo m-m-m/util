@@ -15,11 +15,17 @@ import net.sf.mmm.search.api.SearchException;
  * <pre>
  * {@link SearchQueryBuilder} queryBuilder = mySearchEngine.{@link SearchEngine#getQueryBuilder() getQueryBuilder()};
  * {@link ComplexSearchQuery} query = queryBuilder.{@link #createComplexQuery()};
- * {@link SearchQuery} subQuery1 = queryBuilder.{@link #createTermQuery(String, String) createTermQuery}({@link net.sf.mmm.search.api.SearchEntry#PROPERTY_TEXT SearchEntry.PROPERTY_TEXT}, "Multimedia*");
+ * {@link SearchQuery} subQuery1 = queryBuilder.{@link #createTermQuery(String, 
+ * String) createTermQuery}({@link net.sf.mmm.search.api.SearchEntry#PROPERTY_TEXT 
+ * SearchEntry.PROPERTY_TEXT}, "Multimedia*");
  * query.{@link ComplexSearchQuery#addRequiredQuery(SearchQuery) addRequiredQuery}(subQuery1);
- * {@link SearchQuery} subQuery2 = queryBuilder.{@link #createTermQuery(String, String) createTermQuery}({@link net.sf.mmm.search.api.SearchEntry#PROPERTY_TEXT SearchEntry.PROPERTY_TEXT}, "PHP");
+ * {@link SearchQuery} subQuery2 = queryBuilder.{@link #createTermQuery(String, 
+ * String) createTermQuery}({@link net.sf.mmm.search.api.SearchEntry#PROPERTY_TEXT 
+ * SearchEntry.PROPERTY_TEXT}, "PHP");
  * query.{@link ComplexSearchQuery#addExcludingQuery(SearchQuery) addExcludingQuery}(subQuery2);
- * {@link SearchQuery} subQuery3 = queryBuilder.{@link #createPhraseQuery(String, String) createPhraseQuery}({@link net.sf.mmm.search.api.SearchEntry#PROPERTY_TITLE SearchEntry.PROPERTY_TITLE}, "Enterprise Content Management");
+ * {@link SearchQuery} subQuery3 = queryBuilder.{@link #createPhraseQuery(String, 
+ * String) createPhraseQuery}({@link net.sf.mmm.search.api.SearchEntry#PROPERTY_TITLE 
+ * SearchEntry.PROPERTY_TITLE}, "Enterprise Content Management");
  * query.{@link ComplexSearchQuery#addOptionalQuery(SearchQuery) addOptionalQuery}(subQuery3);
  * </pre>
  * 

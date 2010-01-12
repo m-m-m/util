@@ -6,15 +6,13 @@ package net.sf.mmm.search.view;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import javax.xml.bind.JAXBContext;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
@@ -22,10 +20,10 @@ import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
+import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
+import net.sf.mmm.search.engine.base.config.SearchEngineConfigurationBean;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.file.base.FileUtilImpl;
-import net.sf.mmm.util.xml.api.DomUtil;
-import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This is the abstract base implementation of the controller
@@ -41,8 +39,8 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** @see #init(ServletConfig) */
   private static final String PARAM_CONFIG_FILE = "config-file";
 
-  /** @see #configure(Element) */
-  private SearchViewConfiguration configuration;
+  /** @see #getConfiguration() */
+  private SearchEngineConfiguration configuration;
 
   /** The name of the view for the actual search. */
   private String searchView;
@@ -53,16 +51,12 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** The search engine. */
   private ManagedSearchEngine searchEngine;
 
-  /** The {@link DomUtil} to use. */
-  private DomUtil domUtil;
-
   /**
    * The constructor.
    */
   public AbstractSearchServlet() {
 
     super();
-    this.domUtil = DomUtilImpl.getInstance();
   }
 
   /**
@@ -74,30 +68,25 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   }
 
   /**
+   * This method gets the custom configuration for the search.
+   * 
+   * @return the {@link SearchEngineConfiguration}.
+   */
+  protected SearchEngineConfiguration getConfiguration() {
+
+    return this.configuration;
+  }
+
+  /**
    * @param searchEngine the searchEngine to set
    */
+  @Resource
   public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngine = searchEngine;
     if (this.configuration != null) {
-      this.configuration.setSearchEngine(searchEngine);
+      // this.configuration.setSearchEngine(searchEngine);
     }
-  }
-
-  /**
-   * @param domUtil is the domUtil to set
-   */
-  public void setDomUtil(DomUtil domUtil) {
-
-    this.domUtil = domUtil;
-  }
-
-  /**
-   * @return the domUtil
-   */
-  protected DomUtil getDomUtil() {
-
-    return this.domUtil;
   }
 
   /**
@@ -116,31 +105,17 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       if (this.searchView == null) {
         this.searchView = "search";
       }
-      String configPath = config.getInitParameter("config-file");
+      String configPath = config.getInitParameter(PARAM_CONFIG_FILE);
       if (configPath == null) {
         throw new ResourceMissingException(PARAM_CONFIG_FILE);
       }
       configPath = FileUtilImpl.getInstance().normalizePath(configPath);
       File configFile = new File(configPath);
-      Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+      JAXBContext context = JAXBContext.newInstance(SearchEngineConfigurationBean.class);
+      this.configuration = (SearchEngineConfiguration) context.createUnmarshaller().unmarshal(
           configFile);
-      configure(xmlConfigDoc.getDocumentElement());
     } catch (Exception e) {
       throw new ServletException("Initialization failed!", e);
-    }
-  }
-
-  /**
-   * This method configures this servlet with the given
-   * <code>xmlConfiguration</code>.
-   * 
-   * @param xmlConfiguration is the top-level element of the XML-configuration.
-   */
-  protected void configure(Element xmlConfiguration) {
-
-    this.configuration = new SearchViewConfiguration(xmlConfiguration);
-    if (this.searchEngine != null) {
-      this.configuration.setSearchEngine(this.searchEngine);
     }
   }
 

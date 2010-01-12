@@ -27,5 +27,12 @@
       <version>1.5.6</version>
       <scope>compile</scope>
     </dependency>
+    <!-- XJC for schema generation in IDE -->
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-xjc</artifactId>
+      <version>2.1.6</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>
