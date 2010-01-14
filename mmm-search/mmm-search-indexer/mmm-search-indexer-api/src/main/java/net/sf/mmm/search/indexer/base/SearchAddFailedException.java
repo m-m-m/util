@@ -6,7 +6,6 @@ package net.sf.mmm.search.indexer.base;
 import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.indexer.api.SearchIndexer;
 
 /**
  * This is the exception thrown from
@@ -27,7 +26,7 @@ public class SearchAddFailedException extends SearchException {
    */
   public SearchAddFailedException(SearchEntry entry) {
 
-    super(NlsBundleSearchApi.ERR_ADD_FAILED, "" + entry);
+    super(NlsBundleSearchApi.ERR_ADD_FAILED, toMap(KEY_ENTRY, entry));
   }
 
   /**
@@ -38,7 +37,7 @@ public class SearchAddFailedException extends SearchException {
    */
   public SearchAddFailedException(Throwable nested, SearchEntry entry) {
 
-    super(nested, NlsBundleSearchApi.ERR_ADD_FAILED, "" + entry);
+    super(nested, NlsBundleSearchApi.ERR_ADD_FAILED, toMap(KEY_ENTRY, entry));
   }
 
 }

@@ -38,12 +38,14 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
   /**
    * @see net.sf.mmm.search.base.SearchPropertyValueInvalidException
    */
-  public static final String ERR_PROPERTY_VALUE_INVALID = "The value \"{value}\" is invalid for property \"{property}\"!";
+  public static final String ERR_PROPERTY_VALUE_INVALID = "The value \"{value}\" "
+      + "is invalid for property \"{property}\"!";
 
   /**
    * @see net.sf.mmm.search.indexer.base.SearchRemoveFailedException
    */
-  public static final String ERR_REMOVE_FAILED = "Failed to remove entry with value \"{0}\" for property \"{1}\"!";
+  public static final String ERR_REMOVE_FAILED = "Failed to remove entry with "
+      + "value \"{value}\" for property \"{property}\"!";
 
   /**
    * @see net.sf.mmm.search.indexer.base.SearchAddFailedException

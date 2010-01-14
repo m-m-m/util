@@ -5,7 +5,6 @@ package net.sf.mmm.search.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -23,8 +22,17 @@ public class SearchException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -2903854338698104923L;
 
-  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  /**
+   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   * argument} {@value}.
+   */
   protected static final String KEY_QUERY = "query";
+
+  /**
+   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   * argument} {@value}.
+   */
+  protected static final String KEY_ENTRY = "entry";
 
   /**
    * The constructor.

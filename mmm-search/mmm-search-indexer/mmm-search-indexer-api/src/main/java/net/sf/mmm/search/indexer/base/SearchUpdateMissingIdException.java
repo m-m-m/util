@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
+import java.util.Collections;
+
 import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
@@ -23,7 +25,7 @@ public class SearchUpdateMissingIdException extends SearchException {
    */
   public SearchUpdateMissingIdException() {
 
-    super(NlsBundleSearchApi.ERR_UPDATE_MISSING_ID);
+    super(NlsBundleSearchApi.ERR_UPDATE_MISSING_ID, Collections.<String, Object> emptyMap());
   }
 
 }

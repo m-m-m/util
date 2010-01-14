@@ -26,7 +26,7 @@ public class SearchRemoveFailedException extends SearchException {
    */
   public SearchRemoveFailedException(String property, String value) {
 
-    super(NlsBundleSearchApi.ERR_REMOVE_FAILED, property, value);
+    super(NlsBundleSearchApi.ERR_REMOVE_FAILED, toMap(KEY_PROPERTY, property, KEY_VALUE, value));
   }
 
   /**
@@ -38,7 +38,8 @@ public class SearchRemoveFailedException extends SearchException {
    */
   public SearchRemoveFailedException(Throwable nested, String property, String value) {
 
-    super(nested, NlsBundleSearchApi.ERR_REMOVE_FAILED, property, value);
+    super(nested, NlsBundleSearchApi.ERR_REMOVE_FAILED, toMap(KEY_PROPERTY, property, KEY_VALUE,
+        value));
   }
 
 }
