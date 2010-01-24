@@ -148,4 +148,19 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
   public static final String ERR_XML_INVALID = "Invalid XML!";
 
+  /** @see net.sf.mmm.util.cli.api.AbstractMain */
+  public static final String INF_MAIN_HELP = "help";
+
+  /** @see net.sf.mmm.util.cli.api.AbstractMain */
+  public static final String INF_MAIN_HELP_USAGE = "Print this help.";
+
+  /** @see net.sf.mmm.util.cli.api.AbstractMain */
+  public static final String INF_MAIN_VERSION = "version";
+
+  /** @see net.sf.mmm.util.cli.api.AbstractVersionedMain */
+  public static final String INF_MAIN_VERSION_USAGE = "Print the version of this program.";
+
+  /** @see net.sf.mmm.util.cli.api.AbstractMain */
+  public static final String INF_MAIN_DEFAULT = "default";
+
 }

@@ -8,9 +8,9 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.StringValueConverter;
@@ -32,6 +32,9 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
 
   /** @see #getIso8601Util() */
   private Iso8601Util iso8601Util;
+
+  /** @see #getStringUtil() */
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -61,8 +64,9 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     if (instance == null) {
       synchronized (StringValueConverterImpl.class) {
         if (instance == null) {
-          instance = new StringValueConverterImpl();
-          instance.setIso8601Util(Iso8601UtilImpl.getInstance());
+          StringValueConverterImpl converter = new StringValueConverterImpl();
+          converter.initialize();
+          instance = converter;
         }
       }
     }
@@ -70,8 +74,23 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   }
 
   /**
-   * This method gets the util used to parse and format date and time according
-   * to the standard <code>ISO-8601</code>.
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.iso8601Util == null) {
+      this.iso8601Util = Iso8601UtilImpl.getInstance();
+    }
+    if (this.stringUtil == null) {
+      this.stringUtil = StringUtilImpl.getInstance();
+    }
+  }
+
+  /**
+   * This method gets the {@link Iso8601Util} used to parse and format date and
+   * time according to the standard <code>ISO-8601</code>.
    * 
    * @return the iso8601Util
    */
@@ -88,10 +107,28 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   @Resource
   public void setIso8601Util(Iso8601Util iso8601Util) {
 
-    if (this.iso8601Util != null) {
-      throw new AlreadyInitializedException();
-    }
+    getInitializationState().requireNotInitilized();
     this.iso8601Util = iso8601Util;
+  }
+
+  /**
+   * This method gets the {@link StringUtil} used to deal with strings.
+   * 
+   * @return the stringUtil
+   */
+  protected StringUtil getStringUtil() {
+
+    return this.stringUtil;
+  }
+
+  /**
+   * @param stringUtil is the stringUtil to set
+   */
+  @Resource
+  public void setStringUtil(StringUtil stringUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.stringUtil = stringUtil;
   }
 
   /**
