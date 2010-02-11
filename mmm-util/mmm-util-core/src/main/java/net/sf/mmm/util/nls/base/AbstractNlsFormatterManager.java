@@ -3,8 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.filter.base.ListCharFilter;
+import net.sf.mmm.util.nls.api.NlsArgument;
+import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.text.api.Justification;
+import net.sf.mmm.util.text.api.JustificationBuilder;
+import net.sf.mmm.util.text.base.JustificationBuilderImpl;
 
 /**
  * This is the abstract base implementation of the {@link NlsFormatterManager}
@@ -16,7 +27,19 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterManager implements NlsFormatterManager {
+public abstract class AbstractNlsFormatterManager extends AbstractLoggable implements
+    NlsFormatterManager, NlsArgumentParser {
+
+  /** A char filter that accepts everything except ',' and '}'. */
+  protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(false,
+      NlsArgumentParser.FORMAT_SEPARATOR, NlsArgumentParser.END_EXPRESSION);
+
+  /** A char filter that accepts everything except ',' and '}'. */
+  protected static final CharFilter NO_EXPRESSION = new ListCharFilter(false,
+      NlsArgumentParser.START_EXPRESSION, NlsArgumentParser.END_EXPRESSION);
+
+  /** @see #getJustificationBuilder() */
+  private JustificationBuilder justificationBuilder;
 
   /**
    * The constructor.
@@ -29,15 +52,90 @@ public abstract class AbstractNlsFormatterManager implements NlsFormatterManager
   /**
    * {@inheritDoc}
    */
-  public NlsFormatter<Object> getFormatter() {
+  public NlsArgument parse(CharSequenceScanner scanner) {
 
-    return getFormatter(null);
+    String key = scanner.readWhile(CharFilter.IDENTIFIER_FILTER);
+    char c = scanner.next();
+    String formatType = null;
+    NlsFormatter<?> formatter = null;
+    if (c == NlsArgumentParser.FORMAT_SEPARATOR) {
+      formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
+      c = scanner.forceNext();
+      if (c == NlsArgumentParser.FORMAT_SEPARATOR) {
+        formatter = getSubFormatter(formatType, scanner);
+        c = scanner.forceNext();
+      } else {
+        formatter = getFormatter(formatType);
+      }
+    }
+    Justification justification = null;
+    if (c == NlsArgumentParser.START_EXPRESSION) {
+      String formatJustification = scanner.readUntil(NlsArgumentParser.END_EXPRESSION, false);
+      justification = getJustificationBuilder().build(formatJustification);
+      c = scanner.forceNext();
+    }
+    if (c != NlsArgumentParser.END_EXPRESSION) {
+      // TODO: proper exception, NLS
+      throw new IllegalArgumentException("Unmatched braces in the pattern.");
+    }
+    if (formatter == null) {
+      formatter = getFormatter();
+    }
+    return new NlsArgument(key, formatter, justification);
+  }
+
+  /**
+   * This method is like {@link #getFormatter(String, String)} but reads the
+   * {@link AbstractNlsSubFormatter#getStyle() style} from the given scanner.
+   * 
+   * @param formatType is the type to be formatted.
+   * @param scanner is the current {@link CharSequenceScanner} for parsing the
+   *        style defining details of formatting.
+   * @return the according {@link NlsFormatter}.
+   */
+  protected NlsFormatter<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
+
+    String formatStyle = scanner.readWhile(NO_EXPRESSION);
+    return getFormatter(formatType, formatStyle);
   }
 
   /**
    * {@inheritDoc}
    */
-  public NlsFormatter<Object> getFormatter(String formatType) {
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.justificationBuilder == null) {
+      this.justificationBuilder = JustificationBuilderImpl.getInstance();
+    }
+  }
+
+  /**
+   * This method gets the {@link JustificationBuilder} used to
+   * {@link JustificationBuilder#build(String) build} {@link Justification}s.
+   * 
+   * @return the {@link JustificationBuilder}.
+   */
+  protected JustificationBuilder getJustificationBuilder() {
+
+    return this.justificationBuilder;
+  }
+
+  /**
+   * @param justificationBuilder is the justificationBuilder to set
+   */
+  @Resource
+  public void setJustificationBuilder(JustificationBuilder justificationBuilder) {
+
+    getInitializationState().requireNotInitilized();
+    this.justificationBuilder = justificationBuilder;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public NlsFormatter<?> getFormatter(String formatType) {
 
     return getFormatter(formatType, null);
   }

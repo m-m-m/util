@@ -3,10 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import net.sf.mmm.util.nls.api.NlsFormatter;
-import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.impl.NlsFormatterDefault;
 import net.sf.mmm.util.nls.impl.NlsFormatterManagerImpl;
 
 /**
@@ -19,10 +20,11 @@ import net.sf.mmm.util.nls.impl.NlsFormatterManagerImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsTemplateResolver implements NlsTemplateResolver {
+public abstract class AbstractNlsTemplateResolver extends AbstractLoggable implements
+    NlsTemplateResolver {
 
-  /** The formatter manager to use. */
-  private final NlsFormatterManager formatterManager;
+  /** @see #getArgumentParser() */
+  private NlsArgumentParser argumentParser;
 
   /**
    * The constructor.<br>
@@ -30,31 +32,38 @@ public abstract class AbstractNlsTemplateResolver implements NlsTemplateResolver
   public AbstractNlsTemplateResolver() {
 
     super();
-    this.formatterManager = createFormatterManager();
   }
 
   /**
-   * This method creates the actual {@link NlsFormatterManager} used by this
-   * implementation. It is called once from the constructor. You may override it
-   * to add custom features.
-   * 
-   * @return the {@link NlsFormatterManager} to use.
+   * {@inheritDoc}
    */
-  protected NlsFormatterManager createFormatterManager() {
+  @Override
+  protected void doInitialize() {
 
-    NlsFormatter<Object> defaultFormatter = new NlsFormatterDefault(this);
-    return new NlsFormatterManagerImpl(defaultFormatter);
+    super.doInitialize();
+    if (this.argumentParser == null) {
+      NlsFormatterManagerImpl impl = new NlsFormatterManagerImpl();
+      impl.initialize();
+      this.argumentParser = impl;
+    }
   }
 
   /**
-   * This method gets the {@link NlsFormatterManager} to use by the created
-   * templates.
-   * 
-   * @return the formatterManager
+   * @return the argumentParser
    */
-  public NlsFormatterManager getFormatterManager() {
+  protected NlsArgumentParser getArgumentParser() {
 
-    return this.formatterManager;
+    return this.argumentParser;
+  }
+
+  /**
+   * @param argumentParser is the argumentParser to set
+   */
+  @Resource
+  public void setArgumentParser(NlsArgumentParser argumentParser) {
+
+    getInitializationState().requireNotInitilized();
+    this.argumentParser = argumentParser;
   }
 
 }

@@ -6,6 +6,7 @@ package net.sf.mmm.util.nls.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 
 /**
@@ -16,13 +17,15 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
  * The {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default
  * formatter} is NOT stored in this map.
  * 
+ * @see net.sf.mmm.util.nls.impl.ConfiguredNlsFormatterMap
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public class NlsFormatterMap {
+public class NlsFormatterMap extends AbstractLoggable {
 
   /** @see #getFormatter(String, String) */
-  private final Map<String, Map<String, NlsFormatter<Object>>> builders;
+  private final Map<String, Map<String, NlsFormatter<?>>> builders;
 
   /**
    * The constructor.
@@ -30,7 +33,7 @@ public class NlsFormatterMap {
   public NlsFormatterMap() {
 
     super();
-    this.builders = new HashMap<String, Map<String, NlsFormatter<Object>>>();
+    this.builders = new HashMap<String, Map<String, NlsFormatter<?>>>();
   }
 
   /**
@@ -45,7 +48,7 @@ public class NlsFormatterMap {
    *         replaced by the given <code>formatter</code> or <code>null</code>
    *         if no {@link NlsFormatter} was replaced.
    */
-  public NlsFormatter<Object> registerFormatter(NlsFormatter<Object> formatter, String formatType,
+  public NlsFormatter<?> registerFormatter(NlsFormatter<?> formatter, String formatType,
       String formatStyle) {
 
     if (formatter == null) {
@@ -54,9 +57,9 @@ public class NlsFormatterMap {
     if (formatType == null) {
       throw new NullPointerException();
     }
-    Map<String, NlsFormatter<Object>> style2builderMap = this.builders.get(formatType);
+    Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
     if (style2builderMap == null) {
-      style2builderMap = new HashMap<String, NlsFormatter<Object>>();
+      style2builderMap = new HashMap<String, NlsFormatter<?>>();
       this.builders.put(formatType, style2builderMap);
     }
     // if (style2builderMap.containsKey(formatStyle)) {
@@ -81,11 +84,11 @@ public class NlsFormatterMap {
    *         {@link #registerFormatter(NlsFormatter, String, String) registered}
    *         .
    */
-  public NlsFormatter<Object> getFormatter(String formatType, String formatStyle) {
+  public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
 
-    NlsFormatter<Object> result = null;
+    NlsFormatter<?> result = null;
     if (formatType != null) {
-      Map<String, NlsFormatter<Object>> style2builderMap = this.builders.get(formatType);
+      Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
       if (style2builderMap != null) {
         result = style2builderMap.get(formatStyle);
       }

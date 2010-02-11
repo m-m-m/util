@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+
 /**
  * This is the interface for a manager of {@link NlsFormatter}s.<br>
  * A legal implementation of this interface has to be thread-safe.
@@ -26,6 +27,9 @@ public interface NlsFormatterManager {
 
   /** @see java.text.ChoiceFormat */
   String TYPE_CHOICE = "choice";
+
+  /** Format for {@link java.lang.reflect.Type} */
+  String TYPE_TYPE = "type";
 
   /** @see java.text.DateFormat#SHORT */
   String STYLE_SHORT = "short";
@@ -69,7 +73,7 @@ public interface NlsFormatterManager {
    * @param formatType is the type to be formatted.
    * @return the according {@link NlsFormatter} instance.
    */
-  NlsFormatter<Object> getFormatter(String formatType);
+  NlsFormatter<?> getFormatter(String formatType);
 
   /**
    * This method gets the {@link NlsFormatter} for the given
@@ -100,10 +104,12 @@ public interface NlsFormatterManager {
    * </ul>
    * 
    * <b>ATTENTION:</b><br>
-   * The support for {@link java.text.ChoiceFormat}s is NOT provided by hacking
-   * internal arrays of {@link java.text.MessageFormat}. Instead they will be
-   * provided by this implementation using custom <code>formatStyle</code>s when
-   * <code>formatType</code> is <code>choice</code>.
+   * The support for {@link java.text.ChoiceFormat}s is NOT provided in a
+   * compatible way as by hacking internal arrays of
+   * {@link java.text.MessageFormat}. Instead this implementation provides a
+   * clean configuration via <code>formatStyle</code> when
+   * <code>formatType</code> is <code>choice</code> (see
+   * {@link net.sf.mmm.util.nls.impl.NlsFormatterChoice}).
    * 
    * @see java.text.MessageFormat
    * 
@@ -111,6 +117,6 @@ public interface NlsFormatterManager {
    * @param formatStyle is the style defining details of formatting.
    * @return the according {@link NlsFormatter} instance.
    */
-  NlsFormatter<Object> getFormatter(String formatType, String formatStyle);
+  NlsFormatter<?> getFormatter(String formatType, String formatStyle);
 
 }

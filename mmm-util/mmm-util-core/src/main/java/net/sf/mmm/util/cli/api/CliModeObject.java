@@ -5,8 +5,6 @@ package net.sf.mmm.util.cli.api;
 
 import java.util.Set;
 
-import net.sf.mmm.util.cli.base.CliModeContainer;
-
 /**
  * This is a container for a {@link CliMode} together with additional associated
  * information.
@@ -17,9 +15,20 @@ import net.sf.mmm.util.cli.base.CliModeContainer;
 public interface CliModeObject {
 
   /**
+   * The {@link CliMode#id() ID} of the {@link #getMode() mode}.<br>
+   * <b>ATTENTION:</b><br>
+   * Please use this method to get the ID as {@link #getMode()} may return
+   * <code>null</code>.
+   * 
+   * @return the ID.
+   */
+  String getId();
+
+  /**
    * This method gets the actual {@link CliMode}.
    * 
-   * @return the {@link CliMode}.
+   * @return the {@link CliMode} or <code>null</code> if no {@link CliMode}
+   *         annotation was present.
    */
   CliMode getMode();
 
@@ -27,16 +36,17 @@ public interface CliModeObject {
    * This method gets the {@link Class} that was annotated with the
    * {@link #getMode() mode}.
    * 
-   * @return the annotated {@link Class}.
+   * @return the annotated {@link Class} or <code>null</code> if
+   *         {@link #getMode()} is <code>null</code>.
    */
   Class<?> getAnnotatedClass();
 
   /**
-   * This method gets the {@link Set} of {@link CliModeContainer modes} that are
+   * This method gets the {@link Set} of {@link CliModeObject modes} that are
    * {@link CliMode#parentIds() extended} by this {@link #getMode() mode}.
    * 
-   * @return the extended {@link CliModeContainer modes}.
+   * @return the extended {@link CliModeObject modes}.
    */
-  Set<CliModeContainer> getExtendedModes();
+  Set<? extends CliModeObject> getExtendedModes();
 
 }

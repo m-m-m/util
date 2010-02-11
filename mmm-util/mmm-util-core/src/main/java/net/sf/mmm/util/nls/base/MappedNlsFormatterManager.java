@@ -15,7 +15,15 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
 public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterManager {
 
   /** @see #getFormatter(String, String) */
-  private final NlsFormatterMap formatterMap;
+  private NlsFormatterMap formatterMap;
+
+  /**
+   * The constructor.
+   */
+  public MappedNlsFormatterManager() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -49,15 +57,9 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
   /**
    * {@inheritDoc}
    */
-  @Override
-  public abstract NlsFormatter<Object> getFormatter();
+  public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
 
-  /**
-   * {@inheritDoc}
-   */
-  public NlsFormatter<Object> getFormatter(String formatType, String formatStyle) {
-
-    NlsFormatter<Object> result = null;
+    NlsFormatter<?> result = null;
     if (formatType != null) {
       result = this.formatterMap.getFormatter(formatType, formatStyle);
       if (result == null) {
@@ -73,6 +75,23 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
       result = getFormatter();
     }
     return result;
+  }
+
+  /**
+   * @return the formatterMap
+   */
+  protected NlsFormatterMap getFormatterMap() {
+
+    return this.formatterMap;
+  }
+
+  /**
+   * @param formatterMap is the formatterMap to set
+   */
+  public void setFormatterMap(NlsFormatterMap formatterMap) {
+
+    getInitializationState().requireNotInitilized();
+    this.formatterMap = formatterMap;
   }
 
 }

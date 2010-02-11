@@ -8,6 +8,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.Format;
 import java.util.Locale;
 
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
@@ -43,6 +44,24 @@ public final class NlsFormatterNumberPattern extends SimpleNlsFormatter<Object> 
     // DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance(locale)
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     return new DecimalFormat(this.pattern, symbols);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getType() {
+
+    return NlsFormatterManager.TYPE_NUMBER;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getStyle() {
+
+    return this.pattern;
   }
 
 }

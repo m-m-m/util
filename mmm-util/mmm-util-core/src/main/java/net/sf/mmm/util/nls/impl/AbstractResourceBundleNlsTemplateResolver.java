@@ -58,7 +58,7 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
     String key = resourceBundle.getKey(internationalizedMessage);
     if (key != null) {
       String name = resourceBundle.getClass().getName();
-      return new NlsTemplateImpl(name, key, getFormatterManager());
+      return new NlsTemplateImpl(name, key, getArgumentParser());
     }
     return null;
   }

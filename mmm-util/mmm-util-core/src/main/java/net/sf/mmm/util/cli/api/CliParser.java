@@ -33,18 +33,6 @@ public interface CliParser {
   void printHelp(Appendable target, CliOutputSettings settings);
 
   /**
-   * This method prints the help (program usage) generated from the annotations
-   * to the given {@link Appendable}.
-   * 
-   * @param target is the {@link Appendable} where to print to.
-   * @param omitMainUsage - if <code>true</code> the usage-line of the
-   *        main-program is omitted, <code>false</code> otherwise. Use
-   *        <code>true</code> if you do NOT keep the parameters in your
-   *        main-program but annotate an externalized state object.
-   */
-  void printHelp(Appendable target, boolean omitMainUsage);
-
-  /**
    * This method parses the given command-line arguments and applies the parsed
    * {@link CliOption options} and {@link CliArgument arguments} to the
    * {@link net.sf.mmm.util.pojo.api.Pojo} supplied when

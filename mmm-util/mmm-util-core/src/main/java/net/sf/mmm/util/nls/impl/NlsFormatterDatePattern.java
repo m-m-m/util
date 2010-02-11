@@ -7,6 +7,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
@@ -40,6 +41,24 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
 
     // reimplement thread-safe SimpleDateFormat?
     return new SimpleDateFormat(this.pattern, locale);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getType() {
+
+    return NlsFormatterManager.TYPE_DATE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getStyle() {
+
+    return this.pattern;
   }
 
 }

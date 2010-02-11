@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.nls.api.NlsArgumentParser;
 
 /**
  * This class is the straight forward implementation of the
@@ -30,25 +30,11 @@ public class NlsTemplateImpl extends FormattedNlsTemplate {
    * @param name is the {@link #getName() name} of the bundle.
    * @param key is the {@link #getKey() key} of the string to lookup in the
    *        bundle.
+   * @param argumentParser is the {@link NlsArgumentParser} to use.
    */
-  public NlsTemplateImpl(String name, String key) {
+  public NlsTemplateImpl(String name, String key, NlsArgumentParser argumentParser) {
 
-    super();
-    this.name = name;
-    this.key = key;
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getName() name} of the bundle.
-   * @param key is the {@link #getKey() key} of the string to lookup in the
-   *        bundle.
-   * @param formatterManager is the {@link NlsFormatterManager} to use.
-   */
-  public NlsTemplateImpl(String name, String key, NlsFormatterManager formatterManager) {
-
-    super(formatterManager);
+    super(argumentParser);
     this.name = name;
     this.key = key;
   }
@@ -86,6 +72,7 @@ public class NlsTemplateImpl extends FormattedNlsTemplate {
     try {
       return ResourceBundle.getBundle(this.name, locale).getString(this.key);
     } catch (MissingResourceException e) {
+      // getLogger().warn(e);
       return "unresolved (" + this.name + ":" + this.key + ")";
     }
   }

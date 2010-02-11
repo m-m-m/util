@@ -16,7 +16,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** */
-  @CliOption(name = "--version", aliases = "-v", usage = NlsBundleUtilCore.INF_MAIN_VERSION_USAGE)
+  @CliOption(name = CliOption.NAME_VERSION, aliases = CliOption.ALIAS_VERSION, //
+  usage = NlsBundleUtilCore.INF_MAIN_VERSION_USAGE)
   private boolean version;
 
   /**
@@ -33,7 +34,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
   protected int run(CliModeObject mode) throws Exception {
 
     if (this.version) {
-      assert (CliMode.MODE_VERSION.equals(mode.getMode().id()));
+      assert (CliMode.MODE_VERSION.equals(mode.getId()));
       getOutputStream().println(getVersion());
       return 0;
     }

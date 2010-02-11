@@ -8,11 +8,12 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
+import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
@@ -21,7 +22,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsFormatterDefault extends AbstractNlsFormatter<Object> {
+public class NlsFormatterDefault extends AbstractNlsSubFormatter<Object> {
 
   /** The default singleton instance. */
   public static final NlsFormatterDefault INSTANCE = new NlsFormatterDefault();
@@ -51,33 +52,51 @@ public class NlsFormatterDefault extends AbstractNlsFormatter<Object> {
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Appendable buffer) {
+  public void format(Object object, Locale locale, Map<String, Object> arguments, Appendable buffer)
+      throws IOException {
 
-    try {
-      String result = null;
-      if (object != null) {
-        if (object instanceof Number) {
-          result = NumberFormat.getInstance(locale).format(object);
-        } else if (object instanceof Date) {
-          DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT,
-              locale);
-          result = format.format(object);
-        } else if (object instanceof NlsObject) {
-          NlsMessage message = ((NlsObject) object).toNlsMessage();
-          if (message != null) {
-            message.getLocalizedMessage(locale, this.templateResolver, buffer);
-            return;
-          }
-        } else {
-          result = object.toString();
+    String result = null;
+    if (object != null) {
+      if (object instanceof Number) {
+        result = NumberFormat.getInstance(locale).format(object);
+      } else if (object instanceof Date) {
+        DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT,
+            locale);
+        result = format.format(object);
+      } else if (object instanceof NlsObject) {
+        NlsMessage message = ((NlsObject) object).toNlsMessage();
+        if (message != null) {
+          message.getLocalizedMessage(locale, this.templateResolver, buffer);
+          return;
         }
+      } else if (object instanceof Class<?>) {
+        result = ((Class<?>) object).getName();
+      } else {
+        result = object.toString();
       }
-      if (result == null) {
-        result = "null";
-      }
-      buffer.append(result);
-    } catch (IOException e) {
-      throw new IllegalStateException(e);
     }
+    if (result == null) {
+      result = "null";
+    }
+    buffer.append(result);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getStyle() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getType() {
+
+    return null;
+  }
+
 }

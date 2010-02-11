@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
@@ -34,9 +35,9 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
    *        <code>locale</code>.
    * @param locale is the locale to use. The implementation may ignore it here
    *        because it is also supplied at
-   *        {@link NlsMessageFormatter#format(Map, Locale, Appendable)}. Anyhow
-   *        it allows the implementation to do smart caching of the parsed
-   *        formatter in association with the locale.
+   *        {@link NlsMessageFormatter#format(Void, Locale, Map, Appendable)}.
+   *        Anyhow it allows the implementation to do smart caching of the
+   *        parsed formatter in association with the locale.
    * @return the formatter instance.
    */
   protected abstract NlsMessageFormatter createFormatter(String messageTemplate, Locale locale);
@@ -44,14 +45,15 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
   /**
    * {@inheritDoc}
    */
-  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer) {
+  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer)
+      throws IOException {
 
     String translation = translate(locale);
     if (translation == null) {
       return false;
     } else {
       NlsMessageFormatter formatter = createFormatter(translation, locale);
-      formatter.format(arguments, locale, buffer);
+      formatter.format(null, locale, arguments, buffer);
       return true;
     }
   }

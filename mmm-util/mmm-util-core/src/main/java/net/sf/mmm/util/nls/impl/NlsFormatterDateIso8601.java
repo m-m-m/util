@@ -3,10 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import java.util.Calendar;
-import java.util.Locale;
-
-import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
@@ -15,10 +13,7 @@ import net.sf.mmm.util.date.base.Iso8601UtilImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsFormatterDateIso8601 extends AbstractNlsFormatterDate {
-
-  /** The singleton instance. */
-  public static final NlsFormatterDateIso8601 INSTANCE = new NlsFormatterDateIso8601();
+public class NlsFormatterDateIso8601 extends AbstractNlsFormatterDateIso8601 {
 
   /**
    * The constructor.
@@ -29,13 +24,21 @@ public class NlsFormatterDateIso8601 extends AbstractNlsFormatterDate {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param iso8601Util is the {@link Iso8601Util} instance to use.
+   */
+  public NlsFormatterDateIso8601(Iso8601Util iso8601Util) {
+
+    super(iso8601Util);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
-  protected void format(Calendar calendar, Locale locale, Appendable buffer) {
+  protected String getType() {
 
-    // TODO: use component instance
-    Iso8601UtilImpl.getInstance().formatDate(calendar, true, buffer);
+    return NlsFormatterManager.TYPE_DATE;
   }
-
 }

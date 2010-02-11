@@ -7,6 +7,7 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
@@ -18,13 +19,10 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
  */
 public final class NlsFormatterInteger extends SimpleNlsFormatter<Object> {
 
-  /** The singleton instance of this {@link Format}. */
-  public static final NlsFormatterInteger INSTANCE = new NlsFormatterInteger();
-
   /**
    * The constructor.
    */
-  private NlsFormatterInteger() {
+  public NlsFormatterInteger() {
 
     super();
   }
@@ -36,6 +34,24 @@ public final class NlsFormatterInteger extends SimpleNlsFormatter<Object> {
   public Format createFormat(Locale locale) {
 
     return NumberFormat.getIntegerInstance(locale);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getType() {
+
+    return NlsFormatterManager.TYPE_NUMBER;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getStyle() {
+
+    return NlsFormatterManager.STYLE_INTEGER;
   }
 
 }

@@ -67,7 +67,6 @@ public class InitializationState {
    * This method sets the state to {@link #isInitialized() initialized}.<br>
    * <b>ATTENTION:</b><br>
    * You need to call {@link #setInitializing()} before you invoke this method!
-   * 
    */
   public void setInitialized() {
 

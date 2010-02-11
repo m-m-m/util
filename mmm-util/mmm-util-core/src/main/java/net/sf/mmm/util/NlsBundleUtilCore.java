@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
+import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
@@ -148,6 +149,19 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
   public static final String ERR_XML_INVALID = "Invalid XML!";
 
+  /** @see net.sf.mmm.util.cli.api.CliModeCycleException */
+  public static final String ERR_CLI_MODE_CYCLE = "A @" + CliMode.class.getSimpleName()
+      + "-cycle has been detected[{cycle}]!";
+
+  /** @see net.sf.mmm.util.cli.api.CliOptionIllegalNameOrAliasException */
+  public static final String ERR_CLI_OPTION_NAME_ILLEGAL = "The name or alias \"{name}\" of \"{option}\" is illegal!";
+
+  /** @see net.sf.mmm.util.cli.api.CliModeMixException */
+  public static final String ERR_CLI_MODE_MIX = "The options \"{option}\" and \"{option2}\" have incompatible modes and can not be mixed!";
+
+  /** @see net.sf.mmm.util.cli.api.CliParserExcepiton */
+  public static final String ERR_CLI_PARSER = "The class \"{type}\" is invalid as command-line interface state-object!";
+
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
   public static final String INF_MAIN_HELP = "help";
 
@@ -162,5 +176,8 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
   public static final String INF_MAIN_DEFAULT = "default";
+
+  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
+  public static final String MSG_MAIN_USAGE = "Usage: {mainClass} [<option>*]";
 
 }

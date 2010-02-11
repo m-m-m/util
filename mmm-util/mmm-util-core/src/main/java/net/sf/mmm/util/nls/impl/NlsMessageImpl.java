@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -25,6 +27,9 @@ public class NlsMessageImpl implements NlsMessage {
   /** Locale.ROOT is only available since java 6. */
   private static final Locale LOCALE_ROOT = new Locale("");
 
+  /** @see #getArgumentParser() */
+  private final NlsArgumentParser argumentParser;
+
   /** The {@link #message} as {@link NlsTemplate}. */
   private NlsTemplate template;
 
@@ -41,11 +46,15 @@ public class NlsMessageImpl implements NlsMessage {
    *        {@link #getInternationalizedMessage() raw message}.
    * @param messageArguments are the {@link #getArgument(String) arguments}
    *        filled into the message after nationalization.
+   * @param argumentParser is the {@link #getArgumentParser() argument-parser}
+   *        to use.
    */
-  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments) {
+  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments,
+      NlsArgumentParser argumentParser) {
 
     super();
     assert (template != null);
+    this.argumentParser = argumentParser;
     this.template = template;
     this.message = null;
     if (messageArguments == null) {
@@ -62,11 +71,15 @@ public class NlsMessageImpl implements NlsMessage {
    *        {@link #getInternationalizedMessage() internationalized message}.
    * @param messageArguments are the {@link #getArgument(String) arguments}
    *        filled into the message after nationalization.
+   * @param argumentParser is the {@link #getArgumentParser() argument-parser}
+   *        to use.
    */
-  public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments) {
+  public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments,
+      NlsArgumentParser argumentParser) {
 
     super();
     assert (internationalizedMessage != null);
+    this.argumentParser = argumentParser;
     this.template = null;
     this.message = internationalizedMessage;
     this.arguments = messageArguments;
@@ -112,6 +125,14 @@ public class NlsMessageImpl implements NlsMessage {
       this.message = this.template.translate(LOCALE_ROOT);
     }
     return this.message;
+  }
+
+  /**
+   * @return the argumentParser
+   */
+  protected NlsArgumentParser getArgumentParser() {
+
+    return this.argumentParser;
   }
 
   /**
@@ -198,12 +219,12 @@ public class NlsMessageImpl implements NlsMessage {
             buffer.append(LOCALIZATION_FAILURE_PREFIX);
           }
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(this.message,
-              NlsFormatterManagerImpl.INSTANCE);
-          format.format(this.arguments, locale, buffer);
+              getArgumentParser());
+          format.format(null, locale, this.arguments, buffer);
         }
       }
     } catch (IOException e) {
-      throw new IllegalStateException(e);
+      throw new RuntimeIoException(e);
     }
   }
 

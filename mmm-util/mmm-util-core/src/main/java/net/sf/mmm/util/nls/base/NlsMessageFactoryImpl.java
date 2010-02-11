@@ -5,8 +5,12 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.nls.impl.NlsFormatterManagerImpl;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
@@ -17,6 +21,9 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
  * @since 1.0.0
  */
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
+
+  /** @see #getArgumentParser() */
+  private NlsArgumentParser argumentParser;
 
   /**
    * The constructor.
@@ -31,7 +38,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
    */
   public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(template, messageArguments);
+    return new NlsMessageImpl(template, messageArguments, this.argumentParser);
   }
 
   /**
@@ -39,7 +46,39 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
    */
   public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(internationalizedMessage, messageArguments);
+    return new NlsMessageImpl(internationalizedMessage, messageArguments, this.argumentParser);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.argumentParser == null) {
+      NlsFormatterManagerImpl formatterManager = new NlsFormatterManagerImpl();
+      formatterManager.initialize();
+      this.argumentParser = formatterManager;
+    }
+  }
+
+  /**
+   * @return the argumentParser
+   */
+  public NlsArgumentParser getArgumentParser() {
+
+    return this.argumentParser;
+  }
+
+  /**
+   * @param argumentParser is the argumentParser to set
+   */
+  @Resource
+  public void setArgumentParser(NlsArgumentParser argumentParser) {
+
+    getInitializationState().requireNotInitilized();
+    this.argumentParser = argumentParser;
   }
 
 }

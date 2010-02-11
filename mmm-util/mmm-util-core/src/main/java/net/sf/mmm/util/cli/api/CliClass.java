@@ -14,6 +14,9 @@ import java.lang.annotation.Target;
  * of a main-program that are parsed from the commandline arguments. This
  * annotation is optional. If it is not present, the defaults will apply.
  * 
+ * @see CliOption
+ * @see CliArgument
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */

@@ -6,20 +6,19 @@ package net.sf.mmm.util.nls.base;
 import java.io.IOException;
 import java.text.Format;
 import java.util.Locale;
-
-import net.sf.mmm.util.nls.api.NlsFormatter;
+import java.util.Map;
 
 /**
- * This is an abstract base implementation of {@link NlsFormatter} that adapts a
- * {@link Format}.
+ * This is an abstract base implementation of
+ * {@link net.sf.mmm.util.nls.api.NlsFormatter} that adapts a {@link Format}.
  * 
  * @param <O> is the generic type of the object to
- *        {@link #format(Object, Locale)}.
+ *        {@link #format(Object, Locale, Map)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SimpleNlsFormatter<O> implements NlsFormatter<O> {
+public abstract class SimpleNlsFormatter<O> extends AbstractNlsSubFormatter<O> {
 
   /**
    * The constructor.
@@ -40,7 +39,8 @@ public abstract class SimpleNlsFormatter<O> implements NlsFormatter<O> {
   /**
    * {@inheritDoc}
    */
-  public String format(O object, Locale locale) {
+  @Override
+  public String format(O object, Locale locale, Map<String, Object> arguments) {
 
     return createFormat(locale).format(object);
   }
@@ -48,10 +48,10 @@ public abstract class SimpleNlsFormatter<O> implements NlsFormatter<O> {
   /**
    * {@inheritDoc}
    */
-  public void format(O object, Locale locale, Appendable buffer) {
+  public void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer) {
 
     try {
-      buffer.append(format(object, locale));
+      buffer.append(format(object, locale, arguments));
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }

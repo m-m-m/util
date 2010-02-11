@@ -3,43 +3,35 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import java.text.DateFormat;
-import java.text.Format;
-import java.util.Locale;
-
-import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
- * using {@link DateFormat#getDateInstance(int, Locale)}.
+ * using {@link java.text.DateFormat#getDateInstance(int, java.util.Locale)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class NlsFormatterDate extends SimpleNlsFormatter<Object> {
-
-  /** @see #createFormat(Locale) */
-  private final int style;
+public final class NlsFormatterDate extends AbstractSimpleNlsFormatterDate {
 
   /**
    * The constructor.
    * 
    * @param style is the style used for formatting dates (e.g.
-   *        {@link DateFormat#SHORT}).
+   *        {@link java.text.DateFormat#SHORT}).
    */
   public NlsFormatterDate(int style) {
 
-    super();
-    this.style = style;
+    super(style);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Format createFormat(Locale locale) {
+  protected String getType() {
 
-    return DateFormat.getDateInstance(this.style, locale);
+    return NlsFormatterManager.TYPE_DATE;
   }
 
 }

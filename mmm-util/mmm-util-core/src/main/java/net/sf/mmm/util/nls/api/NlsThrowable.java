@@ -72,6 +72,15 @@ public interface NlsThrowable extends NlsObject {
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_PATH = "path";
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_NAME = "name";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_OPTION = "option";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_MODE = "mode";
+
   /**
    * @return the {@link Throwable#getCause() cause}.
    */

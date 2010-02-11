@@ -35,7 +35,8 @@ public abstract class AbstractMain {
   protected static final int EXIT_CODE_UNEXPECTED = -1;
 
   /** Option to show the {@link #printHelp(CliParser) usage}. */
-  @CliOption(name = "--help", aliases = "-h", required = true, usage = NlsBundleUtilCore.INF_MAIN_HELP_USAGE, mode = CliMode.MODE_HELP)
+  @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //
+  required = true, usage = NlsBundleUtilCore.INF_MAIN_HELP_USAGE, mode = CliMode.MODE_HELP)
   private boolean help;
 
   /**
@@ -156,7 +157,7 @@ public abstract class AbstractMain {
     try {
       CliModeObject mode = parser.parseArguments(args);
       if (this.help) {
-        assert (mode.getMode().id() == CliMode.MODE_HELP);
+        assert (mode.getId() == CliMode.MODE_HELP);
         printHelp(parser);
         return 0;
       }

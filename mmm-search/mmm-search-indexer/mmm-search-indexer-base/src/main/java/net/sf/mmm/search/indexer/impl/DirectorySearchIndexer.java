@@ -11,7 +11,7 @@ import org.kohsuke.args4j.Option;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import net.sf.mmm.search.indexer.api.SearchIndexManager;
-import net.sf.mmm.util.cli.AbstractMain;
+import net.sf.mmm.util.cli.api.AbstractMain;
 import net.sf.mmm.util.file.api.FileUtil;
 
 /**

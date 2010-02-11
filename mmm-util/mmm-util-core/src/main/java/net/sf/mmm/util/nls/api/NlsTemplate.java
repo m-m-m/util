@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public interface NlsTemplate {
   /**
    * This method behaves like {@link #translate(Locale)} but additionally fills
    * the given <code>arguments</code> into the translated message writing into
-   * the given <code>buffer</code> (e.g. using {@link java.text.MessageFormat}).
+   * the given <code>buffer</code>.
    * 
    * @param locale is the locale to translate to.
    * @param arguments are the variable arguments to fill in the message.
@@ -39,7 +40,9 @@ public interface NlsTemplate {
    * @return <code>true</code> if the (translated) message has been appended to
    *         the given <code>messageBuffer</code> or <code>false</code> if the
    *         translation failed.
+   * @throws IOException if the given {@link Appendable} caused such exception.
    */
-  boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer);
+  boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer)
+      throws IOException;
 
 }

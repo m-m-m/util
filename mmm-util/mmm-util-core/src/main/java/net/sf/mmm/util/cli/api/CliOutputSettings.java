@@ -6,7 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
- * TODO: this class ...
+ * This class represents the settings for the
+ * {@link CliParser#printHelp(Appendable, CliOutputSettings) help output}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
@@ -15,6 +16,8 @@ public class CliOutputSettings {
 
   /** @see #getWidth() */
   private int width;
+
+  private int optionRatio;
 
   /** @see #getLineSeparator() */
   private String lineSeparator;
@@ -26,6 +29,8 @@ public class CliOutputSettings {
 
     super();
     this.lineSeparator = StringUtil.LINE_SEPARATOR;
+    this.width = 80;
+    this.optionRatio = 40;
   }
 
   /**
@@ -40,7 +45,11 @@ public class CliOutputSettings {
   }
 
   /**
-   * @return the width
+   * This method gets the width of the
+   * {@link CliParser#printHelp(Appendable, CliOutputSettings) help-output} in
+   * characters per line.
+   * 
+   * @return the width or 0
    */
   public int getWidth() {
 

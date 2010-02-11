@@ -38,12 +38,12 @@ import java.util.Locale;
  * </tr>
  * <tr>
  * <td>FormatType</td>
- * <td>one of <code>number</code>,<code>date</code>,<code>time</code> or
- * <code>datetime</code></td>
+ * <td>a type specifying how to format the value (see below). Should fit to the
+ * {@link Object#getClass() type} of the value.
  * </tr>
  * <tr>
  * <td>FormatStyle</td>
- * <td>a style according to FormatType (see below).</td>
+ * <td>a style according to <code>FormatType</code> (see below).</td>
  * </tr>
  * <tr>
  * <td>Justification</td>
@@ -51,19 +51,52 @@ import java.util.Locale;
  * </tr>
  * </table>
  * 
- * FormatType: one of number date time choice
- * 
- * FormatStyle: short medium long full integer currency percent SubformatPattern
- * 
- * String: StringPartopt String StringPart
- * 
- * StringPart: '' ' QuotedString ' UnquotedString
- * 
- * SubformatPattern: SubformatPatternPartopt SubformatPattern
- * SubformatPatternPart
- * 
- * SubFormatPatternPart: ' QuotedPattern ' UnquotedPattern
- * 
+ * Here are the supported variants:
+ * <table border="1">
+ * <tr>
+ * <th>FormatType</th>
+ * <th>FormatStyle</th>
+ * <th>Example</th>
+ * <th>Comment</th>
+ * </tr>
+ * <tr>
+ * <td>-</td>
+ * <td>-</td>
+ * <td>value as string</td>
+ * <td>default string representation of the value</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
+ * <td>-</td>
+ * <td>12,345</td>
+ * <td>Numeric representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
+ * <td>{@link NlsFormatterManager#STYLE_PERCENT percent}</td>
+ * <td>12%</td>
+ * <td>Number in percent</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
+ * <td>{@link NlsFormatterManager#STYLE_CURRENCY currency}</td>
+ * <td>123,45€</td>
+ * <td>Number as currency</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>-</td>
+ * <td>12,345</td>
+ * <td>Numeric representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>yyyy.MM.dd-HH:mm:ssZ</td>
+ * <td>12,345</td>
+ * <td>Any other style is treated pattern for {@link java.text.SimpleDateFormat}
+ * </td>
+ * </tr>
+ * </table>
  * 
  * For the term <em>internationalization</em> usually the shortcut <em>i18n</em>
  * is used.

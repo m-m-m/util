@@ -27,6 +27,21 @@ public @interface CliOption {
   /** The default {@link #operand() operand}. */
   String PARAMETER_DEFAULT = "arg";
 
+  /** The {@link #name()} of the option to get help/usage. */
+  String NAME_HELP = "--help";
+
+  /** The {@link #aliases() alias} of the option to get help/usage. */
+  String ALIAS_HELP = "-h";
+
+  /** The {@link #name()} of the option to get the program version. */
+  String NAME_VERSION = "--version";
+
+  /** The {@link #aliases() alias} of the option to get the program version. */
+  String ALIAS_VERSION = "-v";
+
+  /** The {@link #name()} of the option for verbose output. */
+  String NAME_VERBOSE = "--verbose";
+
   /**
    * The actual option (e.g. "--help").<br>
    * By convention this should be a GNU long-named option starting with "--"
@@ -47,7 +62,7 @@ public @interface CliOption {
    * The list of optional aliases that can be used instead of the
    * {@link #name()}. E.g. for {@link #name()} "--help" an alias could be "-h".
    */
-  String[] aliases();
+  String[] aliases() default { };
 
   /** The description of the option. */
   String usage();

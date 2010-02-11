@@ -29,18 +29,6 @@ import net.sf.mmm.util.xml.base.StaxUtilImpl;
  * Please note that only plain XML inclusion is currently supported and no
  * XPointer.
  * 
- * <pre>
- * &lt;include&gt; depth=1, fallback=false
- *   &lt;fallback&gt; depth=2, fallback=true
- *     &lt;include&gt; depth=3, fallback=false
- *       &lt;fallback&gt; depth=4, fallback=true
- *         
- *       &lt;/fallback&gt; depth=4
- *     &lt;/include&gt; depth=3
- *   &lt;/fallback&gt; depth=2
- * &lt;/include&gt; depth=1
- * </pre>
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XIncludeStreamReader extends StreamReaderDelegate {

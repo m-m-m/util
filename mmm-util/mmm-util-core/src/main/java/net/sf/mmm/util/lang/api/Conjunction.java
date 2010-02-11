@@ -15,23 +15,133 @@ public enum Conjunction {
    * This conjunction is <code>true</code> if and only if all arguments are
    * <code>true</code>.
    */
-  AND,
+  AND {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean eval(boolean... arguments) {
+
+      for (boolean b : arguments) {
+        if (!b) {
+          return false;
+        }
+      }
+      return true;
+    }
+  },
 
   /**
    * This conjunction is <code>true</code> if and only if at least one argument
    * is <code>true</code>.
    */
-  OR,
+  OR {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean eval(boolean... arguments) {
+
+      for (boolean b : arguments) {
+        if (b) {
+          return true;
+        }
+      }
+      return false;
+    }
+  },
 
   /**
    * This is the negation of {@link #AND}. It is only <code>true</code> if at
    * least one argument is <code>false</code>.
    */
-  NAND,
+  NAND {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean eval(boolean... arguments) {
+
+      for (boolean b : arguments) {
+        if (!b) {
+          return true;
+        }
+      }
+      return false;
+    }
+  },
 
   /**
    * This is the negation of {@link #OR}. It is only <code>true</code> if all
    * arguments are <code>false</code>.
    */
-  NOR
+  NOR {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean eval(boolean... arguments) {
+
+      for (boolean b : arguments) {
+        if (b) {
+          return false;
+        }
+      }
+      return true;
+    }
+  };
+
+  /**
+   * This method evaluates this conjunction for the given boolean
+   * <code>arguments</code>.
+   * 
+   * @param arguments are the boolean values to evaluate.
+   * @return the result of this conjunction applied to the given
+   *         <code>arguments</code>.
+   * @since 1.1.2
+   */
+  public abstract boolean eval(boolean... arguments);
+  // {
+  //
+  // for (boolean b : arguments) {
+  // switch (this) {
+  // case OR:
+  // if (b) {
+  // return true;
+  // }
+  // break;
+  // case AND:
+  // if (!b) {
+  // return false;
+  // }
+  // break;
+  // case NOR:
+  // if (b) {
+  // return false;
+  // }
+  // break;
+  // case NAND:
+  // if (!b) {
+  // return true;
+  // }
+  // break;
+  // default :
+  // throw new IllegalCaseException(Conjunction.class, this);
+  // }
+  // }
+  // switch (this) {
+  // case OR:
+  // case NAND:
+  // return false;
+  // case AND:
+  // case NOR:
+  // return true;
+  // default :
+  // throw new IllegalCaseException(Conjunction.class, this);
+  // }
+  // }
 }

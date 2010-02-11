@@ -80,6 +80,34 @@ public interface CharFilter {
   };
 
   /**
+   * A filter that only {@link #accept(char) accepts} the lower case Latin ASCII
+   * letters 'a'-'z'.
+   * 
+   * @since 1.1.2
+   */
+  CharFilter ASCII_LOWER_CASE_LETTER_FILTER = new CharFilter() {
+
+    public boolean accept(char c) {
+
+      return (((c >= 'a') && (c <= 'z')));
+    }
+  };
+
+  /**
+   * A filter that only {@link #accept(char) accepts} the upper case Latin ASCII
+   * letters 'A'-'Z'.
+   * 
+   * @since 1.1.2
+   */
+  CharFilter ASCII_UPPER_CASE_LETTER_FILTER = new CharFilter() {
+
+    public boolean accept(char c) {
+
+      return (((c >= 'A') && (c <= 'Z')));
+    }
+  };
+
+  /**
    * A filter that {@link #accept(char) accepts} only
    * {@link Character#isWhitespace(char) whitespaces}.
    */

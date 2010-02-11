@@ -16,7 +16,13 @@ import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
 public final class NlsAccess {
 
   /** @see #getFactory() */
-  private static NlsMessageFactory factory = new NlsMessageFactoryImpl();
+  private static NlsMessageFactory factory;
+
+  static {
+    NlsMessageFactoryImpl factoryImpl = new NlsMessageFactoryImpl();
+    factoryImpl.initialize();
+    factory = factoryImpl;
+  }
 
   /**
    * The constructor.
