@@ -14,6 +14,7 @@ import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
 
 /**
@@ -81,8 +82,8 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubForm
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments, Appendable buffer)
-      throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments,
+      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
 
     Calendar calendar = null;
     if (object != null) {

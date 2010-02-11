@@ -212,7 +212,7 @@ public class NlsMessageImpl implements NlsMessage {
       } else {
         boolean success = false;
         if (nlsTemplate != null) {
-          success = nlsTemplate.translate(locale, this.arguments, buffer);
+          success = nlsTemplate.translate(locale, this.arguments, buffer, resolver);
         }
         if (!success) {
           if (resolver != null) {
@@ -220,7 +220,7 @@ public class NlsMessageImpl implements NlsMessage {
           }
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(this.message,
               getArgumentParser());
-          format.format(null, locale, this.arguments, buffer);
+          format.format(null, locale, this.arguments, buffer, resolver);
         }
       }
     } catch (IOException e) {

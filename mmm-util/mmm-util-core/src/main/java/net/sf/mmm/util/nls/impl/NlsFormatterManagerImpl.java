@@ -6,7 +6,6 @@ package net.sf.mmm.util.nls.impl;
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.nls.api.NlsFormatter;
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.MappedNlsFormatterManager;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -38,8 +37,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
 
     super.doInitialize();
     if (this.defaultFormatter == null) {
-      NlsTemplateResolver templateResolver = null; // TODO
-      this.defaultFormatter = new NlsFormatterDefault(templateResolver);
+      this.defaultFormatter = new NlsFormatterDefault();
     }
     if (getFormatterMap() == null) {
       ConfiguredNlsFormatterMap formatterMap = new ConfiguredNlsFormatterMap();

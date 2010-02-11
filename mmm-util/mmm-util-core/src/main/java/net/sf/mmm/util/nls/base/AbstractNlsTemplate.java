@@ -9,6 +9,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
  * This is the abstract base implementation of the {@link NlsTemplate}
@@ -45,7 +46,7 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
   /**
    * {@inheritDoc}
    */
-  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer)
+  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer, NlsTemplateResolver resolver)
       throws IOException {
 
     String translation = translate(locale);
@@ -53,7 +54,7 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
       return false;
     } else {
       NlsMessageFormatter formatter = createFormatter(translation, locale);
-      formatter.format(null, locale, arguments, buffer);
+      formatter.format(null, locale, arguments, buffer, resolver);
       return true;
     }
   }

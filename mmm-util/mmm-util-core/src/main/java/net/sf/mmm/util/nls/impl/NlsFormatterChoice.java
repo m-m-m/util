@@ -12,6 +12,7 @@ import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.lang.api.Comparator;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -77,13 +78,13 @@ public final class NlsFormatterChoice extends AbstractNlsFormatter<Object> {
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments, Appendable buffer)
-      throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments,
+      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
 
     for (Choice choice : this.choices) {
       if (choice.accept(object)) {
         Object result = choice.getResult(arguments);
-        NlsFormatterDefault.INSTANCE.format(result, locale, arguments, buffer);
+        new NlsFormatterDefault().format(result, locale, arguments, buffer, resolver);
         break;
       }
     }

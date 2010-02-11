@@ -37,12 +37,13 @@ public interface NlsTemplate {
    * @param locale is the locale to translate to.
    * @param arguments are the variable arguments to fill in the message.
    * @param buffer is the buffer where the translation will be appended to.
+   * @param resolver is the {@link NlsTemplateResolver}.
    * @return <code>true</code> if the (translated) message has been appended to
    *         the given <code>messageBuffer</code> or <code>false</code> if the
    *         translation failed.
    * @throws IOException if the given {@link Appendable} caused such exception.
    */
-  boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer)
-      throws IOException;
+  boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer,
+      NlsTemplateResolver resolver) throws IOException;
 
 }

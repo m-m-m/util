@@ -13,6 +13,7 @@ import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsMessageFormatter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.Justification;
@@ -76,7 +77,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
    * {@inheritDoc}
    */
   public final void format(Void nothing, Locale locale, Map<String, Object> arguments,
-      Appendable buffer) throws IOException {
+      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
 
     for (PatternSegment segment : this.segments) {
       buffer.append(segment.prefix);
@@ -92,17 +93,12 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
       } else {
         @SuppressWarnings("unchecked")
         NlsFormatter<Object> formatter = (NlsFormatter<Object>) argument.getFormatter();
-        if (formatter == null) {
-          // should actually never happen...
-          // formatter = this.formatterManager.getFormatter();
-          formatter = NlsFormatterDefault.INSTANCE;
-        }
         Justification justification = argument.getJustification();
         if (justification == null) {
-          formatter.format(value, locale, arguments, buffer);
+          formatter.format(value, locale, arguments, buffer, resolver);
         } else {
           StringBuilder sb = new StringBuilder();
-          formatter.format(value, locale, arguments, sb);
+          formatter.format(value, locale, arguments, sb, resolver);
           justification.justify(sb, buffer);
         }
       }

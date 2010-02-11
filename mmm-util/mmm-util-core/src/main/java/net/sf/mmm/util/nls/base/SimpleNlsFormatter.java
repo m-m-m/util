@@ -8,12 +8,14 @@ import java.text.Format;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+
 /**
  * This is an abstract base implementation of
  * {@link net.sf.mmm.util.nls.api.NlsFormatter} that adapts a {@link Format}.
  * 
  * @param <O> is the generic type of the object to
- *        {@link #format(Object, Locale, Map)}.
+ *        {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -40,7 +42,7 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsSubFormatter<O> {
    * {@inheritDoc}
    */
   @Override
-  public String format(O object, Locale locale, Map<String, Object> arguments) {
+  public String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver) {
 
     return createFormat(locale).format(object);
   }
@@ -48,10 +50,10 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsSubFormatter<O> {
   /**
    * {@inheritDoc}
    */
-  public void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer) {
+  public void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer, NlsTemplateResolver resolver) {
 
     try {
-      buffer.append(format(object, locale, arguments));
+      buffer.append(format(object, locale, arguments, resolver));
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }

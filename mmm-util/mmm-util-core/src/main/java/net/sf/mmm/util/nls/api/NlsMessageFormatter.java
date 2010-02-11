@@ -21,22 +21,11 @@ public interface NlsMessageFormatter extends NlsFormatter<Void> {
    * <code>arguments</code> and writing the result into the given
    * <code>buffer</code>.
    * 
-   * @param nothing has to be <code>null</code>. Only for generic compatibility.
-   * @param locale is the {@link Locale} used for localized formatting. An
-   *        implementation may ignore it if it was created locale specific like
-   *        {@link java.text.MessageFormat} which is bound to a locale at
-   *        construction. In order to allow a thread-safe implementation that
-   *        may be used for sub-locales (e.g. for <code>de</code> and
-   *        <code>de_DE</code>) it was added in this signature.
-   * @param buffer is where to append the formatted message.
-   * @param arguments are the argument-objects to be formatted and filled into
-   *        the message.
-   * @throws IOException if the given {@link Appendable} caused such exception.
+   * {@inheritDoc}
    * 
-   * @see java.text.MessageFormat#format(Object[], StringBuffer,
-   *      java.text.FieldPosition)
+   * @param nothing has to be <code>null</code>. Only for generic compatibility.
    */
-  void format(Void nothing, Locale locale, Map<String, Object> arguments, Appendable buffer)
-      throws IOException;
+  void format(Void nothing, Locale locale, Map<String, Object> arguments, Appendable buffer,
+      NlsTemplateResolver resolver) throws IOException;
 
 }

@@ -24,36 +24,19 @@ import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
  */
 public class NlsFormatterDefault extends AbstractNlsSubFormatter<Object> {
 
-  /** The default singleton instance. */
-  public static final NlsFormatterDefault INSTANCE = new NlsFormatterDefault();
-
-  /** The template resolver. */
-  private final NlsTemplateResolver templateResolver;
-
   /**
    * The constructor.
    */
-  private NlsFormatterDefault() {
-
-    this(null);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param templateResolver is the resolver used for {@link NlsObject}s.
-   */
-  public NlsFormatterDefault(NlsTemplateResolver templateResolver) {
+  public NlsFormatterDefault() {
 
     super();
-    this.templateResolver = templateResolver;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments, Appendable buffer)
-      throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments,
+      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
 
     String result = null;
     if (object != null) {
@@ -66,7 +49,7 @@ public class NlsFormatterDefault extends AbstractNlsSubFormatter<Object> {
       } else if (object instanceof NlsObject) {
         NlsMessage message = ((NlsObject) object).toNlsMessage();
         if (message != null) {
-          message.getLocalizedMessage(locale, this.templateResolver, buffer);
+          message.getLocalizedMessage(locale, resolver, buffer);
           return;
         }
       } else if (object instanceof Class<?>) {

@@ -14,7 +14,7 @@ import java.util.Map;
  * @see java.text.Format
  * 
  * @param <O> is the generic type of the object to
- *        {@link #format(Object, Locale, Map)}.
+ *        {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -28,10 +28,11 @@ public interface NlsFormatter<O> {
    * @param object is the object to format.
    * @param locale is the locale used for localized formatting.
    * @param arguments is the {@link Map} of arguments.
-   * @return the formatted and localized string of the given <code>object</code>
-   *         .
+   * @param resolver is the {@link NlsTemplateResolver}.
+   * @return the formatted and localized string for the given
+   *         <code>object</code>.
    */
-  String format(O object, Locale locale, Map<String, Object> arguments);
+  String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver);
 
   /**
    * This method formats the given <code>object</code> according to the given
@@ -42,9 +43,10 @@ public interface NlsFormatter<O> {
    * @param arguments is the {@link Map} of
    *        {@link NlsMessage#getArgument(String) arguments}.
    * @param buffer is where to append the formatted <code>object</code>.
+   * @param resolver is the {@link NlsTemplateResolver}.
    * @throws IOException if the given {@link Appendable} caused such exception.
    */
-  void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer)
-      throws IOException;
+  void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer,
+      NlsTemplateResolver resolver) throws IOException;
 
 }
