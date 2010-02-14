@@ -8,9 +8,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -29,7 +33,11 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.Visitor;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -399,6 +407,81 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
       return ((Class<?>) type).getName();
     } else {
       return type.toString();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void toString(Type type, Appendable appendable, Visitor<Class<?>> classFormatter) {
+
+    NlsNullPointerException.checkNotNull(Type.class, type);
+    NlsNullPointerException.checkNotNull(Appendable.class, appendable);
+    NlsNullPointerException.checkNotNull(Visitor.class, classFormatter);
+    try {
+      Type actualType = type;
+      if (type instanceof GenericType<?>) {
+        actualType = ((GenericType<?>) type).getType();
+      }
+      if (actualType instanceof Class<?>) {
+        classFormatter.visit((Class<?>) type);
+      } else if (actualType instanceof ParameterizedType) {
+        ParameterizedType parameterizedType = (ParameterizedType) actualType;
+        Type ownerType = parameterizedType.getOwnerType();
+        if (ownerType != null) {
+          toString(ownerType, appendable, classFormatter);
+          appendable.append('.');
+        }
+        toString(parameterizedType.getRawType(), appendable, classFormatter);
+        appendable.append('<');
+        boolean separator = false;
+        for (Type arg : parameterizedType.getActualTypeArguments()) {
+          if (separator) {
+            appendable.append(", ");
+          }
+          toString(arg, appendable, classFormatter);
+          separator = true;
+        }
+        appendable.append('>');
+      } else if (actualType instanceof TypeVariable<?>) {
+        TypeVariable<?> typeVariable = (TypeVariable<?>) actualType;
+        appendable.append(typeVariable.getName());
+        Type[] bounds = typeVariable.getBounds();
+        if (bounds.length > 0) {
+          // is this supported after all?
+          Type firstBound = bounds[0];
+          if (!Object.class.equals(firstBound)) {
+            appendable.append(" extends ");
+            toString(firstBound, appendable, classFormatter);
+          }
+        }
+      } else if (actualType instanceof WildcardType) {
+        WildcardType wildcardType = (WildcardType) actualType;
+        Type[] lowerBounds = wildcardType.getLowerBounds();
+        if (lowerBounds.length > 0) {
+          // "? super "
+          appendable.append(LowerBoundWildcardType.PREFIX);
+          toString(lowerBounds[0], appendable, classFormatter);
+        } else {
+          Type[] upperBounds = wildcardType.getUpperBounds();
+          if (upperBounds.length > 0) {
+            // "? extends "
+            appendable.append(UpperBoundWildcardType.PREFIX);
+            toString(upperBounds[0], appendable, classFormatter);
+          } else {
+            // ?
+            appendable.append(UnboundedWildcardType.PREFIX);
+          }
+        }
+      } else if (actualType instanceof GenericArrayType) {
+        toString(((GenericArrayType) actualType).getGenericComponentType(), appendable,
+            classFormatter);
+        appendable.append("[]");
+      } else {
+        throw new IllegalCaseException(type.getClass().getName());
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e);
     }
   }
 

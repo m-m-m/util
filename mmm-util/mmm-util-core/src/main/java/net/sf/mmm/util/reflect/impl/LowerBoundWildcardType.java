@@ -20,6 +20,9 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  */
 public class LowerBoundWildcardType implements WildcardType {
 
+  /** The prefix of the {@link #toString() string representation}. */
+  public static final String PREFIX = "? super ";
+
   /** @see #getLowerBounds() */
   private final Type lowerBound;
 
@@ -90,7 +93,7 @@ public class LowerBoundWildcardType implements WildcardType {
     String upperBoundString = ReflectionUtilImpl.getInstance().toString(this.lowerBound);
     // "? super ".length == 8
     StringBuilder result = new StringBuilder(upperBoundString.length() + 8);
-    result.append("? super ");
+    result.append(PREFIX);
     result.append(upperBoundString);
     return result.toString();
   }

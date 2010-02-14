@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Set;
 
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.Visitor;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
@@ -97,6 +99,25 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return the string representation of the given <code>type</code>.
    */
   String toString(Type type);
+
+  /**
+   * This method gets the string representation of a {@link Type}. Instead of
+   * <code>{@link Type}.toString()</code> it returns {@link Class#getName()} if
+   * the type is a {@link Class}.
+   * 
+   * @param type is the type to get as string.
+   * @param appendable is where to {@link Appendable#append(CharSequence)
+   *        append} the string representation to.
+   * @param classFormatter is a {@link Visitor} that gets called for each
+   *        {@link Class} and has to {@link Appendable#append(CharSequence)
+   *        append} as string-representation of the visited {@link Class} to the
+   *        <code>appendable</code>.
+   * @throws RuntimeIoException if the {@link Appendable} caused an
+   *         {@link java.io.IOException}
+   * @since 1.1.2
+   */
+  void toString(Type type, Appendable appendable, Visitor<Class<?>> classFormatter)
+      throws RuntimeIoException;
 
   /**
    * This method compares the given classes.

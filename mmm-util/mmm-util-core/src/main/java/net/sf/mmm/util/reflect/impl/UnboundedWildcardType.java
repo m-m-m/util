@@ -19,6 +19,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  */
 public final class UnboundedWildcardType implements WildcardType {
 
+  /** The prefix/value of the {@link #toString() string representation}. */
+  public static final String PREFIX = "?";
+
   /** The singleton instance. */
   public static final WildcardType INSTANCE = new UnboundedWildcardType();
 
@@ -82,7 +85,7 @@ public final class UnboundedWildcardType implements WildcardType {
   @Override
   public String toString() {
 
-    return "?";
+    return PREFIX;
   }
 
 }
