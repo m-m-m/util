@@ -11,7 +11,6 @@ import java.util.Map;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.lang.api.Comparator;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
@@ -23,7 +22,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * Examples:<br>
  * <table border="1">
  * <tr>
- * <th>{@link NlsMessage}</th>
+ * <th>{@link net.sf.mmm.util.nls.api.NlsMessage}</th>
  * <th>Example result</th>
  * </tr>
  * <tr>
@@ -128,8 +127,9 @@ public final class NlsFormatterChoice extends AbstractNlsFormatter<Object> {
      * This method determines the result of this {@link Choice} in case it
      * {@link #accept(Object) matched}.
      * 
-     * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
-     *        .
+     * @param arguments are the
+     *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+     *        arguments} .
      * @return the result.
      */
     public Object getResult(Map<String, Object> arguments) {

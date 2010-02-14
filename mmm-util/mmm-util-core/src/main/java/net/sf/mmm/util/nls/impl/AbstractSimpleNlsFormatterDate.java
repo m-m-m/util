@@ -54,6 +54,8 @@ public abstract class AbstractSimpleNlsFormatterDate extends SimpleNlsFormatter<
       return NlsFormatterManager.STYLE_LONG;
     } else if (style == DateFormat.MEDIUM) {
       return NlsFormatterManager.STYLE_MEDIUM;
+    } else if (style == DateFormat.FULL) {
+      return NlsFormatterManager.STYLE_FULL;
     } else {
       return null;
     }
@@ -69,9 +71,9 @@ public abstract class AbstractSimpleNlsFormatterDate extends SimpleNlsFormatter<
     if (NlsFormatterManager.TYPE_DATE.equals(type)) {
       return DateFormat.getDateInstance(this.style, locale);
     } else if (NlsFormatterManager.TYPE_TIME.equals(type)) {
-      return DateFormat.getDateInstance(this.style, locale);
+      return DateFormat.getTimeInstance(this.style, locale);
     } else if (NlsFormatterManager.TYPE_DATETIME.equals(type)) {
-      return DateFormat.getDateInstance(this.style, locale);
+      return DateFormat.getDateTimeInstance(this.style, this.style, locale);
     } else {
       throw new IllegalCaseException(type);
     }
@@ -93,7 +95,7 @@ public abstract class AbstractSimpleNlsFormatterDate extends SimpleNlsFormatter<
   public void register(NlsFormatterMap formatterMap) {
 
     super.register(formatterMap);
-    if (this.style == DateFormat.SHORT) {
+    if (this.style == DateFormat.MEDIUM) {
       formatterMap.registerFormatter(this, getType(), null);
     }
   }

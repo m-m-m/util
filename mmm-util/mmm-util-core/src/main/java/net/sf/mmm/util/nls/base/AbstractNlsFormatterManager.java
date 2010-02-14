@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.Justification;
 import net.sf.mmm.util.text.api.JustificationBuilder;
@@ -62,7 +63,11 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggable imple
       formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
       c = scanner.forceNext();
       if (c == NlsArgumentParser.FORMAT_SEPARATOR) {
-        formatter = getSubFormatter(formatType, scanner);
+        try {
+          formatter = getSubFormatter(formatType, scanner);
+        } catch (Exception e) {
+          throw new NlsParseException(e, scanner.getOriginalString(), NlsFormatter.class);
+        }
         c = scanner.forceNext();
       } else {
         formatter = getFormatter(formatType);

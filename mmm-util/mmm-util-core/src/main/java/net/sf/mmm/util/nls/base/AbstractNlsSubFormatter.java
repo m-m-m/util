@@ -4,19 +4,18 @@
 package net.sf.mmm.util.nls.base;
 
 /**
- * T
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-his is the abstract base-implementation of an
- * {@link net.sf.mmm.util.nls.api.NlsFormatter} that is no
- * {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} but a
+ * T import net.sf.mmm.util.nls.api.NlsTemplateResolver; his is the abstract
+ * base-implementation of an {@link net.sf.mmm.util.nls.api.NlsFormatter} that
+ * is no {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} but a
  * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String, String)
  * sub-formatter} for a specific {@link #getType() type} and {@link #getStyle()
  * style}.
  * 
  * @param <O> is the generic type of the object to
- *        {@link #format(Object, java.util.Locale, java.util.Map)}.
+ *        {@link #format(Object, java.util.Locale, java.util.Map, net.sf.mmm.util.nls.api.NlsTemplateResolver)
+ *        format}.
  * 
- , NlsTemplateResolver* @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */
 public abstract class AbstractNlsSubFormatter<O> extends AbstractNlsFormatter<O> {

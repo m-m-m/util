@@ -14,6 +14,54 @@ package net.sf.mmm.util.nls.api;
  */
 public interface NlsObject {
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_OBJECT = "object";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_KEY = "key";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_ID = "id";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_VALUE = "value";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_TYPE = "type";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_SOURCE = "source";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_MIN = "min";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_MAX = "max";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_RESOURCE = "resource";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_SIZE = "size";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_CAPACITY = "capacity";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_PROPERTY = "property";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_PATH = "path";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_NAME = "name";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_OPTION = "option";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_MODE = "mode";
+
   /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.

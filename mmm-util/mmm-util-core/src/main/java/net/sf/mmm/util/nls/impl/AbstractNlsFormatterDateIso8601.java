@@ -63,6 +63,7 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubForm
       this.iso8601Util.formatDate(calendar, true, buffer);
     } else if (NlsFormatterManager.TYPE_TIME.equals(type)) {
       this.iso8601Util.formatTime(calendar, true, buffer);
+      this.iso8601Util.formatTimeZone(calendar, true, buffer);
     } else if (NlsFormatterManager.TYPE_DATETIME.equals(type)) {
       this.iso8601Util.formatDateTime(calendar, true, true, true, buffer);
     } else {

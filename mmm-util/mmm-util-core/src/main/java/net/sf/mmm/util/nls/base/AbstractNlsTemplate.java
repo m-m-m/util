@@ -36,8 +36,8 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
    *        <code>locale</code>.
    * @param locale is the locale to use. The implementation may ignore it here
    *        because it is also supplied at
-   *        {@link NlsMessageFormatter#format(Void, Locale, Map, Appendable)}.
-   *        Anyhow it allows the implementation to do smart caching of the
+   *        {@link NlsMessageFormatter#format(Void, Locale, Map, NlsTemplateResolver)}
+   *        . Anyhow it allows the implementation to do smart caching of the
    *        parsed formatter in association with the locale.
    * @return the formatter instance.
    */
@@ -46,8 +46,8 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
   /**
    * {@inheritDoc}
    */
-  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer, NlsTemplateResolver resolver)
-      throws IOException {
+  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer,
+      NlsTemplateResolver resolver) throws IOException {
 
     String translation = translate(locale);
     if (translation == null) {

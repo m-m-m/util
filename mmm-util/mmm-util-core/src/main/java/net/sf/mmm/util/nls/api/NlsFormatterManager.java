@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-
 /**
  * This is the interface for a manager of {@link NlsFormatter}s.<br>
  * A legal implementation of this interface has to be thread-safe.
@@ -52,7 +51,7 @@ public interface NlsFormatterManager {
   /** @see java.text.NumberFormat#getPercentInstance() */
   String STYLE_PERCENT = "percent";
 
-  /** @see net.sf.mmm.util.date.base.Iso8601UtilImpl */
+  /** @see net.sf.mmm.util.date.api.Iso8601Util */
   String STYLE_ISO_8601 = "iso8601";
 
   /**

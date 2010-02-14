@@ -3,9 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import junit.framework.Assert;
@@ -15,6 +21,8 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.FormattedNlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.text.api.Justification;
 
 import org.junit.Test;
 
@@ -126,6 +134,9 @@ public class NlsMessageTest {
     Assert.assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, resolver));
   }
 
+  /**
+   * Tests {@link NlsFormatterManager#TYPE_DATE date format}.
+   */
   @Test
   public void testMessageFormatDate() {
 
@@ -149,8 +160,50 @@ public class NlsMessageTest {
     String expected = new SimpleDateFormat(customFormat).format(date);
     // expected="19991231"
     Assert.assertEquals(expected, msg.getMessage());
+
+    String[] types = new String[] { NlsFormatterManager.TYPE_DATE, NlsFormatterManager.TYPE_TIME,
+        NlsFormatterManager.TYPE_DATETIME };
+    String[] styles = new String[] { NlsFormatterManager.STYLE_SHORT,
+        NlsFormatterManager.STYLE_MEDIUM, NlsFormatterManager.STYLE_LONG,
+        NlsFormatterManager.STYLE_FULL, null };
+    int[] dateStyles = new int[] { DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.LONG,
+        DateFormat.FULL, DateFormat.MEDIUM };
+    Locale locale = Locale.GERMANY;
+    for (String type : types) {
+      for (int styleIndex = 0; styleIndex < styles.length; styleIndex++) {
+        String style = styles[styleIndex];
+        int dateStyle = dateStyles[styleIndex];
+        String arg = "{0," + type;
+        if (style != null) {
+          arg = arg + "," + style;
+        }
+        arg = arg + "}";
+        msg = NlsAccess.getFactory().create(arg, date);
+        DateFormat dateFormat;
+        if (type == NlsFormatterManager.TYPE_DATE) {
+          dateFormat = DateFormat.getDateInstance(dateStyle, locale);
+        } else if (type == NlsFormatterManager.TYPE_TIME) {
+          dateFormat = DateFormat.getTimeInstance(dateStyle, locale);
+        } else if (type == NlsFormatterManager.TYPE_DATETIME) {
+          dateFormat = DateFormat.getDateTimeInstance(dateStyle, dateStyle, locale);
+        } else {
+          throw new IllegalCaseException(type);
+        }
+        String localizedMessage = msg.getLocalizedMessage(locale);
+        expected = dateFormat.format(date);
+        Assert.assertEquals("wrong result for message: " + arg + "!", expected, localizedMessage);
+        // double check!
+        if (type != NlsFormatterManager.TYPE_DATETIME) {
+          expected = new MessageFormat(arg, locale).format(new Object[] { date });
+          Assert.assertEquals("wrong result for message: " + arg + "!", expected, localizedMessage);
+        }
+      }
+    }
   }
 
+  /**
+   * Tests {@link NlsFormatterManager#TYPE_NUMBER number format}.
+   */
   @Test
   public void testMessageFormatNumber() {
 
@@ -169,7 +222,33 @@ public class NlsMessageTest {
   }
 
   /**
-   * 
+   * Tests {@link NlsFormatterManager#TYPE_TYPE type format}.
+   */
+  @Test
+  public void testMessageFormatType() throws Exception {
+
+    Method method = GenericClass.class.getMethod("get", ReflectionUtil.NO_PARAMETERS);
+    Type type = method.getGenericReturnType();
+    String key = "key";
+    NlsMessage msg;
+    msg = NlsAccess.getFactory().create("{" + key + ",type}", key, type);
+    Assert.assertEquals("java.util.Map", msg.getMessage());
+    msg = NlsAccess.getFactory().create("{" + key + ",type,short}", key, type);
+    Assert.assertEquals("Map", msg.getMessage());
+    msg = NlsAccess.getFactory().create("{" + key + ",type,medium}", key, type);
+    Assert.assertEquals("java.util.Map", msg.getMessage());
+    msg = NlsAccess.getFactory().create("{" + key + ",type,long}", key, type);
+    Assert.assertEquals(
+        "java.util.Map<java.util.List<? extends String>, java.util.List<java.util.Map<? "
+            + "extends Object, ? super VARIABLE[]>>>", msg.getMessage());
+    msg = NlsAccess.getFactory().create("{" + key + ",type,full}", key, type);
+    Assert.assertEquals("java.util.Map<java.util.List<? extends java.lang.String>, "
+        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>", msg
+        .getMessage());
+  }
+
+  /**
+   * Tests {@link NlsMessage message} with {@link Justification}.
    */
   @Test
   public void testMessageFormatJustification() {
@@ -216,5 +295,16 @@ public class NlsMessageTest {
       return null;
     }
 
+  }
+
+  /**
+   * This is a dummy class to get a complex generic type.
+   */
+  private static class GenericClass<VARIABLE> {
+
+    public Map<List<? extends String>, List<Map<?, ? super VARIABLE[]>>> get() {
+
+      return null;
+    }
   }
 }

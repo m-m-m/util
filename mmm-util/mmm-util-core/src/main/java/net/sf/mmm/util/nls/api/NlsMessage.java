@@ -51,7 +51,9 @@ import java.util.Locale;
  * </tr>
  * </table>
  * 
- * Here are the supported variants:
+ * <br>
+ * The following table shows the supported variants of <code>FormatType</code>
+ * and <code>FormatStyle</code>:
  * <table border="1">
  * <tr>
  * <th>FormatType</th>
@@ -68,33 +70,187 @@ import java.util.Locale;
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
  * <td>-</td>
- * <td>12,345</td>
+ * <td>123,456.78</td>
  * <td>Numeric representation</td>
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
  * <td>{@link NlsFormatterManager#STYLE_PERCENT percent}</td>
- * <td>12%</td>
+ * <td>12,345,678%</td>
  * <td>Number in percent</td>
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
  * <td>{@link NlsFormatterManager#STYLE_CURRENCY currency}</td>
- * <td>123,45€</td>
+ * <td>123,456.78 €</td>
  * <td>Number as currency</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
+ * <td>'#'##.##</td>
+ * <td>#123456.78</td>
+ * <td>Any other style is treated as pattern for {@link java.text.DecimalFormat}
+ * </td>
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
  * <td>-</td>
- * <td>12,345</td>
- * <td>Numeric representation</td>
+ * <td>31-Dec-1999</td>
+ * <td>Date default representation</td>
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
- * <td>yyyy.MM.dd-HH:mm:ssZ</td>
- * <td>12,345</td>
- * <td>Any other style is treated pattern for {@link java.text.SimpleDateFormat}
- * </td>
+ * <td>{@link NlsFormatterManager#STYLE_SHORT short}</td>
+ * <td>31/12/99</td>
+ * <td>Date short representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>{@link NlsFormatterManager#STYLE_MEDIUM medium}</td>
+ * <td>31-Dec-1999</td>
+ * <td>Date medium representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>{@link NlsFormatterManager#STYLE_LONG long}</td>
+ * <td>31 December 1999</td>
+ * <td>Date long representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>{@link NlsFormatterManager#STYLE_FULL full}</td>
+ * <td>Friday, 31 December 1999</td>
+ * <td>Date full representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>{@link NlsFormatterManager#STYLE_ISO_8601 iso8601}</td>
+ * <td>1999-12-31</td>
+ * <td>Date ISO-8601 representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>yyyy.MM.dd</td>
+ * <td>2010.01.01</td>
+ * <td>Any other style is treated as pattern for
+ * {@link java.text.SimpleDateFormat}</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>-</td>
+ * <td>23:59:59</td>
+ * <td>Time default representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>{@link NlsFormatterManager#STYLE_SHORT short}</td>
+ * <td>23:59</td>
+ * <td>Time short representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>{@link NlsFormatterManager#STYLE_MEDIUM medium}</td>
+ * <td>23:59:59</td>
+ * <td>Time medium representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>{@link NlsFormatterManager#STYLE_LONG long}</td>
+ * <td>23:59:59 GMT+01:00</td>
+ * <td>Time long representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>{@link NlsFormatterManager#STYLE_FULL full}</td>
+ * <td>23:59:59 o'clock GMT+01:00</td>
+ * <td>Time full representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>{@link NlsFormatterManager#STYLE_ISO_8601 iso8601}</td>
+ * <td>23:59:59+01:00</td>
+ * <td>Time ISO-8601 representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TIME time}</td>
+ * <td>HH:mm:ss</td>
+ * <td>23:59:59</td>
+ * <td>Any other style is treated as pattern for
+ * {@link java.text.SimpleDateFormat}</td>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATETIME datetime}</td>
+ * <td>-</td>
+ * <td>31-Dec-1999 23:59:59</td>
+ * <td>Date+time default representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATETIME datetime}</td>
+ * <td>{@link NlsFormatterManager#STYLE_SHORT short}</td>
+ * <td>31/12/99 23:59</td>
+ * <td>Date+time short representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATETIME datetime}</td>
+ * <td>{@link NlsFormatterManager#STYLE_MEDIUM medium}</td>
+ * <td>31-Dec-1999 23:59:59</td>
+ * <td>Date+time medium representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATETIME datetime}</td>
+ * <td>{@link NlsFormatterManager#STYLE_LONG long}</td>
+ * <td>31 December 1999 23:59:59 GMT+01:00</td>
+ * <td>Date+time long representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATETIME datetime}</td>
+ * <td>{@link NlsFormatterManager#STYLE_FULL full}</td>
+ * <td>Friday, 31 December 1999 23:59:59 o'clock GMT+01:00</td>
+ * <td>Date+time full representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATETIME datetime}</td>
+ * <td>{@link NlsFormatterManager#STYLE_ISO_8601 iso8601}</td>
+ * <td>1999-12-31T23:59:59+01:00</td>
+ * <td>Date+time ISO-8601 representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_DATE date}</td>
+ * <td>yyyy.MM.dd-HH:mm:ss</td>
+ * <td>2010.01.01-23:59:59</td>
+ * <td>Any other style is treated as pattern for
+ * {@link java.text.SimpleDateFormat}</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
+ * <td>-</td>
+ * <td>java.util.List</td>
+ * <td>{@link java.lang.reflect.Type} medium representation (omit
+ * <code>java.lang</code>)</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
+ * <td>{@link NlsFormatterManager#STYLE_SHORT short}</td>
+ * <td>List</td>
+ * <td>{@link java.lang.reflect.Type} short representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
+ * <td>{@link NlsFormatterManager#STYLE_MEDIUM medium}</td>
+ * <td>java.util.List</td>
+ * <td>{@link java.lang.reflect.Type} medium representation (omit
+ * <code>java.lang</code>)</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
+ * <td>{@link NlsFormatterManager#STYLE_LONG long}</td>
+ * <td>java.util.List&lt;String&gt;</td>
+ * <td>{@link java.lang.reflect.Type} long representation</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
+ * <td>{@link NlsFormatterManager#STYLE_FULL full}</td>
+ * <td>java.util.List&lt;java.lang.String&gt;</td>
+ * <td>{@link java.lang.reflect.Type} full representation</td>
  * </tr>
  * </table>
  * 
