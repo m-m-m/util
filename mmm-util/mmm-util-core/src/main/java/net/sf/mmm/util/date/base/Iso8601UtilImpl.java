@@ -189,9 +189,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
       formatDate(calendar, extendedDate, buffer);
       buffer.append('T');
       formatTime(calendar, extendedTime, buffer);
-      TimeZone timezone = calendar.getTimeZone();
-      int timezoneOffset = timezone.getOffset(calendar.getTimeInMillis());
-      formatTimeZone(timezoneOffset, extendedTimezone, buffer);
+      formatTimeZone(calendar, extendedTimezone, buffer);
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
@@ -230,6 +228,16 @@ public final class Iso8601UtilImpl implements Iso8601Util {
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void formatTimeZone(Calendar calendar, boolean extended, Appendable buffer) {
+
+    TimeZone timezone = calendar.getTimeZone();
+    int timezoneOffset = timezone.getOffset(calendar.getTimeInMillis());
+    formatTimeZone(timezoneOffset, extended, buffer);
   }
 
   /**

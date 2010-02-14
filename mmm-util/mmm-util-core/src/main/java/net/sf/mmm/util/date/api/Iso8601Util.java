@@ -133,7 +133,7 @@ public interface Iso8601Util {
    * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
    * {@link Iso8601Util ISO 8601}.
    * 
-   * @param calendar is the date to format.
+   * @param calendar is the {@link Calendar} to format.
    * @param extendedDate if <code>false</code> the basic date format
    *        ("yyyyMMdd") is used, if <code>true</code> the extended date format
    *        ("yyyy-MM-dd") is used.
@@ -153,7 +153,7 @@ public interface Iso8601Util {
    * the format "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to
    * {@link Iso8601Util ISO 8601}.
    * 
-   * @param calendar is the date to format.
+   * @param calendar is the {@link Calendar} to format.
    * @param extendedDate if <code>false</code> the basic date format
    *        ("yyyyMMdd") is used, if <code>true</code> the extended date format
    *        ("yyyy-MM-dd") is used.
@@ -172,7 +172,7 @@ public interface Iso8601Util {
    * This method formats the given <code>calendar</code> as time according to
    * {@link Iso8601Util ISO 8601}.
    * 
-   * @param calendar is the date to format.
+   * @param calendar is the {@link Calendar} to format.
    * @param extended if <code>false</code> the basic time format ("HHmmss") is
    *        used, if <code>true</code> the extended time format ("HH:mm:ss") is
    *        used.
@@ -191,6 +191,19 @@ public interface Iso8601Util {
    * @param buffer is where to append the formatted timezone.
    */
   void formatTimeZone(int timezoneOffset, boolean extended, Appendable buffer);
+
+  /**
+   * This method formats the given <code>timezone</code> according to
+   * {@link Iso8601Util ISO 8601}.<br>
+   * 
+   * @param calendar is the {@link Calendar} to format.
+   * @param extended - if <code>false</code> the basic timezone format
+   *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
+   *        timezone format ("&#177;HH:mm[:ss]") is used.
+   * @param buffer is where to append the formatted timezone.
+   * @since 1.1.2
+   */
+  void formatTimeZone(Calendar calendar, boolean extended, Appendable buffer);
 
   /**
    * This method parses the given string <code>date</code> according to
