@@ -89,7 +89,7 @@ public class NlsFormatterType extends AbstractNlsSubFormatter<Object> {
    * {@inheritDoc}
    */
   public void format(Object object, Locale locale, Map<String, Object> arguments,
-      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     if (object == null) {
       buffer.append("null");

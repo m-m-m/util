@@ -199,6 +199,45 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} until the given
+   * (un-escaped) <code>stop</code> character or the end is reached.<br>
+   * In advance to {@link #readUntil(char, boolean)}, this method allows that
+   * the <code>stop</code> character may be used in the input-string by adding
+   * the given <code>escape</code> character. After the call of this method, the
+   * {@link #getCurrentIndex() current index} will point to the next character
+   * after the (first) <code>stop</code> character or to the end if NO such
+   * character exists.<br>
+   * This method is especially useful when quoted strings should be parsed.
+   * E.g.:
+   * 
+   * <pre>
+   * {@link CharStreamScanner} scanner = getScanner();
+   * doSomething();
+   * char c = scanner.{@link #forceNext()};
+   * if ((c == '"') || (c == '\'')) {
+   *   char escape = c; // may also be something like '\'
+   *   String quote = scanner.{@link #readUntil(char, boolean, char) readUntil}(c, false, escape)
+   * } else {
+   *   doOtherThings();
+   * }
+   * </pre>
+   * 
+   * @param stop is the character to read until.
+   * @param acceptEof if <code>true</code> EOF will be treated as
+   *        <code>stop</code>, too.
+   * @param escape is the character used to escape the <code>stop</code>
+   *        character. To add an occurrence of the <code>escape</code> character
+   *        it has to be duplicated (occur twice). The <code>escape</code>
+   *        character may also be equal to the <code>stop</code> character. If
+   *        other regular characters are escaped the <code>escape</code>
+   *        character is simply ignored.
+   * @return the string with all read characters excluding the <code>stop</code>
+   *         character or <code>null</code> if there was no <code>stop</code>
+   *         character and <code>acceptEof</code> is <code>false</code>.
+   */
+  String readUntil(char stop, boolean acceptEof, char escape);
+
+  /**
+   * This method reads all {@link #next() next characters} until the given
    * <code>stop</code> character or the end of the string to parse is reached.
    * In advance to {@link #readUntil(char, boolean)}, this method will scan the
    * input using the given <code>syntax</code> which e.g. allows to
@@ -230,7 +269,8 @@ public interface CharStreamScanner {
    * @param filter is used to {@link CharFilter#accept(char) decide} which
    *        characters should be accepted.
    * @return a string with all characters {@link CharFilter#accept(char)
-   *         accepted} by the given <code>filter</code>.
+   *         accepted} by the given <code>filter</code>. Will be the empty
+   *         string if no character was accepted.
    */
   String readWhile(CharFilter filter);
 
@@ -252,6 +292,7 @@ public interface CharStreamScanner {
    * @return a string with all characters {@link CharFilter#accept(char)
    *         accepted} by the given <code>filter</code> limited to the length of
    *         <code>max</code> and the {@link #hasNext() end} of this scanner.
+   *         Will be the empty string if no character was accepted.
    */
   String readWhile(CharFilter filter, int max);
 

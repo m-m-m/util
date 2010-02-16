@@ -3,13 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import net.sf.mmm.framework.api.IocContainer;
 import net.sf.mmm.framework.api.IocContainerException;
+
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * This is the implementation of the {@link IocContainer} using spring.
@@ -18,7 +17,7 @@ import net.sf.mmm.framework.api.IocContainerException;
  */
 public class SpringContainer implements IocContainer {
 
-  /** The {@link ApplicationContext} to delegate to. */
+  /** The {@link ConfigurableApplicationContext} to delegate to. */
   private final ConfigurableApplicationContext applicationContext;
 
   /**
@@ -35,7 +34,8 @@ public class SpringContainer implements IocContainer {
   /**
    * The constructor.
    * 
-   * @param applicationContext is the {@link ApplicationContext} to adapt.
+   * @param applicationContext is the {@link ConfigurableApplicationContext} to
+   *        adapt.
    */
   public SpringContainer(ConfigurableApplicationContext applicationContext) {
 

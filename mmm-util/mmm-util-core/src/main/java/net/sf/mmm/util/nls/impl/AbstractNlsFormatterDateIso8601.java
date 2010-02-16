@@ -84,7 +84,7 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubForm
    * {@inheritDoc}
    */
   public void format(Object object, Locale locale, Map<String, Object> arguments,
-      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     Calendar calendar = null;
     if (object != null) {

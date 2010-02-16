@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -15,11 +16,14 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import junit.framework.Assert;
+import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.FormattedNlsTemplate;
+import net.sf.mmm.util.nls.impl.NlsFormatterChoiceNoElseConditionException;
+import net.sf.mmm.util.nls.impl.NlsFormatterChoiceOnlyElseConditionException;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.text.api.Justification;
@@ -50,8 +54,8 @@ public class NlsMessageTest {
   }
 
   /**
-   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage}
-   * implementation ({@link net.sf.mmm.util.nls.NlsMessageImpl}).
+   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} using a
+   * custom resolver.
    */
   @Test
   public void testMessage() {
@@ -138,7 +142,7 @@ public class NlsMessageTest {
    * Tests {@link NlsFormatterManager#TYPE_DATE date format}.
    */
   @Test
-  public void testMessageFormatDate() {
+  public void testMessageTypeDate() {
 
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
@@ -205,7 +209,7 @@ public class NlsMessageTest {
    * Tests {@link NlsFormatterManager#TYPE_NUMBER number format}.
    */
   @Test
-  public void testMessageFormatNumber() {
+  public void testMessageTypeNumber() {
 
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
@@ -225,7 +229,7 @@ public class NlsMessageTest {
    * Tests {@link NlsFormatterManager#TYPE_TYPE type format}.
    */
   @Test
-  public void testMessageFormatType() throws Exception {
+  public void testMessageTypeType() throws Exception {
 
     Method method = GenericClass.class.getMethod("get", ReflectionUtil.NO_PARAMETERS);
     Type type = method.getGenericReturnType();
@@ -248,10 +252,99 @@ public class NlsMessageTest {
   }
 
   /**
+   * Tests {@link NlsFormatterManager#TYPE_NUMBER number format}.
+   */
+  @Test
+  public void testMessageTypeChoice() {
+
+    String key = "key";
+    NlsMessage msg;
+    String template;
+
+    // boolean choice
+    template = "{" + key + ",choice,(?==true)'foo'(else)'bar'}";
+    msg = NlsAccess.getFactory().create(template, key, Boolean.TRUE);
+    Assert.assertEquals("foo", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, Boolean.FALSE);
+    Assert.assertEquals("bar", msg.getMessage());
+
+    // numeric choice
+    template = "{" + key + ",choice,(?==1)'one'(?>1)'many'(?<0)'negative'(else)'zero'}";
+    msg = NlsAccess.getFactory().create(template, key, 1);
+    Assert.assertEquals("one", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, 2);
+    Assert.assertEquals("many", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, -1);
+    Assert.assertEquals("negative", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, 0);
+    Assert.assertEquals("zero", msg.getMessage());
+
+    // date choice
+    template = "{"
+        + key
+        + ",choice,(?==2010-01-31T23:59:59Z)'special day'(?>2010-01-31T23:59:59Z)'after'(else)\"before\"}";
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
+    calendar.set(2010, Calendar.JANUARY, 31, 23, 59, 59);
+    calendar.set(Calendar.MILLISECOND, 0);
+    msg = NlsAccess.getFactory().create(template, key, calendar);
+    Assert.assertEquals("special day", msg.getMessage());
+    calendar.add(Calendar.SECOND, 1);
+    msg = NlsAccess.getFactory().create(template, key, calendar.getTime());
+    Assert.assertEquals("after", msg.getMessage());
+    calendar.add(Calendar.MINUTE, -1);
+    msg = NlsAccess.getFactory().create(template, key, calendar);
+    Assert.assertEquals("before", msg.getMessage());
+
+    // string choice
+    template = "{" + key + ",choice,(?=='hello')'magic'(?>'hello')'after'(else)'before'}";
+    msg = NlsAccess.getFactory().create(template, key, "hello");
+    Assert.assertEquals("magic", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, "hella");
+    Assert.assertEquals("before", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, "hellp");
+    Assert.assertEquals("after", msg.getMessage());
+
+    // test quotation-symbol
+    template = "{" + key + ",choice,(?=='a\"''b')\"a'\"\"b\"(else)''''}";
+    msg = NlsAccess.getFactory().create(template, key, "a\"'b");
+    Assert.assertEquals("a'\"b", msg.getMessage());
+
+    // test nested choice
+    String key2 = "key2";
+    String key3 = "key3";
+    template = "{" + key + ",choice,(?==true)'foo'(else){" + key2 + ",choice,(?==true)'bar'(else){"
+        + key3 + "}}}";
+    msg = NlsAccess.getFactory().create(template, key, Boolean.TRUE);
+    Assert.assertEquals("foo", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, Boolean.FALSE, key2, Boolean.TRUE);
+    Assert.assertEquals("bar", msg.getMessage());
+    msg = NlsAccess.getFactory().create(template, key, Boolean.FALSE, key2, Boolean.FALSE, key3,
+        key3);
+    Assert.assertEquals(key3, msg.getMessage());
+
+    // test missing else
+    try {
+      NlsAccess.getFactory().create("{key,choice,(?==true)'foo'}", key, Boolean.TRUE).getMessage();
+      ExceptionHelper.failExceptionExpected();
+    } catch (Exception e) {
+      ExceptionHelper.assertCause(e, NlsFormatterChoiceNoElseConditionException.class);
+    }
+
+    // test only else
+    try {
+      NlsAccess.getFactory().create("{key,choice,(else)'foo'}", key, Boolean.TRUE).getMessage();
+      ExceptionHelper.failExceptionExpected();
+    } catch (Exception e) {
+      ExceptionHelper.assertCause(e, NlsFormatterChoiceOnlyElseConditionException.class);
+    }
+  }
+
+  /**
    * Tests {@link NlsMessage message} with {@link Justification}.
    */
   @Test
-  public void testMessageFormatJustification() {
+  public void testMessageWithJustification() {
 
     String key = "value";
     Integer value = Integer.valueOf(42);

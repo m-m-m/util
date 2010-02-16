@@ -5,6 +5,8 @@ package net.sf.mmm.util.nls.impl;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.base.MappedNlsFormatterManager;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
@@ -21,6 +23,9 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   /** The {@link #getFormatter() default formatter}. */
   private NlsFormatter<Object> defaultFormatter;
 
+  /** @see #setIso8601Util(Iso8601Util) */
+  private Iso8601Util iso8601Util;
+
   /**
    * The constructor.
    */
@@ -36,6 +41,9 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   protected void doInitialize() {
 
     super.doInitialize();
+    if (this.iso8601Util == null) {
+      this.iso8601Util = Iso8601UtilImpl.getInstance();
+    }
     if (this.defaultFormatter == null) {
       this.defaultFormatter = new NlsFormatterDefault();
     }
@@ -53,7 +61,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   protected NlsFormatter<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
 
     if (TYPE_CHOICE.equals(formatType)) {
-      return new NlsFormatterChoice(scanner, this);
+      return new NlsFormatterChoice(scanner, this, this.iso8601Util);
     } else {
       return super.getSubFormatter(formatType, scanner);
     }
@@ -91,6 +99,18 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
 
     getInitializationState().requireNotInitilized();
     this.defaultFormatter = defaultFormatter;
+  }
+
+  /**
+   * This method sets the {@link Iso8601Util} instance to use.
+   * 
+   * @param iso8601Util is the {@link Iso8601Util}.
+   */
+  @Resource
+  public void setIso8601Util(Iso8601Util iso8601Util) {
+
+    getInitializationState().requireNotInitilized();
+    this.iso8601Util = iso8601Util;
   }
 
 }

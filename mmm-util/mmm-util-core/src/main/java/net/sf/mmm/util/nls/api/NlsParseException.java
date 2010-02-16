@@ -26,6 +26,18 @@ public class NlsParseException extends NlsRuntimeException {
    * The constructor.
    * 
    * @param value is the value that could NOT be parsed.
+   * @param expected is the string or character that was expected but not found
+   *        at the end of <code>value</code>.
+   */
+  public NlsParseException(CharSequence value, CharSequence expected) {
+
+    super(NlsBundleUtilCore.ERR_PARSE_EXPECTED, toMap(KEY_VALUE, value, KEY_TYPE, expected));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g.
    *        "[+-][0-9]*[.][0-9]+")
    * @param type is type the given <code>value</code> should be converted to.
@@ -76,16 +88,16 @@ public class NlsParseException extends NlsRuntimeException {
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
-   * @param type is type the given <code>value</code> should be converted to.
    * @param requiredFormat describes the expected format (e.g.
    *        "[+-][0-9]*[.][0-9]+")
+   * @param type is type the given <code>value</code> should be converted to.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was
    *        located in an XML document, etc. It is used in exceptions thrown if
    *        something goes wrong. This will help to find the problem easier.
    */
-  public NlsParseException(Throwable nested, CharSequence value, Object type,
-      CharSequence requiredFormat, Object valueSource) {
+  public NlsParseException(Throwable nested, CharSequence value, CharSequence requiredFormat,
+      Object type, Object valueSource) {
 
     super(nested, NlsBundleUtilCore.ERR_PARSE_FORMAT, addToMap(toMap(KEY_VALUE, value, KEY_TYPE,
         type, KEY_FORMAT, requiredFormat), KEY_SOURCE, valueSource));

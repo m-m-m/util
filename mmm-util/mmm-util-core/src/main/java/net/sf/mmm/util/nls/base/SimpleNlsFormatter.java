@@ -50,7 +50,7 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsSubFormatter<O> {
   /**
    * {@inheritDoc}
    */
-  public void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer, NlsTemplateResolver resolver) {
+  public void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver, Appendable buffer) {
 
     try {
       buffer.append(format(object, locale, arguments, resolver));

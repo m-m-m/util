@@ -304,6 +304,42 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * {@inheritDoc}
    */
+  public String readUntil(char stop, boolean acceptEof, char escape) {
+
+    StringBuilder result = new StringBuilder();
+    int start = this.pos;
+    while (this.pos < this.endIndex) {
+      char c = this.chars[this.pos++];
+      if (c == escape) {
+        result.append(this.chars, start, this.pos - start - 1);
+        // lookahead
+        if (this.pos < this.endIndex) {
+          c = this.chars[this.pos];
+          if ((escape == stop) && (c != stop)) {
+            return result.toString();
+          } else {
+            // escape character
+            result.append(c);
+            this.pos++;
+            start = this.pos;
+          }
+        }
+      } else if (c == stop) {
+        result.append(this.chars, start, this.pos - start - 1);
+        return result.toString();
+      }
+    }
+    if (acceptEof) {
+      result.append(this.chars, start, this.pos - start - 1);
+      return result.toString();
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public String readUntil(char stop, boolean acceptEof, CharScannerSyntax syntax) {
 
     StringBuilder result = new StringBuilder();

@@ -5,6 +5,7 @@ package net.sf.mmm.util.date.api;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * This class is a collection of utility functions for formatting and parsing
@@ -65,6 +66,24 @@ import java.util.Date;
  * @since 1.0.2
  */
 public interface Iso8601Util {
+
+  /** The regex-pattern for the date-format. */
+  String PATTERN_STRING_DATE = "([0-9][0-9][0-9][0-9])[-]?([0-1][0-9])[-]?([0-3][0-9])";
+
+  /** The regex-pattern for the time-format. */
+  String PATTERN_STRING_TIME = "([0-2][0-9])[:]?([0-5][0-9])[:]?([0-5][0-9])";
+
+  /** The regex-pattern for the timezone-format. */
+  String PATTERN_STRING_TIMEZONE = "(([+-])([0-2][0-9])[:]?([0-5][0-9])([:]?([0-5][0-9]))?|Z)";
+
+  /**
+   * The regex-pattern for the full date-format (date with optional time and
+   * optional timezone).
+   */
+  String PATTERN_STRING_ALL = PATTERN_STRING_DATE + "(T" + PATTERN_STRING_TIME + "(" + PATTERN_STRING_TIMEZONE + ")?)?";
+
+  /** The regex-pattern to check the format. */
+  Pattern PATTERN_ALL = Pattern.compile(PATTERN_STRING_ALL);
 
   /**
    * This method formats the given <code>date</code> in the format "yyyy-MM-dd"

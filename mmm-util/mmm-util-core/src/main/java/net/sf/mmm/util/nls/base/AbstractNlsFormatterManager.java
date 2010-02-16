@@ -57,16 +57,20 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggable imple
 
     String key = scanner.readWhile(CharFilter.IDENTIFIER_FILTER);
     char c = scanner.next();
+    int index = scanner.getCurrentIndex();
     String formatType = null;
     NlsFormatter<?> formatter = null;
     if (c == NlsArgumentParser.FORMAT_SEPARATOR) {
       formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
+      index = scanner.getCurrentIndex();
       c = scanner.forceNext();
       if (c == NlsArgumentParser.FORMAT_SEPARATOR) {
+        index = scanner.getCurrentIndex();
         try {
           formatter = getSubFormatter(formatType, scanner);
         } catch (Exception e) {
-          throw new NlsParseException(e, scanner.getOriginalString(), NlsFormatter.class);
+          throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()),
+              NlsFormatter.class);
         }
         c = scanner.forceNext();
       } else {
@@ -80,8 +84,8 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggable imple
       c = scanner.forceNext();
     }
     if (c != NlsArgumentParser.END_EXPRESSION) {
-      // TODO: proper exception, NLS
-      throw new IllegalArgumentException("Unmatched braces in the pattern.");
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), ""
+          + NlsArgumentParser.END_EXPRESSION);
     }
     if (formatter == null) {
       formatter = getFormatter();

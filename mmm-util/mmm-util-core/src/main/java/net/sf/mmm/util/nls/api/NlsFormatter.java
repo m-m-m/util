@@ -42,11 +42,11 @@ public interface NlsFormatter<O> {
    * @param locale is the locale used for localized formatting.
    * @param arguments is the {@link Map} of
    *        {@link NlsMessage#getArgument(String) arguments}.
-   * @param buffer is where to append the formatted <code>object</code>.
    * @param resolver is the {@link NlsTemplateResolver}.
+   * @param buffer is where to append the formatted <code>object</code>.
    * @throws IOException if the given {@link Appendable} caused such exception.
    */
-  void format(O object, Locale locale, Map<String, Object> arguments, Appendable buffer,
-      NlsTemplateResolver resolver) throws IOException;
+  void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException;
 
 }

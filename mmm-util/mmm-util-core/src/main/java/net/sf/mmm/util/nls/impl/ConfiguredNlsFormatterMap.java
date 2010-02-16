@@ -111,7 +111,9 @@ public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
   }
 
   /**
-   * @param iso8601Util is the iso8601Util to set
+   * This method sets the {@link Iso8601Util} instance to use.
+   * 
+   * @param iso8601Util is the {@link Iso8601Util}.
    */
   @Resource
   public void setIso8601Util(Iso8601Util iso8601Util) {

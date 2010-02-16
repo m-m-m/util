@@ -18,8 +18,8 @@ public class IocContainerException extends RuntimeException {
   /**
    * The constructor.
    * 
-   * @param message
-   * @param cause
+   * @param message the {@link #getMessage() message}.
+   * @param cause the {@link #getCause() cause}.
    */
   public IocContainerException(String message, Throwable cause) {
 
@@ -29,7 +29,7 @@ public class IocContainerException extends RuntimeException {
   /**
    * The constructor.
    * 
-   * @param message
+   * @param message the {@link #getMessage() message}.
    */
   public IocContainerException(String message) {
 
@@ -39,7 +39,7 @@ public class IocContainerException extends RuntimeException {
   /**
    * The constructor.
    * 
-   * @param cause
+   * @param cause the {@link #getCause() cause}.
    */
   public IocContainerException(Throwable cause) {
 

@@ -36,7 +36,7 @@ public class NlsFormatterDefault extends AbstractNlsSubFormatter<Object> {
    * {@inheritDoc}
    */
   public void format(Object object, Locale locale, Map<String, Object> arguments,
-      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     String result = null;
     if (object != null) {

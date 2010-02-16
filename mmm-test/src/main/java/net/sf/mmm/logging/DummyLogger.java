@@ -3,13 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.logging;
 
-import org.slf4j.Logger;
 import org.slf4j.helpers.MarkerIgnoringBase;
 
 /**
- * This is an implementation of the {@link Logger} interface that does nothing.
- * Unlike {@link org.slf4j.helpers.NOPLogger} its methods are NOT final so it
- * can be extended for testing purposes.
+ * This is an implementation of the {@link org.slf4j.Logger} interface that does
+ * nothing. Unlike {@link org.slf4j.helpers.NOPLogger} its methods are NOT final
+ * so it can be extended for testing purposes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

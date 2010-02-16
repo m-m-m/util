@@ -23,7 +23,8 @@ public interface IocContainer {
    *         implements the given <code>apiClass</code> or if there are multiple
    *         such components.
    */
-  <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass);
+  <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass)
+      throws IocContainerException;
 
   /**
    * This method gets the component that realizes the given
@@ -40,7 +41,8 @@ public interface IocContainer {
    *         given <code>componentId</code> or the registered component does NOT
    *         realize the given <code>apiClass</code>.
    */
-  <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass, String componentId);
+  <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass, String componentId)
+      throws IocContainerException;
 
   /**
    * This method disposes the container (performs a shutdown and destroys all

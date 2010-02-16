@@ -252,6 +252,22 @@ import java.util.Locale;
  * <td>java.util.List&lt;java.lang.String&gt;</td>
  * <td>{@link java.lang.reflect.Type} full representation</td>
  * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_CHOICE choice}</td>
+ * <td>(?==1)'error'(else)'errors'</td>
+ * <td>error</td>
+ * <td>A choice to distinguish singular/plural forms.</td>
+ * </tr>
+ * <tr>
+ * <td>{@link NlsFormatterManager#TYPE_CHOICE choice}</td>
+ * <td>(?>=5){key,choice,(?==true)'a'(else){key2}}(else)'c'</td>
+ * <td>a</td>
+ * <td>A choice that results to 'c' if the value is NOT greater or equal to 5.
+ * Otherwise it results to 'a' if the value of the argument "key" is
+ * {@link Boolean#TRUE}. Otherwise it results to the value of the argument
+ * "key2". - This is a wired example. It shows the power of the choice format as
+ * well as how things turn out unmaintainable if the power is missused.</td>
+ * </tr>
  * </table>
  * 
  * For the term <em>internationalization</em> usually the shortcut <em>i18n</em>

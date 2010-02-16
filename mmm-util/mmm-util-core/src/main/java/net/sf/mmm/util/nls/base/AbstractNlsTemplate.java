@@ -54,7 +54,7 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
       return false;
     } else {
       NlsMessageFormatter formatter = createFormatter(translation, locale);
-      formatter.format(null, locale, arguments, buffer, resolver);
+      formatter.format(null, locale, arguments, resolver, buffer);
       return true;
     }
   }

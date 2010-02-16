@@ -220,7 +220,7 @@ public class NlsMessageImpl implements NlsMessage {
           }
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(this.message,
               getArgumentParser());
-          format.format(null, locale, this.arguments, buffer, resolver);
+          format.format(null, locale, this.arguments, resolver, buffer);
         }
       }
     } catch (IOException e) {

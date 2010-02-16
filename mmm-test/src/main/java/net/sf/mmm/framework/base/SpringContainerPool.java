@@ -14,10 +14,10 @@ import net.sf.mmm.framework.api.IocContainer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SpringContainerPool {
+public final class SpringContainerPool {
 
   /** @see #getContainer(String) */
-  private static final Map<String, SpringContainer> containerMap = new HashMap<String, SpringContainer>();
+  private static final Map<String, SpringContainer> CONTAINER_MAP = new HashMap<String, SpringContainer>();
 
   /**
    * The constructor.
@@ -37,10 +37,10 @@ public class SpringContainerPool {
    */
   public static IocContainer getContainer(String configPath) {
 
-    SpringContainer container = containerMap.get(configPath);
+    SpringContainer container = CONTAINER_MAP.get(configPath);
     if (container == null) {
       container = new SpringContainer(configPath);
-      containerMap.put(configPath, container);
+      CONTAINER_MAP.put(configPath, container);
     }
     return container;
   }
@@ -55,7 +55,7 @@ public class SpringContainerPool {
    */
   public static void disposeContainer(String configPath) {
 
-    SpringContainer container = containerMap.remove(configPath);
+    SpringContainer container = CONTAINER_MAP.remove(configPath);
     if (container != null) {
       container.dispose();
     }

@@ -40,7 +40,7 @@ public abstract class AbstractNlsFormatter<O> implements NlsFormatter<O> {
 
     try {
       StringBuilder buffer = new StringBuilder();
-      format(object, locale, arguments, buffer, resolver);
+      format(object, locale, arguments, resolver, buffer);
       return buffer.toString();
     } catch (IOException e) {
       throw new RuntimeIoException(e);

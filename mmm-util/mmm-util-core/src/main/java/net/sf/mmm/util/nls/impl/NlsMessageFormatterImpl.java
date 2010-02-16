@@ -11,12 +11,11 @@ import java.util.Map;
 
 import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
-import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsMessageFormatter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
-import net.sf.mmm.util.text.api.Justification;
 
 /**
  * This is the implementation of the
@@ -64,7 +63,14 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
     CharSequenceScanner scanner = new CharSequenceScanner(pattern);
     String prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, SYNTAX);
     while (scanner.hasNext()) {
-      NlsArgument argument = this.argumentParser.parse(scanner);
+      NlsArgument argument;
+      int index = scanner.getCurrentIndex() - 1;
+      try {
+        argument = this.argumentParser.parse(scanner);
+      } catch (Exception e) {
+        throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()),
+            NlsArgument.class);
+      }
       PatternSegment segment = new PatternSegment(prefix, argument);
       segmentList.add(segment);
       prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, SYNTAX);
@@ -77,31 +83,12 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
    * {@inheritDoc}
    */
   public final void format(Void nothing, Locale locale, Map<String, Object> arguments,
-      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     for (PatternSegment segment : this.segments) {
       buffer.append(segment.prefix);
       NlsArgument argument = segment.argument;
-      Object value = null;
-      if (arguments != null) {
-        value = arguments.get(argument.getKey());
-      }
-      if (value == null) {
-        buffer.append(NlsArgumentParser.START_EXPRESSION);
-        buffer.append(argument.getKey());
-        buffer.append(NlsArgumentParser.END_EXPRESSION);
-      } else {
-        @SuppressWarnings("unchecked")
-        NlsFormatter<Object> formatter = (NlsFormatter<Object>) argument.getFormatter();
-        Justification justification = argument.getJustification();
-        if (justification == null) {
-          formatter.format(value, locale, arguments, buffer, resolver);
-        } else {
-          StringBuilder sb = new StringBuilder();
-          formatter.format(value, locale, arguments, sb, resolver);
-          justification.justify(sb, buffer);
-        }
-      }
+      NlsArgumentFormatter.INSTANCE.format(argument, locale, arguments, resolver, buffer);
     }
     buffer.append(this.suffix);
   }

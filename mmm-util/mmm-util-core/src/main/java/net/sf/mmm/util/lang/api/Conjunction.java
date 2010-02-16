@@ -105,43 +105,4 @@ public enum Conjunction {
    * @since 1.1.2
    */
   public abstract boolean eval(boolean... arguments);
-  // {
-  //
-  // for (boolean b : arguments) {
-  // switch (this) {
-  // case OR:
-  // if (b) {
-  // return true;
-  // }
-  // break;
-  // case AND:
-  // if (!b) {
-  // return false;
-  // }
-  // break;
-  // case NOR:
-  // if (b) {
-  // return false;
-  // }
-  // break;
-  // case NAND:
-  // if (!b) {
-  // return true;
-  // }
-  // break;
-  // default :
-  // throw new IllegalCaseException(Conjunction.class, this);
-  // }
-  // }
-  // switch (this) {
-  // case OR:
-  // case NAND:
-  // return false;
-  // case AND:
-  // case NOR:
-  // return true;
-  // default :
-  // throw new IllegalCaseException(Conjunction.class, this);
-  // }
-  // }
 }

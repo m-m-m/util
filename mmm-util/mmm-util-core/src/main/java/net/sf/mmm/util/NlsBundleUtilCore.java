@@ -25,15 +25,15 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.value.api.ValueNotSetException */
   public static final String ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!";
 
-  /**
-   * @see net.sf.mmm.util.nls.api.NlsParseException
-   */
+  /** @see net.sf.mmm.util.nls.api.NlsParseException */
+  public static final String ERR_PARSE_EXPECTED = "Failed to parse \"{value}\" - "
+      + "expected \"{type}\"!";
+
+  /** @see net.sf.mmm.util.nls.api.NlsParseException */
   public static final String ERR_PARSE_TYPE = "Failed to parse \"{value}\" as value "
       + "of the type \"{type}\"!";
 
-  /**
-   * @see net.sf.mmm.util.nls.api.NlsParseException
-   */
+  /** @see net.sf.mmm.util.nls.api.NlsParseException */
   public static final String ERR_PARSE_TYPE_SOURCE = "Failed to parse \"{value}\" "
       + "from \"{source}\" as value of the type \"{type}\"!";
 
@@ -145,6 +145,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.io.api.BufferExceedException */
   public static final String ERR_BUFFER_LENGTH_EXCEED = "Offset or length \"{value}\" exceeds buffer with capacity \"{capacity}\"!";
+
+  /** @see net.sf.mmm.util.nls.impl.NlsFormatterChoiceNoElseConditionException */
+  public static final String ERR_NLS_CHOICE_NO_ELSE = "A choice format needs to end with an (else)-condition!";
+
+  /** @see net.sf.mmm.util.nls.impl.NlsFormatterChoiceOnlyElseConditionException */
+  public static final String ERR_NLS_CHOICE_ONLY_ELSE = "A choice format needs to have at least one regular condition before (else)-condition!";
 
   /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
   public static final String ERR_XML_INVALID = "Invalid XML!";

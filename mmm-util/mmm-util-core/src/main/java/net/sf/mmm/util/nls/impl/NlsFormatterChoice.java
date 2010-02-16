@@ -4,15 +4,25 @@
 package net.sf.mmm.util.nls.impl;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.filter.base.ConjunctionCharFilter;
+import net.sf.mmm.util.filter.base.ConstantFilter;
+import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.lang.api.Comparator;
+import net.sf.mmm.util.lang.api.Conjunction;
+import net.sf.mmm.util.nls.api.NlsArgument;
+import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.base.AbstractNlsFormatter;
+import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
@@ -39,7 +49,14 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */
-public final class NlsFormatterChoice extends AbstractNlsFormatter<Object> {
+public final class NlsFormatterChoice extends AbstractNlsSubFormatter<Object> {
+
+  /** TODO: javadoc. */
+  private static final String REQUIRED_FORMAT_COMPARATOR = "(==|!=|>=|>|<=|<)";
+
+  /** TODO: javadoc. */
+  private static final String REQUIRED_FORMAT_CONDITION = "(else|?" + REQUIRED_FORMAT_COMPARATOR
+      + "[0-9a-zA-Z+-.:])";
 
   /** The character used to indicate the start of a {@link Choice} condition. */
   public static final char CONDITION_START = '(';
@@ -56,53 +73,249 @@ public final class NlsFormatterChoice extends AbstractNlsFormatter<Object> {
   /** The value of a {@link Choice} condition that matches always. */
   public static final String CONDITION_ELSE = "else";
 
+  /** The {@link Filter} for {@link #CONDITION_ELSE}. */
+  private static final Filter<Object> FILTER_ELSE = ConstantFilter.getInstance(true);
+
+  /**
+   * The {@link CharFilter} for the {@link Comparator#getSymbol() comparator
+   * symbol} .
+   */
+  private static final CharFilter FILTER_COMPARATOR = new ListCharFilter(true, '<', '=', '>', '!');
+
+  /** The {@link CharFilter} for the comparator argument. */
+  private static final CharFilter FILTER_COMPARATOR_ARGUMENT = new ConjunctionCharFilter(
+      Conjunction.OR, CharFilter.LATIN_DIGIT_OR_LETTER_FILTER, new ListCharFilter(true, '-', '+',
+          '.', ':'));
+
+  /** The {@link Iso8601Util} used to parse dates. */
+  private final Iso8601Util iso8601Util;
+
   /** The {@link Choice}s. */
-  private final Choice[] choices;
+  private final List<Choice> choices;
 
   /**
    * The constructor.
    * 
    * @param scanner is the {@link CharSequenceScanner} pointing to the choice-
    *        <code>formatStyle</code>.
+   * @param argumentParser is the {@link NlsArgumentParser} instance.
+   * @param iso8601Util is the {@link Iso8601Util} instance used to parse dates.
    */
-  public NlsFormatterChoice(CharSequenceScanner scanner, NlsFormatterManager formatterManager) {
+  public NlsFormatterChoice(CharSequenceScanner scanner, NlsArgumentParser argumentParser,
+      Iso8601Util iso8601Util) {
 
     super();
-    scanner.expect(CONDITION_START);
-    // scanner.read(count)
-    this.choices = new Choice[0];
+    this.iso8601Util = iso8601Util;
+    this.choices = new ArrayList<Choice>();
+    boolean hasElse = false;
+    char c = scanner.forceNext();
+    while ((c == CONDITION_START) && (!hasElse)) {
+      Choice choice = parseChoice(scanner, argumentParser);
+      if (choice.condition == FILTER_ELSE) {
+        hasElse = true;
+      }
+      this.choices.add(choice);
+      c = scanner.forceNext();
+    }
+    if (!hasElse) {
+      throw new NlsFormatterChoiceNoElseConditionException();
+    }
+    if (this.choices.size() < 2) {
+      throw new NlsFormatterChoiceOnlyElseConditionException();
+    }
+    scanner.stepBack();
+  }
 
+  /**
+   * This method parses the {@link Choice}.
+   * 
+   * @param scanner is the {@link CharSequenceScanner}.
+   * @param argumentParser is the {@link NlsArgumentParser}.
+   * @return the parsed {@link Choice}.
+   */
+  private Choice parseChoice(CharSequenceScanner scanner, NlsArgumentParser argumentParser) {
+
+    Filter<Object> condition = parseCondition(scanner);
+    int index = scanner.getCurrentIndex();
+    char c = scanner.forceNext();
+    Choice choice;
+    if (c == NlsArgumentParser.START_EXPRESSION) {
+      NlsArgument argument = argumentParser.parse(scanner);
+      choice = new Choice(condition, null, argument);
+    } else if ((c == '"') || (c == '\'')) {
+      String result = scanner.readUntil(c, false, c);
+      choice = new Choice(condition, result, null);
+    } else {
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
+          "({...}|'.*'])", NlsArgument.class);
+    }
+    return choice;
+  }
+
+  /**
+   * This method parses the {@link Condition}.
+   * 
+   * @param scanner is the {@link CharSequenceScanner}.
+   * @return the parsed {@link Condition} or {@link #FILTER_ELSE} in case of
+   *         {@link #CONDITION_ELSE}.
+   */
+  private Filter<Object> parseCondition(CharSequenceScanner scanner) {
+
+    int index = scanner.getCurrentIndex();
+    Filter<Object> condition;
+    if (scanner.expect(CONDITION_VAR)) {
+      // variable choice
+      String symbol = scanner.readWhile(FILTER_COMPARATOR);
+      Comparator comparator = Comparator.fromSymbol(symbol);
+      if (comparator == null) {
+        throw new NlsParseException(symbol, REQUIRED_FORMAT_COMPARATOR, Comparator.class);
+      }
+      Object comparatorArgument = parseComparatorArgument(scanner);
+      condition = new Condition(comparator, comparatorArgument);
+    } else if (scanner.expect(CONDITION_ELSE, false)) {
+      condition = FILTER_ELSE;
+    } else {
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
+          REQUIRED_FORMAT_CONDITION, getType());
+    }
+    if (!scanner.expect(CONDITION_END)) {
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
+          REQUIRED_FORMAT_CONDITION, getType());
+    }
+    return condition;
+  }
+
+  /**
+   * This method parses the {@link Condition#comparatorArgument comparator
+   * argument}.
+   * 
+   * @param scanner is the {@link CharSequenceScanner}.
+   * @return the parsed comparator argument.
+   */
+  private Object parseComparatorArgument(CharSequenceScanner scanner) {
+
+    int index = scanner.getCurrentIndex();
+    Object comparatorArgument;
+    char c = scanner.forcePeek();
+    if ((c == '"') || (c == '\'')) {
+      scanner.next();
+      comparatorArgument = scanner.readUntil(c, false, c);
+    } else {
+      String argument = scanner.readWhile(FILTER_COMPARATOR_ARGUMENT);
+      if (argument.length() == 0) {
+        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
+            REQUIRED_FORMAT_CONDITION, getType());
+      }
+      if ("null".equals(argument)) {
+        comparatorArgument = null;
+      } else if (Iso8601Util.PATTERN_ALL.matcher(argument).matches()) {
+        comparatorArgument = this.iso8601Util.parseDate(argument);
+      } else if (Boolean.TRUE.toString().equals(argument)) {
+        comparatorArgument = Boolean.TRUE;
+      } else if (Boolean.FALSE.toString().equals(argument)) {
+        comparatorArgument = Boolean.FALSE;
+      } else {
+        // double vs. date?
+        comparatorArgument = Double.valueOf(argument);
+      }
+    }
+    return comparatorArgument;
   }
 
   /**
    * {@inheritDoc}
    */
   public void format(Object object, Locale locale, Map<String, Object> arguments,
-      Appendable buffer, NlsTemplateResolver resolver) throws IOException {
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     for (Choice choice : this.choices) {
-      if (choice.accept(object)) {
-        Object result = choice.getResult(arguments);
-        new NlsFormatterDefault().format(result, locale, arguments, buffer, resolver);
-        break;
+      if (choice.condition.accept(object)) {
+        if (choice.argument != null) {
+          NlsArgumentFormatter.INSTANCE
+              .format(choice.argument, locale, arguments, resolver, buffer);
+        } else {
+          buffer.append(choice.result);
+        }
+        return;
       }
     }
     buffer.append(toString());
   }
 
   /**
-   * 
+   * {@inheritDoc}
    */
-  private static class Choice implements Filter<Object> {
+  @Override
+  protected String getType() {
+
+    return NlsFormatterManager.TYPE_CHOICE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getStyle() {
+
+    return null;
+  }
+
+  /**
+   * This inner class represents a single choice.
+   */
+  private static final class Choice {
+
+    /** The condition that determines when the choice applies. */
+    private final Filter<Object> condition;
+
+    /**
+     * The {@link NlsArgument} to use as result or <code>null</code> if
+     * {@link #result} should be used instead.
+     */
+    private final NlsArgument argument;
+
+    /** The literal result. */
+    private final String result;
+
+    /**
+     * The constructor.
+     * 
+     * @param condition is the {@link #condition}.
+     * @param result is the {@link #result}.
+     * @param argument is the {@link #argument}.
+     */
+    private Choice(Filter<Object> condition, String result, NlsArgument argument) {
+
+      super();
+      this.condition = condition;
+      this.result = result;
+      this.argument = argument;
+    }
+  }
+
+  /**
+   * This inner class represents a single choice.
+   */
+  private class Condition implements Filter<Object> {
 
     /** The {@link Comparator}. */
-    private Comparator comparator;
+    private final Comparator comparator;
 
-    private String comparatorArgument;
+    /** The argument for the {@link #comparator}. */
+    private final Object comparatorArgument;
 
-    private Object result;
+    /**
+     * The constructor.
+     * 
+     * @param comparator is the {@link #comparator}.
+     * @param comparatorArgument is the {@link #comparatorArgument}.
+     */
+    public Condition(Comparator comparator, Object comparatorArgument) {
 
-    private String resultKey;
+      super();
+      this.comparator = comparator;
+      this.comparatorArgument = comparatorArgument;
+    }
 
     /**
      * {@inheritDoc}
@@ -112,37 +325,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatter<Object> {
       if (this.comparator == null) {
         return true;
       }
-      Object o = this.comparatorArgument;
-      if (value != null) {
-        if (value instanceof Number) {
-          o = Double.valueOf(this.comparatorArgument);
-        } else if (value instanceof Date) {
-
-        }
-      }
-      return this.comparator.eval(value, o);
-    }
-
-    /**
-     * This method determines the result of this {@link Choice} in case it
-     * {@link #accept(Object) matched}.
-     * 
-     * @param arguments are the
-     *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-     *        arguments} .
-     * @return the result.
-     */
-    public Object getResult(Map<String, Object> arguments) {
-
-      if (this.resultKey == null) {
-        return this.result;
-      } else {
-        Object arg = arguments.get(this.resultKey);
-        if (arg == null) {
-          arg = "{" + this.resultKey + "}";
-        }
-        return arg;
-      }
+      return this.comparator.eval(value, this.comparatorArgument);
     }
   }
 

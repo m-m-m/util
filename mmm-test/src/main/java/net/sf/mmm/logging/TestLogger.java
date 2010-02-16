@@ -9,7 +9,8 @@ import java.util.List;
 import org.slf4j.helpers.MarkerIgnoringBase;
 
 /**
- * TODO: this class ...
+ * This is an implementation of the {@link org.slf4j.Logger} interface that
+ * stores all log-entries in a {@link #getEventList() list}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -278,31 +279,41 @@ public class TestLogger extends MarkerIgnoringBase {
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null, obj, obj1));
   }
 
-  @SuppressWarnings("all")
+  /**
+   * Enumerats the loglevels.
+   */
   private static enum LogLevel {
 
+    /** @see org.slf4j.Logger#trace(String) */
     TRACE,
 
+    /** @see org.slf4j.Logger#debug(String) */
     DEBUG,
 
+    /** @see org.slf4j.Logger#warn(String) */
     WARNING,
 
+    /** @see org.slf4j.Logger#info(String) */
     INFO,
 
+    /** @see org.slf4j.Logger#error(String) */
     ERROR
   }
 
-  @SuppressWarnings("all")
+  /**
+   * An event that tracks the log-entry.
+   */
   public static class LogEvent {
 
     /**
      * The constructor.
      * 
-     * @param arguments
-     * @param level
-     * @param message
-     * @param throwable
+     * @param arguments are the {@link #arguments}.
+     * @param level is the {@link #level}.
+     * @param message is the {@link #message}.
+     * @param throwable is the {@link #throwable}.
      */
+    @SuppressWarnings("all")
     public LogEvent(LogLevel level, String message, Throwable throwable, Object... arguments) {
 
       super();
@@ -312,13 +323,19 @@ public class TestLogger extends MarkerIgnoringBase {
       this.arguments = arguments;
     }
 
+    // CHECKSTYLE:OFF (nuts)
+    /** The {@link LogLevel}. */
     public final LogLevel level;
 
+    /** The logged message. */
     public final String message;
 
+    /** The optional arguments. */
     public final Object[] arguments;
 
+    /** The optional {@link Throwable}. */
     public final Throwable throwable;
+    // CHECKSTYLE:ON
   }
 
 }
