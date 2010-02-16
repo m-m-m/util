@@ -135,6 +135,8 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
     try {
       synchronized (buffer) {
+        buffer.append(throwable.getClass().getName());
+        buffer.append(": ");
         throwable.getLocalizedMessage(locale, resolver, buffer);
         buffer.append(StringUtil.LINE_SEPARATOR);
         UUID uuid = throwable.getUuid();
