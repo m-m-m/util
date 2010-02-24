@@ -17,6 +17,7 @@ import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
 import net.sf.mmm.search.indexer.base.SearchAddFailedException;
 import net.sf.mmm.search.indexer.base.SearchRemoveFailedException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -142,7 +143,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
       try {
         this.indexModifier = new IndexModifier(indexDirectory, this.analyzer, create);
       } catch (IOException e) {
-        throw new RuntimeIoException(e);
+        throw new RuntimeIoException(e, IoMode.READ);
       }
     }
   }
@@ -169,7 +170,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     try {
       this.indexModifier.close();
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.CLOSE);
     }
   }
 
@@ -181,7 +182,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     try {
       this.indexModifier.flush();
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.WRITE);
     }
   }
 

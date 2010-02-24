@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -224,7 +225,7 @@ public class NlsMessageImpl implements NlsMessage {
         }
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.WRITE);
     }
   }
 

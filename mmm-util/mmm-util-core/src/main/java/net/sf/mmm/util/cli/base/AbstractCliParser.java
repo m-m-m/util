@@ -3,21 +3,35 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliException;
 import net.sf.mmm.util.cli.api.CliMode;
-import net.sf.mmm.util.cli.api.CliModeMixException;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.cli.api.CliOptionDuplicateException;
 import net.sf.mmm.util.cli.api.CliOptionIllegalNameOrAliasException;
+import net.sf.mmm.util.cli.api.CliOptionIncompatibleModesException;
+import net.sf.mmm.util.cli.api.CliOptionMisplacedException;
+import net.sf.mmm.util.cli.api.CliOptionMissingException;
+import net.sf.mmm.util.cli.api.CliOptionMissingValueException;
 import net.sf.mmm.util.cli.api.CliOutputSettings;
 import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
@@ -42,22 +56,16 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
   private static final char CHAR_OPTION = '-';
 
   /**
-   * The prefix for {@link CliOption#name() name} or {@link CliOption#aliases()
-   * alias} of a short option (e.g. "-h").
-   */
-  private static final String PREFIX_SHORT_OPTION = "-";
-
-  /**
-   * The prefix for {@link CliOption#name() name} or {@link CliOption#aliases()
-   * alias} of a long option (e.g. "--help").
-   */
-  private static final String PREFIX_LONG_OPTION = "--";
-
-  /**
    * The {@link String#length() length} of the {@link CliOption#name() name} or
    * {@link CliOption#aliases() alias} of a short option.
    */
   private static final int LENGTH_SHORT_OPTION = 2;
+
+  /**
+   * The {@link Pattern} for a mix of multiple short-options. E.g. "-vpa"
+   * instead of "-v", "-p" and "-a".
+   */
+  private static final Pattern PATTERN_MULTI_SHORT_OPTIONS = Pattern.compile("-([a-zA-Z0-9]+)");
 
   /**
    * The minimum {@link String#length() length} of the {@link CliOption#name()
@@ -74,6 +82,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
   /** The {@link GenericValueConverter}. */
   private final GenericValueConverter<Object> converter;
 
+  /** The {@link NlsMessageFactory}. */
   private final NlsMessageFactory nlsMessageFactory;
 
   /** @see #getState() */
@@ -137,7 +146,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     boolean valid = false;
     CharFilter filter = CharFilter.LATIN_DIGIT_OR_LETTER_FILTER;
     if (style == CliStyle.STRICT) {
-      filter = CharFilter.ASCII_UPPER_CASE_LETTER_FILTER;
+      filter = CharFilter.ASCII_LETTER_FILTER;
     }
     if (name.startsWith(PREFIX_SHORT_OPTION)) {
       if ((name.length() == LENGTH_SHORT_OPTION) && (filter.accept(name.charAt(1)))) {
@@ -231,8 +240,18 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     return this.state;
   }
 
-  protected void parseOption(CliModeObject mode, CliOptionContainer optionContainer,
-      CliArgumentConsumer argumentConsumer) {
+  /**
+   * This method parses the value of a {@link CliOption}.
+   * 
+   * @param parserState is the {@link CliParserState}.
+   * @param option is the command-line parameter that triggered the given
+   *        <code>optionContainer</code>.
+   * @param optionContainer is the {@link CliOptionContainer} for the current
+   *        option that has already been detected.
+   * @param argumentConsumer is the {@link CliArgumentConsumer}.
+   */
+  protected void parseOption(CliParserState parserState, String option,
+      CliOptionContainer optionContainer, CliArgumentConsumer argumentConsumer) {
 
     PojoPropertyAccessorOneArg setter = optionContainer.getSetter();
     Class<?> propertyClass = setter.getPropertyClass();
@@ -248,14 +267,15 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       if (value == null) {
         // option (e.g. "--trigger") is not followed by "true" or "false"
         if (this.cliState.getStyle() == CliStyle.STRICT) {
-          throw new CliException("TODO") {};
+          throw new CliOptionMissingValueException(option);
         }
         value = Boolean.TRUE;
+      } else {
+        argumentConsumer.getNext();
       }
-      argumentConsumer.getNext();
     } else {
       if (!argumentConsumer.hasNext()) {
-        throw new CliException("TODO") {};
+        throw new CliOptionMissingValueException(option);
       }
       String argument = argumentConsumer.getNext();
       value = this.converter.convertValue(argument, null, propertyClass, setter.getPropertyType());
@@ -268,46 +288,134 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    */
   public CliModeObject parseArguments(String... arguments) throws CliException {
 
-    CliModeObject currentMode = null;
-    String modeOption = null;
     CliArgumentConsumer argumentConsumer = new CliArgumentConsumer(arguments);
-    boolean optionsComplete = false;
+    CliParserState parserState = new CliParserState();
     while (argumentConsumer.hasNext()) {
       String arg = argumentConsumer.getNext();
-      CliOptionContainer optionContainer = this.cliState.getOption(arg);
+      parseArgument(arg, parserState, argumentConsumer);
+    }
+    checkRequiredOptions(parserState);
+    return parserState.currentMode;
+  }
+
+  /**
+   * This method checks that all {@link CliOption#required() required}
+   * {@link CliOption options} are present if they are triggered by the
+   * {@link CliParserState#getCurrentMode() current mode}.
+   * 
+   * @param parserState is the current {@link CliParserState}.
+   */
+  protected void checkRequiredOptions(CliParserState parserState) {
+
+    CliModeObject mode = parserState.currentMode;
+    String modeId = mode.getId();
+    // create set of active modes...
+    Set<String> modeIdSet = new HashSet<String>();
+    modeIdSet.add(modeId);
+    for (CliModeObject childMode : mode.getExtendedModes()) {
+      modeIdSet.add(childMode.getId());
+    }
+    // check all required options if active of not for current mode...
+    for (CliOptionContainer option : this.cliState.getOptions()) {
+      CliOption cliOption = option.getOption();
+      if (!parserState.optionSet.contains(cliOption) && cliOption.required()) {
+        // option is required but not present
+        if (modeIdSet.contains(cliOption.mode())) {
+          throw new CliOptionMissingException(cliOption.name(), modeId);
+        }
+      }
+    }
+  }
+
+  /**
+   * This method parses a single command-line argument.
+   * 
+   * @param argument is the command-line argument.
+   * @param parserState is the {@link CliParserState}.
+   * @param argumentConsumer is the {@link CliArgumentConsumer}.
+   */
+  protected void parseArgument(String argument, CliParserState parserState,
+      CliArgumentConsumer argumentConsumer) {
+
+    if (!parserState.optionsComplete) {
+      CliOptionContainer optionContainer = this.cliState.getOption(argument);
+      if (optionContainer == null) {
+        Matcher matcher = PATTERN_MULTI_SHORT_OPTIONS.matcher(argument);
+        if (matcher.matches()) {
+          // "-vlp" --> "-v", "-l", "-p"
+          String multiOptions = matcher.group(1);
+          String[] arguments = new String[multiOptions.length()];
+          for (int i = 0; i < multiOptions.length(); i++) {
+            arguments[i] = PREFIX_SHORT_OPTION + multiOptions.charAt(i);
+          }
+          CliArgumentConsumer subConsumer = new CliArgumentConsumer(arguments);
+          while (subConsumer.hasNext()) {
+            String subArg = subConsumer.getNext();
+            parseArgument(subArg, parserState, argumentConsumer);
+          }
+        }
+      }
       if (optionContainer != null) {
-        if (optionsComplete) {
-          throw new CliException("TODO") {};
+        if (parserState.optionsComplete) {
+          throw new CliOptionMisplacedException(argument);
+        }
+        boolean newOption = parserState.optionSet.add(optionContainer.getOption());
+        if (!newOption) {
+          handleDuplicateOption(optionContainer);
         }
         String modeId = optionContainer.getOption().mode();
         CliModeObject newMode = this.cliState.getMode(modeId);
         if (newMode == null) {
           newMode = new CliModeContainer(modeId);
         }
-        if (currentMode == null) {
-          currentMode = newMode;
-          modeOption = arg;
-        } else if (!modeId.equals(currentMode.getId())) {
-          if (newMode.getExtendedModes().contains(currentMode)) {
+        if (parserState.currentMode == null) {
+          parserState.setCurrentMode(argument, newMode);
+        } else if (!modeId.equals(parserState.currentMode.getId())) {
+          // mode already detected, but mode of current option differs...
+          if (newMode.getExtendedModes().contains(parserState.currentMode)) {
             // new mode extends current mode
-            currentMode = newMode;
-            modeOption = arg;
-          } else if (!currentMode.getExtendedModes().contains(newMode)) {
+            parserState.setCurrentMode(argument, newMode);
+          } else if (!parserState.currentMode.getExtendedModes().contains(newMode)) {
             // current mode does NOT extend new mode and vice versa
             // --> incompatible modes
-            throw new CliModeMixException(modeOption, arg);
+            throw new CliOptionIncompatibleModesException(parserState.modeOption, argument);
           }
         }
-        parseOption(currentMode, optionContainer, argumentConsumer);
+        parseOption(parserState, argument, optionContainer, argumentConsumer);
       } else {
-        if (PREFIX_LONG_OPTION.equals(arg)) {
-          optionsComplete = true;
+        if (END_OPTIONS.equals(argument)) {
+          parserState.setOptionsComplete();
         } else {
-          // options over? arguments start?
+          // unknown option or start of arguments
+          List<CliArgumentContainer> argumentList = this.cliState
+              .getArguments(parserState.currentMode);
         }
       }
+    } else {
+
     }
-    return null;
+  }
+
+  /**
+   * This method is invoked if the same {@link CliOption option} has occurred
+   * twice.
+   * 
+   * @param optionContainer is the {@link CliOptionContainer} representing the
+   *        duplicated option.
+   */
+  private void handleDuplicateOption(CliOptionContainer optionContainer) {
+
+    CliStyle style = getCliState().getStyle();
+    if (style == CliStyle.STRICT) {
+      throw new CliOptionDuplicateException(optionContainer.getOption().name());
+    } else {
+      String message = "Duplicate option: " + optionContainer.getOption().name();
+      if (style == CliStyle.TOLERANT) {
+        getLogger().warn(message);
+      } else {
+        getLogger().debug(message);
+      }
+    }
   }
 
   /**
@@ -323,11 +431,17 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    */
   public void printHelp(Appendable target, CliOutputSettings settings) {
 
-    String name = this.cliState.getName();
-    Map<String, Object> arguments = new HashMap<String, Object>();
-    arguments.put("mainClass", this.cliState.getName());
-    NlsMessage usageMessage = this.nlsMessageFactory.create(NlsBundleUtilCore.MSG_MAIN_USAGE,
-        arguments);
+    try {
+      Locale locale = settings.getLocale();
+      Map<String, Object> arguments = new HashMap<String, Object>();
+      arguments.put("mainClass", this.cliState.getName());
+      this.cliState.getOptions();
+      NlsMessage usageMessage = this.nlsMessageFactory.create(NlsBundleUtilCore.MSG_MAIN_USAGE,
+          arguments);
+      target.append(usageMessage.getLocalizedMessage(locale));
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
   }
 
   /**
@@ -345,4 +459,104 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
 
     return this.nlsMessageFactory;
   }
+
+  /**
+   * This inner class holds the state of the
+   * {@link AbstractCliParser#parseArguments(String...) argument parsing}.
+   */
+  protected static class CliParserState {
+
+    /** @see #getCurrentMode() */
+    private CliModeObject currentMode;
+
+    /** @see #getModeOption() */
+    private String modeOption;
+
+    /** @see #getOptionSet() */
+    private Set<CliOption> optionSet;
+
+    /** @see #isOptionsComplete() */
+    private boolean optionsComplete;
+
+    /**
+     * The constructor.
+     */
+    public CliParserState() {
+
+      super();
+      this.currentMode = null;
+      this.modeOption = null;
+      this.optionSet = new HashSet<CliOption>();
+      this.optionsComplete = false;
+    }
+
+    /**
+     * This method gets the current mode that was detected so far.
+     * 
+     * @return the currentMode or <code>null</code> if no mode has been
+     *         detected, yet.
+     */
+    public CliModeObject getCurrentMode() {
+
+      return this.currentMode;
+    }
+
+    /**
+     * The command-line argument for the option, that activated the
+     * {@link #getCurrentMode() current mode}.
+     * 
+     * @return the modeOption
+     */
+    public String getModeOption() {
+
+      return this.modeOption;
+    }
+
+    /**
+     * This method sets {@link #getCurrentMode() current mode} and
+     * {@link #getModeOption() mode-option}.
+     * 
+     * @param option is the {@link #getModeOption() mode-option}.
+     * @param mode is the {@link #getCurrentMode() current mode}.
+     */
+    public void setCurrentMode(String option, CliModeObject mode) {
+
+      this.modeOption = option;
+      this.currentMode = mode;
+    }
+
+    /**
+     * The {@link Set} of activated {@link CliOption options}.
+     * 
+     * @return the optionSet, initially empty.
+     */
+    public Set<CliOption> getOptionSet() {
+
+      return this.optionSet;
+    }
+
+    /**
+     * This method determines if the {@link CliOption options} are completed and
+     * further command-line parameters have to be {@link CliArgument arguments}.
+     * 
+     * @see AbstractCliParser#END_OPTIONS
+     * 
+     * @return the optionsComplete
+     */
+    public boolean isOptionsComplete() {
+
+      return this.optionsComplete;
+    }
+
+    /**
+     * This method sets the {@link #isOptionsComplete() options-complete flag}
+     * to <code>true</code>.
+     */
+    public void setOptionsComplete() {
+
+      this.optionsComplete = true;
+    }
+
+  }
+
 }

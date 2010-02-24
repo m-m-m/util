@@ -10,11 +10,61 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * A {@link CliOption} is used to annotate a field (member variable of some
- * class) that should be set from a main-program via a commandline option.<br>
- * The annotated field should NOT be {@link java.lang.reflect.Modifier#STATIC
- * static} or {@link java.lang.reflect.Modifier#FINAL final} and by convention
- * it should be {@link java.lang.reflect.Modifier#PRIVATE private}.
+ * A {@link CliOption} is used to annotate a property (member variable of some
+ * class or setter-method) that should be set from a main-program via a
+ * commandline option.<br>
+ * If the annotated field is a property it may NOT be
+ * {@link java.lang.reflect.Modifier#STATIC static} or
+ * {@link java.lang.reflect.Modifier#FINAL final} and by convention it should be
+ * {@link java.lang.reflect.Modifier#PRIVATE private}.<br>
+ * The annotated property should be initialized properly at construction in
+ * order to determine whether the option was triggered or not. For non-primitive
+ * types the property should be initialized with <code>null</code>.<br>
+ * Options with a type other than <code>boolean</code> need to be followed by a
+ * value. This value has to be quoted in the commandline if it contains
+ * whitespaces or other characters that are interpreted by the shell (e.g.
+ * backslash in Unix).<br>
+ * The type of the annotated property has to be supported by the CLI
+ * implementation so the value can be converted properly. The followng types are
+ * guaranteed to be supported:
+ * <table border="1">
+ * <tr>
+ * <th>Type</th>
+ * <th>Comment</th>
+ * </tr>
+ * <tr>
+ * <td>{@link String}</td>
+ * <td>The given text as is.</td>
+ * </tr>
+ * <tr>
+ * <td>boolean</td>
+ * <td>Set to <code>true</code> if {@link CliOption} is present. Should be
+ * initialized with <code>false</code> at construction.</td>
+ * </tr>
+ * <tr>
+ * <td>{@link Boolean}</td>
+ * <td>If the option is present with a value of <code>true</code> or
+ * <code>false</code> the according {@link Boolean} is applied. Otherwise values
+ * are treated as invalid. According to {@link CliStyle}, <code>true</code> may
+ * be omitted.</td>
+ * </tr>
+ * <tr>
+ * <td>{@link Number}</td>
+ * <td>The subclasses of {@link Number} from the package <code>java.lang</code>
+ * are always supported. See {@link CliConstraintNumber}.</td>
+ * </tr>
+ * <tr>
+ * <td>{@link java.io.File}</td>
+ * <td>A file {@link java.io.File#File(String) created} from the value of the
+ * option. See {@link CliConstraintFile}.</td>
+ * </tr>
+ * <tr>
+ * <td>{@link Enum}</td>
+ * <td>A {@link Class#isEnum() concrete subclass} of {@link Enum}. The value
+ * needs to match the {@link Enum#name()} but case is ignored and underscores
+ * may also be replaced by hyphen ("-") or whitespace (" ").</td>
+ * </tr>
+ * </table>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
@@ -78,14 +128,17 @@ public @interface CliOption {
 
   /**
    * A typical main-program has different modes how it can be invoked.<br>
-   * The {@link CliOption options} of a program can be split into groups. The
-   * options are ordered in groups in the help-usage-output and groups allow to
-   * express that an {@link CliOption option} is required only in a specific
-   * mode.<br>
-   * Options of different groups can not be mixed. If a group-name
-   * {@link String#startsWith(String) starts with} the name of another group, it
-   * automatically extends that group (e.g. the group "import-strict" extends
-   * the group "import".
+   * The {@link CliOption options} of a program can be split into groups that
+   * represent such mode. The options are ordered by their mode in the
+   * help-usage-output and modes allow to express that an {@link CliOption
+   * option} is {@link #required() required} only in a specific mode.<br>
+   * {@link CliOption Options} can only be combined as command-line arguments if
+   * their {@link #mode() modes} are compatible. This means that the modes have
+   * to be identical or one mode {@link CliMode#parentIds() extends} the other.
+   * In the latter case the most special mode is triggered. For each
+   * {@link #mode() mode} that is used in an {@link CliOption option} of an
+   * {@link CliClass CLI annotated class} an according {@link CliMode}
+   * annotation has to be present in order to define the mode.
    */
   String mode() default CliMode.MODE_DEFAULT;
 

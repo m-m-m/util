@@ -3,8 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This class represents a manifest file. Such file is typically located at
@@ -18,6 +27,12 @@ import java.util.Map;
  * @since 1.0.1
  */
 public class Manifest {
+
+  /** the class-path to the manifest. */
+  public static final String MANIFEST_PATH = "META-INF/MANIFEST.MF";
+
+  /** the default encoding. */
+  public static final String DEFAULT_ENCODING = "UTF-8";
 
   /** the property <code>{@value}</code> */
   public static final String MANIFEST_VERSION = "Manifest-Version";
@@ -67,6 +82,35 @@ public class Manifest {
 
     super();
     this.properties = Collections.unmodifiableMap(properties);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param reader is the {@link Reader} where to read the manifest from.
+   * @throws RuntimeIoException if the {@link Reader} caused an
+   *         {@link IOException}
+   */
+  public Manifest(Reader reader) throws RuntimeIoException {
+
+    super();
+    try {
+      try {
+        Properties p = new Properties();
+        p.load(reader);
+        Map<String, String> map = new HashMap<String, String>();
+        for (Object key : p.keySet()) {
+          String keyString = key.toString();
+          String value = p.getProperty(keyString);
+          map.put(keyString, value);
+        }
+        this.properties = Collections.unmodifiableMap(map);
+      } finally {
+        reader.close();
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
   }
 
   /**
@@ -159,6 +203,34 @@ public class Manifest {
   public String getManifestVersion() {
 
     return this.properties.get(MANIFEST_VERSION);
+  }
+
+  /**
+   * This method loads the {@link Manifest} for the given <code>type</code> if
+   * available.
+   * 
+   * @param type is the {@link Class} for which the {@link Manifest} is
+   *        requested. E.g. if that {@link Class} was loaded from a JAR-file,
+   *        then the {@link Manifest} of that JAR is loaded if present.
+   * @return the according {@link Manifest} or <code>null</code> if NOT
+   *         available.
+   */
+  public static final Manifest load(Class<?> type) {
+
+    InputStream inputStream = type.getClassLoader().getResourceAsStream(MANIFEST_PATH);
+    if (inputStream == null) {
+      return null;
+    }
+    try {
+      InputStreamReader reader = new InputStreamReader(inputStream);
+      return new Manifest(reader);
+    } finally {
+      try {
+        inputStream.close();
+      } catch (IOException e) {
+        throw new RuntimeIoException(e, IoMode.CLOSE);
+      }
+    }
   }
 
 }

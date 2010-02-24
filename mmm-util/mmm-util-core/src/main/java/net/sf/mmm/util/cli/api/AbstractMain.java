@@ -3,9 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.cli.base.DefaultCliParserBuilder;
+import net.sf.mmm.util.io.api.StreamUtil;
+import net.sf.mmm.util.io.base.AppendableWriter;
+import net.sf.mmm.util.io.base.StreamUtilImpl;
 
 /**
  * This is the abstract base class for a main-program.
@@ -34,6 +38,15 @@ public abstract class AbstractMain {
    */
   protected static final int EXIT_CODE_UNEXPECTED = -1;
 
+  /** @see #getStandardOutput() */
+  private PrintWriter standardOutput;
+
+  /** @see #getStandardError() */
+  private PrintWriter standardError;
+
+  /** @see #getOutputSettings() */
+  private final CliOutputSettings outputSettings;
+
   /** Option to show the {@link #printHelp(CliParser) usage}. */
   @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //
   required = true, usage = NlsBundleUtilCore.INF_MAIN_HELP_USAGE, mode = CliMode.MODE_HELP)
@@ -45,6 +58,11 @@ public abstract class AbstractMain {
   public AbstractMain() {
 
     super();
+    this.outputSettings = new CliOutputSettings();
+    // CHECKSTYLE:OFF (legal for main-program)
+    this.standardOutput = new PrintWriter(System.out);
+    this.standardError = new PrintWriter(System.err);
+    // CHECKSTYLE:ON
   }
 
   /**
@@ -68,7 +86,8 @@ public abstract class AbstractMain {
   protected int handleError(Exception exception, CliParser parser) {
 
     // TODO: NLS
-    PrintStream printStream = getErrorStream();
+    AppendableWriter writer = new AppendableWriter(this.standardError);
+    PrintWriter printStream = new PrintWriter(writer);
     if (exception instanceof CliException) {
       printStream.println("Error: " + exception.getMessage());
       printStream.println();
@@ -90,36 +109,76 @@ public abstract class AbstractMain {
    */
   protected CliParserBuilder getParserBuilder() {
 
-    // TODO
-    return null;
+    DefaultCliParserBuilder parserBuilder = new DefaultCliParserBuilder();
+    parserBuilder.initialize();
+    return parserBuilder;
   }
 
   /**
-   * This method gets the output stream where to
-   * {@link PrintStream#print(String) print} information for the end-user.<br>
-   * Default is {@link System#out}.
+   * This method gets the {@link StreamUtil} to use.
    * 
-   * @return the output stream.
+   * @return the {@link StreamUtil} to use.
    */
-  protected PrintStream getOutputStream() {
+  public StreamUtil getStreamUtil() {
 
-    // CHECKSTYLE:OFF (legal for main-program)
-    return System.out;
-    // CHECKSTYLE:ON
+    return StreamUtilImpl.getInstance();
   }
 
   /**
-   * This method gets the output stream where to
-   * {@link PrintStream#print(String) print} information for the end-user.<br>
+   * This method gets the {@link CliOutputSettings output settings} used for
+   * information and error messages.
+   * 
+   * @return the outputSettings.
+   */
+  public CliOutputSettings getOutputSettings() {
+
+    return this.outputSettings;
+  }
+
+  /**
+   * This method gets the standard output where to {@link PrintWriter#println()
+   * print} information for the end-user.<br>
    * Default is {@link System#out}.
+   * 
+   * @return the standard output.
+   */
+  public final PrintWriter getStandardOutput() {
+
+    return this.standardOutput;
+  }
+
+  /**
+   * This method sets the {@link #getStandardOutput() standard output}. It may
+   * be used by sub-classes or tests to redirect output.
+   * 
+   * @param output is the output to set
+   */
+  public final void setStandardOutput(Appendable output) {
+
+    this.standardOutput = getStreamUtil().toPrintWriter(output);
+  }
+
+  /**
+   * This method gets the standard error where to
+   * {@link Appendable#append(CharSequence) print} errors for the end-user.<br>
+   * Default is {@link System#err}.
    * 
    * @return the output stream.
    */
-  protected PrintStream getErrorStream() {
+  public final Appendable getStandardError() {
 
-    // CHECKSTYLE:OFF (legal for main-program)
-    return System.err;
-    // CHECKSTYLE:ON
+    return this.standardError;
+  }
+
+  /**
+   * This method sets the {@link #getStandardError() standard error}. It may be
+   * used by sub-classes or tests to redirect errors.
+   * 
+   * @param error is the error to set.
+   */
+  public final void setStandardError(Appendable error) {
+
+    this.standardError = getStreamUtil().toPrintWriter(error);
   }
 
   /**
@@ -129,7 +188,7 @@ public abstract class AbstractMain {
    */
   protected void printHelp(CliParser parser) {
 
-    parser.printHelp(getOutputStream());
+    parser.printHelp(getStandardOutput(), getOutputSettings());
   }
 
   /**

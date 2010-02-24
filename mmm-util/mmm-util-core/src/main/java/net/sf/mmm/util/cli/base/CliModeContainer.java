@@ -47,6 +47,7 @@ public class CliModeContainer implements CliModeObject {
     this.mode = null;
     this.annotatedClass = null;
     this.extendedModes = Collections.emptySet();
+    this.state = InitState.INITIALIZED;
   }
 
   /**
@@ -62,6 +63,7 @@ public class CliModeContainer implements CliModeObject {
     this.id = mode.id();
     this.annotatedClass = annotatedClass;
     this.extendedModes = new HashSet<CliModeContainer>();
+    this.state = InitState.UNINITIALIZED;
   }
 
   /**

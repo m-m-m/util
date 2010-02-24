@@ -6,19 +6,25 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * TODO: this class ...
+ * A {@link CliParserExcepiton} is thrown if a property is annotated as
+ * {@link CliOption} or {@link CliArgument} but the type of that property is not
+ * supported.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */
 public class CliParserExcepiton extends CliException {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 7576087965627428527L;
+
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param type is the class reflecting the
-   *        {@link net.sf.mmm.util.cli.base.CliState#getState() state-object}.
+   * @param type is the
+   *        {@link net.sf.mmm.util.cli.base.CliState#getStateClass()
+   *        state-class}.
    */
   public CliParserExcepiton(Exception nested, Class<?> type) {
 

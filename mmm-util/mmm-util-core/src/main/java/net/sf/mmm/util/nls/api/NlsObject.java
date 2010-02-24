@@ -62,6 +62,9 @@ public interface NlsObject {
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_MODE = "mode";
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_FILE = "file";
+
   /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.

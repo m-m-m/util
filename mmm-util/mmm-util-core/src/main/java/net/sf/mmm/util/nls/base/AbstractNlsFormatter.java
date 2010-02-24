@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -36,14 +37,15 @@ public abstract class AbstractNlsFormatter<O> implements NlsFormatter<O> {
   /**
    * {@inheritDoc}
    */
-  public String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver) {
+  public String format(O object, Locale locale, Map<String, Object> arguments,
+      NlsTemplateResolver resolver) {
 
     try {
       StringBuilder buffer = new StringBuilder();
       format(object, locale, arguments, resolver, buffer);
       return buffer.toString();
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 

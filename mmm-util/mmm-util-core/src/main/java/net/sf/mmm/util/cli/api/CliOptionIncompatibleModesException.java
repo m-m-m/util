@@ -6,13 +6,13 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliModeMixException} is thrown if two {@link CliOption options} are
+ * A {@link CliOptionIncompatibleModesException} is thrown if two {@link CliOption options} are
  * used together that have incompatible {@link CliOption#mode() modes}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */
-public class CliModeMixException extends CliException {
+public class CliOptionIncompatibleModesException extends CliException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 1233209808038797353L;
@@ -29,9 +29,9 @@ public class CliModeMixException extends CliException {
    * @param option1 is the first option.
    * @param option2 is the second option.
    */
-  public CliModeMixException(String option1, String option2) {
+  public CliOptionIncompatibleModesException(String option1, String option2) {
 
-    super(NlsBundleUtilCore.ERR_CLI_MODE_MIX, toMap(KEY_OPTION, option1, KEY_OPTION2, option2));
+    super(NlsBundleUtilCore.ERR_CLI_OPTION_INCOMPATIBLE_MODES, toMap(KEY_OPTION, option1, KEY_OPTION2, option2));
   }
 
 }

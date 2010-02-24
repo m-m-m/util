@@ -19,6 +19,8 @@ import java.lang.annotation.Target;
  * {@link CliOption#required() required} but in another mode they should NOT be
  * present.
  * 
+ * @see CliModes
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */

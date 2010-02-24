@@ -4,6 +4,7 @@
 package net.sf.mmm.util.cli.api;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.reflect.api.Manifest;
 
 /**
  * This is the abstract base class for a {@link AbstractMain main-program} that
@@ -15,9 +16,12 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 @CliMode(id = CliMode.MODE_VERSION, title = NlsBundleUtilCore.INF_MAIN_VERSION)
 public abstract class AbstractVersionedMain extends AbstractMain {
 
-  /** */
+  /** The {@link #getVersion() version} if NOT available from {@link Manifest}. */
+  private static final String SNAPSHOT = "SNAPSHOT";
+
+  /** The option to print the version. */
   @CliOption(name = CliOption.NAME_VERSION, aliases = CliOption.ALIAS_VERSION, //
-  usage = NlsBundleUtilCore.INF_MAIN_VERSION_USAGE)
+  usage = NlsBundleUtilCore.INF_MAIN_VERSION_USAGE, mode = CliMode.MODE_VERSION)
   private boolean version;
 
   /**
@@ -25,7 +29,21 @@ public abstract class AbstractVersionedMain extends AbstractMain {
    * 
    * @return the program-version.
    */
-  protected abstract String getVersion();
+  protected String getVersion() {
+
+    Manifest manifest = Manifest.load(getClass());
+    String versionNumber = null;
+    if (manifest != null) {
+      versionNumber = manifest.getImplementationVersion();
+      if (versionNumber == null) {
+        versionNumber = manifest.getSpecificationVersion();
+      }
+    }
+    if (versionNumber == null) {
+      versionNumber = SNAPSHOT;
+    }
+    return versionNumber;
+  }
 
   /**
    * {@inheritDoc}
@@ -35,7 +53,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
 
     if (this.version) {
       assert (CliMode.MODE_VERSION.equals(mode.getId()));
-      getOutputStream().println(getVersion());
+      getStandardOutput().println(getVersion());
       return 0;
     }
     return EXIT_CODE_ILLEGAL_SYNTAX;

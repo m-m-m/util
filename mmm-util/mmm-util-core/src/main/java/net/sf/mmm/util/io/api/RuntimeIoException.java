@@ -38,4 +38,40 @@ public class RuntimeIoException extends NlsRuntimeException {
     super(nested, NlsBundleUtilCore.ERR_IO);
   }
 
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception. This
+   *        should be an {@link java.io.IOException}. However it may also be an
+   *        {@link java.io.IOError}.
+   * @param mode is the {@link IoMode}.
+   */
+  public RuntimeIoException(Throwable nested, IoMode mode) {
+
+    super(nested, getMessage(mode));
+  }
+
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   * message} according to the given <code>mode</code>.
+   * 
+   * @param mode is the {@link IoMode} or <code>null</code> if unknown.
+   * @return the message according to <code>mode</code>.
+   */
+  private static String getMessage(IoMode mode) {
+
+    switch (mode) {
+      case READ:
+        return NlsBundleUtilCore.ERR_IO_READ;
+      case WRITE:
+        return NlsBundleUtilCore.ERR_IO_WRITE;
+      case CLOSE:
+        return NlsBundleUtilCore.ERR_IO_CLOSE;
+      default :
+        assert (false) : "IoMode is null!";
+        return NlsBundleUtilCore.ERR_IO;
+    }
+  }
+
 }

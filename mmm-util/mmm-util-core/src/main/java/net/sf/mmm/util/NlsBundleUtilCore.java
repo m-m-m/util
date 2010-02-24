@@ -80,6 +80,21 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.api.RuntimeIoException */
   public static final String ERR_IO = "An unexpected input/output error has ocurred!";
 
+  /** @see net.sf.mmm.util.io.api.RuntimeIoException */
+  public static final String ERR_IO_READ = "An unexpetected error has occured while reading data!";
+
+  /** @see net.sf.mmm.util.io.api.RuntimeIoException */
+  public static final String ERR_IO_WRITE = "An unexpetected error has occured while writing data!";
+
+  /** @see net.sf.mmm.util.io.api.RuntimeIoException */
+  public static final String ERR_IO_CLOSE = "Failed to close handle!";
+
+  /** @see net.sf.mmm.util.file.api.FileAlreadyExistsException */
+  public static final String ERR_FILE_ALREADY_EXISTS = "The file \"{file}\" already exists!";
+
+  /** @see net.sf.mmm.util.file.api.FileNotExistsException */
+  public static final String ERR_FILE_NOT_EXISTS = "The file \"{file}\" does not exist!";
+
   /** @see net.sf.mmm.util.nls.api.NlsNullPointerException */
   public static final String ERR_ARGUMENT_NULL = "The object \"{object}\" is null!";
 
@@ -162,8 +177,8 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.CliOptionIllegalNameOrAliasException */
   public static final String ERR_CLI_OPTION_NAME_ILLEGAL = "The name or alias \"{name}\" of \"{option}\" is illegal!";
 
-  /** @see net.sf.mmm.util.cli.api.CliModeMixException */
-  public static final String ERR_CLI_MODE_MIX = "The options \"{option}\" and \"{option2}\" have incompatible modes and can not be mixed!";
+  /** @see net.sf.mmm.util.cli.api.CliOptionIncompatibleModesException */
+  public static final String ERR_CLI_OPTION_INCOMPATIBLE_MODES = "The options \"{option}\" and \"{option2}\" have incompatible modes and can not be mixed!";
 
   /** @see net.sf.mmm.util.cli.api.CliParserExcepiton */
   public static final String ERR_CLI_PARSER = "The class \"{type}\" is invalid as command-line interface state-object!";
@@ -185,5 +200,33 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
   public static final String MSG_MAIN_USAGE = "Usage: {mainClass} [<option>*]";
+
+  /** @see net.sf.mmm.util.cli.api.CliOptionDuplicateException */
+  public static final String ERR_CLI_OPTION_DUPLICATE = "Duplicate option \"{option}\"!";
+
+  /** @see net.sf.mmm.util.cli.api.CliOptionMissingValueException */
+  public static final String ERR_CLI_OPTION_MISSING_VALUE = "The option "
+      + "\"{option}\" must be followed by a value!";
+
+  /** @see net.sf.mmm.util.cli.api.CliOptionMissingException */
+  public static final String ERR_CLI_OPTION_MISSING = "The option \"{option}\" "
+      + "is required for mode \"{mode}\"!";
+
+  /** @see net.sf.mmm.util.cli.api.CliOptionMisplacedException */
+  public static final String ERR_CLI_OPTION_MISPLACED = "The option \"{option}\" "
+      + "is misplaced and can not be given after the start of the arguments!";
+
+  /** @see net.sf.mmm.util.cli.api.CliOptionAndArgumentAnnotationException */
+  public static final String ERR_CLI_OPTION_AND_ARGUMENT_ANNOTATION = "The property "
+      + "\"{property}\" can not be annotated both with @CliOption and @CliArgument!";
+
+  /** @see net.sf.mmm.util.cli.api.CliClassNoPropertyException */
+  public static final String ERR_CLI_CLASS_NO_PROPERTY = "The CLI class \"{type}\" "
+      + "is illegal because it has no property annotated with @CliOption or @CliArgument!";
+
+  /** @see net.sf.mmm.util.cli.api.CliModeUndefinedException */
+  public static final String ERR_CLI_MODE_UNDEFINED = "The mode \"{mode}\" used "
+      + "by \"{value}\" is undefined! You have to declare it via @CliMode or "
+      + "change CliStyle to something else than STRICT.";
 
 }

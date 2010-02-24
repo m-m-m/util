@@ -10,6 +10,7 @@ import net.sf.mmm.search.engine.base.AbstractSearchResult;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
 import net.sf.mmm.search.engine.base.SearchHitImpl;
 import net.sf.mmm.search.impl.LuceneSearchEntry;
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 import org.apache.lucene.search.Hits;
@@ -53,7 +54,7 @@ public class LuceneSearchResult extends AbstractSearchResult {
       return new SearchHitImpl(new LuceneSearchEntry(this.hits.doc(index)), entryId, this.hits
           .score(index), this.highlighter);
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 

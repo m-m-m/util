@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
@@ -149,7 +150,7 @@ public class NlsFormatterType extends AbstractNlsSubFormatter<Object> {
           this.buffer.append(value.getCanonicalName());
         }
       } catch (IOException e) {
-        throw new RuntimeIoException(e);
+        throw new RuntimeIoException(e, IoMode.WRITE);
       }
     }
   }

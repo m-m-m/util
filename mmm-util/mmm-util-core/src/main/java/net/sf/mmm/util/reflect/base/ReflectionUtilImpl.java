@@ -33,6 +33,7 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
@@ -481,7 +482,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
         throw new IllegalCaseException(type.getClass().getName());
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.WRITE);
     }
   }
 

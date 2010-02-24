@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 import net.sf.mmm.util.io.api.ByteProcessable;
 import net.sf.mmm.util.io.api.ByteProcessor;
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
@@ -231,7 +232,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
       }
       return length - len;
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 

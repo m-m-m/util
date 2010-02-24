@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -27,8 +28,11 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.concurrent.api.Stoppable;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pool.api.Pool;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
@@ -330,6 +334,32 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
   /**
    * {@inheritDoc}
    */
+  public PrintWriter toPrintWriter(Appendable appendable) {
+
+    NlsNullPointerException.checkNotNull(Appendable.class, appendable);
+    if (appendable instanceof PrintWriter) {
+      return (PrintWriter) appendable;
+    } else {
+      return new PrintWriter(toWriter(appendable));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Writer toWriter(Appendable appendable) {
+
+    NlsNullPointerException.checkNotNull(Appendable.class, appendable);
+    if (appendable instanceof Writer) {
+      return (Writer) appendable;
+    } else {
+      return new AppendableWriter(appendable);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void close(InputStream inputStream) {
 
     try {
@@ -347,7 +377,7 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
     try {
       outputStream.close();
     } catch (Exception e) {
-      getLogger().warn("Failed to close stream!", e);
+      throw new RuntimeIoException(e, IoMode.CLOSE);
     }
   }
 
@@ -359,7 +389,7 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
     try {
       writer.close();
     } catch (Exception e) {
-      getLogger().warn("Failed to close writer!", e);
+      throw new RuntimeIoException(e, IoMode.CLOSE);
     }
   }
 
@@ -371,7 +401,7 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
     try {
       reader.close();
     } catch (Exception e) {
-      getLogger().warn("Failed to close writer!", e);
+      getLogger().warn("Failed to close reader!", e);
     }
   }
 
@@ -383,7 +413,10 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
     try {
       channel.close();
     } catch (Exception e) {
-      getLogger().warn("Failed to close writer!", e);
+      if (channel instanceof WritableByteChannel) {
+        throw new RuntimeIoException(e, IoMode.CLOSE);
+      }
+      getLogger().warn("Failed to close channel!", e);
     }
   }
 

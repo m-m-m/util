@@ -3,7 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
+import java.util.Locale;
+
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
  * This class represents the settings for the
@@ -17,10 +20,14 @@ public class CliOutputSettings {
   /** @see #getWidth() */
   private int width;
 
-  private int optionRatio;
-
   /** @see #getLineSeparator() */
   private String lineSeparator;
+
+  /** @see #getLocale() */
+  private Locale locale;
+
+  /** @see #getTemplateResolver() */
+  private NlsTemplateResolver templateResolver;
 
   /**
    * The constructor.
@@ -30,7 +37,8 @@ public class CliOutputSettings {
     super();
     this.lineSeparator = StringUtil.LINE_SEPARATOR;
     this.width = 80;
-    this.optionRatio = 40;
+    this.locale = Locale.getDefault();
+    this.templateResolver = null;
   }
 
   /**
@@ -78,6 +86,43 @@ public class CliOutputSettings {
   public void setLineSeparator(String lineSeparator) {
 
     this.lineSeparator = lineSeparator;
+  }
+
+  /**
+   * This method gets the {@link Locale} used to nationalize the output. By
+   * default {@link Locale#getDefault()} ist used.
+   * 
+   * @return the {@link Locale}.
+   */
+  public Locale getLocale() {
+
+    return this.locale;
+  }
+
+  /**
+   * This method sets the {@link #getLocale() locale} to use.
+   * 
+   * @param locale is the locale to set
+   */
+  public void setLocale(Locale locale) {
+
+    this.locale = locale;
+  }
+
+  /**
+   * @return the templateResolver
+   */
+  public NlsTemplateResolver getTemplateResolver() {
+
+    return this.templateResolver;
+  }
+
+  /**
+   * @param templateResolver is the templateResolver to set
+   */
+  public void setTemplateResolver(NlsTemplateResolver templateResolver) {
+
+    this.templateResolver = templateResolver;
   }
 
 }

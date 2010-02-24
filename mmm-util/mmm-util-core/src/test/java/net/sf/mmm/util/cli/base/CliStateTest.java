@@ -24,6 +24,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
  */
+@SuppressWarnings("all")
 public class CliStateTest {
 
   /** The option for a string. */

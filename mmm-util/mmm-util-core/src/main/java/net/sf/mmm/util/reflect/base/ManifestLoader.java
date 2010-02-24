@@ -10,11 +10,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.reflect.api.Manifest;
 
 /**
@@ -28,59 +27,62 @@ import net.sf.mmm.util.reflect.api.Manifest;
  */
 public class ManifestLoader {
 
-  /** the class-path to the manifest. */
-  private static final String MANIFEST_PATH = "META-INF/MANIFEST.MF";
-
-  /** the default encoding. */
-  public static final String DEFAULT_ENCODING = "UTF-8";
-
   /** the list of the manifests */
   private final List<Manifest> manifests;
 
   /**
    * The constructor.
    * 
-   * @throws IOException if a general I/O error occurred while reflectively
-   *         reading the manifests.
+   * @throws RuntimeIoException if a general I/O error occurred while
+   *         reflectively reading the manifests.
    */
-  public ManifestLoader() throws IOException {
+  public ManifestLoader() throws RuntimeIoException {
 
-    this(DEFAULT_ENCODING);
+    this(Manifest.DEFAULT_ENCODING);
   }
 
   /**
    * The constructor.
    * 
    * @param encoding is the encoding used to read the manifest files.
-   * @throws IOException if a general I/O error occurred while reflectively
-   *         reading the manifests.
+   * @throws RuntimeIoException if a general I/O error occurred while
+   *         reflectively reading the manifests.
    */
-  public ManifestLoader(String encoding) throws IOException {
+  public ManifestLoader(String encoding) throws RuntimeIoException {
+
+    this(encoding, Thread.currentThread().getContextClassLoader());
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param encoding is the encoding used to read the manifest files.
+   * @param classloader is the {@link ClassLoader} used to find and load the
+   *        {@link Manifest}s.
+   * @throws RuntimeIoException if a general I/O error occurred while
+   *         reflectively reading the manifests.
+   */
+  private ManifestLoader(String encoding, ClassLoader classloader) throws RuntimeIoException {
 
     super();
-    List<Manifest> mutableList = new ArrayList<Manifest>();
-    Enumeration<URL> urls = Thread.currentThread().getContextClassLoader().getResources(
-        MANIFEST_PATH);
-    while (urls.hasMoreElements()) {
-      URL url = urls.nextElement();
-      InputStream inputStream = url.openStream();
-      try {
-        InputStreamReader reader = new InputStreamReader(inputStream, encoding);
-        Properties properties = new Properties();
-        properties.load(reader);
-        Map<String, String> map = new HashMap<String, String>();
-        for (Object key : properties.keySet()) {
-          String keyString = key.toString();
-          String value = properties.getProperty(keyString);
-          map.put(keyString, value);
+    try {
+      List<Manifest> mutableList = new ArrayList<Manifest>();
+      Enumeration<URL> urls = classloader.getResources(Manifest.MANIFEST_PATH);
+      while (urls.hasMoreElements()) {
+        URL url = urls.nextElement();
+        InputStream inputStream = url.openStream();
+        try {
+          InputStreamReader reader = new InputStreamReader(inputStream, encoding);
+          Manifest manifest = new Manifest(reader);
+          mutableList.add(manifest);
+        } finally {
+          inputStream.close();
         }
-        Manifest manifest = new Manifest(map);
-        mutableList.add(manifest);
-      } finally {
-        inputStream.close();
       }
+      this.manifests = Collections.unmodifiableList(mutableList);
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
-    this.manifests = Collections.unmodifiableList(mutableList);
   }
 
   /**

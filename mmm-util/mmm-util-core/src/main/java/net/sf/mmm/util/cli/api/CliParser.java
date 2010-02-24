@@ -13,9 +13,32 @@ package net.sf.mmm.util.cli.api;
 public interface CliParser {
 
   /**
+   * The prefix for {@link CliOption#name() name} or {@link CliOption#aliases()
+   * alias} of a short option (e.g. "-h").
+   */
+  String PREFIX_SHORT_OPTION = "-";
+
+  /**
+   * The prefix for {@link CliOption#name() name} or {@link CliOption#aliases()
+   * alias} of a long option (e.g. "--help").
+   */
+  String PREFIX_LONG_OPTION = "--";
+
+  /**
+   * The argument used to indicate that {@link CliOption options} are complete
+   * and {@link CliArgument arguments} will follow. This allows to specify an
+   * argument that is equal to an option (e.g. "cat -- --help" would print the
+   * contents of a file named "--help" rather that printing the help usage
+   * output).
+   */
+  String END_OPTIONS = "--";
+
+  /**
    * This method prints the help (program usage) generated from the annotations
-   * to the given {@link Appendable} including the
-   * {@link #printHelp(Appendable, boolean) main-program usage}.
+   * to the given {@link Appendable} using default {@link CliOutputSettings
+   * settings}.
+   * 
+   * @see #printHelp(Appendable, CliOutputSettings)
    * 
    * @param target is the {@link Appendable} where to print to.
    */
@@ -23,8 +46,7 @@ public interface CliParser {
 
   /**
    * This method prints the help (program usage) generated from the annotations
-   * to the given {@link Appendable} including the
-   * {@link #printHelp(Appendable, boolean) main-program usage}.
+   * to the given {@link Appendable} using the given <code>settings</code>.
    * 
    * @param target is the {@link Appendable} where to print to.
    * @param settings are the {@link CliOutputSettings} used to configure the

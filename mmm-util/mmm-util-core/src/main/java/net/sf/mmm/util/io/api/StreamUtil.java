@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.channels.Channel;
@@ -232,8 +233,26 @@ public interface StreamUtil {
   Properties loadProperties(Reader reader) throws IOException;
 
   /**
+   * This method converts the given {@link Appendable} to a {@link Writer}.
+   * 
+   * @param appendable is the {@link Appendable} to wrap.
+   * @return the adapting {@link Writer}.
+   * @since 1.1.2
+   */
+  Writer toWriter(Appendable appendable);
+
+  /**
+   * This method converts the given {@link Appendable} to a {@link PrintWriter}.
+   * 
+   * @param appendable is the {@link Appendable} to wrap.
+   * @return the adapting {@link PrintWriter}.
+   * @since 1.1.2
+   */
+  PrintWriter toPrintWriter(Appendable appendable);
+
+  /**
    * This method closes the given <code>inputStream</code> without throwing an
-   * {@link Exception}.
+   * {@link Exception}. If an exception occurs, it will only be logged.
    * 
    * @param inputStream is the input-stream to close.
    */
@@ -241,23 +260,25 @@ public interface StreamUtil {
 
   /**
    * This method closes the given <code>outputStream</code> without throwing an
-   * {@link Exception}.
+   * {@link java.io.IOException}.
    * 
    * @param outputStream is the output-stream to close.
+   * @throws RuntimeIoException if the closing failed.
    */
-  void close(OutputStream outputStream);
+  void close(OutputStream outputStream) throws RuntimeIoException;
 
   /**
    * This method closes the given <code>writer</code> without throwing an
-   * {@link Exception}.
+   * {@link java.io.IOException}.
    * 
    * @param writer is the writer to close.
+   * @throws RuntimeIoException if the closing failed.
    */
-  void close(Writer writer);
+  void close(Writer writer) throws RuntimeIoException;
 
   /**
    * This method closes the given <code>reader</code> without throwing an
-   * {@link Exception}.
+   * {@link Exception}. If an exception occurs, it will only be logged.
    * 
    * @param reader is the reader to close.
    */

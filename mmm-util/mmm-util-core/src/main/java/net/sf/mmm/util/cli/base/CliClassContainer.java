@@ -20,8 +20,8 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * A {@link CliClassContainer} determines and holds the CLI-informations of the
- * {@link Class} reflecting the {@link #getStateClass() state-class}.
+ * A {@link CliClassContainer} determines and holds the class-specific
+ * CLI-informations of a {@link #getStateClass() state-class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2
@@ -46,8 +46,7 @@ public class CliClassContainer {
   /**
    * The constructor.
    * 
-   * @param stateClass is the {@link Class} reflecting the
-   *        {@link CliState#getState() state-object}.
+   * @param stateClass is the {@link #getStateClass() state-class}.
    */
   public CliClassContainer(Class<?> stateClass) {
 
@@ -87,6 +86,9 @@ public class CliClassContainer {
       cliStyle = CliStyle.STRICT;
     }
     this.style = cliStyle;
+    if (cliName == null) {
+      cliName = stateClass.getName();
+    }
     this.name = cliName;
     this.usage = cliUsage;
     for (CliModeContainer modeContainer : this.id2ModeMap.values()) {
@@ -150,7 +152,7 @@ public class CliClassContainer {
    * 
    * @param mode is the {@link CliMode} to add.
    */
-  private void addMode(CliModeContainer mode) {
+  protected void addMode(CliModeContainer mode) {
 
     CliModeObject old = this.id2ModeMap.put(mode.getMode().id(), mode);
     if (old != null) {
@@ -160,7 +162,7 @@ public class CliClassContainer {
 
   /**
    * This method gets the {@link Class} reflecting the
-   * {@link CliState#getState() state-object}.
+   * {@link AbstractCliParser#getState() state-object}.
    * 
    * @return the state-class.
    */

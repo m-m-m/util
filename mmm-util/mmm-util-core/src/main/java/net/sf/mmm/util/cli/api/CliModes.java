@@ -10,8 +10,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to annotate a CLI-Class with multiple {@link CliMode}
- * -annotations.
+ * This annotation is used to annotate a {@link CliClass CLI-Class} with
+ * multiple {@link CliMode}-annotations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.2

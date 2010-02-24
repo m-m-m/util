@@ -28,6 +28,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicUtil;
 import net.sf.mmm.util.lang.api.CharIterator;
@@ -342,7 +343,7 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
         }
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.WRITE);
     }
   }
 
@@ -400,7 +401,7 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
     } catch (SAXException e) {
       throw new XmlInvalidException(e);
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 

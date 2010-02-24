@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.base.SearchEntryIdMissingException;
 import net.sf.mmm.search.base.SearchEntryIdInvalidException;
+import net.sf.mmm.search.base.SearchEntryIdMissingException;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResult;
@@ -18,6 +18,7 @@ import net.sf.mmm.search.engine.base.AbstractSearchEngine;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
 import net.sf.mmm.search.impl.LuceneSearchEntry;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -170,7 +171,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
         this.highlightFormatter = new HighlightFormatter();
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 
@@ -192,7 +193,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       }
       return new LuceneSearchResult(query.toString(), hits, highlighter);
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 
@@ -211,7 +212,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     } catch (NumberFormatException e) {
       throw new SearchEntryIdInvalidException(e, id);
     } catch (IOException e) {
-      throw new RuntimeIoException(e);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 
