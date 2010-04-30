@@ -531,11 +531,4 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     return state;
   }
 
-  public static void main(String[] args) {
-
-    for (String key : ENTITY_MAP.keySet()) {
-      System.out.println(key + ": " + ENTITY_MAP.get(key));
-    }
-  }
-
 }
