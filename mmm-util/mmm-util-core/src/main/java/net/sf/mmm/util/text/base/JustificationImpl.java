@@ -5,6 +5,7 @@ package net.sf.mmm.util.text.base;
 
 import java.io.IOException;
 
+import net.sf.mmm.util.lang.api.HorizontalAlignment;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsParseException;
@@ -18,15 +19,6 @@ import net.sf.mmm.util.text.api.Justification;
  */
 public class JustificationImpl implements Justification {
 
-  /** The character used to identify an alignment to the left. */
-  private static final char ALIGN_LEFT = '-';
-
-  /** The character used to identify an alignment to the right. */
-  private static final char ALIGN_RIGHT = '+';
-
-  /** The character used to identify a centered alignment. */
-  private static final char ALIGN_CENTER = '~';
-
   /** The character used to identify the truncate mode. */
   private static final char MODE_TRUNCATE = '|';
 
@@ -36,11 +28,8 @@ public class JustificationImpl implements Justification {
   /** The pattern for the format. */
   private static final String FORMAT_PATTERN = ".[-+~][0-9]+[|]?";
 
-  /**
-   * The alignment ({@link #ALIGN_LEFT}, {@link #ALIGN_CENTER} or
-   * {@link #ALIGN_RIGHT}).
-   */
-  private final char alignment;
+  /** The alignment. */
+  private final HorizontalAlignment alignment;
 
   /**
    * The character used to fill up.
@@ -69,9 +58,8 @@ public class JustificationImpl implements Justification {
       throw new NlsParseException(format, FORMAT_PATTERN, Justification.class.getSimpleName());
     }
     this.filler = format.charAt(0);
-    this.alignment = format.charAt(1);
-    if ((this.alignment != ALIGN_CENTER) && (this.alignment != ALIGN_LEFT)
-        && (this.alignment != ALIGN_RIGHT)) {
+    this.alignment = HorizontalAlignment.fromValue(Character.toString(format.charAt(1)));
+    if (this.alignment == null) {
       throw new NlsParseException(format, FORMAT_PATTERN, Justification.class.getSimpleName());
     }
     int endIndex = format.length();
@@ -111,15 +99,19 @@ public class JustificationImpl implements Justification {
     int leftSpace = 0;
     int rightSpace = 0;
     if (space > 0) {
-      if (this.alignment == ALIGN_CENTER) {
-        leftSpace = space / 2;
-        rightSpace = space - leftSpace;
-      } else if (this.alignment == ALIGN_LEFT) {
-        rightSpace = space;
-      } else if (this.alignment == ALIGN_RIGHT) {
-        leftSpace = space;
-      } else {
-        throw new IllegalCaseException(Character.toString(this.alignment));
+      switch (this.alignment) {
+        case CENTER:
+          leftSpace = space / 2;
+          rightSpace = space - leftSpace;
+          break;
+        case LEFT:
+          rightSpace = space;
+          break;
+        case RIGHT:
+          leftSpace = space;
+          break;
+        default :
+          throw new IllegalCaseException(HorizontalAlignment.class, this.alignment);
       }
     }
     for (int i = 0; i < leftSpace; i++) {

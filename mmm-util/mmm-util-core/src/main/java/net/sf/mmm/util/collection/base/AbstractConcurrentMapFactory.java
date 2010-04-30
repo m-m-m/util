@@ -14,7 +14,7 @@ import net.sf.mmm.util.collection.api.ConcurrentMapFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public abstract class AbstractConcurrentMapFactory implements ConcurrentMapFactory {
 
   /**

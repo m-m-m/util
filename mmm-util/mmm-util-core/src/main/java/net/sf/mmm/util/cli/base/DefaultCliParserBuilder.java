@@ -18,7 +18,7 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
  * {@link net.sf.mmm.util.cli.api.CliParserBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class DefaultCliParserBuilder extends AbstractCliParserBuilder {
 

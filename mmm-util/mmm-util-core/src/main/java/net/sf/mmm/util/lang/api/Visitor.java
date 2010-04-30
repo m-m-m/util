@@ -9,7 +9,7 @@ package net.sf.mmm.util.lang.api;
  * 
  * @param <V> is the generic type to {@link #visit(Object) visit}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public interface Visitor<V> {
 

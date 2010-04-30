@@ -16,11 +16,11 @@
     <level value="warn"/>
   </logger>
   <logger name="net.sf.mmm">
-    <level value="trace"/>
+    <level value="debug"/>
   </logger>
 
   <root>
-    <level value="trace"/>
+    <level value="debug"/>
     <appender-ref ref="DefaultAppender"/>
   </root>
 </log4j:configuration>

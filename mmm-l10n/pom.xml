@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='Cp1252'?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-l10n</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>localization</name>
+  <description>localization (l10n) contains the texts and configuraitons for various locales (languages and contries).</description>
+  <modules>
+    <!--<module>mmm-l10n-ar</module>
+    <module>mmm-l10n-bg</module>
+    <module>mmm-l10n-ca</module>
+    <module>mmm-l10n-cs</module>
+    <module>mmm-l10n-da</module>-->
+    <module>mmm-l10n-de</module>
+    <!--<module>mmm-l10n-en-GB</module>
+    <module>mmm-l10n-es</module>
+    <module>mmm-l10n-fi</module>-->
+    <module>mmm-l10n-fr</module>
+    <!--<module>mmm-l10n-hi</module>
+    <module>mmm-l10n-hu</module>
+    <module>mmm-l10n-is</module>
+    <module>mmm-l10n-it</module>
+    <module>mmm-l10n-iw</module>
+    <module>mmm-l10n-ja</module>
+    <module>mmm-l10n-ko</module>
+    <module>mmm-l10n-lt</module>
+    <module>mmm-l10n-lv</module>
+    <module>mmm-l10n-nl</module>
+    <module>mmm-l10n-nl-BE</module>
+    <module>mmm-l10n-no</module>
+    <module>mmm-l10n-pl</module>
+    <module>mmm-l10n-pt</module>
+    <module>mmm-l10n-sh</module>
+    <module>mmm-l10n-sk</module>
+    <module>mmm-l10n-sl</module>
+    <module>mmm-l10n-sr</module>
+    <module>mmm-l10n-sv</module>
+    <module>mmm-l10n-th</module>
+    <module>mmm-l10n-tr</module>
+    <module>mmm-l10n-zh</module>
+    <module>mmm-l10n-zh-HK</module>
+    <module>mmm-l10n-zh-TW</module>-->
+  </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

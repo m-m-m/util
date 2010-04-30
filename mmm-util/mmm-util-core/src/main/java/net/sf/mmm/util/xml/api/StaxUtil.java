@@ -3,12 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.api;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.events.XMLEvent;
 
 import net.sf.mmm.util.value.api.ValueException;
 
@@ -24,24 +26,52 @@ import net.sf.mmm.util.value.api.ValueException;
 public interface StaxUtil {
 
   /**
-   * This method creates a stream writer.
+   * This method creates an {@link XMLStreamReader}.
+   * 
+   * @see javax.xml.stream.XMLInputFactory#createXMLStreamReader(InputStream)
+   * 
+   * @param inputStream is the {@link InputStream} to read from.
+   * @return the {@link XMLStreamReader}.
+   * @throws XmlGenericException if the creation of the stream-reader failed
+   *         (StAX not available or misconfigured).
+   */
+  XMLStreamReader createXmlStreamReader(InputStream inputStream) throws XmlGenericException;
+
+  /**
+   * This method creates an {@link XMLEventReader}.
+   * 
+   * @see javax.xml.stream.XMLInputFactory#createXMLEventReader(InputStream)
+   * 
+   * @param inputStream is the {@link InputStream} to read from.
+   * @return the {@link XMLEventReader}.
+   * @throws XmlGenericException if the creation of the event-reader failed
+   *         (StAX not available or misconfigured).
+   */
+  XMLEventReader createXmlEventReader(InputStream inputStream) throws XmlGenericException;
+
+  /**
+   * This method creates a {@link XMLStreamWriter}.
+   * 
+   * @see javax.xml.stream.XMLOutputFactory#createXMLStreamWriter(OutputStream)
    * 
    * @param out is the output stream where the XML will be written to.
    * @return the XML stream writer.
-   * @throws XMLStreamException if the creation of the stream writer failed
+   * @throws XmlGenericException if the creation of the stream-writer failed
    *         (StAX not available or misconfigured).
    */
-  XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException;
+  XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XmlGenericException;
 
   /**
-   * This method creates a stream writer.
+   * This method creates a {@link XMLStreamWriter}.
+   * 
+   * @see javax.xml.stream.XMLOutputFactory#createXMLStreamWriter(Writer)
    * 
    * @param writer is the writer where the XML will be written to.
    * @return the XML stream writer.
-   * @throws XMLStreamException if the creation of the stream writer failed
+   * @throws XmlGenericException if the creation of the stream-writer failed
    *         (StAX not available or misconfigured).
    */
-  XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException;
+  XMLStreamWriter createXmlStreamWriter(Writer writer) throws XmlGenericException;
 
   /**
    * This method parses the attribute with the given
@@ -90,13 +120,17 @@ public interface StaxUtil {
    * {@link javax.xml.stream.XMLStreamConstants#ATTRIBUTE attributes} are
    * {@link XMLStreamReader#next() skipped} before.
    * 
-   * @param xmlReader is the {@link XMLStreamException} to read the XML from.
+   * For {@link XMLEventReader} use {@link XMLEventReader#getElementText()}.
+   * 
+   * @param xmlReader is the {@link XMLStreamReader} to read the XML from.
    * @return the {@link XMLStreamReader#getText() text} at the current position
    *         or <code>null</code> if there is no text to read (e.g.
    *         {@link javax.xml.stream.XMLStreamConstants#END_ELEMENT} was hit).
-   * @throws XMLStreamException if caused by the given <code>xmlReader</code>.
+   * @throws XmlGenericException if an
+   *         {@link javax.xml.stream.XMLStreamException} was caused by the given
+   *         <code>xmlReader</code>.
    */
-  String readText(XMLStreamReader xmlReader) throws XMLStreamException;
+  String readText(XMLStreamReader xmlReader) throws XmlGenericException;
 
   /**
    * This method skips all events until the current element (tag) is closed.<br>
@@ -122,9 +156,46 @@ public interface StaxUtil {
    *        end-element event of the element to skip. Calling
    *        {@link XMLStreamReader#nextTag()} will then point to start-element
    *        of the next sibling or to end-element of the parent.
-   * @throws XMLStreamException if the operation failed.
+   * @throws XmlGenericException if an
+   *         {@link javax.xml.stream.XMLStreamException} was caused by the given
+   *         <code>xmlReader</code>.
    */
-  void skipOpenElement(XMLStreamReader xmlReader) throws XMLStreamException;
+  void skipOpenElement(XMLStreamReader xmlReader) throws XmlGenericException;
+
+  /**
+   * This method skips all events until the current element (tag) is closed.<br>
+   * 
+   * @see #skipOpenElement(XMLStreamReader)
+   * 
+   * @param xmlReader is the STaX reader currently pointing at or inside the
+   *        element to skip. After the call of this method it will point to the
+   *        end-element event of the element to skip. Calling
+   *        {@link XMLEventReader#nextEvent()} will then return the event after
+   *        the {@link javax.xml.stream.events.EndElement}-Event of the skipped
+   *        element.
+   * @throws XmlGenericException if an
+   *         {@link javax.xml.stream.XMLStreamException} was caused by the given
+   *         <code>xmlReader</code>.
+   */
+  void skipOpenElement(XMLEventReader xmlReader) throws XmlGenericException;
+
+  /**
+   * This method skips all events until a
+   * {@link javax.xml.stream.events.StartElement},
+   * {@link javax.xml.stream.events.EndElement} or
+   * {@link javax.xml.stream.events.EndDocument} is
+   * {@link XMLEventReader#nextEvent() encountered}. Unlike
+   * {@link XMLEventReader#nextTag()} no exception is thrown according to
+   * unexpected {@link XMLEvent events} except if
+   * {@link XMLEventReader#hasNext() has} no next {@link XMLEvent event}.
+   * 
+   * @param xmlReader is the {@link XMLEventReader} to read the XML from.
+   * @return the according event.
+   * @throws XmlGenericException if an
+   *         {@link javax.xml.stream.XMLStreamException} was caused by the given
+   *         <code>xmlReader</code>.
+   */
+  XMLEvent nextElement(XMLEventReader xmlReader) throws XmlGenericException;
 
   /**
    * This method gets the name for the given <code>eventType</code>.

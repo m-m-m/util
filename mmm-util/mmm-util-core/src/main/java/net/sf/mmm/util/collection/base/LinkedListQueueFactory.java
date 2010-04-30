@@ -24,7 +24,7 @@ public class LinkedListQueueFactory extends AbstractQueueFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 
     return LinkedList.class;

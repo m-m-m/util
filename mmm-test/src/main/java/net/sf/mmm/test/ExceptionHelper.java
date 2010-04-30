@@ -10,7 +10,6 @@ import org.junit.Assert;
  * that check expected exceptions.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
  */
 public final class ExceptionHelper {
 

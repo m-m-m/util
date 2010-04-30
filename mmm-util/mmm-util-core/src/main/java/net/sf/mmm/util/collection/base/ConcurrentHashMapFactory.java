@@ -24,7 +24,7 @@ public class ConcurrentHashMapFactory extends AbstractConcurrentMapFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<ConcurrentHashMap> getMapImplementation() {
 
     return ConcurrentHashMap.class;

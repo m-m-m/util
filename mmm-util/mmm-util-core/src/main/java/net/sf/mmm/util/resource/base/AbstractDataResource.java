@@ -6,6 +6,8 @@ package net.sf.mmm.util.resource.base;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 
@@ -58,9 +60,13 @@ public abstract class AbstractDataResource implements DataResource {
    * This is a default implementation. Override if there is a more performing
    * way to implement this.
    */
-  public InputStream openStream() throws ResourceNotAvailableException, IOException {
+  public InputStream openStream() {
 
-    return getUrl().openStream();
+    try {
+      return getUrl().openStream();
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
   }
 
   /**

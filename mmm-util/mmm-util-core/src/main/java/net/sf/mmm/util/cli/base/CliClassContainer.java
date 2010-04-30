@@ -24,7 +24,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * CLI-informations of a {@link #getStateClass() state-class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliClassContainer {
 
@@ -60,13 +60,13 @@ public class CliClassContainer {
     while (currentClass != null) {
       CliClass cliClass = currentClass.getAnnotation(CliClass.class);
       if (cliClass != null) {
-        if ((cliStyle != null) && (cliClass.style() != CliStyle.INHERIT)) {
+        if ((cliStyle == null) && (cliClass.style() != CliStyle.INHERIT)) {
           cliStyle = cliClass.style();
         }
-        if ((cliName != null) && (cliClass.name().length() > 0)) {
+        if ((cliName == null) && (cliClass.name().length() > 0)) {
           cliName = cliClass.name();
         }
-        if ((cliUsage != null) && (cliClass.usage().length() > 0)) {
+        if ((cliUsage == null) && (cliClass.usage().length() > 0)) {
           cliUsage = cliClass.usage();
         }
       }

@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * given list of filters using a boolean {@link Conjunction}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class ConjunctionCharFilter implements CharFilter {
 

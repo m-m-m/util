@@ -30,7 +30,7 @@ public class SimpleClassHierarchieMap<E> extends AbstractClassHierarchieMap<E> {
    * 
    * @param mapFactory is the factory used to create the internal {@link Map}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public SimpleClassHierarchieMap(MapFactory<Map> mapFactory) {
 
     super(mapFactory);

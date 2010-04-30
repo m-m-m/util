@@ -137,7 +137,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public GenericType<?> createGenericType(Type type) {
 
     if (type instanceof Class) {
@@ -150,7 +150,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public GenericType<?> createGenericType(Type type, GenericType<?> definingType) {
 
     return new GenericTypeImpl(type, definingType);
@@ -159,7 +159,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
     return new GenericTypeImpl(type, createGenericType(definingType));
@@ -552,7 +552,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
       boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws NoSuchFieldException,
       IllegalAccessException, IllegalArgumentException {

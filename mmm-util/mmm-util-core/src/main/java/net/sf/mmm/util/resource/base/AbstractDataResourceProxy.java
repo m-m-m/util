@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -78,7 +77,7 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   /**
    * {@inheritDoc}
    */
-  public InputStream openStream() throws ResourceNotAvailableException, IOException {
+  public InputStream openStream() {
 
     return getDelegate().openStream();
   }

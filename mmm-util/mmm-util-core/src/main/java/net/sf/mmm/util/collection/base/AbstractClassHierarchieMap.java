@@ -34,7 +34,7 @@ public abstract class AbstractClassHierarchieMap<E> {
    * 
    * @param mapFactory is the factory used to create the internal {@link Map}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public AbstractClassHierarchieMap(MapFactory<Map> mapFactory) {
 
     super();

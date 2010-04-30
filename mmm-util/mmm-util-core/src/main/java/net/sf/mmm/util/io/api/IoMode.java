@@ -7,7 +7,7 @@ package net.sf.mmm.util.io.api;
  * This enum holds the possible modes of I/O.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public enum IoMode {
 

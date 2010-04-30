@@ -24,7 +24,7 @@ public class LinkedListDequeFactory extends AbstractDequeFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 
     return LinkedList.class;

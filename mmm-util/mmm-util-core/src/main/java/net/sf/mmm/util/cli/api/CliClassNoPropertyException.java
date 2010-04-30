@@ -11,7 +11,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * {@link CliOption} or {@link CliArgument}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliClassNoPropertyException extends CliException {
 

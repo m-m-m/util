@@ -24,7 +24,7 @@ public class TreeSetFactory extends AbstractSortedSetFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<TreeSet> getCollectionImplementation() {
 
     return TreeSet.class;

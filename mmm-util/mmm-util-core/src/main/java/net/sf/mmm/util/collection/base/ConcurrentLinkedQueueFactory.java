@@ -24,7 +24,7 @@ public class ConcurrentLinkedQueueFactory extends AbstractQueueFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<ConcurrentLinkedQueue> getCollectionImplementation() {
 
     return ConcurrentLinkedQueue.class;

@@ -12,7 +12,7 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
  * {@link net.sf.mmm.util.cli.api.CliParser} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class DefaultCliParser extends AbstractCliParser {
 

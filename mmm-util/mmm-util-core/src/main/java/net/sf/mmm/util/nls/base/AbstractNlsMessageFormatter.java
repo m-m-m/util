@@ -11,7 +11,7 @@ import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public abstract class AbstractNlsMessageFormatter extends AbstractNlsFormatter<Void> implements
     NlsMessageFormatter {

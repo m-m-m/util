@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * with the same name, a regular file can NOT be created).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class FileAlreadyExistsException extends NlsRuntimeException {
 

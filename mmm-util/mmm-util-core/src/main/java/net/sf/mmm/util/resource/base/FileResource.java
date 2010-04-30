@@ -6,7 +6,6 @@ package net.sf.mmm.util.resource.base;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -87,7 +86,7 @@ public class FileResource extends AbstractDataResource {
    * {@inheritDoc}
    */
   @Override
-  public InputStream openStream() throws ResourceNotAvailableException, IOException {
+  public InputStream openStream() {
 
     try {
       return new FileInputStream(this.file);

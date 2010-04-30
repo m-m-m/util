@@ -12,7 +12,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
  * associated information.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliArgumentContainer {
 
@@ -71,8 +71,8 @@ public class CliArgumentContainer {
     sb.append(CliArgument.class.getSimpleName());
     sb.append("(name=\"");
     sb.append(this.argument.name());
-    sb.append("\",index=");
-    sb.append(this.argument.index());
+    sb.append("\"");
+    // sb.append(this.argument.index());
     sb.append(')');
     return sb.toString();
   }

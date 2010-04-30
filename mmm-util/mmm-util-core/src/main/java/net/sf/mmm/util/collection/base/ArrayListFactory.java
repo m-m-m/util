@@ -24,7 +24,7 @@ public class ArrayListFactory extends AbstractListFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<ArrayList> getCollectionImplementation() {
 
     return ArrayList.class;

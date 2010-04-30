@@ -35,7 +35,7 @@ public abstract class AdvancedClassHierarchieMap<E> extends AbstractClassHierarc
    * 
    * @param mapFactory is the factory used to create the internal {@link Map}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public AdvancedClassHierarchieMap(MapFactory<Map> mapFactory) {
 
     super(mapFactory);

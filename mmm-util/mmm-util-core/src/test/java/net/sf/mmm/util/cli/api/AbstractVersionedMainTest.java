@@ -12,9 +12,31 @@ import org.junit.Test;
  * This is the test-case for {@link AbstractVersionedMain}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
+@SuppressWarnings("all")
 public class AbstractVersionedMainTest {
+
+  /**
+   * Test the option "--help".
+   */
+  @Test
+  public void testHelp() {
+
+    AbstractVersionedMain main = new TestMain();
+    StringBuilder errorBuffer = new StringBuilder();
+    main.setStandardError(errorBuffer);
+    StringBuilder outputBuffer = new StringBuilder();
+    main.setStandardOutput(outputBuffer);
+    int exitCode = main.run(new String[] { "--help" });
+    Assert.assertEquals(0, exitCode);
+    String help = outputBuffer.toString();
+    System.out.println(help);
+    Assert.assertTrue(help.contains(main.getClass().getName()));
+    Assert.assertTrue(help.contains(TestMain.USAGE));
+    // TODO
+    Assert.assertEquals("", errorBuffer.toString());
+  }
 
   /**
    * Test the option "--version".
@@ -22,15 +44,7 @@ public class AbstractVersionedMainTest {
   @Test
   public void testVersion() {
 
-    final String magic = "it's a kind of magic!";
-    AbstractVersionedMain main = new AbstractVersionedMain() {
-
-      @Override
-      protected String getVersion() {
-
-        return magic;
-      }
-    };
+    AbstractVersionedMain main = new TestMain();
 
     StringBuilder errorBuffer = new StringBuilder();
     main.setStandardError(errorBuffer);
@@ -39,7 +53,25 @@ public class AbstractVersionedMainTest {
     int exitCode = main.run(new String[] { "--version" });
     Assert.assertEquals(0, exitCode);
     String version = outputBuffer.toString();
-    Assert.assertEquals(magic + StringUtil.LINE_SEPARATOR, version);
+    Assert.assertEquals(TestMain.MAGIC_VERSION + StringUtil.LINE_SEPARATOR, version);
     Assert.assertEquals("", errorBuffer.toString());
+  }
+
+  @CliClass(usage = TestMain.USAGE)
+  private static class TestMain extends AbstractVersionedMain {
+
+    private static final String USAGE = "This program is used for tests only";
+
+    private static final String MAGIC_VERSION = "it's a kind of magic!";
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getVersion() {
+
+      return MAGIC_VERSION;
+    }
+
   }
 }

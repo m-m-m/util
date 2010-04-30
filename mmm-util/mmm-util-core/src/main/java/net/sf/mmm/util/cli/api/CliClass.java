@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  * @see CliArgument
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -43,8 +43,8 @@ public @interface CliClass {
   String name() default "";
 
   /**
-   * The brief description of what this program actually does. If not set it
-   * will be inherited. If not present at all no explicit description will be
+   * A brief description of what this program actually does. If not set it will
+   * be inherited. If not present at all no explicit description will be
    * {@link CliParser#printHelp(Appendable) printed}.
    */
   String usage() default "";

@@ -114,7 +114,7 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        <code>appendable</code>.
    * @throws RuntimeIoException if the {@link Appendable} caused an
    *         {@link java.io.IOException}
-   * @since 1.1.2
+   * @since 2.0.0
    */
   void toString(Type type, Appendable appendable, Visitor<Class<?>> classFormatter)
       throws RuntimeIoException;

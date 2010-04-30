@@ -10,7 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * used together that have incompatible {@link CliOption#mode() modes}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliOptionIncompatibleModesException extends CliException {
 

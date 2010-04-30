@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * {@link CliParser#printHelp(Appendable, CliOutputSettings) help output}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliOutputSettings {
 

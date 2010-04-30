@@ -83,7 +83,7 @@ public interface CharFilter {
    * A filter that only {@link #accept(char) accepts} the lower case Latin ASCII
    * letters 'a'-'z'.
    * 
-   * @since 1.1.2
+   * @since 2.0.0
    */
   CharFilter ASCII_LOWER_CASE_LETTER_FILTER = new CharFilter() {
 
@@ -97,7 +97,7 @@ public interface CharFilter {
    * A filter that only {@link #accept(char) accepts} the upper case Latin ASCII
    * letters 'A'-'Z'.
    * 
-   * @since 1.1.2
+   * @since 2.0.0
    */
   CharFilter ASCII_UPPER_CASE_LETTER_FILTER = new CharFilter() {
 

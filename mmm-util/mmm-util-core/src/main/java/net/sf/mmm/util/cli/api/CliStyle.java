@@ -7,7 +7,7 @@ package net.sf.mmm.util.cli.api;
  * This enum contains the available styles of a {@link CliClass}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public enum CliStyle {
 

@@ -18,7 +18,7 @@ import net.sf.mmm.util.file.api.FileType;
  * or {@link #exists() existence} of the {@link java.io.File}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

@@ -20,22 +20,48 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param argument is the argument that is illegal. May be <code>null</code>.
+   * @param value is the illegal argument-value. May be <code>null</code>.
    */
-  public NlsIllegalArgumentException(Object argument) {
+  public NlsIllegalArgumentException(Object value) {
 
-    super(NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT, toMap(KEY_OBJECT, argument));
+    super(NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT, toMap(KEY_VALUE, value));
   }
 
   /**
    * The constructor.
    * 
-   * @param argument is the argument that is illegal. May be <code>null</code>.
+   * @param value is the illegal argument-value. May be <code>null</code>.
+   * @param name is the name of the argument (name of parameter).
+   * @since 2.0.0
+   */
+  public NlsIllegalArgumentException(Object value, String name) {
+
+    super(NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT_VALUE, toMap(KEY_VALUE, value, KEY_NAME, name));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param value is the illegal argument-value. May be <code>null</code>.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
-  public NlsIllegalArgumentException(Object argument, Throwable nested) {
+  public NlsIllegalArgumentException(Object value, Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT, toMap(KEY_OBJECT, argument));
+    super(nested, NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT, toMap(KEY_VALUE, value));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param value is the illegal argument-value. May be <code>null</code>.
+   * @param name is the name of the argument (name of parameter).
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @since 2.0.0
+   */
+  public NlsIllegalArgumentException(Object value, String name, Throwable nested) {
+
+    super(nested, NlsBundleUtilCore.ERR_ILLEGAL_ARGUMENT_VALUE, toMap(KEY_VALUE, value, KEY_NAME,
+        name));
   }
 
 }

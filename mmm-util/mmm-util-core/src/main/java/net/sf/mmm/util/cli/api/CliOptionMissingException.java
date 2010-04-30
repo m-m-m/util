@@ -10,7 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * {@link CliOption#required() required} {@link CliOption option} is missing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliOptionMissingException extends CliException {
 

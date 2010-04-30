@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the interface for a resource. You can think of a {@link DataResource}
@@ -63,9 +64,9 @@ public interface DataResource {
    * @return the input stream where to read from.
    * @throws ResourceNotAvailableException if this resource is NOT
    *         {@link #isAvailable() available}.
-   * @throws IOException if an input/output error occurred.
+   * @throws RuntimeIoException if an input/output error occurred.
    */
-  InputStream openStream() throws ResourceNotAvailableException, IOException;
+  InputStream openStream() throws ResourceNotAvailableException, RuntimeIoException;
 
   /**
    * This method creates a new {@link DataResource} pointing to the given

@@ -14,6 +14,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
+import net.sf.mmm.util.pojo.path.api.PojoPathAccessException;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathMode;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator;
@@ -98,7 +99,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state) {
 
@@ -107,9 +108,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     PojoPropertyAccessorNonArg getter = descriptor.getAccessor(currentPath.getSegment(),
         PojoPropertyAccessorNonArgMode.GET, !state.isGetType());
     if (getter == null) {
-      // TODO
-      // throw new PojoPathAccessException();
-      return null;
+      throw new PojoPathAccessException(currentPath.getSegment(), currentPath.getPojoType());
     }
     GenericType pojoType = getter.getPropertyType();
     currentPath.setPojoType(pojoType);
@@ -135,7 +134,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, Object value) {
 

@@ -36,7 +36,7 @@ public class MappedClassResolver implements ClassResolver {
    * 
    * @param mapFactory the factory used to create the underlying {@link Map}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public MappedClassResolver(MapFactory<? extends Map> mapFactory) {
 
     super();

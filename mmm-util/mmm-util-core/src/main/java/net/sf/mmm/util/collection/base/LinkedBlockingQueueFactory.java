@@ -24,7 +24,7 @@ public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<LinkedBlockingQueue> getCollectionImplementation() {
 
     return LinkedBlockingQueue.class;

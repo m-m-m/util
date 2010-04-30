@@ -17,6 +17,9 @@ package net.sf.mmm.util.lang.api;
  */
 public interface BasicUtil {
 
+  /** An empty int array. */
+  int[] EMPTY_INT_ARRAY = new int[0];
+
   /**
    * This method checks if two given objects are {@link Object#equals(Object)
    * equal} to each other. In advance to {@link Object#equals(Object)} the

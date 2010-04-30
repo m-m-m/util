@@ -40,7 +40,7 @@ public interface CollectionReflectionUtil {
    *        {@link Collection}.
    * @return the new instance of the given <code>type</code>.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   <C extends Collection> C create(Class<C> type);
 
   /**

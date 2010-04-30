@@ -151,7 +151,7 @@ public class StringTransformerChain implements Transformer<String> {
   /**
    * This inner class contains the state of a transformation.
    * 
-   * @since 1.1.2
+   * @since 2.0.0
    */
   protected static class State {
 

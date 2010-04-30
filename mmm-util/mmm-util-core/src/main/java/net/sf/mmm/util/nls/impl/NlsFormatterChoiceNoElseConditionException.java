@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * {@link NlsFormatterChoice choice-format} has no (else)-condition.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class NlsFormatterChoiceNoElseConditionException extends NlsRuntimeException {
 

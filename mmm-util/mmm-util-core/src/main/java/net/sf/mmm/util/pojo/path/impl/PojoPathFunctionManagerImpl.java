@@ -14,7 +14,7 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager {
 
   /** @see #setFunctions(Map) */

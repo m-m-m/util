@@ -8,7 +8,7 @@ package net.sf.mmm.util.cli.api;
  * command-line arguments of a main-program.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public interface CliParser {
 

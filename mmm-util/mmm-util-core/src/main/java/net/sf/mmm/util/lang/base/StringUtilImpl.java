@@ -118,6 +118,38 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  public boolean isSubstring(String string, String substring, int offset) {
+
+    int stringLength = string.length();
+    int substringLength = substring.length();
+    int end = substringLength + offset;
+    if (end <= stringLength) {
+      // TODO: more efficient?
+      return string.substring(offset, end).equals(substring);
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isSubstring(char[] string, String substring, int offset) {
+
+    int substringLength = substring.length();
+    if (substringLength + offset <= string.length) {
+      for (int i = 0; i < substringLength; i++) {
+        if (string[i + offset] != substring.charAt(i)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase) {
 
     return replaceSuffixWithCase(string, suffixLength, newSuffixLowerCase, Locale.ENGLISH);

@@ -10,7 +10,7 @@ import net.sf.mmm.util.text.api.Justification;
  * {@link net.sf.mmm.util.nls.api.NlsMessage}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class NlsArgument {
 

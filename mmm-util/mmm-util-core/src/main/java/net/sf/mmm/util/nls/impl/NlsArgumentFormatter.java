@@ -18,7 +18,7 @@ import net.sf.mmm.util.text.api.Justification;
  * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public final class NlsArgumentFormatter extends AbstractNlsFormatter<NlsArgument> {
 

@@ -23,7 +23,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * custom needs.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
 

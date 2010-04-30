@@ -237,7 +237,7 @@ public interface StreamUtil {
    * 
    * @param appendable is the {@link Appendable} to wrap.
    * @return the adapting {@link Writer}.
-   * @since 1.1.2
+   * @since 2.0.0
    */
   Writer toWriter(Appendable appendable);
 
@@ -246,7 +246,7 @@ public interface StreamUtil {
    * 
    * @param appendable is the {@link Appendable} to wrap.
    * @return the adapting {@link PrintWriter}.
-   * @since 1.1.2
+   * @since 2.0.0
    */
   PrintWriter toPrintWriter(Appendable appendable);
 

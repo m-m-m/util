@@ -19,8 +19,10 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
  */
 @CliClass(style = CliStyle.STRICT)
 @CliModes(//
-{ @CliMode(id = CliMode.MODE_HELP, title = NlsBundleUtilCore.INF_MAIN_HELP),
-    @CliMode(id = CliMode.MODE_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_DEFAULT) })
+{
+    @CliMode(id = CliMode.MODE_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, // 
+    usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE),
+    @CliMode(id = CliMode.MODE_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT) })
 public abstract class AbstractMain {
 
   /** The {@link #run(CliModeObject) exit-code} on success. */
@@ -49,7 +51,7 @@ public abstract class AbstractMain {
 
   /** Option to show the {@link #printHelp(CliParser) usage}. */
   @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //
-  required = true, usage = NlsBundleUtilCore.INF_MAIN_HELP_USAGE, mode = CliMode.MODE_HELP)
+  required = true, usage = NlsBundleUtilCore.MSG_MAIN_OPTION_HELP_USAGE, mode = CliMode.MODE_HELP)
   private boolean help;
 
   /**
@@ -216,7 +218,7 @@ public abstract class AbstractMain {
     try {
       CliModeObject mode = parser.parseArguments(args);
       if (this.help) {
-        assert (mode.getId() == CliMode.MODE_HELP);
+        assert (mode.getId().equals(CliMode.MODE_HELP));
         printHelp(parser);
         return 0;
       }

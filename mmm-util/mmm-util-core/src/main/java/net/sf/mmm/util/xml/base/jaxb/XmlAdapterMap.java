@@ -21,7 +21,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * @param <K> is the generic type of the {@link AttributeReadId#getId() ID}s
  *        used as {@link Map#get(Object) map-key}.
  * @author hohwille
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class XmlAdapterMap<K> extends XmlAdapter<Object[], Map<K, AttributeReadId<K>>> {
 

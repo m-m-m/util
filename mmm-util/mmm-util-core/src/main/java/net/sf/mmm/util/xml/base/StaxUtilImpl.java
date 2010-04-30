@@ -3,21 +3,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 
 import javax.annotation.Resource;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.events.XMLEvent;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.StringValueConverterImpl;
 import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.api.XmlGenericException;
 
 /**
  * This utility class contains methods that help to work with the StAX API (JSR
@@ -31,7 +37,10 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
   /** @see #getInstance() */
   private static StaxUtil instance;
 
-  /** the StAX output factory */
+  /** @see #getXmlInputFactory() */
+  private XMLInputFactory xmlInputFactory;
+
+  /** @see #getXmlOutputFactory() */
   private XMLOutputFactory xmlOutputFactory;
 
   /** @see #getValueConverter() */
@@ -92,7 +101,7 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
   }
 
   /**
-   * This method gets the {@link XMLOutputFactory}.
+   * This method gets the {@link XMLOutputFactory} to use.
    * 
    * @return the xmlOutputFactory
    */
@@ -113,6 +122,25 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
   }
 
   /**
+   * This method gets the {@link XMLInputFactory} to use.
+   * 
+   * @return the xmlInputFactory
+   */
+  public XMLInputFactory getXmlInputFactory() {
+
+    return this.xmlInputFactory;
+  }
+
+  /**
+   * @param xmlInputFactory is the xmlInputFactory to set
+   */
+  public void setXmlInputFactory(XMLInputFactory xmlInputFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.xmlInputFactory = xmlInputFactory;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -122,6 +150,9 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
     if (this.valueConverter == null) {
       this.valueConverter = StringValueConverterImpl.getInstance();
     }
+    if (this.xmlInputFactory == null) {
+      this.xmlInputFactory = XMLInputFactory.newInstance();
+    }
     if (this.xmlOutputFactory == null) {
       this.xmlOutputFactory = XMLOutputFactory.newInstance();
     }
@@ -130,17 +161,49 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
   /**
    * {@inheritDoc}
    */
-  public XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XMLStreamException {
+  public XMLEventReader createXmlEventReader(InputStream inputStream) {
 
-    return getXmlOutputFactory().createXMLStreamWriter(out);
+    try {
+      return this.xmlInputFactory.createXMLEventReader(inputStream);
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
-  public XMLStreamWriter createXmlStreamWriter(Writer writer) throws XMLStreamException {
+  public XMLStreamReader createXmlStreamReader(InputStream inputStream) {
 
-    return getXmlOutputFactory().createXMLStreamWriter(writer);
+    try {
+      return this.xmlInputFactory.createXMLStreamReader(inputStream);
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public XMLStreamWriter createXmlStreamWriter(OutputStream out) {
+
+    try {
+      return getXmlOutputFactory().createXMLStreamWriter(out);
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public XMLStreamWriter createXmlStreamWriter(Writer writer) {
+
+    try {
+      return getXmlOutputFactory().createXMLStreamWriter(writer);
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
   }
 
   /**
@@ -167,42 +230,89 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
   /**
    * {@inheritDoc}
    */
-  public String readText(XMLStreamReader xmlReader) throws XMLStreamException {
+  public String readText(XMLStreamReader xmlReader) {
 
-    int eventType = xmlReader.getEventType();
-    if (eventType == XMLStreamConstants.START_ELEMENT) {
-      eventType = xmlReader.next();
+    try {
+      int eventType = xmlReader.getEventType();
+      if (eventType == XMLStreamConstants.START_ELEMENT) {
+        eventType = xmlReader.next();
+      }
+      while (eventType == XMLStreamConstants.ATTRIBUTE) {
+        eventType = xmlReader.next();
+      }
+      if (eventType == XMLStreamConstants.END_ELEMENT) {
+        return "";
+      }
+      if ((eventType == XMLStreamConstants.CHARACTERS) || (eventType == XMLStreamConstants.CDATA)) {
+        return xmlReader.getText();
+      }
+      throw new IllegalCaseException(getEventTypeName(eventType));
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
     }
-    while (eventType == XMLStreamConstants.ATTRIBUTE) {
-      eventType = xmlReader.next();
-    }
-    if (eventType == XMLStreamConstants.END_ELEMENT) {
-      return "";
-    }
-    if ((eventType == XMLStreamConstants.CHARACTERS) || (eventType == XMLStreamConstants.CDATA)) {
-      return xmlReader.getText();
-    }
-    throw new IllegalStateException("Not implemented!");
   }
 
   /**
    * {@inheritDoc}
    */
-  public void skipOpenElement(XMLStreamReader xmlReader) throws XMLStreamException {
+  public void skipOpenElement(XMLStreamReader xmlReader) {
 
-    int depth = 1;
-    do {
-      int eventType = xmlReader.nextTag();
-      if (eventType == XMLStreamConstants.START_ELEMENT) {
-        depth++;
-        // } else if (eventType == XMLStreamConstants.END_ELEMENT) {
-      } else {
-        depth--;
-        if (depth == 0) {
-          return;
+    try {
+      int depth = 1;
+      while (depth != 0) {
+        int eventType = xmlReader.nextTag();
+        if (eventType == XMLStreamConstants.START_ELEMENT) {
+          depth++;
+          // } else if (eventType == XMLStreamConstants.END_ELEMENT) {
+        } else {
+          depth--;
         }
       }
-    } while (true);
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void skipOpenElement(XMLEventReader xmlReader) {
+
+    try {
+      int depth = 1;
+      while (depth != 0) {
+        XMLEvent event = xmlReader.nextEvent();
+        int eventType = event.getEventType();
+        if (eventType == XMLStreamConstants.START_ELEMENT) {
+          depth++;
+        } else if (eventType == XMLStreamConstants.END_ELEMENT) {
+          depth--;
+        }
+      }
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public XMLEvent nextElement(XMLEventReader xmlReader) {
+
+    try {
+      while (xmlReader.hasNext()) {
+        XMLEvent event = xmlReader.nextEvent();
+        int eventType = event.getEventType();
+        if ((eventType == XMLStreamConstants.START_ELEMENT)
+            || (eventType == XMLStreamConstants.END_ELEMENT)
+            || (eventType == XMLStreamConstants.END_DOCUMENT)) {
+          return event;
+        }
+      }
+      return null;
+    } catch (XMLStreamException e) {
+      throw new XmlGenericException(e);
+    }
   }
 
   /**
@@ -245,20 +355,5 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
         return "UNKNOWN_EVENT_TYPE (" + String.valueOf(eventType) + ")";
     }
   }
-
-  /*
-   * public void writeToDom(XMLStreamReader xmlReader, Node node) throws
-   * XMLStreamException {
-   * 
-   * int nodeType = node.getNodeType(); int eventType =
-   * xmlReader.getEventType();
-   * 
-   * }
-   * 
-   * public void readFromDom(Node node, XMLStreamWriter xmlWriter) throws
-   * XMLStreamException {
-   * 
-   * }
-   */
 
 }

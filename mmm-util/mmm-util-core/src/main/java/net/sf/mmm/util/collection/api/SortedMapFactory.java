@@ -14,7 +14,7 @@ import java.util.SortedMap;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public interface SortedMapFactory extends MapFactory<SortedMap> {
 
   /**

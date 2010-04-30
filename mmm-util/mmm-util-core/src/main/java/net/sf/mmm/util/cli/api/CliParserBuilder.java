@@ -9,7 +9,7 @@ package net.sf.mmm.util.cli.api;
  * {@link CliParser} from a given object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public interface CliParserBuilder {
 

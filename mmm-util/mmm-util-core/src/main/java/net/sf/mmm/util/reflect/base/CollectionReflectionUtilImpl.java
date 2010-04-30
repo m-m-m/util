@@ -144,7 +144,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public <C extends Collection> C create(Class<C> type) {
 
     if (type.isInterface()) {
@@ -257,7 +257,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver,
       int maximumGrowth) throws NlsIllegalArgumentException {
 
@@ -321,7 +321,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object add(Object arrayOrCollection, Object item) {
 
     if (arrayOrCollection == null) {
@@ -346,7 +346,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Object remove(Object arrayOrCollection, Object item) {
 
     if (arrayOrCollection == null) {

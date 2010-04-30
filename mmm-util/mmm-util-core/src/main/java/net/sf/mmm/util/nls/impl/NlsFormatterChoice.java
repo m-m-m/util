@@ -47,7 +47,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * </table>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public final class NlsFormatterChoice extends AbstractNlsSubFormatter<Object> {
 
@@ -77,7 +77,7 @@ public final class NlsFormatterChoice extends AbstractNlsSubFormatter<Object> {
   private static final Filter<Object> FILTER_ELSE = ConstantFilter.getInstance(true);
 
   /**
-   * The {@link CharFilter} for the {@link Comparator#getSymbol() comparator
+   * The {@link CharFilter} for the {@link Comparator#getValue() comparator
    * symbol} .
    */
   private static final CharFilter FILTER_COMPARATOR = new ListCharFilter(true, '<', '=', '>', '!');
@@ -166,7 +166,7 @@ public final class NlsFormatterChoice extends AbstractNlsSubFormatter<Object> {
     if (scanner.expect(CONDITION_VAR)) {
       // variable choice
       String symbol = scanner.readWhile(FILTER_COMPARATOR);
-      Comparator comparator = Comparator.fromSymbol(symbol);
+      Comparator comparator = Comparator.fromValue(symbol);
       if (comparator == null) {
         throw new NlsParseException(symbol, REQUIRED_FORMAT_COMPARATOR, Comparator.class);
       }

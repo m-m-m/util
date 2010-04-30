@@ -8,7 +8,7 @@ package net.sf.mmm.util.lang.api.attribute;
  * 
  * @param <T> is the generic type of the {@link #getId() ID}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public abstract interface AttributeReadId<T> {
 

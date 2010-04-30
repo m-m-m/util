@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.base;
 
+import java.io.Closeable;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -10,7 +12,7 @@ import java.io.Writer;
  * This class is a {@link Writer} that adapts an {@link Appendable}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class AppendableWriter extends Writer {
 
@@ -34,7 +36,9 @@ public class AppendableWriter extends Writer {
   @Override
   public void close() throws IOException {
 
-  // nothing to do...
+    if (this.appendable instanceof Closeable) {
+      ((Closeable) this.appendable).close();
+    }
   }
 
   /**
@@ -43,7 +47,9 @@ public class AppendableWriter extends Writer {
   @Override
   public void flush() throws IOException {
 
-  // nothing to do...
+    if (this.appendable instanceof Flushable) {
+      ((Flushable) this.appendable).flush();
+    }
   }
 
   /**
@@ -82,7 +88,7 @@ public class AppendableWriter extends Writer {
   @Override
   public void write(char[] buffer) throws IOException {
 
-    this.appendable.append(new String(buffer));
+    append(new String(buffer));
   }
 
   /**
@@ -91,7 +97,7 @@ public class AppendableWriter extends Writer {
   @Override
   public void write(String string) throws IOException {
 
-    this.appendable.append(string);
+    append(string);
   }
 
   /**
@@ -100,7 +106,7 @@ public class AppendableWriter extends Writer {
   @Override
   public void write(String string, int offset, int length) throws IOException {
 
-    this.appendable.append(string, offset, offset + length);
+    append(string, offset, offset + length);
   }
 
   /**
@@ -109,6 +115,16 @@ public class AppendableWriter extends Writer {
   @Override
   public void write(char[] buffer, int offset, int length) throws IOException {
 
-    this.appendable.append(new String(buffer, offset, length));
+    append(new String(buffer, offset, length));
+  }
+
+  /**
+   * This method gets the {@link Appendable} to delegate to.
+   * 
+   * @return the appendable
+   */
+  public Appendable getAppendable() {
+
+    return this.appendable;
   }
 }

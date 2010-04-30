@@ -24,7 +24,7 @@ public class HashSetFactory extends AbstractSetFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<HashSet> getCollectionImplementation() {
 
     return HashSet.class;

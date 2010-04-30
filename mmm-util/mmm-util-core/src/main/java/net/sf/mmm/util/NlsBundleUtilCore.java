@@ -69,7 +69,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_NOT_INITIALIZED = "The object is NOT initialized!";
 
   /** @see net.sf.mmm.util.nls.api.NlsIllegalArgumentException */
-  public static final String ERR_ILLEGAL_ARGUMENT = "The given argument \"{object}\" is illegal!";
+  public static final String ERR_ILLEGAL_ARGUMENT = "The given argument \"{value}\" is illegal!";
+
+  /** @see net.sf.mmm.util.nls.api.NlsIllegalArgumentException */
+  public static final String ERR_ILLEGAL_ARGUMENT_VALUE = "The given value \"{value}\" is illegal for the argument \"{name}\"!";
 
   /** @see net.sf.mmm.util.date.api.IllegalDateFormatException */
   public static final String ERR_ILLEGAL_DATE = "Illegal date \"{value}\"!";
@@ -184,22 +187,31 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_CLI_PARSER = "The class \"{type}\" is invalid as command-line interface state-object!";
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
-  public static final String INF_MAIN_HELP = "help";
+  public static final String INF_MAIN_MODE_HELP = "help";
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
-  public static final String INF_MAIN_HELP_USAGE = "Print this help.";
+  public static final String INF_MAIN_MODE_VERSION = "version";
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
-  public static final String INF_MAIN_VERSION = "version";
+  public static final String INF_MAIN_MODE_DEFAULT = "default";
+
+  /** @see net.sf.mmm.util.cli.api.AbstractMain */
+  public static final String MSG_MAIN_OPTION_HELP_USAGE = "Print this help.";
+
+  /** @see net.sf.mmm.util.cli.api.AbstractMain */
+  public static final String MSG_MAIN_MODE_HELP_USAGE = "Print help about this program.";
 
   /** @see net.sf.mmm.util.cli.api.AbstractVersionedMain */
-  public static final String INF_MAIN_VERSION_USAGE = "Print the version of this program.";
+  public static final String MSG_MAIN_OPTION_VERSION_USAGE = "Print the program-version.";
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
-  public static final String INF_MAIN_DEFAULT = "default";
+  public static final String MSG_MAIN_MODE_VERSION_USAGE = "Print the version of this program.";
 
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  public static final String MSG_MAIN_USAGE = "Usage: {mainClass} [<option>*]";
+  public static final String MSG_MAIN_USAGE = "Usage: {mainClass} {option}";
+
+  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
+  public static final String MSG_MAIN_MODE_USAGE = "Mode {mode}:";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionDuplicateException */
   public static final String ERR_CLI_OPTION_DUPLICATE = "Duplicate option \"{option}\"!";
@@ -228,5 +240,44 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_CLI_MODE_UNDEFINED = "The mode \"{mode}\" used "
       + "by \"{value}\" is undefined! You have to declare it via @CliMode or "
       + "change CliStyle to something else than STRICT.";
+
+  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
+  public static final String INF_LEFT = "left";
+
+  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#RIGHT */
+  public static final String INF_RIGHT = "right";
+
+  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#CENTER */
+  public static final String INF_CENTER = "center";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#AND */
+  public static final String INF_AND = "and";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#OR */
+  public static final String INF_OR = "or";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#NAND */
+  public static final String INF_NAND = "nand";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#NOR */
+  public static final String INF_NOR = "nor";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_THAN */
+  public static final String INF_GREATER_THAN = "greater-than";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_OR_EQUAL */
+  public static final String INF_GREATER_OR_EQUAL = "greater-or-equal";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#EQUAL */
+  public static final String INF_EQUAL = "equal";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#NOT_EQUAL */
+  public static final String INF_NOT_EQUAL = "not-equal";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_THAN */
+  public static final String INF_LESS_THAN = "less-than";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_OR_EQUAL */
+  public static final String INF_LESS_OR_EQUAL = "less-or-equal";
 
 }

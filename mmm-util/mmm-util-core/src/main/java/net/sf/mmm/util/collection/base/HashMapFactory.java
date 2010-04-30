@@ -19,13 +19,13 @@ import net.sf.mmm.util.collection.api.MapFactory;
 public class HashMapFactory extends AbstractMapFactory {
 
   /** The singleton instance. */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public static final MapFactory<Map> INSTANCE = new HashMapFactory();
 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<HashMap> getMapImplementation() {
 
     return HashMap.class;

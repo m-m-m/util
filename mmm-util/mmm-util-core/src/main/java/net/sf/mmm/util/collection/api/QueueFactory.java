@@ -15,7 +15,7 @@ import java.util.Queue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public interface QueueFactory extends CollectionFactory<Queue> {
 
   /**

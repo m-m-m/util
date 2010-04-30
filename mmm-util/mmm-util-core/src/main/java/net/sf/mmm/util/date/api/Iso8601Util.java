@@ -220,7 +220,7 @@ public interface Iso8601Util {
    *        ("&#177;HHmm[ss]") is used, if <code>true</code> the extended
    *        timezone format ("&#177;HH:mm[:ss]") is used.
    * @param buffer is where to append the formatted timezone.
-   * @since 1.1.2
+   * @since 2.0.0
    */
   void formatTimeZone(Calendar calendar, boolean extended, Appendable buffer);
 

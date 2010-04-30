@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * This is a JAXB-ready Container for {@link #getTransformers() Transformers}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net))
- * @since 1.1.2
+ * @since 2.0.0
  */
 @XmlRootElement(name = "transformers")
 @XmlAccessorType(XmlAccessType.FIELD)

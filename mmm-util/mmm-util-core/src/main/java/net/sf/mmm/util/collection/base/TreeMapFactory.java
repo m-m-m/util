@@ -24,7 +24,7 @@ public class TreeMapFactory extends AbstractSortedMapFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public Class<TreeMap> getMapImplementation() {
 
     return TreeMap.class;

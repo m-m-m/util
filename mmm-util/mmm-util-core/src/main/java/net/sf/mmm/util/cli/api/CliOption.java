@@ -67,7 +67,7 @@ import java.lang.annotation.Target;
  * </table>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -75,7 +75,7 @@ import java.lang.annotation.Target;
 public @interface CliOption {
 
   /** The default {@link #operand() operand}. */
-  String PARAMETER_DEFAULT = "arg";
+  String OPERAND_DEFAULT = "arg";
 
   /** The {@link #name()} of the option to get help/usage. */
   String NAME_HELP = "--help";
@@ -106,7 +106,7 @@ public @interface CliOption {
    * it takes an operand (e.g. "--delay 5"). The name of this operand for the
    * {@link #usage() usage} output can be configured here.
    */
-  String operand() default PARAMETER_DEFAULT;
+  String operand() default OPERAND_DEFAULT;
 
   /**
    * The list of optional aliases that can be used instead of the
@@ -127,7 +127,8 @@ public @interface CliOption {
   boolean required() default false;
 
   /**
-   * A typical main-program has different modes how it can be invoked.<br>
+   * The {@link CliMode#id() ID} of the {@link CliMode mode}. A typical
+   * main-program has different modes how it can be invoked.<br>
    * The {@link CliOption options} of a program can be split into groups that
    * represent such mode. The options are ordered by their mode in the
    * help-usage-output and modes allow to express that an {@link CliOption
@@ -136,9 +137,11 @@ public @interface CliOption {
    * their {@link #mode() modes} are compatible. This means that the modes have
    * to be identical or one mode {@link CliMode#parentIds() extends} the other.
    * In the latter case the most special mode is triggered. For each
-   * {@link #mode() mode} that is used in an {@link CliOption option} of an
-   * {@link CliClass CLI annotated class} an according {@link CliMode}
-   * annotation has to be present in order to define the mode.
+   * {@link #mode() mode} that is used in an {@link CliClass CLI annotated
+   * class} an according {@link CliMode} annotation has to be present in order
+   * to define the mode.
+   * 
+   * @see CliMode
    */
   String mode() default CliMode.MODE_DEFAULT;
 

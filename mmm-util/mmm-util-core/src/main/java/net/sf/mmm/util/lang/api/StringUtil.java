@@ -10,6 +10,7 @@ import java.util.Locale;
  * {@link String} handling and manipulation.
  * 
  * @see net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()
+ * @see net.sf.mmm.util.text.api.UnicodeUtil
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -22,10 +23,26 @@ public interface StringUtil {
   /** a string representing the boolean value <code>false</code> */
   String FALSE = String.valueOf(false);
 
-  /** The line-separator string. */
+  /**
+   * The platform-specific line-separator string. Should be one of
+   * {@link #LINE_SEPARATOR_LF}, {@link #LINE_SEPARATOR_CRLF},
+   * {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
+   */
   String LINE_SEPARATOR = System.getProperty("line.separator");
 
-  /** an empty {@link String} array */
+  /** The line-separator with a single carriage-return. */
+  String LINE_SEPARATOR_CR = "\r";
+
+  /** The Unix line-separator (line-feed). */
+  String LINE_SEPARATOR_LF = "\n";
+
+  /** The Windows line-separator (carriage-return line-feed). */
+  String LINE_SEPARATOR_CRLF = "\r\n";
+
+  /** The Mac line-separator (line-feed carriage-return). */
+  String LINE_SEPARATOR_LFCR = "\n\r";
+
+  /** An empty {@link String} array. */
   String[] EMPTY_STRING_ARRAY = new String[0];
 
   /**
@@ -324,5 +341,54 @@ public interface StringUtil {
    *         <code>separator</code> inserted at word-boundaries.
    */
   String fromCamlCase(String string, char separator);
+
+  /**
+   * This method checks if the given <code>string</code>
+   * {@link String#contains(CharSequence) contains} the given
+   * <code>substring</code> at the given <code>offset</code>.<br>
+   * This is an efficient implementation of
+   * 
+   * <pre>string.indexOf(substring, offset) == offset</pre>
+   * 
+   * or
+   * 
+   * <pre>string.substring(offset).beginsWith(substring)</pre>
+   * 
+   * @param string is the string potentially containing <code>substring</code>.
+   * @param substring is the substring that should be contained in
+   *        <code>string</code> at the given <code>offset</code>.
+   * @param offset is the offset in <code>string</code> where to check for
+   *        <code>substring</code>.
+   * @return <code>true</code> if the given <code>string</code>
+   *         {@link String#contains(CharSequence) contains} the given
+   *         <code>substring</code> at the given <code>offset</code> and
+   *         <code>false</code> otherwise.
+   */
+  boolean isSubstring(String string, String substring, int offset);
+
+  /**
+   * This method checks if the given <code>string</code>
+   * {@link String#contains(CharSequence) contains} the given
+   * <code>substring</code> at the given <code>offset</code>.<br>
+   * This is an efficient implementation of
+   * 
+   * <pre>string.indexOf(substring, offset) == offset</pre>
+   * 
+   * or
+   * 
+   * <pre>string.substring(offset).beginsWith(substring)</pre>
+   * 
+   * @param string is the char[] representing the string potentially containing
+   *        <code>substring</code>.
+   * @param substring is the substring that should be contained in
+   *        <code>string</code> at the given <code>offset</code>.
+   * @param offset is the offset in <code>string</code> where to check for
+   *        <code>substring</code>.
+   * @return <code>true</code> if the given <code>string</code>
+   *         {@link String#contains(CharSequence) contains} the given
+   *         <code>substring</code> at the given <code>offset</code> and
+   *         <code>false</code> otherwise.
+   */
+  boolean isSubstring(char[] string, String substring, int offset);
 
 }

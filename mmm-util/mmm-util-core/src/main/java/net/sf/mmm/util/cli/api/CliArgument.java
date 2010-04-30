@@ -32,18 +32,22 @@ import java.lang.annotation.Target;
  * want to implement something like "grep pattern [file]+") but NOT recommended.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Target(value = { ElementType.FIELD, ElementType.METHOD })
 public @interface CliArgument {
 
-  /** The maximum {@link #index()}. */
-  Integer INDEX_MAX = Integer.valueOf(100);
+  /**
+   * Symbolic name used for {@link #addNextTo()} to identify the first argument.
+   */
+  String NAME_FIRST = "#first";
 
-  /** The minimum {@link #index()}. */
-  Integer INDEX_MIN = Integer.valueOf(0);
+  /**
+   * Symbolic name used for {@link #addNextTo()} to identify the last argument.
+   */
+  String NAME_LAST = "#last";
 
   /**
    * The name of the argument used for help usage output.
@@ -51,14 +55,17 @@ public @interface CliArgument {
   String name();
 
   /**
-   * The index of the argument relative to other {@link CliArgument arguments}
-   * in the order of the command-line arguments. The value has to be in the
-   * range from {@link #INDEX_MIN} to {@link #INDEX_MAX}. There should be no
-   * other {@link CliArgument} with the same index and for each index from
-   * {@link #INDEX_MIN} to this {@link #index() index} there should exist an
-   * {@link CliArgument} annotation.
+   * Determines if this {@link CliArgument} should be add after (
+   * <code>true</code>) or before (<code>false</code>) the {@link CliArgument
+   * argument} identified by {@link #addNextTo()}.
    */
-  int index();
+  boolean addAfter() default true;
+
+  /**
+   * The {@link #name() name} of the argument where to add this
+   * {@link CliArgument} in the list of arguments.
+   */
+  String addNextTo();
 
   /**
    * The mode of this argument.

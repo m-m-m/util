@@ -15,7 +15,7 @@ import org.junit.Test;
  * This is the test-case for {@link Comparator}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class ComparatorTest {
 

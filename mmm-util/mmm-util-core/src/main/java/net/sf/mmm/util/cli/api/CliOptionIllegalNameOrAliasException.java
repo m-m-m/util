@@ -13,7 +13,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * "--help" for long option).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliOptionIllegalNameOrAliasException extends CliException {
 

@@ -7,16 +7,18 @@ import java.util.Calendar;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import net.sf.mmm.util.NlsBundleUtilCore;
+
 /**
  * A {@link Comparator} represents a function that compares two given values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
-public enum Comparator {
+public enum Comparator implements Datatype<String> {
 
   /** {@link Comparator} to check if some value is greater than another. */
-  GREATER_THAN(">", false, Boolean.FALSE) {
+  GREATER_THAN(">", NlsBundleUtilCore.INF_GREATER_THAN, false, Boolean.FALSE) {
 
     /**
      * {@inheritDoc}
@@ -29,7 +31,7 @@ public enum Comparator {
   },
 
   /** {@link Comparator} to check if some value is greater or equal to another. */
-  GREATER_OR_EQUAL(">=", true, Boolean.FALSE) {
+  GREATER_OR_EQUAL(">=", NlsBundleUtilCore.INF_GREATER_OR_EQUAL, true, Boolean.FALSE) {
 
     /**
      * {@inheritDoc}
@@ -42,7 +44,7 @@ public enum Comparator {
   },
 
   /** {@link Comparator} to check if some value is less than another. */
-  LESS_THAN("<", false, Boolean.TRUE) {
+  LESS_THAN("<", NlsBundleUtilCore.INF_LESS_THAN, false, Boolean.TRUE) {
 
     /**
      * {@inheritDoc}
@@ -55,7 +57,7 @@ public enum Comparator {
   },
 
   /** {@link Comparator} to check if some value is less or equal than another. */
-  LESS_OR_EQUAL("<=", true, Boolean.TRUE) {
+  LESS_OR_EQUAL("<=", NlsBundleUtilCore.INF_LESS_OR_EQUAL, true, Boolean.TRUE) {
 
     /**
      * {@inheritDoc}
@@ -71,7 +73,7 @@ public enum Comparator {
    * {@link Comparator} to check if objects are {@link Object#equals(Object)
    * equal}.
    */
-  EQUAL("==", true, null) {
+  EQUAL("==", NlsBundleUtilCore.INF_EQUAL, true, null) {
 
     /**
      * {@inheritDoc}
@@ -87,7 +89,7 @@ public enum Comparator {
    * {@link Comparator} to check if objects are NOT
    * {@link Object#equals(Object) equal}.
    */
-  NOT_EQUAL("!=", false, null) {
+  NOT_EQUAL("!=", NlsBundleUtilCore.INF_NOT_EQUAL, false, null) {
 
     /**
      * {@inheritDoc}
@@ -99,8 +101,11 @@ public enum Comparator {
     }
   };
 
-  /** @see #getSymbol() */
-  private final String symbol;
+  /** @see #getValue() */
+  private final String value;
+
+  /** @see #getTitle() */
+  private final String title;
 
   /** @see #eval(Object, Object) */
   private final boolean evalTrueIfEquals;
@@ -111,7 +116,8 @@ public enum Comparator {
   /**
    * The constructor.
    * 
-   * @param expression is the {@link #getSymbol() symbol}.
+   * @param value is the {@link #getValue() raw value} (symbol).
+   * @param title is the {@link #getTitle() title}.
    * @param evalTrueIfEquals - <code>true</code> if {@link Comparator}
    *        {@link #eval(Object, Object) evaluates} to <code>true</code> if
    *        arguments are equal, <code>false</code> otherwise.
@@ -120,9 +126,10 @@ public enum Comparator {
    *        first argument is less than second, {@link Boolean#FALSE} on
    *        greater, <code>null</code> otherwise.
    */
-  private Comparator(String expression, boolean evalTrueIfEquals, Boolean less) {
+  private Comparator(String value, String title, boolean evalTrueIfEquals, Boolean less) {
 
-    this.symbol = expression;
+    this.value = value;
+    this.title = title;
     this.evalTrueIfEquals = evalTrueIfEquals;
     this.less = less;
   }
@@ -133,9 +140,17 @@ public enum Comparator {
    * 
    * @return the comparator symbol.
    */
-  public String getSymbol() {
+  public String getValue() {
 
-    return this.symbol;
+    return this.value;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getTitle() {
+
+    return this.title;
   }
 
   /**
@@ -153,19 +168,19 @@ public enum Comparator {
    * of {@link Calendar} or {@link XMLGregorianCalendar} will be converted to
    * {@link java.util.Date}.
    * 
-   * @param value is the value to convert.
+   * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the
    *        type
    * @return a simpler representation of <code>value</code> or the same
    *         <code>value</code> if on simpler type is known.
    */
-  private Object convert(Object value, Class<?> otherType) {
+  private Object convert(Object object, Class<?> otherType) {
 
-    if (value instanceof Calendar) {
-      return ((Calendar) value).getTime();
+    if (object instanceof Calendar) {
+      return ((Calendar) object).getTime();
     }
-    if (value instanceof XMLGregorianCalendar) {
-      return ((XMLGregorianCalendar) value).toGregorianCalendar().getTime();
+    if (object instanceof XMLGregorianCalendar) {
+      return ((XMLGregorianCalendar) object).toGregorianCalendar().getTime();
     }
     // if (value instanceof String) {
     // if (Number.class.isAssignableFrom(otherType)) {
@@ -174,7 +189,7 @@ public enum Comparator {
     //        
     // }
     // }
-    return value;
+    return object;
   }
 
   /**
@@ -186,7 +201,7 @@ public enum Comparator {
    * @return the result of the {@link Comparator} applied to the given
    *         arguments.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private boolean evalComparable(Comparable arg1, Comparable arg2) {
 
     Class<?> type1 = arg1.getClass();
@@ -225,7 +240,7 @@ public enum Comparator {
    * @return the result of the {@link Comparator} applied to the given
    *         arguments.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public boolean eval(Object arg1, Object arg2) {
 
     if (arg1 == arg2) {
@@ -260,21 +275,21 @@ public enum Comparator {
   @Override
   public String toString() {
 
-    return this.symbol;
+    return getValue();
   }
 
   /**
    * This method gets the {@link Comparator} for the given <code>symbol</code>.
    * 
-   * @param symbol is the {@link #getSymbol() symbol} of the requested
+   * @param value is the {@link #getValue() symbol} of the requested
    *        {@link Comparator}.
    * @return the requested {@link Comparator} or <code>null</code> if no such
    *         {@link Comparator} exists.
    */
-  public static Comparator fromSymbol(String symbol) {
+  public static Comparator fromValue(String value) {
 
     for (Comparator comparator : values()) {
-      if (comparator.symbol.equals(symbol)) {
+      if (comparator.value.equals(value)) {
         return comparator;
       }
     }

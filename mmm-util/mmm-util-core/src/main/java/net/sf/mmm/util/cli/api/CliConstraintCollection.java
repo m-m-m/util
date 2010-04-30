@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * {@link java.util.Collection#size() size} of the {@link java.util.Collection}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

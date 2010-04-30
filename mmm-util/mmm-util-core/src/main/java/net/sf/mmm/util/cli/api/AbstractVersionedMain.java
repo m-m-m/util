@@ -11,9 +11,10 @@ import net.sf.mmm.util.reflect.api.Manifest;
  * has a version.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
-@CliMode(id = CliMode.MODE_VERSION, title = NlsBundleUtilCore.INF_MAIN_VERSION)
+@CliMode(id = CliMode.MODE_VERSION, title = NlsBundleUtilCore.INF_MAIN_MODE_VERSION, // 
+usage = NlsBundleUtilCore.MSG_MAIN_MODE_VERSION_USAGE)
 public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The {@link #getVersion() version} if NOT available from {@link Manifest}. */
@@ -21,7 +22,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The option to print the version. */
   @CliOption(name = CliOption.NAME_VERSION, aliases = CliOption.ALIAS_VERSION, //
-  usage = NlsBundleUtilCore.INF_MAIN_VERSION_USAGE, mode = CliMode.MODE_VERSION)
+  usage = NlsBundleUtilCore.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.MODE_VERSION, required = true)
   private boolean version;
 
   /**

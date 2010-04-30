@@ -5,9 +5,12 @@ package net.sf.mmm.util.cli.base;
 
 import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliClassNoPropertyException;
@@ -24,7 +27,6 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is a container for the {@link #getStateClass() state-class}. It
@@ -33,7 +35,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * specific property annotations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.1.2
+ * @since 2.0.0
  */
 public class CliState extends CliClassContainer {
 
@@ -43,8 +45,11 @@ public class CliState extends CliClassContainer {
   /** @see #getOptions() */
   private final List<CliOptionContainer> optionList;
 
-  /** @see #getArguments() */
+  /** @see #getArguments(CliModeObject) */
   private final Map<String, List<CliArgumentContainer>> mode2argumentsMap;
+
+  /** @see #getArguments() */
+  private final List<CliArgumentContainer> arguments;
 
   /**
    * The constructor.
@@ -60,6 +65,7 @@ public class CliState extends CliClassContainer {
     this.name2OptionMap = new HashMap<String, CliOptionContainer>();
     this.optionList = new ArrayList<CliOptionContainer>();
     this.mode2argumentsMap = new HashMap<String, List<CliArgumentContainer>>();
+    this.arguments = new ArrayList<CliArgumentContainer>();
     int nullIndex = -1;
     boolean annotationFound = findPropertyAnnotations(descriptorBuilderFactory
         .createPrivateFieldDescriptorBuilder());
@@ -133,9 +139,12 @@ public class CliState extends CliClassContainer {
   private void addArgument(CliArgumentContainer argumentContainer) {
 
     CliArgument cliArgument = argumentContainer.getArgument();
-    int index = cliArgument.index();
-    ValueOutOfRangeException.checkRange(Integer.valueOf(index), CliArgument.INDEX_MIN,
-        CliArgument.INDEX_MAX, argumentContainer);
+    // int index = cliArgument.index();
+    // ValueOutOfRangeException.checkRange(Integer.valueOf(index),
+    // CliArgument.INDEX_MIN,
+    // CliArgument.INDEX_MAX, argumentContainer);
+
+    this.arguments.add(argumentContainer);
     String modeId = cliArgument.mode();
     CliModeObject modeObject = getMode(modeId);
     if (modeObject == null) {
@@ -151,13 +160,16 @@ public class CliState extends CliClassContainer {
       this.mode2argumentsMap.put(modeId, argumentList);
     }
     // ensure capacity
-    for (int i = argumentList.size(); i <= index; i++) {
-      argumentList.add(null);
-    }
-    if (argumentList.get(index) != null) {
-      throw new DuplicateObjectException(argumentContainer, Integer.valueOf(index));
-    }
-    argumentList.set(index, argumentContainer);
+    // for (int i = argumentList.size(); i <= index; i++) {
+    // argumentList.add(null);
+    // }
+    // if (argumentList.get(index) != null) {
+    // throw new DuplicateObjectException(argumentContainer,
+    // Integer.valueOf(index));
+    // }
+    // argumentList.set(index, argumentContainer);
+    // TODO
+    argumentList.add(argumentContainer);
   }
 
   /**
@@ -229,28 +241,61 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method gets the {@link List} of {@link CliArgumentContainer
+   * This method gets the {@link List} of all {@link CliArgumentContainer
    * CLI-arguments}.
+   * 
+   * @return the arguments
+   */
+  public Collection<CliArgumentContainer> getArguments() {
+
+    return this.arguments;
+  }
+
+  /**
+   * This method gets the {@link List} of {@link CliArgumentContainer
+   * CLI-arguments} for the given {@link CliModeObject mode}.
    * 
    * @param mode is the according {@link CliModeContainer mode}.
    * @return the arguments
    */
   public List<CliArgumentContainer> getArguments(CliModeObject mode) {
 
-    List<CliArgumentContainer> arguments = this.mode2argumentsMap.get(mode.getId());
-    if (arguments == null) {
+    List<CliArgumentContainer> modeArguments = this.mode2argumentsMap.get(mode.getId());
+    if (modeArguments == null) {
       CliMode cliMode = mode.getMode();
       if (cliMode != null) {
         for (String parentId : cliMode.parentIds()) {
           CliModeObject parentMode = getMode(parentId);
-          arguments = getArguments(parentMode);
-          if (arguments != null) {
+          modeArguments = getArguments(parentMode);
+          if (modeArguments != null) {
             break;
           }
         }
       }
     }
-    return arguments;
+    return modeArguments;
   }
 
+  /**
+   * TODO: javadoc
+   * 
+   * @param mode
+   */
+  public Collection<CliOptionContainer> getOptions(CliModeObject mode) {
+
+    String modeId = mode.getId();
+    // create set of active modes...
+    Set<String> modeIdSet = new HashSet<String>();
+    modeIdSet.add(modeId);
+    for (CliModeObject childMode : mode.getExtendedModes()) {
+      modeIdSet.add(childMode.getId());
+    }
+    List<CliOptionContainer> result = new ArrayList<CliOptionContainer>();
+    for (CliOptionContainer option : this.optionList) {
+      if (modeIdSet.contains(option.getOption().mode())) {
+        result.add(option);
+      }
+    }
+    return result;
+  }
 }
