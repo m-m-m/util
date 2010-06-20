@@ -42,6 +42,9 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /** @see #getComponentType() */
   private final GenericType<?> componentType;
 
+  /** @see #getKeyType() */
+  private final GenericType<?> keyType;
+
   /** @see #getTypeArgument(int) */
   private final Type[] typeArgs;
 
@@ -83,6 +86,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     this.assignmentClass = (Class<? extends T>) bounds.assignmentClass;
     this.retrievalClass = (Class<T>) bounds.retrievalClass;
     Type genericComponentType = null;
+    Type genericKeyType = null;
     if (valueType instanceof ParameterizedType) {
       ParameterizedType parameterizedType = (ParameterizedType) valueType;
       this.typeArgs = parameterizedType.getActualTypeArguments();
@@ -96,6 +100,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
       }
     }
     if (genericComponentType == null) {
+      TypeVariable<?> keyTypeVariable = null;
       TypeVariable<?> componentTypeVariable = null;
       if (this.retrievalClass.isArray()) {
         genericComponentType = this.retrievalClass.getComponentType();
@@ -103,6 +108,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
         componentTypeVariable = CommonTypeVariables.TYPE_VARIABLE_COLLECTION_ELEMENT;
       } else if (Map.class.isAssignableFrom(this.retrievalClass)) {
         componentTypeVariable = CommonTypeVariables.TYPE_VARIABLE_MAP_VALUE;
+        keyTypeVariable = CommonTypeVariables.TYPE_VARIABLE_MAP_KEY;
       }
       if (componentTypeVariable != null) {
         genericComponentType = resolveTypeVariable(componentTypeVariable, this);
@@ -110,11 +116,22 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
           genericComponentType = componentTypeVariable;
         }
       }
+      if (keyTypeVariable != null) {
+        genericKeyType = resolveTypeVariable(keyTypeVariable, this);
+        if (genericKeyType == null) {
+          genericKeyType = keyTypeVariable;
+        }
+      }
     }
     if (genericComponentType == null) {
       this.componentType = null;
     } else {
       this.componentType = create(genericComponentType, definingType);
+    }
+    if (genericKeyType == null) {
+      this.keyType = null;
+    } else {
+      this.keyType = create(genericKeyType, definingType);
     }
   }
 
@@ -126,7 +143,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * @param genericDefiningType is the {@link #getDefiningType() defining-type}.
    * @return a new {@link GenericType} instance.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   protected AbstractGenericType<T> create(Type genericType, GenericType<?> genericDefiningType) {
 
     return new GenericTypeImpl(genericType, genericDefiningType);
@@ -232,6 +249,14 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   public GenericType<?> getComponentType() {
 
     return this.componentType;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public GenericType<?> getKeyType() {
+
+    return this.keyType;
   }
 
   /**

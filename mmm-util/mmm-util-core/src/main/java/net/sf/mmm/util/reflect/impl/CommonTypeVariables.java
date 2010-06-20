@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public final class CommonTypeVariables {
 
   /**

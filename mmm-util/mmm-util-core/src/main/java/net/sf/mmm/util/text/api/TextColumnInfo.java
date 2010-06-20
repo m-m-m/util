@@ -3,7 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
+import java.util.Locale;
+
 import net.sf.mmm.util.lang.api.HorizontalAlignment;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is the interface for the layout-configuration of a text column.<br>
@@ -18,6 +22,13 @@ import net.sf.mmm.util.lang.api.HorizontalAlignment;
  * @since 2.0.0
  */
 public class TextColumnInfo {
+
+  /**
+   * The minimum {@link #getWidth() width} of a {@link TextColumnInfo column} in
+   * order that {@link #getIndent() indentation} and {@link Hyphenator
+   * hyphenation} will be active. The value is {@value} .
+   */
+  public static final int MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN = 4;
 
   /**
    * The default {@link #getWidth() width}. This default is suitable for a
@@ -43,9 +54,6 @@ public class TextColumnInfo {
   /** @see #getAlignment() */
   private HorizontalAlignment alignment;
 
-  /** @see #getWordWrap() */
-  private String wordWrap;
-
   /** @see #getWrapChars() */
   private char[] wrapChars;
 
@@ -54,6 +62,12 @@ public class TextColumnInfo {
 
   /** @see #getIndentationMode() */
   private IndentationMode indentationMode;
+
+  /** @see #getLocale() */
+  private Locale locale;
+
+  /** @see #getLineSeparator() */
+  private String lineSeparator;
 
   /**
    * The constructor.
@@ -67,10 +81,11 @@ public class TextColumnInfo {
     this.indent = "";
     this.alignment = HorizontalAlignment.LEFT;
     this.filler = ' ';
-    this.wordWrap = "-";
     this.wrapChars = new char[] { ' ', '-', '\t' };
     this.omitChars = new char[] { ' ' };
     this.indentationMode = IndentationMode.NO_INDENT_AFTER_DOUBLE_NEWLINE;
+    this.locale = Locale.getDefault();
+    this.lineSeparator = StringUtil.LINE_SEPARATOR;
   }
 
   /**
@@ -80,6 +95,8 @@ public class TextColumnInfo {
    * more than 10. However you may use a very low values (&lt;5) for rendering a
    * small column of a large table, but then do NOT expect nice results if text
    * is really wrapped.
+   * 
+   * @see #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN
    * 
    * @return the width of this column.
    */
@@ -152,9 +169,13 @@ public class TextColumnInfo {
    * each line except the first one (in all lines after the first new line). The
    * default is the empty string.<br>
    * <b>ATTENTION:</b><br>
-   * Be aware that indentation also works with an {@link #getAlignment()
+   * <ul>
+   * <li>Indentation is ignored if {@link #getWidth() width} is less than
+   * {@link #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN}.</li>
+   * <li>Be aware that indentation also works with an {@link #getAlignment()
    * alignment} other than {@link HorizontalAlignment#LEFT left}. However this
-   * might cause confusing results.
+   * might cause confusing results.</li>
+   * </ul>
    * 
    * @see #getIndentationMode()
    * 
@@ -217,38 +238,6 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method sets the string appended if a wrap has to be done within a
-   * word.<br>
-   * If a line has to be wrapped and none of the {@link #getWrapChars() wrap
-   * characters} is found near to the place where to wrap, then a word (text
-   * without a {@link #getWrapChars() wrap character}) will be wrapped. In this
-   * case the {@link #getWordWrap() word wrap} is appended at the end of the
-   * line to indicate that the word was wrapped.<br>
-   * The default {@link #getWordWrap() word wrap} is a hyphen ("-"). Use the
-   * empty string to omit a word wrap.<br>
-   * E.g. for default and a {@link #getWidth() width} of <code>10</code> the
-   * text "Hello World!" would be wrapped as:<br>
-   * "Hello Wor-\n"<br>
-   * "ld!"
-   * 
-   * @return the wordBreak
-   */
-  public String getWordWrap() {
-
-    return this.wordWrap;
-  }
-
-  /**
-   * This method sets the {@link #getWordWrap() word wrap}.
-   * 
-   * @param wordWrap is the {@link #getWordWrap() word wrap}.
-   */
-  public void setWordWrap(String wordWrap) {
-
-    this.wordWrap = wordWrap;
-  }
-
-  /**
    * This method gets the characters where a wrap of the line is preferred.
    * Typical characters are space (' ') or hyphen ('-').
    * 
@@ -295,7 +284,9 @@ public class TextColumnInfo {
 
   /**
    * This method gets the {@link IndentationMode} that defines when to add an
-   * {@link #getIndent() indentation}.
+   * {@link #getIndent() indentation}. To turn {@link #getIndent() indentation}
+   * off, simply set {@link #getIndent() indent} to the empty string.<br>
+   * The default is {@link IndentationMode#NO_INDENT_AFTER_DOUBLE_NEWLINE}.
    * 
    * @see #getIndent()
    * 
@@ -314,6 +305,63 @@ public class TextColumnInfo {
   public void setIndentationMode(IndentationMode indentationMode) {
 
     this.indentationMode = indentationMode;
+  }
+
+  /**
+   * This method gets the {@link Locale} to use for this column. It is used for
+   * line wrapping including hyphenation.
+   * 
+   * @return the columns locale.
+   */
+  public Locale getLocale() {
+
+    return this.locale;
+  }
+
+  /**
+   * This method sets the {@link #getLocale() locale}.
+   * 
+   * @param locale is the {@link Locale} to set.
+   */
+  public void setLocale(Locale locale) {
+
+    this.locale = locale;
+  }
+
+  /**
+   * This method gets the {@link StringUtil#LINE_SEPARATOR} used to terminate a
+   * line of text. Only the line-separator of the
+   * {@link LineWrapper#wrap(Appendable, String[], TextColumnInfo[]) last
+   * column} is used and all others are ignored.
+   * 
+   * @return the line separator string.
+   */
+  public String getLineSeparator() {
+
+    return this.lineSeparator;
+  }
+
+  /**
+   * This method sets the {@link #getLineSeparator() line-separator}.
+   * 
+   * @see StringUtil#LINE_SEPARATOR
+   * @see StringUtil#LINE_SEPARATOR_CR
+   * @see StringUtil#LINE_SEPARATOR_CRLF
+   * @see StringUtil#LINE_SEPARATOR_LF
+   * @see StringUtil#LINE_SEPARATOR_LFCR
+   * 
+   * @param newline is the new line-separator.
+   */
+  public void setLineSeparator(String newline) {
+
+    // TODO: extract to StringUtil
+    if (!StringUtil.LINE_SEPARATOR_CRLF.equals(newline)
+        && !StringUtil.LINE_SEPARATOR_LF.equals(newline)
+        && !StringUtil.LINE_SEPARATOR_LFCR.equals(newline)
+        && !StringUtil.LINE_SEPARATOR_CR.equals(newline)) {
+      throw new NlsIllegalArgumentException(newline);
+    }
+    this.lineSeparator = newline;
   }
 
   /**

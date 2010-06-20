@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.Result;
-
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.TypeVariableImpl;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.Result;
 
 /**
  * This is the test for {@link ReflectionUtilImpl}.
@@ -95,6 +95,11 @@ public class ReflectionUtilTest {
     Assert.assertEquals(String.class, type.getRetrievalClass());
     type = getReflectionUtil().createGenericType(StringList.class).getComponentType();
     Assert.assertEquals(String.class, type.getRetrievalClass());
+
+    // test map key
+    type = getReturnType(AssignableFromTestClass.class, "getMapSubType");
+    Assert.assertEquals(String.class, type.getComponentType().getRetrievalClass());
+    Assert.assertEquals(Integer.class, type.getKeyType().getRetrievalClass());
   }
 
   private void checkTypeParser(String typeString) throws Exception {

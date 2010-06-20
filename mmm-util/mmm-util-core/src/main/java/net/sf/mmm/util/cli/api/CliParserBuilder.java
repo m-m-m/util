@@ -30,7 +30,7 @@ public interface CliParserBuilder {
    * 
    * @param pojo is the annotated object for the CLI-state.
    * @return the {@link CliParser} used to
-   *         {@link CliParser#parseArguments(String...) parse} the
+   *         {@link CliParser#parseParameters(String...) parse} the
    *         commandline-arguments and potentially
    *         {@link CliParser#printHelp(Appendable) print the help}.
    */

@@ -13,15 +13,19 @@ import java.lang.annotation.Target;
  * A {@link CliOption} is used to annotate a property (member variable of some
  * class or setter-method) that should be set from a main-program via a
  * commandline option.<br>
- * If the annotated field is a property it may NOT be
+ * If the annotated property is a {@link java.lang.reflect.Field} it may NOT be
  * {@link java.lang.reflect.Modifier#STATIC static} or
  * {@link java.lang.reflect.Modifier#FINAL final} and by convention it should be
- * {@link java.lang.reflect.Modifier#PRIVATE private}.<br>
+ * {@link java.lang.reflect.Modifier#PRIVATE private}. Setters may NOT be
+ * {@link java.lang.reflect.Modifier#STATIC static} and by convention they
+ * should be {@link java.lang.reflect.Modifier#PUBLIC public}.<br>
  * The annotated property should be initialized properly at construction in
  * order to determine whether the option was triggered or not. For non-primitive
  * types the property should be initialized with <code>null</code>.<br>
- * Options with a type other than <code>boolean</code> need to be followed by a
- * value. This value has to be quoted in the commandline if it contains
+ * When the main-program is invoked an {@link CliOption} can be triggered via
+ * its {@link #name() name} or one of its {@link #aliases() aliases}. Options
+ * with a type other than <code>boolean</code> need to be followed by a value as
+ * CLI parameter. This value has to be quoted in the commandline if it contains
  * whitespaces or other characters that are interpreted by the shell (e.g.
  * backslash in Unix).<br>
  * The type of the annotated property has to be supported by the CLI

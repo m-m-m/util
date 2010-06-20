@@ -250,4 +250,36 @@ public interface CollectionReflectionUtil {
    */
   Object remove(Object arrayOrCollection, Object item);
 
+  /**
+   * This method converts the given {@link Collection} to an array of the given
+   * {@link Class#getComponentType() componentType}. This method also allows to
+   * create primitive arrays. If NOT required please prefer using
+   * {@link #toArrayTyped(Collection, Class)}.
+   * 
+   * @param collection is the {@link Collection} to convert to an array.
+   * @param componentType is the {@link Class#getComponentType() component type}
+   *        of the requested array. If this type is {@link Class#isPrimitive()
+   *        primitive}, the according collection-values with be unboxed.
+   * @return the Array of the given {@link Class#getComponentType()
+   *         componentType} and with the values of the given {@link Collection}.
+   * @throws ClassCastException if the values of the {@link Collection} are NOT
+   *         compatible with the given {@link Class#getComponentType()
+   *         componentType}.
+   */
+  Object toArray(Collection<?> collection, Class<?> componentType) throws ClassCastException;
+
+  /**
+   * This method converts the given {@link Collection} to an array of the given
+   * {@link Class#getComponentType() componentType}.
+   * 
+   * @param <T> is the generic type of the {@link Class#getComponentType()
+   *        componentType}.
+   * @param collection is the {@link Collection} to convert to an array.
+   * @param componentType is the {@link Class#getComponentType() component type}
+   *        of the requested array.
+   * @return the Array of the given {@link Class#getComponentType()
+   *         componentType} and with the values of the given {@link Collection}.
+   */
+  <T> T[] toArrayTyped(Collection<T> collection, Class<T> componentType);
+
 }

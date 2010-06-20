@@ -6,23 +6,23 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionDuplicateException} is thrown if the same {@link CliOption
- * option} occurred multiple times as commandline-argument.
+ * A {@link CliOptionUndefinedException} is thrown if an {@link CliOption
+ * option} is given as commandline-argument if NOT defined.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliOptionDuplicateException extends CliException {
+public class CliOptionUndefinedException extends CliException {
 
   /** UID for serialization. */
-  private static final long serialVersionUID = 5934504531477162386L;
+  private static final long serialVersionUID = 7069859410875864942L;
 
   /**
    * The constructor.
    * 
    * @param option is the according {@link CliOption option}.
    */
-  public CliOptionDuplicateException(String option) {
+  public CliOptionUndefinedException(String option) {
 
     super(NlsBundleUtilCore.ERR_CLI_OPTION_DUPLICATE, toMap(KEY_OPTION, option));
   }

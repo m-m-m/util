@@ -27,7 +27,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   static {
     CHARACTER_TO_ASCII_MAP = new HashMap<Character, String>();
     CHARACTER_TO_ASCII_MAP.put(NON_BREAKING_SPACE, " ");
-    CHARACTER_TO_ASCII_MAP.put(SOFT_HYPEN, "-");
+    CHARACTER_TO_ASCII_MAP.put(SOFT_HYPHEN, "-");
     CHARACTER_TO_ASCII_MAP.put(MINUS_SIGN, "-");
     CHARACTER_TO_ASCII_MAP.put('ä', "ae");
     CHARACTER_TO_ASCII_MAP.put('ö', "oe");

@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import java.lang.annotation.Annotation;
+
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 
 /**
  * This is a container for a {@link CliOption} together with additional
@@ -14,26 +15,39 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliOptionContainer {
+public class CliOptionContainer extends CliParameterContainer {
 
   /** @see #getOption() */
   private final CliOption option;
 
-  /** @see #getSetter() */
-  private final PojoPropertyAccessorOneArg setter;
-
   /**
    * The constructor.
    * 
-   * @param option is the {@link #getOption() option}.
    * @param setter is the {@link #getSetter() setter}.
+   * @param option is the {@link #getOption() option}.
    */
   public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter) {
 
-    super();
-    assert (setter.getMode() == PojoPropertyAccessorOneArgMode.SET);
+    super(setter);
     this.option = option;
-    this.setter = setter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getName() {
+
+    return this.option.name();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Annotation getAnnotation() {
+
+    return this.option;
   }
 
   /**
@@ -44,35 +58,6 @@ public class CliOptionContainer {
   public CliOption getOption() {
 
     return this.option;
-  }
-
-  /**
-   * This method gets the {@link PojoPropertyAccessorOneArg accessor} used to
-   * set the {@link CliOption}.
-   * 
-   * @return the {@link PojoPropertyAccessorOneArg setter}.
-   */
-  public PojoPropertyAccessorOneArg getSetter() {
-
-    return this.setter;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    StringBuilder sb = new StringBuilder();
-    sb.append(this.setter.getDeclaringClass().getSimpleName());
-    sb.append('.');
-    sb.append(this.setter.getName());
-    sb.append('@');
-    sb.append(CliOption.class.getSimpleName());
-    sb.append("(name=\"");
-    sb.append(this.option.name());
-    sb.append("\")");
-    return sb.toString();
   }
 
 }

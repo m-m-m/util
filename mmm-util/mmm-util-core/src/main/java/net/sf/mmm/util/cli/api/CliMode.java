@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * Within some mode, {@link CliOption options} may be
  * {@link CliOption#required() required} but in another mode they should NOT be
  * present.<br>
- * When commandline parameters are {@link CliParser#parseArguments(String...)
+ * When commandline parameters are {@link CliParser#parseParameters(String...)
  * parsed} the {@link CliMode} is automatically detected and returned. This
  * makes it even easier to implement your main-program and decide what to do.<br>
  * A {@link CliMode} can also be {@link CliMode#isAbstract() abstract}. Such
@@ -33,7 +33,7 @@ import java.lang.annotation.Target;
  * 
  * @see CliModes
  * @see CliOption#mode()
- * @see CliParser#parseArguments(String...)
+ * @see CliParser#parseParameters(String...)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

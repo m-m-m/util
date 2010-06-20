@@ -31,17 +31,17 @@ public class CliClassContainer {
   /** @see #getStateClass() */
   private final Class<?> stateClass;
 
-  /** @see #getStyle() */
-  private final CliStyle style;
+  /** @see #getCliStyle() */
+  private final CliStyle cliStyle;
 
-  /** @see #getUsage() */
-  private final String usage;
-
-  /** @see #getName() */
-  private final String name;
+  /** @see #getCliClass() */
+  private final CliClass cliClass;
 
   /** @see #getMode(String) */
   private final Map<String, CliModeContainer> id2ModeMap;
+
+  /** @see #getName() */
+  private final String name;
 
   /**
    * The constructor.
@@ -53,22 +53,15 @@ public class CliClassContainer {
     super();
     this.stateClass = stateClass;
     this.id2ModeMap = new HashMap<String, CliModeContainer>();
-    CliStyle cliStyle = null;
-    String cliUsage = null;
-    String cliName = null;
+    CliStyle cliStyleAnnotation = null;
+    CliClass cliClassAnnotation = null;
     Class<?> currentClass = stateClass;
     while (currentClass != null) {
-      CliClass cliClass = currentClass.getAnnotation(CliClass.class);
-      if (cliClass != null) {
-        if ((cliStyle == null) && (cliClass.style() != CliStyle.INHERIT)) {
-          cliStyle = cliClass.style();
-        }
-        if ((cliName == null) && (cliClass.name().length() > 0)) {
-          cliName = cliClass.name();
-        }
-        if ((cliUsage == null) && (cliClass.usage().length() > 0)) {
-          cliUsage = cliClass.usage();
-        }
+      if (cliStyleAnnotation == null) {
+        cliStyleAnnotation = currentClass.getAnnotation(CliStyle.class);
+      }
+      if (cliClassAnnotation == null) {
+        cliClassAnnotation = currentClass.getAnnotation(CliClass.class);
       }
       CliMode cliMode = currentClass.getAnnotation(CliMode.class);
       if (cliMode != null) {
@@ -82,15 +75,21 @@ public class CliClassContainer {
       }
       currentClass = currentClass.getSuperclass();
     }
-    if (cliStyle == null) {
-      cliStyle = CliStyle.STRICT;
+
+    if (cliStyleAnnotation == null) {
+      cliStyleAnnotation = CliDefaultAnnotations.CLI_STYLE;
     }
-    this.style = cliStyle;
-    if (cliName == null) {
-      cliName = stateClass.getName();
+    this.cliStyle = cliStyleAnnotation;
+    if (cliClassAnnotation == null) {
+      cliClassAnnotation = CliDefaultAnnotations.CLI_CLASS;
     }
-    this.name = cliName;
-    this.usage = cliUsage;
+    this.cliClass = cliClassAnnotation;
+    if (this.cliClass.name().length() == 0) {
+      this.name = this.stateClass.getName();
+    } else {
+      this.name = this.cliClass.name();
+    }
+
     for (CliModeContainer modeContainer : this.id2ModeMap.values()) {
       initializeRecursive(modeContainer);
     }
@@ -172,36 +171,27 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliClass#style() style} configured for the
-   * {@link #getStateClass() state-class}.
+   * This method gets the {@link CliStyle style} configured for the
+   * {@link #getStateClass() state-class}. If no such annotation is present, a
+   * default instance is returned.
    * 
-   * @return the {@link CliClass#style() style}.
+   * @return the {@link CliStyle}.
    */
-  public CliStyle getStyle() {
+  public CliStyle getCliStyle() {
 
-    return this.style;
+    return this.cliStyle;
   }
 
   /**
-   * This method gets the {@link CliClass#name() name} configured for the
-   * {@link #getStateClass() state-class}.
+   * This method gets the {@link CliClass} configured for the
+   * {@link #getStateClass() state-class}. If no such annotation is present, a
+   * default instance is returned.
    * 
-   * @return the {@link CliClass#name() name}.
+   * @return the {@link CliClass}.
    */
-  public String getName() {
+  public CliClass getCliClass() {
 
-    return this.name;
-  }
-
-  /**
-   * This method gets the {@link CliClass#usage() usage} configured for the
-   * {@link #getStateClass() state-class}.
-   * 
-   * @return the {@link CliClass#usage() usage}.
-   */
-  public String getUsage() {
-
-    return this.usage;
+    return this.cliClass;
   }
 
   /**
@@ -226,6 +216,44 @@ public class CliClassContainer {
   public Collection<String> getModeIds() {
 
     return this.id2ModeMap.keySet();
+  }
+
+  /**
+   * This method gets the {@link CliClass#name() name} configured for the
+   * {@link #getStateClass() state-class}.
+   * 
+   * @return the annotated {@link CliClass#name() name} or the
+   *         {@link Class#getName() class-name} of the {@link #getStateClass()
+   *         state-class} if NOT configured.
+   */
+  public String getName() {
+
+    return this.name;
+  }
+
+  /**
+   * This inner class is a dummy for getting default instances of CLI
+   * annotations.
+   */
+  @CliClass
+  @CliStyle
+  private static final class CliDefaultAnnotations {
+
+    /** The default instance of {@link CliClass}. */
+    private static final CliClass CLI_CLASS = CliDefaultAnnotations.class
+        .getAnnotation(CliClass.class);
+
+    /** The default instance of {@link CliStyle}. */
+    private static final CliStyle CLI_STYLE = CliDefaultAnnotations.class
+        .getAnnotation(CliStyle.class);
+
+    /**
+     * The forbidden constructor.
+     */
+    private CliDefaultAnnotations() {
+
+      throw new IllegalStateException();
+    }
   }
 
   /**

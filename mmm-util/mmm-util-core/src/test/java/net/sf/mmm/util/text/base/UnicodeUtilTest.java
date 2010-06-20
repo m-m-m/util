@@ -29,7 +29,7 @@ public class UnicodeUtilTest {
   public void testMinus() {
 
     System.out.println(UnicodeUtil.MINUS_SIGN);
-    System.out.println(UnicodeUtil.SOFT_HYPEN);
+    System.out.println(UnicodeUtil.SOFT_HYPHEN);
     System.out.println(UnicodeUtil.NON_BREAKING_SPACE);
   }
 

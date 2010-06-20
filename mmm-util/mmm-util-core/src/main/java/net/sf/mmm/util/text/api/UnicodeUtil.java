@@ -114,7 +114,7 @@ public interface UnicodeUtil {
    * The soft hyphen that indicates a word-wrap position (for hyphenation).
    * Similar to ASCII hyphen-minus ('-').
    */
-  char SOFT_HYPEN = 173;
+  char SOFT_HYPHEN = 173;
 
   /** A space that should NOT be wrapped. */
   char NON_BREAKING_SPACE = 160;
@@ -184,7 +184,6 @@ public interface UnicodeUtil {
   char MODIFIER_LETTER_DOUBLE_APOSTROPHE = 0x02EE;
   
   
-  char NO_BREAK_SPACE = 0x00A0;
   char INVERTED_EXCLAMATION_MARK = 0x00A1;
   char CENT_SIGN = 0x00A2;
   char POUND_SIGN = 0x00A3;
@@ -197,7 +196,6 @@ public interface UnicodeUtil {
   char FEMININE_ORDINAL_INDICATOR = 0x00AA;
   char LEFT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK = 0x00AB;
   char NOT_SIGN = 0x00AC;
-  char SOFT_HYPHEN = 0x00AD;
   char REGISTERED_SIGN = 0x00AE;
   char MACRON = 0x00AF;
   char DEGREE_SIGN = 0x00B0;

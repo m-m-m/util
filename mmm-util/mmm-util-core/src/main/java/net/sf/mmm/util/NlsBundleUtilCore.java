@@ -216,6 +216,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.CliOptionDuplicateException */
   public static final String ERR_CLI_OPTION_DUPLICATE = "Duplicate option \"{option}\"!";
 
+  /** @see net.sf.mmm.util.cli.api.CliOptionUndefinedException */
+  public static final String ERR_CLI_OPTION_UNDEFINED = "Undefined option \"{option}\"!";
+
   /** @see net.sf.mmm.util.cli.api.CliOptionMissingValueException */
   public static final String ERR_CLI_OPTION_MISSING_VALUE = "The option "
       + "\"{option}\" must be followed by a value!";

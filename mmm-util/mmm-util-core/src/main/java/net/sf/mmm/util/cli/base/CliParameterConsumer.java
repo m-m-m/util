@@ -6,17 +6,20 @@ package net.sf.mmm.util.cli.base;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * A {@link CliArgumentConsumer} holds the command-line arguments together with
- * the current index. In other words it is like an {@link java.util.Iterator}
- * for the arguments.
+ * A {@link CliParameterConsumer} holds the command-line parameters together
+ * with the current index. In other words it is like an
+ * {@link java.util.Iterator} for the parameters.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliArgumentConsumer {
+public class CliParameterConsumer {
+
+  /** An empty instance. */
+  static final CliParameterConsumer EMPTY_INSTANCE = new CliParameterConsumer();
 
   /** @see #getNext() */
-  private final String[] arguments;
+  private final String[] parameters;
 
   /** @see #getNext() */
   private int index;
@@ -24,12 +27,12 @@ public class CliArgumentConsumer {
   /**
    * The constructor.
    * 
-   * @param arguments are the arguments to consume.
+   * @param parameters are the parameters to consume.
    */
-  public CliArgumentConsumer(String... arguments) {
+  public CliParameterConsumer(String... parameters) {
 
     super();
-    this.arguments = arguments;
+    this.parameters = parameters;
     this.index = 0;
   }
 
@@ -42,7 +45,7 @@ public class CliArgumentConsumer {
    */
   public boolean hasNext() {
 
-    return (this.index < this.arguments.length);
+    return (this.index < this.parameters.length);
   }
 
   /**
@@ -67,10 +70,10 @@ public class CliArgumentConsumer {
    */
   public String getCurrent() {
 
-    if (this.index >= this.arguments.length) {
+    if (this.index >= this.parameters.length) {
       return null;
     }
-    String arg = this.arguments[this.index];
+    String arg = this.parameters[this.index];
     if (arg == null) {
       throw new NlsNullPointerException("arguments[" + this.index + "]");
     }
@@ -84,14 +87,14 @@ public class CliArgumentConsumer {
   public String toString() {
 
     StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < this.arguments.length; i++) {
+    for (int i = 0; i < this.parameters.length; i++) {
       if (i > 0) {
         sb.append(' ');
       }
       if (i == this.index) {
         sb.append("(^)");
       }
-      sb.append(this.arguments[i]);
+      sb.append(this.parameters[i]);
     }
     return super.toString();
   }

@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import java.lang.annotation.Annotation;
+
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 
 /**
  * This is a container for a {@link CliArgument} together with additional
@@ -14,13 +15,10 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliArgumentContainer {
+public class CliArgumentContainer extends CliParameterContainer {
 
   /** @see #getArgument() */
   private final CliArgument argument;
-
-  /** @see #getSetter() */
-  private final PojoPropertyAccessorOneArg setter;
 
   /**
    * The constructor.
@@ -30,10 +28,8 @@ public class CliArgumentContainer {
    */
   public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter) {
 
-    super();
-    assert (setter.getMode() == PojoPropertyAccessorOneArgMode.SET);
+    super(setter);
     this.argument = argument;
-    this.setter = setter;
   }
 
   /**
@@ -47,34 +43,21 @@ public class CliArgumentContainer {
   }
 
   /**
-   * This method gets the {@link PojoPropertyAccessorOneArg accessor} used to
-   * set the {@link CliArgument}.
-   * 
-   * @return the {@link PojoPropertyAccessorOneArg setter}.
+   * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg getSetter() {
+  @Override
+  protected Annotation getAnnotation() {
 
-    return this.setter;
+    return this.argument;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String toString() {
+  protected String getName() {
 
-    StringBuilder sb = new StringBuilder();
-    sb.append(this.setter.getDeclaringClass().getSimpleName());
-    sb.append('.');
-    sb.append(this.setter.getName());
-    sb.append('@');
-    sb.append(CliArgument.class.getSimpleName());
-    sb.append("(name=\"");
-    sb.append(this.argument.name());
-    sb.append("\"");
-    // sb.append(this.argument.index());
-    sb.append(')');
-    return sb.toString();
+    return this.argument.name();
   }
 
 }

@@ -4,8 +4,10 @@
 package net.sf.mmm.util.cli.api;
 
 /**
- * This is the interface used to {@link #parseArguments(String...) parse} the
+ * This is the interface used to {@link #parseParameters(String...) parse} the
  * command-line arguments of a main-program.
+ * 
+ * @see CliClass
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -13,14 +15,22 @@ package net.sf.mmm.util.cli.api;
 public interface CliParser {
 
   /**
+   * The option prefix character.
+   * 
+   * @see #PREFIX_SHORT_OPTION
+   * @see #PREFIX_LONG_OPTION
+   */
+  char CHAR_OPTION = '-';
+
+  /**
    * The prefix for {@link CliOption#name() name} or {@link CliOption#aliases()
-   * alias} of a short option (e.g. "-h").
+   * alias} of a short option. Value is {@value} (e.g. "-h").
    */
   String PREFIX_SHORT_OPTION = "-";
 
   /**
    * The prefix for {@link CliOption#name() name} or {@link CliOption#aliases()
-   * alias} of a long option (e.g. "--help").
+   * alias} of a long option. Value is {@value} (e.g. "--help").
    */
   String PREFIX_LONG_OPTION = "--";
 
@@ -55,16 +65,16 @@ public interface CliParser {
   void printHelp(Appendable target, CliOutputSettings settings);
 
   /**
-   * This method parses the given command-line arguments and applies the parsed
+   * This method parses the given command-line parameters and applies the parsed
    * {@link CliOption options} and {@link CliArgument arguments} to the
-   * {@link net.sf.mmm.util.pojo.api.Pojo} supplied when
+   * {@link net.sf.mmm.util.pojo.api.Pojo} that was supplied when
    * {@link CliParserBuilder#build(Object) building} this {@link CliParser
    * parser}.
    * 
-   * @param arguments are the command-line arguments of the main-program.
+   * @param parameters are the command-line arguments of the main-program.
    * @return the {@link CliOption#mode() mode} that was triggered.
    * @throws CliException if the given <code>arguments</code> are invalid.
    */
-  CliModeObject parseArguments(String... arguments) throws CliException;
+  CliModeObject parseParameters(String... parameters) throws CliException;
 
 }

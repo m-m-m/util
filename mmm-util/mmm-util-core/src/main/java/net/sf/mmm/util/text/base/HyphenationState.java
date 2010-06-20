@@ -88,12 +88,21 @@ public class HyphenationState {
     this.hashes = new int[maxPatternLength - MIN_PATTERN_LENGTH + 1][];
   }
 
-  private int[] getHashes(int patternLength) {
+  /**
+   * This method gets the hashes of all substrings of the
+   * {@link #getNormalizedWord() normalized word} that have the given
+   * {@link String#length() length}.
+   * 
+   * @param length is the {@link String#length() length} of the
+   *        substrings to get hashes for.
+   * @return the array with the hashes.
+   */
+  private int[] getHashes(int length) {
 
-    int i = patternLength - MIN_PATTERN_LENGTH;
+    int i = length - MIN_PATTERN_LENGTH;
     int[] subHashes = this.hashes[i];
     if (subHashes == null) {
-      subHashes = this.hasher.getHashCodes(this.normalizedWord, patternLength);
+      subHashes = this.hasher.getHashCodes(this.normalizedWord, length);
       this.hashes[i] = subHashes;
     }
     return subHashes;

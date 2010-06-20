@@ -33,4 +33,9 @@ public @interface CliConstraintCollection {
    */
   int max() default Integer.MAX_VALUE;
 
+  /**
+   * The style how to map collections.
+   */
+  CliCollectionStyle style() default CliCollectionStyle.MULTIPLE_OCCURRENCE;
+
 }

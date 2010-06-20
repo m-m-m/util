@@ -17,7 +17,7 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@CliClass(style = CliStyle.STRICT)
+@CliClass
 @CliModes(//
 {
     @CliMode(id = CliMode.MODE_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, // 
@@ -216,7 +216,7 @@ public abstract class AbstractMain {
     CliParserBuilder parserBuilder = getParserBuilder();
     CliParser parser = parserBuilder.build(this);
     try {
-      CliModeObject mode = parser.parseArguments(args);
+      CliModeObject mode = parser.parseParameters(args);
       if (this.help) {
         assert (mode.getId().equals(CliMode.MODE_HELP));
         printHelp(parser);

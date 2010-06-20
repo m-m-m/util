@@ -3,11 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.lang.api.BasicUtil;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.StringHasher;
@@ -60,7 +63,6 @@ public class HyphenatorImpl extends AbstractHyphenator {
       HyphenationImpl hypenation = new HyphenationImpl(exception, hyphen);
       this.exceptionMap.put(hypenation.getWord(), hypenation);
     }
-    this.patterns = new HyphenationPattern[patternList.size()];
     HyphenationPattern[] patternArray = new HyphenationPattern[patternList.size()];
     int maxLength = 2;
     for (int i = 0; i < patternArray.length; i++) {
@@ -71,30 +73,41 @@ public class HyphenatorImpl extends AbstractHyphenator {
         maxLength = len;
       }
     }
-    int patternIndex = 0;
-    for (int i = 2; i <= maxLength; i++) {
-      for (int j = 0; j < patternArray.length; j++) {
-        int len = patternArray[j].getWordPart().length();
-        if (len == i) {
-          this.patterns[patternIndex++] = patternArray[j];
-        }
-      }
-    }
-    assert (patternIndex == patternList.size());
-    // boolean todo = true;
-    // while (todo) {
-    // todo = false;
-    // for (String pattern : patternList) {
-    // this.patterns[patternIndex++] = new
-    // HyphenationPattern(patternList.get(i),
-    // // hasher);
-    // // // assert (patternList.get(i).equals(this.patterns[i].getPattern()));
-    // // int len = this.patterns[i].getWordPart().length();
-    // // if (len > maxLength) {
-    // // maxLength = len;
-    // }
-    // }
+    patternArray = sortPatterns(patternArray);
+    this.patterns = patternArray;
     this.maxPatternLength = maxLength;
+  }
+
+  /**
+   * This method sorts the given {@link HyphenationPattern patterns} according
+   * to the {@link String#length() length} of their
+   * {@link HyphenationPattern#getWordPart() word-part}.
+   * 
+   * @param patternArray are the unsorted {@link HyphenationPattern patterns}.
+   * @return the sorted {@link HyphenationPattern patterns}.
+   */
+  private static HyphenationPattern[] sortPatterns(HyphenationPattern[] patternArray) {
+
+    Comparator<HyphenationPattern> comparator = new Comparator<HyphenationPattern>() {
+
+      public int compare(HyphenationPattern p1, HyphenationPattern p2) {
+
+        return (p2.getWordPart().length() - p1.getWordPart().length());
+      }
+    };
+    Arrays.sort(patternArray, comparator);
+    return patternArray;
+  }
+
+  /**
+   * This method normalizes the given <code>word</code>.
+   * 
+   * @param word is the word to normalize.
+   * @return the normalized form of <code>word</code>.
+   */
+  protected String normalize(String word) {
+
+    return word.toLowerCase(getLocale());
   }
 
   /**
@@ -102,7 +115,10 @@ public class HyphenatorImpl extends AbstractHyphenator {
    */
   public Hyphenation hyphenate(String word) {
 
-    String normalizedWord = word.toLowerCase(getLocale());
+    if (word.length() <= 1) {
+      return new HyphenationImpl(word, getHyphen(), BasicUtil.EMPTY_INT_ARRAY);
+    }
+    String normalizedWord = normalize(word);
     Hyphenation hyphenation;
     HyphenationImpl exception = this.exceptionMap.get(normalizedWord);
     if (exception != null) {

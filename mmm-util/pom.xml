@@ -16,12 +16,10 @@
 
   <modules>
     <module>mmm-util-core</module>
-    <module>mmm-util-pojo</module>
     <module>mmm-util-http</module>
     <module>mmm-util-xml</module>
     <module>mmm-util-contenttype</module>
     <module>mmm-util-metakeys</module>
-    <module>mmm-util-cli</module>
   </modules>
   
   <dependencies>

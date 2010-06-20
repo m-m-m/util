@@ -72,15 +72,13 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
 
     Hyphenator hyphenator = getHyphenator(Locale.US);
     Assert.assertEquals(Locale.ROOT, hyphenator.getLocale());
-    checkHyphenations(
-        hyphenator,
-        "word",
-        "con-struc-tion",// 
+    checkHyphenations(hyphenator, "word", "this",
+        "a",
+        "con-struc-tion",
         // "spec-tro-elec-tro-chem-is-try",
         "spec-tro-elec-tro-chem-istry", "hy-phen-ation", "hyp-not-ic", "care-tak-er", "as-pi-rin",
         "as-pir-ing", "in-de-pen-dent", "tri-bune", "pro-gress", "even-ing", "pe-ri-od-ic",
         "as-so-ciate", "squirmed", "Af-ghan-i-stan", "bio-rhythm", "ho-mol-o-gous", "be-tray-al",
-        "de-spair");
+        "de-spair", "per-fect-ly");
   }
-
 }

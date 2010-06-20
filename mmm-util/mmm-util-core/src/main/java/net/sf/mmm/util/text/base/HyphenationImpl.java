@@ -63,7 +63,11 @@ public class HyphenationImpl implements Hyphenation {
     this.hyphen = hyphen;
     int length = hyphenatedWord.length();
     StringBuilder wordBuilder = new StringBuilder(length);
-    int[] points = new int[length - 2];
+    int maxPointsLength = length - 2;
+    if (maxPointsLength < 0) {
+      maxPointsLength = 0;
+    }
+    int[] points = new int[maxPointsLength];
     int hyphenationPointCount = 0;
     for (int i = 0; i < length; i++) {
       char c = hyphenatedWord.charAt(i);

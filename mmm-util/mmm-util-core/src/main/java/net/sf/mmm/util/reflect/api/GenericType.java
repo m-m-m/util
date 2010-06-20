@@ -179,6 +179,44 @@ public interface GenericType<T> extends Type {
   GenericType<?> getComponentType();
 
   /**
+   * This method gets the key-type of this {@link GenericType} if it represents
+   * a {@link java.util.Map}.<br>
+   * Here are some examples:<br>
+   * <table border="1">
+   * <tr>
+   * <th>type</th>
+   * <th>{@link #getComponentType()}</th>
+   * </tr>
+   * <tr>
+   * <td><code>List&lt;Map&lt;String, Long&gt;&gt;</code></td>
+   * <td><code>null</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>Map</code></td>
+   * <td><code>Object</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>Foo[]</code></td>
+   * <td><code>null</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>Foo&lt;K,V&gt;</code></td>
+   * <td><code>null</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>Map&lt;String, Long&gt;</code></td>
+   * <td><code>String</code></td>
+   * </tr>
+   * </table>
+   * 
+   * @since 2.0.0
+   * @return the key-type of this {@link GenericType} or <code>null</code> if
+   *         this {@link GenericType} does NOT represent a {@link java.util.Map}
+   *         .
+   */
+  GenericType<?> getKeyType();
+
+  /**
    * This method gets the number of {@link #getTypeArgument(int) type-arguments}
    * .
    * 

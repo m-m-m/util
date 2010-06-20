@@ -5,6 +5,7 @@ package net.sf.mmm.util.reflect.base;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -378,4 +379,42 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
       throw new NlsIllegalArgumentException(arrayOrCollection);
     }
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Object toArray(Collection<?> collection, Class<?> componentType) throws ClassCastException {
+
+    if (componentType == null) {
+      throw new NlsNullPointerException("componentType");
+    }
+    if (collection == null) {
+      return null;
+    }
+    int length = collection.size();
+    Object array = Array.newInstance(componentType, length);
+    Iterator<?> iterator = collection.iterator();
+    int i = 0;
+    if (componentType.isPrimitive()) {
+      while (iterator.hasNext()) {
+        Array.set(array, i++, iterator.next());
+      }
+    } else {
+      Object[] objectArray = (Object[]) array;
+      while (iterator.hasNext()) {
+        objectArray[i++] = iterator.next();
+      }
+    }
+    return array;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  public <T> T[] toArrayTyped(Collection<T> collection, Class<T> componentType) {
+
+    return (T[]) toArray(collection, componentType);
+  }
+
 }

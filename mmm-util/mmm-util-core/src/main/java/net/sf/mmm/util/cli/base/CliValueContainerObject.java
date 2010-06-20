@@ -1,0 +1,67 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.cli.base;
+
+import net.sf.mmm.util.cli.api.CliOptionDuplicateException;
+import net.sf.mmm.util.cli.api.CliStyle;
+import net.sf.mmm.util.cli.api.CliStyleHandling;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+
+import org.slf4j.Logger;
+
+/**
+ * This is an implementation of {@link CliValueContainer} for simple objects (no
+ * arrays, collections, maps).
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 2.0.0
+ */
+public class CliValueContainerObject implements CliValueContainer {
+
+  /** @see #getValue() */
+  private Object value;
+
+  /**
+   * The constructor.
+   */
+  public CliValueContainerObject() {
+
+    super();
+    this.value = null;
+  }
+
+  /**
+   * @return the value
+   */
+  public Object getValue() {
+
+    return this.value;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setValue(String argument, CliParameterContainer parameterContainer,
+      CliStyle cliStyle, CliParserConfiguration configuration, Logger logger) {
+
+    PojoPropertyAccessorOneArg setter = parameterContainer.getSetter();
+    Object newValue = configuration.getConverter().convertValue(argument, parameterContainer,
+        setter.getPropertyClass(), setter.getPropertyType());
+    if (this.value != null) {
+      CliStyleHandling handling;
+      if (Boolean.TRUE.equals(newValue) && Boolean.TRUE.equals(this.value)) {
+        // trigger might be duplicated according to CLI style
+        handling = cliStyle.optionDuplicated();
+      } else {
+        handling = CliStyleHandling.EXCEPTION;
+      }
+      if (handling != CliStyleHandling.OK) {
+        CliOptionDuplicateException exception = new CliOptionDuplicateException(parameterContainer
+            .getName());
+        handling.handle(logger, exception);
+      }
+    }
+    this.value = newValue;
+  }
+}

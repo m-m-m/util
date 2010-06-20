@@ -26,7 +26,9 @@ public class DefaultLineWrapperTest {
    */
   protected LineWrapper getLineWrapper() {
 
-    return new DefaultLineWrapper();
+    DefaultLineWrapper wrapper = new DefaultLineWrapper();
+    wrapper.initialize();
+    return wrapper;
   }
 
   /**
@@ -35,7 +37,7 @@ public class DefaultLineWrapperTest {
    * .
    */
   @Test
-  public void testSingleColumn() {
+  public void testWordIterator() {
 
     BreakIterator breakIterator = BreakIterator.getWordInstance(new Locale("th"));
     String text2 = "เด็กที่มีปัญหาทางการเรียนรู้่บางคนสามารถเรียนร่วมกับเด็กปกติได้";
@@ -50,18 +52,30 @@ public class DefaultLineWrapperTest {
         System.out.println(substring);
       }
     }
+  }
+
+  /**
+   * Tests
+   * {@link LineWrapper#wrap(Appendable, String, net.sf.mmm.util.text.api.TextColumnInfo)}
+   * .
+   */
+  @Test
+  public void testSingleColumn() {
 
     LineWrapper wrapper = getLineWrapper();
-    StringBuilder buffer = new StringBuilder();
     TextColumnInfo columnInfo = new TextColumnInfo();
-    columnInfo.setWidth(20);
+    columnInfo.setLocale(Locale.US);
     columnInfo.setBorderLeft("left|");
     columnInfo.setBorderRight("|right");
-    // .............000000000011111111112222222222333333333344444444445555555555
-    // .............012345678901234567890123456789012345678901234567890123456789
+    // ............000000000011111111112222222222333333333344444444445555555555
+    // ............012345678901234567890123456789012345678901234567890123456789
     String text = "Hello world! This is wrapped text. It wraps perfectly well!";
-    int lines = wrapper.wrap(buffer, text, columnInfo);
-    System.out.println(lines);
-    System.out.println(buffer.toString());
+    for (int i = 12; i > 0; i--) {
+      columnInfo.setWidth(i);
+      StringBuilder buffer = new StringBuilder();
+      int lines = wrapper.wrap(buffer, text, columnInfo);
+      System.out.println("width=" + i + ",line:" + lines);
+      System.out.println(buffer.toString());
+    }
   }
 }

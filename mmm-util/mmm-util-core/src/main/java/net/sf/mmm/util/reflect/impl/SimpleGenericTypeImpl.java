@@ -27,11 +27,11 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
       Object.class);
 
   /** The {@link GenericType} for <code>void</code>. */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public static final GenericType<?> TYPE_VOID = new SimpleGenericTypeImpl(void.class);
 
   /** The {@link GenericType} for <code>int</code>. */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public static final GenericType<?> TYPE_INT = new SimpleGenericTypeImpl(int.class);
 
   /** @see #getType() */
@@ -40,27 +40,35 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
   /** @see #getComponentType() */
   private GenericType<?> componentType;
 
+  /** @see #getKeyType() */
+  private GenericType<?> keyType;
+
   /**
    * The constructor.
    * 
    * @param type is the {@link #getType() type} to represent.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public SimpleGenericTypeImpl(Class<T> type) {
 
     super();
     this.type = type;
     if (type.isArray()) {
       this.componentType = new SimpleGenericTypeImpl(type.getComponentType());
+      this.keyType = null;
     } else if (Collection.class.isAssignableFrom(type)) {
       Type resolvedType = resolveTypeVariable(CommonTypeVariables.TYPE_VARIABLE_COLLECTION_ELEMENT,
           this);
       this.componentType = new GenericTypeImpl(resolvedType);
+      this.keyType = null;
     } else if (Map.class.isAssignableFrom(type)) {
       Type resolvedType = resolveTypeVariable(CommonTypeVariables.TYPE_VARIABLE_MAP_VALUE, this);
       this.componentType = new GenericTypeImpl(resolvedType);
+      resolvedType = resolveTypeVariable(CommonTypeVariables.TYPE_VARIABLE_MAP_KEY, this);
+      this.keyType = new GenericTypeImpl(resolvedType);
     } else {
       this.componentType = null;
+      this.keyType = null;
     }
   }
 
@@ -88,6 +96,14 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
   public GenericType<?> getComponentType() {
 
     return this.componentType;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public GenericType<?> getKeyType() {
+
+    return this.keyType;
   }
 
   /**

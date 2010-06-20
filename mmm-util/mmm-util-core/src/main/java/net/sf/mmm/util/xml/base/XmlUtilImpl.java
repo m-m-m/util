@@ -59,7 +59,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     ENTITY_MAP.put("ordf", Character.valueOf((char) 170));
     ENTITY_MAP.put("laquo", Character.valueOf((char) 171));
     ENTITY_MAP.put("not", Character.valueOf((char) 172));
-    ENTITY_MAP.put("shy", Character.valueOf(UnicodeUtil.SOFT_HYPEN));
+    ENTITY_MAP.put("shy", Character.valueOf(UnicodeUtil.SOFT_HYPHEN));
     ENTITY_MAP.put("reg", Character.valueOf((char) 174));
     ENTITY_MAP.put("macr", Character.valueOf((char) 175));
     ENTITY_MAP.put("deg", Character.valueOf((char) 176));
