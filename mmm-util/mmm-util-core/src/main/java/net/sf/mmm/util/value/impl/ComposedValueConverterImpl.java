@@ -88,7 +88,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    *         that has been replaced by <code>converter</code> or
    *         <code>null</code> if no converter has been replaced.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   private ValueConverter<?, ?> addConverterInternal(ValueConverter<?, ?> converter) {
 
     getInitializationState().requireNotInitilized();
@@ -127,7 +127,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public Object convert(Object value, Object valueSource, GenericType<? extends Object> targetType) {
 
     if (value == null) {
@@ -306,7 +306,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    *         {@link Class#isInstance(Object) instance} of the given
    *         <code>targetType</code>.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object convertRecursive(Object value, Object valueSource, GenericType<?> targetType,
       Class<?> currentTargetClass, ValueConverter previousConverter,
       TargetClass2ConverterMap converterMap) {
@@ -498,7 +498,6 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
             convertRecursive(value, valueSource, genericTargetType, superInterface);
           }
         }
-        // TODO:
         if (currentClass.isInterface() && (value.getClass() == currentClass)) {
           currentClass = Object.class;
         } else {
@@ -530,7 +529,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      * 
      * @param mapFactory is the factory used to create the internal {@link Map}.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "rawtypes" })
     public TargetClass2ConverterMap(MapFactory<Map> mapFactory) {
 
       super(mapFactory);

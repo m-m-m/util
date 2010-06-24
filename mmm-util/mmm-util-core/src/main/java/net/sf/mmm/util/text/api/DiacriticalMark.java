@@ -169,6 +169,11 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
+  /**
+   * TODO
+   * 
+   * @param warning
+   */
   CEDILLA(UnicodeUtil.CEDILLA, UnicodeUtil.COMBINING_CEDILLA, "cedilla") {
 
     /**
@@ -326,6 +331,11 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
+  /**
+   * TODO
+   * 
+   * @param warning
+   */
   DOT_BELOW(UnicodeUtil.DOT_BELOW, UnicodeUtil.COMBINING_DOT_BELOW, "dot below") {
 
     /**
@@ -339,6 +349,12 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
+  /**
+   * Like {@link #ACUTE} but doubled. If your environment supports unicode, you
+   * can see it here: TODO
+   * 
+   * @param warning
+   */
   DOUBLE_ACUTE(UnicodeUtil.DOUBLE_ACUTE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_ACUTE_ACCENT,
       "double acute accent") {
 
@@ -356,6 +372,12 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
+  /**
+   * Like {@link #GRAVE} but doubled. If your environment supports unicode, you
+   * can see it here: TODO
+   * 
+   * @param warning
+   */
   DOUBLE_GRAVE(UnicodeUtil.DOUBLE_GRAVE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_GRAVE_ACCENT,
       "double grave accent") {
 
@@ -381,6 +403,11 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
+  /**
+   * TODO
+   * 
+   * @param warning
+   */
   GRAVE(UnicodeUtil.GRAVE_ACCENT, UnicodeUtil.COMBINING_GRAVE_ACCENT, "grave accent") {
 
     /**
@@ -411,7 +438,7 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   /**
    * A little question mark without the dot, that is placed on top of Vietnamese
-   * vowels.
+   * letters.
    */
   HOOK_ABOVE(UnicodeUtil.HOOK_ABOVE, UnicodeUtil.COMBINING_HOOK_ABOVE, "hook above") {
 
@@ -454,8 +481,7 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A little question mark without the dot, that is placed on top of Vietnamese
-   * vowels.
+   * A ... that is placed on top of Vietnamese vowels.
    */
   HORN_ABOVE(UnicodeUtil.HORN, UnicodeUtil.COMBINING_HORN, "horn") {
 
@@ -465,34 +491,10 @@ public enum DiacriticalMark implements Datatype<Character> {
     @Override
     protected void initialize() {
 
-      addComposition('b', UnicodeUtil.LATIN_SMALL_LETTER_B_WITH_HOOK);
-      addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_HOOK);
-      addComposition('d', UnicodeUtil.LATIN_SMALL_LETTER_D_WITH_HOOK);
-      addComposition('f', UnicodeUtil.LATIN_SMALL_LETTER_F_WITH_HOOK);
-      addComposition('g', UnicodeUtil.LATIN_SMALL_LETTER_G_WITH_HOOK);
-      addComposition('h', UnicodeUtil.LATIN_SMALL_LETTER_H_WITH_HOOK);
-      addComposition('k', UnicodeUtil.LATIN_SMALL_LETTER_K_WITH_HOOK);
-      addComposition('m', UnicodeUtil.LATIN_SMALL_LETTER_M_WITH_HOOK);
-      addComposition('p', UnicodeUtil.LATIN_SMALL_LETTER_P_WITH_HOOK);
-      addComposition('q', UnicodeUtil.LATIN_SMALL_LETTER_Q_WITH_HOOK);
-      addComposition('s', UnicodeUtil.LATIN_SMALL_LETTER_S_WITH_HOOK);
-      addComposition('t', UnicodeUtil.LATIN_SMALL_LETTER_T_WITH_HOOK);
-      addComposition('v', UnicodeUtil.LATIN_SMALL_LETTER_V_WITH_HOOK);
-      addComposition('y', UnicodeUtil.LATIN_SMALL_LETTER_Y_WITH_HOOK);
-      addComposition('z', UnicodeUtil.LATIN_SMALL_LETTER_Z_WITH_HOOK);
-      addComposition('B', UnicodeUtil.LATIN_CAPITAL_LETTER_B_WITH_HOOK);
-      addComposition('C', UnicodeUtil.LATIN_CAPITAL_LETTER_C_WITH_HOOK);
-      addComposition('D', UnicodeUtil.LATIN_CAPITAL_LETTER_D_WITH_HOOK);
-      addComposition('F', UnicodeUtil.LATIN_CAPITAL_LETTER_F_WITH_HOOK);
-      addComposition('G', UnicodeUtil.LATIN_CAPITAL_LETTER_G_WITH_HOOK);
-      addComposition('K', UnicodeUtil.LATIN_CAPITAL_LETTER_K_WITH_HOOK);
-      addComposition('P', UnicodeUtil.LATIN_CAPITAL_LETTER_P_WITH_HOOK);
-      addComposition('T', UnicodeUtil.LATIN_CAPITAL_LETTER_T_WITH_HOOK);
-      addComposition('V', UnicodeUtil.LATIN_CAPITAL_LETTER_V_WITH_HOOK);
-      addComposition('Y', UnicodeUtil.LATIN_CAPITAL_LETTER_Y_WITH_HOOK);
-      addComposition('Z', UnicodeUtil.LATIN_CAPITAL_LETTER_Z_WITH_HOOK);
-      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE,
-          UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE_AND_HOOK);
+      addComposition('o', UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_HORN);
+      addComposition('u', UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_HORN);
+      addComposition('O', UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_HORN);
+      addComposition('U', UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_HORN);
     }
 
   },

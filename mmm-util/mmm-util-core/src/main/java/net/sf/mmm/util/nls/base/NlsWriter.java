@@ -3,12 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.base.AppendableWriter;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -17,10 +16,11 @@ import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * An {@link NlsWriter} is a {@link Writer}, that {@link #write(String) writes}
- * the {@link NlsMessage#getLocalizedMessage(Locale) localized message} of the
- * given text. In other words everything that is written here gets translated
- * via {@link NlsMessage}.
+ * An {@link NlsWriter} is a {@link java.io.Writer}, that {@link #write(String)
+ * writes} the {@link NlsMessage#getLocalizedMessage(Locale) localized message}
+ * of the given text. In other words everything that is written here (except via
+ * {@link #printRaw(CharSequence)} and {@link #printlnRaw(CharSequence)}) gets
+ * translated via {@link NlsMessage}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -130,7 +130,7 @@ public class NlsWriter extends AppendableWriter {
    * {@inheritDoc}
    */
   @Override
-  public Writer append(CharSequence csq, int start, int end) throws IOException {
+  public NlsWriter append(CharSequence csq, int start, int end) throws RuntimeIoException {
 
     return append(csq.subSequence(start, end));
   }
@@ -139,7 +139,7 @@ public class NlsWriter extends AppendableWriter {
    * {@inheritDoc}
    */
   @Override
-  public Writer append(CharSequence csq) throws IOException {
+  public NlsWriter append(CharSequence csq) throws RuntimeIoException {
 
     if (csq == null) {
       super.append("null");
@@ -157,10 +157,10 @@ public class NlsWriter extends AppendableWriter {
    * 
    * @param csq is the {@link NlsMessage#getInternationalizedMessage()
    *        internationalized message} to write.
-   * @throws IOException if an error occurred while
+   * @throws RuntimeIoException if an error occurred while
    *         {@link Appendable#append(CharSequence) writing}.
    */
-  public void print(CharSequence csq) throws IOException {
+  public void print(CharSequence csq) throws RuntimeIoException {
 
     append(csq);
   }
@@ -169,10 +169,10 @@ public class NlsWriter extends AppendableWriter {
    * This method writes an {@link NlsMessage}.
    * 
    * @param message is the {@link NlsMessage} to write.
-   * @throws IOException if an error occurred while
+   * @throws RuntimeIoException if an error occurred while
    *         {@link Appendable#append(CharSequence) writing}.
    */
-  public void print(NlsMessage message) throws IOException {
+  public void print(NlsMessage message) throws RuntimeIoException {
 
     message.getLocalizedMessage(this.locale, this.resolver, getAppendable());
   }
@@ -180,10 +180,10 @@ public class NlsWriter extends AppendableWriter {
   /**
    * This method writes a newline (line-separator).
    * 
-   * @throws IOException if an error occurred while
+   * @throws RuntimeIoException if an error occurred while
    *         {@link Appendable#append(CharSequence) writing}.
    */
-  public void println() throws IOException {
+  public void println() throws RuntimeIoException {
 
     super.append(this.newline);
   }
@@ -194,10 +194,10 @@ public class NlsWriter extends AppendableWriter {
    * 
    * @param csq is the {@link NlsMessage#getInternationalizedMessage()
    *        internationalized message} to write.
-   * @throws IOException if an error occurred while
+   * @throws RuntimeIoException if an error occurred while
    *         {@link Appendable#append(CharSequence) writing}.
    */
-  public void println(CharSequence csq) throws IOException {
+  public void println(CharSequence csq) throws RuntimeIoException {
 
     append(csq);
     super.append(this.newline);
@@ -209,10 +209,11 @@ public class NlsWriter extends AppendableWriter {
    * or already internationalized.
    * 
    * @param text is the raw text to write.
-   * @throws IOException if an error occurred while
-   *         {@link Appendable#append(CharSequence) writing}.
+   * @throws RuntimeIoException if an {@link java.io.IOException} occurred while
+   *         {@link Appendable#append(CharSequence) writing} to the underlying
+   *         {@link Appendable}.
    */
-  public void printRaw(CharSequence text) throws IOException {
+  public void printRaw(CharSequence text) throws RuntimeIoException {
 
     super.append(text);
   }
@@ -223,10 +224,11 @@ public class NlsWriter extends AppendableWriter {
    * or already internationalized.
    * 
    * @param text is the raw text to write.
-   * @throws IOException if an error occurred while
-   *         {@link Appendable#append(CharSequence) writing}.
+   * @throws RuntimeIoException if an {@link java.io.IOException} occurred while
+   *         {@link Appendable#append(CharSequence) writing} to the underlying
+   *         {@link Appendable}.
    */
-  public void printlnRaw(CharSequence text) throws IOException {
+  public void printlnRaw(CharSequence text) throws RuntimeIoException {
 
     super.append(text);
     super.append(this.newline);

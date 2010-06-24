@@ -86,7 +86,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public Object convert(Object value, Object valueSource, GenericType<? extends Object> targetType)
       throws ValueException {
 

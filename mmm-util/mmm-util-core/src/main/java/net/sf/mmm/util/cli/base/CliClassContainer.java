@@ -262,10 +262,7 @@ public class CliClassContainer {
    */
   protected static class CliModeCycle {
 
-    /**
-     * The {@link List} of {@link CliModeContainer modes} that build a cycle in
-     * reverse order.
-     */
+    /** @see #getInverseCycle() */
     private List<CliModeContainer> inverseCycle;
 
     /** The start node where the detected cycle begins. */
@@ -285,7 +282,10 @@ public class CliClassContainer {
     }
 
     /**
-     * @return the inverseCycle
+     * @return the {@link List} of {@link CliModeContainer modes} that build a
+     *         cycle. It is stored in reverse order so the last node is the
+     *         start of the cycle from top-level. The first node will be the
+     *         same node as the last one.
      */
     public List<CliModeContainer> getInverseCycle() {
 

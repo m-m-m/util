@@ -5,22 +5,30 @@ package net.sf.mmm.util.text.base;
 
 import java.io.IOException;
 import java.text.BreakIterator;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.HorizontalAlignment;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
 import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
+import net.sf.mmm.util.text.api.TextTableInfo;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 import net.sf.mmm.util.text.api.TextColumnInfo.IndentationMode;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the default implementation of the
@@ -73,11 +81,157 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   }
 
   /**
+   * This method calculates the {@link ColumnState#getWidth() width} of the
+   * columns to {@link TextColumnInfo#WIDTH_AUTO_ADJUST auto-adjust}.
+   * 
+   * @param columnStates are the {@link ColumnState}s.
+   * @param tableInfo is the {@link TextTableInfo} containing the available
+   *        {@link TextTableInfo#getWidth() width}.
+   */
+  protected void autoAdjustWidthOfColumns(ColumnState[] columnStates, TextTableInfo tableInfo) {
+
+    int tableWidth = tableInfo.getWidth();
+    if (tableWidth == TextColumnInfo.WIDTH_AUTO_ADJUST) {
+      // if table width is not set (auto adjust) then the width of all columns
+      // have to be set...
+      for (int i = 0; i < columnStates.length; i++) {
+        if (columnStates[i].width == TextColumnInfo.WIDTH_AUTO_ADJUST) {
+          // better exception message?
+          throw new NlsIllegalArgumentException(Integer.valueOf(tableWidth),
+              "tableInfo.width && columnInfo[" + i + "].width");
+        }
+      }
+      return;
+    }
+    if (tableWidth <= 0) {
+      throw new NlsIllegalArgumentException(Integer.valueOf(tableWidth), "tableInfo.width");
+    }
+    int autoAdjustColumnCount = 0;
+    int staticTableWidth = 0;
+    ColumnState lastAutoAdjustColumn = null;
+    long autoAdjustColumnTotalTextLength = 0;
+    // find columns that need auto adjustment and determine static width
+    for (int i = 0; i < columnStates.length; i++) {
+      TextColumnInfo columnInfo = columnStates[i].getColumnInfo();
+      staticTableWidth = staticTableWidth + columnInfo.getBorderWidth();
+      int width = columnStates[i].width;
+      if (width == TextColumnInfo.WIDTH_AUTO_ADJUST) {
+        autoAdjustColumnCount++;
+        lastAutoAdjustColumn = columnStates[i];
+        autoAdjustColumnTotalTextLength = autoAdjustColumnTotalTextLength
+            + columnStates[i].getText().length();
+      } else {
+        staticTableWidth = staticTableWidth + width;
+      }
+    }
+
+    // remaining width to be divided over the auto-adjust columns
+    int widthRemaining = tableWidth - staticTableWidth;
+    if (widthRemaining < autoAdjustColumnCount) {
+      // is there less than 1 character left for each auto-adjust columns (or
+      // less than 0 for no such column).
+      throw new ValueOutOfRangeException(Integer.valueOf(tableWidth), Integer
+          .valueOf(staticTableWidth + autoAdjustColumnCount), Integer.valueOf(Integer.MAX_VALUE),
+          "tableInfo.width");
+    }
+
+    // perform auto adjustment...
+    if (autoAdjustColumnCount > 0) {
+      if (autoAdjustColumnCount == 1) {
+        // easy case: single column gets the remaining space
+        lastAutoAdjustColumn.width = widthRemaining;
+      } else {
+        // actual adjustment algorithm ...
+        AutoAdjustInfo[] autoAdjustInfoArray = new AutoAdjustInfo[autoAdjustColumnCount];
+        int autoAdjustInfoIndex = 0;
+        // pass 1
+        int widthUsed = 0;
+        for (int i = 0; i < columnStates.length; i++) {
+          if (columnStates[i].getColumnInfo().getWidth() == TextColumnInfo.WIDTH_AUTO_ADJUST) {
+            AutoAdjustInfo autoAdjustInfo = new AutoAdjustInfo(columnStates[i]);
+            autoAdjustInfoArray[autoAdjustInfoIndex] = autoAdjustInfo;
+            double ratio = autoAdjustInfo.getTextLengthRation(autoAdjustColumnTotalTextLength);
+            int calculatedWidth = (int) (widthRemaining * ratio);
+            if ((calculatedWidth < 1) && (ratio > 0)) {
+              // 0 is simply too small :)
+              calculatedWidth = 1;
+            }
+            if (calculatedWidth > autoAdjustInfo.lineLengthMax) {
+              // width of column should never be greater than maximum line
+              calculatedWidth = autoAdjustInfo.lineLengthMax;
+            }
+            autoAdjustInfo.columnState.setWidth(calculatedWidth);
+            widthUsed = widthUsed + calculatedWidth;
+            autoAdjustInfoIndex++;
+          }
+        }
+        int delta = widthUsed - widthRemaining;
+        if (delta != 0) {
+          SortedSet<AutoAdjustInfo> autoAdjustInfoSet = new TreeSet<DefaultLineWrapper.AutoAdjustInfo>();
+          if (delta > 0) {
+            // width is too high because of rounding errors,
+            // delta should typically be 1
+            for (AutoAdjustInfo autoAdjustInfo : autoAdjustInfoArray) {
+              if (autoAdjustInfo.columnState.width >= 2) {
+                autoAdjustInfoSet.add(autoAdjustInfo);
+              }
+            }
+            while (delta > 0) {
+              Iterator<AutoAdjustInfo> iterator = autoAdjustInfoSet.iterator();
+              if (!iterator.hasNext()) {
+                throw new NlsIllegalStateException();
+              }
+              while (iterator.hasNext()) {
+                AutoAdjustInfo autoAdjustInfo = iterator.next();
+                autoAdjustInfo.columnState.width--;
+                delta--;
+                if (delta == 0) {
+                  return;
+                }
+                if (autoAdjustInfo.columnState.width < 2) {
+                  iterator.remove();
+                }
+              }
+            }
+          } else {
+            // we have chars left to divide ...
+            for (AutoAdjustInfo autoAdjustInfo : autoAdjustInfoArray) {
+              if (autoAdjustInfo.columnState.width < autoAdjustInfo.lineLengthMax) {
+                autoAdjustInfoSet.add(autoAdjustInfo);
+              }
+            }
+            while (delta < 0) {
+              Iterator<AutoAdjustInfo> iterator = autoAdjustInfoSet.iterator();
+              if (!iterator.hasNext()) {
+                return;
+              }
+              while (iterator.hasNext()) {
+                AutoAdjustInfo autoAdjustInfo = iterator.next();
+                autoAdjustInfo.columnState.width++;
+                delta++;
+                if (delta == 0) {
+                  return;
+                }
+                if (autoAdjustInfo.columnState.width >= autoAdjustInfo.lineLengthMax) {
+                  iterator.remove();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
-  public int wrap(Appendable appendable, TextColumn... columns) {
+  public int wrap(Appendable appendable, TextTableInfo tableInfo, TextColumn... columns) {
 
     try {
+      NlsNullPointerException.checkNotNull(Appendable.class, appendable);
+      NlsNullPointerException.checkNotNull(TextTableInfo.class, tableInfo);
+      NlsNullPointerException.checkNotNull(TextColumn[].class, columns);
       if (columns.length == 0) {
         throw new NlsIllegalArgumentException(Integer.valueOf(0), "columns.length");
       }
@@ -88,6 +242,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
         columnStates[i] = new ColumnState(columns[i].getText(), columns[i].getColumnInfo(),
             this.hyphenatorBuilder);
       }
+      autoAdjustWidthOfColumns(columnStates, tableInfo);
+      assert (verifyWithOfColumns(columnStates, tableInfo));
+
       CellBuffer textFragmentBuilder = new CellBuffer();
       while (todo) {
         todo = false;
@@ -102,8 +259,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
           appendable.append(state.getColumnInfo().getBorderRight());
         }
         if (todo) {
-          appendable.append(columnStates[columnStates.length - 1].getColumnInfo()
-              .getLineSeparator());
+          appendable.append(tableInfo.getLineSeparator());
           newLines++;
         }
       }
@@ -111,6 +267,35 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.WRITE);
     }
+  }
+
+  /**
+   * This method verifies that the width of the columns are sane.
+   * 
+   * @param columnStates are the {@link ColumnState}s.
+   * @param tableInfo is the {@link TextTableInfo}.
+   * @return <code>true</code> if the width is sane, <code>false</code>
+   *         otherwise.
+   */
+  private boolean verifyWithOfColumns(ColumnState[] columnStates, TextTableInfo tableInfo) {
+
+    int tableWidth = tableInfo.getWidth();
+    if (tableWidth != TextColumnInfo.WIDTH_AUTO_ADJUST) {
+      int calculatedWidth = 0;
+      for (ColumnState columnState : columnStates) {
+        if (columnState.width < 0) {
+          throw new AssertionError("columnWidth=" + columnState.width);
+          // return false;
+        }
+        calculatedWidth = calculatedWidth + columnState.width
+            + columnState.getColumnInfo().getBorderWidth();
+      }
+      if (calculatedWidth != tableWidth) {
+        throw new AssertionError("with=" + tableWidth + ", sum-of-columns=" + calculatedWidth);
+        // return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -169,7 +354,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
             throw new IllegalCaseException(IndentationMode.class, state.getColumnInfo()
                 .getIndentationMode());
         }
-        todo = state.proceedTextSegment();
+        state.proceedTextSegment();
+        todo = false;
       } else {
         // currentSegment is no newline event...
         int segmentStartOffset = state.textIndex - currentSegment.startIndex;
@@ -269,31 +455,35 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   protected void append(Appendable appendable, ColumnState state, CellBuffer cellBuffer)
       throws IOException {
 
-    TextColumnInfo columnInfo = state.getColumnInfo();
-    int width = columnInfo.getWidth();
     boolean doIndentThisLine = false;
-    if (width >= TextColumnInfo.MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN) {
-      if (state.indent) {
-        doIndentThisLine = true;
-        width = width - columnInfo.getIndent().length();
-        // omit specific characters at beginning of this line...
-        String text = state.getText();
-        while (isIn(text.charAt(state.textIndex), columnInfo.getOmitChars())) {
-          state.textIndex++;
-          if (state.textIndex >= state.currentSegment.endIndex) {
-            boolean todo = state.proceedTextSegment();
-            if (!todo) {
-              break;
+    int width = state.getWidth();
+    if (state.isComplete()) {
+      cellBuffer.reset(width);
+    } else {
+      TextColumnInfo columnInfo = state.getColumnInfo();
+      if (width >= TextColumnInfo.MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN) {
+        if (state.indent) {
+          doIndentThisLine = true;
+          width = width - columnInfo.getIndent().length();
+          // omit specific characters at beginning of this line...
+          String text = state.getText();
+          while (isIn(text.charAt(state.textIndex), columnInfo.getOmitChars())) {
+            state.textIndex++;
+            if (state.textIndex >= state.currentSegment.endIndex) {
+              boolean todo = state.proceedTextSegment();
+              if (!todo) {
+                break;
+              }
             }
           }
         }
+        state.indent = true;
       }
-      state.indent = true;
+      // clear to reuse...
+      cellBuffer.reset(width);
+      // fill up buffer with cells payload...
+      appendCellBuffer(state, cellBuffer);
     }
-    // clear to reuse...
-    cellBuffer.reset(width);
-    // fill up buffer with cells payload...
-    appendCellBuffer(state, cellBuffer);
     // append payload with indent and alignment...
     appendWithAlignment(appendable, state, doIndentThisLine, cellBuffer);
   }
@@ -571,6 +761,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /** @see #getTextIndex() */
     private int textIndex;
 
+    /** @see #getWidth() */
+    private int width;
+
     /** @see #isIndent() */
     private boolean indent;
 
@@ -596,10 +789,12 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       this.hyphenator = hyphenatorBuilder.getHyphenator(locale);
       this.segmentIndex = 0;
       this.textIndex = 0;
+      this.width = columnInfo.getWidth();
       this.breakIteratorIndex = 0;
       this.indent = false;
       if ((columnInfo.getIndent() == null)
-          || (columnInfo.getIndent().length() >= columnInfo.getWidth())) {
+          || ((columnInfo.getWidth() != TextColumnInfo.WIDTH_AUTO_ADJUST) && (columnInfo
+              .getIndent().length() >= columnInfo.getWidth()))) {
         throw new NlsIllegalArgumentException(columnInfo.getIndent(), "TextColumnInfo.indent");
       }
       this.currentSegment = next(new TextSegment(text, this.hyphenator));
@@ -687,35 +882,36 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       if (end == BreakIterator.DONE) {
         end = length;
       }
-      TextSegmentType type;
-      if ((firstChar == '\n') || (firstChar == '\r')) {
-        type = TextSegmentType.NEWLINE;
-        if (newIndex < end) {
-          char next = text.charAt(newIndex);
-          if ((next == '\n') || (next == '\r')) {
-            if (next != firstChar) {
+      TextSegmentType type = getCharacterType(firstChar);
+      switch (type) {
+        case NEWLINE:
+          if (newIndex < end) {
+            char next = text.charAt(newIndex);
+            if ((getCharacterType(next) == TextSegmentType.NEWLINE) && (next != firstChar)) {
               newIndex++;
             }
           }
-        }
-      } else if (Character.isLetter(firstChar)) {
-        type = TextSegmentType.WORD;
-        while ((newIndex < end) && Character.isLetter(text.charAt(newIndex))) {
-          newIndex++;
-        }
-      } else if (isPunctuationCharacter(firstChar)) {
-        type = TextSegmentType.PUNCTUATION_CHARACTER;
-      } else if (isNonbreakingCharacter(firstChar)) {
-        type = TextSegmentType.NON_BREAKING_CHARACTER;
-      } else {
-        type = TextSegmentType.CHARACTERS;
-        while (newIndex < end) {
-          char c = text.charAt(newIndex);
-          if (Character.isLetter(c) || isPunctuationCharacter(c) || isNonbreakingCharacter(c)) {
-            break;
+          break;
+        case WORD:
+          while ((newIndex < end) && Character.isLetter(text.charAt(newIndex))) {
+            newIndex++;
           }
-          newIndex++;
-        }
+          break;
+        case PUNCTUATION_CHARACTER:
+          break;
+        case NON_BREAKING_CHARACTER:
+          break;
+        case CHARACTERS:
+          while (newIndex < end) {
+            char c = text.charAt(newIndex);
+            if (getCharacterType(c) != TextSegmentType.CHARACTERS) {
+              break;
+            }
+            newIndex++;
+          }
+          break;
+        default :
+          throw new IllegalCaseException(TextSegmentType.class, type);
       }
       textSegment.initialize(this.segmentIndex, newIndex, type);
       this.segmentIndex = newIndex;
@@ -723,38 +919,26 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method determines if the given character is a
-     * {@link TextSegmentType#NON_BREAKING_CHARACTER non-breaking character}.
+     * This method gets the {@link TextSegmentType} corresponding to the given
+     * character.
      * 
      * @param c is the character to check.
-     * @return <code>true</code> if the given character is a
-     *         {@link TextSegmentType#NON_BREAKING_CHARACTER non-breaking
-     *         character}, <code>false</code> otherwise.
+     * @return the corresponding {@link TextSegmentType}.
      */
-    private static boolean isNonbreakingCharacter(char c) {
+    private static TextSegmentType getCharacterType(char c) {
 
-      if ((c == UnicodeUtil.NON_BREAKING_SPACE) || (c == ',') || (c == '!') || (c == ';')
+      if ((c == '\n') || (c == '\r')) {
+        return TextSegmentType.NEWLINE;
+      } else if ((c == UnicodeUtil.NON_BREAKING_SPACE) || (c == ',') || (c == '!') || (c == ';')
           || (c == '?')) {
-        return true;
+        return TextSegmentType.NON_BREAKING_CHARACTER;
+      } else if ((c == '.') || (c == ',') || (c == '!') || (c == ';') || (c == '?')) {
+        return TextSegmentType.PUNCTUATION_CHARACTER;
+      } else if (Character.isLetter(c)) {
+        return TextSegmentType.WORD;
+      } else {
+        return TextSegmentType.CHARACTERS;
       }
-      return false;
-    }
-
-    /**
-     * This method determines if the given character is a
-     * {@link TextSegmentType#PUNCTUATION_CHARACTER punctuation character}.
-     * 
-     * @param c is the character to check.
-     * @return <code>true</code> if the given character is a
-     *         {@link TextSegmentType#PUNCTUATION_CHARACTER punctuation
-     *         character}, <code>false</code> otherwise.
-     */
-    private static boolean isPunctuationCharacter(char c) {
-
-      if ((c == '.') || (c == ',') || (c == '!') || (c == ';') || (c == '?')) {
-        return true;
-      }
-      return false;
     }
 
     /**
@@ -787,6 +971,26 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     public void setIndent(boolean indent) {
 
       this.indent = indent;
+    }
+
+    /**
+     * This method gets the physical {@link TextColumnInfo#getWidth() width}. A
+     * value of {@link TextColumnInfo#WIDTH_AUTO_ADJUST} is replaced with a
+     * physical value.
+     * 
+     * @return the physical {@link TextColumnInfo#getWidth() width}.
+     */
+    public int getWidth() {
+
+      return this.width;
+    }
+
+    /**
+     * @param width is the width to set
+     */
+    public void setWidth(int width) {
+
+      this.width = width;
     }
 
     /**
@@ -895,6 +1099,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      */
     protected int append(CharSequence text, int start, int end) {
 
+      if (text.subSequence(start, end).toString().contains("\n")) {
+        throw new IllegalStateException();
+      }
       this.buffer.append(text, start, end);
       this.rest = this.rest - (end - start);
       assert (this.rest >= 0);
@@ -935,6 +1142,77 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       return this.buffer.toString();
     }
 
+  }
+
+  /**
+   * @see DefaultLineWrapper#autoAdjustWidthOfColumns(ColumnState[],
+   *      TextTableInfo)
+   */
+  private static final class AutoAdjustInfo implements Comparable<AutoAdjustInfo> {
+
+    /** The {@link ColumnState}. */
+    private final ColumnState columnState;
+
+    /** The number of newlines + 1. */
+    private int lineCount;
+
+    /** The maximum length of a single unwrapped line. */
+    private int lineLengthMax;
+
+    /**
+     * The constructor.
+     * 
+     * @param columnState is the {@link ColumnState}.
+     */
+    private AutoAdjustInfo(ColumnState columnState) {
+
+      super();
+      this.columnState = columnState;
+      String text = columnState.getText();
+      int textLength = text.length();
+      int index = 0;
+      while (index >= 0) {
+        this.lineCount++;
+        int nextIndex = text.indexOf(StringUtil.LINE_SEPARATOR_LF, index);
+        int length = nextIndex - index;
+        if (nextIndex < 0) {
+          length = textLength - index;
+          index = -1;
+        } else {
+          index = nextIndex + 1;
+        }
+        if (length > this.lineLengthMax) {
+          this.lineLengthMax = length;
+        }
+      }
+      // this.lineLengthAvg = textLength / this.lineCount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int compareTo(AutoAdjustInfo other) {
+
+      NlsNullPointerException.checkNotNull(AutoAdjustInfo.class, other);
+      return this.columnState.width - other.columnState.width;
+    }
+
+    /**
+     * 
+     * @param totalTextLength is the total {@link String#length() length} of the
+     *        {@link TextColumn#getText() text} of all auto-adjust columns.
+     * @return the ratio of the text-length of this column according to the
+     *         total text length.
+     */
+    public double getTextLengthRation(double totalTextLength) {
+
+      if (totalTextLength == 0) {
+        return 0;
+      } else {
+        return this.columnState.getText().length() / totalTextLength;
+      }
+
+    }
   }
 
 }

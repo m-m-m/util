@@ -17,6 +17,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the test-case for {@link CliMode}.
@@ -85,7 +86,8 @@ public class CliStateTest {
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
 
     CliState state;
-    state = new CliState(OptionTest1.class, descriptorBuilder);
+    state = new CliState(OptionTest1.class, descriptorBuilder, LoggerFactory
+        .getLogger(CliStateTest.class));
     List<CliOptionContainer> optionList = state.getOptions();
     Assert.assertNotNull(optionList);
     Assert.assertEquals(2, optionList.size());
@@ -116,7 +118,8 @@ public class CliStateTest {
     // self dependency...
     CliState state = null;
     try {
-      state = new CliState(CyclicTest1.class, descriptorBuilderFactory);
+      state = new CliState(CyclicTest1.class, descriptorBuilderFactory, LoggerFactory
+          .getLogger(CliStateTest.class));
       Assert.fail();
     } catch (CliException e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();
@@ -128,7 +131,8 @@ public class CliStateTest {
 
     // complex dependency...
     try {
-      state = new CliState(CyclicTest2.class, descriptorBuilderFactory);
+      state = new CliState(CyclicTest2.class, descriptorBuilderFactory, LoggerFactory
+          .getLogger(CliStateTest.class));
       Assert.fail();
     } catch (CliException e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();

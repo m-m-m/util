@@ -17,7 +17,10 @@ public enum IoMode {
   /** Indicates that data is written to a target. */
   WRITE,
 
-  /** Indicates that a handle is closed. */
-  CLOSE
+  /** Indicates that a handle is {@link java.io.Closeable#close() closed}. */
+  CLOSE,
+
+  /** Indicates that a handle is {@link java.io.Flushable#flush() flushed}. */
+  FLUSH
 
 }

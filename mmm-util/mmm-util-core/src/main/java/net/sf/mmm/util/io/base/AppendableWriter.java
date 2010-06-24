@@ -8,6 +8,9 @@ import java.io.Flushable;
 import java.io.IOException;
 import java.io.Writer;
 
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+
 /**
  * This class is a {@link Writer} that adapts an {@link Appendable}.
  * 
@@ -34,10 +37,14 @@ public class AppendableWriter extends Writer {
    * {@inheritDoc}
    */
   @Override
-  public void close() throws IOException {
+  public void close() throws RuntimeIoException {
 
-    if (this.appendable instanceof Closeable) {
-      ((Closeable) this.appendable).close();
+    try {
+      if (this.appendable instanceof Closeable) {
+        ((Closeable) this.appendable).close();
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.CLOSE);
     }
   }
 
@@ -45,10 +52,14 @@ public class AppendableWriter extends Writer {
    * {@inheritDoc}
    */
   @Override
-  public void flush() throws IOException {
+  public void flush() throws RuntimeIoException {
 
-    if (this.appendable instanceof Flushable) {
-      ((Flushable) this.appendable).flush();
+    try {
+      if (this.appendable instanceof Flushable) {
+        ((Flushable) this.appendable).flush();
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.FLUSH);
     }
   }
 
@@ -56,37 +67,49 @@ public class AppendableWriter extends Writer {
    * {@inheritDoc}
    */
   @Override
-  public Writer append(char c) throws IOException {
+  public AppendableWriter append(char c) throws RuntimeIoException {
 
-    this.appendable.append(c);
-    return this;
+    try {
+      this.appendable.append(c);
+      return this;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Writer append(CharSequence csq) throws IOException {
+  public AppendableWriter append(CharSequence csq) throws RuntimeIoException {
 
-    this.appendable.append(csq);
-    return this;
+    try {
+      this.appendable.append(csq);
+      return this;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Writer append(CharSequence csq, int start, int end) throws IOException {
+  public AppendableWriter append(CharSequence csq, int start, int end) throws RuntimeIoException {
 
-    this.appendable.append(csq, start, end);
-    return this;
+    try {
+      this.appendable.append(csq, start, end);
+      return this;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void write(char[] buffer) throws IOException {
+  public void write(char[] buffer) throws RuntimeIoException {
 
     append(new String(buffer));
   }
@@ -95,7 +118,7 @@ public class AppendableWriter extends Writer {
    * {@inheritDoc}
    */
   @Override
-  public void write(String string) throws IOException {
+  public void write(String string) throws RuntimeIoException {
 
     append(string);
   }
@@ -104,7 +127,7 @@ public class AppendableWriter extends Writer {
    * {@inheritDoc}
    */
   @Override
-  public void write(String string, int offset, int length) throws IOException {
+  public void write(String string, int offset, int length) throws RuntimeIoException {
 
     append(string, offset, offset + length);
   }
@@ -113,7 +136,7 @@ public class AppendableWriter extends Writer {
    * {@inheritDoc}
    */
   @Override
-  public void write(char[] buffer, int offset, int length) throws IOException {
+  public void write(char[] buffer, int offset, int length) throws RuntimeIoException {
 
     append(new String(buffer, offset, length));
   }

@@ -7,6 +7,7 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
+import net.sf.mmm.util.text.api.TextTableInfo;
 
 /**
  * This is the abstract base-implementation of the {@link LineWrapper}
@@ -28,29 +29,32 @@ public abstract class AbstractLineWrapper extends AbstractLoggable implements Li
   /**
    * {@inheritDoc}
    */
-  public int wrap(Appendable appendable, String columnText, TextColumnInfo columnInfo) {
+  public int wrap(Appendable appendable, TextTableInfo tableInfo, String columnText,
+      TextColumnInfo columnInfo) {
 
-    return wrap(appendable, new TextColumn[] { new TextColumn(columnText, columnInfo) });
+    return wrap(appendable, tableInfo, new TextColumn[] { new TextColumn(columnText, columnInfo) });
   }
 
   /**
    * {@inheritDoc}
    */
-  public int wrap(Appendable appendable, String column1Text, TextColumnInfo column1Info,
-      String column2Text, TextColumnInfo column2Info) {
+  public int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text,
+      TextColumnInfo column1Info, String column2Text, TextColumnInfo column2Info) {
 
-    return wrap(appendable, new TextColumn[] { new TextColumn(column1Text, column1Info),
+    return wrap(appendable, tableInfo, new TextColumn[] { new TextColumn(column1Text, column1Info),
         new TextColumn(column2Text, column2Info) });
   }
 
   /**
    * {@inheritDoc}
    */
-  public int wrap(Appendable appendable, String column1Text, TextColumnInfo column1Info,
-      String column2Text, TextColumnInfo column2Info, String column3Text, TextColumnInfo column3Info) {
+  // CHECKSTYLE:OFF (more than 7 parameters required)
+  public int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text,
+      TextColumnInfo column1Info, String column2Text, TextColumnInfo column2Info,
+      String column3Text, TextColumnInfo column3Info) {
 
-    return wrap(appendable, new TextColumn[] { new TextColumn(column1Text, column1Info),
+    return wrap(appendable, tableInfo, new TextColumn[] { new TextColumn(column1Text, column1Info),
         new TextColumn(column2Text, column2Info), new TextColumn(column3Text, column3Info) });
   }
-
+  // CHECKSTYLE:ON
 }

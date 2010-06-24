@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import java.util.Locale;
+import javax.annotation.Resource;
 
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
@@ -12,15 +12,12 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to an {@link Enum}. It supports objects given as
- * {@link CharSequence} (e.g. {@link String}) or {@link Number} as well as an
- * {@link Enum} having an value with the same {@link Enum#name() name}.
+ * {@link Object} to a {@link Boolean}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, Enum> {
+public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object, Boolean> {
 
   /** @see #getStringUtil() */
   private StringUtil stringUtil;
@@ -28,7 +25,7 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
   /**
    * The constructor.
    */
-  public ValueConverterToEnum() {
+  public ValueConverterToBoolean() {
 
     super();
   }
@@ -48,9 +45,9 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
    * 
    * @param stringUtil is the {@link StringUtil} instance.
    */
+  @Resource
   public void setStringUtil(StringUtil stringUtil) {
 
-    getInitializationState().requireNotInitilized();
     this.stringUtil = stringUtil;
   }
 
@@ -77,27 +74,21 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
   /**
    * {@inheritDoc}
    */
-  public Class<Enum> getTargetType() {
+  public Class<Boolean> getTargetType() {
 
-    return Enum.class;
+    return Boolean.class;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Enum convert(Object value, Object valueSource, Class<? extends Enum> targetClass) {
+  public Boolean convert(Object value, Object valueSource, Class<? extends Boolean> targetClass) {
 
     if (value == null) {
       return null;
     }
-    if (value instanceof CharSequence) {
-      String name = this.stringUtil.fromCamlCase(value.toString(), '_').toUpperCase(Locale.US);
-      return Enum.valueOf(targetClass, name);
-    } else if (value instanceof Enum<?>) {
-      String name = ((Enum<?>) value).name();
-      return Enum.valueOf(targetClass, name);
-    }
-    return null;
+    String valueAsString = value.toString();
+    return this.stringUtil.parseBoolean(valueAsString);
   }
 
 }

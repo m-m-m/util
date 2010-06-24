@@ -31,7 +31,7 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
    * 
    * @param converter is the converter to add.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes" })
   public void addConverterComponent(ValueConverter<?, ?> converter) {
 
     if (converter instanceof AbstractRecursiveValueConverter) {
@@ -49,6 +49,7 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   @Override
   protected void doInitialize() {
 
+    addConverterComponent(new ValueConverterToBoolean());
     addConverterComponent(new ValueConverterToDate());
     addConverterComponent(new ValueConverterToCalendar());
     addConverterComponent(new ValueConverterToNumber());

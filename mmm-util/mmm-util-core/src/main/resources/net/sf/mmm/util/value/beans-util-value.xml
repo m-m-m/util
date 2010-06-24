@@ -18,6 +18,7 @@
   <bean id="net.sf.mmm.util.value.api.ComposedValueConverter" class="net.sf.mmm.util.value.impl.ComposedValueConverterImpl">
     <property name="converters">
       <util:list>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToBoolean"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToDate"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCalendar"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToNumber"/>

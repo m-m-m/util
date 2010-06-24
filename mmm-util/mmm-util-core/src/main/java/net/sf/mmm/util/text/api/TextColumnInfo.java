@@ -6,14 +6,12 @@ package net.sf.mmm.util.text.api;
 import java.util.Locale;
 
 import net.sf.mmm.util.lang.api.HorizontalAlignment;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This is the interface for the layout-configuration of a text column.<br>
+ * This is a Java-bean for the layout-configuration of a text column.<br>
  * It contains the {@link TextColumnInfo#getWidth() width},
  * {@link TextColumnInfo#getAlignment() alignment},
- * {@link TextColumnInfo#getIndent() indent} and various other meta-information
+ * {@link TextColumnInfo#getIndent() indent}, and various other meta-information
  * for the layout of a textual column.
  * 
  * @see LineWrapper
@@ -26,15 +24,20 @@ public class TextColumnInfo {
   /**
    * The minimum {@link #getWidth() width} of a {@link TextColumnInfo column} in
    * order that {@link #getIndent() indentation} and {@link Hyphenator
-   * hyphenation} will be active. The value is {@value} .
+   * hyphenation} will be active. The value is
+   * {@value #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN}.
    */
   public static final int MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN = 4;
 
   /**
-   * The default {@link #getWidth() width}. This default is suitable for a
-   * single-column layout.
+   * The value used for {@link #getWidth() width} of a {@link TextColumnInfo
+   * column} in order to activate automatic adjustment of the width. The value
+   * is {@value #WIDTH_AUTO_ADJUST}. Please note that automatic adjustment for
+   * multiple columns needs to pre-process the entire
+   * {@link TextColumn#getText() text} of these columns what costs a little bit
+   * of additional performance.
    */
-  public static final int DEFAULT_WIDTH = 80;
+  public static final int WIDTH_AUTO_ADJUST = -1;
 
   /** @see #getWidth() */
   private int width;
@@ -66,18 +69,15 @@ public class TextColumnInfo {
   /** @see #getLocale() */
   private Locale locale;
 
-  /** @see #getLineSeparator() */
-  private String lineSeparator;
-
   /**
    * The constructor.
    */
   public TextColumnInfo() {
 
     super();
-    this.width = DEFAULT_WIDTH;
     this.borderLeft = "";
     this.borderRight = "";
+    this.width = WIDTH_AUTO_ADJUST;
     this.indent = "";
     this.alignment = HorizontalAlignment.LEFT;
     this.filler = ' ';
@@ -85,20 +85,21 @@ public class TextColumnInfo {
     this.omitChars = new char[] { ' ' };
     this.indentationMode = IndentationMode.NO_INDENT_AFTER_DOUBLE_NEWLINE;
     this.locale = Locale.getDefault();
-    this.lineSeparator = StringUtil.LINE_SEPARATOR;
   }
 
   /**
    * This method gets the width of this column in characters excluding the
    * {@link #getBorderLeft() left} and {@link #getBorderRight() right border}.<br>
-   * The value has to be positive. A reasonable value is at least 5, typically
-   * more than 10. However you may use a very low values (&lt;5) for rendering a
-   * small column of a large table, but then do NOT expect nice results if text
-   * is really wrapped.
+   * The value has to be positive or may have the value of
+   * {@link #WIDTH_AUTO_ADJUST} (the default). A reasonable value is at least 5,
+   * typically more than 10. However you may use a very low values (&lt;5) for
+   * rendering a small column of a large table, but then do NOT expect nice
+   * results if text is really wrapped.
    * 
    * @see #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN
    * 
-   * @return the width of this column.
+   * @return the width of this column or {@link #WIDTH_AUTO_ADJUST} for
+   *         automatic calculation of the width.
    */
   public int getWidth() {
 
@@ -111,6 +112,18 @@ public class TextColumnInfo {
   public void setWidth(int width) {
 
     this.width = width;
+  }
+
+  /**
+   * This method gets the width of the {@link #getBorderLeft() left} and
+   * {@link #getBorderRight() right border}.<br>
+   * 
+   * @return {@link #getBorderLeft()}.length() + {@link #getBorderRight()}
+   *         .length()
+   */
+  public int getBorderWidth() {
+
+    return this.borderLeft.length() + this.borderRight.length();
   }
 
   /**
@@ -326,42 +339,6 @@ public class TextColumnInfo {
   public void setLocale(Locale locale) {
 
     this.locale = locale;
-  }
-
-  /**
-   * This method gets the {@link StringUtil#LINE_SEPARATOR} used to terminate a
-   * line of text. Only the line-separator of the
-   * {@link LineWrapper#wrap(Appendable, String[], TextColumnInfo[]) last
-   * column} is used and all others are ignored.
-   * 
-   * @return the line separator string.
-   */
-  public String getLineSeparator() {
-
-    return this.lineSeparator;
-  }
-
-  /**
-   * This method sets the {@link #getLineSeparator() line-separator}.
-   * 
-   * @see StringUtil#LINE_SEPARATOR
-   * @see StringUtil#LINE_SEPARATOR_CR
-   * @see StringUtil#LINE_SEPARATOR_CRLF
-   * @see StringUtil#LINE_SEPARATOR_LF
-   * @see StringUtil#LINE_SEPARATOR_LFCR
-   * 
-   * @param newline is the new line-separator.
-   */
-  public void setLineSeparator(String newline) {
-
-    // TODO: extract to StringUtil
-    if (!StringUtil.LINE_SEPARATOR_CRLF.equals(newline)
-        && !StringUtil.LINE_SEPARATOR_LF.equals(newline)
-        && !StringUtil.LINE_SEPARATOR_LFCR.equals(newline)
-        && !StringUtil.LINE_SEPARATOR_CR.equals(newline)) {
-      throw new NlsIllegalArgumentException(newline);
-    }
-    this.lineSeparator = newline;
   }
 
   /**

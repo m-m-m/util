@@ -5,9 +5,10 @@ package net.sf.mmm.util.text.api;
 
 /**
  * This is the interface used to
- * {@link #wrap(Appendable, String, TextColumnInfo) wrap} texts if they exceed a
- * specific length. It even allows to do complex
- * {@link #wrap(Appendable, TextColumn[]) multi-column layouts} easily.
+ * {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo) wrap} texts
+ * if they exceed a specific length. It even allows to do complex
+ * {@link #wrap(Appendable, TextTableInfo, TextColumn[]) multi-column layouts}
+ * easily.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -27,6 +28,7 @@ public interface LineWrapper {
    * 
    * @param appendable is the target where to
    *        {@link Appendable#append(CharSequence) append} to.
+   * @param tableInfo is the {@link TextTableInfo} for the general layout.
    * @param columnText is the text to append. The text may contain newline
    *        characters to indicate a line-break is forced at those positions.
    * @param columnInfo holds the configuration like
@@ -39,16 +41,19 @@ public interface LineWrapper {
    *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line
    *         separators} that have been appended.
    */
-  int wrap(Appendable appendable, String columnText, TextColumnInfo columnInfo);
+  int wrap(Appendable appendable, TextTableInfo tableInfo, String columnText,
+      TextColumnInfo columnInfo);
 
   /**
-   * This method is like {@link #wrap(Appendable, String, TextColumnInfo)} but
-   * for a two-column layout.
+   * This method is like
+   * {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo)} but for a
+   * two-column layout.
    * 
-   * @see #wrap(Appendable, TextColumn[])
+   * @see #wrap(Appendable, TextTableInfo, TextColumn[])
    * 
    * @param appendable is the target where to
    *        {@link Appendable#append(CharSequence) append} to.
+   * @param tableInfo is the {@link TextTableInfo} for the general layout.
    * @param column1Text is the text for the first column.
    * @param column1Info is the {@link TextColumnInfo} of the first column.
    * @param column2Text is the text for the second column.
@@ -59,17 +64,19 @@ public interface LineWrapper {
    *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line
    *         separators} that have been appended.
    */
-  int wrap(Appendable appendable, String column1Text, TextColumnInfo column1Info, String column2Text,
-      TextColumnInfo column2Info);
+  int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text,
+      TextColumnInfo column1Info, String column2Text, TextColumnInfo column2Info);
 
   /**
-   * This method is like {@link #wrap(Appendable, String, TextColumnInfo)} but
-   * for a three-column layout.
+   * This method is like
+   * {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo)} but for a
+   * three-column layout.
    * 
-   * @see #wrap(Appendable, TextColumn[])
+   * @see #wrap(Appendable, TextTableInfo, TextColumn[])
    * 
    * @param appendable is the target where to
    *        {@link Appendable#append(CharSequence) append} to.
+   * @param tableInfo is the {@link TextTableInfo} for the general layout.
    * @param column1Text is the text for the first column.
    * @param column1Info is the {@link TextColumnInfo} of the first column.
    * @param column2Text is the text for the second column.
@@ -82,16 +89,21 @@ public interface LineWrapper {
    *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line
    *         separators} that have been appended.
    */
-  int wrap(Appendable appendable, String column1Text, TextColumnInfo column1Info, String column2Text,
-      TextColumnInfo column2Info, String column3Text, TextColumnInfo column3Info);
+  // CHECKSTYLE:OFF (more than 7 parameters required here)
+  int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text,
+      TextColumnInfo column1Info, String column2Text, TextColumnInfo column2Info,
+      String column3Text, TextColumnInfo column3Info);
+
+  // CHECKSTYLE:ON
 
   /**
    * This method is like
-   * {@link #wrap(Appendable, String, TextColumnInfo, String, TextColumnInfo, String, TextColumnInfo)}
+   * {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo, String, TextColumnInfo, String, TextColumnInfo)}
    * for any number of columns.<br>
    * 
    * @param appendable is the target where to
    *        {@link Appendable#append(CharSequence) append} to.
+   * @param tableInfo is the {@link TextTableInfo} for the general layout.
    * @param columns are the columns to {@link Appendable#append(CharSequence)
    *        append}.
    * @return the number of lines that have been
@@ -100,6 +112,6 @@ public interface LineWrapper {
    *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line
    *         separators} that have been appended.
    */
-  int wrap(Appendable appendable, TextColumn... columns);
+  int wrap(Appendable appendable, TextTableInfo tableInfo, TextColumn... columns);
 
 }

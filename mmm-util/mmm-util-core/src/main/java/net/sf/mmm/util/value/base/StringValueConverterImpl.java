@@ -156,7 +156,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public final <TARGET> TARGET convertValue(String value, Object valueSource, Class<TARGET> type,
       Type targetType) throws ValueNotSetException, WrongValueTypeException {
 

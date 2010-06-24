@@ -9,9 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
-
-import org.junit.Test;
-
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
@@ -22,6 +19,8 @@ import net.sf.mmm.util.value.impl.pojo1.MyPojoImpl;
 import net.sf.mmm.util.value.impl.pojo1.SubPojo;
 import net.sf.mmm.util.value.impl.pojo1.SubPojoImpl;
 import net.sf.mmm.util.value.impl.pojo2.MyPojo;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link ComposedValueConverterImpl}.
@@ -111,6 +110,19 @@ public class ComposedValueConverterTest {
     Assert.assertEquals(dateString, value);
     value = converter.convertValue(String.class, valueSource, String.class);
     Assert.assertEquals(String.class.getName(), value);
+  }
+
+  @Test
+  public void testConvert2Boolean() throws Exception {
+
+    ComposedValueConverter converter = getComposedValueConverter();
+    Boolean value;
+    String valueSource = "test-case";
+    // convert to string
+    value = converter.convertValue("true", valueSource, Boolean.class);
+    Assert.assertEquals(Boolean.TRUE, value);
+    boolean value2 = converter.convertValue("false", valueSource, boolean.class);
+    Assert.assertFalse(value2);
   }
 
   @Test

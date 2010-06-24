@@ -29,13 +29,14 @@ public class AbstractVersionedMainTest {
     StringBuilder outputBuffer = new StringBuilder();
     main.setStandardOutput(outputBuffer);
     int exitCode = main.run(new String[] { "--help" });
+    String error = errorBuffer.toString();
+    Assert.assertEquals("", error);
     Assert.assertEquals(0, exitCode);
     String help = outputBuffer.toString();
     System.out.println(help);
     Assert.assertTrue(help.contains(main.getClass().getName()));
     Assert.assertTrue(help.contains(TestMain.USAGE));
     // TODO
-    Assert.assertEquals("", errorBuffer.toString());
   }
 
   /**

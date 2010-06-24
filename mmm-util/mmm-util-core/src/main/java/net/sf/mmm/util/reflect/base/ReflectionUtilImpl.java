@@ -140,7 +140,9 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   @SuppressWarnings("rawtypes")
   public GenericType<?> createGenericType(Type type) {
 
-    if (type instanceof Class) {
+    if (type instanceof GenericType) {
+      return (GenericType<?>) type;
+    } else if (type instanceof Class) {
       return createGenericType((Class<?>) type);
     } else {
       return new GenericTypeImpl(type);

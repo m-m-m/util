@@ -47,11 +47,11 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
   public static final String ERR_VALUE_OUT_OF_RANGE = "The value \"{value}\" "
-      + "is not in the expected range of \"[{min}-{max}]\"!";
+      + "is not in the expected range of \"[{min} - {max}]\"!";
 
   /** @see net.sf.mmm.util.value.api.ValueOutOfRangeException */
   public static final String ERR_VALUE_OUT_OF_RANGE_SOURCE = "The value \"{value}\" from \"{source}\" "
-      + "is not in the expected range of \"[{min}-{max}]\"!";
+      + "is not in the expected range of \"[{min} - {max}]\"!";
 
   /** @see net.sf.mmm.util.value.api.ValueConvertException */
   public static final String ERR_VALUE_CONVERT = "The value \"{value}\" could NOT be converted to \"{type}\"";
@@ -208,10 +208,16 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String MSG_MAIN_MODE_VERSION_USAGE = "Print the version of this program.";
 
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  public static final String MSG_MAIN_USAGE = "Usage: {mainClass} {option}";
+  public static final String MSG_CLI_USAGE = "Usage: {mainClass} {option}";
 
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  public static final String MSG_MAIN_MODE_USAGE = "Mode {mode}:";
+  public static final String MSG_CLI_MODE_USAGE = "Mode {mode}:";
+
+  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
+  public static final String MSG_CLI_REQUIRED_OPTIONS = "Required options:";
+
+  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
+  public static final String MSG_CLI_ADDITIONAL_OPTIONS = "Additional options:";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionDuplicateException */
   public static final String ERR_CLI_OPTION_DUPLICATE = "Duplicate option \"{option}\"!";
