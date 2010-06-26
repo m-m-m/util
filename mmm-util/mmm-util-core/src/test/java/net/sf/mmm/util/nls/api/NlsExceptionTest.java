@@ -3,21 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import org.junit.Test;
-
-import net.sf.mmm.util.nls.api.NlsException;
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link net.sf.mmm.util.nls.api.NlsException}.
@@ -41,26 +36,28 @@ public class NlsExceptionTest {
     String source = "bad boy";
     NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
     String message = "NullPointerException caused by \"" + source + "\"!";
-    assertEquals(message, e.getMessage());
-    NlsTemplateResolver resolver = new NlsTemplateResolverImpl(new MyResourceBundle());
+    Assert.assertEquals(message, e.getMessage());
+    NlsTemplateResolverImpl resolver = new NlsTemplateResolverImpl(new MyResourceBundle());
+    resolver.initialize();
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";
-    assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN, resolver));
+    Assert.assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN, resolver));
 
     // test UUID and stacktrace
     UUID uuid = e.getUuid();
-    assertNotNull(uuid);
+    Assert.assertNotNull(uuid);
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
     // test stacktrace via PrintWriter in default locale
     e.printStackTrace(pw);
     pw.flush();
     String stacktrace = sw.toString();
+
     sw.getBuffer().setLength(0); // reset sw
     pw.println(e.getLocalizedMessage());
     pw.println(uuid.toString());
     pw.print("\tat ");
     pw.flush();
-    assertTrue(stacktrace.startsWith(sw.toString()));
+    Assert.assertTrue(stacktrace.contains(sw.toString()));
 
     // test German stacktrace
     StringBuilder buffer = new StringBuilder();
@@ -71,7 +68,7 @@ public class NlsExceptionTest {
     pw.println(uuid.toString());
     pw.print("\tat ");
     pw.flush();
-    assertTrue(stacktrace.startsWith(sw.toString()));
+    Assert.assertTrue(stacktrace.contains(sw.toString()));
 
     // test German stacktrace
     buffer = new StringBuilder();
@@ -82,6 +79,6 @@ public class NlsExceptionTest {
     pw.println(uuid.toString());
     pw.print("\tat ");
     pw.flush();
-    assertTrue(stacktraceDe.startsWith(sw.toString()));
+    Assert.assertTrue(stacktraceDe.contains(sw.toString()));
   }
 }
