@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Test;
-
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
 import net.sf.mmm.util.reflect.api.GenericType;
+
+import org.junit.Test;
 
 /**
  * This is the abstract test-case for {@link PojoPathNavigator} implementations.
@@ -395,11 +395,11 @@ public abstract class PojoPathNavigatorTest {
     result = navigator.getType(CollectionPojo.class, "map.key.0.1", true, context);
     assertEquals(String.class, result.getRetrievalClass());
 
-    result = navigator.getType(CollectionPojo.class, "list.0.foo", false, context);
-    assertNull(result);
+    result = navigator.getType(CollectionPojo.class, "list.0.foo.bar", false, context);
+    assertNull("" + result, result);
 
     try {
-      result = navigator.getType(CollectionPojo.class, "list.0.foo", true, context);
+      result = navigator.getType(CollectionPojo.class, "list.0.foo.bar", true, context);
       fail("Exception expected");
     } catch (PojoPathUnsafeException e) {
       // okay

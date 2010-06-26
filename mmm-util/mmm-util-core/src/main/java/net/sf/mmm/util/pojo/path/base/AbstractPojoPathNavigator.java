@@ -444,7 +444,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    *         starting at the given <code>pojo</code>. It may be
    *         <code>null</code> according to the given {@link PojoPathMode mode}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object get(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state) {
 
     Object result;
