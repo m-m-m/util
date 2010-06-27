@@ -82,8 +82,8 @@ public class NlsMessageTest {
       }
     };
     translatorDe.initialize();
-    Assert.assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(Locale.GERMAN,
-        translatorDe));
+    Assert.assertEquals(helloDe + arg + suffix,
+        testMessage.getLocalizedMessage(Locale.GERMAN, translatorDe));
   }
 
   @Test
@@ -221,7 +221,7 @@ public class NlsMessageTest {
             msg.getMessage());
     Assert
         .assertEquals(
-            "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
+            "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als WÃ¤hrung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
             msg.getLocalizedMessage(Locale.GERMANY, resolver));
   }
 
@@ -247,8 +247,8 @@ public class NlsMessageTest {
             + "extends Object, ? super VARIABLE[]>>>", msg.getMessage());
     msg = NlsAccess.getFactory().create("{" + key + ",type,full}", key, type);
     Assert.assertEquals("java.util.Map<java.util.List<? extends java.lang.String>, "
-        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>", msg
-        .getMessage());
+        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>",
+        msg.getMessage());
   }
 
   /**
@@ -361,7 +361,7 @@ public class NlsMessageTest {
     // combined
     msg = NlsAccess.getFactory().create("Value {" + key + ",number,currency{_+15}}", key, value);
     String message = msg.getLocalizedMessage(Locale.GERMANY);
-    Assert.assertEquals("Value ________42,00 €", message);
+    Assert.assertEquals("Value ________42,00 â‚¬", message);
   }
 
   /**
