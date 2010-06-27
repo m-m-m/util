@@ -77,7 +77,7 @@ public abstract class AbstractStringHasher implements StringHasher {
     }
     int[] result = new int[size];
     for (int i = 0; i < size; i++) {
-      result[i] = getHashCode(string, i, i + length);
+      result[i] = getHashCode(string, stringStart + i, stringStart + i + length);
     }
     return result;
   }
