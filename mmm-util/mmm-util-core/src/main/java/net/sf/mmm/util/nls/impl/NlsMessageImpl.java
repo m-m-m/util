@@ -10,6 +10,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -158,8 +159,16 @@ public class NlsMessageImpl implements NlsMessage {
   public NlsTemplate getTemplate(NlsTemplateResolver resolver) {
 
     if (this.template == null) {
-      if (resolver != null) {
-        this.template = resolver.resolveTemplate(this.message);
+      synchronized (this) {
+        if (this.template == null) {
+          NlsTemplateResolver templateResolver;
+          if (resolver == null) {
+            templateResolver = NlsAccess.getTemplateResolver();
+          } else {
+            templateResolver = resolver;
+          }
+          this.template = templateResolver.resolveTemplate(this.message);
+        }
       }
     }
     return this.template;
@@ -197,16 +206,21 @@ public class NlsMessageImpl implements NlsMessage {
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     try {
-      NlsTemplate nlsTemplate = getTemplate(resolver);
+      NlsTemplate nlsTemplate = this.template;
+      if (nlsTemplate == null) {
+        if ((resolver != null) || (locale != LOCALE_ROOT)) {
+          nlsTemplate = getTemplate(resolver);
+        }
+      }
       if (this.arguments.isEmpty()) {
         String text = null;
         if (nlsTemplate != null) {
           text = nlsTemplate.translate(locale);
         }
         if (text == null) {
-          if (resolver != null) {
-            buffer.append(LOCALIZATION_FAILURE_PREFIX);
-          }
+          // if (locale != LOCALE_ROOT) {
+          // buffer.append(LOCALIZATION_FAILURE_PREFIX);
+          // }
           text = this.message;
         }
         buffer.append(text);
@@ -216,9 +230,9 @@ public class NlsMessageImpl implements NlsMessage {
           success = nlsTemplate.translate(locale, this.arguments, buffer, resolver);
         }
         if (!success) {
-          if (resolver != null) {
-            buffer.append(LOCALIZATION_FAILURE_PREFIX);
-          }
+          // if (locale != LOCALE_ROOT) {
+          // buffer.append(LOCALIZATION_FAILURE_PREFIX);
+          // }
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(this.message,
               getArgumentParser());
           format.format(null, locale, this.arguments, resolver, buffer);

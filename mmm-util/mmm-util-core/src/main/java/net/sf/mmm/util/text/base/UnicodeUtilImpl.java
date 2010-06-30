@@ -16,6 +16,7 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@SuppressWarnings("boxing")
 public class UnicodeUtilImpl implements UnicodeUtil {
 
   /** @see #getInstance() */

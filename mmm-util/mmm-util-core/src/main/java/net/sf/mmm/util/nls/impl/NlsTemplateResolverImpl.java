@@ -43,14 +43,7 @@ public class NlsTemplateResolverImpl extends AbstractResourceBundleNlsTemplateRe
    */
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
-    NlsTemplate result = null;
-    for (AbstractResourceBundle bundle : this.nlsBundles) {
-      result = resolveTemplate(bundle, internationalizedMessage);
-      if (result != null) {
-        break;
-      }
-    }
-    return result;
+    return resolveTemplate(internationalizedMessage, this.nlsBundles);
   }
 
 }

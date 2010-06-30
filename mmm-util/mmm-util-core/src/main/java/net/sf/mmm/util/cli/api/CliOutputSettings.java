@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class represents the settings for the
@@ -16,6 +17,9 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @since 2.0.0
  */
 public class CliOutputSettings {
+
+  /** The minimum value for {@link #getWidth() width}. */
+  private static final int MIN_WIDTH = 5;
 
   /** @see #getWidth() */
   private int width;
@@ -57,7 +61,7 @@ public class CliOutputSettings {
    * {@link CliParser#printHelp(Appendable, CliOutputSettings) help-output} in
    * characters per line.
    * 
-   * @return the width or 0
+   * @return the width.
    */
   public int getWidth() {
 
@@ -65,10 +69,14 @@ public class CliOutputSettings {
   }
 
   /**
-   * @param width is the width to set
+   * @param width is the {@link #getWidth() width} to set.
    */
   public void setWidth(int width) {
 
+    if (width < MIN_WIDTH) {
+      throw new ValueOutOfRangeException(Integer.valueOf(width), Integer.valueOf(MIN_WIDTH),
+          Integer.valueOf(Integer.MAX_VALUE), "width");
+    }
     this.width = width;
   }
 

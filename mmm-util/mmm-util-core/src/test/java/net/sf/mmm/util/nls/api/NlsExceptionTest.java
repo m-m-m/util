@@ -36,7 +36,7 @@ public class NlsExceptionTest {
     String source = "bad boy";
     NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
     String message = "NullPointerException caused by \"" + source + "\"!";
-    Assert.assertEquals(message, e.getMessage());
+    Assert.assertEquals(message, e.getLocalizedMessage(Locale.ROOT));
     NlsTemplateResolverImpl resolver = new NlsTemplateResolverImpl(new MyResourceBundle());
     resolver.initialize();
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";

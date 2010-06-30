@@ -44,7 +44,7 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * This method {@link #resolveTemplate(String) resolves} the
    * {@link NlsTemplate} from the given {@link AbstractResourceBundle}.
    * 
-   * @param resourceBundle is the resource-bundle that potentially declared the
+   * @param resourceBundle is the resource-bundle that potentially declare the
    *        <code>internationalizedMessage</code>.
    * @param internationalizedMessage is the message for which the
    *        {@link NlsTemplate} is required.
@@ -61,6 +61,32 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
       return new NlsTemplateImpl(name, key, getArgumentParser());
     }
     return null;
+  }
+
+  /**
+   * This method {@link #resolveTemplate(String) resolves} the
+   * {@link NlsTemplate} from the given array of {@link AbstractResourceBundle
+   * bundles}.
+   * 
+   * @param internationalizedMessage is the message for which the
+   *        {@link NlsTemplate} is required.
+   * @param bundles are the {@link AbstractResourceBundle resource-bundles}
+   *        that potentially declare the <code>internationalizedMessage</code>.
+   * @return the according {@link NlsTemplate} or <code>null</code> if the
+   *         <code>internationalizedMessage</code> is NOT declared in
+   *         <code>resourceBundle</code>.
+   */
+  public NlsTemplate resolveTemplate(String internationalizedMessage,
+      AbstractResourceBundle... bundles) {
+
+    NlsTemplate result = null;
+    for (AbstractResourceBundle bundle : bundles) {
+      result = resolveTemplate(bundle, internationalizedMessage);
+      if (result != null) {
+        break;
+      }
+    }
+    return result;
   }
 
 }

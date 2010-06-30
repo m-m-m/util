@@ -4,6 +4,7 @@
 package net.sf.mmm.util.nls.api;
 
 import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
+import net.sf.mmm.util.nls.impl.DefaultNlsTemplateResolver;
 
 /**
  * This is an ugly static accessor for the {@link NlsMessageFactory} used to
@@ -18,11 +19,8 @@ public final class NlsAccess {
   /** @see #getFactory() */
   private static NlsMessageFactory factory;
 
-  static {
-    NlsMessageFactoryImpl factoryImpl = new NlsMessageFactoryImpl();
-    factoryImpl.initialize();
-    factory = factoryImpl;
-  }
+  /** @see #getTemplateResolver() */
+  private static NlsTemplateResolver templateResolver;
 
   /**
    * The constructor.
@@ -40,17 +38,23 @@ public final class NlsAccess {
    */
   public static NlsMessageFactory getFactory() {
 
+    if (factory == null) {
+      synchronized (NlsAccess.class) {
+        if (factory == null) {
+          NlsMessageFactoryImpl factoryImpl = new NlsMessageFactoryImpl();
+          factoryImpl.initialize();
+          factory = factoryImpl;
+        }
+      }
+    }
     return factory;
   }
 
   /**
    * This method sets (overrides) the {@link NlsMessageFactory}. This allows to
    * exchange the {@link NlsMessageFactory} and thereby the implementation of
-   * {@link net.sf.mmm.util.nls.api.NlsMessage} e.g. to use a universal
-   * {@link net.sf.mmm.util.nls.api.NlsTemplateResolver template-translator} for
-   * {@link net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage()} as used by
-   * {@link net.sf.mmm.util.nls.api.NlsThrowable#getMessage()}.<br>
-   * The desired behaviour of a universal translator can depend from the
+   * {@link net.sf.mmm.util.nls.api.NlsMessage}.<br>
+   * The desired behavior of a universal translator can depend from the
    * situation where it is used. E.g. a client application could use the
    * {@link java.util.Locale#getDefault() "default locale"} to choose the
    * destination language. In a multi-user server application a
@@ -73,6 +77,47 @@ public final class NlsAccess {
   public static void setFactory(NlsMessageFactory instance) {
 
     NlsAccess.factory = instance;
+  }
+
+  /**
+   * This method gets the default {@link NlsTemplateResolver}.
+   * 
+   * @return the default {@link NlsTemplateResolver}.
+   * @since 2.0.0
+   */
+  public static NlsTemplateResolver getTemplateResolver() {
+
+    if (templateResolver == null) {
+      synchronized (NlsAccess.class) {
+        if (templateResolver == null) {
+          DefaultNlsTemplateResolver resolver = new DefaultNlsTemplateResolver();
+          resolver.initialize();
+          templateResolver = resolver;
+        }
+      }
+    }
+    return templateResolver;
+  }
+
+  /**
+   * This method sets (overrides) the default {@link NlsTemplateResolver}.
+   * <b>WARNING:</b><br>
+   * This is only a back-door for simple applications or test situations. Please
+   * try to avoid using this feature and solve this issue with IoC strategies
+   * (using non-final static fields like here is evil).<br>
+   * <b>ATTENTION:</b><br>
+   * No synchronization is performed setting the instance. This assumes that an
+   * assignment is an atomic operation in the JVM you are using. Additionally
+   * this method should only be invoked in the initialization phase of your
+   * application.
+   * 
+   * @param templateResolver is the {@link NlsTemplateResolver} to use by
+   *        default.
+   * @since 2.0.0
+   */
+  public static void setTemplateResolver(NlsTemplateResolver templateResolver) {
+
+    NlsAccess.templateResolver = templateResolver;
   }
 
 }

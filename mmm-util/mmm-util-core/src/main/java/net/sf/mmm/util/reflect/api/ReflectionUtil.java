@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -281,9 +280,10 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        specified {@link Package} will be included in the search.
    * @return a {@link Set} with the fully qualified names of all requested
    *         classes.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    */
-  Set<String> findClassNames(String packageName, boolean includeSubPackages) throws IOException;
+  Set<String> findClassNames(String packageName, boolean includeSubPackages)
+      throws RuntimeIoException;
 
   /**
    * This method finds all classes that are located in the package identified by
@@ -302,11 +302,11 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        "net.sf.mmm.reflect.api.ReflectionUtil").
    * @return a {@link Set} with the fully qualified names of all requested
    *         classes.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
   Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter)
-      throws IOException;
+      throws RuntimeIoException;
 
   /**
    * This method finds all classes that are located in the package identified by
@@ -326,11 +326,11 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @return a {@link Set} with the fully qualified names of all requested
    *         classes.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
   Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
-      ClassLoader classLoader) throws IOException;
+      ClassLoader classLoader) throws RuntimeIoException;
 
   /**
    * This method finds all classes that are located in the package identified by
@@ -343,10 +343,10 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param includeSubPackages - if <code>true</code> all sub-packages of the
    *        specified {@link Package} will be included in the search.
    * @param classSet is where to add the classes.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    */
   void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet)
-      throws IOException;
+      throws RuntimeIoException;
 
   /**
    * This method loads the classes given as {@link Collection} of
@@ -417,11 +417,11 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        resources that end with ".xml".
    * @return a {@link Set} with the fully qualified names of all requested
    *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
   Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter) throws IOException;
+      Filter<String> filter) throws RuntimeIoException;
 
   /**
    * This method finds all resources that are located in the package identified
@@ -443,11 +443,11 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @return a {@link Set} with the fully qualified names of all requested
    *         resources (e.g. "net/sf/mmm/util/reflect/beans-util-reflect.xml").
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
   Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) throws IOException;
+      Filter<String> filter, ClassLoader classLoader) throws RuntimeIoException;
 
   /**
    * This method finds all resources that are located in the package identified
@@ -464,11 +464,26 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        resources. Typically you will exclude resources that end with
    *        ".class" or only accept resources that end with ".xml".
    * @return a {@link Set} with all requested {@link DataResource resources}.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<String> filter) throws IOException;
+      Filter<String> filter) throws RuntimeIoException;
+
+  /**
+   * This method finds all resources that match to the given
+   * <code>absoluteClasspath</code>. Unlike
+   * {@link net.sf.mmm.util.resource.base.ClasspathResource#ClasspathResource(String)}
+   * this method will return all resources that with the given classpath (e.g.
+   * out of multiple JAR-files).<br>
+   * 
+   * @param absoluteClasspath is the absolute path to the resource. E.g.
+   *        "net/sf/mmm/util/resource/ClasspathResource.txt".
+   * @return a {@link Set} with all requested {@link DataResource resources}.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
+   * @since 1.1.0
+   */
+  Set<DataResource> findResources(String absoluteClasspath) throws RuntimeIoException;
 
   /**
    * This method finds all resources that are located in the package identified
@@ -486,10 +501,10 @@ public interface ReflectionUtil extends GenericTypeFactory {
    *        ".class" or only accept resources that end with ".xml".
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @return a {@link Set} with all requested {@link DataResource resources}.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) throws IOException;
+      Filter<String> filter, ClassLoader classLoader) throws RuntimeIoException;
 
 }

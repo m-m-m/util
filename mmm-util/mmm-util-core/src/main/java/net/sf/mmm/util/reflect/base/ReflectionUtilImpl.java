@@ -51,6 +51,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.UnboundedWildcardType;
 import net.sf.mmm.util.reflect.impl.UpperBoundWildcardType;
 import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.base.UrlResource;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
@@ -680,8 +681,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   /**
    * {@inheritDoc}
    */
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages)
-      throws IOException {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages) {
 
     Set<String> classSet = new HashSet<String>();
     findClassNames(packageName, includeSubPackages, classSet);
@@ -691,23 +691,21 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   /**
    * {@inheritDoc}
    */
-  public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet)
-      throws IOException {
+  public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet) {
 
     Filter<String> filter = ConstantFilter.getInstance(true);
-    findClassNames(packageName, includeSubPackages, classSet, filter, Thread.currentThread()
-        .getContextClassLoader());
+    findClassNames(packageName, includeSubPackages, classSet, filter, getDefaultClassLoader());
   }
 
   /**
    * {@inheritDoc}
    */
   public Set<String> findClassNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter) throws IOException {
+      Filter<String> filter) {
 
     Set<String> result = new HashSet<String>();
-    findClassNames(packageName, includeSubPackages, result, filter, Thread.currentThread()
-        .getContextClassLoader());
+    findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter
+        .getClass()));
     return result;
   }
 
@@ -715,7 +713,7 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
    * {@inheritDoc}
    */
   public Set<String> findClassNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) throws IOException {
+      Filter<String> filter, ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
     findClassNames(packageName, includeSubPackages, result, filter, classLoader);
@@ -735,10 +733,11 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
    *        class-names} as argument (e.g.
    *        "net.sf.mmm.reflect.api.ReflectionUtil").
    * @param classLoader is the explicit {@link ClassLoader} to use.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    */
   protected void findClassNames(String packageName, boolean includeSubPackages,
-      Set<String> classSet, Filter<String> filter, ClassLoader classLoader) throws IOException {
+      Set<String> classSet, Filter<String> filter, ClassLoader classLoader)
+      throws RuntimeIoException {
 
     ResourceVisitor visitor = new ClassNameCollector(classSet, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
@@ -748,17 +747,17 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
    * {@inheritDoc}
    */
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter) throws IOException {
+      Filter<String> filter) {
 
-    return findResourceNames(packageName, includeSubPackages, filter, Thread.currentThread()
-        .getContextClassLoader());
+    return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter
+        .getClass()));
   }
 
   /**
    * {@inheritDoc}
    */
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) throws IOException {
+      Filter<String> filter, ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
     ResourceNameCollector visitor = new ResourceNameCollector(result, filter);
@@ -770,17 +769,36 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
    * {@inheritDoc}
    */
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<String> filter) throws IOException {
+      Filter<String> filter) {
 
-    return findResources(packageName, includeSubPackages, filter, Thread.currentThread()
-        .getContextClassLoader());
+    return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter
+        .getClass()));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Set<DataResource> findResources(String absoluteClasspath) throws RuntimeIoException {
+
+    try {
+      Set<DataResource> result = new HashSet<DataResource>();
+      Enumeration<URL> resourceUrlEnumeration = getDefaultClassLoader().getResources(
+          absoluteClasspath);
+      while (resourceUrlEnumeration.hasMoreElements()) {
+        URL url = resourceUrlEnumeration.nextElement();
+        result.add(new UrlResource(url));
+      }
+      return result;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) throws IOException {
+      Filter<String> filter, ClassLoader classLoader) {
 
     Set<DataResource> result = new HashSet<DataResource>();
     ResourceVisitor visitor = new ResourceCollector(result, filter);
@@ -797,73 +815,78 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
    *        specified {@link Package} will be included in the search.
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @param visitor is the {@link ResourceVisitor}.
-   * @throws IOException if the operation failed with an I/O error.
+   * @throws RuntimeIoException if the operation failed with an I/O error.
    */
   public void visitResourceNames(String packageName, boolean includeSubPackages,
-      ClassLoader classLoader, ResourceVisitor visitor) throws IOException {
+      ClassLoader classLoader, ResourceVisitor visitor) throws RuntimeIoException {
 
-    String path = packageName.replace('.', '/');
-    String pathWithPrefix = path + '/';
-    Enumeration<URL> urls = classLoader.getResources(path);
-    StringBuilder qualifiedNameBuilder = new StringBuilder(path);
-    qualifiedNameBuilder.append('/');
-    int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
-    while (urls.hasMoreElements()) {
-      URL packageUrl = urls.nextElement();
-      String urlString = URLDecoder.decode(packageUrl.getFile(), "UTF-8");
-      String protocol = packageUrl.getProtocol().toLowerCase();
-      if ("file".equals(protocol)) {
-        File packageDirectory = new File(urlString);
-        if (packageDirectory.isDirectory()) {
-          if (includeSubPackages) {
-            visitResources(packageDirectory, qualifiedNameBuilder, qualifiedNamePrefixLength,
-                visitor);
-          } else {
-            for (File child : packageDirectory.listFiles()) {
-              if (child.isFile()) {
-                qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
-                qualifiedNameBuilder.append(child.getName());
-                visitor.visitResource(qualifiedNameBuilder.toString());
+    try {
+      String path = packageName.replace('.', '/');
+      String pathWithPrefix = path + '/';
+      Enumeration<URL> urls = classLoader.getResources(path);
+      StringBuilder qualifiedNameBuilder = new StringBuilder(path);
+      qualifiedNameBuilder.append('/');
+      int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
+      while (urls.hasMoreElements()) {
+        URL packageUrl = urls.nextElement();
+        String urlString = URLDecoder.decode(packageUrl.getFile(), "UTF-8");
+        String protocol = packageUrl.getProtocol().toLowerCase();
+        if ("file".equals(protocol)) {
+          File packageDirectory = new File(urlString);
+          if (packageDirectory.isDirectory()) {
+            if (includeSubPackages) {
+              visitResources(packageDirectory, qualifiedNameBuilder, qualifiedNamePrefixLength,
+                  visitor);
+            } else {
+              for (File child : packageDirectory.listFiles()) {
+                if (child.isFile()) {
+                  qualifiedNameBuilder.setLength(qualifiedNamePrefixLength);
+                  qualifiedNameBuilder.append(child.getName());
+                  visitor.visitResource(qualifiedNameBuilder.toString());
+                }
               }
             }
           }
+        } else if ("jar".equals(protocol)) {
+          // somehow the connection has no close method and can NOT be disposed
+          JarURLConnection connection = (JarURLConnection) packageUrl.openConnection();
+          JarFile jarFile = connection.getJarFile();
+          Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
+          while (jarEntryEnumeration.hasMoreElements()) {
+            JarEntry jarEntry = jarEntryEnumeration.nextElement();
+            String classpath = jarEntry.getName();
+            if (classpath.startsWith("/")) {
+              classpath = classpath.substring(1);
+            }
+            if (classpath.startsWith(WEB_INF_CLASSES)) {
+              // special treatment for WAR files...
+              // "WEB-INF/lib/" entries should be opened directly in contained
+              // jar
+              classpath = classpath.substring(WEB_INF_CLASSES.length());
+            }
+            if (classpath.startsWith(pathWithPrefix)) {
+              boolean accept = true;
+              if (!includeSubPackages) {
+                int index = classpath.indexOf('/', qualifiedNamePrefixLength + 1);
+                if (index != -1) {
+                  accept = false;
+                }
+              }
+              if (accept) {
+                if (jarEntry.isDirectory()) {
+                  visitor.visitPackage(classpath);
+                } else {
+                  visitor.visitResource(classpath);
+                }
+              }
+            }
+          }
+        } else {
+          getLogger().warn("Unknown protocol '" + protocol + "' in classpath entry!");
         }
-      } else if ("jar".equals(protocol)) {
-        // somehow the connection has no close method and can NOT be disposed
-        JarURLConnection connection = (JarURLConnection) packageUrl.openConnection();
-        JarFile jarFile = connection.getJarFile();
-        Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
-        while (jarEntryEnumeration.hasMoreElements()) {
-          JarEntry jarEntry = jarEntryEnumeration.nextElement();
-          String classpath = jarEntry.getName();
-          if (classpath.startsWith("/")) {
-            classpath = classpath.substring(1);
-          }
-          if (classpath.startsWith(WEB_INF_CLASSES)) {
-            // special treatment for WAR files...
-            // "WEB-INF/lib/" entries should be opened directly in contained jar
-            classpath = classpath.substring(WEB_INF_CLASSES.length());
-          }
-          if (classpath.startsWith(pathWithPrefix)) {
-            boolean accept = true;
-            if (!includeSubPackages) {
-              int index = classpath.indexOf('/', qualifiedNamePrefixLength + 1);
-              if (index != -1) {
-                accept = false;
-              }
-            }
-            if (accept) {
-              if (jarEntry.isDirectory()) {
-                visitor.visitPackage(classpath);
-              } else {
-                visitor.visitResource(classpath);
-              }
-            }
-          }
-        }
-      } else {
-        getLogger().warn("Unknown protocol '" + protocol + "' in classpath entry!");
       }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 
@@ -902,4 +925,40 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
     return classesSet;
   }
 
+  /**
+   * This method gets the default {@link ClassLoader} to use. This should be the
+   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to
+   * alternatives if no such {@link ClassLoader} is available.
+   * 
+   * @return the default {@link ClassLoader} to use.
+   */
+  protected ClassLoader getDefaultClassLoader() {
+
+    return getDefaultClassLoader(ReflectionUtilImpl.class);
+  }
+
+  /**
+   * This method gets the default {@link ClassLoader} to use. This should be the
+   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to
+   * alternatives if no such {@link ClassLoader} is available.
+   * 
+   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a
+   *        {@link ClassLoader} as fallback if the
+   *        {@link Thread#getContextClassLoader() ContextClassLoader} is not
+   *        available.
+   * @return the default {@link ClassLoader} to use.
+   */
+  protected ClassLoader getDefaultClassLoader(Class<?> fallbackClass) {
+
+    ClassLoader result = Thread.currentThread().getContextClassLoader();
+    if (result == null) {
+      getLogger().warn("strange container: no context-class-loader available!");
+      result = fallbackClass.getClassLoader();
+      if (result == null) {
+        getLogger().warn("strange JVM: only system-class-loader available!");
+        result = ClassLoader.getSystemClassLoader();
+      }
+    }
+    return result;
+  }
 }

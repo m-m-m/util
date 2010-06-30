@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import junit.framework.Assert;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
@@ -28,6 +27,7 @@ import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.text.api.Justification;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -82,8 +82,8 @@ public class NlsMessageTest {
       }
     };
     translatorDe.initialize();
-    Assert.assertEquals(helloDe + arg + suffix,
-        testMessage.getLocalizedMessage(Locale.GERMAN, translatorDe));
+    Assert.assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(Locale.GERMAN,
+        translatorDe));
   }
 
   @Test
@@ -129,11 +129,19 @@ public class NlsMessageTest {
   }
 
   @Test
-  public void testMessageResolved() {
+  public void testMessageDefaultResolver() {
+
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME, "name", "Paul");
+    Assert.assertEquals("Welcome \"Paul\"!", msg.getMessage());
+    Assert.assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN));
+  }
+
+  @Test
+  public void testMessageCustomResolver() {
 
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
-    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME, "Paul");
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_WELCOME, "name", "Paul");
     Assert.assertEquals("Welcome \"Paul\"!", msg.getMessage());
     Assert.assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, resolver));
   }
@@ -147,7 +155,7 @@ public class NlsMessageTest {
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
     Date date = Iso8601UtilImpl.getInstance().parseDate("1999-12-31T23:59:59+01:00");
-    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, date);
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_DATE, "date", date);
     // Make os/locale independent...
     TimeZone.setDefault(TimeZone.getTimeZone("GMT+01:00"));
     Assert
@@ -214,7 +222,8 @@ public class NlsMessageTest {
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
     Number number = new Double(0.42);
-    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_NUMBER, number);
+    NlsMessage msg = NlsAccess.getFactory().create(MyResourceBundle.MSG_TEST_NUMBER, "value",
+        number);
     Assert
         .assertEquals(
             "Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!",
@@ -247,8 +256,8 @@ public class NlsMessageTest {
             + "extends Object, ? super VARIABLE[]>>>", msg.getMessage());
     msg = NlsAccess.getFactory().create("{" + key + ",type,full}", key, type);
     Assert.assertEquals("java.util.Map<java.util.List<? extends java.lang.String>, "
-        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>",
-        msg.getMessage());
+        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>", msg
+        .getMessage());
   }
 
   /**

@@ -19,16 +19,42 @@ public interface UnicodeUtil {
   char EXCLAMATION_MARK = 0x0021;
   char QUOTATION_MARK = 0x0022;
   char NUMBER_SIGN = 0x0023;
+  
+  /** 
+   * The sign for the currency dollar ({@value}). This currency is not unique as many 
+   * countries named their currency dollar (e.g. US-$, CAN-$, AU-$).
+   */
   char DOLLAR_SIGN = 0x0024;
+  
+  /** The percent sign ({@value}). Indicates the 1/100 part of the preceeding number. */
   char PERCENT_SIGN = 0x0025;
+  
+  /** The ampersand sign used for the term "and" ({@value}. */
   char AMPERSAND = 0x0026;
+  
+  /** The apostrophe sign ({@value}. */
   char APOSTROPHE = 0x0027;
+  
   char LEFT_PARENTHESIS = 0x0028;
   char RIGHT_PARENTHESIS = 0x0029;
+  
+  /** The asterisk sign ({@value}). */
   char ASTERISK = 0x002A;
+  
+  /** The plus sign ({@value}. */
   char PLUS_SIGN = 0x002B;
+  
   char COMMA = 0x002C;
+  
+  /** 
+   * The ASCII hyphen or minus sign ({@value}).
+   * 
+   * @see #HYPEN
+   * @see #MINUS_SIGN
+   * @see #SOFT_HYPHEN 
+   */
   char HYPHEN_MINUS = 0x002D;
+  
   char FULL_STOP = 0x002E;
   char SOLIDUS = 0x002F;
   char DIGIT_ZERO = 0x0030;
@@ -183,12 +209,27 @@ public interface UnicodeUtil {
   char MODIFIER_LETTER_UNASPIRATED = 0x02ED;
   char MODIFIER_LETTER_DOUBLE_APOSTROPHE = 0x02EE;
   
-  
+  /**
+   * An inverted exclamation mark (!) used at the beginning of an exclamation in 
+   * Spanish.
+   */
   char INVERTED_EXCLAMATION_MARK = 0x00A1;
+  
+  /** 
+   * The sign for the currency unit cent. A cent is the 1/100 part of a 
+   * {@link #DOLLAR_SIGN dollar}. 
+   */
   char CENT_SIGN = 0x00A2;
+  
+  /** The sign for the British currency pound. */
   char POUND_SIGN = 0x00A3;
+  
+  /** The universal currency sign. */
   char CURRENCY_SIGN = 0x00A4;
+  
+  /** The sign for the Chinese currency yen. */
   char YEN_SIGN = 0x00A5;
+  
   char BROKEN_BAR = 0x00A6;
   char SECTION_SIGN = 0x00A7;
   char DIAERESIS = 0x00A8;

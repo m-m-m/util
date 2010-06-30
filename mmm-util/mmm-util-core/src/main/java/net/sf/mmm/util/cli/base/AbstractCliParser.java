@@ -34,6 +34,9 @@ import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.nls.base.NlsWriter;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.text.api.LineWrapper;
+import net.sf.mmm.util.text.api.TextColumnInfo;
+import net.sf.mmm.util.text.api.TextTableInfo;
 
 /**
  * This is the abstract base-implementation of the {@link CliParser} interface.
@@ -335,12 +338,27 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     printHelp(target, new CliOutputSettings());
   }
 
+  protected void printNlsText(String text, Map<String, Object> arguments, TextTableInfo tableInfo,
+      TextColumnInfo columnInfo) {
+
+    LineWrapper lineWrapper = this.configuration.getLineWrapper();
+
+  }
+
   /**
    * {@inheritDoc}
    */
   public void printHelp(Appendable target, CliOutputSettings settings) {
 
     NlsMessageFactory nlsMessageFactory = this.configuration.getNlsMessageFactory();
+    TextTableInfo tableInfo = new TextTableInfo();
+    tableInfo.setWidth(settings.getWidth());
+    tableInfo.setLineSeparator(settings.getLineSeparator());
+
+    TextColumnInfo optionColumnInfo = new TextColumnInfo();
+    optionColumnInfo.setLocale(settings.getLocale());
+    optionColumnInfo.setIndent("  ");
+
     Map<String, Object> arguments = new HashMap<String, Object>();
     arguments.put("mainClass", this.cliState.getName());
     arguments.put("optionCount", Integer.valueOf(this.cliState.getOptions().size()));
@@ -349,6 +367,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     arguments.put(NlsObject.KEY_OPTION, "[<option>*]");
     NlsWriter writer = new NlsWriter(target, arguments, settings.getLocale(), settings
         .getLineSeparator(), nlsMessageFactory, settings.getTemplateResolver());
+    // nlsMessageFactory.create(internationalizedMessage)
     writer.println(NlsBundleUtilCore.MSG_CLI_USAGE);
     // this.cliState.getOptions();
     String mainUsage = this.cliState.getCliClass().usage();

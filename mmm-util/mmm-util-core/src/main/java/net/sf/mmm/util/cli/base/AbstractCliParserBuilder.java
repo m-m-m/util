@@ -15,12 +15,15 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
+import net.sf.mmm.util.text.api.LineWrapper;
+import net.sf.mmm.util.text.base.DefaultLineWrapper;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
@@ -43,6 +46,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /** @see #getNlsMessageFactory() */
   private NlsMessageFactory nlsMessageFactory;
 
+  /** @see #getTemplateResolver() */
+  private NlsTemplateResolver nlsTemplateResolver;
+
   /** @see #getStringUtil() */
   private StringUtil stringUtil;
 
@@ -57,6 +63,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
 
   /** @see #getConverter() */
   private GenericValueConverter<Object> converter;
+
+  /** @see #getLineWrapper() */
+  private LineWrapper lineWrapper;
 
   /**
    * The constructor.
@@ -81,6 +90,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
     if (this.nlsMessageFactory == null) {
       this.nlsMessageFactory = NlsAccess.getFactory();
     }
+    // if (this.nlsTemplateResolver == null) {
+    // this.nlsTemplateResolver = null;
+    // }
     if (this.converter == null) {
       DefaultComposedValueConverter valueConverter = new DefaultComposedValueConverter();
       valueConverter.initialize();
@@ -91,6 +103,11 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
     }
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtilImpl.getInstance();
+    }
+    if (this.lineWrapper == null) {
+      DefaultLineWrapper wrapper = new DefaultLineWrapper();
+      wrapper.initialize();
+      this.lineWrapper = wrapper;
     }
   }
 
@@ -248,6 +265,22 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * {@inheritDoc}
    */
+  public NlsTemplateResolver getNlsTemplateResolver() {
+
+    return this.nlsTemplateResolver;
+  }
+
+  /**
+   * @param nlsTemplateResolver is the {@link NlsTemplateResolver} to use.
+   */
+  public void setNlsTemplateResolver(NlsTemplateResolver nlsTemplateResolver) {
+
+    this.nlsTemplateResolver = nlsTemplateResolver;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public GenericValueConverter<Object> getConverter() {
 
     return this.converter;
@@ -261,6 +294,24 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
 
     getInitializationState().requireNotInitilized();
     this.converter = converter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public LineWrapper getLineWrapper() {
+
+    return this.lineWrapper;
+  }
+
+  /**
+   * @param lineWrapper is the lineWrapper to set
+   */
+  @Resource
+  public void setLineWrapper(LineWrapper lineWrapper) {
+
+    getInitializationState().requireNotInitilized();
+    this.lineWrapper = lineWrapper;
   }
 
 }

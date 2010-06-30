@@ -39,7 +39,7 @@
  * locale independent arguments in one container object that is called
  * <code>{@link net.sf.mmm.util.nls.api.NlsMessage}</code>. 
  * Here is an example to clarify the idea: The i18n
- * message is "Hi {0}! How are you?" and the language independent argument is
+ * message is "Hi {name}! How are you?" and the language independent argument is
  * the users name e.g. "Lilli". Now if we store these informations together we
  * have all we need. To get the localized message we simply translate the i18n
  * message to the proper language and then fill in the arguments. If we can NOT
@@ -54,23 +54,29 @@
  * public string constants.
  * 
  * <pre>
+ * package foo.bar;
+ * 
  * public class MyResourceBundle extends {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} {
- *   public static final String MSG_SAY_HI = "Hi {0}! How are you?";
- *   public static final String ERR_LOGIN_IN_USE = "Sorry. The login \"{0}\" is " +
+ *   public static final String MSG_SAY_HI = "Hi {name}! How are you?";
+ *   public static final String ERR_LOGIN_IN_USE = "Sorry. The login \"{login}\" is " +
  *     "already in use. Please choose a different login.";
  * }
  * </pre>
+ * 
+ * For the automatic reverse-lookup create the file 
+ * <code>META-INF/net.sf.mmm/nls-bundles</code> with the fully qualified name 
+ * of your bundle-class (foo.bar.MyResourceBundle) as content.
  * 
  * From your code you only need to create the
  * {@link net.sf.mmm.util.nls.api.NlsMessage NlsMessage}</code> using this
  * constants:
  * 
  * <p>
- * <code>&nbsp;&nbsp;String usersName = "Lilli";</code><br>
+ * <code>&nbsp;&nbsp;String userName = "Lilli";</code><br>
  * <code>&nbsp;&nbsp;{@link net.sf.mmm.util.nls.api.NlsMessage} msg = 
  * {@link net.sf.mmm.util.nls.api.NlsAccess#getFactory()}.<!--
- * -->{@link net.sf.mmm.util.nls.api.NlsMessageFactory#create(String, Object...) create}<!--
- * -->(MyResourceBundle.MSG_SAY_HI, usersName);</code>
+ * -->{@link net.sf.mmm.util.nls.api.NlsMessageFactory#create(String, String, Object) create}<!--
+ * -->(MyResourceBundle.MSG_SAY_HI, "name", userName);</code>
  * </p>
  * 
  * For exceptions there is additional support via <code>{@link net.sf.mmm.util.nls.api.NlsException}</code>
@@ -88,12 +94,21 @@
  * Now if you throw a <code>IllegalLoginException</code>, it will behave as a
  * "regular" exception with an English message. Additionally it has methods
  * <code>getLocalizedMessage</code> and <code>printStackTrace</code> that
- * take a {@link java.util.Locale} and a 
+ * take a {@link java.util.Locale} and optionally a 
  * <code>{@link net.sf.mmm.util.nls.api.NlsTemplateResolver}</code> 
- * as argument. You can use {@link net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl}
- * as implementation. All you need to do is register all of your 
- * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}s (such as 
- * <code>MyResourceBundle</code>) and provide them at construction. 
+ * as argument.
+ * 
+ * For localization you can create property files with the translations of your
+ * NLS-bundle. E.g. <code>foo/bar/MyResourceBundle_de.properties</code> with 
+ * this content:
+ * <pre>
+ * MSG_SAY_HI = Hallo {name}! Wie geht es Dir?
+ * LOGIN_IN_USE = Es tut uns leid. Das Login "{login}" ist bereits vergeben. Bitte wählen Sie ein anderes Login.
+ * </pre>
+ * 
+ * In order to support you with creating and maintaining the localized 
+ * properties, this solution also comes with the 
+ * {@link net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}.
  * 
  * <h3>Conclusion</h3>
  * As we have seen the NLS provided here makes it very easy for developers to

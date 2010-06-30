@@ -13,6 +13,15 @@ package net.sf.mmm.util.nls.api;
 public interface NlsTemplateResolver {
 
   /**
+   * The classpath of a textfile containing the full qualified name(s) of an
+   * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle NLS-bundle}.<br>
+   * There can be arbitrary implementations of {@link NlsTemplateResolver}.
+   * However the default implementation will use the
+   * {@link Thread#getContextClassLoader() context-class-loader} to use
+   */
+  String CLASSPATH_NLS_BUNDLE = "META-INF/net.sf.mmm/nls-bundles";
+
+  /**
    * This method is used to create the {@link NlsTemplate} from information that
    * is found by the given <code>internationalizedMessage</code>.<br>
    * This may happen via a reverse lookup from

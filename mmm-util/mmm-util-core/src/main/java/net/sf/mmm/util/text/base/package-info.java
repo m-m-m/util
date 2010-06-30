@@ -4,8 +4,9 @@
 /**
  * Provides the base-implementation of text-util API.
  * <h2>Text-Util Base</h2>
- * Provides base-implementation {@link AbstractTextTransformer} as well as 
- * default implementation {@link EnglishSingularizer}.
+ * Provides base-implementation {@link net.sf.mmm.util.text.base.AbstractTextTransformer}
+ * as well as default implementation 
+ * {@link net.sf.mmm.util.text.base.EnglishSingularizer}.
  */
 package net.sf.mmm.util.text.base;
 

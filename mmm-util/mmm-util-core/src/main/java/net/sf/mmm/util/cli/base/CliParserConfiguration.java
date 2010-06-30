@@ -6,8 +6,10 @@ package net.sf.mmm.util.cli.base;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 
 /**
@@ -46,10 +48,22 @@ public interface CliParserConfiguration {
   NlsMessageFactory getNlsMessageFactory();
 
   /**
+   * @return the {@link NlsTemplateResolver} instance to use or
+   *         <code>null</code> to use the default instance.
+   */
+  NlsTemplateResolver getNlsTemplateResolver();
+
+  /**
    * @return the {@link GenericValueConverter} instance used to convert CLI
    *         parameters to typed values.
    */
   GenericValueConverter<Object> getConverter();
+
+  /**
+   * @return the {@link LineWrapper} used for justification of texts for the
+   *         help texts.
+   */
+  LineWrapper getLineWrapper();
 
   // /**
   // * @return the {@link PojoDescriptorBuilderFactory} instance to use.
