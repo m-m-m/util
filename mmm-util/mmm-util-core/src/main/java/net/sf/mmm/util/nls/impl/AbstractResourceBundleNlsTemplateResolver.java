@@ -40,6 +40,10 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
     super();
   }
 
+  // TODO: do not require AbstractResourceBundle but accept any ResourceBundle
+  // instance. Therefore add a single Map that maps from values to a pair of
+  // <key, bundle> or one Map per bundle that maps directly to the key.
+
   /**
    * This method {@link #resolveTemplate(String) resolves} the
    * {@link NlsTemplate} from the given {@link AbstractResourceBundle}.
@@ -70,8 +74,8 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * 
    * @param internationalizedMessage is the message for which the
    *        {@link NlsTemplate} is required.
-   * @param bundles are the {@link AbstractResourceBundle resource-bundles}
-   *        that potentially declare the <code>internationalizedMessage</code>.
+   * @param bundles are the {@link AbstractResourceBundle resource-bundles} that
+   *        potentially declare the <code>internationalizedMessage</code>.
    * @return the according {@link NlsTemplate} or <code>null</code> if the
    *         <code>internationalizedMessage</code> is NOT declared in
    *         <code>resourceBundle</code>.

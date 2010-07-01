@@ -19,9 +19,8 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
  */
 @CliClass
 @CliModes(//
-{
-    @CliMode(id = CliMode.MODE_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, // 
-    usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE),
+{ @CliMode(id = CliMode.MODE_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, //
+usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE),
     @CliMode(id = CliMode.MODE_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT) })
 public abstract class AbstractMain {
 
@@ -88,18 +87,22 @@ public abstract class AbstractMain {
   protected int handleError(Exception exception, CliParser parser) {
 
     // TODO: NLS
+    int exitCode;
     AppendableWriter writer = new AppendableWriter(this.standardError);
     PrintWriter printStream = new PrintWriter(writer);
     if (exception instanceof CliException) {
       printStream.println("Error: " + exception.getMessage());
       printStream.println();
+      printStream.flush();
       printHelp(parser);
-      return 1;
+      exitCode = 1;
     } else {
       printStream.println("An unexpected error has occurred:");
       exception.printStackTrace(printStream);
-      return -1;
+      exitCode = -1;
     }
+    printStream.flush();
+    return exitCode;
   }
 
   /**

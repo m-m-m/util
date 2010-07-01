@@ -64,6 +64,9 @@ public @interface CliArgument {
   /**
    * The {@link #name() name} of the argument where to add this
    * {@link CliArgument} in the list of arguments.
+   * 
+   * @see #NAME_FIRST
+   * @see #NAME_LAST
    */
   String addNextTo();
 

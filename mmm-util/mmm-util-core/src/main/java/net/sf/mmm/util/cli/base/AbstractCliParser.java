@@ -23,11 +23,13 @@ import net.sf.mmm.util.cli.api.CliOptionMissingException;
 import net.sf.mmm.util.cli.api.CliOptionMissingValueException;
 import net.sf.mmm.util.cli.api.CliOptionUndefinedException;
 import net.sf.mmm.util.cli.api.CliOutputSettings;
+import net.sf.mmm.util.cli.api.CliParameterListEmptyException;
 import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsObject;
@@ -205,15 +207,20 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    * This method parses the value of a {@link CliOption}.
    * 
    * @param parserState is the {@link CliParserState}.
+   * @param argument is the commandline parameter.
    * @param argumentContainer is the {@link CliArgumentContainer} for the
    *        current argument.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
-  protected void parseArgument(CliParserState parserState, CliArgumentContainer argumentContainer,
-      CliParameterConsumer parameterConsumer) {
+  protected void parseArgument(CliParserState parserState, String argument,
+      CliArgumentContainer argumentContainer, CliParameterConsumer parameterConsumer) {
 
-    CliArgument cliArgument = argumentContainer.getArgument();
-
+    CliValueContainer valueContainer = this.valueMap.getOrCreate(argumentContainer);
+    valueContainer.setValue(argument, argumentContainer, this.cliState.getCliStyle(),
+        this.configuration, getLogger());
+    if (!valueContainer.isCollection()) {
+      parserState.argumentIndex++;
+    }
   }
 
   /**
@@ -221,6 +228,9 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    */
   public CliModeObject parseParameters(String... parameters) throws CliException {
 
+    if ((parameters == null) || (parameters.length == 0)) {
+      throw new CliParameterListEmptyException();
+    }
     CliParameterConsumer parameterConsumer = new CliParameterConsumer(parameters);
     CliParserState parserState = new CliParserState();
     while (parameterConsumer.hasNext()) {
@@ -258,10 +268,10 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    * 
    * @param argument is the command-line argument.
    * @param parserState is the {@link CliParserState}.
-   * @param argumentConsumer is the {@link CliParameterConsumer}.
+   * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
   protected void parseParameter(String argument, CliParserState parserState,
-      CliParameterConsumer argumentConsumer) {
+      CliParameterConsumer parameterConsumer) {
 
     if (!parserState.isOptionsComplete()) {
       CliOptionContainer optionContainer = this.cliState.getOption(argument);
@@ -287,7 +297,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
           }
         }
 
-        parseOption(parserState, argument, optionContainer, argumentConsumer);
+        parseOption(parserState, argument, optionContainer, parameterConsumer);
       } else {
         // no option found for argument...
         if (END_OPTIONS.equals(argument)) {
@@ -323,9 +333,10 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       List<CliArgumentContainer> argumentList = this.cliState.getArguments(parserState.currentMode);
       int argumentIndex = parserState.getArgumentIndex();
       if (argumentIndex >= argumentList.size()) {
-        // illegal argument
+        // TODO: illegal argument, defined exception
+        throw new NlsIllegalArgumentException(argument);
       } else {
-        // parseArgument();
+        parseArgument(parserState, argument, argumentList.get(argumentIndex), parameterConsumer);
       }
     }
   }
@@ -365,8 +376,8 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     arguments.put("argumentCount", Integer.valueOf(this.cliState.getArguments().size()));
     // TODO: NLS
     arguments.put(NlsObject.KEY_OPTION, "[<option>*]");
-    NlsWriter writer = new NlsWriter(target, arguments, settings.getLocale(), settings
-        .getLineSeparator(), nlsMessageFactory, settings.getTemplateResolver());
+    NlsWriter writer = new NlsWriter(target, arguments, settings.getLocale(),
+        settings.getLineSeparator(), nlsMessageFactory, settings.getTemplateResolver());
     // nlsMessageFactory.create(internationalizedMessage)
     writer.println(NlsBundleUtilCore.MSG_CLI_USAGE);
     // this.cliState.getOptions();
@@ -395,6 +406,10 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
             options.append("[");
           }
           options.append(cliOption.name());
+          if (!option.getSetter().getPropertyClass().equals(boolean.class)) {
+            options.append(" ");
+            options.append(cliOption.operand());
+          }
           if (!cliOption.required()) {
             options.append("]");
           }
@@ -446,6 +461,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
           }
         }
       }
+      writer.flush();
     }
     arguments.remove(NlsObject.KEY_MODE);
   }

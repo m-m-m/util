@@ -207,6 +207,34 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
   public static final String MSG_MAIN_MODE_VERSION_USAGE = "Print the version of this program.";
 
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE = "Create and/or update resource-bundle "
+      + "property-files from <bundle-class> for the given locales (including the root locale). "
+      + "Example:\n{mainClass} foo.bar.NlsBundleMyExample de de_DE en en_US en_GB fr zh ja_JP zh_TW\n"
+      + "For each locale a property-file foo/bar/NlsBundleMyExample_<locale>.properties "
+      + "will be created or updated in the base-path. In each property-file all "
+      + "properties defined in <bundle-class> will be added with a TODO-marker "
+      + "and the original text as value. If the property-file already exists, all "
+      + "existing properties will remain unchanged and comments will be kept.";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE_ENCODING = "Read and write "
+      + "property-files using the specified encoding {operand} (Default is {default}).";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE_PATH = "Write property-files "
+      + "to the base-path {operand} (Default is \"{default}\").";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE_DATE_PATTERN = "Use the specified "
+      + "date pattern for writing synchronization date to property-files (Default is \"{default}\").";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS = "The bundle-class "
+      + "for which the property-files should be created or update. It has to be "
+      + "the fully qualified name of a subclass of AbstractResourceBundle"
+      + ". For all given locales the according property-file is created or updated.";
+
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
   public static final String MSG_CLI_USAGE = "Usage: {mainClass} {option}";
 
@@ -240,6 +268,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.CliOptionAndArgumentAnnotationException */
   public static final String ERR_CLI_OPTION_AND_ARGUMENT_ANNOTATION = "The property "
       + "\"{property}\" can not be annotated both with @CliOption and @CliArgument!";
+
+  /** @see net.sf.mmm.util.cli.api.CliParameterListEmptyException */
+  public static final String ERR_CLI_PARAMETER_LIST_EMPTY = "No parameter given! You have to supply at least one commandline parameter.";
 
   /** @see net.sf.mmm.util.cli.api.CliClassNoPropertyException */
   public static final String ERR_CLI_CLASS_NO_PROPERTY = "The CLI class \"{type}\" "

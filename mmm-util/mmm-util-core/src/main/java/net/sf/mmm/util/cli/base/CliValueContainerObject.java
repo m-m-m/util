@@ -64,4 +64,12 @@ public class CliValueContainerObject implements CliValueContainer {
     }
     this.value = newValue;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isCollection() {
+  
+    return false;
+  }
 }

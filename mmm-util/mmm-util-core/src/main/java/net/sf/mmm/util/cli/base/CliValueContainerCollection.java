@@ -86,15 +86,23 @@ public class CliValueContainerCollection implements CliValueContainer {
     char collectionValueSeparator = cliStyle.collectionValueSeparator();
     if (collectionValueSeparator == CliStyle.COLLECTION_VALUE_SEPARATOR_NONE) {
       // multi-value style
-      setValueEntry(argument, parameterContainer, cliStyle, configuration, logger, setter
-          .getPropertyType());
+      setValueEntry(argument, parameterContainer, cliStyle, configuration, logger,
+          setter.getPropertyType());
     } else {
       CharSequenceScanner scanner = new CharSequenceScanner(argument);
       while (scanner.hasNext()) {
         String entry = scanner.readUntil(collectionValueSeparator, true);
-        setValueEntry(entry, parameterContainer, cliStyle, configuration, logger, setter
-            .getPropertyType());
+        setValueEntry(entry, parameterContainer, cliStyle, configuration, logger,
+            setter.getPropertyType());
       }
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isCollection() {
+
+    return true;
   }
 }

@@ -39,4 +39,11 @@ public interface CliValueContainer {
   void setValue(String argument, CliParameterContainer parameterContainer, CliStyle cliStyle,
       CliParserConfiguration configuration, Logger logger);
 
+  /**
+   * @return <code>true</code> if this is a container for a value of the type
+   *         array, {@link java.util.Collection} or {@link java.util.Map} -
+   *         <code>false</code> otherwise.
+   */
+  boolean isCollection();
+
 }

@@ -79,7 +79,7 @@ import java.lang.annotation.Target;
 public @interface CliOption {
 
   /** The default {@link #operand() operand}. */
-  String OPERAND_DEFAULT = "arg";
+  String OPERAND_DEFAULT = "ARG";
 
   /** The {@link #name()} of the option to get help/usage. */
   String NAME_HELP = "--help";

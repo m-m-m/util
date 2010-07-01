@@ -21,6 +21,7 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.base.DefaultLineWrapper;
@@ -103,6 +104,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
     }
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtilImpl.getInstance();
+    }
+    if (this.collectionReflectionUtil == null) {
+      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
     if (this.lineWrapper == null) {
       DefaultLineWrapper wrapper = new DefaultLineWrapper();
