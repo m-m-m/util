@@ -12,12 +12,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.junit.Test;
-
+import junit.framework.Assert;
 import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link ResourceBundleSynchronizer}.
@@ -63,14 +64,16 @@ public class ResourceBundleSynchronizerTest {
   @Test
   public void testSynchronizer() throws Exception {
 
-    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer(System.out);
+    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
     String targetPath = "target/test";
     FileUtilImpl.getInstance().deleteRecursive(new File(targetPath));
     Class<? extends AbstractResourceBundle> bundleClass = NlsBundleUtilCore.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
-    synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-        ResourceBundleSynchronizer.OPTION_ENCODING, encoding, bundleClass.getName(), locale1 });
+    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH,
+        targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
+        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(), locale1 });
+    Assert.assertEquals(0, exitCode);
     NlsBundleUtilCore bundle = new NlsBundleUtilCore();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
 

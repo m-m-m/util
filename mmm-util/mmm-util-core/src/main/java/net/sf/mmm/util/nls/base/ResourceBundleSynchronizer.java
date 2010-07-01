@@ -10,25 +10,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.cli.api.AbstractVersionedMain;
+import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.cli.api.CliClass;
+import net.sf.mmm.util.cli.api.CliMode;
+import net.sf.mmm.util.cli.api.CliModeObject;
+import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
-import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
 /**
  * This class can be used to create and update the localized bundles
@@ -40,7 +39,8 @@ import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ResourceBundleSynchronizer {
+@CliClass(usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE)
+public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
    * The command-line option to {@link #setDatePattern(String) set the
@@ -51,10 +51,13 @@ public class ResourceBundleSynchronizer {
   /** The command-line option to {@link #setEncoding(String) set the encoding}. */
   public static final String OPTION_ENCODING = "--encoding";
 
-  /** The command-line option to {@link #setBasePath(String) set the path}. */
+  /** The command-line option to {@link #setPath(String) set the path}. */
   public static final String OPTION_PATH = "--path";
 
-  /** @see #getBasePath() */
+  /** The command-line option to set the bundle-class. */
+  public static final String OPTION_BUNDLE_CLASS = "--bundle";
+
+  /** @see #getPath() */
   private static final String DEFAULT_BASE_PATH = "src/main/resources";
 
   /** @see #getEncoding() */
@@ -64,58 +67,42 @@ public class ResourceBundleSynchronizer {
   private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
 
   /** @see #getLocales() */
+  @CliArgument(name = "locales", addNextTo = CliArgument.NAME_LAST)
   private String[] locales;
 
-  /** @see #getBasePath() */
-  private String basePath;
+  /** @see #getPath() */
+  @CliOption(name = OPTION_PATH, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_PATH, operand = "DIR", aliases = "-p")
+  private String path;
 
   /** @see #getEncoding() */
+  @CliOption(name = OPTION_ENCODING, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_ENCODING, operand = "ENC", aliases = "-e")
   private String encoding;
 
   /** @see #getNewline() */
   private String newline;
 
   /** @see #getDatePattern() */
+  @CliOption(name = OPTION_DATE_PATTERN, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN, operand = "PATTERN", aliases = "-d")
   private String datePattern;
+
+  /** @see #getBundleClass() */
+  @CliOption(name = OPTION_BUNDLE_CLASS, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS, operand = "CLASS", aliases = "-b", required = true)
+  private Class<? extends ResourceBundle> bundleClass;
 
   /** @see #getStreamUtil() */
   private StreamUtil streamUtil;
-
-  /** @see #getOut() */
-  private PrintStream out;
 
   /**
    * The constructor.
    */
   public ResourceBundleSynchronizer() {
 
-    // CHECKSTYLE:OFF (compatibility fallback)
-    this(System.out);
-    // CHECKSTYLE:ON
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param out a {@link PrintStream}, typically {@link System#out}.
-   */
-  public ResourceBundleSynchronizer(PrintStream out) {
-
     super();
-    this.basePath = DEFAULT_BASE_PATH;
+    this.path = DEFAULT_BASE_PATH;
     this.datePattern = DEFAULT_DATE_PATTERN;
     this.encoding = DEFAULT_ENCODING;
     this.newline = "\n";
-    this.locales = new String[] { "" };
-    this.out = out;
-  }
-
-  /**
-   * @return the out-stream where to print information to.
-   */
-  public PrintStream getOut() {
-
-    return this.out;
+    this.locales = null;
   }
 
   /**
@@ -165,7 +152,7 @@ public class ResourceBundleSynchronizer {
    * 
    * @param locales are the locales to set
    */
-  public void setLocales(Locale[] locales) {
+  public void setLocales(Locale... locales) {
 
     this.locales = new String[locales.length];
     for (int i = 0; i < locales.length; i++) {
@@ -181,19 +168,19 @@ public class ResourceBundleSynchronizer {
    * @return the basePath is the base path where the resource bundles are
    *         written to.
    */
-  public String getBasePath() {
+  public String getPath() {
 
-    return this.basePath;
+    return this.path;
   }
 
   /**
-   * This method sets the {@link #getBasePath() base-path}.
+   * This method sets the {@link #getPath() base-path}.
    * 
    * @param basePath the basePath to set
    */
-  public void setBasePath(String basePath) {
+  public void setPath(String basePath) {
 
-    this.basePath = basePath;
+    this.path = basePath;
   }
 
   /**
@@ -237,10 +224,32 @@ public class ResourceBundleSynchronizer {
   }
 
   /**
+   * This method gets the {@link Class} reflecting the {@link ResourceBundle} to
+   * synchronize.
+   * 
+   * @return the bundle-class.
+   */
+  public Class<? extends ResourceBundle> getBundleClass() {
+
+    return this.bundleClass;
+  }
+
+  /**
+   * This method sets the {@link #getBundleClass() bundle-class}.
+   * 
+   * @param bundleClass is the bundle-class to set
+   */
+  public void setBundleClass(Class<? extends ResourceBundle> bundleClass) {
+
+    this.bundleClass = bundleClass;
+  }
+
+  /**
    * This method gets the {@link StreamUtilImpl} instance to use.
    * 
    * @return the {@link StreamUtilImpl}.
    */
+  @Override
   public StreamUtil getStreamUtil() {
 
     if (this.streamUtil == null) {
@@ -270,157 +279,107 @@ public class ResourceBundleSynchronizer {
    */
   public void synchronize(ResourceBundle bundle) throws IOException {
 
+    PrintWriter out = getStandardOutput();
     if (bundle.keySet().isEmpty()) {
-      this.out.println(bundle.getClass().getName() + " is empty - noting to do!");
+      out.println(bundle.getClass().getName() + " is empty - noting to do!");
       return;
     }
     SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
     String date = sdf.format(new Date());
-    String path = this.basePath + File.separatorChar
+    String propertyPath = this.path + File.separatorChar
         + bundle.getClass().getName().replace('.', File.separatorChar);
-    new File(path).getParentFile().mkdirs();
+    new File(propertyPath).getParentFile().mkdirs();
+    synchronize(bundle, "", propertyPath, date);
     for (String locale : this.locales) {
-      StringBuffer pathBuffer = new StringBuffer(path);
-      if (locale.length() > 0) {
-        pathBuffer.append('_');
-        pathBuffer.append(locale);
-      }
-      pathBuffer.append(".properties");
-      File file = new File(pathBuffer.toString());
-      Properties existingBundle;
-      boolean update = file.exists();
-      if (update) {
-        this.out.println("Updating " + file.getPath());
-        FileInputStream in = new FileInputStream(file);
-        Reader reader = new InputStreamReader(in, this.encoding);
-        existingBundle = getStreamUtil().loadProperties(reader);
-      } else {
-        this.out.println("Creating " + file.getPath());
-        existingBundle = new Properties();
-      }
-      StringBuffer buffer = new StringBuffer();
-      for (String key : bundle.keySet()) {
-        if (!existingBundle.containsKey(key)) {
-          String value = bundle.getString(key);
-          buffer.append(key);
-          buffer.append(" = ");
-          if (locale.length() > 0) {
-            buffer.append("TODO(");
-            buffer.append(locale);
-            buffer.append("):");
-          }
-          value = value.replace("\r", "");
-          value = value.replace("\n", "\\n");
-          buffer.append(value);
-          buffer.append(this.newline);
-        }
-      }
-      if (buffer.length() > 0) {
-        OutputStream outStream = new FileOutputStream(file, update);
-        try {
-          Writer writer = new OutputStreamWriter(outStream, this.encoding);
-          try {
-            if (update) {
-              writer.append("# Updated ");
-            } else {
-              writer.append("# Generated ");
-            }
-            writer.append(date);
-            writer.append(this.newline);
-            writer.write(buffer.toString());
-            writer.flush();
-          } finally {
-            writer.close();
-          }
-        } finally {
-          outStream.close();
-        }
-      }
-
+      synchronize(bundle, locale, propertyPath, date);
     }
   }
 
   /**
-   * This method prints the usage of this class.
-   */
-  public void usage() {
-
-    Map<String, Object> arguments = new HashMap<String, Object>();
-    arguments.put("mainClass", ResourceBundleSynchronizer.class.getName());
-    arguments.put("encoding", DEFAULT_ENCODING);
-    arguments.put("path", DEFAULT_BASE_PATH);
-    arguments.put("datePattern", DEFAULT_DATE_PATTERN);
-    arguments.put("exampleClass", NlsBundleSynchronizer.class.getName());
-    NlsMessage message = NlsAccess.getFactory().create(
-        NlsBundleSynchronizer.MSG_SYNCHRONIZER_USAGE, arguments);
-    NlsTemplateResolver nationalizer = new NlsTemplateResolverImpl(new NlsBundleSynchronizer());
-    this.out.println(message.getLocalizedMessage(Locale.getDefault(), nationalizer));
-  }
-
-  /**
-   * The non-static version of the {@link #main(String[]) main-method}.
+   * Like {@link #synchronize(ResourceBundle)} but for a single {@link Locale}.
    * 
-   * @param arguments are the command-line arguments.
-   * @return the exit-code. <code>0</code> for success, anything else if
-   *         something went wrong.
-   * @throws Exception if the operation failed.
+   * @param bundle is the bundle instance as java object.
+   * @param locale is the locale to synchronize as string.
+   * @param propertyPath is the path to the property-file excluding
+   *        locale-suffix.
+   * @param date is the current date as string.
+   * @throws IOException if an I/O problem occurred.
    */
-  public int run(String[] arguments) throws Exception {
+  protected void synchronize(ResourceBundle bundle, String locale, String propertyPath, String date)
+      throws IOException {
 
-    String bundleClassName = null;
-    List<String> currentLocales = new ArrayList<String>();
-    currentLocales.add("");
-    for (int argIndex = 0; argIndex < arguments.length; argIndex++) {
-      String arg = arguments[argIndex];
-      if ((arg.length() > 0) && (arg.charAt(0) == '-')) {
-        if ("--help".equals(arg)) {
-          usage();
-          return 0;
+    PrintWriter out = getStandardOutput();
+    StringBuffer pathBuffer = new StringBuffer(propertyPath);
+    if (locale.length() > 0) {
+      pathBuffer.append('_');
+      pathBuffer.append(locale);
+    }
+    pathBuffer.append(".properties");
+    File file = new File(pathBuffer.toString());
+    Properties existingBundle;
+    boolean update = file.exists();
+    if (update) {
+      out.println("Updating " + file.getPath());
+      FileInputStream in = new FileInputStream(file);
+      Reader reader = new InputStreamReader(in, this.encoding);
+      existingBundle = getStreamUtil().loadProperties(reader);
+    } else {
+      out.println("Creating " + file.getPath());
+      existingBundle = new Properties();
+    }
+    StringBuffer buffer = new StringBuffer();
+    for (String key : bundle.keySet()) {
+      if (!existingBundle.containsKey(key)) {
+        String value = bundle.getString(key);
+        buffer.append(key);
+        buffer.append(" = ");
+        if (locale.length() > 0) {
+          buffer.append("TODO(");
+          buffer.append(locale);
+          buffer.append("):");
         }
-        argIndex++;
-        if ((bundleClassName != null) || (argIndex >= arguments.length)) {
-          usage();
-          return -1;
-        }
-        String value = arguments[argIndex];
-        if (OPTION_ENCODING.equals(arg)) {
-          setEncoding(value);
-        } else if (OPTION_PATH.equals(arg)) {
-          setBasePath(value);
-        } else if (OPTION_DATE_PATTERN.equals(arg)) {
-          setDatePattern(value);
-        } else {
-          this.out.println("Error: unknown option '" + arg + "'!");
-          usage();
-          return -1;
-        }
-      } else if (bundleClassName == null) {
-        bundleClassName = arg;
-      } else {
-        currentLocales.add(arg);
+        // escape newlines for properties-syntax
+        value = value.replace("\r", "");
+        value = value.replace("\n", "\\n");
+        buffer.append(value);
+        buffer.append(this.newline);
       }
     }
-    if (bundleClassName == null) {
-      this.out.println("Error: <bundle-class> not specified!");
-      usage();
-      return -1;
-    }
-    String[] localeArray = currentLocales.toArray(new String[currentLocales.size()]);
-    setLocales(localeArray);
-    Class<?> bundleClass;
-    try {
-      bundleClass = Class.forName(bundleClassName);
-      if (!ResourceBundle.class.isAssignableFrom(bundleClass)) {
-        throw new IllegalArgumentException("Given class '" + bundleClassName
-            + "' does NOT extend '" + ResourceBundle.class.getName() + "'!");
+    if (buffer.length() > 0) {
+      OutputStream outStream = new FileOutputStream(file, update);
+      try {
+        Writer writer = new OutputStreamWriter(outStream, this.encoding);
+        try {
+          if (update) {
+            writer.append("# Updated ");
+          } else {
+            writer.append("# Generated ");
+          }
+          writer.append(date);
+          writer.append(this.newline);
+          writer.write(buffer.toString());
+          writer.flush();
+        } finally {
+          writer.close();
+        }
+      } finally {
+        outStream.close();
       }
-      ResourceBundle bundle = (ResourceBundle) bundleClass.newInstance();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected int run(CliModeObject mode) throws Exception {
+
+    if (CliMode.MODE_DEFAULT.equals(mode.getId())) {
+      ResourceBundle bundle = this.bundleClass.newInstance();
       synchronize(bundle);
-      return 0;
-    } catch (Throwable e) {
-      this.out.println("Error loading class '" + bundleClassName + "': " + e.getMessage());
-      usage();
-      return -1;
+      return EXIT_CODE_OK;
+    } else {
+      return super.run(mode);
     }
   }
 
@@ -431,18 +390,8 @@ public class ResourceBundleSynchronizer {
    */
   public static void main(String[] arguments) {
 
-    // CHECKSTYLE:OFF (OK for main methods)
-    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer(System.out);
-    // CHECKSTYLE:ON
-    int exitCode;
-    try {
-      exitCode = synchronizer.run(arguments);
-    } catch (Exception e) {
-      // CHECKSTYLE:OFF (OK for main methods)
-      e.printStackTrace();
-      // CHECKSTYLE:ON
-      exitCode = -1;
-    }
+    ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
+    int exitCode = synchronizer.run(arguments);
     // CHECKSTYLE:OFF (OK for main methods)
     System.exit(exitCode);
     // CHECKSTYLE:ON
