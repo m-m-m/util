@@ -24,6 +24,7 @@
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToNumber"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToString"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToEnum"/>
+        <bean class="net.sf.mmm.util.value.impl.ValueConverterToClass"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCompatiblePojo"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToCollection"/>
         <bean class="net.sf.mmm.util.value.impl.ValueConverterToArrayOfBoolean"/>

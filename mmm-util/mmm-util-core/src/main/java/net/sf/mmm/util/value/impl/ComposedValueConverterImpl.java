@@ -495,7 +495,10 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
         }
         for (Class<?> superInterface : currentClass.getInterfaces()) {
           if (isAccepted(superInterface)) {
-            convertRecursive(value, valueSource, genericTargetType, superInterface);
+            TARGET result = convertRecursive(value, valueSource, genericTargetType, superInterface);
+            if (result != null) {
+              return result;
+            }
           }
         }
         if (currentClass.isInterface() && (value.getClass() == currentClass)) {

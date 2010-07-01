@@ -31,7 +31,6 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
    * 
    * @param converter is the converter to add.
    */
-  @SuppressWarnings({ "rawtypes" })
   public void addConverterComponent(ValueConverter<?, ?> converter) {
 
     if (converter instanceof AbstractRecursiveValueConverter) {
@@ -55,6 +54,7 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
     addConverterComponent(new ValueConverterToNumber());
     addConverterComponent(new ValueConverterToString());
     addConverterComponent(new ValueConverterToEnum());
+    addConverterComponent(new ValueConverterToClass());
     addConverterComponent(new ValueConverterToCompatiblePojo());
     addConverterComponent(new ValueConverterToCollection());
     addConverterComponent(new ValueConverterToArrayOfBoolean());
