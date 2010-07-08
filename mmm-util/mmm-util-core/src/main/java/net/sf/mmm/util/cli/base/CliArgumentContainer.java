@@ -6,6 +6,7 @@ package net.sf.mmm.util.cli.base;
 import java.lang.annotation.Annotation;
 
 import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
@@ -25,10 +26,12 @@ public class CliArgumentContainer extends CliParameterContainer {
    * 
    * @param argument is the {@link #getArgument() argument}.
    * @param setter is the {@link #getSetter() setter}.
+   * @param getter is the {@link #getGetter() getter}
    */
-  public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter) {
+  public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter,
+      PojoPropertyAccessorNonArg getter) {
 
-    super(setter);
+    super(setter, getter);
     this.argument = argument;
   }
 

@@ -25,6 +25,17 @@ public interface CliModeObject {
   String getId();
 
   /**
+   * The {@link CliMode#title() title} of the {@link #getMode() mode}. If the
+   * title is NOT set, the {@link #getId() ID} is returned<br>
+   * <b>ATTENTION:</b><br>
+   * Please use this method to get the title as {@link #getMode()} may return
+   * <code>null</code>.
+   * 
+   * @return the title or the {@link #getId() ID} if title is NOT set.
+   */
+  String getTitle();
+
+  /**
    * This method gets the actual {@link CliMode}.
    * 
    * @return the {@link CliMode} or <code>null</code> if no {@link CliMode}

@@ -3,8 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import java.io.Flushable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -28,13 +31,14 @@ import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
-import net.sf.mmm.util.nls.base.NlsWriter;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumnInfo;
@@ -349,41 +353,25 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     printHelp(target, new CliOutputSettings());
   }
 
-  protected void printNlsText(String text, Map<String, Object> arguments, TextTableInfo tableInfo,
-      TextColumnInfo columnInfo) {
-
-    LineWrapper lineWrapper = this.configuration.getLineWrapper();
-
-  }
-
   /**
    * {@inheritDoc}
    */
-  public void printHelp(Appendable target, CliOutputSettings settings) {
+  public void printHelp(Appendable appendable, CliOutputSettings settings) {
 
     NlsMessageFactory nlsMessageFactory = this.configuration.getNlsMessageFactory();
-    TextTableInfo tableInfo = new TextTableInfo();
-    tableInfo.setWidth(settings.getWidth());
-    tableInfo.setLineSeparator(settings.getLineSeparator());
 
-    TextColumnInfo optionColumnInfo = new TextColumnInfo();
-    optionColumnInfo.setLocale(settings.getLocale());
-    optionColumnInfo.setIndent("  ");
+    CliHelpWriter writer = new CliHelpWriter(appendable, settings, this.configuration,
+        this.cliState, this.state);
 
-    Map<String, Object> arguments = new HashMap<String, Object>();
-    arguments.put("mainClass", this.cliState.getName());
-    arguments.put("optionCount", Integer.valueOf(this.cliState.getOptions().size()));
-    arguments.put("argumentCount", Integer.valueOf(this.cliState.getArguments().size()));
+    Map<String, Object> nlsArguments = writer.getArguments();
     // TODO: NLS
-    arguments.put(NlsObject.KEY_OPTION, "[<option>*]");
-    NlsWriter writer = new NlsWriter(target, arguments, settings.getLocale(),
-        settings.getLineSeparator(), nlsMessageFactory, settings.getTemplateResolver());
-    // nlsMessageFactory.create(internationalizedMessage)
-    writer.println(NlsBundleUtilCore.MSG_CLI_USAGE);
-    // this.cliState.getOptions();
+    nlsArguments.put(NlsObject.KEY_OPTION, "[<option>*]");
+
+    writer.printText(NlsBundleUtilCore.MSG_CLI_USAGE);
+
     String mainUsage = this.cliState.getCliClass().usage();
     if (mainUsage.length() > 0) {
-      writer.println(mainUsage);
+      writer.printText(mainUsage);
     }
     Map<CliOption, CliOptionHelpInfo> option2HelpMap = new HashMap<CliOption, AbstractCliParser.CliOptionHelpInfo>();
     for (String modeId : this.cliState.getModeIds()) {
@@ -391,96 +379,81 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       CliModeObject mode = this.cliState.getMode(modeId);
       CliMode cliMode = mode.getMode();
       if ((cliMode == null) || (!cliMode.isAbstract())) {
-        NlsMessage modeMessage = nlsMessageFactory.create(mode.getMode().title());
-        arguments.put(NlsObject.KEY_MODE, modeMessage);
-        writer.println(NlsBundleUtilCore.MSG_CLI_MODE_USAGE);
-        StringBuilder options = new StringBuilder();
+        NlsMessage modeMessage = nlsMessageFactory.create(mode.getTitle());
+        nlsArguments.put(NlsObject.KEY_MODE, modeMessage);
+        writer.printText(NlsBundleUtilCore.MSG_CLI_MODE_USAGE);
+        StringBuilder parameters = new StringBuilder();
         Collection<CliOptionContainer> modeOptions = this.cliState.getOptions(mode);
         int maxOptionColumnWidth = 0;
         for (CliOptionContainer option : modeOptions) {
           CliOption cliOption = option.getOption();
-          if (options.length() > 0) {
-            options.append(" ");
+          if (parameters.length() > 0) {
+            parameters.append(" ");
           }
           if (!cliOption.required()) {
-            options.append("[");
+            parameters.append("[");
           }
-          options.append(cliOption.name());
+          parameters.append(cliOption.name());
           if (!option.getSetter().getPropertyClass().equals(boolean.class)) {
-            options.append(" ");
-            options.append(cliOption.operand());
+            parameters.append(" ");
+            parameters.append(cliOption.operand());
           }
           if (!cliOption.required()) {
-            options.append("]");
+            parameters.append("]");
           }
           CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
           if (helpInfo == null) {
-            helpInfo = new CliOptionHelpInfo(option, nlsMessageFactory, settings);
+            helpInfo = new CliOptionHelpInfo(option, this.configuration, settings);
             option2HelpMap.put(cliOption, helpInfo);
           }
-          int len = helpInfo.getLength();
-          if (len > maxOptionColumnWidth) {
-            maxOptionColumnWidth = len;
+          if (helpInfo.length > maxOptionColumnWidth) {
+            maxOptionColumnWidth = helpInfo.length;
           }
         }
-        this.cliState.getOptions(mode);
-        arguments.put(NlsObject.KEY_OPTION, options);
-        writer.println(NlsBundleUtilCore.MSG_CLI_USAGE);
+        List<CliArgumentContainer> argumentList = this.cliState.getArguments(mode);
+        int maxArgumentColumnWidth = 0;
+        List<CliArgumentHelpInfo> argumentHelpList;
+        if (argumentList != null) {
+          argumentHelpList = new ArrayList<AbstractCliParser.CliArgumentHelpInfo>(
+              argumentList.size());
+          for (CliArgumentContainer argumentContainer : argumentList) {
+            CliArgumentHelpInfo argumentHelpInfo = new CliArgumentHelpInfo(argumentContainer,
+                this.configuration, settings);
+            int argLength = argumentHelpInfo.name.length();
+            if (argLength > maxArgumentColumnWidth) {
+              maxArgumentColumnWidth = argLength;
+            }
+            parameters.append(" <");
+            parameters.append(argumentHelpInfo.name);
+            parameters.append(">");
+            argumentHelpList.add(argumentHelpInfo);
+          }
+        } else {
+          argumentHelpList = Collections.emptyList();
+        }
+
+        nlsArguments.put(NlsObject.KEY_OPTION, parameters);
+        writer.printText(NlsBundleUtilCore.MSG_CLI_USAGE);
+        writer.println();
         String optionUsage = "";
         if (cliMode != null) {
           optionUsage = cliMode.usage();
         }
         if (optionUsage.length() > 0) {
-          writer.println(optionUsage);
+          writer.printText(optionUsage);
         }
-        // required options
-        boolean firstOption = true;
-        for (CliOptionContainer option : modeOptions) {
-          CliOption cliOption = option.getOption();
-          if (cliOption.required()) {
-            if (firstOption) {
-              writer.println(NlsBundleUtilCore.MSG_CLI_REQUIRED_OPTIONS);
-              firstOption = false;
-            }
-            CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
-            helpInfo.print(writer, maxOptionColumnWidth + 1);
-          }
-        }
-
-        // additional options
-        firstOption = true;
-        for (CliOptionContainer option : modeOptions) {
-          CliOption cliOption = option.getOption();
-          if (!cliOption.required()) {
-            if (firstOption) {
-              writer.println(NlsBundleUtilCore.MSG_CLI_ADDITIONAL_OPTIONS);
-              firstOption = false;
-            }
-            CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
-            helpInfo.print(writer, maxOptionColumnWidth + 1);
-          }
+        writer.printOptions(modeOptions, option2HelpMap, maxOptionColumnWidth);
+        writer.printArguments(argumentHelpList, maxArgumentColumnWidth);
+      }
+      if (appendable instanceof Flushable) {
+        try {
+          ((Flushable) appendable).flush();
+        } catch (Exception e) {
+          throw new RuntimeIoException(e, IoMode.FLUSH);
         }
       }
-      writer.flush();
     }
-    arguments.remove(NlsObject.KEY_MODE);
-  }
-
-  protected void printOptions(Collection<CliOptionContainer> modeOptions, NlsWriter writer,
-      Map<CliOption, CliOptionHelpInfo> option2HelpMap, int maxOptionColumnWidth) {
-
-    boolean firstOption = true;
-    for (CliOptionContainer option : modeOptions) {
-      CliOption cliOption = option.getOption();
-      if (cliOption.required()) {
-        if (firstOption) {
-          writer.println(NlsBundleUtilCore.MSG_CLI_REQUIRED_OPTIONS);
-          firstOption = false;
-        }
-        CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
-        helpInfo.print(writer, maxOptionColumnWidth + 1);
-      }
-    }
+    nlsArguments.remove(NlsObject.KEY_MODE);
   }
 
   /**
@@ -554,7 +527,8 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
 
     /**
      * This method determines if the {@link CliOption options} are completed and
-     * further command-line parameters have to be {@link CliArgument arguments}.
+     * further command-line parameters have to be
+     * {@link net.sf.mmm.util.cli.api.CliArgument arguments}.
      * 
      * @see AbstractCliParser#END_OPTIONS
      * 
@@ -588,107 +562,107 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
   }
 
   /**
-   * TODO
+   * This inner class holds the help information for a single {@link CliOption}.
    */
   protected static class CliOptionHelpInfo {
 
     /** The actual option. */
     private final CliOptionContainer option;
 
-    /**
-     * The syntax of the option. Typically one entry. If it does NOT fit in one
-     * line, multiple entries.
-     */
-    private final List<String> syntaxLines;
-
-    /** The {@link CliOutputSettings}. */
-    private final CliOutputSettings settings;
+    /** The syntax of the option. */
+    private final String syntax;
 
     /**
      * {@link NlsMessage#getLocalizedMessage(java.util.Locale) Localized
-     * message} for {@link CliOption#usage() usage}.
+     * message} for {@link CliOption#operand() operand}.
      */
-    private final String usage;
+    private final String operand;
 
     /** The maximum length of all syntax lines of this info. */
-    private int length;
+    private final int length;
+
+    /** The current index in the buffer for {@link #syntax}. */
+    private int lineIndex;
+
+    /** The current maximum line index. */
+    private int lineLength;
 
     /**
      * The constructor.
      * 
      * @param option is the {@link CliOptionContainer}.
-     * @param nlsMessageFactory is the {@link NlsMessageFactory}.
+     * @param configuration is the {@link CliParserConfiguration}.
      * @param settings are the {@link CliOutputSettings}.
      */
-    public CliOptionHelpInfo(CliOptionContainer option, NlsMessageFactory nlsMessageFactory,
+    public CliOptionHelpInfo(CliOptionContainer option, CliParserConfiguration configuration,
         CliOutputSettings settings) {
 
       super();
       this.option = option;
-      this.settings = settings;
-      this.syntaxLines = new ArrayList<String>();
+      StringBuilder syntaxBuilder = new StringBuilder();
       int maxLength = settings.getWidth() / 2 - 1;
       Locale locale = settings.getLocale();
       CliOption cliOption = this.option.getOption();
-      NlsMessage operandMessage = nlsMessageFactory.create(cliOption.operand());
-      String operand = operandMessage.getLocalizedMessage(locale);
-      NlsMessage usageMessage = nlsMessageFactory.create(cliOption.usage(), NlsObject.KEY_OPERAND,
-          operand);
-      this.usage = usageMessage.getLocalizedMessage(locale);
-      StringBuilder syntax = new StringBuilder();
-      syntax.append(cliOption.name());
-      this.length = syntax.length();
+      NlsMessage operandMessage = configuration.getNlsMessageFactory().create(cliOption.operand());
+      this.operand = operandMessage.getLocalizedMessage(locale,
+          configuration.getNlsTemplateResolver());
+      syntaxBuilder.append(cliOption.name());
+      this.lineLength = syntaxBuilder.length();
+      // this.lineIndex = this.lineLength;
       String[] aliases = cliOption.aliases();
-      if (aliases.length > 0) {
-        String alias = " (" + aliases[0];
-        if (aliases.length == 1) {
+      for (int i = 0; i < aliases.length; i++) {
+        String prefix;
+        if (i == 0) {
+          prefix = " (";
+        } else {
+          prefix = " ";
+        }
+        String alias = prefix + aliases[i];
+        if (i == (aliases.length - 1)) {
           alias = alias + ")";
         }
-        syntax = append(syntax, alias, maxLength);
-        for (int i = 1; i < aliases.length; i++) {
-          alias = " " + aliases[i];
-          if (i == (aliases.length - 1)) {
-            alias = aliases + ")";
-          }
-          syntax = append(syntax, alias, maxLength);
-        }
+        append(syntaxBuilder, alias, maxLength, settings);
       }
       if (!boolean.class.equals(option.getSetter().getPropertyClass())) {
-        syntax = append(syntax, " " + operand, maxLength);
+        append(syntaxBuilder, " " + this.operand, maxLength, settings);
       }
-      int len = syntax.length();
-      if (len > this.length) {
-        this.length = len;
+      // length of last line...
+      int len = syntaxBuilder.length() - this.lineIndex;
+      if (len > this.lineLength) {
+        this.lineLength = len;
       }
-      this.syntaxLines.add(syntax.toString());
+      this.length = this.lineLength;
+      this.syntax = syntaxBuilder.toString();
     }
 
     /**
+     * This method appends a single option to the syntax. It automatically wraps
+     * and updates {@link #lineLength} and {@link #lineIndex}.
      * 
-     * TODO: javadoc
-     * 
-     * @param syntax
-     * @param text
-     * @param maxLength
-     * @return
+     * @param syntaxBuilder is the {@link StringBuilder buffer} used to build
+     *        the {@link #getSyntax() syntax}.
+     * @param text is the text to append.
+     * @param maxLength is the maximum length allowed for a single line.
+     * @param settings are the {@link CliOutputSettings}.
      */
-    private StringBuilder append(StringBuilder syntax, String text, int maxLength) {
+    private void append(StringBuilder syntaxBuilder, String text, int maxLength,
+        CliOutputSettings settings) {
 
-      int len = syntax.length();
-      int newLen = len + text.length();
-      if (newLen < maxLength) {
-        syntax.append(text);
-        return syntax;
-      } else {
-        if (len > this.length) {
-          this.length = len;
-        }
-        this.syntaxLines.add(syntax.toString());
-        StringBuilder newSyntax = new StringBuilder();
-        newSyntax.append("  ");
-        newSyntax.append(text);
-        return newSyntax;
-      }
+      syntaxBuilder.append(text);
+
+      // int len = syntaxBuilder.length() - this.lineIndex;
+      // int newLen = len + text.length();
+      // if (newLen < maxLength) {
+      // syntaxBuilder.append(text);
+      // } else {
+      // if (len > this.lineLength) {
+      // this.lineLength = len;
+      // }
+      // syntaxBuilder.append(settings.getLineSeparator());
+      // this.lineIndex = syntaxBuilder.length();
+      // syntaxBuilder.append("  ");
+      // syntaxBuilder.append(text);
+      // }
     }
 
     /**
@@ -700,81 +674,283 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     }
 
     /**
-     * This method writes the help of this option to the given
-     * <code>writer</code>.
-     * 
-     * @param writer is where to write the message to.
-     * @param optionsColumnWith is the number of characters to use for the
-     *        options syntax. The actual usage of the option is "indented" with
-     *        this index (two column layout).
+     * @return the syntax
      */
-    public void print(NlsWriter writer, int optionsColumnWith) {
+    public String getSyntax() {
 
-      assert (this.syntaxLines.size() > 0);
-      int usageColumnWith = this.settings.getWidth() - optionsColumnWith;
-      int usageLength = this.usage.length();
-      int usageStart = 0;
-      // loop over syntax lines
-      for (String syntax : this.syntaxLines) {
-        writer.printRaw(syntax);
-        int delta = optionsColumnWith - syntax.length();
-        assert (delta > 0);
-        for (int i = 0; i < delta; i++) {
-          writer.printRaw(" ");
-        }
-        //
-        if (usageStart < usageLength) {
-          usageStart = printUsage(writer, usageStart, usageColumnWith);
-        }
-      }
-      String indent = null;
-      while (usageStart < usageLength) {
-        if (indent == null) {
-          StringBuilder buffer = new StringBuilder(usageColumnWith);
-          for (int i = 0; i < usageColumnWith; i++) {
-            buffer = buffer.append(' ');
+      return this.syntax;
+    }
+
+    /**
+     * @return the operand
+     */
+    public String getOperand() {
+
+      return this.operand;
+    }
+
+  }
+
+  /**
+   * This inner class holds the help information for a single
+   * {@link CliArgument}.
+   */
+  public static class CliArgumentHelpInfo {
+
+    /** @see #getArgument() */
+    private final CliArgumentContainer argument;
+
+    /** @see #getName() */
+    private final String name;
+
+    /**
+     * The constructor.
+     * 
+     * @param argument is the {@link CliArgumentContainer}.
+     * @param configuration is the {@link CliParserConfiguration}.
+     * @param settings are the {@link CliOutputSettings}.
+     */
+    public CliArgumentHelpInfo(CliArgumentContainer argument, CliParserConfiguration configuration,
+        CliOutputSettings settings) {
+
+      super();
+      this.argument = argument;
+      NlsMessage message = configuration.getNlsMessageFactory().create(
+          argument.getArgument().name());
+      this.name = message.getLocalizedMessage(settings.getLocale(),
+          configuration.getNlsTemplateResolver());
+    }
+
+    /**
+     * This method gets the {@link CliArgumentContainer}.
+     * 
+     * @return the {@link CliArgumentContainer}.
+     */
+    public CliArgumentContainer getArgument() {
+
+      return this.argument;
+    }
+
+    /**
+     * This method gets the name of the {@link CliArgument argument}.
+     * 
+     * @return the {@link NlsMessage#getLocalizedMessage(java.util.Locale)
+     *         localized message} for the {@link CliArgument#name()
+     *         argument-name}.
+     */
+    public String getName() {
+
+      return this.name;
+    }
+  }
+
+  /**
+   * This inner class is a helper to simplify writing the help-usage.
+   */
+  public static class CliHelpWriter {
+
+    /** The {@link Appendable} where to write help to. */
+    private final Appendable appendable;
+
+    /** The {@link TextTableInfo}. */
+    private final TextTableInfo tableInfo;
+
+    /** The {@link TextColumnInfo} for parameters (e.g. "--help (-h)"). */
+    private final TextColumnInfo parameterColumnInfo;
+
+    /** The {@link TextColumnInfo} for the main column. */
+    private final TextColumnInfo mainColumnInfo;
+
+    /** The {@link CliParserConfiguration}. */
+    private final CliParserConfiguration configuration;
+
+    /** The NLS-arguments. */
+    private final Map<String, Object> arguments;
+
+    /** The {@link AbstractCliParser#getState() state-object}. */
+    private final Object state;
+
+    /**
+     * The constructor.
+     * 
+     * @param appendable is the {@link Appendable} where to write help to.
+     * @param settings is the {@link CliOutputSettings}.
+     * @param configuration is the {@link CliParserConfiguration}.
+     * @param cliState is the {@link CliState}.
+     * @param state is the {@link AbstractCliParser#getState() state-object}.
+     */
+    public CliHelpWriter(Appendable appendable, CliOutputSettings settings,
+        CliParserConfiguration configuration, CliState cliState, Object state) {
+
+      super();
+      this.appendable = appendable;
+      this.state = state;
+
+      String lineSeparator = settings.getLineSeparator();
+      this.tableInfo = new TextTableInfo();
+      this.tableInfo.setWidth(settings.getWidth());
+      this.tableInfo.setLineSeparator(lineSeparator);
+
+      this.parameterColumnInfo = new TextColumnInfo();
+      // Locale = US?
+      this.parameterColumnInfo.setLocale(settings.getLocale());
+      this.parameterColumnInfo.setIndent("  ");
+
+      this.mainColumnInfo = new TextColumnInfo();
+      this.parameterColumnInfo.setLocale(settings.getLocale());
+      this.parameterColumnInfo.setIndent("  ");
+      this.parameterColumnInfo.setBorderRight("  ");
+
+      this.arguments = new HashMap<String, Object>();
+      this.arguments.put("mainClass", cliState.getName());
+      this.arguments.put("optionCount", Integer.valueOf(cliState.getOptions().size()));
+      this.arguments.put("argumentCount", Integer.valueOf(cliState.getArguments().size()));
+
+      this.configuration = configuration;
+    }
+
+    /**
+     * @return the arguments
+     */
+    public Map<String, Object> getArguments() {
+
+      return this.arguments;
+    }
+
+    /**
+     * This method performs localization of the given NLS-text (see
+     * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}) and performs
+     * {@link LineWrapper line-wrapping} while writing it to the
+     * {@link Appendable} for help-usage output.
+     * 
+     * @param nlsText is the internationalized text to print.
+     */
+    public void printText(String nlsText) {
+
+      LineWrapper lineWrapper = this.configuration.getLineWrapper();
+      NlsMessage message = this.configuration.getNlsMessageFactory()
+          .create(nlsText, this.arguments);
+      String text = message.getLocalizedMessage(this.mainColumnInfo.getLocale());
+      lineWrapper.wrap(this.appendable, this.tableInfo, text, this.mainColumnInfo);
+    }
+
+    /**
+     * This method prints the help for the {@link CliArgument arguments} given
+     * by <code>argumentList</code>. It prints them with localized usage texts
+     * in a two column-layout via {@link LineWrapper}.
+     * 
+     * @param argumentList is the {@link List} with the according
+     *        {@link CliArgumentHelpInfo help infos}.
+     * @param maxArgumentColumnWidth is the maximum width of the argument-name
+     *        column.
+     */
+    public void printArguments(List<CliArgumentHelpInfo> argumentList, int maxArgumentColumnWidth) {
+
+      printText(NlsBundleUtilCore.MSG_CLI_ARGUMENTS);
+      if (!argumentList.isEmpty()) {
+        this.parameterColumnInfo.setWidth(maxArgumentColumnWidth);
+        LineWrapper lineWrapper = this.configuration.getLineWrapper();
+
+        for (CliArgumentHelpInfo helpInfo : argumentList) {
+          CliArgumentContainer argumentContainer = helpInfo.argument;
+          CliArgument cliArgument = argumentContainer.getArgument();
+          Object defaultValue = null;
+          if (argumentContainer.getGetter() != null) {
+            defaultValue = argumentContainer.getGetter().invoke(this.state);
           }
-          indent = buffer.toString();
+          this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
+          NlsMessage usageMessage = this.configuration.getNlsMessageFactory().create(
+              cliArgument.usage(), this.arguments);
+          String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
+
+          lineWrapper.wrap(this.appendable, this.tableInfo, helpInfo.name,
+              this.parameterColumnInfo, usageText, this.mainColumnInfo);
         }
-        writer.printRaw(indent);
-        usageStart = printUsage(writer, usageStart, usageColumnWith);
       }
     }
 
     /**
+     * This method prints the help for the {@link CliOption options} given by
+     * <code>modeOptions</code>. It prints them with localized usage texts in a
+     * two column-layout via {@link LineWrapper}.
      * 
-     * @param writer is where to write the message to.
-     * @param usageStart is the current start-index in {@link #usage}.
-     * @param usageColumnWith the number of characters for the usage column.
-     * @return the new value for <code>usageStart</code>.
+     * @param modeOptions is the {@link Collection} with the options to print.
+     * @param option2HelpMap is the {@link Map} with the according
+     *        {@link CliOptionHelpInfo help infos}.
+     * @param maxOptionColumnWidth is the maximum width of the option-syntax
+     *        column.
      */
-    private int printUsage(NlsWriter writer, int usageStart, int usageColumnWith) {
+    public void printOptions(Collection<CliOptionContainer> modeOptions,
+        Map<CliOption, CliOptionHelpInfo> option2HelpMap, int maxOptionColumnWidth) {
 
-      int start = usageStart;
-      int usageLength = this.usage.length();
-      // omit leading whitespaces...
-      while (this.usage.charAt(start) == ' ') {
-        start++;
-      }
-      int end = start + usageColumnWith;
-      if (end >= usageLength) {
-        end = usageLength;
-      } else {
-        // usage to long -> wrap at space if available
-        int indexOfSpace = this.usage.lastIndexOf(' ', end);
-        int indexOfHyphen = this.usage.lastIndexOf('-', end);
-        if (indexOfHyphen > indexOfSpace) {
-          indexOfSpace = indexOfHyphen;
-        }
-        if (indexOfSpace > start) {
-          end = indexOfSpace;
-        }
-      }
-      writer.printRaw(this.usage.subSequence(start, end));
-      start = end;
-      writer.println();
-      return start;
+      this.parameterColumnInfo.setWidth(maxOptionColumnWidth);
+      println();
+      printOptions(modeOptions, option2HelpMap, true);
+      printOptions(modeOptions, option2HelpMap, false);
     }
+
+    /**
+     * This method is like {@link #printOptions(Collection, Map, int)} but only
+     * prints required or additional options.
+     * 
+     * @param modeOptions is the {@link Collection} with the options to print.
+     * @param option2HelpMap is the {@link Map} with the according
+     *        {@link CliOptionHelpInfo help infos}.
+     * @param required - <code>true</code> if required options should be
+     *        printed, <code>false</code> if additional options should be
+     *        printed.
+     */
+    private void printOptions(Collection<CliOptionContainer> modeOptions,
+        Map<CliOption, CliOptionHelpInfo> option2HelpMap, boolean required) {
+
+      LineWrapper lineWrapper = this.configuration.getLineWrapper();
+      // required options
+      boolean firstOption = true;
+      for (CliOptionContainer option : modeOptions) {
+        CliOption cliOption = option.getOption();
+        if (cliOption.required() == required) {
+          if (firstOption) {
+            String nlsText;
+            if (required) {
+              nlsText = NlsBundleUtilCore.MSG_CLI_REQUIRED_OPTIONS;
+            } else {
+              nlsText = NlsBundleUtilCore.MSG_CLI_ADDITIONAL_OPTIONS;
+            }
+            printText(nlsText);
+            firstOption = false;
+          }
+          CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
+          this.arguments.put(NlsObject.KEY_OPERAND, helpInfo.operand);
+          Object defaultValue = null;
+          if (option.getGetter() != null) {
+            defaultValue = option.getGetter().invoke(this.state);
+          }
+          this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
+          NlsMessage usageMessage = this.configuration.getNlsMessageFactory().create(
+              cliOption.usage(), this.arguments);
+          String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
+
+          lineWrapper.wrap(this.appendable, this.tableInfo, helpInfo.syntax,
+              this.parameterColumnInfo, usageText, this.mainColumnInfo);
+        }
+      }
+      if (!firstOption) {
+        println();
+      }
+    }
+
+    /**
+     * Prints a newline (terminates current line).
+     */
+    public void println() {
+
+      try {
+        this.appendable.append(this.tableInfo.getLineSeparator());
+      } catch (IOException e) {
+        throw new RuntimeIoException(e, IoMode.WRITE);
+      }
+    }
+
   }
 
 }

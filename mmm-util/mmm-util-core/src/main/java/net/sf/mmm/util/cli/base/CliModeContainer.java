@@ -77,6 +77,20 @@ public class CliModeContainer implements CliModeObject {
   /**
    * {@inheritDoc}
    */
+  public String getTitle() {
+
+    if (this.mode != null) {
+      String title = this.mode.title();
+      if (title.length() > 0) {
+        return title;
+      }
+    }
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public CliMode getMode() {
 
     return this.mode;

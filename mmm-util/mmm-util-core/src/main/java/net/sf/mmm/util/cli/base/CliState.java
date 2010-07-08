@@ -25,6 +25,8 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 
@@ -131,7 +133,9 @@ public class CliState extends CliClassContainer {
         CliOption option = accessible.getAnnotation(CliOption.class);
         if (option != null) {
           annotationFound = true;
-          CliOptionContainer optionContainer = new CliOptionContainer(option, setter);
+          PojoPropertyAccessorNonArg getter = propertyDescriptor
+              .getAccessor(PojoPropertyAccessorNonArgMode.GET);
+          CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter);
           addOption(optionContainer);
         }
         CliArgument argument = accessible.getAnnotation(CliArgument.class);
@@ -140,7 +144,10 @@ public class CliState extends CliClassContainer {
           if (option != null) {
             throw new CliOptionAndArgumentAnnotationException(propertyDescriptor.getName());
           }
-          CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter);
+          PojoPropertyAccessorNonArg getter = propertyDescriptor
+              .getAccessor(PojoPropertyAccessorNonArgMode.GET);
+          CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter,
+              getter);
           addArgument(argumentContainer);
         }
       }
@@ -287,7 +294,8 @@ public class CliState extends CliClassContainer {
    * CLI-arguments} for the given {@link CliModeObject mode}.
    * 
    * @param mode is the according {@link CliModeContainer mode}.
-   * @return the arguments
+   * @return the arguments or <code>null</code> if no arguments are defined for
+   *         this mode.
    */
   public List<CliArgumentContainer> getArguments(CliModeObject mode) {
 

@@ -25,9 +25,9 @@ import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
 import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
+import net.sf.mmm.util.text.api.TextColumnInfo.IndentationMode;
 import net.sf.mmm.util.text.api.TextTableInfo;
 import net.sf.mmm.util.text.api.UnicodeUtil;
-import net.sf.mmm.util.text.api.TextColumnInfo.IndentationMode;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
@@ -130,9 +130,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     if (widthRemaining < autoAdjustColumnCount) {
       // is there less than 1 character left for each auto-adjust columns (or
       // less than 0 for no such column).
-      throw new ValueOutOfRangeException(Integer.valueOf(tableWidth), Integer
-          .valueOf(staticTableWidth + autoAdjustColumnCount), Integer.valueOf(Integer.MAX_VALUE),
-          "tableInfo.width");
+      throw new ValueOutOfRangeException(Integer.valueOf(tableWidth),
+          Integer.valueOf(staticTableWidth + autoAdjustColumnCount),
+          Integer.valueOf(Integer.MAX_VALUE), "tableInfo.width");
     }
 
     // perform auto adjustment...
@@ -258,10 +258,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
           }
           appendable.append(state.getColumnInfo().getBorderRight());
         }
-        if (todo) {
-          appendable.append(tableInfo.getLineSeparator());
-          newLines++;
-        }
+        appendable.append(tableInfo.getLineSeparator());
+        newLines++;
       }
       return newLines;
     } catch (IOException e) {

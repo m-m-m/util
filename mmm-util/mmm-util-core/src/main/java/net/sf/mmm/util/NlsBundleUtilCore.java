@@ -208,14 +208,27 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String MSG_MAIN_MODE_VERSION_USAGE = "Print the version of this program.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
-  public static final String MSG_SYNCHRONIZER_USAGE = "Create and/or update resource-bundle "
-      + "property-files from <bundle-class> for the given locales (including the root locale). "
-      + "Example:\n{mainClass} foo.bar.NlsBundleMyExample de de_DE en en_US en_GB fr zh ja_JP zh_TW\n"
+  public static final String MSG_SYNCHRONIZER_USAGE = "Create and/or update "
+      + "resource-bundle property-files.";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT = "Create and/or "
+      + "update resource-bundle property-files from <bundle-class> for the given "
+      + "locales (including the root locale). Example:\n\n"
+      + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample "
+      + "de de_DE en en_US en_GB fr zh ja_JP zh_TW\n\n"
       + "For each locale a property-file foo/bar/NlsBundleMyExample_<locale>.properties "
       + "will be created or updated in the base-path. In each property-file all "
       + "properties defined in <bundle-class> will be added with a TODO-marker "
       + "and the original text as value. If the property-file already exists, all "
       + "existing properties will remain unchanged and comments will be kept.";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
+  public static final String MSG_SYNCHRONIZER_USAGE_LOCALES = "The list of locales "
+      + "to synchronize. Each locale has to be in the form \"ll[_CC[_vv]]\2 where "
+      + "\"ll\" is the lowercase ISO 639 code, CC is the uppercase ISO 3166 "
+      + "2-letter code and vv is an arbitrary variant. Examples are \"de\", "
+      + "\"en_US\" or \"th_TH_TH\".";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE_ENCODING = "Read and write "
@@ -246,6 +259,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
   public static final String MSG_CLI_ADDITIONAL_OPTIONS = "Additional options:";
+
+  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
+  public static final String MSG_CLI_ARGUMENTS = "Arguments:";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionDuplicateException */
   public static final String ERR_CLI_OPTION_DUPLICATE = "Duplicate option \"{option}\"!";
@@ -279,7 +295,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.CliModeUndefinedException */
   public static final String ERR_CLI_MODE_UNDEFINED = "The mode \"{mode}\" used "
       + "by \"{value}\" is undefined! You have to declare it via @CliMode or "
-      + "change CliStyle to something else than STRICT.";
+      + "change @CliStyle.modeUndefined() to something else than EXCEPTION.";
 
   /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
   public static final String INF_LEFT = "left";

@@ -118,7 +118,16 @@ public @interface CliOption {
    */
   String[] aliases() default { };
 
-  /** The description of the option. */
+  /**
+   * The description of this option for {@link CliParser#printHelp(Appendable)
+   * help usage}. It should be an
+   * {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   * internationalized message} that will be localized using
+   * {@link net.sf.mmm.util.nls.api.NlsMessage}.
+   * {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
+   * NLS-arguments} are "operand" for the localized {@link #operand() operand}
+   * and "default" for the default value.
+   */
   String usage();
 
   /**

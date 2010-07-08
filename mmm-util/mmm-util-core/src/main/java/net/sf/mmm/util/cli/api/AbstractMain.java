@@ -20,8 +20,7 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
 @CliClass
 @CliModes(//
 { @CliMode(id = CliMode.MODE_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, //
-usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE),
-    @CliMode(id = CliMode.MODE_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT) })
+usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE) })
 public abstract class AbstractMain {
 
   /** The {@link #run(CliModeObject) exit-code} on success. */

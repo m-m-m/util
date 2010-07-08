@@ -6,6 +6,7 @@ package net.sf.mmm.util.cli.base;
 import java.lang.annotation.Annotation;
 
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
@@ -23,12 +24,14 @@ public class CliOptionContainer extends CliParameterContainer {
   /**
    * The constructor.
    * 
-   * @param setter is the {@link #getSetter() setter}.
    * @param option is the {@link #getOption() option}.
+   * @param setter is the {@link #getSetter() setter}.
+   * @param getter is the {@link #getGetter() getter}.
    */
-  public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter) {
+  public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter,
+      PojoPropertyAccessorNonArg getter) {
 
-    super(setter);
+    super(setter, getter);
     this.option = option;
   }
 

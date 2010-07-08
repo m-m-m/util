@@ -68,6 +68,9 @@ public interface NlsObject {
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_OPERAND = "operand";
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_DEFAULT = "default";
+
   /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.

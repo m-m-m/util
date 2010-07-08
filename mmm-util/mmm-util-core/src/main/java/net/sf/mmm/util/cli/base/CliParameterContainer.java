@@ -6,6 +6,8 @@ package net.sf.mmm.util.cli.base;
 import java.lang.annotation.Annotation;
 
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 
@@ -25,16 +27,22 @@ public abstract class CliParameterContainer {
   /** @see #getSetter() */
   private final PojoPropertyAccessorOneArg setter;
 
+  /** @see #getGetter() */
+  private final PojoPropertyAccessorNonArg getter;
+
   /**
    * The constructor.
    * 
    * @param setter is the {@link #getSetter() setter}.
+   * @param getter is the {@link #getGetter() getter}.
    */
-  public CliParameterContainer(PojoPropertyAccessorOneArg setter) {
+  public CliParameterContainer(PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter) {
 
     super();
     assert (setter.getMode() == PojoPropertyAccessorOneArgMode.SET);
     this.setter = setter;
+    assert ((getter == null) || (getter.getMode() == PojoPropertyAccessorNonArgMode.GET));
+    this.getter = getter;
   }
 
   /**
@@ -47,6 +55,19 @@ public abstract class CliParameterContainer {
   public PojoPropertyAccessorOneArg getSetter() {
 
     return this.setter;
+  }
+
+  /**
+   * This method gets the {@link PojoPropertyAccessorOneArg accessor} used to
+   * get the value of the according {@link net.sf.mmm.util.cli.api.CliOption
+   * option} or {@link net.sf.mmm.util.cli.api.CliArgument argument}.
+   * 
+   * @return the {@link PojoPropertyAccessorNonArg getter} or <code>null</code>
+   *         if NOT available.
+   */
+  public PojoPropertyAccessorNonArg getGetter() {
+
+    return this.getter;
   }
 
   /**

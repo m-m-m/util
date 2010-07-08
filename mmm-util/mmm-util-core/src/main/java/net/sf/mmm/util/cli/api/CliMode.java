@@ -64,7 +64,7 @@ public @interface CliMode {
    * 
    * @see net.sf.mmm.util.nls.api.NlsMessage
    */
-  String title();
+  String title() default "";
 
   /**
    * A brief description of what the program actually does in this mode. If not

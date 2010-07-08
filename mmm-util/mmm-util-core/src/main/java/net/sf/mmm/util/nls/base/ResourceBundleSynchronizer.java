@@ -40,6 +40,7 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
  * @since 1.0.0
  */
 @CliClass(usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE)
+@CliMode(id = CliMode.MODE_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
 public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
@@ -67,26 +68,30 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
 
   /** @see #getLocales() */
-  @CliArgument(name = "locales", addNextTo = CliArgument.NAME_LAST)
+  @CliArgument(name = "locales", addNextTo = CliArgument.NAME_LAST, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
 
   /** @see #getPath() */
-  @CliOption(name = OPTION_PATH, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_PATH, operand = "DIR", aliases = "-p")
+  @CliOption(name = OPTION_PATH, aliases = "-p", operand = "DIR", //
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_PATH)
   private String path;
 
   /** @see #getEncoding() */
-  @CliOption(name = OPTION_ENCODING, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_ENCODING, operand = "ENC", aliases = "-e")
+  @CliOption(name = OPTION_ENCODING, aliases = "-e", operand = "ENC", //
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_ENCODING)
   private String encoding;
 
   /** @see #getNewline() */
   private String newline;
 
   /** @see #getDatePattern() */
-  @CliOption(name = OPTION_DATE_PATTERN, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN, operand = "PATTERN", aliases = "-d")
+  @CliOption(name = OPTION_DATE_PATTERN, aliases = "-d", operand = "PATTERN", //
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
   private String datePattern;
 
   /** @see #getBundleClass() */
-  @CliOption(name = OPTION_BUNDLE_CLASS, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS, operand = "CLASS", aliases = "-b", required = true)
+  @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", required = true, //
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
   private Class<? extends ResourceBundle> bundleClass;
 
   /** @see #getStreamUtil() */
