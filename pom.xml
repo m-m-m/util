@@ -37,7 +37,7 @@
     <module>mmm-persistence</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
-    <!-- <module>mmm-setup</module> -->
+    <module>mmm-setup</module>
     <module>mmm-test</module>
   </modules>
   
