@@ -21,7 +21,8 @@ public class CliOptionMissingException extends CliException {
    * The constructor.
    * 
    * @param option is the required {@link CliOption option}.
-   * @param mode is the activated {@link CliMode mode}.
+   * @param mode is {@link CliModeObject#getTitle() title} of the activated
+   *        {@link CliMode mode}.
    */
   public CliOptionMissingException(String option, String mode) {
 

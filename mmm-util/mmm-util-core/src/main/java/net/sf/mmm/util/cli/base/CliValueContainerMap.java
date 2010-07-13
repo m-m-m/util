@@ -113,7 +113,7 @@ public class CliValueContainerMap implements CliValueContainer {
   /**
    * {@inheritDoc}
    */
-  public boolean isCollection() {
+  public boolean isArrayMapOrCollection() {
 
     return true;
   }

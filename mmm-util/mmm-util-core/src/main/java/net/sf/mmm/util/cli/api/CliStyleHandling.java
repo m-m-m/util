@@ -27,7 +27,22 @@ public enum CliStyleHandling {
     @Override
     public void handle(Logger logger, RuntimeException exception) {
 
-    // nothing to do...
+      // nothing to do...
+    }
+  },
+
+  /** Log a debug message on occurrence. */
+  DEBUG {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void handle(Logger logger, RuntimeException exception) {
+
+      if (logger.isDebugEnabled()) {
+        logger.debug(exception.getLocalizedMessage());
+      }
     }
   },
 

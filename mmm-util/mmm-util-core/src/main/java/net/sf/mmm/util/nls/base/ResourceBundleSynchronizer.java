@@ -67,10 +67,6 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   /** @see #getEncoding() */
   private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
 
-  /** @see #getLocales() */
-  @CliArgument(name = "locales", addNextTo = CliArgument.NAME_LAST, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES)
-  private String[] locales;
-
   /** @see #getPath() */
   @CliOption(name = OPTION_PATH, aliases = "-p", operand = "DIR", //
   usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_PATH)
@@ -89,9 +85,17 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
   private String datePattern;
 
+  /** @see #getLocales() */
+  @CliArgument(name = "locales", addNextTo = CliArgument.NAME_LAST, //
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES, required = false)
+  private String[] locales;
+
   /** @see #getBundleClass() */
-  @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", required = true, //
-  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
+  // @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS",
+  // required = true, //
+  // usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
+  @CliArgument(name = "bundle", addNextTo = CliArgument.NAME_FIRST, //
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS, required = false)
   private Class<? extends ResourceBundle> bundleClass;
 
   /** @see #getStreamUtil() */

@@ -225,7 +225,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE_LOCALES = "The list of locales "
-      + "to synchronize. Each locale has to be in the form \"ll[_CC[_vv]]\2 where "
+      + "to synchronize. Each locale has to be in the form \"ll[_CC[_vv]]\" where "
       + "\"ll\" is the lowercase ISO 639 code, CC is the uppercase ISO 3166 "
       + "2-letter code and vv is an arbitrary variant. Examples are \"de\", "
       + "\"en_US\" or \"th_TH_TH\".";
@@ -275,6 +275,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.cli.api.CliOptionMissingException */
   public static final String ERR_CLI_OPTION_MISSING = "The option \"{option}\" "
+      + "is required for mode \"{mode}\"!";
+
+  /** @see net.sf.mmm.util.cli.api.CliArgumentMissingException */
+  public static final String ERR_CLI_ARGUMENT_MISSING = "The argument \"{argument}\" "
       + "is required for mode \"{mode}\"!";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionMisplacedException */

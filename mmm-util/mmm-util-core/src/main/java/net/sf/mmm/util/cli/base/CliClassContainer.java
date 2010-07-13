@@ -15,9 +15,12 @@ import net.sf.mmm.util.cli.api.CliModeCycleException;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModes;
 import net.sf.mmm.util.cli.api.CliStyle;
+import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.component.api.InitState;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+
+import org.slf4j.Logger;
 
 /**
  * A {@link CliClassContainer} determines and holds the class-specific
@@ -43,15 +46,21 @@ public class CliClassContainer {
   /** @see #getName() */
   private final String name;
 
+  /** @see #getLogger() */
+  private final Logger logger;
+
   /**
    * The constructor.
    * 
    * @param stateClass is the {@link #getStateClass() state-class}.
+   * @param logger is the {@link Logger} to use (e.g. for
+   *        {@link CliStyleHandling}).
    */
-  public CliClassContainer(Class<?> stateClass) {
+  public CliClassContainer(Class<?> stateClass, Logger logger) {
 
     super();
     this.stateClass = stateClass;
+    this.logger = logger;
     this.id2ModeMap = new HashMap<String, CliModeContainer>();
     CliStyle cliStyleAnnotation = null;
     CliClass cliClassAnnotation = null;
@@ -62,16 +71,6 @@ public class CliClassContainer {
       }
       if (cliClassAnnotation == null) {
         cliClassAnnotation = currentClass.getAnnotation(CliClass.class);
-      }
-      CliMode cliMode = currentClass.getAnnotation(CliMode.class);
-      if (cliMode != null) {
-        addMode(cliMode, currentClass);
-      }
-      CliModes cliModes = currentClass.getAnnotation(CliModes.class);
-      if (cliModes != null) {
-        for (CliMode mode : cliModes.value()) {
-          addMode(mode, currentClass);
-        }
       }
       currentClass = currentClass.getSuperclass();
     }
@@ -90,9 +89,33 @@ public class CliClassContainer {
       this.name = this.cliClass.name();
     }
 
+    currentClass = stateClass;
+    while (currentClass != null) {
+      CliMode cliMode = currentClass.getAnnotation(CliMode.class);
+      if (cliMode != null) {
+        addMode(cliMode, currentClass);
+      }
+      CliModes cliModes = currentClass.getAnnotation(CliModes.class);
+      if (cliModes != null) {
+        for (CliMode mode : cliModes.value()) {
+          addMode(mode, currentClass);
+        }
+      }
+      currentClass = currentClass.getSuperclass();
+    }
     for (CliModeContainer modeContainer : this.id2ModeMap.values()) {
       initializeRecursive(modeContainer);
     }
+  }
+
+  /**
+   * This method gets the {@link Logger}.
+   * 
+   * @return the {@link Logger}.
+   */
+  public Logger getLogger() {
+
+    return this.logger;
   }
 
   /**
@@ -155,7 +178,11 @@ public class CliClassContainer {
 
     CliModeObject old = this.id2ModeMap.put(mode.getMode().id(), mode);
     if (old != null) {
-      throw new DuplicateObjectException(mode, mode.getMode().id());
+      CliStyleHandling handling = this.cliStyle.modeDuplicated();
+      DuplicateObjectException exception = new DuplicateObjectException(mode, mode.getMode().id());
+      if (handling != CliStyleHandling.OK) {
+        handling.handle(this.logger, exception);
+      }
     }
   }
 

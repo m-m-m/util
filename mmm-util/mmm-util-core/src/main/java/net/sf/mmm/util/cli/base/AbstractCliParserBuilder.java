@@ -47,7 +47,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /** @see #getNlsMessageFactory() */
   private NlsMessageFactory nlsMessageFactory;
 
-  /** @see #getTemplateResolver() */
+  /** @see #getNlsTemplateResolver() */
   private NlsTemplateResolver nlsTemplateResolver;
 
   /** @see #getStringUtil() */

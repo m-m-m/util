@@ -88,4 +88,16 @@ public @interface CliArgument {
    */
   String usage();
 
+  /**
+   * The flag that indicates if this argument is required. The default value is
+   * <code>true</code>. Use a value of <code>false</code> to make this argument
+   * optional within it's {@link #mode() mode}.<br>
+   * <b>ATTENTION:</b><br>
+   * Avoid optional arguments and use {@link CliOption options} instead. If you
+   * use optional arguments anyway, please note that potentially following
+   * options also need to be optional then.
+   * 
+   * @see CliMode#parentIds()
+   */
+  boolean required() default true;
 }

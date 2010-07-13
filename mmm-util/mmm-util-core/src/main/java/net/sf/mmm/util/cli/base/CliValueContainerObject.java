@@ -68,7 +68,7 @@ public class CliValueContainerObject implements CliValueContainer {
   /**
    * {@inheritDoc}
    */
-  public boolean isCollection() {
+  public boolean isArrayMapOrCollection() {
   
     return false;
   }

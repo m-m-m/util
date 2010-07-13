@@ -44,6 +44,6 @@ public interface CliValueContainer {
    *         array, {@link java.util.Collection} or {@link java.util.Map} -
    *         <code>false</code> otherwise.
    */
-  boolean isCollection();
+  boolean isArrayMapOrCollection();
 
 }

@@ -97,6 +97,20 @@ public @interface CliStyle {
   CliStyleHandling modeUndefined() default CliStyleHandling.EXCEPTION;
 
   /**
+   * Determines how to {@link CliStyleHandling handle} a {@link CliMode mode}
+   * that is declared more than once. If accepted, the deepest {@link CliMode}
+   * annotation is selected from the {@link Class} {@link Class#getSuperclass()
+   * hierarchy} of the {@link net.sf.mmm.util.cli.base.CliState#getStateClass()
+   * state-class}. The default is {@link CliStyleHandling#DEBUG}.<br>
+   * <b>ATTENTION:</b><br>
+   * Please note that it can make sense to override a {@link CliMode}.
+   * 
+   * @see CliOption#mode()
+   * @see CliArgument#mode()
+   */
+  CliStyleHandling modeDuplicated() default CliStyleHandling.DEBUG;
+
+  /**
    * The character used to separate collection values (e.g. ',' or ';'). The
    * value {@link #COLLECTION_VALUE_SEPARATOR_NONE} can be used to disable
    * separator and enable multi-parameter submission of collection values. This

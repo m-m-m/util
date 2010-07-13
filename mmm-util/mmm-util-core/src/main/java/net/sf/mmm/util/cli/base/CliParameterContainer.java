@@ -4,6 +4,8 @@
 package net.sf.mmm.util.cli.base;
 
 import java.lang.annotation.Annotation;
+import java.util.Collection;
+import java.util.Map;
 
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -87,18 +89,30 @@ public abstract class CliParameterContainer {
    */
   protected abstract Annotation getAnnotation();
 
-  //
-  // /**
-  // * This method determines if the
-  // * {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} of the
-  // * {@link #getSetter() setter} is an array, {@link Collection} or {@link
-  // Map}.
-  // *
-  // * @return
-  // */
-  // public boolean isContainerType() {
-  //
-  // }
+  /**
+   * This method determines if the
+   * {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} of the
+   * {@link #getSetter() setter} is a container-type (an array,
+   * {@link Collection} or {@link Map}).
+   * 
+   * @see CliValueContainer#isArrayMapOrCollection()
+   * 
+   * @return <code>true</code> if the
+   *         {@link PojoPropertyAccessorOneArg#getPropertyType() property-type}
+   *         is a container-type.
+   */
+  public boolean isArrayMapOrCollection() {
+
+    Class<?> propertyClass = this.setter.getPropertyClass();
+    if (propertyClass.isArray()) {
+      return true;
+    } else if (Collection.class.isAssignableFrom(propertyClass)) {
+      return true;
+    } else if (Map.class.isAssignableFrom(propertyClass)) {
+      return true;
+    }
+    return false;
+  }
 
   /**
    * {@inheritDoc}

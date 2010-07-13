@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.cli.api.CliArgumentMissingException;
 import net.sf.mmm.util.cli.api.CliException;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
@@ -26,7 +27,6 @@ import net.sf.mmm.util.cli.api.CliOptionMissingException;
 import net.sf.mmm.util.cli.api.CliOptionMissingValueException;
 import net.sf.mmm.util.cli.api.CliOptionUndefinedException;
 import net.sf.mmm.util.cli.api.CliOutputSettings;
-import net.sf.mmm.util.cli.api.CliParameterListEmptyException;
 import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
@@ -180,8 +180,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     PojoPropertyAccessorOneArg setter = optionContainer.getSetter();
     Class<?> propertyClass = setter.getPropertyClass();
     String argument;
-    if (boolean.class.equals(propertyClass)) {
-      // trigger
+    if (optionContainer.isTrigger()) {
       argument = StringUtil.TRUE;
     } else if (Boolean.class.equals(propertyClass)) {
       String lookahead = parameterConsumer.getCurrent();
@@ -222,7 +221,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     CliValueContainer valueContainer = this.valueMap.getOrCreate(argumentContainer);
     valueContainer.setValue(argument, argumentContainer, this.cliState.getCliStyle(),
         this.configuration, getLogger());
-    if (!valueContainer.isCollection()) {
+    if (!valueContainer.isArrayMapOrCollection()) {
       parserState.argumentIndex++;
     }
   }
@@ -232,14 +231,21 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    */
   public CliModeObject parseParameters(String... parameters) throws CliException {
 
-    if ((parameters == null) || (parameters.length == 0)) {
-      throw new CliParameterListEmptyException();
-    }
+    // if ((parameters == null) || (parameters.length == 0)) {
+    // throw new CliParameterListEmptyException();
+    // }
     CliParameterConsumer parameterConsumer = new CliParameterConsumer(parameters);
     CliParserState parserState = new CliParserState();
     while (parameterConsumer.hasNext()) {
       String arg = parameterConsumer.getNext();
       parseParameter(arg, parserState, parameterConsumer);
+    }
+    if (parserState.currentMode == null) {
+      // just in case no argument was given at all...
+      parserState.currentMode = this.cliState.getMode(CliMode.MODE_DEFAULT);
+      if (parserState.currentMode == null) {
+        parserState.currentMode = new CliModeContainer(CliMode.MODE_DEFAULT);
+      }
     }
     checkRequiredParameters(parserState);
     this.valueMap.assign(getState());
@@ -259,10 +265,15 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     // check all required options if active of not for current mode...
     for (CliOptionContainer option : this.cliState.getOptions(mode)) {
       CliOption cliOption = option.getOption();
-      // if (!parserState.optionSet.contains(cliOption) && cliOption.required())
-      // {
-      if ((this.valueMap.get(option) == null) && cliOption.required()) {
-        throw new CliOptionMissingException(cliOption.name(), mode.getId());
+      if (cliOption.required() && (this.valueMap.get(option) == null)) {
+        throw new CliOptionMissingException(cliOption.name(), mode.getTitle());
+      }
+    }
+    // check all required arguments if active or not for current mode...
+    for (CliArgumentContainer argument : this.cliState.getArguments(mode)) {
+      CliArgument cliArgument = argument.getArgument();
+      if (cliArgument.required() && (this.valueMap.get(argument) == null)) {
+        throw new CliArgumentMissingException(cliArgument.name(), mode.getTitle());
       }
     }
   }
@@ -413,20 +424,34 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
         List<CliArgumentContainer> argumentList = this.cliState.getArguments(mode);
         int maxArgumentColumnWidth = 0;
         List<CliArgumentHelpInfo> argumentHelpList;
-        if (argumentList != null) {
+        if (!argumentList.isEmpty()) {
           argumentHelpList = new ArrayList<AbstractCliParser.CliArgumentHelpInfo>(
               argumentList.size());
+          boolean requiredArgument = true;
+          CliArgument cliArgument = null;
           for (CliArgumentContainer argumentContainer : argumentList) {
+            cliArgument = argumentContainer.getArgument();
             CliArgumentHelpInfo argumentHelpInfo = new CliArgumentHelpInfo(argumentContainer,
                 this.configuration, settings);
             int argLength = argumentHelpInfo.name.length();
             if (argLength > maxArgumentColumnWidth) {
               maxArgumentColumnWidth = argLength;
             }
-            parameters.append(" <");
+            parameters.append(" ");
+            if (!cliArgument.required() && requiredArgument) {
+              parameters.append("[");
+              requiredArgument = false;
+            }
+            parameters.append("<");
             parameters.append(argumentHelpInfo.name);
+            if (argumentContainer.isArrayMapOrCollection()) {
+              parameters.append("...");
+            }
             parameters.append(">");
             argumentHelpList.add(argumentHelpInfo);
+          }
+          if ((cliArgument != null) && !cliArgument.required()) {
+            parameters.append("]");
           }
         } else {
           argumentHelpList = Collections.emptyList();
@@ -623,7 +648,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
         }
         append(syntaxBuilder, alias, maxLength, settings);
       }
-      if (!boolean.class.equals(option.getSetter().getPropertyClass())) {
+      if (!option.isTrigger()) {
         append(syntaxBuilder, " " + this.operand, maxLength, settings);
       }
       // length of last line...
@@ -846,8 +871,8 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
      */
     public void printArguments(List<CliArgumentHelpInfo> argumentList, int maxArgumentColumnWidth) {
 
-      printText(NlsBundleUtilCore.MSG_CLI_ARGUMENTS);
       if (!argumentList.isEmpty()) {
+        printText(NlsBundleUtilCore.MSG_CLI_ARGUMENTS);
         this.parameterColumnInfo.setWidth(maxArgumentColumnWidth);
         LineWrapper lineWrapper = this.configuration.getLineWrapper();
 

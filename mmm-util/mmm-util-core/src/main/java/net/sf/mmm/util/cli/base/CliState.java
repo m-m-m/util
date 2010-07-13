@@ -6,6 +6,7 @@ package net.sf.mmm.util.cli.base;
 import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -55,9 +56,6 @@ public class CliState extends CliClassContainer {
   /** @see #getArguments() */
   private final List<CliArgumentContainer> arguments;
 
-  /** @see #getLogger() */
-  private final Logger logger;
-
   /**
    * The constructor.
    * 
@@ -71,12 +69,11 @@ public class CliState extends CliClassContainer {
   public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory,
       Logger logger) {
 
-    super(stateClass);
+    super(stateClass, logger);
     this.name2OptionMap = new HashMap<String, CliOptionContainer>();
     this.optionList = new ArrayList<CliOptionContainer>();
     this.mode2argumentsMap = new HashMap<String, List<CliArgumentContainer>>();
     this.arguments = new ArrayList<CliArgumentContainer>();
-    this.logger = logger;
     int nullIndex = -1;
     boolean annotationFound = findPropertyAnnotations(descriptorBuilderFactory
         .createPrivateFieldDescriptorBuilder());
@@ -87,29 +84,34 @@ public class CliState extends CliClassContainer {
     if (!annotationFound) {
       throw new CliClassNoPropertyException(stateClass);
     }
-    for (List<CliArgumentContainer> argumentList : this.mode2argumentsMap.values()) {
+    for (String modeId : this.mode2argumentsMap.keySet()) {
+      List<CliArgumentContainer> argumentList = this.mode2argumentsMap.get(modeId);
+      boolean optional = false;
+      CliArgumentContainer lastArgument = null;
       for (int i = 0; i < argumentList.size(); i++) {
         CliArgumentContainer argument = argumentList.get(i);
         if (argument == null) {
+          // TODO no null values have to be left over...
           nullIndex = i;
-        } else if (nullIndex > -1) {
-          // TODO own exception
-          throw new IllegalStateException(argument + " is illegal because index '" + nullIndex
-              + "' is missing!");
-
+        } else {
+          if (nullIndex > -1) {
+            // TODO own exception
+            throw new IllegalStateException(argument + " is illegal because index '" + nullIndex
+                + "' is missing!");
+          }
+          if (argument.getArgument().required()) {
+            if (optional) {
+              // TODO own exception
+              throw new IllegalStateException(argument
+                  + " can not be required after optional argument " + lastArgument + "!");
+            }
+          } else {
+            optional = true;
+          }
+          lastArgument = argument;
         }
       }
     }
-  }
-
-  /**
-   * This method gets the {@link Logger}.
-   * 
-   * @return the {@link Logger}.
-   */
-  public Logger getLogger() {
-
-    return this.logger;
   }
 
   /**
@@ -294,10 +296,26 @@ public class CliState extends CliClassContainer {
    * CLI-arguments} for the given {@link CliModeObject mode}.
    * 
    * @param mode is the according {@link CliModeContainer mode}.
+   * @return the arguments.
+   */
+  public List<CliArgumentContainer> getArguments(CliModeObject mode) {
+
+    List<CliArgumentContainer> result = getArgumentsRecursive(mode);
+    if (result == null) {
+      result = Collections.emptyList();
+    }
+    return result;
+  }
+
+  /**
+   * This method gets the {@link List} of {@link CliArgumentContainer
+   * CLI-arguments} for the given {@link CliModeObject mode}.
+   * 
+   * @param mode is the according {@link CliModeContainer mode}.
    * @return the arguments or <code>null</code> if no arguments are defined for
    *         this mode.
    */
-  public List<CliArgumentContainer> getArguments(CliModeObject mode) {
+  protected List<CliArgumentContainer> getArgumentsRecursive(CliModeObject mode) {
 
     List<CliArgumentContainer> modeArguments = this.mode2argumentsMap.get(mode.getId());
     if (modeArguments == null) {
@@ -305,7 +323,7 @@ public class CliState extends CliClassContainer {
       if (cliMode != null) {
         for (String parentId : cliMode.parentIds()) {
           CliModeObject parentMode = getMode(parentId);
-          modeArguments = getArguments(parentMode);
+          modeArguments = getArgumentsRecursive(parentMode);
           if (modeArguments != null) {
             break;
           }

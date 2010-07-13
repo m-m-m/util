@@ -63,4 +63,17 @@ public class CliOptionContainer extends CliParameterContainer {
     return this.option;
   }
 
+  /**
+   * This method determines if the {@link #getOption() option} is a trigger.
+   * Trigger means that the type of the {@link #getSetter() setter} is a
+   * primitive boolean and the option is never followed by a value on the
+   * commandline.
+   * 
+   * @return <code>true</code> if trigger, <code>false</code> otherwise.
+   */
+  public boolean isTrigger() {
+
+    return boolean.class.equals(getSetter().getPropertyClass());
+  }
+
 }
