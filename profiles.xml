@@ -1,0 +1,14 @@
+<profilesXml>
+<profiles>
+    <profile>
+      <id>mmm-profile</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+         <net.sf.mmm.version.util-core>2.0.0-SNAPSHOT</net.sf.mmm.version.util-core>
+         <net.sf.mmm.version.util-metakeys>1.0.0-SNAPSHOT</net.sf.mmm.version.util-metakeys>
+      </properties>
+    </profile>
+</profiles>
+</profilesXml>
