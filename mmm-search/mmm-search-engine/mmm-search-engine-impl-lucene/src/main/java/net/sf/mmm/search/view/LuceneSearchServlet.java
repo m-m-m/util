@@ -5,11 +5,10 @@ package net.sf.mmm.search.view;
 
 import java.io.IOException;
 
-import org.w3c.dom.Element;
-
-import net.sf.mmm.search.base.SearchConfigurator;
 import net.sf.mmm.search.engine.impl.LuceneSearchEngine;
 import net.sf.mmm.search.impl.LuceneSearchConfigurator;
+
+import org.w3c.dom.Element;
 
 /**
  * This is the controller {@link javax.servlet.Servlet servlet} for the search
@@ -35,16 +34,16 @@ public class LuceneSearchServlet extends AbstractSearchServlet {
   /**
    * {@inheritDoc}
    */
-  @Override
   protected void configure(Element xmlConfiguration) {
 
     try {
-      Element searchEngineElement = getDomUtil().requireFirstChildElement(xmlConfiguration,
-          SearchConfigurator.XML_TAG_SEARCH_ENGINE);
+      Element searchEngineElement = null;
+      // getDomUtil().requireFirstChildElement(xmlConfiguration,
+      // SearchConfigurator.XML_TAG_SEARCH_ENGINE);
       LuceneSearchConfigurator configurator = new LuceneSearchConfigurator();
       LuceneSearchEngine searchEngine = configurator.createSearchEngine(searchEngineElement);
       setSearchEngine(searchEngine);
-      super.configure(xmlConfiguration);
+      // super.configure(xmlConfiguration);
     } catch (IOException e) {
       // tomcat is too stupid to print out the right root cause so we include
       // the message of "e"

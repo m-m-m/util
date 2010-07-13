@@ -6,13 +6,12 @@ package net.sf.mmm.search.indexer.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.Option;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import net.sf.mmm.search.indexer.api.SearchIndexManager;
 import net.sf.mmm.util.cli.api.AbstractMain;
+import net.sf.mmm.util.cli.api.CliModeObject;
+import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.file.api.FileUtil;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * TODO: this class ...
@@ -29,12 +28,12 @@ public class DirectorySearchIndexer extends AbstractMain {
   private static final String DEFAULT_SPRING_CONFIG = "net/sf/mmm/search/indexer/impl/beans-search-indexer.xml";
 
   /** The optional filename of the configuration XML-file. */
-  @Option(name = "--config", aliases = "-c", required = false, metaVar = "FILE", usage = "The XML-configuration file. Default is "
+  @CliOption(name = "--config", aliases = "-c", required = false, operand = "FILE", usage = "The XML-configuration file. Default is "
       + DEFAULT_CONFIG_FILE + ".")
   private String configurationFilename;
 
   /** The optional context-path for the spring-context. */
-  @Option(name = "--spring", aliases = "-s", required = false, metaVar = "FILE", usage = "The optional spring context-path.")
+  @CliOption(name = "--spring", aliases = "-s", required = false, operand = "FILE", usage = "The optional spring context-path.")
   private String springConfig;
 
   /** The spring context. */
@@ -49,13 +48,8 @@ public class DirectorySearchIndexer extends AbstractMain {
     this.springContext = null;
   }
 
-  /**
-   * {@inheritDoc}
-   * 
-   * @throws FileNotFoundException
-   */
   @Override
-  protected int run() throws CmdLineException, FileNotFoundException {
+  protected int run(CliModeObject mode) throws Exception {
 
     if (this.configurationFilename == null) {
       this.configurationFilename = DEFAULT_CONFIG_FILE;
@@ -71,7 +65,7 @@ public class DirectorySearchIndexer extends AbstractMain {
       if (!configFile.isFile()) {
         throw new FileNotFoundException(configFilename);
       }
-      SearchIndexManager
+      // SearchIndexManager
     } finally {
       context.stop();
       context.close();

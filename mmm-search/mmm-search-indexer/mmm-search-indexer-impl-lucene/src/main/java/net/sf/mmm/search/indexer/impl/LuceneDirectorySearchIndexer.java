@@ -7,13 +7,12 @@ import java.io.File;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import net.sf.mmm.search.base.SearchConfigurator;
 import net.sf.mmm.search.impl.LuceneSearchConfigurator;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * This class represents a search-indexer using lucene as underlying
@@ -77,8 +76,8 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
     Element xmlConfigElement;
     try {
       File xmlConfigFile = new File(args[0]);
-      Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-          xmlConfigFile);
+      Document xmlConfigDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+          .parse(xmlConfigFile);
       xmlConfigElement = xmlConfigDoc.getDocumentElement();
     } catch (Exception e) {
       usage();
@@ -87,9 +86,10 @@ public class LuceneDirectorySearchIndexer extends ConfiguredDirectorySearchIndex
     }
     LuceneSearchConfigurator configurator = new LuceneSearchConfigurator();
     DomUtil domUtil = DomUtilImpl.getInstance();
-    Element searchEngineElement = domUtil.requireFirstChildElement(xmlConfigElement,
-        SearchConfigurator.XML_TAG_SEARCH_ENGINE);
-    LuceneSearchIndexer luceneIndexer = configurator.createSearchIndexer(searchEngineElement);
+    // Element searchEngineElement =
+    // domUtil.requireFirstChildElement(xmlConfigElement,
+    // SearchConfigurator.XML_TAG_SEARCH_ENGINE);
+    LuceneSearchIndexer luceneIndexer = null; // configurator.createSearchIndexer(searchEngineElement);
     LuceneDirectorySearchIndexer indexer = new LuceneDirectorySearchIndexer(luceneIndexer);
     indexer.initialize();
     indexer.index(xmlConfigElement);

@@ -34,9 +34,9 @@
     <module>mmm-search</module>
     <module>mmm-content-parser</module>
     <module>mmm-transaction</module>
-    <module>mmm-persistence</module>
+    <!--<module>mmm-persistence</module>-->
     <module>mmm-upnp</module>
-    <module>mmm-uit</module>
+    <!--<module>mmm-uit</module>-->
     <module>mmm-setup</module>
     <module>mmm-test</module>
   </modules>
@@ -55,12 +55,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.3</version>
+          <version>2.4.3</version>
         </plugin>
         <plugin>
            <groupId>org.apache.maven.plugins</groupId>
            <artifactId>maven-compiler-plugin</artifactId>
-           <version>2.0.2</version>
+           <version>2.3.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -90,60 +90,60 @@
         <plugin>
            <groupId>org.apache.maven.plugins</groupId>
            <artifactId>maven-eclipse-plugin</artifactId>
-           <version>2.7</version>
+           <version>2.8</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>2.0.1</version>
+          <version>2.1.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.4</version>
+          <version>2.5</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-changes-plugin</artifactId>
-          <version>2.1</version>
+          <version>2.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-changelog-plugin</artifactId>
-          <version>2.1</version>
+          <version>2.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>2.1.2</version>
+          <version>2.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jxr-plugin</artifactId>
-          <version>2.1</version>
+          <version>2.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.6</version>
+          <version>2.7</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.3</version>
+          <version>2.5</version>
           <!-- <version>2.4.3</version> -->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>2.3</version>
+          <version>2.5</version>
           <!-- http://jira.codehaus.org/browse/SUREFIRE-562 -->
           <!-- <version>2.4.3</version> -->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-pmd-plugin</artifactId>
-          <version>2.4</version>
+          <version>2.5</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -153,12 +153,12 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>findbugs-maven-plugin</artifactId>
-          <version>2.1</version>
+          <version>2.3.1</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>taglist-maven-plugin</artifactId>
-          <version>2.3</version>
+          <version>2.4</version>
         </plugin>
         <plugin> 
           <groupId>org.codehaus.mojo</groupId> 
@@ -168,12 +168,12 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>cobertura-maven-plugin</artifactId>
-          <version>2.3</version>
+          <version>2.4</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.0-alpha-4</version>
+          <version>1.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -437,7 +437,9 @@
         <artifactId>maven-changes-plugin</artifactId>
         <configuration>
           <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
-          <issueLinkTemplate>%URL%/ticket/%ISSUE%</issueLinkTemplate>
+          <issueLinkTemplatePerSystem>
+            <trac>%URL%/ticket/%ISSUE%</trac>
+          </issueLinkTemplatePerSystem>
         </configuration>
         <reportSets>
           <reportSet>
@@ -517,6 +519,10 @@
       <name>MMM Snapshot Repository</name>
       <url>http://oss.sonatype.org/content/repositories/sourceforge-snapshots</url>
     </snapshotRepository>
+    <site>
+      <id>m-m-m.sf.net</id>
+      <url>scp://localhost</url>
+    </site>
   </distributionManagement>
   <mailingLists>
     <mailingList>

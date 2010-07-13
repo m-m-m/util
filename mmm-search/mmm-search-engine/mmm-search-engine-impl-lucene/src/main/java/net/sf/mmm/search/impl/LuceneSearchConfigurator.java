@@ -5,15 +5,13 @@ package net.sf.mmm.search.impl;
 
 import java.io.IOException;
 
+import net.sf.mmm.search.engine.impl.LuceneSearchEngine;
+import net.sf.mmm.util.xml.api.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.w3c.dom.Element;
-
-import net.sf.mmm.search.base.AbstractSearchConfigurator;
-import net.sf.mmm.search.engine.impl.LuceneSearchEngine;
-import net.sf.mmm.search.indexer.impl.LuceneSearchIndexer;
-import net.sf.mmm.util.xml.api.DomUtil;
-import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This is the implementation of the
@@ -22,7 +20,7 @@ import net.sf.mmm.util.xml.base.DomUtilImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
+public class LuceneSearchConfigurator { // extends AbstractSearchConfigurator {
 
   /**
    * The name of the XML element for the configuration of the
@@ -56,6 +54,10 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
    * <code>false</code>.
    */
   public static final String XML_ATR_SEARCH_LEADINGWILDCARD = "leading-wildcard";
+
+  private static final String XML_TAG_INDEX = "index";
+
+  private static final String XML_TAG_SEARCH = "search";
 
   /** The {@link DomUtil} to use. */
   private DomUtil domUtil;
@@ -156,15 +158,16 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
   /**
    * {@inheritDoc}
    */
-  public LuceneSearchIndexer createSearchIndexer(Element element) throws IOException {
-
-    LuceneSearchIndexer indexer = new LuceneSearchIndexer();
-    indexer.setAnalyzer(createAnalyzer(element));
-    indexer.setIndexPath(getIndexPath(element));
-    indexer.setUpdate(isUpdate(element));
-    indexer.initialize();
-    return indexer;
-  }
+  // public LuceneSearchIndexer createSearchIndexer(Element element) throws
+  // IOException {
+  //
+  // LuceneSearchIndexer indexer = new LuceneSearchIndexer();
+  // indexer.setAnalyzer(createAnalyzer(element));
+  // indexer.setIndexPath(getIndexPath(element));
+  // indexer.setUpdate(isUpdate(element));
+  // indexer.initialize();
+  // return indexer;
+  // }
 
   /**
    * {@inheritDoc}
@@ -176,7 +179,7 @@ public class LuceneSearchConfigurator extends AbstractSearchConfigurator {
     searchEngine.setIndexPath(getIndexPath(element));
     // searchEngine.setIgnoreLeadingWildcards(isIgnoreLeadingWildcards(element));
     searchEngine.initialize();
-    setupRefreshThread(element, searchEngine);
+    // setupRefreshThread(element, searchEngine);
     return searchEngine;
   }
 

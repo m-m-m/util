@@ -5,6 +5,7 @@ package net.sf.mmm.search.indexer.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 
@@ -81,7 +82,9 @@ public class LuceneSearchIndexManager extends AbstractLoggable implements Search
           create = !update;
         } else {
           // TODO: i18n
-          throw new SearchException("Data source exists but is no directory \"{0}\"!", dataSource);
+          // dataSource
+          throw new SearchException("Data source exists but is no directory \"{0}\"!",
+              new HashMap<String, Object>());
         }
       } else {
         create = true;
