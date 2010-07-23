@@ -58,8 +58,7 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
       if (targetType.getTypeArgumentCount() == 1) {
         Class<?> superClass = targetType.getTypeArgument(0).getRetrievalClass();
         if (!superClass.isAssignableFrom(result)) {
-          throw new NlsParseException(new ClassCastException(superClass.getName()), value,
-              targetType, valueSource);
+          throw new ClassCastException(superClass.getName());
         }
       }
       return result;

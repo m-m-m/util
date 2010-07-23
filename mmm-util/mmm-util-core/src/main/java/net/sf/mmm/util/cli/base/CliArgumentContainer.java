@@ -6,6 +6,7 @@ package net.sf.mmm.util.cli.base;
 import java.lang.annotation.Annotation;
 
 import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
@@ -21,6 +22,9 @@ public class CliArgumentContainer extends CliParameterContainer {
   /** @see #getArgument() */
   private final CliArgument argument;
 
+  /** @see #getState() */
+  private InitializationState state;
+
   /**
    * The constructor.
    * 
@@ -33,6 +37,7 @@ public class CliArgumentContainer extends CliParameterContainer {
 
     super(setter, getter);
     this.argument = argument;
+    this.state = InitializationState.UNINITIALIZED;
   }
 
   /**
@@ -61,6 +66,38 @@ public class CliArgumentContainer extends CliParameterContainer {
   protected String getName() {
 
     return this.argument.name();
+  }
+
+  /**
+   * This method gets the {@link CliArgument#id() ID} of the {@link CliArgument
+   * argument}.
+   * 
+   * @return the {@link CliArgument#id() ID} or the {@link CliArgument#name()
+   *         name} if ID is not set.
+   */
+  public String getId() {
+
+    String id = this.argument.id();
+    if ((id == null) || (id.length() == 0)) {
+      id = this.argument.name();
+    }
+    return id;
+  }
+
+  /**
+   * @return the state
+   */
+  public InitializationState getState() {
+
+    return this.state;
+  }
+
+  /**
+   * @param state is the state to set
+   */
+  public void setState(InitializationState state) {
+
+    this.state = state;
   }
 
 }

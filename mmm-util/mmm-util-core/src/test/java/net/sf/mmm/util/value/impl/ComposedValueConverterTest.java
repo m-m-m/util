@@ -3,14 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
+import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
@@ -118,7 +122,7 @@ public class ComposedValueConverterTest {
     ComposedValueConverter converter = getComposedValueConverter();
     Boolean value;
     String valueSource = "test-case";
-    // convert to string
+    // convert to boolean
     value = converter.convertValue("true", valueSource, Boolean.class);
     Assert.assertEquals(Boolean.TRUE, value);
     boolean value2 = converter.convertValue("false", valueSource, boolean.class);
@@ -140,6 +144,58 @@ public class ComposedValueConverterTest {
     Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
     value = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT.name(), valueSource, TestEnum.class);
     Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
+  }
+
+  @Test
+  public void testConvert2Class() throws Exception {
+
+    ComposedValueConverter converter = getComposedValueConverter();
+    Class value;
+    String valueSource = "test-case";
+    // convert to string
+    value = converter.convertValue("java.lang.String", valueSource, Class.class);
+    Assert.assertEquals(String.class, value);
+    Type classOfNumber = Generic.class.getMethod("getClassOfNumber", ReflectionUtil.NO_PARAMETERS)
+        .getGenericReturnType();
+    Type classExtendsNumber = Generic.class.getMethod("getClassExtendsNumber",
+        ReflectionUtil.NO_PARAMETERS).getGenericReturnType();
+    value = converter.convertValue("java.lang.Number", valueSource, Class.class, classOfNumber);
+    Assert.assertEquals(Number.class, value);
+    value = converter
+        .convertValue("java.lang.Number", valueSource, Class.class, classExtendsNumber);
+    Assert.assertEquals(Number.class, value);
+    value = converter.convertValue("java.lang.Integer", valueSource, Class.class,
+        classExtendsNumber);
+    Assert.assertEquals(Integer.class, value);
+    value = converter
+        .convertValue("java.lang.Double", valueSource, Class.class, classExtendsNumber);
+    Assert.assertEquals(Double.class, value);
+    // Class java.lang.Date does not match Class<? extends Number>
+    try {
+      value = converter
+          .convertValue("java.util.Date", valueSource, Class.class, classExtendsNumber);
+      ExceptionHelper.failExceptionExpected();
+    } catch (RuntimeException e) {
+      // OK
+      ExceptionHelper.assertCause(e, NlsParseException.class);
+    }
+    // Class java.lang.Object does not match Class<? extends Number>
+    try {
+      value = converter.convertValue("java.lang.Object", valueSource, Class.class,
+          classExtendsNumber);
+      ExceptionHelper.failExceptionExpected();
+    } catch (RuntimeException e) {
+      // OK
+      ExceptionHelper.assertCause(e, NlsParseException.class);
+    }
+    // "..." is no Class at all!
+    try {
+      value = converter.convertValue("...", valueSource, Class.class, classExtendsNumber);
+      ExceptionHelper.failExceptionExpected();
+    } catch (RuntimeException e) {
+      // OK
+      ExceptionHelper.assertCause(e, NlsParseException.class);
+    }
   }
 
   @Test
@@ -326,6 +382,19 @@ public class ComposedValueConverterTest {
 
   private static class Foo {
 
+  }
+
+  private static class Generic {
+
+    public Class<Number> getClassOfNumber() {
+
+      return Number.class;
+    }
+
+    public Class<? extends Number> getClassExtendsNumber() {
+
+      return Integer.class;
+    }
   }
 
   private static class ValueConverterFooToObject extends AbstractSimpleValueConverter<Foo, Object> {

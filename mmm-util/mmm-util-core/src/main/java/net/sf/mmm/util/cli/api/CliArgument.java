@@ -40,14 +40,21 @@ import java.lang.annotation.Target;
 public @interface CliArgument {
 
   /**
-   * Symbolic name used for {@link #addNextTo()} to identify the first argument.
+   * Symbolic name used for {@link #addCloseTo()} to identify the first argument.
    */
-  String NAME_FIRST = "#first";
+  String ID_FIRST = "#first";
 
   /**
-   * Symbolic name used for {@link #addNextTo()} to identify the last argument.
+   * Symbolic name used for {@link #addCloseTo()} to identify the last argument.
    */
-  String NAME_LAST = "#last";
+  String ID_LAST = "#last";
+
+  /**
+   * The ID of the argument used to identify the argument e.g. via
+   * {@link #addCloseTo()}. The default is the empty string that is treated as if
+   * the ID is set to the same value as {@link #name()}.
+   */
+  String id() default "";
 
   /**
    * The name of the argument used for help usage output.
@@ -57,25 +64,26 @@ public @interface CliArgument {
   /**
    * Determines if this {@link CliArgument} should be add after (
    * <code>true</code>) or before (<code>false</code>) the {@link CliArgument
-   * argument} identified by {@link #addNextTo()}.
+   * argument} identified by {@link #addCloseTo()}.
    */
   boolean addAfter() default true;
 
   /**
    * The {@link #name() name} of the argument where to add this
-   * {@link CliArgument} in the list of arguments.
+   * {@link CliArgument} in the list of arguments. The default is
+   * {@link #ID_LAST}.
    * 
-   * @see #NAME_FIRST
-   * @see #NAME_LAST
+   * @see #ID_FIRST
+   * @see #ID_LAST
    */
-  String addNextTo();
+  String addCloseTo() default CliArgument.ID_LAST;
 
   /**
    * The mode of this argument.
    * 
    * @see CliOption#mode()
    */
-  String mode() default CliMode.MODE_DEFAULT;
+  String mode() default CliMode.ID_DEFAULT;
 
   /**
    * The description of this argument for

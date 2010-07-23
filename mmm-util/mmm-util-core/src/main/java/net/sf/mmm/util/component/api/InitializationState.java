@@ -12,7 +12,7 @@ package net.sf.mmm.util.component.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public enum InitState {
+public enum InitializationState {
 
   /** State if initialization has not begun. */
   UNINITIALIZED,

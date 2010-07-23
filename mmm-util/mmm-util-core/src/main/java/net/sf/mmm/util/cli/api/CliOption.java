@@ -156,6 +156,6 @@ public @interface CliOption {
    * 
    * @see CliMode
    */
-  String mode() default CliMode.MODE_DEFAULT;
+  String mode() default CliMode.ID_DEFAULT;
 
 }

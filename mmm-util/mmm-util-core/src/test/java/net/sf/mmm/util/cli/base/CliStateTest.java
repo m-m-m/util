@@ -4,13 +4,16 @@
 package net.sf.mmm.util.cli.base;
 
 import java.util.List;
+import java.util.Set;
 
+import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliException;
 import net.sf.mmm.util.cli.api.CliMode;
-import net.sf.mmm.util.cli.api.CliModeCycleException;
+import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModes;
 import net.sf.mmm.util.cli.api.CliOption;
-import net.sf.mmm.util.cli.base.CliClassContainer.CliModeCycle;
+import net.sf.mmm.util.collection.base.NodeCycle;
+import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
@@ -43,6 +46,24 @@ public class CliStateTest {
   /** Usage for boolean-option (should be in NlsBundle if not test-case). */
   private static final String OPTION_USAGE_BOOLEAN = "some boolean trigger.";
 
+  private static final String MODE_X_EXTENDS_DEFAULT = "X";
+
+  private static final String MODE_Y_EXTENDS_HELP = "Y";
+
+  private static final String MODE_Z_EXTENDS_X_Y_HELP = "Z";
+
+  /** The name of a string-argument. */
+  private static final String ARGUMENT_NAME_STRING = "string";
+
+  /** The name of a boolean-argument. */
+  private static final String ARGUMENT_NAME_BOOLEAN = "boolean";
+
+  /** The name of an argument called {@value} . */
+  private static final String ARGUMENT_NAME_FOO = "foo";
+
+  /** The name of an argument called {@value} . */
+  private static final String ARGUMENT_NAME_BAR = "bar";
+
   /**
    * @return the {@link PojoDescriptorBuilder} instance to use.
    */
@@ -60,16 +81,16 @@ public class CliStateTest {
    * @param exception the {@link CliException}
    * @return the {@link CliModeCycle}.
    */
-  protected CliModeCycle getCycle(CliException exception) {
+  protected NodeCycle getCycle(Exception exception) {
 
     Assert.assertNotNull(exception);
-    CliModeCycle cycle = null;
+    NodeCycle cycle = null;
     Throwable cause = exception;
     while ((cycle == null) && (cause != null)) {
-      if (cause instanceof CliModeCycleException) {
-        CliModeCycleException cycleException = (CliModeCycleException) cause;
-        cycle = (CliModeCycle) cycleException.getNlsMessage().getArgument(
-            CliModeCycleException.KEY_CYCLE);
+      if (cause instanceof NodeCycleException) {
+        NodeCycleException cycleException = (NodeCycleException) cause;
+        cycle = (NodeCycle) cycleException.getNlsMessage()
+            .getArgument(NodeCycleException.KEY_CYCLE);
       }
       cause = cause.getCause();
     }
@@ -86,8 +107,8 @@ public class CliStateTest {
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
 
     CliState state;
-    state = new CliState(OptionTest1.class, descriptorBuilder, LoggerFactory
-        .getLogger(CliStateTest.class));
+    state = new CliState(OptionTest1.class, descriptorBuilder,
+        LoggerFactory.getLogger(CliStateTest.class));
     List<CliOptionContainer> optionList = state.getOptions();
     Assert.assertNotNull(optionList);
     Assert.assertEquals(2, optionList.size());
@@ -108,6 +129,55 @@ public class CliStateTest {
   }
 
   /**
+   * Tests that {@link CliMode#parentIds() hierarchy} of {@link CliMode}s is
+   * properly build.
+   */
+  @Test
+  public void testModeExtensions() {
+
+    PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
+    CliState state;
+    state = new CliState(ArgumentTest.class, descriptorBuilder,
+        LoggerFactory.getLogger(CliStateTest.class));
+    CliModeObject modeObject = state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
+    Assert.assertEquals(MODE_Z_EXTENDS_X_Y_HELP, modeObject.getId());
+    Set<? extends CliModeObject> extendedModes = modeObject.getExtendedModes();
+    Assert.assertTrue(extendedModes.contains(state.getMode(MODE_Z_EXTENDS_X_Y_HELP)));
+    Assert.assertTrue(extendedModes.contains(state.getMode(MODE_X_EXTENDS_DEFAULT)));
+    Assert.assertTrue(extendedModes.contains(state.getMode(MODE_Y_EXTENDS_HELP)));
+    Assert.assertTrue(extendedModes.contains(state.getMode(CliMode.ID_HELP)));
+    Assert.assertTrue(extendedModes.contains(state.getMode(CliMode.ID_DEFAULT)));
+    Assert.assertEquals(5, extendedModes.size());
+  }
+
+  /**
+   * Tests that {@link CliArgument}s are ordered correnctly and properly
+   * assigned to modes.
+   */
+  @Test
+  public void testArguments() {
+
+    PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
+    CliState state;
+    state = new CliState(ArgumentTest.class, descriptorBuilder,
+        LoggerFactory.getLogger(CliStateTest.class));
+    List<CliArgumentContainer> argumentsList = state.getArguments(state
+        .getMode(MODE_Z_EXTENDS_X_Y_HELP));
+    Assert.assertEquals(1, argumentsList.size());
+    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
+    argumentsList = state.getArguments(state.getMode(CliMode.ID_HELP));
+    Assert.assertEquals(1, argumentsList.size());
+    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
+    argumentsList = state.getArguments(state.getMode(CliMode.ID_DEFAULT));
+    Assert.assertEquals(4, argumentsList.size());
+    Assert.assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
+    Assert.assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(1).getId());
+    Assert.assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(2).getId());
+    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(3).getId());
+
+  }
+
+  /**
    * Tests that a cyclic mode dependency is discovered and properly reported.
    */
   @Test
@@ -118,10 +188,10 @@ public class CliStateTest {
     // self dependency...
     CliState state = null;
     try {
-      state = new CliState(CyclicTest1.class, descriptorBuilderFactory, LoggerFactory
-          .getLogger(CliStateTest.class));
+      state = new CliState(CyclicTest1.class, descriptorBuilderFactory,
+          LoggerFactory.getLogger(CliStateTest.class));
       Assert.fail();
-    } catch (CliException e) {
+    } catch (Exception e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();
       Assert.assertNotNull(inverseCycle);
       Assert.assertEquals(2, inverseCycle.size());
@@ -131,10 +201,10 @@ public class CliStateTest {
 
     // complex dependency...
     try {
-      state = new CliState(CyclicTest2.class, descriptorBuilderFactory, LoggerFactory
-          .getLogger(CliStateTest.class));
+      state = new CliState(CyclicTest2.class, descriptorBuilderFactory,
+          LoggerFactory.getLogger(CliStateTest.class));
       Assert.fail();
-    } catch (CliException e) {
+    } catch (Exception e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();
       Assert.assertNotNull(inverseCycle);
       Assert.assertEquals(4, inverseCycle.size());
@@ -158,7 +228,7 @@ public class CliStateTest {
 
   }
 
-  @CliMode(id = CliMode.MODE_DEFAULT, title = "default")
+  @CliMode(id = CliMode.ID_DEFAULT, title = "default")
   public static class OptionTest1 {
 
     @CliOption(name = OPTION_NAME_STRING, aliases = OPTION_ALIAS_STRING, usage = OPTION_USAGE_STRING)
@@ -166,6 +236,33 @@ public class CliStateTest {
 
     @CliOption(name = OPTION_NAME_BOOLEAN, usage = OPTION_USAGE_BOOLEAN)
     private boolean bool;
+  }
+
+  @CliModes({
+      @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT),
+      @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
+      @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT,
+          MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
+      @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP),
+      @CliMode(id = CliMode.ID_HELP, title = "help") })
+  public static class ArgumentTest {
+
+    @CliArgument(name = ARGUMENT_NAME_STRING, usage = OPTION_USAGE_STRING, //
+    mode = MODE_Z_EXTENDS_X_Y_HELP)
+    private String string;
+
+    @CliArgument(name = ARGUMENT_NAME_BOOLEAN, addCloseTo = CliArgument.ID_FIRST, addAfter = false, //
+    usage = OPTION_USAGE_BOOLEAN)
+    private boolean bool;
+
+    @CliArgument(name = ARGUMENT_NAME_FOO, addCloseTo = ARGUMENT_NAME_BAR, addAfter = false, //
+    usage = OPTION_USAGE_BOOLEAN, mode = MODE_X_EXTENDS_DEFAULT)
+    private String foo;
+
+    @CliArgument(name = ARGUMENT_NAME_BAR, addCloseTo = ARGUMENT_NAME_BOOLEAN, addAfter = true, //
+    usage = OPTION_USAGE_BOOLEAN, mode = MODE_X_EXTENDS_DEFAULT)
+    private String bar;
+
   }
 
 }

@@ -43,14 +43,20 @@ import java.lang.annotation.Target;
 @Documented
 public @interface CliMode {
 
-  /** The default {@link CliMode mode}. */
-  String MODE_DEFAULT = "default";
+  /** The {@link CliMode#id() ID} of the default {@link CliMode}. */
+  String ID_DEFAULT = "default";
 
-  /** The {@link CliMode group} for getting help (the usage). */
-  String MODE_HELP = "help";
+  /**
+   * The {@link CliMode#id() ID} of the {@link CliMode} for getting help (the
+   * usage).
+   */
+  String ID_HELP = "help";
 
-  /** The {@link CliMode group} for getting the program-version. */
-  String MODE_VERSION = "version";
+  /**
+   * The {@link CliMode#id() ID} of the {@link CliMode} for getting the
+   * program-version.
+   */
+  String ID_VERSION = "version";
 
   /**
    * The unique id of this {@link CliMode}. Should match to
@@ -60,7 +66,8 @@ public @interface CliMode {
 
   /**
    * The title of this {@link CliMode} for displaying in help-usage for the
-   * end-user.
+   * end-user. The default is the empty string that is treated as fallback to
+   * show the {@link #id() ID} as title.
    * 
    * @see net.sf.mmm.util.nls.api.NlsMessage
    */

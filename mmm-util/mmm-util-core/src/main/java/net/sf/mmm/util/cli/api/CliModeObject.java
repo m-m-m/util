@@ -54,9 +54,11 @@ public interface CliModeObject {
 
   /**
    * This method gets the {@link Set} of {@link CliModeObject modes} that are
-   * {@link CliMode#parentIds() extended} by this {@link #getMode() mode}.
+   * {@link CliMode#parentIds() extended} by this {@link #getMode() mode}
+   * including this {@link CliModeObject mode} itself.
    * 
-   * @return the extended {@link CliModeObject modes}.
+   * @return the extended {@link CliModeObject modes} including this
+   *         {@link CliModeObject mode} itself.
    */
   Set<? extends CliModeObject> getExtendedModes();
 

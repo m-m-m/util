@@ -19,7 +19,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ValueConverter<SOURCE, TARGET> {
+public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOURCE, TARGET> {
 
   /**
    * This the type of the value accepted by this converter. Use {@link Object}
@@ -54,24 +54,9 @@ public interface ValueConverter<SOURCE, TARGET> {
   Class<TARGET> getTargetType();
 
   /**
-   * This method converts the given <code>pojo</code> to the
-   * &lt;TARGET&gt;-type.
+   * {@inheritDoc}
    * 
    * @see #convert(Object, Object, GenericType)
-   * 
-   * @param value is the value to convert.
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier.
-   * @param targetClass is the type to convert the <code>value</code> to.
-   * @return the converted <code>value</code> or <code>null</code> if the
-   *         conversion is NOT possible. The returned value has to be an
-   *         {@link Class#isInstance(Object) instance} of the given
-   *         <code>targetType</code>.
-   * @throws ValueException if the conversion failed (e.g. the given
-   *         <code>value</code> is illegal for the given
-   *         <code>targetClass</code>).
    */
   TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass)
       throws ValueException;

@@ -40,7 +40,7 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
  * @since 1.0.0
  */
 @CliClass(usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE)
-@CliMode(id = CliMode.MODE_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
+@CliMode(id = CliMode.ID_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
 public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
@@ -86,7 +86,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   private String datePattern;
 
   /** @see #getLocales() */
-  @CliArgument(name = "locales", addNextTo = CliArgument.NAME_LAST, //
+  @CliArgument(name = "locales", addCloseTo = CliArgument.ID_LAST, //
   usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES, required = false)
   private String[] locales;
 
@@ -94,7 +94,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   // @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS",
   // required = true, //
   // usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
-  @CliArgument(name = "bundle", addNextTo = CliArgument.NAME_FIRST, //
+  @CliArgument(name = "bundle", addCloseTo = CliArgument.ID_FIRST, //
   usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS, required = false)
   private Class<? extends ResourceBundle> bundleClass;
 
@@ -383,7 +383,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   @Override
   protected int run(CliModeObject mode) throws Exception {
 
-    if (CliMode.MODE_DEFAULT.equals(mode.getId())) {
+    if (CliMode.ID_DEFAULT.equals(mode.getId())) {
       ResourceBundle bundle = this.bundleClass.newInstance();
       synchronize(bundle);
       return EXIT_CODE_OK;

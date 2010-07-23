@@ -13,7 +13,7 @@ import net.sf.mmm.util.reflect.api.Manifest;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@CliMode(id = CliMode.MODE_VERSION, title = NlsBundleUtilCore.INF_MAIN_MODE_VERSION, // 
+@CliMode(id = CliMode.ID_VERSION, title = NlsBundleUtilCore.INF_MAIN_MODE_VERSION, // 
 usage = NlsBundleUtilCore.MSG_MAIN_MODE_VERSION_USAGE)
 public abstract class AbstractVersionedMain extends AbstractMain {
 
@@ -22,7 +22,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The option to print the version. */
   @CliOption(name = CliOption.NAME_VERSION, aliases = CliOption.ALIAS_VERSION, //
-  usage = NlsBundleUtilCore.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.MODE_VERSION, required = true)
+  usage = NlsBundleUtilCore.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.ID_VERSION, required = true)
   private boolean version;
 
   /**
@@ -53,7 +53,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
   protected int run(CliModeObject mode) throws Exception {
 
     if (this.version) {
-      assert (CliMode.MODE_VERSION.equals(mode.getId()));
+      assert (CliMode.ID_VERSION.equals(mode.getId()));
       getStandardOutput().println(getVersion());
       return 0;
     }

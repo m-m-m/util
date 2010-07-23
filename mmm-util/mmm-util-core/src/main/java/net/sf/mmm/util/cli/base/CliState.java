@@ -6,7 +6,6 @@ package net.sf.mmm.util.cli.base;
 import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,14 +13,19 @@ import java.util.Map;
 import java.util.Set;
 
 import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException;
 import net.sf.mmm.util.cli.api.CliClassNoPropertyException;
-import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModeUndefinedException;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.cli.api.CliOptionAndArgumentAnnotationException;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
+import net.sf.mmm.util.collection.base.BasicDoubleLinkedNode;
+import net.sf.mmm.util.collection.base.NodeCycle;
+import net.sf.mmm.util.collection.base.NodeCycleException;
+import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
@@ -30,6 +34,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.value.api.SimpleValueConverter;
+import net.sf.mmm.util.value.api.ValueException;
 
 import org.slf4j.Logger;
 
@@ -75,15 +81,16 @@ public class CliState extends CliClassContainer {
     this.mode2argumentsMap = new HashMap<String, List<CliArgumentContainer>>();
     this.arguments = new ArrayList<CliArgumentContainer>();
     int nullIndex = -1;
-    boolean annotationFound = findPropertyAnnotations(descriptorBuilderFactory
+    boolean fieldAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
         .createPrivateFieldDescriptorBuilder());
-    if (!annotationFound) {
-      annotationFound = findPropertyAnnotations(descriptorBuilderFactory
-          .createPublicMethodDescriptorBuilder());
-    }
-    if (!annotationFound) {
+    boolean methodAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
+        .createPublicMethodDescriptorBuilder());
+    if (!fieldAnnotationFound && !methodAnnotationFound) {
+      // is this really forbidden? Add handling to CliStyle?
       throw new CliClassNoPropertyException(stateClass);
     }
+    initializeArguments();
+
     for (String modeId : this.mode2argumentsMap.keySet()) {
       List<CliArgumentContainer> argumentList = this.mode2argumentsMap.get(modeId);
       boolean optional = false;
@@ -112,6 +119,149 @@ public class CliState extends CliClassContainer {
         }
       }
     }
+  }
+
+  /**
+   * This method initializes the {@link #mode2argumentsMap arguments}.
+   */
+  protected void initializeArguments() {
+
+    // 0 (before #first), 1(after 2), 2 (after 3), 3 (after 1), 9 (after #last)
+    // -->
+    // 3, 2, 1, error
+    // Create Node for each arg, and add nodes to map
+
+    Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap = new HashMap<String, BasicDoubleLinkedNode<CliArgumentContainer>>();
+    BasicDoubleLinkedNode<CliArgumentContainer> startHead = null;
+    BasicDoubleLinkedNode<CliArgumentContainer> startTail = null;
+    BasicDoubleLinkedNode<CliArgumentContainer> endHead = null;
+    BasicDoubleLinkedNode<CliArgumentContainer> endTail = null;
+    for (CliArgumentContainer argumentContainer : this.arguments) {
+      String id = argumentContainer.getId();
+      if ((CliArgument.ID_FIRST.equals(id)) || (CliArgument.ID_LAST.equals(id))) {
+        throw new NlsIllegalArgumentException(id, argumentContainer.toString());
+      }
+      if (argumentMap.containsKey(id)) {
+        throw new DuplicateObjectException(argumentContainer, id);
+      }
+      BasicDoubleLinkedNode<CliArgumentContainer> node = new BasicDoubleLinkedNode<CliArgumentContainer>();
+      node.setValue(argumentContainer);
+      argumentMap.put(id, node);
+      CliArgument cliArgument = argumentContainer.getArgument();
+      boolean addAfter = cliArgument.addAfter();
+      String nextTo = cliArgument.addCloseTo();
+      if (CliArgument.ID_FIRST.equals(nextTo)) {
+        if (startHead == null) {
+          startHead = node;
+          startTail = node;
+        } else {
+          if (addAfter) {
+            startTail.insertAsNext(node);
+            startTail = node;
+          } else {
+            startHead.insertAsPrevious(node);
+            startHead = node;
+          }
+        }
+        argumentContainer.setState(InitializationState.INITIALIZED);
+      } else if (CliArgument.ID_LAST.equals(nextTo)) {
+        if (endTail == null) {
+          endTail = node;
+          endHead = node;
+        } else {
+          if (addAfter) {
+            endTail.insertAsNext(node);
+            endTail = node;
+          } else {
+            endHead.insertAsPrevious(node);
+            endHead = node;
+          }
+        }
+        argumentContainer.setState(InitializationState.INITIALIZED);
+      }
+    }
+    if ((startTail != null) && (endHead != null)) {
+      // connect start and end of list...
+      startTail.insertAsNext(endHead);
+    }
+    for (BasicDoubleLinkedNode<CliArgumentContainer> node : argumentMap.values()) {
+      initializeArgumentRecursive(node, argumentMap);
+    }
+    // order arguments
+    if (startHead != null) {
+      this.arguments.clear();
+      startHead.addToList(this.arguments);
+    } else if (endHead != null) {
+      this.arguments.clear();
+      BasicDoubleLinkedNode<CliArgumentContainer> node = endHead;
+      BasicDoubleLinkedNode<CliArgumentContainer> previous = node.getPrevious();
+      while (previous != null) {
+        node = previous;
+        previous = node.getPrevious();
+      }
+      node.addToList(this.arguments);
+    }
+    // for (String modeId : getModeIds()) {
+    // CliModeObject modeContainer = getMode(modeId);
+    // List<CliArgumentContainer> modeArguments = new
+    // ArrayList<CliArgumentContainer>();
+    //
+    // this.mode2argumentsMap.put(modeId, modeArguments);
+    // }
+  }
+
+  /**
+   * This method initializes the {@link BasicDoubleLinkedNode node}
+   * {@link BasicDoubleLinkedNode#getValue() containing} an
+   * {@link CliArgumentContainer} in order to determine the appropriate order of
+   * the {@link CliArgument}s.
+   * 
+   * @param node is the node to initialize (link into the node-list).
+   * @param argumentMap maps the {@link CliArgumentContainer#getId() id} to the
+   *        according argument-node.
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is
+   *         NOT yet complete or <code>null</code> if the initialization was
+   *         successful.
+   * @throws NodeCycleException if a cyclic dependency was detected and
+   *         completed.
+   */
+  protected NodeCycle<CliArgumentContainer> initializeArgumentRecursive(
+      BasicDoubleLinkedNode<CliArgumentContainer> node,
+      Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap)
+      throws NodeCycleException {
+
+    CliArgumentContainer argumentContainer = node.getValue();
+    if (argumentContainer.getState() != InitializationState.INITIALIZED) {
+      if (argumentContainer.getState() == InitializationState.INITIALIZING) {
+        // cycle detected
+        return new NodeCycle<CliArgumentContainer>(argumentContainer, CliArgumentFormatter.INSTANCE);
+      } else {
+        argumentContainer.setState(InitializationState.INITIALIZING);
+      }
+      CliArgument cliArgument = argumentContainer.getArgument();
+      String nextTo = cliArgument.addCloseTo();
+      assert (!CliArgument.ID_FIRST.equals(nextTo) && !CliArgument.ID_LAST.equals(nextTo));
+      BasicDoubleLinkedNode<CliArgumentContainer> nextToNode = argumentMap.get(nextTo);
+      if (nextToNode == null) {
+        throw new CliArgumentReferenceMissingException(argumentContainer);
+      }
+      boolean addAfter = cliArgument.addAfter();
+      NodeCycle<CliArgumentContainer> cycle = initializeArgumentRecursive(nextToNode, argumentMap);
+      if (cycle != null) {
+        cycle.getInverseCycle().add(argumentContainer);
+        if (cycle.getStartNode() == argumentContainer) {
+          throw new NodeCycleException(cycle);
+        }
+        return cycle;
+      }
+      if (addAfter) {
+        nextToNode.insertAsNext(node);
+      } else {
+        nextToNode.insertAsPrevious(node);
+      }
+      argumentContainer.setState(InitializationState.INITIALIZED);
+    }
+    return null;
   }
 
   /**
@@ -160,12 +310,13 @@ public class CliState extends CliClassContainer {
   /**
    * This method is like {@link #getMode(String)} but also
    * {@link net.sf.mmm.util.cli.api.CliStyle#modeUndefined() handles} the case
-   * that a {@link CliMode} may be undefined.
+   * that a {@link net.sf.mmm.util.cli.api.CliMode} may be undefined.
    * 
-   * @param id is the {@link CliMode#id() ID} of the requested {@link CliMode}.
+   * @param id is the {@link net.sf.mmm.util.cli.api.CliMode#id() ID} of the
+   *        requested {@link net.sf.mmm.util.cli.api.CliMode}.
    * @param annotationContainer is the {@link CliArgumentContainer} or
    *        {@link CliOptionContainer}.
-   * @return the requested {@link CliMode}.
+   * @return the requested {@link CliModeObject}.
    */
   protected CliModeObject requireMode(String id, Object annotationContainer) {
 
@@ -191,31 +342,7 @@ public class CliState extends CliClassContainer {
    */
   private void addArgument(CliArgumentContainer argumentContainer) {
 
-    CliArgument cliArgument = argumentContainer.getArgument();
-    // int index = cliArgument.index();
-    // ValueOutOfRangeException.checkRange(Integer.valueOf(index),
-    // CliArgument.INDEX_MIN,
-    // CliArgument.INDEX_MAX, argumentContainer);
-
     this.arguments.add(argumentContainer);
-    String modeId = cliArgument.mode();
-    requireMode(modeId, argumentContainer);
-    List<CliArgumentContainer> argumentList = this.mode2argumentsMap.get(modeId);
-    if (argumentList == null) {
-      argumentList = new ArrayList<CliArgumentContainer>();
-      this.mode2argumentsMap.put(modeId, argumentList);
-    }
-    // ensure capacity
-    // for (int i = argumentList.size(); i <= index; i++) {
-    // argumentList.add(null);
-    // }
-    // if (argumentList.get(index) != null) {
-    // throw new DuplicateObjectException(argumentContainer,
-    // Integer.valueOf(index));
-    // }
-    // argumentList.set(index, argumentContainer);
-    // TODO
-    argumentList.add(argumentContainer);
   }
 
   /**
@@ -300,42 +427,49 @@ public class CliState extends CliClassContainer {
    */
   public List<CliArgumentContainer> getArguments(CliModeObject mode) {
 
-    List<CliArgumentContainer> result = getArgumentsRecursive(mode);
-    if (result == null) {
-      result = Collections.emptyList();
+    List<CliArgumentContainer> result = new ArrayList<CliArgumentContainer>();
+    for (CliArgumentContainer argumentContainer : this.arguments) {
+      String argumentModeId = argumentContainer.getArgument().mode();
+      CliModeObject argumentMode = getMode(argumentModeId);
+      if (argumentMode.getExtendedModes().contains(mode)) {
+        result.add(argumentContainer);
+      }
     }
     return result;
   }
 
-  /**
-   * This method gets the {@link List} of {@link CliArgumentContainer
-   * CLI-arguments} for the given {@link CliModeObject mode}.
-   * 
-   * @param mode is the according {@link CliModeContainer mode}.
-   * @return the arguments or <code>null</code> if no arguments are defined for
-   *         this mode.
-   */
-  protected List<CliArgumentContainer> getArgumentsRecursive(CliModeObject mode) {
-
-    List<CliArgumentContainer> modeArguments = this.mode2argumentsMap.get(mode.getId());
-    if (modeArguments == null) {
-      CliMode cliMode = mode.getMode();
-      if (cliMode != null) {
-        for (String parentId : cliMode.parentIds()) {
-          CliModeObject parentMode = getMode(parentId);
-          modeArguments = getArgumentsRecursive(parentMode);
-          if (modeArguments != null) {
-            break;
-          }
-        }
-      }
-    }
-    return modeArguments;
-  }
+  // /**
+  // * This method gets the {@link List} of {@link CliArgumentContainer
+  // * CLI-arguments} for the given {@link CliModeObject mode}.
+  // *
+  // * @param mode is the according {@link CliModeContainer mode}.
+  // * @return the arguments or <code>null</code> if no arguments are defined
+  // for
+  // * this mode.
+  // */
+  // protected List<CliArgumentContainer> getArgumentsRecursive(CliModeObject
+  // mode) {
+  //
+  // List<CliArgumentContainer> modeArguments =
+  // this.mode2argumentsMap.get(mode.getId());
+  // if (modeArguments == null) {
+  // CliMode cliMode = mode.getMode();
+  // if (cliMode != null) {
+  // for (String parentId : cliMode.parentIds()) {
+  // CliModeObject parentMode = getMode(parentId);
+  // modeArguments = getArgumentsRecursive(parentMode);
+  // if (modeArguments != null) {
+  // break;
+  // }
+  // }
+  // }
+  // }
+  // return modeArguments;
+  // }
 
   /**
    * This method gets the {@link CliOption options} for the given
-   * {@link CliMode mode}.
+   * {@link CliModeObject mode}.
    * 
    * @param mode is the {@link CliModeObject} for which the {@link CliOption
    *        options} are required.
@@ -360,4 +494,25 @@ public class CliState extends CliClassContainer {
     }
     return result;
   }
+
+  /**
+   * This inner class converts a {@link CliArgumentContainer} to a
+   * {@link String}.
+   */
+  protected static final class CliArgumentFormatter implements
+      SimpleValueConverter<CliArgumentContainer, String> {
+
+    /** The singleton instance. */
+    protected static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
+
+    /**
+     * {@inheritDoc}
+     */
+    public String convert(CliArgumentContainer value, Object valueSource,
+        Class<? extends String> targetClass) throws ValueException {
+
+      return value.getId();
+    }
+  }
+
 }

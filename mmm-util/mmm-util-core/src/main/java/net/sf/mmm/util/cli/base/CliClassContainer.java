@@ -3,22 +3,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
-import net.sf.mmm.util.cli.api.CliModeCycleException;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModes;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
-import net.sf.mmm.util.component.api.InitState;
+import net.sf.mmm.util.collection.base.NodeCycle;
+import net.sf.mmm.util.collection.base.NodeCycleException;
+import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.value.api.SimpleValueConverter;
+import net.sf.mmm.util.value.api.ValueException;
 
 import org.slf4j.Logger;
 
@@ -104,7 +105,11 @@ public class CliClassContainer {
       currentClass = currentClass.getSuperclass();
     }
     for (CliModeContainer modeContainer : this.id2ModeMap.values()) {
-      initializeRecursive(modeContainer);
+      NodeCycle<CliModeContainer> cycle = initializeModeRecursive(modeContainer);
+      if (cycle != null) {
+        // actually a bug?!?
+        throw new NodeCycleException(cycle);
+      }
     }
   }
 
@@ -122,37 +127,39 @@ public class CliClassContainer {
    * This method initializes the given {@link CliModeContainer}.
    * 
    * @param mode is the {@link CliModeContainer} to initialize.
-   * @return a {@link CliModeCycle} if a cyclic dependency has been detected but
-   *         is NOT yet complete or <code>null</code> if the initialization was
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is
+   *         NOT yet complete or <code>null</code> if the initialization was
    *         successful.
-   * @throws CliModeCycleException if a cyclic dependency was detected and
+   * @throws NodeCycleException if a cyclic dependency was detected and
    *         completed.
    */
-  private CliModeCycle initializeRecursive(CliModeContainer mode) throws CliModeCycleException {
+  protected NodeCycle<CliModeContainer> initializeModeRecursive(CliModeContainer mode)
+      throws NodeCycleException {
 
-    InitState initState = mode.getState();
-    if (initState != InitState.INITIALIZED) {
-      if (initState == InitState.INITIALIZING) {
+    InitializationState initState = mode.getState();
+    if (initState != InitializationState.INITIALIZED) {
+      if (initState == InitializationState.INITIALIZING) {
         // cycle detected
-        return new CliModeCycle(mode);
+        return new NodeCycle<CliModeContainer>(mode, CliModeFormatter.INSTANCE);
       } else {
-        mode.setState(InitState.INITIALIZING);
+        mode.setState(InitializationState.INITIALIZING);
       }
       for (String parentId : mode.getMode().parentIds()) {
         CliModeContainer parentContainer = this.id2ModeMap.get(parentId);
         if (parentContainer == null) {
           throw new ObjectNotFoundException(CliMode.class, parentId);
         }
-        CliModeCycle cycle = initializeRecursive(parentContainer);
+        NodeCycle<CliModeContainer> cycle = initializeModeRecursive(parentContainer);
         if (cycle != null) {
-          cycle.inverseCycle.add(mode);
-          if (cycle.startNode == mode) {
-            throw new CliModeCycleException(cycle);
+          cycle.getInverseCycle().add(mode);
+          if (cycle.getStartNode() == mode) {
+            throw new NodeCycleException(cycle, "@" + CliMode.class.getSimpleName());
           }
           return cycle;
         }
         mode.getExtendedModes().addAll(parentContainer.getExtendedModes());
       }
+      mode.setState(InitializationState.INITIALIZED);
     }
     return null;
   }
@@ -284,56 +291,21 @@ public class CliClassContainer {
   }
 
   /**
-   * This inner class is used to detect a cyclic {@link CliMode#parentIds()
-   * dependency} of {@link CliMode}s.
+   * This inner class converts a {@link CliModeContainer} to a {@link String}.
    */
-  protected static class CliModeCycle {
+  protected static final class CliModeFormatter implements
+      SimpleValueConverter<CliModeContainer, String> {
 
-    /** @see #getInverseCycle() */
-    private List<CliModeContainer> inverseCycle;
-
-    /** The start node where the detected cycle begins. */
-    private CliModeContainer startNode;
-
-    /**
-     * The constructor.
-     * 
-     * @param startNode is the {@link #startNode}.
-     */
-    public CliModeCycle(CliModeContainer startNode) {
-
-      super();
-      this.startNode = startNode;
-      this.inverseCycle = new ArrayList<CliModeContainer>();
-      this.inverseCycle.add(this.startNode);
-    }
-
-    /**
-     * @return the {@link List} of {@link CliModeContainer modes} that build a
-     *         cycle. It is stored in reverse order so the last node is the
-     *         start of the cycle from top-level. The first node will be the
-     *         same node as the last one.
-     */
-    public List<CliModeContainer> getInverseCycle() {
-
-      return this.inverseCycle;
-    }
+    /** The singleton instance. */
+    protected static final CliModeFormatter INSTANCE = new CliModeFormatter();
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public String toString() {
+    public String convert(CliModeContainer value, Object valueSource,
+        Class<? extends String> targetClass) throws ValueException {
 
-      StringBuilder sb = new StringBuilder();
-      for (int i = this.inverseCycle.size() - 1; i >= 0; i--) {
-        CliModeContainer container = this.inverseCycle.get(i);
-        sb.append(container.getMode().id());
-        if (i > 0) {
-          sb.append("-->");
-        }
-      }
-      return sb.toString();
+      return value.getId();
     }
   }
 

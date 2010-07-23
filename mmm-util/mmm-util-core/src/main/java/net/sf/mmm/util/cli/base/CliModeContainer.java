@@ -3,13 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
-import net.sf.mmm.util.component.api.InitState;
+import net.sf.mmm.util.component.api.InitializationState;
 
 /**
  * This is a container for a {@link CliMode} together with additional associated
@@ -33,7 +32,7 @@ public class CliModeContainer implements CliModeObject {
   private final Set<CliModeContainer> extendedModes;
 
   /** @see #getState() */
-  private InitState state;
+  private InitializationState state;
 
   /**
    * The constructor for a dummy instance.
@@ -42,12 +41,7 @@ public class CliModeContainer implements CliModeObject {
    */
   public CliModeContainer(String id) {
 
-    super();
-    this.id = id;
-    this.mode = null;
-    this.annotatedClass = null;
-    this.extendedModes = Collections.emptySet();
-    this.state = InitState.INITIALIZED;
+    this(null, null, id);
   }
 
   /**
@@ -58,12 +52,25 @@ public class CliModeContainer implements CliModeObject {
    */
   public CliModeContainer(CliMode mode, Class<?> annotatedClass) {
 
+    this(mode, annotatedClass, mode.id());
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param mode is the {@link #getMode() mode}.
+   * @param annotatedClass is the {@link #getAnnotatedClass() annotated class}.
+   * @param id is the {@link #getId() ID}.
+   */
+  private CliModeContainer(CliMode mode, Class<?> annotatedClass, String id) {
+
     super();
     this.mode = mode;
-    this.id = mode.id();
+    this.id = id;
     this.annotatedClass = annotatedClass;
     this.extendedModes = new HashSet<CliModeContainer>();
-    this.state = InitState.UNINITIALIZED;
+    this.extendedModes.add(this);
+    this.state = InitializationState.UNINITIALIZED;
   }
 
   /**
@@ -115,7 +122,7 @@ public class CliModeContainer implements CliModeObject {
   /**
    * @return the state
    */
-  public InitState getState() {
+  public InitializationState getState() {
 
     return this.state;
   }
@@ -123,7 +130,7 @@ public class CliModeContainer implements CliModeObject {
   /**
    * @param state is the state to set
    */
-  public void setState(InitState state) {
+  public void setState(InitializationState state) {
 
     this.state = state;
   }

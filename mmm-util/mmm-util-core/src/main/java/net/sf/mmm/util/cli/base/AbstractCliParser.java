@@ -242,9 +242,9 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     }
     if (parserState.currentMode == null) {
       // just in case no argument was given at all...
-      parserState.currentMode = this.cliState.getMode(CliMode.MODE_DEFAULT);
+      parserState.currentMode = this.cliState.getMode(CliMode.ID_DEFAULT);
       if (parserState.currentMode == null) {
-        parserState.currentMode = new CliModeContainer(CliMode.MODE_DEFAULT);
+        parserState.currentMode = new CliModeContainer(CliMode.ID_DEFAULT);
       }
     }
     checkRequiredParameters(parserState);
