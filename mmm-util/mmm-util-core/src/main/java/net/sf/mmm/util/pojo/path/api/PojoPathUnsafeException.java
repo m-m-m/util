@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.pojo.NlsBundleUtilPojo;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link PojoPathUnsafeException} is thrown by the {@link PojoPathNavigator}
@@ -30,7 +30,7 @@ public class PojoPathUnsafeException extends PojoPathException {
    */
   public PojoPathUnsafeException(Object initialPojoType, String pojoPath) {
 
-    super(NlsBundleUtilPojo.ERR_PATH_UNSAFE, toMap(KEY_PATH, pojoPath, KEY_TYPE, initialPojoType));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_UNSAFE, toMap(KEY_PATH, pojoPath, KEY_TYPE, initialPojoType));
   }
 
 }

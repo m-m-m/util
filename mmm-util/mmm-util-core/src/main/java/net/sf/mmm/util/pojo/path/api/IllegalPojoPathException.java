@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.pojo.NlsBundleUtilPojo;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link IllegalPojoPathException} is thrown by the
@@ -31,7 +31,7 @@ public class IllegalPojoPathException extends PojoPathException {
    */
   public IllegalPojoPathException(String pojoPath) {
 
-    super(NlsBundleUtilPojo.ERR_PATH_ILLEGAL, toMap(KEY_PATH, pojoPath));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_ILLEGAL, toMap(KEY_PATH, pojoPath));
   }
 
   /**
@@ -42,7 +42,7 @@ public class IllegalPojoPathException extends PojoPathException {
    */
   public IllegalPojoPathException(Throwable nested, String pojoPath) {
 
-    super(nested, NlsBundleUtilPojo.ERR_PATH_ILLEGAL, toMap(KEY_PATH, pojoPath));
+    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_ILLEGAL, toMap(KEY_PATH, pojoPath));
   }
 
 }

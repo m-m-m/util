@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
-import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
@@ -13,6 +12,45 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * @since 1.0.2
  */
 public class NlsBundleUtilCore extends AbstractResourceBundle {
+
+  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
+  public static final String INF_LEFT = "left";
+
+  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#RIGHT */
+  public static final String INF_RIGHT = "right";
+
+  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#CENTER */
+  public static final String INF_CENTER = "center";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#AND */
+  public static final String INF_AND = "and";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#OR */
+  public static final String INF_OR = "or";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#NAND */
+  public static final String INF_NAND = "nand";
+
+  /** @see net.sf.mmm.util.lang.api.Conjunction#NOR */
+  public static final String INF_NOR = "nor";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_THAN */
+  public static final String INF_GREATER_THAN = "greater-than";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_OR_EQUAL */
+  public static final String INF_GREATER_OR_EQUAL = "greater-or-equal";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#EQUAL */
+  public static final String INF_EQUAL = "equal";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#NOT_EQUAL */
+  public static final String INF_NOT_EQUAL = "not-equal";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_THAN */
+  public static final String INF_LESS_THAN = "less-than";
+
+  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_OR_EQUAL */
+  public static final String INF_LESS_OR_EQUAL = "less-or-equal";
 
   /** @see net.sf.mmm.util.value.api.WrongValueTypeException */
   public static final String ERR_VALUE_WRONG_TYPE = "The value \"{value}\" with the "
@@ -173,9 +211,8 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
   public static final String ERR_XML_INVALID = "Invalid XML!";
 
-  /** @see net.sf.mmm.util.cli.api.CliModeCycleException */
-  public static final String ERR_CLI_MODE_CYCLE = "A @" + CliMode.class.getSimpleName()
-      + "-cycle has been detected[{cycle}]!";
+  /** @see net.sf.mmm.util.collection.base.NodeCycleException */
+  public static final String ERR_NODE_CYCLE = "A cyclic dependency of {type}-nodes has been detected [{cycle}]!";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionIllegalNameOrAliasException */
   public static final String ERR_CLI_OPTION_NAME_ILLEGAL = "The name or alias \"{name}\" of \"{option}\" is illegal!";
@@ -281,6 +318,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_CLI_ARGUMENT_MISSING = "The argument \"{argument}\" "
       + "is required for mode \"{mode}\"!";
 
+  /** @see net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException */
+  public static final String ERR_CLI_ARGUMENT_REFERENCE_MISSING = "The argument \"{key}\" "
+      + "is referenced by \"{argument}\" but not defined!";
+
   /** @see net.sf.mmm.util.cli.api.CliOptionMisplacedException */
   public static final String ERR_CLI_OPTION_MISPLACED = "The option \"{option}\" "
       + "is misplaced and can not be given after the start of the arguments!";
@@ -301,43 +342,45 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
       + "by \"{value}\" is undefined! You have to declare it via @CliMode or "
       + "change @CliStyle.modeUndefined() to something else than EXCEPTION.";
 
-  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
-  public static final String INF_LEFT = "left";
+  /** @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException */
+  public static final String ERR_POJO_PROPERTY_NOT_FOUND = "Property \"{property}\" not found in \"{type}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#RIGHT */
-  public static final String INF_RIGHT = "right";
+  /** @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException */
+  public static final String ERR_POJO_PROPERTY_NOT_ACCESSABLE = "Property \"{property}\" not "
+      + "accessible for \"{mode}\" in \"{type}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#CENTER */
-  public static final String INF_CENTER = "center";
+  /** @see net.sf.mmm.util.pojo.path.api.IllegalPojoPathException */
+  public static final String ERR_POJO_FUNCTION_UNDEFINED = "Undefined function \"{function}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#AND */
-  public static final String INF_AND = "and";
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationException */
+  public static final String ERR_POJO_FUNCTION_UNSUPPORTED_OPERATION = "The function "
+      + "\"{function}\" does NOT support the operation \"{operation}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#OR */
-  public static final String INF_OR = "or";
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathUnsafeException */
+  public static final String ERR_POJO_PATH_UNSAFE = "The pojo-path \"{path}\" "
+      + "is unsafe for type \"{type}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#NAND */
-  public static final String INF_NAND = "nand";
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException */
+  public static final String ERR_POJO_PATH_SEGMENT_IS_NULL = "The pojo-path \"{path}\" "
+      + "for object \"{object}\" evaluates to null!";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#NOR */
-  public static final String INF_NOR = "nor";
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathCreationException */
+  public static final String ERR_POJO_PATH_CREATION = "Failed to create the "
+      + "object at the pojo-path \"{path}\" for object \"{object}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_THAN */
-  public static final String INF_GREATER_THAN = "greater-than";
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathAccessException */
+  public static final String ERR_POJO_PATH_ACCESS = "Failed to access the pojo-path "
+      + "\"{path}\" for current object of type \"{type}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_OR_EQUAL */
-  public static final String INF_GREATER_OR_EQUAL = "greater-or-equal";
+  /** @see net.sf.mmm.util.pojo.path.api.IllegalPojoPathException */
+  public static final String ERR_POJO_PATH_ILLEGAL = "Illegal pojo-path \"{path}\"!";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#EQUAL */
-  public static final String INF_EQUAL = "equal";
+  /** @see net.sf.mmm.util.pojo.path.base.PojoPathCachingDisabledException */
+  public static final String ERR_POJO_PATH_CACHING_DISABLED = "Caching was required "
+      + "for pojo-path \"{path}\" but is disabled!";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#NOT_EQUAL */
-  public static final String INF_NOT_EQUAL = "not-equal";
-
-  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_THAN */
-  public static final String INF_LESS_THAN = "less-than";
-
-  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_OR_EQUAL */
-  public static final String INF_LESS_OR_EQUAL = "less-or-equal";
+  /** @see net.sf.mmm.util.pojo.path.api.PojoPathConversionException */
+  public static final String ERR_POJO_PATH_CONVERSION = "Can NOT convert from \"{type}\""
+      + " to \"{targetType}\" for pojo-path \"{path}\"!";
 
 }
