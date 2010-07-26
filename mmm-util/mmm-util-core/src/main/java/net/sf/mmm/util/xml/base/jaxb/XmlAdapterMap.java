@@ -6,7 +6,6 @@ package net.sf.mmm.util.xml.base.jaxb;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -15,8 +14,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
 /**
  * This is an implementation of {@link XmlAdapter} for mapping a {@link Map}. It
- * uses a {@link List} of {@link AttributeReadId}-objects that can be handled by
- * JAXB.
+ * uses a {@link java.util.List} of {@link AttributeReadId}-objects that can be
+ * handled by JAXB.
  * 
  * @param <K> is the generic type of the {@link AttributeReadId#getId() ID}s
  *        used as {@link Map#get(Object) map-key}.
@@ -43,8 +42,8 @@ public class XmlAdapterMap<K> extends XmlAdapter<Object[], Map<K, AttributeReadI
     if (map != null) {
       Collection<AttributeReadId<K>> values = map.values();
       if (values.size() > 0) {
-        result = (AttributeReadId[]) Array.newInstance(values.iterator().next().getClass(), values
-            .size());
+        result = (AttributeReadId[]) Array.newInstance(values.iterator().next().getClass(),
+            values.size());
         result = values.toArray(result);
       }
     }
@@ -55,6 +54,7 @@ public class XmlAdapterMap<K> extends XmlAdapter<Object[], Map<K, AttributeReadI
    * {@inheritDoc}
    */
   @Override
+  @SuppressWarnings("unchecked")
   public Map<K, AttributeReadId<K>> unmarshal(Object[] list) throws Exception {
 
     Map<K, AttributeReadId<K>> result = null;

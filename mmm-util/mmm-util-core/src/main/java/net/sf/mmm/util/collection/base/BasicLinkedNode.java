@@ -12,6 +12,6 @@ package net.sf.mmm.util.collection.base;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class BasicLinkedNode<V> extends AbstractBasicLinkedNode<V, BasicLinkedNode<V>> {
+public class BasicLinkedNode<V> extends AbstractLinkedNode<V, BasicLinkedNode<V>> {
 
 }

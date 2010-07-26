@@ -13,7 +13,7 @@ import net.sf.mmm.util.collection.api.DoubleLinkedNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class BasicDoubleLinkedNode<V> extends AbstractBasicLinkedNode<V, BasicDoubleLinkedNode<V>>
+public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleLinkedNode<V>>
     implements DoubleLinkedNode<V, BasicDoubleLinkedNode<V>> {
 
   /** @see #getPrevious() */
@@ -51,7 +51,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractBasicLinkedNode<V, BasicDo
    * This method inserts the given <code>value</code> into the list at the
    * position represented by this node. It will typically create a new node
    * containing the given <code>value</code> and
-   * {@link #setNext(AbstractBasicLinkedNode) set it as next}. It will guarantee
+   * {@link #setNext(AbstractLinkedNode) set it as next}. It will guarantee
    * the following equation:
    * 
    * <pre>this.{@link #getNext()}.{@link #getPrevious()} == this</pre>
@@ -117,7 +117,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractBasicLinkedNode<V, BasicDo
    * This method inserts the given <code>value</code> into the list at the
    * position represented by this node. It will typically create a new node
    * containing the given <code>value</code> and
-   * {@link #setNext(AbstractBasicLinkedNode) set it as next}. It will guarantee
+   * {@link #setNext(AbstractLinkedNode) set it as next}. It will guarantee
    * the following equation:
    * 
    * <pre>this.{@link #getNext()}.{@link #getPrevious()} == this</pre>

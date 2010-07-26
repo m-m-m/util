@@ -65,7 +65,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * 
    * @param mapFactory is the factory used to create the descriptor cache.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public PojoDescriptorBuilderImpl(MapFactory mapFactory) {
 
     super(mapFactory);
@@ -210,7 +210,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
       propertyDescriptor.putAccessor(accessor);
       added = true;
     } else {
-      // Workaround for JVM-Bug
+      // Workaround for JVM-Bug with overridden methods
       if (existing.getReturnType().isAssignableFrom(accessor.getReturnType())) {
         AccessibleObject accessorAccessible = accessor.getAccessibleObject();
         if (accessorAccessible instanceof Method) {
@@ -218,6 +218,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
           added = true;
         }
       }
+      // this will also happen for private fields with the same name and is
+      // then a regular warning...
       if (added) {
         logDuplicateAccessor(accessor, existing);
       } else {

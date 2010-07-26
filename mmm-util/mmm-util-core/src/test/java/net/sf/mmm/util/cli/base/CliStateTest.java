@@ -64,6 +64,12 @@ public class CliStateTest {
   /** The name of an argument called {@value} . */
   private static final String ARGUMENT_NAME_BAR = "bar";
 
+  /** The name of an argument called {@value} . */
+  private static final String ARGUMENT_NAME_THING = "thing";
+
+  /** The name of an argument called {@value} . */
+  private static final String ARGUMENT_NAME_WHOOP = "whoop";
+
   /**
    * @return the {@link PojoDescriptorBuilder} instance to use.
    */
@@ -137,7 +143,7 @@ public class CliStateTest {
 
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
     CliState state;
-    state = new CliState(ArgumentTest.class, descriptorBuilder,
+    state = new CliState(ArgumentTest1.class, descriptorBuilder,
         LoggerFactory.getLogger(CliStateTest.class));
     CliModeObject modeObject = state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
     Assert.assertEquals(MODE_Z_EXTENDS_X_Y_HELP, modeObject.getId());
@@ -159,7 +165,9 @@ public class CliStateTest {
 
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
     CliState state;
-    state = new CliState(ArgumentTest.class, descriptorBuilder,
+
+    // test regular order
+    state = new CliState(ArgumentTest1.class, descriptorBuilder,
         LoggerFactory.getLogger(CliStateTest.class));
     List<CliArgumentContainer> argumentsList = state.getArguments(state
         .getMode(MODE_Z_EXTENDS_X_Y_HELP));
@@ -174,6 +182,18 @@ public class CliStateTest {
     Assert.assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(1).getId());
     Assert.assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(2).getId());
     Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(3).getId());
+
+    // Test inheritance
+    state = new CliState(ArgumentTest2.class, descriptorBuilder,
+        LoggerFactory.getLogger(CliStateTest.class));
+    argumentsList = state.getArguments(state.getMode(CliMode.ID_DEFAULT));
+    Assert.assertEquals(6, argumentsList.size());
+    Assert.assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
+    Assert.assertEquals(ARGUMENT_NAME_WHOOP, argumentsList.get(1).getId());
+    Assert.assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(2).getId());
+    Assert.assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(3).getId());
+    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(4).getId());
+    Assert.assertEquals(ARGUMENT_NAME_THING, argumentsList.get(5).getId());
 
   }
 
@@ -245,23 +265,35 @@ public class CliStateTest {
           MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
       @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP),
       @CliMode(id = CliMode.ID_HELP, title = "help") })
-  public static class ArgumentTest {
+  public static class ArgumentTest1 {
 
     @CliArgument(name = ARGUMENT_NAME_STRING, usage = OPTION_USAGE_STRING, //
     mode = MODE_Z_EXTENDS_X_Y_HELP)
     private String string;
 
-    @CliArgument(name = ARGUMENT_NAME_BOOLEAN, addCloseTo = CliArgument.ID_FIRST, addAfter = false, //
-    usage = OPTION_USAGE_BOOLEAN)
+    @CliArgument(name = ARGUMENT_NAME_BOOLEAN, addCloseTo = CliArgument.ID_FIRST, //
+    addAfter = false, usage = OPTION_USAGE_BOOLEAN)
     private boolean bool;
 
-    @CliArgument(name = ARGUMENT_NAME_FOO, addCloseTo = ARGUMENT_NAME_BAR, addAfter = false, //
-    usage = OPTION_USAGE_BOOLEAN, mode = MODE_X_EXTENDS_DEFAULT)
+    @CliArgument(name = ARGUMENT_NAME_FOO, addCloseTo = ARGUMENT_NAME_BAR, //
+    addAfter = false, usage = "some foo", mode = MODE_X_EXTENDS_DEFAULT)
     private String foo;
 
-    @CliArgument(name = ARGUMENT_NAME_BAR, addCloseTo = ARGUMENT_NAME_BOOLEAN, addAfter = true, //
-    usage = OPTION_USAGE_BOOLEAN, mode = MODE_X_EXTENDS_DEFAULT)
+    @CliArgument(name = ARGUMENT_NAME_BAR, addCloseTo = ARGUMENT_NAME_BOOLEAN, //
+    addAfter = true, usage = "some bar", mode = MODE_X_EXTENDS_DEFAULT)
     private String bar;
+
+  }
+
+  public static class ArgumentTest2 extends ArgumentTest1 {
+
+    @CliArgument(name = ARGUMENT_NAME_THING, addCloseTo = CliArgument.ID_LAST, //
+    addAfter = true, usage = "some thing", mode = MODE_X_EXTENDS_DEFAULT)
+    private String thing;
+
+    @CliArgument(name = ARGUMENT_NAME_WHOOP, addCloseTo = ARGUMENT_NAME_FOO, //
+    addAfter = false, usage = "some whoop")
+    private boolean whoop;
 
   }
 

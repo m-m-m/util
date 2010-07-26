@@ -12,14 +12,14 @@ import net.sf.mmm.util.collection.api.LinkedNode;
  * This is the abstract base-implementation of the {@link LinkedNode} interface.
  * 
  * @param <V> is the generic type of the {@link #getValue() value} of this node.
- * @param <NODE> is the generic type of the {@link AbstractBasicLinkedNode node}
+ * @param <NODE> is the generic type of the {@link AbstractLinkedNode node}
  *        itself.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractBasicLinkedNode<V, NODE extends AbstractBasicLinkedNode<V, NODE>>
-    implements LinkedNode<V, NODE> {
+public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, NODE>> implements
+    LinkedNode<V, NODE> {
 
   /** @see #getValue() */
   private V value;
@@ -30,7 +30,7 @@ public abstract class AbstractBasicLinkedNode<V, NODE extends AbstractBasicLinke
   /**
    * The constructor.
    */
-  public AbstractBasicLinkedNode() {
+  public AbstractLinkedNode() {
 
     super();
   }
@@ -101,6 +101,15 @@ public abstract class AbstractBasicLinkedNode<V, NODE extends AbstractBasicLinke
     List<V> list = new ArrayList<V>();
     addToList(list);
     return list;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return getClass().getSimpleName() + ": " + this.value;
   }
 
 }
