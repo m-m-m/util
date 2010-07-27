@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * Do NOT forget to call {@link #findFirst()} from your constructor or your
  * iterator will always be empty.
  * 
- * @param <E> is the templated type of the elements to iterate.
+ * @param <E> is the generic type of the {@link #next() iterated} elements.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

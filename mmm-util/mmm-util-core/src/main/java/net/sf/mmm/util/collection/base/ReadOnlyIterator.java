@@ -18,7 +18,7 @@ import java.util.Iterator;
 public class ReadOnlyIterator<E> implements Iterator<E> {
 
   /** the actual iterator instance */
-  private Iterator<E> delegate;
+  private final Iterator<E> delegate;
 
   /**
    * The constructor.
