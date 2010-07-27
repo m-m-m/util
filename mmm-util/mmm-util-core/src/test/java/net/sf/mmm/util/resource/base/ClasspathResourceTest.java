@@ -11,9 +11,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.junit.Test;
-
+import junit.framework.Assert;
 import net.sf.mmm.util.resource.api.DataResource;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for the class {@link ClasspathUtil}.
@@ -42,12 +43,18 @@ public class ClasspathResourceTest {
   @Test
   public void testClasspathResource() throws Exception {
 
-    verifyResource(new ClasspathResource(ClasspathResource.class, ".txt", true));
+    ClasspathResource resource = new ClasspathResource(ClasspathResource.class, ".txt", true);
+    verifyResource(resource);
     verifyResource(new ClasspathResource(ClasspathResource.class, //
         ClasspathResource.class.getSimpleName() + ".txt", false));
     verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(),
         ClasspathResource.class.getSimpleName() + ".txt"));
-    verifyResource(new ClasspathResource(ClasspathResource.class.getName().replace('.', '/')
-        + ".txt"));
+    String name = ClasspathResource.class.getSimpleName() + ".txt";
+    String absoluteClasspath = ClasspathResource.class.getPackage().getName().replace('.', '/')
+        + "/" + name;
+    verifyResource(new ClasspathResource(absoluteClasspath));
+    Assert.assertEquals(name, resource.getName());
+    Assert.assertEquals(absoluteClasspath, resource.getPath());
+    Assert.assertEquals(ClasspathResource.SCHEME_PREFIX + absoluteClasspath, resource.getUri());
   }
 }

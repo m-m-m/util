@@ -3,12 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.impl;
 
-import org.junit.Test;
-
+import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.resource.base.ClasspathResourceTest;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for the class {@link DataResourceFactory}.
@@ -16,11 +17,13 @@ import net.sf.mmm.util.resource.base.ClasspathResourceTest;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class DataResourceFactoryTest {
+public class BrowsableResourceFactoryTest {
 
-  public DataResourceFactory getDataResourceFactory() {
+  public BrowsableResourceFactory getBrowsableResourceFactory() {
 
-    return new DataResourceFactoryImpl();
+    BrowsableResourceFactoryImpl impl = new BrowsableResourceFactoryImpl();
+    impl.initialize();
+    return impl;
   }
 
   @Test
@@ -28,7 +31,11 @@ public class DataResourceFactoryTest {
 
     String resourceUri = ClasspathResource.SCHEME_PREFIX
         + ClasspathResource.class.getName().replace('.', '/') + ".txt";
-    DataResource resource = getDataResourceFactory().createDataResource(resourceUri);
+    DataResource resource = getBrowsableResourceFactory().createDataResource(resourceUri);
+    ClasspathResourceTest.verifyResource(resource);
+
+    resource = getBrowsableResourceFactory().createDataResource("file:///test");
+    resource = resource.navigate("foo/bar.txt").navigate(resourceUri);
     ClasspathResourceTest.verifyResource(resource);
   }
 }

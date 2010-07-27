@@ -9,9 +9,9 @@ import java.net.URL;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the interface for a resource. You can think of a {@link DataResource}
- * as a {@link java.io.File file} but it may come from other sources than the
- * filesystem.<br>
+ * This is the interface for a resource containing data. You can think of a
+ * {@link DataResource} as a {@link java.io.File file} but it may come from
+ * other sources than the filesystem.<br>
  * The major reason for naming it {@link DataResource} is that
  * <code>Resource</code> is a very general name already occupied by
  * {@link javax.annotation.Resource}.
@@ -23,7 +23,7 @@ public interface DataResource {
 
   /**
    * This method determines if this resource is available. Available simply
-   * means that it exists.
+   * means that it exists and {@link #openStream() data can be read}.
    * 
    * @return <code>true</code> if this resource is available, <code>false</code>
    *         otherwise.
@@ -32,11 +32,20 @@ public interface DataResource {
 
   /**
    * This method gets the path of this resource. Please note that the path is
-   * including the name of the resource.
+   * including the {@link #getName() name} of the resource.
    * 
    * @return the path that was used to identify this resource when creating.
    */
   String getPath();
+
+  /**
+   * This method gets the name of the resource. It is analog to a
+   * {@link java.io.File#getName() filename}.
+   * 
+   * @return the name of the resource.
+   * @since 2.0.0
+   */
+  String getName();
 
   /**
    * This method gets the size (content-length) of this resource.
@@ -50,16 +59,26 @@ public interface DataResource {
   /**
    * This method gets this resource as {@link URL}.
    * 
-   * @return the url that represents this resource.
-   * @throws ResourceNotAvailableException if this resource is NOT
-   *         {@link #isAvailable() available}.
+   * @return the URL that represents this resource.
+   * @throws ResourceNotAvailableException if an URL can NOT be created because
+   *         the represented resource does not exist.
    */
   URL getUrl() throws ResourceNotAvailableException;
 
   /**
+   * This method gets a string identifying this {@link DataResource}. In most
+   * cases this will be the same as {@link Object#toString()
+   * string-representation} of the {@link #getUrl() URL}. However this method
+   * will not throw an exception.
+   * 
+   * @return the URI as string.
+   */
+  String getUri();
+
+  /**
    * This method opens this resource for reading.
    * 
-   * @see URL#openStream()
+   * @see java.net.URL#openStream()
    * 
    * @return the input stream where to read from.
    * @throws ResourceNotAvailableException if this resource is NOT

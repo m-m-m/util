@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
@@ -14,7 +15,8 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public abstract class AbstractDataResourceFactory implements DataResourceFactory {
+public abstract class AbstractDataResourceFactory extends AbstractLoggable implements
+    DataResourceFactory {
 
   /**
    * The constructor.
@@ -90,11 +92,13 @@ public abstract class AbstractDataResourceFactory implements DataResourceFactory
     public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 
       ResourceUri resourceUri = new ResourceUri(relativePath);
+      DataResource result;
       if (resourceUri.getSchemePrefix() == null) {
-        return super.navigate(relativePath);
+        result = super.navigate(relativePath);
       } else {
-        return createDataResource(resourceUri);
+        result = createDataResource(resourceUri);
       }
+      return new DataResourceAdapter(result);
     }
 
   }

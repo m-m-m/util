@@ -6,5 +6,6 @@
   
   <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
 
-  <bean id="net.sf.mmm.util.resource.api.DataResourceFactory" class="net.sf.mmm.util.resource.impl.DataResourceFactoryImpl"/>
+  <!--<bean id="net.sf.mmm.util.resource.api.DataResourceFactory" class="net.sf.mmm.util.resource.impl.DataResourceFactoryImpl"/>-->
+  <bean id="net.sf.mmm.util.resource.api.BrowsableResourceFactory" class="net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl"/>
 </beans>

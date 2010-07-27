@@ -9,27 +9,29 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 
 /**
- * This is the implementation of the {@link DataResource} interface for a
+ * This is the implementation of the {@link BrowsableResource} interface for a
  * resource that is a {@link File#isFile() regular} {@link File}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public class FileResource extends AbstractDataResource {
+public class FileResource extends AbstractBrowsableResource {
 
   /**
    * The {@link #getSchemePrefix() scheme-prefix} for this type of
-   * {@link DataResource}.
+   * {@link BrowsableResource}.
    */
   public static final String SCHEME_PREFIX = "file://";
 
-  /** the file */
-  private File file;
+  /** The {@link File} to adapt. */
+  private final File file;
 
   /**
    * The constructor.
@@ -65,6 +67,7 @@ public class FileResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getPath() {
 
     return this.file.getAbsolutePath();
@@ -110,6 +113,24 @@ public class FileResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
+  public String getUri() {
+
+    return SCHEME_PREFIX + this.file.getAbsolutePath();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName() {
+
+    return this.file.getName();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public boolean isAvailable() {
 
     // todo works for symlinks to files???
@@ -119,9 +140,101 @@ public class FileResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
-  public DataResource navigate(String relativePath) {
+  public boolean isFolder() {
 
-    return new FileResource(new File(this.file.getParentFile(), relativePath));
+    return this.file.isDirectory();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public BrowsableResource navigate(String resourcePath) {
+
+    return new FileResource(new File(this.file.getParentFile(), resourcePath));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Iterable<BrowsableResource> listChildResources() {
+
+    return new FileResourceIterable();
+  }
+
+  /**
+   * This inner class is an {@link Iterable} of {@link FileResource}s.
+   */
+  protected class FileResourceIterable implements Iterable<BrowsableResource> {
+
+    /**
+     * The constructor.
+     */
+    public FileResourceIterable() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Iterator<BrowsableResource> iterator() {
+
+      File[] files = FileResource.this.file.listFiles();
+      return new FileResourceIterator(files);
+    }
+  }
+
+  /**
+   * This inner class is an {@link Iterator} of {@link FileResource}s.
+   */
+  protected static class FileResourceIterator implements Iterator<BrowsableResource> {
+
+    /** The array of {@link File}s. */
+    private final File[] files;
+
+    /** The current index in {@link #files}. */
+    private int index;
+
+    /**
+     * The constructor.
+     * 
+     * @param files are the {@link File}s to iterate.
+     */
+    public FileResourceIterator(File[] files) {
+
+      super();
+      this.files = files;
+      this.index = 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean hasNext() {
+
+      return (this.index < this.files.length);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public FileResource next() {
+
+      if (!hasNext()) {
+        throw new NoSuchElementException();
+      }
+      return new FileResource(this.files[this.index++]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void remove() {
+
+      // we better do NOT delete the file here...
+      throw new UnsupportedOperationException();
+    }
+
   }
 
 }

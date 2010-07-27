@@ -192,6 +192,7 @@ public class ClasspathResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getPath() {
 
     return this.path;
@@ -206,6 +207,15 @@ public class ClasspathResource extends AbstractDataResource {
       throw new ResourceNotAvailableException(this.path);
     }
     return this.url;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getUri() {
+
+    return SCHEME_PREFIX + this.path;
   }
 
   /**

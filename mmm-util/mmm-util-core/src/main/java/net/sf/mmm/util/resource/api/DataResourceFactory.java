@@ -45,8 +45,8 @@ public interface DataResourceFactory {
    * </tr>
    * </table>
    * 
-   * @param resourceUri is the absolute URI pointing to the location of the
-   *        requested {@link DataResource}.
+   * @param resourceUri is the {@link DataResource#getUri() absolute URI}
+   *        pointing to the location of the requested {@link DataResource}.
    * @return the requested {@link DataResource}.
    * @throws ResourceUriUndefinedException if the given <code>resourceUri</code>
    *         is undefined (e.g. the scheme is NOT supported).

@@ -99,6 +99,15 @@ public class UrlResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
+  public String getName() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public DataResource navigate(String relativePath) {
 
     try {

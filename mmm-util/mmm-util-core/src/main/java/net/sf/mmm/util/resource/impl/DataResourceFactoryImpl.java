@@ -17,7 +17,9 @@ import net.sf.mmm.util.resource.base.UrlResource;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
+ * @deprecated use {@link BrowsableResourceFactoryImpl} instead.
  */
+@Deprecated
 public class DataResourceFactoryImpl extends AbstractDataResourceFactory {
 
   /**
@@ -41,7 +43,7 @@ public class DataResourceFactoryImpl extends AbstractDataResourceFactory {
     } else if (FileResource.SCHEME_PREFIX.equals(schemePrefix)) {
       return new FileResource(resourceUri.getPath());
     } else {
-      return new UrlResource(resourceUri.getPath());
+      return new UrlResource(resourceUri.getUri());
     }
   }
 

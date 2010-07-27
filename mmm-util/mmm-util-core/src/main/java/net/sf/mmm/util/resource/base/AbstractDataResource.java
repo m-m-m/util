@@ -29,8 +29,9 @@ public abstract class AbstractDataResource implements DataResource {
   }
 
   /**
-   * This method gets the <em>scheme-prefix</em> of absolute URIs for this type
-   * of {@link DataResource}. The scheme-prefix has the following form:
+   * This method gets the <em>scheme-prefix</em> of absolute {@link #getUri()
+   * URIs} for this type of {@link DataResource}. The scheme-prefix has the
+   * following form:
    * <code>{@link java.net.URI#getScheme() &lt;scheme&gt;}:&lt;suffix&gt;</code>
    * where <code>&lt;suffix&gt;</code> is the empty string or something like
    * <code>//</code>.
@@ -67,6 +68,52 @@ public abstract class AbstractDataResource implements DataResource {
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getPath() {
+
+    return getUrl().getPath();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getUri() {
+
+    return getUrl().toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getName() {
+
+    String path = getPath();
+    int length = path.length();
+    if (length == 0) {
+      return "";
+    }
+    int endIndex = length - 1;
+    char c = path.charAt(endIndex);
+    while ((c == '/') || (c == '\\')) {
+      endIndex--;
+      if (endIndex < 0) {
+        return "";
+      }
+      c = path.charAt(endIndex);
+    }
+    int startIndex = endIndex;
+    while (startIndex > 0) {
+      c = path.charAt(startIndex - 1);
+      if ((c == '/') || (c == '\\')) {
+        break;
+      }
+      startIndex--;
+    }
+    return path.substring(startIndex, endIndex + 1);
   }
 
   /**

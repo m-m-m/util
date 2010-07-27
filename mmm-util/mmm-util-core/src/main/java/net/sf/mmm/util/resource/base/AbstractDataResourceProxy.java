@@ -45,6 +45,14 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   /**
    * {@inheritDoc}
    */
+  public String getName() {
+
+    return getDelegate().getName();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public long getSize() throws ResourceNotAvailableException {
 
     return getDelegate().getSize();
@@ -56,6 +64,14 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   public URL getUrl() throws ResourceNotAvailableException {
 
     return getDelegate().getUrl();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getUri() {
+
+    return getDelegate().getUri();
   }
 
   /**
