@@ -15,13 +15,14 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@SuppressWarnings("unchecked")
 public final class ConstantFilter<V> implements Filter<V> {
 
   /** @see #getInstance(boolean) */
+  @SuppressWarnings("rawtypes")
   private static final ConstantFilter ACCEPT_ALL_FILTER = new ConstantFilter<Object>();
 
   /** @see #getInstance(boolean) */
+  @SuppressWarnings("rawtypes")
   private static final ConstantFilter REJECT_ALL_FILTER = new ConstantFilter<Object>();
 
   /**
@@ -54,6 +55,7 @@ public final class ConstantFilter<V> implements Filter<V> {
    *        accept all objects, <code>false</code> to reject all objects.
    * @return the requested filter.
    */
+  @SuppressWarnings("unchecked")
   public static <V> Filter<V> getInstance(boolean accept) {
 
     if (accept) {
