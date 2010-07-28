@@ -10,7 +10,9 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.Iterator;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -57,6 +59,8 @@ import org.xml.sax.SAXException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@Singleton
+@Named
 public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
 
   /** @see #getInstance() */
@@ -137,7 +141,7 @@ public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
    * 
    * @param basicUtil is the {@link BasicUtil} to set
    */
-  @Resource
+  @Inject
   public void setBasicUtil(BasicUtil basicUtil) {
 
     getInitializationState().requireNotInitilized();

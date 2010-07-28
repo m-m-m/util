@@ -4,7 +4,6 @@
 package net.sf.mmm.util.io.base;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.io.api.EncodingUtil;
 
 /**
@@ -20,8 +19,7 @@ public class EncodingUtilSpringTest extends EncodingUtilTest {
   @Override
   protected EncodingUtil getEncodingUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_IO).getComponent(
-        EncodingUtil.class);
+    return SpringContainerPool.getInstance().getComponent(EncodingUtil.class);
   }
 
 }

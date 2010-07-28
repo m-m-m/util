@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.math.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.math.api.MathUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link MathUtil} configured using spring.
@@ -23,7 +22,7 @@ public class MathUtilSpringTest extends MathUtilTest {
   @Override
   public MathUtil getMathUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_MATH).getComponent(MathUtil.class);
+    return SpringContainerPool.getInstance().getComponent(MathUtil.class);
   }
 
   /**
@@ -32,7 +31,7 @@ public class MathUtilSpringTest extends MathUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_MATH);
+    SpringContainerPool.dispose();
   }
 
 }

@@ -22,7 +22,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 
-import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.concurrent.api.Stoppable;
@@ -37,6 +38,8 @@ import net.sf.mmm.util.pool.api.Pool;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
 
+import com.google.inject.Inject;
+
 /**
  * This is the implementation of the {@link StreamUtil} interface.
  * 
@@ -45,6 +48,8 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
 
   /** @see #getInstance() */
@@ -114,7 +119,7 @@ public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
    * 
    * @param executor the executor to set.
    */
-  @Resource
+  @Inject
   public void setExecutor(Executor executor) {
 
     getInitializationState().requireNotInitilized();

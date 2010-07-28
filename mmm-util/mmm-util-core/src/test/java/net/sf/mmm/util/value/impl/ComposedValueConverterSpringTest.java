@@ -3,12 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.StringValueConverter;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link StringValueConverter} configured using
@@ -24,8 +23,7 @@ public class ComposedValueConverterSpringTest extends ComposedValueConverterTest
   @Override
   protected ComposedValueConverter getComposedValueConverter() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_VALUE)
-        .getComponent(ComposedValueConverter.class);
+    return SpringContainerPool.getInstance().getComponent(ComposedValueConverter.class);
   }
 
   /**
@@ -34,7 +32,7 @@ public class ComposedValueConverterSpringTest extends ComposedValueConverterTest
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_VALUE);
+    SpringContainerPool.dispose();
   }
 
 }

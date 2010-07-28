@@ -5,7 +5,9 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -102,10 +104,12 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
     PojoDescriptorEnhancer {
 
-  /** The singularizer */
+  /** The singularizer. */
   private Singularizer singularizer;
 
   /** @see #DefaultPojoDescriptorEnhancer(boolean, boolean) */
@@ -166,7 +170,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
    * 
    * @param singularizer is the {@link Singularizer} to set.
    */
-  @Resource
+  @Inject
   public void setSingularizer(Singularizer singularizer) {
 
     this.singularizer = singularizer;
@@ -187,7 +191,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggable implements
    * 
    * @param configuration is the configuration to set.
    */
-  @Resource
+  @Inject
   public void setConfiguration(PojoDescriptorConfiguration configuration) {
 
     this.configuration = configuration;

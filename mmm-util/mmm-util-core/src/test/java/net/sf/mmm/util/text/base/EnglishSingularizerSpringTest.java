@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.text.api.Singularizer;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link EnglishSingularizer} configured using
@@ -24,7 +23,7 @@ public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
   @Override
   public Singularizer getEnglishSingularizer() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_TEXT).getComponent(Singularizer.class);
+    return SpringContainerPool.getInstance().getComponent(Singularizer.class);
   }
 
   /**
@@ -33,7 +32,7 @@ public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_TEXT);
+    SpringContainerPool.dispose();
   }
 
 }

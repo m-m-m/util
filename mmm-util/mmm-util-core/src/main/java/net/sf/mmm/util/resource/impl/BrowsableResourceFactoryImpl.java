@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.impl;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
@@ -19,6 +22,8 @@ import net.sf.mmm.util.resource.base.UrlResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Singleton
+@Named
 public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFactory {
 
   /**

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -24,6 +25,14 @@ public class SpringContainer implements IocContainer {
 
   /** The {@link Logger}. */
   private final Logger logger;
+
+  /**
+   * The constructor.
+   */
+  public SpringContainer() {
+
+    this(new AnnotationConfigApplicationContext("net.sf.mmm"));
+  }
 
   /**
    * The constructor.
@@ -78,13 +87,12 @@ public class SpringContainer implements IocContainer {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass,
       String componentId) {
 
     COMPONENT_API component;
     try {
-      component = (COMPONENT_API) this.applicationContext.getBean(componentId, apiClass);
+      component = this.applicationContext.getBean(componentId, apiClass);
       if (component == null) {
         throw new IocContainerException("Component '" + apiClass.getSimpleName()
             + "' NOT found for '" + componentId + "'!");

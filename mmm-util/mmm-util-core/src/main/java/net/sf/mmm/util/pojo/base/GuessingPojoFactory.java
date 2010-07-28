@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.base;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -23,6 +26,8 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
+@Singleton
+@Named
 public class GuessingPojoFactory extends DefaultPojoFactory {
 
   /** The conventional suffix for an implementation class. */
@@ -73,8 +78,8 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
           implementation = Class.forName(packageName + IMPL_PKG_SUFFIX + className);
         } catch (ClassNotFoundException e1) {
           if (packageName.endsWith(API_PKG_SUFFIX)) {
-            String implPackageName = packageName.substring(0, packageName.length()
-                - API_PKG_SUFFIX.length());
+            String implPackageName = packageName.substring(0,
+                packageName.length() - API_PKG_SUFFIX.length());
             try {
               implementation = Class.forName(implPackageName + className);
             } catch (ClassNotFoundException e2) {

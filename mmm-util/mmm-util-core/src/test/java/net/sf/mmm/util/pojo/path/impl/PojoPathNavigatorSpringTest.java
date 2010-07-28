@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.path.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
 import net.sf.mmm.util.pojo.path.api.PojoPathNavigatorTest;
 
@@ -18,8 +17,8 @@ public class PojoPathNavigatorSpringTest extends PojoPathNavigatorTest {
 
   protected PojoPathNavigator createNavigator() {
 
-    PojoPathNavigator navigator = SpringContainerPool.getContainer(
-        SpringConfigsUtilCore.UTIL_POJO_PATH).getComponent(PojoPathNavigator.class);
+    PojoPathNavigator navigator = SpringContainerPool.getInstance().getComponent(
+        PojoPathNavigator.class);
     return navigator;
   }
 

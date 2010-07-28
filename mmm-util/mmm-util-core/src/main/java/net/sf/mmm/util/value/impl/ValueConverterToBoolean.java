@@ -4,6 +4,8 @@
 package net.sf.mmm.util.value.impl;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
@@ -17,6 +19,8 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object, Boolean> {
 
   /** @see #getStringUtil() */

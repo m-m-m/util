@@ -13,7 +13,9 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -42,6 +44,8 @@ import net.sf.mmm.util.process.api.ProcessUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
 
   /** @see #getInstance() */
@@ -120,7 +124,7 @@ public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
    * 
    * @param executor the executor to set.
    */
-  @Resource
+  @Inject
   public void setExecutor(Executor executor) {
 
     if (this.executor != null) {
@@ -144,7 +148,7 @@ public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
    * 
    * @param streamUtil the streamUtil to set
    */
-  @Resource
+  @Inject
   public void setStreamUtil(StreamUtil streamUtil) {
 
     this.streamUtil = streamUtil;
@@ -268,8 +272,8 @@ public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
         OutputStream err = context.getErrStream();
         for (int i = 0; i < builders.length; i++) {
           Process process = builders[i].start();
-          AsyncTransferrer inOutTransferrer = streamUtility.transferAsync(in, process
-              .getOutputStream(), false);
+          AsyncTransferrer inOutTransferrer = streamUtility.transferAsync(in,
+              process.getOutputStream(), false);
           AsyncTransferrer errTransferrer = streamUtility.transferAsync(process.getErrorStream(),
               err, true);
           this.processes[i] = process;

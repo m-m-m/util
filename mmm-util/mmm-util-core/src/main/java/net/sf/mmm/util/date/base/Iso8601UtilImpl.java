@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.filter.api.CharFilter;
@@ -25,6 +28,8 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public final class Iso8601UtilImpl implements Iso8601Util {
 
   /** The maximum day of the month. */

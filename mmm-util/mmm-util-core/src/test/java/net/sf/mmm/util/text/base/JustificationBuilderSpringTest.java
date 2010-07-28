@@ -4,7 +4,6 @@
 package net.sf.mmm.util.text.base;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.text.api.JustificationBuilder;
 
 /**
@@ -22,8 +21,7 @@ public class JustificationBuilderSpringTest extends JustificationBuilderTest {
   @Override
   protected JustificationBuilder getJustificationBuilder() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_TEXT).getComponent(
-        JustificationBuilder.class);
+    return SpringContainerPool.getInstance().getComponent(JustificationBuilder.class);
   }
 
 }

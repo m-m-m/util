@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueException;
@@ -16,6 +19,8 @@ import net.sf.mmm.util.value.base.AbstractValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 @SuppressWarnings("rawtypes")
 public class ValueConverterToClass extends AbstractValueConverter<CharSequence, Class> {
 

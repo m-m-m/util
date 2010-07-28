@@ -4,7 +4,6 @@
 package net.sf.mmm.util.context.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 
 /**
@@ -22,8 +21,7 @@ public class GenericContextFactorySpringTest extends GenericContextFactoryTest {
   @Override
   protected GenericContextFactory getFactory() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_CONTEXT)
-        .getComponent(GenericContextFactory.class);
+    return SpringContainerPool.getInstance().getComponent(GenericContextFactory.class);
   }
 
 }

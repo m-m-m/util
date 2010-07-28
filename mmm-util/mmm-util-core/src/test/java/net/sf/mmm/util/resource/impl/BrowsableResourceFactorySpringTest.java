@@ -4,7 +4,6 @@
 package net.sf.mmm.util.resource.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 
@@ -23,8 +22,7 @@ public class BrowsableResourceFactorySpringTest extends BrowsableResourceFactory
   @Override
   public BrowsableResourceFactory getBrowsableResourceFactory() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_RESOURCE).getComponent(
-        BrowsableResourceFactory.class);
+    return SpringContainerPool.getInstance().getComponent(BrowsableResourceFactory.class);
   }
 
   /**
@@ -33,7 +31,7 @@ public class BrowsableResourceFactorySpringTest extends BrowsableResourceFactory
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_RESOURCE);
+    SpringContainerPool.dispose();
   }
 
 }

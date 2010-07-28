@@ -10,7 +10,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.reflect.api.AnnotationNotForTargetException;
@@ -27,6 +29,8 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class AnnotationUtilImpl implements AnnotationUtil {
 
   /** @see #getInstance() */
@@ -85,7 +89,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * @param reflectionUtil the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     if (this.reflectionUtil != null) {

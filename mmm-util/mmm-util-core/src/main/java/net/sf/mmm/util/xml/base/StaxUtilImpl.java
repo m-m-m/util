@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -32,6 +34,8 @@ import net.sf.mmm.util.xml.api.XmlGenericException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@Singleton
+@Named
 public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
 
   /** @see #getInstance() */
@@ -93,7 +97,7 @@ public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
   /**
    * @param valueConverter the valueConverter to set
    */
-  @Resource
+  @Inject
   public void setValueConverter(StringValueConverter valueConverter) {
 
     getInitializationState().requireNotInitilized();

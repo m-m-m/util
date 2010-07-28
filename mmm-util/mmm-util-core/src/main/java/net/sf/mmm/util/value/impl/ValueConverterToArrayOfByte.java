@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This is an implementation of the
  * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
@@ -11,6 +14,8 @@ package net.sf.mmm.util.value.impl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
+@Singleton
+@Named
 public class ValueConverterToArrayOfByte extends AbstractConverterToArray<byte[]> {
 
   /**

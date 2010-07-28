@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.lang.api.BasicUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link BasicUtil} configured using spring.
@@ -22,7 +21,7 @@ public class BasicUtilSpringTest extends BasicUtilTest {
   @Override
   public BasicUtil getBasicUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_LANG).getComponent(BasicUtil.class);
+    return SpringContainerPool.getInstance().getComponent(BasicUtil.class);
   }
 
   /**
@@ -31,7 +30,7 @@ public class BasicUtilSpringTest extends BasicUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_LANG);
+    SpringContainerPool.dispose();
   }
 
 }

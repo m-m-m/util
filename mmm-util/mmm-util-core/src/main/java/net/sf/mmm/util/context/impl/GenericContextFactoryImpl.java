@@ -5,6 +5,9 @@ package net.sf.mmm.util.context.impl;
 
 import java.util.Map;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -17,6 +20,8 @@ import net.sf.mmm.util.context.api.MutableGenericContext;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
+@Singleton
+@Named
 public class GenericContextFactoryImpl extends AbstractLoggable implements GenericContextFactory {
 
   /**
@@ -38,7 +43,7 @@ public class GenericContextFactoryImpl extends AbstractLoggable implements Gener
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public MutableGenericContext createContext(MapFactory<? extends Map> mapFactory) {
 
     return new MutableGenericContextImpl(mapFactory);

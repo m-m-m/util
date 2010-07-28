@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.base;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 
 /**
@@ -20,7 +19,7 @@ public class PojoFactorySpringTest extends PojoFactoryTest {
   @Override
   protected PojoFactory getPojoFactory() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_POJO).getComponent(PojoFactory.class);
+    return SpringContainerPool.getInstance().getComponent(PojoFactory.class);
   }
 
 }

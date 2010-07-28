@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -20,6 +22,8 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, Date> {
 
   /** @see #getIso8601Util() */

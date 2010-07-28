@@ -4,6 +4,8 @@
 package net.sf.mmm.util.pojo.descriptor.impl;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory;
@@ -18,6 +20,8 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
   /** @see #getConfiguration() */

@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.xml.api.DomUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link DomUtil} configured using spring.
@@ -23,7 +22,7 @@ public class DomUtilSpringTest extends DomUtilTest {
   @Override
   public DomUtil getDomUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_XML).getComponent(DomUtil.class);
+    return SpringContainerPool.getInstance().getComponent(DomUtil.class);
   }
 
   /**
@@ -32,7 +31,7 @@ public class DomUtilSpringTest extends DomUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_XML);
+    SpringContainerPool.dispose();
   }
 
 }

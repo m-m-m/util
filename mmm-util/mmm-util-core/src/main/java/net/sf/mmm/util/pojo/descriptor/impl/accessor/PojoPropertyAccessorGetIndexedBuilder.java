@@ -6,6 +6,9 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
@@ -16,10 +19,13 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexed
 /**
  * This is the implementation of the
  * {@link PojoPropertyAccessorIndexedNonArgBuilder} interface for
- * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter-access}.
+ * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed
+ * getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoPropertyAccessorGetIndexedBuilder extends
     AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedNonArg> implements
     PojoPropertyAccessorIndexedNonArgBuilder {
@@ -44,7 +50,8 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedNonArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorIndexedNonArg create(Method method, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     if (parameterTypes.length == 1) {
@@ -61,9 +68,9 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
             propertyName = null;
           }
           if (propertyName != null) {
-            return new PojoPropertyAccessorIndexedNonArgMethod(propertyName, method
-                .getGenericReturnType(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, descriptor,
-                configuration, method);
+            return new PojoPropertyAccessorIndexedNonArgMethod(propertyName,
+                method.getGenericReturnType(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED,
+                descriptor, configuration, method);
           }
         }
       }
@@ -74,7 +81,8 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedNonArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorIndexedNonArg create(Field field, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     return null;
   }

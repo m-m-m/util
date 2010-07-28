@@ -7,12 +7,17 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This is a very simple implementation of the {@link Executor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class SimpleExecutor implements Executor {
 
   /**

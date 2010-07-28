@@ -7,6 +7,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -24,6 +26,8 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements
     StringValueConverter {
 

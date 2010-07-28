@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link CollectionReflectionUtil} configured using
@@ -24,8 +23,7 @@ public class CollectionReflectionUtilSpringTest extends CollectionReflectionUtil
   @Override
   public CollectionReflectionUtil getCollectionReflectionUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_REFLECT).getComponent(
-        CollectionReflectionUtil.class);
+    return SpringContainerPool.getInstance().getComponent(CollectionReflectionUtil.class);
   }
 
   /**
@@ -34,7 +32,7 @@ public class CollectionReflectionUtilSpringTest extends CollectionReflectionUtil
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_REFLECT);
+    SpringContainerPool.dispose();
   }
 
 }

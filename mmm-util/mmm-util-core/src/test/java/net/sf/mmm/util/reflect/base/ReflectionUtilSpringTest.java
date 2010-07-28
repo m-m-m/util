@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link ReflectionUtil} configured using spring.
@@ -23,8 +22,7 @@ public class ReflectionUtilSpringTest extends ReflectionUtilTest {
   @Override
   public ReflectionUtil getReflectionUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_REFLECT).getComponent(
-        ReflectionUtil.class);
+    return SpringContainerPool.getInstance().getComponent(ReflectionUtil.class);
   }
 
   /**
@@ -33,7 +31,7 @@ public class ReflectionUtilSpringTest extends ReflectionUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_REFLECT);
+    SpringContainerPool.dispose();
   }
 
 }

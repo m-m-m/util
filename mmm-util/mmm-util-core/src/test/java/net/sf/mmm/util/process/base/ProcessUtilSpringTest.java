@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.process.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.process.api.ProcessUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link ProcessUtilImpl} configured using spring.
@@ -23,7 +22,7 @@ public class ProcessUtilSpringTest extends ProcessUtilTest {
   @Override
   public ProcessUtil getProcessUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_PROCESS).getComponent(ProcessUtil.class);
+    return SpringContainerPool.getInstance().getComponent(ProcessUtil.class);
   }
 
   /**
@@ -32,7 +31,7 @@ public class ProcessUtilSpringTest extends ProcessUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_PROCESS);
+    SpringContainerPool.dispose();
   }
 
 }

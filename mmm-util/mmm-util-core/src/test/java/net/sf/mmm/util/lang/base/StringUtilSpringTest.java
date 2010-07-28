@@ -3,11 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.lang.api.StringUtil;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link StringUtil} configured using spring.
@@ -22,8 +21,7 @@ public class StringUtilSpringTest extends StringUtilTest {
   @Override
   public StringUtil getStringUtil() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_LANG).getComponent(
-        StringUtil.class);
+    return SpringContainerPool.getInstance().getComponent(StringUtil.class);
   }
 
   /**
@@ -32,7 +30,7 @@ public class StringUtilSpringTest extends StringUtilTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_LANG);
+    SpringContainerPool.dispose();
   }
 
 }

@@ -10,7 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
@@ -33,6 +35,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBui
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class ExtendedPojoDescriptorConfigurationImpl extends PojoDescriptorConfigurationImpl {
 
   /** @see #getAccessorBuilders() */
@@ -99,7 +103,7 @@ public class ExtendedPojoDescriptorConfigurationImpl extends PojoDescriptorConfi
    *        It must NOT contain two entries with the same
    *        {@link PojoPropertyAccessorBuilder#getMode() mode}.
    */
-  @Resource
+  @Inject
   public void setAccessorBuilders(Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders) {
 
     getInitializationState().requireNotInitilized();
@@ -131,7 +135,7 @@ public class ExtendedPojoDescriptorConfigurationImpl extends PojoDescriptorConfi
    * 
    * @param descriptorEnhancer is the {@link PojoDescriptorEnhancer} to set.
    */
-  @Resource
+  @Inject
   public void setDescriptorEnhancer(PojoDescriptorEnhancer descriptorEnhancer) {
 
     getInitializationState().requireNotInitilized();

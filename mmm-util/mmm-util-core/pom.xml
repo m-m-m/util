@@ -18,15 +18,34 @@
     <profile>
       <id>java5</id>
       <activation>
+        <jdk>1.6</jdk>
+      </activation>
+      <dependencies>
+        <!-- these dependencies are only required for java6, they are included since java7 -->
+        <dependency>
+          <groupId>javax.inject</groupId>
+          <artifactId>javax.inject</artifactId>
+          <version>1</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>java5</id>
+      <activation>
         <jdk>1.5</jdk>
       </activation>
       <dependencies>
-        <!-- these dependencies are only required for java5, they are included since java6 -->
+        <!-- these dependencies are only required for java5, they are included since java6/7 -->
         <dependency>
           <groupId>javax.annotation</groupId>
           <artifactId>jsr250-api</artifactId>
           <version>1.0</version>
           <scope>compile</scope>
+        </dependency>
+        <dependency>
+          <groupId>javax.inject</groupId>
+          <artifactId>javax.inject</artifactId>
+          <version>1</version>
         </dependency>
         <dependency>
           <groupId>stax</groupId>

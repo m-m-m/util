@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.framework.base;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.sf.mmm.framework.api.IocContainer;
 
 /**
@@ -16,8 +13,8 @@ import net.sf.mmm.framework.api.IocContainer;
  */
 public final class SpringContainerPool {
 
-  /** @see #getContainer(String) */
-  private static final Map<String, SpringContainer> CONTAINER_MAP = new HashMap<String, SpringContainer>();
+  /** @see #getInstance() */
+  private static SpringContainer instance;
 
   /**
    * The constructor.
@@ -28,36 +25,27 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method gets the {@link IocContainer} for the given
-   * <code>configPath</code>.
+   * This method gets the singleton instance of the {@link IocContainer}.
    * 
-   * @param configPath is the location to the XML-configuration in the
-   *        class-path.
    * @return the requested container.
    */
-  public static IocContainer getContainer(String configPath) {
+  public static IocContainer getInstance() {
 
-    SpringContainer container = CONTAINER_MAP.get(configPath);
-    if (container == null) {
-      container = new SpringContainer(configPath);
-      CONTAINER_MAP.put(configPath, container);
+    if (instance == null) {
+      instance = new SpringContainer();
     }
-    return container;
+    return instance;
   }
 
   /**
-   * This method disposes the {@link IocContainer} for the given
-   * <code>configPath</code> (if it exists because it was created via
-   * {@link #getContainer(String)}).
-   * 
-   * @param configPath is the location to the XML-configuration in the
-   *        class-path.
+   * This method disposes the {@link #getInstance() singleton-instance} (if it
+   * exists).
    */
-  public static void disposeContainer(String configPath) {
+  public static void dispose() {
 
-    SpringContainer container = CONTAINER_MAP.remove(configPath);
-    if (container != null) {
-      container.dispose();
+    if (instance != null) {
+      instance.dispose();
+      instance = null;
     }
   }
 

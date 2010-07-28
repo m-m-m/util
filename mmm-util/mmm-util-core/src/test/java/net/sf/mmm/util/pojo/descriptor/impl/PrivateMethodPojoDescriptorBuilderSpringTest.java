@@ -4,7 +4,6 @@
 package net.sf.mmm.util.pojo.descriptor.impl;
 
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
@@ -24,9 +23,8 @@ public class PrivateMethodPojoDescriptorBuilderSpringTest extends
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
-    PojoDescriptorBuilderFactory factory = SpringContainerPool.getContainer(
-        SpringConfigsUtilCore.UTIL_POJO_DESCRIPTOR)
-        .getComponent(PojoDescriptorBuilderFactory.class);
+    PojoDescriptorBuilderFactory factory = SpringContainerPool.getInstance().getComponent(
+        PojoDescriptorBuilderFactory.class);
     return factory.createDescriptorBuilder(VisibilityModifier.PRIVATE, null);
   }
 }

@@ -3,7 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.impl;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -27,6 +29,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
   /** @see #getDescriptorBuilder() */
@@ -71,7 +75,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
   /**
    * @param descriptorBuilderFactory is the descriptorBuilderFactory to set
    */
-  @Resource
+  @Inject
   public void setDescriptorBuilderFactory(PojoDescriptorBuilderFactory descriptorBuilderFactory) {
 
     this.descriptorBuilderFactory = descriptorBuilderFactory;

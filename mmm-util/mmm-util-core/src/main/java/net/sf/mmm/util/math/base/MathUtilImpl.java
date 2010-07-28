@@ -8,6 +8,10 @@ import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 
@@ -17,7 +21,9 @@ import net.sf.mmm.util.math.api.NumberType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class MathUtilImpl implements MathUtil {
+@Singleton
+@Named
+public class MathUtilImpl extends AbstractLoggable implements MathUtil {
 
   /** @see #getInstance() */
   private static MathUtil instance;
@@ -49,7 +55,9 @@ public class MathUtilImpl implements MathUtil {
     if (instance == null) {
       synchronized (MathUtilImpl.class) {
         if (instance == null) {
-          instance = new MathUtilImpl();
+          MathUtilImpl impl = new MathUtilImpl();
+          impl.initialize();
+          instance = impl;
         }
       }
     }

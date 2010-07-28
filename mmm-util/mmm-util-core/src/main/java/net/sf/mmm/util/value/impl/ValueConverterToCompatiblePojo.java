@@ -4,6 +4,8 @@
 package net.sf.mmm.util.value.impl;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
@@ -29,6 +31,8 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConverter<Object, Object> {
 
   /** @see #setPojoFactory(PojoFactory) */
@@ -105,8 +109,8 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
           .getAccessor(PojoPropertyAccessorOneArgMode.SET);
       if (setter != null) {
         try {
-          Object sourcePropertyValue = sourceDescriptor.getProperty(value, targetPropertyDescriptor
-              .getName());
+          Object sourcePropertyValue = sourceDescriptor.getProperty(value,
+              targetPropertyDescriptor.getName());
           GenericType<?> targetPropertyType = setter.getPropertyType();
 
           Object targetPropertyValue = getComposedValueConverter().convert(sourcePropertyValue,

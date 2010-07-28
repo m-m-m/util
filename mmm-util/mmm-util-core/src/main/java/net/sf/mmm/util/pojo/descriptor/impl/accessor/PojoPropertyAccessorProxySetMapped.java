@@ -66,7 +66,7 @@ public class PojoPropertyAccessorProxySetMapped extends
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object invoke(Object pojoInstance, Object key, Object value) {
 
     Map map = (Map) getDelegate().invoke(pojoInstance);

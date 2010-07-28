@@ -13,6 +13,9 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.text.api.UnicodeUtil;
@@ -27,6 +30,8 @@ import net.sf.mmm.util.xml.api.XmlUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@Singleton
+@Named
 public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
 
   /** @see #getInstance() */

@@ -23,7 +23,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * 
    * @param mapFactory is used to create the map for storing variables.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory) {
 
     this(mapFactory, null);
@@ -35,7 +35,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory,
       GenericContext parentContext) {
 

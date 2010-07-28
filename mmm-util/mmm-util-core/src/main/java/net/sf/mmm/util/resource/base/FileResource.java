@@ -156,7 +156,7 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
-  public Iterable<BrowsableResource> listChildResources() {
+  public Iterable<BrowsableResource> getChildResources() {
 
     return new FileResourceIterable();
   }

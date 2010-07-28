@@ -5,6 +5,9 @@ package net.sf.mmm.util.uuid.base;
 
 import java.util.UUID;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.uuid.api.UuidFactory;
 
 /**
@@ -14,6 +17,8 @@ import net.sf.mmm.util.uuid.api.UuidFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class RandomUuidFactory implements UuidFactory {
 
   /**

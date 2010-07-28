@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.text.api.Justification;
 import net.sf.mmm.util.text.api.JustificationBuilder;
@@ -13,6 +16,8 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
+@Singleton
+@Named
 public class JustificationBuilderImpl extends AbstractLoggable implements JustificationBuilder {
 
   /** @see #getInstance() */

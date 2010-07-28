@@ -10,6 +10,9 @@ import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.collection.base.RankMap;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.io.api.ByteOrderMark;
@@ -27,6 +30,8 @@ import net.sf.mmm.util.io.impl.BufferInputStream;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
 
   /**

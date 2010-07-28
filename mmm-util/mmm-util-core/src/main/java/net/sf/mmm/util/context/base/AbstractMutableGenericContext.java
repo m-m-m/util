@@ -31,7 +31,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
   private final GenericContext immutableContext;
 
   /** @see #getMapFactory() */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   private final MapFactory<? extends Map> mapFactory;
 
   /**
@@ -40,7 +40,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   public AbstractMutableGenericContext(MapFactory<? extends Map> mapFactory,
       GenericContext parentContext) {
 
@@ -162,7 +162,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
    * 
    * @return the {@link MapFactory} to use.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   protected MapFactory<? extends Map> getMapFactory() {
 
     return this.mapFactory;

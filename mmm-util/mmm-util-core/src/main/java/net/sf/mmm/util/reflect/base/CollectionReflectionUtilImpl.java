@@ -9,7 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
@@ -29,6 +31,8 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class CollectionReflectionUtilImpl extends AbstractLoggable implements
     CollectionReflectionUtil {
 
@@ -111,7 +115,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggable implements
    * @param collectionFactoryManager is the {@link CollectionFactoryManager}
    *        instance.
    */
-  @Resource
+  @Inject
   public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
 
     getInitializationState().requireNotInitilized();

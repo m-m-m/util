@@ -6,6 +6,9 @@ package net.sf.mmm.util.lang.base;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.lang.api.BasicUtil;
 import net.sf.mmm.util.lang.api.CharIterator;
 
@@ -17,6 +20,8 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class BasicUtilImpl implements BasicUtil {
 
   /** @see #getInstance() */

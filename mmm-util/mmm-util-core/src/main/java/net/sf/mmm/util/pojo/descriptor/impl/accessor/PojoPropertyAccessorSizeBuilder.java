@@ -6,6 +6,9 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.math.base.NumberTypeImpl;
@@ -22,6 +25,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgB
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoPropertyAccessorSizeBuilder extends
     AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorNonArg> implements
     PojoPropertyAccessorNonArgBuilder {

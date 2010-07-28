@@ -11,6 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.component.api.ResourceMissingException;
@@ -27,6 +31,8 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
   /** @see #addConverter(ValueConverter) */
@@ -118,6 +124,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * 
    * @param converterList is the list of converters to register.
    */
+  @Inject
   public void setConverters(List<ValueConverter<?, ?>> converterList) {
 
     getInitializationState().requireNotInitilized();

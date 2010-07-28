@@ -35,17 +35,17 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   /**
    * {@inheritDoc}
    */
-  public Iterable<BrowsableResource> listChildResources() {
+  public Iterable<BrowsableResource> getChildResources() {
 
-    return getDelegate().listChildResources();
+    return getDelegate().getChildResources();
   }
 
   /**
    * {@inheritDoc}
    */
-  public Iterable<BrowsableResource> listChildResources(Filter<BrowsableResource> filter) {
+  public Iterable<BrowsableResource> getChildResources(Filter<BrowsableResource> filter) {
 
-    return getDelegate().listChildResources(filter);
+    return getDelegate().getChildResources(filter);
   }
 
   /**

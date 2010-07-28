@@ -7,6 +7,8 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.lang.api.StringTokenizer;
@@ -26,6 +28,8 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ValueConverterToCollection extends AbstractRecursiveValueConverter<Object, Collection> {
 

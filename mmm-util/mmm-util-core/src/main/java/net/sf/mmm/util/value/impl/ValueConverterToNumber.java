@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
@@ -22,6 +24,8 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object, Number> {
 
   /** @see #getMathUtil() */

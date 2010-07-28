@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
@@ -22,6 +23,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
 public class DefaultPojoFactory extends SimplePojoFactory {
 
   /** @see #getCollectionFactoryManager() */
@@ -94,7 +96,7 @@ public class DefaultPojoFactory extends SimplePojoFactory {
    * @throws InstantiationFailedException if the instantiation failed.
    */
   @Override
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface)
       throws InstantiationFailedException {
 

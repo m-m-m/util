@@ -6,6 +6,9 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
@@ -16,10 +19,13 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexed
 /**
  * This is the implementation of the
  * {@link PojoPropertyAccessorIndexedOneArgBuilder} interface for
- * {@link PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed setter-access}.
+ * {@link PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed
+ * setter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoPropertyAccessorSetIndexedBuilder extends
     AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedOneArg> implements
     PojoPropertyAccessorIndexedOneArgBuilder {
@@ -41,7 +47,8 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorIndexedOneArg create(Method method, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     String methodName = method.getName();
     // is property read method (getter)?
@@ -53,10 +60,12 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
         Class<?> argument2Class = parameterTypes[1];
         if (isIntegerType(argument1Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument2Class,
-              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method, false);
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method,
+              false);
         } else if (isIntegerType(argument2Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument1Class,
-              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method, true);
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method,
+              true);
         }
       }
     }
@@ -66,7 +75,8 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorIndexedOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorIndexedOneArg create(Field field, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     return null;
   }

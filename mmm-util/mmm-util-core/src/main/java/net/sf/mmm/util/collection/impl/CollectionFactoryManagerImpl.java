@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.api.MapFactory;
@@ -25,6 +28,8 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CollectionFactoryManagerImpl extends AbstractLoggable implements
     CollectionFactoryManager {

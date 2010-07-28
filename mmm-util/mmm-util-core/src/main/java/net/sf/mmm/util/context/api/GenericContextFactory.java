@@ -42,7 +42,7 @@ public interface GenericContextFactory {
    *        context.
    * @return the new context.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   MutableGenericContext createContext(MapFactory<? extends Map> mapFactory);
 
 }

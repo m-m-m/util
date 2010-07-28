@@ -6,6 +6,9 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -20,6 +23,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgB
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoPropertyAccessorGetBuilder extends
     AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorNonArg> implements
     PojoPropertyAccessorNonArgBuilder {
@@ -48,7 +53,8 @@ public class PojoPropertyAccessorGetBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
@@ -75,7 +81,8 @@ public class PojoPropertyAccessorGetBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     return new PojoPropertyAccessorGetField(descriptor, configuration, field);
   }

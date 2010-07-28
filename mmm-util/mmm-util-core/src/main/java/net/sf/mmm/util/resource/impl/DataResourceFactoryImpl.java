@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.impl;
 
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 import net.sf.mmm.util.resource.base.AbstractDataResourceFactory;
@@ -19,6 +21,7 @@ import net.sf.mmm.util.resource.base.UrlResource;
  * @since 1.0.2
  * @deprecated use {@link BrowsableResourceFactoryImpl} instead.
  */
+@Singleton
 @Deprecated
 public class DataResourceFactoryImpl extends AbstractDataResourceFactory {
 

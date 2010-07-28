@@ -35,7 +35,7 @@ public interface BrowsableResource extends DataResource {
    * @return an {@link Iterable} of the child-{@link BrowsableResource
    *         resources}.
    */
-  Iterable<BrowsableResource> listChildResources();
+  Iterable<BrowsableResource> getChildResources();
 
   /**
    * This method iterates the immediate child-{@link BrowsableResource
@@ -43,18 +43,18 @@ public interface BrowsableResource extends DataResource {
    * {@link Filter#accept(Object) accepted} by the given <code>filter</code>.<br/>
    * 
    * @param filter is the {@link Filter} applied to the
-   *        {@link #listChildResources() child-resources}.
+   *        {@link #getChildResources() child-resources}.
    * @return an {@link Iterable} of the child-{@link BrowsableResource
    *         resources}.
    */
-  Iterable<BrowsableResource> listChildResources(Filter<BrowsableResource> filter);
+  Iterable<BrowsableResource> getChildResources(Filter<BrowsableResource> filter);
 
   /**
    * This method determines if this {@link BrowsableResource} is a
    * <em>folder</em> that potentially contains other {@link BrowsableResource
-   * resources}. Otherwise if this is no folder, {@link #listChildResources()}
+   * resources}. Otherwise if this is no folder, {@link #getChildResources()}
    * will be empty (return an empty {@link Iterable}). However
-   * {@link #listChildResources()} can also be empty, if this is a folder.<br/>
+   * {@link #getChildResources()} can also be empty, if this is a folder.<br/>
    * In order to determine if this {@link BrowsableResource} is
    * {@link #openStream() containing data}, please use {@link #isAvailable()}.
    * Please note that {@link #isFolder()} and {@link #isAvailable()} can both

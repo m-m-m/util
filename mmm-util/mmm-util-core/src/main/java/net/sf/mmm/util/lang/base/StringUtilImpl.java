@@ -5,6 +5,9 @@ package net.sf.mmm.util.lang.base;
 
 import java.util.Locale;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
@@ -15,6 +18,8 @@ import net.sf.mmm.util.lang.api.StringUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class StringUtilImpl implements StringUtil {
 
   /** @see #getInstance() */

@@ -28,6 +28,9 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
@@ -63,6 +66,8 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUtil {
 
   /** The prefix of resources in WAR-files. */
@@ -704,8 +709,8 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
       Filter<String> filter) {
 
     Set<String> result = new HashSet<String>();
-    findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter
-        .getClass()));
+    findClassNames(packageName, includeSubPackages, result, filter,
+        getDefaultClassLoader(filter.getClass()));
     return result;
   }
 
@@ -749,8 +754,8 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<String> filter) {
 
-    return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter
-        .getClass()));
+    return findResourceNames(packageName, includeSubPackages, filter,
+        getDefaultClassLoader(filter.getClass()));
   }
 
   /**
@@ -771,8 +776,8 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<String> filter) {
 
-    return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter
-        .getClass()));
+    return findResources(packageName, includeSubPackages, filter,
+        getDefaultClassLoader(filter.getClass()));
   }
 
   /**
@@ -896,8 +901,8 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames)
       throws ClassNotFoundException {
 
-    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, ConstantFilter
-        .getInstance(true));
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
+        ConstantFilter.getInstance(true));
   }
 
   /**

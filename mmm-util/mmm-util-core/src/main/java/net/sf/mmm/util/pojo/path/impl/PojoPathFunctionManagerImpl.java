@@ -3,7 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.impl;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
@@ -14,6 +18,8 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 @SuppressWarnings("rawtypes")
 public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager {
 
@@ -42,6 +48,16 @@ public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager 
         registerFunction(this.functions.get(key), key);
       }
     }
+  }
+
+  /**
+   * 
+   * @param functions
+   */
+  // @Inject
+  public void setFunctions(List<PojoPathFunction> functions) {
+
+    // TODO
   }
 
   /**

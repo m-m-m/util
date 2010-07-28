@@ -3,12 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
-import org.junit.AfterClass;
-
 import net.sf.mmm.framework.base.SpringContainerPool;
-import net.sf.mmm.util.SpringConfigsUtilCore;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.value.api.StringValueConverter;
+
+import org.junit.AfterClass;
 
 /**
  * This is the test-case for {@link StringValueConverter} configured using
@@ -24,7 +23,7 @@ public class StringValueConverterSpringTest extends StringValueConverterTest {
   @Override
   public StringValueConverter getStringValueConverter() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_VALUE).getComponent(StringValueConverter.class);
+    return SpringContainerPool.getInstance().getComponent(StringValueConverter.class);
   }
 
   /**
@@ -33,7 +32,7 @@ public class StringValueConverterSpringTest extends StringValueConverterTest {
   @Override
   protected Iso8601Util getIso8601Util() {
 
-    return SpringContainerPool.getContainer(SpringConfigsUtilCore.UTIL_VALUE).getComponent(Iso8601Util.class);
+    return SpringContainerPool.getInstance().getComponent(Iso8601Util.class);
 
   }
 
@@ -43,7 +42,7 @@ public class StringValueConverterSpringTest extends StringValueConverterTest {
   @AfterClass
   public static void tearDown() {
 
-    SpringContainerPool.disposeContainer(SpringConfigsUtilCore.UTIL_VALUE);
+    SpringContainerPool.dispose();
   }
 
 }

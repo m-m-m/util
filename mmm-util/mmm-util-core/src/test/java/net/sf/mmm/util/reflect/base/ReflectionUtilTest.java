@@ -231,11 +231,11 @@ public class ReflectionUtilTest {
       }
     };
     resourceNameSet = util.findResourceNames("net.sf.mmm.util", false, filter);
-    Assert.assertFalse(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
-    resourceNameSet = util.findResourceNames("net.sf.mmm.util.reflect", false, filter);
-    Assert.assertTrue(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
+    Assert.assertFalse(resourceNameSet.contains("net/sf/mmm/util/text/hyphenation.xml"));
+    resourceNameSet = util.findResourceNames("net.sf.mmm.util.text", false, filter);
+    Assert.assertTrue(resourceNameSet.contains("net/sf/mmm/util/text/hyphenation.xml"));
     resourceNameSet = util.findResourceNames("net.sf.mmm.util", true, filter);
-    Assert.assertTrue(resourceNameSet.contains("net/sf/mmm/util/reflect/beans-util-reflect.xml"));
+    Assert.assertTrue(resourceNameSet.contains("net/sf/mmm/util/text/hyphenation.xml"));
   }
 
   @Test

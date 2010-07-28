@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
@@ -17,6 +18,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
 public class PojoDescriptorConfigurationImpl extends AbstractComponent implements
     PojoDescriptorConfiguration {
 
@@ -60,7 +62,7 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
   /**
    * @param collectionUtil is the collectionUtil to set
    */
-  @Resource
+  @Inject
   public void setCollectionReflectionUtil(CollectionReflectionUtil collectionUtil) {
 
     getInitializationState().requireNotInitilized();
@@ -78,7 +80,7 @@ public class PojoDescriptorConfigurationImpl extends AbstractComponent implement
   /**
    * @param reflectionUtil is the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();

@@ -7,6 +7,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
@@ -20,6 +23,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Singleton
+@Named
 public class PojoPropertyAccessorAddBuilder extends
     AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> implements
     PojoPropertyAccessorOneArgBuilder {
@@ -38,7 +43,8 @@ public class PojoPropertyAccessorAddBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     String methodName = method.getName();
     if (methodName.startsWith(METHOD_PREFIX_ADD)) {
@@ -60,7 +66,8 @@ public class PojoPropertyAccessorAddBuilder extends
   /**
    * {@inheritDoc}
    */
-  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration) {
+  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor,
+      PojoDescriptorConfiguration configuration) {
 
     return null;
   }

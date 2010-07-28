@@ -15,7 +15,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -29,6 +30,8 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
+import com.google.inject.Inject;
+
 /**
  * This class is a collection of utility functions for {@link File} handling and
  * manipulation.
@@ -38,6 +41,8 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@Singleton
+@Named
 public class FileUtilImpl extends AbstractLoggable implements FileUtil {
 
   /**
@@ -148,7 +153,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
    * @param stringUtil the stringUtil to set.
    * @throws AlreadyInitializedException if the value has already been set.
    */
-  @Resource
+  @Inject
   public void setStringUtil(StringUtil stringUtil) throws AlreadyInitializedException {
 
     getInitializationState().requireNotInitilized();
