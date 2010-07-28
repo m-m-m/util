@@ -203,7 +203,7 @@ public class ConfiguredDirectorySearchIndexer extends DirectorySearchIndexer {
         }
       }
     }
-    getIndexer().close();
+    getSearchIndexer().close();
   }
 
   /**

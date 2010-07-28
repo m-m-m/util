@@ -42,7 +42,7 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   /** @see #getLocations() */
   @XmlElementWrapper(name = "locations")
   @XmlElement(name = "location")
-  private List<SearchIndexLocationBean> locations;
+  private List<SearchIndexDataLocationBean> locations;
 
   /**
    * The constructor.
@@ -55,7 +55,7 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   /**
    * {@inheritDoc}
    */
-  public List<SearchIndexLocationBean> getLocations() {
+  public List<SearchIndexDataLocationBean> getLocations() {
 
     return this.locations;
   }
@@ -63,7 +63,7 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   /**
    * @param directories is the directories to set
    */
-  public void setLocations(List<SearchIndexLocationBean> directories) {
+  public void setLocations(List<SearchIndexDataLocationBean> directories) {
 
     this.locations = directories;
   }
@@ -90,7 +90,7 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
    * {@link net.sf.mmm.util.filter.api.Filter#accept(Object) decide} which
    * resources should be indexed.
    * 
-   * @see net.sf.mmm.search.indexer.api.config.SearchIndexLocation#getFilter()
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation#getFilter()
    * 
    * @return the {@link Collection} with the {@link FilterRuleChain}s.
    */

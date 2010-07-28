@@ -46,17 +46,18 @@ public interface MutableSearchEntry extends SearchEntry {
      * property can NOT be {@link SearchEntry#getProperty(String) retrieved}
      * from the {@link net.sf.mmm.search.engine.api.SearchHit hit}. This option
      * allows to reduce the size of the search-index but also disables
-     * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText() highlighting}
-     * if used for {@link #PROPERTY_TEXT}.
+     * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()
+     * highlighting} if used for {@link #PROPERTY_TEXT}.
      */
     NOT_STORED,
   }
 
   /**
-   * This method sets the property with the given <code>name</code> to the
-   * given <code>value</code>.
+   * This method sets the property with the given <code>name</code> to the given
+   * <code>value</code>.
    * 
-   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}.
+   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}
+   *        .
    * @param value is the value of the property to set.
    * @param mode determines how the property is indexed and stored.
    */
@@ -79,7 +80,8 @@ public interface MutableSearchEntry extends SearchEntry {
    * 
    * @see #setProperty(String, String, Mode)
    * 
-   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}.
+   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}
+   *        .
    * @param valueReader is a reader to the value of the property to set.
    */
   void setProperty(String name, Reader valueReader);
@@ -88,6 +90,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the {@link #PROPERTY_URI URI}.
    * 
    * @see #setProperty(String, String, Mode)
+   * @see #getUri()
    * 
    * @param uri is the URI to set.
    */
@@ -97,6 +100,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the {@link #PROPERTY_UID UID}.
    * 
    * @see #setProperty(String, String, Mode)
+   * @see #getUid()
    * 
    * @param uid is the UID to set.
    */
@@ -106,6 +110,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the {@link #PROPERTY_TITLE title}.
    * 
    * @see #setProperty(String, String, Mode)
+   * @see #getTitle()
    * 
    * @param title is the title to set.
    */
@@ -142,6 +147,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the {@link #PROPERTY_TYPE type}.
    * 
    * @see #setProperty(String, String, Mode)
+   * @see #getType()
    * 
    * @param type is the type to set.
    */
@@ -151,6 +157,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the {@link #PROPERTY_SOURCE source}.
    * 
    * @see #setProperty(String, String, Mode)
+   * @see #getSource()
    * 
    * @param source is the source to set.
    */
@@ -160,6 +167,7 @@ public interface MutableSearchEntry extends SearchEntry {
    * This method sets the {@link #PROPERTY_SIZE size}.
    * 
    * @see #setProperty(String, String, Mode)
+   * @see #getSource()
    * 
    * @param size is the size to set.
    */

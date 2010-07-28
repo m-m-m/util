@@ -65,12 +65,13 @@ public class SearchConfigurationBean implements SearchConfiguration {
   public void setSources(List<SearchSourceBean> sources) {
 
     this.sources = sources;
+    this.sourceMap = null;
   }
 
   /**
    * @return the sourceMap
    */
-  public Map<String, SearchSourceBean> getSourceMap() {
+  protected Map<String, SearchSourceBean> getSourceMap() {
 
     if (this.sourceMap == null) {
       Map<String, SearchSourceBean> map = new HashMap<String, SearchSourceBean>();

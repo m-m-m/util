@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api.config;
 
-import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
@@ -17,9 +16,11 @@ import net.sf.mmm.util.filter.api.Filter;
 public interface SearchIndexUri {
 
   /**
-   * This method gets the {@link SearchSource#getId() ID} of the
-   * {@link SearchSource}. This name will be added to the search-index for each
-   * according {@link net.sf.mmm.search.api.SearchEntry entry}. A
+   * This method gets the
+   * {@link net.sf.mmm.search.api.config.SearchSource#getId() ID} of the
+   * {@link net.sf.mmm.search.api.config.SearchSource}. This name will be added
+   * to the search-index for each according
+   * {@link net.sf.mmm.search.api.SearchEntry entry}. A
    * {@link net.sf.mmm.search.engine.api.SearchQuery} can be limited to specific
    * sources.
    * 

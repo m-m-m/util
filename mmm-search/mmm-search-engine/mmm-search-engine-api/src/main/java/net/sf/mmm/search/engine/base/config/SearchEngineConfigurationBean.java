@@ -79,4 +79,13 @@ public class SearchEngineConfigurationBean extends SearchConfigurationBean imple
     return this.entryTypes;
   }
 
+  /**
+   * @param entryTypes is the entryTypes to set
+   */
+  public void setEntryTypes(List<SearchEntryTypeBean> entryTypes) {
+
+    this.entryTypes = entryTypes;
+    this.entryTypeMap = null;
+  }
+
 }

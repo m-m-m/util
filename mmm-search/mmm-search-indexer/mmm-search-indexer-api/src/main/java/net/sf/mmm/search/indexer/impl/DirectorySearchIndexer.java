@@ -44,8 +44,8 @@ import net.sf.mmm.util.transformer.api.Transformer;
  */
 public class DirectorySearchIndexer extends AbstractLoggable {
 
-  /** @see #getIndexer() */
-  private SearchIndexer indexer;
+  /** @see #getSearchIndexer() */
+  private SearchIndexer searchIndexer;
 
   /** @see #getFilter() */
   private FileFilter filter;
@@ -75,24 +75,24 @@ public class DirectorySearchIndexer extends AbstractLoggable {
   public DirectorySearchIndexer(SearchIndexer indexer) {
 
     super();
-    this.indexer = indexer;
+    this.searchIndexer = indexer;
   }
 
   /**
    * @return the indexer
    */
-  public SearchIndexer getIndexer() {
+  public SearchIndexer getSearchIndexer() {
 
-    return this.indexer;
+    return this.searchIndexer;
   }
 
   /**
    * @param indexer the indexer to set
    */
   @Resource
-  public void setIndexer(SearchIndexer indexer) {
+  public void setSearchIndexer(SearchIndexer indexer) {
 
-    this.indexer = indexer;
+    this.searchIndexer = indexer;
   }
 
   /**
@@ -196,7 +196,7 @@ public class DirectorySearchIndexer extends AbstractLoggable {
       this.parserService = ps;
 
     }
-    if (this.indexer == null) {
+    if (this.searchIndexer == null) {
       throw new ResourceMissingException("indexer");
     }
   }
@@ -303,7 +303,7 @@ public class DirectorySearchIndexer extends AbstractLoggable {
     String fullPath = relativePath + "/" + filename;
     long fileSize = file.length();
     String extension = FileUtilImpl.getInstance().getExtension(filename);
-    MutableSearchEntry entry = this.indexer.createEntry();
+    MutableSearchEntry entry = this.searchIndexer.createEntry();
     String uri = fullPath;
     if (this.uriRewriter != null) {
       uri = this.uriRewriter.transform(uri);
@@ -346,7 +346,7 @@ public class DirectorySearchIndexer extends AbstractLoggable {
     if (source != null) {
       entry.setSource(source);
     }
-    this.indexer.add(entry);
+    this.searchIndexer.add(entry);
   }
 
 }

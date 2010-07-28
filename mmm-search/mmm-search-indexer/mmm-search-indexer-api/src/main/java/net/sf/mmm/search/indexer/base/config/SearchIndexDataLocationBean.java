@@ -11,12 +11,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.base.config.SearchSourceBean;
-import net.sf.mmm.search.indexer.api.config.SearchIndexLocation;
+import net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
 
 /**
- * This is the implementation of {@link SearchIndexLocation} as JAXB-ready
+ * This is the implementation of {@link SearchIndexDataLocation} as JAXB-ready
  * Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -24,7 +24,7 @@ import net.sf.mmm.util.transformer.base.StringTransformerChain;
  */
 @XmlRootElement(name = "location")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchIndexLocationBean implements SearchIndexLocation {
+public class SearchIndexDataLocationBean implements SearchIndexDataLocation {
 
   /** @see #getLocation() */
   @XmlAttribute(name = "location")
@@ -39,6 +39,14 @@ public class SearchIndexLocationBean implements SearchIndexLocation {
   @XmlAttribute(name = "encoding")
   private String encoding;
 
+  /** @see #getBaseUri() */
+  @XmlAttribute(name = "base-uri")
+  private String baseUri;
+
+  /** @see #isAbsoluteUris() */
+  @XmlAttribute(name = "absolute-uris")
+  private boolean absoluteUris;
+
   /** @see #getFilter() */
   @XmlIDREF
   @XmlAttribute(name = "filter")
@@ -52,7 +60,7 @@ public class SearchIndexLocationBean implements SearchIndexLocation {
   /**
    * The constructor.
    */
-  public SearchIndexLocationBean() {
+  public SearchIndexDataLocationBean() {
 
     super();
   }
@@ -89,26 +97,6 @@ public class SearchIndexLocationBean implements SearchIndexLocation {
     this.source = source;
   }
 
-  //
-  // /**
-  // * This method gets the {@link SearchSource#getId() ID} of the
-  // * {@link SearchSource Source} associated with this directory.
-  // *
-  // * @return the {@link SearchSource#getId() ID} of the {@link SearchSource}.
-  // */
-  // public String getSourceId() {
-  //
-  // return this.sourceId;
-  // }
-  //
-  // /**
-  // * @param source is the source to set
-  // */
-  // public void setSourceId(String source) {
-  //
-  // this.sourceId = source;
-  // }
-
   /**
    * {@inheritDoc}
    */
@@ -123,6 +111,38 @@ public class SearchIndexLocationBean implements SearchIndexLocation {
   public void setEncoding(String encoding) {
 
     this.encoding = encoding;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getBaseUri() {
+
+    return this.baseUri;
+  }
+
+  /**
+   * @param baseUri is the baseUri to set
+   */
+  public void setBaseUri(String baseUri) {
+
+    this.baseUri = baseUri;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isAbsoluteUris() {
+
+    return this.absoluteUris;
+  }
+
+  /**
+   * @param absoluteUris is the absoluteUris to set
+   */
+  public void setAbsoluteUris(boolean absoluteUris) {
+
+    this.absoluteUris = absoluteUris;
   }
 
   /**

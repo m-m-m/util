@@ -21,22 +21,28 @@ import net.sf.mmm.util.transformer.base.RegexStringTransformerRule;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.w3c.dom.Document;
 
 /**
- * TODO: this class ...
+ * This is the test-case for SearchIndexerConfigurationBean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since X 12.10.2009
+ * @since 1.0.0
  */
-public class SSBTest {
+public class SearchIndexerConfigurationBeanTest {
 
   /**
-   * TODO: javadoc
+   * This method creates a {@link SearchIndexerConfigurationBean} with test-data
+   * converts it to XML, parses the XML back to java-objects and converts these
+   * again to XML to finally check that both XMLs are the same.
    * 
-   * @param args
+   * @throws Exception if something went wrong.
    */
-  public static void main(String[] args) throws Exception {
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testXmlSerialization() throws Exception {
 
     JAXBContext context = JAXBContext.newInstance(SearchIndexerConfigurationBean.class);
     SearchIndexerConfigurationBean config = new SearchIndexerConfigurationBean();
@@ -80,31 +86,27 @@ public class SSBTest {
     filters.add(filter);
 
     // directories
-    List<SearchIndexLocationBean> directoryList = new ArrayList<SearchIndexLocationBean>();
+    List<SearchIndexDataLocationBean> directoryList = new ArrayList<SearchIndexDataLocationBean>();
     config.setLocations(directoryList);
-    SearchIndexLocationBean directory = new SearchIndexLocationBean();
+    SearchIndexDataLocationBean directory = new SearchIndexDataLocationBean();
     directory.setEncoding(EncodingUtil.ENCODING_UTF_8);
     directory.setFilter(filter);
-    directory.setLocaltion("/data/repository");
+    directory.setLocaltion("file:///data/repository");
     directory.setSource(source);
     directory.setUriTransformer(transformer);
     directoryList.add(directory);
     StringWriter buffer = new StringWriter();
     context.createMarshaller().marshal(config, buffer);
     String xml = buffer.toString();
-    System.out.println(xml);
     StringReader reader = new StringReader(xml);
     SearchIndexerConfiguration newConfig = (SearchIndexerConfiguration) context
         .createUnmarshaller().unmarshal(reader);
     buffer = new StringWriter();
     context.createMarshaller().marshal(newConfig, buffer);
     String xml2 = buffer.toString();
-    System.out.println(xml2);
-    if (xml.equals(xml2)) {
-      System.out.println("equals");
-    } else {
-      System.out.println("different!");
-    }
+    Assert.assertEquals(xml, xml2);
+
+    // TODO: remove this code...
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     context.createMarshaller().marshal(newConfig, document);
     DomUtilImpl.getInstance().writeXml(document, System.out, true);

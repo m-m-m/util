@@ -7,11 +7,10 @@ import java.util.Iterator;
 
 /**
  * This interface represents an entry of the search-index. It is either used for
- * {@link net.sf.mmm.search.indexer.api.SearchIndexer indexing} or
+ * indexing (net.sf.mmm.search.indexer.api.SearchIndexer) or
  * {@link net.sf.mmm.search.engine.api.SearchEngine retrieval}.
  * 
  * @see net.sf.mmm.search.engine.api.SearchHit
- * @see net.sf.mmm.search.indexer.api.MutableSearchEntry
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,6 +36,8 @@ public interface SearchEntry {
    * property that identifies the content technically unique. While the URI of a
    * content may change (e.g. if the content is renamed or moved) the UID stays
    * untouched and identifies the content for its complete lifetime.
+   * 
+   * @see #getUid()
    */
   String PROPERTY_UID = "uid";
 
@@ -44,6 +45,8 @@ public interface SearchEntry {
    * The name of the "text" property. This is the default property to search on.
    * All textual information about the content should be stored in this
    * property.
+   * 
+   * @see #getText()
    */
   String PROPERTY_TEXT = "text";
 
@@ -57,12 +60,16 @@ public interface SearchEntry {
    * The name of the "size" property. This is an optional property that may hold
    * the size (aka content-length) of the content. This should be an integer
    * representing the size in bytes.
+   * 
+   * @see #getSize()
    */
   String PROPERTY_SIZE = "size";
 
   /**
    * The name of the "author" property. This is an optional property that may
    * hold the author (aka artist) of the content.
+   * 
+   * @see #getAuthor()
    */
   String PROPERTY_AUTHOR = "author";
 
@@ -70,6 +77,8 @@ public interface SearchEntry {
    * The name of the "type" property. This is an optional property that
    * classifies the type (aka format or content-type) of the content. As values
    * typically either mime-types or file-extensions are used (but NOT mixed).
+   * 
+   * @see #getType()
    */
   String PROPERTY_TYPE = "type";
 
@@ -82,6 +91,8 @@ public interface SearchEntry {
   /**
    * The name of the "source" property. This is an optional property that
    * specifies the source of the content.
+   * 
+   * @see #getSource()
    */
   String PROPERTY_SOURCE = "source";
 
@@ -108,7 +119,7 @@ public interface SearchEntry {
    * link to it. Typically this is not an entire URL but a path relative to the
    * base URL of the according {@link #getSource() source}.
    * 
-   * @see SearchEntry#PROPERTY_URI
+   * @see #PROPERTY_URI
    * 
    * @return the URI of this entry.
    */
@@ -120,7 +131,7 @@ public interface SearchEntry {
    * technical ID of the entry assigned by the underlying search-engine this is
    * an optional custom ID given by the user.
    * 
-   * @see SearchEntry#PROPERTY_UID
+   * @see #PROPERTY_UID
    * 
    * @return the UID of this entry or <code>null</code> if NOT available.
    */
@@ -129,7 +140,7 @@ public interface SearchEntry {
   /**
    * This method gets the title used to display this entry.
    * 
-   * @see SearchEntry#PROPERTY_TITLE
+   * @see #PROPERTY_TITLE
    * 
    * @return the title of this entry.
    */
@@ -138,7 +149,7 @@ public interface SearchEntry {
   /**
    * This method gets the author of this entry.
    * 
-   * @see SearchEntry#PROPERTY_AUTHOR
+   * @see #PROPERTY_AUTHOR
    * 
    * @return the author of this entry or <code>null</code> if NOT available.
    */
@@ -147,7 +158,7 @@ public interface SearchEntry {
   /**
    * This method gets the plain text of the content.
    * 
-   * @see SearchEntry#PROPERTY_TEXT
+   * @see #PROPERTY_TEXT
    * 
    * @return the text of this entry.
    */

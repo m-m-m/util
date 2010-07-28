@@ -36,7 +36,7 @@ public interface SearchEntryType extends AttributeReadId<String>, AttributeReadT
    * 
    * @return the ID of this {@link SearchEntryType}. It is typically the file
    *         extension in {@link String#toLowerCase() lower-case} excluding the
-   *         dot (e.g. "doc", "htm", "html", etc.).
+   *         dot (e.g. "doc", "html", etc.).
    */
   String getId();
 
@@ -53,9 +53,8 @@ public interface SearchEntryType extends AttributeReadId<String>, AttributeReadT
    * This method gets the name (path relative to icon folder) of the icon
    * representing this {@link SearchEntryType}.
    * 
-   * @return the name of the icon representing the filetype with the given
-   *         <code>extension</code> or a default icon if no according icon could
-   *         be found.
+   * @return the name of the icon representing the file-type or a default icon
+   *         if no according icon could be found.
    */
   String getIcon();
 

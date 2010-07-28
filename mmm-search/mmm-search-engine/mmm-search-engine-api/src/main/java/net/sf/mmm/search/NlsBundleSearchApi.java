@@ -21,11 +21,6 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
   }
 
   /**
-   * @see net.sf.mmm.search.indexer.base.SearchUpdateMissingIdException
-   */
-  public static final String ERR_UPDATE_MISSING_ID = "Can not update entry: neither UID nor URI is set!";
-
-  /**
    * @see net.sf.mmm.search.base.SearchEntryIdInvalidException
    */
   public static final String ERR_ID_INVALID = "Invalid entry ID \"{id}\"!";
@@ -40,17 +35,6 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
    */
   public static final String ERR_PROPERTY_VALUE_INVALID = "The value \"{value}\" "
       + "is invalid for property \"{property}\"!";
-
-  /**
-   * @see net.sf.mmm.search.indexer.base.SearchRemoveFailedException
-   */
-  public static final String ERR_REMOVE_FAILED = "Failed to remove entry with "
-      + "value \"{value}\" for property \"{property}\"!";
-
-  /**
-   * @see net.sf.mmm.search.indexer.base.SearchAddFailedException
-   */
-  public static final String ERR_ADD_FAILED = "Failed to add entry \"{0}\"!";
 
   /**
    * @see net.sf.mmm.search.base.SearchParseException
