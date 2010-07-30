@@ -6,38 +6,144 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
+    <release version="2.0.0" date="2010-09-26" description="Subsequent release">
+    </release>
+    <release version="1.1.0" date="2009-01-07" description="Subsequent release">
+      <action dev="hohwille" type="add">
+        <![CDATA[Added <code>net.sf.mmm.util.SpringConfigsUtilCore</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.collection.base.AbstractSimpleMap</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.filter.api.CharFilter.IDENTIFIER_FILTER</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.filter.api.CharFilter</code>: added IDENTIFIER_FILTER.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.filter.base.FilterRuleChain</code>: now with JAXB support.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsParseException</code>: added.<br/>
+    	  <code>net.sf.mmm.util.value.api.ValueParseException</code>: deprecated.<br/>
+    	  <code>net.sf.mmm.util.value.api.ValueParseGenericException</code>: deprecated.
+    	  ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsMessage</code>: Javadoc improved.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsMessageFactory</code>: added <code>create(...)</code> methods for 4 key/value pairs added.<br/>
+        <code>net.sf.mmm.util.nls.base.AbstractNlsMessageFactory</code>: added <code>create(...)</code> methods implementation.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.impl.NlsMessageFormatterImpl</code>: added justification support.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.text.api.Justification</code>: added.<br/>
+        <code>net.sf.mmm.util.text.api.JustificationBuilder</code>: added.<br/>
+        <code>net.sf.mmm.util.text.base.JustificationImpl</code>: added.<br/>
+        <code>net.sf.mmm.util.text.base.JustificationBuilderImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsRuntimeException</code>: moved KEY constants to <code>net.sf.mmm.util.nls.api.NlsThrowable</code>.<br/>
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>: NLS of help fixed.<br/>
+        <code>net.sf.mmm.util.nls.base.NlsBundleSynchronizer</code>:NLS of help fixed.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder</code>: added <code>pojo2Map</code> method.<br/>
+        <code>net.sf.mmm.util.pojo.descriptor.base.PojoMap</code>: added.<br/>
+        <code>net.sf.mmm.util.pojo.path.api.PojoPathNavigator</code>: added <code>pojo2Map</code> methods.<br/>
+        <code>net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator</code>: added <code>pojo2Map</code> methods implementation.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.xml.base.NodeIterator</code>: now implements <code>Iterator</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.NlsBundleUtilCore</code>: new messages added.
+        ]]>
+      </action>
+    </release>
     <release version="1.1.0" date="2009-09-26" description="Subsequent release">
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>net.sf.mmm.util.context</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.context</code>: added.
+        ]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>ConcurrentMapFactory</code>.]]>
+        <![CDATA[
+        <code>ConcurrentMapFactory</code>: added.
+        ]]>
       </action>
       <action dev="hohwille" type="add" issue="3">
-        <![CDATA[Merged <code>mmm-util-pojo</code> into <code>mmm-util-core</code>.]]>
+        <![CDATA[
+        Merged <code>mmm-util-pojo</code> into <code>mmm-util-core</code>.<br/>
+        <code>net.sf.mmm.util.pojo</code>: added.]]>
       </action>
       <action dev="hohwille" type="add" issue="1">
-        <![CDATA[Completed stream-detector-framework]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.io</code>: completed stream-detector-framework.
+        ]]>
       </action>
       <action dev="hohwille" type="add" issue="2">
-        <![CDATA[Added suppored for map-keys in NlsMessage rather than index.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.nls</code>: added suppored for map-keys in NlsMessage rather than index.
+        ]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[Added support for URLs and UNC-paths in <code>FileUtil.normalizePath(String)</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.file.api.FileUtil</code>: added support for URLs and UNC-paths in <code>normalizePath(String)</code>.]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>ReflectionUtil.findResourceNames(*)</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.reflect.api.ReflectionUtil</code>: added <code>findResourceNames(*)</code> methods.
+        ]]>
       </action>
     </release>
     <release version="1.0.1" date="2008-02-10" description="Subsequent release">
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>net.sf.mmm.util.file</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.file</code>: added.
+        ]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>net.sf.mmm.util.event</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.event</code>: added.
+        ]]>
       </action>
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>StringUtil.replace(char[], char, char)</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.lang.api.StringUtil</code>: added <code>replace(char[], char, char)</code> method.
+        ]]>
       </action>
     </release>
     <release version="1.0.0" date="2008-01-19" description="initial release">
