@@ -18,6 +18,7 @@
       Here are some of the features provided by this module:
       <ul>
         <li>Advanced <a href="apidocs/net/sf/mmm/util/nls/api/package-summary.html">Native Language Support (NLS)</a>.</li>
+        <li>Excellent support to create a <a href="apidocs/net/sf/mmm/util/cli/api/package-summary.html">Command Line Interface (CLI)</a>.</li>
         <li><a href="apidocs/net/sf/mmm/util/pattern/api/package-summary.html">PatternCompiler</a> for glob- and ant-like path-patterns producing <code>java.util.regex.Pattern</code>.</li>
         <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/api/package-summary.html">values</a>.</li>
         <li><a href="apidocs/net/sf/mmm/util/scanner/api/package-summary.html">Scanner</a> for parsing strings easily.</li>
