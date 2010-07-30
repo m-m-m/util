@@ -183,6 +183,7 @@ public interface NlsMessageFactory {
    * @param argument4 is the {@link NlsMessage#getArgument(String) value} of the
    *        fourth argument.
    * @return the new {@link NlsMessage} instance.
+   * @since 1.1.1
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
   NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
@@ -213,6 +214,7 @@ public interface NlsMessageFactory {
    * @param argument4 is the {@link NlsMessage#getArgument(String) value} of the
    *        fourth argument.
    * @return the new {@link NlsMessage} instance.
+   * @since 1.1.1
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
   NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
