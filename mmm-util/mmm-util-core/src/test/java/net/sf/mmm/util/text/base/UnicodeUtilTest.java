@@ -25,6 +25,9 @@ public class UnicodeUtilTest {
     return UnicodeUtilImpl.getInstance();
   }
 
+  /**
+   * This method "tests" different minus-signs.
+   */
   @Test
   public void testMinus() {
 

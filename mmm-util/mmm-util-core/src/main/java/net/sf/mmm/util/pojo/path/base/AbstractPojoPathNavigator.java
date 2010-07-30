@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.base.CollectionList;
 import net.sf.mmm.util.collection.base.HashKey;
@@ -100,7 +101,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * 
    * @param functionManager is the {@link PojoPathFunctionManager}.
    */
-  @Resource
+  @Inject
   public void setFunctionManager(PojoPathFunctionManager functionManager) {
 
     getInitializationState().requireNotInitilized();
@@ -126,7 +127,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * 
    * @param valueConverter is the {@link ComposedValueConverter} to set.
    */
-  @Resource
+  @Inject
   public void setValueConverter(ComposedValueConverter valueConverter) {
 
     getInitializationState().requireNotInitilized();
@@ -166,7 +167,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   /**
    * @param reflectionUtil is the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();
@@ -192,7 +193,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * 
    * @param pojoFactory is the {@link PojoFactory} to use.
    */
-  @Resource
+  @Inject
   public void setPojoFactory(PojoFactory pojoFactory) {
 
     this.pojoFactory = pojoFactory;
@@ -272,7 +273,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * @return the {@link PojoPathState} or <code>null</code> if caching is
    *         disabled.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   protected PojoPathState createStateByType(GenericType initialPojoType, String pojoPath,
       PojoPathMode mode, PojoPathContext context) {
 
@@ -327,7 +328,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     }
     PojoPathState state = createState(pojo, pojoPath, mode, context);
     CachingPojoPath path = getRecursive(pojoPath, context, state);
-    return (TYPE) convert(path, context, path.pojo, targetClass, targetClass);
+    return (TYPE) convert(path, context, path.pojo, targetClass, null);
   }
 
   /**
@@ -347,7 +348,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       PojoPathState state) {
 
     // try to read from cache...
-    CachingPojoPath currentPath = state.getCached(pojoPath);
+    CachingPojoPath currentPath = state.getCachedPath(pojoPath);
     if (currentPath != null) {
       if (state.isGetType()) {
         // called from getType...
@@ -397,7 +398,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     } else {
       Object result = get(currentPath, context, state);
       currentPath.pojo = result;
-      state.setCached(pojoPath, currentPath);
+      state.setCachedPath(pojoPath, currentPath);
       if (result == null) {
         // creation has already taken place...
         if (state.mode != PojoPathMode.RETURN_IF_NULL) {
@@ -454,7 +455,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       PojoPathFunction function = getFunction(functionName, context);
       if (state.isGetType()) {
         result = null;
-        currentPath.pojoType = new SimpleGenericTypeImpl(function.getOutputClass());
+        currentPath.pojoType = new SimpleGenericTypeImpl(function.getValueClass());
       } else {
         result = getFromFunction(currentPath, context, state, function);
       }
@@ -506,7 +507,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * @return the result of the evaluation. It might be <code>null</code>
    *         according to the {@link PojoPathState#getMode() mode}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object getFromFunction(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, PojoPathFunction function) {
 
@@ -544,7 +545,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * @return the result of the evaluation. It might be <code>null</code>
    *         according to the {@link PojoPathState#getMode() mode}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object getFromMap(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Map parentPojo) {
 
@@ -680,7 +681,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * @throws PojoPathFunctionUndefinedException if no {@link PojoPathFunction}
    *         is defined for the given <code>functionName</code>.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   protected PojoPathFunction getFunction(String functionName, PojoPathContext context)
       throws PojoPathFunctionUndefinedException {
 
@@ -750,11 +751,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
       }
     }
     Object current = pojo;
-    boolean addToCache = false;
+    boolean cached = true;
     PojoPathState state = createState(pojo, pojoPath, mode, context);
-    CachingPojoPath currentPath = state.getCached(pojoPath);
+    CachingPojoPath currentPath = state.getCachedPath(pojoPath);
     if (currentPath == null) {
-      addToCache = true;
+      cached = false;
       currentPath = new CachingPojoPath(pojoPath);
       String parentPathString = currentPath.getParentPath();
       if (parentPathString != null) {
@@ -775,9 +776,13 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     }
     Object old = set(currentPath, context, state, current, value);
     // update cache...
-    currentPath.pojo = value;
-    if (addToCache) {
-      state.setCached(pojoPath, currentPath);
+    if (cached) {
+      // if we set a value that has been cached before, we need to purge the
+      // cache. Otherwise after setting an according get would still return the
+      // old value from the cache. A removal from cache is done for simplicity.
+      // updating of the cache here might be error-prone as the value could be
+      // converted (e.g. in a pojo-path-function).
+      state.removeCachedPath(pojoPath);
     }
     return old;
   }
@@ -800,7 +805,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    * @param value is the value to set in <code>parentPojo</code>.
    * @return the replaced value. It may be <code>null</code>.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object set(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
       Object parentPojo, Object value) {
 
@@ -809,12 +814,28 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     if (functionName != null) {
       // current segment is a function...
       PojoPathFunction function = getFunction(functionName, context);
-      result = function.set(parentPojo, functionName, value, context);
+      Class<?> valueClass = function.getValueClass();
+      currentPath.pojoClass = valueClass;
+      Object convertedValue = convert(currentPath, context, value, valueClass, null);
+      result = function.set(parentPojo, functionName, convertedValue, context);
     } else {
       // current segment is NOT a function
       if (parentPojo instanceof Map) {
         Map map = (Map) parentPojo;
-        result = map.put(currentPath.getSegment(), value);
+        String key = currentPath.getSegment();
+        Object convertedKey = key;
+        Object convertedValue = value;
+        if (currentPath.parent != null) {
+          GenericType<?> mapType = currentPath.parent.pojoType;
+          if (mapType != null) {
+            GenericType<?> valueType = mapType.getComponentType();
+            convertedValue = convert(currentPath, context, value, valueType.getAssignmentClass(),
+                valueType);
+            GenericType<?> keyType = mapType.getKeyType();
+            convertedKey = convert(currentPath, context, key, keyType.getAssignmentClass(), keyType);
+          }
+        }
+        result = map.put(convertedKey, convertedValue);
       } else {
         Integer index = currentPath.getIndex();
         if (index != null) {
@@ -867,8 +888,14 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    *         compatible and could NOT be converted.
    */
   protected Object convert(CachingPojoPath currentPath, PojoPathContext context, Object pojo,
-      Class<?> targetClass, Type targetType) throws PojoPathConversionException {
+      Class<?> targetClass, GenericType<?> targetType) throws PojoPathConversionException {
 
+    Type type;
+    if (targetType != null) {
+      type = targetType;
+    } else {
+      type = targetClass;
+    }
     Object result = pojo;
     // null does NOT need to be converted...
     if (pojo != null) {
@@ -880,23 +907,33 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
         result = null;
         try {
           if (converter != null) {
-            result = converter.convert(pojo, currentPath, targetClass);
+            if (targetType != null) {
+              result = converter.convert(pojo, currentPath, targetType);
+            } else {
+              result = converter.convert(pojo, currentPath, targetClass);
+            }
           }
           if (result == null) {
-            result = this.valueConverter.convert(pojo, currentPath, targetClass);
+            if (targetType != null) {
+              result = this.valueConverter.convert(pojo, currentPath, targetType);
+            } else {
+              result = this.valueConverter.convert(pojo, currentPath, targetClass);
+            }
           }
         } catch (RuntimeException e) {
-          throw new PojoPathConversionException(currentPath.getPojoPath(), pojoClass,
-              currentPath.pojoType);
+          throw new PojoPathConversionException(e, currentPath.getPojoPath(), pojoClass, type);
         }
         if (result == null) {
-          throw new PojoPathConversionException(currentPath.getPojoPath(), pojoClass,
-              currentPath.pojoType);
+          throw new PojoPathConversionException(currentPath.getPojoPath(), pojoClass, type);
         }
         if (!targetClass.isAssignableFrom(result.getClass())) {
-          IllegalStateException illegalState = new IllegalStateException("Illegal conversion!");
-          throw new PojoPathConversionException(illegalState, currentPath.getPojoPath(), pojoClass,
-              targetType);
+          if (!targetClass.isPrimitive()
+              || !this.reflectionUtil.getNonPrimitiveType(targetClass).isAssignableFrom(
+                  result.getClass())) {
+            IllegalStateException illegalState = new IllegalStateException("Illegal conversion!");
+            throw new PojoPathConversionException(illegalState, currentPath.getPojoPath(),
+                pojoClass, type);
+          }
         }
       }
     }
@@ -918,7 +955,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
    *         a {@link Collection} but NOT a {@link List}. Otherwise the given
    *         <code>arrayOrCollection</code> itself.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object convertList(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object arrayOrCollection) {
 
@@ -933,12 +970,12 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
               arrayOrCollection.getClass());
         }
         String collection2ListPath = currentPath.getPojoPath() + PATH_SUFFIX_COLLECTION_LIST;
-        CachingPojoPath listPath = state.getCached(collection2ListPath);
+        CachingPojoPath listPath = state.getCachedPath(collection2ListPath);
         if (listPath == null) {
           listPath = new CachingPojoPath(collection2ListPath);
           listPath.parent = currentPath;
           listPath.pojo = new CollectionList((Collection) arrayOrCollection);
-          state.setCached(collection2ListPath, listPath);
+          state.setCachedPath(collection2ListPath, listPath);
         }
         arrayOrList = listPath.pojo;
       }
@@ -972,7 +1009,17 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
 
     Object arrayOrList = convertList(currentPath, context, state, parentPojo);
     GenericBean<Object> arrayReceiver = new GenericBean<Object>();
-    Object result = getCollectionReflectionUtil().set(arrayOrList, index, value, arrayReceiver);
+    Object convertedValue = value;
+    if (currentPath.parent != null) {
+      GenericType<?> collectionType = currentPath.parent.pojoType;
+      if (collectionType != null) {
+        GenericType<?> valueType = collectionType.getComponentType();
+        convertedValue = convert(currentPath, context, value, valueType.getAssignmentClass(),
+            valueType);
+      }
+    }
+    Object result = getCollectionReflectionUtil().set(arrayOrList, index, convertedValue,
+        arrayReceiver);
     Object newArray = arrayReceiver.getValue();
     if (newArray != null) {
       if (currentPath.parent.parent == null) {
@@ -1152,7 +1199,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * @return the cached {@link CachingPojoPath} or <code>null</code> if NOT
      *         (yet) cached.
      */
-    public CachingPojoPath getCached(String currentPojoPath) {
+    public CachingPojoPath getCachedPath(String currentPojoPath) {
 
       return this.cache.get(currentPojoPath);
     }
@@ -1167,10 +1214,25 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      * @param evaluatedPojoPath is the {@link CachingPojoPath} that has been
      *        evaluated and should be cached.
      */
-    public void setCached(String currentPojoPath, CachingPojoPath evaluatedPojoPath) {
+    public void setCachedPath(String currentPojoPath, CachingPojoPath evaluatedPojoPath) {
 
       if (!this.cachingDisabled) {
         this.cache.put(currentPojoPath, evaluatedPojoPath);
+      }
+    }
+
+    /**
+     * This method removes a {@link CachingPojoPath} from the cache. This method
+     * will do nothing if this state is {@link #isCachingDisabled() disabled}.
+     * 
+     * @param currentPojoPath is the
+     *        {@link net.sf.mmm.util.pojo.path.api.PojoPath} to purge from the
+     *        cache.
+     */
+    public void removeCachedPath(String currentPojoPath) {
+
+      if (!this.cachingDisabled) {
+        this.cache.remove(currentPojoPath);
       }
     }
 
@@ -1230,8 +1292,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
     }
 
     /**
-     * This method disables further {@link #setCached(String, CachingPojoPath)
-     * caching}.
+     * This method disables further
+     * {@link #setCachedPath(String, CachingPojoPath) caching}.
      */
     public void setCachingDisabled() {
 
@@ -1282,7 +1344,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
      *        getType}.
      * @param pojoClass is the initial {@link #getPojoClass() pojo-class}.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public CachingPojoPath(Object pojo, Class<?> pojoClass) {
 
       this(pojo, pojoClass, new SimpleGenericTypeImpl(pojoClass));

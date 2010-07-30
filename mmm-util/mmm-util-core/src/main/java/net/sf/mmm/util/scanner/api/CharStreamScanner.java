@@ -131,14 +131,28 @@ public interface CharStreamScanner {
    * change the state of the scanner. So take care NOT to produce infinity
    * loops.
    * 
-   * @param exprected is the expected string.
+   * @param expected is the expected string.
    * @param ignoreCase - if <code>true</code> the case of the characters is
    *        ignored when compared.
    * @return <code>true</code> if the <code>expected</code> string was
    *         successfully consumed from this scanner, <code>false</code>
    *         otherwise.
    */
-  boolean expect(String exprected, boolean ignoreCase);
+  boolean expect(String expected, boolean ignoreCase);
+
+  /**
+   * This method acts as {@link #expect(String, boolean)} but if the expected
+   * String is NOT completely present, no character is {@link #next() consumed}
+   * and the state of the scanner remains unchanged.
+   * 
+   * @param expected is the expected string.
+   * @param ignoreCase - if <code>true</code> the case of the characters is
+   *        ignored when compared.
+   * @return <code>true</code> if the <code>expected</code> string was
+   *         successfully consumed from this scanner, <code>false</code>
+   *         otherwise.
+   */
+  boolean expectStrict(String expected, boolean ignoreCase);
 
   /**
    * This method checks that the {@link #next() current character} is equal to
@@ -344,10 +358,10 @@ public interface CharStreamScanner {
   /**
    * This method reads all {@link #next() next characters} that are identical to
    * the character given by <code>c</code>.<br>
-   * E.g. use <code>{@link #skipWhile(char) readWhile}(' ')</code> to skip all blanks
-   * from the {@link #getCurrentIndex() current index}. After the call of this
-   * method, the {@link #getCurrentIndex() current index} will point to the next
-   * character that is different to <code>c</code> or to the end if NO such
+   * E.g. use <code>{@link #skipWhile(char) readWhile}(' ')</code> to skip all
+   * blanks from the {@link #getCurrentIndex() current index}. After the call of
+   * this method, the {@link #getCurrentIndex() current index} will point to the
+   * next character that is different to <code>c</code> or to the end if NO such
    * character exists.
    * 
    * @param c is the character to read over.

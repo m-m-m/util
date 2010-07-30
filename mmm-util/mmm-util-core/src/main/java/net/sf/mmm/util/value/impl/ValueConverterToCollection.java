@@ -33,6 +33,21 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ValueConverterToCollection extends AbstractRecursiveValueConverter<Object, Collection> {
 
+  /** The character used to separate the element of the collection. */
+  protected static final char ELEMENT_SEPARATOR = ',';
+
+  /**
+   * The prefix used to escape an element (that may contain
+   * {@link #ELEMENT_SEPARATOR}).
+   */
+  protected static final String ELEMENT_ESCAPE_START = "<{[";
+
+  /**
+   * The suffix used to escape an element (that may contain
+   * {@link #ELEMENT_SEPARATOR}).
+   */
+  protected static final String ELEMENT_ESCAPE_END = "]}>";
+
   /** @see #getCollectionReflectionUtil() */
   private CollectionReflectionUtil collectionReflectionUtil;
 
@@ -123,7 +138,8 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
     } else if (value instanceof CharSequence) {
       result = collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass())
           .create();
-      StringTokenizer tokenizer = new StringTokenizer(value.toString(), ',');
+      StringTokenizer tokenizer = new StringTokenizer(value.toString(), ELEMENT_ESCAPE_START,
+          ELEMENT_ESCAPE_END, ELEMENT_SEPARATOR);
       for (String element : tokenizer) {
         Object resultElement = parentConverter.convert(element, valueSource, componentType);
         if ((resultElement == null) && (element != null)) {

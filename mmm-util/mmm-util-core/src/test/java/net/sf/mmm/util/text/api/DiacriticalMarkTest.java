@@ -11,6 +11,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@SuppressWarnings("all")
 public class DiacriticalMarkTest {
 
   @Test

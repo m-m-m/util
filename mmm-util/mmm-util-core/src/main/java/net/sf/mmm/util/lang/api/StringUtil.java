@@ -46,6 +46,13 @@ public interface StringUtil {
   String[] EMPTY_STRING_ARRAY = new String[0];
 
   /**
+   * An empty char array.
+   * 
+   * @since 2.0.0
+   */
+  char[] EMPTY_CHAR_ARRAY = new char[0];
+
+  /**
    * This method parses a boolean value given as string.
    * 
    * @see Boolean#valueOf(String)

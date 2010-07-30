@@ -24,7 +24,7 @@ public class CliOptionUndefinedException extends CliException {
    */
   public CliOptionUndefinedException(String option) {
 
-    super(NlsBundleUtilCore.ERR_CLI_OPTION_DUPLICATE, toMap(KEY_OPTION, option));
+    super(NlsBundleUtilCore.ERR_CLI_OPTION_UNDEFINED, toMap(KEY_OPTION, option));
   }
 
 }

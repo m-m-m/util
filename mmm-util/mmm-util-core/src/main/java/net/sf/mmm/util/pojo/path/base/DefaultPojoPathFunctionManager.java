@@ -15,7 +15,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public class DefaultPojoPathFunctionManager extends AbstractComponent implements
     PojoPathFunctionManager {
 
@@ -64,6 +64,10 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
    */
   public PojoPathFunction registerFunction(PojoPathFunction function, String functionName) {
 
+    if (function instanceof AbstractComponent) {
+      // make things easier for users, duplicate initialization will do nothing
+      ((AbstractComponent) function).initialize();
+    }
     return this.functionMap.put(functionName, function);
   }
 

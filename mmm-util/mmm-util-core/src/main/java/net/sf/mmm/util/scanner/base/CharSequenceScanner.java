@@ -580,15 +580,15 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * {@inheritDoc}
    */
-  public boolean expect(String exprected, boolean ignoreCase) {
+  public boolean expect(String expected, boolean ignoreCase) {
 
-    int len = exprected.length();
+    int len = expected.length();
     for (int i = 0; i < len; i++) {
       if (this.pos >= this.endIndex) {
         return false;
       }
       char c = this.chars[this.pos];
-      char exp = exprected.charAt(i);
+      char exp = expected.charAt(i);
       if (c != exp) {
         if (!ignoreCase) {
           return false;
@@ -599,6 +599,33 @@ public class CharSequenceScanner implements CharStreamScanner {
       }
       this.pos++;
     }
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean expectStrict(String expected, boolean ignoreCase) {
+
+    int len = expected.length();
+    int newPos = this.pos;
+    for (int i = 0; i < len; i++) {
+      if (newPos >= this.endIndex) {
+        return false;
+      }
+      char c = this.chars[newPos];
+      char exp = expected.charAt(i);
+      if (c != exp) {
+        if (!ignoreCase) {
+          return false;
+        }
+        if (Character.toLowerCase(c) != Character.toLowerCase(exp)) {
+          return false;
+        }
+      }
+      newPos++;
+    }
+    this.pos = newPos;
     return true;
   }
 

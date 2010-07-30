@@ -11,23 +11,23 @@ package net.sf.mmm.util.pojo.path.api;
  * attributes, etc.<br>
  * A {@link PojoPathFunction} is
  * {@link PojoPathFunctionManager#getFunction(String) registered} in a
- * {@link PojoPathFunctionManager} under a specific name (<code>functionName</code>).
- * The {@link PojoPathFunction} itself does NOT contain that name and gets this
- * name back as parameter when it is invoked. Therefore the same
- * {@link PojoPathFunction} instance can be
+ * {@link PojoPathFunctionManager} under a specific name (
+ * <code>functionName</code>). The {@link PojoPathFunction} itself does NOT
+ * contain that name and gets this name back as parameter when it is invoked.
+ * Therefore the same {@link PojoPathFunction} instance can be
  * {@link PojoPathFunctionManager#getFunction(String) registered} with different
  * names and can behave different according to the name it was invoked for.<br>
  * 
  * @param <IN> is the generic {@link #getInputClass() input-type}.
- * @param <OUT> is the generic {@link #getOutputClass() output-type}
+ * @param <VALUE> is the generic {@link #getValueClass() value-type}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PojoPathFunction<IN, OUT> {
+public interface PojoPathFunction<IN, VALUE> {
 
   /**
    * This is the prefix used to indicate a {@link PojoPathFunction} in a
-   * {@link PojoPath}. The value ({@value}) will never change. It is NOT
+   * {@link PojoPath}. The value ({@value} ) will never change. It is NOT
    * necessary to use this constant to construct a {@link PojoPath}.<br>
    * For example the {@link PojoPath#getSegment() segment}
    * <code>&#64;myFunction</code> as part of a {@link PojoPath} such as
@@ -80,20 +80,21 @@ public interface PojoPathFunction<IN, OUT> {
    * 
    * @return the output class.
    */
-  Class<OUT> getOutputClass();
+  Class<VALUE> getValueClass();
 
   /**
    * This method gets the value of this function. It is invoked by
-   * {@link PojoPathNavigator}.{@link PojoPathNavigator#get(Object, String, PojoPathMode, PojoPathContext) get}
-   * independent of the {@link PojoPathMode}. A regular implementation should
-   * only return what is already there. However in specific cases this may NOT
-   * (initially) be available from the given
-   * {@link net.sf.mmm.util.pojo.api.Pojo} <code>actual</code> and therefore
-   * be retrieved from somewhere else (e.g. a database using a primary key given
+   * {@link PojoPathNavigator}.
+   * {@link PojoPathNavigator#get(Object, String, PojoPathMode, PojoPathContext)
+   * get} independent of the {@link PojoPathMode}. A regular implementation
+   * should only return what is already there. However in specific cases this
+   * may NOT (initially) be available from the given
+   * {@link net.sf.mmm.util.pojo.api.Pojo} <code>actual</code> and therefore be
+   * retrieved from somewhere else (e.g. a database using a primary key given
    * via a {@link PojoPathContext#getProperties() property} of the given
    * <code>context</code>). Further it can be legal to modify the
-   * <code>actual</code> {@link net.sf.mmm.util.pojo.api.Pojo} e.g. by
-   * attaching the externally retrieved result.
+   * <code>actual</code> {@link net.sf.mmm.util.pojo.api.Pojo} e.g. by attaching
+   * the externally retrieved result.
    * 
    * @param input is the actual {@link net.sf.mmm.util.pojo.api.Pojo} where this
    *        function is invoked on. Typically the returned value should be
@@ -108,12 +109,13 @@ public interface PojoPathFunction<IN, OUT> {
    *        via the {@link PojoPathContext#getRecognizer() recognizer}.
    * @return the value of this function or <code>null</code> if NOT available.
    */
-  OUT get(IN input, String functionName, PojoPathContext context);
+  VALUE get(IN input, String functionName, PojoPathContext context);
 
   /**
    * This method creates an appropriate new value. It is invoked by
-   * {@link PojoPathNavigator}.{@link PojoPathNavigator#get(Object, String, PojoPathMode, PojoPathContext) get}
-   * if the mode is {@link PojoPathMode#CREATE_IF_NULL} after
+   * {@link PojoPathNavigator}.
+   * {@link PojoPathNavigator#get(Object, String, PojoPathMode, PojoPathContext)
+   * get} if the mode is {@link PojoPathMode#CREATE_IF_NULL} after
    * {@link #get(Object, String, PojoPathContext) get} returned
    * <code>null</code>.<br>
    * A typical implementation may create a new instance of &lt;VALUE&gt; via the
@@ -136,7 +138,7 @@ public interface PojoPathFunction<IN, OUT> {
    *         possible. However returning <code>null</code> here will cause the
    *         {@link PojoPathNavigator} to fail with an exception.
    */
-  OUT create(IN input, String functionName, PojoPathContext context);
+  VALUE create(IN input, String functionName, PojoPathContext context);
 
   /**
    * This method sets the given <code>value</code> for the given
@@ -159,6 +161,6 @@ public interface PojoPathFunction<IN, OUT> {
    *        via the {@link PojoPathContext#getRecognizer() recognizer}.
    * @return the previous value that has been replaced or <code>null</code>.
    */
-  OUT set(IN input, String functionName, OUT value, PojoPathContext context);
+  VALUE set(IN input, String functionName, VALUE value, PojoPathContext context);
 
 }

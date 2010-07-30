@@ -3,23 +3,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.base;
 
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationException;
+import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
 
 /**
  * This is the abstract base implementation of the {@link PojoPathFunction}
  * interface.
  * 
- * @param <ACTUAL> is the generic type of the actual
- *        {@link net.sf.mmm.util.pojo.api.Pojo} this function operates on.
- * @param <VALUE> is the generic type of the value this function traverses to,
- *        starting from the actual {@link net.sf.mmm.util.pojo.api.Pojo}.
+ * @param <IN> is the generic {@link #getInputClass() input-type}.
+ * @param <VALUE> is the generic {@link #getValueClass() value-type}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoPathFunction<ACTUAL, VALUE> implements
-    PojoPathFunction<ACTUAL, VALUE> {
+public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggable implements
+    PojoPathFunction<IN, VALUE> {
 
   /**
    * The constructor.
@@ -49,7 +49,8 @@ public abstract class AbstractPojoPathFunction<ACTUAL, VALUE> implements
   protected String getFunctionDescription(String functionName) {
 
     String className = getClass().getSimpleName();
-    StringBuilder buffer = new StringBuilder(functionName.length() + className.length() + 3);
+    StringBuilder buffer = new StringBuilder(functionName.length() + className.length() + 4);
+    buffer.append(FUNCTION_NAME_PREFIX);
     buffer.append(functionName);
     buffer.append(" [");
     buffer.append(className);
@@ -60,7 +61,7 @@ public abstract class AbstractPojoPathFunction<ACTUAL, VALUE> implements
   /**
    * {@inheritDoc}
    */
-  public VALUE create(ACTUAL actual, String functionName, PojoPathContext context) {
+  public VALUE create(IN actual, String functionName, PojoPathContext context) {
 
     throw new PojoPathFunctionUnsupportedOperationException("create",
         getFunctionDescription(functionName));
@@ -69,7 +70,7 @@ public abstract class AbstractPojoPathFunction<ACTUAL, VALUE> implements
   /**
    * {@inheritDoc}
    */
-  public VALUE get(ACTUAL actual, String functionName, PojoPathContext context) {
+  public VALUE get(IN actual, String functionName, PojoPathContext context) {
 
     // actually get should always be supported!
     throw new PojoPathFunctionUnsupportedOperationException("get",
@@ -79,10 +80,26 @@ public abstract class AbstractPojoPathFunction<ACTUAL, VALUE> implements
   /**
    * {@inheritDoc}
    */
-  public VALUE set(ACTUAL actual, String functionName, VALUE value, PojoPathContext context) {
+  public VALUE set(IN actual, String functionName, VALUE value, PojoPathContext context) {
 
     throw new PojoPathFunctionUnsupportedOperationException("set",
         getFunctionDescription(functionName));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("rawtypes")
+  @Override
+  public String toString() {
+
+    String name;
+    if (this instanceof PojoPathNamedFunction) {
+      name = ((PojoPathNamedFunction) this).getName();
+    } else {
+      name = "<function>";
+    }
+    return getFunctionDescription(name);
   }
 
 }

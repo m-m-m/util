@@ -6,6 +6,8 @@ package net.sf.mmm.util.lang.api;
 import java.util.Iterator;
 
 import net.sf.mmm.util.collection.base.AbstractIterator;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
  * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided
@@ -26,6 +28,12 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /** The characters that will be detected as delimiters. */
   private final char[] delimiters;
+
+  /** The string to start escaping of a token. */
+  private final char[] escapeStart;
+
+  /** The string to end escaping of a token. */
+  private final char[] escapeEnd;
 
   /** The current index in {@link #string}. */
   private int index;
@@ -54,6 +62,91 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
+   * The constructor that allows escaping. The escaping can be cascaded:
+   * 
+   * <pre>
+   * new StringTokenizer("{[foo,{[bar,thing]}]},some", "{[", "]}", ',').next()
+   * </pre>
+   * 
+   * will return "foo,{[bar,thing]}".
+   * 
+   * @param string is the string to be tokenized.
+   * @param escapeStart is the string used to start escaping of a token. The
+   *        string has to be free of <code>delimiters</code>.
+   * @param escapeEnd is the string used to end escaping of a token. The string
+   *        has to be free of <code>delimiters</code>.
+   * @param delimiters are the characters that will be detected as delimiters.
+   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or
+   *         <code>escapeEnd</code> is an empty string or contains a character
+   *         of <code>delimiters</code>, or one of them is <code>null</code>
+   *         while the other is not, or both are not <code>null</code> but
+   *         {@link Object#equals(Object) equal} to each other.
+   * 
+   * @since 2.0.0
+   */
+  public StringTokenizer(String string, String escapeStart, String escapeEnd, char... delimiters)
+      throws NlsIllegalArgumentException {
+
+    this(string.toCharArray(), escapeStart, escapeEnd, delimiters);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @see #StringTokenizer(String, String, String, char...)
+   * 
+   * @param string is the string to be tokenized.
+   * @param escapeStart is the string used to start escaping of a token. May NOT
+   *        be the empty string. The string has to be free of
+   *        <code>delimiters</code>.
+   * @param escapeEnd is the string used to end escaping of a token. May NOT be
+   *        the empty string.The string has to be free of
+   *        <code>delimiters</code>.
+   * @param delimiters are the characters that will be detected as delimiters.
+   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or
+   *         <code>escapeEnd</code> is an empty string or contains a character
+   *         of <code>delimiters</code>, or one of them is <code>null</code>
+   *         while the other is not, or both are not <code>null</code> but
+   *         {@link Object#equals(Object) equal} to each other.
+   * 
+   * @since 2.0.0
+   */
+  public StringTokenizer(char[] string, String escapeStart, String escapeEnd, char... delimiters)
+      throws NlsIllegalArgumentException {
+
+    super();
+    this.string = string;
+    this.delimiters = delimiters;
+    if (escapeStart == null) {
+      if (escapeEnd != null) {
+        throw new NlsIllegalArgumentException(escapeEnd, "escapeEnd (escapeStart=null)");
+      }
+      this.escapeStart = null;
+      this.escapeEnd = null;
+    } else {
+      if (escapeStart.equals(escapeEnd)) {
+        throw new NlsIllegalArgumentException(escapeEnd, "escapeStart=escapeEnd");
+      }
+      if (escapeStart.length() == 0) {
+        throw new NlsIllegalArgumentException(escapeStart, "escapeStart");
+      }
+      if ((escapeEnd == null) || (escapeEnd.length() == 0)) {
+        throw new NlsIllegalArgumentException(escapeEnd, "escapeEnd");
+      }
+      this.escapeStart = escapeStart.toCharArray();
+      this.escapeEnd = escapeEnd.toCharArray();
+      if (containsDelimiter(this.escapeStart, delimiters)) {
+        throw new NlsIllegalArgumentException(escapeStart, "escapeStart");
+      }
+      if (containsDelimiter(this.escapeEnd, delimiters)) {
+        throw new NlsIllegalArgumentException(escapeEnd, "escapeEnd");
+      }
+    }
+    this.index = -1;
+    findFirst();
+  }
+
+  /**
    * The constructor.
    * 
    * @param string is the string to be tokenized.
@@ -61,11 +154,29 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    */
   public StringTokenizer(char[] string, char... delimiters) {
 
-    super();
-    this.string = string;
-    this.delimiters = delimiters;
-    this.index = -1;
-    findFirst();
+    this(string, null, null, delimiters);
+  }
+
+  /**
+   * This method checks that the given <code>escape</code> sequence does NOT
+   * contain any of the <code>delimiters</code>.
+   * 
+   * @param escape is the escape-sequence to check.
+   * @param delimiters are the delimiters that should NOT be contained in
+   *        <code>escape</code>.
+   * @return <code>true</code> if <code>escape</code> contains a character of
+   *         <code>delimiters</code>, <code>false</code> otherwise.
+   */
+  private static boolean containsDelimiter(char[] escape, char[] delimiters) {
+
+    for (char c : escape) {
+      for (char d : delimiters) {
+        if (d == c) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /**
@@ -86,18 +197,100 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
       return null;
     }
     this.index++;
-    int start = this.index;
-    while (this.index < this.string.length) {
-      char c = this.string[this.index];
-      for (char delimiter : this.delimiters) {
-        if (c == delimiter) {
-          String result = new String(this.string, start, this.index - start);
-          return result;
+    int start;
+    int end;
+    // a token can be escaped, then it has to be in the form
+    // <escapeStart><token><escapeEnd>
+    // and is followed by a delimiter or the end of the string.
+    // be aware that <token> itself can also recursively contain any sequence of
+    // <escapeStart><token><escapeEnd>
+    if ((this.escapeStart != null) && containsSubstring(this.escapeStart, this.index)) {
+      // token is escaped...
+      int rawStart = this.index;
+      this.index = this.index + this.escapeStart.length;
+      start = this.index;
+      end = start;
+      int escapeDeepth = 1;
+      while (this.index < this.string.length) {
+        if ((this.escapeStart != null) && containsSubstring(this.escapeStart, this.index)) {
+          escapeDeepth++;
+          this.index = this.index + this.escapeStart.length;
+        } else if ((this.escapeEnd != null) && containsSubstring(this.escapeEnd, this.index)) {
+          escapeDeepth--;
+          if (escapeDeepth == 0) {
+            end = this.index;
+            this.index = this.index + this.escapeEnd.length;
+            break;
+          }
+          this.index = this.index + this.escapeEnd.length;
+        } else {
+          this.index++;
         }
       }
-      this.index++;
+      if (escapeDeepth != 0) {
+        // missing escapeEnd
+        StringBuilder format = new StringBuilder();
+        format.append(this.escapeStart);
+        format.append('*');
+        format.append(this.escapeEnd);
+        throw new NlsParseException(new String(this.string, rawStart, this.index - rawStart),
+            format, "token");
+      }
+      if (this.index < this.string.length) {
+        char c = this.string[this.index];
+        boolean isDelimiter = false;
+        for (char delimiter : this.delimiters) {
+          if (c == delimiter) {
+            isDelimiter = true;
+            break;
+          }
+        }
+        if (!isDelimiter) {
+          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart),
+              new String(this.escapeEnd) + this.delimiters[0], "token");
+        }
+      }
+    } else {
+      start = this.index;
+      while (this.index < this.string.length) {
+        char c = this.string[this.index];
+        boolean isDelimiter = false;
+        for (char delimiter : this.delimiters) {
+          if (c == delimiter) {
+            isDelimiter = true;
+            break;
+          }
+        }
+        if (isDelimiter) {
+          break;
+        }
+        this.index++;
+      }
+      end = this.index;
     }
-    return new String(this.string, start, this.index - start);
+    return new String(this.string, start, end - start);
+  }
+
+  /**
+   * This method tests if the {@link #string} contains the given
+   * <code>substring</code> starting at the given <code>index</code>.
+   * 
+   * @param substring is the substring to check for.
+   * @param startIndex is the start index in {@link #string}.
+   * @return <code>true</code> if the given <code>substring</code> was found at
+   *         <code>index</code>.
+   */
+  protected boolean containsSubstring(char[] substring, int startIndex) {
+
+    if (substring.length < (this.string.length - startIndex)) {
+      for (int i = 0; i < substring.length; i++) {
+        if (substring[i] != this.string[startIndex + i]) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   /**

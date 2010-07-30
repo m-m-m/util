@@ -10,6 +10,8 @@ import static org.junit.Assert.fail;
 
 import java.util.NoSuchElementException;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 /**
@@ -20,7 +22,8 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class StringTokenizerTest {
 
-  public void checkTokenizer(char[] delimiters, String... strings) {
+  public void checkTokenizer(String escapeStart, String escapeEnd, char[] delimiters,
+      String... strings) {
 
     StringBuilder buffer = new StringBuilder();
     int delimiterIndex = 0;
@@ -59,9 +62,19 @@ public class StringTokenizerTest {
       fail("Exception expected");
     } catch (NoSuchElementException e) {
     }
-    checkTokenizer(new char[] { ',' }, "foo");
-    checkTokenizer(new char[] { ',', '.' }, "", "foo", "", "bar", "");
-    checkTokenizer(new char[] { ',', '.' }, "foo", "bar", "", "", "some");
-    checkTokenizer(new char[] { '-', '+', '_' }, "foo", "bar", "some", "", "");
+    checkTokenizer(null, null, new char[] { ',' }, "foo");
+    checkTokenizer(null, null, new char[] { ',', '.' }, "", "foo", "", "bar", "");
+    checkTokenizer(null, null, new char[] { ',', '.' }, "foo", "bar", "", "", "some");
+    checkTokenizer(null, null, new char[] { '-', '+', '_' }, "foo", "bar", "some", "", "");
   }
+
+  @Test
+  public void testTokenizerWithEscaping() {
+
+    StringTokenizer tokenizer = new StringTokenizer("{[foo,{[bar,thing]}]},some", "{[", "]}", ',');
+    Assert.assertEquals("foo,{[bar,thing]}", tokenizer.next());
+    Assert.assertEquals("some", tokenizer.next());
+    Assert.assertFalse("no next token expected", tokenizer.hasNext());
+  }
+
 }

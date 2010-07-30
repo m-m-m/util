@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import junit.framework.Assert;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
@@ -95,6 +96,7 @@ public abstract class PojoPathNavigatorTest {
     DefaultPojoPathFunctionManager functionManager = new DefaultPojoPathFunctionManager();
     String functionName = "fooOrBar";
     functionManager.registerFunction(function, functionName);
+    functionManager.initialize();
     // it is bad style to change the context on the run...
     DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
     defaultContext.setAdditionalFunctionManager(functionManager);
@@ -118,6 +120,7 @@ public abstract class PojoPathNavigatorTest {
     DefaultPojoPathFunctionManager functionManager = new DefaultPojoPathFunctionManager();
     String functionName = "fooOrBar";
     functionManager.registerFunction(function, functionName);
+    functionManager.initialize();
     DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
     defaultContext.setAdditionalFunctionManager(functionManager);
     PojoPathContext context = defaultContext;
@@ -355,10 +358,33 @@ public abstract class PojoPathNavigatorTest {
     }
     // function with unsupported operation...
     try {
-      navigator.set(new MyPojo(), "@" + functionName, PojoPathMode.CREATE_IF_NULL, context, "foo");
+      navigator.set(new MyPojo(), "@" + functionName, PojoPathMode.CREATE_IF_NULL, context,
+          Integer.valueOf(0));
       fail("exception expected");
     } catch (PojoPathFunctionUnsupportedOperationException e) {
     }
+  }
+
+  @Test
+  public void testFunction() {
+
+    PojoPathNavigator navigator = createNavigator();
+    PojoPathContext context = new DefaultPojoPathContext();
+
+    Object value;
+    Integer magic = Integer.valueOf(42);
+    value = navigator.get(magic, "@toString", PojoPathMode.RETURN_IF_NULL, context);
+    assertEquals("42", value);
+
+    FooOrBarFunction function = new FooOrBarFunction();
+    DefaultPojoPathFunctionManager functionManager = new DefaultPojoPathFunctionManager();
+    String functionName = "fooOrBar";
+    functionManager.registerFunction(function, functionName);
+    functionManager.initialize();
+    DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
+    defaultContext.setAdditionalFunctionManager(functionManager);
+    context = defaultContext;
+
   }
 
   @Test
@@ -371,11 +397,37 @@ public abstract class PojoPathNavigatorTest {
     // test using pojo
     MyPojo myPojo = new MyPojo();
     String foo = "42";
-    // navigator.set(myPojo, "foo", PojoPathMode.RETURN_IF_NULL, context, foo);
-    // value = navigator.get(myPojo, "foo", PojoPathMode.RETURN_IF_NULL,
-    // context);
-    // assertEquals(Integer.valueOf(foo), value);
+    navigator.set(myPojo, "foo", PojoPathMode.RETURN_IF_NULL, context, foo);
+    value = navigator.get(myPojo, "foo", PojoPathMode.RETURN_IF_NULL, context);
+    assertEquals(Integer.valueOf(foo), value);
 
+    FooFunction function = new FooFunction();
+    DefaultPojoPathFunctionManager functionManager = new DefaultPojoPathFunctionManager();
+    String functionName = "foo";
+    functionManager.registerFunction(function, functionName);
+    functionManager.initialize();
+    DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
+    defaultContext.setAdditionalFunctionManager(functionManager);
+    context = defaultContext;
+    foo = "43";
+    value = navigator.set(myPojo, "@foo", PojoPathMode.RETURN_IF_NULL, context, foo);
+    Assert.assertEquals(Integer.valueOf(foo), myPojo.getFoo());
+
+    CollectionPojo collectionPojo = new CollectionPojo();
+    Map<Integer, List<String[]>> map = new HashMap<Integer, List<String[]>>();
+    navigator.set(collectionPojo, "map", PojoPathMode.RETURN_IF_NULL, context, map);
+    Assert.assertSame(map, collectionPojo.getMap());
+    navigator.set(collectionPojo, "map.42", PojoPathMode.RETURN_IF_NULL, context, "<{[12,13]}>,24");
+    List<String[]> subValue = map.get(Integer.valueOf(42));
+    Assert.assertNotNull(subValue);
+    Assert.assertEquals(Integer.valueOf(2), Integer.valueOf(subValue.size()));
+    String[] firstArray = subValue.get(0);
+    Assert.assertEquals(Integer.valueOf(2), Integer.valueOf(firstArray.length));
+    Assert.assertEquals("12", firstArray[0]);
+    Assert.assertEquals("13", firstArray[1]);
+    String[] secondArray = subValue.get(1);
+    Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(secondArray.length));
+    Assert.assertEquals("24", secondArray[0]);
   }
 
   @Test
@@ -494,6 +546,56 @@ public abstract class PojoPathNavigatorTest {
 
   }
 
+  /**
+   * A {@link PojoPathFunction} that returns either foo or bar and is used for
+   * testing.
+   */
+  public static class FooFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
+
+    /**
+     * {@inheritDoc}
+     */
+    public Class<MyPojo> getInputClass() {
+
+      return MyPojo.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Class<Integer> getValueClass() {
+
+      return Integer.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Integer get(MyPojo actual, String functionName, PojoPathContext context) {
+
+      if (actual != null) {
+        actual.getFoo();
+      }
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer set(MyPojo actual, String functionName, Integer value, PojoPathContext context) {
+
+      Integer old = actual.getFoo();
+      actual.setFoo(value);
+      return old;
+    }
+
+  }
+
+  /**
+   * A {@link PojoPathFunction} that returns either foo or bar and is used for
+   * testing.
+   */
   public static class FooOrBarFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 
     /**
@@ -507,7 +609,7 @@ public abstract class PojoPathNavigatorTest {
     /**
      * {@inheritDoc}
      */
-    public Class<Integer> getOutputClass() {
+    public Class<Integer> getValueClass() {
 
       return Integer.class;
     }
@@ -542,7 +644,7 @@ public abstract class PojoPathNavigatorTest {
 
   public static class CollectionPojo {
 
-    private Map<String, List<String[]>> map;
+    private Map<Integer, List<String[]>> map;
 
     private String string;
 
@@ -550,12 +652,12 @@ public abstract class PojoPathNavigatorTest {
 
     private List<Object> list;
 
-    public Map<String, List<String[]>> getMap() {
+    public Map<Integer, List<String[]>> getMap() {
 
       return this.map;
     }
 
-    public void setMap(Map<String, List<String[]>> map) {
+    public void setMap(Map<Integer, List<String[]>> map) {
 
       this.map = map;
     }

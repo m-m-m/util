@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
-import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
@@ -58,6 +57,9 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   /** The command-line option to set the bundle-class. */
   public static final String OPTION_BUNDLE_CLASS = "--bundle";
 
+  /** The command-line option to set the locales. */
+  public static final String OPTION_LOCALE = "--locale";
+
   /** @see #getPath() */
   private static final String DEFAULT_BASE_PATH = "src/main/resources";
 
@@ -86,16 +88,13 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   private String datePattern;
 
   /** @see #getLocales() */
-  @CliArgument(name = "locales", addCloseTo = CliArgument.ID_LAST, //
-  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES, required = false)
+  @CliOption(name = OPTION_LOCALE, aliases = "-l", operand = "LOCALE", //
+  required = true, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
 
   /** @see #getBundleClass() */
-  // @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS",
-  // required = true, //
-  // usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
-  @CliArgument(name = "bundle", addCloseTo = CliArgument.ID_FIRST, //
-  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS, required = false)
+  @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", //
+  required = true, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
   private Class<? extends ResourceBundle> bundleClass;
 
   /** @see #getStreamUtil() */

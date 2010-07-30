@@ -151,17 +151,17 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("rawtypes")
   protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state, Object parentPojo, Object value) {
 
     PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
     PojoPropertyAccessorOneArg setAccessor = descriptor.getAccessor(currentPath.getSegment(),
         PojoPropertyAccessorOneArgMode.SET, true);
-    GenericType targetType = setAccessor.getPropertyType();
+    GenericType<?> targetType = setAccessor.getPropertyType();
+    Class<?> targetClass = setAccessor.getPropertyClass();
+    currentPath.setPojoClass(targetClass);
     currentPath.setPojoType(targetType);
-    Object convertedValue = convert(currentPath, context, value, setAccessor.getPropertyClass(),
-        targetType.getType());
+    Object convertedValue = convert(currentPath, context, value, targetClass, targetType);
     return setAccessor.invoke(parentPojo, convertedValue);
   }
 

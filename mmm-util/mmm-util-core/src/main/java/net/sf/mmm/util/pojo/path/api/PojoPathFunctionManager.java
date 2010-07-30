@@ -8,8 +8,8 @@ package net.sf.mmm.util.pojo.path.api;
  * Typically a {@link PojoPathNavigator} instance will have an
  * {@link PojoPathFunctionManager} to {@link #getFunction(String) resolve}
  * {@link PojoPathFunction}s. Further the {@link PojoPathContext} can
- * {@link PojoPathContext#getAdditionalFunctionManager() provide additional functions}
- * that are used prior.
+ * {@link PojoPathContext#getAdditionalFunctionManager() provide additional
+ * functions} that are used prior.
  * 
  * @see #getFunction(String)
  * 
@@ -28,7 +28,7 @@ public interface PojoPathFunctionManager {
    *         {@link PojoPathFunction} is registered for the given
    *         <code>functionName</code>.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   PojoPathFunction getFunction(String functionName);
 
 }
