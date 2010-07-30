@@ -45,7 +45,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    * @param collectionFactory is the collection factory used to create the
    *        internal {@link Collection} for the listeners.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   protected AbstractEventSource(CollectionFactory<? extends Collection> collectionFactory) {
 
     super();

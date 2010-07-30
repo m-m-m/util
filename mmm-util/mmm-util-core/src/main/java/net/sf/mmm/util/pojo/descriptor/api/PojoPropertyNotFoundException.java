@@ -22,9 +22,6 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -7713121978429674081L;
 
-  /** Key for the NLS message. */
-  private static final String KEY_MODE = "mode";
-
   /**
    * The constructor.
    * 
@@ -33,8 +30,8 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PROPERTY_NOT_FOUND, toMap(KEY_PROPERTY, propertyName, KEY_TYPE,
-        pojoType));
+    super(NlsBundleUtilCore.ERR_POJO_PROPERTY_NOT_FOUND, toMap(KEY_PROPERTY, propertyName,
+        KEY_TYPE, pojoType));
   }
 
   /**

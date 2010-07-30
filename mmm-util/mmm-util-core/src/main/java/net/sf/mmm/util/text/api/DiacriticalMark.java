@@ -203,6 +203,11 @@ public enum DiacriticalMark implements Datatype<Character> {
     }
   },
 
+  /**
+   * A mark that can be placed on top of some Latin characters (e.g. in French).
+   * It looks like a small '^'. If your environment supports unicode, you can
+   * see it here: &#770;
+   */
   CIRCUMFLEX(UnicodeUtil.CIRCUMFLEX_ACCENT, UnicodeUtil.COMBINING_CIRCUMFLEX_ACCENT,
       "circumflex accent") {
 
@@ -344,7 +349,7 @@ public enum DiacriticalMark implements Datatype<Character> {
     @Override
     protected void initialize() {
 
-    // empty... whatever this is good for...
+      // empty... whatever this is good for...
     }
 
   },

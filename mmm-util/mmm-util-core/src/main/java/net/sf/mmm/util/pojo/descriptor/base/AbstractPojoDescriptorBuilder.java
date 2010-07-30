@@ -39,7 +39,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    * @param mapFactory the factory used to create the
    *        {@link #getDescriptor(Class) descriptor-cache}.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public AbstractPojoDescriptorBuilder(MapFactory mapFactory) {
 
     super();

@@ -25,7 +25,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 public class PojoMap extends AbstractSimpleMap<String, Object> {
 
   /** @see #get(Object) */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("rawtypes")
   private final PojoDescriptor pojoDescriptor;
 
   /** @see #get(Object) */
