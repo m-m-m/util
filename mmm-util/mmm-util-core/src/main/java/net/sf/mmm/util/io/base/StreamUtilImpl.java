@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -37,8 +38,6 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pool.api.Pool;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 import net.sf.mmm.util.pool.base.NoCharArrayPool;
-
-import com.google.inject.Inject;
 
 /**
  * This is the implementation of the {@link StreamUtil} interface.

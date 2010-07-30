@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -29,8 +30,6 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
-
-import com.google.inject.Inject;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and
