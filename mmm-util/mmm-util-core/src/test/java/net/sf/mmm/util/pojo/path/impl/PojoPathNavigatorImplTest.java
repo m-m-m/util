@@ -28,6 +28,7 @@ public class PojoPathNavigatorImplTest extends PojoPathNavigatorTest {
     functionToString.initialize();
     functions.add(functionToString);
     functionManager.setFunctions(functions);
+    functionManager.initialize();
     navigator.setFunctionManager(functionManager);
     navigator.initialize();
     return navigator;

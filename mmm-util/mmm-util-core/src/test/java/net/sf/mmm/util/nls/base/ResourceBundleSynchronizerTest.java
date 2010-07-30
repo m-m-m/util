@@ -72,7 +72,8 @@ public class ResourceBundleSynchronizerTest {
     String locale1 = "de";
     int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH,
         targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
-        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(), locale1 });
+        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(),
+        ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
     NlsBundleUtilCore bundle = new NlsBundleUtilCore();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
