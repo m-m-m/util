@@ -7,10 +7,54 @@
   </properties>
   <body>
     <release version="2.0.0" date="2010-09-26" description="Subsequent release">
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Migrated to JSR 330. Replaced any <code>@Resource</code> with <code>@Inject</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="removed">
+        <![CDATA[
+        <code>net.sf.mmm.util.SpringConfigsUtilCore</code>: removed as obsolete with JSR 330.
+        <code>net/sf/mmm/util/**/beans-*.xml</code>: removed as obsolete with JSR 330.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction</code>: added (for easy JSR 330 plugin).
+        <code>net.sf.mmm.util.pojo.path.impl.function.PojoPathNamedFunctionToString</code>: added (as useful example).
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.cli</code>: added (now excellent CLI support offered).
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>: migrated to CLI, now API is slightly changed (not because old API could not be realized with CLI).
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator</code>: conversion for functions, collections and maps now working.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Hyphenation added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Line wrapping added.
+        ]]>
+      </action>
     </release>
     <release version="1.1.0" date="2009-01-07" description="Subsequent release">
       <action dev="hohwille" type="add">
-        <![CDATA[Added <code>net.sf.mmm.util.SpringConfigsUtilCore</code>.]]>
+        <![CDATA[
+        <code>net.sf.mmm.util.SpringConfigsUtilCore</code>: added.
+        ]]>
       </action>
       <action dev="hohwille" type="add">
         <![CDATA[

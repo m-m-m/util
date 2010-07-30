@@ -105,7 +105,8 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-changes-plugin</artifactId>
-          <version>2.3</version>
+          <!-- http://jira.codehaus.org/browse/MCHANGES-190 -->
+          <version>2.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -447,8 +448,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
+        <!-- http://jira.codehaus.org/browse/MCHANGES-190 -->
+        <!-- http://jira.codehaus.org/browse/MNG-3385 -->
+        <version>2.2</version>
+      	<!-- TODO: http://maven.apache.org/plugins/maven-changes-plugin/examples/configuring-trac-report.html -->
         <configuration>
           <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
+          <issueLinkTemplate>%URL%/ticket/%ISSUE%</issueLinkTemplate>
           <issueLinkTemplatePerSystem>
             <trac>%URL%/ticket/%ISSUE%</trac>
           </issueLinkTemplatePerSystem>
@@ -468,6 +474,10 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+        	<encoding>${project.build.sourceEncoding}</encoding>
+      	</configuration>
       </plugin>
       <!--
       <plugin>
