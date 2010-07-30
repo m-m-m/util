@@ -16,7 +16,7 @@
   <!-- the suggested java version for this project is java6, at least java5 is required -->
   <profiles>
     <profile>
-      <id>java5</id>
+      <id>java6</id>
       <activation>
         <jdk>1.6</jdk>
       </activation>
