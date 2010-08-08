@@ -51,7 +51,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     // HTML starts here
     ENTITY_MAP.put("apos", Character.valueOf((char) 39));
     // ISO-8859-1
-    ENTITY_MAP.put("nbsp", Character.valueOf(UnicodeUtil.NON_BREAKING_SPACE));
+    ENTITY_MAP.put("nbsp", Character.valueOf(UnicodeUtil.NO_BREAK_SPACE));
     ENTITY_MAP.put("iexcl", Character.valueOf((char) 161));
     ENTITY_MAP.put("cent", Character.valueOf((char) 162));
     ENTITY_MAP.put("pound", Character.valueOf((char) 163));

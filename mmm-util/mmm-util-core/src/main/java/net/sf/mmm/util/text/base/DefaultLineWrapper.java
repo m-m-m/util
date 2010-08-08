@@ -927,7 +927,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
 
       if ((c == '\n') || (c == '\r')) {
         return TextSegmentType.NEWLINE;
-      } else if ((c == UnicodeUtil.NON_BREAKING_SPACE) || (c == ',') || (c == '!') || (c == ';')
+      } else if ((c == UnicodeUtil.NO_BREAK_SPACE) || (c == ',') || (c == '!') || (c == ';')
           || (c == '?')) {
         return TextSegmentType.NON_BREAKING_CHARACTER;
       } else if ((c == '.') || (c == ',') || (c == '!') || (c == ';') || (c == '?')) {

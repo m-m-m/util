@@ -6,6 +6,7 @@ package net.sf.mmm.util.text.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.text.api.DiacriticalMark;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
@@ -27,13 +28,15 @@ public class UnicodeUtilImpl implements UnicodeUtil {
 
   static {
     CHARACTER_TO_ASCII_MAP = new HashMap<Character, String>();
-    CHARACTER_TO_ASCII_MAP.put(NON_BREAKING_SPACE, " ");
+    CHARACTER_TO_ASCII_MAP.put(NO_BREAK_SPACE, " ");
     CHARACTER_TO_ASCII_MAP.put(SOFT_HYPHEN, "-");
     CHARACTER_TO_ASCII_MAP.put(MINUS_SIGN, "-");
-    CHARACTER_TO_ASCII_MAP.put('ä', "ae");
-    CHARACTER_TO_ASCII_MAP.put('ö', "oe");
-    CHARACTER_TO_ASCII_MAP.put('ü', "ue");
-
+    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_SHARP_S, "" + LATIN_SMALL_LETTER_S);
+    for (DiacriticalMark mark : DiacriticalMark.values()) {
+      for (char composed : mark.getComposedCharacters()) {
+        CHARACTER_TO_ASCII_MAP.put(composed, mark.normalizeToAscii(composed));
+      }
+    }
   }
 
   /**

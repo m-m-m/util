@@ -33,7 +33,7 @@ public class UnicodeUtilTest {
 
     System.out.println(UnicodeUtil.MINUS_SIGN);
     System.out.println(UnicodeUtil.SOFT_HYPHEN);
-    System.out.println(UnicodeUtil.NON_BREAKING_SPACE);
+    System.out.println(UnicodeUtil.NO_BREAK_SPACE);
   }
 
 }
