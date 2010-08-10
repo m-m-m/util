@@ -6,7 +6,7 @@ package net.sf.mmm.content.parser.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
@@ -84,7 +84,7 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
   /**
    * @param genericParser is the generic Parser to set.
    */
-  @Resource
+  @Inject
   public void setGenericParser(ContentParserGeneric genericParser) {
 
     getInitializationState().requireNotInitilized();

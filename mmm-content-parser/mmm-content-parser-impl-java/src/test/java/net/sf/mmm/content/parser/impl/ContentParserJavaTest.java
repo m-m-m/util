@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.content.parser.impl.ContentParserJava;
+import net.sf.mmm.content.parser.impl.java.ContentParserJava;
 
 /**
  * This is the {@link TestCase} for {@link ContentParserJava}.

@@ -5,8 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
   
   <import resource="classpath:net/sf/mmm/util/beans-core.xml"/>
-  <bean id="net.sf.mmm.content.parser.api.ContentParser-doc" class="net.sf.mmm.content.parser.impl.ContentParserDoc"/>
-  <bean id="net.sf.mmm.content.parser.api.ContentParser-ppt" class="net.sf.mmm.content.parser.impl.ContentParserPpt"/>
-  <bean id="net.sf.mmm.content.parser.api.ContentParser-xls" class="net.sf.mmm.content.parser.impl.ContentParserXls"/>
+  <bean id="net.sf.mmm.content.parser.api.ContentParser-doc" class="net.sf.mmm.content.parser.impl.poi.poi.ContentParserDoc"/>
+  <bean id="net.sf.mmm.content.parser.api.ContentParser-ppt" class="net.sf.mmm.content.parser.impl.poi.poi.ContentParserPpt"/>
+  <bean id="net.sf.mmm.content.parser.api.ContentParser-xls" class="net.sf.mmm.content.parser.impl.poi.poi.ContentParserXls"/>
   
 </beans>
