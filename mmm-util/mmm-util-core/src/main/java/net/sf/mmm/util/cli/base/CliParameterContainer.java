@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -32,19 +34,25 @@ public abstract class CliParameterContainer {
   /** @see #getGetter() */
   private final PojoPropertyAccessorNonArg getter;
 
+  /** @see #getConstraint() */
+  private final Annotation constraint;
+
   /**
    * The constructor.
    * 
    * @param setter is the {@link #getSetter() setter}.
    * @param getter is the {@link #getGetter() getter}.
+   * @param constraint is the {@link #getConstraint() constraint}.
    */
-  public CliParameterContainer(PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter) {
+  public CliParameterContainer(PojoPropertyAccessorOneArg setter,
+      PojoPropertyAccessorNonArg getter, Annotation constraint) {
 
     super();
     assert (setter.getMode() == PojoPropertyAccessorOneArgMode.SET);
     this.setter = setter;
     assert ((getter == null) || (getter.getMode() == PojoPropertyAccessorNonArgMode.GET));
     this.getter = getter;
+    this.constraint = constraint;
   }
 
   /**
@@ -70,6 +78,41 @@ public abstract class CliParameterContainer {
   public PojoPropertyAccessorNonArg getGetter() {
 
     return this.getter;
+  }
+
+  /**
+   * This method gets the optional constraint-annotation.
+   * 
+   * @see net.sf.mmm.util.cli.api.CliConstraintCollection
+   * @see net.sf.mmm.util.cli.api.CliConstraintNumber
+   * @see net.sf.mmm.util.cli.api.CliConstraintFile
+   * 
+   * @return the constraint or <code>null</code> for no constraint.
+   */
+  public Annotation getConstraint() {
+
+    return this.constraint;
+  }
+
+  /**
+   * This method gets the {@link #getConstraint() constraint} in a type-safe
+   * way.
+   * 
+   * @param <A> is the generic type of the requested annotation.
+   * @param annotationClass is the expected type of the annotation.
+   * @return the constraint or <code>null</code> for no constraint.
+   */
+  public <A extends Annotation> A getConstraint(Class<A> annotationClass) {
+
+    NlsNullPointerException.checkNotNull(Class.class, annotationClass);
+    if (this.constraint == null) {
+      return null;
+    }
+    try {
+      return annotationClass.cast(this.constraint);
+    } catch (ClassCastException e) {
+      throw new NlsClassCastException(e, this.constraint, annotationClass);
+    }
   }
 
   /**
@@ -104,11 +147,26 @@ public abstract class CliParameterContainer {
   public boolean isArrayMapOrCollection() {
 
     Class<?> propertyClass = this.setter.getPropertyClass();
-    if (propertyClass.isArray()) {
+    return isArrayMapOrCollection(propertyClass);
+  }
+
+  /**
+   * This method determines if the given <code>type</code> is a container-type
+   * (an array, {@link Collection} or {@link Map}).
+   * 
+   * @see CliValueContainer#isArrayMapOrCollection()
+   * 
+   * @param type is the {@link Class} to check.
+   * @return <code>true</code> if the given <code>type</code> is a
+   *         container-type.
+   */
+  protected static boolean isArrayMapOrCollection(Class<?> type) {
+
+    if (type.isArray()) {
       return true;
-    } else if (Collection.class.isAssignableFrom(propertyClass)) {
+    } else if (Collection.class.isAssignableFrom(type)) {
       return true;
-    } else if (Map.class.isAssignableFrom(propertyClass)) {
+    } else if (Map.class.isAssignableFrom(type)) {
       return true;
     }
     return false;

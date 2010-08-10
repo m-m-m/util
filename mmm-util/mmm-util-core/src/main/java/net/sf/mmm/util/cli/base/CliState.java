@@ -3,7 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,6 +18,10 @@ import java.util.Set;
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException;
 import net.sf.mmm.util.cli.api.CliClassNoPropertyException;
+import net.sf.mmm.util.cli.api.CliConstraintCollection;
+import net.sf.mmm.util.cli.api.CliConstraintFile;
+import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
+import net.sf.mmm.util.cli.api.CliConstraintNumber;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModeUndefinedException;
 import net.sf.mmm.util.cli.api.CliOption;
@@ -34,6 +41,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.reflect.api.AnnotationUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 
@@ -50,14 +59,17 @@ import org.slf4j.Logger;
  */
 public class CliState extends CliClassContainer {
 
+  /** @see #getReflectionUtil() */
+  private final ReflectionUtil reflectionUtil;
+
+  /** @see #getAnnotationUtil() */
+  private final AnnotationUtil annotationUtil;
+
   /** @see #getOption(String) */
   private final Map<String, CliOptionContainer> name2OptionMap;
 
   /** @see #getOptions() */
   private final List<CliOptionContainer> optionList;
-
-  /** @see #getArguments(CliModeObject) */
-  private final Map<String, List<CliArgumentContainer>> mode2argumentsMap;
 
   /** @see #getArguments() */
   private final List<CliArgumentContainer> arguments;
@@ -71,16 +83,18 @@ public class CliState extends CliClassContainer {
    *        the {@link #getStateClass() stateClass}.
    * @param logger is the {@link Logger} to use (e.g. for
    *        {@link CliStyleHandling}).
+   * @param reflectionUtil is the {@link ReflectionUtil} instance to use.
+   * @param annotationUtil is the {@link AnnotationUtil} instance to use.
    */
   public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory,
-      Logger logger) {
+      Logger logger, ReflectionUtil reflectionUtil, AnnotationUtil annotationUtil) {
 
     super(stateClass, logger);
     this.name2OptionMap = new HashMap<String, CliOptionContainer>();
     this.optionList = new ArrayList<CliOptionContainer>();
-    this.mode2argumentsMap = new HashMap<String, List<CliArgumentContainer>>();
     this.arguments = new ArrayList<CliArgumentContainer>();
-    int nullIndex = -1;
+    this.reflectionUtil = reflectionUtil;
+    this.annotationUtil = annotationUtil;
     boolean fieldAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
         .createPrivateFieldDescriptorBuilder());
     boolean methodAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
@@ -90,46 +104,32 @@ public class CliState extends CliClassContainer {
       throw new CliClassNoPropertyException(stateClass);
     }
     initializeArguments();
-
-    for (String modeId : this.mode2argumentsMap.keySet()) {
-      List<CliArgumentContainer> argumentList = this.mode2argumentsMap.get(modeId);
-      boolean optional = false;
-      CliArgumentContainer lastArgument = null;
-      for (int i = 0; i < argumentList.size(); i++) {
-        CliArgumentContainer argument = argumentList.get(i);
-        if (argument == null) {
-          // TODO no null values have to be left over...
-          nullIndex = i;
-        } else {
-          if (nullIndex > -1) {
-            // TODO own exception
-            throw new IllegalStateException(argument + " is illegal because index '" + nullIndex
-                + "' is missing!");
-          }
-          if (argument.getArgument().required()) {
-            if (optional) {
-              // TODO own exception
-              throw new IllegalStateException(argument
-                  + " can not be required after optional argument " + lastArgument + "!");
-            }
-          } else {
-            optional = true;
-          }
-          lastArgument = argument;
-        }
-      }
-    }
   }
 
   /**
-   * This method initializes the {@link #mode2argumentsMap arguments}.
+   * @return the annotationUtil
+   */
+  protected AnnotationUtil getAnnotationUtil() {
+
+    return this.annotationUtil;
+  }
+
+  /**
+   * @return the reflectionUtil
+   */
+  protected ReflectionUtil getReflectionUtil() {
+
+    return this.reflectionUtil;
+  }
+
+  /**
+   * This method initializes the {@link #arguments}. This means that the
+   * {@link #arguments} are ordered properly.
+   * 
+   * @see CliArgument#addCloseTo()
+   * @see CliArgument#addAfter()
    */
   protected void initializeArguments() {
-
-    // 0 (before #first), 1(after 2), 2 (after 3), 3 (after 1), 9 (after #last)
-    // -->
-    // 3, 2, 1, error
-    // Create Node for each arg, and add nodes to map
 
     Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap = new HashMap<String, BasicDoubleLinkedNode<CliArgumentContainer>>();
     BasicDoubleLinkedNode<CliArgumentContainer> startHead = null;
@@ -201,13 +201,6 @@ public class CliState extends CliClassContainer {
       }
       node.addToList(this.arguments);
     }
-    // for (String modeId : getModeIds()) {
-    // CliModeObject modeContainer = getMode(modeId);
-    // List<CliArgumentContainer> modeArguments = new
-    // ArrayList<CliArgumentContainer>();
-    //
-    // this.mode2argumentsMap.put(modeId, modeArguments);
-    // }
   }
 
   /**
@@ -283,28 +276,108 @@ public class CliState extends CliClassContainer {
       if (setter != null) {
         AccessibleObject accessible = setter.getAccessibleObject();
         CliOption option = accessible.getAnnotation(CliOption.class);
-        if (option != null) {
-          annotationFound = true;
-          PojoPropertyAccessorNonArg getter = propertyDescriptor
-              .getAccessor(PojoPropertyAccessorNonArgMode.GET);
-          CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter);
-          addOption(optionContainer);
-        }
         CliArgument argument = accessible.getAnnotation(CliArgument.class);
-        if (argument != null) {
+        if ((option != null) && (argument != null)) {
+          // property can not both be option and argument
+          throw new CliOptionAndArgumentAnnotationException(propertyDescriptor.getName());
+        } else if ((option != null) || (argument != null)) {
           annotationFound = true;
-          if (option != null) {
-            throw new CliOptionAndArgumentAnnotationException(propertyDescriptor.getName());
-          }
           PojoPropertyAccessorNonArg getter = propertyDescriptor
               .getAccessor(PojoPropertyAccessorNonArgMode.GET);
-          CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter,
-              getter);
-          addArgument(argumentContainer);
+          Annotation constraint = findConstraintAnnotation(setter);
+          if (option != null) {
+            CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter,
+                constraint);
+            addOption(optionContainer);
+          } else {
+            assert (argument != null);
+            CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter,
+                getter, constraint);
+            addArgument(argumentContainer);
+          }
         }
       }
     }
     return annotationFound;
+  }
+
+  /**
+   * This method is a "macro" for reading an annotation from some property.
+   * 
+   * @param <A> is the generic type of the requested annotation.
+   * @param method is the potentially annotated method or <code>null</code> if
+   *        no method available.
+   * @param accessible is the {@link AccessibleObject} to use as fallback if
+   *        <code>method</code> is <code>null</code>.
+   * @param annotationUtil is the {@link AnnotationUtil} used for
+   *        {@link AnnotationUtil#getMethodAnnotation(Method, Class)}.
+   * @param annotationClass is the type of the requested annotation.
+   * @return the requested annotation or <code>null</code> if no such annotation
+   *         exists.
+   */
+  private static <A extends Annotation> A getAnnotation(Method method, AccessibleObject accessible,
+      AnnotationUtil annotationUtil, Class<A> annotationClass) {
+
+    if (method == null) {
+      return accessible.getAnnotation(annotationClass);
+    } else {
+      return annotationUtil.getMethodAnnotation(method, annotationClass);
+    }
+  }
+
+  /**
+   * This method finds an according
+   * {@link CliParameterContainer#getConstraint() constraint annotation} and if
+   * present validates it.
+   * 
+   * @param setter is the setter that may be annotated with a constraint.
+   * @return the requested constraint or <code>null</code> if none is present.
+   * @throws CliConstraintInvalidException if an invalid constraint was found.
+   */
+  protected Annotation findConstraintAnnotation(PojoPropertyAccessorOneArg setter)
+      throws CliConstraintInvalidException {
+
+    Class<?> propertyClass = setter.getPropertyClass();
+    AccessibleObject accessible = setter.getAccessibleObject();
+    Method method = null;
+    if (accessible instanceof Method) {
+      method = (Method) accessible;
+    }
+    Annotation constraint = null;
+    CliConstraintNumber constraintNumber = getAnnotation(method, accessible, this.annotationUtil,
+        CliConstraintNumber.class);
+    if (constraintNumber != null) {
+      if (constraintNumber.max() < constraintNumber.min()) {
+        throw new CliConstraintInvalidException(setter, constraintNumber);
+      }
+      if (!Number.class.isAssignableFrom(this.reflectionUtil.getNonPrimitiveType(propertyClass))) {
+        throw new CliConstraintInvalidException(constraintNumber, setter);
+      }
+      constraint = constraintNumber;
+    }
+    CliConstraintCollection constraintCollection = getAnnotation(method, accessible,
+        this.annotationUtil, CliConstraintCollection.class);
+    if (constraintCollection != null) {
+      if (constraintCollection.min() < 0) {
+        throw new CliConstraintInvalidException(setter, constraintCollection);
+      }
+      if (constraintCollection.max() < constraintCollection.min()) {
+        throw new CliConstraintInvalidException(setter, constraintCollection);
+      }
+      if (!CliParameterContainer.isArrayMapOrCollection(propertyClass)) {
+        throw new CliConstraintInvalidException(constraintCollection, setter);
+      }
+      constraint = constraintCollection;
+    }
+    CliConstraintFile constraintFile = getAnnotation(method, accessible, this.annotationUtil,
+        CliConstraintFile.class);
+    if (constraintFile != null) {
+      if (!File.class.equals(propertyClass)) {
+        throw new CliConstraintInvalidException(constraintFile, setter);
+      }
+      constraint = constraintFile;
+    }
+    return constraint;
   }
 
   /**

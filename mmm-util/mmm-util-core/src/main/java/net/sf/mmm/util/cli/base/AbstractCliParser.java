@@ -84,7 +84,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     this.state = state;
     this.cliState = cliState;
     this.configuration = configuration;
-    this.valueMap = new CliValueMap(configuration);
+    this.valueMap = new CliValueMap(cliState, configuration, getLogger());
     for (CliOptionContainer option : this.cliState.getOptions()) {
       checkOption(option);
     }
@@ -202,8 +202,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       }
       argument = parameterConsumer.getNext();
     }
-    valueContainer.setValue(argument, optionContainer, this.cliState.getCliStyle(),
-        this.configuration, getLogger());
+    valueContainer.setValue(argument);
   }
 
   /**
@@ -219,9 +218,9 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       CliArgumentContainer argumentContainer, CliParameterConsumer parameterConsumer) {
 
     CliValueContainer valueContainer = this.valueMap.getOrCreate(argumentContainer);
-    valueContainer.setValue(argument, argumentContainer, this.cliState.getCliStyle(),
-        this.configuration, getLogger());
+    valueContainer.setValue(argument);
     if (!valueContainer.isArrayMapOrCollection()) {
+      // TODO: determines on config for separator/single-value
       parserState.argumentIndex++;
     }
   }

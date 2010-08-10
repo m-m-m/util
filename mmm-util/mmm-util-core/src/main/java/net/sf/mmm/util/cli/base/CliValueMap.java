@@ -9,6 +9,8 @@ import java.util.Map;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
+import org.slf4j.Logger;
+
 /**
  * This class is a container for the values for
  * {@link net.sf.mmm.util.cli.api.CliOption options} and
@@ -25,16 +27,26 @@ public class CliValueMap {
   /** The {@link CliParserConfiguration}. */
   private final CliParserConfiguration configuration;
 
+  /** The {@link Logger} to use. */
+  private final Logger logger;
+
+  /** The {@link CliState}. */
+  private final CliState cliState;
+
   /**
    * The constructor.
    * 
+   * @param cliState is the {@link CliState}.
    * @param configuration is the {@link CliParserConfiguration}.
+   * @param logger is the {@link Logger} to use.
    */
-  public CliValueMap(CliParserConfiguration configuration) {
+  public CliValueMap(CliState cliState, CliParserConfiguration configuration, Logger logger) {
 
     super();
     this.map = new HashMap<CliParameterContainer, CliValueContainer>();
+    this.cliState = cliState;
     this.configuration = configuration;
+    this.logger = logger;
   }
 
   /**
@@ -74,20 +86,23 @@ public class CliValueMap {
       PojoPropertyAccessorOneArg setter = parameterContainer.getSetter();
       Class<?> propertyClass = setter.getPropertyClass();
       if (propertyClass.isArray()) {
-        result = new CliValueContainerArray(this.configuration.getCollectionReflectionUtil(),
-            propertyClass.getComponentType());
+        result = new CliValueContainerArray(parameterContainer, this.cliState, this.configuration,
+            this.logger);
       } else if (Collection.class.isAssignableFrom(propertyClass)) {
         Class<? extends Collection<?>> collectionClass = (Class<? extends Collection<?>>) propertyClass;
         Collection<Object> collection = this.configuration.getCollectionFactoryManager()
             .getCollectionFactory(collectionClass).create();
-        result = new CliValueContainerCollection(collection);
+        result = new CliValueContainerCollection(parameterContainer, this.cliState,
+            this.configuration, this.logger, collection);
       } else if (Map.class.isAssignableFrom(propertyClass)) {
         Class<? extends Map<?, ?>> mapClass = (Class<? extends Map<?, ?>>) propertyClass;
         Map<Object, Object> mapValue = this.configuration.getCollectionFactoryManager()
             .getMapFactory(mapClass).create();
-        result = new CliValueContainerMap(mapValue);
+        result = new CliValueContainerMap(parameterContainer, this.cliState, this.configuration,
+            this.logger, mapValue);
       } else {
-        result = new CliValueContainerObject();
+        result = new CliValueContainerObject(parameterContainer, this.cliState, this.configuration,
+            this.logger);
       }
       this.map.put(parameterContainer, result);
     }

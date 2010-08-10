@@ -24,7 +24,9 @@ import java.lang.annotation.Target;
 public @interface CliConstraintCollection {
 
   /**
-   * The minimum allowed value.
+   * The minimum allowed
+   * {@link net.sf.mmm.util.reflect.api.CollectionReflectionUtil#getSize(Object)
+   * size}. This value should be positive.
    */
   int min() default 1;
 

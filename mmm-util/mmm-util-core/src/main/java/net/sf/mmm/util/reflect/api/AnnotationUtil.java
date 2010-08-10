@@ -68,7 +68,7 @@ public interface AnnotationUtil {
    *        {@link Class#isInterface() interface}, {@link Class#isPrimitive()
    *        primitive}, {@link Class#isArray() array}, {@link Class#isEnum()
    *        enum}, or {@link Class#isAnnotation() annotation}.
-   * @param annotation is the type of the requested annotation.
+   * @param annotationClass is the type of the requested annotation.
    * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedClass</code> nor one of its
    *         {@link Class#getSuperclass() super-classes} are
@@ -79,7 +79,7 @@ public interface AnnotationUtil {
    *         {@link #isAnnotationForType(Class, ElementType) applicable} for
    *         {@link ElementType#TYPE classes}.
    */
-  <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass, Class<A> annotation)
+  <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass, Class<A> annotationClass)
       throws IllegalArgumentException;
 
   /**
@@ -89,7 +89,7 @@ public interface AnnotationUtil {
    * Instead of {@link #getClassAnnotation(Class, Class)} this method will also
    * scan implemented interfaces for the given <code>annotation</code>.<br>
    * This method is only useful if the given <code>annotation</code> is a
-   * {@link java.lang.annotation.RetentionPolicy#RUNTIME runtime}.
+   * {@link java.lang.annotation.RetentionPolicy#RUNTIME runtime} annotation.
    * 
    * @param <A> is the type of the requested annotation.
    * @param annotatedType is the class or interface potentially annotated with
@@ -97,7 +97,7 @@ public interface AnnotationUtil {
    *        {@link Class#isPrimitive() primitive}, {@link Class#isArray() array}
    *        , {@link Class#isEnum() enum}, or {@link Class#isAnnotation()
    *        annotation}.
-   * @param annotation is the type of the requested annotation.
+   * @param annotationClass is the type of the requested annotation.
    * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedType</code> nor one of its
    *         {@link Class#getSuperclass() super-classes}, or any implemented
@@ -105,7 +105,7 @@ public interface AnnotationUtil {
    *         directly or indirectly) are {@link Class#getAnnotation(Class)
    *         annotated} with the given <code>annotation</code>.
    */
-  <A extends Annotation> A getTypeAnnotation(Class<?> annotatedType, Class<A> annotation);
+  <A extends Annotation> A getTypeAnnotation(Class<?> annotatedType, Class<A> annotationClass);
 
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of
@@ -118,13 +118,13 @@ public interface AnnotationUtil {
    * @param <A> is the type of the requested annotation.
    * @param annotatedMethod is the method potentially annotated with the given
    *        <code>annotation</code>.
-   * @param annotation is the type of the requested annotation.
+   * @param annotationClass is the type of the requested annotation.
    * @return the requested annotation or <code>null</code> if neither the
    *         <code>annotatedMethod</code> nor one of its
    *         {@link ReflectionUtil#getParentMethod(Method) parent methods} are
    *         {@link Method#getAnnotation(Class) annotated} with the given
    *         <code>annotation</code>.
    */
-  <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotation);
+  <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotationClass);
 
 }

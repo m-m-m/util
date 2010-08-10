@@ -74,6 +74,18 @@ public interface NlsObject {
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_ARGUMENT = "argument";
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_FUNCTION = "function";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_OPERATION = "operation";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_TARGET_TYPE = "targetType";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_ANNOTATION = "annotation";
+
   /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.

@@ -27,11 +27,12 @@ public class CliOptionContainer extends CliParameterContainer {
    * @param option is the {@link #getOption() option}.
    * @param setter is the {@link #getSetter() setter}.
    * @param getter is the {@link #getGetter() getter}.
+   * @param constraint is the {@link #getConstraint() constraint}.
    */
   public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter) {
+      PojoPropertyAccessorNonArg getter, Annotation constraint) {
 
-    super(setter, getter);
+    super(setter, getter, constraint);
     this.option = option;
   }
 

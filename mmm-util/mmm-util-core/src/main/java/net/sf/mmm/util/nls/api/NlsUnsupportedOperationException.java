@@ -23,9 +23,6 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1008016155549441562L;
 
-  /** key for the NLS message. */
-  private static final String KEY_OPERATION = "object";
-
   /**
    * The constructor.
    */

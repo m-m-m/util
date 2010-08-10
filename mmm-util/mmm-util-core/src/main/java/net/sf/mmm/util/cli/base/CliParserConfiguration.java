@@ -7,6 +7,7 @@ import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.text.api.LineWrapper;
@@ -31,6 +32,11 @@ public interface CliParserConfiguration {
    * @return the {@link ReflectionUtil} instance to use.
    */
   ReflectionUtil getReflectionUtil();
+
+  /**
+   * @return the {@link AnnotationUtil} instance to use.
+   */
+  AnnotationUtil getAnnotationUtil();
 
   /**
    * @return the {@link CollectionReflectionUtil} instance to use.

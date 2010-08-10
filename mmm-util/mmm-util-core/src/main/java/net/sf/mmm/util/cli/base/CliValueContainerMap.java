@@ -5,6 +5,8 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.Map;
 
+import net.sf.mmm.util.cli.api.CliConstraintCollection;
+import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
@@ -13,6 +15,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.value.api.GenericValueConverter;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 import org.slf4j.Logger;
 
@@ -22,7 +25,7 @@ import org.slf4j.Logger;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliValueContainerMap implements CliValueContainer {
+public class CliValueContainerMap extends AbstractCliValueContainer {
 
   /** @see #getValue() */
   private final Map<Object, Object> map;
@@ -30,11 +33,17 @@ public class CliValueContainerMap implements CliValueContainer {
   /**
    * The constructor.
    * 
+   * @param parameterContainer is the {@link #getParameterContainer()
+   *        parameter-container}.
+   * @param cliState is the {@link #getCliState() state}.
+   * @param configuraiton is the {@link #getConfiguration() configuration}.
+   * @param logger is the {@link #getLogger() logger}.
    * @param value is the initial, empty {@link Map}-{@link #getValue() value}.
    */
-  public CliValueContainerMap(Map<Object, Object> value) {
+  public CliValueContainerMap(CliParameterContainer parameterContainer, CliState cliState,
+      CliParserConfiguration configuraiton, Logger logger, Map<Object, Object> value) {
 
-    super();
+    super(parameterContainer, cliState, configuraiton, logger);
     assert (value != null);
     this.map = value;
   }
@@ -48,20 +57,28 @@ public class CliValueContainerMap implements CliValueContainer {
   }
 
   /**
-   * This method is like
-   * {@link #setValue(String, CliParameterContainer, CliStyle, CliParserConfiguration, Logger)}
-   * but for a single entry.
+   * {@inheritDoc}
+   */
+  @Override
+  public void validate() throws CliConstraintInvalidException {
+
+    super.validate();
+    CliParameterContainer parameterContainer = getParameterContainer();
+    CliConstraintCollection constraint = parameterContainer
+        .getConstraint(CliConstraintCollection.class);
+    if (constraint != null) {
+      ValueOutOfRangeException.checkRange(Integer.valueOf(this.map.size()),
+          Integer.valueOf(constraint.min()), Integer.valueOf(constraint.max()), parameterContainer);
+    }
+  }
+
+  /**
+   * This method is like {@link #setValue(String)} but for a single entry.
    * 
    * @param entry is a single map-entry in the form "key=value".
-   * @param parameterContainer is the {@link CliParameterContainer}.
-   * @param cliStyle is the {@link CliState}.
-   * @param configuration is the {@link CliParserConfiguration}.
-   * @param logger is the {@link Logger} used to log {@link CliStyle} anomalies.
    * @param propertyType is the {@link GenericType} of the {@link Map}.
    */
-  protected void setValueEntry(String entry, CliParameterContainer parameterContainer,
-      CliStyle cliStyle, CliParserConfiguration configuration, Logger logger,
-      GenericType<?> propertyType) {
+  protected void setValueEntry(String entry, GenericType<?> propertyType) {
 
     int splitIndex = entry.indexOf('=');
     if (splitIndex < 0) {
@@ -70,20 +87,20 @@ public class CliValueContainerMap implements CliValueContainer {
     // key
     String keyString = entry.substring(0, splitIndex);
     GenericType<?> keyType = propertyType.getKeyType();
-    GenericValueConverter<Object> converter = configuration.getConverter();
-    Object key = converter.convertValue(keyString, parameterContainer,
+    GenericValueConverter<Object> converter = getConfiguration().getConverter();
+    Object key = converter.convertValue(keyString, getParameterContainer(),
         keyType.getAssignmentClass(), keyType);
     // value
     String valueString = entry.substring(splitIndex + 1);
     GenericType<?> valueType = propertyType.getComponentType();
-    Object value = converter.convertValue(valueString, parameterContainer,
+    Object value = converter.convertValue(valueString, getParameterContainer(),
         valueType.getAssignmentClass(), valueType);
     Object old = this.map.put(key, value);
     if (old != null) {
-      CliStyleHandling handling = cliStyle.valueDuplicateMapKey();
+      CliStyleHandling handling = getCliState().getCliStyle().valueDuplicateMapKey();
       if (handling != CliStyleHandling.OK) {
         DuplicateObjectException exception = new DuplicateObjectException(valueString, keyString);
-        handling.handle(logger, exception);
+        handling.handle(getLogger(), exception);
       }
     }
   }
@@ -91,21 +108,18 @@ public class CliValueContainerMap implements CliValueContainer {
   /**
    * {@inheritDoc}
    */
-  public void setValue(String argument, CliParameterContainer parameterContainer,
-      CliStyle cliStyle, CliParserConfiguration configuration, Logger logger) {
+  public void setValue(String argument) {
 
-    PojoPropertyAccessorOneArg setter = parameterContainer.getSetter();
-    char collectionValueSeparator = cliStyle.collectionValueSeparator();
+    PojoPropertyAccessorOneArg setter = getParameterContainer().getSetter();
+    char collectionValueSeparator = getCliState().getCliStyle().collectionValueSeparator();
     if (collectionValueSeparator == CliStyle.COLLECTION_VALUE_SEPARATOR_NONE) {
       // multi-value style
-      setValueEntry(argument, parameterContainer, cliStyle, configuration, logger,
-          setter.getPropertyType());
+      setValueEntry(argument, setter.getPropertyType());
     } else {
       CharSequenceScanner scanner = new CharSequenceScanner(argument);
       while (scanner.hasNext()) {
         String entry = scanner.readUntil(collectionValueSeparator, true);
-        setValueEntry(entry, parameterContainer, cliStyle, configuration, logger,
-            setter.getPropertyType());
+        setValueEntry(entry, setter.getPropertyType());
       }
     }
   }
@@ -113,6 +127,7 @@ public class CliValueContainerMap implements CliValueContainer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isArrayMapOrCollection() {
 
     return true;

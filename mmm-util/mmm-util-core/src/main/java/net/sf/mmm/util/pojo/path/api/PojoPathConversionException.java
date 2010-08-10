@@ -22,9 +22,6 @@ public class PojoPathConversionException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -577255365330996887L;
 
-  /** Key for the NLS message. */
-  private static final String KEY_TARGET_TYPE = "targetType";
-
   /**
    * The constructor.
    * 
@@ -35,8 +32,8 @@ public class PojoPathConversionException extends PojoPathException {
    */
   public PojoPathConversionException(String pojoPath, Type pojoClass, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_CONVERSION, toMap(KEY_PATH, pojoPath, KEY_TYPE, pojoClass,
-        KEY_TARGET_TYPE, targetType));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_CONVERSION, toMap(KEY_PATH, pojoPath, KEY_TYPE,
+        pojoClass, KEY_TARGET_TYPE, targetType));
   }
 
   /**

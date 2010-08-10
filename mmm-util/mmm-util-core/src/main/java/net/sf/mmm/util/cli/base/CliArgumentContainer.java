@@ -31,11 +31,12 @@ public class CliArgumentContainer extends CliParameterContainer {
    * @param argument is the {@link #getArgument() argument}.
    * @param setter is the {@link #getSetter() setter}.
    * @param getter is the {@link #getGetter() getter}
+   * @param constraint is the {@link #getConstraint() constraint}.
    */
   public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter) {
+      PojoPropertyAccessorNonArg getter, Annotation constraint) {
 
-    super(setter, getter);
+    super(setter, getter, constraint);
     this.argument = argument;
     this.state = InitializationState.UNINITIALIZED;
   }

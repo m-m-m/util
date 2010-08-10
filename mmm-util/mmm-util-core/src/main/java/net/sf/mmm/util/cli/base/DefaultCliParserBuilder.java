@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.cli.api.CliParser;
 
 /**
@@ -12,6 +15,8 @@ import net.sf.mmm.util.cli.api.CliParser;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Singleton
+@Named
 public class DefaultCliParserBuilder extends AbstractCliParserBuilder {
 
   /**

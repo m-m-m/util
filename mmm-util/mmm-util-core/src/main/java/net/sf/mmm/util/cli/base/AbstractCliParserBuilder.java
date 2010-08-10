@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliParserBuilder;
@@ -19,6 +19,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
+import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
@@ -52,6 +53,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
 
   /** @see #getStringUtil() */
   private StringUtil stringUtil;
+
+  /** @see #getAnnotationUtil() */
+  private AnnotationUtil annotationUtil;
 
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;
@@ -124,7 +128,8 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
       throw new NlsNullPointerException("pojo");
     }
     try {
-      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger());
+      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger(),
+          getReflectionUtil(), getAnnotationUtil());
       CliParser parser = buildInternal(pojo, state);
       return parser;
     } catch (Exception e) {
@@ -153,7 +158,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param descriptorBuilderFactory is the descriptorBuilderFactory to set
    */
-  @Resource
+  @Inject
   public void setDescriptorBuilderFactory(PojoDescriptorBuilderFactory descriptorBuilderFactory) {
 
     getInitializationState().requireNotInitilized();
@@ -188,7 +193,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param collectionFactoryManager is the collectionFactoryManager to set
    */
-  @Resource
+  @Inject
   public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
 
     getInitializationState().requireNotInitilized();
@@ -206,11 +211,29 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param stringUtil is the stringUtil to set
    */
-  @Resource
+  @Inject
   public void setStringUtil(StringUtil stringUtil) {
 
     getInitializationState().requireNotInitilized();
     this.stringUtil = stringUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public AnnotationUtil getAnnotationUtil() {
+
+    return this.annotationUtil;
+  }
+
+  /**
+   * @param annotationUtil is the annotationUtil to set
+   */
+  @Inject
+  public void setAnnotationUtil(AnnotationUtil annotationUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.annotationUtil = annotationUtil;
   }
 
   /**
@@ -224,7 +247,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param collectionReflectionUtil is the collectionReflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setCollectionReflectionUtil(CollectionReflectionUtil collectionReflectionUtil) {
 
     getInitializationState().requireNotInitilized();
@@ -232,7 +255,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   }
 
   /**
-   * @return the reflectionUtil
+   * {@inheritDoc}
    */
   public ReflectionUtil getReflectionUtil() {
 
@@ -242,7 +265,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param reflectionUtil is the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();
@@ -293,7 +316,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param converter is the converter to set
    */
-  @Resource
+  @Inject
   public void setConverter(GenericValueConverter<Object> converter) {
 
     getInitializationState().requireNotInitilized();
@@ -311,7 +334,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param lineWrapper is the lineWrapper to set
    */
-  @Resource
+  @Inject
   public void setLineWrapper(LineWrapper lineWrapper) {
 
     getInitializationState().requireNotInitilized();

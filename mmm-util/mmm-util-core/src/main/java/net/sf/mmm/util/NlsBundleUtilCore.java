@@ -139,6 +139,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.nls.api.NlsNullPointerException */
   public static final String ERR_ARGUMENT_NULL = "The object \"{object}\" is null!";
 
+  /** @see net.sf.mmm.util.nls.api.NlsClassCastException */
+  public static final String ERR_CLASS_CAST = "The object \"{object}\" of type \"{type}\" can not be cast to \"{targetType}\"!";
+
   /** @see net.sf.mmm.util.nls.api.DuplicateObjectException */
   public static final String ERR_DUPLICATE_OBJECT = "Duplicate object \"{object}\"!";
 
@@ -321,6 +324,14 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException */
   public static final String ERR_CLI_ARGUMENT_REFERENCE_MISSING = "The argument \"{key}\" "
       + "is referenced by \"{argument}\" but not defined!";
+
+  /** @see net.sf.mmm.util.cli.api.CliConstraintInvalidException */
+  public static final String ERR_CLI_CONSTRAINT_INVALID = "The constraint \"{annotation}\" "
+      + "of the property \"{property}\" is invalid!";
+
+  /** @see net.sf.mmm.util.cli.api.CliConstraintInvalidException */
+  public static final String ERR_CLI_CONSTRAINT_INVALID_FOR_PROPERTY = "The constraint \"{annotation}\" "
+      + "is invalid for the property \"{property}\"!";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionMisplacedException */
   public static final String ERR_CLI_OPTION_MISPLACED = "The option \"{option}\" "

@@ -5,7 +5,7 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.ArrayList;
 
-import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+import org.slf4j.Logger;
 
 /**
  * This is an implementation of {@link CliValueContainer} for an array. It uses
@@ -17,26 +17,19 @@ import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
  */
 public class CliValueContainerArray extends CliValueContainerCollection {
 
-  /** @see #getValue() */
-  private final CollectionReflectionUtil collectionReflectionUtil;
-
-  /** @see #getValue() */
-  private final Class<?> componentType;
-
   /**
    * The constructor.
    * 
-   * @param collectionReflectionUtil is the {@link CollectionReflectionUtil}
-   *        instance.
-   * @param componentType is the {@link Class#getComponentType() component-type}
-   *        of the array.
+   * @param parameterContainer is the {@link #getParameterContainer()
+   *        parameter-container}.
+   * @param cliState is the {@link #getCliState() state}.
+   * @param configuraiton is the {@link #getConfiguration() configuration}.
+   * @param logger is the {@link #getLogger() logger}.
    */
-  public CliValueContainerArray(CollectionReflectionUtil collectionReflectionUtil,
-      Class<?> componentType) {
+  public CliValueContainerArray(CliParameterContainer parameterContainer, CliState cliState,
+      CliParserConfiguration configuraiton, Logger logger) {
 
-    super(new ArrayList<Object>());
-    this.collectionReflectionUtil = collectionReflectionUtil;
-    this.componentType = componentType;
+    super(parameterContainer, cliState, configuraiton, logger, new ArrayList<Object>());
   }
 
   /**
@@ -45,6 +38,8 @@ public class CliValueContainerArray extends CliValueContainerCollection {
   @Override
   public Object getValue() {
 
-    return this.collectionReflectionUtil.toArray(getCollection(), this.componentType);
+    Class<?> componentType = getParameterContainer().getSetter().getPropertyClass()
+        .getComponentType();
+    return getConfiguration().getCollectionReflectionUtil().toArray(getCollection(), componentType);
   }
 }
