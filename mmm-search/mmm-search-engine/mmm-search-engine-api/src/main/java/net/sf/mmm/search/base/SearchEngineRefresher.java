@@ -7,7 +7,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.util.component.base.AbstractLoggable;
@@ -62,8 +62,8 @@ public class SearchEngineRefresher extends AbstractLoggable implements Runnable 
 
     super.doInitialize();
     if (this.refreshDelayInSeconds < MIN_DELAY) {
-      throw new ValueOutOfRangeException(Integer.valueOf(this.refreshDelayInSeconds), Integer
-          .valueOf(MIN_DELAY), Integer.valueOf(Integer.MAX_VALUE));
+      throw new ValueOutOfRangeException(Integer.valueOf(this.refreshDelayInSeconds),
+          Integer.valueOf(MIN_DELAY), Integer.valueOf(Integer.MAX_VALUE));
     }
     this.active = true;
     getLogger().info("starting " + getThreadName() + "...");
@@ -140,7 +140,7 @@ public class SearchEngineRefresher extends AbstractLoggable implements Runnable 
   /**
    * @param searchEngine is the searchEngine to set
    */
-  @Resource
+  @Inject
   public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngine = searchEngine;
@@ -157,7 +157,7 @@ public class SearchEngineRefresher extends AbstractLoggable implements Runnable 
   /**
    * @param executor is the executor to set
    */
-  @Resource
+  @Inject
   public void setExecutor(Executor executor) {
 
     this.executor = executor;

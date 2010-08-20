@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.impl;
 import java.lang.reflect.Array;
 import java.util.Collection;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -72,7 +72,7 @@ public class ValueConverterToCollection extends AbstractRecursiveValueConverter<
   /**
    * @param collectionReflectionUtil is the collectionReflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setCollectionReflectionUtil(CollectionReflectionUtil collectionReflectionUtil) {
 
     getInitializationState().requireNotInitilized();

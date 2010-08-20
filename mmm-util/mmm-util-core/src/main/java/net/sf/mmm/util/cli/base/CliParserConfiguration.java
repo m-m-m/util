@@ -11,7 +11,7 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.text.api.LineWrapper;
-import net.sf.mmm.util.value.api.GenericValueConverter;
+import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
  * This interface bundles the configuration for the
@@ -60,10 +60,10 @@ public interface CliParserConfiguration {
   NlsTemplateResolver getNlsTemplateResolver();
 
   /**
-   * @return the {@link GenericValueConverter} instance used to convert CLI
+   * @return the {@link ComposedValueConverter} instance used to convert CLI
    *         parameters to typed values.
    */
-  GenericValueConverter<Object> getConverter();
+  ComposedValueConverter getConverter();
 
   /**
    * @return the {@link LineWrapper} used for justification of texts for the

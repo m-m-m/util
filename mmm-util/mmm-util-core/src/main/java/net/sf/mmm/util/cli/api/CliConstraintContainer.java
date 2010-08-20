@@ -10,10 +10,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to annotate a property (field or setter) of the type
- * {@link java.util.List} or {@link java.util.Set} that is also annotated with
- * {@link CliArgument}. It allows to define a constraint for the range of the
- * {@link java.util.Collection#size() size} of the {@link java.util.Collection}.
+ * This annotation is used to annotate a
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property}
+ * that is an {@link CliOption option} or {@link CliArgument argument} and has a
+ * <em>container type</em>. A container is an
+ * {@link Class#isAssignableFrom(Class) array}, a {@link java.util.Collection}
+ * or a {@link java.util.Map}. It allows to define a constraint for the range of
+ * the
+ * {@link net.sf.mmm.util.reflect.api.CollectionReflectionUtil#getSize(Object)
+ * size} of the container.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -21,7 +26,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Target(value = { ElementType.FIELD, ElementType.METHOD })
-public @interface CliConstraintCollection {
+public @interface CliConstraintContainer {
 
   /**
    * The minimum allowed

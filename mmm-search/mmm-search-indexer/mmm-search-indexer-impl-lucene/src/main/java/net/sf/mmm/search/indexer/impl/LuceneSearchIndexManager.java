@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.indexer.api.SearchIndexManager;
@@ -51,7 +51,7 @@ public class LuceneSearchIndexManager extends AbstractLoggable implements Search
   /**
    * @param newAnalyzer the analyzer to set
    */
-  @Resource()
+  @Inject
   public void setAnalyzer(Analyzer newAnalyzer) {
 
     this.analyzer = newAnalyzer;

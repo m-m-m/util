@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
@@ -52,7 +52,7 @@ public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends
    * 
    * @param composedValueConverter is the {@link ComposedValueConverter} to set.
    */
-  @Resource
+  @Inject
   public void setComposedValueConverter(ComposedValueConverter composedValueConverter) {
 
     getInitializationState().requireNotInitilized();

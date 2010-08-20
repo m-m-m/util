@@ -6,7 +6,7 @@ package net.sf.mmm.search.indexer.impl;
 import java.io.File;
 import java.io.IOException;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
@@ -72,7 +72,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * 
    * @param luceneAnalyzer the analyzer to set
    */
-  @Resource
+  @Inject
   public void setAnalyzer(Analyzer luceneAnalyzer) {
 
     getInitializationState().requireNotInitilized();

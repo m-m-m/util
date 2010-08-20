@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -57,7 +57,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
    * 
    * @param iso8601Util is the {@link Iso8601Util} instance.
    */
-  @Resource
+  @Inject
   public void setIso8601Util(Iso8601Util iso8601Util) {
 
     this.iso8601Util = iso8601Util;
@@ -78,7 +78,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
    * 
    * @param stringUtil is the {@link StringUtil} instance.
    */
-  @Resource
+  @Inject
   public void setStringUtil(StringUtil stringUtil) {
 
     this.stringUtil = stringUtil;

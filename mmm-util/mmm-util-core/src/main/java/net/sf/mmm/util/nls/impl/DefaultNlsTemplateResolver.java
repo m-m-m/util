@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
@@ -118,7 +118,7 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
   /**
    * @param reflectionUtil is the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();

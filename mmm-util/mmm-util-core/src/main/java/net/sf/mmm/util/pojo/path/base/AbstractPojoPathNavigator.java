@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.base.CollectionList;
@@ -147,7 +146,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggable impleme
   /**
    * @param collectionUtil is the collectionUtil to set
    */
-  @Resource
+  @Inject
   public void setCollectionReflectionUtil(CollectionReflectionUtil collectionUtil) {
 
     getInitializationState().requireNotInitilized();

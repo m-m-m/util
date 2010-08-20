@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
@@ -59,7 +59,7 @@ public abstract class AbstractNlsTemplateResolver extends AbstractLoggable imple
   /**
    * @param argumentParser is the argumentParser to set
    */
-  @Resource
+  @Inject
   public void setArgumentParser(NlsArgumentParser argumentParser) {
 
     getInitializationState().requireNotInitilized();

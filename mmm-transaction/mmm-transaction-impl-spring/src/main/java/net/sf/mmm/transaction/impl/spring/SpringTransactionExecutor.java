@@ -3,14 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.transaction.impl.spring;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+
+import net.sf.mmm.transaction.api.TransactionSettings;
+import net.sf.mmm.transaction.base.AbstractTransactionExecutor;
 
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-
-import net.sf.mmm.transaction.api.TransactionSettings;
-import net.sf.mmm.transaction.base.AbstractTransactionExecutor;
 
 /**
  * This is the implementation of the
@@ -43,7 +43,7 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
   /**
    * @param platformTransactionManager is the platformTransactionManager to set
    */
-  @Resource
+  @Inject
   public void setPlatformTransactionManager(PlatformTransactionManager platformTransactionManager) {
 
     this.platformTransactionManager = platformTransactionManager;

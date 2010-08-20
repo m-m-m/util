@@ -10,7 +10,9 @@ import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
@@ -37,6 +39,8 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Singleton
+@Named
 public class DefaultLineWrapper extends AbstractLineWrapper {
 
   /** @see #getHyphenatorBuilder() */
@@ -61,7 +65,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   /**
    * @param hyphenatorBuilder is the hyphenatorBuilder to set
    */
-  @Resource
+  @Inject
   public void setHyphenatorBuilder(HyphenatorBuilder hyphenatorBuilder) {
 
     getInitializationState().requireNotInitilized();

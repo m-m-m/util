@@ -3,10 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import java.io.File;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,10 +15,6 @@ import java.util.Set;
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException;
 import net.sf.mmm.util.cli.api.CliClassNoPropertyException;
-import net.sf.mmm.util.cli.api.CliConstraintCollection;
-import net.sf.mmm.util.cli.api.CliConstraintFile;
-import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
-import net.sf.mmm.util.cli.api.CliConstraintNumber;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModeUndefinedException;
 import net.sf.mmm.util.cli.api.CliOption;
@@ -45,6 +38,7 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
+import net.sf.mmm.util.value.api.validator.ValueValidator;
 
 import org.slf4j.Logger;
 
@@ -284,100 +278,23 @@ public class CliState extends CliClassContainer {
           annotationFound = true;
           PojoPropertyAccessorNonArg getter = propertyDescriptor
               .getAccessor(PojoPropertyAccessorNonArgMode.GET);
-          Annotation constraint = findConstraintAnnotation(setter);
+          // Annotation constraint = findConstraintAnnotation(setter);
+          // JSR 303 ?
+          ValueValidator<Object> validator = null;
           if (option != null) {
             CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter,
-                constraint);
+                validator);
             addOption(optionContainer);
           } else {
             assert (argument != null);
             CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter,
-                getter, constraint);
+                getter, validator);
             addArgument(argumentContainer);
           }
         }
       }
     }
     return annotationFound;
-  }
-
-  /**
-   * This method is a "macro" for reading an annotation from some property.
-   * 
-   * @param <A> is the generic type of the requested annotation.
-   * @param method is the potentially annotated method or <code>null</code> if
-   *        no method available.
-   * @param accessible is the {@link AccessibleObject} to use as fallback if
-   *        <code>method</code> is <code>null</code>.
-   * @param annotationUtil is the {@link AnnotationUtil} used for
-   *        {@link AnnotationUtil#getMethodAnnotation(Method, Class)}.
-   * @param annotationClass is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if no such annotation
-   *         exists.
-   */
-  private static <A extends Annotation> A getAnnotation(Method method, AccessibleObject accessible,
-      AnnotationUtil annotationUtil, Class<A> annotationClass) {
-
-    if (method == null) {
-      return accessible.getAnnotation(annotationClass);
-    } else {
-      return annotationUtil.getMethodAnnotation(method, annotationClass);
-    }
-  }
-
-  /**
-   * This method finds an according
-   * {@link CliParameterContainer#getConstraint() constraint annotation} and if
-   * present validates it.
-   * 
-   * @param setter is the setter that may be annotated with a constraint.
-   * @return the requested constraint or <code>null</code> if none is present.
-   * @throws CliConstraintInvalidException if an invalid constraint was found.
-   */
-  protected Annotation findConstraintAnnotation(PojoPropertyAccessorOneArg setter)
-      throws CliConstraintInvalidException {
-
-    Class<?> propertyClass = setter.getPropertyClass();
-    AccessibleObject accessible = setter.getAccessibleObject();
-    Method method = null;
-    if (accessible instanceof Method) {
-      method = (Method) accessible;
-    }
-    Annotation constraint = null;
-    CliConstraintNumber constraintNumber = getAnnotation(method, accessible, this.annotationUtil,
-        CliConstraintNumber.class);
-    if (constraintNumber != null) {
-      if (constraintNumber.max() < constraintNumber.min()) {
-        throw new CliConstraintInvalidException(setter, constraintNumber);
-      }
-      if (!Number.class.isAssignableFrom(this.reflectionUtil.getNonPrimitiveType(propertyClass))) {
-        throw new CliConstraintInvalidException(constraintNumber, setter);
-      }
-      constraint = constraintNumber;
-    }
-    CliConstraintCollection constraintCollection = getAnnotation(method, accessible,
-        this.annotationUtil, CliConstraintCollection.class);
-    if (constraintCollection != null) {
-      if (constraintCollection.min() < 0) {
-        throw new CliConstraintInvalidException(setter, constraintCollection);
-      }
-      if (constraintCollection.max() < constraintCollection.min()) {
-        throw new CliConstraintInvalidException(setter, constraintCollection);
-      }
-      if (!CliParameterContainer.isArrayMapOrCollection(propertyClass)) {
-        throw new CliConstraintInvalidException(constraintCollection, setter);
-      }
-      constraint = constraintCollection;
-    }
-    CliConstraintFile constraintFile = getAnnotation(method, accessible, this.annotationUtil,
-        CliConstraintFile.class);
-    if (constraintFile != null) {
-      if (!File.class.equals(propertyClass)) {
-        throw new CliConstraintInvalidException(constraintFile, setter);
-      }
-      constraint = constraintFile;
-    }
-    return constraint;
   }
 
   /**
@@ -416,6 +333,8 @@ public class CliState extends CliClassContainer {
   private void addArgument(CliArgumentContainer argumentContainer) {
 
     this.arguments.add(argumentContainer);
+    String modeId = argumentContainer.getArgument().mode();
+    requireMode(modeId, argumentContainer);
   }
 
   /**

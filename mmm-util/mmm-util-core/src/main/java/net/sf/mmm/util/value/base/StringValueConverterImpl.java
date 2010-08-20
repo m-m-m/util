@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.base;
 import java.lang.reflect.Type;
 import java.util.Date;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -108,7 +108,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    * 
    * @param iso8601Util the iso8601Util to set
    */
-  @Resource
+  @Inject
   public void setIso8601Util(Iso8601Util iso8601Util) {
 
     getInitializationState().requireNotInitilized();
@@ -128,7 +128,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   /**
    * @param stringUtil is the stringUtil to set
    */
-  @Resource
+  @Inject
   public void setStringUtil(StringUtil stringUtil) {
 
     getInitializationState().requireNotInitilized();

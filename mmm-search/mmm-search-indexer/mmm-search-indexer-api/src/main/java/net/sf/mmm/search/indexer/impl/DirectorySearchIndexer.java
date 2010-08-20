@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Properties;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
@@ -89,7 +89,7 @@ public class DirectorySearchIndexer extends AbstractLoggable {
   /**
    * @param indexer the indexer to set
    */
-  @Resource
+  @Inject
   public void setSearchIndexer(SearchIndexer indexer) {
 
     this.searchIndexer = indexer;
@@ -115,7 +115,7 @@ public class DirectorySearchIndexer extends AbstractLoggable {
    * 
    * @param filter the filter to set
    */
-  @Resource
+  @Inject
   public void setFilter(FileFilter filter) {
 
     this.filter = filter;
@@ -156,7 +156,7 @@ public class DirectorySearchIndexer extends AbstractLoggable {
   /**
    * @param parserService the parserService to set
    */
-  @Resource
+  @Inject
   public void setParserService(ContentParserService parserService) {
 
     this.parserService = parserService;

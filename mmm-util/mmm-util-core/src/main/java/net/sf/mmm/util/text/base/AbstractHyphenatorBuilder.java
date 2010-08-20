@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.nls.api.NlsResourceLocator;
@@ -119,7 +119,7 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggable impleme
   /**
    * @param resourceLocator is the resourceLocator to set
    */
-  @Resource
+  @Inject
   public void setResourceLocator(NlsResourceLocator resourceLocator) {
 
     getInitializationState().requireNotInitilized();

@@ -18,7 +18,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoPropertyAccessor {
+public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoPropertyAccessorBase {
 
   /** @see #getField() */
   private final Field field;

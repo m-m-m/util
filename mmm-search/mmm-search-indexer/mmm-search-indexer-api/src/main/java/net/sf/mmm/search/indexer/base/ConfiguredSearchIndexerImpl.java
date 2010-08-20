@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
@@ -36,7 +36,8 @@ import net.sf.mmm.util.transformer.api.Transformer;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ConfiguredSearchIndexerImpl extends AbstractLoggable implements ConfiguredSearchIndexer {
+public class ConfiguredSearchIndexerImpl extends AbstractLoggable implements
+    ConfiguredSearchIndexer {
 
   /** @see #getSearchIndexer() */
   private SearchIndexer searchIndexer;
@@ -80,7 +81,7 @@ public class ConfiguredSearchIndexerImpl extends AbstractLoggable implements Con
   /**
    * @param indexer the indexer to set
    */
-  @Resource
+  @Inject
   public void setSearchIndexer(SearchIndexer indexer) {
 
     getInitializationState().requireNotInitilized();
@@ -98,7 +99,7 @@ public class ConfiguredSearchIndexerImpl extends AbstractLoggable implements Con
   /**
    * @param browsableResourceFactory is the browsableResourceFactory to set
    */
-  @Resource
+  @Inject
   public void setBrowsableResourceFactory(BrowsableResourceFactory browsableResourceFactory) {
 
     getInitializationState().requireNotInitilized();
@@ -116,7 +117,7 @@ public class ConfiguredSearchIndexerImpl extends AbstractLoggable implements Con
   /**
    * @param parserService the parserService to set
    */
-  @Resource
+  @Inject
   public void setParserService(ContentParserService parserService) {
 
     getInitializationState().requireNotInitilized();
@@ -134,7 +135,7 @@ public class ConfiguredSearchIndexerImpl extends AbstractLoggable implements Con
   /**
    * @param fileUtil is the fileUtil to set
    */
-  @Resource
+  @Inject
   public void setFileUtil(FileUtil fileUtil) {
 
     getInitializationState().requireNotInitilized();

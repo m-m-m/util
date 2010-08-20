@@ -10,7 +10,7 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.util.concurrent.Executor;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver;
@@ -59,8 +59,8 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   }
 
   /**
-   * This method determines if this receiver is currently
-   * {@link #connect() connected}.
+   * This method determines if this receiver is currently {@link #connect()
+   * connected}.
    * 
    * @return <code>true</code> if connected, <code>false</code> otherwise.
    */
@@ -87,7 +87,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
    * 
    * @param executor the threadPool to set.
    */
-  @Resource
+  @Inject
   public void setThreadPool(Executor executor) {
 
     this.threadPool = executor;

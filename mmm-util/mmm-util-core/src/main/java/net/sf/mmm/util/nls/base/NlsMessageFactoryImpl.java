@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -74,7 +74,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
   /**
    * @param argumentParser is the argumentParser to set
    */
-  @Resource
+  @Inject
   public void setArgumentParser(NlsArgumentParser argumentParser) {
 
     getInitializationState().requireNotInitilized();

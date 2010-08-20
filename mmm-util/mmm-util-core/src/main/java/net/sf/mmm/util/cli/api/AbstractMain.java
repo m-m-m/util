@@ -6,6 +6,7 @@ package net.sf.mmm.util.cli.api;
 import java.io.PrintWriter;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.cli.base.CliParameterContainer;
 import net.sf.mmm.util.cli.base.DefaultCliParserBuilder;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.AppendableWriter;
@@ -31,6 +32,14 @@ public abstract class AbstractMain {
    * command-line arguments).
    */
   protected static final int EXIT_CODE_ILLEGAL_SYNTAX = 1;
+
+  /**
+   * The {@link #run(CliModeObject) exit-code} on constraint error (illegal
+   * command-line value).
+   * 
+   * @see CliParameterContainer#getConstraintValue()
+   */
+  protected static final int EXIT_CODE_CONSTRAINT_VIOLATION = 2;
 
   /**
    * The {@link #run(CliModeObject) exit-code} if an unexpected
@@ -213,7 +222,7 @@ public abstract class AbstractMain {
    * @param args are the commandline-arguments.
    * @return the exit code or <code>0</code> on success.
    */
-  public int run(String[] args) {
+  public int run(String... args) {
 
     CliParserBuilder parserBuilder = getParserBuilder();
     CliParser parser = parserBuilder.build(this);

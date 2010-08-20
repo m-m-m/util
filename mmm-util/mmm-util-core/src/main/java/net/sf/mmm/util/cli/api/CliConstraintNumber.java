@@ -10,10 +10,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to annotate a property (field or setter) of the type
- * {@link Number} or one of its sub-types that is also annotated with
- * {@link CliOption} or {@link CliArgument}. It allows to define a constraint
- * for the range of the {@link Number}.
+ * * This annotation is used to annotate a
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property}
+ * that is an {@link CliOption option} or {@link CliArgument argument} and the
+ * type {@link Number} (or one of its sub-types). It allows to define a
+ * constraint for the range of the {@link Number}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

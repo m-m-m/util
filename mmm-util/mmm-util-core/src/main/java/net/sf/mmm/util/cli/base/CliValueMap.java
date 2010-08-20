@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.value.api.validator.ValueValidator;
 
 import org.slf4j.Logger;
 
@@ -27,11 +28,11 @@ public class CliValueMap {
   /** The {@link CliParserConfiguration}. */
   private final CliParserConfiguration configuration;
 
-  /** The {@link Logger} to use. */
-  private final Logger logger;
-
   /** The {@link CliState}. */
   private final CliState cliState;
+
+  /** The {@link Logger} to use. */
+  private final Logger logger;
 
   /**
    * The constructor.
@@ -119,7 +120,13 @@ public class CliValueMap {
 
     for (CliParameterContainer parameter : this.map.keySet()) {
       CliValueContainer valueContainer = this.map.get(parameter);
-      parameter.getSetter().invoke(state, valueContainer.getValue());
+      Object value = valueContainer.getValue();
+      ValueValidator<Object> validator = ((AbstractCliValueContainer) valueContainer)
+          .getParameterContainer().getValidator();
+      if (validator != null) {
+        validator.validate(value);
+      }
+      parameter.getSetter().invoke(state, value);
     }
   }
 

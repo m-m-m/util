@@ -17,6 +17,10 @@ import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
+import net.sf.mmm.util.reflect.api.AnnotationUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.AnnotationUtilImpl;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -80,6 +84,23 @@ public class CliStateTest {
     return factory;
   }
 
+  protected ReflectionUtil getReflectionUtil() {
+
+    return ReflectionUtilImpl.getInstance();
+  }
+
+  protected AnnotationUtil getAnnotationUtil() {
+
+    return AnnotationUtilImpl.getInstance();
+  }
+
+  protected CliState createState(Class<?> stateClass) {
+
+    CliState state = new CliState(stateClass, getPojoDescriptorBuilderFactory(),
+        LoggerFactory.getLogger(CliStateTest.class), getReflectionUtil(), getAnnotationUtil());
+    return state;
+  }
+
   /**
    * This method gets the {@link CliModeCycle} in the hierarchy of the given
    * <code>exception</code>.
@@ -113,8 +134,7 @@ public class CliStateTest {
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
 
     CliState state;
-    state = new CliState(OptionTest1.class, descriptorBuilder,
-        LoggerFactory.getLogger(CliStateTest.class));
+    state = createState(OptionTest1.class);
     List<CliOptionContainer> optionList = state.getOptions();
     Assert.assertNotNull(optionList);
     Assert.assertEquals(2, optionList.size());
@@ -143,9 +163,9 @@ public class CliStateTest {
 
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
     CliState state;
-    state = new CliState(ArgumentTest1.class, descriptorBuilder,
-        LoggerFactory.getLogger(CliStateTest.class));
+    state = createState(ArgumentTest1.class);
     CliModeObject modeObject = state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
+    Assert.assertNotNull(modeObject);
     Assert.assertEquals(MODE_Z_EXTENDS_X_Y_HELP, modeObject.getId());
     Set<? extends CliModeObject> extendedModes = modeObject.getExtendedModes();
     Assert.assertTrue(extendedModes.contains(state.getMode(MODE_Z_EXTENDS_X_Y_HELP)));
@@ -167,8 +187,7 @@ public class CliStateTest {
     CliState state;
 
     // test regular order
-    state = new CliState(ArgumentTest1.class, descriptorBuilder,
-        LoggerFactory.getLogger(CliStateTest.class));
+    state = createState(ArgumentTest1.class);
     List<CliArgumentContainer> argumentsList = state.getArguments(state
         .getMode(MODE_Z_EXTENDS_X_Y_HELP));
     Assert.assertEquals(1, argumentsList.size());
@@ -184,8 +203,7 @@ public class CliStateTest {
     Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(3).getId());
 
     // Test inheritance
-    state = new CliState(ArgumentTest2.class, descriptorBuilder,
-        LoggerFactory.getLogger(CliStateTest.class));
+    state = createState(ArgumentTest2.class);
     argumentsList = state.getArguments(state.getMode(CliMode.ID_DEFAULT));
     Assert.assertEquals(6, argumentsList.size());
     Assert.assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
@@ -208,8 +226,7 @@ public class CliStateTest {
     // self dependency...
     CliState state = null;
     try {
-      state = new CliState(CyclicTest1.class, descriptorBuilderFactory,
-          LoggerFactory.getLogger(CliStateTest.class));
+      state = createState(CyclicTest1.class);
       Assert.fail();
     } catch (Exception e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();
@@ -221,8 +238,7 @@ public class CliStateTest {
 
     // complex dependency...
     try {
-      state = new CliState(CyclicTest2.class, descriptorBuilderFactory,
-          LoggerFactory.getLogger(CliStateTest.class));
+      state = createState(CyclicTest2.class);
       Assert.fail();
     } catch (Exception e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();

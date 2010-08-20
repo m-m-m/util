@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -130,7 +130,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
    * 
    * @param pojoFactory is the {@link PojoFactory} to use.
    */
-  @Resource
+  @Inject
   public void setPojoFactory(PojoFactory pojoFactory) {
 
     getInitializationState().requireNotInitilized();
@@ -167,7 +167,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
    * @param pojoDescriptorBuilderFactory is the pojoDescriptorBuilderFactory to
    *        set
    */
-  @Resource
+  @Inject
   public void setPojoDescriptorBuilderFactory(
       PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
 

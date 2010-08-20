@@ -325,13 +325,13 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_CLI_ARGUMENT_REFERENCE_MISSING = "The argument \"{key}\" "
       + "is referenced by \"{argument}\" but not defined!";
 
-  /** @see net.sf.mmm.util.cli.api.CliConstraintInvalidException */
-  public static final String ERR_CLI_CONSTRAINT_INVALID = "The constraint \"{annotation}\" "
-      + "of the property \"{property}\" is invalid!";
+  /** @see net.sf.mmm.util.cli.api.CliConstraintIllegalException */
+  public static final String ERR_CLI_CONSTRAINT_ILLEGAL_VALUES = "The constraint \"{annotation}\" "
+      + "of the property \"{property}\" has an illegal value!";
 
-  /** @see net.sf.mmm.util.cli.api.CliConstraintInvalidException */
-  public static final String ERR_CLI_CONSTRAINT_INVALID_FOR_PROPERTY = "The constraint \"{annotation}\" "
-      + "is invalid for the property \"{property}\"!";
+  /** @see net.sf.mmm.util.cli.api.CliConstraintIllegalException */
+  public static final String ERR_CLI_CONSTRAINT_ILLEGAL_FOR_PROPERTY = "The constraint \"{annotation}\" "
+      + "is illegal for the type of the property \"{property}\"!";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionMisplacedException */
   public static final String ERR_CLI_OPTION_MISPLACED = "The option \"{option}\" "

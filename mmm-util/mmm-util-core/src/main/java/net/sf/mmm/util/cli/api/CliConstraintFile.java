@@ -12,10 +12,11 @@ import java.lang.annotation.Target;
 import net.sf.mmm.util.file.api.FileType;
 
 /**
- * This annotation is used to annotate a property (field or setter) of the type
- * {@link java.io.File} that is also annotated with {@link CliOption} or
- * {@link CliArgument}. It allows to define a constraint for the {@link #type()}
- * or {@link #exists() existence} of the {@link java.io.File}.
+ * * This annotation is used to annotate a
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property}
+ * that is an {@link CliOption option} or {@link CliArgument argument} and has
+ * the type {@link java.io.File}. It allows to define a constraint for the
+ * {@link #type()} or {@link #exists() existence} of the {@link java.io.File}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

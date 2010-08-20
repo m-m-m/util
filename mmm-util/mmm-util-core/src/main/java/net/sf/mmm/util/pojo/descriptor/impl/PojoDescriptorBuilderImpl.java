@@ -14,7 +14,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
@@ -34,7 +35,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@Resource(shareable = true)
+@Singleton
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /** @see #getConfiguration() */
@@ -108,7 +109,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * 
    * @param introspector the introspector to set.
    */
-  @Resource
+  @Inject
   public void setMethodIntrospector(PojoMethodIntrospector introspector) {
 
     getInitializationState().requireNotInitilized();
@@ -134,7 +135,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * 
    * @param introspector the introspector to set.
    */
-  @Resource
+  @Inject
   public void setFieldIntrospector(PojoFieldIntrospector introspector) {
 
     getInitializationState().requireNotInitilized();
@@ -182,7 +183,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * @param configuration is the {@link ExtendedPojoDescriptorConfigurationImpl}
    *        .
    */
-  @Resource
+  @Inject
   public void setConfiguration(ExtendedPojoDescriptorConfigurationImpl configuration) {
 
     getInitializationState().requireNotInitilized();

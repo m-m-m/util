@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -54,7 +54,7 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
    * 
    * @param mathUtil is the {@link MathUtil} instance.
    */
-  @Resource
+  @Inject
   public void setMathUtil(MathUtil mathUtil) {
 
     getInitializationState().requireNotInitilized();

@@ -6,7 +6,7 @@ package net.sf.mmm.util.cli.api;
 /**
  * This enum contains the available styles for arrays and collections.
  * 
- * @see CliConstraintCollection
+ * @see CliConstraintContainer
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -17,13 +17,13 @@ public enum CliCollectionStyle {
    * The {@link CliOption} or {@link CliArgument} may occur multiple times. The
    * collection gets filled with all these values in the order of their
    * occurrence. This style is the default even if no
-   * {@link CliConstraintCollection} is annotated. For {@link CliArgument
+   * {@link CliConstraintContainer} is annotated. For {@link CliArgument
    * arguments} this style is only allowed for the last {@link CliArgument}.<br>
    * Example:<br>
    * Assuming we have a CLI program called <code>Foo</code> with a property
    * <code>private List<String> listProperty</code> annotated with a
    * {@link CliOption} {@link CliOption#name() named} <code>--list</code> and
-   * also annotated with this style via {@link CliConstraintCollection}. It may
+   * also annotated with this style via {@link CliConstraintContainer}. It may
    * also have another boolean option named <code>--bar</code>. Now we call the
    * program like this:
    * 

@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.base;
 
 import java.lang.reflect.Type;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -48,7 +48,7 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
   /**
    * @param reflectionUtil is the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();

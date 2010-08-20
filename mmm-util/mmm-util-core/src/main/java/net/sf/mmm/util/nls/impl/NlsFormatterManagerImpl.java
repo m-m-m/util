@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -94,7 +94,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   /**
    * @param defaultFormatter is the defaultFormatter to set
    */
-  @Resource
+  @Inject
   public void setDefaultFormatter(NlsFormatter<Object> defaultFormatter) {
 
     getInitializationState().requireNotInitilized();
@@ -106,7 +106,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
    * 
    * @param iso8601Util is the {@link Iso8601Util}.
    */
-  @Resource
+  @Inject
   public void setIso8601Util(Iso8601Util iso8601Util) {
 
     getInitializationState().requireNotInitilized();

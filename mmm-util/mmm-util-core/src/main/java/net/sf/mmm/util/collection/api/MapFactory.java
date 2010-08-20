@@ -12,9 +12,9 @@ import java.util.Map;
  * with different aspects such as a thread-safe map. If you write a generic
  * component different users of that component may expect different aspects of
  * your component and therefore the underlying {@link Map}.<br>
- * If you use this interface and allow the user to
- * {@link javax.annotation.Resource inject} an instance of this interface to
- * override the default, your code will increase usability.<br>
+ * If you use this interface and allow the user to {@link javax.inject.Inject
+ * inject} an instance of this interface to override the default, your code will
+ * increase usability.<br>
  * <b>Why passing a {@link MapFactory} rather than a {@link Map} instance to the
  * constructor?</b><br>
  * Since java 5 you want to use generics for type-safe code. If these generic

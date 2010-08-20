@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.filter.api.CharFilter;
@@ -134,7 +134,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggable imple
   /**
    * @param justificationBuilder is the justificationBuilder to set
    */
-  @Resource
+  @Inject
   public void setJustificationBuilder(JustificationBuilder justificationBuilder) {
 
     getInitializationState().requireNotInitilized();

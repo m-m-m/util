@@ -5,7 +5,7 @@ package net.sf.mmm.persistence.base;
 
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
 
@@ -31,7 +31,7 @@ public class PersistenceManagerImpl extends AbstractPersistenceManager {
    * @param managerList is the {@link List} of all
    *        {@link PersistenceEntityManager} to register.
    */
-  @Resource
+  @Inject
   public void setManagers(List<PersistenceEntityManager<?>> managerList) {
 
     for (PersistenceEntityManager<?> entityManager : managerList) {

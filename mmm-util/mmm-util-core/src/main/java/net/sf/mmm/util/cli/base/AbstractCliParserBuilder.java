@@ -9,6 +9,7 @@ import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliParserBuilder;
 import net.sf.mmm.util.cli.api.CliParserExcepiton;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
@@ -26,7 +27,7 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.base.DefaultLineWrapper;
-import net.sf.mmm.util.value.api.GenericValueConverter;
+import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
@@ -67,7 +68,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   private CollectionFactoryManager collectionFactoryManager;
 
   /** @see #getConverter() */
-  private GenericValueConverter<Object> converter;
+  private ComposedValueConverter converter;
 
   /** @see #getLineWrapper() */
   private LineWrapper lineWrapper;
@@ -111,6 +112,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
     }
     if (this.collectionReflectionUtil == null) {
       this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
+    }
+    if (this.collectionFactoryManager == null) {
+      this.collectionFactoryManager = CollectionFactoryManagerImpl.getInstance();
     }
     if (this.lineWrapper == null) {
       DefaultLineWrapper wrapper = new DefaultLineWrapper();
@@ -308,7 +312,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * {@inheritDoc}
    */
-  public GenericValueConverter<Object> getConverter() {
+  public ComposedValueConverter getConverter() {
 
     return this.converter;
   }
@@ -317,7 +321,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
    * @param converter is the converter to set
    */
   @Inject
-  public void setConverter(GenericValueConverter<Object> converter) {
+  public void setConverter(ComposedValueConverter converter) {
 
     getInitializationState().requireNotInitilized();
     this.converter = converter;

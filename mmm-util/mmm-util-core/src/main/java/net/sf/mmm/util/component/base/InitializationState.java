@@ -11,12 +11,14 @@ import net.sf.mmm.util.component.api.NotInitializedException;
 /**
  * This class represents the state of an initialization.<br>
  * It therefore offers the method {@link #requireNotInitilized()} that can be
- * called before initialization e.g. from {@link javax.annotation.Resource
+ * called before initialization e.g. from {@link javax.inject.Inject
  * injection-setters} so nothing can be re-injected after
  * {@link #setInitializing() initialization}. Additionally there is
  * {@link #requireInitilized()} that can be called after initialization e.g.
  * from functional methods of the component to ensure that the component has
  * been {@link #setInitializing() initialized}.
+ * 
+ * @see javax.annotation.PostConstruct
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

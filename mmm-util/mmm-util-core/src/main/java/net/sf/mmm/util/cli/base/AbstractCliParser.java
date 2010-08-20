@@ -84,11 +84,11 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     this.state = state;
     this.cliState = cliState;
     this.configuration = configuration;
-    this.valueMap = new CliValueMap(cliState, configuration, getLogger());
     for (CliOptionContainer option : this.cliState.getOptions()) {
       checkOption(option);
     }
     initialize();
+    this.valueMap = new CliValueMap(cliState, configuration, getLogger());
   }
 
   /**

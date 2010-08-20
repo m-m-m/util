@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamConstants;
@@ -37,6 +39,8 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Singleton
+@Named
 public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
 
   /** @see #createHyphenator(String) */
@@ -280,7 +284,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /**
    * @param staxUtil is the staxUtil to set
    */
-  @Resource
+  @Inject
   public void setStaxUtil(StaxUtil staxUtil) {
 
     getInitializationState().requireNotInitilized();
@@ -298,7 +302,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /**
    * @param stringUtil is the stringUtil to set
    */
-  @Resource
+  @Inject
   public void setStringUtil(StringUtil stringUtil) {
 
     getInitializationState().requireNotInitilized();

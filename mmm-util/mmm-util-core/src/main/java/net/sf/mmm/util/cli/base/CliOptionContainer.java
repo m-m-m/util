@@ -8,6 +8,7 @@ import java.lang.annotation.Annotation;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.value.api.validator.ValueValidator;
 
 /**
  * This is a container for a {@link CliOption} together with additional
@@ -27,12 +28,13 @@ public class CliOptionContainer extends CliParameterContainer {
    * @param option is the {@link #getOption() option}.
    * @param setter is the {@link #getSetter() setter}.
    * @param getter is the {@link #getGetter() getter}.
-   * @param constraint is the {@link #getConstraint() constraint}.
+   * @param validator is the {@link #getValidator() validator}.
    */
+  @SuppressWarnings("rawtypes")
   public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter, Annotation constraint) {
+      PojoPropertyAccessorNonArg getter, ValueValidator validator) {
 
-    super(setter, getter, constraint);
+    super(setter, getter, validator);
     this.option = option;
   }
 
@@ -49,7 +51,7 @@ public class CliOptionContainer extends CliParameterContainer {
    * {@inheritDoc}
    */
   @Override
-  protected Annotation getAnnotation() {
+  protected Annotation getParameterAnnotation() {
 
     return this.option;
   }

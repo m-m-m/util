@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
@@ -97,7 +97,7 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggable im
    * 
    * @param byteArrayPool is the {@link ByteArrayPool} to set.
    */
-  @Resource
+  @Inject
   public void setByteArrayPool(ByteArrayPool byteArrayPool) {
 
     this.byteArrayPool = byteArrayPool;

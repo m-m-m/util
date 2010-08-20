@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyAccessor {
+public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoPropertyAccessor {
 
   /**
    * The constructor.
@@ -76,6 +76,7 @@ public abstract class AbstractPojoPropertyAccessorProxy implements PojoPropertyA
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?> getPropertyClass() {
 
     return getDelegate().getPropertyClass();

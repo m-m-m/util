@@ -6,7 +6,7 @@ package net.sf.mmm.util.pojo.base;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
@@ -65,7 +65,7 @@ public class DefaultPojoFactory extends SimplePojoFactory {
    * @param collectionFactoryManager is the {@link CollectionFactoryManager}
    *        instance used to create {@link Map}s and {@link Collection}s.
    */
-  @Resource
+  @Inject
   public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
 
     getInitializationState().requireNotInitilized();

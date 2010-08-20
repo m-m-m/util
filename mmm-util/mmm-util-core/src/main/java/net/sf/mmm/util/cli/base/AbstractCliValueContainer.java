@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
-
 import org.slf4j.Logger;
 
 /**
@@ -77,13 +75,6 @@ public abstract class AbstractCliValueContainer implements CliValueContainer {
   public Logger getLogger() {
 
     return this.logger;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void validate() throws CliConstraintInvalidException {
-
   }
 
   /**

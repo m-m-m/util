@@ -5,7 +5,7 @@ package net.sf.mmm.util.event.base;
 
 import java.util.concurrent.Executor;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
@@ -45,7 +45,7 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
    * 
    * @param threadPool is used to dispatch events in separate threads.
    */
-  @Resource
+  @Inject
   public void setExecutor(Executor threadPool) {
 
     if (this.executor != null) {

@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -115,7 +115,7 @@ public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
    * 
    * @param iso8601Util is the {@link Iso8601Util}.
    */
-  @Resource
+  @Inject
   public void setIso8601Util(Iso8601Util iso8601Util) {
 
     getInitializationState().requireNotInitilized();
@@ -125,7 +125,7 @@ public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
   /**
    * @param reflectionUtil is the reflectionUtil to set
    */
-  @Resource
+  @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();

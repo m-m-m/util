@@ -9,6 +9,7 @@ import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.value.api.validator.ValueValidator;
 
 /**
  * This is a container for a {@link CliArgument} together with additional
@@ -31,12 +32,13 @@ public class CliArgumentContainer extends CliParameterContainer {
    * @param argument is the {@link #getArgument() argument}.
    * @param setter is the {@link #getSetter() setter}.
    * @param getter is the {@link #getGetter() getter}
-   * @param constraint is the {@link #getConstraint() constraint}.
+   * @param validator is the {@link #getValidator() validator}.
    */
+  @SuppressWarnings("rawtypes")
   public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter, Annotation constraint) {
+      PojoPropertyAccessorNonArg getter, ValueValidator validator) {
 
-    super(setter, getter, constraint);
+    super(setter, getter, validator);
     this.argument = argument;
     this.state = InitializationState.UNINITIALIZED;
   }
@@ -55,7 +57,7 @@ public class CliArgumentContainer extends CliParameterContainer {
    * {@inheritDoc}
    */
   @Override
-  protected Annotation getAnnotation() {
+  protected Annotation getParameterAnnotation() {
 
     return this.argument;
   }

@@ -11,8 +11,11 @@ import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
 
 /**
  * This interface represents a property of a
- * {@link net.sf.mmm.util.pojo.api.Pojo}. It is an alternative to
- * {@link java.beans.PropertyDescriptor} but only has focus on reflectively
+ * {@link net.sf.mmm.util.pojo.api.Pojo}. A property is some attribute of a
+ * {@link net.sf.mmm.util.pojo.api.Pojo} that can be accessed directly via a
+ * {@link java.lang.reflect.Field} or via a {@link java.lang.reflect.Method}
+ * (getter, setter, etc.). This {@link PojoPropertyDescriptor} is an alternative
+ * to {@link java.beans.PropertyDescriptor} but only has focus on reflectively
  * accessing objects. Therefore it works on any
  * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
  * 
@@ -38,8 +41,8 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
    * {@link #getAccessor(PojoPropertyAccessorMode) accessors} for the
    * represented property.
    * 
-   * @return a collection with all
-   *         {@link PojoPropertyDescriptor property descriptor}s
+   * @return a collection with all {@link PojoPropertyDescriptor property
+   *         descriptor}s
    */
   Collection<? extends PojoPropertyAccessor> getAccessors();
 

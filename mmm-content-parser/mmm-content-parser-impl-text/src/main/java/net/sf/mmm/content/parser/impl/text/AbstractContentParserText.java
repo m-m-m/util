@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.base.AbstractContentParser;
 import net.sf.mmm.util.io.api.EncodingUtil;
@@ -85,7 +85,7 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
   /**
    * @param encodingUtil is the encodingUtil to set
    */
-  @Resource
+  @Inject
   public void setEncodingUtil(EncodingUtil encodingUtil) {
 
     getInitializationState().requireNotInitilized();
@@ -107,7 +107,7 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
    * 
    * @param xmlUtil is the {@link XmlUtil} to use.
    */
-  @Resource
+  @Inject
   public void setXmlUtil(XmlUtil xmlUtil) {
 
     getInitializationState().requireNotInitilized();

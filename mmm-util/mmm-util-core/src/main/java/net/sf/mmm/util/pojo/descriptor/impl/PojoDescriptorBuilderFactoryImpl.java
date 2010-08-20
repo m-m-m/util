@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -76,7 +76,7 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
    * @param configuration is the {@link ExtendedPojoDescriptorConfigurationImpl}
    *        .
    */
-  @Resource
+  @Inject
   public void setConfiguration(ExtendedPojoDescriptorConfigurationImpl configuration) {
 
     getInitializationState().requireNotInitilized();

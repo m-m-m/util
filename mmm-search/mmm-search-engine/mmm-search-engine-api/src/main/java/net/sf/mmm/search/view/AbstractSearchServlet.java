@@ -6,7 +6,7 @@ package net.sf.mmm.search.view;
 import java.io.File;
 import java.io.IOException;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,7 +80,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /**
    * @param searchEngine the searchEngine to set
    */
-  @Resource
+  @Inject
   public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngine = searchEngine;

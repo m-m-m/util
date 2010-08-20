@@ -5,7 +5,7 @@ package net.sf.mmm.search.engine.impl;
 
 import java.io.IOException;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
@@ -71,7 +71,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * 
    * @param luceneAnalyzer the analyzer to set
    */
-  @Resource
+  @Inject
   public void setAnalyzer(Analyzer luceneAnalyzer) {
 
     getInitializationState().requireNotInitilized();
@@ -131,7 +131,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * @param formatter the formatter to set
    */
-  @Resource
+  @Inject
   public void setHighlightFormatter(Formatter formatter) {
 
     getInitializationState().requireNotInitilized();

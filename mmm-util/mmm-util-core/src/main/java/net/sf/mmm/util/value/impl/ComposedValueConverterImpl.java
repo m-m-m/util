@@ -486,14 +486,14 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
               .get(currentClass);
           if (converter != null) {
             if (traceEnabled) {
-              getLogger().debug(
+              getLogger().trace(
                   "trying converter for source-type '" + currentClass + "': "
                       + converter.getClass().getSimpleName());
             }
             TARGET result = converter.convert(value, valueSource, genericTargetType);
             if (result != null) {
               if (traceEnabled) {
-                getLogger().debug(
+                getLogger().trace(
                     "conversion successful using '" + converter.getClass().getName() + "'");
               }
               return result;

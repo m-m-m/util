@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.parser.base;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 
 /**
  * This is the abstract base implementation of a
@@ -28,7 +28,7 @@ public abstract class AbstractContentParser extends AbstractContentParserBase {
   /**
    * @param contentParserRegistrar is the contentParserRegistrar to set
    */
-  @Resource
+  @Inject
   public void setContentParserRegistrar(ContentParserRegistrar contentParserRegistrar) {
 
     getInitializationState().requireNotInitilized();

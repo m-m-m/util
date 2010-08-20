@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
 
 /**
  * A {@link CliValueContainer} is a simple container for the {@link #getValue()
@@ -14,15 +13,6 @@ import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
  * @since 2.0.0
  */
 public interface CliValueContainer {
-
-  /**
-   * This method validates the {@link #getValue() value}. If the
-   * {@link #getValue() value} is invalid, an exception will be thrown.
-   * 
-   * @throws CliConstraintInvalidException if the value is invalid according to
-   *         a {@link CliParameterContainer#getConstraint() constraint}.
-   */
-  void validate() throws CliConstraintInvalidException;
 
   /**
    * This method gets the value of a {@link net.sf.mmm.util.cli.api.CliOption

@@ -6,7 +6,15 @@ package net.sf.mmm.search.engine.impl;
 import java.io.IOException;
 import java.io.StringReader;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
+
+import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.base.SearchParseException;
+import net.sf.mmm.search.engine.api.ComplexSearchQuery;
+import net.sf.mmm.search.engine.api.SearchQuery;
+import net.sf.mmm.search.engine.api.SearchQueryBuilder;
+import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Token;
@@ -21,14 +29,6 @@ import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
-
-import net.sf.mmm.search.api.SearchEntry;
-import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.base.SearchParseException;
-import net.sf.mmm.search.engine.api.ComplexSearchQuery;
-import net.sf.mmm.search.engine.api.SearchQuery;
-import net.sf.mmm.search.engine.api.SearchQueryBuilder;
-import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder;
 
 /**
  * This is the implementation of the {@link SearchQueryBuilder} interface using
@@ -96,7 +96,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   /**
    * @param analyzer is the analyzer to set
    */
-  @Resource
+  @Inject
   public void setAnalyzer(Analyzer analyzer) {
 
     getInitializationState().requireNotInitilized();

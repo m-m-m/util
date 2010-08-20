@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -49,7 +49,7 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
    * 
    * @param stringUtil is the {@link StringUtil} instance.
    */
-  @Resource
+  @Inject
   public void setStringUtil(StringUtil stringUtil) {
 
     this.stringUtil = stringUtil;

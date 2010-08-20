@@ -7,6 +7,16 @@
   </properties>
   <body>
     <release version="2.0.0" date="2010-09-26" description="Subsequent release">
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.value.impl.ValueConverterToFile</code>: added.
+        ]]>
+      </action>      
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessor</code>: extracted code to AbstractPojoPropertyAccessorBase.
+        ]]>
+      </action>
       <action dev="hohwille" type="update">
         <![CDATA[
         Migrated to JSR 330. Replaced any <code>@Resource</code> with <code>@Inject</code>.

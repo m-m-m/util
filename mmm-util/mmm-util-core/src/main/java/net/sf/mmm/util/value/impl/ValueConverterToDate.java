@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.impl;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -52,7 +52,7 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
    * 
    * @param iso8601Util is the {@link Iso8601Util} to use.
    */
-  @Resource
+  @Inject
   public void setIso8601Util(Iso8601Util iso8601Util) {
 
     getInitializationState().requireNotInitilized();

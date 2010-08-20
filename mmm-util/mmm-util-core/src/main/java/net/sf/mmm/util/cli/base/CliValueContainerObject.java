@@ -3,15 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
-import java.io.File;
-
-import net.sf.mmm.util.cli.api.CliConstraintFile;
-import net.sf.mmm.util.cli.api.CliConstraintInvalidException;
 import net.sf.mmm.util.cli.api.CliOptionDuplicateException;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
-import net.sf.mmm.util.file.api.FileAlreadyExistsException;
-import net.sf.mmm.util.file.api.FileNotExistsException;
-import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 import org.slf4j.Logger;
@@ -78,38 +71,4 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
     this.value = newValue;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void validate() throws CliConstraintInvalidException {
-
-    CliParameterContainer parameterContainer = getParameterContainer();
-    if (File.class.isAssignableFrom(parameterContainer.getSetter().getPropertyClass())) {
-      CliConstraintFile constraint = parameterContainer.getConstraint(CliConstraintFile.class);
-      if (constraint != null) {
-        File file = (File) this.value;
-        FileType fileType = FileType.getType(file);
-        if (fileType != null) {
-          if (!fileType.equals(constraint.type())) {
-            // throw new WrongFileTypeException();
-          }
-        }
-        if (!constraint.ignoreExists()) {
-          if (constraint.exists()) {
-            // if (!file.exists()) {
-            if (fileType == null) {
-              throw new FileNotExistsException(file);
-            }
-          } else {
-            // if (file.exists()) {
-            if (fileType != null) {
-              throw new FileAlreadyExistsException(file);
-            }
-          }
-        }
-      }
-    }
-    super.validate();
-  }
 }

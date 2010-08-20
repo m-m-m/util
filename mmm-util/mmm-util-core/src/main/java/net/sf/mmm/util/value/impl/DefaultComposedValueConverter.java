@@ -65,6 +65,7 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
     addConverterComponent(new ValueConverterToArrayOfLong());
     addConverterComponent(new ValueConverterToArrayOfObject());
     addConverterComponent(new ValueConverterToArrayOfShort());
+    addConverterComponent(new ValueConverterToFile());
     super.doInitialize();
   }
 }

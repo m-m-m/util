@@ -6,11 +6,8 @@ package net.sf.mmm.content.parser.impl.text;
 import java.io.BufferedReader;
 import java.util.Properties;
 
-import javax.annotation.Resource;
-
 import net.sf.mmm.util.xml.api.ParserState;
 import net.sf.mmm.util.xml.api.XmlUtil;
-import net.sf.mmm.util.xml.base.XmlUtilImpl;
 
 /**
  * This is the abstract base implementation of a
@@ -21,9 +18,6 @@ import net.sf.mmm.util.xml.base.XmlUtilImpl;
  */
 public abstract class AbstractContentParserTextMarkupAware extends AbstractContentParserText {
 
-  /** @see #getXmlUtil() */
-  private XmlUtil xmlUtil;
-
   /**
    * The constructor.
    */
@@ -33,33 +27,12 @@ public abstract class AbstractContentParserTextMarkupAware extends AbstractConte
   }
 
   /**
-   * @return the xmlUtil
-   */
-  protected XmlUtil getXmlUtil() {
-
-    return this.xmlUtil;
-  }
-
-  /**
-   * @param xmlUtil is the xmlUtil to set
-   */
-  @Resource
-  public void setXmlUtil(XmlUtil xmlUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.xmlUtil = xmlUtil;
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.xmlUtil == null) {
-      this.xmlUtil = XmlUtilImpl.getInstance();
-    }
   }
 
   /**
@@ -71,10 +44,11 @@ public abstract class AbstractContentParserTextMarkupAware extends AbstractConte
 
     long maxChars = getMaximumBufferSize() / 2;
     ParserState parserState = null;
+    XmlUtil xmlUtil = getXmlUtil();
     String line = bufferedReader.readLine();
     while (line != null) {
       parseLine(properties, line);
-      parserState = this.xmlUtil.extractPlainText(line, textBuffer, parserState);
+      parserState = xmlUtil.extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }
