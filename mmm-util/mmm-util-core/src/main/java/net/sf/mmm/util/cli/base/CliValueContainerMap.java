@@ -5,13 +5,10 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.Map;
 
-import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsParseException;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 
 import org.slf4j.Logger;
@@ -22,10 +19,10 @@ import org.slf4j.Logger;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliValueContainerMap extends AbstractCliValueContainer {
+public class CliValueContainerMap extends AbstractCliValueContainerContainer {
 
   /** @see #getValue() */
-  private final Map<Object, Object> map;
+  private Map<Object, Object> map;
 
   /**
    * The constructor.
@@ -54,11 +51,21 @@ public class CliValueContainerMap extends AbstractCliValueContainer {
   }
 
   /**
-   * This method is like {@link #setValue(String)} but for a single entry.
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void setValueInternal(Object containerValue) {
+
+    this.map = (Map<Object, Object>) containerValue;
+  }
+
+  /**
+   * {@inheritDoc}
    * 
    * @param entry is a single map-entry in the form "key=value".
-   * @param propertyType is the {@link GenericType} of the {@link Map}.
    */
+  @Override
   protected void setValueEntry(String entry, GenericType<?> propertyType) {
 
     int splitIndex = entry.indexOf('=');
@@ -86,31 +93,4 @@ public class CliValueContainerMap extends AbstractCliValueContainer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public void setValue(String argument) {
-
-    PojoPropertyAccessorOneArg setter = getParameterContainer().getSetter();
-    char collectionValueSeparator = getCliState().getCliStyle().collectionValueSeparator();
-    if (collectionValueSeparator == CliStyle.COLLECTION_VALUE_SEPARATOR_NONE) {
-      // multi-value style
-      setValueEntry(argument, setter.getPropertyType());
-    } else {
-      CharSequenceScanner scanner = new CharSequenceScanner(argument);
-      while (scanner.hasNext()) {
-        String entry = scanner.readUntil(collectionValueSeparator, true);
-        setValueEntry(entry, setter.getPropertyType());
-      }
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isArrayMapOrCollection() {
-
-    return true;
-  }
 }

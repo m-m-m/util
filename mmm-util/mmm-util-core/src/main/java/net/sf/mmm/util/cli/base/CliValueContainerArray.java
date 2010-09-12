@@ -17,6 +17,9 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerArray extends CliValueContainerCollection {
 
+  /** The array or <code>null</code> if NOT yet set. */
+  private Object array;
+
   /**
    * The constructor.
    * 
@@ -36,10 +39,24 @@ public class CliValueContainerArray extends CliValueContainerCollection {
    * {@inheritDoc}
    */
   @Override
+  protected void setValueInternal(Object containerValue) {
+
+    assert (this.array == null);
+    this.array = containerValue;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public Object getValue() {
 
-    Class<?> componentType = getParameterContainer().getSetter().getPropertyClass()
-        .getComponentType();
-    return getConfiguration().getCollectionReflectionUtil().toArray(getCollection(), componentType);
+    if (this.array == null) {
+      Class<?> componentType = getParameterContainer().getSetter().getPropertyClass()
+          .getComponentType();
+      this.array = getConfiguration().getCollectionReflectionUtil().toArray(getCollection(),
+          componentType);
+    }
+    return this.array;
   }
 }

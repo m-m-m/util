@@ -12,7 +12,6 @@ import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
-import net.sf.mmm.util.value.api.PojoValidator;
 
 /**
  * This interface bundles the configuration for the
@@ -71,15 +70,6 @@ public interface CliParserConfiguration {
    *         help texts.
    */
   LineWrapper getLineWrapper();
-
-  /**
-   * This method gets the {@link PojoValidator}.
-   * 
-   * @return the {@link PojoValidator} used to validate the
-   *         {@link AbstractCliParser#getState() state-object} after the
-   *         {@link CliValueContainer parameter values} have been assigned.
-   */
-  PojoValidator getPojoValidator();
 
   // /**
   // * @return the {@link PojoDescriptorBuilderFactory} instance to use.

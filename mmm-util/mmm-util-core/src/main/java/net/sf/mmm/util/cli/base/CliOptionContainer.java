@@ -5,7 +5,9 @@ package net.sf.mmm.util.cli.base;
 
 import java.lang.annotation.Annotation;
 
+import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.value.api.ValueValidator;
@@ -77,6 +79,19 @@ public class CliOptionContainer extends CliParameterContainer {
   public boolean isTrigger() {
 
     return boolean.class.equals(getSetter().getPropertyClass());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CliContainerStyle getContainerStyle(CliStyle cliStyle) {
+
+    CliContainerStyle style = this.option.containerStyle();
+    if (style == CliContainerStyle.DEFAULT) {
+      style = cliStyle.containerStyle();
+    }
+    return style;
   }
 
 }

@@ -4,28 +4,36 @@
 package net.sf.mmm.util.cli.api;
 
 /**
- * This enum contains the available styles for arrays and collections.
+ * This enum contains the available styles for container types. A container type
+ * is an array, {@link java.util.Map} or {@link java.util.Collection}.
  * 
- * @see CliConstraintContainer
+ * @see CliStyle#containerStyle()
+ * @see CliOption#containerStyle()
+ * @see CliArgument#containerStyle()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public enum CliCollectionStyle {
+public enum CliContainerStyle {
+
+  /**
+   * The default style that indicates a fallback to the
+   * {@link CliStyle#containerStyle()}.
+   */
+  DEFAULT,
 
   /**
    * The {@link CliOption} or {@link CliArgument} may occur multiple times. The
    * collection gets filled with all these values in the order of their
-   * occurrence. This style is the default even if no
-   * {@link CliConstraintContainer} is annotated. For {@link CliArgument
-   * arguments} this style is only allowed for the last {@link CliArgument}.<br>
+   * occurrence. This style is the default. For {@link CliArgument arguments}
+   * this style is only allowed for the last {@link CliArgument}.<br>
    * Example:<br>
    * Assuming we have a CLI program called <code>Foo</code> with a property
    * <code>private List<String> listProperty</code> annotated with a
    * {@link CliOption} {@link CliOption#name() named} <code>--list</code> and
-   * also annotated with this style via {@link CliConstraintContainer}. It may
-   * also have another boolean option named <code>--bar</code>. Now we call the
-   * program like this:
+   * with this style via {@link CliOption#containerStyle()}. It may also have
+   * another boolean option named <code>--bar</code>. Now we call the program
+   * like this:
    * 
    * <pre>
    * Foo --list first --bar --list "second value" --list 3

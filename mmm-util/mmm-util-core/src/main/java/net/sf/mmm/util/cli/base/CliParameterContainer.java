@@ -7,7 +7,9 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Map;
 
+import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -166,4 +168,17 @@ public abstract class CliParameterContainer {
     return sb.toString();
   }
 
+  /**
+   * This method gets the {@link CliContainerStyle style} of this parameter. If
+   * the style of the parameter-annotation (
+   * {@link net.sf.mmm.util.cli.api.CliArgument#containerStyle()} or
+   * {@link net.sf.mmm.util.cli.api.CliOption#containerStyle()}) is
+   * {@link CliContainerStyle#DEFAULT} this method will return
+   * {@link net.sf.mmm.util.cli.api.CliStyle#containerStyle()}.
+   * 
+   * @param cliStyle TODO
+   * 
+   * @return the {@link CliContainerStyle style} for this parameter.
+   */
+  public abstract CliContainerStyle getContainerStyle(CliStyle cliStyle);
 }

@@ -29,9 +29,6 @@ import net.sf.mmm.util.filter.api.Filter;
 @Documented
 public @interface CliStyle {
 
-  /** @see #collectionValueSeparator() */
-  char COLLECTION_VALUE_SEPARATOR_NONE = '\0';
-
   /**
    * Determines how to {@link CliStyleHandling handle} a {@link CliOption} that
    * is supplied as separate CLI parameter (e.g.
@@ -111,30 +108,13 @@ public @interface CliStyle {
   CliStyleHandling modeDuplicated() default CliStyleHandling.DEBUG;
 
   /**
-   * The character used to separate collection values (e.g. ',' or ';'). The
-   * value {@link #COLLECTION_VALUE_SEPARATOR_NONE} can be used to disable
-   * separator and enable multi-parameter submission of collection values. This
-   * is the default. In multi-parameter style an {@link CliOption option} or
-   * {@link CliArgument argument} with property-type collection may occur
-   * multiple times. The collection gets filled with all these values in the
-   * order of their occurrence as CLI parameters. For {@link CliArgument
-   * arguments} this style is only allowed for the last {@link CliArgument}.<br>
-   * Example:<br>
-   * Assuming we have a CLI program called <code>Foo</code> with a property
-   * <code>private List&lt;String&gt; listProperty</code> annotated with a
-   * {@link CliOption} {@link CliOption#name() named} <code>--list</code> and
-   * {@link #collectionValueSeparator()} is
-   * {@link #COLLECTION_VALUE_SEPARATOR_NONE}. Further it also has a boolean
-   * option named <code>--bar</code>. Now we call the program like this:
-   * 
-   * <pre>
-   * Foo --list first --bar --list "second value" --list 3
-   * </pre>
-   * 
-   * So <code>listProperty</code> will be filled with a List containing
-   * {"first", "second value", "3"}.
+   * The {@link CliContainerStyle style} of container values. It shall NOT be
+   * {@link CliContainerStyle#DEFAULT}. The default is
+   * {@link CliContainerStyle#MULTIPLE_OCCURRENCE}. This setting can be
+   * overridden via {@link CliOption#containerStyle()} or
+   * {@link CliArgument#containerStyle()}.
    */
-  char collectionValueSeparator() default COLLECTION_VALUE_SEPARATOR_NONE;
+  CliContainerStyle containerStyle() default CliContainerStyle.MULTIPLE_OCCURRENCE;
 
   /**
    * Determines how to {@link CliStyleHandling handle} if the property-type

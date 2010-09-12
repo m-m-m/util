@@ -55,12 +55,12 @@ import java.lang.annotation.Target;
  * <tr>
  * <td>{@link Number}</td>
  * <td>The subclasses of {@link Number} from the package <code>java.lang</code>
- * are always supported. See {@link CliConstraintNumber}.</td>
+ * are always supported.</td>
  * </tr>
  * <tr>
  * <td>{@link java.io.File}</td>
  * <td>A file {@link java.io.File#File(String) created} from the value of the
- * option. See {@link CliConstraintFile}.</td>
+ * option.</td>
  * </tr>
  * <tr>
  * <td>{@link Enum}</td>
@@ -159,5 +159,13 @@ public @interface CliOption {
    * @see CliMode
    */
   String mode() default CliMode.ID_DEFAULT;
+
+  /**
+   * The {@link CliContainerStyle style} of this option if it has a container
+   * type. The default is {@link CliContainerStyle#DEFAULT}.
+   * 
+   * @see CliStyle#containerStyle()
+   */
+  CliContainerStyle containerStyle() default CliContainerStyle.DEFAULT;
 
 }

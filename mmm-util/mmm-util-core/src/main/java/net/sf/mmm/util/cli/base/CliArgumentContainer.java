@@ -6,6 +6,8 @@ package net.sf.mmm.util.cli.base;
 import java.lang.annotation.Annotation;
 
 import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.cli.api.CliContainerStyle;
+import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -103,4 +105,16 @@ public class CliArgumentContainer extends CliParameterContainer {
     this.state = state;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CliContainerStyle getContainerStyle(CliStyle cliStyle) {
+
+    CliContainerStyle style = this.argument.containerStyle();
+    if (style == CliContainerStyle.DEFAULT) {
+      style = cliStyle.containerStyle();
+    }
+    return style;
+  }
 }

@@ -5,10 +5,11 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.Collection;
 
+import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliStyle;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 import org.slf4j.Logger;
 
@@ -19,10 +20,10 @@ import org.slf4j.Logger;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class CliValueContainerCollection extends AbstractCliValueContainer {
+public class CliValueContainerCollection extends AbstractCliValueContainerContainer {
 
   /** @see #getValue() */
-  private final Collection<Object> collection;
+  private Collection<Object> collection;
 
   /**
    * The constructor.
@@ -60,14 +61,21 @@ public class CliValueContainerCollection extends AbstractCliValueContainer {
   }
 
   /**
-   * This method is like {@link #setValue(String)} but for a single entry.
-   * 
-   * @param entry is a single collection-entry given as string.
-   * @param propertyType is the {@link GenericType} of the {@link Collection}.
+   * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void setValueInternal(Object containerValue) {
+
+    this.collection = (Collection<Object>) containerValue;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void setValueEntry(String entry, GenericType<?> propertyType) {
 
-    // value
     GenericType<?> valueType = propertyType.getComponentType();
     Object value = getConfiguration().getConverter().convertValue(entry, getParameterContainer(),
         valueType.getAssignmentClass(), valueType);
@@ -77,28 +85,22 @@ public class CliValueContainerCollection extends AbstractCliValueContainer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setValue(String argument) {
 
     PojoPropertyAccessorOneArg setter = getParameterContainer().getSetter();
-    char collectionValueSeparator = getCliState().getCliStyle().collectionValueSeparator();
-    if (collectionValueSeparator == CliStyle.COLLECTION_VALUE_SEPARATOR_NONE) {
-      // multi-value style
-      setValueEntry(argument, setter.getPropertyType());
-    } else {
-      CharSequenceScanner scanner = new CharSequenceScanner(argument);
-      while (scanner.hasNext()) {
-        String entry = scanner.readUntil(collectionValueSeparator, true);
-        setValueEntry(entry, setter.getPropertyType());
-      }
+    CliStyle cliStyle = getCliState().getCliStyle();
+    CliContainerStyle style = getParameterContainer().getContainerStyle(cliStyle);
+    switch (style) {
+      case MULTIPLE_OCCURRENCE:
+        setValueEntry(argument, setter.getPropertyType());
+        break;
+      case COMMA_SEPARATED:
+        break;
+      case SEMICOLON_SEPARATED:
+        break;
+      default :
+        throw new IllegalCaseException(CliContainerStyle.class, style);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isArrayMapOrCollection() {
-
-    return true;
   }
 }

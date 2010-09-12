@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 import net.sf.mmm.test.ExceptionHelper;
@@ -231,6 +232,28 @@ public class ComposedValueConverterTest {
   }
 
   @Test
+  public void testConvert2Map() throws Exception {
+
+    ComposedValueConverter converter = getComposedValueConverter();
+    Map<Integer, List<String>> value;
+    Type genericType = TypeClass.class.getDeclaredField("mapOfInteger2StringList").getGenericType();
+    String valueSource = "test-case";
+    value = converter.convertValue("41=foo,<{[42=bar,thing]}>,43=some", valueSource, Map.class,
+        genericType);
+    Assert.assertEquals(3, value.size());
+    List<String> list41 = value.get(41);
+    Assert.assertEquals(1, list41.size());
+    Assert.assertEquals("foo", list41.get(0));
+    List<String> list42 = value.get(42);
+    Assert.assertEquals(2, list42.size());
+    Assert.assertEquals("bar", list42.get(0));
+    Assert.assertEquals("thing", list42.get(1));
+    List<String> list43 = value.get(43);
+    Assert.assertEquals(1, list43.size());
+    Assert.assertEquals("some", list43.get(0));
+  }
+
+  @Test
   public void testConvert2Array() throws Exception {
 
     ComposedValueConverter converter = getComposedValueConverter();
@@ -433,5 +456,10 @@ public class ComposedValueConverterTest {
     SOME_ENUM_CONSTANT,
 
     OTHER_CONSTANT
+  }
+
+  public static class TypeClass {
+
+    private Map<Integer, List<String>> mapOfInteger2StringList;
   }
 }

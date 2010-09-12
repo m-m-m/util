@@ -6,8 +6,6 @@ package net.sf.mmm.framework.base;
 import net.sf.mmm.framework.api.IocContainer;
 import net.sf.mmm.framework.api.IocContainerException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -23,8 +21,8 @@ public class SpringContainer implements IocContainer {
   /** The {@link ConfigurableApplicationContext} to delegate to. */
   private final ConfigurableApplicationContext applicationContext;
 
-  /** The {@link Logger}. */
-  private final Logger logger;
+  // /** The {@link Logger}. */
+  // private final Logger logger;
 
   /**
    * The constructor.
@@ -55,7 +53,7 @@ public class SpringContainer implements IocContainer {
 
     super();
     this.applicationContext = applicationContext;
-    this.logger = LoggerFactory.getLogger(getClass());
+    // this.logger = LoggerFactory.getLogger(getClass());
   }
 
   /**
@@ -73,9 +71,11 @@ public class SpringContainer implements IocContainer {
             + "' is ambiguous!\n" + componentIds);
       }
       String componentId = componentIds[0];
-      if (!componentId.equals(apiClass.getName())) {
-        this.logger.warn("Component-ID for '" + apiClass.getName() + "' is '" + componentId + "'!");
-      }
+      // ...Does not make sense anymore with JSR 330...
+      // if (!componentId.equals(apiClass.getName())) {
+      // this.logger.warn("Component-ID for '" + apiClass.getName() + "' is '" +
+      // componentId + "'!");
+      // }
       component = (COMPONENT_API) this.applicationContext.getBean(componentId);
     }
     if (component == null) {

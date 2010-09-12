@@ -40,7 +40,8 @@ import java.lang.annotation.Target;
 public @interface CliArgument {
 
   /**
-   * Symbolic name used for {@link #addCloseTo()} to identify the first argument.
+   * Symbolic name used for {@link #addCloseTo()} to identify the first
+   * argument.
    */
   String ID_FIRST = "#first";
 
@@ -51,8 +52,8 @@ public @interface CliArgument {
 
   /**
    * The ID of the argument used to identify the argument e.g. via
-   * {@link #addCloseTo()}. The default is the empty string that is treated as if
-   * the ID is set to the same value as {@link #name()}.
+   * {@link #addCloseTo()}. The default is the empty string that is treated as
+   * if the ID is set to the same value as {@link #name()}.
    */
   String id() default "";
 
@@ -108,4 +109,13 @@ public @interface CliArgument {
    * @see CliMode#parentIds()
    */
   boolean required() default true;
+
+  /**
+   * The {@link CliContainerStyle style} of this argument if it has a container
+   * type. The default is {@link CliContainerStyle#DEFAULT}.
+   * 
+   * @see CliStyle#containerStyle()
+   */
+  CliContainerStyle containerStyle() default CliContainerStyle.DEFAULT;
+
 }
