@@ -635,7 +635,7 @@ public enum DiacriticalMark implements Datatype<Character> {
   // },
 
   /** ~ on top. */
-  TILDE('~', UnicodeUtil.COMBINING_TILDE, "tilde") {
+  TILDE(UnicodeUtil.TILDE, UnicodeUtil.COMBINING_TILDE, "tilde") {
 
     /**
      * {@inheritDoc}

@@ -22,9 +22,6 @@ public abstract class ReflectionException extends NlsRuntimeException {
   /** Key for the NLS message. */
   protected static final String KEY_ACCESSIBLE = "accessible";
 
-  /** Key for the NLS message. */
-  protected static final String KEY_ANNOTATION = "annotation";
-
   /**
    * The constructor.
    * 
