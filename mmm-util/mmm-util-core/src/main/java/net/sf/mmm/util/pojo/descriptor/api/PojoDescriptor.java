@@ -13,8 +13,8 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
  * {@link net.sf.mmm.util.pojo.api.Pojo}. A
- * {@link net.sf.mmm.util.pojo.api.Pojo} in this manner is more or less
- * any java object.<br>
+ * {@link net.sf.mmm.util.pojo.api.Pojo} in this manner is more or less any java
+ * object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
  * Look at the following example:
  * 
@@ -44,7 +44,9 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * <br>
  * <table border="1">
  * <tr>
- * <th>{@link net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName#getName() Name}</th>
+ * <th>
+ * {@link net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName#getName()
+ * Name}</th>
  * <th>{@link PojoPropertyAccessorMode Mode}</th>
  * <th>{@link PojoAttributeType#getPojoClass() Property-Type}</th>
  * <th>{@link PojoPropertyAccessor#getAccessibleObject() Method}</th>
@@ -126,15 +128,16 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * <td>getColors().set(int, String)</td>
  * <td>enhanced virtual accessor</td>
  * </tr>
- * </table><br>
+ * </table>
+ * <br>
  * <b>ATTENTION:</b><br>
  * When using this interface without generic parameterization you can NOT
  * properly call the
  * {@link #getAccessor(String, PojoPropertyAccessorMode, boolean) getAccessor}
- * methods. If the type of your {@link net.sf.mmm.util.pojo.api.Pojo} is
- * unknown at compile-time, you need to parameterize with the unbound wildcard
- * as <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not
- * call the <code>get</code> or <code>set</code> methods.
+ * methods. If the type of your {@link net.sf.mmm.util.pojo.api.Pojo} is unknown
+ * at compile-time, you need to parameterize with the unbound wildcard as
+ * <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not call
+ * the <code>get</code> or <code>set</code> methods.
  * 
  * @param <POJO> is the templated type of the {@link #getPojoClass() pojo}.
  * 
@@ -150,8 +153,8 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * 
    * @param propertyName is the name of the requested property.
    * @return the descriptor for the property identified by the given
-   *         <code>propertyName</code> or <code>null</code> if no such
-   *         property exists for the according {@link #getPojoClass() pojo}.
+   *         <code>propertyName</code> or <code>null</code> if no such property
+   *         exists for the according {@link #getPojoClass() pojo}.
    */
   PojoPropertyDescriptor getPropertyDescriptor(String propertyName);
 
@@ -159,8 +162,8 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * This method gets the {@link PojoPropertyDescriptor descriptor}s of all
    * properties of the according {@link #getPojoClass() pojo}.
    * 
-   * @return a collection with all
-   *         {@link PojoPropertyDescriptor property descriptor}s
+   * @return a collection with all {@link PojoPropertyDescriptor property
+   *         descriptor}s
    */
   Collection<? extends PojoPropertyDescriptor> getPropertyDescriptors();
 
@@ -172,16 +175,17 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @param <ACCESSOR> is the type of the requested accessor.
    * @param property is the {@link PojoPropertyDescriptor#getName() name} of the
    *        property. If the given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET GET}
-   *        it is treated as for {@link #getProperty(Object, String)}. If the
-   *        given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET SET}
-   *        it is treated as for {@link #setProperty(Object, String, Object)}.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
+   *        GET} it is treated as for {@link #getProperty(Object, String)}. If
+   *        the given <code>mode</code> is
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET
+   *        SET} it is treated as for
+   *        {@link #setProperty(Object, String, Object)}.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
    *        requested accessor.
-   * @return the requested accessor or <code>null</code> if NOT found (there
-   *         is no property named <code>propertyName</code>, the property has
-   *         no accessor for the given <code>mode</code>, etc.).
+   * @return the requested accessor or <code>null</code> if NOT found (there is
+   *         no property named <code>propertyName</code>, the property has no
+   *         accessor for the given <code>mode</code>, etc.).
    */
   <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode);
@@ -190,7 +194,8 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * This method gets the accessor for the given
    * <code>{@link PojoPropertyAccessor#getMode() mode}</code> from the
    * {@link #getPropertyDescriptor(String) descriptor} with the given
-   * <code>{@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() propertyName}</code>.
+   * <code>{@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() propertyName}</code>
+   * .
    * 
    * @see #getPropertyDescriptor(String)
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
@@ -198,11 +203,12 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @param <ACCESSOR> is the type of the requested accessor.
    * @param property is the {@link PojoPropertyDescriptor#getName() name} of the
    *        property. If the given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET GET}
-   *        it is treated as for {@link #getProperty(Object, String)}. If the
-   *        given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET SET}
-   *        it is treated as for {@link #setProperty(Object, String, Object)}.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
+   *        GET} it is treated as for {@link #getProperty(Object, String)}. If
+   *        the given <code>mode</code> is
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET
+   *        SET} it is treated as for
+   *        {@link #setProperty(Object, String, Object)}.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
    *        requested accessor.
    * @param required - if <code>true</code> the accessor is required and an
@@ -232,7 +238,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]*</code></td>
-   * <td><small>{@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET}</small></td>
+   * <td><small>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET}
+   * </small></td>
    * <td>fooBar</td>
    * <td>
    * <ul>
@@ -242,7 +250,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]* "[" [0-9]+ "]"</code></td>
-   * <td><small>{@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED}</small></td>
+   * <td><small>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED}
+   * </small></td>
    * <td>fooBar[42]</td>
    * <td>
    * <ul>
@@ -254,7 +264,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]* "['" [a-zA-Z0-9]+ "']"</code></td>
-   * <td><small>{@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED}</small></td>
+   * <td><small>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED}
+   * </small></td>
    * <td>fooBar['key']</td>
    * <td>
    * <ul>
@@ -271,8 +283,8 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @return the value of the requested property. It will be an instance of the
    *         {@link PojoPropertyAccessor#getPropertyClass() type} of the
    *         according
-   *         {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
-   *         Depending on the POJO, the value may be <code>null</code>.
+   *         {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
+   *         getter}. Depending on the POJO, the value may be <code>null</code>.
    * @throws PojoPropertyNotFoundException if the property with the given
    *         <code>propertyName</code> was NOT
    *         {@link #getPropertyDescriptor(String) found} or has no such
@@ -287,9 +299,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
   /**
    * This method sets the given <code>value</code> for the
    * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>property</code> of the given <code>pojoInstance</code>. The
-   * effect depends on the form of the given <code>property</code> as shown by
-   * the following table:<br>
+   * <code>property</code> of the given <code>pojoInstance</code>. The effect
+   * depends on the form of the given <code>property</code> as shown by the
+   * following table:<br>
    * <table border="1">
    * <tr>
    * <th><code>property</code></th>
@@ -299,7 +311,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]*</code></td>
-   * <td><small>{@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET}</small></td>
+   * <td><small>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET}
+   * </small></td>
    * <td>fooBar</td>
    * <td>
    * <ul>
@@ -309,7 +323,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]* "[" [0-9]+ "]"</code></td>
-   * <td><small>{@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED}</small></td>
+   * <td><small>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED}
+   * </small></td>
    * <td>fooBar[42]</td>
    * <td>
    * <ul>
@@ -321,7 +337,9 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]* "['" [a-zA-Z0-9]+ "']"</code></td>
-   * <td><small>{@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED}</small></td>
+   * <td><small>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED}
+   * </small></td>
    * <td>fooBar['key']</td>
    * <td>
    * <ul>
@@ -352,8 +370,8 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE size}
-   * of the {@link #getPropertyDescriptor(String) property} with the given
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE
+   * size} of the {@link #getPropertyDescriptor(String) property} with the given
    * <code>propertyName</code> from the given <code>pojoInstance</code>.
    * 
    * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
@@ -375,10 +393,11 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
   /**
    * This method adds the given <code>item</code> to the list-like
    * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> from the given <code>pojoInstance</code>
-   * using the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#ADD add}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
+   * <code>propertyName</code> from the given <code>pojoInstance</code> using
+   * the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#ADD
+   * add} {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+   * accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
    *        access the property.
@@ -401,11 +420,13 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
   /**
    * This method removes the given <code>item</code> from an array or
    * {@link Collection} using the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#REMOVE remove}
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#REMOVE
+   * remove}
    * 
    * {@link #getPropertyDescriptor(String) property} with the given
    * <code>propertyName</code> from the given <code>pojoInstance</code>
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+   * accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
    *        access the property.
@@ -430,10 +451,11 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
   /**
    * This method gets the item with the given <code>index</code> from the
    * list-like {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> of the given <code>pojoInstance</code> using
-   * the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
+   * <code>propertyName</code> of the given <code>pojoInstance</code> using the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED
+   * indexed getter}
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+   * accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
    *        add the given property <code>item</code>.
@@ -456,12 +478,13 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
 
   /**
    * This method sets the given <code>item</code> at the given
-   * <code>index</code> in the list-like
-   * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> of the given <code>pojoInstance</code> using
-   * the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed setter}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
+   * <code>index</code> in the list-like {@link #getPropertyDescriptor(String)
+   * property} with the given <code>propertyName</code> of the given
+   * <code>pojoInstance</code> using the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED
+   * indexed setter}
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
+   * accessor}.
    * 
    * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
    *        access the property.

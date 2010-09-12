@@ -8,7 +8,7 @@ import java.lang.annotation.Annotation;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-import net.sf.mmm.util.value.api.validator.ValueValidator;
+import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
  * This is a container for a {@link CliOption} together with additional

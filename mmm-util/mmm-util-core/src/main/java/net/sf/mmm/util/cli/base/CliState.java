@@ -38,7 +38,7 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
-import net.sf.mmm.util.value.api.validator.ValueValidator;
+import net.sf.mmm.util.value.api.ValueValidator;
 
 import org.slf4j.Logger;
 

@@ -29,8 +29,8 @@ import java.lang.annotation.Target;
  * whitespaces or other characters that are interpreted by the shell (e.g.
  * backslash in Unix).<br>
  * The type of the annotated property has to be supported by the CLI
- * implementation so the value can be converted properly. The followng types are
- * guaranteed to be supported:
+ * implementation so the value can be converted properly. The following types
+ * are guaranteed to be supported:
  * <table border="1">
  * <tr>
  * <th>Type</th>
@@ -69,6 +69,8 @@ import java.lang.annotation.Target;
  * may also be replaced by hyphen ("-") or whitespace (" ").</td>
  * </tr>
  * </table>
+ * However the default implementation can handle any reasonable type via
+ * {@link net.sf.mmm.util.value.api.ComposedValueConverter}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.base;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.value.api.validator.ValueValidator}
+ * This is an implementation of {@link net.sf.mmm.util.value.api.ValueValidator}
  * that {@link #validate(Object, Object) validates} that a given
  * <code>value</code> is NOT <code>null</code>.
  * 

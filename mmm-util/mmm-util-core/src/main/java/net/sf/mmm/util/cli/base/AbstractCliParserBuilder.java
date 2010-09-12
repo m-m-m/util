@@ -28,6 +28,8 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.base.DefaultLineWrapper;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
+import net.sf.mmm.util.value.api.PojoValidator;
+import net.sf.mmm.util.value.base.PojoValidatorDummy;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
@@ -72,6 +74,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
 
   /** @see #getLineWrapper() */
   private LineWrapper lineWrapper;
+
+  /** @see #getPojoValidator() */
+  private PojoValidator pojoValidator;
 
   /**
    * The constructor.
@@ -120,6 +125,9 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
       DefaultLineWrapper wrapper = new DefaultLineWrapper();
       wrapper.initialize();
       this.lineWrapper = wrapper;
+    }
+    if (this.pojoValidator == null) {
+      this.pojoValidator = new PojoValidatorDummy();
     }
   }
 
@@ -343,6 +351,24 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
 
     getInitializationState().requireNotInitilized();
     this.lineWrapper = lineWrapper;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public PojoValidator getPojoValidator() {
+
+    return this.pojoValidator;
+  }
+
+  /**
+   * @param pojoValidator is the pojoValidator to set
+   */
+  @Inject
+  public void setPojoValidator(PojoValidator pojoValidator) {
+
+    getInitializationState().requireNotInitilized();
+    this.pojoValidator = pojoValidator;
   }
 
 }

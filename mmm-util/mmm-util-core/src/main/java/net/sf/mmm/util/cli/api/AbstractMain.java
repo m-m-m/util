@@ -6,7 +6,6 @@ package net.sf.mmm.util.cli.api;
 import java.io.PrintWriter;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.cli.base.CliParameterContainer;
 import net.sf.mmm.util.cli.base.DefaultCliParserBuilder;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.AppendableWriter;
@@ -37,7 +36,7 @@ public abstract class AbstractMain {
    * The {@link #run(CliModeObject) exit-code} on constraint error (illegal
    * command-line value).
    * 
-   * @see CliParameterContainer#getConstraintValue()
+   * @see net.sf.mmm.util.cli.base.CliParameterContainer#getValidator()
    */
   protected static final int EXIT_CODE_CONSTRAINT_VIOLATION = 2;
 

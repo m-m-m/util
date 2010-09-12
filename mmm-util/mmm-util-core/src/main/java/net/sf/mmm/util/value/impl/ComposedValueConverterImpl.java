@@ -65,7 +65,9 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       throw new ResourceMissingException("converters");
     }
     for (ValueConverter<?, ?> converter : this.converters) {
-      addConverterInternal(converter);
+      if (converter != this) {
+        addConverterInternal(converter);
+      }
     }
   }
 

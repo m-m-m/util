@@ -220,7 +220,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         }
       }
       // this will also happen for private fields with the same name and is
-      // then a regular warning...
+      // then a regular log message...
       if (added) {
         logDuplicateAccessor(accessor, existing);
       } else {
@@ -282,19 +282,21 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         }
       }
     }
-    final AccessibleObject[] nonPublicAccessibles = new AccessibleObject[nonPublicAccessibleObjects
-        .size()];
-    nonPublicAccessibleObjects.toArray(nonPublicAccessibles);
-    // enable reflective access that violates visibility - this will
-    // fail if disallowed by security-manager.
-    AccessController.doPrivileged(new PrivilegedAction<Object>() {
+    if (nonPublicAccessibleObjects.size() > 0) {
+      final AccessibleObject[] nonPublicAccessibles = new AccessibleObject[nonPublicAccessibleObjects
+          .size()];
+      nonPublicAccessibleObjects.toArray(nonPublicAccessibles);
+      // enable reflective access that violates visibility - this will
+      // fail if disallowed by security-manager.
+      AccessController.doPrivileged(new PrivilegedAction<Object>() {
 
-      public Object run() {
+        public Object run() {
 
-        AccessibleObject.setAccessible(nonPublicAccessibles, true);
-        return null;
-      }
-    });
+          AccessibleObject.setAccessible(nonPublicAccessibles, true);
+          return null;
+        }
+      });
+    }
     getDescriptorEnhancer().enhanceDescriptor(descriptor);
     return descriptor;
   }

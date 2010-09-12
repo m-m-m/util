@@ -6,7 +6,7 @@ package net.sf.mmm.util.value.base;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.value.api.validator.ValueValidator}
+ * This is an implementation of {@link net.sf.mmm.util.value.api.ValueValidator}
  * that {@link #validate(Number, Object) validates} if a {@link Number} is in a
  * specific range.
  * 

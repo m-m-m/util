@@ -6,6 +6,8 @@ package net.sf.mmm.util.cli.api;
 import java.io.File;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 import net.sf.mmm.util.file.api.FileType;
 
 import org.junit.Assert;
@@ -63,6 +65,7 @@ public class CliConstraintTest {
     private static final String USAGE = "This program is used for tests only";
 
     @CliOption(name = "--port", usage = "The port number.")
+    @Size(min = 8080, max = 9090)
     @CliConstraintNumber(min = 8080, max = 9090)
     private int port;
 

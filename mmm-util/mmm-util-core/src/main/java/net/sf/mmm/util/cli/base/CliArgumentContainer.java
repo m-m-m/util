@@ -9,7 +9,7 @@ import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-import net.sf.mmm.util.value.api.validator.ValueValidator;
+import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
  * This is a container for a {@link CliArgument} together with additional

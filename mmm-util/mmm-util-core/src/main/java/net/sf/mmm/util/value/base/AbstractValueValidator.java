@@ -3,7 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
-import net.sf.mmm.util.value.api.validator.ValueValidator;
+import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
  * This is the abstract-base implementation of the {@link ValueValidator}
@@ -15,7 +16,8 @@ import net.sf.mmm.util.value.api.validator.ValueValidator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractValueValidator<V> implements ValueValidator<V> {
+public abstract class AbstractValueValidator<V> extends AbstractLoggable implements
+    ValueValidator<V> {
 
   /**
    * {@inheritDoc}
