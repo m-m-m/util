@@ -213,29 +213,6 @@
           </archive>
         </configuration>
       </plugin>      
-      <!-- also generate source JARs -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>source-jar</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- also generate javadoc JARs -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <show>private</show>
-          <!-- <nohelp>true</nohelp>-->
-        </configuration>
-      </plugin>
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-eclipse-plugin</artifactId>
@@ -302,9 +279,7 @@
           <connectionUrl>jdbc:hsqldb:${basedir}/src/dashboard/database.hsql</connectionUrl>
           <username>sa</username>
           <password>none</password>
-          
           <configLocation>net/sf/mmm/maven-dashboard.xml</configLocation>
-          
         </configuration>
         <dependencies>
           <dependency>
@@ -320,16 +295,16 @@
         </dependencies>
       </plugin>
     </plugins>
-    <!-- http://jira.codehaus.org/browse/MNG-4184 -->
-    <!--
+    <!-- http://jira.codehaus.org/browse/MNG-4253 -->
     <extensions>
+      <!--
       <extension>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-setup</artifactId>
         <version>SNAPSHOT</version>
       </extension>
+      -->
     </extensions>
-    -->
   </build>
   
   <profiles>
@@ -337,6 +312,38 @@
       <id>mmm.deploy</id>
       <build>
         <plugins> 
+          <!-- also generate source JARs -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- also generate javadoc JARs -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <show>private</show>
+              <!-- <nohelp>true</nohelp>-->
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Sign artifacts with PGP -->
           <plugin> 
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
