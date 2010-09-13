@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Set;
 
 import net.sf.mmm.util.cli.api.CliArgument;
+import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliException;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModes;
 import net.sf.mmm.util.cli.api.CliOption;
+import net.sf.mmm.util.cli.api.CliStyle;
+import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.collection.base.NodeCycle;
 import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
@@ -43,6 +46,12 @@ public class CliStateTest {
 
   /** The option for a boolean-flag. */
   private static final String OPTION_NAME_BOOLEAN = "--boolean";
+
+  /** The option for a list. */
+  private static final String OPTION_NAME_LIST = "--list";
+
+  /** The option for a option. */
+  private static final String OPTION_NAME_OPTION = "--option";
 
   /** Usage for string-option (should be in NlsBundle if not test-case). */
   private static final String OPTION_USAGE_STRING = "some string.";
@@ -250,6 +259,57 @@ public class CliStateTest {
       Assert.assertEquals("foo", inverseCycle.get(3).getMode().id());
     }
     Assert.assertNull(state);
+  }
+
+  /**
+   * Tests that {@link CliContainerStyle} is properly handled.
+   */
+  @Test
+  public void testContainerStyle() {
+
+    CliState state = createState(ContainerStyleTest.class);
+    CliOptionContainer option = state.getOption(OPTION_NAME_OPTION);
+    Assert.assertEquals(CliContainerStyle.MULTIPLE_OCCURRENCE,
+        option.getContainerStyle(state.getCliStyle()));
+    CliOptionContainer list = state.getOption(OPTION_NAME_LIST);
+    Assert.assertEquals(CliContainerStyle.COMMA_SEPARATED,
+        list.getContainerStyle(state.getCliStyle()));
+  }
+
+  /**
+   * Tests that illegal container-style is properly reported.
+   */
+  @Test
+  public void testIllegalContainerStyle() {
+
+    CliState state = null;
+    // illegal container style
+    try {
+      state = createState(IllegalContainerStyleTest.class);
+      Assert.fail();
+      // } catch (NlsIllegalArgumentException e) {
+    } catch (Exception e) {
+      Assert.assertTrue(e.getMessage().contains(CliContainerStyle.DEFAULT.toString()));
+    }
+  }
+
+  @CliStyle(modeUndefined = CliStyleHandling.DEBUG)
+  public static class ContainerStyleTest {
+
+    @CliOption(name = OPTION_NAME_OPTION, usage = "The usage of the option.")
+    private List<String> option;
+
+    @CliOption(name = OPTION_NAME_LIST, usage = "The usage of the option.", containerStyle = CliContainerStyle.COMMA_SEPARATED)
+    private List<String> list;
+
+  }
+
+  @CliStyle(containerStyle = CliContainerStyle.DEFAULT, modeUndefined = CliStyleHandling.DEBUG)
+  public static class IllegalContainerStyleTest {
+
+    @CliOption(name = OPTION_NAME_OPTION, usage = "The usage of the option.")
+    private String option;
+
   }
 
   @CliMode(id = "foo", title = "Foo", parentIds = "foo")

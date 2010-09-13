@@ -32,7 +32,7 @@ public enum DiacriticalMark implements Datatype<Character> {
   /**
    * A mark that can be placed on top of some Latin, Cyrillic or Greek
    * characters. It looks like a stroke directing to the upper right corner. If
-   * your environment supports unicode, you can see it here: &#180
+   * your environment supports unicode, you can see it here: &#180;
    */
   ACUTE(UnicodeUtil.ACUTE_ACCENT, UnicodeUtil.COMBINING_ACUTE_ACCENT, "acute accent") {
 
@@ -171,9 +171,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * TODO
-   * 
-   * @param warning
+   * A mark that can be placed at the bottom of some Latin characters. If your
+   * environment supports unicode, you can see it here: &#184;
    */
   CEDILLA(UnicodeUtil.CEDILLA, UnicodeUtil.COMBINING_CEDILLA, "cedilla") {
 
@@ -246,7 +245,9 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
-  /** Two dots on top (trema, diaeresis, or umlaut). E.g. in '&auml;'. */
+  /**
+   * Two dots on top (trema, diaeresis, or umlaut). E.g. in '&auml;'.
+   */
   DIAERESIS(UnicodeUtil.DIAERESIS, UnicodeUtil.COMBINING_DIAERESIS, "diaeresis") {
 
     /**
@@ -368,9 +369,7 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   /**
    * Like {@link #ACUTE} but doubled. If your environment supports unicode, you
-   * can see it here: TODO
-   * 
-   * @param warning
+   * can see it here: &#733;
    */
   DOUBLE_ACUTE(UnicodeUtil.DOUBLE_ACUTE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_ACUTE_ACCENT,
       "double acute accent") {
@@ -421,9 +420,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * TODO
-   * 
-   * @param warning
+   * A mark that can be placed on top of some Latin, Cyrillic or Greek
+   * characters. It looks like a stroke directing to the lower right. If your
+   * environment supports unicode, you can see it here: &#96;
    */
   GRAVE(UnicodeUtil.GRAVE_ACCENT, UnicodeUtil.COMBINING_GRAVE_ACCENT, "grave accent") {
 
@@ -455,7 +454,7 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   /**
    * A little question mark without the dot, that is placed on top of Vietnamese
-   * letters.
+   * letters. &#x3D2; &#x253;
    */
   HOOK_ABOVE(UnicodeUtil.HOOK_ABOVE, UnicodeUtil.COMBINING_HOOK_ABOVE, "hook above") {
 
@@ -493,12 +492,18 @@ public enum DiacriticalMark implements Datatype<Character> {
       addComposition('Z', UnicodeUtil.LATIN_CAPITAL_LETTER_Z_WITH_HOOK);
       addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE,
           UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE_AND_HOOK);
+      addComposition(UnicodeUtil.GREEK_CAPITAL_LETTER_UPSILON,
+          UnicodeUtil.GREEK_UPSILON_WITH_HOOK_SYMBOL);
     }
 
   },
 
   /**
    * A ... that is placed on top of Vietnamese vowels.
+   * 
+   * TODO
+   * 
+   * @param warning
    */
   HORN_ABOVE(UnicodeUtil.HORN, UnicodeUtil.COMBINING_HORN, "horn") {
 
@@ -516,6 +521,13 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
+  /**
+   * A ...
+   * 
+   * TODO
+   * 
+   * @param warning
+   */
   MACRON(UnicodeUtil.MACRON, UnicodeUtil.COMBINING_MACRON, "macron") {
 
     /**
@@ -572,6 +584,13 @@ public enum DiacriticalMark implements Datatype<Character> {
     }
   },
 
+  /**
+   * A ...
+   * 
+   * TODO
+   * 
+   * @param warning
+   */
   OGONEK(UnicodeUtil.OGONEK, UnicodeUtil.COMBINING_OGONEK, "ogonek") {
 
     /**
@@ -598,6 +617,13 @@ public enum DiacriticalMark implements Datatype<Character> {
     }
   },
 
+  /**
+   * A ...
+   * 
+   * TODO
+   * 
+   * @param warning
+   */
   RING_ABOVE(UnicodeUtil.RING_ABOVE, UnicodeUtil.COMBINING_RING_ABOVE, "ring above") {
 
     /**
@@ -685,7 +711,11 @@ public enum DiacriticalMark implements Datatype<Character> {
   /**
    * The constructor.
    * 
-   * @param combiningChar is the {@link #getCombiningCharacter()}.
+   * @param separateCharacter is the {@link #getSeparateCharacter() separator
+   *        character}.
+   * @param combiningChar is the {@link #getCombiningCharacter() combining
+   *        character}.
+   * @param title is the {@link #getTitle() title}.
    */
   private DiacriticalMark(char separateCharacter, char combiningChar, String title) {
 

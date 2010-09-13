@@ -6,7 +6,7 @@ package net.sf.mmm.util.cli.api;
 import java.io.PrintWriter;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.cli.base.DefaultCliParserBuilder;
+import net.sf.mmm.util.cli.impl.DefaultCliParserBuilder;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.AppendableWriter;
 import net.sf.mmm.util.io.base.StreamUtilImpl;

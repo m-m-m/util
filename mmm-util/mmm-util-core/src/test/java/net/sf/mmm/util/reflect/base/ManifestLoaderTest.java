@@ -12,11 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 import junit.framework.TestCase;
+import net.sf.mmm.util.reflect.api.Manifest;
 
 import org.junit.Test;
-
-import net.sf.mmm.util.reflect.api.Manifest;
-import net.sf.mmm.util.reflect.base.ManifestLoader;
 
 /**
  * This is the {@link TestCase} for {@link ManifestLoader}.
@@ -26,6 +24,12 @@ import net.sf.mmm.util.reflect.base.ManifestLoader;
 @SuppressWarnings("all")
 public class ManifestLoaderTest {
 
+  /**
+   * Tests the content of the manifest from the servlet-api that is added as
+   * test-dependency especially for this test.
+   * 
+   * @throws IOException on error.
+   */
   @Test
   public void testLoader() throws IOException {
 
@@ -51,6 +55,7 @@ public class ManifestLoaderTest {
     assertEquals("Apache Software Foundation", servletManifest.getImplementationVendor());
     assertNull(servletManifest.getImplementationVendorId());
     assertEquals("Apache Ant 1.6.2", servletManifest.getProperties().get("Ant-Version"));
+    assertEquals("servlet-api-2.4.jar", servletManifest.getManifestSource());
   }
 
 }

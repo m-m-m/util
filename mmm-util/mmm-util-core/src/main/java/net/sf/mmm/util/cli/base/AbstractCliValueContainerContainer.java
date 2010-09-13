@@ -57,9 +57,6 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
       case COMMA_SEPARATED:
         setValueInternal(argument, ',', propertyType);
         break;
-      case SEMICOLON_SEPARATED:
-        setValueInternal(argument, ';', propertyType);
-        break;
       default :
         throw new IllegalCaseException(CliContainerStyle.class, style);
     }

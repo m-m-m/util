@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.cli.api.CliClass;
+import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliModes;
@@ -17,6 +18,7 @@ import net.sf.mmm.util.collection.base.NodeCycle;
 import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
@@ -78,6 +80,10 @@ public class CliClassContainer {
 
     if (cliStyleAnnotation == null) {
       cliStyleAnnotation = CliDefaultAnnotations.CLI_STYLE;
+    }
+    if (cliStyleAnnotation.containerStyle() == CliContainerStyle.DEFAULT) {
+      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT, "@"
+          + CliStyle.class.getSimpleName() + ".containerStyle()");
     }
     this.cliStyle = cliStyleAnnotation;
     if (cliClassAnnotation == null) {
@@ -183,7 +189,7 @@ public class CliClassContainer {
    */
   protected void addMode(CliModeContainer mode) {
 
-    CliModeObject old = this.id2ModeMap.put(mode.getMode().id(), mode);
+    CliModeObject old = this.id2ModeMap.put(mode.getId(), mode);
     if (old != null) {
       CliStyleHandling handling = this.cliStyle.modeDuplicated();
       DuplicateObjectException exception = new DuplicateObjectException(mode, mode.getMode().id());

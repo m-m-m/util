@@ -5,10 +5,6 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.Collection;
 
-import net.sf.mmm.util.cli.api.CliContainerStyle;
-import net.sf.mmm.util.cli.api.CliStyle;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 import org.slf4j.Logger;
@@ -80,27 +76,5 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
     Object value = getConfiguration().getConverter().convertValue(entry, getParameterContainer(),
         valueType.getAssignmentClass(), valueType);
     this.collection.add(value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setValue(String argument) {
-
-    PojoPropertyAccessorOneArg setter = getParameterContainer().getSetter();
-    CliStyle cliStyle = getCliState().getCliStyle();
-    CliContainerStyle style = getParameterContainer().getContainerStyle(cliStyle);
-    switch (style) {
-      case MULTIPLE_OCCURRENCE:
-        setValueEntry(argument, setter.getPropertyType());
-        break;
-      case COMMA_SEPARATED:
-        break;
-      case SEMICOLON_SEPARATED:
-        break;
-      default :
-        throw new IllegalCaseException(CliContainerStyle.class, style);
-    }
   }
 }

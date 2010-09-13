@@ -27,6 +27,9 @@ import net.sf.mmm.util.reflect.api.Manifest;
  */
 public class ManifestLoader {
 
+  /** The JAR suffix. */
+  private static final String JAR_SUFFIX = ".jar!/" + Manifest.MANIFEST_PATH;
+
   /** the list of the manifests */
   private final List<Manifest> manifests;
 
@@ -70,10 +73,19 @@ public class ManifestLoader {
       Enumeration<URL> urls = classloader.getResources(Manifest.MANIFEST_PATH);
       while (urls.hasMoreElements()) {
         URL url = urls.nextElement();
+        String path = url.getPath();
+        int start = 0;
+        int end = path.length();
+        if (path.endsWith(JAR_SUFFIX)) {
+          // 4 for ".jar"
+          end = end - JAR_SUFFIX.length() + 4;
+          start = path.lastIndexOf('/', end) + 1;
+        }
+        String source = path.substring(start, end);
         InputStream inputStream = url.openStream();
         try {
           InputStreamReader reader = new InputStreamReader(inputStream, encoding);
-          Manifest manifest = new Manifest(reader);
+          Manifest manifest = new Manifest(reader, source);
           mutableList.add(manifest);
         } finally {
           inputStream.close();

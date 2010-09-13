@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
+
 /**
  * This enum contains the available styles for container types. A container type
  * is an array, {@link java.util.Map} or {@link java.util.Collection}.
@@ -52,18 +53,9 @@ public enum CliContainerStyle {
    * <pre>
    * Foo --list "first,second value,3" --bar
    * </pre>
+   * 
+   * @see net.sf.mmm.util.value.impl.AbstractValueConverterToContainer
    */
   COMMA_SEPARATED,
-
-  /**
-   * The {@link CliOption} or {@link CliArgument} may occur only once. Multiple
-   * values are supplied as semicolon separated list. In the above example call
-   * the program as following:
-   * 
-   * <pre>
-   * Foo --list "first;second value;3" --bar
-   * </pre>
-   */
-  SEMICOLON_SEPARATED,
 
 }

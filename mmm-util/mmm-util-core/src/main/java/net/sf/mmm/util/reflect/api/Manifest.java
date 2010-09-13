@@ -34,43 +34,50 @@ public class Manifest {
   /** the default encoding. */
   public static final String DEFAULT_ENCODING = "UTF-8";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String MANIFEST_VERSION = "Manifest-Version";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String ARCHIVER_VERSION = "Archiver-Version";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String CREATED_BY = "Created-By";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String BUILD_BY = "Built-By";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String IMPLEMENTATION_TITLE = "Implementation-Title";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String IMPLEMENTATION_VERSION = "Implementation-Version";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String IMPLEMENTATION_VENDOR_ID = "Implementation-Vendor-Id";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String SPECIFICATION_TITLE = "Specification-Title";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String SPECIFICATION_VERSION = "Specification-Version";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String SPECIFICATION_VENDOR = "Specification-Vendor";
 
-  /** the property <code>{@value}</code> */
+  /** The manifest property <code>{@value}</code>. */
   public static final String SPECIFICATION_VENDOR_ID = "Specification-Vendor-Id";
 
-  /** the properties from the manifest file */
+  /**
+   * The manifest property <code>{@value}</code>. This is a property that is NOT
+   * intended to be defined in the manifest file itself but is set dynamically
+   * to the source of the manifest (e.g. the name of the JAR-file).
+   */
+  public static final String MANIFEST_SOURCE = "Manifest-Source";
+
+  /** the properties from the manifest file. */
   private final Map<String, String> properties;
 
   /**
@@ -93,6 +100,20 @@ public class Manifest {
    */
   public Manifest(Reader reader) throws RuntimeIoException {
 
+    this(reader, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param reader is the {@link Reader} where to read the manifest from.
+   * @param source is the source of the manifest (e.g. the name of the
+   *        JAR-file).
+   * @throws RuntimeIoException if the {@link Reader} caused an
+   *         {@link IOException}
+   */
+  public Manifest(Reader reader, String source) throws RuntimeIoException {
+
     super();
     try {
       try {
@@ -103,6 +124,9 @@ public class Manifest {
           String keyString = key.toString();
           String value = p.getProperty(keyString);
           map.put(keyString, value);
+        }
+        if (source != null) {
+          map.put(MANIFEST_SOURCE, source);
         }
         this.properties = Collections.unmodifiableMap(map);
       } finally {
@@ -193,6 +217,16 @@ public class Manifest {
   public String getSpecificationVendor() {
 
     return this.properties.get(SPECIFICATION_VENDOR);
+  }
+
+  /**
+   * This method gets the value of the property {@link #MANIFEST_SOURCE}.
+   * 
+   * @return the property value or <code>null</code> if NOT set.
+   */
+  public String getManifestSource() {
+
+    return this.properties.get(MANIFEST_SOURCE);
   }
 
   /**

@@ -68,11 +68,11 @@ public class AbstractVersionedMainTest {
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected String getVersion() {
-
-      return MAGIC_VERSION;
-    }
+    // @Override
+    // protected String getVersion() {
+    //
+    // return MAGIC_VERSION;
+    // }
 
   }
 }
