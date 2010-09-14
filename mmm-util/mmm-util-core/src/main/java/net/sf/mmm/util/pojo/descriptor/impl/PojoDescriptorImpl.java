@@ -7,11 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import javax.validation.metadata.BeanDescriptor;
-import javax.validation.metadata.ConstraintDescriptor;
-import javax.validation.metadata.PropertyDescriptor;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
@@ -41,8 +36,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> implements
-    BeanDescriptor {
+public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
 
   /** @see #getPropertyDescriptor(String) */
   private final Map<String, PojoPropertyDescriptorImpl> propertyMap;
@@ -152,67 +146,6 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> imple
       this.propertyMap.put(propertyName, descriptor);
     }
     return descriptor;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isBeanConstrained() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public PropertyDescriptor getConstraintsForProperty(String propertyName) {
-
-    return getPropertyDescriptor(propertyName);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Set<PropertyDescriptor> getConstrainedProperties() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean hasConstraints() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Class<?> getElementClass() {
-
-    return getPojoClass();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Set<ConstraintDescriptor<?>> getConstraintDescriptors() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ConstraintFinder findConstraints() {
-
-    // TODO Auto-generated method stub
-    return null;
   }
 
 }

@@ -8,6 +8,7 @@ package net.sf.mmm.util.value.api;
  * value type {@link String}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
  */
 public interface StringValueConverter extends GenericValueConverter<String> {
 

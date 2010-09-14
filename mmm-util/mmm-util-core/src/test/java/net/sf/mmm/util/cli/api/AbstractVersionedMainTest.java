@@ -54,7 +54,7 @@ public class AbstractVersionedMainTest {
     int exitCode = main.run(new String[] { "--version" });
     Assert.assertEquals(0, exitCode);
     String version = outputBuffer.toString();
-    Assert.assertEquals(TestMain.MAGIC_VERSION + StringUtil.LINE_SEPARATOR, version);
+    Assert.assertEquals("42.1.2.3" + StringUtil.LINE_SEPARATOR, version);
     Assert.assertEquals("", errorBuffer.toString());
   }
 
@@ -62,17 +62,6 @@ public class AbstractVersionedMainTest {
   private static class TestMain extends AbstractVersionedMain {
 
     private static final String USAGE = "This program is used for tests only";
-
-    private static final String MAGIC_VERSION = "it's a kind of magic!";
-
-    /**
-     * {@inheritDoc}
-     */
-    // @Override
-    // protected String getVersion() {
-    //
-    // return MAGIC_VERSION;
-    // }
 
   }
 }

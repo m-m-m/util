@@ -834,9 +834,9 @@ public class ReflectionUtilImpl extends AbstractLoggable implements ReflectionUt
       int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
       while (urls.hasMoreElements()) {
         URL packageUrl = urls.nextElement();
-        String urlString = URLDecoder.decode(packageUrl.getFile(), "UTF-8");
         String protocol = packageUrl.getProtocol().toLowerCase();
         if ("file".equals(protocol)) {
+          String urlString = URLDecoder.decode(packageUrl.getFile(), "UTF-8");
           File packageDirectory = new File(urlString);
           if (packageDirectory.isDirectory()) {
             if (includeSubPackages) {

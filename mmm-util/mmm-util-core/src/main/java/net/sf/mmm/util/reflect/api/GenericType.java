@@ -35,10 +35,8 @@ import java.lang.reflect.Type;
  * <b>LIMITATIONS:</b><br>
  * This solution will only support one upper and one lower bound but NOT
  * multiple bounds of the same kind. However this is more a feature than a
- * limitation. There seems to be no way to express such generics in java-code,
- * it would IMHO lead to code that is hard to understand. Further the API of
- * this interface would be a lot more complicated and the implementation more
- * complex and therefore NOT as fast.
+ * limitation as it makes the usage simple and IMHO using multiple bounds is a
+ * quite uncommon feature that should be avoided.
  * 
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type)
  * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type,

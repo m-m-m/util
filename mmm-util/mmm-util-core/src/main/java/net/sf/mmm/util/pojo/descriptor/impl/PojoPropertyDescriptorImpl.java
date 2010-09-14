@@ -7,10 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import javax.validation.metadata.ConstraintDescriptor;
-import javax.validation.metadata.PropertyDescriptor;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
@@ -22,8 +18,7 @@ import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor implements
-    PropertyDescriptor {
+public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
 
   /** @see #getAccessor(PojoPropertyAccessorMode) */
   private final Map<PojoPropertyAccessorMode<?>, PojoPropertyAccessor> accessorMap;
@@ -69,60 +64,6 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor i
 
     PojoPropertyAccessorMode<?> mode = accessor.getMode();
     return this.accessorMap.put(mode, accessor);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean hasConstraints() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Class<?> getElementClass() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Set<ConstraintDescriptor<?>> getConstraintDescriptors() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ConstraintFinder findConstraints() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isCascaded() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getPropertyName() {
-
-    // TODO Auto-generated method stub
-    return null;
   }
 
 }

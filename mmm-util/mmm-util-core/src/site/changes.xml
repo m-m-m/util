@@ -6,12 +6,65 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
-    <release version="2.0.0" date="2010-09-26" description="Subsequent release">
+    <release version="2.0.0" date="2010-09-26" description="subsequent release">
       <action dev="hohwille" type="add">
         <![CDATA[
-        <code>net.sf.mmm.util.value.impl.ValueConverterToFile</code>: added.
+        <code>net.sf.mmm.util.text.api.Hyphenation</code>: added.
+        <code>net.sf.mmm.util.text.api.Hyphenator</code>: added.
+        <code>net.sf.mmm.util.text.api.HyphenatorBuilder</code>: added.
+        <code>net.sf.mmm.util.text.base.AbstractHyphenatorBuilder</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationImpl</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationPattern</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationPatternPosition</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenatorBuilderImpl</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenatorImpl</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
         ]]>
-      </action>      
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.text.api.StringHasher</code>: added.
+        <code>net.sf.mmm.util.text.base.AbstractStringHasher</code>: added.
+        <code>net.sf.mmm.util.text.base.FastStringHasher</code>: added.
+        <code>net.sf.mmm.util.text.base.SimpleStringHasher</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.text.api.LineWrapper</code>: added.
+        <code>net.sf.mmm.util.text.api.TextColumn</code>: added.
+        <code>net.sf.mmm.util.text.api.TextTableInfo</code>: added.
+        <code>net.sf.mmm.util.text.base.AbstractLineWrapper</code>: added.
+        <code>net.sf.mmm.util.text.base.DefaultLineWrapper</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.text.api.DiacriticalMark</code>: added.
+        <code>net.sf.mmm.util.text.api.UnicodeUtil</code>: added.
+        <code>net.sf.mmm.util.text.base.UnicodeUtilImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.reflect.base.ManifestLoader</code>: added methods <code>loadManifest(...)</code> and <code>getValue(...)</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="removed">
+        <![CDATA[
+        <code>net.sf.mmm.util.reflect.api.Manifest</code>: removed and replaced with existing <code>java.util.jar.Manifest</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.value.impl.AbstractValueConverterToContainer</code>: added.
+        <code>net.sf.mmm.util.value.impl.ValueConverterToFile</code>: added.
+        <code>net.sf.mmm.util.value.impl.ValueConverterToMap</code>: added.
+        ]]>
+      </action>
       <action dev="hohwille" type="update">
         <![CDATA[
         <code>net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessor</code>: extracted code to AbstractPojoPropertyAccessorBase.
@@ -60,7 +113,7 @@
         ]]>
       </action>
     </release>
-    <release version="1.1.0" date="2009-01-07" description="Subsequent release">
+    <release version="1.1.0" date="2009-01-07" description="subsequent release">
       <action dev="hohwille" type="add">
         <![CDATA[
         <code>net.sf.mmm.util.SpringConfigsUtilCore</code>: added.
@@ -147,7 +200,7 @@
         ]]>
       </action>
     </release>
-    <release version="1.1.0" date="2009-09-26" description="Subsequent release">
+    <release version="1.1.0" date="2009-09-26" description="subsequent release">
       <action dev="hohwille" type="add">
         <![CDATA[
         <code>net.sf.mmm.util.context</code>: added.
@@ -183,7 +236,15 @@
         ]]>
       </action>
     </release>
-    <release version="1.0.1" date="2008-02-10" description="Subsequent release">
+    <release version="1.0.2" date="2009-01-21" description="subsequent release">
+    	
+    </release>
+    <release version="1.0.1" date="2008-02-10" description="subsequent release">
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Refactored package structure to general scheme <code>net.sf.mmm.util.*.(api|base|impl)</code>.
+        ]]>
+      </action>
       <action dev="hohwille" type="add">
         <![CDATA[
         <code>net.sf.mmm.util.file</code>: added.

@@ -3,8 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
+
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.reflect.api.Manifest;
+import net.sf.mmm.util.reflect.base.ManifestLoader;
 
 /**
  * This is the abstract base class for a {@link AbstractMain main-program} that
@@ -13,7 +16,7 @@ import net.sf.mmm.util.reflect.api.Manifest;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@CliMode(id = CliMode.ID_VERSION, title = NlsBundleUtilCore.INF_MAIN_MODE_VERSION, // 
+@CliMode(id = CliMode.ID_VERSION, title = NlsBundleUtilCore.INF_MAIN_MODE_VERSION, //
 usage = NlsBundleUtilCore.MSG_MAIN_MODE_VERSION_USAGE)
 public abstract class AbstractVersionedMain extends AbstractMain {
 
@@ -32,12 +35,12 @@ public abstract class AbstractVersionedMain extends AbstractMain {
    */
   protected String getVersion() {
 
-    Manifest manifest = Manifest.load(getClass());
+    Manifest manifest = ManifestLoader.loadManifest(getClass());
     String versionNumber = null;
     if (manifest != null) {
-      versionNumber = manifest.getImplementationVersion();
+      versionNumber = ManifestLoader.getValue(manifest, Attributes.Name.IMPLEMENTATION_VERSION);
       if (versionNumber == null) {
-        versionNumber = manifest.getSpecificationVersion();
+        versionNumber = ManifestLoader.getValue(manifest, Attributes.Name.SPECIFICATION_VERSION);
       }
     }
     if (versionNumber == null) {
