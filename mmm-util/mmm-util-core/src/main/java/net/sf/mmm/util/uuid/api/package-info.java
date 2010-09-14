@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help to create {@link java.util.UUID}s. 
- * <h2>UUID-Util API</h2>
+ * <a name="documentation"><h2>UUID-Util API</h2></a>
  * This package contains the API for utilities that that help to create 
  * {@link java.util.UUID}s. 
  */

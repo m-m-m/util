@@ -4,7 +4,7 @@
 /**
  * Provides the API for utilities that help to build
  * command-line-interfaces (CLI).
- * <h2>CLI API</h2>
+ * <a name="documentation"><h2>CLI API</h2></a>
  * Typical java-applications start with a main-class - a class with a method 
  * with this magic signature:
  * <pre>public static void main(String[] args)</pre>

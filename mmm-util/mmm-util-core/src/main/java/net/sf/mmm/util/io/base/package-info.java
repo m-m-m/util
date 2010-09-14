@@ -4,7 +4,7 @@
 /**
  * Contains public implementations that help to read and write data, process 
  * bytes, etc.
- * <h2>IO-Util Base</h2>
+ * <a name="documentation"><h2>IO-Util Base</h2></a>
  * This package provides implementations that help to read and write data, 
  * process bytes, etc.<br>
  */

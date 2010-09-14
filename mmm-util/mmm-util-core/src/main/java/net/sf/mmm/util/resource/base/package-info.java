@@ -2,9 +2,9 @@
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
- * Contains the basic implementation of the 
+ * Contains the base implementation of the 
  * {@link net.sf.mmm.util.resource.api resource-API}.
- * <h2>Resource-Util Base</h2>
+ * <a name="documentation"><h2>Resource-Util Base</h2></a>
  * This package contains the common implementations of the 
  * {@link net.sf.mmm.util.resource.api.DataResource} interface such as
  * {@link net.sf.mmm.util.resource.base.ClasspathResource},

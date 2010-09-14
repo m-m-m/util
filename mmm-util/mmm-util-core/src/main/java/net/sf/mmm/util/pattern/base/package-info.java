@@ -5,7 +5,7 @@
  * Contains public implementations of the 
  * {@link net.sf.mmm.util.pattern.api.PatternCompiler} interface for different 
  * syntax such as java-regex-, glob- and path-patterns.
- * <h2>Pattern-Util Basis</h2>
+ * <a name="documentation"><h2>Pattern-Util Base</h2></a>
  * Besides the {@link net.sf.mmm.util.pattern.base.RegexPatternCompiler} that only 
  * delegates to {@link java.util.regex.Pattern#compile(String)} there is also 
  * {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler} and 

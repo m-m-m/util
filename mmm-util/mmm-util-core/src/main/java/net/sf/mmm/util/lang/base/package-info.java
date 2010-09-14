@@ -4,7 +4,7 @@
 /**
  * Contains the basic implementation of the 
  * {@link net.sf.mmm.util.lang.api Lang-Util API}.
- * <h2>Lang-Util Base</h2> 
+ * <a name="documentation"><h2>Lang-Util Base</h2></a> 
  * This package contains the implementations of the utilities offered by the
  * {@link net.sf.mmm.util.lang.api Lang-Util API}.<br>
  * Further the {@link net.sf.mmm.util.lang.base.AbstractCharSequence} helps to 

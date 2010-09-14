@@ -4,7 +4,7 @@
 /**
  * Provides the API for scanners that help to parse character sequences 
  * efficient and easily.
- * <h2>Character Scanner API</h2>
+ * <a name="documentation"><h2>Scanner API</h2></a>
  * For efficient parsers of complex grammars it is best practice to use a parser
  * generator like <code>javacc</code> or <code>antlr</code>.<br>
  * However in some situations it is more suitable to write a handwritten parser.

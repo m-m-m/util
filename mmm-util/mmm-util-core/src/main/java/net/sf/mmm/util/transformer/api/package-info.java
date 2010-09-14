@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for transformation-utilities.
- * <h2>Transformer-Util API</h2>
+ * <a name="documentation"><h2>Transformer-Util API</h2></a>
  * Provides a generic {@link net.sf.mmm.util.transformer.api.Transformer}. 
  */
 package net.sf.mmm.util.transformer.api;

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the base-implementation of the {@link net.sf.mmm.util.xml.api Xml-Util API}. 
+ * <a name="documentation"><h2>Xml-Util Base</h2></a>
  */
 package net.sf.mmm.util.xml.base;
 

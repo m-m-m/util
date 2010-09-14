@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for a pattern compiler.
- * <h2>Pattern-Util API</h2>
+ * <a name="documentation"><h2>Pattern-Util API</h2></a>
  * To compile a {@link java.util.regex.Pattern} from a string you can use
  * a {@link net.sf.mmm.util.pattern.api.PatternCompiler} instead of
  * {@link java.util.regex.Pattern#compile(String)}. This allows to exchange the 

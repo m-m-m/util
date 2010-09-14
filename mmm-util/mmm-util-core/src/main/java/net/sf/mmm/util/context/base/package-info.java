@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the base-implementation of the {@link net.sf.mmm.util.context.api Context-API}.
- * <h2>Context Base</h2> 
+ * <a name="documentation"><h2>Context Base</h2></a> 
  * The base implementation.
  */
 package net.sf.mmm.util.context.base;

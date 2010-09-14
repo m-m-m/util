@@ -17,21 +17,21 @@
       <subsection name="Features">
       Here are some of the features provided by this module:
       <ul>
-        <li>Advanced <a href="apidocs/net/sf/mmm/util/nls/api/package-summary.html">Native Language Support (NLS)</a>.</li>
-        <li>Excellent support to create a <a href="apidocs/net/sf/mmm/util/cli/api/package-summary.html">Command Line Interface (CLI)</a>.</li>
-        <li><a href="apidocs/net/sf/mmm/util/pattern/api/package-summary.html">PatternCompiler</a> for glob- and ant-like path-patterns producing <code>java.util.regex.Pattern</code>.</li>
-        <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/api/package-summary.html">values</a>.</li>
-        <li><a href="apidocs/net/sf/mmm/util/scanner/api/package-summary.html">Scanner</a> for parsing strings easily.</li>
-        <li><a href="apidocs/net/sf/mmm/util/date/api/package-summary.html">Date-Utilities</a> for parsing and formatting date and/or time according to ISO-8601.</li>
-        <li><a href="apidocs/net/sf/mmm/util/io/api/package-summary.html">Stream-Utilities</a> for dealing with streams and readers/writers easily.</li>
-        <li><a href="apidocs/net/sf/mmm/util/process/api/package-summary.html">Process-Utilities</a> for dealing with external processes and creating pipes.</li>
-        <li><a href="apidocs/net/sf/mmm/util/reflect/api/package-summary.html">Utilities</a> for dealing with reflection, generics and annotations.</li>
-        <li>Advanced <a href="apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html">POJO-Introspection</a>.</li>
-        <li><a href="apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html">POJO-Navigation</a> for accessing entire object-webs easily.</li>
-        <li>Generic code for the typical pattern to send and receive <a href="apidocs/net/sf/mmm/util/event/api/package-summary.html">events</a>.</li>
-        <li>Support for loading <a href="apidocs/net/sf/mmm/util/resource/api/package-summary.html">resources</a> from arbitrary sources.</li>
-        <li><a href="apidocs/net/sf/mmm/util/xml/api/package-summary.html">Utilities</a> for dealing with XML.</li>
-        <li>A Factory for <a href="apidocs/net/sf/mmm/util/uuid/api/package-summary.html">creating UUIDs</a>.</li>
+        <li>Advanced <a href="apidocs/net/sf/mmm/util/nls/api/package-summary.html#documentation">Native Language Support (NLS)</a>.</li>
+        <li>Excellent support to create a <a href="apidocs/net/sf/mmm/util/cli/api/package-summary.html#documentation">Command Line Interface (CLI)</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/pattern/api/package-summary.html#documentation">PatternCompiler</a> for glob- and ant-like path-patterns producing <code>java.util.regex.Pattern</code>.</li>
+        <li>Support for converting <a href="apidocs/net/sf/mmm/util/value/api/package-summary.html#documentation">values</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/scanner/api/package-summary.html#documentation">Scanner</a> for parsing strings easily.</li>
+        <li><a href="apidocs/net/sf/mmm/util/date/api/package-summary.html#documentation">Date-Utilities</a> for parsing and formatting date and/or time according to ISO-8601.</li>
+        <li><a href="apidocs/net/sf/mmm/util/io/api/package-summary.html#documentation">Stream-Utilities</a> for dealing with streams and readers/writers easily.</li>
+        <li><a href="apidocs/net/sf/mmm/util/process/api/package-summary.html#documentation">Process-Utilities</a> for dealing with external processes and creating pipes.</li>
+        <li><a href="apidocs/net/sf/mmm/util/reflect/api/package-summary.html#documentation">Reflection-Utilities</a> for dealing with reflection, generics and annotations.</li>
+        <li>Advanced <a href="apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#documentation">POJO-Introspection</a>.</li>
+        <li><a href="apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html#documentation">POJO-Navigation</a> for accessing entire object-webs easily.</li>
+        <li>Generic code for the typical pattern to send and receive <a href="apidocs/net/sf/mmm/util/event/api/package-summary.html#documentation">events</a>.</li>
+        <li>Support for loading <a href="apidocs/net/sf/mmm/util/resource/api/package-summary.html#documentation">resources</a> from arbitrary sources.</li>
+        <li><a href="apidocs/net/sf/mmm/util/xml/api/package-summary.html#documentation">Utilities</a> for dealing with XML.</li>
+        <li>A Factory for <a href="apidocs/net/sf/mmm/util/uuid/api/package-summary.html#documentation">creating UUIDs</a>.</li>
         <li>and many more...</li>
       </ul>
       </subsection>

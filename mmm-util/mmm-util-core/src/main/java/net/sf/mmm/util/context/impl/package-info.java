@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the implementation of the {@link net.sf.mmm.util.context.api Context-API}.
- * <h2>Context Base</h2> 
+ * <a name="documentation"><h2>Context Base</h2></a> 
  * The implementation of the context. Please use a container and 
  * {@link javax.inject.Inject inject} the 
  * {@link net.sf.mmm.util.context.api.GenericContextFactory} to bind the 

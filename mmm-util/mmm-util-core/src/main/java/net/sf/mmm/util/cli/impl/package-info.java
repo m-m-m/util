@@ -4,7 +4,7 @@
 /**
  * Contains the implementation of utilities that help to build
  * command-line-interfaces (CLI).
- * <h2>CLI Impl</h2>
+ * <a name="documentation"><h2>CLI Impl</h2></a>
  * The implementation of the {@link net.sf.mmm.util.cli.api.CliParser} and 
  * {@link net.sf.mmm.util.cli.api.CliParserBuilder}.
  */

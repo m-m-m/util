@@ -4,7 +4,7 @@
 /**
  * Provides the API for utilities that help to read and write data, process 
  * bytes, etc.
- * <h2>IO-Util API</h2>
+ * <a name="documentation"><h2>IO-Util API</h2></a>
  * Dealing with {@link java.io} is NOT an easy task. This package
  * provides utilities that make it easier to deal with 
  * {@link java.io.InputStream}s, {@link java.io.OutputStream}s, 

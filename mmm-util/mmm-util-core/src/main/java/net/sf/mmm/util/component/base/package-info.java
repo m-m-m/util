@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains base-implementation of component-util.
- * <h2>Component-Util Base</h2>
+ * <a name="documentation"><h2>Component-Util Base</h2></a>
  * Provides {@link net.sf.mmm.util.component.base.InitializationState}
  * that can be used to implement a component that requires strict
  * {@link javax.annotation.PostConstruct initialization} and wants to ensure 

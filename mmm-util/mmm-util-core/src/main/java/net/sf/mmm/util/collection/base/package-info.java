@@ -4,7 +4,7 @@
 /**
  * Contains public implementations of the 
  * {@link net.sf.mmm.util.collection.api Collection-Util API}.
- * <h2>Collection Utilities Base</h2>
+ * <a name="documentation"><h2>Collection Utilities Base</h2></a>
  * This package contains basic implementations of the
  * {@link net.sf.mmm.util.collection.api Collection-Util API}.<br>
  * Further it provides very helpful classes for dealing with collections such as

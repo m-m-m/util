@@ -6,7 +6,7 @@
  * <h2>Reflection-Util API</h2>
  * Java reflection is a powerful mechanism that allows flexible and generic 
  * programming. With Java5 a generic type-system was introduced. However this
- * is quite a wild animal and therefore hard to deal with via the reflection 
+ * is quite a wild animal and this way hard to deal with via the reflection 
  * API. Therefore this package provides the interface 
  * {@link net.sf.mmm.util.reflect.api.GenericType} that allows simple access 
  * to the complex generic type-system.<br>

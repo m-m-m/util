@@ -4,7 +4,7 @@
 /**
  * Contains the implementation of the 
  * {@link net.sf.mmm.util.resource.api resource-API}.
- * <h2>Resource-Util Impl</h2>
+ * <a name="documentation"><h2>Resource-Util Impl</h2></a>
  * This package contains the 
  * {@link net.sf.mmm.util.resource.impl.DataResourceFactoryImpl}, which is the 
  * default implementation of the 

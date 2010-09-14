@@ -4,6 +4,7 @@
 /**
  * Contains the implementation of the 
  * {@link net.sf.mmm.util.value.api value API}.
+ * <a name="documentation"><h2>Value-Util Impl</h2></a>
  */
 package net.sf.mmm.util.value.impl;
 
