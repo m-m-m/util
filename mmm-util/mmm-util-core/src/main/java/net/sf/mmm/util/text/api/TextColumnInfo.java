@@ -115,8 +115,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the width of the {@link #getBorderLeft() left} and
-   * {@link #getBorderRight() right border}.<br>
+   * This method gets the auto calculated width of the {@link #getBorderLeft()
+   * left} and {@link #getBorderRight() right border}.<br>
    * 
    * @return {@link #getBorderLeft()}.length() + {@link #getBorderRight()}
    *         .length()
@@ -179,8 +179,8 @@ public class TextColumnInfo {
   /**
    * This method gets the indent. This string is added after the
    * {@link #getBorderLeft() left border} and before the text of the column in
-   * each line except the first one (in all lines after the first new line). The
-   * default is the empty string.<br>
+   * each line except the first one. The exact behavior depends on
+   * {@link #getIndentationMode()}. The default is the empty string.<br>
    * <b>ATTENTION:</b><br>
    * <ul>
    * <li>Indentation is ignored if {@link #getWidth() width} is less than

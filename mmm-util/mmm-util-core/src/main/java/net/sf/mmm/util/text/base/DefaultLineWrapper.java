@@ -132,7 +132,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     // remaining width to be divided over the auto-adjust columns
     int widthRemaining = tableWidth - staticTableWidth;
     if (widthRemaining < autoAdjustColumnCount) {
-      // is there less than 1 character left for each auto-adjust columns (or
+      // there is less than 1 character left for each auto-adjust columns (or
       // less than 0 for no such column).
       throw new ValueOutOfRangeException(Integer.valueOf(tableWidth),
           Integer.valueOf(staticTableWidth + autoAdjustColumnCount),
@@ -335,7 +335,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     boolean hyphenationActive = (buffer.maxLength >= TextColumnInfo.MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN);
 
     boolean todo = true;
-    while ((todo) && (bufferRest > 0)) {
+    // while ((todo) && (bufferRest > 0)) {
+    while (todo) {
       TextSegment currentSegment = state.currentSegment;
       if (currentSegment.getType() == TextSegmentType.NEWLINE) {
         switch (state.getColumnInfo().getIndentationMode()) {
@@ -343,7 +344,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
             state.indent = false;
             break;
           case NO_INDENT_AFTER_DOUBLE_NEWLINE:
-            if (buffer.length() == 0) {
+            if (state.getSubsequentNewlineCount() >= 2) {
               state.indent = false;
             } else {
               state.indent = true;
@@ -775,6 +776,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /** @see #getNextSegment() */
     private TextSegment nextSegment;
 
+    /** @see #getSubsequentNewlineCount() */
+    private int subsequentNewlineCount;
+
     /**
      * The constructor.
      * 
@@ -793,6 +797,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       this.textIndex = 0;
       this.width = columnInfo.getWidth();
       this.breakIteratorIndex = 0;
+      this.subsequentNewlineCount = 0;
       this.indent = false;
       if ((columnInfo.getIndent() == null)
           || ((columnInfo.getWidth() != TextColumnInfo.WIDTH_AUTO_ADJUST) && (columnInfo
@@ -832,6 +837,25 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
+     * This method gets the current number of subsequent newlines. If
+     * {@link #getCurrentSegment() current segment} is a
+     * {@link TextSegmentType#NEWLINE}, this method will return the number of
+     * {@link TextSegmentType#NEWLINE} segments (including the current) that
+     * occurred since the last other segment. Otherwise it will always return
+     * <code>0</code>.
+     * 
+     * @return the subsequentNewlineCount the number of subsequent
+     *         {@link TextSegmentType#NEWLINE} segments including the
+     *         {@link #getCurrentSegment() current segment} or <code>0</code> if
+     *         the {@link #getCurrentSegment() current segment} is no
+     *         {@link TextSegmentType#NEWLINE}.
+     */
+    public int getSubsequentNewlineCount() {
+
+      return this.subsequentNewlineCount;
+    }
+
+    /**
      * This method steps on to the next {@link TextSegment}. The
      * {@link #getCurrentSegment() current segment} is set to the
      * {@link #getNextSegment() next segment} and the {@link #getNextSegment()
@@ -852,7 +876,12 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       this.currentSegment = this.nextSegment;
       this.nextSegment = next(old);
       if (this.currentSegment == null) {
+        this.subsequentNewlineCount = 0;
         return false;
+      } else if (this.currentSegment.type == TextSegmentType.NEWLINE) {
+        this.subsequentNewlineCount++;
+      } else {
+        this.subsequentNewlineCount = 0;
       }
       return true;
     }

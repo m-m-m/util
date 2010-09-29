@@ -80,9 +80,12 @@ public class TextTableInfo {
   /**
    * This method gets the width of the text-table in characters.<br>
    * This should be the number of characters per line in your
-   * {@link System#console console}. The value has to be positive and greater or
-   * equal to the sum of the following term for each {@link TextColumnInfo
-   * column}:
+   * {@link System#console console}. It may be
+   * {@link TextColumnInfo#WIDTH_AUTO_ADJUST} if all
+   * {@link TextColumnInfo#getWidth() column-widths} are set to actual positive
+   * values. Otherwise the value returned by this method has to be positive and
+   * greater or equal to the sum of the following term for each
+   * {@link TextColumnInfo column}:
    * 
    * <pre>
    * {@link TextColumnInfo#getBorderLeft()}.length() + {@link TextColumnInfo#getBorderRight()}.length() + &lt;column-with&gt; 

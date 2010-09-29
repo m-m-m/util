@@ -6,11 +6,16 @@ package net.sf.mmm.util.text.base;
 import java.text.BreakIterator;
 import java.util.Locale;
 
+import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
+import net.sf.mmm.util.text.api.TextColumnInfo.IndentationMode;
 import net.sf.mmm.util.text.api.TextTableInfo;
 
+import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,20 +39,18 @@ public class DefaultLineWrapperTest {
   }
 
   /**
-   * Tests
-   * {@link LineWrapper#wrap(Appendable, TextTableInfo, String, net.sf.mmm.util.text.api.TextColumnInfo)}
-   * .
+   * Some experiment with Thai-script.
    */
-  @Test
+  @Ignore
   public void testWordIterator() {
 
     BreakIterator breakIterator = BreakIterator.getWordInstance(new Locale("th"));
-    String text2 = "เด็กที่มีปัญหาทางการเรียนรู้่บางคนสามารถเรียนร่วมกับเด็กปกติได้";
-    breakIterator.setText(text2);
+    String text = "เด็กที่มีปัญหาทางการเรียนรู้่บางคนสามารถเรียนร่วมกับเด็กปกติได้";
+    breakIterator.setText(text);
     int start = breakIterator.first();
     for (int end = breakIterator.next(); end != BreakIterator.DONE; start = end, end = breakIterator
         .next()) {
-      String substring = text2.substring(start, end);
+      String substring = text.substring(start, end);
       if (substring.length() == 1) {
         System.out.println(((int) substring.charAt(0)));
       } else {
@@ -76,14 +79,20 @@ public class DefaultLineWrapperTest {
     // ............000000000011111111112222222222333333333344444444445555555555
     // ............012345678901234567890123456789012345678901234567890123456789
     String text = "Hello world! This is wrapped text. It wraps perfectly well!\n" //
-        + "Indentation is '" + indent + "' but no indentation after double\n\n" // 
+        + "Indentation is '" + indent + "' but no indentation after double\n\n" //
         + "newline.";
-    for (int i = 12; i > 0; i--) {
+    for (int i = 30; i > 0; i--) {
       tableInfo.setWidth(i + borderWidth);
       StringBuilder buffer = new StringBuilder();
       int lines = wrapper.wrap(buffer, tableInfo, text, columnInfo);
-      System.out.println("width=" + i + ",line:" + lines);
-      System.out.println(buffer.toString());
+      if (lines > 1) {
+        double lineRation = (text.length() / i);
+        double ratio = lineRation / lines;
+        Assert.assertTrue("ratio: " + ratio, ratio >= 0.5d);
+      }
+      // System.out.println("width=" + i + ",line:" + lines);
+      // System.out.println(buffer.toString());
+      checkWrappedColumnText(buffer, tableInfo, new TextColumn(text, columnInfo));
     }
   }
 
@@ -98,6 +107,191 @@ public class DefaultLineWrapperTest {
     columnInfo.setBorderLeft(index + ">");
     columnInfo.setBorderRight("<|");
     return columnInfo;
+  }
+
+  /**
+   * This method counts the number of newlines by scanning the given text in
+   * reverse order starting at the given <code>index</code>.
+   * 
+   * @param text is the text to scan for newlines.
+   * @param index is the index where to start from in reverse direction (to the
+   *        start of the text).
+   * @return the number of newlines.
+   */
+  private int countReverseNewlines(CharSequence text, int index) {
+
+    char oldNewline = 0;
+    int i = index;
+    int newlines = 0;
+    while (i > 0) {
+      char c = text.charAt(i);
+      if ((c == '\n') || (c == '\r')) {
+        if (oldNewline == 0) {
+          oldNewline = c;
+          newlines++;
+        } else if (oldNewline == c) {
+          newlines++;
+        } else {
+          oldNewline = 0;
+        }
+        i--;
+      } else {
+        break;
+      }
+    }
+    return newlines;
+  }
+
+  /**
+   * This method verifies the result of a {@link LineWrapper} according to the
+   * input that was given.
+   * 
+   * @param wrappedText is the result of
+   *        {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn...)
+   *        line-wrapping} that should be checked.
+   * @param tableInfo is the {@link TextTableInfo} that was given to the
+   *        {@link LineWrapper}.
+   * @param columns are the {@link TextColumn}s that have been given to the
+   *        {@link LineWrapper}.
+   * @return the number of lines produced by the {@link LineWrapper}. May be
+   *         used to check that an expected maximum of lines is not exceeded.
+   */
+  protected int checkWrappedColumnText(CharSequence wrappedText, TextTableInfo tableInfo,
+      TextColumn... columns) {
+
+    int lineCount = 0;
+    ColumnState[] columnStates = new ColumnState[columns.length];
+    int currentWidth = 0;
+    int tableWidth = tableInfo.getWidth();
+    for (int i = 0; i < columnStates.length; i++) {
+      columnStates[i] = new ColumnState();
+      TextColumnInfo columnInfo = columns[i].getColumnInfo();
+      columnStates[i].indent = false;
+      columnStates[i].textIndex = 0;
+      columnStates[i].width = columnInfo.getWidth();
+      if (TextColumnInfo.WIDTH_AUTO_ADJUST == columnStates[i].width) {
+        if (columns.length == 1) {
+          Assert.assertFalse(TextColumnInfo.WIDTH_AUTO_ADJUST == tableWidth);
+          columnStates[i].width = tableWidth - columnInfo.getBorderWidth();
+        } else {
+          // Assert.fail("column-width-auto-adjust not reimplemented here!");
+          // this is just some magic hack to determine the column width
+          int indexBorderRight = wrappedText.subSequence(currentWidth, tableWidth).toString()
+              .indexOf(columnInfo.getBorderRight());
+          Assert.assertTrue(indexBorderRight > 0);
+          columnStates[i].width = indexBorderRight - columnInfo.getBorderLeft().length();
+        }
+      }
+      currentWidth = currentWidth + columnStates[i].width + columnInfo.getBorderWidth();
+    }
+    CharSequenceScanner scanner = new CharSequenceScanner(wrappedText);
+    while (scanner.hasNext()) {
+      int startIndex = scanner.getCurrentIndex();
+      for (int columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+        TextColumnInfo columnInfo = columns[columnIndex].getColumnInfo();
+        ColumnState state = columnStates[columnIndex];
+        // left border
+        Assert.assertTrue(scanner.expect(columnInfo.getBorderLeft(), false));
+
+        // text-context
+        int width = state.width;
+        if ((state.indent) && (width >= TextColumnInfo.MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN)) {
+          String indent = columnInfo.getIndent();
+          Assert.assertTrue(scanner.expect(indent, false));
+          width = width - indent.length();
+        }
+        String columnContent = scanner.read(width);
+        int contentLength = columnContent.length();
+        Assert.assertEquals(width, contentLength);
+        String columnText = columns[columnIndex].getText();
+        int textLength = columnText.length();
+        // start with columnContent...
+        // this code assumes that indent and/or filler can not clash with
+        // content of the column-text
+        int cellStartIndex = 0;
+        // indent, TODO: indent is only allowed according to specific state of
+        // the column that should be checked here...
+        // filler
+        char filler = columnInfo.getFiller();
+        // System.out.println(columnContent + "|");
+        while ((cellStartIndex < contentLength) && (columnContent.charAt(cellStartIndex) == filler)) {
+          cellStartIndex++;
+        }
+        int cellEndIndex = contentLength - 1;
+        while ((cellEndIndex >= 0) && (columnContent.charAt(cellEndIndex) == filler)) {
+          cellEndIndex--;
+        }
+        // Assert.assertTrue(textIndices[columnIndex] + contentLength <=
+        // textLength);
+        for (int i = cellStartIndex; i <= cellEndIndex; i++) {
+          char c = columnContent.charAt(i);
+          char textChar = columnText.charAt(state.textIndex);
+          if (textChar != c) {
+            if ((c == '-') && (i == cellEndIndex)) {
+              // text was hyphenated...
+            } else {
+              Assert.assertEquals(columnContent, Character.valueOf(textChar), Character.valueOf(c));
+            }
+          } else {
+            state.textIndex++;
+          }
+        }
+        // omit whitespaces for wrap position...
+        // TODO: respect columnInfo.getOmitChars() and columnInfo.getWrapChars()
+        char newline = 0;
+        while (state.textIndex < textLength) {
+          char c = columnText.charAt(state.textIndex);
+          if (((c == '\n') || (c == '\r')) && (newline != c)) {
+            newline = c;
+            state.textIndex++;
+          } else if (c == ' ') {
+            state.textIndex++;
+          } else {
+            break;
+          }
+        }
+        boolean indent;
+        if (newline == 0) {
+          indent = true;
+        } else {
+          switch (columnInfo.getIndentationMode()) {
+            case INDENT_AFTER_NEWLINE:
+              indent = true;
+              break;
+            case NO_INDENT_AFTER_NEWLINE:
+              indent = true;
+              break;
+            case NO_INDENT_AFTER_DOUBLE_NEWLINE:
+              int newlines = countReverseNewlines(columnText, state.textIndex - 1);
+              if (newlines >= 2) {
+                indent = false;
+              } else {
+                indent = true;
+              }
+              break;
+            default :
+              throw new IllegalCaseException(IndentationMode.class, columnInfo.getIndentationMode());
+          }
+        }
+        state.indent = indent;
+        // right border
+        Assert.assertTrue(scanner.expect(columnInfo.getBorderRight(), false));
+      }
+      int endIndex = scanner.getCurrentIndex();
+      if (tableWidth != TextColumnInfo.WIDTH_AUTO_ADJUST) {
+        // in this text-case we expect equality.
+        // however in general this is not correct.
+        Assert.assertEquals(tableWidth, endIndex - startIndex);
+      }
+      Assert.assertTrue(scanner.expect(tableInfo.getLineSeparator(), false));
+      lineCount++;
+    }
+    // check that all texts are completed...
+    for (int columnIndex = 0; columnIndex < columns.length; columnIndex++) {
+      ColumnState state = columnStates[columnIndex];
+      Assert.assertEquals(columns[columnIndex].getText().length(), state.textIndex);
+    }
+    return lineCount;
   }
 
   /**
@@ -129,8 +323,29 @@ public class DefaultLineWrapperTest {
       tableInfo.setWidth(i);
       StringBuilder buffer = new StringBuilder();
       int lines = wrapper.wrap(buffer, tableInfo, columns);
-      System.out.println("width=" + i + ",line:" + lines);
-      System.out.println(buffer.toString());
+      Assert.assertEquals(10, lines);
+      // System.out.println("width=" + i + ",lines:" + lines);
+      // System.out.println(buffer.toString());
+      checkWrappedColumnText(buffer, tableInfo, columns);
     }
+  }
+
+  /**
+   * Inner class for the state of a text column.
+   */
+  private static class ColumnState {
+
+    /** The width of the column. */
+    private int width;
+
+    /** The current index in the column-text. */
+    private int textIndex;
+
+    /**
+     * <code>true</code> if line is expected to be indented, <code>false</code>
+     * otherwise.
+     */
+    private boolean indent;
+
   }
 }
