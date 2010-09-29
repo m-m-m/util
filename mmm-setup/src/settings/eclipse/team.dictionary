@@ -118,3 +118,5 @@ introspector
 accessors
 timestamp
 servlet
+screenshot
+extendable
