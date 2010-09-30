@@ -5,7 +5,8 @@ package net.sf.mmm.util.text.api;
 
 /**
  * This is the interface used to {@link #build(String) build} a
- * {@link Justification} from a {@link String} with the following format:<br>
+ * {@link Justification} from a {@link String}. It therefore expects the
+ * following format:<br>
  * <code>&lt;filler&gt;&lt;alignment&gt;&lt;width&gt;[&lt;mode&gt;]</code><br>
  * The segments have the following meaning:
  * <table border="1">
