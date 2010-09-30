@@ -28,6 +28,7 @@
         <li><a href="apidocs/net/sf/mmm/util/reflect/api/package-summary.html#documentation">Reflection-Utilities</a> for dealing with reflection, generics and annotations.</li>
         <li>Advanced <a href="apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#documentation">POJO-Introspection</a>.</li>
         <li><a href="apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html#documentation">POJO-Navigation</a> for accessing entire object-webs easily.</li>
+        <li><a href="apidocs/net/sf/mmm/util/text/api/package-summary.html#documentation">Text-Utilities</a> for hyphenation, linewrapping, and unicode-handling.</li>
         <li>Generic code for the typical pattern to send and receive <a href="apidocs/net/sf/mmm/util/event/api/package-summary.html#documentation">events</a>.</li>
         <li>Support for loading <a href="apidocs/net/sf/mmm/util/resource/api/package-summary.html#documentation">resources</a> from arbitrary sources.</li>
         <li><a href="apidocs/net/sf/mmm/util/xml/api/package-summary.html#documentation">Utilities</a> for dealing with XML.</li>
