@@ -85,14 +85,14 @@
  * derive your declared exceptions from one of these classes:
  * 
  * <pre>
- * public class IllegalLoginException extends {@link net.sf.mmm.util.nls.api.NlsException} {
- *   public IllegalLoginException(String usedLogin) {
+ * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.nls.api.NlsException} {
+ *   public LoginAlreadyInUseException(String usedLogin) {
  *     super(MyResourceBundle.ERR_LOGIN_IN_USE, usedLogin);
  *   }
  * }
  * </pre>
  * 
- * Now if you throw a <code>IllegalLoginException</code>, it will behave as a
+ * Now if you throw a <code>LoginAlreadyInUseException</code>, it will behave as a
  * "regular" exception with an English message. Additionally it has methods
  * <code>getLocalizedMessage</code> and <code>printStackTrace</code> that
  * take a {@link java.util.Locale} and optionally a 
@@ -116,21 +116,19 @@
  * write and maintain internationalized code. While messages are spread 
  * throughout the code there are only very view places where these messages are 
  * actually displayed to the end-user. At these places you need to figure out
- * the users locale and provide a proper 
- * <code>{@link net.sf.mmm.util.nls.api.NlsTemplateResolver}</code>.
- <p>
- The {@link net.sf.mmm.util.nls.api.NlsMessage} allows to store an 
- internationalized message together with the language independent arguments.
- </p>
- <p>
- The localization (translation to native language) is performed by the 
- {@link net.sf.mmm.util.nls.api.NlsTemplate} resolved by the 
- {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}.
- </p>
- <p>
- For exceptions there is additional support via 
- {@link net.sf.mmm.util.nls.api.NlsThrowable}.
- </p>
+ * the users locale.
+ * <p>
+ * The {@link net.sf.mmm.util.nls.api.NlsMessage} allows to store an 
+ * internationalized message together with the language independent arguments.
+ * </p>
+ * <p>
+ * The localization (translation to native language) is easily performed by 
+ * {@link net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(java.util.Locale)}.
+ * </p>
+ * <p>
+ * For exceptions there is additional support via 
+ * {@link net.sf.mmm.util.nls.api.NlsThrowable}.
+ * </p>
  */
 package net.sf.mmm.util.nls.api;
 
