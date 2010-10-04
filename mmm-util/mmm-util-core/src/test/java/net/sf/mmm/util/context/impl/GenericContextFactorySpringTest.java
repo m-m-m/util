@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.context.impl;
 
-import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 
 /**

@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.impl;
 
-import net.sf.mmm.framework.base.SpringContainerPool;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
  * This is the test-case for {@link CollectionFactoryManager} configured using

@@ -100,6 +100,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.component.api.ResourceMissingException */
   public static final String ERR_RESOURCE_MISSING = "The required resource \"{resource}\" is missing!";
 
+  /** @see net.sf.mmm.util.component.api.ResourceAmbiguousException */
+  public static final String ERR_RESOURCE_AMBIGUOUS = "The required resource \"{resource}\" is ambiguous!";
+
+  /** @see net.sf.mmm.util.component.api.ResourceAmbiguousException */
+  public static final String ERR_RESOURCE_AMBIGUOUS_WITH_IDS = "The required resource \"{resource}\" is ambiguous!\n{value}";
+
   /** @see net.sf.mmm.util.component.api.AlreadyInitializedException */
   public static final String ERR_ALREADY_INITIALIZED = "The object is already initialized!";
 

@@ -7,7 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This is the exception thrown if a resource is required but is NOT available.
+ * This is the exception thrown if a {@link javax.annotation.Resource resource}
+ * is required but is NOT available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -25,6 +26,17 @@ public class ResourceMissingException extends NlsRuntimeException {
   public ResourceMissingException(String resourceName) {
 
     super(NlsBundleUtilCore.ERR_RESOURCE_MISSING, toMap(KEY_RESOURCE, resourceName));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param resourceName is the name of the missing resource.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   */
+  public ResourceMissingException(String resourceName, Throwable nested) {
+
+    super(nested, NlsBundleUtilCore.ERR_RESOURCE_MISSING, toMap(KEY_RESOURCE, resourceName));
   }
 
 }

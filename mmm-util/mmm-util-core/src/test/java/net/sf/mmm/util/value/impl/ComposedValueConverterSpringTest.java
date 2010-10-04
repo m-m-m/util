@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.StringValueConverter;
 

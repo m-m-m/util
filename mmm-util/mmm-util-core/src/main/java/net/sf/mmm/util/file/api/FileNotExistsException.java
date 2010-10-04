@@ -31,7 +31,7 @@ public class FileNotExistsException extends NlsRuntimeException {
   public FileNotExistsException(File file) {
 
     this(file.getAbsolutePath());
-    assert (file.exists());
+    assert (!file.exists());
   }
 
   /**

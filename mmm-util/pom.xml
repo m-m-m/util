@@ -21,13 +21,4 @@
     <module>mmm-util-contenttype</module>
     <module>mmm-util-metakeys</module>
   </modules>
-  
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-test</artifactId>
-      <version>SNAPSHOT</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 </project>
