@@ -6,6 +6,8 @@ package net.sf.mmm.util.resource.base;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
+
 /**
  * This class represents an URI pointing to the location of a
  * {@link net.sf.mmm.util.resource.api.DataResource}. A {@link ResourceUri} can
@@ -78,6 +80,9 @@ public class ResourceUri {
   public ResourceUri(String uri) {
 
     super();
+    if (uri == null) {
+      throw new NlsNullPointerException("uri");
+    }
     this.uri = uri;
     Matcher matcher = SCHEME_PATTERN.matcher(uri);
     if (matcher.matches()) {
