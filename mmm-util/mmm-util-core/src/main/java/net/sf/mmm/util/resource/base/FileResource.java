@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 
@@ -179,7 +180,12 @@ public class FileResource extends AbstractBrowsableResource {
      */
     public Iterator<BrowsableResource> iterator() {
 
-      File[] files = FileResource.this.file.listFiles();
+      File[] files;
+      if (FileResource.this.file.isDirectory()) {
+        files = FileResource.this.file.listFiles();
+      } else {
+        files = FileUtil.NO_FILES;
+      }
       return new FileResourceIterator(files);
     }
   }

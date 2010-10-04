@@ -45,6 +45,9 @@ public interface FileUtil {
    */
   String PROPERTY_TMP_DIR = "java.io.tmpdir";
 
+  /** An empty file array. */
+  File[] NO_FILES = new File[0];
+
   /**
    * This method gets the {@link File} representing the
    * {@link #PROPERTY_USER_HOME home directory of the user}.
