@@ -64,11 +64,11 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
 
   /** pattern to extract the author */
   private static final Pattern AUTHOR_PATTERN = Pattern
-      .compile(".*<meta name=[\"']author[\"'] content=[\"']([^\"']*)[\"']");
+      .compile(".*<meta name=[\"']author[\"'] content=[\"']([^\"']*)[\"'].*");
 
   /** pattern to extract the title */
   private static final Pattern KEYWORDS_PATTERN = Pattern
-      .compile(".*<meta name=[\"']keywords[\"'] content=[\"']([^\"']*)[\"']");
+      .compile(".*<meta name=[\"']keywords[\"'] content=[\"']([^\"']*)[\"'].*");
 
   /**
    * The constructor.
@@ -231,7 +231,7 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
         collectTextContent((Element) childNode, buffer);
       } else if ((nodeType == Node.TEXT_NODE) || (nodeType == Node.CDATA_SECTION_NODE)) {
         buffer.append(childNode.getNodeValue());
-        buffer.append(' ');
+        // buffer.append(' ');
       }
     }
   }
