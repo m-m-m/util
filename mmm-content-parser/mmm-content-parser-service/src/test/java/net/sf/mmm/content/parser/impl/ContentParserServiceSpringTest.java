@@ -4,7 +4,7 @@
 package net.sf.mmm.content.parser.impl;
 
 import net.sf.mmm.content.parser.api.ContentParserService;
-import net.sf.mmm.framework.base.SpringContainerPool;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
  * This is the test-case for {@link ContentParserService} configured using

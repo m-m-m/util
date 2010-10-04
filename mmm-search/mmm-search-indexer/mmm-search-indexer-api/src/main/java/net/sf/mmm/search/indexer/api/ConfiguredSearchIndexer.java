@@ -23,7 +23,7 @@ public interface ConfiguredSearchIndexer {
    * {@link SearchIndexerConfiguration}.
    * 
    * @see SearchIndexerConfiguration#getLocations()
-   * @see #index(SearchIndexDataLocation)
+   * @see #index(SearchIndexer, SearchIndexDataLocation)
    * 
    * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
    *        add to the index.
@@ -32,10 +32,23 @@ public interface ConfiguredSearchIndexer {
 
   /**
    * This method indexes the given {@link SearchIndexDataLocation location}.
-   * 
+   * @param searchIndexer TODO
    * @param location is the {@link SearchIndexDataLocation} to crawl and add to
    *        the index.
    */
-  void index(SearchIndexDataLocation location);
+  void index(SearchIndexer searchIndexer, SearchIndexDataLocation location);
+
+  /**
+   * This method performs the indexing for the given
+   * {@link SearchIndexerConfiguration}.
+   * 
+   * @see SearchIndexerConfiguration#getLocations()
+   * @see #index(SearchIndexerConfiguration)
+   * 
+   * @param configurationFile is the {@link java.io.File#getPath() path} to the
+   *        configuration file containing the {@link SearchIndexerConfiguration}
+   *        as XML.
+   */
+  void index(String configurationFile);
 
 }

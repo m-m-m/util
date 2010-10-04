@@ -6,6 +6,9 @@ package net.sf.mmm.content.parser.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.base.AbstractContentParserService;
 import net.sf.mmm.util.component.api.NotInitializedException;
@@ -16,6 +19,8 @@ import net.sf.mmm.util.component.api.NotInitializedException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Named
+@Singleton
 public class ContentParserServiceImpl extends AbstractContentParserService {
 
   /** @see #setAlias2keyMap(Map) */

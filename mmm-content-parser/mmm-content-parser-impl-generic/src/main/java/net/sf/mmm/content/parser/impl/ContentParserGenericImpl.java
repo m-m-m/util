@@ -6,6 +6,9 @@ package net.sf.mmm.content.parser.impl;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.content.parser.base.AbstractContentParserGeneric;
 
 /**
@@ -15,12 +18,14 @@ import net.sf.mmm.content.parser.base.AbstractContentParserGeneric;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentParserGeneric extends AbstractContentParserGeneric {
+@Named
+@Singleton
+public class ContentParserGenericImpl extends AbstractContentParserGeneric {
 
   /**
    * The constructor.
    */
-  public ContentParserGeneric() {
+  public ContentParserGenericImpl() {
 
     super();
   }

@@ -11,9 +11,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
+import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
 
 /**
@@ -23,9 +23,12 @@ import net.sf.mmm.search.api.config.SearchSource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlRootElement(name = "search")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchConfigurationBean implements SearchConfiguration {
+
+  /** @see #getSearchIndex() */
+  @XmlElement(name = "search-index")
+  private SearchIndexConfigurationBean searchIndex;
 
   /** @see #getSources() */
   @XmlElementWrapper(name = "sources")
@@ -41,6 +44,22 @@ public class SearchConfigurationBean implements SearchConfiguration {
   public SearchConfigurationBean() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchIndexConfiguration getSearchIndex() {
+
+    return this.searchIndex;
+  }
+
+  /**
+   * @param searchIndex is the {@link SearchIndexConfiguration} to set.
+   */
+  public void setSearchIndex(SearchIndexConfigurationBean searchIndex) {
+
+    this.searchIndex = searchIndex;
   }
 
   /**

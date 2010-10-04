@@ -10,7 +10,7 @@ import net.sf.mmm.search.api.SearchException;
  * index. After a search-index is created, the contained information can be
  * searched and found via a {@link net.sf.mmm.search.engine.api.SearchEngine}.
  * 
- * @see SearchIndexManager
+ * @see SearchIndexerManager
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

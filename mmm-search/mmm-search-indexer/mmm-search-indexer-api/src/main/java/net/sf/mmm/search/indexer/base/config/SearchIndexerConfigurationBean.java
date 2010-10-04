@@ -24,7 +24,7 @@ import net.sf.mmm.util.transformer.base.StringTransformerChain;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlRootElement(name = "configuration")
+@XmlRootElement(name = "search")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchIndexerConfigurationBean extends SearchConfigurationBean implements
     SearchIndexerConfiguration {

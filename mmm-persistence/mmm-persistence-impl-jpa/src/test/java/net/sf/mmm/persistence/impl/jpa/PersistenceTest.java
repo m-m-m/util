@@ -8,10 +8,10 @@ import java.util.concurrent.Callable;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.sf.mmm.framework.base.SpringContainerPool;
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
 import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.transaction.api.TransactionExecutor;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
  * This is the test-case for the persistence.

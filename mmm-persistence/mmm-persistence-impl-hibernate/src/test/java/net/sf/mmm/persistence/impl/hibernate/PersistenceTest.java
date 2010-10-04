@@ -5,9 +5,9 @@ package net.sf.mmm.persistence.impl.hibernate;
 
 import org.junit.Test;
 
-import net.sf.mmm.framework.base.SpringContainerPool;
 import net.sf.mmm.persistence.api.RevisionedPersistenceManager;
 import net.sf.mmm.transaction.api.TransactionExecutor;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
  * This is the test-case for the persistence.

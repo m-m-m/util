@@ -66,7 +66,7 @@ public class ContentParserServiceImplHardwired extends ContentParserServiceImpl 
 
     super.doInitialize();
     if (getGenericParser() == null) {
-      setGenericParser(new ContentParserGeneric());
+      setGenericParser(new ContentParserGenericImpl());
     }
 
     addParser(new ContentParserPdf());

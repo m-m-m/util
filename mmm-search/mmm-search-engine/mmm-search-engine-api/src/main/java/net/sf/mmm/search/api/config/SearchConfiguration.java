@@ -6,8 +6,8 @@ package net.sf.mmm.search.api.config;
 import java.util.List;
 
 /**
- * This is the interface for the configuration of the entire search (e.g. the
- * {@link net.sf.mmm.search.engine.api.SearchEngine}).<br>
+ * This is the interface for the configuration of the entire search (e.g. for
+ * the {@link net.sf.mmm.search.engine.api.SearchEngine}).<br>
  * You will typically provide your configuration as XML. The base-implementation
  * comes with an according (un)marshaler.
  * 
@@ -33,5 +33,12 @@ public interface SearchConfiguration {
    *         configured for the given <code>id</code>.
    */
   SearchSource getSource(String id);
+
+  /**
+   * This method gets the {@link SearchIndexConfiguration}.
+   * 
+   * @return the {@link SearchIndexConfiguration}.
+   */
+  SearchIndexConfiguration getSearchIndex();
 
 }

@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.indexer.api.SearchIndexManager;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.search.indexer.base.AbstractSearchIndexerManager;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -26,7 +27,9 @@ import org.apache.lucene.index.IndexModifier;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class LuceneSearchIndexManager extends AbstractLoggable implements SearchIndexManager {
+@Named
+@Singleton
+public class LuceneSearchIndexerManager extends AbstractSearchIndexerManager {
 
   /** @see #getAnalyzer() */
   private Analyzer analyzer;
@@ -34,7 +37,7 @@ public class LuceneSearchIndexManager extends AbstractLoggable implements Search
   /**
    * The constructor.
    */
-  public LuceneSearchIndexManager() {
+  public LuceneSearchIndexerManager() {
 
     super();
     this.analyzer = null;
@@ -72,9 +75,9 @@ public class LuceneSearchIndexManager extends AbstractLoggable implements Search
   /**
    * {@inheritDoc}
    */
-  public SearchIndexer createIndexer(String dataSource, boolean update) throws SearchException {
+  @Override
+  protected SearchIndexer createIndexer(File indexPath, boolean update) throws SearchException {
 
-    File indexPath = new File(dataSource);
     try {
       boolean create;
       if (indexPath.exists()) {

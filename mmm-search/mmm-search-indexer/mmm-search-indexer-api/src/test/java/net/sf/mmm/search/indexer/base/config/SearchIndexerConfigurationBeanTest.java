@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import net.sf.mmm.search.base.config.SearchIndexConfigurationBean;
 import net.sf.mmm.search.base.config.SearchSourceBean;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
@@ -46,6 +47,10 @@ public class SearchIndexerConfigurationBeanTest {
 
     JAXBContext context = JAXBContext.newInstance(SearchIndexerConfigurationBean.class);
     SearchIndexerConfigurationBean config = new SearchIndexerConfigurationBean();
+    // index
+    SearchIndexConfigurationBean searchIndex = new SearchIndexConfigurationBean();
+    searchIndex.setLocation("~/search-index");
+    config.setSearchIndex(searchIndex);
     // sources
     List<SearchSourceBean> sources = new ArrayList<SearchSourceBean>();
     config.setSources(sources);
@@ -106,7 +111,6 @@ public class SearchIndexerConfigurationBeanTest {
     String xml2 = buffer.toString();
     Assert.assertEquals(xml, xml2);
 
-    // TODO: remove this code...
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     context.createMarshaller().marshal(newConfig, document);
     DomUtilImpl.getInstance().writeXml(document, System.out, true);
