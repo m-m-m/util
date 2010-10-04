@@ -121,3 +121,7 @@ servlet
 screenshot
 extendable
 guice
+mimetypes
+registry
+impl
+pdfbox

@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.parser.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.base.AbstractContentParser;
 import net.sf.mmm.content.parser.impl.html.ContentParserHtml;
 import net.sf.mmm.content.parser.impl.java.ContentParserJava;
@@ -48,75 +47,43 @@ public class ContentParserServiceImplHardwired extends ContentParserServiceImpl 
   }
 
   /**
-   * @see #addParser(ContentParser, String...)
-   * 
-   * @param parser is the parser to register.
-   */
-  public void addParser(AbstractContentParser parser) {
-
-    parser.initialize();
-    super.addParser(parser, parser.getRegistryKeys());
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
   protected void doInitialize() {
 
-    super.doInitialize();
     if (getGenericParser() == null) {
       setGenericParser(new ContentParserGenericImpl());
     }
+    List<AbstractContentParser> parserList = new ArrayList<AbstractContentParser>();
 
-    addParser(new ContentParserPdf());
-    addParser(new ContentParserHtml());
-    addParser(new ContentParserDoc());
-    addParser(new ContentParserXls());
-    addParser(new ContentParserPpt());
+    parserList.add(new ContentParserPdf());
+    parserList.add(new ContentParserHtml());
+    parserList.add(new ContentParserDoc());
+    parserList.add(new ContentParserXls());
+    parserList.add(new ContentParserPpt());
 
-    addParser(new ContentParserOdb());
-    addParser(new ContentParserOdc());
-    addParser(new ContentParserOdf());
-    addParser(new ContentParserOdg());
-    addParser(new ContentParserOdi());
-    addParser(new ContentParserOdm());
-    addParser(new ContentParserOds());
-    addParser(new ContentParserOdt());
-    addParser(new ContentParserOtg());
-    addParser(new ContentParserOth());
-    addParser(new ContentParserOtp());
-    addParser(new ContentParserOts());
-    addParser(new ContentParserOtt());
+    parserList.add(new ContentParserOdb());
+    parserList.add(new ContentParserOdc());
+    parserList.add(new ContentParserOdf());
+    parserList.add(new ContentParserOdg());
+    parserList.add(new ContentParserOdi());
+    parserList.add(new ContentParserOdm());
+    parserList.add(new ContentParserOds());
+    parserList.add(new ContentParserOdt());
+    parserList.add(new ContentParserOtg());
+    parserList.add(new ContentParserOth());
+    parserList.add(new ContentParserOtp());
+    parserList.add(new ContentParserOts());
+    parserList.add(new ContentParserOtt());
 
-    addParser(new ContentParserXml());
-    addParser(new ContentParserTextMarkupAware());
-    // even.txt files may contain markup (e.g. twiki data files).
-    // addParser(new ContentParserText());
-    addParser(new ContentParserJava());
-
-    Map<String, String> alias2keyMap = new HashMap<String, String>();
-    alias2keyMap.put("htm", "html");
-    alias2keyMap.put("php", "html");
-    alias2keyMap.put("jsp", "html");
-    alias2keyMap.put("jinc", "text-with-markup");
-    alias2keyMap.put("asc", "txt");
-    alias2keyMap.put("apt", "txt");
-    alias2keyMap.put("csv", "txt");
-    alias2keyMap.put("sql", "txt");
-    alias2keyMap.put("bat", "txt");
-    alias2keyMap.put("sh", "txt");
-    alias2keyMap.put("c", "txt");
-    alias2keyMap.put("h", "txt");
-    alias2keyMap.put("cpp", "txt");
-    alias2keyMap.put("c++", "txt");
-    alias2keyMap.put("cs", "txt");
-    alias2keyMap.put("net", "txt");
-    alias2keyMap.put("pl", "txt");
-    alias2keyMap.put("py", "txt");
-    alias2keyMap.put("js", "txt");
-    alias2keyMap.put("dot", "doc");
-    setAlias2keyMap(alias2keyMap);
-
+    parserList.add(new ContentParserXml());
+    parserList.add(new ContentParserTextMarkupAware());
+    parserList.add(new ContentParserJava());
+    for (AbstractContentParser abstractContentParser : parserList) {
+      abstractContentParser.initialize();
+    }
+    setContentParsers(parserList);
+    super.doInitialize();
   }
 }

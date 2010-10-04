@@ -9,11 +9,13 @@ import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.content.parser.base.AbstractContentParser;
 import net.sf.mmm.util.xml.api.ParserState;
+import net.sf.mmm.util.xml.api.XmlUtil;
 import net.sf.mmm.util.xml.base.XmlUtilImpl;
 
 /**
@@ -37,6 +39,9 @@ public class ContentParserXml extends AbstractContentParser {
   /** The default extension. */
   public static final String KEY_EXTENSION = "xml";
 
+  /** @see #getXmlUtil() */
+  private XmlUtil xmlUtil;
+
   /**
    * The constructor.
    */
@@ -49,7 +54,37 @@ public class ContentParserXml extends AbstractContentParser {
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeys() {
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.xmlUtil == null) {
+      this.xmlUtil = XmlUtilImpl.getInstance();
+    }
+  }
+
+  /**
+   * @return the xmlUtil
+   */
+  protected XmlUtil getXmlUtil() {
+
+    return this.xmlUtil;
+  }
+
+  /**
+   * @param xmlUtil is the xmlUtil to set
+   */
+  @Inject
+  public void setXmlUtil(XmlUtil xmlUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.xmlUtil = xmlUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getRegistryKeysPrimary() {
 
     return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }
@@ -93,8 +128,7 @@ public class ContentParserXml extends AbstractContentParser {
     ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
-      // TODO: use IoC
-      parserState = XmlUtilImpl.getInstance().extractPlainText(line, textBuffer, parserState);
+      parserState = this.xmlUtil.extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }

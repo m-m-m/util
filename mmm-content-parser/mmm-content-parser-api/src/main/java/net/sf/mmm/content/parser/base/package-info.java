@@ -11,7 +11,7 @@
  * {@link net.sf.mmm.content.parser.base.LimitBufferSize} so the memory footprint
  * of  {@link net.sf.mmm.content.parser.api.ContentParser}-implementations
  * can be limited. This is an important feature if you want to parse large
- * sets of content without getting an {@link OutOfMemoryError}.
+ * sets of content without getting an {@link java.lang.OutOfMemoryError}.
  */
 package net.sf.mmm.content.parser.base;
 

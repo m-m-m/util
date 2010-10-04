@@ -10,6 +10,8 @@ import javax.inject.Singleton;
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for text
  * (content with the mimetype "text/plain").
  * 
+ * @see ContentParserTextMarkupAware
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Singleton
@@ -34,7 +36,7 @@ public class ContentParserText extends AbstractContentParserText {
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeys() {
+  public String[] getRegistryKeysPrimary() {
 
     return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }

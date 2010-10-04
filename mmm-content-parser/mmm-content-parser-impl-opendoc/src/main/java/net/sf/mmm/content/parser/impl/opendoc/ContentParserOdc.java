@@ -36,7 +36,7 @@ public class ContentParserOdc extends AbstractContentParserOpenDoc {
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeys() {
+  public String[] getRegistryKeysPrimary() {
 
     return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }

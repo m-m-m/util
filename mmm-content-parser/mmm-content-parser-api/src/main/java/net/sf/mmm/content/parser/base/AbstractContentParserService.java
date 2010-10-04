@@ -4,12 +4,14 @@
 package net.sf.mmm.content.parser.base;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
@@ -21,13 +23,19 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractContentParserService extends AbstractLoggable implements
-    ContentParserService, LimitBufferSize, ContentParserRegistrar {
+    ContentParserService, LimitBufferSize {
 
   /** @see #getGenericParser() */
   private ContentParserGeneric genericParser;
 
+  /** @see #setContentParsers(List) */
+  private List<AbstractContentParser> contentParsers;
+
   /** @see #getParser(String) */
-  private final Map<String, ContentParser> key2parserMap;
+  private final Map<String, ContentParser> primaryKey2parserMap;
+
+  /** @see #doInitialize() */
+  private Map<String, ContentParser> secondaryKey2parserMap;
 
   /** @see #getMaximumBufferSize() */
   private int maximumBufferSize;
@@ -38,9 +46,51 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
   public AbstractContentParserService() {
 
     super();
-    this.key2parserMap = new HashMap<String, ContentParser>();
+    this.primaryKey2parserMap = new HashMap<String, ContentParser>();
+    this.secondaryKey2parserMap = new HashMap<String, ContentParser>();
     this.maximumBufferSize = DEFAULT_MAX_BUFFER_SIZE;
     this.genericParser = null;
+    this.contentParsers = null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.genericParser == null) {
+      throw new ResourceMissingException("genericParser");
+    }
+    if (this.contentParsers == null) {
+      throw new ResourceMissingException("contentParsers");
+    }
+    for (AbstractContentParser parser : this.contentParsers) {
+      parser.setMaximumBufferSize(this.maximumBufferSize);
+      if (!(parser instanceof ContentParserGeneric)) {
+        String[] primaryKeys = parser.getRegistryKeysPrimary();
+        if ((primaryKeys == null) || (primaryKeys.length == 0)) {
+          throw new NlsIllegalArgumentException(parser.getClass().getName());
+        }
+        for (String key : primaryKeys) {
+          ContentParser old = this.primaryKey2parserMap.put(key, parser);
+          if (old != null) {
+            throw new DuplicateObjectException(parser, key);
+          }
+        }
+        String[] secondaryKeys = parser.getRegistryKeysSecondary();
+        if (secondaryKeys != null) {
+          for (String key : secondaryKeys) {
+            ContentParser old = this.secondaryKey2parserMap.put(key, parser);
+            if (old != null) {
+              throw new DuplicateObjectException(parser, key);
+            }
+          }
+        }
+      }
+    }
+
   }
 
   /**
@@ -56,21 +106,8 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
    */
   public void setMaximumBufferSize(int maxBytes) {
 
+    getInitializationState().requireNotInitilized();
     this.maximumBufferSize = maxBytes;
-    updateBufferSize();
-  }
-
-  /**
-   * This method updates the {@link #setMaximumBufferSize(int) buffer size}.
-   */
-  private void updateBufferSize() {
-
-    int bufferSize = this.maximumBufferSize;
-    for (ContentParser parser : this.key2parserMap.values()) {
-      if (parser instanceof LimitBufferSize) {
-        ((LimitBufferSize) parser).setMaximumBufferSize(bufferSize);
-      }
-    }
   }
 
   /**
@@ -92,11 +129,25 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
   }
 
   /**
+   * @param contentParsers is the contentParsers to set
+   */
+  @Inject
+  public void setContentParsers(List<AbstractContentParser> contentParsers) {
+
+    getInitializationState().requireNotInitilized();
+    this.contentParsers = contentParsers;
+  }
+
+  /**
    * {@inheritDoc}
    */
   public ContentParser getParser(String key) {
 
-    return this.key2parserMap.get(key);
+    ContentParser parser = this.primaryKey2parserMap.get(key);
+    if (parser == null) {
+      parser = this.secondaryKey2parserMap.get(key);
+    }
+    return parser;
   }
 
   /**
@@ -117,13 +168,13 @@ public abstract class AbstractContentParserService extends AbstractLoggable impl
       throw new NlsIllegalArgumentException("At least one extension is required!");
     }
     for (int i = 0; i < keys.length; i++) {
-      if (this.key2parserMap.containsKey(keys[i])) {
+      if (this.primaryKey2parserMap.containsKey(keys[i])) {
         throw new DuplicateObjectException(parser, keys[i]);
       }
       if (parser instanceof LimitBufferSize) {
         ((LimitBufferSize) parser).setMaximumBufferSize(this.maximumBufferSize);
       }
-      this.key2parserMap.put(keys[i], parser);
+      this.primaryKey2parserMap.put(keys[i], parser);
     }
   }
 

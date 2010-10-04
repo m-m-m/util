@@ -9,7 +9,9 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for text that
- * may contain markup (e.g. content of the type "jsp" or "php").
+ * may contain markup. It should be used in advance to {@link ContentParserText}
+ * as even "*.txt" files can contain markup (e.g. data-files from
+ * TWiki/FosWiki).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -29,9 +31,19 @@ public class ContentParserTextMarkupAware extends AbstractContentParserTextMarku
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeys() {
+  public String[] getRegistryKeysPrimary() {
 
-    return new String[] { "txt", "php", "jsp", "jinc", "asp", "text/plain" };
+    return new String[] { "txt", "text/plain" };
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getRegistryKeysSecondary() {
+
+    return new String[] { "jinc", "asp", "java", "cpp", "c", "h", "c++", "js", "css", "asc", "apt",
+        "csv", "sql", "bat", "sh", "net", "pl", "py" };
   }
 
 }

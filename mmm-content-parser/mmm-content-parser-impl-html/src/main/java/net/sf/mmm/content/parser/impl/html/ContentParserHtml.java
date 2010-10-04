@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.content.parser.impl.text.AbstractContentParserText;
 import net.sf.mmm.content.parser.impl.text.AbstractContentParserTextMarkupAware;
 
 import org.w3c.dom.Document;
@@ -80,18 +79,31 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeys() {
+  public String[] getRegistryKeysPrimary() {
 
     return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }
 
   /**
-   * @see AbstractContentParserText#parse(InputStream, long)
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getRegistryKeysSecondary() {
+
+    return new String[] { "htm", "php", "jsp", "hta" };
+  }
+
+  /**
+   * @see #parse(InputStream, long)
    * 
-   * @param inputStream
-   * @param filesize
-   * @param properties
-   * @throws Exception
+   * @param inputStream is the fresh input stream of the content to parse. It
+   *        will be {@link InputStream#close() closed} by this method (on
+   *        success and in exceptional state).
+   * @param filesize is the size (content-length) of the content to parse in
+   *        bytes or <code>0</code> if NOT available (unknown). If available,
+   *        the parser may use this value for optimized allocations.
+   * @param properties are the {@link Properties} where metadata can be added.
+   * @throws Exception on error.
    */
   protected void parseJtidy(InputStream inputStream, long filesize, Properties properties)
       throws Exception {
@@ -227,14 +239,23 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
   @SuppressWarnings("all")
   private static class NullWriter extends Writer {
 
+    /**
+     * {@inheritDoc}
+     */
     public void close() throws IOException {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void flush() throws IOException {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void write(char[] cbuf, int off, int len) throws IOException {
 
     }

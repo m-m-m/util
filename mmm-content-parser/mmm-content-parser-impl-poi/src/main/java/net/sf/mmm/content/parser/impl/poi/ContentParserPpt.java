@@ -150,7 +150,7 @@ public class ContentParserPpt extends AbstractContentParserPoi {
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeys() {
+  public String[] getRegistryKeysPrimary() {
 
     return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }
