@@ -7,10 +7,10 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
+import net.sf.mmm.util.resource.api.spi.ResourceUri;
 import net.sf.mmm.util.resource.base.AbstractDataResourceFactory;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.resource.base.FileResource;
-import net.sf.mmm.util.resource.base.ResourceUri;
 import net.sf.mmm.util.resource.base.UrlResource;
 
 /**

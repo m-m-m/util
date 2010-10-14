@@ -53,7 +53,12 @@ public class SimpleExecutor implements Executor {
    */
   public void execute(Runnable command) {
 
-    Thread thread = this.threadFactory.newThread(command);
+    Thread thread;
+    if (command instanceof Thread) {
+      thread = (Thread) command;
+    } else {
+      thread = this.threadFactory.newThread(command);
+    }
     thread.start();
   }
 

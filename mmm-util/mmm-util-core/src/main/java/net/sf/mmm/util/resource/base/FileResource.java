@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -144,6 +145,23 @@ public class FileResource extends AbstractBrowsableResource {
   public boolean isFolder() {
 
     return this.file.isDirectory();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Boolean isModifiedSince(Date date) {
+
+    long lastModified = this.file.lastModified();
+    if (lastModified != 0) {
+      Date modificationDate = new Date(lastModified);
+      if (modificationDate.after(date)) {
+        return Boolean.TRUE;
+      } else {
+        return Boolean.FALSE;
+      }
+    }
+    return null;
   }
 
   /**

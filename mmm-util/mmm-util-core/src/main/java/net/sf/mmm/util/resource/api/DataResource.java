@@ -32,7 +32,11 @@ public interface DataResource {
 
   /**
    * This method gets the path of this resource. Please note that the path is
-   * including the {@link #getName() name} of the resource.
+   * including the {@link #getName() name} of the resource.<br/>
+   * <b>ATTENTION:</b><br>
+   * The result of this method may differ to the path used in the URL when this
+   * resource has been {@link DataResourceFactory#createDataResource(String)
+   * created}.
    * 
    * @return the path that was used to identify this resource when creating.
    */

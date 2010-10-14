@@ -116,8 +116,8 @@ public interface FileUtil {
    * <td>\</td>
    * </tr>
    * <tr>
-   * <td>.</td>
    * <td>/.</td>
+   * <td>.</td>
    * </tr>
    * <tr>
    * <td>/foo.bar</td>

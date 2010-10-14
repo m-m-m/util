@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
+import java.util.Date;
+
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
@@ -54,6 +56,14 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   public boolean isFolder() {
 
     return getDelegate().isFolder();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Boolean isModifiedSince(Date date) {
+
+    return getDelegate().isModifiedSince(date);
   }
 
   /**

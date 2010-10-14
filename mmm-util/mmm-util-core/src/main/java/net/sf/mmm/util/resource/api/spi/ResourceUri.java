@@ -1,8 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.resource.base;
+package net.sf.mmm.util.resource.api.spi;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,7 +87,7 @@ public class ResourceUri {
     this.uri = uri;
     Matcher matcher = SCHEME_PATTERN.matcher(uri);
     if (matcher.matches()) {
-      this.schemePrefix = matcher.group(1);
+      this.schemePrefix = matcher.group(1).toLowerCase(Locale.US);
       this.path = matcher.group(3);
     } else {
       this.schemePrefix = null;
@@ -103,7 +104,7 @@ public class ResourceUri {
   public ResourceUri(String schemePrefix, String path) {
 
     super();
-    this.schemePrefix = schemePrefix;
+    this.schemePrefix = schemePrefix.toLowerCase(Locale.US);
     this.path = path;
     if (this.schemePrefix == null) {
       this.uri = this.path;

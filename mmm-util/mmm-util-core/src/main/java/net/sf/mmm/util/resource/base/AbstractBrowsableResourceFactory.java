@@ -3,9 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
+import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
+import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
+import net.sf.mmm.util.resource.api.spi.ResourceUri;
 
 /**
  * This is the abstract base implementation of the
@@ -17,12 +26,110 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 public abstract class AbstractBrowsableResourceFactory extends AbstractDataResourceFactory
     implements BrowsableResourceFactory {
 
+  /** @see #createBrowsableResource(ResourceUri) */
+  private final Map<String, DataResourceProvider<? extends DataResource>> schema2providerMap;
+
   /**
    * The constructor.
    */
   public AbstractBrowsableResourceFactory() {
 
     super();
+    this.schema2providerMap = new HashMap<String, DataResourceProvider<? extends DataResource>>();
+  }
+
+  /**
+   * This method registers the given <code>provider</code>.
+   * 
+   * @param provider is the {@link DataResourceProvider} to register.
+   * @throws DuplicateObjectException if a {@link DataResourceProvider} is
+   *         already registered for one of the
+   *         {@link DataResourceProvider#getSchemePrefixes() scheme-prefixes}.
+   */
+  public void registerProvider(DataResourceProvider<? extends DataResource> provider)
+      throws DuplicateObjectException {
+
+    getInitializationState().requireNotInitilized();
+    if (provider == null) {
+      throw new NlsNullPointerException("provider");
+    }
+    String[] schemaPrefixes = provider.getSchemePrefixes();
+    if (schemaPrefixes == null) {
+      throw new NlsNullPointerException(provider.getClass().getName() + ".getSchemaPrefix()");
+    }
+    if (schemaPrefixes.length == 0) {
+      throw new NlsIllegalArgumentException(provider.getClass().getName() + ".getSchemaPrefix()");
+    }
+    if (provider.getResourceType() == null) {
+      throw new NlsNullPointerException(provider.getClass().getName() + ".getResourceType()");
+    }
+    for (String schemaPrefix : schemaPrefixes) {
+      if (this.schema2providerMap.containsKey(schemaPrefix)) {
+        throw new DuplicateObjectException(provider, schemaPrefix);
+      }
+      this.schema2providerMap.put(schemaPrefix, provider);
+    }
+  }
+
+  /**
+   * This method registers the given <code>provider</code> for the given
+   * <code>schemaPrefix</code>.
+   * 
+   * @param provider is the {@link DataResourceProvider} to register.
+   * @param schemaPrefix is the {@link ResourceUri#getSchemePrefix()
+   *        scheme-prefix} for which the provider shall be registered.
+   * 
+   * @throws DuplicateObjectException if a {@link DataResourceProvider} is
+   *         already registered with the same
+   *         {@link DataResourceProvider#getSchemePrefixes() scheme-prefix}.
+   */
+  public void registerProvider(DataResourceProvider<? extends DataResource> provider,
+      String schemaPrefix) throws DuplicateObjectException {
+
+    getInitializationState().requireNotInitilized();
+    if (provider == null) {
+      throw new NlsNullPointerException("provider");
+    }
+    if (provider.getResourceType() == null) {
+      throw new NlsNullPointerException(provider.getClass().getName() + ".getResourceType()");
+    }
+    if (this.schema2providerMap.containsKey(schemaPrefix)) {
+      throw new DuplicateObjectException(provider, schemaPrefix);
+    }
+    this.schema2providerMap.put(schemaPrefix, provider);
+  }
+
+  /**
+   * This method gets the {@link DataResourceProvider provider} for the given
+   * <code>resourceUri</code>.
+   * 
+   * @param resourceUri is the {@link ResourceUri}.
+   * @return the {@link DataResourceProvider}
+   *         {@link DataResourceProvider#getSchemePrefixes() responsible} for
+   *         the given <code>resourceUri</code>.
+   * @throws ResourceUriUndefinedException if no {@link DataResourceProvider
+   *         provider} is {@link #registerProvider(DataResourceProvider)
+   *         registered} that is responsible.
+   */
+  protected DataResourceProvider<? extends DataResource> getProvider(ResourceUri resourceUri)
+      throws ResourceUriUndefinedException {
+
+    DataResourceProvider<? extends DataResource> provider = this.schema2providerMap.get(resourceUri
+        .getSchemePrefix());
+    if (provider == null) {
+      throw new ResourceUriUndefinedException(resourceUri.getUri());
+    }
+    return provider;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected DataResource createDataResource(ResourceUri resourceUri)
+      throws ResourceUriUndefinedException {
+
+    return getProvider(resourceUri).createResource(resourceUri);
   }
 
   /**
@@ -35,8 +142,16 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    *         is undefined, e.g. the {@link ResourceUri#getSchemePrefix()
    *         scheme-prefix} is NOT supported by this factory.
    */
-  protected abstract BrowsableResource createBrowsableResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException;
+  protected BrowsableResource createBrowsableResource(ResourceUri resourceUri)
+      throws ResourceUriUndefinedException {
+
+    DataResourceProvider<? extends DataResource> provider = getProvider(resourceUri);
+    if (!BrowsableResource.class.isAssignableFrom(provider.getResourceType())) {
+      Exception cause = new NlsIllegalArgumentException(provider.getResourceType());
+      throw new ResourceUriUndefinedException(cause, resourceUri.getUri());
+    }
+    return (BrowsableResource) provider.createResource(resourceUri);
+  }
 
   /**
    * {@inheritDoc}

@@ -49,6 +49,7 @@ public abstract class AbstractDataResource implements DataResource {
   public long getSize() throws ResourceNotAvailableException {
 
     try {
+      // return getUrl().openConnection().getContentLengthLong();
       return getUrl().openConnection().getContentLength();
     } catch (IOException e) {
       throw new ResourceNotAvailableException(e, getPath());

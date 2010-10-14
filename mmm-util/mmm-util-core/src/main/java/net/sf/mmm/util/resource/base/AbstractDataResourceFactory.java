@@ -7,6 +7,7 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
+import net.sf.mmm.util.resource.api.spi.ResourceUri;
 
 /**
  * This is the abstract base implementation of the {@link DataResourceFactory}

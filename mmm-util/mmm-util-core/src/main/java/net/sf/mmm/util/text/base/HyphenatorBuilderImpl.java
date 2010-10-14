@@ -226,8 +226,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
         }
       }
     } catch (XMLStreamException e) {
-      // TODO ...
-      throw new XmlInvalidException(e);
+      throw new XmlInvalidException(e, resource);
     }
   }
 

@@ -30,4 +30,18 @@ public class XmlInvalidException extends XmlException {
     super(nested, NlsBundleUtilCore.ERR_XML_INVALID);
   }
 
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception - e.g. a
+   *        {@link org.xml.sax.SAXException}.
+   * @param source describes the source of the invalid XML. Typically this will
+   *        be the filename where the XML was read from. It is used in in the
+   *        exception message. This will help to find the problem easier.
+   */
+  public XmlInvalidException(Throwable nested, Object source) {
+
+    super(nested, NlsBundleUtilCore.ERR_XML_INVALID_WITH_SOURCE, toMap(KEY_SOURCE, source));
+  }
+
 }

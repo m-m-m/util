@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
+import java.util.Date;
+
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
@@ -58,12 +60,25 @@ public interface BrowsableResource extends DataResource {
    * In order to determine if this {@link BrowsableResource} is
    * {@link #openStream() containing data}, please use {@link #isAvailable()}.
    * Please note that {@link #isFolder()} and {@link #isAvailable()} can both
-   * return <code>true</code> (or <code>false</code>).
+   * return <code>true</code> or both return <code>false</code>.
    * 
    * @return <code>true</code> if this is a folder, <code>false</code>
    *         otherwise.
    */
   boolean isFolder();
+
+  /**
+   * This method determines if this resource has been been modified since the
+   * given <code>data</code>.
+   * 
+   * @param date is the {@link Date} to check for.
+   * @return <code>true</code> if the resource has been modified after the given
+   *         <code>date</code>, <code>false</code> if it has NOT been modified
+   *         after the given <code>date</code> and <code>null</code> if this can
+   *         NOT be determined (resource not {@link #isAvailable() available} or
+   *         operation NOT supported by this resource).
+   */
+  Boolean isModifiedSince(Date date);
 
   /**
    * {@inheritDoc}

@@ -3,17 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
+import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 import net.sf.mmm.util.resource.base.AbstractBrowsableResourceFactory;
-import net.sf.mmm.util.resource.base.ClasspathResource;
-import net.sf.mmm.util.resource.base.FileResource;
-import net.sf.mmm.util.resource.base.ResourceUri;
-import net.sf.mmm.util.resource.base.UrlResource;
+import net.sf.mmm.util.resource.impl.spi.ClasspathResourceProvider;
+import net.sf.mmm.util.resource.impl.spi.FileResourceProvider;
+import net.sf.mmm.util.resource.impl.spi.UrlResourceProvider;
 
 /**
  * This is the default implementation of the
@@ -25,6 +27,9 @@ import net.sf.mmm.util.resource.base.UrlResource;
 @Singleton
 @Named
 public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFactory {
+
+  /** @see #getProviders() */
+  private List<DataResourceProvider<? extends DataResource>> providers;
 
   /**
    * The constructor.
@@ -38,32 +43,38 @@ public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFacto
    * {@inheritDoc}
    */
   @Override
-  protected BrowsableResource createBrowsableResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException {
+  protected void doInitialize() {
 
-    String schemePrefix = resourceUri.getSchemePrefix();
-    if (FileResource.SCHEME_PREFIX.equals(schemePrefix)) {
-      return new FileResource(resourceUri.getPath());
-    } else {
-      throw new ResourceUriUndefinedException(resourceUri.getUri());
+    super.doInitialize();
+    if (this.providers == null) {
+      this.providers = new ArrayList<DataResourceProvider<? extends DataResource>>();
+      this.providers.add(new ClasspathResourceProvider());
+      this.providers.add(new FileResourceProvider());
+      this.providers.add(new UrlResourceProvider());
+    }
+    for (DataResourceProvider<? extends DataResource> provider : this.providers) {
+      registerProvider(provider);
     }
   }
 
   /**
-   * {@inheritDoc}
+   * @return the providers
    */
-  @Override
-  protected DataResource createDataResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException {
+  protected List<DataResourceProvider<? extends DataResource>> getProviders() {
 
-    String schemePrefix = resourceUri.getSchemePrefix();
-    if (ClasspathResource.SCHEME_PREFIX.equals(schemePrefix)) {
-      return new ClasspathResource(resourceUri.getPath());
-    } else if (FileResource.SCHEME_PREFIX.equals(schemePrefix)) {
-      return new FileResource(resourceUri.getPath());
-    } else {
-      return new UrlResource(resourceUri.getUri());
-    }
+    return this.providers;
+  }
+
+  /**
+   * This method sets the {@link List} of {@link DataResourceProvider providers}
+   * to {@link #registerProvider(DataResourceProvider) register}.
+   * 
+   * @param providers is the list of providers.
+   */
+  @Inject
+  public void setProviders(List<DataResourceProvider<? extends DataResource>> providers) {
+
+    this.providers = providers;
   }
 
 }

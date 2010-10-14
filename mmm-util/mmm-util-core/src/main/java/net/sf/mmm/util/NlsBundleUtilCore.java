@@ -167,7 +167,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_ILLEGAL_CASE = "The case \"{case}\" is NOT covered!";
 
   /** @see net.sf.mmm.util.resource.api.ResourceNotAvailableException */
-  public static final String ERR_RESOURCE_NOT_AVAILABLE = "The resource \"{resource}\" is not available in your classpath!";
+  public static final String ERR_RESOURCE_NOT_AVAILABLE = "The resource \"{resource}\" is not available!";
 
   /** @see net.sf.mmm.util.resource.api.ResourceUriUndefinedException */
   public static final String ERR_RESOURCE_UNDEFINED_URI = "The resource URI \"{uri}\" is undefined!";
@@ -219,6 +219,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
   public static final String ERR_XML_INVALID = "Invalid XML!";
+
+  /** @see net.sf.mmm.util.xml.base.XmlInvalidException */
+  public static final String ERR_XML_INVALID_WITH_SOURCE = "The XML from {source} is invalid!";
 
   /** @see net.sf.mmm.util.collection.base.NodeCycleException */
   public static final String ERR_NODE_CYCLE = "A cyclic dependency of {type}-nodes has been detected [{cycle}]!";
