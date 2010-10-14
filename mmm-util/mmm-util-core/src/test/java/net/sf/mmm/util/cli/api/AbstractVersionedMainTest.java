@@ -61,7 +61,7 @@ public class AbstractVersionedMainTest {
   @CliClass(usage = TestMain.USAGE)
   private static class TestMain extends AbstractVersionedMain {
 
-    private static final String USAGE = "This program is used for tests only";
+    public static final String USAGE = "This program is used for tests only";
 
   }
 }
