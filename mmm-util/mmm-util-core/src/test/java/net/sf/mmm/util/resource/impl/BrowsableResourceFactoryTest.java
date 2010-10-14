@@ -59,7 +59,7 @@ public class BrowsableResourceFactoryTest {
 
     String filename = "page.html";
     String path = "/folder/subfolder/" + filename;
-    String host = "foo.bar.org";
+    String host = "foo.bar.xxx";
     String resourceUri = "http://" + host + path;
     DataResource resource = getBrowsableResourceFactory().createDataResource(resourceUri);
     Assert.assertEquals(filename, resource.getName());
