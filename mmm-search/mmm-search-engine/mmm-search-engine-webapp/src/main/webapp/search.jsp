@@ -175,7 +175,8 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
       int hitCount = searchPage.getPageHitCount();
       for (int hitIndex = 0; hitIndex < hitCount; hitIndex++) {
         SearchHit hit = searchPage.getPageHit(hitIndex);
-        String baseUrl = conf.getUrlPrefixBySource(hit.getSource());
+        // TODO: error handling, source can be null
+        String baseUrl = conf.getSource(hit.getSource()).getUrlPrefix();
         String url = baseUrl + hit.getUri();
         String title = SearchViewContext.getEntryTitle(hit);
         String styleClass;

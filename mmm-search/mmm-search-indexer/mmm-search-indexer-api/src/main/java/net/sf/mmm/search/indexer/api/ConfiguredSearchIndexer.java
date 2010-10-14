@@ -23,7 +23,7 @@ public interface ConfiguredSearchIndexer {
    * {@link SearchIndexerConfiguration}.
    * 
    * @see SearchIndexerConfiguration#getLocations()
-   * @see #index(SearchIndexer, SearchIndexDataLocation)
+   * @see #index(SearchIndexer, SearchIndexDataLocation, boolean)
    * 
    * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
    *        add to the index.
@@ -32,11 +32,18 @@ public interface ConfiguredSearchIndexer {
 
   /**
    * This method indexes the given {@link SearchIndexDataLocation location}.
-   * @param searchIndexer TODO
+   * 
+   * @param searchIndexer is the {@link SearchIndexer} used for modifying the
+   *        index.
    * @param location is the {@link SearchIndexDataLocation} to crawl and add to
    *        the index.
+   * @param forceFullIndex - <code>true</code> if the <code>location</code>
+   *        should be entirely re-indexed (all existing entries for the
+   *        according source/location are deleted and everything is indexed
+   *        again from scratch), <code>false</code> if delta-indexing should be
+   *        enabled so a potentially existing index is updated incremental.
    */
-  void index(SearchIndexer searchIndexer, SearchIndexDataLocation location);
+  void index(SearchIndexer searchIndexer, SearchIndexDataLocation location, boolean forceFullIndex);
 
   /**
    * This method performs the indexing for the given

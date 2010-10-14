@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view;
 
+import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.component.impl.SpringContainer;
 
 /**
  * This is the controller {@link javax.servlet.Servlet servlet} for the search.
@@ -14,12 +16,37 @@ public class GenericSearchServlet extends AbstractSearchServlet {
   /** The UID for serialization. */
   private static final long serialVersionUID = -3795814301240648103L;
 
+  /** @see #getIocContainer() */
+  private static final String PARAM_COMPONENT_PACKAGES = "component-packages";
+
+  /** @see #getIocContainer() */
+  private SpringContainer container;
+
   /**
    * The constructor.
    */
   public GenericSearchServlet() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected IocContainer getIocContainer() {
+
+    // will be called by init-method, so no concurrency problem...
+    if (this.container == null) {
+      String componentPackages = getServletConfig().getInitParameter(PARAM_COMPONENT_PACKAGES);
+      if (componentPackages == null) {
+        // TODO
+        this.container = new SpringContainer();
+      } else {
+        this.container = new SpringContainer();
+      }
+    }
+    return this.container;
   }
 
 }

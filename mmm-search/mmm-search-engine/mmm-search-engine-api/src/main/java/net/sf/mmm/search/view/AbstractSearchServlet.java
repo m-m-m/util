@@ -3,27 +3,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view;
 
-import java.io.File;
 import java.io.IOException;
 
-import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.JAXBContext;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
-import net.sf.mmm.search.engine.base.config.SearchEngineConfigurationBean;
-import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.file.base.FileUtilImpl;
+import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationReader;
+import net.sf.mmm.util.component.api.IocContainer;
 
 /**
  * This is the abstract base implementation of the controller
@@ -39,14 +36,14 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** @see #init(ServletConfig) */
   private static final String PARAM_CONFIG_FILE = "config-file";
 
-  /** @see #getConfiguration() */
-  private SearchEngineConfiguration configuration;
-
   /** The name of the view for the actual search. */
   private String searchView;
 
   /** The name of the view for the details. */
   private String detailsView;
+
+  /** @see #getConfiguration() */
+  private SearchEngineConfiguration configuration;
 
   /** The search engine. */
   private ManagedSearchEngine searchEngine;
@@ -68,6 +65,15 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   }
 
   /**
+   * This method gets the {@link IocContainer} used to manage components with
+   * their implementation. The {@link IocContainer} will be created and
+   * initialized on the first call of this method.
+   * 
+   * @return the {@link IocContainer}.
+   */
+  protected abstract IocContainer getIocContainer();
+
+  /**
    * This method gets the custom configuration for the search.
    * 
    * @return the {@link SearchEngineConfiguration}.
@@ -75,18 +81,6 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   protected SearchEngineConfiguration getConfiguration() {
 
     return this.configuration;
-  }
-
-  /**
-   * @param searchEngine the searchEngine to set
-   */
-  @Inject
-  public void setSearchEngine(ManagedSearchEngine searchEngine) {
-
-    this.searchEngine = searchEngine;
-    if (this.configuration != null) {
-      // this.configuration.setSearchEngine(searchEngine);
-    }
   }
 
   /**
@@ -107,13 +101,13 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       }
       String configPath = config.getInitParameter(PARAM_CONFIG_FILE);
       if (configPath == null) {
-        throw new ResourceMissingException(PARAM_CONFIG_FILE);
+        configPath = SearchConfiguration.DEFAULT_CONFIGURATION_FILE;
       }
-      configPath = FileUtilImpl.getInstance().normalizePath(configPath);
-      File configFile = new File(configPath);
-      JAXBContext context = JAXBContext.newInstance(SearchEngineConfigurationBean.class);
-      this.configuration = (SearchEngineConfiguration) context.createUnmarshaller().unmarshal(
-          configFile);
+      IocContainer container = getIocContainer();
+      SearchEngineConfigurationReader reader = container
+          .getComponent(SearchEngineConfigurationReader.class);
+      this.configuration = reader.readConfiguration(configPath);
+      this.searchEngine = container.getComponent(ManagedSearchEngine.class);
     } catch (Exception e) {
       throw new ServletException("Initialization failed!", e);
     }
@@ -184,8 +178,17 @@ public abstract class AbstractSearchServlet extends HttpServlet {
             query = mainQuery;
           }
           // perform search...
-          SearchResultPage result = getSearchEngine().search(query, searchContext.getPageNumber(),
-              searchContext.getHitsPerPage());
+          int totalHitCount = searchContext.getTotalHitCount();
+          SearchResultPage result;
+          int hitsPerPage = searchContext.getHitsPerPage();
+          if (totalHitCount == -1) {
+            // initial search
+            result = getSearchEngine().search(query, hitsPerPage);
+          } else {
+            // subsequent search
+            int pageNumber = searchContext.getPageNumber();
+            result = getSearchEngine().search(query, hitsPerPage, pageNumber, totalHitCount);
+          }
           searchContext.setResultPage(result);
         }
       } catch (Exception e) {

@@ -41,7 +41,8 @@ public interface SearchSource extends AttributeReadId<String> {
    * This method gets the display-name of this source. This title can be
    * displayed to end-users in the application where a
    * {@link net.sf.mmm.search.engine.api.SearchQuery} is performed so the user
-   * can restrict his search to specific sources.
+   * can restrict his search to specific sources.<br/>
+   * For localization see {@link net.sf.mmm.util.nls.api}.
    * 
    * @return the title of this source.
    */

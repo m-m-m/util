@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API of the common search infrastructure.
- * <h2>Search API</h2> 
+ * <a name="documentation"><h2>Search API</h2></a> 
  * This package contains the API of common search infrastructure such as
  * {@link net.sf.mmm.search.api.SearchEntry}.
  */

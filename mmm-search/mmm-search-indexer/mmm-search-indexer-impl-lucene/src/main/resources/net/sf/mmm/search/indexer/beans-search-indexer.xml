@@ -5,5 +5,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
   
   <import resource="classpath:net/sf/mmm/search/beans-search-engine-lucene.xml" />
-  <bean id="net.sf.mmm.search.indexer.api.SearchIndexerManager" class="net.sf.mmm.search.indexer.impl.LuceneSearchIndexerManager"/>  
+  <bean id="net.sf.mmm.search.indexer.api.SearchIndexerBuilder" class="net.sf.mmm.search.indexer.impl.lucene.LuceneSearchIndexerBuilder"/>  
 </beans>

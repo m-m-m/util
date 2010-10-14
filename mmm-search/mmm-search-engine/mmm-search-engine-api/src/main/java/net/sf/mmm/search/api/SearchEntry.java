@@ -23,11 +23,16 @@ public interface SearchEntry {
 
   /**
    * The name of the "uri" property. The URI (Unified Resource Identifier)
-   * should always be present and identify the content in a unique way. It can
-   * be an URL or the essential part to create an URL used to link the content
-   * when the search results are presented.<br>
-   * If the content has a technical UID, the {@link #PROPERTY_UID} may be used
+   * identifies the original content and allows to link to it. Typically this is
+   * not an entire URL but a path relative to the
+   * {@link net.sf.mmm.search.api.config.SearchSource#getUrlPrefix URL-prefix}
+   * of the according {@link #getSource() source}. This property should always
+   * be present.<br>
+   * <b>NOTE:</b><br>
+   * If the content has a technical UID, the {@link #PROPERTY_UID} can be used
    * additionally.
+   * 
+   * @see #getUri()
    */
   String PROPERTY_URI = "uri";
 
@@ -89,10 +94,13 @@ public interface SearchEntry {
   String PROPERTY_LANGUAGE = "lang";
 
   /**
-   * The name of the "source" property. This is an optional property that
-   * specifies the source of the content.
+   * The name of the "source" property. This property specifies the source of
+   * the content. It is not strictly required but should always be present in a
+   * regular setup. If it is NOT present, the property {@link #PROPERTY_URI URI}
+   * has to contain the complete URL to the content.
    * 
    * @see #getSource()
+   * @see net.sf.mmm.search.api.config.SearchSource
    */
   String PROPERTY_SOURCE = "source";
 
@@ -116,8 +124,7 @@ public interface SearchEntry {
 
   /**
    * This method gets the URI that identifies the original content and allows to
-   * link to it. Typically this is not an entire URL but a path relative to the
-   * base URL of the according {@link #getSource() source}.
+   * link to it.
    * 
    * @see #PROPERTY_URI
    * 
@@ -167,7 +174,7 @@ public interface SearchEntry {
   /**
    * This method gets the type of the content.
    * 
-   * @see SearchEntry#PROPERTY_TYPE
+   * @see #PROPERTY_TYPE
    * 
    * @return the type of this entry or <code>null</code> if NOT available.
    */
@@ -176,7 +183,7 @@ public interface SearchEntry {
   /**
    * This method gets the source of the content.
    * 
-   * @see SearchEntry#PROPERTY_SOURCE
+   * @see #PROPERTY_SOURCE
    * 
    * @return the source of this entry or <code>null</code> if NOT available.
    */
@@ -185,7 +192,7 @@ public interface SearchEntry {
   /**
    * This method gets the size of the content.
    * 
-   * @see SearchEntry#PROPERTY_SIZE
+   * @see #PROPERTY_SIZE
    * 
    * @return the size of this entry or <code>null</code> if NOT available.
    */

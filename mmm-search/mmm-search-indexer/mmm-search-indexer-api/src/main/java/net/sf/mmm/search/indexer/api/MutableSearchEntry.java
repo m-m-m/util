@@ -42,10 +42,10 @@ public interface MutableSearchEntry extends SearchEntry {
 
     /**
      * Indicates that the property will only be tokenized but NOT be stored in
-     * the index. Entries can still be found as with {@link #TEXT} but the
-     * property can NOT be {@link SearchEntry#getProperty(String) retrieved}
-     * from the {@link net.sf.mmm.search.engine.api.SearchHit hit}. This option
-     * allows to reduce the size of the search-index but also disables
+     * the index. Entries can still be found but the property can NOT be
+     * {@link SearchEntry#getProperty(String) retrieved} from the
+     * {@link net.sf.mmm.search.engine.api.SearchHit hit}. This option allows to
+     * reduce the size of the search-index but also disables
      * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()
      * highlighting} if used for {@link #PROPERTY_TEXT}.
      */

@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api;
 
+import java.io.Closeable;
+import java.io.Flushable;
+
 import net.sf.mmm.search.api.SearchException;
 
 /**
@@ -10,11 +13,11 @@ import net.sf.mmm.search.api.SearchException;
  * index. After a search-index is created, the contained information can be
  * searched and found via a {@link net.sf.mmm.search.engine.api.SearchEngine}.
  * 
- * @see SearchIndexerManager
+ * @see SearchIndexerBuilder
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface SearchIndexer {
+public interface SearchIndexer extends Flushable, Closeable {
 
   /**
    * This method creates a new and empty entry for the search-index. After the

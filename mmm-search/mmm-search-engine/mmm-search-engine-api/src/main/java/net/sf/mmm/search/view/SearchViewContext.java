@@ -29,7 +29,10 @@ public class SearchViewContext {
   public static final String PARAM_PAGE = "page";
 
   /** @see SearchResultPage#getHitsPerPage() */
-  public static final String PARAM_HITSPERPAGE = "hits";
+  public static final String PARAM_HITS_PER_PAGE = "hits";
+
+  /** @see SearchResultPage#getTotalHitCount() */
+  public static final String PARAM_TOTAL_HIT_COUNT = "totalHits";
 
   /** the source */
   public static final String PARAM_SOURCE = "source";
@@ -61,6 +64,9 @@ public class SearchViewContext {
   /** @see #getHitsPerPage() */
   private int hitsPerPage;
 
+  /** @see #getTotalHitCount() */
+  private int totalHitCount;
+
   /** @see #getResultPage() */
   private SearchEntry entry;
 
@@ -84,7 +90,8 @@ public class SearchViewContext {
     super();
     this.servletRequest = request;
     this.pageNumber = getParameterAsInt(PARAM_PAGE, 0, 0, 10000);
-    this.hitsPerPage = getParameterAsInt(PARAM_HITSPERPAGE, 10, 5, 100);
+    this.hitsPerPage = getParameterAsInt(PARAM_HITS_PER_PAGE, 10, 5, 100);
+    this.totalHitCount = getParameterAsInt(PARAM_TOTAL_HIT_COUNT, -1, 0, Integer.MAX_VALUE);
     this.servletRequest.setAttribute(ATTRIBUTE_NAME, this);
   }
 
@@ -195,6 +202,14 @@ public class SearchViewContext {
   public int getHitsPerPage() {
 
     return this.hitsPerPage;
+  }
+
+  /**
+   * @return the totalHitCount
+   */
+  public int getTotalHitCount() {
+
+    return this.totalHitCount;
   }
 
   /**

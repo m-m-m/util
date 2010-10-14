@@ -141,7 +141,8 @@ public interface SearchQueryBuilder {
   SearchQuery createTermQuery(String property, String term);
 
   /**
-   * This method creates a {@link ComplexSearchQuery complex query}.
+   * This method creates a {@link ComplexSearchQuery complex query}. You can
+   * then add sub-queries to this query with logical operations.
    * 
    * @return the created query.
    */

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
+import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
 import net.sf.mmm.util.cli.api.CliModeObject;
@@ -10,9 +11,9 @@ import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
 
 /**
- * This is the abstract base-class for a main program that triggers the
- * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer search-indexer}
- * according to a given
+ * This is the abstract base-class for a fully integrated main program that
+ * triggers the {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer
+ * search-indexer} according to a given
  * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration
  * configuration}. It allows to do complex indexing of files from arbitrary
  * sources.
@@ -21,9 +22,6 @@ import net.sf.mmm.util.component.api.IocContainer;
  * @since 1.0.0
  */
 public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
-
-  /** The default configuration XML-file. */
-  private static final String DEFAULT_CONFIGURATION_FILE = "~/.mmm/search.xml";
 
   /** The optional filename of the configuration XML-file. */
   @CliOption(name = "--config", aliases = "-c", required = false, operand = "FILE", usage = "The XML-configuration file. The default is {default}.")
@@ -35,7 +33,7 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
   public AbstractSearchIndexerMain() {
 
     super();
-    this.configurationFilename = DEFAULT_CONFIGURATION_FILE;
+    this.configurationFilename = SearchConfiguration.DEFAULT_CONFIGURATION_FILE;
   }
 
   /**

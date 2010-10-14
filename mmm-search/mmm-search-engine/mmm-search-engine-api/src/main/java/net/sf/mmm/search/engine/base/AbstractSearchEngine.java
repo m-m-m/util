@@ -4,9 +4,6 @@
 package net.sf.mmm.search.engine.base;
 
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.search.engine.api.SearchQuery;
-import net.sf.mmm.search.engine.api.SearchResultPage;
-import net.sf.mmm.util.component.base.AbstractLoggable;
 
 /**
  * This is the abstract base implementation of the {@link ManagedSearchEngine}
@@ -14,33 +11,30 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchEngine extends AbstractLoggable implements ManagedSearchEngine {
+public abstract class AbstractSearchEngine implements ManagedSearchEngine {
+
+  /** The {@link SearchEngineRefresher}. */
+  private final SearchEngineRefresher searchEngineRefresher;
 
   /**
    * The constructor.
+   * 
+   * @param searchEngineRefresher is the {@link SearchEngineRefresher}.
    */
-  public AbstractSearchEngine() {
+  public AbstractSearchEngine(SearchEngineRefresher searchEngineRefresher) {
 
     super();
+    this.searchEngineRefresher = searchEngineRefresher;
   }
 
   /**
    * {@inheritDoc}
    */
-  public SearchResultPage search(SearchQuery query, int pageIndex) {
+  public void dispose() {
 
-    return search(query, pageIndex, SearchResultPage.HITS_PER_PAGE);
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * This method is a simple implementation of this method. Please override if
-   * there is a more efficient way to do this.
-   */
-  public SearchResultPage search(SearchQuery query, int pageIndex, int hitsPerPage) {
-
-    return search(query).getPage(pageIndex, hitsPerPage);
+    if (this.searchEngineRefresher != null) {
+      this.searchEngineRefresher.removeSearchEngine(this);
+    }
   }
 
 }

@@ -25,6 +25,9 @@ public interface SearchHit extends SearchEntry {
   /** @see #getHighlightedText() */
   String HIGHLIGHT_CUT_TEXT = "<span class=\"cut\">...</span>";
 
+  /** An emtpy SearchHit array. */
+  SearchHit[] NO_HITS = new SearchHit[0];
+
   /**
    * This method gets the ID of the entry in the search index represented by
    * this hit.

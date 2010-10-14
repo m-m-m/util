@@ -57,6 +57,10 @@ public class SearchIndexDataLocationBean implements SearchIndexDataLocation {
   @XmlAttribute(name = "uri-transformer")
   private StringTransformerChain uriTransformer;
 
+  /** @see #getUpdateType() */
+  @XmlAttribute(name = "update-type")
+  private String updateType;
+
   /**
    * The constructor.
    */
@@ -175,6 +179,24 @@ public class SearchIndexDataLocationBean implements SearchIndexDataLocation {
   public void setUriTransformer(StringTransformerChain uriTransformer) {
 
     this.uriTransformer = uriTransformer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getUpdateType() {
+
+    return this.updateType;
+  }
+
+  /**
+   * This method sets the {@link #getUpdateType() update-type}.
+   * 
+   * @param updateType is the new value to set.
+   */
+  public void setUpdateType(String updateType) {
+
+    this.updateType = updateType;
   }
 
 }

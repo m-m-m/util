@@ -5,9 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
   
   <import resource="classpath:net/sf/mmm/search/beans-search-engine-lucene.xml" />
-  <bean id="net.sf.mmm.search.engine.api.SearchQueryBuilder" class="net.sf.mmm.search.engine.impl.LuceneSearchQueryBuilder">
+  <bean id="net.sf.mmm.search.engine.api.SearchQueryBuilder" class="net.sf.mmm.search.engine.impl.lucene.LuceneSearchQueryBuilder">
     <!-- <property name="ignoreLeadingWildcard"><value>true</value></property> -->
   </bean>
-  <bean id="net.sf.mmm.search.engine.api.ManagedSearchEngine" class="net.sf.mmm.search.engine.impl.LuceneSearchEngine"/>
+  <bean id="net.sf.mmm.search.engine.api.ManagedSearchEngine" class="net.sf.mmm.search.engine.impl.lucene.LuceneSearchEngine"/>
   
 </beans>

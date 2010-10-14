@@ -4,8 +4,7 @@
 package net.sf.mmm.search.engine.api;
 
 /**
- * This is the interface for the complete result of a
- * {@link SearchEngine#search(SearchQuery) search}.
+ * This is the interface for the complete result of a search.
  * 
  * @see SearchResultPage
  * 
@@ -21,8 +20,8 @@ public interface SearchResult {
   String getQuery();
 
   /**
-   * This method gets the total number of hits for this
-   * {@link SearchResult search-result}.
+   * This method gets the total number of hits for this {@link SearchResult
+   * search-result}.
    * 
    * @return the total number of hits.
    */
@@ -40,8 +39,8 @@ public interface SearchResult {
   /**
    * This method gets the number of {@link SearchResultPage pages} used to split
    * the {@link #getHitCount() total} {@link SearchHit hits} using the
-   * {@link SearchResultPage#HITS_PER_PAGE default} number of hits per page. An
-   * empty search result will have one empty page.
+   * {@link SearchResultPage#DEFAULT_HITS_PER_PAGE default} number of hits per
+   * page. An empty search result will have one empty page.
    * 
    * @see #getPageCount(int)
    * 
@@ -55,8 +54,8 @@ public interface SearchResult {
    * An empty search result will have one empty page.
    * 
    * @param hitsPerPage is the desired number of
-   *        {@link SearchResultPage#getHitsPerPage() hits per page}. This
-   *        should be a value like 5, 10, 20, 30, ..., 100.
+   *        {@link SearchResultPage#getHitsPerPage() hits per page}. This should
+   *        be a value like 5, 10, 20, 30, ..., 100.
    * @return the number of {@link SearchResultPage pages} required to split the
    *         {@link #getHitCount() total} {@link SearchHit hits}.
    */
@@ -65,14 +64,14 @@ public interface SearchResult {
   /**
    * This method gets the {@link SearchResultPage page} of this
    * {@link SearchResult search-result} at the given <code>pageIndex</code>
-   * using the {@link SearchResultPage#HITS_PER_PAGE default} number of hits per
-   * page.
+   * using the {@link SearchResultPage#DEFAULT_HITS_PER_PAGE default} number of
+   * hits per page.
    * 
    * @see SearchEngine#search(SearchQuery, int)
    * 
    * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index}
-   *        of the requested {@link SearchResultPage search result}. This
-   *        should be in the range from <code>0</code> to
+   *        of the requested {@link SearchResultPage search result}. This should
+   *        be in the range from <code>0</code> to
    *        <code>{@link #getPageCount()} - 1</code>.<br>
    *        It can NOT be guaranteed that the <code>pageIndex</code> is always
    *        valid in the sense as described above (the search index may have
@@ -92,9 +91,10 @@ public interface SearchResult {
    * @see SearchEngine#search(SearchQuery, int)
    * 
    * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index}
-   *        of the requested {@link SearchResultPage search result}. This
-   *        should be in the range from <code>0</code> to
-   *        <code>{@link #getPageCount(int) getPageCount(hitsPerPage)} - 1</code>.<br>
+   *        of the requested {@link SearchResultPage search result}. This should
+   *        be in the range from <code>0</code> to
+   *        <code>{@link #getPageCount(int) getPageCount(hitsPerPage)} - 1</code>
+   *        .<br>
    *        It can NOT be guaranteed that the <code>pageIndex</code> is always
    *        valid in the sense as described above (the search index may have
    *        been modified in the meantime). An implementation has to be able to

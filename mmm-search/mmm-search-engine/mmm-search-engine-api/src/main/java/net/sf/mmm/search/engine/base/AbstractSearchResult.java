@@ -43,7 +43,7 @@ public abstract class AbstractSearchResult implements SearchResult {
    */
   public int getPageCount() {
 
-    return getPageCount(SearchResultPage.HITS_PER_PAGE);
+    return getPageCount(SearchResultPage.DEFAULT_HITS_PER_PAGE);
   }
 
   /**
@@ -64,7 +64,7 @@ public abstract class AbstractSearchResult implements SearchResult {
    */
   public SearchResultPage getPage(int pageIndex) {
 
-    return getPage(pageIndex, SearchResultPage.HITS_PER_PAGE);
+    return getPage(pageIndex, SearchResultPage.DEFAULT_HITS_PER_PAGE);
   }
 
   /**

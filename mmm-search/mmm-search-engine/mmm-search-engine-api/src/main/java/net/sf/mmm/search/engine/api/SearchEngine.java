@@ -22,108 +22,77 @@ public interface SearchEngine {
   SearchQueryBuilder getQueryBuilder();
 
   /**
-   * This method performs a search. The {@link SearchHit hits} are in descending
-   * order of their {@link SearchHit#getScore() score} so the first
-   * {@link SearchHit hit} is also the best one.<br>
-   * ATTENTION: You will typically present the {@link SearchHit hits} in
-   * {@link SearchResultPage pages}. If the search-engine is a remote service
-   * or the {@link SearchHit hits} are presented on a remote client (e.g. a
-   * web-browser), only one {@link SearchResultPage page} is transfered and
-   * persented at a time. Instead of using this method, it is recommended to use
-   * {@link #search(SearchQuery, int)} or {@link #search(SearchQuery, int, int)}
-   * to retrieve a {@link SearchResultPage page}, what will typically be more
-   * efficient (depending on the implementation of {@link SearchEngine this}
-   * interface). If the complete search and presentation takes place in one
-   * single process, it may be faster to use
-   * {@link #search(SearchQuery) this method} instead, because the search does
-   * NOT need to be performed again to switch the {@link SearchResultPage pages}.
+   * This method performs an initial search for a given <code>query</code> and
+   * returns the first {@link SearchResultPage}. The {@link SearchHit hits} are
+   * in descending order of their {@link SearchHit#getScore() score} so the best
+   * {@link SearchHit hit} is the first {@link SearchResultPage#getPageHit(int)
+   * hit} of the page .<br/>
+   * For getting the results of a following {@link SearchResultPage} use
+   * {@link #search(SearchQuery, int, int, int)}.
    * 
    * @param query is the {@link SearchQuery query} of the user that wants to
    *        search. Use the {@link #getQueryBuilder() query-builder} to
    *        construct.
-   * @return the complete search result.
-   * @throws SearchException if the search can NOT be performed for technical
-   *         reasons.
-   */
-  SearchResult search(SearchQuery query) throws SearchException;
-
-  /**
-   * This method performs a search. The {@link SearchHit hits} are in descending
-   * order of their {@link SearchHit#getScore() score} so the best
-   * {@link SearchHit hit} is the first hit ({@link SearchResultPage#getPageHit(int)
-   * SearchResult.getPageHit}(0)) of the first page ({@link #search(SearchQuery, int) 
-   * search}(query, 0)).<br>
-   * This method will use the {@link SearchResultPage#HITS_PER_PAGE default}
-   * number of hits per page.
-   * 
-   * @see #search(SearchQuery, int, int)
-   * 
-   * @param query is the {@link SearchQuery query} of the user that wants to
-   *        search. Use the {@link #getQueryBuilder() query-builder} to
-   *        construct.
-   * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index}
-   *        of the requested {@link SearchResultPage search result}. For a new
-   *        query this should initially be <code>0</code>. After a
-   *        {@link SearchResultPage search result} was retrieved by this method,
-   *        further calls for the {@link String#equals(Object) same}
-   *        {@link SearchResultPage#getQuery() query} can be performed with a
-   *        <code>pageIndex</code> greater than <code>0</code> and less than
-   *        <code>{@link SearchResultPage#getPageCount()}</code>.<br>
-   *        It can NOT be guaranteed that the <code>pageIndex</code> is always
-   *        valid in the sense as described above (the search index may have
-   *        been modified in the meantime). An implementation has to be able to
-   *        handle calls with a <code>pageIndex</code> greater or equal to
-   *        <code>{@link SearchResultPage#getPageCount()}</code>. The
-   *        recommended strategy is to return the last page in this case.
+   * @param hitsPerPage is the {@link SearchResultPage#getHitsPerPage() number
+   *        of hits per page}. See
+   *        {@link SearchResultPage#DEFAULT_HITS_PER_PAGE}.
    * @return the search result page for the given <code>query</code> at the
    *         given <code>pageIndex</code>.
    * @throws SearchException if the search can NOT be performed for technical
    *         reasons.
    */
-  SearchResultPage search(SearchQuery query, int pageIndex) throws SearchException;
+  SearchResultPage search(SearchQuery query, int hitsPerPage) throws SearchException;
 
   /**
-   * This method performs a search. The {@link SearchHit hits} are in descending
-   * order of their {@link SearchHit#getScore() score} so the best
-   * {@link SearchHit hit} is the first hit ({@link SearchResultPage#getPageHit(int)
-   * SearchResult.getPageHit}(0)) of the first page ({@link #search(SearchQuery, int) 
-   * search}(query, 0)).
+   * This method performs a search for a subsequent {@link SearchResultPage} of
+   * an {@link #search(SearchQuery, int) initial search}. The {@link SearchHit
+   * hits} are in descending order of their {@link SearchHit#getScore() score}.
    * 
    * @param query is the {@link SearchQuery query} of the user that wants to
    *        search. Use the {@link #getQueryBuilder() query-builder} to
    *        construct.
-   * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index}
-   *        of the requested {@link SearchResultPage search result}. For a new
-   *        query this should initially be <code>0</code>. After a
-   *        {@link SearchResultPage search result} was retrieved by this method,
-   *        further calls for the {@link String#equals(Object) same}
-   *        {@link SearchResultPage#getQuery() query} can be performed with a
-   *        <code>pageIndex</code> greater than <code>0</code> and less than
-   *        <code>{@link SearchResultPage#getPageCount()}</code>.<br>
-   *        It can NOT be guaranteed that the <code>pageIndex</code> is always
-   *        valid in the sense as described above (the search index may have
-   *        been modified in the meantime). An implementation has to be able to
-   *        handle calls with a <code>pageIndex</code> greater or equal to
-   *        <code>{@link SearchResultPage#getPageCount()}</code>. The
-   *        recommended strategy is to return the last page in this case.
    * @param hitsPerPage is the number of {@link SearchHit hits} contained in a
-   *        {@link SearchResultPage}.
+   *        {@link SearchResultPage}. This should be the same value as in the
+   *        {@link #search(SearchQuery, int) initial search}.
+   * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index}
+   *        of the requested {@link SearchResultPage search result}. For a new
+   *        query this should initially be <code>0</code>. After a
+   *        {@link SearchResultPage search result} was retrieved by this method,
+   *        further calls for the {@link String#equals(Object) same}
+   *        {@link SearchResultPage#getQuery() query} can be performed with a
+   *        <code>pageIndex</code> greater than <code>0</code> and less than
+   *        <code>{@link SearchResultPage#getPageCount()}</code>.<br>
+   *        It can NOT be guaranteed that the <code>pageIndex</code> is always
+   *        valid in the sense as described above (the search index may have
+   *        been modified in the meantime). An implementation has to be able to
+   *        handle calls with a <code>pageIndex</code> greater or equal to
+   *        <code>{@link SearchResultPage#getPageCount()}</code>. The
+   *        recommended strategy is to return the last page in this case.
+   * @param totalHitCount is the {@link SearchResultPage#getTotalHitCount()
+   *        total hit count} expected for this query that is already known from
+   *        the {@link #search(SearchQuery, int) initial search}. The
+   *        implementation has to be able to handle that the search index may
+   *        have been modified in the meantime and the value is NOT correct
+   *        anymore. If the implementation can determine the correct total
+   *        hit-count without performance overhead, it may ignore this
+   *        parameter.
    * @return the search result page for the given <code>query</code> at the
    *         given <code>pageIndex</code>.
    * @throws SearchException if the search can NOT be performed for technical
    *         reasons.
    */
-  SearchResultPage search(SearchQuery query, int pageIndex, int hitsPerPage) throws SearchException;
+  SearchResultPage search(SearchQuery query, int hitsPerPage, int pageIndex, int totalHitCount)
+      throws SearchException;
 
   /**
    * This method gets a {@link SearchEntry entry} by its technical
    * {@link SearchHit#getEntryId() ID}. <br>
-   * This method may be usefull for getting details of a {@link SearchHit hit}
-   * in a new request (without rerunning the whole search).
+   * This method may be useful for getting details of a {@link SearchHit hit} in
+   * a new request (without rerunning the whole search).
    * 
    * @param id is the {@link SearchHit#getEntryId() ID} of the requested entry.
-   * @return the entry with the given <code>id</code> or <code>null</code>
-   *         if no such entry is available.
+   * @return the entry with the given <code>id</code> or <code>null</code> if no
+   *         such entry is available.
    * @throws SearchException if the operation failed for technical reasons.
    */
   SearchEntry getEntry(String id) throws SearchException;

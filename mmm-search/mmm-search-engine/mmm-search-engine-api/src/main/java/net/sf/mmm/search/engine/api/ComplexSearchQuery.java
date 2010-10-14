@@ -6,6 +6,11 @@ package net.sf.mmm.search.engine.api;
 /**
  * This is the interface of a query that combines other queries.
  * 
+ * @see SearchQueryBuilder#createComplexQuery()
+ * @see #addRequiredQuery(SearchQuery)
+ * @see #addExcludingQuery(SearchQuery)
+ * @see #addOptionalQuery(SearchQuery)
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface ComplexSearchQuery extends SearchQuery {
@@ -31,8 +36,8 @@ public interface ComplexSearchQuery extends SearchQuery {
   void addOptionalQuery(SearchQuery subQuery);
 
   /**
-   * This method adds the given <code>subQuery</code> as excluding sub-query.
-   * A {@link net.sf.mmm.search.api.SearchEntry entry} must NOT match the
+   * This method adds the given <code>subQuery</code> as excluding sub-query. A
+   * {@link net.sf.mmm.search.api.SearchEntry entry} must NOT match the
    * <code>subQuery</code> in order to match this complex query.
    * 
    * @param subQuery is the sub-query to add.
