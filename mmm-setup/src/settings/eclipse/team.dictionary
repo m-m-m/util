@@ -125,3 +125,10 @@ mimetypes
 registry
 impl
 pdfbox
+marshaller
+marshall
+unmarshall
+unmarshaller
+credentials
+highlighter
+malformed
