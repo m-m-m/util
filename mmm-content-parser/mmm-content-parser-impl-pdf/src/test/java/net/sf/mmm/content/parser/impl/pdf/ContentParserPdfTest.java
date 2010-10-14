@@ -14,7 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link ContentParserPpt}.
+ * This is the test-case for {@link ContentParserPdf}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
