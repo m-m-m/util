@@ -4,7 +4,6 @@
 package net.sf.mmm.content.parser.impl.poi;
 
 import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.content.parser.impl.poi.ContentParserPpt;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
@@ -20,8 +19,7 @@ public class ContentParserXlsSpringTest extends ContentParserXlsTest {
   @Override
   protected ContentParser getContentParser() {
 
-    return SpringContainerPool.getInstance().getComponent(ContentParser.class,
-        ContentParser.class.getName() + "-xls");
+    return SpringContainerPool.getInstance().getComponent(ContentParserXls.class);
   }
 
 }

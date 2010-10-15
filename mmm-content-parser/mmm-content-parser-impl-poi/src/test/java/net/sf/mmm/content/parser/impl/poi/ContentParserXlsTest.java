@@ -8,10 +8,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Properties;
 
-import org.junit.Test;
-
 import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.content.parser.impl.poi.ContentParserXls;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link ContentParserXls}.
@@ -51,7 +50,7 @@ public class ContentParserXlsTest extends AbstractContentParserPoiTest {
           value = "Cell ";
         }
         value = value + column + row;
-        assertTrue(text.contains(value));
+        assertTrue(value + ":" + text, text.contains(value));
       }
     }
     assertTrue(text.contains("Cell J42"));
