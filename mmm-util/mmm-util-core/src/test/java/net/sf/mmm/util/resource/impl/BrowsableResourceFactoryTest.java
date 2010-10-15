@@ -24,6 +24,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class BrowsableResourceFactoryTest {
 
+  /**
+   * This method gets the {@link BrowsableResourceFactory} instance to test.
+   * 
+   * @return the {@link BrowsableResourceFactory}.
+   */
   public BrowsableResourceFactory getBrowsableResourceFactory() {
 
     BrowsableResourceFactoryImpl impl = new BrowsableResourceFactoryImpl();
