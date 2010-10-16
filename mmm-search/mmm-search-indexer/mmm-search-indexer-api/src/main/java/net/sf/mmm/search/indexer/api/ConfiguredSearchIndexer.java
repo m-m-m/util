@@ -49,13 +49,12 @@ public interface ConfiguredSearchIndexer {
    * This method performs the indexing for the given
    * {@link SearchIndexerConfiguration}.
    * 
-   * @see SearchIndexerConfiguration#getLocations()
    * @see #index(SearchIndexerConfiguration)
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader#readConfiguration(String)
    * 
-   * @param configurationFile is the {@link java.io.File#getPath() path} to the
-   *        configuration file containing the {@link SearchIndexerConfiguration}
-   *        as XML.
+   * @param configurationLocation is the location where the configuration data
+   *        shall be read from. This is typically a path into the filesystem.
    */
-  void index(String configurationFile);
+  void index(String configurationLocation);
 
 }

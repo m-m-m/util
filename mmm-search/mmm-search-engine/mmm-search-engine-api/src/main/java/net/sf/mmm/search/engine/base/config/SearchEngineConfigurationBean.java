@@ -22,7 +22,7 @@ import net.sf.mmm.search.engine.api.config.SearchEntryType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlRootElement(name = "search-engine")
+@XmlRootElement(name = "search")
 public class SearchEngineConfigurationBean extends SearchConfigurationBean implements
     SearchEngineConfiguration {
 

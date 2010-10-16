@@ -106,10 +106,11 @@ public class ConfiguredSearchIndexerImpl extends AbstractConfiguredSearchIndexer
         indexData(searchIndexer, location, resource);
       }
       for (BrowsableResource child : resource.getChildResources()) {
-        if (location.getFilter().accept(child.getUri())) {
+        String childUri = child.getUri().replace('\\', '/');
+        if (location.getFilter().accept(childUri)) {
           indexRecursive(searchIndexer, location, child, visitedResources);
         } else {
-          getLogger().debug("Filtered " + child.getUri());
+          getLogger().debug("Filtered " + childUri);
         }
       }
     }

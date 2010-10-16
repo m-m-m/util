@@ -3,17 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Properties;
 
 import javax.inject.Inject;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
@@ -26,17 +21,14 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
-import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationBean;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader;
+import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationReaderImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
-import net.sf.mmm.util.file.api.FileNotExistsException;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.transformer.api.Transformer;
-import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
  * This is the implementation of the {@link ConfiguredSearchIndexer}.<br>
@@ -48,6 +40,9 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
 
   /** @see #getSearchIndexerManager() */
   private SearchIndexerBuilder searchIndexerManager;
+
+  /** @see #getSearchIndexerConfigurationReader() */
+  private SearchIndexerConfigurationReader searchIndexerConfigurationReader;
 
   /** @see #getParserService() */
   private ContentParserService parserService;
@@ -78,6 +73,26 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   public void setSearchIndexerManager(SearchIndexerBuilder searchIndexerManager) {
 
     this.searchIndexerManager = searchIndexerManager;
+  }
+
+  /**
+   * @return the searchIndexerConfigurationReader
+   */
+  protected SearchIndexerConfigurationReader getSearchIndexerConfigurationReader() {
+
+    return this.searchIndexerConfigurationReader;
+  }
+
+  /**
+   * @param searchIndexerConfigurationReader is the
+   *        searchIndexerConfigurationReader to set
+   */
+  @Inject
+  public void setSearchIndexerConfigurationReader(
+      SearchIndexerConfigurationReader searchIndexerConfigurationReader) {
+
+    getInitializationState().requireNotInitilized();
+    this.searchIndexerConfigurationReader = searchIndexerConfigurationReader;
   }
 
   /**
@@ -126,6 +141,11 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
     if (this.searchIndexerManager == null) {
       throw new ResourceMissingException("searchIndexerManager");
     }
+    if (this.searchIndexerConfigurationReader == null) {
+      SearchIndexerConfigurationReaderImpl readerImpl = new SearchIndexerConfigurationReaderImpl();
+      readerImpl.initialize();
+      this.searchIndexerConfigurationReader = readerImpl;
+    }
     if (this.parserService == null) {
       ContentParserServiceImpl impl = new ContentParserServiceImpl();
       impl.initialize();
@@ -149,6 +169,9 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
         index(searchIndexer, location, false);
       }
     } finally {
+      getLogger().debug("Optimizing index...");
+      searchIndexer.optimize();
+      getLogger().debug("Closing index...");
       searchIndexer.close();
     }
   }
@@ -158,27 +181,9 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
    */
   public void index(String configurationFile) {
 
-    String path = this.fileUtil.normalizePath(configurationFile);
-    File file = new File(path);
-    if (!file.isFile()) {
-      throw new FileNotExistsException(file);
-    }
-    try {
-      InputStream inStream = new FileInputStream(file);
-      try {
-        JAXBContext jaxbContext = JAXBContext.newInstance(SearchIndexerConfigurationBean.class);
-        SearchIndexerConfigurationBean configuration = (SearchIndexerConfigurationBean) jaxbContext
-            .createUnmarshaller().unmarshal(inStream);
-        index(configuration);
-      } finally {
-        inStream.close();
-      }
-    } catch (JAXBException e) {
-      throw new XmlInvalidException(e);
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
-    }
-
+    SearchIndexerConfiguration configuration = this.searchIndexerConfigurationReader
+        .readConfiguration(configurationFile);
+    index(configuration);
   }
 
   /**
@@ -213,11 +218,11 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   public void indexData(SearchIndexer searchIndexer, SearchIndexDataLocation location,
       DataResource resource) {
 
-    getLogger().debug("Indexing " + resource.getUri());
+    String uri = resource.getUri().replace('\\', '/');
+    getLogger().debug("Indexing " + uri);
     String filename = resource.getName();
-    String uri = resource.getUri();
     if (!location.isAbsoluteUris()) {
-      String locationUri = location.getLocation();
+      String locationUri = location.getLocation().replace('\\', '/');
       if (uri.startsWith(locationUri)) {
         uri = uri.substring(locationUri.length());
         if (uri.startsWith("/") || uri.startsWith("\\")) {

@@ -35,6 +35,20 @@ public abstract class AbstractSearchEngineBuilder extends AbstractLoggable imple
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.searchEngineRefresher == null) {
+      SearchEngineRefresherImpl refresherImpl = new SearchEngineRefresherImpl();
+      refresherImpl.initialize();
+      this.searchEngineRefresher = refresherImpl;
+    }
+  }
+
+  /**
    * @return the searchQueryBuilder
    */
   protected SearchQueryBuilder getSearchQueryBuilder() {

@@ -19,6 +19,7 @@ import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneVersion;
+import net.sf.mmm.search.impl.lucene.LuceneVersionImpl;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
@@ -133,9 +134,15 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   protected void doInitialize() {
 
     super.doInitialize();
+    if (this.luceneVersion == null) {
+      LuceneVersionImpl luceneVersionImpl = new LuceneVersionImpl();
+      luceneVersionImpl.initialize();
+      this.luceneVersion = luceneVersionImpl;
+    }
     if (this.analyzer == null) {
       if (this.luceneAnalyzer == null) {
         LuceneAnalyzerImpl luceneAnalyzerImpl = new LuceneAnalyzerImpl();
+        luceneAnalyzerImpl.setLuceneVersion(this.luceneVersion);
         luceneAnalyzerImpl.initialize();
         this.luceneAnalyzer = luceneAnalyzerImpl;
       }

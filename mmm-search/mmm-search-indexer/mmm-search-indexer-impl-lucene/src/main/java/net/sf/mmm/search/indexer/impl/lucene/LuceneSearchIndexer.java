@@ -17,7 +17,6 @@ import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
@@ -33,10 +32,6 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /** the {@link IndexWriter}. */
   private final IndexWriter indexWriter;
 
-  /** The {@link IndexReader}. */
-  // lucene is strange: and IndexReader is required to delete documents by id
-  private final IndexReader indexReader;
-
   /**
    * The constructor.
    * 
@@ -45,12 +40,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   public LuceneSearchIndexer(IndexWriter indexWriter) {
 
     super();
-    try {
-      this.indexWriter = indexWriter;
-      this.indexReader = IndexReader.open(indexWriter.getDirectory(), true);
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
-    }
+    this.indexWriter = indexWriter;
   }
 
   /**
@@ -118,8 +108,14 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
     try {
       int docId = Integer.parseInt(entryId);
+      // lucene is strange: IndexReader is required to delete documents by id
+      // according to this issue:
+      // https://issues.apache.org/jira/browse/LUCENE-1721
+      // the documentId is no ID at all as it may turn invalid if the index
+      // changed.
       // lucene does NOT seem to give use feedback here...
-      this.indexReader.deleteDocument(docId);
+      // TODO: javadoc: getReader() is read-only, so this code buggy
+      this.indexWriter.getReader().deleteDocument(docId);
       return true;
     } catch (NumberFormatException e) {
       throw new SearchEntryIdInvalidException(e, entryId);

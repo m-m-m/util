@@ -15,6 +15,7 @@ import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.search.engine.api.SearchEngineBuilder;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
@@ -101,13 +102,14 @@ public abstract class AbstractSearchServlet extends HttpServlet {
       }
       String configPath = config.getInitParameter(PARAM_CONFIG_FILE);
       if (configPath == null) {
-        configPath = SearchConfiguration.DEFAULT_CONFIGURATION_FILE;
+        configPath = SearchConfiguration.DEFAULT_CONFIGURATION_URL;
       }
       IocContainer container = getIocContainer();
       SearchEngineConfigurationReader reader = container
           .getComponent(SearchEngineConfigurationReader.class);
       this.configuration = reader.readConfiguration(configPath);
-      this.searchEngine = container.getComponent(ManagedSearchEngine.class);
+      this.searchEngine = container.getComponent(SearchEngineBuilder.class).createSearchEngine(
+          this.configuration.getSearchIndex());
     } catch (Exception e) {
       throw new ServletException("Initialization failed!", e);
     }

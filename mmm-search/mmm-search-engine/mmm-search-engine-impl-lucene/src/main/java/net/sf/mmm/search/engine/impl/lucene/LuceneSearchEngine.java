@@ -164,7 +164,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     try {
       Query luceneQuery = getLuceneQuery(query);
       int start = hitsPerPage * pageIndex;
-      int requiredHitCount = hitsPerPage + pageIndex;
+      int requiredHitCount = hitsPerPage + start;
       // do the actual search...
       TopDocs topDocs = this.searcher.search(luceneQuery, requiredHitCount);
       int pageHitCount = topDocs.scoreDocs.length - start;

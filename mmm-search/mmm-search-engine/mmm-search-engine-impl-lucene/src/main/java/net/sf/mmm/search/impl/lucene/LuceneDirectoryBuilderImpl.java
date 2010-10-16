@@ -5,6 +5,7 @@ package net.sf.mmm.search.impl.lucene;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -78,6 +79,10 @@ public class LuceneDirectoryBuilderImpl extends AbstractComponent implements Luc
   public Directory createDirectory(String directory) {
 
     String location = this.fileUtil.normalizePath(directory);
+    if (location.toLowerCase(Locale.US).startsWith("file://")) {
+      // "file://".length() ==
+      location = location.substring(7);
+    }
     File path = new File(location);
     boolean windows = true; // System.getProperty("os");
     try {

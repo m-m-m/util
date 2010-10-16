@@ -11,6 +11,7 @@ import net.sf.mmm.search.engine.base.AbstractSearchEngineBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
+import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.search.highlight.Formatter;
@@ -116,7 +117,7 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
    * {@inheritDoc}
    */
   @Override
-  public void doInitialize() {
+  protected void doInitialize() {
 
     super.doInitialize();
     if (this.analyzer == null) {
@@ -128,12 +129,19 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
       this.analyzer = this.luceneAnalyzer.getAnalyzer();
     }
     if (getSearchQueryBuilder() == null) {
-      LuceneSearchQueryBuilder qb = new LuceneSearchQueryBuilder();
-      qb.setAnalyzer(this.analyzer);
-      setSearchQueryBuilder(qb);
+      LuceneSearchQueryBuilder luceneSearchQueryBuilder = new LuceneSearchQueryBuilder();
+      luceneSearchQueryBuilder.setLuceneAnalyzer(this.luceneAnalyzer);
+      luceneSearchQueryBuilder.setAnalyzer(this.analyzer);
+      luceneSearchQueryBuilder.initialize();
+      setSearchQueryBuilder(luceneSearchQueryBuilder);
     }
     if (this.highlightFormatter == null) {
       this.highlightFormatter = new HighlightFormatter();
+    }
+    if (this.luceneDirectoryBuilder == null) {
+      LuceneDirectoryBuilderImpl directoryBuilderImpl = new LuceneDirectoryBuilderImpl();
+      directoryBuilderImpl.initialize();
+      this.luceneDirectoryBuilder = directoryBuilderImpl;
     }
   }
 

@@ -17,7 +17,7 @@ import java.util.List;
 public interface SearchConfiguration {
 
   /** The default location of the configuration for the search. */
-  String DEFAULT_CONFIGURATION_FILE = "~/.mmm/search.xml";
+  String DEFAULT_CONFIGURATION_URL = "file://~/.mmm/search.xml";
 
   /**
    * This method gets the {@link List} of {@link SearchSource sources}.

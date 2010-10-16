@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base.spi;
 
+import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 
@@ -17,8 +18,8 @@ import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractDataResourceProvider<R extends DataResource> implements
-    DataResourceProvider<R> {
+public abstract class AbstractDataResourceProvider<R extends DataResource> extends AbstractLoggable
+    implements DataResourceProvider<R> {
 
   /**
    * The constructor.

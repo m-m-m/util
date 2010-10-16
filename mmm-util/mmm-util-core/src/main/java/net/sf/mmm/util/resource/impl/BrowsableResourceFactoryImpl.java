@@ -48,9 +48,15 @@ public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFacto
     super.doInitialize();
     if (this.providers == null) {
       this.providers = new ArrayList<DataResourceProvider<? extends DataResource>>();
-      this.providers.add(new ClasspathResourceProvider());
-      this.providers.add(new FileResourceProvider());
-      this.providers.add(new UrlResourceProvider());
+      ClasspathResourceProvider classpathResourceProvider = new ClasspathResourceProvider();
+      classpathResourceProvider.initialize();
+      this.providers.add(classpathResourceProvider);
+      FileResourceProvider fileResourceProvider = new FileResourceProvider();
+      fileResourceProvider.initialize();
+      this.providers.add(fileResourceProvider);
+      UrlResourceProvider urlResourceProvider = new UrlResourceProvider();
+      urlResourceProvider.initialize();
+      this.providers.add(urlResourceProvider);
     }
     for (DataResourceProvider<? extends DataResource> provider : this.providers) {
       registerProvider(provider);

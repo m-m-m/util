@@ -30,6 +30,8 @@ public interface SearchEngine {
    * For getting the results of a following {@link SearchResultPage} use
    * {@link #search(SearchQuery, int, int, int)}.
    * 
+   * @see #getQueryBuilder()
+   * 
    * @param query is the {@link SearchQuery query} of the user that wants to
    *        search. Use the {@link #getQueryBuilder() query-builder} to
    *        construct.

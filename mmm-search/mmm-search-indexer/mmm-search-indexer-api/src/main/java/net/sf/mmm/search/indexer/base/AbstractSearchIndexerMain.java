@@ -25,7 +25,7 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
 
   /** The optional filename of the configuration XML-file. */
   @CliOption(name = "--config", aliases = "-c", required = false, operand = "FILE", usage = "The XML-configuration file. The default is {default}.")
-  private String configurationFilename;
+  private String configurationUrl;
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
   public AbstractSearchIndexerMain() {
 
     super();
-    this.configurationFilename = SearchConfiguration.DEFAULT_CONFIGURATION_FILE;
+    this.configurationUrl = SearchConfiguration.DEFAULT_CONFIGURATION_URL;
   }
 
   /**
@@ -55,7 +55,7 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
     try {
       ConfiguredSearchIndexer configuredSearchIndexer = container
           .getComponent(ConfiguredSearchIndexer.class);
-      configuredSearchIndexer.index(this.configurationFilename);
+      configuredSearchIndexer.index(this.configurationUrl);
     } finally {
       container.dispose();
     }
