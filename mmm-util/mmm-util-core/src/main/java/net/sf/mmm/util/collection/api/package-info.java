@@ -4,7 +4,7 @@
 /**
  * Provides the API for utilities that help to dealing with 
  * {@link java.util.Collections}.
- * <a name="documentation"><h2>Collection-Util API</h2></a>
+ * <a name="documentation"/><h2>Collection-Util API</h2>
  * This package contains interfaces for factories (especially 
  * {@link net.sf.mmm.util.collection.api.CollectionFactory} and 
  * {@link net.sf.mmm.util.collection.api.MapFactory}) of the various 

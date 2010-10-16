@@ -4,7 +4,7 @@
 /**
  * Provides the API for introspection of 
  * {@link net.sf.mmm.util.pojo.api.Pojo}s.
- * <h2>POJO Introspection API</h2>
+ * <a name="documentation"/><h2>POJO Introspection API</h2>
  * This package provides the 
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
  * Unlike the {@link java.beans.Introspector} for Java-beans or

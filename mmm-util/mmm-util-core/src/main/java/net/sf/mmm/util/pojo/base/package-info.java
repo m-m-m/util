@@ -4,7 +4,7 @@
 /**
  * Provides the base-implementation of the 
  * {@link net.sf.mmm.util.pojo.api.Pojo} API.
- * <h2>POJO Base</h2>
+ * <a name="documentation"/><h2>POJO Base</h2>
  * This package provides simple implementations of the 
  * {@link net.sf.mmm.util.pojo.api.PojoFactory} interface.
  */

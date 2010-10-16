@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the base-implementation of text-util API.
- * <a name="documentation"><h2>Text-Util Base</h2></a>
+ * <a name="documentation"/><h2>Text-Util Base</h2>
  * Provides base-implementation of the
  * {@link net.sf.mmm.util.text.api Text-Util API}.
  */

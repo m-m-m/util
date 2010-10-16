@@ -4,7 +4,7 @@
 /**
  * Contains the basic implementation of the 
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor Introspection-Accessor-API}.
- * <h2>POJO Introspection Base - Accessors</h2>
+ * <a name="documentation"/><h2>POJO Introspection Base - Accessors</h2>
  * This package provides the basic implementation of the 
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor Introspection-Accessor-API}.
  */

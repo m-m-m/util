@@ -4,7 +4,7 @@
 /**
  * Contains implementations of
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction}.
- * <h2>POJO-Path-Function Implementations</h2>
+ * <a name="documentation"/><h2>POJO-Path-Function Implementations</h2>
  * This package contains the implementation of the 
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction} interface. If they 
  * implement {@link net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction} and

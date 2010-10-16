@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains abstract interfaces for common attributes of objects.
- * <a name="documentation"><h2>Lang-Attributes API</h2></a> 
+ * <a name="documentation"/><h2>Lang-Attributes API</h2> 
  * This package contains interfaces for common attributes such as 
  * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadId ID}. This helps to
  * standardize signatures (including javadoc) and allows generic access to such 

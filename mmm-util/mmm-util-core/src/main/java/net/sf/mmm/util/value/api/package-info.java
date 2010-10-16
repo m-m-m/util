@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for generic handling of values.
- * <a name="documentation"><h2>Value-Util API</h2></a>
+ * <a name="documentation"/><h2>Value-Util API</h2>
  * When reading values from sources like configuration data or user input you 
  * always need to handle failure situations. The value can be <code>null</code> 
  * and often has to be converted to a specific type (e.g. from 

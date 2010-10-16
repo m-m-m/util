@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the implementation for the native language support (NLS).
- * <a name="documentation"><h2>NLS Impl</h2></a>
+ * <a name="documentation"/><h2>NLS Impl</h2>
  * This package provides the implementation of the 
  * {@link net.sf.mmm.util.nls.api NLS API}.<br>
  */

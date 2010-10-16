@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for a generic event-handling.
- * <a name="documentation"><h2>Event-Util API</h2></a>
+ * <a name="documentation"/><h2>Event-Util API</h2>
  * It is a common pattern to register a listener for events that notify of a 
  * specific situation. This pattern has been re-implemented thousands of times.
  * Java generics allow to stop to re-invent the wheel and implement the pattern

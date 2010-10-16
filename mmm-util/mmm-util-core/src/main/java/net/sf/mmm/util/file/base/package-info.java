@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains public implementations of {@link java.io.File}-utilities.
- * <a name="documentation"><h2>File-Util Base</h2></a> 
+ * <a name="documentation"/><h2>File-Util Base</h2> 
  * This package contains public implementations that help to deal with 
  * {@link java.io.File}s and other related stuff.<br>
  * The {@link net.sf.mmm.util.file.base.FileAccessPermissions} represent the 

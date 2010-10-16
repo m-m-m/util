@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help with textual operations.
- * <a name="documentation"><h2>Text-Util API</h2></a>
+ * <a name="documentation"/><h2>Text-Util API</h2>
  * This package contains the API for various textual utilities. 
  * {@link net.sf.mmm.util.text.api.Justification} allows simple justification of
  * a short string while {@link net.sf.mmm.util.text.api.LineWrapper} offers

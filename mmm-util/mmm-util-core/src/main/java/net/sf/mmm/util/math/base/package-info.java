@@ -4,7 +4,7 @@
 /**
  * Contains the public implementation of the 
  * {@link net.sf.mmm.util.math.api Math-Util API}.
- * <a name="documentation"><h2>Math-Util Base</h2></a>
+ * <a name="documentation"/><h2>Math-Util Base</h2>
  * This package contains the public implementation of the 
  * {@link net.sf.mmm.util.math.api Math-Util API}.<br>
  */

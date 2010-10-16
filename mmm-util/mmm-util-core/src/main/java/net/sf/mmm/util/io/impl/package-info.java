@@ -4,7 +4,7 @@
 /**
  * Contains implementations for utilities that help to read and write 
  * data, process bytes, etc.
- * <a name="documentation"><h2>IO-Util Base</h2></a>
+ * <a name="documentation"/><h2>IO-Util Base</h2>
  * This package provides implementations that help to read and write 
  * data, process bytes, etc.<br>
  */

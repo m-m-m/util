@@ -5,7 +5,7 @@
  * Provides the API for utilities that help to load 
  * {@link net.sf.mmm.util.resource.api.DataResource resources} from arbitrary 
  * sources.
- * <a name="documentation"><h2>Resource-Util API</h2></a>
+ * <a name="documentation"/><h2>Resource-Util API</h2>
  * A {@link net.sf.mmm.util.resource.api.DataResource} represents a source of data.
  * Unlike a {@link java.io.File} it abstracts from the underlying source that
  * can be the regular filesystem (see {@link net.sf.mmm.util.resource.base.FileResource}), 

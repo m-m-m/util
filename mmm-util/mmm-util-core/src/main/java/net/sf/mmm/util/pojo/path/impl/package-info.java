@@ -4,7 +4,7 @@
 /**
  * Contains the implementation of the
  * {@link net.sf.mmm.util.pojo.path.api.PojoPath} API.
- * <h2>POJO-Path Implementation</h2>
+ * <a name="documentation"/><h2>POJO-Path Implementation</h2>
  * This package contains the implementation of the 
  * {@link net.sf.mmm.util.pojo.path.api.PojoPath} API. See 
  * {@link net.sf.mmm.util.pojo.path.impl.PojoPathNavigatorImpl}.

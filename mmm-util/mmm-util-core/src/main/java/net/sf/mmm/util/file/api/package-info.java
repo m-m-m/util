@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help to deal with {@link java.io.File}s.
- * <a name="documentation"><h2>File-Util API</h2></a> 
+ * <a name="documentation"/><h2>File-Util API</h2> 
  * This package contains the API for the {@link java.io.File} utilities that 
  * allow easy and efficient operations related to {@link java.io.File}. 
  * The {@link net.sf.mmm.util.file.base.FileUtilImpl} allows to copy or delete 

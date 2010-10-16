@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for the native language support (NLS).
- * <a name="documentation"><h2>NLS API</h2></a>
+ * <a name="documentation"/><h2>NLS API</h2>
  * Applications that should be used by people all over the world need
  * <em>native language support</em> (NLS). The developers task is the
  * <em>internationalization</em> (i18n) where the application has to be

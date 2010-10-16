@@ -4,7 +4,7 @@
 /**
  * Contains the base-implementation of the
  * {@link net.sf.mmm.util.pojo.path.api.PojoPath} API.
- * <h2>POJO-Path Base</h2>
+ * <a name="documentation"/><h2>POJO-Path Base</h2>
  * This package contains the basic implementation of the 
  * {@link net.sf.mmm.util.pojo.path.api.PojoPath} API. The 
  * {@link net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext} allows 

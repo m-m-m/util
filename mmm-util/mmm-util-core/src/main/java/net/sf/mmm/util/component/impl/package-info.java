@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains implementation of component-util.
- * <a name="documentation"><h2>Component-Util Impl</h2></a>
+ * <a name="documentation"/><h2>Component-Util Impl</h2>
  * Provides {@link net.sf.mmm.util.component.impl.SpringContainer}
  * that binds to the springframework.
  */

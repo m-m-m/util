@@ -4,7 +4,7 @@
 /**
  * Contains the base-implementations of the 
  * {@link net.sf.mmm.util.reflect.api Reflection-Util API}.
- * <a name="documentation"><h2>Reflection-Util Base</h2></a>
+ * <a name="documentation"/><h2>Reflection-Util Base</h2>
  * This package provides simple implementations of the 
  * {@link net.sf.mmm.util.reflect.api.ClassResolver} interface that can be used
  * by end-users.<br>

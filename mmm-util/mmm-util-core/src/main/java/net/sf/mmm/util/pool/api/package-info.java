@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for a generic pool.
- * <h2>Pool Utilities</h2>
- * Some sort of objects are expensive to create and should therfore be pooled.
+ * <a name="documentation"/><h2>Pool-Util API</h2>
+ * Some sort of objects are expensive to create and should therefore be pooled.
  * The interface {@link net.sf.mmm.util.pool.api.Pool} provides a generic interface for a pool of some 
  * sort of objects.
  */

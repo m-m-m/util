@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for dealing with {@link net.sf.mmm.util.pojo.api.Pojo}s.
- * <a name="documentation"><h2>POJO API</h2></a>
+ * <a name="documentation"/><h2>POJO API</h2>
  * POJO is a shortcut for Plain Old Java Object and more or less means any java 
  * object. While the java beans specification is generally a good idea to 
  * follow, it is sometimes too restrictive. E.g. you might want to name a 

@@ -4,7 +4,7 @@
 /**
  * Provides the API for utilities that help to deal with 
  * {@link java.lang.Number}s.
- * <a name="documentation"><h2>Math-Util API</h2></a>
+ * <a name="documentation"/><h2>Math-Util API</h2>
  * This package contains the API for utilities that help to deal with 
  * {@link java.lang.Number}s such as the {@link net.sf.mmm.util.math.api.NumberType} 
  * that allows to deal with {@link java.lang.Number}s in a generic way.<br>

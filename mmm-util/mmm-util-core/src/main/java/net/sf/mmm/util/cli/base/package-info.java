@@ -4,7 +4,7 @@
 /**
  * Contains the base-implementation of utilities that help to build
  * command-line-interfaces (CLI).
- * <a name="documentation"><h2>CLI Base</h2></a>
+ * <a name="documentation"/><h2>CLI Base</h2>
  * Now if you want to create a main-program, the easiest way is to extend
  * {@link net.sf.mmm.util.cli.api.AbstractMain}.
  */

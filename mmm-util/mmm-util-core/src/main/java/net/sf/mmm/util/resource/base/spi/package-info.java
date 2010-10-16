@@ -4,7 +4,7 @@
 /**
  * Contains the base-implementation of the SPI (service-provider-interface) for 
  * {@link net.sf.mmm.util.resource.api.DataResource data-resources}.
- * <a name="documentation"><h2>Resource-Util Base</h2></a>
+ * <a name="documentation"/><h2>Resource-Util Base</h2>
  * Extend the {@link net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider} 
  * where possible to gain compatibility.
  */
