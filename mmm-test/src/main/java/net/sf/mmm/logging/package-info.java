@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  Provides test-code to test logging.
- <h2>Logging</h2>
+ <a name="documentation"/><h2>Logging</h2>
  <p>
  Logger implementations used for testing.
  </p>

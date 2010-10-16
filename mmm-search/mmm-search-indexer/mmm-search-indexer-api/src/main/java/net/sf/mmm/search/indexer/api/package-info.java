@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API of the Search-Indexer.
- * <a name="documentation"><h2>Search-Indexer API</h2></a> 
+ * <a name="documentation"/><h2>Search-Indexer API</h2> 
  * This package contains the API for a 
  * {@link net.sf.mmm.search.indexer.api.SearchIndexer}. Such indexer allows to
  * update information in a search-index so it can by found by the 

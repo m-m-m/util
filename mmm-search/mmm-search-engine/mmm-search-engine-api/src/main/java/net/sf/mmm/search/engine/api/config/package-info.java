@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the API of configurations for the search-engine.
- * <h2>Search-Configuration API</h2> 
+ * <a name="documentation"/><h2>Search-Configuration API</h2> 
  * This package contains the API of common search configurations such as 
  * {@link net.sf.mmm.search.api.config.SearchSource}.
  */

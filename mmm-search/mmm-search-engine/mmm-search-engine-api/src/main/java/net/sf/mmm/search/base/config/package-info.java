@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the base-implementation of common search configurations.
- * <h2>Search-Configuration Base</h2> 
+ * <a name="documentation"/><h2>Search-Configuration Base</h2> 
  * This package contains the base-implementation of common search configurations.
  */
 package net.sf.mmm.search.base.config;
