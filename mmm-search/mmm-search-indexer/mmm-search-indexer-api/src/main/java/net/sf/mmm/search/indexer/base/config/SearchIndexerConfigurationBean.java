@@ -61,11 +61,11 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   }
 
   /**
-   * @param directories is the directories to set
+   * @param locations is the {@link List} of locations to set
    */
-  public void setLocations(List<SearchIndexDataLocationBean> directories) {
+  public void setLocations(List<SearchIndexDataLocationBean> locations) {
 
-    this.locations = directories;
+    this.locations = locations;
   }
 
   /**
@@ -108,4 +108,5 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
 
     this.filters = filters;
   }
+
 }

@@ -5,8 +5,8 @@
  * Contains the base-implementation of the {@link net.sf.mmm.search.indexer.api.config 
  * Search-Indexer Configuration API}.
  * <a name="documentation"/><h2>Search-Indexer Configuration Base</h2> 
- * This package contains the base-implementation that should be used to implement
- * the {@link net.sf.mmm.search.indexer.api.config Search-Indexer Configuration API}.
+ * This package contains the default-implementation of the
+ * {@link net.sf.mmm.search.indexer.api.config Search-Indexer Configuration API}.
  * It uses simple Java-Beans with JAX-Bindings for de-/serialization of XML.
  */
 package net.sf.mmm.search.indexer.base.config;

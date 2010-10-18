@@ -1,0 +1,15 @@
+<?xml version="1.1"?>
+<search-index-state>
+  <sources>
+    <source-state source="foo">
+      <indexing-date>2010-01-31T23:59:58Z</indexing-date>
+    </source-state>
+    <source-state source="some">
+      <indexing-date>1999-12-22T12:23:45Z</indexing-date>
+    </source-state>
+  </sources>
+  <locations>
+    <location-state location="file://~/music" revision="rev42"/>
+    <location-state location="xvcs://hyper/repository" revision="{base-5fe9ad}"/>
+  </locations>
+</search-index-state>
