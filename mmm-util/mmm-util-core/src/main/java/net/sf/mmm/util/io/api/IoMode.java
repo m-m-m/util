@@ -21,6 +21,9 @@ public enum IoMode {
   CLOSE,
 
   /** Indicates that a handle is {@link java.io.Flushable#flush() flushed}. */
-  FLUSH
+  FLUSH,
+
+  /** Indicates that data is copied. */
+  COPY
 
 }

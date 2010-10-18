@@ -108,6 +108,7 @@ public class UrlResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isAvailable() {
 
     if (this.url == null) {
@@ -119,6 +120,14 @@ public class UrlResource extends AbstractDataResource {
     } catch (IOException e) {
       return false;
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isData() {
+
+    return (this.url != null);
   }
 
   /**

@@ -184,7 +184,7 @@ public class ClasspathResource extends AbstractDataResource {
   /**
    * {@inheritDoc}
    */
-  public boolean isAvailable() {
+  public boolean isData() {
 
     return (this.url != null);
   }

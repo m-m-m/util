@@ -85,6 +85,14 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   /**
    * {@inheritDoc}
    */
+  public boolean isData() {
+
+    return getDelegate().isData();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 
     return getDelegate().navigate(relativePath);

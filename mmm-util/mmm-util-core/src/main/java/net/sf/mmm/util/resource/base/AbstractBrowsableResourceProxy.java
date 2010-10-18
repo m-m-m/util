@@ -3,11 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
+import java.io.OutputStream;
 import java.util.Date;
 
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.resource.api.BrowsableResource;
-import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
+import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
  * This is an abstract implementation of the {@link BrowsableResource} interface
@@ -69,10 +70,9 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   /**
    * {@inheritDoc}
    */
-  @Override
-  public BrowsableResource navigate(String relativePath) throws ResourceUriUndefinedException {
+  public OutputStream openOutputStream() throws ResourceNotWritableException {
 
-    return getDelegate().navigate(relativePath);
+    return getDelegate().openOutputStream();
   }
 
 }

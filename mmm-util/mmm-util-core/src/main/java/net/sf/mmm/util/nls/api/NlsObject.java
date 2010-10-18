@@ -66,6 +66,9 @@ public interface NlsObject {
   String KEY_FILE = "file";
 
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_DIRECTORY = "directory";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_OPERAND = "operand";
 
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */

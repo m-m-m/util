@@ -3,23 +3,25 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
+import java.io.OutputStream;
 import java.util.Date;
 
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is the interface for a {@link DataResource} that may contain other
- * resources. You can think of a {@link BrowsableResource} as a
- * {@link java.io.File file} that is a {@link java.io.File#isDirectory()
- * directory} or a {@link java.io.File#isFile() regular file}. However it may be
- * both and it can originate from other sources than the filesystem.<br>
+ * This is the interface for a {@link DataResource} that has higher-level
+ * features and may contain other resources. You can think of a
+ * {@link BrowsableResource} as a {@link java.io.File file} that is a
+ * {@link java.io.File#isDirectory() directory} or a
+ * {@link java.io.File#isFile() regular file}. However it may be both and it can
+ * originate from other sources than the filesystem.<br>
  * <b>ATTENTION:</b><br>
  * This API has a high level of abstraction. It is possible that the underlying
- * implementation e.g. forms a web-crawler where a HTML-page is a
- * {@link DataResource} containing the HTML-content as well as a
- * {@link BrowsableResource} containing the linked sites. Further you have to be
- * careful when recursively scanning {@link BrowsableResource}s that you avoid
- * infinity loops. E.g. create a {@link java.util.Set} holding the
+ * implementation e.g. forms a web-crawler where a HTML-page is
+ * {@link #isData() data} containing the HTML-content as well as a
+ * {@link #isFolder() folder} containing the linked sites. Further you have to
+ * be careful when recursively scanning {@link BrowsableResource}s that you
+ * avoid infinity loops. E.g. create a {@link java.util.Set} holding the
  * {@link #getUri() URIs} of the {@link BrowsableResource}s that have already
  * been visited.
  * 
@@ -81,8 +83,12 @@ public interface BrowsableResource extends DataResource {
   Boolean isModifiedSince(Date date);
 
   /**
-   * {@inheritDoc}
+   * This method opens an output-stream in order to write data to the resource.
+   * 
+   * @return the {@link OutputStream} to write to the resource.
+   * @throws ResourceNotWritableException if the resource is NOT writable (e.g.
+   *         read-only).
    */
-  BrowsableResource navigate(String resourcePath) throws ResourceUriUndefinedException;
+  OutputStream openOutputStream() throws ResourceNotWritableException;
 
 }

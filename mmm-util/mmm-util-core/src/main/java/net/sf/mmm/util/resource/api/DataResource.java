@@ -23,12 +23,42 @@ public interface DataResource {
 
   /**
    * This method determines if this resource is available. Available simply
-   * means that it exists and {@link #openStream() data can be read}.
+   * means that it exists and {@link #openStream() data can be read}.<br/>
+   * <b>ATTENTION:</b><br>
+   * Depending on the underlying implementation this can be a relatively
+   * expensive operation. E.g. if this resource points to a remote URL this
+   * method has to open a network connection in order to verify if the resource
+   * is available. Use {@link #isData()} to prevent such expensive operaitons.
    * 
    * @return <code>true</code> if this resource is available, <code>false</code>
    *         otherwise.
    */
   boolean isAvailable();
+
+  /**
+   * This method determines if this resource has potentially data
+   * {@link #isAvailable() available}. Unlike {@link #isAvailable()} this method
+   * will not invoke expensive operations like connecting to remote URLs. If
+   * this method will return <code>false</code>, then {@link #isAvailable()}
+   * would also have returned <code>false</code>. However in case of
+   * <code>true</code> only {@link #isAvailable()} can guarantee if a resource
+   * really exists and contains data. E.g. if the resource points to a
+   * {@link java.io.File} then this method can check if it is a
+   * {@link java.io.File#isFile() data-file}. So in case it points to a
+   * directory or does not exist at all in the filesystem, this method will
+   * return <code>false</code>. Please also note that this may invoke expensive
+   * operations if the according directory path points to something like a
+   * network share. You should also be aware that the state of {@link #isData()}
+   * and {@link #isAvailable()} can change at any time so you never have a full
+   * guarantee if some data exists or NOT. However in most cases it is very
+   * improbable that this status changes when you {@link #openStream() read} the
+   * resource immediately after the check.
+   * 
+   * @return <code>true</code> if this resource points to potential data,
+   *         <code>false</code> otherwise.
+   * @since 2.0.0
+   */
+  boolean isData();
 
   /**
    * This method gets the path of this resource. Please note that the path is

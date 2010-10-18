@@ -6,7 +6,7 @@ package net.sf.mmm.util.file.api;
 import java.io.File;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * A {@link FileAlreadyExistsException} is thrown if a file or directory already
@@ -19,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class FileAlreadyExistsException extends NlsRuntimeException {
+public class FileAlreadyExistsException extends RuntimeIoException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 4648212905848792934L;
@@ -42,6 +42,19 @@ public class FileAlreadyExistsException extends NlsRuntimeException {
    */
   public FileAlreadyExistsException(String file) {
 
-    super(NlsBundleUtilCore.ERR_FILE_ALREADY_EXISTS, toMap(KEY_FILE, file));
+    this(file, false);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param file is the name of the file that already exists.
+   * @param directory - <code>true</code> if the exception is about a directory,
+   *        <code>false</code> if the exception is about a file.
+   */
+  public FileAlreadyExistsException(String file, boolean directory) {
+
+    super(NlsBundleUtilCore.ERR_FILE_ALREADY_EXISTS, toMap(KEY_FILE, file, KEY_DIRECTORY,
+        Boolean.valueOf(directory)));
   }
 }

@@ -6,6 +6,7 @@ package net.sf.mmm.util.xml.base.jaxb;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -17,7 +18,11 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.resource.api.BrowsableResource;
+import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
@@ -42,8 +47,8 @@ public class XmlBeanMapper<T> extends AbstractLoggable {
   /** @see #loadXml(InputStream, Object) */
   private final Class<T> xmlBeanClass;
 
-  /** @see #getDataResourceFactory() */
-  private DataResourceFactory dataResourceFactory;
+  /** @see #getBrowsableResourceFactory() */
+  private BrowsableResourceFactory browsableResourceFactory;
 
   /**
    * The constructor.
@@ -63,21 +68,22 @@ public class XmlBeanMapper<T> extends AbstractLoggable {
   }
 
   /**
-   * @return the dataResourceFactory
+   * @return the browsableResourceFactory
    */
-  protected DataResourceFactory getDataResourceFactory() {
+  protected DataResourceFactory getBrowsableResourceFactory() {
 
-    return this.dataResourceFactory;
+    return this.browsableResourceFactory;
   }
 
   /**
-   * @param dataResourceFactory is the dataResourceFactory to set
+   * @param browsableResourceFactory is the {@link BrowsableResourceFactory} to
+   *        set.
    */
   @Inject
-  public void setDataResourceFactory(DataResourceFactory dataResourceFactory) {
+  public void setBrowsableResourceFactory(BrowsableResourceFactory browsableResourceFactory) {
 
     getInitializationState().requireNotInitilized();
-    this.dataResourceFactory = dataResourceFactory;
+    this.browsableResourceFactory = browsableResourceFactory;
   }
 
   /**
@@ -87,10 +93,10 @@ public class XmlBeanMapper<T> extends AbstractLoggable {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.dataResourceFactory == null) {
+    if (this.browsableResourceFactory == null) {
       BrowsableResourceFactoryImpl resourceFactoryImpl = new BrowsableResourceFactoryImpl();
       resourceFactoryImpl.initialize();
-      this.dataResourceFactory = resourceFactoryImpl;
+      this.browsableResourceFactory = resourceFactoryImpl;
     }
   }
 
@@ -162,7 +168,7 @@ public class XmlBeanMapper<T> extends AbstractLoggable {
    */
   public T loadXml(String locationUrl) {
 
-    DataResource resource = this.dataResourceFactory.createDataResource(locationUrl);
+    DataResource resource = this.browsableResourceFactory.createDataResource(locationUrl);
     return loadXml(resource);
   }
 
@@ -214,6 +220,9 @@ public class XmlBeanMapper<T> extends AbstractLoggable {
 
   /**
    * This method saves the given <code>jaxbBean</code> as XML to the given
+   * <code>outputStream</code>.<br/>
+   * <b>ATTENTION:</b><br>
+   * The caller of this method has to {@link OutputStream#close() close} the
    * <code>outputStream</code>.
    * 
    * @param jaxbBean is the JAXB-bean to save as XML.
@@ -227,6 +236,29 @@ public class XmlBeanMapper<T> extends AbstractLoggable {
       throw new XmlInvalidException(e, jaxbBean);
     } catch (JAXBException e) {
       throw new NlsIllegalStateException(e);
+    }
+  }
+
+  /**
+   * This method saves the given <code>jaxbBean</code> as XML to the given
+   * <code>locationUrl</code>.<br/>
+   * 
+   * @param jaxbBean is the JAXB-bean to save as XML.
+   * @param locationUrl is the location URL for the {@link BrowsableResource
+   *        resource} where to write the XML to. Typically a file-URL.
+   */
+  public void saveXml(T jaxbBean, String locationUrl) {
+
+    BrowsableResource resource = this.browsableResourceFactory.createBrowsableResource(locationUrl);
+    OutputStream outputStream = resource.openOutputStream();
+    try {
+      saveXml(jaxbBean, outputStream);
+    } finally {
+      try {
+        outputStream.close();
+      } catch (IOException e) {
+        throw new RuntimeIoException(e, IoMode.CLOSE);
+      }
     }
   }
 

@@ -136,11 +136,25 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.api.RuntimeIoException */
   public static final String ERR_IO_CLOSE = "Failed to close handle!";
 
+  /** @see net.sf.mmm.util.io.api.RuntimeIoException */
+  public static final String ERR_IO_FLUSH = "Failed to flush handle!";
+
+  /** @see net.sf.mmm.util.io.api.RuntimeIoException */
+  public static final String ERR_IO_COPY = "An unexpetected error has occured while copying data!";
+
   /** @see net.sf.mmm.util.file.api.FileAlreadyExistsException */
-  public static final String ERR_FILE_ALREADY_EXISTS = "The file \"{file}\" already exists!";
+  public static final String ERR_FILE_ALREADY_EXISTS = "The {directory==true?'directory':'file'} \"{file}\" already exists!";
 
   /** @see net.sf.mmm.util.file.api.FileNotExistsException */
-  public static final String ERR_FILE_NOT_EXISTS = "The file \"{file}\" does not exist!";
+  public static final String ERR_FILE_NOT_EXISTS = "The {directory==true?'directory':'file'} \"{file}\" does not exist!";
+
+  /** @see net.sf.mmm.util.file.api.FileCreationFailedException */
+  public static final String ERR_FILE_CREATION_FAILED = "The "
+      + "{directory==true?'directory':'file'} \"{file}\" could not be created!";
+
+  /** @see net.sf.mmm.util.file.api.FileDeletionFailedException */
+  public static final String ERR_FILE_DELETION_FAILED = "The "
+      + "{directory==true?'directory':'file'} \"{file}\" could not be deleted!";
 
   /** @see net.sf.mmm.util.nls.api.NlsNullPointerException */
   public static final String ERR_ARGUMENT_NULL = "The object \"{object}\" is null!";
@@ -168,6 +182,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.resource.api.ResourceNotAvailableException */
   public static final String ERR_RESOURCE_NOT_AVAILABLE = "The resource \"{resource}\" is not available!";
+
+  /** @see net.sf.mmm.util.resource.api.ResourceNotWritableException */
+  public static final String ERR_RESOURCE_NOT_WRITABLE = "The resource \"{resource}\" is not writable!";
 
   /** @see net.sf.mmm.util.resource.api.ResourceUriUndefinedException */
   public static final String ERR_RESOURCE_UNDEFINED_URI = "The resource URI \"{uri}\" is undefined!";

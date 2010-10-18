@@ -6,7 +6,7 @@ package net.sf.mmm.util.file.api;
 import java.io.File;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * A {@link FileNotExistsException} is thrown if a file or directory is expected
@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class FileNotExistsException extends NlsRuntimeException {
+public class FileNotExistsException extends RuntimeIoException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 4648212905848792934L;
@@ -43,4 +43,18 @@ public class FileNotExistsException extends NlsRuntimeException {
 
     super(NlsBundleUtilCore.ERR_FILE_NOT_EXISTS, toMap(KEY_FILE, file));
   }
+
+  /**
+   * The constructor.
+   * 
+   * @param file is the name of the file that does NOT exist.
+   * @param directory - <code>true</code> if the exception is about a directory,
+   *        <code>false</code> if the exception is about a file.
+   */
+  public FileNotExistsException(String file, boolean directory) {
+
+    super(NlsBundleUtilCore.ERR_FILE_NOT_EXISTS, toMap(KEY_FILE, file, KEY_DIRECTORY,
+        Boolean.valueOf(directory)));
+  }
+
 }

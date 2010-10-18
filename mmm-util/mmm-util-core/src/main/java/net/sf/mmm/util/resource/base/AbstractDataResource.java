@@ -90,6 +90,14 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  public boolean isAvailable() {
+
+    return isData();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public String getName() {
 
     String path = getPath();

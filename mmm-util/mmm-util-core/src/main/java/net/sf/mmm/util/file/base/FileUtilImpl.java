@@ -22,8 +22,13 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.file.api.FileAccessClass;
+import net.sf.mmm.util.file.api.FileAlreadyExistsException;
+import net.sf.mmm.util.file.api.FileCreationFailedException;
+import net.sf.mmm.util.file.api.FileDeletionFailedException;
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -401,26 +406,38 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
   /**
    * {@inheritDoc}
    */
-  public void copyFile(File source, File destination) throws IOException {
+  public void copyFile(File source, File destination) {
 
-    FileInputStream sourceStream = new FileInputStream(source);
     try {
-      FileOutputStream destinationStream = new FileOutputStream(destination);
+      FileInputStream sourceStream = new FileInputStream(source);
       try {
-        FileChannel sourceChannel = sourceStream.getChannel();
-        sourceChannel.transferTo(0, sourceChannel.size(), destinationStream.getChannel());
+        FileOutputStream destinationStream = new FileOutputStream(destination);
+        try {
+          FileChannel sourceChannel = sourceStream.getChannel();
+          sourceChannel.transferTo(0, sourceChannel.size(), destinationStream.getChannel());
+        } finally {
+          try {
+            destinationStream.close();
+          } catch (Exception e) {
+            throw new RuntimeIoException(e, IoMode.CLOSE);
+          }
+        }
       } finally {
-        destinationStream.close();
+        try {
+          sourceStream.close();
+        } catch (Exception e) {
+          throw new RuntimeIoException(e, IoMode.CLOSE);
+        }
       }
-    } finally {
-      sourceStream.close();
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.COPY);
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public void copyFile(File source, File destination, boolean keepFlags) throws IOException {
+  public void copyFile(File source, File destination, boolean keepFlags) {
 
     copyFile(source, destination);
     if (keepFlags) {
@@ -432,6 +449,72 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
       }
       long lastModified = source.lastModified();
       destination.setLastModified(lastModified);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void copyRecursive(File source, File destination, boolean allowOverwrite) {
+
+    copyRecursive(source, destination, allowOverwrite, null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter) {
+
+    if (!allowOverwrite && (destination.exists())) {
+      throw new FileAlreadyExistsException(destination);
+    }
+    copyRecursive(source, destination, filter);
+  }
+
+  /**
+   * This method copies the file or directory given by <code>source</code> into
+   * the given <code>destination</code>.<br>
+   * <b>ATTENTION:</b><br>
+   * In order to allow giving the copy of <code>source</code> a new
+   * {@link File#getName() name}, the <code>destination</code> has to point to
+   * the final place where the copy should appear rather than the directory
+   * where the copy will be located in.<br>
+   * <br>
+   * E.g. the following code copies the folder "foo" located in "/usr/local"
+   * recursively to the directory "/tmp". The copy will have the same name
+   * "foo".
+   * 
+   * <pre>
+   * {@link File} source = new {@link File}("/usr/local/foo");
+   * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
+   * {@link FileUtilImpl}.copyRecursive(source, destination, true);
+   * </pre>
+   * 
+   * @param source is the file or directory to copy.
+   * @param destination is the final place where the copy should appear.
+   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File)
+   *        decides} which files should be copied. Only
+   *        {@link FileFilter#accept(File) accepted} files and directories are
+   *        copied, others will be ignored.
+   */
+  private void copyRecursive(File source, File destination, FileFilter filter) {
+
+    if (source.isDirectory()) {
+      boolean okay = destination.mkdir();
+      if (!okay) {
+        throw new FileCreationFailedException(destination.getAbsolutePath(), true);
+      }
+      File[] children;
+      if (filter == null) {
+        children = source.listFiles();
+      } else {
+        children = source.listFiles(filter);
+      }
+      for (File file : children) {
+        copyRecursive(file, new File(destination, file.getName()), filter);
+      }
+    } else {
+      copyFile(source, destination);
     }
   }
 
@@ -474,77 +557,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
   /**
    * {@inheritDoc}
    */
-  public void copyRecursive(File source, File destination, boolean allowOverwrite)
-      throws IOException {
-
-    copyRecursive(source, destination, allowOverwrite, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter)
-      throws IOException {
-
-    if (!allowOverwrite && (destination.exists())) {
-      throw new IOException("Destination path \"" + destination.getAbsolutePath()
-          + "\" already exists!");
-    }
-    copyRecursive(source, destination, filter);
-  }
-
-  /**
-   * This method copies the file or directory given by <code>source</code> into
-   * the given <code>destination</code>.<br>
-   * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of <code>source</code> a new
-   * {@link File#getName() name}, the <code>destination</code> has to point to
-   * the final place where the copy should appear rather than the directory
-   * where the copy will be located in.<br>
-   * <br>
-   * E.g. the following code copies the folder "foo" located in "/usr/local"
-   * recursively to the directory "/tmp". The copy will have the same name
-   * "foo".
-   * 
-   * <pre>
-   * {@link File} source = new {@link File}("/usr/local/foo");
-   * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
-   * {@link FileUtilImpl}.copyRecursive(source, destination, true);
-   * </pre>
-   * 
-   * @param source is the file or directory to copy.
-   * @param destination is the final place where the copy should appear.
-   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File)
-   *        decides} which files should be copied. Only
-   *        {@link FileFilter#accept(File) accepted} files and directories are
-   *        copied, others will be ignored.
-   * @throws IOException if the operation fails.
-   */
-  private void copyRecursive(File source, File destination, FileFilter filter) throws IOException {
-
-    if (source.isDirectory()) {
-      boolean okay = destination.mkdir();
-      if (!okay) {
-        throw new IOException("Failed to create path \"" + destination.getAbsolutePath() + "\"!");
-      }
-      File[] children;
-      if (filter == null) {
-        children = source.listFiles();
-      } else {
-        children = source.listFiles(filter);
-      }
-      for (File file : children) {
-        copyRecursive(file, new File(destination, file.getName()), filter);
-      }
-    } else {
-      copyFile(source, destination);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int deleteRecursive(File path) throws IOException {
+  public int deleteRecursive(File path) {
 
     int deleteCount = 0;
     if (path.exists()) {
@@ -555,7 +568,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
       }
       boolean deleted = path.delete();
       if (!deleted) {
-        throw new IOException("Could not delete '" + path + "'!");
+        throw new FileDeletionFailedException(path);
       }
     }
     return deleteCount;
@@ -564,7 +577,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
   /**
    * {@inheritDoc}
    */
-  public int deleteChildren(File directory) throws IOException {
+  public int deleteChildren(File directory) {
 
     int deleteCount = 0;
     File[] children = directory.listFiles();
@@ -577,7 +590,7 @@ public class FileUtilImpl extends AbstractLoggable implements FileUtil {
         }
         boolean deleted = file.delete();
         if (!deleted) {
-          throw new IOException("Could not delete '" + file + "'!");
+          throw new FileDeletionFailedException(file);
         }
       }
     }

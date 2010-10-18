@@ -6,7 +6,9 @@ package net.sf.mmm.util.resource.base;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -16,6 +18,7 @@ import java.util.NoSuchElementException;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
+import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
  * This is the implementation of the {@link BrowsableResource} interface for a
@@ -103,6 +106,18 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
+  public OutputStream openOutputStream() throws ResourceNotWritableException {
+
+    try {
+      return new FileOutputStream(this.file);
+    } catch (FileNotFoundException e) {
+      throw new ResourceNotWritableException(e, getPath());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public URL getUrl() throws ResourceNotAvailableException {
 
     try {
@@ -133,7 +148,7 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
-  public boolean isAvailable() {
+  public boolean isData() {
 
     // todo works for symlinks to files???
     return this.file.isFile();

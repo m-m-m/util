@@ -5,10 +5,10 @@ package net.sf.mmm.util.file.api;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
 import java.util.List;
 
 import net.sf.mmm.util.file.base.FileAccessPermissions;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the interface for a collection of utility functions for {@link File}
@@ -196,9 +196,9 @@ public interface FileUtil {
    * @param source is the existing file to copy from.
    * @param destination is the file to copy to. It will be created if it does
    *        NOT exist and overridden otherwise.
-   * @throws IOException if the operation fails.
+   * @throws RuntimeIoException if the operation fails.
    */
-  void copyFile(File source, File destination) throws IOException;
+  void copyFile(File source, File destination) throws RuntimeIoException;
 
   /**
    * This method copies the file given by <code>source</code> to the file given
@@ -212,9 +212,9 @@ public interface FileUtil {
    * @param keepFlags - <code>true</code> if the flags of the file should be
    *        copied as well, <code>false</code> otherwise (a new file is created
    *        with default flags and only the content is copied).
-   * @throws IOException if the operation fails.
+   * @throws RuntimeIoException if the operation fails.
    */
-  void copyFile(File source, File destination, boolean keepFlags) throws IOException;
+  void copyFile(File source, File destination, boolean keepFlags) throws RuntimeIoException;
 
   /**
    * This method gets the {@link FileAccessPermissions permissions} of the given
@@ -271,12 +271,13 @@ public interface FileUtil {
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
    * @param allowOverwrite - if <code>false</code> and the
-   *        <code>destination</code> already exists, an {@link IOException} is
-   *        thrown, else if <code>true</code> the <code>destination</code> will
-   *        be overwritten.
-   * @throws IOException if the operation fails.
+   *        <code>destination</code> already exists, a
+   *        {@link RuntimeIoException} is thrown, else if <code>true</code> the
+   *        <code>destination</code> will be overwritten.
+   * @throws RuntimeIoException if the operation fails.
    */
-  void copyRecursive(File source, File destination, boolean allowOverwrite) throws IOException;
+  void copyRecursive(File source, File destination, boolean allowOverwrite)
+      throws RuntimeIoException;
 
   /**
    * This method copies the file or directory given by <code>source</code> into
@@ -293,17 +294,17 @@ public interface FileUtil {
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
    * @param allowOverwrite - if <code>false</code> and the
-   *        <code>destination</code> already exists, an {@link IOException} is
-   *        thrown, else if <code>true</code> the <code>destination</code> will
-   *        be overwritten.
+   *        <code>destination</code> already exists, a
+   *        {@link RuntimeIoException} is thrown, else if <code>true</code> the
+   *        <code>destination</code> will be overwritten.
    * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File)
    *        decides} which files should be copied. Only
    *        {@link FileFilter#accept(File) accepted} files and directories are
    *        copied, others will be ignored.
-   * @throws IOException if the operation fails.
+   * @throws RuntimeIoException if the operation fails.
    */
   void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter)
-      throws IOException;
+      throws RuntimeIoException;
 
   /**
    * This method {@link File#delete() deletes} the given <code>path</code>. If
@@ -315,10 +316,10 @@ public interface FileUtil {
    * @param path is the path to delete.
    * @return the number of files that have been deleted (excluding the
    *         directories).
-   * @throws IOException if a file or directory could NOT be
+   * @throws RuntimeIoException if a file or directory could NOT be
    *         {@link File#delete() deleted}.
    */
-  int deleteRecursive(File path) throws IOException;
+  int deleteRecursive(File path) throws RuntimeIoException;
 
   /**
    * This method {@link File#delete() deletes} all {@link File#listFiles()
@@ -330,10 +331,10 @@ public interface FileUtil {
    * @param directory is the directory to delete.
    * @return the number of files that have been deleted (excluding the
    *         directories).
-   * @throws IOException if a file or directory could NOT be
+   * @throws RuntimeIoException if a file or directory could NOT be
    *         {@link File#delete() deleted}.
    */
-  int deleteChildren(File directory) throws IOException;
+  int deleteChildren(File directory) throws RuntimeIoException;
 
   /**
    * This method gets all {@link File files} matching to the given

@@ -205,16 +205,20 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
      * {@inheritDoc}
      */
     @Override
-    public BrowsableResource navigate(String relativePath) throws ResourceUriUndefinedException {
+    public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 
       ResourceUri resourceUri = new ResourceUri(relativePath);
-      BrowsableResource result;
+      DataResource result;
       if (resourceUri.getSchemePrefix() == null) {
         result = super.navigate(relativePath);
       } else {
         result = createBrowsableResource(resourceUri);
       }
-      return new BrowsableResourceAdapter(result);
+      if (result instanceof BrowsableResource) {
+        return new BrowsableResourceAdapter((BrowsableResource) result);
+      } else {
+        return new DataResourceAdapter(result);
+      }
     }
 
   }
