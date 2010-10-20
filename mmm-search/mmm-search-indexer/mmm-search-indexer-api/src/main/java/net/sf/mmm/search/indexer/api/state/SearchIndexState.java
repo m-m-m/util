@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api.state;
 
+import java.util.Date;
+
 /**
  * This is the interface for the state of the
  * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer}. It is used to
@@ -47,5 +49,15 @@ public interface SearchIndexState {
    *         <code>location</code> or <code>null</code> if no such state exists.
    */
   SearchIndexDataLocationState getLocationState(String location);
+
+  /**
+   * This method gets the {@link Date} when the index had been updated last
+   * time. It will be set the the current {@link Date} every time this state is
+   * {@link SearchIndexStateManager#save(SearchIndexState) saved}.
+   * 
+   * @return the last indexing date or <code>null</code> if the index did NOT
+   *         exist before.
+   */
+  Date getIndexingDate();
 
 }

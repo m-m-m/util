@@ -4,6 +4,7 @@
 package net.sf.mmm.search.indexer.base.state;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,10 @@ import net.sf.mmm.search.indexer.api.state.SearchIndexState;
 @XmlRootElement(name = "search-index-state")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchIndexStateBean implements SearchIndexState {
+
+  /** @see #getIndexingDate() */
+  @XmlElement(name = "indexing-date")
+  private Date indexingDate;
 
   /** @see #getSources() */
   @XmlElementWrapper(name = "sources")
@@ -214,6 +219,24 @@ public class SearchIndexStateBean implements SearchIndexState {
   public void setConfigurationLocation(String configurationLocation) {
 
     this.configurationLocation = configurationLocation;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Date getIndexingDate() {
+
+    return this.indexingDate;
+  }
+
+  /**
+   * This method sets the {@link #getIndexingDate() indexing-date}.
+   * 
+   * @param indexingDate is the new indexing-date.
+   */
+  public void setIndexingDate(Date indexingDate) {
+
+    this.indexingDate = indexingDate;
   }
 
 }

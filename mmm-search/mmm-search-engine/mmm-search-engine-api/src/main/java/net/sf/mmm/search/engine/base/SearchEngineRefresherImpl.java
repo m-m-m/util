@@ -53,7 +53,7 @@ public class SearchEngineRefresherImpl extends AbstractLoggable implements Searc
   /** @see #startup() */
   private boolean active;
 
-  /** @see #shutdown() */
+  /** @see #close() */
   private boolean shutdown;
 
   /** The {@link Set} of {@link ManagedSearchEngine}s. */
@@ -86,7 +86,16 @@ public class SearchEngineRefresherImpl extends AbstractLoggable implements Searc
   }
 
   /**
-   * {@inheritDoc}
+   * This method will initialize and startup this refresher. On the first call
+   * of this method a new thread will be started, that periodically performs a
+   * refresh.<br/>
+   * Multiple calls of this method have no further effect unless the refresher
+   * is {@link #close() closed}.<br/>
+   * <b>NOTE:</b><br>
+   * This is intentionally NOT performed automatically via
+   * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so
+   * the startup only happens if explicitly required and not accidently because
+   * this component if found and managed by some container.
    */
   public synchronized void startup() {
 
@@ -108,6 +117,7 @@ public class SearchEngineRefresherImpl extends AbstractLoggable implements Searc
   public void addSearchEngine(ManagedSearchEngine searchEngine) {
 
     this.searchEngineSet.add(searchEngine);
+    startup();
   }
 
   /**
@@ -121,7 +131,7 @@ public class SearchEngineRefresherImpl extends AbstractLoggable implements Searc
   /**
    * {@inheritDoc}
    */
-  public void shutdown() {
+  public void close() {
 
     this.shutdown = true;
   }

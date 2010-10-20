@@ -6,27 +6,43 @@ package net.sf.mmm.search.indexer.base;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
 import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
+import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
+import net.sf.mmm.search.engine.api.SearchEngine;
+import net.sf.mmm.search.engine.api.SearchHit;
+import net.sf.mmm.search.engine.api.SearchQuery;
+import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
+import net.sf.mmm.search.indexer.api.config.ConfiguredSearchIndexerOptions;
 import net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader;
+import net.sf.mmm.search.indexer.api.state.SearchIndexSourceState;
+import net.sf.mmm.search.indexer.api.state.SearchIndexState;
+import net.sf.mmm.search.indexer.api.state.SearchIndexStateManager;
+import net.sf.mmm.search.indexer.base.config.ConfiguredSearchIndexerOptionsBean;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationReaderImpl;
+import net.sf.mmm.search.indexer.base.state.SearchIndexStateManagerImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.transformer.api.Transformer;
 
@@ -43,6 +59,9 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
 
   /** @see #getSearchIndexerConfigurationReader() */
   private SearchIndexerConfigurationReader searchIndexerConfigurationReader;
+
+  /** @see #getSearchIndexStateManager() */
+  private SearchIndexStateManager searchIndexStateManager;
 
   /** @see #getParserService() */
   private ContentParserService parserService;
@@ -96,6 +115,24 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   }
 
   /**
+   * @return the searchIndexStateManager
+   */
+  protected SearchIndexStateManager getSearchIndexStateManager() {
+
+    return this.searchIndexStateManager;
+  }
+
+  /**
+   * @param searchIndexStateManager is the searchIndexStateManager to set
+   */
+  @Inject
+  public void setSearchIndexStateManager(SearchIndexStateManager searchIndexStateManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.searchIndexStateManager = searchIndexStateManager;
+  }
+
+  /**
    * @return the parserService
    */
   public ContentParserService getParserService() {
@@ -146,6 +183,11 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
       readerImpl.initialize();
       this.searchIndexerConfigurationReader = readerImpl;
     }
+    if (this.searchIndexStateManager == null) {
+      SearchIndexStateManagerImpl stateManagerImpl = new SearchIndexStateManagerImpl();
+      stateManagerImpl.initialize();
+      this.searchIndexStateManager = stateManagerImpl;
+    }
     if (this.parserService == null) {
       ContentParserServiceImpl impl = new ContentParserServiceImpl();
       impl.initialize();
@@ -160,13 +202,106 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   /**
    * {@inheritDoc}
    */
+  public void index(SearchIndexer searchIndexer, SearchIndexState state, boolean forceFullIndexing,
+      SearchIndexerConfiguration configuration, SearchSource source) {
+
+    String sourceId = source.getId();
+    SearchIndexSourceState sourceState = state.getSourceState(sourceId);
+    if (sourceState == null) {
+      throw new ObjectNotFoundException(SearchIndexSourceState.class.getSimpleName(), sourceId);
+    }
+    // how to deal with multiple locations for single source?
+    if (forceFullIndexing) {
+      // TODO: we should skip this if this is the first indexing.
+      // TODO: wont work with updateMode of location...
+      getLogger().debug("Removing all search-entries for source: " + sourceId);
+      int removeCount = searchIndexer.remove(SearchEntry.PROPERTY_SOURCE, sourceId);
+      getLogger().debug("Removed " + removeCount + " entries/entry.");
+    } else {
+      // Map<String, DocState> uri2docStateMap?
+      // <DocState: docid -> lucene Document, state: OLD/UNCHANGED/UPDATED/ADDED
+      // on update directly delete by uri (+source?)
+    }
+    Date indexingDate = new Date();
+    Set<String> resourceUris = new HashSet<String>();
+    for (SearchIndexDataLocation location : configuration.getLocations()) {
+      if (location.getSource().getId().equals(sourceId)) {
+        index(searchIndexer, state, forceFullIndexing, location, resourceUris);
+      }
+    }
+    if (!forceFullIndexing && (sourceState.getIndexingDate() != null)) {
+      // delta-indexing: delete entries that have NOT been visited again
+      SearchEngine searchEngine = searchIndexer.getSearchEngine();
+      SearchQuery query = searchEngine.getQueryBuilder().createTermQuery(
+          SearchEntry.PROPERTY_SOURCE, sourceId);
+      int hitsPerPage = Integer.MAX_VALUE;
+      // get all hits... (TODO: use paging...?)
+      SearchResultPage page = searchEngine.search(query, hitsPerPage);
+      for (int i = 0; i < page.getPageHitCount(); i++) {
+        SearchHit hit = page.getPageHit(i);
+        String uri = hit.getUri();
+        if (!resourceUris.contains(uri)) {
+          // delete...
+        }
+      }
+    }
+    sourceState.setIndexingDate(indexingDate);
+    this.searchIndexStateManager.save(state);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void index(String configurationLocation) {
+
+    index(configurationLocation, new ConfiguredSearchIndexerOptionsBean());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void index(String configurationLocation, ConfiguredSearchIndexerOptions options) {
+
+    SearchIndexerConfiguration configuration = this.searchIndexerConfigurationReader
+        .readConfiguration(configurationLocation);
+    index(configuration, options);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void index(SearchIndexerConfiguration configuration) {
 
+    index(configuration, new ConfiguredSearchIndexerOptionsBean());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void index(SearchIndexerConfiguration configuration, ConfiguredSearchIndexerOptions options) {
+
+    SearchIndexState state = this.searchIndexStateManager.load(configuration);
     SearchIndexConfiguration searchIndexConfiguration = configuration.getSearchIndex();
-    SearchIndexer searchIndexer = this.searchIndexerManager.createIndexer(searchIndexConfiguration);
+    List<String> sourceIds = options.getSourceIds();
+    SearchIndexer searchIndexer = this.searchIndexerManager.createIndexer(searchIndexConfiguration,
+        options);
     try {
-      for (SearchIndexDataLocation location : configuration.getLocations()) {
-        index(searchIndexer, location, false);
+      if (sourceIds == null) {
+        for (SearchSource source : configuration.getSources()) {
+          index(searchIndexer, state, options.isOverwriteEntries(), configuration, source);
+        }
+      } else {
+        // verify sourceIds...
+        for (String sourceId : sourceIds) {
+          SearchSource source = configuration.getSource(sourceId);
+          if (source == null) {
+            throw new ObjectNotFoundException(SearchSource.class.getName(), sourceId);
+          }
+        }
+        for (String sourceId : sourceIds) {
+          SearchSource source = configuration.getSource(sourceId);
+          index(searchIndexer, state, options.isOverwriteEntries(), configuration, source);
+        }
       }
     } finally {
       getLogger().debug("Optimizing index...");
@@ -174,16 +309,6 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
       getLogger().debug("Closing index...");
       searchIndexer.close();
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void index(String configurationFile) {
-
-    SearchIndexerConfiguration configuration = this.searchIndexerConfigurationReader
-        .readConfiguration(configurationFile);
-    index(configuration);
   }
 
   /**

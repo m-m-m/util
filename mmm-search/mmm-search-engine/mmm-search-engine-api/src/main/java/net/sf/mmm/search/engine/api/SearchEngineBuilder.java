@@ -4,6 +4,7 @@
 package net.sf.mmm.search.engine.api;
 
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
+import net.sf.mmm.search.engine.api.config.SearchEngineOptions;
 
 /**
  * This is the interface for the component that allows to create a
@@ -22,5 +23,16 @@ public interface SearchEngineBuilder {
    * @return the created {@link ManagedSearchEngine}.
    */
   ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration);
+
+  /**
+   * This method creates a {@link ManagedSearchEngine} for the given
+   * <code>configuration</code>.
+   * 
+   * @param configuration is the {@link SearchIndexConfiguration}.
+   * @param options are the {@link SearchEngineOptions}.
+   * @return the created {@link ManagedSearchEngine}.
+   */
+  ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration,
+      SearchEngineOptions options);
 
 }

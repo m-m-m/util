@@ -9,6 +9,9 @@ import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchEntryIdInvalidException;
 import net.sf.mmm.search.base.SearchPropertyValueInvalidException;
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.search.engine.api.SearchEngine;
+import net.sf.mmm.search.engine.impl.lucene.LuceneSearchEngineBuilder;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
 import net.sf.mmm.search.indexer.base.SearchAddFailedException;
@@ -32,15 +35,24 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /** the {@link IndexWriter}. */
   private final IndexWriter indexWriter;
 
+  /** @see #getSearchEngine() */
+  private ManagedSearchEngine searchEngine;
+
+  /** @see #getSearchEngine() */
+  private LuceneSearchEngineBuilder searchEngineBuilder;
+
   /**
    * The constructor.
    * 
    * @param indexWriter is the index modifier to use.
+   * @param searchEngineBuilder is the {@link LuceneSearchEngineBuilder}
+   *        required for {@link #getSearchEngine()}.
    */
-  public LuceneSearchIndexer(IndexWriter indexWriter) {
+  public LuceneSearchIndexer(IndexWriter indexWriter, LuceneSearchEngineBuilder searchEngineBuilder) {
 
     super();
     this.indexWriter = indexWriter;
+    this.searchEngineBuilder = searchEngineBuilder;
   }
 
   /**
@@ -64,6 +76,10 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
     try {
       this.indexWriter.close();
+      if (this.searchEngine != null) {
+        this.searchEngine.close();
+        this.searchEngine = null;
+      }
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.CLOSE);
     }
@@ -153,6 +169,22 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
       return 0;
     } catch (IOException e) {
       throw new SearchRemoveFailedException(property, value);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchEngine getSearchEngine() {
+
+    try {
+      if (this.searchEngine == null) {
+        this.searchEngine = this.searchEngineBuilder.createSearchEngine(this.indexWriter
+            .getReader());
+      }
+      return this.searchEngine;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 

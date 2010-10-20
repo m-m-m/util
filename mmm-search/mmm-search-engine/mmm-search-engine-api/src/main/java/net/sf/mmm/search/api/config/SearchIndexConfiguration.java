@@ -20,18 +20,20 @@ public interface SearchIndexConfiguration {
    */
   String getLocation();
 
-  /**
-   * This method determines if the search-index should be overwritten on
-   * re-indexing. In most cases you do NOT want to overwrite the search-index
-   * but update it.<br/>
-   * <b>WARNING:</b><br/>
-   * Be very careful when setting <code>overwrite</code> to <code>true</code> to
-   * avoid loosing valuable data.
-   * 
-   * @return <code>true</code> if an existing search-index should be deleted and
-   *         created from scratch on re-indexing or <code>false</code> if the
-   *         search-index should be updated.
-   */
-  boolean isOverwrite();
+  // /**
+  // * This method determines if the search-index should be overwritten on
+  // * re-indexing. In most cases you do NOT want to overwrite the search-index
+  // * but update it.<br/>
+  // * <b>WARNING:</b><br/>
+  // * Be very careful when setting <code>overwrite</code> to <code>true</code>
+  // to
+  // * avoid loosing valuable data.
+  // *
+  // * @return <code>true</code> if an existing search-index should be deleted
+  // and
+  // * created from scratch on re-indexing or <code>false</code> if the
+  // * search-index should be updated.
+  // */
+  // boolean isOverwrite();
 
 }

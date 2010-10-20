@@ -11,13 +11,16 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
+import net.sf.mmm.search.engine.impl.lucene.LuceneSearchEngineBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexerBuilder;
 import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.IndexWriter;
@@ -44,13 +47,15 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
   /** @see #getAnalyzer() */
   private Analyzer analyzer;
 
+  /** @see #setLuceneSearchEngineBuilder(LuceneSearchEngineBuilder) */
+  private LuceneSearchEngineBuilder luceneSearchEngineBuilder;
+
   /**
    * The constructor.
    */
   public LuceneSearchIndexerBuilder() {
 
     super();
-    this.analyzer = null;
   }
 
   /**
@@ -91,6 +96,16 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
   }
 
   /**
+   * @param luceneSearchEngineBuilder is the luceneSearchEngineBuilder to set
+   */
+  @Inject
+  public void setLuceneSearchEngineBuilder(LuceneSearchEngineBuilder luceneSearchEngineBuilder) {
+
+    getInitializationState().requireNotInitilized();
+    this.luceneSearchEngineBuilder = luceneSearchEngineBuilder;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -110,24 +125,32 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
       luceneDirectoryBuilderImpl.initialize();
       this.luceneDirectoryBuilder = luceneDirectoryBuilderImpl;
     }
+    if (this.luceneSearchEngineBuilder == null) {
+      LuceneSearchEngineBuilder searchEngineBuilder = new LuceneSearchEngineBuilder();
+      searchEngineBuilder.setAnalyzer(this.analyzer);
+      searchEngineBuilder.initialize();
+      this.luceneSearchEngineBuilder = searchEngineBuilder;
+    }
   }
 
   /**
    * {@inheritDoc}
    */
-  public SearchIndexer createIndexer(SearchIndexConfiguration configuration) throws SearchException {
+  public SearchIndexer createIndexer(SearchIndexConfiguration configuration,
+      SearchIndexerOptions options) throws SearchException {
 
+    NlsNullPointerException.checkNotNull(SearchIndexConfiguration.class, configuration);
+    NlsNullPointerException.checkNotNull(SearchIndexerOptions.class, options);
     try {
       Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration);
       IndexWriter indexWriter;
-      // TODO: max filed length ? via generic configuration?
-      MaxFieldLength maxFieldLength = new MaxFieldLength(5);
-      if (configuration.isOverwrite()) {
+      MaxFieldLength maxFieldLength = MaxFieldLength.UNLIMITED;
+      if (options.isOverwriteIndex()) {
         indexWriter = new IndexWriter(directory, this.analyzer, true, maxFieldLength);
       } else {
         indexWriter = new IndexWriter(directory, this.analyzer, maxFieldLength);
       }
-      return new LuceneSearchIndexer(indexWriter);
+      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder);
     } catch (IOException e) {
       throw new RuntimeIoException(e);
     }

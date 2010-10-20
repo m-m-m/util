@@ -4,9 +4,12 @@
 package net.sf.mmm.search.indexer.base;
 
 import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.base.config.SearchIndexConfigurationBean;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
+import net.sf.mmm.search.indexer.base.config.SearchIndexerOptionsBean;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 
 /**
@@ -30,31 +33,21 @@ public abstract class AbstractSearchIndexerBuilder extends AbstractLoggable impl
   /**
    * {@inheritDoc}
    */
-  public final SearchIndexer createIndexer(String dataSource, boolean overwrite)
+  public final SearchIndexer createIndexer(String dataSource, SearchIndexerOptions options)
       throws SearchException {
 
     SearchIndexConfigurationBean configuration = new SearchIndexConfigurationBean();
     configuration.setLocation(dataSource);
-    configuration.setOverwrite(overwrite);
-    return createIndexer(configuration);
+    return createIndexer(configuration, options);
   }
 
-  // /**
-  // * This method is like {@link #createIndexer(String, boolean)} but for the
-  // * normalized index-location given as {@link File}.
-  // *
-  // * @param indexPath is the {@link File} pointing to the directory for the
-  // * index.
-  // * @param update if <code>true</code> the indexer will update the index at
-  // * <code>indexPath</code> if it already exists, else if
-  // * <code>false</code> the index will be overwritten if it already
-  // * exists. If the index does NOT yet exist, it will be created in any
-  // * case.
-  // * @return the create indexer.
-  // * @throws SearchException if the operation failed.
-  // */
-  // protected abstract SearchIndexer createIndexer(File indexPath, boolean
-  // update)
-  // throws SearchException;
+  /**
+   * {@inheritDoc}
+   */
+  public SearchIndexer createIndexer(SearchIndexConfiguration searchIndexConfiguration)
+      throws SearchException {
+
+    return createIndexer(searchIndexConfiguration, new SearchIndexerOptionsBean());
+  }
 
 }

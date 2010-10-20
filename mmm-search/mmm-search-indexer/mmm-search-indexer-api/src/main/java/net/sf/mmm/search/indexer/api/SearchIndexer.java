@@ -7,6 +7,7 @@ import java.io.Closeable;
 import java.io.Flushable;
 
 import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.engine.api.SearchEngine;
 
 /**
  * This is the interface for the indexer used to create and modify a search
@@ -85,7 +86,7 @@ public interface SearchIndexer extends Flushable, Closeable {
    *         be <code>1</code> if one entry exists with the given
    *         <code>uid</code> or <code>0</code> if no such entry exists. A value
    *         greater than <code>1</code> indicates that multiple entries have
-   *         been removed that all have the given <code>uri</code> what
+   *         been removed that all have the given <code>uid</code> what
    *         indicates a mistake of your index(er).
    * @throws SearchException if the operation failed.
    */
@@ -103,8 +104,7 @@ public interface SearchIndexer extends Flushable, Closeable {
    *         be <code>1</code> if one entry exists with the given
    *         <code>uri</code> or <code>0</code> if no such entry exists. A value
    *         greater than <code>1</code> indicates that multiple entries have
-   *         been removed that all have the given <code>uri</code> what
-   *         indicates a mistake of your index(er).
+   *         been removed that all have the given <code>uri</code>.
    * @throws SearchException if the operation failed.
    */
   int removeByUri(String uri) throws SearchException;
@@ -139,11 +139,23 @@ public interface SearchIndexer extends Flushable, Closeable {
 
   /**
    * This method optimizes the search index. If NOT supported by the
-   * implementation, this method will have no effect.
+   * implementation, this method will have no effect. Optimization will
+   * typically cause some performance overhead but therefore speed up your
+   * {@link SearchEngine#search(net.sf.mmm.search.engine.api.SearchQuery, int)
+   * searches}.
    * 
    * @throws SearchException if the operation failed.
    */
   void optimize() throws SearchException;
+
+  /**
+   * This method gets the {@link SearchEngine} for the index of this
+   * {@link SearchIndexer}. It may be used for advanced indexing where
+   * search-queries need to performed for updating the search-index.
+   * 
+   * @return the {@link SearchEngine}.
+   */
+  SearchEngine getSearchEngine();
 
   /**
    * This method closes the search index. After the call of this method no other

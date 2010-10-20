@@ -6,8 +6,11 @@ package net.sf.mmm.search.engine.base;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import net.sf.mmm.search.api.config.SearchIndexConfiguration;
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngineBuilder;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
+import net.sf.mmm.search.engine.base.config.SearchEngineOptionsBean;
 import net.sf.mmm.util.component.base.AbstractLoggable;
 
 /**
@@ -89,8 +92,16 @@ public abstract class AbstractSearchEngineBuilder extends AbstractLoggable imple
   public void dispose() {
 
     if (this.searchEngineRefresher != null) {
-      this.searchEngineRefresher.shutdown();
+      this.searchEngineRefresher.close();
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration) {
+
+    return createSearchEngine(configuration, new SearchEngineOptionsBean());
   }
 
 }

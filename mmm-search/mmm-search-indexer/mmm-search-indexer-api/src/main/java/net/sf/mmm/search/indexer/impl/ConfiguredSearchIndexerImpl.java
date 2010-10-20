@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.impl;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation;
+import net.sf.mmm.search.indexer.api.state.SearchIndexState;
 import net.sf.mmm.search.indexer.base.AbstractConfiguredSearchIndexer;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
@@ -73,8 +75,8 @@ public class ConfiguredSearchIndexerImpl extends AbstractConfiguredSearchIndexer
   /**
    * {@inheritDoc}
    */
-  public void index(SearchIndexer searchIndexer, SearchIndexDataLocation location,
-      boolean forceFullIndex) {
+  public void index(SearchIndexer searchIndexer, SearchIndexState state,
+      boolean forceFullIndexing, SearchIndexDataLocation location, Collection<String> resourceUris) {
 
     String locationUri = location.getLocation();
     BrowsableResource resource = this.browsableResourceFactory.createBrowsableResource(locationUri);
@@ -102,7 +104,7 @@ public class ConfiguredSearchIndexerImpl extends AbstractConfiguredSearchIndexer
     String uri = resource.getUri();
     if (!visitedResources.contains(uri)) {
       visitedResources.add(uri);
-      if (resource.isAvailable()) {
+      if (resource.isData()) {
         indexData(searchIndexer, location, resource);
       }
       for (BrowsableResource child : resource.getChildResources()) {

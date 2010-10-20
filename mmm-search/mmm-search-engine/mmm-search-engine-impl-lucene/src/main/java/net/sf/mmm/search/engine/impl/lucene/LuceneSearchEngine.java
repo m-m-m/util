@@ -4,6 +4,7 @@
 package net.sf.mmm.search.engine.impl.lucene;
 
 import java.io.IOException;
+import java.util.Date;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
@@ -60,6 +61,13 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   private Searcher searcher;
 
   /**
+   * The {@link Date} when the index was last modified.
+   * 
+   * @see #refresh()
+   */
+  private Date indexModificationDate;
+
+  /**
    * The constructor.
    * 
    * @param searchEngineRefresher is the {@link SearchEngineRefresher}.
@@ -77,6 +85,57 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     this.queryBuilder = queryBuilder;
     this.highlightFormatter = highlightFormatter;
     refresh();
+  }
+
+  /**
+   * This method determines the modification {@link Date} of the search-index
+   * specified by the given <code>directory</code>.
+   * 
+   * @param directory is the {@link Directory} with the search-index.
+   * @return the modification {@link Date} of the search-index. Will be
+   *         <code>new Date(0)</code> if the search-index does NOT exist.
+   */
+  protected static Date getModificationDate(Directory directory) {
+
+    try {
+      long modificationDate = 0;
+      for (String filename : directory.listAll()) {
+        long modified = directory.fileModified(filename);
+        if (modified > modificationDate) {
+          modificationDate = modified;
+        }
+      }
+      return new Date(modificationDate);
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
+  }
+
+  /**
+   * @return the indexModificationDate
+   */
+  public Date getIndexModificationDate() {
+
+    return this.indexModificationDate;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param indexReader is the {@link IndexReader}.
+   * @param analyzer is the {@link Analyzer} to use.
+   * @param queryBuilder is the {@link SearchQueryBuilder} query builder.
+   * @param highlightFormatter is the {@link Formatter} for highlighting.
+   */
+  public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
+      SearchQueryBuilder queryBuilder, Formatter highlightFormatter) {
+
+    super(null);
+    this.directory = null;
+    this.analyzer = analyzer;
+    this.queryBuilder = queryBuilder;
+    this.highlightFormatter = highlightFormatter;
+    this.searcher = new IndexSearcher(indexReader);
   }
 
   /**
@@ -212,12 +271,25 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   public void refresh() {
 
     try {
-      if (this.searcher != null) {
-        this.searcher.close();
+      Date currentModificationDate = getModificationDate(this.directory);
+      if (this.indexModificationDate != null) {
+        if (this.indexModificationDate.equals(currentModificationDate)) {
+          // index is unchanged...
+          return;
+        } else {
+          getLogger().debug("search-index has changed and search-engine is refreshed!");
+        }
       }
-      // TODO: do we need to do this in finally? What happened to the searcher
-      // if close caused an I/O error?
+      if (this.searcher != null) {
+        try {
+          this.searcher.close();
+        } catch (Exception e) {
+          getLogger().error("Closing the search-engine for refresh failed!", e);
+        }
+        this.searcher = null;
+      }
       this.searcher = new IndexSearcher(this.directory);
+      this.indexModificationDate = currentModificationDate;
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
@@ -227,9 +299,9 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * {@inheritDoc}
    */
   @Override
-  public void dispose() {
+  public void close() {
 
-    super.dispose();
+    super.close();
     try {
       this.searcher.close();
       this.searcher = null;

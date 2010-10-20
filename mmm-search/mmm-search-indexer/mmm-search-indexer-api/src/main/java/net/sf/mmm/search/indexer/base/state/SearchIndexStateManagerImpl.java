@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base.state;
 
+import java.util.Date;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -69,6 +71,7 @@ public class SearchIndexStateManagerImpl extends XmlBeanMapper<SearchIndexStateB
   public void save(SearchIndexState searchIndexStatus) {
 
     SearchIndexStateBean stateBean = (SearchIndexStateBean) searchIndexStatus;
+    stateBean.setIndexingDate(new Date());
     String configurationLocation = stateBean.getConfigurationLocation();
     saveXml(stateBean, configurationLocation);
   }

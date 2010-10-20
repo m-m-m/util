@@ -4,16 +4,21 @@
 package net.sf.mmm.search.engine.impl.lucene;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.search.engine.api.config.SearchEngineOptions;
 import net.sf.mmm.search.engine.base.AbstractSearchEngineBuilder;
+import net.sf.mmm.search.engine.base.SearchEngineRefresher;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.highlight.Formatter;
 import org.apache.lucene.store.Directory;
 
@@ -25,6 +30,8 @@ import org.apache.lucene.store.Directory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
 
   /** @see #setAnalyzer(Analyzer) */
@@ -148,12 +155,36 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   /**
    * {@inheritDoc}
    */
-  public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration) {
+  public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration,
+      SearchEngineOptions options) {
 
     Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration);
-    LuceneSearchEngine engine = new LuceneSearchEngine(getSearchEngineRefresher(), directory,
+    SearchEngineRefresher searchEngineRefresher;
+    boolean autoRefresh = options.isAutoRefresh();
+    if (autoRefresh) {
+      searchEngineRefresher = getSearchEngineRefresher();
+    } else {
+      searchEngineRefresher = null;
+    }
+    LuceneSearchEngine engine = new LuceneSearchEngine(searchEngineRefresher, directory,
         this.analyzer, getSearchQueryBuilder(), this.highlightFormatter);
-    getSearchEngineRefresher().startup();
+    if (autoRefresh) {
+      searchEngineRefresher.addSearchEngine(engine);
+    }
+    return engine;
+  }
+
+  /**
+   * This method creates a {@link ManagedSearchEngine} for an existing
+   * {@link IndexReader}.
+   * 
+   * @param indexReader is the {@link IndexReader}.
+   * @return the {@link ManagedSearchEngine}.
+   */
+  public ManagedSearchEngine createSearchEngine(IndexReader indexReader) {
+
+    LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer,
+        getSearchQueryBuilder(), this.highlightFormatter);
     return engine;
   }
 
