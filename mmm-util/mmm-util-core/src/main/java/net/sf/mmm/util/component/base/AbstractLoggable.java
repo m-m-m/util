@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.base;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.NotInitializedException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the abstract base class for a component that needs a
@@ -72,8 +72,7 @@ public abstract class AbstractLoggable extends AbstractComponent {
 
     super.doInitialize();
     if (this.logger == null) {
-      // new Jdk14Logger(getClass()));
-      // even more ugly...
+      // ugly static...
       this.logger = LoggerFactory.getLogger(getClass());
     }
   }
