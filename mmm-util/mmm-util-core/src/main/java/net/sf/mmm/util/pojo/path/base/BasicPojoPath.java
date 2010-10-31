@@ -12,6 +12,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
  * validate and parse a {@link PojoPath}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class BasicPojoPath implements PojoPath {
 

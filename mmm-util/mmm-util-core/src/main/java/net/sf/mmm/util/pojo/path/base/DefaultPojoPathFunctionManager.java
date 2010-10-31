@@ -14,6 +14,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
  * This is the default implementation of the {@link PojoPathFunctionManager}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @SuppressWarnings("rawtypes")
 public class DefaultPojoPathFunctionManager extends AbstractComponent implements

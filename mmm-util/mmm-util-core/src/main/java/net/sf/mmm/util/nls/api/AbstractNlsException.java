@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -172,7 +171,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           }
         }
       }
-    } catch (IOException e) {
+    } catch (Exception e) {
       throw new IllegalStateException(e);
     }
   }

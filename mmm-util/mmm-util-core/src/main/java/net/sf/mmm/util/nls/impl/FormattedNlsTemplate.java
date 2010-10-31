@@ -5,9 +5,10 @@ package net.sf.mmm.util.nls.impl;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
+import net.sf.mmm.util.nls.base.NlsDependencies;
+import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
 
 /**
  * This class is an abstract implementation of the
@@ -19,18 +20,17 @@ import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
 public abstract class FormattedNlsTemplate extends AbstractNlsTemplate {
 
   /** @see #createFormatter(String, Locale) */
-  private NlsArgumentParser argumentParser;
+  private NlsDependencies nlsDependencies;
 
   /**
    * The constructor.
    * 
-   * @param argumentParser is the {@link #getArgumentParser() argument-parser}
-   *        to use.
+   * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
-  public FormattedNlsTemplate(NlsArgumentParser argumentParser) {
+  public FormattedNlsTemplate(NlsDependencies nlsDependencies) {
 
     super();
-    this.argumentParser = argumentParser;
+    this.nlsDependencies = nlsDependencies;
   }
 
   /**
@@ -39,17 +39,17 @@ public abstract class FormattedNlsTemplate extends AbstractNlsTemplate {
   @Override
   protected NlsMessageFormatter createFormatter(String messageTemplate, Locale locale) {
 
-    return new NlsMessageFormatterImpl(messageTemplate, getArgumentParser());
+    return new NlsMessageFormatterImpl(messageTemplate, this.nlsDependencies);
   }
 
   /**
-   * This method gets the {@link NlsArgumentParser} to use.
+   * This method gets the {@link NlsDependencies} to use.
    * 
-   * @return the argumentParser
+   * @return the {@link NlsDependencies}.
    */
-  protected NlsArgumentParser getArgumentParser() {
+  protected NlsDependencies getNlsDependencies() {
 
-    return this.argumentParser;
+    return this.nlsDependencies;
   }
 
 }

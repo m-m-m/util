@@ -3,14 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * TODO: this class ...
+ * The {@link NlsArgumentParser} is used to {@link #parse(CharSequenceScanner)
+ * parse} an {@link NlsArgument}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@ComponentSpecification
 public interface NlsArgumentParser {
 
   /** The character used to start a variable expression: {@value} */

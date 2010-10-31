@@ -19,13 +19,14 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
-  /** @see #getConfiguration() */
-  private ExtendedPojoDescriptorConfigurationImpl configuration;
+  /** @see #getDependencies() */
+  private ExtendedPojoDescriptorDependenciesImpl dependencies;
 
   /**
    * The constructor.
@@ -53,7 +54,7 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
     } else {
       descriptorBuilder.setFieldIntrospector(new PojoFieldIntrospectorImpl(fieldVisibility, false));
     }
-    descriptorBuilder.setConfiguration(this.configuration);
+    descriptorBuilder.setConfiguration(this.dependencies);
     descriptorBuilder.initialize();
     return descriptorBuilder;
   }
@@ -64,33 +65,33 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
   @Override
   protected void doInitialize() {
 
-    if (this.configuration == null) {
-      this.configuration = new ExtendedPojoDescriptorConfigurationImpl();
-      this.configuration.initialize();
+    if (this.dependencies == null) {
+      this.dependencies = new ExtendedPojoDescriptorDependenciesImpl();
+      this.dependencies.initialize();
     }
   }
 
   /**
-   * This method sets the {@link ExtendedPojoDescriptorConfigurationImpl}.
+   * This method sets the {@link ExtendedPojoDescriptorDependenciesImpl}.
    * 
-   * @param configuration is the {@link ExtendedPojoDescriptorConfigurationImpl}
+   * @param dependencies are the {@link ExtendedPojoDescriptorDependenciesImpl}
    *        .
    */
   @Inject
-  public void setConfiguration(ExtendedPojoDescriptorConfigurationImpl configuration) {
+  public void setDependencies(ExtendedPojoDescriptorDependenciesImpl dependencies) {
 
     getInitializationState().requireNotInitilized();
-    this.configuration = configuration;
+    this.dependencies = dependencies;
   }
 
   /**
-   * This method gets the {@link ExtendedPojoDescriptorConfigurationImpl}.
+   * This method gets the {@link ExtendedPojoDescriptorDependenciesImpl}.
    * 
-   * @return the {@link ExtendedPojoDescriptorConfigurationImpl}.
+   * @return the {@link ExtendedPojoDescriptorDependenciesImpl}.
    */
-  protected ExtendedPojoDescriptorConfigurationImpl getConfiguration() {
+  protected ExtendedPojoDescriptorDependenciesImpl getDependencies() {
 
-    return this.configuration;
+    return this.dependencies;
   }
 
 }

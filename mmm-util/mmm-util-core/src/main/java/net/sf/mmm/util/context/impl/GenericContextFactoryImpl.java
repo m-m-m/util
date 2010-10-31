@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 
@@ -22,7 +22,7 @@ import net.sf.mmm.util.context.api.MutableGenericContext;
  */
 @Singleton
 @Named
-public class GenericContextFactoryImpl extends AbstractLoggable implements GenericContextFactory {
+public class GenericContextFactoryImpl extends AbstractLoggableComponent implements GenericContextFactory {
 
   /**
    * The constructor.

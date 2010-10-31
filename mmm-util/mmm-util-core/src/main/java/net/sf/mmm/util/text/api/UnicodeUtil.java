@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a collection of utility functions that help with
  * unicode characters and texts.
@@ -13,6 +15,7 @@ package net.sf.mmm.util.text.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@ComponentSpecification
 public interface UnicodeUtil {
 
   // ** C0 controls **

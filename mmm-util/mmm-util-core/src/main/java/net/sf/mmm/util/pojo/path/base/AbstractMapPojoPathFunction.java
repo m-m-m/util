@@ -16,6 +16,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathContext;
  *        actual POJO.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractMapPojoPathFunction<VALUE> extends
     AbstractPojoPathFunction<Map<String, Object>, VALUE> {

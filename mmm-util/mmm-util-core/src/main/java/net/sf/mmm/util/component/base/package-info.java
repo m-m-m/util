@@ -10,7 +10,7 @@
  * that some methods have to be called before and others after initialization.<br>
  * For components of this project that do NOT have to inherit from anything else,
  * this package offers {@link net.sf.mmm.util.component.base.AbstractComponent} 
- * and {@link net.sf.mmm.util.component.base.AbstractLoggable} to
+ * and {@link net.sf.mmm.util.component.base.AbstractLoggableComponent} to
  * make writing components easier.
  */
 package net.sf.mmm.util.component.base;

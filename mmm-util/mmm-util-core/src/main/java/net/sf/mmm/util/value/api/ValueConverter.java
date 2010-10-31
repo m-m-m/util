@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -19,6 +20,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@ComponentSpecification(plugin = true)
 public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOURCE, TARGET> {
 
   /**

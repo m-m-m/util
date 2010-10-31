@@ -9,9 +9,9 @@ import java.net.URL;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the interface for a resource containing data. You can think of a
- * {@link DataResource} as a {@link java.io.File file} but it may come from
- * other sources than the filesystem.<br>
+ * This is the interface for a resource {@link #isData() potentially} containing
+ * data. You can think of a {@link DataResource} as a {@link java.io.File file}
+ * but it may come from other sources than the filesystem.<br>
  * The major reason for naming it {@link DataResource} is that
  * <code>Resource</code> is a very general name already occupied by
  * {@link javax.annotation.Resource}.

@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface used to {@link #build(Object) build} a
@@ -11,6 +12,7 @@ package net.sf.mmm.util.cli.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@ComponentSpecification
 public interface CliParserBuilder {
 
   /**

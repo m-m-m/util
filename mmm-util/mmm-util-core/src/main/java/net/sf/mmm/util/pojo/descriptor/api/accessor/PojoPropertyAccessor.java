@@ -15,6 +15,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract interface PojoPropertyAccessor extends PojoAttributeName {
 
@@ -96,8 +97,8 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * is a convenience method for {@link #getPropertyType()}.
    * {@link GenericType#getRetrievalClass() getUpperBound()} if the
    * {@link #getMode() mode} is for {@link PojoPropertyAccessorMode#isReading()
-   * reading} and {@link #getPropertyType()}.{@link GenericType#getAssignmentClass()
-   * getLowerBound()} otherwise.
+   * reading} and {@link #getPropertyType()}.
+   * {@link GenericType#getAssignmentClass() getLowerBound()} otherwise.
    * 
    * @return the {@link Class} reflecting the property.
    */

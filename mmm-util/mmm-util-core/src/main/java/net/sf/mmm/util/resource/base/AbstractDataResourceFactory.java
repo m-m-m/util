@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
+import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
-import net.sf.mmm.util.resource.api.spi.ResourceUri;
 
 /**
  * This is the abstract base implementation of the {@link DataResourceFactory}
@@ -16,7 +16,7 @@ import net.sf.mmm.util.resource.api.spi.ResourceUri;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public abstract class AbstractDataResourceFactory extends AbstractLoggable implements
+public abstract class AbstractDataResourceFactory extends AbstractLoggableComponent implements
     DataResourceFactory {
 
   /**
@@ -32,7 +32,7 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggable imple
    */
   public DataResource createDataResource(String resourceUri) throws ResourceUriUndefinedException {
 
-    ResourceUri uri = new ResourceUri(resourceUri);
+    ResourceUri uri = new ResourceUriImpl(resourceUri);
     if (uri.getSchemePrefix() == null) {
       throw new ResourceUriUndefinedException(resourceUri);
     }
@@ -44,10 +44,10 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggable imple
    * This method {@link #createDataResource(String) creates} the actual raw
    * {@link DataResource}.
    * 
-   * @param resourceUri is the parsed and qualified {@link ResourceUri}.
+   * @param resourceUri is the parsed and qualified {@link ResourceUriImpl}.
    * @return the created {@link DataResource}.
    * @throws ResourceUriUndefinedException if the given <code>resourceUri</code>
-   *         is undefined, e.g. the {@link ResourceUri#getSchemePrefix()
+   *         is undefined, e.g. the {@link ResourceUriImpl#getSchemePrefix()
    *         scheme-prefix} is NOT supported by this factory.
    */
   protected abstract DataResource createDataResource(ResourceUri resourceUri)
@@ -92,7 +92,7 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggable imple
     @Override
     public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 
-      ResourceUri resourceUri = new ResourceUri(relativePath);
+      ResourceUri resourceUri = new ResourceUriImpl(relativePath);
       DataResource result;
       if (resourceUri.getSchemePrefix() == null) {
         result = super.navigate(relativePath);

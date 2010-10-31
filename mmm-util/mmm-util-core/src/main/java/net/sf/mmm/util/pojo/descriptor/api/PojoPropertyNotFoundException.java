@@ -16,6 +16,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
  * @see PojoDescriptor#setProperty(Object, String, Object)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyNotFoundException extends NlsRuntimeException {
 

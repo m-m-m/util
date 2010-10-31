@@ -108,7 +108,7 @@ public interface NlsFormatterManager {
    * {@link java.text.MessageFormat}. Instead this implementation provides a
    * clean configuration via <code>formatStyle</code> when
    * <code>formatType</code> is <code>choice</code> (see
-   * {@link net.sf.mmm.util.nls.impl.NlsFormatterChoice}).
+   * {@link net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice}).
    * 
    * @see java.text.MessageFormat
    * 

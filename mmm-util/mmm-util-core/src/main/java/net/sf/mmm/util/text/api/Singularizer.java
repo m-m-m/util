@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
@@ -13,6 +14,7 @@ import net.sf.mmm.util.transformer.api.Transformer;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@ComponentSpecification
 public interface Singularizer extends Transformer<String> {
 
   /**

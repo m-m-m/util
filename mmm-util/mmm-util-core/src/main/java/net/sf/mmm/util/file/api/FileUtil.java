@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.List;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.file.base.FileAccessPermissions;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
@@ -19,6 +20,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface FileUtil {
 
   /** The path segment indicating the current folder itself. */

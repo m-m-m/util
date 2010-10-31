@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface used to {@link #build(String) build} a
  * {@link Justification} from a {@link String}. It therefore expects the
@@ -80,6 +82,7 @@ package net.sf.mmm.util.text.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
+@ComponentSpecification
 public interface JustificationBuilder {
 
   /**

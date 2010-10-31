@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a collection of utility functions for very general
  * operations especially for dealing with Arrays.
@@ -15,6 +17,7 @@ package net.sf.mmm.util.lang.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface BasicUtil {
 
   /** An empty int array. */

@@ -19,7 +19,7 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.XMLEvent;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
@@ -36,7 +36,7 @@ import net.sf.mmm.util.xml.api.XmlGenericException;
  */
 @Singleton
 @Named
-public final class StaxUtilImpl extends AbstractLoggable implements StaxUtil {
+public final class StaxUtilImpl extends AbstractLoggableComponent implements StaxUtil {
 
   /** @see #getInstance() */
   private static StaxUtil instance;

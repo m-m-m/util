@@ -4,7 +4,7 @@
 package net.sf.mmm.util.pojo.descriptor.base.accessor;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 
 /**
  * This is the abstract base implementation of a
@@ -12,15 +12,16 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
  * that acts as proxy to a {@link #getDelegate() delegate} allowing to add new
  * ways to access a property.<br>
  * E.g. if the {@link #getDelegate() delegate} is a
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}
- * that returns an array or a {@link java.util.List} then this adapter may
- * expose it as
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter}
- * or
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE size}
- * accessor.
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
+ * getter} that returns an array or a {@link java.util.List} then this adapter
+ * may expose it as
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED
+ * indexed getter} or
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE
+ * size} accessor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyAccessorProxyAdapter extends
     AbstractPojoPropertyAccessorProxy {
@@ -28,22 +29,22 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapter extends
   /** @see #getDelegate() */
   private final PojoPropertyAccessorNonArg containerGetAccessor;
 
-  /** @see #getConfiguration() */
-  private final PojoDescriptorConfiguration configuration;
+  /** @see #getDependencies() */
+  private final PojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.
    * 
-   * @param configuration is the configuration to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array,
    *        map or collection property.
    */
-  public AbstractPojoPropertyAccessorProxyAdapter(PojoDescriptorConfiguration configuration,
+  public AbstractPojoPropertyAccessorProxyAdapter(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor) {
 
     super();
     this.containerGetAccessor = containerGetAccessor;
-    this.configuration = configuration;
+    this.dependencies = dependencies;
   }
 
   /**
@@ -56,11 +57,11 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapter extends
   }
 
   /**
-   * @return the configuration
+   * @return the dependencies
    */
-  protected PojoDescriptorConfiguration getConfiguration() {
+  protected PojoDescriptorDependencies getDependencies() {
 
-    return this.configuration;
+    return this.dependencies;
   }
 
 }

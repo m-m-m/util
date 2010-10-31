@@ -12,6 +12,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * {@link net.sf.mmm.util.pojo.api.Pojo} was <code>null</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathSegmentIsNullException extends PojoPathException {
 

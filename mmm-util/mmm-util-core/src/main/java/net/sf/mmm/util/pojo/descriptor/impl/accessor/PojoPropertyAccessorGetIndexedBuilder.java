@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexedNonArgBuilder;
 
@@ -23,6 +23,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexed
  * getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -51,7 +52,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorIndexedNonArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     if (parameterTypes.length == 1) {
@@ -70,7 +71,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
           if (propertyName != null) {
             return new PojoPropertyAccessorIndexedNonArgMethod(propertyName,
                 method.getGenericReturnType(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED,
-                descriptor, configuration, method);
+                descriptor, dependencies, method);
           }
         }
       }
@@ -82,7 +83,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorIndexedNonArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     return null;
   }

@@ -8,13 +8,13 @@ import java.util.Iterator;
 
 /**
  * This is the interface used to find {@link Method methods} that can
- * (potentially)
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor access} a
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property}
- * of a given
+ * (potentially) {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+ * access} a {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
+ * property} of a given
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoMethodIntrospector {
 

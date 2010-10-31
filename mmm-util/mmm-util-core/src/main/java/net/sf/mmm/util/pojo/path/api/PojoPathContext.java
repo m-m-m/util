@@ -16,6 +16,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  * as being extendable.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPathContext {
 

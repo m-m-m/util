@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
-import net.sf.mmm.util.resource.api.spi.ResourceUri;
+import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.base.FileResource;
 import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 
@@ -25,7 +25,7 @@ import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 @Named
 public class FileResourceProvider extends AbstractDataResourceProvider<FileResource> {
 
-  /** @see #createResource(ResourceUri) */
+  /** @see #createResource(ResourceUriImpl) */
   private FileUtil fileUtil;
 
   /**

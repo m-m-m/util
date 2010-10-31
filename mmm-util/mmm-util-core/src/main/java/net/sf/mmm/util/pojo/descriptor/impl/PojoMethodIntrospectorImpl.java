@@ -15,6 +15,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * This is the implementation of the {@link PojoMethodIntrospector} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector implements
     PojoMethodIntrospector {

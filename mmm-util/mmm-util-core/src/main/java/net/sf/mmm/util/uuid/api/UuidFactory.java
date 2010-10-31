@@ -5,6 +5,8 @@ package net.sf.mmm.util.uuid.api;
 
 import java.util.UUID;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a factory used to create {@link UUID}s. There can
  * be different implementations for the various {@link UUID#variant() variants}
@@ -13,6 +15,7 @@ import java.util.UUID;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@ComponentSpecification
 public interface UuidFactory {
 
   /**

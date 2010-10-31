@@ -12,6 +12,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * {@link PojoPathFunctionManager#getFunction(String) registered}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathFunctionUndefinedException extends PojoPathException {
 

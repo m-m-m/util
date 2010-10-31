@@ -6,8 +6,11 @@ package net.sf.mmm.util.nls.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsFormatter;
+import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This class is like a {@link Map} to
@@ -22,7 +25,7 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public class NlsFormatterMap extends AbstractLoggable {
+public class NlsFormatterMap extends AbstractLoggableComponent {
 
   /** @see #getFormatter(String, String) */
   private final Map<String, Map<String, NlsFormatter<?>>> builders;
@@ -34,6 +37,21 @@ public class NlsFormatterMap extends AbstractLoggable {
 
     super();
     this.builders = new HashMap<String, Map<String, NlsFormatter<?>>>();
+  }
+
+  /**
+   * This method registers the given <code>formatBuilder</code>.
+   * 
+   * @param formatter is the {@link NlsFormatterPlugin} to register.
+   * @return the {@link NlsFormatter} that was registered for the given
+   *         {@link NlsFormatterPlugin#getType() type} and
+   *         {@link NlsFormatterPlugin#getStyle() style} and is now replaced by
+   *         the given <code>formatter</code> or <code>null</code> if no
+   *         {@link NlsFormatter} was replaced.
+   */
+  public NlsFormatter<?> registerFormatter(NlsFormatterPlugin<?> formatter) {
+
+    return registerFormatter(formatter, formatter.getType(), formatter.getStyle());
   }
 
   /**
@@ -51,23 +69,15 @@ public class NlsFormatterMap extends AbstractLoggable {
   public NlsFormatter<?> registerFormatter(NlsFormatter<?> formatter, String formatType,
       String formatStyle) {
 
-    if (formatter == null) {
-      throw new NullPointerException();
-    }
-    if (formatType == null) {
-      throw new NullPointerException();
+    NlsNullPointerException.checkNotNull(NlsFormatter.class, formatter);
+    if ((formatType == null) && (formatStyle != null)) {
+      throw new NullPointerException("formatType");
     }
     Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
     if (style2builderMap == null) {
       style2builderMap = new HashMap<String, NlsFormatter<?>>();
       this.builders.put(formatType, style2builderMap);
     }
-    // if (style2builderMap.containsKey(formatStyle)) {
-    // // if NLS is broken there is no need for NlsThrowable here...
-    // throw new IllegalStateException("Format-builder for type (" +
-    // formatType + ") and style ("
-    // + formatStyle + ") already registered!");
-    // }
     return style2builderMap.put(formatStyle, formatter);
   }
 
@@ -87,10 +97,11 @@ public class NlsFormatterMap extends AbstractLoggable {
   public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
 
     NlsFormatter<?> result = null;
-    if (formatType != null) {
-      Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
-      if (style2builderMap != null) {
-        result = style2builderMap.get(formatStyle);
+    Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
+    if (style2builderMap != null) {
+      result = style2builderMap.get(formatStyle);
+      if ((result == null) && (formatStyle == null)) {
+        result = style2builderMap.get(NlsFormatterManager.STYLE_MEDIUM);
       }
     }
     return result;

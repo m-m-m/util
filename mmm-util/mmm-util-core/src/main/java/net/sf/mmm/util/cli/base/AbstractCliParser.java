@@ -30,7 +30,7 @@ import net.sf.mmm.util.cli.api.CliOutputSettings;
 import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -50,7 +50,7 @@ import net.sf.mmm.util.text.api.TextTableInfo;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractCliParser extends AbstractLoggable implements CliParser {
+public abstract class AbstractCliParser extends AbstractLoggableObject implements CliParser {
 
   /**
    * The {@link Pattern} for a mix of multiple short-options. E.g. "-vpa"
@@ -61,8 +61,8 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
   /** @see #getCliState() */
   private final CliState cliState;
 
-  /** @see #getConfiguration() */
-  private final CliParserConfiguration configuration;
+  /** @see #getDependencies() */
+  private final CliParserDependencies dependencies;
 
   /** The {@link CliValueMap}. */
   private final CliValueMap valueMap;
@@ -75,20 +75,19 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    * 
    * @param state is the {@link #getState() state}.
    * @param cliState is the {@link CliState}.
-   * @param configuration is the {@link #getConfiguration() configuration} with
+   * @param dependencies are the {@link #getDependencies() dependencies} with
    *        the required components.
    */
-  public AbstractCliParser(Object state, CliState cliState, CliParserConfiguration configuration) {
+  public AbstractCliParser(Object state, CliState cliState, CliParserDependencies dependencies) {
 
     super();
     this.state = state;
     this.cliState = cliState;
-    this.configuration = configuration;
+    this.dependencies = dependencies;
     for (CliOptionContainer option : this.cliState.getOptions()) {
       checkOption(option);
     }
-    initialize();
-    this.valueMap = new CliValueMap(cliState, configuration, getLogger());
+    this.valueMap = new CliValueMap(cliState, dependencies, getLogger());
   }
 
   /**
@@ -184,7 +183,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       argument = StringUtil.TRUE;
     } else if (Boolean.class.equals(propertyClass)) {
       String lookahead = parameterConsumer.getCurrent();
-      Boolean value = this.configuration.getStringUtil().parseBoolean(lookahead);
+      Boolean value = this.dependencies.getStringUtil().parseBoolean(lookahead);
       if (value == null) {
         // option (e.g. "--trigger") is not followed by "true" or "false"
         CliStyleHandling handling = this.cliState.getCliStyle().optionMissingBooleanValue();
@@ -368,9 +367,9 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
    */
   public void printHelp(Appendable appendable, CliOutputSettings settings) {
 
-    NlsMessageFactory nlsMessageFactory = this.configuration.getNlsMessageFactory();
+    NlsMessageFactory nlsMessageFactory = this.dependencies.getNlsMessageFactory();
 
-    CliHelpWriter writer = new CliHelpWriter(appendable, settings, this.configuration,
+    CliHelpWriter writer = new CliHelpWriter(appendable, settings, this.dependencies,
         this.cliState, this.state);
 
     Map<String, Object> nlsArguments = writer.getArguments();
@@ -413,7 +412,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
           }
           CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
           if (helpInfo == null) {
-            helpInfo = new CliOptionHelpInfo(option, this.configuration, settings);
+            helpInfo = new CliOptionHelpInfo(option, this.dependencies, settings);
             option2HelpMap.put(cliOption, helpInfo);
           }
           if (helpInfo.length > maxOptionColumnWidth) {
@@ -431,7 +430,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
           for (CliArgumentContainer argumentContainer : argumentList) {
             cliArgument = argumentContainer.getArgument();
             CliArgumentHelpInfo argumentHelpInfo = new CliArgumentHelpInfo(argumentContainer,
-                this.configuration, settings);
+                this.dependencies, settings);
             int argLength = argumentHelpInfo.name.length();
             if (argLength > maxArgumentColumnWidth) {
               maxArgumentColumnWidth = argLength;
@@ -481,11 +480,11 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
   }
 
   /**
-   * @return the {@link CliParserConfiguration configuration} for this parser.
+   * @return the {@link CliParserDependencies dependencies} for this parser.
    */
-  protected CliParserConfiguration getConfiguration() {
+  protected CliParserDependencies getDependencies() {
 
-    return this.configuration;
+    return this.dependencies;
   }
 
   /**
@@ -615,10 +614,10 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
      * The constructor.
      * 
      * @param option is the {@link CliOptionContainer}.
-     * @param configuration is the {@link CliParserConfiguration}.
+     * @param dependencies are the {@link CliParserDependencies}.
      * @param settings are the {@link CliOutputSettings}.
      */
-    public CliOptionHelpInfo(CliOptionContainer option, CliParserConfiguration configuration,
+    public CliOptionHelpInfo(CliOptionContainer option, CliParserDependencies dependencies,
         CliOutputSettings settings) {
 
       super();
@@ -627,9 +626,9 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       int maxLength = settings.getWidth() / 2 - 1;
       Locale locale = settings.getLocale();
       CliOption cliOption = this.option.getOption();
-      NlsMessage operandMessage = configuration.getNlsMessageFactory().create(cliOption.operand());
+      NlsMessage operandMessage = dependencies.getNlsMessageFactory().create(cliOption.operand());
       this.operand = operandMessage.getLocalizedMessage(locale,
-          configuration.getNlsTemplateResolver());
+          dependencies.getNlsTemplateResolver());
       syntaxBuilder.append(cliOption.name());
       this.lineLength = syntaxBuilder.length();
       // this.lineIndex = this.lineLength;
@@ -731,18 +730,18 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
      * The constructor.
      * 
      * @param argument is the {@link CliArgumentContainer}.
-     * @param configuration is the {@link CliParserConfiguration}.
+     * @param dependencies are the {@link CliParserDependencies}.
      * @param settings are the {@link CliOutputSettings}.
      */
-    public CliArgumentHelpInfo(CliArgumentContainer argument, CliParserConfiguration configuration,
+    public CliArgumentHelpInfo(CliArgumentContainer argument, CliParserDependencies dependencies,
         CliOutputSettings settings) {
 
       super();
       this.argument = argument;
-      NlsMessage message = configuration.getNlsMessageFactory().create(
-          argument.getArgument().name());
+      NlsMessage message = dependencies.getNlsMessageFactory()
+          .create(argument.getArgument().name());
       this.name = message.getLocalizedMessage(settings.getLocale(),
-          configuration.getNlsTemplateResolver());
+          dependencies.getNlsTemplateResolver());
     }
 
     /**
@@ -785,8 +784,8 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     /** The {@link TextColumnInfo} for the main column. */
     private final TextColumnInfo mainColumnInfo;
 
-    /** The {@link CliParserConfiguration}. */
-    private final CliParserConfiguration configuration;
+    /** The {@link CliParserDependencies}. */
+    private final CliParserDependencies dependencies;
 
     /** The NLS-arguments. */
     private final Map<String, Object> arguments;
@@ -799,12 +798,12 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
      * 
      * @param appendable is the {@link Appendable} where to write help to.
      * @param settings is the {@link CliOutputSettings}.
-     * @param configuration is the {@link CliParserConfiguration}.
+     * @param dependencies are the {@link CliParserDependencies}.
      * @param cliState is the {@link CliState}.
      * @param state is the {@link AbstractCliParser#getState() state-object}.
      */
     public CliHelpWriter(Appendable appendable, CliOutputSettings settings,
-        CliParserConfiguration configuration, CliState cliState, Object state) {
+        CliParserDependencies dependencies, CliState cliState, Object state) {
 
       super();
       this.appendable = appendable;
@@ -830,7 +829,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       this.arguments.put("optionCount", Integer.valueOf(cliState.getOptions().size()));
       this.arguments.put("argumentCount", Integer.valueOf(cliState.getArguments().size()));
 
-      this.configuration = configuration;
+      this.dependencies = dependencies;
     }
 
     /**
@@ -851,9 +850,8 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
      */
     public void printText(String nlsText) {
 
-      LineWrapper lineWrapper = this.configuration.getLineWrapper();
-      NlsMessage message = this.configuration.getNlsMessageFactory()
-          .create(nlsText, this.arguments);
+      LineWrapper lineWrapper = this.dependencies.getLineWrapper();
+      NlsMessage message = this.dependencies.getNlsMessageFactory().create(nlsText, this.arguments);
       String text = message.getLocalizedMessage(this.mainColumnInfo.getLocale());
       lineWrapper.wrap(this.appendable, this.tableInfo, text, this.mainColumnInfo);
     }
@@ -873,7 +871,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
       if (!argumentList.isEmpty()) {
         printText(NlsBundleUtilCore.MSG_CLI_ARGUMENTS);
         this.parameterColumnInfo.setWidth(maxArgumentColumnWidth);
-        LineWrapper lineWrapper = this.configuration.getLineWrapper();
+        LineWrapper lineWrapper = this.dependencies.getLineWrapper();
 
         for (CliArgumentHelpInfo helpInfo : argumentList) {
           CliArgumentContainer argumentContainer = helpInfo.argument;
@@ -883,7 +881,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
             defaultValue = argumentContainer.getGetter().invoke(this.state);
           }
           this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
-          NlsMessage usageMessage = this.configuration.getNlsMessageFactory().create(
+          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(
               cliArgument.usage(), this.arguments);
           String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
 
@@ -927,7 +925,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
     private void printOptions(Collection<CliOptionContainer> modeOptions,
         Map<CliOption, CliOptionHelpInfo> option2HelpMap, boolean required) {
 
-      LineWrapper lineWrapper = this.configuration.getLineWrapper();
+      LineWrapper lineWrapper = this.dependencies.getLineWrapper();
       // required options
       boolean firstOption = true;
       for (CliOptionContainer option : modeOptions) {
@@ -950,7 +948,7 @@ public abstract class AbstractCliParser extends AbstractLoggable implements CliP
             defaultValue = option.getGetter().invoke(this.state);
           }
           this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
-          NlsMessage usageMessage = this.configuration.getNlsMessageFactory().create(
+          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(
               cliOption.usage(), this.arguments);
           String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
 

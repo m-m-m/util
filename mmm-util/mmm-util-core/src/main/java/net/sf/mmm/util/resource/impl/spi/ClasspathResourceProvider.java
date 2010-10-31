@@ -6,7 +6,7 @@ package net.sf.mmm.util.resource.impl.spi;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.resource.api.spi.ResourceUri;
+import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 

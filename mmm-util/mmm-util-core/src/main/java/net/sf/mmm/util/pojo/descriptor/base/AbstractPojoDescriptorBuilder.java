@@ -8,7 +8,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -18,8 +18,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable implements
+public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements
     PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
@@ -47,18 +48,18 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
   }
 
   /**
-   * This method gets the required configuration.
+   * This method gets the required dependencies.
    * 
-   * @return the {@link PojoDescriptorConfiguration}.
+   * @return the {@link PojoDescriptorDependencies}.
    */
-  protected abstract PojoDescriptorConfiguration getConfiguration();
+  protected abstract PojoDescriptorDependencies getDependencies();
 
   /**
    * {@inheritDoc}
    */
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
-    GenericType<POJO> genericType = getConfiguration().getReflectionUtil().createGenericType(
+    GenericType<POJO> genericType = getDependencies().getReflectionUtil().createGenericType(
         pojoClass);
     return getDescriptor(genericType);
   }
@@ -68,7 +69,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggable imp
    */
   public PojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
-    GenericType<?> genericType = getConfiguration().getReflectionUtil().createGenericType(pojoType);
+    GenericType<?> genericType = getDependencies().getReflectionUtil().createGenericType(pojoType);
     return getDescriptor(genericType);
   }
 

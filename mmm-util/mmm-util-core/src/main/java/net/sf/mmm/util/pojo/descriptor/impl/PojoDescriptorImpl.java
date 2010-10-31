@@ -35,6 +35,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @param <POJO> is the templated type of the {@link #getPojoClass() POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
 

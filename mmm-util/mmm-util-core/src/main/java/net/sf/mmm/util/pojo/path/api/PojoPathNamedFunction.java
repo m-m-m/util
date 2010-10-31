@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a {@link PojoPathFunction} that has a
  * {@link #getName() name}. This allows to register such functions as plugin via
@@ -14,6 +16,7 @@ package net.sf.mmm.util.pojo.path.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@ComponentSpecification(plugin = true)
 public interface PojoPathNamedFunction<IN, VALUE> extends PojoPathFunction<IN, VALUE> {
 
   /**

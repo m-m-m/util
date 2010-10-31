@@ -9,13 +9,15 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
+import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
@@ -24,7 +26,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubFormatter<Object> {
+public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsFormatterPlugin<Object> {
 
   /** @see #format(Calendar, Locale, Appendable) */
   private Iso8601Util iso8601Util;
@@ -34,7 +36,7 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubForm
    */
   public AbstractNlsFormatterDateIso8601() {
 
-    this(Iso8601UtilImpl.getInstance());
+    super();
   }
 
   /**
@@ -47,6 +49,29 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubForm
     super();
     NlsNullPointerException.checkNotNull(Iso8601Util.class, iso8601Util);
     this.iso8601Util = iso8601Util;
+    initialize();
+  }
+
+  /**
+   * @param iso8601Util is the iso8601Util to set
+   */
+  @Inject
+  public void setIso8601Util(Iso8601Util iso8601Util) {
+
+    getInitializationState().requireNotInitilized();
+    this.iso8601Util = iso8601Util;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.iso8601Util == null) {
+      this.iso8601Util = Iso8601UtilImpl.getInstance();
+    }
   }
 
   /**
@@ -74,8 +99,7 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsSubForm
   /**
    * {@inheritDoc}
    */
-  @Override
-  protected String getStyle() {
+  public String getStyle() {
 
     return NlsFormatterManager.STYLE_ISO_8601;
   }

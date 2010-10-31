@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -17,6 +17,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * interface used to access a {@link Field}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoPropertyAccessorBase {
 
@@ -27,13 +28,13 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
    * The constructor.
    * 
    * @param descriptor is the descriptor this accessor is intended for.
-   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param field is the {@link #getField() field} to access.
    */
   public AbstractPojoPropertyAccessorField(PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration, Field field) {
+      PojoDescriptorDependencies dependencies, Field field) {
 
-    this(field.getName(), field.getGenericType(), descriptor, configuration, field);
+    this(field.getName(), field.getGenericType(), descriptor, dependencies, field);
   }
 
   /**
@@ -43,13 +44,13 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
    * @param descriptor is the descriptor this accessor is intended for.
-   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param field is the {@link #getField() field} to access.
    */
   public AbstractPojoPropertyAccessorField(String propertyName, Type propertyType,
-      PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration, Field field) {
+      PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies, Field field) {
 
-    super(propertyName, propertyType, descriptor, configuration);
+    super(propertyName, propertyType, descriptor, dependencies);
     this.field = field;
   }
 

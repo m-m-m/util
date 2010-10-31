@@ -30,14 +30,14 @@ public class CliValueContainerMap extends AbstractCliValueContainerContainer {
    * @param parameterContainer is the {@link #getParameterContainer()
    *        parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
-   * @param configuraiton is the {@link #getConfiguration() configuration}.
+   * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    * @param value is the initial, empty {@link Map}-{@link #getValue() value}.
    */
   public CliValueContainerMap(CliParameterContainer parameterContainer, CliState cliState,
-      CliParserConfiguration configuraiton, Logger logger, Map<Object, Object> value) {
+      CliParserDependencies dependencies, Logger logger, Map<Object, Object> value) {
 
-    super(parameterContainer, cliState, configuraiton, logger);
+    super(parameterContainer, cliState, dependencies, logger);
     assert (value != null);
     this.map = value;
   }
@@ -75,7 +75,7 @@ public class CliValueContainerMap extends AbstractCliValueContainerContainer {
     // key
     String keyString = entry.substring(0, splitIndex);
     GenericType<?> keyType = propertyType.getKeyType();
-    GenericValueConverter<Object> converter = getConfiguration().getConverter();
+    GenericValueConverter<Object> converter = getDependencies().getConverter();
     Object key = converter.convertValue(keyString, getParameterContainer(),
         keyType.getAssignmentClass(), keyType);
     // value

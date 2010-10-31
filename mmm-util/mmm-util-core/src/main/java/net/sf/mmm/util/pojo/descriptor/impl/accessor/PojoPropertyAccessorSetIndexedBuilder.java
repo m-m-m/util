@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexedOneArgBuilder;
 
@@ -23,6 +23,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexed
  * setter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -48,7 +49,7 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorIndexedOneArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     String methodName = method.getName();
     // is property read method (getter)?
@@ -60,11 +61,11 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
         Class<?> argument2Class = parameterTypes[1];
         if (isIntegerType(argument1Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument2Class,
-              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method,
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, dependencies, method,
               false);
         } else if (isIntegerType(argument2Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument1Class,
-              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, configuration, method,
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, dependencies, method,
               true);
         }
       }
@@ -76,7 +77,7 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorIndexedOneArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     return null;
   }

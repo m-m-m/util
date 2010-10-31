@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.base;
 
 import java.lang.reflect.Array;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -15,8 +15,9 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * instances}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
-public class SimplePojoFactory extends AbstractLoggable implements PojoFactory {
+public class SimplePojoFactory extends AbstractLoggableComponent implements PojoFactory {
 
   /**
    * {@inheritDoc}

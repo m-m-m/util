@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.api.DetectorStreamProvider;
@@ -28,7 +28,7 @@ import net.sf.mmm.util.pool.base.NoByteArrayPool;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractDetectorStreamProvider extends AbstractLoggable implements
+public abstract class AbstractDetectorStreamProvider extends AbstractLoggableComponent implements
     DetectorStreamProvider {
 
   /** @see #getProcessorFactoryList() */

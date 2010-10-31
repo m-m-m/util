@@ -144,6 +144,7 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * @see PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
 

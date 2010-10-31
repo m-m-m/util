@@ -17,7 +17,7 @@ import javax.xml.bind.MarshalException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
@@ -39,7 +39,7 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class XmlBeanMapper<T> extends AbstractLoggable {
+public class XmlBeanMapper<T> extends AbstractLoggableComponent {
 
   /** @see #getJaxbContext() */
   private final JAXBContext jaxbContext;

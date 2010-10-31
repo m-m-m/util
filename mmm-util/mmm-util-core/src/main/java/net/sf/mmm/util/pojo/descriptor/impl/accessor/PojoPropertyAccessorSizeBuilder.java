@@ -15,7 +15,7 @@ import net.sf.mmm.util.math.base.NumberTypeImpl;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgBuilder;
 
@@ -24,6 +24,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgB
  * interface for {@link PojoPropertyAccessorNonArgMode#GET getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -49,7 +50,7 @@ public class PojoPropertyAccessorSizeBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
@@ -63,7 +64,7 @@ public class PojoPropertyAccessorSizeBuilder extends
           if (propertyName != null) {
             return new PojoPropertyAccessorNonArgMethod(propertyName,
                 method.getGenericReturnType(), PojoPropertyAccessorNonArgMode.GET_SIZE, descriptor,
-                configuration, method);
+                dependencies, method);
           }
         }
       }
@@ -75,7 +76,7 @@ public class PojoPropertyAccessorSizeBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     // return new PojoPropertyAccessorGetField(field);
     return null;

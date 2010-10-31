@@ -6,12 +6,15 @@ package net.sf.mmm.util.collection.api;
 import java.util.Collection;
 import java.util.Map;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a manager of {@link CollectionFactory} instances.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
+@ComponentSpecification
 @SuppressWarnings("rawtypes")
 public interface CollectionFactoryManager {
 

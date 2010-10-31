@@ -143,18 +143,18 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_IO_COPY = "An unexpetected error has occured while copying data!";
 
   /** @see net.sf.mmm.util.file.api.FileAlreadyExistsException */
-  public static final String ERR_FILE_ALREADY_EXISTS = "The {directory==true?'directory':'file'} \"{file}\" already exists!";
+  public static final String ERR_FILE_ALREADY_EXISTS = "The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" already exists!";
 
   /** @see net.sf.mmm.util.file.api.FileNotExistsException */
-  public static final String ERR_FILE_NOT_EXISTS = "The {directory==true?'directory':'file'} \"{file}\" does not exist!";
+  public static final String ERR_FILE_NOT_EXISTS = "The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" does not exist!";
 
   /** @see net.sf.mmm.util.file.api.FileCreationFailedException */
   public static final String ERR_FILE_CREATION_FAILED = "The "
-      + "{directory==true?'directory':'file'} \"{file}\" could not be created!";
+      + "{directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be created!";
 
   /** @see net.sf.mmm.util.file.api.FileDeletionFailedException */
   public static final String ERR_FILE_DELETION_FAILED = "The "
-      + "{directory==true?'directory':'file'} \"{file}\" could not be deleted!";
+      + "{directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be deleted!";
 
   /** @see net.sf.mmm.util.nls.api.NlsNullPointerException */
   public static final String ERR_ARGUMENT_NULL = "The object \"{object}\" is null!";
@@ -228,10 +228,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.api.BufferExceedException */
   public static final String ERR_BUFFER_LENGTH_EXCEED = "Offset or length \"{value}\" exceeds buffer with capacity \"{capacity}\"!";
 
-  /** @see net.sf.mmm.util.nls.impl.NlsFormatterChoiceNoElseConditionException */
+  /** @see net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceNoElseConditionException */
   public static final String ERR_NLS_CHOICE_NO_ELSE = "A choice format needs to end with an (else)-condition!";
 
-  /** @see net.sf.mmm.util.nls.impl.NlsFormatterChoiceOnlyElseConditionException */
+  /** @see net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceOnlyElseConditionException */
   public static final String ERR_NLS_CHOICE_ONLY_ELSE = "A choice format needs to have at least one regular condition before (else)-condition!";
 
   /** @see net.sf.mmm.util.xml.base.XmlInvalidException */

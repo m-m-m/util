@@ -12,13 +12,14 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
  * your own custom mode by extending this class.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorIndexedNonArgMode extends
     PojoPropertyAccessorMode<PojoPropertyAccessorIndexedNonArg> {
 
   /**
-   * The mode for a
-   * {@link PojoPropertyAccessorIndexedOneArg setter of an indexed property}.
+   * The mode for a {@link PojoPropertyAccessorIndexedOneArg setter of an
+   * indexed property}.
    */
   public static final PojoPropertyAccessorIndexedNonArgMode GET_INDEXED = new PojoPropertyAccessorIndexedNonArgMode(
       "get-indexed");

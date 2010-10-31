@@ -89,6 +89,9 @@ public interface NlsObject {
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_ANNOTATION = "annotation";
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_LOCATION = "location";
+
   /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.

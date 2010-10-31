@@ -6,6 +6,7 @@ package net.sf.mmm.util.context.api;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface for a factory of generic {@link MutableGenericContext
@@ -14,6 +15,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
+@ComponentSpecification
 public interface GenericContextFactory {
 
   /**

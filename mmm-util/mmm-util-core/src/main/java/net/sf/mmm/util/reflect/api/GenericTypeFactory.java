@@ -5,6 +5,8 @@ package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.Type;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a factory with ability to create
  * {@link GenericType}s.
@@ -12,6 +14,7 @@ import java.lang.reflect.Type;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface GenericTypeFactory {
 
   /**

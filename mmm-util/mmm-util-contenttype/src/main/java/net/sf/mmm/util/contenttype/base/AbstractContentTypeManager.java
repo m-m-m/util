@@ -6,7 +6,7 @@ package net.sf.mmm.util.contenttype.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.contenttype.api.ContentType;
 import net.sf.mmm.util.contenttype.api.ContentTypeManager;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractContentTypeManager<TYPE extends ContentType<?>> extends
-    AbstractLoggable implements ContentTypeManager {
+    AbstractLoggableComponent implements ContentTypeManager {
 
   /** @see #getContentType(String) */
   private final Map<String, TYPE> id2contentTypeMap;

@@ -19,6 +19,7 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named

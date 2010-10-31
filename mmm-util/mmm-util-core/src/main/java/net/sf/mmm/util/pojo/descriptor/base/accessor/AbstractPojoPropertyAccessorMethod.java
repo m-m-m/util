@@ -8,9 +8,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This is the abstract implementation of the
@@ -18,6 +18,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * interface used to access a {@link Method}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPropertyAccessorBase {
 
@@ -34,20 +35,20 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
    * @param descriptor is the descriptor this accessor is intended for.
-   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
    */
   public AbstractPojoPropertyAccessorMethod(String propertyName, Type propertyType,
-      PojoDescriptor<?> descriptor, PojoDescriptorConfiguration configuration, Method method) {
+      PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies, Method method) {
 
-    super(propertyName, propertyType, descriptor, configuration);
+    super(propertyName, propertyType, descriptor, dependencies);
     this.method = method;
     Type type = method.getGenericReturnType();
     // == or equals ???
     if (type == propertyType) {
       this.returnType = getPropertyType();
     } else {
-      ReflectionUtil util = configuration.getReflectionUtil();
+      ReflectionUtil util = dependencies.getReflectionUtil();
       this.returnType = util.createGenericType(type, descriptor.getPojoType());
     }
     // if (mode.isReading()) {

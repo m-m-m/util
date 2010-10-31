@@ -11,6 +11,7 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * <code>index</code> in an indexed property.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPropertyAccessorIndexedOneArg extends PojoPropertyAccessor {
 
@@ -25,8 +26,8 @@ public interface PojoPropertyAccessorIndexedOneArg extends PojoPropertyAccessor 
    * 
    * @param pojoInstance is the instance of the POJO where to access the
    *        property. Has to be an instance of the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass() type}
-   *        from where this accessor was created for.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass()
+   *        type} from where this accessor was created for.
    * @param index is the position in the indexed property where to apply (e.g.
    *        set or insert) the given <code>item</code>.
    * @param item is the value to apply (e.g. set or insert) as element of the

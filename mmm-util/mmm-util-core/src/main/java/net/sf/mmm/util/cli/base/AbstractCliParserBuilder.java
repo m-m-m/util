@@ -10,7 +10,7 @@ import net.sf.mmm.util.cli.api.CliParserBuilder;
 import net.sf.mmm.util.cli.api.CliParserExcepiton;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -37,8 +37,8 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractCliParserBuilder extends AbstractLoggable implements
-    CliParserBuilder, CliParserConfiguration {
+public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent implements
+    CliParserBuilder, CliParserDependencies {
 
   /** @see #getDescriptorBuilderFactory() */
   private PojoDescriptorBuilderFactory descriptorBuilderFactory;
@@ -287,6 +287,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggable implemen
   /**
    * @param nlsMessageFactory is the nlsMessageFactory to set
    */
+  @Inject
   public void setNlsMessageFactory(NlsMessageFactory nlsMessageFactory) {
 
     getInitializationState().requireNotInitilized();

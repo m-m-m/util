@@ -11,6 +11,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedO
  * {@link PojoPropertyAccessorIndexedOneArg indexed one-arg accessor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPropertyAccessorIndexedOneArgBuilder extends
     PojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedOneArg> {

@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.base.ArrayListFactory;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
@@ -26,7 +26,7 @@ import net.sf.mmm.util.event.api.EventSource;
  * @since 1.0.1
  */
 public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> extends
-    AbstractLoggable implements EventSource<E, L> {
+    AbstractLoggableComponent implements EventSource<E, L> {
 
   /** the registered listeners */
   private final Collection<L> listeners;

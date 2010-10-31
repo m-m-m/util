@@ -14,6 +14,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * interface that delegates to another {@link PojoPropertyAccessor accessor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoPropertyAccessor {
 

@@ -3,18 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the interface for a generic factory used to
  * {@link #newInstance(Class) create new instances} of
- * {@link net.sf.mmm.util.pojo.api.Pojo}s.<br>
- * {@link net.sf.mmm.util.pojo.api.Pojo} is a shortcut for
- * <em>Plain Old Java Object</em> and simply means any Java object. Typically
- * a {@link net.sf.mmm.util.pojo.api.Pojo} has a public non-arg constructor.
+ * {@link net.sf.mmm.util.pojo.api.Pojo}s.<br> {@link net.sf.mmm.util.pojo.api.Pojo}
+ * is a shortcut for <em>Plain Old Java Object</em> and simply means any Java
+ * object. Typically a {@link net.sf.mmm.util.pojo.api.Pojo} has a public
+ * non-arg constructor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification
 public interface PojoFactory {
 
   /**

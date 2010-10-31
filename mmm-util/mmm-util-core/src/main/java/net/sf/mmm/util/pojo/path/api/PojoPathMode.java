@@ -9,6 +9,7 @@ package net.sf.mmm.util.pojo.path.api;
  * {@link PojoPathNavigator} deals with (intermediate) <code>null</code> values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public enum PojoPathMode {
 

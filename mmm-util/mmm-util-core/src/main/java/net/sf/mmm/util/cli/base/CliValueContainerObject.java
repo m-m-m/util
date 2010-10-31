@@ -27,13 +27,13 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
    * @param parameterContainer is the {@link #getParameterContainer()
    *        parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
-   * @param configuration is the {@link #getConfiguration() configuration}.
+   * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    */
   public CliValueContainerObject(CliParameterContainer parameterContainer, CliState cliState,
-      CliParserConfiguration configuration, Logger logger) {
+      CliParserDependencies dependencies, Logger logger) {
 
-    super(parameterContainer, cliState, configuration, logger);
+    super(parameterContainer, cliState, dependencies, logger);
     this.value = null;
   }
 
@@ -52,7 +52,7 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
 
     CliParameterContainer parameterContainer = getParameterContainer();
     PojoPropertyAccessorOneArg setter = parameterContainer.getSetter();
-    Object newValue = getConfiguration().getConverter().convertValue(argument, parameterContainer,
+    Object newValue = getDependencies().getConverter().convertValue(argument, parameterContainer,
         setter.getPropertyClass(), setter.getPropertyType());
     if (this.value != null) {
       CliStyleHandling handling;

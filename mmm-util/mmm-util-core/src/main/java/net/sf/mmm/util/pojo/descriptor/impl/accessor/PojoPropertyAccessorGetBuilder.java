@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgBuilder;
 
@@ -22,6 +22,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgB
  * interface for {@link PojoPropertyAccessorNonArgMode#GET getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -54,7 +55,7 @@ public class PojoPropertyAccessorGetBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
@@ -71,7 +72,7 @@ public class PojoPropertyAccessorGetBuilder extends
         }
         if (propertyName != null) {
           return new PojoPropertyAccessorNonArgMethod(propertyName, method.getGenericReturnType(),
-              PojoPropertyAccessorNonArgMode.GET, descriptor, configuration, method);
+              PojoPropertyAccessorNonArgMode.GET, descriptor, dependencies, method);
         }
       }
     }
@@ -82,9 +83,9 @@ public class PojoPropertyAccessorGetBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
-    return new PojoPropertyAccessorGetField(descriptor, configuration, field);
+    return new PojoPropertyAccessorGetField(descriptor, dependencies, field);
   }
 
   /**

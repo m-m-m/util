@@ -5,7 +5,7 @@ package net.sf.mmm.util.text.base;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.Hyphenator;
 
@@ -15,7 +15,7 @@ import net.sf.mmm.util.text.api.Hyphenator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractHyphenator extends AbstractLoggable implements Hyphenator {
+public abstract class AbstractHyphenator extends AbstractLoggableComponent implements Hyphenator {
 
   /** @see #getLocale() */
   private final Locale locale;

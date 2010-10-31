@@ -6,6 +6,7 @@ package net.sf.mmm.util.reflect.api;
 import java.util.Collection;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
@@ -19,6 +20,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface CollectionReflectionUtil {
 
   /**

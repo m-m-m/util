@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsArgument;
@@ -28,7 +28,7 @@ import net.sf.mmm.util.text.base.JustificationBuilderImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterManager extends AbstractLoggable implements
+public abstract class AbstractNlsFormatterManager extends AbstractLoggableComponent implements
     NlsFormatterManager, NlsArgumentParser {
 
   /** A char filter that accepts everything except ',' and '}'. */
@@ -95,7 +95,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggable imple
 
   /**
    * This method is like {@link #getFormatter(String, String)} but reads the
-   * {@link AbstractNlsSubFormatter#getStyle() style} from the given scanner.
+   * {@link AbstractNlsFormatterPlugin#getStyle() style} from the given scanner.
    * 
    * @param formatType is the type to be formatted.
    * @param scanner is the current {@link CharSequenceScanner} for parsing the
@@ -139,6 +139,15 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggable imple
 
     getInitializationState().requireNotInitilized();
     this.justificationBuilder = justificationBuilder;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  public NlsFormatter<Object> getFormatter() {
+
+    return (NlsFormatter<Object>) getFormatter(null);
   }
 
   /**

@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 
 /**
  * This is the interface used to create a {@link PojoPropertyAccessor}.
@@ -17,6 +17,7 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
  * @param <ACCESSOR> is the type of the accessor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract interface PojoPropertyAccessorBuilder<ACCESSOR extends PojoPropertyAccessor> {
 
@@ -29,13 +30,14 @@ public abstract interface PojoPropertyAccessorBuilder<ACCESSOR extends PojoPrope
    * @param descriptor is the descriptor of the
    *        {@link net.sf.mmm.util.pojo.api.Pojo} having the given
    *        <code>method</code>.
-   * @param configuration is the configuration with injected helper components.
+   * @param dependencies are the {@link PojoDescriptorDependencies} with
+   *        injected helper components.
    * @return the {@link PojoPropertyAccessor accessor} for the given
    *         <code>method</code> or <code>null</code> if the <code>method</code>
    *         is NOT suitable for this builder.
    */
   ACCESSOR create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration);
+      PojoDescriptorDependencies dependencies);
 
   /**
    * This method creates the {@link PojoPropertyAccessor accessor} for the given
@@ -46,13 +48,13 @@ public abstract interface PojoPropertyAccessorBuilder<ACCESSOR extends PojoPrope
    * @param descriptor is the descriptor of the
    *        {@link net.sf.mmm.util.pojo.api.Pojo} having the given
    *        <code>field</code>.
-   * @param configuration is the configuration with injected helper components.
+   * @param dependencies are the {@link PojoDescriptorDependencies} with
+   *        injected helper components.
    * @return the {@link PojoPropertyAccessor accessor} for the given
    *         <code>field</code> or <code>null</code> if the <code>field</code>
    *         is NOT suitable for this builder.
    */
-  ACCESSOR create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration);
+  ACCESSOR create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies);
 
   /**
    * This method gets the mode of this builder.

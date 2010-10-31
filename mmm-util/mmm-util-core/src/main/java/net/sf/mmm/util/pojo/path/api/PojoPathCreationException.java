@@ -18,6 +18,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * method signature).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathCreationException extends PojoPathException {
 
@@ -34,7 +35,8 @@ public class PojoPathCreationException extends PojoPathException {
    */
   public PojoPathCreationException(Object initialPojo, String pojoPath) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_CREATION, toMap(KEY_OBJECT, initialPojo, KEY_PATH, pojoPath));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_CREATION, toMap(KEY_OBJECT, initialPojo, KEY_PATH,
+        pojoPath));
   }
 
   /**
@@ -48,8 +50,8 @@ public class PojoPathCreationException extends PojoPathException {
    */
   public PojoPathCreationException(Throwable nested, Object initialPojo, String pojoPath) {
 
-    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_CREATION, toMap(KEY_OBJECT, initialPojo, KEY_PATH,
-        pojoPath));
+    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_CREATION, toMap(KEY_OBJECT, initialPojo,
+        KEY_PATH, pojoPath));
   }
 
 }

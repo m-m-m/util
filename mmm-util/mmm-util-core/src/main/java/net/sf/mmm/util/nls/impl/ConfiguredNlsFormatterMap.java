@@ -3,19 +3,40 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-import net.sf.mmm.util.date.api.Iso8601Util;
-import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.base.AbstractNlsSubFormatter;
+import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
+import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
 import net.sf.mmm.util.nls.base.NlsFormatterMap;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterCurrency;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateFull;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateIso8601;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateLong;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateMedium;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateShort;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateTimeFull;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateTimeIso8601;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateTimeLong;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateTimeMedium;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDateTimeShort;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterDefault;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterInteger;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterNumber;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterPercent;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTimeFull;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTimeIso8601;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTimeLong;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTimeMedium;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTimeShort;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeFull;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeLong;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeMedium;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeShort;
 
 /**
  * This is a sub-class of {@link NlsFormatterMap} as a ready to use configurable
@@ -25,16 +46,12 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Singleton
+@Named
 public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
 
   /** @see #setFormatters(List) */
-  private List<AbstractNlsSubFormatter<?>> formatters;
-
-  /** @see #setIso8601Util(Iso8601Util) */
-  private Iso8601Util iso8601Util;
-
-  /** @see #setReflectionUtil(ReflectionUtil) */
-  private ReflectionUtil reflectionUtil;
+  private List<? extends NlsFormatterPlugin<?>> formatters;
 
   /**
    * The constructor.
@@ -51,85 +68,61 @@ public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.iso8601Util == null) {
-      this.iso8601Util = Iso8601UtilImpl.getInstance();
-    }
-    if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtilImpl.getInstance();
-    }
     if (this.formatters == null) {
       // number format
-      this.formatters = new ArrayList<AbstractNlsSubFormatter<?>>();
-      this.formatters.add(new NlsFormatterNumber());
-      this.formatters.add(new NlsFormatterCurrency());
-      this.formatters.add(new NlsFormatterInteger());
-      this.formatters.add(new NlsFormatterPercent());
+      List<AbstractNlsFormatterPlugin<?>> formatterList = new ArrayList<AbstractNlsFormatterPlugin<?>>();
+      // default format
+      formatterList.add(new NlsFormatterDefault());
+      // number format
+      formatterList.add(new NlsFormatterNumber());
+      formatterList.add(new NlsFormatterCurrency());
+      formatterList.add(new NlsFormatterInteger());
+      formatterList.add(new NlsFormatterPercent());
       // date format
-      this.formatters.add(new NlsFormatterDate(DateFormat.SHORT));
-      this.formatters.add(new NlsFormatterDate(DateFormat.MEDIUM));
-      this.formatters.add(new NlsFormatterDate(DateFormat.LONG));
-      this.formatters.add(new NlsFormatterDate(DateFormat.FULL));
-      this.formatters.add(new NlsFormatterDateIso8601(this.iso8601Util));
+      formatterList.add(new NlsFormatterDateShort());
+      formatterList.add(new NlsFormatterDateMedium());
+      formatterList.add(new NlsFormatterDateLong());
+      formatterList.add(new NlsFormatterDateFull());
+      formatterList.add(new NlsFormatterDateIso8601());
       // time format
-      this.formatters.add(new NlsFormatterTime(DateFormat.SHORT));
-      this.formatters.add(new NlsFormatterTime(DateFormat.MEDIUM));
-      this.formatters.add(new NlsFormatterTime(DateFormat.LONG));
-      this.formatters.add(new NlsFormatterTime(DateFormat.FULL));
-      this.formatters.add(new NlsFormatterTimeIso8601(this.iso8601Util));
+      formatterList.add(new NlsFormatterTimeShort());
+      formatterList.add(new NlsFormatterTimeMedium());
+      formatterList.add(new NlsFormatterTimeLong());
+      formatterList.add(new NlsFormatterTimeFull());
+      formatterList.add(new NlsFormatterTimeIso8601());
       // date-time format
-      this.formatters.add(new NlsFormatterDateTime(DateFormat.SHORT));
-      this.formatters.add(new NlsFormatterDateTime(DateFormat.MEDIUM));
-      this.formatters.add(new NlsFormatterDateTime(DateFormat.LONG));
-      this.formatters.add(new NlsFormatterDateTime(DateFormat.FULL));
-      this.formatters.add(new NlsFormatterDateTimeIso8601(this.iso8601Util));
+      formatterList.add(new NlsFormatterDateTimeShort());
+      formatterList.add(new NlsFormatterDateTimeMedium());
+      formatterList.add(new NlsFormatterDateTimeLong());
+      formatterList.add(new NlsFormatterDateTimeFull());
+      formatterList.add(new NlsFormatterDateTimeIso8601());
       // type format
-      this.formatters
-          .add(new NlsFormatterType(NlsFormatterManager.STYLE_SHORT, this.reflectionUtil));
-      this.formatters.add(new NlsFormatterType(NlsFormatterManager.STYLE_MEDIUM,
-          this.reflectionUtil));
-      this.formatters
-          .add(new NlsFormatterType(NlsFormatterManager.STYLE_LONG, this.reflectionUtil));
-      this.formatters
-          .add(new NlsFormatterType(NlsFormatterManager.STYLE_FULL, this.reflectionUtil));
+      formatterList.add(new NlsFormatterTypeShort());
+      formatterList.add(new NlsFormatterTypeMedium());
+      formatterList.add(new NlsFormatterTypeLong());
+      formatterList.add(new NlsFormatterTypeFull());
+      for (AbstractNlsFormatterPlugin<?> formatter : formatterList) {
+        formatter.initialize();
+      }
+      this.formatters = formatterList;
     }
-    for (AbstractNlsSubFormatter<?> formatter : this.formatters) {
-      formatter.register(this);
+    for (NlsFormatterPlugin<?> formatter : this.formatters) {
+      registerFormatter(formatter);
     }
   }
 
   /**
-   * This method allows to inject the {@link AbstractNlsSubFormatter formatters}
-   * to
+   * This method allows to inject the {@link NlsFormatterPlugin formatters} to
    * {@link #registerFormatter(net.sf.mmm.util.nls.api.NlsFormatter, String, String)
    * register}.
    * 
    * @param formatters is the {@link List} of formatters to set.
    */
-  public void setFormatters(List<AbstractNlsSubFormatter<?>> formatters) {
+  @Inject
+  public void setFormatters(List<? extends NlsFormatterPlugin<?>> formatters) {
 
+    getInitializationState().requireNotInitilized();
     this.formatters = formatters;
-  }
-
-  /**
-   * This method sets the {@link Iso8601Util} instance to use.
-   * 
-   * @param iso8601Util is the {@link Iso8601Util}.
-   */
-  @Inject
-  public void setIso8601Util(Iso8601Util iso8601Util) {
-
-    getInitializationState().requireNotInitilized();
-    this.iso8601Util = iso8601Util;
-  }
-
-  /**
-   * @param reflectionUtil is the reflectionUtil to set
-   */
-  @Inject
-  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.reflectionUtil = reflectionUtil;
   }
 
 }

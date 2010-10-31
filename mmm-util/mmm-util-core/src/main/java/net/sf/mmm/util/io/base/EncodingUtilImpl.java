@@ -14,7 +14,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.base.RankMap;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.ByteOrderMark;
 import net.sf.mmm.util.io.api.ByteProcessor;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
@@ -32,7 +32,7 @@ import net.sf.mmm.util.io.impl.BufferInputStream;
  */
 @Singleton
 @Named
-public class EncodingUtilImpl extends AbstractLoggable implements EncodingUtil {
+public class EncodingUtilImpl extends AbstractLoggableComponent implements EncodingUtil {
 
   /**
    * In an UTF-8 multi-byte-sequence all bytes except the first one have the

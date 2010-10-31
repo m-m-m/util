@@ -31,13 +31,13 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
    * @param parameterContainer is the {@link #getParameterContainer()
    *        parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
-   * @param configuration is the {@link #getConfiguration() configuration}.
+   * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    */
   public AbstractCliValueContainerContainer(CliParameterContainer parameterContainer,
-      CliState cliState, CliParserConfiguration configuration, Logger logger) {
+      CliState cliState, CliParserDependencies dependencies, Logger logger) {
 
-    super(parameterContainer, cliState, configuration, logger);
+    super(parameterContainer, cliState, dependencies, logger);
     this.valueAlreadySet = false;
   }
 
@@ -80,8 +80,8 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
       CliStyleHandling.EXCEPTION.handle(getLogger(), exception);
     }
     // TODO: separator currently ignored!
-    Object value = getConfiguration().getConverter().convertValue(argument,
-        getParameterContainer(), propertyType.getAssignmentClass(), propertyType);
+    Object value = getDependencies().getConverter().convertValue(argument, getParameterContainer(),
+        propertyType.getAssignmentClass(), propertyType);
     setValueInternal(value);
     this.valueAlreadySet = true;
   }

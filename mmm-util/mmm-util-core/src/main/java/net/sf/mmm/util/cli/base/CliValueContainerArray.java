@@ -26,13 +26,13 @@ public class CliValueContainerArray extends CliValueContainerCollection {
    * @param parameterContainer is the {@link #getParameterContainer()
    *        parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
-   * @param configuraiton is the {@link #getConfiguration() configuration}.
+   * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    */
   public CliValueContainerArray(CliParameterContainer parameterContainer, CliState cliState,
-      CliParserConfiguration configuraiton, Logger logger) {
+      CliParserDependencies dependencies, Logger logger) {
 
-    super(parameterContainer, cliState, configuraiton, logger, new ArrayList<Object>());
+    super(parameterContainer, cliState, dependencies, logger, new ArrayList<Object>());
   }
 
   /**
@@ -54,7 +54,7 @@ public class CliValueContainerArray extends CliValueContainerCollection {
     if (this.array == null) {
       Class<?> componentType = getParameterContainer().getSetter().getPropertyClass()
           .getComponentType();
-      this.array = getConfiguration().getCollectionReflectionUtil().toArray(getCollection(),
+      this.array = getDependencies().getCollectionReflectionUtil().toArray(getCollection(),
           componentType);
     }
     return this.array;

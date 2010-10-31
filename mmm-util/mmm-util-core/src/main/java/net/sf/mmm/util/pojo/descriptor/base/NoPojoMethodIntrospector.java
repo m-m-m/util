@@ -13,6 +13,7 @@ import net.sf.mmm.util.collection.base.EmptyIterator;
  * interface that never {@link #findMethods(Class) finds} any method.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class NoPojoMethodIntrospector implements PojoMethodIntrospector {
 

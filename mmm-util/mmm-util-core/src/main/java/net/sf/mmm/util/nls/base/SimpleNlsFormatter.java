@@ -20,7 +20,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class SimpleNlsFormatter<O> extends AbstractNlsSubFormatter<O> {
+public abstract class SimpleNlsFormatter<O> extends AbstractNlsFormatterPlugin<O> {
 
   /**
    * The constructor.

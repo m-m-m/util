@@ -20,8 +20,8 @@ public abstract class AbstractCliValueContainer implements CliValueContainer {
   /** @see #getCliState() */
   private final CliState cliState;
 
-  /** @see #getConfiguration() */
-  private final CliParserConfiguration configuration;
+  /** @see #getDependencies() */
+  private final CliParserDependencies dependencies;
 
   /** @see #getLogger() */
   private final Logger logger;
@@ -32,16 +32,16 @@ public abstract class AbstractCliValueContainer implements CliValueContainer {
    * @param parameterContainer is the {@link #getParameterContainer()
    *        parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
-   * @param configuration is the {@link #getConfiguration() configuration}.
+   * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    */
   public AbstractCliValueContainer(CliParameterContainer parameterContainer, CliState cliState,
-      CliParserConfiguration configuration, Logger logger) {
+      CliParserDependencies dependencies, Logger logger) {
 
     super();
     this.parameterContainer = parameterContainer;
     this.cliState = cliState;
-    this.configuration = configuration;
+    this.dependencies = dependencies;
     this.logger = logger;
   }
 
@@ -62,11 +62,11 @@ public abstract class AbstractCliValueContainer implements CliValueContainer {
   }
 
   /**
-   * @return the configuration
+   * @return the dependencies
    */
-  public CliParserConfiguration getConfiguration() {
+  public CliParserDependencies getDependencies() {
 
-    return this.configuration;
+    return this.dependencies;
   }
 
   /**

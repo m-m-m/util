@@ -19,6 +19,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @see PojoDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoDescriptorBuilder {
 

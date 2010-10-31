@@ -11,10 +11,11 @@ import java.util.Map;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.base.NlsDependencies;
+import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
 
 /**
  * This is the abstract base implementation of {@link NlsMessage}.<br>
@@ -29,8 +30,8 @@ public class NlsMessageImpl implements NlsMessage {
   /** Locale.ROOT is only available since java 6. */
   private static final Locale LOCALE_ROOT = new Locale("");
 
-  /** @see #getArgumentParser() */
-  private final NlsArgumentParser argumentParser;
+  /** @see #getNlsDependencies() */
+  private final NlsDependencies nlsDependencies;
 
   /** The {@link #message} as {@link NlsTemplate}. */
   private NlsTemplate template;
@@ -48,15 +49,14 @@ public class NlsMessageImpl implements NlsMessage {
    *        {@link #getInternationalizedMessage() raw message}.
    * @param messageArguments are the {@link #getArgument(String) arguments}
    *        filled into the message after nationalization.
-   * @param argumentParser is the {@link #getArgumentParser() argument-parser}
-   *        to use.
+   * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
   public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments,
-      NlsArgumentParser argumentParser) {
+      NlsDependencies nlsDependencies) {
 
     super();
     assert (template != null);
-    this.argumentParser = argumentParser;
+    this.nlsDependencies = nlsDependencies;
     this.template = template;
     this.message = null;
     if (messageArguments == null) {
@@ -73,15 +73,14 @@ public class NlsMessageImpl implements NlsMessage {
    *        {@link #getInternationalizedMessage() internationalized message}.
    * @param messageArguments are the {@link #getArgument(String) arguments}
    *        filled into the message after nationalization.
-   * @param argumentParser is the {@link #getArgumentParser() argument-parser}
-   *        to use.
+   * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
   public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments,
-      NlsArgumentParser argumentParser) {
+      NlsDependencies nlsDependencies) {
 
     super();
     assert (internationalizedMessage != null);
-    this.argumentParser = argumentParser;
+    this.nlsDependencies = nlsDependencies;
     this.template = null;
     this.message = internationalizedMessage;
     this.arguments = messageArguments;
@@ -130,11 +129,11 @@ public class NlsMessageImpl implements NlsMessage {
   }
 
   /**
-   * @return the argumentParser
+   * @return the {@link NlsDependencies}.
    */
-  protected NlsArgumentParser getArgumentParser() {
+  protected NlsDependencies getNlsDependencies() {
 
-    return this.argumentParser;
+    return this.nlsDependencies;
   }
 
   /**
@@ -234,7 +233,7 @@ public class NlsMessageImpl implements NlsMessage {
           // buffer.append(LOCALIZATION_FAILURE_PREFIX);
           // }
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(this.message,
-              getArgumentParser());
+              getNlsDependencies());
           format.format(null, locale, this.arguments, resolver, buffer);
         }
       }

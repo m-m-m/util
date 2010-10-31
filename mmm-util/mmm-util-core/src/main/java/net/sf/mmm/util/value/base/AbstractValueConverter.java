@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.value.api.ValueConverter;
@@ -20,7 +20,7 @@ import net.sf.mmm.util.value.api.ValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLoggable implements
+public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent implements
     ValueConverter<SOURCE, TARGET> {
 
   /** @see #getReflectionUtil() */

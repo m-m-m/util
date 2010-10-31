@@ -11,6 +11,7 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * remove) for a given <code>index</code> of an indexed property.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor {
 
@@ -25,8 +26,8 @@ public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor 
    * 
    * @param pojoInstance is the instance of the POJO where to access the
    *        property. Has to be an instance of the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass() type}
-   *        from where this accessor was created for.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass()
+   *        type} from where this accessor was created for.
    * @param index is the position in the indexed property (e.g. where to get or
    *        remove an item).
    * @return the result of the invocation. Will be <code>null</code> if void

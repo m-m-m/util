@@ -12,6 +12,7 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
  * your own custom mode by extending this class.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorTwoArgMode extends
     PojoPropertyAccessorMode<PojoPropertyAccessorTwoArg> {

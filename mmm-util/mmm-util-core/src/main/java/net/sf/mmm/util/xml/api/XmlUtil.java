@@ -9,6 +9,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a collection of utility functions that help to deal
  * with XML.
@@ -21,6 +23,7 @@ import java.nio.charset.Charset;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface XmlUtil {
 
   /** the URI of the xmlns namespace */

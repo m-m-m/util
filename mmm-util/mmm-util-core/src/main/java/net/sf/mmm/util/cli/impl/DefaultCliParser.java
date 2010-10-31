@@ -4,9 +4,8 @@
 package net.sf.mmm.util.cli.impl;
 
 import net.sf.mmm.util.cli.base.AbstractCliParser;
-import net.sf.mmm.util.cli.base.CliParserConfiguration;
+import net.sf.mmm.util.cli.base.CliParserDependencies;
 import net.sf.mmm.util.cli.base.CliState;
-
 
 /**
  * This is the default implementation of the
@@ -22,11 +21,11 @@ public class DefaultCliParser extends AbstractCliParser {
    * 
    * @param state is the {@link #getState() state}.
    * @param cliState is the {@link CliState}.
-   * @param configuration is the {@link CliParserConfiguration}.
+   * @param dependencies are the {@link CliParserDependencies}.
    */
-  public DefaultCliParser(Object state, CliState cliState, CliParserConfiguration configuration) {
+  public DefaultCliParser(Object state, CliState cliState, CliParserDependencies dependencies) {
 
-    super(state, cliState, configuration);
+    super(state, cliState, dependencies);
   }
 
 }

@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.base.CollectionList;
 import net.sf.mmm.util.collection.base.HashKey;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
@@ -46,8 +46,9 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
  * This is the abstract base implementation of the {@link PojoPathNavigator}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
-public abstract class AbstractPojoPathNavigator extends AbstractLoggable implements
+public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponent implements
     PojoPathNavigator {
 
   /**

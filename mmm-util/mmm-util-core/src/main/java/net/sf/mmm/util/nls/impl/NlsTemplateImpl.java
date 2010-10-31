@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.util.nls.api.NlsArgumentParser;
+import net.sf.mmm.util.nls.base.NlsDependencies;
 
 /**
  * This class is the straight forward implementation of the
@@ -30,11 +30,11 @@ public class NlsTemplateImpl extends FormattedNlsTemplate {
    * @param name is the {@link #getName() name} of the bundle.
    * @param key is the {@link #getKey() key} of the string to lookup in the
    *        bundle.
-   * @param argumentParser is the {@link NlsArgumentParser} to use.
+   * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
-  public NlsTemplateImpl(String name, String key, NlsArgumentParser argumentParser) {
+  public NlsTemplateImpl(String name, String key, NlsDependencies nlsDependencies) {
 
-    super(argumentParser);
+    super(nlsDependencies);
     this.name = name;
     this.key = key;
   }

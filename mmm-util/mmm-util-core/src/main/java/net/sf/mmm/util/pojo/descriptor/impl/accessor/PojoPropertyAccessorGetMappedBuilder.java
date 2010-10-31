@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgBuilder;
 
@@ -23,6 +23,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
  * getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -55,7 +56,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     if (parameterTypes.length == 1) {
@@ -73,7 +74,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
         }
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, method.getGenericReturnType(),
-              PojoPropertyAccessorOneArgMode.GET_MAPPED, descriptor, configuration, method);
+              PojoPropertyAccessorOneArgMode.GET_MAPPED, descriptor, dependencies, method);
         }
       }
     }
@@ -84,7 +85,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     return null;
   }

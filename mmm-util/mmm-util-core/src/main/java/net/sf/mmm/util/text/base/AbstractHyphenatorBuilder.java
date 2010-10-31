@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsResourceLocator;
 import net.sf.mmm.util.nls.base.DefaultNlsResourceLocator;
 import net.sf.mmm.util.text.api.Hyphenator;
@@ -25,7 +25,7 @@ import net.sf.mmm.util.text.api.HyphenatorBuilder;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractHyphenatorBuilder extends AbstractLoggable implements
+public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponent implements
     HyphenatorBuilder {
 
   /** Cache for {@link #getHyphenator(Locale)}. */

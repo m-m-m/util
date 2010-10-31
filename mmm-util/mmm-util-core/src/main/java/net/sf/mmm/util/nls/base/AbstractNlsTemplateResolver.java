@@ -5,10 +5,9 @@ package net.sf.mmm.util.nls.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
-import net.sf.mmm.util.nls.api.NlsArgumentParser;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.impl.NlsFormatterManagerImpl;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
 /**
  * This is the abstract base implementation of the {@link NlsTemplateResolver}
@@ -20,11 +19,11 @@ import net.sf.mmm.util.nls.impl.NlsFormatterManagerImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsTemplateResolver extends AbstractLoggable implements
+public abstract class AbstractNlsTemplateResolver extends AbstractLoggableComponent implements
     NlsTemplateResolver {
 
-  /** @see #getArgumentParser() */
-  private NlsArgumentParser argumentParser;
+  /** @see #getNlsDependencies() */
+  private NlsDependencies nlsDependencies;
 
   /**
    * The constructor.<br>
@@ -41,29 +40,29 @@ public abstract class AbstractNlsTemplateResolver extends AbstractLoggable imple
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.argumentParser == null) {
+    if (this.nlsDependencies == null) {
       NlsFormatterManagerImpl impl = new NlsFormatterManagerImpl();
       impl.initialize();
-      this.argumentParser = impl;
+      this.nlsDependencies = impl.getNlsDependencies();
     }
   }
 
   /**
-   * @return the argumentParser
+   * @return the {@link NlsDependencies}.
    */
-  protected NlsArgumentParser getArgumentParser() {
+  protected NlsDependencies getNlsDependencies() {
 
-    return this.argumentParser;
+    return this.nlsDependencies;
   }
 
   /**
-   * @param argumentParser is the argumentParser to set
+   * @param nlsDependencies are the {@link NlsDependencies} to set.
    */
   @Inject
-  public void setArgumentParser(NlsArgumentParser argumentParser) {
+  public void setNlsDependencies(NlsDependencies nlsDependencies) {
 
     getInitializationState().requireNotInitilized();
-    this.argumentParser = argumentParser;
+    this.nlsDependencies = nlsDependencies;
   }
 
 }

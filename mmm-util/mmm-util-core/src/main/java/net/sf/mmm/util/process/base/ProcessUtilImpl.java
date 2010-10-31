@@ -18,7 +18,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.concurrent.api.Stoppable;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
@@ -46,7 +46,7 @@ import net.sf.mmm.util.process.api.ProcessUtil;
  */
 @Singleton
 @Named
-public class ProcessUtilImpl extends AbstractLoggable implements ProcessUtil {
+public class ProcessUtilImpl extends AbstractLoggableComponent implements ProcessUtil {
 
   /** @see #getInstance() */
   private static ProcessUtil instance;

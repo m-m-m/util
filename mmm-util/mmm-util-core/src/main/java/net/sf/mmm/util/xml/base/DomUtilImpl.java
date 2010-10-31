@@ -29,7 +29,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicUtil;
@@ -61,7 +61,7 @@ import org.xml.sax.SAXException;
  */
 @Singleton
 @Named
-public final class DomUtilImpl extends AbstractLoggable implements DomUtil {
+public final class DomUtilImpl extends AbstractLoggableComponent implements DomUtil {
 
   /** @see #getInstance() */
   private static DomUtil instance;

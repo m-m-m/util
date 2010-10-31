@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
@@ -33,6 +35,8 @@ import net.sf.mmm.util.resource.api.DataResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Named
+@Singleton
 public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver {
 
   /** @see #getReflectionUtil() */

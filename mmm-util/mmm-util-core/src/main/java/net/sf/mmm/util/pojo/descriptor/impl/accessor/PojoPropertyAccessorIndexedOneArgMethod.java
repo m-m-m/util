@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorMethod;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
@@ -20,6 +20,7 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
  * interface for accessing a {@link Method}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropertyAccessorMethod
     implements PojoPropertyAccessorIndexedOneArg {
@@ -28,8 +29,7 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
   private final PojoPropertyAccessorIndexedOneArgMode mode;
 
   /**
-   * <code>false</code> if index is first argument, <code>true</code> if
-   * second.
+   * <code>false</code> if index is first argument, <code>true</code> if second.
    */
   private final boolean inverted;
 
@@ -41,17 +41,17 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
    *        property.
    * @param mode is the {@link #getMode() mode} of access.
    * @param descriptor is the descriptor this accessor is intended for.
-   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
    * @param inverted - <code>false</code> if the index is first
-   *        <code>method</code>-argument, <code>true</code> if it is the
-   *        second argument.
+   *        <code>method</code>-argument, <code>true</code> if it is the second
+   *        argument.
    */
   public PojoPropertyAccessorIndexedOneArgMethod(String propertyName, Type propertyType,
       PojoPropertyAccessorIndexedOneArgMode mode, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration, Method method, boolean inverted) {
+      PojoDescriptorDependencies dependencies, Method method, boolean inverted) {
 
-    super(propertyName, propertyType, descriptor, configuration, method);
+    super(propertyName, propertyType, descriptor, dependencies, method);
     this.mode = mode;
     this.inverted = inverted;
   }

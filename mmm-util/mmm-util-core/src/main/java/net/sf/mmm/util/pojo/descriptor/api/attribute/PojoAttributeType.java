@@ -13,6 +13,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @param <POJO> is the {@link #getPojoClass() pojo-type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract interface PojoAttributeType<POJO> {
 

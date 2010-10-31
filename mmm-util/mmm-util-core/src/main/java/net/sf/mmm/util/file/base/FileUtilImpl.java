@@ -20,7 +20,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.file.api.FileAccessClass;
 import net.sf.mmm.util.file.api.FileAlreadyExistsException;
 import net.sf.mmm.util.file.api.FileCreationFailedException;
@@ -47,7 +47,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 @Singleton
 @Named
-public class FileUtilImpl extends AbstractLoggable implements FileUtil {
+public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil {
 
   /**
    * The prefix of an UNC (Uniform Naming Convention) path (e.g.

@@ -11,6 +11,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
  * {@link PojoPropertyDescriptor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDescriptor {
 

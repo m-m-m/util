@@ -10,6 +10,7 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * that allows to {@link #invoke(Object, Object) write} (modify) a property.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPropertyAccessorOneArg extends PojoPropertyAccessor {
 
@@ -24,8 +25,8 @@ public interface PojoPropertyAccessorOneArg extends PojoPropertyAccessor {
    * 
    * @param pojoInstance is the instance of the POJO where to access the
    *        property. Has to be an instance of the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass() type}
-   *        from where this accessor was created for.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass()
+   *        type} from where this accessor was created for.
    * @param argument is the value of the property to set.
    * @return the result of the invocation. Will be <code>null</code> if void
    *         (e.g. regular setter method).

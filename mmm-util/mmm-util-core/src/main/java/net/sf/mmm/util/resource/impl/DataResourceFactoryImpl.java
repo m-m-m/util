@@ -6,8 +6,8 @@ package net.sf.mmm.util.resource.impl;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
-import net.sf.mmm.util.resource.api.spi.ResourceUri;
 import net.sf.mmm.util.resource.base.AbstractDataResourceFactory;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.resource.base.FileResource;

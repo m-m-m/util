@@ -13,9 +13,11 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector} interface.
+ * {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implements
     PojoFieldIntrospector {

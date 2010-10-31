@@ -28,6 +28,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathNavigator} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named

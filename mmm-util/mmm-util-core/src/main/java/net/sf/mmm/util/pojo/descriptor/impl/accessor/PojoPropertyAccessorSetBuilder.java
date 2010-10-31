@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgBuilder;
 
@@ -23,6 +23,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
  * interface for {@link PojoPropertyAccessorOneArgMode#SET setter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -45,7 +46,7 @@ public class PojoPropertyAccessorSetBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     String methodName = method.getName();
     if (methodName.startsWith(METHOD_PREFIX_SET)) {
@@ -57,7 +58,7 @@ public class PojoPropertyAccessorSetBuilder extends
         String propertyName = getPropertyName(methodName, METHOD_PREFIX_SET.length(), 0);
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, argumentTypes[0],
-              PojoPropertyAccessorOneArgMode.SET, descriptor, configuration, method);
+              PojoPropertyAccessorOneArgMode.SET, descriptor, dependencies, method);
         }
       }
     }
@@ -68,10 +69,10 @@ public class PojoPropertyAccessorSetBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     if (!Modifier.isFinal(field.getModifiers())) {
-      return new PojoPropertyAccessorSetField(descriptor, configuration, field);
+      return new PojoPropertyAccessorSetField(descriptor, dependencies, field);
     }
     // even though it is possible to set final fields via reflection since
     // java5, it is sick to do so and we therefore do NOT support this.

@@ -13,10 +13,11 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * This is an implementation of the {@link PojoPropertyAccessorOneArg} acting as
  * as a {@link PojoPropertyAccessorOneArgMode#SET setter} that
  * {@link #getDelegate() delegates} to a
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED mapped-setter}
- * using a fixed key.
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED
+ * mapped-setter} using a fixed key.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorProxySetByKey extends AbstractPojoPropertyAccessorProxy implements
     PojoPropertyAccessorOneArg {

@@ -12,6 +12,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  * be evaluated because it lead to an invalid access on some object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathAccessException extends PojoPathException {
 
@@ -30,7 +31,8 @@ public class PojoPathAccessException extends PojoPathException {
    */
   public PojoPathAccessException(String pojoPath, Type currentPojoType) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE, currentPojoType));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE,
+        currentPojoType));
   }
 
   /**

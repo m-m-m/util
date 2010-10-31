@@ -25,8 +25,8 @@ public class CliValueMap {
   /** @see #getOrCreate(CliParameterContainer) */
   private final Map<CliParameterContainer, CliValueContainer> map;
 
-  /** The {@link CliParserConfiguration}. */
-  private final CliParserConfiguration configuration;
+  /** The {@link CliParserDependencies}. */
+  private final CliParserDependencies dependencies;
 
   /** The {@link CliState}. */
   private final CliState cliState;
@@ -38,15 +38,15 @@ public class CliValueMap {
    * The constructor.
    * 
    * @param cliState is the {@link CliState}.
-   * @param configuration is the {@link CliParserConfiguration}.
+   * @param dependencies is the {@link CliParserDependencies}.
    * @param logger is the {@link Logger} to use.
    */
-  public CliValueMap(CliState cliState, CliParserConfiguration configuration, Logger logger) {
+  public CliValueMap(CliState cliState, CliParserDependencies dependencies, Logger logger) {
 
     super();
     this.map = new HashMap<CliParameterContainer, CliValueContainer>();
     this.cliState = cliState;
-    this.configuration = configuration;
+    this.dependencies = dependencies;
     this.logger = logger;
   }
 
@@ -87,22 +87,22 @@ public class CliValueMap {
       PojoPropertyAccessorOneArg setter = parameterContainer.getSetter();
       Class<?> propertyClass = setter.getPropertyClass();
       if (propertyClass.isArray()) {
-        result = new CliValueContainerArray(parameterContainer, this.cliState, this.configuration,
+        result = new CliValueContainerArray(parameterContainer, this.cliState, this.dependencies,
             this.logger);
       } else if (Collection.class.isAssignableFrom(propertyClass)) {
         Class<? extends Collection<?>> collectionClass = (Class<? extends Collection<?>>) propertyClass;
-        Collection<Object> collection = this.configuration.getCollectionFactoryManager()
+        Collection<Object> collection = this.dependencies.getCollectionFactoryManager()
             .getCollectionFactory(collectionClass).create();
         result = new CliValueContainerCollection(parameterContainer, this.cliState,
-            this.configuration, this.logger, collection);
+            this.dependencies, this.logger, collection);
       } else if (Map.class.isAssignableFrom(propertyClass)) {
         Class<? extends Map<?, ?>> mapClass = (Class<? extends Map<?, ?>>) propertyClass;
-        Map<Object, Object> mapValue = this.configuration.getCollectionFactoryManager()
+        Map<Object, Object> mapValue = this.dependencies.getCollectionFactoryManager()
             .getMapFactory(mapClass).create();
-        result = new CliValueContainerMap(parameterContainer, this.cliState, this.configuration,
+        result = new CliValueContainerMap(parameterContainer, this.cliState, this.dependencies,
             this.logger, mapValue);
       } else {
-        result = new CliValueContainerObject(parameterContainer, this.cliState, this.configuration,
+        result = new CliValueContainerObject(parameterContainer, this.cliState, this.dependencies,
             this.logger);
       }
       this.map.put(parameterContainer, result);

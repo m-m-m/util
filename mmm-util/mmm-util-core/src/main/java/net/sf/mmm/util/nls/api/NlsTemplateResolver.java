@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the callback interface for translating a text-message to a
  * {@link java.util.Locale}-specific language.<br>
@@ -10,14 +12,17 @@ package net.sf.mmm.util.nls.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@ComponentSpecification
 public interface NlsTemplateResolver {
 
   /**
-   * The classpath of a textfile containing the full qualified name(s) of an
-   * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle NLS-bundle}.<br>
+   * The classpath of a textual file containing the full qualified name(s) of
+   * one or multiple {@link net.sf.mmm.util.nls.base.AbstractResourceBundle
+   * NLS-bundle}(s).<br>
    * There can be arbitrary implementations of {@link NlsTemplateResolver}.
    * However the default implementation will use the
-   * {@link Thread#getContextClassLoader() context-class-loader} to use
+   * {@link Thread#getContextClassLoader() context-class-loader} to for this
+   * lookup.
    */
   String CLASSPATH_NLS_BUNDLE = "META-INF/net.sf.mmm/nls-bundles";
 

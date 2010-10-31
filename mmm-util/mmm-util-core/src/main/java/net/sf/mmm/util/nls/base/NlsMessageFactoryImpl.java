@@ -6,12 +6,14 @@ package net.sf.mmm.util.nls.base;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-import net.sf.mmm.util.nls.api.NlsArgumentParser;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.nls.impl.NlsFormatterManagerImpl;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
 /**
  * This is the implementation of the
@@ -20,10 +22,12 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Named
+@Singleton
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
 
-  /** @see #getArgumentParser() */
-  private NlsArgumentParser argumentParser;
+  /** @see #getNlsDependencies() */
+  private NlsDependencies nlsDependencies;
 
   /**
    * The constructor.
@@ -38,7 +42,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
    */
   public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(template, messageArguments, this.argumentParser);
+    return new NlsMessageImpl(template, messageArguments, this.nlsDependencies);
   }
 
   /**
@@ -46,7 +50,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
    */
   public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(internationalizedMessage, messageArguments, this.argumentParser);
+    return new NlsMessageImpl(internationalizedMessage, messageArguments, this.nlsDependencies);
   }
 
   /**
@@ -56,29 +60,39 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.argumentParser == null) {
+    if (this.nlsDependencies == null) {
       NlsFormatterManagerImpl formatterManager = new NlsFormatterManagerImpl();
       formatterManager.initialize();
-      this.argumentParser = formatterManager;
+      this.nlsDependencies = formatterManager.getNlsDependencies();
     }
   }
 
   /**
-   * @return the argumentParser
+   * {@inheritDoc}
    */
-  public NlsArgumentParser getArgumentParser() {
+  @Override
+  protected void doInitialized() {
 
-    return this.argumentParser;
+    super.doInitialized();
+    NlsAccess.setFactory(this);
   }
 
   /**
-   * @param argumentParser is the argumentParser to set
+   * @return the {@link NlsDependencies}.
+   */
+  public NlsDependencies getNlsDependencies() {
+
+    return this.nlsDependencies;
+  }
+
+  /**
+   * @param nlsDependencies are the {@link NlsDependencies} to set.
    */
   @Inject
-  public void setArgumentParser(NlsArgumentParser argumentParser) {
+  public void setNlsDependencies(NlsDependencies nlsDependencies) {
 
     getInitializationState().requireNotInitilized();
-    this.argumentParser = argumentParser;
+    this.nlsDependencies = nlsDependencies;
   }
 
 }

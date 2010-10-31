@@ -6,6 +6,7 @@ package net.sf.mmm.util.pojo.path.api;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -23,7 +24,9 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
+@ComponentSpecification
 public interface PojoPathNavigator {
 
   /**

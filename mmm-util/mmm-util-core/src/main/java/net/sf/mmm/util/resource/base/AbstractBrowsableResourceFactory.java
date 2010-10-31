@@ -12,9 +12,9 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
-import net.sf.mmm.util.resource.api.spi.ResourceUri;
 
 /**
  * This is the abstract base implementation of the
@@ -76,7 +76,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    * <code>schemaPrefix</code>.
    * 
    * @param provider is the {@link DataResourceProvider} to register.
-   * @param schemaPrefix is the {@link ResourceUri#getSchemePrefix()
+   * @param schemaPrefix is the {@link ResourceUriImpl#getSchemePrefix()
    *        scheme-prefix} for which the provider shall be registered.
    * 
    * @throws DuplicateObjectException if a {@link DataResourceProvider} is
@@ -103,7 +103,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    * This method gets the {@link DataResourceProvider provider} for the given
    * <code>resourceUri</code>.
    * 
-   * @param resourceUri is the {@link ResourceUri}.
+   * @param resourceUri is the {@link ResourceUriImpl}.
    * @return the {@link DataResourceProvider}
    *         {@link DataResourceProvider#getSchemePrefixes() responsible} for
    *         the given <code>resourceUri</code>.
@@ -114,8 +114,13 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   protected DataResourceProvider<? extends DataResource> getProvider(ResourceUri resourceUri)
       throws ResourceUriUndefinedException {
 
-    DataResourceProvider<? extends DataResource> provider = this.schema2providerMap.get(resourceUri
-        .getSchemePrefix());
+    String schemePrefix = resourceUri.getSchemePrefix();
+    if (schemePrefix == null) {
+      // default is file://
+      schemePrefix = FileResource.SCHEME_PREFIX;
+    }
+    DataResourceProvider<? extends DataResource> provider = this.schema2providerMap
+        .get(schemePrefix);
     if (provider == null) {
       throw new ResourceUriUndefinedException(resourceUri.getUri());
     }
@@ -136,10 +141,10 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    * This method {@link #createBrowsableResource(String) creates} the actual raw
    * {@link BrowsableResource}.
    * 
-   * @param resourceUri is the parsed and qualified {@link ResourceUri}.
+   * @param resourceUri is the parsed and qualified {@link ResourceUriImpl}.
    * @return the created {@link BrowsableResource}.
    * @throws ResourceUriUndefinedException if the given <code>resourceUri</code>
-   *         is undefined, e.g. the {@link ResourceUri#getSchemePrefix()
+   *         is undefined, e.g. the {@link ResourceUriImpl#getSchemePrefix()
    *         scheme-prefix} is NOT supported by this factory.
    */
   protected BrowsableResource createBrowsableResource(ResourceUri resourceUri)
@@ -159,7 +164,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   public BrowsableResource createBrowsableResource(String resourceUri)
       throws ResourceUriUndefinedException {
 
-    ResourceUri uri = new ResourceUri(resourceUri);
+    ResourceUri uri = new ResourceUriImpl(resourceUri);
     if (uri.getSchemePrefix() == null) {
       throw new ResourceUriUndefinedException(resourceUri);
     }
@@ -207,7 +212,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
     @Override
     public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 
-      ResourceUri resourceUri = new ResourceUri(relativePath);
+      ResourceUri resourceUri = new ResourceUriImpl(relativePath);
       DataResource result;
       if (resourceUri.getSchemePrefix() == null) {
         result = super.navigate(relativePath);

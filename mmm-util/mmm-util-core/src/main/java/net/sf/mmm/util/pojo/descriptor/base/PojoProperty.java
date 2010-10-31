@@ -6,8 +6,8 @@ package net.sf.mmm.util.pojo.descriptor.base;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This class represents the property of a
- * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+ * This class represents the property of a {@link net.sf.mmm.util.pojo.api.Pojo}
+ * .<br>
  * It can be a <em>simple property</em> such as <code>fooBar</code>, an
  * <em>indexed property</em> such as <code>fooBar[42]</code> or a
  * <em>mapped property</em> such as <code>fooBar['my.key']</code>.<br>
@@ -15,6 +15,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * access via the offered getters.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoProperty {
 
@@ -68,7 +69,8 @@ public class PojoProperty {
 
   /**
    * This method gets the plain name of the property.<br>
-   * Examples: <table border="1">
+   * Examples:
+   * <table border="1">
    * <tr>
    * <th>propertyName</th>
    * <th>new {@link PojoProperty}(propertyName).{@link #getName()}</th>
@@ -108,8 +110,8 @@ public class PojoProperty {
   /**
    * This method gets the optional key.
    * 
-   * @return the key of <code>null</code> if this {@link PojoProperty} does
-   *         NOT represent a mapped property.
+   * @return the key of <code>null</code> if this {@link PojoProperty} does NOT
+   *         represent a mapped property.
    */
   public String getKey() {
 

@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 
@@ -23,7 +23,7 @@ import net.sf.mmm.util.math.api.NumberType;
  */
 @Singleton
 @Named
-public class MathUtilImpl extends AbstractLoggable implements MathUtil {
+public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil {
 
   /** @see #getInstance() */
   private static MathUtil instance;

@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a manager of {@link PojoPathFunction}s.<br>
  * Typically a {@link PojoPathNavigator} instance will have an
@@ -14,7 +16,9 @@ package net.sf.mmm.util.pojo.path.api;
  * @see #getFunction(String)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
+@ComponentSpecification
 public interface PojoPathFunctionManager {
 
   /**

@@ -22,6 +22,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * and {@link Collection}s from their interfaces.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 public class DefaultPojoFactory extends SimplePojoFactory {

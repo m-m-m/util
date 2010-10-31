@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapter;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
@@ -17,6 +17,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * accessor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccessorProxyAdapter
     implements PojoPropertyAccessorNonArg {
@@ -24,14 +25,14 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
   /**
    * The constructor.
    * 
-   * @param configuration is the configuration to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array,
    *        map or collection property.
    */
-  public PojoPropertyAccessorProxyGetSize(PojoDescriptorConfiguration configuration,
+  public PojoPropertyAccessorProxyGetSize(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super(configuration, containerGetAccessor);
+    super(dependencies, containerGetAccessor);
   }
 
   /**
@@ -89,7 +90,7 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
     if (arrayMapOrCollection == null) {
       size = 0;
     } else {
-      size = getConfiguration().getCollectionReflectionUtil().getSize(arrayMapOrCollection);
+      size = getDependencies().getCollectionReflectionUtil().getSize(arrayMapOrCollection);
     }
     return Integer.valueOf(size);
   }

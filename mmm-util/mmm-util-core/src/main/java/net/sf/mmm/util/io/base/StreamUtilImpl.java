@@ -26,7 +26,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.concurrent.api.Stoppable;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
@@ -49,7 +49,7 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
  */
 @Singleton
 @Named
-public class StreamUtilImpl extends AbstractLoggable implements StreamUtil {
+public class StreamUtilImpl extends AbstractLoggableComponent implements StreamUtil {
 
   /** @see #getInstance() */
   private static StreamUtil instance;

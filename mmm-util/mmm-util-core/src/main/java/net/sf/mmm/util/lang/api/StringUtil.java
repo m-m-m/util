@@ -5,6 +5,8 @@ package net.sf.mmm.util.lang.api;
 
 import java.util.Locale;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a collection of utility functions that help with
  * {@link String} handling and manipulation.
@@ -15,6 +17,7 @@ import java.util.Locale;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface StringUtil {
 
   /** a string representing the boolean value <code>true</code> */

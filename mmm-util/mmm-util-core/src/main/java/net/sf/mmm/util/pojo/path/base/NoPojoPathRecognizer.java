@@ -11,6 +11,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathRecognizer;
  * {@link #recognize(Object, PojoPath) does} nothing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public final class NoPojoPathRecognizer implements PojoPathRecognizer {
 

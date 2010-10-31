@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -33,7 +33,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  */
 @Singleton
 @Named
-public class CollectionReflectionUtilImpl extends AbstractLoggable implements
+public class CollectionReflectionUtilImpl extends AbstractLoggableComponent implements
     CollectionReflectionUtil {
 
   /**

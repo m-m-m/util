@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorField;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 
@@ -18,6 +18,7 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
  * {@link Field}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorGetField extends AbstractPojoPropertyAccessorField implements
     PojoPropertyAccessorNonArg {
@@ -26,13 +27,13 @@ public class PojoPropertyAccessorGetField extends AbstractPojoPropertyAccessorFi
    * The constructor.
    * 
    * @param descriptor is the descriptor this accessor is intended for.
-   * @param configuration is the {@link PojoDescriptorConfiguration} to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param field is the {@link #getField() field} to access.
    */
   public PojoPropertyAccessorGetField(PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration, Field field) {
+      PojoDescriptorDependencies dependencies, Field field) {
 
-    super(descriptor, configuration, field);
+    super(descriptor, dependencies, field);
   }
 
   /**

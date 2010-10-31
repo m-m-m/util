@@ -13,6 +13,7 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
  * @param <ACCESSOR> is the type of the accessor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAccessor> {
 
@@ -53,8 +54,8 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
    * @return <code>true</code> if this mode is for a reading
    *         {@link PojoPropertyAccessor accessor} that
    *         {@link PojoPropertyAccessor#getReturnType() returns} a
-   *         property-value, <code>false</code> if this mode is for a
-   *         modifying {@link PojoPropertyAccessor accessor} that expects a
+   *         property-value, <code>false</code> if this mode is for a modifying
+   *         {@link PojoPropertyAccessor accessor} that expects a
    *         {@link PojoPropertyAccessor#getPropertyType() property}-value as
    *         argument.
    */

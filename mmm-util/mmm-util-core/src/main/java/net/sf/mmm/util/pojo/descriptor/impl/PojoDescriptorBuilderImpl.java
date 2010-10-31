@@ -34,12 +34,13 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
-  /** @see #getConfiguration() */
-  private ExtendedPojoDescriptorConfigurationImpl configuration;
+  /** @see #getDependencies() */
+  private ExtendedPojoDescriptorDependenciesImpl configuration;
 
   /** @see #getMethodIntrospector() */
   private PojoMethodIntrospector methodIntrospector;
@@ -85,7 +86,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
       this.fieldIntrospector = new NoPojoFieldIntrospector();
     }
     if (this.configuration == null) {
-      this.configuration = new ExtendedPojoDescriptorConfigurationImpl();
+      this.configuration = new ExtendedPojoDescriptorDependenciesImpl();
       this.configuration.initialize();
     }
   }
@@ -167,24 +168,24 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method gets the {@link ExtendedPojoDescriptorConfigurationImpl}.
+   * This method gets the {@link ExtendedPojoDescriptorDependenciesImpl}.
    * 
-   * @return the {@link ExtendedPojoDescriptorConfigurationImpl}.
+   * @return the {@link ExtendedPojoDescriptorDependenciesImpl}.
    */
   @Override
-  protected ExtendedPojoDescriptorConfigurationImpl getConfiguration() {
+  protected ExtendedPojoDescriptorDependenciesImpl getDependencies() {
 
     return this.configuration;
   }
 
   /**
-   * This method sets the {@link ExtendedPojoDescriptorConfigurationImpl}.
+   * This method sets the {@link ExtendedPojoDescriptorDependenciesImpl}.
    * 
-   * @param configuration is the {@link ExtendedPojoDescriptorConfigurationImpl}
+   * @param configuration is the {@link ExtendedPojoDescriptorDependenciesImpl}
    *        .
    */
   @Inject
-  public void setConfiguration(ExtendedPojoDescriptorConfigurationImpl configuration) {
+  public void setConfiguration(ExtendedPojoDescriptorDependenciesImpl configuration) {
 
     getInitializationState().requireNotInitilized();
     this.configuration = configuration;
@@ -247,7 +248,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         Method method = methodIterator.next();
         boolean methodUsed = false;
         for (PojoPropertyAccessorBuilder<?> builder : getAccessorBuilders()) {
-          PojoPropertyAccessor accessor = builder.create(method, descriptor, getConfiguration());
+          PojoPropertyAccessor accessor = builder.create(method, descriptor, getDependencies());
           if (accessor != null) {
             boolean registered = registerAccessor(descriptor, accessor);
             if (registered) {
@@ -268,7 +269,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         Field field = fieldIterator.next();
         boolean fieldUsed = false;
         for (PojoPropertyAccessorBuilder<?> builder : getAccessorBuilders()) {
-          PojoPropertyAccessor accessor = builder.create(field, descriptor, getConfiguration());
+          PojoPropertyAccessor accessor = builder.create(field, descriptor, getDependencies());
           if (accessor != null) {
             boolean registered = registerAccessor(descriptor, accessor);
             if (registered) {

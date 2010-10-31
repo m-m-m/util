@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgBuilder;
 
@@ -22,6 +22,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
  * interface for {@link PojoPropertyAccessorOneArgMode#ADD add-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @Singleton
 @Named
@@ -44,7 +45,7 @@ public class PojoPropertyAccessorRemoveBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     String methodName = method.getName();
     if (methodName.startsWith(METHOD_PREFIX_REMOVE)) {
@@ -56,7 +57,7 @@ public class PojoPropertyAccessorRemoveBuilder extends
         String propertyName = getPropertyName(methodName, METHOD_PREFIX_REMOVE.length(), 0);
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, argumentTypes[0],
-              PojoPropertyAccessorOneArgMode.REMOVE, descriptor, configuration, method);
+              PojoPropertyAccessorOneArgMode.REMOVE, descriptor, dependencies, method);
         }
       }
     }
@@ -67,7 +68,7 @@ public class PojoPropertyAccessorRemoveBuilder extends
    * {@inheritDoc}
    */
   public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorConfiguration configuration) {
+      PojoDescriptorDependencies dependencies) {
 
     return null;
   }

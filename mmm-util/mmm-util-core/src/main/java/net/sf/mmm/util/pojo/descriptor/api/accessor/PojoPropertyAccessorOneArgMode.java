@@ -12,6 +12,7 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
  * your own custom mode by extending this class.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorOneArgMode extends
     PojoPropertyAccessorMode<PojoPropertyAccessorOneArg> {
@@ -28,8 +29,8 @@ public class PojoPropertyAccessorOneArgMode extends
    * item to a property with a container (array or {@link java.util.Collection})
    * {@link PojoPropertyAccessor#getPropertyType() type}. The accessor will add
    * the item given as argument to the end of the container (if ordered). If the
-   * container is an array a copy with a size increased by <code>1</code> has
-   * to be created. Therefore a virtual add-accessor can only be generated for
+   * container is an array a copy with a size increased by <code>1</code> has to
+   * be created. Therefore a virtual add-accessor can only be generated for
    * array-type getters if also an according setter is present.
    * 
    * @see java.util.Collection#add(Object)
@@ -45,9 +46,9 @@ public class PojoPropertyAccessorOneArgMode extends
    * remove the first occurrence of the item given as argument from the
    * container. It will return <code>true</code> on success and
    * <code>false</code> if the item was NOT found in the container. If the
-   * container is an array a copy with a size decreased by <code>1</code> has
-   * to be created. Therefore a virtual remove-accessor can only be generated
-   * for array-type getters if also an according setter is present.
+   * container is an array a copy with a size decreased by <code>1</code> has to
+   * be created. Therefore a virtual remove-accessor can only be generated for
+   * array-type getters if also an according setter is present.
    * 
    * @see java.util.Collection#remove(Object)
    */
@@ -57,10 +58,9 @@ public class PojoPropertyAccessorOneArgMode extends
   /**
    * The mode for a {@link PojoPropertyAccessorOneArg getter} of a mapped
    * property.<br>
-   * For example an
-   * {@link PojoPropertyAccessorOneArg#invoke(Object, Object) invoke} with
-   * argument <code>key</code> for a property {@link #getName() named}
-   * "colors" might cause a <code>pojo.getColors().get(key)</code> or
+   * For example an {@link PojoPropertyAccessorOneArg#invoke(Object, Object)
+   * invoke} with argument <code>key</code> for a property {@link #getName()
+   * named} "colors" might cause a <code>pojo.getColors().get(key)</code> or
    * <code>pojo.getColors(key)</code> or even <code>pojo.getColor(key)</code>.
    */
   public static final PojoPropertyAccessorOneArgMode GET_MAPPED = new PojoPropertyAccessorOneArgMode(

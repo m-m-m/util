@@ -8,13 +8,13 @@ import java.util.Iterator;
 
 /**
  * This is the interface used to find {@link Field fields} that can
- * (potentially)
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor access} a
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property}
- * of a given
+ * (potentially) {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+ * access} a {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
+ * property} of a given
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoFieldIntrospector {
 
@@ -22,8 +22,8 @@ public interface PojoFieldIntrospector {
    * This method finds the {@link Field fields} of the given
    * <code>pojoType</code>.
    * 
-   * @param pojoType is the type reflecting the POJO for which the
-   *        {@link Field fields} are requested.
+   * @param pojoType is the type reflecting the POJO for which the {@link Field
+   *        fields} are requested.
    * @return a read-only iterator of all the {@link Field}s.
    */
   Iterator<Field> findFields(Class<?> pojoType);

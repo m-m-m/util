@@ -10,10 +10,11 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the abstract base class for the default implementation of
- * {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector}
- * or {@link net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector}.
+ * {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector} or
+ * {@link net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class AbstractPojoIntrospector {
 

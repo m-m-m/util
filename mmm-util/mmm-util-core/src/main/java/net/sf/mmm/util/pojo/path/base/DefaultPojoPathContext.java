@@ -11,6 +11,7 @@ import java.util.Properties;
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathContext} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class DefaultPojoPathContext extends PojoPathContextBean {
 

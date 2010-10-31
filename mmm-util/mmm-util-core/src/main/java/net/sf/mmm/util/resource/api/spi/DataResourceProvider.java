@@ -4,6 +4,7 @@
 package net.sf.mmm.util.resource.api.spi;
 
 import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.api.ResourceUri;
 
 /**
  * This is the interface for a provider of {@link DataResource}.

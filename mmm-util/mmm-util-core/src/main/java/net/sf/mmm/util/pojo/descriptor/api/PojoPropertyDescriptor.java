@@ -20,6 +20,7 @@ import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
  * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPropertyDescriptor extends PojoAttributeName {
 

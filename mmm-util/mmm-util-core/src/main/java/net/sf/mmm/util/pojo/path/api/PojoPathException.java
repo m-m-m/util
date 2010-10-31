@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * {@link PojoPathNavigator}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract class PojoPathException extends NlsRuntimeException {
 

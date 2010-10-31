@@ -19,6 +19,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  * @see DefaultPojoPathContext
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathContextBean implements PojoPathContext {
 
@@ -57,8 +58,8 @@ public class PojoPathContextBean implements PojoPathContext {
   }
 
   /**
-   * This method sets the
-   * {@link #getAdditionalFunctionManager() additional function-manager}.
+   * This method sets the {@link #getAdditionalFunctionManager() additional
+   * function-manager}.
    * 
    * @param additionalFunctionManager is the {@link PojoPathFunctionManager} to
    *        set.
@@ -77,7 +78,8 @@ public class PojoPathContextBean implements PojoPathContext {
   }
 
   /**
-   * This method sets the {@link #getAdditionalConverter() additional converter}.
+   * This method sets the {@link #getAdditionalConverter() additional converter}
+   * .
    * 
    * @param additionalConverter is the {@link ComposedValueConverter} to set.
    */

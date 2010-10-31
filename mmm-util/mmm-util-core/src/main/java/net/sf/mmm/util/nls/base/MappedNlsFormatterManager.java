@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.util.nls.api.NlsFormatter;
 
 /**
@@ -60,19 +62,19 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
   public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
 
     NlsFormatter<?> result = null;
-    if (formatType != null) {
-      result = this.formatterMap.getFormatter(formatType, formatStyle);
-      if (result == null) {
-        if (formatStyle != null) {
-          result = getSubFormatter(formatType, formatStyle);
-          if (result == null) {
-            result = this.formatterMap.getFormatter(formatType, null);
-          }
+    result = this.formatterMap.getFormatter(formatType, formatStyle);
+    if (result == null) {
+      if (formatStyle != null) {
+        result = getSubFormatter(formatType, formatStyle);
+        if (result == null) {
+          result = this.formatterMap.getFormatter(formatType, null);
         }
       }
     }
     if (result == null) {
-      result = getFormatter();
+      if (formatType == null) {
+        throw new IllegalStateException();
+      }
     }
     return result;
   }
@@ -88,6 +90,7 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
   /**
    * @param formatterMap is the formatterMap to set
    */
+  @Inject
   public void setFormatterMap(NlsFormatterMap formatterMap) {
 
     getInitializationState().requireNotInitilized();

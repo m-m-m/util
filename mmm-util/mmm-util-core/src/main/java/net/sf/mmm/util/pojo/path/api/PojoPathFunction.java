@@ -22,6 +22,7 @@ package net.sf.mmm.util.pojo.path.api;
  * @param <VALUE> is the generic {@link #getValueClass() value-type}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public interface PojoPathFunction<IN, VALUE> {
 

@@ -25,7 +25,7 @@ public interface NlsMessageFormatter extends NlsFormatter<Void> {
    * 
    * @param nothing has to be <code>null</code>. Only for generic compatibility.
    */
-  void format(Void nothing, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
-      Appendable buffer) throws IOException;
+  void format(Void nothing, Locale locale, Map<String, Object> arguments,
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException;
 
 }

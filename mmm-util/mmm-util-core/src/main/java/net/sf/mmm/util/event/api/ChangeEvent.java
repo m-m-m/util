@@ -5,8 +5,8 @@ package net.sf.mmm.util.event.api;
 
 /**
  * A {@link ChangeEvent} is an {@link Event} that informs about something that
- * has been {@link ChangeEventType#ADD added}, {@link ChangeEventType#UPDATE
- * updated} or {@link ChangeEventType#REMOVE removed}.
+ * has been {@link ChangeType#ADD added}, {@link ChangeType#UPDATE
+ * updated} or {@link ChangeType#REMOVE removed}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -18,6 +18,6 @@ public interface ChangeEvent extends Event {
    * 
    * @return the type of the change.
    */
-  ChangeEventType getType();
+  ChangeType getType();
 
 }

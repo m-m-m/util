@@ -15,6 +15,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
  *      String, boolean, PojoPathContext)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathUnsafeException extends PojoPathException {
 
@@ -30,7 +31,8 @@ public class PojoPathUnsafeException extends PojoPathException {
    */
   public PojoPathUnsafeException(Object initialPojoType, String pojoPath) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_UNSAFE, toMap(KEY_PATH, pojoPath, KEY_TYPE, initialPojoType));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_UNSAFE, toMap(KEY_PATH, pojoPath, KEY_TYPE,
+        initialPojoType));
   }
 
 }

@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This class is a collection of utility functions for formatting and parsing
  * dates according to ISO 8601 formats.<br>
@@ -65,6 +67,7 @@ import java.util.regex.Pattern;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface Iso8601Util {
 
   /** The regex-pattern for the date-format. */
@@ -80,7 +83,8 @@ public interface Iso8601Util {
    * The regex-pattern for the full date-format (date with optional time and
    * optional timezone).
    */
-  String PATTERN_STRING_ALL = PATTERN_STRING_DATE + "(T" + PATTERN_STRING_TIME + "(" + PATTERN_STRING_TIMEZONE + ")?)?";
+  String PATTERN_STRING_ALL = PATTERN_STRING_DATE + "(T" + PATTERN_STRING_TIME + "("
+      + PATTERN_STRING_TIMEZONE + ")?)?";
 
   /** The regex-pattern to check the format. */
   Pattern PATTERN_ALL = Pattern.compile(PATTERN_STRING_ALL);

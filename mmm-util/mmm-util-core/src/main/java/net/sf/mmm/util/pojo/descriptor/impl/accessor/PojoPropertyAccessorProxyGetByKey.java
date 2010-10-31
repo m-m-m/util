@@ -13,10 +13,11 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * This is an implementation of the {@link PojoPropertyAccessorNonArg} acting as
  * as a {@link PojoPropertyAccessorNonArgMode#GET getter} that
  * {@link #getDelegate() delegates} to a
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED mapped-getter}
- * using a fixed key.
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED
+ * mapped-getter} using a fixed key.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorProxyGetByKey extends AbstractPojoPropertyAccessorProxy implements
     PojoPropertyAccessorNonArg {

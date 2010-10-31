@@ -6,17 +6,18 @@ package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorConfiguration;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorProxyAdapterComponentType;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg}
- * interface for
- * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED getting} an element
- * from another accessor returning an array or {@link java.util.List}.
+ * interface for {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED
+ * getting} an element from another accessor returning an array or
+ * {@link java.util.List}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPropertyAccessorProxyGetIndexed extends
     AbstractPojoPropertyAccessorProxyAdapterComponentType implements
@@ -25,14 +26,14 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   /**
    * The constructor.
    * 
-   * @param configuration is the configuration to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array,
    *        map or collection property.
    */
-  public PojoPropertyAccessorProxyGetIndexed(PojoDescriptorConfiguration configuration,
+  public PojoPropertyAccessorProxyGetIndexed(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor) {
 
-    super(configuration, containerGetAccessor);
+    super(dependencies, containerGetAccessor);
   }
 
   /**
@@ -68,7 +69,7 @@ public class PojoPropertyAccessorProxyGetIndexed extends
   public Object invoke(Object pojoInstance, int index) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);
-    return getConfiguration().getCollectionReflectionUtil().get(arrayOrList, index);
+    return getDependencies().getCollectionReflectionUtil().get(arrayOrList, index);
   }
 
 }

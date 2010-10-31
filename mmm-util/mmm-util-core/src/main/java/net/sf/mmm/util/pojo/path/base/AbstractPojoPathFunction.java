@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationException;
@@ -17,9 +17,10 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
  * @param <VALUE> is the generic {@link #getValueClass() value-type}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
-public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggable implements
-    PojoPathFunction<IN, VALUE> {
+public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggableComponent
+    implements PojoPathFunction<IN, VALUE> {
 
   /**
    * The constructor.

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
@@ -13,9 +13,10 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * {@link PojoDescriptorBuilderFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggable implements
-    PojoDescriptorBuilderFactory {
+public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent
+    implements PojoDescriptorBuilderFactory {
 
   /**
    * The constructor.

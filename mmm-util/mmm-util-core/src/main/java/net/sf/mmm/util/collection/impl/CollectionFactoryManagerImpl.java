@@ -19,7 +19,7 @@ import net.sf.mmm.util.collection.base.HashSetFactory;
 import net.sf.mmm.util.collection.base.LinkedBlockingQueueFactory;
 import net.sf.mmm.util.collection.base.LinkedListQueueFactory;
 import net.sf.mmm.util.collection.base.TreeSetFactory;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
  * This is the default implementation of the {@link CollectionFactoryManager}
@@ -31,7 +31,7 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
 @Singleton
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class CollectionFactoryManagerImpl extends AbstractLoggable implements
+public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements
     CollectionFactoryManager {
 
   /** @see #getInstance() */

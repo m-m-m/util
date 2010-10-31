@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Set;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;
@@ -22,6 +23,7 @@ import net.sf.mmm.util.resource.api.DataResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@ComponentSpecification
 public interface ReflectionUtil extends GenericTypeFactory {
 
   /** an empty class array */

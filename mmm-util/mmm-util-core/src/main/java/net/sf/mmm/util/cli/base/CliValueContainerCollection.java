@@ -27,15 +27,15 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
    * @param parameterContainer is the {@link #getParameterContainer()
    *        parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
-   * @param configuraiton is the {@link #getConfiguration() configuration}.
+   * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    * @param value is the initial, empty {@link Collection}-{@link #getValue()
    *        value}.
    */
   public CliValueContainerCollection(CliParameterContainer parameterContainer, CliState cliState,
-      CliParserConfiguration configuraiton, Logger logger, Collection<Object> value) {
+      CliParserDependencies dependencies, Logger logger, Collection<Object> value) {
 
-    super(parameterContainer, cliState, configuraiton, logger);
+    super(parameterContainer, cliState, dependencies, logger);
     assert (value != null);
     this.collection = value;
   }
@@ -73,7 +73,7 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
   protected void setValueEntry(String entry, GenericType<?> propertyType) {
 
     GenericType<?> valueType = propertyType.getComponentType();
-    Object value = getConfiguration().getConverter().convertValue(entry, getParameterContainer(),
+    Object value = getDependencies().getConverter().convertValue(entry, getParameterContainer(),
         valueType.getAssignmentClass(), valueType);
     this.collection.add(value);
   }

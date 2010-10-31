@@ -12,6 +12,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathException;
  * caching was disabled at this point.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class PojoPathCachingDisabledException extends PojoPathException {
 

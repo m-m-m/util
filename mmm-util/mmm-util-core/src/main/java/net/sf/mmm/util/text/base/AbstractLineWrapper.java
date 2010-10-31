@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
@@ -16,7 +16,7 @@ import net.sf.mmm.util.text.api.TextTableInfo;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractLineWrapper extends AbstractLoggable implements LineWrapper {
+public abstract class AbstractLineWrapper extends AbstractLoggableComponent implements LineWrapper {
 
   /**
    * The constructor.

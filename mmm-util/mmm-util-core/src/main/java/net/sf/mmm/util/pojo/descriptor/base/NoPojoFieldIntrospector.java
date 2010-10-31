@@ -13,6 +13,7 @@ import net.sf.mmm.util.collection.base.EmptyIterator;
  * that never {@link #findFields(Class) finds} any field.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public class NoPojoFieldIntrospector implements PojoFieldIntrospector {
 
