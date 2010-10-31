@@ -207,7 +207,7 @@ public class NlsMessageImpl implements NlsMessage {
     try {
       NlsTemplate nlsTemplate = this.template;
       if (nlsTemplate == null) {
-        if ((resolver != null) || (locale != LOCALE_ROOT)) {
+        if (locale != LOCALE_ROOT) {
           nlsTemplate = getTemplate(resolver);
         }
       }
@@ -217,9 +217,9 @@ public class NlsMessageImpl implements NlsMessage {
           text = nlsTemplate.translate(locale);
         }
         if (text == null) {
-          // if (locale != LOCALE_ROOT) {
-          // buffer.append(LOCALIZATION_FAILURE_PREFIX);
-          // }
+          if (locale != LOCALE_ROOT) {
+            buffer.append(LOCALIZATION_FAILURE_PREFIX);
+          }
           text = this.message;
         }
         buffer.append(text);
