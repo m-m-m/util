@@ -229,6 +229,10 @@ public class NlsMessageImpl implements NlsMessage {
           success = nlsTemplate.translate(locale, this.arguments, buffer, resolver);
         }
         if (!success) {
+          // This does not make sense:
+          // If one wants for format "{0,date}" with a specific locale no
+          // translation is required...
+
           // if (locale != LOCALE_ROOT) {
           // buffer.append(LOCALIZATION_FAILURE_PREFIX);
           // }
