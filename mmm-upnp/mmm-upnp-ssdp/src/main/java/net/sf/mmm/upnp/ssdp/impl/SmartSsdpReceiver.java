@@ -34,12 +34,7 @@ public class SmartSsdpReceiver extends BasicSsdpReceiver {
 
     super.addListener(listener);
     if (!isConnected()) {
-      try {
-        connect();
-      } catch (IOException e) {
-        // TODO:
-        throw new IllegalStateException(e);
-      }
+      connect();
     }
   }
 

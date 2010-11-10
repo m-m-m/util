@@ -5,7 +5,6 @@ package net.sf.mmm.upnp.ssdp.impl;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import net.sf.mmm.upnp.ssdp.api.SsdpListener;
@@ -35,14 +34,12 @@ public class SimpleSsdpReceiver extends BasicSsdpReceiver {
   }
 
   /**
-   * This method initializes this object. It needs to be called after
-   * construction and before the object can be used.
-   * 
-   * @throws IOException if the operation failed with an I/O problem.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() throws IOException {
+  @Override
+  protected void doInitialize() {
 
+    super.doInitialize();
     connect();
   }
 

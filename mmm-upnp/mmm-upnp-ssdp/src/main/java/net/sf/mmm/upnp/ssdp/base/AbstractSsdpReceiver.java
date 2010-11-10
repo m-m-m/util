@@ -9,6 +9,7 @@ import java.util.List;
 import net.sf.mmm.upnp.ssdp.api.SsdpListener;
 import net.sf.mmm.upnp.ssdp.api.SsdpReceiver;
 import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
  * This is the abstract base implementation of the {@link SsdpReceiver}
@@ -16,7 +17,8 @@ import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSsdpReceiver implements SsdpReceiver {
+public abstract class AbstractSsdpReceiver extends AbstractLoggableComponent implements
+    SsdpReceiver {
 
   /** @see #addListener(SsdpListener) */
   private final List<SsdpListener> listeners;
@@ -79,8 +81,8 @@ public abstract class AbstractSsdpReceiver implements SsdpReceiver {
    * This method is called when a listener throws an <code>exception</code>
    * while {@link SsdpListener#receive(SsdpRequest) receiving} a
    * {@link SsdpRequest request}.<br>
-   * This implementation ignores the given <code>exception</code>. Override
-   * to change this behaviour.
+   * This implementation ignores the given <code>exception</code>. Override to
+   * change this behaviour.
    * 
    * @param exception is the catched exception.
    */

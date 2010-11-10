@@ -16,6 +16,8 @@ import net.sf.mmm.upnp.ssdp.api.SsdpRequest;
 import net.sf.mmm.upnp.ssdp.base.AbstractSsdpReceiver;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.http.HttpParser;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the basic implementation of the
@@ -44,18 +46,22 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   /**
    * This method connects the multicast-socket.
    * 
-   * @throws IOException if the operation failed.
+   * @throws RuntimeIoException if the operation failed.
    */
-  protected void connect() throws IOException {
+  protected void connect() throws RuntimeIoException {
 
-    if (this.listener != null) {
-      throw new IllegalStateException("Connect called twice without disconnect!");
+    try {
+      if (this.listener != null) {
+        throw new IllegalStateException("Connect called twice without disconnect!");
+      }
+      if (this.threadPool == null) {
+        this.threadPool = new SimpleExecutor();
+      }
+      this.listener = new MulticastListener();
+      this.threadPool.execute(this.listener);
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
-    if (this.threadPool == null) {
-      this.threadPool = new SimpleExecutor();
-    }
-    this.listener = new MulticastListener();
-    this.threadPool.execute(this.listener);
   }
 
   /**
@@ -151,12 +157,13 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
         // this.socket.disconnect();
         for (int retry = 0; retry < 3; retry++) {
           if (this.stopped) {
-            System.out.println("stopped");
+            getLogger().info("SSDP-Multicast-Listener has been stopped.");
             break;
           } else {
             try {
               Thread.sleep(100);
             } catch (InterruptedException e) {
+              // ignore?
             }
           }
         }
@@ -185,8 +192,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
           HttpParser.parseRequest(stream, request);
           notifyListeners(request);
         } catch (IOException e) {
-          // TODO: error handling!!!
-          e.printStackTrace();
+          throw new RuntimeIoException(e, IoMode.READ);
         }
       }
       this.stopped = true;
