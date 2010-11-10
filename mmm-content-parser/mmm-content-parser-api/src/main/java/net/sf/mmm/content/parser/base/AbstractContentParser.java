@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentParser extends AbstractLoggable implements ContentParser,
+public abstract class AbstractContentParser extends AbstractLoggableComponent implements ContentParser,
     LimitBufferSize {
 
   /** @see #getMaximumBufferSize() */

@@ -6,10 +6,11 @@ package net.sf.mmm.content.parser.api;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
- * This is the interface for a parser that
- * {@link #parse(InputStream, long) extracts} (meta-)data from the content of an
- * as {@link InputStream}.<br>
+ * This is the interface for a parser that {@link #parse(InputStream, long)
+ * extracts} (meta-)data from the content of an as {@link InputStream}.<br>
  * <b>ATTENTION:</b><br>
  * The implementation should allocate expensive resources (e.g. byte-arrays)
  * only temporary while {@link #parse(InputStream, long) parsing}. See also
@@ -17,13 +18,14 @@ import java.util.Properties;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification(plugin = true)
 public interface ContentParser {
 
   /**
    * this is the {@link Properties#keys() property-key} used to
-   * {@link Properties#getProperty(String) get} the plain <code>text</code>
-   * (the actual content) of the content from the
-   * {@link #parse(InputStream, long) parsed} {@link Properties}.<br>
+   * {@link Properties#getProperty(String) get} the plain <code>text</code> (the
+   * actual content) of the content from the {@link #parse(InputStream, long)
+   * parsed} {@link Properties}.<br>
    * This property has to be set (not <code>null</code>).
    */
   String PROPERTY_KEY_TEXT = "text";
@@ -40,8 +42,8 @@ public interface ContentParser {
   /**
    * this is the {@link Properties#keys() property-key} used to
    * {@link Properties#getProperty(String) get} the <code>keywords</code> (aka
-   * tags or subject) of the content from the
-   * {@link #parse(InputStream, long) parsed} {@link Properties}.<br>
+   * tags or subject) of the content from the {@link #parse(InputStream, long)
+   * parsed} {@link Properties}.<br>
    * If the title could NOT be determined, this property is NOT set.
    */
   String PROPERTY_KEY_KEYWORDS = "keywords";
@@ -81,12 +83,11 @@ public interface ContentParser {
    *         <code>ParseException</code> here would cause the overhead of
    *         additional encapsulation of exceptions without any advantage. The
    *         user of this interface has to catch for {@link Exception} what
-   *         includes {@link RuntimeException}s and excludes {@link Error}s.
-   *         He has to handle the problem anyways (also for
+   *         includes {@link RuntimeException}s and excludes {@link Error}s. He
+   *         has to handle the problem anyways (also for
    *         {@link RuntimeException}s) and has all contextual information
-   *         required to enhance the exception
-   *         {@link Exception#getMessage() message}. This is NOT a matter of
-   *         bad design.
+   *         required to enhance the exception {@link Exception#getMessage()
+   *         message}. This is NOT a matter of bad design.
    */
   Properties parse(InputStream inputStream, long filesize) throws Exception;
 
@@ -114,12 +115,11 @@ public interface ContentParser {
    *         <code>ParseException</code> here would cause the overhead of
    *         additional encapsulation of exceptions without any advantage. The
    *         user of this interface has to catch for {@link Exception} what
-   *         includes {@link RuntimeException}s and excludes {@link Error}s.
-   *         He has to handle the problem anyways (also for
+   *         includes {@link RuntimeException}s and excludes {@link Error}s. He
+   *         has to handle the problem anyways (also for
    *         {@link RuntimeException}s) and has all contextual information
-   *         required to enhance the exception
-   *         {@link Exception#getMessage() message}. This is NOT a matter of
-   *         bad design.
+   *         required to enhance the exception {@link Exception#getMessage()
+   *         message}. This is NOT a matter of bad design.
    */
   Properties parse(InputStream inputStream, long filesize, String encoding) throws Exception;
 

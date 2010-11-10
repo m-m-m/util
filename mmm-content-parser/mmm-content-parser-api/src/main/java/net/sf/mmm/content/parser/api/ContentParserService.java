@@ -3,11 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.parser.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a service that provides {@link ContentParser}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification
 public interface ContentParserService {
 
   /**

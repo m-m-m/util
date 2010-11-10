@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
@@ -22,7 +22,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentParserService extends AbstractLoggable implements
+public abstract class AbstractContentParserService extends AbstractLoggableComponent implements
     ContentParserService, LimitBufferSize {
 
   /** @see #getGenericParser() */
