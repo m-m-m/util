@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.base.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.base.config.SearchConfigurationBean;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
+import net.sf.mmm.search.engine.api.config.SearchEngineProperties;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 
 /**
@@ -25,6 +27,10 @@ import net.sf.mmm.search.engine.api.config.SearchEntryType;
 @XmlRootElement(name = "search")
 public class SearchEngineConfigurationBean extends SearchConfigurationBean implements
     SearchEngineConfiguration {
+
+  /** @see #getSearchProperties() */
+  @XmlElement(name = "search-properties")
+  private SearchEnginePropertiesBean searchProperties;
 
   /** @see #getEntryTypes() */
   @XmlElementWrapper(name = "entry-types")
@@ -62,6 +68,9 @@ public class SearchEngineConfigurationBean extends SearchConfigurationBean imple
   protected Map<String, SearchEntryTypeBean> getEntryTypeMap() {
 
     if (this.entryTypeMap == null) {
+      if (this.entryTypes == null) {
+        return Collections.emptyMap();
+      }
       Map<String, SearchEntryTypeBean> map = new HashMap<String, SearchEntryTypeBean>();
       for (SearchEntryTypeBean type : this.entryTypes) {
         map.put(type.getId(), type);
@@ -76,6 +85,9 @@ public class SearchEngineConfigurationBean extends SearchConfigurationBean imple
    */
   public List<SearchEntryTypeBean> getEntryTypes() {
 
+    if (this.entryTypes == null) {
+      return Collections.emptyList();
+    }
     return this.entryTypes;
   }
 
@@ -86,6 +98,25 @@ public class SearchEngineConfigurationBean extends SearchConfigurationBean imple
 
     this.entryTypes = entryTypes;
     this.entryTypeMap = null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchEngineProperties getSearchProperties() {
+
+    if (this.searchProperties == null) {
+      return new SearchEnginePropertiesBean();
+    }
+    return this.searchProperties;
+  }
+
+  /**
+   * @param searchProperties is the searchProperties to set
+   */
+  public void setSearchProperties(SearchEnginePropertiesBean searchProperties) {
+
+    this.searchProperties = searchProperties;
   }
 
 }

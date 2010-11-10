@@ -25,10 +25,6 @@ public class SearchIndexConfigurationBean implements SearchIndexConfiguration {
   @XmlAttribute(name = "location")
   private String location;
 
-  // /** @see #isOverwrite() */
-  // @XmlAttribute(name = "overwrite")
-  // private boolean overwrite;
-
   /**
    * The constructor.
    */
@@ -52,21 +48,5 @@ public class SearchIndexConfigurationBean implements SearchIndexConfiguration {
 
     this.location = location;
   }
-
-  // /**
-  // * {@inheritDoc}
-  // */
-  // public boolean isOverwrite() {
-  //
-  // return this.overwrite;
-  // }
-  //
-  // /**
-  // * @param overwrite is the overwrite to set
-  // */
-  // public void setOverwrite(boolean overwrite) {
-  //
-  // this.overwrite = overwrite;
-  // }
 
 }

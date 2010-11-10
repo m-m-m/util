@@ -5,7 +5,6 @@ package net.sf.mmm.search.indexer.impl;
 
 import net.sf.mmm.search.indexer.NlsBundleSearchIndexerApi;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain;
-import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.impl.SpringContainer;
@@ -24,7 +23,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@CliMode(id = CliMode.ID_DEFAULT, usage = NlsBundleSearchIndexerApi.MSG_SEARCH_INDEXER_MAIN_MODE_USAGE_DEFAULT)
 public class SearchIndexerMain extends AbstractSearchIndexerMain {
 
   /** The optional context-path for the spring-context. */
@@ -59,6 +57,7 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
   protected IocContainer getIocContainer() {
 
     if (this.container == null) {
+      getLogger().debug("Starting spring context...");
       ConfigurableApplicationContext springContext;
       if (this.springConfig == null) {
         springContext = new AnnotationConfigApplicationContext(this.springPackages);
@@ -66,6 +65,7 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
         springContext = new ClassPathXmlApplicationContext(this.springConfig);
       }
       this.container = new SpringContainer(springContext);
+      getLogger().debug("Spring context started...");
     }
     return this.container;
   }

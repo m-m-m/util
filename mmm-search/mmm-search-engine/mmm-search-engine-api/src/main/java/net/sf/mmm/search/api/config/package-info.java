@@ -4,8 +4,8 @@
 /**
  * Contains the API of common search configurations.
  * <a name="documentation"/><h2>Search-Configuration API</h2> 
- * This package contains the API of common search configurations such as 
- * {@link net.sf.mmm.search.api.config.SearchSource}.
+ * This package contains the API of common 
+ * {@link net.sf.mmm.search.api.config.SearchConfiguration}.
  */
 package net.sf.mmm.search.api.config;
 

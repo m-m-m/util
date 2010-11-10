@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<search>
+  <search-index location="target/search-index" />
+  <!-- configuration of sources -->
+  <sources>
+    <source id="" title="All" />
+    <source id="twiki" title="Wiki" url-prefix="http://foo.bar/twiki/bin/view/" />
+    <source id="svn" title="Subversion" update-strategy="last-modified" url-prefix="http://foo.bar/svn/trunk/">
+      <locations>
+        <location absolute-uris="false" encoding="UTF-8" filter="svn-filter" location-uri="src/main/java" source="svn" uri-transformer="wiki-transformer" />
+      </locations>
+    </source>
+  </sources>
+  <filters>
+    <filter-chain default-result="true" id="svn-filter">
+      <rule include="false" pattern="/\.svn$"/>
+    </filter-chain>
+  </filters>
+  <uri-rewriters>
+    <transformer-chain id="wiki-transformer">
+      <regex pattern=".txt$" replace-all="false" replacement="" stop-on-match="false" />
+      <regex pattern="/\.foo/" replace-all="false" replacement="" stop-on-match="true" />
+    </transformer-chain>
+  </uri-rewriters>
+</search>

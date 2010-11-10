@@ -34,6 +34,10 @@ public class SearchSourceBean implements SearchSource {
   @XmlAttribute(name = "url-prefix")
   private String urlPrefix;
 
+  // /** @see #getUpdateStrategy() */
+  // @XmlAttribute(name = "update-strategy")
+  // private String updateStrategy;
+
   /**
    * The constructor.
    */
@@ -89,5 +93,23 @@ public class SearchSourceBean implements SearchSource {
 
     this.urlPrefix = urlPrefix;
   }
+
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public String getUpdateStrategy() {
+  //
+  // return this.updateStrategy;
+  // }
+  //
+  // /**
+  // * This method sets the {@link #getUpdateStrategy() update-strategy}.
+  // *
+  // * @param updateStrategy is the new value to set.
+  // */
+  // public void setUpdateStrategy(String updateStrategy) {
+  //
+  // this.updateStrategy = updateStrategy;
+  // }
 
 }

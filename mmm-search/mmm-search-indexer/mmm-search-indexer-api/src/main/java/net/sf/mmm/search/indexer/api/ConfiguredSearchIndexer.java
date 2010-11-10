@@ -3,29 +3,33 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api;
 
-import java.util.Collection;
-
-import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.indexer.api.config.ConfiguredSearchIndexerOptions;
-import net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
-import net.sf.mmm.search.indexer.api.state.SearchIndexState;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerState;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface for a high-level {@link SearchIndexer}. It recursively
  * crawls {@link net.sf.mmm.util.resource.api.BrowsableResource directories},
- * performs {@link SearchIndexDataLocation#getFilter() filtering},
- * {@link SearchIndexDataLocation#getUriTransformer() URI-transformations} and
- * {@link net.sf.mmm.content.parser.api.ContentParser metadata extraction}.
+ * performs
+ * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation#getFilter()
+ * filtering},
+ * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation#getUriTransformer()
+ * URI-transformations}. It will use the {@link ResourceSearchIndexer} for
+ * indexing of single {@link net.sf.mmm.util.resource.api.DataResource
+ * resources}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@ComponentSpecification
 public interface ConfiguredSearchIndexer {
 
   /**
-   * This method performs the indexing for the given
-   * {@link SearchIndexerConfiguration}.
+   * This method reads the {@link SearchIndexerConfiguration} from the given
+   * <code>configurationLocation</code> and performs the
+   * {@link #index(SearchIndexerConfiguration) indexing}.
    * 
    * @see #index(SearchIndexerConfiguration)
    * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader#readConfiguration(String)
@@ -36,10 +40,12 @@ public interface ConfiguredSearchIndexer {
   void index(String configurationLocation);
 
   /**
-   * This method performs the indexing for the given
-   * {@link SearchIndexerConfiguration}.
+   * This method reads the {@link SearchIndexerConfiguration} from the given
+   * <code>configurationLocation</code> and performs the
+   * {@link #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions)
+   * indexing}.
    * 
-   * @see #index(SearchIndexerConfiguration)
+   * @see #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions)
    * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader#readConfiguration(String)
    * 
    * @param configurationLocation is the location where the configuration data
@@ -49,12 +55,11 @@ public interface ConfiguredSearchIndexer {
   void index(String configurationLocation, ConfiguredSearchIndexerOptions options);
 
   /**
-   * This method performs the indexing for the given
-   * {@link SearchIndexerConfiguration}.
+   * This method performs the indexing of all
+   * {@link SearchIndexerConfiguration#getSources() sources} given by
+   * <code>configuration</code>.
    * 
-   * @see SearchIndexerConfiguration#getLocations()
-   * @see #index(SearchIndexer, SearchIndexState, boolean,
-   *      SearchIndexDataLocation, Collection)
+   * @see SearchIndexerSource#getLocations()
    * 
    * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
    *        add to the index.
@@ -62,12 +67,11 @@ public interface ConfiguredSearchIndexer {
   void index(SearchIndexerConfiguration configuration);
 
   /**
-   * This method performs the indexing for the given
-   * {@link SearchIndexerConfiguration}.
+   * This method performs the indexing for the given <code>configuration</code>
+   * and <code>options</code>.
    * 
-   * @see SearchIndexerConfiguration#getLocations()
-   * @see #index(SearchIndexer, SearchIndexState, boolean,
-   *      SearchIndexDataLocation, Collection)
+   * @see #index(SearchIndexerConfiguration)
+   * @see ConfiguredSearchIndexerOptions#getSourceIds()
    * 
    * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
    *        add to the index.
@@ -76,52 +80,38 @@ public interface ConfiguredSearchIndexer {
   void index(SearchIndexerConfiguration configuration, ConfiguredSearchIndexerOptions options);
 
   /**
-   * This method performs the indexing for the given
-   * {@link SearchIndexerConfiguration} limited to the
-   * {@link SearchIndexerConfiguration#getLocations() locations} that are
-   * {@link SearchIndexDataLocation#getSource() associated} with the given
-   * <code>source</code>.
+   * This method performs the indexing for the given {@link SearchIndexerSource
+   * source}.
    * 
-   * @param searchIndexer is the {@link SearchIndexer} used for modifying the
-   *        index.
-   * @param state is the {@link SearchIndexState}.
-   * @param forceFullIndexing - <code>true</code> if the <code>location</code>
-   *        should be entirely re-indexed (all existing entries for the
-   *        according source/location are deleted and everything is indexed
-   *        again from scratch), <code>false</code> if delta-indexing should be
-   *        enabled so a potentially existing index is updated incremental.
-   * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
-   *        add to the index.
    * @param source is the {@link SearchIndexerConfiguration#getSource(String)
    *        source} to index.
-   * @see SearchIndexerConfiguration#getLocations()
-   * @see #index(SearchIndexer, SearchIndexState, boolean,
-   *      SearchIndexDataLocation, Collection)
-   */
-  void index(SearchIndexer searchIndexer, SearchIndexState state, boolean forceFullIndexing,
-      SearchIndexerConfiguration configuration, SearchSource source);
-
-  /**
-   * This method indexes the given {@link SearchIndexDataLocation location}.<br/>
-   * <b>NOTE:</b><br>
-   * Unlike
-   * {@link #index(SearchIndexer, SearchIndexState, boolean, SearchIndexerConfiguration, SearchSource)}
-   * this method will NOT delete search-entries from the index in advance.
-   * 
+   * @param options are the {@link ConfiguredSearchIndexerOptions}.
+   * @param state is the {@link SearchIndexerState}.
    * @param searchIndexer is the {@link SearchIndexer} used for modifying the
    *        index.
-   * @param state is the {@link SearchIndexState}.
-   * @param forceFullIndexing - <code>true</code> if the <code>location</code>
-   *        should be entirely indexed again from scratch, <code>false</code> if
-   *        delta-indexing should be enabled so a potentially existing index is
-   *        updated incremental.
-   * @param location is the {@link SearchIndexDataLocation} to crawl and add to
-   *        the index.
-   * @param resourceUris is a {@link Collection} where the URIs of the indexed
-   *        resources are collected. It can be used to determine the entries
-   *        from the index that need to be removed for delta-indexing.
+   * 
+   * @see SearchIndexerSource#getLocations()
    */
-  void index(SearchIndexer searchIndexer, SearchIndexState state, boolean forceFullIndexing,
-      SearchIndexDataLocation location, Collection<String> resourceUris);
+  void index(SearchIndexerSource source, ConfiguredSearchIndexerOptions options,
+      SearchIndexerState state, SearchIndexer searchIndexer);
+
+  // /**
+  // * This method indexes the given {@link SearchIndexDataLocation
+  // location}.<br/>
+  // * <b>NOTE:</b><br>
+  // * Unlike
+  // * {@link #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions,
+  // SearchIndexState, SearchIndexer, SearchIndexerSource)}
+  // * this method will NOT delete search-entries from the index in advance.
+  // *
+  // * @param location is the {@link SearchIndexDataLocation} to crawl and add
+  // to
+  // * the index.
+  // * @param state is the {@link SearchIndexState}.
+  // * @param searchIndexer is the {@link SearchIndexer} used for modifying the
+  // * index.
+  // */
+  // void index(SearchIndexDataLocation location, SearchIndexState state,
+  // SearchIndexer searchIndexer);
 
 }

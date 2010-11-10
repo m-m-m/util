@@ -16,7 +16,11 @@ public class GenericSearchServlet extends AbstractSearchServlet {
   /** The UID for serialization. */
   private static final long serialVersionUID = -3795814301240648103L;
 
-  /** @see #getIocContainer() */
+  /**
+   * A comma separated list of {@link Package}s containing components.
+   * 
+   * @see #getIocContainer()
+   */
   private static final String PARAM_COMPONENT_PACKAGES = "component-packages";
 
   /** @see #getIocContainer() */
@@ -40,13 +44,12 @@ public class GenericSearchServlet extends AbstractSearchServlet {
     if (this.container == null) {
       String componentPackages = getServletConfig().getInitParameter(PARAM_COMPONENT_PACKAGES);
       if (componentPackages == null) {
-        // TODO
         this.container = new SpringContainer();
       } else {
-        this.container = new SpringContainer();
+        String[] packages = componentPackages.split(",");
+        this.container = new SpringContainer(packages);
       }
     }
     return this.container;
   }
-
 }

@@ -39,4 +39,12 @@ public interface SearchEngineConfiguration extends SearchConfiguration {
    */
   List<? extends SearchEntryType> getEntryTypes();
 
+  /**
+   * This method gets the options for the
+   * {@link net.sf.mmm.search.engine.api.SearchEngine}.
+   * 
+   * @return the {@link SearchEngineProperties}.
+   */
+  SearchEngineProperties getSearchProperties();
+
 }

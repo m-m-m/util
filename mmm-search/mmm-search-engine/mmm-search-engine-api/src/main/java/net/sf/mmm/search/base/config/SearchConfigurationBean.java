@@ -7,32 +7,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import net.sf.mmm.search.api.config.SearchConfiguration;
-import net.sf.mmm.search.api.config.SearchIndexConfiguration;
-import net.sf.mmm.search.api.config.SearchSource;
-
 /**
- * This is the implementation of {@link SearchConfiguration} as JAXB-ready
+ * This is the implementation of
+ * {@link net.sf.mmm.search.api.config.SearchConfiguration} as JAXB-ready
  * Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-public class SearchConfigurationBean implements SearchConfiguration {
-
-  /** @see #getSearchIndex() */
-  @XmlElement(name = "search-index")
-  private SearchIndexConfigurationBean searchIndex;
+public class SearchConfigurationBean extends AbstractSearchConfigurationBean {
 
   /** @see #getSources() */
-  @XmlElementWrapper(name = "sources")
-  @XmlElement(name = "source")
+  @XmlElementWrapper(name = XML_ELEMENT_SOURCES)
+  @XmlElement(name = XML_ELEMENT_SOURCE)
   private List<SearchSourceBean> sources;
 
   /** @see #getSourceMap() */
@@ -47,22 +37,6 @@ public class SearchConfigurationBean implements SearchConfiguration {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public SearchIndexConfiguration getSearchIndex() {
-
-    return this.searchIndex;
-  }
-
-  /**
-   * @param searchIndex is the {@link SearchIndexConfiguration} to set.
-   */
-  public void setSearchIndex(SearchIndexConfigurationBean searchIndex) {
-
-    this.searchIndex = searchIndex;
-  }
-
-  /**
    * @return the sources
    */
   public List<SearchSourceBean> getSources() {
@@ -73,7 +47,7 @@ public class SearchConfigurationBean implements SearchConfiguration {
   /**
    * {@inheritDoc}
    */
-  public SearchSource getSource(String id) {
+  public SearchSourceBean getSource(String id) {
 
     return getSourceMap().get(id);
   }

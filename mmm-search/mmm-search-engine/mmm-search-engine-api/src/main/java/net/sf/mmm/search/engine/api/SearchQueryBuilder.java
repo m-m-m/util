@@ -4,6 +4,7 @@
 package net.sf.mmm.search.engine.api;
 
 import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface used to build {@link SearchQuery search-queries}.<br>
@@ -35,6 +36,7 @@ import net.sf.mmm.search.api.SearchException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification
 public interface SearchQueryBuilder {
 
   /**

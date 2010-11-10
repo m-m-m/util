@@ -13,8 +13,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import net.sf.mmm.search.base.config.SearchIndexConfigurationBean;
-import net.sf.mmm.search.base.config.SearchSourceBean;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.filter.base.PatternFilterRule;
 import net.sf.mmm.util.io.api.EncodingUtil;
@@ -27,7 +28,7 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 
 /**
- * This is the test-case for SearchIndexerConfigurationBean.
+ * This is the test-case for {@link SearchIndexerConfigurationBean}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -47,25 +48,28 @@ public class SearchIndexerConfigurationBeanTest {
 
     JAXBContext context = JAXBContext.newInstance(SearchIndexerConfigurationBean.class);
     SearchIndexerConfigurationBean config = new SearchIndexerConfigurationBean();
+
+    // create an example configuration as java object...
     // index
     SearchIndexConfigurationBean searchIndex = new SearchIndexConfigurationBean();
     searchIndex.setLocation("~/search-index");
     config.setSearchIndex(searchIndex);
     // sources
-    List<SearchSourceBean> sources = new ArrayList<SearchSourceBean>();
-    config.setSources(sources);
-    SearchSourceBean source;
-    source = new SearchSourceBean();
+    List<SearchIndexerSourceBean> sources = new ArrayList<SearchIndexerSourceBean>();
+    SearchIndexerSourceBean source;
+    source = new SearchIndexerSourceBean();
     source.setId("Wiki");
     source.setTitle("Wiki");
     source.setUrlPrefix("http://foo.org/twiki/");
+    source.setUpdateStrategy(SearchIndexerSource.UPDATE_STRATEGY_NONE);
     sources.add(source);
-    source = new SearchSourceBean();
+    source = new SearchIndexerSourceBean();
     source.setId("SVN");
     source.setTitle("Subversion");
     source.setUrlPrefix("http://foo.org/svn/trunk");
+    source.setUpdateStrategy(SearchIndexerSource.UPDATE_STRATEGY_VCS);
     sources.add(source);
-
+    config.setSources(sources);
     // transformers
     List<StringTransformerChain> transformerList = new ArrayList<StringTransformerChain>();
     config.setTransformers(transformerList);
@@ -76,7 +80,6 @@ public class SearchIndexerConfigurationBeanTest {
     StringTransformerChain transformer = new StringTransformerChain("wiki-transformer", null,
         rule1, rule2);
     transformerList.add(transformer);
-
     // filters
     List<FilterRuleChain<String>> filters = new ArrayList<FilterRuleChain<String>>();
     config.setFilters(filters);
@@ -89,33 +92,54 @@ public class SearchIndexerConfigurationBeanTest {
     filterRule2 = new PatternFilterRule("(?i)\\.(xml|xsl)$", false);
     filter = new FilterRuleChain<String>("extended-filter", filter, true, filterRule1, filterRule2);
     filters.add(filter);
+    // locations
+    List<SearchIndexerDataLocationBean> locationList = new ArrayList<SearchIndexerDataLocationBean>();
+    source.setLocations(locationList);
+    SearchIndexerDataLocationBean location = new SearchIndexerDataLocationBean();
+    location.setEncoding(EncodingUtil.ENCODING_UTF_8);
+    location.setFilter(filter);
+    location.setLocaltionUri("file:///data/repository");
+    location.setSource(source);
+    location.setUriTransformer(transformer);
+    location.setUpdateStrategyVariant(SearchIndexerDataLocation.UPDATE_STRATEGY_VCS_VARIANT_SVN);
+    locationList.add(location);
+    // configuration object created...
 
-    // directories
-    List<SearchIndexDataLocationBean> directoryList = new ArrayList<SearchIndexDataLocationBean>();
-    config.setLocations(directoryList);
-    SearchIndexDataLocationBean directory = new SearchIndexDataLocationBean();
-    directory.setEncoding(EncodingUtil.ENCODING_UTF_8);
-    directory.setFilter(filter);
-    directory.setLocaltion("file:///data/repository");
-    directory.setSource(source);
-    directory.setUriTransformer(transformer);
-    directoryList.add(directory);
+    // serialize/marshal as XML to string
     StringWriter buffer = new StringWriter();
     context.createMarshaller().marshal(config, buffer);
     String xml = buffer.toString();
+
+    // deserialize/unmarshal XML string to object
     StringReader reader = new StringReader(xml);
     SearchIndexerConfiguration newConfig = (SearchIndexerConfiguration) context
         .createUnmarshaller().unmarshal(reader);
+
+    // serialize/marshal object back to XML
     buffer = new StringWriter();
     context.createMarshaller().marshal(newConfig, buffer);
     String xml2 = buffer.toString();
+
+    // compare that both XMLs are equal
     Assert.assertEquals(xml, xml2);
 
+    // dumpAsXml(context, newConfig);
+  }
+
+  /**
+   * This method serializes the given <code>configuration</code> to XML and
+   * dumps this formatted to the console.
+   * 
+   * @param context is the {@link JAXBContext}.
+   * @param configuration is the configuration-bean to dump.
+   * @throws Exception if something goes wrong.
+   */
+  public void dumpAsXml(JAXBContext context, SearchIndexerConfiguration configuration)
+      throws Exception {
+
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-    context.createMarshaller().marshal(newConfig, document);
+    context.createMarshaller().marshal(configuration, document);
     DomUtilImpl.getInstance().writeXml(document, System.out, true);
-    System.out.println(newConfig.getLocations().get(0).getSource().getTitle());
-    System.out.println(((StringTransformerChain) newConfig.getLocations().get(0)
-        .getUriTransformer()).getId());
+
   }
 }

@@ -3,19 +3,25 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.impl.lucene;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.search.engine.api.config.SearchEngineOptions;
+import net.sf.mmm.search.engine.api.config.SearchEngineProperties;
 import net.sf.mmm.search.engine.base.AbstractSearchEngineBuilder;
 import net.sf.mmm.search.engine.base.SearchEngineRefresher;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.IndexReader;
@@ -156,22 +162,25 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
    * {@inheritDoc}
    */
   public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration,
-      SearchEngineOptions options) {
+      SearchEngineProperties properties) {
 
-    Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration);
-    SearchEngineRefresher searchEngineRefresher;
-    boolean autoRefresh = options.isAutoRefresh();
-    if (autoRefresh) {
-      searchEngineRefresher = getSearchEngineRefresher();
-    } else {
-      searchEngineRefresher = null;
+    NlsNullPointerException.checkNotNull(SearchIndexConfiguration.class, configuration);
+    NlsNullPointerException.checkNotNull(SearchEngineProperties.class, properties);
+    try {
+      Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration);
+      SearchEngineRefresher searchEngineRefresher = null;
+      String autoRefresh = properties.getProperty(SearchEngineProperties.KEY_AUTO_REFRESH);
+      if ((autoRefresh == null) || (StringUtil.TRUE.equals(autoRefresh))) {
+        searchEngineRefresher = getSearchEngineRefresher();
+      }
+      IndexReader indexReader = IndexReader.open(directory, true);
+      LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer,
+          getSearchQueryBuilder(), this.highlightFormatter, searchEngineRefresher);
+      engine.initialize();
+      return engine;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
-    LuceneSearchEngine engine = new LuceneSearchEngine(searchEngineRefresher, directory,
-        this.analyzer, getSearchQueryBuilder(), this.highlightFormatter);
-    if (autoRefresh) {
-      searchEngineRefresher.addSearchEngine(engine);
-    }
-    return engine;
   }
 
   /**

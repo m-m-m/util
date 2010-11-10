@@ -10,8 +10,10 @@ import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngineBuilder;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
-import net.sf.mmm.search.engine.base.config.SearchEngineOptionsBean;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
+import net.sf.mmm.search.engine.base.config.SearchEnginePropertiesBean;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base-implementation of the {@link SearchEngineBuilder}
@@ -20,7 +22,7 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSearchEngineBuilder extends AbstractLoggable implements
+public abstract class AbstractSearchEngineBuilder extends AbstractLoggableComponent implements
     SearchEngineBuilder {
 
   /** @see #getSearchQueryBuilder() */
@@ -99,9 +101,18 @@ public abstract class AbstractSearchEngineBuilder extends AbstractLoggable imple
   /**
    * {@inheritDoc}
    */
+  public ManagedSearchEngine createSearchEngine(SearchEngineConfiguration configuration) {
+
+    NlsNullPointerException.checkNotNull(SearchEngineConfiguration.class, configuration);
+    return createSearchEngine(configuration.getSearchIndex(), configuration.getSearchProperties());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration) {
 
-    return createSearchEngine(configuration, new SearchEngineOptionsBean());
+    return createSearchEngine(configuration, new SearchEnginePropertiesBean());
   }
 
 }

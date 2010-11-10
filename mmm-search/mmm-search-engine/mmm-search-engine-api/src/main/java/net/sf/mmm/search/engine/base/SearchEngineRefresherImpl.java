@@ -13,7 +13,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
@@ -29,7 +29,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 @Singleton
 @Named
-public class SearchEngineRefresherImpl extends AbstractLoggable implements SearchEngineRefresher,
+public class SearchEngineRefresherImpl extends AbstractLoggableComponent implements SearchEngineRefresher,
     Runnable {
 
   /** The default {@link #setRefreshDelayInSeconds(int) refresh-delay}. */

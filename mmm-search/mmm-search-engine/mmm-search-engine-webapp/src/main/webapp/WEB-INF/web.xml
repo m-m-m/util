@@ -12,15 +12,9 @@
     <init-param>
       <!-- the path to the configuration file -->
       <param-name>config-file</param-name>
-      <param-value>~/search.xml</param-value>
+      <param-value>~/.mmm/search.xml</param-value>
     </init-param>
     <!-- search-configurator for GenericSearchServlet -->
-    <!--
-    <init-param>
-      <param-name>search-configurator</param-name>
-      <param-value>net.sf.mmm.search.impl.lucene.LuceneSearchConfigurator</param-value>
-    </init-param>
-    -->
     <!--
     <init-param>
       <param-name>details-view</param-name>

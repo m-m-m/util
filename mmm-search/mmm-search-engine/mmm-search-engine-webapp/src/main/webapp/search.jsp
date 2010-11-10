@@ -2,14 +2,18 @@
  $Id$
  Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  http://www.apache.org/licenses/LICENSE-2.0
- --%><%@page import="net.sf.mmm.util.StringUtil"
+ --%><%@ page import="net.sf.mmm.search.engine.api.config.SearchEntryType"
+%><%@ page import="net.sf.mmm.search.api.config.SearchSource"
+%><%@ page import="net.sf.mmm.util.xml.base.XmlUtilImpl"
 %><%@ page import="net.sf.mmm.search.engine.api.SearchResultPage"
 %><%@ page import="net.sf.mmm.search.engine.api.SearchHit"
-%><%@ page import="net.sf.mmm.search.view.SearchViewConfiguration"
-%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%// get parameters as attributes (already validated and prepared by the servlet)
+%><%@ page import="net.sf.mmm.search.engine.api.config.SearchEngineConfiguration"
+%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%
+  // get parameters as attributes (already validated and prepared by the servlet)
   SearchViewContext searchContext = SearchViewContext.get(request);
   SearchResultPage searchPage = searchContext.getResultPage();
-  SearchViewConfiguration conf = searchContext.getConfiguration();%><html>
+  SearchEngineConfiguration conf = searchContext.getConfiguration();
+%><html>
 <head>
   <title>Search</title>
   <meta name="description" content="Search result page"/>
@@ -55,8 +59,7 @@ function showPage(pageNum) {
   document.search.submit();
 }
   </script>
-</head>
-<%
+</head><%
   String paramExpert = request.getParameter("expert");
   if (paramExpert == null) {
     paramExpert = "";
@@ -65,11 +68,11 @@ function showPage(pageNum) {
   if (paramExpert.length() > 0) {
     expertSelected = " checked=\"true\"";
   }
-  String htmlQuery = StringUtil.escapeXml(searchContext.getQuery(), true);
+  String htmlQuery = XmlUtilImpl.getInstance().escapeXml(searchContext.getQuery(), true);
 %>
 <body onload="updateExpert()">
 <div id="body">
-<a name="top"/>
+<a name="top"></a>
 <div id="logo">
   <img src="images/logo.png" alt="Logo"/>
 </div>
@@ -78,40 +81,36 @@ function showPage(pageNum) {
     Query: 
     <input type="text" size="60" maxlength="2048" name="<%= SearchViewContext.PARAM_QUERY %>" value="<%= htmlQuery %>"/>
     <input type="hidden" name="<%= SearchViewContext.PARAM_PAGE %>" value="<%= searchContext.getPageNumber() %>"/>  
-    <input type="submit" value="Search" onclick="showPage(0)">
-    <input type="checkbox" name="expert" <%= expertSelected %> onclick="updateExpert()">Advanced</input>
+    <input type="submit" value="Search" onclick="showPage(0)"/>
+    <input type="checkbox" name="expert" <%= expertSelected %> onclick="updateExpert()"/>Advanced
     <div id="searchadvanced">
       Source: 
-      <select name="<%= SearchViewContext.PARAM_SOURCE %>" size="1">
-        <%
-                    for (String source: conf.getSourceNames()) {
-                    String sourceKey = conf.getSourceByName(source);
-                    String sourceSelected = "";
-                    if (sourceKey.equals(searchContext.getSource())) {
-                      sourceSelected = "selected=\"true\"";
-                    }
+      <select name="<%= SearchViewContext.PARAM_SOURCE %>" size="1"><%
+  for (SearchSource source: conf.getSources()) {
+    String sourceKey = source.getId();
+    String sourceSelected = "";
+    if (sourceKey.equals(searchContext.getSource())) {
+      sourceSelected = "selected=\"true\"";
+    }
         %>
-        <option value="<%= sourceKey%>"<%= sourceSelected %>><%=source%></option>            
-            <%
-                        }
-                        %>
+        <option value="<%= sourceKey%>"<%= sourceSelected %>><%=source.getTitle()%></option><%
+  }
+%>
       </select>
       Filetype:
-      <select name="<%= SearchViewContext.PARAM_TYPE %>" size="1">
-        <%
-                    for (String type: conf.getTypeNames()) {
-                    String typeKey = conf.getTypeByName(type);
-                    String typeSelected = "";
-                    if (typeKey.equals(searchContext.getType())) {
-                      typeSelected = " selected=\"true\"";
-                    }
-        %>
-        <option value="<%= typeKey%>"<%= typeSelected %>><%=type%></option>            
-            <%
-                        }
-                        %>
+      <select name="<%= SearchViewContext.PARAM_TYPE %>" size="1"><%
+  for (SearchEntryType type: conf.getEntryTypes()) {
+    String typeKey = type.getId();
+    String typeSelected = "";
+    if (typeKey.equals(searchContext.getType())) {
+      typeSelected = " selected=\"true\"";
+    }
+%>
+        <option value="<%= typeKey%>"<%= typeSelected %>><%=type.getTitle()%></option><%
+  }
+%>
       </select>
-      Author: <input type="text" maxlength="512" name="<%= SearchViewContext.PARAM_AUTHOR %>" value="<%= StringUtil.escapeXml(searchContext.getAuthor(), true) %>"/><br/>
+      Author: <input type="text" maxlength="512" name="<%= SearchViewContext.PARAM_AUTHOR %>" value="<%= XmlUtilImpl.getInstance().escapeXml(searchContext.getAuthor(), true) %>"/><br/>
     </div>
   </form>
 </div>
@@ -121,7 +120,7 @@ function showPage(pageNum) {
     if (error != null) {
       %>
 <div id="hitlisttop"> 
-An error has occured during search.
+An error has occurred during search.
 </div>
 <div id="hit">
 Unfortunately your search has caused an error:<br/>
@@ -188,7 +187,7 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
         %>
 <div id="hit" class="<%= styleClass %>">
 <a href="details?id=<%= hit.getEntryId() %>"><img src="images/stars<%= hit.getScore(5) %>.gif"/></a> 
-<a href="<%= url %>"><img src="images/icons/<%= conf.getIconName(hit.getType())%>"/> <%= title %></a><br/>
+<a href="<%= url %>"><img src="images/icons/<%= conf.getEntryType(hit.getType()).getIcon() %>"/> <%= title %></a><br/>
 <%= hit.getHighlightedText() %><br/>
 <a href="<%= url %>"><span class="url"><%= url %></span></a>
 </div>
@@ -196,7 +195,7 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
       }
       %>
 <div id="hitlistbottom">
-<a name="bottom"/><a href="#top"><img src="images/icons/arrow-top-on.gif" alt="Top of page"/></a> <%@include file="jinc/search-paging.jinc" %>
+<a name="bottom"></a><a href="#top"><img src="images/icons/arrow-top-on.gif" alt="Top of page"/></a> <%@include file="jinc/search-paging.jinc" %>
 </div>
       <%
     }
@@ -206,7 +205,7 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
 %>
 </div>
 <div id="footer">
-&copy;2007 The m-m-m Team
+&copy; The m-m-m Team
 </div>
 </body>
 </html>

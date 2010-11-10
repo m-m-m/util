@@ -6,6 +6,7 @@ package net.sf.mmm.search.view;
 import javax.servlet.ServletRequest;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 
@@ -46,14 +47,17 @@ public class SearchViewContext {
   /** @see SearchEntry#PROPERTY_TITLE */
   public static final String PARAM_TITLE = SearchEntry.PROPERTY_TITLE;
 
-  /** @see SearchEntry#PROPERTY_TITLE */
+  /** @see net.sf.mmm.search.engine.api.SearchHit#getEntryId() */
   public static final String PARAM_ID = "id";
 
   /** @see #getServletRequest() */
-  private ServletRequest servletRequest;
+  private final ServletRequest servletRequest;
 
   /** @see #getConfiguration() */
   private SearchEngineConfiguration configuration;
+
+  /** @see #getSearchEngine() */
+  private ManagedSearchEngine searchEngine;
 
   /** @see #getPageNumber() */
   private int pageNumber;
@@ -90,7 +94,8 @@ public class SearchViewContext {
     super();
     this.servletRequest = request;
     this.pageNumber = getParameterAsInt(PARAM_PAGE, 0, 0, 10000);
-    this.hitsPerPage = getParameterAsInt(PARAM_HITS_PER_PAGE, 10, 5, 100);
+    this.hitsPerPage = getParameterAsInt(PARAM_HITS_PER_PAGE,
+        SearchResultPage.DEFAULT_HITS_PER_PAGE, 2, 100);
     this.totalHitCount = getParameterAsInt(PARAM_TOTAL_HIT_COUNT, -1, 0, Integer.MAX_VALUE);
     this.servletRequest.setAttribute(ATTRIBUTE_NAME, this);
   }
@@ -173,7 +178,9 @@ public class SearchViewContext {
   }
 
   /**
-   * @return the configuration
+   * This method gets the {@link SearchEngineConfiguration}.
+   * 
+   * @return the {@link SearchEngineConfiguration}.
    */
   public SearchEngineConfiguration getConfiguration() {
 
@@ -189,83 +196,21 @@ public class SearchViewContext {
   }
 
   /**
-   * @return the pageNumber
+   * This method gets the {@link ManagedSearchEngine}.
+   * 
+   * @return the {@link ManagedSearchEngine}.
    */
-  public int getPageNumber() {
+  public ManagedSearchEngine getSearchEngine() {
 
-    return this.pageNumber;
+    return this.searchEngine;
   }
 
   /**
-   * @return the hitsPerPage
+   * @param searchEngine is the searchEngine to set
    */
-  public int getHitsPerPage() {
+  public void setSearchEngine(ManagedSearchEngine searchEngine) {
 
-    return this.hitsPerPage;
-  }
-
-  /**
-   * @return the totalHitCount
-   */
-  public int getTotalHitCount() {
-
-    return this.totalHitCount;
-  }
-
-  /**
-   * @param newServletRequest the servletRequest to set
-   */
-  public void setServletRequest(ServletRequest newServletRequest) {
-
-    this.servletRequest = newServletRequest;
-  }
-
-  /**
-   * @return the query
-   */
-  public String getQuery() {
-
-    return getParameter(PARAM_QUERY);
-  }
-
-  /**
-   * @return the source
-   */
-  public String getSource() {
-
-    return getParameter(PARAM_SOURCE);
-  }
-
-  /**
-   * @return the author
-   */
-  public String getAuthor() {
-
-    return getParameter(PARAM_AUTHOR);
-  }
-
-  /**
-   * @return the title
-   */
-  public String getTitle() {
-
-    return getParameter(PARAM_TITLE);
-  }
-
-  /**
-   * @return the type
-   */
-  public String getType() {
-
-    return getParameter(PARAM_TYPE);
-  }
-
-  /**
-   * @return the id
-   */
-  public String getId() {
-
-    return getParameter(PARAM_ID);
+    this.searchEngine = searchEngine;
   }
 
   /**
@@ -290,6 +235,110 @@ public class SearchViewContext {
   public SearchEntry getEntry() {
 
     return this.entry;
+  }
+
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.search.engine.api.SearchResultPage#getPageIndex()
+   * page-index} from the request parameters.
+   * 
+   * @return the pageNumber. Will be <code>0</code> if NOT set in request.
+   */
+  public int getPageNumber() {
+
+    return this.pageNumber;
+  }
+
+  /**
+   * This method gets the number of {@link SearchResultPage#getHitsPerPage()
+   * hits per page} from the request parameters.
+   * 
+   * @return the hitsPerPage. Will be
+   *         {@link SearchResultPage#DEFAULT_HITS_PER_PAGE} if NOT set in
+   *         request.
+   */
+  public int getHitsPerPage() {
+
+    return this.hitsPerPage;
+  }
+
+  /**
+   * This method gets the {@link SearchResultPage#getTotalHitCount() total
+   * number of hits} from the request parameters.
+   * 
+   * @return the totalHitCount or <code>-1</code> if NOT set in request.
+   */
+  public int getTotalHitCount() {
+
+    return this.totalHitCount;
+  }
+
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.search.engine.api.SearchQueryBuilder#parseStandardQuery(String)
+   * query} from the request parameters.
+   * 
+   * @return the query. Will be the empty string if NOT set in request.
+   */
+  public String getQuery() {
+
+    return getParameter(PARAM_QUERY);
+  }
+
+  /**
+   * This method gets the {@link SearchEntry#PROPERTY_SOURCE source} from the
+   * request parameters.
+   * 
+   * @return the source. Will be the empty string if NOT set in request.
+   */
+  public String getSource() {
+
+    return getParameter(PARAM_SOURCE);
+  }
+
+  /**
+   * This method gets the {@link SearchEntry#PROPERTY_AUTHOR author} from the
+   * request parameters.
+   * 
+   * @return the author. Will be the empty string if NOT set in request.
+   */
+  public String getAuthor() {
+
+    return getParameter(PARAM_AUTHOR);
+  }
+
+  /**
+   * This method gets the {@link SearchEntry#PROPERTY_TITLE title} from the
+   * request parameters.
+   * 
+   * @return the title. Will be the empty string if NOT set in request.
+   */
+  public String getTitle() {
+
+    return getParameter(PARAM_TITLE);
+  }
+
+  /**
+   * This method gets the {@link SearchEntry#PROPERTY_TYPE type} from the
+   * request parameters.
+   * 
+   * @return the type. Will be the empty string if NOT set in request.
+   */
+  public String getType() {
+
+    return getParameter(PARAM_TYPE);
+  }
+
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() ID} from the
+   * request parameters.
+   * 
+   * @return the id. Will be the empty string if NOT set in request.
+   */
+  public String getId() {
+
+    return getParameter(PARAM_ID);
   }
 
   /**

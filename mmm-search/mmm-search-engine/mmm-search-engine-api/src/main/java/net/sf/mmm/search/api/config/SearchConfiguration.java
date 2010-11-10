@@ -8,8 +8,9 @@ import java.util.List;
 /**
  * This is the interface for the configuration of the entire search (e.g. for
  * the {@link net.sf.mmm.search.engine.api.SearchEngine}).<br>
- * You will typically provide your configuration as XML. The base-implementation
- * comes with an according (un)marshaler.
+ * You will typically provide your configuration as XML in the
+ * {@link #DEFAULT_CONFIGURATION_URL default configuration file}. The
+ * base-implementation comes with an according (un)marshaler.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -18,6 +19,13 @@ public interface SearchConfiguration {
 
   /** The default location of the configuration for the search. */
   String DEFAULT_CONFIGURATION_URL = "file://~/.mmm/search.xml";
+
+  /**
+   * This method gets the {@link SearchIndexConfiguration}.
+   * 
+   * @return the {@link SearchIndexConfiguration}.
+   */
+  SearchIndexConfiguration getSearchIndex();
 
   /**
    * This method gets the {@link List} of {@link SearchSource sources}.
@@ -36,12 +44,5 @@ public interface SearchConfiguration {
    *         configured for the given <code>id</code>.
    */
   SearchSource getSource(String id);
-
-  /**
-   * This method gets the {@link SearchIndexConfiguration}.
-   * 
-   * @return the {@link SearchIndexConfiguration}.
-   */
-  SearchIndexConfiguration getSearchIndex();
 
 }

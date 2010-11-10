@@ -3,55 +3,41 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Properties;
-import java.util.Set;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.content.parser.api.ContentParserService;
-import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
-import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
-import net.sf.mmm.search.engine.api.SearchEngine;
-import net.sf.mmm.search.engine.api.SearchHit;
-import net.sf.mmm.search.engine.api.SearchQuery;
-import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer;
-import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
 import net.sf.mmm.search.indexer.api.config.ConfiguredSearchIndexerOptions;
-import net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader;
-import net.sf.mmm.search.indexer.api.state.SearchIndexSourceState;
-import net.sf.mmm.search.indexer.api.state.SearchIndexState;
-import net.sf.mmm.search.indexer.api.state.SearchIndexStateManager;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerSourceState;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerState;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerStateManager;
+import net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy;
+import net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategyManager;
 import net.sf.mmm.search.indexer.base.config.ConfiguredSearchIndexerOptionsBean;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationReaderImpl;
-import net.sf.mmm.search.indexer.base.state.SearchIndexStateManagerImpl;
+import net.sf.mmm.search.indexer.base.state.SearchIndexerStateManagerImpl;
+import net.sf.mmm.search.indexer.base.strategy.UpdateStrategyArgumentsBean;
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.component.base.AbstractLoggable;
-import net.sf.mmm.util.file.api.FileUtil;
-import net.sf.mmm.util.file.base.FileUtilImpl;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.context.api.GenericContextFactory;
+import net.sf.mmm.util.context.api.MutableGenericContext;
+import net.sf.mmm.util.context.impl.GenericContextFactoryImpl;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
-import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
  * This is the implementation of the {@link ConfiguredSearchIndexer}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable implements
+public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableComponent implements
     ConfiguredSearchIndexer {
 
   /** @see #getSearchIndexerManager() */
@@ -60,14 +46,14 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   /** @see #getSearchIndexerConfigurationReader() */
   private SearchIndexerConfigurationReader searchIndexerConfigurationReader;
 
-  /** @see #getSearchIndexStateManager() */
-  private SearchIndexStateManager searchIndexStateManager;
+  /** @see #getSearchIndexerStateManager() */
+  private SearchIndexerStateManager searchIndexerStateManager;
 
-  /** @see #getParserService() */
-  private ContentParserService parserService;
+  /** @see #getSearchIndexerUpdateStrategyManager() */
+  private SearchIndexerUpdateStrategyManager searchIndexerUpdateStrategyManager;
 
-  /** @see #getFileUtil() */
-  private FileUtil fileUtil;
+  /** @see #getGenericContextFactory() */
+  private GenericContextFactory genericContextFactory;
 
   /**
    * The constructor.
@@ -117,55 +103,59 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   /**
    * @return the searchIndexStateManager
    */
-  protected SearchIndexStateManager getSearchIndexStateManager() {
+  protected SearchIndexerStateManager getSearchIndexerStateManager() {
 
-    return this.searchIndexStateManager;
+    return this.searchIndexerStateManager;
   }
 
   /**
-   * @param searchIndexStateManager is the searchIndexStateManager to set
+   * @param searchIndexerStateManager is the searchIndexStateManager to set
    */
   @Inject
-  public void setSearchIndexStateManager(SearchIndexStateManager searchIndexStateManager) {
+  public void setSearchIndexerStateManager(SearchIndexerStateManager searchIndexerStateManager) {
 
     getInitializationState().requireNotInitilized();
-    this.searchIndexStateManager = searchIndexStateManager;
+    this.searchIndexerStateManager = searchIndexerStateManager;
   }
 
   /**
-   * @return the parserService
+   * @return the deltaSearchIndexerBuilder
    */
-  public ContentParserService getParserService() {
+  protected SearchIndexerUpdateStrategyManager getSearchIndexerUpdateStrategyManager() {
 
-    return this.parserService;
+    return this.searchIndexerUpdateStrategyManager;
   }
 
   /**
-   * @param parserService the parserService to set
+   * @param searchIndexerUpdateStrategyManager is the deltaSearchIndexerBuilder
+   *        to set
    */
   @Inject
-  public void setParserService(ContentParserService parserService) {
+  public void setSearchIndexerUpdateStrategyManager(
+      SearchIndexerUpdateStrategyManager searchIndexerUpdateStrategyManager) {
 
     getInitializationState().requireNotInitilized();
-    this.parserService = parserService;
+    this.searchIndexerUpdateStrategyManager = searchIndexerUpdateStrategyManager;
   }
 
   /**
-   * @return the fileUtil
+   * This method gets the {@link GenericContextFactory}.
+   * 
+   * @return the {@link GenericContextFactory}.
    */
-  public FileUtil getFileUtil() {
+  protected GenericContextFactory getGenericContextFactory() {
 
-    return this.fileUtil;
+    return this.genericContextFactory;
   }
 
   /**
-   * @param fileUtil is the fileUtil to set
+   * @param genericContextFactory is the genericContextFactory to set
    */
   @Inject
-  public void setFileUtil(FileUtil fileUtil) {
+  public void setGenericContextFactory(GenericContextFactory genericContextFactory) {
 
     getInitializationState().requireNotInitilized();
-    this.fileUtil = fileUtil;
+    this.genericContextFactory = genericContextFactory;
   }
 
   /**
@@ -175,6 +165,9 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
   public void doInitialize() {
 
     super.doInitialize();
+    if (this.searchIndexerUpdateStrategyManager == null) {
+      throw new ResourceMissingException(SearchIndexerUpdateStrategyManager.class.getSimpleName());
+    }
     if (this.searchIndexerManager == null) {
       throw new ResourceMissingException("searchIndexerManager");
     }
@@ -183,70 +176,97 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
       readerImpl.initialize();
       this.searchIndexerConfigurationReader = readerImpl;
     }
-    if (this.searchIndexStateManager == null) {
-      SearchIndexStateManagerImpl stateManagerImpl = new SearchIndexStateManagerImpl();
-      stateManagerImpl.initialize();
-      this.searchIndexStateManager = stateManagerImpl;
-    }
-    if (this.parserService == null) {
-      ContentParserServiceImpl impl = new ContentParserServiceImpl();
+    if (this.searchIndexerStateManager == null) {
+      SearchIndexerStateManagerImpl impl = new SearchIndexerStateManagerImpl();
       impl.initialize();
-      this.parserService = impl;
-
+      this.searchIndexerStateManager = impl;
     }
-    if (this.fileUtil == null) {
-      this.fileUtil = FileUtilImpl.getInstance();
+    if (this.genericContextFactory == null) {
+      GenericContextFactoryImpl impl = new GenericContextFactoryImpl();
+      impl.initialize();
+      this.genericContextFactory = impl;
     }
   }
+
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public void index(SearchIndexDataLocation location, SearchIndexState state,
+  // SearchIndexer searchIndexer) {
+  //
+  // index(searchIndexer, state, location);
+  // }
+
+  // /**
+  // * This method indexes the given {@link SearchIndexDataLocation
+  // location}.<br/>
+  // * <b>NOTE:</b><br>
+  // * Unlike
+  // * {@link #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions,
+  // SearchIndexState, SearchIndexer, SearchSource)}
+  // * this method will NOT delete search-entries from the index in advance.
+  // *
+  // * @param searchIndexer is the {@link SearchIndexer} used for modifying the
+  // * index.
+  // * @param state is the {@link SearchIndexState}.
+  // * @param forceFullIndexing - <code>true</code> if the <code>location</code>
+  // * should be entirely indexed again from scratch, <code>false</code> if
+  // * delta-indexing should be enabled so a potentially existing index is
+  // * updated incremental.
+  // * @param location is the {@link SearchIndexDataLocation} to crawl and add
+  // to
+  // * the index.
+  // * @param entryUriSet is the {@link Set} with the
+  // * {@link net.sf.mmm.search.api.SearchEntry#getUri() URIs} of all
+  // * {@link net.sf.mmm.search.api.SearchEntry entries} that have been
+  // * indexed or remain untouched in delta-indexing.
+  // */
+  // protected abstract void index(SearchIndexer searchIndexer, SearchIndexState
+  // state,
+  // boolean forceFullIndexing, SearchIndexDataLocation location, Set<String>
+  // entryUriSet);
 
   /**
    * {@inheritDoc}
    */
-  public void index(SearchIndexer searchIndexer, SearchIndexState state, boolean forceFullIndexing,
-      SearchIndexerConfiguration configuration, SearchSource source) {
+  public void index(SearchIndexerSource source, ConfiguredSearchIndexerOptions options,
+      SearchIndexerState state, SearchIndexer searchIndexer) {
 
+    if (source.getLocations().isEmpty()) {
+      if (!source.getId().equals(SearchSource.ID_ANY)) {
+        getLogger().info(
+            "source '" + source.getId() + "' has not locations and will NOT be indexed.");
+      }
+      // nothing to index...
+      return;
+    }
+
+    getLogger().debug("Indexing source '" + source.getId() + "' ...");
     String sourceId = source.getId();
-    SearchIndexSourceState sourceState = state.getSourceState(sourceId);
+    SearchIndexerSourceState sourceState = state.getSourceState(sourceId);
     if (sourceState == null) {
-      throw new ObjectNotFoundException(SearchIndexSourceState.class.getSimpleName(), sourceId);
+      throw new ObjectNotFoundException(SearchIndexerSourceState.class.getSimpleName(), sourceId);
     }
-    // how to deal with multiple locations for single source?
-    if (forceFullIndexing) {
-      // TODO: we should skip this if this is the first indexing.
-      // TODO: wont work with updateMode of location...
-      getLogger().debug("Removing all search-entries for source: " + sourceId);
-      int removeCount = searchIndexer.remove(SearchEntry.PROPERTY_SOURCE, sourceId);
-      getLogger().debug("Removed " + removeCount + " entries/entry.");
-    } else {
-      // Map<String, DocState> uri2docStateMap?
-      // <DocState: docid -> lucene Document, state: OLD/UNCHANGED/UPDATED/ADDED
-      // on update directly delete by uri (+source?)
-    }
-    Date indexingDate = new Date();
-    Set<String> resourceUris = new HashSet<String>();
-    for (SearchIndexDataLocation location : configuration.getLocations()) {
-      if (location.getSource().getId().equals(sourceId)) {
-        index(searchIndexer, state, forceFullIndexing, location, resourceUris);
-      }
-    }
-    if (!forceFullIndexing && (sourceState.getIndexingDate() != null)) {
-      // delta-indexing: delete entries that have NOT been visited again
-      SearchEngine searchEngine = searchIndexer.getSearchEngine();
-      SearchQuery query = searchEngine.getQueryBuilder().createTermQuery(
-          SearchEntry.PROPERTY_SOURCE, sourceId);
-      int hitsPerPage = Integer.MAX_VALUE;
-      // get all hits... (TODO: use paging...?)
-      SearchResultPage page = searchEngine.search(query, hitsPerPage);
-      for (int i = 0; i < page.getPageHitCount(); i++) {
-        SearchHit hit = page.getPageHit(i);
-        String uri = hit.getUri();
-        if (!resourceUris.contains(uri)) {
-          // delete...
-        }
-      }
-    }
-    sourceState.setIndexingDate(indexingDate);
-    this.searchIndexStateManager.save(state);
+
+    // get strategy...
+    SearchIndexerUpdateStrategy strategy = this.searchIndexerUpdateStrategyManager
+        .getStrategy(source);
+
+    // create arguments (state object)...
+    MutableGenericContext context = this.genericContextFactory.createContext();
+    UpdateStrategyArgumentsBean arguments = new UpdateStrategyArgumentsBean(context);
+    arguments.setIndexer(searchIndexer);
+    arguments.setOptions(options);
+    arguments.setSource(source);
+    arguments.setSourceState(sourceState);
+
+    // delegate the actual indexing to according strategy...
+    strategy.index(arguments);
+
+    // complete indexing...
+    searchIndexer.flush();
+    this.searchIndexerStateManager.save(state);
+    getLogger().debug("Indexed source '" + source.getId() + "' ...");
   }
 
   /**
@@ -280,15 +300,17 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
    */
   public void index(SearchIndexerConfiguration configuration, ConfiguredSearchIndexerOptions options) {
 
-    SearchIndexState state = this.searchIndexStateManager.load(configuration);
+    this.searchIndexerConfigurationReader.validateConfiguration(configuration);
+    SearchIndexerState state = this.searchIndexerStateManager.load(configuration);
     SearchIndexConfiguration searchIndexConfiguration = configuration.getSearchIndex();
     List<String> sourceIds = options.getSourceIds();
     SearchIndexer searchIndexer = this.searchIndexerManager.createIndexer(searchIndexConfiguration,
         options);
+    getLogger().debug("Start to index...");
     try {
       if (sourceIds == null) {
-        for (SearchSource source : configuration.getSources()) {
-          index(searchIndexer, state, options.isOverwriteEntries(), configuration, source);
+        for (SearchIndexerSource source : configuration.getSources()) {
+          index(source, options, state, searchIndexer);
         }
       } else {
         // verify sourceIds...
@@ -299,120 +321,18 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggable i
           }
         }
         for (String sourceId : sourceIds) {
-          SearchSource source = configuration.getSource(sourceId);
-          index(searchIndexer, state, options.isOverwriteEntries(), configuration, source);
+          SearchIndexerSource source = configuration.getSource(sourceId);
+          index(source, options, state, searchIndexer);
         }
       }
+      if (options.isOptimize()) {
+        getLogger().debug("Optimizing index...");
+        searchIndexer.optimize();
+      }
     } finally {
-      getLogger().debug("Optimizing index...");
-      searchIndexer.optimize();
       getLogger().debug("Closing index...");
       searchIndexer.close();
     }
   }
 
-  /**
-   * This method gets the property <code>key</code> from the given
-   * <code>properties</code>. It will also {@link String#trim() trim} the
-   * properties value.
-   * 
-   * @param properties is where to get the property from.
-   * @param key is the name of the requested property.
-   * @return the trimmed property or <code>null</code> if the property is NOT
-   *         set or its trimmed value is the empty string.
-   */
-  protected String getProperty(Properties properties, String key) {
-
-    String value = properties.getProperty(key);
-    if (value != null) {
-      value = value.trim();
-      if (value.length() == 0) {
-        value = null;
-      }
-    }
-    return value;
-  }
-
-  /**
-   * This method indexes a single {@link DataResource}.
-   * 
-   * @param searchIndexer is the {@link SearchIndexer} to use.
-   * @param location is the {@link SearchIndexDataLocation}.
-   * @param resource is the {@link DataResource} to index.
-   */
-  public void indexData(SearchIndexer searchIndexer, SearchIndexDataLocation location,
-      DataResource resource) {
-
-    String uri = resource.getUri().replace('\\', '/');
-    getLogger().debug("Indexing " + uri);
-    String filename = resource.getName();
-    if (!location.isAbsoluteUris()) {
-      String locationUri = location.getLocation().replace('\\', '/');
-      if (uri.startsWith(locationUri)) {
-        uri = uri.substring(locationUri.length());
-        if (uri.startsWith("/") || uri.startsWith("\\")) {
-          uri = uri.substring(1);
-        }
-        String baseUri = location.getBaseUri();
-        if (baseUri == null) {
-          baseUri = "";
-        }
-        if ((baseUri.length() > 0) && !baseUri.endsWith("/") && !baseUri.endsWith("\\")) {
-          baseUri = baseUri + "/";
-        }
-        uri = baseUri + uri;
-      }
-    }
-    String extension = this.fileUtil.getExtension(filename);
-    MutableSearchEntry entry = searchIndexer.createEntry();
-    Transformer<String> uriTransformer = location.getUriTransformer();
-    if (uriTransformer != null) {
-      uri = uriTransformer.transform(uri);
-    }
-    entry.setUri(uri);
-    long fileSize = resource.getSize();
-    entry.setSize(fileSize);
-    ContentParser parser = null;
-    if (extension != null) {
-      entry.setType(extension);
-      parser = this.parserService.getParser(extension);
-    }
-    if (parser == null) {
-      parser = this.parserService.getGenericParser();
-    }
-    if (parser != null) {
-      try {
-        InputStream inputStream = resource.openStream();
-        try {
-          Properties properties = parser.parse(inputStream, fileSize, location.getEncoding());
-          String title = getProperty(properties, ContentParser.PROPERTY_KEY_TITLE);
-          if (title != null) {
-            entry.setTitle(title);
-          }
-          String author = getProperty(properties, ContentParser.PROPERTY_KEY_AUTHOR);
-          if (author != null) {
-            entry.setAuthor(author);
-          }
-          String text = getProperty(properties, ContentParser.PROPERTY_KEY_TEXT);
-          if (text != null) {
-            entry.setText(text);
-          }
-        } catch (Exception e) {
-          getLogger().error("Failed to extract data from resource: " + resource.getUri(), e);
-          // TODO: this is just a temporary hack!!!
-          // however it helps perfectly for debugging...
-          StringWriter sw = new StringWriter();
-          e.printStackTrace(new PrintWriter(sw));
-          entry.setText(sw.toString());
-        }
-      } catch (RuntimeException e) {
-        getLogger().error("Failed to open resource " + resource.getUri(), e);
-      }
-    }
-    SearchSource source = location.getSource();
-    if (source != null) {
-      entry.setSource(source.getId());
-    }
-    searchIndexer.add(entry);
-  }
 }

@@ -118,6 +118,27 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   }
 
   /**
+   * This method performs the actual remove by {@link Term}.
+   * 
+   * @see #removeByUid(String)
+   * @see #removeByUri(String, String)
+   * @see IndexWriter#deleteDocuments(Term)
+   * 
+   * @param terms are the {@link Term}s identifying the {@link SearchEntry
+   *        entries} to remove.
+   * @return the number of removed {@link SearchEntry entries}.
+   */
+  protected int remove(Term... terms) {
+
+    try {
+      this.indexWriter.deleteDocuments(terms);
+      return -1;
+    } catch (IOException e) {
+      throw new SearchRemoveFailedException(e, terms[0].field(), terms[0].text());
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   public boolean removeById(String entryId) throws SearchException {
@@ -127,33 +148,18 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
       // lucene is strange: IndexReader is required to delete documents by id
       // according to this issue:
       // https://issues.apache.org/jira/browse/LUCENE-1721
-      // the documentId is no ID at all as it may turn invalid if the index
-      // changed.
-      // lucene does NOT seem to give use feedback here...
+      // the documentId might also not be an ID at all as it may turn invalid
+      // if the index changed.
+      // lucene does NOT seem to give feedback here...
+
       // TODO: javadoc: getReader() is read-only, so this code buggy
       this.indexWriter.getReader().deleteDocument(docId);
       return true;
     } catch (NumberFormatException e) {
       throw new SearchEntryIdInvalidException(e, entryId);
     } catch (IOException e) {
-      throw new SearchRemoveFailedException("ID", entryId);
+      throw new SearchRemoveFailedException(e, "ID", entryId);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int removeByUid(String uid) throws SearchException {
-
-    return remove(SearchEntry.PROPERTY_UID, uid);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int removeByUri(String uri) throws SearchException {
-
-    return remove(SearchEntry.PROPERTY_URI, uri);
   }
 
   /**
@@ -164,11 +170,22 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     if ((value == null) || (value.length() == 0)) {
       throw new SearchPropertyValueInvalidException(property, value);
     }
-    try {
-      this.indexWriter.deleteDocuments(new Term(property, value));
-      return 0;
-    } catch (IOException e) {
-      throw new SearchRemoveFailedException(property, value);
+    return remove(new Term(property, value));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int removeByUri(String uri, String sourceId) throws SearchException {
+
+    if (sourceId == null) {
+      return remove(SearchEntry.PROPERTY_URI, uri);
+    } else {
+      if ((uri == null) || (uri.length() == 0)) {
+        throw new SearchPropertyValueInvalidException(SearchEntry.PROPERTY_URI, uri);
+      }
+      return remove(new Term(SearchEntry.PROPERTY_URI, uri), new Term(SearchEntry.PROPERTY_SOURCE,
+          sourceId));
     }
   }
 

@@ -19,11 +19,13 @@ import net.sf.mmm.search.api.config.SearchConfiguration;
 public interface SearchIndexerConfiguration extends SearchConfiguration {
 
   /**
-   * This method gets the {@link List} of {@link SearchIndexDataLocation
-   * directories}.
-   * 
-   * @return the {@link List} of {@link SearchIndexDataLocation}.
+   * {@inheritDoc}
    */
-  List<? extends SearchIndexDataLocation> getLocations();
+  List<? extends SearchIndexerSource> getSources();
+
+  /**
+   * {@inheritDoc}
+   */
+  SearchIndexerSource getSource(String id);
 
 }

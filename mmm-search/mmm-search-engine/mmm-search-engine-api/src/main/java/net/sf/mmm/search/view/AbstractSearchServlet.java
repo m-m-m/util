@@ -25,7 +25,12 @@ import net.sf.mmm.util.component.api.IocContainer;
 
 /**
  * This is the abstract base implementation of the controller
- * {@link javax.servlet.Servlet servlet} of the search.
+ * {@link javax.servlet.Servlet servlet} of the search.<br/>
+ * <b>ATTENTION:</b><br>
+ * Please set <code>URIEncoding="UTF-8"</code> or better
+ * <code>useBodyEncodingForURI="true"</code> for the connector in the server.xml
+ * of your tomcat.
+ * 
  * 
  * @author Joerg Hohwiller
  */
@@ -37,10 +42,10 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   /** @see #init(ServletConfig) */
   private static final String PARAM_CONFIG_FILE = "config-file";
 
-  /** The name of the view for the actual search. */
+  /** The name of the view (URL segment) for the actual search. */
   private String searchView;
 
-  /** The name of the view for the details. */
+  /** The name of the view (URL segment) for the details. */
   private String detailsView;
 
   /** @see #getConfiguration() */
@@ -109,7 +114,7 @@ public abstract class AbstractSearchServlet extends HttpServlet {
           .getComponent(SearchEngineConfigurationReader.class);
       this.configuration = reader.readConfiguration(configPath);
       this.searchEngine = container.getComponent(SearchEngineBuilder.class).createSearchEngine(
-          this.configuration.getSearchIndex());
+          this.configuration);
     } catch (Exception e) {
       throw new ServletException("Initialization failed!", e);
     }
@@ -138,16 +143,13 @@ public abstract class AbstractSearchServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // you need to set URIEncoding = "UTF-8" or better
-    // useBodyEncodingForURI = "true" for the connector in the server.xml of
-    // your tomcat!
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html");
 
     SearchViewContext searchContext = new SearchViewContext(request);
     searchContext.setConfiguration(this.configuration);
-    // request.setAttribute(SearchContext.ATTRIBUTE_NAME, searchContext);
+    searchContext.setSearchEngine(this.searchEngine);
 
     String viewName = request.getServletPath().substring(1);
     if (viewName.equals(this.detailsView)) {

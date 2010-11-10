@@ -4,15 +4,18 @@
 package net.sf.mmm.search.engine.base;
 
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 
 /**
  * This is the abstract base implementation of the {@link ManagedSearchEngine}
  * interface.
  * 
+ * @see #initialize()
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchEngine extends AbstractLoggable implements ManagedSearchEngine {
+public abstract class AbstractSearchEngine extends AbstractLoggableObject implements
+    ManagedSearchEngine {
 
   /** The {@link SearchEngineRefresher}. */
   private final SearchEngineRefresher searchEngineRefresher;
@@ -26,16 +29,17 @@ public abstract class AbstractSearchEngine extends AbstractLoggable implements M
 
     super();
     this.searchEngineRefresher = searchEngineRefresher;
-    initialize();
   }
 
   /**
-   * {@inheritDoc}
+   * This method initializes this engine. It should be called after
+   * construction.
    */
-  @Override
-  protected final void doInitialize() {
+  public void initialize() {
 
-    super.doInitialize();
+    if (this.searchEngineRefresher != null) {
+      this.searchEngineRefresher.addSearchEngine(this);
+    }
   }
 
   /**

@@ -12,37 +12,32 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  */
 public class NlsBundleSearchIndexerApi extends AbstractResourceBundle {
 
-  /**
-   * @see net.sf.mmm.search.indexer.base.SearchUpdateMissingIdException
-   */
-  public static final String ERR_UPDATE_MISSING_ID = "Can not update entry: neither UID nor URI is set!";
+  /** @see net.sf.mmm.search.indexer.base.SearchUpdateMissingIdException */
+  public static final String ERR_UPDATE_MISSING_ID = "Can not update entry: "
+      + "neither UID nor URI is set!";
 
-  /**
-   * @see net.sf.mmm.search.indexer.base.SearchRemoveFailedException
-   */
+  /** @see net.sf.mmm.search.indexer.base.SearchRemoveFailedException */
   public static final String ERR_REMOVE_FAILED = "Failed to remove entry with "
       + "value \"{value}\" for property \"{property}\"!";
 
-  /**
-   * @see net.sf.mmm.search.indexer.base.SearchAddFailedException
-   */
+  /** @see net.sf.mmm.search.indexer.base.SearchAddFailedException */
   public static final String ERR_ADD_FAILED = "Failed to add entry \"{0}\"!";
 
-  /** See net.sf.mmm.search.indexer.base.AdvancedSearchIndexer. */
+  /** See net.sf.mmm.search.indexer.impl.SearchIndexerMain */
   public static final String MSG_MAIN_OPTION_USAGE_SPRING_XML = "The "
       + "optional XML based configuration used for the spring context given by "
       + "{operand}. By default annotation based config is used.";
 
-  /** See net.sf.mmm.search.indexer.base.AdvancedSearchIndexer. */
+  /** See net.sf.mmm.search.indexer.impl.SearchIndexerMain */
   public static final String INT_INDEXER_MAIN_OPTION_NAME_SPRING_XML = "--spring-xml";
 
-  /** See net.sf.mmm.search.indexer.base.AdvancedSearchIndexer. */
+  /** See net.sf.mmm.search.indexer.impl.SearchIndexerMain */
   public static final String MSG_MAIN_OPTION_USAGE_SPRING_PACKAGES = "The "
       + "optional list of java packages where spring should look for "
       + "annotated beans. The default is {default}. This option is ignored, if "
       + INT_INDEXER_MAIN_OPTION_NAME_SPRING_XML + " is set.";
 
-  /** See net.sf.mmm.search.indexer.base.AdvancedSearchIndexer. */
+  /** @see net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain */
   public static final String MSG_SEARCH_INDEXER_MAIN_MODE_USAGE_DEFAULT = "Perform "
       + "search-indexing according to the configuration.";
 

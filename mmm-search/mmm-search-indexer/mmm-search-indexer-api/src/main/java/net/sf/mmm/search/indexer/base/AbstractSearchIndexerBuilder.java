@@ -10,7 +10,7 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerOptionsBean;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
  * This is the abstract base-implementation for the {@link SearchIndexerBuilder}
@@ -19,7 +19,7 @@ import net.sf.mmm.util.component.base.AbstractLoggable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSearchIndexerBuilder extends AbstractLoggable implements
+public abstract class AbstractSearchIndexerBuilder extends AbstractLoggableComponent implements
     SearchIndexerBuilder {
 
   /**

@@ -8,7 +8,7 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
-import net.sf.mmm.util.component.base.AbstractLoggable;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -18,7 +18,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchQueryBuilder extends AbstractLoggable implements
+public abstract class AbstractSearchQueryBuilder extends AbstractLoggableComponent implements
     SearchQueryBuilder {
 
   /**

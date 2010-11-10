@@ -8,6 +8,7 @@ import java.util.List;
 import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationReader;
+import net.sf.mmm.search.engine.api.config.SearchEngineProperties;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
@@ -122,6 +123,13 @@ public class SearchEngineConfigurationReaderTest {
     Assert.assertEquals(source, sources.get(2));
 
     Assert.assertNull(configuration.getSource("UNDEFINED"));
+
+    // properties
+    SearchEngineProperties properties = configuration.getSearchProperties();
+    Assert.assertNotNull(properties);
+    Assert.assertEquals("bar", properties.getProperty("foo"));
+    Assert.assertNull(properties.getProperty("undefined"));
+
   }
 
 }

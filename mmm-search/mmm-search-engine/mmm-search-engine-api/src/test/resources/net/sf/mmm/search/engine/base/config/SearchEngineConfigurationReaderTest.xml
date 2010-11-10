@@ -17,5 +17,10 @@
     <type id="xml" title="XML" icon="xml.png"/>
     <type id="html" title="HTML" icon="firefox.png"/>
     <type id="htm" icon="ie.png"/>
-  </entry-types>  
+  </entry-types>
+  <search-properties>
+    <properties>
+      <property key="foo">bar</property>
+    </properties>
+  </search-properties>
 </search>

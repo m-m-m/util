@@ -8,6 +8,7 @@ import java.io.Flushable;
 
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.SearchEngine;
+import net.sf.mmm.search.engine.api.SearchHit;
 
 /**
  * This is the interface for the indexer used to create and modify a search
@@ -76,6 +77,20 @@ public interface SearchIndexer extends Flushable, Closeable {
 
   /**
    * This method removes an {@link #add(MutableSearchEntry) existing} entry
+   * identified by the given <code>hit</code>. In most cases this method will
+   * delegate to {@link #removeById(String)}. However the implementation can
+   * decide what is the best way to do it.
+   * 
+   * @param hit is the {@link SearchHit} to remove.
+   * @return <code>true</code> if the entry existed and has been removed from
+   *         the index, <code>false</code> if NO entry exists for the given
+   *         <code>hit</code>.
+   * @throws SearchException if the operation failed.
+   */
+  boolean remove(SearchHit hit) throws SearchException;
+
+  /**
+   * This method removes an {@link #add(MutableSearchEntry) existing} entry
    * identified by the given <code>uri</code> from the search-index.
    * 
    * @see #update(MutableSearchEntry)
@@ -87,7 +102,9 @@ public interface SearchIndexer extends Flushable, Closeable {
    *         <code>uid</code> or <code>0</code> if no such entry exists. A value
    *         greater than <code>1</code> indicates that multiple entries have
    *         been removed that all have the given <code>uid</code> what
-   *         indicates a mistake of your index(er).
+   *         indicates a mistake of your index(er). A value of <code>-1</code>
+   *         means the number is unknown because this is not supported by the
+   *         implementation.
    * @throws SearchException if the operation failed.
    */
   int removeByUid(String uid) throws SearchException;
@@ -100,14 +117,22 @@ public interface SearchIndexer extends Flushable, Closeable {
    * 
    * @param uri is the {@link MutableSearchEntry#setUri(String) URI} of an entry
    *        previously {@link #add(MutableSearchEntry) added} to the index.
+   * @param sourceId is the
+   *        {@link net.sf.mmm.search.api.config.SearchSource#getId() ID} of the
+   *        {@link net.sf.mmm.search.api.config.SearchSource}. This is required
+   *        because the <code>uri</code> itself may NOT be unique (e.g.
+   *        different sources might both contain the entry with URI
+   *        "index.html").
    * @return the number of entries that have been removed. This should typically
    *         be <code>1</code> if one entry exists with the given
    *         <code>uri</code> or <code>0</code> if no such entry exists. A value
    *         greater than <code>1</code> indicates that multiple entries have
-   *         been removed that all have the given <code>uri</code>.
+   *         been removed that all have the given <code>uri</code>. A value of
+   *         <code>-1</code> means the number is unknown because this is not
+   *         supported by the implementation.
    * @throws SearchException if the operation failed.
    */
-  int removeByUri(String uri) throws SearchException;
+  int removeByUri(String uri, String sourceId) throws SearchException;
 
   /**
    * This method removes all {@link #add(MutableSearchEntry) existing} entries
@@ -123,7 +148,9 @@ public interface SearchIndexer extends Flushable, Closeable {
    *        {@link MutableSearchEntry#setProperty(String, String, MutableSearchEntry.Mode)
    *        value} of an entry previously {@link #add(MutableSearchEntry) added}
    *        to the index.
-   * @return the number of entries that have been removed.
+   * @return the number of entries that have been removed or <code>-1</code> if
+   *         the number is unknown because this is not supported by the
+   *         implementation.
    * @throws SearchException if the operation failed.
    */
   int remove(String property, String value) throws SearchException;

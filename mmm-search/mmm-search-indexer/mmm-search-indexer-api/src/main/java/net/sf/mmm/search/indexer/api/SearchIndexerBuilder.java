@@ -6,6 +6,7 @@ package net.sf.mmm.search.indexer.api;
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface for the component that allows to create the
@@ -13,6 +14,7 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification
 public interface SearchIndexerBuilder {
 
   /**

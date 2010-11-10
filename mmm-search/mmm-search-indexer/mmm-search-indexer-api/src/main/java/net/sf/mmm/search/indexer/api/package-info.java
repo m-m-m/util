@@ -10,14 +10,20 @@
  * {@link net.sf.mmm.search.engine.api.SearchEngine}. It acts on a low level of 
  * abstraction and adapts to the underlying search-technology (e.g. apache 
  * lucene).<br/>
- * On a higher level of abstraction there is the 
- * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer} that adds 
- * advanced features (using the {@link net.sf.mmm.search.indexer.api.SearchIndexer}
- * as underlying technology).<br/>
- * On the highest level of abstraction the implementation of this API offers
- * a fully integrated main-program for performing the indexing (based on
- * {@link net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain}, see for 
- * <code>SearchIndexerMain</code>).
+ * On top there are higher-level components that use the 
+ * {@link net.sf.mmm.search.indexer.api.SearchIndexer} and are independent from 
+ * the underlying search-technology: 
+ * <ol>
+ * <li>the {@link net.sf.mmm.search.indexer.api.ResourceSearchIndexer} 
+ * allows to index {@link net.sf.mmm.util.resource.api.DataResource}s of 
+ * arbitrary formats and extracts texts and metadata for the search index.</li>
+ * <li>the {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer} allows 
+ * recursive indexing including incremental updates. The actual strategy for 
+ * incremental indexing is realized via {@link net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy}.</li>
+ * <li>the <code>SearchIndexerMain</code> offers a fully integrated main-program 
+ * for performing the indexing (based on 
+ * {@link net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain}).</li>
+ * <ol>
  */
 package net.sf.mmm.search.indexer.api;
 

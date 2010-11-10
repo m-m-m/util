@@ -4,7 +4,6 @@
 package net.sf.mmm.search.engine.impl.lucene;
 
 import java.io.IOException;
-import java.util.Date;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
@@ -34,7 +33,6 @@ import org.apache.lucene.search.Scorer;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.highlight.Formatter;
-import org.apache.lucene.store.Directory;
 
 /**
  * This is the implementation of the
@@ -45,9 +43,6 @@ import org.apache.lucene.store.Directory;
  */
 public class LuceneSearchEngine extends AbstractSearchEngine {
 
-  /** The lucene index directory. */
-  private final Directory directory;
-
   /** The lucene {@link Analyzer}. */
   private final Analyzer analyzer;
 
@@ -57,66 +52,31 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /** @see #getHighlightFormatter() */
   private final Formatter highlightFormatter;
 
+  /** The {@link IndexReader} used for the {@link #searcher}. */
+  private IndexReader indexReader;
+
   /** The actual lucene {@link Searcher}. */
   private Searcher searcher;
 
   /**
-   * The {@link Date} when the index was last modified.
-   * 
-   * @see #refresh()
-   */
-  private Date indexModificationDate;
-
-  /**
    * The constructor.
    * 
-   * @param searchEngineRefresher is the {@link SearchEngineRefresher}.
-   * @param directory is the {@link Directory} of the search-index.
+   * @param indexReader is the {@link IndexReader} to access the index.
    * @param analyzer is the {@link Analyzer} to use.
    * @param queryBuilder is the {@link SearchQueryBuilder} query builder.
    * @param highlightFormatter is the {@link Formatter} for highlighting.
+   * @param searchEngineRefresher is the {@link SearchEngineRefresher}.
    */
-  public LuceneSearchEngine(SearchEngineRefresher searchEngineRefresher, Directory directory,
-      Analyzer analyzer, SearchQueryBuilder queryBuilder, Formatter highlightFormatter) {
+  public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
+      SearchQueryBuilder queryBuilder, Formatter highlightFormatter,
+      SearchEngineRefresher searchEngineRefresher) {
 
     super(searchEngineRefresher);
-    this.directory = directory;
+    this.indexReader = indexReader;
+    this.searcher = new IndexSearcher(this.indexReader);
     this.analyzer = analyzer;
     this.queryBuilder = queryBuilder;
     this.highlightFormatter = highlightFormatter;
-    refresh();
-  }
-
-  /**
-   * This method determines the modification {@link Date} of the search-index
-   * specified by the given <code>directory</code>.
-   * 
-   * @param directory is the {@link Directory} with the search-index.
-   * @return the modification {@link Date} of the search-index. Will be
-   *         <code>new Date(0)</code> if the search-index does NOT exist.
-   */
-  protected static Date getModificationDate(Directory directory) {
-
-    try {
-      long modificationDate = 0;
-      for (String filename : directory.listAll()) {
-        long modified = directory.fileModified(filename);
-        if (modified > modificationDate) {
-          modificationDate = modified;
-        }
-      }
-      return new Date(modificationDate);
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
-    }
-  }
-
-  /**
-   * @return the indexModificationDate
-   */
-  public Date getIndexModificationDate() {
-
-    return this.indexModificationDate;
   }
 
   /**
@@ -130,12 +90,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
       SearchQueryBuilder queryBuilder, Formatter highlightFormatter) {
 
-    super(null);
-    this.directory = null;
-    this.analyzer = analyzer;
-    this.queryBuilder = queryBuilder;
-    this.highlightFormatter = highlightFormatter;
-    this.searcher = new IndexSearcher(indexReader);
+    this(indexReader, analyzer, queryBuilder, highlightFormatter, null);
   }
 
   /**
@@ -268,28 +223,21 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
-  public void refresh() {
+  public synchronized void refresh() {
 
     try {
-      Date currentModificationDate = getModificationDate(this.directory);
-      if (this.indexModificationDate != null) {
-        if (this.indexModificationDate.equals(currentModificationDate)) {
-          // index is unchanged...
-          return;
-        } else {
-          getLogger().debug("search-index has changed and search-engine is refreshed!");
-        }
-      }
-      if (this.searcher != null) {
+      IndexReader oldReader = this.indexReader;
+      this.indexReader = this.indexReader.reopen();
+      if (this.indexReader != oldReader) {
+        getLogger().debug("search-index has changed and search-engine is refreshed!");
+        Searcher oldSearcher = this.searcher;
+        this.searcher = new IndexSearcher(this.indexReader);
         try {
-          this.searcher.close();
-        } catch (Exception e) {
-          getLogger().error("Closing the search-engine for refresh failed!", e);
+          oldSearcher.close();
+        } finally {
+          oldReader.close();
         }
-        this.searcher = null;
       }
-      this.searcher = new IndexSearcher(this.directory);
-      this.indexModificationDate = currentModificationDate;
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }

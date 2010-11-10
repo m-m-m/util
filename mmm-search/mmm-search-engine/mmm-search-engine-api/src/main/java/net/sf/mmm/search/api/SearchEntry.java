@@ -26,11 +26,13 @@ public interface SearchEntry {
    * identifies the original content and allows to link to it. Typically this is
    * not an entire URL but a path relative to the
    * {@link net.sf.mmm.search.api.config.SearchSource#getUrlPrefix URL-prefix}
-   * of the according {@link #getSource() source}. This property should always
-   * be present.<br>
+   * of the according {@link #getSource() source}.<br>
    * <b>NOTE:</b><br>
-   * If the content has a technical UID, the {@link #PROPERTY_UID} can be used
-   * additionally.
+   * This property should typically be present. Only if the content has a
+   * technical UID, the {@link #PROPERTY_UID} can be used for linking the
+   * content and the URI might NOT be set then. However it is best practice to
+   * set the URI anyways (to the URL-suffix containing the UID for linking the
+   * content).
    * 
    * @see #getUri()
    */
@@ -38,9 +40,14 @@ public interface SearchEntry {
 
   /**
    * The name of the "uid" property. The UID (Unique Identifier) is an optional
-   * property that identifies the content technically unique. While the URI of a
-   * content may change (e.g. if the content is renamed or moved) the UID stays
-   * untouched and identifies the content for its complete lifetime.
+   * property that identifies the content uniquely. Unlike the
+   * {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() entry ID} that
+   * is the technical ID of the {@link SearchEntry} assigned by the underlying
+   * search-engine, this is an optional custom ID given by the user of this API.
+   * While the URI of a content may change (e.g. if the content is renamed or
+   * moved) the UID has to stay untouched and identifies the content for its
+   * complete lifetime.
+   * 
    * 
    * @see #getUid()
    */
@@ -94,8 +101,9 @@ public interface SearchEntry {
   String PROPERTY_LANGUAGE = "lang";
 
   /**
-   * The name of the "source" property. This property specifies the source of
-   * the content. It is not strictly required but should always be present in a
+   * The name of the "source" property. This property specifies the
+   * {@link net.sf.mmm.search.api.config.SearchSource#getId() source} of the
+   * content. It is not strictly required but should always be present in a
    * regular setup. If it is NOT present, the property {@link #PROPERTY_URI URI}
    * has to contain the complete URL to the content.
    * 
@@ -123,8 +131,7 @@ public interface SearchEntry {
   Iterator<String> getPropertyNames();
 
   /**
-   * This method gets the URI that identifies the original content and allows to
-   * link to it.
+   * This method gets the value of the {@link #PROPERTY_URI}.
    * 
    * @see #PROPERTY_URI
    * 
@@ -133,10 +140,7 @@ public interface SearchEntry {
   String getUri();
 
   /**
-   * This method gets the UID that identifies the original content. While the
-   * {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() entry ID} is the
-   * technical ID of the entry assigned by the underlying search-engine this is
-   * an optional custom ID given by the user.
+   * This method gets the value of the {@link #PROPERTY_UID source property}.
    * 
    * @see #PROPERTY_UID
    * 
@@ -145,7 +149,7 @@ public interface SearchEntry {
   String getUid();
 
   /**
-   * This method gets the title used to display this entry.
+   * This method gets the value of the {@link #PROPERTY_TITLE title property}.
    * 
    * @see #PROPERTY_TITLE
    * 
@@ -163,7 +167,7 @@ public interface SearchEntry {
   String getAuthor();
 
   /**
-   * This method gets the plain text of the content.
+   * This method gets the value of the {@link #PROPERTY_SOURCE text property}.
    * 
    * @see #PROPERTY_TEXT
    * 
@@ -172,7 +176,7 @@ public interface SearchEntry {
   String getText();
 
   /**
-   * This method gets the type of the content.
+   * This method gets the value of the {@link #PROPERTY_TYPE type property}.
    * 
    * @see #PROPERTY_TYPE
    * 
@@ -181,7 +185,7 @@ public interface SearchEntry {
   String getType();
 
   /**
-   * This method gets the source of the content.
+   * This method gets the value of the {@link #PROPERTY_SOURCE source property}.
    * 
    * @see #PROPERTY_SOURCE
    * 

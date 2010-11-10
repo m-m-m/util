@@ -4,7 +4,9 @@
 package net.sf.mmm.search.indexer.base.config;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,7 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.sf.mmm.search.base.config.SearchConfigurationBean;
+import net.sf.mmm.search.base.config.AbstractSearchConfigurationBean;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
@@ -26,8 +28,16 @@ import net.sf.mmm.util.transformer.base.StringTransformerChain;
  */
 @XmlRootElement(name = "search")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchIndexerConfigurationBean extends SearchConfigurationBean implements
+public class SearchIndexerConfigurationBean extends AbstractSearchConfigurationBean implements
     SearchIndexerConfiguration {
+
+  /** @see #getSources() */
+  @XmlElementWrapper(name = XML_ELEMENT_SOURCES)
+  @XmlElement(name = XML_ELEMENT_SOURCE)
+  private List<SearchIndexerSourceBean> sources;
+
+  /** @see #getSourceMap() */
+  private transient Map<String, SearchIndexerSourceBean> sourceMap;
 
   /** @see #getFilters() */
   @XmlElementWrapper(name = "filters")
@@ -39,10 +49,13 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   @XmlElement(name = "transformer-chain")
   private List<StringTransformerChain> transformers;
 
-  /** @see #getLocations() */
-  @XmlElementWrapper(name = "locations")
-  @XmlElement(name = "location")
-  private List<SearchIndexDataLocationBean> locations;
+  // /** @see #getLocations() */
+  // @XmlElementWrapper(name = "locations")
+  // @XmlElement(name = "location")
+  // private List<SearchIndexerDataLocationBean> locations;
+
+  /** @see #getConfigurationLocation() */
+  private transient String configurationLocation;
 
   /**
    * The constructor.
@@ -53,20 +66,60 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   }
 
   /**
-   * {@inheritDoc}
+   * @return the sources
    */
-  public List<SearchIndexDataLocationBean> getLocations() {
+  public List<SearchIndexerSourceBean> getSources() {
 
-    return this.locations;
+    return this.sources;
   }
 
   /**
-   * @param locations is the {@link List} of locations to set
+   * {@inheritDoc}
    */
-  public void setLocations(List<SearchIndexDataLocationBean> locations) {
+  public SearchIndexerSourceBean getSource(String id) {
 
-    this.locations = locations;
+    return getSourceMap().get(id);
   }
+
+  /**
+   * @param sources is the sources to set
+   */
+  public void setSources(List<SearchIndexerSourceBean> sources) {
+
+    this.sources = sources;
+    this.sourceMap = null;
+  }
+
+  /**
+   * @return the sourceMap
+   */
+  protected Map<String, SearchIndexerSourceBean> getSourceMap() {
+
+    if (this.sourceMap == null) {
+      Map<String, SearchIndexerSourceBean> map = new HashMap<String, SearchIndexerSourceBean>();
+      for (SearchIndexerSourceBean source : this.sources) {
+        map.put(source.getId(), source);
+      }
+      this.sourceMap = map;
+    }
+    return this.sourceMap;
+  }
+
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public List<SearchIndexerDataLocationBean> getLocations() {
+  //
+  // return this.locations;
+  // }
+  //
+  // /**
+  // * @param locations is the {@link List} of locations to set
+  // */
+  // public void setLocations(List<SearchIndexerDataLocationBean> locations) {
+  //
+  // this.locations = locations;
+  // }
 
   /**
    * @return the transformers
@@ -90,7 +143,7 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
    * {@link net.sf.mmm.util.filter.api.Filter#accept(Object) decide} which
    * resources should be indexed.
    * 
-   * @see net.sf.mmm.search.indexer.api.config.SearchIndexDataLocation#getFilter()
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation#getFilter()
    * 
    * @return the {@link Collection} with the {@link FilterRuleChain}s.
    */
@@ -107,6 +160,25 @@ public class SearchIndexerConfigurationBean extends SearchConfigurationBean impl
   public void setFilters(List<FilterRuleChain<String>> filters) {
 
     this.filters = filters;
+  }
+
+  /**
+   * This method gets the location URI where the configuration for this bean is
+   * stored. This is a transient attribute dynamically added after loading.
+   * 
+   * @return the configurationLocation
+   */
+  public String getConfigurationLocation() {
+
+    return this.configurationLocation;
+  }
+
+  /**
+   * @param configurationLocation is the configurationLocation to set
+   */
+  public void setConfigurationLocation(String configurationLocation) {
+
+    this.configurationLocation = configurationLocation;
   }
 
 }
