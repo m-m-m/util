@@ -14,12 +14,11 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
 /**
  * This is an implementation of {@link XmlAdapter} for mapping a {@link Map}. It
- * uses a {@link java.util.List} of {@link AttributeReadId}-objects that can be
- * handled by JAXB.
+ * uses an array of {@link AttributeReadId}-objects that can be handled by JAXB.
  * 
  * @param <K> is the generic type of the {@link AttributeReadId#getId() ID}s
  *        used as {@link Map#get(Object) map-key}.
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class XmlAdapterMap<K> extends XmlAdapter<Object[], Map<K, AttributeReadId<K>>> {

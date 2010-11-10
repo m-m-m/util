@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.impl.DefaultCliParserBuilder;
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.AppendableWriter;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
@@ -21,7 +22,7 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
 @CliModes(//
 { @CliMode(id = CliMode.ID_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, //
 usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE) })
-public abstract class AbstractMain {
+public abstract class AbstractMain extends AbstractLoggableObject {
 
   /** The {@link #run(CliModeObject) exit-code} on success. */
   protected static final int EXIT_CODE_OK = 0;

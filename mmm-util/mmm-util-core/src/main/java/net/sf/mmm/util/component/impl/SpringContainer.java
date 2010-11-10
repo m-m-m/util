@@ -32,6 +32,16 @@ public class SpringContainer implements IocContainer {
   /**
    * The constructor.
    * 
+   * @param packages are the {@link Package}s containing components to manage.
+   */
+  public SpringContainer(String... packages) {
+
+    this(new AnnotationConfigApplicationContext(packages));
+  }
+
+  /**
+   * The constructor.
+   * 
    * @param applicationContext is the {@link ConfigurableApplicationContext} to
    *        adapt.
    */

@@ -23,7 +23,7 @@ public interface GenericContext {
 
   /**
    * This method gets the variable associated with the given
-   * <code>variableName</code> as object.
+   * <code>variableName</code>.
    * 
    * @param variableName is the name of the requested variable.
    * @return the value of the variable.
@@ -33,7 +33,7 @@ public interface GenericContext {
 
   /**
    * This method gets the variable associated with the given
-   * <code>variableName</code> as value.
+   * <code>variableName</code>.
    * 
    * @param <T> the generic type of the variable.
    * @param variableName is the name of the requested variable.
@@ -44,8 +44,27 @@ public interface GenericContext {
   <T> T requireVariable(String variableName, Class<T> type) throws ValueNotSetException;
 
   /**
+   * This method gets the variable associated with the given <code>type</code>.
+   * It will use the {@link Class#getName() classname} as
+   * {@link #getVariable(String, Class) variable-name}.<br/>
+   * <b>ATTENTION:</b><br>
+   * Only use this method in combination with expressive types. E.g. types like
+   * {@link String} or {@link Integer} are bad candidates while
+   * <code>MySpecificSingletonComponentInterface</code> might be a good option.
+   * 
+   * @see MutableGenericContext#setVariable(String, Object)
+   * 
+   * @param <T> the generic type of the variable.
+   * @param type is the class reflecting the type of the variable.
+   * @return the value of the variable.
+   * @throws ValueNotSetException if the requested variable is NOT set.
+   * @since 2.0.0
+   */
+  <T> T requireVariable(Class<T> type) throws ValueNotSetException;
+
+  /**
    * This method gets the variable associated with the given
-   * <code>variableName</code> as object.
+   * <code>variableName</code>.
    * 
    * @param variableName is the name of the requested variable.
    * @return the value of the variable or <code>null</code> if the variable is
@@ -55,7 +74,7 @@ public interface GenericContext {
 
   /**
    * This method gets the variable associated with the given
-   * <code>variableName</code> as value.
+   * <code>variableName</code>.
    * 
    * @param <T> the generic type of the variable.
    * @param variableName is the name of the requested variable.
@@ -64,6 +83,25 @@ public interface GenericContext {
    *         NOT set.
    */
   <T> T getVariable(String variableName, Class<T> type);
+
+  /**
+   * This method gets the variable associated with the given <code>type</code>.
+   * It will use the {@link Class#getName() classname} as
+   * {@link #getVariable(String, Class) variable-name}.<br/>
+   * <b>ATTENTION:</b><br>
+   * Only use this method in combination with expressive types. E.g. types like
+   * {@link String} or {@link Integer} are bad candidates while
+   * <code>MySpecificSingletonComponentInterface</code> might be a good option.
+   * 
+   * @see MutableGenericContext#setVariable(String, Object)
+   * 
+   * @param <T> the generic type of the variable.
+   * @param type is the class reflecting the type of the variable.
+   * @return the value of the variable or <code>null</code> if the variable is
+   *         NOT set.
+   * @since 2.0.0
+   */
+  <T> T getVariable(Class<T> type);
 
   /**
    * This method determines if the {@link #getVariable(String) variable} for the
@@ -92,8 +130,9 @@ public interface GenericContext {
    * child-context do NOT modify this context.<br>
    * <b>ATTENTION:</b><br>
    * Typically the child-context will be a cheap-copy connected to this context.
-   * So you should be aware of creating many child-contexts recursively as their
-   * parent-contexts can NOT be collected by the garbage-collector.
+   * So you should be aware of this when creating many child-contexts
+   * recursively as their parent-contexts can NOT be collected by the
+   * garbage-collector.
    * 
    * @return the new created sub-context.
    */

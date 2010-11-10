@@ -44,6 +44,9 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
+ * For simplicity all implementations of such component in this project have to
+ * be {@link javax.inject.Singleton stateless} and thread-safe.
+ * 
  * @see org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

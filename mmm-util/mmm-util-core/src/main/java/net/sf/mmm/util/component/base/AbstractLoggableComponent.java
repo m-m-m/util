@@ -74,6 +74,9 @@ public abstract class AbstractLoggableComponent extends AbstractComponent {
     if (this.logger == null) {
       // ugly static...
       this.logger = LoggerFactory.getLogger(getClass());
+      if (this.logger.isTraceEnabled()) {
+        this.logger.trace("Initializing: " + getClass().getName());
+      }
     }
   }
 

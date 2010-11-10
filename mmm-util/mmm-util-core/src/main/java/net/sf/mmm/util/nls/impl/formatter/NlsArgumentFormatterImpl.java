@@ -30,7 +30,7 @@ import net.sf.mmm.util.text.api.Justification;
  */
 @Singleton
 @Named
-public final class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> implements
+public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> implements
     NlsArgumentFormatter {
 
   /**
@@ -50,6 +50,9 @@ public final class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgu
     Object value = null;
     if (arguments != null) {
       value = arguments.get(argument.getKey());
+      if ((value == null) && (arguments.containsKey(argument.getKey()))) {
+        value = "null";
+      }
     }
     if (value == null) {
       buffer.append(NlsArgumentParser.START_EXPRESSION);
@@ -68,5 +71,4 @@ public final class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgu
       }
     }
   }
-
 }

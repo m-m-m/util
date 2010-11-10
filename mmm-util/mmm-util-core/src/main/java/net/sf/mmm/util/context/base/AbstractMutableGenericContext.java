@@ -10,6 +10,7 @@ import java.util.Set;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.context.api.MutableGenericContext;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 
 /**
@@ -52,6 +53,21 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
   }
 
   /**
+   * This method gets the variable-name (key) for the given <code>type</code>.
+   * 
+   * @see #setVariable(Object)
+   * @see #getVariable(Class)
+   * @see #requireVariable(Class)
+   * 
+   * @param type is the {@link Class} reflecting the type of some variable.
+   * @return the generic variable-name for the given <code>type</code>.
+   */
+  protected String getVariableName(Class<?> type) {
+
+    return type.getName();
+  }
+
+  /**
    * {@inheritDoc}
    */
   public Object getVariable(String variableName) {
@@ -61,6 +77,14 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
       value = this.parent.getVariable(variableName);
     }
     return value;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <T> T getVariable(Class<T> type) {
+
+    return getVariable(getVariableName(type), type);
   }
 
   /**
@@ -85,6 +109,14 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
       throw new ValueNotSetException(variableName);
     }
     return value;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <T> T requireVariable(Class<T> type) throws ValueNotSetException {
+
+    return requireVariable(getVariableName(type), type);
   }
 
   /**
@@ -124,6 +156,17 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
   public Object setVariable(String variableName, Object value) {
 
     return this.variableMap.put(variableName, value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Object setVariable(Object value) {
+
+    if (value == null) {
+      throw new NlsNullPointerException("value");
+    }
+    return setVariable(getVariableName(value.getClass()), value);
   }
 
   /**

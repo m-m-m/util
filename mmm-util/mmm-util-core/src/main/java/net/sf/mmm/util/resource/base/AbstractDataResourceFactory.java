@@ -33,9 +33,6 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
   public DataResource createDataResource(String resourceUri) throws ResourceUriUndefinedException {
 
     ResourceUri uri = new ResourceUriImpl(resourceUri);
-    if (uri.getSchemePrefix() == null) {
-      throw new ResourceUriUndefinedException(resourceUri);
-    }
     DataResource resource = createDataResource(uri);
     return new DataResourceAdapter(resource);
   }

@@ -165,9 +165,6 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
       throws ResourceUriUndefinedException {
 
     ResourceUri uri = new ResourceUriImpl(resourceUri);
-    if (uri.getSchemePrefix() == null) {
-      throw new ResourceUriUndefinedException(resourceUri);
-    }
     BrowsableResource resource = createBrowsableResource(uri);
     return new BrowsableResourceAdapter(resource);
   }

@@ -53,6 +53,14 @@ public abstract class AbstractGenericContextProxy implements GenericContext {
   /**
    * {@inheritDoc}
    */
+  public <T> T requireVariable(Class<T> type) throws ValueNotSetException {
+
+    return getContext().requireVariable(type);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Object getVariable(String variableName) {
 
     return getContext().getVariable(variableName);
@@ -64,6 +72,14 @@ public abstract class AbstractGenericContextProxy implements GenericContext {
   public <T> T getVariable(String variableName, Class<T> type) {
 
     return getContext().getVariable(variableName, type);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <T> T getVariable(Class<T> type) {
+
+    return getContext().getVariable(type);
   }
 
   /**

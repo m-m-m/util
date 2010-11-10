@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.sf.mmm.util.filter.api.FilterRule;
 import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
-import net.sf.mmm.util.xml.base.jaxb.XmlAdapterPattern;
+import net.sf.mmm.util.xml.base.jaxb.XmlAdapterInfixPattern;
 
 /**
  * This is an implementation of the {@link FilterRule} interface that matches
@@ -27,7 +27,7 @@ public class PatternFilterRule implements FilterRule<String> {
 
   /** @see #accept(String) */
   @XmlAttribute(name = "pattern", required = true)
-  @XmlJavaTypeAdapter(value = XmlAdapterPattern.class)
+  @XmlJavaTypeAdapter(value = XmlAdapterInfixPattern.class)
   private Pattern pattern;
 
   /** @see #accept(String) */
